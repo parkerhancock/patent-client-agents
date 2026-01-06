@@ -1,0 +1,19 @@
+{
+  "name": "ip-tools",
+  "version": "0.1.0",
+  "description": "Patent and intellectual property data tools for Claude Code",
+  "author": "Parker Hancock",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/parkerhancock/ip_tools",
+  "skills": [
+    {
+      "name": "ip_research",
+      "path": "skills/ip_research",
+      "description": "Search and analyze patents from USPTO, EPO, JPO, and Google Patents"
+    }
+  ],
+  "setup": {
+    "install": "uv sync",
+    "requirements": ["uv"]
+  }
+}
