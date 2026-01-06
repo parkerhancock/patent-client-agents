@@ -1,193 +1,99 @@
 ---
-name: "ip_research"
-description: "IP data research tools for patents. Use for patent searches, lookups, and citation analysis."
+name: ip_research
+description: |
+  IP data research tools for patents, trademarks, and applications. Use when:
+  - Looking up patents by number (US, EP, WO, JP, etc.)
+  - Searching patent databases by keyword, assignee, inventor, or classification
+  - Getting patent family, citation, or legal status information
+  - Checking USPTO application status, file wrapper, or PTAB proceedings
+  - Downloading bulk USPTO data products
+  - Finding patent assignments or ownership history
 ---
 
-# IP Research Skill
+# IP Research
 
-Data connectors for intellectual property research using the ip_tools library.
+Async Python clients for patent data. All clients use `async with` context managers.
 
-## Quick Start
+## Routing
 
-| Task | Example |
-|------|---------|
-| Fetch patent by number | `client.fetch("US10123456B2")` |
-| Search patents | `client.search(query)` |
-| Get citation data | `client.citations(patent_number)` |
+| Task | Client | Reference |
+|------|--------|-----------|
+| Patent lookup/search | `GooglePatentsClient` | [google_patents.md](references/google_patents.md) |
+| USPTO application status | `ApplicationsClient` | [uspto_odp.md](references/uspto_odp.md) |
+| USPTO PTAB (IPR/PGR) | `PtabTrialsClient` | [uspto_odp.md](references/uspto_odp.md) |
+| USPTO bulk data | `BulkDataClient` | [uspto_odp.md](references/uspto_odp.md) |
+| USPTO assignments | `UsptoAssignmentsClient` | [uspto_assignments.md](references/uspto_assignments.md) |
+| EPO bibliographic/family | `EpoOpsClient` | [epo_ops.md](references/epo_ops.md) |
+| JPO application status | `JpoClient` | [jpo.md](references/jpo.md) |
 
-### Library Source & Issues
+## Quick Examples
 
-**ip_tools** source: [parkerhancock/ip_tools](https://github.com/parkerhancock/ip_tools)
-
-Report bugs, unexpected behavior, or feature requests as issues on the repository. Include the ip_tools version, minimal reproduction code, and relevant API responses if possible.
-
-## Available Connectors
-
-| Source | Module | Description |
-|--------|--------|-------------|
-| Google Patents | `ip_tools.google_patents` | Full-text search, patent documents, citations |
-| USPTO ODP | `ip_tools.uspto_odp` | Open Data Portal - applications, PTAB, bulk data |
-| USPTO Publications | `ip_tools.uspto_publications` | Granted patents full-text search (PPUBS) |
-| USPTO Assignments | `ip_tools.uspto_assignments` | Patent ownership and assignment data |
-| EPO OPS | `ip_tools.epo_ops` | European Patent Office Open Patent Services |
-| JPO | `ip_tools.jpo` | Japan Patent Office (requires API credentials) |
-
-## Common Research Tasks
-
-### Fetch a Patent
+### Lookup patent by number
 
 ```python
 from ip_tools.google_patents import GooglePatentsClient
 
 async with GooglePatentsClient() as client:
-    patent = await client.fetch("US10123456B2")
+    patent = await client.get_patent_data("US10123456B2")
 ```
 
-### Search Patents
+### Search patents
 
 ```python
 from ip_tools.google_patents import GooglePatentsClient
 
 async with GooglePatentsClient() as client:
-    results = await client.search("machine learning neural network")
-```
-
-### Get Citations
-
-```python
-from ip_tools.google_patents import GooglePatentsClient
-
-async with GooglePatentsClient() as client:
-    citations = await client.citations("US10123456B2")
-```
-
-## Cache Management
-
-All clients cache HTTP responses to `~/.cache/ip_tools/`. Use these APIs to manage the cache:
-
-```python
-from ip_tools.google_patents import GooglePatentsClient
-from datetime import timedelta
-
-# Set TTL (optional, default uses HTTP headers)
-async with GooglePatentsClient(ttl_seconds=3600) as client:
-    # Get cache statistics
-    stats = await client.cache_stats()
-    # stats.hit_rate, stats.entry_count, stats.size_mb
-
-    # Clear all cached data
-    await client.cache_clear()
-
-    # Clear entries older than max_age
-    await client.cache_clear_expired(max_age=timedelta(hours=1))
-
-    # Invalidate by URL pattern (regex)
-    await client.cache_invalidate(r"patents\.google\.com")
-```
-
-Disable caching entirely with `use_cache=False`:
-
-```python
-async with GooglePatentsClient(use_cache=False) as client:
-    patent = await client.fetch("US10123456B2")  # Always fetches
-```
-
-## USPTO Open Data Portal (ODP)
-
-The ODP module provides comprehensive USPTO data access. Requires `USPTO_ODP_API_KEY` environment variable.
-
-### ODP Clients
-
-| Client | Description |
-|--------|-------------|
-| `ApplicationsClient` | Patent applications, documents, family graphs |
-| `BulkDataClient` | Bulk data product downloads |
-| `PetitionsClient` | Petition decisions |
-| `PtabTrialsClient` | IPR/PGR/CBM/DER proceedings |
-| `PtabAppealsClient` | Ex parte appeals |
-| `PtabInterferencesClient` | Interference decisions |
-
-### Application Lookup
-
-```python
-from ip_tools.uspto_odp import ApplicationsClient
-
-async with ApplicationsClient() as client:
-    # Get application by number
-    app = await client.get("16123456")
-
-    # Get file wrapper documents
-    docs = await client.get_documents("16123456")
-
-    # Get assignment history
-    assignments = await client.get_assignment("16123456")
-
-    # Build patent family graph
-    family = await client.get_family("16123456")
-```
-
-### Search Applications
-
-```python
-from ip_tools.uspto_odp import ApplicationsClient
-
-async with ApplicationsClient() as client:
-    results = await client.search(
-        query="artificial intelligence",
-        limit=25,
-        sort="filingDate desc"
+    results = await client.search_patents(
+        keywords="machine learning",
+        assignee="Google",
+        limit=25
     )
 ```
 
-### PTAB Trials (IPR/PGR)
+### Check application status
+
+```python
+from ip_tools.uspto_odp import ApplicationsClient
+
+async with ApplicationsClient() as client:  # Requires USPTO_ODP_API_KEY
+    app = await client.get("16123456")
+    docs = await client.get_documents("16123456")
+```
+
+### Find PTAB proceedings
 
 ```python
 from ip_tools.uspto_odp import PtabTrialsClient
 
 async with PtabTrialsClient() as client:
-    # Search proceedings
     results = await client.search_proceedings(query="patent:US10123456")
-
-    # Get proceeding by trial number
-    proceeding = await client.get_proceeding("IPR2023-00001")
-
-    # Get trial documents
-    docs = await client.get_documents_by_trial("IPR2023-00001")
-
-    # Get decisions
-    decisions = await client.get_decisions_by_trial("IPR2023-00001")
 ```
 
-### Bulk Data Downloads
+## Environment Variables
 
-```python
-from ip_tools.uspto_odp import BulkDataClient
+| Variable | Required For |
+|----------|--------------|
+| `USPTO_ODP_API_KEY` | All ODP clients (Applications, PTAB, BulkData, Petitions) |
+| `EPO_OPS_API_KEY` | EPO OPS client |
+| `EPO_OPS_API_SECRET` | EPO OPS client |
+| `JPO_API_USERNAME` | JPO client |
+| `JPO_API_PASSWORD` | JPO client |
 
-async with BulkDataClient() as client:
-    # Search available products
-    products = await client.search(query="grant")
+## Cache Management
 
-    # Get product with file list
-    product = await client.get_product(
-        "PTGRXML",
-        file_from_date="2024-01-01",
-        file_to_date="2024-12-31"
-    )
-```
+All clients cache to `~/.cache/ip_tools/`. See [cache.md](references/cache.md) for TTL, invalidation, and statistics APIs.
 
-## Routing Logic
+## Issue Reporting
 
-### Patent lookup
-"Find patent US10123456" -> Use fetch with patent number
+**Source**: [parkerhancock/ip_tools](https://github.com/parkerhancock/ip_tools)
 
-### Patent search
-"Find patents related to X" -> Use search with keywords
+Report bugs with: version, minimal reproduction code, and API response if applicable.
 
-### Citation analysis
-"What patents cite US10123456?" -> Use citations method
+## References
 
-### Application status
-"What's the status of application 16/123,456?" -> Use ODP ApplicationsClient.get()
-
-### PTAB proceedings
-"Are there any IPRs against US10123456?" -> Use ODP PtabTrialsClient.search_proceedings()
+- [google_patents.md](references/google_patents.md) - Full-text search, patent documents, citations
+- [uspto_odp.md](references/uspto_odp.md) - Applications, PTAB, bulk data, petitions
+- [uspto_assignments.md](references/uspto_assignments.md) - Assignment/ownership lookup
+- [epo_ops.md](references/epo_ops.md) - EPO bibliographic, family, legal status
+- [jpo.md](references/jpo.md) - Japan Patent Office APIs
+- [cache.md](references/cache.md) - Cache management APIs

@@ -71,6 +71,7 @@ ignore = [
     "SIM103", # return condition directly (stylistic)
     "SIM108", # use ternary operator (stylistic, can reduce readability)
     "C416",   # unnecessary dict comprehension (stylistic)
+    "UP047",  # use type parameters (stylistic, Python 3.12+)
 ]
 
 [tool.ruff.lint.isort]
