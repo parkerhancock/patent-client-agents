@@ -46,18 +46,19 @@ claude plugins add github:parkerhancock/ip_tools
 
 That's it. Claude Code now has access to patent data through the `ip_research` skill.
 
-### API Keys (Optional)
+### API Keys
 
-Some data sources require API keys for full access:
+Some data sources require API keys:
 
-| Variable | Source | How to Get |
-|----------|--------|------------|
-| `EPO_OPS_API_KEY` | EPO | [Register at EPO](https://developers.epo.org/) |
-| `EPO_OPS_API_SECRET` | EPO | [Register at EPO](https://developers.epo.org/) |
-| `JPO_API_USERNAME` | JPO | [Register at JPO](https://www.j-platpat.inpit.go.jp/) |
-| `JPO_API_PASSWORD` | JPO | [Register at JPO](https://www.j-platpat.inpit.go.jp/) |
+| Variable | Source | Required | How to Get |
+|----------|--------|----------|------------|
+| `USPTO_ODP_API_KEY` | USPTO ODP | Yes | [Request at USPTO](https://developer.uspto.gov/) |
+| `EPO_OPS_API_KEY` | EPO OPS | Yes | [Register at EPO](https://developers.epo.org/) |
+| `EPO_OPS_API_SECRET` | EPO OPS | Yes | [Register at EPO](https://developers.epo.org/) |
+| `JPO_API_USERNAME` | JPO | Yes | [Register at JPO](https://www.j-platpat.inpit.go.jp/) |
+| `JPO_API_PASSWORD` | JPO | Yes | [Register at JPO](https://www.j-platpat.inpit.go.jp/) |
 
-Google Patents and USPTO work without API keys.
+**No API key needed:** Google Patents, USPTO Assignments.
 
 ## As a Python Library
 
