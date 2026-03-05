@@ -227,7 +227,7 @@ class CacheManager:
     async def close(self) -> None:
         """Close the storage connection."""
         if self._storage is not None:
-            await self._storage.aclose()
+            await self._storage.close()
             self._storage = None
 
 
