@@ -17,6 +17,7 @@ from pypdf import PdfReader, PdfWriter
 
 from ip_tools.core.cache import build_cached_http_client
 from ip_tools.core.exceptions import AuthenticationError, RateLimitError
+from ip_tools.core.resilience import default_retryer
 
 from .models import (
     BiblioResponse,
@@ -155,7 +156,7 @@ class EpoOpsClient:
             "Accept": "application/xml",
             "User-Agent": "patent-mcp-epo-ops/0.1",
         }
-        self._client = build_cached_http_client(
+        client, self._cache_manager = build_cached_http_client(
             use_cache=True,
             cache_name="epo_ops",
             headers=headers,
@@ -165,6 +166,7 @@ class EpoOpsClient:
             policy=hishel.SpecificationPolicy(),
             http2=False,
         )
+        self._client = client
 
     async def close(self) -> None:
         await self._client.aclose()
@@ -177,11 +179,17 @@ class EpoOpsClient:
 
     async def _request(self, method: str, path: str, **kwargs: Any) -> httpx.Response:
         url = path if path.startswith("http") else f"{BASE_URL}{path}"
-        response = await self._client.request(method, url, **kwargs)
-        if response.status_code == 403:
-            raise self._build_forbidden_error(response)
-        response.raise_for_status()
-        return response
+        logger.debug("EPO OPS %s %s", method, url)
+        async for attempt in default_retryer():
+            with attempt:
+                response = await self._client.request(method, url, **kwargs)
+                if response.status_code == 403:
+                    raise self._build_forbidden_error(response)
+                response.raise_for_status()
+                logger.debug("EPO OPS %s %s -> %s", method, url, response.status_code)
+                return response
+        # Should not reach here due to reraise=True in retryer
+        raise RuntimeError("Unexpected retry exhaustion")
 
     @staticmethod
     def _build_forbidden_error(response: httpx.Response) -> OpsForbiddenError:

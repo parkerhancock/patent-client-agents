@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: '{"pagination":{"offset":0,"limit":3}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/search
+  response:
+    body:
+      string: '{"count":3,"patentTrialProceedingDataBag":[{"trialNumber":"IPR2024-00200","trialTypeCode":"IPR","petitionFilingDate":"2024-03-01","applicationNumber":"14600001","patentNumber":"10222333"},{"trialNumber":"IPR2024-00201","trialTypeCode":"IPR","petitionFilingDate":"2024-03-05","applicationNumber":"14600002","patentNumber":"10444555"},{"trialNumber":"CBM2024-00005","trialTypeCode":"CBM","petitionFilingDate":"2024-03-10","applicationNumber":"15700001","patentNumber":"11666777"}],"requestIdentifier":"req-ptab-002"}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+version: 1

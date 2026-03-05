@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - assignment-api.uspto.gov
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://assignment-api.uspto.gov/patent/lookup?query=16123456&filter=ApplicationNumber&rows=200
+  response:
+    body:
+      string: |
+        <?xml version="1.0" encoding="UTF-8"?>
+        <response>
+          <result name="response" numFound="1" start="0">
+            <doc>
+              <str name="reelNo">045678</str>
+              <str name="frameNo">0321</str>
+              <str name="conveyanceText">ASSIGNMENT OF ASSIGNORS INTEREST (SEE DOCUMENT FOR DETAILS).</str>
+              <date name="recordedDate">2018-03-22T00:00:00Z</date>
+              <date name="patAssignorEarliestExDate">2018-03-20T00:00:00Z</date>
+              <arr name="patAssignorName"><str>INVENTOR, TEST A.</str></arr>
+              <arr name="patAssignorAddress1"><str>500 PATENT AVE</str></arr>
+              <arr name="patAssignorCity"><str>ALEXANDRIA</str></arr>
+              <arr name="patAssignorState"><str>VIRGINIA</str></arr>
+              <arr name="patAssignorCountryName"><str>UNITED STATES</str></arr>
+              <arr name="patAssignorPostcode"><str>22314</str></arr>
+              <arr name="patAssigneeName"><str>TEST COMPANY INC.</str></arr>
+              <arr name="patAssigneeAddress1"><str>100 CORPORATE DR</str></arr>
+              <arr name="patAssigneeCity"><str>WILMINGTON</str></arr>
+              <arr name="patAssigneeState"><str>DELAWARE</str></arr>
+              <arr name="patAssigneeCountryName"><str>UNITED STATES</str></arr>
+              <arr name="patAssigneePostcode"><str>19801</str></arr>
+              <arr name="patNum"><str>10555666</str></arr>
+              <arr name="applNum"><str>16123456</str></arr>
+            </doc>
+          </result>
+        </response>
+    headers:
+      Content-Type:
+      - application/xml;charset=UTF-8
+    status:
+      code: 200
+      message: OK
+version: 1

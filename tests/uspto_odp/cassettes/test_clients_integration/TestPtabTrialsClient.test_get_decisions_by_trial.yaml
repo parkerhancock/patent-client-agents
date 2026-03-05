@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/trials/IPR2021-00001/decisions
+  response:
+    body:
+      string: '{"count":1,"requestIdentifier":"9ab5ff0f-4e94-42da-bd9e-35b2324c5daa","patentTrialDocumentDataBag":[{"trialNumber":"IPR2021-00001","lastModifiedDateTime":"2025-12-30T17:24:14","trialDocumentCategory":"Decision","trialMetaData":{"institutionDecisionDate":"2021-05-06","accordedFilingDate":"2020-10-05","petitionFilingDate":"2020-10-05","trialLastModifiedDateTime":"2022-07-29T13:50:39","trialLastModifiedDate":"2022-07-29","terminationDate":"2022-05-02","trialStatusCategory":"Final
+        Written Decision","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"10264899","counselName":"Witcoff,
+        David et al","grantDate":"2004-11-16","groupArtUnitNumber":"2838","inventorName":"Ernst
+        Bretschneider","realPartyInInterestName":"NXP B.V. et al.","patentNumber":"6819092","technologyCenterNumber":"2800"},"regularPetitionerData":{"counselName":"McCullough,
+        Christina ","realPartyInInterestName":"Impinj, Inc."},"documentData":{"documentCategory":"Paper","documentFilingDate":"2022-05-02","documentIdentifier":"170239444","documentName":"IPR2021-00001
+        FWD Final.pdf","documentNumber":30,"documentTitleText":"Final Written Decision:  original","documentTypeDescriptionText":"Final
+        Written Decision:  original","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170239444.pdf","filingPartyCategory":"BOARD","documentOCRText":"Trials@uspto.gov
+        Paper 30 \n\n571-272-7822 Date: May 2, 2022  \n\n \n\nUNITED STATES PATENT
+        AND TRADEMARK OFFICE \n\n \n\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \n\n
+        \n\nIMPINJ, INC., \n\nPetitioner, \n\nv. \n\nNXP B.V., \n\nPatent Owner. \n\n
+        \n\nIPR2021-00001 \n\nPatent 6,819,092 B2 \n\n \n\n \n\n \n\nBefore MIRIAM
+        L. QUINN, MICHELLE N. WORMMEESTER, and \n\nSTACY B. MARGOLIES, Administrative
+        Patent Judges. \n\n \n\nQUINN, Administrative Patent Judge.  \n\n \n\n \n\nJUDGMENT
+        \n\nFinal Written Decision \n\nDetermining All Challenged Claims  ..."},"decisionData":{"statuteAndRuleBag":["35
+        USC 318","37 CFR 42.73","37 CFR 42.100"],"decisionIssueDate":"2022-05-02","decisionTypeCategory":"Decision","trialOutcomeCategory":"Final
+        Decision"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2101'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:50 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d2-221da436346a0ac02935c655;Parent=4a88cb1939f969c3;Sampled=0;Lineage=1:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - Zwuw-HqGoAMFrzA=
+      x-amzn-RequestId:
+      - 9ab5ff0f-4e94-42da-bd9e-35b2324c5daa
+    status:
+      code: 200
+      message: OK
+version: 1

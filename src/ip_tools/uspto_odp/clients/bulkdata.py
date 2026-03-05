@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Sequence
 from datetime import date
 from typing import Any
 
 from ..models import BulkDataProductResponse, BulkDataSearchResponse
 from .base import UsptoOdpBaseClient, _format_bool, _format_csv, _format_date
+
+logger = logging.getLogger(__name__)
 
 
 class BulkDataClient(UsptoOdpBaseClient):
@@ -43,6 +46,7 @@ class BulkDataClient(UsptoOdpBaseClient):
         Returns:
             BulkDataSearchResponse with matching products.
         """
+        logger.debug("Searching bulk data: query=%s limit=%d offset=%d", query, limit, offset)
         params: dict[str, Any] = {}
         if offset is not None:
             params["offset"] = offset
@@ -101,6 +105,7 @@ class BulkDataClient(UsptoOdpBaseClient):
         if not normalized_identifier:
             raise ValidationError("product_identifier is required")
 
+        logger.debug("Getting bulk data product %s", normalized_identifier)
         params: dict[str, Any] = {}
         if (from_value := _format_date(file_from_date)) is not None:
             params["fileDataFromDate"] = from_value

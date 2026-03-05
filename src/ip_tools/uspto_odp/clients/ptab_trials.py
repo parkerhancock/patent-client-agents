@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Sequence
 from typing import Any
 
@@ -11,6 +12,8 @@ from ..models import (
     PtabTrialProceedingResponse,
 )
 from .base import PaginationModel, SearchPayload, UsptoOdpBaseClient, _prune
+
+logger = logging.getLogger(__name__)
 
 
 class PtabTrialsClient(UsptoOdpBaseClient):
@@ -51,6 +54,9 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialProceedingResponse with matching proceedings.
         """
+        logger.debug(
+            "Searching trial proceedings: query=%s limit=%d offset=%d", query, limit, offset
+        )
         payload = SearchPayload(
             q=query,
             fields=list(fields) if fields else None,
@@ -85,6 +91,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         if not trial_number:
             raise ValidationError("trial_number is required")
 
+        logger.debug("Getting trial proceeding %s", trial_number)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/proceedings/{trial_number}",
@@ -183,6 +190,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDecisionResponse with matching decisions.
         """
+        logger.debug("Searching trial decisions: query=%s limit=%d offset=%d", query, limit, offset)
         payload = SearchPayload(
             q=query,
             fields=list(fields) if fields else None,
@@ -217,6 +225,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         if not document_identifier:
             raise ValidationError("document_identifier is required")
 
+        logger.debug("Getting trial decision %s", document_identifier)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/decisions/{document_identifier}",
@@ -241,6 +250,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         if not trial_number:
             raise ValidationError("trial_number is required")
 
+        logger.debug("Getting decisions for trial %s", trial_number)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/{trial_number}/decisions",
@@ -323,6 +333,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDocumentResponse with matching documents.
         """
+        logger.debug("Searching trial documents: query=%s limit=%d offset=%d", query, limit, offset)
         payload = SearchPayload(
             q=query,
             fields=list(fields) if fields else None,
@@ -357,6 +368,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         if not document_identifier:
             raise ValidationError("document_identifier is required")
 
+        logger.debug("Getting trial document %s", document_identifier)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/documents/{document_identifier}",
@@ -381,6 +393,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         if not trial_number:
             raise ValidationError("trial_number is required")
 
+        logger.debug("Getting documents for trial %s", trial_number)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/{trial_number}/documents",

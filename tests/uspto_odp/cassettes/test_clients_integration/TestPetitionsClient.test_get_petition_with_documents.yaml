@@ -1,0 +1,109 @@
+interactions:
+- request:
+    body: '{"pagination":{"offset":0,"limit":1}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '37'
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://api.uspto.gov/api/v1/petition/decisions/search
+  response:
+    body:
+      string: '{"count":7334,"requestIdentifier":"4672bf21-94bc-4e79-a4ef-f273a6c1d613","petitionDecisionDataBag":[{"actionTakenByCourtName":"","applicationNumberText":"10290800","businessEntityStatusCategory":"Regular
+        Undiscounted","courtActionIndicator":false,"customerNumber":29159,"decisionDate":"2003-10-17","decisionPetitionTypeCode":411,"decisionTypeCode":"C","decisionTypeCodeDescriptionText":"DENIED","finalDecidingOfficeName":"OFFICE
+        OF PETITIONS","firstInventorToFileIndicator":false,"groupArtUnitNumber":"3713","inventionTitle":"GAMING
+        DEVICE HAVING IMPROVED AWARD OFFER BONUS SCHEME","inventorBag":["Anthony J.
+        Baerlocher","Joseph E. Kaminkow","Gregg J. Palmer"],"lastIngestionDateTime":"2026-03-02T15:05:05","patentNumber":"6796905","petitionDecisionRecordIdentifier":"0b71b685-adb9-539d-8257-127dc9e58247","petitionIssueConsideredTextBag":["Filing
+        date"],"petitionMailDate":"2003-08-04","prosecutionStatusCode":30,"prosecutionStatusCodeDescriptionText":"Prior
+        to examination","ruleBag":["37 CFR 1.10"],"statuteBag":["35 USC 21(a)"],"technologyCenter":"3700"}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1060'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:01:10 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4e5-591f4142538c0215186d60ea;Parent=6688aaf61956b8b2;Sampled=0;Lineage=1:f5f5fcbf:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - Zwuz_Hq8oAMFu9A=
+      x-amzn-RequestId:
+      - 4672bf21-94bc-4e79-a4ef-f273a6c1d613
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: GET
+    uri: https://api.uspto.gov/api/v1/petition/decisions/0b71b685-adb9-539d-8257-127dc9e58247?includeDocuments=true
+  response:
+    body:
+      string: '{"count":1,"requestIdentifier":"cb94f8ea-bd6b-4a22-ac71-ebfff6f8e947","petitionDecisionDataBag":[{"actionTakenByCourtName":"","applicationNumberText":"10290800","businessEntityStatusCategory":"Regular
+        Undiscounted","courtActionIndicator":false,"customerNumber":29159,"decisionDate":"2003-10-17","decisionPetitionTypeCode":411,"decisionTypeCode":"C","decisionTypeCodeDescriptionText":"DENIED","finalDecidingOfficeName":"OFFICE
+        OF PETITIONS","firstInventorToFileIndicator":false,"groupArtUnitNumber":"3713","inventionTitle":"GAMING
+        DEVICE HAVING IMPROVED AWARD OFFER BONUS SCHEME","inventorBag":["Anthony J.
+        Baerlocher","Joseph E. Kaminkow","Gregg J. Palmer"],"lastIngestionDateTime":"2026-03-02T15:05:05","patentNumber":"6796905","petitionDecisionRecordIdentifier":"0b71b685-adb9-539d-8257-127dc9e58247","petitionIssueConsideredTextBag":["Filing
+        date"],"petitionMailDate":"2003-08-04","prosecutionStatusCode":30,"prosecutionStatusCodeDescriptionText":"Prior
+        to examination","ruleBag":["37 CFR 1.10"],"statuteBag":["35 USC 21(a)"],"technologyCenter":"3700","documentBag":[{"applicationNumberText":"10290800","officialDate":"2003-10-17T00:00:00.000-0400","documentIdentifier":"DSEN5APWPHOENIX","documentCode":"PETDEC","documentCodeDescriptionText":"Petition
+        Decision","directionCategory":"OUTGOING","downloadOptionBag":[{"mimeTypeIdentifier":"PDF","downloadUrl":"https://api.uspto.gov/api/v1/download/applications/10290800/DSEN5APWPHOENIX.pdf","pageTotalQuantity":5}]}]}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1469'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:01:14 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4e6-6491267c2e19d036154f5cbf;Parent=52e5231295052c8a;Sampled=0;Lineage=1:f5f5fcbf:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - Zwu0DGocIAMFl0A=
+      x-amzn-RequestId:
+      - cb94f8ea-bd6b-4a22-ac71-ebfff6f8e947
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,26 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/applications/16123456
+  response:
+    body:
+      string: '{"count":1,"patentFileWrapperDataBag":[{"applicationNumberText":"16123456","applicationMetaData":{"applicationStatusCode":"150","applicationStatusDescriptionText":"Patented Case","filingDate":"2018-06-07","inventionTitle":"METHOD AND APPARATUS FOR DATA PROCESSING","patentNumber":"10555666","grantDate":"2020-02-11","entityStatusData":{"businessEntityStatusCategory":"UNDISCOUNTED","smallEntityStatusIndicator":false}}}],"requestIdentifier":"req-test-123"}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,51 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/IPR2021-00001
+  response:
+    body:
+      string: '{"count":1,"requestIdentifier":"e612ab8e-09d6-4ff7-b7a1-4df520f77a15","patentTrialProceedingDataBag":[{"lastModifiedDateTime":"2025-12-12T17:01:43","patentOwnerData":{"patentNumber":"6819092","grantDate":"2004-11-16","realPartyInInterestName":"NXP
+        B.V. et al.","technologyCenterNumber":"2800","groupArtUnitNumber":"2838","applicationNumberText":"10264899","inventorName":"Ernst
+        Bretschneider","counselName":"Witcoff, David et al"},"trialMetaData":{"accordedFilingDate":"2020-10-05","terminationDate":"2022-05-02","trialTypeCode":"IPR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/IPR2021-00001.zip","institutionDecisionDate":"2021-05-06","trialStatusCategory":"Final
+        Written Decision","trialLastModifiedDate":"2022-07-29","petitionFilingDate":"2020-10-05","trialLastModifiedDateTime":"2022-07-29T13:50:39"},"trialNumber":"IPR2021-00001","regularPetitionerData":{"realPartyInInterestName":"Impinj,
+        Inc.","counselName":"McCullough, Christina "}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '981'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:48 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d0-62c33e721682d9234ff6823f;Parent=4ce31a3106c5b668;Sampled=0;Lineage=1:ce682653:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - ZwuwqEVlIAMFVew=
+      x-amzn-RequestId:
+      - e612ab8e-09d6-4ff7-b7a1-4df520f77a15
+    status:
+      code: 200
+      message: OK
+version: 1

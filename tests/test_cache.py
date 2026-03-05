@@ -146,6 +146,49 @@ class TestCacheManager:
         assert cleared == 2
 
     @pytest.mark.asyncio
+    async def test_clear_expired_default_ttl(self, populated_db: Path) -> None:
+        """Verify clear_expired uses ttl_seconds when max_age is None."""
+        manager = CacheManager(database_path=populated_db, ttl_seconds=1800)
+        # ttl_seconds=1800 (30 min) -> entries older than 30 min cleared
+        cleared = await manager.clear_expired()
+        assert cleared == 2
+
+    @pytest.mark.asyncio
+    async def test_clear_expired_default_24h(self, populated_db: Path) -> None:
+        """Verify clear_expired uses 24h default when no ttl_seconds."""
+        manager = CacheManager(database_path=populated_db)
+        # No ttl_seconds -> defaults to 24 hours; all entries are recent
+        cleared = await manager.clear_expired()
+        assert cleared == 0
+
+    @pytest.mark.asyncio
+    async def test_clear_expired_nonexistent_db(self, tmp_path: Path) -> None:
+        """Verify clear_expired returns 0 for nonexistent db."""
+        manager = CacheManager(database_path=tmp_path / "nope.db")
+        cleared = await manager.clear_expired()
+        assert cleared == 0
+
+    @pytest.mark.asyncio
+    async def test_invalidate_nonexistent_db(self, tmp_path: Path) -> None:
+        """Verify invalidate returns 0 for nonexistent db."""
+        manager = CacheManager(database_path=tmp_path / "nope.db")
+        cleared = await manager.invalidate_pattern(".*")
+        assert cleared == 0
+
+    @pytest.mark.asyncio
+    async def test_close_with_storage_resets_to_none(self, temp_db: Path) -> None:
+        """Verify close resets storage to None (storage.aclose may not exist in all versions)."""
+        manager = CacheManager(database_path=temp_db)
+        # Initialize storage
+        storage = manager.get_storage()
+        assert manager._storage is not None
+        # Patch aclose to avoid AttributeError if it doesn't exist
+        if not hasattr(storage, "aclose"):
+            storage.aclose = storage.close  # type: ignore[attr-defined]
+        await manager.close()
+        assert manager._storage is None
+
+    @pytest.mark.asyncio
     async def test_invalidate_pattern(self, populated_db: Path) -> None:
         """Verify invalidating by URL pattern."""
         manager = CacheManager(database_path=populated_db)

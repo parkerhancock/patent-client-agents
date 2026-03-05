@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: '{"q":"artificial intelligence","pagination":{"offset":0,"limit":5}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/applications/search
+  response:
+    body:
+      string: '{"count":5,"patentFileWrapperDataBag":[{"applicationNumberText":"17100001","applicationMetaData":{"inventionTitle":"ARTIFICIAL INTELLIGENCE SYSTEM FOR MEDICAL DIAGNOSIS","filingDate":"2021-01-15","applicationStatusCode":"150"}},{"applicationNumberText":"17100002","applicationMetaData":{"inventionTitle":"MACHINE LEARNING BASED ARTIFICIAL INTELLIGENCE ENGINE","filingDate":"2021-02-20","applicationStatusCode":"30"}},{"applicationNumberText":"17100003","applicationMetaData":{"inventionTitle":"AI POWERED SEARCH SYSTEM","filingDate":"2021-03-10","applicationStatusCode":"150"}},{"applicationNumberText":"17100004","applicationMetaData":{"inventionTitle":"CONVERSATIONAL AI PLATFORM","filingDate":"2021-04-05","applicationStatusCode":"161"}},{"applicationNumberText":"17100005","applicationMetaData":{"inventionTitle":"AI FOR AUTONOMOUS VEHICLES","filingDate":"2021-05-01","applicationStatusCode":"30"}}],"requestIdentifier":"req-test-456"}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -2,9 +2,18 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
+# Avoid circular import — use the same path as core/logging.py
+_LOG_FILE = Path.home() / ".cache" / "ip_tools" / "ip_tools.log"
+
 
 class IpToolsError(Exception):
     """Base exception for all ip_tools errors."""
+
+    def __str__(self) -> str:
+        base = super().__str__()
+        return f"{base} (details: {_LOG_FILE})"
 
 
 class ApiError(IpToolsError):
@@ -21,10 +30,11 @@ class ApiError(IpToolsError):
         self.response_body = response_body
 
     def __str__(self) -> str:
-        base = super().__str__()
+        parts = [super(Exception, self).__str__()]
         if self.status_code:
-            return f"{base} (HTTP {self.status_code})"
-        return base
+            parts.append(f"HTTP {self.status_code}")
+        parts.append(f"details: {_LOG_FILE}")
+        return f"{parts[0]} ({', '.join(parts[1:])})"
 
 
 class NotFoundError(ApiError):

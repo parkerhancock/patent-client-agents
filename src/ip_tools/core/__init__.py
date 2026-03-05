@@ -6,6 +6,7 @@ This module provides shared infrastructure used across all ip_tools packages:
 - HTTP caching utilities
 - Resilience/retry utilities
 - Agent tooling decorators
+- File-based logging configuration
 """
 
 from .base_client import BaseAsyncClient
@@ -21,6 +22,7 @@ from .exceptions import (
     ServerError,
     ValidationError,
 )
+from .logging import LOG_FILE, configure_logging
 from .resilience import (
     RETRYABLE_STATUS_CODES,
     default_retryer,
@@ -46,6 +48,9 @@ __all__ = [
     "ValidationError",
     "ConfigurationError",
     "ParseError",
+    # Logging
+    "LOG_FILE",
+    "configure_logging",
     # Resilience
     "RETRYABLE_STATUS_CODES",
     "is_retryable_error",

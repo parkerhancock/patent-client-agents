@@ -1,0 +1,56 @@
+interactions:
+- request:
+    body: '{"pagination":{"limit":3}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search/download
+  response:
+    body:
+      string: '{"patentTrialData":[{"decisionData":{"decisionTypeCategory":"Decision","appealOutcomeCategory":"Reversed","decisionIssueDate":"2026-01-08"},"appealNumber":"2026000539","appellantData":{"realPartyInInterestName":"THE
+        REGENTS OF THE UNIVERSITY OF CALIFORNIA","technologyCenterNumber":"1700","applicationNumberText":"18206307"}},{"decisionData":{"decisionTypeCategory":"Decision","appealOutcomeCategory":"Affirmed","decisionIssueDate":"2026-02-26"},"appealNumber":"2026000472","appellantData":{"realPartyInInterestName":"UNIVERSAL
+        ELECTRONICS, INC.(OWNER) Organization et al.","technologyCenterNumber":"3900","applicationNumberText":"90019287"}},{"decisionData":{"decisionTypeCategory":"Decision","appealOutcomeCategory":"Affirmed","decisionIssueDate":"2026-02-24"},"appealNumber":"2026000275","appellantData":{"realPartyInInterestName":"Outdoor
+        Wireless Networks LLC","technologyCenterNumber":"3900","applicationNumberText":"18632750"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '936'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:56 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d8-1d7122e31b90861341d5014a;Parent=35926799df51e633;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      content-disposition:
+      - attachment;filename="results-2026-03-05T18-00-56.json"
+      x-amz-apigw-id:
+      - Zwux5EluIAMFYrw=
+      x-amzn-RequestId:
+      - dbe23c61-5714-42ff-a198-1b03925a02fa
+    status:
+      code: 200
+      message: OK
+version: 1

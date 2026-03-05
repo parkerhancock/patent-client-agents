@@ -1,0 +1,53 @@
+interactions:
+- request:
+    body: '{"pagination":{"limit":3}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/search/download
+  response:
+    body:
+      string: '{"patentTrialData":[{"patentOwnerData":{"patentNumber":"10200654","technologyCenterNumber":"2600","applicationNumberText":"13778430"},"trialMetaData":{"trialStatusCategory":"Pending","petitionFilingDate":"2026-03-04"},"trialNumber":"IPR2026-00266"},{"patentOwnerData":{"patentNumber":"12349941","technologyCenterNumber":"3700","applicationNumberText":"18615875"},"trialMetaData":{"trialStatusCategory":"Pending","petitionFilingDate":"2026-03-03"},"trialNumber":"PGR2026-00031"},{"patentOwnerData":{"patentNumber":"10603183","technologyCenterNumber":"3700","applicationNumberText":"16100410"},"trialMetaData":{"trialStatusCategory":"Pending","petitionFilingDate":"2026-03-02"},"trialNumber":"IPR2026-00285"}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '708'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:50 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d2-17bd744c0e83b0d03e1872f5;Parent=270ff62a3441e6a9;Sampled=0;Lineage=1:ce682653:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      content-disposition:
+      - attachment;filename="results-2026-03-05T18-00-50.json"
+      x-amz-apigw-id:
+      - ZwuxBGEDIAMFmZw=
+      x-amzn-RequestId:
+      - d05d4d37-2d35-4570-8e15-1c19a0e622d9
+    status:
+      code: 200
+      message: OK
+version: 1

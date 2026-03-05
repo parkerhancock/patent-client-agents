@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from datetime import timedelta
 from pathlib import Path
 from typing import Any, Self
@@ -17,6 +18,8 @@ from .exceptions import (
     ServerError,
 )
 from .resilience import default_retryer
+
+logger = logging.getLogger(__name__)
 
 
 class BaseAsyncClient:
@@ -201,7 +204,16 @@ class BaseAsyncClient:
 
         status = response.status_code
         body = response.text[:500] if response.text else ""
-        msg = f"{context}: {status}" if context else f"HTTP {status}"
+        msg = f"{context}: HTTP {status}" if context else f"HTTP {status}"
+
+        # Log full response details to file for debugging
+        logger.error(
+            "%s %s -> %s\nResponse body: %s",
+            response.request.method,
+            response.request.url,
+            status,
+            body,
+        )
 
         if status == 404:
             raise NotFoundError(msg, status, body)
@@ -248,10 +260,12 @@ class BaseAsyncClient:
         if timeout:
             request_kwargs["timeout"] = timeout
 
+        logger.debug("%s %s", method, url)
         async for attempt in default_retryer(max_attempts=self._max_retries):
             with attempt:
                 response = await self._client.request(method, url, **request_kwargs)
                 self._raise_for_status(response, context)
+                logger.debug("%s %s -> %s", method, url, response.status_code)
                 return response
 
         # Should not reach here due to reraise=True in retryer

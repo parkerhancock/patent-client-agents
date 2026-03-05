@@ -1,0 +1,118 @@
+interactions:
+- request:
+    body: '{"pagination":{"offset":0,"limit":1}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '37'
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search
+  response:
+    body:
+      string: '{"count":162699,"requestIdentifier":"b78a210f-b907-4f7d-8872-5ccf3cc77198","patentAppealDataBag":[{"appealNumber":"2026000539","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"2025-12-10","appealLastModifiedDateTime":"2026-01-08T16:11:21","appealLastModifiedDate":"2026-01-08","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000539/2026000539.zip"},"appellantData":{"applicationNumberText":"18206307","counselName":"OConnor
+        & Company PLLC","groupArtUnitNumber":"1752","inventorName":"Haodong LIU","realPartyInInterestName":"THE
+        REGENTS OF THE UNIVERSITY OF CALIFORNIA","patentOwnerName":"THE REGENTS OF
+        THE UNIVERSITY OF CALIFORNIA","publicationDate":"2023-10-05","publicationNumber":"US20230317937A1","technologyCenterNumber":"1700"},"documentData":{"documentFilingDate":"2026-01-08","documentIdentifier":"650ad83e-56f0-4d7d-843a-5f238d16951f","documentName":"Decision_2026000539_01-08-2026.pdf","documentSizeQuantity":101645,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/206,307
+        06/06/2023 Haodong LIU TYF-1000-CON 8821\n\n62542 7590 01/09/2026\n\nOConnor
+        & Company PLLC\nP.O. Box 580\nMinnetrista, MN 55364-0580\n\nEXAMINER\n\nCONLEY,
+        OI K\n\nART UNIT PAPER NUMBER\n\n1752 ...","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000539/650ad83e-56f0-4d7d-843a-5f238d16951f.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-01-08","decisionTypeCategory":"Decision","issueTypeBag":["102","103"]}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1954'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:55 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d7-530edd446dce053b5d91564d;Parent=7565adce1a06531e;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - ZwuxsFCDIAMFVhA=
+      x-amzn-RequestId:
+      - b78a210f-b907-4f7d-8872-5ccf3cc77198
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/650ad83e-56f0-4d7d-843a-5f238d16951f
+  response:
+    body:
+      string: '{"count":1,"requestIdentifier":"9c10a7ca-776a-4413-80ea-deba35e38c7e","patentAppealDataBag":[{"appealNumber":"2026000539","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"2025-12-10","appealLastModifiedDateTime":"2026-01-08T16:11:21","appealLastModifiedDate":"2026-01-08","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000539/2026000539.zip"},"appellantData":{"applicationNumberText":"18206307","counselName":"OConnor
+        & Company PLLC","groupArtUnitNumber":"1752","inventorName":"Haodong LIU","realPartyInInterestName":"THE
+        REGENTS OF THE UNIVERSITY OF CALIFORNIA","patentOwnerName":"THE REGENTS OF
+        THE UNIVERSITY OF CALIFORNIA","publicationDate":"2023-10-05","publicationNumber":"US20230317937A1","technologyCenterNumber":"1700"},"documentData":{"documentFilingDate":"2026-01-08","documentIdentifier":"650ad83e-56f0-4d7d-843a-5f238d16951f","documentName":"Decision_2026000539_01-08-2026.pdf","documentSizeQuantity":101645,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/206,307
+        06/06/2023 Haodong LIU TYF-1000-CON 8821\n\n62542 7590 01/09/2026\n\nOConnor
+        & Company PLLC\nP.O. Box 580\nMinnetrista, MN 55364-0580\n\nEXAMINER\n\nCONLEY,
+        OI K\n\nART UNIT PAPER NUMBER\n\n1752 ...","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000539/650ad83e-56f0-4d7d-843a-5f238d16951f.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-01-08","decisionTypeCategory":"Decision","issueTypeBag":["102","103"]}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1949'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:55 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d7-22db2d4d1e59b04a025cb08f;Parent=688d09df44c9b47f;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - ZwuxwExCIAMF_ag=
+      x-amzn-RequestId:
+      - 9c10a7ca-776a-4413-80ea-deba35e38c7e
+    status:
+      code: 200
+      message: OK
+version: 1

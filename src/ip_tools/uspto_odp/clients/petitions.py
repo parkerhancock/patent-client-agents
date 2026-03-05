@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Sequence
 from typing import Any
 
@@ -13,6 +14,8 @@ from ..models import (
     PetitionDecisionSort,
 )
 from .base import UsptoOdpBaseClient, _prune, _serialize_model_list
+
+logger = logging.getLogger(__name__)
 
 
 class PetitionsClient(UsptoOdpBaseClient):
@@ -48,6 +51,7 @@ class PetitionsClient(UsptoOdpBaseClient):
         Returns:
             PetitionDecisionResponse with matching decisions.
         """
+        logger.debug("Searching petitions: q=%s limit=%s offset=%s", q, limit, offset)
         payload: dict[str, Any] = {}
         if q:
             payload["q"] = q
@@ -156,6 +160,7 @@ class PetitionsClient(UsptoOdpBaseClient):
         if not identifier:
             raise ValidationError("petition_decision_record_identifier is required")
 
+        logger.debug("Getting petition decision %s", identifier)
         params = None
         if include_documents:
             params = {"includeDocuments": "true"}

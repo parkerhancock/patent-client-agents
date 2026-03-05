@@ -1,0 +1,85 @@
+interactions:
+- request:
+    body: '{"q":"software","pagination":{"offset":0,"limit":3}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '52'
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search
+  response:
+    body:
+      string: "{\"count\":14216,\"requestIdentifier\":\"453424dd-4cdb-470d-b22b-a82ec37f143a\",\"patentAppealDataBag\":[{\"appealNumber\":\"2026000472\",\"appealDocumentCategory\":\"Decision\",\"lastModifiedDateTime\":\"2026-02-27T00:32:36\",\"appealMetaData\":{\"appealFilingDate\":\"2025-11-24\",\"appealLastModifiedDateTime\":\"2026-02-26T16:09:57\",\"appealLastModifiedDate\":\"2026-02-26\",\"applicationTypeCategory\":\"REEXAM\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000472/2026000472.zip\"},\"appellantData\":{\"applicationNumberText\":\"90019287\",\"counselName\":\"Greenberg
+        Traurig, LLP\",\"groupArtUnitNumber\":\"3992\",\"inventorName\":\"M. 7782309\",\"realPartyInInterestName\":\"UNIVERSAL
+        ELECTRONICS, INC.(OWNER) Organization et al.\",\"patentOwnerName\":\"Janik,Craig,M.
+        et al\",\"technologyCenterNumber\":\"3900\"},\"documentData\":{\"documentFilingDate\":\"2026-02-26\",\"documentIdentifier\":\"0c226cb6-989b-4c24-8bc8-fdc68f7be1b6\",\"documentName\":\"Decision_2026000472_02-26-2026.pdf\",\"documentSizeQuantity\":217527,\"documentOCRText\":\"Appellant
+        next urges that incorporating the processing <b><span style='background-color:
+        yellow;'>software</span></b> of \\n\\nZetts, which operates on the principle
+        of using a delay timer to distinguish \\n\\nbetween moving input types, into
+        the processing <b><span style='background-color: yellow;'>software</span></b>
+        of Herz would \\n\\nhave \u201Cno expectation of success,\u201D and that the
+        processing <b><span style='background-color: yellow;'>software</span></b>
+        of Zetts \\n\\nwould be inoperable if incorporated into the \u201Ctimer-less\u201D
+        device of Herz. \\n\\nAppeal Br. 9\u201310.\",\"documentTypeDescriptionText\":\"Paper\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000472/0c226cb6-989b-4c24-8bc8-fdc68f7be1b6.pdf\"},\"decisionData\":{\"appealOutcomeCategory\":\"Affirmed\",\"statuteAndRuleBag\":[\"35
+        USC 134\"],\"decisionIssueDate\":\"2026-02-26\",\"decisionTypeCategory\":\"Decision\",\"issueTypeBag\":[\"103\"]}},{\"appealNumber\":\"2026000250\",\"appealDocumentCategory\":\"Decision\",\"lastModifiedDateTime\":\"2026-02-26T10:59:15\",\"appealMetaData\":{\"appealFilingDate\":\"2025-10-30\",\"appealLastModifiedDateTime\":\"2026-01-02T15:10:09\",\"appealLastModifiedDate\":\"2026-01-02\",\"applicationTypeCategory\":\"REISSUE\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000250/2026000250.zip\"},\"appellantData\":{\"applicationNumberText\":\"16833447\",\"counselName\":\"Arent
+        Fox LLP and Divergent Technologies Inc.\",\"groupArtUnitNumber\":\"3992\",\"inventorName\":\"Kevin
+        Robert Czinger\",\"realPartyInInterestName\":\"DIVERGENT TECHNOLOGIES, INC.\",\"patentNumber\":\"\",\"patentOwnerName\":\"DIVERGENT
+        TECHNOLOGIES, INC.\",\"technologyCenterNumber\":\"3900\"},\"documentData\":{\"documentFilingDate\":\"2026-01-02\",\"documentIdentifier\":\"6fff1d16-8f56-4ec6-9fd9-ccc60df6922e\",\"documentName\":\"Decision_2026000250_01-02-2026.pdf\",\"documentSizeQuantity\":182000,\"documentOCRText\":\"\u201CApplicant
+        has also addressed the Examiner\u2019s second concern, \\n\\nnamely that \u2018the
+        problem occurs when the claim goes the other path and the \\n\\ndata does
+        not satisfy the criteria and is sent to the <b><span style='background-color:
+        yellow;'>software</span></b> in the hopes of \\n\\nobtaining more favorable
+        data.\u2019\u201D  Id. at 13.  \u201CAccordingly, . . . the claims as \\n\\namended
+        recite an iterative approach of updating the data model until the \\n\\nupdated
+        design model satisfies the relevant criteria, at which point the one or \\n\\nmore
+        structures are printed.\u201D  Id.\",\"documentTypeDescriptionText\":\"Paper\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000250/6fff1d16-8f56-4ec6-9fd9-ccc60df6922e.pdf\"},\"decisionData\":{\"appealOutcomeCategory\":\"Affirmed\",\"statuteAndRuleBag\":[\"37
+        CFR 41.50(f)\",\"35 USC 251\",\"37 CFR 41.50\",\"35 USC 134\"],\"decisionIssueDate\":\"2026-01-02\",\"decisionTypeCategory\":\"Decision\",\"issueTypeBag\":[\"102\",\"103\",\"101\"]}},{\"appealNumber\":\"2026000256\",\"appealDocumentCategory\":\"Decision\",\"lastModifiedDateTime\":\"2026-02-26T10:59:15\",\"appealMetaData\":{\"appealFilingDate\":\"2025-10-30\",\"appealLastModifiedDateTime\":\"2025-12-29T12:10:26\",\"appealLastModifiedDate\":\"2025-12-29\",\"applicationTypeCategory\":\"REISSUE\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000256/2026000256.zip\"},\"appellantData\":{\"applicationNumberText\":\"17939563\",\"counselName\":\"FOLEY
+        & LARDNER LLP\",\"groupArtUnitNumber\":\"3992\",\"inventorName\":\"Benjamin
+        Nelson\",\"realPartyInInterestName\":\"NetScout Systems, Inc.\",\"patentNumber\":\"\",\"patentOwnerName\":\"NetScout
+        Systems, Inc.\",\"technologyCenterNumber\":\"3900\"},\"documentData\":{\"documentFilingDate\":\"2025-12-29\",\"documentIdentifier\":\"de66ff7b-eb90-43fc-acc3-a54f578c2774\",\"documentName\":\"Decision_2026000256_12-29-2025.pdf\",\"documentSizeQuantity\":301498,\"documentOCRText\":\"That
+        is, \\n\\nthis undisclosed \u201C<b><span style='background-color: yellow;'>software</span></b>\u201D
+        is merely described in terms of what it achieves, \\n\\nyet there is no disclosed
+        algorithm, computer code, or particular instructions \\n\\nto facilitate this
+        achievement.  How the test agent\u2019s <b><span style='background-color:
+        yellow;'>software</span></b> determines an \\n\\noptimal time period for the
+        test is unclear at best.\",\"documentTypeDescriptionText\":\"Paper\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000256/de66ff7b-eb90-43fc-acc3-a54f578c2774.pdf\"},\"decisionData\":{\"appealOutcomeCategory\":\"Affirmed\",\"statuteAndRuleBag\":[\"37
+        CFR 41.50(f)\",\"35 USC 251\",\"37 CFR 41.50\",\"35 USC 134\"],\"decisionIssueDate\":\"2025-12-29\",\"decisionTypeCategory\":\"Decision\",\"issueTypeBag\":[\"112\",\"101\"]}}]}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '5529'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:52 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d4-18c4bd4c49f86d9b4acfdc00;Parent=6dbf605cf1708381;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - ZwuxNH5nIAMF2iA=
+      x-amzn-RequestId:
+      - 453424dd-4cdb-470d-b22b-a82ec37f143a
+    status:
+      code: 200
+      message: OK
+version: 1

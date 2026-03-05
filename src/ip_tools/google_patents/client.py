@@ -18,6 +18,7 @@ from tenacity import AsyncRetrying, stop_after_attempt, wait_exponential_jitter
 if TYPE_CHECKING:  # pragma: no cover - typing only
     pass
 
+from ip_tools.core.exceptions import NotFoundError
 from ip_tools.core.tooling import agent_tool
 
 from .cache import build_cached_http_client
@@ -827,7 +828,7 @@ async def fetch_patent_from_google_patents(
 
         if "Sorry, we couldn't find this patent" in response.text:
             logger.warning("Patent %s not found in Google Patents", normalized)
-            raise FileNotFoundError(f"Patent {normalized} not found on Google Patents")
+            raise NotFoundError(f"Patent {normalized} not found on Google Patents", 404)
 
         document = html.fromstring(response.text)
         metadata = extract_metadata(document, response.text, patent_number=normalized)
@@ -965,24 +966,18 @@ class GooglePatentsClient:
                     normalized, use_cache=self._use_cache
                 )
                 return patent_data
-        raise RuntimeError(f"Unable to fetch patent data for {normalized} after retries")
+        from ip_tools.core.exceptions import ApiError
+
+        raise ApiError(f"Unable to fetch patent data for {normalized} after retries")
 
     async def _get_patent_data(self, patent_number: str) -> PatentData:
         return await self._fetch_with_retry(patent_number)
 
-    async def get_patent_data(self, patent_number: str) -> PatentData | None:
-        try:
-            return await self._fetch_with_retry(patent_number)
-        except Exception as exc:  # pragma: no cover - defensive logging
-            logger.error("Error retrieving patent data for %s: %s", patent_number, exc)
-            return None
+    async def get_patent_data(self, patent_number: str) -> PatentData:
+        return await self._fetch_with_retry(patent_number)
 
-    async def get_patent_details(self, patent_number: str) -> dict[str, object] | None:
-        try:
-            patent = await self._get_patent_data(patent_number)
-        except Exception as exc:  # pragma: no cover
-            logger.error("Error getting patent details for %s: %s", patent_number, exc)
-            return None
+    async def get_patent_details(self, patent_number: str) -> dict[str, object]:
+        patent = await self._get_patent_data(patent_number)
 
         def _parse_date(value: str | None) -> date | None:
             if not value:
@@ -1069,7 +1064,9 @@ class GooglePatentsClient:
 
         text = response.text.strip()
         if text.startswith("<"):
-            raise RuntimeError(
+            from ip_tools.core.exceptions import ApiError
+
+            raise ApiError(
                 "Google Patents rejected the search request (HTML response). "
                 "Wait a moment and try a narrower query."
             )
@@ -1077,16 +1074,18 @@ class GooglePatentsClient:
         try:
             payload = json.loads(text)
         except json.JSONDecodeError as exc:  # pragma: no cover - defensive
-            raise RuntimeError("Unable to parse Google Patents search response") from exc
+            from ip_tools.core.exceptions import ParseError
+
+            logger.exception("Failed to parse Google Patents search response")
+            raise ParseError(
+                "Unable to parse Google Patents search response",
+                source="google_patents",
+            ) from exc
 
         return _parse_search_results(payload, query_url)
 
-    async def get_patent_claims(self, patent_number: str) -> list[dict[str, object]] | None:
-        try:
-            patent = await self._get_patent_data(patent_number)
-        except Exception as exc:  # pragma: no cover
-            logger.error("Error getting patent claims for %s: %s", patent_number, exc)
-            return None
+    async def get_patent_claims(self, patent_number: str) -> list[dict[str, object]]:
+        patent = await self._get_patent_data(patent_number)
 
         claims_payload: list[dict[str, object]] = []
         for claim in patent.claims:
@@ -1106,41 +1105,20 @@ class GooglePatentsClient:
     async def get_structured_claim_limitations(
         self, patent_number: str
     ) -> dict[str, list[str]] | None:
-        try:
-            patent = await self._get_patent_data(patent_number)
-        except Exception as exc:  # pragma: no cover
-            logger.error(
-                "Error getting structured claim limitations for %s: %s", patent_number, exc
-            )
-            return None
-
+        patent = await self._get_patent_data(patent_number)
         return patent.structured_limitations
 
     async def get_patent_pdf_url(self, patent_number: str) -> str | None:
-        try:
-            patent = await self._get_patent_data(patent_number)
-        except Exception as exc:  # pragma: no cover
-            logger.error("Error getting patent PDF URL for %s: %s", patent_number, exc)
-            return None
-
+        patent = await self._get_patent_data(patent_number)
         return patent.pdf_url
 
     async def get_patent_figures(self, patent_number: str) -> list[dict[str, Any]] | None:
-        try:
-            patent = await self._get_patent_data(patent_number)
-        except Exception as exc:  # pragma: no cover
-            logger.error("Error getting patent figures for %s: %s", patent_number, exc)
-            return None
-
+        patent = await self._get_patent_data(patent_number)
         html_payload = patent.raw_html
         if not html_payload:
-            try:
-                refreshed = await fetch_patent_from_google_patents(
-                    patent_number, use_cache=self._use_cache
-                )
-            except Exception as exc:  # pragma: no cover
-                logger.error("Error refetching patent %s for figures: %s", patent_number, exc)
-                return None
+            refreshed = await fetch_patent_from_google_patents(
+                patent_number, use_cache=self._use_cache
+            )
             patent = refreshed
             html_payload = refreshed.raw_html
         if not html_payload:
@@ -1157,8 +1135,8 @@ class GooglePatentsClient:
         use_cache: bool = True,
     ) -> bytes:
         patent = await self.get_patent_data(patent_number)
-        if not patent or not patent.pdf_url:
-            raise ValueError(f"No PDF URL available for {patent_number}")
+        if not patent.pdf_url:
+            raise NotFoundError(f"No PDF URL available for {patent_number}", 404)
 
         pdf_url = patent.pdf_url
         if pdf_url.startswith("//"):

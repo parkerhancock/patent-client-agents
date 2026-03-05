@@ -1,0 +1,225 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Host:
+      - ppubs.uspto.gov
+      Origin:
+      - https://ppubs.uspto.gov
+      Pragma:
+      - no-cache
+      Priority:
+      - u=1, i
+      Referer:
+      - https://ppubs.uspto.gov/pubwebapp/
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Requested-With:
+      - XMLHttpRequest
+    method: GET
+    uri: https://ppubs.uspto.gov/pubwebapp/
+  response:
+    body:
+      string: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n
+        \   <meta http-equiv=\"Pragma\" content=\"no-cache\">\n    <meta http-equiv=\"Expires\"
+        content=\"-1\">\n    <meta http-equiv=\"Cache-Control\" content=\"no-store,
+        no-cache, max-age=0\">\n    <title>Patent Public Search | USPTO</title>\n
+        \   <link rel=\"icon\" type=\"image/png\" href=\"images/favicon_new.png\">\n
+        \   <!-- DO NOT REMOVE ANY OF COMMENT BELOW (USED BY USMIN) -->\n    <!--
+        build:css(.tmp) styles/main.css -->\n    <link rel=\"stylesheet\" href=\"styles/main.css\">\n
+        \   <!-- endbuild -->\n    <script src=\"common/environment.js\"></script>\n</head>\n<body>\n<h1
+        class=\"sr-only\">Patent Public Search | USPTO <span class=\"ext-window\">
+        - extended window</span></h1>\n<div class=\"layout\">\n    <div class=\"zone
+        ui-layout-north\" data-zone=\"north\"></div>\n    <div class=\"zone ui-layout-west\"
+        data-zone=\"west\"></div>\n    <div class=\"zone ui-layout-center\" data-zone=\"center\"></div>\n
+        \   <div class=\"zone ui-layout-east\" data-zone=\"east\"></div>\n    <div
+        class=\"zone ui-layout-south\" data-zone=\"south\"></div>\n</div>\n\n<!--
+        build:js({web,.tmp}) main.js -->\n<!-- Google Analytics script -->\n<script
+        type='text/javascript' src=\"common/analytics/googleAnalytics.js\"></script>\n\n<!--BEGIN
+        QUALTRICS WEBSITE FEEDBACK SNIPPET-->\n<script type='text/javascript' src=\"common/analytics/qualtricsAnalytics.js\"></script>\n\n<script
+        src=\"vendor/require/require.js\"></script>\n<script src=\"main.js\"></script>\n<!--
+        endbuild -->\n</body>\n</html>"
+    headers:
+      accept-ranges:
+      - bytes
+      content-length:
+      - '1456'
+      content-type:
+      - text/html
+      date:
+      - Thu, 05 Mar 2026 17:56:34 GMT
+      etag:
+      - '"5b0-6463cc1987ceb"'
+      last-modified:
+      - Thu, 18 Dec 2025 16:50:20 GMT
+      server:
+      - Apache/2.4.66 (Unix)
+    status:
+      code: 200
+      message: null
+- request:
+    body: '-1'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2'
+      Content-Type:
+      - application/json
+      Host:
+      - ppubs.uspto.gov
+      Origin:
+      - https://ppubs.uspto.gov
+      Pragma:
+      - no-cache
+      Priority:
+      - u=1, i
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Requested-With:
+      - XMLHttpRequest
+      referer:
+      - https://ppubs.uspto.gov/pubwebapp/
+    method: POST
+    uri: https://ppubs.uspto.gov/api/users/me/session
+  response:
+    body:
+      string: '{"userSessionId":206529196,"ipAddress":null,"userCase":{"caseId":206529365,"userId":206529196,"caseName":"Untitled
+        Case","applicationNumber":null},"userPreferences":{},"versions":[{"product":"API","releaseNumber":"5.1.1","date":"03.12.2025
+        @ 15:08:42 UTC","commitId":"8390cd5c","collectionName":""},{"product":"SOLR","releaseNumber":"9.8.1","date":"","commitId":"","collectionName":"us_patent_collection"}],"documentsLimitInQuery":1000,"sessionTimeOutTime":1800,"featureFlags":{"MLTD":false,"SQM":true,"FIT":false,"QBRANCH_ANALYTICS":false},"role":"ANONYMOUS_USER","sessionIdentifer":"00d35d34-5df2-46e7-9b13-cd9ca5889d49"}'
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Thu, 05 Mar 2026 17:56:36 GMT
+      x-access-token:
+      - eyJzdWIiOiIwMGQzNWQzNC01ZGYyLTQ2ZTctOWIxMy1jZDljYTU4ODlkNDkiLCJ2ZXIiOiI0ZjEwMzMwZi04YjgwLTQxOTAtYWFjZi05NGQ0Yjg1Y2U0NzIiLCJleHAiOjB9
+    status:
+      code: 200
+      message: null
+- request:
+    body: '{"caseId":206529365,"hl_snippets":"2","op":"OR","q":"autonomous vehicle","queryName":"autonomous
+      vehicle","highlights":"1","qt":"brs","spellCheck":false,"viewName":"tile","plurals":true,"britishEquivalents":true,"databaseFilters":[{"databaseName":"US-PGPUB","countryCodes":[]},{"databaseName":"USPAT","countryCodes":[]},{"databaseName":"USOCR","countryCodes":[]}],"searchType":1,"ignorePersist":true,"userEnteredQuery":"autonomous
+      vehicle"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '440'
+      Content-Type:
+      - application/json
+      Host:
+      - ppubs.uspto.gov
+      Origin:
+      - https://ppubs.uspto.gov
+      Pragma:
+      - no-cache
+      Priority:
+      - u=1, i
+      Referer:
+      - https://ppubs.uspto.gov/pubwebapp/
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Access-Token:
+      - eyJzdWIiOiIwMGQzNWQzNC01ZGYyLTQ2ZTctOWIxMy1jZDljYTU4ODlkNDkiLCJ2ZXIiOiI0ZjEwMzMwZi04YjgwLTQxOTAtYWFjZi05NGQ0Yjg1Y2U0NzIiLCJleHAiOjB9
+      X-Requested-With:
+      - XMLHttpRequest
+    method: POST
+    uri: https://ppubs.uspto.gov/api/searches/counts
+  response:
+    body:
+      string: '{"id":null,"caseId":206529365,"userId":null,"numResults":3802250,"ignorePersist":true,"fq":null,"databaseFilters":[{"databaseName":"US-PGPUB","countryCodes":[]},{"databaseName":"USPAT","countryCodes":[]},{"databaseName":"USOCR","countryCodes":[]}],"q":"autonomous
+        vehicle","queryName":"autonomous vehicle","userEnteredQuery":"autonomous vehicle","viewName":"tile","op":"OR","highlights":"1","plurals":true,"britishEquivalents":true,"searchType":1,"excludeResultsAfter":null,"dateCreated":null,"deleteIn":false,"expand":false,"expandSort":null,"expandRows":null,"expandTrackDocScores":false,"expandTrackMaxScore":false,"termGraph":{"termOrigin":[{"id":0,"name":null,"nodeType":"ROOT","parentId":null,"relation":null,"aliases":["default"],"aliasCategory":"OTHER"},{"id":1,"name":"autonomous","nodeType":"TERM","parentId":0,"relation":"REGULAR","aliases":["default"],"aliasCategory":"OTHER"},{"id":3,"name":"autonomou","nodeType":"TERM","parentId":1,"relation":"PLURAL","aliases":["default"],"aliasCategory":"OTHER"},{"id":2,"name":"vehicle","nodeType":"TERM","parentId":0,"relation":"REGULAR","aliases":["default"],"aliasCategory":"OTHER"},{"id":4,"name":"vehicles","nodeType":"TERM","parentId":2,"relation":"PLURAL","aliases":["default"],"aliasCategory":"OTHER"}],"termRelationship":[{"relationshipType":"PLURAL","relationshipBase":0,"members":[1,3]},{"relationshipType":"PLURAL","relationshipBase":0,"members":[2,4]}]},"hl":false,"fl":null,"originalQuery":"autonomous
+        vehicle","error":null,"terms":["autonomou","vehicles","autonomous","vehicle"],"facets":[{"solrField":"document_type","count":1820966,"id":"US-PGPUB"},{"solrField":"document_type","count":1690017,"id":"USPAT"},{"solrField":"document_type","count":291267,"id":"USOCR"}],"anchorDocIds":null,"querySource":null,"pNumber":null,"hl_fl":null}'
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Thu, 05 Mar 2026 17:56:37 GMT
+      x-rate-limit-remaining:
+      - '39'
+    status:
+      code: 200
+      message: null
+- request:
+    body: '{"start":0,"pageCount":1,"sort":"date_publ desc","docFamilyFiltering":"familyIdFiltering","searchType":1,"familyIdEnglishOnly":true,"familyIdFirstPreferred":"US-PGPUB","familyIdSecondPreferred":"USPAT","familyIdThirdPreferred":"FPRS","showDocPerFamilyPref":"showEnglish","queryId":0,"tagDocSearch":false,"query":{"caseId":206529365,"hl_snippets":"2","op":"OR","q":"autonomous
+      vehicle","queryName":"autonomous vehicle","highlights":"1","qt":"brs","spellCheck":false,"viewName":"tile","plurals":true,"britishEquivalents":true,"databaseFilters":[{"databaseName":"US-PGPUB","countryCodes":[]},{"databaseName":"USPAT","countryCodes":[]},{"databaseName":"USOCR","countryCodes":[]}],"searchType":1,"ignorePersist":true,"userEnteredQuery":"autonomous
+      vehicle"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '753'
+      Content-Type:
+      - application/json
+      Host:
+      - ppubs.uspto.gov
+      Origin:
+      - https://ppubs.uspto.gov
+      Pragma:
+      - no-cache
+      Priority:
+      - u=1, i
+      Referer:
+      - https://ppubs.uspto.gov/pubwebapp/
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Access-Token:
+      - eyJzdWIiOiIwMGQzNWQzNC01ZGYyLTQ2ZTctOWIxMy1jZDljYTU4ODlkNDkiLCJ2ZXIiOiI0ZjEwMzMwZi04YjgwLTQxOTAtYWFjZi05NGQ0Yjg1Y2U0NzIiLCJleHAiOjB9
+      X-Requested-With:
+      - XMLHttpRequest
+    method: POST
+    uri: https://ppubs.uspto.gov/api/searches/searchWithBeFamily
+  response:
+    body:
+      string: '{"numFound":1,"perPage":1,"page":0,"totalPages":0,"hlSnippets":0,"sort":null,"query":{"id":null,"caseId":206529365,"userId":null,"numResults":1,"ignorePersist":true,"fq":null,"databaseFilters":[{"databaseName":"US-PGPUB","countryCodes":[]},{"databaseName":"USPAT","countryCodes":[]},{"databaseName":"USOCR","countryCodes":[]}],"q":"autonomous
+        vehicle","queryName":"autonomous vehicle","userEnteredQuery":"autonomous vehicle","viewName":"tile","op":"OR","highlights":"1","plurals":true,"britishEquivalents":true,"searchType":1,"excludeResultsAfter":null,"dateCreated":null,"deleteIn":false,"expand":true,"expandSort":"group_sort_date
+        asc, id desc ","expandRows":"100","expandTrackDocScores":true,"expandTrackMaxScore":true,"termGraph":null,"hl":false,"fl":null,"originalQuery":"autonomous
+        vehicle","error":null,"terms":["autonomou","vehicles","autonomous","vehicle"],"facets":[],"anchorDocIds":null,"querySource":null,"pNumber":null,"hl_fl":null},"duration":371,"highlightingTime":0,"cursorMarker":"AoJwwOnS3ZwDPwAxMDAwMDA4MDM2NTM1IVBHLVVTLTIwMjYwMDY2ODQx","totalResults":1,"numberOfFamilies":2187695,"error":null,"patents":[{"guid":"US-20260066841-A1","publicationReferenceDocumentNumber":"20260066841","compositeId":"1000008036535!PG-US-20260066841","publicationReferenceDocumentNumber1":"20260066841","datePublishedKwicHits":null,"datePublished":"2026-03-05T00:00:00Z","inventionTitle":"SYSTEM
+        FOR SUPPLYING POWER TO AT LEAST ONE POWER CONSUMING DEVICE USING RECHARGEABLE
+        BATTERY","type":"US-PGPUB","mainClassificationCode":"1/1","applicantName":["LAT
+        Enterprises, Inc., d/b/a MediPak Energy Systems"],"assigneeName":["LAT Enterprises,
+        Inc., d/b/a MediPak Energy Systems"],"uspcFullClassificationFlattened":null,"ipcCodeFlattened":"H02S30/20;A45F3/06","cpcInventiveFlattened":"H02S30/20;A45F3/06;H01M10/465;H02S20/00;H02S20/30","cpcAdditionalFlattened":"H01M50/202;H01M50/247;H01M2220/30;H02S10/40","applicationFilingDate":["2024-08-08T00:00:00Z"],"applicationFilingDateKwicHits":null,"relatedApplFilingDate":["2023-12-14T00:00:00Z","2023-08-30T00:00:00Z","2019-10-18T00:00:00Z","2019-01-07T00:00:00Z","2018-12-14T00:00:00Z","2018-05-09T00:00:00Z","2018-02-01T00:00:00Z","2017-12-08T00:00:00Z","2017-09-29T00:00:00Z","2017-07-31T00:00:00Z","2017-03-27T00:00:00Z","2014-10-16T00:00:00Z","2014-10-22T00:00:00Z","2017-12-08T00:00:00Z","2017-09-29T00:00:00Z","2016-12-27T00:00:00Z","2014-01-15T00:00:00Z","2018-02-01T00:00:00Z"],"primaryExaminer":null,"assistantExaminer":null,"applicationNumber":"18/798326","frontPageStart":1,"frontPageEnd":2,"drawingsStart":3,"drawingsEnd":53,"specificationStart":54,"specificationEnd":78,"claimsStart":78,"claimsEnd":79,"abstractStart":1,"abstractEnd":1,"bibStart":1,"bibEnd":2,"certCorrectionStart":0,"certCorrectionEnd":0,"certReexaminationStart":0,"certReexaminationEnd":0,"supplementalStart":0,"supplementalEnd":0,"ptabStart":0,"ptabEnd":0,"amendStart":0,"amendEnd":0,"searchReportStart":0,"searchReportEnd":0,"pageCount":79,"pageCountDisplay":"79","previouslyViewed":false,"unused":false,"imageLocation":"us-pgpub/US/2026/0066/841","imageFileName":"00000001.tif","cpcCodes":null,"queryId":null,"tags":null,"inventorsShort":"Thiel;
+        Laura et al.","familyIdentifierCur":1000008036535,"familyIdentifierCurStr":null,"languageIndicator":"EN","databaseName":"PGPB","dwImageDoctypeList":null,"dwImageLocList":null,"dwPageCountList":null,"dwImageDocidList":null,"patentFamilyMembers":null,"patentFamilyCountry":null,"patentFamilySerialNumber":null,"documentIdWithDashesDw":null,"pfPublDate":null,"pfPublDateKwicHits":null,"priorityClaimsDate":null,"priorityClaimsDateKwicHits":null,"pfApplicationSerialNumber":null,"pfApplicationDescriptor":null,"pfLanguage":null,"pfApplicationDate":null,"pfApplicationDateKwicHits":null,"clippedUri":null,"source":null,"documentId":"US
+        20260066841 A1","derwentAccessionNumber":null,"documentSize":230469,"score":2.6607614,"governmentInterest":null,"kindCode":["A1"],"urpn":null,"urpnCode":null,"descriptionStart":54,"descriptionEnd":78,"publicationReferenceDocumentNumberOne":"20260066841"}],"qtime":369}'
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Thu, 05 Mar 2026 17:56:37 GMT
+      x-rate-limit-remaining:
+      - '38'
+    status:
+      code: 200
+      message: null
+version: 1
