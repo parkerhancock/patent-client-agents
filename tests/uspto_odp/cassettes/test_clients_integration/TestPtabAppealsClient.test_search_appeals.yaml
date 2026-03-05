@@ -1,0 +1,104 @@
+interactions:
+- request:
+    body: '{"pagination":{"offset":0,"limit":5}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '37'
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search
+  response:
+    body:
+      string: '{"count":162699,"requestIdentifier":"468970be-1b1e-4fea-b9b9-187292ea2608","patentAppealDataBag":[{"appealNumber":"2026000539","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"2025-12-10","appealLastModifiedDateTime":"2026-01-08T16:11:21","appealLastModifiedDate":"2026-01-08","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000539/2026000539.zip"},"appellantData":{"applicationNumberText":"18206307","counselName":"OConnor
+        & Company PLLC","groupArtUnitNumber":"1752","inventorName":"Haodong LIU","realPartyInInterestName":"THE
+        REGENTS OF THE UNIVERSITY OF CALIFORNIA","patentOwnerName":"THE REGENTS OF
+        THE UNIVERSITY OF CALIFORNIA","publicationDate":"2023-10-05","publicationNumber":"US20230317937A1","technologyCenterNumber":"1700"},"documentData":{"documentFilingDate":"2026-01-08","documentIdentifier":"650ad83e-56f0-4d7d-843a-5f238d16951f","documentName":"Decision_2026000539_01-08-2026.pdf","documentSizeQuantity":101645,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/206,307
+        06/06/2023 Haodong LIU TYF-1000-CON 8821\n\n62542 7590 01/09/2026\n\nOConnor
+        & Company PLLC\nP.O. Box 580\nMinnetrista, MN 55364-0580\n\nEXAMINER\n\nCONLEY,
+        OI K\n\nART UNIT PAPER NUMBER\n\n1752 ...","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000539/650ad83e-56f0-4d7d-843a-5f238d16951f.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-01-08","decisionTypeCategory":"Decision","issueTypeBag":["102","103"]}},{"appealNumber":"2026000472","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-27T00:32:36","appealMetaData":{"appealFilingDate":"2025-11-24","appealLastModifiedDateTime":"2026-02-26T16:09:57","appealLastModifiedDate":"2026-02-26","applicationTypeCategory":"REEXAM","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000472/2026000472.zip"},"appellantData":{"applicationNumberText":"90019287","counselName":"Greenberg
+        Traurig, LLP","groupArtUnitNumber":"3992","inventorName":"M. 7782309","realPartyInInterestName":"UNIVERSAL
+        ELECTRONICS, INC.(OWNER) Organization et al.","patentOwnerName":"Janik,Craig,M.
+        et al","technologyCenterNumber":"3900"},"documentData":{"documentFilingDate":"2026-02-26","documentIdentifier":"0c226cb6-989b-4c24-8bc8-fdc68f7be1b6","documentName":"Decision_2026000472_02-26-2026.pdf","documentSizeQuantity":217527,"documentOCRText":"The
+        opinion in support of the decision being entered today\n\n\nUNITED STATES
+        PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n90/019,287
+        10/19/2023 M. 7782309 48331.4 2863\n\n34018 7590 02/27/2026\n\nGreenberg Traurig,
+        LLP\n360 North Green Street\nSuite 1300\nCHI ...","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000472/0c226cb6-989b-4c24-8bc8-fdc68f7be1b6.pdf"},"decisionData":{"appealOutcomeCategory":"Affirmed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-02-26","decisionTypeCategory":"Decision","issueTypeBag":["103"]}},{"appealNumber":"2026000275","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"2025-10-31","appealLastModifiedDateTime":"2026-02-24T14:09:38","appealLastModifiedDate":"2026-02-24","applicationTypeCategory":"REISSUE","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000275/2026000275.zip"},"appellantData":{"applicationNumberText":"18632750","counselName":"Fogg
+        & Powers LLC/ANDREW","groupArtUnitNumber":"3992","inventorName":"Luigi Tarlazzi","realPartyInInterestName":"Outdoor
+        Wireless Networks LLC","patentOwnerName":"Outdoor Wireless Networks LLC","technologyCenterNumber":"3900"},"documentData":{"documentFilingDate":"2026-02-24","documentIdentifier":"102f7ef9-e121-44cd-9630-df29823cf2b7","documentName":"Decision_2026000275_02-24-2026.pdf","documentSizeQuantity":251753,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/632,750
+        04/11/2024 Luigi Tarlazzi 2674 US\nRE/100.1463US02R1\n\n5366\n\n204189 7590
+        02/25/2026\n\nFogg & Powers LLC/ANDREW\n4600 W 77th Street\nSuite 305\nMinneapolis,
+        MN 55435\n\nEXAMINER\n\nHANCE, ROB ...","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000275/102f7ef9-e121-44cd-9630-df29823cf2b7.pdf"},"decisionData":{"appealOutcomeCategory":"Affirmed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-02-24","decisionTypeCategory":"Decision","issueTypeBag":["112","102","103"]}},{"appealNumber":"2026000250","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"2025-10-30","appealLastModifiedDateTime":"2026-01-02T15:10:09","appealLastModifiedDate":"2026-01-02","applicationTypeCategory":"REISSUE","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000250/2026000250.zip"},"appellantData":{"applicationNumberText":"16833447","counselName":"Arent
+        Fox LLP and Divergent Technologies Inc.","groupArtUnitNumber":"3992","inventorName":"Kevin
+        Robert Czinger","realPartyInInterestName":"DIVERGENT TECHNOLOGIES, INC.","patentNumber":"","patentOwnerName":"DIVERGENT
+        TECHNOLOGIES, INC.","technologyCenterNumber":"3900"},"documentData":{"documentFilingDate":"2026-01-02","documentIdentifier":"6fff1d16-8f56-4ec6-9fd9-ccc60df6922e","documentName":"Decision_2026000250_01-02-2026.pdf","documentSizeQuantity":182000,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n16/833,447
+        03/27/2020 Kevin Robert Czinger 038191.00479 2492\n\n163743 7590 01/05/2026\n\nArent
+        Fox LLP and Divergent Technologies Inc.\nArent Fox LLP\n1717 K Street, NW\nWashington,
+        DC 20006-5344\n\n ...","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000250/6fff1d16-8f56-4ec6-9fd9-ccc60df6922e.pdf"},"decisionData":{"appealOutcomeCategory":"Affirmed","statuteAndRuleBag":["37
+        CFR 41.50(f)","35 USC 251","37 CFR 41.50","35 USC 134"],"decisionIssueDate":"2026-01-02","decisionTypeCategory":"Decision","issueTypeBag":["102","103","101"]}},{"appealNumber":"2026000256","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"2025-10-30","appealLastModifiedDateTime":"2025-12-29T12:10:26","appealLastModifiedDate":"2025-12-29","applicationTypeCategory":"REISSUE","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000256/2026000256.zip"},"appellantData":{"applicationNumberText":"17939563","counselName":"FOLEY
+        & LARDNER LLP","groupArtUnitNumber":"3992","inventorName":"Benjamin Nelson","realPartyInInterestName":"NetScout
+        Systems, Inc.","patentNumber":"","patentOwnerName":"NetScout Systems, Inc.","technologyCenterNumber":"3900"},"documentData":{"documentFilingDate":"2025-12-29","documentIdentifier":"de66ff7b-eb90-43fc-acc3-a54f578c2774","documentName":"Decision_2026000256_12-29-2025.pdf","documentSizeQuantity":301498,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/939,563
+        09/07/2022 Benjamin Nelson 124395-0138 1023\n\n30542 7590 12/30/2025\n\nFOLEY
+        & LARDNER LLP\n3000 K STREET N.W.\nSUITE 600\nWASHINGTON, DC 20007-5109\n\nEXAMINER\n\nWOOD,
+        WILLIAM H\n\nART UNIT  ...","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000256/de66ff7b-eb90-43fc-acc3-a54f578c2774.pdf"},"decisionData":{"appealOutcomeCategory":"Affirmed","statuteAndRuleBag":["37
+        CFR 41.50(f)","35 USC 251","37 CFR 41.50","35 USC 134"],"decisionIssueDate":"2025-12-29","decisionTypeCategory":"Decision","issueTypeBag":["112","101"]}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '9146'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:51 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d3-1e8f1114286db4ae5d2deb52;Parent=52beac91cbbf587d;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - ZwuxDEwZoAMFeCg=
+      x-amzn-RequestId:
+      - 468970be-1b1e-4fea-b9b9-187292ea2608
+    status:
+      code: 200
+      message: OK
+version: 1

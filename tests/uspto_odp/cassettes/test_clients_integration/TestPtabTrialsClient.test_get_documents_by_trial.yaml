@@ -1,0 +1,220 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/trials/IPR2021-00001/documents
+  response:
+    body:
+      string: "{\"count\":55,\"requestIdentifier\":\"2da62876-0175-4bb7-86f2-5356ec7267c7\",\"patentTrialDocumentDataBag\":[{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:14\",\"trialDocumentCategory\":\"Decision\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2022-05-02\",\"documentIdentifier\":\"170239444\",\"documentName\":\"IPR2021-00001
+        FWD Final.pdf\",\"documentNumber\":30,\"documentTitleText\":\"Final Written
+        Decision:  original\",\"documentTypeDescriptionText\":\"Final Written Decision:
+        \ original\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170239444.pdf\",\"filingPartyCategory\":\"BOARD\",\"documentOCRText\":\"Trials@uspto.gov
+        Paper 30 \\n\\n571-272-7822 Date: May 2, 2022  \\n\\n \\n\\nUNITED STATES
+        PATENT AND TRADEMARK OFFICE \\n\\n \\n\\nBEFORE THE PATENT TRIAL AND APPEAL
+        BOARD \\n\\n \\n\\nIMPINJ, INC., \\n\\nPetitioner, \\n\\nv. \\n\\nNXP B.V.,
+        \\n\\nPatent Owner. \\n\\n \\n\\nIPR2021-00001 \\n\\nPatent 6,819,092 B2 \\n\\n
+        \\n\\n \\n\\n \\n\\nBefore MIRIAM L. QUINN, MICHELLE N. WORMMEESTER, and \\n\\nSTACY
+        B. MARGOLIES, Administrative Patent Judges. \\n\\n \\n\\nQUINN, Administrative
+        Patent Judge.  \\n\\n \\n\\n \\n\\nJUDGMENT \\n\\nFinal Written Decision \\n\\nDetermining
+        All Challenged Claims  ...\"},\"decisionData\":{\"statuteAndRuleBag\":[\"35
+        USC 318\",\"37 CFR 42.73\",\"37 CFR 42.100\"],\"decisionIssueDate\":\"2022-05-02\",\"decisionTypeCategory\":\"Decision\",\"trialOutcomeCategory\":\"Final
+        Decision\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"OTHER\",\"documentFilingDate\":\"2022-03-03\",\"documentIdentifier\":\"170218050\",\"documentName\":\"IPR2021-00001.pdf\",\"documentNumber\":29,\"documentSizeQuantity\":167630,\"documentTitleText\":\"Other:
+        \ Hearing transcript\",\"documentTypeDescriptionText\":\"Other:  Hearing transcript\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170218050.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"NOTICE\",\"documentFilingDate\":\"2022-02-07\",\"documentIdentifier\":\"170207578\",\"documentName\":\"IPR2021-00001
+        - PO's Updated Exhibit List.pdf\",\"documentNumber\":27,\"documentSizeQuantity\":94421,\"documentTitleText\":\"Updated
+        Exhibit List\",\"documentTypeDescriptionText\":\"Exhibit List\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170207578.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"NOTICE\",\"documentFilingDate\":\"2022-02-07\",\"documentIdentifier\":\"170207593\",\"documentName\":\"2022-02-07
+        Petitioner_s Updated Exhibit List.pdf\",\"documentNumber\":28,\"documentSizeQuantity\":153736,\"documentTitleText\":\"Petitioner_s
+        Updated Exhibit List\",\"documentTypeDescriptionText\":\"Exhibit List\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170207593.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2022-02-07\",\"documentIdentifier\":\"170207579\",\"documentName\":\"Ex.
+        2007 - Patent Owner's Demonstratives.pdf\",\"documentNumber\":2007,\"documentSizeQuantity\":3997696,\"documentTitleText\":\"Demonstratives\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170207579.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2022-02-07\",\"documentIdentifier\":\"170207594\",\"documentName\":\"Ex.
+        1017 IPR2021-00001 Petitioner_s Demonstratives.pdf\",\"documentNumber\":1017,\"documentSizeQuantity\":10773249,\"documentTitleText\":\"IPR2021-00001
+        Petitioner_s Demonstratives\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170207594.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"OTHER\",\"documentFilingDate\":\"2022-01-14\",\"documentIdentifier\":\"170198510\",\"documentName\":\"IPR2021-00001
+        and other Cases WoC Order Witcoff mccullough PET.pdf\",\"documentNumber\":26,\"documentSizeQuantity\":93845,\"documentTitleText\":\"ORDER
+        Granting NXP USA, Inc.s Motions for Withdrawal of Counsel 37 C.F.R. \xA7 42.10
+        1\",\"documentTypeDescriptionText\":\"Other:  other\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170198510.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2022-01-07\",\"documentIdentifier\":\"170196149\",\"documentName\":\"IPR2021-00001
+        Oral Argument video Circ.pdf\",\"documentNumber\":25,\"documentTitleText\":\"ORDER
+        Setting Oral Argument 37 C.F.R. sec 42.70\",\"documentTypeDescriptionText\":\"Order:
+        \ on Motion\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170196149.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-12-22\",\"documentIdentifier\":\"170191115\",\"documentName\":\"12-22-2021
+        - Request for Oral Argument.pdf\",\"documentNumber\":21,\"documentTitleText\":\"Request
+        for Oral Argument\",\"documentTypeDescriptionText\":\"Oral Hearing Request\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170191115.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-12-22\",\"documentIdentifier\":\"170191368\",\"documentName\":\"IPR2021-00001
+        - Updated Mandatory Notices.pdf\",\"documentNumber\":23,\"documentTitleText\":\"Patent
+        Owner's Updated Mandatory Notices\",\"documentTypeDescriptionText\":\"Other
+        (Not for motions)\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170191368.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-12-22\",\"documentIdentifier\":\"170191373\",\"documentName\":\"2021-12-22
+        Petitioner's Request for Oral Argument.pdf\",\"documentNumber\":24,\"documentTitleText\":\"Petitioner's
+        Request for Oral Argument\",\"documentTypeDescriptionText\":\"Oral Hearing
+        Request\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170191373.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-12-22\",\"documentIdentifier\":\"170191367\",\"documentName\":\"Motion
+        to Withdraw Lead Counsel.pdf\",\"documentNumber\":22,\"documentTitleText\":\"Motion
+        to Withdraw David Witcoff\",\"documentTypeDescriptionText\":\"Motion\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170191367.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-12-02\",\"documentIdentifier\":\"170183432\",\"documentName\":\"2021-12-02
+        [20] - Patent Owner's Sur-Reply.pdf\",\"documentNumber\":20,\"documentTitleText\":\"Patent
+        Owner Sur-Reply\",\"documentTypeDescriptionText\":\"Other (Not for motions)\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170183432.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibits\",\"documentFilingDate\":\"2021-10-21\",\"documentIdentifier\":\"170168133\",\"documentName\":\"Ex.
+        1016 - 2021-10-21 Reply Decl.pdf\",\"documentNumber\":1016,\"documentTitleText\":\"Exhibit
+        1016 - Reply Declaration of James Stevenson Kenney, Ph.D.\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170168133.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-10-21\",\"documentIdentifier\":\"170168130\",\"documentName\":\"2021-10-21
+        IPR2021-00001 Reply.pdf\",\"documentNumber\":19,\"documentTitleText\":\"Petitioner's
+        Reply to Patent Owner's Response\",\"documentTypeDescriptionText\":\"Reply\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170168130.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-09-29\",\"documentIdentifier\":\"170159586\",\"documentName\":\"2021-09-29
+        \ IPR2021-00001 Petitioner_s Notice of Deposition.pdf\",\"documentNumber\":18,\"documentTitleText\":\"Petitioner's
+        Notice of Deposition of Vijay K. Madisetti, Ph.D.\",\"documentTypeDescriptionText\":\"Notice
+        of Deposition\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170159586.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-07-29\",\"documentIdentifier\":\"170138235\",\"documentName\":\"Patent
+        Owner's Exhibit List.pdf\",\"documentNumber\":17,\"documentTitleText\":\"Patent
+        Owner's Exhibit List\",\"documentTypeDescriptionText\":\"Exhibit List\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170138235.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-07-29\",\"documentIdentifier\":\"170138233\",\"documentName\":\"Patent
+        Owner's Response to Petition.pdf\",\"documentNumber\":16,\"documentTitleText\":\"Patent
+        Owner's Response to Petition\",\"documentTypeDescriptionText\":\"Response\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170138233.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibits\",\"documentFilingDate\":\"2021-07-29\",\"documentIdentifier\":\"170138234\",\"documentName\":\"EX2006
+        Declaration of Madisetti.pdf\",\"documentNumber\":2006,\"documentTitleText\":\"Declaration
+        of Vijay K. Madisetti, Ph.D.\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170138234.pdf\",\"filingPartyCategory\":\"PATENT
+        OWN\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibits\",\"documentFilingDate\":\"2021-05-07\",\"documentIdentifier\":\"170107223\",\"documentName\":\"Exhibit
+        3001.pdf\",\"documentNumber\":3001,\"documentTitleText\":\"Exhibit 3001\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170107223.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-05-06\",\"documentIdentifier\":\"170107102\",\"documentName\":\"IPR2021-00001
+        DI.pdf\",\"documentNumber\":14,\"documentTitleText\":\"Trial Instituted Document\",\"documentTypeDescriptionText\":\"Institution
+        Decision\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170107102.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-05-06\",\"documentIdentifier\":\"170107103\",\"documentName\":\"IPR2021-00001
+        Scheduling Order.pdf\",\"documentNumber\":15,\"documentTitleText\":\"Scheduling
+        Order\",\"documentTypeDescriptionText\":\"Order\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170107103.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-04-09\",\"documentIdentifier\":\"170096318\",\"documentName\":\"IPR2021-00001
+        PHV Order (Stark and Al-Salam).pdf\",\"documentNumber\":13,\"documentTitleText\":\"Order
+        - Granting Petitioner's Motions for Pro Hac Vice Admission of Stevan R. Stark
+        and Ramsey Al-Salam - 37 CFR 42.10\",\"documentTypeDescriptionText\":\"Order\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170096318.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-03-02\",\"documentIdentifier\":\"170083667\",\"documentName\":\"IPR2021-00001
+        Order Conduct of Proceeding.pdf\",\"documentNumber\":10,\"documentTitleText\":\"ORDER\\nConduct
+        of Proceeding\",\"documentTypeDescriptionText\":\"Order\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170083667.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2021-00001\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2021-05-06\",\"accordedFilingDate\":\"2020-10-05\",\"petitionFilingDate\":\"2020-10-05\",\"trialLastModifiedDateTime\":\"2022-07-29T13:50:39\",\"trialLastModifiedDate\":\"2022-07-29\",\"terminationDate\":\"2022-05-02\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"10264899\",\"counselName\":\"Witcoff,
+        David et al\",\"grantDate\":\"2004-11-16\",\"groupArtUnitNumber\":\"2838\",\"inventorName\":\"Ernst
+        Bretschneider\",\"realPartyInInterestName\":\"NXP B.V. et al.\",\"patentNumber\":\"6819092\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"McCullough,
+        Christina \",\"realPartyInInterestName\":\"Impinj, Inc.\"},\"documentData\":{\"documentCategory\":\"Paper\",\"documentFilingDate\":\"2021-03-02\",\"documentIdentifier\":\"170083845\",\"documentName\":\"2021-03-02
+        IPR2021-00001 Updated Exhibit List.pdf\",\"documentNumber\":12,\"documentTitleText\":\"Petitioner's
+        Updated Exhibit List\",\"documentTypeDescriptionText\":\"Exhibit List\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2021/00001/170083845.pdf\",\"filingPartyCategory\":\"PETITIONER\"}}]}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '32058'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:50 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d2-192ef740771e0b6145086ee9;Parent=736f6bcc4fca6cfb;Sampled=0;Lineage=1:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - Zwuw6GOhIAMF-5g=
+      x-amzn-RequestId:
+      - 2da62876-0175-4bb7-86f2-5356ec7267c7
+    status:
+      code: 200
+      message: OK
+version: 1

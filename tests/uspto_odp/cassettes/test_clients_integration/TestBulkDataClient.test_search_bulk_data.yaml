@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Host:
+      - api.uspto.gov
+    method: GET
+    uri: https://api.uspto.gov/api/v1/datasets/products/search?offset=0&limit=5
+  response:
+    body:
+      string: '{"count":5,"bulkDataProductBag":[{"productIdentifier":"PTFWPRE","productTitle":"Patent Full-Text With Embedded Pre-Grant Publication Data","productFrequency":"Weekly"},{"productIdentifier":"PTGRNT","productTitle":"Patent Grant Full Text","productFrequency":"Weekly"},{"productIdentifier":"PTAPPBIB","productTitle":"Patent Application Bibliographic Data","productFrequency":"Weekly"},{"productIdentifier":"PTGRNTBIB","productTitle":"Patent Grant Bibliographic Data","productFrequency":"Weekly"},{"productIdentifier":"PTISSD","productTitle":"Patent Issued Data","productFrequency":"Weekly"}],"requestIdentifier":"req-bulk-001"}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+version: 1

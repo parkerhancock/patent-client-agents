@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Sequence
 from typing import Any
 
 from ..models import PtabAppealResponse
 from .base import PaginationModel, SearchPayload, UsptoOdpBaseClient, _prune
+
+logger = logging.getLogger(__name__)
 
 
 class PtabAppealsClient(UsptoOdpBaseClient):
@@ -42,6 +45,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
         Returns:
             PtabAppealResponse with matching appeal decisions.
         """
+        logger.debug("Searching PTAB appeals: query=%s limit=%d offset=%d", query, limit, offset)
         payload = SearchPayload(
             q=query,
             fields=list(fields) if fields else None,
@@ -76,6 +80,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
         if not document_identifier:
             raise ValidationError("document_identifier is required")
 
+        logger.debug("Getting appeal decision %s", document_identifier)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/appeals/decisions/{document_identifier}",
@@ -100,6 +105,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
         if not appeal_number:
             raise ValidationError("appeal_number is required")
 
+        logger.debug("Getting decisions for appeal %s", appeal_number)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/appeals/{appeal_number}/decisions",

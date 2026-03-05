@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 from ..models import (
@@ -15,6 +16,8 @@ from ..models import (
     SearchResponse,
 )
 from .base import PaginationModel, SearchPayload, UsptoOdpBaseClient, _prune
+
+logger = logging.getLogger(__name__)
 
 
 def _merge_application_metadata(entry: dict[str, Any]) -> dict[str, Any]:
@@ -143,13 +146,16 @@ class ApplicationsClient(UsptoOdpBaseClient):
                 pagination=PaginationModel(offset=offset, limit=limit),
             ).model_dump_pruned()
 
+        logger.debug("Searching applications: query=%s limit=%d offset=%d", query, limit, offset)
         data = await self._search_with_payload(
             "/api/v1/patent/applications/search",
             payload,
             empty_bag_key="patentFileWrapperDataBag",
             context="search applications",
         )
-        return SearchResponse(**_normalize_patent_response(data))
+        response = SearchResponse(**_normalize_patent_response(data))
+        logger.debug("Application search returned %d results", response.count)
+        return response
 
     async def get(self, application_number: str) -> ApplicationResponse:
         """Get a single application by number.
@@ -161,6 +167,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
             ApplicationResponse with the application data.
         """
         appl = self._normalize_application_number(application_number)
+        logger.debug("Getting application %s", appl)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/applications/{appl}",
@@ -184,6 +191,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
             DocumentsResponse with document list.
         """
         appl = self._normalize_application_number(application_number)
+        logger.debug("Getting documents for application %s", appl)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/applications/{appl}/documents",
@@ -218,6 +226,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
             assignees, conveyance text, and recorded dates.
         """
         appl = self._normalize_application_number(application_number)
+        logger.debug("Getting assignment for application %s", appl)
         data = await self._get_with_404_handling(
             f"/api/v1/patent/applications/{appl}/assignment",
             empty_bag_key="assignmentBag",
@@ -244,6 +253,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
         Returns:
             FamilyGraphResponse with nodes and edges.
         """
+        logger.debug("Building patent family graph for identifier %s", identifier)
         root_application = await self._resolve_identifier(identifier)
         normalized_root = self._normalize_application_number(root_application)
         if not normalized_root:
@@ -331,6 +341,12 @@ class ApplicationsClient(UsptoOdpBaseClient):
                         )
                         edge_keys.add(key)
 
+        logger.debug(
+            "Family graph complete: %d nodes, %d edges, %d missing",
+            len(nodes),
+            len(edges),
+            len(missing),
+        )
         metadata = {
             "nodeCount": len(nodes),
             "edgeCount": len(edges),
@@ -383,6 +399,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
         try:
             response = await self.get(application_number)
         except NotFoundError:
+            logger.debug("Application %s not found", application_number)
             return None
         if not response.patentBag:
             return None

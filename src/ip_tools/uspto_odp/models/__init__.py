@@ -169,7 +169,7 @@ class PetitionDecision(_BaseModel):
     patentNumber: str | None = None
     petitionIssueConsideredTextBag: list[Any] | None = None
     petitionMailDate: str | None = None
-    prosecutionStatusCode: str | None = None
+    prosecutionStatusCode: str | int | None = None
     prosecutionStatusCodeDescriptionText: str | None = None
     ruleBag: list[str] | None = None
     statuteBag: list[str] | None = None

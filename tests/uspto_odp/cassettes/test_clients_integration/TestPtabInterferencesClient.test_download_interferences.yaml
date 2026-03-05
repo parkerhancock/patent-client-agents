@@ -1,0 +1,66 @@
+interactions:
+- request:
+    body: '{"pagination":{"limit":3}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/interferences/decisions/search/download
+  response:
+    body:
+      string: "{\"interferenceData\":[{\"interferenceNumber\":\"106130\",\"interferenceMetaData\":{\"interferenceStyleName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v. PATRICE
+        CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS\"},\"documentData\":{\"decisionTypeCategory\":\"Decision\",\"decisionIssueDate\":\"2025-01-28\",\"interferenceOutcomeCategory\":\"Judgment\"},\"seniorPartyData\":{\"realPartyInInterestName\":\"UNIVERSIT\xC9
+        CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT\",\"applicationNumberText\":\"14443829\"}},{\"interferenceNumber\":\"106130\",\"interferenceMetaData\":{\"interferenceStyleName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v. PATRICE
+        CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS\"},\"documentData\":{\"decisionTypeCategory\":\"Motion
+        Decision\",\"decisionIssueDate\":\"2025-01-28\",\"interferenceOutcomeCategory\":\"Decision
+        on Motion\"},\"seniorPartyData\":{\"realPartyInInterestName\":\"UNIVERSIT\xC9
+        CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT\",\"applicationNumberText\":\"14443829\"}},{\"interferenceNumber\":\"106125\",\"interferenceMetaData\":{\"interferenceStyleName\":\"ULRICH
+        SPECK and BRUNO SCHELLER v. BRIAN L. BATES, ANTHONY O. RAGHEB, JOSEPH M. STEWART
+        IV, WILLIAM J. BOURDEAU, BRIAN D. CHOULES, JAMES D. PURDY, and NEAL E. FEARNOT\"},\"documentData\":{\"decisionTypeCategory\":\"Decision\",\"decisionIssueDate\":\"2024-07-30\",\"interferenceOutcomeCategory\":\"Decision
+        after Court Decision\"},\"seniorPartyData\":{\"realPartyInInterestName\":\"BRIAN
+        L. BATES, ANTHONY O. RAGHEB, JOSEPH M. STEWART IV, WILLIAM J. BOURDEAU, BRIAN
+        D. CHOULES, JAMES D. PURDY, and NEAL E. FEARNOT\",\"applicationNumberText\":\"14013591\"}}]}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1624'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:01:07 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4e3-3a01523504a75baa2aa85b46;Parent=1bbc5c12d81e8997;Sampled=0;Lineage=1:5fd89aa0:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      content-disposition:
+      - attachment;filename="results-2026-03-05T18-01-07.json"
+      x-amz-apigw-id:
+      - ZwuzjHBuoAMFyyA=
+      x-amzn-RequestId:
+      - eb17f57c-319f-41a0-b8e1-400f26de5559
+    status:
+      code: 200
+      message: OK
+version: 1

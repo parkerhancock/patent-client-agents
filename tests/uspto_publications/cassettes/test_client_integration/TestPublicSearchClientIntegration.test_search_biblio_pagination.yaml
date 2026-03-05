@@ -1,0 +1,236 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Host:
+      - ppubs.uspto.gov
+      Origin:
+      - https://ppubs.uspto.gov
+      Pragma:
+      - no-cache
+      Priority:
+      - u=1, i
+      Referer:
+      - https://ppubs.uspto.gov/pubwebapp/
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Requested-With:
+      - XMLHttpRequest
+    method: GET
+    uri: https://ppubs.uspto.gov/pubwebapp/
+  response:
+    body:
+      string: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"utf-8\">\n
+        \   <meta http-equiv=\"Pragma\" content=\"no-cache\">\n    <meta http-equiv=\"Expires\"
+        content=\"-1\">\n    <meta http-equiv=\"Cache-Control\" content=\"no-store,
+        no-cache, max-age=0\">\n    <title>Patent Public Search | USPTO</title>\n
+        \   <link rel=\"icon\" type=\"image/png\" href=\"images/favicon_new.png\">\n
+        \   <!-- DO NOT REMOVE ANY OF COMMENT BELOW (USED BY USMIN) -->\n    <!--
+        build:css(.tmp) styles/main.css -->\n    <link rel=\"stylesheet\" href=\"styles/main.css\">\n
+        \   <!-- endbuild -->\n    <script src=\"common/environment.js\"></script>\n</head>\n<body>\n<h1
+        class=\"sr-only\">Patent Public Search | USPTO <span class=\"ext-window\">
+        - extended window</span></h1>\n<div class=\"layout\">\n    <div class=\"zone
+        ui-layout-north\" data-zone=\"north\"></div>\n    <div class=\"zone ui-layout-west\"
+        data-zone=\"west\"></div>\n    <div class=\"zone ui-layout-center\" data-zone=\"center\"></div>\n
+        \   <div class=\"zone ui-layout-east\" data-zone=\"east\"></div>\n    <div
+        class=\"zone ui-layout-south\" data-zone=\"south\"></div>\n</div>\n\n<!--
+        build:js({web,.tmp}) main.js -->\n<!-- Google Analytics script -->\n<script
+        type='text/javascript' src=\"common/analytics/googleAnalytics.js\"></script>\n\n<!--BEGIN
+        QUALTRICS WEBSITE FEEDBACK SNIPPET-->\n<script type='text/javascript' src=\"common/analytics/qualtricsAnalytics.js\"></script>\n\n<script
+        src=\"vendor/require/require.js\"></script>\n<script src=\"main.js\"></script>\n<!--
+        endbuild -->\n</body>\n</html>"
+    headers:
+      accept-ranges:
+      - bytes
+      content-length:
+      - '1456'
+      content-type:
+      - text/html
+      date:
+      - Thu, 05 Mar 2026 17:56:24 GMT
+      etag:
+      - '"5b0-6463cc1987ceb"'
+      last-modified:
+      - Thu, 18 Dec 2025 16:50:20 GMT
+      server:
+      - Apache/2.4.66 (Unix)
+    status:
+      code: 200
+      message: null
+- request:
+    body: '-1'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2'
+      Content-Type:
+      - application/json
+      Host:
+      - ppubs.uspto.gov
+      Origin:
+      - https://ppubs.uspto.gov
+      Pragma:
+      - no-cache
+      Priority:
+      - u=1, i
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Requested-With:
+      - XMLHttpRequest
+      referer:
+      - https://ppubs.uspto.gov/pubwebapp/
+    method: POST
+    uri: https://ppubs.uspto.gov/api/users/me/session
+  response:
+    body:
+      string: '{"userSessionId":206529090,"ipAddress":null,"userCase":{"caseId":206529259,"userId":206529090,"caseName":"Untitled
+        Case","applicationNumber":null},"userPreferences":{},"versions":[{"product":"API","releaseNumber":"5.1.1","date":"03.12.2025
+        @ 15:08:42 UTC","commitId":"8390cd5c","collectionName":""},{"product":"SOLR","releaseNumber":"9.8.1","date":"","commitId":"","collectionName":"us_patent_collection"}],"documentsLimitInQuery":1000,"sessionTimeOutTime":1800,"featureFlags":{"MLTD":false,"SQM":true,"FIT":false,"QBRANCH_ANALYTICS":false},"role":"ANONYMOUS_USER","sessionIdentifer":"4ded4e36-73d5-41a0-811d-465836839baf"}'
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Thu, 05 Mar 2026 17:56:26 GMT
+      x-access-token:
+      - eyJzdWIiOiI0ZGVkNGUzNi03M2Q1LTQxYTAtODExZC00NjU4MzY4MzliYWYiLCJ2ZXIiOiI2NDgwZjY1Zi03OGNjLTQ5OGItYjcxOS1lODk4Yzc4ZmY1OTEiLCJleHAiOjB9
+    status:
+      code: 200
+      message: null
+- request:
+    body: '{"caseId":206529259,"hl_snippets":"2","op":"OR","q":"machine learning","queryName":"machine
+      learning","highlights":"1","qt":"brs","spellCheck":false,"viewName":"tile","plurals":true,"britishEquivalents":true,"databaseFilters":[{"databaseName":"US-PGPUB","countryCodes":[]},{"databaseName":"USPAT","countryCodes":[]},{"databaseName":"USOCR","countryCodes":[]}],"searchType":1,"ignorePersist":true,"userEnteredQuery":"machine
+      learning"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '434'
+      Content-Type:
+      - application/json
+      Host:
+      - ppubs.uspto.gov
+      Origin:
+      - https://ppubs.uspto.gov
+      Pragma:
+      - no-cache
+      Priority:
+      - u=1, i
+      Referer:
+      - https://ppubs.uspto.gov/pubwebapp/
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Access-Token:
+      - eyJzdWIiOiI0ZGVkNGUzNi03M2Q1LTQxYTAtODExZC00NjU4MzY4MzliYWYiLCJ2ZXIiOiI2NDgwZjY1Zi03OGNjLTQ5OGItYjcxOS1lODk4Yzc4ZmY1OTEiLCJleHAiOjB9
+      X-Requested-With:
+      - XMLHttpRequest
+    method: POST
+    uri: https://ppubs.uspto.gov/api/searches/counts
+  response:
+    body:
+      string: '{"id":null,"caseId":206529259,"userId":null,"numResults":6456387,"ignorePersist":true,"fq":null,"databaseFilters":[{"databaseName":"US-PGPUB","countryCodes":[]},{"databaseName":"USPAT","countryCodes":[]},{"databaseName":"USOCR","countryCodes":[]}],"q":"machine
+        learning","queryName":"machine learning","userEnteredQuery":"machine learning","viewName":"tile","op":"OR","highlights":"1","plurals":true,"britishEquivalents":true,"searchType":1,"excludeResultsAfter":null,"dateCreated":null,"deleteIn":false,"expand":false,"expandSort":null,"expandRows":null,"expandTrackDocScores":false,"expandTrackMaxScore":false,"termGraph":{"termOrigin":[{"id":0,"name":null,"nodeType":"ROOT","parentId":null,"relation":null,"aliases":["default"],"aliasCategory":"OTHER"},{"id":1,"name":"machine","nodeType":"TERM","parentId":0,"relation":"REGULAR","aliases":["default"],"aliasCategory":"OTHER"},{"id":3,"name":"machines","nodeType":"TERM","parentId":1,"relation":"PLURAL","aliases":["default"],"aliasCategory":"OTHER"},{"id":2,"name":"learning","nodeType":"TERM","parentId":0,"relation":"REGULAR","aliases":["default"],"aliasCategory":"OTHER"},{"id":4,"name":"learnings","nodeType":"TERM","parentId":2,"relation":"PLURAL","aliases":["default"],"aliasCategory":"OTHER"}],"termRelationship":[{"relationshipType":"PLURAL","relationshipBase":0,"members":[1,3]},{"relationshipType":"PLURAL","relationshipBase":0,"members":[2,4]}]},"hl":false,"fl":null,"originalQuery":"machine
+        learning","error":null,"terms":["machine","learning","machines","learnings"],"facets":[{"solrField":"document_type","count":2875041,"id":"USPAT"},{"solrField":"document_type","count":2784002,"id":"US-PGPUB"},{"solrField":"document_type","count":797344,"id":"USOCR"}],"anchorDocIds":null,"querySource":null,"pNumber":null,"hl_fl":null}'
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Thu, 05 Mar 2026 17:56:26 GMT
+      x-rate-limit-remaining:
+      - '39'
+    status:
+      code: 200
+      message: null
+- request:
+    body: '{"start":0,"pageCount":3,"sort":"date_publ desc","docFamilyFiltering":"familyIdFiltering","searchType":1,"familyIdEnglishOnly":true,"familyIdFirstPreferred":"US-PGPUB","familyIdSecondPreferred":"USPAT","familyIdThirdPreferred":"FPRS","showDocPerFamilyPref":"showEnglish","queryId":0,"tagDocSearch":false,"query":{"caseId":206529259,"hl_snippets":"2","op":"OR","q":"machine
+      learning","queryName":"machine learning","highlights":"1","qt":"brs","spellCheck":false,"viewName":"tile","plurals":true,"britishEquivalents":true,"databaseFilters":[{"databaseName":"US-PGPUB","countryCodes":[]},{"databaseName":"USPAT","countryCodes":[]},{"databaseName":"USOCR","countryCodes":[]}],"searchType":1,"ignorePersist":true,"userEnteredQuery":"machine
+      learning"}}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '747'
+      Content-Type:
+      - application/json
+      Host:
+      - ppubs.uspto.gov
+      Origin:
+      - https://ppubs.uspto.gov
+      Pragma:
+      - no-cache
+      Priority:
+      - u=1, i
+      Referer:
+      - https://ppubs.uspto.gov/pubwebapp/
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/114.0.0.0 Safari/537.36
+      X-Access-Token:
+      - eyJzdWIiOiI0ZGVkNGUzNi03M2Q1LTQxYTAtODExZC00NjU4MzY4MzliYWYiLCJ2ZXIiOiI2NDgwZjY1Zi03OGNjLTQ5OGItYjcxOS1lODk4Yzc4ZmY1OTEiLCJleHAiOjB9
+      X-Requested-With:
+      - XMLHttpRequest
+    method: POST
+    uri: https://ppubs.uspto.gov/api/searches/searchWithBeFamily
+  response:
+    body:
+      string: '{"numFound":3,"perPage":3,"page":0,"totalPages":0,"hlSnippets":0,"sort":null,"query":{"id":null,"caseId":206529259,"userId":null,"numResults":3,"ignorePersist":true,"fq":null,"databaseFilters":[{"databaseName":"US-PGPUB","countryCodes":[]},{"databaseName":"USPAT","countryCodes":[]},{"databaseName":"USOCR","countryCodes":[]}],"q":"machine
+        learning","queryName":"machine learning","userEnteredQuery":"machine learning","viewName":"tile","op":"OR","highlights":"1","plurals":true,"britishEquivalents":true,"searchType":1,"excludeResultsAfter":null,"dateCreated":null,"deleteIn":false,"expand":true,"expandSort":"group_sort_date
+        asc, id desc ","expandRows":"100","expandTrackDocScores":true,"expandTrackMaxScore":true,"termGraph":null,"hl":false,"fl":null,"originalQuery":"machine
+        learning","error":null,"terms":["machine","learning","machines","learnings"],"facets":[],"anchorDocIds":null,"querySource":null,"pNumber":null,"hl_fl":null},"duration":602,"highlightingTime":0,"cursorMarker":"AoJwwOnS3ZwDPwAxMDAwMDA4MDk1Mzc2IVBHLVVTLTIwMjYwMDY2NDgw","totalResults":3,"numberOfFamilies":3739234,"error":null,"patents":[{"guid":"US-20260063075-A1","publicationReferenceDocumentNumber":"20260063075","compositeId":"1000007981743!PG-US-20260063075","publicationReferenceDocumentNumber1":"20260063075","datePublishedKwicHits":null,"datePublished":"2026-03-05T00:00:00Z","inventionTitle":"HYBRID
+        ELECTRIC IDLE AND BRAKING FOR AN AIRCRAFT","type":"US-PGPUB","mainClassificationCode":"1/1","applicantName":["RTX
+        Corporation"],"assigneeName":null,"uspcFullClassificationFlattened":null,"ipcCodeFlattened":"F02K5/00;B64D27/16","cpcInventiveFlattened":"F02C7/32;B64D27/16;B64D27/24;F01D15/10;F01D19/02","cpcAdditionalFlattened":"B64D27/026;F05D2220/323;F05D2220/76","applicationFilingDate":["2024-07-11T00:00:00Z"],"applicationFilingDateKwicHits":null,"relatedApplFilingDate":["2021-05-07T00:00:00Z"],"primaryExaminer":null,"assistantExaminer":null,"applicationNumber":"18/769507","frontPageStart":1,"frontPageEnd":1,"drawingsStart":2,"drawingsEnd":7,"specificationStart":8,"specificationEnd":13,"claimsStart":13,"claimsEnd":14,"abstractStart":1,"abstractEnd":1,"bibStart":1,"bibEnd":1,"certCorrectionStart":0,"certCorrectionEnd":0,"certReexaminationStart":0,"certReexaminationEnd":0,"supplementalStart":0,"supplementalEnd":0,"ptabStart":0,"ptabEnd":0,"amendStart":0,"amendEnd":0,"searchReportStart":0,"searchReportEnd":0,"pageCount":14,"pageCountDisplay":"14","previouslyViewed":false,"unused":false,"imageLocation":"us-pgpub/US/2026/0063/075","imageFileName":"00000001.tif","cpcCodes":null,"queryId":null,"tags":null,"inventorsShort":"Gilson;
+        Jonathan et al.","familyIdentifierCur":1000007981743,"familyIdentifierCurStr":null,"languageIndicator":"EN","databaseName":"PGPB","dwImageDoctypeList":null,"dwImageLocList":null,"dwPageCountList":null,"dwImageDocidList":null,"patentFamilyMembers":null,"patentFamilyCountry":null,"patentFamilySerialNumber":null,"documentIdWithDashesDw":null,"pfPublDate":null,"pfPublDateKwicHits":null,"priorityClaimsDate":null,"priorityClaimsDateKwicHits":null,"pfApplicationSerialNumber":null,"pfApplicationDescriptor":null,"pfLanguage":null,"pfApplicationDate":null,"pfApplicationDateKwicHits":null,"clippedUri":null,"source":null,"documentId":"US
+        20260063075 A1","derwentAccessionNumber":null,"documentSize":63387,"score":3.3462272,"governmentInterest":null,"kindCode":["A1"],"urpn":null,"urpnCode":null,"descriptionStart":8,"descriptionEnd":13,"publicationReferenceDocumentNumberOne":"20260063075"},{"guid":"US-20260068526-A1","publicationReferenceDocumentNumber":"20260068526","compositeId":"1000008038553!PG-US-20260068526","publicationReferenceDocumentNumber1":"20260068526","datePublishedKwicHits":null,"datePublished":"2026-03-05T00:00:00Z","inventionTitle":"SYSTEM
+        AND METHOD FOR WORK FUNCTION REDUCTION AND THERMIONIC ENERGY CONVERSION","type":"US-PGPUB","mainClassificationCode":"1/1","applicantName":["Spark  Thermionics,
+        Inc."],"assigneeName":["Spark  Thermionics, Inc."],"uspcFullClassificationFlattened":null,"ipcCodeFlattened":"H10N10/13;H01J45/00","cpcInventiveFlattened":"H10N10/13;H01J45/00;H10N10/851;H10N10/853;H10N10/855;H10N10/8556","cpcAdditionalFlattened":null,"applicationFilingDate":["2024-08-09T00:00:00Z"],"applicationFilingDateKwicHits":null,"relatedApplFilingDate":["2022-11-23T00:00:00Z","2019-12-16T00:00:00Z","2018-12-12T00:00:00Z","2018-05-02T00:00:00Z","2017-05-02T00:00:00Z","2017-12-05T00:00:00Z"],"primaryExaminer":null,"assistantExaminer":null,"applicationNumber":"18/799227","frontPageStart":1,"frontPageEnd":1,"drawingsStart":2,"drawingsEnd":10,"specificationStart":11,"specificationEnd":22,"claimsStart":22,"claimsEnd":22,"abstractStart":1,"abstractEnd":1,"bibStart":1,"bibEnd":1,"certCorrectionStart":0,"certCorrectionEnd":0,"certReexaminationStart":0,"certReexaminationEnd":0,"supplementalStart":0,"supplementalEnd":0,"ptabStart":0,"ptabEnd":0,"amendStart":0,"amendEnd":0,"searchReportStart":0,"searchReportEnd":0,"pageCount":22,"pageCountDisplay":"22","previouslyViewed":false,"unused":false,"imageLocation":"us-pgpub/US/2026/0068/526","imageFileName":"00000001.tif","cpcCodes":null,"queryId":null,"tags":null,"inventorsShort":"Schwede;
+        Jared William et al.","familyIdentifierCur":1000008038553,"familyIdentifierCurStr":null,"languageIndicator":"EN","databaseName":"PGPB","dwImageDoctypeList":null,"dwImageLocList":null,"dwPageCountList":null,"dwImageDocidList":null,"patentFamilyMembers":null,"patentFamilyCountry":null,"patentFamilySerialNumber":null,"documentIdWithDashesDw":null,"pfPublDate":null,"pfPublDateKwicHits":null,"priorityClaimsDate":null,"priorityClaimsDateKwicHits":null,"pfApplicationSerialNumber":null,"pfApplicationDescriptor":null,"pfLanguage":null,"pfApplicationDate":null,"pfApplicationDateKwicHits":null,"clippedUri":null,"source":null,"documentId":"US
+        20260068526 A1","derwentAccessionNumber":null,"documentSize":103155,"score":0.73524964,"governmentInterest":["STATEMENT
+        OF GOVERNMENT SUPPORT\n[0002] This invention was made with government support
+        under Award Number ARPA-E-DE-AR00000664 awarded by the Advanced Research Projects
+        Agency-Energy and under Contract Numbers HR0011-17-P-0003 and W911NF-17-P-0034
+        awarded by the Defense Advanced Research Projects Agency. The government has
+        certain rights in the invention.\n<br />"],"kindCode":["A1"],"urpn":null,"urpnCode":null,"descriptionStart":11,"descriptionEnd":22,"publicationReferenceDocumentNumberOne":"20260068526"},{"guid":"US-20260066480-A1","publicationReferenceDocumentNumber":"20260066480","compositeId":"1000008095376!PG-US-20260066480","publicationReferenceDocumentNumber1":"20260066480","datePublishedKwicHits":null,"datePublished":"2026-03-05T00:00:00Z","inventionTitle":"BATTERY
+        WITH WELDED BUS BAR CONNECTIONS","type":"US-PGPUB","mainClassificationCode":"1/1","applicantName":["FORD
+        GLOBAL TECHNOLOGIES, LLC"],"assigneeName":null,"uspcFullClassificationFlattened":null,"ipcCodeFlattened":"H01M50/516;B23K26/21","cpcInventiveFlattened":"H01M50/516;B23K26/21;H01M50/204;H01M50/249;H01M50/296;H01M50/562","cpcAdditionalFlattened":"H01M2220/20","applicationFilingDate":["2024-08-27T00:00:00Z"],"applicationFilingDateKwicHits":null,"relatedApplFilingDate":null,"primaryExaminer":null,"assistantExaminer":null,"applicationNumber":"18/816544","frontPageStart":1,"frontPageEnd":1,"drawingsStart":2,"drawingsEnd":5,"specificationStart":6,"specificationEnd":8,"claimsStart":8,"claimsEnd":8,"abstractStart":1,"abstractEnd":1,"bibStart":1,"bibEnd":1,"certCorrectionStart":0,"certCorrectionEnd":0,"certReexaminationStart":0,"certReexaminationEnd":0,"supplementalStart":0,"supplementalEnd":0,"ptabStart":0,"ptabEnd":0,"amendStart":0,"amendEnd":0,"searchReportStart":0,"searchReportEnd":0,"pageCount":8,"pageCountDisplay":"8","previouslyViewed":false,"unused":false,"imageLocation":"us-pgpub/US/2026/0066/480","imageFileName":"00000001.tif","cpcCodes":null,"queryId":null,"tags":null,"inventorsShort":"HAN;
+        Daewon et al.","familyIdentifierCur":1000008095376,"familyIdentifierCurStr":null,"languageIndicator":"EN","databaseName":"PGPB","dwImageDoctypeList":null,"dwImageLocList":null,"dwPageCountList":null,"dwImageDocidList":null,"patentFamilyMembers":null,"patentFamilyCountry":null,"patentFamilySerialNumber":null,"documentIdWithDashesDw":null,"pfPublDate":null,"pfPublDateKwicHits":null,"priorityClaimsDate":null,"priorityClaimsDateKwicHits":null,"pfApplicationSerialNumber":null,"pfApplicationDescriptor":null,"pfLanguage":null,"pfApplicationDate":null,"pfApplicationDateKwicHits":null,"clippedUri":null,"source":null,"documentId":"US
+        20260066480 A1","derwentAccessionNumber":null,"documentSize":33089,"score":3.2854872,"governmentInterest":null,"kindCode":["A1"],"urpn":null,"urpnCode":null,"descriptionStart":6,"descriptionEnd":8,"publicationReferenceDocumentNumberOne":"20260066480"}],"qtime":599}'
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Thu, 05 Mar 2026 17:56:27 GMT
+      x-rate-limit-remaining:
+      - '38'
+    status:
+      code: 200
+      message: null
+version: 1

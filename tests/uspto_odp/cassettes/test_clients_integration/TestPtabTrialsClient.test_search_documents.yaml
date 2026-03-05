@@ -1,0 +1,101 @@
+interactions:
+- request:
+    body: '{"pagination":{"offset":0,"limit":5}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '37'
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/documents/search
+  response:
+    body:
+      string: '{"count":1503698,"requestIdentifier":"346c92e1-9d52-42bb-8e01-b23c49fca4be","patentTrialDocumentDataBag":[{"trialNumber":"IPR2025-01111","lastModifiedDateTime":"2026-03-05T10:55:29","trialDocumentCategory":"Document","trialMetaData":{"institutionDecisionDate":"2025-12-19","accordedFilingDate":"2025-06-09","petitionFilingDate":"2025-06-09","trialLastModifiedDateTime":"2026-03-05T03:46:54","trialLastModifiedDate":"2026-03-05","trialStatusCategory":"Trial
+        Instituted","latestDecisionDate":"2025-12-19","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"16377829","counselName":"Mirzaie,
+        Rezaet al","grantDate":"2021-02-02","groupArtUnitNumber":"2467","inventorName":"Woojin
+        AHN et al","realPartyInInterestName":"Wilus Institute of Standards and Technology
+        Inc.","patentNumber":"10911186","technologyCenterNumber":"2400"},"regularPetitionerData":{"counselName":"Renner,
+        W. Karlet al","realPartyInInterestName":"Samsung Electronics Co., Ltd. et
+        al."},"documentData":{"documentCategory":"NOTICE","documentFilingDate":"2026-03-05","documentIdentifier":"171304134","documentName":"IPR2025-01111
+        - Paper 17 - Patent Owners Updated Mandatory Notices.pdf","documentNumber":17,"documentSizeQuantity":93900,"documentTitleText":"Patent
+        Owner''s Updated Mandatory Notices","documentTypeDescriptionText":"Notice:  Updated
+        Mandatory Notice","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01111/171304134.pdf","filingPartyCategory":"PATENT
+        OWNER"}},{"trialNumber":"IPR2025-01110","lastModifiedDateTime":"2026-03-05T10:55:29","trialDocumentCategory":"Document","trialMetaData":{"institutionDecisionDate":"2025-12-19","accordedFilingDate":"2025-06-09","petitionFilingDate":"2025-06-09","trialLastModifiedDateTime":"2026-03-05T03:46:51","trialLastModifiedDate":"2026-03-05","trialStatusCategory":"Trial
+        Instituted","latestDecisionDate":"2025-12-19","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"17145670","counselName":"Mirzaie,
+        Rezaet al","grantDate":"2023-08-01","groupArtUnitNumber":"2467","inventorName":"Woojin
+        AHN et al","realPartyInInterestName":"Wilus Institute of Standards and Technology
+        Inc.","patentNumber":"11716171","technologyCenterNumber":"2400"},"regularPetitionerData":{"counselName":"Renner,
+        W. Karlet al","realPartyInInterestName":"Samsung Electronics Co., Ltd. et
+        al."},"documentData":{"documentCategory":"NOTICE","documentFilingDate":"2026-03-05","documentIdentifier":"171304128","documentName":"IPR2025-01110
+        - Paper 19 - Patent Owners Power of Attorney.pdf","documentNumber":19,"documentSizeQuantity":147531,"documentTitleText":"Patent
+        Owner''s Power of Attorney","documentTypeDescriptionText":"Notice:  Power
+        of Attorney","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01110/171304128.pdf","filingPartyCategory":"PATENT
+        OWNER"}},{"trialNumber":"IPR2025-01069","lastModifiedDateTime":"2026-03-05T10:55:29","trialDocumentCategory":"Document","trialMetaData":{"institutionDecisionDate":"2025-12-10","accordedFilingDate":"2025-06-05","petitionFilingDate":"2025-06-05","trialLastModifiedDateTime":"2026-03-05T03:44:37","trialLastModifiedDate":"2026-03-05","trialStatusCategory":"Trial
+        Instituted","latestDecisionDate":"2025-12-10","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"15854662","counselName":"Mirzaie,
+        Rezaet al","grantDate":"2019-06-04","groupArtUnitNumber":"2474","inventorName":"Geonjung
+        KO et al","realPartyInInterestName":"Wilus Institute of Standards and Technology
+        Inc.","patentNumber":"10313077","technologyCenterNumber":"2400"},"regularPetitionerData":{"counselName":"Renner,
+        W. Karlet al","realPartyInInterestName":"Samsung Electronics Co., Ltd. et
+        al."},"documentData":{"documentCategory":"NOTICE","documentFilingDate":"2026-03-05","documentIdentifier":"171304126","documentName":"IPR2025-01069
+        - Paper 23 - Patent Owners Updated Mandatory Notices.pdf","documentNumber":23,"documentSizeQuantity":94476,"documentTitleText":"Patent
+        Owner''s Updated Mandatory Notices","documentTypeDescriptionText":"Notice:  Updated
+        Mandatory Notice","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01069/171304126.pdf","filingPartyCategory":"PATENT
+        OWNER"}},{"trialNumber":"IPR2025-01111","lastModifiedDateTime":"2026-03-05T10:55:29","trialDocumentCategory":"Document","trialMetaData":{"institutionDecisionDate":"2025-12-19","accordedFilingDate":"2025-06-09","petitionFilingDate":"2025-06-09","trialLastModifiedDateTime":"2026-03-05T03:46:54","trialLastModifiedDate":"2026-03-05","trialStatusCategory":"Trial
+        Instituted","latestDecisionDate":"2025-12-19","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"16377829","counselName":"Mirzaie,
+        Rezaet al","grantDate":"2021-02-02","groupArtUnitNumber":"2467","inventorName":"Woojin
+        AHN et al","realPartyInInterestName":"Wilus Institute of Standards and Technology
+        Inc.","patentNumber":"10911186","technologyCenterNumber":"2400"},"regularPetitionerData":{"counselName":"Renner,
+        W. Karlet al","realPartyInInterestName":"Samsung Electronics Co., Ltd. et
+        al."},"documentData":{"documentCategory":"NOTICE","documentFilingDate":"2026-03-05","documentIdentifier":"171304132","documentName":"IPR2025-01111
+        - Paper 16 - Patent Owners Power of Attorney.pdf","documentNumber":16,"documentSizeQuantity":147556,"documentTitleText":"Patent
+        Owner''s Power of Attorney","documentTypeDescriptionText":"Notice:  Power
+        of Attorney","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01111/171304132.pdf","filingPartyCategory":"PATENT
+        OWNER"}},{"trialNumber":"IPR2025-01111","lastModifiedDateTime":"2026-03-05T10:55:29","trialDocumentCategory":"Document","trialMetaData":{"institutionDecisionDate":"2025-12-19","accordedFilingDate":"2025-06-09","petitionFilingDate":"2025-06-09","trialLastModifiedDateTime":"2026-03-05T03:46:54","trialLastModifiedDate":"2026-03-05","trialStatusCategory":"Trial
+        Instituted","latestDecisionDate":"2025-12-19","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"16377829","counselName":"Mirzaie,
+        Rezaet al","grantDate":"2021-02-02","groupArtUnitNumber":"2467","inventorName":"Woojin
+        AHN et al","realPartyInInterestName":"Wilus Institute of Standards and Technology
+        Inc.","patentNumber":"10911186","technologyCenterNumber":"2400"},"regularPetitionerData":{"counselName":"Renner,
+        W. Karlet al","realPartyInInterestName":"Samsung Electronics Co., Ltd. et
+        al."},"documentData":{"documentCategory":"NOTICE","documentFilingDate":"2026-03-05","documentIdentifier":"171304138","documentName":"IPR2025-01111
+        - Paper 18 - Patent Owners Notice of Deposition of Zhi Ding, Ph.D.pdf","documentNumber":18,"documentSizeQuantity":61711,"documentTitleText":"Patent
+        Owner''s Notice of Deposition of Zhi Ding, Ph.D.","documentTypeDescriptionText":"Notice:  Notice
+        of deposition","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01111/171304138.pdf","filingPartyCategory":"PATENT
+        OWNER"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '6947'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 05 Mar 2026 18:00:49 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69a9c4d1-173a46114da6916857e17f7a;Parent=76f8914142cc66f9;Sampled=0;Lineage=1:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - ZwuwxE_toAMF38w=
+      x-amzn-RequestId:
+      - 346c92e1-9d52-42bb-8e01-b23c49fca4be
+    status:
+      code: 200
+      message: OK
+version: 1

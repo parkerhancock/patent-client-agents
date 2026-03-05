@@ -1,0 +1,385 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en-US,en;q=0.9
+      Connection:
+      - keep-alive
+      Host:
+      - patents.google.com
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: GET
+    uri: https://patents.google.com/xhr/query?url=q%3Drobot%26num%3D5
+  response:
+    body:
+      string: "{\"results\":{\"total_num_results\":110761, \"total_num_pages\":100,
+        \"many_results\":false, \"num_page\":0, \"cluster\":[{\"result\":[{\"id\":\"patent/JP7661093B2/en\",
+        \"rank\":0, \"patent\":{\"title\":\" Grasp planning method for industrial
+        <b>robot</b> and grasp planning system for &hellip;\", \"snippet\":\" The
+        method of claim 1, wherein planning the motion of the <b>robot</b> to grasp
+        and move the workpiece includes using inverse kinematics calculations to calculate
+        the motion of the joints of the <b>robot</b> to grasp and move the workpiece
+        with a gripper tool of the <b>robot</b>, and further includes performing &hellip;\",
+        \"priority_date\":\"2020-04-03\", \"filing_date\":\"2021-04-02\", \"grant_date\":\"2025-04-14\",
+        \"publication_date\":\"2025-04-14\", \"inventor\":\"\u30C1\u30E5\u30FC \u30B7\u30F3\u30CF\u30AA\",
+        \"assignee\":\"\u30D5\u30A1\u30CA\u30C3\u30AF\u682A\u5F0F\u4F1A\u793E\", \"publication_number\":\"JP7661093B2\",
+        \"language\":\"en\", \"thumbnail\":\"68/f3/57/2c9a4b3efed809/0007661093000001.png\",
+        \"pdf\":\"16/95/c9/448eb1ffda95b0/JP7661093B2.pdf\", \"figures\":[{\"thumbnail\":\"00/08/7c/026cd0802f61d8/0007661093000001.png\",
+        \"full\":\"03/f4/29/bb0fd848667dde/0007661093000001.png\"}, {\"thumbnail\":\"db/d6/66/9be1e9ac5174f1/0007661093000002.png\",
+        \"full\":\"78/d3/43/2837f2751c4bf2/0007661093000002.png\"}, {\"thumbnail\":\"f5/fb/25/850c410a1cece6/0007661093000003.png\",
+        \"full\":\"f8/f3/c2/bd49ffe8be6d4f/0007661093000003.png\"}, {\"thumbnail\":\"42/54/35/98bcb83bf5339d/0007661093000004.png\",
+        \"full\":\"5a/23/f2/b43574a379e611/0007661093000004.png\"}, {\"thumbnail\":\"fe/be/89/3679eb2b4f000d/0007661093000005.png\",
+        \"full\":\"be/a2/43/482cd4bc759504/0007661093000005.png\"}, {\"thumbnail\":\"a8/9f/06/15ab5671b2a951/0007661093000006.png\",
+        \"full\":\"fc/50/4f/efa86f9ab533e5/0007661093000006.png\"}, {\"thumbnail\":\"24/a6/6a/9551f9f95c0d9f/0007661093000007.png\",
+        \"full\":\"55/46/64/2269d1273dfb3f/0007661093000007.png\"}], \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"US\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"CN\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}},
+        {\"country_code\":\"JP\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"DE\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}}, \"is_similar_document\":false,
+        \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}}, {\"id\":\"patent/KR101479233B1/en\",
+        \"rank\":1, \"patent\":{\"title\":\" How to control <b>robot</b> and its cooperative
+        work\", \"snippet\":\" BACKGROUND OF THE INVENTION 1. Field of the Invention
+        The present invention relates to a <b>robot</b> in which a plurality of <b>robot</b>
+        manipulators perform coordinated work through impedance control and a method
+        of controlling the cooperative work. To this end, the present invention comprises:
+        calculating an &hellip;\", \"priority_date\":\"2008-05-13\", \"filing_date\":\"2008-05-13\",
+        \"grant_date\":\"2015-01-05\", \"publication_date\":\"2015-01-05\", \"inventor\":\"\uCD5C\uC885\uB3C4\",
+        \"assignee\":\"\uC0BC\uC131\uC804\uC790 \uC8FC\uC2DD\uD68C\uC0AC\", \"publication_number\":\"KR101479233B1\",
+        \"language\":\"en\", \"thumbnail\":\"bf/44/d5/eb117c0e1678a6/112008033529633-pat00004.png\",
+        \"pdf\":\"8a/5b/56/31ad893bbd93fb/KR101479233B1.pdf\", \"figures\":[{\"thumbnail\":\"37/aa/a4/373746c70bd537/112008033529633-pat00004.png\",
+        \"full\":\"9e/37/a3/a3978c940c7e55/112008033529633-pat00004.png\"}, {\"thumbnail\":\"05/3e/e5/d8ef9f92cdc690/112008033529633-pat00005.png\",
+        \"full\":\"43/44/c3/add4f7792f089d/112008033529633-pat00005.png\"}, {\"thumbnail\":\"fc/3d/fd/d0289abade3e5a/112008033529633-pat00006.png\",
+        \"full\":\"f2/8b/f0/b5fbde630d7d43/112008033529633-pat00006.png\"}, {\"thumbnail\":\"fd/57/fa/063a14d0baa792/112008033529633-pat00007.png\",
+        \"full\":\"41/56/a3/c94de33552ce1a/112008033529633-pat00007.png\"}], \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"US\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"JP\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}},
+        {\"country_code\":\"KR\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"DE\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}}, \"is_similar_document\":true,
+        \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}}, {\"id\":\"patent/CN110421547B/en\",
+        \"rank\":2, \"patent\":{\"title\":\" Double-arm <b>robot</b> cooperative impedance
+        control method based on estimation &hellip;\", \"snippet\":\" Wherein, rot
+        A \u2208R 3\xD73 Is a rotation matrix describing the attitude of the end of
+        the arm A, P A \u2208R 3 Is a position vector describing the position of the
+        tip of the <b>robot</b> arm A, r A \u2208R 3 Is a rotation vector, alpha,
+        obtained from the rotation matrix by means of a Rodrigues transformation A
+        ,\u03B2 A ,\u03B3 A &hellip;\", \"priority_date\":\"2019-07-12\", \"filing_date\":\"2019-07-12\",
+        \"grant_date\":\"2022-10-28\", \"publication_date\":\"2022-10-28\", \"inventor\":\"\u5F90\u5FB7\u521A\",
+        \"assignee\":\"\u4E2D\u5357\u5927\u5B66\", \"publication_number\":\"CN110421547B\",
+        \"language\":\"en\", \"thumbnail\":\"aa/a1/16/a33599ca14700b/HDA0002128524800000011.png\",
+        \"pdf\":\"93/4a/23/e156a9f3b89193/CN110421547B.pdf\", \"figures\":[{\"thumbnail\":\"f0/84/8a/4e8487474a1f6b/HDA0002128524800000011.png\",
+        \"full\":\"58/28/ed/f7c0a5963146be/HDA0002128524800000011.png\"}, {\"thumbnail\":\"8c/30/8d/eaf5bf59102190/HDA0002128524800000021.png\",
+        \"full\":\"d2/e7/73/f83f87d5cdc18a/HDA0002128524800000021.png\"}, {\"thumbnail\":\"0d/06/59/ba9135861d1e6d/HDA0002128524800000022.png\",
+        \"full\":\"b9/b0/74/6e1eb31d1eb605/HDA0002128524800000022.png\"}, {\"thumbnail\":\"c3/f7/64/e3882b8b63fd30/HDA0002128524800000031.png\",
+        \"full\":\"d1/76/72/f163a5fb3790de/HDA0002128524800000031.png\"}, {\"thumbnail\":\"0b/20/1b/dd796386630768/HDA0002128524800000041.png\",
+        \"full\":\"b4/29/18/24efbec7dada8a/HDA0002128524800000041.png\"}], \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"CN\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}}, \"is_similar_document\":false,
+        \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}}, {\"id\":\"patent/GB2609712B/en\",
+        \"rank\":3, \"patent\":{\"title\":\" Modular <b>robotic</b> linkages and methods
+        of assembling a <b>robot</b> manipulator\", \"snippet\":\"\", \"priority_date\":\"2021-05-26\",
+        \"filing_date\":\"2022-05-23\", \"grant_date\":\"2024-06-19\", \"publication_date\":\"2024-06-19\",
+        \"inventor\":\"Atamer Bertan\", \"assignee\":\"Amazon Tech Inc\", \"publication_number\":\"GB2609712B\",
+        \"language\":\"en\", \"thumbnail\":\"\", \"pdf\":\"5f/df/30/16e7f4eaf85778/GB2609712B.pdf\",
+        \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"US\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"DE\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}},
+        {\"country_code\":\"GB\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}},
+        \"is_similar_document\":true, \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}},
+        {\"id\":\"patent/CN117697735A/en\", \"rank\":4, \"patent\":{\"title\":\" <b>Robot</b>
+        control method and control device\", \"snippet\":\" 4. The control method
+        according to claim 2, wherein, In the driving process, the <b>robot</b> is
+        moved by linear interpolation motion, The optimal value calculation step is
+        a step of calculating the maximum speed when the <b>robot</b> reaches the
+        target position by linear interpolation operation while changing &hellip;\",
+        \"priority_date\":\"2022-09-15\", \"filing_date\":\"2023-09-04\", \"publication_date\":\"2024-03-15\",
+        \"inventor\":\"\u5965\u6751\u5B8F\u514B\", \"assignee\":\"\u5C3C\u5F97\u79D1\u4EEA\u5668\u682A\u5F0F\u4F1A\u793E\",
+        \"publication_number\":\"CN117697735A\", \"language\":\"en\", \"thumbnail\":\"\",
+        \"pdf\":\"45/d5/9c/227371ac2d9a8a/CN117697735A.pdf\", \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"US\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"CN\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}},
+        {\"country_code\":\"JP\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}},
+        \"is_similar_document\":true, \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}},
+        {\"id\":\"patent/CN112157659B/en\", \"rank\":5, \"patent\":{\"title\":\" Aircraft
+        component assembly system and method based on <b>robot</b> power and position
+        &hellip;\", \"snippet\":\" S5: Adjust the <b>robot</b> to the assembly posture;
+        S6: The worker starts the force-controlled traction function and inserts the
+        shaft into the aircraft assembly hole by dragging the workpiece; S7: Start
+        force-controlled automatic insertion; S8: Open the gripper, the <b>robot</b>
+        moves back, and the AGV returns &hellip;\", \"priority_date\":\"2020-10-28\",
+        \"filing_date\":\"2020-10-28\", \"grant_date\":\"2024-12-17\", \"publication_date\":\"2024-12-17\",
+        \"inventor\":\"\u90D1\u6108\u7EA2\", \"assignee\":\"\u6210\u90FD\u4E5D\u7CFB\u673A\u5668\u4EBA\u79D1\u6280\u6709\u9650\u516C\u53F8\",
+        \"publication_number\":\"CN112157659B\", \"language\":\"en\", \"thumbnail\":\"\",
+        \"pdf\":\"8b/ca/fb/991dc9731edf87/CN112157659B.pdf\", \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"CN\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}}, \"is_similar_document\":true,
+        \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}}, {\"id\":\"patent/CN112372630B/en\",
+        \"rank\":6, \"patent\":{\"title\":\" Multi-mechanical-arm cooperative polishing
+        force compliance control method and &hellip;\", \"snippet\":\" 2. The multi-<b>robot</b>-arm
+        cooperative sanding force compliance control method as claimed in claim 1,
+        wherein in step 2), the pose of the object centroid coordinate system in the
+        world coordinate system is obtained according to the given target object reference
+        trajectory, and then the coordinate &hellip;\", \"priority_date\":\"2020-09-24\",
+        \"filing_date\":\"2020-09-24\", \"grant_date\":\"2022-02-22\", \"publication_date\":\"2022-02-22\",
+        \"inventor\":\"\u674E\u5175\", \"assignee\":\"\u54C8\u5C14\u6EE8\u5DE5\u4E1A\u5927\u5B66\uFF08\u6DF1\u5733\uFF09\",
+        \"publication_number\":\"CN112372630B\", \"language\":\"en\", \"thumbnail\":\"3f/c3/3b/260bbda2d502c7/HDA0002698764320000011.png\",
+        \"pdf\":\"48/ec/41/115e7a693e9d18/CN112372630B.pdf\", \"figures\":[{\"thumbnail\":\"bc/84/78/c89d45cfb962c7/HDA0002698764320000011.png\",
+        \"full\":\"50/db/e1/f113e7f3a15d3a/HDA0002698764320000011.png\"}, {\"thumbnail\":\"84/51/35/eebb11385cab58/HDA0002698764320000021.png\",
+        \"full\":\"86/a7/f9/ab225a036abb74/HDA0002698764320000021.png\"}, {\"thumbnail\":\"de/b5/8e/b059f28334710d/HDA0002698764320000031.png\",
+        \"full\":\"88/57/f4/d55cf5654c8b73/HDA0002698764320000031.png\"}, {\"thumbnail\":\"cc/0b/a3/877dd91aa893ee/HDA0002698764320000041.png\",
+        \"full\":\"62/39/58/2c29eedd105b45/HDA0002698764320000041.png\"}, {\"thumbnail\":\"b4/db/79/0e7a08ba2063e5/HDA0002698764320000051.png\",
+        \"full\":\"2b/7c/6e/be03ec63321053/HDA0002698764320000051.png\"}], \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"CN\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}}, \"is_similar_document\":true,
+        \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}}, {\"id\":\"patent/CN110035871B/en\",
+        \"rank\":7, \"patent\":{\"title\":\" System and method for indicating a <b>robot</b>\",
+        \"snippet\":\" -a calculation sub-module (9) configured to calculate joint
+        movement commands for the master <b>robot</b> arm (2) and for the slave <b>robot</b>
+        arm (3) based on the master external force data, the slave external force
+        data, the non-linear dynamical model of the master <b>robot</b> arm, the non-linear
+        dynamical model &hellip;\", \"priority_date\":\"2016-11-10\", \"filing_date\":\"2017-11-08\",
+        \"grant_date\":\"2022-09-23\", \"publication_date\":\"2022-09-23\", \"inventor\":\"M\xB7\u9A6C\u8D6B\u8FEA\xB7\u54C8\u624E\u963F\u5C14\u8FBE\u5361\u5C3C\",
+        \"assignee\":\"\u5EB7\u683C\u5C3C\u535A\u63D0\u514B\u65AF\u80A1\u4EFD\u516C\u53F8\",
+        \"publication_number\":\"CN110035871B\", \"language\":\"en\", \"thumbnail\":\"aa/1b/fa/8f47c2c6e22a58/HDA0003654664630000011.png\",
+        \"pdf\":\"53/77/f2/39ad1094f3a58b/CN110035871B.pdf\", \"figures\":[{\"thumbnail\":\"d2/4a/93/65e94452bc56a5/HDA0003654664630000011.png\",
+        \"full\":\"ee/34/e5/2a21a8f6a9da7c/HDA0003654664630000011.png\"}, {\"thumbnail\":\"d3/6c/b4/b292e3c4ecc00d/HDA0003654664630000021.png\",
+        \"full\":\"19/59/97/07a8421af3c9f6/HDA0003654664630000021.png\"}, {\"thumbnail\":\"77/9f/fb/91db5257f01fa2/HDA0003654664630000031.png\",
+        \"full\":\"98/cd/48/12421ec3ba2be9/HDA0003654664630000031.png\"}, {\"thumbnail\":\"fb/85/78/40fbcd522eb621/HDA0003654664630000041.png\",
+        \"full\":\"cd/b7/13/7c350e953147b9/HDA0003654664630000041.png\"}], \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"WO\",
+        \"best_patent_stage\":{\"state\":\"NOT_ACTIVE\"}}, {\"country_code\":\"EP\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"US\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}},
+        {\"country_code\":\"CN\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"KR\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"DK\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}},
+        \"is_similar_document\":false, \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}},
+        {\"id\":\"patent/TWI657903B/en\", \"rank\":8, \"patent\":{\"title\":\"&hellip;
+        \ system, manufacturing system construction method, end effector, <b>robot</b>,
+        and &hellip;\", \"snippet\":\" The manufacturing system of the present invention
+        includes: an industrial <b>robot</b> having a <b>robot</b> arm and a <b>robot</b>
+        arm mounted on the <b>robot</b> arm; and a work station having a machine provided
+        with a grip for the <b>robot</b> arm to hold.\", \"priority_date\":\"2015-11-16\",
+        \"filing_date\":\"2016-10-07\", \"grant_date\":\"2019-05-01\", \"publication_date\":\"2019-05-01\",
+        \"inventor\":\"\u6A4B\u672C\u5EB7\u5F66\", \"assignee\":\"\u65E5\u5546\u5DDD\u5D0E\u91CD\u5DE5\u696D\u80A1\u4EFD\u6709\u9650\u516C\u53F8\",
+        \"publication_number\":\"TWI657903B\", \"language\":\"en\", \"thumbnail\":\"\",
+        \"pdf\":\"f8/40/36/903332f4008c0f/TWI657903B.pdf\", \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"WO\",
+        \"best_patent_stage\":{\"state\":\"NOT_ACTIVE\"}}, {\"country_code\":\"US\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"CN\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}},
+        {\"country_code\":\"JP\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"KR\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}, {\"country_code\":\"DE\", \"best_patent_stage\":{\"state\":\"NOT_ACTIVE\"}},
+        {\"country_code\":\"TW\", \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}},
+        \"is_similar_document\":true, \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}},
+        {\"id\":\"patent/US10105853B1/en\", \"rank\":9, \"patent\":{\"title\":\" Flexible
+        <b>robot</b> end-effector for assembling door closure\", \"snippet\":\" A
+        flexible end-effector for a <b>robot</b> includes a frame and a clamp assembly
+        movably coupled to the frame. As such, the clamp assembly is movable relative
+        to the frame along a first direction, wherein the clamp assembly includes
+        a locator and a clamp movably coupled to the locator. The clamp assembly &hellip;\",
+        \"priority_date\":\"2017-10-05\", \"filing_date\":\"2017-10-05\", \"grant_date\":\"2018-10-23\",
+        \"publication_date\":\"2018-10-23\", \"inventor\":\"Dooil HWANG\", \"assignee\":\"GM
+        Global Technology Operations LLC\", \"publication_number\":\"US10105853B1\",
+        \"language\":\"en\", \"thumbnail\":\"d9/bf/6c/e2a7be35364d27/US10105853-20181023-D00000.png\",
+        \"pdf\":\"e2/56/ed/57a15fc3cd7aab/US10105853.pdf\", \"figures\":[{\"thumbnail\":\"1a/fb/78/4f679c08653066/US10105853-20181023-D00000.png\",
+        \"full\":\"9a/de/eb/c4512d36a20f7a/US10105853-20181023-D00000.png\"}, {\"thumbnail\":\"44/97/c3/600ec4101b12e8/US10105853-20181023-D00001.png\",
+        \"full\":\"98/78/e9/5073812755d728/US10105853-20181023-D00001.png\"}, {\"thumbnail\":\"9f/6e/da/442e7d167f2476/US10105853-20181023-D00002.png\",
+        \"full\":\"e9/c8/7f/b6ce956d1c1598/US10105853-20181023-D00002.png\"}, {\"thumbnail\":\"8d/73/28/6227caf134c820/US10105853-20181023-D00003.png\",
+        \"full\":\"2d/65/69/e59b3c6df9291a/US10105853-20181023-D00003.png\"}, {\"thumbnail\":\"f6/2e/ce/f1ac137e83ff1b/US10105853-20181023-D00004.png\",
+        \"full\":\"0f/29/32/49ff3fe6166bf9/US10105853-20181023-D00004.png\"}, {\"thumbnail\":\"70/0d/a7/f656e798de706d/US10105853-20181023-D00005.png\",
+        \"full\":\"49/ee/c6/31d1ad5382f84a/US10105853-20181023-D00005.png\"}, {\"thumbnail\":\"66/8f/ae/9bfb02c3a5dec5/US10105853-20181023-D00006.png\",
+        \"full\":\"16/12/46/7b63d62406f7ae/US10105853-20181023-D00006.png\"}, {\"thumbnail\":\"de/92/e2/12dd6fc504f529/US10105853-20181023-D00007.png\",
+        \"full\":\"b0/12/69/522153cd5b3cb2/US10105853-20181023-D00007.png\"}], \"family_metadata\":{\"aggregated\":{\"country_status\":[{\"country_code\":\"US\",
+        \"best_patent_stage\":{\"state\":\"ACTIVE\"}}]}}}, \"is_similar_document\":true,
+        \"entity_matches\":{\"additional\":0}, \"measure_matches\":{}}]}], \"chem_exhausted\":false,
+        \"summary\":{\"assignee\":[{\"key\":\"Total\", \"value\":1000, \"frequency\":[{\"key\":\"2025-2028\",
+        \"value\":20}, {\"key\":\"2022-2025\", \"value\":347}, {\"key\":\"2019-2022\",
+        \"value\":688}, {\"key\":\"2016-2019\", \"value\":205}, {\"key\":\"2013-2016\",
+        \"value\":19}, {\"key\":\"2010-2013\", \"value\":15}, {\"key\":\"2007-2010\",
+        \"value\":10}, {\"key\":\"2004-2007\", \"value\":6}, {\"key\":\"2001-2004\",
+        \"value\":12}, {\"key\":\"1998-2001\", \"value\":3}, {\"key\":\"1995-1998\",
+        \"value\":2}, {\"key\":\"1992-1995\", \"value\":4}, {\"key\":\"1989-1992\",
+        \"value\":8}, {\"key\":\"1986-1989\", \"value\":3}, {\"key\":\"1983-1986\",
+        \"value\":3}, {\"key\":\"1980-1983\", \"value\":1}]}, {\"key\":\"Irobot Corporation\",
+        \"value\":23, \"frequency\":[{\"key\":\"2022-2025\", \"value\":10}, {\"key\":\"2019-2022\",
+        \"value\":14}, {\"key\":\"2016-2019\", \"value\":7}]}, {\"key\":\"Lg Electronics
+        Inc.\", \"value\":18, \"frequency\":[{\"key\":\"2022-2025\", \"value\":4},
+        {\"key\":\"2019-2022\", \"value\":19}, {\"key\":\"2016-2019\", \"value\":2}]},
+        {\"key\":\"Google Llc\", \"value\":13, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":12}, {\"key\":\"2019-2022\", \"value\":5}, {\"key\":\"2016-2019\",
+        \"value\":1}]}, {\"key\":\"Boston Dynamics, Inc.\", \"value\":12, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":12}, {\"key\":\"2019-2022\", \"value\":4}, {\"key\":\"2016-2019\",
+        \"value\":1}]}, {\"key\":\"\u682A\u5F0F\u4F1A\u793E\u5B89\u5DDD\u96FB\u6A5F\",
+        \"value\":10, \"frequency\":[{\"key\":\"2019-2022\", \"value\":3}, {\"key\":\"2013-2016\",
+        \"value\":1}, {\"key\":\"2010-2013\", \"value\":3}, {\"key\":\"2007-2010\",
+        \"value\":2}, {\"key\":\"2001-2004\", \"value\":2}, {\"key\":\"1998-2001\",
+        \"value\":1}, {\"key\":\"1989-1992\", \"value\":2}]}, {\"key\":\"Cobalt Robotics
+        Inc.\", \"value\":10, \"frequency\":[{\"key\":\"2022-2025\", \"value\":2},
+        {\"key\":\"2019-2022\", \"value\":11}, {\"key\":\"2016-2019\", \"value\":1}]},
+        {\"key\":\"\u30A2\u30A4\u30ED\u30DC\u30C3\u30C8\u30FB\u30B3\u30FC\u30DD\u30EC\u30FC\u30B7\u30E7\u30F3\",
+        \"value\":8, \"frequency\":[{\"key\":\"2022-2025\", \"value\":5}, {\"key\":\"2019-2022\",
+        \"value\":5}, {\"key\":\"2016-2019\", \"value\":2}]}, {\"key\":\"\uC5D8\uC9C0\uC804\uC790
+        \uC8FC\uC2DD\uD68C\uC0AC\", \"value\":8, \"frequency\":[{\"key\":\"2019-2022\",
+        \"value\":11}]}, {\"key\":\"\u30AD\u30E4\u30CE\u30F3\u682A\u5F0F\u4F1A\u793E\",
+        \"value\":8, \"frequency\":[{\"key\":\"2022-2025\", \"value\":3}, {\"key\":\"2019-2022\",
+        \"value\":4}, {\"key\":\"2016-2019\", \"value\":4}]}, {\"key\":\"Universal
+        Robots A/S\", \"value\":7, \"frequency\":[{\"key\":\"2022-2025\", \"value\":2},
+        {\"key\":\"2019-2022\", \"value\":7}, {\"key\":\"2016-2019\", \"value\":1}]},
+        {\"key\":\"X Development Llc\", \"value\":7, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":1}, {\"key\":\"2019-2022\", \"value\":6}, {\"key\":\"2016-2019\",
+        \"value\":3}]}, {\"key\":\"\u4E09\u661F\u7535\u5B50\u682A\u5F0F\u4F1A\u793E\",
+        \"value\":7, \"frequency\":[{\"key\":\"2022-2025\", \"value\":1}, {\"key\":\"2019-2022\",
+        \"value\":6}, {\"key\":\"2016-2019\", \"value\":3}]}, {\"key\":\"Hai Robotics
+        Co., Ltd.\", \"value\":7, \"frequency\":[{\"key\":\"2022-2025\", \"value\":9},
+        {\"key\":\"2019-2022\", \"value\":1}]}, {\"key\":\"Fanuc Corporation\", \"value\":6,
+        \"frequency\":[{\"key\":\"2022-2025\", \"value\":1}, {\"key\":\"2019-2022\",
+        \"value\":3}, {\"key\":\"2016-2019\", \"value\":5}]}, {\"key\":\"Teladoc Health,
+        Inc.\", \"value\":6, \"frequency\":[{\"key\":\"2022-2025\", \"value\":4},
+        {\"key\":\"2019-2022\", \"value\":3}, {\"key\":\"2016-2019\", \"value\":2}]},
+        {\"key\":\"\u682A\u5F0F\u4F1A\u793E\uFF2D\uFF55\uFF4A\uFF49\uFF4E\", \"value\":6,
+        \"frequency\":[{\"key\":\"2019-2022\", \"value\":9}]}, {\"key\":\"\u8C37\u6B4C\u6709\u9650\u8D23\u4EFB\u516C\u53F8\",
+        \"value\":5, \"frequency\":[{\"key\":\"2019-2022\", \"value\":4}, {\"key\":\"2016-2019\",
+        \"value\":4}]}, {\"key\":\"Kawasaki Jukogyo Kabushiki Kaisha\", \"value\":5,
+        \"frequency\":[{\"key\":\"2022-2025\", \"value\":1}, {\"key\":\"2019-2022\",
+        \"value\":6}, {\"key\":\"2016-2019\", \"value\":1}]}, {\"key\":\"Globus Medical,
+        Inc.\", \"value\":5, \"frequency\":[{\"key\":\"2022-2025\", \"value\":6},
+        {\"key\":\"2019-2022\", \"value\":1}]}], \"inventor\":[{\"key\":\"Total\",
+        \"value\":1000, \"frequency\":[{\"key\":\"2025-2028\", \"value\":20}, {\"key\":\"2022-2025\",
+        \"value\":347}, {\"key\":\"2019-2022\", \"value\":688}, {\"key\":\"2016-2019\",
+        \"value\":205}, {\"key\":\"2013-2016\", \"value\":19}, {\"key\":\"2010-2013\",
+        \"value\":15}, {\"key\":\"2007-2010\", \"value\":10}, {\"key\":\"2004-2007\",
+        \"value\":6}, {\"key\":\"2001-2004\", \"value\":12}, {\"key\":\"1998-2001\",
+        \"value\":3}, {\"key\":\"1995-1998\", \"value\":2}, {\"key\":\"1992-1995\",
+        \"value\":4}, {\"key\":\"1989-1992\", \"value\":8}, {\"key\":\"1986-1989\",
+        \"value\":3}, {\"key\":\"1983-1986\", \"value\":3}, {\"key\":\"1980-1983\",
+        \"value\":1}]}, {\"key\":\"Travis J. Deyle\", \"value\":11, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":3}, {\"key\":\"2019-2022\", \"value\":11}, {\"key\":\"2016-2019\",
+        \"value\":1}]}, {\"key\":\"Erik Schluntz\", \"value\":11, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":3}, {\"key\":\"2019-2022\", \"value\":11}, {\"key\":\"2016-2019\",
+        \"value\":1}]}, {\"key\":\"\u30CB\u30B3\u30E9\u30A8\u30D5 \u30C7\u30A2\u30F3\u30B3\u30A6\uFF0C\u30ED\u30BB\u30F3\",
+        \"value\":10, \"frequency\":[{\"key\":\"2022-2025\", \"value\":1}, {\"key\":\"2019-2022\",
+        \"value\":13}]}, {\"key\":\"Peregrine Badger\", \"value\":8, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":3}, {\"key\":\"2019-2022\", \"value\":8}, {\"key\":\"2016-2019\",
+        \"value\":1}]}, {\"key\":\"Harold Artes\", \"value\":6, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":4}, {\"key\":\"2019-2022\", \"value\":2}, {\"key\":\"2016-2019\",
+        \"value\":3}]}, {\"key\":\"Reinhard Vogel\", \"value\":5, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":4}, {\"key\":\"2019-2022\", \"value\":2}, {\"key\":\"2016-2019\",
+        \"value\":2}]}, {\"key\":\"Charles S. Jordan\", \"value\":5, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":3}, {\"key\":\"2019-2022\", \"value\":2}, {\"key\":\"2016-2019\",
+        \"value\":2}]}, {\"key\":\"\u30B8\u30E7\u30F3\u30BD\u30F3 \u30CE\u30FC\u30D0\u30FC\u30C8\",
+        \"value\":5, \"frequency\":[{\"key\":\"2019-2022\", \"value\":7}]}, {\"key\":\"Marco
+        Pinter\", \"value\":5, \"frequency\":[{\"key\":\"2022-2025\", \"value\":3},
+        {\"key\":\"2019-2022\", \"value\":3}, {\"key\":\"2016-2019\", \"value\":2}]},
+        {\"key\":\"Youjun Xiong\", \"value\":5, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":1}, {\"key\":\"2019-2022\", \"value\":6}]}, {\"key\":\"Dominik Seethaler\",
+        \"value\":4, \"frequency\":[{\"key\":\"2022-2025\", \"value\":4}, {\"key\":\"2016-2019\",
+        \"value\":2}]}, {\"key\":\"Marco da Silva\", \"value\":4, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":4}, {\"key\":\"2019-2022\", \"value\":2}]}, {\"key\":\"Yuwei Cui\",
+        \"value\":4, \"frequency\":[{\"key\":\"2019-2022\", \"value\":5}, {\"key\":\"2016-2019\",
+        \"value\":1}]}, {\"key\":\"Michael Ferguson\", \"value\":4, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":1}, {\"key\":\"2019-2022\", \"value\":5}]}, {\"key\":\"\u30AB\u30CC\u30CB\u30B3\u30D5\uFF0C\u30C7\u30CB\u30B9\",
+        \"value\":4, \"frequency\":[{\"key\":\"2019-2022\", \"value\":6}]}, {\"key\":\"Yulun
+        Wang\", \"value\":4, \"frequency\":[{\"key\":\"2022-2025\", \"value\":2},
+        {\"key\":\"2019-2022\", \"value\":2}, {\"key\":\"2016-2019\", \"value\":2}]},
+        {\"key\":\"Daniel Steven Sanchez\", \"value\":3, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":2}, {\"key\":\"2019-2022\", \"value\":2}, {\"key\":\"2016-2019\",
+        \"value\":1}]}, {\"key\":\"Neil R. Crawford\", \"value\":3, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":3}, {\"key\":\"2019-2022\", \"value\":2}]}, {\"key\":\"Teymour S.
+        EL-TAHRY\", \"value\":3, \"frequency\":[{\"key\":\"2022-2025\", \"value\":5}]}],
+        \"cpc\":[{\"key\":\"Total\", \"value\":1000, \"frequency\":[{\"key\":\"2025-2028\",
+        \"value\":20}, {\"key\":\"2022-2025\", \"value\":347}, {\"key\":\"2019-2022\",
+        \"value\":688}, {\"key\":\"2016-2019\", \"value\":205}, {\"key\":\"2013-2016\",
+        \"value\":19}, {\"key\":\"2010-2013\", \"value\":15}, {\"key\":\"2007-2010\",
+        \"value\":10}, {\"key\":\"2004-2007\", \"value\":6}, {\"key\":\"2001-2004\",
+        \"value\":12}, {\"key\":\"1998-2001\", \"value\":3}, {\"key\":\"1995-1998\",
+        \"value\":2}, {\"key\":\"1992-1995\", \"value\":4}, {\"key\":\"1989-1992\",
+        \"value\":8}, {\"key\":\"1986-1989\", \"value\":3}, {\"key\":\"1983-1986\",
+        \"value\":3}, {\"key\":\"1980-1983\", \"value\":1}]}, {\"key\":\"B25J\", \"value\":661,
+        \"frequency\":[{\"key\":\"2025-2028\", \"value\":14}, {\"key\":\"2022-2025\",
+        \"value\":235}, {\"key\":\"2019-2022\", \"value\":444}, {\"key\":\"2016-2019\",
+        \"value\":146}, {\"key\":\"2013-2016\", \"value\":12}, {\"key\":\"2010-2013\",
+        \"value\":11}, {\"key\":\"2007-2010\", \"value\":6}, {\"key\":\"2004-2007\",
+        \"value\":5}, {\"key\":\"2001-2004\", \"value\":8}, {\"key\":\"1998-2001\",
+        \"value\":1}, {\"key\":\"1995-1998\", \"value\":1}, {\"key\":\"1992-1995\",
+        \"value\":3}, {\"key\":\"1989-1992\", \"value\":2}, {\"key\":\"1986-1989\",
+        \"value\":2}, {\"key\":\"1983-1986\", \"value\":1}]}, {\"key\":\"G05B\", \"value\":286,
+        \"frequency\":[{\"key\":\"2025-2028\", \"value\":3}, {\"key\":\"2022-2025\",
+        \"value\":101}, {\"key\":\"2019-2022\", \"value\":194}, {\"key\":\"2016-2019\",
+        \"value\":65}, {\"key\":\"2013-2016\", \"value\":9}, {\"key\":\"2010-2013\",
+        \"value\":3}, {\"key\":\"2007-2010\", \"value\":2}, {\"key\":\"2004-2007\",
+        \"value\":3}, {\"key\":\"2001-2004\", \"value\":2}, {\"key\":\"1995-1998\",
+        \"value\":1}, {\"key\":\"1992-1995\", \"value\":1}, {\"key\":\"1989-1992\",
+        \"value\":1}, {\"key\":\"1986-1989\", \"value\":1}]}, {\"key\":\"G05D\", \"value\":271,
+        \"frequency\":[{\"key\":\"2025-2028\", \"value\":1}, {\"key\":\"2022-2025\",
+        \"value\":85}, {\"key\":\"2019-2022\", \"value\":209}, {\"key\":\"2016-2019\",
+        \"value\":70}]}, {\"key\":\"A47L\", \"value\":103, \"frequency\":[{\"key\":\"2025-2028\",
+        \"value\":1}, {\"key\":\"2022-2025\", \"value\":36}, {\"key\":\"2019-2022\",
+        \"value\":82}, {\"key\":\"2016-2019\", \"value\":20}]}, {\"key\":\"Y10S\",
+        \"value\":98, \"frequency\":[{\"key\":\"2025-2028\", \"value\":1}, {\"key\":\"2022-2025\",
+        \"value\":24}, {\"key\":\"2019-2022\", \"value\":56}, {\"key\":\"2016-2019\",
+        \"value\":39}, {\"key\":\"2013-2016\", \"value\":5}, {\"key\":\"2010-2013\",
+        \"value\":3}, {\"key\":\"2007-2010\", \"value\":3}, {\"key\":\"2004-2007\",
+        \"value\":1}]}, {\"key\":\"A61B\", \"value\":85, \"frequency\":[{\"key\":\"2025-2028\",
+        \"value\":2}, {\"key\":\"2022-2025\", \"value\":35}, {\"key\":\"2019-2022\",
+        \"value\":58}, {\"key\":\"2016-2019\", \"value\":20}]}, {\"key\":\"G06Q\",
+        \"value\":76, \"frequency\":[{\"key\":\"2025-2028\", \"value\":1}, {\"key\":\"2022-2025\",
+        \"value\":30}, {\"key\":\"2019-2022\", \"value\":57}, {\"key\":\"2016-2019\",
+        \"value\":15}]}, {\"key\":\"B65G\", \"value\":75, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":29}, {\"key\":\"2019-2022\", \"value\":58}, {\"key\":\"2016-2019\",
+        \"value\":13}, {\"key\":\"2013-2016\", \"value\":1}]}, {\"key\":\"G06F\",
+        \"value\":74, \"frequency\":[{\"key\":\"2025-2028\", \"value\":1}, {\"key\":\"2022-2025\",
+        \"value\":31}, {\"key\":\"2019-2022\", \"value\":53}, {\"key\":\"2016-2019\",
+        \"value\":15}]}, {\"key\":\"G06N\", \"value\":64, \"frequency\":[{\"key\":\"2025-2028\",
+        \"value\":2}, {\"key\":\"2022-2025\", \"value\":29}, {\"key\":\"2019-2022\",
+        \"value\":45}, {\"key\":\"2016-2019\", \"value\":11}]}, {\"key\":\"G06T\",
+        \"value\":62, \"frequency\":[{\"key\":\"2025-2028\", \"value\":1}, {\"key\":\"2022-2025\",
+        \"value\":28}, {\"key\":\"2019-2022\", \"value\":46}, {\"key\":\"2016-2019\",
+        \"value\":9}]}, {\"key\":\"G06V\", \"value\":62, \"frequency\":[{\"key\":\"2025-2028\",
+        \"value\":1}, {\"key\":\"2022-2025\", \"value\":28}, {\"key\":\"2019-2022\",
+        \"value\":40}, {\"key\":\"2016-2019\", \"value\":15}]}, {\"key\":\"G01C\",
+        \"value\":54, \"frequency\":[{\"key\":\"2022-2025\", \"value\":17}, {\"key\":\"2019-2022\",
+        \"value\":40}, {\"key\":\"2016-2019\", \"value\":16}]}, {\"key\":\"Y02P\",
+        \"value\":53, \"frequency\":[{\"key\":\"2022-2025\", \"value\":26}, {\"key\":\"2019-2022\",
+        \"value\":35}, {\"key\":\"2016-2019\", \"value\":8}, {\"key\":\"2007-2010\",
+        \"value\":1}, {\"key\":\"1995-1998\", \"value\":1}, {\"key\":\"1989-1992\",
+        \"value\":1}]}, {\"key\":\"B62D\", \"value\":50, \"frequency\":[{\"key\":\"2022-2025\",
+        \"value\":20}, {\"key\":\"2019-2022\", \"value\":35}, {\"key\":\"2016-2019\",
+        \"value\":10}, {\"key\":\"2001-2004\", \"value\":1}, {\"key\":\"1992-1995\",
+        \"value\":1}, {\"key\":\"1983-1986\", \"value\":1}]}, {\"key\":\"Y02T\", \"value\":28,
+        \"frequency\":[{\"key\":\"2025-2028\", \"value\":1}, {\"key\":\"2022-2025\",
+        \"value\":6}, {\"key\":\"2019-2022\", \"value\":23}, {\"key\":\"2016-2019\",
+        \"value\":9}]}, {\"key\":\"B60L\", \"value\":26, \"frequency\":[{\"key\":\"2025-2028\",
+        \"value\":1}, {\"key\":\"2022-2025\", \"value\":6}, {\"key\":\"2019-2022\",
+        \"value\":19}, {\"key\":\"2016-2019\", \"value\":9}]}, {\"key\":\"G01S\",
+        \"value\":26, \"frequency\":[{\"key\":\"2022-2025\", \"value\":7}, {\"key\":\"2019-2022\",
+        \"value\":20}, {\"key\":\"2016-2019\", \"value\":9}]}, {\"key\":\"H04N\",
+        \"value\":23, \"frequency\":[{\"key\":\"2022-2025\", \"value\":15}, {\"key\":\"2019-2022\",
+        \"value\":12}, {\"key\":\"2016-2019\", \"value\":4}]}]}, \"landscape\":{\"related_landscapes\":[{\"name\":\"Engineering
+        & Computer Science\", \"landscape_type\":\"AREA\"}, {\"name\":\"Mechanical
+        Engineering\", \"landscape_type\":\"AREA\"}, {\"name\":\"Manipulator\", \"landscape_type\":\"AREA\"}]}}}"
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Content-Security-Policy-Report-Only:
+      - script-src 'none'; form-action 'none'; frame-src 'none'; report-uri https://csp.withgoogle.com/csp/goa-cf66a5ad_2
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Date:
+      - Thu, 05 Mar 2026 17:54:18 GMT
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Sec-Fetch-Site
+      - Sec-Fetch-Mode
+      - Sec-Fetch-Dest
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Frontend-Version:
+      - patent-search.search_20250707_RC00
+      X-Xss-Protection:
+      - '0'
+      content-length:
+      - '26959'
+    status:
+      code: 200
+      message: OK
+version: 1

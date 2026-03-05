@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: '{"q":"semiconductor","pagination":{"offset":0,"limit":3}}'
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Host:
+      - api.uspto.gov
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/applications/search
+  response:
+    body:
+      string: '{"count":3,"patentFileWrapperDataBag":[{"applicationNumberText":"16200001","applicationMetaData":{"inventionTitle":"SEMICONDUCTOR DEVICE","filingDate":"2020-06-15","applicationStatusCode":"150","patentNumber":"11222333"}},{"applicationNumberText":"16200002","applicationMetaData":{"inventionTitle":"SEMICONDUCTOR WAFER METHOD","filingDate":"2020-07-20","applicationStatusCode":"30"}},{"applicationNumberText":"16200003","applicationMetaData":{"inventionTitle":"SEMICONDUCTOR MEMORY","filingDate":"2020-08-10","applicationStatusCode":"150","patentNumber":"11444555"}}],"requestIdentifier":"req-test-789"}'
+    headers:
+      Content-Type:
+      - application/json
+    status:
+      code: 200
+      message: OK
+version: 1

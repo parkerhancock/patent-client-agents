@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import os
 from collections.abc import Sequence
 from datetime import date
@@ -11,6 +12,8 @@ from pydantic import BaseModel, Field
 
 from ip_tools.core.base_client import BaseAsyncClient
 from ip_tools.core.exceptions import ConfigurationError, NotFoundError
+
+logger = logging.getLogger(__name__)
 
 BASE_URL = "https://api.uspto.gov"
 
@@ -135,6 +138,7 @@ class UsptoOdpBaseClient(BaseAsyncClient):
         """
         resolved_key = api_key or os.getenv("USPTO_ODP_API_KEY")
         if not resolved_key:
+            logger.error("No USPTO ODP API key provided")
             raise ConfigurationError(
                 "USPTO ODP API key required. "
                 "Set USPTO_ODP_API_KEY environment variable or pass api_key parameter."
@@ -160,9 +164,13 @@ class UsptoOdpBaseClient(BaseAsyncClient):
         context: str = "",
     ) -> dict[str, Any]:
         """Execute a search POST request, handling 404 as empty result."""
+        logger.debug("POST %s payload=%s", endpoint, context or payload)
         try:
-            return await self._request_json("POST", endpoint, json=payload, context=context)
+            result = await self._request_json("POST", endpoint, json=payload, context=context)
+            logger.debug("POST %s returned count=%s", endpoint, result.get("count"))
+            return result
         except NotFoundError:
+            logger.debug("POST %s returned 404, returning empty result", endpoint)
             return {"count": 0, empty_bag_key: []}
 
     async def _get_with_404_handling(
@@ -173,9 +181,13 @@ class UsptoOdpBaseClient(BaseAsyncClient):
         params: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Execute a GET request, handling 404 as empty result."""
+        logger.debug("GET %s context=%s", endpoint, context)
         try:
-            return await self._request_json("GET", endpoint, params=params, context=context)
+            result = await self._request_json("GET", endpoint, params=params, context=context)
+            logger.debug("GET %s returned count=%s", endpoint, result.get("count"))
+            return result
         except NotFoundError:
+            logger.debug("GET %s returned 404, returning empty result", endpoint)
             return {"count": 0, empty_bag_key: []}
 
 

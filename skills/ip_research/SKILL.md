@@ -8,6 +8,7 @@ description: |
   - Checking USPTO application status, file wrapper, or PTAB proceedings
   - Downloading bulk USPTO data products
   - Finding patent assignments or ownership history
+  - Fetching USPTO publication full-text data
 ---
 
 # IP Research
@@ -23,6 +24,7 @@ Async Python clients for patent data. All clients use `async with` context manag
 | USPTO PTAB (IPR/PGR) | `PtabTrialsClient` | [uspto_odp.md](references/uspto_odp.md) |
 | USPTO bulk data | `BulkDataClient` | [uspto_odp.md](references/uspto_odp.md) |
 | USPTO assignments | `UsptoAssignmentsClient` | [uspto_assignments.md](references/uspto_assignments.md) |
+| USPTO publications | `UsptoPublicationsClient` | [uspto_publications.md](references/uspto_publications.md) |
 | EPO bibliographic/family | `EpoOpsClient` | [epo_ops.md](references/epo_ops.md) |
 | JPO application status | `JpoClient` | [jpo.md](references/jpo.md) |
 
@@ -69,6 +71,40 @@ async with PtabTrialsClient() as client:
     results = await client.search_proceedings(query="patent:US10123456")
 ```
 
+## Error Handling
+
+All clients raise typed exceptions from `ip_tools.core.exceptions`. Error messages are concise and include a path to the log file for full tracebacks. Stacktraces never pollute your context window.
+
+```python
+from ip_tools.core.exceptions import IpToolsError, NotFoundError, RateLimitError
+
+try:
+    async with GooglePatentsClient() as client:
+        patent = await client.get_patent_data("US99999999")
+except NotFoundError as e:
+    print(e)  # "Patent US99999999 not found ... (details: ~/.cache/ip_tools/ip_tools.log)"
+except RateLimitError:
+    print("Rate limited — wait and retry")
+except IpToolsError as e:
+    print(e)  # Concise message + log path for debugging
+```
+
+**Exception hierarchy:**
+
+| Exception | When |
+|-----------|------|
+| `NotFoundError` | Patent/resource not found (404) |
+| `RateLimitError` | Rate limit exceeded (429) |
+| `AuthenticationError` | Bad or missing API credentials (401/403) |
+| `ServerError` | Remote API error (5xx) |
+| `ParseError` | Failed to parse response data |
+| `ConfigurationError` | Missing API key or invalid config |
+| `ValidationError` | Invalid input (bad patent number format, etc.) |
+| `ApiError` | Other HTTP errors (base for all API errors) |
+| `IpToolsError` | Base for all ip_tools errors |
+
+**Log file:** `~/.cache/ip_tools/ip_tools.log` — contains full tracebacks, request/response details, and debug information. Read this file when error messages alone aren't sufficient to diagnose an issue.
+
 ## Environment Variables
 
 | Variable | Required For |
@@ -94,6 +130,7 @@ Report bugs with: version, minimal reproduction code, and API response if applic
 - [google_patents.md](references/google_patents.md) - Full-text search, patent documents, citations
 - [uspto_odp.md](references/uspto_odp.md) - Applications, PTAB, bulk data, petitions
 - [uspto_assignments.md](references/uspto_assignments.md) - Assignment/ownership lookup
+- [uspto_publications.md](references/uspto_publications.md) - Full-text patent and application publications
 - [epo_ops.md](references/epo_ops.md) - EPO bibliographic, family, legal status
 - [jpo.md](references/jpo.md) - Japan Patent Office APIs
 - [cache.md](references/cache.md) - Cache management APIs

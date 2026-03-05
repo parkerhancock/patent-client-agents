@@ -14,6 +14,7 @@ API Documentation:
 
 from __future__ import annotations
 
+import logging
 import re
 from datetime import datetime
 from typing import Self
@@ -22,6 +23,8 @@ import httpx
 from lxml import etree  # type: ignore[import]
 
 from .models import AssignmentParty, AssignmentRecord
+
+logger = logging.getLogger(__name__)
 
 
 def _clean_patent_number(number: str) -> str:
@@ -157,6 +160,7 @@ class UsptoAssignmentsClient:
     ) -> list[AssignmentRecord]:
         """Execute a search query."""
         client = await self._get_client()
+        logger.debug("Searching assignments: query=%s filter=%s rows=%d", query, filter_type, rows)
         response = await client.get(
             "/patent/lookup",
             params={
@@ -166,11 +170,14 @@ class UsptoAssignmentsClient:
             },
         )
         response.raise_for_status()
-        return self._parse_response(response.content)
+        records = self._parse_response(response.content)
+        logger.debug("Assignment search returned %d records", len(records))
+        return records
 
     def _parse_response(self, content: bytes) -> list[AssignmentRecord]:
         """Parse XML response into AssignmentRecord objects."""
         if not content:
+            logger.debug("Empty response body, returning no records")
             return []
 
         root = etree.fromstring(content)
