@@ -8,7 +8,8 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 
 ```bash
-claude plugins add github:parkerhancock/ip_tools
+/plugin marketplace add parkerhancock/ip_tools
+/plugin install ip-tools@ip-tools
 ```
 
 ---
@@ -41,7 +42,8 @@ All sources include automatic caching, rate limiting, and retry logic.
 ## Install
 
 ```bash
-claude plugins add github:parkerhancock/ip_tools
+/plugin marketplace add parkerhancock/ip_tools
+/plugin install ip-tools@ip-tools
 ```
 
 That's it. Claude Code now has access to patent data through the `ip_research` skill.

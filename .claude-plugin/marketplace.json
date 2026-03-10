@@ -1,0 +1,13 @@
+{
+  "name": "ip-tools",
+  "owner": {
+    "name": "Parker Hancock"
+  },
+  "plugins": [
+    {
+      "name": "ip-tools",
+      "source": "./",
+      "description": "Patent and intellectual property data tools - async Python clients for USPTO, EPO, Google Patents, and JPO"
+    }
+  ]
+}

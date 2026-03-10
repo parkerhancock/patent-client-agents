@@ -6,5 +6,11 @@
     "name": "Parker Hancock",
     "url": "https://github.com/parkerhancock"
   },
-  "repository": "https://github.com/parkerhancock/ip_tools"
+  "repository": "https://github.com/parkerhancock/ip_tools",
+  "license": "Apache-2.0",
+  "skills": "./skills",
+  "setup": {
+    "install": "uv sync",
+    "requirements": ["uv"]
+  }
 }
