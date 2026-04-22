@@ -80,8 +80,7 @@ def lint_file(path: Path) -> list[str]:
         for conditional in CONDITIONAL_SECTIONS:
             if conditional not in section_set:
                 errors.append(
-                    f"missing ## {conditional} (required for Active connectors; "
-                    f"Status='{status}')"
+                    f"missing ## {conditional} (required for Active connectors; Status='{status}')"
                 )
 
     return errors
