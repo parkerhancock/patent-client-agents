@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import logging
 import os
 from collections.abc import Sequence
 from datetime import date
@@ -10,12 +9,19 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-from ip_tools.core.base_client import BaseAsyncClient
-from ip_tools.core.exceptions import ConfigurationError, NotFoundError
-
-logger = logging.getLogger(__name__)
+from law_tools_core.base_client import BaseAsyncClient
+from law_tools_core.exceptions import ConfigurationError, NotFoundError
 
 BASE_URL = "https://api.uspto.gov"
+
+# ODP release this client is verified against. Bump when re-reviewing
+# https://data.uspto.gov/support/release and confirming no regressions.
+# Checking tip: compare to the current release number on that page; every
+# minor bump has typically been additive, but 3.6 (2026-04-10) removed
+# `countryOrStateCode` from the Assignment API and standardized PCT
+# numbers — so review each bump before advancing this constant.
+ODP_TRACKED_RELEASE = "3.6"
+ODP_LAST_REVIEWED = "2026-04-14"
 
 
 def _prune(value: Any) -> Any:
@@ -95,21 +101,38 @@ class PaginationModel(BaseModel):
 
 
 class SearchPayload(BaseModel):
-    """Standard search payload for ODP POST endpoints."""
+    """Standard search payload for ODP POST endpoints.
+
+    Filters, rangeFilters, and sort accept JSON-object lists (OdpFilter, OdpRangeFilter,
+    OdpSort models or plain dicts). These are serialized via _serialize_model_list.
+    """
 
     q: str | None = None
     fields: list[str] | None = None
     facets: list[str] | None = None
-    filters: list[str] | None = None
-    rangeFilters: list[str] | None = Field(default=None, alias="range_filters")
-    sort: str | None = None
+    filters: list[Any] | None = None
+    rangeFilters: list[Any] | None = Field(default=None, alias="range_filters")
+    sort: list[Any] | None = None
     pagination: PaginationModel = Field(default_factory=PaginationModel)
 
     model_config = {"populate_by_name": True, "extra": "allow"}
 
     def model_dump_pruned(self) -> dict[str, Any]:
-        """Dump model with empty values removed."""
-        data = self.model_dump(by_alias=True)
+        """Dump model with empty values removed, serializing nested models."""
+        data: dict[str, Any] = {}
+        if self.q is not None:
+            data["q"] = self.q
+        if self.fields is not None:
+            data["fields"] = self.fields
+        if self.facets is not None:
+            data["facets"] = self.facets
+        if (filters := _serialize_model_list(self.filters)) is not None:
+            data["filters"] = filters
+        if (range_filters := _serialize_model_list(self.rangeFilters)) is not None:
+            data["rangeFilters"] = range_filters
+        if (sort := _serialize_model_list(self.sort)) is not None:
+            data["sort"] = sort
+        data["pagination"] = _prune(self.pagination.model_dump())
         return _prune(data)
 
 
@@ -138,7 +161,6 @@ class UsptoOdpBaseClient(BaseAsyncClient):
         """
         resolved_key = api_key or os.getenv("USPTO_ODP_API_KEY")
         if not resolved_key:
-            logger.error("No USPTO ODP API key provided")
             raise ConfigurationError(
                 "USPTO ODP API key required. "
                 "Set USPTO_ODP_API_KEY environment variable or pass api_key parameter."
@@ -150,6 +172,12 @@ class UsptoOdpBaseClient(BaseAsyncClient):
         }
         super().__init__(headers=headers, **kwargs)
         self.api_key = resolved_key
+
+    def _build_url(self, path: str) -> str:
+        """Pass absolute URLs through unchanged (e.g. grant XML fileLocationURI)."""
+        if path.startswith("http://") or path.startswith("https://"):
+            return path
+        return super()._build_url(path)
 
     def _normalize_application_number(self, application_number: str) -> str:
         """Normalize application number by removing separators."""
@@ -164,13 +192,9 @@ class UsptoOdpBaseClient(BaseAsyncClient):
         context: str = "",
     ) -> dict[str, Any]:
         """Execute a search POST request, handling 404 as empty result."""
-        logger.debug("POST %s payload=%s", endpoint, context or payload)
         try:
-            result = await self._request_json("POST", endpoint, json=payload, context=context)
-            logger.debug("POST %s returned count=%s", endpoint, result.get("count"))
-            return result
+            return await self._request_json("POST", endpoint, json=payload, context=context)
         except NotFoundError:
-            logger.debug("POST %s returned 404, returning empty result", endpoint)
             return {"count": 0, empty_bag_key: []}
 
     async def _get_with_404_handling(
@@ -181,13 +205,9 @@ class UsptoOdpBaseClient(BaseAsyncClient):
         params: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Execute a GET request, handling 404 as empty result."""
-        logger.debug("GET %s context=%s", endpoint, context)
         try:
-            result = await self._request_json("GET", endpoint, params=params, context=context)
-            logger.debug("GET %s returned count=%s", endpoint, result.get("count"))
-            return result
+            return await self._request_json("GET", endpoint, params=params, context=context)
         except NotFoundError:
-            logger.debug("GET %s returned 404, returning empty result", endpoint)
             return {"count": 0, empty_bag_key: []}
 
 

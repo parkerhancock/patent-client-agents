@@ -1,0 +1,53 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/IPR2025-01319
+  response:
+    body:
+      string: '{"count":1,"requestIdentifier":"f518ba3b-aa01-4ec5-81a5-ed89599a7b4c","patentTrialProceedingDataBag":[{"lastModifiedDateTime":"2026-03-27T17:10:42","patentOwnerData":{"patentNumber":"11703443","grantDate":"2023-07-18","realPartyInInterestName":"Beckman
+        Coulter, Inc. et al.","technologyCenterNumber":"2800","groupArtUnitNumber":"2884","applicationNumberText":"17980669","inventorName":"Yong
+        Qin Chen","counselName":"Cohen, Alexiset al"},"trialMetaData":{"accordedFilingDate":"2025-07-17","terminationDate":"2025-11-20","trialTypeCode":"IPR","latestDecisionDate":"2025-11-20","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/IPR2025-01319.zip","institutionDecisionDate":"2025-11-20","trialStatusCategory":"Discretionary
+        Denial","trialLastModifiedDate":"2026-03-27","petitionFilingDate":"2025-07-17","trialLastModifiedDateTime":"2026-03-27T14:04:28"},"trialNumber":"IPR2025-01319","regularPetitionerData":{"realPartyInInterestName":"Cytek
+        Biosciences, Inc.","counselName":"Knight, Dustinet al"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1027'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:37 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92525-3dee98fb0fd6657d7f8a1d44;Parent=5ddc7f27eabd343e;Sampled=0;Lineage=1:ce682653:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK92HtdIAMFeFw=
+      x-amzn-RequestId:
+      - f518ba3b-aa01-4ec5-81a5-ed89599a7b4c
+    status:
+      code: 200
+      message: OK
+version: 1

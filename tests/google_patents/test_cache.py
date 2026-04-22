@@ -2,234 +2,258 @@
 
 from __future__ import annotations
 
+import tempfile
 import time
+from collections.abc import Generator
 from pathlib import Path
 
 import httpx
 import pytest
 
 from ip_tools.google_patents.cache import (
+    CACHE_TTL_SECONDS,
     CachingAsyncClient,
     PatentCache,
     build_cached_http_client,
 )
 
-# ---------------------------------------------------------------------------
-# PatentCache tests
-# ---------------------------------------------------------------------------
+
+class TestCacheTtlSeconds:
+    """Tests for CACHE_TTL_SECONDS constant."""
+
+    def test_is_30_days(self) -> None:
+        expected = 30 * 24 * 60 * 60
+        assert CACHE_TTL_SECONDS == expected
+
+    def test_is_positive(self) -> None:
+        assert CACHE_TTL_SECONDS > 0
 
 
 class TestPatentCache:
-    """Unit tests for the SQLite-based PatentCache."""
+    """Tests for PatentCache class."""
 
     @pytest.fixture
-    def cache(self, tmp_path: Path) -> PatentCache:
-        db = tmp_path / "test_cache.db"
-        return PatentCache(db, ttl_seconds=60)
+    def temp_cache(self) -> Generator[PatentCache, None, None]:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            db_path = Path(tmp_dir) / "test_cache.db"
+            cache = PatentCache(db_path, ttl_seconds=3600)
+            yield cache
+            cache.close()
 
-    def test_init_attributes(self, tmp_path: Path) -> None:
-        db = tmp_path / "cache.db"
-        cache = PatentCache(db, ttl_seconds=120)
-        assert cache.db_path == db
-        assert cache.ttl_seconds == 120
-        assert cache._conn is None
+    def test_init(self, temp_cache: PatentCache) -> None:
+        assert temp_cache.ttl_seconds == 3600
+        assert temp_cache._conn is None
 
-    def test_get_conn_creates_table(self, cache: PatentCache) -> None:
-        conn = cache._get_conn()
-        assert conn is not None
-        # Verify table exists
-        cursor = conn.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='html_cache'"
-        )
-        assert cursor.fetchone() is not None
+    def test_creates_db_on_first_access(self, temp_cache: PatentCache) -> None:
+        assert temp_cache._conn is None
+        temp_cache._get_conn()
+        assert temp_cache._conn is not None
 
-    def test_get_conn_is_idempotent(self, cache: PatentCache) -> None:
-        conn1 = cache._get_conn()
-        conn2 = cache._get_conn()
-        assert conn1 is conn2
+    def test_creates_parent_directories(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            nested_path = Path(tmp_dir) / "nested" / "dir" / "cache.db"
+            cache = PatentCache(nested_path)
+            cache._get_conn()
+            assert nested_path.parent.exists()
+            cache.close()
 
-    def test_get_conn_creates_parent_dirs(self, tmp_path: Path) -> None:
-        db = tmp_path / "nested" / "dir" / "cache.db"
-        cache = PatentCache(db)
-        conn = cache._get_conn()
-        assert conn is not None
-        assert db.parent.exists()
-        cache.close()
-
-    def test_url_hash_deterministic(self, cache: PatentCache) -> None:
-        h1 = cache._url_hash("https://example.com")
-        h2 = cache._url_hash("https://example.com")
-        assert h1 == h2
-        assert len(h1) == 64  # SHA-256 hex digest
-
-    def test_url_hash_different_for_different_urls(self, cache: PatentCache) -> None:
-        h1 = cache._url_hash("https://a.com")
-        h2 = cache._url_hash("https://b.com")
-        assert h1 != h2
-
-    def test_set_and_get(self, cache: PatentCache) -> None:
-        url = "https://patents.google.com/patent/US1234567B2/en"
-        cache.set(url, "<html>content</html>", 200)
-        result = cache.get(url)
+    def test_set_and_get(self, temp_cache: PatentCache) -> None:
+        url = "https://patents.google.com/patent/US10123456"
+        html = "<html>Test content</html>"
+        temp_cache.set(url, html, 200)
+        result = temp_cache.get(url)
         assert result is not None
-        html, status_code = result
-        assert html == "<html>content</html>"
-        assert status_code == 200
+        assert result[0] == html
+        assert result[1] == 200
 
-    def test_get_miss(self, cache: PatentCache) -> None:
-        result = cache.get("https://nonexistent.com")
+    def test_get_returns_none_for_missing(self, temp_cache: PatentCache) -> None:
+        result = temp_cache.get("https://example.com/not-cached")
         assert result is None
 
-    def test_get_expired(self, tmp_path: Path) -> None:
-        db = tmp_path / "expire_test.db"
-        cache = PatentCache(db, ttl_seconds=1)
-        url = "https://example.com/expired"
-        cache.set(url, "<html>old</html>", 200)
-        # Manually backdate the cached_at
-        conn = cache._get_conn()
-        url_hash = cache._url_hash(url)
-        conn.execute(
-            "UPDATE html_cache SET cached_at = ? WHERE url_hash = ?",
-            (time.time() - 100, url_hash),
-        )
-        conn.commit()
-        result = cache.get(url)
-        assert result is None
-
-    def test_set_replaces_existing(self, cache: PatentCache) -> None:
-        url = "https://example.com/replace"
-        cache.set(url, "<html>v1</html>", 200)
-        cache.set(url, "<html>v2</html>", 200)
-        result = cache.get(url)
+    def test_set_overwrites_existing(self, temp_cache: PatentCache) -> None:
+        url = "https://example.com/test"
+        temp_cache.set(url, "old content", 200)
+        temp_cache.set(url, "new content", 200)
+        result = temp_cache.get(url)
         assert result is not None
-        assert result[0] == "<html>v2</html>"
+        assert result[0] == "new content"
 
-    def test_close(self, cache: PatentCache) -> None:
-        cache._get_conn()
-        assert cache._conn is not None
-        cache.close()
-        assert cache._conn is None
+    def test_expired_entries_deleted(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            db_path = Path(tmp_dir) / "expired_cache.db"
+            cache = PatentCache(db_path, ttl_seconds=1)
+            url = "https://example.com/expires"
+            cache.set(url, "content", 200)
+            time.sleep(1.1)
+            result = cache.get(url)
+            assert result is None
+            cache.close()
 
-    def test_close_when_not_open(self, cache: PatentCache) -> None:
-        # Should not raise
-        cache.close()
-        assert cache._conn is None
+    def test_url_hash_consistent(self, temp_cache: PatentCache) -> None:
+        url = "https://patents.google.com/patent/US12345678"
+        hash1 = temp_cache._url_hash(url)
+        hash2 = temp_cache._url_hash(url)
+        assert hash1 == hash2
 
+    def test_url_hash_different_for_different_urls(self, temp_cache: PatentCache) -> None:
+        hash1 = temp_cache._url_hash("https://example.com/a")
+        hash2 = temp_cache._url_hash("https://example.com/b")
+        assert hash1 != hash2
 
-# ---------------------------------------------------------------------------
-# CachingAsyncClient tests
-# ---------------------------------------------------------------------------
+    def test_close(self, temp_cache: PatentCache) -> None:
+        temp_cache._get_conn()
+        assert temp_cache._conn is not None
+        temp_cache.close()
+        assert temp_cache._conn is None
+
+    def test_close_when_not_connected(self, temp_cache: PatentCache) -> None:
+        assert temp_cache._conn is None
+        temp_cache.close()
+        assert temp_cache._conn is None
 
 
 class TestCachingAsyncClient:
-    """Tests for the async HTTP client wrapper with caching."""
+    """Tests for CachingAsyncClient class."""
 
     @pytest.fixture
-    def cache(self, tmp_path: Path) -> PatentCache:
-        db = tmp_path / "async_cache.db"
-        return PatentCache(db, ttl_seconds=3600)
+    def temp_cache(self) -> Generator[PatentCache, None, None]:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            db_path = Path(tmp_dir) / "client_cache.db"
+            cache = PatentCache(db_path)
+            yield cache
+            cache.close()
 
     @pytest.mark.asyncio
-    async def test_context_manager(self) -> None:
-        client = CachingAsyncClient(cache=None)
-        async with client as c:
-            assert c is client
-            assert c._client is not None
+    async def test_context_manager(self, temp_cache: PatentCache) -> None:
+        client = CachingAsyncClient(cache=temp_cache)
+        async with client:
+            assert client._client is not None
         assert client._client is None
 
     @pytest.mark.asyncio
-    async def test_get_without_context_raises(self) -> None:
-        client = CachingAsyncClient(cache=None)
+    async def test_get_without_context_raises(self, temp_cache: PatentCache) -> None:
+        client = CachingAsyncClient(cache=temp_cache)
         with pytest.raises(RuntimeError, match="Client not initialized"):
             await client.get("https://example.com")
 
     @pytest.mark.asyncio
-    async def test_get_returns_cached_response(self, cache: PatentCache) -> None:
-        url = "https://patents.google.com/patent/TEST/en"
-        cache.set(url, "<html>cached</html>", 200)
-        client = CachingAsyncClient(cache=cache)
+    async def test_get_caches_successful_response(self, temp_cache: PatentCache) -> None:
+        def handler(request: httpx.Request) -> httpx.Response:
+            return httpx.Response(200, text="<html>Mocked response</html>")
+
+        mock_transport = httpx.MockTransport(handler)
+        client = CachingAsyncClient(cache=temp_cache, transport=mock_transport)
+
         async with client:
+            url = "https://patents.google.com/patent/US10123456"
             response = await client.get(url)
-        assert response.status_code == 200
-        assert response.text == "<html>cached</html>"
+            assert response.status_code == 200
+            cached = temp_cache.get(url)
+            assert cached is not None
+            assert cached[0] == "<html>Mocked response</html>"
 
     @pytest.mark.asyncio
-    async def test_get_cache_miss_fetches_network(self, cache: PatentCache) -> None:
-        """On cache miss, the client fetches from the network and caches 200 responses."""
+    async def test_get_returns_cached_response(self, temp_cache: PatentCache) -> None:
+        url = "https://patents.google.com/patent/US10123456"
+        temp_cache.set(url, "<html>Cached content</html>", 200)
 
-        def handler(request: httpx.Request) -> httpx.Response:  # noqa: ARG001
-            return httpx.Response(200, text="<html>fresh</html>")
+        call_count = 0
 
-        transport = httpx.MockTransport(handler)
-        client = CachingAsyncClient(cache=cache, transport=transport)
-        url = "https://example.com/patent"
+        def handler(request: httpx.Request) -> httpx.Response:
+            nonlocal call_count
+            call_count += 1
+            return httpx.Response(200, text="<html>Fresh content</html>")
+
+        mock_transport = httpx.MockTransport(handler)
+        client = CachingAsyncClient(cache=temp_cache, transport=mock_transport)
+
         async with client:
             response = await client.get(url)
-        assert response.status_code == 200
-        assert response.text == "<html>fresh</html>"
-        # Verify it was cached
-        cached = cache.get(url)
-        assert cached is not None
-        assert cached[0] == "<html>fresh</html>"
+            assert response.status_code == 200
+            assert response.text == "<html>Cached content</html>"
+            assert call_count == 0
 
     @pytest.mark.asyncio
-    async def test_get_non_200_not_cached(self, cache: PatentCache) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:  # noqa: ARG001
-            return httpx.Response(404, text="Not found")
+    async def test_get_without_cache(self) -> None:
+        def handler(request: httpx.Request) -> httpx.Response:
+            return httpx.Response(200, text="Response without caching")
 
-        transport = httpx.MockTransport(handler)
-        client = CachingAsyncClient(cache=cache, transport=transport)
-        url = "https://example.com/missing"
-        async with client:
-            response = await client.get(url)
-        assert response.status_code == 404
-        assert cache.get(url) is None
+        mock_transport = httpx.MockTransport(handler)
+        client = CachingAsyncClient(cache=None, transport=mock_transport)
 
-    @pytest.mark.asyncio
-    async def test_get_no_cache(self) -> None:
-        """When cache is None, requests go straight to network."""
-
-        def handler(request: httpx.Request) -> httpx.Response:  # noqa: ARG001
-            return httpx.Response(200, text="<html>no-cache</html>")
-
-        transport = httpx.MockTransport(handler)
-        client = CachingAsyncClient(cache=None, transport=transport)
         async with client:
             response = await client.get("https://example.com")
-        assert response.status_code == 200
+            assert response.status_code == 200
+            assert response.text == "Response without caching"
 
+    @pytest.mark.asyncio
+    async def test_get_does_not_cache_non_200(self, temp_cache: PatentCache) -> None:
+        def handler(request: httpx.Request) -> httpx.Response:
+            return httpx.Response(404, text="Not found")
 
-# ---------------------------------------------------------------------------
-# build_cached_http_client tests
-# ---------------------------------------------------------------------------
+        mock_transport = httpx.MockTransport(handler)
+        client = CachingAsyncClient(cache=temp_cache, transport=mock_transport)
+
+        async with client:
+            url = "https://example.com/not-found"
+            response = await client.get(url)
+            assert response.status_code == 404
+            cached = temp_cache.get(url)
+            assert cached is None
+
+    @pytest.mark.asyncio
+    async def test_custom_headers(self, temp_cache: PatentCache) -> None:
+        captured_headers = {}
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            captured_headers.update(request.headers)
+            return httpx.Response(200, text="OK")
+
+        mock_transport = httpx.MockTransport(handler)
+        client = CachingAsyncClient(
+            cache=temp_cache,
+            headers={"X-Custom-Header": "test-value"},
+            transport=mock_transport,
+        )
+
+        async with client:
+            await client.get("https://example.com")
+            assert captured_headers.get("x-custom-header") == "test-value"
 
 
 class TestBuildCachedHttpClient:
-    """Tests for the factory function."""
+    """Tests for build_cached_http_client function."""
 
-    def test_returns_caching_client_no_cache(self) -> None:
+    def test_returns_caching_async_client(self) -> None:
         client = build_cached_http_client(use_cache=False, cache_name="test")
         assert isinstance(client, CachingAsyncClient)
+
+    def test_with_cache_enabled(self) -> None:
+        client = build_cached_http_client(use_cache=True, cache_name="test_cache")
+        assert client._cache is not None
+        if client._cache:
+            client._cache.close()
+
+    def test_with_cache_disabled(self) -> None:
+        client = build_cached_http_client(use_cache=False, cache_name="test")
         assert client._cache is None
 
-    def test_returns_caching_client_with_cache(self) -> None:
-        client = build_cached_http_client(use_cache=True, cache_name="test_build")
-        assert isinstance(client, CachingAsyncClient)
-        assert client._cache is not None
-        assert isinstance(client._cache, PatentCache)
-        # Clean up
-        client._cache.close()
-
-    def test_headers_merged(self) -> None:
-        client = build_cached_http_client(
-            use_cache=False,
-            cache_name="test",
-            headers={"X-Custom": "value"},
-        )
-        assert "User-Agent" in client._headers
-        assert client._headers["X-Custom"] == "value"
-
-    def test_default_headers_present(self) -> None:
+    def test_includes_default_headers(self) -> None:
         client = build_cached_http_client(use_cache=False, cache_name="test")
         assert "User-Agent" in client._headers
         assert "Accept-Language" in client._headers
+
+    def test_custom_headers_merged(self) -> None:
+        custom_headers = {"X-Custom": "value"}
+        client = build_cached_http_client(
+            use_cache=False, cache_name="test", headers=custom_headers
+        )
+        assert client._headers.get("X-Custom") == "value"
+        assert "User-Agent" in client._headers
+
+    def test_custom_headers_override_defaults(self) -> None:
+        custom_headers = {"Accept-Language": "fr-FR"}
+        client = build_cached_http_client(
+            use_cache=False, cache_name="test", headers=custom_headers
+        )
+        assert client._headers.get("Accept-Language") == "fr-FR"

@@ -17,6 +17,8 @@ from typing import Any
 
 import httpx
 
+from law_tools_core.cache import get_default_cache_dir
+
 logger = logging.getLogger(__name__)
 
 # Cache TTL: 30 days for patent pages (they rarely change)
@@ -192,7 +194,7 @@ def build_cached_http_client(
 
     cache = None
     if use_cache:
-        cache_root = Path.home() / ".cache" / "patent_mcp_suite"
+        cache_root = get_default_cache_dir()
         cache = PatentCache(cache_root / f"{cache_name}_html.db")
 
     return CachingAsyncClient(

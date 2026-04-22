@@ -1,0 +1,21 @@
+# Gitleaks configuration for ip-tools.
+#
+# Extends the default rule set and allowlists specific upstream documentation
+# files that contain illustrative placeholders and example URLs published by
+# USPTO / JPO / EPO themselves. These aren't secrets we control, and the
+# files are imported verbatim from upstream — reviewing them for leaks here
+# is redundant and produces false positives every time upstream ships new
+# examples.
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Upstream USPTO / JPO / EPO OpenAPI specs and reference bundles"
+paths = [
+    '''resources/uspto/uspto_odp_swagger\.yaml''',
+    '''resources/epo/en-ops\.txt''',
+    '''resources/jpo/jpo_api_openapi\.json''',
+    '''resources/jpo/jpo_api_reference_e\.js''',
+    '''src/ip_tools/uspto_odp/data/odp_swagger\.yaml''',
+]

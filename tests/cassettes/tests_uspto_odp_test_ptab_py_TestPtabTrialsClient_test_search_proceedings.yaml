@@ -1,0 +1,65 @@
+interactions:
+- request:
+    body: '{"q":"trialMetaData.trialTypeCode:IPR","pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '75'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/search
+  response:
+    body:
+      string: '{"count":18058,"requestIdentifier":"4a77e422-6201-456f-8b98-992a01bb6422","patentTrialProceedingDataBag":[{"lastModifiedDateTime":"2026-04-22T09:11:06","patentOwnerData":{"patentNumber":"8738103","grantDate":"2014-05-27","technologyCenterNumber":"2600","groupArtUnitNumber":"2643","applicationNumberText":"11614429","inventorName":"Carles
+        Puente Baliarda et al"},"trialMetaData":{"accordedFilingDate":"2026-04-21","trialTypeCode":"IPR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00338/IPR2026-00338.zip","trialStatusCategory":"Pending","trialLastModifiedDate":"2026-04-22","petitionFilingDate":"2026-04-21","trialLastModifiedDateTime":"2026-04-22T06:33:20"},"trialNumber":"IPR2026-00338","regularPetitionerData":{"realPartyInInterestName":"Johnson
+        Controls Inc.","counselName":"Carlan, Janineet al"}},{"lastModifiedDateTime":"2026-04-16T17:11:53","patentOwnerData":{"patentNumber":"10512385","grantDate":"2019-12-24","technologyCenterNumber":"1700","groupArtUnitNumber":"1711","applicationNumberText":"15941761","inventorName":"Barry
+        E. Tuller et al"},"trialMetaData":{"accordedFilingDate":"2026-04-15","trialTypeCode":"IPR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00337/IPR2026-00337.zip","trialStatusCategory":"Pending","trialLastModifiedDate":"2026-04-16","petitionFilingDate":"2026-04-15","trialLastModifiedDateTime":"2026-04-16T14:14:59"},"trialNumber":"IPR2026-00337","regularPetitionerData":{"realPartyInInterestName":"Samsung
+        Electronics Co., Ltd. et al.","counselName":"HABER, BENJAMINet al"}},{"lastModifiedDateTime":"2026-04-15T23:08:37","patentOwnerData":{"patentNumber":"12232681","grantDate":"2025-02-25","technologyCenterNumber":"1700","groupArtUnitNumber":"1711","applicationNumberText":"18535327","inventorName":"Mark
+        S. Feddema et al"},"trialMetaData":{"accordedFilingDate":"2026-04-13","trialTypeCode":"IPR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00336/IPR2026-00336.zip","trialStatusCategory":"Pending","trialLastModifiedDate":"2026-04-15","petitionFilingDate":"2026-04-13","trialLastModifiedDateTime":"2026-04-15T17:57:30"},"trialNumber":"IPR2026-00336","regularPetitionerData":{"realPartyInInterestName":"Samsung
+        Electronics Co., Ltd. et al.","counselName":"HABER, BENJAMINet al"}},{"lastModifiedDateTime":"2026-04-13T19:10:20","patentOwnerData":{"patentNumber":"11374508","grantDate":"2022-06-28","realPartyInInterestName":"BUNKER
+        HILL TECHNOLOGIES, LLC","technologyCenterNumber":"2800","groupArtUnitNumber":"2846","applicationNumberText":"16866028","inventorName":"Jian
+        Zhou et al","counselName":"Fahmi, Tareket al"},"trialMetaData":{"accordedFilingDate":"2026-04-07","trialTypeCode":"IPR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00333/IPR2026-00333.zip","trialStatusCategory":"Pending","trialLastModifiedDate":"2026-04-13","petitionFilingDate":"2026-04-07","trialLastModifiedDateTime":"2026-04-13T15:04:03"},"trialNumber":"IPR2026-00333","regularPetitionerData":{"realPartyInInterestName":"Toyota
+        Motor Corporation et al.","counselName":"ENGLEHART, ALEXANDERet al"}},{"lastModifiedDateTime":"2026-04-13T21:11:10","patentOwnerData":{"patentNumber":"12301627","grantDate":"2025-05-13","realPartyInInterestName":"Qomplx
+        LLC","technologyCenterNumber":"2400","groupArtUnitNumber":"2497","applicationNumberText":"18892283","inventorName":"Jason
+        Crabtree et al","counselName":"WEATHERWAX, KENNETHet al"},"trialMetaData":{"accordedFilingDate":"2026-04-07","trialTypeCode":"IPR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00325/IPR2026-00325.zip","trialStatusCategory":"Pending","trialLastModifiedDate":"2026-04-13","petitionFilingDate":"2026-04-07","trialLastModifiedDateTime":"2026-04-13T17:58:32"},"trialNumber":"IPR2026-00325","regularPetitionerData":{"realPartyInInterestName":"Microsoft
+        Corporation","counselName":"Mason, Andrewet al"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '3930'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:36 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92524-2df138e01ee35c1151ae63a9;Parent=647980d2c85b7f36;Sampled=0;Lineage=1:ce682653:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK9xGGlIAMFsNA=
+      x-amzn-RequestId:
+      - 4a77e422-6201-456f-8b98-992a01bb6422
+    status:
+      code: 200
+      message: OK
+version: 1

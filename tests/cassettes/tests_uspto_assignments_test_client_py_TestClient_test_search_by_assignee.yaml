@@ -1,0 +1,131 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"Apple Inc","searchBy":"assigneeName"},{"property":"5","searchBy":"rowsNeeded"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '112'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/patent/exportPublicPatentData
+  response:
+    body:
+      string: "[{\"searchCriteria\": [{\"property\": \"Apple Inc\", \"searchBy\":
+        \"assignee_name\"}, {\"property\": \"5\", \"searchBy\": \"rowsNeeded\"}],
+        \"data\": [{\"reelNumber\": 71179, \"frameNumber\": 17, \"assignorExecutionDate\":
+        \"05/14/2025\", \"correspondentName\": \"KYLE MORSE\", \"assignors\": [{\"assignorName\":
+        \"MULLER, MARCEL V.\", \"executionDate\": \"05/14/2025\"}, {\"assignorName\":
+        \"STORY, HANNAH S.\", \"executionDate\": \"05/14/2025\"}], \"assignees\":
+        [\"APPLE INC.\"], \"noOfProperties\": 1, \"properties\": [{\"sequenceNumber\":
+        1, \"applicationNumber\": \"19214179\", \"fillingDate\": \"\", \"internationalRegistrationNumber\":
+        null, \"inventionTitle\": null, \"inventors\": null, \"issueDate\": \"\",
+        \"patentNumber\": null, \"pctNumber\": null, \"pctNumber17\": null, \"publicationNumber\":
+        null, \"publicationDate\": \"\", \"internationalPublicationDate\": \"\"}]},
+        {\"reelNumber\": 65125, \"frameNumber\": 249, \"assignorExecutionDate\": \"09/25/2023\",
+        \"correspondentName\": \"BIRCH, STEWART, KOLASCH & BIRCH, LLP\", \"assignors\":
+        [{\"assignorName\": \"FLEIZACH, CHRISTOPHER B\", \"executionDate\": \"08/28/2023\"},
+        {\"assignorName\": \"LOBO FERREIRA DA SILVA, JOAQUIM GONCALO\", \"executionDate\":
+        \"08/28/2023\"}, {\"assignorName\": \"RAMIREZ MOLERES, ISIS NAOMI\", \"executionDate\":
+        \"08/28/2023\"}, {\"assignorName\": \"KASEMSET, CLARE T\", \"executionDate\":
+        \"08/29/2023\"}, {\"assignorName\": \"WHEARRY, ALLEN, JR\", \"executionDate\":
+        \"08/31/2023\"}, {\"assignorName\": \"ROMNEY, CHRISTOPHER J.\", \"executionDate\":
+        \"09/05/2023\"}, {\"assignorName\": \"CHAMBERS, ADRIAN T.\", \"executionDate\":
+        \"09/05/2023\"}, {\"assignorName\": \"ZAKIROVA, MARGARITA\", \"executionDate\":
+        \"09/05/2023\"}, {\"assignorName\": \"PANAGE, SOMMER\", \"executionDate\":
+        \"09/12/2023\"}, {\"assignorName\": \"SEYMOUR, ERIC T.\", \"executionDate\":
+        \"09/25/2023\"}], \"assignees\": [\"APPLE INC.\"], \"noOfProperties\": 2,
+        \"properties\": [{\"sequenceNumber\": 1, \"applicationNumber\": \"63502236\",
+        \"fillingDate\": \"05/15/2023\", \"internationalRegistrationNumber\": null,
+        \"inventionTitle\": \"METHOD OF ACTIVATING AND MANAGING DUAL USER INTERFACE
+        OPERATING MODES\", \"inventors\": \"Christopher FLEIZACH B., Christopher ROMNEY
+        J., Clare KASEMSET T., Joaquim LOBO FERREIRA DA SILVA Goncalo, Eric Seymour
+        T., Isis Ram\xEDrez Moleres Naomi, Allen Whearry, Adrian Chambers T., Margarita
+        Zakirova, Sommer Panage\", \"issueDate\": \"\", \"patentNumber\": null, \"pctNumber\":
+        null, \"pctNumber17\": null, \"publicationNumber\": null, \"publicationDate\":
+        \"\", \"internationalPublicationDate\": \"\"}, {\"sequenceNumber\": 2, \"applicationNumber\":
+        \"18204840\", \"fillingDate\": \"06/01/2023\", \"internationalRegistrationNumber\":
+        null, \"inventionTitle\": \"METHOD OF ACTIVATING AND MANAGING DUAL USER INTERFACE
+        OPERATING MODES\", \"inventors\": \"Christopher FLEIZACH B., Christopher ROMNEY
+        J., Clare KASEMSET T., Joaquim LOBO FERREIRA DA SILVA Goncalo, Eric SEYMOUR
+        T., Isis RAM\xCDREZ MOLERES Naomi, Allen WHEARRY JR., Adrian CHAMBERS T.,
+        Margarita ZAKIROVA, Sommer PANAGE\", \"issueDate\": \"\", \"patentNumber\":
+        null, \"pctNumber\": null, \"pctNumber17\": null, \"publicationNumber\": \"20230393865\",
+        \"publicationDate\": \"12/07/2023\", \"internationalPublicationDate\": \"\"}]},
+        {\"reelNumber\": 51996, \"frameNumber\": 978, \"assignorExecutionDate\": \"11/30/2019\",
+        \"correspondentName\": \"STERNE KESSLER GOLDSTEIN & FOX\", \"assignors\":
+        [{\"assignorName\": \"INTEL CORPORATION\", \"executionDate\": \"11/30/2019\"}],
+        \"assignees\": [\"APPLE INC.\"], \"noOfProperties\": 1, \"properties\": [{\"sequenceNumber\":
+        1, \"applicationNumber\": \"16139443\", \"fillingDate\": \"09/24/2018\", \"internationalRegistrationNumber\":
+        null, \"inventionTitle\": \"POWER HEADROOM OF GRANTLESS UPLINK\", \"inventors\":
+        \"Huaning NIU, Wenting CHANG, Jeongho JEON, Anthony LEE, Seau LIM S.\", \"issueDate\":
+        \"04/21/2020\", \"patentNumber\": \"10631256\", \"pctNumber\": null, \"pctNumber17\":
+        null, \"publicationNumber\": \"20190045459\", \"publicationDate\": \"02/07/2019\",
+        \"internationalPublicationDate\": \"\"}]}, {\"reelNumber\": 35620, \"frameNumber\":
+        696, \"assignorExecutionDate\": \"03/24/2015\", \"correspondentName\": \"PARKER
+        L. KUHL\", \"assignors\": [{\"assignorName\": \"YANG, LAWRENCE Y.\", \"executionDate\":
+        \"03/24/2015\"}], \"assignees\": [\"APPLE INC.\"], \"noOfProperties\": 1,
+        \"properties\": [{\"sequenceNumber\": 1, \"applicationNumber\": \"62129947\",
+        \"fillingDate\": \"03/08/2015\", \"internationalRegistrationNumber\": null,
+        \"inventionTitle\": \"DEVICE CONFIGURATION USER INTERFACE\", \"inventors\":
+        \"Lawrence YANG Y.\", \"issueDate\": \"\", \"patentNumber\": null, \"pctNumber\":
+        null, \"pctNumber17\": null, \"publicationNumber\": null, \"publicationDate\":
+        \"\", \"internationalPublicationDate\": \"\"}]}, {\"reelNumber\": 31716, \"frameNumber\":
+        512, \"assignorExecutionDate\": \"12/02/2013\", \"correspondentName\": \"KILPATRICK
+        TOWNSEND & STOCKTON\", \"assignors\": [{\"assignorName\": \"CHAUDHRI, IMRAN\",
+        \"executionDate\": \"11/04/2013\"}, {\"assignorName\": \"BACHAMAN, WILLIAM\",
+        \"executionDate\": \"12/02/2013\"}], \"assignees\": [\"APPLE INC.\"], \"noOfProperties\":
+        1, \"properties\": [{\"sequenceNumber\": 1, \"applicationNumber\": \"13843153\",
+        \"fillingDate\": \"03/15/2013\", \"internationalRegistrationNumber\": null,
+        \"inventionTitle\": \"CREATING MULTIPLE RECOMMENDED STATIONS BASED ON PURCHASE
+        HISTORY\", \"inventors\": \"William Bachman, Imran Chaudhri\", \"issueDate\":
+        \"\", \"patentNumber\": null, \"pctNumber\": null, \"pctNumber17\": null,
+        \"publicationNumber\": \"20140115467\", \"publicationDate\": \"04/24/2014\",
+        \"internationalPublicationDate\": \"\"}]}]}]"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=exportPublicData_20260422_194434.json
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:34 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 f1c3219e4eddb69c5dee8aea1c2473f2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - PWM7UbIfcg3jdo5w6bZhvMd0zqd6xJlRgKjquDQq97Q861W7k6l0kw==
+      X-Amz-Cf-Pop:
+      - IAH50-P4
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,266 +1,316 @@
-"""Async client for the USPTO Patent Assignment Search API.
-
-This API provides access to patent assignment records from August 1980 to present.
-It returns XML responses in Solr format.
-
-Note: For assignment data via the USPTO Open Data Portal (ODP), use
-`ip_tools.uspto_odp.UsptoOdpClient.get_assignment()` instead.
-This client uses the legacy Assignment Search API which provides
-broader search capabilities including patent number and assignee searches.
-
-API Documentation:
-    https://assignment.uspto.gov/patent/index.html#/patent/search
-"""
+"""USPTO Assignment Center API client."""
 
 from __future__ import annotations
 
-import logging
-import re
-from datetime import datetime
-from typing import Self
+from typing import Any
 
-import httpx
-from lxml import etree  # type: ignore[import]
+from law_tools_core.base_client import BaseAsyncClient
 
-from .models import AssignmentParty, AssignmentRecord
-
-logger = logging.getLogger(__name__)
+from .models import AssignmentRecord, AssignmentSearchResponse
 
 
-def _clean_patent_number(number: str) -> str:
-    """Clean a patent number for API queries."""
-    cleaned = re.sub(r"[^0-9A-Za-z]", "", number)
-    if cleaned.upper().startswith("US"):
-        cleaned = cleaned[2:]
-    return cleaned
+class AssignmentCenterClient(BaseAsyncClient):
+    """Async client for the USPTO Assignment Center API.
 
-
-class UsptoAssignmentsClient:
-    """Async client for the USPTO Patent Assignment Search API.
-
-    This client queries the legacy Assignment Search API which provides
-    rich search capabilities for patent assignments.
+    Provides programmatic access to patent assignment records, supporting
+    searches by assignee name, assignor name, patent number, application
+    number, and other criteria.
 
     Example:
-        async with UsptoAssignmentsClient() as client:
-            records = await client.assignments_for_patent("US8830957")
-            for record in records:
-                print(f"{record.conveyance_text}: {record.assignees}")
+        async with AssignmentCenterClient() as client:
+            # Search by assignee
+            results = await client.search_by_assignee("Apple Inc", limit=100)
+            for record in results:
+                print(f"{record.reel_frame}: {record.assignees}")
+
+            # Search by assignor
+            results = await client.search_by_assignor("Samsung", limit=50)
+
+            # Search by patent number
+            results = await client.search_by_patent("10000000")
     """
 
-    BASE_URL = "https://assignment-api.uspto.gov"
-
-    def __init__(
-        self,
-        *,
-        base_url: str | None = None,
-        timeout: float = 30.0,
-    ) -> None:
-        """Initialize the client.
-
-        Args:
-            base_url: Override the default API base URL.
-            timeout: Request timeout in seconds.
-        """
-        self._base_url = base_url or self.BASE_URL
-        self._timeout = timeout
-        self._client: httpx.AsyncClient | None = None
-
-    async def _get_client(self) -> httpx.AsyncClient:
-        """Get or create the HTTP client."""
-        if self._client is None:
-            self._client = httpx.AsyncClient(
-                base_url=self._base_url,
-                timeout=self._timeout,
-            )
-        return self._client
-
-    async def close(self) -> None:
-        """Close the HTTP client."""
-        if self._client is not None:
-            await self._client.aclose()
-            self._client = None
-
-    async def __aenter__(self) -> Self:
-        return self
-
-    async def __aexit__(self, *exc: object) -> None:
-        await self.close()
-
-    async def assignments_for_patent(
-        self,
-        patent_number: str,
-        *,
-        rows: int = 200,
-    ) -> list[AssignmentRecord]:
-        """Get assignment records for a patent number.
-
-        Args:
-            patent_number: The patent number (e.g., "US8830957", "8830957").
-            rows: Maximum number of records to return.
-
-        Returns:
-            List of AssignmentRecord objects.
-        """
-        cleaned = _clean_patent_number(patent_number)
-        return await self._search(
-            query=cleaned,
-            filter_type="PatentNumber",
-            rows=rows,
-        )
-
-    async def assignments_for_application(
-        self,
-        application_number: str,
-        *,
-        rows: int = 200,
-    ) -> list[AssignmentRecord]:
-        """Get assignment records for an application number.
-
-        Args:
-            application_number: The application number (e.g., "16123456").
-            rows: Maximum number of records to return.
-
-        Returns:
-            List of AssignmentRecord objects.
-        """
-        cleaned = _clean_patent_number(application_number)
-        return await self._search(
-            query=cleaned,
-            filter_type="ApplicationNumber",
-            rows=rows,
-        )
-
-    async def assignments_for_assignee(
-        self,
-        assignee_name: str,
-        *,
-        rows: int = 200,
-    ) -> list[AssignmentRecord]:
-        """Get assignment records for an assignee name.
-
-        Args:
-            assignee_name: The assignee name to search.
-            rows: Maximum number of records to return.
-
-        Returns:
-            List of AssignmentRecord objects.
-        """
-        return await self._search(
-            query=assignee_name,
-            filter_type="PatentAssigneeName",
-            rows=rows,
-        )
+    DEFAULT_BASE_URL = "https://assignmentcenter.uspto.gov"
+    CACHE_NAME = "uspto_assignments"
 
     async def _search(
         self,
-        query: str,
-        filter_type: str,
-        rows: int,
+        criteria: list[dict[str, str]],
+        *,
+        start_row: int = 1,
+        limit: int = 100,
+        use_pagination: bool = True,
+        timeout: float = 60.0,
+    ) -> AssignmentSearchResponse:
+        """Execute a search against the Assignment Center API.
+
+        Args:
+            criteria: List of search criteria dicts with 'property' and 'searchBy' keys.
+            start_row: Starting row for pagination (1-based).
+            limit: Maximum number of results (max 1000 per request).
+            use_pagination: Whether to add pagination parameters. Some search types
+                (e.g., patent number) don't work well with pagination params.
+            timeout: Request timeout in seconds.
+
+        Returns:
+            AssignmentSearchResponse containing matching records.
+        """
+        # Build search criteria
+        search_criteria = list(criteria)
+
+        # Add pagination params (some searches don't work with these)
+        if use_pagination and start_row > 1:
+            search_criteria.append({"property": str(start_row), "searchBy": "startRow"})
+            search_criteria.append({"property": str(start_row + limit - 1), "searchBy": "endRow"})
+        search_criteria.append({"property": str(min(limit, 1000)), "searchBy": "rowsNeeded"})
+
+        payload = {"searchCriteria": search_criteria}
+
+        http_response = await self._request(
+            "POST",
+            "/ipas/search/api/v2/public/patent/exportPublicPatentData",
+            json=payload,
+            context="Assignment search",
+            timeout=timeout,
+        )
+        response_data: Any = http_response.json()
+
+        # API returns a list with one element containing searchCriteria and data
+        if isinstance(response_data, list) and len(response_data) > 0:
+            return AssignmentSearchResponse.model_validate(response_data[0])
+        return AssignmentSearchResponse.model_validate({"searchCriteria": [], "data": []})
+
+    async def search_by_assignee(
+        self,
+        assignee_name: str,
+        *,
+        start_row: int = 1,
+        limit: int = 100,
+        timeout: float = 60.0,
     ) -> list[AssignmentRecord]:
-        """Execute a search query."""
-        client = await self._get_client()
-        logger.debug("Searching assignments: query=%s filter=%s rows=%d", query, filter_type, rows)
-        response = await client.get(
-            "/patent/lookup",
-            params={
-                "query": query,
-                "filter": filter_type,
-                "rows": rows,
-            },
-        )
-        response.raise_for_status()
-        records = self._parse_response(response.content)
-        logger.debug("Assignment search returned %d records", len(records))
-        return records
+        """Search assignments by assignee name.
 
-    def _parse_response(self, content: bytes) -> list[AssignmentRecord]:
-        """Parse XML response into AssignmentRecord objects."""
-        if not content:
-            logger.debug("Empty response body, returning no records")
-            return []
+        Args:
+            assignee_name: Name of the assignee (company or person receiving rights).
+            start_row: Starting row for pagination (1-based).
+            limit: Maximum number of results (max 1000 per request).
+            timeout: Request timeout in seconds.
 
-        root = etree.fromstring(content)
-        result_node = root.find("result[@name='response']")
-        if result_node is None:
-            return []
+        Returns:
+            List of AssignmentRecord objects matching the search.
+        """
+        criteria = [{"property": assignee_name, "searchBy": "assigneeName"}]
+        response = await self._search(criteria, start_row=start_row, limit=limit, timeout=timeout)
+        return response.data
 
-        records: list[AssignmentRecord] = []
-        for doc in result_node.findall("doc"):
-            records.append(self._parse_document(doc))
-        return records
+    async def search_by_assignor(
+        self,
+        assignor_name: str,
+        *,
+        start_row: int = 1,
+        limit: int = 100,
+        timeout: float = 60.0,
+    ) -> list[AssignmentRecord]:
+        """Search assignments by assignor name.
 
-    def _parse_document(self, doc: etree._Element) -> AssignmentRecord:
-        """Parse a single document element."""
-        return AssignmentRecord(
-            reel_number=self._string_value(doc, "reelNo"),
-            frame_number=self._string_value(doc, "frameNo"),
-            conveyance_text=self._string_value(doc, "conveyanceText"),
-            recorded_date=self._date_value(doc, "recordedDate"),
-            execution_date=self._date_value(doc, "patAssignorEarliestExDate"),
-            assignors=self._collect_parties(doc, prefix="patAssignor"),
-            assignees=self._collect_parties(doc, prefix="patAssignee"),
-            patent_numbers=self._array_strings(doc, "patNum"),
-            application_numbers=self._array_strings(doc, "applNum"),
-        )
+        Args:
+            assignor_name: Name of the assignor (company or person transferring rights).
+            start_row: Starting row for pagination (1-based).
+            limit: Maximum number of results (max 1000 per request).
+            timeout: Request timeout in seconds.
 
-    @staticmethod
-    def _string_value(doc: etree._Element, field: str) -> str | None:
-        """Extract a string value from a document."""
-        node = doc.find(f"str[@name='{field}']")
-        if node is not None and node.text and node.text.strip().upper() != "NULL":
-            return node.text.strip()
-        return None
+        Returns:
+            List of AssignmentRecord objects matching the search.
+        """
+        criteria = [{"property": assignor_name, "searchBy": "assignorName"}]
+        response = await self._search(criteria, start_row=start_row, limit=limit, timeout=timeout)
+        return response.data
 
-    @staticmethod
-    def _date_value(doc: etree._Element, field: str) -> datetime | None:
-        """Extract a date value from a document."""
-        node = doc.find(f"date[@name='{field}']")
-        if node is None or not node.text:
-            return None
-        text = node.text.strip()
-        if not text or text.upper() == "NULL":
-            return None
-        try:
-            return datetime.fromisoformat(text.replace("Z", "+00:00"))
-        except ValueError:
-            return None
+    async def search_by_patent(
+        self,
+        patent_number: str,
+        *,
+        limit: int = 100,
+        timeout: float = 60.0,
+    ) -> list[AssignmentRecord]:
+        """Search assignments by patent number.
 
-    def _array_strings(self, doc: etree._Element, field: str) -> list[str]:
-        """Extract an array of strings from a document."""
-        node = doc.find(f"arr[@name='{field}']")
-        if node is None:
-            return []
-        values: list[str] = []
-        for child in node.findall("str"):
-            if child.text and child.text.strip().upper() != "NULL":
-                values.append(child.text.strip())
-        return values
+        Args:
+            patent_number: USPTO patent number.
+            limit: Maximum number of results.
+            timeout: Request timeout in seconds.
 
-    def _collect_parties(self, doc: etree._Element, *, prefix: str) -> list[AssignmentParty]:
-        """Collect party (assignor/assignee) information."""
-        names = self._array_strings(doc, f"{prefix}Name")
-        addresses1 = self._array_strings(doc, f"{prefix}Address1")
-        addresses2 = self._array_strings(doc, f"{prefix}Address2")
-        cities = self._array_strings(doc, f"{prefix}City")
-        states = self._array_strings(doc, f"{prefix}State")
-        countries = self._array_strings(doc, f"{prefix}CountryName")
-        postcodes = self._array_strings(doc, f"{prefix}Postcode")
+        Returns:
+            List of AssignmentRecord objects for the patent.
+        """
+        criteria = [{"property": patent_number, "searchBy": "patentNumber"}]
+        # Patent searches don't work well with pagination params
+        response = await self._search(criteria, limit=limit, use_pagination=False, timeout=timeout)
+        return response.data
 
-        parties: list[AssignmentParty] = []
-        for idx, name in enumerate(names):
-            parties.append(
-                AssignmentParty(
-                    name=name,
-                    address1=addresses1[idx] if idx < len(addresses1) else None,
-                    address2=addresses2[idx] if idx < len(addresses2) else None,
-                    city=cities[idx] if idx < len(cities) else None,
-                    state=states[idx] if idx < len(states) else None,
-                    country=countries[idx] if idx < len(countries) else None,
-                    postcode=postcodes[idx] if idx < len(postcodes) else None,
-                )
+    async def search_by_application(
+        self,
+        application_number: str,
+        *,
+        limit: int = 100,
+        timeout: float = 60.0,
+    ) -> list[AssignmentRecord]:
+        """Search assignments by application number.
+
+        Args:
+            application_number: USPTO application number.
+            limit: Maximum number of results.
+            timeout: Request timeout in seconds.
+
+        Returns:
+            List of AssignmentRecord objects for the application.
+        """
+        criteria = [{"property": application_number, "searchBy": "applicationNumber"}]
+        # Application searches don't work well with pagination params
+        response = await self._search(criteria, limit=limit, use_pagination=False, timeout=timeout)
+        return response.data
+
+    async def search_by_reel_frame(
+        self,
+        reel_frame: str,
+        *,
+        timeout: float = 60.0,
+    ) -> list[AssignmentRecord]:
+        """Search assignments by reel/frame number.
+
+        Args:
+            reel_frame: Reel/frame identifier (e.g., "52614/446").
+            timeout: Request timeout in seconds.
+
+        Returns:
+            List of AssignmentRecord objects (typically one) for the reel/frame.
+        """
+        criteria = [{"property": reel_frame, "searchBy": "reelFrame"}]
+        # Reel/frame searches don't work well with pagination params
+        response = await self._search(criteria, limit=10, use_pagination=False, timeout=timeout)
+        return response.data
+
+    async def search(
+        self,
+        *,
+        assignee_name: str | None = None,
+        assignor_name: str | None = None,
+        patent_number: str | None = None,
+        application_number: str | None = None,
+        reel_frame: str | None = None,
+        correspondent_name: str | None = None,
+        pct_number: str | None = None,
+        publication_number: str | None = None,
+        start_execution_date: str | None = None,
+        end_execution_date: str | None = None,
+        start_row: int = 1,
+        limit: int = 100,
+        timeout: float = 60.0,
+    ) -> list[AssignmentRecord]:
+        """Search assignments with multiple criteria.
+
+        At least one search criterion must be provided.
+
+        Args:
+            assignee_name: Filter by assignee name.
+            assignor_name: Filter by assignor name.
+            patent_number: Filter by patent number.
+            application_number: Filter by application number.
+            reel_frame: Filter by reel/frame (e.g., "52614/446").
+            correspondent_name: Filter by correspondent/attorney name.
+            pct_number: Filter by PCT application number.
+            publication_number: Filter by publication number.
+            start_execution_date: Filter by execution date start (MM/YYYY).
+            end_execution_date: Filter by execution date end (MM/YYYY).
+            start_row: Starting row for pagination (1-based).
+            limit: Maximum number of results (max 1000 per request).
+            timeout: Request timeout in seconds.
+
+        Returns:
+            List of AssignmentRecord objects matching all criteria.
+
+        Raises:
+            ValueError: If no search criteria provided.
+        """
+        criteria: list[dict[str, str]] = []
+
+        field_map = {
+            "assigneeName": assignee_name,
+            "assignorName": assignor_name,
+            "patentNumber": patent_number,
+            "applicationNumber": application_number,
+            "reelFrame": reel_frame,
+            "correspondentName": correspondent_name,
+            "pctNumber": pct_number,
+            "publicationNumber": publication_number,
+            "startExecutionDate": start_execution_date,
+            "endExecutionDate": end_execution_date,
+        }
+
+        for search_by, value in field_map.items():
+            if value is not None:
+                criteria.append({"property": value, "searchBy": search_by})
+
+        if not criteria:
+            raise ValueError("At least one search criterion must be provided")
+
+        response = await self._search(criteria, start_row=start_row, limit=limit, timeout=timeout)
+        return response.data
+
+    async def search_all(
+        self,
+        *,
+        assignee_name: str | None = None,
+        assignor_name: str | None = None,
+        batch_size: int = 1000,
+        max_results: int | None = None,
+        timeout: float = 60.0,
+        **kwargs: Any,
+    ) -> list[AssignmentRecord]:
+        """Search and paginate through all matching assignments.
+
+        Automatically handles pagination to retrieve all matching records.
+
+        Args:
+            assignee_name: Filter by assignee name.
+            assignor_name: Filter by assignor name.
+            batch_size: Number of records per request (max 1000).
+            max_results: Maximum total results to return (None for unlimited).
+            timeout: Request timeout per batch.
+            **kwargs: Additional search criteria passed to search().
+
+        Returns:
+            List of all AssignmentRecord objects matching the criteria.
+        """
+        all_records: list[AssignmentRecord] = []
+        start_row = 1
+        batch_size = min(batch_size, 1000)
+
+        while True:
+            records = await self.search(
+                assignee_name=assignee_name,
+                assignor_name=assignor_name,
+                start_row=start_row,
+                limit=batch_size,
+                timeout=timeout,
+                **kwargs,
             )
-        return parties
+
+            if not records:
+                break
+
+            all_records.extend(records)
+
+            if max_results and len(all_records) >= max_results:
+                all_records = all_records[:max_results]
+                break
+
+            if len(records) < batch_size:
+                break
+
+            start_row += batch_size
+
+        return all_records
 
 
-__all__ = ["UsptoAssignmentsClient"]
+__all__ = ["AssignmentCenterClient"]

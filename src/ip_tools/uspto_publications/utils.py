@@ -114,11 +114,20 @@ class ClaimsParser:
 PUB_NUMBER_CLEAN_RE = re.compile(r"[^A-Z0-9]")
 
 
+_KIND_CODE_RE = re.compile(r"[A-Z]\d$")
+
+
 def normalize_publication_number(value: str | None) -> str:
-    """Normalize a publication number for PN searches."""
+    """Normalize a publication number for PPUBS PN searches.
+
+    Strips country prefix, kind codes, and non-alphanumeric characters.
+    PPUBS does not index kind codes in the .pn. field, so including them
+    causes zero results.
+    """
     if not value:
         return ""
     cleaned = PUB_NUMBER_CLEAN_RE.sub("", value.upper())
     if cleaned.startswith("US"):
         cleaned = cleaned[2:]
+    cleaned = _KIND_CODE_RE.sub("", cleaned)
     return cleaned

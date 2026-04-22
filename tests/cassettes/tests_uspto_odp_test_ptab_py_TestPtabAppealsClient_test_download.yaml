@@ -1,0 +1,60 @@
+interactions:
+- request:
+    body: '{"q":"appellantData.technologyCenterNumber:2800","pagination":{"limit":5},"format":"json"}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '90'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search/download
+  response:
+    body:
+      string: '{"patentTrialData":[{"decisionData":{"decisionTypeCategory":"Decision","appealOutcomeCategory":"Reversed","decisionIssueDate":"2026-04-21"},"appealNumber":"2026000736","appellantData":{"realPartyInInterestName":"Raytheon
+        Company","technologyCenterNumber":"2800","applicationNumberText":"18354034"}},{"decisionData":{"decisionTypeCategory":"Decision","appealOutcomeCategory":"Affirmed","decisionIssueDate":"2026-04-14"},"appealNumber":"2026000613","appellantData":{"realPartyInInterestName":"SEMICONDUCTOR
+        COMPONENTS INDUSTRIES, LLC","technologyCenterNumber":"2800","applicationNumberText":"17664482"}},{"decisionData":{"decisionTypeCategory":"Decision","appealOutcomeCategory":"Reversed","decisionIssueDate":"2026-03-27"},"appealNumber":"2026000549","appellantData":{"realPartyInInterestName":"Infineon
+        Technologies AG","technologyCenterNumber":"2800","applicationNumberText":"17840971"}},{"decisionData":{"decisionTypeCategory":"Decision","appealOutcomeCategory":"Affirmed","decisionIssueDate":"2026-04-09"},"appealNumber":"2026000568","appellantData":{"realPartyInInterestName":"LONE
+        GULL HOLDINGS, LTD.","technologyCenterNumber":"2800","applicationNumberText":"18411802"}},{"decisionData":{"decisionTypeCategory":"Decision","appealOutcomeCategory":"Reversed","decisionIssueDate":"2026-04-16"},"appealNumber":"2026000525","appellantData":{"realPartyInInterestName":"Infineon
+        Technologies AG","technologyCenterNumber":"2800","applicationNumberText":"16868314"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1464'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:43 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e9252b-50311761318ad3415448562d;Parent=2dddff46ca72667b;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      content-disposition:
+      - attachment;filename="results-2026-04-22T19-44-43.json"
+      x-amz-apigw-id:
+      - cPK-4EHZoAMFaYg=
+      x-amzn-RequestId:
+      - a84505bb-c0b5-4c08-874c-d6df4ab7a53c
+    status:
+      code: 200
+      message: OK
+version: 1

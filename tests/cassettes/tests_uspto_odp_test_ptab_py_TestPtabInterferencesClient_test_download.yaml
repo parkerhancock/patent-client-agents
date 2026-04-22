@@ -1,0 +1,72 @@
+interactions:
+- request:
+    body: '{"q":"*","pagination":{"limit":5},"format":"json"}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '50'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/interferences/decisions/search/download
+  response:
+    body:
+      string: "{\"interferenceData\":[{\"interferenceNumber\":\"106130\",\"interferenceMetaData\":{\"interferenceStyleName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v. PATRICE
+        CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS\"},\"documentData\":{\"decisionTypeCategory\":\"Decision\",\"decisionIssueDate\":\"2025-01-28\",\"interferenceOutcomeCategory\":\"Judgment\"},\"seniorPartyData\":{\"realPartyInInterestName\":\"UNIVERSIT\xC9
+        CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT\",\"applicationNumberText\":\"14443829\"}},{\"interferenceNumber\":\"106130\",\"interferenceMetaData\":{\"interferenceStyleName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v. PATRICE
+        CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS\"},\"documentData\":{\"decisionTypeCategory\":\"Motion
+        Decision\",\"decisionIssueDate\":\"2025-01-28\",\"interferenceOutcomeCategory\":\"Decision
+        on Motion\"},\"seniorPartyData\":{\"realPartyInInterestName\":\"UNIVERSIT\xC9
+        CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT\",\"applicationNumberText\":\"14443829\"}},{\"interferenceNumber\":\"106125\",\"interferenceMetaData\":{\"interferenceStyleName\":\"ULRICH
+        SPECK and BRUNO SCHELLER v. BRIAN L. BATES, ANTHONY O. RAGHEB, JOSEPH M. STEWART
+        IV, WILLIAM J. BOURDEAU, BRIAN D. CHOULES, JAMES D. PURDY, and NEAL E. FEARNOT\"},\"documentData\":{\"decisionTypeCategory\":\"Decision\",\"decisionIssueDate\":\"2024-07-30\",\"interferenceOutcomeCategory\":\"Decision
+        after Court Decision\"},\"seniorPartyData\":{\"realPartyInInterestName\":\"BRIAN
+        L. BATES, ANTHONY O. RAGHEB, JOSEPH M. STEWART IV, WILLIAM J. BOURDEAU, BRIAN
+        D. CHOULES, JAMES D. PURDY, and NEAL E. FEARNOT\",\"applicationNumberText\":\"14013591\"}},{\"interferenceNumber\":\"106138\",\"interferenceMetaData\":{\"interferenceStyleName\":\"SMA
+        Solar Technology AG  v. SolarEdge Technologies Ltd. \"},\"documentData\":{\"decisionTypeCategory\":\"Decision\",\"decisionIssueDate\":\"2023-09-21\",\"interferenceOutcomeCategory\":\"Judgment\"},\"seniorPartyData\":{\"realPartyInInterestName\":\"SolarEdge
+        Technologies Ltd. \",\"applicationNumberText\":\"16243612\"}},{\"interferenceNumber\":\"106135\",\"interferenceMetaData\":{\"interferenceStyleName\":\"SHL
+        MEDICAL AG v. SANOFI-AVENTIS DEUTSCHLAND GMBH\"},\"documentData\":{\"decisionTypeCategory\":\"Decision\",\"decisionIssueDate\":\"2023-08-22\",\"interferenceOutcomeCategory\":\"Judgment\"},\"seniorPartyData\":{\"realPartyInInterestName\":\"SHL
+        MEDICAL AG \",\"applicationNumberText\":\"15809398\"}}]}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2358'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:49 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92531-0618cf3240b4971a6522d67b;Parent=5370473e36ce72c3;Sampled=0;Lineage=1:5fd89aa0:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      content-disposition:
+      - attachment;filename="results-2026-04-22T19-44-49.json"
+      x-amz-apigw-id:
+      - cPK_uFFPIAMFV_g=
+      x-amzn-RequestId:
+      - 9ebd5270-2c09-430e-b943-a7ce6d33aa49
+    status:
+      code: 200
+      message: OK
+version: 1

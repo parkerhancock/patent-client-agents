@@ -12,7 +12,7 @@ ODP_SWAGGER_RESOURCE_URI = "resource://uspto-odp/swagger"
 
 def _read_text_resource(relative_path: str) -> str:
     return (
-        importlib_resources.files("ip_tools.uspto_odp")
+        importlib_resources.files("uspto_odp_mcp")
         .joinpath(relative_path)
         .read_text(encoding="utf-8")
     )
@@ -37,18 +37,28 @@ conventions documented in the ODP Swagger definition.
 - Each endpoint enforces its own maximum facet count (usually ≤10); extra entries are ignored.
 
 ### Filters
-1. **String-based endpoints** (applications, bulk data) expect lists of strings, for example:
-   - `filters=["applicationType:UTILITY","entityStatusCategory:SMALL"]`
-   - `rangeFilters=["filingDate:[2020-01-01 TO 2020-12-31]"]`
-2. **JSON filter endpoints** (petitions) expect objects that mirror the Swagger schema:
-   ```json
-   {"fieldName": "petitionDecisionStatusCategory", "values": ["GRANTED", "DENIED"]}
-   ```
-   Range filters use `{"fieldName": "...", "from": "...", "to": "..."}`.
+All ODP POST search endpoints (applications, petitions, PTAB) use **JSON-object filters**:
+
+```json
+{
+  "filters": [
+    {"name": "applicationMetaData.publicationCategoryBag", "value": ["Granted/Issued"]}
+  ],
+  "rangeFilters": [
+    {"field": "applicationMetaData.filingDate", "valueFrom": "2022-01-01", "valueTo": "2023-12-31"}
+  ]
+}
+```
+
+**Important:** Application fields require the `applicationMetaData.` prefix in filter/sort names.
+
+Common filter values for `applicationMetaData.publicationCategoryBag`:
+- `"Granted/Issued"` — granted patents
+- `"Pre-Grant Publications - PGPub"` — published applications
 
 ### Sorting & pagination
-- `sort` accepts `field asc` / `field desc` (or an array of `{fieldName, sortOrder}` objects in JSON
-  endpoints). Multi-field sorts are comma-separated.
+- `sort` accepts an array of objects:
+  `[{"field": "applicationMetaData.filingDate", "order": "Desc"}]`.
 - `limit` defaults to 25; most services cap it at 200.
 - `offset` is zero-based.
 
@@ -72,27 +82,30 @@ ODP_FIELD_CATALOG = """\
 Use these field names in `fields`, `facets`, `filters`, `rangeFilters`, or `sort`. The listings
 focus on the patent datasets exposed by our MCPs; consult the Swagger spec for exhaustive schemas.
 
-### Patent Applications API (`/iaf/application/v1/application`)
+### Patent Applications API (`/api/v1/patent/applications/search`)
 | Field | Type | Notes |
 | --- | --- | --- |
 | `applicationNumberText` | string | Primary identifier (e.g., `16999555`). |
-| `applicationTypeCategory` | string | `UTILITY`, `DESIGN`, `PLANT`, `REAEX`. |
-| `filingDate` | date | ISO `YYYY-MM-DD`. |
-| `grantDate` | date | Empty for unpublished. |
-| `publicationNumber` | string | Linked PGPub when present. |
-| `patentNumber` | string | Linked grant when present. |
-| `applicationStatusCode` | string | Numeric status code (e.g., `150`). |
-| `applicationStatusDescriptionText` | string | Human-readable status. |
-| `examinerName` / `examinerArtUnitNumber` | string | Primary examiner info. |
-| `customerNumber` | string | Correspondence customer number. |
-| `inventionTitle` | string | Title text; use `fields` to include due to size. |
-| `firstInventorToFileIndicator` | boolean | FITF flag. |
-| `entityStatusCategory` | string | `REGULAR`, `SMALL`, `MICRO`. |
-| `continuityBag.parentContinuityBag[].applicationNumberText` | array | Use dot notation |
-|  |  | for parent/child filters. |
+| `applicationMetaData.applicationTypeCategory` | string | `UTILITY`, `DESIGN`, `PLANT`, `REAEX`. |
+| `applicationMetaData.filingDate` | date | ISO `YYYY-MM-DD`. |
+| `applicationMetaData.grantDate` | date | Empty for unpublished. |
+| `applicationMetaData.publicationNumber` | string | Linked PGPub when present. |
+| `applicationMetaData.patentNumber` | string | Linked grant when present. |
+| `applicationMetaData.applicationStatusDescriptionText` | string | Human-readable status. |
+| `applicationMetaData.publicationCategoryBag` | string | `"Granted/Issued"`, `"PGPub"`. |
+| `applicationMetaData.cpcClassificationBag` | string | CPC classification codes. |
+| `applicationMetaData.examinerName` | string | Primary examiner. |
+| `applicationMetaData.examinerArtUnitNumber` | string | Art unit number. |
+| `applicationMetaData.customerNumber` | string | Correspondence customer number. |
+| `applicationMetaData.inventionTitle` | string | Title text. |
+| `applicationMetaData.firstInventorToFileIndicator` | boolean | FITF flag. |
+| `applicationMetaData.entityStatusData.businessEntityStatusCategory` | string | Entity size. |
 
-Common facets: `applicationTypeCategory`, `entityStatusCategory`, `examinerArtUnitNumber`,
-`applicationStatusDescriptionText`, `filingYear` (derived facet).
+**Note:** For `filters`, `rangeFilters`, and `sort`, application fields require the
+`applicationMetaData.` prefix. In query (`q`), fields can be used with or without the prefix.
+
+Common facets: `applicationMetaData.applicationTypeCategory`,
+`applicationMetaData.publicationCategoryBag`, `applicationMetaData.examinerArtUnitNumber`.
 
 ### Bulk Data (BDSS) API (`/bdss-datastore/v1/datasets`)
 | Field | Type | Notes |
@@ -194,10 +207,14 @@ Common facets: `decisionData.appealOutcomeCategory`, `decisionData.decisionTypeC
 
 Common facets: `decisionDocumentData.decisionTypeCategory`.
 
-**Tip:** When filtering on nested arrays (e.g., `continuityBag.parentContinuityBag`), flatten the
-path with dots and specify the value, for example:
-`filters=["continuityBag.parentContinuityBag.applicationNumberText:14141414"]`.
+**Tip:** All ODP search endpoints use JSON-object filters. For application searches, use the
+`applicationMetaData.` prefix for nested fields:
+```json
+{"name": "applicationMetaData.publicationCategoryBag", "value": ["Granted/Issued"]}
+```
 """
+
+ODP_STATUS_CODES = _read_text_resource("status_codes.md")
 
 
 def get_odp_swagger_spec() -> str:

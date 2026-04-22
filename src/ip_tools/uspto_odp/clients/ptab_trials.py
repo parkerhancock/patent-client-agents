@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import logging
 from collections.abc import Sequence
+from pathlib import Path
 from typing import Any
 
 from ..models import (
@@ -12,8 +12,6 @@ from ..models import (
     PtabTrialProceedingResponse,
 )
 from .base import PaginationModel, SearchPayload, UsptoOdpBaseClient, _prune
-
-logger = logging.getLogger(__name__)
 
 
 class PtabTrialsClient(UsptoOdpBaseClient):
@@ -54,16 +52,13 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialProceedingResponse with matching proceedings.
         """
-        logger.debug(
-            "Searching trial proceedings: query=%s limit=%d offset=%d", query, limit, offset
-        )
         payload = SearchPayload(
             q=query,
             fields=list(fields) if fields else None,
             facets=list(facets) if facets else None,
             filters=list(filters) if filters else None,
             range_filters=list(range_filters) if range_filters else None,
-            sort=sort,
+            sort=[sort] if sort else None,
             pagination=PaginationModel(offset=offset, limit=limit),
         ).model_dump_pruned()
 
@@ -85,13 +80,12 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialProceedingResponse with the proceeding data.
         """
-        from ip_tools.core.exceptions import ValidationError
+        from law_tools_core.exceptions import ValidationError
 
         trial_number = trial_number.strip()
         if not trial_number:
             raise ValidationError("trial_number is required")
 
-        logger.debug("Getting trial proceeding %s", trial_number)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/proceedings/{trial_number}",
@@ -190,14 +184,13 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDecisionResponse with matching decisions.
         """
-        logger.debug("Searching trial decisions: query=%s limit=%d offset=%d", query, limit, offset)
         payload = SearchPayload(
             q=query,
             fields=list(fields) if fields else None,
             facets=list(facets) if facets else None,
             filters=list(filters) if filters else None,
             range_filters=list(range_filters) if range_filters else None,
-            sort=sort,
+            sort=[sort] if sort else None,
             pagination=PaginationModel(offset=offset, limit=limit),
         ).model_dump_pruned()
 
@@ -219,13 +212,12 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDecisionResponse with the decision data.
         """
-        from ip_tools.core.exceptions import ValidationError
+        from law_tools_core.exceptions import ValidationError
 
         document_identifier = document_identifier.strip()
         if not document_identifier:
             raise ValidationError("document_identifier is required")
 
-        logger.debug("Getting trial decision %s", document_identifier)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/decisions/{document_identifier}",
@@ -244,13 +236,12 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDecisionResponse with all decisions for the trial.
         """
-        from ip_tools.core.exceptions import ValidationError
+        from law_tools_core.exceptions import ValidationError
 
         trial_number = trial_number.strip()
         if not trial_number:
             raise ValidationError("trial_number is required")
 
-        logger.debug("Getting decisions for trial %s", trial_number)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/{trial_number}/decisions",
@@ -333,14 +324,13 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDocumentResponse with matching documents.
         """
-        logger.debug("Searching trial documents: query=%s limit=%d offset=%d", query, limit, offset)
         payload = SearchPayload(
             q=query,
             fields=list(fields) if fields else None,
             facets=list(facets) if facets else None,
             filters=list(filters) if filters else None,
             range_filters=list(range_filters) if range_filters else None,
-            sort=sort,
+            sort=[sort] if sort else None,
             pagination=PaginationModel(offset=offset, limit=limit),
         ).model_dump_pruned()
 
@@ -362,13 +352,12 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDocumentResponse with the document data.
         """
-        from ip_tools.core.exceptions import ValidationError
+        from law_tools_core.exceptions import ValidationError
 
         document_identifier = document_identifier.strip()
         if not document_identifier:
             raise ValidationError("document_identifier is required")
 
-        logger.debug("Getting trial document %s", document_identifier)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/documents/{document_identifier}",
@@ -387,13 +376,12 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDocumentResponse with all documents for the trial.
         """
-        from ip_tools.core.exceptions import ValidationError
+        from law_tools_core.exceptions import ValidationError
 
         trial_number = trial_number.strip()
         if not trial_number:
             raise ValidationError("trial_number is required")
 
-        logger.debug("Getting documents for trial %s", trial_number)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/trials/{trial_number}/documents",
@@ -444,6 +432,62 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         )
         data.setdefault("patentTrialDocumentDataBag", [])
         return PtabTrialDocumentResponse(**data)
+
+    # =========================================================================
+    # Document PDF Download
+    # =========================================================================
+
+    async def download_document_pdf(
+        self,
+        document_identifier: str,
+        *,
+        output_path: str | Path | None = None,
+    ) -> bytes:
+        """Download a PTAB trial document PDF by its document identifier.
+
+        The document identifier is available from :pyattr:`PtabDocumentData.documentIdentifier`
+        or :pyattr:`PtabDocumentData.fileDownloadURI`.
+
+        Args:
+            document_identifier: The document identifier (e.g., from
+                ``get_documents_by_trial``).  If a full URI is provided
+                (starting with ``/``), it is used directly; otherwise
+                the standard download path is constructed.
+            output_path: Optional path to save the PDF. Parent directories
+                are created if needed.
+
+        Returns:
+            The PDF content as bytes.
+
+        Example:
+            >>> async with PtabTrialsClient() as client:
+            ...     docs = await client.get_documents_by_trial("IPR2024-00001")
+            ...     for doc_data in docs.patentTrialDocumentDataBag or []:
+            ...         pdf = await client.download_document_pdf(
+            ...             doc_data.documentIdentifier,
+            ...             output_path=f"ptab_{doc_data.documentIdentifier}.pdf",
+            ...         )
+        """
+        if document_identifier.startswith("/"):
+            path = document_identifier
+        else:
+            path = f"/api/v1/patent/trials/documents/{document_identifier}/download"
+
+        response = await self._request(
+            "GET",
+            path,
+            context=f"download PTAB document {document_identifier}",
+            timeout=120.0,
+        )
+
+        content = response.content
+
+        if output_path is not None:
+            output = Path(output_path)
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_bytes(content)
+
+        return content
 
 
 __all__ = ["PtabTrialsClient"]

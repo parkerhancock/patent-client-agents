@@ -3,7 +3,6 @@ from __future__ import annotations
 import asyncio
 import base64
 import json
-import logging
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -11,13 +10,11 @@ from typing import Any
 import httpx
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from ip_tools.core.exceptions import ApiError, ServerError
+from law_tools_core.exceptions import ApiError
 
 from .models import PublicSearchBiblioPage, PublicSearchDocument
 from .transformers import convert_biblio_page, convert_document_payload
 from .utils import normalize_publication_number
-
-logger = logging.getLogger(__name__)
 
 _HEADERS = {
     "X-Requested-With": "XMLHttpRequest",
@@ -90,7 +87,6 @@ class PublicSearchClient:
             await self._refresh_session()
 
     async def _refresh_session(self) -> None:
-        logger.debug("Refreshing USPTO Public Search session")
         self._client.cookies = httpx.Cookies()
         await self._client.get(f"{_BASE_URL}/pubwebapp/")
         response = await self._client.post(
@@ -104,7 +100,6 @@ class PublicSearchClient:
         self._access_token = response.headers.get("X-Access-Token")
         if self._access_token:
             self._client.headers["X-Access-Token"] = self._access_token
-        logger.debug("Session established, case_id=%s", self._case_id)
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=15))
     async def _request(self, method: str, url: str, **kwargs: Any) -> httpx.Response:
@@ -146,9 +141,6 @@ class PublicSearchClient:
         data["query"]["britishEquivalents"] = british_equivalents
         return data
 
-    _POLL_MAX_ATTEMPTS: int = 30
-    _POLL_INTERVAL: float = 2.0
-
     async def search_biblio(
         self,
         *,
@@ -163,7 +155,6 @@ class PublicSearchClient:
     ) -> PublicSearchBiblioPage:
         if not query:
             raise ValueError("query must be provided")
-        logger.debug("search_biblio query=%r start=%d limit=%d", query, start, limit)
         await self._ensure_session()
         payload = self._build_search_payload(
             query,
@@ -194,7 +185,6 @@ class PublicSearchClient:
         return PublicSearchBiblioPage.model_validate(converted)
 
     async def get_document(self, guid: str, *, source: str) -> PublicSearchDocument:
-        logger.debug("get_document guid=%s source=%s", guid, source)
         await self._ensure_session()
         url = f"{_BASE_URL}/api/patents/highlight/{guid}"
         params = {"queryId": 1, "source": source, "includeSections": True, "uniqueId": None}
@@ -229,8 +219,7 @@ class PublicSearchClient:
         return response.text.strip().strip('"')
 
     async def _poll_print_job(self, job_id: str) -> str:
-        logger.debug("Polling print job %s (max %d attempts)", job_id, self._POLL_MAX_ATTEMPTS)
-        for attempt in range(1, self._POLL_MAX_ATTEMPTS + 1):
+        while True:
             response = await self._request(
                 "POST",
                 f"{_BASE_URL}/api/print/print-process",
@@ -239,19 +228,9 @@ class PublicSearchClient:
             response.raise_for_status()
             data = response.json()
             status = data[0].get("printStatus")
-            logger.debug(
-                "Print job %s attempt %d/%d status=%s",
-                job_id,
-                attempt,
-                self._POLL_MAX_ATTEMPTS,
-                status,
-            )
             if status == "COMPLETED":
                 return data[0]["pdfName"]
-            await asyncio.sleep(self._POLL_INTERVAL)
-        raise ServerError(
-            f"Print job {job_id} did not complete within {self._POLL_MAX_ATTEMPTS} attempts"
-        )
+            await asyncio.sleep(1)
 
     async def _download_pdf_bytes(self, pdf_name: str) -> bytes:
         request = self._client.build_request(
@@ -269,7 +248,6 @@ class PublicSearchClient:
             await response.aclose()
 
     async def download_pdf(self, document: PublicSearchDocument) -> bytes:
-        logger.debug("download_pdf for document guid=%s", document.guid)
         await self._ensure_session()
         job_id = await self._request_save(document)
         pdf_name = await self._poll_print_job(job_id)

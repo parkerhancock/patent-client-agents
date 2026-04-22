@@ -1,0 +1,64 @@
+interactions:
+- request:
+    body: '{"q":"*","pagination":{"offset":0,"limit":1}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '45'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search
+  response:
+    body:
+      string: '{"count":163252,"requestIdentifier":"7d563c9f-a18b-4b34-8362-9d6f51c0114e","patentAppealDataBag":[{"appealNumber":"2026001340","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-04-15T22:12:11","appealMetaData":{"appealFilingDate":"2026-03-02","appealLastModifiedDateTime":"2026-04-15T15:11:31","appealLastModifiedDate":"2026-04-15","applicationTypeCategory":"REEXAM","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001340/2026001340.zip"},"appellantData":{"applicationNumberText":"90019181","counselName":"Devlin
+        Law Firm","groupArtUnitNumber":"3991","inventorName":"7080330","realPartyInInterestName":"ADVANCED
+        MICRO DEVICES , INC.                   (PATENT OWNER) et al.","patentOwnerName":"7080330
+        et al","technologyCenterNumber":"3900"},"documentData":{"documentFilingDate":"2026-04-15","documentIdentifier":"a45ce091-7922-4548-828b-01629ae332c0","documentName":"Decision_2026001340_04-15-2026.pdf","documentSizeQuantity":368262,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\n\n\nUNITED STATES PATENT AND TRADEMARK
+        OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited States Patent and Trademark
+        Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O. Box 1450\nAlexandria, Virginia
+        22313-1450\nwww.uspto.gov\n\nAPPLICATION NO. FILING DATE FIRST NAMED INVENTOR
+        ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n90/019,181 03/24/2023 7080330 081318-1343
+        8618\n\n134688 7590 04/15/2026\n\nDevlin Law Firm\n1526 Gilpin Ave.\nWilmington,
+        DE 19806\n\nEXAMINER\n\nENGLE, PATRICIA","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/001340/a45ce091-7922-4548-828b-01629ae332c0.pdf"},"decisionData":{"appealOutcomeCategory":"Affirmed","statuteAndRuleBag":["37
+        CFR 41.50(f)","37 CFR 1.132","37 CFR 41.50","35 USC 134"],"decisionIssueDate":"2026-04-15","decisionTypeCategory":"Decision","issueTypeBag":["103"]}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1911'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:49 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92531-6d55db4d0a621b2e31782da8;Parent=7235fb6767091279;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK_zGS8IAMFsqA=
+      x-amzn-RequestId:
+      - 7d563c9f-a18b-4b34-8362-9d6f51c0114e
+    status:
+      code: 200
+      message: OK
+version: 1

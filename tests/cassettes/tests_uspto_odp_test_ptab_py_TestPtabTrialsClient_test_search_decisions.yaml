@@ -1,0 +1,141 @@
+interactions:
+- request:
+    body: '{"q":"decisionData.decisionTypeCategory:Decision","pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '86'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/decisions/search
+  response:
+    body:
+      string: "{\"count\":20384,\"requestIdentifier\":\"c9aba442-a8de-43fa-b362-d2acfceba528\",\"patentTrialDocumentDataBag\":[{\"trialNumber\":\"IPR2022-01002\",\"lastModifiedDateTime\":\"2026-04-22T13:16:20\",\"trialDocumentCategory\":\"Decision\",\"trialMetaData\":{\"institutionDecisionDate\":\"2022-12-05\",\"accordedFilingDate\":\"2022-05-23\",\"petitionFilingDate\":\"2022-05-23\",\"trialLastModifiedDateTime\":\"2026-04-22T08:38:16\",\"trialLastModifiedDate\":\"2026-04-22\",\"terminationDate\":\"2026-04-22\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"latestDecisionDate\":\"2026-04-22\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"14709428\",\"counselName\":\"Weatherwax,
+        Kennethet al\",\"grantDate\":\"2015-11-17\",\"groupArtUnitNumber\":\"2476\",\"inventorName\":\"Sanjay
+        K. Rao et al\",\"realPartyInInterestName\":\"Smart Mobile Technologies LLC\",\"patentNumber\":\"9191083\",\"technologyCenterNumber\":\"2400\"},\"regularPetitionerData\":{\"counselName\":\"Renner,
+        Walteret al\",\"realPartyInInterestName\":\"Samsung Electronics Co., Ltd.
+        et al.\"},\"documentData\":{\"documentCategory\":\"FINAL\",\"documentFilingDate\":\"2026-04-22\",\"documentIdentifier\":\"171322794\",\"documentName\":\"FWD
+        on Remand Final to Mail IPR2022-01002.pdf\",\"documentNumber\":52,\"documentSizeQuantity\":618504,\"documentTitleText\":\"JUDGMENT
+        Final Written Decision Determining All Challenged Claims Unpatentable 35 U.S.C.
+        \xA7 318(a)\",\"documentTypeDescriptionText\":\"Final Written Decision: On
+        remand from the CAFC\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2022/01002/171322794.pdf\",\"filingPartyCategory\":\"BOARD\",\"documentOCRText\":\"Trials@uspto.gov
+        Paper 52 \\n571-272-7822 Date: April 22, 2026 \\n\\n \\n\\nUNITED STATES PATENT
+        AND TRADEMARK OFFICE \\n \\n\\nBEFORE THE PATENT TRIAL AND APPEAL BOARD \\n
+        \\n\\nAPPLE INC., SAMSUNG ELECTRONICS CO., LTD., AND \\nSAMSUNG ELECRTORNICS
+        AMERICA, INC., \\n\\nPetitioner, \\n\\nv. \\n\\nSMART MOBILE TECHNOLOGIES
+        LLC, \\nPatent Owner. \\n\\n \\n\\nIPR2022-01002 \\nPatent 9,191,083 B1  \\n\\n
+        \\n\\nBefore JAMESON LEE, KEVIN F. TURNER, and  \\nHYUN J. JUNG, Administrative
+        Patent Judges. \\n \\nLEE, Administrative Patent Judge.  \\n\\nJUDGMENT \\nFinal
+        Written\"},\"decisionData\":{\"statuteAndRuleBag\":[\"37 CFR 42.100\",\"37
+        CFR 42.73\",\"35 USC 311\",\"35 USC 318\"],\"decisionIssueDate\":\"2026-04-22\",\"decisionTypeCategory\":\"Decision\",\"issueTypeBag\":[\"102\",\"103\"],\"trialOutcomeCategory\":\"Final
+        Written Decision On CAFC Remand\"}},{\"trialNumber\":\"IPR2023-00042\",\"lastModifiedDateTime\":\"2026-04-20T15:11:11\",\"trialDocumentCategory\":\"Decision\",\"trialMetaData\":{\"institutionDecisionDate\":\"2024-04-23\",\"accordedFilingDate\":\"2022-10-26\",\"petitionFilingDate\":\"2022-10-12\",\"trialLastModifiedDateTime\":\"2026-04-20T09:52:26\",\"trialLastModifiedDate\":\"2026-04-20\",\"terminationDate\":\"2024-04-23\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"latestDecisionDate\":\"2026-04-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"16574524\",\"counselName\":\"Harmer,
+        Josephet al\",\"grantDate\":\"2021-05-11\",\"groupArtUnitNumber\":\"2611\",\"inventorName\":\"Steven
+        Cvetko, Ph.D et al\",\"realPartyInInterestName\":\"Novarad Corp.\",\"patentNumber\":\"11004271\",\"technologyCenterNumber\":\"2600\"},\"regularPetitionerData\":{\"counselName\":\"Freeman,
+        Kiaet al\",\"realPartyInInterestName\":\"Medivis, Inc.\"},\"documentData\":{\"documentCategory\":\"OTHER\",\"documentFilingDate\":\"2026-04-20\",\"documentIdentifier\":\"171321480\",\"documentName\":\"IPR2023-00042
+        mandate.pdf\",\"documentNumber\":39,\"documentSizeQuantity\":114142,\"documentTitleText\":\"Other:
+        Fed Circuit mandate\",\"documentTypeDescriptionText\":\"Other: Fed Circuit
+        mandate\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2023/00042/171321480.pdf\",\"filingPartyCategory\":\"BOARD\",\"documentOCRText\":\"United
+        States Court of Appeals  \\nfor the Federal Circuit \\n\\n______________________
+        \\n\\nMEDIVIS, INC.,  \\nAppellant \\n\\n  \\nv. \\n\\n  \\nNOVARAD CORP.,
+        \ \\n\\nAppellee \\n______________________ \\n\\n2024-1794 \\n______________________
+        \\n\\nAppeal from the United States Patent and Trademark \\nOffice, Patent
+        Trial and Appeal Board in No. IPR2023-\\n00042.  \\n\\n______________________
+        \\n\\nMANDATE \\n______________________ \\n\\nIn accordance with the judgment
+        of this Court, entered \\nMarch 3, 2026, and pursuant to Rule 41 of the Federal
+        \\nRules\"},\"decisionData\":{\"decisionIssueDate\":\"2026-04-20\",\"decisionTypeCategory\":\"Decision\",\"trialOutcomeCategory\":\"Remanded-in
+        part\"}},{\"trialNumber\":\"PGR2024-00053\",\"lastModifiedDateTime\":\"2026-04-20T21:11:42\",\"trialDocumentCategory\":\"Decision\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-04-21\",\"accordedFilingDate\":\"2024-09-27\",\"petitionFilingDate\":\"2024-09-27\",\"trialLastModifiedDateTime\":\"2026-04-20T13:26:07\",\"trialLastModifiedDate\":\"2026-04-20\",\"terminationDate\":\"2026-04-20\",\"trialStatusCategory\":\"Final
+        Written Decision\",\"latestDecisionDate\":\"2026-04-20\",\"trialTypeCode\":\"PGR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17681367\",\"counselName\":\"KELLAR,
+        KYLEet al\",\"grantDate\":\"2024-01-02\",\"groupArtUnitNumber\":\"3785\",\"inventorName\":\"Philip
+        C. Danby et al\",\"realPartyInInterestName\":\"Hyperice IP Subco, LLC et al.\",\"patentNumber\":\"11857482\",\"technologyCenterNumber\":\"3700\"},\"regularPetitionerData\":{\"counselName\":\"Fink,
+        Williamet al\",\"realPartyInInterestName\":\"Therabody, Inc.\"},\"documentData\":{\"documentCategory\":\"FINAL\",\"documentFilingDate\":\"2026-04-20\",\"documentIdentifier\":\"171321516\",\"documentName\":\"PGR2024-00053
+        FWD circ.pdf\",\"documentNumber\":45,\"documentSizeQuantity\":464170,\"documentTitleText\":\"JUDGMENT
+        Final Written Decision Determining No Challenged Claims Unpatentable 35 U.S.C.
+        \xA7 328(a)\",\"documentTypeDescriptionText\":\"Final Written Decision:  original\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/PGR/2024/00053/171321516.pdf\",\"filingPartyCategory\":\"BOARD\",\"documentOCRText\":\"Trials@uspto.gov
+        Paper 45 \\n571-272-7822 Date: April 20, 2026 \\n\\n \\n \\n\\nUNITED STATES
+        PATENT AND TRADEMARK OFFICE \\n \\n\\nBEFORE THE PATENT TRIAL AND APPEAL BOARD
+        \\n \\n\\n \\nTHERABODY, INC., \\n\\nPetitioner, \\n\\nv. \\n\\nHYPERICE IP
+        SUBCO, LLC, \\nPatent Owner. \\n\\n \\n\\nPGR2024-00053 \\nPatent 11,857,482
+        B1 \\n\\n \\n\\n \\nBefore JEFFREY N. FREDMAN, RICHARD H. MARSCHALL, and \\nALYSSA
+        A. FINAMORE, Administrative Patent Judges. \\n \\nFINAMORE, Administrative
+        Patent Judge.  \\n \\n \\n \\n\\nJUDGMENT \\nFinal Written Decision \\n\\nDetermining
+        No Challenged\"},\"decisionData\":{\"statuteAndRuleBag\":[\"35 USC 328\",\"37
+        CFR 42.200\"],\"decisionIssueDate\":\"2026-04-20\",\"decisionTypeCategory\":\"Decision\",\"issueTypeBag\":[\"112\",\"102\",\"103\"],\"trialOutcomeCategory\":\"Final
+        Written Decision\"}},{\"trialNumber\":\"IPR2025-01189\",\"lastModifiedDateTime\":\"2026-04-17T19:05:55\",\"trialDocumentCategory\":\"Decision\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-12-23\",\"accordedFilingDate\":\"2025-07-11\",\"petitionFilingDate\":\"2025-07-11\",\"trialLastModifiedDateTime\":\"2026-04-17T09:47:44\",\"trialLastModifiedDate\":\"2026-04-17\",\"terminationDate\":\"2026-04-17\",\"trialStatusCategory\":\"Terminated-Settled\",\"latestDecisionDate\":\"2026-04-17\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"16859945\",\"counselName\":\"Carpenter,
+        Brianet al\",\"grantDate\":\"2022-06-21\",\"groupArtUnitNumber\":\"2467\",\"inventorName\":\"HSIN-HSI
+        TSAI et al\",\"realPartyInInterestName\":\"Hannibal IP LLC\",\"patentNumber\":\"11368911\",\"technologyCenterNumber\":\"2400\"},\"regularPetitionerData\":{\"counselName\":\"Goldberg,
+        Joshuaet al\",\"realPartyInInterestName\":\"Samsung Electronics Co., Ltd.
+        et al.\"},\"documentData\":{\"documentCategory\":\"TERMINATE\",\"documentFilingDate\":\"2026-04-17\",\"documentIdentifier\":\"171321206\",\"documentName\":\"IPR2025-01189
+        Post. Inst. Termination Order Mail.pdf\",\"documentNumber\":32,\"documentSizeQuantity\":106991,\"documentTitleText\":\"TERMINATION
+        Due to Settlement After Institution of Trial 35 U.S.C. \xA7 317; 37 C.F.R.
+        \xA7 42.74\",\"documentTypeDescriptionText\":\"Termination Decision:  Post-DI
+        Settlement\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01189/171321206.pdf\",\"filingPartyCategory\":\"BOARD\",\"documentOCRText\":\"Trials@uspto.gov
+        \                           Paper 32 \\n571.272.7822              Entered:
+        April 17, 2026 \\n\\n \\n\\n \\n \\n \\n\\nUNITED STATES PATENT AND TRADEMARK
+        OFFICE \\n____________ \\n\\n \\nBEFORE THE PATENT TRIAL AND APPEAL BOARD
+        \\n\\n____________ \\n \\n\\nSAMSUNG ELECTRONICS CO., LTD., and  \\nSAMSUNG
+        ELECTRONICS AMERICA, INC., \\n\\nPetitioner, \\n \\n\\nv. \\n \\n\\nHANNIBAL
+        IP LLC, \\nPatent Owner. \\n____________ \\n\\n \\nIPR2025-01187 (Patent 11,057,896
+        B2)  \\nIPR2025-01188 (Patent 11,272,535 B2)  \\nIPR2025-01189 (Patent 11,368,911
+        B2)  \\nIPR2025\"},\"decisionData\":{\"statuteAndRuleBag\":[\"37 CFR 42.74\",\"35
+        USC 318\",\"35 USC 317\",\"PER CURIAM\",\"37 CFR 42.72\"],\"decisionIssueDate\":\"2026-04-17\",\"decisionTypeCategory\":\"Decision\",\"trialOutcomeCategory\":\"Settled
+        After Institution\"}},{\"trialNumber\":\"IPR2025-01188\",\"lastModifiedDateTime\":\"2026-04-17T19:05:55\",\"trialDocumentCategory\":\"Decision\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-12-23\",\"accordedFilingDate\":\"2025-07-11\",\"petitionFilingDate\":\"2025-07-11\",\"trialLastModifiedDateTime\":\"2026-04-17T09:46:46\",\"trialLastModifiedDate\":\"2026-04-17\",\"terminationDate\":\"2026-04-17\",\"trialStatusCategory\":\"Terminated-Settled\",\"latestDecisionDate\":\"2026-04-17\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"16737787\",\"counselName\":\"Carpenter,
+        Brianet al\",\"grantDate\":\"2022-03-08\",\"groupArtUnitNumber\":\"2415\",\"inventorName\":\"HUNG-CHEN
+        CHEN et al\",\"realPartyInInterestName\":\"Hannibal IP LLC\",\"patentNumber\":\"11272535\",\"technologyCenterNumber\":\"2400\"},\"regularPetitionerData\":{\"counselName\":\"Goldberg,
+        Joshuaet al\",\"realPartyInInterestName\":\"Samsung Electronics Co., Ltd.
+        et al.\"},\"documentData\":{\"documentCategory\":\"TERMINATE\",\"documentFilingDate\":\"2026-04-17\",\"documentIdentifier\":\"171321204\",\"documentName\":\"IPR2025-01188
+        Post. Inst. Termination Order Mail.pdf\",\"documentNumber\":27,\"documentSizeQuantity\":106902,\"documentTitleText\":\"TERMINATION
+        Due to Settlement After Institution of Trial 35 U.S.C. \xA7 317; 37 C.F.R.
+        \xA7 42.74\",\"documentTypeDescriptionText\":\"Termination Decision:  Post-DI
+        Settlement\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01188/171321204.pdf\",\"filingPartyCategory\":\"BOARD\",\"documentOCRText\":\"Trials@uspto.gov
+        \                           Paper 27 \\n571.272.7822              Entered:
+        April 17, 2026 \\n\\n \\n\\n \\n \\n \\n\\nUNITED STATES PATENT AND TRADEMARK
+        OFFICE \\n____________ \\n\\n \\nBEFORE THE PATENT TRIAL AND APPEAL BOARD
+        \\n\\n____________ \\n \\n\\nSAMSUNG ELECTRONICS CO., LTD., and  \\nSAMSUNG
+        ELECTRONICS AMERICA, INC., \\n\\nPetitioner, \\n \\n\\nv. \\n \\n\\nHANNIBAL
+        IP LLC, \\nPatent Owner. \\n____________ \\n\\n \\nIPR2025-01187 (Patent 11,057,896
+        B2)  \\nIPR2025-01188 (Patent 11,272,535 B2)  \\nIPR2025-01189 (Patent 11,368,911
+        B2)  \\nIPR2025\"},\"decisionData\":{\"statuteAndRuleBag\":[\"37 CFR 42.74\",\"35
+        USC 318\",\"35 USC 317\",\"PER CURIAM\",\"37 CFR 42.72\"],\"decisionIssueDate\":\"2026-04-17\",\"decisionTypeCategory\":\"Decision\",\"trialOutcomeCategory\":\"Settled
+        After Institution\"}}]}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '10898'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:37 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92525-47adbe58586b70bb32d2e834;Parent=59e992a9e7d42227;Sampled=0;Lineage=1:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK96FQpIAMFWgw=
+      x-amzn-RequestId:
+      - c9aba442-a8de-43fa-b362-d2acfceba528
+    status:
+      code: 200
+      message: OK
+version: 1

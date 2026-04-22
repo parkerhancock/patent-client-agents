@@ -1,1 +1,1 @@
-"""Tests for USPTO Assignments module."""
+"""Tests for USPTO assignments module."""

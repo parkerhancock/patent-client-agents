@@ -1,0 +1,108 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"Apple","searchBy":"assigneeName"},{"property":"5","searchBy":"rowsNeeded"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '108'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/patent/exportPublicPatentData
+  response:
+    body:
+      string: '[{"searchCriteria": [{"property": "Apple", "searchBy": "assignee_name"},
+        {"property": "5", "searchBy": "rowsNeeded"}], "data": [{"reelNumber": 28735,
+        "frameNumber": 667, "assignorExecutionDate": "05/11/2012", "correspondentName":
+        "MEYERTONS HOOD KIVLIN KOWERT & GOETZEL", "assignors": [{"assignorName": "ROCKSTAR
+        BIDCO, LP", "executionDate": "05/11/2012"}], "assignees": ["APPLE"], "noOfProperties":
+        1, "properties": [{"sequenceNumber": 1, "applicationNumber": "10477023", "fillingDate":
+        "11/05/2003", "internationalRegistrationNumber": null, "inventionTitle": "SYSTEM
+        AND METHOD FOR MESSAGE REDIRECTION BETWEEN MOBILE TELECOMMUNICATION NETWORKS
+        WITH DIFFERENT RADIO ACCESS TECHNOLOGIES", "inventors": "Thierry Lucidarme,
+        Pierre Lescuyer", "issueDate": "10/17/2006", "patentNumber": "7123910", "pctNumber":
+        null, "pctNumber17": null, "publicationNumber": "20040147262", "publicationDate":
+        "07/29/2004", "internationalPublicationDate": ""}]}, {"reelNumber": 28668,
+        "frameNumber": 117, "assignorExecutionDate": "05/11/2012", "correspondentName":
+        "MEYERTONS HOOD KIVLIN KOWERT & GOETZEL", "assignors": [{"assignorName": "ROCKSTAR
+        BIDCO, LP", "executionDate": "05/11/2012"}], "assignees": ["APPLE"], "noOfProperties":
+        1, "properties": [{"sequenceNumber": 1, "applicationNumber": "09722338", "fillingDate":
+        "11/28/2000", "internationalRegistrationNumber": null, "inventionTitle": "DYNAMIC
+        AUTOMATIC RETRANSMISSION REQUEST IN WIRELESS ACCESS NETWORKS", "inventors":
+        "Hang Zhang, Mo-Han Fong, Shalini Periyalwar S.", "issueDate": "04/18/2006",
+        "patentNumber": "7032153", "pctNumber": null, "pctNumber17": null, "publicationNumber":
+        null, "publicationDate": "", "internationalPublicationDate": ""}]}, {"reelNumber":
+        28663, "frameNumber": 399, "assignorExecutionDate": "05/11/2012", "correspondentName":
+        "MEYERTONS HOOD KIVLIN KOWERT & GOETZEL", "assignors": [{"assignorName": "ROCKSTAR
+        BIDCO, LP", "executionDate": "05/11/2012"}], "assignees": ["APPLE"], "noOfProperties":
+        1, "properties": [{"sequenceNumber": 1, "applicationNumber": "08589573", "fillingDate":
+        "01/22/1996", "internationalRegistrationNumber": null, "inventionTitle": "TELEPHONE
+        SYSTEM FOR MOBILE WIRELESS TELEPHONE SERVICES ", "inventors": "CHRISTOPHER
+        REECE S., HOWARD SANDLER M., WILLIAM NEWMAN J., KEITH O''NEILL D., DAVID PRIEST
+        M., PAUL ROW M., JORGE DEL RIO A., JASTINDER JAWANDA S.", "issueDate": "03/31/1998",
+        "patentNumber": "5734984", "pctNumber": null, "pctNumber17": null, "publicationNumber":
+        null, "publicationDate": "", "internationalPublicationDate": ""}]}, {"reelNumber":
+        28667, "frameNumber": 677, "assignorExecutionDate": "05/11/2012", "correspondentName":
+        "MEYERTONS HOOD KIVLIN KOWERT & GOETZEL", "assignors": [{"assignorName": "ROCKSTAR
+        BIDCO, LP", "executionDate": "05/11/2012"}], "assignees": ["APPLE"], "noOfProperties":
+        1, "properties": [{"sequenceNumber": 1, "applicationNumber": "08731035", "fillingDate":
+        "10/10/1996", "internationalRegistrationNumber": null, "inventionTitle": "RADIO
+        FREQUENCY NOISE REDUCTION ARRANGEMENT ", "inventors": "CHRISTOPHER REED J.",
+        "issueDate": "10/20/1998", "patentNumber": "5826181", "pctNumber": null, "pctNumber17":
+        null, "publicationNumber": null, "publicationDate": "", "internationalPublicationDate":
+        ""}]}, {"reelNumber": 28667, "frameNumber": 503, "assignorExecutionDate":
+        "05/11/2012", "correspondentName": "MEYERTONS HOOD KIVLIN KOWERT & GOETZEL",
+        "assignors": [{"assignorName": "ROCKSTAR BIDCO, LP", "executionDate": "05/11/2012"}],
+        "assignees": ["APPLE"], "noOfProperties": 1, "properties": [{"sequenceNumber":
+        1, "applicationNumber": "08689533", "fillingDate": "08/08/1996", "internationalRegistrationNumber":
+        null, "inventionTitle": "MICROCELL FREQUENCY PLANNING ", "inventors": "YUQIANG
+        TANG, Z.K. CHENG, MAN-FAI NG", "issueDate": "10/13/1998", "patentNumber":
+        "5822698", "pctNumber": null, "pctNumber17": null, "publicationNumber": null,
+        "publicationDate": "", "internationalPublicationDate": ""}]}]}]'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=exportPublicData_20260422_194436.json
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:36 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 18c4177dcd2e30ddfeba6f785bac77e6.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - kbiy0gftlWE8qylBXn7ISK5Z8Is-3FzddNyUQgm7ZmYay09--l4v8A==
+      X-Amz-Cf-Pop:
+      - IAH50-P4
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

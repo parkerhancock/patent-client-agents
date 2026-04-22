@@ -229,6 +229,13 @@ def _extract_date_via_dt(root: HtmlElement, pattern: re.Pattern[str]) -> str:
 
 
 def _extract_expiration(root: HtmlElement) -> str:
+    # Semantic ifiExpiration span (most reliable)
+    ifi = root.xpath("//span[@itemprop='ifiExpiration']/text()")
+    if ifi:
+        val = ifi[0].strip()
+        if val:
+            return val
+
     expiry = _extract_date_via_dt(root, re.compile("Adjusted expiration", re.IGNORECASE))
     if expiry:
         return expiry

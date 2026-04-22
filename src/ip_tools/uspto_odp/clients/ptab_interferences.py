@@ -2,14 +2,11 @@
 
 from __future__ import annotations
 
-import logging
 from collections.abc import Sequence
 from typing import Any
 
 from ..models import PtabInterferenceResponse
 from .base import PaginationModel, SearchPayload, UsptoOdpBaseClient, _prune
-
-logger = logging.getLogger(__name__)
 
 
 class PtabInterferencesClient(UsptoOdpBaseClient):
@@ -45,16 +42,13 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         Returns:
             PtabInterferenceResponse with matching interference decisions.
         """
-        logger.debug(
-            "Searching PTAB interferences: query=%s limit=%d offset=%d", query, limit, offset
-        )
         payload = SearchPayload(
             q=query,
             fields=list(fields) if fields else None,
             facets=list(facets) if facets else None,
             filters=list(filters) if filters else None,
             range_filters=list(range_filters) if range_filters else None,
-            sort=sort,
+            sort=[sort] if sort else None,
             pagination=PaginationModel(offset=offset, limit=limit),
         ).model_dump_pruned()
 
@@ -76,13 +70,12 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         Returns:
             PtabInterferenceResponse with the interference decision data.
         """
-        from ip_tools.core.exceptions import ValidationError
+        from law_tools_core.exceptions import ValidationError
 
         document_identifier = document_identifier.strip()
         if not document_identifier:
             raise ValidationError("document_identifier is required")
 
-        logger.debug("Getting interference decision %s", document_identifier)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/interferences/decisions/{document_identifier}",
@@ -101,13 +94,12 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         Returns:
             PtabInterferenceResponse with all decisions for the interference.
         """
-        from ip_tools.core.exceptions import ValidationError
+        from law_tools_core.exceptions import ValidationError
 
         interference_number = interference_number.strip()
         if not interference_number:
             raise ValidationError("interference_number is required")
 
-        logger.debug("Getting decisions for interference %s", interference_number)
         data = await self._request_json(
             "GET",
             f"/api/v1/patent/interferences/{interference_number}/decisions",

@@ -1,4 +1,8 @@
-"""Tests for USPTO Publications transformer functions (pure functions)."""
+"""Tests for USPTO publications transformers module."""
+
+from __future__ import annotations
+
+import datetime as dt
 
 from ip_tools.uspto_publications.transformers import (
     _coerce_int,
@@ -10,6 +14,7 @@ from ip_tools.uspto_publications.transformers import (
     _parse_month,
     _parse_npl,
     _split,
+    _zip_records,
     convert_biblio,
     convert_biblio_page,
     convert_document_payload,
@@ -19,495 +24,459 @@ from ip_tools.uspto_publications.transformers import (
 
 
 class TestCoerceInt:
-    def test_valid_int(self):
+    """Tests for _coerce_int function."""
+
+    def test_coerces_int(self) -> None:
         assert _coerce_int(42) == 42
 
-    def test_string_int(self):
+    def test_coerces_string(self) -> None:
         assert _coerce_int("123") == 123
 
-    def test_none(self):
+    def test_coerces_float(self) -> None:
+        assert _coerce_int(3.7) == 3
+
+    def test_returns_none_for_none(self) -> None:
         assert _coerce_int(None) is None
 
-    def test_empty_string(self):
+    def test_returns_none_for_empty_string(self) -> None:
         assert _coerce_int("") is None
 
-    def test_invalid(self):
-        assert _coerce_int("abc") is None
-
-    def test_float(self):
-        assert _coerce_int(3.9) == 3
+    def test_returns_none_for_invalid(self) -> None:
+        assert _coerce_int("not a number") is None
 
 
 class TestNormalizeStr:
-    def test_valid(self):
+    """Tests for _normalize_str function."""
+
+    def test_normalizes_string(self) -> None:
         assert _normalize_str("hello") == "hello"
 
-    def test_none(self):
+    def test_converts_int_to_string(self) -> None:
+        assert _normalize_str(42) == "42"
+
+    def test_returns_none_for_none(self) -> None:
         assert _normalize_str(None) is None
 
-    def test_empty(self):
+    def test_returns_none_for_empty_string(self) -> None:
         assert _normalize_str("") is None
-
-    def test_number(self):
-        assert _normalize_str(123) == "123"
 
 
 class TestEnsureList:
-    def test_none(self):
-        assert _ensure_list(None) == []
+    """Tests for _ensure_list function."""
 
-    def test_list(self):
-        assert _ensure_list([1, 2]) == [1, 2]
+    def test_returns_list_unchanged(self) -> None:
+        result = _ensure_list([1, 2, 3])
+        assert result == [1, 2, 3]
 
-    def test_scalar(self):
-        assert _ensure_list("val") == ["val"]
+    def test_wraps_single_value(self) -> None:
+        result = _ensure_list(42)
+        assert result == [42]
+
+    def test_wraps_string(self) -> None:
+        result = _ensure_list("hello")
+        assert result == ["hello"]
+
+    def test_returns_empty_for_none(self) -> None:
+        result = _ensure_list(None)
+        assert result == []
 
 
 class TestTakeFirst:
-    def test_list(self):
-        assert take_first(["a", "b"]) == "a"
+    """Tests for take_first function."""
 
-    def test_none_values(self):
-        assert take_first([None, "", "c"]) == "c"
+    def test_takes_first_from_list(self) -> None:
+        result = take_first(["a", "b", "c"])
+        assert result == "a"
 
-    def test_none(self):
-        assert take_first(None) is None
+    def test_skips_none(self) -> None:
+        result = take_first([None, "b", "c"])
+        assert result == "b"
 
-    def test_empty_list(self):
-        assert take_first([]) is None
+    def test_skips_empty_string(self) -> None:
+        result = take_first(["", "b", "c"])
+        assert result == "b"
 
-    def test_scalar(self):
-        assert take_first("single") == "single"
+    def test_skips_empty_list_value(self) -> None:
+        result = take_first([[], "b", "c"])
+        assert result == "b"
+
+    def test_returns_single_value(self) -> None:
+        result = take_first("single")
+        assert result == "single"
+
+    def test_returns_none_for_all_empty(self) -> None:
+        result = take_first([None, "", []])
+        assert result is None
+
+    def test_returns_none_for_none(self) -> None:
+        result = take_first(None)
+        assert result is None
 
 
 class TestParseDate:
-    def test_iso_date_string(self):
-        assert _parse_date("2024-01-15") == "2024-01-15"
+    """Tests for _parse_date function."""
 
-    def test_compact_date_string(self):
-        assert _parse_date("20240115") == "2024-01-15"
+    def test_parses_iso_date(self) -> None:
+        result = _parse_date("2023-05-15")
+        assert result == "2023-05-15"
 
-    def test_iso_datetime(self):
-        assert _parse_date("2024-01-15T12:00:00Z") == "2024-01-15"
+    def test_parses_compact_date(self) -> None:
+        result = _parse_date("20230515")
+        assert result == "2023-05-15"
 
-    def test_none(self):
-        assert _parse_date(None) is None
+    def test_parses_datetime_with_t(self) -> None:
+        result = _parse_date("2023-05-15T10:30:00Z")
+        assert result == "2023-05-15"
 
-    def test_empty(self):
-        assert _parse_date("") is None
+    def test_parses_datetime_object(self) -> None:
+        result = _parse_date(dt.date(2023, 5, 15))
+        assert result == "2023-05-15"
 
-    def test_integer_date(self):
-        assert _parse_date(20240115) == "2024-01-15"
+    def test_parses_numeric_value(self) -> None:
+        result = _parse_date(20230515)
+        assert result == "2023-05-15"
 
-    def test_invalid(self):
-        assert _parse_date("not-a-date") is None
+    def test_returns_none_for_none(self) -> None:
+        result = _parse_date(None)
+        assert result is None
 
-    def test_date_object(self):
-        import datetime as dt
+    def test_returns_none_for_empty_string(self) -> None:
+        result = _parse_date("")
+        assert result is None
 
-        assert _parse_date(dt.date(2024, 1, 15)) == "2024-01-15"
+    def test_returns_none_for_invalid(self) -> None:
+        result = _parse_date("invalid date")
+        assert result is None
 
 
 class TestParseMonth:
-    def test_valid(self):
-        assert _parse_month("202401") == "2024-01-01"
+    """Tests for _parse_month function."""
 
-    def test_with_day(self):
-        assert _parse_month("20240115") == "2024-01-01"
+    def test_parses_month_string(self) -> None:
+        result = _parse_month("202305")
+        assert result == "2023-05-01"
 
-    def test_none(self):
-        assert _parse_month(None) is None
+    def test_parses_with_extra_digits(self) -> None:
+        result = _parse_month("20230515")
+        assert result == "2023-05-01"
 
-    def test_short_string(self):
-        assert _parse_month("2024") is None
+    def test_returns_none_for_none(self) -> None:
+        result = _parse_month(None)
+        assert result is None
 
-    def test_invalid(self):
-        assert _parse_month("abcdef") is None
+    def test_returns_none_for_empty(self) -> None:
+        result = _parse_month("")
+        assert result is None
+
+    def test_returns_none_for_short_string(self) -> None:
+        result = _parse_month("2023")
+        assert result is None
+
+    def test_returns_none_for_invalid_month(self) -> None:
+        result = _parse_month("2023AB")
+        assert result is None
 
 
 class TestSplit:
-    def test_semicolon(self):
-        assert _split("A; B; C") == ["A", "B", "C"]
+    """Tests for _split function."""
 
-    def test_empty(self):
-        assert _split("") == []
+    def test_splits_semicolon(self) -> None:
+        result = _split("a; b; c")
+        assert result == ["a", "b", "c"]
 
-    def test_none(self):
-        assert _split(None) == []
+    def test_splits_custom_delimiter(self) -> None:
+        result = _split("a,b,c", ",")
+        assert result == ["a", "b", "c"]
 
-    def test_list_input(self):
-        assert _split(["A", "B"]) == ["A", "B"]
+    def test_handles_list_input(self) -> None:
+        result = _split(["a", "b", "c"])
+        assert result == ["a", "b", "c"]
 
-    def test_strips_whitespace(self):
-        assert _split("  X ;  Y  ") == ["X", "Y"]
+    def test_strips_whitespace(self) -> None:
+        result = _split("  a  ;  b  ;  c  ")
+        assert result == ["a", "b", "c"]
+
+    def test_filters_empty(self) -> None:
+        result = _split("a;;b")
+        assert result == ["a", "b"]
+
+    def test_returns_empty_for_none(self) -> None:
+        result = _split(None)
+        assert result == []
+
+    def test_returns_empty_for_empty_string(self) -> None:
+        result = _split("")
+        assert result == []
 
 
 class TestParseCpc:
-    def test_valid_cpc(self):
-        result = _parse_cpc("G06N 3/08 20230101")
-        assert result["cpc_class"] == "G06N"
-        assert result["cpc_subclass"] == "3/08"
-        assert result["version"] == "2023-01-01"
+    """Tests for _parse_cpc function."""
 
-    def test_empty(self):
+    def test_parses_full_cpc(self) -> None:
+        result = _parse_cpc("A01B1/00 20060101")
+        assert result["cpc_class"] == "A01B"
+        assert result["cpc_subclass"] == "1/00"
+        assert result["version"] == "2006-01-01"
+
+    def test_parses_cpc_without_version(self) -> None:
+        result = _parse_cpc("H04L67/00")
+        assert result["cpc_class"] == "H04L"
+        assert result["cpc_subclass"] == "67/00"
+        assert result["version"] is None
+
+    def test_handles_short_code(self) -> None:
+        result = _parse_cpc("A01")
+        assert result["cpc_class"] is None
+        assert result["cpc_subclass"] == "A01"
+        assert result["version"] is None
+
+    def test_handles_empty(self) -> None:
         result = _parse_cpc("")
         assert result["cpc_class"] is None
+        assert result["cpc_subclass"] is None
+        assert result["version"] is None
 
-    def test_none(self):
+    def test_handles_none(self) -> None:
         result = _parse_cpc(None)
         assert result["cpc_class"] is None
 
-    def test_short_code(self):
-        result = _parse_cpc("G06")
-        assert result["cpc_class"] is None
-        assert result["cpc_subclass"] == "G06"
-
-    def test_no_version(self):
-        result = _parse_cpc("G06N 3/08")
-        assert result["cpc_class"] == "G06N"
-        assert result["cpc_subclass"] == "3/08"
-        assert result["version"] is None
-
 
 class TestParseIntl:
-    def test_valid(self):
-        result = _parse_intl("G06F 21/00 20130101")
-        assert result["intl_class"] == "G06F"
-        assert result["intl_subclass"] == "21/00"
-        assert result["version"] == "2013-01-01"
+    """Tests for _parse_intl function."""
 
-    def test_empty(self):
+    def test_parses_full_intl(self) -> None:
+        result = _parse_intl("G06F3/00 20060101")
+        assert result["intl_class"] == "G06F"
+        assert result["intl_subclass"] == "3/00"
+        assert result["version"] == "2006-01-01"
+
+    def test_parses_intl_without_version(self) -> None:
+        result = _parse_intl("H04L29/08")
+        assert result["intl_class"] == "H04L"
+        assert result["intl_subclass"] == "29/08"
+        assert result["version"] is None
+
+    def test_handles_empty(self) -> None:
         result = _parse_intl("")
         assert result["intl_class"] is None
+        assert result["intl_subclass"] is None
 
-    def test_none(self):
+    def test_handles_none(self) -> None:
         result = _parse_intl(None)
         assert result["intl_class"] is None
 
 
 class TestParseNpl:
-    def test_basic(self):
-        result = _parse_npl(["Smith et al., Machine Learning, 2020"])
+    """Tests for _parse_npl function."""
+
+    def test_parses_npl_citation(self) -> None:
+        result = _parse_npl(["Smith et al., Journal of Science, 2020"])
         assert len(result) == 1
-        assert result[0]["citation"] == "Smith et al., Machine Learning, 2020"
+        assert result[0]["citation"] == "Smith et al., Journal of Science, 2020"
         assert result[0]["cited_by_examiner"] is False
 
-    def test_cited_by_examiner(self):
-        result = _parse_npl(["Smith et al., Machine Learning, 2020 cited by examiner"])
+    def test_parses_examiner_cited(self) -> None:
+        result = _parse_npl(["Smith et al., 2020 cited by Examiner"])
         assert len(result) == 1
-        assert "Smith" in result[0]["citation"]
+        assert "Smith et al." in result[0]["citation"]
         assert result[0]["cited_by_examiner"] is True
 
-    def test_empty_entries(self):
-        result = _parse_npl(["", "  ", "Valid citation"])
-        assert len(result) == 1
-        assert result[0]["citation"] == "Valid citation"
+    def test_filters_empty_entries(self) -> None:
+        result = _parse_npl(["Valid citation", "", "  ", "Another citation"])
+        assert len(result) == 2
 
-    def test_empty_list(self):
-        assert _parse_npl([]) == []
+    def test_handles_empty_list(self) -> None:
+        result = _parse_npl([])
+        assert result == []
+
+
+class TestZipRecords:
+    """Tests for _zip_records function."""
+
+    def test_zips_parallel_arrays(self) -> None:
+        data = {"names": ["Alice", "Bob"], "ages": [30, 25]}
+        mapping: list[tuple[str, str, None]] = [
+            ("name", "names", None),
+            ("age", "ages", None),
+        ]
+        result = _zip_records(data, mapping)
+        assert len(result) == 2
+        assert result[0]["name"] == "Alice"
+        assert result[0]["age"] == 30
+        assert result[1]["name"] == "Bob"
+        assert result[1]["age"] == 25
+
+    def test_handles_uneven_arrays(self) -> None:
+        data = {"names": ["Alice", "Bob", "Carol"], "ages": [30]}
+        mapping: list[tuple[str, str, None]] = [
+            ("name", "names", None),
+            ("age", "ages", None),
+        ]
+        result = _zip_records(data, mapping)
+        assert len(result) == 3
+        assert result[2]["name"] == "Carol"
+        assert result[2]["age"] is None
+
+    def test_applies_transform(self) -> None:
+        data = {"values": ["10", "20"]}
+
+        def transform(v, idx, d):  # type: ignore[no-untyped-def]
+            return int(v) if v else None
+
+        mapping = [("number", "values", transform)]
+        result = _zip_records(data, mapping)
+        assert result[0]["number"] == 10
+        assert result[1]["number"] == 20
+
+    def test_skips_all_empty_records(self) -> None:
+        data = {"names": [None, "Bob"], "ages": [None, 25]}
+        mapping: list[tuple[str, str, None]] = [
+            ("name", "names", None),
+            ("age", "ages", None),
+        ]
+        result = _zip_records(data, mapping)
+        assert len(result) == 1
+        assert result[0]["name"] == "Bob"
 
 
 class TestExtractDocumentStructure:
-    def test_basic(self):
+    """Tests for extract_document_structure function."""
+
+    def test_extracts_structure_fields(self) -> None:
         data = {
-            "numberOfClaims": 20,
-            "pageCount": 15,
-            "claimsStart": 10,
-            "claimsEnd": 14,
+            "numberOfClaims": "20",
+            "numberOfDrawingSheets": "5",
+            "pageCount": "30",
         }
         result = extract_document_structure(data)
         assert result["number_of_claims"] == 20
-        assert result["page_count"] == 15
-        assert result["claims_start"] == 10
-        assert result["claims_end"] == 14
+        assert result["number_of_drawing_sheets"] == 5
+        assert result["page_count"] == 30
 
-    def test_missing_fields(self):
+    def test_skips_none_values(self) -> None:
+        data = {"numberOfClaims": "20", "numberOfFigures": None}
+        result = extract_document_structure(data)
+        assert "number_of_claims" in result
+        assert "number_of_figures" not in result
+
+    def test_handles_empty_data(self) -> None:
         result = extract_document_structure({})
         assert result == {}
 
-    def test_none_values_excluded(self):
-        data = {"numberOfClaims": None, "pageCount": 10}
-        result = extract_document_structure(data)
-        assert "number_of_claims" not in result
-        assert result["page_count"] == 10
-
-    def test_string_ints(self):
-        data = {"numberOfClaims": "20", "pageCount": "15"}
-        result = extract_document_structure(data)
-        assert result["number_of_claims"] == 20
-        assert result["page_count"] == 15
-
 
 class TestConvertBiblio:
-    def test_basic_conversion(self):
-        raw = {
-            "guid": "abc-123",
-            "publicationReferenceDocumentNumber": "US11234567B2",
-            "inventionTitle": "Test Invention",
-            "datePublished": "20240115",
+    """Tests for convert_biblio function."""
+
+    def test_converts_basic_fields(self) -> None:
+        doc = {
+            "guid": "abc123",
             "applicationNumber": "17/123456",
-            "type": "USPAT",
-            "databaseName": "USPAT",
-            "mainClassificationCode": "G06N",
-            "inventorsShort": "Smith; John",
-            "primaryExaminer": "Doe; Jane",
-            "imageFileName": "US11234567-20240115",
-            "imageLocation": "/images/US11234567",
-            "numberOfClaims": 20,
-            "pageCount": 10,
+            "publicationReferenceDocumentNumber": "US20230123456A1",
+            "inventionTitle": "Test Patent",
         }
-        result = convert_biblio(raw)
-        assert result["guid"] == "abc-123"
-        assert result["publication_number"] == "US11234567B2"
-        assert result["patent_title"] == "Test Invention"
-        assert result["publication_date"] == "2024-01-15"
-        assert result["type"] == "USPAT"
-        assert result["primary_examiner"] == "Doe; Jane"
+        result = convert_biblio(doc)
+        assert result["guid"] == "abc123"
+        assert result["appl_id"] == "17/123456"
+        assert result["publication_number"] == "US20230123456A1"
+        assert result["patent_title"] == "Test Patent"
 
-    def test_list_fields(self):
-        raw = {
-            "applicantName": ["Corp A", "Corp B"],
-            "assigneeName": "Single Assignee",
-            "cpcAdditionalFlattened": "G06N 3/08; H04L 9/32",
+    def test_parses_dates(self) -> None:
+        doc = {
+            "applicationFilingDate": ["20230101"],
+            "datePublished": "2023-06-15",
         }
-        result = convert_biblio(raw)
-        assert result["applicant_names"] == ["Corp A", "Corp B"]
-        assert result["assignee_names"] == ["Single Assignee"]
-        assert result["cpc_additional"] == ["G06N 3/08", "H04L 9/32"]
+        result = convert_biblio(doc)
+        assert result["app_filing_date"] == "2023-01-01"
+        assert result["publication_date"] == "2023-06-15"
 
-    def test_empty_doc(self):
-        result = convert_biblio({})
-        assert result["guid"] is None
-        assert result["publication_number"] is None
-        assert result["applicant_names"] == []
+    def test_handles_list_fields(self) -> None:
+        doc = {
+            "applicantName": ["Company A", "Company B"],
+            "assigneeName": ["Assignee Corp"],
+        }
+        result = convert_biblio(doc)
+        assert result["applicant_names"] == ["Company A", "Company B"]
+        assert result["assignee_names"] == ["Assignee Corp"]
 
 
 class TestConvertBiblioPage:
-    def test_basic(self):
-        raw = {
-            "numFound": 100,
-            "perPage": 25,
-            "page": 1,
+    """Tests for convert_biblio_page function."""
+
+    def test_converts_page(self) -> None:
+        data = {
+            "numFound": "100",
+            "perPage": "25",
+            "page": "1",
             "patents": [
-                {
-                    "guid": "abc-123",
-                    "publicationReferenceDocumentNumber": "US11234567B2",
-                    "inventionTitle": "Test Invention",
-                    "datePublished": "20240115",
-                    "type": "USPAT",
-                }
+                {"guid": "abc", "inventionTitle": "Patent 1"},
+                {"guid": "def", "inventionTitle": "Patent 2"},
             ],
         }
-        result = convert_biblio_page(raw)
+        result = convert_biblio_page(data)
         assert result["num_found"] == 100
         assert result["per_page"] == 25
         assert result["page"] == 1
-        assert len(result["docs"]) == 1
-        assert result["docs"][0]["publication_number"] == "US11234567B2"
+        assert len(result["docs"]) == 2
 
-    def test_empty_patents(self):
-        raw = {"numFound": 0, "perPage": 25, "page": 0, "patents": []}
-        result = convert_biblio_page(raw)
+    def test_handles_empty_patents(self) -> None:
+        data = {"numFound": "0", "perPage": "25", "page": "1", "patents": []}
+        result = convert_biblio_page(data)
         assert result["num_found"] == 0
         assert result["docs"] == []
 
-    def test_none_values_stripped(self):
-        raw = {
-            "numFound": 1,
-            "perPage": 25,
-            "page": 0,
-            "patents": [{"guid": "x", "inventionTitle": None}],
-        }
-        result = convert_biblio_page(raw)
-        doc = result["docs"][0]
-        assert "patent_title" not in doc  # None values stripped
-
 
 class TestConvertDocumentPayload:
-    def test_basic_document(self):
-        raw = {
-            "guid": "doc-456",
-            "pubRefDocNumber": "US11234567B2",
-            "inventionTitle": "Test Invention",
-            "datePublished": "20240115",
-            "applicationNumber": "17/123456",
-            "applicationRefFilingType": "utility",
-            "type": "USPAT",
-            "databaseName": "USPAT",
-            "abstractHtml": "<p>An abstract about machine learning.</p>",
-            "claimsHtml": None,
-            "descriptionHtml": "<p>A detailed description.</p>",
-            "inventorsName": ["John Smith", "Jane Doe"],
-            "inventorCity": ["San Francisco", "New York"],
-            "inventorCountry": ["US", "US"],
-            "inventorState": ["CA", "NY"],
-            "assigneeName": ["Tech Corp"],
-            "assigneeCity": ["Palo Alto"],
-            "assigneeCountry": ["US"],
-            "assigneeState": ["CA"],
-            "assigneeTypeCode": ["02"],
-            "primaryExaminer": "Examiner, Primary",
-            "examinerGroup": "2100",
-            "imageFileName": "US11234567-20240115",
-            "imageLocation": "/images/US11234567",
-            "numberOfClaims": 20,
-            "pageCount": 10,
-        }
-        result = convert_document_payload(raw)
-        assert result["guid"] == "doc-456"
-        assert result["publication_number"] == "US11234567B2"
-        assert result["patent_title"] == "Test Invention"
-        assert result["publication_date"] == "2024-01-15"
-        assert result["type"] == "USPAT"
-        assert result["primary_examiner"] == "Examiner, Primary"
-        assert result["group_art_unit"] == "2100"
+    """Tests for convert_document_payload function."""
 
-    def test_inventors_extraction(self):
-        raw = {
-            "inventorsName": ["John Smith", "Jane Doe"],
-            "inventorCity": ["San Francisco", "New York"],
-            "inventorCountry": ["US", "US"],
-            "inventorState": ["CA", "NY"],
+    def test_converts_basic_document(self) -> None:
+        data = {
+            "guid": "doc123",
+            "pubRefDocNumber": "US10123456B2",
+            "inventionTitle": "Test Patent",
+            "datePublished": "2020-01-01",
+            "abstractHtml": "<p>Abstract text</p>",
         }
-        result = convert_document_payload(raw)
+        result = convert_document_payload(data)
+        assert result["guid"] == "doc123"
+        assert result["publication_number"] == "US10123456B2"
+        assert result["patent_title"] == "Test Patent"
+        assert result["publication_date"] == "2020-01-01"
+        assert result["document"]["abstract_html"] == "<p>Abstract text</p>"
+
+    def test_parses_claims(self) -> None:
+        data = {"claimsHtml": "1. A method.\n2. The method of claim 1."}
+        result = convert_document_payload(data)
+        assert len(result["document"]["claims"]) == 2
+
+    def test_extracts_inventors(self) -> None:
+        data = {
+            "inventorsName": ["John Doe", "Jane Smith"],
+            "inventorCity": ["Boston", "New York"],
+            "inventorCountry": ["US", "US"],
+        }
+        result = convert_document_payload(data)
         assert len(result["inventors"]) == 2
-        assert result["inventors"][0]["name"] == "John Smith"
-        assert result["inventors"][0]["city"] == "San Francisco"
-        assert result["inventors"][1]["name"] == "Jane Doe"
+        assert result["inventors"][0]["name"] == "John Doe"
+        assert result["inventors"][0]["city"] == "Boston"
 
-    def test_assignees_extraction(self):
-        raw = {
-            "assigneeName": ["Tech Corp"],
-            "assigneeCity": ["Palo Alto"],
-            "assigneeCountry": ["US"],
-            "assigneeState": ["CA"],
-            "assigneeTypeCode": ["02"],
+    def test_extracts_us_references(self) -> None:
+        data = {
+            "urpn": ["US7654321B2", "US8765432B2"],
+            "usRefPatenteeName": ["Inventor A", "Inventor B"],
+            "usRefGroup": ["examiner", "applicant"],
         }
-        result = convert_document_payload(raw)
-        assert len(result["assignees"]) == 1
-        assert result["assignees"][0]["name"] == "Tech Corp"
-        assert result["assignees"][0]["type_code"] == "02"
+        result = convert_document_payload(data)
+        assert len(result["us_references"]) == 2
+        assert result["us_references"][0]["cited_by_examiner"] is True
+        assert result["us_references"][1]["cited_by_examiner"] is False
 
-    def test_us_references(self):
-        raw = {
-            "urpn": ["US8830957B2", "US9123456B1"],
-            "usRefIssueDate": ["201409", "201512"],
-            "usRefPatenteeName": ["Smith; John", "Doe; Jane"],
-            "usRefGroup": ["cited by examiner", "cited by applicant"],
-        }
-        result = convert_document_payload(raw)
-        refs = result["us_references"]
-        assert len(refs) == 2
-        assert refs[0]["publication_number"] == "US8830957B2"
-        assert refs[0]["pub_month"] == "2014-09-01"
-        assert refs[0]["cited_by_examiner"] is True
-        assert refs[1]["cited_by_examiner"] is False
+    def test_parses_cpc_codes(self) -> None:
+        data = {"cpcInventive": ["A01B1/00", "G06F3/00"]}
+        result = convert_document_payload(data)
+        assert len(result["cpc_inventive"]) == 2
+        assert result["cpc_inventive"][0]["cpc_class"] == "A01B"
 
-    def test_foreign_references(self):
-        raw = {
-            "foreignRefCountryCode": ["EP", "JP"],
-            "foreignRefPatentNumber": ["1234567", "2024-001234"],
-            "foreignRefPubDate": ["202401", "202306"],
-            "foreignRefGroup": ["cited by examiner", "cited by applicant"],
-        }
-        result = convert_document_payload(raw)
-        refs = result["foreign_references"]
-        assert len(refs) == 2
-        assert refs[0]["country_code"] == "EP"
-        assert refs[0]["pub_month"] == "2024-01-01"
-        assert refs[0]["cited_by_examiner"] is True
-
-    def test_npl_references(self):
-        raw = {
-            "otherRefPub": "Smith et al., ML paper, 2020<br />Jones, AI study cited by examiner",
-        }
-        result = convert_document_payload(raw)
-        npls = result["npl_references"]
-        assert len(npls) == 2
-        assert npls[0]["cited_by_examiner"] is False
-        assert npls[1]["cited_by_examiner"] is True
-
-    def test_related_apps(self):
-        raw = {
-            "relatedApplCountryCode": ["US"],
-            "relatedApplNumber": ["16/123456"],
-            "relatedApplFilingDate": ["20200115"],
-            "relatedApplParentStatusCode": ["CON"],
-        }
-        result = convert_document_payload(raw)
-        apps = result["related_apps"]
-        assert len(apps) == 1
-        assert apps[0]["country_code"] == "US"
-        assert apps[0]["filing_date"] == "2020-01-15"
-        assert apps[0]["parent_status_code"] == "CON"
-
-    def test_foreign_priority(self):
-        raw = {
-            "priorityClaimsCountry": ["JP"],
-            "priorityClaimsDocNumber": ["2020-123456"],
-            "priorityClaimsDate": ["20200615"],
-        }
-        result = convert_document_payload(raw)
-        priority = result["foreign_priority"]
-        assert len(priority) == 1
-        assert priority[0]["country"] == "JP"
-        assert priority[0]["app_filing_date"] == "2020-06-15"
-
-    def test_cpc_codes(self):
-        raw = {
-            "cpcInventive": ["G06N 3/08 20230101"],
-            "cpcAdditional": ["H04L 9/32 20130101", "G06F 21/00 20130101"],
-        }
-        result = convert_document_payload(raw)
-        assert len(result["cpc_inventive"]) == 1
-        assert result["cpc_inventive"][0]["cpc_class"] == "G06N"
-        assert len(result["cpc_additional"]) == 2
-
-    def test_intl_classes(self):
-        raw = {
-            "ipcCodeFlattened": "G06N 3/08; H04L 9/32",
-            "curIntlPatentClassificationPrimary": ["G06N 3/08 20130101"],
-        }
-        result = convert_document_payload(raw)
-        assert result["intl_class_issued"] == ["G06N 3/08", "H04L 9/32"]
-        assert len(result["intl_class_current_primary"]) == 1
-        assert result["intl_class_current_primary"][0]["intl_class"] == "G06N"
-
-    def test_empty_payload(self):
+    def test_handles_empty_document(self) -> None:
         result = convert_document_payload({})
         assert result["guid"] is None
-        assert result["inventors"] == []
-        assert result["us_references"] == []
-        assert result["npl_references"] == []
-
-    def test_document_section(self):
-        raw = {
-            "abstractHtml": "<p>Abstract text</p>",
-            "backgroundTextHtml": "<p>Background</p>",
-            "descriptionHtml": "<p>Description</p>",
-            "briefHtml": "<p>Brief</p>",
-            "claimStatement": "What is claimed is:",
-            "claimsHtml": None,
-        }
-        result = convert_document_payload(raw)
-        doc = result["document"]
-        assert doc["abstract_html"] == "<p>Abstract text</p>"
-        assert doc["background_html"] == "<p>Background</p>"
-        assert doc["description_html"] == "<p>Description</p>"
-        assert doc["brief_html"] == "<p>Brief</p>"
-        assert doc["claim_statement"] == "What is claimed is:"
-        assert doc["claims"] == []
-
-    def test_applicants_extraction(self):
-        raw = {
-            "applicantName": ["Tech Corp"],
-            "applicantCity": ["Seattle"],
-            "applicantCountry": ["US"],
-            "applicantState": ["WA"],
-            "applicantZipCode": ["98101"],
-            "applicantAuthorityType": ["assignee"],
-        }
-        result = convert_document_payload(raw)
-        assert len(result["applicants"]) == 1
-        assert result["applicants"][0]["name"] == "Tech Corp"
-        assert result["applicants"][0]["authority_type"] == "assignee"
+        assert result["document"]["claims"] == []

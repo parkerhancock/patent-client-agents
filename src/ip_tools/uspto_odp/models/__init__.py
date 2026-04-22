@@ -121,6 +121,28 @@ class BulkDataSearchResponse(BulkDataProductResponse):
 # =============================================================================
 
 
+class OdpFilter(_BaseModel):
+    """Filter for ODP search endpoints (JSON object format)."""
+
+    name: str
+    value: list[str] = Field(default_factory=list)
+
+
+class OdpRangeFilter(_BaseModel):
+    """Range filter for ODP search endpoints."""
+
+    field: str
+    valueFrom: str | None = None
+    valueTo: str | None = None
+
+
+class OdpSort(_BaseModel):
+    """Sort directive for ODP search endpoints."""
+
+    field: str
+    order: str = "Desc"
+
+
 class PetitionDecisionFilter(_BaseModel):
     name: str
     value: list[str] = Field(default_factory=list)
@@ -169,7 +191,7 @@ class PetitionDecision(_BaseModel):
     patentNumber: str | None = None
     petitionIssueConsideredTextBag: list[Any] | None = None
     petitionMailDate: str | None = None
-    prosecutionStatusCode: str | int | None = None
+    prosecutionStatusCode: str | None = None
     prosecutionStatusCodeDescriptionText: str | None = None
     ruleBag: list[str] | None = None
     statuteBag: list[str] | None = None
@@ -182,7 +204,7 @@ class PetitionDecisionWithDocuments(PetitionDecision):
 class PetitionDecisionResponse(_BaseModel):
     count: int = 0
     petitionDecisionDataBag: list[PetitionDecision] = Field(default_factory=list)
-    facets: list[dict[str, Any]] | None = None
+    facets: dict[str, Any] | None = None
 
 
 class PetitionDecisionIdentifierResponse(_BaseModel):
@@ -292,7 +314,7 @@ class PtabTrialProceedingResponse(_BaseModel):
     count: int = 0
     requestIdentifier: str | None = None
     patentTrialProceedingDataBag: list[PtabTrialProceeding] = Field(default_factory=list)
-    facets: list[dict[str, Any]] | None = None
+    facets: dict[str, Any] | None = None
 
 
 class PtabTrialDocument(_BaseModel):
@@ -316,7 +338,7 @@ class PtabTrialDocumentResponse(_BaseModel):
     count: int = 0
     requestIdentifier: str | None = None
     patentTrialDocumentDataBag: list[PtabTrialDocument] = Field(default_factory=list)
-    facets: list[dict[str, Any]] | None = None
+    facets: dict[str, Any] | None = None
 
 
 class PtabTrialDecision(_BaseModel):
@@ -341,7 +363,7 @@ class PtabTrialDecisionResponse(_BaseModel):
     count: int = 0
     requestIdentifier: str | None = None
     patentTrialDocumentDataBag: list[PtabTrialDecision] = Field(default_factory=list)
-    facets: list[dict[str, Any]] | None = None
+    facets: dict[str, Any] | None = None
 
 
 # =============================================================================
@@ -425,7 +447,7 @@ class PtabAppealResponse(_BaseModel):
     count: int = 0
     requestIdentifier: str | None = None
     patentAppealDataBag: list[PtabAppeal] = Field(default_factory=list)
-    facets: list[dict[str, Any]] | None = None
+    facets: dict[str, Any] | None = None
 
 
 # =============================================================================
@@ -491,7 +513,7 @@ class PtabInterferenceResponse(_BaseModel):
     count: int = 0
     requestIdentifier: str | None = None
     patentInterferenceDataBag: list[PtabInterference] = Field(default_factory=list)
-    facets: list[dict[str, Any]] | None = None
+    facets: dict[str, Any] | None = None
 
 
 __all__ = [
@@ -535,6 +557,10 @@ __all__ = [
     "BulkDataProduct",
     "BulkDataProductResponse",
     "BulkDataSearchResponse",
+    # ODP Shared Filters
+    "OdpFilter",
+    "OdpRangeFilter",
+    "OdpSort",
     # Petition Decisions
     "PetitionDecisionFilter",
     "PetitionDecisionRange",

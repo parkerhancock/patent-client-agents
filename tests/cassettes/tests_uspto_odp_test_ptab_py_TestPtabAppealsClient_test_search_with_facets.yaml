@@ -1,0 +1,107 @@
+interactions:
+- request:
+    body: '{"q":"appellantData.technologyCenterNumber:2800","facets":["decisionData.decisionTypeCategory"],"pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '132'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search
+  response:
+    body:
+      string: '{"count":13470,"facets":{"decisionData.decisionTypeCategory":[{"value":"Decision","count":12996},{"value":"Rehearing
+        Decision","count":444},{"value":"Reconsideration","count":30}]},"requestIdentifier":"3b5158a8-5272-42d7-8f14-03f0f1a3cdc3","patentAppealDataBag":[{"appealNumber":"2026000736","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-04-21T23:14:09","appealMetaData":{"appealFilingDate":"2026-01-08","appealLastModifiedDateTime":"2026-04-21T16:09:29","appealLastModifiedDate":"2026-04-21","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000736/2026000736.zip"},"appellantData":{"applicationNumberText":"18354034","counselName":"Docket
+        Clerk-RAYN/MWM","groupArtUnitNumber":"2836","inventorName":"Micky R. Harris","realPartyInInterestName":"Raytheon
+        Company","patentOwnerName":"Raytheon Company","publicationDate":"2025-01-23","publicationNumber":"US20250030423A1","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"2026-04-21","documentIdentifier":"97efbbcd-ab53-4238-96a4-6e3285d08a8e","documentName":"Decision_2026000736_04-21-2026.pdf","documentSizeQuantity":168547,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/354,034
+        07/18/2023 Micky R. Harris 175834US01 7769\n\n18510 7590 04/22/2026\n\nDocket
+        Clerk-RAYN/MWM\n1100 Wilson Blvd.\nArlington, VA 22209\n\nEXAMINER\n\nPUENTES,
+        DANIEL CALRISSIAN\n\nART UNIT PAPER NUMBER","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000736/97efbbcd-ab53-4238-96a4-6e3285d08a8e.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-04-21","decisionTypeCategory":"Decision","issueTypeBag":["112","102"]}},{"appealNumber":"2026000613","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-04-15T01:12:34","appealMetaData":{"appealFilingDate":"2025-12-18","appealLastModifiedDateTime":"2026-04-14T18:09:30","appealLastModifiedDate":"2026-04-14","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000613/2026000613.zip"},"appellantData":{"applicationNumberText":"17664482","counselName":"onsemi
+        (AS)","groupArtUnitNumber":"2812","inventorName":"Seungwon IM","realPartyInInterestName":"SEMICONDUCTOR
+        COMPONENTS INDUSTRIES, LLC","patentNumber":"","patentOwnerName":"SEMICONDUCTOR
+        COMPONENTS INDUSTRIES, LLC","publicationDate":"2022-12-22","publicationNumber":"US20220406683A1","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"2026-04-14","documentIdentifier":"8980f468-921b-451d-80f2-fcd45d9c186a","documentName":"Decision_2026000613_04-14-2026.pdf","documentSizeQuantity":345882,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/664,482
+        05/23/2022 Seungwon IM ONS04293US 7574\n\n132194 7590 04/15/2026\n\nonsemi
+        (AS)\n5701 N. Pima Road\nScottsdale, AZ 85250\n\nEXAMINER\n\nWIEGAND, TYLER
+        J\n\nART UNIT PAPER NUMBER\n\n2812\n\nNOTIFICATION","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000613/8980f468-921b-451d-80f2-fcd45d9c186a.pdf"},"decisionData":{"appealOutcomeCategory":"Affirmed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-04-14","decisionTypeCategory":"Decision","issueTypeBag":["102"]}},{"appealNumber":"2026000549","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-03-28T02:12:22","appealMetaData":{"appealFilingDate":"2025-12-15","appealLastModifiedDateTime":"2026-03-27T19:11:13","appealLastModifiedDate":"2026-03-27","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000549/2026000549.zip"},"appellantData":{"applicationNumberText":"17840971","counselName":"MURPHY,
+        BILAK & HOMILLER/INFINEON TECHNOLOGIES","groupArtUnitNumber":"2815","inventorName":"Christoph
+        Liebl","realPartyInInterestName":"Infineon Technologies AG","patentNumber":"","patentOwnerName":"Infineon
+        Technologies AG","publicationDate":"2022-12-29","publicationNumber":"US20220415732A1","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"2026-03-27","documentIdentifier":"c9f3060c-b5c0-4f04-9c17-4a9c927b7d96","documentName":"Decision_2026000549_03-27-2026.pdf","documentSizeQuantity":295288,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/840,971
+        06/15/2022 Christoph Liebl 1012-3283 /\n2021P00902 US\n\n4420\n\n57579 7590
+        03/30/2026\n\nMURPHY, BILAK & HOMILLER/INFINEON TECHNOLOGIES\nPO BOX 1959\nCARY,
+        NC 27512-1959\n\nEXAMINER\n\nNELSON, JACOB","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000549/c9f3060c-b5c0-4f04-9c17-4a9c927b7d96.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-03-27","decisionTypeCategory":"Decision","issueTypeBag":["103"]}},{"appealNumber":"2026000568","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-04-10T01:12:18","appealMetaData":{"appealFilingDate":"2025-12-15","appealLastModifiedDateTime":"2026-04-09T18:11:24","appealLastModifiedDate":"2026-04-09","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000568/2026000568.zip"},"appellantData":{"applicationNumberText":"18411802","counselName":"FULWIDER
+        PATTON LLP","groupArtUnitNumber":"2834","inventorName":"Brian Lee Moffat","realPartyInInterestName":"LONE
+        GULL HOLDINGS, LTD.","patentOwnerName":"LONE GULL HOLDINGS, LTD.","publicationDate":"2024-05-09","publicationNumber":"US20240151204A1","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"2026-04-09","documentIdentifier":"f8d4a064-701e-40a0-a457-1352a2301073","documentName":"Decision_2026000568_04-09-2026.pdf","documentSizeQuantity":209479,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n18/411,802
+        01/12/2024 Brian Lee Moffat LONEG-100618 3197\n\n24201 7590 04/10/2026\n\nFULWIDER
+        PATTON LLP\n111 W. Ocean Blvd., Suite 1510\nLong Beach, CA 90802\n\nEXAMINER\n\nNGUYEN,
+        VIET P\n\nART UNIT PAPER NUMBER","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000568/f8d4a064-701e-40a0-a457-1352a2301073.pdf"},"decisionData":{"appealOutcomeCategory":"Affirmed","statuteAndRuleBag":["37
+        CFR 41.50(f)","37 CFR 41.50","35 USC 134"],"decisionIssueDate":"2026-04-09","decisionTypeCategory":"Decision","issueTypeBag":["103"]}},{"appealNumber":"2026000525","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-04-16T23:14:17","appealMetaData":{"appealFilingDate":"2025-12-05","appealLastModifiedDateTime":"2026-04-16T16:15:49","appealLastModifiedDate":"2026-04-16","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000525/2026000525.zip"},"appellantData":{"applicationNumberText":"16868314","counselName":"MURPHY,
+        BILAK & HOMILLER/INFINEON TECHNOLOGIES","groupArtUnitNumber":"2893","inventorName":"Manfred
+        Pfaffenlehner","realPartyInInterestName":"Infineon Technologies AG","patentNumber":"","patentOwnerName":"Infineon
+        Technologies AG","publicationDate":"2020-11-12","publicationNumber":"US20200357883A1","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"2026-04-16","documentIdentifier":"7e05ea5c-4f81-4b7f-ad5e-d1686f951e41","documentName":"Decision_2026000525_04-16-2026.pdf","documentSizeQuantity":366076,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n16/868,314
+        05/06/2020 Manfred Pfaffenlehner 1012-2734 /\n2018P52165 US\n\n2587\n\n57579
+        7590 04/17/2026\n\nMURPHY, BILAK & HOMILLER/INFINEON TECHNOLOGIES\nPO BOX
+        1959\nCARY, NC 27512-1959\n\nEXAMINER\n\nMAI, ANH","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000525/7e05ea5c-4f81-4b7f-ad5e-d1686f951e41.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2026-04-16","decisionTypeCategory":"Decision","issueTypeBag":[]}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '9490'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:43 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e9252b-3892b3b61827a30579511222;Parent=435b2b2d53af4fbf;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK-yE11IAMFy5g=
+      x-amzn-RequestId:
+      - 3b5158a8-5272-42d7-8f14-03f0f1a3cdc3
+    status:
+      code: 200
+      message: OK
+version: 1

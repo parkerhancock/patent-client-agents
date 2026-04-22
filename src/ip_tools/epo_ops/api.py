@@ -32,11 +32,6 @@ from .models import (
     LegalEventsResponse,
     NumberConversionResponse,
     PdfDownloadResponse,
-    RegisterBiblioResponse,
-    RegisterEventsResponse,
-    RegisterProceduralStepsResponse,
-    RegisterSearchResponse,
-    RegisterUppResponse,
     SearchResponse,
 )
 from .resources import (
@@ -58,11 +53,6 @@ __all__ = [
     "LegalEventsResponse",
     "PdfDownloadResponse",
     "NumberConversionResponse",
-    "RegisterSearchResponse",
-    "RegisterBiblioResponse",
-    "RegisterEventsResponse",
-    "RegisterProceduralStepsResponse",
-    "RegisterUppResponse",
     "get_client",
     "search_published",
     "search_families",
@@ -74,11 +64,6 @@ __all__ = [
     "convert_number",
     "number_service",
     "download_pdf",
-    "search_register",
-    "fetch_register_biblio",
-    "fetch_register_events",
-    "fetch_register_procedural_steps",
-    "fetch_register_upp",
     "CQL_GUIDE_RESOURCE_URI",
     "CQL_GUIDE",
     "CPC_PARAMETERS_RESOURCE_URI",
@@ -354,107 +339,3 @@ async def download_pdf(
 
     async with client_from_env() as cl:
         return await cl.download_pdf(number=number, doc_type=doc_type, fmt=fmt)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# EP Register Convenience Functions
-# ─────────────────────────────────────────────────────────────────────────────
-
-
-async def search_register(
-    query: str,
-    range_begin: int = 1,
-    range_end: int = 25,
-    *,
-    client: EpoOpsClient | None = None,
-) -> RegisterSearchResponse:
-    """Search EP Register for European patent applications.
-
-    If no client is provided, creates one internally and closes it after the request.
-    """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_register(
-            query=query, range_begin=range_begin, range_end=range_end
-        )
-
-    async with client_from_env() as cl:
-        return await cl.search_register(query=query, range_begin=range_begin, range_end=range_end)
-
-
-async def fetch_register_biblio(
-    number: str,
-    doc_type: str = "application",
-    fmt: str = "epodoc",
-    *,
-    client: EpoOpsClient | None = None,
-) -> RegisterBiblioResponse:
-    """Fetch EP Register bibliographic data for an application.
-
-    If no client is provided, creates one internally and closes it after the request.
-    """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_register_biblio(number=number, doc_type=doc_type, fmt=fmt)
-
-    async with client_from_env() as cl:
-        return await cl.fetch_register_biblio(number=number, doc_type=doc_type, fmt=fmt)
-
-
-async def fetch_register_events(
-    number: str,
-    doc_type: str = "application",
-    fmt: str = "epodoc",
-    *,
-    client: EpoOpsClient | None = None,
-) -> RegisterEventsResponse:
-    """Fetch EP Register events for an application.
-
-    If no client is provided, creates one internally and closes it after the request.
-    """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_register_events(number=number, doc_type=doc_type, fmt=fmt)
-
-    async with client_from_env() as cl:
-        return await cl.fetch_register_events(number=number, doc_type=doc_type, fmt=fmt)
-
-
-async def fetch_register_procedural_steps(
-    number: str,
-    doc_type: str = "application",
-    fmt: str = "epodoc",
-    *,
-    client: EpoOpsClient | None = None,
-) -> RegisterProceduralStepsResponse:
-    """Fetch EP Register procedural steps (prosecution history).
-
-    If no client is provided, creates one internally and closes it after the request.
-    """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_register_procedural_steps(
-            number=number, doc_type=doc_type, fmt=fmt
-        )
-
-    async with client_from_env() as cl:
-        return await cl.fetch_register_procedural_steps(number=number, doc_type=doc_type, fmt=fmt)
-
-
-async def fetch_register_upp(
-    number: str,
-    doc_type: str = "application",
-    fmt: str = "epodoc",
-    *,
-    client: EpoOpsClient | None = None,
-) -> RegisterUppResponse:
-    """Fetch Unitary Patent (UPP) data from EP Register.
-
-    If no client is provided, creates one internally and closes it after the request.
-    """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_register_upp(number=number, doc_type=doc_type, fmt=fmt)
-
-    async with client_from_env() as cl:
-        return await cl.fetch_register_upp(number=number, doc_type=doc_type, fmt=fmt)

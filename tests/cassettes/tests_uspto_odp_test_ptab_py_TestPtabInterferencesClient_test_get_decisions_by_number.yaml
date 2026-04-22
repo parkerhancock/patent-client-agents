@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/interferences/105801/decisions
+  response:
+    body:
+      string: '{"count":1,"requestIdentifier":"94c9daa4-973b-4907-a1b2-a11b4065631a","patentInterferenceDataBag":[{"interferenceNumber":"105801","lastModifiedDateTime":"2025-12-12T17:18:56","interferenceMetaData":{"interferenceLastModifiedDateTime":"2012-09-19T00:00:00","interferenceLastModifiedDate":"2012-09-19","declarationDate":"2012-09-19","interferenceStyleName":"Pippin
+        V. THOMAS","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/105801/105801.zip"},"seniorPartyData":{"applicationNumberText":"08262754","grantDate":"1998-05-12","groupArtUnitNumber":"2787","inventorName":"C.
+        DOUGLASS THOMAS et al","patentNumber":"5752011","patentOwnerName":"C. DOUGLASS
+        THOMAS et al","realPartyInInterestName":"C. DOUGLASS THOMAS et al","technologyCenterNumber":"2700"},"juniorPartyData":{"applicationNumberText":"10464482","groupArtUnitNumber":"2118","inventorName":"Jack
+        D. Pippin","patentNumber":"","patentOwnerName":"Jack D. Pippin","publicationDate":"2003-11-13","publicationNumber":"20030212474A1","realPartyInInterestName":"Jack
+        D. Pippin","technologyCenterNumber":"2100"},"documentData":{"documentIdentifier":"045329662dac2c1c9495af5e4fc3e207913e030efea319b3c03fef7f","documentName":"fd105801-09-19-2012-1","documentSizeQuantity":27608,"documentOCRText":"Microsoft
+        Word - 105801 077\n\n\nBoxInterferences@uspto.gov                              Paper
+        077 \n571-272-4683              Filed: September 19, 2012 \n \n\nUNITED STATES
+        PATENT AND TRADEMARK OFFICE \n_________________  \n\n \nBEFORE THE PATENT
+        TRIAL AND APPEAL BOARD \n\n_________________ \n \n\nC. DOUGLASS THOMAS and
+        ALAN E. THOMAS \n Junior Party  \n\n(U.S. Pat. No. 5,752,011)1 \n \n\nv. \n
+        \n\nJACK D. PIPPIN \n Senior Party  \n\n(Application 10/464,482)2 \n_________________
+        \n\n \nPatent Interference No. 105,801 (JL) ...","documentTitleText":"DECISION-105801","interferenceOutcomeCategory":"Final
+        Decision","statuteAndRuleBag":["Bd. R. 127"],"decisionIssueDate":"2012-09-19","decisionTypeCategory":"Decision","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/105801/Intf608_10580108262754_1348027200000.pdf","documentFilingDate":"2012-09-19"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2141'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:48 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92530-62f1de5d4f74fcef455e8305;Parent=515283425c05702f;Sampled=0;Lineage=1:5fd89aa0:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK_sEMdIAMFvLw=
+      x-amzn-RequestId:
+      - 94c9daa4-973b-4907-a1b2-a11b4065631a
+    status:
+      code: 200
+      message: OK
+version: 1

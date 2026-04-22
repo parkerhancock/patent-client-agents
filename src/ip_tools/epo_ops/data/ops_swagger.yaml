@@ -1,5 +1,5 @@
-# This is an Open API specification of OPS API.
-# Version 1.2 only is supported by Apigee SmartDocs
+# This is an Open API specification of OPS API. 
+# Version 1.2 only is supported by Apigee SmartDocs 
 swagger: '2.0'
 
 info:
@@ -14,7 +14,7 @@ info:
   license:
     name: Fair use charter
     url: http://www.epo.org/service-support/ordering/fair-use.html
-
+  
 # the domain of the service
 # If host is not specified, it is assumed to be the same host where the API documentation is being served.
 host: ops.epo.org
@@ -33,7 +33,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -72,7 +72,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -111,7 +111,7 @@ paths:
       security:
         - client-credentials: []
 
-
+        
   /published-data/{type}/{format}/{number}/biblio:
     get:
       operationId: Published Data Retrieval
@@ -120,7 +120,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -167,7 +167,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -215,7 +215,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -262,7 +262,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -310,7 +310,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -357,7 +357,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -405,7 +405,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -452,7 +452,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -500,7 +500,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -547,7 +547,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -595,7 +595,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -642,7 +642,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -690,7 +690,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -736,7 +736,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -783,7 +783,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -830,7 +830,7 @@ paths:
       tags:
         - Published
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -977,7 +977,7 @@ paths:
       tags:
         - Family
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1024,7 +1024,7 @@ paths:
       tags:
         - Family
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -1066,13 +1066,13 @@ paths:
 
   /family/{type}/{format}/{number}/biblio:
     get:
-      operationId: INPADOC Family Retrieval Service with Biblio
+      operationId: INPADOC Family Retrieval Service with Biblio 
       summary: Family + biblio retrieval service
       description: Family + biblio retrieval service
       tags:
         - Family
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1119,7 +1119,7 @@ paths:
       tags:
         - Family
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -1161,13 +1161,13 @@ paths:
 
   /family/{type}/{format}/{number}/legal:
     get:
-      operationId: INPADOC Family Retrieval Service with Legal
+      operationId: INPADOC Family Retrieval Service with Legal 
       summary: Family + legal data retrieval service
       description: Family + legal data retrieval service
       tags:
         - Family
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1214,7 +1214,7 @@ paths:
       tags:
         - Family
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -1262,7 +1262,7 @@ paths:
       tags:
         - Legal
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1309,7 +1309,7 @@ paths:
       tags:
         - Legal
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -1357,7 +1357,7 @@ paths:
       tags:
         - Register
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1389,13 +1389,13 @@ paths:
 
   /register/search/{constituent}:
     get:
-      operationId: Register Search Service with Variable Constituents
+      operationId: Register Search Service with Variable Constituents 
       summary: Register data search service
       description: Register data search service
       tags:
         - Register
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1406,7 +1406,7 @@ paths:
           type: string
           format: string
           default: biblio
-          enum: [biblio, events, procedural-steps, upp]
+          enum: [biblio, events, procedural-steps, upp]      
         - name: q
           in: query
           description: Search query
@@ -1441,7 +1441,7 @@ paths:
       tags:
         - Register
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1488,7 +1488,7 @@ paths:
       tags:
         - Register
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -1536,7 +1536,7 @@ paths:
       tags:
         - Register
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1583,7 +1583,7 @@ paths:
       tags:
         - Register
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -1631,7 +1631,7 @@ paths:
       tags:
         - Register
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1678,7 +1678,7 @@ paths:
       tags:
         - Register
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -1821,7 +1821,7 @@ paths:
       tags:
         - Classification
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1876,7 +1876,7 @@ paths:
       tags:
         - Classification
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -1938,7 +1938,7 @@ paths:
       tags:
         - Classification
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:
@@ -2006,7 +2006,7 @@ paths:
       tags:
         - Classification
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -2037,7 +2037,7 @@ paths:
       tags:
         - Classification
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -2097,7 +2097,7 @@ paths:
       tags:
         - Number
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       parameters:
@@ -2152,7 +2152,7 @@ paths:
       tags:
         - Number
       produces:
-        - application/xml
+        - application/xml      
         - application/json
         - application/javascript
       consumes:

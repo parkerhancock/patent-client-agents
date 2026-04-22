@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: '{"q":"*","fields":["interferenceNumber","interferenceMetaData"],"pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '100'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/interferences/decisions/search
+  response:
+    body:
+      string: '{"count":1812,"requestIdentifier":"7f0d17da-f822-408e-974f-54c846da7716","patentInterferenceDataBag":[{"interferenceNumber":"106130","interferenceMetaData":{"fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/106130.zip","declarationDate":"2021-01-26","interferenceLastModifiedDate":"2025-11-13","interferenceStyleName":"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v. PATRICE
+        CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS","interferenceLastModifiedDateTime":"2025-11-13T00:00:00"}},{"interferenceNumber":"106130","interferenceMetaData":{"fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/106130.zip","declarationDate":"2021-01-26","interferenceLastModifiedDate":"2025-11-13","interferenceStyleName":"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v. PATRICE
+        CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS","interferenceLastModifiedDateTime":"2025-11-13T00:00:00"}},{"interferenceNumber":"106125","interferenceMetaData":{"fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106125/106125.zip","declarationDate":"2020-08-10","interferenceLastModifiedDate":"2025-11-18","interferenceStyleName":"ULRICH
+        SPECK and BRUNO SCHELLER v. BRIAN L. BATES, ANTHONY O. RAGHEB, JOSEPH M. STEWART
+        IV, WILLIAM J. BOURDEAU, BRIAN D. CHOULES, JAMES D. PURDY, and NEAL E. FEARNOT","interferenceLastModifiedDateTime":"2025-11-18T00:00:00"}},{"interferenceNumber":"106138","interferenceMetaData":{"fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106138/106138.zip","declarationDate":"2023-04-25","interferenceLastModifiedDate":"2023-09-21","interferenceStyleName":"SMA
+        Solar Technology AG  v. SolarEdge Technologies Ltd. ","interferenceLastModifiedDateTime":"2023-09-21T00:00:00"}},{"interferenceNumber":"106135","interferenceMetaData":{"fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106135/106135.zip","declarationDate":"2021-08-26","interferenceLastModifiedDate":"2023-08-22","interferenceStyleName":"SHL
+        MEDICAL AG v. SANOFI-AVENTIS DEUTSCHLAND GMBH","interferenceLastModifiedDateTime":"2023-08-22T00:00:00"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2176'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:48 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92530-74cbdf477087298338e6f5cc;Parent=692bbd69b2ead8a4;Sampled=0;Lineage=1:5fd89aa0:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK_qHTyIAMFjGA=
+      x-amzn-RequestId:
+      - 7f0d17da-f822-408e-974f-54c846da7716
+    status:
+      code: 200
+      message: OK
+version: 1

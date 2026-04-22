@@ -1,0 +1,55 @@
+interactions:
+- request:
+    body: '{"q":"*","pagination":{"offset":0,"limit":1}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '45'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/search
+  response:
+    body:
+      string: '{"count":19246,"requestIdentifier":"1aa7df9d-ea9c-423d-9e3e-eab4ce9d44d3","patentTrialProceedingDataBag":[{"lastModifiedDateTime":"2026-04-22T09:11:06","patentOwnerData":{"patentNumber":"8738103","grantDate":"2014-05-27","technologyCenterNumber":"2600","groupArtUnitNumber":"2643","applicationNumberText":"11614429","inventorName":"Carles
+        Puente Baliarda et al"},"trialMetaData":{"accordedFilingDate":"2026-04-21","trialTypeCode":"IPR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00338/IPR2026-00338.zip","trialStatusCategory":"Pending","trialLastModifiedDate":"2026-04-22","petitionFilingDate":"2026-04-21","trialLastModifiedDateTime":"2026-04-22T06:33:20"},"trialNumber":"IPR2026-00338","regularPetitionerData":{"realPartyInInterestName":"Johnson
+        Controls Inc.","counselName":"Carlan, Janineet al"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '834'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:49 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92531-61542c6e4000b70f778f1dd7;Parent=210a22f23bec255b;Sampled=0;Lineage=1:ce682653:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK_xHHToAMF3iw=
+      x-amzn-RequestId:
+      - 1aa7df9d-ea9c-423d-9e3e-eab4ce9d44d3
+    status:
+      code: 200
+      message: OK
+version: 1

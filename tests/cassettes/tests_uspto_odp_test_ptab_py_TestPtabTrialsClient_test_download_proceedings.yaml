@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: '{"q":"trialMetaData.trialTypeCode:IPR","pagination":{"limit":5},"format":"json"}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '80'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/search/download
+  response:
+    body:
+      string: '{"patentTrialData":[{"patentOwnerData":{"patentNumber":"8738103","technologyCenterNumber":"2600","applicationNumberText":"11614429"},"trialMetaData":{"trialStatusCategory":"Pending","petitionFilingDate":"2026-04-21"},"trialNumber":"IPR2026-00338"},{"patentOwnerData":{"patentNumber":"10512385","technologyCenterNumber":"1700","applicationNumberText":"15941761"},"trialMetaData":{"trialStatusCategory":"Pending","petitionFilingDate":"2026-04-15"},"trialNumber":"IPR2026-00337"},{"patentOwnerData":{"patentNumber":"12232681","technologyCenterNumber":"1700","applicationNumberText":"18535327"},"trialMetaData":{"trialStatusCategory":"Pending","petitionFilingDate":"2026-04-13"},"trialNumber":"IPR2026-00336"},{"patentOwnerData":{"patentNumber":"11374508","realPartyInInterestName":"BUNKER
+        HILL TECHNOLOGIES, LLC","technologyCenterNumber":"2800","applicationNumberText":"16866028"},"trialMetaData":{"trialStatusCategory":"Pending","petitionFilingDate":"2026-04-07"},"trialNumber":"IPR2026-00333"},{"patentOwnerData":{"patentNumber":"12301627","realPartyInInterestName":"Qomplx
+        LLC","technologyCenterNumber":"2400","applicationNumberText":"18892283"},"trialMetaData":{"trialStatusCategory":"Pending","petitionFilingDate":"2026-04-07"},"trialNumber":"IPR2026-00325"}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1262'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:37 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92525-7be663ee5fc4f36411756cf9;Parent=2596eb2fd8249754;Sampled=0;Lineage=1:ce682653:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      content-disposition:
+      - attachment;filename="results-2026-04-22T19-44-37.json"
+      x-amz-apigw-id:
+      - cPK94GXDIAMF7Qg=
+      x-amzn-RequestId:
+      - 29ab1bca-3932-4f51-9e28-6da4740080bf
+    status:
+      code: 200
+      message: OK
+version: 1

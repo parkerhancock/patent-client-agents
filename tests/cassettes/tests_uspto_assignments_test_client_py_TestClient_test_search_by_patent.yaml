@@ -1,0 +1,71 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"10000000","searchBy":"patentNumber"},{"property":"100","searchBy":"rowsNeeded"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '113'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/patent/exportPublicPatentData
+  response:
+    body:
+      string: '[{"searchCriteria": [{"property": "10000000", "searchBy": "patent_number"},
+        {"property": "100", "searchBy": "rowsNeeded"}], "data": [{"reelNumber": 35130,
+        "frameNumber": 327, "assignorExecutionDate": "03/06/2015", "correspondentName":
+        "DOCKET CLERK-RAYTHEON/MWM", "assignors": [{"assignorName": "MARRON, JOSEPH",
+        "executionDate": "03/06/2015"}], "assignees": ["RAYTHEON COMPANY"], "noOfProperties":
+        1, "properties": [{"sequenceNumber": 1, "applicationNumber": "14643719", "fillingDate":
+        "03/10/2015", "internationalRegistrationNumber": null, "inventionTitle": "COHERENT
+        LADAR USING INTRA-PIXEL QUADRATURE DETECTION", "inventors": "Joseph Marron",
+        "issueDate": "06/19/2018", "patentNumber": "10000000", "pctNumber": null,
+        "pctNumber17": null, "publicationNumber": "20160266243", "publicationDate":
+        "09/15/2016", "internationalPublicationDate": ""}]}]}]'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=exportPublicData_20260422_194435.json
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:35 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 18c4177dcd2e30ddfeba6f785bac77e6.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - QW-UBj9hg0syyqPB7VnG7jC6JS2QiBAFiOMwmBiRK_TTZXcI5-4K9Q==
+      X-Amz-Cf-Pop:
+      - IAH50-P4
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "requestIdentifier": {
+      "type": "string"
+    },
+    "petitionDecisionDataBag": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "applicationNumberText": {
+              "type": "string"
+            },
+            "businessEntityStatusCategory": {
+              "type": "string"
+            },
+            "customerNumber": {
+              "type": "integer"
+            },
+            "decisionDate": {
+              "type": "string"
+            },
+            "decisionPetitionTypeCode": {
+              "type": "integer"
+            },
+            "decisionTypeCode": {
+              "type": "string"
+            },
+            "decisionTypeCodeDescriptionText": {
+              "type": "string"
+            },
+            "finalDecidingOfficeName": {
+              "type": "string"
+            },
+            "firstApplicantName": {
+              "type": "string"
+            },
+            "firstInventorToFileIndicator": {
+              "type": "boolean"
+            },
+            "groupArtUnitNumber": {
+              "type": "string"
+            },
+            "inventionTitle": {
+              "type": "string"
+            },
+            "inventorBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "actionTakenByCourtName": {
+              "type": "string"
+            },
+            "courtActionIndicator":{
+               "type": "boolean"
+            },
+            "lastIngestionDateTime": {
+              "type": "string"
+            },
+            "patentNumber": {
+              "type": "string"
+            },
+            "petitionDecisionRecordIdentifier": {
+              "type": "string"
+            },
+            "petitionIssueConsideredTextBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "petitionMailDate": {
+              "type": "string"
+            },
+            "prosecutionStatusCode": {
+              "type": "string"
+            },
+            "prosecutionStatusCodeDescriptionText": {
+              "type": "string"
+            },
+            "documentBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "applicationNumberText": {
+                      "type": "string"
+                    },
+                    "officialDate": {
+                      "type": "string"
+                    },
+                    "documentIdentifier": {
+                      "type": "string"
+                    },
+                    "documentCode": {
+                      "type": "string"
+                    },
+                    "documentCodeDescriptionText": {
+                      "type": "string"
+                    },
+                    "documentDirectionCategory": {
+                      "type": "string"
+                    },
+                    "downloadOptionBag": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "mimeTypeIdentifier": {
+                              "type": "string"
+                            },
+                            "documentURI": {
+                              "type": "string"
+                            },
+                            "pageTotalQuantity": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "mimeTypeIdentifier",
+                            "documentURI",
+                            "pageTotalQuantity"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "applicationNumberText",
+                    "officialDate",
+                    "documentIdentifier",
+                    "documentCode",
+                    "documentCodeDescriptionText",
+                    "documentDirectionCategory",
+                    "downloadOptionBag"
+                  ]
+                }
+              ]
+            },
+            "statuteBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "technologyCenter": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "count",
+    "requestIdentifier",
+    "petitionDecisionDataBag"
+  ]
+}

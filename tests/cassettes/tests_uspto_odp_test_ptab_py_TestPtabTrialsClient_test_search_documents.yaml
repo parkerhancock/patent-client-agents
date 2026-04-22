@@ -1,0 +1,73 @@
+interactions:
+- request:
+    body: '{"q":"documentData.filingPartyCategory:Petitioner","pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '87'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/documents/search
+  response:
+    body:
+      string: '{"count":829136,"requestIdentifier":"00838122-13a8-4ff1-83e9-7c3c166d3bae","patentTrialDocumentDataBag":[{"trialNumber":"IPR2026-00338","lastModifiedDateTime":"2026-04-21T19:11:02","trialDocumentCategory":"Document","trialMetaData":{"petitionFilingDate":"2026-04-21","trialLastModifiedDateTime":"2026-04-21T12:33:08","trialLastModifiedDate":"2026-04-21","trialStatusCategory":"Pending","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"11614429","grantDate":"2014-05-27","groupArtUnitNumber":"2643","inventorName":"Carles
+        Puente Baliarda et al","patentNumber":"8738103","technologyCenterNumber":"2600"},"regularPetitionerData":{"counselName":"Carlan,
+        Janineet al","realPartyInInterestName":"Johnson Controls Inc."},"documentData":{"documentCategory":"Exhibit","documentFilingDate":"2026-04-21","documentIdentifier":"171322452","documentName":"Ex.
+        1026 - Cho WiFi-PIFA-APMC2005.pdf","documentNumber":1026,"documentSizeQuantity":1175248,"documentTitleText":"Ex.
+        1026","documentTypeDescriptionText":"EXHIBIT","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00338/171322452.pdf","filingPartyCategory":"PETITIONER"}},{"trialNumber":"IPR2026-00338","lastModifiedDateTime":"2026-04-21T19:11:02","trialDocumentCategory":"Document","trialMetaData":{"petitionFilingDate":"2026-04-21","trialLastModifiedDateTime":"2026-04-21T12:33:08","trialLastModifiedDate":"2026-04-21","trialStatusCategory":"Pending","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"11614429","grantDate":"2014-05-27","groupArtUnitNumber":"2643","inventorName":"Carles
+        Puente Baliarda et al","patentNumber":"8738103","technologyCenterNumber":"2600"},"regularPetitionerData":{"counselName":"Carlan,
+        Janineet al","realPartyInInterestName":"Johnson Controls Inc."},"documentData":{"documentCategory":"Exhibit","documentFilingDate":"2026-04-21","documentIdentifier":"171322450","documentName":"Ex.
+        1025 - Camera Phones Emerge as a Health Care Tool.pdf","documentNumber":1025,"documentSizeQuantity":1124850,"documentTitleText":"Ex.
+        1025","documentTypeDescriptionText":"EXHIBIT","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00338/171322450.pdf","filingPartyCategory":"PETITIONER"}},{"trialNumber":"IPR2026-00338","lastModifiedDateTime":"2026-04-21T19:11:02","trialDocumentCategory":"Document","trialMetaData":{"petitionFilingDate":"2026-04-21","trialLastModifiedDateTime":"2026-04-21T12:33:08","trialLastModifiedDate":"2026-04-21","trialStatusCategory":"Pending","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"11614429","grantDate":"2014-05-27","groupArtUnitNumber":"2643","inventorName":"Carles
+        Puente Baliarda et al","patentNumber":"8738103","technologyCenterNumber":"2600"},"regularPetitionerData":{"counselName":"Carlan,
+        Janineet al","realPartyInInterestName":"Johnson Controls Inc."},"documentData":{"documentCategory":"Exhibit","documentFilingDate":"2026-04-21","documentIdentifier":"171322442","documentName":"Ex.
+        1021 - 3GPP TS 25.101 version 6.5.0 Release 6.pdf","documentNumber":1021,"documentSizeQuantity":5993745,"documentTitleText":"Ex.
+        1021","documentTypeDescriptionText":"EXHIBIT","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00338/171322442.pdf","filingPartyCategory":"PETITIONER"}},{"trialNumber":"IPR2026-00338","lastModifiedDateTime":"2026-04-21T19:11:02","trialDocumentCategory":"Document","trialMetaData":{"petitionFilingDate":"2026-04-21","trialLastModifiedDateTime":"2026-04-21T12:33:08","trialLastModifiedDate":"2026-04-21","trialStatusCategory":"Pending","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"11614429","grantDate":"2014-05-27","groupArtUnitNumber":"2643","inventorName":"Carles
+        Puente Baliarda et al","patentNumber":"8738103","technologyCenterNumber":"2600"},"regularPetitionerData":{"counselName":"Carlan,
+        Janineet al","realPartyInInterestName":"Johnson Controls Inc."},"documentData":{"documentCategory":"Exhibit","documentFilingDate":"2026-04-21","documentIdentifier":"171322404","documentName":"-Ex.
+        1002 - 103 patent Pros His excerpts.pdf","documentNumber":1002,"documentSizeQuantity":17161013,"documentTitleText":"Ex.
+        1002","documentTypeDescriptionText":"EXHIBIT","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00338/171322404.pdf","filingPartyCategory":"PETITIONER"}},{"trialNumber":"IPR2026-00338","lastModifiedDateTime":"2026-04-21T19:11:02","trialDocumentCategory":"Document","trialMetaData":{"petitionFilingDate":"2026-04-21","trialLastModifiedDateTime":"2026-04-21T12:33:08","trialLastModifiedDate":"2026-04-21","trialStatusCategory":"Pending","trialTypeCode":"IPR"},"patentOwnerData":{"applicationNumberText":"11614429","grantDate":"2014-05-27","groupArtUnitNumber":"2643","inventorName":"Carles
+        Puente Baliarda et al","patentNumber":"8738103","technologyCenterNumber":"2600"},"regularPetitionerData":{"counselName":"Carlan,
+        Janineet al","realPartyInInterestName":"Johnson Controls Inc."},"documentData":{"documentCategory":"Exhibit","documentFilingDate":"2026-04-21","documentIdentifier":"171322414","documentName":"Ex.
+        1007 - Vivint IPR - Order to Terminate Prior to Instiution.pdf","documentNumber":1007,"documentSizeQuantity":101928,"documentTitleText":"Ex.
+        1007","documentTypeDescriptionText":"EXHIBIT","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2026/00338/171322414.pdf","filingPartyCategory":"PETITIONER"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '5433'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:38 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92525-4f3c1a9000782e8c74595d18;Parent=12ae0996525bb11b;Sampled=0;Lineage=1:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK9-FTXoAMFWgw=
+      x-amzn-RequestId:
+      - 00838122-13a8-4ff1-83e9-7c3c166d3bae
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -26,7 +26,7 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-from ip_tools.core.tooling import agent_tool
+from law_tools_core.tooling import agent_tool
 
 from .client import (
     ChemicalCompound,

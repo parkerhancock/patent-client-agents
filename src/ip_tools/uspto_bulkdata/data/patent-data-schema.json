@@ -1,0 +1,934 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "patentFileWrapperDataBag": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "applicationNumberText": {
+              "type": "string"
+            },
+            "applicationMetaData": {
+              "type": "object",
+              "properties": {
+                "nationalStageIndicator": {
+                  "type": "boolean"
+                },
+                "entityStatusData": {
+                  "type": "object",
+                  "properties": {
+                    "smallEntityStatusIndicator": {
+                      "type": "boolean"
+                    },
+                    "businessEntityStatusCategory": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "publicationDateBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "publicationSequenceNumberBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "publicationCategoryBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "docketNumber": {
+                  "type": "string"
+                },
+                "firstInventorToFileIndicator": {
+                  "type": "string"
+                },
+                "firstApplicantName": {
+                  "type": "string"
+                },
+                "firstInventorName": {
+                  "type": "string"
+                },
+                "applicationConfirmationNumber": {
+                  "type": "integer"
+                },
+                "applicationStatusDate": {
+                  "type": "string"
+                },
+                "applicationStatusDescriptionText": {
+                  "type": "string"
+                },
+                "filingDate": {
+                  "type": "string"
+                },
+                "effectiveFilingDate": {
+                  "type": "string"
+                },
+                "grantDate": {
+                  "type": "string"
+                },
+                "groupArtUnitNumber": {
+                  "type": "string"
+                },
+                "applicationTypeCode": {
+                  "type": "string"
+                },
+                "applicationTypeLabelName": {
+                  "type": "string"
+                },
+                "applicationTypeCategory": {
+                  "type": "string"
+                },
+                "inventionTitle": {
+                  "type": "string"
+                },
+                "patentNumber": {
+                  "type": "string"
+                },
+                "applicationStatusCode": {
+                  "type": "integer"
+                },
+                "earliestPublicationNumber": {
+                  "type": "string"
+                },
+                "earliestPublicationDate": {
+                  "type": "string"
+                },
+                "pctPublicationNumber": {
+                  "type": "string"
+                },
+                "pctPublicationDate": {
+                  "type": "string"
+                },
+                "internationalRegistrationPublicationDate": {
+                  "type": "string"
+                },
+                "internationalRegistrationNumber": {
+                  "type": "string"
+                },
+                "examinerNameText": {
+                  "type": "string"
+                },
+                "class": {
+                  "type": "string"
+                },
+                "subclass": {
+                  "type": "string"
+                },
+                "uspcSymbolText": {
+                  "type": "string"
+                },
+                "customerNumber": {
+                  "type": "integer"
+                },
+                "cpcClassificationBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "applicantBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "applicantNameText": {
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "middleName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "preferredName": {
+                          "type": "string"
+                        },
+                        "namePrefix": {
+                          "type": "string"
+                        },
+                        "nameSuffix": {
+                          "type": "string"
+                        },
+                        "countryCode": {
+                          "type": "string"
+                        },
+                        "correspondenceAddressBag": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "nameLineOneText": {
+                                  "type": "string"
+                                },
+                                "nameLineTwoText": {
+                                  "type": "string"
+                                },
+                                "geographicRegionName": {
+                                  "type": "string"
+                                },
+                                "geographicRegionCode": {
+                                  "type": "string"
+                                },
+                                "cityName": {
+                                  "type": "string"
+                                },
+                                "countryCode": {
+                                  "type": "string"
+                                },
+                                "countryName": {
+                                  "type": "string"
+                                },
+                                "postalAddressCategory": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                "inventorBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "middleName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "namePrefix": {
+                          "type": "string"
+                        },
+                        "nameSuffix": {
+                          "type": "string"
+                        },
+                        "preferredName": {
+                          "type": "string"
+                        },
+                        "countryCode": {
+                          "type": "string"
+                        },
+                        "inventorNameText": {
+                          "type": "string"
+                        },
+                        "correspondenceAddressBag": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "nameLineOneText": {
+                                  "type": "string"
+                                },
+                                "nameLineTwoText": {
+                                  "type": "string"
+                                },
+                                "geographicRegionName": {
+                                  "type": "string"
+                                },
+                                "geographicRegionCode": {
+                                  "type": "string"
+                                },
+                                "cityName": {
+                                  "type": "string"
+                                },
+                                "countryCode": {
+                                  "type": "string"
+                                },
+                                "countryName": {
+                                  "type": "string"
+                                },
+                                "postalAddressCategory": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "correspondenceAddressBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "nameLineOneText": {
+                      "type": "string"
+                    },
+                    "nameLineTwoText": {
+                      "type": "string"
+                    },
+                    "addressLineOneText": {
+                      "type": "string"
+                    },
+                    "addressLineTwoText": {
+                      "type": "string"
+                    },
+                    "geographicRegionName": {
+                      "type": "string"
+                    },
+                    "geographicRegionCode": {
+                      "type": "string"
+                    },
+                    "postalCode": {
+                      "type": "string"
+                    },
+                    "cityName": {
+                      "type": "string"
+                    },
+                    "countryCode": {
+                      "type": "string"
+                    },
+                    "countryName": {
+                      "type": "string"
+                    },
+                    "postalAddressCategory": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            },
+            "assignmentBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "reelNumber": {
+                      "type": "integer"
+                    },
+                    "frameNumber": {
+                      "type": "integer"
+                    },
+                    "reelAndFrameNumber": {
+                      "type": "string"
+                    },
+                    "pageTotalQuantity": {
+                      "type": "integer"
+                    },
+                    "assignmentDocumentLocationURI": {
+                      "type": "string"
+                    },
+                    "assignmentReceivedDate": {
+                      "type": "string"
+                    },
+                    "assignmentRecordedDate": {
+                      "type": "string"
+                    },
+                    "assignmentMailedDate": {
+                      "type": "string"
+                    },
+                    "conveyanceText": {
+                      "type": "string"
+                    },
+                    "assignorBag": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "assignorName": {
+                              "type": "string"
+                            },
+                            "executionDate": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "assigneeBag": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "assigneeNameText": {
+                              "type": "string"
+                            },
+                            "assigneeAddress": {
+                              "type": "object",
+                              "properties": {
+                                "addressLineOneText": {
+                                  "type": "string"
+                                },
+                                "addressLineTwoText": {
+                                  "type": "string"
+                                },
+                                "cityName": {
+                                  "type": "string"
+                                },
+                                "geographicRegionName": {
+                                  "type": "string"
+                                },
+                                "geographicRegionCode": {
+                                  "type": "string"
+                                },
+                                "countryName": {
+                                  "type": "string"
+                                },
+                                "postalCode": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "correspondenceAddress": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "correspondentNameText": {
+                              "type": "string"
+                            },
+                            "addressLineOneText": {
+                              "type": "string"
+                            },
+                            "addressLineTwoText": {
+                              "type": "string"
+                            },
+                            "addressLineThreeText": {
+                              "type": "string"
+                            },
+                            "addressLineFourText": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "recordAttorney": {
+              "type": "object",
+              "properties": {
+                "customerNumberCorrespondenceData": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "patronIdentifier": {
+                          "type": "integer"
+                        },
+                        "organizationStandardName": {
+                          "type": "string"
+                        },
+                        "powerOfAttorneyAddressBag": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "nameLineOneText": {
+                                  "type": "string"
+                                },
+                                "addressLineOneText": {
+                                  "type": "string"
+                                },
+                                "addressLineTwoText": {
+                                  "type": "string"
+                                },
+                                "geographicRegionName": {
+                                  "type": "string"
+                                },
+                                "geographicRegionCode": {
+                                  "type": "string"
+                                },
+                                "postalCode": {
+                                  "type": "string"
+                                },
+                                "cityName": {
+                                  "type": "string"
+                                },
+                                "countryCode": {
+                                  "type": "string"
+                                },
+                                "countryName": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "telecommunicationAddressBag": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "telecommunicationNumber": {
+                                  "type": "string"
+                                },
+                                "extensionNumber": {
+                                  "type": "string"
+                                },
+                                "telecomTypeCode": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                "powerOfAttorneyBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "middleName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "namePrefix": {
+                          "type": "string"
+                        },
+                        "nameSuffix": {
+                          "type": "string"
+                        },
+                        "preferredName": {
+                          "type": "string"
+                        },
+                        "countryCode": {
+                          "type": "string"
+                        },
+                        "registrationNumber": {
+                          "type": "string"
+                        },
+                        "activeIndicator": {
+                          "type": "string"
+                        },
+                        "registeredPractitionerCategory": {
+                          "type": "string"
+                        },
+                        "attorneyAddressBag": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "nameLineOneText": {
+                                  "type": "string"
+                                },
+                                "nameLineTwoText": {
+                                  "type": "string"
+                                },
+                                "addressLineOneText": {
+                                  "type": "string"
+                                },
+                                "addressLineTwoText": {
+                                  "type": "string"
+                                },
+                                "geographicRegionName": {
+                                  "type": "string"
+                                },
+                                "geographicRegionCode": {
+                                  "type": "string"
+                                },
+                                "postalCode": {
+                                  "type": "string"
+                                },
+                                "cityName": {
+                                  "type": "string"
+                                },
+                                "countryCode": {
+                                  "type": "string"
+                                },
+                                "countryName": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "telecommunicationAddressBag": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "telecommunicationNumber": {
+                                  "type": "string"
+                                },
+                                "extensionNumber": {
+                                  "type": "string"
+                                },
+                                "telecomTypeCode": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                "attorneyBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "middleName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "namePrefix": {
+                          "type": "string"
+                        },
+                        "nameSuffix": {
+                          "type": "string"
+                        },
+                        "registrationNumber": {
+                          "type": "string"
+                        },
+                        "activeIndicator": {
+                          "type": "string"
+                        },
+                        "registeredPractitionerCategory": {
+                          "type": "string"
+                        },
+                        "attorneyAddressBag": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "nameLineOneText": {
+                                  "type": "string"
+                                },
+                                "nameLineTwoText": {
+                                  "type": "string"
+                                },
+                                "addressLineOneText": {
+                                  "type": "string"
+                                },
+                                "addressLineTwoText": {
+                                  "type": "string"
+                                },
+                                "geographicRegionName": {
+                                  "type": "string"
+                                },
+                                "geographicRegionCode": {
+                                  "type": "string"
+                                },
+                                "postalCode": {
+                                  "type": "string"
+                                },
+                                "cityName": {
+                                  "type": "string"
+                                },
+                                "countryCode": {
+                                  "type": "string"
+                                },
+                                "countryName": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "telecommunicationAddressBag": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "telecommunicationNumber": {
+                                  "type": "string"
+                                },
+                                "extensionNumber": {
+                                  "type": "string"
+                                },
+                                "telecomTypeCode": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "foreignPriorityBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "ipOfficeName": {
+                      "type": "string"
+                    },
+                    "filingDate": {
+                      "type": "string"
+                    },
+                    "applicationNumberText": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            },
+            "parentContinuityBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "firstInventorToFileIndicator": {
+                      "type": "boolean"
+                    },
+                    "parentApplicationStatusCode": {
+                      "type": "integer"
+                    },
+                    "parentPatentNumber": {
+                      "type": "string"
+                    },
+                    "parentApplicationStatusDescriptionText": {
+                      "type": "string"
+                    },
+                    "parentApplicationFilingDate": {
+                      "type": "string"
+                    },
+                    "parentApplicationNumberText": {
+                      "type": "string"
+                    },
+                    "childApplicationNumberText": {
+                      "type": "string"
+                    },
+                    "claimParentageTypeCode": {
+                      "type": "string"
+                    },
+                    "claimParentageTypeCodeDescriptionText": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            },
+            "childContinuityBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "childApplicationStatusCode": {
+                      "type": "integer"
+                    },
+                    "parentApplicationNumberText": {
+                      "type": "string"
+                    },
+                    "childApplicationNumberText": {
+                      "type": "string"
+                    },
+                    "childApplicationStatusDescriptionText": {
+                      "type": "string"
+                    },
+                    "childApplicationFilingDate": {
+                      "type": "string"
+                    },
+                    "firstInventorToFileIndicator": {
+                      "type": "boolean"
+                    },
+                    "childPatentNumber": {
+                      "type": "string"
+                    },
+                    "claimParentageTypeCode": {
+                      "type": "string"
+                    },
+                    "claimParentageTypeCodeDescriptionText": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            },
+            "patentTermAdjustmentData": {
+              "type": "object",
+              "properties": {
+                "aDelayQuantity": {
+                  "type": "number"
+                },
+                "adjustmentTotalQuantity": {
+                  "type": "number"
+                },
+                "applicantDayDelayQuantity": {
+                  "type": "number"
+                },
+                "bDelayQuantity": {
+                  "type": "number"
+                },
+                "cDelayQuantity": {
+                  "type": "number"
+                },
+                "nonOverlappingDayQuantity": {
+                  "type": "number"
+                },
+                "overlappingDayQuantity": {
+                  "type": "number"
+                },
+                "patentTermAdjustmentHistoryDataBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "eventDate": {
+                          "type": "string"
+                        },
+                        "applicantDayDelayQuantity": {
+                          "type": "number"
+                        },
+                        "eventDescriptionText": {
+                          "type": "string"
+                        },
+                        "eventSequenceNumber": {
+                          "type": "number"
+                        },
+                        "ipOfficeDayDelayQuantity": {
+                          "type": "number"
+                        },
+                        "originatingEventSequenceNumber": {
+                          "type": "number"
+                        },
+                        "ptaPTECode": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "eventDataBag": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "eventCode": {
+                      "type": "string"
+                    },
+                    "eventDescriptionText": {
+                      "type": "string"
+                    },
+                    "eventDate": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            },
+            "pgpubDocumentMetaData": {
+              "type": "object",
+              "properties": {
+                "zipFileName": {
+                  "type": "string"
+                },
+                "productIdentifier": {
+                  "type": "string"
+                },
+                "fileLocationURI": {
+                  "type": "string"
+                },
+                "fileCreateDateTime": {
+                  "type": "string"
+                },
+                "xmlFileName": {
+                  "type": "string"
+                }
+              }
+            },
+            "grantDocumentMetaData": {
+              "type": "object",
+              "properties": {
+                "zipFileName": {
+                  "type": "string"
+                },
+                "productIdentifier": {
+                  "type": "string"
+                },
+                "fileLocationURI": {
+                  "type": "string"
+                },
+                "fileCreateDateTime": {
+                  "type": "string"
+                },
+                "xmlFileName": {
+                  "type": "string"
+                }
+              }
+            },
+            "lastIngestionDateTime": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

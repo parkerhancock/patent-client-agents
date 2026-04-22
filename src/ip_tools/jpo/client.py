@@ -19,12 +19,13 @@ import logging
 import os
 import time
 from collections import deque
-from typing import Any, Self
+from typing import Any
 
 import httpx
 from tenacity import AsyncRetrying, stop_after_attempt, wait_exponential_jitter
 
-from ip_tools.core.exceptions import (
+from law_tools_core.base_client import BaseAsyncClient
+from law_tools_core.exceptions import (
     ApiError,
     AuthenticationError,
     ConfigurationError,
@@ -130,8 +131,8 @@ class TokenManager:
                 self._token_expiry = time.time() + expires_in
 
                 logger.debug("Successfully acquired JPO API token (expires in %ds)", expires_in)
-                # self._token is guaranteed to be set at this point
-                assert self._token is not None
+                if self._token is None:
+                    raise RuntimeError("Token acquisition failed")
                 return self._token
 
             except httpx.HTTPStatusError as e:
@@ -187,7 +188,7 @@ class RateLimiter:
             self._timestamps.append(time.time())
 
 
-class JpoClient:
+class JpoClient(BaseAsyncClient):
     """Async client for JPO Patent Information Retrieval API.
 
     Handles OAuth2 authentication, rate limiting, and provides methods
@@ -205,12 +206,16 @@ class JpoClient:
             url = await client.get_patent_jplatpat_url("2020123456")
     """
 
+    DEFAULT_BASE_URL = BASE_URL
+    CACHE_NAME = "jpo"
+    DEFAULT_TIMEOUT = 30.0
+
     def __init__(
         self,
         username: str | None = None,
         password: str | None = None,
         *,
-        base_url: str = BASE_URL,
+        base_url: str | None = None,
         token_path: str = TOKEN_PATH,
         client: httpx.AsyncClient | None = None,
     ) -> None:
@@ -236,34 +241,24 @@ class JpoClient:
                 "or pass username and password parameters."
             )
 
-        self.base_url = base_url.rstrip("/")
-        self._owns_client = client is None
-        self._client = client or httpx.AsyncClient(
-            timeout=30.0,
-            follow_redirects=True,
+        super().__init__(
+            base_url=base_url,
+            client=client,
+            use_cache=False,
+            headers={"Accept": "application/json"},
+            timeout=self.DEFAULT_TIMEOUT,
         )
 
         self._token_manager = TokenManager(
             resolved_username,
             resolved_password,
-            base_url=base_url,
+            base_url=self.base_url,
             token_path=token_path,
         )
         self._rate_limiter = RateLimiter()
 
-    async def close(self) -> None:
-        """Close the underlying HTTP client if we own it."""
-        if self._owns_client:
-            await self._client.aclose()
-
-    async def __aenter__(self) -> Self:
-        return self
-
-    async def __aexit__(self, *exc: object) -> None:
-        await self.close()
-
     def _build_url(self, path: str) -> str:
-        """Build full URL from API path."""
+        """Build full URL from API path, prepending /api."""
         return f"{self.base_url}/api{path}"
 
     async def _request(

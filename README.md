@@ -32,11 +32,17 @@ IP Tools connects Claude Code to USPTO, EPO, JPO, and Google Patents, giving you
 | Source | What You Get |
 |--------|--------------|
 | **Google Patents** | Global search, full-text, citations, PDFs, families |
-| **USPTO ODP** | Applications, prosecution history, PTAB trials & appeals, assignments, bulk data |
-| **EPO OPS** | European patents, Inpadoc families, legal events, EP Register, CPC classification |
+| **USPTO ODP** | Applications, prosecution history, PTAB trials & appeals, petitions, bulk data |
+| **USPTO Publications** | Patent Public Search (PPUBS) full-text search and document retrieval |
+| **USPTO Assignments** | Patent ownership transfers and reel/frame lookups |
+| **USPTO Office Actions** | Rejection analytics, cited references, full-text OA retrieval |
+| **EPO OPS** | European patents, Inpadoc families, legal events, EP Register |
 | **JPO** | Japanese patents, examination history, PCT national phase |
+| **MPEP** | Manual of Patent Examining Procedure search and section lookup |
+| **CPC** | Classification hierarchy lookup, search, and CPC/IPC mapping |
 
-All sources include automatic caching, rate limiting, and retry logic.
+All sources include automatic caching (hishel + SQLite with WAL), rate limiting,
+and retry logic via `law_tools_core`.
 
 ## Install
 
@@ -205,13 +211,25 @@ async with GooglePatentsClient() as client:
 git clone https://github.com/parkerhancock/ip_tools.git
 cd ip_tools
 uv sync --group dev
-uv run pytest                       # 685 tests, replays VCR cassettes
+uv run pytest                       # 767 tests, replays VCR cassettes
 uv run ruff check . && uv run ruff format .
 ```
 
-Tests use [pytest-recording](https://github.com/kiwicom/pytest-recording) (VCR.py) to replay recorded HTTP interactions without hitting live APIs. To record new cassettes: `uv run pytest --record-mode=new_episodes`.
+Tests use [vcrpy](https://vcrpy.readthedocs.io) to replay recorded HTTP interactions
+without hitting live APIs. Record modes:
+```bash
+uv run pytest --vcr-record=once     # Record missing cassettes
+uv run pytest --vcr-record=all      # Re-record everything
+uv run pytest --run-live-uspto      # Skip VCR, hit live USPTO
+uv run pytest --run-live-jpo        # Skip VCR, hit live JPO
+```
 
-Errors follow a log-first pattern — concise messages with a path to `~/.cache/ip_tools/ip_tools.log` for full details.
+API errors follow a log-first pattern — concise messages with a path to
+`~/.cache/ip_tools/ip_tools.log` for full stacktraces.
+
+The shared HTTP scaffolding (`BaseAsyncClient`, cache, exceptions, retry,
+logging) ships as the `law_tools_core` package inside this same wheel —
+other libraries in the same family import it directly.
 
 ## Related
 

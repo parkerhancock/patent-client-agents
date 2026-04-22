@@ -1,0 +1,698 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "count": {
+      "type": "integer"
+    },
+    "bulkDataProductBag": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "productIdentifier": {
+              "type": "string"
+            },
+            "productDescriptionText": {
+              "type": "string"
+            },
+            "productTitleText": {
+              "type": "string"
+            },
+            "productFrequencyText": {
+              "type": "string"
+            },
+            "daysOfWeekText": {
+              "type": "string"
+            },
+            "productLabelArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productDatasetArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productDatasetCategoryArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productFromDate": {
+              "type": "string"
+            },
+            "productToDate": {
+              "type": "string"
+            },
+            "productTotalFileSize": {
+              "type": "integer"
+            },
+            "productFileTotalQuantity": {
+              "type": "integer"
+            },
+            "lastModifiedDateTime": {
+              "type": "string"
+            },
+            "mimeTypeIdentifierArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productFileBag": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "fileDataBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileReleaseDate"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "count",
+                "fileDataBag"
+              ]
+            }
+          },
+          "required": [
+            "productIdentifier",
+            "productDescriptionText",
+            "productTitleText",
+            "productFrequencyText",
+            "daysOfWeekText",
+            "productLabelArrayText",
+            "productDatasetArrayText",
+            "productDatasetCategoryArrayText",
+            "productFromDate",
+            "productToDate",
+            "productTotalFileSize",
+            "productFileTotalQuantity",
+            "lastModifiedDateTime",
+            "mimeTypeIdentifierArrayText",
+            "productFileBag"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "productIdentifier": {
+              "type": "string"
+            },
+            "productDescriptionText": {
+              "type": "string"
+            },
+            "productTitleText": {
+              "type": "string"
+            },
+            "productFrequencyText": {
+              "type": "string"
+            },
+            "daysOfWeekText": {
+              "type": "string"
+            },
+            "productLabelArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productDatasetArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productDatasetCategoryArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productFromDate": {
+              "type": "string"
+            },
+            "productToDate": {
+              "type": "string"
+            },
+            "productTotalFileSize": {
+              "type": "integer"
+            },
+            "productFileTotalQuantity": {
+              "type": "integer"
+            },
+            "lastModifiedDateTime": {
+              "type": "string"
+            },
+            "mimeTypeIdentifierArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productFileBag": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "fileDataBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "count",
+                "fileDataBag"
+              ]
+            }
+          },
+          "required": [
+            "productIdentifier",
+            "productDescriptionText",
+            "productTitleText",
+            "productFrequencyText",
+            "daysOfWeekText",
+            "productLabelArrayText",
+            "productDatasetArrayText",
+            "productDatasetCategoryArrayText",
+            "productFromDate",
+            "productToDate",
+            "productTotalFileSize",
+            "productFileTotalQuantity",
+            "lastModifiedDateTime",
+            "mimeTypeIdentifierArrayText",
+            "productFileBag"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "productIdentifier": {
+              "type": "string"
+            },
+            "productDescriptionText": {
+              "type": "string"
+            },
+            "productTitleText": {
+              "type": "string"
+            },
+            "productFrequencyText": {
+              "type": "string"
+            },
+            "productLabelArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productDatasetArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productDatasetCategoryArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productFromDate": {
+              "type": "string"
+            },
+            "productToDate": {
+              "type": "string"
+            },
+            "productTotalFileSize": {
+              "type": "integer"
+            },
+            "productFileTotalQuantity": {
+              "type": "integer"
+            },
+            "lastModifiedDateTime": {
+              "type": "string"
+            },
+            "mimeTypeIdentifierArrayText": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "productFileBag": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "fileDataBag": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        },
+                        "fileLastModifiedDateTime": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate",
+                        "fileLastModifiedDateTime"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer"
+                        },
+                        "fileDataFromDate": {
+                          "type": "string"
+                        },
+                        "fileDataToDate": {
+                          "type": "string"
+                        },
+                        "fileTypeText": {
+                          "type": "string"
+                        },
+                        "fileDownloadURI": {
+                          "type": "string"
+                        },
+                        "fileReleaseDate": {
+                          "type": "string"
+                        },
+                        "fileDate": {
+                          "type": "string"
+                        },
+                        "fileLastModifiedDateTime": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "fileName",
+                        "fileSize",
+                        "fileDataFromDate",
+                        "fileDataToDate",
+                        "fileTypeText",
+                        "fileDownloadURI",
+                        "fileReleaseDate",
+                        "fileLastModifiedDateTime"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "count",
+                "fileDataBag"
+              ]
+            }
+          },
+          "required": [
+            "productIdentifier",
+            "productDescriptionText",
+            "productTitleText",
+            "productFrequencyText",
+            "productLabelArrayText",
+            "productDatasetArrayText",
+            "productDatasetCategoryArrayText",
+            "productFromDate",
+            "productToDate",
+            "productTotalFileSize",
+            "productFileTotalQuantity",
+            "lastModifiedDateTime",
+            "mimeTypeIdentifierArrayText",
+            "productFileBag"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "count",
+    "bulkDataProductBag"
+  ]
+}

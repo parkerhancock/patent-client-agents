@@ -1,0 +1,60 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/appeals/2026000120/decisions
+  response:
+    body:
+      string: '{"count":1,"requestIdentifier":"9f3d1bf8-0e07-422a-9987-449036997559","patentAppealDataBag":[{"appealNumber":"2026000120","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-03-15T01:16:21","appealMetaData":{"appealFilingDate":"2025-10-15","appealLastModifiedDateTime":"2026-03-14T17:52:49","appealLastModifiedDate":"2026-03-14","applicationTypeCategory":"REGULAR","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000120/2026000120.zip"},"appellantData":{"applicationNumberText":"17766767","counselName":"Lempia
+        Summerfield Katz LLC / Siemens","groupArtUnitNumber":"2857","inventorName":"Daniel
+        Klein","realPartyInInterestName":"Siemens Aktiengesellschaft","patentNumber":"","patentOwnerName":"Siemens
+        Aktiengesellschaft","publicationDate":"2023-05-04","publicationNumber":"US20230135550A1","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"2025-12-29","documentIdentifier":"5ae34aaa-b3ec-4169-820b-e601d7f4a4e4","documentName":"Decision_2026000120_12-29-2025.pdf","documentSizeQuantity":315553,"documentOCRText":"UNITED
+        STATES PATENT AND TRADEMARK OFFICE\nUNITED STATES DEPARTMENT OF COMMERCE\nUnited
+        States Patent and Trademark Office\nAddress:  COMMISSIONER FOR PATENTS\n\nP.O.
+        Box 1450\nAlexandria, Virginia 22313-1450\nwww.uspto.gov\n\nAPPLICATION NO.
+        FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.\n\n17/766,767
+        04/06/2022 Daniel Klein 11371-22025A 3032\n\n162314 7590 12/30/2025\n\nLempia
+        Summerfield Katz LLC / Siemens\n20 S. Clark Street\nSuite 600\nChicago, IL
+        60603\n\nEXAMINER\n\nBECKER, BRANDON J ...","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/000120/5ae34aaa-b3ec-4169-820b-e601d7f4a4e4.pdf"},"decisionData":{"appealOutcomeCategory":"Affirmed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"2025-12-29","decisionTypeCategory":"Decision","issueTypeBag":["103","101"]}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1946'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:43 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e9252b-7e7818fd59a60e1209da057b;Parent=149690acadd5c860;Sampled=0;Lineage=1:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK-2FZcoAMFzEg=
+      x-amzn-RequestId:
+      - 9f3d1bf8-0e07-422a-9987-449036997559
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -6,7 +6,7 @@ from collections.abc import Iterable
 
 import lxml.etree as etree
 
-from ip_tools.core.exceptions import ParseError
+from law_tools_core.exceptions import ParseError
 
 from .models import (
     BiblioRecord,
@@ -23,7 +23,6 @@ from .models import (
     CpcSearchResponse,
     CpcSearchResult,
     CpcTitlePart,
-    DesignatedState,
     DocumentId,
     FamilyMember,
     FamilyResponse,
@@ -31,19 +30,8 @@ from .models import (
     LegalEvent,
     LegalEventsResponse,
     NumberConversionResponse,
-    OppositionData,
-    OppositionParty,
-    ProceduralStep,
-    RegisterBiblioResponse,
-    RegisterEvent,
-    RegisterEventsResponse,
-    RegisterProceduralStepsResponse,
-    RegisterSearchResponse,
-    RegisterSearchResult,
-    RegisterUppResponse,
     SearchResponse,
     SearchResult,
-    UnitaryPatentData,
 )
 
 NS = {
@@ -51,7 +39,6 @@ NS = {
     "epo": "http://www.epo.org/exchange",
     "ft": "http://www.epo.org/fulltext",
     "cpc": "http://www.epo.org/cpcexport",
-    "reg": "http://www.epo.org/register",
 }
 
 
@@ -573,225 +560,3 @@ def parse_cpci_biblio(xml_data: str | bytes) -> CpciBiblioResponse:
                 )
             )
     return CpciBiblioResponse(records=records)
-
-
-# EP Register Parsing Functions
-
-
-def parse_register_search(xml_data: str | bytes) -> RegisterSearchResponse:
-    """Parse EP Register search response."""
-    root = _as_element(xml_data)
-
-    query = _text(root, ".//ops:query")
-    total = _text(root, ".//ops:register-search/@total-result-count")
-    range_begin = _text(root, ".//ops:range/@begin")
-    range_end = _text(root, ".//ops:range/@end")
-
-    results: list[RegisterSearchResult] = []
-    for doc in root.xpath(".//reg:register-document", namespaces=NS):
-        app_ref = _first(doc.xpath(".//reg:application-reference", namespaces=NS))
-        pub_ref = _first(doc.xpath(".//reg:publication-reference", namespaces=NS))
-
-        app_number = None
-        if app_ref is not None:
-            app_number = _text(app_ref, ".//epo:doc-number")
-
-        pub_number = None
-        if pub_ref is not None:
-            country = _text(pub_ref, ".//epo:country") or ""
-            doc_num = _text(pub_ref, ".//epo:doc-number") or ""
-            kind = _text(pub_ref, ".//epo:kind") or ""
-            if doc_num:
-                pub_number = f"{country}{doc_num}{kind}"
-
-        applicants = _collect_texts(doc, ".//reg:applicant//reg:name/text()")
-        title = _text(doc, ".//reg:invention-title[@lang='en']") or _text(
-            doc, ".//reg:invention-title"
-        )
-        status = _text(doc, ".//reg:status")
-
-        results.append(
-            RegisterSearchResult(
-                application_number=app_number,
-                publication_number=pub_number,
-                application_date=_text(doc, ".//reg:application-date"),
-                title=title,
-                applicants=applicants,
-                status=status,
-            )
-        )
-
-    return RegisterSearchResponse(
-        query=query,
-        range_begin=int(range_begin) if range_begin and range_begin.isdigit() else None,
-        range_end=int(range_end) if range_end and range_end.isdigit() else None,
-        total_results=int(total) if total and total.isdigit() else None,
-        results=results,
-    )
-
-
-def parse_register_biblio(xml_data: str | bytes) -> RegisterBiblioResponse:
-    """Parse EP Register bibliographic data."""
-    root = _as_element(xml_data)
-    doc = _first(root.xpath(".//reg:register-document", namespaces=NS))
-
-    if doc is None:
-        return RegisterBiblioResponse()
-
-    # Application reference
-    app_number = _text(doc, ".//reg:application-reference//epo:doc-number")
-    app_date = _text(doc, ".//reg:application-date")
-
-    # Publication reference
-    pub_ref = _first(doc.xpath(".//reg:publication-reference", namespaces=NS))
-    pub_number = None
-    pub_date = None
-    if pub_ref is not None:
-        country = _text(pub_ref, ".//epo:country") or ""
-        doc_num = _text(pub_ref, ".//epo:doc-number") or ""
-        kind = _text(pub_ref, ".//epo:kind") or ""
-        if doc_num:
-            pub_number = f"{country}{doc_num}{kind}"
-        pub_date = _text(pub_ref, ".//epo:date")
-
-    # Grant date
-    grant_date = _text(doc, ".//reg:date-of-grant")
-
-    # Title
-    title = _text(doc, ".//reg:invention-title[@lang='en']") or _text(doc, ".//reg:invention-title")
-
-    # Applicants, inventors, representatives
-    applicants = _collect_texts(doc, ".//reg:applicant//reg:name/text()")
-    inventors = _collect_texts(doc, ".//reg:inventor//reg:name/text()")
-    representatives = _collect_texts(doc, ".//reg:agent//reg:name/text()")
-
-    # Designated states
-    designated_states: list[DesignatedState] = []
-    for state_node in doc.xpath(".//reg:designated-state", namespaces=NS):
-        country_code = _text(state_node, ".//reg:country")
-        if country_code:
-            designated_states.append(
-                DesignatedState(
-                    country_code=country_code,
-                    status=_text(state_node, ".//reg:status"),
-                    effective_date=_text(state_node, ".//reg:effective-date"),
-                )
-            )
-
-    # Status
-    status = _text(doc, ".//reg:status")
-    status_desc = _text(doc, ".//reg:status-description")
-
-    # Opposition data
-    opposition = None
-    opp_node = _first(doc.xpath(".//reg:opposition", namespaces=NS))
-    if opp_node is not None:
-        parties: list[OppositionParty] = []
-        for party in opp_node.xpath(".//reg:party", namespaces=NS):
-            parties.append(
-                OppositionParty(
-                    name=_text(party, ".//reg:name"),
-                    country=_text(party, ".//reg:country"),
-                    role=party.get("role"),
-                )
-            )
-        opposition = OppositionData(
-            opposition_date=_text(opp_node, ".//reg:opposition-date"),
-            status=_text(opp_node, ".//reg:status"),
-            parties=parties,
-        )
-
-    return RegisterBiblioResponse(
-        application_number=app_number,
-        publication_number=pub_number,
-        application_date=app_date,
-        publication_date=pub_date,
-        grant_date=grant_date,
-        title=title,
-        applicants=applicants,
-        inventors=inventors,
-        representatives=representatives,
-        designated_states=designated_states,
-        status=status,
-        status_description=status_desc,
-        opposition=opposition,
-    )
-
-
-def parse_register_events(xml_data: str | bytes) -> RegisterEventsResponse:
-    """Parse EP Register events."""
-    root = _as_element(xml_data)
-    doc = _first(root.xpath(".//reg:register-document", namespaces=NS))
-
-    app_number = None
-    if doc is not None:
-        app_number = _text(doc, ".//reg:application-reference//epo:doc-number")
-
-    events: list[RegisterEvent] = []
-    for event_node in root.xpath(".//reg:event", namespaces=NS):
-        events.append(
-            RegisterEvent(
-                event_code=_text(event_node, ".//reg:event-code"),
-                event_date=_text(event_node, ".//reg:event-date"),
-                event_description=_text(event_node, ".//reg:event-description"),
-                bulletin_number=_text(event_node, ".//reg:bulletin-number"),
-                bulletin_date=_text(event_node, ".//reg:bulletin-date"),
-            )
-        )
-
-    return RegisterEventsResponse(
-        application_number=app_number,
-        events=events,
-    )
-
-
-def parse_register_procedural_steps(xml_data: str | bytes) -> RegisterProceduralStepsResponse:
-    """Parse EP Register procedural steps."""
-    root = _as_element(xml_data)
-    doc = _first(root.xpath(".//reg:register-document", namespaces=NS))
-
-    app_number = None
-    if doc is not None:
-        app_number = _text(doc, ".//reg:application-reference//epo:doc-number")
-
-    steps: list[ProceduralStep] = []
-    for step_node in root.xpath(".//reg:procedural-step", namespaces=NS):
-        steps.append(
-            ProceduralStep(
-                phase=_text(step_node, ".//reg:phase"),
-                step_code=_text(step_node, ".//reg:step-code"),
-                step_description=_text(step_node, ".//reg:step-description"),
-                step_date=_text(step_node, ".//reg:step-date"),
-                office=_text(step_node, ".//reg:office"),
-            )
-        )
-
-    return RegisterProceduralStepsResponse(
-        application_number=app_number,
-        procedural_steps=steps,
-    )
-
-
-def parse_register_upp(xml_data: str | bytes) -> RegisterUppResponse:
-    """Parse EP Register Unitary Patent (UPP) data."""
-    root = _as_element(xml_data)
-    doc = _first(root.xpath(".//reg:register-document", namespaces=NS))
-
-    app_number = None
-    if doc is not None:
-        app_number = _text(doc, ".//reg:application-reference//epo:doc-number")
-
-    upp_data = None
-    upp_node = _first(root.xpath(".//reg:unitary-patent", namespaces=NS))
-    if upp_node is not None:
-        participating = _collect_texts(upp_node, ".//reg:participating-state//reg:country/text()")
-        upp_data = UnitaryPatentData(
-            upp_status=_text(upp_node, ".//reg:status"),
-            registration_date=_text(upp_node, ".//reg:registration-date"),
-            participating_states=participating,
-        )
-
-    return RegisterUppResponse(
-        application_number=app_number,
-        unitary_patent=upp_data,
-    )

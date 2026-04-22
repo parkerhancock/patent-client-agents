@@ -291,7 +291,9 @@ def extract_claims(
 
         # Determine claim type from class attribute or dependency
         class_attr = claim_element.get("class", "")
-        if "child" in class_attr.split() or depends_on:
+        if "child" in class_attr.split():
+            claim_type = "dependent"
+        elif depends_on:
             claim_type = "dependent"
         else:
             claim_type = "independent"

@@ -15,9 +15,9 @@ import httpx
 import lxml.etree as etree
 from pypdf import PdfReader, PdfWriter
 
-from ip_tools.core.cache import build_cached_http_client
-from ip_tools.core.exceptions import AuthenticationError, RateLimitError
-from ip_tools.core.resilience import default_retryer
+from law_tools_core.base_client import BaseAsyncClient
+from law_tools_core.cache import build_cached_http_client
+from law_tools_core.exceptions import AuthenticationError, RateLimitError
 
 from .models import (
     BiblioResponse,
@@ -33,11 +33,6 @@ from .models import (
     LegalEventsResponse,
     NumberConversionResponse,
     PdfDownloadResponse,
-    RegisterBiblioResponse,
-    RegisterEventsResponse,
-    RegisterProceduralStepsResponse,
-    RegisterSearchResponse,
-    RegisterUppResponse,
     SearchResponse,
 )
 from .parsing import (
@@ -51,11 +46,6 @@ from .parsing import (
     parse_family,
     parse_legal_events,
     parse_number_conversion,
-    parse_register_biblio,
-    parse_register_events,
-    parse_register_procedural_steps,
-    parse_register_search,
-    parse_register_upp,
     parse_search_response,
 )
 
@@ -141,7 +131,11 @@ class OpsAuth(httpx.Auth):
         )
 
 
-class EpoOpsClient:
+class EpoOpsClient(BaseAsyncClient):
+    DEFAULT_BASE_URL = BASE_URL
+    CACHE_NAME = "epo_ops"
+    DEFAULT_TIMEOUT = 60.0
+
     def __init__(
         self,
         *,
@@ -150,15 +144,22 @@ class EpoOpsClient:
         cache_path: Path | None = None,
         timeout: float = 60.0,
     ) -> None:
+        # Build the HTTP client directly to pass EPO-specific kwargs
+        # (base_url, policy, http2) that BaseAsyncClient doesn't forward.
         cache_dir = cache_path or CACHE_DIR
         cache_dir.mkdir(parents=True, exist_ok=True)
         headers = {
             "Accept": "application/xml",
-            "User-Agent": "patent-mcp-epo-ops/0.1",
+            "User-Agent": "ip-tools-epo-ops/0.2",
         }
-        client, self._cache_manager = build_cached_http_client(
+        self.base_url = self.DEFAULT_BASE_URL.rstrip("/")
+        self._owns_client = True
+        self._max_retries = 4
+        self._timeout = timeout
+        self._client, self._cache_manager = build_cached_http_client(
             use_cache=True,
-            cache_name="epo_ops",
+            cache_name=self.CACHE_NAME,
+            cache_dir=cache_dir,
             headers=headers,
             auth=OpsAuth(api_key, api_secret),
             timeout=timeout,
@@ -166,30 +167,18 @@ class EpoOpsClient:
             policy=hishel.SpecificationPolicy(),
             http2=False,
         )
-        self._client = client
 
-    async def close(self) -> None:
-        await self._client.aclose()
+    def _build_url(self, path: str) -> str:
+        """Build a full URL, passing through absolute URLs unchanged."""
+        if path.startswith("http"):
+            return path
+        return f"{self.base_url}{path}"
 
-    async def __aenter__(self) -> EpoOpsClient:
-        return self
-
-    async def __aexit__(self, *exc: Any) -> None:
-        await self.close()
-
-    async def _request(self, method: str, path: str, **kwargs: Any) -> httpx.Response:
-        url = path if path.startswith("http") else f"{BASE_URL}{path}"
-        logger.debug("EPO OPS %s %s", method, url)
-        async for attempt in default_retryer():
-            with attempt:
-                response = await self._client.request(method, url, **kwargs)
-                if response.status_code == 403:
-                    raise self._build_forbidden_error(response)
-                response.raise_for_status()
-                logger.debug("EPO OPS %s %s -> %s", method, url, response.status_code)
-                return response
-        # Should not reach here due to reraise=True in retryer
-        raise RuntimeError("Unexpected retry exhaustion")
+    def _raise_for_status(self, response: httpx.Response, context: str = "") -> None:
+        """Check for 403 (EPO rate limiting) before standard error handling."""
+        if response.status_code == 403:
+            raise self._build_forbidden_error(response)
+        super()._raise_for_status(response, context)
 
     @staticmethod
     def _build_forbidden_error(response: httpx.Response) -> OpsForbiddenError:
@@ -378,6 +367,8 @@ class EpoOpsClient:
             f"{input_schema.lower()}/{normalized_symbol}/{output_schema.lower()}"
         )
         response = await self._request("GET", path, params=params)
+        if not response.text or not response.text.strip().startswith("<"):
+            return ClassificationMappingResponse(mappings=[])
         return parse_classification_mapping(response.text)
 
     async def fetch_cpc_media(self, *, media_id: str, accept: str) -> CpcMediaResponse:
@@ -427,12 +418,14 @@ class EpoOpsClient:
         num_pages = int(num_pages_str)
         pdf_writer = PdfWriter()
         for page in range(1, num_pages + 1):
-            page_response = await self._request(
+            page_url = self._build_url(f"/rest-services/{link}.pdf")
+            page_response = await self._client.request(
                 "GET",
-                f"/rest-services/{link}.pdf",
+                page_url,
                 params={"Range": page},
                 extensions={"force_cache": True},
             )
+            self._raise_for_status(page_response)
             reader = PdfReader(BytesIO(page_response.content))
             page_obj = reader.pages[0]
             rotation = page_obj.get("/Rotate")
@@ -447,119 +440,6 @@ class EpoOpsClient:
             num_pages=num_pages,
             pdf_base64=base64.b64encode(pdf_bytes).decode("ascii"),
         )
-
-    # ─────────────────────────────────────────────────────────────────────────
-    # EP Register Methods
-    # ─────────────────────────────────────────────────────────────────────────
-
-    async def search_register(
-        self,
-        *,
-        query: str,
-        range_begin: int = 1,
-        range_end: int = 25,
-    ) -> RegisterSearchResponse:
-        """Search the EP Register for European patent applications.
-
-        Args:
-            query: CQL query (e.g., 'pa="Siemens"' for applicant search)
-            range_begin: Start of result range (1-indexed)
-            range_end: End of result range
-
-        Returns:
-            RegisterSearchResponse with matching applications
-        """
-        params = {"q": query, "Range": f"{range_begin}-{range_end}"}
-        response = await self._request("GET", "/rest-services/register/search", params=params)
-        return parse_register_search(response.text)
-
-    async def fetch_register_biblio(
-        self,
-        *,
-        number: str,
-        doc_type: str = "application",
-        fmt: str = "epodoc",
-    ) -> RegisterBiblioResponse:
-        """Fetch EP Register bibliographic data for an application.
-
-        Args:
-            number: Application number (e.g., 'EP20200001')
-            doc_type: 'application' or 'publication'
-            fmt: Number format ('epodoc' or 'docdb')
-
-        Returns:
-            RegisterBiblioResponse with detailed register data
-        """
-        normalized = self._normalize_number(number)
-        path = f"/rest-services/register/{doc_type}/{fmt}/{normalized}/biblio"
-        response = await self._request("GET", path)
-        return parse_register_biblio(response.text)
-
-    async def fetch_register_events(
-        self,
-        *,
-        number: str,
-        doc_type: str = "application",
-        fmt: str = "epodoc",
-    ) -> RegisterEventsResponse:
-        """Fetch EP Register events for an application.
-
-        Args:
-            number: Application number (e.g., 'EP20200001')
-            doc_type: 'application' or 'publication'
-            fmt: Number format ('epodoc' or 'docdb')
-
-        Returns:
-            RegisterEventsResponse with register events
-        """
-        normalized = self._normalize_number(number)
-        path = f"/rest-services/register/{doc_type}/{fmt}/{normalized}/events"
-        response = await self._request("GET", path)
-        return parse_register_events(response.text)
-
-    async def fetch_register_procedural_steps(
-        self,
-        *,
-        number: str,
-        doc_type: str = "application",
-        fmt: str = "epodoc",
-    ) -> RegisterProceduralStepsResponse:
-        """Fetch EP Register procedural steps (prosecution history).
-
-        Args:
-            number: Application number (e.g., 'EP20200001')
-            doc_type: 'application' or 'publication'
-            fmt: Number format ('epodoc' or 'docdb')
-
-        Returns:
-            RegisterProceduralStepsResponse with procedural steps
-        """
-        normalized = self._normalize_number(number)
-        path = f"/rest-services/register/{doc_type}/{fmt}/{normalized}/procedural-steps"
-        response = await self._request("GET", path)
-        return parse_register_procedural_steps(response.text)
-
-    async def fetch_register_upp(
-        self,
-        *,
-        number: str,
-        doc_type: str = "application",
-        fmt: str = "epodoc",
-    ) -> RegisterUppResponse:
-        """Fetch Unitary Patent (UPP) data from EP Register.
-
-        Args:
-            number: Application number (e.g., 'EP20200001')
-            doc_type: 'application' or 'publication'
-            fmt: Number format ('epodoc' or 'docdb')
-
-        Returns:
-            RegisterUppResponse with UPP status and participating states
-        """
-        normalized = self._normalize_number(number)
-        path = f"/rest-services/register/{doc_type}/{fmt}/{normalized}/upp"
-        response = await self._request("GET", path)
-        return parse_register_upp(response.text)
 
 
 def client_from_env() -> EpoOpsClient:

@@ -1,0 +1,161 @@
+interactions:
+- request:
+    body: '{"q":"*","pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '45'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/interferences/decisions/search
+  response:
+    body:
+      string: "{\"count\":1812,\"requestIdentifier\":\"cbac271e-57f0-4a89-bd5d-ff48d614f3ec\",\"patentInterferenceDataBag\":[{\"interferenceNumber\":\"106130\",\"lastModifiedDateTime\":\"2025-12-12T17:18:56\",\"additionalPartyDataBag\":[{\"applicationNumberText\":\"16159021\",\"inventorName\":\"Lee
+        M Kaplan et al\",\"patentNumber\":\"\",\"additionalPartyName\":\"LEE M. KAPLAN,
+        ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS\"},{\"applicationNumberText\":\"15698965\",\"inventorName\":\"Lee
+        M Kaplan et al\",\"patentNumber\":\"10149870\",\"additionalPartyName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS\"},{\"applicationNumberText\":\"16669143\",\"inventorName\":\"Lee
+        M Kaplan et al\",\"patentNumber\":\"10729732\",\"additionalPartyName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS\"}],\"interferenceMetaData\":{\"interferenceLastModifiedDateTime\":\"2025-11-13T00:00:00\",\"interferenceLastModifiedDate\":\"2025-11-13\",\"declarationDate\":\"2021-01-26\",\"interferenceStyleName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v. PATRICE
+        CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/106130.zip\"},\"seniorPartyData\":{\"applicationNumberText\":\"14443829\",\"counselName\":\"ALSTON
+        & BIRD and GEMINI LAW LLP \",\"groupArtUnitNumber\":\"1651\",\"inventorName\":\"Patrice
+        Cani et al\",\"patentOwnerName\":\"CANI, PATRICE; EVERARD, Amandine; BELZER,
+        Clara; DE VOS Willem\",\"publicationDate\":\"2015-10-29\",\"publicationNumber\":\"US20150306152A1\",\"realPartyInInterestName\":\"UNIVERSIT\xC9
+        CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT\",\"technologyCenterNumber\":\"1600\"},\"juniorPartyData\":{\"applicationNumberText\":\"14862663\",\"counselName\":\"ROTHWELL,
+        FIGG, ERNST & MANBECK, P.C. and LATHROP GAGE LLP\",\"grantDate\":\"2018-12-11\",\"groupArtUnitNumber\":\"1651\",\"inventorName\":\"Lee
+        M. Kaplan et al\",\"patentNumber\":\"10149867\",\"publicationDate\":\"2016-04-28\",\"publicationNumber\":\"US20160113971A1\",\"realPartyInInterestName\":\"Ethicon
+        Endo-Surgery, Inc.; The General Hospital Corporation D/B/A Massachusetts General
+        Hospital; President and Fellows of Harvard College \",\"technologyCenterNumber\":\"1600\"},\"documentData\":{\"documentIdentifier\":\"229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b\",\"documentName\":\"106130_106130-jd-20250128.pdf\",\"documentSizeQuantity\":97923,\"documentOCRText\":\"Microsoft
+        Word - 106,130 Judgment (to be mailed)\\n\\n\\n       \\nTrials@uspto.gov
+        \      Filed: January 28, 2025 \\nTel: 571-272-7822 \\n \\n\\nUNITED STATES
+        PATENT AND TRADEMARK OFFICE \\n_______________ \\n\\n \\nBEFORE THE PATENT
+        TRIAL AND APPEAL BOARD \\n\\n \\n________________ \\n\\n  \\nLEE M. KAPLAN,
+        \ \\n\\nALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS,  \\n \\n\\nJunior
+        Party  \\n(Patents 10,149,867; 10,149,870; and 10,729,732; \\n\\nand Application
+        16/159,021),  \\n \\n\\nv.  \\n \\n\\nPATRICE CANI,  \\nAMANDINE EVERARD,
+        CLARA BELZER, and WILLEM\",\"documentTitleText\":\"Judgment 37 C.F.R. \xA7
+        41.127(a)\",\"interferenceOutcomeCategory\":\"Judgment\",\"statuteAndRuleBag\":[\"37
+        CFR 41.127(a)\"],\"decisionIssueDate\":\"2025-01-28\",\"decisionTypeCategory\":\"Decision\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/Intf508_10613014862663_1738040400000.pdf\",\"documentFilingDate\":\"2025-01-28\"}},{\"interferenceNumber\":\"106130\",\"lastModifiedDateTime\":\"2025-12-12T17:18:56\",\"additionalPartyDataBag\":[{\"applicationNumberText\":\"16159021\",\"inventorName\":\"Lee
+        M Kaplan et al\",\"patentNumber\":\"\",\"additionalPartyName\":\"LEE M. KAPLAN,
+        ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS\"},{\"applicationNumberText\":\"15698965\",\"inventorName\":\"Lee
+        M Kaplan et al\",\"patentNumber\":\"10149870\",\"additionalPartyName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS\"},{\"applicationNumberText\":\"16669143\",\"inventorName\":\"Lee
+        M Kaplan et al\",\"patentNumber\":\"10729732\",\"additionalPartyName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS\"}],\"interferenceMetaData\":{\"interferenceLastModifiedDateTime\":\"2025-11-13T00:00:00\",\"interferenceLastModifiedDate\":\"2025-11-13\",\"declarationDate\":\"2021-01-26\",\"interferenceStyleName\":\"LEE
+        M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v. PATRICE
+        CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/106130.zip\"},\"seniorPartyData\":{\"applicationNumberText\":\"14443829\",\"counselName\":\"ALSTON
+        & BIRD and GEMINI LAW LLP \",\"groupArtUnitNumber\":\"1651\",\"inventorName\":\"Patrice
+        Cani et al\",\"patentOwnerName\":\"CANI, PATRICE; EVERARD, Amandine; BELZER,
+        Clara; DE VOS Willem\",\"publicationDate\":\"2015-10-29\",\"publicationNumber\":\"US20150306152A1\",\"realPartyInInterestName\":\"UNIVERSIT\xC9
+        CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT\",\"technologyCenterNumber\":\"1600\"},\"juniorPartyData\":{\"applicationNumberText\":\"14862663\",\"counselName\":\"ROTHWELL,
+        FIGG, ERNST & MANBECK, P.C. and LATHROP GAGE LLP\",\"grantDate\":\"2018-12-11\",\"groupArtUnitNumber\":\"1651\",\"inventorName\":\"Lee
+        M. Kaplan et al\",\"patentNumber\":\"10149867\",\"publicationDate\":\"2016-04-28\",\"publicationNumber\":\"US20160113971A1\",\"realPartyInInterestName\":\"Ethicon
+        Endo-Surgery, Inc.; The General Hospital Corporation D/B/A Massachusetts General
+        Hospital; President and Fellows of Harvard College \",\"technologyCenterNumber\":\"1600\"},\"documentData\":{\"documentIdentifier\":\"d8c2fdbf4c9e2a4e8c989e88b8f5ca7fbd8c2806afce701bf2de4903\",\"documentName\":\"106130_106130-priority-20250128.pdf\",\"documentSizeQuantity\":568152,\"documentOCRText\":\"Microsoft
+        Word - 106130 Decision on Priority (to be mailed)\\n\\n\\nTrials@uspto.gov
+        \      Filed: January 28, 2025 \\nTel: 571-272-7822 \\n \\n \\n\\nUNITED STATES
+        PATENT AND TRADEMARK OFFICE \\n_______________ \\n\\n \\nBEFORE THE PATENT
+        TRIAL AND APPEAL BOARD \\n\\n_______________ \\n \\n\\nLEE M. KAPLAN,  \\nALICE
+        P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS,  \\n\\n \\nJunior Party
+        \ \\n\\n(Patents 10,149,867; 10,149,870; and 10,729,732; \\nand Application
+        16/159,021),  \\n\\n \\nv.  \\n \\n\\nPATRICE CANI,  \\nAMANDINE EVERARD,
+        CLARA BELZER, and WILLEM\",\"documentTitleText\":\"Decision on Priority\",\"interferenceOutcomeCategory\":\"Decision
+        on Motion\",\"statuteAndRuleBag\":[\"37 CFR 1.132\"],\"decisionIssueDate\":\"2025-01-28\",\"decisionTypeCategory\":\"Motion
+        Decision\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/Intf504_10613014862663_1738040400000.pdf\",\"documentFilingDate\":\"2025-01-28\"}},{\"interferenceNumber\":\"106125\",\"lastModifiedDateTime\":\"2025-12-12T17:18:56\",\"interferenceMetaData\":{\"interferenceLastModifiedDateTime\":\"2025-11-18T00:00:00\",\"interferenceLastModifiedDate\":\"2025-11-18\",\"declarationDate\":\"2020-08-10\",\"interferenceStyleName\":\"ULRICH
+        SPECK and BRUNO SCHELLER v. BRIAN L. BATES, ANTHONY O. RAGHEB, JOSEPH M. STEWART
+        IV, WILLIAM J. BOURDEAU, BRIAN D. CHOULES, JAMES D. PURDY, and NEAL E. FEARNOT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106125/106125.zip\"},\"seniorPartyData\":{\"applicationNumberText\":\"14013591\",\"counselName\":\"WOODARD,
+        EMHARDT, HENRY, REEVES & WAGNER, LLP\",\"groupArtUnitNumber\":\"3783\",\"inventorName\":\"BRIAN
+        L. BATES et al\",\"patentOwnerName\":\"BRIAN L. BATES, ANTHONY O. RAGHEB,
+        JOSEPH M. STEWART IV, WILLIAM J. BOURDEAU, BRIAN D. CHOULES, JAMES D. PURDY,
+        and NEAL E. FEARNOT\",\"publicationDate\":\"2014-01-02\",\"publicationNumber\":\"20140005541A1\",\"realPartyInInterestName\":\"BRIAN
+        L. BATES, ANTHONY O. RAGHEB, JOSEPH M. STEWART IV, WILLIAM J. BOURDEAU, BRIAN
+        D. CHOULES, JAMES D. PURDY, and NEAL E. FEARNOT\",\"technologyCenterNumber\":\"3700\"},\"juniorPartyData\":{\"applicationNumberText\":\"10528577\",\"counselName\":\"PILLSBURY
+        WINTHROP SHAW PITTMAN LLP\",\"grantDate\":\"2012-09-04\",\"groupArtUnitNumber\":\"3783\",\"inventorName\":\"ULRICH
+        SPECK et al\",\"patentNumber\":\"8257305\",\"patentOwnerName\":\"ULRICH SPECK
+        and BRUNO SCHELLER\",\"publicationDate\":\"2006-01-26\",\"publicationNumber\":\"20060020243\",\"realPartyInInterestName\":\"ULRICH
+        SPECK and BRUNO SCHELLER\",\"technologyCenterNumber\":\"3700\"},\"documentData\":{\"documentIdentifier\":\"f6115f9e1f9603d41b6fcb4a0dfc16b06b4166324f1a66824f4cafba\",\"documentName\":\"106125_106125-jd-20240730.pdf\",\"documentSizeQuantity\":120025,\"documentOCRText\":\"BoxInterferences@uspto.gov
+        \     Filed: July 30, 2024 \\nTel: 571-272-9797 \\n \\n\\nUNITED STATES PATENT
+        AND TRADEMARK OFFICE \\n_______________ \\n\\n \\nBEFORE THE PATENT TRIAL
+        AND APPEAL BOARD \\n\\n_______________ \\n \\n\\nULRICH SPECK and BRUNO SCHELLER,
+        \ \\n \\n\\nJunior Party  \\n(Patent 8,257,305),  \\n\\n \\nv.  \\n \\n\\nBRIAN
+        L. BATES, ANTHONY O. RAGHEB, JOSEPH M. STEWART IV, \\nWILLIAM J. BOURDEAU,
+        BRIAN D. CHOULES, JAMES D. PURDY, and \\n\\nNEAL E. FEARNOT,  \\n \\n\\nSenior
+        Party  \\n(Application 14/013,591),  \\n\\n______________ \\n \\n\\nPatent
+        Interference\",\"documentTitleText\":\"Judgment 37 C.F.R. \xA7 41.127(a)\",\"interferenceOutcomeCategory\":\"Decision
+        after Court Decision\",\"statuteAndRuleBag\":[\"37 CFR 41.127(a)\"],\"decisionIssueDate\":\"2024-07-30\",\"decisionTypeCategory\":\"Decision\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106125/Intf610_10612514013591_1722312000000.pdf\",\"documentFilingDate\":\"2024-07-30\"}},{\"interferenceNumber\":\"106138\",\"lastModifiedDateTime\":\"2025-12-12T17:18:56\",\"additionalPartyDataBag\":[{\"applicationNumberText\":\"16243817\",\"inventorName\":\"Meir
+        \ Adest et al\",\"patentNumber\":\"\",\"additionalPartyName\":\"SolarEdge
+        Technologies Ltd. \"}],\"interferenceMetaData\":{\"interferenceLastModifiedDateTime\":\"2023-09-21T00:00:00\",\"interferenceLastModifiedDate\":\"2023-09-21\",\"declarationDate\":\"2023-04-25\",\"interferenceStyleName\":\"SMA
+        Solar Technology AG  v. SolarEdge Technologies Ltd. \",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106138/106138.zip\"},\"seniorPartyData\":{\"applicationNumberText\":\"16243612\",\"counselName\":\"BANNER
+        & WITCOFF, LTD. \",\"groupArtUnitNumber\":\"2836\",\"inventorName\":\"Meir
+        \  Adest  et al\",\"patentOwnerName\":\"Meir Adest, Lior Handelsman, Yoav
+        Galin, Amir Fishelov,  Meir Gazit, Yaron Binder, and Guy Sella\",\"publicationDate\":\"2019-05-16\",\"publicationNumber\":\"US20190149037A1\",\"realPartyInInterestName\":\"SolarEdge
+        Technologies Ltd. \",\"technologyCenterNumber\":\"2800\"},\"juniorPartyData\":{\"applicationNumberText\":\"14205606\",\"counselName\":\"ESCHWEILER
+        & POTASHNIK LLC \",\"grantDate\":\"2018-01-09\",\"groupArtUnitNumber\":\"2842\",\"inventorName\":\"Jens
+        \ Friebe  et al\",\"patentNumber\":\"9865411\",\"patentOwnerName\":\"Jens
+        Friebe and Sebstian Bieniek\",\"publicationDate\":\"2014-07-10\",\"publicationNumber\":\"US20140191589A1\",\"realPartyInInterestName\":\"SMA
+        Solar Technology AG\",\"technologyCenterNumber\":\"2800\"},\"documentData\":{\"documentIdentifier\":\"f7fc643dad8e0660e785a4f72b13fae2e95023575d1fa4494c83c7f4\",\"documentName\":\"106138_106138_20230921_judgment.pdf\",\"documentSizeQuantity\":103659,\"documentOCRText\":\"Microsoft
+        Word - 106,138 Judgment circ\\n\\n\\nBoxInterferences@uspto.gov           Filed:
+        21 September 2023 \\nTel: 571-272-9797 \\n \\n\\nUNITED STATES PATENT AND
+        TRADEMARK OFFICE \\n_______________ \\n\\n \\nBEFORE THE PATENT TRIAL AND
+        APPEAL BOARD \\n\\n_______________ \\n \\n\\nSMA Solar Technology AG  \\n(Inventors:
+        Jens Friebe and Sebstian Bieniek)  \\n\\n \\nJunior Party  \\n\\n(Patent 9,865,411),
+        \ \\n \\n\\nv.  \\n \\n\\nSolarEdge Technologies Ltd.  \\n(Inventors: Meir
+        Adest, Lior Handelsman, Yoav Galin, Amir Fishelov,  \\n\\nMeir Gazit, Yaron
+        Binder\",\"documentTitleText\":\"JUDGMENT 37 C.F.R. \xA7 41.127(b)(3)\",\"interferenceOutcomeCategory\":\"Judgment\",\"decisionIssueDate\":\"2023-09-21\",\"decisionTypeCategory\":\"Decision\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106138/Intf508_10613814205606_1695268800000.pdf\",\"documentFilingDate\":\"2023-09-21\"}},{\"interferenceNumber\":\"106135\",\"lastModifiedDateTime\":\"2025-12-12T17:18:56\",\"interferenceMetaData\":{\"interferenceLastModifiedDateTime\":\"2023-08-22T00:00:00\",\"interferenceLastModifiedDate\":\"2023-08-22\",\"declarationDate\":\"2021-08-26\",\"interferenceStyleName\":\"SHL
+        MEDICAL AG v. SANOFI-AVENTIS DEUTSCHLAND GMBH\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106135/106135.zip\"},\"seniorPartyData\":{\"applicationNumberText\":\"15809398\",\"counselName\":\"PERKINS
+        COIE LLP  \",\"groupArtUnitNumber\":\"3783\",\"inventorName\":\"ANDERS  HOLMQVIST\",\"patentOwnerName\":\"ANDERS
+        HOLMQVIST and HSUEH-YI CHEN\",\"publicationDate\":\"2018-03-08\",\"publicationNumber\":\"US20180064875A1\",\"realPartyInInterestName\":\"SHL
+        MEDICAL AG \",\"technologyCenterNumber\":\"3700\"},\"juniorPartyData\":{\"applicationNumberText\":\"17020027\",\"counselName\":\"FISH
+        & RICHARDSON P.C. \",\"groupArtUnitNumber\":\"3783\",\"inventorName\":\"YANNICK
+        HOURMAND et al\",\"patentOwnerName\":\"YANNICK HOURMAND, DOUGLAS IVAN JENNINGS,
+        and MATTHEW EKMAN\",\"publicationDate\":\"2020-12-31\",\"publicationNumber\":\"US20200405961A1\",\"realPartyInInterestName\":\"SANOFI-AVENTIS
+        DEUTSCHLAND GMBH\",\"technologyCenterNumber\":\"3700\"},\"documentData\":{\"documentIdentifier\":\"ced291e7953e57ff683593f808eff9e9dd2d88b4465bd690e9315944\",\"documentName\":\"106135_106135_20230822_judgment.pdf\",\"documentSizeQuantity\":1368570,\"documentOCRText\":\"Microsoft
+        Word - 106,135 circ Decision on Priority\\n\\n\\nBoxInterferences@uspto.gov
+        \     Filed: 22 August 2023 \\nTel: 571-272-9797 \\n \\n\\nUNITED STATES PATENT
+        AND TRADEMARK OFFICE \\n_______________ \\n\\n \\nBEFORE THE PATENT TRIAL
+        AND APPEAL BOARD \\n\\n_______________ \\n \\n\\nSHL MEDICAL AG  \\n(INVENTORS:
+        ANDERS HOLMQVIST, and HSUEH-YI CHEN),  \\n\\n \\nJunior Party  \\n\\n(Application
+        15/809,398)  \\n \\n\\nv.  \\n \\n\\nSANOFI-AVENTIS DEUTSCHLAND GMBH  \\n(INVENTORS:
+        YANNICK HOURMAND, DOUGLAS IVAN JENNINGS, and \\n\\nMATTHEW EKMAN),  \\n \\n\\nSenior\",\"documentTitleText\":\"DECISION
+        ON PRIORITY 37 C.F.R. \xA7 41.125(a)\",\"interferenceOutcomeCategory\":\"Judgment\",\"decisionIssueDate\":\"2023-08-22\",\"decisionTypeCategory\":\"Decision\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106135/Intf508_10613515809398_1692676800000.pdf\",\"documentFilingDate\":\"2023-08-22\"}}]}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '13736'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:48 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e9252b-629e2c1d67272daf10fe2789;Parent=716c1964fab6ef4a;Sampled=0;Lineage=1:5fd89aa0:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK-7EDYIAMFTAQ=
+      x-amzn-RequestId:
+      - cbac271e-57f0-4a89-bd5d-ff48d614f3ec
+    status:
+      code: 200
+      message: OK
+version: 1

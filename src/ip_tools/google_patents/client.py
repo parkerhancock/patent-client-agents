@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import asyncio
 import io
 import json
 import logging
 import re
+import time
 from collections.abc import Iterable, Sequence
 from datetime import date, datetime
 from typing import TYPE_CHECKING, Any
@@ -18,13 +20,54 @@ from tenacity import AsyncRetrying, stop_after_attempt, wait_exponential_jitter
 if TYPE_CHECKING:  # pragma: no cover - typing only
     pass
 
-from ip_tools.core.exceptions import NotFoundError
-from ip_tools.core.tooling import agent_tool
+from law_tools_core.tooling import agent_tool
 
 from .cache import build_cached_http_client
 from .parsers import extract_claims, extract_figures, extract_metadata
 
 logger = logging.getLogger(__name__)
+
+
+# ---------------------------------------------------------------------------
+# Rate limiter — Google Patents returns 503 after ~3 rapid requests and
+# requires a multi-minute cooldown. This limits to 1 request per
+# _MIN_INTERVAL seconds and backs off on 503s.
+# ---------------------------------------------------------------------------
+
+_MIN_INTERVAL = 4.0  # seconds between requests
+_COOLDOWN_SECONDS = 90.0  # wait after a 503 before retrying
+
+_rate_lock = asyncio.Lock()
+_last_request_time: float = 0.0
+_cooldown_until: float = 0.0
+
+
+async def _rate_limit() -> None:
+    """Wait until we are allowed to make the next Google Patents request."""
+    global _last_request_time
+    async with _rate_lock:
+        now = time.monotonic()
+        # If we are in a cooldown period from a 503, wait it out
+        if now < _cooldown_until:
+            wait = _cooldown_until - now
+            logger.info("Google Patents cooldown: waiting %.0fs", wait)
+            await asyncio.sleep(wait)
+            now = time.monotonic()
+        # Enforce minimum interval between requests
+        elapsed = now - _last_request_time
+        if elapsed < _MIN_INTERVAL:
+            await asyncio.sleep(_MIN_INTERVAL - elapsed)
+        _last_request_time = time.monotonic()
+
+
+def _trigger_cooldown() -> None:
+    """Start a cooldown period after a 503 response."""
+    global _cooldown_until
+    _cooldown_until = time.monotonic() + _COOLDOWN_SECONDS
+    logger.warning(
+        "Google Patents rate limited (503) — cooling down for %.0fs",
+        _COOLDOWN_SECONDS,
+    )
 
 
 def _build_http_client(*, use_cache: bool):
@@ -37,13 +80,41 @@ def _build_http_client(*, use_cache: bool):
     )
 
 
+_PARA_NUM_RE = re.compile(r'<para-num\s+num="(\[\d+\])"\s*>\s*</para-num>')
+# Hidden spans that contain duplicate paragraph numbers scattered throughout text
+_HIDDEN_PARA_SPAN_RE = re.compile(
+    r'<span\s+style="display:\s*none"\s*>\s*\[\d+\]\s*</span>',
+    re.IGNORECASE,
+)
+
+
+def _preprocess_patent_html(html_string: str) -> str:
+    """Preprocess Google Patents HTML to preserve paragraph numbers.
+
+    Google Patents uses two representations of paragraph markers:
+    1. <para-num num="[0001]"></para-num> at paragraph starts (good)
+    2. <span style="display: none">[0001]</span> scattered mid-text (bad)
+
+    This function:
+    - Converts <para-num> tags to visible [0001] text at paragraph starts
+    - Removes hidden spans that would otherwise pollute the text
+    """
+    # First remove hidden spans with paragraph numbers (they appear mid-sentence)
+    result = _HIDDEN_PARA_SPAN_RE.sub("", html_string)
+    # Then convert para-num tags to visible text at paragraph starts
+    result = _PARA_NUM_RE.sub(r"\1 ", result)
+    return result
+
+
 def _html_to_markdown(html_string: str | None) -> str | None:
     """Convert HTML string to markdown using MarkItDown."""
     if not html_string:
         return None
     try:
+        # Preprocess to preserve paragraph numbers
+        preprocessed = _preprocess_patent_html(html_string)
         md = MarkItDown(enable_plugins=False)
-        stream = io.BytesIO(html_string.encode("utf-8"))
+        stream = io.BytesIO(preprocessed.encode("utf-8"))
         result = md.convert_stream(stream, file_extension=".html")
         return result.text_content
     except Exception as exc:  # pragma: no cover - defensive
@@ -818,9 +889,12 @@ async def fetch_patent_from_google_patents(
     logger.debug("Fetching patent data for %s", normalized)
     url = f"https://patents.google.com/patent/{normalized}/en"
 
+    await _rate_limit()
     async with _build_http_client(use_cache=use_cache) as client:
         try:
             response = await client.get(url, follow_redirects=True, timeout=30.0)
+            if response.status_code == 503:
+                _trigger_cooldown()
             response.raise_for_status()
         except Exception as exc:  # pragma: no cover - network failures
             logger.error("Error fetching patent %s: %s", normalized, exc)
@@ -828,7 +902,7 @@ async def fetch_patent_from_google_patents(
 
         if "Sorry, we couldn't find this patent" in response.text:
             logger.warning("Patent %s not found in Google Patents", normalized)
-            raise NotFoundError(f"Patent {normalized} not found on Google Patents", 404)
+            raise FileNotFoundError(f"Patent {normalized} not found on Google Patents")
 
         document = html.fromstring(response.text)
         metadata = extract_metadata(document, response.text, patent_number=normalized)
@@ -966,18 +1040,24 @@ class GooglePatentsClient:
                     normalized, use_cache=self._use_cache
                 )
                 return patent_data
-        from ip_tools.core.exceptions import ApiError
-
-        raise ApiError(f"Unable to fetch patent data for {normalized} after retries")
+        raise RuntimeError(f"Unable to fetch patent data for {normalized} after retries")
 
     async def _get_patent_data(self, patent_number: str) -> PatentData:
         return await self._fetch_with_retry(patent_number)
 
-    async def get_patent_data(self, patent_number: str) -> PatentData:
-        return await self._fetch_with_retry(patent_number)
+    async def get_patent_data(self, patent_number: str) -> PatentData | None:
+        try:
+            return await self._fetch_with_retry(patent_number)
+        except Exception as exc:  # pragma: no cover - defensive logging
+            logger.error("Error retrieving patent data for %s: %s", patent_number, exc)
+            return None
 
-    async def get_patent_details(self, patent_number: str) -> dict[str, object]:
-        patent = await self._get_patent_data(patent_number)
+    async def get_patent_details(self, patent_number: str) -> dict[str, object] | None:
+        try:
+            patent = await self._get_patent_data(patent_number)
+        except Exception as exc:  # pragma: no cover
+            logger.error("Error getting patent details for %s: %s", patent_number, exc)
+            return None
 
         def _parse_date(value: str | None) -> date | None:
             if not value:
@@ -1054,6 +1134,7 @@ class GooglePatentsClient:
 
         params = {"url": query_url}
 
+        await _rate_limit()
         async with _build_http_client(use_cache=False) as client:
             response = await client.get(
                 _SEARCH_ENDPOINT,
@@ -1063,29 +1144,26 @@ class GooglePatentsClient:
             )
 
         text = response.text.strip()
-        if text.startswith("<"):
-            from ip_tools.core.exceptions import ApiError
-
-            raise ApiError(
-                "Google Patents rejected the search request (HTML response). "
-                "Wait a moment and try a narrower query."
+        if text.startswith("<") or response.status_code == 503:
+            _trigger_cooldown()
+            raise RuntimeError(
+                "Google Patents rate limited. The request will be retried "
+                "automatically after a cooldown period."
             )
 
         try:
             payload = json.loads(text)
         except json.JSONDecodeError as exc:  # pragma: no cover - defensive
-            from ip_tools.core.exceptions import ParseError
-
-            logger.exception("Failed to parse Google Patents search response")
-            raise ParseError(
-                "Unable to parse Google Patents search response",
-                source="google_patents",
-            ) from exc
+            raise RuntimeError("Unable to parse Google Patents search response") from exc
 
         return _parse_search_results(payload, query_url)
 
-    async def get_patent_claims(self, patent_number: str) -> list[dict[str, object]]:
-        patent = await self._get_patent_data(patent_number)
+    async def get_patent_claims(self, patent_number: str) -> list[dict[str, object]] | None:
+        try:
+            patent = await self._get_patent_data(patent_number)
+        except Exception as exc:  # pragma: no cover
+            logger.error("Error getting patent claims for %s: %s", patent_number, exc)
+            return None
 
         claims_payload: list[dict[str, object]] = []
         for claim in patent.claims:
@@ -1105,20 +1183,41 @@ class GooglePatentsClient:
     async def get_structured_claim_limitations(
         self, patent_number: str
     ) -> dict[str, list[str]] | None:
-        patent = await self._get_patent_data(patent_number)
+        try:
+            patent = await self._get_patent_data(patent_number)
+        except Exception as exc:  # pragma: no cover
+            logger.error(
+                "Error getting structured claim limitations for %s: %s", patent_number, exc
+            )
+            return None
+
         return patent.structured_limitations
 
     async def get_patent_pdf_url(self, patent_number: str) -> str | None:
-        patent = await self._get_patent_data(patent_number)
+        try:
+            patent = await self._get_patent_data(patent_number)
+        except Exception as exc:  # pragma: no cover
+            logger.error("Error getting patent PDF URL for %s: %s", patent_number, exc)
+            return None
+
         return patent.pdf_url
 
     async def get_patent_figures(self, patent_number: str) -> list[dict[str, Any]] | None:
-        patent = await self._get_patent_data(patent_number)
+        try:
+            patent = await self._get_patent_data(patent_number)
+        except Exception as exc:  # pragma: no cover
+            logger.error("Error getting patent figures for %s: %s", patent_number, exc)
+            return None
+
         html_payload = patent.raw_html
         if not html_payload:
-            refreshed = await fetch_patent_from_google_patents(
-                patent_number, use_cache=self._use_cache
-            )
+            try:
+                refreshed = await fetch_patent_from_google_patents(
+                    patent_number, use_cache=self._use_cache
+                )
+            except Exception as exc:  # pragma: no cover
+                logger.error("Error refetching patent %s for figures: %s", patent_number, exc)
+                return None
             patent = refreshed
             html_payload = refreshed.raw_html
         if not html_payload:
@@ -1135,8 +1234,8 @@ class GooglePatentsClient:
         use_cache: bool = True,
     ) -> bytes:
         patent = await self.get_patent_data(patent_number)
-        if not patent.pdf_url:
-            raise NotFoundError(f"No PDF URL available for {patent_number}", 404)
+        if not patent or not patent.pdf_url:
+            raise ValueError(f"No PDF URL available for {patent_number}")
 
         pdf_url = patent.pdf_url
         if pdf_url.startswith("//"):

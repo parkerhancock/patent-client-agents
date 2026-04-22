@@ -7,16 +7,16 @@ import json
 import httpx
 import pytest
 
-from ip_tools.core.base_client import BaseAsyncClient
-from ip_tools.core.exceptions import (
+from law_tools_core.base_client import BaseAsyncClient
+from law_tools_core.exceptions import (
     ApiError,
     AuthenticationError,
-    IpToolsError,
+    LawToolsCoreError,
     NotFoundError,
     RateLimitError,
     ServerError,
 )
-from ip_tools.core.resilience import is_retryable_error, with_retry
+from law_tools_core.resilience import is_retryable_error, with_retry
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -56,23 +56,31 @@ def make_client(transport: httpx.MockTransport, **kwargs) -> BaseAsyncClient:
 
 
 # ---------------------------------------------------------------------------
-# IpToolsError
+# LawToolsCoreError
 # ---------------------------------------------------------------------------
 
 
-class TestIpToolsError:
-    """Tests for IpToolsError exception."""
+class TestLawToolsCoreError:
+    """Tests for LawToolsCoreError exception."""
 
     def test_can_raise_ip_tools_error(self) -> None:
-        with pytest.raises(IpToolsError):
-            raise IpToolsError("test error")
+        with pytest.raises(LawToolsCoreError):
+            raise LawToolsCoreError("test error")
 
     def test_error_message_preserved(self) -> None:
         try:
-            raise IpToolsError("custom message")
-        except IpToolsError as e:
-            assert "custom message" in str(e)
-            assert "ip_tools.log" in str(e)
+            raise LawToolsCoreError("custom message")
+        except LawToolsCoreError as e:
+            assert str(e) == "custom message"
+
+    def test_api_error_appends_log_hint(self) -> None:
+        try:
+            raise ApiError("boom", status_code=500)
+        except ApiError as e:
+            rendered = str(e)
+            assert "boom" in rendered
+            assert "HTTP 500" in rendered
+            assert "ip_tools.log" in rendered
 
 
 # ---------------------------------------------------------------------------

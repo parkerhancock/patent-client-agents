@@ -1,0 +1,214 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/trials/IPR2025-01319/documents
+  response:
+    body:
+      string: "{\"count\":242,\"requestIdentifier\":\"4f2b0622-a339-4ce5-bc7d-9be0cd3b176b\",\"patentTrialDocumentDataBag\":[{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2026-03-27T22:58:11\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2026-03-27T14:04:28\",\"trialLastModifiedDate\":\"2026-03-27\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"NOTICE\",\"documentFilingDate\":\"2026-03-27\",\"documentIdentifier\":\"171314592\",\"documentName\":\"IPR2025-01319.pdf\",\"documentNumber\":15,\"documentSizeQuantity\":87356,\"documentTitleText\":\"Notice:
+        \ refund approved\",\"documentTypeDescriptionText\":\"Notice:  refund approved\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171314592.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2026-03-26T00:56:41\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2026-03-25T17:46:55\",\"trialLastModifiedDate\":\"2026-03-25\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"OTHER\",\"documentFilingDate\":\"2026-03-25\",\"documentIdentifier\":\"171313868\",\"documentName\":\"2026-03-25
+        '443 Request for Refund of Post-Institution Fees.pdf\",\"documentNumber\":14,\"documentSizeQuantity\":108010,\"documentTitleText\":\"Petitioner's
+        Request for Refund of Post-Institution Fees\",\"documentTypeDescriptionText\":\"Other:
+        \ Refund request\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171313868.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:14\",\"trialDocumentCategory\":\"Decision\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"RESPONSE\",\"documentFilingDate\":\"2025-11-20\",\"documentIdentifier\":\"171242096\",\"documentName\":\"20251120
+        Director Notice Regarding Institution Paper 13.pdf\",\"documentNumber\":13,\"documentSizeQuantity\":85780,\"documentTitleText\":\"Director
+        Discretionary Decision: Deny\",\"documentTypeDescriptionText\":\"Director
+        Discretionary Decision: Deny\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171242096.pdf\",\"filingPartyCategory\":\"BOARD\",\"documentOCRText\":\"Trials@uspto.gov
+        \ Paper 13 \\n571-272-7822  Date: November 20, 2025 \\n \\n\\nUNITED STATES
+        PATENT AND TRADEMARK OFFICE \\n \\n\\n \\n\\n \\nBEFORE THE OFFICE OF THE
+        UNDER SECRETARY OF COMMERCE \\n\\nFOR INTELLECTUAL PROPERTY AND DIRECTOR OF
+        THE  \\nUNITED STATES PATENT AND TRADEMARK OFFICE \\n\\n \\n\\nNOTICE OF DECISIONS
+        ON INSTITUTION \\n\\n \\n \\nBefore JOHN A. SQUIRES, Under Secretary of Commerce
+        for Intellectual \\nProperty and Director of the United States Patent and
+        Trademark Office. \\n\\n \\nNOTICE \\n\\n \\n Pursuant to 35 U.S.C. \xA7 31
+        ...\"},\"decisionData\":{\"statuteAndRuleBag\":[\"35 USC 314\",\"35 USC 324\"],\"decisionIssueDate\":\"2025-11-20\",\"decisionTypeCategory\":\"Decision\",\"trialOutcomeCategory\":\"Institution
+        Denied\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"OTHER\",\"documentFilingDate\":\"2025-11-18\",\"documentIdentifier\":\"171240330\",\"documentName\":\"IPR2025-01319_Discretionary_Denial_Reply_Brief.pdf\",\"documentNumber\":12,\"documentSizeQuantity\":183723,\"documentTitleText\":\"Patent
+        Owner\u2019s Reply to Petitioner\u2019s Opposition of Discretionary Denial\",\"documentTypeDescriptionText\":\"Other:
+        \ other\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171240330.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-11-18\",\"documentIdentifier\":\"171240332\",\"documentName\":\"EX2041_-_2025-10-22_Defendant's_Election_of_Prior_Art_Grounds_.pdf\",\"documentNumber\":2041,\"documentSizeQuantity\":730022,\"documentTitleText\":\"Cytek\u2019s
+        Election of Asserted Prior Art Grounds\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171240332.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-11-14\",\"documentIdentifier\":\"171238266\",\"documentName\":\"RE_
+        IPR2025-01319_ Request for Authorization fo....pdf\",\"documentNumber\":3101,\"documentSizeQuantity\":130622,\"documentTitleText\":\"Email
+        Correspondence\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171238266.pdf\",\"filingPartyCategory\":\"BOARD\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228044\",\"documentName\":\"EX2029-part_1_of_2.pdf\",\"documentNumber\":2029,\"documentSizeQuantity\":24185971,\"documentTitleText\":\"Shapiro,
+        Practical Flow Cytometry (2003) \u2013 Part 1\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228044.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228058\",\"documentName\":\"EX2035_-_Optical_fiber_communicationAn_overview_.pdf\",\"documentNumber\":2035,\"documentSizeQuantity\":1045919,\"documentTitleText\":\"Arumugam,
+        57 Pramana J. Physics 849 (2001)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228058.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228066\",\"documentName\":\"EX2039_-_Azadeh_-_Fiber_Optics_Engineering_xx.pdf\",\"documentNumber\":2039,\"documentSizeQuantity\":1404466,\"documentTitleText\":\"Azadeh,
+        Fiber Optics Engineering (2009)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228066.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228046\",\"documentName\":\"EX2029-part_2_of_2.pdf\",\"documentNumber\":2029,\"documentSizeQuantity\":24151232,\"documentTitleText\":\"Shapiro,
+        Practical Flow Cytometry (2003) \u2013 Part 2\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228046.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228060\",\"documentName\":\"EX2036_Fundamentals_of_Photonics_-_Saleh_.pdf\",\"documentNumber\":2036,\"documentSizeQuantity\":24191673,\"documentTitleText\":\"Saleh,
+        Fundamentals of Photonics 2d. Ed. 2007\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228060.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228042\",\"documentName\":\"EX2028_.pdf\",\"documentNumber\":2028,\"documentSizeQuantity\":2670619,\"documentTitleText\":\"Declaration
+        of David Schaafsma, Ph.D.\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228042.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228054\",\"documentName\":\"EX2033_-_DWDM_Standards_.pdf\",\"documentNumber\":2033,\"documentSizeQuantity\":810253,\"documentTitleText\":\"Telecomm
+        Standardization Sector of ITU, Recommendation G.694.1 (June 2002)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228054.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228048\",\"documentName\":\"EX2030_-_US10330582B2.pdf\",\"documentNumber\":2030,\"documentSizeQuantity\":14399747,\"documentTitleText\":\"Chen,
+        U.S. Patent No. 10,330,582\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228048.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228050\",\"documentName\":\"EX2031_-_NEBELING_CWDM_.pdf\",\"documentNumber\":2031,\"documentSizeQuantity\":788434,\"documentTitleText\":\"Nebeling,
+        Fiber Network Engineering (July 3, 2002)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228050.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"POPR\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228040\",\"documentName\":\"IPR2025-01319_Patent_Owner_Preliminary_Response_103125.pdf\",\"documentNumber\":11,\"documentSizeQuantity\":3549841,\"documentTitleText\":\"Patent
+        Owner's Preliminary Response\",\"documentTypeDescriptionText\":\"POPR: filed\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228040.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228052\",\"documentName\":\"EX2032_-_CWDM_Standards_.pdf\",\"documentNumber\":2032,\"documentSizeQuantity\":1396753,\"documentTitleText\":\"Telecomm
+        Standardization Sector of ITU, Recommendation G.694.2 (Dec. 2003)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228052.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228064\",\"documentName\":\"EX2038_-_Welford_Optics.pdf\",\"documentNumber\":2038,\"documentSizeQuantity\":9905098,\"documentTitleText\":\"Welford,
+        Optics (3d ed. 1990)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228064.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228062\",\"documentName\":\"EX2037_-_Modern_Optical_Engineering_-_Smithxx.pdf\",\"documentNumber\":2037,\"documentSizeQuantity\":2459314,\"documentTitleText\":\"Smith,
+        Modern Optical Engineering (3d ed. 2000)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228062.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-31\",\"documentIdentifier\":\"171228056\",\"documentName\":\"EX2034_-_2025-10-06_Order_Denying_Request_For_Reexam_App_No._90015441_.pdf\",\"documentNumber\":2034,\"documentSizeQuantity\":20020204,\"documentTitleText\":\"Denial
+        of Request for Ex Parte Reexam Control Number 90/015,441 (Oct. 6, 2025)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171228056.pdf\",\"filingPartyCategory\":\"PATENT
+        OWNER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"RESPONSE\",\"documentFilingDate\":\"2025-10-30\",\"documentIdentifier\":\"171226918\",\"documentName\":\"2025-10-30
+        01319 Opp to BC Discretionary Denial.pdf\",\"documentNumber\":9,\"documentSizeQuantity\":411404,\"documentTitleText\":\"Petitioner's
+        Opposition to PO's Request for Discretionary Denial\",\"documentTypeDescriptionText\":\"PET
+        Opposition to Discretionary Denial Brief\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171226918.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-30\",\"documentIdentifier\":\"171226924\",\"documentName\":\"EX1033,
+        cytekbio-blogs-news-cytek-biosciences-debuts-newadvanced-flow-cytometry-system-2025-10-28.pdf\",\"documentNumber\":1033,\"documentSizeQuantity\":885626,\"documentTitleText\":\"Cytek
+        Biosciences Debuts New Advanced Flow Cytometry System, (June 7, 2017), https://cytekbio.com/blogs/news/cytek-biosciences-debuts-newadvanced-flow-cytometry-system\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171226924.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"NOTICE\",\"documentFilingDate\":\"2025-10-30\",\"documentIdentifier\":\"171226920\",\"documentName\":\"2025-10-30
+        01319 Updated Exhibit List.pdf\",\"documentNumber\":10,\"documentSizeQuantity\":144457,\"documentTitleText\":\"Petitioner's
+        Updated Exhibit List\",\"documentTypeDescriptionText\":\"Notice:  Exhibit
+        list\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171226920.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-30\",\"documentIdentifier\":\"171226922\",\"documentName\":\"EX1032,
+        2025-01-09 D42 Beckman First Amd Cpt.pdf\",\"documentNumber\":1032,\"documentSizeQuantity\":1498404,\"documentTitleText\":\"First
+        Amended Complaint filed in Beckman Coulter, Inc. v. Cytek Biosciences, Inc.,
+        C.A. No. 1:24-cv-00945 (D. Del. Jan. 9, 2025), D.I. 42\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171226922.pdf\",\"filingPartyCategory\":\"PETITIONER\"}},{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:16\",\"trialDocumentCategory\":\"Document\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"Exhibit\",\"documentFilingDate\":\"2025-10-30\",\"documentIdentifier\":\"171226926\",\"documentName\":\"EX1034,
+        US10330582B2 .pdf\",\"documentNumber\":1034,\"documentSizeQuantity\":11930605,\"documentTitleText\":\"U.S.
+        Patent No. 10,330,582 B2 to Yong Qin Chen (filed June 30, 2017, issued June
+        25, 2019)\",\"documentTypeDescriptionText\":\"EXHIBIT\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171226926.pdf\",\"filingPartyCategory\":\"PETITIONER\"}}]}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '34392'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:38 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92526-7a8f4d765df3eeef2134d9c1;Parent=014cce084a3d5556;Sampled=0;Lineage=1:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK-BEHOIAMF04Q=
+      x-amzn-RequestId:
+      - 4f2b0622-a339-4ce5-bc7d-9be0cd3b176b
+    status:
+      code: 200
+      message: OK
+version: 1

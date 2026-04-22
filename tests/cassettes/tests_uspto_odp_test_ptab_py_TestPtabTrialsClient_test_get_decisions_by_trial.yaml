@@ -1,0 +1,65 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      host:
+      - api.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      x-api-key:
+      - REDACTED
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/trials/IPR2025-01319/decisions
+  response:
+    body:
+      string: "{\"count\":1,\"requestIdentifier\":\"5a1c7bfe-e471-45e7-8e9f-c93597032f6b\",\"patentTrialDocumentDataBag\":[{\"trialNumber\":\"IPR2025-01319\",\"lastModifiedDateTime\":\"2025-12-30T17:24:14\",\"trialDocumentCategory\":\"Decision\",\"trialMetaData\":{\"institutionDecisionDate\":\"2025-11-20\",\"accordedFilingDate\":\"2025-07-17\",\"petitionFilingDate\":\"2025-07-17\",\"trialLastModifiedDateTime\":\"2025-12-23T00:00:29\",\"trialLastModifiedDate\":\"2025-12-23\",\"terminationDate\":\"2025-11-20\",\"trialStatusCategory\":\"Discretionary
+        Denial\",\"latestDecisionDate\":\"2025-11-20\",\"trialTypeCode\":\"IPR\"},\"patentOwnerData\":{\"applicationNumberText\":\"17980669\",\"counselName\":\"Cohen,
+        Alexiset al\",\"grantDate\":\"2023-07-18\",\"groupArtUnitNumber\":\"2884\",\"inventorName\":\"Yong
+        Qin Chen\",\"realPartyInInterestName\":\"Beckman Coulter, Inc. et al.\",\"patentNumber\":\"11703443\",\"technologyCenterNumber\":\"2800\"},\"regularPetitionerData\":{\"counselName\":\"Knight,
+        Dustinet al\",\"realPartyInInterestName\":\"Cytek Biosciences, Inc.\"},\"documentData\":{\"documentCategory\":\"RESPONSE\",\"documentFilingDate\":\"2025-11-20\",\"documentIdentifier\":\"171242096\",\"documentName\":\"20251120
+        Director Notice Regarding Institution Paper 13.pdf\",\"documentNumber\":13,\"documentSizeQuantity\":85780,\"documentTitleText\":\"Director
+        Discretionary Decision: Deny\",\"documentTypeDescriptionText\":\"Director
+        Discretionary Decision: Deny\",\"fileDownloadURI\":\"https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2025/01319/171242096.pdf\",\"filingPartyCategory\":\"BOARD\",\"documentOCRText\":\"Trials@uspto.gov
+        \ Paper 13 \\n571-272-7822  Date: November 20, 2025 \\n \\n\\nUNITED STATES
+        PATENT AND TRADEMARK OFFICE \\n \\n\\n \\n\\n \\nBEFORE THE OFFICE OF THE
+        UNDER SECRETARY OF COMMERCE \\n\\nFOR INTELLECTUAL PROPERTY AND DIRECTOR OF
+        THE  \\nUNITED STATES PATENT AND TRADEMARK OFFICE \\n\\n \\n\\nNOTICE OF DECISIONS
+        ON INSTITUTION \\n\\n \\n \\nBefore JOHN A. SQUIRES, Under Secretary of Commerce
+        for Intellectual \\nProperty and Director of the United States Patent and
+        Trademark Office. \\n\\n \\nNOTICE \\n\\n \\n Pursuant to 35 U.S.C. \xA7 31
+        ...\"},\"decisionData\":{\"statuteAndRuleBag\":[\"35 USC 314\",\"35 USC 324\"],\"decisionIssueDate\":\"2025-11-20\",\"decisionTypeCategory\":\"Decision\",\"trialOutcomeCategory\":\"Institution
+        Denied\"}}]}"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2182'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Apr 2026 19:44:37 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-69e92525-461dfbbf0d2f6fd45abe1f70;Parent=0034284b2619ff92;Sampled=0;Lineage=1:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - cPK99G4JIAMF6og=
+      x-amzn-RequestId:
+      - 5a1c7bfe-e471-45e7-8e9f-c93597032f6b
+    status:
+      code: 200
+      message: OK
+version: 1
