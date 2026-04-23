@@ -1,4 +1,4 @@
-"""Pytest configuration for ip_tools tests.
+"""Pytest configuration for patent_client_agents tests.
 
 Supports VCR recording for HTTP interactions:
     pytest tests/                           # replay from cassettes

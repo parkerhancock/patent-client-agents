@@ -5,7 +5,7 @@ Access the European Patent Office Open Patent Services (OPS) API.
 ## Quick Start
 
 ```python
-from ip_tools.epo_ops import EpoOpsClient
+from patent_client_agents.epo_ops import EpoOpsClient
 
 async with EpoOpsClient() as client:
     # Search published patents
@@ -47,7 +47,7 @@ Get credentials from [developers.epo.org](https://developers.epo.org).
 ## Usage Pattern
 
 ```python
-from ip_tools.epo_ops import (
+from patent_client_agents.epo_ops import (
     EpoOpsClient,
     search_published,
     fetch_biblio,

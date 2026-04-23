@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ip_tools.google_patents.api import (
+from patent_client_agents.google_patents.api import (
     FigureBounds,
     FigureCallout,
     FigureEntry,
@@ -13,7 +13,7 @@ from ip_tools.google_patents.api import (
     _normalize_page_size,
     get_client,
 )
-from ip_tools.google_patents.client import GooglePatentsClient
+from patent_client_agents.google_patents.client import GooglePatentsClient
 
 
 class TestFigureBounds:

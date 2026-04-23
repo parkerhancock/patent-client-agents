@@ -5,7 +5,7 @@ one that matches how you're going to use it:
 
 | Mode | You want to... | Section |
 |---|---|---|
-| Python library | Import `ip_tools` in your own async code | [§1](#1-python-library) |
+| Python library | Import `patent_client_agents` in your own async code | [§1](#1-python-library) |
 | Python library + MCP runtime | Run an MCP server locally or in-process | [§2](#2-python-library-with-mcp-runtime) |
 | Claude Code plugin (from GitHub) | One-command install into Claude Code | [§3](#3-claude-code-plugin-from-github) |
 | Claude Code skill (dev symlink) | Edit the skill content and hot-reload | [§4](#4-claude-code-skill-dev-symlink) |
@@ -53,7 +53,7 @@ no credentials.
 
 ```python
 import asyncio
-from ip_tools.google_patents import GooglePatentsClient
+from patent_client_agents.google_patents import GooglePatentsClient
 
 async def main():
     async with GooglePatentsClient() as client:
@@ -93,15 +93,15 @@ Two new console scripts on your PATH:
 Plus the Python-importable MCP surface:
 
 ```python
-from ip_tools.mcp import ip_mcp                 # pre-composed FastMCP
-from ip_tools.mcp.server import mcp as ip_server  # + middleware + routes
+from patent_client_agents.mcp import ip_mcp                 # pre-composed FastMCP
+from patent_client_agents.mcp.server import mcp as ip_server  # + middleware + routes
 ```
 
 Mount `ip_mcp` inside your own FastMCP server:
 
 ```python
 from fastmcp import FastMCP
-from ip_tools.mcp import ip_mcp
+from patent_client_agents.mcp import ip_mcp
 
 my_server = FastMCP("my-server")
 my_server.mount(ip_mcp)  # + your own tools alongside
@@ -137,7 +137,7 @@ What happens:
 
 1. Claude Code clones the repo into `~/.claude/plugins/patent-client-agents/`.
 2. It auto-discovers the `ip_research` skill at
-   `src/ip_tools/skills/` — available to the agent immediately.
+   `src/patent_client_agents/skills/` — available to the agent immediately.
 3. It registers the MCP server declared in `.claude-plugin/plugin.json`.
    On first use, `uvx` installs `patent-client-agents[mcp]` from the plugin clone
    into a managed environment and launches `patent-client-agents-mcp`. The cold
@@ -370,7 +370,7 @@ server side, and `deploy/DEPLOYMENT.md` for standing one up).
 
 ### Prereqs
 
-- A deployed `patent-client-agents` MCP server — e.g. `https://mcp.example.com/ip_tools/`
+- A deployed `patent-client-agents` MCP server — e.g. `https://mcp.example.com/patent_client_agents/`
 - The `LAW_TOOLS_CORE_API_KEY` secret value set on that server
 - Cowork admin access to the target workspace
 
@@ -379,13 +379,13 @@ server side, and `deploy/DEPLOYMENT.md` for standing one up).
 1. In Cowork, open **Settings → Connectors**.
 2. Click **Add custom MCP**.
 3. Fill in:
-   - **Server URL**: `https://mcp.example.com/ip_tools/mcp`
+   - **Server URL**: `https://mcp.example.com/patent_client_agents/mcp`
    - **Auth type**: **OAuth2 client credentials**
    - **Client ID**: any string (`patent-client-agents` is a fine default — the
      server doesn't check client_id, only client_secret)
    - **Client secret**: the `LAW_TOOLS_CORE_API_KEY` value from the
      server's `.env`
-   - **Token URL**: `https://mcp.example.com/ip_tools/oauth/token`
+   - **Token URL**: `https://mcp.example.com/patent_client_agents/oauth/token`
 4. Save.
 
 Cowork will immediately POST to the token URL with
@@ -437,7 +437,7 @@ For setup, see `deploy/DEPLOYMENT.md`.
 {
   "mcpServers": {
     "patent-client-agents": {
-      "url": "https://mcp.example.com/ip_tools/mcp",
+      "url": "https://mcp.example.com/patent_client_agents/mcp",
       "headers": {
         "Authorization": "Bearer <LAW_TOOLS_CORE_API_KEY value>"
       }
@@ -454,7 +454,7 @@ for remote MCPs.
 ### Raw smoke-test
 
 ```bash
-curl -s -X POST https://mcp.example.com/ip_tools/mcp \
+curl -s -X POST https://mcp.example.com/patent_client_agents/mcp \
   -H "Authorization: Bearer <LAW_TOOLS_CORE_API_KEY value>" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json, text/event-stream" \
@@ -467,7 +467,7 @@ Expect a JSON response with `"serverInfo": {"name": "patent-client-agents", ...}
 
 Patent PDFs (Google Patents, PPUBS, EPO, PTAB, etc.) return signed
 `download_url` fields pointing at
-`https://mcp.example.com/ip_tools/downloads/{path}?key=...`. URLs
+`https://mcp.example.com/patent_client_agents/downloads/{path}?key=...`. URLs
 rotate every 24 hours by HMAC — the tool response includes an
 `expires_at` field so the client knows when to re-call.
 
@@ -499,4 +499,4 @@ rotate every 24 hours by HMAC — the tool response includes an
 - Issues: [github.com/parkerhancock/ip_tools/issues](https://github.com/parkerhancock/ip_tools/issues)
 - Full source: [github.com/parkerhancock/ip_tools](https://github.com/parkerhancock/ip_tools)
 - Deploy guide for remote MCP: `deploy/DEPLOYMENT.md`
-- Per-connector API notes: `src/ip_tools/catalog/*.md`
+- Per-connector API notes: `src/patent_client_agents/catalog/*.md`

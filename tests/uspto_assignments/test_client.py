@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from ip_tools.uspto_assignments import (
+from patent_client_agents.uspto_assignments import (
     AssignmentCenterClient,
     AssignmentRecord,
     Assignor,

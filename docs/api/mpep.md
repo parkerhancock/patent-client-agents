@@ -5,7 +5,7 @@ Access the Manual of Patent Examining Procedure (MPEP) for searching and retriev
 ## Quick Start
 
 ```python
-from ip_tools.mpep import MpepClient
+from patent_client_agents.mpep import MpepClient
 
 async with MpepClient() as client:
     # Search MPEP
@@ -41,7 +41,7 @@ async with MpepClient() as client:
 ## Usage Pattern
 
 ```python
-from ip_tools.mpep import (
+from patent_client_agents.mpep import (
     MpepClient,
     search,
     get_section,

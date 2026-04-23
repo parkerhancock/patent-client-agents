@@ -12,7 +12,7 @@ import os
 
 import pytest
 
-from ip_tools.jpo import (
+from patent_client_agents.jpo import (
     JpoClient,
     NumberType,
     get_patent_jplatpat_url,

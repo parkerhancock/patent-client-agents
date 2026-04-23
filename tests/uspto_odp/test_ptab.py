@@ -12,7 +12,7 @@ import os
 
 import pytest
 
-from ip_tools.uspto_odp import (
+from patent_client_agents.uspto_odp import (
     PtabAppealsClient,
     PtabInterferencesClient,
     PtabTrialsClient,

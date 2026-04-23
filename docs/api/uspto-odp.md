@@ -9,7 +9,7 @@ the same underlying client.
 ## Quick Start
 
 ```python
-from ip_tools.uspto_odp import UsptoOdpClient
+from patent_client_agents.uspto_odp import UsptoOdpClient
 
 async with UsptoOdpClient() as client:
     results = await client.search_applications(query="artificial intelligence")
@@ -20,7 +20,7 @@ async with UsptoOdpClient() as client:
 Most work is routed through dedicated sub-clients:
 
 ```python
-from ip_tools.uspto_odp import (
+from patent_client_agents.uspto_odp import (
     ApplicationsClient,     # applications, IFW file history
     PtabTrialsClient,       # IPR/PGR/CBM trial data
     PtabAppealsClient,      # ex parte appeal decisions
@@ -90,12 +90,12 @@ Typed exceptions inherit from `law_tools_core.exceptions.ApiError`:
 - `RateLimitError` (429) — includes `retry_after` seconds
 
 Every error message ends with a path to the log file
-(`~/.cache/ip_tools/ip_tools.log`) for full response body inspection.
+(`~/.cache/patent_client_agents/patent_client_agents.log`) for full response body inspection.
 
 ## Usage patterns
 
 ```python
-from ip_tools.uspto_odp import ApplicationsClient
+from patent_client_agents.uspto_odp import ApplicationsClient
 
 # Context manager (recommended)
 async with ApplicationsClient() as client:
@@ -108,9 +108,9 @@ async with ApplicationsClient() as client:
 
 For most use cases, the wrapper modules are more ergonomic:
 
-- `ip_tools.uspto_applications` — function-level API over applications
-- `ip_tools.uspto_petitions` — petition search/get helpers
-- `ip_tools.uspto_bulkdata` — bulk data product catalog
-- `ip_tools.uspto_office_actions` — office-action analytics (separate endpoint)
+- `patent_client_agents.uspto_applications` — function-level API over applications
+- `patent_client_agents.uspto_petitions` — petition search/get helpers
+- `patent_client_agents.uspto_bulkdata` — bulk data product catalog
+- `patent_client_agents.uspto_office_actions` — office-action analytics (separate endpoint)
 
 See [uspto-applications.md](uspto-applications.md) and peer files.

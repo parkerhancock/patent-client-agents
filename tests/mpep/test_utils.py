@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ip_tools.mpep.utils import BASE_URL, build_search_params
+from patent_client_agents.mpep.utils import BASE_URL, build_search_params
 
 
 class TestBuildSearchParams:

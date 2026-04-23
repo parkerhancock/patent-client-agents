@@ -4,13 +4,13 @@ from typing import Any, cast
 
 import pytest
 
-from ip_tools.uspto_odp.models import (
+from patent_client_agents.uspto_odp.models import (
     PetitionDecision,
     PetitionDecisionIdentifierResponse,
     PetitionDecisionResponse,
     PetitionDecisionWithDocuments,
 )
-from ip_tools.uspto_petitions import api as petitions_api
+from patent_client_agents.uspto_petitions import api as petitions_api
 
 
 @pytest.mark.asyncio

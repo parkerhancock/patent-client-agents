@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ip_tools.google_patents.client import (
+from patent_client_agents.google_patents.client import (
     ChemicalCompound,
     ChildApplication,
     Concept,

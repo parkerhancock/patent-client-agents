@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 
-from ip_tools.uspto_publications.transformers import (
+from patent_client_agents.uspto_publications.transformers import (
     _coerce_int,
     _ensure_list,
     _normalize_str,

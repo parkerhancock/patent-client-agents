@@ -81,7 +81,7 @@ pip install patent-client-agents
 ```
 
 ```python
-from ip_tools.google_patents import GooglePatentsClient
+from patent_client_agents.google_patents import GooglePatentsClient
 
 async with GooglePatentsClient() as client:
     patent = await client.get_patent_data("US10123456B2")
@@ -203,7 +203,7 @@ async with GooglePatentsClient() as client:
 │                    IP Tools MCP Server                       │
 │              (Natural language → API calls)                  │
 ├─────────────────────────────────────────────────────────────┤
-│                   ip_tools Library                           │
+│                   patent_client_agents Library                           │
 │    ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
 │    │  USPTO   │  │   EPO    │  │  Google  │  │   JPO    │   │
 │    │   ODP    │  │   OPS    │  │ Patents  │  │          │   │
@@ -215,7 +215,7 @@ async with GooglePatentsClient() as client:
 
 ```bash
 git clone https://github.com/parkerhancock/ip_tools.git
-cd ip_tools
+cd patent_client_agents
 uv sync --group dev
 uv run pytest                       # 767 tests, replays VCR cassettes
 uv run ruff check . && uv run ruff format .
@@ -231,7 +231,7 @@ uv run pytest --run-live-jpo        # Skip VCR, hit live JPO
 ```
 
 API errors follow a log-first pattern — concise messages with a path to
-`~/.cache/ip_tools/ip_tools.log` for full stacktraces.
+`~/.cache/patent_client_agents/patent_client_agents.log` for full stacktraces.
 
 The shared HTTP scaffolding (`BaseAsyncClient`, cache, exceptions, retry,
 logging) ships as the `law_tools_core` package inside this same wheel —

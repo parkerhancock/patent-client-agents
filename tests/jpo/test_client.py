@@ -8,13 +8,13 @@ import time
 import httpx
 import pytest
 
-from ip_tools.jpo.client import (
+from patent_client_agents.jpo.client import (
     BASE_URL,
     JpoClient,
     RateLimiter,
     TokenManager,
 )
-from ip_tools.jpo.models import (
+from patent_client_agents.jpo.models import (
     ApplicantAttorney,
     ApplicationDocumentsData,
     CitedDocumentInfo,

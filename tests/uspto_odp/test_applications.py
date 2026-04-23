@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from ip_tools.uspto_odp.clients.applications import (
+from patent_client_agents.uspto_odp.clients.applications import (
     ApplicationsClient,
     _clean_patent_identifier,
 )

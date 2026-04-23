@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from lxml import html
 
-from ip_tools.google_patents.parsers.figures import (
+from patent_client_agents.google_patents.parsers.figures import (
     _absolute_url,
     _extract_bounds,
     _extract_callouts,

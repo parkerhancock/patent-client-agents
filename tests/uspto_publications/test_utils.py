@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ip_tools.uspto_publications.utils import (
+from patent_client_agents.uspto_publications.utils import (
     ClaimsParser,
     html_to_text,
     normalize_publication_number,

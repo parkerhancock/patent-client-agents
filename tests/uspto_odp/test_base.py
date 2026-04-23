@@ -7,7 +7,7 @@ from datetime import date
 import pytest
 from pydantic import BaseModel
 
-from ip_tools.uspto_odp.clients.base import (
+from patent_client_agents.uspto_odp.clients.base import (
     BASE_URL,
     PaginationModel,
     SearchPayload,
@@ -18,7 +18,7 @@ from ip_tools.uspto_odp.clients.base import (
     _prune,
     _serialize_model_list,
 )
-from ip_tools.uspto_odp.models import OdpFilter, OdpRangeFilter, OdpSort
+from patent_client_agents.uspto_odp.models import OdpFilter, OdpRangeFilter, OdpSort
 from law_tools_core.exceptions import ConfigurationError
 
 

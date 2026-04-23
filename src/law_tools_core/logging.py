@@ -27,7 +27,7 @@ def configure(app_name: str, log_dir: Path | None = None) -> Path:
     adding duplicate handlers.
 
     Args:
-        app_name: Root logger name for the app (e.g. ``"ip_tools"``). Used as
+        app_name: Root logger name for the app (e.g. ``"patent_client_agents"``). Used as
             both the logger name and the log filename stem.
         log_dir: Override the log directory. Defaults to
             ``~/.cache/{app_name}``.

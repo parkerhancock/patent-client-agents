@@ -27,8 +27,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 # Catalog lives inside the Python package so it ships via importlib.resources
 # in both editable and wheel installs. Downstream consumers read these files
-# via `importlib.resources.files("ip_tools") / "catalog"`.
-CATALOG_DIR = ROOT / "src" / "ip_tools" / "catalog"
+# via `importlib.resources.files("patent_client_agents") / "catalog"`.
+CATALOG_DIR = ROOT / "src" / "patent_client_agents" / "catalog"
 CATALOG_INDEX = ROOT / "CATALOG.md"
 
 REQUIRED_SECTIONS = ["Source"]
@@ -90,7 +90,7 @@ def lint_index_links() -> list[str]:
     """Cross-check CATALOG.md links against files on disk."""
     errors: list[str] = []
     text = CATALOG_INDEX.read_text()
-    referenced = set(re.findall(r"\]\(src/ip_tools/catalog/([a-z0-9-]+\.md)\)", text))
+    referenced = set(re.findall(r"\]\(src/patent_client_agents/catalog/([a-z0-9-]+\.md)\)", text))
     on_disk = {p.name for p in CATALOG_DIR.glob("*.md") if not p.name.startswith("_")}
 
     missing_files = referenced - on_disk

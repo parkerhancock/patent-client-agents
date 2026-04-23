@@ -1,4 +1,4 @@
-"""Cache module tests for ip_tools."""
+"""Cache module tests for patent_client_agents."""
 
 from __future__ import annotations
 

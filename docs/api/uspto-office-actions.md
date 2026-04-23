@@ -7,7 +7,7 @@ endpoints (separate namespace from applications/PTAB).
 ## Quick Start
 
 ```python
-from ip_tools.uspto_office_actions import OfficeActionClient
+from patent_client_agents.uspto_office_actions import OfficeActionClient
 
 async with OfficeActionClient() as client:
     # Structured rejection records per application
@@ -72,7 +72,7 @@ Lucene-style, over ODP's office-action index. Common fields:
 ## Result shape
 
 Each search returns a `SearchResponse` (Pydantic v2) with a `results` list
-plus `total_count`. See `ip_tools/uspto_office_actions/models.py` for
+plus `total_count`. See `patent_client_agents/uspto_office_actions/models.py` for
 the full schema.
 
 ## Usage patterns

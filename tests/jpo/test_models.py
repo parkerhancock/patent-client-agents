@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ip_tools.jpo.models import (
+from patent_client_agents.jpo.models import (
     ApiResult,
     ApplicantAttorney,
     ApplicantAttorneyClass,

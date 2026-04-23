@@ -22,7 +22,7 @@ uv run pytest --vcr-record=once              # Record missing cassettes
 uv run pytest --vcr-record=all               # Re-record all cassettes
 uv run pytest --run-live-uspto               # Run live USPTO tests
 uv run pytest --run-live-jpo                 # Run live JPO tests
-uv run pytest --cov=ip_tools --cov-report=term-missing  # Coverage
+uv run pytest --cov=patent_client_agents --cov-report=term-missing  # Coverage
 ```
 
 When recording new cassettes, ensure auth headers are scrubbed. The conftest
@@ -35,7 +35,7 @@ verify with `gitleaks protect --staged` before committing.
 src/
   law_tools_core/           # Shared HTTP scaffolding (BaseAsyncClient, cache, retry,
                             #   exceptions, logging). Shipped in the same wheel.
-  ip_tools/
+  patent_client_agents/
     uspto_odp/              # USPTO Open Data Portal — applications, PTAB, petitions
                             #   (needs USPTO_ODP_API_KEY)
     uspto_applications/     # High-level wrapper over ODP applications endpoints
@@ -63,8 +63,8 @@ context. Base class `LawToolsCoreError` (from `law_tools_core.exceptions`)
 and plain validation/config errors use vanilla `Exception.__str__`.
 
 File logging is configured per consumer app via
-`law_tools_core.logging.configure(app_name)`. `ip_tools` calls
-`configure("ip_tools")` on import → `~/.cache/ip_tools/ip_tools.log`.
+`law_tools_core.logging.configure(app_name)`. `patent_client_agents` calls
+`configure("patent_client_agents")` on import → `~/.cache/patent_client_agents/patent_client_agents.log`.
 
 ## Key Conventions
 
@@ -72,6 +72,6 @@ File logging is configured per consumer app via
 - HTTP caching: `hishel` + SQLite with WAL pragmas via `RetryingAsyncSqliteStorage`.
 - Retry: `tenacity` `default_retryer` (4 attempts, exponential jitter).
 - Models are Pydantic v2.
-- The skill is packaged inside the wheel at `ip_tools/skills/ip_research/` so
-  `importlib.resources.files("ip_tools") / "skills" / "ip_research"` works
+- The skill is packaged inside the wheel at `patent_client_agents/skills/ip_research/` so
+  `importlib.resources.files("patent_client_agents") / "skills" / "ip_research"` works
   regardless of filesystem layout.

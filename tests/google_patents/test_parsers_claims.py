@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from lxml import html
 
-from ip_tools.google_patents.parsers.claims import (
+from patent_client_agents.google_patents.parsers.claims import (
     _direct_text_before_nested,
     _extract_limitations,
     _has_class,

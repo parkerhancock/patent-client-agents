@@ -5,8 +5,8 @@ from typing import Any, cast
 
 import pytest
 
-from ip_tools.uspto_publications import api as pub_api
-from ip_tools.uspto_publications.models import PublicSearchDocument
+from patent_client_agents.uspto_publications import api as pub_api
+from patent_client_agents.uspto_publications.models import PublicSearchDocument
 
 
 class DummyClient:

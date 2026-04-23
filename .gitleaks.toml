@@ -17,5 +17,5 @@ paths = [
     '''resources/epo/en-ops\.txt''',
     '''resources/jpo/jpo_api_openapi\.json''',
     '''resources/jpo/jpo_api_reference_e\.js''',
-    '''src/ip_tools/uspto_odp/data/odp_swagger\.yaml''',
+    '''src/patent_client_agents/uspto_odp/data/odp_swagger\.yaml''',
 ]

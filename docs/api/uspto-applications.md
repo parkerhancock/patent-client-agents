@@ -5,7 +5,7 @@ Access patent application data and PTAB proceedings via the USPTO Open Data Port
 ## Quick Start
 
 ```python
-from ip_tools.uspto_applications import UsptoOdpClient
+from patent_client_agents.uspto_applications import UsptoOdpClient
 
 async with UsptoOdpClient() as client:
     # Search applications
@@ -71,7 +71,7 @@ The `UsptoOdpClient` is re-exported from `uspto_odp_mcp.client`. See the source 
 All functions support the standard async context manager pattern:
 
 ```python
-from ip_tools.uspto_applications import (
+from patent_client_agents.uspto_applications import (
     UsptoOdpClient,
     search_applications,
     get_application,

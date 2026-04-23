@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ip_tools.epo_ops.client import (
+from patent_client_agents.epo_ops.client import (
     EpoOpsClient,
     OpsAuthenticationError,
     OpsForbiddenError,

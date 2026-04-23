@@ -1,4 +1,4 @@
-"""Core module tests for ip_tools."""
+"""Core module tests for patent_client_agents."""
 
 from __future__ import annotations
 
@@ -80,7 +80,7 @@ class TestLawToolsCoreError:
             rendered = str(e)
             assert "boom" in rendered
             assert "HTTP 500" in rendered
-            assert "ip_tools.log" in rendered
+            assert "patent_client_agents.log" in rendered
 
 
 # ---------------------------------------------------------------------------
@@ -153,7 +153,7 @@ class TestRaiseForStatus:
         with pytest.raises(NotFoundError) as exc_info:
             client._raise_for_status(self._response(404))
         assert exc_info.value.status_code == 404
-        assert "ip_tools.log" in str(exc_info.value)
+        assert "patent_client_agents.log" in str(exc_info.value)
 
     def test_429_raises_rate_limit(self) -> None:
         client = make_client(mock_transport(200))

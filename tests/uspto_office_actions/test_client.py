@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock, MagicMock
 import httpx
 import pytest
 
-from ip_tools.uspto_office_actions import OfficeActionClient
+from patent_client_agents.uspto_office_actions import OfficeActionClient
 
 API_KEY = "test-key"
 
@@ -285,7 +285,7 @@ class TestSearchEnrichedCitations:
 
 class TestClientConfig:
     def test_base_url(self) -> None:
-        from ip_tools.uspto_odp.clients.base import BASE_URL
+        from patent_client_agents.uspto_odp.clients.base import BASE_URL
 
         assert "api.uspto.gov" in BASE_URL
 

@@ -19,12 +19,12 @@ This installs the runtime (`fastmcp`, `starlette`) and adds the
 patent-client-agents-mcp                  # default: stdio transport, no auth
 ```
 
-`patent-client-agents-mcp` is a thin wrapper around `ip_tools.mcp.server:mcp` that
+`patent-client-agents-mcp` is a thin wrapper around `patent_client_agents.mcp.server:mcp` that
 runs via fastmcp. You can also invoke it directly:
 
 ```bash
-python -m ip_tools.mcp.server
-fastmcp run ip_tools.mcp.server:mcp
+python -m patent_client_agents.mcp.server
+fastmcp run patent_client_agents.mcp.server:mcp
 ```
 
 ## Claude Code configuration

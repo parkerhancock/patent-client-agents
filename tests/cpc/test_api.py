@@ -6,8 +6,8 @@ from typing import Any, cast
 
 import pytest
 
-from ip_tools.cpc import api as cpc_api
-from ip_tools.epo_ops.models import (
+from patent_client_agents.cpc import api as cpc_api
+from patent_client_agents.epo_ops.models import (
     ClassificationMappingResponse,
     CpciBiblioResponse,
     CpcMediaResponse,

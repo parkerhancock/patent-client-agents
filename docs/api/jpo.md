@@ -5,7 +5,7 @@ Access the Japan Patent Office Patent Information Retrieval APIs for patents, de
 ## Quick Start
 
 ```python
-from ip_tools.jpo import JpoClient
+from patent_client_agents.jpo import JpoClient
 
 async with JpoClient() as client:
     # Get patent progress/status
@@ -97,7 +97,7 @@ The client automatically enforces rate limiting via a sliding window.
 ### Get Full Patent Prosecution History
 
 ```python
-from ip_tools.jpo import JpoClient
+from patent_client_agents.jpo import JpoClient
 
 async with JpoClient() as client:
     app_num = "2020123456"
@@ -122,7 +122,7 @@ async with JpoClient() as client:
 ### Cross-Reference Patent Numbers
 
 ```python
-from ip_tools.jpo import JpoClient, NumberType
+from patent_client_agents.jpo import JpoClient, NumberType
 
 async with JpoClient() as client:
     # From application number, get publication and registration
@@ -139,7 +139,7 @@ async with JpoClient() as client:
 ### Find Applicant Information
 
 ```python
-from ip_tools.jpo import JpoClient
+from patent_client_agents.jpo import JpoClient
 
 async with JpoClient() as client:
     # Search by name (partial match supported)
@@ -151,7 +151,7 @@ async with JpoClient() as client:
 ### One-Shot Convenience Functions
 
 ```python
-from ip_tools.jpo import get_patent_progress, get_patent_jplatpat_url
+from patent_client_agents.jpo import get_patent_progress, get_patent_jplatpat_url
 
 # No need for context manager - creates client automatically
 progress = await get_patent_progress("2020123456")
@@ -198,7 +198,7 @@ jpo-mcp  # Starts the MCP server
 
 ## API Reference
 
-::: ip_tools.jpo.JpoClient
+::: patent_client_agents.jpo.JpoClient
     options:
       show_root_heading: true
       members:

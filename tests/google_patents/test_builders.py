@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from ip_tools.google_patents.client import (
+from patent_client_agents.google_patents.client import (
     ChildApplication,
     Concept,
     CountryFiling,

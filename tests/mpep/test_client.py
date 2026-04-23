@@ -5,8 +5,8 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from ip_tools.mpep.client import MpepClient
-from ip_tools.mpep.models import MpepSearchResponse, MpepSection, MpepVersion
+from patent_client_agents.mpep.client import MpepClient
+from patent_client_agents.mpep.models import MpepSearchResponse, MpepSection, MpepVersion
 
 
 class TestMpepClientInit:

@@ -1,6 +1,6 @@
 """Tests for USPTO ODP ST.96 XML parser."""
 
-from ip_tools.uspto_odp.xml_parser import (
+from patent_client_agents.uspto_odp.xml_parser import (
     parse_claims_xml,
     parse_document_xml,
     parse_grant_claims_xml,

@@ -6,7 +6,7 @@ No API key required.
 ## Quick Start
 
 ```python
-from ip_tools.uspto_assignments import AssignmentCenterClient
+from patent_client_agents.uspto_assignments import AssignmentCenterClient
 
 async with AssignmentCenterClient() as client:
     # By assignee company
@@ -58,7 +58,7 @@ class AssignmentRecord(BaseModel):
 ## Usage patterns
 
 ```python
-from ip_tools.uspto_assignments import AssignmentCenterClient
+from patent_client_agents.uspto_assignments import AssignmentCenterClient
 
 async with AssignmentCenterClient() as client:
     # Paginate for large result sets

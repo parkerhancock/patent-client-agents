@@ -1,6 +1,6 @@
 [project]
 name = "patent-client-agents"
-version = "0.2.0"
+version = "0.3.0"
 description = "Intellectual property research toolkit for AI agents — patents, trademarks, and prosecution data from USPTO, EPO, JPO, Google Patents, MPEP, and CPC"
 readme = "README.md"
 authors = [
@@ -46,8 +46,8 @@ mcp = [
 ]
 
 [project.scripts]
-patent-client-agents-mcp = "ip_tools.mcp.server:main"
-patent-client-agents-skill-install = "ip_tools.skill_install:main"
+patent-client-agents-mcp = "patent_client_agents.mcp.server:main"
+patent-client-agents-skill-install = "patent_client_agents.skill_install:main"
 
 [project.urls]
 Homepage = "https://github.com/parkerhancock/ip_tools"
@@ -58,7 +58,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ip_tools", "src/law_tools_core"]
+packages = ["src/patent_client_agents", "src/law_tools_core"]
 
 [dependency-groups]
 dev = [
@@ -83,7 +83,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["ip_tools", "law_tools_core"]
+known-first-party = ["patent_client_agents", "law_tools_core"]
 
 [tool.ruff.format]
 quote-style = "double"

@@ -5,7 +5,7 @@ Access USPTO bulk data products for downloading large datasets.
 ## Quick Start
 
 ```python
-from ip_tools.uspto_bulkdata import UsptoOdpClient
+from patent_client_agents.uspto_bulkdata import UsptoOdpClient
 
 async with UsptoOdpClient() as client:
     # Search available products
@@ -37,7 +37,7 @@ export USPTO_ODP_API_KEY="your-api-key"
 ## Usage Pattern
 
 ```python
-from ip_tools.uspto_bulkdata import search_products, get_product
+from patent_client_agents.uspto_bulkdata import search_products, get_product
 
 # One-shot convenience functions
 results = await search_products(q="grant")

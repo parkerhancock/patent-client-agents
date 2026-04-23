@@ -5,7 +5,7 @@ Access USPTO petition decision data via the Open Data Portal.
 ## Quick Start
 
 ```python
-from ip_tools.uspto_petitions import UsptoOdpClient
+from patent_client_agents.uspto_petitions import UsptoOdpClient
 
 async with UsptoOdpClient() as client:
     # Search petition decisions
@@ -34,7 +34,7 @@ export USPTO_ODP_API_KEY="your-api-key"
 ## Usage Pattern
 
 ```python
-from ip_tools.uspto_petitions import search_petitions, get_petition
+from patent_client_agents.uspto_petitions import search_petitions, get_petition
 
 # One-shot convenience functions
 results = await search_petitions(q="revival")

@@ -5,7 +5,7 @@ Search and retrieve patent documents from Google Patents.
 ## Quick Start
 
 ```python
-from ip_tools.google_patents import GooglePatentsClient
+from patent_client_agents.google_patents import GooglePatentsClient
 
 async with GooglePatentsClient() as client:
     # Search for patents
@@ -47,7 +47,7 @@ async with GooglePatentsClient() as client:
 ## Usage Pattern
 
 ```python
-from ip_tools.google_patents import (
+from patent_client_agents.google_patents import (
     GooglePatentsClient,
     search,
     fetch,

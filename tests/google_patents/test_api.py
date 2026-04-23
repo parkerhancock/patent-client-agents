@@ -5,8 +5,8 @@ from typing import Any
 
 import pytest
 
-from ip_tools.google_patents import api as gp_api
-from ip_tools.google_patents.client import GooglePatentsSearchResponse, PatentData
+from patent_client_agents.google_patents import api as gp_api
+from patent_client_agents.google_patents.client import GooglePatentsSearchResponse, PatentData
 
 
 @pytest.fixture

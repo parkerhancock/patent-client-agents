@@ -4,8 +4,8 @@ from typing import Any, cast
 
 import pytest
 
-from ip_tools.mpep import api as mpep_api
-from ip_tools.mpep.models import MpepSearchResponse, MpepSection, MpepVersion
+from patent_client_agents.mpep import api as mpep_api
+from patent_client_agents.mpep.models import MpepSearchResponse, MpepSection, MpepVersion
 
 
 @pytest.mark.asyncio

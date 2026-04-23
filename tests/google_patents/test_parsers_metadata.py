@@ -6,7 +6,7 @@ import re
 
 from lxml import html
 
-from ip_tools.google_patents.parsers.metadata import (
+from patent_client_agents.google_patents.parsers.metadata import (
     _dd_text,
     _event_entries,
     _extract_abstract,

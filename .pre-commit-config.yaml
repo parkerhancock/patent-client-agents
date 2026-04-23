@@ -22,7 +22,7 @@ repos:
         entry: uv run python scripts/lint_catalog.py
         language: system
         pass_filenames: false
-        files: ^(src/ip_tools/catalog/|CATALOG\.md$)
+        files: ^(src/patent_client_agents/catalog/|CATALOG\.md$)
 
   # ty type checker disabled in pre-commit due to external library type issues
-  # Run manually with: uv run ty check src/ip_tools/
+  # Run manually with: uv run ty check src/patent_client_agents/

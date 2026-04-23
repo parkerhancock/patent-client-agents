@@ -10,7 +10,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from ip_tools.google_patents.cache import (
+from patent_client_agents.google_patents.cache import (
     CACHE_TTL_SECONDS,
     CachingAsyncClient,
     PatentCache,

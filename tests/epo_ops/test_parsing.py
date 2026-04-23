@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from ip_tools.epo_ops.parsing import (
+from patent_client_agents.epo_ops.parsing import (
     NS,
     XmlParseError,
     _as_element,
@@ -103,7 +103,7 @@ class TestFirst:
     """Tests for _first helper."""
 
     def test_returns_first_element(self) -> None:
-        from ip_tools.epo_ops.parsing import _first
+        from patent_client_agents.epo_ops.parsing import _first
 
         xml = b"<root><item>one</item><item>two</item></root>"
         elem = _as_element(xml)
@@ -112,7 +112,7 @@ class TestFirst:
         assert result.text == "one"
 
     def test_returns_none_for_empty(self) -> None:
-        from ip_tools.epo_ops.parsing import _first
+        from patent_client_agents.epo_ops.parsing import _first
 
         xml = b"<root></root>"
         elem = _as_element(xml)
@@ -124,7 +124,7 @@ class TestParseDocumentId:
     """Tests for _parse_document_id helper."""
 
     def test_parses_document_id(self) -> None:
-        from ip_tools.epo_ops.parsing import _parse_document_id
+        from patent_client_agents.epo_ops.parsing import _parse_document_id
 
         xml = b"""<doc-id xmlns="http://www.epo.org/exchange">
             <country>US</country>
@@ -140,7 +140,7 @@ class TestParseDocumentId:
         assert doc_id.date == "20230515"
 
     def test_returns_empty_for_none(self) -> None:
-        from ip_tools.epo_ops.parsing import _parse_document_id
+        from patent_client_agents.epo_ops.parsing import _parse_document_id
 
         doc_id = _parse_document_id(None)
         assert doc_id.country is None
@@ -151,7 +151,7 @@ class TestParseSearchResponse:
     """Tests for parse_search_response function."""
 
     def test_parses_search_results(self) -> None:
-        from ip_tools.epo_ops.parsing import parse_search_response
+        from patent_client_agents.epo_ops.parsing import parse_search_response
 
         xml = b"""<?xml version="1.0" encoding="UTF-8"?>
         <ops:world-patent-data xmlns:ops="http://ops.epo.org"
@@ -184,7 +184,7 @@ class TestParseSearchResponse:
         assert result.results[0].kind == "B2"
 
     def test_handles_empty_results(self) -> None:
-        from ip_tools.epo_ops.parsing import parse_search_response
+        from patent_client_agents.epo_ops.parsing import parse_search_response
 
         xml = b"""<?xml version="1.0" encoding="UTF-8"?>
         <ops:world-patent-data xmlns:ops="http://ops.epo.org"
@@ -203,7 +203,7 @@ class TestParseBiblioResponse:
     """Tests for parse_biblio_response function."""
 
     def test_parses_biblio_record(self) -> None:
-        from ip_tools.epo_ops.parsing import parse_biblio_response
+        from patent_client_agents.epo_ops.parsing import parse_biblio_response
 
         xml = b"""<?xml version="1.0" encoding="UTF-8"?>
         <ops:world-patent-data xmlns:ops="http://ops.epo.org"
@@ -246,7 +246,7 @@ class TestParseBiblioResponse:
         assert "John Inventor" in doc.inventors
 
     def test_handles_missing_fields(self) -> None:
-        from ip_tools.epo_ops.parsing import parse_biblio_response
+        from patent_client_agents.epo_ops.parsing import parse_biblio_response
 
         xml = b"""<?xml version="1.0" encoding="UTF-8"?>
         <ops:world-patent-data xmlns:ops="http://ops.epo.org"
@@ -267,7 +267,7 @@ class TestParseClaims:
     """Tests for parse_claims function."""
 
     def test_parses_claims(self) -> None:
-        from ip_tools.epo_ops.parsing import parse_claims
+        from patent_client_agents.epo_ops.parsing import parse_claims
 
         xml = b"""<?xml version="1.0" encoding="UTF-8"?>
         <ft:fulltext-document xmlns:ft="http://www.epo.org/fulltext">
@@ -295,7 +295,7 @@ class TestParseClaims:
         assert result.claims[1].number == 2
 
     def test_parses_description(self) -> None:
-        from ip_tools.epo_ops.parsing import parse_claims
+        from patent_client_agents.epo_ops.parsing import parse_claims
 
         xml = b"""<?xml version="1.0" encoding="UTF-8"?>
         <ft:fulltext-document xmlns:ft="http://www.epo.org/fulltext">
@@ -322,7 +322,7 @@ class TestParseFamily:
     """Tests for parse_family function."""
 
     def test_parses_family_response(self) -> None:
-        from ip_tools.epo_ops.parsing import parse_family
+        from patent_client_agents.epo_ops.parsing import parse_family
 
         xml = b"""<?xml version="1.0" encoding="UTF-8"?>
         <ops:world-patent-data xmlns:ops="http://ops.epo.org"

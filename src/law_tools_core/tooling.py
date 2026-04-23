@@ -1,4 +1,4 @@
-"""Agent tooling infrastructure for ip_tools."""
+"""Agent tooling infrastructure for patent_client_agents."""
 
 from collections.abc import Callable
 
@@ -9,7 +9,7 @@ def agent_tool[T](func: Callable[..., T]) -> Callable[..., T]:
 
     This decorator simply marks the function for stub generation. The stub
     generator will extract the function's docstring, signature, and Pydantic
-    models to create an agent-friendly wrapper in ip_tools.tools.
+    models to create an agent-friendly wrapper in patent_client_agents.tools.
 
     Usage:
         @agent_tool

@@ -5,8 +5,8 @@ from typing import Any, cast
 
 import pytest
 
-from ip_tools.uspto_bulkdata import api as bulk_api
-from ip_tools.uspto_odp.models import (
+from patent_client_agents.uspto_bulkdata import api as bulk_api
+from patent_client_agents.uspto_odp.models import (
     BulkDataProduct,
     BulkDataProductResponse,
     BulkDataSearchResponse,

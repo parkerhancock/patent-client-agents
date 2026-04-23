@@ -4,8 +4,8 @@ from typing import Any, cast
 
 import pytest
 
-from ip_tools.uspto_applications import api as apps_api
-from ip_tools.uspto_odp.models import (
+from patent_client_agents.uspto_applications import api as apps_api
+from patent_client_agents.uspto_odp.models import (
     ApplicationResponse,
     DocumentsResponse,
     FamilyGraphResponse,

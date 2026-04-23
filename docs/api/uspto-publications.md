@@ -5,7 +5,7 @@ Access USPTO Patent Public Search (PPUBS) for searching and retrieving published
 ## Quick Start
 
 ```python
-from ip_tools.uspto_publications import PublicSearchClient
+from patent_client_agents.uspto_publications import PublicSearchClient
 
 async with PublicSearchClient() as client:
     # Search publications
@@ -41,7 +41,7 @@ The `source` parameter accepts:
 ## Usage Pattern
 
 ```python
-from ip_tools.uspto_publications import (
+from patent_client_agents.uspto_publications import (
     PublicSearchClient,
     search,
     download_pdf,

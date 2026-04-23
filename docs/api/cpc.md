@@ -5,7 +5,7 @@ Access the Cooperative Patent Classification (CPC) system for looking up and sea
 ## Quick Start
 
 ```python
-from ip_tools.cpc import retrieve_cpc, search_cpc
+from patent_client_agents.cpc import retrieve_cpc, search_cpc
 
 # Look up a classification
 cpc = await retrieve_cpc(symbol="G06N3/08")
@@ -37,7 +37,7 @@ The CPC system is hierarchical:
 ## Usage Pattern
 
 ```python
-from ip_tools.cpc import retrieve_cpc, search_cpc
+from patent_client_agents.cpc import retrieve_cpc, search_cpc
 
 # Get classification details
 cpc = await retrieve_cpc(symbol="H01L21/00")
