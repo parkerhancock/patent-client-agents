@@ -1,19 +1,25 @@
 # Installing `patent-client-agents`
 
-`patent-client-agents` ships in one wheel that covers six install modes. Pick the
-one that matches how you're going to use it:
+`patent-client-agents` covers seven install modes. Pick the one that
+matches how you're going to use it:
 
 | Mode | You want to... | Section |
 |---|---|---|
 | Python library | Import `patent_client_agents` in your own async code | [§1](#1-python-library) |
 | Python library + MCP runtime | Run an MCP server locally or in-process | [§2](#2-python-library-with-mcp-runtime) |
-| Claude Code plugin (from GitHub) | One-command install into Claude Code | [§3](#3-claude-code-plugin-from-github) |
-| Claude Code skill (dev symlink) | Edit the skill content and hot-reload | [§4](#4-claude-code-skill-dev-symlink) |
+| Claude Code plugin (from GitHub marketplace) | Add 63 patent MCP tools to Claude Code with two slash commands | [§3](#3-claude-code-plugin-from-github) |
+| Claude Code skill (standalone, library-user) | Install the `ip_research` skill into `~/.claude/skills/` for Python-library guidance | [§4](#4-claude-code-skill-standalone-library-user) |
 | Stdio MCP (any MCP client) | Connect Claude Desktop / Cursor / Cline / CoWork-local / custom client | [§5](#5-stdio-mcp-from-any-mcp-client) |
 | Remote MCP — Cowork | Add `patent-client-agents` to a shared Cowork workspace | [§6](#6-remote-mcp--cowork) |
 | Remote MCP — Claude Code / Desktop / others | HTTP MCP with Bearer token | [§7](#7-remote-mcp--generic-claude-code-desktop-etc) |
 
 Skip to the section you need — they're independent.
+
+**The Claude Code plugin** (§3) ships the MCP server only. The
+`ip_research` skill is a separate artifact aimed at Python-library
+users (§4); the plugin installs MCP tools whose in-schema descriptions
+already cover the routing/usage guidance a skill would otherwise
+centralize.
 
 ---
 
@@ -113,8 +119,14 @@ This is exactly how `law-tools` consumes `patent-client-agents` in the monorepo.
 
 ## 3. Claude Code plugin (from GitHub)
 
-Use this when you use Claude Code and want the skill **and** the 63
-MCP tools dropped in with one command.
+Use this when you use Claude Code and want the 63 patent MCP tools
+dropped in with two slash commands.
+
+The plugin ships **only the MCP server** — no skill, no agents, no
+hooks. The MCP tools' in-schema descriptions already carry the
+cross-tool routing guidance a skill would otherwise centralize (e.g.
+`search_google_patents` tells the agent "PREFER search_patent_publications
+for US patents"; `get_epo_cql_help` is itself a tool).
 
 ### Prereq
 
@@ -130,43 +142,70 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ### Install
 
 Claude Code's plugin install goes through a **marketplace** — a small
-catalog manifest that points at one or more plugins. This repo ships
-its own single-plugin marketplace (`.claude-plugin/marketplace.json`),
-so the flow is: add the marketplace once, then install the plugin
-from it.
+catalog manifest that lists one or more plugins. This repo ships its
+own single-plugin marketplace at `.claude-plugin/marketplace.json`,
+with the plugin itself living in a subdirectory
+(`plugins/patent-client-agents/`) that the schema requires.
 
 Run these **inside a Claude Code session** (slash commands, not shell):
 
 ```
 /plugin marketplace add parkerhancock/ip_tools
 /plugin install patent-client-agents@patent-client-agents
+/reload-plugins
 ```
 
 What happens:
 
 1. `/plugin marketplace add parkerhancock/ip_tools` clones this repo
-   into `~/.claude/marketplaces/parkerhancock/` and registers the
-   marketplace manifest (`name: "patent-client-agents"`).
-2. `/plugin install patent-client-agents@patent-client-agents` resolves the
-   `patent-client-agents` plugin from that marketplace, links it into
-   `~/.claude/plugins/`, auto-discovers the `ip_research` skill at
-   `src/patent_client_agents/skills/`, and registers the MCP server
-   declared in `.claude-plugin/plugin.json`.
-3. On first MCP use, `uvx` installs `patent-client-agents[mcp]` from
-   the plugin clone into a managed environment and launches
-   `patent-client-agents-mcp`. The cold start takes ~30 seconds;
-   after that it's fast because uv caches the resolved environment.
+   into `~/.claude/plugins/marketplaces/`, parses
+   `.claude-plugin/marketplace.json`, and registers the marketplace
+   under the name it declares (`patent-client-agents`).
+2. `/plugin install patent-client-agents@patent-client-agents`
+   resolves the `patent-client-agents` plugin from that marketplace
+   (the redundant `@patent-client-agents` suffix is the marketplace
+   name, not the plugin name), links it into `~/.claude/plugins/`,
+   and registers the MCP server declared in
+   `plugins/patent-client-agents/.claude-plugin/plugin.json`.
+3. `/reload-plugins` tells Claude Code to pick up the newly-registered
+   plugin in the current session.
+4. On first MCP use, `uvx` fetches `patent-client-agents[mcp]` from
+   **PyPI** (not from the cloned repo — the plugin manifest uses
+   `uvx --from patent-client-agents[mcp] patent-client-agents-mcp`)
+   into a managed environment and launches the server. The first run
+   takes ~30 seconds while ~100 packages download; subsequent runs
+   are fast because uv caches the resolved environment.
+
+Expected output after install + reload:
+
+```
+Reloaded: 1 plugin · 0 skills · … agents · 0 hooks · 1 plugin MCP server · 0 plugin LSP servers
+```
+
+`0 skills` is the intended state — see the note at the top of this doc.
 
 ### Update
 
+When a new plugin version lands on GitHub:
+
 ```
 /plugin marketplace update patent-client-agents
-/plugin install patent-client-agents@patent-client-agents
+/reload-plugins
 ```
 
-The first command pulls the latest marketplace commit (which may
-include a newer plugin version); the second reinstalls. The
-uv-managed env gets rebuilt on next MCP launch.
+The first command pulls the latest marketplace commit (which includes
+any plugin-manifest changes). `/reload-plugins` then re-reads the
+registered plugin's manifest. If the PyPI version referenced by
+`uvx --from patent-client-agents[mcp]` changed, the next MCP call
+rebuilds the uv-managed env.
+
+If you need to force a clean reinstall:
+
+```
+/plugin uninstall patent-client-agents@patent-client-agents
+/plugin install patent-client-agents@patent-client-agents
+/reload-plugins
+```
 
 ### Remove
 
@@ -192,47 +231,60 @@ ODP and EPO tools will return auth errors.
 
 ### Verify
 
-Start Claude Code, open a chat, and ask something patent-research-ish:
-
-> "What's in MPEP section 2106?"
-
-The `ip_research` skill surfaces in routing and Claude calls
-`get_mpep_section` via the MCP server. The response is the text of
-MPEP 2106 — Patent Subject Matter Eligibility.
-
-Or, more directly — list MCP tools from within a Claude Code session:
+List MCP tools from within a Claude Code session:
 
 ```
 /mcp
 ```
 
-`patent-client-agents` should show up with 63 tools.
+Expect `patent-client-agents` with 63 tools. Or call one directly by
+asking something patent-research-ish:
+
+> "What's in MPEP section 2106?"
+
+Claude invokes `get_mpep_section` via the MCP server and returns the
+text of MPEP 2106 — Patent Subject Matter Eligibility.
 
 ### Troubleshooting
 
 **`uvx: command not found`** — install uv (see prereq).
 
-**MCP server shows "failed to start" in `/mcp`** — open the logs
-pane and look for the stderr output. Common causes: offline during
-first install (`uvx` can't fetch packages), or a Python build error
-on ancient macOS (upgrade `uv` to the latest).
+**`/mcp` shows the server as "failed to start"** — open the logs pane
+and look for stderr output. Common causes: offline during first
+install (`uvx` can't reach PyPI), or an ancient macOS Python build
+error (upgrade `uv` to latest).
 
 **Cold start takes too long** — subsequent runs are ~1s. If every
-session is 30s, something is evicting uv's cache. Check
+session takes 30s, something is evicting uv's cache. Check that
 `~/.cache/uv/` is persistent.
+
+**Plugin shows 0 tools after install** — `/reload-plugins` didn't
+pick it up. Fully exit Claude Code and restart the session.
 
 ---
 
-## 4. Claude Code skill (dev symlink)
+## 4. Claude Code skill (standalone, library-user)
 
-Use this when you're **editing** the skill content and want
-`~/.claude/skills/ip-research` to track your working tree. Native
-installer copies the repo — this symlinks it, so edits are live.
+The Claude Code plugin (§3) intentionally ships **only the MCP
+server** — its tool descriptions carry the routing guidance a skill
+would centralize. This section is for a different use case: you
+installed `patent-client-agents` as a **Python library** (§1 or §2)
+and want the `ip_research` skill's reference docs available in
+Claude Code for when you're *writing* Python code that uses the
+library.
+
+The skill covers:
+
+- Client class → import path routing
+- Query-syntax cheat sheets (CQL for EPO, PPUBS field codes, Lucene
+  for USPTO OA)
+- Gotchas (patent number formats, JPO credentials, rate limits)
+- Python usage examples
 
 ### Install
 
 ```bash
-pip install 'patent-client-agents[mcp]'
+pip install 'patent-client-agents[mcp]'   # or without [mcp] if you don't need the MCP runtime
 patent-client-agents-skill-install
 ```
 
@@ -254,14 +306,19 @@ patent-client-agents-skill-install --force
 Backs up any existing `ip-research` dir to `ip-research.bak` and
 replaces with the symlink.
 
-### Native installer vs dev symlink
+### Plugin vs. standalone skill
 
-| | Native installer (§3) | Dev symlink (§4) |
+|  | Plugin (§3) | Standalone skill (§4) |
 |---|---|---|
+| What it installs | MCP server only (63 tools) | Skill markdown for Python library usage |
 | Command | `/plugin install patent-client-agents@patent-client-agents` | `patent-client-agents-skill-install` |
-| Source | Cloned copy of the repo | Pip-installed package (symlinked) |
-| Updates | `claude plugin update` (re-clones) | Picks up edits live — reinstall `patent-client-agents` to refresh |
-| Best for | Users | Contributors editing SKILL.md or references |
+| Source | Cloned marketplace repo | pip-installed package (symlinked) |
+| Updates | `/plugin marketplace update` + `/reload-plugins` | Reinstall `patent-client-agents` to pick up new skill content |
+| Best for | Agents calling MCP tools | Humans writing Python that imports `patent_client_agents` |
+
+The two paths can co-exist on the same machine — the plugin provides
+the MCP tools to agents, the standalone skill provides reference docs
+to humans working in the codebase.
 
 ---
 

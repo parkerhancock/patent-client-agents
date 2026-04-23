@@ -12,6 +12,7 @@ Inside Claude Code:
 ```
 /plugin marketplace add parkerhancock/ip_tools
 /plugin install patent-client-agents@patent-client-agents
+/reload-plugins
 ```
 
 See [docs/installation.md](docs/installation.md) for all seven install modes.
@@ -56,12 +57,13 @@ For Claude Code users — run these inside a Claude Code session:
 ```
 /plugin marketplace add parkerhancock/ip_tools
 /plugin install patent-client-agents@patent-client-agents
+/reload-plugins
 ```
 
-Two slash commands (not shell). You get the `ip_research` skill and
-all 63 patent MCP tools. Prereq: [uv](https://docs.astral.sh/uv/) on
-PATH (the MCP server runs under `uvx` so you don't pip install
-anything yourself).
+Three slash commands (not shell). You get all 63 patent MCP tools
+exposed to the agent. Prereq: [uv](https://docs.astral.sh/uv/) on
+PATH — the MCP server runs under `uvx` so you don't `pip install`
+anything yourself.
 
 **Seven install modes are documented in [docs/installation.md](docs/installation.md)**
 — Python library, Python+MCP runtime, Claude Code plugin, dev symlink, stdio
