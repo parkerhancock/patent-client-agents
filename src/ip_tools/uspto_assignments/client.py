@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 from law_tools_core.base_client import BaseAsyncClient
 
 from .models import AssignmentRecord, AssignmentSearchResponse
+
+logger = logging.getLogger(__name__)
 
 
 class AssignmentCenterClient(BaseAsyncClient):

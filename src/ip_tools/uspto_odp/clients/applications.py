@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,8 @@ from ..models import (
     SearchResponse,
 )
 from .base import UsptoOdpBaseClient, _prune, _serialize_model_list
+
+logger = logging.getLogger(__name__)
 
 _OCR_CACHE_DIR = get_default_cache_dir() / "ifw_ocr"
 _OCR_MIN_CHARS_PER_PAGE = 50
@@ -404,13 +407,19 @@ class ApplicationsClient(UsptoOdpBaseClient):
         }
 
         if format in ("auto", "xml"):
-            from ...core.exceptions import NotFoundError
+            from law_tools_core.exceptions import NotFoundError
 
             try:
                 xml_text = await self.download_document_xml(appl, document_identifier)
-            except (ValueError, NotFoundError):
+            except (ValueError, NotFoundError) as exc:
                 if format == "xml":
                     raise
+                logger.warning(
+                    "XML fetch failed for %s/%s (%s); falling back to PDF.",
+                    appl,
+                    document_identifier,
+                    exc,
+                )
                 xml_text = None
             if xml_text is not None:
                 if format == "xml":

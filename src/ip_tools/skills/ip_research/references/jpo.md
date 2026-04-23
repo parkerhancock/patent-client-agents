@@ -41,7 +41,7 @@ Get simplified status.
 simple = await client.get_patent_progress_simple("2020-123456")
 ```
 
-### get_patent_documents(application_number) -> ApplicationDocumentsData
+### get_patent_application_documents(application_number) -> ApplicationDocumentsData
 
 Get documents filed by applicant.
 
@@ -65,9 +65,10 @@ Get cited prior art.
 cited = await client.get_patent_cited_documents("2020-123456")
 ```
 
-### get_patent_family_info(application_number) -> FamilyInfo
+### get_patent_divisional_info(application_number) / get_patent_priority_info(application_number)
 
-Get divisional and priority information.
+Get divisional relationships and priority claims (two separate calls —
+there is no unified family-info method).
 
 ```python
 divisional = await client.get_patent_divisional_info("2020-123456")

@@ -15,11 +15,11 @@ from typing import TYPE_CHECKING, Any
 from lxml import html
 from markitdown import MarkItDown
 from pydantic import BaseModel, Field
-from tenacity import AsyncRetrying, stop_after_attempt, wait_exponential_jitter
 
 if TYPE_CHECKING:  # pragma: no cover - typing only
     pass
 
+from law_tools_core.resilience import default_retryer
 from law_tools_core.tooling import agent_tool
 
 from .cache import build_cached_http_client
@@ -1029,17 +1029,11 @@ class GooglePatentsClient:
 
     async def _fetch_with_retry(self, patent_number: str) -> PatentData:
         normalized = _normalize_patent_number(patent_number)
-        retryer = AsyncRetrying(
-            stop=stop_after_attempt(4),
-            wait=wait_exponential_jitter(initial=1.0, max=20.0),
-            reraise=True,
-        )
-        async for attempt in retryer:
+        async for attempt in default_retryer(max_attempts=4):
             with attempt:
-                patent_data = await fetch_patent_from_google_patents(
+                return await fetch_patent_from_google_patents(
                     normalized, use_cache=self._use_cache
                 )
-                return patent_data
         raise RuntimeError(f"Unable to fetch patent data for {normalized} after retries")
 
     async def _get_patent_data(self, patent_number: str) -> PatentData:

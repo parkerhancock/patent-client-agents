@@ -90,12 +90,12 @@ doc.related_apps        # list[RelatedApplication]
 doc.foreign_priority    # list[ForeignPriorityApplication]
 ```
 
-### resolve_document_by_publication_number(publication_number) -> PublicSearchDocument
+### resolve_publication(publication_number) -> PublicSearchDocument
 
 Look up a document by publication number (e.g., "US10123456B2", "US20200012345A1").
 
 ```python
-doc = await client.resolve_document_by_publication_number("US10123456B2")
+doc = await client.resolve_publication("US10123456B2")
 ```
 
 ### download_pdf(document) -> bytes
@@ -103,7 +103,7 @@ doc = await client.resolve_document_by_publication_number("US10123456B2")
 Download the patent PDF as raw bytes.
 
 ```python
-doc = await client.resolve_document_by_publication_number("US10123456B2")
+doc = await client.resolve_publication("US10123456B2")
 pdf_bytes = await client.download_pdf(doc)
 Path("patent.pdf").write_bytes(pdf_bytes)
 ```

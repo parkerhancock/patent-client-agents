@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import base64
 import json
+import logging
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -15,6 +16,8 @@ from law_tools_core.exceptions import ApiError
 from .models import PublicSearchBiblioPage, PublicSearchDocument
 from .transformers import convert_biblio_page, convert_document_payload
 from .utils import normalize_publication_number
+
+logger = logging.getLogger(__name__)
 
 _HEADERS = {
     "X-Requested-With": "XMLHttpRequest",
@@ -218,19 +221,37 @@ class PublicSearchClient:
         response.raise_for_status()
         return response.text.strip().strip('"')
 
+    _POLL_TIMEOUT_SECONDS = 300  # 5 min — long docs take ~30s; 5 min is 10x typical
+    _POLL_INTERVAL_SECONDS = 1
+
     async def _poll_print_job(self, job_id: str) -> str:
-        while True:
-            response = await self._request(
-                "POST",
-                f"{_BASE_URL}/api/print/print-process",
-                json=[job_id],
-            )
-            response.raise_for_status()
-            data = response.json()
-            status = data[0].get("printStatus")
-            if status == "COMPLETED":
-                return data[0]["pdfName"]
-            await asyncio.sleep(1)
+        """Poll the PPUBS print-job endpoint until the PDF is ready.
+
+        Bounded by ``_POLL_TIMEOUT_SECONDS`` — a stuck job raises
+        ``PublicSearchError`` instead of hanging forever.
+        """
+        async def _loop() -> str:
+            while True:
+                response = await self._request(
+                    "POST",
+                    f"{_BASE_URL}/api/print/print-process",
+                    json=[job_id],
+                )
+                response.raise_for_status()
+                data = response.json()
+                status = data[0].get("printStatus")
+                if status == "COMPLETED":
+                    return data[0]["pdfName"]
+                await asyncio.sleep(self._POLL_INTERVAL_SECONDS)
+
+        try:
+            return await asyncio.wait_for(_loop(), timeout=self._POLL_TIMEOUT_SECONDS)
+        except TimeoutError as exc:
+            raise PublicSearchError(
+                f"PPUBS print job {job_id} did not complete within "
+                f"{self._POLL_TIMEOUT_SECONDS}s. USPTO's print service may be "
+                f"degraded — retry later."
+            ) from exc
 
     async def _download_pdf_bytes(self, pdf_name: str) -> bytes:
         request = self._client.build_request(

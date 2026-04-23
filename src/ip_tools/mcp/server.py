@@ -12,6 +12,10 @@ Stdio is the default transport. Pass ``--transport http`` (or use
 
 from __future__ import annotations
 
+import argparse
+import sys
+
+from ip_tools import __version__
 from law_tools_core.mcp.server_factory import build_server
 
 from . import ip_mcp
@@ -27,9 +31,30 @@ mcp = build_server(
 mcp.mount(ip_mcp)
 
 
-def main() -> None:
-    """Entry point for the ``ip-tools-mcp`` console script."""
-    mcp.run()
+def main(argv: list[str] | None = None) -> None:
+    """Entry point for the ``ip-tools-mcp`` console script.
+
+    No args ⇒ run the MCP server on stdio (the default behavior MCP
+    clients expect). ``--version`` and ``--help`` print and exit.
+    """
+    parser = argparse.ArgumentParser(
+        prog="ip-tools-mcp",
+        description=(
+            "Run the ip-tools MCP server on stdio. Exposes 63 patent/IP "
+            "tools from USPTO, EPO, Google Patents, and MPEP to any MCP "
+            "client. See docs/installation.md for client configuration."
+        ),
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"ip-tools {__version__}",
+    )
+    parser.parse_args(argv)
+    try:
+        mcp.run()
+    except KeyboardInterrupt:
+        sys.exit(0)
 
 
 if __name__ == "__main__":

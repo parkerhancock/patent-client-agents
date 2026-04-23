@@ -4,7 +4,7 @@ Things flagged but not yet done. Sorted by how much they'd hurt if we
 left them unchecked. Add items as you find them; check them off in PRs
 that fix them.
 
-## Nice-to-have UX improvements
+## User-decision / enablement
 
 - [ ] **Publish `ip-tools` to PyPI.** Install-from-GitHub works fine and
       the plugin's `uvx --from ${CLAUDE_PLUGIN_ROOT}[mcp]` already "just
@@ -14,86 +14,67 @@ that fix them.
       project name, set up trusted publishing from GitHub Actions, cut a
       0.2.0 release.
 
+- [ ] **Stand up a real remote MCP endpoint.** Deploy artifacts in
+      `deploy/` are ready (systemd unit, nginx config, env template,
+      step-by-step guide). Missing: a host, DNS, a TLS cert, a first
+      bearer token. Once up, swap `mcp.example.com` references in the
+      docs for the real hostname.
+
+- [ ] **CI auto-deploy on merge to `main`.** Model on law-tools' pattern
+      but genericized (no GCP WIF). GitHub Secrets: `REMOTE_HOST`,
+      `REMOTE_SSH_KEY`, `LAW_TOOLS_CORE_API_KEY`.
+
+## Known issues (deferred)
+
+- [ ] **Re-record stale law-tools VCR cassettes** (TSDR + FedReserve).
+      The TSDR test also needs a code update — the cassette recorded
+      `/last-update/info.json?sn=...` but current client requests
+      `/ts/cd/casestatus/sn.../info`. Needs live `USPTO_TSDR_API_KEY` to
+      re-record.
+
 - [ ] **Cold-start latency on first plugin use.** First `uvx` invocation
-      after `claude plugin add` downloads ~100 packages (lxml, onnxruntime,
-      pypdfium2, etc.) and takes ~30 seconds. Subsequent invocations hit
-      uv's cache and are ~1s. Consider pre-warming the cache at plugin-add
-      time (via a Claude Code install hook, if one ever gets blessed) or
-      leaning on the skill-first UX where the agent can answer before the
-      MCP is cold-started.
-
-## Known regressions / bugs
-
-- [ ] **`mpep.search()` returns 0 hits for plausible queries against the
-      live endpoint.** Surfaced during 2026-04-22 e2e install-mode testing.
-      `get_section()` still works. Upstream indexing issue or a client-side
-      query-construction regression — investigate and either fix or file
-      upstream.
-
-- [ ] _(law-tools, pre-existing)_ Stale VCR cassettes for TSDR and Fed
-      Reserve. 2 tests fail as-recorded; re-record and commit.
-
-- [ ] _(law-tools, pre-existing)_ Missing `pdfplumber` dep blocks colline
-      test collection. Add `pdfplumber` to the `colline` optional-deps group
-      or drop the extra if no longer used.
-
-## Tech debt (carried forward)
-
-- [ ] **EPO OPS client has no retry logic.** Doesn't inherit from
-      `BaseAsyncClient` and doesn't use `law_tools_core.resilience`. Transient
-      network errors surface as raw exceptions. Migrate to `BaseAsyncClient`
-      or at minimum wrap in `default_retryer`.
-
-- [ ] **Google Patents and JPO clients duplicate retry logic** instead of
-      using `law_tools_core.resilience`. Consolidate.
-
-- [ ] **JPO module has 0% test coverage.** Credentials are restricted so
-      VCR cassettes are the pragmatic answer — record once against a known
-      good fixture set.
-
-- [ ] **USPTO Publications `_poll_print_job()` has no timeout.** A stuck
-      job will hang indefinitely. Add a bounded poll with `anyio.fail_after`.
-
-- [ ] **USPTO assignments / ODP / publications modules have no logging.**
-      Log failures at WARNING with the log-file path convention (see
-      `law_tools_core.logging`).
-
-## Documentation
-
-- [ ] **Skill `references/*.md` content needs a refresh pass.** Several
-      reference files describe the pre-extraction API surface (law-tools
-      module names). The extraction plan memory flagged this; still not
-      done.
-
-- [ ] **Monorepo `CLAUDE.md` doesn't list ip-tools as a library-backed
-      skill.** Add to the skills directory in the top-level README/CLAUDE.
-
-- [ ] **API docs under `docs/api/` lag the current module layout.** Cross-
-      check every file in `src/ip_tools/` against `docs/api/` and fill the
-      gaps (office_actions, bulk_data, petitions).
-
-## Remote MCP deployment
-
-- [ ] **Stand up a real remote MCP endpoint.** Deploy artifacts are ready
-      in `deploy/` (systemd unit, nginx config, env template, step-by-step
-      guide). Missing: a host, DNS, a TLS cert, and a first bearer token.
-      Once up, swap `mcp.example.com` references in the docs for the real
-      hostname.
-
-- [ ] **CI auto-deploy on merge to `main`.** Model on `tools/law-tools/`'s
-      GCP-WIF workflow (`.github/workflows/deploy.yml.disabled`) but
-      generic — no firm-specific identity federation. GitHub Secrets:
-      `REMOTE_HOST`, `REMOTE_SSH_KEY`, `LAW_TOOLS_CORE_API_KEY`.
+      after `claude plugin add` downloads ~100 packages and takes ~30
+      seconds. Subsequent invocations hit uv's cache and are ~1s. Consider
+      pre-warming the cache at plugin-add time (via a Claude Code install
+      hook, if one ever gets blessed) or leaning on the skill-first UX
+      where the agent can answer before the MCP is cold-started.
 
 ## Nice to have
 
-- [ ] **Cowork UI screenshots** for the installation guide. Text directions
-      in [docs/installation.md §6](docs/installation.md#6-remote-mcp--cowork)
-      are based on the described flow; screenshots would disambiguate.
+- [ ] **Migrate JPO off its bespoke retry loop.** The JPO client inherits
+      from `BaseAsyncClient` but overrides `_request` with its own
+      AsyncRetrying loop to handle rate-limiting + token refresh on
+      401/403. Consolidation would require moving rate-limit + auth-refresh
+      hooks into `BaseAsyncClient`. Not done — the bespoke logic is
+      justified and a refactor risk.
 
-- [ ] **`ip-tools-mcp --help` / `--version`.** The console script is a
-      bare `mcp.run()` today. Add a thin argparse wrapper so `ip-tools-mcp --version`
-      prints the package version and `--help` points at the docs.
+- [ ] **JPO module test coverage.** Credentials are restricted, so the
+      pragmatic approach is recording VCR cassettes once against a known
+      good fixture set and replaying thereafter.
 
-- [ ] **Migrate the skill's `install.sh` to use `uv` or `pipx`** instead
-      of `pip install --user`. Works everywhere, avoids PATH confusion.
+## Done this session (2026-04-23)
+
+- ✓ Skill references/*.md refreshed — EP Register section stripped from
+  epo_ops.md (5 nonexistent methods); `resolve_document_by_publication_number`
+  renamed to `resolve_publication` in uspto_publications.md; JPO method
+  names corrected.
+- ✓ `docs/api/` backfilled — added uspto-odp.md, uspto-assignments.md,
+  uspto-office-actions.md.
+- ✓ Monorepo CLAUDE.md lists ip-tools as a library-backed skill.
+- ✓ `ip-tools-mcp --help` / `--version` works (was a bare `mcp.run()`).
+- ✓ `USPTO Publications _poll_print_job()` has a 5-minute bounded timeout.
+- ✓ `Google Patents` retry loop uses `law_tools_core.resilience.default_retryer`
+  (consolidated from a bespoke `AsyncRetrying` instance).
+- ✓ Module-level loggers + one meaningful `logger.warning()` at the XML-fallback
+  path in USPTO applications / assignments / publications.
+- ✓ Fixed latent bug: `from ...core.exceptions import NotFoundError` in
+  `uspto_odp/clients/applications.py` (stale pre-extraction import that
+  would have ImportError'd on first call).
+- ✓ Skill `install.sh` prefers `uv` over `pip install --user`.
+- ✓ Law-tools colline tests skip collection cleanly when `pdfplumber` is
+  absent (pytest `collect_ignore_glob` gate, not a dep bump).
+- ✓ Law-tools leaks scrubbed: LegiScan API key + 9 access_keys sanitized
+  in the VCR cassette, VCR `filter_query_parameters` patched to catch
+  `key=...` going forward, `.gitleaks.toml` allowlist for 3 known-safe
+  findings (EDIS JWT example, Google Patents browser-inlined GCP key,
+  placeholder `YOUR_*` strings). `gitleaks detect` → 0 leaks.

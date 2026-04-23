@@ -1,39 +1,63 @@
 #!/bin/bash
+# ip_research skill: quick-install helper for standalone dev symlink setup.
+#
+# Most users should NOT run this directly. Instead:
+#
+#   - Claude Code users (recommended):
+#       claude plugin add github:parkerhancock/ip_tools
+#
+#   - Dev symlink into ~/.claude/skills/:
+#       pip install 'ip-tools[mcp]'
+#       ip-tools-skill-install
+#
+#   - Python library only:
+#       pip install ip-tools
+#       # or
+#       uv add ip-tools
+#
+# This script stays in the wheel as a convenience for editable-install
+# workflows where somebody has the ip-tools repo cloned locally and
+# wants to make `import ip_tools` work without setting up a venv first.
+
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-# Walk up until we find the repo root (directory containing pyproject.toml for ip-tools).
 REPO_ROOT="$SCRIPT_DIR"
 while [[ "$REPO_ROOT" != "/" && ! -f "$REPO_ROOT/pyproject.toml" ]]; do
     REPO_ROOT="$(dirname "$REPO_ROOT")"
 done
-MARKER_FILE="$REPO_ROOT/.install-marker"
 
-if [[ -f "$REPO_ROOT/pyproject.toml" ]]; then
-    # Dev repo: editable install with dependency tracking
-    CURRENT_HASH=$(md5 -q "$REPO_ROOT/pyproject.toml" 2>/dev/null || md5sum "$REPO_ROOT/pyproject.toml" 2>/dev/null | cut -d' ' -f1 || echo "none")
-    STORED_HASH=$(cat "$MARKER_FILE" 2>/dev/null || echo "")
-
-    # Fast path: already installed and pyproject.toml unchanged
-    if [[ "$CURRENT_HASH" == "$STORED_HASH" ]] && python3 -c "import ip_tools" 2>/dev/null; then
-        exit 0
-    fi
-
-    # Install/upgrade (editable install for dev - code changes auto-picked up)
-    pip install --quiet --user -e "$REPO_ROOT"
-
-    # Store marker for next run
-    echo "$CURRENT_HASH" > "$MARKER_FILE"
-else
-    # Not in repo - check if already installed
-    python3 -c "import ip_tools" 2>/dev/null && exit 0
-
-    # Install from GitHub
-    pip install --quiet --user git+https://github.com/parkerhancock/ip_tools.git
+# Fast path: already importable.
+if python3 -c "import ip_tools" 2>/dev/null; then
+    exit 0
 fi
 
-# Verify
+# Prefer uv — it's faster, resolves deps cleanly, doesn't need a venv.
+if command -v uv >/dev/null 2>&1; then
+    if [[ -f "$REPO_ROOT/pyproject.toml" ]]; then
+        # Dev repo: editable install into uv's project venv.
+        (cd "$REPO_ROOT" && uv sync --quiet) || {
+            echo "uv sync failed in $REPO_ROOT" >&2
+            exit 1
+        }
+    else
+        uv pip install --quiet 'ip-tools @ git+https://github.com/parkerhancock/ip_tools.git' || {
+            echo "uv pip install from GitHub failed" >&2
+            exit 1
+        }
+    fi
+else
+    # Fallback to pip if uv is absent.
+    if [[ -f "$REPO_ROOT/pyproject.toml" ]]; then
+        pip install --quiet --user -e "$REPO_ROOT"
+    else
+        pip install --quiet --user git+https://github.com/parkerhancock/ip_tools.git
+    fi
+fi
+
+# Verify.
 python3 -c "import ip_tools" || {
-    echo "Error: Failed to install ip_tools" >&2
+    echo "Error: ip_tools is still not importable after install." >&2
+    echo "See https://github.com/parkerhancock/ip_tools/blob/main/docs/installation.md" >&2
     exit 1
 }
