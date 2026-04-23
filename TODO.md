@@ -14,15 +14,17 @@ that fix them.
       project name, set up trusted publishing from GitHub Actions, cut a
       0.2.0 release.
 
-- [ ] **Stand up a real remote MCP endpoint.** Deploy artifacts in
-      `deploy/` are ready (systemd unit, nginx config, env template,
-      step-by-step guide). Missing: a host, DNS, a TLS cert, a first
-      bearer token. Once up, swap `mcp.example.com` references in the
-      docs for the real hostname.
+- [ ] **Stand up the public remote MCP demo.** Deploy artifacts moved
+      to [`parkerhancock/patent-client-agents-deploy`](https://github.com/parkerhancock/patent-client-agents-deploy)
+      (Cloud Run + Google OAuth + Firestore rate limits). Still need: GCP
+      project, OAuth client, custom domain, first `terraform apply`. Once
+      live, swap the `patent-mcp-demo.example.com` placeholder in
+      `docs/installation.md` §6 for the real hostname.
 
-- [ ] **CI auto-deploy on merge to `main`.** Model on law-tools' pattern
-      but genericized (no GCP WIF). GitHub Secrets: `REMOTE_HOST`,
-      `REMOTE_SSH_KEY`, `LAW_TOOLS_CORE_API_KEY`.
+- [ ] **CI auto-deploy on merge to `main`.** Cloud Build trigger on the
+      deploy repo pointing at `cloudbuild.yaml`. Needs the GCP project to
+      exist and `roles/run.admin` + `roles/artifactregistry.writer` granted
+      to the Cloud Build SA.
 
 ## Known issues (deferred)
 

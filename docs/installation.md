@@ -10,8 +10,7 @@ matches how you're going to use it:
 | Claude Code plugin (from GitHub marketplace) | Add 63 patent MCP tools to Claude Code with two slash commands | [§3](#3-claude-code-plugin-from-github) |
 | Claude Code skill (standalone, library-user) | Install the `ip_research` skill into `~/.claude/skills/` for Python-library guidance | [§4](#4-claude-code-skill-standalone-library-user) |
 | Stdio MCP (any MCP client) | Connect Claude Desktop / Cursor / Cline / CoWork-local / custom client | [§5](#5-stdio-mcp-from-any-mcp-client) |
-| Remote MCP — Cowork | Add `patent-client-agents` to a shared Cowork workspace | [§6](#6-remote-mcp--cowork) |
-| Remote MCP — Claude Code / Desktop / others | HTTP MCP with Bearer token | [§7](#7-remote-mcp--generic-claude-code-desktop-etc) |
+| Remote MCP (hosted or self-hosted) | Point an MCP client at a deployed HTTPS endpoint | [§6](#6-remote-mcp) |
 
 Skip to the section you need — they're independent.
 
@@ -434,115 +433,66 @@ server. Check the JSON config points at the right binary.
 
 ---
 
-## 6. Remote MCP — Cowork
+## 6. Remote MCP
 
-Use this when your team uses Cowork and wants `patent-client-agents` available as
-a shared connector for the whole workspace. Requires a deployed
-`patent-client-agents` remote MCP endpoint (see §7 for what's running on the
-server side, and `deploy/DEPLOYMENT.md` for standing one up).
+Use this when an MCP client (Claude Code, Claude Desktop, Cowork, Cursor,
+custom agent) should point at a deployed HTTPS endpoint instead of spawning
+a local subprocess.
 
-### Prereqs
+The server side lives in a separate repo:
+[**parkerhancock/patent-client-agents-deploy**](https://github.com/parkerhancock/patent-client-agents-deploy).
+It packages this library with a FastAPI wrapper that adds Google-login
+bearer tokens and Firestore-backed rate limits, and ships Terraform + Cloud
+Build for a one-command GCP Cloud Run deployment. A public demo instance is
+hosted at `https://patent-mcp-demo.example.com` (update this URL when the
+demo lands).
 
-- A deployed `patent-client-agents` MCP server — e.g. `https://mcp.example.com/patent_client_agents/`
-- The `LAW_TOOLS_CORE_API_KEY` secret value set on that server
-- Cowork admin access to the target workspace
+### Using the hosted demo
 
-### Add the connector
+1. Visit the demo URL, sign in with Google, and mint a bearer token at
+   `/tokens`.
+2. Add to `.mcp.json` / Claude Desktop config / Cowork connector:
 
-1. In Cowork, open **Settings → Connectors**.
-2. Click **Add custom MCP**.
-3. Fill in:
-   - **Server URL**: `https://mcp.example.com/patent_client_agents/mcp`
-   - **Auth type**: **OAuth2 client credentials**
-   - **Client ID**: any string (`patent-client-agents` is a fine default — the
-     server doesn't check client_id, only client_secret)
-   - **Client secret**: the `LAW_TOOLS_CORE_API_KEY` value from the
-     server's `.env`
-   - **Token URL**: `https://mcp.example.com/patent_client_agents/oauth/token`
-4. Save.
+   ```json
+   {
+     "mcpServers": {
+       "patent-client-agents": {
+         "url": "https://patent-mcp-demo.example.com/mcp/",
+         "headers": { "Authorization": "Bearer <your token>" }
+       }
+     }
+   }
+   ```
 
-Cowork will immediately POST to the token URL with
-`grant_type=client_credentials&client_secret=<secret>` and exchange
-it for an access token. The server returns the same token back as the
-`access_token` (the OAuth endpoint is a passthrough — the token
-*is* the API key). Cowork caches the token and uses it as
-`Authorization: Bearer <token>` on every MCP request.
+3. Smoke-test:
 
-### Verify
+   ```bash
+   curl -s -X POST https://patent-mcp-demo.example.com/mcp/ \
+     -H "Authorization: Bearer <your token>" \
+     -H "Content-Type: application/json" \
+     -H "Accept: application/json, text/event-stream" \
+     -d '{"jsonrpc":"2.0","id":1,"method":"initialize",
+          "params":{"protocolVersion":"2025-06-18","capabilities":{},
+                    "clientInfo":{"name":"curl","version":"0"}}}'
+   ```
 
-After saving, Cowork should list the connector as **Connected**. Open
-any Cowork chat and ask a patent question — the `patent-client-agents` connector
-should appear in the tool-use indicators.
+   Expect `"serverInfo":{"name":"patent-client-agents",...}`.
 
-### Troubleshooting
+### Running your own
 
-**Connection test fails with `401 invalid_client`** — the client
-secret doesn't match `LAW_TOOLS_CORE_API_KEY` on the server. Re-copy
-from the server `.env`, being careful not to include trailing
-whitespace.
-
-**Connection test fails with `500 server_error` on token exchange** —
-`LAW_TOOLS_CORE_API_KEY` is not set on the server at all. Check the
-systemd unit's `EnvironmentFile` and `sudo systemctl restart patent-client-agents-mcp`.
-
-**Tools list empty after connecting** — the bearer token wasn't
-forwarded. Double-check Cowork is sending it as `Authorization: Bearer
-<token>`, not e.g. `Token <token>`.
-
----
-
-## 7. Remote MCP — generic (Claude Code, Desktop, etc.)
-
-Use this when you're pointing Claude Code, Claude Desktop, or any
-HTTP-speaking MCP client at a deployed `patent-client-agents` remote MCP. No
-OAuth2 round-trip — you paste the bearer token directly.
-
-### Prereqs
-
-Same as §6: a deployed endpoint + the `LAW_TOOLS_CORE_API_KEY` value.
-For setup, see `deploy/DEPLOYMENT.md`.
-
-### Claude Code config
-
-`.mcp.json` in the project root, or `~/.claude.json` for user-scope:
-
-```json
-{
-  "mcpServers": {
-    "patent-client-agents": {
-      "url": "https://mcp.example.com/patent_client_agents/mcp",
-      "headers": {
-        "Authorization": "Bearer <LAW_TOOLS_CORE_API_KEY value>"
-      }
-    }
-  }
-}
-```
-
-### Claude Desktop config
-
-Same shape — `claude_desktop_config.json` accepts `url` + `headers`
-for remote MCPs.
-
-### Raw smoke-test
+If you need higher rate limits, private data sources, or control over
+auth/domain allowlists, run your own deployment. See the
+[deploy repo README](https://github.com/parkerhancock/patent-client-agents-deploy)
+and `deploy/DEPLOYMENT.md` there — the short version:
 
 ```bash
-curl -s -X POST https://mcp.example.com/patent_client_agents/mcp \
-  -H "Authorization: Bearer <LAW_TOOLS_CORE_API_KEY value>" \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json, text/event-stream" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"curl","version":"0"}}}'
+git clone https://github.com/parkerhancock/patent-client-agents-deploy
+cd patent-client-agents-deploy/deploy/terraform
+cp terraform.tfvars.example terraform.tfvars   # edit project_id + public_url
+terraform init && terraform apply
+# populate secrets, then:
+gcloud builds submit --config=cloudbuild.yaml
 ```
-
-Expect a JSON response with `"serverInfo": {"name": "patent-client-agents", ...}`.
-
-### Downloads
-
-Patent PDFs (Google Patents, PPUBS, EPO, PTAB, etc.) return signed
-`download_url` fields pointing at
-`https://mcp.example.com/patent_client_agents/downloads/{path}?key=...`. URLs
-rotate every 24 hours by HMAC — the tool response includes an
-`expires_at` field so the client knows when to re-call.
 
 ---
 
@@ -555,21 +505,17 @@ rotate every 24 hours by HMAC — the tool response includes an
 
   Are you a Claude Code user?
   ├── yes → §3 (plugin install from GitHub)
-  │         plus §5 if you want the MCP tools too
+  │         plus §5 if you also want the tools as MCP locally
   └── no ↓
 
-  Is your team using Cowork?
-  ├── yes → §6 (Cowork remote MCP)
-  └── no ↓
-
-  Are you on Claude Desktop / Cursor / Cline / other stdio client?
+  Are you on Claude Desktop / Cursor / Cline / other MCP client?
   ├── local subprocess → §5 (stdio MCP)
-  └── pointing at a deployed server → §7 (remote MCP)
+  └── pointing at a deployed server → §6 (remote MCP)
 ```
 
 ## Getting help
 
 - Issues: [github.com/parkerhancock/ip_tools/issues](https://github.com/parkerhancock/ip_tools/issues)
 - Full source: [github.com/parkerhancock/ip_tools](https://github.com/parkerhancock/ip_tools)
-- Deploy guide for remote MCP: `deploy/DEPLOYMENT.md`
+- Remote MCP deployment: [github.com/parkerhancock/patent-client-agents-deploy](https://github.com/parkerhancock/patent-client-agents-deploy)
 - Per-connector API notes: `src/patent_client_agents/catalog/*.md`
