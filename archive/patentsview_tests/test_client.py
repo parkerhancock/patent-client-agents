@@ -6,7 +6,6 @@ from unittest.mock import MagicMock
 
 import httpx
 import pytest
-
 from ip_tools.patentsview import (
     Assignee,
     Citation,

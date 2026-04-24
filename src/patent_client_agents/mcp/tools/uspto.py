@@ -359,9 +359,7 @@ async def search_ptab(
     if method_name is None:
         from law_tools_core.exceptions import ValidationError
 
-        raise ValidationError(
-            f"type must be one of {sorted(_PTAB_SEARCH_METHOD)}; got {type!r}"
-        )
+        raise ValidationError(f"type must be one of {sorted(_PTAB_SEARCH_METHOD)}; got {type!r}")
     async with UsptoOdpClient() as client:
         method = getattr(client, method_name)
         result = await method(query=query, limit=limit, offset=offset)
@@ -387,9 +385,7 @@ async def get_ptab(
     if key not in _PTAB_GET_METHOD:
         from law_tools_core.exceptions import ValidationError
 
-        raise ValidationError(
-            f"type must be one of {sorted(_PTAB_GET_METHOD)}; got {type!r}"
-        )
+        raise ValidationError(f"type must be one of {sorted(_PTAB_GET_METHOD)}; got {type!r}")
     method_name, _id_kind = _PTAB_GET_METHOD[key]
     async with UsptoOdpClient() as client:
         method = getattr(client, method_name)
@@ -437,9 +433,7 @@ async def list_ptab_children(
             return out
         if pt == "application":
             if inc not in ("decisions",):
-                raise ValidationError(
-                    "parent_type='application' only supports include='decisions'"
-                )
+                raise ValidationError("parent_type='application' only supports include='decisions'")
             result = await client.get_appeal_decisions_by_number(parent_identifier)
             return {"application_number": parent_identifier, "decisions": _dump(result)}
         if pt == "interference":

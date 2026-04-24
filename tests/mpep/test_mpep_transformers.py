@@ -3,7 +3,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from patent_client_agents.mpep.transformers import parse_search_response, parse_section_html, parse_versions
+from patent_client_agents.mpep.transformers import (
+    parse_search_response,
+    parse_section_html,
+    parse_versions,
+)
 
 FIXTURES = Path(__file__).parent / "data" / "mpep"
 

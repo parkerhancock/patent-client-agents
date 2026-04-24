@@ -230,6 +230,7 @@ class PublicSearchClient:
         Bounded by ``_POLL_TIMEOUT_SECONDS`` — a stuck job raises
         ``PublicSearchError`` instead of hanging forever.
         """
+
         async def _loop() -> str:
             while True:
                 response = await self._request(

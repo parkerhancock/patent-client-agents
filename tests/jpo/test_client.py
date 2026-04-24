@@ -8,6 +8,12 @@ import time
 import httpx
 import pytest
 
+from law_tools_core.exceptions import (
+    ApiError,
+    AuthenticationError,
+    ConfigurationError,
+    RateLimitError,
+)
 from patent_client_agents.jpo.client import (
     BASE_URL,
     JpoClient,
@@ -28,12 +34,6 @@ from patent_client_agents.jpo.models import (
     RegistrationInfo,
     SimplifiedPatentProgressData,
     TrademarkProgressData,
-)
-from law_tools_core.exceptions import (
-    ApiError,
-    AuthenticationError,
-    ConfigurationError,
-    RateLimitError,
 )
 
 

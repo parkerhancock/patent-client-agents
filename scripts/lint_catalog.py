@@ -103,9 +103,7 @@ def lint_index_links() -> list[str]:
     errors: list[str] = []
     text = CATALOG_INDEX.read_text()
     referenced = set(
-        re.findall(
-            r"\]\(src/patent_client_agents/catalog/sources/([a-z0-9-]+\.md)\)", text
-        )
+        re.findall(r"\]\(src/patent_client_agents/catalog/sources/([a-z0-9-]+\.md)\)", text)
     )
     on_disk = {p.name for p in CATALOG_SOURCES_DIR.glob("*.md") if not p.name.startswith("_")}
 

@@ -134,9 +134,7 @@ def google_limitations_from_html(raw_html: str) -> dict[int, dict[str, Any]]:
                 except ValueError:
                     depends_on = None
         class_attr = ce.get("class", "") or ""
-        claim_type = (
-            "dependent" if ("child" in class_attr.split() or depends_on) else "independent"
-        )
+        claim_type = "dependent" if ("child" in class_attr.split() or depends_on) else "independent"
         by_number[number] = {
             "limitations": limitations,
             "claim_type": claim_type,

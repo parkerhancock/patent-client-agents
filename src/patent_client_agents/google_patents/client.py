@@ -1029,9 +1029,7 @@ class GooglePatentsClient:
         normalized = _normalize_patent_number(patent_number)
         async for attempt in default_retryer(max_attempts=4):
             with attempt:
-                return await fetch_patent_from_google_patents(
-                    normalized, use_cache=self._use_cache
-                )
+                return await fetch_patent_from_google_patents(normalized, use_cache=self._use_cache)
         raise RuntimeError(f"Unable to fetch patent data for {normalized} after retries")
 
     async def _get_patent_data(self, patent_number: str) -> PatentData:
