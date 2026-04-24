@@ -51,8 +51,8 @@ patent-client-agents-mcp = "patent_client_agents.mcp.server:main"
 patent-client-agents-skill-install = "patent_client_agents.skill_install:main"
 
 [project.urls]
-Homepage = "https://github.com/parkerhancock/ip_tools"
-Repository = "https://github.com/parkerhancock/ip_tools"
+Homepage = "https://github.com/parkerhancock/patent-client-agents"
+Repository = "https://github.com/parkerhancock/patent-client-agents"
 
 [build-system]
 requires = ["hatchling"]

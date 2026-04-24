@@ -6,7 +6,7 @@
     "name": "Parker Hancock",
     "url": "https://github.com/parkerhancock"
   },
-  "repository": "https://github.com/parkerhancock/ip_tools",
+  "repository": "https://github.com/parkerhancock/patent-client-agents",
   "license": "Apache-2.0",
   "keywords": ["patent", "trademark", "intellectual-property", "uspto", "epo", "mcp"],
   "mcpServers": {

@@ -147,7 +147,7 @@ invalidation, and statistics APIs.
 
 ## Issue Reporting
 
-**Source**: [parkerhancock/ip_tools](https://github.com/parkerhancock/ip_tools)
+**Source**: [parkerhancock/patent-client-agents](https://github.com/parkerhancock/patent-client-agents)
 
 Report bugs with version, minimal reproduction code, and relevant API response
 if applicable.

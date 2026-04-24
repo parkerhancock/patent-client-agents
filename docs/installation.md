@@ -149,14 +149,14 @@ with the plugin itself living in a subdirectory
 Run these **inside a Claude Code session** (slash commands, not shell):
 
 ```
-/plugin marketplace add parkerhancock/ip_tools
+/plugin marketplace add parkerhancock/patent-client-agents
 /plugin install patent-client-agents@patent-client-agents
 /reload-plugins
 ```
 
 What happens:
 
-1. `/plugin marketplace add parkerhancock/ip_tools` clones this repo
+1. `/plugin marketplace add parkerhancock/patent-client-agents` clones this repo
    into `~/.claude/plugins/marketplaces/`, parses
    `.claude-plugin/marketplace.json`, and registers the marketplace
    under the name it declares (`patent-client-agents`).
@@ -482,7 +482,7 @@ See the [Terms of Use](https://mcp.patentclient.com/terms).
 
 ## Getting help
 
-- Issues: [github.com/parkerhancock/ip_tools/issues](https://github.com/parkerhancock/ip_tools/issues)
-- Full source: [github.com/parkerhancock/ip_tools](https://github.com/parkerhancock/ip_tools)
+- Issues: [github.com/parkerhancock/patent-client-agents/issues](https://github.com/parkerhancock/patent-client-agents/issues)
+- Full source: [github.com/parkerhancock/patent-client-agents](https://github.com/parkerhancock/patent-client-agents)
 - Per-source API notes: `src/patent_client_agents/catalog/sources/`
 - MCP tool reference (by intent): `src/patent_client_agents/catalog/intents/`

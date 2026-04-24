@@ -2,8 +2,8 @@
 
 **Give your AI agent access to the world's patent data.**
 
-[![CI](https://github.com/parkerhancock/ip_tools/actions/workflows/ci.yml/badge.svg)](https://github.com/parkerhancock/ip_tools/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/parkerhancock/ip_tools/branch/main/graph/badge.svg)](https://codecov.io/gh/parkerhancock/ip_tools)
+[![CI](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml/badge.svg)](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/parkerhancock/patent-client-agents/branch/main/graph/badge.svg)](https://codecov.io/gh/parkerhancock/patent-client-agents)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 
@@ -34,7 +34,7 @@ See the [Terms of Use](https://mcp.patentclient.com/terms).
 ## Or install locally (Claude Code plugin)
 
 ```
-/plugin marketplace add parkerhancock/ip_tools
+/plugin marketplace add parkerhancock/patent-client-agents
 /plugin install patent-client-agents@patent-client-agents
 /reload-plugins
 ```
@@ -79,7 +79,7 @@ and retry logic via `law_tools_core`.
 For Claude Code users — run these inside a Claude Code session:
 
 ```
-/plugin marketplace add parkerhancock/ip_tools
+/plugin marketplace add parkerhancock/patent-client-agents
 /plugin install patent-client-agents@patent-client-agents
 /reload-plugins
 ```
@@ -245,7 +245,7 @@ async with GooglePatentsClient() as client:
 ## Development
 
 ```bash
-git clone https://github.com/parkerhancock/ip_tools.git
+git clone https://github.com/parkerhancock/patent-client-agents.git
 cd patent_client_agents
 uv sync --group dev
 uv run pytest                       # 767 tests, replays VCR cassettes
