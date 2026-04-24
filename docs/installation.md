@@ -461,30 +461,6 @@ per account (100 MB/day, 20 MB/minute).
 This is a public demo — don't send confidential material through it.
 See the [Terms of Use](https://mcp.patentclient.com/terms).
 
-### Running your own
-
-If you need higher limits, private data sources, or an internal instance
-with a domain restriction, the server code lives at
-[**parkerhancock/patent-client-agents-deploy**](https://github.com/parkerhancock/patent-client-agents-deploy).
-It deploys to GCP Cloud Run with one `gcloud builds submit`; see the
-deploy repo's README for the full walkthrough.
-
-### Running your own
-
-If you need higher rate limits, private data sources, or control over
-auth/domain allowlists, run your own deployment. See the
-[deploy repo README](https://github.com/parkerhancock/patent-client-agents-deploy)
-and `deploy/DEPLOYMENT.md` there — the short version:
-
-```bash
-git clone https://github.com/parkerhancock/patent-client-agents-deploy
-cd patent-client-agents-deploy/deploy/terraform
-cp terraform.tfvars.example terraform.tfvars   # edit project_id + public_url
-terraform init && terraform apply
-# populate secrets, then:
-gcloud builds submit --config=cloudbuild.yaml
-```
-
 ---
 
 ## Deciding which path
@@ -508,6 +484,5 @@ gcloud builds submit --config=cloudbuild.yaml
 
 - Issues: [github.com/parkerhancock/ip_tools/issues](https://github.com/parkerhancock/ip_tools/issues)
 - Full source: [github.com/parkerhancock/ip_tools](https://github.com/parkerhancock/ip_tools)
-- Remote MCP deployment: [github.com/parkerhancock/patent-client-agents-deploy](https://github.com/parkerhancock/patent-client-agents-deploy)
 - Per-source API notes: `src/patent_client_agents/catalog/sources/`
 - MCP tool reference (by intent): `src/patent_client_agents/catalog/intents/`

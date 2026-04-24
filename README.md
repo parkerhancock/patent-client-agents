@@ -29,9 +29,7 @@ verified Google account works. Usage is rate-limited per account
 (100 MB/day, 20 MB/minute).
 
 This is a public demo — don't send confidential material through it.
-See the [Terms of Use](https://mcp.patentclient.com/terms). For higher
-limits, a private instance, or domain-restricted access see
-[Running your own](#running-your-own) below.
+See the [Terms of Use](https://mcp.patentclient.com/terms).
 
 ## Or install locally (Claude Code plugin)
 
@@ -270,19 +268,9 @@ The shared HTTP scaffolding (`BaseAsyncClient`, cache, exceptions, retry,
 logging) ships as the `law_tools_core` package inside this same wheel —
 other libraries in the same family import it directly.
 
-## Running your own
-
-If the hosted demo's limits don't fit — bulk jobs, an internal
-Workspace-gated instance, private data sources — run your own GCP
-Cloud Run deployment from
-[**parkerhancock/patent-client-agents-deploy**](https://github.com/parkerhancock/patent-client-agents-deploy).
-Same code as `mcp.patentclient.com`, deploys with one
-`gcloud builds submit`.
-
 ## Related
 
 - [patent_client](https://github.com/parkerhancock/patent_client) - The original patent data library this project builds on
-- [patent-client-agents-deploy](https://github.com/parkerhancock/patent-client-agents-deploy) - Self-hosted GCP Cloud Run deployment
 
 ## License
 
