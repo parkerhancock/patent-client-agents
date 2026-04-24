@@ -78,9 +78,7 @@ async def search_epo(
     if group not in ("publication", "family"):
         from law_tools_core.exceptions import ValidationError
 
-        raise ValidationError(
-            f"group_by must be 'publication' or 'family'; got {group_by!r}"
-        )
+        raise ValidationError(f"group_by must be 'publication' or 'family'; got {group_by!r}")
     async with client_from_env() as client:
         if group == "family":
             result = await client.search_families(

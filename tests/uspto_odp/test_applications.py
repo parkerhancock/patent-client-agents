@@ -6,11 +6,11 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
+from law_tools_core.exceptions import ValidationError
 from patent_client_agents.uspto_odp.clients.applications import (
     ApplicationsClient,
     _clean_patent_identifier,
 )
-from law_tools_core.exceptions import ValidationError
 
 # ---------------------------------------------------------------------------
 # _clean_patent_identifier
