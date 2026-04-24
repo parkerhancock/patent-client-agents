@@ -1,4 +1,4 @@
-# IP Tools
+# patent-client-agents
 
 **Give your AI agent access to the world's patent data.**
 
@@ -55,7 +55,7 @@ Ask Claude to research patents in natural language:
 
 > "Track the legal status of EP3456789 across all designated states"
 
-IP Tools connects Claude Code to USPTO, EPO, JPO, and Google Patents, giving your agent the ability to search, analyze, and report on intellectual property worldwide.
+`patent-client-agents` connects Claude Code to USPTO, EPO, JPO, and Google Patents, giving your agent the ability to search, analyze, and report on intellectual property worldwide.
 
 ## Coverage
 
@@ -231,10 +231,10 @@ async with GooglePatentsClient() as client:
 ┌─────────────────────────────────────────────────────────────┐
 │                     Claude Code Agent                        │
 ├─────────────────────────────────────────────────────────────┤
-│                    IP Tools MCP Server                       │
+│               patent-client-agents MCP Server                │
 │              (Natural language → API calls)                  │
 ├─────────────────────────────────────────────────────────────┤
-│                   patent_client_agents Library                           │
+│              patent_client_agents Python library             │
 │    ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
 │    │  USPTO   │  │   EPO    │  │  Google  │  │   JPO    │   │
 │    │   ODP    │  │   OPS    │  │ Patents  │  │          │   │
@@ -246,7 +246,7 @@ async with GooglePatentsClient() as client:
 
 ```bash
 git clone https://github.com/parkerhancock/patent-client-agents.git
-cd patent_client_agents
+cd patent-client-agents
 uv sync --group dev
 uv run pytest                       # 767 tests, replays VCR cassettes
 uv run ruff check . && uv run ruff format .
