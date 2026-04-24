@@ -1,4 +1,4 @@
-# patent-client-agents
+[![patent-client-agents logo](https://raw.githubusercontent.com/parkerhancock/patent-client-agents/main/docs/_static/patent_client_agents_logo.svg)](https://github.com/parkerhancock/patent-client-agents)
 
 **Give your AI agent access to the world's patent data.**
 
