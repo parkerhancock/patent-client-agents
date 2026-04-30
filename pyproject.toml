@@ -1,6 +1,6 @@
 [project]
 name = "patent-client-agents"
-version = "0.5.1"
+version = "0.6.0"
 description = "Intellectual property research toolkit for AI agents — patents, trademarks, and prosecution data from USPTO, EPO, JPO, Google Patents, MPEP, and CPC"
 readme = "README.md"
 authors = [
