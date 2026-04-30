@@ -1,48 +1,62 @@
 # Patent Assignments
 
-Single unified search over the USPTO Assignment Center, replacing what used
-to be six different `search_by_*` tools.
+Single unified search over the USPTO Assignment Center.
 
-## Why fused
+## Why one tool
 
-All six previous tools (`search_patent_assignments_by_assignee`, `…_assignor`,
-`…_patent`, `…_application`, `…_reel_frame`, plus `search_all_*`) hit the
-same `AssignmentCenterClient` with different filter arguments. The shape of
-the returned records is identical across filters. This is **parameter fusion
-within a single source**, not cross-source fusion — pure win, no
-information loss.
+The Assignment Center exposes a single search endpoint that handles every
+indexed axis (assignee, assignor, correspondent, application, patent,
+publication, reel/frame, PCT, international registration). The response
+shape is identical across axes. The tool surface mirrors that — one
+method, one MCP tool, one response model.
 
 ## MCP tool
 
 ```
 search_patent_assignments(
-    assignee?, assignor?, patent_number?, application_number?, reel_frame?,
-    paginate_all=False,
+    query: str,
+    by: Literal["assignee", "assignor", "correspondent",
+                "application_number", "patent_number", "publication_number",
+                "reel_frame", "international_registration_number", "pct_number"],
+    exact: bool = False,
+    executed_after: str | None = None,   # YYYY-MM-DD
+    executed_before: str | None = None,  # YYYY-MM-DD
+    conveyance: str | None = None,       # contains-match
+    offset: int = 0,
+    limit: int | None = None,
 ) -> dict
 ```
 
-**Exactly one** filter must be set; validation raises otherwise. Records
-include reel/frame, recording date, conveyance type, assignor/assignee
-identities, and affected properties (applications and patents).
+Returns `{records, total, truncated, [warning]}`. Each record carries
+reel/frame, conveyance type, conveyance code, assignors (with execution
+dates), assignees, correspondent, and affected properties (applications
+and patents).
 
-`paginate_all=True` auto-paginates assignee/assignor searches through all
-matching results; ignored for patent/application/reel_frame lookups which
-are already single-record-bounded.
+When USPTO's ~10,000-record cap is hit, `truncated` is `True` and a
+human-readable `warning` is included so agents can prompt for narrower
+queries.
 
-## Python API (raw)
-
-No fused wrapper in the library — if you're a Python consumer, call the
-underlying client directly:
+## Python API
 
 ```python
+from datetime import date
 from patent_client_agents.uspto_assignments import AssignmentCenterClient
 
 async with AssignmentCenterClient() as client:
-    records = await client.search_by_assignee("Anthropic PBC")
+    result = await client.search(
+        query="Anthropic PBC",
+        by="assignee",
+        executed_between=(date(2024, 1, 1), date(2024, 12, 31)),
+        limit=100,
+    )
+    for record in result:
+        ...
+    if result.truncated:
+        ...
 ```
 
-The MCP wrapper exists only to collapse five decorated tools into one; the
-library doesn't benefit from that re-wrapping.
+The library and MCP tool have the same shape; the wrapper just translates
+date strings and surfaces the truncation warning.
 
 ## Related
 

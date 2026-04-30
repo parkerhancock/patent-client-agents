@@ -17,30 +17,54 @@ Patent ownership transfer records from the USPTO Assignment Center. Covers assig
 
 | Method | Path | Description |
 |--------|------|-------------|
-| POST | `/ipas/search/api/v2/public/patent/exportPublicPatentData` | Search patent assignment records |
+| POST | `/ipas/search/api/v2/public/search/patent` | Reverse-engineered from the Assignment Center web UI. Accepts a `searchCriteria` array body and returns flat recordations with conveyance populated for every search axis. |
 
 ## Library API
 
 ```python
+from datetime import date
 from patent_client_agents.uspto_assignments import AssignmentCenterClient
 
 async with AssignmentCenterClient() as client:
-    records = await client.search_by_assignee("Apple Inc")
-    records = await client.search_by_patent("10000000")
+    result = await client.search(query="Apple Inc", by="assignee")
+    for record in result:
+        print(record.reel_frame, record.conveyance, record.assignees)
+    if result.truncated:
+        print(f"Capped at {len(result)} of {result.total}+ — narrow query")
+
+    # Date-filtered, paginated, conveyance-narrowed
+    result = await client.search(
+        query="Google",
+        by="assignee",
+        executed_between=(date(2024, 1, 1), date(2024, 12, 31)),
+        conveyance="SECURITY",
+        offset=0,
+        limit=100,
+    )
 ```
 
-| Method | Returns | Description |
-|--------|---------|-------------|
-| `search_by_assignee(assignee_name, start_row=1, limit=100)` | `list[AssignmentRecord]` | Search by assignee (receiving party) |
-| `search_by_assignor(assignor_name, start_row=1, limit=100)` | `list[AssignmentRecord]` | Search by assignor (transferring party) |
-| `search_by_patent(patent_number, limit=100)` | `list[AssignmentRecord]` | Search by patent number |
-| `search_by_application(application_number, limit=100)` | `list[AssignmentRecord]` | Search by application number |
-| `search_by_reel_frame(reel_frame)` | `list[AssignmentRecord]` | Search by reel/frame (e.g. "52614/446") |
-| `search(assignee_name=, assignor_name=, patent_number=, ...)` | `list[AssignmentRecord]` | Multi-criteria search |
-| `search_all(assignee_name=, assignor_name=, batch_size=1000, max_results=)` | `list[AssignmentRecord]` | Auto-paginated search |
+### `search(*, query, by, exact=False, executed_between=None, conveyance=None, offset=0, limit=None) -> SearchResults`
+
+| Param | Type | Description |
+|---|---|---|
+| `query` | `str` | Value to search for |
+| `by` | `Literal[...]` | Search axis: `assignee`, `assignor`, `correspondent`, `application_number`, `patent_number`, `publication_number`, `reel_frame`, `international_registration_number`, `pct_number` |
+| `exact` | `bool` | Exact-match (`True`) vs contains (`False`, default). Ignored for number axes |
+| `executed_between` | `tuple[date, date] \| None` | Narrow by assignor execution-date range. Only date filter USPTO honors |
+| `conveyance` | `str \| None` | Contains-match against conveyance text (e.g. `"SECURITY"`) |
+| `offset` | `int` | Records to skip from the start |
+| `limit` | `int \| None` | Max records to return (None fetches all matching) |
+
+`SearchResults` is list-like (`for r in result`, `len(result)`, `result[0]`) with three additional attributes:
+
+| Attr | Description |
+|---|---|
+| `records` | `list[AssignmentRecord]` |
+| `total` | USPTO's stated total before slicing |
+| `truncated` | `True` iff USPTO's ~10k cap was hit; more data exists |
 
 ## MCP Tools
 
 | Tool | Description |
 |------|-------------|
-| `search_patent_assignments(assignee?, assignor?, patent_number?, application_number?, reel_frame?, paginate_all?)` | Unified patent-assignment search. Set exactly one filter. `paginate_all=True` auto-paginates for assignee/assignor searches. |
+| `search_patent_assignments(query, by, exact?, executed_after?, executed_before?, conveyance?, offset?, limit?)` | Unified patent-assignment search across every axis. Returns `{records, total, truncated, [warning]}`; `warning` is set when USPTO caps the result set. |
