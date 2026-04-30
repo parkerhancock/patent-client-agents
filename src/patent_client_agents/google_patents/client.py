@@ -533,7 +533,28 @@ class PatentData(BaseModel):
     filing_date: str
     grant_date: str
     publication_date: str | None = None
-    expiration_date: str
+    expiration_date: str = Field(
+        default="",
+        description=(
+            "Anticipated expiration as YYYY-MM-DD, or empty string if unknown. "
+            "When ``expiration_estimated`` is True, this value came from the "
+            "priority_date + 20y fallback (Google Patents had no structured "
+            "expiration data for this patent, typical of newly-granted utilities). "
+            "An estimate computed this way may be wrong by months — refine via "
+            "USPTO ODP (applicationFilingDate + 20y + "
+            "patentTermAdjustmentData.adjustmentTotalQuantity days, with a "
+            "continuity-chain walk for the earliest non-provisional filing) "
+            "before relying on it for legally-significant work."
+        ),
+    )
+    expiration_estimated: bool = Field(
+        default=False,
+        description=(
+            "True iff ``expiration_date`` came from the priority+20y fallback "
+            "because Google Patents had no structured expiration data. "
+            "**Refine via USPTO ODP for accurate patent term.**"
+        ),
+    )
     priority_date: str | None = None
     claims: list[dict[str, str | None]]
     description: str
@@ -647,6 +668,57 @@ def _normalize_date(value: str) -> str:
     except ValueError as exc:  # pragma: no cover - defensive
         raise ValueError("Dates must be provided as YYYY-MM-DD") from exc
     return parsed.strftime("%Y-%m-%d")
+
+
+def _resolve_expiration_date(
+    gp_expiration: str,
+    priority_date: str | None,
+) -> tuple[str, bool]:
+    """Resolve ``expiration_date`` with a priority+20y fallback.
+
+    Google Patents doesn't populate ``expiration_date`` for newly-granted
+    patents (typical for grants in the last ~6 months) — its structured
+    data lacks the field until backfill. As an unblock for callers who
+    need *some* answer, we compute ``priority_date + 20 years`` as a
+    rough estimate.
+
+    **The estimate is approximate.** It assumes the recorded priority
+    date represents the term-controlling effective filing date, which
+    holds for most US utility patents but underestimates term where only
+    foreign or provisional priority is claimed (since the US filing
+    comes later). Estimates should be refined via USPTO ODP — see the
+    field docstrings on :class:`PatentData` for the recommended
+    computation.
+
+    Args:
+        gp_expiration: The expiration date as extracted from Google Patents.
+        priority_date: The patent's priority date (ISO YYYY-MM-DD) if known.
+
+    Returns:
+        ``(expiration_date, estimated)`` where:
+
+        * Google Patents had a value → ``(gp_expiration, False)``
+        * GP empty but priority parseable → ``(priority+20y, True)``
+        * Neither available → ``("", False)``
+    """
+    if gp_expiration:
+        return gp_expiration, False
+
+    if not priority_date:
+        return "", False
+
+    try:
+        parsed = datetime.strptime(priority_date.strip(), "%Y-%m-%d").date()
+    except ValueError:
+        logger.debug("Unable to parse priority_date %r for expiration estimate", priority_date)
+        return "", False
+
+    try:
+        estimate = parsed.replace(year=parsed.year + 20)
+    except ValueError:
+        # Feb 29 in priority year, target year isn't a leap year — clamp to Feb 28.
+        estimate = parsed.replace(year=parsed.year + 20, day=28)
+    return estimate.isoformat(), True
 
 
 def _join_encoded(values: Iterable[str]) -> str:
@@ -944,6 +1016,10 @@ async def fetch_patent_from_google_patents(
         publication_date = metadata["publication_date"] or None
         priority_date = metadata["priority_date"] or None
 
+        expiration_date, expiration_estimated = _resolve_expiration_date(
+            metadata["expiration_date"], priority_date
+        )
+
         return PatentData(
             patent_number=normalized,
             application_number=metadata["application_number"],
@@ -956,7 +1032,8 @@ async def fetch_patent_from_google_patents(
             filing_date=metadata["filing_date"],
             grant_date=metadata["grant_date"],
             publication_date=publication_date,
-            expiration_date=metadata["expiration_date"],
+            expiration_date=expiration_date,
+            expiration_estimated=expiration_estimated,
             priority_date=priority_date,
             claims=claims,
             description=description,

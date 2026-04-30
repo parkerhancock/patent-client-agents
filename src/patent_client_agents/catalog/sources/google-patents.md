@@ -48,6 +48,18 @@ async with GooglePatentsClient() as client:
 | `get_patent_figures(patent_number)` | Get patent figure images with callout annotations |
 | `download_patent_pdf(patent_number)` | Download the patent PDF as bytes |
 
+### `expiration_date` fallback
+
+Google Patents doesn't populate `expiration_date` for newly-granted patents
+(typical for grants in the last ~6 months). When this happens,
+`get_patent_data` falls back to `priority_date + 20 years` as a rough
+estimate and sets `expiration_estimated=True` on the returned `PatentData`.
+
+**The estimate is approximate** — refine via USPTO ODP
+(`applicationFilingDate + 20y + patentTermAdjustmentData.adjustmentTotalQuantity`,
+walking `parentContinuityBag`) before relying on the date for legally
+significant work.
+
 ## MCP Tools
 
 8 tools. `get_patent_claims` routes through USPTO ODP with a Google fallback — documented on [uspto-odp.md](uspto-odp.md).

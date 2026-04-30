@@ -27,6 +27,9 @@ async with GooglePatentsClient() as client:
     patent.assignees          # List of assignee names
     patent.filing_date
     patent.publication_date
+    patent.priority_date
+    patent.expiration_date    # str — see ⚠ note below
+    patent.expiration_estimated  # bool — True iff expiration_date is a priority+20y fallback
     patent.cpc_classifications  # List[CpcClassification]
     patent.claims             # Full claims text
     patent.description        # Full description text
@@ -100,6 +103,26 @@ Extract figure metadata.
 figures = await client.get_patent_figures("US10123456B2")
 # Returns list of figure URLs and captions
 ```
+
+## ⚠ `expiration_date` is sometimes an estimate
+
+Google Patents doesn't populate `expiration_date` for newly-granted patents
+(typical for grants in the last ~6 months) — its structured data lacks the
+field until backfilled. As an unblock, this client falls back to
+`priority_date + 20 years` and sets `expiration_estimated=True`.
+
+The estimate is approximate. It assumes the recorded priority date represents
+the term-controlling effective filing date, which holds for most US utility
+patents but underestimates term where only a foreign or provisional priority
+is claimed.
+
+**For accurate patent term, refine via USPTO ODP** when
+`expiration_estimated` is `True`:
+
+- Fetch the application via `UsptoOdpClient.applications.get(application_number)`
+- Take `applicationFilingDate + 20 years + patentTermAdjustmentData.adjustmentTotalQuantity` days
+- Walk `parentContinuityBag` for the chain-earliest non-provisional filing date
+  (term runs from there for continuations and divisionals)
 
 ## Patent Number Formats
 
