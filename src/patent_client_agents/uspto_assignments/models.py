@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Any
+from collections.abc import Iterator
+from dataclasses import dataclass, field
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 
 
 class Assignor(BaseModel):
@@ -19,7 +20,7 @@ class Property(BaseModel):
 
     sequence_number: int | None = Field(default=None, alias="sequenceNumber")
     application_number: str | None = Field(default=None, alias="applicationNumber")
-    filing_date: str | None = Field(default=None, alias="fillingDate")  # Note: API typo
+    filing_date: str | None = Field(default=None, alias="fillingDate")  # API typo
     patent_number: str | None = Field(default=None, alias="patentNumber")
     publication_number: str | None = Field(default=None, alias="publicationNumber")
     publication_date: str | None = Field(default=None, alias="publicationDate")
@@ -36,7 +37,9 @@ class Property(BaseModel):
 
 
 class AssignmentRecord(BaseModel):
-    """A single assignment record from the USPTO Assignment Center."""
+    """A single assignment recordation from the USPTO Assignment Center."""
+
+    model_config = {"extra": "allow"}
 
     reel_number: int = Field(alias="reelNumber")
     frame_number: int = Field(alias="frameNumber")
@@ -44,12 +47,8 @@ class AssignmentRecord(BaseModel):
     correspondent_name: str | None = Field(default=None, alias="correspondentName")
     assignors: list[Assignor] = Field(default_factory=list)
     assignees: list[str] = Field(default_factory=list)
-    # NOTE: The ``exportPublicPatentData`` endpoint that backs ``search_*`` does
-    # not include conveyance text in its response, so this field is always
-    # ``None`` for records returned by those methods. Use
-    # ``AssignmentCenterClient.get_application_assignments()`` if you need the
-    # conveyance type (e.g. "ASSIGNMENT", "CHANGE OF NAME", "SECURITY AGREEMENT").
-    conveyance_text: str | None = Field(default=None, alias="conveyanceText")
+    conveyance: str | None = None
+    conveyance_code: int | None = Field(default=None, alias="conveyanceCode")
     number_of_properties: int = Field(default=0, alias="noOfProperties")
     properties: list[Property] = Field(default_factory=list)
 
@@ -59,88 +58,36 @@ class AssignmentRecord(BaseModel):
         return f"{self.reel_number}/{self.frame_number}"
 
 
-class SearchCriterion(BaseModel):
-    """A search criterion echoed back in the response."""
+@dataclass
+class SearchResults:
+    """Result of :meth:`AssignmentCenterClient.search`.
 
-    property: str
-    search_by: str = Field(alias="searchBy")
-
-
-class AssignmentSearchResponse(BaseModel):
-    """Response from the Assignment Center search API."""
-
-    search_criteria: list[SearchCriterion] = Field(default_factory=list, alias="searchCriteria")
-    data: list[AssignmentRecord] = Field(default_factory=list)
-
-    @property
-    def count(self) -> int:
-        """Number of records in this response."""
-        return len(self.data)
-
-
-class AssignmentDetail(BaseModel):
-    """A single assignment recordation as returned by the search/patent endpoint.
-
-    This is a richer per-recordation shape than ``AssignmentRecord``: it
-    includes ``conveyance`` (e.g. "ASSIGNMENT OF ASSIGNOR'S INTEREST",
-    "CHANGE OF NAME", "SECURITY AGREEMENT"), recordation/receipt/mail dates,
-    and a link to the cover-sheet image. Returned by
-    ``AssignmentCenterClient.get_application_assignments()``.
+    Behaves as a list of :class:`AssignmentRecord` for the common case
+    (``for r in result``, ``len(result)``, ``result[0]``) while also exposing
+    ``total`` and ``truncated`` so callers know whether the USPTO ~10k cap
+    was hit.
     """
 
-    model_config = {"extra": "allow"}
+    records: list[AssignmentRecord] = field(default_factory=list)
+    total: int = 0
+    truncated: bool = False
 
-    reel_number: int = Field(alias="reelNumber")
-    frame_number: int = Field(alias="frameNumber")
-    conveyance: str | None = None
-    conveyance_code: int | None = Field(default=None, alias="conveyanceCode")
-    recordation_date: str | None = Field(default=None, alias="recordationDate")
-    receipt_date: str | None = Field(default=None, alias="receiptDate")
-    mail_date: str | None = Field(default=None, alias="mailDate")
-    page_count: int | None = Field(default=None, alias="pageCount")
-    image_url: str | None = Field(default=None, alias="imageURL")
-    assignors: list[Assignor] = Field(default_factory=list)
-    assignees: list[Any] = Field(default_factory=list)
-    correspondent: Any | None = None
-    documents: list[Any] = Field(default_factory=list)
+    def __iter__(self) -> Iterator[AssignmentRecord]:
+        return iter(self.records)
 
-    @field_validator("assignees", "documents", mode="before")
-    @classmethod
-    def _coerce_empty_string_to_list(cls, v: Any) -> Any:
-        # The Assignment Center API occasionally serialises absent list-valued
-        # fields as the empty string "" rather than []. Normalise so callers
-        # always see a list.
-        if v == "":
-            return []
-        return v
+    def __len__(self) -> int:
+        return len(self.records)
 
-    @property
-    def reel_frame(self) -> str:
-        """Return reel/frame as a formatted string."""
-        return f"{self.reel_number}/{self.frame_number}"
+    def __getitem__(self, index: int) -> AssignmentRecord:
+        return self.records[index]
 
-
-class ApplicationAssignmentBundle(BaseModel):
-    """Per-application assignment bundle returned by ``search/patent``.
-
-    Wraps the ``data`` object: a single ``properties`` block describing the
-    application/patent and an ``assignment`` array of every recordation that
-    has been made against it.
-    """
-
-    model_config = {"extra": "allow"}
-
-    properties: dict[str, Any] | None = None
-    assignment: list[AssignmentDetail] = Field(default_factory=list)
-    no_of_assignments: int = Field(default=0, alias="noOfAssignments")
+    def __bool__(self) -> bool:
+        return bool(self.records)
 
 
 __all__ = [
     "Assignor",
     "Property",
     "AssignmentRecord",
-    "SearchCriterion",
-    "AssignmentSearchResponse",
-    "AssignmentDetail",
-    "ApplicationAssignmentBundle",
+    "SearchResults",
 ]

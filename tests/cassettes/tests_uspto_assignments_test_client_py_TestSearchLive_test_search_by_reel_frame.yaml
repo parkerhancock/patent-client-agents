@@ -1,0 +1,75 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"58293/75","searchBy":"reelFrame","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '181'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/search/patent
+  response:
+    body:
+      string: '{"status": "Success", "statusCode": 200, "error": null, "successResponse":
+        {"data": [{"reelNumber": 58293, "frameNumber": 75, "correspondentName": "KACVINSKY
+        DAISAK BLUNI PLLC (LATCH)", "assignorExecutionDate": "06/01/2021", "conveyance":
+        "CHANGE OF NAME", "conveyanceCode": 33, "assignors": [{"assignorName": "LATCH,
+        INC.", "executionDate": "06/01/2021"}], "assignees": ["LATCH SYSTEMS, INC."],
+        "noOfProperties": 29, "properties": [{"sequenceNumber": 1, "applicationNumber":
+        "17171540", "fillingDate": "02/09/2021", "internationalRegistrationNumber":
+        null, "inventionTitle": "SYSTEMS AND TECHNIQUES TO PROVIDE SMART ACCESS CAPABILITIES
+        IN A SMART SYSTEM ENVIRONMENT", "inventors": "Luke SCHOENFELDER Andrew, Michael
+        JONES Brian, David SHAPIRO, Saayuj DHANAK", "issueDate": "", "patentNumber":
+        null, "pctNumber": null, "pctNumber17": null, "publicationNumber": "20220254212",
+        "publicationDate": "08/11/2022", "internationalPublicationDate": ""}]}], "totalRows":
+        1, "backendPagination": false, "filteredRowsCount": 0, "message": null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 30 Apr 2026 15:08:12 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 461853d52f271678cc474a50cbd2f2a6.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - VRKpiZAEgFZwKw2QvIAcv3385nmrWvVqvKaey1VYdR5UqbpIzPuv6g==
+      X-Amz-Cf-Pop:
+      - IAH50-P4
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1034'
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

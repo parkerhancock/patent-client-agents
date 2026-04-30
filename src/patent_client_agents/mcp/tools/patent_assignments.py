@@ -7,6 +7,7 @@ tools backed by ``patent_client_agents.uspto_assignments``.
 
 from __future__ import annotations
 
+from datetime import date, datetime
 from typing import Annotated
 
 from fastmcp import FastMCP
@@ -14,6 +15,7 @@ from fastmcp import FastMCP
 from law_tools_core.exceptions import ValidationError
 from law_tools_core.mcp.annotations import READ_ONLY
 from patent_client_agents.uspto_assignments import AssignmentCenterClient
+from patent_client_agents.uspto_assignments.client import _SEARCH_AXIS_TO_API
 
 patent_assignments_mcp = FastMCP("PatentAssignments")
 
@@ -24,75 +26,103 @@ def _dump(obj: object) -> object:
     return obj
 
 
-def _dump_list(items: list) -> dict:
-    return {"results": [_dump(i) for i in items]}
+def _parse_date(value: str | None, *, field: str) -> date | None:
+    if value is None:
+        return None
+    for fmt in ("%Y-%m-%d", "%Y%m%d", "%m/%d/%Y"):
+        try:
+            return datetime.strptime(value, fmt).date()
+        except ValueError:
+            continue
+    raise ValidationError(
+        f"{field} must be a date in YYYY-MM-DD, YYYYMMDD, or MM/DD/YYYY format; got {value!r}"
+    )
+
+
+_VALID_AXES = tuple(_SEARCH_AXIS_TO_API.keys())
 
 
 @patent_assignments_mcp.tool(annotations=READ_ONLY)
 async def search_patent_assignments(
-    assignee: Annotated[
-        str | None,
-        "Assignee name (party receiving patent rights).",
-    ] = None,
-    assignor: Annotated[
-        str | None,
-        "Assignor name (party transferring patent rights).",
-    ] = None,
-    patent_number: Annotated[
-        str | None,
-        "USPTO patent number to look up chain of title for.",
-    ] = None,
-    application_number: Annotated[
-        str | None,
-        "USPTO application number to look up recorded assignments for.",
-    ] = None,
-    reel_frame: Annotated[
-        str | None,
-        "Reel/frame identifier (e.g. '52614/446') for a specific recordation.",
-    ] = None,
-    paginate_all: Annotated[
+    query: Annotated[
+        str,
+        "Value to search for (e.g. 'Apple Inc', '16136935', '52614/446').",
+    ],
+    by: Annotated[
+        str,
+        "What kind of value `query` is. One of: assignee, assignor, "
+        "correspondent, application_number, patent_number, "
+        "publication_number, reel_frame, international_registration_number, "
+        "pct_number.",
+    ],
+    exact: Annotated[
         bool,
-        "When true, auto-paginates through all matching results (assignee/assignor only). "
-        "Ignored for patent_number, application_number, and reel_frame lookups.",
+        "True for exact match, False (default) for contains match. Ignored "
+        "for number axes, where USPTO accepts either.",
     ] = False,
+    executed_after: Annotated[
+        str | None,
+        "Narrow to recordations whose assignor execution date is on or "
+        "after this date (YYYY-MM-DD). Pair with ``executed_before`` for a "
+        "range. Note: only assignor execution date is honored by USPTO; "
+        "recordation, mail, and receipt date filters are ignored.",
+    ] = None,
+    executed_before: Annotated[
+        str | None,
+        "Narrow to recordations whose assignor execution date is on or "
+        "before this date (YYYY-MM-DD).",
+    ] = None,
+    conveyance: Annotated[
+        str | None,
+        "Contains-match against conveyance text (e.g. 'ASSIGNMENT', 'SECURITY', 'CHANGE OF NAME').",
+    ] = None,
+    offset: Annotated[
+        int,
+        "Number of records to skip from the start of the result set.",
+    ] = 0,
+    limit: Annotated[
+        int | None,
+        "Maximum records to return. None (default) fetches everything "
+        "matching, capped at USPTO's ~10,000 for very-broad queries.",
+    ] = None,
 ) -> dict:
-    """Search USPTO patent assignments. Exactly one filter must be set.
+    """Search USPTO patent assignment recordations.
 
-    Returns assignment records with reel/frame, recording date, conveyance
-    type, assignor/assignee details, and affected properties (applications
-    and patents).
+    Returns recordations with reel/frame, conveyance type, assignors,
+    assignees, correspondent, and affected properties. Each call hits a
+    single endpoint with full conveyance data populated.
     """
-    filters = {
-        "assignee": assignee,
-        "assignor": assignor,
-        "patent_number": patent_number,
-        "application_number": application_number,
-        "reel_frame": reel_frame,
-    }
-    set_filters = [k for k, v in filters.items() if v is not None]
-    if len(set_filters) != 1:
+    if by not in _VALID_AXES:
+        raise ValidationError(f"`by` must be one of {_VALID_AXES}; got {by!r}")
+    after = _parse_date(executed_after, field="executed_after")
+    before = _parse_date(executed_before, field="executed_before")
+    if (after is None) != (before is None):
         raise ValidationError(
-            f"search_patent_assignments requires exactly one filter; got {set_filters or 'none'}"
+            "executed_after and executed_before must be set together (or both omitted)"
         )
-    selected = set_filters[0]
-    value = filters[selected]
-    assert value is not None
+    executed_between = (after, before) if after and before else None
 
     async with AssignmentCenterClient() as client:
-        if selected == "assignee":
-            if paginate_all:
-                records = await client.search_all(assignee_name=value)
-            else:
-                records = await client.search_by_assignee(value)
-        elif selected == "assignor":
-            if paginate_all:
-                records = await client.search_all(assignor_name=value)
-            else:
-                records = await client.search_by_assignor(value)
-        elif selected == "patent_number":
-            records = await client.search_by_patent(value)
-        elif selected == "application_number":
-            records = await client.search_by_application(value)
-        else:  # reel_frame
-            records = await client.search_by_reel_frame(value)
-    return _dump_list(records)
+        result = await client.search(
+            query=query,
+            by=by,  # type: ignore[arg-type]
+            exact=exact,
+            executed_between=executed_between,
+            conveyance=conveyance,
+            offset=offset,
+            limit=limit,
+        )
+
+    payload: dict = {
+        "records": [_dump(r) for r in result.records],
+        "total": result.total,
+        "truncated": result.truncated,
+    }
+    if result.truncated:
+        payload["warning"] = (
+            f"USPTO capped this query at {len(result)} of {result.total}+ matching "
+            f"records. Narrow your query (use a more specific value, add "
+            f"executed_after/before, or filter conveyance) to access records "
+            f"beyond the cap."
+        )
+    return payload

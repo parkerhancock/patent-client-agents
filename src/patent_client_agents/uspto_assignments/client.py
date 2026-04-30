@@ -3,374 +3,221 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
+from datetime import date
+from typing import Any, Literal
 
 from law_tools_core.base_client import BaseAsyncClient
 
-from .models import (
-    ApplicationAssignmentBundle,
-    AssignmentRecord,
-    AssignmentSearchResponse,
-)
+from .models import AssignmentRecord, SearchResults
 
 logger = logging.getLogger(__name__)
+
+
+SearchAxis = Literal[
+    "assignee",
+    "assignor",
+    "correspondent",
+    "application_number",
+    "patent_number",
+    "publication_number",
+    "reel_frame",
+    "international_registration_number",
+    "pct_number",
+]
+
+
+_SEARCH_AXIS_TO_API: dict[str, str] = {
+    "assignee": "assigneeName",
+    "assignor": "assignorName",
+    "correspondent": "correspondentName",
+    "application_number": "applicationNumber",
+    "patent_number": "patentNumber",
+    "publication_number": "publicationNumber",
+    "reel_frame": "reelFrame",
+    "international_registration_number": "internationalRegistrationNumber",
+    "pct_number": "pctNumber",
+}
+
+# USPTO caps very-broad queries at this many rows. Used to set the
+# ``truncated`` flag so callers can warn agents that more data exists.
+_USPTO_TOTAL_CAP = 10_000
+
+# Internal page size — pinned to the API's stated maximum so order is
+# stable across pages and pagination math is straightforward.
+_INTERNAL_PAGE_SIZE = 1000
 
 
 class AssignmentCenterClient(BaseAsyncClient):
     """Async client for the USPTO Assignment Center API.
 
-    Provides programmatic access to patent assignment records, supporting
-    searches by assignee name, assignor name, patent number, application
-    number, and other criteria.
+    The Assignment Center exposes an undocumented JSON API at
+    ``assignmentcenter.uspto.gov/ipas/search/api/v2/public/search/patent``.
+    This client reverse-engineers it to provide search across every
+    indexed axis (assignee, assignor, correspondent, application,
+    patent, publication, reel/frame, PCT, international registration)
+    with conveyance-type populated, server-side execution-date
+    filtering, conveyance-text contains-filtering, and pagination.
 
-    Example:
+    Example::
+
         async with AssignmentCenterClient() as client:
-            # Search by assignee
-            results = await client.search_by_assignee("Apple Inc", limit=100)
-            for record in results:
-                print(f"{record.reel_frame}: {record.assignees}")
-
-            # Search by assignor
-            results = await client.search_by_assignor("Samsung", limit=50)
-
-            # Search by patent number
-            results = await client.search_by_patent("10000000")
+            result = await client.search(query="Apple Inc", by="assignee")
+            for record in result:
+                print(record.reel_frame, record.conveyance, record.assignees)
+            if result.truncated:
+                print(f"Capped at {len(result)} of {result.total}+ — narrow query")
     """
 
     DEFAULT_BASE_URL = "https://assignmentcenter.uspto.gov"
     CACHE_NAME = "uspto_assignments"
 
-    async def _search(
-        self,
-        criteria: list[dict[str, str]],
-        *,
-        start_row: int = 1,
-        limit: int = 100,
-        use_pagination: bool = True,
-        timeout: float = 60.0,
-    ) -> AssignmentSearchResponse:
-        """Execute a search against the Assignment Center API.
-
-        Args:
-            criteria: List of search criteria dicts with 'property' and 'searchBy' keys.
-            start_row: Starting row for pagination (1-based).
-            limit: Maximum number of results (max 1000 per request).
-            use_pagination: Whether to add pagination parameters. Some search types
-                (e.g., patent number) don't work well with pagination params.
-            timeout: Request timeout in seconds.
-
-        Returns:
-            AssignmentSearchResponse containing matching records.
-        """
-        # Build search criteria
-        search_criteria = list(criteria)
-
-        # Add pagination params (some searches don't work with these)
-        if use_pagination and start_row > 1:
-            search_criteria.append({"property": str(start_row), "searchBy": "startRow"})
-            search_criteria.append({"property": str(start_row + limit - 1), "searchBy": "endRow"})
-        search_criteria.append({"property": str(min(limit, 1000)), "searchBy": "rowsNeeded"})
-
-        payload = {"searchCriteria": search_criteria}
-
-        http_response = await self._request(
-            "POST",
-            "/ipas/search/api/v2/public/patent/exportPublicPatentData",
-            json=payload,
-            context="Assignment search",
-            timeout=timeout,
-        )
-        response_data: Any = http_response.json()
-
-        # API returns a list with one element containing searchCriteria and data
-        if isinstance(response_data, list) and len(response_data) > 0:
-            return AssignmentSearchResponse.model_validate(response_data[0])
-        return AssignmentSearchResponse.model_validate({"searchCriteria": [], "data": []})
-
-    async def search_by_assignee(
-        self,
-        assignee_name: str,
-        *,
-        start_row: int = 1,
-        limit: int = 100,
-        timeout: float = 60.0,
-    ) -> list[AssignmentRecord]:
-        """Search assignments by assignee name.
-
-        Args:
-            assignee_name: Name of the assignee (company or person receiving rights).
-            start_row: Starting row for pagination (1-based).
-            limit: Maximum number of results (max 1000 per request).
-            timeout: Request timeout in seconds.
-
-        Returns:
-            List of AssignmentRecord objects matching the search.
-        """
-        criteria = [{"property": assignee_name, "searchBy": "assigneeName"}]
-        response = await self._search(criteria, start_row=start_row, limit=limit, timeout=timeout)
-        return response.data
-
-    async def search_by_assignor(
-        self,
-        assignor_name: str,
-        *,
-        start_row: int = 1,
-        limit: int = 100,
-        timeout: float = 60.0,
-    ) -> list[AssignmentRecord]:
-        """Search assignments by assignor name.
-
-        Args:
-            assignor_name: Name of the assignor (company or person transferring rights).
-            start_row: Starting row for pagination (1-based).
-            limit: Maximum number of results (max 1000 per request).
-            timeout: Request timeout in seconds.
-
-        Returns:
-            List of AssignmentRecord objects matching the search.
-        """
-        criteria = [{"property": assignor_name, "searchBy": "assignorName"}]
-        response = await self._search(criteria, start_row=start_row, limit=limit, timeout=timeout)
-        return response.data
-
-    async def search_by_patent(
-        self,
-        patent_number: str,
-        *,
-        limit: int = 100,
-        timeout: float = 60.0,
-    ) -> list[AssignmentRecord]:
-        """Search assignments by patent number.
-
-        Args:
-            patent_number: USPTO patent number.
-            limit: Maximum number of results.
-            timeout: Request timeout in seconds.
-
-        Returns:
-            List of AssignmentRecord objects for the patent.
-        """
-        criteria = [{"property": patent_number, "searchBy": "patentNumber"}]
-        # Patent searches don't work well with pagination params
-        response = await self._search(criteria, limit=limit, use_pagination=False, timeout=timeout)
-        return response.data
-
-    async def search_by_application(
-        self,
-        application_number: str,
-        *,
-        limit: int = 100,
-        timeout: float = 60.0,
-    ) -> list[AssignmentRecord]:
-        """Search assignments by application number.
-
-        Args:
-            application_number: USPTO application number.
-            limit: Maximum number of results.
-            timeout: Request timeout in seconds.
-
-        Returns:
-            List of AssignmentRecord objects for the application.
-        """
-        criteria = [{"property": application_number, "searchBy": "applicationNumber"}]
-        # Application searches don't work well with pagination params
-        response = await self._search(criteria, limit=limit, use_pagination=False, timeout=timeout)
-        return response.data
-
-    async def search_by_reel_frame(
-        self,
-        reel_frame: str,
-        *,
-        timeout: float = 60.0,
-    ) -> list[AssignmentRecord]:
-        """Search assignments by reel/frame number.
-
-        Args:
-            reel_frame: Reel/frame identifier (e.g., "52614/446").
-            timeout: Request timeout in seconds.
-
-        Returns:
-            List of AssignmentRecord objects (typically one) for the reel/frame.
-        """
-        criteria = [{"property": reel_frame, "searchBy": "reelFrame"}]
-        # Reel/frame searches don't work well with pagination params
-        response = await self._search(criteria, limit=10, use_pagination=False, timeout=timeout)
-        return response.data
-
     async def search(
         self,
         *,
-        assignee_name: str | None = None,
-        assignor_name: str | None = None,
-        patent_number: str | None = None,
-        application_number: str | None = None,
-        reel_frame: str | None = None,
-        correspondent_name: str | None = None,
-        pct_number: str | None = None,
-        publication_number: str | None = None,
-        start_execution_date: str | None = None,
-        end_execution_date: str | None = None,
-        start_row: int = 1,
-        limit: int = 100,
+        query: str,
+        by: SearchAxis,
+        exact: bool = False,
+        executed_between: tuple[date, date] | None = None,
+        conveyance: str | None = None,
+        offset: int = 0,
+        limit: int | None = None,
         timeout: float = 60.0,
-    ) -> list[AssignmentRecord]:
-        """Search assignments with multiple criteria.
-
-        At least one search criterion must be provided.
+    ) -> SearchResults:
+        """Search USPTO assignment recordations.
 
         Args:
-            assignee_name: Filter by assignee name.
-            assignor_name: Filter by assignor name.
-            patent_number: Filter by patent number.
-            application_number: Filter by application number.
-            reel_frame: Filter by reel/frame (e.g., "52614/446").
-            correspondent_name: Filter by correspondent/attorney name.
-            pct_number: Filter by PCT application number.
-            publication_number: Filter by publication number.
-            start_execution_date: Filter by execution date start (MM/YYYY).
-            end_execution_date: Filter by execution date end (MM/YYYY).
-            start_row: Starting row for pagination (1-based).
-            limit: Maximum number of results (max 1000 per request).
-            timeout: Request timeout in seconds.
+            query: The value to search for (e.g. ``"Apple Inc"`` or
+                ``"16136935"``).
+            by: Which axis ``query`` is searching against. One of
+                ``"assignee"``, ``"assignor"``, ``"correspondent"``,
+                ``"application_number"``, ``"patent_number"``,
+                ``"publication_number"``, ``"reel_frame"``,
+                ``"international_registration_number"``, ``"pct_number"``.
+            exact: ``True`` for exact-match (``Exact``); ``False`` for
+                contains-match (``Contains``). Defaults to contains since
+                that's the realistic default for name searches; ignored
+                for number axes (USPTO accepts either).
+            executed_between: ``(start, end)`` date tuple narrowing to
+                recordations whose assignor execution date falls in the
+                range (inclusive). USPTO honors only this date filter;
+                ``recordationDate``, ``mailDate``, and ``receiptDate`` are
+                silently ignored by the server.
+            conveyance: Contains-match against the conveyance text
+                (e.g. ``"ASSIGNMENT"``, ``"SECURITY"``, ``"CHANGE OF NAME"``).
+            offset: Number of records to skip from the start of the
+                result set. Defaults to 0.
+            limit: Maximum number of records to return. ``None`` (default)
+                fetches everything matching, paginating internally,
+                capped at USPTO's ~10k for very-broad queries.
+            timeout: Per-request HTTP timeout in seconds.
 
         Returns:
-            List of AssignmentRecord objects matching all criteria.
+            :class:`SearchResults` (list-like) with ``records``,
+            ``total`` (USPTO's total before slicing), and ``truncated``
+            (``True`` iff USPTO's ~10k cap was hit and more data exists).
 
-        Raises:
-            ValueError: If no search criteria provided.
+        Notes:
+            USPTO ignores ``sortBy`` parameters; results come back in the
+            server's internal order. Order is stable across calls within
+            a fixed page size (which this client pins internally to
+            keep ``offset`` deterministic), but may shift slightly if
+            new recordations are added between calls.
         """
-        criteria: list[dict[str, str]] = []
+        if offset < 0:
+            raise ValueError("offset must be >= 0")
+        if limit is not None and limit < 0:
+            raise ValueError("limit must be >= 0 or None")
 
-        field_map = {
-            "assigneeName": assignee_name,
-            "assignorName": assignor_name,
-            "patentNumber": patent_number,
-            "applicationNumber": application_number,
-            "reelFrame": reel_frame,
-            "correspondentName": correspondent_name,
-            "pctNumber": pct_number,
-            "publicationNumber": publication_number,
-            "startExecutionDate": start_execution_date,
-            "endExecutionDate": end_execution_date,
-        }
+        api_search_by = _SEARCH_AXIS_TO_API[by]
+        match_type = "Exact" if exact else "Contains"
 
-        for search_by, value in field_map.items():
-            if value is not None:
-                criteria.append({"property": value, "searchBy": search_by})
-
-        if not criteria:
-            raise ValueError("At least one search criterion must be provided")
-
-        response = await self._search(criteria, start_row=start_row, limit=limit, timeout=timeout)
-        return response.data
-
-    async def get_application_assignments(
-        self,
-        application_number: str,
-        *,
-        timeout: float = 60.0,
-    ) -> ApplicationAssignmentBundle:
-        """Fetch every recordation made against a single application, with conveyance.
-
-        Uses the Assignment Center's per-application detail endpoint
-        (``/ipas/search/api/v2/public/search/patent``) — the same one its
-        web UI calls. Unlike ``search_by_application()``, this endpoint
-        returns the conveyance type for each recordation
-        (e.g. ``"ASSIGNMENT OF ASSIGNOR'S INTEREST"``, ``"CHANGE OF NAME"``,
-        ``"SECURITY AGREEMENT"``) along with recordation date and a link to
-        the cover-sheet image.
-
-        Args:
-            application_number: USPTO application number (no slash, e.g. "16136935").
-            timeout: Request timeout in seconds.
-
-        Returns:
-            ApplicationAssignmentBundle with a ``properties`` block describing
-            the application and an ``assignment`` list of every recordation.
-            ``bundle.assignment`` is empty if the application has no recorded
-            assignments.
-
-        Example:
-            async with AssignmentCenterClient() as client:
-                bundle = await client.get_application_assignments("16136935")
-                for asgn in bundle.assignment:
-                    print(f"{asgn.reel_frame}  {asgn.conveyance}")
-        """
-        payload = {
-            "property": application_number,
-            "searchBy": "applicationNumber",
-            "dataFilter": {},
-        }
-        http_response = await self._request(
-            "POST",
-            "/ipas/search/api/v2/public/search/patent",
-            json=payload,
-            context="Application assignment detail",
-            timeout=timeout,
-        )
-        response_data: Any = http_response.json()
-
-        # Endpoint shape: {status, statusCode, error, successResponse: {data: {...}, ...}}
-        success = response_data.get("successResponse") if isinstance(response_data, dict) else None
-        data_obj = success.get("data") if isinstance(success, dict) else None
-        if not isinstance(data_obj, dict):
-            return ApplicationAssignmentBundle()
-        return ApplicationAssignmentBundle.model_validate(data_obj)
-
-    async def search_all(
-        self,
-        *,
-        assignee_name: str | None = None,
-        assignor_name: str | None = None,
-        batch_size: int = 1000,
-        max_results: int | None = None,
-        timeout: float = 60.0,
-        **kwargs: Any,
-    ) -> list[AssignmentRecord]:
-        """Search and paginate through all matching assignments.
-
-        Automatically handles pagination to retrieve all matching records.
-
-        Args:
-            assignee_name: Filter by assignee name.
-            assignor_name: Filter by assignor name.
-            batch_size: Number of records per request (max 1000).
-            max_results: Maximum total results to return (None for unlimited).
-            timeout: Request timeout per batch.
-            **kwargs: Additional search criteria passed to search().
-
-        Returns:
-            List of all AssignmentRecord objects matching the criteria.
-        """
-        all_records: list[AssignmentRecord] = []
-        start_row = 1
-        batch_size = min(batch_size, 1000)
-
-        while True:
-            records = await self.search(
-                assignee_name=assignee_name,
-                assignor_name=assignor_name,
-                start_row=start_row,
-                limit=batch_size,
-                timeout=timeout,
-                **kwargs,
+        filter_by: list[dict[str, Any]] = []
+        if executed_between is not None:
+            start, end = executed_between
+            filter_by.append(
+                {
+                    "property": "",
+                    "startDate": _format_yyyymmdd(start),
+                    "endDate": _format_yyyymmdd(end),
+                    "searchBy": "executionDate",
+                }
+            )
+        if conveyance is not None:
+            filter_by.append(
+                {
+                    "property": conveyance,
+                    "startDate": "",
+                    "endDate": "",
+                    "searchBy": "conveyance",
+                }
             )
 
-            if not records:
+        start_page = offset // _INTERNAL_PAGE_SIZE + 1
+        skip_in_first_page = offset % _INTERNAL_PAGE_SIZE
+
+        records: list[AssignmentRecord] = []
+        total = 0
+        page = start_page
+
+        while True:
+            payload = {
+                "searchCriteria": [
+                    {
+                        "property": query,
+                        "searchBy": api_search_by,
+                        "matchType": match_type,
+                        "order": 1,
+                        "relation": "AND",
+                    }
+                ],
+                "dataFilter": {
+                    "filterBy": filter_by,
+                    "rowsPerPage": _INTERNAL_PAGE_SIZE,
+                    "currentPage": page,
+                },
+            }
+            response = await self._request(
+                "POST",
+                "/ipas/search/api/v2/public/search/patent",
+                json=payload,
+                context="Assignment search",
+                timeout=timeout,
+            )
+            body: Any = response.json()
+            success = body.get("successResponse") if isinstance(body, dict) else None
+            if not isinstance(success, dict):
+                break
+            total = int(success.get("totalRows") or 0)
+            data = success.get("data")
+            if not isinstance(data, list):
                 break
 
-            all_records.extend(records)
+            batch = [AssignmentRecord.model_validate(r) for r in data]
+            if page == start_page and skip_in_first_page:
+                batch = batch[skip_in_first_page:]
+            records.extend(batch)
 
-            if max_results and len(all_records) >= max_results:
-                all_records = all_records[:max_results]
+            if not batch:
                 break
-
-            if len(records) < batch_size:
+            if limit is not None and len(records) >= limit:
+                records = records[:limit]
                 break
+            # ``backendPagination=False`` means the server returned everything
+            # in a single response (small result sets); no further pages.
+            if not success.get("backendPagination"):
+                break
+            # Hard stop at USPTO's 10k cap to avoid runaway loops.
+            if page * _INTERNAL_PAGE_SIZE >= _USPTO_TOTAL_CAP:
+                break
+            page += 1
 
-            start_row += batch_size
+        truncated = total >= _USPTO_TOTAL_CAP
+        return SearchResults(records=records, total=total, truncated=truncated)
 
-        return all_records
+
+def _format_yyyymmdd(d: date) -> str:
+    """Format a date as YYYYMMDD for the USPTO date-filter API."""
+    return d.strftime("%Y%m%d")
 
 
-__all__ = ["AssignmentCenterClient"]
+__all__ = ["AssignmentCenterClient", "SearchAxis"]

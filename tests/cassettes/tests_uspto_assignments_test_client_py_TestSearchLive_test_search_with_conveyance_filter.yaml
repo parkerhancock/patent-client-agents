@@ -1,0 +1,150 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"Google","searchBy":"assigneeName","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[{"property":"SECURITY","startDate":"","endDate":"","searchBy":"conveyance"}],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '257'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/search/patent
+  response:
+    body:
+      string: '{"status": "Success", "statusCode": 200, "error": null, "successResponse":
+        {"data": [{"reelNumber": 47966, "frameNumber": 839, "correspondentName": "MCDONNELL
+        BOEHNEN HULBERT & BERGHOFF LLP", "assignorExecutionDate": "09/29/2017", "conveyance":
+        "RELEASE OF SECURITY INTEREST", "conveyanceCode": 36, "assignors": [{"assignorName":
+        "GOOGLE INC.", "executionDate": "09/29/2017"}], "assignees": ["GOOGLE LLC"],
+        "noOfProperties": 1, "properties": [{"sequenceNumber": 1, "applicationNumber":
+        "16226643", "fillingDate": "12/20/2018", "internationalRegistrationNumber":
+        null, "inventionTitle": "Systems and Methods for Multiscopic Noise Reduction
+        and High-Dynamic Range", "inventors": "Jonathan Barron Tilton, Stephen DiVerdi
+        Joseph, Ryan Geiss", "issueDate": "11/12/2019", "patentNumber": "10477185",
+        "pctNumber": null, "pctNumber17": null, "publicationNumber": "20190124319",
+        "publicationDate": "04/25/2019", "internationalPublicationDate": ""}]}, {"reelNumber":
+        33897, "frameNumber": 744, "correspondentName": "AJAY GAMBHIR", "assignorExecutionDate":
+        "01/29/2014", "conveyance": "CORRECTIVE ASSIGNMENT TO CORRECT THE ASSIGNOR
+        PREVIOUSLY RECORDED ON REEL 033745 FRAME 0473. ASSIGNOR(S) HEREBY CONFIRMS
+        THE CORRECT NAME OF THE ASSIGNOR IS: BRIGHT SUN TECHNOLOGIES, SERIES 42 OF
+        ALLIED SECURITY TRUST I.", "conveyanceCode": 40, "assignors": [{"assignorName":
+        "BRIGHT SUN TECHNOLOGIES. SERIES 42 OF ALLIED SECURITY TRUST I", "executionDate":
+        "01/29/2014"}], "assignees": ["GOOGLE INC."], "noOfProperties": 52, "properties":
+        [{"sequenceNumber": 1, "applicationNumber": "10354509", "fillingDate": "01/29/2003",
+        "internationalRegistrationNumber": null, "inventionTitle": "METHOD FOR POPULATING
+        A CALLER''S INFORMATION TO A HOST-BASED ADDRESS BOOK", "inventors": "Michaela
+        Barnes Ann Beeby", "issueDate": "06/27/2006", "patentNumber": "7068768", "pctNumber":
+        null, "pctNumber17": null, "publicationNumber": "20040146150", "publicationDate":
+        "07/29/2004", "internationalPublicationDate": ""}]}, {"reelNumber": 28201,
+        "frameNumber": 309, "correspondentName": "WSGR, C/O NANCY BOUCH, SENIOR PARALEGAL",
+        "assignorExecutionDate": "05/11/2012", "conveyance": "SECURITY AGREEMENT",
+        "conveyanceCode": 40, "assignors": [{"assignorName": "MAKANI POWER, INC.",
+        "executionDate": "05/11/2012"}], "assignees": ["GOOGLE VENTURES 2012, L.P."],
+        "noOfProperties": 10, "properties": [{"sequenceNumber": 1, "applicationNumber":
+        "13070157", "fillingDate": "03/23/2011", "internationalRegistrationNumber":
+        null, "inventionTitle": "Planform Configuration for Stability of a Powered
+        Kite and a System and Method for Use of Same", "inventors": "Damon Vander
+        Lind", "issueDate": "08/12/2014", "patentNumber": "8800931", "pctNumber":
+        null, "pctNumber17": null, "publicationNumber": "20110260462", "publicationDate":
+        "10/27/2011", "internationalPublicationDate": ""}]}, {"reelNumber": 26679,
+        "frameNumber": 19, "correspondentName": "WSGR, C/O NANCY BOUCH, SENIOR PARALEGAL",
+        "assignorExecutionDate": "07/29/2011", "conveyance": "SECURITY AGREEMENT",
+        "conveyanceCode": 40, "assignors": [{"assignorName": "MAKANI POWER, INC.",
+        "executionDate": "07/29/2011"}], "assignees": ["GOOGLE ENDEAVOR LLC"], "noOfProperties":
+        10, "properties": [{"sequenceNumber": 1, "applicationNumber": "11890313",
+        "fillingDate": "08/03/2007", "internationalRegistrationNumber": null, "inventionTitle":
+        "CONTROLLING POWER EXTRACTION FOR WIND POWER GENERATION", "inventors": "Saul
+        Griffith, Wensheng Hua, Corwin Hardham, Peter Lynn, Jim McBride", "issueDate":
+        "02/02/2010", "patentNumber": "7656053", "pctNumber": null, "pctNumber17":
+        null, "publicationNumber": "20090033098", "publicationDate": "02/05/2009",
+        "internationalPublicationDate": ""}]}, {"reelNumber": 26602, "frameNumber":
+        979, "correspondentName": "WSGR, C/O NANCY BOUCH, SENIOR PARALEGAL", "assignorExecutionDate":
+        "07/15/2011", "conveyance": "SECURITY AGREEMENT", "conveyanceCode": 40, "assignors":
+        [{"assignorName": "POTTER DRILLING, INC.", "executionDate": "07/15/2011"}],
+        "assignees": ["GOOGLE INC."], "noOfProperties": 1, "properties": [{"sequenceNumber":
+        1, "applicationNumber": "61369935", "fillingDate": "08/02/2010", "internationalRegistrationNumber":
+        null, "inventionTitle": "DYNAMIC BARRIER FOR THERMAL DRILLING", "inventors":
+        "Nicholas Sazdanoff, Robert Potter M., Jared Potter M., Donald Dreesen S.,
+        Thomas Wideman W.", "issueDate": "", "patentNumber": null, "pctNumber": null,
+        "pctNumber17": null, "publicationNumber": null, "publicationDate": "", "internationalPublicationDate":
+        ""}]}, {"reelNumber": 25059, "frameNumber": 511, "correspondentName": "MILES
+        & STOCKBRIDGE P.C., 14TH FLOOR", "assignorExecutionDate": "09/14/2010", "conveyance":
+        "RELEASE OF SECURITY INTEREST IN PATENT APPLICATION", "conveyanceCode": 40,
+        "assignors": [{"assignorName": "BRANCH BANKING AND TRUST COMPANY", "executionDate":
+        "09/14/2010"}], "assignees": ["GOOGLE, INC."], "noOfProperties": 1, "properties":
+        [{"sequenceNumber": 1, "applicationNumber": "10675233", "fillingDate": "09/29/2003",
+        "internationalRegistrationNumber": null, "inventionTitle": "TILT-OUT SHELF
+        GUIDE MECHANISM SUITABLE FOR RACK MOUNT COMPUTING SYSTEMS", "inventors": "William
+        Whitted H.", "issueDate": "09/06/2011", "patentNumber": "8011742", "pctNumber":
+        null, "pctNumber17": null, "publicationNumber": null, "publicationDate": "",
+        "internationalPublicationDate": ""}]}, {"reelNumber": 22318, "frameNumber":
+        762, "correspondentName": "WSGR, C/O NANCY BOUCH, SENIOR PARALEGAL", "assignorExecutionDate":
+        "02/25/2009", "conveyance": "SECURITY AGREEMENT", "conveyanceCode": 40, "assignors":
+        [{"assignorName": "MAKANI POWER, INC.", "executionDate": "02/25/2009"}], "assignees":
+        ["GOOGLE ENDEAVOR LLC"], "noOfProperties": 7, "properties": [{"sequenceNumber":
+        1, "applicationNumber": "11890313", "fillingDate": "08/03/2007", "internationalRegistrationNumber":
+        null, "inventionTitle": "CONTROLLING POWER EXTRACTION FOR WIND POWER GENERATION",
+        "inventors": "Saul Griffith, Wensheng Hua, Corwin Hardham, Peter Lynn, Jim
+        McBride", "issueDate": "02/02/2010", "patentNumber": "7656053", "pctNumber":
+        null, "pctNumber17": null, "publicationNumber": "20090033098", "publicationDate":
+        "02/05/2009", "internationalPublicationDate": ""}]}, {"reelNumber": 15797,
+        "frameNumber": 798, "correspondentName": "WSGR C/O NANCY BOUCH, SENIOR PARALEGAL",
+        "assignorExecutionDate": "03/11/2005", "conveyance": "SECURITY AGREEMENT",
+        "conveyanceCode": 40, "assignors": [{"assignorName": "GOSSETT & GUNTER, INC.",
+        "executionDate": "03/11/2005"}], "assignees": ["GOOGLE, INC."], "noOfProperties":
+        6, "properties": [{"sequenceNumber": 1, "applicationNumber": "09738010", "fillingDate":
+        "12/14/2000", "internationalRegistrationNumber": null, "inventionTitle": "COMMUNICATIONS
+        NETWORK QUALITY OF SERVICE SYSTEM AND METHOD FOR REAL TIME INFORMATION", "inventors":
+        "Carroll Gossett Philip, Michial Gunter Allen", "issueDate": "11/28/2006",
+        "patentNumber": "7142536", "pctNumber": null, "pctNumber17": null, "publicationNumber":
+        null, "publicationDate": "", "internationalPublicationDate": ""}]}], "totalRows":
+        8, "backendPagination": true, "filteredRowsCount": 8, "message": null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 30 Apr 2026 15:08:19 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 e1496f86e99bdba0a12fe556d1aa76ba.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - G2Znx-p48leg7cBG-V4Lo9Zs-M-ldF_ZLOiksDoKHKozmHB3EOB1iw==
+      X-Amz-Cf-Pop:
+      - IAH50-P4
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '7103'
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

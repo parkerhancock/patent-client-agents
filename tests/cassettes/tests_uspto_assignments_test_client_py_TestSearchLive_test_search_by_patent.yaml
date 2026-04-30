@@ -1,0 +1,70 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"10000000","searchBy":"patentNumber","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '184'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/search/patent
+  response:
+    body:
+      string: '{"status": "Success", "statusCode": 200, "error": null, "successResponse":
+        {"data": [{"reelNumber": 35130, "frameNumber": 327, "correspondentName": "DOCKET
+        CLERK-RAYTHEON/MWM", "assignorExecutionDate": "03/06/2015", "conveyance":
+        "ASSIGNMENT OF ASSIGNOR''S INTEREST", "conveyanceCode": 23, "assignors": [{"assignorName":
+        "MARRON, JOSEPH", "executionDate": "03/06/2015"}], "assignees": ["RAYTHEON
+        COMPANY"], "noOfProperties": 1, "properties": [{"sequenceNumber": 1, "applicationNumber":
+        "14643719", "fillingDate": "03/10/2015", "internationalRegistrationNumber":
+        null, "inventionTitle": "COHERENT LADAR USING INTRA-PIXEL QUADRATURE DETECTION",
+        "inventors": "Joseph Marron", "issueDate": "06/19/2018", "patentNumber": "10000000",
+        "pctNumber": null, "pctNumber17": null, "publicationNumber": "20160266243",
+        "publicationDate": "09/15/2016", "internationalPublicationDate": ""}]}], "totalRows":
+        1, "backendPagination": false, "filteredRowsCount": 0, "message": null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '961'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 30 Apr 2026 15:08:12 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 f1c3219e4eddb69c5dee8aea1c2473f2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - Cvu9kAXejzNPQ8P2-h1bc7aIdqqsEAXLy5C_T5POsFEJxtGDwHC_yA==
+      X-Amz-Cf-Pop:
+      - IAH50-P4
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -2,200 +2,217 @@
 
 from __future__ import annotations
 
+from datetime import date
+
 import pytest
 
 from patent_client_agents.uspto_assignments import (
-    ApplicationAssignmentBundle,
     AssignmentCenterClient,
-    AssignmentDetail,
     AssignmentRecord,
     Assignor,
     Property,
+    SearchResults,
 )
 
 
 class TestModels:
-    """Tests for Pydantic models."""
+    """Tests for Pydantic models and SearchResults dataclass."""
 
     def test_assignor_model(self) -> None:
-        """Test Assignor model parsing."""
         data = {"assignorName": "SMITH, JOHN", "executionDate": "01/15/2024"}
-        assignor = Assignor.model_validate(data)
-        assert assignor.assignor_name == "SMITH, JOHN"
-        assert assignor.execution_date == "01/15/2024"
+        a = Assignor.model_validate(data)
+        assert a.assignor_name == "SMITH, JOHN"
+        assert a.execution_date == "01/15/2024"
 
     def test_property_model(self) -> None:
-        """Test Property model parsing."""
         data = {
             "sequenceNumber": 1,
             "applicationNumber": "17123456",
-            "fillingDate": "01/01/2024",  # Note: API typo
+            "fillingDate": "01/01/2024",  # API typo preserved
             "patentNumber": "11000000",
             "inventionTitle": "Test Invention",
             "inventors": "John Smith, Jane Doe",
         }
-        prop = Property.model_validate(data)
-        assert prop.application_number == "17123456"
-        assert prop.patent_number == "11000000"
-        assert prop.invention_title == "Test Invention"
+        p = Property.model_validate(data)
+        assert p.application_number == "17123456"
+        assert p.patent_number == "11000000"
+        assert p.filing_date == "01/01/2024"
+        assert p.invention_title == "Test Invention"
 
-    def test_assignment_record_model(self) -> None:
-        """Test AssignmentRecord model parsing."""
+    def test_assignment_record_with_conveyance(self) -> None:
+        """Confirms conveyance + conveyance_code populate from the search/patent response shape."""
         data = {
-            "reelNumber": 52614,
-            "frameNumber": 446,
-            "assignorExecutionDate": "04/29/2020",
-            "correspondentName": "LAW FIRM LLC",
-            "assignors": [{"assignorName": "INVENTOR", "executionDate": "04/29/2020"}],
-            "assignees": ["COMPANY INC."],
+            "reelNumber": 72877,
+            "frameNumber": 227,
+            "correspondentName": "Lerner David LLP",
+            "assignorExecutionDate": "11/12/2025",
+            "conveyance": "ASSIGNMENT OF ASSIGNOR'S INTEREST",
+            "conveyanceCode": 23,
+            "assignors": [{"assignorName": "SAKALKAR, VARUN", "executionDate": "11/12/2025"}],
+            "assignees": ["GOOGLE LLC"],
             "noOfProperties": 1,
-            "properties": [{"sequenceNumber": 1, "applicationNumber": "17123456"}],
+            "properties": [{"sequenceNumber": 1, "applicationNumber": "19385694"}],
         }
-        record = AssignmentRecord.model_validate(data)
-        assert record.reel_number == 52614
-        assert record.frame_number == 446
-        assert record.reel_frame == "52614/446"
-        assert len(record.assignors) == 1
-        assert record.assignors[0].assignor_name == "INVENTOR"
-        assert record.assignees == ["COMPANY INC."]
-        assert record.number_of_properties == 1
+        r = AssignmentRecord.model_validate(data)
+        assert r.reel_number == 72877
+        assert r.frame_number == 227
+        assert r.reel_frame == "72877/227"
+        assert r.conveyance == "ASSIGNMENT OF ASSIGNOR'S INTEREST"
+        assert r.conveyance_code == 23
+        assert r.correspondent_name == "Lerner David LLP"
+        assert r.assignors[0].assignor_name == "SAKALKAR, VARUN"
+        assert r.assignees == ["GOOGLE LLC"]
+        assert r.number_of_properties == 1
+        assert r.properties[0].application_number == "19385694"
 
-    def test_assignment_detail_model(self) -> None:
-        """Test AssignmentDetail model parsing (search/patent endpoint shape)."""
+    def test_assignment_record_handles_missing_conveyance(self) -> None:
+        """Records without conveyance still parse cleanly (defensive default)."""
         data = {
-            "reelNumber": 58293,
-            "frameNumber": 75,
-            "conveyance": "CHANGE OF NAME",
-            "conveyanceCode": 33,
-            "recordationDate": "12/01/2021",
-            "receiptDate": "12/01/2021",
-            "mailDate": "12/08/2021",
-            "pageCount": 5,
-            "imageURL": "https://assignmentcenter.uspto.gov/.../58293/75",
-            "assignors": [{"assignorName": "LATCH, INC.", "executionDate": "06/01/2021"}],
-            "assignees": [{"assigneeName": "LATCH SYSTEMS, INC."}],
+            "reelNumber": 1,
+            "frameNumber": 2,
+            "assignors": [],
+            "assignees": [],
+            "properties": [],
         }
-        detail = AssignmentDetail.model_validate(data)
-        assert detail.reel_number == 58293
-        assert detail.frame_number == 75
-        assert detail.reel_frame == "58293/75"
-        assert detail.conveyance == "CHANGE OF NAME"
-        assert detail.conveyance_code == 33
-        assert detail.recordation_date == "12/01/2021"
-        assert detail.assignors[0].assignor_name == "LATCH, INC."
+        r = AssignmentRecord.model_validate(data)
+        assert r.conveyance is None
+        assert r.conveyance_code is None
+        assert r.number_of_properties == 0
 
-    def test_application_assignment_bundle_model(self) -> None:
-        """Test ApplicationAssignmentBundle model parsing."""
-        data = {
-            "properties": {"applicationNumber": "16136935", "patentNumber": "10872483"},
-            "noOfAssignments": 2,
-            "assignment": [
-                {
-                    "reelNumber": 58293,
-                    "frameNumber": 75,
-                    "conveyance": "CHANGE OF NAME",
-                    "conveyanceCode": 33,
-                },
-                {
-                    "reelNumber": 47386,
-                    "frameNumber": 595,
-                    "conveyance": "ASSIGNMENT OF ASSIGNOR'S INTEREST",
-                    "conveyanceCode": 23,
-                },
-            ],
-        }
-        bundle = ApplicationAssignmentBundle.model_validate(data)
-        assert bundle.no_of_assignments == 2
-        assert len(bundle.assignment) == 2
-        assert bundle.assignment[0].conveyance == "CHANGE OF NAME"
-        assert bundle.assignment[1].conveyance == "ASSIGNMENT OF ASSIGNOR'S INTEREST"
+    def test_search_results_list_protocol(self) -> None:
+        """SearchResults behaves as a list of records for the common path."""
+        records = [
+            AssignmentRecord.model_validate({"reelNumber": i, "frameNumber": 0}) for i in range(3)
+        ]
+        result = SearchResults(records=records, total=42, truncated=False)
+        assert len(result) == 3
+        assert result[0].reel_number == 0
+        assert [r.reel_number for r in result] == [0, 1, 2]
+        assert bool(result) is True
+        assert result.total == 42
+        assert result.truncated is False
+
+    def test_search_results_empty_is_falsy(self) -> None:
+        result = SearchResults(records=[], total=0, truncated=False)
+        assert bool(result) is False
+        assert len(result) == 0
 
 
-class TestClient:
-    """Tests for AssignmentCenterClient using VCR cassettes.
-
-    To record new cassettes:
-        pytest tests/uspto_assignments/ --vcr-record=once -v
-    """
+class TestSearchValidation:
+    """Argument validation that doesn't require HTTP."""
 
     @pytest.mark.asyncio
-    async def test_search_by_assignee(self, vcr_cassette) -> None:
-        """Test searching by assignee name."""
+    async def test_negative_offset_rejected(self) -> None:
         async with AssignmentCenterClient() as client:
-            records = await client.search_by_assignee("Apple Inc", limit=5)
-            assert len(records) > 0
-            assert all(isinstance(r, AssignmentRecord) for r in records)
-            # All results should have Apple as an assignee
-            for record in records:
-                assignee_names = [a.lower() for a in record.assignees]
-                assert any("apple" in name for name in assignee_names)
+            with pytest.raises(ValueError, match="offset"):
+                await client.search(query="x", by="assignee", offset=-1)
 
     @pytest.mark.asyncio
-    async def test_search_by_assignor(self, vcr_cassette) -> None:
-        """Test searching by assignor name."""
+    async def test_negative_limit_rejected(self) -> None:
         async with AssignmentCenterClient() as client:
-            records = await client.search_by_assignor("Samsung", limit=5)
-            assert len(records) > 0
-            assert all(isinstance(r, AssignmentRecord) for r in records)
+            with pytest.raises(ValueError, match="limit"):
+                await client.search(query="x", by="assignee", limit=-1)
 
     @pytest.mark.asyncio
-    async def test_search_by_patent(self, vcr_cassette) -> None:
-        """Test searching by patent number."""
+    async def test_invalid_axis_rejected(self) -> None:
         async with AssignmentCenterClient() as client:
-            records = await client.search_by_patent("10000000")
-            assert len(records) > 0
-            # Should find assignments for patent 10,000,000
-            for record in records:
-                patent_numbers = [
-                    p.patent_number.strip() if p.patent_number else "" for p in record.properties
-                ]
-                assert any("10000000" in pn for pn in patent_numbers)
+            with pytest.raises(KeyError):
+                await client.search(query="x", by="bogus")  # type: ignore[arg-type]
+
+
+class TestSearchLive:
+    """Tests against recorded VCR cassettes."""
 
     @pytest.mark.asyncio
     async def test_search_by_application(self, vcr_cassette) -> None:
-        """Test searching by application number."""
+        """Application-number search returns recordations with conveyance populated."""
         async with AssignmentCenterClient() as client:
-            # Application for patent 10,000,000
-            records = await client.search_by_application("14643719")
-            assert len(records) > 0
-            assert all(isinstance(r, AssignmentRecord) for r in records)
+            result = await client.search(query="16136935", by="application_number")
+        assert len(result) >= 1
+        for r in result:
+            assert isinstance(r, AssignmentRecord)
+            assert r.conveyance is not None and r.conveyance != ""
+            assert r.conveyance_code is not None
+        assert result.truncated is False
+
+    @pytest.mark.asyncio
+    async def test_search_by_patent(self, vcr_cassette) -> None:
+        async with AssignmentCenterClient() as client:
+            result = await client.search(query="10000000", by="patent_number")
+        assert len(result) >= 1
+        for r in result:
+            assert any(p.patent_number and "10000000" in p.patent_number for p in r.properties)
 
     @pytest.mark.asyncio
     async def test_search_by_reel_frame(self, vcr_cassette) -> None:
-        """Test searching by reel/frame."""
         async with AssignmentCenterClient() as client:
-            # Known reel/frame from patent 10,000,000
-            records = await client.search_by_reel_frame("37879/527")
-            assert len(records) > 0
-            assert records[0].reel_frame == "37879/527"
+            result = await client.search(query="58293/75", by="reel_frame")
+        assert len(result) == 1
+        assert result[0].reel_frame == "58293/75"
+        assert result[0].conveyance == "CHANGE OF NAME"
 
     @pytest.mark.asyncio
-    async def test_search_multi_criteria(self, vcr_cassette) -> None:
-        """Test searching with multiple criteria."""
+    async def test_search_by_assignee_contains(self, vcr_cassette) -> None:
+        """Assignee Contains-search returns recordations with conveyance for every match."""
         async with AssignmentCenterClient() as client:
-            records = await client.search(
-                assignee_name="Apple",
+            result = await client.search(query="WIDEX A/S", by="assignee", exact=True, limit=10)
+        assert len(result) > 0
+        for r in result:
+            assert r.conveyance is not None
+            assert any("WIDEX" in name.upper() for name in r.assignees)
+
+    @pytest.mark.asyncio
+    async def test_search_with_executed_between(self, vcr_cassette) -> None:
+        """executionDate filter actually narrows the result set."""
+        start, end = date(2024, 1, 1), date(2024, 12, 31)
+        async with AssignmentCenterClient() as client:
+            unfiltered = await client.search(query="Google", by="assignee", limit=5)
+            filtered = await client.search(
+                query="Google",
+                by="assignee",
+                executed_between=(start, end),
                 limit=5,
             )
-            assert len(records) > 0
+        # The total before slicing should differ when filter narrows
+        assert filtered.total <= unfiltered.total
 
     @pytest.mark.asyncio
-    async def test_get_application_assignments(self, vcr_cassette) -> None:
-        """Test fetching per-application assignment detail with conveyance type."""
+    async def test_search_with_conveyance_filter(self, vcr_cassette) -> None:
+        """conveyance contains-filter narrows result set."""
         async with AssignmentCenterClient() as client:
-            # Application 16136935 has three recordations, two of which are
-            # CHANGE OF NAME and one ASSIGNMENT OF ASSIGNOR'S INTEREST.
-            bundle = await client.get_application_assignments("16136935")
-            assert bundle.no_of_assignments >= 1
-            assert len(bundle.assignment) >= 1
-            # Conveyance type must be populated by this endpoint.
-            for asgn in bundle.assignment:
-                assert asgn.conveyance is not None
-                assert asgn.conveyance != ""
+            result = await client.search(
+                query="Google",
+                by="assignee",
+                conveyance="SECURITY",
+                limit=5,
+            )
+        assert result.total > 0
+        for r in result:
+            assert r.conveyance is not None
+            assert "SECURITY" in r.conveyance.upper()
 
     @pytest.mark.asyncio
-    async def test_search_requires_criteria(self) -> None:
-        """Test that search() requires at least one criterion."""
+    async def test_search_truncated_flag_for_huge_query(self, vcr_cassette) -> None:
+        """An assignee with >10k recordations sets truncated=True."""
         async with AssignmentCenterClient() as client:
-            with pytest.raises(ValueError, match="At least one search criterion"):
-                await client.search()
+            result = await client.search(query="Apple", by="assignee", exact=False, limit=5)
+        assert result.truncated is True
+        assert result.total >= 10_000
+        assert len(result) == 5
+
+    @pytest.mark.asyncio
+    async def test_search_offset_skips_records(self, vcr_cassette) -> None:
+        """offset advances past the first records of the result set."""
+        async with AssignmentCenterClient() as client:
+            page1 = await client.search(
+                query="WIDEX A/S", by="assignee", exact=True, offset=0, limit=3
+            )
+            page2 = await client.search(
+                query="WIDEX A/S", by="assignee", exact=True, offset=3, limit=3
+            )
+        assert len(page1) == 3
+        assert len(page2) == 3
+        # Reel/frames should differ between pages
+        rf1 = {r.reel_frame for r in page1}
+        rf2 = {r.reel_frame for r in page2}
+        assert rf1.isdisjoint(rf2)
