@@ -1,0 +1,100 @@
+site_name: patent-client-agents
+site_description: Async Python library and MCP server for patent + IP data — USPTO, EPO, JPO, Google Patents, MPEP, CPC.
+site_author: Parker Hancock
+site_url: https://parkerhancock.github.io/patent-client-agents/
+
+repo_name: parkerhancock/patent-client-agents
+repo_url: https://github.com/parkerhancock/patent-client-agents
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  logo: _static/patent_client_agents_logo.svg
+  favicon: _static/patent_client_agents_icon.svg
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.indexes
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+    - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/parkerhancock/patent-client-agents
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/patent-client-agents/
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      permalink_title: Anchor link to this section
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: ['.', 'docs']
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+  - include-markdown
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - MCP Reference: mcp-stdio.md
+  - API Reference:
+    - USPTO ODP: api/uspto-odp.md
+    - USPTO Applications: api/uspto-applications.md
+    - USPTO Publications: api/uspto-publications.md
+    - USPTO Assignments: api/uspto-assignments.md
+    - USPTO Office Actions: api/uspto-office-actions.md
+    - USPTO Petitions: api/uspto-petitions.md
+    - USPTO Bulk Data: api/uspto-bulkdata.md
+    - EPO OPS: api/epo-ops.md
+    - JPO: api/jpo.md
+    - Google Patents: api/google-patents.md
+    - MPEP: api/mpep.md
+    - CPC: api/cpc.md

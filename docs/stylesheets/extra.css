@@ -1,0 +1,57 @@
+/* Brand palette
+   - Cobalt    #008cc8  primary
+   - Cyan      #19c6d6  accent / hover
+   - Deep navy #0b4a6e  dark mode primary
+*/
+
+:root {
+  --md-primary-fg-color:        #008cc8;
+  --md-primary-fg-color--light:  #19c6d6;
+  --md-primary-fg-color--dark:   #0b4a6e;
+  --md-accent-fg-color:          #19c6d6;
+  --md-accent-fg-color--transparent: rgba(25, 198, 214, 0.1);
+
+  --md-typeset-a-color: #008cc8;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        #0b4a6e;
+  --md-primary-fg-color--light:  #19c6d6;
+  --md-primary-fg-color--dark:   #06324a;
+  --md-accent-fg-color:          #19c6d6;
+  --md-accent-fg-color--transparent: rgba(25, 198, 214, 0.15);
+
+  --md-typeset-a-color: #19c6d6;
+
+  --md-default-bg-color:        hsl(206, 28%, 12%);
+  --md-default-bg-color--light: hsl(206, 28%, 16%);
+}
+
+.md-header {
+  background-color: var(--md-primary-fg-color);
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.6rem;
+  width: auto;
+}
+
+.md-tabs {
+  background-color: var(--md-primary-fg-color--dark);
+}
+
+.md-typeset code {
+  background-color: rgba(0, 140, 200, 0.08);
+  color: var(--md-primary-fg-color--dark);
+}
+
+[data-md-color-scheme="slate"] .md-typeset code {
+  background-color: rgba(25, 198, 214, 0.12);
+  color: var(--md-primary-fg-color--light);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: #fff;
+}
