@@ -31,19 +31,30 @@
   background-color: var(--md-primary-fg-color);
 }
 
+/* The wordmark already says "Patent Client Agents" — hide the duplicate
+   site_name text and let the logo stand alone. */
+.md-header__title {
+  display: none;
+}
+
 /* White matte behind the wordmark so it reads against the cobalt header */
 .md-header__button.md-logo {
   background: #ffffff;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  margin-right: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  margin-right: 0.5rem;
 }
 
 .md-header__button.md-logo img,
 .md-header__button.md-logo svg {
-  height: 1.4rem;
+  height: 1.8rem;
   width: auto;
   display: block;
+}
+
+/* Suppress the auto-rendered "Home" H1 above the README hero on the index. */
+.md-typeset h1.home-h1-suppress {
+  display: none;
 }
 
 .md-tabs {

@@ -5,7 +5,6 @@
 **Give your AI agent access to the world's patent data.**
 
 [![CI](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml/badge.svg)](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/parkerhancock/patent-client-agents/branch/main/graph/badge.svg)](https://codecov.io/gh/parkerhancock/patent-client-agents)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 

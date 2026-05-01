@@ -3,7 +3,7 @@ site_description: Async Python library and MCP server for patent + IP data — U
 site_author: Parker Hancock
 site_url: https://docs.patentclient.com/
 
-repo_name: parkerhancock/patent-client-agents
+repo_name: patent-client-agents
 repo_url: https://github.com/parkerhancock/patent-client-agents
 edit_uri: edit/main/docs/
 
