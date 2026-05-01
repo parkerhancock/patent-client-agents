@@ -83,7 +83,7 @@ async with AssignmentCenterClient() as client:
 
 ## Caveats
 
-- **USPTO 10k cap.** Very-broad queries (e.g. `assignee="Apple"`) return
+- **USPTO 10k cap.** Very-broad queries (e.g. `assignee="[Company]"`) return
   at most ~10,000 records. `result.truncated` is `True` when this happens;
   narrow with `executed_between`, `conveyance`, or a more specific query.
 - **Order is server-default and unsortable.** USPTO accepts `sortBy` but

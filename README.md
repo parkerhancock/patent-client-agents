@@ -49,11 +49,11 @@ See [docs/installation.md](docs/installation.md) for all seven install modes.
 
 Ask Claude to research patents in natural language:
 
-> "Find Tesla's recent battery patents and summarize the key innovations"
+> "Find [Company]'s recent battery patents and summarize the key innovations"
 
 > "What's the prosecution history for US Patent 11,234,567?"
 
-> "Compare Apple and Samsung's patent portfolios in mobile display technology"
+> "Compare [Company A] and [Company B]'s patent portfolios in mobile display technology"
 
 > "Track the legal status of EP3456789 across all designated states"
 

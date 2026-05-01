@@ -143,7 +143,7 @@ from patent_client_agents.jpo import JpoClient
 
 async with JpoClient() as client:
     # Search by name (partial match supported)
-    applicants = await client.get_patent_applicant_by_name("トヨタ")
+    applicants = await client.get_patent_applicant_by_name("[出願人名]")
     for a in applicants:
         print(f"{a.applicant_attorney_cd}: {a.name}")
 ```

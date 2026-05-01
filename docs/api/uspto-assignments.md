@@ -10,7 +10,7 @@ from patent_client_agents.uspto_assignments import AssignmentCenterClient
 
 async with AssignmentCenterClient() as client:
     # By assignee company
-    records = await client.search_by_assignee("Tesla, Inc.")
+    records = await client.search_by_assignee("[Company Name]")
     for r in records:
         print(f"{r.reel_frame}: {r.assignor_name} -> {r.assignee_name}")
 
@@ -62,7 +62,7 @@ from patent_client_agents.uspto_assignments import AssignmentCenterClient
 
 async with AssignmentCenterClient() as client:
     # Paginate for large result sets
-    all_records = await client.search_all(assignee_name="Tesla")
+    all_records = await client.search_all(assignee_name="[Company Name]")
     print(f"found {len(all_records)} assignments")
 ```
 
