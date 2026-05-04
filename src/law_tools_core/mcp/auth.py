@@ -180,12 +180,19 @@ def _build_static_verifier(api_key: str) -> StaticTokenVerifier:
     Claim shape matches what FastMCP expects: a dict keyed by raw token
     string, each value a dict with at minimum ``client_id`` and
     ``scopes``.
+
+    Scopes match the set GoogleProvider requires
+    (``["openid", "email", "profile"]``) so static-token callers
+    satisfy MultiAuth's scope check when GoogleProvider is also wired
+    up. Without this, cron / S2S callers using the static bearer would
+    get ``insufficient_scope`` 403s on every tool call in any
+    deployment that enables Google OAuth.
     """
     return StaticTokenVerifier(
         tokens={
             api_key: {
                 "client_id": "law-tools-core-service",
-                "scopes": ["openid"],
+                "scopes": ["openid", "email", "profile"],
             }
         }
     )
