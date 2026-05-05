@@ -5,8 +5,11 @@
 **Give your AI agent access to the world's patent data.**
 
 [![CI](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml/badge.svg)](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml)
+[![Docs](https://img.shields.io/badge/docs-docs.patentclient.com-008cc8.svg)](https://docs.patentclient.com/)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
+
+**Full documentation: [docs.patentclient.com](https://docs.patentclient.com/)**
 
 ## Use the hosted demo
 
@@ -40,7 +43,7 @@ See the [Terms of Use](https://mcp.patentclient.com/terms).
 /reload-plugins
 ```
 
-See [docs/installation.md](docs/installation.md) for all seven install modes.
+See [docs.patentclient.com/installation](https://docs.patentclient.com/installation/) for all seven install modes.
 
 ---
 
@@ -90,7 +93,7 @@ exposed to the agent. Prereq: [uv](https://docs.astral.sh/uv/) on
 PATH — the MCP server runs under `uvx` so you don't `pip install`
 anything yourself.
 
-**Seven install modes are documented in [docs/installation.md](docs/installation.md)**
+**Seven install modes are documented at [docs.patentclient.com/installation](https://docs.patentclient.com/installation/)**
 — Python library, Python+MCP runtime, Claude Code plugin, dev symlink, stdio
 MCP, Cowork remote MCP, and generic remote MCP. Pick the one that matches
 how you'll use it.
