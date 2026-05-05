@@ -2,6 +2,14 @@
 
 Access the Japan Patent Office Patent Information Retrieval APIs for patents, designs, and trademarks.
 
+!!! warning "JPO MCP tools are not available"
+    The Python `JpoClient` documented on this page works locally if you
+    have your own `JPO_API_USERNAME` / `JPO_API_PASSWORD`. JPO is **not**
+    exposed as MCP tools — the hosted demo at
+    `mcp.patentclient.com`, the stdio MCP server, and the Claude Code
+    plugin all omit JPO. Treat the "MCP Tools" section below as a
+    description of the Python surface only.
+
 ## Quick Start
 
 ```python

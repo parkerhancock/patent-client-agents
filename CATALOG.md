@@ -37,7 +37,7 @@ for the master table. Cross-source fused tools have dedicated pages:
 
 | Source | Status | Notes |
 |---|---|---|
-| [JPO](src/patent_client_agents/catalog/sources/jpo.md) | Disabled | Module present; requires `JPO_API_USERNAME` + `JPO_API_PASSWORD` which are not broadly available. All clients skip at runtime if credentials are absent. |
+| [JPO](src/patent_client_agents/catalog/sources/jpo.md) | Library only | JPO MCP tools are not available. The Python library still exposes `JpoClient` and the `jpo` submodule for users with their own `JPO_API_USERNAME` + `JPO_API_PASSWORD`. The MCP tool wrappers in `src/patent_client_agents/mcp/tools/international.py` are commented out, so the hosted demo at `mcp.patentclient.com`, the stdio MCP server, and the Claude Code plugin all omit JPO tools. |
 | [patentsview](archive/patentsview/) | Deprecated | USPTO retired the PatentsView API (search.patentsview.org no longer resolves); module kept in `archive/` for reference only. |
 
 ## By auth type

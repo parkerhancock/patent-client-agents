@@ -56,7 +56,7 @@ Ask Claude to research patents in natural language:
 
 > "Track the legal status of EP3456789 across all designated states"
 
-`patent-client-agents` connects Claude Code to USPTO, EPO, JPO, and Google Patents, giving your agent the ability to search, analyze, and report on intellectual property worldwide.
+`patent-client-agents` connects Claude Code to USPTO, EPO, and Google Patents, giving your agent the ability to search, analyze, and report on intellectual property worldwide. JPO clients ship in the Python library; JPO MCP tools are not available.
 
 ## Coverage
 
@@ -68,7 +68,7 @@ Ask Claude to research patents in natural language:
 | **USPTO Assignments** | Patent ownership transfers and reel/frame lookups |
 | **USPTO Office Actions** | Rejection analytics, cited references, full-text OA retrieval |
 | **EPO OPS** | European patents, Inpadoc families, legal events, EP Register |
-| **JPO** | Japanese patents, examination history, PCT national phase |
+| **JPO** | Japanese patents, examination history, PCT national phase — *Python library only; JPO MCP tools are not available* |
 | **MPEP** | Manual of Patent Examining Procedure search and section lookup |
 | **CPC** | Classification hierarchy lookup, search, and CPC/IPC mapping |
 
@@ -101,7 +101,7 @@ how you'll use it.
 |----------|--------|----------|------------|
 | `USPTO_ODP_API_KEY` | USPTO ODP | Most USPTO tools | [developer.uspto.gov](https://developer.uspto.gov/) (free) |
 | `EPO_OPS_API_KEY`, `EPO_OPS_API_SECRET` | EPO OPS | All EPO tools | [developers.epo.org](https://developers.epo.org/) (free) |
-| `JPO_API_USERNAME`, `JPO_API_PASSWORD` | JPO | JPO tools only | [j-platpat.inpit.go.jp](https://www.j-platpat.inpit.go.jp/) |
+| `JPO_API_USERNAME`, `JPO_API_PASSWORD` | JPO | Python library only — JPO MCP tools are not available | [j-platpat.inpit.go.jp](https://www.j-platpat.inpit.go.jp/) |
 
 **No API key needed:** Google Patents, USPTO Publications (PPUBS), USPTO
 Assignments, MPEP, CPC.
@@ -211,7 +211,13 @@ async with GooglePatentsClient() as client:
 </details>
 
 <details>
-<summary><strong>JPO (Japan Patent Office)</strong></summary>
+<summary><strong>JPO (Japan Patent Office) — Python library only</strong></summary>
+
+> **JPO MCP tools are not available.** The hosted demo at
+> `mcp.patentclient.com` does not expose any JPO tools, and neither does
+> the local stdio MCP server or the Claude Code plugin. The Python
+> library's `JpoClient` still works locally if you have your own
+> `JPO_API_USERNAME` / `JPO_API_PASSWORD`.
 
 | Feature | Description |
 |---------|-------------|
@@ -236,11 +242,12 @@ async with GooglePatentsClient() as client:
 │              (Natural language → API calls)                  │
 ├─────────────────────────────────────────────────────────────┤
 │              patent_client_agents Python library             │
-│    ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
-│    │  USPTO   │  │   EPO    │  │  Google  │  │   JPO    │   │
-│    │   ODP    │  │   OPS    │  │ Patents  │  │          │   │
-│    └──────────┘  └──────────┘  └──────────┘  └──────────┘   │
+│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌──────────┐   │
+│  │ USPTO  │ │  EPO   │ │ Google │ │  MPEP  │ │   JPO*   │   │
+│  │  ODP   │ │  OPS   │ │Patents │ │  CPC   │ │ (lib)    │   │
+│  └────────┘ └────────┘ └────────┘ └────────┘ └──────────┘   │
 └─────────────────────────────────────────────────────────────┘
+* JPO is library-only — JPO MCP tools are not available.
 ```
 
 ## Development

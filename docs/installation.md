@@ -49,7 +49,7 @@ these unlock the full surface:
 |---|---|---|
 | `USPTO_ODP_API_KEY` | USPTO Open Data Portal | [developer.uspto.gov](https://developer.uspto.gov/) (free) |
 | `EPO_OPS_API_KEY`, `EPO_OPS_API_SECRET` | EPO Open Patent Services | [developers.epo.org](https://developers.epo.org/) (free, 4 GB/week) |
-| `JPO_API_USERNAME`, `JPO_API_PASSWORD` | JPO J-PlatPat | Contact JPO (restricted) |
+| `JPO_API_USERNAME`, `JPO_API_PASSWORD` | JPO J-PlatPat | Contact JPO (restricted). **Python library only — JPO MCP tools are not available.** |
 
 Google Patents, USPTO Publications, USPTO Assignments, and MPEP need
 no credentials.
