@@ -169,9 +169,7 @@ class TestMakeAuth:
         # path didn't accidentally swallow it).
         assert result.server._client_storage is not None
 
-    def test_static_verifier_claims_google_scopes(
-        self, monkeypatch: pytest.MonkeyPatch
-    ) -> None:
+    def test_static_verifier_claims_google_scopes(self, monkeypatch: pytest.MonkeyPatch) -> None:
         # Regression: when GoogleProvider AND static are both wired up
         # via MultiAuth, GoogleProvider's required_scopes are normalized
         # to the FULL Google URL form (e.g. "email" →

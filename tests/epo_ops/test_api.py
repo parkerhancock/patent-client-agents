@@ -69,9 +69,7 @@ async def test_fetch_fulltext_translates_404_to_friendly_value_error() -> None:
             raise NotFoundError("HTTP 404", 404, "")
 
     with pytest.raises(ValueError, match="EPO has no claims full text"):
-        await ops_api.fetch_fulltext(
-            "EP1000000", section="claims", client=cast(Any, DummyClient())
-        )
+        await ops_api.fetch_fulltext("EP1000000", section="claims", client=cast(Any, DummyClient()))
 
 
 @pytest.mark.asyncio
