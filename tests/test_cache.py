@@ -264,3 +264,35 @@ class TestBuildCachedHttpClient:
             cache_dir=cache_dir,
         )
         assert cache_dir.exists()
+
+    def test_does_not_inject_chrome_user_agent_default(self, tmp_path: Path) -> None:
+        """The default User-Agent must NOT be a Chrome impersonator.
+
+        Akamai-protected govt sites (USITC EDIS, federalregister.gov,
+        consumerfinance.gov) flag the combination of a browser UA with
+        httpx's TLS fingerprint as a "browser impersonator" and 403 the
+        request. Letting httpx send its native ``python-httpx/x.y.z``
+        UA passes those WAFs cleanly.
+        """
+        client, _ = build_cached_http_client(
+            use_cache=False,
+            cache_name="test",
+            cache_dir=tmp_path,
+        )
+        ua = client.headers.get("User-Agent", "")
+        assert "Mozilla" not in ua, f"Chrome-impersonator UA leaked back: {ua!r}"
+        assert "Chrome" not in ua, f"Chrome-impersonator UA leaked back: {ua!r}"
+        assert "Accept-Language" not in client.headers, (
+            "Accept-Language is a browser-only header; do not set by default"
+        )
+
+    def test_caller_can_still_set_user_agent(self, tmp_path: Path) -> None:
+        """Callers that need a specific UA (e.g. SEC EDGAR mandates an
+        email contact in the UA) must be able to pass one through."""
+        client, _ = build_cached_http_client(
+            use_cache=False,
+            cache_name="test",
+            cache_dir=tmp_path,
+            headers={"User-Agent": "law-tools test@example.com"},
+        )
+        assert client.headers["User-Agent"] == "law-tools test@example.com"

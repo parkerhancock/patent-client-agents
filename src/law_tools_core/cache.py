@@ -316,15 +316,15 @@ def build_cached_http_client(
     Returns:
         Tuple of (client, cache_manager). cache_manager is None if use_cache=False.
     """
-    default_headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/127.0.0.0 Safari/537.36"
-        ),
-        "Accept-Language": "en-US,en;q=0.9",
-    }
-    merged_headers = dict(default_headers)
+    # Headers default: empty. Pretending to be Chrome was actively
+    # harmful — Akamai-protected sites (USITC EDIS, federalregister.gov,
+    # consumerfinance.gov) flag the combination of a browser User-Agent
+    # with httpx's TLS fingerprint as a "browser impersonator" and 403
+    # the request. Letting httpx send its native ``python-httpx/x.y.z``
+    # UA passes those WAFs cleanly. Callers that need a specific UA
+    # (e.g. SEC EDGAR which mandates an email contact) pass one through
+    # ``headers``.
+    merged_headers: dict[str, str] = {}
     if headers:
         merged_headers.update(headers)
 
