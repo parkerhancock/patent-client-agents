@@ -136,6 +136,39 @@ class TestMakeAuth:
         result = make_auth()
         assert isinstance(result, StaticTokenVerifier)
 
+    def test_client_storage_passes_through_to_google_provider(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        # Persistent client storage (Firestore/Redis-backed) must be
+        # threaded into GoogleProvider — the default per-container
+        # FileTreeStore silently breaks DCR across Cloud Run cold starts
+        # and multi-instance routing. Asserts wiring, not behavior.
+        monkeypatch.setenv("LAW_TOOLS_CORE_GOOGLE_OAUTH_CLIENT_ID", "gid")
+        monkeypatch.setenv("LAW_TOOLS_CORE_GOOGLE_OAUTH_CLIENT_SECRET", "gsecret")
+        monkeypatch.setenv("LAW_TOOLS_CORE_PUBLIC_URL", "https://example.com")
+        sentinel = MagicMock(name="client_storage")
+        result = make_auth(client_storage=sentinel)
+        assert isinstance(result, MultiAuth)
+        google_provider = result.server  # MultiAuth.server holds GoogleProvider
+        assert google_provider._client_storage is sentinel
+
+    def test_client_storage_default_keeps_fastmcp_default(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        # Without an explicit client_storage, GoogleProvider falls back
+        # to its built-in FileTreeStore. Stdio / single-process dev rely
+        # on this default, so we don't want make_auth() to silently
+        # introduce a different one.
+        monkeypatch.setenv("LAW_TOOLS_CORE_GOOGLE_OAUTH_CLIENT_ID", "gid")
+        monkeypatch.setenv("LAW_TOOLS_CORE_GOOGLE_OAUTH_CLIENT_SECRET", "gsecret")
+        monkeypatch.setenv("LAW_TOOLS_CORE_PUBLIC_URL", "https://example.com")
+        result = make_auth()
+        assert isinstance(result, MultiAuth)
+        # FastMCP swaps None for a FileTreeStore in OAuthProxy.__init__,
+        # so we just assert _something_ was wired in (proves the kwarg
+        # path didn't accidentally swallow it).
+        assert result.server._client_storage is not None
+
     def test_static_verifier_claims_google_scopes(
         self, monkeypatch: pytest.MonkeyPatch
     ) -> None:

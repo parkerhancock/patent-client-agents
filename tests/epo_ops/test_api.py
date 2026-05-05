@@ -4,6 +4,7 @@ from typing import Any, cast
 
 import pytest
 
+from law_tools_core.exceptions import NotFoundError
 from patent_client_agents.epo_ops import api as ops_api
 from patent_client_agents.epo_ops.models import (
     BiblioRecord,
@@ -54,6 +55,23 @@ async def test_fetch_fulltext() -> None:
     )
     assert isinstance(result, FullTextResponse)
     assert result.section == "claims"
+
+
+@pytest.mark.asyncio
+async def test_fetch_fulltext_translates_404_to_friendly_value_error() -> None:
+    # EPO returns 404 for publications without indexed full text
+    # (especially older or non-EP/non-WO documents). The library-level
+    # NotFoundError carries an internal log-path hint via ApiError.__str__
+    # which is unhelpful for that domain failure — surface a clean
+    # ValueError that a tool / agent can show to the user verbatim.
+    class DummyClient:
+        async def fetch_fulltext(self, **kwargs: object) -> FullTextResponse:
+            raise NotFoundError("HTTP 404", 404, "")
+
+    with pytest.raises(ValueError, match="EPO has no claims full text"):
+        await ops_api.fetch_fulltext(
+            "EP1000000", section="claims", client=cast(Any, DummyClient())
+        )
 
 
 @pytest.mark.asyncio

@@ -23,6 +23,8 @@ from __future__ import annotations
 
 import warnings
 
+from law_tools_core.exceptions import NotFoundError
+
 from .client import EpoOpsClient, client_from_env
 from .models import (
     BiblioResponse,
@@ -172,15 +174,39 @@ async def fetch_fulltext(
     """Fetch full text (claims or description) for a patent document.
 
     If no client is provided, creates one internally and closes it after the request.
+
+    Raises:
+        ValueError: When EPO has no full text for the requested
+            publication. Many older publications and most non-EP/non-WO
+            documents lack indexed full text — surfacing this as a
+            domain-specific message (rather than the raw HTTP 404 with
+            log-path hint) keeps the failure interpretable for callers.
     """
     if client is not None:
         _warn_client_deprecated()
-        return await client.fetch_fulltext(
-            number=number, section=section, doc_type=doc_type, fmt=fmt
-        )
+        try:
+            return await client.fetch_fulltext(
+                number=number, section=section, doc_type=doc_type, fmt=fmt
+            )
+        except NotFoundError as exc:
+            raise _no_fulltext_error(number=number, section=section) from exc
 
     async with client_from_env() as cl:
-        return await cl.fetch_fulltext(number=number, section=section, doc_type=doc_type, fmt=fmt)
+        try:
+            return await cl.fetch_fulltext(
+                number=number, section=section, doc_type=doc_type, fmt=fmt
+            )
+        except NotFoundError as exc:
+            raise _no_fulltext_error(number=number, section=section) from exc
+
+
+def _no_fulltext_error(*, number: str, section: str) -> ValueError:
+    return ValueError(
+        f"EPO has no {section} full text for publication {number!r}. "
+        "Many older publications and most non-EP/non-WO documents are "
+        "not indexed for full text — try fetching biblio or family "
+        "instead, or check the publication number on Espacenet."
+    )
 
 
 async def fetch_family(

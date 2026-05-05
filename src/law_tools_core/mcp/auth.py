@@ -25,6 +25,7 @@ work.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import TYPE_CHECKING
 
 from fastmcp.exceptions import ToolError
 from fastmcp.server.auth import AuthProvider, MultiAuth, TokenVerifier
@@ -34,6 +35,9 @@ from fastmcp.server.dependencies import get_access_token
 from fastmcp.server.middleware import Middleware, MiddlewareContext
 
 from . import _env
+
+if TYPE_CHECKING:
+    from key_value.aio.protocols.key_value import AsyncKeyValue
 
 _DEFAULT_MCP_REDIRECT_URIS: tuple[str, ...] = (
     "https://claude.ai/*",
@@ -54,6 +58,7 @@ def make_auth(
     issuer_url: str | None = None,
     allowed_email_domains: Sequence[str] = (),
     allowed_client_redirect_uris: Sequence[str] = _DEFAULT_MCP_REDIRECT_URIS,
+    client_storage: AsyncKeyValue | None = None,
 ) -> AuthProvider | None:
     """Build the MCP server's auth provider from env vars.
 
@@ -78,6 +83,14 @@ def make_auth(
         allowed_client_redirect_uris: URI patterns accepted from MCP
             clients during Dynamic Client Registration. Default covers
             Claude.ai / Anthropic apps.
+        client_storage: Persistent backend for OAuth state (DCR client
+            registrations, in-flight auth transactions, refresh-token
+            metadata). Pass a Firestore-/Redis-/etc-backed
+            :class:`AsyncKeyValue` for any horizontally scaled
+            deployment — FastMCP's default is a per-container file
+            store, which silently breaks DCR across Cloud Run cold
+            starts and multi-instance routing. ``None`` keeps the
+            FastMCP default (fine for stdio and single-process dev).
 
     Returns:
         Configured ``AuthProvider`` or ``None`` if no auth env vars are
@@ -111,6 +124,7 @@ def make_auth(
             allowed_client_redirect_uris=list(allowed_client_redirect_uris),
             extra_authorize_params=_google_hd_hint(allowed_email_domains),
             require_authorization_consent="external",
+            client_storage=client_storage,
         )
         verifiers: list[TokenVerifier] = [static] if static is not None else []
         return MultiAuth(server=google, verifiers=verifiers)
