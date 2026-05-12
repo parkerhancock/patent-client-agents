@@ -24,6 +24,7 @@ Auth selection:
 
 from __future__ import annotations
 
+import mcp.types
 from fastmcp import FastMCP
 from fastmcp.server.auth import AuthProvider
 from starlette.requests import Request
@@ -39,6 +40,8 @@ def build_server(
     instructions: str,
     *,
     auth: AuthProvider | None = None,
+    icons: list[mcp.types.Icon] | None = None,
+    website_url: str | None = None,
 ) -> FastMCP:
     """Build a FastMCP server with all standard middleware and routes.
 
@@ -49,8 +52,23 @@ def build_server(
             :func:`law_tools_core.mcp.auth.make_auth` to opt into the
             new auth stack (Google OAuth + static token). Leave ``None``
             for stdio / legacy static-bearer behavior.
+        icons: Optional icons surfaced in ``serverInfo.icons`` on the
+            MCP ``initialize`` response (MCP spec 2025-11-25). Hosted
+            UIs like Claude.ai's connector panel display these on the
+            server card; absent, they fall back to a generic placeholder.
+            Prefer absolute HTTPS URLs over data URIs so the asset can
+            be updated without bumping the wire payload.
+        website_url: Optional public site URL surfaced in
+            ``serverInfo.websiteUrl`` (same spec revision). Used by
+            client UIs to deep-link from the server card.
     """
-    mcp = FastMCP(name, instructions=instructions, auth=auth)
+    mcp = FastMCP(
+        name,
+        instructions=instructions,
+        auth=auth,
+        icons=icons,
+        website_url=website_url,
+    )
 
     # Outer-to-inner: FriendlyErrors wraps ToolCallLogger so the JSONL
     # log sees the raw exception type, not the remapped ToolError.
