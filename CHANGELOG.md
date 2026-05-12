@@ -5,6 +5,18 @@ All notable changes to `patent-client-agents` are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.8.1] — 2026-05-12
+
+### Added
+
+- `law_tools_core.mcp.server_factory.build_server()` now accepts optional
+  `icons` and `website_url` kwargs, forwarded to FastMCP and surfaced in
+  the MCP `initialize` response's `serverInfo.icons` / `serverInfo.websiteUrl`
+  (MCP spec 2025-11-25). Hosted UIs like Claude.ai's connector card / CoWork
+  use these to render the server card; without them the card falls back to
+  a generic placeholder. Defaults stay `None`, so existing stdio / library
+  callers are unaffected.
+
 ## [0.8.0] — 2026-05-12
 
 ### Added
