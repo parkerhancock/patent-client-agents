@@ -29,6 +29,12 @@ import vcr
 os.environ.setdefault("JPO_API_USERNAME", "test_jpo_user")
 os.environ.setdefault("JPO_API_PASSWORD", "test_jpo_pass")
 
+# TSDR client (uspto_tsdr) requires USPTO_TSDR_API_KEY at construction
+# time. Cassettes scrub the real key on record (the conftest filter
+# rewrites uspto-api-key to REDACTED on both record and replay), so the
+# placeholder here serves replay-only — it never reaches the network.
+os.environ.setdefault("USPTO_TSDR_API_KEY", "test_tsdr_key")
+
 USPTO_LIVE_ENV_VAR = "USPTO_LIVE_TESTS"
 JPO_LIVE_ENV_VAR = "JPO_LIVE_TESTS"
 
