@@ -1,15 +1,16 @@
 ---
 name: ip_research
 description: |
-  IP data research tools for patents, applications, and related USPTO/EPO/JPO records. Use when:
+  IP data research tools for patents, trademarks, and related USPTO/EPO/JPO records. Use when:
   - Looking up patents by number (US, EP, WO, JP, etc.)
   - Searching patent databases by keyword, assignee, inventor, or classification
   - Getting patent family, citation, or legal status information
   - Checking USPTO application status, file wrapper, PTAB proceedings, or petitions
   - Searching office action rejections and cited references
-  - Looking up MPEP sections or CPC classifications
-  - Finding patent assignments or ownership history
+  - Looking up MPEP or TMEP sections, or CPC classifications
+  - Finding patent or trademark assignments / ownership history
   - Fetching USPTO publication full-text data
+  - Checking U.S. trademark status, prosecution documents, or mark images (TSDR)
 ---
 
 # IP Research
@@ -31,9 +32,12 @@ managers. All shared scaffolding (HTTP, cache, retry, errors) lives in
 | USPTO assignments | `uspto_assignments.AssignmentCenterClient` | [uspto_assignments.md](references/uspto_assignments.md) |
 | USPTO publications (PPUBS) full-text | `uspto_publications.PublicSearchClient` | [uspto_publications.md](references/uspto_publications.md) |
 | USPTO office actions | `patent_client_agents.uspto_office_actions` | [uspto_office_actions.md](references/uspto_office_actions.md) |
+| USPTO trademark status / documents (TSDR) | `uspto_tsdr.TsdrClient` | [uspto_tsdr.md](references/uspto_tsdr.md) |
+| USPTO trademark assignments | `uspto_trademark_assignments.TrademarkAssignmentClient` | [uspto_trademark_assignments.md](references/uspto_trademark_assignments.md) |
 | EPO bibliographic / family / legal events | `epo_ops.EpoOpsClient` | [epo_ops.md](references/epo_ops.md) |
 | JPO application status | `jpo.JpoClient` | [jpo.md](references/jpo.md) |
 | MPEP search + section lookup | `patent_client_agents.mpep` | [mpep.md](references/mpep.md) |
+| TMEP search + section lookup | `patent_client_agents.tmep` | [tmep.md](references/tmep.md) |
 | CPC lookup / search / mapping | `patent_client_agents.cpc` | [cpc.md](references/cpc.md) |
 
 ## Quick Examples
@@ -75,6 +79,25 @@ from patent_client_agents.mpep import SearchInput, search
 response = await search(SearchInput(query="obviousness rejection", per_page=10))
 for hit in response.hits:
     print(hit.section_id, hit.title)
+```
+
+### Check trademark status (TSDR)
+
+```python
+from patent_client_agents.uspto_tsdr import TsdrClient
+
+async with TsdrClient() as client:  # Requires USPTO_TSDR_API_KEY
+    status = await client.get_status("97123456")
+    print(status.mark_text, status.status_description)
+```
+
+### Look up TMEP section
+
+```python
+from patent_client_agents.tmep import get_section
+
+section = await get_section("1207.01(a)")
+print(section.title)
 ```
 
 ### Resolve a CPC symbol
@@ -132,12 +155,14 @@ details, debug info. Read this when concise error messages aren't enough.
 | Variable | Required For |
 |----------|--------------|
 | `USPTO_ODP_API_KEY` | All USPTO ODP clients (Applications, PTAB, BulkData, Petitions, Office Actions) |
+| `USPTO_TSDR_API_KEY` | TSDR (trademark status / documents / images) |
 | `EPO_OPS_API_KEY` | EPO OPS, CPC (CPC uses EPO OPS under the hood) |
 | `EPO_OPS_API_SECRET` | EPO OPS, CPC |
 | `JPO_API_USERNAME` | JPO client |
 | `JPO_API_PASSWORD` | JPO client |
 
-USPTO Publications, USPTO Assignments, Google Patents, and MPEP require no API key.
+USPTO Publications, USPTO Assignments, USPTO Trademark Assignments,
+Google Patents, MPEP, and TMEP require no API key.
 
 ## Cache Management
 
@@ -160,10 +185,13 @@ if applicable.
 - [uspto_petitions.md](references/uspto_petitions.md) — Petition decisions
 - [uspto_bulkdata.md](references/uspto_bulkdata.md) — Bulk data product catalog
 - [uspto_office_actions.md](references/uspto_office_actions.md) — Office action analytics
-- [uspto_assignments.md](references/uspto_assignments.md) — Assignment/ownership lookup
+- [uspto_assignments.md](references/uspto_assignments.md) — Patent assignment/ownership lookup
 - [uspto_publications.md](references/uspto_publications.md) — PPUBS full-text
+- [uspto_tsdr.md](references/uspto_tsdr.md) — Trademark Status & Document Retrieval
+- [uspto_trademark_assignments.md](references/uspto_trademark_assignments.md) — Trademark ownership transfers
 - [epo_ops.md](references/epo_ops.md) — EPO bibliographic, family, legal status
 - [jpo.md](references/jpo.md) — Japan Patent Office
 - [mpep.md](references/mpep.md) — Manual of Patent Examining Procedure
+- [tmep.md](references/tmep.md) — Trademark Manual of Examining Procedure
 - [cpc.md](references/cpc.md) — CPC classification lookup
 - [cache.md](references/cache.md) — Cache management

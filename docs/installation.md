@@ -7,7 +7,7 @@ matches how you're going to use it:
 |---|---|---|
 | Python library | Import `patent_client_agents` in your own async code | [§1](#1-python-library) |
 | Python library + MCP runtime | Run an MCP server locally or in-process | [§2](#2-python-library-with-mcp-runtime) |
-| Claude Code plugin (from GitHub marketplace) | Add 63 patent MCP tools to Claude Code with two slash commands | [§3](#3-claude-code-plugin-from-github) |
+| Claude Code plugin (from GitHub marketplace) | Add 49 patent + trademark MCP tools to Claude Code with two slash commands (61 with JPO env vars) | [§3](#3-claude-code-plugin-from-github) |
 | Claude Code skill (standalone, library-user) | Install the `ip_research` skill into `~/.claude/skills/` for Python-library guidance | [§4](#4-claude-code-skill-standalone-library-user) |
 | Stdio MCP (any MCP client) | Connect Claude Desktop / Cursor / Cline / CoWork-local / custom client | [§5](#5-stdio-mcp-from-any-mcp-client) |
 | Remote MCP (hosted or self-hosted) | Point an MCP client at a deployed HTTPS endpoint | [§6](#6-remote-mcp) |
@@ -48,11 +48,12 @@ these unlock the full surface:
 | Variable | Source | How to get |
 |---|---|---|
 | `USPTO_ODP_API_KEY` | USPTO Open Data Portal | [developer.uspto.gov](https://developer.uspto.gov/) (free) |
+| `USPTO_TSDR_API_KEY` | USPTO Trademark Status & Document Retrieval | [account.uspto.gov/api-manager/](https://account.uspto.gov/api-manager/) (free MyUSPTO account; pick the TSDR API product) |
 | `EPO_OPS_API_KEY`, `EPO_OPS_API_SECRET` | EPO Open Patent Services | [developers.epo.org](https://developers.epo.org/) (free, 4 GB/week) |
 | `JPO_API_USERNAME`, `JPO_API_PASSWORD` | JPO J-PlatPat | Contact JPO (restricted). **Python library only — JPO MCP tools are not available.** |
 
-Google Patents, USPTO Publications, USPTO Assignments, and MPEP need
-no credentials.
+Google Patents, USPTO Publications, USPTO Assignments, USPTO Trademark
+Assignments, MPEP, and TMEP need no credentials.
 
 ### Verify
 
@@ -92,7 +93,7 @@ of the base dependencies.
 
 Two new console scripts on your PATH:
 
-- `patent-client-agents-mcp` — launches the stdio MCP server (63 patent tools)
+- `patent-client-agents-mcp` — launches the stdio MCP server (49 patent + trademark tools by default; 61 with JPO env vars)
 - `patent-client-agents-skill-install` — symlinks the `ip_research` skill into `~/.claude/skills/` (see §4)
 
 Plus the Python-importable MCP surface:
@@ -118,8 +119,9 @@ This is exactly how `law-tools` consumes `patent-client-agents` in the monorepo.
 
 ## 3. Claude Code plugin (from GitHub)
 
-Use this when you use Claude Code and want the 63 patent MCP tools
-dropped in with two slash commands.
+Use this when you use Claude Code and want the 49 patent + trademark MCP
+tools dropped in with two slash commands (61 if you also have JPO
+credentials in the environment).
 
 The plugin ships **only the MCP server** — no skill, no agents, no
 hooks. The MCP tools' in-schema descriptions already carry the
@@ -220,13 +222,15 @@ export them in your shell profile:
 
 ```bash
 export USPTO_ODP_API_KEY="…"
+export USPTO_TSDR_API_KEY="…"
 export EPO_OPS_API_KEY="…"
 export EPO_OPS_API_SECRET="…"
 ```
 
 Restart Claude Code so the new env reaches the MCP subprocess. Without
-keys, Google Patents / PPUBS / MPEP / Assignments still work; USPTO
-ODP and EPO tools will return auth errors.
+keys, Google Patents / PPUBS / Assignments / Trademark Assignments /
+MPEP / TMEP still work; USPTO ODP, USPTO TSDR, and EPO tools will return
+auth errors.
 
 ### Verify
 
@@ -236,8 +240,8 @@ List MCP tools from within a Claude Code session:
 /mcp
 ```
 
-Expect `patent-client-agents` with 63 tools. Or call one directly by
-asking something patent-research-ish:
+Expect `patent-client-agents` with 49 tools (61 if JPO env vars are
+set). Or call one directly by asking something patent-research-ish:
 
 > "What's in MPEP section 2106?"
 
@@ -309,7 +313,7 @@ replaces with the symlink.
 
 |  | Plugin (§3) | Standalone skill (§4) |
 |---|---|---|
-| What it installs | MCP server only (63 tools) | Skill markdown for Python library usage |
+| What it installs | MCP server only (49 tools; 61 with JPO env vars) | Skill markdown for Python library usage |
 | Command | `/plugin install patent-client-agents@patent-client-agents` | `patent-client-agents-skill-install` |
 | Source | Cloned marketplace repo | pip-installed package (symlinked) |
 | Updates | `/plugin marketplace update` + `/reload-plugins` | Reinstall `patent-client-agents` to pick up new skill content |
@@ -417,8 +421,8 @@ async def main():
 asyncio.run(main())
 ```
 
-Expect **63 tools** and title starting `2106 ... Patent Subject Matter
-Eligibility`.
+Expect **49 tools** (or **61** with JPO env vars set) and title starting
+`2106 ... Patent Subject Matter Eligibility`.
 
 ### Troubleshooting
 

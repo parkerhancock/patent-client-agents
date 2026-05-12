@@ -66,18 +66,19 @@ EPO OPS, and JPO all consume credentials from env (see each connector's
 
 ## Tools exposed
 
-The server mounts `ip_mcp`, which composes 7 sub-servers:
+The server mounts `ip_mcp`, which composes 8 sub-servers:
 
 | Sub-server | Tools | Prefixes on signed-URL downloads |
 |---|---:|---|
-| `Patents` (Google Patents) | 9 | `patents/` |
-| `USPTO` (ODP — applications, PTAB, petitions, bulk) | 25 | `uspto/applications/`, `ptab/documents/` |
-| `Publications` (PPUBS) | 4 | `publications/` |
-| `International` (EPO OPS, CPC) | 12 | `epo/patents/` |
-| `OfficeActions` (USPTO OA rejections/citations/text) | 4 | — |
-| `PatentAssignments` (USPTO Assignment Center) | 7 | — |
+| `Patents` (Google Patents) | 7 | `patents/` |
+| `USPTO` (ODP — applications, PTAB, petitions, bulk) | 18 | `uspto/applications/`, `ptab/documents/` |
+| `Publications` (PPUBS) | 3 | `publications/` |
+| `International` (EPO OPS, CPC; + 12 JPO when `JPO_API_USERNAME` and `JPO_API_PASSWORD` are set) | 10 / 22 | `epo/patents/`, `jpo/documents/` |
+| `OfficeActions` (USPTO OA rejections/citations/text) | 1 | — |
+| `PatentAssignments` (USPTO Assignment Center) | 1 | — |
+| `Trademarks` (TSDR — needs `USPTO_TSDR_API_KEY`; TMEP; Trademark Assignments) | 7 | — |
 | `MPEP` | 2 | — |
-| **Total** | **63** | |
+| **Total** | **49 / 61** | |
 
 Downloadable artifacts mint HMAC-signed URLs when
 `LAW_TOOLS_CORE_PUBLIC_URL` is set (remote HTTP deployment). In stdio
@@ -102,7 +103,8 @@ async def main():
 asyncio.run(main())
 ```
 
-Expect 63 tools and the title `2106 … Patent Subject Matter Eligibility`.
+Expect 49 tools (61 with `JPO_API_USERNAME`/`JPO_API_PASSWORD` set) and
+the title `2106 … Patent Subject Matter Eligibility`.
 
 ## Not installed?
 

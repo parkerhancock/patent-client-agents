@@ -2,7 +2,7 @@
   <img src="docs/_static/patent_client_agents_logo.png" alt="patent-client-agents" width="600">
 </p>
 
-**Give your AI agent access to the world's patent data.**
+**Give your AI agent access to the world's patent and trademark data.**
 
 [![CI](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml/badge.svg)](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml)
 [![Docs](https://img.shields.io/badge/docs-docs.patentclient.com-008cc8.svg)](https://docs.patentclient.com/)
@@ -49,7 +49,7 @@ See [docs.patentclient.com/installation](https://docs.patentclient.com/installat
 
 ## What You Can Do
 
-Ask Claude to research patents in natural language:
+Ask Claude to research patents and trademarks in natural language:
 
 > "Find [Company]'s recent battery patents and summarize the key innovations"
 
@@ -59,7 +59,11 @@ Ask Claude to research patents in natural language:
 
 > "Track the legal status of EP3456789 across all designated states"
 
-`patent-client-agents` connects Claude Code to USPTO, EPO, and Google Patents, giving your agent the ability to search, analyze, and report on intellectual property worldwide. JPO clients ship in the Python library; JPO MCP tools are not available.
+> "What's the current status of trademark serial 97123456, and who filed it?"
+
+> "Search the TMEP for guidance on Section 2(d) likelihood-of-confusion refusals"
+
+`patent-client-agents` connects Claude Code to USPTO (patents and trademarks), EPO, and Google Patents, giving your agent the ability to search, analyze, and report on intellectual property worldwide. JPO clients ship in the Python library; JPO MCP tools are not available.
 
 ## Coverage
 
@@ -70,9 +74,12 @@ Ask Claude to research patents in natural language:
 | **USPTO Publications** | Patent Public Search (PPUBS) full-text search and document retrieval |
 | **USPTO Assignments** | Patent ownership transfers and reel/frame lookups |
 | **USPTO Office Actions** | Rejection analytics, cited references, full-text OA retrieval |
+| **USPTO TSDR** | Trademark Status & Document Retrieval — status, docs, mark images |
+| **USPTO Trademark Assignments** | Trademark ownership transfers (Assignment Center) |
 | **EPO OPS** | European patents, Inpadoc families, legal events, EP Register |
 | **JPO** | Japanese patents, examination history, PCT national phase — *Python library only; JPO MCP tools are not available* |
 | **MPEP** | Manual of Patent Examining Procedure search and section lookup |
+| **TMEP** | Trademark Manual of Examining Procedure search and section lookup |
 | **CPC** | Classification hierarchy lookup, search, and CPC/IPC mapping |
 
 All sources include automatic caching (hishel + SQLite with WAL), rate limiting,
@@ -88,8 +95,9 @@ For Claude Code users — run these inside a Claude Code session:
 /reload-plugins
 ```
 
-Three slash commands (not shell). You get all 63 patent MCP tools
-exposed to the agent. Prereq: [uv](https://docs.astral.sh/uv/) on
+Three slash commands (not shell). You get 49 patent + trademark MCP
+tools exposed to the agent by default (61 with JPO credentials in
+the environment). Prereq: [uv](https://docs.astral.sh/uv/) on
 PATH — the MCP server runs under `uvx` so you don't `pip install`
 anything yourself.
 
@@ -102,12 +110,13 @@ how you'll use it.
 
 | Variable | Source | Required | How to get |
 |----------|--------|----------|------------|
-| `USPTO_ODP_API_KEY` | USPTO ODP | Most USPTO tools | [developer.uspto.gov](https://developer.uspto.gov/) (free) |
+| `USPTO_ODP_API_KEY` | USPTO ODP | Most USPTO patent tools | [developer.uspto.gov](https://developer.uspto.gov/) (free) |
+| `USPTO_TSDR_API_KEY` | USPTO TSDR | All TSDR trademark tools | [account.uspto.gov/api-manager/](https://account.uspto.gov/api-manager/) (free MyUSPTO account) |
 | `EPO_OPS_API_KEY`, `EPO_OPS_API_SECRET` | EPO OPS | All EPO tools | [developers.epo.org](https://developers.epo.org/) (free) |
 | `JPO_API_USERNAME`, `JPO_API_PASSWORD` | JPO | Python library only — JPO MCP tools are not available | [j-platpat.inpit.go.jp](https://www.j-platpat.inpit.go.jp/) |
 
 **No API key needed:** Google Patents, USPTO Publications (PPUBS), USPTO
-Assignments, MPEP, CPC.
+Assignments, USPTO Trademark Assignments, MPEP, TMEP, CPC.
 
 ## Quickstart — Python library
 
@@ -184,6 +193,50 @@ async with GooglePatentsClient() as client:
 </details>
 
 <details>
+<summary><strong>USPTO TSDR (Trademark Status & Document Retrieval)</strong></summary>
+
+| Feature | Description |
+|---------|-------------|
+| Status lookup | Mark text, filing/registration dates, current status |
+| Prosecution documents | Office actions, responses, registration certificate |
+| Mark images | Drawing JPGs by serial number |
+| Batch status | Check many serial numbers in one call |
+| Last-update timestamp | When the case record was last modified |
+
+Requires `USPTO_TSDR_API_KEY`. Peak hours (5am–10pm ET): 60 req/min
+general, 4 req/min PDF/ZIP. Off-peak doubles those limits.
+
+</details>
+
+<details>
+<summary><strong>USPTO Trademark Assignments</strong></summary>
+
+| Feature | Description |
+|---------|-------------|
+| Search by assignee | Company/person acquiring rights |
+| Search by assignor | Company/person transferring rights |
+| Search by serial / registration | Chain of title for a mark |
+| Search by reel/frame | Direct recordation lookup |
+| Pagination | `search_all` iterates the full result set |
+
+No API key required.
+
+</details>
+
+<details>
+<summary><strong>TMEP (Trademark Manual of Examining Procedure)</strong></summary>
+
+| Feature | Description |
+|---------|-------------|
+| Section lookup | Get any TMEP section by number (e.g. `1207.01(a)`) |
+| Full-text search | Keyword search with relevance ranking |
+| Version listing | Available TMEP editions |
+
+No API key required.
+
+</details>
+
+<details>
 <summary><strong>EPO OPS</strong></summary>
 
 | Feature | Description |
@@ -245,10 +298,12 @@ async with GooglePatentsClient() as client:
 │              (Natural language → API calls)                  │
 ├─────────────────────────────────────────────────────────────┤
 │              patent_client_agents Python library             │
-│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌──────────┐   │
-│  │ USPTO  │ │  EPO   │ │ Google │ │  MPEP  │ │   JPO*   │   │
-│  │  ODP   │ │  OPS   │ │Patents │ │  CPC   │ │ (lib)    │   │
-│  └────────┘ └────────┘ └────────┘ └────────┘ └──────────┘   │
+│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌────────┐ │
+│  │  USPTO  │ │  USPTO  │ │   EPO   │ │ Google  │ │  JPO*  │ │
+│  │ patents │ │  marks  │ │   OPS   │ │ Patents │ │ (lib)  │ │
+│  │ ODP+    │ │TSDR+TM  │ │  + CPC  │ │  +MPEP  │ │        │ │
+│  │ PPUBS   │ │assigns  │ │         │ │  +TMEP  │ │        │ │
+│  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └────────┘ │
 └─────────────────────────────────────────────────────────────┘
 * JPO is library-only — JPO MCP tools are not available.
 ```
@@ -259,7 +314,7 @@ async with GooglePatentsClient() as client:
 git clone https://github.com/parkerhancock/patent-client-agents.git
 cd patent-client-agents
 uv sync --group dev
-uv run pytest                       # 767 tests, replays VCR cassettes
+uv run pytest                       # 1,056 tests, replays VCR cassettes
 uv run ruff check . && uv run ruff format .
 ```
 

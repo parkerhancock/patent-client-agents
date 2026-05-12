@@ -1,8 +1,10 @@
 # MCP Tools by Intent
 
-54 read-only MCP tools, grouped by what an agent wants to do. Cross-source
-fused tools are marked ⭑ and have dedicated pages in this folder; the rest
-are single-source wrappers documented by their backend in
+Read-only MCP tools, grouped by what an agent wants to do. 49 tools register
+by default; 12 JPO tools register additionally when `JPO_API_USERNAME` and
+`JPO_API_PASSWORD` are both set in the environment (61 total when JPO is on).
+Cross-source fused tools are marked ⭑ and have dedicated pages in this folder;
+the rest are single-source wrappers documented by their backend in
 [../sources/](../sources/).
 
 ## Search
@@ -21,6 +23,8 @@ Find records matching a query.
 | `search_petitions` | ODP petitions | Query string |
 | `search_bulk_datasets` | ODP bulk products | Query string |
 | `search_mpep` | MPEP | Keyword |
+| `search_tmep` | TMEP | Keyword |
+| `search_trademark_assignments` | Trademark Assignment Center. `query` + `by` (assignee, assignor, serial_number, registration_number, reel_frame). | Plain value per axis |
 | `search_cpc` | CPC classifications | Keyword |
 
 ## Lookup (single record by identifier)
@@ -38,6 +42,11 @@ Find records matching a query.
 | `get_petition` | ODP petition decision |
 | `get_bulk_dataset` | ODP bulk product detail |
 | `get_mpep_section` | MPEP section by number |
+| `get_tmep_section` | TMEP section by number (e.g. `1207.01(a)`) |
+| `get_trademark_status` | TSDR — current status, mark text, filing/registration dates (requires `USPTO_TSDR_API_KEY`) |
+| `get_trademark_documents` | TSDR — prosecution documents list (requires `USPTO_TSDR_API_KEY`) |
+| `get_trademark_last_update` | TSDR — last-modified timestamp for a case (requires `USPTO_TSDR_API_KEY`) |
+| `batch_trademark_status` | TSDR — status for a JSON array of serial numbers (requires `USPTO_TSDR_API_KEY`) |
 | `get_jpo_progress(application_number, ip_type)` | JPO full prosecution status (patent/design/trademark) |
 | `get_jpo_progress_simple(application_number, ip_type)` | JPO simplified status (no priority/family) |
 | `get_jpo_registration_info(application_number, ip_type)` | JPO granted-rights record |
