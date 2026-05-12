@@ -19,9 +19,9 @@ from patent_client_agents.epo_ops.client import client_from_env
 # JPO tools are env-gated: they only appear in tool/list when JPO_API_USERNAME
 # and JPO_API_PASSWORD are both set. The hosted public deploy at
 # mcp.patentclient.com intentionally does not carry these keys per JPO TOS;
-# private deploys (e.g. law-tools on bb-law-mcp-prod) flip them on by adding
-# the secrets to their Cloud Run env. The download fetcher uses
-# register_source_if_configured for the same reason — defense in depth.
+# private deploys flip them on by adding the secrets to their Cloud Run env.
+# The download fetcher uses register_source_if_configured for the same
+# reason — defense in depth.
 _JPO_REQUIRED_ENV: list[str] = ["JPO_API_USERNAME", "JPO_API_PASSWORD"]
 
 international_mcp = FastMCP("International")

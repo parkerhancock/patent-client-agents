@@ -1,0 +1,84 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"6204399","searchBy":"registrationNumber"},{"property":"100","searchBy":"rowsNeeded"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '118'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/trademark/exportTradeMarkData
+  response:
+    body:
+      string: '[{"searchCriteria": [{"property": "6204399", "searchBy": "registration_number"},
+        {"property": "100", "searchBy": "rowsNeeded"}], "data": [{"reelNumber": 9006,
+        "frameNumber": "0093", "assignorExecutionDate": "07/22/2025", "correspondentName":
+        "PHILLIP A. ROSENBERG ", "domesticRepresentative": "", "assignors": [{"assignorName":
+        "RAC7 GAMES ULC", "executionDate": "07/22/2025"}], "assignees": ["APPLE INC."],
+        "noOfProperties": 1, "properties": [{"sequenceNumber": 1, "serialNumber":
+        88874668, "currentOwner": "RAC7 GAMES INC.", "mark": "SNEAKY SASQUATCH", "applicationFilingDate":
+        "04/16/2020", "internationalRegistrationNumber": null, "registrationDate":
+        "11/24/2020", "registrationNumber": 6204399, "registrantName": null}]}, {"reelNumber":
+        9053, "frameNumber": "0654", "assignorExecutionDate": "07/02/2025", "correspondentName":
+        "Phillip A. Rosenberg ", "domesticRepresentative": "", "assignors": [{"assignorName":
+        "RAC7 GAMES INC.", "executionDate": "07/02/2025"}], "assignees": ["1536345
+        B.C. UNLIMITED LIABILITY COMPANY"], "noOfProperties": 1, "properties": [{"sequenceNumber":
+        1, "serialNumber": 88874668, "currentOwner": "RAC7 GAMES INC.", "mark": "SNEAKY
+        SASQUATCH", "applicationFilingDate": "04/16/2020", "internationalRegistrationNumber":
+        null, "registrationDate": "11/24/2020", "registrationNumber": 6204399, "registrantName":
+        null}]}, {"reelNumber": 9006, "frameNumber": "0088", "assignorExecutionDate":
+        "07/02/2025", "correspondentName": "PHILLIP A. ROSENBERG ", "domesticRepresentative":
+        "", "assignors": [{"assignorName": "1536345 B.C. UNLIMITED LIABILITY COMPANY",
+        "executionDate": "07/02/2025"}], "assignees": ["RAC7 GAMES ULC"], "noOfProperties":
+        1, "properties": [{"sequenceNumber": 1, "serialNumber": 88874668, "currentOwner":
+        "RAC7 GAMES INC.", "mark": "SNEAKY SASQUATCH", "applicationFilingDate": "04/16/2020",
+        "internationalRegistrationNumber": null, "registrationDate": "11/24/2020",
+        "registrationNumber": 6204399, "registrantName": null}]}]}]'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=exportPublicData_20260112_221849.json
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jan 2026 22:18:49 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 6a1e43c7e8523dfb0378fa16c9f34f70.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - Y8tqOkh0s1QN6Rys6SNIi1zWXp1XYBBg-5lIsB8-Euiwz4Do4gaDQg==
+      X-Amz-Cf-Pop:
+      - SFO5-P3
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

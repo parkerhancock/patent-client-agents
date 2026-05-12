@@ -37,8 +37,8 @@ mcp = build_server(
     name="patent-client-agents",
     instructions=(
         "Patent and IP data connectors: USPTO (ODP, PPUBS, Assignments, "
-        "Office Actions, PTAB, Petitions, Bulk Data), EPO OPS, Google "
-        "Patents, CPC, and the MPEP."
+        "Office Actions, PTAB, Petitions, Bulk Data, TSDR, Trademark "
+        "Assignments), EPO OPS, Google Patents, CPC, MPEP, and TMEP."
     ),
     auth=make_auth(
         base_url=_HOSTED_BASE_URL,

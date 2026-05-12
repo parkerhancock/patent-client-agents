@@ -1,0 +1,82 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"Pixelmator","searchBy":"assignorName"},{"property":"5","searchBy":"rowsNeeded"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '113'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/trademark/exportTradeMarkData
+  response:
+    body:
+      string: '[{"searchCriteria": [{"property": "Pixelmator", "searchBy": "assignor_name"},
+        {"property": "5", "searchBy": "rowsNeeded"}], "data": [{"reelNumber": 8875,
+        "frameNumber": "0285", "assignorExecutionDate": "05/15/2025", "correspondentName":
+        "MRS. KIMBERLY ECKHART ", "domesticRepresentative": "", "assignors": [{"assignorName":
+        "UAB \"PIXELMATOR TEAM\"", "executionDate": "05/15/2025"}], "assignees": ["APPLE
+        INC."], "noOfProperties": 5, "properties": [{"sequenceNumber": 1, "serialNumber":
+        88665501, "currentOwner": "APPLE INC.", "mark": "PIXELMATOR PRO", "applicationFilingDate":
+        "10/23/2019", "internationalRegistrationNumber": null, "registrationDate":
+        "06/09/2020", "registrationNumber": 6073758, "registrantName": null}, {"sequenceNumber":
+        2, "serialNumber": 88665547, "currentOwner": "APPLE INC.", "mark": "PIXELMATOR
+        PHOTO", "applicationFilingDate": "10/23/2019", "internationalRegistrationNumber":
+        null, "registrationDate": "06/09/2020", "registrationNumber": 6073761, "registrantName":
+        null}, {"sequenceNumber": 3, "serialNumber": 88665566, "currentOwner": "APPLE
+        INC.", "mark": "PIXELMATOR", "applicationFilingDate": "10/23/2019", "internationalRegistrationNumber":
+        null, "registrationDate": "06/02/2020", "registrationNumber": 6067994, "registrantName":
+        null}, {"sequenceNumber": 4, "serialNumber": 77773217, "currentOwner": "APPLE
+        INC.", "mark": "PIXELMATOR", "applicationFilingDate": "07/02/2009", "internationalRegistrationNumber":
+        null, "registrationDate": "02/09/2010", "registrationNumber": 3746611, "registrantName":
+        null}, {"sequenceNumber": 5, "serialNumber": 97828233, "currentOwner": "APPLE
+        INC.", "mark": "PHOTOMATOR", "applicationFilingDate": "03/08/2023", "internationalRegistrationNumber":
+        null, "registrationDate": "06/04/2024", "registrationNumber": 7410238, "registrantName":
+        null}]}]}]'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=exportPublicData_20260112_221849.json
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jan 2026 22:18:49 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 a2eb08d83c216edb471d369425d11dd8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - u2dekdJaE7FT6-7AA93vYIuXH9J16HzQ62ObITNXtr8EIjqq80BiLA==
+      X-Amz-Cf-Pop:
+      - SFO5-P3
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

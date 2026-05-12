@@ -1,0 +1,336 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      host:
+      - tsdrapi.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+      uspto-api-key:
+      - REDACTED
+    method: GET
+    uri: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/info
+  response:
+    body:
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<ns2:TrademarkTransaction
+        xmlns:ns1=\"http://www.wipo.int/standards/XMLSchema/ST96/Common\" xmlns:ns2=\"http://www.wipo.int/standards/XMLSchema/ST96/Trademark\"
+        xmlns:ns3=\"urn:us:gov:doc:uspto:trademark\">\n    <ns2:TrademarkTransactionBody>\n
+        \       <ns2:TransactionContentBag>\n            <ns1:TransactionCategory>National
+        trademark registration</ns1:TransactionCategory>\n            <ns2:TransactionData>\n
+        \               <ns2:TrademarkBag>\n                    <ns2:Trademark>\n
+        \                       <ns1:ApplicationNumber>\n                            <ns1:IPOfficeCode>US</ns1:IPOfficeCode>\n
+        \                           <ns1:ApplicationNumberText>78787878</ns1:ApplicationNumberText>\n
+        \                       </ns1:ApplicationNumber>\n                        <ns2:ApplicationDate>2006-01-09-05:00</ns2:ApplicationDate>\n
+        \                       <ns1:FilingPlace>US</ns1:FilingPlace>\n                        <ns2:MarkCurrentStatusCode>602</ns2:MarkCurrentStatusCode>\n
+        \                       <ns2:MarkCurrentStatusDate>2007-09-25</ns2:MarkCurrentStatusDate>\n
+        \                       <ns2:AssociatedMarkBag>\n                            <ns2:AssociatedMark>\n<ns2:AssociationCategory>International
+        application or registration</ns2:AssociationCategory>\n<ns1:ApplicationNumber>\n
+        \   <ns1:IPOfficeCode>WO</ns1:IPOfficeCode>\n    <ns1:ApplicationNumberText>A3141234</ns1:ApplicationNumberText>\n</ns1:ApplicationNumber>\n<ns2:InternationalApplicationNumber>\n
+        \   <ns1:ApplicationNumberText> </ns1:ApplicationNumberText>\n</ns2:InternationalApplicationNumber>\n
+        \                           </ns2:AssociatedMark>\n                        </ns2:AssociatedMarkBag>\n
+        \                       <ns2:MarkCategory>Collective membership mark</ns2:MarkCategory>\n
+        \                       <ns2:MarkRepresentation>\n                            <ns2:MarkReproduction>\n<ns2:WordMarkSpecification>\n
+        \   <ns2:MarkVerbalElementText>MAC MEMPHIS ATHLETIC CAMPUS</ns2:MarkVerbalElementText>\n
+        \   <ns2:MarkSignificantVerbalElementText>MAC MEMPHIS ATHLETIC CAMPUS</ns2:MarkSignificantVerbalElementText>\n
+        \   <ns2:MarkTranslationText ns1:sequenceNumber=\"1\"/>\n    <ns2:MarkTransliteration/>\n
+        \   <ns2:MarkStandardCharacterIndicator>false</ns2:MarkStandardCharacterIndicator>\n</ns2:WordMarkSpecification>\n<ns2:MarkImageBag>\n
+        \   <ns2:MarkImage>\n        <ns1:FileName>78787878.jpg</ns1:FileName>\n        <ns2:MarkImageColourClaimedText
+        ns1:sequenceNumber=\"1\">The applicant claims color as a feature of the mark,
+        namely, BLACK, BLUE, WHITE, AND RED.</ns2:MarkImageColourClaimedText>\n        <ns2:MarkImageColourPartClaimedText
+        ns1:sequenceNumber=\"1\"/>\n        <ns2:NationalDesignSearchCodeBag>\n            <ns2:NationalDesignSearchCode>\n
+        \               <ns2:NationalDesignCode>01.01.09</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Stars, two</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Two stars</ns2:NationalDesignCodeDescriptionText>\n
+        \           </ns2:NationalDesignSearchCode>\n            <ns2:NationalDesignSearchCode>\n
+        \               <ns2:NationalDesignCode>01.01.13</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Stars - multiple stars
+        with five points</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \           <ns2:NationalDesignSearchCode>\n                <ns2:NationalDesignCode>01.15.03</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Fire (flames), other
+        than emanating from objects, words, numbers, fireplaces or candles</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Flames, other than
+        flames emanating from objects, words, numbers, fireplaces or candles</ns2:NationalDesignCodeDescriptionText>\n
+        \           </ns2:NationalDesignSearchCode>\n            <ns2:NationalDesignSearchCode>\n
+        \               <ns2:NationalDesignCode>01.15.15</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Fire (flames), emanating
+        from objects, words or numbers</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \           <ns2:NationalDesignSearchCode>\n                <ns2:NationalDesignCode>13.01.02</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Blow torch</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Propane torches</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Torches</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Welding torch</ns2:NationalDesignCodeDescriptionText>\n
+        \           </ns2:NationalDesignSearchCode>\n            <ns2:NationalDesignSearchCode>\n
+        \               <ns2:NationalDesignCode>24.09.07</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Advertising, banners</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Banners</ns2:NationalDesignCodeDescriptionText>\n
+        \           </ns2:NationalDesignSearchCode>\n            <ns2:NationalDesignSearchCode>\n
+        \               <ns2:NationalDesignCode>26.01.17</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Circles, two concentric</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Concentric circles,
+        two</ns2:NationalDesignCodeDescriptionText>\n                <ns2:NationalDesignCodeDescriptionText>Two
+        concentric circles</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \           <ns2:NationalDesignSearchCode>\n                <ns2:NationalDesignCode>26.01.21</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Circles that are totally
+        or partially shaded.</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \           <ns2:NationalDesignSearchCode>\n                <ns2:NationalDesignCode>26.03.13</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Ovals, exactly two
+        (not concentric)</ns2:NationalDesignCodeDescriptionText>\n                <ns2:NationalDesignCodeDescriptionText>Two
+        ovals</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \           <ns2:NationalDesignSearchCode>\n                <ns2:NationalDesignCode>26.03.17</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Concentric ovals</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Concentric ovals and
+        ovals within ovals</ns2:NationalDesignCodeDescriptionText>\n                <ns2:NationalDesignCodeDescriptionText>Ovals
+        within ovals</ns2:NationalDesignCodeDescriptionText>\n                <ns2:NationalDesignCodeDescriptionText>Ovals,
+        concentric</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \           <ns2:NationalDesignSearchCode>\n                <ns2:NationalDesignCode>26.03.21</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Ovals that are completely
+        or partially shaded</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \           <ns2:NationalDesignSearchCode>\n                <ns2:NationalDesignCode>26.17.01</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Bands, straight</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Bars, straight</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Lines, straight</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Straight line(s), band(s)
+        or bar(s)</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \           <ns2:NationalDesignSearchCode>\n                <ns2:NationalDesignCode>26.17.05</ns2:NationalDesignCode>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Bands, horizontal</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Bars, horizontal</ns2:NationalDesignCodeDescriptionText>\n
+        \               <ns2:NationalDesignCodeDescriptionText>Horizontal line(s),
+        band(s) or bar(s)</ns2:NationalDesignCodeDescriptionText>\n                <ns2:NationalDesignCodeDescriptionText>Lines,
+        horizontal</ns2:NationalDesignCodeDescriptionText>\n            </ns2:NationalDesignSearchCode>\n
+        \       </ns2:NationalDesignSearchCodeBag>\n        <ns1:ColourIndicator>true</ns1:ColourIndicator>\n
+        \   </ns2:MarkImage>\n</ns2:MarkImageBag>\n<ns2:MarkSoundBag>\n    <ns2:MarkSound/>\n</ns2:MarkSoundBag>\n
+        \                           </ns2:MarkReproduction>\n                            <ns2:MarkDescriptionBag>\n<ns2:MarkDescriptionText>The
+        mark consists of A large vertically-oriented medium blue oval outlined with
+        thin white and black oval lines with the letters \"MAC\" in the center written
+        horizontally in black with white and black outlines on the letters with a
+        thin white horizontal stripe above and below the letters with a small black
+        circle intersecting the top of the large oval containing a white torch with
+        three red flames flowing upward with a three-quarter medium blue semi-circle
+        on each side of the torch and with a black ribbon crossing the bottom of the
+        large oval with a medium blue pinstripe at the top and bottom of the ribbon
+        with the words \"MEMPHIS ATHLETIC CAMPUS\" centered in the ribbon with a single
+        white star on each end of the text and light blue outlines on the ribbon on
+        the ends outside the boundary of the large oval.</ns2:MarkDescriptionText>\n<ns2:NationalMarkDescription>\n
+        \   <ns2:MarkFeatureCode>3</ns2:MarkFeatureCode>\n</ns2:NationalMarkDescription>\n
+        \                           </ns2:MarkDescriptionBag>\n                        </ns2:MarkRepresentation>\n
+        \                       <ns2:MarkDisclaimerBag>\n                            <ns2:MarkDisclaimerText
+        ns1:sequenceNumber=\"1\">\"MEMPHIS ATHLETIC CAMPUS\"</ns2:MarkDisclaimerText>\n
+        \                       </ns2:MarkDisclaimerBag>\n                        <ns2:GoodsServicesBag>\n
+        \                           <ns2:GoodsServices>\n<ns2:GoodsServicesClassificationBag>\n
+        \   <ns2:GoodsServicesClassification>\n        <ns2:ClassificationKindCode>Primary</ns2:ClassificationKindCode>\n
+        \       <ns2:NationalClassNumber>200</ns2:NationalClassNumber>\n    </ns2:GoodsServicesClassification>\n
+        \   <ns2:GoodsServicesClassification>\n        <ns2:ClassificationKindCode>Nice</ns2:ClassificationKindCode>\n
+        \       <ns2:ClassNumber>200</ns2:ClassNumber>\n    </ns2:GoodsServicesClassification>\n
+        \   <ns2:GoodsServicesClassification>\n        <ns2:ClassificationKindCode>Domestic</ns2:ClassificationKindCode>\n
+        \       <ns2:NationalClassNumber>200</ns2:NationalClassNumber>\n    </ns2:GoodsServicesClassification>\n</ns2:GoodsServicesClassificationBag>\n<ns2:NationalFilingBasis>\n
+        \   <ns2:CurrentBasis>\n        <ns2:BasisForeignApplicationIndicator>false</ns2:BasisForeignApplicationIndicator>\n
+        \       <ns2:BasisForeignRegistrationIndicator>false</ns2:BasisForeignRegistrationIndicator>\n
+        \       <ns2:BasisUseIndicator>false</ns2:BasisUseIndicator>\n        <ns2:BasisIntentToUseIndicator>false</ns2:BasisIntentToUseIndicator>\n
+        \       <ns2:NoBasisIndicator>false</ns2:NoBasisIndicator>\n    </ns2:CurrentBasis>\n</ns2:NationalFilingBasis>\n<ns2:ClassDescriptionBag>\n
+        \   <ns2:ClassDescription>\n        <ns2:ClassNumber>200</ns2:ClassNumber>\n
+        \       <ns2:GoodsServicesDescriptionText ns1:sequenceNumber=\"1\">2020</ns2:GoodsServicesDescriptionText>\n
+        \   </ns2:ClassDescription>\n    <ns2:ClassDescription>\n        <ns2:NationalStatusBag>\n
+        \           <ns2:NationalStatus>\n                <ns2:NationalStatusCategory>National
+        class status</ns2:NationalStatusCategory>\n                <ns2:NationalStatusCode>6</ns2:NationalStatusCode>\n
+        \               <ns2:NationalStatusExternalDescriptionText>ACTIVE</ns2:NationalStatusExternalDescriptionText>\n
+        \           </ns2:NationalStatus>\n        </ns2:NationalStatusBag>\n    </ns2:ClassDescription>\n</ns2:ClassDescriptionBag>\n
+        \                           </ns2:GoodsServices>\n                        </ns2:GoodsServicesBag>\n
+        \                       <ns2:PublicationBag>\n                            <ns2:Publication>\n<ns1:PublicationIdentifier>USPTO
+        Official Gazette for Trademarks (OG)</ns1:PublicationIdentifier>\n                            </ns2:Publication>\n
+        \                       </ns2:PublicationBag>\n                        <ns2:ApplicantBag>\n
+        \                           <ns2:Applicant ns1:sequenceNumber=\"10\">\n<ns1:LegalEntityName>CORPORATION</ns1:LegalEntityName>\n<ns1:NationalLegalEntityCode>3</ns1:NationalLegalEntityCode>\n<ns1:IncorporationCountryCode>US</ns1:IncorporationCountryCode>\n<ns1:IncorporationState>TN</ns1:IncorporationState>\n<ns1:Version>\n
+        \   <ns1:CommentText ns1:sequenceNumber=\"1\">ORIGINAL APPLICANT</ns1:CommentText>\n</ns1:Version>\n<ns1:Contact>\n
+        \   <ns1:Name>\n        <ns1:EntityName>MEMPHIS ATHLETIC     CAMPUS FOUNDATION</ns1:EntityName>\n
+        \   </ns1:Name>\n    <ns1:PostalAddressBag>\n        <ns1:PostalAddress>\n
+        \           <ns1:PostalStructuredAddress>\n                <ns1:AddressLineText
+        ns1:sequenceNumber=\"1\">xxx</ns1:AddressLineText>\n                <ns1:AddressLineText
+        ns1:sequenceNumber=\"2\">xxx</ns1:AddressLineText>\n                <ns1:CityName>xxxxx</ns1:CityName>\n
+        \               <ns1:GeographicRegionName>ILLINOIS</ns1:GeographicRegionName>\n
+        \               <ns1:CountryCode>US</ns1:CountryCode>\n                <ns1:PostalCode>11111</ns1:PostalCode>\n
+        \           </ns1:PostalStructuredAddress>\n        </ns1:PostalAddress>\n
+        \   </ns1:PostalAddressBag>\n</ns1:Contact>\n                            </ns2:Applicant>\n
+        \                       </ns2:ApplicantBag>\n                        <ns2:NationalRepresentative>\n
+        \                           <ns1:Contact>\n<ns1:Name>\n    <ns1:PersonName/>\n</ns1:Name>\n<ns1:FaxNumberBag>\n
+        \   <ns1:FaxNumber/>\n</ns1:FaxNumberBag>\n<ns1:EmailAddressBag/>\n<ns1:PhoneNumberBag>\n
+        \   <ns1:PhoneNumber/>\n</ns1:PhoneNumberBag>\n                            </ns1:Contact>\n
+        \                       </ns2:NationalRepresentative>\n                        <ns2:NationalCorrespondent>\n
+        \                           <ns1:Contact>\n<ns1:Name>\n    <ns1:PersonName>\n
+        \       <ns1:PersonFullName>MICHAEL T EVANGELISTI</ns1:PersonFullName>\n    </ns1:PersonName>\n</ns1:Name>\n<ns1:PostalAddressBag>\n
+        \   <ns1:PostalAddress>\n        <ns1:PostalStructuredAddress>\n            <ns1:AddressLineText
+        ns1:sequenceNumber=\"1\">1100 Ridgeway Loop Rd, STE 400</ns1:AddressLineText>\n
+        \           <ns1:AddressLineText ns1:sequenceNumber=\"2\"/>\n            <ns1:CityName>memphis</ns1:CityName>\n
+        \           <ns1:GeographicRegionName>TENNESSEE</ns1:GeographicRegionName>\n
+        \           <ns1:CountryCode>US</ns1:CountryCode>\n            <ns1:PostalCode>38120-4058</ns1:PostalCode>\n
+        \       </ns1:PostalStructuredAddress>\n    </ns1:PostalAddress>\n</ns1:PostalAddressBag>\n<ns1:FaxNumberBag>\n
+        \   <ns1:FaxNumber>(901) 259-7180</ns1:FaxNumber>\n</ns1:FaxNumberBag>\n<ns1:EmailAddressBag>\n
+        \   <ns1:EmailAddressText ns1:emailAddressPurposeCategory=\"Main\">mte@farris-law.com</ns1:EmailAddressText>\n</ns1:EmailAddressBag>\n<ns1:PhoneNumberBag>\n
+        \   <ns1:PhoneNumber>(901) 259-7120</ns1:PhoneNumber>\n</ns1:PhoneNumberBag>\n
+        \                           </ns1:Contact>\n                        </ns2:NationalCorrespondent>\n
+        \                       <ns2:RecordAttorney>\n                            <ns2:DocketText>123456789123</ns2:DocketText>\n
+        \                           <ns1:CommentText ns1:sequenceNumber=\"1\">Attorney
+        of Record</ns1:CommentText>\n                        </ns2:RecordAttorney>\n
+        \                       <ns1:StaffBag>\n                            <ns1:Staff>\n<ns1:OfficialTitleText>Examining
+        Attorney</ns1:OfficialTitleText>\n<ns1:StaffName>null</ns1:StaffName>\n                            </ns1:Staff>\n
+        \                       </ns1:StaffBag>\n                        <ns2:MarkEventBag>\n
+        \                           <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>MAILI</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>PAPER
+        RECEIVED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>16</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2020-10-14</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>CHANI</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>APPLICANT/CORRESPONDENCE
+        CHANGES (NON-RESPONSIVE) ENTERED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>15</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2014-02-24</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>COARI</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>TEAS
+        CHANGE OF OWNER ADDRESS RECEIVED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>14</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2014-02-24</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>MAB2O</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>ABANDONMENT
+        NOTICE MAILED - FAILURE TO RESPOND</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>13</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2007-09-25</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>ABN2O</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>ABANDONMENT
+        - FAILURE TO RESPOND OR LATE RESPONSE</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>12</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2007-09-25</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>GNRTO</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>NON-FINAL
+        ACTION E-MAILED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>11</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2007-02-06</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>CNRTR</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>NON-FINAL
+        ACTION  WRITTEN</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>10</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2007-02-06</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>TEMEI</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>TEAS/EMAIL
+        CORRESPONDENCE ENTERED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>9</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-12-27</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>CRFAI</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>CORRESPONDENCE
+        RECEIVED IN LAW OFFICE</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>8</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-12-27</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>TROAI</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>TEAS
+        RESPONSE TO OFFICE ACTION RECEIVED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>7</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-12-27</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>DOCKD</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>ASSIGNED
+        TO EXAMINER</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>6</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-10-10</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>GNRTF</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>NON-FINAL
+        ACTION E-MAILED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>5</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-06-27</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>CNRTR</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>NON-FINAL
+        ACTION  WRITTEN</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>4</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-06-27</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>DOCKD</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>ASSIGNED
+        TO EXAMINER</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>3</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-06-27</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>MDSCO</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>NOTICE
+        OF DESIGN SEARCH CODE MAILED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>2</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-01-13</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                            <ns2:MarkEvent>\n<ns2:MarkEventCategory>National
+        prosecution history entry</ns2:MarkEventCategory>\n<ns2:NationalMarkEvent>\n
+        \   <ns2:MarkEventCode>NWAPI</ns2:MarkEventCode>\n    <ns2:MarkEventDescriptionText>NEW
+        APPLICATION ENTERED</ns2:MarkEventDescriptionText>\n    <ns2:MarkEventEntryNumber>1</ns2:MarkEventEntryNumber>\n
+        \   <ns2:MarkEventAdditionalText>0</ns2:MarkEventAdditionalText>\n</ns2:NationalMarkEvent>\n<ns2:MarkEventDate>2006-01-12</ns2:MarkEventDate>\n
+        \                           </ns2:MarkEvent>\n                        </ns2:MarkEventBag>\n
+        \                       <ns2:AssignmentBag>\n                            <ns2:NationalAssignmentTotalQuantity>0</ns2:NationalAssignmentTotalQuantity>\n
+        \                       </ns2:AssignmentBag>\n                        <ns2:LegalProceedingsBag>\n
+        \                           <ns2:LegalProceedings>\n<ns3:TMAProceedingBag/>\n
+        \                           </ns2:LegalProceedings>\n                        </ns2:LegalProceedingsBag>\n
+        \                       <ns2:NationalTrademarkInformation>\n                            <ns2:RegisterCategory>Primary</ns2:RegisterCategory>\n
+        \                           <ns2:ApplicationAbandonedDate>2007-08-07</ns2:ApplicationAbandonedDate>\n
+        \                           <ns2:AmendedPrincipalRegisterIndicator>false</ns2:AmendedPrincipalRegisterIndicator>\n
+        \                           <ns2:AmendedSupplementalRegisterIndicator>false</ns2:AmendedSupplementalRegisterIndicator>\n
+        \                           <ns2:MarkCurrentStatusExternalDescriptionText>Abandoned
+        because the applicant failed to respond or filed a late response to an Office
+        action.  To view all documents in this file, click on the Trademark Document
+        Retrieval link at the top of this page.</ns2:MarkCurrentStatusExternalDescriptionText>\n
+        \                           <ns2:PreviouslyRegisteredMarkPublicationIndicator>false</ns2:PreviouslyRegisteredMarkPublicationIndicator>\n
+        \                           <ns2:ConcurrentUseStatementText>test</ns2:ConcurrentUseStatementText>\n
+        \                           <ns2:FiledAsPlusApplicationIndicator>true</ns2:FiledAsPlusApplicationIndicator>\n
+        \                           <ns2:CurrentlyPlusApplicationIndicator>true</ns2:CurrentlyPlusApplicationIndicator>\n
+        \                           <ns2:RegistrationChangeIndicator>false</ns2:RegistrationChangeIndicator>\n
+        \                           <ns2:CertificateCorrectingRegistrationText></ns2:CertificateCorrectingRegistrationText>\n
+        \                           <ns2:MaintenanceFilingBag/>\n                            <ns2:NationalCaseLocation>\n<ns2:LawOfficeAssignedText>LAW
+        OFFICE 107</ns2:LawOfficeAssignedText>\n<ns2:LawOfficeAssignedDescriptionCode>L70</ns2:LawOfficeAssignedDescriptionCode>\n<ns2:CurrentLocationText>PETITIONS
+        OFFICE</ns2:CurrentLocationText>\n<ns2:CurrentLocationCode>450</ns2:CurrentLocationCode>\n<ns2:CurrentLocationDate>2023-08-30-04:00</ns2:CurrentLocationDate>\n<ns2:ChargeToLocation>900
+        - FILE REPOSITORY (FRANCONIA)</ns2:ChargeToLocation>\n<ns2:PhysicalLocation>900</ns2:PhysicalLocation>\n<ns2:PhysicalLocationDate>2006-04-29-04:00</ns2:PhysicalLocationDate>\n
+        \                           </ns2:NationalCaseLocation>\n                            <ns3:FiledAsReducedFeeApplicationIndicator>false</ns3:FiledAsReducedFeeApplicationIndicator>\n
+        \                           <ns3:CurrentlyReducedFeeApplicationIndicator>false</ns3:CurrentlyReducedFeeApplicationIndicator>\n
+        \                       </ns2:NationalTrademarkInformation>\n                        <ns2:NationalGoodsServices>\n
+        \                           <ns2:ActiveClassTotalQuantity>1</ns2:ActiveClassTotalQuantity>\n
+        \                           <ns2:NationalClassTotalQuantity>1</ns2:NationalClassTotalQuantity>\n
+        \                       </ns2:NationalGoodsServices>\n                        <ns2:NationalFilingBasis>\n
+        \                           <ns2:FilingBasis>\n<ns2:BasisForeignApplicationIndicator>false</ns2:BasisForeignApplicationIndicator>\n<ns2:BasisForeignRegistrationIndicator>false</ns2:BasisForeignRegistrationIndicator>\n<ns2:BasisUseIndicator>true</ns2:BasisUseIndicator>\n<ns2:BasisIntentToUseIndicator>false</ns2:BasisIntentToUseIndicator>\n<ns2:NoBasisIndicator>false</ns2:NoBasisIndicator>\n<ns2:BasisInternationalRegistrationIndicator>false</ns2:BasisInternationalRegistrationIndicator>\n
+        \                           </ns2:FilingBasis>\n                            <ns2:CurrentBasis>\n<ns2:BasisForeignApplicationIndicator>false</ns2:BasisForeignApplicationIndicator>\n<ns2:BasisForeignRegistrationIndicator>false</ns2:BasisForeignRegistrationIndicator>\n<ns2:BasisUseIndicator>true</ns2:BasisUseIndicator>\n<ns2:BasisIntentToUseIndicator>false</ns2:BasisIntentToUseIndicator>\n<ns2:NoBasisIndicator>false</ns2:NoBasisIndicator>\n<ns2:BasisInternationalRegistrationIndicator>false</ns2:BasisInternationalRegistrationIndicator>\n
+        \                           </ns2:CurrentBasis>\n                            <ns2:AmendedBasis>\n<ns2:BasisForeignApplicationIndicator>false</ns2:BasisForeignApplicationIndicator>\n<ns2:BasisForeignRegistrationIndicator>false</ns2:BasisForeignRegistrationIndicator>\n<ns2:BasisUseIndicator>false</ns2:BasisUseIndicator>\n<ns2:BasisIntentToUseIndicator>false</ns2:BasisIntentToUseIndicator>\n
+        \                           </ns2:AmendedBasis>\n                        </ns2:NationalFilingBasis>\n
+        \                   </ns2:Trademark>\n                </ns2:TrademarkBag>\n
+        \           </ns2:TransactionData>\n        </ns2:TransactionContentBag>\n
+        \   </ns2:TrademarkTransactionBody>\n</ns2:TrademarkTransaction>\n"
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Security-Policy:
+      - frame-ancestors https://*.uspto.gov:*
+      Content-Type:
+      - application/xml;charset=UTF-8
+      Date:
+      - Thu, 23 Apr 2026 21:05:00 GMT
+      Expires:
+      - '0'
+      Keep-Alive:
+      - timeout=60
+      Pragma:
+      - no-cache
+      Set-Cookie:
+      - REDACTED
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '29691'
+      x-l7-reqid:
+      - 0000019cbd02edab-9d4199b
+    status:
+      code: 200
+      message: ''
+version: 1

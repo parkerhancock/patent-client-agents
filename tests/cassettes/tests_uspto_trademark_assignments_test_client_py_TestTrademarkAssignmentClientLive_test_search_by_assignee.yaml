@@ -1,0 +1,131 @@
+interactions:
+- request:
+    body: '{"searchCriteria":[{"property":"Apple","searchBy":"assigneeName"},{"property":"5","searchBy":"rowsNeeded"}]}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      accept-language:
+      - en-US,en;q=0.9
+      connection:
+      - keep-alive
+      content-length:
+      - '108'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/127.0.0.0 Safari/537.36
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/trademark/exportTradeMarkData
+  response:
+    body:
+      string: '[{"searchCriteria": [{"property": "Apple", "searchBy": "assignee_name"},
+        {"property": "5", "searchBy": "rowsNeeded"}], "data": [{"reelNumber": 4237,
+        "frameNumber": "0961", "assignorExecutionDate": "06/17/2010", "correspondentName":
+        "THOMAS R. LA PERLE", "domesticRepresentative": "", "assignors": [{"assignorName":
+        "INNOVATE MEDIA GROUP, LLC", "executionDate": "06/17/2010"}], "assignees":
+        ["APPLE INC."], "noOfProperties": 2, "properties": [{"sequenceNumber": 1,
+        "serialNumber": 77313277, "currentOwner": "APPLE INC.", "mark": "IADS", "applicationFilingDate":
+        "10/25/2007", "internationalRegistrationNumber": null, "registrationDate":
+        "10/14/2008", "registrationNumber": 3515183, "registrantName": null}, {"sequenceNumber":
+        2, "serialNumber": 77313325, "currentOwner": "APPLE INC.", "mark": "IADS",
+        "applicationFilingDate": "10/25/2007", "internationalRegistrationNumber":
+        null, "registrationDate": "10/14/2008", "registrationNumber": 3515184, "registrantName":
+        null}]}, {"reelNumber": 4193, "frameNumber": "0899", "assignorExecutionDate":
+        "04/27/2010", "correspondentName": "JOHN DONALD", "domesticRepresentative":
+        "", "assignors": [{"assignorName": "FINGERWORKS, INC.", "executionDate": "04/27/2010"}],
+        "assignees": ["APPLE INC."], "noOfProperties": 3, "properties": [{"sequenceNumber":
+        1, "serialNumber": 76517917, "currentOwner": "APPLE INC.", "mark": "MACNTOUCH",
+        "applicationFilingDate": "05/29/2003", "internationalRegistrationNumber":
+        null, "registrationDate": "01/18/2005", "registrationNumber": 2919593, "registrantName":
+        null}, {"sequenceNumber": 2, "serialNumber": 78073082, "currentOwner": "APPLE
+        INC.", "mark": "IGESTURE", "applicationFilingDate": "07/10/2001", "internationalRegistrationNumber":
+        null, "registrationDate": "06/22/2004", "registrationNumber": 2856683, "registrantName":
+        null}, {"sequenceNumber": 3, "serialNumber": 78495531, "currentOwner": "APPLE
+        INC.", "mark": "XWINDER", "applicationFilingDate": "10/06/2004", "internationalRegistrationNumber":
+        null, "registrationDate": "11/29/2005", "registrationNumber": 3020669, "registrantName":
+        null}]}, {"reelNumber": 3801, "frameNumber": "0685", "assignorExecutionDate":
+        "12/21/2007", "correspondentName": "THOMAS R. LA PERLE", "domesticRepresentative":
+        "", "assignors": [{"assignorName": "SNAPP NETWORKS, INC.", "executionDate":
+        "12/21/2007"}], "assignees": ["APPLE INC."], "noOfProperties": 5, "properties":
+        [{"sequenceNumber": 1, "serialNumber": 77281622, "currentOwner": "APPLE INC.",
+        "mark": "ME.COM", "applicationFilingDate": "09/17/2007", "internationalRegistrationNumber":
+        null, "registrationDate": "09/01/2009", "registrationNumber": 3674984, "registrantName":
+        null}, {"sequenceNumber": 2, "serialNumber": 77281620, "currentOwner": "APPLE
+        INC.", "mark": "ME.COM", "applicationFilingDate": "09/17/2007", "internationalRegistrationNumber":
+        null, "registrationDate": "11/16/2010", "registrationNumber": 3875273, "registrantName":
+        null}, {"sequenceNumber": 3, "serialNumber": 77281619, "currentOwner": "APPLE
+        INC.", "mark": "ME.COM", "applicationFilingDate": "09/17/2007", "internationalRegistrationNumber":
+        null, "registrationDate": "09/01/2009", "registrationNumber": 3674983, "registrantName":
+        null}, {"sequenceNumber": 4, "serialNumber": 77281618, "currentOwner": "APPLE
+        INC.", "mark": "ME.COM", "applicationFilingDate": "09/17/2007", "internationalRegistrationNumber":
+        null, "registrationDate": "09/01/2009", "registrationNumber": 3674982, "registrantName":
+        null}, {"sequenceNumber": 5, "serialNumber": 78742541, "currentOwner": "APPLE
+        INC.", "mark": "ME.COM", "applicationFilingDate": "10/28/2005", "internationalRegistrationNumber":
+        null, "registrationDate": "11/06/2007", "registrationNumber": 3329164, "registrantName":
+        null}]}, {"reelNumber": 3521, "frameNumber": "0342", "assignorExecutionDate":
+        "03/20/2007", "correspondentName": "SUSAN SMITH - KENYON & KENYON LLP", "domesticRepresentative":
+        "", "assignors": [{"assignorName": "MILLER, MARK STEVEN", "executionDate":
+        "03/20/2007"}], "assignees": ["APPLE INC."], "noOfProperties": 2, "properties":
+        [{"sequenceNumber": 1, "serialNumber": 76034718, "currentOwner": "APPLE INC.",
+        "mark": "IMIX", "applicationFilingDate": "04/25/2000", "internationalRegistrationNumber":
+        null, "registrationDate": "11/20/2001", "registrationNumber": 2509163, "registrantName":
+        null}, {"sequenceNumber": 2, "serialNumber": 76034717, "currentOwner": "APPLE
+        INC.", "mark": "IMIX", "applicationFilingDate": "04/25/2000", "internationalRegistrationNumber":
+        null, "registrationDate": "11/20/2001", "registrationNumber": 2509162, "registrantName":
+        null}]}, {"reelNumber": 3516, "frameNumber": "0288", "assignorExecutionDate":
+        "02/02/2007", "correspondentName": "THOMAS R. LA PERLE", "domesticRepresentative":
+        "", "assignors": [{"assignorName": "APPLE CORPS LIMITED", "executionDate":
+        "02/02/2007"}], "assignees": ["APPLE INC."], "noOfProperties": 4, "properties":
+        [{"sequenceNumber": 1, "serialNumber": 74693839, "currentOwner": "APPLE INC.",
+        "mark": "APPLE", "applicationFilingDate": "06/26/1995", "internationalRegistrationNumber":
+        null, "registrationDate": "02/04/1997", "registrationNumber": 2034964, "registrantName":
+        null}, {"sequenceNumber": 2, "serialNumber": 74693680, "currentOwner": "APPLE
+        INC.", "mark": null, "applicationFilingDate": "06/26/1995", "internationalRegistrationNumber":
+        null, "registrationDate": "03/04/1997", "registrationNumber": 2041653, "registrantName":
+        null}, {"sequenceNumber": 3, "serialNumber": 74693838, "currentOwner": "APPLE
+        INC.", "mark": null, "applicationFilingDate": "06/26/1995", "internationalRegistrationNumber":
+        null, "registrationDate": "02/11/1997", "registrationNumber": 2036537, "registrantName":
+        null}, {"sequenceNumber": 4, "serialNumber": 78430282, "currentOwner": "APPLE
+        INC.", "mark": null, "applicationFilingDate": "06/04/2004", "internationalRegistrationNumber":
+        null, "registrationDate": "01/23/2007", "registrationNumber": 3200354, "registrantName":
+        null}]}]}]'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment;filename=exportPublicData_20260112_221848.json
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jan 2026 22:18:48 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Server:
+      - gunicorn
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 bd4908b727d11c5689b30e718c258778.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - CuWiZoxKYaK2-FAGhbHggI25k88ohHUtyQIqdcFezpwBu6z9S5AA0A==
+      X-Amz-Cf-Pop:
+      - SFO5-P3
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

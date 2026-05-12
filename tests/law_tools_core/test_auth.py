@@ -60,9 +60,9 @@ class TestMakeAuth:
         monkeypatch.setenv("LAW_TOOLS_CORE_GOOGLE_OAUTH_CLIENT_ID", "gid")
         monkeypatch.setenv("LAW_TOOLS_CORE_GOOGLE_OAUTH_CLIENT_SECRET", "gsecret")
         result = make_auth(
-            base_url="https://mcp.bakerbotts.tools/law_tools",
-            issuer_url="https://mcp.bakerbotts.tools",
-            allowed_email_domains=["bakerbotts.com"],
+            base_url="https://mcp.example.com/law_tools",
+            issuer_url="https://mcp.example.com",
+            allowed_email_domains=["example.com"],
         )
         assert isinstance(result, MultiAuth)
 
@@ -209,8 +209,8 @@ class TestDefaultRedirectUris:
 
 class TestGoogleHdHint:
     def test_single_domain_sets_hd(self) -> None:
-        hint = auth_module._google_hd_hint(["bakerbotts.com"])
-        assert hint == {"hd": "bakerbotts.com"}
+        hint = auth_module._google_hd_hint(["example.com"])
+        assert hint == {"hd": "example.com"}
 
     def test_no_domain_returns_none(self) -> None:
         assert auth_module._google_hd_hint([]) is None
@@ -249,7 +249,7 @@ class TestDomainGate:
         self, call_next: AsyncMock, context: MagicMock, monkeypatch: pytest.MonkeyPatch
     ) -> None:
         monkeypatch.setattr(auth_module, "get_access_token", lambda: None)
-        gate = make_domain_gate_middleware(["bakerbotts.com"])
+        gate = make_domain_gate_middleware(["example.com"])
         result = await gate.on_call_tool(context, call_next)
         assert result == "tool-result"
 
@@ -262,7 +262,7 @@ class TestDomainGate:
             "get_access_token",
             lambda: MagicMock(claims={}),
         )
-        gate = make_domain_gate_middleware(["bakerbotts.com"])
+        gate = make_domain_gate_middleware(["example.com"])
         result = await gate.on_call_tool(context, call_next)
         assert result == "tool-result"
 
@@ -272,9 +272,9 @@ class TestDomainGate:
         monkeypatch.setattr(
             auth_module,
             "get_access_token",
-            lambda: MagicMock(claims={"email": "user@bakerbotts.com", "email_verified": False}),
+            lambda: MagicMock(claims={"email": "user@example.com", "email_verified": False}),
         )
-        gate = make_domain_gate_middleware(["bakerbotts.com"])
+        gate = make_domain_gate_middleware(["example.com"])
         with pytest.raises(ToolError, match="not verified"):
             await gate.on_call_tool(context, call_next)
         call_next.assert_not_awaited()
@@ -287,8 +287,8 @@ class TestDomainGate:
             "get_access_token",
             lambda: MagicMock(claims={"email": "user@gmail.com", "email_verified": True}),
         )
-        gate = make_domain_gate_middleware(["bakerbotts.com"])
-        with pytest.raises(ToolError, match="bakerbotts.com"):
+        gate = make_domain_gate_middleware(["example.com"])
+        with pytest.raises(ToolError, match="example.com"):
             await gate.on_call_tool(context, call_next)
 
     async def test_accepts_allowed_domain(
@@ -297,9 +297,9 @@ class TestDomainGate:
         monkeypatch.setattr(
             auth_module,
             "get_access_token",
-            lambda: MagicMock(claims={"email": "user@bakerbotts.com", "email_verified": True}),
+            lambda: MagicMock(claims={"email": "user@example.com", "email_verified": True}),
         )
-        gate = make_domain_gate_middleware(["bakerbotts.com"])
+        gate = make_domain_gate_middleware(["example.com"])
         result = await gate.on_call_tool(context, call_next)
         assert result == "tool-result"
 
@@ -309,9 +309,9 @@ class TestDomainGate:
         monkeypatch.setattr(
             auth_module,
             "get_access_token",
-            lambda: MagicMock(claims={"email": "User@BakerBotts.COM", "email_verified": True}),
+            lambda: MagicMock(claims={"email": "User@Example.COM", "email_verified": True}),
         )
-        gate = make_domain_gate_middleware(["bakerbotts.com"])
+        gate = make_domain_gate_middleware(["example.com"])
         result = await gate.on_call_tool(context, call_next)
         assert result == "tool-result"
 

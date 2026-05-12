@@ -64,12 +64,12 @@ def make_auth(
 
     Args:
         base_url: Public URL of this server including any mount path
-            (e.g. ``https://mcp.bakerbotts.tools/law_tools``). Google's
+            (e.g. ``https://mcp.example.com/law_tools``). Google's
             redirect lands at ``{base_url}/auth/callback``. When ``None``,
             falls back to ``LAW_TOOLS_CORE_PUBLIC_URL`` (or the legacy
             ``LAW_TOOLS_PUBLIC_URL``) via :mod:`._env`.
         issuer_url: Root-level URL used as the OAuth issuer
-            (e.g. ``https://mcp.bakerbotts.tools``). MUST be the host
+            (e.g. ``https://mcp.example.com``). MUST be the host
             root, not a mount path — MCP clients probe
             ``/.well-known/oauth-authorization-server`` at this URL.
             When ``None``, falls back to ``LAW_TOOLS_CORE_ISSUER_URL``,
@@ -144,7 +144,7 @@ def make_domain_gate_middleware(allowed_domains: Sequence[str]) -> Middleware:
     ``allowed_domains``.
 
     Args:
-        allowed_domains: Bare domains (e.g. ``["bakerbotts.com"]``). An
+        allowed_domains: Bare domains (e.g. ``["example.com"]``). An
             empty list disables the gate entirely; the middleware
             becomes a no-op.
 

@@ -212,6 +212,7 @@ def _create_vcr() -> vcr.VCR:
         filter_headers=[
             ("authorization", "REDACTED"),
             ("x-api-key", "REDACTED"),
+            ("uspto-api-key", "REDACTED"),
             ("cookie", "REDACTED"),
             ("set-cookie", "REDACTED"),
         ],

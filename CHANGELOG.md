@@ -5,6 +5,51 @@ All notable changes to `patent-client-agents` are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.8.0] — 2026-05-12
+
+### Added
+
+- **Trademark tooling — Phase 1.** Three new modules, ported from
+  `law-tools`, bring trademark prosecution data alongside the existing
+  patent surface:
+  - `patent_client_agents.tmep` — Trademark Manual of Examining
+    Procedure (search + section lookup). No auth.
+  - `patent_client_agents.uspto_tsdr` — Trademark Status & Document
+    Retrieval. Requires `USPTO_TSDR_API_KEY` (request via the USPTO
+    API Key Manager at `account.uspto.gov/api-manager/` with a free
+    MyUSPTO account).
+  - `patent_client_agents.uspto_trademark_assignments` — USPTO
+    Assignment Center trademark recordations. No auth.
+- **Seven new MCP tools** mounted on `ip_mcp` via the new
+  `trademarks_mcp` sub-server: `search_tmep`, `get_tmep_section`,
+  `get_trademark_status`, `get_trademark_documents`,
+  `batch_trademark_status`, `get_trademark_last_update`, and
+  `search_trademark_assignments`.
+
+### Security
+
+- `tests/conftest.py` now also redacts the `uspto-api-key` request
+  header (used by TSDR; not a match for the existing `x-api-key`
+  filter). The 4 TSDR cassettes shipped with this release were
+  recorded under the upstream `law-tools` filter set and have the
+  API key already scrubbed; this guards future re-records in this
+  repo from leaking the key.
+- Scrubbed F5 BIG-IP session-affinity `Set-Cookie` values from
+  the 4 TSDR cassettes. These are server-side load-balancer cookies
+  (not credentials), but no reason to keep them on disk.
+
+### Fixed
+
+- `__version__` in `src/patent_client_agents/__init__.py` had
+  drifted to `0.5.1` while `pyproject.toml` advanced to 0.7.0.
+  Both now read `0.8.0`.
+
+### Skipped from the law-tools port
+
+- `uspto_tmsearch` (TESS) — depends on Playwright + a periodic
+  AWS WAF token refresh job. Deferred to Phase 2; tracked
+  separately.
+
 ## [0.7.0] — 2026-05-07
 
 ### Added
@@ -29,9 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   `register_source_if_configured` for the same env gate (defense
   in depth).
 - The hosted public deploy at `mcp.patentclient.com` intentionally
-  does NOT carry these keys per JPO TOS; private deploys (e.g.
-  law-tools on `bb-law-mcp-prod`) flip JPO on by mounting the
-  secrets in their own Cloud Run env.
+  does NOT carry these keys per JPO TOS; private deploys flip JPO
+  on by mounting the secrets in their own Cloud Run env.
 
 ### Changed
 

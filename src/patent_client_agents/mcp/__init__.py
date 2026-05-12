@@ -24,14 +24,16 @@ from .tools.office_actions import office_actions_mcp
 from .tools.patent_assignments import patent_assignments_mcp
 from .tools.patents import patents_mcp
 from .tools.publications import publications_mcp
+from .tools.trademarks import trademarks_mcp
 from .tools.uspto import uspto_mcp
 
 ip_mcp = FastMCP(
     "patent-client-agents",
     instructions=(
         "Patent and IP data connectors: USPTO (ODP, PPUBS, Assignments, "
-        "Office Actions, PTAB, Petitions, Bulk Data), EPO OPS, Google "
-        "Patents, CPC, and the MPEP. ~40 read-only tools, grouped by intent."
+        "Office Actions, PTAB, Petitions, Bulk Data, TSDR, Trademark "
+        "Assignments), EPO OPS, Google Patents, CPC, MPEP, and TMEP. "
+        "~40 read-only tools, grouped by intent."
     ),
 )
 
@@ -41,6 +43,7 @@ ip_mcp.mount(publications_mcp)
 ip_mcp.mount(international_mcp)
 ip_mcp.mount(office_actions_mcp)
 ip_mcp.mount(patent_assignments_mcp)
+ip_mcp.mount(trademarks_mcp)
 ip_mcp.mount(mpep_mcp)
 
 __all__ = ["ip_mcp"]

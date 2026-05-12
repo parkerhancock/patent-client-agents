@@ -54,7 +54,7 @@ The download fetcher is gated symmetrically as defense in depth.
 | Deployment | JPO secrets? | JPO tools advertised? |
 |---|---|---|
 | `mcp.patentclient.com` (public) | No (per JPO TOS) | No |
-| law-tools on `bb-law-mcp-prod` | Yes (Cloud Run secret_env_map) | Yes |
+| Private Cloud Run deploy with secrets mounted | Yes (Cloud Run secret_env_map) | Yes |
 | Local stdio plugin | Yes if user has them in env | Yes if both set |
 
 **JPO TOS notes.** JPO requires individual or corporate registration
