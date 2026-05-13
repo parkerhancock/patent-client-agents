@@ -117,8 +117,7 @@ class TsdrClient(BaseAsyncClient):
             context="TSDR status",
             timeout=timeout,
         )
-        # Parse ST96 XML response
-        return self._parse_status_xml(response.text, serial_number)
+        return self._parse_status_json(response.json(), serial_number)
 
     async def get_status_json(
         self,
@@ -325,174 +324,121 @@ class TsdrClient(BaseAsyncClient):
         )
         return response.json()
 
-    def _parse_status_xml(self, xml_content: str, serial_number: str) -> TrademarkStatus:
-        """Parse ST96 XML response into TrademarkStatus model."""
-        try:
-            root = ET.fromstring(xml_content)
-            ns = {
-                "c": "http://www.wipo.int/standards/XMLSchema/ST96/Common",
-                "tm": "http://www.wipo.int/standards/XMLSchema/ST96/Trademark",
-            }
+    def _parse_status_json(self, payload: dict[str, Any], serial_number: str) -> TrademarkStatus:
+        """Parse the TSDR `casestatus/.../info` JSON response.
 
-            def ft(path: str) -> str | None:
-                elem = root.find(path, ns)
-                return elem.text.strip() if elem is not None and elem.text else None
-
-            # Parse owners from Applicant and Registrant bags
-            owners: list[Owner] = []
-            for tag in ("tm:ApplicantBag/tm:Applicant", "tm:Registrant"):
-                for owner_elem in root.findall(f".//{tag}", ns):
-                    name = None
-                    for name_path in (
-                        "c:Contact/c:Name/c:EntityName",
-                        "c:Contact/c:Name/c:OrganizationName/c:OrganizationStandardName",
-                        "c:Contact/c:Name/c:PersonName/c:PersonFullName",
-                    ):
-                        n = owner_elem.find(name_path, ns)
-                        if n is not None and n.text:
-                            name = n.text.strip()
-                            break
-                    addr = owner_elem.find(
-                        "c:Contact/c:PostalAddressBag/c:PostalAddress/c:PostalStructuredAddress",
-                        ns,
-                    )
-                    if addr is None:
-                        addr = owner_elem.find(
-                            "c:Contact/c:PostalAddressBag/c:PostalStructuredAddress", ns
-                        )
-                    city = state = country = postcode = address = None
-                    if addr is not None:
-                        city_el = addr.find("c:CityName", ns)
-                        city = (
-                            city_el.text.strip() if city_el is not None and city_el.text else None
-                        )
-                        state_el = addr.find("c:GeographicRegionName", ns)
-                        state = (
-                            state_el.text.strip()
-                            if state_el is not None and state_el.text
-                            else None
-                        )
-                        country_el = addr.find("c:CountryCode", ns)
-                        country = (
-                            country_el.text.strip()
-                            if country_el is not None and country_el.text
-                            else None
-                        )
-                        pc_el = addr.find("c:PostalCode", ns)
-                        postcode = pc_el.text.strip() if pc_el is not None and pc_el.text else None
-                        addr_el = addr.find("c:AddressLineText", ns)
-                        address = (
-                            addr_el.text.strip() if addr_el is not None and addr_el.text else None
-                        )
-                    entity_el = owner_elem.find("c:LegalEntityName", ns)
-                    entity_type = (
-                        entity_el.text.strip() if entity_el is not None and entity_el.text else None
-                    )
-                    if name:
-                        owners.append(
-                            Owner(
-                                name=name,
-                                address=address,
-                                city=city,
-                                state=state,
-                                country=country,
-                                postcode=postcode,
-                                entityType=entity_type,
-                            )
-                        )
-
-            # Parse goods and services
-            gs_list: list[GoodsServices] = []
-            for gs_elem in root.findall(".//tm:GoodsServices", ns):
-                class_num = None
-                class_desc = None
-                first_use = None
-                first_use_commerce = None
-                cn_el = gs_elem.find(
-                    "tm:GoodsServicesClassificationBag/tm:GoodsServicesClassification"
-                    "/tm:ClassNumber",
-                    ns,
-                )
-                if cn_el is not None and cn_el.text:
-                    class_num = int(cn_el.text.strip())
-                desc_el = gs_elem.find(
-                    "tm:ClassDescriptionBag/tm:ClassDescription/tm:GoodsServicesDescriptionText",
-                    ns,
-                )
-                if desc_el is not None and desc_el.text:
-                    class_desc = desc_el.text.strip()
-                fu_el = gs_elem.find("tm:NationalGoodsServices/tm:FirstUsedDate", ns)
-                if fu_el is not None and fu_el.text:
-                    first_use = fu_el.text.strip()
-                fuc_el = gs_elem.find("tm:NationalGoodsServices/tm:FirstUsedCommerceDate", ns)
-                if fuc_el is not None and fuc_el.text:
-                    first_use_commerce = fuc_el.text.strip()
-                if class_num is not None or class_desc:
-                    gs_list.append(
-                        GoodsServices(
-                            classNumber=class_num,
-                            classDescription=class_desc,
-                            firstUseDate=first_use,
-                            firstUseDateInCommerce=first_use_commerce,
-                        )
-                    )
-
-            # Parse prosecution history (mark events)
-            events: list[ProsecutionEvent] = []
-            for event_elem in root.findall(".//tm:MarkEventBag/tm:MarkEvent", ns):
-                date_el = event_elem.find("tm:MarkEventDate", ns)
-                # Description and code are nested under NationalMarkEvent
-                nat = event_elem.find("tm:NationalMarkEvent", ns)
-                desc_el = nat.find("tm:MarkEventDescriptionText", ns) if nat is not None else None
-                code_el = nat.find("tm:MarkEventCode", ns) if nat is not None else None
-                if date_el is not None or desc_el is not None:
-                    events.append(
-                        ProsecutionEvent(
-                            eventDate=(
-                                date_el.text.strip()
-                                if date_el is not None and date_el.text
-                                else None
-                            ),
-                            eventDescription=(
-                                desc_el.text.strip()
-                                if desc_el is not None and desc_el.text
-                                else None
-                            ),
-                            eventCode=(
-                                code_el.text.strip()
-                                if code_el is not None and code_el.text
-                                else None
-                            ),
-                        )
-                    )
-
-            # Strip timezone suffix from dates (e.g. "2010-06-22-04:00" -> "2010-06-22")
-            def clean_date(d: str | None) -> str | None:
-                if d and len(d) > 10:
-                    return d[:10]
-                return d
-
-            status_desc = ft(".//tm:MarkCurrentStatusExternalDescriptionText")
-            if not status_desc:
-                status_desc = ft(".//tm:NationalStatusExternalDescriptionText")
-
-            return TrademarkStatus(
-                serialNumber=serial_number,
-                registrationNumber=ft(".//c:RegistrationNumber"),
-                markText=ft(".//tm:MarkVerbalElementText"),
-                markType=ft(".//tm:MarkCategory"),
-                statusCode=ft(".//tm:MarkCurrentStatusCode"),
-                statusDescription=status_desc,
-                statusDate=clean_date(ft(".//tm:MarkCurrentStatusDate")),
-                filingDate=clean_date(ft(".//tm:ApplicationDate")),
-                registrationDate=clean_date(ft(".//c:RegistrationDate")),
-                renewalDate=clean_date(ft(".//tm:RenewalDate")),
-                owners=owners,
-                goodsServices=gs_list,
-                prosecutionHistory=events,
-            )
-        except ET.ParseError:
+        The endpoint switched away from ST96 XML — the JSON shape lives under
+        `payload["trademarks"][0]` with `status`, `parties`, `gsList`, and
+        `prosecutionHistory` siblings. An empty `trademarks` list (no record)
+        returns a near-empty model with only the serial set; a malformed
+        payload raises rather than silently swallowing the error.
+        """
+        records = payload.get("trademarks") or []
+        if not records:
             return TrademarkStatus(serialNumber=serial_number)
+        tm = records[0]
+        st = tm.get("status") or {}
+
+        def clean_date(value: Any) -> str | None:
+            if not value:
+                return None
+            text = str(value)
+            return text[:10] if len(text) > 10 else text
+
+        def opt_str(value: Any) -> str | None:
+            if value is None:
+                return None
+            text = str(value).strip()
+            return text or None
+
+        owners: list[Owner] = []
+        owner_groups = (tm.get("parties") or {}).get("ownerGroups") or {}
+        for group in owner_groups.values():
+            for raw in group or []:
+                name = opt_str(raw.get("name"))
+                if not name:
+                    continue
+                address_lines = [
+                    line
+                    for line in (opt_str(raw.get("address1")), opt_str(raw.get("address2")))
+                    if line
+                ]
+                address = ", ".join(address_lines) if address_lines else None
+                asc = raw.get("addressStateCountry") or {}
+                state_country = asc.get("stateCountry") or {}
+                iso = asc.get("iso") or {}
+                entity = raw.get("entityType") or {}
+                owners.append(
+                    Owner(
+                        name=name,
+                        address=address,
+                        city=opt_str(raw.get("city")),
+                        state=opt_str(state_country.get("code")),
+                        country=opt_str(iso.get("code")) or opt_str(raw.get("countryCode")),
+                        postcode=opt_str(raw.get("zip")),
+                        entityType=opt_str(entity.get("description")),
+                    )
+                )
+
+        gs_list: list[GoodsServices] = []
+        for raw in tm.get("gsList") or []:
+            prime = raw.get("primeClassCode")
+            class_num: int | None = None
+            if prime is not None:
+                try:
+                    class_num = int(str(prime).strip())
+                except ValueError:
+                    class_num = None
+            gs_list.append(
+                GoodsServices(
+                    classNumber=class_num,
+                    classDescription=opt_str(raw.get("description")),
+                    firstUseDate=clean_date(raw.get("firstUseDate")),
+                    firstUseDateInCommerce=clean_date(raw.get("firstUseInCommerceDate")),
+                )
+            )
+
+        events: list[ProsecutionEvent] = []
+        for raw in tm.get("prosecutionHistory") or []:
+            events.append(
+                ProsecutionEvent(
+                    eventDate=clean_date(raw.get("entryDate")),
+                    eventDescription=opt_str(raw.get("entryDesc")),
+                    eventCode=opt_str(raw.get("entryCode")),
+                )
+            )
+
+        mark_flags = (
+            ("TRADEMARK", st.get("trademark")),
+            ("SERVICE_MARK", st.get("serviceMark")),
+            ("CERTIFICATION_MARK", st.get("certificationMark")),
+            ("COLLECTIVE_MEMBERSHIP_MARK", st.get("collectiveMembershipMark")),
+            ("COLLECTIVE_SERVICE_MARK", st.get("collectiveServiceMark")),
+            ("COLLECTIVE_TRADEMARK", st.get("collectiveTradeMark")),
+        )
+        mark_type = next((label for label, flag in mark_flags if flag), None)
+
+        reg_num = opt_str(st.get("usRegistrationNumber"))
+        status_code = opt_str(st.get("status"))
+
+        return TrademarkStatus(
+            serialNumber=serial_number,
+            registrationNumber=reg_num,
+            markText=opt_str(st.get("markElement")),
+            markType=mark_type,
+            statusCode=status_code,
+            statusDescription=opt_str(st.get("extStatusDesc")) or opt_str(st.get("intStatusDesc")),
+            statusDate=clean_date(st.get("statusDate")),
+            filingDate=clean_date(st.get("filingDate")),
+            registrationDate=clean_date(st.get("registrationDate")),
+            abandonmentDate=clean_date(st.get("dateAbandoned")),
+            cancellationDate=clean_date(st.get("dateCancelled")),
+            expirationDate=clean_date(st.get("dateExpired") or st.get("expirationDate")),
+            renewalDate=clean_date(st.get("renewalDate")),
+            owners=owners,
+            goodsServices=gs_list,
+            prosecutionHistory=events,
+        )
 
     def _parse_documents_xml(self, xml_content: str) -> list[TsdrDocument]:
         """Parse documents XML response."""

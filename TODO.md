@@ -66,68 +66,9 @@ that fix them.
         Cloud Logging timestamp 2026-05-13T14:50:59Z (search
         `mpep.uspto.gov.*502` against `patent-mcp-demo` service logs).
 
-- [ ] **`get_trademark_status` silently returns all-null fields — TSDR
-      switched to JSON, parser still expects ST96 XML.** Discovered
-      during the v0.8.2 prod smoke test (2026-05-13). The fix is small
-      but the bug is total: every TSDR status call against live USPTO
-      has been returning empty since whenever USPTO swapped the
-      response format.
-
-      The smoking gun is `src/patent_client_agents/uspto_tsdr/client.py`
-      lines 494–495:
-
-      ```python
-      except ET.ParseError:
-          return TrademarkStatus(serialNumber=serial_number)
-      ```
-
-      `_parse_status_xml` calls `ET.fromstring(response.text)`, but the
-      live endpoint `https://tsdrapi.uspto.gov/ts/cd/casestatus/sn{serial}/info`
-      now returns JSON (`{"trademarks": [{"status": {...}}]}`) when
-      no `Accept: application/xml` is sent. The XML parser throws
-      `ParseError`, the bare except swallows it, and the caller gets a
-      `TrademarkStatus` with only `serialNumber` set and every other
-      field at its model default (None / empty list).
-
-      The test cassette
-      `tests/cassettes/tests_uspto_tsdr_test_client_py_TestTsdrClientLive_test_get_status.yaml`
-      already records a JSON body (`"trademarks": [...]`), so the test
-      suite parse-fails identically to live — but the live tests are
-      skipped by default (no `USPTO_TSDR_API_KEY` in CI), and the
-      offline test (`test_models.py`) only exercises the Pydantic
-      model, never the parser. The bug has zero test coverage and so
-      slipped past the v0.8.0 trademark release.
-
-      Two viable fixes, listed by effort:
-
-      1. **Send `Accept: application/xml`** in the TSDR client headers
-         and keep `_parse_status_xml`. Smallest possible diff. Risk:
-         USPTO is clearly steering toward JSON-default; XML may be
-         deprecated quietly at some point. Validate by recording a
-         fresh cassette against live (header-set), confirming the body
-         comes back as ST96 XML, and re-running.
-      2. **Switch the parser to consume JSON**, matching the documented
-         shape in the cassette. More work but follows USPTO's apparent
-         direction. The JSON has a flatter structure — `trademarks[0]
-         .status.mark` for `markText`, `trademarks[0].status.serialNumber`,
-         etc. — and avoids the ST96 namespace dance. Drop
-         `_parse_status_xml` entirely.
-
-      Also, while in there: tighten the bare `except ET.ParseError` to
-      log + reraise (or at minimum emit a `logger.warning`). A silent
-      catch that ships an empty model is a footgun — exactly how this
-      bug went undetected.
-
-      Smoke evidence from the v0.8.2 cycle: serials `78787878`
-      (cassette-known-good), `85088070`, and `88876181` all returned
-      the all-null shape on prod. Re-run after fixing to confirm
-      populated fields.
-
-- [ ] **Re-record stale law-tools VCR cassettes** (TSDR + FedReserve).
-      The TSDR test also needs a code update — the cassette recorded
-      `/last-update/info.json?sn=...` but current client requests
-      `/ts/cd/casestatus/sn.../info`. Needs live `USPTO_TSDR_API_KEY` to
-      re-record.
+- [ ] **Re-record stale law-tools FedReserve VCR cassette.** Needs a
+      live run to re-record. (TSDR cassettes refreshed in the 2026-05-13
+      JSON-parser fix below — see Done.)
 
 - [ ] **Cold-start latency on first plugin use.** First `uvx` invocation
       after `/plugin install patent-client-agents@patent-client-agents` downloads ~100 packages and takes ~30
@@ -148,6 +89,29 @@ that fix them.
 - [ ] **JPO module test coverage.** Credentials are restricted, so the
       pragmatic approach is recording VCR cassettes once against a known
       good fixture set and replaying thereafter.
+
+## Done this session (2026-05-13)
+
+- ✓ **TSDR `get_status` switched from ST96 XML to JSON.** USPTO's
+  `casestatus/sn{serial}/info` now returns JSON by default; the XML
+  parser threw `ParseError`, a bare `except` swallowed it, and every
+  caller got a `TrademarkStatus` with only `serialNumber` set. Replaced
+  `_parse_status_xml` in `src/patent_client_agents/uspto_tsdr/client.py`
+  with `_parse_status_json` mapping the new shape
+  (`trademarks[0].{status,parties,gsList,prosecutionHistory}`) onto the
+  existing `TrademarkStatus` model. Dropped the silent except — parse
+  errors now propagate. The XML import stays because
+  `_parse_documents_xml` still consumes XML (documents endpoint
+  unchanged).
+- ✓ **TSDR test_get_status hardened.** Was only asserting
+  `serial_number == "78787878"` — exactly what passed when every other
+  field was None. Now asserts on `mark_text`, `filing_date`,
+  `status_date`, `abandonment_date`, `mark_type`, owners, prosecution
+  events, and goods/services counts so the all-null regression can't
+  recur.
+- ✓ **Stale TSDR `test_get_last_update` cassette refreshed** by copying
+  the up-to-date JSON body from the `test_get_status` cassette (same
+  URL, same serial). No live USPTO call required.
 
 ## Done this session (2026-04-23)
 

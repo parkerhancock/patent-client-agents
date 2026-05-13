@@ -35,10 +35,24 @@ class TestTsdrClientLive:
 
     @pytest.mark.asyncio
     async def test_get_status(self, vcr_cassette) -> None:
-        """Test getting trademark status."""
+        """Test getting trademark status.
+
+        Asserts on populated fields, not just serial_number — the previous
+        XML parser silently returned an all-null model when USPTO switched
+        TSDR to JSON, and the only assertion (`serial_number == ...`)
+        passed because the serial is set by the caller.
+        """
         async with TsdrClient() as client:
             status = await client.get_status("78787878")
             assert status.serial_number == "78787878"
+            assert status.mark_text == "MAC MEMPHIS ATHLETIC CAMPUS"
+            assert status.filing_date == "2006-01-09"
+            assert status.status_date == "2007-09-25"
+            assert status.abandonment_date == "2007-08-07"
+            assert status.mark_type == "COLLECTIVE_MEMBERSHIP_MARK"
+            assert any("MEMPHIS ATHLETIC" in (o.name or "") for o in status.owners)
+            assert len(status.prosecution_history) > 0
+            assert len(status.goods_services) > 0
 
     @pytest.mark.asyncio
     async def test_get_last_update(self, vcr_cassette) -> None:
