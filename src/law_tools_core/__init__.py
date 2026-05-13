@@ -23,6 +23,7 @@ from .exceptions import (
     ValidationError,
 )
 from .logging import configure, log_file_hint
+from .oauth2 import OAuth2ClientCredentialsAuth
 from .resilience import (
     RETRYABLE_STATUS_CODES,
     default_retryer,
@@ -50,6 +51,8 @@ __all__ = [
     # Logging
     "configure",
     "log_file_hint",
+    # OAuth2
+    "OAuth2ClientCredentialsAuth",
     # Resilience
     "RETRYABLE_STATUS_CODES",
     "is_retryable_error",
