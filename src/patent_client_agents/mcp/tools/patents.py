@@ -7,10 +7,12 @@ view shapes, and signed-URL packaging; fusion semantics live in the library.
 
 from __future__ import annotations
 
+import asyncio
 from typing import Annotated
 
 from fastmcp import FastMCP
 
+from law_tools_core.exceptions import NotFoundError, RateLimitError
 from law_tools_core.filenames import patent_pdf as _patent_pdf_name
 from law_tools_core.mcp.annotations import READ_ONLY
 from law_tools_core.mcp.downloads import (
@@ -20,6 +22,8 @@ from law_tools_core.mcp.downloads import (
 )
 from patent_client_agents import unified
 from patent_client_agents.google_patents import GooglePatentsClient
+
+_GET_PATENT_BUDGET_SECONDS = 60.0
 
 patents_mcp = FastMCP("Patents")
 
@@ -118,11 +122,19 @@ async def get_patent(
 
     Use download_patent_pdf to download the patent PDF.
     """
-    async with GooglePatentsClient() as client:
-        result = await client.get_patent_data(patent_number)
-        if result is None:
-            raise ValueError(f"Patent {patent_number} not found")
-        return result.model_dump()
+    try:
+        async with asyncio.timeout(_GET_PATENT_BUDGET_SECONDS):
+            async with GooglePatentsClient() as client:
+                result = await client.get_patent_data(patent_number)
+                return result.model_dump()
+    except FileNotFoundError as exc:
+        raise NotFoundError(f"Patent {patent_number} not found on Google Patents") from exc
+    except TimeoutError as exc:
+        raise RateLimitError(
+            f"Google Patents did not return {patent_number} within "
+            f"{int(_GET_PATENT_BUDGET_SECONDS)}s — usually upstream rate limiting. "
+            "Retry shortly."
+        ) from exc
 
 
 @patents_mcp.tool(annotations=READ_ONLY)

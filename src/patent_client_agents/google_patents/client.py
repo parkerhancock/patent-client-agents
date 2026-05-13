@@ -1112,12 +1112,16 @@ class GooglePatentsClient:
     async def _get_patent_data(self, patent_number: str) -> PatentData:
         return await self._fetch_with_retry(patent_number)
 
-    async def get_patent_data(self, patent_number: str) -> PatentData | None:
-        try:
-            return await self._fetch_with_retry(patent_number)
-        except Exception as exc:  # pragma: no cover - defensive logging
-            logger.error("Error retrieving patent data for %s: %s", patent_number, exc)
-            return None
+    async def get_patent_data(self, patent_number: str) -> PatentData:
+        """Fetch full patent data, propagating typed errors on failure.
+
+        Raises ``FileNotFoundError`` when Google Patents returns its "couldn't
+        find this patent" page, ``httpx.HTTPStatusError`` on 503/other upstream
+        failures, and ``httpx.TransportError`` on network errors. Callers that
+        need the legacy "return None on any error" behavior should wrap their
+        own try/except.
+        """
+        return await self._fetch_with_retry(patent_number)
 
     async def get_patent_details(self, patent_number: str) -> dict[str, object] | None:
         try:
@@ -1301,7 +1305,7 @@ class GooglePatentsClient:
         use_cache: bool = True,
     ) -> bytes:
         patent = await self.get_patent_data(patent_number)
-        if not patent or not patent.pdf_url:
+        if not patent.pdf_url:
             raise ValueError(f"No PDF URL available for {patent_number}")
 
         pdf_url = patent.pdf_url

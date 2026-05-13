@@ -238,16 +238,10 @@ async def fetch(
     """
     if client is not None:
         _warn_client_deprecated()
-        patent = await client.get_patent_data(patent_number)
-        if patent is None:
-            raise ValueError(f"Failed to fetch patent {patent_number}")
-        return patent
+        return await client.get_patent_data(patent_number)
 
     async with GooglePatentsClient(use_cache=use_cache) as cl:
-        patent = await cl.get_patent_data(patent_number)
-        if patent is None:
-            raise ValueError(f"Failed to fetch patent {patent_number}")
-        return patent
+        return await cl.get_patent_data(patent_number)
 
 
 async def fetch_pdf(
