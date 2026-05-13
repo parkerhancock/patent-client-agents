@@ -145,9 +145,8 @@ def _scrub_euipo_token_request(request):
     import re as _re
 
     host = request.host
-    is_euipo_token = (
-        ("euipo.europa.eu" in host and "cas-server-webapp" in request.path)
-        or ("auth-sandbox.euipo.europa.eu" in host)
+    is_euipo_token = ("euipo.europa.eu" in host and "cas-server-webapp" in request.path) or (
+        "auth-sandbox.euipo.europa.eu" in host
     )
     if is_euipo_token and request.body:
         body = request.body
@@ -155,7 +154,9 @@ def _scrub_euipo_token_request(request):
             body = body.decode("utf-8", "ignore")
         body = _re.sub(r"client_id=[^&]*", "client_id=REDACTED_CLIENT_ID", body)
         body = _re.sub(r"client_secret=[^&]*", "client_secret=REDACTED_CLIENT_SECRET", body)
-        request.body = body.encode("utf-8") if isinstance(request.body, (bytes, bytearray)) else body
+        request.body = (
+            body.encode("utf-8") if isinstance(request.body, (bytes, bytearray)) else body
+        )
     return request
 
 
@@ -172,7 +173,12 @@ def _scrub_euipo_token_response(response):
     raw = body.get("string", "") if isinstance(body, dict) else ""
     if isinstance(raw, bytes):
         raw = raw.decode("utf-8", "ignore")
-    if isinstance(raw, str) and "access_token" in raw and "token_type" in raw and "refresh_token" not in raw:
+    if (
+        isinstance(raw, str)
+        and "access_token" in raw
+        and "token_type" in raw
+        and "refresh_token" not in raw
+    ):
         new_body = (
             '{"access_token": "REDACTED_ACCESS_TOKEN", '
             '"token_type": "Bearer", '
@@ -302,19 +308,23 @@ _patch_vcr_httpcore_for_str_bodies()
 
 def _chain_request_scrubbers(*scrubbers):
     """Compose request scrubbers in order."""
+
     def _chained(request):
         for s in scrubbers:
             request = s(request)
         return request
+
     return _chained
 
 
 def _chain_response_scrubbers(*scrubbers):
     """Compose response scrubbers in order."""
+
     def _chained(response):
         for s in scrubbers:
             response = s(response)
         return response
+
     return _chained
 
 
