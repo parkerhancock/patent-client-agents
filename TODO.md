@@ -28,10 +28,6 @@ that fix them.
 
 ## Known issues (deferred)
 
-- [ ] **Re-record stale law-tools FedReserve VCR cassette.** Needs a
-      live run to re-record. (TSDR cassettes refreshed in the 2026-05-13
-      JSON-parser fix below — see Done.)
-
 - [ ] **Cold-start latency on first plugin use.** First `uvx` invocation
       after `/plugin install patent-client-agents@patent-client-agents` downloads ~100 packages and takes ~30
       seconds. Subsequent invocations hit uv's cache and are ~1s. Consider
@@ -46,6 +42,28 @@ that fix them.
       good fixture set and replaying thereafter.
 
 ## Done this session (2026-05-13)
+
+- ✓ **User-facing docs updated for the MPEP/TMEP corpus surface.**
+  Eight files touched: `mpep/docs/usage.md` (served as
+  `resource://mpep/usage`) rewritten end-to-end; `catalog/sources/{mpep,tmep}.md`
+  swapped the obsolete eMPEP/eTMEP endpoint tables for a
+  SQLite/FTS5 backend description; `docs/api/{mpep,tmep}.md` gained a
+  "First-time setup" + "Cloud deploys" section; the
+  `skills/ip_research/references/{mpep,tmep}.md` references picked up a
+  "Backend" section so agents know the corpus must exist; and
+  `docs/installation.md` got a "MPEP / TMEP corpus setup" subsection
+  replacing the misleading "MPEP/TMEP still work without keys" line.
+
+- ✓ **FedReserve VCR cassette refreshed (law-tools repo).** The
+  cassette had a single recorded interaction but the test exercises
+  three GETs (testing that "SR1106" / "11-6" / "SR 11-6" all normalize
+  to the same URL) — replay was failing with "cassette exhausted." Re-
+  recorded against live www.federalreserve.gov for SR 11-6, gitleaks
+  scan clean. Same commit repaired a cross-repo break in
+  law-tools/tests/test_section_lookup.py that was importing the deleted
+  `patent_client_agents.mpep.transformers` — removed the obsolete
+  TestMpepTocParsing class and redirected TestTmepLiveSectionLookup to
+  the corpus-backed `patent_client_agents.tmep`.
 
 - ✓ **JPO retry consolidated onto `default_retryer`.** The bespoke
   `AsyncRetrying(...)` block in `jpo/client.py:_raw_request` now

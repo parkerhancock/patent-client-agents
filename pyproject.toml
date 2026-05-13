@@ -1,6 +1,6 @@
 [project]
 name = "patent-client-agents"
-version = "0.9.1"
+version = "0.9.2"
 description = "Intellectual property research toolkit for AI agents — patents, trademarks, and prosecution data from USPTO, EPO, JPO, Google Patents, CanLII, WIPO Lex, MPEP, and CPC"
 readme = "README.md"
 authors = [
@@ -104,6 +104,11 @@ python-version = "3.11"
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+markers = [
+  "live_tsdr: marks tests that hit live USPTO TSDR API (requires USPTO_TSDR_API_KEY)",
+  "live_mpep: tagged for grep parity with prior suites; the corpus-backed MpepClient no longer hits live USPTO, so these tests run offline",
+  "live_tmep: tagged for grep parity with prior suites; the corpus-backed TmepClient no longer hits live USPTO, so these tests run offline",
+]
 
 [tool.uv]
 exclude-newer = "7 days"

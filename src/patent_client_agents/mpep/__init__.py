@@ -14,6 +14,7 @@ from .api import (  # noqa: F401
     list_versions,
     search,
 )
+from .corpus import CorpusUnavailable
 
 __all__ = [
     "MpepClient",
@@ -22,6 +23,7 @@ __all__ = [
     "MpepVersion",
     "SearchInput",
     "SectionInput",
+    "CorpusUnavailable",
     "search",
     "get_section",
     "list_versions",

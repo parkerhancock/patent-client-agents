@@ -78,8 +78,8 @@ Ask Claude to research patents and trademarks in natural language:
 | **USPTO Trademark Assignments** | Trademark ownership transfers (Assignment Center) |
 | **EPO OPS** | European patents, Inpadoc families, legal events, EP Register |
 | **JPO** | Japanese patents, examination history, PCT national phase — *MCP tools register when `JPO_API_USERNAME` + `JPO_API_PASSWORD` are set; not exposed by the hosted demo* |
-| **MPEP** | Manual of Patent Examining Procedure search and section lookup |
-| **TMEP** | Trademark Manual of Examining Procedure search and section lookup |
+| **MPEP** | Manual of Patent Examining Procedure search and section lookup — *runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-mpep-corpus`; see docs/installation.md* |
+| **TMEP** | Trademark Manual of Examining Procedure search and section lookup — *runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-tmep-corpus`; see docs/installation.md* |
 | **CPC** | Classification hierarchy lookup, search, and CPC/IPC mapping |
 | **CanLII** | Canadian courts, tribunals, and IP statutes — Federal Court / FCA / Supreme Court IP rulings, Trade-marks Opposition Board, Patent Appeal Board, Patent Act, Trademarks Act with point-in-time queries — *MCP tools register when `CANLII_API_KEY` is set; not exposed by the hosted demo* |
 | **WIPO Lex** | Global IP statute / treaty / judgment database curated by WIPO — ~50k legal documents across ~200 jurisdictions, six UN languages. v0.9 scope: legislation collection (search + detail with PDF links) |
@@ -233,9 +233,14 @@ No API key required.
 |---------|-------------|
 | Section lookup | Get any TMEP section by number (e.g. `1207.01(a)`) |
 | Full-text search | Keyword search with relevance ranking |
-| Version listing | Available TMEP editions |
+| Version listing | Snapshot label for the loaded corpus |
 
-No API key required.
+No API key required, but requires a one-time corpus build —
+`patent-client-agents-build-tmep-corpus --output ~/.cache/patent_client_agents/tmep.db`
+— before the first call. MPEP has the matching
+`patent-client-agents-build-mpep-corpus` CLI. Cloud deployments point
+`TMEP_CORPUS_PATH` / `MPEP_CORPUS_PATH` at any path. See
+[docs/installation.md](docs/installation.md#mpep--tmep-corpus-setup).
 
 </details>
 

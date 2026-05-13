@@ -5,6 +5,135 @@ All notable changes to `patent-client-agents` are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.9.2] — 2026-05-13
+
+### Changed
+
+- **MPEP module switched from live USPTO HTTP to a local SQLite/FTS5
+  corpus.** USPTO's eMPEP `/search` endpoint has been intermittently
+  broken since 2026-05-13 — confirmed via probes with the library UA,
+  full Chrome UA + Referer, persisted session cookies, and HTTP/2 —
+  while `/content` remained healthy. New
+  `patent_client_agents.mpep.corpus.{schema,db,build}` module ships
+  with the wheel as a build artifact, not data: a single CLI
+  (`patent-client-agents-build-mpep-corpus --output <PATH>`) BFS-crawls
+  `/content` from one seed href, parses chapter HTML into
+  per-section rows, and writes a SQLite+FTS5 snapshot
+  (~3,000 sections across all 29 chapters, ~50MB, ~4-minute scrape).
+  `MpepClient` preserves the public surface exactly — `search`,
+  `get_section`, `resolve_section_href`, `list_versions` — but now
+  reads from the corpus. Runtime locates the file via
+  `MPEP_CORPUS_PATH` env var → `~/.cache/patent_client_agents/mpep.db`
+  → `CorpusUnavailable` with the build command in the message. No
+  silent fallback to live HTTP.
+- **TMEP module switched to the same corpus pattern.** Sister script
+  `patent-client-agents-build-tmep-corpus --output <PATH>` produces
+  ~1,750 sections across all 19 TMEP chapters in ~16MB / ~2 minutes.
+  Runtime resolves via `TMEP_CORPUS_PATH` → `~/.cache/patent_client_agents/tmep.db`
+  → `CorpusUnavailable`. Same public surface preserved.
+- **JPO retry loop consolidated onto `law_tools_core.resilience.default_retryer`.**
+  The bespoke `AsyncRetrying(...)` block in `JpoClient._raw_request`
+  now delegates backoff and the retry-filter (RateLimitError,
+  TransportError, retryable HTTPStatusError) to the shared helper.
+  Rate-limit acquire, token refresh on 401/403, and the
+  429→`RateLimitError` mapping stay inline because they encode
+  JPO-specific protocol details. Side benefit: the prior filter
+  retried on every Exception including plain `ApiError` for 4xx/5xx,
+  which never recovered — dropping `tests/jpo/` runtime from 9.01s to
+  3.93s.
+
+### Fixed
+
+- **TSDR `get_status` returned all-null fields.** USPTO switched
+  `casestatus/sn{serial}/info` to JSON-by-default; the ST96 XML parser
+  threw `ParseError`, a bare `except` swallowed it, and every caller
+  got a `TrademarkStatus` with only `serialNumber` populated. Replaced
+  `_parse_status_xml` in `uspto_tsdr/client.py` with
+  `_parse_status_json` mapping the new
+  `trademarks[0].{status,parties,gsList,prosecutionHistory}` shape
+  onto the existing model. Silent except removed; parse errors
+  propagate. `_parse_documents_xml` unchanged (TSDR documents endpoint
+  still returns XML).
+- **TSDR `test_get_status` was asserting only on `serial_number`** —
+  exactly what passed when every other field was None. Strengthened
+  to cover `mark_text`, `filing_date`, `status_date`,
+  `abandonment_date`, `mark_type`, owners, prosecution events, and
+  goods/services counts so the all-null regression can't recur.
+  Stale `test_get_last_update` cassette refreshed by copying the JSON
+  body from the matching `test_get_status` cassette (same URL).
+
+### Added
+
+- `CorpusUnavailable` re-exported from `patent_client_agents.mpep`
+  and `patent_client_agents.tmep` package roots so callers don't need
+  to know about the `.corpus` submodule.
+- `tmep/docs/usage.md` + `tmep/resources.py` ship a `resource://tmep/usage`
+  static doc reachable via `get_usage_resource()`, matching the MPEP
+  pattern.
+- New `live_tsdr` / `live_mpep` / `live_tmep` pytest markers
+  registered in `pyproject.toml`; the matching `live_mpep` / `live_tmep`
+  markers also registered in the law-tools repo to silence
+  `PytestUnknownMarkWarning` across both suites.
+
+### Documentation
+
+- Threaded the corpus story through every user-facing reference:
+  `mpep/docs/usage.md` (full rewrite — agents see this when they pull
+  `resource://mpep/usage`), `catalog/sources/{mpep,tmep}.md` (replaced
+  the obsolete eMPEP/eTMEP endpoint tables with a "Backend:
+  SQLite/FTS5 corpus" section), `docs/api/{mpep,tmep}.md` (new
+  "First-time setup" + "Cloud deploys" sections),
+  `skills/ip_research/references/{mpep,tmep}.md` (Backend section so
+  the agent knows the corpus must exist), `docs/installation.md`
+  (replaced the misleading "MPEP/TMEP still work without keys" line
+  with a "MPEP / TMEP corpus setup" subsection), and the README rows
+  for MPEP/TMEP now flag the one-time build step.
+
+### Tests
+
+- `tests/mpep/` rewritten: new `conftest.py` builds a five-section
+  fixture corpus per session via `write_corpus`; `test_client.py`
+  exercises 14 cases against it (lookups, search syntax variants,
+  pagination, version, missing-corpus error). Removed dead
+  `test_transformers.py`, `test_mpep_transformers.py`,
+  `test_utils.py`.
+- `tests/tmep/` matched: new `conftest.py` fixture corpus,
+  `test_client.py` with 13 parallel cases. Removed dead
+  `test_transformers.py`.
+- Cross-repo fix in `tools/law-tools/tests/test_section_lookup.py`:
+  it imported the deleted `patent_client_agents.mpep.transformers` —
+  removed the obsolete `TestMpepTocParsing` class (covered now by
+  `tests/mpep/test_client.py` in patent-client-agents), redirected
+  `TestTmepLiveSectionLookup` from the legacy `law_tools.tmep`
+  (broken against USPTO `/search`) to the corpus-backed
+  `patent_client_agents.tmep`. Bundled with the FedReserve cassette
+  refresh in the law-tools repo (`a986b10`).
+- Removed dead `mpep/{transformers,utils}.py` and
+  `tmep/{transformers,utils}.py` modules; the new corpus path
+  doesn't need the old HTTP-response parsers.
+
+### Wheel / CLI
+
+- New console scripts in `[project.scripts]`:
+  `patent-client-agents-build-mpep-corpus` and
+  `patent-client-agents-build-tmep-corpus`. The wheel ships the
+  builders; corpus data is materialized separately and located via
+  env var or `~/.cache`. Refresh story: rerun the builder.
+
+## [0.9.1] — 2026-05-13
+
+### Added
+
+- **Persistent OAuth client storage via Firestore.** New
+  `make_firestore_client_storage()` helper in `law_tools_core.mcp.auth`
+  reads `LAW_TOOLS_CORE_OAUTH_FIRESTORE_{PROJECT,COLLECTION}` from
+  the environment and returns a `py-key-value-aio` `FirestoreStore`;
+  wiring it through `make_auth(client_storage=...)` keeps Dynamic
+  Client Registration entries alive across Cloud Run redeploys instead
+  of dying with the ephemeral container filesystem. Patent-client-agents
+  MCP server registers the store when those env vars are set; falls
+  back to in-memory storage otherwise.
+
 ## [0.9.0] — 2026-05-13
 
 ### Added
