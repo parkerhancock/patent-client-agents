@@ -1,7 +1,7 @@
 [project]
 name = "patent-client-agents"
-version = "0.8.2"
-description = "Intellectual property research toolkit for AI agents — patents, trademarks, and prosecution data from USPTO, EPO, JPO, Google Patents, MPEP, and CPC"
+version = "0.9.0"
+description = "Intellectual property research toolkit for AI agents — patents, trademarks, and prosecution data from USPTO, EPO, JPO, Google Patents, CanLII, WIPO Lex, MPEP, and CPC"
 readme = "README.md"
 authors = [
     { name = "Parker Hancock", email = "633163+parkerhancock@users.noreply.github.com" }
@@ -50,6 +50,7 @@ mcp = [
 patent-client-agents-mcp = "patent_client_agents.mcp.server:main"
 patent-client-agents-skill-install = "patent_client_agents.skill_install:main"
 patent-client-agents-build-mpep-corpus = "patent_client_agents.mpep.corpus.build:main"
+patent-client-agents-build-tmep-corpus = "patent_client_agents.tmep.corpus.build:main"
 
 [project.urls]
 Homepage = "https://github.com/parkerhancock/patent-client-agents"

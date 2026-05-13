@@ -28,23 +28,6 @@ that fix them.
 
 ## Known issues (deferred)
 
-- [ ] **TMEP corpus** (Phase 2 of the scrape-and-serve replacement; MPEP
-      shipped 2026-05-13 — see Done). Same pattern as MPEP: a
-      `tmep/corpus/` module with `schema.py`, `db.py`, and a
-      `build.py` console script (`patent-client-agents-build-tmep-corpus`)
-      that scrapes `tmep.uspto.gov/RDMS/TMEP/content` and writes a
-      SQLite/FTS5 snapshot. Runtime should resolve via
-      `TMEP_CORPUS_PATH` env var → `~/.cache/patent_client_agents/tmep.db`
-      → `CorpusUnavailable`. TMEP is smaller than MPEP (~half the
-      sections), so the build pattern from MPEP should port directly.
-      Diagnosis confirmed during the MPEP work: TMEP's `/search`
-      timeout has the same root cause as MPEP's — USPTO's search
-      endpoint is currently broken for both subdomains regardless of
-      UA, headers, or HTTP version — so the corpus approach is the
-      right end state for TMEP too. `/content` and `/current` remain
-      healthy on tmep.uspto.gov, so the build code from MPEP only
-      needs a different base URL + seed href.
-
 - [ ] **Re-record stale law-tools FedReserve VCR cassette.** Needs a
       live run to re-record. (TSDR cassettes refreshed in the 2026-05-13
       JSON-parser fix below — see Done.)
@@ -70,6 +53,16 @@ that fix them.
       good fixture set and replaying thereafter.
 
 ## Done this session (2026-05-13)
+
+- ✓ **TMEP corpus replaces all eTMEP HTTP calls.** Same pattern as the
+  MPEP work earlier in the session: `tmep/corpus/{schema,db,build}.py`
+  + new console script `patent-client-agents-build-tmep-corpus`,
+  TmepClient rewritten as a corpus reader, conftest.py + test_client.py
+  with a 5-section fixture corpus. Live scrape produces 1,751 sections
+  across all 19 TMEP chapters (100–1900) in ~2 minutes, 16MB SQLite.
+  Runtime resolves the corpus via `TMEP_CORPUS_PATH` env var →
+  `~/.cache/patent_client_agents/tmep.db` → `CorpusUnavailable`.
+  Deleted dead `tmep/{transformers,utils}.py` + `test_transformers.py`.
 
 - ✓ **MPEP corpus replaces all eMPEP HTTP calls.** USPTO's
   `/RDMS/MPEP/search` is currently broken externally regardless of UA

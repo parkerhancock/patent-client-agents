@@ -1,65 +1,106 @@
-"""USPTO Trademark Manual of Examining Procedure (TMEP) client."""
+"""Corpus-backed TMEP client.
+
+Sister module to :mod:`patent_client_agents.mpep.client` — replaces the
+old HTTP client against ``tmep.uspto.gov`` with reads from a frozen
+SQLite/FTS5 corpus produced by
+``patent-client-agents-build-tmep-corpus``. Corpus location is resolved
+at runtime through ``TMEP_CORPUS_PATH`` → ``~/.cache/patent_client_agents/tmep.db``
+→ :class:`CorpusUnavailable`.
+"""
 
 from __future__ import annotations
 
-import json
+import os
 import re
+from typing import Any
 
-import httpx
+from .corpus.db import CorpusDB, CorpusUnavailable
+from .models import TmepSearchHit, TmepSearchResponse, TmepSection, TmepVersion
 
-from .models import TmepSearchResponse, TmepSection, TmepVersion
-from .transformers import (
-    parse_search_response,
-    parse_section_html,
-    parse_toc_for_section,
-    parse_versions,
-)
-from .utils import BASE_URL, build_search_params
-
-# Pattern to detect if input looks like a section number vs an href
-# Section numbers: 1207, 1207.01, 1207.01(a), 710.01(c)
-# Hrefs: TMEP-1200d1e8145.html, changed1e1.html
+# Section number patterns: 1207, 1207.01, 1207.01(a), 710.01(c) etc.
 SECTION_NUMBER_PATTERN = re.compile(r"^\d+(\.\d+)?(\([a-z]\))?(\(\d+\))?$", re.IGNORECASE)
 
 
+def _translate_fts_query(query: str, syntax: str) -> str:
+    cleaned = query.strip()
+    if not cleaned:
+        return ""
+    if syntax in ("adj", "exact"):
+        escaped = cleaned.replace('"', '""')
+        return f'"{escaped}"'
+    tokens = [t for t in re.split(r"\s+", cleaned) if t]
+    if syntax == "or":
+        return " OR ".join(tokens)
+    return " ".join(tokens)
+
+
+def _normalize_href(value: str) -> str:
+    h = value.strip().lstrip("/")
+    h = h.removeprefix("current/")
+    if not h.endswith(".html"):
+        h = f"{h}.html"
+    return h
+
+
+def _hit_to_model(hit: Any, base_url: str) -> TmepSearchHit:
+    title = (
+        f"{hit.section_number} - {hit.title}"
+        if hit.section_number and hit.title
+        else hit.title or hit.section_number or ""
+    )
+    path: list[str] = []
+    if hit.chapter:
+        path.append(f"Chapter {hit.chapter}")
+    if hit.section_number:
+        path.append(hit.section_number)
+    return TmepSearchHit(
+        title=title,
+        href=hit.href,
+        path=path,
+        result_url=f"{base_url}/RDMS/TMEP/result?href={hit.href}",
+    )
+
+
 class TmepClient:
-    """Async client for searching and retrieving TMEP sections.
+    """Corpus-backed eTMEP client.
 
-    Example:
-        async with TmepClient() as client:
-            results = await client.search("likelihood of confusion")
-            for hit in results.hits:
-                print(f"{hit.title}: {hit.href}")
-
-            section = await client.get_section("TMEP-1200d1e8145.html")
-            print(section.text)
+    Opens the corpus lazily on first use. Construction in environments
+    where the database hasn't been materialized doesn't raise — the
+    error surfaces on the first actual query instead.
     """
 
-    def __init__(self, client: httpx.AsyncClient | None = None) -> None:
-        """Initialize the TMEP client.
+    DEFAULT_BASE_URL: str = os.getenv("TMEP_BASE_URL", "https://tmep.uspto.gov")
+    CACHE_NAME: str = "tmep"
 
-        Args:
-            client: Optional httpx client to use. If not provided, one is created.
-        """
-        headers = {
-            # Note: Do NOT send Accept: application/json - the TMEP API
-            # paradoxically returns HTML when JSON is requested
-            "User-Agent": "law-tools/0.1 (tmep-client)",
-        }
-        timeout = httpx.Timeout(10.0, connect=10.0, read=30.0, write=10.0)
-        self._client = client or httpx.AsyncClient(headers=headers, timeout=timeout)
-        self._owns_client = client is None
+    def __init__(
+        self,
+        *,
+        corpus_path: str | os.PathLike[str] | None = None,
+        base_url: str | None = None,
+    ) -> None:
+        self._corpus_path = corpus_path
+        self._base_url = (base_url or self.DEFAULT_BASE_URL).rstrip("/")
+        self._db: CorpusDB | None = None
 
     async def __aenter__(self) -> TmepClient:
         return self
 
-    async def __aexit__(self, exc_type, exc, tb) -> None:
+    async def __aexit__(self, *_exc: object) -> None:
         await self.close()
 
     async def close(self) -> None:
-        """Close the HTTP client if we own it."""
-        if self._owns_client:
-            await self._client.aclose()
+        if self._db is not None:
+            self._db.close()
+            self._db = None
+
+    @property
+    def base_url(self) -> str:
+        return self._base_url
+
+    def _open(self) -> CorpusDB:
+        if self._db is None:
+            self._db = CorpusDB.open(self._corpus_path)
+        return self._db
 
     async def resolve_section_href(
         self,
@@ -67,40 +108,10 @@ class TmepClient:
         *,
         version: str = "current",
     ) -> str | None:
-        """Resolve a section number to its href by searching the TMEP.
-
-        Args:
-            section_number: The section number (e.g., "1207", "1207.01(a)").
-            version: TMEP version to search.
-
-        Returns:
-            The href (e.g., "TMEP-1200d1e8145.html") or None if not found.
-        """
-        # For subsections with parentheticals like "1207.01(a)", search for
-        # the base section number since parentheses break the search.
-        search_term = re.sub(r"\([^)]+\)", "", section_number)
-
-        params = {
-            "q": search_term,
-            "ccb": "on",
-            "icb": "off",
-            "ncb": "off",
-            "ver": version,
-            "syn": "exact",
-            "results": "compact",
-            "sort": "outline",
-            "cnt": 50,
-        }
-        response = await self._client.get(
-            f"{BASE_URL}/RDMS/TMEP/search",
-            params=build_search_params(params),
-        )
-        response.raise_for_status()
-        text = response.content.decode("utf-8", errors="replace")
-        payload = json.loads(text)
-
-        toc_html = payload.get("list", "")
-        return parse_toc_for_section(toc_html, section_number)
+        del version
+        db = self._open()
+        row = db.get_section(section_number=section_number)
+        return row.href if row else None
 
     async def search(
         self,
@@ -116,44 +127,17 @@ class TmepClient:
         per_page: int = 10,
         page: int = 1,
     ) -> TmepSearchResponse:
-        """Search the TMEP.
-
-        Args:
-            query: Search query string.
-            version: TMEP version (e.g., "current", "Nov2025", "Oct2024").
-            include_content: Include content sections in search.
-            include_index: Include index in search.
-            include_notes: Include notes in search.
-            syntax: Search syntax - "adj" (adjacent), "and", "or", "exact".
-            snippet: Snippet display - "compact" or "full".
-            sort: Sort order - "relevance" or "outline".
-            per_page: Results per page (max 100).
-            page: Page number (1-based).
-
-        Returns:
-            TmepSearchResponse with search hits.
-        """
-        params = {
-            "q": query,
-            "ccb": "on" if include_content else "off",
-            "icb": "on" if include_index else "off",
-            "ncb": "on" if include_notes else "off",
-            "ver": version,
-            "syn": syntax,
-            "results": snippet,
-            "sort": sort,
-            "cnt": per_page,
-            "startPage": (page - 1) * per_page if page > 1 else "",
-        }
-        response = await self._client.get(
-            f"{BASE_URL}/RDMS/TMEP/search",
-            params=build_search_params(params),
-        )
-        response.raise_for_status()
-        # Handle non-UTF-8 characters in TMEP content
-        text = response.content.decode("utf-8", errors="replace")
-        payload = json.loads(text)
-        return parse_search_response(payload, BASE_URL, page, per_page)
+        del version, include_content, include_index, include_notes, snippet
+        db = self._open()
+        fts_query = _translate_fts_query(query, syntax)
+        if not fts_query:
+            return TmepSearchResponse(hits=[], page=page, per_page=per_page, has_more=False)
+        offset = max(0, (page - 1) * per_page)
+        rows = db.search(fts_query, limit=per_page + 1, offset=offset, sort=sort)
+        has_more = len(rows) > per_page
+        rows = rows[:per_page]
+        hits = [_hit_to_model(r, self._base_url) for r in rows]
+        return TmepSearchResponse(hits=hits, page=page, per_page=per_page, has_more=has_more)
 
     async def get_section(
         self,
@@ -162,48 +146,36 @@ class TmepClient:
         version: str = "current",
         highlight_query: str | None = None,
     ) -> TmepSection:
-        """Get a specific TMEP section.
-
-        Args:
-            section: Either a section number (e.g., "1207", "1207.01(a)") or
-                an href (e.g., "TMEP-1200d1e8145.html"). Section numbers are
-                automatically resolved to hrefs.
-            version: TMEP version.
-            highlight_query: Optional query to highlight in the section.
-
-        Returns:
-            TmepSection with content.
-
-        Raises:
-            ValueError: If a section number cannot be resolved to an href.
-        """
-        # Determine if this is a section number or an href
-        href = section
+        del highlight_query
+        db = self._open()
         if SECTION_NUMBER_PATTERN.match(section):
-            resolved = await self.resolve_section_href(section, version=version)
-            if resolved is None:
+            row = db.get_section(section_number=section)
+            if row is None:
                 raise ValueError(f"Could not find TMEP section '{section}'")
-            href = resolved
-
-        if highlight_query:
-            url = f"{BASE_URL}/RDMS/TMEP/result"
-            params = {"href": href, "q": highlight_query, "ver": version}
-            response = await self._client.get(url, params=params)
         else:
-            url = f"{BASE_URL}/RDMS/TMEP/content"
-            params = {"version": version, "href": href}
-            response = await self._client.get(url, params=params)
-        response.raise_for_status()
-        html = response.text
-        return parse_section_html(html, version=version, href=href)
+            href = _normalize_href(section)
+            row = db.get_section(href=href)
+            if row is None:
+                raise ValueError(f"Could not find TMEP href '{section}'")
+        return TmepSection(
+            href=row.href,
+            html=row.html,
+            text=row.text,
+            version=version,
+            title=row.title,
+        )
 
     async def list_versions(self) -> list[TmepVersion]:
-        """List available TMEP versions.
+        db = self._open()
+        meta = db.meta()
+        snapshot = meta.get("snapshot_date", "unknown")
+        return [
+            TmepVersion(
+                label=f"current (snapshot {snapshot})",
+                value="current",
+                current=True,
+            )
+        ]
 
-        Returns:
-            List of TmepVersion objects.
-        """
-        response = await self._client.get(f"{BASE_URL}/RDMS/TMEP/current")
-        response.raise_for_status()
-        html = response.text
-        return parse_versions(html)
+
+__all__ = ["TmepClient", "SECTION_NUMBER_PATTERN", "CorpusUnavailable"]
