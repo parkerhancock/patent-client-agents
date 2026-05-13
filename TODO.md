@@ -28,43 +28,22 @@ that fix them.
 
 ## Known issues (deferred)
 
-- [ ] **MPEP and TMEP live calls fail against USPTO; replace with a local
-      scrape-and-serve corpus.** Discovered while smoke-testing the v0.8.2
-      promote (2026-05-13). Both subdomains misbehave when the library
-      proxies live requests:
-
-      - `mpep.uspto.gov/RDMS/MPEP/search` returns Apache `502 Proxy
-        Error` for the library's `User-Agent: patent-client-agents-mpep/0.2`
-        (set in `src/patent_client_agents/mpep/client.py:37`). The same
-        URL with `User-Agent: Mozilla/5.0` returns 200. USPTO's WAF is
-        bot-flagging the custom UA. Affects every endpoint in `client.py`
-        (`/RDMS/MPEP/search`, `/result`, `/content`, `/current`) and so
-        all of `search_mpep` and `get_mpep_section`.
-      - `tmep.uspto.gov` returns 200 to direct curls with either the
-        library UA or a Mozilla UA, but `search_tmep` and
-        `get_tmep_section` consistently time out from prod. Different
-        root cause from MPEP — likely a slow path or a different
-        sub-endpoint the library polls. Needs reproduction with logging
-        on to nail down.
-
-      Short-term workaround would be to ship a Mozilla-like UA in both
-      clients, but that's a fragile arms race with USPTO's WAF and
-      doesn't help with the TMEP timeout. The right solution is to scrape
-      both corpora once and serve from a static index bundled with the
-      wheel (similar to how `cpc/` ships a snapshot, or the way the
-      `skills/ip_research/` knowledge corpus is packaged via
-      `importlib.resources`). Section text and search are both
-      deterministic functions of the published MPEP/TMEP — there's no
-      reason to round-trip to USPTO at runtime. A scheduled scrape job
-      (monthly?) can republish a fresh wheel when the corpora update.
-
-      Files most relevant:
-      - `src/patent_client_agents/mpep/client.py` — URL paths + UA
-      - `src/patent_client_agents/mpep/transformers.py` — HTML→model parser
-      - `src/patent_client_agents/uspto_tmep/` — equivalent module for TMEP
-      - Empirical proof from the v0.8.2 smoke test is in this session's
-        Cloud Logging timestamp 2026-05-13T14:50:59Z (search
-        `mpep.uspto.gov.*502` against `patent-mcp-demo` service logs).
+- [ ] **TMEP corpus** (Phase 2 of the scrape-and-serve replacement; MPEP
+      shipped 2026-05-13 — see Done). Same pattern as MPEP: a
+      `tmep/corpus/` module with `schema.py`, `db.py`, and a
+      `build.py` console script (`patent-client-agents-build-tmep-corpus`)
+      that scrapes `tmep.uspto.gov/RDMS/TMEP/content` and writes a
+      SQLite/FTS5 snapshot. Runtime should resolve via
+      `TMEP_CORPUS_PATH` env var → `~/.cache/patent_client_agents/tmep.db`
+      → `CorpusUnavailable`. TMEP is smaller than MPEP (~half the
+      sections), so the build pattern from MPEP should port directly.
+      Diagnosis confirmed during the MPEP work: TMEP's `/search`
+      timeout has the same root cause as MPEP's — USPTO's search
+      endpoint is currently broken for both subdomains regardless of
+      UA, headers, or HTTP version — so the corpus approach is the
+      right end state for TMEP too. `/content` and `/current` remain
+      healthy on tmep.uspto.gov, so the build code from MPEP only
+      needs a different base URL + seed href.
 
 - [ ] **Re-record stale law-tools FedReserve VCR cassette.** Needs a
       live run to re-record. (TSDR cassettes refreshed in the 2026-05-13
@@ -91,6 +70,40 @@ that fix them.
       good fixture set and replaying thereafter.
 
 ## Done this session (2026-05-13)
+
+- ✓ **MPEP corpus replaces all eMPEP HTTP calls.** USPTO's
+  `/RDMS/MPEP/search` is currently broken externally regardless of UA
+  (verified by probing with library UA, full Chrome UA + Referer,
+  cookies, HTTP/2). Built a SQLite/FTS5 corpus pipeline that ships
+  with the wheel as a buildable artifact, not the data itself:
+    - `src/patent_client_agents/mpep/corpus/{__init__,schema,db,build}.py`
+      — schema (sections + FTS5 external-content index), read-side
+      `CorpusDB.open()` with env-var/cache-path/error resolution, and
+      a single-file scraper+parser+writer (BFS-crawls eMPEP's
+      `/content` endpoint from one seed, dedupes by section href).
+    - Console script `patent-client-agents-build-mpep-corpus` wired
+      into `pyproject.toml`; produces `mpep.db` in ~4 minutes against
+      live USPTO. Initial snapshot: 3,013 sections, 51MB, all 29 MPEP
+      chapters (100 through 2900) plus 832 appendix entries.
+    - `MpepClient` in `src/patent_client_agents/mpep/client.py`
+      rewritten: same public surface (`search`, `get_section`,
+      `resolve_section_href`, `list_versions`) now reads from
+      SQLite/FTS5. Lazy-opens the corpus; raises `CorpusUnavailable`
+      with build instructions if the DB is missing.
+    - Runtime corpus resolution priority:
+      1. `MPEP_CORPUS_PATH` env var (cloud deploys).
+      2. `~/.cache/patent_client_agents/mpep.db` (local dev).
+      3. `CorpusUnavailable` with a helpful build hint.
+    - Tests rewritten end-to-end: `tests/mpep/conftest.py` builds a
+      tiny 5-section fixture corpus once per session; `test_client.py`
+      exercises 14 cases (lookups, search syntax variants, pagination,
+      version, missing-corpus error). Removed dead
+      `tests/mpep/{test_transformers,test_mpep_transformers,test_utils}.py`
+      that tested the old HTTP transformers.
+  Cloud-deploy story: build CLI runs at image build time, outputs to a
+  known path, runtime points `MPEP_CORPUS_PATH` at it. The wheel stays
+  small (~500KB) regardless of corpus size. Refresh = rerun the
+  builder + redeploy.
 
 - ✓ **TSDR `get_status` switched from ST96 XML to JSON.** USPTO's
   `casestatus/sn{serial}/info` now returns JSON by default; the XML

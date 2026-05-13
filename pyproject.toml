@@ -49,6 +49,7 @@ mcp = [
 [project.scripts]
 patent-client-agents-mcp = "patent_client_agents.mcp.server:main"
 patent-client-agents-skill-install = "patent_client_agents.skill_install:main"
+patent-client-agents-build-mpep-corpus = "patent_client_agents.mpep.corpus.build:main"
 
 [project.urls]
 Homepage = "https://github.com/parkerhancock/patent-client-agents"

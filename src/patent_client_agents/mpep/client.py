@@ -1,93 +1,132 @@
+"""Corpus-backed MPEP client.
+
+Replaces the previous HTTP client against ``mpep.uspto.gov`` — USPTO's
+``/RDMS/MPEP/search`` endpoint has been intermittently broken since
+2026-05-13, and even when healthy, search round-trips are slow. The
+runtime now reads exclusively from a SQLite/FTS5 snapshot produced by
+``patent-client-agents-build-mpep-corpus`` and located via
+``MPEP_CORPUS_PATH`` or ``~/.cache/patent_client_agents/mpep.db`` (see
+:mod:`patent_client_agents.mpep.corpus.db`).
+
+The public surface here is preserved exactly so callers don't change:
+``search``, ``get_section``, ``resolve_section_href``, ``list_versions``.
+"""
+
 from __future__ import annotations
 
-import json
 import os
 import re
+from typing import Any
 
-import httpx
+from .corpus.db import CorpusDB, CorpusUnavailable
+from .models import MpepSearchHit, MpepSearchResponse, MpepSection, MpepVersion
 
-from law_tools_core import BaseAsyncClient
-
-from .models import MpepSearchResponse, MpepSection, MpepVersion
-from .transformers import (
-    parse_search_response,
-    parse_section_html,
-    parse_toc_for_section,
-    parse_versions,
-)
-from .utils import build_search_params
-
-# Pattern to detect if input looks like a section number vs an href
+# Pattern to detect if input looks like a section number vs an href.
 # Section numbers: 2106, 2106.04, 2106.04(a), 706.03(a)(1)
 # Hrefs: d0e197244.html, ch2100_d29a1b_13a9e_2dc.html
 SECTION_NUMBER_PATTERN = re.compile(r"^\d+(\.\d+)?(\([a-z]\))?(\(\d+\))?$", re.IGNORECASE)
 
 
-class MpepClient(BaseAsyncClient):
+def _translate_fts_query(query: str, syntax: str) -> str:
+    """Convert eMPEP-API search params to an FTS5 MATCH expression.
+
+    - ``adj`` / ``exact`` → quoted phrase (multi-word terms stay
+      adjacent, which matches eMPEP's ``adj`` semantics).
+    - ``or`` → ``term1 OR term2`` between whitespace-separated terms.
+    - ``and`` / anything else → space-separated terms (FTS5's default).
+    """
+    cleaned = query.strip()
+    if not cleaned:
+        return ""
+    if syntax in ("adj", "exact"):
+        escaped = cleaned.replace('"', '""')
+        return f'"{escaped}"'
+    tokens = [t for t in re.split(r"\s+", cleaned) if t]
+    if syntax == "or":
+        return " OR ".join(tokens)
+    return " ".join(tokens)
+
+
+def _normalize_href(value: str) -> str:
+    """Accept hrefs in any of the forms callers commonly produce."""
+    h = value.strip().lstrip("/")
+    h = h.removeprefix("current/")
+    if not h.endswith(".html"):
+        h = f"{h}.html"
+    return h
+
+
+def _hit_to_model(hit: Any, base_url: str) -> MpepSearchHit:
+    title = (
+        f"{hit.section_number} - {hit.title}"
+        if hit.section_number and hit.title
+        else hit.title or hit.section_number or ""
+    )
+    path: list[str] = []
+    if hit.chapter:
+        path.append(f"Chapter {hit.chapter}")
+    if hit.section_number:
+        path.append(hit.section_number)
+    return MpepSearchHit(
+        title=title,
+        href=hit.href,
+        path=path,
+        result_url=f"{base_url}/RDMS/MPEP/result?href={hit.href}",
+    )
+
+
+class MpepClient:
+    """Corpus-backed eMPEP client.
+
+    The corpus is opened lazily on first use so consumers can still
+    construct clients in environments where the database hasn't been
+    materialized yet (it'll raise ``CorpusUnavailable`` on the first
+    actual call instead).
+    """
+
     DEFAULT_BASE_URL: str = os.getenv("MPEP_BASE_URL", "https://mpep.uspto.gov")
     CACHE_NAME: str = "mpep"
-    DEFAULT_TIMEOUT: float = 30.0
 
-    def __init__(self, client: httpx.AsyncClient | None = None) -> None:
-        super().__init__(
-            client=client,
-            headers={
-                # Note: Do NOT send Accept: application/json - the MPEP API
-                # paradoxically returns HTML when JSON is requested
-                "User-Agent": "patent-client-agents-mpep/0.2",
-            },
-        )
+    def __init__(
+        self,
+        *,
+        corpus_path: str | os.PathLike[str] | None = None,
+        base_url: str | None = None,
+    ) -> None:
+        self._corpus_path = corpus_path
+        self._base_url = (base_url or self.DEFAULT_BASE_URL).rstrip("/")
+        self._db: CorpusDB | None = None
+
+    async def __aenter__(self) -> MpepClient:
+        return self
+
+    async def __aexit__(self, *_exc: object) -> None:
+        await self.close()
+
+    async def close(self) -> None:
+        if self._db is not None:
+            self._db.close()
+            self._db = None
+
+    @property
+    def base_url(self) -> str:
+        return self._base_url
+
+    def _open(self) -> CorpusDB:
+        if self._db is None:
+            self._db = CorpusDB.open(self._corpus_path)
+        return self._db
 
     async def resolve_section_href(
         self,
         section_number: str,
         *,
-        version: str = "current",
+        version: str = "current",  # accepted for API parity; corpus is single-snapshot
     ) -> str | None:
-        """Resolve a section number to its href by searching the MPEP.
-
-        Args:
-            section_number: The section number (e.g., "2106", "2106.04(a)").
-            version: MPEP version to search.
-
-        Returns:
-            The href (e.g., "d0e197244.html") or None if not found.
-        """
-        # For subsections with parentheticals like "2106.04(a)", search for
-        # the base section number (e.g., "2106.04") since parentheses break
-        # the search. We'll find the exact match in the ToC.
-        search_term = re.sub(r"\([^)]+\)", "", section_number)
-
-        # Strip leading zeros for the search API (it doesn't find "0700" but
-        # finds "700"). We'll match against the original section_number in the
-        # TOC which may include leading zeros.
-        search_term = search_term.lstrip("0") or search_term
-
-        # Search for the section number with exact syntax
-        params = {
-            "q": search_term,
-            "ccb": "on",
-            "icb": "off",
-            "ncb": "off",
-            "fcb": "off",
-            "ver": version,
-            "syn": "exact",
-            "results": "compact",
-            "sort": "outline",
-            "cnt": 50,  # Get more results to find nested subsections
-        }
-        response = await self._request(
-            "GET",
-            "/RDMS/MPEP/search",
-            params=build_search_params(params),
-            context="resolve_section_href",
-        )
-        text = response.content.decode("utf-8", errors="replace")
-        payload = json.loads(text)
-
-        # The 'list' field contains the ToC with section numbers and hrefs
-        toc_html = payload.get("list", "")
-        return parse_toc_for_section(toc_html, section_number)
+        del version
+        db = self._open()
+        row = db.get_section(section_number=section_number)
+        return row.href if row else None
 
     async def search(
         self,
@@ -99,97 +138,74 @@ class MpepClient(BaseAsyncClient):
         include_notes: bool = False,
         include_form_paragraphs: bool = False,
         syntax: str = "adj",
-        snippet: str = "compact",
+        snippet: str = "compact",  # FTS5 snippet is always compact-ish
         sort: str = "relevance",
         per_page: int = 10,
         page: int = 1,
     ) -> MpepSearchResponse:
-        params = {
-            "q": query,
-            "ccb": "on" if include_content else "off",
-            "icb": "on" if include_index else "off",
-            "ncb": "on" if include_notes else "off",
-            "fcb": "on" if include_form_paragraphs else "off",
-            "ver": version,
-            "syn": syntax,
-            "results": snippet,
-            "sort": sort,
-            "cnt": per_page,
-            "startPage": (page - 1) * per_page if page > 1 else "",
-        }
-        response = await self._request(
-            "GET",
-            "/RDMS/MPEP/search",
-            params=build_search_params(params),
-            context="search",
-        )
-        # Handle non-UTF-8 characters in MPEP content
-        text = response.content.decode("utf-8", errors="replace")
-        payload = json.loads(text)
-        return parse_search_response(payload, self.base_url, page, per_page)
+        # Corpus snapshot doesn't distinguish content / index / notes / form
+        # paragraphs — all body text is indexed together. We accept the
+        # flags for API parity but have no separate corpus to filter on.
+        del version, include_content, include_index, include_notes
+        del include_form_paragraphs, snippet
+        db = self._open()
+        fts_query = _translate_fts_query(query, syntax)
+        if not fts_query:
+            return MpepSearchResponse(hits=[], page=page, per_page=per_page, has_more=False)
+        offset = max(0, (page - 1) * per_page)
+        # Fetch one extra row to detect whether more pages exist.
+        rows = db.search(fts_query, limit=per_page + 1, offset=offset, sort=sort)
+        has_more = len(rows) > per_page
+        rows = rows[:per_page]
+        hits = [_hit_to_model(r, self._base_url) for r in rows]
+        return MpepSearchResponse(hits=hits, page=page, per_page=per_page, has_more=has_more)
 
     async def get_section(
         self,
         section: str,
         *,
         version: str = "current",
-        highlight_query: str | None = None,
+        highlight_query: str | None = None,  # noqa: ARG002 — API parity
     ) -> MpepSection:
-        """Get a specific MPEP section.
-
-        Args:
-            section: Either a section number (e.g., "2106", "2106.04(a)") or
-                an href (e.g., "d0e197244.html"). Section numbers are
-                automatically resolved to hrefs.
-            version: MPEP version.
-            highlight_query: Optional query to highlight in the section.
-
-        Returns:
-            MpepSection with content.
-
-        Raises:
-            ValueError: If a section number cannot be resolved to an href.
-        """
-        # Determine if this is a section number or an href
-        href = section
+        del (
+            highlight_query
+        )  # the corpus stores the canonical HTML; no need to re-fetch a highlighted view
+        db = self._open()
         if SECTION_NUMBER_PATTERN.match(section):
-            # This looks like a section number, resolve it
-            resolved = await self.resolve_section_href(section, version=version)
-            if resolved is None:
+            row = db.get_section(section_number=section)
+            if row is None:
                 raise ValueError(f"Could not find MPEP section '{section}'")
-            href = resolved
-
-        if highlight_query:
-            params = {"href": href, "q": highlight_query, "ver": version}
-            response = await self._request(
-                "GET",
-                "/RDMS/MPEP/result",
-                params=params,
-                context="get_section",
-            )
         else:
-            # The content API expects just the filename, not a path
-            clean_href = href.lstrip("/")
-            if clean_href.startswith("current/"):
-                clean_href = clean_href[8:]  # Remove "current/" prefix
-            params = {
-                "version": version,
-                "href": clean_href,
-            }
-            response = await self._request(
-                "GET",
-                "/RDMS/MPEP/content",
-                params=params,
-                context="get_section",
-            )
-        html = response.text
-        return parse_section_html(html, version=version, href=href)
+            href = _normalize_href(section)
+            row = db.get_section(href=href)
+            if row is None:
+                raise ValueError(f"Could not find MPEP href '{section}'")
+        return MpepSection(
+            href=row.href,
+            html=row.html,
+            text=row.text,
+            version=version,
+            title=row.title,
+        )
 
     async def list_versions(self) -> list[MpepVersion]:
-        response = await self._request(
-            "GET",
-            "/RDMS/MPEP/current",
-            context="list_versions",
-        )
-        html = response.text
-        return parse_versions(html)
+        """Single-entry list reflecting the loaded corpus snapshot.
+
+        The corpus only ships one MPEP version (the snapshot recorded
+        when ``patent-client-agents-build-mpep-corpus`` last ran);
+        return a value field of ``"current"`` so callers passing it to
+        :meth:`search` continue to work.
+        """
+        db = self._open()
+        meta = db.meta()
+        snapshot = meta.get("snapshot_date", "unknown")
+        return [
+            MpepVersion(
+                label=f"current (snapshot {snapshot})",
+                value="current",
+                current=True,
+            )
+        ]
+
+
+__all__ = ["MpepClient", "SECTION_NUMBER_PATTERN", "CorpusUnavailable"]

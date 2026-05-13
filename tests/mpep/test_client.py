@@ -1,169 +1,132 @@
-"""Tests for MPEP client."""
+"""Tests for the corpus-backed MpepClient.
+
+These exercise the real SQLite/FTS5 read path against a hand-built tiny
+corpus from ``conftest.py``. No live HTTP — the runtime no longer calls
+USPTO.
+"""
 
 from __future__ import annotations
 
-import httpx
+from pathlib import Path
+
 import pytest
 
 from patent_client_agents.mpep.client import MpepClient
+from patent_client_agents.mpep.corpus import CorpusUnavailable
 from patent_client_agents.mpep.models import MpepSearchResponse, MpepSection, MpepVersion
 
 
 class TestMpepClientInit:
-    """Tests for client initialization."""
-
-    def test_creates_client(self) -> None:
-        client = MpepClient()
-        assert client._client is not None
-        assert client._owns_client is True
-
-    def test_accepts_custom_client(self) -> None:
-        custom = httpx.AsyncClient()
-        client = MpepClient(client=custom)
-        assert client._client is custom
-        assert client._owns_client is False
-
-
-class TestMpepClientMethods:
-    """Tests for client methods with mocked HTTP."""
-
-    @pytest.fixture
-    def mock_client(self) -> httpx.AsyncClient:
-        """Create a mock async client."""
-
-        def handler(request: httpx.Request) -> httpx.Response:
-            path = request.url.path
-
-            if "/search" in path:
-                # Match real site structure: chapter-level uses <span>, sections use <a>
-                return httpx.Response(
-                    200,
-                    json={
-                        "list": """<ul>
-<li><span href="#/result/d0e55397.html?q=patent">0700 - Examination of Applications</span>
-<ul><li><a href="#/result/d0e57969.html?q=patent">706 - Rejection of Claims</a></li></ul>
-</li></ul>"""
-                    },
-                )
-            elif "/result" in path or "/content" in path:
-                return httpx.Response(
-                    200,
-                    text="""
-                        <html>
-                            <body>
-                                <h1>§700 Examination of Applications</h1>
-                                <p>This chapter discusses patent examination.</p>
-                            </body>
-                        </html>
-                    """,
-                )
-            elif "/current" in path:
-                return httpx.Response(
-                    200,
-                    text="""
-                        <html>
-                            <body>
-                                <select id="edition-select">
-                                    <option value="/current" selected>Current Edition</option>
-                                    <option value="/R-09.2019">R-09.2019</option>
-                                </select>
-                            </body>
-                        </html>
-                    """,
-                )
-
-            return httpx.Response(404, text="Not found")
-
-        return httpx.AsyncClient(
-            transport=httpx.MockTransport(handler),
-            headers={"User-Agent": "Test/1.0"},
-        )
+    def test_constructs_without_opening_corpus(self) -> None:
+        """Construction is sync and must not open the DB — that's lazy."""
+        client = MpepClient(corpus_path="/nonexistent.db")
+        assert client._db is None
 
     @pytest.mark.asyncio
-    async def test_search(self, mock_client: httpx.AsyncClient) -> None:
-        client = MpepClient(client=mock_client)
-        result = await client.search("patent")
-        assert isinstance(result, MpepSearchResponse)
-        # Only <a> tags are returned as hits, not <span> tags
-        assert len(result.hits) == 1
-        assert result.hits[0].title == "706 - Rejection of Claims"
+    async def test_missing_corpus_raises_on_first_call(
+        self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+    ) -> None:
+        monkeypatch.delenv("MPEP_CORPUS_PATH", raising=False)
+        absent = tmp_path / "does-not-exist.db"
+        client = MpepClient(corpus_path=absent)
+        with pytest.raises(CorpusUnavailable):
+            await client.search("anything")
+
+
+class TestMpepClientLookups:
+    @pytest.mark.asyncio
+    async def test_get_section_by_number(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            section = await client.get_section("2106")
+        assert isinstance(section, MpepSection)
+        assert section.title == "Patent Subject Matter Eligibility"
+        assert "subject matter" in section.text.lower()
 
     @pytest.mark.asyncio
-    async def test_search_with_options(self, mock_client: httpx.AsyncClient) -> None:
-        client = MpepClient(client=mock_client)
-        result = await client.search(
-            "patent",
-            version="R-09.2019",
-            include_content=True,
-            include_index=True,
-            per_page=20,
-            page=2,
-        )
-        assert isinstance(result, MpepSearchResponse)
+    async def test_get_section_with_subsection_parens(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            section = await client.get_section("2106.04(a)")
+        assert section.title == "Abstract Ideas"
 
     @pytest.mark.asyncio
-    async def test_get_section(self, mock_client: httpx.AsyncClient) -> None:
-        client = MpepClient(client=mock_client)
-        result = await client.get_section("0700")
-        assert isinstance(result, MpepSection)
-        assert result.title == "§700 Examination of Applications"
-        assert "patent examination" in result.text
+    async def test_get_section_by_href(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            section = await client.get_section("d0e_2106.html")
+        assert section.title == "Patent Subject Matter Eligibility"
 
     @pytest.mark.asyncio
-    async def test_get_section_with_highlight(self, mock_client: httpx.AsyncClient) -> None:
-        client = MpepClient(client=mock_client)
-        result = await client.get_section("0700", highlight_query="patent")
-        assert isinstance(result, MpepSection)
+    async def test_get_section_by_href_without_extension(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            section = await client.get_section("d0e_2106")
+        assert section.title == "Patent Subject Matter Eligibility"
 
     @pytest.mark.asyncio
-    async def test_list_versions(self, mock_client: httpx.AsyncClient) -> None:
-        client = MpepClient(client=mock_client)
-        result = await client.list_versions()
-        assert isinstance(result, list)
-        assert len(result) == 2
-        assert all(isinstance(v, MpepVersion) for v in result)
-        assert result[0].current is True
+    async def test_get_section_not_found_raises(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            with pytest.raises(ValueError):
+                await client.get_section("9999")
 
     @pytest.mark.asyncio
-    async def test_context_manager(self, mock_client: httpx.AsyncClient) -> None:
-        async with MpepClient(client=mock_client) as client:
-            result = await client.search("test")
-            assert isinstance(result, MpepSearchResponse)
-
-
-class TestSearchParams:
-    """Tests for search parameter handling."""
+    async def test_resolve_section_href_hits(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            href = await client.resolve_section_href("2106")
+        assert href == "d0e_2106.html"
 
     @pytest.mark.asyncio
-    async def test_page_parameter_calculation(self) -> None:
-        captured_params: dict[str, str] = {}
+    async def test_resolve_section_href_misses(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            href = await client.resolve_section_href("9999")
+        assert href is None
 
-        def handler(request: httpx.Request) -> httpx.Response:
-            captured_params.update(dict(request.url.params))
-            return httpx.Response(200, json={"list": "<div></div>"})
 
-        mock = httpx.AsyncClient(
-            transport=httpx.MockTransport(handler),
-            headers={"User-Agent": "Test/1.0"},
-        )
-        client = MpepClient(client=mock)
-        await client.search("test", page=3, per_page=10)
-        # Page 3 with per_page 10 means start at item 20
-        assert captured_params.get("startPage") == "20"
+class TestMpepClientSearch:
+    @pytest.mark.asyncio
+    async def test_search_phrase_matches_subject_matter(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            results = await client.search("subject matter eligibility")
+        assert isinstance(results, MpepSearchResponse)
+        titles = [hit.title for hit in results.hits]
+        # The dedicated section 2106 must be the top hit since its title
+        # contains the exact phrase.
+        assert titles, "expected at least one hit"
+        assert any("Patent Subject Matter Eligibility" in t for t in titles)
 
     @pytest.mark.asyncio
-    async def test_first_page_no_start(self) -> None:
-        captured_params: dict[str, str] = {}
+    async def test_search_or_syntax_widens(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            adj = await client.search("obviousness alice", syntax="adj")
+            or_ = await client.search("obviousness alice", syntax="or")
+        # OR should never return fewer hits than the same-terms phrase query.
+        assert len(or_.hits) >= len(adj.hits)
 
-        def handler(request: httpx.Request) -> httpx.Response:
-            captured_params.update(dict(request.url.params))
-            return httpx.Response(200, json={"list": "<div></div>"})
+    @pytest.mark.asyncio
+    async def test_search_pagination_and_has_more(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            page1 = await client.search("patent", per_page=2, page=1)
+            page2 = await client.search("patent", per_page=2, page=2)
+        assert page1.has_more is True
+        # No duplicate hrefs across pages.
+        page1_hrefs = {h.href for h in page1.hits}
+        page2_hrefs = {h.href for h in page2.hits}
+        assert page1_hrefs.isdisjoint(page2_hrefs)
 
-        mock = httpx.AsyncClient(
-            transport=httpx.MockTransport(handler),
-            headers={"User-Agent": "Test/1.0"},
-        )
-        client = MpepClient(client=mock)
-        await client.search("test", page=1)
-        # Page 1 should have empty startPage
-        assert captured_params.get("startPage") == ""
+    @pytest.mark.asyncio
+    async def test_search_empty_query_returns_empty_response(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            results = await client.search("   ")
+        assert results.hits == []
+        assert results.has_more is False
+
+
+class TestMpepClientVersions:
+    @pytest.mark.asyncio
+    async def test_list_versions_single_snapshot(self, mpep_corpus_env: Path) -> None:
+        async with MpepClient() as client:
+            versions = await client.list_versions()
+        assert len(versions) == 1
+        v = versions[0]
+        assert isinstance(v, MpepVersion)
+        assert v.value == "current"
+        assert v.current is True
+        # Label should mention the snapshot date that write_corpus stamped.
+        assert "snapshot" in v.label
