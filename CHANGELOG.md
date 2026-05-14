@@ -20,6 +20,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   "actually not found." Removes the dead `if patent is None` branches in
   `download_patent_pdf` and `google_patents.api.fetch`.
 
+## [0.12.1] — 2026-05-14
+
+### Fixed
+
+- **`upc_decisions.UpcDecisionsClient.search` returned 0 hits on
+  the first page.** The client sent ``?page=0`` for the default
+  request, but the UPC site's Drupal View renders its *empty*
+  template when ``page=0`` is in the URL — only the no-param case
+  fetches the actual first listing page. Omit ``page`` when
+  ``page=0``; keep sending it for ``page>=1``. The parser, response
+  shape, and pager-discovery logic were already correct; this was a
+  one-line URL-parameter bug.
+- Repro: pre-0.12.1 `await UpcDecisionsClient().search()` →
+  ``hits=0, total_pages=1``. Post-0.12.1 → ``hits=49, total_pages=38``.
+
+### Known limitation
+
+- **The hosted demo at `mcp.patentclient.com` cannot fetch the UPC
+  decisions listing.** ``unifiedpatentcourt.org``'s Cloudflare config
+  blocks Google Cloud Run egress IPs (verified 2026-05-14 — both
+  ``httpx`` and ``curl_cffi`` with Chrome TLS impersonation returned
+  HTTP 403 from Cloud Run; same client succeeds from a residential
+  IP). Users who need the decisions feed should run the stdio MCP
+  locally (``patent-client-agents-mcp``). The UPC *statutes* corpus
+  (UPCA, Rules of Procedure, Fees) works on the demo — those PDFs
+  are pre-baked into the container image.
+
 ## [0.12.0] — 2026-05-14
 
 ### Added

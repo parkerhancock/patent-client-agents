@@ -284,7 +284,14 @@ class UpcDecisionsClient(BaseAsyncClient):
             proceedings_lang: Procedural-language ID from
                 :meth:`list_languages` (e.g. ``33`` for English).
         """
-        params: dict[str, Any] = {"page": page}
+        # Drupal Views quirk: ``?page=0`` renders the View's *empty*
+        # template (the View interprets the param as "page offset 0
+        # beyond the natural first page" rather than "first page").
+        # Omitting the param entirely is the canonical way to fetch
+        # page 0. For page>=1 the param works as expected.
+        params: dict[str, Any] = {}
+        if page > 0:
+            params["page"] = page
         if judgement_type:
             params["judgement_type"] = judgement_type
         if court_type:
