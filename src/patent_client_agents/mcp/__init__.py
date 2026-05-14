@@ -29,6 +29,7 @@ from .tools.patent_assignments import patent_assignments_mcp
 from .tools.patents import patents_mcp
 from .tools.publications import publications_mcp
 from .tools.trademarks import trademarks_mcp
+from .tools.ukipo_mopp import ukipo_mopp_mcp
 from .tools.upc import upc_mcp
 from .tools.usitc import usitc_mcp
 from .tools.uspto import uspto_mcp
@@ -60,6 +61,7 @@ ip_mcp.mount(office_actions_mcp)
 ip_mcp.mount(patent_assignments_mcp)
 ip_mcp.mount(trademarks_mcp)
 ip_mcp.mount(mpep_mcp)
+ip_mcp.mount(ukipo_mopp_mcp)
 ip_mcp.mount(cafc_mcp)
 ip_mcp.mount(canlii_mcp)
 ip_mcp.mount(copyright_mcp)

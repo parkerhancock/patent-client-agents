@@ -21,11 +21,11 @@ weeks.
       clients before any HTTP layer, suggesting an IP allowlist
       and/or mTLS in front of OAuth. Investigation summary in
       `research/connectors/upc.md` §14; verbatim Athena-form ticket
-      body in §14.6 of that file. **Ticket not yet submitted** —
-      Athena form's `formcreator` plugin has aggressive conditional
-      reveals + CAPTCHA that made automated submission flaky, so it
-      stays a manual paste-and-send. Blocks task: `upc_cms` connector
-      build (v0.12.0 target). Last checked: 2026-05-13.
+      body in §14.6 of that file. **Ticket submitted 2026-05-14**
+      via Safari (Chrome had been triggering the formcreator
+      plugin's conditional-reveal breakage). Blocks task: `upc_cms`
+      connector build. Watch for response — turnaround on UPC IT
+      tickets is unspecified, expect days to weeks.
 
 - [ ] **IP Australia developer API key.** Awaiting issuance of a
       client_id / client_secret pair from IP Australia's developer

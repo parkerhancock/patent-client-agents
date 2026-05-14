@@ -20,6 +20,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   "actually not found." Removes the dead `if patent is None` branches in
   `download_patent_pdf` and `google_patents.api.fetch`.
 
+## [0.14.0] — 2026-05-14
+
+### Added
+
+- **UKIPO Manual of Patent Practice (MoPP) connector**
+  (``patent_client_agents.ukipo_mopp``). UK examination practice for
+  PA 1977 + SPCs, mirroring the existing MPEP/TMEP corpus pattern.
+  Source: gov.uk's ``/guidance/manual-of-patent-practice-mopp``
+  (192 pages, OGL v3.0, no auth). Built once via
+  ``patent-client-agents-build-mopp-corpus`` into a ~9 MB
+  SQLite/FTS5 database, then served offline. Quarterly refresh
+  cadence mirrors UKIPO's own MoPP update schedule.
+  - ``MoppClient.search(query, syntax=...)`` — FTS5 search with
+    AND / OR / adj-phrase syntaxes.
+  - ``MoppClient.get_section(section)`` — section lookup by PA 1977
+    section number ("1", "14", "4A", "100") or by gov.uk slug
+    ("section-14-the-application").
+  - ``MoppClient.list_versions()`` — corpus snapshot metadata.
+  - MCP tools: ``search_mopp`` + ``get_mopp_section`` on the
+    new ``ukipo_mopp_mcp`` sub-server (75 default tools, +1).
+- ``patent-client-agents-build-mopp-corpus`` CLI ships with the
+  wheel for local rebuilds.
+
 ## [0.13.0] — 2026-05-14
 
 ### Added
