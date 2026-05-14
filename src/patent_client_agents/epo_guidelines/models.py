@@ -1,0 +1,31 @@
+from __future__ import annotations
+
+from pydantic import BaseModel, Field
+
+
+class GuidelinesSearchHit(BaseModel):
+    title: str
+    href: str
+    path: list[str] = Field(default_factory=list)
+    result_url: str
+
+
+class GuidelinesSearchResponse(BaseModel):
+    hits: list[GuidelinesSearchHit]
+    page: int
+    per_page: int
+    has_more: bool
+
+
+class GuidelinesSection(BaseModel):
+    href: str
+    html: str
+    text: str
+    version: str
+    title: str | None = None
+
+
+class GuidelinesVersion(BaseModel):
+    label: str
+    value: str
+    current: bool = False

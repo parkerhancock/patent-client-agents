@@ -20,6 +20,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   "actually not found." Removes the dead `if patent is None` branches in
   `download_patent_pdf` and `google_patents.api.fetch`.
 
+## [0.15.0] — 2026-05-14
+
+### Added
+
+- **EPO Guidelines for Examination connector**
+  (``patent_client_agents.epo_guidelines``). The EPO equivalent of
+  the USPTO's MPEP — covers Parts A-H + General Part of the
+  Guidelines, the canonical EPO examination practice manual.
+  - Source: ``www.epo.org/en/legal/guidelines-epc/<year>``. EPO
+    publishes annually (March releases); 2024 edition snapshot
+    is the current default (``GUIDELINES_VERSION=2024``).
+  - Built via ``patent-client-agents-build-guidelines-corpus``
+    into a SQLite/FTS5 database (~10-30 MB; size scales with
+    the number of leaf sections). BFS crawl from the year's
+    ``index.html`` over the ``<part>_<chapter>_<section>_<sub>``
+    URL hierarchy.
+  - ``GuidelinesClient.search(query, syntax=...)`` — FTS5 with
+    adj-phrase / AND / OR syntaxes.
+  - ``GuidelinesClient.get_section(section)`` — accepts canonical
+    citations (``G-II, 3.1`` / ``G-II 3.1`` / ``G.II.3.1``) and URL
+    slugs (``g_ii_3_1``).
+  - MCP tools: ``search_epo_guidelines`` + ``get_epo_guidelines_section``
+    on the new ``epo_guidelines_mcp`` sub-server (76 default tools,
+    +1 from 0.14.0).
+- ``patent-client-agents-build-guidelines-corpus`` CLI ships with
+  the wheel for local rebuilds.
+
+### Coming next
+
+- **EPC convention** + **Case Law of the Boards of Appeal**
+  — both researched in this session, deferred to a v0.16.0 ship to
+  keep this release focused.
+
 ## [0.14.0] — 2026-05-14
 
 ### Added
