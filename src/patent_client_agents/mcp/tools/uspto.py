@@ -2,33 +2,93 @@
 
 from __future__ import annotations
 
-from typing import Annotated
+import asyncio
+from typing import Annotated, Any, cast
 from urllib.parse import urlparse
 
 from fastmcp import FastMCP
 
+from law_tools_core.envelope import (
+    ListEnvelope,
+    make_provenance,
+)
 from law_tools_core.mcp.annotations import READ_ONLY
 from law_tools_core.mcp.downloads import read_resource, register_source
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
 
 uspto_mcp = FastMCP("USPTO")
 
+# ──────────────────────────────────────────────────────────────────────
+# Envelope helpers — USPTO ODP source-specific wrappers around
+# law_tools_core.envelope. The applications surface is the template
+# referenced by CONNECTOR_STANDARDS.md §5.9; other USPTO tools (PTAB,
+# petitions, bulk data) follow the same pattern in a later sweep.
+# ──────────────────────────────────────────────────────────────────────
+
+_USPTO_ODP_BASE = "https://api.uspto.gov"
+_USPTO_ODP_NAME = "USPTO Open Data Portal"
+
+
+def _odp_provenance(path: str) -> Any:
+    """Build a Provenance pointing at ``{base}{path}``."""
+    return make_provenance(
+        source_url=f"{_USPTO_ODP_BASE}{path}",
+        source_name=_USPTO_ODP_NAME,
+    )
+
+
+def _summarize_application(record: dict) -> str:
+    """One-line Markdown summary for a single application record."""
+    meta = record.get("applicationMetaData") or {}
+    appl = record.get("applicationNumberText") or "(no appl#)"
+    title = meta.get("inventionTitle") or "(no title)"
+    status = meta.get("applicationStatusDescriptionText") or "(unknown status)"
+    filing = meta.get("filingDate") or "?"
+    pat = meta.get("patentNumber")
+    grant = meta.get("grantDate")
+    head = f"**US application {appl}** — {title}"
+    line = f"Status: {status}. Filed {filing}"
+    if pat and grant:
+        line += f"; issued as US {pat} on {grant}."
+    elif pat:
+        line += f"; issued as US {pat}."
+    else:
+        line += "."
+    return f"{head}\n{line}"
+
 
 # USPTO ODP URL fields that require API key auth — must be stripped from responses
 _AUTH_URL_FIELDS = {"fileDownloadURI", "downloadURI", "downloadUrl", "fileLocationURI"}
 
 
-def _dump(obj: object) -> object:
-    """Serialize a Pydantic model and strip auth-required URLs."""
+def _dump(obj: object) -> dict[str, Any]:
+    """Serialize a Pydantic model and strip auth-required URLs.
+
+    Every caller passes a Pydantic model from the upstream client; the
+    fallback ``return obj`` branch exists only to be defensive if a dict
+    slips through. Typed as ``dict[str, Any]`` so call sites can use
+    ``.get(...)`` and similar without per-call type narrowing.
+
+    ``hasattr`` and ``isinstance(obj, dict)`` don't narrow ``object`` in
+    ty's view, so we cast the results. The pyright/mypy ``union-attr``
+    suppression remains for the model_dump attribute lookup.
+    """
     if hasattr(obj, "model_dump"):
-        data = obj.model_dump()  # type: ignore[union-attr]
+        data: dict[str, Any] = cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
         _strip_auth_urls(data)
         return data
-    return obj
+    if isinstance(obj, dict):
+        return cast("dict[str, Any]", obj)
+    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
-def _strip_auth_urls(data: object) -> None:
-    """Recursively remove auth-required URL fields from nested dicts/lists."""
+def _strip_auth_urls(data: Any) -> None:
+    """Recursively remove auth-required URL fields from nested dicts/lists.
+
+    Typed as ``Any`` because this walks JSON-shaped data of arbitrary
+    depth — the recursion sees dicts, lists, scalars interchangeably.
+    Stricter typing would force per-call casts at every recursive step.
+    """
     if isinstance(data, dict):
         for key in _AUTH_URL_FIELDS & data.keys():
             del data[key]
@@ -146,7 +206,7 @@ async def search_applications(
         "attorney of record, continuity, PTA history, prosecution events, "
         "etc.) — large; prefer ``get_application`` for one record.",
     ] = False,
-) -> dict:
+) -> ListEnvelope[dict]:
     """Search USPTO patent applications by metadata fields (title, CPC, dates, status).
 
     Returns a lean stub per hit by default so result sets stay small.
@@ -157,33 +217,81 @@ async def search_applications(
     NOTE: This searches application metadata only — not claims or specification
     text. For full-text patent search (within claims, description, abstract),
     use search_patent_publications instead.
+
+    Related tools: get_application, list_file_history, get_patent_family.
     """
     async with UsptoOdpClient() as client:
         result = await client.search_applications(
             query=query, limit=limit, offset=offset, full=full
         )
-        return _dump(result)  # type: ignore[return-value]
+
+    dumped = _dump(result)
+    items = list(dumped.get("patentBag") or dumped.get("results") or [])
+    total_match = dumped.get("count") or dumped.get("recordTotalQuantity")
+    shown = len(items)
+    more = bool(total_match and shown + offset < int(total_match))
+    summary_total = f"{shown} of {total_match} hits" if total_match else f"{shown} hits"
+    return ListEnvelope[dict](
+        summary=f"USPTO Applications — `{query}`: {summary_total}.",
+        items=items,
+        more_available=more,
+        next_cursor=None,
+        provenance=_odp_provenance("/api/v1/patent/applications/search"),
+    )
+
+
+_GET_APPLICATION_FANOUT_CONCURRENCY = 5
 
 
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def get_application(
     application_number: Annotated[
-        str,
-        "USPTO application number (8+ digits). Examples: '16123456', '17654321'. "
+        str | list[str],
+        "USPTO application number (8+ digits), or a list of such numbers for "
+        "portfolio workflows. Examples: '16123456', ['16123456', '17654321']. "
         "NOT a patent number (like '10123456B2') or publication number "
         "(like 'US20230012345A1'). If you have a patent number, use "
         "get_patent_family to find the application number first.",
     ],
-) -> dict:
+) -> ListEnvelope[dict]:
     """Get application metadata: status, filing/grant dates, examiner, CPC, and title.
+
+    Accepts either a single application number or a list (per §5.4); the
+    response is always a ListEnvelope so the shape is stable. Bounded
+    concurrent fan-out internally.
 
     Does NOT return patent text (claims, spec, abstract). For patent text,
     use get_patent_publication. For prosecution documents, use
     list_file_history.
+
+    Related tools: search_applications, list_file_history, get_patent_family,
+    get_patent_assignment.
     """
+    numbers = (
+        [application_number] if isinstance(application_number, str) else list(application_number)
+    )
+
+    semaphore = asyncio.Semaphore(_GET_APPLICATION_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: UsptoOdpClient, appl: str) -> dict:
+        async with semaphore:
+            response = await client.get_application(appl)
+            return _dump(response)  # type: ignore[return-value]
+
     async with UsptoOdpClient() as client:
-        result = await client.get_application(application_number)
-        return _dump(result)  # type: ignore[return-value]
+        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(results) == 1:
+        summary = _summarize_application(_extract_first_record(results[0]))
+    else:
+        summary = f"Fetched {len(results)} USPTO applications: " + ", ".join(numbers)
+
+    path = "/api/v1/patent/applications" + ("/" + numbers[0] if len(numbers) == 1 else "")
+    return ListEnvelope[dict](
+        summary=summary,
+        items=results,
+        provenance=_odp_provenance(path),
+    )
 
 
 @uspto_mcp.tool(annotations=READ_ONLY)
@@ -193,7 +301,7 @@ async def list_file_history(
         "USPTO application number (8+ digits). Examples: '16123456'. "
         "NOT a patent number or publication number.",
     ],
-) -> dict:
+) -> ListEnvelope[dict]:
     """List prosecution file-history documents for an application.
 
     Returns each document with its identifier, code, description, date,
@@ -205,6 +313,8 @@ async def list_file_history(
     ABST (abstract), CTFR/CTNF (office actions), REM (applicant remarks),
     NOA (notice of allowance), CTRS (restriction requirement), IDS
     (information disclosure statement).
+
+    Related tools: get_application, get_file_history_item, download_file_history.
     """
     async with UsptoOdpClient() as client:
         response = await client.get_documents(application_number)
@@ -227,7 +337,26 @@ async def list_file_history(
                 "formats": formats,
             }
         )
-    return {"application_number": application_number, "documents": documents}
+
+    return ListEnvelope[dict](
+        summary=(
+            f"USPTO application {application_number} — {len(documents)} file-history documents."
+        ),
+        items=documents,
+        provenance=_odp_provenance(f"/api/v1/patent/applications/{application_number}/documents"),
+    )
+
+
+def _extract_first_record(payload: dict) -> dict:
+    """Pull the first record out of a single get_application response.
+
+    USPTO ODP returns ``{"patentBag": [{...}]}`` for a single application.
+    Falls back to the payload itself if the bag is absent.
+    """
+    bag = payload.get("patentBag") or payload.get("results")
+    if bag and isinstance(bag, list):
+        return bag[0]
+    return payload
 
 
 @uspto_mcp.tool(annotations=READ_ONLY)
@@ -500,23 +629,96 @@ async def get_patent_family(
 # ---------------------------------------------------------------------------
 
 
+_PATENT_ASSIGNMENT_FANOUT_CONCURRENCY = 5
+
+
+def _summarize_patent_assignment_response(record: dict) -> str:
+    """One-line Markdown summary of an ODP assignment response for one application."""
+    appl = record.get("applicationNumberText") or "(no appl#)"
+    bag = record.get("assignmentBag") or []
+    if not bag:
+        return f"**US application {appl}** — no recorded assignments."
+    first = bag[0]
+    rf = first.get("reelAndFrameNumber") or "(no reel/frame)"
+    conveyance = first.get("conveyanceText") or "(no conveyance)"
+    assignees = first.get("assigneeBag") or []
+    assignee_name = (
+        assignees[0].get("assigneeNameText")
+        if assignees and isinstance(assignees[0], dict)
+        else None
+    )
+    head = (
+        f"**US application {appl}** — {len(bag)} assignment"
+        f"{'s' if len(bag) != 1 else ''} on record."
+    )
+    line = f"Latest reel/frame {rf}: {conveyance}"
+    if assignee_name:
+        line += f" → {assignee_name}"
+    line += "."
+    return f"{head}\n{line}"
+
+
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def get_patent_assignment(
     application_number: Annotated[
-        str,
-        "USPTO application number (8+ digits). Examples: '16123456', '17654321'. "
-        "NOT a patent number or publication number.",
+        str | list[str],
+        "USPTO application number (8+ digits), or a list of such numbers for "
+        "portfolio workflows. Examples: '16123456', ['16123456', '17654321']. "
+        "NOT a patent number or publication number. The response is always "
+        "a ListEnvelope so the shape is stable.",
     ],
-) -> dict:
-    """Get assignment and ownership transfer history for a patent application."""
+) -> ListEnvelope[dict]:
+    """Get USPTO patent assignment and ownership-transfer history for one or many applications.
+
+    Returns recorded assignments (reel/frame, conveyance type, assignors,
+    assignees, dates) for each application. Accepts either a single
+    application number or a list (§5.4); bounded concurrent fan-out
+    internally, order matches the input. For text-based searches across
+    assignments (by assignee/assignor/conveyance), use
+    ``search_patent_assignments``.
+
+    Related tools: search_patent_assignments, get_application,
+    search_applications.
+    """
+    numbers = (
+        [application_number] if isinstance(application_number, str) else list(application_number)
+    )
+    if not numbers:
+        from law_tools_core.exceptions import ValidationError
+
+        raise ValidationError("get_patent_assignment requires at least one application number")
+
+    semaphore = asyncio.Semaphore(_PATENT_ASSIGNMENT_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: UsptoOdpClient, appl: str) -> dict:
+        async with semaphore:
+            return _dump(await client.get_assignment(appl))  # type: ignore[return-value]
+
     async with UsptoOdpClient() as client:
-        result = await client.get_assignment(application_number)
-        return _dump(result)  # type: ignore[return-value]
+        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(results) == 1:
+        summary = _summarize_patent_assignment_response(results[0])
+        path = f"/api/v1/patent/applications/{numbers[0]}/assignment"
+    else:
+        summary = f"Fetched assignments for {len(results)} applications: " + ", ".join(numbers)
+        path = "/api/v1/patent/applications/assignment"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=results,
+        provenance=_odp_provenance(path),
+    )
 
 
 # ---------------------------------------------------------------------------
 # PTAB (trials, appeals, interferences)
 # ---------------------------------------------------------------------------
+#
+# search_ptab / get_ptab / list_ptab_children multiplex over five PTAB record
+# types via a `type` parameter (§5.1 soft-cap accepted; the alternative was
+# 15+ tools). The audit (§5.13) flagged the abstract names, so each
+# docstring's first sentence expands "PTAB" and names the record types.
 
 
 _PTAB_SEARCH_METHOD = {
@@ -535,6 +737,166 @@ _PTAB_GET_METHOD = {
     "interference_decision": ("get_interference_decision", "document_identifier"),
 }
 
+# Upstream response bag keys keyed by PTAB type.
+_PTAB_BAG_KEY = {
+    "proceeding": "patentTrialProceedingDataBag",
+    "trial_decision": "patentTrialDocumentDataBag",
+    "trial_document": "patentTrialDocumentDataBag",
+    "appeal_decision": "patentAppealDataBag",
+    "interference_decision": "patentInterferenceDataBag",
+}
+
+_PTAB_FANOUT_CONCURRENCY = 5
+
+
+def _stub_ptab_record(record: dict, ptab_type: str) -> dict:
+    """Lean projection (§5.5) of a PTAB record.
+
+    Branches by ``ptab_type`` because the upstream shapes differ:
+
+    - ``proceeding`` — trial_number + status + filing/institution/decision
+      dates + patent number, patent owner, petitioner.
+    - ``trial_decision`` / ``trial_document`` — document_identifier +
+      filing_date + filing_party + document_type + trial_number. Decisions
+      additionally carry decision_type / issue_date.
+    - ``appeal_decision`` — document_identifier + appeal_number + issue_date
+      + decision_type + appeal_outcome + application_number + applicant.
+    - ``interference_decision`` — document_identifier + interference_number
+      + issue_date + decision_type + outcome + senior_party + junior_party.
+    """
+    out: dict = {"type": ptab_type}
+    if ptab_type == "proceeding":
+        meta = record.get("trialMetaData") or {}
+        po = record.get("patentOwnerData") or record.get("respondentData") or {}
+        rp = record.get("regularPetitionerData") or {}
+        out.update(
+            {
+                "trial_number": record.get("trialNumber"),
+                "trial_type_code": meta.get("trialTypeCode"),
+                "status": meta.get("trialStatusCategory"),
+                "petition_filing_date": meta.get("petitionFilingDate"),
+                "institution_decision_date": meta.get("institutionDecisionDate"),
+                "latest_decision_date": meta.get("latestDecisionDate"),
+                "termination_date": meta.get("terminationDate"),
+                "patent_number": po.get("patentNumber"),
+                "application_number": po.get("applicationNumberText"),
+                "patent_owner": po.get("patentOwnerName") or po.get("realPartyInInterestName"),
+                "petitioner": rp.get("realPartyInInterestName"),
+            }
+        )
+        return out
+    if ptab_type in ("trial_decision", "trial_document"):
+        dd = record.get("documentData") or {}
+        out.update(
+            {
+                "trial_number": record.get("trialNumber"),
+                "document_identifier": dd.get("documentIdentifier"),
+                "document_type": dd.get("documentTypeDescriptionText"),
+                "document_title": dd.get("documentTitleText") or dd.get("documentName"),
+                "filing_date": dd.get("documentFilingDate"),
+                "filing_party": dd.get("filingPartyCategory"),
+            }
+        )
+        if ptab_type == "trial_decision":
+            decision = record.get("decisionData") or {}
+            out["decision_type"] = decision.get("decisionTypeCategory")
+            out["decision_issue_date"] = decision.get("decisionIssueDate")
+            out["trial_outcome"] = decision.get("trialOutcomeCategory")
+        return out
+    if ptab_type == "appeal_decision":
+        dd = record.get("documentData") or {}
+        decision = record.get("decisionData") or {}
+        appellant = record.get("appellantData") or {}
+        out.update(
+            {
+                "appeal_number": record.get("appealNumber"),
+                "document_identifier": dd.get("documentIdentifier"),
+                "decision_issue_date": decision.get("decisionIssueDate"),
+                "decision_type": decision.get("decisionTypeCategory"),
+                "appeal_outcome": decision.get("appealOutcomeCategory"),
+                "application_number": appellant.get("applicationNumberText"),
+                "patent_number": appellant.get("patentNumber"),
+                "applicant": appellant.get("patentOwnerName")
+                or appellant.get("realPartyInInterestName"),
+            }
+        )
+        return out
+    if ptab_type == "interference_decision":
+        dd = record.get("decisionDocumentData") or record.get("documentData") or {}
+        senior = record.get("seniorPartyData") or {}
+        junior = record.get("juniorPartyData") or {}
+        out.update(
+            {
+                "interference_number": record.get("interferenceNumber"),
+                "document_identifier": dd.get("documentIdentifier"),
+                "decision_issue_date": dd.get("decisionIssueDate"),
+                "decision_type": dd.get("decisionTypeCategory"),
+                "interference_outcome": dd.get("interferenceOutcomeCategory"),
+                "senior_party": senior.get("realPartyInInterestName")
+                or senior.get("patentOwnerName"),
+                "junior_party": junior.get("realPartyInInterestName")
+                or junior.get("patentOwnerName"),
+            }
+        )
+        return out
+    return out
+
+
+def _summarize_ptab(record: dict, ptab_type: str) -> str:
+    """One-line Markdown summary of a single PTAB record. Always names the type."""
+    if ptab_type == "proceeding":
+        meta = record.get("trialMetaData") or {}
+        trial = record.get("trialNumber") or "(no trial#)"
+        status = meta.get("trialStatusCategory") or "(unknown status)"
+        kind = meta.get("trialTypeCode") or ""
+        po = record.get("patentOwnerData") or record.get("respondentData") or {}
+        owner = po.get("patentOwnerName") or po.get("realPartyInInterestName") or "(no owner)"
+        head = f"**PTAB trial {trial}** ({kind}) — {status}"
+        return f"{head}\nPatent owner: {owner}."
+    if ptab_type in ("trial_decision", "trial_document"):
+        dd = record.get("documentData") or {}
+        trial = record.get("trialNumber") or "(no trial#)"
+        doc_id = dd.get("documentIdentifier") or "(no doc id)"
+        title = dd.get("documentTitleText") or dd.get("documentName") or "(no title)"
+        filing = dd.get("documentFilingDate") or "?"
+        decision_type = ""
+        if ptab_type == "trial_decision":
+            decision = record.get("decisionData") or {}
+            dt = decision.get("decisionTypeCategory")
+            if dt:
+                decision_type = f" ({dt})"
+        head = (
+            f"**PTAB trial {ptab_type.removeprefix('trial_')} {doc_id}** — {title}{decision_type}"
+        )
+        return f"{head}\nTrial: {trial}. Filed {filing}."
+    if ptab_type == "appeal_decision":
+        dd = record.get("documentData") or {}
+        decision = record.get("decisionData") or {}
+        doc_id = dd.get("documentIdentifier") or "(no doc id)"
+        appeal = record.get("appealNumber") or "(no appeal#)"
+        outcome = decision.get("appealOutcomeCategory") or "(no outcome)"
+        issued = decision.get("decisionIssueDate") or "?"
+        head = f"**PTAB appeal decision {doc_id}** — appeal {appeal}, outcome: {outcome}"
+        return f"{head}\nIssued {issued}."
+    if ptab_type == "interference_decision":
+        dd = record.get("decisionDocumentData") or record.get("documentData") or {}
+        doc_id = dd.get("documentIdentifier") or "(no doc id)"
+        intf = record.get("interferenceNumber") or "(no intf#)"
+        outcome = dd.get("interferenceOutcomeCategory") or "(no outcome)"
+        issued = dd.get("decisionIssueDate") or "?"
+        head = f"**PTAB interference decision {doc_id}** — interference {intf}, outcome: {outcome}"
+        return f"{head}\nIssued {issued}."
+    return "PTAB record."
+
+
+def _extract_ptab_first(payload: dict, ptab_type: str) -> dict:
+    """Pull the first record out of a get_ptab response payload."""
+    bag_key = _PTAB_BAG_KEY[ptab_type]
+    bag = payload.get(bag_key)
+    if bag and isinstance(bag, list):
+        return bag[0]
+    return payload
+
 
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def search_ptab(
@@ -549,12 +911,28 @@ async def search_ptab(
     query: Annotated[str, "Search query"],
     limit: Annotated[int, "Maximum number of results"] = 25,
     offset: Annotated[int, "Result offset for pagination"] = 0,
-) -> dict:
-    """Search PTAB records across trials, appeals, and interferences.
+    full: Annotated[
+        bool,
+        "When False (the default), each hit is a lean stub whose fields "
+        "depend on ``type`` — proceedings carry trial number + status + key "
+        "dates + patent owner / petitioner; decisions and documents carry "
+        "document_identifier + filing_date + party + (for decisions) "
+        "decision_type + outcome. When True, every hit is the full PTAB "
+        "record — large; prefer ``get_ptab`` for one.",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search Patent Trial and Appeal Board (PTAB) records across AIA trials, ex parte appeals, and pre-AIA interferences.
 
-    Appeals and interferences are legally distinct tribunals from AIA
-    trials — pick ``type`` deliberately. For trial-bound searches, use
-    ``proceeding`` / ``trial_decision`` / ``trial_document``.
+    The PTAB is the USPTO administrative tribunal for AIA trials
+    (IPR/PGR/CBM/DER), ex parte appeals from examiner rejections, and
+    pre-AIA interferences. The ``type`` parameter picks which record kind
+    to search; appeals and interferences are legally distinct from AIA
+    trials. Returns a lean stub per hit by default; pass ``full=True`` for
+    the upstream PTAB record per hit.
+
+    Related tools: get_ptab, list_ptab_children, download_ptab_trial_documents,
+    download_ptab_trial_decisions, download_ptab_appeal_decisions,
+    download_ptab_interference_decisions.
     """
     key = type.strip().lower()
     method_name = _PTAB_SEARCH_METHOD.get(key)
@@ -565,7 +943,22 @@ async def search_ptab(
     async with UsptoOdpClient() as client:
         method = getattr(client, method_name)
         result = await method(query=query, limit=limit, offset=offset)
-        return _dump(result)  # type: ignore[return-value]
+
+    dumped = _dump(result) if hasattr(result, "model_dump") else result
+    bag_key = _PTAB_BAG_KEY[key]
+    raw_items = list(dumped.get(bag_key) or [])
+    total = dumped.get("count")
+    items = raw_items if full else [_stub_ptab_record(r, key) for r in raw_items]
+    shown = len(items)
+    more = bool(total and shown + offset < int(total))
+    summary_total = f"{shown} of {total} hits" if total else f"{shown} hits"
+    return ListEnvelope[dict](
+        summary=f"PTAB {key} — `{query}`: {summary_total}.",
+        items=items,
+        more_available=more,
+        next_cursor=None,
+        provenance=_odp_provenance(f"/api/v1/ptab/{key.replace('_', '-')}s/search"),
+    )
 
 
 @uspto_mcp.tool(annotations=READ_ONLY)
@@ -578,21 +971,58 @@ async def get_ptab(
         "from the corresponding search.",
     ],
     identifier: Annotated[
-        str,
-        "Trial number for 'proceeding'; document identifier for all other types.",
+        str | list[str],
+        "Trial number for 'proceeding' (e.g. 'IPR2024-00001'); document "
+        "identifier for all other types. Pass a list for portfolio workflows; "
+        "the response is always a ListEnvelope.",
     ],
-) -> dict:
-    """Fetch a single PTAB record (proceeding, decision, or document) by identifier."""
+) -> ListEnvelope[dict]:
+    """Fetch one or more Patent Trial and Appeal Board (PTAB) records — proceeding, decision, or document — by identifier.
+
+    The PTAB is the USPTO administrative tribunal for AIA trials, ex parte
+    appeals, and pre-AIA interferences. The ``type`` parameter selects the
+    record kind. Accepts either a single identifier or a list (§5.4) and
+    fans out with bounded concurrency; order matches the input.
+
+    Related tools: search_ptab, list_ptab_children, download_ptab_trial_documents,
+    download_ptab_trial_decisions, download_ptab_appeal_decisions,
+    download_ptab_interference_decisions.
+    """
     key = type.strip().lower()
     if key not in _PTAB_GET_METHOD:
         from law_tools_core.exceptions import ValidationError
 
         raise ValidationError(f"type must be one of {sorted(_PTAB_GET_METHOD)}; got {type!r}")
     method_name, _id_kind = _PTAB_GET_METHOD[key]
+    ids = [identifier] if isinstance(identifier, str) else list(identifier)
+    if not ids:
+        from law_tools_core.exceptions import ValidationError
+
+        raise ValidationError("get_ptab requires at least one identifier")
+
+    semaphore = asyncio.Semaphore(_PTAB_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: UsptoOdpClient, ident: str) -> dict:
+        async with semaphore:
+            method = getattr(client, method_name)
+            return _dump(await method(ident))  # type: ignore[return-value]
+
     async with UsptoOdpClient() as client:
-        method = getattr(client, method_name)
-        result = await method(identifier)
-        return _dump(result)  # type: ignore[return-value]
+        results = await asyncio.gather(*[_fetch_one(client, i) for i in ids])
+
+    if len(results) == 1:
+        first = _extract_ptab_first(results[0], key)
+        summary = _summarize_ptab(first, key)
+    else:
+        summary = f"Fetched {len(results)} PTAB {key} records: " + ", ".join(ids)
+
+    base_path = f"/api/v1/ptab/{key.replace('_', '-')}s"
+    path = base_path + ("/" + ids[0] if len(ids) == 1 else "")
+    return ListEnvelope[dict](
+        summary=summary,
+        items=results,
+        provenance=_odp_provenance(path),
+    )
 
 
 @uspto_mcp.tool(annotations=READ_ONLY)
@@ -610,10 +1040,18 @@ async def list_ptab_children(
         "For parent_type='trial' only: 'decisions' (default), 'documents', or 'both'. "
         "Appeals and interferences only return decisions.",
     ] = "decisions",
-) -> dict:
-    """List PTAB children (decisions, documents) attached to a parent record.
+) -> ListEnvelope[dict]:
+    """List Patent Trial and Appeal Board (PTAB) children — decisions or documents attached to a parent record.
 
-    Use ``download_ptab_document`` to retrieve the PDF of any trial document.
+    The parent can be an AIA trial number, a USPTO application number (for
+    ex parte appeals), or a pre-AIA interference number. For trials, pass
+    ``include='both'`` to enumerate decisions and party filings in one
+    call. Use the document identifiers to fetch full records via
+    ``get_ptab`` or PDFs via the ``download_ptab_*`` family.
+
+    Related tools: search_ptab, get_ptab, download_ptab_trial_documents,
+    download_ptab_trial_decisions, download_ptab_appeal_decisions,
+    download_ptab_interference_decisions.
     """
     from law_tools_core.exceptions import ValidationError
 
@@ -625,26 +1063,72 @@ async def list_ptab_children(
                 raise ValidationError(
                     f"include must be 'decisions', 'documents', or 'both' for trials; got {include!r}"
                 )
-            out: dict[str, object] = {"trial_number": parent_identifier}
+            items: list[dict] = []
             if inc in ("decisions", "both"):
-                decisions = await client.get_trial_decisions_by_trial(parent_identifier)
-                out["decisions"] = _dump(decisions)
+                decisions = _dump(await client.get_trial_decisions_by_trial(parent_identifier))
+                for entry in decisions.get("patentTrialDocumentDataBag") or []:
+                    items.append(
+                        _stub_ptab_record(
+                            {**entry, "trialNumber": parent_identifier}, "trial_decision"
+                        )
+                    )
             if inc in ("documents", "both"):
-                documents = await client.get_trial_documents_by_trial(parent_identifier)
-                out["documents"] = _dump(documents)
-            return out
+                documents = _dump(await client.get_trial_documents_by_trial(parent_identifier))
+                for entry in documents.get("patentTrialDocumentDataBag") or []:
+                    items.append(
+                        _stub_ptab_record(
+                            {**entry, "trialNumber": parent_identifier}, "trial_document"
+                        )
+                    )
+            summary = (
+                f"PTAB trial {parent_identifier} — {len(items)} {inc} record"
+                f"{'s' if len(items) != 1 else ''}."
+            )
+            return ListEnvelope[dict](
+                summary=summary,
+                items=items,
+                provenance=_odp_provenance(f"/api/v1/ptab/trials/{parent_identifier}/{inc}"),
+            )
         if pt == "application":
             if inc not in ("decisions",):
                 raise ValidationError("parent_type='application' only supports include='decisions'")
-            result = await client.get_appeal_decisions_by_number(parent_identifier)
-            return {"application_number": parent_identifier, "decisions": _dump(result)}
+            result = _dump(await client.get_appeal_decisions_by_number(parent_identifier))
+            items = [
+                _stub_ptab_record(entry, "appeal_decision")
+                for entry in result.get("patentAppealDataBag") or []
+            ]
+            summary = (
+                f"PTAB ex parte appeal decisions for application {parent_identifier} "
+                f"— {len(items)} decision{'s' if len(items) != 1 else ''}."
+            )
+            return ListEnvelope[dict](
+                summary=summary,
+                items=items,
+                provenance=_odp_provenance(
+                    f"/api/v1/ptab/appeals/by-application/{parent_identifier}"
+                ),
+            )
         if pt == "interference":
             if inc not in ("decisions",):
                 raise ValidationError(
                     "parent_type='interference' only supports include='decisions'"
                 )
-            result = await client.get_interference_decisions_by_number(parent_identifier)
-            return {"interference_number": parent_identifier, "decisions": _dump(result)}
+            result = _dump(await client.get_interference_decisions_by_number(parent_identifier))
+            items = [
+                _stub_ptab_record(entry, "interference_decision")
+                for entry in result.get("patentInterferenceDataBag") or []
+            ]
+            summary = (
+                f"PTAB interference decisions for {parent_identifier} "
+                f"— {len(items)} decision{'s' if len(items) != 1 else ''}."
+            )
+            return ListEnvelope[dict](
+                summary=summary,
+                items=items,
+                provenance=_odp_provenance(
+                    f"/api/v1/ptab/interferences/by-number/{parent_identifier}"
+                ),
+            )
         raise ValidationError(
             f"parent_type must be 'trial', 'application', or 'interference'; got {parent_type!r}"
         )
@@ -844,6 +1328,9 @@ async def download_ptab_trial_documents(
 
     For board-issued papers (institution decisions, FWDs, orders), use
     ``download_ptab_trial_decisions`` instead.
+
+    Related tools: search_ptab, get_ptab, list_ptab_children,
+    download_ptab_trial_decisions.
     """
     after_d = _ptab_parse_date(after, field_name="after")
     before_d = _ptab_parse_date(before, field_name="before")
@@ -905,6 +1392,9 @@ async def download_ptab_trial_decisions(
     URL-comfortable clients; in CoWork-style allowlist-gated setups,
     fall back to ``download_ptab_trial_documents`` for the party
     filings, which do surface per-doc resource links.
+
+    Related tools: search_ptab, get_ptab, list_ptab_children,
+    download_ptab_trial_documents.
     """
     after_d = _ptab_parse_date(after, field_name="after")
     before_d = _ptab_parse_date(before, field_name="before")
@@ -964,6 +1454,8 @@ async def download_ptab_appeal_decisions(
 
     Note: per-decision MCP resource URIs are not exposed for this
     category — fetch the zip via ``download_url``.
+
+    Related tools: search_ptab, get_ptab, list_ptab_children, get_application.
     """
     after_d = _ptab_parse_date(after, field_name="after")
     before_d = _ptab_parse_date(before, field_name="before")
@@ -1047,6 +1539,8 @@ async def download_ptab_interference_decisions(
 
     Note: per-decision MCP resource URIs are not exposed for this
     category — fetch the zip via ``download_url``.
+
+    Related tools: search_ptab, get_ptab, list_ptab_children.
     """
     after_d = _ptab_parse_date(after, field_name="after")
     before_d = _ptab_parse_date(before, field_name="before")
@@ -1142,26 +1636,142 @@ def _ptab_decision_filename(
 # ---------------------------------------------------------------------------
 
 
+_PETITION_FANOUT_CONCURRENCY = 5
+
+
+def _stub_petition(record: dict) -> dict:
+    """Lean projection (§5.5) of a USPTO petition decision record."""
+    return {
+        "petition_decision_record_identifier": record.get("petitionDecisionRecordIdentifier"),
+        "application_number": record.get("applicationNumberText"),
+        "patent_number": record.get("patentNumber"),
+        "decision_date": record.get("decisionDate"),
+        "decision_type_code": record.get("decisionTypeCode"),
+        "petition_type": record.get("decisionPetitionTypeCodeDescriptionText"),
+        "deciding_office": record.get("finalDecidingOfficeName"),
+        "applicant": record.get("firstApplicantName"),
+        "invention_title": record.get("inventionTitle"),
+        "petition_mail_date": record.get("petitionMailDate"),
+    }
+
+
+def _summarize_petition(record: dict) -> str:
+    """One-line Markdown summary of a single petition decision record."""
+    pid = record.get("petitionDecisionRecordIdentifier") or "(no id)"
+    appl = record.get("applicationNumberText") or "(no appl#)"
+    pt = record.get("decisionPetitionTypeCodeDescriptionText") or "(no type)"
+    dt = record.get("decisionTypeCode") or "(no decision)"
+    decided = record.get("decisionDate") or "?"
+    office = record.get("finalDecidingOfficeName") or ""
+    head = f"**USPTO petition {pid}** — {pt}"
+    line = f"Application {appl}. Decision: {dt} on {decided}"
+    if office:
+        line += f" by {office}"
+    line += "."
+    return f"{head}\n{line}"
+
+
+def _extract_petition_first(payload: dict) -> dict:
+    """Pull the first record out of a get_petition response payload."""
+    bag = payload.get("petitionDecisionDataBag")
+    if bag and isinstance(bag, list):
+        return bag[0]
+    return payload
+
+
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def search_petitions(
     query: Annotated[str, "Search query for petition decisions"],
     limit: Annotated[int, "Maximum number of results"] = 25,
     offset: Annotated[int, "Result offset for pagination"] = 0,
-) -> dict:
-    """Search USPTO petition decisions."""
+    full: Annotated[
+        bool,
+        "When False (the default), each hit is a lean stub: petition "
+        "decision identifier, application number, patent number, decision "
+        "date and type, petition type, deciding office, applicant, "
+        "invention title. When True, every hit carries the full ODP "
+        "petition decision record (statutes/rules bags, issue text, "
+        "ingestion timestamps, etc.).",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search USPTO petition decisions across the Open Data Portal.
+
+    Petition decisions are USPTO rulings on procedural and substantive
+    petitions filed during prosecution (e.g., revival, withdrawal of
+    holding of abandonment, prioritized examination). Returns lean stubs
+    by default. Use ``get_petition`` for a full record by decision
+    identifier; petitions attach to applications, so ``search_applications``
+    and ``get_application`` give you the underlying prosecution context.
+
+    Related tools: get_petition, search_applications, get_application.
+    """
     async with UsptoOdpClient() as client:
         result = await client.search_petitions(q=query, limit=limit, offset=offset)
-        return _dump(result)  # type: ignore[return-value]
+
+    dumped = _dump(result) if hasattr(result, "model_dump") else result
+    raw_items = list(dumped.get("petitionDecisionDataBag") or [])
+    total = dumped.get("count")
+    items = raw_items if full else [_stub_petition(r) for r in raw_items]
+    shown = len(items)
+    more = bool(total and shown + offset < int(total))
+    summary_total = f"{shown} of {total} hits" if total else f"{shown} hits"
+    return ListEnvelope[dict](
+        summary=f"USPTO petitions — `{query}`: {summary_total}.",
+        items=items,
+        more_available=more,
+        next_cursor=None,
+        provenance=_odp_provenance("/api/v1/patent/petitions/search"),
+    )
 
 
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def get_petition(
-    petition_id: Annotated[str, "Petition decision record identifier"],
-) -> dict:
-    """Get details for a specific petition decision."""
+    petition_number: Annotated[
+        str | list[str],
+        "USPTO petition decision record identifier (from search_petitions), or "
+        "a list of such identifiers for portfolio workflows. The response "
+        "shape stays a ListEnvelope whether you pass one or many.",
+    ],
+) -> ListEnvelope[dict]:
+    """Get one or more USPTO petition decision records by identifier.
+
+    Accepts either a single petition decision identifier or a list (§5.4);
+    the response is always a ListEnvelope. Bounded concurrent fan-out
+    internally; order matches the input.
+
+    Use ``search_petitions`` to discover decision identifiers, and
+    ``get_application`` for the underlying prosecution context (each
+    petition attaches to an application).
+
+    Related tools: search_petitions, search_applications, get_application.
+    """
+    ids = [petition_number] if isinstance(petition_number, str) else list(petition_number)
+    if not ids:
+        from law_tools_core.exceptions import ValidationError
+
+        raise ValidationError("get_petition requires at least one identifier")
+
+    semaphore = asyncio.Semaphore(_PETITION_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: UsptoOdpClient, pid: str) -> dict:
+        async with semaphore:
+            return _dump(await client.get_petition(pid))  # type: ignore[return-value]
+
     async with UsptoOdpClient() as client:
-        result = await client.get_petition(petition_id)
-        return _dump(result)  # type: ignore[return-value]
+        results = await asyncio.gather(*[_fetch_one(client, p) for p in ids])
+
+    if len(results) == 1:
+        first = _extract_petition_first(results[0])
+        summary = _summarize_petition(first)
+    else:
+        summary = f"Fetched {len(results)} USPTO petition decisions: " + ", ".join(ids)
+
+    path = "/api/v1/patent/petitions" + ("/" + ids[0] if len(ids) == 1 else "")
+    return ListEnvelope[dict](
+        summary=summary,
+        items=results,
+        provenance=_odp_provenance(path),
+    )
 
 
 # ---------------------------------------------------------------------------

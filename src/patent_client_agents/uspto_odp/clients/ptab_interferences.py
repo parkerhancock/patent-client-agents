@@ -59,7 +59,7 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
             context="search interferences",
         )
         data.setdefault("patentInterferenceDataBag", [])
-        return PtabInterferenceResponse(**data)
+        return PtabInterferenceResponse.model_validate(data)
 
     async def get_decision(self, document_identifier: str) -> PtabInterferenceResponse:
         """Get a single PTAB interference decision by document identifier.
@@ -83,7 +83,7 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         )
         if "patentInterferenceDataBag" not in data:
             data = {"count": 1, "patentInterferenceDataBag": [data]}
-        return PtabInterferenceResponse(**data)
+        return PtabInterferenceResponse.model_validate(data)
 
     async def get_decisions_by_number(self, interference_number: str) -> PtabInterferenceResponse:
         """Get all decisions for a PTAB interference by interference number.
@@ -106,7 +106,7 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
             context=f"get decisions for interference {interference_number}",
         )
         data.setdefault("patentInterferenceDataBag", [])
-        return PtabInterferenceResponse(**data)
+        return PtabInterferenceResponse.model_validate(data)
 
     async def download(
         self,
@@ -149,7 +149,7 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
             context="download interferences",
         )
         data.setdefault("patentInterferenceDataBag", [])
-        return PtabInterferenceResponse(**data)
+        return PtabInterferenceResponse.model_validate(data)
 
 
 __all__ = ["PtabInterferencesClient"]

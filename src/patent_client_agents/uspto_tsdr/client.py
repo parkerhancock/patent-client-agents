@@ -170,9 +170,11 @@ class TsdrClient(BaseAsyncClient):
                 if event.event_date:
                     last_date = event.event_date
                     break
-        return LastUpdateInfo(
-            serialNumber=serial_number,
-            lastUpdateDate=last_date,
+        return LastUpdateInfo.model_validate(
+            {
+                "serialNumber": serial_number,
+                "lastUpdateDate": last_date,
+            }
         )
 
     async def get_documents(
@@ -335,7 +337,7 @@ class TsdrClient(BaseAsyncClient):
         """
         records = payload.get("trademarks") or []
         if not records:
-            return TrademarkStatus(serialNumber=serial_number)
+            return TrademarkStatus.model_validate({"serialNumber": serial_number})
         tm = records[0]
         st = tm.get("status") or {}
 
@@ -369,14 +371,16 @@ class TsdrClient(BaseAsyncClient):
                 iso = asc.get("iso") or {}
                 entity = raw.get("entityType") or {}
                 owners.append(
-                    Owner(
-                        name=name,
-                        address=address,
-                        city=opt_str(raw.get("city")),
-                        state=opt_str(state_country.get("code")),
-                        country=opt_str(iso.get("code")) or opt_str(raw.get("countryCode")),
-                        postcode=opt_str(raw.get("zip")),
-                        entityType=opt_str(entity.get("description")),
+                    Owner.model_validate(
+                        {
+                            "name": name,
+                            "address": address,
+                            "city": opt_str(raw.get("city")),
+                            "state": opt_str(state_country.get("code")),
+                            "country": opt_str(iso.get("code")) or opt_str(raw.get("countryCode")),
+                            "postcode": opt_str(raw.get("zip")),
+                            "entityType": opt_str(entity.get("description")),
+                        }
                     )
                 )
 
@@ -390,21 +394,25 @@ class TsdrClient(BaseAsyncClient):
                 except ValueError:
                     class_num = None
             gs_list.append(
-                GoodsServices(
-                    classNumber=class_num,
-                    classDescription=opt_str(raw.get("description")),
-                    firstUseDate=clean_date(raw.get("firstUseDate")),
-                    firstUseDateInCommerce=clean_date(raw.get("firstUseInCommerceDate")),
+                GoodsServices.model_validate(
+                    {
+                        "classNumber": class_num,
+                        "classDescription": opt_str(raw.get("description")),
+                        "firstUseDate": clean_date(raw.get("firstUseDate")),
+                        "firstUseDateInCommerce": clean_date(raw.get("firstUseInCommerceDate")),
+                    }
                 )
             )
 
         events: list[ProsecutionEvent] = []
         for raw in tm.get("prosecutionHistory") or []:
             events.append(
-                ProsecutionEvent(
-                    eventDate=clean_date(raw.get("entryDate")),
-                    eventDescription=opt_str(raw.get("entryDesc")),
-                    eventCode=opt_str(raw.get("entryCode")),
+                ProsecutionEvent.model_validate(
+                    {
+                        "eventDate": clean_date(raw.get("entryDate")),
+                        "eventDescription": opt_str(raw.get("entryDesc")),
+                        "eventCode": opt_str(raw.get("entryCode")),
+                    }
                 )
             )
 
@@ -421,23 +429,26 @@ class TsdrClient(BaseAsyncClient):
         reg_num = opt_str(st.get("usRegistrationNumber"))
         status_code = opt_str(st.get("status"))
 
-        return TrademarkStatus(
-            serialNumber=serial_number,
-            registrationNumber=reg_num,
-            markText=opt_str(st.get("markElement")),
-            markType=mark_type,
-            statusCode=status_code,
-            statusDescription=opt_str(st.get("extStatusDesc")) or opt_str(st.get("intStatusDesc")),
-            statusDate=clean_date(st.get("statusDate")),
-            filingDate=clean_date(st.get("filingDate")),
-            registrationDate=clean_date(st.get("registrationDate")),
-            abandonmentDate=clean_date(st.get("dateAbandoned")),
-            cancellationDate=clean_date(st.get("dateCancelled")),
-            expirationDate=clean_date(st.get("dateExpired") or st.get("expirationDate")),
-            renewalDate=clean_date(st.get("renewalDate")),
-            owners=owners,
-            goodsServices=gs_list,
-            prosecutionHistory=events,
+        return TrademarkStatus.model_validate(
+            {
+                "serialNumber": serial_number,
+                "registrationNumber": reg_num,
+                "markText": opt_str(st.get("markElement")),
+                "markType": mark_type,
+                "statusCode": status_code,
+                "statusDescription": opt_str(st.get("extStatusDesc"))
+                or opt_str(st.get("intStatusDesc")),
+                "statusDate": clean_date(st.get("statusDate")),
+                "filingDate": clean_date(st.get("filingDate")),
+                "registrationDate": clean_date(st.get("registrationDate")),
+                "abandonmentDate": clean_date(st.get("dateAbandoned")),
+                "cancellationDate": clean_date(st.get("dateCancelled")),
+                "expirationDate": clean_date(st.get("dateExpired") or st.get("expirationDate")),
+                "renewalDate": clean_date(st.get("renewalDate")),
+                "owners": owners,
+                "goodsServices": gs_list,
+                "prosecutionHistory": events,
+            }
         )
 
     def _parse_documents_xml(self, xml_content: str) -> list[TsdrDocument]:
@@ -455,14 +466,20 @@ class TsdrClient(BaseAsyncClient):
                 mail_date = doc_elem.findtext("d:MailRoomDate", namespaces=ns)
                 pages = doc_elem.findtext("d:TotalPageQuantity", namespaces=ns)
 
-                doc = TsdrDocument(
-                    docId=f"{sn}-{doc_type}" if doc_type else sn,
-                    docType=doc_type,
-                    docCategory=category,
-                    docDate=mail_date[:10] if mail_date and len(mail_date) > 10 else mail_date,
-                    description=doc_desc,
-                    pageCount=int(pages) if pages else None,
-                    mailDate=mail_date[:10] if mail_date and len(mail_date) > 10 else mail_date,
+                doc = TsdrDocument.model_validate(
+                    {
+                        "docId": f"{sn}-{doc_type}" if doc_type else sn,
+                        "docType": doc_type,
+                        "docCategory": category,
+                        "docDate": mail_date[:10]
+                        if mail_date and len(mail_date) > 10
+                        else mail_date,
+                        "description": doc_desc,
+                        "pageCount": int(pages) if pages else None,
+                        "mailDate": mail_date[:10]
+                        if mail_date and len(mail_date) > 10
+                        else mail_date,
+                    }
                 )
                 documents.append(doc)
         except ET.ParseError:

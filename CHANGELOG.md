@@ -5,6 +5,303 @@ All notable changes to `patent-client-agents` are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.19.0] — 2026-05-15 (unreleased)
+
+### Added
+
+- **`CONNECTOR_STANDARDS.md`** — opinionated rules every connector must
+  satisfy (coverage scope, architecture defaults, provenance, recency,
+  MCP tool design §5.1-§5.13, closed-vocabulary manifest §6).
+- **`MIGRATION_PLAYBOOK.md`** — working sweep plan for migrating the
+  existing tool surface onto the standards, ordered for impact and
+  blast radius (21 PRs queued; rows 1-2 done).
+- **`coverage/sources.yaml`** — 31-entry closed-vocabulary manifest
+  enforced by `scripts/build_coverage.py`. Top-30 patent offices by
+  WIPO 2023 filing volume tracked for gap analysis.
+- **`law_tools_core.envelope`** — `Provenance`, `ResponseEnvelope[T]`,
+  `ListEnvelope[T]`, plus `make_provenance`, `encode_cursor`,
+  `decode_cursor` helpers. Cursors are opaque base64(JSON); connectors
+  decide the payload schema. The response shape is now uniform across
+  the catalog (§5.9).
+
+### Changed (breaking)
+
+- **USPTO Applications surface migrated to `ListEnvelope`.**
+  `search_applications`, `get_application`, and `list_file_history`
+  now return `ListEnvelope[dict]` with `Provenance` metadata (UTC
+  `retrieved_at`, `source_url`, `source_name`, `connector_version`)
+  and a Markdown `summary`. The shape is `{summary, items, next_cursor,
+  more_available, provenance}`.
+- **`get_application` now accepts `list[str]`** per §5.4 — pass a list
+  of application numbers for portfolio workflows. Single-string calls
+  still work and still return a `ListEnvelope` (shape is stable).
+  Internal bounded concurrency, order preservation.
+- **Trademarks surface migrated to `ListEnvelope`** (row 2 of
+  `MIGRATION_PLAYBOOK.md`):
+  - `search_trademarks` now returns lean stubs by default (eight
+    scalar fields); pass `full=True` for the upstream-shaped record.
+  - `get_trademark` collapses the two-argument
+    `(serial_number, registration_number)` pattern into one
+    `serial_number` parameter that accepts either format (auto-detected
+    by digit count: 8 → serial, 6-7 → registration). Accepts a list per
+    §5.4.
+  - `get_trademark_status` and `get_trademark_last_update` accept
+    `str | list[str]` per §5.4.
+
+### Removed
+
+- **`batch_trademark_status` deleted.** It was a §5.4 violation (no
+  `batch_*` tools). Use `get_trademark_status(serial_number=[...])`
+  instead — the list-accepting form is now the supported pattern.
+
+### Additional connector migrations (rows 3, 10, 19)
+
+- **USPTO Publications (PPUBS) migrated to `ListEnvelope`**
+  (row 3). `search_patent_publications` now returns lean stubs
+  (eight scalar fields) by default with `full=True` opt-in;
+  `get_patent_publication` accepts `publication_number: str | list[str]`
+  per §5.4 with bounded-concurrency fan-out. `resolve_publication_number`
+  in the same file now returns `ResponseEnvelope` (single-record shape;
+  true 1:1 resolver).
+- **EUIPO trademarks + designs migrated to `ListEnvelope`** (row 10).
+  `search_euipo_trademarks`, `get_euipo_trademark`,
+  `search_euipo_designs`, and `get_euipo_design` all conform; gets
+  accept `application_number: str | list[str]` (trademarks) or
+  `design_number: str | list[str]` (designs). Lean stubs of 8 / 7
+  scalars respectively. Single `_euipo_provenance` helper covers both
+  surfaces (shared host).
+- **WIPO Lex migrated to `ListEnvelope`** (row 19).
+  `search_wipo_lex_legislation` and `get_wipo_lex_legislation` conform;
+  get accepts `legislation_id: str | list[str]`. Note:
+  `LegislationSearchHit` upstream carries only three fields
+  (`legislation_id`, `title`, `url`) — country / year / IP-category
+  appear only on the detail-page fetch, documented in the search
+  docstring's cross-reference rather than fabricated into the lean
+  view.
+- **CAFC search tools migrated to `ListEnvelope`** (row 14).
+  `search_cafc_opinions` and `search_cafc_patent_opinions` return
+  lean stubs (eight scalars including `is_patent_case`) by default
+  with `full=True` opt-in. Shared `_stub_opinion()` helper. Provenance
+  is `substantive_law` / `mcp_proxy` shape (no `corpus_synced_at` /
+  `corpus_version`). `download_cafc_pdf` shape unchanged per playbook
+  §2 Shape E; its docstring picks up a `Related tools:` line and the
+  CAFC acronym expansion for §5.13 compliance.
+- **Copyright migrated to `ListEnvelope`** (row 16). `search_copyright`
+  now lean by default (eight scalar fields via a `_first()` list-flattener)
+  with `full=True` opt-in. `get_copyright_record` accepts
+  `public_records_id: str | list[str]` per §5.4. The parameter name
+  is intentionally kept — the upstream's `public_records_id` is a
+  distinct opaque ID (`voyager_12345`, `card_catalog_...`), not the
+  user-facing registration number (`TX 1234567`). Docstrings now
+  distinguish the two and point at `search_copyright` for
+  registration-number lookups.
+- **CPC tools migrated to envelope** (row 20). `lookup_cpc` and
+  `map_cpc_classification` return `ResponseEnvelope[dict]` (single
+  record); `search_cpc` returns `ListEnvelope[dict]` with a lean
+  default. First sentences sharpened per §5.13 audit finding — the
+  three tools' docstrings no longer "blur together." Tools live in
+  `mcp/tools/international.py` alongside the EPO OPS surface (which
+  CPC delegates to). `lookup_cpc` deliberately not list-accepting
+  for now (per-symbol summaries are more quotable; can flip if
+  portfolio resolution becomes a real workflow).
+- **MPEP migrated to envelope + `get_corpus_status()` callable**
+  (row 17). `search_mpep` returns `ListEnvelope[dict]` with a lean
+  default; `get_mpep_section` accepts `section: str | list[str]`
+  per §5.4. New module-level `patent_client_agents.mpep.get_corpus_status()`
+  returns a `CorpusStatus` TypedDict with `corpus_synced_at` and
+  `corpus_version`. The MCP tool calls it once per request to populate
+  `Provenance.corpus_synced_at` / `Provenance.corpus_version`. The
+  validator's MPEP-specific warning is now gone (8 corpora remain
+  pending row 18). The callable's pattern (TypedDict + `_parse_snapshot_date`
+  helper + try/except fallback to "unknown") is the template for the
+  8 row-18 sub-PRs.
+- **UPC migrated to envelope** (row 12). Seven tools: `search_upc_decisions`,
+  `get_upc_decision` (list-accept on `case_id`), `search_upc_statutes`,
+  `get_upc_section` (list-accept on `instrument`), and the three
+  `list_upc_*` vocab enumerators (§5.8 acceptable extension).
+  Decisions are `mcp_proxy` (no corpus fields); statutes are `mcp_local`
+  with corpus fields hardcoded to "unknown — needs verification" until
+  the `get_corpus_status()` rollout reaches `upc_statutes` (queued for
+  row 18). §5.6 audit fix: `search_upc_statutes` ↔ `get_upc_section`
+  now cross-reference.
+### Batch 7 connector migrations (rows 5, 7, 8) — sweep complete (21/21)
+
+- **Row 5: PTAB envelope + §5.4 list-accept + §5.13 acronym expansion.**
+  `search_ptab`, `get_ptab`, and `list_ptab_children` migrated to
+  `ListEnvelope[dict]` / `ResponseEnvelope[dict]`. The type-multiplex
+  (`proceeding` / `trial_decision` / `trial_document` /
+  `appeal_decision` / `interference_decision`) is preserved (§5.1
+  soft-cap acceptable); a single `_stub_ptab_record(record, ptab_type)`
+  helper branches per type. `list_ptab_children` collapses the
+  previous nested-dict shape (`{decisions: ..., documents: ...}`)
+  into a flat `ListEnvelope` where each item carries a `type` field —
+  agents can sort/filter without knowing the nesting. Every PTAB
+  tool's first sentence now spells out "Patent Trial and Appeal Board
+  (PTAB)" on first use. Download tools (`download_ptab_*`) keep
+  Shape E; docstrings picked up `Related tools:` lines.
+
+- **Row 7: Petitions envelope + §5.8 parameter rename.**
+  `search_petitions` returns `ListEnvelope[dict]` with a lean default
+  (drops upstream `statuteBag` / `ruleBag` / `issueTypeBag`).
+  `get_petition` accepts `petition_number: str | list[str]` per §5.4
+  with bounded fan-out — **parameter renamed from `petition_id` per
+  §5.8's "never `id`" rule.** Test pins the rename via `inspect.signature`.
+
+- **Row 8: Patent + Trademark Assignments envelope + lean projections.**
+  Spans three files:
+  - `search_patent_assignments` in `patent_assignments.py` — lean
+    projection (reel/frame, conveyance, first-party names, dates).
+    Now propagates `result.truncated` into both `more_available` and
+    the summary text ("USPTO capped at ~N; narrow to access more").
+  - `search_trademark_assignments` in `trademarks.py` — lean
+    projection. **Latent bug fix:** the previous code passed
+    `start_row=` to `search_by_serial` / `search_by_registration` /
+    `search_by_reel_frame` (would have raised `TypeError`); fixed to
+    only pass to methods that accept it.
+  - `get_patent_assignment` in `uspto.py` — `ListEnvelope[dict]` with
+    `application_number: str | list[str]` per §5.4.
+  - Provenance helpers: the two `search_*` tools hit
+    `assignment-api.uspto.gov` (distinct from ODP) and each get their
+    own source-specific helper (`_patent_assignment_provenance`,
+    `_tm_assignment_provenance`). `get_patent_assignment` hits the
+    ODP `/applications/{n}/assignment` endpoint and reuses
+    `_odp_provenance`.
+
+**The connector standards sweep is complete: all 21 playbook rows
+migrated. ~99 MCP tools across 25 connectors now ship the
+`ResponseEnvelope` / `ListEnvelope` contract with structured
+`Provenance` metadata.**
+
+### Batch 6 connector migrations (rows 4, 6, 9)
+
+- **Row 4: Google Patents collapse + rename + envelope.** Three
+  coordinated changes:
+  - `search_google_patents` → `search_patents_global` (§5.7
+    jurisdiction-neutral name; Google Patents indexes >100
+    jurisdictions, not just one source's view).
+  - `get_patent_details` **deleted**; `get_patent` gains a
+    `view: "full" | "details"` parameter — same data, half the
+    catalog surface (§5.1 catalog discipline).
+  - `get_patent` accepts `patent_number: str | list[str]` per §5.4
+    with bounded-concurrency fan-out; returns `ListEnvelope[dict]`
+    even for a single string.
+  - `search_patents_global` lean default of 9 scalars + `full=True`
+    opt-in (§5.5). New helpers: `_google_patents_provenance`,
+    `_summarize_patent`, `_details_view`, `_stub_search_hit`.
+  - Catalog (`catalog/sources/google-patents.md`,
+    `catalog/intents/README.md`) and docs (`docs/installation.md`)
+    updated for the rename.
+- **Row 6: Office Actions envelope + new `get_office_action`.**
+  Closes the §5.2 orphan-search audit finding via a real upstream
+  endpoint: `POST /api/v1/patent/oa/oa_actions/v1/records` with a
+  Lucene `id:<documentIdentifier>` query (the `oa_actions` Solr
+  dataset is the only office-action endpoint with full `body_text`
+  + structured `sections`). `search_office_actions` now returns
+  `ListEnvelope[dict]` with lean default (rejection_types included
+  in the projection) + `full=True` opt-in. Cursor encoding:
+  `{"start": N, "rows": M}`. `get_office_action` accepts
+  `document_identifier: str | list[str]` per §5.4 with bounded
+  fan-out. No client-layer changes needed.
+- **Row 9: EPO OPS migration — largest remaining surface.**
+  Seven tools migrated in `international.py`:
+  - `search_epo`: `ListEnvelope[dict]` with lean default + `full=True`
+    opt-in. EPO's `range_begin`/`range_end` pagination encoded as
+    opaque `next_cursor` payload per playbook §3.
+  - `get_epo_biblio`, `get_epo_family`, `get_epo_fulltext`,
+    `get_epo_legal_events`: all accept `application_number: str | list[str]`
+    per §5.4 with `_EPO_FANOUT_CONCURRENCY=5`.
+  - `get_epo_cql_help`: `ResponseEnvelope[dict]`. §5.13 rewrite:
+    "Show the search syntax (CQL — Common Query Language) accepted
+    by `search_epo`."
+  - `convert_epo_number`: `ResponseEnvelope[dict]`.
+  - §5.6 cross-references: `search_epo` now names all 5 `get_epo_*`
+    siblings + `convert_epo_number`; each `get_epo_*` references the
+    others (closes the audit finding that the EPO get-family was
+    not cross-referenced from `search_epo`).
+  - Sibling tools in `international.py` (JPO, CPC,
+    `get_epo_unitary_patent_status`) explicitly verified unmodified.
+
+### Batch 5 connector migrations (rows 13, 15, 21)
+
+- **Row 21: Unitary patent helper renamed and migrated.**
+  `get_unitary_patent_package` → `get_epo_unitary_patent_status`
+  (§5.7 jurisdiction prefix, §5.8 dropped "package" jargon, §5.13
+  first sentence rewritten to lead with what an attorney actually
+  wants). Returns `ResponseEnvelope[dict]` (Shape B — single-record
+  EPO Register lookup). Library-level API
+  (`epo_ops.get_unitary_patent_package`, client method,
+  `UnitaryPatentPackage` model) intentionally unchanged — only the MCP
+  tool surface renamed.
+
+- **Row 13: USITC migrated + new `get_usitc_investigation` tool.**
+  Closes the §5.2 orphan-search audit finding via a real EDIS
+  endpoint (`/data/investigation/{N}`); no search fallback needed.
+  `search_usitc_investigations`, `search_usitc_documents`,
+  `search_hts_tariffs`, `list_usitc_attachments`,
+  `list_ids_investigations` now all conform to the envelope.
+  `run_dataweb_report` first sentence rewritten per §5.13:
+  "Pull US import/export statistics from USITC DataWeb (the official
+  trade-statistics interface)." All docstrings spell out USITC, EDIS,
+  and DataWeb on first use. Download tools (`download_usitc_*`)
+  retain their Shape E ResourceLink shape; docstrings updated for
+  §5.6 cross-refs only.
+
+- **Row 15: CanLII renamed and migrated.**
+  `browse_canlii_cases` → `search_canlii_cases`,
+  `browse_canlii_legislation` → `search_canlii_legislation` per the
+  §5.8 verb table (the upstream behavior is filter-driven search, not
+  vocabulary enumeration). `get_canlii_case` and
+  `get_canlii_legislation` accept `str | list[str]` per §5.4 with
+  bounded-concurrency fan-out. Citator tools
+  (`get_canlii_cited_cases`, `get_canlii_citing_cases`,
+  `get_canlii_cited_legislations`) gain §5.6 cross-refs to
+  `get_canlii_case`. Vocabulary list_* enumerators retained per §5.8
+  acceptable extension. Catalog and docs references updated for the
+  rename.
+
+- **Row 18 complete — all 8 substantive-law `mcp_local` corpora now
+  expose `get_corpus_status()` AND ship envelope-conformant MCP tools.**
+  Real `corpus_version` strings now flow through `Provenance.corpus_version`
+  on every response:
+  - **EPC**: `"2020"` (EPC 2020 edition)
+  - **EPO Guidelines**: `"2024"` (March 2024 annual edition)
+  - **EPO Case Law**: `"2022"` (10th edition Boards of Appeal "white book")
+  - **PCT-EPO Guidelines**: `"2024"`
+  - **EPO UP Guidelines**: `"2026"`
+  - **UKIPO MoPP**: `"snapshot-2026-05-14"` (gov.uk doesn't publish a
+    stable revision tag; falls back to dated snapshot)
+  - **TMEP**: `"current"` (USPTO doesn't publish a stable revision label)
+  - **UPC Statutes**: `"snapshot-YYYY-MM-DD"` (derived from
+    `meta.snapshot_date` since the corpus schema doesn't carry a
+    `source_version` field)
+
+  `scripts/build_coverage.py` validator's check #3 is now a **hard
+  error** (was a warning during rollout). Every category-2 mcp_local
+  connector must expose `get_corpus_status()` or CI fails.
+
+  Row-18b agent also fixed a pre-existing bug in `epo_pct_guidelines`
+  and `epo_up_guidelines`: `default_corpus_path()` returned
+  `~/.cache/patent_client_agents/guidelines.db` (the EPC corpus path)
+  for both. Corrected to per-corpus filenames (`pct_guidelines.db`,
+  `up_guidelines.db`).
+
+- **JPO migrated to envelope** (row 11). All `get_jpo_*` and the
+  `convert_*` family. Notable changes:
+  - **`get_jpo_applicant_by_code` + `get_jpo_applicant_by_name`
+    collapsed into single `get_jpo_applicant`** per §5.3 (auto-detect:
+    9-digit numeric → code; anything else → exact-name match). Drops
+    the JPO surface from 12 to 11 tools.
+  - **§5.13 rewrites:** `get_jpo_jplatpat_url` first sentence now reads
+    "Get the J-PlatPat (JPO public search portal) permalink for a JPO
+    filing." `get_jpo_number_reference` now reads "Convert a JPO number
+    between application, publication, and registration forms."
+  - **§5.4 list-accept** on `get_jpo_progress`, `get_jpo_progress_simple`,
+    `get_jpo_registration_info` with `_JPO_FANOUT_CONCURRENCY=5`.
+  - **§5.6 cross-references** added between facet fetches and the
+    parent `get_jpo_progress` (audit finding).
+  - Catalog and `ip_research` skill references updated to name the
+    collapsed applicant tool.
+
 ## [0.18.0] — 2026-05-14 (unreleased)
 
 ### Changed (breaking)

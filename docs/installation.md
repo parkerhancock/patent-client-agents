@@ -151,7 +151,7 @@ environment).
 The plugin ships **only the MCP server** — no skill, no agents, no
 hooks. The MCP tools' in-schema descriptions already carry the
 cross-tool routing guidance a skill would otherwise centralize (e.g.
-`search_google_patents` tells the agent "PREFER search_patent_publications
+`search_patents_global` tells the agent "PREFER search_patent_publications
 for US patents"; `get_epo_cql_help` is itself a tool).
 
 ### Prereq

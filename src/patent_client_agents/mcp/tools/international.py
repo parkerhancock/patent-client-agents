@@ -2,12 +2,20 @@
 
 from __future__ import annotations
 
+import asyncio
 import base64
-from typing import Annotated, Literal
+from typing import Annotated, Any, Literal, cast
 
 import httpx
 from fastmcp import FastMCP
 
+from law_tools_core.envelope import (
+    ListEnvelope,
+    ResponseEnvelope,
+    decode_cursor,
+    encode_cursor,
+    make_provenance,
+)
 from law_tools_core.exceptions import ValidationError
 from law_tools_core.filenames import epo_pdf as _epo_pdf_name
 from law_tools_core.mcp.annotations import READ_ONLY
@@ -36,10 +44,19 @@ _JPO_REQUIRED_ENV: list[str] = ["JPO_API_USERNAME", "JPO_API_PASSWORD"]
 international_mcp = FastMCP("International")
 
 
-def _dump(obj: object) -> object:
+def _dump(obj: object) -> dict[str, Any]:
+    """Serialize a Pydantic model to a dict (or pass through dicts).
+
+    Every caller passes a Pydantic model from the upstream client; the
+    fallback exists to be defensive if a dict slips through. Typed as
+    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
+    per-call narrowing.
+    """
     if hasattr(obj, "model_dump"):
-        return obj.model_dump()  # type: ignore[union-attr]
-    return obj
+        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
+    if isinstance(obj, dict):
+        return cast("dict[str, Any]", obj)
+    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 # ---------------------------------------------------------------------------
@@ -177,7 +194,109 @@ async def _jpo_document_bundle_resource(ip_type: str, application_number: str, d
 
 
 # ---------------------------------------------------------------------------
-# EPO Open Patent Services
+# EPO Open Patent Services — envelope helpers
+#
+# Every EPO OPS tool returns ListEnvelope[dict] (search + list-accepting gets
+# per §5.4) or ResponseEnvelope[dict] (CQL help, single-record number
+# conversion). Provenance points at the upstream
+# `https://ops.epo.org/3.2/rest-services` path so attorneys can verify any
+# field against the source register.
+# ---------------------------------------------------------------------------
+
+_EPO_OPS_BASE = "https://ops.epo.org/3.2/rest-services"
+_EPO_OPS_NAME = "European Patent Office Open Patent Services (EPO OPS)"
+_EPO_FANOUT_CONCURRENCY = 5
+
+
+def _epo_provenance(path: str) -> Any:
+    """Build a Provenance pointing at ``{base}{path}`` on EPO OPS."""
+    return make_provenance(source_url=f"{_EPO_OPS_BASE}{path}", source_name=_EPO_OPS_NAME)
+
+
+def _stub_epo_search_hit(record: dict) -> dict:
+    """Lean projection of an EPO publication search hit (§5.5).
+
+    Returns scalar identifiers + the most-quotable metadata: publication number
+    (country + doc_number + kind code, when present), application number,
+    publication date, and family id. Mirrors the upstream ``SearchResult``
+    shape but flattens the publication identity into a single string so an
+    agent can paste it into ``get_epo_biblio`` or ``get_epo_family`` directly.
+    """
+    country = record.get("country")
+    doc_number = record.get("doc_number")
+    kind = record.get("kind")
+    pub_parts = [p for p in (country, doc_number, kind) if p]
+    publication_number = "".join(pub_parts) if pub_parts else record.get("docdb_number")
+    return {
+        "publication_number": publication_number,
+        "application_number": record.get("application_number"),
+        "publication_date": record.get("publication_date"),
+        "country": country,
+        "kind": kind,
+        "family_id": record.get("family_id"),
+    }
+
+
+def _stub_epo_family_hit(record: dict) -> dict:
+    """Lean projection of an EPO family search hit (one row per family)."""
+    members = record.get("members") or []
+    member_stubs = [_stub_epo_search_hit(m) for m in members if isinstance(m, dict)]
+    return {
+        "family_id": record.get("family_id"),
+        "member_count": len(member_stubs),
+        "members": member_stubs,
+    }
+
+
+def _summarize_epo_biblio(record: dict, *, fallback_number: str) -> str:
+    """One-line Markdown summary for a single ``BiblioRecord`` dump."""
+    documents = record.get("documents") or []
+    first = documents[0] if documents and isinstance(documents[0], dict) else record
+    pub = first.get("docdb_number") or fallback_number
+    title = first.get("title") or "(no title)"
+    applicants = first.get("applicants") or []
+    head = f"**EPO {pub}** — {title}"
+    if applicants:
+        return f"{head}\nApplicant: {applicants[0]}."
+    return f"{head}."
+
+
+def _summarize_epo_fulltext(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("docdb_number") or fallback_number
+    section = record.get("section") or "fulltext"
+    claims = record.get("claims") or []
+    if claims:
+        return f"**EPO {pub}** — {section}: {len(claims)} claim(s)."
+    has_desc = bool(record.get("description") or record.get("raw_text"))
+    if has_desc:
+        return f"**EPO {pub}** — {section} text returned."
+    return f"**EPO {pub}** — no {section} content available."
+
+
+def _summarize_epo_family(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("publication_number") or fallback_number
+    num = record.get("num_records") or len(record.get("members") or [])
+    return f"**EPO {pub}** — INPADOC family: {num} member(s)."
+
+
+def _summarize_epo_legal_events(record: dict, *, fallback_number: str) -> str:
+    events = record.get("events") or []
+    ref = record.get("publication_reference") or {}
+    pub = ref.get("doc_number") or fallback_number
+    return f"**EPO {pub}** — {len(events)} legal event(s) on file."
+
+
+def _summarize_epo_number_conversion(input_number: str, record: dict) -> str:
+    out_doc = record.get("output_document") or {}
+    country = out_doc.get("country") or ""
+    number = out_doc.get("doc_number") or out_doc.get("number") or "(no output)"
+    kind = out_doc.get("kind") or ""
+    rendered = f"{country}{number}{kind}".strip() or number
+    return f"**EPO number conversion `{input_number}`** → {rendered}."
+
+
+# ---------------------------------------------------------------------------
+# EPO Open Patent Services — MCP tools
 # ---------------------------------------------------------------------------
 
 
@@ -185,35 +304,63 @@ async def _jpo_document_bundle_resource(ip_type: str, application_number: str, d
 async def search_epo(
     cql_query: Annotated[
         str,
-        "CQL query string. Common examples: "
+        "CQL (Common Query Language) query string. Common examples: "
         "'ta=CRISPR and pa=Broad Institute' (title/abstract + applicant), "
         "'in=Nakamura and ic=H01L' (inventor + IPC class), "
         "'pn=EP1234567' (publication number lookup). "
-        "For complex queries, call get_epo_cql_help first.",
+        "Call ``get_epo_cql_help`` for the full field reference.",
     ],
     group_by: Annotated[
         str,
         "Result grouping: 'publication' (one row per publication, default) or "
         "'family' (one row per patent family — de-duplicates across jurisdictions).",
     ] = "publication",
-    range_begin: Annotated[int, "Start of result range (1-indexed)"] = 1,
-    range_end: Annotated[int, "End of result range"] = 25,
-) -> dict:
-    """Search patents via EPO Open Patent Services.
+    range_begin: Annotated[int, "Start of result range (1-indexed)."] = 1,
+    range_end: Annotated[int, "End of result range."] = 25,
+    next_cursor: Annotated[
+        str | None,
+        "Opaque cursor from a previous response's ``next_cursor``. Overrides "
+        "``range_begin``/``range_end`` when present.",
+    ] = None,
+    full: Annotated[
+        bool,
+        "When False (default), each hit is a lean stub: publication number, "
+        "application number, publication date, country, kind, family id. "
+        "When True, hits carry the full upstream ``SearchResult`` shape. "
+        "For deep bibliographic data on one publication, prefer "
+        "``get_epo_biblio``.",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search worldwide patents (US, EP, WO, JP, CN, KR, and more) via EPO Open Patent Services.
 
-    Covers patents worldwide including US, EP, WO, JP, CN, KR, and
-    many other jurisdictions. Use CQL query syntax — call
-    get_epo_cql_help for the full field reference.
+    Returns a ListEnvelope of publication or family hits ranked by EPO's
+    CQL search service. The lean default surfaces just the identifiers an
+    agent needs to follow up with ``get_epo_biblio`` (bibliography),
+    ``get_epo_fulltext`` (claims + description), ``get_epo_family``
+    (INPADOC family), ``get_epo_legal_events`` (status timeline), or
+    ``convert_epo_number`` (format conversion). Pass ``group_by='family'``
+    to deduplicate across priority-linked publications.
 
-    Set ``group_by='family'`` to deduplicate across priority-linked
-    publications (INPADOC families); the default returns one row per
-    publication.
+    Pagination uses EPO's ``range_begin``/``range_end`` window (1-indexed,
+    inclusive). When ``total > shown + (range_begin - 1)`` the envelope
+    sets ``more_available=True`` and returns an opaque ``next_cursor`` —
+    pass it back unchanged for the next page.
 
-    Returns 404 when no results match (not an error).
+    Related tools: get_epo_cql_help, get_epo_biblio, get_epo_fulltext,
+    get_epo_family, get_epo_legal_events, convert_epo_number.
     """
     group = group_by.strip().lower()
     if group not in ("publication", "family"):
         raise ValidationError(f"group_by must be 'publication' or 'family'; got {group_by!r}")
+
+    if next_cursor:
+        try:
+            payload = decode_cursor(next_cursor)
+        except ValueError as exc:
+            raise ValidationError(f"invalid next_cursor: {exc}") from exc
+        range_begin = int(payload.get("range_begin", range_begin))
+        range_end = int(payload.get("range_end", range_end))
+
     async with client_from_env() as client:
         if group == "family":
             result = await client.search_families(
@@ -223,19 +370,53 @@ async def search_epo(
             result = await client.search_published(
                 query=cql_query, range_begin=range_begin, range_end=range_end
             )
-        return _dump(result)  # type: ignore[return-value]
+
+    dumped = _dump(result)
+    raw = dumped.get("families") if group == "family" else dumped.get("results")
+    raw_rows: list[dict[str, Any]] = raw if isinstance(raw, list) else []
+    items: list[dict[str, Any]]
+    if full:
+        items = raw_rows
+    elif group == "family":
+        items = [_stub_epo_family_hit(r) for r in raw_rows]
+    else:
+        items = [_stub_epo_search_hit(r) for r in raw_rows]
+
+    total = dumped.get("total_results")
+    shown = len(items)
+    page_size = max(range_end - range_begin + 1, 1)
+    more = bool(total and (range_begin - 1) + shown < int(total))
+    cursor: str | None = None
+    if more:
+        next_begin = range_begin + page_size
+        cursor = encode_cursor({"range_begin": next_begin, "range_end": next_begin + page_size - 1})
+
+    summary_total = f"{shown} of {total} hits" if total else f"{shown} hits"
+    return ListEnvelope[dict](
+        summary=f"EPO OPS — `{cql_query}` ({group}): {summary_total}.",
+        items=items,
+        more_available=more,
+        next_cursor=cursor,
+        provenance=_epo_provenance(
+            "/family/search" if group == "family" else "/published-data/search"
+        ),
+    )
 
 
 @international_mcp.tool(annotations=READ_ONLY)
-async def get_epo_cql_help() -> dict:
-    """Get the full CQL query syntax reference for EPO OPS search tools.
+async def get_epo_cql_help() -> ResponseEnvelope[dict]:
+    """Show the search syntax (CQL — Common Query Language) accepted by ``search_epo``.
 
-    Call this before constructing complex EPO search queries. Returns
-    all searchable fields, operators, wildcards, and examples.
+    Returns example queries for each searchable field plus the operators,
+    wildcards, and date-range forms that EPO OPS understands. Call this
+    before constructing complex queries; pass the resulting field codes
+    (``ta``, ``pa``, ``ic``, …) to ``search_epo``.
+
+    Related tools: search_epo, get_epo_biblio, get_epo_family.
     """
-    return {
+    details = {
         "overview": (
-            "EPO OPS uses CQL (Contextual Query Language). Queries are "
+            "EPO OPS uses CQL (Common Query Language). Queries are "
             "field=value pairs combined with boolean operators."
         ),
         "fields": {
@@ -300,132 +481,524 @@ async def get_epo_cql_help() -> dict:
             "publication numbers (e.g. 'pn=US10123456', 'pn=EP1234567')."
         ),
     }
+    return ResponseEnvelope[dict](
+        summary="EPO OPS CQL reference — field codes, operators, wildcards, examples.",
+        details=details,
+        provenance=_epo_provenance("/published-data/search"),
+    )
 
 
 @international_mcp.tool(annotations=READ_ONLY)
 async def get_epo_biblio(
-    patent_number: Annotated[str, "Patent document number (e.g. 'EP1234567A1')"],
-) -> dict:
-    """Get bibliographic data for a patent from EPO OPS.
+    patent_number: Annotated[
+        str | list[str],
+        "Patent document number (e.g. 'EP1234567A1'), or a list of such "
+        "numbers for portfolio workflows. Examples: 'EP1234567A1', "
+        "['EP1234567A1', 'US10123456B2']. EPO OPS accepts country-prefixed "
+        "publication numbers across all jurisdictions it indexes.",
+    ],
+) -> ListEnvelope[dict]:
+    """Get bibliographic data (title, applicants, inventors, IPC/CPC, priority) for one or more patents from EPO OPS.
 
-    Use download_patent_pdf to download the patent PDF.
+    Accepts a single number or a list (per §5.4); the response is always
+    a ListEnvelope. Bounded concurrent fan-out internally. Each item
+    carries the upstream ``BiblioResponse`` shape (``documents`` list with
+    title, applicants, inventors, classifications, priority claims).
+    For full text use ``get_epo_fulltext``; for the family graph use
+    ``get_epo_family``; for status timeline use ``get_epo_legal_events``.
+
+    Related tools: search_epo, get_epo_fulltext, get_epo_family,
+    get_epo_legal_events, convert_epo_number, get_epo_cql_help.
     """
+    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    if not numbers:
+        raise ValidationError("get_epo_biblio requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_biblio(number=n))  # type: ignore[return-value]
+
     async with client_from_env() as client:
-        result = await client.fetch_biblio(number=patent_number)
-        return _dump(result)  # type: ignore[return-value]
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_biblio(items[0], fallback_number=numbers[0])
+        path = f"/published-data/publication/docdb/{numbers[0]}/biblio"
+    else:
+        summary = f"EPO OPS biblio — fetched {len(items)} record(s): " + ", ".join(numbers)
+        path = "/published-data/publication"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_provenance(path),
+    )
 
 
 @international_mcp.tool(annotations=READ_ONLY)
 async def get_epo_fulltext(
-    patent_number: Annotated[str, "Patent document number (e.g. 'EP1234567A1')"],
-) -> dict:
-    """Get full text (description and claims) of a patent from EPO OPS."""
+    patent_number: Annotated[
+        str | list[str],
+        "Patent document number (e.g. 'EP1234567A1'), or a list for portfolio "
+        "workflows. Examples: 'EP1234567A1', ['EP1234567A1', 'EP9876543B1'].",
+    ],
+) -> ListEnvelope[dict]:
+    """Get full text (claims + description) for one or more patents from EPO OPS.
+
+    Accepts a single number or a list (per §5.4); the response is always
+    a ListEnvelope. Each item carries the parsed ``FullTextResponse`` —
+    claims list with dependency graph and (where indexed) the
+    description text. Bounded concurrent fan-out internally. Note: EPO
+    OPS only carries fulltext for jurisdictions that license it to EPO;
+    coverage is denser for EP/WO than for national US/JP/CN
+    publications.
+
+    Related tools: search_epo, get_epo_biblio, get_epo_family,
+    get_epo_legal_events, convert_epo_number.
+    """
+    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    if not numbers:
+        raise ValidationError("get_epo_fulltext requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_fulltext(number=n))  # type: ignore[return-value]
+
     async with client_from_env() as client:
-        result = await client.fetch_fulltext(number=patent_number)
-        return _dump(result)  # type: ignore[return-value]
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_fulltext(items[0], fallback_number=numbers[0])
+        path = f"/published-data/publication/docdb/{numbers[0]}/claims"
+    else:
+        summary = f"EPO OPS fulltext — fetched {len(items)} record(s): " + ", ".join(numbers)
+        path = "/published-data/publication"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_provenance(path),
+    )
 
 
 @international_mcp.tool(annotations=READ_ONLY)
 async def get_epo_family(
-    patent_number: Annotated[str, "Patent document number"],
-) -> dict:
-    """Get patent family members from EPO OPS (INPADOC family)."""
+    patent_number: Annotated[
+        str | list[str],
+        "Patent document number, or a list for portfolio workflows. "
+        "Examples: 'EP1234567A1', ['EP1234567A1', 'US10123456B2']. EPO uses "
+        "INPADOC families (priority-linked publications across jurisdictions).",
+    ],
+) -> ListEnvelope[dict]:
+    """Get INPADOC patent family members (priority-linked publications across jurisdictions) for one or more patents.
+
+    Accepts a single number or a list (per §5.4); the response is always
+    a ListEnvelope. Each item carries the parsed ``FamilyResponse`` —
+    every family member with its publication number, application number,
+    and priority claims. Bounded concurrent fan-out internally. INPADOC
+    families group all publications that share at least one priority
+    document, so the response covers continuation chains, national-phase
+    entries from a PCT, and cross-jurisdiction equivalents.
+
+    Related tools: search_epo, get_epo_biblio, get_epo_fulltext,
+    get_epo_legal_events, convert_epo_number.
+    """
+    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    if not numbers:
+        raise ValidationError("get_epo_family requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_family(number=n))  # type: ignore[return-value]
+
     async with client_from_env() as client:
-        result = await client.fetch_family(number=patent_number)
-        return _dump(result)  # type: ignore[return-value]
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_family(items[0], fallback_number=numbers[0])
+        path = f"/family/publication/docdb/{numbers[0]}"
+    else:
+        summary = f"EPO OPS family — fetched {len(items)} record(s): " + ", ".join(numbers)
+        path = "/family/publication"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_provenance(path),
+    )
 
 
 @international_mcp.tool(annotations=READ_ONLY)
 async def get_epo_legal_events(
-    patent_number: Annotated[str, "Patent document number"],
-) -> dict:
-    """Get legal status events for a patent from EPO OPS."""
+    patent_number: Annotated[
+        str | list[str],
+        "Patent document number, or a list for portfolio workflows. "
+        "Examples: 'EP1234567A1', ['EP1234567A1', 'EP9876543B1'].",
+    ],
+) -> ListEnvelope[dict]:
+    """Get the legal-status event timeline (filing, publication, grant, lapse) for one or more patents from EPO OPS.
+
+    Accepts a single number or a list (per §5.4); the response is always
+    a ListEnvelope. Each item carries the parsed ``LegalEventsResponse``
+    — a chronological list of events with their date, country, EPO code,
+    and human-readable description. Bounded concurrent fan-out
+    internally. Useful for confirming grant date, lapse/withdrawal,
+    opposition events, and renewal-fee history across the family.
+
+    Related tools: search_epo, get_epo_biblio, get_epo_family,
+    get_epo_fulltext, convert_epo_number, get_epo_unitary_patent_status.
+    """
+    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    if not numbers:
+        raise ValidationError("get_epo_legal_events requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_legal_events(number=n))  # type: ignore[return-value]
+
     async with client_from_env() as client:
-        result = await client.fetch_legal_events(number=patent_number)
-        return _dump(result)  # type: ignore[return-value]
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_legal_events(items[0], fallback_number=numbers[0])
+        path = f"/legal/publication/docdb/{numbers[0]}"
+    else:
+        summary = f"EPO OPS legal events — fetched {len(items)} record(s): " + ", ".join(numbers)
+        path = "/legal/publication"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_provenance(path),
+    )
 
 
 @international_mcp.tool(annotations=READ_ONLY)
 async def convert_epo_number(
-    number: Annotated[str, "Patent document number to convert"],
-    input_format: Annotated[str, "Input format: 'original', 'docdb', or 'epodoc'"] = "original",
-    output_format: Annotated[str, "Output format: 'docdb' or 'epodoc'"] = "docdb",
-) -> dict:
-    """Convert a patent number between EPO formats (original, docdb, epodoc)."""
+    number: Annotated[
+        str,
+        "Patent number to convert. Examples: 'EP1234567A1' (original), "
+        "'EP.1234567.A1' (docdb), 'EP1234567' (epodoc).",
+    ],
+    input_format: Annotated[str, "Input format: 'original', 'docdb', or 'epodoc'."] = "original",
+    output_format: Annotated[str, "Output format: 'docdb' or 'epodoc'."] = "docdb",
+) -> ResponseEnvelope[dict]:
+    """Convert a patent number between EPO formats (original ↔ docdb ↔ epodoc).
+
+    EPO OPS accepts three normalization formats. ``original`` is the
+    publication number as printed on the document (e.g. ``EP1234567A1``);
+    ``docdb`` is the dotted form used by INPADOC (``EP.1234567.A1``);
+    ``epodoc`` is the country-prefixed bare form (``EP1234567``). Use
+    this to translate between formats when an upstream tool wants a
+    specific one. Returns a single conversion record in ``details``.
+
+    Related tools: search_epo, get_epo_biblio, get_epo_family,
+    get_epo_legal_events, get_epo_cql_help.
+    """
     async with client_from_env() as client:
         result = await client.convert_number(
             number=number, input_format=input_format, output_format=output_format
         )
-        return _dump(result)  # type: ignore[return-value]
+
+    details: dict = _dump(result)  # type: ignore[assignment]
+    path = f"/number-service/publication/{input_format}/{number}/{output_format}"
+    return ResponseEnvelope[dict](
+        summary=_summarize_epo_number_conversion(number, details),
+        details=details,
+        provenance=_epo_provenance(path),
+    )
+
+
+# ---------------------------------------------------------------------------
+# CPC (Cooperative Patent Classification) — envelope helpers
+#
+# CPC is the classification vocabulary used to index the patent register.
+# Per coverage/sources.yaml it's `category: registered_ip`, served live via
+# EPO OPS (the EPO and USPTO jointly maintain the scheme). Provenance points
+# at `https://ops.epo.org/3.2/rest-services/classification/...` so an attorney
+# can verify a title or mapping against the upstream OPS endpoint.
+# ---------------------------------------------------------------------------
+
+_CPC_BASE = "https://ops.epo.org/3.2"
+_CPC_NAME = "Cooperative Patent Classification (CPC)"
+
+
+def _cpc_provenance(path: str) -> Any:
+    """Build a Provenance pointing at ``{base}{path}`` on EPO OPS."""
+    return make_provenance(source_url=f"{_CPC_BASE}{path}", source_name=_CPC_NAME)
+
+
+def _first_cpc_item(payload: dict) -> dict | None:
+    """Return the first CPC classification item from a retrieval payload, if any."""
+    scheme = payload.get("scheme") or {}
+    items = scheme.get("items") or []
+    if items and isinstance(items, list):
+        return items[0]
+    return None
+
+
+def _summarize_cpc_retrieval(symbol: str, payload: dict) -> str:
+    """One-line Markdown summary for a CPC retrieval (lookup) response."""
+    item = _first_cpc_item(payload) or {}
+    title = item.get("title") or "(no title)"
+    resolved = item.get("symbol") or symbol
+    head = f"**CPC {resolved}** — {title}"
+    extras: list[str] = []
+    level = item.get("level")
+    if level is not None:
+        extras.append(f"level {level}")
+    if item.get("not_allocatable"):
+        extras.append("not allocatable")
+    if item.get("breakdown_code"):
+        extras.append("breakdown code")
+    if extras:
+        return f"{head} ({', '.join(extras)})."
+    return f"{head}."
+
+
+def _stub_cpc_search_hit(record: dict) -> dict:
+    """Lean projection of a CPC search hit (§5.5): symbol, title, parent symbol."""
+    symbol = record.get("classification_symbol")
+    parent: str | None = None
+    if isinstance(symbol, str) and "/" in symbol:
+        # Parent is the symbol with the trailing group removed (e.g.
+        # 'H04L9/32' -> 'H04L9/00', the parent main group).
+        head = symbol.split("/", 1)[0]
+        parent = f"{head}/00" if not symbol.endswith("/00") else None
+    return {
+        "symbol": symbol,
+        "title": record.get("title"),
+        "parent_symbol": parent,
+    }
+
+
+def _summarize_cpc_mapping(symbol: str, from_scheme: str, to_scheme: str, payload: dict) -> str:
+    """One-line Markdown summary for a CPC ↔ IPC/USCLS mapping response."""
+    mappings = payload.get("mappings") or []
+    targets: list[str] = []
+    target_key = to_scheme.lower()
+    for m in mappings:
+        if not isinstance(m, dict):
+            continue
+        val = m.get(target_key) or m.get("ipc") or m.get("cpc") or m.get("ecla")
+        if val and val not in targets:
+            targets.append(str(val))
+    head = f"**CPC mapping {symbol}** ({from_scheme.upper()} → {to_scheme.upper()})"
+    if targets:
+        return f"{head}: {', '.join(targets)}."
+    return f"{head}: no cross-reference found."
 
 
 @international_mcp.tool(annotations=READ_ONLY)
 async def lookup_cpc(
-    symbol: Annotated[str, "CPC classification symbol (e.g. 'H04L9/32')"],
-) -> dict:
-    """Look up a CPC classification symbol to get its title and hierarchy."""
+    symbol: Annotated[
+        str,
+        "CPC classification symbol (e.g. 'H04L9/32', 'G06F1/00'). "
+        "Format: section letter + class + subclass + main group + '/' + subgroup.",
+    ],
+) -> ResponseEnvelope[dict]:
+    """Look up the title and definition for a CPC symbol (e.g., 'G06F1/00').
+
+    Returns the official title for one CPC classification symbol plus its
+    hierarchy (level, children, ``not_allocatable`` / ``breakdown_code``
+    flags). Use this when an agent has a symbol in hand and needs to
+    explain what it covers.
+
+    To go the other direction — finding candidate symbols for a technology
+    area — use ``search_cpc``. To translate between CPC and IPC (or USCLS),
+    use ``map_cpc_classification``.
+
+    Related tools: search_cpc, map_cpc_classification.
+    """
     async with client_from_env() as client:
         result = await client.retrieve_cpc(symbol=symbol)
-        return _dump(result)  # type: ignore[return-value]
+
+    payload: dict = _dump(result)  # type: ignore[assignment]
+    return ResponseEnvelope[dict](
+        summary=_summarize_cpc_retrieval(symbol, payload),
+        details=payload,
+        provenance=_cpc_provenance(f"/rest-services/classification/cpc/{symbol}"),
+    )
+
+
+@international_mcp.tool(annotations=READ_ONLY)
+async def search_cpc(
+    query: Annotated[
+        str,
+        "Keyword(s) describing the technology area (e.g. 'machine learning', "
+        "'lithium battery thermal management').",
+    ],
+    range_begin: Annotated[int, "Start of result range (1-indexed)."] = 1,
+    range_end: Annotated[int, "End of result range."] = 10,
+    full: Annotated[
+        bool,
+        "When False (default), each hit is a lean stub: symbol + title + "
+        "parent symbol — enough to triage candidate CPC classes. When True, "
+        "every hit carries the full upstream record (percentage match, "
+        "structured title parts).",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search CPC titles by keyword to find candidate symbols for a technology area.
+
+    Returns ranked CPC classification hits matching the query, with each
+    hit's symbol, title, and parent symbol by default. Pass ``full=True``
+    for the upstream-shaped row (includes the match percentage). Once an
+    agent picks a symbol from the result list, call ``lookup_cpc`` for
+    its definition or ``map_cpc_classification`` to cross-reference it.
+
+    Related tools: lookup_cpc, map_cpc_classification.
+    """
+    async with client_from_env() as client:
+        result = await client.search_cpc(query=query, range_begin=range_begin, range_end=range_end)
+
+    payload: dict = _dump(result)  # type: ignore[assignment]
+    raw_results = list(payload.get("results") or [])
+    items = raw_results if full else [_stub_cpc_search_hit(r) for r in raw_results]
+    total = payload.get("total_results")
+    shown = len(items)
+    more = bool(total and shown + (range_begin - 1) < int(total))
+    summary_total = f"{shown} of {total} hits" if total else f"{shown} hits"
+    return ListEnvelope[dict](
+        summary=f"CPC search — `{query}`: {summary_total}.",
+        items=items,
+        more_available=more,
+        next_cursor=None,
+        provenance=_cpc_provenance("/rest-services/classification/cpc/search"),
+    )
 
 
 @international_mcp.tool(annotations=READ_ONLY)
 async def map_cpc_classification(
-    symbol: Annotated[str, "Classification symbol to map (e.g. 'H04L9/32')"],
-    from_scheme: Annotated[str, "Source scheme: 'cpc', 'ipc', or 'uscls'"],
-    to_scheme: Annotated[str, "Target scheme: 'cpc', 'ipc', or 'uscls'"],
-) -> dict:
-    """Map a patent classification between CPC, IPC, and USCLS.
+    symbol: Annotated[
+        str,
+        "Classification symbol to map (e.g. 'H04L9/32', 'G06F1/00').",
+    ],
+    from_scheme: Annotated[
+        str,
+        "Source scheme: 'cpc', 'ipc', or 'uscls'.",
+    ],
+    to_scheme: Annotated[
+        str,
+        "Target scheme: 'cpc', 'ipc', or 'uscls'.",
+    ],
+) -> ResponseEnvelope[dict]:
+    """Convert a CPC symbol to its IPC equivalent and related cross-references.
 
-    Converts a classification symbol from one scheme to
-    another using EPO OPS concordance data.
+    Uses EPO OPS concordance data to translate one classification symbol
+    between schemes — typically CPC ↔ IPC, occasionally to/from the US
+    Classification System. Returns the structured mapping(s) found; an
+    empty ``mappings`` list means upstream had no cross-reference for
+    this symbol.
+
+    Use ``lookup_cpc`` first if you need to confirm what the source
+    symbol covers, or ``search_cpc`` to find candidate symbols by
+    keyword before mapping.
+
+    Related tools: lookup_cpc, search_cpc.
     """
     result = await map_classification(
         input_schema=from_scheme,
         symbol=symbol,
         output_schema=to_scheme,
     )
-    return _dump(result)  # type: ignore[return-value]
+    payload: dict = _dump(result)  # type: ignore[assignment]
+    path = f"/rest-services/classification/map/{from_scheme.lower()}/{symbol}/{to_scheme.lower()}"
+    return ResponseEnvelope[dict](
+        summary=_summarize_cpc_mapping(symbol, from_scheme, to_scheme, payload),
+        details=payload,
+        provenance=_cpc_provenance(path),
+    )
+
+
+# ---------------------------------------------------------------------------
+# EPO Register — Unitary Patent (UP) status
+#
+# The Unitary Patent register is served live via the EPO Register service
+# (the same OPS host as biblio / legal events / family). Provenance points at
+# `https://ops.epo.org/3.2/rest-services/register/publication/epodoc/{n}/upp`
+# so an attorney can verify a UP status timeline against the upstream
+# register payload.
+# ---------------------------------------------------------------------------
+
+_EPO_REGISTER_BASE = "https://ops.epo.org/3.2"
+_EPO_REGISTER_NAME = "EPO Register (Unitary Patent)"
+
+
+def _epo_register_provenance(path: str) -> Any:
+    """Build a Provenance pointing at ``{base}{path}`` on the EPO Register."""
+    return make_provenance(source_url=f"{_EPO_REGISTER_BASE}{path}", source_name=_EPO_REGISTER_NAME)
+
+
+def _summarize_unitary_patent(record: dict) -> str:
+    """One-line Markdown summary for a Unitary Patent register record."""
+    epo_number = record.get("epo_number") or "(unknown EP)"
+    statuses = record.get("statuses") or []
+    if not statuses:
+        return (
+            f"**Unitary Patent {epo_number}** — no unitary-effect record on file "
+            f"(not elected, or registration not yet recorded)."
+        )
+    latest = statuses[0] if isinstance(statuses, list) else {}
+    status_text = latest.get("text") or "(unknown status)"
+    change_date = latest.get("change_date") or "?"
+    registered = any(
+        "registered" in (s.get("text") or "").lower() and "unitary" in (s.get("text") or "").lower()
+        for s in statuses
+        if isinstance(s, dict)
+    )
+    flag = "registered" if registered else "pending"
+    return (
+        f"**Unitary Patent {epo_number}** — status: {status_text} "
+        f"({flag}); effective: {change_date}."
+    )
 
 
 @international_mcp.tool(annotations=READ_ONLY)
-async def search_cpc(
-    query: Annotated[str, "Text query to search CPC classifications"],
-) -> dict:
-    """Search CPC classifications by keyword."""
-    async with client_from_env() as client:
-        result = await client.search_cpc(query=query)
-        return _dump(result)  # type: ignore[return-value]
-
-
-@international_mcp.tool(annotations=READ_ONLY)
-async def get_unitary_patent_package(
+async def get_epo_unitary_patent_status(
     epo_number: Annotated[
         str,
         (
             "EP publication number (e.g. 'EP4108782' or 'EP4108782.B1'). "
-            "Pass the granted B1 publication when known — UPP data is "
-            "attached at grant."
+            "Pass the granted B1 publication when known — UP register data "
+            "is attached at grant."
         ),
     ],
-) -> dict | None:
-    """Check whether an EP patent has registered Unitary Patent effect.
+) -> ResponseEnvelope[dict]:
+    """Get the Unitary Patent (UP) Register record for a European patent application, with status, opt-out, license, and translation metadata.
 
     Calls the EPO Register's ``/upp`` sub-endpoint and returns the
     ``<reg:unitary-patent>`` block as structured data: the registration
     status timeline (e.g. "Request for unitary effect filed" →
-    "Unitary effect registered") with dates.
+    "Unitary effect registered") with the change date for each step.
 
-    Returns ``None`` when the EP wasn't elected for unitary effect, or
-    the registration hasn't been recorded yet. Note that UPC
-    *opt-out* status is **not** exposed by the OPS Register — that
-    requires the UPC CMS Public API (separate enrollment).
+    ``details`` is ``{}`` when the EP wasn't elected for unitary effect, or
+    the registration hasn't been recorded yet. Note that UPC *opt-out*
+    status is **not** exposed by the OPS Register — that requires the UPC
+    CMS Public API (separate enrollment); the same caveat applies to
+    license-of-right declarations and translation filings, which are
+    surfaced through the register only after the unitary effect is
+    registered.
+
+    Related tools: get_epo_biblio, get_epo_legal_events, search_epo.
     """
     async with client_from_env() as client:
         result = await client.get_unitary_patent_package(epo_number)
-        if result is None:
-            return None
-        return result.model_dump()
+
+    details: dict = result.model_dump() if result is not None else {}
+    path = f"/rest-services/register/publication/epodoc/{epo_number}/upp"
+    return ResponseEnvelope[dict](
+        summary=_summarize_unitary_patent(details or {"epo_number": epo_number}),
+        details=details,
+        provenance=_epo_register_provenance(path),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -435,7 +1008,86 @@ async def get_unitary_patent_package(
 # ``ip_type`` argument so a single tool name covers all three IP types.
 # Requires JPO_API_USERNAME / JPO_API_PASSWORD env vars (issued by JPO).
 # Daily caps are enforced server-side per endpoint (handbook v14 Tables 1-3).
+#
+# Envelope helpers per CONNECTOR_STANDARDS.md §5.9 — every JPO tool returns
+# a ``ResponseEnvelope`` (single-record facet) or ``ListEnvelope``
+# (portfolio-shaped fan-outs per §5.4). Provenance points at the JPO
+# Patent Information Retrieval API base.
 # ---------------------------------------------------------------------------
+
+_JPO_BASE = "https://ip-data.jpo.go.jp"
+_JPO_NAME = "Japan Patent Office (JPO)"
+_JPO_FANOUT_CONCURRENCY = 5
+
+
+def _jpo_provenance(path: str) -> Any:
+    """Build a Provenance pointing at ``{base}/api{path}`` on the JPO API."""
+    return make_provenance(source_url=f"{_JPO_BASE}/api{path}", source_name=_JPO_NAME)
+
+
+def _summarize_jpo_progress(application_number: str, record: dict) -> str:
+    """One-line Markdown summary of a JPO progress record."""
+    if not record:
+        return f"**JPO application {application_number}** — no data on file."
+    title = (
+        record.get("title")
+        or record.get("invention_title")
+        or record.get("designArticleName")
+        or record.get("design_article_name")
+        or record.get("trademarkDisplayContent")
+        or "(no title)"
+    )
+    filing = record.get("filing_date") or record.get("filingDate") or "?"
+    status = (
+        record.get("status")
+        or record.get("application_status")
+        or record.get("registrationStatus")
+        or "(unknown status)"
+    )
+    head = f"**JPO application {application_number}** — {title}"
+    return f"{head}\nFiled {filing}. Status: {status}."
+
+
+def _summarize_jpo_registration(application_number: str, record: dict) -> str:
+    """One-line Markdown summary of a JPO registration record."""
+    if not record:
+        return f"**JPO application {application_number}** — not registered."
+    reg = record.get("registration_number") or record.get("registrationNumber") or "(no reg #)"
+    reg_date = record.get("registration_date") or record.get("registrationDate") or "?"
+    head = f"**JPO registration {reg}** (application {application_number})"
+    return f"{head}\nRegistered {reg_date}."
+
+
+def _summarize_jpo_priority(application_number: str, rows: list) -> str:
+    return (
+        f"**JPO application {application_number}** — "
+        f"{len(rows)} priority claim{'s' if len(rows) != 1 else ''}."
+    )
+
+
+def _summarize_jpo_number_reference(number: str, kind: str, record: dict) -> str:
+    if not record:
+        return f"**JPO {kind} {number}** — no cross-reference found."
+    return f"**JPO {kind} {number}** — cross-reference resolved."
+
+
+def _summarize_jpo_jplatpat(application_number: str, url: str | None) -> str:
+    if not url:
+        return f"**JPO application {application_number}** — no J-PlatPat URL available."
+    return f"**JPO application {application_number}** — J-PlatPat permalink: {url}"
+
+
+def _classify_jpo_applicant(value: str) -> str:
+    """Return 'code' for a 9-digit numeric string, 'name' otherwise.
+
+    JPO applicant/attorney codes are exactly 9 digits. Names are any
+    other (non-purely-numeric) text — typically Japanese registered
+    entity names.
+    """
+    raw = value.strip()
+    if raw.isdigit() and len(raw) == 9:
+        return "code"
+    return "name"
 
 
 # Map (ip_type, use_case) -> JpoClient method name. Lookups for the
@@ -485,57 +1137,117 @@ _JPO_APPLICANT_BY_NAME_METHODS: dict[str, str] = {
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_jpo_progress(
     application_number: Annotated[
-        str,
+        str | list[str],
         "10-digit JP application number (Gregorian year 4 digits + 6-digit "
-        "serial, e.g. '2020123456'). Format is the same for patent, design, "
-        "and trademark applications.",
+        "serial, e.g. '2020123456'), or a list for portfolio workflows. "
+        "Format is the same for patent, design, and trademark applications.",
     ],
     ip_type: Annotated[
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> dict:
-    """Get full prosecution status from JPO — works for patent, design, or trademark.
+) -> ListEnvelope[dict]:
+    """Get full prosecution status for a JPO patent, design, or trademark filing.
 
-    Returns title (invention / design article / trademark display),
-    applicants, filing/publication/registration dates, priority claims
-    (Paris Convention or domestic), parent + divisional family info
-    (patents and designs), expiration, erasure status, and the
-    ``bibliographyInformation`` file-wrapper inventory.
+    Returns title, applicants, filing/publication/registration dates,
+    priority claims (Paris Convention or domestic), parent + divisional
+    family info (patents and designs), expiration, erasure status, and
+    the file-wrapper inventory.
 
-    Returns ``{}`` when the application number is unknown or out of
-    scope (status 107 / 111).
+    Per §5.4 accepts a single number or a list; the response is always a
+    ListEnvelope. Each item is the per-application record, or ``{}`` for
+    an unknown number (status 107 / 111). Bounded concurrent fan-out
+    internally.
+
+    Related tools: get_jpo_progress_simple, get_jpo_priority_info,
+    get_jpo_registration_info, get_jpo_documents, get_jpo_jplatpat_url.
     """
     ip = _validate_ip_type(ip_type)
+    numbers = (
+        [application_number] if isinstance(application_number, str) else list(application_number)
+    )
+    if not numbers:
+        raise ValidationError("get_jpo_progress requires at least one application number")
+
+    semaphore = asyncio.Semaphore(_JPO_FANOUT_CONCURRENCY)
     from patent_client_agents.jpo import JpoClient
 
+    async def _fetch_one(client: Any, appl: str) -> dict:
+        async with semaphore:
+            method = getattr(client, _JPO_PROGRESS_METHODS[ip])
+            result = await method(appl)
+            return _dump(result) if result else {}  # type: ignore[return-value]
+
     async with JpoClient() as client:
-        method = getattr(client, _JPO_PROGRESS_METHODS[ip])
-        result = await method(application_number)
-        return _dump(result) if result else {}  # type: ignore[return-value]
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_jpo_progress(numbers[0], items[0])
+        path = f"/{ip}/v1/app_progress/{numbers[0]}"
+    else:
+        summary = f"Fetched {len(items)} JPO {ip} progress records: " + ", ".join(numbers)
+        path = f"/{ip}/v1/app_progress"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_jpo_provenance(path),
+    )
 
 
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_jpo_progress_simple(
-    application_number: Annotated[str, "10-digit JP application number"],
+    application_number: Annotated[
+        str | list[str],
+        "10-digit JP application number, or a list for portfolio workflows.",
+    ],
     ip_type: Annotated[
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> dict:
-    """Get a simplified JPO status (no priority/family detail).
+) -> ListEnvelope[dict]:
+    """Get a simplified JPO status (no priority or family detail).
 
     Works for patent, design, or trademark applications. Cheaper than
     ``get_jpo_progress`` for bulk status checks — same daily quota tier
-    (400/day) but skips the priority and divisional sections.
+    (400/day) but skips the priority and divisional sections. Per §5.4
+    accepts a single number or a list; the response is always a
+    ListEnvelope.
+
+    Related tools: get_jpo_progress, get_jpo_priority_info,
+    get_jpo_registration_info, get_jpo_documents.
     """
     ip = _validate_ip_type(ip_type)
+    numbers = (
+        [application_number] if isinstance(application_number, str) else list(application_number)
+    )
+    if not numbers:
+        raise ValidationError("get_jpo_progress_simple requires at least one application number")
+
+    semaphore = asyncio.Semaphore(_JPO_FANOUT_CONCURRENCY)
     from patent_client_agents.jpo import JpoClient
 
+    async def _fetch_one(client: Any, appl: str) -> dict:
+        async with semaphore:
+            method = getattr(client, _JPO_PROGRESS_SIMPLE_METHODS[ip])
+            result = await method(appl)
+            return _dump(result) if result else {}  # type: ignore[return-value]
+
     async with JpoClient() as client:
-        method = getattr(client, _JPO_PROGRESS_SIMPLE_METHODS[ip])
-        result = await method(application_number)
-        return _dump(result) if result else {}  # type: ignore[return-value]
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_jpo_progress(numbers[0], items[0])
+        path = f"/{ip}/v1/app_progress_simple/{numbers[0]}"
+    else:
+        summary = f"Fetched {len(items)} JPO {ip} simplified status records."
+        path = f"/{ip}/v1/app_progress_simple"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_jpo_provenance(path),
+    )
 
 
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
@@ -545,14 +1257,17 @@ async def get_jpo_priority_info(
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> dict:
+) -> ListEnvelope[dict]:
     """List priority basis applications (Paris + domestic) for a JPO filing.
 
-    Works for patent, design, or trademark applications. Returns
-    ``{"results": [...]}`` — each row carries either a Paris Convention
-    foreign priority (``parisPriorityApplicationNumber`` + country code +
-    date) or a domestic JP priority
-    (``nationalPriorityApplicationNumber`` + four-law code + date).
+    Each row carries either a Paris Convention foreign priority
+    (``parisPriorityApplicationNumber`` + country code + date) or a
+    domestic JP priority (``nationalPriorityApplicationNumber`` +
+    four-law code + date). Works for patent, design, or trademark
+    applications.
+
+    Related tools: get_jpo_progress, get_jpo_registration_info,
+    get_jpo_number_reference.
     """
     ip = _validate_ip_type(ip_type)
     from patent_client_agents.jpo import JpoClient
@@ -560,33 +1275,69 @@ async def get_jpo_priority_info(
     async with JpoClient() as client:
         method = getattr(client, _JPO_PRIORITY_METHODS[ip])
         priorities = await method(application_number)
-        return {"results": [_dump(p) for p in priorities]}
+
+    items = [_dump(p) for p in priorities]
+    return ListEnvelope[dict](
+        summary=_summarize_jpo_priority(application_number, items),
+        items=items,
+        provenance=_jpo_provenance(f"/{ip}/v1/priority_right_app_info/{application_number}"),
+    )
 
 
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_jpo_registration_info(
-    application_number: Annotated[str, "10-digit JP application number"],
+    application_number: Annotated[
+        str | list[str],
+        "10-digit JP application number, or a list for portfolio workflows.",
+    ],
     ip_type: Annotated[
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> dict:
-    """Get the registration record for a JPO filing.
+) -> ListEnvelope[dict]:
+    """Get the JPO granted-rights record for a patent, design, or trademark filing.
 
-    Works for patent, design, or trademark applications. Includes
-    registration number/date, decision date, current rights holders,
-    claim count (patents) / design article (designs) / trademark display
-    (trademarks), expiration, next pension payment due date, last paid
-    year, erasure flag/date, and last update date. Returns ``{}`` when
+    Includes registration number/date, decision date, current rights
+    holders, claim count (patents) / design article (designs) /
+    trademark display (trademarks), expiration, next pension payment
+    due date, last paid year, erasure flag/date, and last update date.
+    Per §5.4 accepts a single number or a list. Each item is ``{}`` when
     the application is not registered.
+
+    Related tools: get_jpo_progress, get_jpo_priority_info,
+    get_jpo_number_reference.
     """
     ip = _validate_ip_type(ip_type)
+    numbers = (
+        [application_number] if isinstance(application_number, str) else list(application_number)
+    )
+    if not numbers:
+        raise ValidationError("get_jpo_registration_info requires at least one application number")
+
+    semaphore = asyncio.Semaphore(_JPO_FANOUT_CONCURRENCY)
     from patent_client_agents.jpo import JpoClient
 
+    async def _fetch_one(client: Any, appl: str) -> dict:
+        async with semaphore:
+            method = getattr(client, _JPO_REGISTRATION_METHODS[ip])
+            result = await method(appl)
+            return _dump(result) if result else {}  # type: ignore[return-value]
+
     async with JpoClient() as client:
-        method = getattr(client, _JPO_REGISTRATION_METHODS[ip])
-        result = await method(application_number)
-        return _dump(result) if result else {}  # type: ignore[return-value]
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_jpo_registration(numbers[0], items[0])
+        path = f"/{ip}/v1/registration_info/{numbers[0]}"
+    else:
+        summary = f"Fetched {len(items)} JPO {ip} registration records."
+        path = f"/{ip}/v1/registration_info"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_jpo_provenance(path),
+    )
 
 
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
@@ -606,12 +1357,17 @@ async def get_jpo_number_reference(
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> dict:
-    """Cross-reference a JPO number to other forms.
+) -> ResponseEnvelope[dict]:
+    """Convert a JPO number between application, publication, and registration forms.
 
-    Works for patent, design, or trademark applications. Given an
-    application/publication/registration number, returns the other
-    associated numbers for the same JPO record.
+    Given any one of the three identifiers for a JPO record (application
+    number, publication number, or registration number), returns the
+    other associated numbers for the same record. Works for patent,
+    design, or trademark applications. ``details`` is ``{}`` when no
+    cross-reference exists.
+
+    Related tools: get_jpo_progress, get_jpo_registration_info,
+    get_jpo_jplatpat_url.
     """
     ip = _validate_ip_type(ip_type)
     from patent_client_agents.jpo import JpoClient
@@ -619,7 +1375,13 @@ async def get_jpo_number_reference(
     async with JpoClient() as client:
         method = getattr(client, _JPO_NUMBER_REF_METHODS[ip])
         result = await method(kind, number)
-        return _dump(result) if result else {}  # type: ignore[return-value]
+
+    details: dict = _dump(result) if result else {}  # type: ignore[assignment]
+    return ResponseEnvelope[dict](
+        summary=_summarize_jpo_number_reference(number, kind, details),
+        details=details,
+        provenance=_jpo_provenance(f"/{ip}/v1/case_number_reference/{kind}/{number}"),
+    )
 
 
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
@@ -629,13 +1391,16 @@ async def get_jpo_jplatpat_url(
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> dict:
-    """Get the J-PlatPat fixed-address URL for a JPO filing.
+) -> ResponseEnvelope[dict]:
+    """Get the J-PlatPat (JPO public search portal) permalink for a JPO filing.
 
-    Works for patent, design, or trademark applications. J-PlatPat is
-    JPO's free public search portal — the returned URL is a stable
-    permalink that opens directly to this filing's bibliographic page
-    (in Japanese).
+    J-PlatPat is JPO's free public search portal — the returned URL is a
+    stable permalink that opens directly to this filing's bibliographic
+    page (in Japanese). Works for patent, design, or trademark
+    applications. ``details["url"]`` is the permalink, or absent when no
+    URL is available.
+
+    Related tools: get_jpo_progress, get_jpo_number_reference.
     """
     ip = _validate_ip_type(ip_type)
     from patent_client_agents.jpo import JpoClient
@@ -643,58 +1408,73 @@ async def get_jpo_jplatpat_url(
     async with JpoClient() as client:
         method = getattr(client, _JPO_JPLATPAT_METHODS[ip])
         url = await method(application_number)
-        return {"url": url} if url else {}
+
+    details: dict = {"url": url} if url else {}
+    return ResponseEnvelope[dict](
+        summary=_summarize_jpo_jplatpat(application_number, url),
+        details=details,
+        provenance=_jpo_provenance(f"/{ip}/v1/jpp_fixed_address/{application_number}"),
+    )
 
 
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_jpo_applicant_by_code(
-    applicant_code: Annotated[str, "9-digit JPO applicant/attorney code"],
-    ip_type: Annotated[
-        Literal["patent", "design", "trademark"],
-        "Which JPO register to query. The same tool works for all three.",
-    ] = "patent",
-) -> dict:
-    """Get an applicant or attorney name from a JPO 9-digit code.
-
-    Works for patent, design, or trademark registers. Returns the
-    applicant or attorney name (a single string). Returns an empty
-    object when the code is unknown.
-    """
-    ip = _validate_ip_type(ip_type)
-    from patent_client_agents.jpo import JpoClient
-
-    async with JpoClient() as client:
-        method = getattr(client, _JPO_APPLICANT_BY_CODE_METHODS[ip])
-        name = await method(applicant_code)
-        return {"name": name} if name else {}
-
-
-@conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_jpo_applicant_by_name(
-    applicant_name: Annotated[
+async def get_jpo_applicant(
+    applicant: Annotated[
         str,
-        "EXACT applicant or attorney name to look up (the API requires an "
-        "exact match — partial / fuzzy queries return no data).",
+        "JPO applicant/attorney identifier. Either a 9-digit code "
+        "(e.g. '000003207') or the EXACT registered name "
+        "(e.g. 'トヨタ自動車株式会社'). Auto-detected: 9 digits → "
+        "code lookup; anything else → name lookup. Name search "
+        "requires an exact match — partial / fuzzy queries return no data.",
     ],
     ip_type: Annotated[
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> dict:
-    """Get JPO applicant/attorney code(s) by exact name.
+) -> ResponseEnvelope[dict]:
+    """Look up a JPO applicant/attorney by 9-digit code or by exact registered name.
 
-    Works for patent, design, or trademark registers. Note: the
-    endpoint requires an exact match. Searching for "トヨタ" won't
-    return Toyota; you need the full registered name e.g.
-    "トヨタ自動車株式会社".
+    Auto-detects which lookup to run from the input shape: 9-digit
+    numeric → code-to-name; anything else → exact-name-to-code(s).
+    ``details["name"]`` carries the resolved name for a code lookup;
+    ``details["results"]`` carries the matching code rows for a name
+    lookup. Empty when nothing matches. Works for patent, design, or
+    trademark registers.
+
+    Related tools: get_jpo_progress, get_jpo_registration_info.
     """
     ip = _validate_ip_type(ip_type)
+    kind = _classify_jpo_applicant(applicant)
     from patent_client_agents.jpo import JpoClient
 
     async with JpoClient() as client:
-        method = getattr(client, _JPO_APPLICANT_BY_NAME_METHODS[ip])
-        applicants = await method(applicant_name)
-        return {"results": [_dump(a) for a in applicants]}
+        if kind == "code":
+            method = getattr(client, _JPO_APPLICANT_BY_CODE_METHODS[ip])
+            name = await method(applicant)
+            details: dict = {"name": name} if name else {}
+            path = f"/{ip}/v1/applicant_attorney_cd/{applicant}"
+            summary = (
+                f"**JPO applicant code {applicant}** — {name}"
+                if name
+                else f"**JPO applicant code {applicant}** — not found."
+            )
+        else:
+            method = getattr(client, _JPO_APPLICANT_BY_NAME_METHODS[ip])
+            applicants = await method(applicant)
+            rows = [_dump(a) for a in applicants]
+            details = {"results": rows}
+            path = f"/{ip}/v1/applicant_attorney/{applicant}"
+            summary = (
+                f"**JPO applicant `{applicant}`** — {len(rows)} matching code(s)."
+                if rows
+                else f"**JPO applicant `{applicant}`** — not found (exact match required)."
+            )
+
+    return ResponseEnvelope[dict](
+        summary=summary,
+        details=details,
+        provenance=_jpo_provenance(path),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -705,36 +1485,65 @@ async def get_jpo_applicant_by_name(
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_jpo_patent_divisional_info(
     application_number: Annotated[str, "10-digit JP patent application number"],
-) -> dict:
-    """Get divisional family (parent + descendants) for a JP patent.
+) -> ResponseEnvelope[dict]:
+    """Get the divisional family (parent + descendants) for a JP patent.
 
-    Patent-only endpoint (no design/trademark equivalent). Returns the
-    parent application info (if any) and a list of divisional descendants
-    with their generation, publication/registration numbers, erasure
-    status, and expiration.
+    Patent-only endpoint (no design or trademark equivalent). Returns
+    the parent application info (if any) and a list of divisional
+    descendants with their generation, publication/registration numbers,
+    erasure status, and expiration. ``details`` is ``{}`` when the
+    application has no divisional history.
+
+    Related tools: get_jpo_progress, get_jpo_patent_cited_documents,
+    get_jpo_pct_national_phase_number.
     """
     from patent_client_agents.jpo import JpoClient
 
     async with JpoClient() as client:
         result = await client.get_patent_divisional_info(application_number)
-        return _dump(result) if result else {}  # type: ignore[return-value]
+
+    details: dict = _dump(result) if result else {}  # type: ignore[assignment]
+    summary = (
+        f"**JPO patent {application_number}** — divisional family resolved."
+        if details
+        else f"**JPO patent {application_number}** — no divisional history."
+    )
+    return ResponseEnvelope[dict](
+        summary=summary,
+        details=details,
+        provenance=_jpo_provenance(f"/patent/v1/divisional_app_info/{application_number}"),
+    )
 
 
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_jpo_patent_cited_documents(
     application_number: Annotated[str, "10-digit JP patent application number"],
-) -> dict:
-    """Get patent and non-patent citations for a JP patent application.
+) -> ResponseEnvelope[dict]:
+    """Get patent and non-patent literature citations for a JP patent application.
 
     Patent-only endpoint. Returns ``patentDoc`` (cited patent documents
-    with type/order) and ``nonPatentDoc`` (NPL with author, title,
-    publication, etc.). Citation types follow JPO code-table 07010.
+    with type/order) and ``nonPatentDoc`` (non-patent literature with
+    author, title, publication, etc.). Citation types follow JPO
+    code-table 07010. ``details`` is ``{}`` when no citations exist.
+
+    Related tools: get_jpo_progress, get_jpo_patent_divisional_info.
     """
     from patent_client_agents.jpo import JpoClient
 
     async with JpoClient() as client:
         result = await client.get_patent_cited_documents(application_number)
-        return _dump(result) if result else {}  # type: ignore[return-value]
+
+    details: dict = _dump(result) if result else {}  # type: ignore[assignment]
+    summary = (
+        f"**JPO patent {application_number}** — citation record resolved."
+        if details
+        else f"**JPO patent {application_number}** — no citations on file."
+    )
+    return ResponseEnvelope[dict](
+        summary=summary,
+        details=details,
+        provenance=_jpo_provenance(f"/patent/v1/cite_doc_info/{application_number}"),
+    )
 
 
 @conditional_tool(international_mcp, requires_env=_JPO_REQUIRED_ENV, annotations=READ_ONLY)
@@ -749,17 +1558,33 @@ async def get_jpo_pct_national_phase_number(
         "Either 'international_application' (use with PCT/JP-style number) "
         "or 'international_publication' (use with WO-style number).",
     ] = "international_application",
-) -> dict:
+) -> ResponseEnvelope[dict]:
     """Look up the JP national-phase application number for a PCT filing.
 
     Patent-only endpoint. Useful for following PCT applications that
-    have entered Japan's national phase.
+    have entered Japan's national phase. ``details`` is ``{}`` when the
+    PCT filing has no JP national-phase record.
+
+    Related tools: get_jpo_progress, get_jpo_patent_divisional_info.
     """
     from patent_client_agents.jpo import JpoClient
 
     async with JpoClient() as client:
         result = await client.get_patent_pct_national_number(kind, number)
-        return _dump(result) if result else {}  # type: ignore[return-value]
+
+    details: dict = _dump(result) if result else {}  # type: ignore[assignment]
+    summary = (
+        f"**PCT {number}** — JP national phase resolved."
+        if details
+        else f"**PCT {number}** — no JP national-phase record."
+    )
+    return ResponseEnvelope[dict](
+        summary=summary,
+        details=details,
+        provenance=_jpo_provenance(
+            f"/patent/v1/pct_national_phase_application_number/{kind}/{number}"
+        ),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -861,7 +1686,7 @@ async def get_jpo_documents(
             }
             if zip_bytes is not None:
                 payload.update(
-                    download_response(
+                    await download_response(
                         resource_path,
                         zip_bytes,
                         filename=filename,
@@ -880,8 +1705,8 @@ async def get_jpo_documents(
 
         bundle = parse_document_bundle(
             zip_bytes,
-            kind,  # type: ignore[arg-type]
-            ip,  # type: ignore[arg-type]
+            kind,  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
+            ip,  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
             application_number=application_number,
         )
 

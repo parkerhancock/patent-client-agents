@@ -113,10 +113,10 @@ class TestBuildDownloadUrl:
 
 
 class TestDownloadResponse:
-    def test_local_mode_writes_tempfile(self, tmp_path, monkeypatch) -> None:
+    async def test_local_mode_writes_tempfile(self, tmp_path, monkeypatch) -> None:
         monkeypatch.delenv("LAW_TOOLS_CORE_PUBLIC_URL", raising=False)
         monkeypatch.delenv("LAW_TOOLS_PUBLIC_URL", raising=False)
-        payload = downloads.download_response(
+        payload = await downloads.download_response(
             "patents/X",
             b"bytes",
             filename="X.pdf",
@@ -127,11 +127,13 @@ class TestDownloadResponse:
         assert payload["size_bytes"] == 5
         assert payload["filename"] == "X.pdf"
 
-    def test_remote_mode_returns_signed_url_and_expires_at(self, tmp_path, monkeypatch) -> None:
+    async def test_remote_mode_returns_signed_url_and_expires_at(
+        self, tmp_path, monkeypatch
+    ) -> None:
         monkeypatch.setenv("LAW_TOOLS_CORE_API_KEY", "secret")
         monkeypatch.setenv("LAW_TOOLS_CORE_PUBLIC_URL", "https://mcp.example.com")
         monkeypatch.setenv("LAW_TOOLS_CORE_DOWNLOAD_CACHE", str(tmp_path))
-        payload = downloads.download_response(
+        payload = await downloads.download_response(
             "patents/X",
             b"bytes",
             filename="X.pdf",
@@ -140,11 +142,11 @@ class TestDownloadResponse:
         assert "expires_at" in payload
         assert "Z" in payload["expires_at"]
 
-    def test_permanent_url_omits_expires_at(self, tmp_path, monkeypatch) -> None:
+    async def test_permanent_url_omits_expires_at(self, tmp_path, monkeypatch) -> None:
         monkeypatch.setenv("LAW_TOOLS_CORE_API_KEY", "secret")
         monkeypatch.setenv("LAW_TOOLS_CORE_PUBLIC_URL", "https://mcp.example.com")
         monkeypatch.setenv("LAW_TOOLS_CORE_DOWNLOAD_CACHE", str(tmp_path))
-        payload = downloads.download_response(
+        payload = await downloads.download_response(
             "patents/X",
             b"bytes",
             filename="X.pdf",
@@ -486,10 +488,12 @@ class TestResourceUri:
             == "pca://uspto/applications/16/documents/X"
         )
 
-    def test_download_response_includes_resource_uri_local(self, tmp_path, monkeypatch) -> None:
+    async def test_download_response_includes_resource_uri_local(
+        self, tmp_path, monkeypatch
+    ) -> None:
         monkeypatch.delenv("LAW_TOOLS_CORE_PUBLIC_URL", raising=False)
         monkeypatch.delenv("LAW_TOOLS_PUBLIC_URL", raising=False)
-        payload = downloads.download_response(
+        payload = await downloads.download_response(
             "patents/X", b"bytes", filename="X.pdf", content_type="application/pdf"
         )
         # resource_uri is always emitted — independent of PUBLIC_URL —
@@ -497,20 +501,22 @@ class TestResourceUri:
         assert payload["resource_uri"] == "pca://patents/X"
         assert "file_path" in payload
 
-    def test_download_response_includes_resource_uri_remote(self, tmp_path, monkeypatch) -> None:
+    async def test_download_response_includes_resource_uri_remote(
+        self, tmp_path, monkeypatch
+    ) -> None:
         monkeypatch.setenv("LAW_TOOLS_CORE_API_KEY", "secret")
         monkeypatch.setenv("LAW_TOOLS_CORE_PUBLIC_URL", "https://mcp.example.com")
         monkeypatch.setenv("LAW_TOOLS_CORE_DOWNLOAD_CACHE", str(tmp_path))
-        payload = downloads.download_response("patents/X", b"bytes", filename="X.pdf")
+        payload = await downloads.download_response("patents/X", b"bytes", filename="X.pdf")
         assert payload["resource_uri"] == "pca://patents/X"
         assert payload["download_url"].startswith("https://mcp.example.com/")
 
 
 class TestDownloadToolResult:
-    def test_returns_tool_result_with_resource_link(self, tmp_path, monkeypatch) -> None:
+    async def test_returns_tool_result_with_resource_link(self, tmp_path, monkeypatch) -> None:
         monkeypatch.delenv("LAW_TOOLS_CORE_PUBLIC_URL", raising=False)
         monkeypatch.setenv("LAW_TOOLS_CORE_DOWNLOAD_CACHE", str(tmp_path / "cache"))
-        result = downloads.download_tool_result(
+        result = await downloads.download_tool_result(
             "patents/US10000000B2",
             b"%PDF-1.4 hi",
             filename="US10000000B2.pdf",
@@ -530,10 +536,10 @@ class TestDownloadToolResult:
         # Size populated so clients can decide whether to attempt resources/read.
         assert link.size == len(b"%PDF-1.4 hi")
 
-    def test_extras_land_in_structured_content(self, tmp_path, monkeypatch) -> None:
+    async def test_extras_land_in_structured_content(self, tmp_path, monkeypatch) -> None:
         monkeypatch.delenv("LAW_TOOLS_CORE_PUBLIC_URL", raising=False)
         monkeypatch.setenv("LAW_TOOLS_CORE_DOWNLOAD_CACHE", str(tmp_path / "cache"))
-        result = downloads.download_tool_result(
+        result = await downloads.download_tool_result(
             "patents/US1",
             b"x",
             filename="US1.pdf",

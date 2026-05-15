@@ -59,7 +59,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
             context="search appeals",
         )
         data.setdefault("patentAppealDataBag", [])
-        return PtabAppealResponse(**data)
+        return PtabAppealResponse.model_validate(data)
 
     async def get_decision(self, document_identifier: str) -> PtabAppealResponse:
         """Get a single PTAB appeal decision by document identifier.
@@ -83,7 +83,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
         )
         if "patentAppealDataBag" not in data:
             data = {"count": 1, "patentAppealDataBag": [data]}
-        return PtabAppealResponse(**data)
+        return PtabAppealResponse.model_validate(data)
 
     async def get_decisions_by_number(self, appeal_number: str) -> PtabAppealResponse:
         """Get all decisions for a PTAB appeal by appeal number.
@@ -106,7 +106,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
             context=f"get decisions for appeal {appeal_number}",
         )
         data.setdefault("patentAppealDataBag", [])
-        return PtabAppealResponse(**data)
+        return PtabAppealResponse.model_validate(data)
 
     async def download(
         self,
@@ -149,7 +149,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
             context="download appeals",
         )
         data.setdefault("patentAppealDataBag", [])
-        return PtabAppealResponse(**data)
+        return PtabAppealResponse.model_validate(data)
 
 
 __all__ = ["PtabAppealsClient"]

@@ -46,7 +46,7 @@ class CorpusHit:
 
 def default_corpus_path() -> Path:
     """Return the local-dev default location (~/.cache/...)."""
-    return Path.home() / ".cache" / "patent_client_agents" / "guidelines.db"
+    return Path.home() / ".cache" / "patent_client_agents" / "up_guidelines.db"
 
 
 def _resolve_corpus_path(explicit: str | os.PathLike[str] | None) -> Path:

@@ -85,13 +85,13 @@ act = await get_legislation(
 | Tool | Description |
 |---|---|
 | `list_canlii_case_databases` | List courts / tribunals |
-| `browse_canlii_cases` | Browse cases with date filters |
+| `search_canlii_cases` | Filter-driven case listing (date / language windows) |
 | `get_canlii_case` | Case metadata |
 | `get_canlii_cited_cases` | Cases cited by `case_id` |
 | `get_canlii_citing_cases` | Cases citing `case_id` |
 | `get_canlii_cited_legislations` | Legislation cited by `case_id` |
 | `list_canlii_legislation_databases` | List statute / regulation databases |
-| `browse_canlii_legislation` | List statutes within a database |
+| `search_canlii_legislation` | List statutes within a database |
 | `get_canlii_legislation` | Statute / regulation metadata |
 
 All tools env-gate on `CANLII_API_KEY` — they are absent from `tool/list` on deployments that don't carry the key.

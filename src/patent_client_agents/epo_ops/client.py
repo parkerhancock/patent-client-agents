@@ -12,7 +12,7 @@ from typing import Any
 
 import hishel
 import httpx
-import lxml.etree as etree
+import lxml.etree as etree  # ty: ignore[unresolved-import]  # lxml lacks PEP 561 stubs
 from pypdf import PdfReader, PdfWriter
 
 from law_tools_core.base_client import BaseAsyncClient
@@ -120,7 +120,7 @@ class OpsAuth(httpx.Auth):
     def _token_expired(self) -> bool:
         if self._expires is None:
             return True
-        return dt.datetime.utcnow() >= self._expires - dt.timedelta(seconds=30)
+        return dt.datetime.now(dt.UTC) >= self._expires - dt.timedelta(seconds=30)
 
     def _build_refresh_request(self) -> httpx.Request:
         credentials = f"{self.key}:{self.secret}".encode()

@@ -18,7 +18,7 @@ Find records matching a query.
 
 | Tool | Scope | Query style |
 |---|---|---|
-| `search_google_patents` | Worldwide patents (Google index) | Structured params |
+| `search_patents_global` | Worldwide patents (Google Patents aggregator, >100 jurisdictions) | Structured params |
 | `search_patent_publications` | US patents + published apps (full text) | PPUBS Boolean + field codes |
 | `search_applications` | US application metadata (ODP) | Lucene (ODP fields) |
 | `search_epo` | EPO OPS. `group_by="publication"\|"family"`. | CQL — see `get_epo_cql_help` |
@@ -38,9 +38,8 @@ Find records matching a query.
 
 | Tool | Scope |
 |---|---|
-| `get_patent` | Google Patents full data (worldwide) |
+| `get_patent` | Google Patents full data (worldwide). `view='full'` (default) or `view='details'` (metadata subset). Accepts a list of patent numbers (§5.4). |
 | `get_patent_publication` | PPUBS full document (US) |
-| `get_patent_details` | Google Patents structured metadata |
 | `get_application` | ODP application metadata (US) |
 | `get_patent_family` | ODP family (US-centric continuations/divisionals) |
 | `get_epo_biblio` / `get_epo_fulltext` / `get_epo_family` / `get_epo_legal_events` | EPO OPS |
@@ -62,8 +61,7 @@ Find records matching a query.
 | `get_jpo_priority_info(application_number, ip_type)` | JPO Paris + domestic priority claims |
 | `get_jpo_number_reference(number, kind, ip_type)` | JPO cross-reference application/publication/registration |
 | `get_jpo_jplatpat_url(application_number, ip_type)` | JPO J-PlatPat permalink |
-| `get_jpo_applicant_by_code(applicant_code, ip_type)` | JPO 9-digit applicant/attorney code → name |
-| `get_jpo_applicant_by_name(applicant_name, ip_type)` | JPO exact-name → applicant/attorney codes |
+| `get_jpo_applicant(applicant, ip_type)` | JPO applicant/attorney lookup — auto-detects code (9 digits) vs exact name |
 | `get_jpo_patent_divisional_info(application_number)` | JPO patent-only — divisional family |
 | `get_jpo_patent_cited_documents(application_number)` | JPO patent-only — patent + non-patent citations |
 | `get_jpo_pct_national_phase_number(number, kind)` | JPO patent-only — PCT → JP national-phase lookup |

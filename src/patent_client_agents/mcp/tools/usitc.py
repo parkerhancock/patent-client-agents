@@ -1,9 +1,15 @@
-"""USITC MCP tools (EDIS investigations + documents, DataWeb, HTS, IDS).
+"""USITC MCP tools — EDIS investigations + documents, DataWeb, HTS, IDS.
 
-Section 337 patent investigations are the IP-relevant slice; HTS and IDS
-listings round out the ITC's public surface. EDIS uses
-``USITC_EDIS_TOKEN``; DataWeb uses ``USITC_DATAWEB_TOKEN``; HTS and IDS
-require no auth.
+The U.S. International Trade Commission (USITC) exposes four public
+surfaces wrapped here:
+
+* **EDIS** — Electronic Document Information System (``edis.usitc.gov``).
+  Section 337 patent investigations and their full document records.
+  Bearer token via ``USITC_EDIS_TOKEN``.
+* **DataWeb** — official US import/export trade statistics
+  (``datawebws.usitc.gov``). Bearer token via ``USITC_DATAWEB_TOKEN``.
+* **HTS** — Harmonized Tariff Schedule (``hts.usitc.gov``). No auth.
+* **IDS** — Intellectual Property Search investigation index. No auth.
 """
 
 from __future__ import annotations
@@ -12,10 +18,11 @@ import asyncio
 import base64
 from datetime import date as _date
 from pathlib import PurePosixPath
-from typing import Annotated
+from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
+from law_tools_core.envelope import ListEnvelope, ResponseEnvelope, make_provenance
 from law_tools_core.exceptions import ValidationError
 from law_tools_core.filenames import usitc_attachment as _usitc_name
 from law_tools_core.mcp import (
@@ -37,11 +44,52 @@ from patent_client_agents.usitc.client import build_dataweb_query
 
 usitc_mcp = FastMCP("USITC")
 
+# ──────────────────────────────────────────────────────────────────────
+# Envelope helpers (CONNECTOR_STANDARDS.md §5.9).
+#
+# One provenance helper for the whole USITC connector — the source
+# name is shared ("U.S. International Trade Commission (USITC)") and
+# each call points at the relevant USITC sub-host (EDIS, DataWeb, HTS,
+# IDS) via the ``path`` argument or a full URL.
+# ──────────────────────────────────────────────────────────────────────
 
-def _dump(obj: object) -> object:
+_USITC_SOURCE_NAME = "U.S. International Trade Commission (USITC)"
+_EDIS_BASE = "https://edis.usitc.gov"
+_DATAWEB_BASE = "https://datawebws.usitc.gov"
+_HTS_BASE = "https://hts.usitc.gov"
+_IDS_BASE = "https://ids.usitc.gov"
+
+# Bounded fan-out for list-accepting get_usitc_investigation (§5.4).
+# EDIS responses are XML-parsed in-process — the cap keeps a 25-item
+# portfolio from opening 25 sockets simultaneously while still amortizing
+# Akamai TLS handshakes across the batch.
+_USITC_FANOUT_CONCURRENCY = 5
+
+
+def _usitc_provenance(path: str) -> Any:
+    """Build a Provenance pointing at the appropriate USITC sub-host.
+
+    ``path`` may be a full URL (https://...) or a path that will be
+    appended to ``edis.usitc.gov`` (the default sub-host for the
+    investigations/documents/attachments surface).
+    """
+    source_url = path if path.startswith("http") else f"{_EDIS_BASE}{path}"
+    return make_provenance(source_url=source_url, source_name=_USITC_SOURCE_NAME)
+
+
+def _dump(obj: object) -> dict[str, Any]:
+    """Serialize a Pydantic model to a dict (or pass through dicts).
+
+    Every caller passes a Pydantic model from the upstream client; the
+    fallback exists to be defensive if a dict slips through. Typed as
+    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
+    per-call narrowing.
+    """
     if hasattr(obj, "model_dump"):
-        return obj.model_dump()  # type: ignore[union-attr]
-    return obj
+        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
+    if isinstance(obj, dict):
+        return cast("dict[str, Any]", obj)
+    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _parse_iso_date(value: str | None, *, field_name: str) -> _date | None:
@@ -83,8 +131,41 @@ register_source("usitc/documents", _fetch_usitc_attachment, "application/pdf")
 
 
 # ---------------------------------------------------------------------------
-# Helpers
+# Lean projections + summarizers
 # ---------------------------------------------------------------------------
+
+
+def _stub_investigation(record: dict) -> dict:
+    """Lean projection of a USITC EDIS investigation row (§5.5).
+
+    Drops the upstream ``document_list_uri`` (an EDIS-auth-required URL
+    agents can't follow directly) and keeps the scalar fields needed
+    to triage a hit.
+    """
+    return {
+        "investigation_number": record.get("investigation_number"),
+        "title": record.get("title"),
+        "investigation_status": record.get("investigation_status"),
+        "investigation_phase": record.get("investigation_phase"),
+        "investigation_type": record.get("investigation_type"),
+        "docket_number": record.get("docket_number"),
+    }
+
+
+def _summarize_usitc_investigation(record: dict) -> str:
+    """One-line Markdown summary of a single USITC EDIS investigation."""
+    number = record.get("investigation_number") or "(no investigation number)"
+    title = record.get("title") or "(no title)"
+    status = record.get("investigation_status") or "(unknown status)"
+    phase = record.get("investigation_phase")
+    inv_type = record.get("investigation_type")
+    head = f"**USITC investigation {number}** — {title}"
+    line = f"Status: {status}."
+    if phase:
+        line += f" Phase: {phase}."
+    if inv_type:
+        line += f" Type: {inv_type}."
+    return f"{head}\n{line}"
 
 
 def _clean_edis_document(doc: object) -> dict:
@@ -95,6 +176,51 @@ def _clean_edis_document(doc: object) -> dict:
     if isinstance(item, dict):
         item.pop("attachment_list_uri", None)
     return item  # type: ignore[return-value]
+
+
+def _stub_edis_document(record: dict) -> dict:
+    """Lean projection of an EDIS document row (§5.5)."""
+    return {
+        "id": record.get("id"),
+        "investigation_number": record.get("investigation_number"),
+        "document_type": record.get("document_type"),
+        "title": record.get("title"),
+        "security_level": record.get("security_level"),
+        "filed_by": record.get("filed_by"),
+        "firm_organization": record.get("firm_organization"),
+        "document_date": record.get("document_date"),
+        "official_received_date": record.get("official_received_date"),
+    }
+
+
+def _stub_hts_result(record: dict) -> dict:
+    """Lean projection of an HTS search hit (§5.5).
+
+    The upstream ``HtsSearchResult`` is already small (4 fields), but
+    we name them explicitly so the lean default is stable across any
+    upstream field additions.
+    """
+    return {
+        "hts_number": record.get("hts_number"),
+        "description": record.get("description"),
+        "heading": record.get("heading"),
+        "chapter": record.get("chapter"),
+    }
+
+
+def _stub_ids_investigation(record: dict) -> dict:
+    """Lean projection of an IDS (USITC IP Search) investigation row (§5.5)."""
+    return {
+        "investigation_id": record.get("investigation_id"),
+        "investigation_number": record.get("investigation_number"),
+        "title": record.get("title"),
+        "topic": record.get("topic"),
+        "investigation_status": record.get("investigation_status"),
+        "investigation_type": record.get("investigation_type"),
+        "docket_number": record.get("docket_number"),
+        "start_date": record.get("start_date"),
+        "end_date": record.get("end_date"),
+    }
 
 
 def _parse_edis_date(date_str: str | None) -> str | None:
@@ -110,7 +236,7 @@ def _parse_edis_date(date_str: str | None) -> str | None:
 
 
 # ---------------------------------------------------------------------------
-# Tools
+# Tools — investigations
 # ---------------------------------------------------------------------------
 
 
@@ -118,25 +244,36 @@ def _parse_edis_date(date_str: str | None) -> str | None:
 async def search_usitc_investigations(
     investigation_number: Annotated[
         str | None,
-        "Investigation number (e.g. '337-1234'). "
-        "Used as path segment per EDIS API — use EDIS format without 'TA-' prefix.",
+        "Investigation number in EDIS format (e.g. '337-1234'). "
+        "Used as a path segment per EDIS API — pass without the 'TA-' infix.",
     ] = None,
     phase: Annotated[
-        str | None, "Phase filter (e.g. 'Violation', 'Preliminary', 'Final', 'Review2')"
+        str | None, "Phase filter (e.g. 'Violation', 'Preliminary', 'Final', 'Review2')."
     ] = None,
     investigation_type: Annotated[
         str | None,
         "Type filter (e.g. 'Sec 337', 'Import Injury', "
-        "'Industry and Economic Analysis', 'Tariff Affairs & Trade Agreements')",
+        "'Industry and Economic Analysis', 'Tariff Affairs & Trade Agreements').",
     ] = None,
     status: Annotated[
-        str | None, "Status filter: 'PreInstitution', 'Active', 'Inactive', or 'Cancelled'"
+        str | None, "Status filter: 'PreInstitution', 'Active', 'Inactive', or 'Cancelled'."
     ] = None,
-) -> dict:
-    """Search USITC investigations via EDIS.
+    full: Annotated[
+        bool,
+        "When False (default), each hit is a lean stub (investigation "
+        "number, title, status, phase, type, docket number). When True, "
+        "every hit carries the full EDIS investigation record — prefer "
+        "``get_usitc_investigation`` for one record.",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search U.S. International Trade Commission (USITC) Section 337 investigations via EDIS.
 
-    Filter by investigation number (path lookup), phase, type, or status.
-    Returns investigation number, title, phase, status, type, and docket number.
+    EDIS is the USITC Electronic Document Information System. Filter by
+    investigation number (path lookup), phase, type, or status. Lean
+    stubs by default; pass ``full=True`` for the upstream record.
+
+    Related tools: get_usitc_investigation, list_usitc_attachments,
+    search_usitc_documents, download_usitc_investigation_documents.
     """
     kwargs: dict = {}
     if investigation_type:
@@ -145,12 +282,112 @@ async def search_usitc_investigations(
         kwargs["investigationStatus"] = status
 
     async with EdisClient() as client:
-        result = await client.list_investigations(
+        results = await client.list_investigations(
             investigation_number=investigation_number,
             investigation_phase=phase,
             **kwargs,
         )
-        return {"results": [_dump(r) for r in result]}
+
+    dumped = [_dump(r) for r in results]
+    items = dumped if full else [_stub_investigation(r) for r in dumped]  # type: ignore[arg-type]
+
+    filter_bits: list[str] = []
+    if investigation_number:
+        filter_bits.append(f"investigation_number={investigation_number}")
+    if phase:
+        filter_bits.append(f"phase={phase}")
+    if investigation_type:
+        filter_bits.append(f"type={investigation_type}")
+    if status:
+        filter_bits.append(f"status={status}")
+    label = " ".join(filter_bits) or "(no filters)"
+
+    path = (
+        f"/data/investigation/{investigation_number}"
+        if investigation_number
+        else "/data/investigation"
+    )
+    return ListEnvelope[dict](
+        summary=f"USITC investigations — {label}: {len(items)} hits.",
+        items=items,
+        more_available=False,
+        next_cursor=None,
+        provenance=_usitc_provenance(path),
+    )
+
+
+@usitc_mcp.tool(annotations=READ_ONLY)
+async def get_usitc_investigation(
+    investigation_number: Annotated[
+        str | list[str],
+        "USITC investigation number in EDIS format (e.g. '337-1234'), or a "
+        "list of such numbers for portfolio workflows. Pass without the "
+        "'TA-' infix (use '337-1234', not '337-TA-1234').",
+    ],
+) -> ListEnvelope[dict]:
+    """Fetch one or more U.S. International Trade Commission (USITC) investigations from EDIS.
+
+    EDIS (Electronic Document Information System) treats the investigation
+    number as a path segment, so the underlying call is a per-record GET
+    against ``/data/investigation/{investigation_number}``. Accepts either
+    a single number or a list (§5.4); the response is always a
+    ListEnvelope so the shape is stable. Bounded concurrent fan-out
+    internally; order matches the input.
+
+    Related tools: search_usitc_investigations, list_usitc_attachments,
+    search_usitc_documents, download_usitc_investigation_documents.
+    """
+    numbers = (
+        [investigation_number]
+        if isinstance(investigation_number, str)
+        else list(investigation_number)
+    )
+    if not numbers:
+        raise ValidationError("get_usitc_investigation requires at least one investigation_number")
+
+    semaphore = asyncio.Semaphore(_USITC_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: EdisClient, number: str) -> dict | None:
+        async with semaphore:
+            results = await client.list_investigations(investigation_number=number)
+        if not results:
+            return None
+        # EDIS returns a list even for a single-number path lookup;
+        # prefer an exact investigation_number match, else fall back to
+        # the first row (some EDIS rows carry the full investigation
+        # number including a phase suffix).
+        dumped_rows = [_dump(r) for r in results]
+        for row in dumped_rows:
+            if isinstance(row, dict) and row.get("investigation_number") == number:
+                return row
+        first = dumped_rows[0]
+        return first if isinstance(first, dict) else None
+
+    async with EdisClient() as client:
+        fetched = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    items: list[dict] = [r for r in fetched if r is not None]
+    not_found = [n for n, r in zip(numbers, fetched, strict=True) if r is None]
+
+    if len(numbers) == 1 and items:
+        summary = _summarize_usitc_investigation(items[0])
+    elif len(numbers) == 1:
+        summary = f"USITC investigation {numbers[0]} — not found."
+    else:
+        head = f"Fetched {len(items)} of {len(numbers)} USITC investigations."
+        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+
+    path = f"/data/investigation/{numbers[0]}" if len(numbers) == 1 else "/data/investigation"
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_usitc_provenance(path),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Tools — documents
+# ---------------------------------------------------------------------------
 
 
 @usitc_mcp.tool(annotations=READ_ONLY)
@@ -160,19 +397,19 @@ async def search_usitc_documents(
         "Investigation number in EDIS format (e.g. '337-1234'). Partial numbers allowed.",
     ] = None,
     investigation_phase: Annotated[
-        str | None, "Phase filter (e.g. 'Violation', 'Final', 'Review2')"
+        str | None, "Phase filter (e.g. 'Violation', 'Final', 'Review2')."
     ] = None,
     document_type: Annotated[
         str | None,
         "Document type (e.g. 'Motion', 'Order', 'Notice', 'Brief Filed With ALJ'). "
-        "Must be complete string — partial matches not allowed.",
+        "Must match exactly — partial matches not allowed.",
     ] = None,
     firm_org: Annotated[
         str | None,
         "Firm/organization name. Each word is treated as an OR search.",
     ] = None,
     security_level: Annotated[
-        str | None, "Security level filter: 'Public', 'Confidential', or 'Limited'"
+        str | None, "Security level filter: 'Public', 'Confidential', or 'Limited'."
     ] = None,
     date_from: Annotated[
         str | None,
@@ -186,23 +423,30 @@ async def search_usitc_documents(
     ] = None,
     page_number: Annotated[
         int,
-        "Page number (100 results per page). "
-        "If 'has_more' is true in the response, increment to get the next page.",
+        "Page number (100 results per page). If ``more_available`` is true, "
+        "increment to get the next page.",
     ] = 1,
-) -> dict:
-    """Search USITC EDIS documents.
+    full: Annotated[
+        bool,
+        "When False (default), each hit is a lean stub. When True, every hit "
+        "carries the full EDIS document record.",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search U.S. International Trade Commission (USITC) EDIS documents.
 
-    Returns document ID, type, title, security level, filing party, date,
-    firm, and investigation context. Use investigation_number to scope to
-    a specific investigation.
+    Returns documents from the Electronic Document Information System
+    (EDIS): ID, type, title, security level, filing party, date, firm,
+    and investigation context. Use ``investigation_number`` to scope to
+    a specific investigation. Up to 100 results per page; check
+    ``more_available`` and increment ``page_number`` to paginate.
 
-    Returns up to 100 results per page. Check 'has_more' in the response
-    and increment page_number to paginate. Works with or without date
-    filters.
+    When ``date_from`` or ``date_to`` is set, the server fetches all
+    matching documents from EDIS (up to 3000) and filters by
+    ``document_date``, then returns the requested page of filtered
+    results.
 
-    When date_from or date_to is set, the server fetches all matching
-    documents from EDIS (up to 3000) and filters by document_date, then
-    returns the requested page of filtered results.
+    Related tools: search_usitc_investigations, list_usitc_attachments,
+    download_usitc_attachment, download_usitc_investigation_documents.
     """
     kwargs: dict = {}
     if investigation_number:
@@ -222,12 +466,20 @@ async def search_usitc_documents(
     if not use_date_filter:
         kwargs["pageNumber"] = page_number
         async with EdisClient() as client:
-            result = await client.list_documents(**kwargs)
-            return {
-                "results": [_clean_edis_document(r) for r in result],
-                "page": page_number,
-                "has_more": len(result) >= page_size,
-            }
+            results = await client.list_documents(**kwargs)
+        dumped = [_clean_edis_document(r) for r in results]
+        items = dumped if full else [_stub_edis_document(r) for r in dumped]
+        more = len(results) >= page_size
+        return ListEnvelope[dict](
+            summary=(
+                f"USITC documents — page {page_number}: {len(items)} hits"
+                + (f" (investigation {investigation_number})." if investigation_number else ".")
+            ),
+            items=items,
+            more_available=more,
+            next_cursor=None,
+            provenance=_usitc_provenance("/data/document"),
+        )
 
     # Server-side: fetch all pages from EDIS, filter by date, then paginate
     max_pages = 30
@@ -253,34 +505,110 @@ async def search_usitc_documents(
 
     start = (page_number - 1) * page_size
     page_results = filtered[start : start + page_size]
+    dumped_page = [_clean_edis_document(r) for r in page_results]
+    items = dumped_page if full else [_stub_edis_document(r) for r in dumped_page]
+    return ListEnvelope[dict](
+        summary=(
+            f"USITC documents — page {page_number}: {len(items)} of {len(filtered)} "
+            f"matched (date_from={date_from!r}, date_to={date_to!r})."
+        ),
+        items=items,
+        more_available=start + page_size < len(filtered),
+        next_cursor=None,
+        provenance=_usitc_provenance("/data/document"),
+    )
 
-    return {
-        "results": [_clean_edis_document(r) for r in page_results],
-        "page": page_number,
-        "has_more": start + page_size < len(filtered),
-        "total_matched": len(filtered),
-    }
+
+@usitc_mcp.tool(annotations=READ_ONLY)
+async def list_usitc_attachments(
+    document_id: Annotated[int, "EDIS document ID to list attachments for."],
+) -> ListEnvelope[dict]:
+    """List attachments for a U.S. International Trade Commission (USITC) EDIS document.
+
+    EDIS (Electronic Document Information System) groups one or more
+    attachments under each document record. Use
+    ``download_usitc_attachment`` to fetch a specific attachment as a PDF.
+
+    Related tools: search_usitc_documents, download_usitc_attachment,
+    download_usitc_investigation_documents.
+    """
+    async with EdisClient() as client:
+        results = await client.list_attachments(document_id)
+
+    items: list[dict] = []
+    for att in results:
+        item = _dump(att)
+        if isinstance(item, dict):
+            # download_uri points at edis.usitc.gov and requires the
+            # EDIS bearer token — strip it so agents use the registered
+            # ``usitc/documents/{doc}/attachments/{att}`` resource path.
+            item.pop("download_uri", None)
+            items.append(item)
+
+    return ListEnvelope[dict](
+        summary=f"USITC document {document_id} — {len(items)} attachments.",
+        items=items,
+        provenance=_usitc_provenance(f"/data/attachment/{document_id}"),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Tools — HTS (Harmonized Tariff Schedule)
+# ---------------------------------------------------------------------------
 
 
 @usitc_mcp.tool(annotations=READ_ONLY)
 async def search_hts_tariffs(
-    query: Annotated[str, "Keyword to search HTS tariff codes"],
-) -> dict:
-    """Search USITC Harmonized Tariff Schedule by keyword."""
+    query: Annotated[str, "Keyword to search HTS tariff codes (free text)."],
+    full: Annotated[
+        bool,
+        "When False (default), each hit is a lean stub (hts_number, "
+        "description, heading, chapter). When True, returns the upstream "
+        "row verbatim — currently the same four fields, but stable across "
+        "upstream additions.",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search the U.S. Harmonized Tariff Schedule (HTS) for commodity classification codes.
+
+    The HTS is the U.S. International Trade Commission (USITC) tariff
+    classification taxonomy used by Customs and Border Protection to
+    assess import duties. Keyword search returns HTS numbers,
+    descriptions, headings, and chapters.
+
+    No companion ``get_hts_tariff`` exists — HTS is a closed taxonomy
+    whose canonical reference is the schedule itself; agents that need a
+    specific code should search for it or use the public HTS site.
+
+    Related tools: run_dataweb_report, search_usitc_investigations.
+    """
     async with HtsClient() as client:
         results = await client.search(keyword=query)
-        return {"results": [_dump(r) for r in results]}
+
+    dumped = [_dump(r) for r in results]
+    items = dumped if full else [_stub_hts_result(r) for r in dumped]  # type: ignore[arg-type]
+    return ListEnvelope[dict](
+        summary=f"USITC HTS — `{query}`: {len(items)} hits.",
+        items=items,
+        more_available=False,
+        next_cursor=None,
+        provenance=_usitc_provenance(f"{_HTS_BASE}/reststop/search?keyword={query}"),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Tools — DataWeb (trade statistics)
+# ---------------------------------------------------------------------------
 
 
 @usitc_mcp.tool(annotations=READ_ONLY)
 async def run_dataweb_report(
     trade_type: Annotated[
         str,
-        "Trade type: 'Import', 'Export', 'GenImp', 'TotExp', 'Balance', 'ForeignExp', 'ImpExp'",
+        "Trade type: 'Import', 'Export', 'GenImp', 'TotExp', 'Balance', 'ForeignExp', 'ImpExp'.",
     ] = "Import",
     classification: Annotated[
         str,
-        "Classification system: 'HTS', 'SITC', 'NAIC', 'SIC', 'QUICK', 'EXPERT'",
+        "Classification system: 'HTS', 'SITC', 'NAIC', 'SIC', 'QUICK', 'EXPERT'.",
     ] = "HTS",
     years: Annotated[
         str,
@@ -288,8 +616,8 @@ async def run_dataweb_report(
     ] = "2024",
     data_metrics: Annotated[
         str,
-        "Comma-separated metrics: 'CONS_CUSTOMS_VALUE', 'CONS_FIR_UNIT_QUANT', 'CONS_QUANTITY_2'. "
-        "Defaults to 'CONS_CUSTOMS_VALUE'.",
+        "Comma-separated metrics: 'CONS_CUSTOMS_VALUE', 'CONS_FIR_UNIT_QUANT', "
+        "'CONS_QUANTITY_2'. Defaults to 'CONS_CUSTOMS_VALUE'.",
     ] = "CONS_CUSTOMS_VALUE",
     commodities: Annotated[
         str | None,
@@ -315,12 +643,15 @@ async def run_dataweb_report(
         str,
         "Time aggregation: 'Annual' or 'Monthly'.",
     ] = "Annual",
-) -> dict:
-    """Run a USITC DataWeb trade data report.
+) -> ResponseEnvelope[dict]:
+    """Pull US import/export statistics from USITC DataWeb (the official trade-statistics interface).
 
-    Query US import/export trade statistics by commodity, country, and time period.
-    Returns tabular data with column headers and row values.
-    Requires USITC_DATAWEB_TOKEN environment variable.
+    DataWeb is the U.S. International Trade Commission's public trade-data
+    interface. Query by commodity, country, and time period; returns
+    tabular data with column headers and row values. Requires
+    ``USITC_DATAWEB_TOKEN`` environment variable.
+
+    Related tools: search_hts_tariffs, search_usitc_investigations.
     """
     year_list = [y.strip() for y in years.split(",")]
     metric_list = [m.strip() for m in data_metrics.split(",")]
@@ -341,26 +672,107 @@ async def run_dataweb_report(
 
     async with DataWebClient() as client:
         result = await client.run_report(query)
-        return _dump(result)  # type: ignore[return-value]
+    details = _dump(result)
+    if not isinstance(details, dict):
+        details = {"raw": details}
+
+    row_count: int | None = None
+    dto = details.get("dto") if isinstance(details, dict) else None
+    if isinstance(dto, dict):
+        # DataWeb's ``dto`` payload nests result rows under different keys
+        # across runs; best-effort row count for the summary.
+        for candidate in ("rows", "results", "data"):
+            value = dto.get(candidate)
+            if isinstance(value, list):
+                row_count = len(value)
+                break
+
+    year_label = ",".join(year_list)
+    head = f"**USITC DataWeb {trade_type} report** ({classification}, years {year_label})"
+    if row_count is not None:
+        head += f"\n{row_count} row(s); metrics: {', '.join(metric_list)}."
+    else:
+        head += f"\nMetrics: {', '.join(metric_list)}."
+
+    return ResponseEnvelope[dict](
+        summary=head,
+        details=details,
+        provenance=_usitc_provenance(f"{_DATAWEB_BASE}/dataweb/api/v2/report2/runReport"),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Tools — IDS (USITC IP Search)
+# ---------------------------------------------------------------------------
 
 
 @usitc_mcp.tool(annotations=READ_ONLY)
-async def list_usitc_attachments(
-    document_id: Annotated[int, "EDIS document ID to list attachments for"],
-) -> dict:
-    """List attachments for a USITC EDIS document.
+async def list_ids_investigations(
+    limit: Annotated[
+        int, "Max records to return (default 200; 4000+ exist, full payload exceeds MCP budget)."
+    ] = 200,
+    offset: Annotated[int, "Records to skip for pagination."] = 0,
+    investigation_number_contains: Annotated[
+        str | None, "Filter to investigations whose number contains this substring (e.g. '337-1')."
+    ] = None,
+    title_contains: Annotated[
+        str | None,
+        "Filter to investigations whose title contains this substring (case-insensitive).",
+    ] = None,
+    include_parties: Annotated[
+        bool,
+        "Include participants/staff arrays. Off by default — they're ~85% of payload size.",
+    ] = False,
+    full: Annotated[
+        bool,
+        "When False (default), each hit is a lean stub. When True, every hit "
+        "carries the full IDS record (still subject to ``include_parties``).",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """List U.S. International Trade Commission (USITC) IDS (Intellectual Property Search) investigations.
 
-    Use download_usitc_attachment to download a specific attachment.
+    The IDS endpoint returns ~4000 records in a single 11 MB payload.
+    By default the tool drops ``participants``/``staff_contacts`` (the
+    bulk of that payload) and returns the first ``limit`` records as
+    lean stubs. ``total`` reports the unfiltered upstream size so
+    callers can paginate or refine via ``investigation_number_contains``
+    / ``title_contains``.
+
+    Related tools: search_usitc_investigations, get_usitc_investigation,
+    search_usitc_documents.
     """
-    async with EdisClient() as client:
-        results = await client.list_attachments(document_id)
-        items = []
-        for att in results:
-            item = _dump(att)
-            if isinstance(item, dict):
-                item.pop("download_uri", None)
-            items.append(item)
-        return {"results": items}
+    async with IdsClient() as client:
+        results = await client.list_investigations()
+
+    if investigation_number_contains:
+        needle = investigation_number_contains
+        results = [r for r in results if needle in (r.investigation_number or "")]
+    if title_contains:
+        needle = title_contains.lower()
+        results = [r for r in results if needle in (r.title or "").lower()]
+
+    total = len(results)
+    page = results[offset : offset + limit]
+
+    exclude = None if include_parties else {"participants", "staff_contacts"}
+    dumped = [r.model_dump(exclude=exclude) for r in page]
+    items = dumped if full else [_stub_ids_investigation(r) for r in dumped]
+
+    return ListEnvelope[dict](
+        summary=(
+            f"USITC IDS investigations — {len(items)} of {total} total "
+            f"(offset {offset}, limit {limit})."
+        ),
+        items=items,
+        more_available=offset + len(page) < total,
+        next_cursor=None,
+        provenance=_usitc_provenance(f"{_IDS_BASE}/investigations.json"),
+    )
+
+
+# ---------------------------------------------------------------------------
+# Tools — downloads (Shape E — shape preserved, docstring polish only)
+# ---------------------------------------------------------------------------
 
 
 _USITC_BULK_CAP = 25
@@ -394,16 +806,20 @@ async def download_usitc_investigation_documents(
         "Include only documents officially received on or before this date (ISO YYYY-MM-DD).",
     ] = None,
 ) -> dict:
-    """Bulk-download USITC EDIS attachments for one investigation.
+    """Bulk-download U.S. International Trade Commission (USITC) EDIS attachments for one investigation.
 
-    Two-level enumeration: pages through every document in the investigation,
-    then lists each document's attachments. Cap: 25 attachments per call
-    (USITC PDFs are routinely huge — exhibits often hundreds of MB each).
+    EDIS (Electronic Document Information System) two-level enumeration:
+    pages through every document in the investigation, then lists each
+    document's attachments. Cap: 25 attachments per call (USITC PDFs are
+    routinely huge — exhibits often hundreds of MB each).
 
     The cap applies to *attachments*, not documents — a single EDIS
     document can carry multiple PDFs. Narrow with ``item_ids``,
     ``document_types``, or date range to fit under the cap. Use
     ``search_usitc_documents`` and ``list_usitc_attachments`` to preview.
+
+    Related tools: download_usitc_attachment, list_usitc_attachments,
+    search_usitc_documents, get_usitc_investigation.
     """
     after_d = _parse_iso_date(after, field_name="after")
     before_d = _parse_iso_date(before, field_name="before")
@@ -572,13 +988,18 @@ async def download_usitc_investigation_documents(
 
 @usitc_mcp.tool(annotations=READ_ONLY)
 async def download_usitc_attachment(
-    document_id: Annotated[int, "EDIS document ID"],
-    attachment_id: Annotated[int, "EDIS attachment ID"],
+    document_id: Annotated[int, "EDIS document ID."],
+    attachment_id: Annotated[int, "EDIS attachment ID."],
 ) -> dict:
-    """Download a USITC EDIS attachment.
+    """Download a U.S. International Trade Commission (USITC) EDIS attachment as a PDF.
 
-    Returns a signed `download_url` (or `file_path` in local stdio mode) plus
-    `filename`, `content_type`, `size_bytes`, `document_id`, `attachment_id`.
+    EDIS (Electronic Document Information System) stores party filings
+    as document/attachment pairs. Returns a signed ``download_url`` (or
+    ``file_path`` in local stdio mode) plus ``filename``,
+    ``content_type``, ``size_bytes``, ``document_id``, ``attachment_id``.
+
+    Related tools: list_usitc_attachments, search_usitc_documents,
+    download_usitc_investigation_documents.
     """
     async with EdisClient() as client:
         result = await client.download_attachment(document_id, attachment_id)
@@ -597,46 +1018,3 @@ async def download_usitc_attachment(
             document_id=document_id,
             attachment_id=attachment_id,
         )
-
-
-@usitc_mcp.tool(annotations=READ_ONLY)
-async def list_ids_investigations(
-    limit: Annotated[
-        int, "Max records to return (default 200; 4000+ exist, full payload exceeds MCP budget)"
-    ] = 200,
-    offset: Annotated[int, "Records to skip for pagination"] = 0,
-    investigation_number_contains: Annotated[
-        str | None, "Filter to investigations whose number contains this substring (e.g. '337-1')"
-    ] = None,
-    title_contains: Annotated[
-        str | None,
-        "Filter to investigations whose title contains this substring (case-insensitive)",
-    ] = None,
-    include_parties: Annotated[
-        bool,
-        "Include participants/staff arrays. Off by default — they're ~85% of payload size.",
-    ] = False,
-) -> dict:
-    """List USITC IDS (Intellectual Property) investigations.
-
-    Upstream returns ~4000 records in a single 11 MB payload. By default
-    the tool drops ``participants``/``staff_contacts`` (the bulk of that
-    payload) and returns the first ``limit`` records. ``total`` reports
-    the unfiltered upstream size so callers can paginate or refine.
-    """
-    async with IdsClient() as client:
-        results = await client.list_investigations()
-
-    if investigation_number_contains:
-        needle = investigation_number_contains
-        results = [r for r in results if needle in (r.investigation_number or "")]
-    if title_contains:
-        needle = title_contains.lower()
-        results = [r for r in results if needle in (r.title or "").lower()]
-
-    total = len(results)
-    page = results[offset : offset + limit]
-
-    exclude = None if include_parties else {"participants", "staff_contacts"}
-    items = [r.model_dump(exclude=exclude) for r in page]
-    return {"results": items, "total": total, "offset": offset, "limit": limit}

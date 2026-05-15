@@ -258,9 +258,7 @@ class TestSearchProjection:
             captured["payload"] = payload
             return {"count": 0, "patentFileWrapperDataBag": []}
 
-        with patch.object(
-            client, "_search_with_payload", side_effect=fake_search_with_payload
-        ):
+        with patch.object(client, "_search_with_payload", side_effect=fake_search_with_payload):
             await client.search(query="anything")
 
         assert captured["payload"]["fields"] == list(STUB_APPLICATION_FIELDS)
@@ -274,9 +272,7 @@ class TestSearchProjection:
             captured["payload"] = payload
             return {"count": 0, "patentFileWrapperDataBag": []}
 
-        with patch.object(
-            client, "_search_with_payload", side_effect=fake_search_with_payload
-        ):
+        with patch.object(client, "_search_with_payload", side_effect=fake_search_with_payload):
             await client.search(query="anything", full=True)
 
         assert "fields" not in captured["payload"]
@@ -290,9 +286,7 @@ class TestSearchProjection:
             captured["payload"] = payload
             return {"count": 0, "patentFileWrapperDataBag": []}
 
-        with patch.object(
-            client, "_search_with_payload", side_effect=fake_search_with_payload
-        ):
+        with patch.object(client, "_search_with_payload", side_effect=fake_search_with_payload):
             await client.search(query="anything", fields=["applicationNumberText"])
 
         assert captured["payload"]["fields"] == ["applicationNumberText"]
@@ -306,12 +300,8 @@ class TestSearchProjection:
             captured["payload"] = payload
             return {"count": 0, "patentFileWrapperDataBag": []}
 
-        with patch.object(
-            client, "_search_with_payload", side_effect=fake_search_with_payload
-        ):
-            await client.search(
-                query="x", fields=["applicationNumberText"], full=True
-            )
+        with patch.object(client, "_search_with_payload", side_effect=fake_search_with_payload):
+            await client.search(query="x", fields=["applicationNumberText"], full=True)
 
         assert captured["payload"]["fields"] == ["applicationNumberText"]
 

@@ -30,7 +30,7 @@ try:
 
     PLAYWRIGHT_AVAILABLE = True
 except ImportError:
-    async_playwright = None  # type: ignore[assignment]
+    async_playwright = None  # type: ignore[assignment]  # ty: ignore[invalid-assignment]
     PLAYWRIGHT_AVAILABLE = False
 
 logger = logging.getLogger(__name__)

@@ -2,6 +2,10 @@
 
 Verifies that each ``ip_type``-dispatched tool routes to the correct
 ``JpoClient`` method. Heavy on monkey-patching; no network.
+
+Envelope-shape assertions live in ``test_mcp_envelope.py``; these tests
+focus on dispatch routing and reach through the envelope (``items[0]``
+or ``.details``) to confirm the right upstream method was called.
 """
 
 from __future__ import annotations
@@ -62,7 +66,7 @@ class TestGetJpoProgressDispatch:
         )
         result = await inter.get_jpo_progress("2020123456", ip_type="patent")
         mock_client.get_patent_progress.assert_awaited_once_with("2020123456")
-        assert result["application_number"] == "2020123456"
+        assert result.items[0]["application_number"] == "2020123456"
 
     @pytest.mark.asyncio
     async def test_routes_to_design_method(self, mock_client) -> None:
@@ -71,7 +75,7 @@ class TestGetJpoProgressDispatch:
         )
         result = await inter.get_jpo_progress("2020015234", ip_type="design")
         mock_client.get_design_progress.assert_awaited_once_with("2020015234")
-        assert result["application_number"] == "2020015234"
+        assert result.items[0]["application_number"] == "2020015234"
 
     @pytest.mark.asyncio
     async def test_routes_to_trademark_method(self, mock_client) -> None:
@@ -80,7 +84,7 @@ class TestGetJpoProgressDispatch:
         )
         result = await inter.get_jpo_progress("2024123456", ip_type="trademark")
         mock_client.get_trademark_progress.assert_awaited_once_with("2024123456")
-        assert result["application_number"] == "2024123456"
+        assert result.items[0]["application_number"] == "2024123456"
 
     @pytest.mark.asyncio
     async def test_unknown_ip_type_raises(self, mock_client) -> None:
@@ -93,7 +97,8 @@ class TestGetJpoProgressDispatch:
     async def test_returns_empty_dict_when_no_data(self, mock_client) -> None:
         mock_client.get_patent_progress = AsyncMock(return_value=None)
         result = await inter.get_jpo_progress("9999999999", ip_type="patent")
-        assert result == {}
+        # Single-id call still returns ListEnvelope per §5.4; item is {}.
+        assert result.items == [{}]
 
 
 # ---------------------------------------------------------------------------
@@ -109,7 +114,7 @@ class TestGetJpoProgressSimpleDispatch:
         )
         result = await inter.get_jpo_progress_simple("2020015234", ip_type="design")
         mock_client.get_design_progress_simple.assert_awaited_once_with("2020015234")
-        assert result["application_number"] == "2020015234"
+        assert result.items[0]["application_number"] == "2020015234"
 
     @pytest.mark.asyncio
     async def test_routes_trademark_simple(self, mock_client) -> None:
@@ -118,7 +123,7 @@ class TestGetJpoProgressSimpleDispatch:
         )
         result = await inter.get_jpo_progress_simple("2024123456", ip_type="trademark")
         mock_client.get_trademark_progress_simple.assert_awaited_once_with("2024123456")
-        assert result["application_number"] == "2024123456"
+        assert result.items[0]["application_number"] == "2024123456"
 
 
 # ---------------------------------------------------------------------------
@@ -134,14 +139,14 @@ class TestGetJpoPriorityInfoDispatch:
         )
         result = await inter.get_jpo_priority_info("2020015234", ip_type="design")
         mock_client.get_design_priority_info.assert_awaited_once_with("2020015234")
-        assert result == {"results": [PriorityInfo(parisPriorityCountryCd="US").model_dump()]}
+        assert result.items == [PriorityInfo(parisPriorityCountryCd="US").model_dump()]
 
     @pytest.mark.asyncio
     async def test_routes_trademark_priority(self, mock_client) -> None:
         mock_client.get_trademark_priority_info = AsyncMock(return_value=[])
         result = await inter.get_jpo_priority_info("2024123456", ip_type="trademark")
         mock_client.get_trademark_priority_info.assert_awaited_once_with("2024123456")
-        assert result == {"results": []}
+        assert result.items == []
 
 
 # ---------------------------------------------------------------------------
@@ -157,13 +162,13 @@ class TestGetJpoRegistrationInfoDispatch:
         )
         result = await inter.get_jpo_registration_info("2020015234", ip_type="design")
         mock_client.get_design_registration_info.assert_awaited_once_with("2020015234")
-        assert result["registration_number"] == "1234567"
+        assert result.items[0]["registration_number"] == "1234567"
 
     @pytest.mark.asyncio
     async def test_returns_empty_for_unregistered(self, mock_client) -> None:
         mock_client.get_trademark_registration_info = AsyncMock(return_value=None)
         result = await inter.get_jpo_registration_info("2024123456", ip_type="trademark")
-        assert result == {}
+        assert result.items == [{}]
 
 
 # ---------------------------------------------------------------------------
@@ -185,7 +190,7 @@ class TestGetJpoNumberReferenceDispatch:
         mock_client.get_design_number_reference.assert_awaited_once_with(
             "application", "2020015234"
         )
-        assert result["application_number"] == "2020015234"
+        assert result.details["application_number"] == "2020015234"
 
     @pytest.mark.asyncio
     async def test_routes_trademark_number_ref(self, mock_client) -> None:
@@ -195,7 +200,7 @@ class TestGetJpoNumberReferenceDispatch:
             kind="application",
             ip_type="trademark",
         )
-        assert result == {}
+        assert result.details == {}
 
 
 # ---------------------------------------------------------------------------
@@ -211,31 +216,33 @@ class TestGetJpoJplatpatUrlDispatch:
         )
         result = await inter.get_jpo_jplatpat_url("2020015234", ip_type="design")
         mock_client.get_design_jplatpat_url.assert_awaited_once_with("2020015234")
-        assert result["url"].startswith("https://")
+        assert result.details["url"].startswith("https://")
 
 
 # ---------------------------------------------------------------------------
-# get_jpo_applicant_by_code / by_name
+# get_jpo_applicant — collapsed code/name lookups (§5.3)
 # ---------------------------------------------------------------------------
 
 
 class TestGetJpoApplicantDispatch:
     @pytest.mark.asyncio
-    async def test_by_code_routes_design(self, mock_client) -> None:
+    async def test_code_lookup_routes_design(self, mock_client) -> None:
+        # 9-digit numeric → code lookup branch
         mock_client.get_design_applicant_by_code = AsyncMock(return_value="株式会社サンプル")
-        result = await inter.get_jpo_applicant_by_code("000003207", ip_type="design")
+        result = await inter.get_jpo_applicant("000003207", ip_type="design")
         mock_client.get_design_applicant_by_code.assert_awaited_once_with("000003207")
-        assert result["name"] == "株式会社サンプル"
+        assert result.details["name"] == "株式会社サンプル"
 
     @pytest.mark.asyncio
-    async def test_by_name_routes_trademark(self, mock_client) -> None:
+    async def test_name_lookup_routes_trademark(self, mock_client) -> None:
+        # Non-9-digit → name lookup branch
         mock_client.get_trademark_applicant_by_name = AsyncMock(
             return_value=[ApplicantAttorney(applicantAttorneyCd="000003207", name="テスト")]
         )
-        result = await inter.get_jpo_applicant_by_name("テスト", ip_type="trademark")
+        result = await inter.get_jpo_applicant("テスト", ip_type="trademark")
         mock_client.get_trademark_applicant_by_name.assert_awaited_once_with("テスト")
-        assert len(result["results"]) == 1
-        assert result["results"][0]["applicant_attorney_cd"] == "000003207"
+        assert len(result.details["results"]) == 1
+        assert result.details["results"][0]["applicant_attorney_cd"] == "000003207"
 
 
 # ---------------------------------------------------------------------------
@@ -249,7 +256,7 @@ class TestPatentOnlyTools:
         mock_client.get_patent_divisional_info = AsyncMock(return_value=None)
         result = await inter.get_jpo_patent_divisional_info("2020123456")
         mock_client.get_patent_divisional_info.assert_awaited_once_with("2020123456")
-        assert result == {}
+        assert result.details == {}
 
     @pytest.mark.asyncio
     async def test_pct_national_phase(self, mock_client) -> None:
@@ -261,7 +268,7 @@ class TestPatentOnlyTools:
         mock_client.get_patent_pct_national_number.assert_awaited_once_with(
             "international_application", "JP9999999999"
         )
-        assert result == {}
+        assert result.details == {}
 
 
 # ---------------------------------------------------------------------------

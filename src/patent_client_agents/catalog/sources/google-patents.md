@@ -62,13 +62,12 @@ significant work.
 
 ## MCP Tools
 
-8 tools. `get_patent_claims` routes through USPTO ODP with a Google fallback — documented on [uspto-odp.md](uspto-odp.md).
+7 tools. `get_patent_claims` routes through USPTO ODP with a Google fallback — documented on [uspto-odp.md](uspto-odp.md).
 
 | Tool | Description |
 |------|-------------|
-| `search_google_patents` | Search Google Patents by keyword, inventor, assignee, or CPC code |
-| `get_patent` | Get full patent data including title, abstract, claims, description, and citations |
-| `get_patent_details` | Get structured patent details: dates, assignee, inventors |
+| `search_patents_global(query, …, full=False)` | Search patent publications worldwide via Google Patents (>100 jurisdictions). Lean stubs by default; `full=True` for upstream search row shape. Returns a `ListEnvelope[dict]`. |
+| `get_patent(patent_number, view='full')` | Get worldwide patent data: title, abstract, claims, description, citations. Accepts `str | list[str]` (§5.4); always returns `ListEnvelope[dict]`. `view='details'` projects to the metadata subset (dates, assignee, inventors, abstract, claim_count) on the same upstream record. |
 | `get_patent_figures` | Get patent figure images with callout annotations |
 | `get_patent_claims(patent_number, view)` | Unified claims tool. Cascades USPTO ODP grant XML → Google Patents for full coverage. Returns canonical shape per claim: `{claim_number, limitations: [{text, depth}], claim_text, claim_type, depends_on}`. `view` = `full` (default), `independent_only`, or `limitations` (compact mapping for infringement charts). |
 | `get_forward_citations` | Get patents that cite the given patent (publication_number, assignee, title, examiner_cited flag); optional family-level citations |

@@ -1,0 +1,661 @@
+# patent-client-agents coverage manifest
+#
+# Source of truth for the coverage page. Schema is closed-vocabulary;
+# the validator in `scripts/build_coverage.py` enforces every field.
+# See CONNECTOR_STANDARDS.md §6 for the contract.
+#
+# Edit this file by hand. After editing, run:
+#   uv run python scripts/build_coverage.py --check   # validate only
+#   uv run python scripts/build_coverage.py           # writes coverage/coverage.json
+#
+# Classification rules for ambiguous sources (CONNECTOR_STANDARDS.md §6):
+#   - CPC                       → registered_ip   (classification of the register)
+#   - USITC investigations      → registered_ip   (tribunal adjudicating rights, like PTAB)
+#   - EPO Case Law              → substantive_law, cadence: annual (bundled-artifact rhythm)
+#   - CAFC / UPC / CanLII cases → substantive_law (reviewing-court interpretation)
+
+sources:
+
+  # ────────────────────────────────────────────────────────────────────
+  # US — USPTO registers (patents)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: US/USPTO/ODP/Applications
+    name: USPTO Open Data Portal — Applications
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [patent]
+    data_types: [bibliographic, prosecution, legal_status]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.uspto_applications
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: US/USPTO/ODP/PTAB
+    name: USPTO Open Data Portal — PTAB proceedings
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office (Patent Trial and Appeal Board)
+    rights: [patent]
+    data_types: [tribunal_proceedings, prosecution]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.uspto_odp
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: US/USPTO/ODP/Petitions
+    name: USPTO Open Data Portal — Petitions
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [patent]
+    data_types: [tribunal_proceedings, prosecution]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.uspto_petitions
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: US/USPTO/PPUBS
+    name: USPTO Patent Public Search (PPUBS)
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [patent]
+    data_types: [bibliographic, full_text]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.uspto_publications
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: US/USPTO/Assignments/Patents
+    name: USPTO Patent Assignment Center
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [patent]
+    data_types: [assignments]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.uspto_assignments
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: US/USPTO/OfficeActions
+    name: USPTO Office Actions Dataset
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [patent]
+    data_types: [prosecution]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.uspto_office_actions
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: US/USPTO/BulkData
+    name: USPTO Bulk Data Storage System (BDSS)
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [patent, trademark]
+    data_types: [bulk_data]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.uspto_bulkdata
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  # ────────────────────────────────────────────────────────────────────
+  # US — USPTO registers (trademarks)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: US/USPTO/TSDR
+    name: USPTO Trademark Status & Document Retrieval (TSDR)
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [trademark]
+    data_types: [bibliographic, prosecution, legal_status]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [USPTO_TSDR_API_KEY]
+    status: active
+    connector:
+      module: patent_client_agents.uspto_tsdr
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: US/USPTO/TMSearch
+    name: USPTO Trademark Search (TESS replacement)
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [trademark]
+    data_types: [bibliographic]
+    access:
+      method: website_scrape
+      auth: cookie_token
+    status: active
+    connector:
+      module: patent_client_agents.uspto_tmsearch
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: US/USPTO/Assignments/Trademarks
+    name: USPTO Trademark Assignment Center
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [trademark]
+    data_types: [assignments]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.uspto_trademark_assignments
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  # ────────────────────────────────────────────────────────────────────
+  # US — copyright register
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: US/USCO/Registrations
+    name: U.S. Copyright Office — Public Records
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Copyright Office (Library of Congress)
+    rights: [copyright]
+    data_types: [bibliographic, assignments, legal_status]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.copyright
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  # ────────────────────────────────────────────────────────────────────
+  # EP — European Patent Office (registers + classification)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: EP/EPO/OPS
+    name: EPO Open Patent Services (OPS)
+    jurisdiction: EP
+    wipo_st3_code: EP
+    issuing_body: European Patent Office
+    rights: [patent]
+    data_types: [bibliographic, full_text, legal_status]
+    access:
+      method: rest_api
+      auth: oauth2_client_credentials
+      auth_env: [EPO_OPS_API_KEY, EPO_OPS_API_SECRET]
+    status: active
+    connector:
+      module: patent_client_agents.epo_ops
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: EP/EPO/CPC
+    name: Cooperative Patent Classification (CPC)
+    jurisdiction: EP
+    wipo_st3_code: EP
+    issuing_body: European Patent Office / U.S. Patent and Trademark Office
+    rights: [patent]
+    data_types: [classification]
+    access:
+      method: rest_api
+      auth: oauth2_client_credentials
+      auth_env: [EPO_OPS_API_KEY, EPO_OPS_API_SECRET]
+    status: active
+    connector:
+      module: patent_client_agents.cpc
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  # ────────────────────────────────────────────────────────────────────
+  # EU — EUIPO (trademarks + designs)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: EM/EUIPO/Trademarks
+    name: EUIPO — European Union Trademarks
+    jurisdiction: EM
+    wipo_st3_code: EM
+    issuing_body: European Union Intellectual Property Office
+    rights: [trademark]
+    data_types: [bibliographic, legal_status]
+    access:
+      method: rest_api
+      auth: oauth2_client_credentials
+      auth_env: [EUIPO_CLIENT_ID, EUIPO_CLIENT_SECRET]
+    status: active
+    connector:
+      module: patent_client_agents.euipo_trademarks
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: EM/EUIPO/Designs
+    name: EUIPO — Registered Community Designs
+    jurisdiction: EM
+    wipo_st3_code: EM
+    issuing_body: European Union Intellectual Property Office
+    rights: [design]
+    data_types: [bibliographic, legal_status]
+    access:
+      method: rest_api
+      auth: oauth2_client_credentials
+      auth_env: [EUIPO_CLIENT_ID, EUIPO_CLIENT_SECRET]
+    status: active
+    connector:
+      module: patent_client_agents.euipo_designs
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  # ────────────────────────────────────────────────────────────────────
+  # JP — JPO (patents, trademarks, designs)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: JP/JPO
+    name: Japan Patent Office (JPO) — Open API
+    jurisdiction: JP
+    wipo_st3_code: JP
+    issuing_body: Japan Patent Office
+    rights: [patent, trademark, design]
+    data_types: [bibliographic, prosecution, legal_status]
+    access:
+      method: rest_api
+      auth: oauth2_password
+      auth_env: [JPO_API_USERNAME, JPO_API_PASSWORD]
+    status: active
+    connector:
+      module: patent_client_agents.jpo
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+
+  # ────────────────────────────────────────────────────────────────────
+  # WO — Google Patents (worldwide aggregator)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: WO/Google/Patents
+    name: Google Patents (worldwide aggregator)
+    jurisdiction: WO
+    wipo_st3_code: WO
+    issuing_body: Google LLC (aggregator; not an issuing authority)
+    rights: [patent]
+    data_types: [bibliographic, full_text]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.google_patents
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+    notes: |
+      Non-authoritative aggregator; primary use is cross-jurisdiction reach
+      where authoritative registers (PPUBS, EPO OPS, JPO) don't reach.
+
+  # ────────────────────────────────────────────────────────────────────
+  # US — USITC (Section 337 investigations + trade data)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: US/USITC
+    name: U.S. International Trade Commission (EDIS + DataWeb + HTS)
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. International Trade Commission
+    rights: [patent, trademark]
+    data_types: [tribunal_proceedings, litigation]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [USITC_EDIS_TOKEN]
+    status: active
+    connector:
+      module: patent_client_agents.usitc
+    last_verified: 2026-05-15
+    category: registered_ip
+    transport: mcp_proxy
+    notes: |
+      Classified registered_ip by analogy to PTAB: a tribunal adjudicating
+      registered patents is part of the registered-IP lifecycle.
+
+  # ════════════════════════════════════════════════════════════════════
+  # SUBSTANTIVE LAW — statutes, regulations, examination guidelines
+  # ════════════════════════════════════════════════════════════════════
+
+  # ────────────────────────────────────────────────────────────────────
+  # US — USPTO examination guidelines
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: US/USPTO/MPEP
+    name: Manual of Patent Examining Procedure (MPEP)
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [patent]
+    data_types: [guidelines]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.mpep
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: quarterly
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+
+  - id: US/USPTO/TMEP
+    name: Trademark Manual of Examining Procedure (TMEP)
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [trademark]
+    data_types: [guidelines]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.tmep
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: quarterly
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+
+  # ────────────────────────────────────────────────────────────────────
+  # EP — European Patent Office substantive law
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: EP/EPC/Statute
+    name: European Patent Convention (EPC)
+    jurisdiction: EP
+    wipo_st3_code: EP
+    issuing_body: European Patent Office
+    rights: [patent]
+    data_types: [statutes]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.epc
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: irregular
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+
+  - id: EP/EPO/Guidelines
+    name: EPO Guidelines for Examination
+    jurisdiction: EP
+    wipo_st3_code: EP
+    issuing_body: European Patent Office
+    rights: [patent]
+    data_types: [guidelines]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.epo_guidelines
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: annual
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+
+  - id: EP/EPO/CaseLaw
+    name: EPO Boards of Appeal Case Law Compendium
+    jurisdiction: EP
+    wipo_st3_code: EP
+    issuing_body: European Patent Office (Boards of Appeal)
+    rights: [patent]
+    data_types: [case_law]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.epo_case_law
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: annual
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+    notes: |
+      Cadence follows the bundled-artifact rhythm (annual compendium
+      republication), not individual decision issuance.
+
+  - id: WO/PCT/Guidelines
+    name: PCT Guidelines (PCT-EPO Guidelines for Examination)
+    jurisdiction: WO
+    wipo_st3_code: WO
+    issuing_body: European Patent Office / World Intellectual Property Organization
+    rights: [patent]
+    data_types: [guidelines]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.epo_pct_guidelines
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: annual
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+
+  - id: UP/EPO/UPGuidelines
+    name: Unitary Patent Guidelines
+    jurisdiction: UP
+    wipo_st3_code: UP
+    issuing_body: European Patent Office (Unitary Patent Court Division)
+    rights: [patent]
+    data_types: [guidelines]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.epo_up_guidelines
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: annual
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+
+  # ────────────────────────────────────────────────────────────────────
+  # GB — UKIPO Manual of Patent Practice
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: GB/UKIPO/MoPP
+    name: UKIPO Manual of Patent Practice (MoPP)
+    jurisdiction: GB
+    wipo_st3_code: GB
+    issuing_body: UK Intellectual Property Office
+    rights: [patent]
+    data_types: [guidelines]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.ukipo_mopp
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: monthly
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+
+  # ────────────────────────────────────────────────────────────────────
+  # UPC — Unified Patent Court statutes
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: UPC/UPC/Statutes
+    name: Unified Patent Court — Statutes & Rules of Procedure
+    jurisdiction: UPC
+    wipo_st3_code: UPC
+    issuing_body: Unified Patent Court
+    rights: [patent]
+    data_types: [statutes]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.upc_statutes
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: irregular
+    last_synced: 2026-05-15
+    corpus_version: "unknown — needs verification"
+
+  # ════════════════════════════════════════════════════════════════════
+  # SUBSTANTIVE LAW — reviewing-court case law (live proxy)
+  # ════════════════════════════════════════════════════════════════════
+
+  - id: US/CAFC/Opinions
+    name: U.S. Court of Appeals for the Federal Circuit — Opinions
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Court of Appeals for the Federal Circuit
+    rights: [patent, trademark]
+    data_types: [case_law, litigation]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.cafc
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: weekly
+
+  - id: UPC/UPC/Decisions
+    name: Unified Patent Court — Decisions
+    jurisdiction: UPC
+    wipo_st3_code: UPC
+    issuing_body: Unified Patent Court
+    rights: [patent]
+    data_types: [case_law, tribunal_proceedings, litigation]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.upc_decisions
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: weekly
+
+  - id: CA/CanLII
+    name: CanLII — Canadian patent / trademark case law and statutes
+    jurisdiction: CA
+    wipo_st3_code: CA
+    issuing_body: Canadian Legal Information Institute
+    rights: [patent, trademark]
+    data_types: [case_law, statutes, litigation]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [CANLII_API_KEY]
+    status: active
+    connector:
+      module: patent_client_agents.canlii
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: weekly
+
+  - id: WO/WIPO/Lex
+    name: WIPO Lex — global IP legislation & treaties
+    jurisdiction: WO
+    wipo_st3_code: WO
+    issuing_body: World Intellectual Property Organization
+    rights: [patent, trademark, design, copyright, gi]
+    data_types: [statutes, treaties]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.wipo_lex
+    last_verified: 2026-05-15
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular

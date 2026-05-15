@@ -30,8 +30,7 @@ argument that switches between the three IP types.
 | `get_jpo_registration_info` | `application_number, ip_type` | Granted-rights record |
 | `get_jpo_number_reference` | `number, kind, ip_type` | Cross-reference application/publication/registration |
 | `get_jpo_jplatpat_url` | `application_number, ip_type` | J-PlatPat permalink |
-| `get_jpo_applicant_by_code` | `applicant_code, ip_type` | 9-digit code → name |
-| `get_jpo_applicant_by_name` | `applicant_name, ip_type` | Exact-match name → code |
+| `get_jpo_applicant` | `applicant, ip_type` | Auto-detects 9-digit code vs exact name |
 | `get_jpo_documents` | `application_number, doc_kind, ip_type, parse=True` | Parsed file-history bundle + signed download URL. Pass `parse=False` to skip parsing and return just metadata + URL. |
 | `get_jpo_patent_divisional_info` | `application_number` | Patent-only — no design/trademark equivalent |
 | `get_jpo_patent_cited_documents` | `application_number` | Patent-only — patent + non-patent citations |

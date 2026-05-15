@@ -481,24 +481,26 @@ class TestMcpDispatchLive:
         from patent_client_agents.mcp.tools.international import get_jpo_progress
 
         result = await get_jpo_progress(DESIGN_APP, ip_type="design")
-        assert result["application_number"] == DESIGN_APP
-        assert result.get("design_article")
+        record = result.items[0]
+        assert record["application_number"] == DESIGN_APP
+        assert record.get("design_article")
 
     @pytest.mark.asyncio
     async def test_progress_trademark(self, vcr_cassette) -> None:
         from patent_client_agents.mcp.tools.international import get_jpo_progress
 
         result = await get_jpo_progress(TRADEMARK_APP, ip_type="trademark")
-        assert result["application_number"] == TRADEMARK_APP
-        assert result.get("trademark_for_display")
+        record = result.items[0]
+        assert record["application_number"] == TRADEMARK_APP
+        assert record.get("trademark_for_display")
 
     @pytest.mark.asyncio
     async def test_jplatpat_url_design(self, vcr_cassette) -> None:
         from patent_client_agents.mcp.tools.international import get_jpo_jplatpat_url
 
         result = await get_jpo_jplatpat_url(DESIGN_APP, ip_type="design")
-        assert result.get("url")
-        assert "j-platpat" in result["url"].lower()
+        assert result.details.get("url")
+        assert "j-platpat" in result.details["url"].lower()
 
     @pytest.mark.asyncio
     async def test_get_jpo_documents_patent_refusal(self, vcr_cassette) -> None:

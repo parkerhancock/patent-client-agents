@@ -8,11 +8,12 @@ view shapes, and signed-URL packaging; fusion semantics live in the library.
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated
+from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.exceptions import NotFoundError, RateLimitError
+from law_tools_core.envelope import ListEnvelope, make_provenance
+from law_tools_core.exceptions import NotFoundError, RateLimitError, ValidationError
 from law_tools_core.filenames import patent_pdf as _patent_pdf_name
 from law_tools_core.mcp.annotations import READ_ONLY
 from law_tools_core.mcp.downloads import (
@@ -24,8 +25,116 @@ from patent_client_agents import unified
 from patent_client_agents.google_patents import GooglePatentsClient
 
 _GET_PATENT_BUDGET_SECONDS = 60.0
+_GP_FANOUT_CONCURRENCY = 5
 
 patents_mcp = FastMCP("Patents")
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Envelope helpers — Google Patents source-specific wrappers around
+# law_tools_core.envelope. Google Patents is a worldwide aggregator that
+# indexes >100 jurisdictions including offices unreachable via authoritative
+# APIs; "Google Patents (worldwide aggregator)" is the canonical source name.
+# ──────────────────────────────────────────────────────────────────────
+
+_GOOGLE_PATENTS_BASE = "https://patents.google.com"
+_GOOGLE_PATENTS_NAME = "Google Patents (worldwide aggregator)"
+
+
+def _google_patents_provenance(path: str) -> Any:
+    """Build a Provenance pointing at ``{base}{path}`` for the Google Patents upstream."""
+    return make_provenance(
+        source_url=f"{_GOOGLE_PATENTS_BASE}{path}",
+        source_name=_GOOGLE_PATENTS_NAME,
+    )
+
+
+def _dump(obj: object) -> dict[str, Any]:
+    """Serialize a Pydantic model to a dict (or pass through dicts)."""
+    if hasattr(obj, "model_dump"):
+        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
+    if isinstance(obj, dict):
+        return cast("dict[str, Any]", obj)
+    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
+
+
+# Country code is the leading two-letter prefix of a publication_number
+# like 'US10123456B2', 'EP3456789A1', 'WO2020123456A1'.
+def _country_from_publication_number(pub_no: str | None) -> str | None:
+    if not pub_no:
+        return None
+    head = pub_no[:2]
+    if len(head) == 2 and head.isalpha() and head.isupper():
+        return head
+    return None
+
+
+def _stub_search_hit(record: dict) -> dict:
+    """Lean projection of one Google Patents search hit (§5.5).
+
+    Keeps the ~8 scalar fields an agent needs to triage a worldwide
+    result set. Skips the bulky family_country_status array, thumbnail
+    URLs, and the upstream rank/result_type/id (the agent talks to the
+    tool by ``publication_number``, not Google's internal id).
+    """
+    pub_no = record.get("publication_number")
+    return {
+        "publication_number": pub_no,
+        "title": record.get("title"),
+        "assignee": record.get("assignee"),
+        "inventor": record.get("inventor"),
+        "filing_date": record.get("filing_date"),
+        "publication_date": record.get("publication_date"),
+        "grant_date": record.get("grant_date"),
+        "country": _country_from_publication_number(pub_no),
+        "language": record.get("language"),
+    }
+
+
+def _summarize_patent(record: dict) -> str:
+    """One-line Markdown summary for a single Google Patents patent record."""
+    pub_no = record.get("patent_number") or record.get("publication_number") or "(no pub#)"
+    title = record.get("title") or "(no title)"
+    status = record.get("status") or "?"
+    assignee = record.get("current_assignee") or record.get("assignee") or None
+    filing = record.get("filing_date") or "?"
+    grant = record.get("grant_date") or record.get("issue_date")
+    head = f"**Patent {pub_no}** — {title}"
+    line = f"Status: {status}. Filed {filing}"
+    if grant:
+        line += f"; granted {grant}"
+    if assignee:
+        line += f"; assignee {assignee}"
+    line += "."
+    return f"{head}\n{line}"
+
+
+def _details_view(record: dict) -> dict:
+    """Project a full PatentData dump down to the metadata subset that
+    ``get_patent_details`` used to return.
+
+    Carries the fields agents need for triage (dates, assignee, inventors,
+    abstract, claim count) without the bulky claims/description/citation
+    arrays. Mirrors :meth:`GooglePatentsClient.get_patent_details` so the
+    ``view='details'`` opt-in is shape-compatible with the deleted tool.
+    """
+    claims = record.get("claims") or []
+    return {
+        "patent_number": record.get("patent_number"),
+        "application_number": record.get("application_number"),
+        "title": record.get("title"),
+        "filing_date": record.get("filing_date"),
+        "grant_date": record.get("grant_date"),
+        "priority_date": record.get("priority_date"),
+        "publication_date": record.get("publication_date"),
+        "current_assignee": record.get("current_assignee"),
+        "original_assignee": record.get("original_assignee"),
+        "inventors": record.get("inventors") or [],
+        "status": record.get("status"),
+        "claim_count": len(claims) if isinstance(claims, list) else None,
+        "abstract": record.get("abstract"),
+        "kind_code": record.get("kind_code"),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -63,7 +172,7 @@ async def _patent_pdf_resource(publication_number: str):
 
 
 @patents_mcp.tool(annotations=READ_ONLY)
-async def search_google_patents(
+async def search_patents_global(
     query: Annotated[str, "Keyword search query"],
     cpc_codes: Annotated[list[str] | None, "CPC classification codes (e.g. ['H04L9/32'])"] = None,
     inventors: Annotated[list[str] | None, "Inventor names to filter on"] = None,
@@ -76,18 +185,28 @@ async def search_google_patents(
     sort: Annotated[str | None, "Sort order: 'new' (newest first) or 'old' (oldest first)"] = None,
     page: Annotated[int | None, "Page number (1-indexed)"] = None,
     page_size: Annotated[int | None, "Results per page (max 100)"] = None,
-) -> dict:
-    """Search Google Patents by keyword, inventor, assignee, or CPC code.
+    full: Annotated[
+        bool,
+        "When False (the default), each hit is a lean stub: publication "
+        "number, title, assignee, inventor, filing/publication/grant dates, "
+        "country, language. When True, every hit carries the full upstream "
+        "search row (family_country_status array, rank, thumbnail URLs, "
+        "etc.) — larger; prefer ``get_patent`` for one record.",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search patent publications worldwide via Google Patents (covers >100 jurisdictions including non-US offices).
 
-    PREFER search_patent_publications (PPUBS) for US patent search — it is
-    more reliable and supports full-text search within claims, specification,
-    and abstract. Use this tool for non-US patents (EP, WO, JP, etc.) or
-    when PPUBS does not support the query.
+    The most jurisdiction-portable patent search this server exposes —
+    pull EP, WO, JP, CN, KR, AU, CA, BR, IN, and many others from one
+    query. For US-only full-text search (which can match claims and
+    specification text), ``search_patent_publications`` (PPUBS) is more
+    reliable and supports field codes.
 
-    Requests are rate-limited to avoid bot detection. If rate limited,
-    wait and retry.
+    Returns lean stubs by default; pass ``full=True`` for the upstream
+    search row shape. Requests are rate-limited to avoid bot detection;
+    if rate limited, wait and retry.
 
-    Use download_patent_pdf to download a specific patent PDF.
+    Related tools: get_patent, search_patent_publications, search_applications, download_patent_pdf.
     """
     async with GooglePatentsClient() as client:
         response = await client.search_patents(
@@ -102,39 +221,100 @@ async def search_google_patents(
             page=page,
             page_size=page_size,
         )
-        return {"results": [r.model_dump() for r in response.results]}
+
+    rows = [r.model_dump() for r in response.results]
+    total = response.total_results
+    shown = len(rows)
+    more = bool(total and shown < int(total))
+    items = rows if full else [_stub_search_hit(r) for r in rows]
+    summary_total = f"{shown} of {total} hits" if total else f"{shown} hits"
+    return ListEnvelope[dict](
+        summary=f"Google Patents — `{query}`: {summary_total}.",
+        items=items,
+        more_available=more,
+        next_cursor=None,
+        provenance=_google_patents_provenance("/xhr/query"),
+    )
 
 
 @patents_mcp.tool(annotations=READ_ONLY)
 async def get_patent(
     patent_number: Annotated[
-        str,
-        "Patent publication number with country code and kind code. "
-        "Examples: 'US10123456B2', 'US20230012345A1', 'EP3456789A1'. "
-        "The 'US' prefix is added automatically if omitted for US patents.",
+        str | list[str],
+        "Patent number with country and kind code (or a list for portfolio "
+        "workflows). Accepts patent numbers AND publication numbers from any "
+        "jurisdiction — the upstream client cascades publication → grant. "
+        "Examples: 'US10123456B2', 'US20230012345A1', 'EP3456789A1', "
+        "['US10123456B2', 'EP3456789A1']. The 'US' prefix is added "
+        "automatically when omitted for US patents.",
     ],
-) -> dict:
-    """Get full patent data from Google Patents: title, abstract, claims,
-    description, and citations.
+    view: Annotated[
+        str,
+        "Response detail level. 'full' (default): full Google Patents record "
+        "— title, abstract, claims, description, citations, family, legal "
+        "events, etc. 'details': metadata subset — patent_number, "
+        "application_number, title, dates (filing/grant/priority/publication), "
+        "assignee, inventors, status, claim_count, abstract. Use 'details' "
+        "for triage; 'full' when you need the claims/description/citations.",
+    ] = "full",
+) -> ListEnvelope[dict]:
+    """Get worldwide patent data from Google Patents (the worldwide patent search aggregator): title, abstract, claims, description, and citations.
 
-    For US patents, get_patent_publication (PPUBS) is more reliable.
-    This tool is useful for non-US patents (EP, WO, JP, etc.).
+    Accepts a single patent number or a list (§5.4) and always returns a
+    ListEnvelope so the response shape stays stable. Bounded concurrent
+    fan-out internally. For US patents, ``get_patent_publication`` (PPUBS)
+    is more reliable; this tool is the only path for non-US patents
+    (EP, WO, JP, CN, KR, etc.).
 
-    Use download_patent_pdf to download the patent PDF.
+    The ``view`` parameter swaps in a metadata-only projection on the same
+    upstream record — see the parameter docs. Use ``download_patent_pdf``
+    for PDF bytes.
+
+    Related tools: search_patents_global, get_patent_publication, get_patent_family, download_patent_pdf.
     """
-    try:
-        async with asyncio.timeout(_GET_PATENT_BUDGET_SECONDS):
-            async with GooglePatentsClient() as client:
-                result = await client.get_patent_data(patent_number)
-                return result.model_dump()
-    except FileNotFoundError as exc:
-        raise NotFoundError(f"Patent {patent_number} not found on Google Patents") from exc
-    except TimeoutError as exc:
-        raise RateLimitError(
-            f"Google Patents did not return {patent_number} within "
-            f"{int(_GET_PATENT_BUDGET_SECONDS)}s — usually upstream rate limiting. "
-            "Retry shortly."
-        ) from exc
+    view_key = view.strip().lower()
+    if view_key not in ("full", "details"):
+        raise ValidationError(f"view must be 'full' or 'details'; got {view!r}")
+
+    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    if not numbers:
+        raise ValidationError("get_patent requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_GP_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: GooglePatentsClient, pat_no: str) -> dict:
+        async with semaphore:
+            try:
+                async with asyncio.timeout(_GET_PATENT_BUDGET_SECONDS):
+                    record = await client.get_patent_data(pat_no)
+            except FileNotFoundError as exc:
+                raise NotFoundError(f"Patent {pat_no} not found on Google Patents") from exc
+            except TimeoutError as exc:
+                raise RateLimitError(
+                    f"Google Patents did not return {pat_no} within "
+                    f"{int(_GET_PATENT_BUDGET_SECONDS)}s — usually upstream rate limiting. "
+                    "Retry shortly."
+                ) from exc
+        return _dump(record)  # type: ignore[return-value]
+
+    async with GooglePatentsClient() as client:
+        full_records = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    items = full_records if view_key == "full" else [_details_view(r) for r in full_records]
+
+    if len(numbers) == 1:
+        # _summarize_patent reads the same scalar fields from either view.
+        summary = _summarize_patent(items[0])
+        path = f"/patent/{numbers[0]}"
+    else:
+        summary = f"Fetched {len(items)} patents: " + ", ".join(numbers)
+        path = "/patent"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_google_patents_provenance(path),
+    )
 
 
 @patents_mcp.tool(annotations=READ_ONLY)
@@ -178,8 +358,6 @@ async def get_patent_claims(
     """
     view_key = view.strip().lower()
     if view_key not in ("full", "independent_only", "limitations"):
-        from law_tools_core.exceptions import ValidationError
-
         raise ValidationError(
             f"view must be 'full', 'independent_only', or 'limitations'; got {view!r}"
         )
@@ -235,6 +413,8 @@ async def download_patent_pdf(
     affordance fetch ``download_url`` directly. Non-not-found errors
     (auth, transient HTTP failures) surface immediately rather than
     being masked by silent fallback.
+
+    Related tools: search_patents_global, get_patent, get_patent_publication.
     """
     pdf = await unified.download_patent_pdf(patent_number)
     signed_path_prefix = {
@@ -242,38 +422,20 @@ async def download_patent_pdf(
         "ppubs": "publications",
         "epo": "epo/patents",
     }[pdf.source]
-    extra: dict[str, object] = {"patent_number": pdf.patent_number, "source": pdf.source}
+    # Dynamic metadata kwargs forwarded to download_tool_result. ty can't
+    # statically verify dict-spread kwargs against the function signature, so
+    # the suppression is targeted to the spread site only.
+    extra: dict[str, str] = {"patent_number": pdf.patent_number, "source": pdf.source}
     if pdf.patent_title is not None:
         extra["patent_title"] = pdf.patent_title
-    return download_tool_result(
+    return await download_tool_result(
         f"{signed_path_prefix}/{pdf.patent_number}",
         pdf.pdf_bytes,
         filename=pdf.filename,
         content_type="application/pdf",
         description=pdf.patent_title,
-        **extra,
+        **extra,  # ty: ignore[invalid-argument-type]
     )
-
-
-@patents_mcp.tool(annotations=READ_ONLY)
-async def get_patent_details(
-    patent_number: Annotated[
-        str,
-        "Patent publication number with country and kind code (e.g. 'US10123456B2'). "
-        "For US patents, get_application (ODP) returns similar metadata more reliably.",
-    ],
-) -> dict:
-    """Get structured patent details from Google Patents: dates, assignee, inventors.
-
-    Returns filing date, grant date, priority date, assignee,
-    and inventor names. For US patents, get_application provides
-    more reliable and detailed metadata.
-    """
-    async with GooglePatentsClient() as client:
-        result = await client.get_patent_details(patent_number)
-        if result is None:
-            raise ValueError(f"Patent {patent_number} not found")
-        return result
 
 
 @patents_mcp.tool(annotations=READ_ONLY)

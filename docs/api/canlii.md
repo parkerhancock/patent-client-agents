@@ -68,4 +68,4 @@ async with CanLIIClient() as client:
 ## MCP Tool Surface
 
 MCP tools register only when `CANLII_API_KEY` is set in the server's environment (matches the JPO env-gating pattern — tools are absent from `tool/list` on deployments that don't carry the key). Nine tools mirror the library functions:
-`list_canlii_case_databases`, `browse_canlii_cases`, `get_canlii_case`, `get_canlii_cited_cases`, `get_canlii_citing_cases`, `get_canlii_cited_legislations`, `list_canlii_legislation_databases`, `browse_canlii_legislation`, `get_canlii_legislation`.
+`list_canlii_case_databases`, `search_canlii_cases`, `get_canlii_case`, `get_canlii_cited_cases`, `get_canlii_citing_cases`, `get_canlii_cited_legislations`, `list_canlii_legislation_databases`, `search_canlii_legislation`, `get_canlii_legislation`.

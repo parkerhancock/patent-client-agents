@@ -11,6 +11,15 @@ Provides the infrastructure that consumers build on:
 
 from .base_client import BaseAsyncClient
 from .cache import CacheManager, CacheStats, build_cached_http_client
+from .envelope import (
+    ListEnvelope,
+    Provenance,
+    ResponseEnvelope,
+    decode_cursor,
+    encode_cursor,
+    make_provenance,
+)
+from .envelope import configure as configure_envelope
 from .exceptions import (
     ApiError,
     AuthenticationError,
@@ -38,6 +47,14 @@ __all__ = [
     "build_cached_http_client",
     "CacheManager",
     "CacheStats",
+    # Envelope
+    "Provenance",
+    "ResponseEnvelope",
+    "ListEnvelope",
+    "configure_envelope",
+    "make_provenance",
+    "encode_cursor",
+    "decode_cursor",
     # Exceptions
     "LawToolsCoreError",
     "ApiError",

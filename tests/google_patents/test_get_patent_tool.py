@@ -1,11 +1,11 @@
 """Tests for the ``get_patent`` MCP tool's error mapping and time budget.
 
-The tool now:
-- Maps Google Patents' "couldn't find this patent" page (``FileNotFoundError``)
+The tool maps:
+- Google Patents' "couldn't find this patent" page (``FileNotFoundError``)
   to ``NotFoundError`` so the FriendlyErrors middleware can tag it
   ``[not-retryable] Not found``.
-- Caps wall-clock at ``_GET_PATENT_BUDGET_SECONDS`` and maps a timeout to
-  ``RateLimitError`` so the middleware tags it ``[retryable]``.
+- Wall-clock overruns past ``_GET_PATENT_BUDGET_SECONDS`` to ``RateLimitError``
+  so the middleware tags it ``[retryable]``.
 """
 
 from __future__ import annotations
@@ -16,6 +16,7 @@ from unittest.mock import patch
 
 import pytest
 
+from law_tools_core.envelope import ListEnvelope
 from law_tools_core.exceptions import NotFoundError, RateLimitError
 from patent_client_agents.mcp.tools import patents as patents_module
 
@@ -40,12 +41,14 @@ class _FakeClient:
 
 
 @pytest.mark.asyncio
-async def test_get_patent_returns_payload_on_success() -> None:
+async def test_get_patent_returns_envelope_on_success() -> None:
     fake_payload = SimpleNamespace(model_dump=lambda: {"patent_number": "US7654321B2"})
     fake = _FakeClient(result=fake_payload)
     with patch.object(patents_module, "GooglePatentsClient", lambda: fake):
         result = await patents_module.get_patent("US7654321B2")
-    assert result == {"patent_number": "US7654321B2"}
+    assert isinstance(result, ListEnvelope)
+    assert len(result.items) == 1
+    assert result.items[0]["patent_number"] == "US7654321B2"
 
 
 @pytest.mark.asyncio

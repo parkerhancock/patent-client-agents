@@ -75,3 +75,25 @@ File logging is configured per consumer app via
 - The skill is packaged inside the wheel at `patent_client_agents/skills/ip_research/` so
   `importlib.resources.files("patent_client_agents") / "skills" / "ip_research"` works
   regardless of filesystem layout.
+
+## Connector Standards
+
+[`CONNECTOR_STANDARDS.md`](CONNECTOR_STANDARDS.md) is the contract every
+connector must satisfy. It covers coverage scope (top 30 patent offices +
+substantive law), architecture defaults (MCP-first, proxy → fallback to
+bundled corpus), provenance (§3) and recency (§4) metadata, MCP tool
+design rules (§5.1-§5.13 — catalog discipline, response envelope,
+elevator test, etc.), and the closed-vocabulary manifest at
+`coverage/sources.yaml` (§6).
+
+The [`scripts/build_coverage.py`](scripts/build_coverage.py) validator
+enforces §6 against the manifest; CI fails on any deviation. Read the
+standards doc before adding a new connector or refactoring an existing
+tool surface.
+
+[`MIGRATION_PLAYBOOK.md`](MIGRATION_PLAYBOOK.md) is the working sweep
+plan for migrating the existing tool surface onto the standards (one
+connector per PR, ordered for impact + blast radius). USPTO Applications
+is row 1 and is already done; rows 2-21 are queued. The playbook
+references the USPTO Applications migration as the canonical template
+for every shape the sweep will encounter.

@@ -185,8 +185,7 @@ argument that defaults to `"patent"`. Patent-only tools have no
 | `get_jpo_registration_info` | `application_number`, `ip_type` | 50 | Granted-rights record. `{}` if not registered. |
 | `get_jpo_number_reference` | `number`, `kind`, `ip_type` | 50 | Cross-reference. `kind = "application"\|"publication"\|"registration"`. |
 | `get_jpo_jplatpat_url` | `application_number`, `ip_type` | 200 | Returns `{"url": ...}` or `{}`. |
-| `get_jpo_applicant_by_code` | `applicant_code`, `ip_type` | 200 | Returns `{"name": ...}` or `{}` (single name; the API does not return a list). |
-| `get_jpo_applicant_by_name` | `applicant_name`, `ip_type` | 200 | **Exact match** required. Returns `{"results": [...]}`. |
+| `get_jpo_applicant` | `applicant`, `ip_type` | 200 | Auto-detects code (9-digit numeric) vs exact name. Code → `{"name": ...}`; name → `{"results": [...]}`. **Exact match** required for name lookup. |
 | `get_jpo_documents` | `application_number`, `doc_kind`, `ip_type`, `parse=True` | 100 | Parsed file-history bundle + signed `download_url`. `doc_kind = "application"\|"mailed"\|"refusal"`. With `parse=False` returns just the bundle metadata + signed download URL (no parsing). |
 | `get_jpo_patent_divisional_info` | `application_number` | 30 | Patent-only — divisional family. |
 | `get_jpo_patent_cited_documents` | `application_number` | 100 | Patent-only — patent + non-patent citations. |
@@ -366,7 +365,7 @@ async with JpoClient() as client:
             print(entry.document_name, entry.legal_date, entry.drafter_name)
 ```
 
-The same flow runs from MCP via `get_jpo_applicant_by_name` →
+The same flow runs from MCP via `get_jpo_applicant` (name branch) →
 `get_jpo_number_reference` → `get_jpo_progress` → `get_jpo_documents`,
 with `ip_type` parameters defaulting to `"patent"`. For designs or
 trademarks, swap in `ip_type="design"` / `ip_type="trademark"`

@@ -70,13 +70,12 @@ class EuipoTrademarksClient(BaseAsyncClient):
         auth: httpx.Auth | None = None,
         **kwargs: Any,
     ) -> None:
-        resolved_env: EuipoEnvironment = (
-            environment or os.getenv("EUIPO_ENV", "production")  # type: ignore[assignment]
-        )
-        if resolved_env not in ("production", "sandbox"):
+        env_raw: str = environment or os.getenv("EUIPO_ENV", "production")
+        if env_raw not in ("production", "sandbox"):
             raise ConfigurationError(
-                f"EUIPO environment must be 'production' or 'sandbox', got {resolved_env!r}"
+                f"EUIPO environment must be 'production' or 'sandbox', got {env_raw!r}"
             )
+        resolved_env: EuipoEnvironment = env_raw  # type: ignore[assignment]  # ty: ignore[invalid-assignment]
 
         resolved_base_url = base_url or (
             _SANDBOX_BASE_URL if resolved_env == "sandbox" else _PROD_BASE_URL

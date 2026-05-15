@@ -2,6 +2,14 @@
 
 Builds a tiny on-disk corpus from hand-authored rows so the read path
 is exercised end-to-end without a 192-page gov.uk scrape.
+
+Two fixture flavors:
+
+* ``mopp_corpus_path`` — session-scoped, returns the on-disk path. Used
+  by ``test_client.py`` which already monkeypatches the env var itself.
+* ``mopp_corpus_env`` — per-test, returns the path AND monkeypatches
+  ``MOPP_CORPUS_PATH``. Used by the row-18 envelope/corpus_status
+  tests so a single fixture covers both setup steps.
 """
 
 from __future__ import annotations
@@ -77,3 +85,10 @@ def mopp_corpus_path(tmp_path_factory: pytest.TempPathFactory) -> Path:
     finally:
         conn.close()
     return out
+
+
+@pytest.fixture
+def mopp_corpus_env(monkeypatch: pytest.MonkeyPatch, mopp_corpus_path: Path) -> Path:
+    """Point ``MOPP_CORPUS_PATH`` at the fixture corpus for one test."""
+    monkeypatch.setenv("MOPP_CORPUS_PATH", str(mopp_corpus_path))
+    return mopp_corpus_path
