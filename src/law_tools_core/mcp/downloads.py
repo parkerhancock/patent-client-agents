@@ -49,7 +49,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from fastmcp.resources import ResourceContent
-from fastmcp.tools.tool import ToolResult  # ty: ignore[unresolved-import]  # third-party submodule path  # noqa: E501
+from fastmcp.tools.tool import ToolResult  # ty: ignore[unresolved-import]
 from mcp.types import Annotations, ResourceLink
 from starlette.requests import Request
 from starlette.responses import Response, StreamingResponse

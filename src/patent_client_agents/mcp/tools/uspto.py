@@ -1057,6 +1057,10 @@ async def list_ptab_children(
 
     pt = parent_type.strip().lower()
     inc = include.strip().lower()
+    if pt not in ("trial", "application", "interference"):
+        raise ValidationError(
+            f"parent_type must be 'trial', 'application', or 'interference'; got {parent_type!r}"
+        )
     async with UsptoOdpClient() as client:
         if pt == "trial":
             if inc not in ("decisions", "documents", "both"):
@@ -1108,29 +1112,26 @@ async def list_ptab_children(
                     f"/api/v1/ptab/appeals/by-application/{parent_identifier}"
                 ),
             )
-        if pt == "interference":
-            if inc not in ("decisions",):
-                raise ValidationError(
-                    "parent_type='interference' only supports include='decisions'"
-                )
-            result = _dump(await client.get_interference_decisions_by_number(parent_identifier))
-            items = [
-                _stub_ptab_record(entry, "interference_decision")
-                for entry in result.get("patentInterferenceDataBag") or []
-            ]
-            summary = (
-                f"PTAB interference decisions for {parent_identifier} "
-                f"— {len(items)} decision{'s' if len(items) != 1 else ''}."
+        # pt is guaranteed "interference" here (validated above).
+        if inc not in ("decisions",):
+            raise ValidationError(
+                "parent_type='interference' only supports include='decisions'"
             )
-            return ListEnvelope[dict](
-                summary=summary,
-                items=items,
-                provenance=_odp_provenance(
-                    f"/api/v1/ptab/interferences/by-number/{parent_identifier}"
-                ),
-            )
-        raise ValidationError(
-            f"parent_type must be 'trial', 'application', or 'interference'; got {parent_type!r}"
+        result = _dump(await client.get_interference_decisions_by_number(parent_identifier))
+        items = [
+            _stub_ptab_record(entry, "interference_decision")
+            for entry in result.get("patentInterferenceDataBag") or []
+        ]
+        summary = (
+            f"PTAB interference decisions for {parent_identifier} "
+            f"— {len(items)} decision{'s' if len(items) != 1 else ''}."
+        )
+        return ListEnvelope[dict](
+            summary=summary,
+            items=items,
+            provenance=_odp_provenance(
+                f"/api/v1/ptab/interferences/by-number/{parent_identifier}"
+            ),
         )
 
 
