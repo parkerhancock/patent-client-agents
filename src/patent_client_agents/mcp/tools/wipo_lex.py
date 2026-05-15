@@ -137,8 +137,13 @@ async def search_wipo_lex_legislation(
 
     Related tools: get_wipo_lex_legislation.
     """
-    subject_enums = [SubjectMatter(c) for c in subject_matter] if subject_matter else None
-    type_enums = [TypeOfText(c) for c in type_of_text] if type_of_text else None
+    # Validate input codes via the IntEnum constructor (raises on bad code),
+    # then cast back to list[int] for the client signature — IntEnum subclass
+    # is structurally compatible but ty treats list types invariantly.
+    subject_enums = (
+        cast("list[int]", [SubjectMatter(c) for c in subject_matter]) if subject_matter else None
+    )
+    type_enums = cast("list[int]", [TypeOfText(c) for c in type_of_text]) if type_of_text else None
 
     async with WipoLexClient() as client:
         response = await client.search_legislation(

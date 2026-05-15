@@ -422,7 +422,10 @@ async def download_patent_pdf(
         "ppubs": "publications",
         "epo": "epo/patents",
     }[pdf.source]
-    extra: dict[str, object] = {"patent_number": pdf.patent_number, "source": pdf.source}
+    # Dynamic metadata kwargs forwarded to download_tool_result. ty can't
+    # statically verify dict-spread kwargs against the function signature, so
+    # the suppression is targeted to the spread site only.
+    extra: dict[str, str] = {"patent_number": pdf.patent_number, "source": pdf.source}
     if pdf.patent_title is not None:
         extra["patent_title"] = pdf.patent_title
     return await download_tool_result(
@@ -431,7 +434,7 @@ async def download_patent_pdf(
         filename=pdf.filename,
         content_type="application/pdf",
         description=pdf.patent_title,
-        **extra,
+        **extra,  # ty: ignore[invalid-argument-type]
     )
 
 
