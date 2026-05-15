@@ -78,6 +78,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   appear only on the detail-page fetch, documented in the search
   docstring's cross-reference rather than fabricated into the lean
   view.
+- **CAFC search tools migrated to `ListEnvelope`** (row 14).
+  `search_cafc_opinions` and `search_cafc_patent_opinions` return
+  lean stubs (eight scalars including `is_patent_case`) by default
+  with `full=True` opt-in. Shared `_stub_opinion()` helper. Provenance
+  is `substantive_law` / `mcp_proxy` shape (no `corpus_synced_at` /
+  `corpus_version`). `download_cafc_pdf` shape unchanged per playbook
+  §2 Shape E; its docstring picks up a `Related tools:` line and the
+  CAFC acronym expansion for §5.13 compliance.
+- **Copyright migrated to `ListEnvelope`** (row 16). `search_copyright`
+  now lean by default (eight scalar fields via a `_first()` list-flattener)
+  with `full=True` opt-in. `get_copyright_record` accepts
+  `public_records_id: str | list[str]` per §5.4. The parameter name
+  is intentionally kept — the upstream's `public_records_id` is a
+  distinct opaque ID (`voyager_12345`, `card_catalog_...`), not the
+  user-facing registration number (`TX 1234567`). Docstrings now
+  distinguish the two and point at `search_copyright` for
+  registration-number lookups.
+- **CPC tools migrated to envelope** (row 20). `lookup_cpc` and
+  `map_cpc_classification` return `ResponseEnvelope[dict]` (single
+  record); `search_cpc` returns `ListEnvelope[dict]` with a lean
+  default. First sentences sharpened per §5.13 audit finding — the
+  three tools' docstrings no longer "blur together." Tools live in
+  `mcp/tools/international.py` alongside the EPO OPS surface (which
+  CPC delegates to). `lookup_cpc` deliberately not list-accepting
+  for now (per-symbol summaries are more quotable; can flip if
+  portfolio resolution becomes a real workflow).
 
 ## [0.18.0] — 2026-05-14 (unreleased)
 
