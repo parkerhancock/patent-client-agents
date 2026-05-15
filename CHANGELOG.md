@@ -54,6 +54,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   `batch_*` tools). Use `get_trademark_status(serial_number=[...])`
   instead — the list-accepting form is now the supported pattern.
 
+### Additional connector migrations (rows 3, 10, 19)
+
+- **USPTO Publications (PPUBS) migrated to `ListEnvelope`**
+  (row 3). `search_patent_publications` now returns lean stubs
+  (eight scalar fields) by default with `full=True` opt-in;
+  `get_patent_publication` accepts `publication_number: str | list[str]`
+  per §5.4 with bounded-concurrency fan-out. `resolve_publication_number`
+  in the same file now returns `ResponseEnvelope` (single-record shape;
+  true 1:1 resolver).
+- **EUIPO trademarks + designs migrated to `ListEnvelope`** (row 10).
+  `search_euipo_trademarks`, `get_euipo_trademark`,
+  `search_euipo_designs`, and `get_euipo_design` all conform; gets
+  accept `application_number: str | list[str]` (trademarks) or
+  `design_number: str | list[str]` (designs). Lean stubs of 8 / 7
+  scalars respectively. Single `_euipo_provenance` helper covers both
+  surfaces (shared host).
+- **WIPO Lex migrated to `ListEnvelope`** (row 19).
+  `search_wipo_lex_legislation` and `get_wipo_lex_legislation` conform;
+  get accepts `legislation_id: str | list[str]`. Note:
+  `LegislationSearchHit` upstream carries only three fields
+  (`legislation_id`, `title`, `url`) — country / year / IP-category
+  appear only on the detail-page fetch, documented in the search
+  docstring's cross-reference rather than fabricated into the lean
+  view.
+
 ## [0.18.0] — 2026-05-14 (unreleased)
 
 ### Changed (breaking)
