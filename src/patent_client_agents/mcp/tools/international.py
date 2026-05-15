@@ -562,34 +562,87 @@ async def map_cpc_classification(
     )
 
 
+# ---------------------------------------------------------------------------
+# EPO Register — Unitary Patent (UP) status
+#
+# The Unitary Patent register is served live via the EPO Register service
+# (the same OPS host as biblio / legal events / family). Provenance points at
+# `https://ops.epo.org/3.2/rest-services/register/publication/epodoc/{n}/upp`
+# so an attorney can verify a UP status timeline against the upstream
+# register payload.
+# ---------------------------------------------------------------------------
+
+_EPO_REGISTER_BASE = "https://ops.epo.org/3.2"
+_EPO_REGISTER_NAME = "EPO Register (Unitary Patent)"
+
+
+def _epo_register_provenance(path: str) -> Any:
+    """Build a Provenance pointing at ``{base}{path}`` on the EPO Register."""
+    return make_provenance(source_url=f"{_EPO_REGISTER_BASE}{path}", source_name=_EPO_REGISTER_NAME)
+
+
+def _summarize_unitary_patent(record: dict) -> str:
+    """One-line Markdown summary for a Unitary Patent register record."""
+    epo_number = record.get("epo_number") or "(unknown EP)"
+    statuses = record.get("statuses") or []
+    if not statuses:
+        return (
+            f"**Unitary Patent {epo_number}** — no unitary-effect record on file "
+            f"(not elected, or registration not yet recorded)."
+        )
+    latest = statuses[0] if isinstance(statuses, list) else {}
+    status_text = latest.get("text") or "(unknown status)"
+    change_date = latest.get("change_date") or "?"
+    registered = any(
+        "registered" in (s.get("text") or "").lower() and "unitary" in (s.get("text") or "").lower()
+        for s in statuses
+        if isinstance(s, dict)
+    )
+    flag = "registered" if registered else "pending"
+    return (
+        f"**Unitary Patent {epo_number}** — status: {status_text} "
+        f"({flag}); effective: {change_date}."
+    )
+
+
 @international_mcp.tool(annotations=READ_ONLY)
-async def get_unitary_patent_package(
+async def get_epo_unitary_patent_status(
     epo_number: Annotated[
         str,
         (
             "EP publication number (e.g. 'EP4108782' or 'EP4108782.B1'). "
-            "Pass the granted B1 publication when known — UPP data is "
-            "attached at grant."
+            "Pass the granted B1 publication when known — UP register data "
+            "is attached at grant."
         ),
     ],
-) -> dict | None:
-    """Check whether an EP patent has registered Unitary Patent effect.
+) -> ResponseEnvelope[dict]:
+    """Get the Unitary Patent (UP) Register record for a European patent application, with status, opt-out, license, and translation metadata.
 
     Calls the EPO Register's ``/upp`` sub-endpoint and returns the
     ``<reg:unitary-patent>`` block as structured data: the registration
     status timeline (e.g. "Request for unitary effect filed" →
-    "Unitary effect registered") with dates.
+    "Unitary effect registered") with the change date for each step.
 
-    Returns ``None`` when the EP wasn't elected for unitary effect, or
-    the registration hasn't been recorded yet. Note that UPC
-    *opt-out* status is **not** exposed by the OPS Register — that
-    requires the UPC CMS Public API (separate enrollment).
+    ``details`` is ``{}`` when the EP wasn't elected for unitary effect, or
+    the registration hasn't been recorded yet. Note that UPC *opt-out*
+    status is **not** exposed by the OPS Register — that requires the UPC
+    CMS Public API (separate enrollment); the same caveat applies to
+    license-of-right declarations and translation filings, which are
+    surfaced through the register only after the unitary effect is
+    registered.
+
+    Related tools: get_epo_biblio, get_epo_legal_events, search_epo.
     """
     async with client_from_env() as client:
         result = await client.get_unitary_patent_package(epo_number)
-        if result is None:
-            return None
-        return result.model_dump()
+
+    details: dict = result.model_dump() if result is not None else {}
+    path = f"/rest-services/register/publication/epodoc/{epo_number}/upp"
+    return ResponseEnvelope[dict](
+        summary=_summarize_unitary_patent(details or {"epo_number": epo_number}),
+        details=details,
+        provenance=_epo_register_provenance(path),
+    )
 
 
 # ---------------------------------------------------------------------------
