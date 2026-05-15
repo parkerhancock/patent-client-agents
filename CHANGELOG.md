@@ -124,6 +124,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   the `get_corpus_status()` rollout reaches `upc_statutes` (queued for
   row 18). §5.6 audit fix: `search_upc_statutes` ↔ `get_upc_section`
   now cross-reference.
+### Batch 6 connector migrations (rows 4, 6, 9)
+
+- **Row 4: Google Patents collapse + rename + envelope.** Three
+  coordinated changes:
+  - `search_google_patents` → `search_patents_global` (§5.7
+    jurisdiction-neutral name; Google Patents indexes >100
+    jurisdictions, not just one source's view).
+  - `get_patent_details` **deleted**; `get_patent` gains a
+    `view: "full" | "details"` parameter — same data, half the
+    catalog surface (§5.1 catalog discipline).
+  - `get_patent` accepts `patent_number: str | list[str]` per §5.4
+    with bounded-concurrency fan-out; returns `ListEnvelope[dict]`
+    even for a single string.
+  - `search_patents_global` lean default of 9 scalars + `full=True`
+    opt-in (§5.5). New helpers: `_google_patents_provenance`,
+    `_summarize_patent`, `_details_view`, `_stub_search_hit`.
+  - Catalog (`catalog/sources/google-patents.md`,
+    `catalog/intents/README.md`) and docs (`docs/installation.md`)
+    updated for the rename.
+- **Row 6: Office Actions envelope + new `get_office_action`.**
+  Closes the §5.2 orphan-search audit finding via a real upstream
+  endpoint: `POST /api/v1/patent/oa/oa_actions/v1/records` with a
+  Lucene `id:<documentIdentifier>` query (the `oa_actions` Solr
+  dataset is the only office-action endpoint with full `body_text`
+  + structured `sections`). `search_office_actions` now returns
+  `ListEnvelope[dict]` with lean default (rejection_types included
+  in the projection) + `full=True` opt-in. Cursor encoding:
+  `{"start": N, "rows": M}`. `get_office_action` accepts
+  `document_identifier: str | list[str]` per §5.4 with bounded
+  fan-out. No client-layer changes needed.
+- **Row 9: EPO OPS migration — largest remaining surface.**
+  Seven tools migrated in `international.py`:
+  - `search_epo`: `ListEnvelope[dict]` with lean default + `full=True`
+    opt-in. EPO's `range_begin`/`range_end` pagination encoded as
+    opaque `next_cursor` payload per playbook §3.
+  - `get_epo_biblio`, `get_epo_family`, `get_epo_fulltext`,
+    `get_epo_legal_events`: all accept `application_number: str | list[str]`
+    per §5.4 with `_EPO_FANOUT_CONCURRENCY=5`.
+  - `get_epo_cql_help`: `ResponseEnvelope[dict]`. §5.13 rewrite:
+    "Show the search syntax (CQL — Common Query Language) accepted
+    by `search_epo`."
+  - `convert_epo_number`: `ResponseEnvelope[dict]`.
+  - §5.6 cross-references: `search_epo` now names all 5 `get_epo_*`
+    siblings + `convert_epo_number`; each `get_epo_*` references the
+    others (closes the audit finding that the EPO get-family was
+    not cross-referenced from `search_epo`).
+  - Sibling tools in `international.py` (JPO, CPC,
+    `get_epo_unitary_patent_status`) explicitly verified unmodified.
+
 ### Batch 5 connector migrations (rows 13, 15, 21)
 
 - **Row 21: Unitary patent helper renamed and migrated.**
