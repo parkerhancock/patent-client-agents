@@ -5,6 +5,55 @@ All notable changes to `patent-client-agents` are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.19.0] — 2026-05-15 (unreleased)
+
+### Added
+
+- **`CONNECTOR_STANDARDS.md`** — opinionated rules every connector must
+  satisfy (coverage scope, architecture defaults, provenance, recency,
+  MCP tool design §5.1-§5.13, closed-vocabulary manifest §6).
+- **`MIGRATION_PLAYBOOK.md`** — working sweep plan for migrating the
+  existing tool surface onto the standards, ordered for impact and
+  blast radius (21 PRs queued; rows 1-2 done).
+- **`coverage/sources.yaml`** — 31-entry closed-vocabulary manifest
+  enforced by `scripts/build_coverage.py`. Top-30 patent offices by
+  WIPO 2023 filing volume tracked for gap analysis.
+- **`law_tools_core.envelope`** — `Provenance`, `ResponseEnvelope[T]`,
+  `ListEnvelope[T]`, plus `make_provenance`, `encode_cursor`,
+  `decode_cursor` helpers. Cursors are opaque base64(JSON); connectors
+  decide the payload schema. The response shape is now uniform across
+  the catalog (§5.9).
+
+### Changed (breaking)
+
+- **USPTO Applications surface migrated to `ListEnvelope`.**
+  `search_applications`, `get_application`, and `list_file_history`
+  now return `ListEnvelope[dict]` with `Provenance` metadata (UTC
+  `retrieved_at`, `source_url`, `source_name`, `connector_version`)
+  and a Markdown `summary`. The shape is `{summary, items, next_cursor,
+  more_available, provenance}`.
+- **`get_application` now accepts `list[str]`** per §5.4 — pass a list
+  of application numbers for portfolio workflows. Single-string calls
+  still work and still return a `ListEnvelope` (shape is stable).
+  Internal bounded concurrency, order preservation.
+- **Trademarks surface migrated to `ListEnvelope`** (row 2 of
+  `MIGRATION_PLAYBOOK.md`):
+  - `search_trademarks` now returns lean stubs by default (eight
+    scalar fields); pass `full=True` for the upstream-shaped record.
+  - `get_trademark` collapses the two-argument
+    `(serial_number, registration_number)` pattern into one
+    `serial_number` parameter that accepts either format (auto-detected
+    by digit count: 8 → serial, 6-7 → registration). Accepts a list per
+    §5.4.
+  - `get_trademark_status` and `get_trademark_last_update` accept
+    `str | list[str]` per §5.4.
+
+### Removed
+
+- **`batch_trademark_status` deleted.** It was a §5.4 violation (no
+  `batch_*` tools). Use `get_trademark_status(serial_number=[...])`
+  instead — the list-accepting form is now the supported pattern.
+
 ## [0.18.0] — 2026-05-14 (unreleased)
 
 ### Changed (breaking)
