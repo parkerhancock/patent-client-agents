@@ -124,6 +124,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   the `get_corpus_status()` rollout reaches `upc_statutes` (queued for
   row 18). §5.6 audit fix: `search_upc_statutes` ↔ `get_upc_section`
   now cross-reference.
+### Batch 7 connector migrations (rows 5, 7, 8) — sweep complete (21/21)
+
+- **Row 5: PTAB envelope + §5.4 list-accept + §5.13 acronym expansion.**
+  `search_ptab`, `get_ptab`, and `list_ptab_children` migrated to
+  `ListEnvelope[dict]` / `ResponseEnvelope[dict]`. The type-multiplex
+  (`proceeding` / `trial_decision` / `trial_document` /
+  `appeal_decision` / `interference_decision`) is preserved (§5.1
+  soft-cap acceptable); a single `_stub_ptab_record(record, ptab_type)`
+  helper branches per type. `list_ptab_children` collapses the
+  previous nested-dict shape (`{decisions: ..., documents: ...}`)
+  into a flat `ListEnvelope` where each item carries a `type` field —
+  agents can sort/filter without knowing the nesting. Every PTAB
+  tool's first sentence now spells out "Patent Trial and Appeal Board
+  (PTAB)" on first use. Download tools (`download_ptab_*`) keep
+  Shape E; docstrings picked up `Related tools:` lines.
+
+- **Row 7: Petitions envelope + §5.8 parameter rename.**
+  `search_petitions` returns `ListEnvelope[dict]` with a lean default
+  (drops upstream `statuteBag` / `ruleBag` / `issueTypeBag`).
+  `get_petition` accepts `petition_number: str | list[str]` per §5.4
+  with bounded fan-out — **parameter renamed from `petition_id` per
+  §5.8's "never `id`" rule.** Test pins the rename via `inspect.signature`.
+
+- **Row 8: Patent + Trademark Assignments envelope + lean projections.**
+  Spans three files:
+  - `search_patent_assignments` in `patent_assignments.py` — lean
+    projection (reel/frame, conveyance, first-party names, dates).
+    Now propagates `result.truncated` into both `more_available` and
+    the summary text ("USPTO capped at ~N; narrow to access more").
+  - `search_trademark_assignments` in `trademarks.py` — lean
+    projection. **Latent bug fix:** the previous code passed
+    `start_row=` to `search_by_serial` / `search_by_registration` /
+    `search_by_reel_frame` (would have raised `TypeError`); fixed to
+    only pass to methods that accept it.
+  - `get_patent_assignment` in `uspto.py` — `ListEnvelope[dict]` with
+    `application_number: str | list[str]` per §5.4.
+  - Provenance helpers: the two `search_*` tools hit
+    `assignment-api.uspto.gov` (distinct from ODP) and each get their
+    own source-specific helper (`_patent_assignment_provenance`,
+    `_tm_assignment_provenance`). `get_patent_assignment` hits the
+    ODP `/applications/{n}/assignment` endpoint and reuses
+    `_odp_provenance`.
+
+**The connector standards sweep is complete: all 21 playbook rows
+migrated. ~99 MCP tools across 25 connectors now ship the
+`ResponseEnvelope` / `ListEnvelope` contract with structured
+`Provenance` metadata.**
+
 ### Batch 6 connector migrations (rows 4, 6, 9)
 
 - **Row 4: Google Patents collapse + rename + envelope.** Three
