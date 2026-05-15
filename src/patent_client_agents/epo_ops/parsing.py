@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 
-import lxml.etree as etree
+import lxml.etree as etree  # ty: ignore[unresolved-import]  # lxml lacks PEP 561 stubs
 
 from law_tools_core.exceptions import ParseError
 
@@ -110,7 +110,7 @@ def _parse_document_id(node: etree._Element | None) -> DocumentId:  # type: igno
     doc_type = node.tag.split("}")[-1] if "}" in node.tag else node.tag
     return DocumentId(
         doc_type=doc_type,
-        number=_text(node, "./epo:doc-number"),
+        doc_number=_text(node, "./epo:doc-number"),
         country=_text(node, "./epo:country"),
         kind=_text(node, "./epo:kind"),
         date=_text(node, "./epo:date"),
@@ -538,7 +538,7 @@ def parse_cpci_biblio(xml_data: str | bytes) -> CpciBiblioResponse:
         for class_node in exchange_doc.xpath(".//epo:patent-classification", namespaces=NS):
             sequence = _int_attr(class_node, "sequence")
             generating = _text(class_node, "./epo:generating-office")
-            offices = (
+            offices: list[str] = (
                 [office.strip() for office in (generating or "").split(",") if office.strip()]
                 if generating
                 else []

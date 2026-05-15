@@ -218,7 +218,7 @@ class TestSearchPayload:
         assert payload.q == "search term"
         assert payload.fields == ["field1", "field2"]
         assert payload.filters is not None and len(payload.filters) == 1
-        assert payload.rangeFilters is not None and len(payload.rangeFilters) == 1
+        assert payload.range_filters is not None and len(payload.range_filters) == 1
 
     def test_with_model_filters(self) -> None:
         payload = SearchPayload(

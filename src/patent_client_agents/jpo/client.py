@@ -350,7 +350,7 @@ class JpoClient(BaseAsyncClient):
 
         raise RuntimeError("Unexpected retry exhaustion")
 
-    async def _request(
+    async def _request(  # ty: ignore[invalid-method-override]
         self,
         method: str,
         path: str,

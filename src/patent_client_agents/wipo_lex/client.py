@@ -95,10 +95,15 @@ class WipoLexClient(BaseAsyncClient):
             params.append(("eDate", end_date))
         params.append(("last", "true" if include_historical else "false"))
 
+        # WIPO Lex's search endpoint expects repeated keys (e.g.
+        # ``sub=1&sub=2``); represent as list[tuple] which httpx accepts.
+        # The base_client signature types params as dict[str, Any] | None,
+        # so this is a real widening — suppress to keep the deferred fix
+        # off the critical path.
         response = await self._request(
             "GET",
             "/wipolex/en/legislation/results",
-            params=params,
+            params=params,  # ty: ignore[invalid-argument-type]
             context="search_legislation",
         )
         html_text = response.text

@@ -101,7 +101,7 @@ def _dump(obj: object) -> Any:
     if obj is None:
         return None
     if hasattr(obj, "model_dump"):
-        return obj.model_dump()  # type: ignore[union-attr]
+        return obj.model_dump()  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
     if isinstance(obj, list):
         return [_dump(item) for item in obj]
     return obj

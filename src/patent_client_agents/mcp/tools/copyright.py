@@ -49,7 +49,8 @@ def _dump(obj: object) -> dict[str, Any]:
 def _first(values: object) -> str | None:
     """Return the first element of a list-valued field, or None."""
     if isinstance(values, list) and values:
-        return values[0]
+        first = values[0]
+        return first if isinstance(first, str) else None
     if isinstance(values, str) and values:
         return values
     return None

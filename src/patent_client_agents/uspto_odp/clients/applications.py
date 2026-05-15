@@ -252,7 +252,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
             empty_bag_key="patentFileWrapperDataBag",
             context="search applications",
         )
-        return SearchResponse(**_normalize_patent_response(data))
+        return SearchResponse.model_validate(_normalize_patent_response(data))
 
     async def get(self, application_number: str) -> ApplicationResponse:
         """Get a single application by number.
@@ -269,7 +269,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
             f"/api/v1/patent/applications/{appl}",
             context=f"get application {application_number}",
         )
-        return ApplicationResponse(**_normalize_patent_response(data))
+        return ApplicationResponse.model_validate(_normalize_patent_response(data))
 
     async def get_documents(
         self,
@@ -293,7 +293,9 @@ class ApplicationsClient(UsptoOdpBaseClient):
             context=f"get documents for {application_number}",
         )
         documents_raw = data.get("documentBag", [])
-        documents = [DocumentRecord(**item) for item in documents_raw if isinstance(item, dict)]
+        documents = [
+            DocumentRecord.model_validate(item) for item in documents_raw if isinstance(item, dict)
+        ]
 
         associated_docs: list[dict[str, Any]] | None = None
         if include_associated:

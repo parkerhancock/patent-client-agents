@@ -69,7 +69,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             context="search trial proceedings",
         )
         data.setdefault("patentTrialProceedingDataBag", [])
-        return PtabTrialProceedingResponse(**data)
+        return PtabTrialProceedingResponse.model_validate(data)
 
     async def get_proceeding(self, trial_number: str) -> PtabTrialProceedingResponse:
         """Get a single PTAB trial proceeding by trial number.
@@ -94,7 +94,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         # Wrap single result in response format
         if "patentTrialProceedingDataBag" not in data:
             data = {"count": 1, "patentTrialProceedingDataBag": [data]}
-        return PtabTrialProceedingResponse(**data)
+        return PtabTrialProceedingResponse.model_validate(data)
 
     async def download_proceedings(
         self,
@@ -151,7 +151,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             context="download trial proceedings",
         )
         data.setdefault("patentTrialProceedingDataBag", [])
-        return PtabTrialProceedingResponse(**data)
+        return PtabTrialProceedingResponse.model_validate(data)
 
     # =========================================================================
     # Trial Decisions
@@ -201,7 +201,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             context="search trial decisions",
         )
         data.setdefault("patentTrialDocumentDataBag", [])
-        return PtabTrialDecisionResponse(**data)
+        return PtabTrialDecisionResponse.model_validate(data)
 
     async def get_decision(self, document_identifier: str) -> PtabTrialDecisionResponse:
         """Get a single PTAB trial decision by document identifier.
@@ -225,7 +225,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         )
         if "patentTrialDocumentDataBag" not in data:
             data = {"count": 1, "patentTrialDocumentDataBag": [data]}
-        return PtabTrialDecisionResponse(**data)
+        return PtabTrialDecisionResponse.model_validate(data)
 
     async def get_decisions_by_trial(self, trial_number: str) -> PtabTrialDecisionResponse:
         """Get all decisions for a PTAB trial by trial number.
@@ -248,7 +248,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             context=f"get decisions for trial {trial_number}",
         )
         data.setdefault("patentTrialDocumentDataBag", [])
-        return PtabTrialDecisionResponse(**data)
+        return PtabTrialDecisionResponse.model_validate(data)
 
     async def download_decisions(
         self,
@@ -291,7 +291,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             context="download trial decisions",
         )
         data.setdefault("patentTrialDocumentDataBag", [])
-        return PtabTrialDecisionResponse(**data)
+        return PtabTrialDecisionResponse.model_validate(data)
 
     # =========================================================================
     # Trial Documents
@@ -341,7 +341,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             context="search trial documents",
         )
         data.setdefault("patentTrialDocumentDataBag", [])
-        return PtabTrialDocumentResponse(**data)
+        return PtabTrialDocumentResponse.model_validate(data)
 
     async def get_document(self, document_identifier: str) -> PtabTrialDocumentResponse:
         """Get a single PTAB trial document by document identifier.
@@ -365,7 +365,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         )
         if "patentTrialDocumentDataBag" not in data:
             data = {"count": 1, "patentTrialDocumentDataBag": [data]}
-        return PtabTrialDocumentResponse(**data)
+        return PtabTrialDocumentResponse.model_validate(data)
 
     async def get_documents_by_trial(self, trial_number: str) -> PtabTrialDocumentResponse:
         """Get all documents for a PTAB trial by trial number.
@@ -388,7 +388,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             context=f"get documents for trial {trial_number}",
         )
         data.setdefault("patentTrialDocumentDataBag", [])
-        return PtabTrialDocumentResponse(**data)
+        return PtabTrialDocumentResponse.model_validate(data)
 
     async def download_documents(
         self,
@@ -431,7 +431,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             context="download trial documents",
         )
         data.setdefault("patentTrialDocumentDataBag", [])
-        return PtabTrialDocumentResponse(**data)
+        return PtabTrialDocumentResponse.model_validate(data)
 
     # =========================================================================
     # Document PDF Download

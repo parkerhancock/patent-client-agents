@@ -68,7 +68,7 @@ class BulkDataClient(UsptoOdpBaseClient):
             params=params,
         )
         data.setdefault("bulkDataProductBag", [])
-        return BulkDataSearchResponse(**data)
+        return BulkDataSearchResponse.model_validate(data)
 
     async def get_product(
         self,
@@ -122,7 +122,7 @@ class BulkDataClient(UsptoOdpBaseClient):
             params=params or None,
         )
         data.setdefault("bulkDataProductBag", [])
-        return BulkDataProductResponse(**data)
+        return BulkDataProductResponse.model_validate(data)
 
 
 __all__ = ["BulkDataClient"]

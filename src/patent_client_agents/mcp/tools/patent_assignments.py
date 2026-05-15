@@ -176,7 +176,7 @@ async def search_patent_assignments(
     async with AssignmentCenterClient() as client:
         result = await client.search(
             query=query,
-            by=by,  # type: ignore[arg-type]
+            by=by,  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
             exact=exact,
             executed_between=executed_between,
             conveyance=conveyance,

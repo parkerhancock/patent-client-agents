@@ -133,12 +133,14 @@ async def search_applications(
         "raw_payload": raw_payload,
     }
 
+    # Dynamic kwargs spread — ty can't statically verify dict-spread against
+    # the method signature.
     if client is not None:
         _warn_client_deprecated()
-        return await client.search_applications(**kwargs)
+        return await client.search_applications(**kwargs)  # ty: ignore[invalid-argument-type]
 
     async with UsptoOdpClient() as cl:
-        return await cl.search_applications(**kwargs)
+        return await cl.search_applications(**kwargs)  # ty: ignore[invalid-argument-type]
 
 
 async def get_application(

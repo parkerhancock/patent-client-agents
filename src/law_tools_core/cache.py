@@ -16,7 +16,7 @@ from hishel.httpx import AsyncCacheClient  # type: ignore[attr-defined]
 from tenacity import AsyncRetrying, stop_after_attempt, wait_exponential_jitter
 
 
-class RetryingAsyncSqliteStorage(AsyncSqliteStorage):
+class RetryingAsyncSqliteStorage(AsyncSqliteStorage):  # ty: ignore[unsupported-base]
     """SQLite-backed cache storage with WAL pragmas and lock-retry.
 
     Applies ``journal_mode=WAL``, ``synchronous=NORMAL``, and ``busy_timeout=5000``
@@ -278,7 +278,11 @@ class CacheManager:
     async def close(self) -> None:
         """Close the storage connection."""
         if self._storage is not None:
-            await self._storage.close()
+            # hishel's AsyncSqliteStorage is defined twice in the same module
+            # (Python-version compat); both definitions expose close() at
+            # runtime but ty sees a union of two class objects where the
+            # method is on a different concrete branch.
+            await self._storage.close()  # ty: ignore[unresolved-attribute]
             self._storage = None
 
 

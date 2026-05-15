@@ -111,7 +111,7 @@ class SearchPayload(BaseModel):
     fields: list[str] | None = None
     facets: list[str] | None = None
     filters: list[Any] | None = None
-    rangeFilters: list[Any] | None = Field(default=None, alias="range_filters")
+    range_filters: list[Any] | None = Field(default=None, alias="rangeFilters")
     sort: list[Any] | None = None
     pagination: PaginationModel = Field(default_factory=PaginationModel)
 
@@ -128,7 +128,7 @@ class SearchPayload(BaseModel):
             data["facets"] = self.facets
         if (filters := _serialize_model_list(self.filters)) is not None:
             data["filters"] = filters
-        if (range_filters := _serialize_model_list(self.rangeFilters)) is not None:
+        if (range_filters := _serialize_model_list(self.range_filters)) is not None:
             data["rangeFilters"] = range_filters
         if (sort := _serialize_model_list(self.sort)) is not None:
             data["sort"] = sort

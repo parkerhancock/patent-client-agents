@@ -76,7 +76,7 @@ class PetitionsClient(UsptoOdpBaseClient):
             context="search petitions",
         )
         data.setdefault("petitionDecisionDataBag", [])
-        return PetitionDecisionResponse(**data)
+        return PetitionDecisionResponse.model_validate(data)
 
     async def download(
         self,
@@ -133,7 +133,7 @@ class PetitionsClient(UsptoOdpBaseClient):
             context="download petitions",
         )
         data.setdefault("petitionDecisionDataBag", [])
-        return PetitionDecisionResponse(**data)
+        return PetitionDecisionResponse.model_validate(data)
 
     async def get(
         self,
@@ -167,7 +167,7 @@ class PetitionsClient(UsptoOdpBaseClient):
             context=f"get petition {identifier}",
         )
         data.setdefault("petitionDecisionDataBag", [])
-        return PetitionDecisionIdentifierResponse(**data)
+        return PetitionDecisionIdentifierResponse.model_validate(data)
 
 
 __all__ = ["PetitionsClient"]

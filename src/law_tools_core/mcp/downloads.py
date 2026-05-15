@@ -49,7 +49,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from fastmcp.resources import ResourceContent
-from fastmcp.tools.tool import ToolResult
+from fastmcp.tools.tool import ToolResult  # ty: ignore[unresolved-import]  # third-party submodule path  # noqa: E501
 from mcp.types import Annotations, ResourceLink
 from starlette.requests import Request
 from starlette.responses import Response, StreamingResponse
@@ -234,7 +234,9 @@ def _match_source(resource_path: str) -> tuple[DownloadSource, str] | None:
     Returns ``(source, remaining_path)`` or ``None`` if unknown.
     Longest-prefix match.
     """
-    for prefix in sorted(_SOURCES, key=len, reverse=True):
+    # Explicit `.keys()` + lambda keeps ty's element-type inference on str
+    # rather than the more general `Sized` it infers from `key=len`.
+    for prefix in sorted(_SOURCES.keys(), key=lambda p: len(p), reverse=True):
         if resource_path.startswith(prefix + "/") or resource_path == prefix:
             remainder = resource_path[len(prefix) :].lstrip("/")
             return _SOURCES[prefix], remainder
@@ -406,19 +408,24 @@ def _make_resource_link(
     to attempt ``resources/read``, ``annotations.lastModified`` when the
     source carries that metadata.
     """
+    # MCP's Annotations + ResourceLink are Pydantic models whose camelCase
+    # aliases are the only construction names ty sees. Using model_validate
+    # avoids kwarg checking and keeps the wire-format names.
     annotations = (
-        Annotations(audience=["user"], lastModified=last_modified)
+        Annotations.model_validate({"audience": ["user"], "lastModified": last_modified})
         if last_modified
-        else Annotations(audience=["user"])
+        else Annotations.model_validate({"audience": ["user"]})
     )
-    return ResourceLink(
-        type="resource_link",
-        uri=uri,  # type: ignore[arg-type]
-        name=name,
-        mimeType=mime_type,
-        size=size,
-        description=description,
-        annotations=annotations,
+    return ResourceLink.model_validate(
+        {
+            "type": "resource_link",
+            "uri": uri,
+            "name": name,
+            "mimeType": mime_type,
+            "size": size,
+            "description": description,
+            "annotations": annotations,
+        }
     )
 
 
