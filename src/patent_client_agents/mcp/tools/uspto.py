@@ -612,18 +612,86 @@ async def get_patent_family(
 # ---------------------------------------------------------------------------
 
 
+_PATENT_ASSIGNMENT_FANOUT_CONCURRENCY = 5
+
+
+def _summarize_patent_assignment_response(record: dict) -> str:
+    """One-line Markdown summary of an ODP assignment response for one application."""
+    appl = record.get("applicationNumberText") or "(no appl#)"
+    bag = record.get("assignmentBag") or []
+    if not bag:
+        return f"**US application {appl}** — no recorded assignments."
+    first = bag[0]
+    rf = first.get("reelAndFrameNumber") or "(no reel/frame)"
+    conveyance = first.get("conveyanceText") or "(no conveyance)"
+    assignees = first.get("assigneeBag") or []
+    assignee_name = (
+        assignees[0].get("assigneeNameText")
+        if assignees and isinstance(assignees[0], dict)
+        else None
+    )
+    head = (
+        f"**US application {appl}** — {len(bag)} assignment"
+        f"{'s' if len(bag) != 1 else ''} on record."
+    )
+    line = f"Latest reel/frame {rf}: {conveyance}"
+    if assignee_name:
+        line += f" → {assignee_name}"
+    line += "."
+    return f"{head}\n{line}"
+
+
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def get_patent_assignment(
     application_number: Annotated[
-        str,
-        "USPTO application number (8+ digits). Examples: '16123456', '17654321'. "
-        "NOT a patent number or publication number.",
+        str | list[str],
+        "USPTO application number (8+ digits), or a list of such numbers for "
+        "portfolio workflows. Examples: '16123456', ['16123456', '17654321']. "
+        "NOT a patent number or publication number. The response is always "
+        "a ListEnvelope so the shape is stable.",
     ],
-) -> dict:
-    """Get assignment and ownership transfer history for a patent application."""
+) -> ListEnvelope[dict]:
+    """Get USPTO patent assignment and ownership-transfer history for one or many applications.
+
+    Returns recorded assignments (reel/frame, conveyance type, assignors,
+    assignees, dates) for each application. Accepts either a single
+    application number or a list (§5.4); bounded concurrent fan-out
+    internally, order matches the input. For text-based searches across
+    assignments (by assignee/assignor/conveyance), use
+    ``search_patent_assignments``.
+
+    Related tools: search_patent_assignments, get_application,
+    search_applications.
+    """
+    numbers = (
+        [application_number] if isinstance(application_number, str) else list(application_number)
+    )
+    if not numbers:
+        from law_tools_core.exceptions import ValidationError
+
+        raise ValidationError("get_patent_assignment requires at least one application number")
+
+    semaphore = asyncio.Semaphore(_PATENT_ASSIGNMENT_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: UsptoOdpClient, appl: str) -> dict:
+        async with semaphore:
+            return _dump(await client.get_assignment(appl))  # type: ignore[return-value]
+
     async with UsptoOdpClient() as client:
-        result = await client.get_assignment(application_number)
-        return _dump(result)  # type: ignore[return-value]
+        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(results) == 1:
+        summary = _summarize_patent_assignment_response(results[0])
+        path = f"/api/v1/patent/applications/{numbers[0]}/assignment"
+    else:
+        summary = f"Fetched assignments for {len(results)} applications: " + ", ".join(numbers)
+        path = "/api/v1/patent/applications/assignment"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=results,
+        provenance=_odp_provenance(path),
+    )
 
 
 # ---------------------------------------------------------------------------

@@ -630,6 +630,44 @@ _TM_ASSIGNMENT_AXES = (
     "reel_frame",
 )
 
+_TM_ASSIGNMENT_BASE = "https://assignment-api.uspto.gov"
+_TM_ASSIGNMENT_NAME = "USPTO Trademark Assignment Center"
+
+
+def _tm_assignment_provenance(path: str) -> Any:
+    return make_provenance(
+        source_url=f"{_TM_ASSIGNMENT_BASE}{path}",
+        source_name=_TM_ASSIGNMENT_NAME,
+    )
+
+
+def _stub_trademark_assignment(record: Any) -> dict:
+    """Lean projection (§5.5) of a trademark assignment recordation."""
+    data = record.model_dump() if hasattr(record, "model_dump") else dict(record)
+    assignors = data.get("assignors") or []
+    assignees = data.get("assignees") or []
+    properties = data.get("properties") or []
+    first_assignor = (
+        assignors[0].get("assignor_name") if assignors and isinstance(assignors[0], dict) else None
+    )
+    first_assignee = assignees[0] if assignees else None
+    first_property = properties[0] if properties and isinstance(properties[0], dict) else {}
+    reel_frame = (
+        f"{data.get('reel_number')}/{data.get('frame_number')}"
+        if data.get("reel_number") is not None and data.get("frame_number") is not None
+        else None
+    )
+    return {
+        "reel_frame": reel_frame,
+        "assignor": first_assignor,
+        "assignee": first_assignee,
+        "assignor_execution_date": data.get("assignor_execution_date"),
+        "number_of_properties": data.get("number_of_properties"),
+        "serial_number": first_property.get("serial_number"),
+        "registration_number": first_property.get("registration_number"),
+        "mark": first_property.get("mark"),
+    }
+
 
 @trademarks_mcp.tool(annotations=READ_ONLY)
 async def search_trademark_assignments(
@@ -650,11 +688,25 @@ async def search_trademark_assignments(
         int,
         "1-based starting row for pagination.",
     ] = 1,
-) -> dict:
-    """Search USPTO trademark assignment recordations.
+    full: Annotated[
+        bool,
+        "When False (the default), each hit is a lean stub: reel/frame, "
+        "first assignor, first assignee, execution date, number of "
+        "properties, plus the lead property's serial/registration number "
+        "and mark text. When True, every hit is the full Trademark "
+        "Assignment Center record (all properties, all assignors, "
+        "correspondent, domestic representative, etc.).",
+    ] = False,
+) -> ListEnvelope[dict]:
+    """Search USPTO trademark assignment recordations by assignee, assignor, or mark identifier.
 
-    Returns recordations with reel/frame, conveyance, assignors,
-    assignees, and affected trademark properties. No auth required.
+    Returns recordations with reel/frame, assignors, assignees, and
+    affected trademark properties. Lean by default (§5.5); use
+    ``full=True`` for the upstream record per hit. No auth required.
+    For the underlying register data, use ``get_trademark`` (full record)
+    or ``get_trademark_status`` (current TSDR status).
+
+    Related tools: get_trademark, get_trademark_status, search_trademarks.
     """
     axis = by.strip().lower()
     if axis not in _TM_ASSIGNMENT_AXES:
@@ -666,10 +718,24 @@ async def search_trademark_assignments(
         elif axis == "assignor":
             records = await client.search_by_assignor(query, start_row=start_row, limit=limit)
         elif axis == "serial_number":
-            records = await client.search_by_serial(query, start_row=start_row, limit=limit)
+            records = await client.search_by_serial(query, limit=limit)
         elif axis == "registration_number":
-            records = await client.search_by_registration(query, start_row=start_row, limit=limit)
+            records = await client.search_by_registration(query, limit=limit)
         else:  # reel_frame
-            records = await client.search_by_reel_frame(query, start_row=start_row, limit=limit)
+            records = await client.search_by_reel_frame(query)
 
-    return _dump_list(records)
+    items = (
+        [_dump(r) for r in records] if full else [_stub_trademark_assignment(r) for r in records]
+    )
+    shown = len(items)
+    summary = (
+        f"USPTO trademark assignments (by {axis}) — `{query}`: {shown} hit"
+        f"{'s' if shown != 1 else ''}."
+    )
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_tm_assignment_provenance(
+            "/ipas/search/api/v2/public/trademark/exportTradeMarkData"
+        ),
+    )

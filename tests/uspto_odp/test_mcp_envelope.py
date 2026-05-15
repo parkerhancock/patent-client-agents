@@ -18,6 +18,7 @@ from pydantic import BaseModel
 from law_tools_core.envelope import ListEnvelope, Provenance
 from patent_client_agents.mcp.tools.uspto import (
     get_application,
+    get_patent_assignment,
     list_file_history,
     search_applications,
 )
@@ -218,3 +219,69 @@ async def test_list_file_history_returns_list_envelope():
     }
     assert result.items[0]["formats"] == ["PDF", "MS_WORD"]
     assert "/api/v1/patent/applications/16123456/documents" in result.provenance.source_url
+
+
+# ──────────────────────────────────────────────────────────────────────
+# get_patent_assignment — §5.4 list-accept (Row 8)
+# ──────────────────────────────────────────────────────────────────────
+
+
+class _FakeAssignmentResponse(BaseModel):
+    payload: dict = {}
+
+    def model_dump(self, **kwargs):  # type: ignore[override]
+        return self.payload
+
+
+def _make_assignment_response(appl: str, *, count: int = 1) -> dict:
+    return {
+        "applicationNumberText": appl,
+        "assignmentBag": [
+            {
+                "reelNumber": 50000 + i,
+                "frameNumber": 100 + i,
+                "reelAndFrameNumber": f"{50000 + i}/{100 + i}",
+                "conveyanceText": "ASSIGNMENT OF ASSIGNORS INTEREST",
+                "assignorBag": [{"assignorNameText": "Alice Inventor"}],
+                "assigneeBag": [{"assigneeNameText": "Acme Corp"}],
+                "assignmentRecordedDate": "2024-03-20",
+            }
+            for i in range(count)
+        ],
+    }
+
+
+@pytest.mark.asyncio
+async def test_get_patent_assignment_single_string_returns_list_envelope():
+    payload = _make_assignment_response("16123456", count=2)
+    fake = _FakeAssignmentResponse(payload=payload)
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_assignment = AsyncMock(return_value=fake)
+        result = await get_patent_assignment(application_number="16123456")
+
+    assert isinstance(result, ListEnvelope)
+    assert len(result.items) == 1
+    assert result.provenance.source_name == "USPTO Open Data Portal"
+    assert "/api/v1/patent/applications/16123456/assignment" in result.provenance.source_url
+    assert "16123456" in result.summary
+    assert "2 assignments on record" in result.summary
+
+
+@pytest.mark.asyncio
+async def test_get_patent_assignment_list_preserves_order():
+    appls = ["16123456", "17654321", "18900000"]
+    responses = [_FakeAssignmentResponse(payload=_make_assignment_response(a)) for a in appls]
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_assignment = AsyncMock(side_effect=responses)
+        result = await get_patent_assignment(application_number=appls)
+
+    assert isinstance(result, ListEnvelope)
+    assert len(result.items) == 3
+    returned = [item["applicationNumberText"] for item in result.items]
+    assert returned == appls
+    assert result.provenance.source_url.endswith("/api/v1/patent/applications/assignment")
+    assert "Fetched assignments for 3 applications" in result.summary
