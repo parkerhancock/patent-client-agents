@@ -33,13 +33,37 @@ COVERAGE_JSON = ROOT / "coverage" / "coverage.json"
 
 RIGHTS = {"patent", "trademark", "design", "copyright", "plant_variety", "gi"}
 DATA_TYPES = {
-    "bibliographic", "full_text", "prosecution", "legal_status",
-    "assignments", "oppositions", "tribunal_proceedings", "litigation",
-    "classification", "guidelines", "case_law", "statutes", "treaties",
+    "bibliographic",
+    "full_text",
+    "prosecution",
+    "legal_status",
+    "assignments",
+    "oppositions",
+    "tribunal_proceedings",
+    "litigation",
+    "classification",
+    "guidelines",
+    "case_law",
+    "statutes",
+    "treaties",
     "bulk_data",
 }
-ACCESS_METHODS = {"rest_api", "bulk_download", "website_scrape", "pdf_download", "ftp", "mcp_passthrough"}
-AUTH_KINDS = {"none", "api_key", "oauth2_client_credentials", "oauth2_password", "cookie_token", "account_required"}
+ACCESS_METHODS = {
+    "rest_api",
+    "bulk_download",
+    "website_scrape",
+    "pdf_download",
+    "ftp",
+    "mcp_passthrough",
+}
+AUTH_KINDS = {
+    "none",
+    "api_key",
+    "oauth2_client_credentials",
+    "oauth2_password",
+    "cookie_token",
+    "account_required",
+}
 STATUSES = {"active", "beta", "planned", "candidate", "blocked", "external", "deprecated"}
 
 # CONNECTOR_STANDARDS.md §6 closed vocabularies.
@@ -95,8 +119,16 @@ def validate_source(
     sid = source.get("id", f"<index {idx}>")
     path = f"sources[{idx}] {sid}"
 
-    for required in ("id", "name", "jurisdiction", "issuing_body", "rights",
-                     "data_types", "access", "status"):
+    for required in (
+        "id",
+        "name",
+        "jurisdiction",
+        "issuing_body",
+        "rights",
+        "data_types",
+        "access",
+        "status",
+    ):
         if required not in source:
             fail(errors, path, f"missing required key: {required}")
 
@@ -107,9 +139,12 @@ def validate_source(
         fail(errors, path, f"jurisdiction {source['jurisdiction']!r} must be ISO-2 or UPC/UP")
 
     if "wipo_st3_code" in source and not ST3_REGEX.match(source["wipo_st3_code"]):
-        fail(errors, path,
-             f"wipo_st3_code {source['wipo_st3_code']!r} must match WIPO Standard ST.3 codes "
-             f"({ST3_REGEX.pattern})")
+        fail(
+            errors,
+            path,
+            f"wipo_st3_code {source['wipo_st3_code']!r} must match WIPO Standard ST.3 codes "
+            f"({ST3_REGEX.pattern})",
+        )
 
     rights = source.get("rights") or []
     for r in rights:
@@ -140,8 +175,12 @@ def validate_source(
             fail(errors, path, "active/beta source requires connector.module")
         else:
             module_path = ROOT / "src" / module.replace(".", "/")
-            if not (module_path.exists() or (module_path.parent / f"{module_path.name}.py").exists()):
-                fail(errors, path, f"connector.module {module!r} does not import (no {module_path})")
+            if not (
+                module_path.exists() or (module_path.parent / f"{module_path.name}.py").exists()
+            ):
+                fail(
+                    errors, path, f"connector.module {module!r} does not import (no {module_path})"
+                )
 
         last_verified = source.get("last_verified")
         if not last_verified:
@@ -149,16 +188,28 @@ def validate_source(
         elif isinstance(last_verified, dt.date):
             age = (dt.date.today() - last_verified).days
             if age > FRESHNESS_DAYS[status]:
-                fail(errors, path, f"last_verified {last_verified} is {age}d old (limit {FRESHNESS_DAYS[status]}d)")
+                fail(
+                    errors,
+                    path,
+                    f"last_verified {last_verified} is {age}d old (limit {FRESHNESS_DAYS[status]}d)",
+                )
         else:
-            fail(errors, path, f"last_verified must be a YAML date (got {type(last_verified).__name__})")
+            fail(
+                errors,
+                path,
+                f"last_verified must be a YAML date (got {type(last_verified).__name__})",
+            )
 
         # ── CONNECTOR_STANDARDS.md §6 checks ────────────────────────────
 
         # Check #1: every active/beta entry has `category`.
         category = source.get("category")
         if not category:
-            fail(errors, path, "status=active/beta requires category (registered_ip or substantive_law)")
+            fail(
+                errors,
+                path,
+                "status=active/beta requires category (registered_ip or substantive_law)",
+            )
         elif category not in CATEGORIES:
             fail(errors, path, f"category {category!r} not in {sorted(CATEGORIES)}")
 
@@ -204,22 +255,42 @@ def validate_source(
             if not update_strategy:
                 fail(errors, path, "category=substantive_law active/beta requires update_strategy")
             elif update_strategy not in UPDATE_STRATEGIES:
-                fail(errors, path, f"update_strategy {update_strategy!r} not in {sorted(UPDATE_STRATEGIES)}")
+                fail(
+                    errors,
+                    path,
+                    f"update_strategy {update_strategy!r} not in {sorted(UPDATE_STRATEGIES)}",
+                )
             if not update_cadence:
                 fail(errors, path, "category=substantive_law active/beta requires update_cadence")
             elif update_cadence not in UPDATE_CADENCES:
-                fail(errors, path, f"update_cadence {update_cadence!r} not in {sorted(UPDATE_CADENCES)}")
+                fail(
+                    errors,
+                    path,
+                    f"update_cadence {update_cadence!r} not in {sorted(UPDATE_CADENCES)}",
+                )
 
             # transport=mcp_local additionally requires last_synced + corpus_version.
             last_synced = source.get("last_synced")
             corpus_version = source.get("corpus_version")
             if transport == "mcp_local":
                 if not last_synced:
-                    fail(errors, path, "category=substantive_law + transport=mcp_local requires last_synced")
+                    fail(
+                        errors,
+                        path,
+                        "category=substantive_law + transport=mcp_local requires last_synced",
+                    )
                 elif not isinstance(last_synced, dt.date):
-                    fail(errors, path, f"last_synced must be a YAML date (got {type(last_synced).__name__})")
+                    fail(
+                        errors,
+                        path,
+                        f"last_synced must be a YAML date (got {type(last_synced).__name__})",
+                    )
                 if not corpus_version:
-                    fail(errors, path, "category=substantive_law + transport=mcp_local requires corpus_version")
+                    fail(
+                        errors,
+                        path,
+                        "category=substantive_law + transport=mcp_local requires corpus_version",
+                    )
 
             # Check #5: scheduled_recrawl / vendor_changefeed staleness gate.
             if (
@@ -253,9 +324,36 @@ def validate_source(
 # figures (https://www.wipo.int/ipstats/en/). Used to compute a
 # "top-N covered" metric on the coverage page.
 TOP30_FILING_VOLUME = [
-    "CN", "US", "JP", "KR", "DE", "IN", "BR", "CA", "AU", "MX",
-    "RU", "GB", "FR", "IT", "ES", "SE", "NL", "CH", "BE", "PL",
-    "DK", "TW", "SG", "HK", "TH", "MY", "PH", "VN", "ID", "KH",
+    "CN",
+    "US",
+    "JP",
+    "KR",
+    "DE",
+    "IN",
+    "BR",
+    "CA",
+    "AU",
+    "MX",
+    "RU",
+    "GB",
+    "FR",
+    "IT",
+    "ES",
+    "SE",
+    "NL",
+    "CH",
+    "BE",
+    "PL",
+    "DK",
+    "TW",
+    "SG",
+    "HK",
+    "TH",
+    "MY",
+    "PH",
+    "VN",
+    "ID",
+    "KH",
 ]
 
 
@@ -306,18 +404,30 @@ def build_matrix(sources: list[dict[str, Any]]) -> list[dict[str, Any]]:
     Each cell records the strongest status among sources touching that
     (jurisdiction, right) pair, plus the source IDs underneath.
     """
-    status_rank = {"active": 5, "beta": 4, "planned": 3, "candidate": 2,
-                   "blocked": 1, "external": 1, "deprecated": 0}
+    status_rank = {
+        "active": 5,
+        "beta": 4,
+        "planned": 3,
+        "candidate": 2,
+        "blocked": 1,
+        "external": 1,
+        "deprecated": 0,
+    }
 
     cells: dict[tuple[str, str], dict[str, Any]] = {}
     for s in sources:
         juris = s["jurisdiction"]
-        for right in (s.get("rights") or []):
+        for right in s.get("rights") or []:
             key = (juris, right)
-            entry = cells.setdefault(key, {
-                "jurisdiction": juris, "right": right,
-                "status": s["status"], "sources": [],
-            })
+            entry = cells.setdefault(
+                key,
+                {
+                    "jurisdiction": juris,
+                    "right": right,
+                    "status": s["status"],
+                    "sources": [],
+                },
+            )
             entry["sources"].append(s["id"])
             if status_rank.get(s["status"], -1) > status_rank.get(entry["status"], -1):
                 entry["status"] = s["status"]

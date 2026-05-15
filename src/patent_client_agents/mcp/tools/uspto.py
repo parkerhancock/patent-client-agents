@@ -1114,9 +1114,7 @@ async def list_ptab_children(
             )
         # pt is guaranteed "interference" here (validated above).
         if inc not in ("decisions",):
-            raise ValidationError(
-                "parent_type='interference' only supports include='decisions'"
-            )
+            raise ValidationError("parent_type='interference' only supports include='decisions'")
         result = _dump(await client.get_interference_decisions_by_number(parent_identifier))
         items = [
             _stub_ptab_record(entry, "interference_decision")
@@ -1129,9 +1127,7 @@ async def list_ptab_children(
         return ListEnvelope[dict](
             summary=summary,
             items=items,
-            provenance=_odp_provenance(
-                f"/api/v1/ptab/interferences/by-number/{parent_identifier}"
-            ),
+            provenance=_odp_provenance(f"/api/v1/ptab/interferences/by-number/{parent_identifier}"),
         )
 
 
