@@ -169,31 +169,30 @@ def validate_source(
         elif transport not in TRANSPORTS:
             fail(errors, path, f"transport {transport!r} not in {sorted(TRANSPORTS)}")
 
-        # Check #3: transport=mcp_local requires the connector module to
-        # expose a `get_corpus_status()` callable. Per the standards rollout
-        # plan we surface this as a WARNING for now, not a hard error —
-        # most connectors don't yet implement the callable; we'll convert
-        # this to an error in a follow-up PR after the API lands. Skip
-        # the check for category=registered_ip entries (they don't owe
-        # the corpus_status surface).
+        # Check #3: transport=mcp_local + category=substantive_law requires the
+        # connector module to expose a `get_corpus_status()` callable. As of
+        # the row-18 rollout (TMEP, EPC, EPO Guidelines, EPO Case Law, PCT
+        # Guidelines, EPO UP Guidelines, UKIPO MoPP, UPC Statutes — plus
+        # MPEP from row 17), all category-2 mcp_local connectors expose
+        # the callable, so this is now a hard error. Skip for
+        # category=registered_ip entries (they don't owe the surface).
         if transport == "mcp_local" and category == "substantive_law" and module:
             try:
                 imported = importlib.import_module(module)
             except Exception as exc:  # noqa: BLE001 — surface any import failure clearly
-                warn(
-                    warnings,
+                fail(
+                    errors,
                     path,
                     f"transport=mcp_local: could not import {module!r} to check "
                     f"for get_corpus_status() ({type(exc).__name__}: {exc})",
                 )
             else:
                 if not callable(getattr(imported, "get_corpus_status", None)):
-                    warn(
-                        warnings,
+                    fail(
+                        errors,
                         path,
-                        f"transport=mcp_local: connector {module!r} should expose a "
-                        f"get_corpus_status() callable (CONNECTOR_STANDARDS.md §4) — "
-                        f"warning only until the rollout PR converts to a hard error",
+                        f"transport=mcp_local: connector {module!r} must expose a "
+                        f"get_corpus_status() callable (CONNECTOR_STANDARDS.md §4)",
                     )
 
         # Checks #4–6 apply only to category-2 entries.

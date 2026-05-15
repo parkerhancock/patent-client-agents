@@ -124,6 +124,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   the `get_corpus_status()` rollout reaches `upc_statutes` (queued for
   row 18). §5.6 audit fix: `search_upc_statutes` ↔ `get_upc_section`
   now cross-reference.
+- **Row 18 complete — all 8 substantive-law `mcp_local` corpora now
+  expose `get_corpus_status()` AND ship envelope-conformant MCP tools.**
+  Real `corpus_version` strings now flow through `Provenance.corpus_version`
+  on every response:
+  - **EPC**: `"2020"` (EPC 2020 edition)
+  - **EPO Guidelines**: `"2024"` (March 2024 annual edition)
+  - **EPO Case Law**: `"2022"` (10th edition Boards of Appeal "white book")
+  - **PCT-EPO Guidelines**: `"2024"`
+  - **EPO UP Guidelines**: `"2026"`
+  - **UKIPO MoPP**: `"snapshot-2026-05-14"` (gov.uk doesn't publish a
+    stable revision tag; falls back to dated snapshot)
+  - **TMEP**: `"current"` (USPTO doesn't publish a stable revision label)
+  - **UPC Statutes**: `"snapshot-YYYY-MM-DD"` (derived from
+    `meta.snapshot_date` since the corpus schema doesn't carry a
+    `source_version` field)
+
+  `scripts/build_coverage.py` validator's check #3 is now a **hard
+  error** (was a warning during rollout). Every category-2 mcp_local
+  connector must expose `get_corpus_status()` or CI fails.
+
+  Row-18b agent also fixed a pre-existing bug in `epo_pct_guidelines`
+  and `epo_up_guidelines`: `default_corpus_path()` returned
+  `~/.cache/patent_client_agents/guidelines.db` (the EPC corpus path)
+  for both. Corrected to per-corpus filenames (`pct_guidelines.db`,
+  `up_guidelines.db`).
+
 - **JPO migrated to envelope** (row 11). All `get_jpo_*` and the
   `convert_*` family. Notable changes:
   - **`get_jpo_applicant_by_code` + `get_jpo_applicant_by_name`
