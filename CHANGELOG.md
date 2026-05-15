@@ -5,7 +5,13 @@ All notable changes to `patent-client-agents` are recorded here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [0.19.0] — 2026-05-15 (unreleased)
+## [0.19.0] — 2026-05-15
+
+This release rolls up four bodies of work that landed on `main` without
+being individually tagged (the in-progress version markers `0.16.0`,
+`0.17.0`, and `0.18.0` were never published). It is therefore the first
+release since `v0.15.0` and carries a large number of breaking changes
+across the connector surface.
 
 ### Added
 
@@ -302,9 +308,7 @@ migrated. ~99 MCP tools across 25 connectors now ship the
   - Catalog and `ip_research` skill references updated to name the
     collapsed applicant tool.
 
-## [0.18.0] — 2026-05-14 (unreleased)
-
-### Changed (breaking)
+### Lean `search_applications` stub (originally planned as 0.18.0)
 
 - **`search_applications` now returns a lean stub per hit by default.**
   Previously every hit carried the full ODP record (inventor bag,
@@ -331,24 +335,7 @@ migrated. ~99 MCP tools across 25 connectors now ship the
   When you only need one application's full record, prefer
   ``get_application(application_number)`` — that endpoint is unchanged.
 
-## [0.11.1] — 2026-05-13
-
-### Fixed
-
-- **`get_patent` MCP tool no longer stalls for ~4.5 min when Google Patents
-  returns 503.** Wrapped the tool body in a 60s `asyncio.timeout`, mapping
-  budget overruns to `RateLimitError` (`[retryable]`) and Google's
-  "couldn't find this patent" page to `NotFoundError` (`[not-retryable]`).
-- **`GooglePatentsClient.get_patent_data` stops swallowing exceptions and
-  returning `None`.** Typed errors (`httpx.HTTPStatusError`,
-  `FileNotFoundError`, transport errors) now propagate so callers and the
-  FriendlyErrors middleware can distinguish "rate-limited" from
-  "actually not found." Removes the dead `if patent is None` branches in
-  `download_patent_pdf` and `google_patents.api.fetch`.
-
-## [0.17.0] — 2026-05-14 (unreleased)
-
-### Added
+### PCT-EPO + UP Guidelines connectors (originally planned as 0.17.0)
 
 - **EPO PCT-EPO Guidelines connector**
   (``patent_client_agents.epo_pct_guidelines``). The Guidelines that
@@ -359,6 +346,7 @@ migrated. ~99 MCP tools across 25 connectors now ship the
   - ``PctGuidelinesClient.search`` + ``.get_section`` with citation
     forms ``G-II, 3.1`` / ``g_ii_3_1`` / full URL.
   - MCP tools: ``search_epo_pct_guidelines`` + ``get_epo_pct_guidelines_section``.
+
 - **EPO Unitary Patent (UP) Guidelines connector**
   (``patent_client_agents.epo_up_guidelines``). Guidelines for the
   Unitary Patent regime (opt-in, fees, renewals, UPP register).
@@ -373,10 +361,10 @@ migrated. ~99 MCP tools across 25 connectors now ship the
   ``patent-client-agents-build-up-guidelines-corpus`` CLIs ship with
   the wheel.
 
-### EPO completeness
+#### EPO completeness
 
-This release brings the EPO static-corpus coverage to a defensible
-"complete" set:
+The PCT and UP additions bring the EPO static-corpus coverage to a
+defensible "complete" set:
 
 | Source | Module | Sections | Size |
 |---|---|---|---|
@@ -399,13 +387,11 @@ This release brings the EPO static-corpus coverage to a defensible
 - **National Law Relating to the EPC** — annual EPO publication
   tracking member-state implementations. URL needs investigation.
 
-### Tool count
+#### Tool count
 
 - Default surface: 80 → **84** (4 new tools across PCT + UP Guidelines).
 
-## [0.16.0] — 2026-05-14 (unreleased)
-
-### Added
+### EPC + EPO Case Law connectors (originally planned as 0.16.0)
 
 - **European Patent Convention (EPC) connector** (``patent_client_agents.epc``).
   Corpus-backed access to the Convention Articles (180) and
@@ -437,7 +423,7 @@ This release brings the EPO static-corpus coverage to a defensible
   ``patent-client-agents-build-caselaw-corpus`` CLIs ship with the
   wheel.
 
-### Tool count
+#### Tool count
 
 - Default surface: 76 → **80** (4 new tools across EPC + Case Law).
 
@@ -676,6 +662,21 @@ previously lived in the BB-internal `law-tools` package. They are now
 part of the public `patent-client-agents` wheel. `law_tools.{cafc,
 usitc, uspto_tmsearch, copyright}` remain as re-export shims for one
 release so existing internal callers don't break.
+
+## [0.11.1] — 2026-05-13
+
+### Fixed
+
+- **`get_patent` MCP tool no longer stalls for ~4.5 min when Google Patents
+  returns 503.** Wrapped the tool body in a 60s `asyncio.timeout`, mapping
+  budget overruns to `RateLimitError` (`[retryable]`) and Google's
+  "couldn't find this patent" page to `NotFoundError` (`[not-retryable]`).
+- **`GooglePatentsClient.get_patent_data` stops swallowing exceptions and
+  returning `None`.** Typed errors (`httpx.HTTPStatusError`,
+  `FileNotFoundError`, transport errors) now propagate so callers and the
+  FriendlyErrors middleware can distinguish "rate-limited" from
+  "actually not found." Removes the dead `if patent is None` branches in
+  `download_patent_pdf` and `google_patents.api.fetch`.
 
 ## [0.10.0] — 2026-05-13
 
