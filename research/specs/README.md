@@ -151,8 +151,10 @@ When the synopsis §5 says "what we should add" and it's ≤1 day work, just do 
 
 ## Index
 
-Specs in this folder (none yet — added as they're written):
+Specs in this folder (added as they're written):
 
 | Spec | Office | Authoring date | Status |
 |---|---|---|---|
-| _(none yet)_ | | | |
+| [`tw-tipo-connector-spec.md`](tw-tipo-connector-spec.md) | TIPO Taiwan — OpenData REST (green) | 2026-05-16 | spec_ready |
+| [`kr-kipo-connector-spec.md`](kr-kipo-connector-spec.md) | KIPO Korea — KIPRIS Plus (yellow BYOK) | 2026-05-16 | spec_ready |
+| [`fr-inpi-connector-spec.md`](fr-inpi-connector-spec.md) | INPI France — TM + Design (yellow BYOK) | 2026-05-16 | spec_ready |

@@ -32,14 +32,15 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-05-16
+last_updated: 2026-05-16  # specs written for TIPO, KIPO, INPI France
 
 stats:
   total_entities: 43
   synopses_filled: 17    # +5 from coverage-batch-2: Madrid, Hague, CNIPA, INPI France, TIPO
   fee_research_filled: 5
   connectors_shipped: 12
-  connectors_planned: 3  # KIPO BYOK + TIPO clean + INPI France BYOK
+  connectors_spec_ready: 3  # TIPO (green) + KIPO (yellow BYOK) + INPI France (yellow BYOK)
+  connectors_planned: 0
   connectors_blocked: 7  # DPMA, UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
   next_unblocked_synopses: 22
 
@@ -353,12 +354,12 @@ entities:
     synopsis: national/kr-kipo.md
     detail_survey: connectors/kipo.md
     fee_research: null
-    connector_spec: null
+    connector_spec: specs/kr-kipo-connector-spec.md
     verdict: yellow_byok
     verdict_basis: KIPRIS Plus API real and clean; ToS §11 forbids key sharing → BYOK only
-    connector_status: planned
+    connector_status: spec_ready
     manifest_ids: []
-    next_action: spec_writing
+    next_action: connector_build
     blocked_by: []
     last_verified: 2026-05-16
     notes: Top-5 office; biggest single-office gap; mirror JPO BYOK architecture
@@ -425,12 +426,12 @@ entities:
     synopsis: national/fr-inpi.md
     detail_survey: connectors/inpi_france.md
     fee_research: null
-    connector_spec: null
+    connector_spec: specs/fr-inpi-connector-spec.md
     verdict: yellow_byok
     verdict_basis: api-gateway.inpi.fr is the cleanest national REST surface surveyed (JSON, SolR Lucene, ST.36/66/86); session-bearer + XSRF auth bound to personal data.inpi.fr account (NOT PISTE — older survey was wrong); 10 req/min throttle
-    connector_status: planned
+    connector_status: spec_ready
     manifest_ids: [FR/Legifrance/IP]
-    next_action: spec_writing
+    next_action: connector_build
     blocked_by: []
     last_verified: 2026-05-16
     notes: BYOK for TMs + designs (real gaps); skip patents (EPO OPS covers); FR IP case law via Judilibre over PISTE; PIBD froze 2026-03-11
@@ -557,12 +558,12 @@ entities:
     synopsis: national/tw-tipo.md
     detail_survey: connectors/tipo_taiwan.md
     fee_research: null
-    connector_spec: null
+    connector_spec: specs/tw-tipo-connector-spec.md
     verdict: green
     verdict_basis: Swagger 2.0 REST API at cloud.tipo.gov.tw/S220/opdataapi/ verified live; Taiwan OGDL v1.0 (CC-BY-4.0 + explicit sublicensing); 15 GET ops; 1.45M patents + 3.39M trademarks
-    connector_status: planned
+    connector_status: spec_ready
     manifest_ids: [TW/MOJ/TradeSecretsAct]
-    next_action: spec_writing
+    next_action: connector_build
     blocked_by: []
     last_verified: 2026-05-16
     notes: Only path to TW IP (not a WIPO member; no PCT/Madrid/Hague/INPADOC bridges). API base moved cloud.tipo.gov.tw (was tiponet); auth via `tk` query param. Per-record details on FTPS (proxy ships biblio-only). TWPAT retiring 2025-04-25 (iPKM replaced 2024-12-18)
