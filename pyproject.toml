@@ -88,6 +88,7 @@ patent-client-agents-build-tw-trade-secrets-corpus = "patent_client_agents.tw_tr
 patent-client-agents-build-ipos-statutes-corpus = "patent_client_agents.ipos_statutes.corpus.build:main"
 patent-client-agents-build-ipos-manuals-corpus = "patent_client_agents.ipos_manuals.corpus.build:main"
 patent-client-agents-build-inpi-br-statutes-corpus = "patent_client_agents.inpi_br_statutes.corpus.build:main"
+patent-client-agents-build-ilpo-statutes-corpus = "patent_client_agents.ilpo_statutes.corpus.build:main"
 
 [project.urls]
 Homepage = "https://github.com/parkerhancock/patent-client-agents"

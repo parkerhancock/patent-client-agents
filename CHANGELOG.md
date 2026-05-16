@@ -118,6 +118,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - The LPI sub-paragraph addressing (e.g. `Art. 195(XI)` resolving to
   the specific paragraph row) is rolled up to the parent Article in
   v1; sub-section addressing is a v2 follow-up.
+- **ILPO Israel connector — first cut.** Adds Israeli coverage to the
+  registered-IP catalog and the substantive-law corpus. Two packages
+  ship in this PR; both are public, no auth.
+  - `patent_client_agents.ilpo_statutes` — corpus-backed client over a
+    SQLite/FTS5 snapshot of the five Israeli IP statutes: **Patents
+    Law 5727-1967**, **Trade Marks Ordinance [New Version] 5732-1972**,
+    **Designs Law 5777-2017**, **Copyright Act 5768-2007**, and the
+    distinctive **Commercial Torts Law 5759-1999** (Articles 6-9 trade
+    secrets + Article 13 statutory damages — Israel's standalone
+    trade-secret statute, in contrast to the Civil-Code / common-law
+    breach-of-confidence model used in most other jurisdictions).
+    Citation parser accepts `Section 3 Patents Law`,
+    `Article 6 Commercial Torts Law`, reverse-order forms, and `§N`.
+  - `patent_client_agents.ilpo_tm` — CKAN catalog client for
+    `data.gov.il`'s ILPO trade-mark register feed (Shape E — catalog
+    list + raw download URL; no auth).
+- **MCP tools (4 new, all envelope-shaped per
+  CONNECTOR_STANDARDS.md §5.9):**
+  - `search_ilpo_statutes`, `get_ilpo_section` — `mcp/tools/ilpo.py`,
+    backed by the local statutes corpus (`mcp_local`; carries
+    `corpus_synced_at` / `corpus_version` per §4).
+  - `list_ilpo_tm_releases`, `download_ilpo_tm` — `mcp/tools/ilpo.py`,
+    Shape E catalog + download URL.
+- **Build CLI**: `patent-client-agents-build-ilpo-statutes-corpus`
+  downloads the WIPO Lex authoritative-EN PDFs for the five statutes,
+  extracts plain text with `pypdf`, parses sections with a unit-aware
+  regex (`Section N` for Patents/TM/Designs/Copyright; `Article N`
+  for Commercial Torts), and writes a SQLite/FTS5 corpus at
+  `~/.cache/patent_client_agents/ilpo_statutes.db` (or
+  `ILPO_STATUTES_CORPUS_PATH`).
+- **Manifest entries** in `coverage/sources.yaml`:
+  `IL/ILPO/Statutes` (substantive_law / mcp_local) and
+  `IL/ILPO/TradeMarks` (registered_ip / mcp_proxy), both
+  `last_verified: 2026-05-16`.
+
+### Notes (ILPO)
+
+- The ILPO Patents SPA at `israelpatents.justice.gov.il` is **out of
+  scope for v1** — it's an Angular SPA with reCAPTCHA + Glassbox
+  session capture, and EPO OPS already covers IL biblio + INPADOC
+  legal events. Re-evaluate in v2 if file-wrapper PDF retrieval becomes
+  a paying use case.
+- The Commercial Torts Law is intentionally surfaced as a first-class
+  statute (not bundled under TM or copyright) because Israel's
+  trade-secret regime is statutory rather than common-law and carries
+  its own statutory-damages remedy.
 
 ### Fixed
 
