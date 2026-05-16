@@ -38,6 +38,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   - Envelope tests refactored to the plain `_FakeModel` pattern from
     the IP Australia reference so `ty` no longer trips on Pydantic
     `populate_by_name` aliases.
+- **IPOS Singapore connector — first cut.** Adds Singapore coverage to
+  the substantive-law catalog via two new `mcp_local` corpus packages.
+  Public, no credentials required; corpora ship as a SQLite/FTS5
+  snapshot built once and replayed at agent runtime:
+  - `patent_client_agents.ipos_statutes` — `IposStatutesClient` over
+    the four IPOS-administered Acts (Patents Act 1994, Trade Marks Act
+    1998, Registered Designs Act 2000, Copyright Act 2021). Sourced
+    from Singapore Statutes Online (`sso.agc.gov.sg`); built by the
+    `patent-client-agents-build-ipos-statutes-corpus` console script
+    (env override `IPOS_STATUTES_CORPUS_PATH`).
+  - `patent_client_agents.ipos_manuals` — `IposManualsClient` over the
+    three IPOS examination / work manuals (Patent Examination
+    Guidelines, Trade Marks Work Manual, Industrial Designs Work
+    Manual). Sourced from `ipos.gov.sg`; built by the
+    `patent-client-agents-build-ipos-manuals-corpus` console script
+    (env override `IPOS_MANUALS_CORPUS_PATH`).
+  Citation parsers accept `"Section 13 Patents Act"`, `"s 27(1) Trade
+  Marks Act"`, `"IPOS PEG 1.5.3"`, `"IPOS TM Work Manual 3.4"`, plus
+  short forms (`PA1994`, `TMA1998`, `PEG 1.5.3`, etc).
+- **MCP tools (6 new, all envelope-shaped per CONNECTOR_STANDARDS.md
+  §5.9, all unconditional read-only):**
+  - `search_ipos_statutes`, `get_ipos_section`, `list_ipos_statutes` —
+    `mcp/tools/ipos.py` (the statutes surface).
+  - `search_ipos_manuals`, `get_ipos_manual_section`,
+    `list_ipos_manuals` — `mcp/tools/ipos.py` (the manuals surface).
+- **Manifest entries** in `coverage/sources.yaml`: `SG/IPOS/Statutes`
+  and `SG/IPOS/Manuals` (both `category: substantive_law`,
+  `transport: mcp_local`, `last_verified: 2026-05-16`).
 
 ### Fixed
 
