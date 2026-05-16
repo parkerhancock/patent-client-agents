@@ -80,6 +80,9 @@ src/
                             #   only; FR patents via EPO OPS. BYOK
                             #   session-bearer + XSRF auth — needs
                             #   INPI_USERNAME + INPI_PASSWORD.
+    canlii/                 # CanLII REST — Canadian IP cases (FC/FCA/SCC IP-filtered,
+                            #   TMOB, PAB) + IP statutes (Patent / Trademarks /
+                            #   Industrial Design / Copyright Acts). Needs CANLII_API_KEY.
     cpc/                    # CPC classification lookups (via EPO OPS)
     mpep/                   # Manual of Patent Examining Procedure search
     skills/ip_research/     # Skill content packaged with the wheel; downstream

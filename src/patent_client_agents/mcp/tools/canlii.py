@@ -50,6 +50,72 @@ _CANLII_NAME = "CanLII (Canadian Legal Information Institute)"
 # still parallelizing portfolio workflows.
 _CANLII_FANOUT_CONCURRENCY = 5
 
+# ──────────────────────────────────────────────────────────────────────
+# Canadian IP layer — database codes & keyword filters
+# ──────────────────────────────────────────────────────────────────────
+#
+# The CanLII API exposes 200+ databases. Mission scope is IP only, so
+# we curate two groups:
+#
+#   * Pure-IP tribunals — every decision is IP by construction; no
+#     post-filter needed. TMOB handles trade-mark oppositions and
+#     cancellations; the Commissioner of Patents (PAB) issues
+#     pre-grant / re-examination / final action decisions.
+#   * General reviewing courts — FC / FCA / SCC docket every kind of
+#     federal matter. We filter their results to the rows whose
+#     title / citation mentions an IP right ("patent", "trade-mark",
+#     "trademark", "copyright", "industrial design"). Filtering on
+#     ``title`` is the only signal exposed by the browse endpoint
+#     (``keywords`` ships only in case-metadata, not in the list view);
+#     this is what CanLII's own "IP" topic page does too.
+#
+# Statute coverage extends across all four Canadian IP Acts: Patent Act
+# (P-4), Trademarks Act (T-13), Industrial Design Act (I-9), and the
+# Copyright Act (C-42).
+
+CANLII_IP_TRIBUNALS: tuple[str, ...] = ("tmob-comc", "cab-cab")
+"""Databases whose every decision is IP by construction."""
+
+CANLII_IP_REVIEWING_COURTS: tuple[str, ...] = ("fct", "fca", "csc-scc")
+"""Federal Court, Federal Court of Appeal, Supreme Court of Canada — filtered."""
+
+CANLII_IP_DATABASES: tuple[str, ...] = (
+    *CANLII_IP_TRIBUNALS,
+    *CANLII_IP_REVIEWING_COURTS,
+)
+"""Every CanLII database in scope for IP work (5 total)."""
+
+# Keyword sets per IP right (lowercased; matched as substrings against
+# the case title). EN + FR spellings, the two languages CanLII serves.
+_CANLII_IP_KEYWORDS: dict[str, tuple[str, ...]] = {
+    "patent": ("patent", "brevet"),
+    "trademark": ("trade-mark", "trademark", "trade mark", "marque de commerce"),
+    "copyright": ("copyright", "droit d'auteur", "droit d auteur"),
+    "design": ("industrial design", "dessin industriel"),
+}
+
+# IP-relevant statute identifiers under the federal-statutes database
+# (``cas``). Surfaced via :data:`CANLII_IP_STATUTES` for downstream
+# convenience; the lookup itself routes through ``get_canlii_legislation``.
+CANLII_IP_STATUTES: dict[str, str] = {
+    "patent_act": "rsc-1985-c-p-4",
+    "trademarks_act": "rsc-1985-c-t-13",
+    "industrial_design_act": "rsc-1985-c-i-9",
+    "copyright_act": "rsc-1985-c-c-42",
+}
+
+
+def _matches_ip_rights(title: str | None, rights: tuple[str, ...]) -> bool:
+    """Return True when ``title`` mentions any keyword for the requested rights."""
+    if not title:
+        return False
+    haystack = title.lower()
+    for right in rights:
+        for keyword in _CANLII_IP_KEYWORDS.get(right, ()):
+            if keyword in haystack:
+                return True
+    return False
+
 
 def _canlii_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}``."""
@@ -189,6 +255,40 @@ async def list_canlii_legislation_databases(
     )
 
 
+@conditional_tool(canlii_mcp, requires_env=_CANLII_REQUIRED_ENV, annotations=READ_ONLY)
+async def list_canlii_ip_statutes(
+    language: Annotated[Language, "'en' or 'fr'"] = "en",
+) -> ListEnvelope[dict]:
+    """List the four Canadian IP Acts indexed by CanLII as a ready-to-use catalog.
+
+    Curated entry point for the Canadian IP statute corpus: Patent Act
+    (R.S.C. 1985, c. P-4), Trademarks Act (c. T-13), Industrial Design
+    Act (c. I-9), and Copyright Act (c. C-42). Returns the
+    ``legislation_id`` and ``database_id`` ('cas') each Act maps to so
+    callers can hand them straight to ``get_canlii_legislation`` for
+    point-in-time metadata (start/end dates, repealed flag, parts).
+
+    Related tools: get_canlii_legislation, search_canlii_legislation,
+    list_canlii_legislation_databases.
+    """
+    items = [
+        {
+            "right": right,
+            "legislation_id": legislation_id,
+            "database_id": "cas",
+            "language": language,
+        }
+        for right, legislation_id in CANLII_IP_STATUTES.items()
+    ]
+    return ListEnvelope[dict](
+        summary=(
+            f"Canadian IP statutes catalog ({language}): {', '.join(CANLII_IP_STATUTES.values())}."
+        ),
+        items=items,
+        provenance=_canlii_provenance(f"/v1/legislationBrowse/{language}/cas/"),
+    )
+
+
 # ---------------------------------------------------------------------------
 # Cases
 # ---------------------------------------------------------------------------
@@ -255,6 +355,125 @@ async def search_canlii_cases(
         more_available=len(raw_cases) == result_count,
         next_cursor=None,
         provenance=_canlii_provenance(f"/v1/caseBrowse/{language}/{database_id}/"),
+    )
+
+
+@conditional_tool(canlii_mcp, requires_env=_CANLII_REQUIRED_ENV, annotations=READ_ONLY)
+async def search_canlii_ip_cases(
+    rights: Annotated[
+        list[str] | None,
+        "IP rights to filter by (subset of ['patent', 'trademark', "
+        "'copyright', 'design']). Defaults to all four. Keywords are "
+        "matched as substrings against each case title (EN + FR).",
+    ] = None,
+    databases: Annotated[
+        list[str] | None,
+        "CanLII database codes to query. Defaults to the canonical "
+        "Canadian IP layer: ['tmob-comc', 'cab-cab', 'fct', 'fca', "
+        "'csc-scc']. The two tribunals (TMOB, PAB) are IP by "
+        "construction; the three general courts are post-filtered.",
+    ] = None,
+    result_count: Annotated[
+        int,
+        "Per-database page size (1-10000). Each database contributes "
+        "up to this many candidate rows before the IP filter is "
+        "applied; expect a smaller post-filter total for FC / FCA / "
+        "SCC.",
+    ] = 100,
+    language: Annotated[Language, "'en' or 'fr'"] = "en",
+    decision_date_after: Annotated[
+        str | None,
+        "ISO date YYYY-MM-DD — only return decisions handed down on/after this date.",
+    ] = None,
+    decision_date_before: Annotated[str | None, "ISO date YYYY-MM-DD"] = None,
+) -> ListEnvelope[dict]:
+    """Search Canadian IP cases across CanLII's IP-relevant courts and tribunals.
+
+    Convenience wrapper around ``search_canlii_cases`` that runs the
+    canonical Canadian IP slice in one call: Trade-marks Opposition
+    Board (TMOB), Commissioner of Patents Appeal Board (PAB), Federal
+    Court (FC), Federal Court of Appeal (FCA), Supreme Court of Canada
+    (SCC). Tribunal databases return every hit; reviewing-court
+    databases are filtered to titles mentioning a requested IP right
+    (patent / trademark / copyright / industrial design, EN + FR).
+    Each hit is a lean stub with an added ``rights`` tag listing the
+    rights the title matched. Pass any hit's ``case_id`` +
+    ``database_id`` to ``get_canlii_case`` for full metadata.
+
+    Related tools: search_canlii_cases, get_canlii_case,
+    list_canlii_case_databases, get_canlii_cited_cases.
+    """
+    rights_tuple: tuple[str, ...] = tuple(rights) if rights else tuple(_CANLII_IP_KEYWORDS.keys())
+    invalid = [r for r in rights_tuple if r not in _CANLII_IP_KEYWORDS]
+    if invalid:
+        raise ValidationError(
+            f"unknown IP right(s): {invalid}. Allowed: {sorted(_CANLII_IP_KEYWORDS)}"
+        )
+
+    db_tuple: tuple[str, ...] = tuple(databases) if databases else CANLII_IP_DATABASES
+
+    if result_count <= 0 or result_count > 10_000:
+        raise ValidationError("result_count must be between 1 and 10000")
+
+    semaphore = asyncio.Semaphore(_CANLII_FANOUT_CONCURRENCY)
+
+    async def _fetch_db(client: CanLIIClient, db_id: str) -> list[dict]:
+        async with semaphore:
+            params = BrowseCasesInput(
+                database_id=db_id,
+                result_count=result_count,
+                language=language,
+                decision_date_after=decision_date_after,
+                decision_date_before=decision_date_before,
+            )
+            response = await client.browse_cases(**params.model_dump())
+            dumped = _dump(response)
+            raw_rows = list(dumped.get("cases") or [])
+
+        # Pure-IP tribunal databases pass every row through; reviewing
+        # courts are post-filtered against the IP keyword set.
+        is_tribunal = db_id in CANLII_IP_TRIBUNALS
+        out: list[dict] = []
+        for row in raw_rows:
+            stub = _stub_case_ref(row)
+            matched: list[str] = []
+            if is_tribunal:
+                # Tribunal databases carry all four rights by docket; tag
+                # the dominant right when the title is distinctive, else
+                # tag with the tribunal's intrinsic scope.
+                tribunal_default = "trademark" if db_id == "tmob-comc" else "patent"
+                matched = [r for r in rights_tuple if _matches_ip_rights(stub.get("title"), (r,))]
+                if not matched:
+                    matched = [tribunal_default] if tribunal_default in rights_tuple else []
+                # When the caller didn't request the tribunal's scope, skip.
+                if not matched:
+                    continue
+            else:
+                matched = [r for r in rights_tuple if _matches_ip_rights(stub.get("title"), (r,))]
+                if not matched:
+                    continue
+            stub_with_rights = dict(stub)
+            stub_with_rights["rights"] = matched
+            out.append(stub_with_rights)
+        return out
+
+    async with CanLIIClient() as client:
+        per_db = await asyncio.gather(*[_fetch_db(client, db) for db in db_tuple])
+
+    items: list[dict] = []
+    for rows in per_db:
+        items.extend(rows)
+
+    summary = (
+        f"CanLII IP cases ({language}) across "
+        f"{len(db_tuple)} database{'s' if len(db_tuple) != 1 else ''} "
+        f"({', '.join(db_tuple)}): {len(items)} hit{'s' if len(items) != 1 else ''} "
+        f"matching rights {list(rights_tuple)}."
+    )
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_canlii_provenance(f"/v1/caseBrowse/{language}/"),
     )
 
 
