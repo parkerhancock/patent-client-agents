@@ -87,6 +87,12 @@ src/
                             #   (SSO mirror; corpus built once via build script)
     ipos_manuals/           # IPOS Singapore manuals — PEG / TM / Designs work manuals
                             #   (ipos.gov.sg PDFs; corpus built once via build script)
+    inpi_br_bulk/           # INPI Brazil RPI weekly XML bulk catalog
+                            #   (dados.gov.br, no auth, Decreto 8.777/2016)
+    inpi_br_statutes/       # INPI Brazil LPI (Lei 9.279/1996) corpus
+                            #   — unified IP statute (patents + TM + designs
+                            #   + GIs + trade-secrets/unfair-competition);
+                            #   bundles PT (authoritative) + EN (WIPO Lex)
     cpc/                    # CPC classification lookups (via EPO OPS)
     mpep/                   # Manual of Patent Examining Procedure search
     skills/ip_research/     # Skill content packaged with the wheel; downstream

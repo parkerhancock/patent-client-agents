@@ -66,6 +66,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - **Manifest entries** in `coverage/sources.yaml`: `SG/IPOS/Statutes`
   and `SG/IPOS/Manuals` (both `category: substantive_law`,
   `transport: mcp_local`, `last_verified: 2026-05-16`).
+- **INPI Brazil connector — first cut.** Adds Brazilian coverage to
+  both the registered-IP catalog (RPI weekly bulk) and the substantive-
+  law shelf (LPI). Two packages ship in this PR:
+  - `patent_client_agents.inpi_br_bulk` — `InpiBrBulkClient` for the
+    *Revista da Propriedade Industrial* (RPI) weekly feed on
+    `dados.gov.br` (no auth; Decreto 8.777/2016 open license). Catalog
+    + download surface (Shape E); per-section RPI XML ingestion is
+    deferred to a follow-up.
+  - `patent_client_agents.inpi_br_statutes` — `InpiBrStatutesClient`
+    for the LPI (Lei 9.279/1996), Brazil's unified IP statute. Each
+    Article carries both authoritative Portuguese (Planalto) and
+    English (WIPO Lex translation) text, indexed in SQLite/FTS5 so
+    queries in either language hit the same rows. Citation forms
+    handled: `Art. 6`, `Article 6`, `Artigo 6`, `Art. 195 LPI`,
+    `Art. 195(XI) LPI`, slug `art195`, and full Planalto URLs.
+- **MCP tools (4 new, all envelope-shaped per
+  CONNECTOR_STANDARDS.md §5.9):**
+  - `list_inpi_br_bulk_releases`, `download_inpi_br_bulk` —
+    `mcp/tools/inpi_br_bulk.py` (Shape E — catalog + download URL).
+  - `search_inpi_br_statutes`, `get_inpi_br_section` —
+    `mcp/tools/inpi_br_statutes.py` (substantive-law category;
+    Provenance carries `corpus_synced_at` + `corpus_version`).
+- **Corpus builder.**
+  `patent-client-agents-build-inpi-br-statutes-corpus` pulls the LPI
+  PT consolidation from Planalto (and the optional WIPO Lex EN
+  translation) and lands a SQLite/FTS5 snapshot at
+  `~/.cache/patent_client_agents/inpi_br_statutes.db`. Locator env var
+  is `INPI_BR_STATUTES_CORPUS_PATH`.
+- **Manifest entries** in `coverage/sources.yaml`:
+  - `BR/INPI/RPI` (`registered_ip`, `mcp_proxy`, `bulk_download`,
+    `last_verified: 2026-05-16`).
+  - `BR/LPI/Statute` (`substantive_law`, `mcp_local`,
+    `mcp_passthrough`, `update_strategy: scheduled_recrawl`,
+    `update_cadence: irregular`).
+
+### Notes (INPI Brazil)
+
+- The RPI surface ships intentionally minimal — `list_inpi_br_bulk_releases`
+  + `download_inpi_br_bulk` only — per CONNECTOR_STANDARDS.md §7.2
+  Shape E. Full per-section RPI XML ingestion (eight sections, INID
+  + INPI-dispatch-code decoders, schema-versioned record models) is
+  deferred to a follow-up so this PR ships independently.
+- The `dados.gov.br` portal migrated to a SPA in 2024 and gates the new
+  public-search API behind `Authorization`. The legacy CKAN
+  `package_show` action remains the most stable read-path; if the
+  portal retires that route, `InpiBrBulkClient.get_dataset` is the
+  single swap point.
+- Pre-2017 RPI is PDF-only (no XML); the catalog lists every issue
+  from 2017-01-31 forward.
+- The LPI sub-paragraph addressing (e.g. `Art. 195(XI)` resolving to
+  the specific paragraph row) is rolled up to the parent Article in
+  v1; sub-section addressing is a v2 follow-up.
 
 ### Fixed
 
