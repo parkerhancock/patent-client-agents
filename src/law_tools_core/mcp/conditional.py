@@ -2,8 +2,9 @@
 
 Helpers for registering MCP tools and download fetchers only when the
 required environment variables are present. Used to suppress
-credentialed connectors (e.g. JPO) on deployments that don't carry the
-keys, without forking the codebase or building per-deployment sub-servers.
+credentialed connectors (e.g. JPO, TIPO) on deployments that don't carry
+the keys, without forking the codebase or building per-deployment
+sub-servers.
 
 Both helpers are evaluated at module-import time. Env-var changes after
 process startup will NOT retroactively register or unregister tools —
@@ -29,6 +30,19 @@ Typical usage::
         "application/zip",
         requires_env=["JPO_API_USERNAME", "JPO_API_PASSWORD"],
     )
+
+TIPO (Taiwan) follows the same pattern with a single ``TIPO_API_KEY``
+env var::
+
+    @conditional_tool(
+        tipo_opdata_mcp,
+        requires_env=["TIPO_API_KEY"],
+        annotations=READ_ONLY,
+    )
+    async def search_tipo_patents(...) -> ListEnvelope[dict]:
+        ...
+
+Tool modules live at ``patent_client_agents.mcp.tools.tipo_opdata``.
 """
 
 from __future__ import annotations
