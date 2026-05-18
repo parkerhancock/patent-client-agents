@@ -31,17 +31,17 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-05-18  # TIPO/KIPO/INPI France merged to main — connector_status: shipped
+last_updated: 2026-05-18  # Priority-2 synopsis batch (BR/SG/IL/RU) + DPMA BYOK unlock
 
 stats:
   total_entities: 43
-  synopses_filled: 17
-  connectors_shipped: 15     # +3: TW/TIPO, KR/KIPO, FR/INPI
-  connectors_in_progress: 3  # BR/INPI, SG/IPOS, IL/ILPO — stale worktrees from 2026-05 fan-out, needs reconciliation
+  synopses_filled: 21        # +4: BR/INPI, SG/IPOS, IL/ILPO, RU/Rospatent
+  connectors_shipped: 15
+  connectors_in_progress: 0  # Stale BR/SG/IL worktrees reconciled — see synopsis §5 each
   connectors_spec_ready: 0
-  connectors_planned: 0
-  connectors_blocked: 7      # DPMA, UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
-  next_unblocked_synopses: 22
+  connectors_planned: 1      # DE/DPMA — BYOK unlock confirmed 2026-05-18
+  connectors_blocked: 7      # UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
+  next_unblocked_synopses: 17
 
 entities:
 
@@ -382,14 +382,24 @@ entities:
     synopsis: national/de-dpma.md
     detail_survey: connectors/dpma.md
     connector_spec: null
-    rating: red_contract
-    rating_basis: Contract §3.2 prohibits proxy use; statutes shipped separately
-    connector_status: skipped
+    rating: yellow_byok
+    rating_basis: DPMAconnectPlus REST permits per-user self-hosted access — EUR 200 one-time Datenempfänger contract, fixed-IP Basic-auth credentials, no German residency required, EU-SCC auto-attached for non-EU recipients (§8). Prior red_contract reading misread §3.2 — the clause prohibits rebroadcasting data records (zero-infra proxy is barred), NOT self-hosted BYOK by the contracting party. Synopsis update + BACKLOG entry queued 2026-05-18. Statutes corpus already shipped separately.
+    connector_status: planned
     manifest_ids: [DE/DPMA/Statutes]
-    next_action: monitor_register_modernization
+    next_action: spec_writing
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: DE patents available via EPO OPS; TMs/designs are gaps with no proxyable path
+    last_verified: 2026-05-18
+    notes: |
+      BYOK rating unlock confirmed by contract-text agent
+      2026-05-18 (memo at waves/2026-05-18-priority-2-synopses/
+      dpma-byok-rating.md). Current contract:
+      standardvertrag_dpmaconnectplus.pdf (Stand 01.04.2020) — the
+      synopsis's older citation of dpmaconnectplusvertragsbedingungen.pdf
+      404s and needs to be corrected. DPMAregister UI + DEPATISnet
+      remain 🔴 (5,000-hit/day per-IP cap, UI-shaped, no per-user
+      creds to gate on). Connector should follow the JPO/KIPO/INPI
+      France pattern: env-gate MCP tools on DPMA_CONNECTPLUS_USERNAME
+      + DPMA_CONNECTPLUS_PASSWORD; not exposed by hosted demo.
 
   - id: GB/UKIPO
     name: UKIPO United Kingdom
@@ -502,51 +512,77 @@ entities:
     layer: national
     iso2: BR
     rights: [patent, trademark, design]
-    synopsis: null
+    synopsis: national/br-inpi.md
     detail_survey: connectors/inpi_brazil.md
     connector_spec: null
-    rating: yellow_paid
-    rating_basis: RPI weekly XML bulk + dados.gov.br annual; live register has no API
-    connector_status: in_progress
+    rating: red_no_api
+    rating_basis: Live register has no public REST (pePI is HTML+CAPTCHA+ToS-hostile); RPI weekly XML + dados.gov.br annual are bulk-only (violates zero-infra-proxy constraint). Coverage via EPO OPS + Google Patents.
+    connector_status: skipped
     manifest_ids: []
-    next_action: write_synopsis
+    next_action: backlog_lpi_statute_corpus
     blocked_by: []
-    last_verified: 2026-05  # older survey
-    notes: INPI Brazil RPI bulk on worktree from 2026-05 fan-out (not yet integrated)
+    last_verified: 2026-05-18
+    notes: |
+      Synopsis 2026-05-18 confirms register is no-API for our proxy
+      constraint. The 2026-05 inpi_br_bulk worktree predates the
+      connector-standards sweep and bakes in the indexing posture
+      we've since ruled off-spec — CLOSE OUT. Salvage the
+      inpi_br_statutes half (LPI 9.279/1996 PT + WIPO Lex EN) as a
+      separate BR/LPI/Statute BACKLOG entry under the static-law
+      module pattern. Swagger UI at meu.inpi.gov.br/pag/swagger/
+      documents the e-INPI filer portal, not register reads — only
+      live signal of a future public read API.
 
   - id: SG/IPOS
     name: IPOS Singapore
     layer: national
     iso2: SG
     rights: [patent, trademark, design]
-    synopsis: null
+    synopsis: national/sg-ipos.md
     detail_survey: connectors/ipos_singapore.md
     connector_spec: null
     rating: red_no_api
-    rating_basis: IP2SG transactional APIs CorpPass-gated to SG entities; data.gov.sg shallow
-    connector_status: in_progress
+    rating_basis: IP2SG transactional APIs Singpass/CorpPass-gated to SG-resident entities (filing-side only); data.gov.sg collection 281 biblio-only with patents frozen Aug 2018→Oct 2020; Digital Hub is ASP.NET __VIEWSTATE HTML. INPADOC + Madrid + Hague cover the cross-border slice.
+    connector_status: skipped
     manifest_ids: []
-    next_action: write_synopsis
+    next_action: backlog_sg_statute_corpus
     blocked_by: []
-    last_verified: 2026-05  # older survey
-    notes: IPOS Singapore statutes + manuals on worktree from 2026-05 fan-out (not yet integrated)
+    last_verified: 2026-05-18
+    notes: |
+      Synopsis 2026-05-18 locks in register closure. Statutes-side
+      is separately 🟢 green — REVIVE the 2026-05 IPOS statutes
+      worktree as a separate static-law corpus under the
+      DPMA/Légifrance/IPO India/Taiwan Trade Secrets pattern.
+      Primary sources stable (SSO Act slugs + IPOS PDF tree).
+      Closing this loses real SG filings / prosecution / SICC
+      capability for no engineering saving. Proposed manifest
+      split: SG/IPOS/Statute (planned) + SG/IPOS/Register (none).
 
   - id: IL/ILPO
     name: ILPO Israel
     layer: national
     iso2: IL
     rights: [patent, trademark, design]
-    synopsis: null
+    synopsis: national/il-ilpo.md
     detail_survey: connectors/israel_pto.md
     connector_spec: null
     rating: red_no_api
-    rating_basis: Register portal Angular SPA + reCAPTCHA; data.gov.il weekly TM CKAN feed only
-    connector_status: in_progress
+    rating_basis: israelpatents.justice.gov.il is an Angular SPA fronted by CSRF + reCAPTCHA + Glassbox session capture (explicit anti-automation perimeter); TM and Design portals are ASP.NET WebForms with no API; data.gov.il TM CKAN feed is bulk-shaped.
+    connector_status: skipped
     manifest_ids: []
-    next_action: write_synopsis
+    next_action: backlog_il_statute_corpus
     blocked_by: []
-    last_verified: 2026-05  # older survey
-    notes: ILPO statutes + TM bulk catalog on worktree from 2026-05 fan-out
+    last_verified: 2026-05-18
+    notes: |
+      Synopsis 2026-05-18 confirms register closure. Statutes-side
+      is separately 🟢 green — REVIVE the 2026-05 ILPO statutes
+      worktree as a separate IL/ILPO/Statute corpus. Eight statutes
+      sit on WIPO Lex with authoritative ILPO English translations
+      (Patents Law 5727-1967, Patents Regs 5728-1968, TM Ordinance
+      5732-1972, Designs Law 5777-2017, Commercial Torts Law
+      5759-1999 [standalone trade-secrets statute], PBR Law,
+      Copyright Act 5768-2007, Appellations of Origin 5725-1965).
+      Same shape as DPMA/Légifrance/IPO India/Taiwan Trade Secrets.
 
   - id: TW/TIPO
     name: TIPO Taiwan
@@ -576,17 +612,26 @@ entities:
     layer: national
     iso2: RU
     rights: [patent, trademark, design]
-    synopsis: null
+    synopsis: national/ru-rospatent.md
     detail_survey: connectors/rospatent.md
     connector_spec: null
     rating: red_blocked
-    rating_basis: Politics + economics (Decree 299 zeros foreign-patentee compensation); statutes only
+    rating_basis: Politics + economics — Decree 299/2022 zeros foreign-patentee compensation; Decree 430; USPTO termination (2022); EU 18th sanctions package (19 Jul 2025) extended No-Russia clauses to IP/know-how/trade secrets; EPO suspension. WIPO has NOT suspended Russia (PCT/Madrid/Hague still routing).
     connector_status: skipped
     manifest_ids: []
-    next_action: write_synopsis
+    next_action: backlog_ru_civilcode_part4
     blocked_by: []
-    last_verified: 2026-05  # older survey
-    notes: ru_statutes Civil Code Part 4 worth shipping as substantive law
+    last_verified: 2026-05-18
+    notes: |
+      Synopsis 2026-05-18 locks in register closure permanently.
+      Coverage transitively via EPO INPADOC + WIPO Madrid/Hague.
+      Recommend RU/CivilCode/Part4 static-law corpus as separate
+      BACKLOG entry — WIPO Lex 22547 (Civil Code Parts One–Four,
+      consolidated through 2024 amendments) — one master statute
+      (326 articles / 9 chapters) replaces 7–8 separate RU statute
+      mirrors, never queries a Russian server at runtime.
+      searchplatform.rospatent.gov.ru/trademarks launched 22 Jan
+      2024 — UI improvement, no API.
 
   - id: MX/IMPI
     name: IMPI Mexico

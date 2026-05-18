@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T20:01:29+00:00",
+  "generated_at": "2026-05-18T20:29:40+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 46,
@@ -7,17 +7,15 @@
       "red_tos": 5,
       "green": 9,
       "tbd": 18,
-      "red_no_api": 9,
-      "yellow_byok": 2,
-      "red_contract": 1,
-      "yellow_paid": 1,
+      "red_no_api": 10,
+      "yellow_byok": 3,
       "red_blocked": 1
     },
     "by_connector_status": {
-      "skipped": 14,
+      "skipped": 16,
       "shipped": 11,
       "none": 18,
-      "in_progress": 3
+      "planned": 1
     },
     "by_region": {
       "multilateral": 6,
@@ -33,7 +31,7 @@
       "regional": 7,
       "national": 33
     },
-    "synopses_filled": 17
+    "synopses_filled": 21
   },
   "entities": [
     {
@@ -818,12 +816,12 @@
         "trademark",
         "design"
       ],
-      "rating": "red_contract",
-      "rating_emoji": "\ud83d\udd34",
-      "rating_label": "Red \u2014 Contract",
-      "rating_basis": "Contract \u00a73.2 prohibits proxy use; statutes shipped separately",
-      "connector_status": "skipped",
-      "last_verified": "2026-05-16",
+      "rating": "yellow_byok",
+      "rating_emoji": "\ud83d\udfe1",
+      "rating_label": "Yellow \u2014 BYOK",
+      "rating_basis": "DPMAconnectPlus REST permits per-user self-hosted access \u2014 EUR 200 one-time Datenempf\u00e4nger contract, fixed-IP Basic-auth credentials, no German residency required, EU-SCC auto-attached for non-EU recipients (\u00a78). Prior red_contract reading misread \u00a73.2 \u2014 the clause prohibits rebroadcasting data records (zero-infra proxy is barred), NOT self-hosted BYOK by the contracting party. Synopsis update + BACKLOG entry queued 2026-05-18. Statutes corpus already shipped separately.",
+      "connector_status": "planned",
+      "last_verified": "2026-05-18",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/de-dpma/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/de-dpma.md",
       "shipped_sources": [
@@ -1111,14 +1109,14 @@
         "trademark",
         "design"
       ],
-      "rating": "yellow_paid",
-      "rating_emoji": "\ud83d\udfe1",
-      "rating_label": "Yellow \u2014 Paid",
-      "rating_basis": "RPI weekly XML bulk + dados.gov.br annual; live register has no API",
-      "connector_status": "in_progress",
-      "last_verified": "2026-05",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "rating": "red_no_api",
+      "rating_emoji": "\ud83d\udd34",
+      "rating_label": "Red \u2014 No API",
+      "rating_basis": "Live register has no public REST (pePI is HTML+CAPTCHA+ToS-hostile); RPI weekly XML + dados.gov.br annual are bulk-only (violates zero-infra-proxy constraint). Coverage via EPO OPS + Google Patents.",
+      "connector_status": "skipped",
+      "last_verified": "2026-05-18",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/br-inpi/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/br-inpi.md",
       "shipped_sources": []
     },
     {
@@ -1135,11 +1133,11 @@
       "rating": "red_no_api",
       "rating_emoji": "\ud83d\udd34",
       "rating_label": "Red \u2014 No API",
-      "rating_basis": "IP2SG transactional APIs CorpPass-gated to SG entities; data.gov.sg shallow",
-      "connector_status": "in_progress",
-      "last_verified": "2026-05",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "rating_basis": "IP2SG transactional APIs Singpass/CorpPass-gated to SG-resident entities (filing-side only); data.gov.sg collection 281 biblio-only with patents frozen Aug 2018\u2192Oct 2020; Digital Hub is ASP.NET __VIEWSTATE HTML. INPADOC + Madrid + Hague cover the cross-border slice.",
+      "connector_status": "skipped",
+      "last_verified": "2026-05-18",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/sg-ipos/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/sg-ipos.md",
       "shipped_sources": []
     },
     {
@@ -1156,11 +1154,11 @@
       "rating": "red_no_api",
       "rating_emoji": "\ud83d\udd34",
       "rating_label": "Red \u2014 No API",
-      "rating_basis": "Register portal Angular SPA + reCAPTCHA; data.gov.il weekly TM CKAN feed only",
-      "connector_status": "in_progress",
-      "last_verified": "2026-05",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "rating_basis": "israelpatents.justice.gov.il is an Angular SPA fronted by CSRF + reCAPTCHA + Glassbox session capture (explicit anti-automation perimeter); TM and Design portals are ASP.NET WebForms with no API; data.gov.il TM CKAN feed is bulk-shaped.",
+      "connector_status": "skipped",
+      "last_verified": "2026-05-18",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/il-ilpo/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/il-ilpo.md",
       "shipped_sources": []
     },
     {
@@ -1264,11 +1262,11 @@
       "rating": "red_blocked",
       "rating_emoji": "\ud83d\udd34",
       "rating_label": "Red \u2014 Blocked",
-      "rating_basis": "Politics + economics (Decree 299 zeros foreign-patentee compensation); statutes only",
+      "rating_basis": "Politics + economics \u2014 Decree 299/2022 zeros foreign-patentee compensation; Decree 430; USPTO termination (2022); EU 18th sanctions package (19 Jul 2025) extended No-Russia clauses to IP/know-how/trade secrets; EPO suspension. WIPO has NOT suspended Russia (PCT/Madrid/Hague still routing).",
       "connector_status": "skipped",
-      "last_verified": "2026-05",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "last_verified": "2026-05-18",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/ru-rospatent/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/ru-rospatent.md",
       "shipped_sources": []
     },
     {
