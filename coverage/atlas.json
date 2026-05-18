@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T20:29:40+00:00",
+  "generated_at": "2026-05-18T20:53:00+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 46,
@@ -31,7 +31,7 @@
       "regional": 7,
       "national": 33
     },
-    "synopses_filled": 21
+    "synopses_filled": 24
   },
   "entities": [
     {
@@ -109,11 +109,11 @@
       "rating": "green",
       "rating_emoji": "\ud83d\udfe2",
       "rating_label": "Green",
-      "rating_basis": "Free polite scrape; substantive-law backbone",
+      "rating_basis": "Free polite scrape; substantive-law backbone (~50k statutes/treaties/decisions across ~200 jurisdictions). Only WIPO public database not ToS-blocked.",
       "connector_status": "shipped",
-      "last_verified": "2026-05-16",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "last_verified": "2026-05-18",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/multilateral/wipo-lex/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/multilateral/wipo-lex.md",
       "shipped_sources": [
         {
           "id": "WO/WIPO/Lex",
@@ -315,11 +315,11 @@
       "rating": "green",
       "rating_emoji": "\ud83d\udfe2",
       "rating_label": "Green",
-      "rating_basis": "OAuth2 public API; PDF decisions; opt-out registry; UPCA + RoP corpus",
+      "rating_basis": "Decisions feed (Drupal Views HTML harvester) + UPCA/RoP statute corpus both shipped \ud83d\udfe2. CMS Public Read API v5.3 (the opt-out registry path) is \ud83d\udd34 \u2014 TLS-blocked at handshake for unenrolled clients; enrollment only via Athena contact form.",
       "connector_status": "shipped",
-      "last_verified": "2026-05-16",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "last_verified": "2026-05-18",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/regional/upc/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/regional/upc.md",
       "shipped_sources": [
         {
           "id": "UPC/UPC/Statutes",
@@ -646,11 +646,11 @@
       "rating": "green",
       "rating_emoji": "\ud83d\udfe2",
       "rating_label": "Green",
-      "rating_basis": "Free; copyright public records API",
+      "rating_basis": "Free anonymous Public Records System (PRS) REST API at api.publicrecords.copyright.gov. US is unusual among Berne jurisdictions in operating a copyright register at all \u2014 registration is constitutive of statutory damages + attorneys' fees (17 USC \u00a7\u00a7411, 412, 504, 505).",
       "connector_status": "shipped",
-      "last_verified": "2026-05-16",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "last_verified": "2026-05-18",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/us-usco/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/us-usco.md",
       "shipped_sources": [
         {
           "id": "US/USCO/Registrations",

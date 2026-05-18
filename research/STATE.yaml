@@ -31,15 +31,15 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-05-18  # Priority-2 synopsis batch (BR/SG/IL/RU) + DPMA BYOK unlock
+last_updated: 2026-05-18  # Priority-1 synopses (USCO, UPC, WIPO Lex) — shipped connectors now documented
 
 stats:
   total_entities: 43
-  synopses_filled: 21        # +4: BR/INPI, SG/IPOS, IL/ILPO, RU/Rospatent
+  synopses_filled: 24        # +3: US/USCO, UPC/UPC, WO/WIPO/Lex
   connectors_shipped: 15
-  connectors_in_progress: 0  # Stale BR/SG/IL worktrees reconciled — see synopsis §5 each
+  connectors_in_progress: 0
   connectors_spec_ready: 0
-  connectors_planned: 1      # DE/DPMA — BYOK unlock confirmed 2026-05-18
+  connectors_planned: 1      # DE/DPMA
   connectors_blocked: 7      # UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
   next_unblocked_synopses: 17
 
@@ -105,17 +105,23 @@ entities:
     layer: multilateral
     iso2: n/a
     rights: [patent, utility_model, trademark, design, copyright, gi, trade_secret]
-    synopsis: null
+    synopsis: multilateral/wipo-lex.md
     detail_survey: connectors/wipo_lex_api_discovery.md
     connector_spec: null
     rating: green
-    rating_basis: Free polite scrape; substantive-law backbone
+    rating_basis: Free polite scrape; substantive-law backbone (~50k statutes/treaties/decisions across ~200 jurisdictions). Only WIPO public database not ToS-blocked.
     connector_status: shipped
     manifest_ids: [WO/WIPO/Lex]
-    next_action: write_synopsis
+    next_action: monitor
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: ~50k statutes/treaties/decisions across ~200 jurisdictions; already in catalog
+    last_verified: 2026-05-18
+    notes: |
+      Synopsis 2026-05-18. Connector parses server-rendered HTML —
+      pins on URL-shape regex (/wipolex/{lang}/legislation/details/{ID})
+      + OpenGraph meta tags. Multi-value query params use repeated
+      keys, not comma-joined. Result pages render some hits twice
+      (mobile + desktop blocks) — dedup on legislation_id. Treaties
+      + judgments share URL/HTML shape; parser clones are queued.
 
   - id: WO/WIPO/GlobalBrandDB
     name: WIPO Global Brand Database
@@ -194,17 +200,26 @@ entities:
     layer: regional
     iso2: n/a
     rights: [patent]
-    synopsis: null
+    synopsis: regional/upc.md
     detail_survey: connectors/upc.md
     connector_spec: null
     rating: green
-    rating_basis: OAuth2 public API; PDF decisions; opt-out registry; UPCA + RoP corpus
+    rating_basis: Decisions feed (Drupal Views HTML harvester) + UPCA/RoP statute corpus both shipped 🟢. CMS Public Read API v5.3 (the opt-out registry path) is 🔴 — TLS-blocked at handshake for unenrolled clients; enrollment only via Athena contact form.
     connector_status: shipped
     manifest_ids: [UPC/UPC/Statutes, UPC/UPC/Decisions]
-    next_action: write_synopsis
+    next_action: monitor_cms_enrollment
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: ~17 EU states for unitary patents; opt-out registry is highest-leverage UPC asset
+    last_verified: 2026-05-18
+    notes: |
+      Synopsis 2026-05-18. Decisions-feed listing rows are
+      structurally complete (case_id, court, type_of_action,
+      parties, PDF URL) — harvester never follows Cloudflare-gated
+      /en/node/<id> detail page. PDF/A binaries stream directly.
+      ?page=0 triggers Drupal Views empty-template render; omit
+      page param for first page. Opt-out registry is the
+      highest-leverage UPC asset once CMS enrollment unblocks.
+      Unitary Patent register is separately reachable via epo_ops
+      (UP register lives at the EPO, not the UPC).
 
   - id: RU/EAPO
     name: Eurasian Patent Office
@@ -300,17 +315,24 @@ entities:
     layer: national
     iso2: US
     rights: [copyright]
-    synopsis: null
+    synopsis: national/us-usco.md
     detail_survey: null
     connector_spec: null
     rating: green
-    rating_basis: Free; copyright public records API
+    rating_basis: Free anonymous Public Records System (PRS) REST API at api.publicrecords.copyright.gov. US is unusual among Berne jurisdictions in operating a copyright register at all — registration is constitutive of statutory damages + attorneys' fees (17 USC §§411, 412, 504, 505).
     connector_status: shipped
     manifest_ids: [US/USCO/Registrations]
-    next_action: write_synopsis
+    next_action: monitor
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: US is unusual in operating a copyright register
+    last_verified: 2026-05-18
+    notes: |
+      Synopsis 2026-05-18. HTTP/2 mandatory — api.publicrecords.copyright.gov
+      rejects HTTP/1.1 with 500. Connector enforces HTTP2: bool =
+      True. Models include _coerce_to_list validator because the API
+      returns scalar strings on rows typed as list[str] (canonical:
+      SR-prefix sound recordings). USCO migrating from legacy COHM
+      to Enterprise Copyright System (ECS) — open question whether
+      ECS will change the public API contract.
 
   - id: JP/JPO
     name: Japan Patent Office
