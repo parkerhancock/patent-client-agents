@@ -2,8 +2,9 @@
 
 Helpers for registering MCP tools and download fetchers only when the
 required environment variables are present. Used to suppress
-credentialed connectors (e.g. JPO) on deployments that don't carry the
-keys, without forking the codebase or building per-deployment sub-servers.
+credentialed connectors (e.g. JPO, KIPO) on deployments that don't
+carry the keys, without forking the codebase or building per-deployment
+sub-servers.
 
 Both helpers are evaluated at module-import time. Env-var changes after
 process startup will NOT retroactively register or unregister tools —
@@ -15,12 +16,23 @@ Typical usage::
 
     from law_tools_core.mcp import conditional_tool, register_source_if_configured
 
+    # JPO — two env vars (OAuth2 password grant).
     @conditional_tool(
         my_mcp,
         requires_env=["JPO_API_USERNAME", "JPO_API_PASSWORD"],
         annotations=READ_ONLY,
     )
     async def get_jpo_progress(application_number: str) -> dict:
+        ...
+
+    # KIPO KIPRIS Plus — one env var (per-user serviceKey, ToS §11 BYOK).
+    # Registered in patent_client_agents.mcp.tools.kipo_kipris.
+    @conditional_tool(
+        my_mcp,
+        requires_env=["KIPO_KIPRIS_API_KEY"],
+        annotations=READ_ONLY,
+    )
+    async def search_kipo_patents(query: str) -> ListEnvelope[dict]:
         ...
 
     register_source_if_configured(
