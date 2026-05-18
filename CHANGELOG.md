@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- `patent_client_agents.kipo_kipris`: KIPO Korea KIPRIS Plus connector
+  (9 MCP tools, env-gated on `KIPO_KIPRIS_API_KEY`; 3 manifest rows
+  `KR/KIPO/{Patents,Trademarks,Designs}`). BYOK per ToS §11 (no
+  shared-key proxy permitted). v1 ships with synthesized XML
+  fixtures; live cassettes pending serviceKey acquisition (KIPRIS
+  Plus signup currently blocked behind Korean phone / i-PIN
+  verification — see `research/specs/kr-kipo-connector-spec.md` §6
+  for status).
+
 - **IPO India statutes + MPPP connector — first cut.** Brings the
   Indian IP statutes and the IPO India examination manual into the
   substantive-law catalog. Two packages ship in this PR, both

@@ -324,8 +324,7 @@ class TrademarkRow(_KiprisRowBase):
         default=None,
         alias="bigDrawing",
         description=(
-            "URL to the high-resolution mark image hosted on KIPRIS "
-            "(empty for word-only marks)"
+            "URL to the high-resolution mark image hosted on KIPRIS (empty for word-only marks)"
         ),
     )
 
@@ -342,8 +341,7 @@ class TrademarkRow(_KiprisRowBase):
         default=None,
         alias="viennaCode",
         description=(
-            "Vienna figurative-element classification code(s) — "
-            "may be semicolon-delimited"
+            "Vienna figurative-element classification code(s) — may be semicolon-delimited"
         ),
     )
 
@@ -447,10 +445,7 @@ class DesignRow(_KiprisRowBase):
     loc_code: str | None = Field(
         default=None,
         alias="locCode",
-        description=(
-            "Locarno design classification code(s) — may be "
-            "semicolon-delimited"
-        ),
+        description=("Locarno design classification code(s) — may be semicolon-delimited"),
     )
 
     # --- Parties -------------------------------------------------------

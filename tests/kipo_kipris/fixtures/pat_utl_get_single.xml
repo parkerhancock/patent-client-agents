@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <header>
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <applicationNumber>1020230012345</applicationNumber>
+        <applicationDate>20230105</applicationDate>
+        <publicationNumber>1024567890000</publicationNumber>
+        <publicationDate>20240310</publicationDate>
+        <openNumber>1020230112345</openNumber>
+        <openDate>20230715</openDate>
+        <registerNumber>1024567890000</registerNumber>
+        <registerDate>20240310</registerDate>
+        <registerStatus>등록</registerStatus>
+        <inventionTitle>리튬 이온 배터리 모듈</inventionTitle>
+        <inventionTitleEnglish>Lithium Ion Battery Module</inventionTitleEnglish>
+        <astrtCont>본 발명은 리튬 이온 배터리 모듈에 관한 것으로...</astrtCont>
+        <applicantName>삼성전자주식회사</applicantName>
+        <inventorName>홍길동;김철수</inventorName>
+        <agentName>특허법인 명륜</agentName>
+        <ipcNumber>H01M 10/0525</ipcNumber>
+      </item>
+    </items>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>1</totalCount>
+  </body>
+</response>

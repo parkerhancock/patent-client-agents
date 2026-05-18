@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <header>
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <applicationNumber>1020230012345</applicationNumber>
+        <applicationDate>20230105</applicationDate>
+        <publicationNumber>1024567890000</publicationNumber>
+        <publicationDate>20240310</publicationDate>
+        <openNumber>1020230112345</openNumber>
+        <openDate>20230715</openDate>
+        <registerNumber>1024567890000</registerNumber>
+        <registerDate>20240310</registerDate>
+        <registerStatus>등록</registerStatus>
+        <inventionTitle>리튬 이온 배터리 모듈</inventionTitle>
+        <inventionTitleEnglish>Lithium Ion Battery Module</inventionTitleEnglish>
+        <astrtCont>본 발명은 리튬 이온 배터리 모듈에 관한 것으로...</astrtCont>
+        <applicantName>삼성전자주식회사</applicantName>
+        <inventorName>홍길동;김철수</inventorName>
+        <agentName>특허법인 명륜</agentName>
+        <ipcNumber>H01M 10/0525;H01M 50/204</ipcNumber>
+      </item>
+      <item>
+        <applicationNumber>1020230098765</applicationNumber>
+        <applicationDate>20230820</applicationDate>
+        <publicationNumber></publicationNumber>
+        <publicationDate></publicationDate>
+        <openNumber>1020240056789</openNumber>
+        <openDate>20240501</openDate>
+        <registerNumber></registerNumber>
+        <registerDate></registerDate>
+        <registerStatus>공개</registerStatus>
+        <inventionTitle>고체 전해질 제조 방법</inventionTitle>
+        <inventionTitleEnglish>Method for Manufacturing Solid Electrolyte</inventionTitleEnglish>
+        <astrtCont>본 발명은 고체 전해질 제조 방법에 관한 것이다.</astrtCont>
+        <applicantName>LG에너지솔루션</applicantName>
+        <inventorName>이영희</inventorName>
+        <agentName></agentName>
+        <ipcNumber>H01M 10/0562</ipcNumber>
+      </item>
+    </items>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>2</totalCount>
+  </body>
+</response>

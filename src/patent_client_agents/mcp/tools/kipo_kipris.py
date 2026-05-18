@@ -84,13 +84,9 @@ def _lean_patent(row: PatentUtilityRow) -> dict[str, Any]:
     """Lean projection of a patent/UM row (drops ``astrt_cont``)."""
     return {
         "application_number": row.application_number,
-        "application_date": row.application_date.isoformat()
-        if row.application_date
-        else None,
+        "application_date": row.application_date.isoformat() if row.application_date else None,
         "publication_number": row.publication_number,
-        "publication_date": row.publication_date.isoformat()
-        if row.publication_date
-        else None,
+        "publication_date": row.publication_date.isoformat() if row.publication_date else None,
         "register_number": row.register_number,
         "register_status": row.register_status,
         "invention_title": row.invention_title,
@@ -105,13 +101,9 @@ def _lean_trademark(row: TrademarkRow) -> dict[str, Any]:
     """Lean projection of a trademark row."""
     return {
         "application_number": row.application_number,
-        "application_date": row.application_date.isoformat()
-        if row.application_date
-        else None,
+        "application_date": row.application_date.isoformat() if row.application_date else None,
         "registration_number": row.registration_number,
-        "registration_date": row.registration_date.isoformat()
-        if row.registration_date
-        else None,
+        "registration_date": row.registration_date.isoformat() if row.registration_date else None,
         "title": row.title,
         "classification_code": row.classification_code,
         "vienna_code": row.vienna_code,
@@ -124,13 +116,9 @@ def _lean_design(row: DesignRow) -> dict[str, Any]:
     """Lean projection of a design row (always keeps ``drawing`` image URL)."""
     return {
         "application_number": row.application_number,
-        "application_date": row.application_date.isoformat()
-        if row.application_date
-        else None,
+        "application_date": row.application_date.isoformat() if row.application_date else None,
         "registration_number": row.registration_number,
-        "registration_date": row.registration_date.isoformat()
-        if row.registration_date
-        else None,
+        "registration_date": row.registration_date.isoformat() if row.registration_date else None,
         "register_status": row.register_status,
         "article_name": row.article_name,
         "loc_code": row.loc_code,
@@ -190,24 +178,20 @@ async def search_kipo_patents(
     """
     patent = right_type in ("patent", "both")
     utility = right_type in ("utility_model", "both")
-    items, pagination = await (
-        __import__(
-            "patent_client_agents.kipo_kipris.api", fromlist=["search_kipo_patents"]
-        ).search_kipo_patents(
-            query=query,
-            patent=patent,
-            utility=utility,
-            num_of_rows=num_of_rows,
-            page_no=page_no,
-        )
+    items, pagination = await __import__(
+        "patent_client_agents.kipo_kipris.api", fromlist=["search_kipo_patents"]
+    ).search_kipo_patents(
+        query=query,
+        patent=patent,
+        utility=utility,
+        num_of_rows=num_of_rows,
+        page_no=page_no,
     )
     rows = _validate_raw_items(items, PatentUtilityRow)
     out = [_dump(r) for r in rows] if full else [_lean_patent(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
-    summary_total = (
-        f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
-    )
+    summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
     more = bool(isinstance(total, int) and (page_no * num_of_rows) < total)
     return ListEnvelope[dict](
         summary=f"KIPO patents/UM — `{query}`: {summary_total}.",
@@ -223,27 +207,15 @@ async def search_kipo_patents_advanced(
     invention_title: Annotated[
         str | None, "Match against invention title (Korean or English)."
     ] = None,
-    astrt_cont: Annotated[
-        str | None, "Match against abstract content."
-    ] = None,
-    claim_scope: Annotated[
-        str | None, "Match against claim text."
-    ] = None,
-    applicant: Annotated[
-        str | None, "Match against applicant name (Korean or romanized)."
-    ] = None,
-    inventor: Annotated[
-        str | None, "Match against inventor name."
-    ] = None,
-    ipc: Annotated[
-        str | None, "IPC classification code (e.g. 'G06F')."
-    ] = None,
+    astrt_cont: Annotated[str | None, "Match against abstract content."] = None,
+    claim_scope: Annotated[str | None, "Match against claim text."] = None,
+    applicant: Annotated[str | None, "Match against applicant name (Korean or romanized)."] = None,
+    inventor: Annotated[str | None, "Match against inventor name."] = None,
+    ipc: Annotated[str | None, "IPC classification code (e.g. 'G06F')."] = None,
     application_date: Annotated[
         str | None, "Filing date filter (YYYYMMDD or YYYYMMDD~YYYYMMDD range)."
     ] = None,
-    publication_date: Annotated[
-        str | None, "Publication date filter (YYYYMMDD or range)."
-    ] = None,
+    publication_date: Annotated[str | None, "Publication date filter (YYYYMMDD or range)."] = None,
     right_type: Annotated[
         str,
         "One of 'patent', 'utility_model', 'both' (default).",
@@ -289,9 +261,7 @@ async def search_kipo_patents_advanced(
     out = [_dump(r) for r in rows] if full else [_lean_patent(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
-    summary_total = (
-        f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
-    )
+    summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
     more = bool(isinstance(total, int) and (page_no * num_of_rows) < total)
     return ListEnvelope[dict](
         summary=f"KIPO advanced patent/UM search: {summary_total}.",
@@ -327,14 +297,10 @@ async def get_kipo_patent(
     depth, or utility models.
     """
     numbers = (
-        [application_number]
-        if isinstance(application_number, str)
-        else list(application_number)
+        [application_number] if isinstance(application_number, str) else list(application_number)
     )
     if not numbers:
-        raise ValidationError(
-            "get_kipo_patent requires at least one application_number"
-        )
+        raise ValidationError("get_kipo_patent requires at least one application_number")
     if len(numbers) > LIST_ACCEPT_CAP:
         raise ValidationError(
             f"get_kipo_patent capped at {LIST_ACCEPT_CAP} numbers per call "
@@ -348,10 +314,7 @@ async def get_kipo_patent(
             all_rows.extend(_validate_raw_items(items, PatentUtilityRow))
 
     out = [_dump(r) for r in all_rows] if full else [_lean_patent(r) for r in all_rows]
-    summary = (
-        f"Fetched {len(out)} KIPO patent/UM record(s) for "
-        f"{len(numbers)} number(s)."
-    )
+    summary = f"Fetched {len(out)} KIPO patent/UM record(s) for {len(numbers)} number(s)."
     return ListEnvelope[dict](
         summary=summary,
         items=out,
@@ -375,18 +338,14 @@ async def search_kipo_trademarks(
     ],
     num_of_rows: Annotated[int, "Page size (max 1000)."] = 10,
     page_no: Annotated[int, "1-indexed page number."] = 1,
-    full: Annotated[
-        bool, "When True, return full upstream rows (default lean)."
-    ] = False,
+    full: Annotated[bool, "When True, return full upstream rows (default lean)."] = False,
 ) -> ListEnvelope[dict]:
     """Search KIPO trademarks by free text.
 
     Returns a lean stub per hit by default; pass ``full=True`` for the
     full upstream row including Vienna codes and image URLs.
     """
-    api = __import__(
-        "patent_client_agents.kipo_kipris.api", fromlist=["search_kipo_trademarks"]
-    )
+    api = __import__("patent_client_agents.kipo_kipris.api", fromlist=["search_kipo_trademarks"])
     items, pagination = await api.search_kipo_trademarks(
         query=query, num_of_rows=num_of_rows, page_no=page_no
     )
@@ -394,9 +353,7 @@ async def search_kipo_trademarks(
     out = [_dump(r) for r in rows] if full else [_lean_trademark(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
-    summary_total = (
-        f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
-    )
+    summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
     more = bool(isinstance(total, int) and (page_no * num_of_rows) < total)
     return ListEnvelope[dict](
         summary=f"KIPO trademarks — `{query}`: {summary_total}.",
@@ -411,23 +368,15 @@ async def search_kipo_trademarks(
 async def search_kipo_trademarks_advanced(
     title: Annotated[str | None, "Match against mark text."] = None,
     applicant: Annotated[str | None, "Match against applicant name."] = None,
-    classification: Annotated[
-        str | None, "Nice goods/services class (e.g. '09')."
-    ] = None,
-    vienna_code: Annotated[
-        str | None, "Vienna figurative classification code."
-    ] = None,
-    application_date: Annotated[
-        str | None, "Filing date filter (YYYYMMDD or range)."
-    ] = None,
+    classification: Annotated[str | None, "Nice goods/services class (e.g. '09')."] = None,
+    vienna_code: Annotated[str | None, "Vienna figurative classification code."] = None,
+    application_date: Annotated[str | None, "Filing date filter (YYYYMMDD or range)."] = None,
     registration_date: Annotated[
         str | None, "Registration date filter (YYYYMMDD or range)."
     ] = None,
     num_of_rows: Annotated[int, "Page size (max 1000)."] = 10,
     page_no: Annotated[int, "1-indexed page number."] = 1,
-    full: Annotated[
-        bool, "When True, return full upstream rows (default lean)."
-    ] = False,
+    full: Annotated[bool, "When True, return full upstream rows (default lean)."] = False,
 ) -> ListEnvelope[dict]:
     """Structured-field search over KIPO trademarks.
 
@@ -451,9 +400,7 @@ async def search_kipo_trademarks_advanced(
     out = [_dump(r) for r in rows] if full else [_lean_trademark(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
-    summary_total = (
-        f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
-    )
+    summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
     more = bool(isinstance(total, int) and (page_no * num_of_rows) < total)
     return ListEnvelope[dict](
         summary=f"KIPO advanced trademark search: {summary_total}.",
@@ -472,23 +419,17 @@ async def get_kipo_trademark(
         f"or a list (capped at {LIST_ACCEPT_CAP}). Fan-out is serial — "
         "KIPRIS has no batch endpoint.",
     ],
-    full: Annotated[
-        bool, "When True, return full upstream rows (default lean)."
-    ] = False,
+    full: Annotated[bool, "When True, return full upstream rows (default lean)."] = False,
 ) -> ListEnvelope[dict]:
     """Fetch a single KIPO trademark by application or registration number.
 
     Accepts a single number or a list (capped at 50).
     """
     numbers = (
-        [application_number]
-        if isinstance(application_number, str)
-        else list(application_number)
+        [application_number] if isinstance(application_number, str) else list(application_number)
     )
     if not numbers:
-        raise ValidationError(
-            "get_kipo_trademark requires at least one application_number"
-        )
+        raise ValidationError("get_kipo_trademark requires at least one application_number")
     if len(numbers) > LIST_ACCEPT_CAP:
         raise ValidationError(
             f"get_kipo_trademark capped at {LIST_ACCEPT_CAP} numbers per call "
@@ -502,10 +443,7 @@ async def get_kipo_trademark(
             all_rows.extend(_validate_raw_items(items, TrademarkRow))
 
     out = [_dump(r) for r in all_rows] if full else [_lean_trademark(r) for r in all_rows]
-    summary = (
-        f"Fetched {len(out)} KIPO trademark record(s) for "
-        f"{len(numbers)} number(s)."
-    )
+    summary = f"Fetched {len(out)} KIPO trademark record(s) for {len(numbers)} number(s)."
     return ListEnvelope[dict](
         summary=summary,
         items=out,
@@ -529,18 +467,14 @@ async def search_kipo_designs(
     ],
     num_of_rows: Annotated[int, "Page size (max 1000)."] = 10,
     page_no: Annotated[int, "1-indexed page number."] = 1,
-    full: Annotated[
-        bool, "When True, return full upstream rows (default lean)."
-    ] = False,
+    full: Annotated[bool, "When True, return full upstream rows (default lean)."] = False,
 ) -> ListEnvelope[dict]:
     """Search KIPO designs by free text.
 
     Returns a lean stub per hit by default; pass ``full=True`` for the
     full upstream row. Lean output still keeps the ``drawing`` image URL.
     """
-    api = __import__(
-        "patent_client_agents.kipo_kipris.api", fromlist=["search_kipo_designs"]
-    )
+    api = __import__("patent_client_agents.kipo_kipris.api", fromlist=["search_kipo_designs"])
     items, pagination = await api.search_kipo_designs(
         query=query, num_of_rows=num_of_rows, page_no=page_no
     )
@@ -548,9 +482,7 @@ async def search_kipo_designs(
     out = [_dump(r) for r in rows] if full else [_lean_design(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
-    summary_total = (
-        f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
-    )
+    summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
     more = bool(isinstance(total, int) and (page_no * num_of_rows) < total)
     return ListEnvelope[dict](
         summary=f"KIPO designs — `{query}`: {summary_total}.",
@@ -567,20 +499,14 @@ async def search_kipo_designs_advanced(
         str | None, "Match against article name (the product the design covers)."
     ] = None,
     applicant: Annotated[str | None, "Match against applicant name."] = None,
-    loc_code: Annotated[
-        str | None, "Locarno design classification code."
-    ] = None,
-    application_date: Annotated[
-        str | None, "Filing date filter (YYYYMMDD or range)."
-    ] = None,
+    loc_code: Annotated[str | None, "Locarno design classification code."] = None,
+    application_date: Annotated[str | None, "Filing date filter (YYYYMMDD or range)."] = None,
     registration_date: Annotated[
         str | None, "Registration date filter (YYYYMMDD or range)."
     ] = None,
     num_of_rows: Annotated[int, "Page size (max 1000)."] = 10,
     page_no: Annotated[int, "1-indexed page number."] = 1,
-    full: Annotated[
-        bool, "When True, return full upstream rows (default lean)."
-    ] = False,
+    full: Annotated[bool, "When True, return full upstream rows (default lean)."] = False,
 ) -> ListEnvelope[dict]:
     """Structured-field search over KIPO designs.
 
@@ -603,9 +529,7 @@ async def search_kipo_designs_advanced(
     out = [_dump(r) for r in rows] if full else [_lean_design(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
-    summary_total = (
-        f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
-    )
+    summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
     more = bool(isinstance(total, int) and (page_no * num_of_rows) < total)
     return ListEnvelope[dict](
         summary=f"KIPO advanced design search: {summary_total}.",
@@ -624,9 +548,7 @@ async def get_kipo_design(
         f"or a list (capped at {LIST_ACCEPT_CAP}). Fan-out is serial — "
         "KIPRIS has no batch endpoint.",
     ],
-    full: Annotated[
-        bool, "When True, return full upstream rows (default lean)."
-    ] = False,
+    full: Annotated[bool, "When True, return full upstream rows (default lean)."] = False,
 ) -> ListEnvelope[dict]:
     """Fetch a single KIPO design by application or registration number.
 
@@ -634,14 +556,10 @@ async def get_kipo_design(
     the ``drawing`` image URL field.
     """
     numbers = (
-        [application_number]
-        if isinstance(application_number, str)
-        else list(application_number)
+        [application_number] if isinstance(application_number, str) else list(application_number)
     )
     if not numbers:
-        raise ValidationError(
-            "get_kipo_design requires at least one application_number"
-        )
+        raise ValidationError("get_kipo_design requires at least one application_number")
     if len(numbers) > LIST_ACCEPT_CAP:
         raise ValidationError(
             f"get_kipo_design capped at {LIST_ACCEPT_CAP} numbers per call "
@@ -655,9 +573,7 @@ async def get_kipo_design(
             all_rows.extend(_validate_raw_items(items, DesignRow))
 
     out = [_dump(r) for r in all_rows] if full else [_lean_design(r) for r in all_rows]
-    summary = (
-        f"Fetched {len(out)} KIPO design record(s) for {len(numbers)} number(s)."
-    )
+    summary = f"Fetched {len(out)} KIPO design record(s) for {len(numbers)} number(s)."
     return ListEnvelope[dict](
         summary=summary,
         items=out,

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <header>
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <applicationNumber>3020230012345</applicationNumber>
+        <applicationDate>20230210</applicationDate>
+        <registrationNumber>3000987654</registrationNumber>
+        <registrationDate>20240120</registrationDate>
+        <registerStatus>등록</registerStatus>
+        <articleName>휴대용 전화기</articleName>
+        <drawing>https://www.kipris.or.kr/images/3020230012345_drawing.jpg</drawing>
+        <locCode>14-03</locCode>
+        <applicantName>삼성전자주식회사</applicantName>
+        <inventorName>박디자인</inventorName>
+        <agentName>특허법인 명륜</agentName>
+      </item>
+    </items>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>1</totalCount>
+  </body>
+</response>

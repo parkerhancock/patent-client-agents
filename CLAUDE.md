@@ -47,6 +47,9 @@ src/
     epo_ops/                # EPO Open Patent Services (needs EPO_OPS_API_KEY/SECRET)
     google_patents/         # Scrapes Google Patents (no API key)
     jpo/                    # Japan Patent Office (needs JPO_API_USERNAME/PASSWORD)
+    kipo_kipris/            # KIPO Korea — KIPRIS Plus REST API for patents,
+                            #   utility models, trademarks, designs.
+                            #   BYOK per ToS §11; needs KIPO_KIPRIS_API_KEY.
     ip_australia_common/    # Shared OAuth + host scaffolding for the AU OAuth APIs
     ip_australia_patents/   # IP Australia Patents (needs IPAUSTRALIA_CLIENT_ID/SECRET)
     ip_australia_trademarks/# IP Australia Trade Marks (needs IPAUSTRALIA_CLIENT_ID/SECRET)

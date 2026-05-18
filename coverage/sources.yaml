@@ -855,3 +855,69 @@ sources:
     update_cadence: irregular
     last_synced: 2026-05-16
     corpus_version: "seed v1"
+
+  # ────────────────────────────────────────────────────────────────────
+  # KR — KIPO Korea (KIPRIS Plus REST API)
+  # ────────────────────────────────────────────────────────────────────
+
+  # Note on shape: KIPRIS Plus exposes patents and utility models via a
+  # single ``patUtliInfoSearchService`` (the agent toggles ``patent=Y/N``
+  # + ``utility=Y/N``). The closed-vocabulary ``rights`` field does not
+  # carry ``utility_model`` separately, so we file the combined service
+  # under ``rights: [patent]`` (utility-model scope is documented in
+  # the connector name + CHANGELOG note). Image URLs are surfaced via
+  # ``bibliographic`` row fields rather than a separate data type.
+
+  - id: KR/KIPO/Patents
+    name: KIPO Korea — Patents and Utility Models (KIPRIS Plus)
+    jurisdiction: KR
+    wipo_st3_code: KR
+    issuing_body: Korean Intellectual Property Office (KIPO)
+    rights: [patent]
+    data_types: [bibliographic, classification, legal_status]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [KIPO_KIPRIS_API_KEY]
+    status: active
+    connector:
+      module: patent_client_agents.kipo_kipris
+    last_verified: 2026-05-17
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: KR/KIPO/Trademarks
+    name: KIPO Korea — Trademarks (KIPRIS Plus)
+    jurisdiction: KR
+    wipo_st3_code: KR
+    issuing_body: Korean Intellectual Property Office (KIPO)
+    rights: [trademark]
+    data_types: [bibliographic, classification, legal_status]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [KIPO_KIPRIS_API_KEY]
+    status: active
+    connector:
+      module: patent_client_agents.kipo_kipris
+    last_verified: 2026-05-17
+    category: registered_ip
+    transport: mcp_proxy
+
+  - id: KR/KIPO/Designs
+    name: KIPO Korea — Designs (KIPRIS Plus)
+    jurisdiction: KR
+    wipo_st3_code: KR
+    issuing_body: Korean Intellectual Property Office (KIPO)
+    rights: [design]
+    data_types: [bibliographic, classification, legal_status]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [KIPO_KIPRIS_API_KEY]
+    status: active
+    connector:
+      module: patent_client_agents.kipo_kipris
+    last_verified: 2026-05-17
+    category: registered_ip
+    transport: mcp_proxy

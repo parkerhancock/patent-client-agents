@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <header>
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <applicationNumber>1020230000001</applicationNumber>
+        <applicationDate>20230101</applicationDate>
+        <inventionTitle>Row 1</inventionTitle>
+        <applicantName>Applicant 1</applicantName>
+      </item>
+      <item>
+        <applicationNumber>1020230000002</applicationNumber>
+        <applicationDate>20230102</applicationDate>
+        <inventionTitle>Row 2</inventionTitle>
+        <applicantName>Applicant 2</applicantName>
+      </item>
+    </items>
+    <numOfRows>2</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>3</totalCount>
+  </body>
+</response>

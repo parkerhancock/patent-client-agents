@@ -278,9 +278,7 @@ class KiprisClient(BaseAsyncClient):
         rows_per_page = min(num_of_rows, MAX_NUM_OF_ROWS)
         page_no = 1
         while True:
-            items, _ = await method(
-                num_of_rows=rows_per_page, page_no=page_no, **kwargs
-            )
+            items, _ = await method(num_of_rows=rows_per_page, page_no=page_no, **kwargs)
             for item in items:
                 yield item
             if len(items) < rows_per_page:
@@ -363,9 +361,7 @@ class KiprisClient(BaseAsyncClient):
         )
         return self._parse_kipris_response(xml_bytes)
 
-    async def get_patent(
-        self, number: str, **extra: Any
-    ) -> tuple[list[dict], dict]:
+    async def get_patent(self, number: str, **extra: Any) -> tuple[list[dict], dict]:
         """Fetch a single patent / UM by application or publication number.
 
         KIPRIS has no dedicated by-number fetch endpoint; we use the
@@ -444,9 +440,7 @@ class KiprisClient(BaseAsyncClient):
         )
         return self._parse_kipris_response(xml_bytes)
 
-    async def get_trademark(
-        self, number: str, **extra: Any
-    ) -> tuple[list[dict], dict]:
+    async def get_trademark(self, number: str, **extra: Any) -> tuple[list[dict], dict]:
         """Fetch a single trademark by application or registration number."""
         xml_bytes = await self._get(
             TM,
@@ -514,9 +508,7 @@ class KiprisClient(BaseAsyncClient):
         )
         return self._parse_kipris_response(xml_bytes)
 
-    async def get_design(
-        self, number: str, **extra: Any
-    ) -> tuple[list[dict], dict]:
+    async def get_design(self, number: str, **extra: Any) -> tuple[list[dict], dict]:
         """Fetch a single design by application or registration number."""
         xml_bytes = await self._get(
             DESIGN,

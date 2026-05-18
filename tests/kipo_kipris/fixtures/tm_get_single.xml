@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <header>
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <applicationNumber>4020230123456</applicationNumber>
+        <applicationDate>20230320</applicationDate>
+        <registrationNumber>4000123456</registrationNumber>
+        <registrationDate>20240401</registrationDate>
+        <registrationPublicNumber>4000123456-0000</registrationPublicNumber>
+        <title>GALAXY</title>
+        <bigDrawing>https://www.kipris.or.kr/images/4020230123456_big.gif</bigDrawing>
+        <classificationCode>09;42</classificationCode>
+        <viennaCode>26.04.01</viennaCode>
+        <applicantName>삼성전자주식회사</applicantName>
+        <agentName>특허법인 광장</agentName>
+        <regPrivilegeName>삼성전자주식회사</regPrivilegeName>
+      </item>
+    </items>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>1</totalCount>
+  </body>
+</response>

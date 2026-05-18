@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <header>
+    <successYN>N</successYN>
+    <resultCode>30</resultCode>
+    <resultMsg>SERVICE_KEY_DAILY_QUOTA_EXCEEDED</resultMsg>
+  </header>
+  <body>
+    <items/>
+    <numOfRows>0</numOfRows>
+    <pageNo>0</pageNo>
+    <totalCount>0</totalCount>
+  </body>
+</response>
