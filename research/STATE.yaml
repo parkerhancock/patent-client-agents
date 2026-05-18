@@ -32,15 +32,15 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-05-16  # TIPO 4-chunk build PASS (feature/tipo-opdata-connector @ 30e853f)
+last_updated: 2026-05-17  # KIPO 4-chunk build PASS (feature/kipo-kipris-connector @ 989c825)
 
 stats:
   total_entities: 43
   synopses_filled: 17    # +5 from coverage-batch-2: Madrid, Hague, CNIPA, INPI France, TIPO
   fee_research_filled: 5
   connectors_shipped: 12
-  connectors_in_progress: 1  # TIPO (4 manifest rows; awaiting human integration of feature/tipo-opdata-connector)
-  connectors_spec_ready: 2   # KIPO (yellow BYOK) + INPI France (yellow BYOK)
+  connectors_in_progress: 2  # TIPO (4 rows) + KIPO (3 rows); both awaiting human cherry-pick to main
+  connectors_spec_ready: 1   # INPI France (yellow BYOK; build in flight)
   connectors_planned: 0
   connectors_blocked: 7      # DPMA, UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
   next_unblocked_synopses: 22
@@ -358,12 +358,24 @@ entities:
     connector_spec: specs/kr-kipo-connector-spec.md
     verdict: yellow_byok
     verdict_basis: KIPRIS Plus API real and clean; ToS §11 forbids key sharing → BYOK only
-    connector_status: spec_ready
-    manifest_ids: []
-    next_action: connector_build
+    connector_status: in_progress
+    manifest_ids: [KR/KIPO/Patents, KR/KIPO/Trademarks, KR/KIPO/Designs]
+    next_action: human_integration
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: Top-5 office; biggest single-office gap; mirror JPO BYOK architecture
+    last_verified: 2026-05-17
+    notes: |
+      Connector built on feature/kipo-kipris-connector at SHA 989c825
+      (4-chunk build 2026-05-17; verify_connector VERDICT: PASS, 99.3%
+      coverage, 104 tests). Synthesized XML fixtures only — no live
+      KIPRIS traffic recorded because foreign-developer signup blocks
+      on Korean phone/i-PIN (synopsis §6 open question). When a real
+      serviceKey arrives, extend conftest filter_query_parameters with
+      `serviceKey` and add `--run-live-kipo` flag mirroring JPO.
+      Manifest vocabulary clamp: spec called for `rights: [patent,
+      utility_model]` but build_coverage.py rejects `utility_model` —
+      filed under `[patent]` with note; vocabulary expansion is a
+      CONNECTOR_STANDARDS §6 follow-up. Top-5 office; biggest
+      single-office gap closed.
 
   - id: CN/CNIPA
     name: CNIPA China
