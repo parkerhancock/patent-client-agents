@@ -29,6 +29,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   Plus signup currently blocked behind Korean phone / i-PIN
   verification — see `research/specs/kr-kipo-connector-spec.md` §6
   for status).
+- `patent_client_agents.inpi_pi`: INPI France TM + Design BYOK
+  connector (4 MCP tools, env-gated on `INPI_USERNAME` +
+  `INPI_PASSWORD`; 2 manifest rows FR/INPI/{Trademarks, Designs}).
+  NO patent tools (EPO OPS covers FR patents via INPADOC). v1 ships
+  with synthesized JSON + ST.66/ST.86 XML fixtures; live cassettes
+  pending INPI Data account acquisition.
 - **IPO India statutes + MPPP connector — first cut.** Brings the
   Indian IP statutes and the IPO India examination manual into the
   substantive-law catalog. Two packages ship in this PR, both

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TradeMark>
+  <ApplicationNumber>4216963</ApplicationNumber>
+  <ApplicationDate>20150901</ApplicationDate>
+  <RegistrationNumber>4216963</RegistrationNumber>
+  <RegistrationDate>20160115</RegistrationDate>
+  <ExpiryDate>20260115</ExpiryDate>
+  <PublicationDate>20151015</PublicationDate>
+  <Mark>EXAMPLE</Mark>
+  <MarkImageURI>https://api-gateway.inpi.fr/services/apidiffusion/api/marques/image/4216963/std</MarkImageURI>
+  <KindMark>Individual</KindMark>
+  <ClassNumber>9</ClassNumber>
+  <ClassNumber>42</ClassNumber>
+  <ViennaClass>03.07.17</ViennaClass>
+  <ApplicantName>ACME SAS</ApplicantName>
+  <ApplicantName>ACME Holdings</ApplicantName>
+  <HolderName></HolderName>
+  <RepresentativeName>Cabinet Patent</RepresentativeName>
+  <MarkCurrentStatusCode>registered</MarkCurrentStatusCode>
+</TradeMark>

@@ -1,0 +1,32 @@
+{
+  "total": 2,
+  "hits": [
+    {
+      "DesignApplicationNumber": "FR20140182",
+      "DesignReference": "001",
+      "DesignApplicationDate": "2014-05-20",
+      "RegistrationNumber": "FR20140182",
+      "RegistrationDate": "2014-08-10",
+      "ExpiryDate": "2024-05-20",
+      "PublicationDate": "2014-08-15",
+      "DesignTitle": "Chaise pliante",
+      "DesignRepresentationSheetURIs": [
+        "https://api-gateway.inpi.fr/services/apidiffusion/api/dessins/image/FR20140182/001/001/std",
+        "https://api-gateway.inpi.fr/services/apidiffusion/api/dessins/image/FR20140182/001/002/std"
+      ],
+      "ClassNumber": ["0601"],
+      "ApplicantName": ["Mobilier France"],
+      "DesignerName": ["Jean Designer"],
+      "RepresentativeName": "Cabinet Design",
+      "DesignCurrentStatusCode": "registered"
+    },
+    {
+      "DesignApplicationNumber": "FR20140182",
+      "DesignReference": "002",
+      "DesignTitle": "Tabouret modulaire",
+      "ClassNumber": ["0601"],
+      "ApplicantName": ["Mobilier France"],
+      "DesignCurrentStatusCode": "registered"
+    }
+  ]
+}

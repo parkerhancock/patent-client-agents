@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-18T19:57:44+00:00",
+  "generated_at": "2026-05-18T19:59:44+00:00",
   "schema_version": 1,
   "summary": {
-    "total": 47,
+    "total": 49,
     "by_status": {
-      "active": 47
+      "active": 49
     },
     "active_jurisdictions": [
       "AU",
@@ -244,7 +244,8 @@
       "right": "design",
       "status": "active",
       "sources": [
-        "FR/Legifrance/IP"
+        "FR/Legifrance/IP",
+        "FR/INPI/Designs"
       ]
     },
     {
@@ -268,7 +269,8 @@
       "right": "trademark",
       "status": "active",
       "sources": [
-        "FR/Legifrance/IP"
+        "FR/Legifrance/IP",
+        "FR/INPI/Trademarks"
       ]
     },
     {
@@ -1821,6 +1823,68 @@
       "last_verified": "2026-05-17",
       "category": "registered_ip",
       "transport": "mcp_proxy"
+    },
+    {
+      "id": "FR/INPI/Trademarks",
+      "name": "INPI France \u2014 National Trademarks",
+      "jurisdiction": "FR",
+      "wipo_st3_code": "FR",
+      "issuing_body": "Institut National de la Propri\u00e9t\u00e9 Industrielle (INPI)",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "cookie_token",
+        "auth_env": [
+          "INPI_USERNAME",
+          "INPI_PASSWORD"
+        ]
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.inpi_pi"
+      },
+      "last_verified": "2026-05-17",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "WIPO ST.66 v1.0. BYOK \u2014 production deployers must register a personal data.inpi.fr account. ``cookie_token`` is the closest closed-vocabulary match for INPI's session-bearer + XSRF flow."
+    },
+    {
+      "id": "FR/INPI/Designs",
+      "name": "INPI France \u2014 National Designs",
+      "jurisdiction": "FR",
+      "wipo_st3_code": "FR",
+      "issuing_body": "Institut National de la Propri\u00e9t\u00e9 Industrielle (INPI)",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "cookie_token",
+        "auth_env": [
+          "INPI_USERNAME",
+          "INPI_PASSWORD"
+        ]
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.inpi_pi"
+      },
+      "last_verified": "2026-05-17",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "WIPO ST.86 v1.0. Scope = FR-national only; RCDs covered via EUIPO; Hague international registrations via WIPO Hague. FR patents covered by EPO OPS (INPADOC) \u2014 no FR/INPI/Patents row in this manifest by design."
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-18T19:57:45+00:00",
+  "generated_at": "2026-05-18T19:59:44+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 46,
@@ -901,7 +901,40 @@
       "last_verified": "2026-05-17",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/fr-inpi/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/fr-inpi.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "FR/INPI/Trademarks",
+          "name": "INPI France \u2014 National Trademarks",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "cookie_token",
+          "status": "active",
+          "module": "patent_client_agents.inpi_pi"
+        },
+        {
+          "id": "FR/INPI/Designs",
+          "name": "INPI France \u2014 National Designs",
+          "rights": [
+            "design"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "cookie_token",
+          "status": "active",
+          "module": "patent_client_agents.inpi_pi"
+        }
+      ]
     },
     {
       "id": "CA/CIPO",

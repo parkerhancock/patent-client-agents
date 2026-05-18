@@ -1,0 +1,6 @@
+{
+  "access_token": "test-access-token-rotated-CCC",
+  "refresh_token": "test-refresh-token-BBB",
+  "token_type": "Bearer",
+  "expires_in": 1800
+}

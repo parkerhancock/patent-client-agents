@@ -1,0 +1,29 @@
+{
+  "total": 2,
+  "hits": [
+    {
+      "ApplicationNumber": "4216963",
+      "ApplicationDate": "2015-09-01",
+      "RegistrationNumber": "4216963",
+      "RegistrationDate": "2016-01-15",
+      "Mark": "EXAMPLE",
+      "MarkImageURI": "https://api-gateway.inpi.fr/services/apidiffusion/api/marques/image/4216963/std",
+      "KindMark": "Individual",
+      "ClassNumber": ["9", "42"],
+      "ViennaClass": ["03.07.17"],
+      "ApplicantName": ["ACME SAS", "ACME Holdings"],
+      "HolderName": [],
+      "RepresentativeName": "Cabinet Patent",
+      "MarkCurrentStatusCode": "registered",
+      "ExpiryDate": "2026-01-15"
+    },
+    {
+      "ApplicationNumber": "4216964",
+      "ApplicationDate": "2015-09-02",
+      "Mark": "EXEMPLE",
+      "ClassNumber": ["9"],
+      "ApplicantName": ["Société Bêta"],
+      "MarkCurrentStatusCode": "filed"
+    }
+  ]
+}

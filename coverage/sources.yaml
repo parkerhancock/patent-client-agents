@@ -1001,3 +1001,56 @@ sources:
     last_verified: 2026-05-17
     category: registered_ip
     transport: mcp_proxy
+
+  # ────────────────────────────────────────────────────────────────────
+  # FR — INPI National Trademarks (api-gateway.inpi.fr, BYOK)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: FR/INPI/Trademarks
+    name: INPI France — National Trademarks
+    jurisdiction: FR
+    wipo_st3_code: FR
+    issuing_body: Institut National de la Propriété Industrielle (INPI)
+    rights: [trademark]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: cookie_token
+      auth_env: [INPI_USERNAME, INPI_PASSWORD]
+    status: active
+    connector:
+      module: patent_client_agents.inpi_pi
+    last_verified: 2026-05-17
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      WIPO ST.66 v1.0. BYOK — production deployers must register a
+      personal data.inpi.fr account. ``cookie_token`` is the closest
+      closed-vocabulary match for INPI's session-bearer + XSRF flow.
+
+  # ────────────────────────────────────────────────────────────────────
+  # FR — INPI National Designs (api-gateway.inpi.fr, BYOK)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: FR/INPI/Designs
+    name: INPI France — National Designs
+    jurisdiction: FR
+    wipo_st3_code: FR
+    issuing_body: Institut National de la Propriété Industrielle (INPI)
+    rights: [design]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: cookie_token
+      auth_env: [INPI_USERNAME, INPI_PASSWORD]
+    status: active
+    connector:
+      module: patent_client_agents.inpi_pi
+    last_verified: 2026-05-17
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      WIPO ST.86 v1.0. Scope = FR-national only; RCDs covered via
+      EUIPO; Hague international registrations via WIPO Hague. FR
+      patents covered by EPO OPS (INPADOC) — no FR/INPI/Patents row
+      in this manifest by design.

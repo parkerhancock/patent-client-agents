@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Design>
+  <DesignApplicationNumber>FR20140182</DesignApplicationNumber>
+  <DesignReference>001</DesignReference>
+  <DesignApplicationDate>20140520</DesignApplicationDate>
+  <RegistrationNumber>FR20140182</RegistrationNumber>
+  <RegistrationDate>20140810</RegistrationDate>
+  <ExpiryDate>20240520</ExpiryDate>
+  <PublicationDate>20140815</PublicationDate>
+  <DesignTitle>Chaise pliante</DesignTitle>
+  <DesignRepresentationSheetURIs>https://api-gateway.inpi.fr/services/apidiffusion/api/dessins/image/FR20140182/001/001/std</DesignRepresentationSheetURIs>
+  <DesignRepresentationSheetURIs>https://api-gateway.inpi.fr/services/apidiffusion/api/dessins/image/FR20140182/001/002/std</DesignRepresentationSheetURIs>
+  <ClassNumber>0601</ClassNumber>
+  <ApplicantName>Mobilier France</ApplicantName>
+  <DesignerName>Jean Designer</DesignerName>
+  <RepresentativeName>Cabinet Design</RepresentativeName>
+  <DesignCurrentStatusCode>registered</DesignCurrentStatusCode>
+</Design>
