@@ -5,9 +5,9 @@
 **Issuing body:** Deutsches Patent- und Markenamt (German Patent and Trade Mark Office)
 **Rights administered:** patent, utility_model, trademark, design, copyright (registers; copyright is largely automatic in DE)
 **Working languages:** German (primary); English (partial — some service pages, fee schedules)
-**Connector status:** **skipped for live registers** (contract §3.2 prohibits proxy use); statutes shipped
-**Last verified:** 2026-05-16
-**Manifest entry:** [`coverage/sources.yaml` `DE/DPMA/Statutes`](../../coverage/sources.yaml) (statutes only — `patent_client_agents.dpma_statutes`)
+**Connector status:** **planned (BYOK)** — DPMAconnectPlus REST permits self-hosted access by the contracting party; statutes already shipped
+**Last verified:** 2026-05-18
+**Manifest entry:** [`coverage/sources.yaml` `DE/DPMA/Statutes`](../../coverage/sources.yaml) (statutes only — `patent_client_agents.dpma_statutes`). Live-register manifest rows pending build of `patent_client_agents.dpma_register`.
 
 **Detail surveys:**
 - [`connectors/dpma.md`](../connectors/dpma.md) — 2026-05 detail survey (211 lines; covers DPMAregister UI, DEPATISnet, DPMAconnectPlus REST, backfile, BPatG/BGH case law, gesetze-im-internet)
@@ -29,10 +29,15 @@ European IP work — but the German federal data-access policy treats
 register data as a paid product with strict redistribution terms.
 
 For agents working on German patents, EPO OPS via INPADOC substitutes
-for biblio/family at the regional layer. National-only filings at the
-TM and design level — and German utility models (Gebrauchsmuster), a
-distinctive German right type not in EP — remain DPMA-exclusive but
-are not proxyable under the current contract terms.
+for biblio/family at the regional layer. **National-only filings at
+the TM and design level — and German utility models (Gebrauchsmuster),
+a distinctive German right type not in EP — remain DPMA-exclusive**,
+accessible via the DPMAconnectPlus REST API on a per-user BYOK basis:
+each user signs their own Datenempfänger contract (EUR 200 one-time),
+registers a fixed IP, and runs `patent-client-agents-mcp` locally with
+their own credentials. The hosted demo at `mcp.patentclient.com` does
+not carry DPMA credentials by design — the §3.2 prohibition on
+rebroadcasting data records forecloses zero-infra proxy.
 
 ## §2 What's unique here
 - **German utility models (Gebrauchsmuster, GebrMG)** — a registered right distinct from patents; not covered by EP filings; only path is DPMA.
@@ -48,21 +53,27 @@ are not proxyable under the current contract terms.
 | Field | Value |
 |---|---|
 | Endpoint | `https://dpmaconnect.dpma.de/dpmaws/rest-services/` (separate services per right) |
-| Auth | HTTP Basic (username + password); paper contract required |
+| Auth | HTTP Basic (username + password); signed Datenempfänger contract required (per user) |
 | Format | XML on ST.36 (patents) / ST.66 (TMs) / ST.87 (designs) extension schemas |
-| Cost | One-time access fee + provision costs (see contract page) |
-| Rate limit | No published per-second / per-day numbers; contract §2.13 disclaims uninterrupted access |
-| ToS posture | **§3.2 explicitly prohibits passing data to third parties** — proxy-as-a-service is barred |
-| Verdict (zero-infra proxy) | 🔴 **Red** — clean technical surface, but contract terms preclude our model |
-| Primary sources | [DPMAconnectPlus overview (EN)](https://www.dpma.de/english/search/data_supply_services/dpmaconnect/index.html) · [Interface spec (DE PDF)](https://www.dpma.de/docs/recherche/dienste/schnittstellenbeschreibungdpmaconnectplus.pdf) · [Standard contract terms (DE PDF)](https://www.dpma.de/docs/recherche/dienste/dpmaconnectplusvertragsbedingungen.pdf) |
+| Cost | EUR 200 one-time connection fee (§4.2); per-record retrieval free; optional Frontfile/backfile packages priced separately |
+| Rate limit | 1,000 hits per search query for production accounts; 100 for test accounts; §2.2 lets DPMA cap volume if a user impairs availability |
+| ToS posture | §3.2 forbids **rebroadcasting the data records** to third parties (with carve-out for purpose §3.1(b)); §2.1 requires a registered, non-dynamic IP — exactly the self-host shape. **Per-user BYOK is permitted; zero-infra proxy is not.** |
+| Rating (BYOK) | 🟢 **Green for self-hosted per-user access** — same shape as JPO / KIPO / TIPO / INPI France |
+| Rating (zero-infra proxy) | 🔴 Red — §3.2 redistribution prohibition forecloses this |
+| Primary sources | [DPMAconnectPlus overview (DE)](https://www.dpma.de/recherche/datenabgabe/dpmaconnect/index.html) · [Interface spec (DE PDF)](https://www.dpma.de/docs/recherche/dienste/schnittstellenbeschreibungdpmaconnectplus.pdf) · [Standardvertrag DPMAconnectPlus, Stand 01.04.2020 (DE PDF)](https://www.dpma.de/docs/recherche/dienste/standardvertrag_dpmaconnectplus.pdf) |
 
 The API is technically attractive — structured `Expertenrecherche` query
 syntax (Boolean + 50+ INID-coded fields like `INH=` (proprietor),
-`AT=` (application), `IC=` (IPC class), `WAKZ=` (PCT family)), production-grade
-XSDs — but every blocker is on the legal side: §3.2 of the standard
-contract bars third-party redistribution; §2.1 requires a registered,
-non-dynamic IP (fights cloud egress); 1,000-hit-per-query cap with no
-documented pagination; signed paper contract by Munich postal mail.
+`AT=` (application), `IC=` (IPC class), `WAKZ=` (PCT family)),
+production-grade XSDs. The legal posture is more permissive than the
+older synopsis claimed: §3.2 prohibits **rebroadcasting the data
+records** (zero-infra proxy ruled out), not self-hosted operation by
+the contracting party. §2.1's fixed-IP requirement is in fact the
+self-host shape — no shared cloud egress IP unless pre-registered.
+Foreign signup is permitted (Anlage 1 accepts any country; §8 ships
+EU Standard Contractual Clauses for non-EU/EEA Datenempfänger).
+See [`waves/2026-05-18-priority-2-synopses/dpma-byok-rating.md`](../waves/2026-05-18-priority-2-synopses/dpma-byok-rating.md)
+for the contract re-read.
 
 ### DPMAregister web UI
 
@@ -112,26 +123,30 @@ contract) has its own separate access fee.
 - [`patent_client_agents.dpma_statutes`](../../src/patent_client_agents/dpma_statutes/) — bundled SQLite/FTS5 corpus of the six core German IP Acts (PatG, MarkenG, GebrMG, DesignG, UrhG, GeschGehG); manifest entry `DE/DPMA/Statutes`.
 - DE patent biblio + family via [`patent_client_agents.epo_ops`](../regional/epo.md) (transitive).
 
+### What we CAN add as BYOK (queued)
+
+- **`patent_client_agents.dpma_register`** — DPMAconnectPlus REST connector following the JPO / KIPO / TIPO / INPI France pattern. Env-gates MCP tools on `DPMA_CONNECTPLUS_USERNAME` + `DPMA_CONNECTPLUS_PASSWORD`; not exposed by the hosted demo. Three services × ~10 functions for patents, utility models, trademarks, and designs. Estimated ~3-5 days build per the BYOK rating memo. **Adds the only authoritative path to DE Gebrauchsmuster, national-only DE TMs, and national-only DE designs.** See [BACKLOG entry](../BACKLOG.md) row "DPMA contract re-read" for the queued spec.
+
 ### What we should NOT add (and why)
 
-- **DPMAconnectPlus proxy** — contract §3.2 prohibits passing data to third parties. Even paying the contract fee and signing the paper contract doesn't unlock a proxy model. The "buy access and proxy it" path is foreclosed by the legal terms, not by cost.
-- **DEPATISnet scrape** — brittle, UI-only, and redundant with EPO OPS DE coverage at the biblio/family layer.
-- **DPMAregister live scrape** — same; CAPTCHA-gated and unsupported as a programmatic interface.
+- **DPMA-as-zero-infra-proxy on the hosted demo** — §3.2 prohibits us rebroadcasting the data records to third parties. The hosted demo at `mcp.patentclient.com` cannot carry DPMAconnectPlus credentials; that's a design boundary, not a build gap.
+- **DEPATISnet scrape** — brittle, UI-only, and redundant with EPO OPS DE coverage at the biblio/family layer. 5,000-hit/day per-IP cap on the UI is explicitly anti-automation.
+- **DPMAregister live scrape** — same; CAPTCHA-gated, same 5,000/day cap, redirects volume users to DPMAconnectPlus.
 
 ### What we *could* add later
 
 - **`dpma_caselaw`** — BPatG decisions via rechtsprechung-im-internet.de XML feed + BGH via the RiI daily feed. Substantive law / case law layer, no register proxy. See [`connectors/dpma.md`](../connectors/dpma.md) §7 for the asset details.
-- **Per-user DPMAconnectPlus access** — if a specific end user has their own signed DPMA contract, a connector could accept their credentials via env and proxy on their behalf. This is the JPO/KIPO BYOK pattern adapted to DPMA. Operationally hostile (paper contract, fixed IP requirement) but legally viable. Low priority pending user demand.
 
 ### Next steps
 
-1. Monitor for DPMAregister modernization — the current platform predates the EPO OPS / EUIPO OAuth surfaces and may eventually get a friendlier replacement. No timeline published.
-2. Watch BPatG case-law coverage as a substantive-law expansion target — that's redistribution-clean and adds real value for DE IP litigation work.
+1. Write `specs/de-dpma-connector-spec.md` for the `dpma_register` connector. Pattern: JPO env-gating + Basic auth + ST.36/66/87 XML parsing.
+2. Decide whether to record live cassettes (requires paying the EUR 200 connection fee + registering a fixed IP) or ship with synthesized fixtures (KIPO / INPI France precedent — live cassettes pending downstream-user credentials).
+3. Watch BPatG case-law coverage as a substantive-law expansion target — redistribution-clean and adds real value for DE IP litigation work.
 
 ## §6 Open questions
 
-- **Does paying the contract fee + signing the standard contract unlock any path other than the §3.2-restricted one?** Primary source says the standard contract is what's offered; bespoke terms would require direct negotiation.
-- **Are there exceptions for academic / research use?** §3.2's language is categorical; no carve-out in the public-facing contract.
+- **Signup operational path.** §3.2 of the standard contract permits BYOK; the open question is *how* to submit it — postal-only ("Präsidentin des DPMA, 80297 München") or signed-PDF email? Test-account workflow vs. production-account workflow? Both undocumented in primary sources read so far.
+- **VAT treatment for non-EU contracting parties.** EUR 200 base fee per §4.2; §8 ships EU-SCC for non-EU/EEA Datenempfänger but doesn't address VAT.
 - **DPMAregister modernization timeline.** No primary source found.
 
 ## §7 References
@@ -147,7 +162,9 @@ Primary sources only.
 - [Legacy DPMAconnect SOAP API spec (DE PDF)](https://www.dpma.de/docs/recherche/dienste/dpmaconnectapibeschreibung.pdf)
 
 **Legal terms:**
-- [Standard contract terms — DPMAconnectPlus (DE PDF)](https://www.dpma.de/docs/recherche/dienste/dpmaconnectplusvertragsbedingungen.pdf) — §3.2 (no third-party data transfer)
+- [Standardvertrag DPMAconnectPlus, Stand 01.04.2020 (DE PDF)](https://www.dpma.de/docs/recherche/dienste/standardvertrag_dpmaconnectplus.pdf) — the actual standard contract; §3.2 prohibits rebroadcasting data records (carve-out for purpose 1(b)). The older URL `dpmaconnectplusvertragsbedingungen.pdf` cited in the 2026-05-16 synopsis returns DPMA's 404 page.
+- [Anlage 1 — Datenpaket-Bestellblatt (DE PDF)](https://www.dpma.de/docs/recherche/dienste/anlage_2_standardvertragdpmaconnectplus.pdf)
+- [Anlage 2 — EU-Standardvertragsklauseln (DE PDF)](https://www.dpma.de/docs/recherche/dienste/anlage_3_standardvertragdpmaconnectplus.pdf)
 
 **Fees:**
 - [DPMA fees (EN)](https://www.dpma.de/english/services/fees/index.html)
@@ -162,3 +179,4 @@ Primary sources only.
 | Date | Change | Source |
 |---|---|---|
 | 2026-05-16 | Initial synopsis. Reconciled the original "Tier 2 paid+contract" framing — the actual blocker is **contract §3.2 (no third-party redistribution)**, not the EUR 200 cost. | [waves/2026-05-16-registered-ip-discovery/dpma-germany.md](../waves/2026-05-16-registered-ip-discovery/dpma-germany.md) |
+| 2026-05-18 | **BYOK unlock.** Contract re-read of the actual `standardvertrag_dpmaconnectplus.pdf` (Stand 01.04.2020) — earlier framing "§3.2 prohibits proxy use" was a misread of a clause that actually prohibits **rebroadcasting the data records**, with an explicit carve-out for purpose §3.1(b). Self-hosted per-user access by the contracting party is permitted; the older URL the synopsis cited (`dpmaconnectplusvertragsbedingungen.pdf`) 404s. Rating updated red_contract → yellow_byok; connector queued. | [waves/2026-05-18-priority-2-synopses/dpma-byok-rating.md](../waves/2026-05-18-priority-2-synopses/dpma-byok-rating.md) |
