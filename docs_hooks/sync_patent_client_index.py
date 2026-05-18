@@ -71,13 +71,28 @@ CONNECTOR_STATUS_BADGES = {
 }
 
 
+# ─── on_pre_build ──────────────────────────────────────────────────────────
+
+
+def on_pre_build(config: dict[str, Any]) -> None:
+    """Write the overview matrix BEFORE mkdocs validates the nav against
+    the docs directory. mkdocs.yml references ``patent-client-index/index.md``
+    as the placeholder for the Patent Client Index tab; if the file
+    doesn't physically exist when nav validation runs, --strict aborts
+    with a warning. CI does a fresh clone where the gitignored
+    generated file doesn't exist yet, so we generate it on every build.
+    """
+    INDEX_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    INDEX_OUTPUT.write_text(_render_overview())
+
+
 # ─── on_files ──────────────────────────────────────────────────────────────
 
 
 def on_files(files: Files, config: dict[str, Any]) -> Files:
-    """Virtual-mount synopses, generate the overview matrix, AND inject
-    the per-layer sub-nav into ``config["nav"]`` so the synopses appear
-    in the Material sidebar (not as orphan pages).
+    """Virtual-mount synopses AND inject the per-layer sub-nav into
+    ``config["nav"]`` so the synopses appear in the Material sidebar
+    (not as orphan pages).
     """
     # 1) Virtual-mount each synopsis (and collect them for the nav build)
     by_layer: dict[str, list[tuple[str, str]]] = {lyr: [] for lyr in LAYERS}
@@ -100,10 +115,6 @@ def on_files(files: Files, config: dict[str, Any]) -> Files:
             f.src_uri = virtual
             files.append(f)
             by_layer[layer].append((_title_from_synopsis(source), virtual))
-
-    # 2) Generate the overview matrix from STATE.yaml
-    INDEX_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    INDEX_OUTPUT.write_text(_render_overview())
 
     # 3) Inject the sub-nav into config["nav"]. The mkdocs.yml entry is
     #    a placeholder (single page); replace it with a section that has
