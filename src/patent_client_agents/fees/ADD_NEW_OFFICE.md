@@ -50,9 +50,43 @@ Outcome → architecture:
 | 403 / 401 with realistic UA                                                                | **Bot-protected** — bump UA + `http2=True` first; if still blocked, escalate to dev-browser stealth | `euipo.py` |
 | 200 OK from one machine but ReadTimeout/ReadError from another with the same minimal UA   | **Bot-protected via TLS/header fingerprint** — needs full `Sec-Fetch-*` set (NOT a network issue — see §7) | `jpo.py` |
 | HTTP 200 returning a PDF                                                                  | **PDF via pypdf** (§4 below)          | `dpma.py`, `ipindia.py` |
+| 200 OK from main fee page but body says "Restricted" / "Conteúdo Restrito" / auth wall    | **Look for an EN-language PDF anchor** on the same site — gov.br/inpi & inpi.fr both publish anonymously-fetchable PDFs even when the canonical HTML landing is auth-gated | `inpi_br.py`, `inpi_fr.py` |
 
 For JS-rendered pages, **always probe for a hidden API before committing
 to browser rendering** — see §2.
+
+### EN-PDF-anchor pattern (national IP offices)
+
+When the canonical fee URL fails (auth-gated, Cloudflare-challenged,
+JS-rendered SPA, 410 Gone, etc.), **before escalating to a stealth
+service or dev-browser, hunt the office's English-language section for
+direct PDF anchors**. Most national IP offices maintain a parallel
+EN-language section that has fewer site-wide CMS restrictions and
+links the same canonical PDF the SPA renders.
+
+Two concrete cases:
+
+* **INPI Brazil (2026-05-19)**. `gov.br/inpi/pt-br/servicos/tabelas-de-retribuicao`
+  is Plone-role-restricted ("Conteúdo Restrito") to anonymous
+  crawlers. But `gov.br/inpi/en/costs-and-payment/schedule-of-fees-{patents,trademarks,software}.pdf`
+  is anonymously accessible. No discovery from the public site was
+  needed — guessable from the URL structure once you know the
+  pattern. See `inpi_br.py`.
+* **INPI France (2026-05-19)**. `legifrance.gouv.fr` 403s with a
+  Cloudflare JS challenge on the Code de la propriété intellectuelle
+  fee article. The inpi.fr Tarifs landing page renders fine but only
+  has ~11 inline `<li>` €-amounts. The full schedule lives in a PDF
+  linked from the SAME landing page via an `<a href>` to
+  `inpi.fr/inpi-block/download-document?id=20516` — anonymous,
+  no Cloudflare, complete schedule. See `inpi_fr.py`.
+
+Probe heuristic: when the canonical URL fails, on the SAME domain,
+look for: (a) `/en/...` or `/en-us/...` path equivalents; (b) anchor
+text containing "schedule of fees", "fee schedule", "tarifs",
+"redevances", or "download"; (c) `<a href>` to `*.pdf`,
+`/download-document`, `/block/...`, or other CDN-style asset paths.
+The next session should pre-flight this probe before assuming an
+office is genuinely unscrapeable.
 
 **Multi-source offices** are common: DPMA's English HTML page only has
 years 3-6 of the annuity schedule and punts to a PDF for years 7-20;

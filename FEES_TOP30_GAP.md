@@ -153,38 +153,121 @@ without compliance review is a different question. Recommended:
 
 ## §4 Realistic ceiling without paid infra
 
-* **Today**: 11 of 30 = 37%.
-* **With dev-browser stealth fixed + 1 week of office-specific work**:
-  estimate 18-20 / 30 = 60-67% (everything except Brazil-auth-gated,
-  sanctions-blocked, and offices whose fees genuinely don't exist
-  online).
+* **Today**: 13 of 30 = 43%.
+* **With the EN-PDF-anchor pattern applied to the unprobed offices**:
+  estimate 18-22 / 30 = 60-73%. The Brazil + France wins this session
+  came from finding a parallel public PDF anchor that bypassed the
+  obvious Cloudflare/auth wall on the canonical URL. The same pattern
+  likely works for IL, ES, IT, SG, MY, HK, TR, ID, VN, TH, PH.
 * **With a stealth HTTP service + ~2 weeks**: 22-25 / 30 = 73-83%.
-* **30 / 30**: requires Brazilian CPF/consular registration + a
-  sanctions waiver. Not feasible as a one-developer push.
+* **30 / 30**: requires sanctions waivers for RU/IR. The other
+  remaining offices should all be reachable via the EN-PDF pattern
+  or a paid official API; pure 30/30 is feasible without exotic infra
+  if we can get a clean probe sweep first.
 
-The honest target is probably **22-24 of 30 ≈ 75% coverage** of
-top-30 by patent filing volume. The remaining 6-8 offices are
-blocked on factors outside our pure-coding control (auth, sanctions,
-recurring infra spend).
+The honest target is **22-25 of 30 ≈ 80% coverage** of top-30 by
+patent filing volume on a one-developer push. Beyond that, RU and
+Iran need sanctions clearance; the rest is "keep probing until we
+find the anonymous EN-PDF route."
 
 ---
 
 ## §5 Recommended next steps (in order of leverage)
 
-1. **Pick the unblock path** (§3.1 stealth service, §3.3 dev-browser
-   fix, or sequential office-by-office without infra). Without
-   picking, every session burns 60+ min on rediscovery.
-2. **Probe the unprobed offices** (IT, ID, VN, TH, PH, NZ, UPRP, HK,
-   MY) in a dedicated 30-min session. Some may turn out to be clean
-   HTML; we won't know until we probe with the right tooling.
-3. **Ship a "low-hanging fruit" batch** of whichever offices come
-   back clean from the probe sweep — Italy, Indonesia, Philippines,
-   New Zealand are the likely winners.
-4. **Defer the hard offices** (BR, FR, IL, ES, IT-statutory) until
-   the unblock-path decision is made.
+**Discovery first, ship second.** The session re-anchored this
+priority after Brazil and France both turned out to be unblockable
+once we found the right URL. The next session should:
+
+1. **Do a 30-min "EN-PDF anchor sweep"** across the remaining
+   unprobed offices: IT, ID, VN, TH, PH, NZ, UPRP, HK, MY, IL, ES,
+   SG, TR. For each: fetch the main fees URL → look for `<a href>`
+   to a downloadable PDF (`.pdf`, `/download-document`, `/block/`,
+   `/wSite/public/Attachment/`, etc.) AND try the `/en/`-prefix
+   equivalent. Even if the canonical URL 403s, a parallel anonymous
+   PDF route is the more-common-than-not outcome.
+2. **Order ship work by ranking × accessibility**:
+   - Singapore (#22) — landing hub works; SSO has the statutory
+     route under stochastic rate-limit. Try the EN-PDF pattern
+     on ipos.gov.sg first.
+   - Italy (#24) — uibm.mise.gov.it not yet probed; statutory
+     ministerial decree route via Normattiva is documented.
+   - Spain (#25) — research note has BOE links; both the
+     procedural fees pages 410'd but BOE is anonymously fetchable.
+   - Israel (#26) — Cloudflare on gov.il; check WIPO Lex copy at
+     `wipo.int/wipolex/en/legislation/details/19117` first.
+   - Mexico (#15) — geo-blocked subdomain; needs non-US IP. Lower
+     priority without stealth service.
+3. **Defer until policy review**: Rospatent + Iran IPI (sanctions);
+   Brazil 2025 Portaria 10 update (waiting on INPI to republish the
+   EN PDF — the scraper currently reflects the 2019 schedule).
 
 Until step 1 is decided, further office-by-office grinding is likely
 to keep producing 0 commits per hour.
+
+### §5.1 Next-session pickup: EN-PDF-anchor probe script
+
+Drop this into the next session as a starting point. It hits the
+landing pages for the 13 unshipped non-sanctioned offices in
+parallel, reports HTTP status + PDF-link count + currency hints,
+and flags any office whose page has a fetchable PDF anchor.
+
+```python
+import asyncio, httpx, re
+from lxml import html as L
+
+OFFICES = {
+    "SG/IPOS-patent":   "https://www.ipos.gov.sg/manage-ip/",
+    "IT/UIBM":          "https://uibm.mise.gov.it/index.php/it/tasse-e-tariffe",
+    "ES/OEPM-patent":   "https://www.oepm.es/es/invenciones/Presentar-una-solicitud/tasas-pagos-y-reintegros/",
+    "IL/ILPO":          "https://www.gov.il/en/departments/ilpo",
+    "MY/MyIPO":         "https://www.myipo.gov.my/en/patent/",
+    "SA/SAIP":          "https://saip.gov.sa/en/",
+    "HK/HKIPD":         "https://www.ipd.gov.hk/en/",
+    "TR/TurkPatent":    "https://www.turkpatent.gov.tr/en/",
+    "ID/DGIP":          "https://www.dgip.go.id/",
+    "VN/IPVN":          "https://ipvietnam.gov.vn/",
+    "TH/DIP":           "https://www.ipthailand.go.th/",
+    "PH/IPOPHL":        "https://www.ipophl.gov.ph/",
+    "NZ/IPONZ":         "https://www.iponz.govt.nz/get-ip/patents/fees/",
+    "PL/UPRP":          "https://uprp.gov.pl/en",
+}
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/126.0 Safari/537.36",
+    "Accept-Language": "en;q=0.9",
+}
+
+async def probe(client, name, url):
+    try:
+        r = await client.get(url, follow_redirects=True)
+        d = L.fromstring(r.text) if r.text else None
+        pdfs = []
+        if d is not None:
+            for a in d.cssselect("a[href]"):
+                href = (a.get("href") or "").lower()
+                text = (a.text_content() or "").strip().lower()
+                if ".pdf" in href or "download-document" in href or "/block/" in href:
+                    if any(t in text for t in ["fee", "tarif", "redevance", "tasa", "ücret", "費", "fees"]) or ".pdf" in href:
+                        pdfs.append((a.text_content().strip()[:50], a.get("href")))
+        # Currency hints
+        currencies = sum(c in r.text for c in ["€", "£", "$", "¥", "₺", "₹", "₪", "₱", "₫", "฿", "₩", "Rp", "RM"])
+        return f"{name:18s} {r.status_code} bytes={len(r.text):>7} pdf-anchors={len(pdfs):>2} curr-hints={currencies:>3}  →  first PDF: {pdfs[0] if pdfs else '-'}"
+    except Exception as e:
+        return f"{name:18s} ERROR {type(e).__name__}: {str(e)[:50]}"
+
+async def main():
+    async with httpx.AsyncClient(timeout=30.0, headers=HEADERS, http2=True) as c:
+        results = await asyncio.gather(*[probe(c, n, u) for n, u in OFFICES.items()])
+        for r in results:
+            print(r)
+
+asyncio.run(main())
+```
+
+Then, for offices with PDF anchors: download, run `pypdf` for a
+sample page, and decide between the IPIN/DPMA/INPI-BR PDF pattern
+(numeric codes + columns) vs the INPI-FR curated-catalog pattern
+(prose with embedded amounts). Most office PDFs are clean column
+tables — favour the IPIN pattern when possible.
 
 ---
 
