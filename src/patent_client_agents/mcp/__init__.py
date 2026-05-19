@@ -28,23 +28,24 @@ from .tools.epo_guidelines import epo_guidelines_mcp
 from .tools.epo_pct_guidelines import epo_pct_guidelines_mcp
 from .tools.epo_up_guidelines import epo_up_guidelines_mcp
 from .tools.euipo import euipo_mcp
+from .tools.fees import fees_mcp
+from .tools.inpi_pi import inpi_pi_mcp
 from .tools.international import international_mcp
 from .tools.ip_australia_bulk import ip_australia_bulk_mcp
 from .tools.ip_australia_designs import ip_australia_designs_mcp
 from .tools.ip_australia_patents import ip_australia_patents_mcp
 from .tools.ip_australia_trademarks import ip_australia_trademarks_mcp
-from .tools.inpi_pi import inpi_pi_mcp
 from .tools.ipo_in_mppp import ipo_in_mppp_mcp
 from .tools.ipo_in_statutes import ipo_in_statutes_mcp
 from .tools.kipo_kipris import kipo_kipris_mcp
 from .tools.mpep import mpep_mcp
-from .tools.tipo_opdata import tipo_opdata_mcp
-from .tools.tw_trade_secrets import tw_trade_secrets_mcp
 from .tools.office_actions import office_actions_mcp
 from .tools.patent_assignments import patent_assignments_mcp
 from .tools.patents import patents_mcp
 from .tools.publications import publications_mcp
+from .tools.tipo_opdata import tipo_opdata_mcp
 from .tools.trademarks import trademarks_mcp
+from .tools.tw_trade_secrets import tw_trade_secrets_mcp
 from .tools.ukipo_mopp import ukipo_mopp_mcp
 from .tools.upc import upc_mcp
 from .tools.usitc import usitc_mcp
@@ -101,5 +102,6 @@ ip_mcp.mount(tipo_opdata_mcp)
 ip_mcp.mount(tw_trade_secrets_mcp)
 ip_mcp.mount(kipo_kipris_mcp)
 ip_mcp.mount(upc_mcp)
+ip_mcp.mount(fees_mcp)
 
 __all__ = ["ip_mcp"]

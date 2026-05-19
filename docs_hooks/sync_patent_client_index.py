@@ -33,7 +33,7 @@ from typing import Any
 
 import yaml
 from mkdocs.structure.files import File, Files
-from mkdocs.structure.nav import Navigation, Section
+from mkdocs.structure.nav import Navigation
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RESEARCH_DIR = REPO_ROOT / "research"
@@ -49,13 +49,33 @@ LAYERS = ("multilateral", "regional", "national")
 # sync until lifted into a shared module.
 RATING_BADGES = {
     "green": ("🟢", "Green", "Live API, queryable, ToS-clean."),
-    "yellow_byok": ("🟡", "Yellow — BYOK", "Live API but per-user keys required (terms of use forbid shared-key proxy)."),
-    "yellow_paid": ("🟡", "Yellow — Paid", "Programmatic access exists but only behind a paid contract or subscription."),
+    "yellow_byok": (
+        "🟡",
+        "Yellow — BYOK",
+        "Live API but per-user keys required (terms of use forbid shared-key proxy).",
+    ),
+    "yellow_paid": (
+        "🟡",
+        "Yellow — Paid",
+        "Programmatic access exists but only behind a paid contract or subscription.",
+    ),
     "red_tos": ("🔴", "Red — ToS", "Terms of use prohibit programmatic / automated access."),
-    "red_no_api": ("🔴", "Red — No API", "No queryable API surface; HTML-only or bulk-dump access."),
+    "red_no_api": (
+        "🔴",
+        "Red — No API",
+        "No queryable API surface; HTML-only or bulk-dump access.",
+    ),
     "red_bulk_only": ("🔴", "Red — Bulk only", "Bulk download exists but no per-query API."),
-    "red_contract": ("🔴", "Red — Contract", "Access requires a paper / wet-signature contract not accessible to indie developers."),
-    "red_blocked": ("🔴", "Red — Blocked", "Access path exists but is currently blocked (egress filter, geofence, etc.)."),
+    "red_contract": (
+        "🔴",
+        "Red — Contract",
+        "Access requires a paper / wet-signature contract not accessible to indie developers.",
+    ),
+    "red_blocked": (
+        "🔴",
+        "Red — Blocked",
+        "Access path exists but is currently blocked (egress filter, geofence, etc.).",
+    ),
     "watch": ("⚪", "Watch", "Monitoring for changes; no decision yet."),
     "tbd": ("⚪", "TBD", "Research pending."),
 }
@@ -129,9 +149,11 @@ def on_files(files: Files, config: dict[str, Any]) -> Files:
                 entries = by_layer.get(layer, [])
                 if not entries:
                     continue
-                section.append({
-                    layer.capitalize(): [{title: path} for title, path in entries],
-                })
+                section.append(
+                    {
+                        layer.capitalize(): [{title: path} for title, path in entries],
+                    }
+                )
             nav[i] = {"Patent Client Index": section}
             break
     config["nav"] = nav
@@ -266,9 +288,7 @@ def _render_overview() -> str:
         rating_code = row.get("rating", "tbd")
         emoji, label, _ = RATING_BADGES.get(rating_code, RATING_BADGES["tbd"])
         rating_cell = f"{emoji} {label}"
-        connector_cell = CONNECTOR_STATUS_BADGES.get(
-            row.get("connector_status", "none"), "—"
-        )
+        connector_cell = CONNECTOR_STATUS_BADGES.get(row.get("connector_status", "none"), "—")
         last_verified = row.get("last_verified", "—")
         lines.append(
             f"| {name_cell} | {iso} | {rights} | {rating_cell} | {connector_cell} | {last_verified} |"
@@ -280,16 +300,12 @@ def _render_overview() -> str:
     lines.append(
         "- **Multilateral** — WIPO systems (PATENTSCOPE, Madrid, Hague, Lex, Global Brand DB, Global Design DB)"
     )
-    lines.append(
-        "- **Regional** — multi-state offices (EPO, EUIPO, UPC, EAPO, ARIPO, OAPI, GCC)"
-    )
+    lines.append("- **Regional** — multi-state offices (EPO, EUIPO, UPC, EAPO, ARIPO, OAPI, GCC)")
     lines.append(
         "- **National** — single-state offices (US, JP, KR, CN, DE, GB, FR, CA, AU, IN, …)"
     )
     lines.append("")
-    lines.append(
-        f"_Source of truth: [`research/STATE.yaml`]({GITHUB_RESEARCH_URL}/STATE.yaml)._"
-    )
+    lines.append(f"_Source of truth: [`research/STATE.yaml`]({GITHUB_RESEARCH_URL}/STATE.yaml)._")
     lines.append("")
     return "\n".join(lines)
 
@@ -337,18 +353,12 @@ def _transform_synopsis(markdown: str, layer: str, entity: dict[str, Any] | None
     # 1) Prepend a rating callout (if we have entity state)
     callout = ""
     if entity:
-        emoji, label, desc = RATING_BADGES.get(
-            entity.get("rating", "tbd"), RATING_BADGES["tbd"]
-        )
+        emoji, label, desc = RATING_BADGES.get(entity.get("rating", "tbd"), RATING_BADGES["tbd"])
         basis = entity.get("rating_basis", "").strip() or desc
         focus = _atlas_focus_token(entity)
-        atlas_link = (
-            f"    [View on the atlas →]({ATLAS_URL}?focus={focus})\n"
-            if focus
-            else ""
-        )
+        atlas_link = f"    [View on the atlas →]({ATLAS_URL}?focus={focus})\n" if focus else ""
         callout = (
-            f'!!! {"success" if emoji == "🟢" else "warning" if emoji == "🟡" else "danger" if emoji == "🔴" else "note"}'
+            f"!!! {'success' if emoji == '🟢' else 'warning' if emoji == '🟡' else 'danger' if emoji == '🔴' else 'note'}"
             f' "Rating: {emoji} {label}"\n'
             f"    {basis}\n"
             f"    [Jump to access details →](#5-access-via-patent-client-agents)\n"
@@ -426,7 +436,7 @@ def _restructure_frontmatter(markdown: str) -> str:
     """
     # Identify the preamble: from line after H1 to first `---` or `## `
     lines = markdown.splitlines()
-    h1_idx = next((i for i, l in enumerate(lines) if l.startswith("# ")), -1)
+    h1_idx = next((i for i, line in enumerate(lines) if line.startswith("# ")), -1)
     if h1_idx == -1:
         return markdown
     end_idx = None
@@ -525,9 +535,7 @@ def _insert_after_header_block(markdown: str, snippet: str) -> str:
 
 def _collapse_change_log(markdown: str) -> str:
     """Replace the §8 change log table with a single 'Last updated <date>' footer."""
-    pattern = re.compile(
-        r"## §8 Change log\s*\n.*?(?=\n## |\Z)", flags=re.DOTALL
-    )
+    pattern = re.compile(r"## §8 Change log\s*\n.*?(?=\n## |\Z)", flags=re.DOTALL)
     match = pattern.search(markdown)
     if not match:
         return markdown
@@ -535,14 +543,12 @@ def _collapse_change_log(markdown: str) -> str:
     dates = re.findall(r"\b(20\d{2}-\d{2}-\d{2})\b", match.group(0))
     latest = max(dates) if dates else ""
     footer = f"---\n\n*Last updated {latest}.*\n" if latest else ""
-    return markdown[: match.start()] + footer + markdown[match.end():]
+    return markdown[: match.start()] + footer + markdown[match.end() :]
 
 
 def _drop_should_not_add(markdown: str) -> str:
     """Strip the '### What we should NOT add' subsection (and its body)."""
-    pattern = re.compile(
-        r"### What we should NOT add\s*\n.*?(?=\n### |\n## |\Z)", flags=re.DOTALL
-    )
+    pattern = re.compile(r"### What we should NOT add\s*\n.*?(?=\n### |\n## |\Z)", flags=re.DOTALL)
     return pattern.sub("", markdown)
 
 
@@ -561,8 +567,7 @@ def _rewrite_research_links(markdown: str, layer: str) -> str:
     rendered into the docs) stay relative so mkdocs handles them.
     """
     co_mounted_by_layer = {
-        lyr: {p.name for p in (RESEARCH_DIR / lyr).glob("*.md")}
-        for lyr in LAYERS
+        lyr: {p.name for p in (RESEARCH_DIR / lyr).glob("*.md")} for lyr in LAYERS
     }
     synopsis_dir_repo_relative = f"research/{layer}"  # repo-root-relative
 
@@ -576,7 +581,7 @@ def _rewrite_research_links(markdown: str, layer: str) -> str:
         for lyr in LAYERS:
             prefix = f"../{lyr}/"
             if target_path.startswith(prefix):
-                rest = target_path[len(prefix):]
+                rest = target_path[len(prefix) :]
                 if rest in co_mounted_by_layer[lyr]:
                     return match.group(0)
                 break
@@ -590,9 +595,7 @@ def _rewrite_research_links(markdown: str, layer: str) -> str:
             return match.group(0)
 
         # Resolve everything else to a repo-root path
-        resolved = posixpath.normpath(
-            posixpath.join(synopsis_dir_repo_relative, target_path)
-        )
+        resolved = posixpath.normpath(posixpath.join(synopsis_dir_repo_relative, target_path))
         if resolved.startswith("../"):
             return match.group(0)  # escapes the repo — leave alone
         url = f"{GITHUB_REPO_URL}/{resolved}"
