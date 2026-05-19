@@ -6,6 +6,7 @@ from decimal import Decimal
 
 from patent_client_agents.fees.scrapers import cipo as cipo_mod
 from patent_client_agents.fees.scrapers import cnipa as cnipa_mod
+from patent_client_agents.fees.scrapers import dpma as dpma_mod
 from patent_client_agents.fees.scrapers import epo as epo_mod
 from patent_client_agents.fees.scrapers import euipo as euipo_mod
 from patent_client_agents.fees.scrapers import uspto as uspto_mod
@@ -204,3 +205,34 @@ class TestCNIPAMoneyAndYearRange:
         m = cnipa_mod._YEAR_RANGE_RE.search("1-3 Years (Each Year)")
         assert m is not None
         assert (int(m.group(1)), int(m.group(2))) == (1, 3)
+
+
+class TestDPMAAmountAndYear:
+    def test_plain_amount(self) -> None:
+        assert dpma_mod._parse_amount("70") == Decimal("70")
+
+    def test_thousands_with_space(self) -> None:
+        # DPMA uses NBSP or regular space as thousands separator: "1 130"
+        assert dpma_mod._parse_amount("1 130") == Decimal("1130")
+        assert dpma_mod._parse_amount("2 030") == Decimal("2030")
+
+    def test_empty(self) -> None:
+        assert dpma_mod._parse_amount("") is None
+
+    def test_year_3(self) -> None:
+        assert dpma_mod._extract_year("for the 3rd year of the patent") == 3
+
+    def test_year_20(self) -> None:
+        assert dpma_mod._extract_year("for the 20th year of the patent") == 20
+
+    def test_year_no_match(self) -> None:
+        assert dpma_mod._extract_year("- surcharge for late payment (section 7)") is None
+
+    def test_patent_code_310s_yes(self) -> None:
+        assert dpma_mod._is_patent_code("311") is True
+        assert dpma_mod._is_patent_code("312") is True
+        assert dpma_mod._is_patent_code("318") is True
+
+    def test_non_patent_code_no(self) -> None:
+        assert dpma_mod._is_patent_code("330") is False  # trademark
+        assert dpma_mod._is_patent_code("340") is False  # design

@@ -1254,3 +1254,29 @@ sources:
       third and fourth anniversaries") which the scraper expands to
       per-year rows. CIPO publishes annually with a January 1 effective
       date; Patent Rules SOR/2019-251 Schedule of Fees.
+
+  - id: DE/DPMA/Fees/Patents
+    name: DPMA Fee Schedule — Patents
+    jurisdiction: DE
+    wipo_st3_code: DE
+    issuing_body: Deutsches Patent- und Markenamt (DPMA)
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: pdf_download
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Scraped from the DPMA cost-info PDF (form A 9510.1) because the
+      English HTML fee page only lists years 3-6 of the annual fee
+      schedule and punts to the PDF for years 7-20. pypdf + regex
+      extraction of the uniform "<6-digit code> <description> ...
+      <amount>" row format. Fee numbers in the 31x range are patents.
+      Statutory basis: PatKostG (Patentkostengesetz).

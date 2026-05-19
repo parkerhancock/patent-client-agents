@@ -12,6 +12,7 @@ from collections.abc import Awaitable, Callable
 from .models import FeeSchedule, RightType
 from .scrapers import cipo as _cipo
 from .scrapers import cnipa as _cnipa
+from .scrapers import dpma as _dpma
 from .scrapers import epo as _epo
 from .scrapers import euipo as _euipo
 from .scrapers import uspto as _uspto
@@ -31,10 +32,11 @@ _DISPATCH: dict[tuple[str, RightType], Scraper] = {
     ("EUIPO", RightType.design): _euipo.scrape_euipo_designs,
     ("CNIPA", RightType.patent): _cnipa.scrape_cnipa_patents,
     ("CIPO", RightType.patent): _cipo.scrape_cipo_patents,
+    ("DPMA", RightType.patent): _dpma.scrape_dpma_patents,
 }
 
 
-OFFICES: tuple[str, ...] = ("USPTO", "EPO", "EUIPO", "CNIPA", "CIPO")
+OFFICES: tuple[str, ...] = ("USPTO", "EPO", "EUIPO", "CNIPA", "CIPO", "DPMA")
 """Office codes covered in v1, in stable order for tool docstrings + listings."""
 
 
