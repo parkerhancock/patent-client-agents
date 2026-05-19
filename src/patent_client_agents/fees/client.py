@@ -91,6 +91,21 @@ _OFFICE_ALIASES: dict[str, tuple[str, str]] = {
     "IPO INDIA": ("IN", "IPIN"),
     "CGPDTM": ("IN", "IPIN"),
     "INDIAN PATENT OFFICE": ("IN", "IPIN"),
+    # WIPO — three systems, right discriminates
+    # (use 'WIPO' as a top-level alias; resolver routes by right)
+    "WIPO": ("WO", "WIPO"),
+    "WO": ("WO", "WIPO"),
+    "INTERNATIONAL BUREAU": ("WO", "WIPO"),
+    "WORLD INTELLECTUAL PROPERTY ORGANIZATION": ("WO", "WIPO"),
+    # Explicit per-system aliases
+    "PCT": ("WO", "WIPO-PCT"),
+    "WIPO-PCT": ("WO", "WIPO-PCT"),
+    "MADRID": ("WO", "WIPO-MADRID"),
+    "WIPO-MADRID": ("WO", "WIPO-MADRID"),
+    "MADRID PROTOCOL": ("WO", "WIPO-MADRID"),
+    "HAGUE": ("WO", "WIPO-HAGUE"),
+    "WIPO-HAGUE": ("WO", "WIPO-HAGUE"),
+    "HAGUE SYSTEM": ("WO", "WIPO-HAGUE"),
 }
 
 
@@ -115,6 +130,18 @@ def resolve_jurisdiction(value: str, right: RightType) -> tuple[str, str]:
         if right in (RightType.trademark, RightType.design):
             return "EP", "EUIPO"
         return "EP", "EPO"
+    # WIPO has three sub-systems discriminated by right:
+    #   PCT (patents) / Madrid (trademarks) / Hague (designs)
+    if key in {"WIPO", "WO", "INTERNATIONAL BUREAU", "WORLD INTELLECTUAL PROPERTY ORGANIZATION"}:
+        if right == RightType.patent:
+            return "WO", "WIPO-PCT"
+        if right == RightType.trademark:
+            return "WO", "WIPO-MADRID"
+        if right == RightType.design:
+            return "WO", "WIPO-HAGUE"
+        raise UnknownJurisdictionError(
+            f"WIPO has no {right.value} schedule (PCT=patent, Madrid=trademark, Hague=design only)."
+        )
     if key not in _OFFICE_ALIASES:
         raise UnknownJurisdictionError(
             f"Unknown jurisdiction or office {value!r}. "

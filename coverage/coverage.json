@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-19T02:57:15+00:00",
+  "generated_at": "2026-05-19T03:11:40+00:00",
   "schema_version": 1,
   "summary": {
-    "total": 64,
+    "total": 67,
     "by_status": {
-      "active": 64
+      "active": 67
     },
     "active_jurisdictions": [
       "AU",
@@ -516,7 +516,8 @@
       "right": "design",
       "status": "active",
       "sources": [
-        "WO/WIPO/Lex"
+        "WO/WIPO/Lex",
+        "WO/WIPO/Fees/Hague"
       ]
     },
     {
@@ -534,7 +535,8 @@
       "sources": [
         "WO/Google/Patents",
         "WO/PCT/Guidelines",
-        "WO/WIPO/Lex"
+        "WO/WIPO/Lex",
+        "WO/WIPO/Fees/PCT"
       ]
     },
     {
@@ -542,7 +544,8 @@
       "right": "trademark",
       "status": "active",
       "sources": [
-        "WO/WIPO/Lex"
+        "WO/WIPO/Lex",
+        "WO/WIPO/Fees/Madrid"
       ]
     }
   ],
@@ -2339,6 +2342,87 @@
       "update_strategy": "live_proxy",
       "update_cadence": "irregular",
       "notes": "Scraped from the canonical Schedule 1 PDF (ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf). pypdf + regex extraction. INR. 4 rate columns: small-applicant + other(s) \u00d7 e-filing + paper. Paper-filing rows flagged via FeeCondition(trigger=paper_filing). All 18 renewal years (3-20) captured cleanly. Main numbered items (filing, exam, etc.) are PDF-structure-sensitive \u2014 a sanity check drops rows where rate columns appear misaligned (paper < e-file is impossible), so non-renewal coverage is partial in v1. PCT- specific fees live in Schedule 5 (separate PDF) and ship as a follow-up. Patents Rules 2003 Schedule 1 (as amended through Patents (Amendment) Rules 2024)."
+    },
+    {
+      "id": "WO/WIPO/Fees/PCT",
+      "name": "WIPO PCT \u2014 Schedule of Fees",
+      "jurisdiction": "WO",
+      "wipo_st3_code": "WO",
+      "issuing_body": "World Intellectual Property Organization (WIPO) \u2014 International Bureau",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-18",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "PCT international fees (international filing, supplementary search handling, handling) paid to the WIPO International Bureau, in CHF. Per-RO transmittal and per-ISA search fees vary by Receiving Office and are documented in the PCT Fee Tables PDF \u2014 not covered in this route. Source: PCT Schedule of Fees annexed to the Regulations under the PCT (wipo.int/en/web/pct-system/texts/rules/rtax)."
+    },
+    {
+      "id": "WO/WIPO/Fees/Madrid",
+      "name": "WIPO Madrid Protocol \u2014 Schedule of Fees",
+      "jurisdiction": "WO",
+      "wipo_st3_code": "WO",
+      "issuing_body": "World Intellectual Property Organization (WIPO) \u2014 International Bureau",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-18",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "Madrid Protocol international trademark fees in CHF: basic application (color/no-color variants), supplementary class fee, complementary designation, subsequent designation, 10-year renewal, irregularity fees. Per-country individual designation fees (set by each Contracting Party) live in a separate 126-row table on wipo.int and are not included in v1. Source: wipo.int/en/web/madrid-system/fees/sched."
+    },
+    {
+      "id": "WO/WIPO/Fees/Hague",
+      "name": "WIPO Hague System \u2014 Schedule of Fees",
+      "jurisdiction": "WO",
+      "wipo_st3_code": "WO",
+      "issuing_body": "World Intellectual Property Organization (WIPO) \u2014 International Bureau",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-18",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "Hague System international design fees in CHF: basic + per- additional-design, publication, standard designation (3 levels), and per-period renewals (periods 1-5 map to years 5/10/15/20/25). Per-country individual designation fees live in a separate ~50- row table on wipo.int. Source: wipo.int/hague/en/fees/sched.html."
     }
   ]
 }
