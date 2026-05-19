@@ -188,8 +188,8 @@ is laid out one module per upstream (`uspto.py`, `epo_ops.py`, `jpo.py`,
 forbidden: it inflates the largest file in the catalog, hides
 jurisdiction-specific helpers from grep, and makes per-office test
 isolation harder. When a file's docstring has to enumerate multiple
-jurisdictions, split it. See [`REFACTOR_PLAN.md`](REFACTOR_PLAN.md)
-Phase 1 for the corrective precedent.
+jurisdictions, split it. Corrective precedent: commit `313593c` split
+the former `international.py` into `epo_ops.py` / `cpc.py` / `jpo.py`.
 
 ### §5.2 Search + fetch baseline
 

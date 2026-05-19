@@ -63,10 +63,18 @@ jobs:
 
       - name: Run type checking
         run: uv run ty check src/
-        # Pre-existing baseline: ~198 diagnostics, concentrated in
-        # law_tools_core/base_client.py (~150) and fees/scrapers/* (~45).
-        # Track via REFACTOR_PLAN.md Phase 4 follow-up. Flip to blocking
-        # once the baseline reaches zero.
+        # Pre-existing baseline (as of 2026-05-19): 198 diagnostics:
+        #   - 150 in src/law_tools_core/base_client.py — all
+        #     `invalid-argument-type` on `__init__`. Likely one or two
+        #     real annotation bugs cascading. Highest leverage; fix this
+        #     file first.
+        #   - ~45 across src/patent_client_agents/fees/scrapers/*.py
+        #     (15 files, same `invalid-argument-type` pattern). Likely
+        #     a shared base-class annotation issue rather than 15
+        #     independent bugs.
+        #   - 3 oddballs: 1 invalid-return-type in fees/scrapers/epo.py,
+        #     2 invalid-declaration for `list[int | None]`.
+        # Flip to blocking (remove `continue-on-error`) when this hits 0.
         continue-on-error: true
 
   test:
