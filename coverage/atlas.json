@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T02:48:27+00:00",
+  "generated_at": "2026-05-19T02:55:16+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 88,
@@ -3091,6 +3091,33 @@
       "update_strategy": "live_proxy",
       "update_cadence": "irregular",
       "notes": "Scrapes IP Australia's timeframes-and-fees page (13 small Action | Fee tables). AUD. Fees revised 2024-10-01 per the four-yearly fee review; PCT-fee equivalents updated 2026-01-01. v1 GAP: annual renewal fees (years 5-20) live in Schedule 7 of the Patents Regulations 1991 and are not on this page \u2014 follow-up scraper needed to pull them from the Federal Register of Legislation."
+    },
+    {
+      "id": "IN/IPIN/Fees/Patents",
+      "name": "IPO India Fee Schedule \u2014 Patents",
+      "jurisdiction": "IN",
+      "wipo_st3_code": "IN",
+      "issuing_body": "Office of the Controller General of Patents, Designs and Trade Marks (CGPDTM)",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "pdf_download",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-18",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "Scraped from the canonical Schedule 1 PDF (ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf). pypdf + regex extraction. INR. 4 rate columns: small-applicant + other(s) \u00d7 e-filing + paper. Paper-filing rows flagged via FeeCondition(trigger=paper_filing). All 18 renewal years (3-20) captured cleanly. Main numbered items (filing, exam, etc.) are PDF-structure-sensitive \u2014 a sanity check drops rows where rate columns appear misaligned (paper < e-file is impossible), so non-renewal coverage is partial in v1. PCT- specific fees live in Schedule 5 (separate PDF) and ship as a follow-up. Patents Rules 2003 Schedule 1 (as amended through Patents (Amendment) Rules 2024)."
     }
   ]
 }

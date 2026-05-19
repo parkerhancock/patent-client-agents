@@ -84,6 +84,13 @@ _OFFICE_ALIASES: dict[str, tuple[str, str]] = {
     "JP": ("JP", "JPO"),
     "JAPAN": ("JP", "JPO"),
     "JAPAN PATENT OFFICE": ("JP", "JPO"),
+    # IPO India
+    "IPIN": ("IN", "IPIN"),
+    "IN": ("IN", "IPIN"),
+    "INDIA": ("IN", "IPIN"),
+    "IPO INDIA": ("IN", "IPIN"),
+    "CGPDTM": ("IN", "IPIN"),
+    "INDIAN PATENT OFFICE": ("IN", "IPIN"),
 }
 
 

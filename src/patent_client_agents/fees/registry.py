@@ -16,6 +16,7 @@ from .scrapers import dpma as _dpma
 from .scrapers import epo as _epo
 from .scrapers import euipo as _euipo
 from .scrapers import ipaustralia as _ipau
+from .scrapers import ipindia as _ipindia
 from .scrapers import jpo as _jpo
 from .scrapers import kipo as _kipo
 from .scrapers import ukipo as _ukipo
@@ -42,6 +43,7 @@ _DISPATCH: dict[tuple[str, RightType], Scraper] = {
     ("UKIPO", RightType.patent): _ukipo.scrape_ukipo_patents,
     ("UKIPO", RightType.trademark): _ukipo.scrape_ukipo_trademarks,
     ("JPO", RightType.patent): _jpo.scrape_jpo_patents,
+    ("IPIN", RightType.patent): _ipindia.scrape_ipindia_patents,
 }
 
 
@@ -56,6 +58,7 @@ OFFICES: tuple[str, ...] = (
     "IPAU",
     "UKIPO",
     "JPO",
+    "IPIN",
 )
 """Office codes covered in v1, in stable order for tool docstrings + listings."""
 
