@@ -1858,3 +1858,82 @@ sources:
       invalidation. Source PDF at gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf.
       Up-to-60% discount applies per Resolution 251/2019 §I.5. Same
       scraper-pattern as the patent route.
+
+  - id: FR/INPI/Fees/Patent
+    name: INPI France — Fees (Patent)
+    jurisdiction: FR
+    wipo_st3_code: FR
+    issuing_body: Institut National de la Propriété Industrielle (INPI)
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-19
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      INPI France patent + utility-certificate + SPC fees in EUR.
+      Source is the "Tarifs des procédures applicables au 27 avril
+      2026" PDF linked from inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi
+      and fetched via the inpi-block/download-document?id=20516
+      endpoint (anonymously accessible). Curated catalog of 14 patent
+      entries (filing, search, claims-over-10 surcharge, grant,
+      opposition, SPC) plus per-year annuity rows extracted for years
+      2-20 + SPC annual fee at year=21. The reduced rate applies to
+      natural persons, non-profit research/education organisations,
+      and companies <1000 employees with <25% non-qualifying capital.
+      Statutory basis CPI Articles R.411-17 et seq.
+
+  - id: FR/INPI/Fees/Trademark
+    name: INPI France — Fees (Trademark)
+    jurisdiction: FR
+    wipo_st3_code: FR
+    issuing_body: Institut National de la Propriété Industrielle (INPI)
+    rights: [trademark]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-19
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      INPI France trademark fees per-class (Nice classification) in
+      EUR on a 10-year renewal cycle. Base filing €190 (€350 for
+      collective/guarantee marks); €40 per additional class; €290
+      renewal per class; €400 opposition; €600 nullity/déchéance.
+      Source is the same procedures PDF as the patent route.
+
+  - id: FR/INPI/Fees/Design
+    name: INPI France — Fees (Design)
+    jurisdiction: FR
+    wipo_st3_code: FR
+    issuing_body: Institut National de la Propriété Industrielle (INPI)
+    rights: [design]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-19
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      INPI France design fees in EUR. Base filing €39 plus per-
+      reproduction surcharges (b&w €23, colour €47). Renewal
+      ('prorogation') €52 per 5-year period (up to 25 years total).

@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- **INPI France fee schedules (patent + trademark + design).** Adds
+  three routes to the bundled `patent_client_agents.fees` connector:
+  `FR/INPI/Fees/Patent` (49 FeeItems incl. annuity years 2-20 plus
+  SPC annual at year=21), `FR/INPI/Fees/Trademark` (10 FeeItems on
+  10-year cycle), and `FR/INPI/Fees/Design` (5 FeeItems on 5-year
+  prorogation cycle). Source is the official "Tarifs des procédures
+  applicables au 27 avril 2026.pdf" linked from
+  `inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi`
+  and fetched via the inpi-block download endpoint (anonymously
+  accessible; the legifrance/Cloudflare-protected statutory route
+  turned out to be unnecessary). The "TARIFS RÉDUITS" column maps
+  to `EntityTier.small` (natural persons, non-profit research/
+  education orgs, companies <1000 employees with <25% non-qualifying
+  capital). Brings the fees connector to 17 offices / 25 routes
+  (13 of WIPO top-30 by 2023 patent filing volume).
+  v1 GAPS: pypdf reliably captures annuity reduced rates for years
+  2-7 only — years 8-20 reduced rates exist in the source but
+  the second column drops out of extracted text. REGISTRES NATIONAUX
+  admin fees, GIs, and semiconductor-topography fees are out of
+  scope.
 - **INPI Brazil fee schedules (patent + trademark).** Adds two
   routes to the bundled `patent_client_agents.fees` connector:
   `BR/INPI/Fees/Patent` (60 fee codes expanded to 272 FeeItems via

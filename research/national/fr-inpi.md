@@ -129,17 +129,37 @@ proxy impractical for interactive agent UX.
 
 ## §4 Fees
 
-INPI publishes a consolidated French-language tariff covering patents
-(filing, search report, grant, annuities yrs 2–20), trade marks
-(filing/renewal per class), and designs.
+**Status (2026-05-19):** Three routes shipped on the bundled
+`patent_client_agents.fees` connector — `FR/INPI/Fees/Patent`,
+`FR/INPI/Fees/Trademark`, and `FR/INPI/Fees/Design`. INPI publishes
+a consolidated French-language tariff covering patents (filing,
+search report, grant, annuities yrs 2-20), trade marks (filing /
+renewal per class on a 10-year cycle), and designs (filing,
+prorogation per 5-year period).
 
-- **Official schedule:** [Tarifs des procédures et prestations de l'INPI](https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi)
+- **Landing page (HTML, discovery point):** [Tarifs des procédures et prestations de l'INPI](https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi)
+- **Patent + TM + design schedule (canonical fetch target):** ["Tarifs des procédures applicables au 27 avril 2026.pdf"](https://www.inpi.fr/inpi-block/download-document?id=20516) — anonymously accessible PDF, ~157 KB, 2 pages; covers all three rights under section headings BREVETS D'INVENTION / MARQUES / DESSINS ET MODÈLES.
+- **Services schedule (out of v1 scope):** ["Tarifs des prestations applicables au 8 avril 2024.pdf"](https://www.inpi.fr/inpi-block/download-document?id=20514) — ancillary document copies.
+- **Madrid international:** ["Tarifs pour le dépôt d'une marque internationale.pdf"](https://www.inpi.fr/inpi-block/download-document?id=20520) — Madrid-system fees in CHF; not modeled (WIPO Madrid covers).
+- **Statutory basis:** Code de la propriété intellectuelle Articles R.411-17 et seq.; arrêtés fixant les redevances perçues par l'INPI; most recent effective date 2026-04-27.
 
-Discount programs:
+Discount programs *(eligibility)*:
 
-- **50% reduction** for individuals, SMEs (under defined size
-  thresholds), and education/research non-profits, applied on filing,
-  grant, and maintenance fees.
+- **Tarif réduit** (typically 50%): natural persons (personnes
+  physiques), non-profit research/education organisations, companies
+  with <1000 employees AND <25% capital held by a non-qualifying
+  entity. The scraper maps the PDF's "TARIFS RÉDUITS" column to
+  `EntityTier.small`.
+
+v1 GAPS (documented in the scraper's notes field):
+
+- Annuity reduced rates are reliably captured by pypdf for years
+  2-7 only; years 8-20 reduced rates exist in the source PDF but the
+  second column drops out of text extraction for those rows.
+- REGISTRES NATIONAUX admin fees, INDICATIONS GÉOGRAPHIQUES, and
+  DROITS VOISINS (semiconductor topographies) are out of v1 scope.
+- The Madrid international PDF (id=20520) is in CHF and overlaps with
+  the WIPO Madrid international scraper; not loaded here.
 
 
 ## §5 Connector strategy

@@ -13,7 +13,7 @@ blocking each remaining office.
 
 ---
 
-## §1 Coverage today: 12 of 30 offices
+## §1 Coverage today: 13 of 30 offices
 
 Routes already shipped on the fees connector
 (`src/patent_client_agents/fees/registry.py`):
@@ -31,14 +31,15 @@ Routes already shipped on the fees connector
 | 10   | IP Australia       | P              | Multi-table HTML, heading-walks-up-DOM |
 | 11   | UKIPO              | P / TM         | gov.uk per-form fan-out (bounded concurrency = 5) |
 | 12   | INPI Brazil        | P / TM         | PDF (pypdf) with backward code lookup; large/small tiers via "discounted" column |
+| 23   | INPI France        | P / TM / D     | PDF (curated catalog + annuity walker); large/small tiers via "TARIFS RÉDUITS" column; SPC at y=21 |
 | 13   | TIPO Taiwan        | P / TM         | HTML table + bilingual PDF curated catalog |
 
 Plus 3 non-national routes:
 * **EUIPO** (regional TM/D — Next.js SSR stream decoding for TM, HTML for D)
 * **WIPO** PCT / Madrid / Hague (international systems)
 
-**Total** = 16 offices on 22 routes; 12/30 of the WIPO national ranking,
-or 12/27 if we exclude the offices below that are blocked on factors
+**Total** = 17 offices on 25 routes; 13/30 of the WIPO national ranking,
+or 13/27 if we exclude the offices below that are blocked on factors
 outside our control (Russia + Iran sanctions, plus offices we have not
 yet found a public route for).
 
@@ -63,7 +64,7 @@ returned, not what the page would look like in a real browser.
 | 20 | **IP Viet Nam** | noip.gov.vn | Not probed | Circular 263/2016 PDF | Probe needed. |
 | 21 | **EAPO** | eapo.org | Not probed | Multilateral; potential RU exposure | EAPO billing is in USD which is unusual. Compliance check first. |
 | 22 | **IPOS Singapore** | sso.agc.gov.sg/SL/PA1994-R1 | First fetch 200 OK / 471 KB / 141 tables (Patents Rules); follow-ups hit CloudFront 403 (CDN rate-limit) | **Stochastic CDN rate-limit** + content not in body of /SL/PA1994-R1; First Schedule lives at separate sub-URL | Use SSO with respectful caching (TTL ≥ 7 days from one hit) + find the First Schedule's `?ProvIds=Sc1-` URL form. ipos.gov.sg sub-pages all 404 on URL guesses — the SSO statutory route is the real source. ~2-3 hr session. |
-| 23 | **INPI France** | legifrance.gouv.fr/codes/article_lc/LEGIARTI000043891691/ | 403 Cloudflare challenge ("Just a moment...") | **Cloudflare JS challenge** | Three options: (a) Legifrance PISTE API (free, requires registration at `piste.gouv.fr`); (b) stealth HTTP service; (c) dev-browser with stealth profile. Sub-pages on inpi.fr are 404; the only working inpi.fr Tarifs page covers PCT/Madrid/Brevet européen + ~11 line-items, NO annuities. |
+| 23 | ~~**INPI France**~~ | ✅ SHIPPED 2026-05-19 via inpi.fr/inpi-block/download-document?id=20516 (the procedures PDF, anonymously accessible — discovered as an anchor on the INPI Tarifs landing page). The Cloudflare-blocked legifrance route turned out to be unnecessary. | n/a | n/a | n/a |
 | 24 | **UIBM Italy** | uibm.mise.gov.it/index.php/it/tasse-e-tariffe | Not yet probed in this session | TBD | Probe needed. uibm.mise.gov.it has historically been straightforward HTML. |
 | 25 | **OEPM Spain** | oepm.es/es/invenciones/...tasas-pagos-y-reintegros/ | HTTP 410 Gone — URL retired | URL drift | URL discovery. Backup: BOE statutory route via `boe.es/buscar/act.php?id=BOE-A-2015-8328` (Ley 24/2015 Patentes) annual update. |
 | 26 | **ILPO Israel** | gov.il/en/departments/ilpo | 403 Cloudflare | Cloudflare bot-protection | Same options as France: stealth, dev-browser, or look for the WIPO Lex copy at `wipo.int/wipolex/en/legislation/details/19117`. |
@@ -189,6 +190,17 @@ to keep producing 0 commits per hour.
 
 ## §6 Session log
 
+* **2026-05-19 (after Brazil ship)** — User pointed at the INPI France
+  Tarifs landing page. A deeper inspection (looking past the 11 inline
+  ``<li>`` €-items I'd captured earlier) revealed three downloadable
+  PDF anchors on the page, one of which — "Tarifs des procédures
+  applicables au 27 avril 2026.pdf" at
+  `inpi.fr/inpi-block/download-document?id=20516` — is the full
+  cross-right schedule. Anonymously accessible, no Cloudflare on the
+  download endpoint. Shipped `FR/INPI/Fees/{Patent,Trademark,Design}`
+  via a curated-catalog + annuity-walker. Patent annuities years 2-20
+  extracted (reduced rates reliably for 2-7 only — pypdf drops second
+  column for years 8-20).
 * **2026-05-19 (after the gap doc)** — User found the English-language
   INPI Brazil fee PDFs at `gov.br/inpi/en/costs-and-payment/schedule-of-fees-*.pdf`
   (anonymously accessible, no auth). Shipped `BR/INPI/Fees/Patent`

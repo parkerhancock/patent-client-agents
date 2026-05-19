@@ -105,6 +105,13 @@ _OFFICE_ALIASES: dict[str, tuple[str, str]] = {
     "INPI BRAZIL": ("BR", "INPI-BR"),
     "INPI BRASIL": ("BR", "INPI-BR"),
     "INSTITUTO NACIONAL DA PROPRIEDADE INDUSTRIAL": ("BR", "INPI-BR"),
+    # INPI France
+    "INPI-FR": ("FR", "INPI-FR"),
+    "FR": ("FR", "INPI-FR"),
+    "FRANCE": ("FR", "INPI-FR"),
+    "INPI FRANCE": ("FR", "INPI-FR"),
+    "INSTITUT NATIONAL DE LA PROPRIETE INDUSTRIELLE": ("FR", "INPI-FR"),
+    "INSTITUT NATIONAL DE LA PROPRIÉTÉ INDUSTRIELLE": ("FR", "INPI-FR"),
     # WIPO — three systems, right discriminates
     # (use 'WIPO' as a top-level alias; resolver routes by right)
     "WIPO": ("WO", "WIPO"),
