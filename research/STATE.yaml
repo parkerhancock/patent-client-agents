@@ -31,17 +31,18 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-05-18  # Secondary-national wave 13/17 done — CH/AT/NL/SE/FI/ES/IT/NZ/MX/AR/PH/ID/TH
+last_updated: 2026-05-18  # Africa wave shipped — 4 surveyed nationals (all red) + 39 transitive entries (ARIPO + OAPI member states, all green_transitive via EPO OPS AP/OA codes)
 
 stats:
-  total_entities: 43
-  synopses_filled: 37        # +13 from secondary-nationals wave
+  total_entities: 88
+  synopses_filled: 37        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
   connectors_shipped: 15
   connectors_in_progress: 0
   connectors_spec_ready: 0
   connectors_planned: 7      # DE/DPMA + CH/IPI + SE/PRV + FI/PRH + ES/OEPM + NZ/IPONZ + TH/DIP
   connectors_blocked: 7      # UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
   next_unblocked_synopses: 3 # SA, AE, TR remaining (ZA shipped 2026-05-18; Africa wave added EG/NG/MA all red)
+  green_transitive_states: 39 # 22 ARIPO + 17 OAPI member states; patents covered via EPO OPS country codes AP/OA
 
 entities:
 
@@ -1143,6 +1144,683 @@ entities:
       NG is Hague Agreement member (2017-12-12; unverified in synopsis).
       Not ARIPO/OAPI (observer only). Patents partially via EPO INPADOC for
       EP/PCT counterparts. Watch items: NIPCOM bill, NIPPS digitization rollout.
+
+  # ─── ARIPO member states (22) ───────────────────────────────────────
+  # All transitively covered for patents via EPO OPS country code AP.
+  # See waves/2026-05-18-africa-wave/aripo.md for the protocol matrix.
+  # `connector_status: skipped` because the regional layer (AP/ARIPO)
+  # is the canonical machine surface — no native national connector
+  # planned.
+
+  - id: BW/CIPA
+    name: Companies and Intellectual Property Authority (Botswana)
+    layer: national
+    iso2: BW
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP (Botswana is a Harare + Banjul Protocol member). National-only register HTML; no native API.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: CV/IPICV
+    name: Industrial Property Institute of Cabo Verde
+    layer: national
+    iso2: CV
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP (Cabo Verde Harare + Banjul effective 2025).
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Arusha member.
+
+  - id: SZ/IPGRO
+    name: Industrial Property Office (Eswatini)
+    layer: national
+    iso2: SZ
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: GM/IPO
+    name: Industrial Property Office (Gambia)
+    layer: national
+    iso2: GM
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare member.
+
+  - id: GH/GHIPO
+    name: Industrial Property Office (Ghana)
+    layer: national
+    iso2: GH
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Arusha member.
+
+  - id: KE/KIPI
+    name: Kenya Industrial Property Institute
+    layer: national
+    iso2: KE
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP. National IPAS exports also flow to the ARIPO Regional IP Database.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Swakopmund member; one of 5 nationals with searchable Journal in the Regional IP DB.
+
+  - id: LS/LIPO
+    name: Lesotho IP Office
+    layer: national
+    iso2: LS
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: LR/LIPO
+    name: Liberia IP Office
+    layer: national
+    iso2: LR
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: MW/DRGGO
+    name: Department of the Registrar General (Malawi)
+    layer: national
+    iso2: MW
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: MU/IPO
+    name: Industrial Property Office (Mauritius)
+    layer: national
+    iso2: MU
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP (Mauritius acceded to Harare Protocol 2025-08-27).
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare (2025-08-27) — newest member.
+
+  - id: MZ/IPI
+    name: Industrial Property Institute (Mozambique)
+    layer: national
+    iso2: MZ
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul member; one of 5 nationals with searchable Journal in the Regional IP DB.
+
+  - id: NA/BIPA
+    name: Business and Intellectual Property Authority (Namibia)
+    layer: national
+    iso2: NA
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: RW/RDB
+    name: Rwanda Development Board IP Office
+    layer: national
+    iso2: RW
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Swakopmund + Arusha member; one of 5 nationals with searchable Journal.
+
+  - id: ST/SENAPIQ
+    name: National Quality Service (São Tomé and Príncipe)
+    layer: national
+    iso2: ST
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Arusha member; one of 5 nationals with searchable Journal.
+
+  - id: SC/SBC
+    name: Seychelles Business Centre IP Section
+    layer: national
+    iso2: SC
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP (Seychelles ARIPO member since 2022).
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO member since 2022.
+
+  - id: SL/OARG
+    name: Office of the Administrator and Registrar General (Sierra Leone)
+    layer: national
+    iso2: SL
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Swakopmund member.
+
+  - id: SO/SOIPO
+    name: Somalia IP Office
+    layer: national
+    iso2: SO
+    rights: [trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patent coverage limited (Somalia is the only ARIPO member NOT party to the Harare Protocol per WIPO INSPIRE). Banjul TM data via ARIPO regional layer only.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Banjul only — not a Harare Protocol contracting state.
+
+  - id: SD/RGCT
+    name: Registrar General of Commercial Titles (Sudan)
+    layer: national
+    iso2: SD
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: TZ/BRELA
+    name: Business Registrations and Licensing Agency (Tanzania mainland)
+    layer: national
+    iso2: TZ
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP. Tanzania mainland is an ARIPO Harare + Banjul member; Zanzibar is addressed separately under Banjul.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member (mainland); one of 5 nationals with searchable Journal.
+
+  - id: UG/URSB
+    name: Uganda Registration Services Bureau
+    layer: national
+    iso2: UG
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: ZM/PACRA
+    name: Patents and Companies Registration Agency (Zambia)
+    layer: national
+    iso2: ZM
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO Harare + Banjul + Swakopmund member.
+
+  - id: ZW/ZIPO
+    name: Zimbabwe IP Office (Companies and IP Office)
+    layer: national
+    iso2: ZW
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under ARIPO country code AP. Zimbabwe hosts the ARIPO secretariat.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ARIPO host state; Harare + Banjul + Swakopmund member.
+
+  # ─── OAPI member states (17) ────────────────────────────────────────
+  # OAPI is the *only* IP office for these states — no national-office
+  # substitute exists (Bangui Agreement Art. 2). Patents covered via
+  # EPO OPS country code OA. Everything else (UMs, designs, TMs, GIs,
+  # copyright, plant varieties) lives only in OAPI's PDF BOPI gazette.
+  # See waves/2026-05-18-africa-wave/oapi.md.
+
+  - id: BJ/OAPI
+    name: Benin (OAPI unitary)
+    layer: national
+    iso2: BJ
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: BF/OAPI
+    name: Burkina Faso (OAPI unitary)
+    layer: national
+    iso2: BF
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: CM/OAPI
+    name: Cameroon (OAPI unitary, host state)
+    layer: national
+    iso2: CM
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority. Cameroon hosts the OAPI secretariat in Yaoundé.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI host state.
+
+  - id: CF/OAPI
+    name: Central African Republic (OAPI unitary)
+    layer: national
+    iso2: CF
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: TD/OAPI
+    name: Chad (OAPI unitary)
+    layer: national
+    iso2: TD
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: KM/OAPI
+    name: Comoros (OAPI unitary)
+    layer: national
+    iso2: KM
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: CG/OAPI
+    name: Republic of Congo (OAPI unitary)
+    layer: national
+    iso2: CG
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: CI/OAPI
+    name: Côte d'Ivoire (OAPI unitary)
+    layer: national
+    iso2: CI
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: GQ/OAPI
+    name: Equatorial Guinea (OAPI unitary)
+    layer: national
+    iso2: GQ
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: GA/OAPI
+    name: Gabon (OAPI unitary)
+    layer: national
+    iso2: GA
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: GN/OAPI
+    name: Guinea (OAPI unitary)
+    layer: national
+    iso2: GN
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: GW/OAPI
+    name: Guinea-Bissau (OAPI unitary)
+    layer: national
+    iso2: GW
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: ML/OAPI
+    name: Mali (OAPI unitary)
+    layer: national
+    iso2: ML
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: MR/OAPI
+    name: Mauritania (OAPI unitary)
+    layer: national
+    iso2: MR
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: NE/OAPI
+    name: Niger (OAPI unitary)
+    layer: national
+    iso2: NE
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: SN/OAPI
+    name: Senegal (OAPI unitary)
+    layer: national
+    iso2: SN
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
+
+  - id: TG/OAPI
+    name: Togo (OAPI unitary)
+    layer: national
+    iso2: TG
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Patents covered via EPO OPS / INPADOC under OAPI country code OA. No national office — OAPI is the unitary IP authority.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OAPI Bangui Agreement member.
 
   - id: MA/OMPIC
     name: Office Marocain de la Propriété Industrielle et Commerciale

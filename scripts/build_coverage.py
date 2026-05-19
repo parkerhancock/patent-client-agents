@@ -64,6 +64,11 @@ RATING_LABELS: dict[str, tuple[str, str, str]] = {
         "Red — Blocked",
         "Access path exists but is currently blocked (egress filter, geofence, etc.).",
     ),
+    "green_transitive": (
+        "🟢",
+        "Green — Transitive",
+        "No native API; covered transitively via a regional or higher-layer connector we already operate.",
+    ),
     "watch": ("⚪", "Watch", "Monitoring for changes; no decision yet."),
     "tbd": ("⚪", "TBD", "Research pending."),
 }
@@ -106,8 +111,52 @@ ISO_TO_REGION: dict[str, str] = {
     # Oceania
     "AU": "oceania",
     "NZ": "oceania",
-    # Africa
+    # Africa — surveyed nationals
     "ZA": "africa",
+    "EG": "africa",
+    "NG": "africa",
+    "MA": "africa",
+    # Africa — ARIPO members (22; transitively covered via EPO OPS country code AP)
+    "BW": "africa",  # Botswana
+    "CV": "africa",  # Cabo Verde
+    "SZ": "africa",  # eSwatini
+    "GM": "africa",  # Gambia
+    "GH": "africa",  # Ghana
+    "KE": "africa",  # Kenya
+    "LS": "africa",  # Lesotho
+    "LR": "africa",  # Liberia
+    "MW": "africa",  # Malawi
+    "MU": "africa",  # Mauritius
+    "MZ": "africa",  # Mozambique
+    "NA": "africa",  # Namibia
+    "RW": "africa",  # Rwanda
+    "ST": "africa",  # São Tomé and Príncipe
+    "SC": "africa",  # Seychelles
+    "SL": "africa",  # Sierra Leone
+    "SO": "africa",  # Somalia
+    "SD": "africa",  # Sudan
+    "TZ": "africa",  # Tanzania (mainland)
+    "UG": "africa",  # Uganda
+    "ZM": "africa",  # Zambia
+    "ZW": "africa",  # Zimbabwe
+    # Africa — OAPI members (17; transitively covered via EPO OPS country code OA)
+    "BJ": "africa",  # Benin
+    "BF": "africa",  # Burkina Faso
+    "CM": "africa",  # Cameroon
+    "CF": "africa",  # Central African Republic
+    "TD": "africa",  # Chad
+    "KM": "africa",  # Comoros
+    "CG": "africa",  # Republic of Congo
+    "CI": "africa",  # Côte d'Ivoire
+    "GQ": "africa",  # Equatorial Guinea
+    "GA": "africa",  # Gabon
+    "GN": "africa",  # Guinea
+    "GW": "africa",  # Guinea-Bissau
+    "ML": "africa",  # Mali
+    "MR": "africa",  # Mauritania
+    "NE": "africa",  # Niger
+    "SN": "africa",  # Senegal
+    "TG": "africa",  # Togo
 }
 
 RIGHTS = {"patent", "trademark", "design", "copyright", "plant_variety", "gi", "trade_secret"}
