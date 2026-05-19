@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T01:37:11+00:00",
+  "generated_at": "2026-05-19T01:45:54+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 46,
@@ -976,6 +976,34 @@
           "auth": "none",
           "status": "active",
           "module": "patent_client_agents.ukipo_mopp"
+        },
+        {
+          "id": "GB/UKIPO/Fees/Patents",
+          "name": "UKIPO Fee Schedule \u2014 Patents",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
+        },
+        {
+          "id": "GB/UKIPO/Fees/Trademarks",
+          "name": "UKIPO Fee Schedule \u2014 Trademarks",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
         }
       ]
     },

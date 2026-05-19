@@ -71,6 +71,14 @@ _OFFICE_ALIASES: dict[str, tuple[str, str]] = {
     "IP AUSTRALIA": ("AU", "IPAU"),
     "AU": ("AU", "IPAU"),
     "AUSTRALIA": ("AU", "IPAU"),
+    # UKIPO
+    "UKIPO": ("GB", "UKIPO"),
+    "UK IPO": ("GB", "UKIPO"),
+    "UK INTELLECTUAL PROPERTY OFFICE": ("GB", "UKIPO"),
+    "GB": ("GB", "UKIPO"),
+    "UK": ("GB", "UKIPO"),
+    "UNITED KINGDOM": ("GB", "UKIPO"),
+    "BRITAIN": ("GB", "UKIPO"),
 }
 
 

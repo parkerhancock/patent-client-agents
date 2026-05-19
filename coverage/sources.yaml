@@ -1334,3 +1334,55 @@ sources:
       the Patents Regulations 1991 and are not on this page —
       follow-up scraper needed to pull them from the Federal Register
       of Legislation.
+
+  - id: GB/UKIPO/Fees/Patents
+    name: UKIPO Fee Schedule — Patents
+    jurisdiction: GB
+    wipo_st3_code: GB
+    issuing_body: UK Intellectual Property Office
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      UKIPO publishes one gov.uk publication page per patent form
+      (~30 forms). The scraper reads the index detail page (form
+      number/title/sub-URL), then fans out to fetch each sub-page
+      (bounded concurrency 5, hishel cache 7d) and extracts the
+      £-amount from the "Cost" section. Effective 2026-04-01 — first
+      major UKIPO fee rise in years (~25% average). v1 GAP: renewal
+      fees are published as a range (£90-£810); per-year schedule is
+      in The Patents (Fees) Rules 2007 statutory instrument and needs
+      a follow-up scraper against legislation.gov.uk.
+
+  - id: GB/UKIPO/Fees/Trademarks
+    name: UKIPO Fee Schedule — Trademarks
+    jurisdiction: GB
+    wipo_st3_code: GB
+    issuing_body: UK Intellectual Property Office
+    rights: [trademark]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Scrapes the gov.uk trade-mark-forms-and-fees detail page; 17
+      inline Form | Title | Cost tables. Renewals tagged year=10
+      (UKIPO TM 10-year cycle). Effective 2026-04-01.
