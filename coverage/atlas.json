@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T02:42:12+00:00",
+  "generated_at": "2026-05-19T02:48:27+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 88,
@@ -769,6 +769,20 @@
           "auth": "oauth2_password",
           "status": "active",
           "module": "patent_client_agents.jpo"
+        },
+        {
+          "id": "JP/JPO/Fees/Patents",
+          "name": "JPO Fee Schedule \u2014 Patents",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
         }
       ]
     },

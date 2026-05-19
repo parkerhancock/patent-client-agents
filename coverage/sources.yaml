@@ -1386,3 +1386,34 @@ sources:
       Scrapes the gov.uk trade-mark-forms-and-fees detail page; 17
       inline Form | Title | Cost tables. Renewals tagged year=10
       (UKIPO TM 10-year cycle). Effective 2026-04-01.
+
+  - id: JP/JPO/Fees/Patents
+    name: JPO Fee Schedule — Patents
+    jurisdiction: JP
+    wipo_st3_code: JP
+    issuing_body: Japan Patent Office
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Scrapes the JPO English fee page
+      (jpo.go.jp/e/system/process/tesuryo/hyou.html). JPY. Patent
+      annuities + examination requests are uniformly
+      claim-count-dependent ("¥X + ¥Y per claim"); the scraper splits
+      each into a base FeeItem plus a separate excess_claims FeeItem
+      with FeeCondition. Year bands 1-3, 4-6, 7-9, 10-25 expanded to
+      per-year rows (Japan has a 25-year term for some patent
+      categories). Two cohorts (current vs legacy by 2004/2019 fee
+      revisions) captured with notes. JPO requires full Sec-Fetch-*
+      browser headers or the request hangs with ReadTimeout — the
+      scraper's HTTP client sets them.
