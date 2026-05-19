@@ -22,7 +22,6 @@ from law_tools_core.corpus_db import (
     OutlineCorpusSection,
 )
 
-
 # ----------------------------------------------------------------------
 # Fixtures: build a minimal outline corpus on disk.
 # ----------------------------------------------------------------------

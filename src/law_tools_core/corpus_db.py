@@ -235,9 +235,7 @@ class OutlineCorpusDB(CorpusDBBase):
         if section_number is None and href is None:
             raise ValueError("Provide either section_number or href")
         if href is not None:
-            row = self._conn.execute(
-                "SELECT * FROM sections WHERE href = ?", (href,)
-            ).fetchone()
+            row = self._conn.execute("SELECT * FROM sections WHERE href = ?", (href,)).fetchone()
         else:
             row = self._conn.execute(
                 "SELECT * FROM sections WHERE section_number = ?",

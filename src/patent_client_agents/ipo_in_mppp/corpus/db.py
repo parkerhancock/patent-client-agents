@@ -8,18 +8,19 @@ and serves queries against it. Locator precedence:
 2. ``~/.cache/patent_client_agents/ipo_in_mppp.db`` (local-dev default).
 
 Misses raise :class:`CorpusUnavailable` with a hint at how to build it.
+
+Lifecycle inherits from :class:`law_tools_core.corpus_db.CorpusDBBase`;
+this module declares the MPPP row schema (section_number + chapter +
+title + text + source_url) and its FTS5 query path.
 """
 
 from __future__ import annotations
 
-import os
 import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
-
-class CorpusUnavailable(RuntimeError):
-    """Raised when the IPO India MPPP corpus cannot be located or opened."""
+from law_tools_core.corpus_db import CorpusDBBase, CorpusUnavailable
 
 
 @dataclass(frozen=True)
@@ -45,63 +46,13 @@ def default_corpus_path() -> Path:
     return Path.home() / ".cache" / "patent_client_agents" / "ipo_in_mppp.db"
 
 
-def _resolve_corpus_path(explicit: str | os.PathLike[str] | None) -> Path:
-    if explicit is not None:
-        return Path(explicit)
-    env = os.environ.get("IPO_IN_MPPP_CORPUS_PATH")
-    if env:
-        return Path(env)
-    return default_corpus_path()
-
-
-_INSTALL_HINT = (
-    "Run `patent-client-agents-build-ipo-in-mppp-corpus --output "
-    "~/.cache/patent_client_agents/ipo_in_mppp.db` to build it, or set "
-    "IPO_IN_MPPP_CORPUS_PATH to an existing corpus file."
-)
-
-
-class CorpusDB:
+class CorpusDB(CorpusDBBase):
     """Thin wrapper around the IPO India MPPP corpus SQLite connection."""
 
-    def __init__(self, conn: sqlite3.Connection, path: Path) -> None:
-        self._conn = conn
-        self._path = path
-        conn.row_factory = sqlite3.Row
-
-    @classmethod
-    def open(
-        cls, path: str | os.PathLike[str] | None = None, *, must_exist: bool = True
-    ) -> CorpusDB:
-        resolved = _resolve_corpus_path(path)
-        if must_exist and not resolved.exists():
-            raise CorpusUnavailable(
-                f"IPO India MPPP corpus not found at {resolved}. {_INSTALL_HINT}"
-            )
-        try:
-            conn = sqlite3.connect(f"file:{resolved}?mode=ro", uri=True)
-        except sqlite3.OperationalError as exc:
-            raise CorpusUnavailable(
-                f"Could not open IPO India MPPP corpus at {resolved}: {exc}. {_INSTALL_HINT}"
-            ) from exc
-        return cls(conn, resolved)
-
-    @property
-    def path(self) -> Path:
-        return self._path
-
-    def close(self) -> None:
-        self._conn.close()
-
-    def __enter__(self) -> CorpusDB:
-        return self
-
-    def __exit__(self, *_exc: object) -> None:
-        self.close()
-
-    def meta(self) -> dict[str, str]:
-        rows = self._conn.execute("SELECT key, value FROM meta").fetchall()
-        return {row["key"]: row["value"] for row in rows}
+    LABEL = "IPO India MPPP"
+    ENV_VAR = "IPO_IN_MPPP_CORPUS_PATH"
+    DEFAULT_FILENAME = "ipo_in_mppp.db"
+    BUILD_COMMAND = "patent-client-agents-build-ipo-in-mppp-corpus"
 
     def get_section(self, *, section_number: str) -> CorpusSection | None:
         row = self._conn.execute(
@@ -169,8 +120,8 @@ def _row_to_section(row: sqlite3.Row) -> CorpusSection:
 
 __all__ = [
     "CorpusDB",
-    "CorpusUnavailable",
-    "CorpusSection",
     "CorpusHit",
+    "CorpusSection",
+    "CorpusUnavailable",
     "default_corpus_path",
 ]

@@ -8,18 +8,20 @@ and serves queries against it. Locator precedence:
 2. ``~/.cache/patent_client_agents/tw_trade_secrets.db`` (local-dev default).
 
 Misses raise :class:`CorpusUnavailable` with a hint at how to build it.
+
+Lifecycle (open/close/meta/path resolution) inherits from
+:class:`law_tools_core.corpus_db.CorpusDBBase`; this module declares the
+TW Trade Secrets row schema (section + title + text) and its FTS5
+query path.
 """
 
 from __future__ import annotations
 
-import os
 import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
-
-class CorpusUnavailable(RuntimeError):
-    """Raised when the TW Trade Secrets corpus cannot be located or opened."""
+from law_tools_core.corpus_db import CorpusDBBase, CorpusUnavailable
 
 
 @dataclass(frozen=True)
@@ -42,24 +44,8 @@ def default_corpus_path() -> Path:
     return Path.home() / ".cache" / "patent_client_agents" / "tw_trade_secrets.db"
 
 
-def _resolve_corpus_path(explicit: str | os.PathLike[str] | None) -> Path:
-    if explicit is not None:
-        return Path(explicit)
-    env = os.environ.get("TW_TRADE_SECRETS_CORPUS_PATH")
-    if env:
-        return Path(env)
-    return default_corpus_path()
-
-
-_INSTALL_HINT = (
-    "Run `patent-client-agents-build-tw-trade-secrets-corpus --output "
-    "~/.cache/patent_client_agents/tw_trade_secrets.db` to build it, or set "
-    "TW_TRADE_SECRETS_CORPUS_PATH to an existing corpus file."
-)
-
-
-class CorpusDB:
-    """Thin wrapper around the corpus SQLite connection.
+class CorpusDB(CorpusDBBase):
+    """Taiwan Trade Secrets Act corpus client.
 
     Open via context manager so the underlying connection is closed
     deterministically::
@@ -69,49 +55,10 @@ class CorpusDB:
             hits = corpus.search("damages", limit=10)
     """
 
-    def __init__(self, conn: sqlite3.Connection, path: Path) -> None:
-        self._conn = conn
-        self._path = path
-        conn.row_factory = sqlite3.Row
-
-    @classmethod
-    def open(
-        cls, path: str | os.PathLike[str] | None = None, *, must_exist: bool = True
-    ) -> CorpusDB:
-        resolved = _resolve_corpus_path(path)
-        if must_exist and not resolved.exists():
-            raise CorpusUnavailable(
-                f"TW Trade Secrets corpus not found at {resolved}. {_INSTALL_HINT}"
-            )
-        try:
-            conn = sqlite3.connect(f"file:{resolved}?mode=ro", uri=True)
-        except sqlite3.OperationalError as exc:
-            raise CorpusUnavailable(
-                f"Could not open TW Trade Secrets corpus at {resolved}: {exc}. {_INSTALL_HINT}"
-            ) from exc
-        return cls(conn, resolved)
-
-    @property
-    def path(self) -> Path:
-        return self._path
-
-    def close(self) -> None:
-        self._conn.close()
-
-    def __enter__(self) -> CorpusDB:
-        return self
-
-    def __exit__(self, *_exc: object) -> None:
-        self.close()
-
-    def meta(self) -> dict[str, str]:
-        rows = self._conn.execute("SELECT key, value FROM meta").fetchall()
-        return {row["key"]: row["value"] for row in rows}
-
-    def meta_get(self, key: str, default: str | None = None) -> str | None:
-        """Look up a single meta key, returning ``default`` when absent."""
-        row = self._conn.execute("SELECT value FROM meta WHERE key = ?", (key,)).fetchone()
-        return row["value"] if row else default
+    LABEL = "TW Trade Secrets"
+    ENV_VAR = "TW_TRADE_SECRETS_CORPUS_PATH"
+    DEFAULT_FILENAME = "tw_trade_secrets.db"
+    BUILD_COMMAND = "patent-client-agents-build-tw-trade-secrets-corpus"
 
     def get_section(self, section: str) -> CorpusSection | None:
         row = self._conn.execute(
@@ -182,8 +129,8 @@ def _row_to_section(row: sqlite3.Row) -> CorpusSection:
 
 __all__ = [
     "CorpusDB",
-    "CorpusUnavailable",
-    "CorpusSection",
     "CorpusHit",
+    "CorpusSection",
+    "CorpusUnavailable",
     "default_corpus_path",
 ]
