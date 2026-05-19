@@ -378,7 +378,7 @@ the closed vocabularies below; CI fails on any deviation.
 | `wipo_st3_code` | optional | WIPO ST.3 code |
 | `issuing_body` | always | free text |
 | `rights` | always | subset of `{patent, trademark, design, copyright, plant_variety, gi, trade_secret}` |
-| `data_types` | always | subset of `{bibliographic, full_text, prosecution, legal_status, assignments, oppositions, tribunal_proceedings, litigation, classification, guidelines, case_law, statutes, treaties, bulk_data}` |
+| `data_types` | always | subset of `{bibliographic, full_text, prosecution, legal_status, assignments, oppositions, tribunal_proceedings, litigation, classification, guidelines, case_law, statutes, treaties, bulk_data, fees}` |
 | `access.method` | always | `{rest_api, bulk_download, website_scrape, pdf_download, ftp, mcp_passthrough}` |
 | `access.auth` | always | `{none, api_key, oauth2_client_credentials, oauth2_password, cookie_token, account_required}` |
 | `access.auth_env` | when auth ≠ none | list of env var names |

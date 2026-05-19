@@ -1054,3 +1054,203 @@ sources:
       EUIPO; Hague international registrations via WIPO Hague. FR
       patents covered by EPO OPS (INPADOC) — no FR/INPI/Patents row
       in this manifest by design.
+
+  # ────────────────────────────────────────────────────────────────────
+  # IP-office fee schedules — live-fetch with 7-day hishel cache
+  # ────────────────────────────────────────────────────────────────────
+  # Substantive-law category because schedules are set by statute /
+  # rule (37 CFR Parts 1-2; EPC Rules relating to Fees; EUTMR Annex I;
+  # Regulation 2024/2822). Live proxy because USPTO publishes HTML,
+  # EPO ships an undocumented JSON BFF (fees.apps.epo.org/prod/bff/api),
+  # and EUIPO uses Next.js SSR — none ship a wheel-bundled snapshot.
+
+  - id: US/USPTO/Fees/Patents
+    name: USPTO Fee Schedule — Patents
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: annual
+    notes: >-
+      Scrapes the USPTO HTML schedule
+      (uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule),
+      filters out design + plant patent rows so the patent route covers
+      utility prosecution only. 37 CFR §§ 1.16, 1.17, 1.18, 1.20.
+
+  - id: US/USPTO/Fees/Trademarks
+    name: USPTO Fee Schedule — Trademarks
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [trademark]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: annual
+    notes: >-
+      Post-2025-rule shape (no entity tiers; paper-filing surcharges
+      modeled via FeeCondition(trigger=paper_filing)). 37 CFR §§ 2.6,
+      2.7.
+
+  - id: US/USPTO/Fees/Designs
+    name: USPTO Fee Schedule — Designs
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. Patent and Trademark Office
+    rights: [design]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: annual
+    notes: >-
+      Design-specific rows only (filing, search, exam, issue, Design
+      CPA). Shared procedural fees (extensions, appeals, petitions)
+      come from US/USPTO/Fees/Patents.
+
+  - id: EP/EPO/Fees/Patents
+    name: EPO Schedule of Fees — Patents
+    jurisdiction: EP
+    issuing_body: European Patent Office
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Sources from the EPO Schedule-of-Fees SPA's backing BFF
+      (fees.apps.epo.org/prod/bff/api/fees). The BFF is undocumented
+      but stable. Covers EPC renewals years 2-20 (codes 732-750) and
+      Unitary Patent renewals (codes 033-050). Amounts in EUR.
+
+  - id: EP/EUIPO/Fees/Trademarks
+    name: EUIPO EUTM Fee Schedule
+    jurisdiction: EP
+    issuing_body: European Union Intellectual Property Office
+    rights: [trademark]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Extracts F-xxx (EUTM) and M-xxx (Madrid) fees from the EUIPO
+      Next.js SSR stream. EUR. 10-year renewal cycle. EUTMR Annex I.
+
+  - id: EP/EUIPO/Fees/Designs
+    name: EUIPO REUD Fee Schedule
+    jurisdiction: EP
+    issuing_body: European Union Intellectual Property Office
+    rights: [design]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Post-Regulation 2024/2822 reform: back-loaded renewal curve at
+      periods 1/2/3/4 (years 5/10/15/20 = €150/€250/€400/€700),
+      combined application+publication fee, late-payment surcharges
+      abolished.
+
+  - id: CN/CNIPA/Fees/Patents
+    name: CNIPA Fee Schedule — Patents
+    jurisdiction: CN
+    wipo_st3_code: CN
+    issuing_body: China National Intellectual Property Administration
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Scrapes the CNIPA English mirror
+      (english.cnipa.gov.cn/col/col3000). Single 2-column hierarchical
+      table with Roman-numeral sections; the scraper expands year-banded
+      annuities (e.g., "1-3 Years (Each Year) | 900") to per-year rows.
+      v1 covers invention patents only; utility-model + design ship as
+      separate routes when needed. Patent Law of the PRC + Implementing
+      Regulations. Fee schedule set by State Council Pricing Bureau.
+
+  - id: CA/CIPO/Fees/Patents
+    name: CIPO Fee Schedule — Patents
+    jurisdiction: CA
+    wipo_st3_code: CA
+    issuing_body: Canadian Intellectual Property Office
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: annual
+    notes: >-
+      Scrapes the CIPO patent fee page
+      (ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html).
+      4 unique HTML tables; small + standard entity tiers in CAD.
+      Maintenance fees use English-band descriptions (e.g., "second,
+      third and fourth anniversaries") which the scraper expands to
+      per-year rows. CIPO publishes annually with a January 1 effective
+      date; Patent Rules SOR/2019-251 Schedule of Fees.
