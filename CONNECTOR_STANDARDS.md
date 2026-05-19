@@ -91,6 +91,18 @@ WAL pragmas via `RetryingAsyncSqliteStorage`, plus `tenacity` retry via
 `default_retryer` (4 attempts, exponential jitter). New connectors do not
 roll their own HTTP layer.
 
+**Corpus scaffolding is shared.** Every `transport: mcp_local` connector
+inherits from `law_tools_core.corpus_db.CorpusDBBase` (the universal
+lifecycle: path resolution from `ENV_VAR` → `~/.cache/...`, read-only
+SQLite open, install-hint error messages, `meta()` / `meta_get()`).
+Connectors with the common "outline" row schema (`href` +
+`section_number` + `breadcrumb` + `chapter` + `html` + `text` — used by
+MPEP / TMEP / EPC / UKIPO MoPP / the EPO Guidelines family) inherit
+from `OutlineCorpusDB` and get `get_section` / `search` / `count_for`
+for free. Statute-shaped connectors (unique row keys) inherit from
+`CorpusDBBase` directly and provide their own SQL. New connectors do
+not reimplement the lifecycle.
+
 **Cloud Run egress is the deployment target.** Some upstreams filter Cloud
 Run egress harder than residential IPs (USPTO TESS via AWS WAF;
 unifiedpatentcourt.org via Cloudflare). New connectors are tested against
@@ -168,6 +180,16 @@ needs a decision tree before it can pick a tool. Collapse instead.
 Soft cap: a single data type should rarely need more than ~5 tools
 (search + get + 1-3 facet fetches + a download). If you're past that,
 the data type is probably two data types fused together.
+
+**One connector per MCP tool file.** `src/patent_client_agents/mcp/tools/`
+is laid out one module per upstream (`uspto.py`, `epo_ops.py`, `jpo.py`,
+`cpc.py`, `mpep.py`, etc.). Cross-office bundling — e.g. the former
+`international.py` that mixed EPO + JPO + CPC in 1,719 lines — is
+forbidden: it inflates the largest file in the catalog, hides
+jurisdiction-specific helpers from grep, and makes per-office test
+isolation harder. When a file's docstring has to enumerate multiple
+jurisdictions, split it. See [`REFACTOR_PLAN.md`](REFACTOR_PLAN.md)
+Phase 1 for the corrective precedent.
 
 ### §5.2 Search + fetch baseline
 
@@ -362,6 +384,84 @@ docstring can guess what the tool does.** If they can't, rename or rewrite.
 Acronyms (PTAB, J-PlatPat, DataWeb, MoPP) are expanded on first use in the
 first sentence. Jargon ("package," "biblio") is replaced or defined.
 
+### §5.14 Testing patterns
+
+Two test-data patterns are recognized; pick the one that fits the connector.
+
+**VCR cassettes** (`tests/cassettes/`) — the default for connectors with
+significant upstream surface (search + multiple fetch facets + downloads).
+Cassettes are recorded against the real upstream with the conftest's
+auth scrubber active, then replayed on every test run. Use when:
+
+- The upstream surface is large enough that hand-rolled fixtures would
+  drift from reality.
+- The tests need to exercise real HTTP semantics (status codes, headers,
+  pagination boundaries) end-to-end.
+- The connector already has cassettes (don't migrate just for taste).
+
+Discipline: run `gitleaks protect --staged` before committing; the root
+`tests/conftest.py` already scrubs `authorization`, `x-api-key`,
+`x-ibm-client-id`, `uspto-api-key`, OAuth2 token bodies/responses, and
+known query-param secrets. When re-recording with `--vcr-record=once`,
+clear `~/.cache/patent_client_agents/<connector>.db` first — hishel's
+SQLite cache can shadow VCR and silently re-play a stale fixture.
+
+**Fixture-based contract tests** (`tests/<connector>/fixtures/*.json`) —
+the default for stateless connectors with a small upstream surface. The
+per-connector `conftest.py` loads JSON fixtures and serves them through
+an `httpx.MockTransport` handler. Use when:
+
+- Upstream responses are stable JSON envelopes with no side channels
+  (auth refresh, redirects, etc.).
+- The connector's whole tool surface fits in 4-6 endpoints.
+- You want zero auth-scrubbing surface area (fixtures are clean by
+  construction).
+- Cassettes would be overkill for the level of HTTP fidelity you need.
+
+Canonical templates: [`src/patent_client_agents/prh_fi/`](src/patent_client_agents/prh_fi/)
+and [`src/patent_client_agents/prv_se/`](src/patent_client_agents/prv_se/)
+with [`tests/prh_fi/`](tests/prh_fi/) and [`tests/prv_se/`](tests/prv_se/).
+
+Mixed: smoke tests against the real upstream remain valuable for both
+patterns. Gate them on a `--run-live-<connector>` flag or
+`<CONNECTOR>_LIVE_TESTS=1` env var so CI runs cassette/fixture replays
+by default. See `tests/conftest.py` for the existing flag wiring.
+
+### §5.15 Per-module helper conventions
+
+MCP tool modules accumulate three kinds of private helper functions.
+Names are conventional so they're greppable across the catalog:
+
+- `_provenance(path: str) -> Provenance` (or `_<office>_provenance(...)`)
+  — builds a `Provenance` pointing at the canonical upstream URL for
+  this connector. Typically 2-3 lines wrapping
+  `law_tools_core.envelope.make_provenance` with the connector's base URL
+  and source name as module-level constants. Per-module rather than shared
+  because the base URL + source name are part of the connector's identity.
+
+- `_summarize_<entity>(record, *, fallback_<id>) -> str` — produces the
+  short Markdown `summary` field for the response envelope. Takes the
+  raw record plus a fallback identifier for the "no data on file" branch.
+  Returns one line for `ResponseEnvelope` summaries; up to ~3 lines for
+  `ListEnvelope` summaries describing the result set.
+
+- `_stub_<entity>(record) -> dict` / `_project_<entity>_row(record) -> dict`
+  — the lean projection (§5.5) of a single hit or single record. Drops
+  large fields (full text, drawings, raw HTML) and flattens nested
+  identifiers an agent can quote (e.g., country + doc_number + kind →
+  `publication_number`).
+
+These helpers are deliberately per-module, not shared. Each connector's
+record shape is different enough that a generic helper would be a thin
+shim with no real abstraction. Repetition is acceptable; consistency in
+naming is what makes the catalog navigable.
+
+The canonical examples live in
+[`src/patent_client_agents/mcp/tools/uspto.py`](src/patent_client_agents/mcp/tools/uspto.py)
+(complex, multi-entity) and
+[`src/patent_client_agents/mcp/tools/prv_se.py`](src/patent_client_agents/mcp/tools/prv_se.py)
+(small, single-entity).
+
 ---
 
 ## §6 Manifest contract
@@ -437,7 +537,14 @@ Before merging a new connector:
 - [ ] No `batch_*` tools.
 - [ ] No `get_by_*` family — single `get_thing` with auto-detected identifier.
 - [ ] For category-2 connectors: module-level `get_corpus_status()` callable.
-- [ ] VCR cassettes recorded and auth headers scrubbed; `gitleaks protect --staged` clean.
+- [ ] For `transport=mcp_local` connectors: `CorpusDB` inherits from
+      `law_tools_core.corpus_db.CorpusDBBase` (or `OutlineCorpusDB` for the
+      outline row schema). No bespoke lifecycle.
+- [ ] One MCP tool module per upstream (§5.1) — no cross-office bundling.
+- [ ] Test pattern chosen and documented (§5.14): VCR cassettes for
+      large/HTTP-fidelity surfaces, fixture-based for small stateless ones.
+- [ ] VCR cassettes (when used) recorded with auth headers scrubbed;
+      `gitleaks protect --staged` clean.
 - [ ] `CHANGELOG.md` entry under the next-release header.
 
 ---
