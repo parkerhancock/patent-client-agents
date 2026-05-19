@@ -41,7 +41,7 @@ stats:
   connectors_spec_ready: 0
   connectors_planned: 7      # DE/DPMA + CH/IPI + SE/PRV + FI/PRH + ES/OEPM + NZ/IPONZ + TH/DIP
   connectors_blocked: 7      # UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
-  next_unblocked_synopses: 4 # ZA, SA, AE, TR remaining
+  next_unblocked_synopses: 3 # SA, AE, TR remaining (ZA shipped 2026-05-18; Africa wave added EG/NG/MA all red)
 
 entities:
 
@@ -173,10 +173,10 @@ entities:
     rating_basis: Free OAuth2 OPS API; INPADOC backbone for ~100 offices
     connector_status: shipped
     manifest_ids: [EP/EPO/OPS, EP/EPO/CPC, EP/EPC/Statute, EP/EPO/Guidelines, EP/EPO/CaseLaw, UP/EPO/UPGuidelines]
-    next_action: migration_playbook_row_9
+    next_action: per_jurisdiction_recipes
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: Highest-leverage connector in catalog; §5.9 envelope sweep pending (MIGRATION_PLAYBOOK row 9)
+    last_verified: 2026-05-18
+    notes: Highest-leverage connector in catalog; §5.9 envelope sweep complete (2026-05-18). Next is per-jurisdiction recipe helpers (CN/DE/KR via INPADOC).
 
   - id: EM/EUIPO
     name: European Union Intellectual Property Office
@@ -242,35 +242,57 @@ entities:
     name: African Regional Intellectual Property Organization
     layer: regional
     iso2: n/a
-    rights: [patent, utility_model, design, trademark, plant_variety]
+    rights: [patent, utility_model, design, trademark, plant_variety, copyright]
     synopsis: null
-    detail_survey: connectors/aripo.md
+    detail_survey: waves/2026-05-18-africa-wave/aripo.md
     connector_spec: null
     rating: red_no_api
-    rating_basis: Robots.txt Disallow:/; covered via EPO INPADOC (country code AP)
+    rating_basis: |
+      Two HTML-only front ends (KIPO-built eService at eservice.aripo.org/pdl
+      that redirects users to WIPO Publish at regionalip.aripo.org); ARIPO
+      Journal as monthly PDFs (2015→present); no REST/JSON API; 0 entries in
+      WIPO IP API Catalog; no developer program; data.aripo.org / api.aripo.org
+      don't exist. Patents already in EPO OPS / INPADOC under country code AP —
+      use the existing epo_ops connector transitively.
     connector_status: skipped
     manifest_ids: []
-    next_action: write_synopsis
+    next_action: link_only_atlas_card
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: 22 contracting states; coverage already via EPO OPS
+    last_verified: 2026-05-18
+    notes: |
+      22 contracting states (Seychelles 2022, Mauritius Harare 2025-08-27);
+      5 protocols not 4 — Kampala (voluntary copyright registration) adopted
+      2024. Arusha (plant varieties) in force 2024-11-24. Coverage of ARIPO
+      patents already via EPO OPS / INPADOC under country code AP.
 
   - id: OA/OAPI
     name: African Intellectual Property Organization (OAPI)
     layer: regional
     iso2: n/a
-    rights: [patent, design, trademark, gi]
+    rights: [patent, utility_model, design, trademark, gi, copyright, plant_variety]
     synopsis: null
-    detail_survey: connectors/oapi.md
+    detail_survey: waves/2026-05-18-africa-wave/oapi.md
     connector_spec: null
     rating: red_no_api
-    rating_basis: No public REST; covered via EPO INPADOC (country code OA)
+    rating_basis: |
+      Register on bare-IP HTTP-only WoPublish (195.24.202.12:9092, no TLS);
+      BOPI gazette PDF only; 2024 e-filing portal (TMs only) is write-only and
+      agent-gated; WIPO INSPIRE profile states verbatim "OAPI does not have an
+      Online Register. It has an Online Gazette." 0 entries in WIPO IP API
+      Catalog. Patents transitively in EPO OPS / INPADOC under country code OA.
     connector_status: skipped
     manifest_ids: []
-    next_action: write_synopsis
+    next_action: link_only_atlas_card
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: 17 Francophone African states; Bangui Agreement (unified statute)
+    last_verified: 2026-05-18
+    notes: |
+      17 unitary states (BJ/BF/CM/CF/TD/KM/CG/CI/GQ/GA/GN/GW/ML/MR/NE/SN/TG);
+      Bangui Agreement revised 2015-12-14 effective 2020-11-14; OAPI is the
+      *only* IP office for all 17 — no national-office substitute exists for
+      any of them. OAPI = PCT regional office and Madrid Protocol member since
+      2015-03-05. Patents reachable via EPO OPS country code OA; everything
+      else (UMs, designs, trade names, GIs, copyright, layout-designs, plant
+      varieties) exists only as PDF BOPI entries.
 
   - id: GCC/GCCPatent
     name: GCC Patent Office (legacy)
@@ -923,18 +945,30 @@ entities:
     name: CIPC South Africa
     layer: national
     iso2: ZA
-    rights: [patent, trademark, design]
+    rights: [patent, trademark, design, copyright]
     synopsis: null
-    detail_survey: null
+    detail_survey: waves/2026-05-18-africa-wave/za-cipc.md
     connector_spec: null
-    rating: tbd
-    rating_basis: Not yet researched
-    connector_status: none
+    rating: red_blocked
+    rating_basis: |
+      IPS API ("trademarks/patents/designs/copyright" JSON surface) is marked
+      "Coming Soon" on developer.cipc.co.za (APIVerse Hub); only Companies/
+      BO/Authorisation APIs are live. eServices T&Cs prohibit derived works
+      and restrict reuse to per-client deployment (incompatible with hosted
+      multi-tenant proxy). Live IP register is HTML-only ASP.NET WebForms at
+      iponline.cipc.co.za. SA also still NOT a Madrid Protocol member as of
+      2026-05-18 — Trade Marks Amendment Bill targeted Sept 2025 has stalled.
+    connector_status: skipped
     manifest_ids: []
-    next_action: synopsis_discovery
+    next_action: watch_ips_api_ga
     blocked_by: []
-    last_verified: never
-    notes: Top-30 office; African coverage. 2026-05-18 wave attempted but agent TPM-stalled before writing anything — re-queue for next session.
+    last_verified: 2026-05-18
+    notes: |
+      Top-30 office (depository patent system — no substantive examination,
+      which reduces value of file-history data even if available). Patents
+      partially via EPO INPADOC for EP/PCT counterparts. Watch items: IPS
+      API GA on APIVerse Hub; SA Madrid accession progress (target Sept 2025
+      slipped); T&C revision permitting third-party redistribution.
 
   - id: AR/INPI
     name: INPI Argentina
@@ -1047,6 +1081,101 @@ entities:
     blocked_by: []
     last_verified: never
     notes: Only Gulf national office with usable public search per BACKLOG
+
+  - id: EG/EAIP
+    name: Egyptian Authority for Intellectual Property (consolidating EGYPO + ITDA)
+    layer: national
+    iso2: EG
+    rights: [patent, utility_model, trademark, design, copyright, plant_variety]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/eg-egypto.md
+    connector_spec: null
+    rating: red_no_api
+    rating_basis: |
+      EGYPO patents run on a hosted WIPO PUBLISH instance at
+      egypo.gov.eg/wopublish-search/public/patents — HTML only, no JSON envelope.
+      ITDA TM/Designs office publishes a monthly TM gazette PDF at
+      itda.gov.eg/jurnal-TM.aspx; no national designs register exists at all.
+      0 entries in WIPO IP API Catalog for EG. Law 163/2023 dissolves both
+      offices into the new Egyptian Authority for Intellectual Property (EAIP)
+      reporting to the Prime Minister — transition deadline 2024-08-05 +
+      6 months. As of 2026-05-18 the legacy sites still serve; EAIP has no
+      discoverable canonical web property yet.
+    connector_status: skipped
+    manifest_ids: []
+    next_action: watch_eaip_consolidation
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: |
+      Law 82/2002 is the integrated IP statute (patents/UMs/TMs/designs/
+      copyrights/plant varieties). EG is a PCT contracting state (2003-09-06),
+      Madrid Protocol member (2009-09-03), not Hague, not ARIPO/OAPI member.
+      Patents partially via EPO INPADOC. Watch item: EAIP canonical web
+      property + any new API surface (none today).
+
+  - id: NG/FMITI
+    name: Nigeria Federal Ministry of Industry, Trade and Investment IP Registries
+    layer: national
+    iso2: NG
+    rights: [patent, utility_model, trademark, design, copyright]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/ng-fmiti.md
+    connector_spec: null
+    rating: red_no_api
+    rating_basis: |
+      Login-gated SvelteKit SPA at portal.iponigeria.com (Patents/Designs/TMs);
+      legacy static JSP at nipo.gov.ng; ASP.NET MVC NCeRS portal at
+      copyright.gov.ng (HTTP 502 at probe). TM search restricted to accredited
+      agents. IPO Nigeria ToU explicitly prohibits reproduction/redistribution/
+      reverse-engineering. 0 NG entries in WIPO IP API Catalog. NIPCOM bill
+      (Industrial Property Commission) not yet enacted as of 2026-05-18;
+      NIPPS (approved 2025-11-06) only proposes prospective digitization.
+      NG is also NOT a Madrid Protocol member (refuted prior assumption).
+    connector_status: skipped
+    manifest_ids: []
+    next_action: watch_nipcom_enactment
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: |
+      Patents and Designs Act (Cap. P2 LFN 2004); Trade Marks Act (Cap. T13
+      LFN 2004); Copyright Act 2022 (Act No. 8) effective 2023-03-17. NG is
+      PCT contracting state (2005-02-08, not 2005-05-08 as previously written).
+      NG is Hague Agreement member (2017-12-12; unverified in synopsis).
+      Not ARIPO/OAPI (observer only). Patents partially via EPO INPADOC for
+      EP/PCT counterparts. Watch items: NIPCOM bill, NIPPS digitization rollout.
+
+  - id: MA/OMPIC
+    name: Office Marocain de la Propriété Industrielle et Commerciale
+    layer: national
+    iso2: MA
+    rights: [patent, utility_model, trademark, design, gi]
+    synopsis: null
+    detail_survey: waves/2026-05-18-africa-wave/ma-ompic.md
+    connector_spec: null
+    rating: red_no_api
+    rating_basis: |
+      HTML/PDF-only register portals (search.ompic.ma, patent.ompic.ma,
+      patentregister.ompic.ma); paid subscription portal directinfo.ma is
+      per-document B2C/B2B with no machine credential or API flow. No
+      developer portal; 0 entries in WIPO IP API Catalog for MA. Despite
+      Morocco being uniquely EPO-integrated (only African EPO Validation
+      State, in force 2015-03-01) and OMPIC running an EPO-built patent
+      publication server, the office has NOT translated that EPO relationship
+      into a public API surface for itself.
+    connector_status: skipped
+    manifest_ids: []
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: |
+      Loi 17-97 (industrial property, as amended); Loi 2-00 (copyright, BMDA,
+      separate from OMPIC). PCT contracting state (1999-10-08). Madrid
+      Protocol member (1999-10-08). Hague Agreement (1999 Geneva Act)
+      deposited 2022-04-22 (not 1957 — that was the 1934/1960-Act era).
+      Only African EPO Validation State — EPO OPS covers MA patents at
+      decent fidelity via INPADOC + the validation relationship. Not
+      ARIPO/OAPI. Recommend native MA connector declined; rely on EPO OPS,
+      WIPO Madrid Monitor, Hague Express, PATENTSCOPE.
 
 # When new entities are added, document them above with the same field
 # shape. When entities are completed, update synopsis paths

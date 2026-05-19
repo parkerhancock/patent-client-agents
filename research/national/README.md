@@ -36,6 +36,17 @@ Organized by ISO 3166-1 alpha-2 prefix.
 | **IMPI** (MX) | Patents, TMs, designs | Not yet researched | [mx-impi.md](mx-impi.md) — *not yet written* |
 | **Rospatent** (RU) | Patents, TMs, designs | Skipped (economics + politics); statutes deferred | [ru-rospatent.md](ru-rospatent.md) — *not yet written* |
 
+### Africa (2026-05-18 wave — all red)
+
+| Office | Rights | Connector status | Synopsis |
+|---|---|---|---|
+| **CIPC** (ZA) South Africa | Patents, TMs, designs, copyright | 🔴 red_blocked (IPS API "Coming Soon"; eServices T&Cs forbid derived works); SA also **not** a Madrid member | [waves/2026-05-18-africa-wave/za-cipc.md](../waves/2026-05-18-africa-wave/za-cipc.md) |
+| **EGYPO + ITDA → EAIP** (EG) Egypt | Patents, UMs, TMs, designs | 🔴 red_no_api (HTML + PDF only); **Law 163/2023 dissolves both offices into new EAIP**, transition in progress | [waves/2026-05-18-africa-wave/eg-egypto.md](../waves/2026-05-18-africa-wave/eg-egypto.md) |
+| **FMITI + NCC** (NG) Nigeria | Patents, designs, TMs, copyright | 🔴 red_no_api (login-gated portals; NIPCOM bill not yet enacted); NG also **not** a Madrid member | [waves/2026-05-18-africa-wave/ng-fmiti.md](../waves/2026-05-18-africa-wave/ng-fmiti.md) |
+| **OMPIC** (MA) Morocco | Patents, TMs, designs, GIs | 🔴 red_no_api despite being **the only African EPO Validation State** (2015-03-01) | [waves/2026-05-18-africa-wave/ma-ompic.md](../waves/2026-05-18-africa-wave/ma-ompic.md) |
+
+**Africa transitive coverage:** patents reachable via **EPO OPS / INPADOC** under ARIPO country code `AP` and OAPI code `OA` — our existing `epo_ops` connector covers ~40 African states transitively. See the [Africa wave summary](../waves/2026-05-18-africa-wave/00-summary.md) for the full transitive matrix and the ARIPO/OAPI regional synopses.
+
 ## Layer-level note
 
 National offices are the only source for:
