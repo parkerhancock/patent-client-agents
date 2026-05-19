@@ -38,7 +38,7 @@ from patent_client_agents.epo_ops.models import (
     SearchResponse,
     SearchResult,
 )
-from patent_client_agents.mcp.tools.international import (
+from patent_client_agents.mcp.tools.epo_ops import (
     convert_epo_number,
     get_epo_biblio,
     get_epo_cql_help,
@@ -54,7 +54,7 @@ def _patch_client_from_env(mock_client) -> object:
     cm = MagicMock()
     cm.__aenter__ = AsyncMock(return_value=mock_client)
     cm.__aexit__ = AsyncMock(return_value=None)
-    return patch("patent_client_agents.mcp.tools.international.client_from_env", return_value=cm)
+    return patch("patent_client_agents.mcp.tools.epo_ops.client_from_env", return_value=cm)
 
 
 # ──────────────────────────────────────────────────────────────────────

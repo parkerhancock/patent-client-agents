@@ -24,7 +24,7 @@ from patent_client_agents.epo_ops.models import (
     CpcSearchResponse,
     CpcSearchResult,
 )
-from patent_client_agents.mcp.tools.international import (
+from patent_client_agents.mcp.tools.cpc import (
     lookup_cpc,
     map_cpc_classification,
     search_cpc,
@@ -65,9 +65,7 @@ async def test_lookup_cpc_returns_response_envelope_with_provenance():
     mock_client = MagicMock()
     mock_client.retrieve_cpc = AsyncMock(return_value=upstream)
 
-    with _patch_client_from_env(
-        "patent_client_agents.mcp.tools.international.client_from_env", mock_client
-    ):
+    with _patch_client_from_env("patent_client_agents.mcp.tools.cpc.client_from_env", mock_client):
         result = await lookup_cpc(symbol="H04L9/32")
 
     assert isinstance(result, ResponseEnvelope)
@@ -87,9 +85,7 @@ async def test_lookup_cpc_handles_empty_scheme():
     mock_client = MagicMock()
     mock_client.retrieve_cpc = AsyncMock(return_value=upstream)
 
-    with _patch_client_from_env(
-        "patent_client_agents.mcp.tools.international.client_from_env", mock_client
-    ):
+    with _patch_client_from_env("patent_client_agents.mcp.tools.cpc.client_from_env", mock_client):
         result = await lookup_cpc(symbol="Z99Z99/99")
 
     assert isinstance(result, ResponseEnvelope)
@@ -125,9 +121,7 @@ async def test_search_cpc_returns_lean_list_envelope_by_default():
     mock_client = MagicMock()
     mock_client.search_cpc = AsyncMock(return_value=upstream)
 
-    with _patch_client_from_env(
-        "patent_client_agents.mcp.tools.international.client_from_env", mock_client
-    ):
+    with _patch_client_from_env("patent_client_agents.mcp.tools.cpc.client_from_env", mock_client):
         result = await search_cpc(query="machine learning")
 
     assert isinstance(result, ListEnvelope)
@@ -153,9 +147,7 @@ async def test_search_cpc_full_true_returns_upstream_shape():
     mock_client = MagicMock()
     mock_client.search_cpc = AsyncMock(return_value=upstream)
 
-    with _patch_client_from_env(
-        "patent_client_agents.mcp.tools.international.client_from_env", mock_client
-    ):
+    with _patch_client_from_env("patent_client_agents.mcp.tools.cpc.client_from_env", mock_client):
         result = await search_cpc(query="ml", full=True)
 
     # Full shape uses upstream field names.
@@ -178,7 +170,7 @@ async def test_map_cpc_classification_returns_response_envelope():
     )
 
     with patch(
-        "patent_client_agents.mcp.tools.international.map_classification",
+        "patent_client_agents.mcp.tools.cpc.map_classification",
         new=AsyncMock(return_value=upstream),
     ):
         result = await map_cpc_classification(symbol="H04L9/32", from_scheme="cpc", to_scheme="ipc")
@@ -196,7 +188,7 @@ async def test_map_cpc_classification_empty_mappings_summary():
     upstream = ClassificationMappingResponse(input_schema="cpc", output_schema="uscls", mappings=[])
 
     with patch(
-        "patent_client_agents.mcp.tools.international.map_classification",
+        "patent_client_agents.mcp.tools.cpc.map_classification",
         new=AsyncMock(return_value=upstream),
     ):
         result = await map_cpc_classification(

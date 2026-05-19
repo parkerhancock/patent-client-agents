@@ -31,7 +31,7 @@ from patent_client_agents.jpo import (
     PriorityInfo,
     RegistrationInfo,
 )
-from patent_client_agents.mcp.tools import international as inter
+from patent_client_agents.mcp.tools import jpo as inter
 
 
 @pytest.fixture

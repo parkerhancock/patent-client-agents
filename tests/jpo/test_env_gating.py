@@ -1,12 +1,12 @@
 """Tests for env-gated JPO MCP tool registration.
 
-Verifies that ``patent_client_agents.mcp.tools.international`` registers
+Verifies that ``patent_client_agents.mcp.tools.jpo`` registers
 the 12 JPO tools (and the JPO download fetcher) only when both
 ``JPO_API_USERNAME`` and ``JPO_API_PASSWORD`` are set.
 
-Test strategy: each test ``importlib.reload``s the international module
+Test strategy: each test ``importlib.reload``s the jpo module
 under a controlled env, then inspects a fresh ``FastMCP`` instance to
-see what got registered. We rebind ``international_mcp`` on the module
+see what got registered. We rebind ``jpo_mcp`` on the module
 to a fresh server before reload so the 12 ``@conditional_tool`` decorators
 each run against an empty surface — that way the assertions are about
 what *this reload* would have registered, not anything that came before.
@@ -22,17 +22,17 @@ from fastmcp import FastMCP
 from law_tools_core.mcp import downloads
 
 
-def _reload_international_with_fresh_mcp() -> object:
-    """Reload the international tool module under a fresh FastMCP.
+def _reload_jpo_with_fresh_mcp() -> object:
+    """Reload the JPO tool module under a fresh FastMCP.
 
-    Replaces ``international_mcp`` with a brand-new instance, then reloads
+    Replaces ``jpo_mcp`` with a brand-new instance, then reloads
     the module so every ``@conditional_tool`` decorator runs against the
     fresh surface. Returns the reloaded module.
     """
-    import patent_client_agents.mcp.tools.international as inter
+    import patent_client_agents.mcp.tools.jpo as jpo_module
 
-    inter.international_mcp = FastMCP("International")
-    return importlib.reload(inter)
+    jpo_module.jpo_mcp = FastMCP("JPO")
+    return importlib.reload(jpo_module)
 
 
 @pytest.fixture
@@ -49,9 +49,9 @@ def fresh_state(monkeypatch: pytest.MonkeyPatch):
     downloads._SOURCES.clear()
     downloads._SOURCES.update(saved_sources)
     # Restore the conftest-managed registration state too. The
-    # international module is module-cached; reload once more under the
+    # jpo module is module-cached; reload once more under the
     # conftest's set env so subsequent tests see the registered tools.
-    _reload_international_with_fresh_mcp()
+    _reload_jpo_with_fresh_mcp()
 
 
 class TestJpoEnvGating:
@@ -63,17 +63,17 @@ class TestJpoEnvGating:
         monkeypatch.delenv("JPO_API_USERNAME", raising=False)
         monkeypatch.delenv("JPO_API_PASSWORD", raising=False)
 
-        inter = _reload_international_with_fresh_mcp()
+        jpo_module = _reload_jpo_with_fresh_mcp()
 
-        tools = await inter.international_mcp.list_tools()  # type: ignore[attr-defined]
+        tools = await jpo_module.jpo_mcp.list_tools()  # type: ignore[attr-defined]
         jpo_names = [t.name for t in tools if t.name.startswith("get_jpo_")]
         assert jpo_names == []
 
-        # Sanity: the EPO/CPC tools (which are NOT env-gated) should
-        # still be registered — that proves the reload actually ran the
-        # decorators and we didn't just import a no-op module.
-        all_names = {t.name for t in tools}
-        assert "search_epo" in all_names
+        # Sanity: the reload actually ran (constants survived). Without
+        # an env-unconditional tool to check, confirming the module's
+        # own state proves the import path executed end-to-end.
+        assert jpo_module.__name__ == "patent_client_agents.mcp.tools.jpo"  # type: ignore[attr-defined]
+        assert "patent" in jpo_module._IP_TYPES  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_only_username_set_skips_registration(
@@ -83,9 +83,9 @@ class TestJpoEnvGating:
         monkeypatch.setenv("JPO_API_USERNAME", "alice")
         monkeypatch.delenv("JPO_API_PASSWORD", raising=False)
 
-        inter = _reload_international_with_fresh_mcp()
+        jpo_module = _reload_jpo_with_fresh_mcp()
 
-        tools = await inter.international_mcp.list_tools()  # type: ignore[attr-defined]
+        tools = await jpo_module.jpo_mcp.list_tools()  # type: ignore[attr-defined]
         jpo_names = [t.name for t in tools if t.name.startswith("get_jpo_")]
         assert jpo_names == []
 
@@ -97,9 +97,9 @@ class TestJpoEnvGating:
         monkeypatch.delenv("JPO_API_USERNAME", raising=False)
         monkeypatch.setenv("JPO_API_PASSWORD", "secret")
 
-        inter = _reload_international_with_fresh_mcp()
+        jpo_module = _reload_jpo_with_fresh_mcp()
 
-        tools = await inter.international_mcp.list_tools()  # type: ignore[attr-defined]
+        tools = await jpo_module.jpo_mcp.list_tools()  # type: ignore[attr-defined]
         jpo_names = [t.name for t in tools if t.name.startswith("get_jpo_")]
         assert jpo_names == []
 
@@ -111,9 +111,9 @@ class TestJpoEnvGating:
         monkeypatch.setenv("JPO_API_USERNAME", "alice")
         monkeypatch.setenv("JPO_API_PASSWORD", "secret")
 
-        inter = _reload_international_with_fresh_mcp()
+        jpo_module = _reload_jpo_with_fresh_mcp()
 
-        tools = await inter.international_mcp.list_tools()  # type: ignore[attr-defined]
+        tools = await jpo_module.jpo_mcp.list_tools()  # type: ignore[attr-defined]
         jpo_names = {t.name for t in tools if t.name.startswith("get_jpo_")}
         expected = {
             "get_jpo_progress",
@@ -140,12 +140,9 @@ class TestJpoEnvGating:
         # Clear the registry so we observe only what THIS reload registers.
         downloads._SOURCES.clear()
 
-        _reload_international_with_fresh_mcp()
+        _reload_jpo_with_fresh_mcp()
 
         assert "jpo/documents" not in downloads._SOURCES
-        # EPO source IS registered unconditionally — sanity check that
-        # the reload ran and didn't just no-op.
-        assert "epo/patents" in downloads._SOURCES
 
     def test_jpo_download_source_partial_env_skipped(
         self, monkeypatch: pytest.MonkeyPatch, fresh_state: None
@@ -155,7 +152,7 @@ class TestJpoEnvGating:
         monkeypatch.delenv("JPO_API_PASSWORD", raising=False)
 
         downloads._SOURCES.clear()
-        _reload_international_with_fresh_mcp()
+        _reload_jpo_with_fresh_mcp()
 
         assert "jpo/documents" not in downloads._SOURCES
 
@@ -167,7 +164,7 @@ class TestJpoEnvGating:
         monkeypatch.setenv("JPO_API_PASSWORD", "secret")
 
         downloads._SOURCES.clear()
-        _reload_international_with_fresh_mcp()
+        _reload_jpo_with_fresh_mcp()
 
         assert "jpo/documents" in downloads._SOURCES
         assert downloads._SOURCES["jpo/documents"].mime_type == "application/zip"

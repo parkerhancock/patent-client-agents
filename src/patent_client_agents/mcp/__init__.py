@@ -21,27 +21,31 @@ from fastmcp import FastMCP
 from .tools.cafc import cafc_mcp
 from .tools.canlii import canlii_mcp
 from .tools.copyright import copyright_mcp
+from .tools.cpc import cpc_mcp
 from .tools.dpma_statutes import dpma_statutes_mcp
 from .tools.epc import epc_mcp
 from .tools.epo_case_law import epo_case_law_mcp
 from .tools.epo_guidelines import epo_guidelines_mcp
+from .tools.epo_ops import epo_ops_mcp
 from .tools.epo_pct_guidelines import epo_pct_guidelines_mcp
 from .tools.epo_up_guidelines import epo_up_guidelines_mcp
 from .tools.euipo import euipo_mcp
 from .tools.fees import fees_mcp
 from .tools.inpi_pi import inpi_pi_mcp
-from .tools.international import international_mcp
 from .tools.ip_australia_bulk import ip_australia_bulk_mcp
 from .tools.ip_australia_designs import ip_australia_designs_mcp
 from .tools.ip_australia_patents import ip_australia_patents_mcp
 from .tools.ip_australia_trademarks import ip_australia_trademarks_mcp
 from .tools.ipo_in_mppp import ipo_in_mppp_mcp
 from .tools.ipo_in_statutes import ipo_in_statutes_mcp
+from .tools.jpo import jpo_mcp
 from .tools.kipo_kipris import kipo_kipris_mcp
 from .tools.mpep import mpep_mcp
 from .tools.office_actions import office_actions_mcp
 from .tools.patent_assignments import patent_assignments_mcp
 from .tools.patents import patents_mcp
+from .tools.prh_fi import prh_fi_mcp
+from .tools.prv_se import prv_se_mcp
 from .tools.publications import publications_mcp
 from .tools.tipo_opdata import tipo_opdata_mcp
 from .tools.trademarks import trademarks_mcp
@@ -73,7 +77,9 @@ ip_mcp = FastMCP(
 ip_mcp.mount(patents_mcp)
 ip_mcp.mount(uspto_mcp)
 ip_mcp.mount(publications_mcp)
-ip_mcp.mount(international_mcp)
+ip_mcp.mount(epo_ops_mcp)
+ip_mcp.mount(cpc_mcp)
+ip_mcp.mount(jpo_mcp)
 ip_mcp.mount(office_actions_mcp)
 ip_mcp.mount(patent_assignments_mcp)
 ip_mcp.mount(trademarks_mcp)
@@ -98,6 +104,8 @@ ip_mcp.mount(ipo_in_statutes_mcp)
 ip_mcp.mount(ipo_in_mppp_mcp)
 ip_mcp.mount(inpi_pi_mcp)
 ip_mcp.mount(dpma_statutes_mcp)
+ip_mcp.mount(prv_se_mcp)
+ip_mcp.mount(prh_fi_mcp)
 ip_mcp.mount(tipo_opdata_mcp)
 ip_mcp.mount(tw_trade_secrets_mcp)
 ip_mcp.mount(kipo_kipris_mcp)

@@ -22,7 +22,7 @@ import vcr
 # We need them registered during the test process so the JPO unit and
 # dispatcher tests can call into them. Setting placeholder credentials
 # at top-level conftest — before pytest collects test modules and before
-# patent_client_agents.mcp.tools.international gets imported — flips
+# patent_client_agents.mcp.tools.jpo gets imported — flips
 # registration on. Cassettes scrub real auth, so placeholders are fine.
 # Tests that need to verify the *unset* path use monkeypatch.delenv +
 # importlib.reload (see tests/jpo/test_env_gating.py).
@@ -403,20 +403,20 @@ def jpo_tools_registered() -> None:
 
     Guards the conftest setup at the top of this file: if the placeholder
     JPO_API_USERNAME / JPO_API_PASSWORD vars aren't set BEFORE
-    ``patent_client_agents.mcp.tools.international`` is imported, the
+    ``patent_client_agents.mcp.tools.jpo`` is imported, the
     ``@conditional_tool`` decorator skips registration and every JPO
     dispatcher test fails with a confusing AttributeError. Asserting at
-    least one ``get_jpo_*`` tool is on ``international_mcp`` here turns
+    least one ``get_jpo_*`` tool is on ``jpo_mcp`` here turns
     that failure mode into a clear, single-line error.
     """
     import asyncio
 
-    from patent_client_agents.mcp.tools.international import international_mcp
+    from patent_client_agents.mcp.tools.jpo import jpo_mcp
 
-    tools = asyncio.run(international_mcp.list_tools())
+    tools = asyncio.run(jpo_mcp.list_tools())
     jpo_names = [t.name for t in tools if t.name.startswith("get_jpo_")]
     assert jpo_names, (
-        "No get_jpo_* tools registered on international_mcp. "
+        "No get_jpo_* tools registered on jpo_mcp. "
         "Check that conftest.py sets JPO_API_USERNAME and JPO_API_PASSWORD "
         "before patent_client_agents.mcp imports occur."
     )

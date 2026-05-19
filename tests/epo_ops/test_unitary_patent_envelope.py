@@ -20,8 +20,8 @@ from patent_client_agents.epo_ops.models import (
     UnitaryPatentPackage,
     UnitaryPatentStatus,
 )
-from patent_client_agents.mcp.tools import international as international_module
-from patent_client_agents.mcp.tools.international import (
+from patent_client_agents.mcp.tools import epo_ops as epo_ops_module
+from patent_client_agents.mcp.tools.epo_ops import (
     _summarize_unitary_patent,
     get_epo_unitary_patent_status,
 )
@@ -32,7 +32,7 @@ def _patch_client_from_env(mock_client) -> object:
     cm = MagicMock()
     cm.__aenter__ = AsyncMock(return_value=mock_client)
     cm.__aexit__ = AsyncMock(return_value=None)
-    return patch("patent_client_agents.mcp.tools.international.client_from_env", return_value=cm)
+    return patch("patent_client_agents.mcp.tools.epo_ops.client_from_env", return_value=cm)
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -42,7 +42,7 @@ def _patch_client_from_env(mock_client) -> object:
 
 def test_old_name_is_removed_from_module():
     """The pre-rename symbol must not be reachable from the module."""
-    assert not hasattr(international_module, "get_unitary_patent_package")
+    assert not hasattr(epo_ops_module, "get_unitary_patent_package")
 
 
 def test_new_name_is_callable_and_async():
