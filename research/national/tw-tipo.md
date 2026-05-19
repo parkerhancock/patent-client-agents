@@ -134,7 +134,7 @@ The `tw_statutes` follow-on (Patent Act / Trademark Act / Copyright Act / IC Lay
 
 1. Register a `tk` with TIPO (email the docx form to `ipoid@tipo.gov.tw`) — owner: maintainer. ETA unknown (no published SLA).
 2. Once `tk` arrives, write `tipo_opdata` connector spec under [`research/specs/`](../specs/) following the IP Australia template.
-3. Build `tipo_opdata` per [`MIGRATION_PLAYBOOK.md`](../../MIGRATION_PLAYBOOK.md). Add `TW/TIPO/Patents`, `TW/TIPO/Trademarks`, `TW/TIPO/Designs`, `TW/TIPO/UtilityModels` rows to `coverage/sources.yaml` at ship time.
+3. Build `tipo_opdata` per [`CONNECTOR_STANDARDS.md`](../../CONNECTOR_STANDARDS.md). Add `TW/TIPO/Patents`, `TW/TIPO/Trademarks`, `TW/TIPO/Designs`, `TW/TIPO/UtilityModels` rows to `coverage/sources.yaml` at ship time. (Shipped 2026-05-18 — see `src/patent_client_agents/tipo_opdata/`.)
 4. Queue `tw_statutes` corpus (the remaining six IP statutes) for after `tipo_opdata`.
 
 ## §6 Open questions

@@ -11,8 +11,7 @@ treating every office in isolation.
 
 It complements but does not replace:
 
-- [`CONNECTOR_STANDARDS.md`](../CONNECTOR_STANDARDS.md) — *how* to build a connector
-- [`MIGRATION_PLAYBOOK.md`](../MIGRATION_PLAYBOOK.md) — *how* to sweep existing tools onto the standards
+- [`CONNECTOR_STANDARDS.md`](../CONNECTOR_STANDARDS.md) — *how* to build a connector (per-tool envelope, provenance, lean+full, list-accept)
 - [`coverage/sources.yaml`](../coverage/sources.yaml) — the manifest of what we cover today
 
 This doc answers: *what* should we cover next, and *why*.

@@ -143,7 +143,7 @@ through national TM connectors:
   in TSDR as US TM applications/registrations.
 - `ip_australia_trademarks` — AU designations via the IP Australia
   Trade Marks OAuth API.
-- (Planned per [`MIGRATION_PLAYBOOK.md`](../../MIGRATION_PLAYBOOK.md)) —
+- (Planned — see [`coverage/atlas.json`](../../coverage/atlas.json)) —
   EUIPO TMView for EU designations.
 
 ### What we should add (if anything)

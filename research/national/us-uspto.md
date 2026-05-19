@@ -22,8 +22,8 @@
 - `US/USPTO/TMEP` — `patent_client_agents.tmep` (substantive law)
 
 **Detail surveys:**
-- Substantial existing knowledge across the connector codebase + [`MIGRATION_PLAYBOOK.md`](../../MIGRATION_PLAYBOOK.md) rows 1-8 (USPTO migrations)
-- USPTO Applications migration is the canonical template for the playbook (row 1, ✅ done)
+- Substantial existing knowledge across the connector codebase
+- USPTO Applications (`uspto_odp` / `uspto_applications`) is the canonical §5.9 envelope template — see `src/patent_client_agents/mcp/tools/uspto.py`
 
 **Higher / sibling layers carrying overlapping data:**
 - **EPO INPADOC** — US patent biblio is in DOCDB, but USPTO ODP is **the authoritative real-time source** for US patents and adds prosecution depth INPADOC doesn't carry.
@@ -136,7 +136,6 @@ The full USPTO catalog. ~10 distinct connector modules (see manifest entries abo
 
 ### What we should improve
 
-- **MIGRATION_PLAYBOOK rows 4-8 pending** — Google Patents, USPTO PTAB, Office Actions, Petitions, Assignments still need the §5.9 envelope sweep. Highest-value local cleanup ahead of new connectors. See [`MIGRATION_PLAYBOOK.md`](../../MIGRATION_PLAYBOOK.md).
 - **TBMP** (Trademark Trial and Appeal Board Manual) — `BACKLOG.md` US Gap Analysis identifies this as a small new module. Mirrors MPEP/TMEP shape.
 - **Design Patent Examiner Guidelines** — no formal "MPEP for designs"; consider adding as a small module or extending MPEP to surface design-specific chapters.
 
@@ -147,10 +146,9 @@ The full USPTO catalog. ~10 distinct connector modules (see manifest entries abo
 
 ### Next steps
 
-1. Knock out MIGRATION_PLAYBOOK rows 4-8 (envelope sweep on existing tools). Highest-leverage local cleanup.
-2. Update fee logic anywhere it references TEAS Plus/Standard or pre-UAIA (50%/75%) discount tiers — both are stale as of 2025-01-18.
-3. Ship TBMP (~1 day per BACKLOG estimate).
-4. Watch for USPTO Director §10 sunset (2026-09-16) — fee rulemaking cadence may shift.
+1. Update fee logic anywhere it references TEAS Plus/Standard or pre-UAIA (50%/75%) discount tiers — both are stale as of 2025-01-18.
+2. Ship TBMP (~1 day per BACKLOG estimate).
+3. Watch for USPTO Director §10 sunset (2026-09-16) — fee rulemaking cadence may shift.
 
 ## §6 Open questions
 
@@ -177,7 +175,8 @@ Primary sources only.
 - [37 CFR](https://www.ecfr.gov/current/title-37) — patent + trademark regulations
 
 **Detail in this repo:**
-- [`MIGRATION_PLAYBOOK.md`](../../MIGRATION_PLAYBOOK.md) — rows 1-8 for USPTO migrations
+- `src/patent_client_agents/mcp/tools/uspto.py` — canonical §5.9 envelope template
+- [`CONNECTOR_STANDARDS.md`](../../CONNECTOR_STANDARDS.md) — connector contract
 
 ## §8 Change log
 

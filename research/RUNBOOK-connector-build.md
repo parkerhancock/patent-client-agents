@@ -49,8 +49,7 @@ You are implementing a new connector for {{ entity_name }} ({{ entity_id }}) per
 1. `{{ spec_path }}` — the concrete deliverable spec (env vars, tool names, response shapes, test fixtures)
 2. `{{ synopsis_path }}` — strategic context (what's unique, what we should NOT add, primary-source URLs)
 3. `CONNECTOR_STANDARDS.md` — the contract every connector must satisfy (§5 tool design rules, §6 manifest entry, §7 connector shapes)
-4. `MIGRATION_PLAYBOOK.md` §1 — the canonical recipe per tool
-5. The canonical template connector: `src/patent_client_agents/{{ canonical_template_package }}/` — copy this and adapt
+4. The canonical template connector: `src/patent_client_agents/{{ canonical_template_package }}/` — copy this and adapt
 
 **Your deliverables:**
 

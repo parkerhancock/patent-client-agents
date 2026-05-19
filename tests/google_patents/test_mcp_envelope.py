@@ -1,7 +1,7 @@
 """Envelope-shape tests for the migrated Google Patents MCP tools.
 
 Verifies the §5.1 / §5.5 / §5.7 / §5.9 contract for ``search_patents_global``
-and ``get_patent``. Row 4 in MIGRATION_PLAYBOOK.md.
+and ``get_patent`` (see ``CONNECTOR_STANDARDS.md`` §5).
 
 Mocks ``GooglePatentsClient`` at the boundary — we test envelope shape,
 not the upstream scraping.

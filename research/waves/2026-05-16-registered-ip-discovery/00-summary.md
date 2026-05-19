@@ -57,11 +57,11 @@ DPMA *could* be BYOK-shaped in the same way for users willing to sign their own 
 
 ### 2. Squeeze more out of aggregators we already have
 
-**EPO OPS** already covers German national patents transitively, plus EP, plus PCT national-phase entries for many designated states. The pending §5.9 envelope sweep on EPO tools ([MIGRATION_PLAYBOOK.md](../../MIGRATION_PLAYBOOK.md) row 9) is real value before adding more registered-IP surface area.
+**EPO OPS** already covers German national patents transitively, plus EP, plus PCT national-phase entries for many designated states. The §5.9 envelope sweep on EPO tools completed on 2026-05-18; the next layer of value is per-jurisdiction recipe helpers (CN/DE/KR via INPADOC).
 
 **Google Patents** covers many jurisdictions transitively. ToS friction we already accept; the scraper is operational.
 
-**USPTO ODP/PPUBS/Assignments/Office Actions/PTAB/Petitions** — playbook rows 4, 5, 6, 7, 8 are still pending. Completing them sharpens what we already have.
+**USPTO ODP/PPUBS/Assignments/Office Actions/PTAB/Petitions** — all on the §5.9 envelope as of 2026-05-18.
 
 ### 3. Keep building substantive-law corpora
 
@@ -84,7 +84,7 @@ Two specific signals worth watching:
 
 1. **Stop pursuing "free national-office REST APIs" as a growth strategy.** The pattern across 8/8 surfaces is restrictive-to-hostile; further canvassing in adjacent jurisdictions (CN, BR, IN, MX) is likely to find more of the same.
 2. **Build the KIPO BYOK connector** next. One office, real coverage, ToS-clean if architected per-user. Follows the JPO/EUIPO/IPA pattern we already operate.
-3. **Finish the MIGRATION_PLAYBOOK pending rows** (4, 5, 6, 7, 8, 9, 13, 15, 21) — sharpens existing tools to §5.9 envelope spec before expanding surface area.
+3. ~~Finish the MIGRATION_PLAYBOOK pending rows.~~ Done 2026-05-18 — all 21 rows of the original sweep landed; existing tools are §5.9 envelope-compliant with provenance and lean+full projections.
 4. **Continue substantive-law expansion** — this is the lane that ships freely under our constraint.
 5. **Monitor partner-program signals** quarterly (WIPO, UKIPO, CIPO).
 

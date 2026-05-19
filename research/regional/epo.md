@@ -111,7 +111,7 @@ Discount programs:
 
 ### What we should improve
 
-- **§5.9 envelope sweep on EPO tools** — [MIGRATION_PLAYBOOK row 9](../../MIGRATION_PLAYBOOK.md) — `search_epo`, `get_epo_biblio`, `get_epo_family`, `get_epo_fulltext`, `get_epo_legal_events`, `get_epo_cql_help`. Add list-accept on all gets, cross-refs, lean defaults. Pending in the playbook.
+- **§5.9 envelope sweep on EPO tools** — completed 2026-05-18 ✅. All `search_epo`/`get_epo_*`/`get_epo_cql_help` tools on the envelope, with list-accept on the four single-record gets (biblio/family/fulltext/legal_events) and cross-refs.
 - **Per-jurisdiction recipe helpers** — `get_de_biblio(de_application_number)`, `get_cn_biblio(...)`, `get_kr_biblio(...)` etc. — wraps OPS jurisdiction-specific search patterns. Documented as "Tier 1 Rank 12" in BACKLOG.
 
 ### What we should NOT add
@@ -120,9 +120,8 @@ Discount programs:
 
 ### Next steps
 
-1. Complete MIGRATION_PLAYBOOK row 9 (envelope sweep).
-2. Ship per-jurisdiction recipe helpers (especially CN — see [BACKLOG Tier 1 Rank 12 `cn_via_epo_ops`](../BACKLOG.md)) to make INPADOC's transitive coverage discoverable for agents.
-3. Update fee-aware tooling once we expose fees via MCP — EPO 2026-04-01 schedule is now effective; old fee logic with 2024 figures will misquote.
+1. Ship per-jurisdiction recipe helpers (especially CN — see [BACKLOG Tier 1 Rank 12 `cn_via_epo_ops`](../BACKLOG.md)) to make INPADOC's transitive coverage discoverable for agents.
+2. Update fee-aware tooling once we expose fees via MCP — EPO 2026-04-01 schedule is now effective; old fee logic with 2024 figures will misquote.
 
 ## §6 Open questions
 
@@ -155,4 +154,5 @@ Primary sources only.
 
 | Date | Change | Source |
 |---|---|---|
-| 2026-05-16 | Initial synopsis. Flagged §5.9 envelope sweep (MIGRATION_PLAYBOOK row 9) as pending. | — |
+| 2026-05-16 | Initial synopsis. Flagged §5.9 envelope sweep as pending. | — |
+| 2026-05-18 | §5.9 envelope sweep on EPO tools complete; next step is per-jurisdiction recipe helpers (CN/DE/KR via INPADOC). | — |

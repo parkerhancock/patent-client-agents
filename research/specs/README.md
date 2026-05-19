@@ -142,7 +142,7 @@ Tests required:
 Some "connectors" are too small for a full spec. Examples:
 
 - **Synopsis-only entities** — offices we've decided to skip. No connector → no spec.
-- **Helper recipes on existing connectors** — e.g., `get_unitary_patent_status(ep_number)` is a helper on EPO OPS, not a new connector. Skip the spec; add the recipe directly per MIGRATION_PLAYBOOK row 21.
+- **Helper recipes on existing connectors** — e.g., `get_epo_unitary_patent_status(ep_number)` is a helper on EPO OPS, not a new connector. Skip the spec; add the recipe directly to the existing tool file under the per-tool checklist in `CONNECTOR_STANDARDS.md` §5.
 - **Doc-only updates** — REUD terminology cleanup is a one-line PR, not a spec-grade build.
 
 When the synopsis §5 says "what we should add" and it's ≤1 day work, just do it; spec discipline is for connector-grade builds.

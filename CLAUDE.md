@@ -119,9 +119,11 @@ enforces §6 against the manifest; CI fails on any deviation. Read the
 standards doc before adding a new connector or refactoring an existing
 tool surface.
 
-[`MIGRATION_PLAYBOOK.md`](MIGRATION_PLAYBOOK.md) is the working sweep
-plan for migrating the existing tool surface onto the standards (one
-connector per PR, ordered for impact + blast radius). USPTO Applications
-is row 1 and is already done; rows 2-21 are queued. The playbook
-references the USPTO Applications migration as the canonical template
-for every shape the sweep will encounter.
+The original 21-row migration sweep (one connector per PR onto the §5.9
+envelope, with provenance and lean+full projections) finished on
+2026-05-18. New connectors and new tools on existing connectors should
+follow `CONNECTOR_STANDARDS.md` directly; the canonical templates are
+`src/patent_client_agents/mcp/tools/uspto.py` (per-tool §5.9 envelope
+shape) and any of the substantive-law connectors (`mpep`, `tmep`,
+`dpma_statutes`) for the `mcp_local` corpus shape with
+`get_corpus_status()`.

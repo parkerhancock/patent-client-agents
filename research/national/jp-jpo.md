@@ -106,7 +106,7 @@ All env-gated on `JPO_API_USERNAME` + `JPO_API_PASSWORD`.
 
 ### What we should improve
 
-- **§5.9 envelope sweep** — completed in [MIGRATION_PLAYBOOK row 11](../../MIGRATION_PLAYBOOK.md) ✅. Including the `get_jpo_applicant_by_*` collapse to a single tool and `get_jpo_jplatpat_url` / `get_jpo_number_reference` first-sentence rewrites.
+- **§5.9 envelope sweep** — completed 2026-05-15 ✅. Including the `get_jpo_applicant_by_*` collapse to a single tool and `get_jpo_jplatpat_url` / `get_jpo_number_reference` first-sentence rewrites.
 - **Cloud Run egress** — see operational note in §3; per-deployment verification.
 
 ### What we should NOT add
@@ -143,7 +143,8 @@ Primary sources only.
 - [Japan Patent Act (EN)](https://www.japaneselawtranslation.go.jp/en/laws/view/3915) — via Japanese Law Translation Database
 
 **Detail in this repo:**
-- [`MIGRATION_PLAYBOOK.md`](../../MIGRATION_PLAYBOOK.md) row 11 (JPO migration ✅)
+- `src/patent_client_agents/mcp/tools/international.py` — JPO MCP tools (§5.9 envelope, ✅)
+- [`CONNECTOR_STANDARDS.md`](../../CONNECTOR_STANDARDS.md) — connector contract
 
 ## §8 Change log
 

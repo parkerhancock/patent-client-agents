@@ -137,7 +137,7 @@ EU Design, post-reform name for RCD).
 ### What we should improve
 
 - **Terminology cleanup** — update `EM/EUIPO/Designs` manifest entry and connector code to reflect **REUD** rather than RCD throughout. The old RCD language is grandfathered but new code should use the current term. ([Reconciliation log entry in BACKLOG.md](../BACKLOG.md).)
-- **§5.9 envelope sweep on EUIPO tools** — completed in [MIGRATION_PLAYBOOK.md row 10](../../MIGRATION_PLAYBOOK.md) ✅. Tools are envelope-compliant.
+- **§5.9 envelope sweep on EUIPO tools** — completed 2026-05-15 ✅. Tools are envelope-compliant.
 - **Fee modeling** — the REUD reform back-loaded the renewal curve significantly (4th renewal at year 20 is now a multiple of the old fee). If we expose fees via API/MCP, that curve needs to be modeled accurately — see the EUIPO design fees page linked above for current figures.
 
 ### What we should NOT add
