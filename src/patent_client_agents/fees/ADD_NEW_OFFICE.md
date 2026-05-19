@@ -2,12 +2,12 @@
 
 The fees connector live-fetches each IP office's published schedule and
 projects it onto the closed-vocab [`FeeSchedule` / `FeeItem`](models.py)
-shape. As of this writing, 15 offices ship under 20 routes:
+shape. As of this writing, 16 offices ship under 22 routes:
 
 * **USPTO** (P/TM/D), **EPO** (P), **EUIPO** (TM/D), **CNIPA** (P),
   **CIPO** (P), **DPMA** (P), **KIPO** (P), **IP Australia** (P),
   **UKIPO** (P/TM), **JPO** (P), **IPO India** (P), **TIPO** (P/TM),
-  **WIPO** (PCT / Madrid / Hague)
+  **INPI Brazil** (P/TM), **WIPO** (PCT / Madrid / Hague)
 
 This runbook captures the decision tree, the file checklist, the gotchas,
 and the dev-browser cookbook we used when discovering EPO's undocumented
@@ -597,6 +597,7 @@ Pick the scraper closest to your office's source shape and copy-modify.
 | `scrapers/jpo.py`      | HTML tables with "¥X + ¥Y per claim" everywhere   | Base+per-claim cell splitting; multi-cohort tagging; full Sec-Fetch headers  |
 | `scrapers/ipindia.py`  | Schedule_1.pdf with 4 rate columns                 | pypdf + regex; column-alignment sanity check                                |
 | `scrapers/tipo.py`     | HTML table (P) + bilingual PDF (TM)                | SME-tier pairing on adjacent rows; curated-catalog verify for the TM PDF (avoids positional walk on a chaotic layout) |
+| `scrapers/inpi_br.py`  | English-language PDF (codes + 2-tier columns)      | Backward code lookup from amount-pair walker; reject decimal-fragment / year false-positives; 3-letter ISO currency; large/small tier from "discounted" column |
 
 Each module's top-of-file docstring describes the source shape; read it
 before touching the code.
@@ -623,3 +624,4 @@ adding a new office, find the closest analog here and copy its tricks.
 | IPIN   | PDF (Schedule 1)    | none                           | INR      | small/large × e-file/paper | One row per year 3-20 (each tier × mode) |
 | TIPO P | HTML table (1×35rows)| none                          | TWD      | large/small (SME)  | Banded: 1-3 / 4-6 / 7-9 / 10+ (inv); 1-3 / 4-6 / 7+ (UM/D). SME tier on years 1-6 only. |
 | TIPO TM | PDF (bilingual zh+EN)| none                          | TWD      | none               | 10-year cycle. Curated catalog + co-occurrence verify (no positional walk). |
+| INPI-BR | English-language PDF | none                         | BRL      | large/small (60% discount per Res. 251/2019) | One row per year for invention (cap 20), UM (cap 15), cert of addition. Discounted column = small tier. Backward code lookup from amount-pair walker. |

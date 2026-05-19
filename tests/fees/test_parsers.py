@@ -4,11 +4,13 @@ from __future__ import annotations
 
 from decimal import Decimal
 
+from patent_client_agents.fees.models import FeeCategory
 from patent_client_agents.fees.scrapers import cipo as cipo_mod
 from patent_client_agents.fees.scrapers import cnipa as cnipa_mod
 from patent_client_agents.fees.scrapers import dpma as dpma_mod
 from patent_client_agents.fees.scrapers import epo as epo_mod
 from patent_client_agents.fees.scrapers import euipo as euipo_mod
+from patent_client_agents.fees.scrapers import inpi_br as inpi_br_mod
 from patent_client_agents.fees.scrapers import tipo as tipo_mod
 from patent_client_agents.fees.scrapers import uspto as uspto_mod
 
@@ -332,3 +334,63 @@ class TestTIPOMoneyAndAnnuity:
         # both pieces back to a single alphanumeric stream
         assert tipo_mod._normalize_for_match("designate d good") == "designatedgood"
         assert tipo_mod._normalize_for_match("NT$ 7,000") == "nt7000"
+
+
+class TestINPIBrazilAmountAndBands:
+    def test_parse_amount_plain(self) -> None:
+        assert inpi_br_mod._parse_br_amount("780,00") == Decimal("780.00")
+
+    def test_parse_amount_thousands(self) -> None:
+        # Brazilian format: 1.595,00 means 1595.00 (. is thousands sep)
+        assert inpi_br_mod._parse_br_amount("1.595,00") == Decimal("1595.00")
+        assert inpi_br_mod._parse_br_amount("3.295,00") == Decimal("3295.00")
+
+    def test_parse_amount_small(self) -> None:
+        assert inpi_br_mod._parse_br_amount("2,80") == Decimal("2.80")
+
+    def test_parse_amount_empty(self) -> None:
+        assert inpi_br_mod._parse_br_amount("") is None
+
+    def test_years_for_code_invention_3_to_6(self) -> None:
+        assert inpi_br_mod._years_for_code("222") == [3, 4, 5, 6]
+
+    def test_years_for_code_invention_open_band(self) -> None:
+        # Code 228: "16th year and on" for invention (cap at 20)
+        assert inpi_br_mod._years_for_code("228") == [16, 17, 18, 19, 20]
+
+    def test_years_for_code_utility_model_open_band(self) -> None:
+        # Code 246: "11th year and on" for utility model (cap at 15)
+        assert inpi_br_mod._years_for_code("246") == [11, 12, 13, 14, 15]
+
+    def test_years_for_code_non_annuity_empty(self) -> None:
+        # Code 202 is publication-in-advance, not an annuity
+        assert inpi_br_mod._years_for_code("202") == []
+
+    def test_is_year_excludes_real_years(self) -> None:
+        assert inpi_br_mod._is_year("2019") is True
+        assert inpi_br_mod._is_year("2025") is True
+        assert inpi_br_mod._is_year("1996") is True
+        assert inpi_br_mod._is_year("222") is False  # real code
+        assert inpi_br_mod._is_year("3018") is False  # code, not year (out of range)
+
+    def test_categorize_patent_renewal(self) -> None:
+        cat, cond = inpi_br_mod._categorize_patent("222", "from the 3rd to the 6th year")
+        assert cat == FeeCategory.renewal
+        assert cond is None
+
+    def test_categorize_patent_grant(self) -> None:
+        cat, _ = inpi_br_mod._categorize_patent("212", "within the regular term")
+        assert cat == FeeCategory.grant
+
+    def test_categorize_patent_appeal(self) -> None:
+        cat, _ = inpi_br_mod._categorize_patent("214", "Appeal for a patent of invention")
+        assert cat == FeeCategory.appeal
+
+    def test_detect_per_class_trademark(self) -> None:
+        cond = inpi_br_mod._detect_per_class("Opposition – amount per class")
+        assert cond is not None
+        assert cond.threshold == 1
+        assert cond.per_unit is True
+
+    def test_detect_per_class_no_match(self) -> None:
+        assert inpi_br_mod._detect_per_class("Submission of documents") is None

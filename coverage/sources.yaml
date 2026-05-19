@@ -1130,6 +1130,28 @@ sources:
       Locarno classification; SE-national designs back to 1971. RCDs
       covered transitively via EUIPO. Hague IR coverage via WIPO Hague.
 
+  - id: SE/PRV/SPCs
+    name: PRV Sweden — Supplementary Protection Certificates
+    jurisdiction: SE
+    wipo_st3_code: SE
+    issuing_body: Patent- och registreringsverket (PRV)
+    rights: [patent]
+    data_types: [bibliographic, legal_status]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.prv_se
+    last_verified: 2026-05-19
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      Swedish SPCs (patent-term extensions under EU Reg. 469/2009 +
+      1610/96). Uses an advanced-search body where each filter wraps
+      as ``{value, searchType}``; the client requires at least one
+      filter because an empty body returns HTTP 500.
+
   # ────────────────────────────────────────────────────────────────────
   # FI — PRH Finland (nis-api-gateway-* hosts, unauthenticated)
   # ────────────────────────────────────────────────────────────────────
@@ -1773,3 +1795,66 @@ sources:
       the live PDF: each entry's English label and amount must
       co-occur within a 300-char window in normalized text. Drift
       raises loudly rather than silently mis-classifying.
+
+  - id: BR/INPI/Fees/Patent
+    name: INPI Brazil — Fees (Patent)
+    jurisdiction: BR
+    wipo_st3_code: BR
+    issuing_body: Instituto Nacional da Propriedade Industrial (INPI)
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-19
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      INPI Brazil patent fees in BRL covering invention patents (20-yr
+      term), utility model patents (15-yr term), and certificates of
+      addition. Source is the English-language Schedule of Fees PDF at
+      gov.br/inpi/en/costs-and-payment/schedule-of-fees-patents.pdf
+      (the pt-BR landing at /servicos/tabelas-de-retribuicao is Plone
+      role-restricted "Conteúdo Restrito" but the EN PDFs under
+      /en/costs-and-payment/ are anonymously accessible — path
+      discovered 2026-05-19). 60 fee codes expanded to 272 FeeItems
+      via per-year annuity bands × large/small tier siblings. The
+      "discounted" column maps to EntityTier.small per Resolution
+      251/2019 §I.5 (up to 60% reduction for individuals,
+      micro-enterprises, SMEs, cooperatives, ICTs, non-profits, and
+      public bodies). Statutory basis Lei 9.279/1996 + Ordinance MDIC
+      39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019. v1
+      GAPS: (a) multi-tier per-claim surcharges published as prose
+      not numeric columns; (b) PCT-section variable-amount rows; (c)
+      Portaria 10/2025 update not yet reflected in the EN PDF.
+
+  - id: BR/INPI/Fees/Trademark
+    name: INPI Brazil — Fees (Trademark)
+    jurisdiction: BR
+    wipo_st3_code: BR
+    issuing_body: Instituto Nacional da Propriedade Industrial (INPI)
+    rights: [trademark]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-19
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      INPI Brazil trademark fees in BRL, per-class for application
+      (pre-approved vs free specification), first 10-year term, 10-yr
+      renewal cycle, opposition, cancellation, and administrative
+      invalidation. Source PDF at gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf.
+      Up-to-60% discount applies per Resolution 251/2019 §I.5. Same
+      scraper-pattern as the patent route.

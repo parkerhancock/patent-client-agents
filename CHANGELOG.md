@@ -9,6 +9,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- **INPI Brazil fee schedules (patent + trademark).** Adds two
+  routes to the bundled `patent_client_agents.fees` connector:
+  `BR/INPI/Fees/Patent` (60 fee codes expanded to 272 FeeItems via
+  per-year annuity bands × large/small tier siblings — invention
+  20-yr term, utility model 15-yr term, certificate of addition
+  20-yr term) and `BR/INPI/Fees/Trademark` (34 FeeItems including
+  10-year renewal cycle). Source is the English-language
+  Schedule of Fees PDFs at
+  `gov.br/inpi/en/costs-and-payment/schedule-of-fees-{patents,trademarks}.pdf`
+  — anonymously accessible (path discovered 2026-05-19; the pt-BR
+  `tabelas-de-retribuicao` landing remains Plone role-restricted).
+  The "discounted" column maps to `EntityTier.small` per Resolution
+  251/2019 §I.5 (up-to-60% reduction for individuals,
+  micro-enterprises, SMEs, cooperatives, ICTs, non-profits, public
+  bodies). Brings the fees connector to 16 offices / 22 routes
+  (12 of WIPO top-30 by 2023 patent filing volume).
+- **PRH Finland v0.2 — trademark + design image downloads.** Two new
+  MCP tools — `download_prh_trademark_image` and
+  `download_prh_design_image` — fetch the binary image bytes exposed
+  in dossier search rows and return the canonical `download_response`
+  shape (signed `download_url` in hosted mode; local `file_path` in
+  stdio mode; MCP `pca://` resource URI in both). TM variants cover
+  `image` (GIF/JPEG), `thumbnail`, and `thumbnail/large` (JPEG);
+  design variants cover `image`, `thumbnail`, and `thumbnail/medium`
+  (JPEG). Cache key per CoWork allowlist invariant:
+  `prh_fi/{right}/{variant}/{ident}` is also the MCP URI and the HTTP
+  path. Adds 2 VCR cassettes.
+- **PRV Sweden v0.2 — SPC search.** Adds `search_prv_spcs` MCP tool +
+  `PrvClient.search_spcs()` for Swedish Supplementary Protection
+  Certificates (patent-term extensions under EU Regulation 469/2009
+  + 1610/96). Decoded the advanced-search request shape from the
+  PRV React bundle: each filter wraps as
+  `{value: ..., searchType: "CONTAINS"|"STARTS_WITH"|"EXACT"}` and
+  the endpoint requires at least one filter (empty body returns
+  HTTP 500). Filters exposed: `substance_product`, `applicants`,
+  `application_number_spc`, `base_patent_number`,
+  `marketing_authorization_number`, `announcement`. Adds one
+  manifest row (`SE/PRV/SPCs`) and one VCR cassette. Resolves the
+  v0.1 deferral on PRV SPC coverage.
 - **TIPO Taiwan fee schedules (patent + trademark).** Adds two routes
   to the bundled `patent_client_agents.fees` connector: `TW/TIPO/Fees/Patent`
   (HTML table scrape of `/en/tipo2/326.html`, 34 source rows expanded

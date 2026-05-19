@@ -2,15 +2,18 @@
 
 Honest accounting of where `patent_client_agents.fees` stands against the
 WIPO World IP Indicators 2024 ranking of patent offices by filing volume
-(2023 data). Updated 2026-05-19 after the TIPO Taiwan ship (`db91c5d`)
-plus a 60-minute discovery push that hit walls on several Tier-2 offices.
+(2023 data). Updated 2026-05-19 — TIPO Taiwan (`db91c5d`) and INPI Brazil
+shipped; the Brazil unblock came from the user finding the English-PDF
+mirror at `gov.br/inpi/en/costs-and-payment/schedule-of-fees-*.pdf`,
+which is anonymously accessible while the pt-BR Plone tabela page is
+auth-gated.
 
 This doc exists so the next session doesn't have to re-discover what's
 blocking each remaining office.
 
 ---
 
-## §1 Coverage today: 11 of 30 offices
+## §1 Coverage today: 12 of 30 offices
 
 Routes already shipped on the fees connector
 (`src/patent_client_agents/fees/registry.py`):
@@ -27,15 +30,17 @@ Routes already shipped on the fees connector
 | 9    | CIPO Canada        | P              | Multi-table HTML; English-word ordinal year-band expansion |
 | 10   | IP Australia       | P              | Multi-table HTML, heading-walks-up-DOM |
 | 11   | UKIPO              | P / TM         | gov.uk per-form fan-out (bounded concurrency = 5) |
+| 12   | INPI Brazil        | P / TM         | PDF (pypdf) with backward code lookup; large/small tiers via "discounted" column |
 | 13   | TIPO Taiwan        | P / TM         | HTML table + bilingual PDF curated catalog |
 
 Plus 3 non-national routes:
 * **EUIPO** (regional TM/D — Next.js SSR stream decoding for TM, HTML for D)
 * **WIPO** PCT / Madrid / Hague (international systems)
 
-**Total** = 15 offices on 20 routes; 11/30 of the WIPO national ranking,
-or 11/27 if we exclude the three offices below that are blocked on
-factors outside our control (Brazil auth, Russia + Iran sanctions).
+**Total** = 16 offices on 22 routes; 12/30 of the WIPO national ranking,
+or 12/27 if we exclude the offices below that are blocked on factors
+outside our control (Russia + Iran sanctions, plus offices we have not
+yet found a public route for).
 
 ---
 
@@ -48,7 +53,7 @@ returned, not what the page would look like in a real browser.
 | # | Office | Last-known fee URL | Probe result | Blocker class | Unblock path |
 |---|--------|--------------------|--------------|---------------|--------------|
 | 8 | **Rospatent** RU | rospatent.gov.ru | n/a (not probed) | Sanctions (OFAC/EU) | Defer pending compliance review. Schedule itself is informational only; the question is whether we can host it on the public demo. |
-| 12 | **INPI Brazil** | gov.br/inpi/pt-br/servicos/tabelas-de-retribuicao | 200 OK but body = "Conteúdo Restrito" → `acl_users/credentials_cookie_auth/require_login` | **Plone role-restricted** (auth required) | Need gov.br federated auth (CPF or consular reg). Even then unclear if fee tables are role-accessible. Backup: Portaria PDFs on `in.gov.br` (also bot-protected; Azion CDN errors on direct fetch). Recommended: stealth HTTP service. |
+| 12 | ~~**INPI Brazil**~~ | ✅ SHIPPED 2026-05-19 via `gov.br/inpi/en/costs-and-payment/schedule-of-fees-*.pdf` (the EN-language PDFs are anonymously accessible while the pt-BR Plone landing is auth-gated) | n/a | n/a | n/a |
 | 14 | **HKIPD** Hong Kong | ipd.gov.hk (URL pattern unknown) | 404 on `/eng/fees.htm` and `/en/patents/fees/index.html` | URL drift / unknown | 15-min dev-browser navigation from `ipd.gov.hk` homepage should find current URLs. |
 | 15 | **IMPI Mexico** | gob.mx/impi | Geo-blocked subdomain per research note `mx-impi.md` | Geo-block + DOF gazette gating | Stealth HTTP service with non-US IP; or paid LATAM proxy. |
 | 16 | **Iran IPI** | n/a | n/a (not probed) | Sanctions + connectivity | Defer pending compliance + sanctions review. |
@@ -184,6 +189,16 @@ to keep producing 0 commits per hour.
 
 ## §6 Session log
 
+* **2026-05-19 (after the gap doc)** — User found the English-language
+  INPI Brazil fee PDFs at `gov.br/inpi/en/costs-and-payment/schedule-of-fees-*.pdf`
+  (anonymously accessible, no auth). Shipped `BR/INPI/Fees/Patent`
+  (272 FeeItems from 60 codes × tier × year-band expansion) and
+  `BR/INPI/Fees/Trademark` (34 FeeItems). Worth noting: the official
+  research note had been pointing to the auth-gated pt-BR landing
+  page; the EN-PDF path on `/inpi/en/costs-and-payment/` is the
+  practical working route. v1 GAPS documented for the multi-tier
+  per-claim surcharges (prose-formatted in the PDF) and PCT-section
+  variable-amount rows.
 * **2026-05-19 (post-TIPO)** — Probed 9 offices for the "easy HTML
   batch" plan (BR, SG, FR, ES, IL, MY, SA, HK, TR). Found that the
   subagent's "low complexity" estimate was wrong: only 1 returned a
@@ -191,4 +206,4 @@ to keep producing 0 commits per hour.
   page; not actually the fees page). Spent 30 min on Brazil
   (auth-gated), 20 min on France (Cloudflare), 10 min on Singapore
   (CDN rate-limit). Wrote this doc instead of forcing another
-  attempt. Doc supersedes the WIPO-Brazil-Singapore push.
+  attempt. Doc superseded by the EN-PDF discovery for Brazil.

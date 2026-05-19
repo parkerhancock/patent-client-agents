@@ -131,25 +131,43 @@ missing register API.
 
 ## §4 Fees
 
-**Policy: link only.** INPI publishes a consolidated Brazilian Real
-(BRL) tariff under Portaria MDIC 110/2025 + Portaria INPI/PR 10/2025
-(effective in phases through late 2025), covering **patents** (filing,
-search/examination, annuities), **utility models**, **trademarks**
-(filing/renewal per class), **industrial designs**, **GIs**, **computer
-programs**, **IC topographies**, and **technology-transfer contracts**.
+**Status (2026-05-19):** Two routes shipped on the bundled
+`patent_client_agents.fees` connector: `BR/INPI/Fees/Patent` and
+`BR/INPI/Fees/Trademark`. The scraper sources are the
+English-language **`/inpi/en/costs-and-payment/schedule-of-fees-*.pdf`**
+PDFs — anonymously accessible, no auth required. INPI publishes a
+consolidated BRL tariff covering **patents** (filing, search/examination,
+annuities), **utility models**, **trademarks** (filing/renewal per
+class), **industrial designs**, **GIs**, **computer programs**, **IC
+topographies**, and **technology-transfer contracts**.
 
-- **Official schedule:** [Tabelas de Retribuição — INPI](https://www.gov.br/inpi/pt-br/servicos/tabelas-de-retribuicao)
+- **Official English schedule (PDFs — anonymously fetchable, used by the scraper):**
+  - [Patents PDF](https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-patents.pdf)
+  - [Trademarks PDF](https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf)
+  - [Software PDF](https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-software.pdf) (out of v1 scope)
+- **Official pt-BR landing (auth-gated):** [Tabelas de Retribuição — INPI](https://www.gov.br/inpi/pt-br/servicos/tabelas-de-retribuicao) — returns "Conteúdo Restrito" / login wall to public crawlers; the EN PDFs above are the working access path.
 - **Rate adjustment notice:** [INPI fixa descontos para a nova Tabela de Retribuições](https://www.gov.br/inpi/pt-br/central-de-conteudo/noticias/inpi-fixa-descontos-para-a-nova-tabela-de-retribuicoes-pelos-seus-servicos)
-- **Statutory basis:** [Lei 9.279/1996 (LPI)](https://www.planalto.gov.br/ccivil_03/leis/l9279.htm)
+- **Statutory basis:** [Lei 9.279/1996 (LPI)](https://www.planalto.gov.br/ccivil_03/leis/l9279.htm); Ordinance MDIC 39/2014; ME Ordinance 516/2019; INPI Resolution 251/2019. A 2025 update under Portaria MDIC 110/2025 + Portaria INPI/PR 10/2025 (phased through late 2025) is announced but INPI has not yet republished the EN PDFs — the scraper currently reflects the 2019 schedule.
 
-Discount programs *(name + one-line eligibility — no amounts, no dates)*:
+Discount programs *(name + one-line eligibility)*:
 
-- **50% reduction** — natural persons, microenterprises (ME), individual
-  microentrepreneurs (MEI), small businesses (EPP), simple-innovation
-  enterprises, scientific & technological institutions (ICTs),
-  non-profit entities, public bodies.
+- **Up-to-60% reduction** (Resolution 251/2019 §I.5) — natural persons
+  with no corporate stake in the field, microenterprises (ME),
+  individual microentrepreneurs (MEI), small businesses (EPP),
+  cooperatives (Law 5,764/1971), scientific & technological
+  institutions (ICTs), non-profit entities, and public bodies. The
+  scraper maps the PDF's "discounted" column to `EntityTier.small`.
 - **Full exemption** — persons in financial hardship and persons with
-  disabilities registered in CadÚnico or the National PcD Register.
+  disabilities registered in CadÚnico or the National PcD Register
+  (not represented in the schedule data).
+
+v1 GAPS (documented in the scraper's `notes` field):
+- Multi-tier per-claim surcharges for examination requests (published
+  as prose: "R$100 per claim from the 11th to the 15th; R$200 from
+  the 16th to the 30th; R$500 from the 31st on" with parallel
+  discounted rates) — not captured as structured rows.
+- PCT-section variable-amount rows are skipped.
+- 2025 Portaria 10 update not yet reflected in INPI's EN PDF.
 
 ## §5 Connector strategy
 
