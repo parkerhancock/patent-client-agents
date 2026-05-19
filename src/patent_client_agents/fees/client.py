@@ -91,6 +91,13 @@ _OFFICE_ALIASES: dict[str, tuple[str, str]] = {
     "IPO INDIA": ("IN", "IPIN"),
     "CGPDTM": ("IN", "IPIN"),
     "INDIAN PATENT OFFICE": ("IN", "IPIN"),
+    # TIPO Taiwan
+    "TIPO": ("TW", "TIPO"),
+    "TW": ("TW", "TIPO"),
+    "TAIWAN": ("TW", "TIPO"),
+    "TAIWAN INTELLECTUAL PROPERTY OFFICE": ("TW", "TIPO"),
+    "ROC": ("TW", "TIPO"),
+    "CHINESE TAIPEI": ("TW", "TIPO"),
     # WIPO — three systems, right discriminates
     # (use 'WIPO' as a top-level alias; resolver routes by right)
     "WIPO": ("WO", "WIPO"),

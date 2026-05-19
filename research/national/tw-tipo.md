@@ -6,7 +6,7 @@
 **Rights administered:** patent, utility_model, design (one Patent Act), trademark, copyright (registry only — not an examined right since 1985)
 **Working languages:** Traditional Chinese (primary); partial English on policy pages and structured-field names; field *content* is Chinese-only
 **Connector status:** partial — only the Trade Secrets Act statute (`TW/MOJ/TradeSecretsAct`) ships today; the TIPO REST API is verified green but not yet wrapped
-**Last verified:** 2026-05-16
+**Last verified:** 2026-05-19 (fees routes added; legacy fee URLs corrected after drift)
 **Manifest entry:** [`coverage/sources.yaml` → `TW/MOJ/TradeSecretsAct`](../../coverage/sources.yaml) (the only TW row in the manifest today)
 
 **Detail surveys:**
@@ -92,10 +92,17 @@ Out of scope for any TIPO-style connector — different agency (Judicial Yuan, n
 
 ## §4 Fees
 
-TIPO publishes patent and trade mark fee schedules in TWD.
+TIPO publishes patent and trade mark fee schedules in TWD. Both routes
+ship in the bundled `patent_client_agents.fees` connector as of
+2026-05-19 (`TW/TIPO/Fees/Patent`, `TW/TIPO/Fees/Trademark`). Patent is
+a clean HTML scrape; TM is a curated catalog of 30 entries verified
+against the bilingual zh-TW + EN PDF.
 
-- **Patent fees (EN):** [TIPO — Patent fees](https://www.tipo.gov.tw/en/cp-289-855395-15881-2.html)
-- **Trademark fees (EN):** [TIPO — Trademark fees](https://www.tipo.gov.tw/en/lp-282-2.html)
+- **Patent fees (EN, current):** [Schedule of Patent Fees](https://www.tipo.gov.tw/en/tipo2/326.html) — single HTML table, 34 line-items; covers invention (20-yr term), utility model (10-yr term), and design (15-yr term) patents under one Patent Act. Small-tier discount ("natural person, a school, or a small and medium-sized enterprise") applies to annuity years 1-3 and 4-6 across all three patent types; design year-1 SME annuity is NT$0.
+- **Trademark fees (EN, current, effective 2024-05-01):** [Schedule of Trademark Fees 2024](https://www.tipo.gov.tw/en/tipo2/342.html) — bilingual PDF (linked from the landing page). Per-class application (NT$3,000), registration (NT$2,500), and renewal on 10-year cycle (NT$4,000); per-good surcharge over 20 in a single class (NT$200/good); Class 35 retail surcharge over 5 designated services (NT$500/service).
+- **Statutory basis:** [Patent Act (專利法, EN)](https://www.tipo.gov.tw/en/cp-86-852060-1f164-2.html) Articles 92, 93, 96, 142, 159 (fee provisions) and the corresponding Patent Fee Regulations; [Trademark Act (商標法, EN)](https://www.tipo.gov.tw/en/cp-86-1027099-2deef-2.html) Articles 33, 104 (renewal cycle and fee delegation).
+- **Statutory basis — patents:** [Patent Act](https://www.tipo.gov.tw/en/cp-86-852060-1f164-2.html)
+- **Note on URL drift (2026-05-19):** the legacy `cp-289-...` URLs in earlier surveys now 404; TIPO migrated to the `/en/tipo2/<page-id>.html` namespace.
 
 
 ## §5 Connector strategy
@@ -158,8 +165,8 @@ Primary sources only.
 - [Taiwan Open Government Data License v1.0](https://data.gov.tw/license)
 - [TIPO News — iPKM launch announcement (2025-05-15)](https://www.tipo.gov.tw/en/tipo2/363-22677.html)
 - [iPKM new search platform](https://cloud.tipo.gov.tw/S400)
-- [TIPO Patent fees (EN)](https://www.tipo.gov.tw/en/cp-289-855395-15881-2.html)
-- [TIPO Trademark fees (EN landing)](https://www.tipo.gov.tw/en/lp-282-2.html)
+- [TIPO Patent fees (EN, current URL)](https://www.tipo.gov.tw/en/tipo2/326.html)
+- [TIPO Trademark fees (EN landing, current URL)](https://www.tipo.gov.tw/en/tipo2/342.html)
 - [Patent Act (MOJ EN)](https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=J0070007)
 - [Trademark Act (MOJ EN)](https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=J0070001)
 - [Trade Secrets Act (MOJ EN)](https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=J0080028)
@@ -172,4 +179,5 @@ Primary sources only.
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-05-19 | Added `TW/TIPO/Fees/Patent` and `TW/TIPO/Fees/Trademark` routes to the bundled `patent_client_agents.fees` connector. Patent is a direct HTML table scrape of [`/en/tipo2/326.html`](https://www.tipo.gov.tw/en/tipo2/326.html) (34 line-items expanded to 83 FeeItems with annuity year-band + small-tier expansion). Trademark is a curated catalog of 30 entries verified against the 2024-05-01 bilingual PDF linked from [`/en/tipo2/342.html`](https://www.tipo.gov.tw/en/tipo2/342.html); each entry's label and amount must co-occur in the normalized PDF text or the scraper raises (drift discipline). Also corrected URL drift: the previous `cp-289-855395-15881-2.html` (patent) and `lp-282-2.html` (TM) URLs both 404 — TIPO migrated to a `/en/tipo2/<id>.html` namespace. | Live HTML + PDF fetch; smoke-test against rows 17-30 (annuity bands) for known totals (invention y10=NT$16,000; design y1 SME=NT$0); coverage manifest validates clean (`scripts/build_coverage.py --check`). |
 | 2026-05-16 | Initial synopsis. **Drift corrections vs. older [`connectors/tipo_taiwan.md`](../connectors/tipo_taiwan.md)**: (a) API host moved from `tiponet.tipo.gov.tw` to `cloud.tipo.gov.tw` (old host 301-redirects); (b) auth is `tk` *query parameter*, not an `apiKey` *header* as the publicapi.dev listing claims; (c) **TWPAT scheduled offline 2025-04-25** and replaced by iPKM at `cloud.tipo.gov.tw/S400` (launched 2024-12-18); (d) ToS resolved — Taiwan OGDL v1.0, CC-BY-4.0-compatible, sublicensing permitted; (e) 6,000-row-per-request page cap discovered empirically; (f) older "no rate limits" claim is misleading. The biblio-only scope finding from the older survey is confirmed — no full text/claims/figures in the API. | Live OAS pull + sample-mode probe + authenticated probe with demo `tk` from data.gov.tw + TIPO English news pages; full detail in [`waves/2026-05-16-coverage-batch-2/tw-tipo.md`](../waves/2026-05-16-coverage-batch-2/tw-tipo.md) |

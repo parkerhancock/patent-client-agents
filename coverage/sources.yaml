@@ -1056,6 +1056,187 @@ sources:
       in this manifest by design.
 
   # ────────────────────────────────────────────────────────────────────
+  # SE — PRV Sweden (search.prv.se backing APIs, unauthenticated)
+  # ────────────────────────────────────────────────────────────────────
+
+  # Three undocumented but unauthenticated JSON APIs reverse-engineered
+  # from the search.prv.se React bundle 2026-05-18:
+  #   patents-search-api.prv.se   — patent simple-search
+  #   dv-search-api.prv.se        — trademark + design simple-search
+  #   api.prv.se                  — per-record patent fetch
+  # No API key, no signed ToU. Parallel bulk feeds on data.prv.se are
+  # CC0 1.0 / CC BY 4.0 under Sweden's Open Data Act (SFS 2022:818).
+
+  - id: SE/PRV/Patents
+    name: PRV Sweden — National Patents
+    jurisdiction: SE
+    wipo_st3_code: SE
+    issuing_body: Patent- och registreringsverket (PRV)
+    rights: [patent]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.prv_se
+    last_verified: 2026-05-19
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      Simple-search + per-record GET (applicationType=NAT default).
+      EP-validated patents reachable via EPO OPS at INPADOC fidelity;
+      this entry covers the SE-national-only slice. SPC search
+      endpoint returned HTTP 500 on probe — deferred to v0.2.
+
+  - id: SE/PRV/Trademarks
+    name: PRV Sweden — National Trademarks
+    jurisdiction: SE
+    wipo_st3_code: SE
+    issuing_body: Patent- och registreringsverket (PRV)
+    rights: [trademark]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.prv_se
+    last_verified: 2026-05-19
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      Nice classification; dossierTypeEn/Sv discriminates national
+      filings from Madrid IRs designating SE. EUTM coverage via
+      planned EUIPO connector.
+
+  - id: SE/PRV/Designs
+    name: PRV Sweden — National Designs (Mönster)
+    jurisdiction: SE
+    wipo_st3_code: SE
+    issuing_body: Patent- och registreringsverket (PRV)
+    rights: [design]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.prv_se
+    last_verified: 2026-05-19
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      Locarno classification; SE-national designs back to 1971. RCDs
+      covered transitively via EUIPO. Hague IR coverage via WIPO Hague.
+
+  # ────────────────────────────────────────────────────────────────────
+  # FI — PRH Finland (nis-api-gateway-* hosts, unauthenticated)
+  # ────────────────────────────────────────────────────────────────────
+
+  # Three undocumented but unauthenticated JSON APIs reverse-engineered
+  # from PRH's React bundles 2026-05-18 / patent body decoded 2026-05-19:
+  #   patenttitietopalvelu.prh.fi/nis-api-gateway-pat/
+  #     — patent / UM / SPC / EP-FI corpus + per-record GET
+  #   tavaramerkkitietopalvelu.prh.fi/nis-api-gateway/
+  #     — national trademarks + well-known TMR
+  #   mallioikeustietopalvelu.prh.fi/nis-api-gateway/
+  #     — national designs
+  # No API key, no signed ToU. Sister business-register service
+  # avoindata.prh.fi is explicit CC-BY 4.0 — strongest available
+  # license-posture signal for the IP search APIs.
+
+  - id: FI/PRH/Patents
+    name: PRH Finland — National Patents, UMs, SPCs, EP-FI
+    jurisdiction: FI
+    wipo_st3_code: FI
+    issuing_body: Patentti- ja rekisterihallitus (PRH)
+    rights: [patent]
+    data_types: [bibliographic, prosecution, legal_status, classification]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.prh_fi
+    last_verified: 2026-05-19
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      Search + per-record GET. PatentDossier (national) /
+      PatentDossierUtilityModel (UM) / PatentEurope (EP-FI) / Spc all
+      surface through the same endpoints. Server-side cap of 3,000
+      rows per query — narrow filters required for high-population
+      applicants. The patent-search body has 30 fields with three
+      inclusion-filter lists (dossierStatus / patentTypes /
+      publicationTypes) supplied with full defaults by the client.
+
+  - id: FI/PRH/Trademarks
+    name: PRH Finland — National Trademarks
+    jurisdiction: FI
+    wipo_st3_code: FI
+    issuing_body: Patentti- ja rekisterihallitus (PRH)
+    rights: [trademark]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.prh_fi
+    last_verified: 2026-05-19
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      Nice classification; ~283k national TMs back to 1891. Mark
+      images served at /opendata/trademark/image/... (URL-only on
+      this row; no download surface in v1). EUTM coverage via
+      planned EUIPO connector; Madrid IRs via WIPO Madrid Monitor.
+
+  - id: FI/PRH/WellKnownTrademarks
+    name: PRH Finland — Well-Known Trademarks (TMR)
+    jurisdiction: FI
+    wipo_st3_code: FI
+    issuing_body: Patentti- ja rekisterihallitus (PRH)
+    rights: [trademark]
+    data_types: [bibliographic, legal_status]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.prh_fi
+    last_verified: 2026-05-19
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      Marks recognized as well-known in Finland under §6 of the
+      Trade Marks Act (544/2019). ~111 records as of 2026-05-19;
+      each carries a free-text targetGroup audience description.
+      No upstream substitute — FI-national well-known register only.
+
+  - id: FI/PRH/Designs
+    name: PRH Finland — National Designs (Mallit)
+    jurisdiction: FI
+    wipo_st3_code: FI
+    issuing_body: Patentti- ja rekisterihallitus (PRH)
+    rights: [design]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.prh_fi
+    last_verified: 2026-05-19
+    category: registered_ip
+    transport: mcp_proxy
+    notes: >-
+      Locarno classification; ~34k national designs back to 1971.
+      RCDs covered transitively via EUIPO. Hague IR coverage via
+      WIPO Hague.
+
+  # ────────────────────────────────────────────────────────────────────
   # IP-office fee schedules — live-fetch with 7-day hishel cache
   # ────────────────────────────────────────────────────────────────────
   # Substantive-law category because schedules are set by statute /
@@ -1530,3 +1711,65 @@ sources:
       and per-period renewals (periods 1-5 map to years 5/10/15/20/25).
       Per-country individual designation fees live in a separate ~50-
       row table on wipo.int. Source: wipo.int/hague/en/fees/sched.html.
+
+  - id: TW/TIPO/Fees/Patent
+    name: TIPO Taiwan — Fees (Patent)
+    jurisdiction: TW
+    wipo_st3_code: TW
+    issuing_body: Taiwan Intellectual Property Office (TIPO)
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-19
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Schedule of Patent Fees (TWD) covering all three Taiwan patent
+      types under one office: invention patents (20-yr term), utility
+      model patents (10-yr term), and design patents (15-yr term). The
+      schedule prints standard rates with sibling SME-tier rows
+      ("natural person, school, or small and medium-sized enterprise")
+      for annuity years 1-3 and 4-6; design year-1 SME annuity is
+      NT$0. Per-claim surcharge over 10 claims (NT$800 invention
+      substantive exam, NT$600 utility model TER); per-50-page
+      surcharge over 50 pages (NT$500). Source HTML table at
+      tipo.gov.tw/en/tipo2/326.html — direct lxml scrape; annuity
+      rows expanded per-year so lookup-by-year works.
+
+  - id: TW/TIPO/Fees/Trademark
+    name: TIPO Taiwan — Fees (Trademark)
+    jurisdiction: TW
+    wipo_st3_code: TW
+    issuing_body: Taiwan Intellectual Property Office (TIPO)
+    rights: [trademark]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-19
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Trademark Fee Standards 2024 (effective 2024-05-01), published
+      as a bilingual zh-TW + EN PDF linked from tipo.gov.tw/en/tipo2/342.html.
+      Per-class fees in TWD for application (NT$3,000), registration
+      (NT$2,500), renewal on 10-year cycle (NT$4,000), opposition
+      (NT$4,000), invalidation (NT$7,000), revocation (NT$7,000),
+      plus per-good surcharge over 20 designated goods (NT$200/good)
+      and per-retail-service surcharge over 5 in Class 35 (NT$500).
+      Scraper uses a curated catalog of 30 entries verified against
+      the live PDF: each entry's English label and amount must
+      co-occur within a 300-char window in normalized text. Drift
+      raises loudly rather than silently mis-classifying.

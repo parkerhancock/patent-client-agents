@@ -9,6 +9,7 @@ from patent_client_agents.fees.scrapers import cnipa as cnipa_mod
 from patent_client_agents.fees.scrapers import dpma as dpma_mod
 from patent_client_agents.fees.scrapers import epo as epo_mod
 from patent_client_agents.fees.scrapers import euipo as euipo_mod
+from patent_client_agents.fees.scrapers import tipo as tipo_mod
 from patent_client_agents.fees.scrapers import uspto as uspto_mod
 
 
@@ -236,3 +237,98 @@ class TestDPMAAmountAndYear:
     def test_non_patent_code_no(self) -> None:
         assert dpma_mod._is_patent_code("330") is False  # trademark
         assert dpma_mod._is_patent_code("340") is False  # design
+
+
+class TestTIPOMoneyAndAnnuity:
+    def test_parse_nt_plain(self) -> None:
+        assert tipo_mod._parse_nt("NT$3,500") == Decimal("3500")
+
+    def test_parse_nt_with_space(self) -> None:
+        # PDF extraction sometimes inserts whitespace between NT$ and the digits.
+        assert tipo_mod._parse_nt("NT$ 7,000") == Decimal("7000")
+
+    def test_parse_nt_zero(self) -> None:
+        assert tipo_mod._parse_nt("NT$0") == Decimal("0")
+
+    def test_parse_nt_no_match(self) -> None:
+        assert tipo_mod._parse_nt("3,500 yen") is None
+
+    def test_annuity_invention_band_1_3(self) -> None:
+        rows = tipo_mod._emit_annuity_rows(
+            17,
+            "Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)",
+            Decimal("2500"),
+        )
+        # Two right-types × 3 years = 6 large-tier rows
+        assert len(rows) == 6
+        years = sorted({r.year for r in rows})
+        assert years == [1, 2, 3]
+        assert {r.amount for r in rows} == {Decimal("2500")}
+
+    def test_annuity_invention_open_band_caps_at_term(self) -> None:
+        rows = tipo_mod._emit_annuity_rows(
+            22,
+            "Annuity for a granted invention patent (10th year and beyond)",
+            Decimal("16000"),
+        )
+        # Years 10..20 for invention (20-year term)
+        assert {r.year for r in rows} == set(range(10, 21))
+
+    def test_annuity_design_open_band_caps_at_15(self) -> None:
+        rows = tipo_mod._emit_annuity_rows(
+            30,
+            "Annuity for a granted design patent (7th year and beyond)",
+            Decimal("3000"),
+        )
+        # Years 7..15 for design (15-year term)
+        assert {r.year for r in rows} == set(range(7, 16))
+
+    def test_annuity_with_sme_emits_both_tiers(self) -> None:
+        rows = tipo_mod._emit_annuity_rows(
+            17,
+            "Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)",
+            Decimal("2500"),
+            sme_amount=Decimal("1700"),
+        )
+        # 2 right-types × 3 years × 2 tiers = 12 rows
+        assert len(rows) == 12
+        from patent_client_agents.fees.models import EntityTier
+
+        tiers = {r.tier for r in rows}
+        assert tiers == {EntityTier.large, EntityTier.small}
+
+    def test_annuity_non_match_returns_empty(self) -> None:
+        # Filing fee description should not parse as annuity
+        rows = tipo_mod._emit_annuity_rows(
+            1,
+            "(1) Filing of an invention application",
+            Decimal("3500"),
+        )
+        assert rows == []
+
+    def test_categorize_patent_renewal(self) -> None:
+        from patent_client_agents.fees.models import FeeCategory
+
+        cat, cond = tipo_mod._categorize_patent(
+            "Annuity for a granted invention patent (1st-3rd year)"
+        )
+        assert cat == FeeCategory.renewal
+        assert cond is None
+
+    def test_categorize_patent_excess_claims(self) -> None:
+        from patent_client_agents.fees.models import FeeCategory
+
+        cat, cond = tipo_mod._categorize_patent(
+            "(1) Additional fee for substantive examination of an invention application "
+            "whose total number of claims exceed 10 (a fee of NT$800 is required for each additional claim)"
+        )
+        assert cat == FeeCategory.excess_claims
+        assert cond is not None
+        assert cond.threshold == 10
+        assert cond.per_unit is True
+
+    def test_normalize_for_match_strips_whitespace_and_case(self) -> None:
+        # pypdf often breaks words mid-token; normalization should collapse
+        # both pieces back to a single alphanumeric stream
+        assert tipo_mod._normalize_for_match("designate d good") == "designatedgood"
+        assert tipo_mod._normalize_for_match("NT$ 7,000") == "nt7000"

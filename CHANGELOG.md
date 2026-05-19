@@ -9,6 +9,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- **TIPO Taiwan fee schedules (patent + trademark).** Adds two routes
+  to the bundled `patent_client_agents.fees` connector: `TW/TIPO/Fees/Patent`
+  (HTML table scrape of `/en/tipo2/326.html`, 34 source rows expanded
+  to 83 FeeItems via per-year annuity bands × SME-tier siblings; SME
+  applies to patentees who are natural persons / schools / SMEs for
+  annuity years 1-3 and 4-6 across all three Taiwan patent types) and
+  `TW/TIPO/Fees/Trademark` (curated catalog of 30 entries verified
+  against the bilingual 2024-05-01 PDF; each entry's label and amount
+  must co-occur within a 300-char window in normalized text or the
+  scraper raises). Brings the fees connector to 15 offices / 20 routes.
+  Also corrects URL drift: TIPO migrated the EN fee landing pages
+  from `/en/cp-289-…` to `/en/tipo2/<id>.html`.
+- **PRH Finland connector (v0.1).** `patent_client_agents.prh_fi` wraps
+  three undocumented but unauthenticated PRH JSON APIs reverse-engineered
+  from the React bundles: `patenttitietopalvelu.prh.fi/nis-api-gateway-pat/`
+  (patent / UM / SPC / EP-FI corpus + per-record GET),
+  `tavaramerkkitietopalvelu.prh.fi/nis-api-gateway/` (national trademarks
+  + well-known TMR), and `mallioikeustietopalvelu.prh.fi/nis-api-gateway/`
+  (designs). Ships 5 MCP tools — `search_prh_patents`, `get_prh_patent`
+  (accepts `list[str]` per §5.4), `search_prh_trademarks`,
+  `search_prh_well_known_trademarks`, `search_prh_designs`. The
+  patent-search body has 30 fields with three list-valued inclusion
+  filters (`dossierStatus` / `patentTypes` / `publicationTypes`);
+  the client supplies full upstream-default vocabularies (~35 statuses,
+  4 patent types, 38 publication kinds) so callers who only set
+  applicant/title filters still get results. Lean projection drops
+  the file-history pointer list, payment timeline, and raw events on
+  the per-record GET; drops the thumbnail-URL triplet on dossier
+  search rows. Adds 4 manifest rows
+  (`FI/PRH/{Patents,Trademarks,WellKnownTrademarks,Designs}`). Server
+  caps the response at 3,000 rows per query — narrow filters required
+  for high-population applicants. No auth; courtesy User-Agent
+  identifies the project + contact `avoindata@prh.fi`.
+- **PRV Sweden connector (v0.1).** `patent_client_agents.prv_se` wraps
+  three undocumented but unauthenticated PRV JSON APIs reverse-engineered
+  from the `search.prv.se` React bundle: `patents-search-api.prv.se`
+  (patent simple-search), `dv-search-api.prv.se` (trademark + design
+  simple-search), and `api.prv.se` (per-record patent GET). Ships 4 MCP
+  tools — `search_prv_patents`, `get_prv_patent` (`applicationType=NAT`
+  default; accepts `list[str]` per §5.4), `search_prv_trademarks`,
+  `search_prv_designs` — with lean projection dropping the ~32 KB
+  base64-encoded first-drawing image on `get_prv_patent`. No auth
+  required; courtesy User-Agent identifies the project + contact
+  `data@prv.se`. Adds 3 manifest rows
+  (`SE/PRV/{Patents,Trademarks,Designs}`). Deferred to v0.2: SPC search
+  (HTTP 500 on probe), municipal arms register, advanced-search field
+  decoding. Parallel bulk feeds on `data.prv.se` are CC0 1.0 / CC BY 4.0
+  under Sweden's Open Data Act (SFS 2022:818).
 - **TIPO Taiwan OpenData REST connector.** `patent_client_agents.tipo_opdata`
   wraps the 15-endpoint TIPO OpenData REST API
   (`https://cloud.tipo.gov.tw/S220/opdataapi/api/`) for biblio-only
