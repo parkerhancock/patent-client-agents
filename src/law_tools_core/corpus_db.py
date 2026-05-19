@@ -53,7 +53,7 @@ import os
 import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
-from typing import ClassVar
+from typing import ClassVar, Self
 
 
 class CorpusUnavailable(RuntimeError):
@@ -131,7 +131,7 @@ class CorpusDBBase:
         path: str | os.PathLike[str] | None = None,
         *,
         must_exist: bool = True,
-    ) -> CorpusDBBase:
+    ) -> Self:
         """Open the corpus read-only.
 
         Resolution order: explicit ``path`` → ``cls.ENV_VAR`` → default
@@ -159,7 +159,7 @@ class CorpusDBBase:
     def close(self) -> None:
         self._conn.close()
 
-    def __enter__(self) -> CorpusDBBase:
+    def __enter__(self) -> Self:
         return self
 
     def __exit__(self, *_exc: object) -> None:

@@ -139,21 +139,22 @@ Depends on Phases 1 + 2 landing first, so the doc cites them as enforcement prec
 
 **Why.** `.github/workflows/ci.yml` runs `ty check src/` with `continue-on-error: true`, so type errors don't fail CI. Coverage is uploaded to Codecov but no threshold gates anything. Free wins.
 
-**What changes.**
+**What landed (2026-05-19).**
 
-1. Remove `continue-on-error: true` from the `ty check` step. Fix any type errors that surface before merging — they shouldn't be many; the suite has been passing with type-clean code de-facto for a while.
-2. Add a coverage floor to the pytest step. Initial target: **60%**. Not aspirational. The point is to prevent regressions, not chase 100%. Use `--cov-fail-under=60`.
-3. Audit `scripts/build_coverage.py --check` is still in the workflow and blocking — it is, but confirm during the same PR.
-4. Leave Codecov upload untouched.
+1. **Coverage floor at 60% added** — `--cov-fail-under=60` on the pytest step. Current baseline is 70.94%, so the floor is conservative on purpose: it catches regressions without chasing 100%. Ratchet up when we comfortably clear the next +5%.
+2. **`ty check` blocking deferred.** The pre-existing baseline turned out to be 226 diagnostics, not "shouldn't be many" — concentrated in `law_tools_core/base_client.py` (~150) and `fees/scrapers/*.py` (~45 across 15 files). Flipping `continue-on-error` would have broken CI on day one. Instead the step keeps `continue-on-error: true` with a baseline comment naming the targets, and the work is captured below as a Phase 4 follow-up.
+3. Two tiny Phase-4-adjacent fixes landed in `law_tools_core/corpus_db.py`: `open()` and `__enter__()` now return `Self` (PY 3.11+). This eliminated 28 of the original 226 diagnostics — all 14 corpus errors I introduced during Phase 2 plus 14 cascade errors — without sprinkling `# type: ignore` anywhere. Final baseline: **198 diagnostics, all pre-existing.**
+4. `scripts/build_coverage.py --check` confirmed already-blocking in the `coverage-manifest` job. No change needed.
+5. Codecov upload left as-is.
 
-**Steps.**
-1. Capture current type-check output: `uv run ty check src/ 2>&1 | tee /tmp/ty-snapshot.txt`. Decide what to fix and what to suppress (`# type: ignore[...]` with a comment, sparingly).
-2. Capture current coverage: `uv run pytest --cov=patent_client_agents --cov-report=term`. Confirm we're already above 60%; if not, lower the initial floor to current-minus-2% and ratchet up later.
-3. Edit `.github/workflows/ci.yml`. Single PR.
+**Phase 4 follow-up — drive the ty baseline to zero.**
 
-**Verification.**
-- Open a deliberately-broken type PR (e.g. wrong return type on one function) → CI fails. Revert.
-- Open a deliberately-uncovered PR (delete a tested branch without removing the test) → CI fails. Revert.
+The 198 remaining diagnostics break down predictably:
+- `law_tools_core/base_client.py` — 150 errors, all `invalid-argument-type` on `__init__`. Likely one or two real annotation bugs cascading. Highest leverage; fix this file first.
+- `fees/scrapers/{tipo,inpi_fr,epo,inpi_br,wipo,uspto,ukipo,kipo,jpo,ipindia,ipaustralia,euipo,dpma,cnipa,cipo}.py` — ~10 errors each, same `invalid-argument-type` pattern. Likely a shared base-class annotation issue in `fees/scrapers/` rather than 15 independent bugs.
+- 3 remaining oddballs: 1 `invalid-return-type` in `fees/scrapers/epo.py`, 2 `invalid-declaration` for `list[int | None]`.
+
+When the baseline reaches zero: remove `continue-on-error: true` from the `typecheck` step. The comment in `.github/workflows/ci.yml` references this section as the work item.
 
 **Rollback.** Revert the workflow change. No code touched.
 
@@ -182,9 +183,9 @@ Surfaced here so we don't lose them. These are product/architecture calls that n
 
 ## Phase ordering & PR cadence
 
-1. **Phase 1** — single PR, ~1 hour. Pure file move.
-2. **Phase 2** — N+1 PRs over 1–2 days. One base PR adding `CorpusDBBase`, then one PR per connector migration. Sequence by test-suite size ascending so failures surface cheap.
-3. **Phase 3** — single docs PR, ~1 hour. Lands after Phases 1+2 so it can cite them.
-4. **Phase 4** — single workflow PR, ~30 minutes plus whatever type/coverage fixes surface.
+1. **Phase 1** — single PR, ~1 hour. Pure file move. *(Landed 2026-05-19 as `313593c`.)*
+2. **Phase 2** — three PRs: base + tests (`55a1a11`), Group 1 outline-shaped migration (`92d974f`), Group 2 statute-shaped migration (`28a62ad`). All on `main` 2026-05-19.
+3. **Phase 3** — single docs PR (`2d79bdf`). Landed 2026-05-19.
+4. **Phase 4** — single workflow PR (coverage floor + corpus_db `Self` fix). Type-check blocking deferred to follow-up; see the Phase 4 section above for the diagnostic baseline.
 
-Total expected wall-clock: 2–3 days of focused work. Total expected diff: ~1,800 LOC removed, ~250 LOC added in `law_tools_core`, three new files in `mcp/tools/`, one file deleted, two CI lines changed, one docs file edited.
+Actual diff (Phases 1–4 combined): ~1,800 LOC removed across `mcp/tools/international.py` + 14 corpus `db.py` files; ~600 LOC added in `law_tools_core/corpus_db.py` + its tests; three new files in `mcp/tools/` (`epo_ops.py`, `cpc.py`, `jpo.py`); one CI file edited; two docs files edited. Test suite grew by 18 (new corpus_db unit tests): 2,617 → 2,635.

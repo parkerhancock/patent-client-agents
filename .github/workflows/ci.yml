@@ -63,7 +63,11 @@ jobs:
 
       - name: Run type checking
         run: uv run ty check src/
-        continue-on-error: true  # Type errors don't fail CI yet
+        # Pre-existing baseline: ~198 diagnostics, concentrated in
+        # law_tools_core/base_client.py (~150) and fees/scrapers/* (~45).
+        # Track via REFACTOR_PLAN.md Phase 4 follow-up. Flip to blocking
+        # once the baseline reaches zero.
+        continue-on-error: true
 
   test:
     runs-on: ubuntu-latest
@@ -85,9 +89,12 @@ jobs:
         run: uv sync --group dev --all-extras
 
       - name: Run tests with coverage
+        # Coverage floor: 60% (current baseline: ~71% as of 2026-05-19).
+        # Floor is set conservatively to catch regressions, not chase
+        # 100%. Raise the floor when we comfortably clear the next +5%.
         run: |
           uv pip install pytest-cov
-          uv run pytest --cov=patent_client_agents --cov-report=xml --cov-report=term-missing
+          uv run pytest --cov=patent_client_agents --cov-report=xml --cov-report=term-missing --cov-fail-under=60
 
       - name: Upload coverage to Codecov
         if: matrix.python-version == '3.11'
