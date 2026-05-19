@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T01:30:46+00:00",
+  "generated_at": "2026-05-19T01:37:11+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 46,
@@ -188,7 +188,7 @@
       "rating_label": "Green",
       "rating_basis": "Free OAuth2 OPS API; INPADOC backbone for ~100 offices",
       "connector_status": "shipped",
-      "last_verified": "2026-05-16",
+      "last_verified": "2026-05-18",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/regional/epo/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/regional/epo.md",
       "shipped_sources": [
@@ -835,6 +835,20 @@
           "auth": "api_key",
           "status": "active",
           "module": "patent_client_agents.kipo_kipris"
+        },
+        {
+          "id": "KR/KIPO/Fees/Patents",
+          "name": "KIPO Fee Schedule \u2014 Patents",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
         }
       ]
     },
@@ -2039,6 +2053,33 @@
       "update_strategy": "live_proxy",
       "update_cadence": "irregular",
       "notes": "Post-Regulation 2024/2822 reform: back-loaded renewal curve at periods 1/2/3/4 (years 5/10/15/20 = \u20ac150/\u20ac250/\u20ac400/\u20ac700), combined application+publication fee, late-payment surcharges abolished."
+    },
+    {
+      "id": "AU/IPAU/Fees/Patents",
+      "name": "IP Australia Fee Schedule \u2014 Patents",
+      "jurisdiction": "AU",
+      "wipo_st3_code": "AU",
+      "issuing_body": "IP Australia",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-18",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "Scrapes IP Australia's timeframes-and-fees page (13 small Action | Fee tables). AUD. Fees revised 2024-10-01 per the four-yearly fee review; PCT-fee equivalents updated 2026-01-01. v1 GAP: annual renewal fees (years 5-20) live in Schedule 7 of the Patents Regulations 1991 and are not on this page \u2014 follow-up scraper needed to pull them from the Federal Register of Legislation."
     }
   ]
 }

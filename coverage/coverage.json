@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-19T01:30:46+00:00",
+  "generated_at": "2026-05-19T01:37:11+00:00",
   "schema_version": 1,
   "summary": {
-    "total": 58,
+    "total": 60,
     "by_status": {
-      "active": 58
+      "active": 60
     },
     "active_jurisdictions": [
       "AU",
@@ -137,7 +137,8 @@
       "status": "active",
       "sources": [
         "AU/IPAustralia/Patents",
-        "AU/IPAustralia/Bulk"
+        "AU/IPAustralia/Bulk",
+        "AU/IPAU/Fees/Patents"
       ]
     },
     {
@@ -380,7 +381,8 @@
       "right": "patent",
       "status": "active",
       "sources": [
-        "KR/KIPO/Patents"
+        "KR/KIPO/Patents",
+        "KR/KIPO/Fees/Patents"
       ]
     },
     {
@@ -2164,6 +2166,60 @@
       "update_strategy": "live_proxy",
       "update_cadence": "irregular",
       "notes": "Scraped from the DPMA cost-info PDF (form A 9510.1) because the English HTML fee page only lists years 3-6 of the annual fee schedule and punts to the PDF for years 7-20. pypdf + regex extraction of the uniform \"<6-digit code> <description> ... <amount>\" row format. Fee numbers in the 31x range are patents. Statutory basis: PatKostG (Patentkostengesetz)."
+    },
+    {
+      "id": "KR/KIPO/Fees/Patents",
+      "name": "KIPO Fee Schedule \u2014 Patents",
+      "jurisdiction": "KR",
+      "wipo_st3_code": "KR",
+      "issuing_body": "Korean Intellectual Property Office",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-18",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "Scrapes the KIPO English IP-system fees page (HtmlApp c=92004). KRW. 2-column Description | Fee table with section headers (Application/Examination/Annual/Others). Annuity bands 1-3, 4-6, 7-9, 10-12, 13-15, 16-25 years expanded to per-year rows. Per-claim surcharges appear as bare-amount rows after each \"a. Basic fee\" row and are paired by the scraper. Effective 2023-08-01 per KIPO Enforcement Rule amendment."
+    },
+    {
+      "id": "AU/IPAU/Fees/Patents",
+      "name": "IP Australia Fee Schedule \u2014 Patents",
+      "jurisdiction": "AU",
+      "wipo_st3_code": "AU",
+      "issuing_body": "IP Australia",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-18",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "Scrapes IP Australia's timeframes-and-fees page (13 small Action | Fee tables). AUD. Fees revised 2024-10-01 per the four-yearly fee review; PCT-fee equivalents updated 2026-01-01. v1 GAP: annual renewal fees (years 5-20) live in Schedule 7 of the Patents Regulations 1991 and are not on this page \u2014 follow-up scraper needed to pull them from the Federal Register of Legislation."
     }
   ]
 }

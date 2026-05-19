@@ -1280,3 +1280,57 @@ sources:
       extraction of the uniform "<6-digit code> <description> ...
       <amount>" row format. Fee numbers in the 31x range are patents.
       Statutory basis: PatKostG (Patentkostengesetz).
+
+  - id: KR/KIPO/Fees/Patents
+    name: KIPO Fee Schedule — Patents
+    jurisdiction: KR
+    wipo_st3_code: KR
+    issuing_body: Korean Intellectual Property Office
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Scrapes the KIPO English IP-system fees page (HtmlApp c=92004).
+      KRW. 2-column Description | Fee table with section headers
+      (Application/Examination/Annual/Others). Annuity bands 1-3, 4-6,
+      7-9, 10-12, 13-15, 16-25 years expanded to per-year rows.
+      Per-claim surcharges appear as bare-amount rows after each
+      "a. Basic fee" row and are paired by the scraper. Effective
+      2023-08-01 per KIPO Enforcement Rule amendment.
+
+  - id: AU/IPAU/Fees/Patents
+    name: IP Australia Fee Schedule — Patents
+    jurisdiction: AU
+    wipo_st3_code: AU
+    issuing_body: IP Australia
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-05-18
+    category: substantive_law
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: irregular
+    notes: >-
+      Scrapes IP Australia's timeframes-and-fees page (13 small
+      Action | Fee tables). AUD. Fees revised 2024-10-01 per the
+      four-yearly fee review; PCT-fee equivalents updated 2026-01-01.
+      v1 GAP: annual renewal fees (years 5-20) live in Schedule 7 of
+      the Patents Regulations 1991 and are not on this page —
+      follow-up scraper needed to pull them from the Federal Register
+      of Legislation.

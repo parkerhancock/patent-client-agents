@@ -15,6 +15,8 @@ from .scrapers import cnipa as _cnipa
 from .scrapers import dpma as _dpma
 from .scrapers import epo as _epo
 from .scrapers import euipo as _euipo
+from .scrapers import ipaustralia as _ipau
+from .scrapers import kipo as _kipo
 from .scrapers import uspto as _uspto
 
 # Each scraper takes no arguments; it owns its own BaseAsyncClient and
@@ -33,10 +35,21 @@ _DISPATCH: dict[tuple[str, RightType], Scraper] = {
     ("CNIPA", RightType.patent): _cnipa.scrape_cnipa_patents,
     ("CIPO", RightType.patent): _cipo.scrape_cipo_patents,
     ("DPMA", RightType.patent): _dpma.scrape_dpma_patents,
+    ("KIPO", RightType.patent): _kipo.scrape_kipo_patents,
+    ("IPAU", RightType.patent): _ipau.scrape_ipaustralia_patents,
 }
 
 
-OFFICES: tuple[str, ...] = ("USPTO", "EPO", "EUIPO", "CNIPA", "CIPO", "DPMA")
+OFFICES: tuple[str, ...] = (
+    "USPTO",
+    "EPO",
+    "EUIPO",
+    "CNIPA",
+    "CIPO",
+    "DPMA",
+    "KIPO",
+    "IPAU",
+)
 """Office codes covered in v1, in stable order for tool docstrings + listings."""
 
 
