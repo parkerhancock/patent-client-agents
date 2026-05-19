@@ -1855,6 +1855,501 @@ entities:
       ARIPO/OAPI. Recommend native MA connector declined; rely on EPO OPS,
       WIPO Madrid Monitor, Hague Express, PATENTSCOPE.
 
+  # ────────────────────────────────────────────────────────────────────
+  # EPC transitive sweep (2026-05-18) — 28 EPC contracting states
+  # not previously surveyed individually. Patents (national + EP-
+  # validated) reachable via EPO OPS / INPADOC. National-only TM/
+  # design registers not covered transitively; for EU member states,
+  # EUTM via EUIPO and Madrid IRs via WIPO Madrid Monitor close part
+  # of that gap. Rating: green_transitive throughout.
+  #
+  # EPC contracting state counts and accession dates per the EPO
+  # Member States page (https://www.epo.org/en/about-us/foundation/
+  # member-states). Not all 39 contracting states appear here — AT,
+  # CH, DE, ES, FI, FR, GB, IT, NL, SE, TR already have individual
+  # STATE entries from prior waves.
+  # ────────────────────────────────────────────────────────────────────
+
+  # ─── EPC contracting states, EU member ──────────────────────────────
+
+  - id: BE/OPRI
+    name: Office for Intellectual Property (Belgium) — FPS Economy
+    layer: national
+    iso2: BE
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Founding EPC contracting state; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO. Benelux TMs and designs via BOIP (shared registry with NL + LU).
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Benelux TM/design registry (BOIP) is the canonical surface for BE TM/designs; national patent office under FPS Economy.
+
+  - id: BG/BPO
+    name: Bulgarian Patent Office
+    layer: national
+    iso2: BG
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2002-07-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO; Madrid IRs via WIPO Madrid Monitor.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Patent Office of the Republic of Bulgaria (Патентно ведомство на Република България).
+
+  - id: CY/DRCOR
+    name: Department of the Registrar of Companies and Intellectual Property (Cyprus)
+    layer: national
+    iso2: CY
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 1998-04-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Cyprus uses the Department of the Registrar of Companies and IP under the Ministry of Energy, Commerce and Industry.
+
+  - id: CZ/UPV
+    name: Industrial Property Office of the Czech Republic (Úřad průmyslového vlastnictví)
+    layer: national
+    iso2: CZ
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2002-07-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Czech UPV maintains its own search portal at isdv.upv.cz but no documented public API; transitive route is the canonical machine surface.
+
+  - id: DK/DKPTO
+    name: Danish Patent and Trademark Office (Patent- og Varemærkestyrelsen)
+    layer: national
+    iso2: DK
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 1990-01-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: DKPTO publishes a national register at pvsonline.dk; transitive route handles patents.
+
+  - id: EE/EPA
+    name: Estonian Patent Office (Patendiamet)
+    layer: national
+    iso2: EE
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2002-07-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Estonian Patendiamet under the Ministry of Justice.
+
+  - id: GR/OBI
+    name: Industrial Property Organisation (Greece, Οργανισμός Βιομηχανικής Ιδιοκτησίας / OBI)
+    layer: national
+    iso2: GR
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 1986-10-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OBI (Hellenic Industrial Property Organisation).
+
+  - id: HR/SIPO
+    name: State Intellectual Property Office (Croatia, Državni zavod za intelektualno vlasništvo / DZIV)
+    layer: national
+    iso2: HR
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2008-01-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state (since 2013) — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: DZIV (State Intellectual Property Office of the Republic of Croatia).
+
+  - id: HU/HIPO
+    name: Hungarian Intellectual Property Office (Szellemi Tulajdon Nemzeti Hivatala / SZTNH)
+    layer: national
+    iso2: HU
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2003-01-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: HIPO / SZTNH.
+
+  - id: IE/IPOI
+    name: Intellectual Property Office of Ireland (renamed 2023 from Irish Patents Office)
+    layer: national
+    iso2: IE
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 1992-08-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Renamed from "Irish Patents Office" to "Intellectual Property Office of Ireland" in 2023; ipoi.gov.ie.
+
+  - id: LV/LRPV
+    name: Patent Office of the Republic of Latvia (Latvijas Republikas Patentu valde)
+    layer: national
+    iso2: LV
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2005-07-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: LRPV (Latvian Patent Office).
+
+  - id: LT/SPB
+    name: State Patent Bureau of the Republic of Lithuania (Valstybinis patentų biuras)
+    layer: national
+    iso2: LT
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2004-12-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: SPB (Lithuanian State Patent Bureau).
+
+  - id: LU/OPI
+    name: Office of Intellectual Property (Luxembourg) — Ministry of Economy
+    layer: national
+    iso2: LU
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: Founding EPC contracting state; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO. Benelux TMs and designs via BOIP (shared registry with BE + NL).
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Luxembourg LU/OPI under the Ministry of Economy. Benelux TM/design registry (BOIP) is the canonical surface for LU TM/designs.
+
+  - id: MT/IPRD
+    name: Industrial Property Registrations Directorate (Malta) — Commerce Department
+    layer: national
+    iso2: MT
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2007-03-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Malta IPRD under the Commerce Department, Ministry for the Economy.
+
+  - id: PL/UPRP
+    name: Patent Office of the Republic of Poland (Urząd Patentowy Rzeczypospolitej Polskiej)
+    layer: national
+    iso2: PL
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2004-03-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO. UPRP is one of the few EPC-state national offices listed in the WIPO IP API Catalog; native register surface still developing.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: research_uprp_native_api
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: UPRP is one of the few national IP offices with a WIPO IP API Catalog entry — worth a dedicated synopsis pass to confirm what's actually exposed beyond the transitive layer.
+
+  - id: PT/INPI_PT
+    name: Instituto Nacional da Propriedade Industrial (Portugal)
+    layer: national
+    iso2: PT
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 1992-01-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Portuguese INPI — different agency from INPI Brazil (BR/INPI) and INPI France (FR/INPI).
+
+  - id: RO/OSIM
+    name: State Office for Inventions and Trademarks (Romania, Oficiul de Stat pentru Invenții și Mărci)
+    layer: national
+    iso2: RO
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2003-03-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: OSIM (Romanian State Office for Inventions and Trademarks).
+
+  - id: SK/UPV_SK
+    name: Industrial Property Office of the Slovak Republic (Úrad priemyselného vlastníctva SR)
+    layer: national
+    iso2: SK
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2002-07-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Slovak UPV (Úrad priemyselného vlastníctva Slovenskej republiky); upv.sk.
+
+  - id: SI/URSIL
+    name: Slovenian Intellectual Property Office (Urad Republike Slovenije za intelektualno lastnino)
+    layer: national
+    iso2: SI
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2002-12-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EU member state — EUTM via EUIPO.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: URSIL (Slovenian IP Office); uil-sipo.si.
+
+  # ─── EPC contracting states, non-EU ─────────────────────────────────
+
+  - id: AL/GDPI
+    name: General Directorate of Industrial Property (Albania)
+    layer: national
+    iso2: AL
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2010-05-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. Not an EU member state — TMs via WIPO Madrid Monitor only.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: GDIPI (General Directorate of Industrial Property) under the Ministry of Finance and Economy.
+
+  - id: IS/ISIPO
+    name: Icelandic Intellectual Property Office (Hugverkastofan)
+    layer: national
+    iso2: IS
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2004-11-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EEA member but not EU — EUTM does not automatically extend; Madrid IRs via WIPO Madrid Monitor.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ISIPO / Hugverkastofan; renamed from Einkaleyfastofan in 2021.
+
+  - id: LI/IPI_LI
+    name: Liechtenstein IP services (administered jointly with CH/IPI under Customs Union)
+    layer: national
+    iso2: LI
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 1980-04-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. Liechtenstein patents are administered jointly with CH/IPI under the 1924 Customs Union (one register covers both states).
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: No independent LI IP register — patent and TM filings flow through CH/IPI per the 1924 Switzerland-Liechtenstein Customs Treaty.
+
+  - id: MC/DEEIPI
+    name: Direction de l'Expansion Économique — IP Division (Monaco)
+    layer: national
+    iso2: MC
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 1991-12-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. Not an EU member state — TMs via WIPO Madrid Monitor.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Monaco IP under the Direction de l'Expansion Économique; a French-based filing convention often applies.
+
+  - id: ME/IPO_ME
+    name: Intellectual Property Office of Montenegro (Zavod za intelektualnu svojinu)
+    layer: national
+    iso2: ME
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2022-10-01 (newest member); patents (national + EP-validated) reachable via EPO OPS / INPADOC. Not yet an EU member — TMs via WIPO Madrid Monitor.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Most-recent EPC accession (2022-10-01).
+
+  - id: MK/ISA
+    name: State Office for Industrial Property (North Macedonia, Државен завод за индустриска сопственост)
+    layer: national
+    iso2: MK
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2009-01-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. Not an EU member state — TMs via WIPO Madrid Monitor.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ISA (State Office for Industrial Property of the Republic of North Macedonia).
+
+  - id: NO/NIPO
+    name: Norwegian Industrial Property Office (Patentstyret)
+    layer: national
+    iso2: "NO"  # quoted — unquoted "NO" parses as YAML 1.1 boolean False
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2008-01-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. EEA member but not EU — EUTM does not automatically extend; Madrid IRs via WIPO Madrid Monitor. Patentstyret (patentstyret.no) is unusually digitally mature among non-EU EPC offices.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: research_patentstyret_native_api
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: Norway's Patentstyret has historically been a publishing-forward IP office; worth a dedicated synopsis to confirm native API availability beyond the transitive route.
+
+  - id: RS/ZIS
+    name: Intellectual Property Office of the Republic of Serbia (Zavod za intelektualnu svojinu)
+    layer: national
+    iso2: RS
+    rights: [patent, utility_model, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2010-10-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. Not yet an EU member — TMs via WIPO Madrid Monitor.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: ZIS (Serbian IP Office); zis.gov.rs.
+
+  - id: SM/USBM
+    name: State Patents and Trademarks Office (San Marino, Ufficio di Stato Brevetti e Marchi)
+    layer: national
+    iso2: SM
+    rights: [patent, design, trademark]
+    synopsis: null
+    detail_survey: null
+    connector_spec: null
+    rating: green_transitive
+    rating_basis: EPC contracting state since 2009-07-01; patents (national + EP-validated) reachable via EPO OPS / INPADOC. Not an EU member state — TMs via WIPO Madrid Monitor.
+    connector_status: skipped
+    manifest_ids: [EP/EPO/OPS]
+    next_action: link_only_atlas_card
+    blocked_by: []
+    last_verified: 2026-05-18
+    notes: USBM (San Marino State Patents and Trademarks Office); usbm.sm.
+
 # When new entities are added, document them above with the same field
 # shape. When entities are completed, update synopsis paths
 # and next_action accordingly.

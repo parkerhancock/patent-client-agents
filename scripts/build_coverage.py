@@ -82,7 +82,7 @@ ISO_TO_REGION: dict[str, str] = {
     "MX": "americas",
     "BR": "americas",
     "AR": "americas",
-    # Europe
+    # Europe — surveyed
     "DE": "europe",
     "GB": "europe",
     "FR": "europe",
@@ -94,6 +94,37 @@ ISO_TO_REGION: dict[str, str] = {
     "ES": "europe",
     "IT": "europe",
     "RU": "europe",
+    # Europe — EPC contracting states added via EPC transitive sweep
+    # (patents reachable via EPO OPS / INPADOC; national-only TM/design
+    # registers not covered transitively).
+    "AL": "europe",  # Albania (EPC 2010)
+    "BE": "europe",  # Belgium (founding EPC)
+    "BG": "europe",  # Bulgaria (EPC 2002)
+    "CY": "europe",  # Cyprus (EPC 1998)
+    "CZ": "europe",  # Czech Republic (EPC 2002)
+    "DK": "europe",  # Denmark (EPC 1990)
+    "EE": "europe",  # Estonia (EPC 2002)
+    "GR": "europe",  # Greece (EPC 1986)
+    "HR": "europe",  # Croatia (EPC 2008)
+    "HU": "europe",  # Hungary (EPC 2003)
+    "IE": "europe",  # Ireland (EPC 1992)
+    "IS": "europe",  # Iceland (EPC 2004)
+    "LI": "europe",  # Liechtenstein (EPC 1980; joint with CH/IPI)
+    "LT": "europe",  # Lithuania (EPC 2004)
+    "LU": "europe",  # Luxembourg (founding EPC)
+    "LV": "europe",  # Latvia (EPC 2005)
+    "MC": "europe",  # Monaco (EPC 1991)
+    "ME": "europe",  # Montenegro (EPC 2022-10-01)
+    "MK": "europe",  # North Macedonia (EPC 2009)
+    "MT": "europe",  # Malta (EPC 2007)
+    "NO": "europe",  # Norway (EPC 2008)
+    "PL": "europe",  # Poland (EPC 2004)
+    "PT": "europe",  # Portugal (EPC 1992)
+    "RO": "europe",  # Romania (EPC 2003)
+    "RS": "europe",  # Serbia (EPC 2010)
+    "SI": "europe",  # Slovenia (EPC 2002)
+    "SK": "europe",  # Slovakia (EPC 2002)
+    "SM": "europe",  # San Marino (EPC 2009)
     # Asia
     "JP": "asia",
     "KR": "asia",
