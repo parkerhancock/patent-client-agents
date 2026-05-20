@@ -5,9 +5,9 @@
 **Issuing body:** Instituto Mexicano de la Propiedad Industrial (Mexican Institute of Industrial Property, IMPI)
 **Rights administered:** patent, utility model (*modelo de utilidad*), industrial design, integrated-circuit layout design (*esquema de trazado de circuitos integrados*), trademark, distinctive sign (commercial slogan / trade name), denomination of origin (*denominación de origen*), geographic indication, trade secret
 **Working languages:** Spanish (primary); some institutional pages have English versions
-**Connector status:** **skipped (red — infrastructure-level geo-block)**
-**Last verified:** 2026-05-18
-**Manifest entry:** not yet listed (skipped — coverage flows transitively)
+**Connector status:** **register: skipped (red — infrastructure-level geo-block); fees: ready to build (yellow — primary-source PDF reachable)**
+**Last verified:** 2026-05-19
+**Manifest entry:** not yet listed (register skipped — coverage flows transitively; fees scheduled for next build wave)
 
 **Detail surveys:**
 - [`waves/2026-05-18-secondary-nationals-wave/mx-impi.md`](../waves/2026-05-18-secondary-nationals-wave/mx-impi.md) — 2026-05-18 grounded API discovery
@@ -173,31 +173,58 @@ law and fee-schedule references.
 
 ## §4 Fees
 
-**Policy: link only.**
+**Status (2026-05-19):** Reachable for an MX/IMPI fees connector.
+Despite the register-host geo-block documented above, the binding
+tariff text is published as a single consolidated PDF on the
+**gob.mx CMS attachment endpoint** (Akamai-fronted) — and that
+endpoint is anonymously fetchable from US egress. The "IMPI is
+geo-blocked" finding above is correct for the SIGA / VIDOC /
+datosabiertos register, **not** for the tariff document. Two
+parallel routes both work:
 
-IMPI publishes a fee schedule (in MXN, Mexican peso) covering
-patent and utility model filing, search, examination, grant,
-opposition, annuity / renewal; trademark filing per class
-(commercial denomination, trade name, slogan), renewals, and
-opposition; industrial design filing and renewals; integrated-
-circuit layout filing; geographic indication and denomination of
-origin proceedings; miscellaneous services (file inspection,
-certified copies, priority documents, gazette publication of
-acts). Statutory basis is the **Ley Federal de Protección a la
-Propiedad Industrial (LFPPI)** with implementing fee schedule
-*Tarifas por los Servicios que Presta el Instituto Mexicano de
-la Propiedad Industrial* published annually in the DOF.
+1. **gob.mx CMS attachment route (primary, used for v1 connector
+   build):** [`gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf`](https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf) — 22-page consolidated *Acuerdo*, three-column layout (Artículo | Concepto | Tarifa) parsing cleanly with `pypdf`. Self-declared version stamp on page 1: *"Última reforma publicada DOF: 12-05-2023"*.
+2. **DOF citation route (authoritative version pin):** [DOF nota_detalle](https://www.dof.gob.mx/) entries — searchable via the on-page Google CSE. SSL note: `dof.gob.mx` ships an incomplete cert chain; clients hitting it need a current CA bundle or `verify=False`. The 12-05-2023 publication is the consolidated base; the only post-2023 modifying *Acuerdo* found as of 2026-05-19 is [March 15, 2024 (codigo=5720420)](https://www.dof.gob.mx/nota_detalle.php?codigo=5720420&fecha=15/03/2024).
 
-- **Official fee schedule landing:** [IMPI servicios y costos (gob.mx/impi)](https://www.gob.mx/impi) — the canonical tarifas page is on the geo-blocked IMPI subdomain; the [substantive-law gob.mx/impi page](https://www.gob.mx/impi/documentos/ley-federal-de-proteccion-a-la-propiedad-industrial-274304) is reachable and references the implementing rule.
-- **Statutory basis (LFPPI):** [Ley Federal de Protección a la Propiedad Industrial — Diputados](https://www.diputados.gob.mx/LeyesBiblio/ref/lfppi.htm) (consolidated) · [LFPPI PDF (portalhcd.diputados.gob.mx)](https://portalhcd.diputados.gob.mx/LeyesBiblio/pdf/LFPPI_010720.pdf)
-- **Statutory basis (publication):** [DOF 2020-07-01 nota_detalle codigo=5596010](https://www.dof.gob.mx/nota_detalle.php?codigo=5596010&fecha=01%2F07%2F2020) — published 2020-07-01, in force 2021-11-05.
-- **Tarifas annual update track:** [Diario Oficial de la Federación](https://www.dof.gob.mx/) — *Acuerdo* on tarifas IMPI is published in the DOF annually.
+**Scope of the schedule (MXN-denominated, Title-organized):**
 
-Notable discount programmes *(name + one-line eligibility — no amounts or dates)*:
+- **Title II — Patents, utility models, industrial designs, integrated-circuit layouts.** Filing, PCT national-phase entry (Chapter I / Chapter II), per-page surcharge above 30 pages, anticipated publication, prosecution / annuity, grant title issuance, divisional, recordation. Arts. 1–8 (patents proper), Arts. 9–13 (UM / design / IC).
+- **Title IV — Trademarks, commercial slogans, trade names.** Per-class filing & exam through grant (Art. 14a), opposition (Art. 14b), renewal (Art. 14c), recordation (Art. 14d).
+- **Title VI / VII — Denominations of origin and geographic indications.** Application, modification, authorization-to-use.
+- **General concepts** — certified copies, file inspection, priority documents, gazette publication, late-filing surcharges.
 
-- **Tarifas reducidas para inventores independientes y MIPYMES** — fee reductions for independent inventors, micro and small enterprises, and public research / education institutions under LFPPI implementing tarifas, per the standard practice across IMPI's tarifa schedules.
-- **USPTO-IMPI PPH pilot** — accelerated examination using USPTO work products via [Patent Prosecution Highway](https://www.uspto.gov/patents/basics/international-protection/patent-prosecution-highway/patent-prosecution-3) (not a fee reduction per se but reduces total prosecution cost).
-- **EPO-IMPI cooperation (pharma)** — strategic cooperation per [Uhthoff summary](https://uhthoff.com.mx/en/mexican-institute-of-industrial-property-impi-and-european-patent-office-epo-strategic-cooperation-enhancing-patent-prosecution-strategies-in-mexico-in-terms-of-pharmaceutical-patents/).
+**Discount tiers (mapped to `EntityTier`):**
+
+- **Small / independent inventor (50% reduction)** — patents, utility models, designs only, per LFPPI implementing tarifa standard practice. Maps to `EntityTier.small`.
+- **Décima Primera Disposición General (full waiver)** — added by [March 15, 2024 Acuerdo (codigo=5720420)](https://www.dof.gob.mx/nota_detalle.php?codigo=5720420&fecha=15/03/2024). Waives fees for indigenous / Afro-Mexican peoples and communities filing **collective marks** or **certification marks** tied to geographic indications under LFPPI Art. 184, covering services in Arts. 14a–14d and 15a / 15b / 15d. Requires a *constancia de pertenencia indígena*. Maps to a connector-specific `indigenous_collective` tier with note.
+- **USPTO-IMPI PPH pilot** — not a fee reduction per se, but reduces total prosecution cost via accelerated examination using USPTO work products: [USPTO Patent Prosecution Highway](https://www.uspto.gov/patents/basics/international-protection/patent-prosecution-highway/patent-prosecution-3).
+- **EPO-IMPI cooperation (pharma)** — strategic cooperation per [Uhthoff summary](https://uhthoff.com.mx/en/mexican-institute-of-industrial-property-impi-and-european-patent-office-epo-strategic-cooperation-enhancing-patent-prosecution-strategies-in-mexico-in-terms-of-pharmaceutical-patents/); not a tariff line.
+
+**April 2026 LFPPI reform — tariff impact: none yet.** Mexico
+amended the LFPPI on April 3, 2026 (in force April 4, 2026) —
+new registrable mark types (position, motion, multimedia),
+indigenous / Afro-Mexican cultural-heritage refusal grounds,
+oath against bad faith on TM filings / renewals, and 5-month
+TM resolution deadlines (12-month patent deadline). See [EY
+Law Flash on the reform](https://www.ey.com/es_mx/technical/tax/boletines-fiscales/ey-law-flash-reforma-lfppi).
+**As of 2026-05-19 no post-reform tariff *Acuerdo* has been
+published in DOF**, so the 2023 PDF + 2024 amendment remain the
+consolidated binding state. Worth re-checking quarterly — fee
+schedules typically follow substantive reform within months.
+
+**Statutory basis:**
+
+- [Ley Federal de Protección a la Propiedad Industrial — Diputados (consolidated)](https://www.diputados.gob.mx/LeyesBiblio/ref/lfppi.htm) · [LFPPI PDF (portalhcd)](https://portalhcd.diputados.gob.mx/LeyesBiblio/pdf/LFPPI_010720.pdf)
+- [DOF 2020-07-01 LFPPI publication (codigo=5596010)](https://www.dof.gob.mx/nota_detalle.php?codigo=5596010&fecha=01%2F07%2F2020) — published 2020-07-01, in force 2021-11-05.
+- [DOF — annual *tarifas IMPI* track](https://www.dof.gob.mx/) — *Acuerdos* on the IMPI tariff are published in DOF on an as-needed basis (the canonical 1995 *Acuerdo* has been modified periodically; "Última reforma publicada DOF: 12-05-2023" is the current consolidated stamp).
+
+**v1 connector plan — `MX/IMPI/Fees/{Patent, UtilityModel, Design, IntegratedCircuit, Trademark}`:**
+
+- **Source:** the gob.mx CMS attachment PDF (cached locally, re-fetched weekly + content-hash-pinned).
+- **Parser pattern:** IPIN India / DPMA / INPI Brazil — `pypdf` column extraction with article-code regex (`\d+\s*[a-z]( bis)?`).
+- **Currency:** MXN.
+- **Provenance metadata:** `version_as_of = "2023-05-12"`, `last_modifying_acuerdo = "DOF 2024-03-15 codigo=5720420"`, `freshness_max_age = 14d`.
+- **Freshness probe:** weekly check of (a) the gob.mx CMS PDF hash, (b) Google CSE on `dof.gob.mx` for `"Acuerdo" "Instituto Mexicano de la Propiedad Industrial" "tarifa"` filtered to post-2024.
 
 ## §5 Connector strategy
 
@@ -362,4 +389,5 @@ treaty / system pages.
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-05-19 | **Fees re-rated yellow (ready to build).** The original "geo-blocked" finding applies to the SIGA / VIDOC / datosabiertos register subdomains on Telmex `187.130.250.0/24`, **not** to the binding tariff document. The consolidated *Acuerdo* PDF at [gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf](https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf) is anonymously fetchable from US egress (CMS attachment route is Akamai-fronted, unlike the register hosts) and parses cleanly with `pypdf` (3-column layout, 22 pages). DOF was misdiagnosed as gated — it's actually an SSL chain issue resolved with `verify=False` or a current CA bundle. The May 2023 PDF is consolidated through "Última reforma publicada DOF: 12-05-2023"; the only post-2023 modifying *Acuerdo* found is [March 15, 2024 (codigo=5720420)](https://www.dof.gob.mx/nota_detalle.php?codigo=5720420&fecha=15/03/2024), which adds a *Décima Primera Disposición General* fee waiver for indigenous / Afro-Mexican peoples and communities filing collective or certification marks under LFPPI Art. 184 (Arts. 14a–14d, 15a / 15b / 15d) and changes no article-level tariff amounts. The April 3, 2026 LFPPI substantive reform has not yet triggered a post-reform tariff *Acuerdo*; needs quarterly re-check. Register-side status (red) unchanged. | This session; [Acuerdo PDF](https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf); [DOF March 2024 amendment](https://www.dof.gob.mx/nota_detalle.php?codigo=5720420&fecha=15/03/2024); [EY April 2026 reform brief](https://www.ey.com/es_mx/technical/tax/boletines-fiscales/ey-law-flash-reforma-lfppi) |
 | 2026-05-18 | Initial synopsis; rating **`red`**. Findings: (a) IMPI publishes **no documented REST/JSON API**, no analogue to OEPM's WSDL bundle, no SE/PRV-style undocumented JSON layer; (b) **0 IMPI entries** in the [WIPO IP API Catalog](https://apicatalog.wipo.int/) probed 2026-05-18 (179 total across 10 IPOs — DPMA, EPO, EUIPO, IP Australia, JPO, MOIP KOREA, QAZ, UPRP, USPTO, WIPO); (c) **the decisive blocker is infrastructure-level**: all `*.impi.gob.mx` subdomains except `marcia.impi.gob.mx` (which appears to be on `tmv.io`/`tmvapi.com` CDN edge) resolve to Telmex `187.130.250.0/24` and packet-level-drop TCP connections from US egress — this includes SIGA (gazette), VIDOC (documents), legacy Marcanet, `datosabiertos.impi.gob.mx` (open data), `patenteslibres.impi.gob.mx`, `eservicios.impi.gob.mx`, `pase.impi.gob.mx` (electronic prosecution), and `clasniza.impi.gob.mx`; (d) MARCia IS reachable and exposes a Spring Boot JSON backend at `/marcas/search/internal/*` (verified: `GET /counts` returns `{"records":0,"extracts":0}`) with anonymous session via JSESSIONID + HS512 SESSIONTOKEN JWT + XSRF-TOKEN, but covers only the TM slice and the payload schema is opaque without further SPA bundle replay; (e) Mexico is a [USMCA party](https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement/agreement-between), [Madrid acceded 2013-02-19](https://www.wipo.int/en/web/madrid-system/w/news/2025/madrid-system-mexico-now-providing-trademark-registration-certificates), [Hague acceded 2020-06-06](https://www.wipo.int/hague/en/members/), [PCT contracting state since 1995-01-01](https://www.wipo.int/pct/en/pct_contracting_states.html) — but USMCA is substantive-law harmonization only, no data-sharing arrangement; (f) the [LFPPI](https://www.diputados.gob.mx/LeyesBiblio/ref/lfppi.htm) was [published in DOF 2020-07-01, in force 2021-11-05](https://www.dof.gob.mx/nota_detalle.php?codigo=5596010&fecha=01%2F07%2F2020) and replaced the 1991 Ley de la Propiedad Industrial to implement USMCA Chapter 20 IP commitments; (g) PASE electronic prosecution likely requires SAT-issued [FIEL](https://www.gob.mx/sat/acciones-y-programas/firma-electronica-fiel) (Mexican residents/nationals only), mirroring the CN/CNIPA structural foreign-developer block — unverifiable from US egress. Connector status: **skipped (red — infrastructure-level geo-block)**. Coverage of MX flows transitively through EPO INPADOC (granted patents, biblio + family + legal events), Google Patents (web-crawl coverage of MX patents + TMs), WIPO Madrid Monitor (Madrid IRs designating MX), Hague Express (Hague IRs designating MX), and Patentscope (PCT national-phase entries). Document gap explicitly: MX national-only file histories, electronic prosecution events, the Gaceta, opposition / nullity proceedings, and the open-data register catalog are not covered and cannot be covered without Mexican egress. | [waves/2026-05-18-secondary-nationals-wave/mx-impi.md](../waves/2026-05-18-secondary-nationals-wave/mx-impi.md) |

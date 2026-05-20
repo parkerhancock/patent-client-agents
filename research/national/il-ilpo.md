@@ -5,9 +5,9 @@
 **Issuing body:** Israel Patent Office (רשם הפטנטים, המדגמים וסימני המסחר) — registration unit inside the Ministry of Justice
 **Rights administered:** patent, trademark, design, geographical indication (appellations of origin)
 **Working languages:** Hebrew (controlling); English (EN locales on all three search portals; partial EN coverage of examination guidelines)
-**Connector status:** **register: skip (no API)**; **statutes: planned** (revive `israel_statutes`, `StaticLawCorpus`-shape)
-**Last verified:** 2026-05-18
-**Manifest entry:** not yet listed in [`coverage/sources.yaml`](../../coverage/sources.yaml) — proposed split into `IL/ILPO/Register` (none) + `IL/ILPO/Statute` (planned)
+**Connector status:** **register: skip (no API)**; **fees: yellow — extraction needs dev-browser** (ecom.gov.il SPA reachable + valid SSL, but content is Angular-hydrated behind Akamai bot manager; promotable to clean httpx after ~1-2 hr of SPA reverse-engineering); **statutes: planned** (revive `israel_statutes`, `StaticLawCorpus`-shape)
+**Last verified:** 2026-05-19
+**Manifest entry:** not yet listed in [`coverage/sources.yaml`](../../coverage/sources.yaml) — proposed split into `IL/ILPO/Register` (none) + `IL/ILPO/Fees` (yellow) + `IL/ILPO/Statute` (planned)
 
 **Detail surveys:**
 - [`connectors/israel_pto.md`](../connectors/israel_pto.md) — 2026-05 detail survey (329 lines; 23-asset matrix, statute-heavy v1 recommendation)
@@ -142,25 +142,166 @@ the TM feed is **not evidenced by primary source** as of 2026-05-18.
 
 ## §4 Fees
 
-ILPO publishes a consolidated fee schedule in **NIS (Israeli new shekel)**
-covering patents (filing, search, examination, grant, oppositions,
-annual fees), trademarks (filing per class, renewal), and designs
-(filing, renewal). The schedule is administered under the Patents
-Regulations (Office Practice) 5728-1968 and parallel TM / Design
-secondary legislation; rate-adjustment notices are published in the
-official gazette and on the ILPO `gov.il` pages.
+**Status (2026-05-19): yellow — extraction needs dev-browser.**
+This is the first office in the current wave where the
+canonical current-effective schedule lives behind a JS-rendered
+SPA + Akamai bot manager, with no parallel static PDF mirror
+on the live-data side. The statutory **structure** is reachable
+on WIPO Lex but the consolidated text there is stale by 7
+years (last amendment up to 2019-01-16) — useless for current
+fee amounts because Israeli fees are CPI-adjusted every
+1 January.
 
-- **Official schedule (ILPO):** [`gov.il/en/departments/ilpo`](https://www.gov.il/en/departments/ilpo) — fee tables and rate-adjustment notices under the relevant department's "Fees" / "תעריפים" navigation
-- **Statutory basis (Patents Regulations 5728-1968):** [WIPO Lex 19117](https://www.wipo.int/wipolex/en/legislation/details/19117)
-- **Patents Law (parent statute):** [WIPO Lex 15167](https://www.wipo.int/wipolex/en/legislation/details/15167)
+**Publication chain:**
 
-Notable discount categories (link-only — no amounts):
+1. **Current effective amounts — Government Payment Service
+   (ecom.gov.il / "שירות התשלומים הממשלתי"):**
+   - **Patents:** [`ecom.gov.il/counterspa/home/14/2/patents`](https://ecom.gov.il/counterspa/home/14/2/patents) — Angular SPA, 3 KB HTML shell, no server-rendered content
+   - **Trademarks:** [`ecom.gov.il/counterspa/home/14/2/trademarks`](https://ecom.gov.il/counterspa/home/14/2/trademarks) — same shape
+   - **Designs:** [`ecom.gov.il/counterspa/home/14/2/designs`](https://ecom.gov.il/counterspa/home/14/2/designs) — same shape
 
-- **Small-entity / individual applicant reductions** under the Patents Regulations
-  fee schedule.
-- **ISA / IPEA reductions for Israeli-routed PCT applicants** (academic /
-  student / pensioner tiers documented through the
-  [PCT eGuide IL](https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=IL&doc-lang=en)).
+   All three reachable from US egress with valid SSL — they
+   are *not* blocked. But the SPA queries a CSRF-protected
+   `/counterspa/*` JSON backend with Akamai Bot Manager
+   gating (the `/TSbd/` script in the shell loads Akamai's
+   PoW + behavioural fingerprint). A plain `httpx` POST to
+   common endpoint guesses (`/PatentsAgra/GetAll`, `/Service`,
+   `/Counter/GetSpaContent`) returns 302 to the session-bootstrap
+   page. Reverse-engineering the SPA's data flow to a clean
+   `httpx` connector is a multi-hour task and might prove
+   brittle to Akamai rotation.
+
+   **Practical extraction path: dev-browser.** The SPA renders
+   the full fee table after Angular initialization, and the
+   rendered DOM has stable Hebrew-labelled cells that map
+   cleanly to FeeItems. Pattern matches the EPO BFF case
+   (where we used dev-browser to discover the hidden JSON
+   endpoint, then promoted to clean httpx). For v1 the
+   pragmatic approach is to ship dev-browser-rendered HTML
+   extraction and queue the upgrade.
+
+2. **Statutory structure — WIPO Lex (stale by 7 years for
+   amounts, but useful for confirming what categories of
+   fees exist):**
+   - [WIPO Lex 19117 — Patents Regulations (Office Practice, Rules of Procedure, Documents and Fees), 5728-1968 (as amended up to 2019-01-16)](https://www.wipo.int/wipolex/en/legislation/details/19117) — Hebrew-only PDF at [`wipolex-res.wipo.int/edocs/lexdocs/laws/he/il/il117he.pdf`](https://wipolex-res.wipo.int/edocs/lexdocs/laws/he/il/il117he.pdf). The Schedule (תוספת / "Tosefet") to these Regulations contains the fee table structure. **The amounts are stale** — CPI-adjusted annually since 2019, so they should not be quoted to clients. Use only for confirming category boundaries (which items have separate fees, how excess-claims/excess-pages are codified).
+   - Prior English-language consolidations exist at WIPO Lex IDs [15984, 15259, 2365](https://www.wipo.int/wipolex/en/legislation/details/15984) — also stale.
+   - **Patents Law 5727-1967 (parent statute):** [WIPO Lex 15167](https://www.wipo.int/wipolex/en/legislation/details/15167) — substantive law, not fee amounts.
+   - **Trade Marks Ordinance [New Version], 5732-1972** and the **Trade Marks Regulations, 5700-1940** — fee schedule for trademarks. Available on Nevo / gov.il (gov.il currently Cloudflare-403 from US egress, but Nevo reachable at [`nevo.co.il`](https://www.nevo.co.il/)).
+   - **Designs Law, 5777-2017** — replaced the 1924 Patents and Designs Ordinance for designs filed on/after 2018-08-07. New regulations on Nevo / gov.il.
+
+3. **Annual CPI-adjustment notices** publish in **Reshumot**
+   (Israeli official gazette). The notices are PDFs on
+   gov.il/he/departments/dynamiccollectors/publications-of-justice
+   — but that path currently returns 403 Cloudflare from US
+   egress. Reshumot is therefore not a viable direct extraction
+   target without a dev-browser or stealth-IP detour.
+
+**Cloudflare-403 perimeter on gov.il.** All `gov.il/*`
+sub-pages return 403 Cloudflare from US residential IPs as of
+2026-05-19, regardless of language (EN, HE) or sub-path
+(ilpo, departments, units, services, dynamiccollectors).
+The block is wholly on gov.il proper; the **ecom.gov.il**
+deep counterspa paths bypass it (Akamai bot manager replaces
+Cloudflare on that subdomain). This is analogous to the
+gob.mx-CMS-attachment-vs-HTML-shell split in Mexico — the
+e-payment subdomain is the only reachable surface for the
+fee data.
+
+**Scope of the schedule (NIS-denominated, structural shape
+from WIPO Lex 1968 Regulations Schedule + current-amount
+hints from practitioner sources):**
+
+- **Patents.** Filing fee (national, ~NIS 2,344 for 2025
+  after the ~3.5% CPI bump from 2024's NIS 2,264), national-
+  phase entry (PCT), search report fee, examination request,
+  allowance, **excess-claims fee** (per claim over 50 — easy
+  to miss for biotech / software with many claims), **excess-
+  pages fee** (per 50 pages over 100 pages of description,
+  excluding sequence listings), grant, renewal fees at year
+  6, 10, 14, and 18 (cumulative-coverage model — fewer
+  individual annuities than European offices).
+- **Trademarks.** Filing per class, opposition, registration,
+  renewal (10-year), recordation. Per-class structure
+  similar to most international offices.
+- **Industrial designs.** Filing, examination, registration,
+  renewal, recordation.
+- **Cross-cutting administrative fees.** Priority claims,
+  certified copies, file inspection, late-payment surcharges.
+
+**Discount tiers (mapped to `EntityTier`):**
+
+- **Small-entity 40% reduction.** Available for individuals
+  or companies with **annual turnover under NIS 10 million in
+  the preceding year**, on a **first-ever patent application
+  for the invention**. Applies to filing and grant fees.
+  Requires a turnover declaration. Maps to `EntityTier.small`
+  with explicit eligibility criteria (turnover-based and
+  first-time-filer, not pure entity-size). Note this is
+  stricter than the US small-entity test — only the *first*
+  application for the invention qualifies, and only the
+  filing + grant fees are reduced (not examination, search,
+  or annuities).
+- **ISA / IPEA reductions for Israeli-routed PCT applicants**
+  — academic / student / pensioner tiers documented through
+  the [PCT eGuide IL](https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=IL&doc-lang=en).
+
+**Excess-claims / excess-pages structural levers.** Both are
+easy to miss when budgeting for claim-heavy or long-spec
+applications:
+
+- **Excess claims:** per-claim charge for claims over 50.
+  Connector should emit as a per-claim FeeItem with a
+  `threshold = 50` note.
+- **Excess pages:** per-50-pages charge for descriptions
+  over 100 pages, *excluding sequence listings*. Connector
+  should emit as a per-50-page FeeItem with `threshold =
+  100` and `exclusions = ["sequence_listings"]`.
+
+**Annual revision cadence — CPI-tied, January 1.** ILPO
+fees adjust each 1 January by Israeli CPI movement,
+rounded to the nearest shekel. The 2025 round was about
+**+3.5%** (national patent filing: NIS 2,264 → NIS 2,344);
+the 2024 round was lower-single-digits, the 2023 round was
+higher (post-pandemic inflation). Freshness window should
+be **30 days** through January, then relaxable to 90 days
+through the rest of the calendar year.
+
+**NIS volatility caveat** — same warning as Turkey: the
+NIS moves enough against the USD that a dollar-equivalent
+quoted on practitioner websites is only a snapshot.
+Always confirm against the live ecom.gov.il page when
+sending client estimates.
+
+**Proposed amendments in flight (2025).** The Israeli
+Patents Statute had proposed amendments working through the
+Knesset in 2025 — worth checking whether anything has been
+gazetted that affects fees or procedural deadlines before
+relying on a stale figure. The Reshumot publication track
+is the source of truth; gov.il/he/departments/dynamiccollectors/publications-of-justice
+is the (currently Cloudflare-blocked) index.
+
+**Statutory basis (summary):**
+
+- [Patents Law 5727-1967 — WIPO Lex 15167](https://www.wipo.int/wipolex/en/legislation/details/15167)
+- [Patents Regulations (Office Practice, Procedural Rules, Documents and Fees) 5728-1968 — WIPO Lex 19117](https://www.wipo.int/wipolex/en/legislation/details/19117) (Schedule contains fee structure; amounts stale by 7 years)
+- Trade Marks Ordinance [New Version] 5732-1972 + Trade Marks Regulations 5700-1940 — available via Nevo and gov.il (gov.il currently Cloudflare-403; [Nevo home](https://www.nevo.co.il/) reachable)
+- Designs Law 5777-2017 — replaced the 1924 Patents and Designs Ordinance for designs filed on/after 2018-08-07
+
+**v1 connector plan — `IL/ILPO/Fees/{Patent, Trademark, Design}`:**
+
+- **Source:** dev-browser-rendered ecom.gov.il counterspa pages (three URLs above).
+- **Parser pattern:** dev-browser → wait for Angular hydration → extract the rendered fee-table DOM → match against the WIPO-Lex-derived category map → emit FeeItems. Closest sibling: the EPO BFF connector, which used dev-browser to discover the hidden JSON endpoint and then promoted to clean httpx; the same upgrade path applies here when the SPA's CSRF / Akamai handshake is decoded.
+- **Currency:** NIS.
+- **Provenance metadata:** `version_as_of = "live"` (re-fetched on first access in calendar year + on detected CPI-notice publication); `statutory_basis = "Patents Regulations 5728-1968 Schedule + Trade Marks Regulations 5700-1940 + Designs Regulations 5777-2017"`; `last_cpi_adjustment_year = YYYY`; `freshness_max_age = 30d` through January, 90d thereafter.
+- **Eligibility tag handling:** `eligible_for_small_entity_reduction = True/False` (40% on filing + grant only, with turnover-under-NIS-10M + first-ever-application criteria documented as eligibility notes).
+- **Excess-charge handling:** emit excess-claims and excess-pages as their own FeeItems with `threshold` and `unit` provenance, so cost-estimator tools can compute portfolio-specific totals.
+- **SSL note:** `ecom.gov.il/counterspa/*` valid; `gov.il/*` returns Cloudflare 403 from US egress (not an SSL issue, a WAF block). WIPO Lex valid SSL.
+
+**Connector readiness summary.** Rate this **yellow rather
+than green**: extraction requires dev-browser (and depends on
+the dev-browser skill being healthy — see [`feedback_dev_browser_health`] in MEMORY if it isn't). All other documented offices in this wave (MX, TR, HK, SG, ES) ship cleanly with `httpx` + `pypdf` / `lxml`; Israel is the first that needs the browser. Plan to spend ~1-2 hours
+on the SPA reverse-engineer to promote to a clean httpx
+connector before depending on the dev-browser path at scale.
 
 ## §5 Connector strategy
 
@@ -340,4 +481,5 @@ Primary sources only — `justice.gov.il`, `gov.il`, `data.gov.il`,
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-05-19 | **Fees re-rated yellow — extraction needs dev-browser.** The prior wave's "Cloudflare 403" finding on `gov.il/en/departments/ilpo` is confirmed (and is wholly true: every `gov.il/*` sub-path returns Cloudflare 403 from US residential egress regardless of language or section), **but** the canonical current-effective fee schedule actually lives at `ecom.gov.il/counterspa/home/14/2/{patents,trademarks,designs}` — three URLs on a different subdomain that **bypass Cloudflare** and return 200 OK with valid SSL. The catch: those pages are Angular SPA shells (~3 KB HTML) backed by a CSRF-gated JSON API behind **Akamai Bot Manager** (the `/TSbd/` PoW + behavioural fingerprint script). Plain `httpx` POSTs to endpoint guesses (`/PatentsAgra/GetAll/14/2`, `/Service/14/2`, etc.) return 302 to session-bootstrap; reverse-engineering the SPA's data flow is a multi-hour task. Pragmatic v1 path: dev-browser rendered DOM extraction (analogous to the EPO BFF case where dev-browser found the hidden JSON endpoint that we later promoted to clean httpx). The WIPO Lex copy at [legislation/details/19117](https://www.wipo.int/wipolex/en/legislation/details/19117) provides the statutory **structure** of the Patents Regulations (Office Practice, Procedural Rules, Documents and Fees) 5728-1968 Schedule, but the consolidated text is **as amended up to 2019-01-16 — stale by 7 years for amounts** because Israeli fees are CPI-adjusted every 1 January (2025 round was ~+3.5%; national patent filing NIS 2,264 → NIS 2,344). Statutory citations: Patents Law 5727-1967 + Regulations 5728-1968 (Schedule = "Tosefet"); Trade Marks Ordinance [New Version] 5732-1972 + Regulations 5700-1940; Designs Law 5777-2017. Structural levers (must carry as FeeItem dimensions): (a) small-entity 40% reduction — eligibility is `turnover_under_NIS_10M_preceding_year AND first_ever_application_for_invention`, applies only to filing + grant fees (stricter than US small-entity test); (b) excess-claims fee per claim over 50; (c) excess-pages fee per 50 pages over 100 page description (sequence listings excluded). NIS volatility caveat same as Turkey — always confirm USD equivalent against the live ecom.gov.il page. Connector plan: `IL/ILPO/Fees/{Patent,Trademark,Design}` — three routes, dev-browser-rendered DOM extraction for v1, ~1-2 hr SPA reverse-engineering planned to promote to clean httpx. Register-side rating unchanged. | This session; live probes 2026-05-19; [WIPO Lex 19117](https://www.wipo.int/wipolex/en/legislation/details/19117); ecom.gov.il counterspa URLs. |
 | 2026-05-18 | Initial synopsis. Resolved the stale "in_progress" IL/ILPO worktree by splitting register-side (🔴 red_no_api, skip — Angular SPA + reCAPTCHA + Glassbox, ASP.NET WebForms TM/design, bulk-only data.gov.il TM feed) from substantive-law-side (🟢 green, revive `israel_statutes` as `StaticLawCorpus` — same shape as DPMA / Légifrance / IPO India / Taiwan Trade Secrets corpora). Register rating confirms the existing `red_no_api` in STATE.yaml; statutes half lands as `planned`. Same split lens applied to BR/INPI in the sibling wave file. | [`waves/2026-05-18-priority-2-synopses/il-ilpo.md`](../waves/2026-05-18-priority-2-synopses/il-ilpo.md) |

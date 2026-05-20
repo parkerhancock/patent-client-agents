@@ -5,8 +5,8 @@
 **Issuing body:** Intellectual Property Office of Singapore (IPOS), a statutory board under the Ministry of Law
 **Rights administered:** patent, trademark, design, geographical_indication, plant_variety (and copyright is administered by IPOS for policy purposes; registration is not required under SG law)
 **Working languages:** English (primary, authoritative for all statutes and manuals)
-**Connector status:** **register-side: skipped** (no usable public REST + Oct-2020 patent freeze on the one open API); **statutes-side: planned** (revive the 2026-05 worktree under current `StaticLawCorpus` standards)
-**Last verified:** 2026-05-18
+**Connector status:** **register-side: skipped** (no usable public REST + Oct-2020 patent freeze on the one open API); **fees-side: ready to build** (yellow → green; the prior wave's "SSO stochastic rate-limit + First Schedule URL unknown" finding is superseded — see §4); **statutes-side: planned** (revive the 2026-05 worktree under current `StaticLawCorpus` standards)
+**Last verified:** 2026-05-19
 **Manifest entry:** not yet listed in `coverage/sources.yaml`
 
 **Detail surveys:**
@@ -105,16 +105,205 @@ Same corpus shape as MoPP/MPEP/TMEP, single-fetch ingestion.
 
 ## §4 Fees
 
-IPOS charges in **SGD** across patents (filing, search, examination, grant, annuities yrs 4–20), trade marks (filing/renewal per class), registered designs (filing/renewal), geographical indications, and plant varieties — plus IPOS Hearings tribunal fees. Fee schedules are statutory, set under the [Patents Rules (SL/PA1994-R1)](https://sso.agc.gov.sg/SL/PA1994-R1) and parallel TM/Designs/GI/PVP rules.
+**Status (2026-05-19):** Ready to build. The earlier wave's
+finding ("stochastic CloudFront rate-limit on SSO, First
+Schedule lives at a separate sub-URL we haven't pinned") is
+superseded — IPOS publishes the per-right schedule as native
+HTML on six dedicated forms-and-fees pages plus an aggregate
+landing, all reachable on first hit. SSO returns 200 OK with
+full content (Patents Rules at 471 KB / 141 tables) — any
+earlier CDN-throttle finding was transient. SSO is the
+statutory primary source; the IPOS pages are the practical
+extraction target.
 
-- **Official schedule:** [IPOS fees and grants resources](https://www.ipos.gov.sg/manage-ip/) — navigate per right (patents/trade marks/designs/GIs/PVP) to the current published fee tables.
-- **Statutory basis:** [Patents Rules](https://sso.agc.gov.sg/SL/PA1994-R1) · [Registered Designs Rules](https://sso.agc.gov.sg/SL/266-R1) on SSO.
-- **Practice circulars (fee changes):** [Circulars and Practice Directions](https://www.ipos.gov.sg/about-ip/patents/circulars-and-practice-directions/).
+**Publication chain:**
 
-Notable discount programs *(named here; specific amounts and dates live on the official schedule)*:
+1. **Primary statutory source — Singapore Statutes Online
+   ([sso.agc.gov.sg](https://sso.agc.gov.sg/)):**
+   - **Patents Rules — First Schedule "Fees payable"** at
+     [`SL/PA1994-R1`](https://sso.agc.gov.sg/SL/PA1994-R1).
+     Subsidiary legislation under the Patents Act 1994.
+     Current consolidated version reflects 01 Sep 2025
+     amendment by [S 538/2025](https://sso.agc.gov.sg/SL/PA1994-R1?ProvIds=Sc1-).
+   - **Trade Marks Rules — fee schedule** at
+     [`SL/TMA1998-R1`](https://sso.agc.gov.sg/SL/TMA1998-R1).
+     Subsidiary legislation under the Trade Marks Act 1998.
+   - **Registered Designs Rules — fee schedule** at
+     [`SL/RDA2000-R1`](https://sso.agc.gov.sg/SL/RDA2000-R1).
+     Subsidiary legislation under the Registered Designs Act
+     2000. (The earlier `/SL/266-R1` slug in this file's prior
+     revision was outdated.)
+   - **Plant Varieties Protection Act / Geographical
+     Indications Act / Layout-Designs of Integrated Circuits
+     Act** — each has its own subsidiary-legislation slug on
+     SSO; v1 can pin Patent / TM / Design and follow up on the
+     three sui generis rights later.
 
-- **SG IP Fast (formerly SG Patent Fast Track)** — accelerated examination programme; named-only, eligibility via IPOS announcements.
-- **IPOS acceleration programmes (PPH, ASPEC, ASPEC+)** — fee posture varies per programme per the [Patent Prosecution Highway page](https://www.ipos.gov.sg/about-ip/patents/how-to-register-overview/acceleration-programmes/patent-prosecution-highway/).
+2. **IPOS forms-and-fees pages (practical extraction target,
+   reachable as native HTML — verified 2026-05-19):**
+   - **Patents:** [`ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/`](https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/) — **note the `-singapore` URL suffix**; the user-known `/about-ip/patents/forms-and-fees/` 404s. 9 tables on the page; the primary fee table is table 1 (102 rows) with shape `Form code | Description | Fee`. Form codes are `PFn` (e.g., PF1 = Request for Grant of a Patent at S$170) with `NA` for non-form items.
+   - **Trade marks:** [`ipos.gov.sg/about-ip/trade-marks/forms-and-fees/`](https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/) — 4 tables. Explicit "From 1 April 2026" effective-date markers in the page body.
+   - **Designs:** [`ipos.gov.sg/about-ip/designs/forms-and-fees/`](https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/) — 3 tables. **Note the URL is `/designs/`, not `/registered-designs/`** (the user-known `/about-ip/registered-designs/forms-and-fees/` 404s).
+   - **Geographical indications:** [`ipos.gov.sg/about-ip/geographical-indications/forms-and-fees/`](https://www.ipos.gov.sg/about-ip/geographical-indications/forms-and-fees/) — 3 tables.
+   - **Plant variety rights:** [`ipos.gov.sg/about-ip/plant-variety-rights/forms-and-fees/`](https://www.ipos.gov.sg/about-ip/plant-variety-rights/forms-and-fees/) — 3 tables.
+   - **Copyright:** [`ipos.gov.sg/about-ip/copyright/forms-and-fees/`](https://www.ipos.gov.sg/about-ip/copyright/forms-and-fees/) — 4 tables. Copyright is non-registrable in SG; this page covers tribunal / Copyright Tribunal fees.
+   - **Aggregate landing:** [`ipos.gov.sg/about-ip/forms-fees/`](https://www.ipos.gov.sg/about-ip/forms-fees/) — note the hyphen-less slug. Links to all six right-type pages and to the 21 July 2025 circulars.
+
+3. **Practice circulars (fee-change announcements)** —
+   IPOS hosts these on the same forms-and-fees pages.
+   Three were issued together on **21 July 2025** and contain
+   side-by-side old/new fee tables in Annex A:
+   - **Patents Circular No. 3 of 2025**
+   - **Trade Marks Circular No. 3 of 2025**
+   - **Designs Circular No. 1 of 2025**
+
+   Circulars list, on a row-by-row basis, every changed fee
+   with the old and new amounts side by side. They are the
+   single best documentation source for *what changed* on
+   1 Sep 2025 and 1 Apr 2026; the SSO Rules are the binding
+   primary source for *what the current rate is*.
+
+**Two-phase implementation — 2025-09-01 + 2026-04-01.** Most
+of the announced changes took effect on **1 September 2025**;
+a second tranche took effect on **1 April 2026**. The two
+biggest April-2026 line items are:
+
+- **Patents: examination review report fee → S$3,200.**
+- **Trade marks: amendment fee → S$60 per class.**
+
+If a connector serves fee data near either implementation
+date, the IPOS HTML page is the source of truth (it shows
+the *current effective* rate); the circulars contain both
+old and new rates for back-dated fee estimates. The
+connector should track both effective dates and surface
+"in effect from" provenance on every FeeItem.
+
+**Trademark filing — pre-approved database lever (S$240
+vs S$410/class).** A real cost decision for US clients
+filing broad specs:
+
+- **S$240/class** if the applicant adopts the IPOS
+  pre-approved goods and services classification database
+  in full (no custom specification text).
+- **S$410/class** (up from S$380 pre-1-Sep-2025) for
+  custom specifications.
+
+The connector should emit both as distinct FeeItems with
+a `specification_type = "pre-approved"` / `"custom"`
+provenance tag. This is a material cost lever — for a
+broad US filing covering, say, 15 classes, the difference
+is S$240×15 = S$3,600 vs S$410×15 = S$6,150.
+
+**Patent excess claims — steeper as of 1 Sep 2025.**
+Threshold dropped from 20 claims to **15**, and the
+per-claim fee doubled from S$40 to **S$80** for
+examination requests filed on or after 1 September 2025.
+For portfolio-management workflows the implication is:
+voluntary amendment before exam request can save real
+money on claim-heavy applications. The connector should
+emit excess-claims as a per-claim FeeItem with a clear
+threshold note so cost-estimator tools can compute
+correctly.
+
+**Madrid Protocol designation fees are separate.** For
+international registrations designating Singapore, the
+relevant amounts as of **1 September 2025**:
+
+- **Application / transformation:** S$380 → S$410 per class
+- **Renewal:** S$440 → S$480 per class
+
+These are paid to IPOS as the designated office (not to
+WIPO) and are surfaced via the SG Individual Fee notification
+on the WIPO Madrid system page. The connector should emit
+these as separate `MadridDesignation` FeeItems with the
+`route = "Madrid IR designating SG"` provenance tag.
+
+**Scope of the schedule (SGD-denominated, per-form structure):**
+
+- **Patents** — filing (PF1 = S$170), search, examination,
+  excess claims fee (per claim over 15 = S$80 for exam
+  requests on/after 2025-09-01), grant, annuities (years 4
+  through 20), restoration, recordation, opposition,
+  amendment, certification.
+- **Trade marks** — filing per class (S$240 pre-approved DB
+  / S$410 custom), opposition, registration of changes,
+  renewal (10-year), goods-and-services amendment (S$60/class
+  from 2026-04-01), recordation.
+- **Registered designs** — filing per design, registration,
+  extension (each 5-year extension up to maximum 15 years
+  for newer registrations or 25 for older), recordation.
+- **Geographical indications** — application, opposition,
+  recordation.
+- **Plant variety rights** — application, examination,
+  grant, annuities.
+
+**Discount tiers (mapped to `EntityTier`):**
+
+- **No size-based small-entity rate.** The Singapore
+  schedule does not encode a US-style large/small/micro
+  tier.
+- **The trademark pre-approved-DB rate** is not a tier in
+  the legal sense — every applicant is eligible if they
+  accept the canonical specifications. Treat it as a
+  `specification_type` provenance, not as an
+  `EntityTier`.
+- **IPOS programme-level subsidies** (SG IP Fast / ASPEC /
+  PPH) reduce *time*, not tariff amounts. Not represented
+  as FeeItem discounts.
+
+**Statutory basis:**
+
+- [Patents Act 1994 — SSO PA1994](https://sso.agc.gov.sg/Act/PA1994)
+- [Patents Rules (Cap. PA1994-R1) — First Schedule = Fees payable](https://sso.agc.gov.sg/SL/PA1994-R1)
+- [Trade Marks Act 1998 — SSO TMA1998](https://sso.agc.gov.sg/Act/TMA1998)
+- [Trade Marks Rules — SSO TMA1998-R1](https://sso.agc.gov.sg/SL/TMA1998-R1)
+- [Registered Designs Act 2000 — SSO RDA2000](https://sso.agc.gov.sg/Act/RDA2000)
+- [Registered Designs Rules — SSO RDA2000-R1](https://sso.agc.gov.sg/SL/RDA2000-R1)
+- [IPOS Circulars and Practice Directions hub](https://www.ipos.gov.sg/about-ip/patents/circulars-and-practice-directions/) — index of all gazetted fee changes including the 21-Jul-2025 circulars
+
+**v1 connector plan — `SG/IPOS/Fees/{Patent, Trademark, Design, GeographicalIndication, PlantVariety}`:**
+
+- **Source:** the six IPOS HTML pages (the five right-type
+  pages plus the aggregate landing for cross-reference).
+- **Parser pattern:** `lxml` per-page table walk, similar
+  to HK/IPD and CIPO Canada. The main fee table is
+  consistently at table index 1 on each right-type page,
+  with shape `Form | Description | Fee` (or just
+  `Description | Fee` where forms don't apply).
+- **Currency:** SGD.
+- **Provenance metadata:** every FeeItem gets
+  `in_effect_from` (mostly 2025-09-01 or 2026-04-01),
+  `statutory_basis` (the relevant SSO slug), and
+  `circular_announcement` (the 21-Jul-2025 circular for
+  the current cycle).
+- **Freshness probe:** quarterly hash check of the six
+  IPOS pages + a SSO Rules-history poll for new
+  S-numbered amendments since the recorded version.
+- **Spec-type handling for TM:** emit
+  `specification_type = "pre-approved"` (S$240/class) and
+  `"custom"` (S$410/class) as separate FeeItems on the
+  filing row.
+- **Madrid SG-designation handling:** emit as separate
+  FeeItems with `route = "Madrid IR designating SG"` to
+  distinguish from direct-filing TM fees.
+- **SSL note:** Both `ipos.gov.sg` (isomer-hosted on by.gov.sg
+  CDN) and `sso.agc.gov.sg` present valid certs; no
+  `verify=False` required.
+
+**SSO "stochastic rate-limit" claim — superseded.** The
+prior wave reported intermittent CloudFront 403s on SSO.
+The 2026-05-19 probe returned 200 OK on first hit for all
+three Rules slugs with full content (471 KB / 141 tables
+on Patents Rules). If a rate-limit reappears under load,
+respectful caching (TTL ≥ 7 days from one hit) and exponential
+backoff should keep us within the envelope.
+
+Notable IPOS acceleration programmes *(named only — these are
+prosecution-time levers, not tariff discounts)*:
+
+- **SG IP Fast (formerly SG Patent Fast Track)** — accelerated examination programme.
+- **Patent Prosecution Highway (PPH)** — bilateral acceleration; fee posture per [IPOS PPH page](https://www.ipos.gov.sg/about-ip/patents/how-to-register-overview/acceleration-programmes/patent-prosecution-highway/).
+- **ASPEC and ASPEC+** — ASEAN Patent Examination Cooperation. ASPEC has no public API; SG is not in ASEAN Patentscope national collections.
 
 ## §5 Connector strategy
 
@@ -202,4 +391,5 @@ Primary sources only — IPOS, AGC SSO, data.gov.sg, WIPO.
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-05-19 | **Fees re-rated yellow → ready to build.** Prior wave's "SSO stochastic CloudFront rate-limit + First Schedule URL unpinned" finding is superseded — the 2026-05-19 probe returned 200 OK on first hit for all three Rules slugs ([Patents Rules](https://sso.agc.gov.sg/SL/PA1994-R1) 471 KB / 141 tables; [Trade Marks Rules](https://sso.agc.gov.sg/SL/TMA1998-R1) 134 tables; [Registered Designs Rules](https://sso.agc.gov.sg/SL/RDA2000-R1) 116 tables; First Schedule "Fees payable" confirmed on the Patents Rules page). The IPOS forms-and-fees pages are reachable on six dedicated URLs — **but with URL-pattern surprises:** patents is at `/about-ip/patents/forms-and-fees-singapore/` (the user-known `/about-ip/patents/forms-and-fees/` 404s) and designs is at `/about-ip/designs/forms-and-fees/` (the user-known `/about-ip/registered-designs/forms-and-fees/` 404s). Two-phase fee implementation: most changes 1 Sep 2025 (S 538/2025), second tranche 1 Apr 2026 (patent examination review report fee → S$3,200, TM amendment fee → S$60/class). Trademark filing has a per-applicant cost lever: S$240/class if the IPOS pre-approved goods-and-services database is adopted in full vs S$410/class for custom specs. Patent excess-claims threshold dropped from 20 to 15 with per-claim fee doubling from S$40 to S$80 for exam requests on/after 2025-09-01. Madrid SG-designation fees are separate (S$380→S$410 application, S$440→S$480 renewal). Three [IPOS circulars](https://www.ipos.gov.sg/about-ip/patents/circulars-and-practice-directions/) dated 21 July 2025 (Patents #3, TM #3, Designs #1) have Annex A side-by-side fee tables for back-dated estimate work. Connector plan: `SG/IPOS/Fees/{Patent,Trademark,Design,GeographicalIndication,PlantVariety}` — five routes from six HTML pages, `lxml` multi-table pattern (table index 1 per page, 3-col `Form | Description | Fee` shape; 102 rows on the patent table). Register-side rating unchanged (🔴 red). | This session; live probes 2026-05-19; user-sourced 2025-2026 implementation timeline. |
 | 2026-05-18 | Initial synopsis. Register-side **🔴 red** — no usable read REST: IP2SG transactional is Singpass/CorpPass-gated to SG residents; data.gov.sg collection 281 is biblio-only with patents frozen Aug 2018 → Oct 2020 and lodgement-date-only query semantics; Digital Hub is ASP.NET `__VIEWSTATE` HTML. Statutes-side **🟢 green** — SSO + IPOS PDF tree are clean static-corpus material; recommend reviving the 2026-05 `sg_statutes`/`sg_manuals` worktree under current `StaticLawCorpus` standards (same shape as `ipo_in_statutes`, `dpma_statutes`, `legifrance_ip`, `tw_trade_secrets`). Drift from older detail survey: the data.gov.sg **design endpoint `d_63bfb01a27595bedef08da39a344402c` is in fact published** (older survey marked it as placeholder). | [waves/2026-05-18-priority-2-synopses/sg-ipos.md](../waves/2026-05-18-priority-2-synopses/sg-ipos.md) · [data.gov.sg collection 281](https://data.gov.sg/collections/281/view) · [SSO](https://sso.agc.gov.sg/) |

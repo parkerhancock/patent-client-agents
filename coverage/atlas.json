@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T03:11:40+00:00",
+  "generated_at": "2026-05-19T14:12:41+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 116,
@@ -14,9 +14,9 @@
     },
     "by_connector_status": {
       "skipped": 94,
-      "shipped": 11,
+      "shipped": 13,
       "none": 4,
-      "planned": 7
+      "planned": 5
     },
     "by_region": {
       "multilateral": 6,
@@ -1406,6 +1406,34 @@
           "auth": "api_key",
           "status": "active",
           "module": "patent_client_agents.tipo_opdata"
+        },
+        {
+          "id": "TW/TIPO/Fees/Patent",
+          "name": "TIPO Taiwan \u2014 Fees (Patent)",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
+        },
+        {
+          "id": "TW/TIPO/Fees/Trademark",
+          "name": "TIPO Taiwan \u2014 Fees (Trademark)",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
         }
       ]
     },
@@ -1550,11 +1578,75 @@
       "rating_emoji": "\ud83d\udfe2",
       "rating_label": "Green",
       "rating_basis": "Three undocumented unauthenticated REST/JSON APIs (patents-search-api.prv.se, dv-search-api.prv.se, api.prv.se) reverse-engineered from beta UI bundle.js. CC0 / CC BY 4.0 on parallel bulk feeds + Sweden's Open Data Act SFS 2022:818. Probes returned 764k patents + 89 IKEA TMs + design records.",
-      "connector_status": "planned",
-      "last_verified": "2026-05-18",
+      "connector_status": "shipped",
+      "last_verified": "2026-05-19",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/se-prv/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/se-prv.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "SE/PRV/Patents",
+          "name": "PRV Sweden \u2014 National Patents",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.prv_se"
+        },
+        {
+          "id": "SE/PRV/Trademarks",
+          "name": "PRV Sweden \u2014 National Trademarks",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.prv_se"
+        },
+        {
+          "id": "SE/PRV/Designs",
+          "name": "PRV Sweden \u2014 National Designs (M\u00f6nster)",
+          "rights": [
+            "design"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.prv_se"
+        },
+        {
+          "id": "SE/PRV/SPCs",
+          "name": "PRV Sweden \u2014 Supplementary Protection Certificates",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.prv_se"
+        }
+      ]
     },
     {
       "id": "FI/PRH",
@@ -1571,11 +1663,76 @@
       "rating_emoji": "\ud83d\udfe2",
       "rating_label": "Green",
       "rating_basis": "Three independent unauthenticated JSON APIs under one office (patenttitietopalvelu.prh.fi/nis-api-gateway-pat/, tavaramerkkitietopalvelu.prh.fi/nis-api-gateway/, mallioikeustietopalvelu.prh.fi/nis-api-gateway/) covering 393,750 patents + UM + SPC + EP-FI, 282,824 TMs back to 1891, 33,682 designs back to 1971. Per-application GET returns true register-fidelity prosecution data.",
-      "connector_status": "planned",
-      "last_verified": "2026-05-18",
+      "connector_status": "shipped",
+      "last_verified": "2026-05-19",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/fi-prh/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/fi-prh.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "FI/PRH/Patents",
+          "name": "PRH Finland \u2014 National Patents, UMs, SPCs, EP-FI",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "prosecution",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.prh_fi"
+        },
+        {
+          "id": "FI/PRH/Trademarks",
+          "name": "PRH Finland \u2014 National Trademarks",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.prh_fi"
+        },
+        {
+          "id": "FI/PRH/WellKnownTrademarks",
+          "name": "PRH Finland \u2014 Well-Known Trademarks (TMR)",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.prh_fi"
+        },
+        {
+          "id": "FI/PRH/Designs",
+          "name": "PRH Finland \u2014 National Designs (Mallit)",
+          "rights": [
+            "design"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.prh_fi"
+        }
+      ]
     },
     {
       "id": "AT/OPA",

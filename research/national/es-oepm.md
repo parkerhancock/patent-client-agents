@@ -5,8 +5,8 @@
 **Issuing body:** Oficina Española de Patentes y Marcas (Spanish Patent and Trade Mark Office, OEPM)
 **Rights administered:** patent, utility_model (*modelo de utilidad*), trademark, trade name (*nombre comercial*), industrial design (*diseño industrial*), supplementary protection certificate (SPC), semiconductor topography; Latipat coordination for 18 Latin American offices
 **Working languages:** Spanish (primary); English (institutional pages + EN versions of Sede electrónica + Opendata documentation); the BOPI gazette is Spanish-only
-**Connector status:** **planned (yellow — BYOK)**
-**Last verified:** 2026-05-18
+**Connector status:** **register: planned (yellow — BYOK); fees: ready to build (green — consolidated PDF reachable, single-document extraction)**
+**Last verified:** 2026-05-19
 **Manifest entry:** not yet listed (planned)
 
 **Detail surveys:**
@@ -144,32 +144,177 @@ reverse-engineered JSON layer behind the UI.
 
 ## §4 Fees
 
-**Policy: link only.**
+**Status (2026-05-19):** Ready to build. OEPM publishes a
+**single consolidated PDF** covering every fee surface in one
+document — patents, utility models, SPCs, industrial designs,
+trademarks, trade names, semiconductor topographies, PCT
+national-phase fees, and the *precios públicos* (commercial
+services). The earlier finding that the procedural-fees URL
+returned 410 Gone was correct for one sub-page; the canonical
+extraction target is the consolidated PDF and it is
+anonymously reachable from US egress.
 
-OEPM publishes fee schedules (in EUR) covering patent and utility
-model filing, search, examination, grant, opposition, renewal, and
-SPC fees; trademark filing per class and renewals (multi-class
-schedule); industrial design filing per design and renewals;
-miscellaneous services (file inspection, certified copies, priority
-documents, BOPI publication of acts). Statutory basis is the **Ley
-24/2015, de 24 de julio, de Patentes** (Patents Act 2015), the **Ley
-17/2001, de 7 de diciembre, de Marcas** (Trademarks Act), and the
-**Ley 20/2003, de 7 de julio, de Protección Jurídica del Diseño
-Industrial** (Industrial Designs Act), each with implementing fee
-schedules updated annually via the *Ley de Presupuestos Generales del
-Estado* (national budget law).
+**Publication chain:**
 
-- **Official patent fee schedule:** [OEPM patent fees (Tasas, Pagos y reintegros — Invenciones, ES)](https://www.oepm.es/es/invenciones/Presentar-una-solicitud/tasas-pagos-y-reintegros/)
-- **Official trademark fee schedule:** [OEPM trademark fees (Marcas y nombres comerciales — ES)](https://www.oepm.es/es/marcas-y-nombres-comerciales/presentar-una-solicitud/)
-- **Statutory basis (patents):** [Ley 24/2015, de Patentes — BOE](https://www.boe.es/buscar/act.php?id=BOE-A-2015-8328)
-- **Statutory basis (trademarks):** [Ley 17/2001, de Marcas — BOE](https://www.boe.es/buscar/act.php?id=BOE-A-2001-23093)
-- **Statutory basis (designs):** [Ley 20/2003, de Protección Jurídica del Diseño Industrial — BOE](https://www.boe.es/buscar/act.php?id=BOE-A-2003-13615)
-- **Live BOPI fee publication track:** [BOPI viewer](https://sede.oepm.gob.es/bopiweb/descargaPublicaciones/formBusqueda.action) — fee-schedule updates published as administrative acts
+1. **Primary extraction target — Consolidated PDF (current
+   version updated 1 April 2026):**
+   - [`oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf`](https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf) — 670 KB, 17 pages, "Actualizado a fecha: 1 de abril de 2026" stamp on page 1. Parses cleanly with `pypdf`. This is the single document OEPM directs applicants to.
 
-Notable discount programmes *(name + eligibility — no amounts or dates)*:
+2. **OEPM landing pages by IP right (3 of 4 reachable;
+   primary purpose is navigation, not extraction):**
+   - **Invenciones (patents / utility models / SPCs):**
+     [`oepm.es/en/tasas-y-precios-publicos/tasas-de-invenciones/`](https://www.oepm.es/en/tasas-y-precios-publicos/tasas-de-invenciones/) — 200 OK
+   - **Signos distintivos (TM / trade names):**
+     [`oepm.es/en/tasas-y-precios-publicos/tasas-de-signos-distintivos/`](https://www.oepm.es/en/tasas-y-precios-publicos/tasas-de-signos-distintivos/) — **410 Gone** as of 2026-05-19; URL retired by OEPM but the PDF link from the invenciones page still resolves
+   - **Diseños industriales:**
+     [`oepm.es/en/tasas-y-precios-publicos/tasas-de-disenos-industriales/`](https://www.oepm.es/en/tasas-y-precios-publicos/tasas-de-disenos-industriales/) — **410 Gone** as well
+   - **Precios públicos (search reports / certified copies / commercial services):**
+     [`oepm.es/en/tasas-y-precios-publicos/precios-publicos/`](https://www.oepm.es/en/tasas-y-precios-publicos/precios-publicos/) — 200 OK
+   - **None of these are required for extraction** — the consolidated PDF is the source of truth. The 410s are noted as a maintenance signal: OEPM may be in the middle of a navigation refactor, but the PDF URL has remained stable.
 
-- **Reducciones para emprendedores e investigadores** — fee reductions for individuals, SMEs, universities, and public research organisations under [Ley 24/2015 art. 186](https://www.boe.es/buscar/act.php?id=BOE-A-2015-8328).
-- **SME Fund (EUIPO Ideas Powered for Business)** — partial reimbursement of national TM and design fees, administered jointly with EUIPO for ES applicants.
+3. **Statutory primary sources — BOE (boe.es, all reachable
+   with valid SSL):**
+   - **Ley 24/2015, de 24 de julio, de Patentes** —
+     [`boe.es/buscar/act.php?id=BOE-A-2015-8328`](https://www.boe.es/buscar/act.php?id=BOE-A-2015-8328). The **Annex** sets out the patent / utility model / SPC fee structure. Art. 186 governs SME / entrepreneur / public-university reductions.
+   - **Ley 17/2001, de 7 de diciembre, de Marcas** —
+     [`boe.es/buscar/act.php?id=BOE-A-2001-23093`](https://www.boe.es/buscar/act.php?id=BOE-A-2001-23093). The Annex governs trademark and trade-name fees.
+   - **Ley 20/2003, de 7 de julio, de Protección Jurídica del Diseño Industrial** —
+     [`boe.es/buscar/act.php?id=BOE-A-2003-13615`](https://www.boe.es/buscar/act.php?id=BOE-A-2003-13615). Governs design fees.
+
+4. **Year-over-year tariff updates via the budget law.** The
+   amounts in the three Annexes above are adjusted each year
+   by the **Ley de Presupuestos Generales del Estado** (the
+   national budget law). For example, Article 66 of [Ley
+   22/2021 (2022 budget)](https://www.boe.es/buscar/act.php?id=BOE-A-2021-21657)
+   applied a 1% coefficient bump to OEPM fees; subsequent
+   budget laws contain the equivalent provision. To confirm
+   a current figure, cross-reference the most recent budget
+   law against the consolidated PDF — but for the connector,
+   the PDF is the consolidated authority and the budget-law
+   citation goes into provenance metadata only.
+
+5. **BOPI gazette** (administrative acts) —
+   [BOPI viewer](https://sede.oepm.gob.es/bopiweb/descargaPublicaciones/formBusqueda.action).
+   Fee-schedule updates publish here as administrative acts;
+   useful for change-detection signals but not needed for the
+   extraction itself.
+
+**Scope of the schedule (EUR-denominated, dual-channel pricing):**
+
+- **Patents and utility models.** Filing fee (`IT01`/`IE01`),
+  modality change, search report, substantive examination,
+  grant, recordation, renewal (annuity, years 3-20), PCT
+  national-phase entry, priority claim, divisional, SPC
+  filing + annuity. The `(*)` asterisk on electronic-channel
+  keys flags rows that are also eligible for the SME /
+  entrepreneur / public-university reduction.
+- **Trademarks and trade names.** Per-class filing
+  (`MT17`/`ME17` for the first class; `MT18`/`ME18` for the
+  second and each subsequent), collective and certification
+  marks, opposition (`MT20`/`ME20`), renewal, recordation,
+  nullity/cancellation petitions (`MT25`/`ME25`).
+- **Industrial designs.** Per-design filing, deferred
+  publication, renewal (every 5 years up to 25), recordation.
+- **Semiconductor topographies.** Filing, recordation.
+- **Precios públicos.** Search reports, certified copies,
+  expedited service, commercial information services.
+- **PCT national-phase fees.** OEPM-specific portion.
+
+**Column model — dual-channel + SME flag.** Every fee row
+in the PDF has a **two-column structure**:
+
+- **Non-electronic channel** (e.g., `MT17` for TM Class 1
+  filing, `IT01` for patent filing): full tariff.
+- **Electronic channel** (e.g., `ME17`, `IE01`): ~15%
+  reduction vs the non-electronic equivalent (e.g., €150.45
+  → €127.88 for TM Class 1 filing).
+- **`(*)` asterisk on the electronic-channel key**: marks
+  rows where the SME / individual entrepreneur / public-
+  university reduction *additionally* applies under
+  Ley 24/2015 art. 186 (and equivalent for TMs / designs).
+
+The connector should emit `filing_channel = "electronic"` /
+`"paper"` plus `eligible_for_sme_reduction = True/False`
+as separate FeeItem provenance fields. The SME-reduced
+amount itself is computed downstream (50% reduction on
+filing / search / substantive-examination fees for
+qualifying applicants per art. 186) rather than being
+explicitly tabulated in this PDF.
+
+**Discount tiers (mapped to `EntityTier` / provenance):**
+
+- **SME / individual entrepreneur / Spanish public-university
+  50% reduction.** For patents and utility models filed on or
+  after 1 April 2017 (when Ley 24/2015 took effect),
+  declared SMEs, individual entrepreneurs, and Spanish public
+  universities get a **50% reduction** on filing, search
+  report, and substantive examination fees. The schedule
+  uses the `(*)` asterisk to flag eligible rows. Maps to
+  `EntityTier.small`.
+- **Electronic-filing 15% reduction** (e.g., MT17 €150.45 →
+  ME17 €127.88). Available to every applicant who files
+  online via the OEPM Sede Electrónica. Emit as
+  `filing_channel = "electronic"` provenance, not as an
+  `EntityTier`. Same structural lever as Singapore's TM
+  pre-approved-DB choice — applicant-choice, not entity
+  status.
+- **SME Fund (EUIPO Ideas Powered for Business).** Partial
+  reimbursement of national TM and design fees for ES
+  applicants, administered by EUIPO. Programme-level
+  reimbursement after payment, not a tariff-line discount;
+  document as a reference, not as a FeeItem.
+
+**Per-class TM structure.** First class around €150.45 (or
+€127.88 electronic), second and each subsequent class at
+the reduced sub-rate around €97.48 (or €82.84 electronic).
+The PDF's TM section uses an explicit "1ª Clase / 2ª Clase
+y cada sucesiva" sub-table for filing, renewal, and
+opposition. Connector should emit one FeeItem per
+`(channel, class_band)` pair.
+
+**European patent validation in Spain.** Translation
+publication and post-grant annuities flow through OEPM
+under the Spanish portion of the consolidated PDF (codes
+shared with national patent annuities). The **EPO grant
+fee itself is separate** (charged by EPO under the Rfees
+schedule, not OEPM). Connector should tag EP-validation
+rows with `validation_track = "EP-ES"` to avoid
+double-counting against direct ES-national patent fees.
+
+**Annual revision cadence.** The consolidated PDF is
+re-published once a year, typically following enactment of
+the *Ley de Presupuestos Generales del Estado* (which
+takes effect around 1 January, but the OEPM PDF tends to
+land on 1 April after the year's budget bumps are
+finalized). Current version: **1 April 2026.**
+
+**Statutory basis (summary):**
+
+- [Ley 24/2015, de 24 de julio, de Patentes — Annex (patent fees)](https://www.boe.es/buscar/act.php?id=BOE-A-2015-8328) · Art. 186 (SME reduction)
+- [Ley 17/2001, de 7 de diciembre, de Marcas — Annex (TM fees)](https://www.boe.es/buscar/act.php?id=BOE-A-2001-23093)
+- [Ley 20/2003, de Protección Jurídica del Diseño Industrial](https://www.boe.es/buscar/act.php?id=BOE-A-2003-13615)
+- [Ley de Presupuestos Generales del Estado — annual updates](https://www.boe.es/buscar/act.php?id=BOE-A-2021-21657) (example: Ley 22/2021 art. 66; the current year's budget law contains the equivalent OEPM-fee adjustment provision)
+
+**v1 connector plan — `ES/OEPM/Fees/{Patent, UtilityModel, Design, Trademark, SPC, SemiconductorTopography, PrecioPublico}`:**
+
+- **Source:** the consolidated PDF (cached locally, re-fetched weekly + content-hash-pinned).
+- **Parser pattern:** IPIN India / DPMA / INPI BR — `pypdf` extraction with code-prefix regex.
+  - `IT.../IE...` → Invenciones (patent / UM / SPC)
+  - `MT.../ME...` → Marcas (TM / trade name) including `MX.../XM...` for "Pago Máximo" max-fee variants
+  - `DT.../DE...` → Diseños (industrial design)
+  - Asterisk flag `(*)` on electronic key → `eligible_for_sme_reduction = True`
+- **Currency:** EUR.
+- **Provenance metadata:** `version_as_of = "2026-04-01"`, `statutory_basis = "Ley 24/2015 Annex + Ley 17/2001 Annex + Ley 20/2003"`, `last_budget_law = "Ley NN/YYYY art. NN"` (current-year reference), `freshness_max_age = 30d`.
+- **Channel handling:** every fee row emitted as **two
+  FeeItems** — one with `filing_channel = "paper"` (full
+  tariff) and one with `filing_channel = "electronic"` (~15%
+  reduced); the SME-reduction eligibility flag is a third
+  dimension applied to applicable rows.
+- **Freshness probe:** weekly hash check of the
+  consolidated PDF; on detected change, diff the version
+  stamp on page 1 and surface in the change log.
+- **SSL note:** both `oepm.es` and `boe.es` present valid
+  certs; no `verify=False` required.
 
 ## §5 Connector strategy
 
@@ -289,4 +434,5 @@ Primary sources only — `oepm.es`, `sede.oepm.gob.es`,
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-05-19 | **Fees re-rated green → ready to build.** The earlier wave's "OEPM tasas page 410 Gone, BOE statutory route as backup" finding is partially superseded: it is true that `/en/tasas-y-precios-publicos/tasas-de-signos-distintivos/` and `/.../tasas-de-disenos-industriales/` both return 410 Gone, but OEPM publishes a **single consolidated PDF** covering every fee surface — patents / UM / SPCs / designs / TMs / trade names / semiconductor topographies / PCT national-phase / *precios públicos* — at [`oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf`](https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf), 670 KB / 17 pages, stamped "Actualizado a fecha: 1 de abril de 2026" on page 1. Parses cleanly with `pypdf`. Structure: dual-channel pricing (`MTnn`/`MEnn` for TMs non-electronic vs electronic with ~15% reduction; `ITnn`/`IEnn` for patents) with `(*)` asterisk on electronic keys flagging rows eligible for Ley 24/2015 art. 186 SME / individual-entrepreneur / public-university 50% reduction (separate from the 15% e-channel reduction — both can stack). Per-class TM structure (`1ª Clase` ~€150.45 paper / €127.88 electronic; `2ª Clase y cada sucesiva` ~€97.48 / €82.84). Statutory basis: Ley 24/2015 Annex (patents) + Ley 17/2001 Annex (TMs) + Ley 20/2003 (designs), with year-over-year amounts adjusted by the annual *Ley de Presupuestos Generales del Estado* (e.g., Ley 22/2021 art. 66 applied a 1% bump). Connector plan: `ES/OEPM/Fees/{Patent,UtilityModel,Design,Trademark,SPC,SemiconductorTopography,PrecioPublico}` — seven routes from one PDF. EP-validation rows tagged with `validation_track = "EP-ES"` (translation publication + ES annuities flow through OEPM; EPO grant fee is separate). Register-side rating (`yellow_byok`) unchanged. | This session; live probes 2026-05-19; [Consolidated PDF](https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf). |
 | 2026-05-18 | Initial synopsis; rating **`yellow_byok`**. Findings: (a) OEPM publishes a documented catalogue of five free SOAP/XML web services (INVENES + Diseños, CEO, CLINMAR, Localizador de marcas, BOPI-LOPD-protected) at [`sede.oepm.gob.es/eSede/datos/es/servicios-web/`](https://sede.oepm.gob.es/eSede/datos/es/servicios-web/), all gated by a per-applicant [acceso-a-servicios-web](https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/acceso-a-servicios-web/) form issuing free username/password credentials — JPO-shaped BYOK pattern; (b) parallel Opendata bulk distributions ship in **WIPO ST.36 (since 2019-01-01), ST.66, and ST.86** under a permissive [Aviso legal](https://sede.oepm.gob.es/eSede/datos/es/aviso-legal/) explicitly authorising commercial and non-commercial reuse with attribution, under the statutory cover of [Ley 37/2007](https://www.boe.es/buscar/act.php?id=BOE-A-2007-19814) transposing [EU Directive 2019/1024](https://eur-lex.europa.eu/eli/dir/2019/1024); (c) Spain is **NOT in the UPC system** per [Baker McKenzie 2026-02](https://www.bakermckenzie.com/en/insight/publications/2026/02/emea-upcs-long-arm-jurisdiction) — ES patent disputes route through national courts (`Tribunales de lo Mercantil de Madrid / Barcelona`) only; (d) ES national TMs and designs flow into TMview / DesignView through the EUIPN [CTI](https://www.euipn.org/bg/tools/Common-Tools-Integration-CTI) back-office bridge — the SOAP path adds full register-event fidelity beyond CTI's bibliographic slice; (e) [WIPO IP API Catalog](https://apicatalog.wipo.int/) returns 0 OEPM entries — services are undocumented from the canonical-inventory standpoint; (f) the OEPM web search UIs at `consultas2.oepm.es` are classical JSF/Struts2 server-rendered pages — unlike SE/PRV's SPA-on-undocumented-JSON pattern, the documented SOAP services are the intended programmatic path, not a reverse-engineerable JSON layer. Connector status: **planned (yellow — BYOK)**; queue `patent_client_agents.oepm` as a JPO-shaped client once credentials issued. Highest-priority gap closure: ES utility models, ES-national-only TMs / designs, and CEO file-history fidelity. | [waves/2026-05-18-secondary-nationals-wave/es-oepm.md](../waves/2026-05-18-secondary-nationals-wave/es-oepm.md) |

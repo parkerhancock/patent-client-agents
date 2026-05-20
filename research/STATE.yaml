@@ -802,22 +802,26 @@ entities:
     connector_spec: null
     rating: green
     rating_basis: Three undocumented unauthenticated REST/JSON APIs (patents-search-api.prv.se, dv-search-api.prv.se, api.prv.se) reverse-engineered from beta UI bundle.js. CC0 / CC BY 4.0 on parallel bulk feeds + Sweden's Open Data Act SFS 2022:818. Probes returned 764k patents + 89 IKEA TMs + design records.
-    connector_status: planned
-    manifest_ids: []
-    next_action: spec_writing
+    connector_status: shipped
+    manifest_ids: [SE/PRV/Patents, SE/PRV/Trademarks, SE/PRV/Designs, SE/PRV/SPCs]
+    next_action: probe_municipal_arms
     blocked_by: []
-    last_verified: 2026-05-18
+    last_verified: 2026-05-19
     notes: |
-      Synopsis 2026-05-18. Most permissive licence posture of the
-      secondary-nationals wave. Nordic vendor-infra pattern shared
-      with FI/PRH (both use `nis-api-gateway` hosts). Build pattern:
-      Google Patents-shaped (zero-auth REST/JSON, polite caching,
-      User-Agent identification). Pre-flight courtesy email to
-      data@prv.se before hosted-demo cutover. Versionless schema
-      is the principal risk; the internal hostname leak
-      (wildflyexternprod.prv.se:8080/prvpublicapi-web/api/public/)
-      shows the agency designed these for outside callers but
-      never published documentation.
+      Shipped 2026-05-19 as `patent_client_agents.prv_se`. 5 MCP tools:
+      search_prv_patents, get_prv_patent (NAT default),
+      search_prv_trademarks, search_prv_designs, search_prv_spcs (v0.2
+      — uses the advanced-search ``{value, searchType}`` body wrapper
+      decoded from the React bundle; substance/applicants/base_patent_number
+      filters expose the SPC corpus). Build pattern: Google Patents-shaped
+      (zero-auth REST/JSON, polite caching, User-Agent identification
+      with data@prv.se contact). Versionless schema mitigated by
+      `extra="allow"` on every model. Still deferred: municipal arms
+      register (still HTTP 500 on simple-search shape, likely needs the
+      same advanced-shape body fix as SPC), advanced-search field
+      decoding for patents/TM/designs (extra= kwarg already supports
+      power-user pass-through). Pre-flight courtesy email to
+      data@prv.se pending for hosted-demo cutover.
 
   - id: FI/PRH
     name: PRH Finland
@@ -829,19 +833,31 @@ entities:
     connector_spec: null
     rating: green
     rating_basis: Three independent unauthenticated JSON APIs under one office (patenttitietopalvelu.prh.fi/nis-api-gateway-pat/, tavaramerkkitietopalvelu.prh.fi/nis-api-gateway/, mallioikeustietopalvelu.prh.fi/nis-api-gateway/) covering 393,750 patents + UM + SPC + EP-FI, 282,824 TMs back to 1891, 33,682 designs back to 1971. Per-application GET returns true register-fidelity prosecution data.
-    connector_status: planned
-    manifest_ids: []
-    next_action: spec_writing
+    connector_status: shipped
+    manifest_ids: [FI/PRH/Patents, FI/PRH/Trademarks, FI/PRH/WellKnownTrademarks, FI/PRH/Designs]
+    next_action: probe_bulletins_endpoint
     blocked_by: []
-    last_verified: 2026-05-18
+    last_verified: 2026-05-19
     notes: |
-      Synopsis 2026-05-18. Nordic vendor-infra pattern shared with
-      SE/PRV (both use `nis-api-gateway`-style hosts). Arguably
-      richer than SE in per-application detail (examiner name,
-      representative, annual-fee payment timeline with creditor
-      reference, T-prefixed EP-translation kind codes). Build
-      pattern: same as SE/PRV — sibling connectors. Catch: 3,000-row
-      hard server-side cap per query, no exposed paging cursor.
+      Shipped 2026-05-19 as `patent_client_agents.prh_fi`. 7 MCP tools:
+      search_prh_patents (30-field body, inclusion-filter defaults
+      supplied automatically), get_prh_patent (per-record with
+      examiner + abstracts + priorities), search_prh_trademarks,
+      search_prh_well_known_trademarks (TMR), search_prh_designs,
+      plus v0.2 additions download_prh_trademark_image and
+      download_prh_design_image (canonical download_response shape,
+      cache key === MCP URI === HTTP path per CoWork allowlist
+      invariant). Patent search body decoded from the React bundle:
+      dossierStatus/patentTypes/publicationTypes are inclusion lists —
+      empty arrays return zero hits, full defaults return everything.
+      Constants ``In`` (35 statuses), ``Mn`` (4 types), ``Ln`` (38
+      publication kinds) baked into the client. Confirmed open issues:
+      3,000-row hard server-side cap per query with no exposed paging
+      cursor (limit/offset on the body are ignored — narrow queries
+      required for high-population applicants); bulletins/surveys
+      endpoints now return HTTP 404 (was 400 — may have been removed
+      between 2026-05-18 and 2026-05-19). Pre-flight courtesy email
+      to avoindata@prh.fi pending.
 
   - id: AT/OPA
     name: Austrian Patent Office

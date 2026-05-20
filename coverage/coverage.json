@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-19T03:11:40+00:00",
+  "generated_at": "2026-05-19T14:12:41+00:00",
   "schema_version": 1,
   "summary": {
-    "total": 67,
+    "total": 77,
     "by_status": {
-      "active": 67
+      "active": 77
     },
     "active_jurisdictions": [
       "AU",
@@ -13,11 +13,13 @@
       "DE",
       "EM",
       "EP",
+      "FI",
       "FR",
       "GB",
       "IN",
       "JP",
       "KR",
+      "SE",
       "TW",
       "UP",
       "UPC",
@@ -93,6 +95,7 @@
         "AU",
         "GB",
         "FR",
+        "SE",
         "TW"
       ],
       "missing": [
@@ -101,7 +104,6 @@
         "RU",
         "IT",
         "ES",
-        "SE",
         "NL",
         "CH",
         "BE",
@@ -116,7 +118,7 @@
         "ID",
         "KH"
       ],
-      "tracked_count": 11,
+      "tracked_count": 12,
       "total": 30,
       "source": "WIPO IP Statistics Data Center (https://www.wipo.int/ipstats/en/), WIPI 2024 report, 2023 filing data"
     }
@@ -259,6 +261,31 @@
       "status": "active",
       "sources": [
         "EP/EUIPO/Fees/Trademarks"
+      ]
+    },
+    {
+      "jurisdiction": "FI",
+      "right": "design",
+      "status": "active",
+      "sources": [
+        "FI/PRH/Designs"
+      ]
+    },
+    {
+      "jurisdiction": "FI",
+      "right": "patent",
+      "status": "active",
+      "sources": [
+        "FI/PRH/Patents"
+      ]
+    },
+    {
+      "jurisdiction": "FI",
+      "right": "trademark",
+      "status": "active",
+      "sources": [
+        "FI/PRH/Trademarks",
+        "FI/PRH/WellKnownTrademarks"
       ]
     },
     {
@@ -405,6 +432,31 @@
       ]
     },
     {
+      "jurisdiction": "SE",
+      "right": "design",
+      "status": "active",
+      "sources": [
+        "SE/PRV/Designs"
+      ]
+    },
+    {
+      "jurisdiction": "SE",
+      "right": "patent",
+      "status": "active",
+      "sources": [
+        "SE/PRV/Patents",
+        "SE/PRV/SPCs"
+      ]
+    },
+    {
+      "jurisdiction": "SE",
+      "right": "trademark",
+      "status": "active",
+      "sources": [
+        "SE/PRV/Trademarks"
+      ]
+    },
+    {
       "jurisdiction": "TW",
       "right": "design",
       "status": "active",
@@ -418,7 +470,8 @@
       "status": "active",
       "sources": [
         "TW/TIPO/Patents",
-        "TW/TIPO/UtilityModels"
+        "TW/TIPO/UtilityModels",
+        "TW/TIPO/Fees/Patent"
       ]
     },
     {
@@ -434,7 +487,8 @@
       "right": "trademark",
       "status": "active",
       "sources": [
-        "TW/TIPO/Trademarks"
+        "TW/TIPO/Trademarks",
+        "TW/TIPO/Fees/Trademark"
       ]
     },
     {
@@ -1942,6 +1996,221 @@
       "notes": "WIPO ST.86 v1.0. Scope = FR-national only; RCDs covered via EUIPO; Hague international registrations via WIPO Hague. FR patents covered by EPO OPS (INPADOC) \u2014 no FR/INPI/Patents row in this manifest by design."
     },
     {
+      "id": "SE/PRV/Patents",
+      "name": "PRV Sweden \u2014 National Patents",
+      "jurisdiction": "SE",
+      "wipo_st3_code": "SE",
+      "issuing_body": "Patent- och registreringsverket (PRV)",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.prv_se"
+      },
+      "last_verified": "2026-05-19",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Simple-search + per-record GET (applicationType=NAT default). EP-validated patents reachable via EPO OPS at INPADOC fidelity; this entry covers the SE-national-only slice. SPC search endpoint returned HTTP 500 on probe \u2014 deferred to v0.2."
+    },
+    {
+      "id": "SE/PRV/Trademarks",
+      "name": "PRV Sweden \u2014 National Trademarks",
+      "jurisdiction": "SE",
+      "wipo_st3_code": "SE",
+      "issuing_body": "Patent- och registreringsverket (PRV)",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.prv_se"
+      },
+      "last_verified": "2026-05-19",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Nice classification; dossierTypeEn/Sv discriminates national filings from Madrid IRs designating SE. EUTM coverage via planned EUIPO connector."
+    },
+    {
+      "id": "SE/PRV/Designs",
+      "name": "PRV Sweden \u2014 National Designs (M\u00f6nster)",
+      "jurisdiction": "SE",
+      "wipo_st3_code": "SE",
+      "issuing_body": "Patent- och registreringsverket (PRV)",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.prv_se"
+      },
+      "last_verified": "2026-05-19",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Locarno classification; SE-national designs back to 1971. RCDs covered transitively via EUIPO. Hague IR coverage via WIPO Hague."
+    },
+    {
+      "id": "SE/PRV/SPCs",
+      "name": "PRV Sweden \u2014 Supplementary Protection Certificates",
+      "jurisdiction": "SE",
+      "wipo_st3_code": "SE",
+      "issuing_body": "Patent- och registreringsverket (PRV)",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.prv_se"
+      },
+      "last_verified": "2026-05-19",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Swedish SPCs (patent-term extensions under EU Reg. 469/2009 + 1610/96). Uses an advanced-search body where each filter wraps as ``{value, searchType}``; the client requires at least one filter because an empty body returns HTTP 500."
+    },
+    {
+      "id": "FI/PRH/Patents",
+      "name": "PRH Finland \u2014 National Patents, UMs, SPCs, EP-FI",
+      "jurisdiction": "FI",
+      "wipo_st3_code": "FI",
+      "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "prosecution",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.prh_fi"
+      },
+      "last_verified": "2026-05-19",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Search + per-record GET. PatentDossier (national) / PatentDossierUtilityModel (UM) / PatentEurope (EP-FI) / Spc all surface through the same endpoints. Server-side cap of 3,000 rows per query \u2014 narrow filters required for high-population applicants. The patent-search body has 30 fields with three inclusion-filter lists (dossierStatus / patentTypes / publicationTypes) supplied with full defaults by the client."
+    },
+    {
+      "id": "FI/PRH/Trademarks",
+      "name": "PRH Finland \u2014 National Trademarks",
+      "jurisdiction": "FI",
+      "wipo_st3_code": "FI",
+      "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.prh_fi"
+      },
+      "last_verified": "2026-05-19",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Nice classification; ~283k national TMs back to 1891. Mark images served at /opendata/trademark/image/... (URL-only on this row; no download surface in v1). EUTM coverage via planned EUIPO connector; Madrid IRs via WIPO Madrid Monitor."
+    },
+    {
+      "id": "FI/PRH/WellKnownTrademarks",
+      "name": "PRH Finland \u2014 Well-Known Trademarks (TMR)",
+      "jurisdiction": "FI",
+      "wipo_st3_code": "FI",
+      "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.prh_fi"
+      },
+      "last_verified": "2026-05-19",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Marks recognized as well-known in Finland under \u00a76 of the Trade Marks Act (544/2019). ~111 records as of 2026-05-19; each carries a free-text targetGroup audience description. No upstream substitute \u2014 FI-national well-known register only."
+    },
+    {
+      "id": "FI/PRH/Designs",
+      "name": "PRH Finland \u2014 National Designs (Mallit)",
+      "jurisdiction": "FI",
+      "wipo_st3_code": "FI",
+      "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.prh_fi"
+      },
+      "last_verified": "2026-05-19",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Locarno classification; ~34k national designs back to 1971. RCDs covered transitively via EUIPO. Hague IR coverage via WIPO Hague."
+    },
+    {
       "id": "US/USPTO/Fees/Patents",
       "name": "USPTO Fee Schedule \u2014 Patents",
       "jurisdiction": "US",
@@ -2423,6 +2692,60 @@
       "update_strategy": "live_proxy",
       "update_cadence": "irregular",
       "notes": "Hague System international design fees in CHF: basic + per- additional-design, publication, standard designation (3 levels), and per-period renewals (periods 1-5 map to years 5/10/15/20/25). Per-country individual designation fees live in a separate ~50- row table on wipo.int. Source: wipo.int/hague/en/fees/sched.html."
+    },
+    {
+      "id": "TW/TIPO/Fees/Patent",
+      "name": "TIPO Taiwan \u2014 Fees (Patent)",
+      "jurisdiction": "TW",
+      "wipo_st3_code": "TW",
+      "issuing_body": "Taiwan Intellectual Property Office (TIPO)",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-19",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "Schedule of Patent Fees (TWD) covering all three Taiwan patent types under one office: invention patents (20-yr term), utility model patents (10-yr term), and design patents (15-yr term). The schedule prints standard rates with sibling SME-tier rows (\"natural person, school, or small and medium-sized enterprise\") for annuity years 1-3 and 4-6; design year-1 SME annuity is NT$0. Per-claim surcharge over 10 claims (NT$800 invention substantive exam, NT$600 utility model TER); per-50-page surcharge over 50 pages (NT$500). Source HTML table at tipo.gov.tw/en/tipo2/326.html \u2014 direct lxml scrape; annuity rows expanded per-year so lookup-by-year works."
+    },
+    {
+      "id": "TW/TIPO/Fees/Trademark",
+      "name": "TIPO Taiwan \u2014 Fees (Trademark)",
+      "jurisdiction": "TW",
+      "wipo_st3_code": "TW",
+      "issuing_body": "Taiwan Intellectual Property Office (TIPO)",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-05-19",
+      "category": "substantive_law",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "irregular",
+      "notes": "Trademark Fee Standards 2024 (effective 2024-05-01), published as a bilingual zh-TW + EN PDF linked from tipo.gov.tw/en/tipo2/342.html. Per-class fees in TWD for application (NT$3,000), registration (NT$2,500), renewal on 10-year cycle (NT$4,000), opposition (NT$4,000), invalidation (NT$7,000), revocation (NT$7,000), plus per-good surcharge over 20 designated goods (NT$200/good) and per-retail-service surcharge over 5 in Class 35 (NT$500). Scraper uses a curated catalog of 30 entries verified against the live PDF: each entry's English label and amount must co-occur within a 300-char window in normalized text. Drift raises loudly rather than silently mis-classifying."
     }
   ]
 }
