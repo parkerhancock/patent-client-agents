@@ -1,0 +1,71 @@
+interactions:
+- request:
+    body: '{"trademarkWord":"AUDI","applicationNumber":"","registrationNumber":"","dossierStatus":"","trademarkKind":"","applicantName":"","representativeName":"","businessID":"","applicationStartDate":"","applicationEndDate":"","oppositionPeriodStartStartDate":"","oppositionPeriodStartEndDate":"","registrationStartDate":"","registrationEndDate":"","expirationStartDate":"","expirationEndDate":"","goodsAndServicesTerm":"","goodsAndServicesClassNumber":"","viennaClass":"","filingNumber":"","basicSearch":""}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '499'
+      content-type:
+      - application/json
+      host:
+      - tavaramerkkitietopalvelu.prh.fi
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    method: POST
+    uri: https://tavaramerkkitietopalvelu.prh.fi/nis-api-gateway/trademark
+  response:
+    body:
+      string: "{\"totalResults\":10,\"results\":[{\"dossierId\":113988,\"applicationNumber\":\"T196503880\",\"registrationNumber\":\"49497\",\"dossierStatus\":\"Expired\",\"dossierSubType\":\"Figurative-word\",\"applicationDate\":\"1965-11-17\",\"registrationDate\":\"1967-02-06\",\"expirationDate\":\"2007-02-06\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Oy Kolster Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"Audi\",\"trademarkHasImage\":true,\"goodsAndServices\":[{\"classNumber\":12,\"ordinal\":1}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":\"/opendata/trademark/image/T196503880/49497\",\"thumbnailUrl\":\"/opendata/trademark/thumbnail/T196503880/49497\",\"largeThumbnailUrl\":\"/opendata/trademark/thumbnail/large/T196503880/49497\",\"ordinal\":1},{\"dossierId\":134653,\"applicationNumber\":\"T197105372\",\"registrationNumber\":\"64033\",\"dossierStatus\":\"Expired\",\"dossierSubType\":\"Word\",\"applicationDate\":\"1971-10-21\",\"registrationDate\":\"1975-07-10\",\"expirationDate\":\"2005-07-10\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Oy Kolster Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"AUDI
+        NSU\",\"trademarkHasImage\":false,\"goodsAndServices\":[{\"classNumber\":6,\"ordinal\":1},{\"classNumber\":7,\"ordinal\":2},{\"classNumber\":12,\"ordinal\":3}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":null,\"thumbnailUrl\":null,\"largeThumbnailUrl\":null,\"ordinal\":2},{\"dossierId\":81510,\"applicationNumber\":\"T197803425\",\"registrationNumber\":\"81033\",\"dossierStatus\":\"Expired\",\"dossierSubType\":\"Figurative-word\",\"applicationDate\":\"1978-07-27\",\"registrationDate\":\"1982-03-22\",\"expirationDate\":\"2022-03-22\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Kolster Oy Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"AUdI\",\"trademarkHasImage\":true,\"goodsAndServices\":[{\"classNumber\":37,\"ordinal\":1}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":\"/opendata/trademark/image/T197803425/81033\",\"thumbnailUrl\":\"/opendata/trademark/thumbnail/T197803425/81033\",\"largeThumbnailUrl\":\"/opendata/trademark/thumbnail/large/T197803425/81033\",\"ordinal\":3},{\"dossierId\":54061,\"applicationNumber\":\"T198503306\",\"registrationNumber\":\"99033\",\"dossierStatus\":\"Expired\",\"dossierSubType\":\"Word\",\"applicationDate\":\"1985-09-30\",\"registrationDate\":\"1987-08-05\",\"expirationDate\":\"2007-08-05\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Kolster Oy Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"AUDI
+        quattro\",\"trademarkHasImage\":false,\"goodsAndServices\":[{\"classNumber\":12,\"ordinal\":1}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":null,\"thumbnailUrl\":null,\"largeThumbnailUrl\":null,\"ordinal\":4},{\"dossierId\":50267,\"applicationNumber\":\"T198700662\",\"registrationNumber\":\"103970\",\"dossierStatus\":\"Expired\",\"dossierSubType\":\"Figurative-word\",\"applicationDate\":\"1987-02-18\",\"registrationDate\":\"1989-05-05\",\"expirationDate\":\"2009-05-05\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Kolster Oy Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"Audi\",\"trademarkHasImage\":true,\"goodsAndServices\":[{\"classNumber\":37,\"ordinal\":1}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":\"/opendata/trademark/image/T198700662/103970\",\"thumbnailUrl\":\"/opendata/trademark/thumbnail/T198700662/103970\",\"largeThumbnailUrl\":\"/opendata/trademark/thumbnail/large/T198700662/103970\",\"ordinal\":5},{\"dossierId\":6761,\"applicationNumber\":\"T199227799\",\"registrationNumber\":\"126708\",\"dossierStatus\":\"Expired\",\"dossierSubType\":\"Word\",\"applicationDate\":\"1992-06-05\",\"registrationDate\":\"1993-06-07\",\"expirationDate\":\"2003-06-07\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Oy Kolster Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"Audi\",\"trademarkHasImage\":false,\"goodsAndServices\":[{\"classNumber\":36,\"ordinal\":1}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":null,\"thumbnailUrl\":null,\"largeThumbnailUrl\":null,\"ordinal\":6},{\"dossierId\":201957,\"applicationNumber\":\"T199401652\",\"registrationNumber\":\"136278\",\"dossierStatus\":\"Registered\",\"dossierSubType\":\"Word\",\"applicationDate\":\"1994-03-31\",\"registrationDate\":\"1995-02-06\",\"expirationDate\":\"2035-02-06\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Kolster Oy Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"Audi-Bank\",\"trademarkHasImage\":false,\"goodsAndServices\":[{\"classNumber\":36,\"ordinal\":1}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":null,\"thumbnailUrl\":null,\"largeThumbnailUrl\":null,\"ordinal\":7},{\"dossierId\":285891,\"applicationNumber\":\"T200301828\",\"registrationNumber\":\"228984\",\"dossierStatus\":\"Registered\",\"dossierSubType\":\"Word\",\"applicationDate\":\"1999-04-16\",\"registrationDate\":\"2003-11-14\",\"expirationDate\":\"2033-11-14\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Kolster Oy Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"AUDI\",\"trademarkHasImage\":false,\"goodsAndServices\":[{\"classNumber\":36,\"ordinal\":1}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":null,\"thumbnailUrl\":null,\"largeThumbnailUrl\":null,\"ordinal\":8},{\"dossierId\":256313,\"applicationNumber\":\"T200002583\",\"registrationNumber\":\"221827\",\"dossierStatus\":\"Expired\",\"dossierSubType\":\"Word\",\"applicationDate\":\"2000-08-14\",\"registrationDate\":\"2001-10-15\",\"expirationDate\":\"2021-10-15\",\"applicants\":[{\"name\":\"AUDI
+        AG\",\"ordinal\":1}],\"representatives\":[{\"name\":\"Kolster Oy Ab\",\"ordinal\":1}],\"priorities\":[],\"trademarkWord\":\"Audi
+        Alkuper\xE4isosat\",\"trademarkHasImage\":false,\"goodsAndServices\":[{\"classNumber\":1,\"ordinal\":1},{\"classNumber\":2,\"ordinal\":2},{\"classNumber\":4,\"ordinal\":3},{\"classNumber\":6,\"ordinal\":4},{\"classNumber\":7,\"ordinal\":5},{\"classNumber\":9,\"ordinal\":6},{\"classNumber\":11,\"ordinal\":7},{\"classNumber\":12,\"ordinal\":8},{\"classNumber\":16,\"ordinal\":9},{\"classNumber\":37,\"ordinal\":10}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":null,\"thumbnailUrl\":null,\"largeThumbnailUrl\":null,\"ordinal\":9},{\"dossierId\":273477,\"applicationNumber\":\"W200200793\",\"registrationNumber\":\"773197\",\"dossierStatus\":\"IR_not_valid_in_Finland_not_renewed\",\"dossierSubType\":\"Figurative-word\",\"applicationDate\":\"2002-01-04\",\"registrationDate\":\"2002-11-29\",\"expirationDate\":\"2022-01-04\",\"applicants\":[{\"name\":\"Cooperation
+        Pharmaceutique Fran\xE7aise en abr\xE9g\xE9 COOPER\",\"ordinal\":1}],\"representatives\":[],\"priorities\":[{\"priorityDate\":\"2001-10-04\",\"ordinal\":1}],\"trademarkWord\":\"AUDI-BABY\",\"trademarkHasImage\":true,\"goodsAndServices\":[{\"classNumber\":5,\"ordinal\":1}],\"targetGroup\":null,\"locarnos\":[],\"designs\":[],\"imageUrl\":\"/opendata/trademark/image/W200200793/773197\",\"thumbnailUrl\":\"/opendata/trademark/thumbnail/W200200793/773197\",\"largeThumbnailUrl\":\"/opendata/trademark/thumbnail/large/W200200793/773197\",\"ordinal\":10}]}"
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - '*'
+      connection:
+      - close
+      content-length:
+      - '6724'
+      content-security-policy:
+      - 'default-src ''self''; img-src ''self'' data: ; media-src ''self'' ; child-src
+        ''none''; manifest-src ''self''; object-src ''none''; worker-src ''none'';
+        connect-src ''self'' https://asiointi.prh.fi;'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Tue, 19 May 2026 13:49:51 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - 'off'
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

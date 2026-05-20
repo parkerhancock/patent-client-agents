@@ -1,0 +1,103 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      host:
+      - mallioikeustietopalvelu.prh.fi
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    method: GET
+    uri: https://mallioikeustietopalvelu.prh.fi/opendata/design/thumbnail/M19710014.1.1
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-methods:
+      - GET, HEAD
+      connection:
+      - close
+      content-disposition:
+      - inline; filename="M19710014.1.1-thumbnail-jpeg80.JPEG"
+      content-length:
+      - '2672'
+      content-security-policy:
+      - 'default-src ''self''; img-src ''self'' data: ; media-src ''self'' ; child-src
+        ''none''; manifest-src ''self''; object-src ''none''; worker-src ''none'';
+        connect-src ''self'' https://asiointi.prh.fi;'
+      content-type:
+      - image/jpeg
+      date:
+      - Tue, 19 May 2026 14:11:42 GMT
+      last-modified:
+      - Thu, 10 Sep 2020 17:35:05 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

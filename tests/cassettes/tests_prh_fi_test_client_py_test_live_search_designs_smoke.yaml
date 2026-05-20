@@ -1,0 +1,60 @@
+interactions:
+- request:
+    body: '{"productTitle":"","applicationNumber":"","registrationNumber":"","dossierStatus":"","designerName":"","applicantName":"Marimekko","representativeName":"","businessID":"","applicationStartDate":"","applicationEndDate":"","oppositionPeriodStartStartDate":"","oppositionPeriodStartEndDate":"","publicationDateStartDate":"","publicationDateEndDate":"","registrationStartDate":"","registrationEndDate":"","classNumber":"","filingNumber":"","basicSearch":""}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '453'
+      content-type:
+      - application/json
+      host:
+      - mallioikeustietopalvelu.prh.fi
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    method: POST
+    uri: https://mallioikeustietopalvelu.prh.fi/nis-api-gateway/design
+  response:
+    body:
+      string: '{"totalResults":1,"results":[{"dossierId":785068,"applicationNumber":"M20010326","registrationNumber":"22685","dossierStatus":"DS_Expired","dossierSubType":null,"applicationDate":"2001-05-15","registrationDate":"2002-07-31","expirationDate":"2006-05-15","applicants":[{"name":"Marimekko
+        Oyj","ordinal":1}],"representatives":[{"name":"Leena Valjakka Berggren Oy
+        Ab","ordinal":1}],"priorities":[],"trademarkWord":null,"trademarkHasImage":false,"goodsAndServices":[],"targetGroup":null,"locarnos":[{"classNumber":"02","subClassNumber":"02","ordinal":1},{"classNumber":"02","subClassNumber":"99","ordinal":2},{"classNumber":"11","subClassNumber":"02","ordinal":3},{"classNumber":"11","subClassNumber":"99","ordinal":4},{"classNumber":"32","subClassNumber":"00","ordinal":5}],"designs":[{"title":"Vaate/koriste-esine","titleSecondLng":null,"number":1,"dominantViewNumber":1,"dominantViewImageUrl":"/opendata/design/image/M20010326.1.1","dominantViewSmallThumbnailUrl":"/opendata/design/thumbnail/M20010326.1.1","dominantViewMediumThumbnailUrl":"/opendata/design/thumbnail/medium/M20010326.1.1","ordinal":1}],"imageUrl":null,"thumbnailUrl":null,"largeThumbnailUrl":null,"ordinal":1}]}'
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - '*'
+      connection:
+      - close
+      content-length:
+      - '1178'
+      content-security-policy:
+      - 'default-src ''self''; img-src ''self'' data: ; media-src ''self'' ; child-src
+        ''none''; manifest-src ''self''; object-src ''none''; worker-src ''none'';
+        connect-src ''self'' https://asiointi.prh.fi;'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Tue, 19 May 2026 13:49:53 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - 'off'
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

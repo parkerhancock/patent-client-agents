@@ -1,0 +1,79 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      host:
+      - tavaramerkkitietopalvelu.prh.fi
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    method: GET
+    uri: https://tavaramerkkitietopalvelu.prh.fi/opendata/trademark/thumbnail/T196503880/49497
+  response:
+    body:
+      string: !!binary |
+        /9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkI
+        CQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/wAALCAAkAEABAREA/8QAHAAAAgMAAwEA
+        AAAAAAAAAAAAAAYHCAkBAwUE/8QAMBAAAgEDAwMDAgYBBQAAAAAAAQIDBAUGAAcRCBIhCRMxFCIV
+        IzIzQVFCF0NSYaH/2gAIAQEAAD8A1T1CeSdanSviF6uGOZNvji9uulqqpKKto56hlmgnjYq6Ovby
+        CCCDqZ6Wpp62mirKSZJoJ0WSORG5V1Ycggj5BBB12687I77RYvYLlklySoektdJLWTrTQNNKY40L
+        N2RqCztwDwoBJ+Bqv22XqGdK27mf2vbLDM/nmv15kaKihqbXUU8csgQuEErqE7mCntHP3HgDyeNW
+        R+fI1zo1k36t/T7i+M7kYnv1b4Kdhm85x2+2yIqKmoqRFxFWQJ8u4j4Vj8d0cPP6zqd/S26jqjMc
+        Dr+nPOrtHPlu26BKCcze5+JWQkezLG3nuEfcqcjx7bwn+9WNqerrpvo9xRtLU7tWVMuN0Wy/hP5p
+        n+tZwgh8Jx3FiB88f96+St6zemah3NGzVXurRR5k13Swi1fRVZk+vdwiw9wi7PLMB3d3b5+dZE9a
+        e2+G7LdVt8sGzuX2hZK6ujyS0Ja6pGnx29LIWaicr+0S45RCft7oeQO060f249SbY+bp1w/eHdi/
+        TWWuutRJY7rTUtvmqTBd6eNWnQrEpKKyssqc/wCMgHyDqweye+O3nUHhK7hbYXOpuFjermoknno5
+        KZmki4D8JIA3ALDzx/en5mCgsSAB/J1hb139S6b+753TIrNeYExjFZZMTw+R3IieViBW3Lx57fP2
+        sB+n2CPKkajHbXceu2D3hosy2wy+kyyt22rmakr6RZYYMgsTHieEpIA68LI32sOVV2P+0p095BnO
+        FXjrSn3rtlUq2H/Vyy3prnKnt/S0MjmaUy/PYF7G7/4BjbS91L5xFT9Se4O8W2N1hqamm3GNbYrv
+        SBZVZ4o3f3In+GCuI2BHI/Sf614u2eM4NkEGTSZvvXTbfz27E1yK21NTQGrnyW5yJ7jRNKx5/cJj
+        4BJ5BIUkOSlz3i4XPN8apa1gtLkFwtV5udsRVWnNY7dhk9ofapkjYvxwBxNwBxwBr96Rh46SxDz+
+        zlN2Tj/j90R4/wDdTv1Y2LebLdjchw3YeKhGU5FELWKusrRTJRUsoInmVuCS/Zyi8eQZA3+Os9dn
+        /SR33udHJR7q7rWTDaW1xxx2uGz0KXZ5u53eUyMxi9sglfILFuf4CjlzzL0i9wrbbPxDa3qKWrvi
+        zp2wXq1ikozAwKzBni91jypI7ShDAlT4OkPGvRx35s9NV1Eu7uDQVhWGOOmSnqaqjqou78xJ1khH
+        xwpU9rckcfb4YWC6X/TPO22d025O+eW2TLq6zRzxWezW22CC2wNKjJJPKGUe45V2Hb2Ac/cxdgva
+        k556P7PlFRPtLvNTWXGJ5pKimtF8x5Lo9sZzyVglZxyoPxyAw4HcXP3aZsv9JfGK7ai1YVh26dRb
+        8rTIEyC9ZbX2z6iqr5UhkjjjjjSVPYjRpC6gMx5JJLHgixnRv01VfSptHJtfWZkmTu94qrp9etCa
+        TkTCMdhQyP5HYfPd55+NTro0aNGjRo1//9k=
+    headers:
+      accept-ranges:
+      - bytes
+      access-control-allow-methods:
+      - GET, HEAD
+      connection:
+      - close
+      content-disposition:
+      - inline; filename="T196503880-thumbnail-jpeg64.JPEG"
+      content-length:
+      - '1280'
+      content-security-policy:
+      - 'default-src ''self''; img-src ''self'' data: ; media-src ''self'' ; child-src
+        ''none''; manifest-src ''self''; object-src ''none''; worker-src ''none'';
+        connect-src ''self'' https://asiointi.prh.fi;'
+      content-type:
+      - image/jpeg
+      date:
+      - Tue, 19 May 2026 14:11:41 GMT
+      last-modified:
+      - Fri, 11 Sep 2020 05:04:27 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

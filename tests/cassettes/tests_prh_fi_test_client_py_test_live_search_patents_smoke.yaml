@@ -1,0 +1,115 @@
+interactions:
+- request:
+    body: '{"patentTitle":"","applicationNumber":"","registrationNumber":"","priorityNumber":"","dossierStatus":["Application_refused","Application_dismissed","Expired","Renounced","Annulled","Opposition","UMopposition","Appeal","Patent_revoked","Application_withdrawn","Application_filed","Valid","Limited","Approved","Basic_patent_has_lapsed","EP_660_notvalidated","EP_630_oppo_B2","EP_620_grant_B1","EP_632_limit_B3","EP_700_applrefused","EP_800_application_dismissed","EP_600_imported","EP_640_revoked","EP_631_oppo_T4","EP_635_limit_T6","EP_650_appwthdr","EP_621_valid_T3","EP_625_opposition","Lapsed","Revoked","Refused","Reinstated","Withdrawn","Granted","Application_pending","Pending"],"applicant":"Audience","assignee":"","inventor":"","representative":"","applicationStartDate":"","applicationEndDate":"","filingStartDate":"","filingEndDate":"","oppositionPeriodStartStartDate":"","oppositionPeriodStartEndDate":"","grantStartDate":"","grantEndDate":"","openStartDate":"","openEndDate":"","publicationStartDate":"","publicationEndDate":"","priorityStartDate":"","priorityEndDate":"","ipcClassification":"","cpcClassification":"","basicSearch":"","patentTypes":["PatentDossier","PatentDossierUtilityModel","PatentEurope","Spc"],"noAuthoAppm":"","spcBasePatentNumber":"","publicationTypes":["UM_Revoked","UM_Notification","UM_Granted_Y1","UM_Corrected_Y8","UM_AvailableToPublic_U1","UM_AnnulledPartial_Z1","PT_Transferred","PT_SPCWithdrawn","PT_SPCRefused","PT_SPCLapsed","PT_SPCGranted_Certificate","PT_SPCFiled","PT_SPCDismissed","PT_SPCContinuationGranted","PT_SPCContinuationFiled","PT_Revoked","PT_Reinstated","PT_Refused","PT_OppositionAmended_B2","PT_Opposition_Refused","PT_Notification","PT_Limited_B3","PT_Lapsed","PT_Granted_B1","PT_Granted_B","PT_Expired","PT_EPTranslationAmended_T6","PT_EPTranslation_T3","PT_EPTranslation_T2","PT_AvailableToPublic_A1","PT_Application_withdrawn","PT_Application_refused","PT_Application_dismissed","PT_Application_filed","PT_Annulled","PT_AnnulledPartial","PT_AcceptedApplicationT1","PT_AcceptedApplication"]}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '2055'
+      content-type:
+      - application/json
+      host:
+      - patenttitietopalvelu.prh.fi
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact avoindata@prh.fi)
+    method: POST
+    uri: https://patenttitietopalvelu.prh.fi/nis-api-gateway-pat/patent
+  response:
+    body:
+      string: "{\"totalResults\":10,\"results\":[{\"applicationNumber\":\"20125600\",\"registrationNumber\":null,\"dossierStatus\":\"Application_dismissed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2012-06-01\",\"statusDate\":\"2016-05-29\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"H04M 9/08\"},{\"classification\":\"H04R
+        3/00\"}],\"titles\":[{\"title\":\"\xC4\xE4nizoomi\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"Ljudzoom\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"Audio
+        zoom\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2013-09-30\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":1}],\"ordinal\":1},{\"applicationNumber\":\"20110428\",\"registrationNumber\":null,\"dossierStatus\":\"Application_dismissed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2011-12-29\",\"statusDate\":\"2014-02-09\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"G10L 21/02\"}],\"titles\":[{\"title\":\"Vahingoittuneiden
+        audiosignaalien korjaaminen\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"Reparation
+        av skadade audiosignaler\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"REPARATION
+        OF CORRUPTED AUDIO SIGNALS\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2012-04-16\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":1}],\"ordinal\":2},{\"applicationNumber\":\"20125812\",\"registrationNumber\":null,\"dossierStatus\":\"Application_dismissed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2012-07-19\",\"statusDate\":\"2013-08-21\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"G10L 21/02\"}],\"titles\":[{\"title\":\"S\xE4r\xF6nmittaus
+        h\xE4iri\xF6npoistoj\xE4rjestelm\xE4\xE4 varten\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"Distorsionsm\xE4tning
+        f\xF6r avst\xF6rningssystem\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"Distortion
+        measurement for noise suppression system\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2014-03-31\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":1}],\"ordinal\":3},{\"applicationNumber\":\"20125814\",\"registrationNumber\":null,\"dossierStatus\":\"Application_dismissed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2012-07-20\",\"statusDate\":\"2016-01-11\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"G10L 21/02\"},{\"classification\":\"G10K
+        11/16\"},{\"classification\":\"H04R 3/00\"}],\"titles\":[{\"title\":\"Adaptiivinen
+        kohinanpoisto tasomerkkien avulla\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"Adaptiv
+        brusreducering genom anv\xE4ndning av niv\xE5tecken\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"Adaptive
+        noise reduction using level cues\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2014-09-04\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":1}],\"ordinal\":4},{\"applicationNumber\":\"20100001\",\"registrationNumber\":\"124716\",\"dossierStatus\":\"Lapsed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2010-01-04\",\"statusDate\":\"2016-07-03\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"H04R 1/22\"},{\"classification\":\"H04R
+        3/00\"},{\"classification\":\"H04B 15/00\"},{\"classification\":\"G10L 21/0216\"}],\"titles\":[{\"title\":\"J\xE4rjestelm\xE4
+        ja menetelm\xE4 adaptiivista \xE4lyk\xE4st\xE4 kohinanvaimennusta varten\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"System
+        och f\xF6rfarande f\xF6r adaptiv intelligent brusd\xE4mpning\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"System
+        and method for adaptive intelligent noise suppression\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2014-12-31\",\"type\":\"B\",\"publicationSection\":\"PT_Granted_B\",\"ordinal\":1},{\"publicationDate\":\"2010-05-26\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":2}],\"ordinal\":5},{\"applicationNumber\":\"20126083\",\"registrationNumber\":null,\"dossierStatus\":\"Application_dismissed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2012-10-18\",\"statusDate\":\"2016-02-02\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"G10L 25/18\"},{\"classification\":\"H04B
+        15/00\"},{\"classification\":\"G10L 21/02\"}],\"titles\":[{\"title\":\"Menetelm\xE4
+        kohinanvaimennuksen ja \xE4\xE4nenlaadun yhteiseksi optimoimiseksi yksi- tai
+        monimikrofonij\xE4rjestelm\xE4ss\xE4\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"F\xF6rfarande
+        f\xF6r gemensam optimering av brusreduktion och talkvalitet i ett monomikrofons-
+        eller multimikrofonssystem\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"METHOD
+        FOR JOINTLY OPTIMIZING NOISE REDUCTION AND VOICE QUALITY IN A MONO OR MULTI-MICROPHONE
+        SYSTEM\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2013-01-25\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":1}],\"ordinal\":6},{\"applicationNumber\":\"20110223\",\"registrationNumber\":\"123080\",\"dossierStatus\":\"Lapsed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2011-06-29\",\"statusDate\":\"2015-12-20\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"G10L 19/02\"}],\"titles\":[{\"title\":\"J\xE4rjestelm\xE4t
+        ja menetelm\xE4t hajotettujen \xE4\xE4nisignaalien uudelleen muodostamiseksi\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"System
+        och f\xF6rfaranden f\xF6r att rekonstruera uppl\xF6sta audiosignaler\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"Systems
+        and methods for reconstructing decomposed audio signals\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2012-10-31\",\"type\":\"B\",\"publicationSection\":\"PT_Granted_B\",\"ordinal\":1},{\"publicationDate\":\"2011-10-11\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":2}],\"ordinal\":7},{\"applicationNumber\":\"20100431\",\"registrationNumber\":null,\"dossierStatus\":\"Application_dismissed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2010-12-30\",\"statusDate\":\"2014-08-09\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"H04R 1/22\"},{\"classification\":\"G10L
+        21/0216\"},{\"classification\":\"H04R 3/00\"},{\"classification\":\"H04B 15/04\"}],\"titles\":[{\"title\":\"J\xE4rjestelm\xE4
+        ja menetelm\xE4 h\xE4iri\xF6npoiston mahdollistamiseksi k\xE4ytt\xE4en h\xE4iri\xF6nv\xE4hennysk\xE4sittely\xE4\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"System
+        och f\xF6rfarande f\xF6r avst\xF6rning genom st\xF6rningssubtraktionsbehandling\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"System
+        and method for providing noise suppression utilizing null processing noise
+        subtraction\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2011-06-15\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":1}],\"ordinal\":8},{\"applicationNumber\":\"20135038\",\"registrationNumber\":null,\"dossierStatus\":\"Application_dismissed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2013-01-11\",\"statusDate\":\"2016-11-30\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"G10L 21/0208\"}],\"titles\":[{\"title\":\"MONAURAALINEN
+        KOHINANVAIMENNUS LASKENNALLISEN KUULOMAISEMA-ANALYYSIN PERUSTEELLA\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"MONAURAL
+        AVST\xD6RNING P\xC5 BASIS AV COMPUTATIONAL AUDITORY SCENE ANALYSIS\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"MONAURAL
+        NOISE SUPPRESSION BASED ON COMPUTATIONAL AUDITORY SCENE ANALYSIS\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2014-09-04\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":1}],\"ordinal\":9},{\"applicationNumber\":\"20126106\",\"registrationNumber\":null,\"dossierStatus\":\"Application_dismissed\",\"dossierType\":\"PatentDossier\",\"applicationDate\":\"2012-10-25\",\"statusDate\":\"2016-02-23\",\"applicants\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"classifications\":[{\"classification\":\"G10L 21/02\"}],\"titles\":[{\"title\":\"VOIMAKAS
+        MONEN MIKROFONIN KOHINANVAIMENNUS\",\"language\":\"FI\",\"ordinal\":1},{\"title\":\"Robust
+        multimikrofonbrusd\xE4mpning\",\"language\":\"SV\",\"ordinal\":2},{\"title\":\"MULTI-MICROPHONE
+        ROBUST NOISE SUPPRESSION\",\"language\":\"EN\",\"ordinal\":3}],\"owners\":[{\"name\":null,\"companyName\":\"Audience,
+        Inc.\",\"ordinal\":1}],\"appms\":[],\"publications\":[{\"publicationDate\":\"2016-10-28\",\"type\":\"L\",\"publicationSection\":\"PT_AvailableToPublic_A1\",\"ordinal\":1}],\"ordinal\":10}]}"
+    headers:
+      access-control-allow-methods:
+      - GET, HEAD, POST
+      access-control-allow-origin:
+      - '*'
+      connection:
+      - close
+      content-length:
+      - '8892'
+      content-security-policy:
+      - 'default-src ''self''; img-src ''self'' data: ; media-src ''self'' ; child-src
+        ''none''; manifest-src ''self''; object-src ''none''; worker-src ''none'';
+        connect-src ''self'' https://asiointi.prh.fi;'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Tue, 19 May 2026 13:49:50 GMT
+      strict-transport-security:
+      - max-age=63072000; includeSubdomains;
+      x-content-type-options:
+      - nosniff
+      x-dns-prefetch-control:
+      - 'off'
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-permitted-cross-domain-policies:
+      - none
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
