@@ -1,0 +1,54 @@
+{
+  "country_name": "Denmark",
+  "gii_rank": 10,
+  "gii_ranking_text": "Denmark ranks 10th among the 136 economies featured in the GII 2024.",
+  "iso2": "DK",
+  "lead_summary": "Explore IP Landscape:\nDenmark has been a member of WIPO since 1970 and is a signatory to over 20 WIPO treaties.\nThe national IP offices of Denmark are the Copyright Department at the Ministry of Culture and the Danish Patent and Trademark Office. The offices are located in Copenhagen.",
+  "national_ip_offices": "The national IP offices of Denmark are the Copyright Department at the Ministry of Culture and the Danish Patent and Trademark Office. The offices are located in Copenhagen.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/DK"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=DK"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=DK"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/dk.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/dk.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=DK&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=DK"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=dk"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:20+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/dk",
+  "wipo_member_since": 1970,
+  "wipo_treaty_count": 20
+}

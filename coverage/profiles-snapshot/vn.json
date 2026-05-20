@@ -1,0 +1,54 @@
+{
+  "country_name": "Viet Nam",
+  "gii_rank": 44,
+  "gii_ranking_text": "Viet Nam ranks 44th among the 136 economies featured in the GII 2024.",
+  "iso2": "VN",
+  "lead_summary": "Explore IP Landscape:\nViet Nam has been a member of WIPO since 1976 and is a signatory to over 14 WIPO treaties.\nThe national IP offices of Viet Nam are the Copyright Office of Viet Nam (COV) and the Intellectual Property Office of Viet Nam (IP Viet Nam). The offices are located in Hanoi.",
+  "national_ip_offices": "The national IP offices of Viet Nam are the Copyright Office of Viet Nam (COV) and the Intellectual Property Office of Viet Nam (IP Viet Nam). The offices are located in Hanoi.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/VN"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=VN"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=VN"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/vn.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/vn.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=VN&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=VN"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=vn"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:58+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/vn",
+  "wipo_member_since": 1976,
+  "wipo_treaty_count": 14
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Mali",
+  "gii_rank": 131,
+  "gii_ranking_text": "Mali ranks 131st among the 136 economies featured in the GII 2024.",
+  "iso2": "ML",
+  "lead_summary": "Explore IP Landscape:\nMali has been a member of WIPO since 1982 and is a signatory to over 9 WIPO treaties.\nThe national IP offices of Mali are the Malian Copyright Office and the Malian Centre for the Promotion of Industrial Property (CEMAPI). The offices are located in Bamako.",
+  "national_ip_offices": "The national IP offices of Mali are the Malian Copyright Office and the Malian Centre for the Promotion of Industrial Property (CEMAPI). The offices are located in Bamako.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/ML"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=ML"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=ML"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ml.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ml.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=ML&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=ML"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ml"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:37+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ml",
+  "wipo_member_since": 1982,
+  "wipo_treaty_count": 9
+}

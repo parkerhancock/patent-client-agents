@@ -1,0 +1,1752 @@
+{
+  "profiles": [
+    {
+      "country_name": "Afghanistan",
+      "gii_rank": null,
+      "iso2": "AF",
+      "national_ip_offices": "The national IP offices of Afghanistan are Afghanistan Ministry of Information and Culture (MoIC) and Afghanistan Central Business Registry & Intellectual Properties (ACBR-IP). The offices are located in Kabul.",
+      "snapshot_at": "2026-05-19T16:14:04+00:00",
+      "wipo_member_since": 2005,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Albania",
+      "gii_rank": 84,
+      "iso2": "AL",
+      "national_ip_offices": "The national IP offices of Albania are the Copyright Directorate and the General Directorate of Industrial Property. The offices are located in Tirana.",
+      "snapshot_at": "2026-05-19T16:14:04+00:00",
+      "wipo_member_since": 1992,
+      "wipo_treaty_count": 19
+    },
+    {
+      "country_name": "Algeria",
+      "gii_rank": 115,
+      "iso2": "DZ",
+      "national_ip_offices": "WIPO has an external office located in Algiers. The national IP offices of Algeria are the National Office of Copyrights and Related Rights (ONDA) and Algerian National Institute of Industrial Property (INAPI). The offices are located in Algiers.",
+      "snapshot_at": "2026-05-19T16:14:04+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 16
+    },
+    {
+      "country_name": "Andorra",
+      "gii_rank": null,
+      "iso2": "AD",
+      "national_ip_offices": "The national IP office of Andorra is the Trademarks Office of the Principality of Andorra. The office is located in Andorra La Vella.",
+      "snapshot_at": "2026-05-19T16:14:04+00:00",
+      "wipo_member_since": 1994,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Angola",
+      "gii_rank": 133,
+      "iso2": "AO",
+      "national_ip_offices": "The national IP offices of Angola are the National Service for Copyrights and Related Rights and the Angolan Institute of Industrial Property. The offices are located in Luanda.",
+      "snapshot_at": "2026-05-19T16:14:04+00:00",
+      "wipo_member_since": 1985,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Antigua and Barbuda",
+      "gii_rank": null,
+      "iso2": "AG",
+      "national_ip_offices": "The national IP office of Antigua and Barbuda is the Antigua and Barbuda Intellectual Property and Commerce Office (ABIPCO). The office is located in St. John's.",
+      "snapshot_at": "2026-05-19T16:14:04+00:00",
+      "wipo_member_since": 2000,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Argentina",
+      "gii_rank": 76,
+      "iso2": "AR",
+      "national_ip_offices": "The national IP offices of Argentina are the National Directorate of Author’s Rights and the National Institute of Industrial Property (INPI). The offices are located in Buenos Aires.",
+      "snapshot_at": "2026-05-19T16:14:06+00:00",
+      "wipo_member_since": 1980,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Armenia",
+      "gii_rank": 63,
+      "iso2": "AM",
+      "national_ip_offices": "The national IP office of Armenia is the Intellectual Property Office of the Republic of Armenia. The office is located in Yerevan.",
+      "snapshot_at": "2026-05-19T16:14:06+00:00",
+      "wipo_member_since": 1993,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "Australia",
+      "gii_rank": 23,
+      "iso2": "AU",
+      "national_ip_offices": "The national IP offices of Australia are the Attorney-General’s Department and IP Australia. The offices are located in Canberra.",
+      "snapshot_at": "2026-05-19T16:14:06+00:00",
+      "wipo_member_since": 1972,
+      "wipo_treaty_count": 18
+    },
+    {
+      "country_name": "Austria",
+      "gii_rank": 17,
+      "iso2": "AT",
+      "national_ip_offices": "The national IP offices of Austria are the Federal Ministry of Justice and Austrian Patent Office. The offices are located in Vienna.",
+      "snapshot_at": "2026-05-19T16:14:06+00:00",
+      "wipo_member_since": 1973,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Azerbaijan",
+      "gii_rank": 95,
+      "iso2": "AZ",
+      "national_ip_offices": "The national IP office of Azerbaijan is the Intellectual Property Agency of the Republic of Azerbaijan. The office is located in Baku.",
+      "snapshot_at": "2026-05-19T16:14:06+00:00",
+      "wipo_member_since": 1995,
+      "wipo_treaty_count": 17
+    },
+    {
+      "country_name": "Bahamas",
+      "gii_rank": null,
+      "iso2": "BS",
+      "national_ip_offices": "The national IP office of Bahamas is the Registrar General's Department. The office is located in Nassau.",
+      "snapshot_at": "2026-05-19T16:14:06+00:00",
+      "wipo_member_since": 1977,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Bahrain",
+      "gii_rank": 72,
+      "iso2": "BH",
+      "national_ip_offices": "The national IP offices of Bahrain are the Ministry of Information Affairs and the National Patent Office. The offices are located in Manama.",
+      "snapshot_at": "2026-05-19T16:14:09+00:00",
+      "wipo_member_since": 1995,
+      "wipo_treaty_count": 12
+    },
+    {
+      "country_name": "Bangladesh",
+      "gii_rank": 106,
+      "iso2": "BD",
+      "national_ip_offices": "The national IP offices of Bangladesh are the Copyright Office of Bangladesh and the Department of Patents, Designs and Trademarks at the Ministry of Industries (DPDT). The offices are located in Dhaka.",
+      "snapshot_at": "2026-05-19T16:00:15+00:00",
+      "wipo_member_since": 1985,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Barbados",
+      "gii_rank": 77,
+      "iso2": "BB",
+      "national_ip_offices": "The national IP office of Barbados is the Corporate Affairs and Intellectual Property Office (CAIPO). The office is located in Warrens.",
+      "snapshot_at": "2026-05-19T16:14:09+00:00",
+      "wipo_member_since": 1979,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Belarus",
+      "gii_rank": 85,
+      "iso2": "BY",
+      "national_ip_offices": "The national IP office of Belarus is the National Center of Intellectual Property (NCIP). The office is located in Minsk.",
+      "snapshot_at": "2026-05-19T16:14:10+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Belgium",
+      "gii_rank": 24,
+      "iso2": "BE",
+      "national_ip_offices": "The national IP office of Belgium is the Belgian Intellectual Property Office (IPObel). The office is located in Brussels.",
+      "snapshot_at": "2026-05-19T16:14:09+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "Belize",
+      "gii_rank": null,
+      "iso2": "BZ",
+      "national_ip_offices": "The national IP office of Belize is the Belize Intellectual Property Office (BELIPO). The office is located in Belmopan.",
+      "snapshot_at": "2026-05-19T16:14:09+00:00",
+      "wipo_member_since": 2000,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Benin",
+      "gii_rank": 119,
+      "iso2": "BJ",
+      "national_ip_offices": "The national IP offices of Benin are the Beninese Copyright Office (BUBEDRA) and the Ministry of Industry and Trade. The offices are located in Cotonou.",
+      "snapshot_at": "2026-05-19T16:14:10+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Bhutan",
+      "gii_rank": null,
+      "iso2": "BT",
+      "national_ip_offices": "The national IP office of Bhutan is the Department of Media Creative Industry and Industrial Property (DoMCIIP) at the Ministry of Industry Commerce and Employment. The office is located in Thimphu.",
+      "snapshot_at": "2026-05-19T16:14:11+00:00",
+      "wipo_member_since": 1994,
+      "wipo_treaty_count": 4
+    },
+    {
+      "country_name": "Bolivia (Plurinational State of)",
+      "gii_rank": 100,
+      "iso2": "BO",
+      "national_ip_offices": "The national IP office of Bolivia is the National Intellectual Property Service (SENAPI). The office is located in La Paz.",
+      "snapshot_at": "2026-05-19T16:14:11+00:00",
+      "wipo_member_since": 1993,
+      "wipo_treaty_count": 9
+    },
+    {
+      "country_name": "Bosnia and Herzegovina",
+      "gii_rank": 80,
+      "iso2": "BA",
+      "national_ip_offices": "The national IP office of Bosnia and Herzegovina is the Institute for Intellectual Property of Bosnia and Herzegovina. The office is located in Mostar.",
+      "snapshot_at": "2026-05-19T16:14:11+00:00",
+      "wipo_member_since": 1992,
+      "wipo_treaty_count": 27
+    },
+    {
+      "country_name": "Botswana",
+      "gii_rank": 87,
+      "iso2": "BW",
+      "national_ip_offices": "The national IP office of Botswana is the Companies and Intellectual Property Authority (CIPA). The office is located in Gaborone.",
+      "snapshot_at": "2026-05-19T16:14:11+00:00",
+      "wipo_member_since": 1998,
+      "wipo_treaty_count": 9
+    },
+    {
+      "country_name": "Brazil",
+      "gii_rank": 50,
+      "iso2": "BR",
+      "national_ip_offices": "WIPO has an external office located in Rio de Janeiro. The national IP offices of Brazil are the Copyright Office at the Ministry of Culture and National Institute of Industrial Property (INPI). The offices are located in Rio de Janeiro.",
+      "snapshot_at": "2026-05-19T16:14:12+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 17
+    },
+    {
+      "country_name": "Brunei Darussalam",
+      "gii_rank": 88,
+      "iso2": "BN",
+      "national_ip_offices": "The national IP office of Brunei Darussalam is the Brunei Darussalam Intellectual Property Office (BruIPO). The office is located in Bandar Seri Begawan.",
+      "snapshot_at": "2026-05-19T16:14:12+00:00",
+      "wipo_member_since": 1994,
+      "wipo_treaty_count": 8
+    },
+    {
+      "country_name": "Bulgaria",
+      "gii_rank": 38,
+      "iso2": "BG",
+      "national_ip_offices": "The national IP offices of Bulgaria are the Copyright and Neighbouring Rights Directorate and the Patent Office of Republic of Bulgaria. The offices are located in Sofia.",
+      "snapshot_at": "2026-05-19T16:14:13+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "Burkina Faso",
+      "gii_rank": 129,
+      "iso2": "BF",
+      "national_ip_offices": "The national IP offices of Burkina Faso are the Burkinabé Copyright Office (BBDA) and the National Center for Industrial Property (CNPI). The offices are located in Ouagadougou.",
+      "snapshot_at": "2026-05-19T16:14:14+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Burundi",
+      "gii_rank": 127,
+      "iso2": "BI",
+      "national_ip_offices": "The national IP offices of Burundi are the Burundian Office of Copyright and Neighboring Rights (OBDA) and the Ministry of Commerce, Transport, Industry and Tourism. The offices are located in Bujumbura.",
+      "snapshot_at": "2026-05-19T16:14:14+00:00",
+      "wipo_member_since": 1977,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Cabo Verde",
+      "gii_rank": 90,
+      "iso2": "CV",
+      "national_ip_offices": "The national IP office of Cabo Verde is the Institute for Quality Management and Intellectual Property (IGQPI). The office is located in Praia.",
+      "snapshot_at": "2026-05-19T16:14:13+00:00",
+      "wipo_member_since": 1997,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Cambodia",
+      "gii_rank": 103,
+      "iso2": "KH",
+      "national_ip_offices": "The national IP offices of Cambodia are the Department of Copyright and Related rights at the Ministry of Culture and Fine Arts, the Department of Industrial Property (DIP) at the Ministry of Industry, Science, Technology and Innovation and the Department of Intellectual Property at the Ministry of Commerce. The offices are located in Phnom Penh.",
+      "snapshot_at": "2026-05-19T16:00:15+00:00",
+      "wipo_member_since": 1995,
+      "wipo_treaty_count": 9
+    },
+    {
+      "country_name": "Cameroon",
+      "gii_rank": 123,
+      "iso2": "CM",
+      "national_ip_offices": "The national IP offices of Cameroon are the Ministry of Arts and Culture and the Directorate of Technological Development and Industrial Property at the Ministry of Mines, Industry and Technological Development (MINMIDT). The offices are located in Yaoundé.",
+      "snapshot_at": "2026-05-19T16:14:15+00:00",
+      "wipo_member_since": 1973,
+      "wipo_treaty_count": 8
+    },
+    {
+      "country_name": "Canada",
+      "gii_rank": 14,
+      "iso2": "CA",
+      "national_ip_offices": "The national IP office of Canada is the Canadian Intellectual Property Office (CIPO). The office is located in Gatineau.",
+      "snapshot_at": "2026-05-19T16:14:15+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 17
+    },
+    {
+      "country_name": "Central African Republic",
+      "gii_rank": null,
+      "iso2": "CF",
+      "national_ip_offices": "The national IP offices of the Central African Republic are the Central African Copyright Office (BUCADA) and Direction de la propriété industrielle. The offices are located in Bangui.",
+      "snapshot_at": "2026-05-19T16:14:16+00:00",
+      "wipo_member_since": 1978,
+      "wipo_treaty_count": 8
+    },
+    {
+      "country_name": "Chad",
+      "gii_rank": null,
+      "iso2": "TD",
+      "national_ip_offices": "The national IP offices of Chad are the Chadian Copyright Office (BUTDRA) and the Ministry of Commerce and Industry (SNL-OAPI-TCHAD). The offices are located in N'Djaména.",
+      "snapshot_at": "2026-05-19T16:14:16+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 5
+    },
+    {
+      "country_name": "Chile",
+      "gii_rank": 51,
+      "iso2": "CL",
+      "national_ip_offices": "The national IP offices of Chile are the Intellectual Rights Department (DDI) at the Ministry of Cultures, Arts and Heritage and National Institute of Industrial Property (INAPI). The offices are located in Santiago de Chile.",
+      "snapshot_at": "2026-05-19T16:14:16+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 16
+    },
+    {
+      "country_name": "China",
+      "gii_rank": 11,
+      "iso2": "CN",
+      "national_ip_offices": "WIPO has an external office located in Beijing. The national IP offices of China are the National Copyright Administration of China (NCAC) and China National Intellectual Property Administration (CNIPA). The offices are located in Beijing.",
+      "snapshot_at": "2026-05-19T16:14:16+00:00",
+      "wipo_member_since": 1980,
+      "wipo_treaty_count": 19
+    },
+    {
+      "country_name": "Colombia",
+      "gii_rank": 61,
+      "iso2": "CO",
+      "national_ip_offices": "The national IP offices of Colombia are the National Directorate of Copyright and the Superintendence of Industry and Commerce. The offices are located in Bogotá.",
+      "snapshot_at": "2026-05-19T16:14:16+00:00",
+      "wipo_member_since": 1980,
+      "wipo_treaty_count": 16
+    },
+    {
+      "country_name": "Comoros",
+      "gii_rank": null,
+      "iso2": "KM",
+      "national_ip_offices": "The national IP offices of Comoros are the Ministry of Youth, Employment, Workforce Development, Culture, and Sport and the Comorian Intellectual Property Office. The offices are located in Moroni.",
+      "snapshot_at": "2026-05-19T16:14:16+00:00",
+      "wipo_member_since": 2005,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Congo",
+      "gii_rank": null,
+      "iso2": "CG",
+      "national_ip_offices": "The national IP offices of Congo are the Congolese Copyright Office (BCDA) and the Directorate of the National Industrial Property Office. The offices are located in Brazzaville.",
+      "snapshot_at": "2026-05-19T16:14:18+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Cook Islands",
+      "gii_rank": null,
+      "iso2": "CK",
+      "national_ip_offices": "The national IP office of Cook Islands is the Ministry of Foreign Affairs and Immigration. The office is located in Avarua.",
+      "snapshot_at": "2026-05-19T16:15:07+00:00",
+      "wipo_member_since": 2016,
+      "wipo_treaty_count": 5
+    },
+    {
+      "country_name": "Costa Rica",
+      "gii_rank": 70,
+      "iso2": "CR",
+      "national_ip_offices": "The national IP office of Costa Rica is the Registro Nacional. The office is located in San José.",
+      "snapshot_at": "2026-05-19T16:14:18+00:00",
+      "wipo_member_since": 1981,
+      "wipo_treaty_count": 16
+    },
+    {
+      "country_name": "Croatia",
+      "gii_rank": 43,
+      "iso2": "HR",
+      "national_ip_offices": "The national IP office of Croatia is the State Intellectual Property Office of the Republic of Croatia (SIPO). The office is located in Zagreb.",
+      "snapshot_at": "2026-05-19T16:14:18+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "Cuba",
+      "gii_rank": null,
+      "iso2": "CU",
+      "national_ip_offices": "The national IP offices of Cuba are the National Copyright Center (CENDA) and the Cuban Industrial Property Office (OCPI). The offices are located in La Habana.",
+      "snapshot_at": "2026-05-19T16:14:18+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 15
+    },
+    {
+      "country_name": "Cyprus",
+      "gii_rank": 27,
+      "iso2": "CY",
+      "national_ip_offices": "The national IP office of Cyprus is the Department of Registrar of Companies and Intellectual Property at the Ministry of Energy, Commerce and Industry. The office is located in Nicosia.",
+      "snapshot_at": "2026-05-19T16:14:18+00:00",
+      "wipo_member_since": 1984,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Czech Republic",
+      "gii_rank": 30,
+      "iso2": "CZ",
+      "national_ip_offices": "The national IP offices of the Czech Republic are the Copyright Law Department at the Ministry of Culture and the Industrial Property Office of the Czech Republic. The offices are located in Prague.",
+      "snapshot_at": "2026-05-19T16:14:19+00:00",
+      "wipo_member_since": 1993,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Côte d'Ivoire",
+      "gii_rank": 112,
+      "iso2": "CI",
+      "national_ip_offices": "The national IP offices of Côte d'Ivoire are the Ivorian Copyright Office and the Ivorian Office of Intellectual Property. The offices are located in Abidjan.",
+      "snapshot_at": "2026-05-19T16:14:19+00:00",
+      "wipo_member_since": 1974,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Democratic People's Republic of Korea",
+      "gii_rank": null,
+      "iso2": "KP",
+      "national_ip_offices": "The national IP office of the Democratic People's Republic of Korea is the Intellectual Property Administration (IPA). The office is located in Pyongyang.",
+      "snapshot_at": "2026-05-19T16:14:20+00:00",
+      "wipo_member_since": 1974,
+      "wipo_treaty_count": 19
+    },
+    {
+      "country_name": "Democratic Republic of the Congo",
+      "gii_rank": null,
+      "iso2": "CD",
+      "national_ip_offices": "The national IP offices of the Democratic Republic of the Congo are the General Secretariat for Culture and the Arts and the Directorate of Industrial Property. The offices are located in Kinshasa.",
+      "snapshot_at": "2026-05-19T16:14:19+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 4
+    },
+    {
+      "country_name": "Denmark",
+      "gii_rank": 10,
+      "iso2": "DK",
+      "national_ip_offices": "The national IP offices of Denmark are the Copyright Department at the Ministry of Culture and the Danish Patent and Trademark Office. The offices are located in Copenhagen.",
+      "snapshot_at": "2026-05-19T16:14:20+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Djibouti",
+      "gii_rank": null,
+      "iso2": "DJ",
+      "national_ip_offices": "The national IP offices of Djibouti are the Djibouti Office of Copyright and Related Rights and the Djiboutian Office of Industrial and Commercial Property (ODPIC). The offices are located in Djibouti.",
+      "snapshot_at": "2026-05-19T16:14:21+00:00",
+      "wipo_member_since": 2002,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Dominica",
+      "gii_rank": null,
+      "iso2": "DM",
+      "national_ip_offices": "The national IP office of Dominica is the Companies and Intellectual Property Office (CIPO). The office is located in Roseau.",
+      "snapshot_at": "2026-05-19T16:14:21+00:00",
+      "wipo_member_since": 1998,
+      "wipo_treaty_count": 5
+    },
+    {
+      "country_name": "Dominican Republic",
+      "gii_rank": 97,
+      "iso2": "DO",
+      "national_ip_offices": "The national IP offices of the Dominican Republic are the National Copyright Office (ONDA) and National Office of Industrial Property (ONAPI). The office is located in Santo Domingo.",
+      "snapshot_at": "2026-05-19T16:14:22+00:00",
+      "wipo_member_since": 2000,
+      "wipo_treaty_count": 15
+    },
+    {
+      "country_name": "Ecuador",
+      "gii_rank": 105,
+      "iso2": "EC",
+      "national_ip_offices": "The national IP office of Ecuador is the National Service of Intellectual Rights (SENADI). The office is located in Quito.",
+      "snapshot_at": "2026-05-19T16:14:22+00:00",
+      "wipo_member_since": 1988,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Egypt",
+      "gii_rank": 86,
+      "iso2": "EG",
+      "national_ip_offices": "The national IP offices of Egypt are the Egypt Intellectual Property Office, the Egyptian Patent Office and the Trademarks and Industrial Designs Office. The offices are located in Cairo.",
+      "snapshot_at": "2026-05-19T16:14:22+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "El Salvador",
+      "gii_rank": 98,
+      "iso2": "SV",
+      "national_ip_offices": "The national IP office of El Salvador is the Salvadoran Institute of Intellectual Property. The office is located in San Salvador.",
+      "snapshot_at": "2026-05-19T16:14:22+00:00",
+      "wipo_member_since": 1979,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Equatorial Guinea",
+      "gii_rank": null,
+      "iso2": "GQ",
+      "national_ip_offices": "The national IP office of Equatorial Guinea is the Scientific and Technological Research Council (CICTE). The office is located in Malabo.",
+      "snapshot_at": "2026-05-19T16:14:23+00:00",
+      "wipo_member_since": 1997,
+      "wipo_treaty_count": 4
+    },
+    {
+      "country_name": "Eritrea",
+      "gii_rank": null,
+      "iso2": "ER",
+      "national_ip_offices": "The national IP offices of Eritrea are the Department of Culture at the Ministry of Information and Culture and Domestic Trade and Intellectual Property at the Ministry of Trade and Industry. The offices are located in Asmara.",
+      "snapshot_at": "2026-05-19T16:14:23+00:00",
+      "wipo_member_since": 1997,
+      "wipo_treaty_count": null
+    },
+    {
+      "country_name": "Estonia",
+      "gii_rank": 16,
+      "iso2": "EE",
+      "national_ip_offices": "The national IP offices of Estonia are the Estonian Ministry of Justice and the Estonian Patent Office. The offices are located in Tallinn.",
+      "snapshot_at": "2026-05-19T16:14:23+00:00",
+      "wipo_member_since": 1994,
+      "wipo_treaty_count": 19
+    },
+    {
+      "country_name": "Eswatini",
+      "gii_rank": null,
+      "iso2": "SZ",
+      "national_ip_offices": "The national IP office of Eswatini is the Ministry of Commerce, Industry and Trade. The office is located in Mbabane.",
+      "snapshot_at": "2026-05-19T16:14:23+00:00",
+      "wipo_member_since": 1988,
+      "wipo_treaty_count": 8
+    },
+    {
+      "country_name": "Ethiopia",
+      "gii_rank": 130,
+      "iso2": "ET",
+      "national_ip_offices": "The national IP office of Ethiopia is the Ethiopian Intellectual Property Authority (EIPA). The office is located in Addis Ababa.",
+      "snapshot_at": "2026-05-19T16:14:23+00:00",
+      "wipo_member_since": 1998,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Fiji",
+      "gii_rank": null,
+      "iso2": "FJ",
+      "national_ip_offices": "The national IP office of Fiji is the Office of the Attorney-General. The office is located in Suva.",
+      "snapshot_at": "2026-05-19T16:14:24+00:00",
+      "wipo_member_since": 1972,
+      "wipo_treaty_count": 4
+    },
+    {
+      "country_name": "Finland",
+      "gii_rank": 7,
+      "iso2": "FI",
+      "national_ip_offices": "The national IP offices of Finland are the Division for Copyright Policy and Audiovisual Culture at the Ministry of Education and Culture and the Finnish Patent and Registration Office (PRH). The offices are located in Helsinki.",
+      "snapshot_at": "2026-05-19T16:14:24+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 19
+    },
+    {
+      "country_name": "France",
+      "gii_rank": 12,
+      "iso2": "FR",
+      "national_ip_offices": "The national IP offices of France are the Intellectual Property Office and French Patent and Trademark Office (INPI). The offices are located in Paris.",
+      "snapshot_at": "2026-05-19T16:14:24+00:00",
+      "wipo_member_since": 1974,
+      "wipo_treaty_count": 24
+    },
+    {
+      "country_name": "Gabon",
+      "gii_rank": null,
+      "iso2": "GA",
+      "national_ip_offices": "The national IP offices of Gabon are the Copyright and Neighboring Rights Office of Gabon (BUGADA) and Industrial Property Office. The offices are located in Libreville.",
+      "snapshot_at": "2026-05-19T16:14:24+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Gambia (the)",
+      "gii_rank": null,
+      "iso2": "GM",
+      "national_ip_offices": "The national IP offices of the Gambia are the National Centre for Arts and Culture (NCAC) and Registrar General’s Department. The offices are located in Banjul.",
+      "snapshot_at": "2026-05-19T16:14:25+00:00",
+      "wipo_member_since": 1980,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Georgia",
+      "gii_rank": 57,
+      "iso2": "GE",
+      "national_ip_offices": "The national IP office of Georgia is the National Intellectual Property Center (SAKPATENTI). The office is located in Mtskheta.",
+      "snapshot_at": "2026-05-19T16:14:25+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Germany",
+      "gii_rank": 9,
+      "iso2": "DE",
+      "national_ip_offices": "The national IP office of Germany is the German Patent and Trade Mark Office (DPMA). The office is located in Berlin.",
+      "snapshot_at": "2026-05-19T16:00:01+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 23
+    },
+    {
+      "country_name": "Ghana",
+      "gii_rank": 101,
+      "iso2": "GH",
+      "national_ip_offices": "The national IP offices of Ghana are the Copyright Department and the Registrar General's Department at the Ministry of Justice. The offices are located in Accra.",
+      "snapshot_at": "2026-05-19T16:14:25+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 18
+    },
+    {
+      "country_name": "Greece",
+      "gii_rank": 45,
+      "iso2": "GR",
+      "national_ip_offices": "The national IP offices of Greece are the Hellenic Copyright Organization (OPI - HCO) and the Hellenic Industrial Property Organization (OBI). The offices are located in Athens.",
+      "snapshot_at": "2026-05-19T16:14:26+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Grenada",
+      "gii_rank": null,
+      "iso2": "GD",
+      "national_ip_offices": "The national IP office of Grenada is the Corporate Affairs and Intellectual Property Office (CAIPO). The office is located in St. George's.",
+      "snapshot_at": "2026-05-19T16:14:26+00:00",
+      "wipo_member_since": 1998,
+      "wipo_treaty_count": 5
+    },
+    {
+      "country_name": "Guatemala",
+      "gii_rank": 122,
+      "iso2": "GT",
+      "national_ip_offices": "The national IP office of Guatemala is the Registry of Intellectual Property of Guatemala. The office is located in Guatemala City.",
+      "snapshot_at": "2026-05-19T16:14:27+00:00",
+      "wipo_member_since": 1983,
+      "wipo_treaty_count": 15
+    },
+    {
+      "country_name": "Guinea",
+      "gii_rank": 128,
+      "iso2": "GN",
+      "national_ip_offices": "The national IP offices of Guinea are the Guinean Copyright Office (BGDA) and the National Service of Industrial Property. The offices are located in Conakry.",
+      "snapshot_at": "2026-05-19T16:14:27+00:00",
+      "wipo_member_since": 1980,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Guinea-Bissau",
+      "gii_rank": null,
+      "iso2": "GW",
+      "national_ip_offices": "The national IP offices of Guinea-Bissau are the Guinean Copyright Society and the General Directorate of Industrial Property. The offices are located in Bissau.",
+      "snapshot_at": "2026-05-19T16:14:27+00:00",
+      "wipo_member_since": 1988,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Guyana",
+      "gii_rank": null,
+      "iso2": "GY",
+      "national_ip_offices": "The national IP office of Guyana is the Deeds and Commercial Registries. The office is located in Georgetown.",
+      "snapshot_at": "2026-05-19T16:14:27+00:00",
+      "wipo_member_since": 1994,
+      "wipo_treaty_count": 2
+    },
+    {
+      "country_name": "Haiti",
+      "gii_rank": null,
+      "iso2": "HT",
+      "national_ip_offices": "The national IP offices of Haiti are the Haitian Copyright Office (BHDA) and the Ministry of Trade and Industry. The office is located in Port-au-Prince.",
+      "snapshot_at": "2026-05-19T16:14:27+00:00",
+      "wipo_member_since": 1983,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Holy See",
+      "gii_rank": null,
+      "iso2": "VA",
+      "national_ip_offices": "The national IP office of the Holy See is the Governorate of the Vatican City State. The office is located in Vatican City State.",
+      "snapshot_at": "2026-05-19T16:14:28+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 8
+    },
+    {
+      "country_name": "Honduras",
+      "gii_rank": 114,
+      "iso2": "HN",
+      "national_ip_offices": "The national IP office of Honduras is the Institute of Intellectual Property (DIGEPIH). The office is located in Tegucigalpa.",
+      "snapshot_at": "2026-05-19T16:14:28+00:00",
+      "wipo_member_since": 1983,
+      "wipo_treaty_count": null
+    },
+    {
+      "country_name": "Hungary",
+      "gii_rank": 36,
+      "iso2": "HU",
+      "national_ip_offices": "The national IP office of Hungary is the Hungarian Intellectual Property Office (HIPO). The office is located in Budapest.",
+      "snapshot_at": "2026-05-19T16:14:29+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Iceland",
+      "gii_rank": 22,
+      "iso2": "IS",
+      "national_ip_offices": "The national IP offices of Iceland are the Ministry of Culture and Business Affairs and the Icelandic Intellectual Property Office (ISIPO). The offices are located in Reykjavík.",
+      "snapshot_at": "2026-05-19T16:14:29+00:00",
+      "wipo_member_since": 1986,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "India",
+      "gii_rank": 39,
+      "iso2": "IN",
+      "national_ip_offices": "The national IP offices of India are the Copyright Office and the Office of the Controller General of Patents, Designs and Trademarks. The offices are located in New Delhi and in Mumbai respectively.",
+      "snapshot_at": "2026-05-19T16:14:29+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 16
+    },
+    {
+      "country_name": "Indonesia",
+      "gii_rank": 54,
+      "iso2": "ID",
+      "national_ip_offices": "The national IP office of Indonesia is the Directorate General of Intellectual Property (DGIP). The office is located in Jakarta.",
+      "snapshot_at": "2026-05-19T16:14:30+00:00",
+      "wipo_member_since": 1979,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Iran (Islamic Republic of)",
+      "gii_rank": 64,
+      "iso2": "IR",
+      "national_ip_offices": "The national IP offices of the Islamic Republic of Iran are the Registrar of Copyright at the Center for Cultural Studies and Research (CCSR) and the Intellectual Property Center of the Islamic Republic of Iran. The offices are located in Tehran.",
+      "snapshot_at": "2026-05-19T16:14:30+00:00",
+      "wipo_member_since": 2002,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Iraq",
+      "gii_rank": 131,
+      "iso2": "IQ",
+      "national_ip_offices": "The national IP offices of Iraq are the National Center for the Protection of Copyright and Related Rights, the Central Organization for Standardization and Quality Control (COSQC) and Department of Industrial Development and Regulation at the Ministry of Industry and Minerals. The offices are located in Baghdad.",
+      "snapshot_at": "2026-05-19T16:14:30+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 4
+    },
+    {
+      "country_name": "Ireland",
+      "gii_rank": 19,
+      "iso2": "IE",
+      "national_ip_offices": "The national IP office of Ireland is the Intellectual Property Office of Ireland (IPOI). The office is located in Kilkenny.",
+      "snapshot_at": "2026-05-19T16:14:30+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 19
+    },
+    {
+      "country_name": "Israel",
+      "gii_rank": 15,
+      "iso2": "IL",
+      "national_ip_offices": "The national IP offices of Israel are the Office of the Director General at the Ministry of Justice and the Israel Patent Office. The offices are located in Jerusalem.",
+      "snapshot_at": "2026-05-19T16:14:31+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Italy",
+      "gii_rank": 26,
+      "iso2": "IT",
+      "national_ip_offices": "The national IP offices of Italy are the Directorate General for Libraries and Copyright and the Markets and Consumers Protection Department of the Italian Patent and Trademark Office. The offices are located in Rome.",
+      "snapshot_at": "2026-05-19T16:14:31+00:00",
+      "wipo_member_since": 1977,
+      "wipo_treaty_count": 24
+    },
+    {
+      "country_name": "Jamaica",
+      "gii_rank": 79,
+      "iso2": "JM",
+      "national_ip_offices": "The national IP office of Jamaica is the Jamaica Intellectual Property Office (JIPO). The office is located in Kingston.",
+      "snapshot_at": "2026-05-19T16:14:31+00:00",
+      "wipo_member_since": 1978,
+      "wipo_treaty_count": 15
+    },
+    {
+      "country_name": "Japan",
+      "gii_rank": 13,
+      "iso2": "JP",
+      "national_ip_offices": "WIPO has an external office located in Tokyo. The national IP offices of Japan are Japan Copyright Office (JCO) and Japan Patent Office (JPO). The offices are located in Tokyo.",
+      "snapshot_at": "2026-05-19T16:00:01+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Jordan",
+      "gii_rank": 73,
+      "iso2": "JO",
+      "national_ip_offices": "The national IP offices of Jordan are the Department of the National Library at the Ministry of Culture and the Industrial Property Protection Directorate. The offices are located in Amman.",
+      "snapshot_at": "2026-05-19T16:14:32+00:00",
+      "wipo_member_since": 1972,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Kazakhstan",
+      "gii_rank": 78,
+      "iso2": "KZ",
+      "national_ip_offices": "The national IP offices of Kazakhstan are the Committee for Intellectual Property Rights and the National Institute of Intellectual Property. The offices are located in Astana.",
+      "snapshot_at": "2026-05-19T16:14:32+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 18
+    },
+    {
+      "country_name": "Kenya",
+      "gii_rank": 96,
+      "iso2": "KE",
+      "national_ip_offices": "The national IP offices of Kenya are the Kenya Copyright Board and the Kenya Industrial Property Institute (KIPI). The offices are located in Nairobi.",
+      "snapshot_at": "2026-05-19T16:14:32+00:00",
+      "wipo_member_since": 1971,
+      "wipo_treaty_count": 17
+    },
+    {
+      "country_name": "Kiribati",
+      "gii_rank": null,
+      "iso2": "KI",
+      "national_ip_offices": "The national IP office of Kiribati is the Ministry of Commerce, Industry and Cooperatives. The office is located in Tarawa.",
+      "snapshot_at": "2026-05-19T16:14:33+00:00",
+      "wipo_member_since": 2013,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Kuwait",
+      "gii_rank": 71,
+      "iso2": "KW",
+      "national_ip_offices": "The national IP offices of Kuwait are the National Library of Kuwait and the Trademarks and Patents Department at the Ministry of Commerce and Industry. The offices are located in Kuwait City.",
+      "snapshot_at": "2026-05-19T16:14:33+00:00",
+      "wipo_member_since": 1998,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Kyrgyzstan",
+      "gii_rank": 99,
+      "iso2": "KG",
+      "national_ip_offices": "The national IP office of Kyrgyzstan is the State Agency of Intellectual Property and Innovation. The office is located in Bishkek.",
+      "snapshot_at": "2026-05-19T16:14:33+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "Lao People's Democratic Republic",
+      "gii_rank": 111,
+      "iso2": "LA",
+      "national_ip_offices": "The national IP office of the Lao People's Democratic Republic is the Department of Intellectual Property at the Ministry of Industry and Commerce. The office is located in Vientiane.",
+      "snapshot_at": "2026-05-19T16:14:33+00:00",
+      "wipo_member_since": 1995,
+      "wipo_treaty_count": 5
+    },
+    {
+      "country_name": "Latvia",
+      "gii_rank": 42,
+      "iso2": "LV",
+      "national_ip_offices": "The national IP offices of Latvia are the Copyright Unit of the Ministry of Culture and the Patent Office of the Republic of Latvia. The office is located in Riga.",
+      "snapshot_at": "2026-05-19T16:14:33+00:00",
+      "wipo_member_since": 1993,
+      "wipo_treaty_count": 17
+    },
+    {
+      "country_name": "Lebanon",
+      "gii_rank": 94,
+      "iso2": "LB",
+      "national_ip_offices": "The national IP office of Lebanon is the Office of Intellectual Property. The office is located in Beirut.",
+      "snapshot_at": "2026-05-19T16:14:34+00:00",
+      "wipo_member_since": 1986,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Lesotho",
+      "gii_rank": null,
+      "iso2": "LS",
+      "national_ip_offices": "The national IP office of Lesotho is the Registrar General's Office (RGO). The office is located in Maseru.",
+      "snapshot_at": "2026-05-19T16:14:34+00:00",
+      "wipo_member_since": 1986,
+      "wipo_treaty_count": 8
+    },
+    {
+      "country_name": "Liberia",
+      "gii_rank": null,
+      "iso2": "LR",
+      "national_ip_offices": "The national IP office of Liberia is the Liberia Intellectual Property Office (LIPO). The office is located in Monrovia.",
+      "snapshot_at": "2026-05-19T16:14:35+00:00",
+      "wipo_member_since": 1989,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Libya",
+      "gii_rank": null,
+      "iso2": "LY",
+      "national_ip_offices": "The national IP office of Libya is the Libyan Authority for Research at the Ministry of Higher Education and Scientific Research. The office is located in Tripoli.",
+      "snapshot_at": "2026-05-19T16:14:35+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Liechtenstein",
+      "gii_rank": null,
+      "iso2": "LI",
+      "national_ip_offices": "The national IP office of Liechtenstein is the Bureau of Intellectual Property. The office is located in Vaduz.",
+      "snapshot_at": "2026-05-19T16:14:35+00:00",
+      "wipo_member_since": 1972,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Lithuania",
+      "gii_rank": 35,
+      "iso2": "LT",
+      "national_ip_offices": "The national IP offices of Lithuania are the Media and Copyright Policy Unit at the Ministry of Culture and the State Patent Bureau. The offices are located in Vilnius.",
+      "snapshot_at": "2026-05-19T16:14:35+00:00",
+      "wipo_member_since": 1992,
+      "wipo_treaty_count": 17
+    },
+    {
+      "country_name": "Luxembourg",
+      "gii_rank": 20,
+      "iso2": "LU",
+      "national_ip_offices": "The national IP office of Luxembourg is the Intellectual Property Office. The office is located in Luxembourg.",
+      "snapshot_at": "2026-05-19T16:14:36+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Madagascar",
+      "gii_rank": 110,
+      "iso2": "MG",
+      "national_ip_offices": "The national IP offices of Madagascar are the Malagasy Copyright Office (OMDA) and the Malagasy Industrial Property Office (OMAPI). The offices are located in Antananarivo.",
+      "snapshot_at": "2026-05-19T16:14:36+00:00",
+      "wipo_member_since": 1989,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Malawi",
+      "gii_rank": 107,
+      "iso2": "MW",
+      "national_ip_offices": "The national IP offices of Malawi are the Copyright Society of Malawi (COSOMA) and the Department of Registrar General at the Ministry of Justice and Constitutional Affairs. The offices are located in Lilongwe and Blantyre respectively.",
+      "snapshot_at": "2026-05-19T16:14:36+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Malaysia",
+      "gii_rank": 33,
+      "iso2": "MY",
+      "national_ip_offices": "The national IP office of Malaysia is the Intellectual Property Corporation of Malaysia (MyIPO). The office is located in Petaling Jaya.",
+      "snapshot_at": "2026-05-19T16:14:36+00:00",
+      "wipo_member_since": 1989,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Maldives",
+      "gii_rank": null,
+      "iso2": "MV",
+      "national_ip_offices": "The national IP office of Maldives is the Intellectual Property Unit at the Ministry of Economic Development. The office is located in Male.",
+      "snapshot_at": "2026-05-19T16:14:37+00:00",
+      "wipo_member_since": 2004,
+      "wipo_treaty_count": 2
+    },
+    {
+      "country_name": "Mali",
+      "gii_rank": 131,
+      "iso2": "ML",
+      "national_ip_offices": "The national IP offices of Mali are the Malian Copyright Office and the Malian Centre for the Promotion of Industrial Property (CEMAPI). The offices are located in Bamako.",
+      "snapshot_at": "2026-05-19T16:14:37+00:00",
+      "wipo_member_since": 1982,
+      "wipo_treaty_count": 9
+    },
+    {
+      "country_name": "Malta",
+      "gii_rank": 29,
+      "iso2": "MT",
+      "national_ip_offices": "The national IP office of Malta is the Industrial Property Registrations Directorate. The office is located in Valletta.",
+      "snapshot_at": "2026-05-19T16:14:37+00:00",
+      "wipo_member_since": 1977,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Marshall Islands",
+      "gii_rank": null,
+      "iso2": "MH",
+      "national_ip_offices": "The national IP office of Marshall Islands is the Ministry of Culture and Internal Affairs. The office is located in Majuro.",
+      "snapshot_at": "2026-05-19T16:14:38+00:00",
+      "wipo_member_since": 2017,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Mauritania",
+      "gii_rank": 126,
+      "iso2": "MR",
+      "national_ip_offices": "The national IP offices of Mauritania are the Cultural Cooperation and Intellectual Property Department, Directorate of Culture and Arts at the Ministry of Culture, Youth and Sports and the Directorate of Industry at the Ministry of Commerce, Industry, Handicraft and Tourism. The offices are located in Nouakchott.",
+      "snapshot_at": "2026-05-19T16:14:38+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Mauritius",
+      "gii_rank": 55,
+      "iso2": "MU",
+      "national_ip_offices": "The national IP offices of Mauritius are the Ministry of Arts and Cultural Heritage and the Industrial Property Office of Mauritius (IPOM). The offices are located in Port Louis.",
+      "snapshot_at": "2026-05-19T16:14:38+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Mexico",
+      "gii_rank": 56,
+      "iso2": "MX",
+      "national_ip_offices": "The national IP offices of Mexico are the National Institute of Copyright (INDAUTOR) and the Mexican Institute of Industrial Property. The offices are located in Mexico City.",
+      "snapshot_at": "2026-05-19T16:14:39+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Micronesia (Federated States of)",
+      "gii_rank": null,
+      "iso2": "FM",
+      "national_ip_offices": "The national IP office of the Federated States of Micronesia is the Department of Foreign Affairs. The office is located in Palikir.",
+      "snapshot_at": "2026-05-19T16:14:38+00:00",
+      "wipo_member_since": 2025,
+      "wipo_treaty_count": 2
+    },
+    {
+      "country_name": "Monaco",
+      "gii_rank": null,
+      "iso2": "MC",
+      "national_ip_offices": "The national IP office of Monaco is the Intellectual Property Division at the Department of Economic Expansion. The office is located in Monaco.",
+      "snapshot_at": "2026-05-19T16:14:39+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 18
+    },
+    {
+      "country_name": "Mongolia",
+      "gii_rank": 67,
+      "iso2": "MN",
+      "national_ip_offices": "The national IP office of Mongolia is the Intellectual Property Office (IPOM). The office is located in Ulaanbaatar.",
+      "snapshot_at": "2026-05-19T16:14:39+00:00",
+      "wipo_member_since": 1979,
+      "wipo_treaty_count": 15
+    },
+    {
+      "country_name": "Montenegro",
+      "gii_rank": 65,
+      "iso2": "ME",
+      "national_ip_offices": "The national IP office of Montenegro is the Directorate for Internal Market and Competition at the Ministry of Economic Development. The office is located in Podgorica.",
+      "snapshot_at": "2026-05-19T16:14:39+00:00",
+      "wipo_member_since": 2006,
+      "wipo_treaty_count": 25
+    },
+    {
+      "country_name": "Morocco",
+      "gii_rank": 66,
+      "iso2": "MA",
+      "national_ip_offices": "The national IP offices of Morocco are the Copyright Office of Morocco and the Moroccan Industrial and Commercial Property Office (OMPIC). The offices are located in Rabat and Casablanca respectively.",
+      "snapshot_at": "2026-05-19T16:14:39+00:00",
+      "wipo_member_since": 1971,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Mozambique",
+      "gii_rank": 128,
+      "iso2": "MZ",
+      "national_ip_offices": "The national IP offices of Mozambique are the National Institute of Culture and Creative Industries and the Industrial Property Institute (IPI). The offices are located in Maputo.",
+      "snapshot_at": "2026-05-19T16:14:39+00:00",
+      "wipo_member_since": 1996,
+      "wipo_treaty_count": 8
+    },
+    {
+      "country_name": "Myanmar",
+      "gii_rank": 125,
+      "iso2": "MM",
+      "national_ip_offices": "The national IP office of Myanmar is the Intellectual Property Department (IPD) of the Ministry of Commerce. The office is located in Nay Pyi Taw.",
+      "snapshot_at": "2026-05-19T16:14:40+00:00",
+      "wipo_member_since": 2001,
+      "wipo_treaty_count": null
+    },
+    {
+      "country_name": "Namibia",
+      "gii_rank": 102,
+      "iso2": "NA",
+      "national_ip_offices": "The national IP office of Namibia is the Business and Intellectual Property Authority (BIPA). The office is located in Windhoek.",
+      "snapshot_at": "2026-05-19T16:14:40+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Nauru",
+      "gii_rank": null,
+      "iso2": "NR",
+      "national_ip_offices": "The national IP office of Nauru is the Registrar of Copyright, Trademarks and Patents at the Department of Justice and Border Control. The office is located in Aiwo.",
+      "snapshot_at": "2026-05-19T16:14:41+00:00",
+      "wipo_member_since": 2020,
+      "wipo_treaty_count": 2
+    },
+    {
+      "country_name": "Nepal",
+      "gii_rank": 109,
+      "iso2": "NP",
+      "national_ip_offices": "The national IP offices of Nepal are the Nepal Copyright Registrar's Office and the Department of Industries at the Ministry of Industry, Commerce and Supplies. The offices are located in Kathmandu.",
+      "snapshot_at": "2026-05-19T16:14:40+00:00",
+      "wipo_member_since": 1997,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Netherlands (Kingdom of the)",
+      "gii_rank": 8,
+      "iso2": "NL",
+      "national_ip_offices": "The national IP offices of the Kingdom of the Netherlands are:",
+      "snapshot_at": "2026-05-19T16:14:41+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "New Zealand",
+      "gii_rank": 25,
+      "iso2": "NZ",
+      "national_ip_offices": "The national IP office of New Zealand is the Intellectual Property Office of New Zealand (IPONZ). The office is located in Wellington.",
+      "snapshot_at": "2026-05-19T16:14:41+00:00",
+      "wipo_member_since": 1984,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Nicaragua",
+      "gii_rank": 124,
+      "iso2": "NI",
+      "national_ip_offices": "The national IP office of Nicaragua is the Intellectual Property Registry (RPI). The office is located in Managua.",
+      "snapshot_at": "2026-05-19T16:14:41+00:00",
+      "wipo_member_since": 1985,
+      "wipo_treaty_count": 15
+    },
+    {
+      "country_name": "Niger",
+      "gii_rank": 132,
+      "iso2": "NE",
+      "national_ip_offices": "The national IP offices of Niger are Niger Copyright Office (BNDA) and the National Agency for Industrial Property and Promotion of Innovation. The offices are located in Niamey.",
+      "snapshot_at": "2026-05-19T16:14:42+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Nigeria",
+      "gii_rank": 113,
+      "iso2": "NG",
+      "national_ip_offices": "WIPO has an external office located in Abuja. The national IP offices of Nigeria are the Nigerian Copyright Commission (NCC), the Patents and Designs Office and the Trademark Registry. The offices are located in Abuja.",
+      "snapshot_at": "2026-05-19T16:14:42+00:00",
+      "wipo_member_since": 1995,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Niue",
+      "gii_rank": null,
+      "iso2": "NU",
+      "national_ip_offices": "The national IP office of Niue is the Crown Law Office. The office is located in Alofi.",
+      "snapshot_at": "2026-05-19T16:14:42+00:00",
+      "wipo_member_since": 2015,
+      "wipo_treaty_count": 2
+    },
+    {
+      "country_name": "North Macedonia",
+      "gii_rank": 58,
+      "iso2": "MK",
+      "national_ip_offices": "The national IP offices of North Macedonia are the Office for Normative and Administrative Affairs, Copyright and Related Rights at the Ministry of Culture and the State Office of Industrial Property (SOIP). The offices are located in Skopje.",
+      "snapshot_at": "2026-05-19T16:14:43+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "Norway",
+      "gii_rank": 21,
+      "iso2": "NO",
+      "national_ip_offices": "The national IP office of Norway is the Norwegian Industrial Property Office (NIPO). The office is located in Oslo.",
+      "snapshot_at": "2026-05-19T16:14:43+00:00",
+      "wipo_member_since": 1974,
+      "wipo_treaty_count": 15
+    },
+    {
+      "country_name": "Oman",
+      "gii_rank": 74,
+      "iso2": "OM",
+      "national_ip_offices": "The national IP office of Oman is the National Intellectual Property Office. The office is located in Muscat.",
+      "snapshot_at": "2026-05-19T16:14:43+00:00",
+      "wipo_member_since": 1997,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Pakistan",
+      "gii_rank": 91,
+      "iso2": "PK",
+      "national_ip_offices": "The national IP office of Pakistan is the Intellectual Property Organization of Pakistan (IPO-Pakistan). The offices are located in Islamabad and Karachi.",
+      "snapshot_at": "2026-05-19T16:00:15+00:00",
+      "wipo_member_since": 1977,
+      "wipo_treaty_count": 4
+    },
+    {
+      "country_name": "Panama",
+      "gii_rank": 82,
+      "iso2": "PA",
+      "national_ip_offices": "The national IP offices of Panama are the National Directorate of Copyright and Directorate General of the Industrial Property Registry (DIGERPI). The offices are located in Panama City.",
+      "snapshot_at": "2026-05-19T16:14:43+00:00",
+      "wipo_member_since": 1983,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Papua New Guinea",
+      "gii_rank": null,
+      "iso2": "PG",
+      "national_ip_offices": "The national IP office of Papua New Guinea is the Intellectual Property Office of Papua New Guinea (IPOPNG). The office is located in Port Moresby.",
+      "snapshot_at": "2026-05-19T16:14:43+00:00",
+      "wipo_member_since": 1997,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Paraguay",
+      "gii_rank": 93,
+      "iso2": "PY",
+      "national_ip_offices": "The national IP office of Paraguay is the National Directorate of Intellectual Property (DINAPI). The office is located in Asunción.",
+      "snapshot_at": "2026-05-19T16:14:44+00:00",
+      "wipo_member_since": 1987,
+      "wipo_treaty_count": 15
+    },
+    {
+      "country_name": "Peru",
+      "gii_rank": 75,
+      "iso2": "PE",
+      "national_ip_offices": "The national IP office of Peru is the National Institute for the Defense of Competition and Protection of Intellectual Property (INDECOPI). The office is located in Lima.",
+      "snapshot_at": "2026-05-19T16:14:44+00:00",
+      "wipo_member_since": 1980,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "Philippines",
+      "gii_rank": 53,
+      "iso2": "PH",
+      "national_ip_offices": "The national IP office of the Philippines is the Intellectual Property Office of the Philippines (IPOPHL). The office is located in Taguig.",
+      "snapshot_at": "2026-05-19T16:14:44+00:00",
+      "wipo_member_since": 1980,
+      "wipo_treaty_count": 12
+    },
+    {
+      "country_name": "Poland",
+      "gii_rank": 40,
+      "iso2": "PL",
+      "national_ip_offices": "The national IP offices of Poland are the Department of Copyright and Film at the Ministry of Culture and National Heritage and the Patent Office of the Republic of Poland. The offices are located in Warsaw.",
+      "snapshot_at": "2026-05-19T16:14:45+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Portugal",
+      "gii_rank": 31,
+      "iso2": "PT",
+      "national_ip_offices": "The national IP offices of Portugal are the Bureau for Cultural Strategy, Planning and Assessment (GEPAC) and the Portuguese Institute of Industrial Property. The offices are located in Lisbon.",
+      "snapshot_at": "2026-05-19T16:14:45+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Qatar",
+      "gii_rank": 49,
+      "iso2": "QA",
+      "national_ip_offices": "The national IP office of Qatar is the Intellectual Property Department at the Ministry of Commerce and Industry. The office is located in Doha.",
+      "snapshot_at": "2026-05-19T16:14:45+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Republic of Korea",
+      "gii_rank": 6,
+      "iso2": "KR",
+      "national_ip_offices": "The national IP offices of the Republic of Korea are the Copyright Bureau at the Ministry of Culture, Sports and Tourism and the Ministry of Intellectual Property (MOIP). The offices are located in Sejong-si and Daejeon respectively.",
+      "snapshot_at": "2026-05-19T16:14:45+00:00",
+      "wipo_member_since": 1979,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Republic of Moldova",
+      "gii_rank": 68,
+      "iso2": "MD",
+      "national_ip_offices": "The national IP office of the Republic of Moldova is the State Agency on Intellectual Property (AGEPI). The office is located in Chisinau.",
+      "snapshot_at": "2026-05-19T16:14:46+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 26
+    },
+    {
+      "country_name": "Romania",
+      "gii_rank": 48,
+      "iso2": "RO",
+      "national_ip_offices": "The national IP offices of Romania are the Romanian Copyright Office (ORDA) and the State Office for Inventions and Trademarks (OSIM). The offices are located in Bucharest.",
+      "snapshot_at": "2026-05-19T16:14:46+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Russian Federation",
+      "gii_rank": 59,
+      "iso2": "RU",
+      "national_ip_offices": "WIPO has an external office located in Moscow. The national IP office of the Russian Federation is the Federal Service for Intellectual Property (ROSPATENT). The office is located in Moscow.",
+      "snapshot_at": "2026-05-19T16:14:46+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 23
+    },
+    {
+      "country_name": "Rwanda",
+      "gii_rank": 104,
+      "iso2": "RW",
+      "national_ip_offices": "The national IP office of Rwanda is the Office of the Registrar General, Rwanda Development Board (RDB). The office is located in Kigali.",
+      "snapshot_at": "2026-05-19T16:14:46+00:00",
+      "wipo_member_since": 1984,
+      "wipo_treaty_count": 8
+    },
+    {
+      "country_name": "Saint Kitts and Nevis",
+      "gii_rank": null,
+      "iso2": "KN",
+      "national_ip_offices": "The national IP office of Saint Kitts and Nevis is the Intellectual Property Office of St. Kitts and Nevis. The office is located in Basseterre.",
+      "snapshot_at": "2026-05-19T16:14:46+00:00",
+      "wipo_member_since": 1995,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Saint Lucia",
+      "gii_rank": null,
+      "iso2": "LC",
+      "national_ip_offices": "The national IP office of Saint Lucia is the Registry of Companies and Intellectual Property. The office is located in Castries.",
+      "snapshot_at": "2026-05-19T16:14:47+00:00",
+      "wipo_member_since": 1993,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Saint Vincent and the Grenadines",
+      "gii_rank": null,
+      "iso2": "VC",
+      "national_ip_offices": "The national IP office of Saint Vincent and the Grenadines is the Commerce and Intellectual Property Office. The office is located in Kingstown.",
+      "snapshot_at": "2026-05-19T16:14:47+00:00",
+      "wipo_member_since": 1995,
+      "wipo_treaty_count": 9
+    },
+    {
+      "country_name": "Samoa",
+      "gii_rank": null,
+      "iso2": "WS",
+      "national_ip_offices": "The national IP office of Samoa is the Registries of Companies and Intellectual Property Division (RCIP) at the Ministry of Commerce, Industry and Labour. The office is located in Apia.",
+      "snapshot_at": "2026-05-19T16:14:47+00:00",
+      "wipo_member_since": 1997,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "San Marino",
+      "gii_rank": null,
+      "iso2": "SM",
+      "national_ip_offices": "The national IP offices of San Marino are the Department of External Affairs and the State Office for Patents and Trademarks. The offices are located in San Marino and Borgo Maggiore respectively.",
+      "snapshot_at": "2026-05-19T16:14:47+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Sao Tome and Principe",
+      "gii_rank": null,
+      "iso2": "ST",
+      "national_ip_offices": "The national IP office of Sao Tome and Principe is the National Intellectual Property and Quality Service (SENAPIQ-STP). The office is located in Sao Tome.",
+      "snapshot_at": "2026-05-19T16:14:48+00:00",
+      "wipo_member_since": 1998,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Saudi Arabia",
+      "gii_rank": 47,
+      "iso2": "SA",
+      "national_ip_offices": "The national IP office of Saudi Arabia is the Saudi Authority for Intellectual Property (SAIP). The office is located in Riyadh.",
+      "snapshot_at": "2026-05-19T16:14:48+00:00",
+      "wipo_member_since": 1982,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Senegal",
+      "gii_rank": 92,
+      "iso2": "SN",
+      "national_ip_offices": "The national IP offices of Senegal are the Ministry of Culture, Société Sénégalaise du Droit d’Auteur et des Droits Voisins (SODAV) and Senegalese Agency for Industrial Property and Technological Innovation (ASPIT). The offices are located in Dakar.",
+      "snapshot_at": "2026-05-19T16:14:48+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 16
+    },
+    {
+      "country_name": "Serbia",
+      "gii_rank": 52,
+      "iso2": "RS",
+      "national_ip_offices": "The national IP office of Serbia is the Intellectual Property Office of the Republic of Serbia. The office is located in Belgrade.",
+      "snapshot_at": "2026-05-19T16:14:49+00:00",
+      "wipo_member_since": 1992,
+      "wipo_treaty_count": null
+    },
+    {
+      "country_name": "Seychelles",
+      "gii_rank": null,
+      "iso2": "SC",
+      "national_ip_offices": "The national IP office of Seychelles is the Intellectual Property Office at the Department of Legal Affairs. The office is located in Victoria.",
+      "snapshot_at": "2026-05-19T16:14:48+00:00",
+      "wipo_member_since": 2000,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Sierra Leone",
+      "gii_rank": null,
+      "iso2": "SL",
+      "national_ip_offices": "The national IP office of Sierra Leone is the National Registry for Industrial Property and Copyright. The office is located in Freetown.",
+      "snapshot_at": "2026-05-19T16:14:49+00:00",
+      "wipo_member_since": 1986,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Singapore",
+      "gii_rank": 4,
+      "iso2": "SG",
+      "national_ip_offices": "WIPO has an external office located in Singapore. The national IP office of Singapore is the National Registry for Industrial Property and Copyright. The office is located in Singapore.",
+      "snapshot_at": "2026-05-19T16:14:49+00:00",
+      "wipo_member_since": 1990,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Slovakia",
+      "gii_rank": 46,
+      "iso2": "SK",
+      "national_ip_offices": "The national IP offices of Slovakia are the Copyright Unit at the Ministry of Culture and the Industrial Property Office of the Slovak Republic. The offices are located in Bratislava and Banská Bystrica respectively.",
+      "snapshot_at": "2026-05-19T16:14:49+00:00",
+      "wipo_member_since": 1993,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "Slovenia",
+      "gii_rank": 34,
+      "iso2": "SI",
+      "national_ip_offices": "The national IP office of Slovenia is the Slovenian Intellectual Property Office (SIPO). The office is located in Ljubljana.",
+      "snapshot_at": "2026-05-19T16:14:50+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "Solomon Islands",
+      "gii_rank": null,
+      "iso2": "SB",
+      "national_ip_offices": "The national IP office of Solomon Islands is the Registrar-General's Office at the Ministry of Justice and Legal Affairs. The office is located in Honiara.",
+      "snapshot_at": "2026-05-19T16:14:50+00:00",
+      "wipo_member_since": 2019,
+      "wipo_treaty_count": 2
+    },
+    {
+      "country_name": "Somalia",
+      "gii_rank": null,
+      "iso2": "SO",
+      "national_ip_offices": "The national IP offices of Somalia are the Copyright Office at the Ministry of Culture and Higher Education and the Patents and Trademarks Office at the Ministry of Commerce and Industry. The offices are located in Mogadishu.",
+      "snapshot_at": "2026-05-19T16:14:50+00:00",
+      "wipo_member_since": 1982,
+      "wipo_treaty_count": null
+    },
+    {
+      "country_name": "South Africa",
+      "gii_rank": 69,
+      "iso2": "ZA",
+      "national_ip_offices": "The national IP office of South Africa is the Companies and Intellectual Property Commission (CIPC). The office is located in Pretoria.",
+      "snapshot_at": "2026-05-19T16:14:51+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 9
+    },
+    {
+      "country_name": "Spain",
+      "gii_rank": 28,
+      "iso2": "ES",
+      "national_ip_offices": "The national IP offices of Spain are the Ministry of Culture and the Spanish Patent and Trademark Office (OEPM). The offices are located in Madrid.",
+      "snapshot_at": "2026-05-19T16:14:51+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 23
+    },
+    {
+      "country_name": "Sri Lanka",
+      "gii_rank": 89,
+      "iso2": "LK",
+      "national_ip_offices": "The national IP office of Sri Lanka is the National Intellectual Property Office of Sri Lanka. The office is located in Colombo.",
+      "snapshot_at": "2026-05-19T16:14:51+00:00",
+      "wipo_member_since": 1978,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Sudan",
+      "gii_rank": null,
+      "iso2": "SD",
+      "national_ip_offices": "The national IP offices of Sudan are the Council for Protection of Copyright and Related Rights and the Registrar General of Intellectual Property Administration. The offices are located in Omdurman and Khartoum respectively.",
+      "snapshot_at": "2026-05-19T16:14:51+00:00",
+      "wipo_member_since": 1974,
+      "wipo_treaty_count": 9
+    },
+    {
+      "country_name": "Suriname",
+      "gii_rank": null,
+      "iso2": "SR",
+      "national_ip_offices": "The national IP office of Suriname is the Intellectual Property Office of Suriname. The office is located in Paramaribo.",
+      "snapshot_at": "2026-05-19T16:14:52+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 5
+    },
+    {
+      "country_name": "Sweden",
+      "gii_rank": 2,
+      "iso2": "SE",
+      "national_ip_offices": "The national IP office of Sweden is the Swedish Intellectual Property Office (PRV). The office is located in Stockholm.",
+      "snapshot_at": "2026-05-19T16:14:52+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": null
+    },
+    {
+      "country_name": "Switzerland",
+      "gii_rank": 1,
+      "iso2": "CH",
+      "national_ip_offices": "The national IP office of Switzerland is the Swiss Federal Institute of Intellectual Property (IPI). The office is located in Bern.",
+      "snapshot_at": "2026-05-19T16:14:52+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 26
+    },
+    {
+      "country_name": "Syrian Arab Republic",
+      "gii_rank": null,
+      "iso2": "SY",
+      "national_ip_offices": "The national IP offices of the Syrian Arab Republic are the Copyright Office at the Ministry of Culture and the Directorate of Industrial and Commercial Property Protection (DCIP). The offices are located in Damascus.",
+      "snapshot_at": "2026-05-19T16:14:52+00:00",
+      "wipo_member_since": 2004,
+      "wipo_treaty_count": 11
+    },
+    {
+      "country_name": "Tajikistan",
+      "gii_rank": 107,
+      "iso2": "TJ",
+      "national_ip_offices": "The national IP offices of Tajikistan are the Agency of Copyright and Related Rights and the National Center for Patents and Information (NCPI). The offices are located in Dushanbe.",
+      "snapshot_at": "2026-05-19T16:14:52+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 17
+    },
+    {
+      "country_name": "Thailand",
+      "gii_rank": 41,
+      "iso2": "TH",
+      "national_ip_offices": "The national IP office of Thailand is the Department of Intellectual Property (DIP) at the Ministry of Commerce. The office is located in Nonthaburi.",
+      "snapshot_at": "2026-05-19T16:14:53+00:00",
+      "wipo_member_since": 1989,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Timor-Leste",
+      "gii_rank": null,
+      "iso2": "TL",
+      "national_ip_offices": "The national IP office of Timor-Leste is the Permanent Mission of the Democratic Republic of Timor-Leste to the United Nations Office at Geneva. The office is located in Geneva, Switzerland.",
+      "snapshot_at": "2026-05-19T16:14:53+00:00",
+      "wipo_member_since": 2017,
+      "wipo_treaty_count": null
+    },
+    {
+      "country_name": "Togo",
+      "gii_rank": 117,
+      "iso2": "TG",
+      "national_ip_offices": "The national IP offices of Togo are the Togolese Office of Copyright and Neighboring Rights (BUTODRA) and the National Institute for Industrial Property and Technology (INPIT). The offices are located in Lomé.",
+      "snapshot_at": "2026-05-19T16:14:53+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 16
+    },
+    {
+      "country_name": "Tonga",
+      "gii_rank": null,
+      "iso2": "TO",
+      "national_ip_offices": "The national IP office of Tonga is the Intellectual Property Office at the Ministry of Trade and Economic Development. The office is located in Nuku’Alofa.",
+      "snapshot_at": "2026-05-19T16:14:54+00:00",
+      "wipo_member_since": 2001,
+      "wipo_treaty_count": 2
+    },
+    {
+      "country_name": "Trinidad and Tobago",
+      "gii_rank": 108,
+      "iso2": "TT",
+      "national_ip_offices": "The national IP office of Trinidad and Tobago is the Intellectual Property Office - Office of the Attorney General and Ministry of Legal Affairs. The office is located in Port of Spain.",
+      "snapshot_at": "2026-05-19T16:14:54+00:00",
+      "wipo_member_since": 1988,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Tunisia",
+      "gii_rank": 81,
+      "iso2": "TN",
+      "national_ip_offices": "The national IP offices of Tunisia are the Tunisian Organism for the Protection of Copyrights and Related Rights (OTDAV) and the National Institute for Standardization and Industrial Property (INNORPI). The offices are located in Tunis.",
+      "snapshot_at": "2026-05-19T16:14:54+00:00",
+      "wipo_member_since": 1975,
+      "wipo_treaty_count": 17
+    },
+    {
+      "country_name": "Turkmenistan",
+      "gii_rank": null,
+      "iso2": "TM",
+      "national_ip_offices": "The national IP office of Turkmenistan is the State Service for Intellectual Property at the Ministry of Finance and Economy of Turkmenistan. The office is located in Ashgabat.",
+      "snapshot_at": "2026-05-19T16:14:54+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 13
+    },
+    {
+      "country_name": "Tuvalu",
+      "gii_rank": null,
+      "iso2": "TV",
+      "national_ip_offices": "The national IP office of Tuvalu is the Office of the Attorney-General at the Ministry of Justice, Communications and Foreign Affairs. The office is located in Funafuti.",
+      "snapshot_at": "2026-05-19T16:14:55+00:00",
+      "wipo_member_since": 2014,
+      "wipo_treaty_count": 2
+    },
+    {
+      "country_name": "Türkiye",
+      "gii_rank": 37,
+      "iso2": "TR",
+      "national_ip_offices": "The national IP offices of Türkiye are the Directorate General for Copyright at the Ministry of Culture and Tourism and the Turkish Patent and Trademark Office (TURKPATENT). The offices are located in Ankara.",
+      "snapshot_at": "2026-05-19T16:14:55+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 20
+    },
+    {
+      "country_name": "Uganda",
+      "gii_rank": 121,
+      "iso2": "UG",
+      "national_ip_offices": "The national IP office of Uganda is the Uganda Registration Services Bureau (URSB). The office is located in Kampala.",
+      "snapshot_at": "2026-05-19T16:14:55+00:00",
+      "wipo_member_since": 1973,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Ukraine",
+      "gii_rank": 60,
+      "iso2": "UA",
+      "national_ip_offices": "The national IP office of Ukraine is the Ukrainian National Office for Intellectual Property and Innovations (UANIPIO). The office is located in Kyiv.",
+      "snapshot_at": "2026-05-19T16:14:55+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 21
+    },
+    {
+      "country_name": "United Arab Emirates",
+      "gii_rank": 32,
+      "iso2": "AE",
+      "national_ip_offices": "The national IP offices of the United Arab Emirates are the Copyrights and Related Rights Department, the Innovation Development and Industrial Property Department and the Trademark Department at the Ministry of Economy. The office is located in Abu Dhabi.",
+      "snapshot_at": "2026-05-19T16:14:55+00:00",
+      "wipo_member_since": 1974,
+      "wipo_treaty_count": 12
+    },
+    {
+      "country_name": "United Kingdom",
+      "gii_rank": 5,
+      "iso2": "GB",
+      "national_ip_offices": "The national IP office of the United Kingdom is the Intellectual Property Office. The office is located in Newport, South Wales.",
+      "snapshot_at": "2026-05-19T16:14:56+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 22
+    },
+    {
+      "country_name": "United Republic of Tanzania",
+      "gii_rank": 120,
+      "iso2": "TZ",
+      "national_ip_offices": "The national IP offices of the United Republic of Tanzania are:",
+      "snapshot_at": "2026-05-19T16:14:56+00:00",
+      "wipo_member_since": 1983,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "United States of America",
+      "gii_rank": 3,
+      "iso2": "US",
+      "national_ip_offices": "The national IP offices of the United States of America are the United States Copyright Office and the United States Patent and Trademark Office (USPTO). The offices are located in Washington, D.C. and Alexandria, VA respectively.",
+      "snapshot_at": "2026-05-19T16:00:01+00:00",
+      "wipo_member_since": 1970,
+      "wipo_treaty_count": 18
+    },
+    {
+      "country_name": "Uruguay",
+      "gii_rank": 62,
+      "iso2": "UY",
+      "national_ip_offices": "The national IP offices of Uruguay are the Ministry of Education and Culture - National Library of Uruguay and the National Directorate of Industrial Property (DNPI). The offices are located in Montevideo.",
+      "snapshot_at": "2026-05-19T16:14:56+00:00",
+      "wipo_member_since": 1979,
+      "wipo_treaty_count": 19
+    },
+    {
+      "country_name": "Uzbekistan",
+      "gii_rank": 83,
+      "iso2": "UZ",
+      "national_ip_offices": "The national IP office of Uzbekistan is the Ministry of Justice of the Republic of Uzbekistan. The office is located in Tashkent.",
+      "snapshot_at": "2026-05-19T16:14:56+00:00",
+      "wipo_member_since": 1991,
+      "wipo_treaty_count": 19
+    },
+    {
+      "country_name": "Vanuatu",
+      "gii_rank": null,
+      "iso2": "VU",
+      "national_ip_offices": "The national IP office of Vanuatu is Vanuatu Intellectual Property Office. The office is located in Port Vila.",
+      "snapshot_at": "2026-05-19T16:14:57+00:00",
+      "wipo_member_since": 2012,
+      "wipo_treaty_count": 6
+    },
+    {
+      "country_name": "Venezuela (Bolivarian Republic of)",
+      "gii_rank": null,
+      "iso2": "VE",
+      "national_ip_offices": "The national IP office of the Bolivarian Republic of Venezuela is the Autonomous Service of Intellectual Property (SAPI). The office is located in Caracas.",
+      "snapshot_at": "2026-05-19T16:14:57+00:00",
+      "wipo_member_since": 1984,
+      "wipo_treaty_count": 7
+    },
+    {
+      "country_name": "Viet Nam",
+      "gii_rank": 44,
+      "iso2": "VN",
+      "national_ip_offices": "The national IP offices of Viet Nam are the Copyright Office of Viet Nam (COV) and the Intellectual Property Office of Viet Nam (IP Viet Nam). The offices are located in Hanoi.",
+      "snapshot_at": "2026-05-19T16:14:58+00:00",
+      "wipo_member_since": 1976,
+      "wipo_treaty_count": 14
+    },
+    {
+      "country_name": "Yemen",
+      "gii_rank": 128,
+      "iso2": "YE",
+      "national_ip_offices": "The national IP offices of Yemen are the Ministry of Culture and the Department of Intellectual Protection and Marks at the Ministry of Industry and Trade. The offices are located in Sana'a.",
+      "snapshot_at": "2026-05-19T16:14:57+00:00",
+      "wipo_member_since": 1979,
+      "wipo_treaty_count": 3
+    },
+    {
+      "country_name": "Zambia",
+      "gii_rank": 116,
+      "iso2": "ZM",
+      "national_ip_offices": "The national IP office of Zambia is the Patents and Companies Registration Agency (PACRA). The office is located in Lusaka.",
+      "snapshot_at": "2026-05-19T16:14:58+00:00",
+      "wipo_member_since": 1977,
+      "wipo_treaty_count": 10
+    },
+    {
+      "country_name": "Zimbabwe",
+      "gii_rank": 118,
+      "iso2": "ZW",
+      "national_ip_offices": "The national IP office of Zimbabwe is the Companies and Intellectual Property Office of Zimbabwe (CIPZ). The office is located in Harare.",
+      "snapshot_at": "2026-05-19T16:14:58+00:00",
+      "wipo_member_since": 1981,
+      "wipo_treaty_count": 8
+    }
+  ],
+  "schema_version": 1,
+  "total_profiles": 194
+}

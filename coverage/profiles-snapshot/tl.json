@@ -1,0 +1,54 @@
+{
+  "country_name": "Timor-Leste",
+  "gii_rank": null,
+  "gii_ranking_text": "_(not present)_",
+  "iso2": "TL",
+  "lead_summary": "Explore IP Landscape:\nTimor-Leste has been a member of WIPO since 2017 and is a signatory to 1 WIPO treaty.\nThe national IP office of Timor-Leste is the Permanent Mission of the Democratic Republic of Timor-Leste to the United Nations Office at Geneva. The office is located in Geneva, Switzerland.",
+  "national_ip_offices": "The national IP office of Timor-Leste is the Permanent Mission of the Democratic Republic of Timor-Leste to the United Nations Office at Geneva. The office is located in Geneva, Switzerland.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=TL"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=TL"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/tl.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=TL"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=tl"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:53+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/tl",
+  "wipo_member_since": 2017,
+  "wipo_treaty_count": null
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Nepal",
+  "gii_rank": 109,
+  "gii_ranking_text": "Nepal ranks 109th among the 136 economies featured in the GII 2024.",
+  "iso2": "NP",
+  "lead_summary": "Explore IP Landscape:\nNepal has been a member of WIPO since 1997 and is a signatory to over 3 WIPO treaties.\nThe national IP offices of Nepal are the Nepal Copyright Registrar's Office and the Department of Industries at the Ministry of Industry, Commerce and Supplies. The offices are located in Kathmandu.",
+  "national_ip_offices": "The national IP offices of Nepal are the Nepal Copyright Registrar's Office and the Department of Industries at the Ministry of Industry, Commerce and Supplies. The offices are located in Kathmandu.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/NP"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=NP"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=NP"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/np.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/np.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=NP"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=np"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:40+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/np",
+  "wipo_member_since": 1997,
+  "wipo_treaty_count": 3
+}

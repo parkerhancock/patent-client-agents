@@ -1,0 +1,54 @@
+{
+  "country_name": "Botswana",
+  "gii_rank": 87,
+  "gii_ranking_text": "Botswana ranks 87th among the 136 economies featured in the GII 2024.",
+  "iso2": "BW",
+  "lead_summary": "Explore IP Landscape:\nBotswana has been a member of WIPO since 1998 and is a signatory to over 9 WIPO treaties.\nThe national IP office of Botswana is the Companies and Intellectual Property Authority (CIPA). The office is located in Gaborone.",
+  "national_ip_offices": "The national IP office of Botswana is the Companies and Intellectual Property Authority (CIPA). The office is located in Gaborone.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/BW"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=BW"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=BW"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/bw.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/bw.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=BW&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=BW"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=bw"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:11+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/bw",
+  "wipo_member_since": 1998,
+  "wipo_treaty_count": 9
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Slovakia",
+  "gii_rank": 46,
+  "gii_ranking_text": "Slovakia ranks 46th among the 136 economies featured in the GII 2024.",
+  "iso2": "SK",
+  "lead_summary": "Explore IP Landscape:\nSlovakia has been a member of WIPO since 1993 and is a signatory to over 21 WIPO treaties.\nThe national IP offices of Slovakia are the Copyright Unit at the Ministry of Culture and the Industrial Property Office of the Slovak Republic. The offices are located in Bratislava and Banská Bystrica respectively.",
+  "national_ip_offices": "The national IP offices of Slovakia are the Copyright Unit at the Ministry of Culture and the Industrial Property Office of the Slovak Republic. The offices are located in Bratislava and Banská Bystrica respectively.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/SK"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=SK"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=SK"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/sk.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/sk.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=SK&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=SK"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=sk"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:49+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/sk",
+  "wipo_member_since": 1993,
+  "wipo_treaty_count": 21
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Costa Rica",
+  "gii_rank": 70,
+  "gii_ranking_text": "Costa Rica ranks 70th among the 136 economies featured in the GII 2024.",
+  "iso2": "CR",
+  "lead_summary": "Explore IP Landscape:\nCosta Rica has been a member of WIPO since 1981 and is a signatory to over 16 WIPO treaties.\nThe national IP office of Costa Rica is the Registro Nacional. The office is located in San José.",
+  "national_ip_offices": "The national IP office of Costa Rica is the Registro Nacional. The office is located in San José.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/CR"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=CR"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=CR"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/cr.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/cr.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=CR&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=CR"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=cr"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:18+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/cr",
+  "wipo_member_since": 1981,
+  "wipo_treaty_count": 16
+}

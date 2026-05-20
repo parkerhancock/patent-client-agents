@@ -1,0 +1,54 @@
+{
+  "country_name": "Bosnia and Herzegovina",
+  "gii_rank": 80,
+  "gii_ranking_text": "Bosnia and Herzegovina ranks 80th among the 136 economies featured in the GII 2024.",
+  "iso2": "BA",
+  "lead_summary": "Explore IP Landscape:\nBosnia and Herzegovina has been a member of WIPO since 1992 and is a signatory to over 27 WIPO treaties.\nThe national IP office of Bosnia and Herzegovina is the Institute for Intellectual Property of Bosnia and Herzegovina. The office is located in Mostar.",
+  "national_ip_offices": "The national IP office of Bosnia and Herzegovina is the Institute for Intellectual Property of Bosnia and Herzegovina. The office is located in Mostar.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/BA"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=BA"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=BA"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ba.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ba.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=BA&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=BA"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ba"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:11+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ba",
+  "wipo_member_since": 1992,
+  "wipo_treaty_count": 27
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Niger",
+  "gii_rank": 132,
+  "gii_ranking_text": "Niger ranks 132nd among the 136 economies featured in the GII 2024.",
+  "iso2": "NE",
+  "lead_summary": "Explore IP Landscape:\nNiger has been a member of WIPO since 1975 and is a signatory to over 6 WIPO treaties.\nThe national IP offices of Niger are Niger Copyright Office (BNDA) and the National Agency for Industrial Property and Promotion of Innovation. The offices are located in Niamey.",
+  "national_ip_offices": "The national IP offices of Niger are Niger Copyright Office (BNDA) and the National Agency for Industrial Property and Promotion of Innovation. The offices are located in Niamey.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/NE"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=NE"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=NE"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ne.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ne.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=NE&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=NE"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ne"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:42+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ne",
+  "wipo_member_since": 1975,
+  "wipo_treaty_count": 6
+}

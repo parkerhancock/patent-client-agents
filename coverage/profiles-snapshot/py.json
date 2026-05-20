@@ -1,0 +1,54 @@
+{
+  "country_name": "Paraguay",
+  "gii_rank": 93,
+  "gii_ranking_text": "Paraguay ranks 93rd among the 136 economies featured in the GII 2024.",
+  "iso2": "PY",
+  "lead_summary": "Explore IP Landscape:\nParaguay has been a member of WIPO since 1987 and is a signatory to over 15 WIPO treaties.\nThe national IP office of Paraguay is the National Directorate of Intellectual Property (DINAPI). The office is located in Asunción.",
+  "national_ip_offices": "The national IP office of Paraguay is the National Directorate of Intellectual Property (DINAPI). The office is located in Asunción.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/PY"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=PY"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=PY"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/py.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/py.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=PY"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=py"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:44+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/py",
+  "wipo_member_since": 1987,
+  "wipo_treaty_count": 15
+}

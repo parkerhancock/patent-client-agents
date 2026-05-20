@@ -1,0 +1,54 @@
+{
+  "country_name": "Brazil",
+  "gii_rank": 50,
+  "gii_ranking_text": "Brazil ranks 50th among the 136 economies featured in the GII 2024.",
+  "iso2": "BR",
+  "lead_summary": "Explore IP Landscape:\nBrazil has been a member of WIPO since 1975 and is a signatory to over 17 WIPO treaties.\nWIPO has an external office located in Rio de Janeiro.\nThe national IP offices of Brazil are the Copyright Office at the Ministry of Culture and National Institute of Industrial Property (INPI). The offices are located in Rio de Janeiro.",
+  "national_ip_offices": "WIPO has an external office located in Rio de Janeiro. The national IP offices of Brazil are the Copyright Office at the Ministry of Culture and National Institute of Industrial Property (INPI). The offices are located in Rio de Janeiro.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/BR"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=BR"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=BR"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/br.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/br.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=BR&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=BR"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=br"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:12+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/br",
+  "wipo_member_since": 1975,
+  "wipo_treaty_count": 17
+}

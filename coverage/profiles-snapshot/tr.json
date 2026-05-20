@@ -1,0 +1,54 @@
+{
+  "country_name": "Türkiye",
+  "gii_rank": 37,
+  "gii_ranking_text": "Türkiye ranks 37th among the 136 economies featured in the GII 2024.",
+  "iso2": "TR",
+  "lead_summary": "Explore IP Landscape:\nTürkiye has been a member of WIPO since 1976 and is a signatory to over 20 WIPO treaties.\nThe national IP offices of Türkiye are the Directorate General for Copyright at the Ministry of Culture and Tourism and the Turkish Patent and Trademark Office (TURKPATENT). The offices are located in Ankara.",
+  "national_ip_offices": "The national IP offices of Türkiye are the Directorate General for Copyright at the Ministry of Culture and Tourism and the Turkish Patent and Trademark Office (TURKPATENT). The offices are located in Ankara.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/TR"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=TR"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=TR"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/tr.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/tr.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=TR&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=TR"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=tr"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:55+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/tr",
+  "wipo_member_since": 1976,
+  "wipo_treaty_count": 20
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Mongolia",
+  "gii_rank": 67,
+  "gii_ranking_text": "Mongolia ranks 67th among the 136 economies featured in the GII 2024.",
+  "iso2": "MN",
+  "lead_summary": "Explore IP Landscape:\nMongolia has been a member of WIPO since 1979 and is a signatory to over 15 WIPO treaties.\nThe national IP office of Mongolia is the Intellectual Property Office (IPOM). The office is located in Ulaanbaatar.",
+  "national_ip_offices": "The national IP office of Mongolia is the Intellectual Property Office (IPOM). The office is located in Ulaanbaatar.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/MN"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=MN"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=MN"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/mn.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/mn.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=MN&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=MN"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=mn"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:39+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/mn",
+  "wipo_member_since": 1979,
+  "wipo_treaty_count": 15
+}

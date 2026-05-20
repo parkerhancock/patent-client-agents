@@ -1,0 +1,54 @@
+{
+  "country_name": "Guinea-Bissau",
+  "gii_rank": null,
+  "gii_ranking_text": "_(not present)_",
+  "iso2": "GW",
+  "lead_summary": "Explore IP Landscape:\nGuinea-Bissau has been a member of WIPO since 1988 and is a signatory to over 3 WIPO treaties.\nThe national IP offices of Guinea-Bissau are the Guinean Copyright Society and the General Directorate of Industrial Property. The offices are located in Bissau.",
+  "national_ip_offices": "The national IP offices of Guinea-Bissau are the Guinean Copyright Society and the General Directorate of Industrial Property. The offices are located in Bissau.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=GW"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=GW"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/gw.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=GW&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=GW"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=gw"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:27+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/gw",
+  "wipo_member_since": 1988,
+  "wipo_treaty_count": 3
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Nicaragua",
+  "gii_rank": 124,
+  "gii_ranking_text": "Nicaragua ranks 124th among the 136 economies featured in the GII 2024.",
+  "iso2": "NI",
+  "lead_summary": "Explore IP Landscape:\nNicaragua has been a member of WIPO since 1985 and is a signatory to over 15 WIPO treaties.\nThe national IP office of Nicaragua is the Intellectual Property Registry (RPI). The office is located in Managua.",
+  "national_ip_offices": "The national IP office of Nicaragua is the Intellectual Property Registry (RPI). The office is located in Managua.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/NI"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=NI"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=NI"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ni.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ni.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=NI&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=NI"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ni"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:41+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ni",
+  "wipo_member_since": 1985,
+  "wipo_treaty_count": 15
+}

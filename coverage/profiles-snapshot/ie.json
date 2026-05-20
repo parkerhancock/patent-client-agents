@@ -1,0 +1,54 @@
+{
+  "country_name": "Ireland",
+  "gii_rank": 19,
+  "gii_ranking_text": "Ireland ranks 19th among the 136 economies featured in the GII 2024.",
+  "iso2": "IE",
+  "lead_summary": "Explore IP Landscape:\nIreland has been a member of WIPO since 1970 and is a signatory to over 19 WIPO treaties.\nThe national IP office of Ireland is the Intellectual Property Office of Ireland (IPOI). The office is located in Kilkenny.",
+  "national_ip_offices": "The national IP office of Ireland is the Intellectual Property Office of Ireland (IPOI). The office is located in Kilkenny.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/IE"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=IE"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=IE"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ie.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ie.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=IE&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=IE"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ie"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:30+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ie",
+  "wipo_member_since": 1970,
+  "wipo_treaty_count": 19
+}

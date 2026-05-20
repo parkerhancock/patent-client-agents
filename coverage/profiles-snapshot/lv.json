@@ -1,0 +1,54 @@
+{
+  "country_name": "Latvia",
+  "gii_rank": 42,
+  "gii_ranking_text": "Latvia ranks 42nd among the 136 economies featured in the GII 2024.",
+  "iso2": "LV",
+  "lead_summary": "Explore IP Landscape:\nLatvia has been a member of WIPO since 1993 and is a signatory to over 17 WIPO treaties.\nThe national IP offices of Latvia are the Copyright Unit of the Ministry of Culture and the Patent Office of the Republic of Latvia. The office is located in Riga.",
+  "national_ip_offices": "The national IP offices of Latvia are the Copyright Unit of the Ministry of Culture and the Patent Office of the Republic of Latvia. The office is located in Riga.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/LV"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=LV"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=LV"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/lv.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/lv.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=LV&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=LV"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=lv"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:33+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/lv",
+  "wipo_member_since": 1993,
+  "wipo_treaty_count": 17
+}

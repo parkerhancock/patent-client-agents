@@ -1,0 +1,54 @@
+{
+  "country_name": "Jordan",
+  "gii_rank": 73,
+  "gii_ranking_text": "Jordan ranks 73rd among the 136 economies featured in the GII 2024.",
+  "iso2": "JO",
+  "lead_summary": "Explore IP Landscape:\nJordan has been a member of WIPO since 1972 and is a signatory to over 11 WIPO treaties.\nThe national IP offices of Jordan are the Department of the National Library at the Ministry of Culture and the Industrial Property Protection Directorate. The offices are located in Amman.",
+  "national_ip_offices": "The national IP offices of Jordan are the Department of the National Library at the Ministry of Culture and the Industrial Property Protection Directorate. The offices are located in Amman.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/JO"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=JO"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=JO"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/jo.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/jo.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=JO&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=JO"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=jo"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:32+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/jo",
+  "wipo_member_since": 1972,
+  "wipo_treaty_count": 11
+}

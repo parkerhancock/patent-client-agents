@@ -1,0 +1,54 @@
+{
+  "country_name": "Burkina Faso",
+  "gii_rank": 129,
+  "gii_ranking_text": "Burkina Faso ranks 129th among the 136 economies featured in the GII 2024.",
+  "iso2": "BF",
+  "lead_summary": "Explore IP Landscape:\nBurkina Faso has been a member of WIPO since 1975 and is a signatory to over 14 WIPO treaties.\nThe national IP offices of Burkina Faso are the Burkinabé Copyright Office (BBDA) and the National Center for Industrial Property (CNPI). The offices are located in Ouagadougou.",
+  "national_ip_offices": "The national IP offices of Burkina Faso are the Burkinabé Copyright Office (BBDA) and the National Center for Industrial Property (CNPI). The offices are located in Ouagadougou.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/BF"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=BF"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=BF"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/bf.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/bf.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=BF&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=BF"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=bf"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:14+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/bf",
+  "wipo_member_since": 1975,
+  "wipo_treaty_count": 14
+}

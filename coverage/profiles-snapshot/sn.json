@@ -1,0 +1,54 @@
+{
+  "country_name": "Senegal",
+  "gii_rank": 92,
+  "gii_ranking_text": "Senegal ranks 92nd among the 136 economies featured in the GII 2024.",
+  "iso2": "SN",
+  "lead_summary": "Explore IP Landscape:\nSenegal has been a member of WIPO since 1970 and is a signatory to over 16 WIPO treaties.\nThe national IP offices of Senegal are the Ministry of Culture, Société Sénégalaise du Droit d’Auteur et des Droits Voisins (SODAV) and Senegalese Agency for Industrial Property and Technological Innovation (ASPIT). The offices are located in Dakar.",
+  "national_ip_offices": "The national IP offices of Senegal are the Ministry of Culture, Société Sénégalaise du Droit d’Auteur et des Droits Voisins (SODAV) and Senegalese Agency for Industrial Property and Technological Innovation (ASPIT). The offices are located in Dakar.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/SN"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=SN"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=SN"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/sn.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/sn.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=SN&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=SN"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=sn"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:48+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/sn",
+  "wipo_member_since": 1970,
+  "wipo_treaty_count": 16
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Barbados",
+  "gii_rank": 77,
+  "gii_ranking_text": "Barbados ranks 77th among the 136 economies featured in the GII 2024.",
+  "iso2": "BB",
+  "lead_summary": "Explore IP Landscape:\nBarbados has been a member of WIPO since 1979 and is a signatory to over 10 WIPO treaties.\nThe national IP office of Barbados is the Corporate Affairs and Intellectual Property Office (CAIPO). The office is located in Warrens.",
+  "national_ip_offices": "The national IP office of Barbados is the Corporate Affairs and Intellectual Property Office (CAIPO). The office is located in Warrens.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/BB"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=BB"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=BB"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/bb.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/bb.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=BB&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=BB"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=bb"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:09+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/bb",
+  "wipo_member_since": 1979,
+  "wipo_treaty_count": 10
+}

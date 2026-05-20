@@ -1,0 +1,54 @@
+{
+  "country_name": "Jamaica",
+  "gii_rank": 79,
+  "gii_ranking_text": "Jamaica ranks 79th among the 136 economies featured in the GII 2024.",
+  "iso2": "JM",
+  "lead_summary": "Explore IP Landscape:\nJamaica has been a member of WIPO since 1978 and is a signatory to over 15 WIPO treaties.\nThe national IP office of Jamaica is the Jamaica Intellectual Property Office (JIPO). The office is located in Kingston.",
+  "national_ip_offices": "The national IP office of Jamaica is the Jamaica Intellectual Property Office (JIPO). The office is located in Kingston.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/JM"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=JM"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=JM"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/jm.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/jm.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=JM&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=JM"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=jm"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:31+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/jm",
+  "wipo_member_since": 1978,
+  "wipo_treaty_count": 15
+}

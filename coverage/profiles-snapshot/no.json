@@ -1,0 +1,54 @@
+{
+  "country_name": "Norway",
+  "gii_rank": 21,
+  "gii_ranking_text": "Norway ranks 21st among the 136 economies featured in the GII 2024.",
+  "iso2": "NO",
+  "lead_summary": "Explore IP Landscape:\nNorway has been a member of WIPO since 1974 and is a signatory to over 15 WIPO treaties.\nThe national IP office of Norway is the Norwegian Industrial Property Office (NIPO). The office is located in Oslo.",
+  "national_ip_offices": "The national IP office of Norway is the Norwegian Industrial Property Office (NIPO). The office is located in Oslo.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/NO"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=NO"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=NO"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/no.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/no.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=NO&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=NO"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=no"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:43+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/no",
+  "wipo_member_since": 1974,
+  "wipo_treaty_count": 15
+}

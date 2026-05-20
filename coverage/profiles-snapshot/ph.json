@@ -1,0 +1,54 @@
+{
+  "country_name": "Philippines",
+  "gii_rank": 53,
+  "gii_ranking_text": "Philippines ranks 53rd among the 136 economies featured in the GII 2024.",
+  "iso2": "PH",
+  "lead_summary": "Explore IP Landscape:\nThe Philippines has been a member of WIPO since 1980 and is a signatory to over 12 WIPO treaties.\nThe national IP office of the Philippines is the Intellectual Property Office of the Philippines (IPOPHL). The office is located in Taguig.",
+  "national_ip_offices": "The national IP office of the Philippines is the Intellectual Property Office of the Philippines (IPOPHL). The office is located in Taguig.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/PH"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=PH"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=PH"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ph.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ph.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=PH&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=PH"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ph"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:44+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ph",
+  "wipo_member_since": 1980,
+  "wipo_treaty_count": 12
+}

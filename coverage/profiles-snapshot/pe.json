@@ -1,0 +1,54 @@
+{
+  "country_name": "Peru",
+  "gii_rank": 75,
+  "gii_ranking_text": "Peru ranks 75th among the 136 economies featured in the GII 2024.",
+  "iso2": "PE",
+  "lead_summary": "Explore IP Landscape:\nPeru has been a member of WIPO since 1980 and is a signatory to over 21 WIPO treaties.\nThe national IP office of Peru is the National Institute for the Defense of Competition and Protection of Intellectual Property (INDECOPI). The office is located in Lima.",
+  "national_ip_offices": "The national IP office of Peru is the National Institute for the Defense of Competition and Protection of Intellectual Property (INDECOPI). The office is located in Lima.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/PE"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=PE"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=PE"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/pe.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/pe.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=PE&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=PE"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=pe"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:44+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/pe",
+  "wipo_member_since": 1980,
+  "wipo_treaty_count": 21
+}

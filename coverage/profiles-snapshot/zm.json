@@ -1,0 +1,54 @@
+{
+  "country_name": "Zambia",
+  "gii_rank": 116,
+  "gii_ranking_text": "Zambia ranks 116th among the 136 economies featured in the GII 2024.",
+  "iso2": "ZM",
+  "lead_summary": "Explore IP Landscape:\nZambia has been a member of WIPO since 1977 and is a signatory to over 10 WIPO treaties.\nThe national IP office of Zambia is the Patents and Companies Registration Agency (PACRA). The office is located in Lusaka.",
+  "national_ip_offices": "The national IP office of Zambia is the Patents and Companies Registration Agency (PACRA). The office is located in Lusaka.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/ZM"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=ZM"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=ZM"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/zm.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/zm.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=ZM&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=ZM"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=zm"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:58+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/zm",
+  "wipo_member_since": 1977,
+  "wipo_treaty_count": 10
+}

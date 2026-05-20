@@ -1,0 +1,54 @@
+{
+  "country_name": "Canada",
+  "gii_rank": 14,
+  "gii_ranking_text": "Canada ranks 14th among the 136 economies featured in the GII 2024.",
+  "iso2": "CA",
+  "lead_summary": "Explore IP Landscape:\nCanada has been a member of WIPO since 1970 and is a signatory to over 17 WIPO treaties.\nThe national IP office of Canada is the Canadian Intellectual Property Office (CIPO). The office is located in Gatineau.",
+  "national_ip_offices": "The national IP office of Canada is the Canadian Intellectual Property Office (CIPO). The office is located in Gatineau.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/CA"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=CA"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=CA"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ca.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ca.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=CA&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=CA"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ca"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:15+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ca",
+  "wipo_member_since": 1970,
+  "wipo_treaty_count": 17
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Mexico",
+  "gii_rank": 56,
+  "gii_ranking_text": "Mexico ranks 56th among the 136 economies featured in the GII 2024.",
+  "iso2": "MX",
+  "lead_summary": "Explore IP Landscape:\nMexico has been a member of WIPO since 1975 and is a signatory to over 22 WIPO treaties.\nThe national IP offices of Mexico are the National Institute of Copyright (INDAUTOR) and the Mexican Institute of Industrial Property. The offices are located in Mexico City.",
+  "national_ip_offices": "The national IP offices of Mexico are the National Institute of Copyright (INDAUTOR) and the Mexican Institute of Industrial Property. The offices are located in Mexico City.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/MX"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=MX"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=MX"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/mx.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/mx.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=MX&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=MX"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=mx"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:39+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/mx",
+  "wipo_member_since": 1975,
+  "wipo_treaty_count": 22
+}

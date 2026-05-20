@@ -1,0 +1,54 @@
+{
+  "country_name": "Morocco",
+  "gii_rank": 66,
+  "gii_ranking_text": "Morocco ranks 66th among the 136 economies featured in the GII 2024.",
+  "iso2": "MA",
+  "lead_summary": "Explore IP Landscape:\nMorocco has been a member of WIPO since 1971 and is a signatory to over 22 WIPO treaties.\nThe national IP offices of Morocco are the Copyright Office of Morocco and the Moroccan Industrial and Commercial Property Office (OMPIC). The offices are located in Rabat and Casablanca respectively.",
+  "national_ip_offices": "The national IP offices of Morocco are the Copyright Office of Morocco and the Moroccan Industrial and Commercial Property Office (OMPIC). The offices are located in Rabat and Casablanca respectively.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/MA"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=MA"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=MA"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ma.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ma.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=MA&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=MA"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ma"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:39+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ma",
+  "wipo_member_since": 1971,
+  "wipo_treaty_count": 22
+}

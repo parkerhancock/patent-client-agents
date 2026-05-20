@@ -1,0 +1,54 @@
+{
+  "country_name": "Argentina",
+  "gii_rank": 76,
+  "gii_ranking_text": "Argentina ranks 76th among the 136 economies featured in the GII 2024.",
+  "iso2": "AR",
+  "lead_summary": "Explore IP Landscape:\nArgentina has been a member of WIPO since 1980 and is a signatory to over 14 WIPO treaties.\nThe national IP offices of Argentina are the National Directorate of Author’s Rights and the National Institute of Industrial Property (INPI). The offices are located in Buenos Aires.",
+  "national_ip_offices": "The national IP offices of Argentina are the National Directorate of Author’s Rights and the National Institute of Industrial Property (INPI). The offices are located in Buenos Aires.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/AR"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=AR"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=AR"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ar.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ar.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=AR"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ar"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:06+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ar",
+  "wipo_member_since": 1980,
+  "wipo_treaty_count": 14
+}

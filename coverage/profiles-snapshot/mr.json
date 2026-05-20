@@ -1,0 +1,54 @@
+{
+  "country_name": "Mauritania",
+  "gii_rank": 126,
+  "gii_ranking_text": "Mauritania ranks 126th among the 136 economies featured in the GII 2024.",
+  "iso2": "MR",
+  "lead_summary": "Explore IP Landscape:\nMauritania has been a member of WIPO since 1976 and is a signatory to over 6 WIPO treaties.\nThe national IP offices of Mauritania are the Cultural Cooperation and Intellectual Property Department, Directorate of Culture and Arts at the Ministry of Culture, Youth and Sports and the Directorate of Industry at the Ministry of Commerce, Industry, Handicraft and Tourism. The offices are located in Nouakchott.",
+  "national_ip_offices": "The national IP offices of Mauritania are the Cultural Cooperation and Intellectual Property Department, Directorate of Culture and Arts at the Ministry of Culture, Youth and Sports and the Directorate of Industry at the Ministry of Commerce, Industry, Handicraft and Tourism. The offices are located in Nouakchott.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/MR"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=MR"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=MR"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/mr.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/mr.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=MR&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=MR"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=mr"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:38+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/mr",
+  "wipo_member_since": 1976,
+  "wipo_treaty_count": 6
+}

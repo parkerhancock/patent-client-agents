@@ -1,0 +1,54 @@
+{
+  "country_name": "Bangladesh",
+  "gii_rank": 106,
+  "gii_ranking_text": "Bangladesh ranks 106th among the 136 economies featured in the GII 2024.",
+  "iso2": "BD",
+  "lead_summary": "Explore IP Landscape:\nBangladesh has been a member of WIPO since 1985 and is a signatory to over 3 WIPO treaties.\nThe national IP offices of Bangladesh are the Copyright Office of Bangladesh and the Department of Patents, Designs and Trademarks at the Ministry of Industries (DPDT). The offices are located in Dhaka.",
+  "national_ip_offices": "The national IP offices of Bangladesh are the Copyright Office of Bangladesh and the Department of Patents, Designs and Trademarks at the Ministry of Industries (DPDT). The offices are located in Dhaka.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/BD"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=BD"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=BD"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/bd.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/bd.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=BD"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=bd"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:00:15+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/bd",
+  "wipo_member_since": 1985,
+  "wipo_treaty_count": 3
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Guatemala",
+  "gii_rank": 122,
+  "gii_ranking_text": "Guatemala ranks 122nd among the 136 economies featured in the GII 2024.",
+  "iso2": "GT",
+  "lead_summary": "Explore IP Landscape:\nGuatemala has been a member of WIPO since 1983 and is a signatory to over 15 WIPO treaties.\nThe national IP office of Guatemala is the Registry of Intellectual Property of Guatemala. The office is located in Guatemala City.",
+  "national_ip_offices": "The national IP office of Guatemala is the Registry of Intellectual Property of Guatemala. The office is located in Guatemala City.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/GT"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=GT"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=GT"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/gt.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/gt.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=GT&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=GT"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=gt"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:27+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/gt",
+  "wipo_member_since": 1983,
+  "wipo_treaty_count": 15
+}

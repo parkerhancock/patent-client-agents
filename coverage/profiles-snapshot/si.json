@@ -1,0 +1,54 @@
+{
+  "country_name": "Slovenia",
+  "gii_rank": 34,
+  "gii_ranking_text": "Slovenia ranks 34th among the 136 economies featured in the GII 2024.",
+  "iso2": "SI",
+  "lead_summary": "Explore IP Landscape:\nSlovenia has been a member of WIPO since 1991 and is a signatory to over 22 WIPO treaties.\nThe national IP office of Slovenia is the Slovenian Intellectual Property Office (SIPO). The office is located in Ljubljana.",
+  "national_ip_offices": "The national IP office of Slovenia is the Slovenian Intellectual Property Office (SIPO). The office is located in Ljubljana.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/SI"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=SI"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=SI"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/si.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/si.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=SI&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=SI"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=si"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:50+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/si",
+  "wipo_member_since": 1991,
+  "wipo_treaty_count": 22
+}

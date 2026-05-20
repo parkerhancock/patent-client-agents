@@ -1,0 +1,54 @@
+{
+  "country_name": "United States of America",
+  "gii_rank": 3,
+  "gii_ranking_text": "United States of America ranks 3rd among the 136 economies featured in the GII 2024.",
+  "iso2": "US",
+  "lead_summary": "Explore IP Landscape:\nThe United States of America has been a member of WIPO since 1970 and is a signatory to over 18 WIPO treaties.\nThe national IP offices of the United States of America are the United States Copyright Office and the United States Patent and Trademark Office (USPTO). The offices are located in Washington, D.C. and Alexandria, VA respectively.",
+  "national_ip_offices": "The national IP offices of the United States of America are the United States Copyright Office and the United States Patent and Trademark Office (USPTO). The offices are located in Washington, D.C. and Alexandria, VA respectively.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/US"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=US"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=US"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/us.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/us.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=US&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=US"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=us"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:00:01+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/us",
+  "wipo_member_since": 1970,
+  "wipo_treaty_count": 18
+}

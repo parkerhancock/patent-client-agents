@@ -1,0 +1,54 @@
+{
+  "country_name": "Yemen",
+  "gii_rank": 128,
+  "gii_ranking_text": "Yemen ranks 128th among the 136 economies featured in the GII 2022.",
+  "iso2": "YE",
+  "lead_summary": "Explore IP Landscape:\nYemen has been a member of WIPO since 1979 and is a signatory to 3 WIPO treaties.\nThe national IP offices of Yemen are the Ministry of Culture and the Department of Intellectual Protection and Marks at the Ministry of Industry and Trade. The offices are located in Sana'a.",
+  "national_ip_offices": "The national IP offices of Yemen are the Ministry of Culture and the Department of Intellectual Protection and Marks at the Ministry of Industry and Trade. The offices are located in Sana'a.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/YE"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=YE"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=YE"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ye.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=YE"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ye"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:57+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ye",
+  "wipo_member_since": 1979,
+  "wipo_treaty_count": 3
+}

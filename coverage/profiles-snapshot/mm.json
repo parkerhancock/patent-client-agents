@@ -1,0 +1,54 @@
+{
+  "country_name": "Myanmar",
+  "gii_rank": 125,
+  "gii_ranking_text": "Myanmar ranks 125th among the 136 economies featured in the GII 2024.",
+  "iso2": "MM",
+  "lead_summary": "Explore IP Landscape:\nMyanmar has been a member of WIPO since 2001 and is a signatory to 1 WIPO treaty.\nThe national IP office of Myanmar is the Intellectual Property Department (IPD) of the Ministry of Commerce. The office is located in Nay Pyi Taw.",
+  "national_ip_offices": "The national IP office of Myanmar is the Intellectual Property Department (IPD) of the Ministry of Commerce. The office is located in Nay Pyi Taw.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/MM"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=MM"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=MM"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/mm.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/mm.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=MM"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=mm"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:40+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/mm",
+  "wipo_member_since": 2001,
+  "wipo_treaty_count": null
+}

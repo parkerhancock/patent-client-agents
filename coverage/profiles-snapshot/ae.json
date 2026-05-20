@@ -1,0 +1,54 @@
+{
+  "country_name": "United Arab Emirates",
+  "gii_rank": 32,
+  "gii_ranking_text": "United Arab Emirates ranks 32nd among the 136 economies featured in the GII 2024.",
+  "iso2": "AE",
+  "lead_summary": "Explore IP Landscape:\nThe United Arab Emirates has been a member of WIPO since 1974 and is a signatory to over 12 WIPO treaties.\nThe national IP offices of the United Arab Emirates are the Copyrights and Related Rights Department, the Innovation Development and Industrial Property Department and the Trademark Department at the Ministry of Economy. The office is located in Abu Dhabi.",
+  "national_ip_offices": "The national IP offices of the United Arab Emirates are the Copyrights and Related Rights Department, the Innovation Development and Industrial Property Department and the Trademark Department at the Ministry of Economy. The office is located in Abu Dhabi.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/AE"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=AE"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=AE"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ae.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ae.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=AE&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=AE"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ae"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:55+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ae",
+  "wipo_member_since": 1974,
+  "wipo_treaty_count": 12
+}

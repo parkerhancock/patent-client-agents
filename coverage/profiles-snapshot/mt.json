@@ -1,0 +1,54 @@
+{
+  "country_name": "Malta",
+  "gii_rank": 29,
+  "gii_ranking_text": "Malta ranks 29th among the 136 economies featured in the GII 2024.",
+  "iso2": "MT",
+  "lead_summary": "Explore IP Landscape:\nMalta has been a member of WIPO since 1977 and is a signatory to over 6 WIPO treaties.\nThe national IP office of Malta is the Industrial Property Registrations Directorate. The office is located in Valletta.",
+  "national_ip_offices": "The national IP office of Malta is the Industrial Property Registrations Directorate. The office is located in Valletta.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/MT"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=MT"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=MT"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/mt.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/mt.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=MT&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=MT"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=mt"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:37+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/mt",
+  "wipo_member_since": 1977,
+  "wipo_treaty_count": 6
+}

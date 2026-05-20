@@ -1,0 +1,54 @@
+{
+  "country_name": "Burundi",
+  "gii_rank": 127,
+  "gii_ranking_text": "Burundi ranks 127th among the 136 economies featured in the GII 2024.",
+  "iso2": "BI",
+  "lead_summary": "Explore IP Landscape:\nBurundi has been a member of WIPO since 1977 and is a signatory to over 6 WIPO treaties.\nThe national IP offices of Burundi are the Burundian Office of Copyright and Neighboring Rights (OBDA) and the Ministry of Commerce, Transport, Industry and Tourism. The offices are located in Bujumbura.",
+  "national_ip_offices": "The national IP offices of Burundi are the Burundian Office of Copyright and Neighboring Rights (OBDA) and the Ministry of Commerce, Transport, Industry and Tourism. The offices are located in Bujumbura.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/BI"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=BI"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=BI"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/bi.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/bi.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=BI"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=bi"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:14+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/bi",
+  "wipo_member_since": 1977,
+  "wipo_treaty_count": 6
+}

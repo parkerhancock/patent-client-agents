@@ -1,0 +1,54 @@
+{
+  "country_name": "Chile",
+  "gii_rank": 51,
+  "gii_ranking_text": "Chile ranks 51st among the 136 economies featured in the GII 2024.",
+  "iso2": "CL",
+  "lead_summary": "Explore IP Landscape:\nChile has been a member of WIPO since 1975 and is a signatory to over 16 WIPO treaties.\nThe national IP offices of Chile are the Intellectual Rights Department (DDI) at the Ministry of Cultures, Arts and Heritage and National Institute of Industrial Property (INAPI). The offices are located in Santiago de Chile.",
+  "national_ip_offices": "The national IP offices of Chile are the Intellectual Rights Department (DDI) at the Ministry of Cultures, Arts and Heritage and National Institute of Industrial Property (INAPI). The offices are located in Santiago de Chile.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/CL"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=CL"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=CL"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/cl.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/cl.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=CL&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=CL"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=cl"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:16+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/cl",
+  "wipo_member_since": 1975,
+  "wipo_treaty_count": 16
+}

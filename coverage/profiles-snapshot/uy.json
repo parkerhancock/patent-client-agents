@@ -1,0 +1,54 @@
+{
+  "country_name": "Uruguay",
+  "gii_rank": 62,
+  "gii_ranking_text": "Uruguay ranks 62nd among the 136 economies featured in the GII 2024.",
+  "iso2": "UY",
+  "lead_summary": "Explore IP Landscape:\nUruguay has been a member of WIPO since 1979 and is a signatory to over 19 WIPO treaties.\nThe national IP offices of Uruguay are the Ministry of Education and Culture - National Library of Uruguay and the National Directorate of Industrial Property (DNPI). The offices are located in Montevideo.",
+  "national_ip_offices": "The national IP offices of Uruguay are the Ministry of Education and Culture - National Library of Uruguay and the National Directorate of Industrial Property (DNPI). The offices are located in Montevideo.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/UY"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=UY"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=UY"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/uy.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/uy.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=UY&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=UY"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=uy"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:56+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/uy",
+  "wipo_member_since": 1979,
+  "wipo_treaty_count": 19
+}

@@ -1,0 +1,54 @@
+{
+  "country_name": "Bahrain",
+  "gii_rank": 72,
+  "gii_ranking_text": "Bahrain ranks 72nd among the 136 economies featured in the GII 2024.",
+  "iso2": "BH",
+  "lead_summary": "Explore IP Landscape:\nBahrain has been a member of WIPO since 1995 and is a signatory to over 12 WIPO treaties.\nThe national IP offices of Bahrain are the Ministry of Information Affairs and the National Patent Office. The offices are located in Manama.",
+  "national_ip_offices": "The national IP offices of Bahrain are the Ministry of Information Affairs and the National Patent Office. The offices are located in Manama.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/BH"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=BH"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=BH"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/bh.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/bh.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=BH&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=BH"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=bh"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:09+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/bh",
+  "wipo_member_since": 1995,
+  "wipo_treaty_count": 12
+}

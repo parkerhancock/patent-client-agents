@@ -1,0 +1,54 @@
+{
+  "country_name": "Namibia",
+  "gii_rank": 102,
+  "gii_ranking_text": "Namibia ranks 102nd among the 136 economies featured in the GII 2024.",
+  "iso2": "NA",
+  "lead_summary": "Explore IP Landscape:\nNamibia has been a member of WIPO since 1991 and is a signatory to over 11 WIPO treaties.\nThe national IP office of Namibia is the Business and Intellectual Property Authority (BIPA). The office is located in Windhoek.",
+  "national_ip_offices": "The national IP office of Namibia is the Business and Intellectual Property Authority (BIPA). The office is located in Windhoek.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/NA"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=NA"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=NA"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/na.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/na.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=NA&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=NA"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=na"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:40+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/na",
+  "wipo_member_since": 1991,
+  "wipo_treaty_count": 11
+}

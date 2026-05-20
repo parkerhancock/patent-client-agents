@@ -1,0 +1,54 @@
+{
+  "country_name": "Cambodia",
+  "gii_rank": 103,
+  "gii_ranking_text": "Cambodia ranks 103rd among the 136 economies featured in the GII 2024.",
+  "iso2": "KH",
+  "lead_summary": "Explore IP Landscape:\nCambodia has been a member of WIPO since 1995 and is a signatory to over 9 WIPO treaties.\nThe national IP offices of Cambodia are the Department of Copyright and Related rights at the Ministry of Culture and Fine Arts, the Department of Industrial Property (DIP) at the Ministry of Industry, Science, Technology and Innovation and the Department of Intellectual Property at the Ministry of Commerce. The offices are located in Phnom Penh.",
+  "national_ip_offices": "The national IP offices of Cambodia are the Department of Copyright and Related rights at the Ministry of Culture and Fine Arts, the Department of Industrial Property (DIP) at the Ministry of Industry, Science, Technology and Innovation and the Department of Intellectual Property at the Ministry of Commerce. The offices are located in Phnom Penh.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/KH"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=KH"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=KH"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/kh.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/kh.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=KH&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=KH"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=kh"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:00:15+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/kh",
+  "wipo_member_since": 1995,
+  "wipo_treaty_count": 9
+}

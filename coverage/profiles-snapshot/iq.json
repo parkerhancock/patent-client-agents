@@ -1,0 +1,54 @@
+{
+  "country_name": "Iraq",
+  "gii_rank": 131,
+  "gii_ranking_text": "Iraq ranks 131st among the 136 economies featured in the GII 2022.",
+  "iso2": "IQ",
+  "lead_summary": "Explore IP Landscape:\nIraq has been a member of WIPO since 1976 and is a signatory to over 4 WIPO treaties.\nThe national IP offices of Iraq are the National Center for the Protection of Copyright and Related Rights, the Central Organization for Standardization and Quality Control (COSQC) and Department of Industrial Development and Regulation at the Ministry of Industry and Minerals. The offices are located in Baghdad.",
+  "national_ip_offices": "The national IP offices of Iraq are the National Center for the Protection of Copyright and Related Rights, the Central Organization for Standardization and Quality Control (COSQC) and Department of Industrial Development and Regulation at the Ministry of Industry and Minerals. The offices are located in Baghdad.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/IQ"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=IQ"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=IQ"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/iq.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=IQ&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=IQ"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=iq"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:30+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/iq",
+  "wipo_member_since": 1976,
+  "wipo_treaty_count": 4
+}

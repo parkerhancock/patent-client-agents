@@ -1,0 +1,54 @@
+{
+  "country_name": "Côte d'Ivoire",
+  "gii_rank": 112,
+  "gii_ranking_text": "Côte d'Ivoire ranks 112th among the 136 economies featured in the GII 2024.",
+  "iso2": "CI",
+  "lead_summary": "Explore IP Landscape:\nCôte d'Ivoire has been a member of WIPO since 1974 and is a signatory to over 13 WIPO treaties.\nThe national IP offices of Côte d'Ivoire are the Ivorian Copyright Office and the Ivorian Office of Intellectual Property. The offices are located in Abidjan.",
+  "national_ip_offices": "The national IP offices of Côte d'Ivoire are the Ivorian Copyright Office and the Ivorian Office of Intellectual Property. The offices are located in Abidjan.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/CI"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=CI"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=CI"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ci.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/ci.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=CI&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=CI"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=ci"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:19+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/ci",
+  "wipo_member_since": 1974,
+  "wipo_treaty_count": 13
+}

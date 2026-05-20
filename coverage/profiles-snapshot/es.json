@@ -1,0 +1,54 @@
+{
+  "country_name": "Spain",
+  "gii_rank": 28,
+  "gii_ranking_text": "Spain ranks 28th among the 136 economies featured in the GII 2024.",
+  "iso2": "ES",
+  "lead_summary": "Explore IP Landscape:\nSpain has been a member of WIPO since 1970 and is a signatory to over 23 WIPO treaties.\nThe national IP offices of Spain are the Ministry of Culture and the Spanish Patent and Trademark Office (OEPM). The offices are located in Madrid.",
+  "national_ip_offices": "The national IP offices of Spain are the Ministry of Culture and the Spanish Patent and Trademark Office (OEPM). The offices are located in Madrid.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/ES"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=ES"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=ES"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/es.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/es.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=ES&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=ES"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=es"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:51+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/es",
+  "wipo_member_since": 1970,
+  "wipo_treaty_count": 23
+}

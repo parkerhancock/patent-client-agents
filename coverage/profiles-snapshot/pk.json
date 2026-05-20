@@ -1,0 +1,54 @@
+{
+  "country_name": "Pakistan",
+  "gii_rank": 91,
+  "gii_ranking_text": "Pakistan ranks 91st among the 136 economies featured in the GII 2024.",
+  "iso2": "PK",
+  "lead_summary": "Explore IP Landscape:\nPakistan has been a member of WIPO since 1977 and is a signatory to over 4 WIPO treaties.\nThe national IP office of Pakistan is the Intellectual Property Organization of Pakistan (IPO-Pakistan). The offices are located in Islamabad and Karachi.",
+  "national_ip_offices": "The national IP office of Pakistan is the Intellectual Property Organization of Pakistan (IPO-Pakistan). The offices are located in Islamabad and Karachi.",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/PK"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=PK"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=PK"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/pk.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/pk.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "_(not present)_"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=PK"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=pk"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:00:15+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/pk",
+  "wipo_member_since": 1977,
+  "wipo_treaty_count": 4
+}

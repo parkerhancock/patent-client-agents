@@ -1,0 +1,54 @@
+{
+  "country_name": "Netherlands (Kingdom of the)",
+  "gii_rank": 8,
+  "gii_ranking_text": "Netherlands (Kingdom of the) ranks 8th among the 136 economies featured in the GII 2024.",
+  "iso2": "NL",
+  "lead_summary": "Explore IP Landscape:\nThe Kingdom of the Netherlands has been a member of WIPO since 1975 and is a signatory to over 20 WIPO treaties.\nThe national IP offices of the Kingdom of the Netherlands are:\nBureau for Intellectual Property Curaçao, located in Willemstad, Curaçao\nBureau for Intellectual Property Sint Maarten (BIP SXM), located in Sint Maarten\nBureau of Intellectual Property Aruba, located in Oranjestad, Aruba\nNetherlands Enterprise Agency, located in The Hague, the Netherlands.",
+  "national_ip_offices": "The national IP offices of the Kingdom of the Netherlands are:",
+  "quick_links": [
+    {
+      "resource": "WIPO Lex profile",
+      "url": "https://www.wipo.int/wipolex/en/members/profile/NL"
+    },
+    {
+      "resource": "WIPO treaty memberships",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=NL"
+    },
+    {
+      "resource": "Treaty notifications",
+      "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?start_year=ANY&end_year=ANY&search_what=N&treaty_all=ALL&code=NL"
+    },
+    {
+      "resource": "Statistical IP profile (PDF)",
+      "url": "https://www.wipo.int/edocs/statistics-country-profile/en/nl.pdf"
+    },
+    {
+      "resource": "GII 2024 ranking (PDF)",
+      "url": "https://www.wipo.int/edocs/gii-ranking/2024/nl.pdf"
+    },
+    {
+      "resource": "PCT eGuide",
+      "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=NL&doc-lang=en"
+    },
+    {
+      "resource": "ePCT office profile",
+      "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
+    },
+    {
+      "resource": "Madrid System member profile",
+      "url": "https://www.wipo.int/madrid/memberprofiles/selectmember"
+    },
+    {
+      "resource": "National statements at WIPO assemblies",
+      "url": "https://www.wipo.int/meetings/en/statements_country.jsp?country_code=NL"
+    },
+    {
+      "resource": "Contact information",
+      "url": "https://www.wipo.int/en/web/country-profiles/contact?code=nl"
+    }
+  ],
+  "snapshot_at": "2026-05-19T16:14:41+00:00",
+  "source_url": "https://www.wipo.int/en/web/country-profiles/nl",
+  "wipo_member_since": 1975,
+  "wipo_treaty_count": 20
+}
