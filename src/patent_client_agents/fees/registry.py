@@ -52,6 +52,8 @@ _DISPATCH: dict[tuple[str, RightType], Scraper] = {
     ("UKIPO", RightType.patent): _ukipo.scrape_ukipo_patents,
     ("UKIPO", RightType.trademark): _ukipo.scrape_ukipo_trademarks,
     ("JPO", RightType.patent): _jpo.scrape_jpo_patents,
+    ("JPO", RightType.trademark): _jpo.scrape_jpo_trademarks,
+    ("JPO", RightType.design): _jpo.scrape_jpo_designs,
     ("IPIN", RightType.patent): _ipindia.scrape_ipindia_patents,
     ("TIPO", RightType.patent): _tipo.scrape_tipo_patents,
     ("TIPO", RightType.trademark): _tipo.scrape_tipo_trademarks,

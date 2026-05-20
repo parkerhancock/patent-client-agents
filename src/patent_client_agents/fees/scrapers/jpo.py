@@ -26,8 +26,36 @@ structural quirks worth knowing before reading the code:
 * **Examination request** has its own pre/post-2019 split (different
   cutoff date), captured the same way.
 
-v1 scope: patent route only. UM, design, and trademark ship under
-separate routes when needed; their fee tables are in the same file.
+Trademark coverage
+------------------
+
+Trademark fees live under the (4) Trademarks sub-sections of headings
+1, 3, 4. Two structural quirks worth flagging:
+
+* **Per-classification multiplier.** Every TM fee cell is either
+  ``"¥X + ¥Y per classification"`` (application/opposition/appeal/
+  trial) or ``"¥Z per classification"`` (registration/renewal). The
+  scraper splits these into a base FeeItem plus a separate row
+  carrying ``FeeCategory.excess_classes`` with
+  ``FeeCondition(trigger=classes_over, threshold=0, per_unit=True)``.
+* **Installment payment option.** TM registration and renewal fees
+  publish both a full-term rate (10 years up-front) and a 5-year
+  installment rate per class. Both emit as separate FeeItems with
+  ``-installment`` suffix and a note clarifying the choice.
+
+Design coverage
+---------------
+
+Design fees live under the (3) Designs sub-sections of headings 1,
+3, 4. The annual-fee table has cohort overlap that needs care:
+
+* **Term cohort split.** Pre-2007 applications terminate at year 15,
+  2007-2020 applications terminate at year 20, post-2020 applications
+  terminate at year 25. The per-year fee is ¥16,900 across all three
+  cohorts for years 4-N; the only difference is N. The scraper emits
+  rows for years 1-3 (¥8,500) and years 4-15 (¥16,900) covering all
+  current designs, plus an extension band 16-25 at ¥16,900 tagged in
+  ``notes`` as the post-2007 / post-2020 cohort.
 """
 
 from __future__ import annotations
@@ -404,8 +432,616 @@ async def scrape_jpo_patents() -> FeeSchedule:
     )
 
 
+# ──────────────────────────────────────────────────────────────────────
+# Trademark + design helpers
+# ──────────────────────────────────────────────────────────────────────
+
+
+_DESIGN_YEAR_RANGE_RE = re.compile(r"(\d+)\s*-\s*(\d+)(?:st|nd|rd|th)?\s+year", re.IGNORECASE)
+
+
+def _split_base_and_per_class(raw: str) -> tuple[Decimal | None, Decimal | None]:
+    """'¥3,400 + ¥8,600 per classification' → (Decimal('3400'), Decimal('8600')).
+
+    Mirrors :func:`_split_base_and_per_claim` for the TM tables, which
+    use "per classification" instead of "per claim". Returns
+    ``(base, per_class)``. For cells that contain only a per-class
+    amount ("¥32,900 per classification"), returns
+    ``(None, Decimal('32900'))`` so the caller can choose to emit a
+    pure per-class FeeItem.
+    """
+    per_m = _PER_CLASS_RE.search(raw)
+    amts = list(_YEN_RE.finditer(raw))
+    if not amts:
+        return None, None
+    if per_m and len(amts) >= 2:
+        # "¥X + ¥Y per classification" — base is first, per-class is the per_m amount
+        base = Decimal(amts[0].group(1).replace(",", ""))
+        per = Decimal(per_m.group(1).replace(",", ""))
+        return base, per
+    if per_m and len(amts) == 1:
+        # "¥X per classification" — purely per-class
+        return None, Decimal(per_m.group(1).replace(",", ""))
+    # No per-class language; treat as a fixed amount.
+    return Decimal(amts[0].group(1).replace(",", "")), None
+
+
+def _section_heading_for(table: L.HtmlElement, target_tags: tuple[str, ...]) -> str:
+    """Walk back from a table to find the nearest heading in ``target_tags``."""
+    cur = table
+    for _ in range(40):
+        prev = cur.getprevious()
+        while prev is not None:
+            if isinstance(prev.tag, str) and prev.tag in target_tags:
+                return re.sub(r"\s+", " ", prev.text_content()).strip()
+            if isinstance(prev.tag, str):
+                try:
+                    inner = prev.cssselect(", ".join(target_tags))
+                    if inner:
+                        return re.sub(r"\s+", " ", inner[-1].text_content()).strip()
+                except Exception:
+                    pass
+            prev = prev.getprevious()
+        parent = cur.getparent()
+        if parent is None:
+            break
+        cur = parent
+    return ""
+
+
+def _heading_matches(heading: str, *prefixes: str) -> bool:
+    """True if the (3)/(4) sub-heading matches any of ``prefixes``.
+
+    Handles the JPO whitespace inconsistency ("(3)Designs" vs
+    "(3) Designs") and ignores trailing punctuation.
+    """
+    norm = re.sub(r"\s+", " ", heading.replace("　", " ")).strip().lower()
+    return any(p.lower() in norm for p in prefixes)
+
+
+def _design_year_band(description: str) -> tuple[int, int] | None:
+    """'1-3rd year: annually' → (1, 3); '4-15th year' → (4, 15)."""
+    m = _DESIGN_YEAR_RANGE_RE.search(description)
+    if not m:
+        return None
+    start, end = int(m.group(1)), int(m.group(2))
+    if start > end or end > 25:
+        return None
+    return start, end
+
+
+def _find_transfer_of_right_fee(doc: L.HtmlElement, right_label: str) -> Decimal | None:
+    """Pick the right-specific transfer-of-right fee from section 6.
+
+    Section 6's "Registration of transfer of right:" table publishes
+    one row per right type ("-Patents ¥15,000", "-Trademarks ¥30,000",
+    etc.). The right-specific scrapers call this with their label
+    ("Patents" / "Trademarks" / "Designs") to extract just their
+    transfer fee.
+    """
+    target = right_label.strip().lower()
+    for table in doc.cssselect("table"):
+        h2 = _section_heading_for(table, ("h2",))
+        if not h2.strip().startswith("6."):
+            continue
+        for tr in table.cssselect("tr"):
+            cells = [
+                re.sub(r"\s+", " ", td.text_content().strip()) for td in tr.cssselect("td, th")
+            ]
+            for cell in cells:
+                # Cells look like "-Trademarks" / "-Patents" / "-Designs"
+                if cell.lstrip("-").strip().lower() == target:
+                    # The fee is the next cell with a ¥ amount
+                    for c2 in cells:
+                        amt = _parse_yen(c2)
+                        if amt is not None:
+                            return amt
+    return None
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Trademark builder
+# ──────────────────────────────────────────────────────────────────────
+
+
+def _categorize_trademark(h2: str, description: str) -> FeeCategory:
+    h = h2.lower()
+    d = description.lower()
+    if "1. application" in h:
+        return FeeCategory.filing
+    if "2. request for examination" in h:
+        return FeeCategory.examination
+    if "3. annual fee" in h or "3.annual" in h or "registration fee" in h:
+        if "renewal" in d:
+            return FeeCategory.renewal
+        return FeeCategory.grant
+    if "4. opposition" in h:
+        if "opposition" in d:
+            return FeeCategory.opposition
+        if "appeal" in d:
+            return FeeCategory.appeal
+        if "trial" in d:
+            return FeeCategory.trial
+        return FeeCategory.appeal
+    if "5. others" in h:
+        if "extension" in d:
+            return FeeCategory.extension
+        if "succession" in d:
+            return FeeCategory.transfer
+        return FeeCategory.other
+    if "6. after registration" in h:
+        return FeeCategory.transfer
+    return FeeCategory.other
+
+
+def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
+    """Walk every (4) Trademarks table and emit FeeItems.
+
+    Per-class language is everywhere on this page; the builder emits
+    a base FeeItem plus an ``excess_classes`` FeeItem (threshold=0,
+    per_unit=True) for every fee that publishes a per-class component.
+    Registration/renewal installment rates emit as separate FeeItems
+    with a ``-installment`` slug suffix.
+    """
+    fees: list[FeeItem] = []
+    seen: set[str] = set()
+
+    def _emit(
+        *,
+        slug_parts: list[str],
+        label: str,
+        category: FeeCategory,
+        amount: Decimal,
+        year: int | None = None,
+        condition: FeeCondition | None = None,
+        notes: str | None = None,
+    ) -> None:
+        code = _unique_slug(slug_parts, seen)
+        fees.append(
+            FeeItem(
+                code=code,
+                label=label[:200],
+                category=category,
+                rights=[RightType.trademark],
+                amount=amount,
+                currency="JPY",
+                tier=EntityTier.none,
+                year=year,
+                condition=condition,
+                source_url=JPO_FEES_URL,
+                notes=notes,
+            )
+        )
+
+    for table in doc.cssselect("table"):
+        h2 = _section_heading_for(table, ("h2",))
+        h3 = _section_heading_for(table, ("h3",))
+        # Only walk tables under the (4)Trademarks sub-headings of
+        # right-specific sections 1/2/3/4. Sections 5 ("Others") and
+        # 6 ("After Registration") inherit the last h3 from page
+        # render order — they actually apply across all rights and
+        # would otherwise mix patent/UM/design transfer rows into
+        # the TM schedule. The TM-specific transfer fee (¥30,000)
+        # IS captured below via the curated section-6 walker.
+        if not _heading_matches(h3, "(4)Trademark", "(4) Trademark", "Trademarks"):
+            continue
+        # h2 must be a right-specific numbered section
+        if not re.match(r"^[1-4]\.", h2.strip()):
+            continue
+
+        for tr in table.cssselect("tr"):
+            cells = [
+                re.sub(r"\s+", " ", td.text_content().strip()) for td in tr.cssselect("td, th")
+            ]
+            if len(cells) < 2:
+                continue
+            description, fee_raw = cells[0], cells[1]
+            if not description or not fee_raw:
+                continue
+            if fee_raw.strip().lower() == "fees":
+                continue
+
+            category = _categorize_trademark(h2, description)
+            base, per_class = _split_base_and_per_class(fee_raw)
+
+            # Description sub-marker: "Defensive mark" rows are
+            # separate fee tracks. The slug carries it.
+            is_defensive = "defensive" in description.lower()
+            # Installment flag for registration / renewal rows.
+            is_installment = (
+                "installment" in description.lower() or "by installment" in description.lower()
+            )
+            # Renewal rows carry year=10 (TM term = 10 yrs, Japan TM Act art. 19).
+            year = 10 if category is FeeCategory.renewal else None
+
+            slug_label = description[:50]
+            label = description
+
+            if base is not None and per_class is not None:
+                # "¥X + ¥Y per classification" — emit base + per-class surcharge
+                slug = ["jp", "tm"]
+                if is_defensive:
+                    slug.append("defensive")
+                slug.append(slug_label)
+                if is_installment:
+                    slug.append("installment")
+                _emit(
+                    slug_parts=slug,
+                    label=label,
+                    category=category,
+                    amount=base,
+                    year=year,
+                    notes=f"JPO heading: {h2}",
+                )
+                _emit(
+                    slug_parts=slug + ["per-class"],
+                    label=f"{label} — per classification",
+                    category=FeeCategory.excess_classes,
+                    amount=per_class,
+                    year=year,
+                    condition=FeeCondition(
+                        trigger="classes_over",
+                        threshold=0,
+                        per_unit=True,
+                        description="JPO per-classification multiplier.",
+                    ),
+                    notes=f"JPO heading: {h2}",
+                )
+            elif per_class is not None and base is None:
+                # "¥X per classification" — pure per-class fee. Emit a
+                # single FeeItem carrying the per-class amount as the
+                # canonical fee, with the classes_over condition.
+                slug = ["jp", "tm"]
+                if is_defensive:
+                    slug.append("defensive")
+                slug.append(slug_label)
+                if is_installment:
+                    slug.append("installment")
+                _emit(
+                    slug_parts=slug,
+                    label=label,
+                    category=category,
+                    amount=per_class,
+                    year=year,
+                    condition=FeeCondition(
+                        trigger="classes_over",
+                        threshold=0,
+                        per_unit=True,
+                        description="JPO per-classification fee.",
+                    ),
+                    notes=f"JPO heading: {h2}",
+                )
+            elif base is not None:
+                # Flat fee with no per-class component
+                slug = ["jp", "tm", slug_label]
+                _emit(
+                    slug_parts=slug,
+                    label=label,
+                    category=category,
+                    amount=base,
+                    year=year,
+                    notes=f"JPO heading: {h2}",
+                )
+
+    # Section 6 — the TM-specific transfer-of-right fee (¥30,000).
+    transfer_amount = _find_transfer_of_right_fee(doc, "Trademarks")
+    if transfer_amount is not None:
+        _emit(
+            slug_parts=["jp", "tm", "transfer-of-right"],
+            label="Registration of transfer of right — Trademarks",
+            category=FeeCategory.transfer,
+            amount=transfer_amount,
+            notes="JPO heading: 6. After Registration",
+        )
+
+    return fees
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Design builder
+# ──────────────────────────────────────────────────────────────────────
+
+
+def _categorize_design(h2: str, description: str) -> FeeCategory:
+    h = h2.lower()
+    d = description.lower()
+    if "1. application" in h:
+        if "secret design" in d:
+            return FeeCategory.other
+        return FeeCategory.filing
+    if "3. annual fee" in h or "registration fee" in h:
+        return FeeCategory.renewal
+    if "4. opposition" in h:
+        if "appeal" in d:
+            return FeeCategory.appeal
+        if "trial" in d:
+            return FeeCategory.trial
+        return FeeCategory.appeal
+    if "5. others" in h:
+        if "extension" in d:
+            return FeeCategory.extension
+        if "succession" in d:
+            return FeeCategory.transfer
+        return FeeCategory.other
+    if "6. after registration" in h:
+        return FeeCategory.transfer
+    return FeeCategory.other
+
+
+def _build_design_fees(doc: L.HtmlElement) -> list[FeeItem]:
+    """Walk every (3) Designs table and emit FeeItems.
+
+    Design annuities expand across the maximum 25-year term, tagged
+    with cohort notes for the 16-25 extension band.
+    """
+    fees: list[FeeItem] = []
+    seen: set[str] = set()
+
+    def _emit(
+        *,
+        slug_parts: list[str],
+        label: str,
+        category: FeeCategory,
+        amount: Decimal,
+        year: int | None = None,
+        notes: str | None = None,
+    ) -> None:
+        code = _unique_slug(slug_parts, seen)
+        fees.append(
+            FeeItem(
+                code=code,
+                label=label[:200],
+                category=category,
+                rights=[RightType.design],
+                amount=amount,
+                currency="JPY",
+                tier=EntityTier.none,
+                year=year,
+                condition=None,
+                source_url=JPO_FEES_URL,
+                notes=notes,
+            )
+        )
+
+    # Track the latest 4-N renewal cell so we can extend the "1-3 + 4-15"
+    # tables out to year 25 for the post-2020 cohort (statutory max term).
+    latest_renewal_amount: Decimal | None = None
+    latest_renewal_end: int = 0
+
+    for table in doc.cssselect("table"):
+        h2 = _section_heading_for(table, ("h2",))
+        h3 = _section_heading_for(table, ("h3",))
+        # Same scoping rule as TM: only the (3)Designs sub-section of
+        # right-specific numbered sections; sections 5/6 are shared and
+        # handled below as a curated transfer row.
+        if not _heading_matches(h3, "(3)Design", "(3) Design", "Designs"):
+            continue
+        if not re.match(r"^[1-4]\.", h2.strip()):
+            continue
+
+        for tr in table.cssselect("tr"):
+            cells = [
+                re.sub(r"\s+", " ", td.text_content().strip()) for td in tr.cssselect("td, th")
+            ]
+            if not cells:
+                continue
+            # Single-cell row: cohort marker like "4-20th year: annually,※1"
+            # — extends the latest renewal band to the new end year.
+            if len(cells) == 1:
+                if (
+                    "annual" in h2.lower()
+                    and latest_renewal_amount is not None
+                    and "year" in cells[0].lower()
+                ):
+                    band = _design_year_band(cells[0])
+                    if band is not None and band[1] > latest_renewal_end:
+                        for yr in range(latest_renewal_end + 1, band[1] + 1):
+                            slug = ["jp", "des", "renewal-extension", f"y{yr}"]
+                            _emit(
+                                slug_parts=slug,
+                                label=f"Design annuity year {yr} (extension cohort)",
+                                category=FeeCategory.renewal,
+                                amount=latest_renewal_amount,
+                                year=yr,
+                                notes=(
+                                    f"JPO heading: {h2}; cohort marker "
+                                    f"{cells[0]!r} extends the 4-15 rate "
+                                    "for newer cohorts. Applies to "
+                                    "applications filed on or after "
+                                    "April 1, 2007 (extension to year "
+                                    "20) and on or after April 1, 2020 "
+                                    "(extension to year 25)."
+                                ),
+                            )
+                        latest_renewal_end = band[1]
+                continue
+            description, fee_raw = cells[0], cells[1]
+            if not description:
+                continue
+            if fee_raw.strip().lower() == "fees":
+                continue
+            # Empty fee cell — should have already been handled by the
+            # 1-cell branch above; defensive skip.
+            if not fee_raw or _parse_yen(fee_raw) is None:
+                continue
+
+            category = _categorize_design(h2, description)
+            amount = _parse_yen(fee_raw)
+            if amount is None:
+                continue
+
+            year_band = _design_year_band(description) if category is FeeCategory.renewal else None
+            if category is FeeCategory.renewal and year_band is None:
+                # Renewal row with no parseable year band — skip rather
+                # than emit a renewal FeeItem with year=None (validator
+                # rejects).
+                continue
+
+            label = description
+            if year_band is None:
+                slug = ["jp", "des", label[:50]]
+                _emit(
+                    slug_parts=slug,
+                    label=label,
+                    category=category,
+                    amount=amount,
+                    year=None,
+                    notes=f"JPO heading: {h2}",
+                )
+            else:
+                start, end = year_band
+                for yr in range(start, end + 1):
+                    slug = ["jp", "des", label[:30], f"y{yr}"]
+                    _emit(
+                        slug_parts=slug,
+                        label=label,
+                        category=category,
+                        amount=amount,
+                        year=yr,
+                        notes=f"JPO heading: {h2}; year band {start}-{end}",
+                    )
+                # Track the latest band so the cohort-marker rows
+                # (4-20, 4-25) can extend it.
+                latest_renewal_amount = amount
+                latest_renewal_end = max(latest_renewal_end, end)
+
+    # Section 6 — the design-specific transfer-of-right fee (¥9,000).
+    transfer_amount = _find_transfer_of_right_fee(doc, "Designs")
+    if transfer_amount is not None:
+        _emit(
+            slug_parts=["jp", "des", "transfer-of-right"],
+            label="Registration of transfer of right — Designs",
+            category=FeeCategory.transfer,
+            amount=transfer_amount,
+            notes="JPO heading: 6. After Registration",
+        )
+
+    return fees
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Slug helpers
+# ──────────────────────────────────────────────────────────────────────
+
+
+def _unique_slug(parts: list[str], seen: set[str]) -> str:
+    bits: list[str] = []
+    for p in parts:
+        if not p:
+            continue
+        s = re.sub(r"[^a-z0-9]+", "-", p.lower()).strip("-")[:40]
+        if s:
+            bits.append(s)
+    base = "-".join(bits)
+    if base not in seen:
+        seen.add(base)
+        return base
+    n = 2
+    while f"{base}-{n}" in seen:
+        n += 1
+    out = f"{base}-{n}"
+    seen.add(out)
+    return out
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Public scrape entry points (TM + Design)
+# ──────────────────────────────────────────────────────────────────────
+
+
+async def scrape_jpo_trademarks() -> FeeSchedule:
+    """Scrape JPO Japan trademark fees from the English fee table."""
+    async with JPOFeesClient() as client:
+        html_text = await client.fetch_html()
+    doc = L.fromstring(html_text)
+    fees = _build_trademark_fees(doc)
+    if not fees:
+        raise RuntimeError(
+            "JPO trademark scraper parsed zero rows — page structure may have changed"
+        )
+    return FeeSchedule(
+        jurisdiction="JP",
+        issuing_body="Japan Patent Office",
+        office_code="JPO",
+        right=RightType.trademark,
+        currency="JPY",
+        effective_date=date(2022, 4, 1),  # JPO page footer: Last updated 1 April 2022
+        source_url=JPO_FEES_URL,
+        statutory_basis=(
+            "Trademark Act of Japan (Act No. 127 of 1959). Fees set "
+            "under Article 76 + the Order for Enforcement of the "
+            "Trademark Act."
+        ),
+        retrieved_at=date.today(),
+        fees=fees,
+        notes=(
+            "JPO trademark fees are universally per-classification. "
+            "Each '¥X + ¥Y per classification' row emits a base "
+            "FeeItem plus a separate excess_classes FeeItem with "
+            "FeeCondition(trigger=classes_over, threshold=0, "
+            "per_unit=True) — the classes_over threshold is 0 "
+            "because the per-class component is charged for EVERY "
+            "class (not just classes over the first). For pure "
+            "'¥Z per classification' rows (registration, renewal), "
+            "a single FeeItem emits with the per-class amount + the "
+            "same FeeCondition. Trademark term is 10 years (Trademark "
+            "Act Art. 19); renewal rows carry year=10. Defensive mark "
+            "rows are emitted with a -defensive slug suffix. "
+            "Registration + renewal publish a 10-year up-front rate "
+            "and a 5-year installment rate; both are emitted, the "
+            "installment row with -installment suffix."
+        ),
+    )
+
+
+async def scrape_jpo_designs() -> FeeSchedule:
+    """Scrape JPO Japan design fees from the English fee table."""
+    async with JPOFeesClient() as client:
+        html_text = await client.fetch_html()
+    doc = L.fromstring(html_text)
+    fees = _build_design_fees(doc)
+    if not fees:
+        raise RuntimeError("JPO design scraper parsed zero rows — page structure may have changed")
+    return FeeSchedule(
+        jurisdiction="JP",
+        issuing_body="Japan Patent Office",
+        office_code="JPO",
+        right=RightType.design,
+        currency="JPY",
+        effective_date=date(2022, 4, 1),  # JPO page footer: Last updated 1 April 2022
+        source_url=JPO_FEES_URL,
+        statutory_basis=(
+            "Design Act of Japan (Act No. 125 of 1959). Fees set "
+            "under Article 67 + the Order for Enforcement of the "
+            "Design Act."
+        ),
+        retrieved_at=date.today(),
+        fees=fees,
+        notes=(
+            "Design annuities published in two bands: 1-3rd year "
+            "at ¥8,500/year and 4-15th year at ¥16,900/year. The "
+            "scraper expands the 1-3 band across years 1-3 and the "
+            "4-15 band across years 4-15 (¥16,900/year applies to all "
+            "current designs). Design term cohorts: applications "
+            "filed before April 1, 2007 expire at year 15; "
+            "applications filed 2007-04-01 through 2020-03-31 expire "
+            "at year 20; applications filed on or after April 1, 2020 "
+            "expire at year 25. The JPO page publishes empty 4-20 / "
+            "4-25 marker rows that share the ¥16,900/year rate — "
+            "those rows carry no fee value and are skipped by the "
+            "parser; the year-25 cap is the statutory maximum. "
+            "Design 'Request for secret design' (¥5,100) is a "
+            "voluntary publication-deferral request, categorized as "
+            "'other' since FeeCategory.deferment is reserved for "
+            "Singapore-style design deferment."
+        ),
+    )
+
+
 __all__ = [
     "JPO_FEES_URL",
     "JPOFeesClient",
     "scrape_jpo_patents",
+    "scrape_jpo_trademarks",
+    "scrape_jpo_designs",
 ]
