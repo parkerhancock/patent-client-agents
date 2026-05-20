@@ -1,0 +1,93 @@
+name: Nightly fee snapshot
+
+# Rebuilds coverage/fees-snapshot/ each night by running every fee
+# scraper against the live office pages. The output is the artifact
+# patentclient.com/fees consumes via jsDelivr — keeping this fresh is
+# the *only* path data updates reach the website.
+#
+# Failure policy: partial failures are EXPECTED (e.g. INPI-FR 503's
+# every few days). The build script records each failure in
+# index.json's `failures` array so the UI can show "Currently
+# unavailable" rows. We commit whatever the build produces and only
+# fail the workflow if *every* scraper failed.
+
+on:
+  schedule:
+    # 02:00 UTC nightly. Most office pages publish updates during their
+    # local business day; running overnight US time gives Asia + Europe
+    # offices a full day to publish before we re-scrape.
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync --group dev --all-extras
+
+      - name: Rebuild fees snapshot
+        id: build
+        # `|| true` so partial scraper failures don't kill the workflow.
+        # The script's index.json records what failed so the UI can
+        # surface gaps to users without hiding them.
+        run: |
+          uv run python scripts/build_fees_snapshot.py 2>&1 | tee /tmp/build.log || true
+          if [ ! -f coverage/fees-snapshot/index.json ]; then
+            echo "::error::Build produced no index.json — total failure, refusing to commit."
+            exit 1
+          fi
+
+      - name: Diff against previous snapshot
+        id: diff
+        run: |
+          if git diff --quiet -- coverage/fees-snapshot/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No snapshot changes today."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- coverage/fees-snapshot/ | tail -20
+          fi
+
+      - name: Commit + push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name  "patent-client-agents bot"
+          git config user.email "bot@patentclient.com"
+          git add coverage/fees-snapshot/
+          # Summarize which offices changed so the commit log is useful.
+          CHANGED=$(git diff --staged --name-only -- coverage/fees-snapshot/ \
+            | grep -v index.json \
+            | sed 's|coverage/fees-snapshot/||;s|\.json$||' \
+            | sort -u | tr '\n' ' ')
+          git commit -m "chore(fees): nightly snapshot $(date -u +%Y-%m-%d)" \
+                     -m "Refreshed schedules: ${CHANGED:-(none)}"
+          git push
+
+      - name: Surface failures in workflow summary
+        run: |
+          FAILURES=$(jq -r '.failures[] | "\(.office_code)/\(.right)"' coverage/fees-snapshot/index.json)
+          {
+            echo "### Fee snapshot rebuild"
+            echo ""
+            if [ -n "$FAILURES" ]; then
+              echo "**Failed routes (recorded in index.json):**"
+              echo ""
+              echo "$FAILURES" | sed 's|^|- |'
+            else
+              echo "All routes built successfully."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
