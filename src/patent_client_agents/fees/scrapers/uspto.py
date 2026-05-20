@@ -20,6 +20,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 from lxml import html as L
 
@@ -27,6 +28,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -51,7 +53,7 @@ class USPTOFeesClient(BaseAsyncClient):
     DEFAULT_TIMEOUT = 30.0
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600  # 7 days
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -59,7 +61,7 @@ class USPTOFeesClient(BaseAsyncClient):
                 "User-Agent": "patent-client-agents (https://patentclient.com)",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self) -> str:
         response = await self._request(
@@ -229,7 +231,7 @@ def _detect_condition(description: str) -> FeeCondition | None:
     if "each independent claim in excess of" in desc:
         m = re.search(r"in excess of\s*(\d+)", desc)
         return FeeCondition(
-            trigger="independent_claims_over",  # type: ignore[arg-type]
+            trigger="independent_claims_over",
             threshold=int(m.group(1)) if m else 3,
             per_unit=True,
             description="Per independent claim over threshold.",
@@ -237,7 +239,7 @@ def _detect_condition(description: str) -> FeeCondition | None:
     if "each claim in excess of" in desc and "independent" not in desc:
         m = re.search(r"in excess of\s*(\d+)", desc)
         return FeeCondition(
-            trigger="claims_over",  # type: ignore[arg-type]
+            trigger="claims_over",
             threshold=int(m.group(1)) if m else 20,
             per_unit=True,
             description="Per claim (total) over threshold.",
@@ -245,7 +247,7 @@ def _detect_condition(description: str) -> FeeCondition | None:
     if "size fee" in desc and "for each additional" in desc:
         m = re.search(r"for each additional\s*(\d+)", desc)
         return FeeCondition(
-            trigger="sheets_over",  # type: ignore[arg-type]
+            trigger="sheets_over",
             threshold=100,
             per_unit=True,
             description=(f"Per additional {m.group(1) if m else '50'} sheets over 100."),
@@ -412,7 +414,7 @@ def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
                         tier=EntityTier.none,
                         year=tm_year,
                         condition=FeeCondition(
-                            trigger="paper_filing",  # type: ignore[arg-type]
+                            trigger="paper_filing",
                             description="Paper-filing surcharge — applies when not e-filed.",
                         ),
                         source_url=USPTO_FEES_URL,
@@ -461,7 +463,7 @@ def _detect_tm_condition(description: str) -> FeeCondition | None:
     desc = description.lower()
     if "per class" in desc or "additional class" in desc:
         return FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="Per class — multi-class surcharge.",

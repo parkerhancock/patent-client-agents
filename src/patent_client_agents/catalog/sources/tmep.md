@@ -10,9 +10,11 @@ SQLite/FTS5 corpus pattern as the MPEP module.
 |---|---|
 | Module | `patent_client_agents.tmep` |
 | Client | `TmepClient` |
+| Base URL | `https://tmep.uspto.gov` (build-time snapshot source; no runtime HTTP) |
 | Backend | Local SQLite/FTS5 corpus (no runtime HTTP) |
 | Snapshot source | Scraped from `https://tmep.uspto.gov/RDMS/TMEP/content` |
 | Auth | None |
+| Rate limits | None at runtime; corpus builder uses ordinary USPTO website requests |
 | Status | Active |
 
 ## Backend: local SQLite/FTS5 corpus

@@ -35,6 +35,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 from lxml import html as L
 
@@ -42,6 +43,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -69,7 +71,7 @@ class WIPOFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -82,7 +84,7 @@ class WIPOFeesClient(BaseAsyncClient):
                 "Accept-Language": "en-US,en;q=0.9",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch(self, url: str) -> str:
         # Convert full URL to path for the base-URL-relative request
@@ -313,7 +315,7 @@ def _build_madrid_fees(doc: L.HtmlElement) -> list[FeeItem]:
             condition: FeeCondition | None = None
             if "per class" in description.lower() or ("for each class" in description.lower()):
                 condition = FeeCondition(
-                    trigger="classes_over",  # type: ignore[arg-type]
+                    trigger="classes_over",
                     threshold=3,
                     per_unit=True,
                     description=(
@@ -445,7 +447,7 @@ def _build_hague_fees(doc: L.HtmlElement) -> list[FeeItem]:
             condition: FeeCondition | None = None
             if "additional design" in description.lower():
                 condition = FeeCondition(
-                    trigger="multi_design",  # type: ignore[arg-type]
+                    trigger="multi_design",
                     threshold=1,
                     per_unit=True,
                     description="Per additional design beyond the first.",

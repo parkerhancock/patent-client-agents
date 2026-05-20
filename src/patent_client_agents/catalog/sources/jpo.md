@@ -20,7 +20,7 @@ file-history document bundles for all three IP types.
 | Client | `JpoClient` |
 | Base URL | `https://ip-data.jpo.go.jp` (API path prefix `/api`) |
 | Auth | `JPO_API_USERNAME` + `JPO_API_PASSWORD` (OAuth2 password grant against `https://ip-data.jpo.go.jp/auth/token`) |
-| Rate limit | 10 requests / 60 s sliding window (handbook v14 §3) — enforced in-process |
+| Rate limits | 10 requests / 60 s sliding window (handbook v14 §3) — enforced in-process |
 | Daily caps | Per endpoint, server-side — see [Daily quotas](#daily-quotas) |
 | Status | **Active, env-gated.** 12 MCP tools register only when `JPO_API_USERNAME` and `JPO_API_PASSWORD` are both set. Active on private deploys with the secrets (e.g. law-tools); intentionally absent on the hosted public server `mcp.patentclient.com` per JPO TOS. See [Deployment posture](#deployment-posture). |
 

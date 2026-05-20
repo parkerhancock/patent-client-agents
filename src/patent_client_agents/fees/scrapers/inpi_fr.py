@@ -82,6 +82,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 import pypdf
 from lxml import html as L
@@ -90,6 +91,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -115,7 +117,7 @@ class INPIFranceFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -129,7 +131,7 @@ class INPIFranceFeesClient(BaseAsyncClient):
                 "Accept-Language": "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self, path: str) -> str:
         r = await self._request("GET", path, context=f"inpi_fr_html {path[:40]}")
@@ -348,7 +350,7 @@ _FEE_CATALOG: list[
         42,
         21,
         FeeCondition(
-            trigger="claims_over",  # type: ignore[arg-type]
+            trigger="claims_over",
             threshold=10,
             per_unit=True,
             description="INPI FR per-claim surcharge from the 11th claim onward.",
@@ -477,7 +479,7 @@ _FEE_CATALOG: list[
         190,
         None,
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="INPI FR base filing fee covers the first Nice class.",
@@ -493,7 +495,7 @@ _FEE_CATALOG: list[
         350,
         None,
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="INPI FR collective/guarantee mark base filing covers the first Nice class.",
@@ -509,7 +511,7 @@ _FEE_CATALOG: list[
         40,
         None,
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="INPI FR additional-class surcharge for each Nice class beyond the first.",
@@ -558,7 +560,7 @@ _FEE_CATALOG: list[
         290,
         None,
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="INPI FR base renewal fee covers the first Nice class on the 10-year cycle.",
@@ -574,7 +576,7 @@ _FEE_CATALOG: list[
         450,
         None,
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="INPI FR collective/guarantee mark renewal base, first class.",

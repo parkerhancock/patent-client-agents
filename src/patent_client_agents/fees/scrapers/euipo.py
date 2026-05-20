@@ -24,6 +24,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 from lxml import html as L
 
@@ -31,6 +32,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -69,12 +71,12 @@ class EUIPOFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         existing = kwargs.get("headers") or {}
         merged = {**_BROWSERY_HEADERS, **(existing if isinstance(existing, dict) else {})}
         kwargs["headers"] = merged
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self, path: str) -> str:
         r = await self._request("GET", path, context="euipo_fees")
@@ -183,14 +185,14 @@ def _detect_tm_condition(description: str) -> FeeCondition | None:
     d = description.lower()
     if "second class" in d:
         return FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=False,
             description="Flat fee for the second class.",
         )
     if "each class" in d and ("beyond" in d or "additional" in d):
         return FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=2,
             per_unit=True,
             description="Per class beyond the first two.",
@@ -321,7 +323,7 @@ def _detect_design_condition(description: str) -> FeeCondition | None:
     d = description.lower()
     if "second design onwards" in d:
         return FeeCondition(
-            trigger="multi_design",  # type: ignore[arg-type]
+            trigger="multi_design",
             threshold=1,
             per_unit=True,
             description="Per design beyond the first.",

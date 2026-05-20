@@ -1,4 +1,6 @@
-"""IP Tools - Intellectual property data tools for AI agents."""
+"""Intellectual property data tools for AI agents."""
+
+from importlib.metadata import PackageNotFoundError, version
 
 from law_tools_core.envelope import configure as _configure_envelope
 from law_tools_core.logging import configure as _configure_logging
@@ -12,7 +14,10 @@ from .unified import (
     odp_limitations_from_text,
 )
 
-__version__ = "0.10.0"
+try:
+    __version__ = version("patent-client-agents")
+except PackageNotFoundError:
+    __version__ = "0+unknown"
 
 _configure_logging("patent_client_agents")
 _configure_envelope(__version__)

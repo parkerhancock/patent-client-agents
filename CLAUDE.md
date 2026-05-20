@@ -1,12 +1,13 @@
-# IP Tools
+# Patent Client Agents
 
-Async Python library for patent and IP data from USPTO, EPO, Google Patents, and JPO.
+Async Python library and MCP server for patent, trademark, litigation, fee, and
+substantive-law research.
 
 ## Development
 
 ```bash
 uv sync --group dev              # Install dependencies
-uv run pytest                    # Run tests (767 tests, ~15s)
+uv run pytest                    # Run the offline/VCR replay suite
 uv run ruff check src/ tests/    # Lint
 uv run ruff format src/ tests/   # Format
 ```
@@ -20,8 +21,8 @@ Tests use `vcrpy` to replay recorded HTTP interactions. Cassettes live at
 uv run pytest                                # Replay from cassettes (default)
 uv run pytest --vcr-record=once              # Record missing cassettes
 uv run pytest --vcr-record=all               # Re-record all cassettes
-uv run pytest --run-live-uspto               # Run live USPTO tests
-uv run pytest --run-live-jpo                 # Run live JPO tests
+uv run pytest --run-live-uspto --vcr-record=once  # Allow missing USPTO cassettes to record
+uv run pytest --run-live-jpo --vcr-record=once    # Allow missing JPO cassettes to record
 uv run pytest --cov=patent_client_agents --cov-report=term-missing  # Coverage
 ```
 

@@ -12,8 +12,10 @@ from __future__ import annotations
 from datetime import date
 from decimal import Decimal
 from enum import StrEnum
-from typing import Literal
+from pathlib import Path
+from typing import Literal, TypedDict
 
+import httpx
 from pydantic import (
     BaseModel,
     ConfigDict,
@@ -139,6 +141,24 @@ class ConditionalTrigger(StrEnum):
     multi_design = "multi_design"  # EUIPO designs, post-2024 reform
 
 
+ConditionalTriggerInput = (
+    ConditionalTrigger
+    | Literal[
+        "claims_over",
+        "independent_claims_over",
+        "pages_over",
+        "sheets_over",
+        "classes_over",
+        "intent_to_use",
+        "paper_filing",
+        "late_days",
+        "deferred_publication",
+        "multi_design",
+    ]
+)
+"""Constructor-friendly type for FeeCondition trigger values."""
+
+
 class FeeCondition(BaseModel):
     """Conditions under which a surcharge / variable fee applies.
 
@@ -149,13 +169,18 @@ class FeeCondition(BaseModel):
 
     model_config = ConfigDict(frozen=True)
 
-    trigger: ConditionalTrigger
+    trigger: ConditionalTriggerInput
     threshold: NonNegativeInt | None = None
     per_unit: bool = False
     description: str | None = Field(
         default=None,
         description="Free-text explanation when the trigger alone is ambiguous.",
     )
+
+    @field_validator("trigger", mode="before")
+    @classmethod
+    def _trigger_enum(cls, v: ConditionalTriggerInput) -> ConditionalTrigger:
+        return ConditionalTrigger(v)
 
 
 class FeeItem(BaseModel):
@@ -315,6 +340,21 @@ JurisdictionKey = tuple[str, RightType]
 JurisdictionV1 = Literal["US", "EP", "USPTO", "EPO", "EUIPO"]
 
 
+class FeeClientKwargs(TypedDict, total=False):
+    """Keyword arguments accepted by the shared HTTP base client."""
+
+    base_url: str | None
+    cache_path: Path | None
+    client: httpx.AsyncClient | None
+    use_cache: bool
+    ttl_seconds: int | None
+    max_retries: int
+    headers: dict[str, str] | None
+    timeout: float | None
+    auth: httpx.Auth | None
+    http2: bool | None
+
+
 __all__ = [
     "RightType",
     "EntityTier",
@@ -326,4 +366,6 @@ __all__ = [
     "JurisdictionMeta",
     "JurisdictionKey",
     "JurisdictionV1",
+    "FeeClientKwargs",
+    "ConditionalTriggerInput",
 ]

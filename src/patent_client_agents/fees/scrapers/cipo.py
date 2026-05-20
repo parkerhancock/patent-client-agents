@@ -34,6 +34,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 from lxml import html as L
 
@@ -41,6 +42,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -61,7 +63,7 @@ class CIPOFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -74,7 +76,7 @@ class CIPOFeesClient(BaseAsyncClient):
                 "Accept-Language": "en-CA,en;q=0.5",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self) -> str:
         r = await self._request(
@@ -222,14 +224,14 @@ def _detect_condition(description: str) -> FeeCondition | None:
     d = description.lower()
     if "excess of 20" in d and "claim" in d:
         return FeeCondition(
-            trigger="claims_over",  # type: ignore[arg-type]
+            trigger="claims_over",
             threshold=20,
             per_unit=True,
             description="CIPO per-claim excess over 20.",
         )
     if "each page of specification" in d:
         return FeeCondition(
-            trigger="pages_over",  # type: ignore[arg-type]
+            trigger="pages_over",
             threshold=0,
             per_unit=True,
             description="Per page of specification + drawings (final-fee component).",
@@ -278,10 +280,9 @@ def _build_fees(doc: L.HtmlElement) -> list[FeeItem]:
             condition = _detect_condition(description)
 
             # Year-band expansion for maintenance fees
-            years_for_row: list[int | None]
             if category == FeeCategory.maintenance:
                 band = _parse_year_band(description)
-                years_for_row = list(band) if band else [None]
+                years_for_row: list[int | None] = list(band) if band else [None]
             else:
                 years_for_row = [None]
 

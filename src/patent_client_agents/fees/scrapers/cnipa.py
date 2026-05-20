@@ -30,6 +30,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 from lxml import html as L
 
@@ -37,6 +38,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -57,7 +59,7 @@ class CNIPAFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -69,7 +71,7 @@ class CNIPAFeesClient(BaseAsyncClient):
                 "Accept": "text/html,application/xhtml+xml,*/*",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self) -> str:
         r = await self._request("GET", "/col/col3000/index.html", context="cnipa_fees")
@@ -154,14 +156,14 @@ def _detect_condition(roman: str, label: str) -> FeeCondition | None:
     if roman == "II":
         if "each claim" in d and "exceeds 10" in d:
             return FeeCondition(
-                trigger="claims_over",  # type: ignore[arg-type]
+                trigger="claims_over",
                 threshold=10,
                 per_unit=True,
                 description="CNIPA per-claim excess over 10.",
             )
         if "each page" in d:
             return FeeCondition(
-                trigger="pages_over",  # type: ignore[arg-type]
+                trigger="pages_over",
                 threshold=30,  # CNIPA charges per page over 30 (50 CNY) then over 300 (100 CNY)
                 per_unit=True,
                 description=(

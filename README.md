@@ -9,7 +9,7 @@
 [![CI](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml/badge.svg)](https://github.com/parkerhancock/patent-client-agents/actions/workflows/ci.yml)
 [![Website](https://img.shields.io/badge/web-patentclient.com-008cc8.svg)](https://patentclient.com/)
 [![Docs](https://img.shields.io/badge/docs-docs.patentclient.com-008cc8.svg)](https://docs.patentclient.com/)
-[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 
 **Project home: [patentclient.com](https://patentclient.com/)** · **Full documentation: [docs.patentclient.com](https://docs.patentclient.com/)**
@@ -271,9 +271,10 @@ and retry logic via `law_tools_core`.
 
 ## API keys
 
-86 patent + IP MCP tools are exposed by default, plus additional
-families that register when their credentials are present: +12 JPO,
-+9 CanLII, +4 EUIPO.
+111 patent + IP MCP tools are exposed by default. Credentialed
+families register when their environment variables are present, bringing
+the local/private surface up to 168 tools when every env-gated family is
+configured.
 
 | Variable | Source | Required | How to get |
 |----------|--------|----------|------------|
@@ -524,7 +525,7 @@ No API key required, but requires a one-time corpus build —
 git clone https://github.com/parkerhancock/patent-client-agents.git
 cd patent-client-agents
 uv sync --group dev
-uv run pytest                       # 1,117 tests, replays VCR cassettes
+uv run pytest                       # Replay VCR cassettes and offline fixtures
 uv run ruff check . && uv run ruff format .
 ```
 
@@ -533,9 +534,9 @@ without hitting live APIs. Record modes:
 ```bash
 uv run pytest --vcr-record=once     # Record missing cassettes
 uv run pytest --vcr-record=all      # Re-record everything
-uv run pytest --run-live-uspto      # Skip VCR, hit live USPTO
-uv run pytest --run-live-jpo        # Skip VCR, hit live JPO
-uv run pytest --run-live-euipo      # Skip VCR, hit live EUIPO (sandbox or prod)
+uv run pytest --run-live-uspto --vcr-record=once  # Allow missing USPTO cassettes to record
+uv run pytest --run-live-jpo --vcr-record=once    # Allow missing JPO cassettes to record
+uv run pytest --run-live-euipo --vcr-record=once  # Allow missing EUIPO cassettes to record
 ```
 
 API errors follow a log-first pattern — concise messages with a path to

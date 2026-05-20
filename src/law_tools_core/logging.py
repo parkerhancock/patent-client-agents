@@ -12,6 +12,8 @@ import time with its own app name. Exception ``__str__`` methods consult
 from __future__ import annotations
 
 import logging
+import os
+import tempfile
 from pathlib import Path
 
 _configured_log_files: dict[str, Path] = {}
@@ -30,7 +32,9 @@ def configure(app_name: str, log_dir: Path | None = None) -> Path:
         app_name: Root logger name for the app (e.g. ``"patent_client_agents"``). Used as
             both the logger name and the log filename stem.
         log_dir: Override the log directory. Defaults to
-            ``~/.cache/{app_name}``.
+            ``$LAW_TOOLS_CORE_LOG_DIR`` when set, otherwise
+            ``~/.cache/{app_name}``. If that path is not writable, falls
+            back to ``{tempdir}/{app_name}``.
 
     Returns:
         Absolute path to the log file.
@@ -42,16 +46,27 @@ def configure(app_name: str, log_dir: Path | None = None) -> Path:
     if app_name in _configured_log_files:
         return _configured_log_files[app_name]
 
-    log_dir = log_dir or Path.home() / ".cache" / app_name
-    log_dir.mkdir(parents=True, exist_ok=True)
+    env_log_dir = os.environ.get("LAW_TOOLS_CORE_LOG_DIR")
+    log_dir = log_dir or (Path(env_log_dir) if env_log_dir else Path.home() / ".cache" / app_name)
+    try:
+        log_dir.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        log_dir = Path(tempfile.gettempdir()) / app_name
+        log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / f"{app_name}.log"
-    _configured_log_files[app_name] = log_file
 
     logger = logging.getLogger(app_name)
     logger.setLevel(logging.DEBUG)
-    handler = logging.FileHandler(log_file)
+    try:
+        handler = logging.FileHandler(log_file)
+    except OSError:
+        log_dir = Path(tempfile.gettempdir()) / app_name
+        log_dir.mkdir(parents=True, exist_ok=True)
+        log_file = log_dir / f"{app_name}.log"
+        handler = logging.FileHandler(log_file)
     handler.setFormatter(logging.Formatter("%(asctime)s %(name)s %(levelname)s %(message)s"))
     logger.addHandler(handler)
+    _configured_log_files[app_name] = log_file
 
     return log_file
 

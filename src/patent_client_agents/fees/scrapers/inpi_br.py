@@ -98,6 +98,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 import pypdf
 
@@ -105,6 +106,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -127,7 +129,7 @@ class INPIBrazilFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -141,7 +143,7 @@ class INPIBrazilFeesClient(BaseAsyncClient):
                 "Accept-Language": "en-US,en;q=0.9,pt-BR;q=0.8",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_pdf(self, path: str) -> bytes:
         r = await self._request("GET", path, context=f"inpi_br_fees {path[:40]}")
@@ -307,7 +309,7 @@ def _detect_per_class(desc: str) -> FeeCondition | None:
     """If the description marks 'amount per class', emit a per-class condition."""
     if "amount per class" in desc.lower() or "per class" in desc.lower():
         return FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="INPI Brazil per-class fee under Nice classification.",

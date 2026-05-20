@@ -62,6 +62,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 import pypdf
 from lxml import html as L
@@ -70,6 +71,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -97,7 +99,7 @@ class TIPOFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -111,7 +113,7 @@ class TIPOFeesClient(BaseAsyncClient):
                 "Accept-Language": "en-US,en;q=0.9",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self, path: str) -> str:
         r = await self._request("GET", path, context=f"tipo_html {path[:40]}")
@@ -251,14 +253,14 @@ def _categorize_patent(desc: str) -> tuple[FeeCategory, FeeCondition | None]:
         return FeeCategory.renewal, None
     if "each additional claim" in d or "exceed 10" in d and "claim" in d:
         return FeeCategory.excess_claims, FeeCondition(
-            trigger="claims_over",  # type: ignore[arg-type]
+            trigger="claims_over",
             threshold=10,
             per_unit=True,
             description="TIPO per-claim surcharge over 10 claims.",
         )
     if "additional fee" in d and "page" in d:
         return FeeCategory.excess_pages, FeeCondition(
-            trigger="pages_over",  # type: ignore[arg-type]
+            trigger="pages_over",
             threshold=50,
             per_unit=True,
             description="TIPO per-50-page surcharge over 50 pages (each addl 50 pages counted as 50).",
@@ -474,7 +476,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         3000,
         "For a class in Classes 1 to 34",
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="Per-class fee in Nice Classes 1-34, ≤20 designated goods per class.",
@@ -488,7 +490,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         200,
         "Additional NT$200 per designated good over 20 goods",
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=20,
             per_unit=True,
             description="TIPO additional NT$200 per designated good over 20 goods in a single class.",
@@ -502,7 +504,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         3000,
         "For a class in Classes",  # combined w/ "35 to 45" runs to "Classes 35 to 45"; we verify the surrounding phrase
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="Per-class fee in Nice Classes 35-45.",
@@ -516,7 +518,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         500,
         "Additional NT$500 per designated retail service",
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=5,
             per_unit=True,
             description="TIPO surcharge per retail service over 5 designated retail services of specific goods in Class 35.",
@@ -567,7 +569,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         2500,
         "Registration Fees",
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="Per-class registration fee.",
@@ -591,7 +593,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         4000,
         "Renewal Fees",
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="Per-class renewal fee on the 10-year cycle.",
@@ -707,7 +709,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         4000,
         "Opposition",
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="Per-class opposition fee.",
@@ -721,7 +723,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         7000,
         "Invalidation",
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="Per-class invalidation fee.",
@@ -735,7 +737,7 @@ _TM_CATALOG: list[tuple[str, str, FeeCategory, int, str, FeeCondition | None, in
         7000,
         "Revocation",
         FeeCondition(
-            trigger="classes_over",  # type: ignore[arg-type]
+            trigger="classes_over",
             threshold=1,
             per_unit=True,
             description="Per-class revocation fee.",

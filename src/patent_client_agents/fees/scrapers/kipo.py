@@ -32,6 +32,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 from lxml import html as L
 
@@ -39,6 +40,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -59,7 +61,7 @@ class KIPOFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -72,7 +74,7 @@ class KIPOFeesClient(BaseAsyncClient):
                 "Accept-Language": "en-US,en;q=0.5,ko;q=0.3",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self) -> str:
         r = await self._request(
@@ -139,7 +141,7 @@ def _detect_condition(description: str) -> FeeCondition | None:
     d = description.lower()
     if "per claim" in d or "per additional" in d:
         return FeeCondition(
-            trigger="claims_over",  # type: ignore[arg-type]
+            trigger="claims_over",
             threshold=1,
             per_unit=True,
             description="KIPO per-claim surcharge.",
@@ -204,7 +206,7 @@ def _build_fees(doc: L.HtmlElement) -> list[FeeItem]:
                             currency="KRW",
                             tier=EntityTier.none,
                             condition=FeeCondition(
-                                trigger="claims_over",  # type: ignore[arg-type]
+                                trigger="claims_over",
                                 threshold=1,
                                 per_unit=True,
                                 description="KIPO additional per-claim fee.",

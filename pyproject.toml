@@ -135,6 +135,7 @@ markers = [
   "live_tsdr: marks tests that hit live USPTO TSDR API (requires USPTO_TSDR_API_KEY)",
   "live_mpep: tagged for grep parity with prior suites; the corpus-backed MpepClient no longer hits live USPTO, so these tests run offline",
   "live_tmep: tagged for grep parity with prior suites; the corpus-backed TmepClient no longer hits live USPTO, so these tests run offline",
+  "live_trademark_assignments: marks tests that replay or re-record USPTO Trademark Assignment Center calls",
 ]
 
 [tool.uv]

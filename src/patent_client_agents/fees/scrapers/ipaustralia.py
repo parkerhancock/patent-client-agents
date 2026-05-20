@@ -30,6 +30,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 from lxml import html as L
 
@@ -37,6 +38,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -57,7 +59,7 @@ class IPAustraliaFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -70,7 +72,7 @@ class IPAustraliaFeesClient(BaseAsyncClient):
                 "Accept-Language": "en-AU,en;q=0.5",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self) -> str:
         r = await self._request(
@@ -145,14 +147,14 @@ def _detect_condition(description: str) -> FeeCondition | None:
         m = re.search(r"more than (\d+)", d)
         threshold = int(m.group(1)) if m else 20
         return FeeCondition(
-            trigger="claims_over",  # type: ignore[arg-type]
+            trigger="claims_over",
             threshold=threshold,
             per_unit=True,
             description="IP Australia per-claim surcharge above threshold.",
         )
     if "per month" in d:
         return FeeCondition(
-            trigger="late_days",  # type: ignore[arg-type]
+            trigger="late_days",
             per_unit=True,
             description="Per month (or part-month) of extension/late period.",
         )

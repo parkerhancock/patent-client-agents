@@ -40,12 +40,13 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
-from typing import Any
+from typing import Any, Unpack, cast
 
 from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -67,7 +68,7 @@ class EPOFeesClient(BaseAsyncClient):
     DEFAULT_TIMEOUT = 30.0
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         kwargs.setdefault(
             "headers",
@@ -76,15 +77,16 @@ class EPOFeesClient(BaseAsyncClient):
                 "Accept": "application/json",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_fees(self) -> list[dict[str, Any]]:
-        return await self._request_json(
+        data = await self._request_json(
             "GET",
             "/prod/bff/api/fees",
             params={"language": "EN", "currency": "EUR"},
             context="epo_fees_bff",
-        )  # type: ignore[return-value]
+        )
+        return cast("list[dict[str, Any]]", data)
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -164,14 +166,14 @@ def _detect_condition(description: str) -> FeeCondition | None:
         m = _CLAIMS_OVER_RE.search(d)
         if "16th" in d or "from the 16th" in d:
             return FeeCondition(
-                trigger="claims_over",  # type: ignore[arg-type]
+                trigger="claims_over",
                 threshold=15,
                 per_unit=True,
                 description="EPO charges per claim from the 16th onwards.",
             )
         if "51st" in d or "from the 51st" in d:
             return FeeCondition(
-                trigger="claims_over",  # type: ignore[arg-type]
+                trigger="claims_over",
                 threshold=50,
                 per_unit=True,
                 description="EPO higher-tier per-claim fee from the 51st onwards.",
@@ -179,13 +181,13 @@ def _detect_condition(description: str) -> FeeCondition | None:
         # Fallback if threshold not yet identifiable
         threshold = int(m.group(1)) - 1 if m else 15
         return FeeCondition(
-            trigger="claims_over",  # type: ignore[arg-type]
+            trigger="claims_over",
             threshold=threshold,
             per_unit=True,
         )
     if "page fee" in d or ("pages" in d and "over" in d):
         return FeeCondition(
-            trigger="pages_over",  # type: ignore[arg-type]
+            trigger="pages_over",
             threshold=35,
             per_unit=True,
             description="Per page over 35.",

@@ -29,24 +29,33 @@ from __future__ import annotations
 import argparse
 import sys
 
-from law_tools_core.mcp import make_auth
-from law_tools_core.mcp.server_factory import build_server
 from patent_client_agents import __version__
 
-from . import ip_mcp
+_mcp_import_error: ModuleNotFoundError | None = None
 
-mcp = build_server(
-    name="patent-client-agents",
-    instructions=(
-        "Patent and IP data connectors: USPTO (ODP, PPUBS, Assignments, "
-        "Office Actions, PTAB, Petitions, Bulk Data, TSDR, Trademark "
-        "Assignments), EPO OPS, Google Patents, CPC, MPEP, TMEP, CanLII "
-        "(Canadian courts, tribunals, and IP statutes), and WIPO Lex "
-        "(global IP statute / treaty / judgment database)."
-    ),
-    auth=make_auth(),
-)
-mcp.mount(ip_mcp)
+try:
+    from law_tools_core.mcp import make_auth
+    from law_tools_core.mcp.server_factory import build_server
+
+    from . import ip_mcp
+except ModuleNotFoundError as exc:
+    if exc.name != "fastmcp":
+        raise
+    _mcp_import_error = exc
+    mcp = None
+else:
+    mcp = build_server(
+        name="patent-client-agents",
+        instructions=(
+            "Patent and IP data connectors: USPTO (ODP, PPUBS, Assignments, "
+            "Office Actions, PTAB, Petitions, Bulk Data, TSDR, Trademark "
+            "Assignments), EPO OPS, Google Patents, CPC, MPEP, TMEP, CanLII "
+            "(Canadian courts, tribunals, and IP statutes), and WIPO Lex "
+            "(global IP statute / treaty / judgment database)."
+        ),
+        auth=make_auth(),
+    )
+    mcp.mount(ip_mcp)
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -58,9 +67,10 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="patent-client-agents-mcp",
         description=(
-            "Run the patent-client-agents MCP server on stdio. Exposes ~50 patent/IP "
-            "tools from USPTO, EPO, Google Patents, MPEP, and CanLII to any "
-            "MCP client. See docs/installation.md for client configuration."
+            "Run the patent-client-agents MCP server on stdio. Exposes 111 "
+            "default patent/IP tools to any MCP client; local/private deployments "
+            "expose up to 168 tools when every env-gated family is configured. "
+            "See docs/installation.md for client configuration."
         ),
     )
     parser.add_argument(
@@ -69,7 +79,13 @@ def main(argv: list[str] | None = None) -> None:
         version=f"patent-client-agents {__version__}",
     )
     parser.parse_args(argv)
+    if _mcp_import_error is not None:
+        raise SystemExit(
+            "patent-client-agents-mcp requires the optional MCP dependencies. "
+            "Install with: pip install 'patent-client-agents[mcp]'"
+        ) from _mcp_import_error
     try:
+        assert mcp is not None
         mcp.run()
     except KeyboardInterrupt:
         sys.exit(0)

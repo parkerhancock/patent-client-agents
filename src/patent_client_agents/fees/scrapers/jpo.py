@@ -36,6 +36,7 @@ import logging
 import re
 from datetime import date
 from decimal import Decimal
+from typing import Unpack
 
 from lxml import html as L
 
@@ -43,6 +44,7 @@ from law_tools_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
+    FeeClientKwargs,
     FeeCondition,
     FeeItem,
     FeeSchedule,
@@ -68,7 +70,7 @@ class JPOFeesClient(BaseAsyncClient):
     DEFAULT_TTL_SECONDS = 7 * 24 * 3600
     HTTP2 = True
 
-    def __init__(self, **kwargs: object) -> None:
+    def __init__(self, **kwargs: Unpack[FeeClientKwargs]) -> None:
         kwargs.setdefault("ttl_seconds", self.DEFAULT_TTL_SECONDS)
         # JPO drops requests that don't look like a real browser — needs
         # the full Sec-Fetch-* set or you get ReadTimeout/ReadError. The
@@ -89,7 +91,7 @@ class JPOFeesClient(BaseAsyncClient):
                 "Sec-Fetch-Site": "none",
             },
         )
-        super().__init__(**kwargs)  # type: ignore[arg-type]
+        super().__init__(**kwargs)
 
     async def fetch_html(self) -> str:
         r = await self._request(
@@ -302,9 +304,8 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
                 continue
 
             # Year-banded annuities → expand to per-year rows
-            years_for_row: list[int | None]
             if band is not None:
-                years_for_row = list(range(band[0], band[1] + 1))
+                years_for_row: list[int | None] = list(range(band[0], band[1] + 1))
             elif category == FeeCategory.maintenance:
                 # Maintenance row that didn't match a year band — skip to
                 # avoid the year-required validator failing.
@@ -351,7 +352,7 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
                             tier=EntityTier.none,
                             year=year,
                             condition=FeeCondition(
-                                trigger="claims_over",  # type: ignore[arg-type]
+                                trigger="claims_over",
                                 threshold=1,
                                 per_unit=True,
                                 description="JPO per-claim surcharge.",

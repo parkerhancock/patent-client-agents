@@ -489,7 +489,7 @@ class PrhClient(BaseAsyncClient):
         appno = (application_number or "").strip()
         if not appno:
             raise ValueError("application_number must be a non-empty string")
-        path_segments = [appno]
+        path_segments: list[str] = [appno]
         if registration_number:
             path_segments.append(registration_number.strip())
         url = f"{TRADEMARK_HOST}/opendata/trademark/{variant}/" + "/".join(path_segments)

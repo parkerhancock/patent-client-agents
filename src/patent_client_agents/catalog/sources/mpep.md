@@ -9,9 +9,11 @@ reference for patent examination procedure at the USPTO.
 |---|---|
 | Module | `patent_client_agents.mpep` |
 | Client | `MpepClient` |
+| Base URL | `https://mpep.uspto.gov` (build-time snapshot source; no runtime HTTP) |
 | Backend | Local SQLite/FTS5 corpus (no runtime HTTP) |
 | Snapshot source | Scraped from `https://mpep.uspto.gov/RDMS/MPEP/content` |
 | Auth | None |
+| Rate limits | None at runtime; corpus builder uses ordinary USPTO website requests |
 | Status | Active |
 
 ## Backend: local SQLite/FTS5 corpus
