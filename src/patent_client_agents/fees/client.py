@@ -112,6 +112,53 @@ _OFFICE_ALIASES: dict[str, tuple[str, str]] = {
     "INPI FRANCE": ("FR", "INPI-FR"),
     "INSTITUT NATIONAL DE LA PROPRIETE INDUSTRIELLE": ("FR", "INPI-FR"),
     "INSTITUT NATIONAL DE LA PROPRIÉTÉ INDUSTRIELLE": ("FR", "INPI-FR"),
+    # OEPM Spain
+    "OEPM": ("ES", "OEPM"),
+    "ES": ("ES", "OEPM"),
+    "SPAIN": ("ES", "OEPM"),
+    "OFICINA ESPAÑOLA DE PATENTES Y MARCAS": ("ES", "OEPM"),
+    # HKIPD Hong Kong
+    "HKIPD": ("HK", "HKIPD"),
+    "HK": ("HK", "HKIPD"),
+    "HONG KONG": ("HK", "HKIPD"),
+    "HONG KONG INTELLECTUAL PROPERTY DEPARTMENT": ("HK", "HKIPD"),
+    # IMPI Mexico
+    "IMPI": ("MX", "IMPI"),
+    "MX": ("MX", "IMPI"),
+    "MEXICO": ("MX", "IMPI"),
+    "MÉXICO": ("MX", "IMPI"),
+    "INSTITUTO MEXICANO DE LA PROPIEDAD INDUSTRIAL": ("MX", "IMPI"),
+    # IPOS Singapore
+    "IPOS": ("SG", "IPOS"),
+    "SG": ("SG", "IPOS"),
+    "SINGAPORE": ("SG", "IPOS"),
+    "INTELLECTUAL PROPERTY OFFICE OF SINGAPORE": ("SG", "IPOS"),
+    # TÜRKPATENT Turkey
+    "TURKPATENT": ("TR", "TURKPATENT"),
+    "TÜRKPATENT": ("TR", "TURKPATENT"),
+    "TR": ("TR", "TURKPATENT"),
+    "TURKEY": ("TR", "TURKPATENT"),
+    "TÜRKIYE": ("TR", "TURKPATENT"),
+    "TURKIYE": ("TR", "TURKPATENT"),
+    "TURKISH PATENT AND TRADEMARK OFFICE": ("TR", "TURKPATENT"),
+    # PRH Finland
+    "PRH": ("FI", "PRH"),
+    "FI": ("FI", "PRH"),
+    "FINLAND": ("FI", "PRH"),
+    "PATENTTI- JA REKISTERIHALLITUS": ("FI", "PRH"),
+    "FINNISH PATENT AND REGISTRATION OFFICE": ("FI", "PRH"),
+    # PRV Sweden
+    "PRV": ("SE", "PRV"),
+    "SE": ("SE", "PRV"),
+    "SWEDEN": ("SE", "PRV"),
+    "PATENT- OCH REGISTRERINGSVERKET": ("SE", "PRV"),
+    "SWEDISH INTELLECTUAL PROPERTY OFFICE": ("SE", "PRV"),
+    # ILPO Israel
+    "ILPO": ("IL", "ILPO"),
+    "IL": ("IL", "ILPO"),
+    "ISRAEL": ("IL", "ILPO"),
+    "ISRAEL PATENT OFFICE": ("IL", "ILPO"),
+    "ISRAELI PATENT OFFICE": ("IL", "ILPO"),
     # WIPO — three systems, right discriminates
     # (use 'WIPO' as a top-level alias; resolver routes by right)
     "WIPO": ("WO", "WIPO"),

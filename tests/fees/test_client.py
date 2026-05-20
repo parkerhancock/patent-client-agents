@@ -52,6 +52,31 @@ class TestResolveJurisdiction:
         with pytest.raises(UnknownJurisdictionError, match="Unknown jurisdiction"):
             resolve_jurisdiction("ZZ", RightType.patent)
 
+    def test_every_office_code_is_aliased(self) -> None:
+        """Every office in registry.OFFICES must resolve via its own code.
+
+        Regression guard: when a new office is added to the registry, an
+        alias block must also be added to client._OFFICE_ALIASES so that
+        get_fee_schedule("SE", "patent") and similar calls don't raise
+        UnknownJurisdictionError.
+        """
+        for office_code in registry.OFFICES:
+            if office_code.startswith("WIPO-"):
+                continue  # WIPO sub-systems are resolved via right discrimination, not aliases
+            right = (
+                RightType.patent
+                if (office_code, RightType.patent) in registry._DISPATCH
+                else RightType.trademark
+                if (office_code, RightType.trademark) in registry._DISPATCH
+                else RightType.design
+            )
+            _, resolved_office = resolve_jurisdiction(office_code, right)
+            assert resolved_office == office_code, (
+                f"Office {office_code!r} in registry but resolve_jurisdiction "
+                f"returned {resolved_office!r}. Add an alias block in "
+                f"fees/client.py:_OFFICE_ALIASES."
+            )
+
 
 def _fixture_schedule() -> FeeSchedule:
     """A small synthetic schedule covering filing, maintenance, excess_claims."""
