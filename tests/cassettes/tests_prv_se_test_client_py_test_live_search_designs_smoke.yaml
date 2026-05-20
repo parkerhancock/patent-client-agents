@@ -1,0 +1,55 @@
+interactions:
+- request:
+    body: '{"page":0,"pageSize":2,"sortColumn":"filingDate","sortOrder":"DESC","simpleSearchText":"stol"}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '94'
+      content-type:
+      - application/json
+      host:
+      - dv-search-api.prv.se
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    method: POST
+    uri: https://dv-search-api.prv.se/searchdesign/dssimplesearch/
+  response:
+    body:
+      string: "{\"totalHits\":920,\"totalPages\":459,\"hits\":2,\"page\":0,\"designs\":[{\"idDesign\":52283641,\"applicants\":[{\"name\":\"Raoul
+        & Hartly AB\",\"address\":\"Raoul Lndqvist Rind\xF6backen 23 18541 Vaxholm,
+        SE, 559530-1325\"}],\"applicationNumber\":\"2025-0180\",\"classes\":[\"06-01\"],\"designId\":\"100391624\",\"designNumber\":1,\"designsTotal\":1,\"expiryDate\":\"2035-11-17\",\"filingDate\":\"2025-11-17\",\"productTitle\":\"Stol\",\"registrationNumber\":\"85760\",\"representatives\":[],\"statusEn\":\"Registered\",\"statusSv\":\"Registrerad\"},{\"idDesign\":52281631,\"applicants\":[{\"name\":\"Karin
+        Persson\",\"address\":\"Fortuna Strand 89 25730 Rydeb\xE4ck, SE\"}],\"applicationNumber\":\"2025-0162\",\"classes\":[\"06-01\"],\"designId\":\"100390156\",\"designNumber\":1,\"designsTotal\":1,\"expiryDate\":\"2030-10-20\",\"filingDate\":\"2025-10-20\",\"productTitle\":\"Stol\",\"registrationNumber\":\"85842\",\"representatives\":[],\"statusEn\":\"Registered\",\"statusSv\":\"Registrerad\"}]}"
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Content-Length:
+      - '880'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 19 May 2026 13:34:25 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - Microsoft-IIS/10.0
+      Vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Powered-By:
+      - ARR/3.0
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: '{"page":0,"pageSize":2,"sortColumn":"filingDate","sortOrder":"DESC","simpleSearchText":"IKEA"}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '94'
+      content-type:
+      - application/json
+      host:
+      - dv-search-api.prv.se
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    method: POST
+    uri: https://dv-search-api.prv.se/searchtrademark/tmsimplesearch/
+  response:
+    body:
+      string: "{\"totalHits\":89,\"totalPages\":44,\"hits\":2,\"page\":0,\"trademarks\":[{\"idTrademark\":4907387,\"applicants\":[{\"name\":\"IKEA
+        \xC4lmhult AB\",\"address\":\"c/o IKEA of Sweden AB 343 81 \xC4lmhult, SE,
+        559070-5058\"}],\"applicationNumber\":\"2025-05038\",\"classes\":[\"35\",\"36\",\"41\"],\"dossierTypeEn\":\"National
+        trademark\",\"dossierTypeSv\":\"Nationellt varum\xE4rke\",\"expiryDate\":\"2035-10-01\",\"filingDate\":\"2025-10-01\",\"markFeatureEn\":\"Figurative\",\"markFeatureSv\":\"Figur\",\"markSpecification\":\"form
+        hult\",\"registrationNumber\":\"639377\",\"representatives\":[\"Advokatfirman
+        Lindahl KB, Pr\xE5mplatsen 4 211 19 Malm\xF6, SE, 916629-0834\"],\"statusEn\":\"Registered\",\"statusSv\":\"Registrerad\"},{\"idTrademark\":4709243,\"applicants\":[{\"name\":\"IKEA
+        Centres A/S\",\"address\":\"Amager Strandvej 390 DK-2770 Kastrup, DK\"}],\"applicationNumber\":\"2016-00749\",\"classes\":[\"35\",\"36\",\"37\",\"39\",\"41\",\"42\",\"43\"],\"dossierTypeEn\":\"National
+        trademark\",\"dossierTypeSv\":\"Nationellt varum\xE4rke\",\"expiryDate\":null,\"filingDate\":\"2016-02-02\",\"markFeatureEn\":\"Word\",\"markFeatureSv\":\"Ord\",\"markSpecification\":\"\xC4LV
+        SHOPPING\",\"registrationNumber\":null,\"representatives\":[\"Advokatbyr\xE5n
+        Gulliksson AB, Box 4171 203 13 Malm\xF6, SE, 556733-5319\"],\"statusEn\":\"Dismissed\",\"statusSv\":\"Avskriven\"}]}"
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Content-Length:
+      - '1211'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 19 May 2026 13:34:25 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - Microsoft-IIS/10.0
+      Vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Powered-By:
+      - ARR/3.0
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: '{"page":0,"pageSize":2,"sortColumn":"","sortOrder":"DESC","applicants":{"value":"AstraZeneca","searchType":"CONTAINS"}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '119'
+      content-type:
+      - application/json
+      host:
+      - patents-search-api.prv.se
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    method: POST
+    uri: https://patents-search-api.prv.se/searchpatentspc/patentsearchspc/
+  response:
+    body:
+      string: "{\"totalHits\":31,\"totalPages\":15,\"hits\":2,\"page\":0,\"searchSpcDTOS\":[{\"idSpc\":2758373,\"applicants\":[{\"name\":\"AstraZeneca
+        AB\",\"address\":\"151 85 S\xF6dert\xE4lje, Sverige, SE\"}],\"applicationNumberFormatted\":\"EP08806741.8\",\"applicationNumberSpcFormatted\":\"2490037-5\",\"publicationNumber\":\"2201012\",\"substance\":\"Capivasertib,
+        optionally in the form of a pharmaceutically acceptable salt\",\"validFromDate\":\"2028-10-10\",\"validUntilDate\":\"2033-10-09\"},{\"idSpc\":2758263,\"applicants\":[{\"name\":\"AstraZeneca
+        AB\",\"address\":\"151 85 S\xF6dert\xE4lje, Sverige, SE\"},{\"name\":\"(Hist)
+        MedImmune\",\"address\":\"LLC, One MedImmune Way, Gaithersburg, MD 20878,
+        USA, US\"}],\"applicationNumberFormatted\":\"EP09707396.9\",\"applicationNumberSpcFormatted\":\"2290020-3\",\"publicationNumber\":\"2250279\",\"substance\":\"anifrolumab\",\"validFromDate\":\"2029-02-07\",\"validUntilDate\":\"2034-02-06\"}]}"
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Content-Length:
+      - '841'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 19 May 2026 14:03:05 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - Microsoft-IIS/10.0
+      Vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Powered-By:
+      - ARR/3.0
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

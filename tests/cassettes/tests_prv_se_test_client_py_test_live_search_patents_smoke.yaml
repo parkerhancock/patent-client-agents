@@ -1,0 +1,66 @@
+interactions:
+- request:
+    body: '{"page":0,"pageSize":2,"sortColumn":"filingDate","sortOrder":"DESC","simpleSearchText":"Volvo"}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '95'
+      content-type:
+      - application/json
+      host:
+      - patents-search-api.prv.se
+      user-agent:
+      - patent-client-agents/0 (+https://patentclient.com; contact data@prv.se)
+    method: POST
+    uri: https://patents-search-api.prv.se/searchpatent/patentsimplesearch/
+  response:
+    body:
+      string: "{\"totalHits\":3309,\"totalPages\":1654,\"hits\":2,\"page\":0,\"searchPatentDTOS\":[{\"idPatent\":7064552,\"applicants\":[{\"name\":\"VOLVO
+        TRUCK CORPORATION\",\"address\":\"VOLVO TRUCK CORPORATION, ;, 405 08 G\xF6teborg,
+        Sverige\"}],\"applicationNumberFormatted\":\"SE2615555-6\",\"applicationType\":\"NAT\",\"cpcClasses\":[],\"dpkClasses\":[],\"filingDate\":\"2026-05-05\",\"grantDate\":null,\"ipcClasses\":[],\"inventors\":[{\"name\":\"David
+        RAY\",\"address\":\"CHASSIEU, Frankrike\"}],\"publicationDate\":\"2026-05-05\",\"publicationNumber\":\"\",\"reference\":null,\"representatives\":[{\"name\":\"Zacco
+        Sweden AB\",\"address\":\"Zacco Sweden AB, P.O. Box 5581 L\xF6jtnantsgatan
+        21, 114 85 Stockholm, Sverige\"}],\"status\":{\"status\":\"116\",\"statusText\":null,\"statusDisplayTextEn\":null,\"statusDisplayTextSv\":null,\"statusSubText\":null,\"statusDisplaySubTextEn\":null,\"statusDisplaySubTextSv\":null},\"title\":\"CLIP
+        ASSEMBLY FOR MOUNTING AN ACCESSORY TO A TRIM ELEMENT OF A VEHICLE, AND ASSOCIATED
+        ARRANGEMENT AND VEHICLE\"},{\"idPatent\":7059633,\"applicants\":[{\"name\":\"Volvo
+        Truck Corporation\",\"address\":\"Volvo Truck Corporation, x, 405 08 G\xF6teborg,
+        Sverige\"}],\"applicationNumberFormatted\":\"SE2615536-6\",\"applicationType\":\"NAT\",\"cpcClasses\":[],\"dpkClasses\":[],\"filingDate\":\"2026-04-30\",\"grantDate\":null,\"ipcClasses\":[],\"inventors\":[{\"name\":\"Bhumika
+        Shah\",\"address\":\"Burhanpur, Indien\"},{\"name\":\"Muthukumar Venkitachalam\",\"address\":\"Kerala,
+        Indien\"},{\"name\":\"Vinary M R\",\"address\":\"Karnataka, Indien\"},{\"name\":\"Torbj\xF6rn
+        Wiklund\",\"address\":\"Trollh\xE4ttan, Sverige\"}],\"publicationDate\":\"2026-04-30\",\"publicationNumber\":\"\",\"reference\":null,\"representatives\":[{\"name\":\"AWA
+        Sweden AB\",\"address\":\"AWA Sweden AB, P O Box 5117, 200 71 Malm\xF6, Sverige\"}],\"status\":{\"status\":\"116\",\"statusText\":null,\"statusDisplayTextEn\":null,\"statusDisplayTextSv\":null,\"statusSubText\":null,\"statusDisplaySubTextEn\":null,\"statusDisplaySubTextSv\":null},\"title\":\"AIR
+        GUIDE MEMBER AND VEHICLE COOLING SYSTEM\"}]}"
+    headers:
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Content-Length:
+      - '1898'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 19 May 2026 13:34:21 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - Microsoft-IIS/10.0
+      Vary:
+      - Origin,Access-Control-Request-Method,Access-Control-Request-Headers
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Powered-By:
+      - ARR/3.0
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1
