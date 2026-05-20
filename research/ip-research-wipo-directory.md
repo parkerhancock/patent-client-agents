@@ -3,6 +3,18 @@
 **Research Date:** May 14, 2026  
 **Target URLs Accessed:** See section 6 (WIPO Authoritative Citations)
 
+> **2026-05-19 correction:** The "not traversable" conclusion below (§6
+> "Research Methodology & Limitations") was wrong. WIPO Country IP Profile
+> pages at `https://www.wipo.int/en/web/country-profiles/{iso2-lower}` are
+> server-rendered HTML; they sit behind a TLS-fingerprinting AWS CloudFront
+> WAF that defeats plain `curl`/`WebFetch` but is cleared by Playwright with
+> a persistent profile and a `navigator.webdriver = undefined` stealth init
+> script. We now snapshot these pages with
+> [`scripts/wipo_country_profile_snapshot.py`](../scripts/wipo_country_profile_snapshot.py)
+> into [`research/wipo_profiles/`](wipo_profiles/) — see that
+> directory's README for usage. The gap analysis in §2–§5 below is still
+> useful as the missing-jurisdictions checklist.
+
 ## Executive Summary
 
 This research attempted to compile a comprehensive manifest of WIPO-recognized IP offices using two authoritative WIPO sources: (1) the Directory of IP Offices (Country IP Profiles), and (2) the IP Statistics Data Center (patent filing volumes). WIPO's primary public entry points are React-based web applications that load data dynamically, preventing traditional static content extraction. This report documents attempted access, identifies available WIPO references, and provides gap analysis against the current 77-jurisdiction manifest.
@@ -187,6 +199,15 @@ Our manifest should reference:
 ---
 
 ## 6. Research Methodology & Limitations
+
+> **2026-05-19 correction:** The "SPA / no static HTML" conclusion in this
+> section is wrong for the country-profiles directory specifically. Those
+> pages *are* server-rendered HTML; the blocker was the AWS CloudFront WAF
+> JS challenge, not client-side rendering. With Playwright + persistent
+> profile + stealth init, every per-country page returns full HTML on the
+> first request. See [`research/wipo_profiles/README.md`](wipo_profiles/README.md).
+> The IP Statistics portal (`/ipstats`, `/en/web/ip-statistics`) may still
+> be SPA-rendered — not re-verified in the 2026-05-19 sweep.
 
 **Attempted Access Methods:**
 1. ✓ Direct HTTP fetch with Mozilla user-agent: `curl -sL -A "Mozilla/5.0 ..."`

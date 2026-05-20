@@ -16,6 +16,21 @@ For each, this doc gives:
 
 **Trigger:** STATE.yaml row with `synopsis: null` and `next_action: synopsis_discovery`.
 
+**Starting-point shortcut.** Before WebFetching, check
+[`research/wipo_profiles/{iso2}.md`](wipo_profiles/) for WIPO's structured
+overview of the jurisdiction — national IP office names + city, WIPO
+membership year, treaty count, GII rank, and direct URLs into WIPO Lex,
+the statistical IP profile PDF, PCT eGuide, and Madrid System member
+profile. Saves 20+ minutes of opening tabs. If the file is missing, run:
+
+```bash
+uv run python scripts/wipo_country_profile_snapshot.py {ISO2}
+```
+
+That populates the snapshot; see
+[`research/wipo_profiles/README.md`](wipo_profiles/README.md) for full
+usage and what fields are extracted.
+
 ### Input the orchestrator needs
 
 | Field | Source | Example |

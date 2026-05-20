@@ -127,3 +127,18 @@ follow `CONNECTOR_STANDARDS.md` directly; the canonical templates are
 shape) and any of the substantive-law connectors (`mpep`, `tmep`,
 `dpma_statutes`) for the `mcp_local` corpus shape with
 `get_corpus_status()`.
+
+## Research workflow (when adding new coverage)
+
+- [`research/README.md`](research/README.md) is the navigation index;
+  [`research/RUNBOOK-research.md`](research/RUNBOOK-research.md) §A is the
+  canonical discovery prompt for new-jurisdiction research agents.
+- **Start any new-jurisdiction research by reading
+  [`research/wipo_profiles/{iso2}.md`](research/wipo_profiles/)** —
+  pre-rendered WIPO Country IP Profile snapshots covering ~194
+  jurisdictions (national IP office names, WIPO membership year, treaty
+  count, GII rank, direct links into WIPO Lex / Statistical IP Profile
+  PDF / PCT eGuide / Madrid System member profile). Refresh or generate
+  missing files with
+  `uv run python scripts/wipo_country_profile_snapshot.py {ISO2}` — see
+  [`research/wipo_profiles/README.md`](research/wipo_profiles/README.md).

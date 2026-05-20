@@ -36,3 +36,6 @@ site/
 docs/patent-client-index/
 
 .claude/
+
+# Research-helper artifacts
+.cache/

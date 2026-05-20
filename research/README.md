@@ -19,6 +19,15 @@ fee-schedule URLs (no inline figures — we don't reproduce drift-prone
 content), connector rating in context, cross-references to detail and
 waves.
 
+**Researching a new jurisdiction (no synopsis yet)?**
+- Start with [`wipo_profiles/{iso2}.md`](wipo_profiles/) — pre-rendered
+  WIPO Country IP Profile snapshots for ~194 jurisdictions (offices,
+  membership year, treaty count, GII rank, direct WIPO Lex / Statistical
+  IP Profile PDF / PCT eGuide / Madrid System links). See
+  [`wipo_profiles/README.md`](wipo_profiles/README.md) for usage. Then
+  follow [`RUNBOOK-research.md`](RUNBOOK-research.md) §A for the full
+  discovery workflow.
+
 **Need the deep dive?**
 - [`connectors/`](connectors/) — original detailed survey files per office (~200 lines each; assets, auth, formats, gotchas).
 - [`waves/`](waves/) — time-stamped research products (frozen audit trail, full primary-source hyperlinks).
@@ -50,6 +59,10 @@ research/
 ├── connectors/                        ← detail surveys (canonical deep dive per office)
 │   ├── dpma.md, kipo.md, ukipo.md, ...
 │   └── wipo_lex_api_discovery.md
+│
+├── wipo_profiles/                     ← WIPO Country IP Profile snapshots (per-iso2)
+│   ├── README.md                       (~194 jurisdictions; refresh via scripts/wipo_country_profile_snapshot.py)
+│   └── {iso2}.md per WIPO-recognized jurisdiction
 │
 ├── waves/                             ← time-stamped research products (frozen)
 │   └── 2026-05-16-registered-ip-discovery/
