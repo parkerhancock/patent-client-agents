@@ -15,6 +15,7 @@ from .scrapers import cnipa as _cnipa
 from .scrapers import dpma as _dpma
 from .scrapers import epo as _epo
 from .scrapers import euipo as _euipo
+from .scrapers import hk_ipd as _hk_ipd
 from .scrapers import inpi_br as _inpi_br
 from .scrapers import inpi_fr as _inpi_fr
 from .scrapers import ipaustralia as _ipau
@@ -59,6 +60,9 @@ _DISPATCH: dict[tuple[str, RightType], Scraper] = {
     ("OEPM", RightType.patent): _oepm.scrape_oepm_patents,
     ("OEPM", RightType.trademark): _oepm.scrape_oepm_trademarks,
     ("OEPM", RightType.design): _oepm.scrape_oepm_designs,
+    ("HKIPD", RightType.patent): _hk_ipd.scrape_hk_patents,
+    ("HKIPD", RightType.trademark): _hk_ipd.scrape_hk_trademarks,
+    ("HKIPD", RightType.design): _hk_ipd.scrape_hk_designs,
     ("WIPO-PCT", RightType.patent): _wipo.scrape_wipo_pct,
     ("WIPO-MADRID", RightType.trademark): _wipo.scrape_wipo_madrid,
     ("WIPO-HAGUE", RightType.design): _wipo.scrape_wipo_hague,
@@ -81,6 +85,7 @@ OFFICES: tuple[str, ...] = (
     "INPI-BR",
     "INPI-FR",
     "OEPM",
+    "HKIPD",
     "WIPO-PCT",
     "WIPO-MADRID",
     "WIPO-HAGUE",
