@@ -1,15 +1,11 @@
 {
   "country_name": "Samoa",
   "gii_rank": null,
-  "gii_ranking_text": "_(not present)_",
+  "gii_ranking_text": null,
   "iso2": "WS",
   "lead_summary": "Explore IP Landscape:\nSamoa has been a member of WIPO since 1997 and is a signatory to over 7 WIPO treaties.\nThe national IP office of Samoa is the Registries of Companies and Intellectual Property Division (RCIP) at the Ministry of Commerce, Industry and Labour. The office is located in Apia.",
   "national_ip_offices": "The national IP office of Samoa is the Registries of Companies and Intellectual Property Division (RCIP) at the Ministry of Commerce, Industry and Labour. The office is located in Apia.",
   "quick_links": [
-    {
-      "resource": "WIPO Lex profile",
-      "url": "_(not present)_"
-    },
     {
       "resource": "WIPO treaty memberships",
       "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=WS"
@@ -21,10 +17,6 @@
     {
       "resource": "Statistical IP profile (PDF)",
       "url": "https://www.wipo.int/edocs/statistics-country-profile/en/ws.pdf"
-    },
-    {
-      "resource": "GII 2024 ranking (PDF)",
-      "url": "_(not present)_"
     },
     {
       "resource": "PCT eGuide",

@@ -1,15 +1,11 @@
 {
   "country_name": "Dominica",
   "gii_rank": null,
-  "gii_ranking_text": "_(not present)_",
+  "gii_ranking_text": null,
   "iso2": "DM",
   "lead_summary": "Explore IP Landscape:\nDominica has been a member of WIPO since 1998 and is a signatory to over 5 WIPO treaties.\nThe national IP office of Dominica is the Companies and Intellectual Property Office (CIPO). The office is located in Roseau.",
   "national_ip_offices": "The national IP office of Dominica is the Companies and Intellectual Property Office (CIPO). The office is located in Roseau.",
   "quick_links": [
-    {
-      "resource": "WIPO Lex profile",
-      "url": "_(not present)_"
-    },
     {
       "resource": "WIPO treaty memberships",
       "url": "https://www.wipo.int/wipolex/en/treaties/ShowResults?code=DM"
@@ -23,20 +19,12 @@
       "url": "https://www.wipo.int/edocs/statistics-country-profile/en/dm.pdf"
     },
     {
-      "resource": "GII 2024 ranking (PDF)",
-      "url": "_(not present)_"
-    },
-    {
       "resource": "PCT eGuide",
       "url": "https://pctlegal.wipo.int/eGuide/view-doc.xhtml?doc-code=DM&doc-lang=en"
     },
     {
       "resource": "ePCT office profile",
       "url": "https://pct.wipo.int/ePCTExternal/pages/OfficeProfile.xhtml"
-    },
-    {
-      "resource": "Madrid System member profile",
-      "url": "_(not present)_"
     },
     {
       "resource": "National statements at WIPO assemblies",

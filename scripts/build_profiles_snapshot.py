@@ -29,6 +29,8 @@ SNAPSHOT_DIR = ROOT / "coverage" / "profiles-snapshot"
 
 # Markdown table row: | Key | Value |
 _TABLE_ROW = re.compile(r"^\|\s*([^|]+?)\s*\|\s*(.+?)\s*\|\s*$")
+# Sentinel WIPO uses (and our snapshot script copies) for missing fields.
+_MISSING = re.compile(r"^_?\(?not\s+present\)?_?$", re.IGNORECASE)
 _H1 = re.compile(r"^#\s+(.+?)\s*—\s*WIPO Country IP Profile")
 _SECTION_H2 = re.compile(r"^##\s+(.+?)\s*$")
 _SOURCE = re.compile(r"^\*\*Source:\*\*\s+(\S+)")
@@ -74,11 +76,15 @@ def _parse_profile(md_path: Path) -> dict[str, Any] | None:
                 continue
             # Strip backtick wrapping on values like `JP`.
             val = val.strip("`")
+            if _MISSING.match(val):
+                continue
             fields[_slugify_key(key)] = val
         elif section and section.lower().startswith("quick links"):
             if m := _TABLE_ROW.match(line):
                 resource, url = m.group(1).strip(), m.group(2).strip()
                 if resource.lower() == "resource" and url.lower() == "url":
+                    continue
+                if _MISSING.match(url):
                     continue
                 quick_links.append({"resource": resource, "url": url})
         elif in_summary:
