@@ -1,0 +1,495 @@
+{
+  "currency": "CHF",
+  "effective_date": "2025-01-01",
+  "fees": [
+    {
+      "amount": "397",
+      "category": "filing",
+      "code": "wo-hague-1-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For one design",
+      "notes": "Hague Schedule of Fees; item 1.1; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "filing",
+      "code": "wo-hague-1-2",
+      "condition": {
+        "description": "Per additional design beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "multi_design"
+      },
+      "currency": "CHF",
+      "label": "For each additional design included in the same international application",
+      "notes": "Hague Schedule of Fees; item 1.2; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "17",
+      "category": "publication",
+      "code": "wo-hague-2-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For each reproduction to be published",
+      "notes": "Hague Schedule of Fees; item 2.1; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "publication",
+      "code": "wo-hague-2-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For each page, in addition to the first, on which one or more reproductions are shown (where the reproductions are submitted on paper)",
+      "notes": "Hague Schedule of Fees; item 2.2; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2",
+      "category": "other",
+      "code": "wo-hague-3",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Additional fee where the description exceeds 100 words per word exceeding 100 words 1",
+      "notes": "Hague Schedule of Fees; item 3; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "42",
+      "category": "designation",
+      "code": "wo-hague-4-1-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For one design",
+      "notes": "Hague Schedule of Fees; item 4.1.1; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2",
+      "category": "designation",
+      "code": "wo-hague-4-1-2",
+      "condition": {
+        "description": "Per additional design beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "multi_design"
+      },
+      "currency": "CHF",
+      "label": "For each additional design included in the same international application",
+      "notes": "Hague Schedule of Fees; item 4.1.2; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "designation",
+      "code": "wo-hague-4-2-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For one design",
+      "notes": "Hague Schedule of Fees; item 4.2.1; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20",
+      "category": "designation",
+      "code": "wo-hague-4-2-2",
+      "condition": {
+        "description": "Per additional design beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "multi_design"
+      },
+      "currency": "CHF",
+      "label": "For each additional design included in the same international application",
+      "notes": "Hague Schedule of Fees; item 4.2.2; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "90",
+      "category": "designation",
+      "code": "wo-hague-4-3-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For one design",
+      "notes": "Hague Schedule of Fees; item 4.3.1; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "designation",
+      "code": "wo-hague-4-3-2",
+      "condition": {
+        "description": "Per additional design beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "multi_design"
+      },
+      "currency": "CHF",
+      "label": "For each additional design included in the same international application",
+      "notes": "Hague Schedule of Fees; item 4.3.2; Section: International Applications",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "renewal",
+      "code": "wo-hague-7-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For one design",
+      "notes": "Hague Schedule of Fees; item 7.1; Section: Renewal of an International Registration",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "17",
+      "category": "renewal",
+      "code": "wo-hague-7-2",
+      "condition": {
+        "description": "Per additional design beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "multi_design"
+      },
+      "currency": "CHF",
+      "label": "For each additional design included in the same international registration",
+      "notes": "Hague Schedule of Fees; item 7.2; Section: Renewal of an International Registration",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "21",
+      "category": "other",
+      "code": "wo-hague-8-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For one design",
+      "notes": "Hague Schedule of Fees; item 8.1; Section: Renewal of an International Registration",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1",
+      "category": "other",
+      "code": "wo-hague-8-2",
+      "condition": {
+        "description": "Per additional design beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "multi_design"
+      },
+      "currency": "CHF",
+      "label": "For each additional design included in the same international registration",
+      "notes": "Hague Schedule of Fees; item 8.2; Section: Renewal of an International Registration",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "144",
+      "category": "filing",
+      "code": "wo-hague-13",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Change in ownership",
+      "notes": "Hague Schedule of Fees; item 13; Section: Miscellaneous Recordings",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "144",
+      "category": "filing",
+      "code": "wo-hague-14-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For one international registration",
+      "notes": "Hague Schedule of Fees; item 14.1; Section: Miscellaneous Recordings",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "72",
+      "category": "filing",
+      "code": "wo-hague-14-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For each additional international registration of the same holder included in the same request",
+      "notes": "Hague Schedule of Fees; item 14.2; Section: Miscellaneous Recordings",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "144",
+      "category": "filing",
+      "code": "wo-hague-15",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Renunciation",
+      "notes": "Hague Schedule of Fees; item 15; Section: Miscellaneous Recordings",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "144",
+      "category": "filing",
+      "code": "wo-hague-16",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Limitation",
+      "notes": "Hague Schedule of Fees; item 16; Section: Miscellaneous Recordings",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "144",
+      "category": "filing",
+      "code": "wo-hague-17",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Supply of an extract from the International Register relating to a published international registration",
+      "notes": "Hague Schedule of Fees; item 17; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "26",
+      "category": "filing",
+      "code": "wo-hague-18-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For the first five pages",
+      "notes": "Hague Schedule of Fees; item 18.1; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2",
+      "category": "filing",
+      "code": "wo-hague-18-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For each additional page after the fifth if the copies are requested at the same time and relate to the same international registration",
+      "notes": "Hague Schedule of Fees; item 18.2; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "46",
+      "category": "filing",
+      "code": "wo-hague-19-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For the first five pages",
+      "notes": "Hague Schedule of Fees; item 19.1; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2",
+      "category": "filing",
+      "code": "wo-hague-19-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For each additional page after the fifth if the copies are requested at the same time and relate to the same international registration",
+      "notes": "Hague Schedule of Fees; item 19.2; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "57",
+      "category": "publication",
+      "code": "wo-hague-20",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Supply of a photograph of a specimen",
+      "notes": "Hague Schedule of Fees; item 20; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "82",
+      "category": "publication",
+      "code": "wo-hague-21-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Concerning one international registration",
+      "notes": "Hague Schedule of Fees; item 21.1; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "publication",
+      "code": "wo-hague-21-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Concerning any additional international registration of the same holder if the same information is requested at the same time",
+      "notes": "Hague Schedule of Fees; item 21.2; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "82",
+      "category": "publication",
+      "code": "wo-hague-22-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Per search by the name of a given person or entity",
+      "notes": "Hague Schedule of Fees; item 22.1; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "publication",
+      "code": "wo-hague-22-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "For each international registration found beyond the first one",
+      "notes": "Hague Schedule of Fees; item 22.2; Section: Information Concerning Published International Registrations",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "World Intellectual Property Organization (WIPO) \u2014 International Bureau",
+  "jurisdiction": "WO",
+  "key": "WO/WIPO-HAGUE/design",
+  "notes": "Hague System international design fees paid to the WIPO International Bureau, in CHF. Per-country designation fees (standard designation 3-level + individual designation per Contracting Party) are partially covered (the 3 standard levels are emitted); per-country individual fees live in a separate 48-row table on wipo.int/hague/en/fees/. v1 covers basic + publication + standard designation + additional-design + renewal-by-period. Renewal periods map: first=year 5, second=year 10, third=year 15, fourth=year 20, fifth=year 25.",
+  "office_code": "WIPO-HAGUE",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
+  "statutory_basis": "Schedule of Fees annexed to the Common Regulations under the 1999 Act and the 1960 Act of the Hague Agreement."
+}

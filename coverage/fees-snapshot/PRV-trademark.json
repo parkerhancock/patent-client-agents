@@ -1,0 +1,610 @@
+{
+  "currency": "SEK",
+  "effective_date": "2025-04-25",
+  "fees": [
+    {
+      "amount": "2700",
+      "category": "filing",
+      "code": "se-tm-e-service-application-for-registration-of-a-trademark-for-pr",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for registration of a trademark for protection in one class, including a collective, guarantee or control trademark",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Fees for Swedish trademark application",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "se-tm-e-service-for-each-additional-class",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "SEK",
+      "label": "For each additional class",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Fees for Swedish trademark application",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3900",
+      "category": "filing",
+      "code": "se-tm-paper-or-other-application-for-registration-of-a-trademark-for-pr",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for registration of a trademark for protection in one class, including a collective, guarantee or control trademark",
+      "notes": "Filed via paper / other channel.; Section: Fees for Swedish trademark application",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "se-tm-paper-or-other-for-each-additional-class",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "SEK",
+      "label": "For each additional class",
+      "notes": "Filed via paper / other channel.; Section: Fees for Swedish trademark application",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1800",
+      "category": "other",
+      "code": "se-tm-paper-or-other-application-of-division-of-a-trademark-registratio",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application of division of a trademark registration or application, for each divisional registration",
+      "notes": "Filed via paper / other channel.; Section: Fees for Swedish trademark application",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "transfer",
+      "code": "se-tm-paper-or-other-application-for-transfer-of-trademark-ownership-f",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for transfer of trademark ownership, for each application",
+      "notes": "Filed via paper / other channel.; Section: Fees for Swedish trademark application",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2700",
+      "category": "renewal",
+      "code": "se-tm-e-service-renewal-application-for-protection-in-one-class-i",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Renewal application for protection in one class, including collective, guarantee or control mark",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "se-tm-e-service-for-each-additional-class-2",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "SEK",
+      "label": "For each additional class",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "late_fee",
+      "code": "se-tm-e-service-increased-fee-for-each-class-due-to-late-renewal-a",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Increased fee for each class due to late renewal application",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1800",
+      "category": "transfer",
+      "code": "se-tm-e-service-application-for-registration-of-pledge-agreement",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for registration of pledge agreement",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "transfer",
+      "code": "se-tm-e-service-application-for-transfer-of-trademark-ownership-f",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for transfer of trademark ownership, for each registration",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "cancellation",
+      "code": "se-tm-e-service-application-for-revocation-of-trademark-registrati",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for revocation of trademark registration",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3900",
+      "category": "renewal",
+      "code": "se-tm-paper-or-other-renewal-application-for-protection-in-one-class-i",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Renewal application for protection in one class, including collective, guarantee or control mark",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "se-tm-paper-or-other-for-each-additional-class-2",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "SEK",
+      "label": "For each additional class",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "late_fee",
+      "code": "se-tm-paper-or-other-increased-fee-for-each-class-due-to-late-renewal-a",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Increased fee for each class due to late renewal application",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "transfer",
+      "code": "se-tm-paper-or-other-application-for-transfer-of-trademark-ownership-f-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for transfer of trademark ownership, for each registration",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "other",
+      "code": "se-tm-paper-or-other-application-for-changes-in-a-word-mark-or-figurati",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for changes in a word mark or figurative mark",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "transfer",
+      "code": "se-tm-paper-or-other-application-for-registration-of-licence",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for registration of licence",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1800",
+      "category": "other",
+      "code": "se-tm-paper-or-other-application-of-division-of-a-trademark-registratio-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application of division of a trademark registration or application, for each divisional registration",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1800",
+      "category": "transfer",
+      "code": "se-tm-paper-or-other-application-for-registration-of-pledge-agreement-o",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for registration of pledge agreement or registration of new pledgee",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "late_fee",
+      "code": "se-tm-paper-or-other-reinstatement-of-dismissed-application-according",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Reinstatement of dismissed application (according to chapter 2, article 20, second paragraph or chapter 2, article 36, third paragraph, VmL)",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "cancellation",
+      "code": "se-tm-paper-or-other-application-for-revocation-of-trademark-registrati",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for revocation of trademark registration",
+      "notes": "Filed via paper / other channel.; Section: Fees for changing, renewing and reinstatement a Swedish trademark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1890",
+      "category": "other",
+      "code": "se-tm-application-for-permission-to-use-swedish-official",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for permission to use Swedish official designation",
+      "notes": "Section: Other fees",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "other",
+      "code": "se-tm-registration-certificates-note-you-will-receive",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Registration certificates (NOTE - you will receive a registration certificate free of charge when your application is registered.)",
+      "notes": "Section: Other fees",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350",
+      "category": "other",
+      "code": "se-tm-historical-certificate-of-registration",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Historical certificate of registration",
+      "notes": "Section: Other fees",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350",
+      "category": "other",
+      "code": "se-tm-priority-document",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Priority document",
+      "notes": "Section: Other fees",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2400",
+      "category": "grant",
+      "code": "se-tm-registration-fee",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Registration fee",
+      "notes": "Section: Other fees",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "madrid",
+      "code": "se-tm-conversion-of-application-for-registration-of-a-eu",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Conversion of application for registration of a EU trademark or a collective mark, for protection in one class",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "se-tm-for-each-additional-class",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "SEK",
+      "label": "For each additional class",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1200",
+      "category": "madrid",
+      "code": "se-tm-certificate-relating-to-representation-before-euip",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Certificate relating to representation before EUIPO",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3900",
+      "category": "madrid",
+      "code": "se-tm-application-for-international-registration-for-pro",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for international registration for protection in a class of trademark or collective mark",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "late_fee",
+      "code": "se-tm-reinstatement-of-dismissed-application-according",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Reinstatement of dismissed application (according to chapter 5, article 6, second paragraph VmL)",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1400",
+      "category": "madrid",
+      "code": "se-tm-replacement-according-to-chapter-5-section-20-of",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Replacement (according to Chapter 5, Section 20 of the Trade Marks Act)",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3900",
+      "category": "madrid",
+      "code": "se-tm-transformation-according-to-chapter-5-section-22",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Transformation (according to Chapter 5, Section 22 of the Trade Marks Act)",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1800",
+      "category": "transfer",
+      "code": "se-tm-application-for-registration-of-pledge-agreement-o",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for registration of pledge agreement or registration of new pledgee, for the Swedish part of the international registration",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "transfer",
+      "code": "se-tm-application-for-transfer-of-trademark-ownership-f",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for transfer of trademark ownership, for the Swedish part of the international registration (for each registration)",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "transfer",
+      "code": "se-tm-application-for-registration-of-licence-for-the-s",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for registration of licence, for the Swedish part of the international registration",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "cancellation",
+      "code": "se-tm-application-for-revocation-of-the-international-re",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for revocation of the international registration",
+      "notes": "Section: Fees for international trademark protection",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Patent- och registreringsverket (PRV)",
+  "jurisdiction": "SE",
+  "key": "SE/PRV/trademark",
+  "notes": "PRV trademark schedule. The 'application' and 'changing/renewing' sections publish two tables apiece: the first is the PRV e-service rate (cheaper), the second is the paper / other-channel rate. Each rate emits as a separate FeeItem with -e-service / -paper-or-other slug suffixes. TM term is 10 years (Varum\u00e4rkeslagen ch.2 \u00a732); renewal FeeItems carry year=10. 'For each additional class' rows emit as excess_classes with classes_over threshold=1. International registration (Madrid Protocol) routing emits with FeeCategory.madrid; the WIPO-administered CHF portion is not duplicated here \u2014 see the WIPO-Madrid schedule. Sweden has no tiered entity discounts \u2014 all rows use EntityTier.none.",
+  "office_code": "PRV",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
+  "statutory_basis": "Trade Marks Act 2010 (Varum\u00e4rkeslagen 2010:1877) + Trade Marks Ordinance (Varum\u00e4rkesf\u00f6rordningen 2018:10) + PRVFS fee orders. Fee changes effective 2025-04-25."
+}

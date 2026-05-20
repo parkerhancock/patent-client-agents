@@ -1,0 +1,315 @@
+{
+  "currency": "GBP",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "75",
+      "category": "filing",
+      "code": "uk-patent-form-1-7-9a-10",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Apply for a patent, search and examination and add inventors",
+      "notes": "UKIPO form 1, 7, 9A & 10; section: 1. Apply for a UK patent and manage patent applications",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/apply-for-a-patent-search-and-examination-and-add-inventors",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "95",
+      "category": "filing",
+      "code": "uk-patent-form-af1",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Pay the fee for a patent application",
+      "notes": "UKIPO form AF1; section: 1. Apply for a UK patent and manage patent applications",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/application-fee-for-patent-application",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "27",
+      "category": "grant",
+      "code": "uk-patent-form-34",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Grant Fee for patent applications",
+      "notes": "UKIPO form 34; section: 1. Apply for a UK patent and manage patent applications",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/grant-fee-for-patent-application",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "filing",
+      "code": "uk-patent-form-np1",
+      "condition": null,
+      "currency": "GBP",
+      "label": "National processing of an international application for a patent (UK)",
+      "notes": "UKIPO form NP1; section: 1. Apply for a UK patent and manage patent applications",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/national-processing-of-international-patent-uk-application",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "late_fee",
+      "code": "uk-patent-form-3",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Submit a late claim for priority",
+      "notes": "UKIPO form 3; section: 2. Request late additions and declarations of priority",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/late-additions-and-declarations-of-priority",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "65",
+      "category": "transfer",
+      "code": "uk-patent-form-21",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Record transfer of ownership, add, change or remove a licence or security interest",
+      "notes": "UKIPO form 21; section: 3. Update details of the owner or the representative",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/application-to-register-or-give-notice-of-rights",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "810",
+      "category": "maintenance",
+      "code": "uk-patent-form-12",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Renew patents",
+      "notes": "UKIPO form 12; section: 4. Renew, reinstate or restore a patent. Published as a range \u00a390-\u00a3810; year-by-year schedule lives in The Patents (Fees) Rules 2007 \u2014 high end stored as the fee amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/payment-of-renewal-fee",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "200",
+      "category": "petition",
+      "code": "uk-patent-form-14",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request to reinstate application",
+      "notes": "UKIPO form 14; section: 4. Renew, reinstate or restore a patent",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/request-to-reinstate-a-patent-application",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "180",
+      "category": "petition",
+      "code": "uk-patent-form-16",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Restore a patent",
+      "notes": "UKIPO form 16; section: 4. Renew, reinstate or restore a patent",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/application-to-restore-a-patent",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "27",
+      "category": "other",
+      "code": "uk-patent-form-23",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request a certified copy",
+      "notes": "UKIPO form 23; section: 4.1 Request documents or information",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/request-for-a-certified-or-uncertified-copy-of-a-patent",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "7",
+      "category": "other",
+      "code": "uk-patent-form-23",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request an uncertified copy",
+      "notes": "UKIPO form 23; section: 4.1 Request documents or information",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/request-for-an-uncertified-copy-of-a-patent",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "35",
+      "category": "other",
+      "code": "uk-patent-form-49",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request to be informed of future events relating to a Patent application or patent (caveat)",
+      "notes": "UKIPO form 49; section: 4.1 Request documents or information",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/request-future-events-relating-to-a-patent-application-or-caveat",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "175",
+      "category": "extension",
+      "code": "uk-patent-form-52",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request to extend a deadline",
+      "notes": "UKIPO form 52; section: 5. Request an extension of time",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/request-to-extend-a-prescribed-time-limit",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "65",
+      "category": "opposition",
+      "code": "uk-patent-form-2",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Initiation of proceedings before the Comptroller",
+      "notes": "UKIPO form 2; section: 6. Oppose a patent",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/initiation-of-proceedings-before-the-comptroller",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "opposition",
+      "code": "uk-patent-form-4",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Continuation of proceedings before the Comptroller",
+      "notes": "UKIPO form 4; section: 6. Oppose a patent",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/continuation-of-proceedings-before-the-comptroller",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "65",
+      "category": "opposition",
+      "code": "uk-patent-form-15",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Notice of opposition to the proceedings before the Comptroller",
+      "notes": "UKIPO form 15; section: 6. Oppose a patent",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/notice-of-opposition-to-proceedings-before-the-comptroller",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "petition",
+      "code": "uk-patent-form-17",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request for opinion as to the validity or infringement of a patent",
+      "notes": "UKIPO form 17; section: 7. Request opinion as to the validity or infringement of a patent",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/request-for-opinion-as-to-validity-or-infringement",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "330",
+      "category": "other",
+      "code": "uk-patent-form-sp1",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application for grant of a supplementary protection certificate",
+      "notes": "UKIPO form SP1; section: 11. Supplementary protection certificates (SPCs)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/application-for-grant-of-a-supplementary-protection-certificate",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "65",
+      "category": "other",
+      "code": "uk-patent-form-sp3",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application for declaration of lapse or invalidity, or to revoke an extension of the duration of an SPC",
+      "notes": "UKIPO form SP3; section: 11. Supplementary protection certificates (SPCs)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/declarelapseinvalidaterevoke-an-extension-of-a-supplementary-protection-certificate",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "270",
+      "category": "other",
+      "code": "uk-patent-form-sp4",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application for grant of an extension to a Supplementary Protection Certificate",
+      "notes": "UKIPO form SP4; section: 11. Supplementary protection certificates (SPCs)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/application-to-extend-a-supplementary-protection-certificate",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "UK Intellectual Property Office",
+  "jurisdiction": "GB",
+  "key": "GB/UKIPO/patent",
+  "notes": "Per-form fees scraped from gov.uk patent-forms-and-fees sub-pages. ~30 sub-pages fetched concurrently (bounded to 5). Effective 2026-04-01 (UKIPO's first major rise in years; ~25% average across patent/TM/design). v1 GAP: renewal fees are published on the form sub-page as a range (\u00a390-\u00a3810) rather than per-year; the high end is stored. The per-year schedule lives in The Patents (Fees) Rules 2007 statutory instrument \u2014 a follow-up scraper can pull it from legislation.gov.uk.",
+  "office_code": "UKIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.gov.uk/government/publications/patent-forms-and-fees",
+  "statutory_basis": "Patents Act 1977; The Patents (Fees) Rules 2007 (as amended)."
+}

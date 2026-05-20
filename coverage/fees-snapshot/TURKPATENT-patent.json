@@ -1,0 +1,840 @@
+{
+  "currency": "TRY",
+  "effective_date": "2026-01-01",
+  "fees": [
+    {
+      "amount": "620",
+      "category": "filing",
+      "code": "tr-pat-01.01.01",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent Ba\u015fvuru \u00dccreti",
+      "notes": "base TRY 81.42; VAT TRY 16.28; stamp TRY 522.3",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "other",
+      "code": "tr-pat-01.01.02",
+      "condition": null,
+      "currency": "TRY",
+      "label": "R\u00fc\u00e7han Hakk\u0131 Talebi \u00dccreti (Her Bir R\u00fc\u00e7han \u0130\u00e7in)",
+      "notes": "base TRY 398.08; VAT TRY 79.62; stamp TRY 522.3",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10800",
+      "category": "publication",
+      "code": "tr-pat-01.01.03",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Avrupa Patentinin \u0130tiraz veya K\u0131s\u0131tlama \u0130\u015flemi Sonucu De\u011fi\u015fen Fasik\u00fcl Yay\u0131m \u00dccreti",
+      "notes": "base TRY 9000; VAT TRY 1800",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8190",
+      "category": "filing",
+      "code": "tr-pat-01.01.04",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Avrupa Patent Ba\u015fvurusunun veya Avrupa Patentinin D\u00fczeltilmi\u015f T\u00fcrk\u00e7e \u00c7evirisinin Yay\u0131m \u00dccreti",
+      "notes": "base TRY 6825; VAT TRY 1365",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "790",
+      "category": "extension",
+      "code": "tr-pat-01.01.06",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Ek S\u00fcre Talebi \u00dccreti",
+      "notes": "base TRY 658.33; VAT TRY 131.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3330",
+      "category": "other",
+      "code": "tr-pat-01.01.07",
+      "condition": null,
+      "currency": "TRY",
+      "label": "R\u00fc\u00e7han Hakk\u0131 Belgesi D\u00fczenleme \u00dccreti",
+      "notes": "base TRY 254.75; VAT TRY 50.95; stamp TRY 3024.3",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3800",
+      "category": "grant",
+      "code": "tr-pat-01.01.08",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent Belgesi D\u00fczenleme \u00dccreti",
+      "notes": "base TRY 969.33; VAT TRY 193.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3800",
+      "category": "grant",
+      "code": "tr-pat-01.01.09",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Ek Patent Belgesi D\u00fczenleme \u00dccreti",
+      "notes": "base TRY 969.33; VAT TRY 193.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5520",
+      "category": "publication",
+      "code": "tr-pat-01.01.10",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Devir \u0130\u015flemi Kay\u0131t ve Yay\u0131m \u00dccreti",
+      "notes": "base TRY 2402.67; VAT TRY 480.53; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3150",
+      "category": "publication",
+      "code": "tr-pat-01.01.11",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Lisans \u0130\u015flemi Kay\u0131t ve Yay\u0131m \u00dccreti",
+      "notes": "base TRY 104.75; VAT TRY 20.95; stamp TRY 3024.3",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4360",
+      "category": "publication",
+      "code": "tr-pat-01.01.12",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Birle\u015fme B\u00f6l\u00fcnme veya Ayni Sermaye Koyma Borcu Gibi Yap\u0131sal De\u011fi\u015fikliklere \u0130li\u015fkin \u0130\u015flemi Kay\u0131t ve Yay\u0131m \u00dccreti",
+      "notes": "base TRY 3633.33; VAT TRY 726.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "230",
+      "category": "publication",
+      "code": "tr-pat-01.01.13",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Lisans Verme Teklifi Kay\u0131t ve Yay\u0131m \u00dccreti",
+      "notes": "base TRY 191.67; VAT TRY 38.33",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5520",
+      "category": "publication",
+      "code": "tr-pat-01.01.14",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Miras Yoluyla \u0130ntikal \u0130\u015flemi Kay\u0131t ve Yay\u0131m \u00dccreti",
+      "notes": "base TRY 2402.67; VAT TRY 480.53; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5520",
+      "category": "publication",
+      "code": "tr-pat-01.01.15",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Rehin/Teminat \u0130\u015flemi Kay\u0131t ve Yay\u0131m \u00dccreti",
+      "notes": "base TRY 2402.67; VAT TRY 480.53; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3190",
+      "category": "grant",
+      "code": "tr-pat-01.01.17",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent Belgesi Onayl\u0131 Sureti D\u00fczenleme \u00dccreti",
+      "notes": "base TRY 461; VAT TRY 92.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "other",
+      "code": "tr-pat-01.01.18",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent Dosyas\u0131 Yerinde \u0130nceleme \u00dccreti",
+      "notes": "base TRY 125; VAT TRY 25",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "430",
+      "category": "filing",
+      "code": "tr-pat-01.01.19",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent Ba\u015fvurusunun Faydal\u0131 Model Ba\u015fvurusuna De\u011fi\u015ftirilmesi Talebi \u00dccreti",
+      "notes": "base TRY 358.33; VAT TRY 71.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "late_fee",
+      "code": "tr-pat-01.01.20",
+      "condition": null,
+      "currency": "TRY",
+      "label": "M\u00fccbir Sebep \u00dccreti",
+      "notes": "Formula: \u00d6denmesi gereken y\u0131ll\u0131k \u00fccret + (\u00d6denmesi gereken y\u0131ll\u0131k \u00fccret - har\u00e7)\u0131n %50\u2019si",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "late_fee",
+      "code": "tr-pat-01.01.21",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Vadesinde \u00d6denmeyen Y\u0131ll\u0131k \u00dccret",
+      "notes": "Formula: \u00d6denmesi gereken y\u0131ll\u0131k \u00fccret + (\u00d6denmesi gereken y\u0131ll\u0131k \u00fccret - har\u00e7)\u0131n %25\u2019i",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3800",
+      "category": "renewal",
+      "code": "tr-pat-01.01.23",
+      "condition": null,
+      "currency": "TRY",
+      "label": "3.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 969.33; VAT TRY 193.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "4280",
+      "category": "renewal",
+      "code": "tr-pat-01.01.24",
+      "condition": null,
+      "currency": "TRY",
+      "label": "4.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 1369.33; VAT TRY 273.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "5720",
+      "category": "renewal",
+      "code": "tr-pat-01.01.25",
+      "condition": null,
+      "currency": "TRY",
+      "label": "5.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 2569.33; VAT TRY 513.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "7040",
+      "category": "renewal",
+      "code": "tr-pat-01.01.26",
+      "condition": null,
+      "currency": "TRY",
+      "label": "6.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 3669.33; VAT TRY 733.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "7730",
+      "category": "renewal",
+      "code": "tr-pat-01.01.27",
+      "condition": null,
+      "currency": "TRY",
+      "label": "7.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 4244.33; VAT TRY 848.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "8530",
+      "category": "renewal",
+      "code": "tr-pat-01.01.28",
+      "condition": null,
+      "currency": "TRY",
+      "label": "8.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 4911; VAT TRY 982.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "9220",
+      "category": "renewal",
+      "code": "tr-pat-01.01.29",
+      "condition": null,
+      "currency": "TRY",
+      "label": "9.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 5486; VAT TRY 1097.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "10000",
+      "category": "renewal",
+      "code": "tr-pat-01.01.30",
+      "condition": null,
+      "currency": "TRY",
+      "label": "10.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 6136; VAT TRY 1227.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "11230",
+      "category": "renewal",
+      "code": "tr-pat-01.01.31",
+      "condition": null,
+      "currency": "TRY",
+      "label": "11.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 7161; VAT TRY 1432.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "12910",
+      "category": "renewal",
+      "code": "tr-pat-01.01.32",
+      "condition": null,
+      "currency": "TRY",
+      "label": "12.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 8561; VAT TRY 1712.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "14750",
+      "category": "renewal",
+      "code": "tr-pat-01.01.33",
+      "condition": null,
+      "currency": "TRY",
+      "label": "13.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 10094.33; VAT TRY 2018.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "16580",
+      "category": "renewal",
+      "code": "tr-pat-01.01.34",
+      "condition": null,
+      "currency": "TRY",
+      "label": "14.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 11619.33; VAT TRY 2323.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "18940",
+      "category": "renewal",
+      "code": "tr-pat-01.01.35",
+      "condition": null,
+      "currency": "TRY",
+      "label": "15.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 13586; VAT TRY 2717.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "20620",
+      "category": "renewal",
+      "code": "tr-pat-01.01.36",
+      "condition": null,
+      "currency": "TRY",
+      "label": "16.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 14986; VAT TRY 2997.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "22800",
+      "category": "renewal",
+      "code": "tr-pat-01.01.37",
+      "condition": null,
+      "currency": "TRY",
+      "label": "17.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 16802.67; VAT TRY 3360.53; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "24320",
+      "category": "renewal",
+      "code": "tr-pat-01.01.38",
+      "condition": null,
+      "currency": "TRY",
+      "label": "18.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 18069.33; VAT TRY 3613.87; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "25600",
+      "category": "renewal",
+      "code": "tr-pat-01.01.39",
+      "condition": null,
+      "currency": "TRY",
+      "label": "19.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 19136; VAT TRY 3827.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "26650",
+      "category": "renewal",
+      "code": "tr-pat-01.01.40",
+      "condition": null,
+      "currency": "TRY",
+      "label": "20.Y\u0131l Sicil Kay\u0131t \u00dccreti",
+      "notes": "base TRY 20011; VAT TRY 4002.2; stamp TRY 2636.8",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "16890",
+      "category": "filing",
+      "code": "tr-pat-01.01.41",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent \u0130\u015fbirli\u011fi Antla\u015fmas\u0131 Kapsam\u0131nda Ulusal A\u015famaya Giren Ba\u015fvurunun \u00dccreti",
+      "notes": "base TRY 14075; VAT TRY 2815",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8550",
+      "category": "extension",
+      "code": "tr-pat-01.01.42",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent \u0130\u015fbirli\u011fi Antla\u015fmas\u0131 Kapsam\u0131nda Ulusal A\u015famaya Giren Ba\u015fvurunun Yap\u0131lmas\u0131 \u0130\u00e7in Ek S\u00fcre \u00dccreti",
+      "notes": "base TRY 7125; VAT TRY 1425",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "16180",
+      "category": "publication",
+      "code": "tr-pat-01.01.44",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Avrupa Patenti Ba\u015fvurusu \u0130stemlerinin Yay\u0131m \u00dccreti",
+      "notes": "base TRY 13483.33; VAT TRY 2696.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25930",
+      "category": "publication",
+      "code": "tr-pat-01.01.45",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Avrupa Patenti Fasik\u00fcl Yay\u0131m \u00dccreti",
+      "notes": "base TRY 21608.33; VAT TRY 4321.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "14660",
+      "category": "extension",
+      "code": "tr-pat-01.01.46",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Avrupa Patenti Fasik\u00fcl\u00fc T\u00fcrk\u00e7e \u00c7evirisi \u0130\u00e7in Ek S\u00fcre \u00dccreti",
+      "notes": "base TRY 12216.67; VAT TRY 2443.33",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "29070",
+      "category": "extension",
+      "code": "tr-pat-01.01.47",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Patent \u0130\u015fbirli\u011fi Antla\u015fmas\u0131 Kapsam\u0131nda Ba\u015fvuru Yapma Hakk\u0131n\u0131n Tesisi \u0130\u00e7in Verilen Ek S\u00fcre \u00dccreti (33 Aydan Sonra Ulusal Safhaya Giren Ba\u015fvurular \u0130\u00e7in)",
+      "notes": "base TRY 24225; VAT TRY 4845",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2530",
+      "category": "search",
+      "code": "tr-pat-01.01.48",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Ara\u015ft\u0131rma Raporu D\u00fczenlenmesi \u00dccreti (Ger\u00e7ek Ki\u015filer \u0130\u00e7in 10, \u00dcniversiteler \u0130\u00e7in 100 Ba\u015fvuruya Kadar)",
+      "notes": "base TRY 2108.33; VAT TRY 421.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5180",
+      "category": "search",
+      "code": "tr-pat-01.01.49",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Ara\u015ft\u0131rma Raporu D\u00fczenlenmesi \u00dccreti (1.01.48 Say\u0131l\u0131 Sat\u0131r Haricindeki Ba\u015fvurular \u0130\u00e7in)",
+      "notes": "base TRY 4316.67; VAT TRY 863.33",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2530",
+      "category": "other",
+      "code": "tr-pat-01.01.50",
+      "condition": null,
+      "currency": "TRY",
+      "label": "\u0130nceleme Raporu D\u00fczenlenmesi \u00dccreti (Ger\u00e7ek Ki\u015filer \u0130\u00e7in 10, \u00dcniversiteler \u0130\u00e7in 100 Ba\u015fvuruya Kadar)",
+      "notes": "base TRY 2108.33; VAT TRY 421.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5180",
+      "category": "other",
+      "code": "tr-pat-01.01.51",
+      "condition": null,
+      "currency": "TRY",
+      "label": "\u0130nceleme Raporu D\u00fczenlenmesi \u00dccreti (1.01.50 Say\u0131l\u0131 Sat\u0131r Haricindeki Ba\u015fvurular \u0130\u00e7in)",
+      "notes": "base TRY 4316.67; VAT TRY 863.33",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2530",
+      "category": "other",
+      "code": "tr-pat-01.01.54",
+      "condition": null,
+      "currency": "TRY",
+      "label": "2. ve 3. \u0130nceleme Raporu D\u00fczenlenmesi \u00dccreti",
+      "notes": "base TRY 2108.33; VAT TRY 421.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3130",
+      "category": "filing",
+      "code": "tr-pat-01.01.56",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Faydal\u0131 Model Ba\u015fvurusunun Patent Ba\u015fvurusuna D\u00f6n\u00fc\u015ft\u00fcr\u00fclmesi Talebi i\u00e7in Ara\u015ft\u0131rma \u00dccreti",
+      "notes": "base TRY 2608.33; VAT TRY 521.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "16660",
+      "category": "other",
+      "code": "tr-pat-01.01.57",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Haklar\u0131n Yeniden Tesisi \u00dccreti",
+      "notes": "base TRY 13883.33; VAT TRY 2776.67",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4190",
+      "category": "other",
+      "code": "tr-pat-01.01.58",
+      "condition": null,
+      "currency": "TRY",
+      "label": "\u0130\u015flemlerin Devam Ettirilmesi \u00dccreti",
+      "notes": "base TRY 3491.67; VAT TRY 698.33",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "late_fee",
+      "code": "tr-pat-01.01.59",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Y\u0131ll\u0131k \u00dccret \u0130\u00e7in Telafi \u00dccreti",
+      "notes": "Formula: \u00d6denmesi gereken \u00fccretin 1,5 kat\u0131",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "320",
+      "category": "filing",
+      "code": "tr-pat-01.01.60",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Yay\u0131mlanm\u0131\u015f Patent Ba\u015fvurular\u0131 veya Patentler i\u00e7in Sicil Sureti \u00dccreti",
+      "notes": "base TRY 266.67; VAT TRY 53.33",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10400",
+      "category": "search",
+      "code": "tr-pat-01.01.64",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Acil Ara\u015ft\u0131rma Raporu D\u00fczenleme \u00dccreti (01.01.65 say\u0131l\u0131 sat\u0131r haricindeki ba\u015fvurular i\u00e7in)",
+      "notes": "base TRY 8666.67; VAT TRY 1733.33",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "7280",
+      "category": "search",
+      "code": "tr-pat-01.01.65",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Acil Ara\u015ft\u0131rma Raporu D\u00fczenleme \u00dccreti (Teknogiri\u015fim Rozetine Sahip T\u00fczel Ki\u015fi Ba\u015fvurular\u0131)",
+      "notes": "base TRY 6066.67; VAT TRY 1213.33",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
+  "jurisdiction": "TR",
+  "key": "TR/TURKPATENT/patent",
+  "notes": "All-in TOPLAM TUTAR is captured as FeeItem.amount; the base / VAT / stamp-duty breakdown is preserved in notes. Annuity expansion: years 3-20 emit one renewal FeeItem per year ('N.Y\u0131l Sicil Kay\u0131t \u00dccreti'). Formula rows (force-majeure, late-annuity, compensation) emit amount=0 with the formula text in notes. v1 GAPS: PCT priority-document fee (30 CHF) skipped \u2014 multi-currency not supported in the FeeItem model. Appeal fees on a separate page not in v1 scope. Annual republication on or about 31 December; TRY inflation drives large YoY jumps (2024\u21922025 +44%, 2025\u21922026 +20-25%) so quoted figures should be re-pulled aggressively.",
+  "office_code": "TURKPATENT",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
+  "statutory_basis": "S\u0131nai M\u00fclkiyet Kanunu (Law 6769) Art. 188; Resm\u00ee Gazete 5. m\u00fckerrer 31-12-2025, B\u0130K/T\u00dcRKPATENT 2026/1 (Law 6769 Art. 188) (PDF: https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-37.pdf)."
+}

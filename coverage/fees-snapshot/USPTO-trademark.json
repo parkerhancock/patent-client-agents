@@ -1,0 +1,2320 @@
+{
+  "currency": "USD",
+  "effective_date": "2026-05-01",
+  "fees": [
+    {
+      "amount": "850.00",
+      "category": "filing",
+      "code": "6001",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Base application (paper), per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(i)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600.00",
+      "category": "filing",
+      "code": "7931",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Application fee filed with WIPO (Section 66(a)), per class",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(ii)(A)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600.00",
+      "category": "filing",
+      "code": "7933",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Subsequent designation fee filed with WIPO (Section 66(a)), per class",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(ii)(A)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350.00",
+      "category": "filing",
+      "code": "7017",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Base application, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(iii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "filing",
+      "code": "7018",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Insufficient information (Sections 1 and 44), per class",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(iv)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "filing",
+      "code": "6018",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Insufficient information (Sections 1 and 44), per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(iv)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "filing",
+      "code": "7019",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Using the free-form text box instead of the Trademark ID Manual within Trademark Center to identify goods and services (Sections 1 and 44), per class",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(v)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "filing",
+      "code": "6019",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Using the free-form text box instead of the Trademark ID Manual within Trademark Center to identify goods and services (Sections 1 and 44), per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(v)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "filing",
+      "code": "7020",
+      "condition": null,
+      "currency": "USD",
+      "label": "Each additional group of 1,000 characters in the free-form text box beyond the first 1,000 (Sections 1 and 44), per affected class",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(vi)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "filing",
+      "code": "6020",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Each additional group of 1,000 characters in the free-form text box beyond the first 1,000 (Sections 1 and 44), per affected class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(1)(vi)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "filing",
+      "code": "7002",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Amendment to allege use (AAU), per class",
+      "notes": "37 CFR \u00a7 2.6(a)(2)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250.00",
+      "category": "filing",
+      "code": "6002",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Amendment to allege use (AAU), per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(2)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "statement_of_use",
+      "code": "7003",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Statement of use (SOU), per class",
+      "notes": "37 CFR \u00a7 2.6(a)(3)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250.00",
+      "category": "statement_of_use",
+      "code": "6003",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Statement of use (SOU), per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(3)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "extension",
+      "code": "7004",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Request for six-month extension for filing an SOU, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(4)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "225.00",
+      "category": "extension",
+      "code": "6004",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Request for six-month extension for filing an SOU, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(4)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "filing",
+      "code": "7006",
+      "condition": null,
+      "currency": "USD",
+      "label": "Request to divide an application, per new application created",
+      "notes": "37 CFR \u00a7 2.6(a)(19)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "filing",
+      "code": "6006",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Request to divide an application, per new application created (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(19)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "extension",
+      "code": "7016",
+      "condition": null,
+      "currency": "USD",
+      "label": "Extension of time for filing a response to a pre-registration office action",
+      "notes": "37 CFR \u00a7 2.6(a)(28)(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400.00",
+      "category": "petition",
+      "code": "7005",
+      "condition": null,
+      "currency": "USD",
+      "label": "Petition to the Director",
+      "notes": "37 CFR \u00a7 2.6(a)(15)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500.00",
+      "category": "petition",
+      "code": "6005",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Petition to the Director (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(15)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250.00",
+      "category": "petition",
+      "code": "7010",
+      "condition": null,
+      "currency": "USD",
+      "label": "Petition to revive an application",
+      "notes": "37 CFR \u00a7 2.6(a)(15)(iii)-(iv)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350.00",
+      "category": "petition",
+      "code": "6010",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Petition to revive an application (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(15)(iii)-(iv)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "petition",
+      "code": "7011",
+      "condition": null,
+      "currency": "USD",
+      "label": "Letter of protest",
+      "notes": "37 CFR \u00a7 2.6(a)(25)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400.00",
+      "category": "petition",
+      "code": "7014",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Petition for expungement and reexamination, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(26)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "petition",
+      "code": "7015",
+      "condition": null,
+      "currency": "USD",
+      "label": "Extension of time for filing a response to an office action in an expungement or reexamination proceeding",
+      "notes": "37 CFR \u00a7 2.6(a)(27)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "325.00",
+      "category": "renewal",
+      "code": "7201",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Section 9 registration renewal application, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(5)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "525.00",
+      "category": "renewal",
+      "code": "6201",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 9 registration renewal application, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(5)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "325.00",
+      "category": "renewal",
+      "code": "7932",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Renewal fee filed with WIPO (Section 66(a)), per class",
+      "notes": "37 CFR \u00a7 2.6(a)(5)(iii)(A)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "100.00",
+      "category": "renewal",
+      "code": "7203",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Section 9 registration renewal application grace period fee, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(6)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "200.00",
+      "category": "renewal",
+      "code": "6203",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 9 registration renewal application grace period fee, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(6)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "100.00",
+      "category": "renewal",
+      "code": "7204",
+      "condition": null,
+      "currency": "USD",
+      "label": "Section 9 registration renewal application deficiency fee",
+      "notes": "37 CFR \u00a7 2.6(a)(21)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "200.00",
+      "category": "renewal",
+      "code": "6204",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 9 registration renewal application deficiency fee (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(21)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "325.00",
+      "category": "declaration_of_use",
+      "code": "7205",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Section 8 declaration, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(12)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "425.00",
+      "category": "declaration_of_use",
+      "code": "6205",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 8 declaration, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(12)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "declaration_of_use",
+      "code": "7206",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Section 8 declaration grace period fee, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(14)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "declaration_of_use",
+      "code": "6206",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 8 declaration grace period fee, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(14)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "declaration_of_use",
+      "code": "7207",
+      "condition": null,
+      "currency": "USD",
+      "label": "Section 8 declaration deficiency fee",
+      "notes": "37 CFR \u00a7 2.6(a)(20)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "declaration_of_use",
+      "code": "6207",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 8 declaration deficiency fee (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(20)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250.00",
+      "category": "other",
+      "code": "7208",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Section 15 declaration, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(13)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350.00",
+      "category": "other",
+      "code": "6208",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 15 declaration, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(13)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "575.00",
+      "category": "declaration_of_use",
+      "code": "7205, 7208",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Combined Section 8 and Section 15 declarations, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(12)(i)-(ii), (a)(13)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "775.00",
+      "category": "declaration_of_use",
+      "code": "6205, 6208",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Combined Section 8 and Section 15 declarations, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(12)(i)-(ii), (a)(13)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "675.00",
+      "category": "declaration_of_use",
+      "code": "7205, 7206, 7208",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Combined Section 8 and Section 15 declarations filed during grace period, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(12)(i)-(ii), (a)(13)(i)-(ii),\u00a0(a)(14)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "975.00",
+      "category": "declaration_of_use",
+      "code": "6205, 6206, 6208",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Combined Section 8 and Section 15 declarations filed during grace period, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(12)(i)-(ii), (a)(13)(i)-(ii),\u00a0(a)(14)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "650.00",
+      "category": "renewal",
+      "code": "7201, 7205",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Combined Section 8 declaration and Section 9 renewals, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(5)(i)-(ii),\u00a0(a)(12)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "950.00",
+      "category": "renewal",
+      "code": "6201, 6205",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Combined Section 8 declaration and Section 9 renewals, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(5)(i)-(ii),\u00a0(a)(12)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "850.00",
+      "category": "renewal",
+      "code": "7201, 7203, 7205, 7206",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Combined Section 8 declaration and Section 9 renewals both filed during grace period, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(5)(i)-(ii),\u00a0(a)(6)(i)-(ii),\u00a0(a)(12)(i)-(ii),\u00a0(a)(14)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1350.00",
+      "category": "renewal",
+      "code": "6201, 6203, 6205, 6206",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Combined Section 8 declaration and Section 9 renewals both filed during grace period, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(5)(i)-(ii),\u00a0(a)(6)(i)-(ii),\u00a0(a)(12)(i)-(ii),\u00a0(a)(14)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "100.00",
+      "category": "other",
+      "code": "7210",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Section 12(c) affidavit, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(7)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "other",
+      "code": "6210",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 12(c) affidavit, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(7)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "other",
+      "code": "7211",
+      "condition": null,
+      "currency": "USD",
+      "label": "New registration certificate",
+      "notes": "37 CFR \u00a7 2.6(a)(8)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "other",
+      "code": "6211",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "New registration certificate (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(8)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "other",
+      "code": "7212",
+      "condition": null,
+      "currency": "USD",
+      "label": "Corrected registration certificate, registrant's error",
+      "notes": "37 CFR \u00a7 2.6(a)(9)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "other",
+      "code": "6212",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Corrected registration certificate, registrant's error (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(9)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "other",
+      "code": "7213",
+      "condition": null,
+      "currency": "USD",
+      "label": "Adding a disclaimer to a registration",
+      "notes": "37 CFR \u00a7 2.6(a)(10)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "other",
+      "code": "6213",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Adding a disclaimer to a registration (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(10)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "other",
+      "code": "7214",
+      "condition": null,
+      "currency": "USD",
+      "label": "Amending registration for other than adding a disclaimer",
+      "notes": "37 CFR \u00a7 2.6(a)(11)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "other",
+      "code": "6214",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Amending registration for other than adding a disclaimer (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(11)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0.00",
+      "category": "declaration_of_use",
+      "code": "n/a",
+      "condition": null,
+      "currency": "USD",
+      "label": "Deleting only goods/services/classes from registration, before filing Section 8 declaration, and making no other changes",
+      "notes": "37 CFR \u00a7 2.6(a)(11)(iii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250.00",
+      "category": "declaration_of_use",
+      "code": "7012",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Deleting goods/services/classes from registration, after filing Section 8 declaration and before acceptance, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(12)(iii)-(iv)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350.00",
+      "category": "declaration_of_use",
+      "code": "6012",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Deleting goods/services/classes from registration, after filing Section 8 declaration and before acceptance, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(12)(iii)-(iv)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600.00",
+      "category": "cancellation",
+      "code": "7401",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "TTAB petition for cancellation, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(16)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "700.00",
+      "category": "cancellation",
+      "code": "6401",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "TTAB petition for cancellation, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(16)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600.00",
+      "category": "opposition",
+      "code": "7402",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "TTAB notice of opposition, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(17)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "700.00",
+      "category": "opposition",
+      "code": "6402",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "TTAB notice of opposition, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(17)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "225.00",
+      "category": "appeal",
+      "code": "7403",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "TTAB ex parte appeal, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(18)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "325.00",
+      "category": "appeal",
+      "code": "6403",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "TTAB ex parte appeal, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(18)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0.00",
+      "category": "appeal",
+      "code": "n/a",
+      "condition": null,
+      "currency": "USD",
+      "label": "TTAB ex parte appeal brief extension, first",
+      "notes": "37 CFR \u00a7 2.6(a)(18)(iii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "appeal",
+      "code": "7407",
+      "condition": null,
+      "currency": "USD",
+      "label": "TTAB ex parte appeal brief extension, second or subsequent",
+      "notes": "37 CFR \u00a7 2.6(a)(18)(iv)-(v)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "appeal",
+      "code": "6407",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "TTAB ex parte appeal brief extension, second or subsequent (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(18)(iv)-(v)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "appeal",
+      "code": "7406",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "TTAB ex parte appeal brief, per class",
+      "notes": "37 CFR \u00a7 2.6(a)(18)(vi)-(vii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300.00",
+      "category": "appeal",
+      "code": "6406",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "TTAB ex parte appeal brief, per class (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(18)(vi)-(vii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0.00",
+      "category": "opposition",
+      "code": "n/a",
+      "condition": null,
+      "currency": "USD",
+      "label": "TTAB first 30-day request for extension of time to file a notice of opposition",
+      "notes": "37 CFR \u00a7 2.102(c)(1)(i)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "opposition",
+      "code": "7404",
+      "condition": null,
+      "currency": "USD",
+      "label": "TTAB first 90-day or second 60-day request for extension of time to file a notice of opposition",
+      "notes": "37 CFR \u00a7 2.6(a)(22)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400.00",
+      "category": "opposition",
+      "code": "6404",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "TTAB first 90-day or second 60-day request for extension of time to file a notice of opposition (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(22)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400.00",
+      "category": "opposition",
+      "code": "7405",
+      "condition": null,
+      "currency": "USD",
+      "label": "TTAB final 60-day request for extension of time to file a notice of opposition",
+      "notes": "37 CFR \u00a7 2.6(a)(23)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500.00",
+      "category": "opposition",
+      "code": "6405",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "TTAB final 60-day request for extension of time to file a notice of opposition (paper)",
+      "notes": "37 CFR \u00a7 2.6(a)(23)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500.00",
+      "category": "other",
+      "code": "7408",
+      "condition": null,
+      "currency": "USD",
+      "label": "TTAB request for an oral hearing",
+      "notes": "37 CFR \u00a7 2.6(a)(24)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "madrid",
+      "code": "7901",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Certifying an international application based on a single basic application or registration, per class",
+      "notes": "37 CFR \u00a7 7.6(a)(1)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "madrid",
+      "code": "6901",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Certifying an international application based on a single basic application or registration, per class (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(1)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "madrid",
+      "code": "7902",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Certifying an international application based on more than one basic application or registration, per class",
+      "notes": "37 CFR \u00a7 7.6(a)(2)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250.00",
+      "category": "madrid",
+      "code": "6902",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Certifying an international application based on more than one basic application or registration, per class (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(2)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "madrid",
+      "code": "7907",
+      "condition": null,
+      "currency": "USD",
+      "label": "Transmittal fee for subsequent designation",
+      "notes": "37 CFR \u00a7 7.6(a)(3)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "madrid",
+      "code": "6907",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Transmittal fee for subsequent designation (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(3)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "madrid",
+      "code": "7903",
+      "condition": null,
+      "currency": "USD",
+      "label": "Transmittal fee for request to record an assignment or restriction to the international registration",
+      "notes": "37 CFR \u00a7 7.6(a)(4)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "madrid",
+      "code": "6903",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Transmittal fee for request to record an assignment or restriction to the international registration (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(4)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "madrid",
+      "code": "7904",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Notice of replacement, per class",
+      "notes": "37 CFR \u00a7 7.6(a)(5)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "madrid",
+      "code": "6904",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Notice of replacement, per class (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(5)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "325.00",
+      "category": "madrid",
+      "code": "7905",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Section 71 declaration, per class",
+      "notes": "37 CFR \u00a7 7.6(a)(6)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "425.00",
+      "category": "madrid",
+      "code": "6905",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 71 declaration, per class (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(6)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "madrid",
+      "code": "7906",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Section 71 declaration grace period fee, per class",
+      "notes": "37 CFR \u00a7 7.6(a)(7)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "madrid",
+      "code": "6906",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 71 declaration grace period fee, per class (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(7)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "madrid",
+      "code": "7908",
+      "condition": null,
+      "currency": "USD",
+      "label": "Section 71 declaration deficiency fee",
+      "notes": "37 CFR \u00a7 7.6(a)(8)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "madrid",
+      "code": "6908",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Section 71 declaration deficiency fee (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(8)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "575.00",
+      "category": "madrid",
+      "code": "7905, 7208",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Combined Section 71 and Section 15 declarations, per class",
+      "notes": "37 CFR \u00a7 7.6(a)(6)(i)-(ii), 2.6(a)(13)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "775.00",
+      "category": "madrid",
+      "code": "6905, 6208",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Combined Section 71 and Section 15 declarations, per class (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(6)(i)-(ii), 2.6(a)(13)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "675.00",
+      "category": "madrid",
+      "code": "7905, 7906, 7208",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Combined Section 71 and Section 15 declarations filed during grace period, per class",
+      "notes": "37 CFR \u00a7 7.6(a)(6)(i)-(ii),\u00a0(a)(7)(i)-(ii),\u00a02.6(a)(13)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "975.00",
+      "category": "madrid",
+      "code": "6905, 6906, 6208",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Combined Section 71 and Section 15 declarations filed during grace period, per class (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(6)(i)-(ii),\u00a0(a)(7)(i)-(ii),\u00a02.6(a)(13)(i)-(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0.00",
+      "category": "madrid",
+      "code": "n/a",
+      "condition": null,
+      "currency": "USD",
+      "label": "Deleting only goods/services/classes from registration, before filing Section 71 declaration, and making no other changes",
+      "notes": "37 CFR \u00a7 2.6(a)(11)(iii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250.00",
+      "category": "madrid",
+      "code": "7013",
+      "condition": {
+        "description": "Per class \u2014 multi-class surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "USD",
+      "label": "Deleting goods/services/classes from registration, after filing Section 71 declaration and before acceptance, per class",
+      "notes": "37 CFR \u00a7 7.6(a)(6)(iii)-(iv)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350.00",
+      "category": "madrid",
+      "code": "6013",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Deleting goods/services/classes from registration, after filing Section 71 declaration and before acceptance, per class (paper)",
+      "notes": "37 CFR \u00a7 7.6(a)(6)(iii)-(iv)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3.00",
+      "category": "other",
+      "code": "8501",
+      "condition": null,
+      "currency": "USD",
+      "label": "Printed copy of registration, delivery by USPS, USPTO box, or electronic means",
+      "notes": "37 CFR \u00a7 2.6(b)(1)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3.00",
+      "category": "other",
+      "code": "8501",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Printed copy of registration, delivery by USPS, USPTO box, or electronic means (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(1)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15.00",
+      "category": "other",
+      "code": "8503",
+      "condition": null,
+      "currency": "USD",
+      "label": "Certified copy of registration, with title and/or status, regular service",
+      "notes": "37 CFR \u00a7 2.6(b)(4)(i)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15.00",
+      "category": "other",
+      "code": "8503",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Certified copy of registration, with title and/or status, regular service (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(4)(i)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30.00",
+      "category": "other",
+      "code": "8504",
+      "condition": null,
+      "currency": "USD",
+      "label": "Certified copy of registration, with title and/or status, expedited local service",
+      "notes": "37 CFR \u00a7 2.6(b)(4)(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30.00",
+      "category": "other",
+      "code": "8504",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Certified copy of registration, with title and/or status, expedited local service (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(4)(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15.00",
+      "category": "other",
+      "code": "8507",
+      "condition": null,
+      "currency": "USD",
+      "label": "Certified copy of domestic application as filed",
+      "notes": "37 CFR \u00a7 2.6(b)(2)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15.00",
+      "category": "other",
+      "code": "8507",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Certified copy of domestic application as filed (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(2)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50.00",
+      "category": "other",
+      "code": "8508",
+      "condition": null,
+      "currency": "USD",
+      "label": "Certified or uncertified copy of application/registration file",
+      "notes": "37 CFR \u00a7 2.6(b)(3)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50.00",
+      "category": "other",
+      "code": "8508",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Certified or uncertified copy of application/registration file (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(3)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25.00",
+      "category": "other",
+      "code": "8513",
+      "condition": null,
+      "currency": "USD",
+      "label": "Certified or uncertified copy of trademark document, unless otherwise provided",
+      "notes": "37 CFR \u00a7 2.6(b)(5)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25.00",
+      "category": "other",
+      "code": "8513",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Certified or uncertified copy of trademark document, unless otherwise provided (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(5)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25.00",
+      "category": "other",
+      "code": "8514",
+      "condition": null,
+      "currency": "USD",
+      "label": "For assignment records, abstracts of title and certification per registration",
+      "notes": "37 CFR \u00a7 2.6(b)(7)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25.00",
+      "category": "other",
+      "code": "8514",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "For assignment records, abstracts of title and certification per registration (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(7)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40.00",
+      "category": "other",
+      "code": "8521",
+      "condition": null,
+      "currency": "USD",
+      "label": "Recording trademark assignment, agreement or other ownership document, first mark per document",
+      "notes": "37 CFR \u00a7 2.6(b)(6)(i)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40.00",
+      "category": "other",
+      "code": "8521",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Recording trademark assignment, agreement or other ownership document, first mark per document (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(6)(i)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25.00",
+      "category": "other",
+      "code": "8522",
+      "condition": null,
+      "currency": "USD",
+      "label": "Recording trademark assignment, agreement or other ownership document, second and subsequent marks in the same document",
+      "notes": "37 CFR \u00a7 2.6(b)(6)(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25.00",
+      "category": "other",
+      "code": "8522",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Recording trademark assignment, agreement or other ownership document, second and subsequent marks in the same document (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(6)(ii)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "160.00",
+      "category": "other",
+      "code": "8534",
+      "condition": null,
+      "currency": "USD",
+      "label": "Additional fee for expedited service",
+      "notes": "37 CFR \u00a7 2.6(b)(9)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "160.00",
+      "category": "other",
+      "code": "8534",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Additional fee for expedited service (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(9)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40.00",
+      "category": "other",
+      "code": "8533",
+      "condition": null,
+      "currency": "USD",
+      "label": "Additional fee for overnight delivery",
+      "notes": "37 CFR \u00a7 2.6(b)(8)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40.00",
+      "category": "other",
+      "code": "8533",
+      "condition": {
+        "description": "Paper-filing surcharge \u2014 applies when not e-filed.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "USD",
+      "label": "Additional fee for overnight delivery (paper)",
+      "notes": "37 CFR \u00a7 2.6(b)(8)",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "U.S. Patent and Trademark Office",
+  "jurisdiction": "US",
+  "key": "US/USPTO/trademark",
+  "notes": "USPTO maintenance fees are due at the 3.5, 7.5, and 11.5 year marks; our schema rounds the year up (4, 8, 12). Paper-filing surcharges on TM fees are flagged via FeeCondition(trigger=paper_filing). Some single-tier rows (e.g., '4011') represent tier-specific electronic-filing discounts and carry a single FeeItem under the applicable tier.",
+  "office_code": "USPTO",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+  "statutory_basis": "37 CFR Part 1 (patents); 37 CFR Part 2 (trademarks); 35 USC \u00a7\u00a7 41, 376"
+}

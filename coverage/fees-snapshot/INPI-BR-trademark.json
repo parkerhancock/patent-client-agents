@@ -1,0 +1,615 @@
+{
+  "currency": "BRL",
+  "effective_date": "2019-10-02",
+  "fees": [
+    {
+      "amount": "355.00",
+      "category": "filing",
+      "code": "inpi-br-tm-389-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 389: Application for registration of trademark (with pre- approved specification) \u2013 amount per class",
+      "notes": "INPI BR TM fee code 389. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "142.00",
+      "category": "filing",
+      "code": "inpi-br-tm-389-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 389: Application for registration of trademark (with pre- approved specification) \u2013 amount per class",
+      "notes": "INPI BR TM fee code 389. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "415.00",
+      "category": "filing",
+      "code": "inpi-br-tm-394-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 394: Application for registration of trademark (with no predefined specification) \u2013 amount per class",
+      "notes": "INPI BR TM fee code 394. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "166.00",
+      "category": "filing",
+      "code": "inpi-br-tm-394-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 394: Application for registration of trademark (with no predefined specification) \u2013 amount per class",
+      "notes": "INPI BR TM fee code 394. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "355.00",
+      "category": "opposition",
+      "code": "inpi-br-tm-332-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 332: Opposition \u2013 amount per class",
+      "notes": "INPI BR TM fee code 332. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "142.00",
+      "category": "opposition",
+      "code": "inpi-br-tm-332-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 332: Opposition \u2013 amount per class",
+      "notes": "INPI BR TM fee code 332. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "280.00",
+      "category": "other",
+      "code": "inpi-br-tm-339-l",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 339: Response",
+      "notes": "INPI BR TM fee code 339. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "112.00",
+      "category": "other",
+      "code": "inpi-br-tm-339-s",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 339: Response",
+      "notes": "INPI BR TM fee code 339. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "140.00",
+      "category": "other",
+      "code": "inpi-br-tm-340-l",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 340: Submission of amendments",
+      "notes": "INPI BR TM fee code 340. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "56.00",
+      "category": "other",
+      "code": "inpi-br-tm-340-s",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 340: Submission of amendments",
+      "notes": "INPI BR TM fee code 340. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "745.00",
+      "category": "grant",
+      "code": "inpi-br-tm-372-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 372: fee paid within the regular term \u2013 amount per class",
+      "notes": "INPI BR TM fee code 372. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "298.00",
+      "category": "grant",
+      "code": "inpi-br-tm-372-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 372: fee paid within the regular term \u2013 amount per class",
+      "notes": "INPI BR TM fee code 372. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "1115.00",
+      "category": "grant",
+      "code": "inpi-br-tm-373-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 373: fee paid within an extended term \u2013 amount per class",
+      "notes": "INPI BR TM fee code 373. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "446.00",
+      "category": "grant",
+      "code": "inpi-br-tm-373-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 373: fee paid within an extended term \u2013 amount per class",
+      "notes": "INPI BR TM fee code 373. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "1065.00",
+      "category": "renewal",
+      "code": "inpi-br-tm-374-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 374: fee paid within the regular term \u2013 amount per class",
+      "notes": "INPI BR TM fee code 374. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": 10
+    },
+    {
+      "amount": "426.00",
+      "category": "renewal",
+      "code": "inpi-br-tm-374-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 374: fee paid within the regular term \u2013 amount per class",
+      "notes": "INPI BR TM fee code 374. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": 10
+    },
+    {
+      "amount": "1610.00",
+      "category": "renewal",
+      "code": "inpi-br-tm-375-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 375: fee paid within an extended term \u2013 amount per class",
+      "notes": "INPI BR TM fee code 375. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": 10
+    },
+    {
+      "amount": "644.00",
+      "category": "renewal",
+      "code": "inpi-br-tm-375-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 375: fee paid within an extended term \u2013 amount per class",
+      "notes": "INPI BR TM fee code 375. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": 10
+    },
+    {
+      "amount": "475.00",
+      "category": "appeal",
+      "code": "inpi-br-tm-333-l",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 333: Appeal for trademarks (except against rejection of an application for registration of trademark",
+      "notes": "INPI BR TM fee code 333. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "190.00",
+      "category": "appeal",
+      "code": "inpi-br-tm-333-s",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 333: Appeal for trademarks (except against rejection of an application for registration of trademark",
+      "notes": "INPI BR TM fee code 333. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "590.00",
+      "category": "cancellation",
+      "code": "inpi-br-tm-336-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 336: Administrative invalidation of a trademark registration \u2013 amount per class",
+      "notes": "INPI BR TM fee code 336. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "236.00",
+      "category": "cancellation",
+      "code": "inpi-br-tm-336-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 336: Administrative invalidation of a trademark registration \u2013 amount per class",
+      "notes": "INPI BR TM fee code 336. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "70.00",
+      "category": "other",
+      "code": "inpi-br-tm-251-l",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 251: of 10/2/2019",
+      "notes": "INPI BR TM fee code 251. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "70.00",
+      "category": "other",
+      "code": "inpi-br-tm-251-s",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 251: of 10/2/2019",
+      "notes": "INPI BR TM fee code 251. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "590.00",
+      "category": "cancellation",
+      "code": "inpi-br-tm-337-l",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 337: Cancellation due to non-use \u2013 amount per class",
+      "notes": "INPI BR TM fee code 337. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "236.00",
+      "category": "cancellation",
+      "code": "inpi-br-tm-337-s",
+      "condition": {
+        "description": "INPI Brazil per-class fee under Nice classification.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "BRL",
+      "label": "INPI BR code 337: Cancellation due to non-use \u2013 amount per class",
+      "notes": "INPI BR TM fee code 337. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "140.00",
+      "category": "other",
+      "code": "inpi-br-tm-352-l",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 352: Official copy for purposes of priority claim Uncertified copy - Up to four (4) pages - More than four (4) pages Code Ser",
+      "notes": "INPI BR TM fee code 352. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "70.00",
+      "category": "other",
+      "code": "inpi-br-tm-352-s",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 352: Official copy for purposes of priority claim Uncertified copy - Up to four (4) pages - More than four (4) pages Code Ser",
+      "notes": "INPI BR TM fee code 352. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "35.00",
+      "category": "other",
+      "code": "inpi-br-tm-349-l",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 349: 180,00 85,00",
+      "notes": "INPI BR TM fee code 349. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "140.00",
+      "category": "other",
+      "code": "inpi-br-tm-349-s",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 349: 180,00 85,00",
+      "notes": "INPI BR TM fee code 349. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "85.00",
+      "category": "other",
+      "code": "inpi-br-tm-800-l",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 800: 95,00 140,00 (X) Certificate, Certifications, Official Copies, and Copies",
+      "notes": "INPI BR TM fee code 800. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "60.00",
+      "category": "other",
+      "code": "inpi-br-tm-800-s",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 800: 95,00 140,00 (X) Certificate, Certifications, Official Copies, and Copies",
+      "notes": "INPI BR TM fee code 800. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "710.00",
+      "category": "other",
+      "code": "inpi-br-tm-3014-l",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 3014: Designation received, granting of registration and issuance of certificate (Article 8 (7) \u2013 Madrid Protocol) Code Servic",
+      "notes": "INPI BR TM fee code 3014. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "70.00",
+      "category": "other",
+      "code": "inpi-br-tm-3014-s",
+      "condition": null,
+      "currency": "BRL",
+      "label": "INPI BR code 3014: Designation received, granting of registration and issuance of certificate (Article 8 (7) \u2013 Madrid Protocol) Code Servic",
+      "notes": "INPI BR TM fee code 3014. Source: 'Schedule of Fees for Services Provided by INPI' (Ordinance 39/2014 + ME Ordinance 516/2019 + INPI Resolution 251/2019). Discount per Resolution 251 \u00a7I.5.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+      "tier": "small",
+      "year": null
+    }
+  ],
+  "issuing_body": "Instituto Nacional da Propriedade Industrial (INPI)",
+  "jurisdiction": "BR",
+  "key": "BR/INPI-BR/trademark",
+  "notes": "INPI Brazil trademark fees are quoted per-class in BRL for application (pre-approved vs free specification), the first 10-year term, renewal (10-yr cycle), opposition, cancellation, and administrative invalidation. Per-class amounts are flagged via FeeCondition(classes_over=1, per_unit=True). Up-to-60% discount applies per Resolution 251/2019 \u00a7I.5 for individuals, SMEs, cooperatives, ICTs, non-profits, and public bodies.",
+  "office_code": "INPI-BR",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
+  "statutory_basis": "Lei 9.279/1996 (Brazilian IP Law); Ordinance MDIC 39/2014; ME Ordinance 516/2019; INPI Resolution 251/2019."
+}

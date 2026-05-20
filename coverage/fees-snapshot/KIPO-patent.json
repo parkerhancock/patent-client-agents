@@ -1,0 +1,645 @@
+{
+  "currency": "KRW",
+  "effective_date": "2023-08-01",
+  "fees": [
+    {
+      "amount": "46000",
+      "category": "filing",
+      "code": "kr-patent-application-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Patent Application (Electronic)",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "66000",
+      "category": "filing",
+      "code": "kr-patent-application-paper-a-basic-fee-b-a",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Patent Application (Paper) a. Basic fee b. Additional fee for each page when the total of the description, drawing, and abstract exceeds 20 pages",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300000",
+      "category": "extension",
+      "code": "kr-application-for-an-extension-of-the-term",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Application for an extension of the term of a patent right, for each application",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "18000",
+      "category": "other",
+      "code": "kr-application-for-a-priority-claim-a-basic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Application for a priority claim a. Basic fee b. Additional fee for each priority claim",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "166000",
+      "category": "other",
+      "code": "kr-request-for-substantive-examination-a-ba",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for substantive examination a. Basic fee b. Additional fee for each patent claim",
+      "notes": "KIPO section: 18,000(electronic) 20,000(paper-based)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100000",
+      "category": "other",
+      "code": "kr-request-for-reexamination-a-basic-fee-b-",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for reexamination a. Basic fee b. Additional fee for each patent claim",
+      "notes": "KIPO section: 18,000(electronic) 20,000(paper-based)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200000",
+      "category": "other",
+      "code": "kr-request-for-a-preferential-examination",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for a preferential examination",
+      "notes": "KIPO section: 18,000(electronic) 20,000(paper-based)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "13000",
+      "category": "maintenance",
+      "code": "kr-1-to-3-years-grant-fee-is-included-a-ann-y1",
+      "condition": null,
+      "currency": "KRW",
+      "label": "1 to 3 years (Grant fee is included) a. Annual basic fee b. Annual additional fee for each claim (year 1)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "13000",
+      "category": "maintenance",
+      "code": "kr-1-to-3-years-grant-fee-is-included-a-ann-y2",
+      "condition": null,
+      "currency": "KRW",
+      "label": "1 to 3 years (Grant fee is included) a. Annual basic fee b. Annual additional fee for each claim (year 2)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "13000",
+      "category": "maintenance",
+      "code": "kr-1-to-3-years-grant-fee-is-included-a-ann-y3",
+      "condition": null,
+      "currency": "KRW",
+      "label": "1 to 3 years (Grant fee is included) a. Annual basic fee b. Annual additional fee for each claim (year 3)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "12000",
+      "category": "excess_claims",
+      "code": "kr-1-to-3-years-grant-fee-is-included-a-ann",
+      "condition": {
+        "description": "KIPO additional per-claim fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "KRW",
+      "label": "1 to 3 years (Grant fee is included) a. Annual basic fee b. Annual additional fee for each claim \u2014 additional per-claim fee",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "36000",
+      "category": "maintenance",
+      "code": "kr-4-to-6-years-a-annual-basic-fee-b-annual-y4",
+      "condition": null,
+      "currency": "KRW",
+      "label": "4 to 6 years a. Annual basic fee b. Annual additional fee for each claim (year 4)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "36000",
+      "category": "maintenance",
+      "code": "kr-4-to-6-years-a-annual-basic-fee-b-annual-y5",
+      "condition": null,
+      "currency": "KRW",
+      "label": "4 to 6 years a. Annual basic fee b. Annual additional fee for each claim (year 5)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "36000",
+      "category": "maintenance",
+      "code": "kr-4-to-6-years-a-annual-basic-fee-b-annual-y6",
+      "condition": null,
+      "currency": "KRW",
+      "label": "4 to 6 years a. Annual basic fee b. Annual additional fee for each claim (year 6)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "20000",
+      "category": "excess_claims",
+      "code": "kr-4-to-6-years-a-annual-basic-fee-b-annual",
+      "condition": {
+        "description": "KIPO additional per-claim fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "KRW",
+      "label": "4 to 6 years a. Annual basic fee b. Annual additional fee for each claim \u2014 additional per-claim fee",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "90000",
+      "category": "maintenance",
+      "code": "kr-7-to-9-years-a-annual-basic-fee-b-annual-y7",
+      "condition": null,
+      "currency": "KRW",
+      "label": "7 to 9 years a. Annual basic fee b. Annual additional fee for each claim (year 7)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "90000",
+      "category": "maintenance",
+      "code": "kr-7-to-9-years-a-annual-basic-fee-b-annual-y8",
+      "condition": null,
+      "currency": "KRW",
+      "label": "7 to 9 years a. Annual basic fee b. Annual additional fee for each claim (year 8)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "90000",
+      "category": "maintenance",
+      "code": "kr-7-to-9-years-a-annual-basic-fee-b-annual-y9",
+      "condition": null,
+      "currency": "KRW",
+      "label": "7 to 9 years a. Annual basic fee b. Annual additional fee for each claim (year 9)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "34000",
+      "category": "excess_claims",
+      "code": "kr-7-to-9-years-a-annual-basic-fee-b-annual",
+      "condition": {
+        "description": "KIPO additional per-claim fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "KRW",
+      "label": "7 to 9 years a. Annual basic fee b. Annual additional fee for each claim \u2014 additional per-claim fee",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "216000",
+      "category": "maintenance",
+      "code": "kr-10-to-12-years-a-annual-basic-fee-b-annu-y10",
+      "condition": null,
+      "currency": "KRW",
+      "label": "10 to 12 years a. Annual basic fee b. Annual additional fee for each claim (year 10)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "216000",
+      "category": "maintenance",
+      "code": "kr-10-to-12-years-a-annual-basic-fee-b-annu-y11",
+      "condition": null,
+      "currency": "KRW",
+      "label": "10 to 12 years a. Annual basic fee b. Annual additional fee for each claim (year 11)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "216000",
+      "category": "maintenance",
+      "code": "kr-10-to-12-years-a-annual-basic-fee-b-annu-y12",
+      "condition": null,
+      "currency": "KRW",
+      "label": "10 to 12 years a. Annual basic fee b. Annual additional fee for each claim (year 12)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "49000",
+      "category": "excess_claims",
+      "code": "kr-10-to-12-years-a-annual-basic-fee-b-annu",
+      "condition": {
+        "description": "KIPO additional per-claim fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "KRW",
+      "label": "10 to 12 years a. Annual basic fee b. Annual additional fee for each claim \u2014 additional per-claim fee",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-13-to-15-years-a-annual-basic-fee-b-annu-y13",
+      "condition": null,
+      "currency": "KRW",
+      "label": "13 to 15 years a. Annual basic fee b. Annual additional fee for each claim (year 13)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-13-to-15-years-a-annual-basic-fee-b-annu-y14",
+      "condition": null,
+      "currency": "KRW",
+      "label": "13 to 15 years a. Annual basic fee b. Annual additional fee for each claim (year 14)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-13-to-15-years-a-annual-basic-fee-b-annu-y15",
+      "condition": null,
+      "currency": "KRW",
+      "label": "13 to 15 years a. Annual basic fee b. Annual additional fee for each claim (year 15)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "49000",
+      "category": "excess_claims",
+      "code": "kr-13-to-15-years-a-annual-basic-fee-b-annu",
+      "condition": {
+        "description": "KIPO additional per-claim fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "KRW",
+      "label": "13 to 15 years a. Annual basic fee b. Annual additional fee for each claim \u2014 additional per-claim fee",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y16",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 16)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y17",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 17)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y18",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 18)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y19",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 19)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y20",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 20)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y21",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 21)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y22",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 22)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y23",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 23)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y24",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 24)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "324000",
+      "category": "maintenance",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu-y25",
+      "condition": null,
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim (year 25)",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "49000",
+      "category": "excess_claims",
+      "code": "kr-16-to-25-years-a-annual-basic-fee-b-annu",
+      "condition": {
+        "description": "KIPO additional per-claim fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "KRW",
+      "label": "16 to 25 years a. Annual basic fee b. Annual additional fee for each claim \u2014 additional per-claim fee",
+      "notes": "KIPO section: Annual Fee",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "46000",
+      "category": "other",
+      "code": "kr-converted-application-fee-utility-model-",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Converted application fee Utility model application into Patent application(On-line)",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "66000",
+      "category": "other",
+      "code": "kr-utility-model-application-into-patent-ap",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Utility model application into Patent application(Paper) a. Basic fee b. Additional fee for each page when the total of the description, drawing, and abstract exceeds 20 pages",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Korean Intellectual Property Office",
+  "jurisdiction": "KR",
+  "key": "KR/KIPO/patent",
+  "notes": "KIPO publishes fees in KRW with electronic + paper rate variants. Annuity bands (1-3, 4-6, 7-9, 10-12, 13-15, 16-25 years) are expanded to per-year rows. Section headers ('Application Fee', 'Examination Fee', 'Annual Fee', 'Others') drive categorization. Per-claim surcharges appear as bare-amount rows immediately following a 'Basic fee' row \u2014 the scraper pairs them. KIPO entity discounts are administered through a separate refund program, not on the published schedule. v1 covers patents only; utility models ship under a separate route when needed.",
+  "office_code": "KIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
+  "statutory_basis": "Enforcement Rule of the Korean Patent Act on Collection of Patent Fees (Korean MOIP / KIPO)."
+}

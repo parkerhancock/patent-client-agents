@@ -1,0 +1,1515 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "450",
+      "category": "filing",
+      "code": "fi-prh-pat-hakemusmaksu-sahkoista-jarjestelmaa-kayttaen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Hakemusmaksu s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "580",
+      "category": "filing",
+      "code": "fi-prh-pat-hakemusmaksu-muuta-kuin-sahkoista-jarjestelmaa-kayttaen",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Hakemusmaksu muuta kuin s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "excess_claims",
+      "code": "fi-prh-pat-lisamaksu-jokaisesta-viisitoista-ylittavasta-patenttivaatimu",
+      "condition": {
+        "description": "Per claim in excess of 15.",
+        "per_unit": true,
+        "threshold": 15,
+        "trigger": "claims_over"
+      },
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu jokaisesta viisitoista ylitt\u00e4v\u00e4st\u00e4 patenttivaatimuksesta",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "fi-prh-pat-lisamaksu-patenttivaatimuksesta-joka-on-annettu-sen-jalkeen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu patenttivaatimuksesta, joka on annettu sen j\u00e4lkeen, kun",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "580",
+      "category": "other",
+      "code": "fi-prh-pat-erityinen-lisamaksu-tapauksissa-joissa-hakemusta-jatketaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Erityinen lis\u00e4maksu tapauksissa, joissa hakemusta jatketaan patenttilain",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "other",
+      "code": "fi-prh-pat-maksu-patenttilain-36-n-tai-37-n-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu patenttilain 36 \u00a7:n tai 37\u00a7:n mukaan",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "extension",
+      "code": "fi-prh-pat-lisamaksu-patenttilain-31-n-2-momentin-mukaisesta-lisaajas",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu patenttilain 31 \u00a7:n 2 momentin mukaisesta lis\u00e4ajasta",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "110",
+      "category": "other",
+      "code": "fi-prh-pat-maksu-uudelleenkasiteltavaksi-ottamisesta-ensimmainen-kerta",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu uudelleenk\u00e4sitelt\u00e4v\u00e4ksi ottamisesta, ensimm\u00e4inen kerta",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "190",
+      "category": "other",
+      "code": "fi-prh-pat-maksu-uudelleenkasiteltavaksi-ottamisesta-muut-kerrat",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu uudelleenk\u00e4sitelt\u00e4v\u00e4ksi ottamisesta, muut kerrat",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "90",
+      "category": "translation",
+      "code": "fi-prh-pat-kaannosmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "K\u00e4\u00e4nn\u00f6smaksu",
+      "notes": "unit: /sivu",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "publication",
+      "code": "fi-prh-pat-julkaisumaksu-sahkoista-jarjestelmaa-kayttaen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Julkaisumaksu s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "580",
+      "category": "publication",
+      "code": "fi-prh-pat-julkaisumaksu-muuta-kuin-sahkoista-jarjestelmaa-kayttaen",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Julkaisumaksu muuta kuin s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "580",
+      "category": "publication",
+      "code": "fi-prh-pat-julkaisumaksu-kaannoksen-korjauksen-johdosta",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Julkaisumaksu k\u00e4\u00e4nn\u00f6ksen korjauksen johdosta",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "renewal",
+      "code": "fi-prh-pat-1-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "1. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "80",
+      "category": "renewal",
+      "code": "fi-prh-pat-2-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "2. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "140",
+      "category": "renewal",
+      "code": "fi-prh-pat-3-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "3. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "170",
+      "category": "renewal",
+      "code": "fi-prh-pat-4-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "4. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "220",
+      "category": "renewal",
+      "code": "fi-prh-pat-5-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "5. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "250",
+      "category": "renewal",
+      "code": "fi-prh-pat-6-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "6. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "280",
+      "category": "renewal",
+      "code": "fi-prh-pat-7-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "7. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "340",
+      "category": "renewal",
+      "code": "fi-prh-pat-8-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "8. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "390",
+      "category": "renewal",
+      "code": "fi-prh-pat-9-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "9. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "fi-prh-pat-10-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "10. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "500",
+      "category": "renewal",
+      "code": "fi-prh-pat-11-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "11. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "560",
+      "category": "renewal",
+      "code": "fi-prh-pat-12-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "12. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "620",
+      "category": "renewal",
+      "code": "fi-prh-pat-13-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "13. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "670",
+      "category": "renewal",
+      "code": "fi-prh-pat-14-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "14. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "740",
+      "category": "renewal",
+      "code": "fi-prh-pat-15-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "15. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "790",
+      "category": "renewal",
+      "code": "fi-prh-pat-16-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "16. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "840",
+      "category": "renewal",
+      "code": "fi-prh-pat-17-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "17. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "900",
+      "category": "renewal",
+      "code": "fi-prh-pat-18-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "18. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "960",
+      "category": "renewal",
+      "code": "fi-prh-pat-19-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "19. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "1010",
+      "category": "renewal",
+      "code": "fi-prh-pat-20-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "20. vuosi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "950",
+      "category": "opposition",
+      "code": "fi-prh-pat-vaitemaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "V\u00e4itemaksu",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "550",
+      "category": "appeal",
+      "code": "fi-prh-pat-ratkaisumaksu-patenttilain-71-a-n-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Ratkaisumaksu patenttilain 71 a \u00a7:n mukaan",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "950",
+      "category": "cancellation",
+      "code": "fi-prh-pat-rajoittamista-koskeva-kasittelymaksu-patenttilain-53-a-n-m",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rajoittamista koskeva k\u00e4sittelymaksu patenttilain 53 a \u00a7:n mukaan",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "fi-prh-pat-maksu-patenttirekisteriin-tehtavasta-merkinnasta-kultakin-m",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu patenttirekisteriin teht\u00e4v\u00e4st\u00e4 merkinn\u00e4st\u00e4, kultakin merkinn\u00e4lt\u00e4",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "fi-prh-pat-etuoikeustodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Etuoikeustodistus",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "fi-prh-pat-diaaritodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Diaaritodistus",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-pat-oikeaksi-todistaminen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Oikeaksi todistaminen",
+      "notes": "unit: +",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-pat-rekisteriote",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekisteriote",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "filing",
+      "code": "fi-prh-um-rekisterointimaksu-sahkoista-jarjestelmaa-kayttaen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekister\u00f6intimaksu s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "310",
+      "category": "filing",
+      "code": "fi-prh-um-rekisterointimaksu-muuta-kuin-sahkoista-jarjestelmaa-kayttae",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Rekister\u00f6intimaksu muuta kuin s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30",
+      "category": "excess_claims",
+      "code": "fi-prh-um-lisamaksu-jokaisesta-viisi-ylittavasta-suojavaatimuksesta",
+      "condition": {
+        "description": "Per claim in excess of 5.",
+        "per_unit": true,
+        "threshold": 5,
+        "trigger": "claims_over"
+      },
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu jokaisesta viisi ylitt\u00e4v\u00e4st\u00e4 suojavaatimuksesta",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "130",
+      "category": "other",
+      "code": "fi-prh-um-lisamaksu-hyodyllisyysmallioikeudesta-annetun-lain-800-1991",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu hy\u00f6dyllisyysmallioikeudesta annetun lain (800/1991) 45 d \u00a7:n",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "110",
+      "category": "examination",
+      "code": "fi-prh-um-uudelleenkasittelymaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Uudelleenk\u00e4sittelymaksu",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "330",
+      "category": "renewal",
+      "code": "fi-prh-um-rekisteroinnin-uudistamismaksu-neljaksi-vuodeksi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekister\u00f6innin uudistamismaksu nelj\u00e4ksi vuodeksi",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "70",
+      "category": "renewal",
+      "code": "fi-prh-um-uudistamismaksun-korotus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Uudistamismaksun korotus",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "280",
+      "category": "renewal",
+      "code": "fi-prh-um-rekisteroinnin-uudistamismaksu-kahdeksi-vuodeksi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekister\u00f6innin uudistamismaksu kahdeksi vuodeksi",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "70",
+      "category": "renewal",
+      "code": "fi-prh-um-uudistamismaksun-korotus-2",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Uudistamismaksun korotus",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "100",
+      "category": "cancellation",
+      "code": "fi-prh-um-maksu-mitatointivaatimuksesta",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu mit\u00e4t\u00f6intivaatimuksesta",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "550",
+      "category": "appeal",
+      "code": "fi-prh-um-ratkaisumaksu-hyodyllisyysmallioikeudesta-annetun-lain-26-a",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Ratkaisumaksu hy\u00f6dyllisyysmallioikeudesta annetun lain 26 a \u00a7:n mukaan",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "fi-prh-um-maksu-hyodyllisyysmallirekisteriin-tehtavasta-merkinnasta-k",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu hy\u00f6dyllisyysmallirekisteriin teht\u00e4v\u00e4st\u00e4 merkinn\u00e4st\u00e4, kultakin",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "90",
+      "category": "translation",
+      "code": "fi-prh-um-kaannosmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "K\u00e4\u00e4nn\u00f6smaksu",
+      "notes": "unit: /sivu | \u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "fi-prh-um-etuoikeustodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Etuoikeustodistus",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "fi-prh-um-diaaritodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Diaaritodistus",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-um-oikeaksi-todistaminen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Oikeaksi todistaminen",
+      "notes": "unit: + | \u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-um-rekisteriote",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekisteriote",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "370",
+      "category": "search",
+      "code": "fi-prh-um-tutkimusmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Tutkimusmaksu",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "160",
+      "category": "search",
+      "code": "fi-prh-um-lausuntomaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lausuntomaksu",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "extension",
+      "code": "fi-prh-um-lykkaysmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lykk\u00e4ysmaksu",
+      "notes": "\u00a72 Utility Model (hy\u00f6dyllisyysmalli)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1885",
+      "category": "search",
+      "code": "fi-prh-pct-uutuustutkimusmaksu-pct-saannon-16-1-a-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Uutuustutkimusmaksu PCT-s\u00e4\u00e4nn\u00f6n 16.1(a) mukaan",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1885",
+      "category": "other",
+      "code": "fi-prh-pct-lisamaksu-uutuustutkimuksesta-pct-saannon-40-2-a-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu uutuustutkimuksesta PCT-s\u00e4\u00e4nn\u00f6n 40.2(a) mukaan",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1885",
+      "category": "other",
+      "code": "fi-prh-pct-taydentavasta-uutuustutkimuksesta-suoritettava-maksu-pct-saa",
+      "condition": null,
+      "currency": "EUR",
+      "label": "T\u00e4ydent\u00e4v\u00e4st\u00e4 uutuustutkimuksesta suoritettava maksu PCT-s\u00e4\u00e4nn\u00f6n",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "search",
+      "code": "fi-prh-pct-palautus-uutuustutkimusmaksusta-pct-saannon-16-3-ja-41-1-muk",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Palautus uutuustutkimusmaksusta PCT-s\u00e4\u00e4nn\u00f6n 16.3 ja 41.1 mukaan. Jos",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "690",
+      "category": "search",
+      "code": "fi-prh-pct-patentoitavuuden-esitutkimusmaksu-pct-saannon-58-1-b-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Patentoitavuuden esitutkimusmaksu PCT-s\u00e4\u00e4nn\u00f6n 58.1(b) mukaan",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "690",
+      "category": "examination",
+      "code": "fi-prh-pct-lisamaksu-patentoitavuuden-esitutkimuksesta-pct-saannon-68-3",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu patentoitavuuden esitutkimuksesta PCT-s\u00e4\u00e4nn\u00f6n 68.3(a)",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "140",
+      "category": "other",
+      "code": "fi-prh-pct-lahettamismaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "L\u00e4hett\u00e4mismaksu",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "fi-prh-pct-etuoikeustodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Etuoikeustodistus",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-pct-etuoikeustodistuksen-lahettaminen-patenttiasetuksen-669-198",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Etuoikeustodistuksen l\u00e4hett\u00e4minen patenttiasetuksen (669/1980) 47 \u00a7:n",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "late_fee",
+      "code": "fi-prh-pct-sekvenssiluettelon-myohastymismaksu-pct-saannon-13ter-1-c-t",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Sekvenssiluettelon my\u00f6h\u00e4stymismaksu PCT-s\u00e4\u00e4nn\u00f6n 13ter.1(c) tai 13ter.2",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0.60",
+      "category": "other",
+      "code": "fi-prh-pct-kopiot-sivu-pct-saannon-94-1ter-ja-94-2-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Kopiot/sivu PCT-s\u00e4\u00e4nn\u00f6n 94.1ter ja 94.2 mukaan",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "other",
+      "code": "fi-prh-pct-kansainvalisen-uutuustutkimuksen-kaltainen-tutkimus-its",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Kansainv\u00e4lisen uutuustutkimuksen kaltainen tutkimus (ITS)",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "550",
+      "category": "appeal",
+      "code": "fi-prh-pct-ratkaisumaksu-pct-saannon-26bis-3-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Ratkaisumaksu PCT-s\u00e4\u00e4nn\u00f6n 26bis.3 mukaan",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "550",
+      "category": "appeal",
+      "code": "fi-prh-pct-ratkaisumaksu-pct-saannon-49ter-2d-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Ratkaisumaksu PCT-s\u00e4\u00e4nn\u00f6n 49ter.2d mukaan",
+      "notes": "\u00a73 PCT international",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "publication",
+      "code": "fi-prh-ep-kaannoksen-julkaisumaksu-sahkoista-jarjestelmaa-kayttaen-pat",
+      "condition": null,
+      "currency": "EUR",
+      "label": "K\u00e4\u00e4nn\u00f6ksen julkaisumaksu s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en patenttilain",
+      "notes": "\u00a74 EP validation in Finland",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "580",
+      "category": "publication",
+      "code": "fi-prh-ep-kaannoksen-julkaisumaksu-muuta-kuin-sahkoista-jarjestelmaa-k",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "K\u00e4\u00e4nn\u00f6ksen julkaisumaksu muuta kuin s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en",
+      "notes": "\u00a74 EP validation in Finland",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "fi-prh-ep-maksu-patenttirekisteriin-tehtavasta-merkinnasta-kultakin-m",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu patenttirekisteriin teht\u00e4v\u00e4st\u00e4 merkinn\u00e4st\u00e4, kultakin merkinn\u00e4lt\u00e4",
+      "notes": "\u00a74 EP validation in Finland",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "550",
+      "category": "appeal",
+      "code": "fi-prh-ep-ratkaisumaksu-patenttilain-71-a-n-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Ratkaisumaksu patenttilain 71 a \u00a7:n mukaan",
+      "notes": "\u00a74 EP validation in Finland",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "fi-prh-ep-diaaritodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Diaaritodistus",
+      "notes": "\u00a74 EP validation in Finland",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-ep-oikeaksi-todistaminen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Oikeaksi todistaminen",
+      "notes": "unit: + | \u00a74 EP validation in Finland",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-ep-rekisteriote",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekisteriote",
+      "notes": "\u00a74 EP validation in Finland",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600",
+      "category": "filing",
+      "code": "fi-prh-spc-lisasuojatodistuksen-hakemusmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4suojatodistuksen hakemusmaksu",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600",
+      "category": "filing",
+      "code": "fi-prh-spc-lisasuojatodistuksen-jatkamisen-hakemusmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4suojatodistuksen jatkamisen hakemusmaksu",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "110",
+      "category": "other",
+      "code": "fi-prh-spc-ensimmainen-kerta",
+      "condition": null,
+      "currency": "EUR",
+      "label": "ensimm\u00e4inen kerta",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "190",
+      "category": "other",
+      "code": "fi-prh-spc-muut-kerrat",
+      "condition": null,
+      "currency": "EUR",
+      "label": "muut kerrat",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "fi-prh-spc-maksu-patenttirekisteriin-tehtavasta-merkinnasta-kultakin-m",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu patenttirekisteriin teht\u00e4v\u00e4st\u00e4 merkinn\u00e4st\u00e4, kultakin merkinn\u00e4lt\u00e4",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "550",
+      "category": "appeal",
+      "code": "fi-prh-spc-ratkaisumaksu-patenttilain-71-a-n-mukaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Ratkaisumaksu patenttilain 71 a \u00a7:n mukaan",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1060",
+      "category": "renewal",
+      "code": "fi-prh-spc-lisasuojatodistuksen-vuosimaksu-1-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4suojatodistuksen vuosimaksu 1. vuosi",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "1160",
+      "category": "renewal",
+      "code": "fi-prh-spc-lisasuojatodistuksen-vuosimaksu-2-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4suojatodistuksen vuosimaksu 2. vuosi",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "1260",
+      "category": "renewal",
+      "code": "fi-prh-spc-lisasuojatodistuksen-vuosimaksu-3-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4suojatodistuksen vuosimaksu 3. vuosi",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "1360",
+      "category": "renewal",
+      "code": "fi-prh-spc-lisasuojatodistuksen-vuosimaksu-4-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4suojatodistuksen vuosimaksu 4. vuosi",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "1460",
+      "category": "renewal",
+      "code": "fi-prh-spc-lisasuojatodistuksen-vuosimaksu-5-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4suojatodistuksen vuosimaksu 5. vuosi",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "1560",
+      "category": "renewal",
+      "code": "fi-prh-spc-lisasuojatodistuksen-vuosimaksu-6-vuosi",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Lis\u00e4suojatodistuksen vuosimaksu 6. vuosi",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "100",
+      "category": "publication",
+      "code": "fi-prh-spc-valmistuspoikkeusilmoituksen-julkaisumaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Valmistuspoikkeusilmoituksen julkaisumaksu",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "fi-prh-spc-diaaritodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Diaaritodistus",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-spc-oikeaksi-todistaminen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Oikeaksi todistaminen",
+      "notes": "unit: + | \u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-spc-rekisteriote",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekisteriote",
+      "notes": "\u00a75 Supplementary Protection Certificate (SPC)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
+  "jurisdiction": "FI",
+  "key": "FI/PRH/patent",
+  "notes": "Bundles \u00a71 national patents, \u00a72 utility models, \u00a73 PCT, \u00a74 EP validation, and \u00a75 Supplementary Protection Certificate (SPC). Patent annuities (years 1-20) and SPC annuities (years 1-6) each emit one FeeItem per year. UM renewal periods (4-yr / 2-yr) emit with year=4 / year=10. The \u00a71 patent claims-over-15 surcharge and \u00a72 UM claims-over-5 surcharge emit as FeeCategory.excess_claims with FeeCondition(claims_over, threshold). Paper-channel rows carry FeeCondition(paper_filing).",
+  "office_code": "PRH",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
+  "statutory_basis": "Patenttilaki (550/1967) (Patents Act) + Hy\u00f6dyllisyysmallilaki (800/1991) (Utility Models Act). Fees set by TEM asetus 1216/2025 (effective 2026-01-01), as amended by 171/2026 (effective 2026-04-01)."
+}

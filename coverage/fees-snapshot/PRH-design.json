@@ -1,0 +1,310 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "250",
+      "category": "filing",
+      "code": "fi-prh-des-hakemusmaksu-sahkoista-jarjestelmaa-kayttaen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Hakemusmaksu s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "filing",
+      "code": "fi-prh-des-hakemusmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Hakemusmaksu",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55",
+      "category": "excess_classes",
+      "code": "fi-prh-des-luokkamaksu-jokaiselta-luokalta-ensimmaisen-luokan-jalkeen",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Luokkamaksu jokaiselta luokalta ensimm\u00e4isen luokan j\u00e4lkeen",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "130",
+      "category": "filing",
+      "code": "fi-prh-des-yhteisrekisterointimaksu-jokaiselta-mallilta-ensimmaisen-jal",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Yhteisrekister\u00f6intimaksu jokaiselta mallilta ensimm\u00e4isen j\u00e4lkeen",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55",
+      "category": "deferment",
+      "code": "fi-prh-des-sailytysmaksu-jokaiselta-mallikappaleelta",
+      "condition": null,
+      "currency": "EUR",
+      "label": "S\u00e4ilytysmaksu jokaiselta mallikappaleelta",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55",
+      "category": "examination",
+      "code": "fi-prh-des-uudelleenkasittelymaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Uudelleenk\u00e4sittelymaksu",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "380",
+      "category": "renewal",
+      "code": "fi-prh-des-uudistamismaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Uudistamismaksu",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "55",
+      "category": "excess_classes",
+      "code": "fi-prh-des-luokkamaksu-jokaiselta-luokalta-ensimmaisen-luokan-jalkeen-2",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Luokkamaksu jokaiselta luokalta ensimm\u00e4isen luokan j\u00e4lkeen",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "130",
+      "category": "filing",
+      "code": "fi-prh-des-yhteisrekisterointimaksu-jokaiselta-mallilta-ensimmaisen-luo",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Yhteisrekister\u00f6intimaksu jokaiselta mallilta ensimm\u00e4isen luokan j\u00e4lkeen",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55",
+      "category": "deferment",
+      "code": "fi-prh-des-sailytysmaksu-jokaiselta-mallikappaleelta-2",
+      "condition": null,
+      "currency": "EUR",
+      "label": "S\u00e4ilytysmaksu jokaiselta mallikappaleelta",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55",
+      "category": "renewal",
+      "code": "fi-prh-des-jos-uudistamismaksu-suoritetaan-kuluvan-rekisterointikauden",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Jos uudistamismaksu suoritetaan kuluvan rekister\u00f6intikauden p\u00e4\u00e4tytty\u00e4",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "fi-prh-des-maksu-mallirekisteriin-tehtavasta-merkinnasta-kultakin-merk",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu mallirekisteriin teht\u00e4v\u00e4st\u00e4 merkinn\u00e4st\u00e4, kultakin merkinn\u00e4lt\u00e4",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "other",
+      "code": "fi-prh-des-maksu-mallirekisteroinnin-muuttamisesta-hakemuksen-perusteel",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu mallirekister\u00f6innin muuttamisesta hakemuksen perusteella",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "fi-prh-des-yhteisomallia-koskevan-rekisterointihakemuksen-toimittamisma",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Yhteis\u00f6mallia koskevan rekister\u00f6intihakemuksen toimittamismaksu",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "fi-prh-des-kansainvalista-rekisterointia-koskevan-hakemuksen-toimittami",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Kansainv\u00e4list\u00e4 rekister\u00f6inti\u00e4 koskevan hakemuksen toimittamismaksu",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "17",
+      "category": "other",
+      "code": "fi-prh-des-etuoikeustodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Etuoikeustodistus",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "fi-prh-des-diaaritodistus",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Diaaritodistus",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-des-oikeaksi-todistaminen",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Oikeaksi todistaminen",
+      "notes": "unit: +",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-des-rekisteriote",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekisteriote",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
+  "jurisdiction": "FI",
+  "key": "FI/PRH/design",
+  "notes": "5-year initial term, renewable in 5-year periods up to 25 years (Mallioikeuslaki \u00a724). Renewal FeeItems carry year=10 (end of first 5-year extension); consumers needing the full ladder should consult the Act. 'Yhteisrekister\u00f6intimaksu' (multi-design surcharge) emits as FeeCategory.filing; 'S\u00e4ilytysmaksu' (deposit fee) emits as FeeCategory.deferment. Community design (EUIPO) and international design (Hague) transmittal fees are also captured.",
+  "office_code": "PRH",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
+  "statutory_basis": "Mallioikeuslaki (221/1971) (Designs Act). Fees set by TEM asetus 1216/2025, as amended by 171/2026 (effective 2026-04-01)."
+}

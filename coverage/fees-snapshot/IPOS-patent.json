@@ -1,0 +1,1900 @@
+{
+  "currency": "SGD",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "170",
+      "category": "filing",
+      "code": "sg-pat-pf1-request-for-the-grant-of-a-patent",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF1: Request for the Grant of a Patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "other",
+      "code": "sg-pat-pf2-reference-to-registrar-on-determination",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF2: Reference to Registrar on Determination of Entitlement to Patent Before or After Grant",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "sg-pat-na-application-for-authorisation-by-registr",
+      "condition": null,
+      "currency": "SGD",
+      "label": "NA: Application for Authorisation by Registrar to Carry out Act on Behalf of Person to whom Directions were Given",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "other",
+      "code": "sg-pat-na-request-for-directions-on-handling-of-di",
+      "condition": null,
+      "currency": "SGD",
+      "label": "NA: Request for Directions on Handling of Dispute Between Joint Applicants",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "transfer",
+      "code": "sg-pat-na-reference-to-registrar-to-determine-the",
+      "condition": null,
+      "currency": "SGD",
+      "label": "NA: Reference to Registrar to determine the question of a licence",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "other",
+      "code": "sg-pat-pf7-application-to-add-and-or-remove-invento",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF7: Application to Add and/or Remove Inventors",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "publication",
+      "code": "sg-pat-pf9-request-for-early-publication",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF9: Request for Early Publication",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1735",
+      "category": "search",
+      "code": "sg-pat-pf10-request-for-search-report-or-supplementa",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF10: Request for Search Report or Supplementary",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1750",
+      "category": "search",
+      "code": "sg-pat-pf11-request-for-search-and-examination-repor",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF11: Request for Search and Examination Report(a) In a case where the International Search Report/International Preliminary Report has been established by IPOS (for PCT application entering national ",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "80",
+      "category": "search",
+      "code": "sg-pat-pf11-request-for-search-and-examination-repor-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF11: Request for Search and Examination Report(a) In a case where the International Search Report/International Preliminary Report has been established by IPOS (for PCT application entering national ",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "80",
+      "category": "excess_claims",
+      "code": "sg-pat-pf11-excess-claims",
+      "condition": {
+        "description": "Per claim in excess of 15.",
+        "per_unit": true,
+        "threshold": 15,
+        "trigger": "claims_over"
+      },
+      "currency": "SGD",
+      "label": "PF11: excess claims surcharge",
+      "notes": "Surcharge over base PF11 fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2050",
+      "category": "search",
+      "code": "sg-pat-pf11-b-in-any-other-case",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF11: (b) In any other case",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "80",
+      "category": "search",
+      "code": "sg-pat-pf11-b-in-any-other-case-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF11: (b) In any other case",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "80",
+      "category": "excess_claims",
+      "code": "sg-pat-pf11-excess-claims-2",
+      "condition": {
+        "description": "Per claim in excess of 15.",
+        "per_unit": true,
+        "threshold": 15,
+        "trigger": "claims_over"
+      },
+      "currency": "SGD",
+      "label": "PF11: excess claims surcharge",
+      "notes": "Surcharge over base PF11 fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1420",
+      "category": "examination",
+      "code": "sg-pat-pf12-request-for-examination-report",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF12: Request for Examination Report",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "80",
+      "category": "examination",
+      "code": "sg-pat-pf12-request-for-examination-report-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF12: Request for Examination Report",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "80",
+      "category": "excess_claims",
+      "code": "sg-pat-pf12-excess-claims",
+      "condition": {
+        "description": "Per claim in excess of 15.",
+        "per_unit": true,
+        "threshold": 15,
+        "trigger": "claims_over"
+      },
+      "currency": "SGD",
+      "label": "PF12: excess claims surcharge",
+      "notes": "Surcharge over base PF12 fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3200",
+      "category": "examination",
+      "code": "sg-pat-pf12b-request-for-an-examination-review-report",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF12B: Request for an Examination Review Report with the Request to Amend Application Before Grant",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "80",
+      "category": "examination",
+      "code": "sg-pat-pf13a-response-to-written-opinion-or-a-respons",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF13A: Response to written opinion or a response to an invitation to amend (whether amending the specification of the application or rejecting the invitation) \u2014 For PF11, PF12 or PF12A filed on or aft",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "grant",
+      "code": "sg-pat-pf14-payment-of-fee-for-grant-of-patent-a",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF14: Payment of Fee for Grant of Patent \u2014 (a) For PF11, PF12 or PF12A filed before 1 September 2025(i) the specification of the patent application has 20 claims or less when rule 47(3) is complied wi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "grant",
+      "code": "sg-pat-pf14-payment-of-fee-for-grant-of-patent-for",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF14: Payment of Fee for Grant of Patent \u2014 For PF12A requests(ii) the specification of the patent application has more than 20 claims when rule 47(3) is complied with;",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "grant",
+      "code": "sg-pat-pf14-payment-of-fee-for-grant-of-patent-for-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF14: Payment of Fee for Grant of Patent \u2014 For PF12A requests(ii) the specification of the patent application has more than 20 claims when rule 47(3) is complied with;",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "excess_claims",
+      "code": "sg-pat-pf14-excess-claims",
+      "condition": {
+        "description": "Per claim in excess of 20.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "SGD",
+      "label": "PF14: excess claims surcharge",
+      "notes": "Surcharge over base PF14 fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "grant",
+      "code": "sg-pat-pf14-for-pf11-or-pf12-requests-iii-the-speci",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF14: For PF11 or PF12 requests(iii) the specification of the patent application has more than 20 claims when rule 47(3) is complied with; and \u2014 A. the specification of the patent application had 20 c",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "grant",
+      "code": "sg-pat-pf14-for-pf11-or-pf12-requests-iii-the-speci-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF14: For PF11 or PF12 requests(iii) the specification of the patent application has more than 20 claims when rule 47(3) is complied with; and \u2014 A. the specification of the patent application had 20 c",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "excess_claims",
+      "code": "sg-pat-pf14-excess-claims-2",
+      "condition": {
+        "description": "Per claim in excess of 20.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "SGD",
+      "label": "PF14: excess claims surcharge",
+      "notes": "Surcharge over base PF14 fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "grant",
+      "code": "sg-pat-pf14-for-pf11-or-pf12-requests-iii-the-speci-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF14: For PF11 or PF12 requests(iii) the specification of the patent application has more than 20 claims when rule 47(3) is complied with; and \u2014 B. the specification of the patent application had more",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "grant",
+      "code": "sg-pat-pf14-for-pf11-or-pf12-requests-iii-the-speci-v2-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF14: For PF11 or PF12 requests(iii) the specification of the patent application has more than 20 claims when rule 47(3) is complied with; and \u2014 B. the specification of the patent application had more",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "grant",
+      "code": "sg-pat-pf14-for-pf11-or-pf12-requests-iii-the-speci-3",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF14: For PF11 or PF12 requests(iii) the specification of the patent application has more than 20 claims when rule 47(3) is complied with; and \u2014 (b) For PF11, PF12 or PF12A requests filed on or after ",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "176",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-5",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 Renewal Fee(a) For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "176",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-6",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 Renewal Fee(a) For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "176",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-7",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 Renewal Fee(a) For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "460",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-8",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (b) For each year of renewal in respect of the 8th, 9th or 10th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "460",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-9",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (b) For each year of renewal in respect of the 8th, 9th or 10th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "460",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-10",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (b) For each year of renewal in respect of the 8th, 9th or 10th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "640",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-11",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (c) For each year of renewal in respect of the 11th, 12th or 13th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "640",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-12",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (c) For each year of renewal in respect of the 11th, 12th or 13th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "640",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-13",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (c) For each year of renewal in respect of the 11th, 12th or 13th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "830",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-14",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (d) For each year of renewal in respect of the 14th, 15th or 16th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "830",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-15",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (d) For each year of renewal in respect of the 14th, 15th or 16th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "830",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-16",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (d) For each year of renewal in respect of the 14th, 15th or 16th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "1010",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-17",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (e) For each year of renewal in respect of the 17th, 18th or 19th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "1010",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-18",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (e) For each year of renewal in respect of the 17th, 18th or 19th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "1010",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-19",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (e) For each year of renewal in respect of the 17th, 18th or 19th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "1200",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-20",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (f) For renewal of the 20th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "1470",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-21",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (g) For each year of renewal after the 20th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "sg-pat-pf15-payment-of-renewal-fee-and-any-additiona",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 Additional Fee(a) For late payment of renewal fee not exceeding one month",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "late_fee",
+      "code": "sg-pat-pf15-payment-of-renewal-fee-and-any-additiona-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee \u2014 (b) For late payment of renewal fee for each succeeding month (but not exceeding 6 months)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1250",
+      "category": "other",
+      "code": "sg-pat-pf17-application-amend-specification-after-gr",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF17: Application Amend Specification After Grant",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "sg-pat-pf19-application-for-restoration-of-patent",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF19: Application for Restoration of Patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-1",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: Payment of Additional Fee and Renewal Fee for Restoration of Patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "176",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-5",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (a) For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "176",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-6",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (a) For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "176",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-7",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (a) For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "460",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-8",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (b) For each year of renewal in respect of the 8th, 9th or 10th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "460",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-9",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (b) For each year of renewal in respect of the 8th, 9th or 10th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "460",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-10",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (b) For each year of renewal in respect of the 8th, 9th or 10th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "640",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-11",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (c) For each year of renewal in respect of the 11th, 12th or 13th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "640",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-12",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (c) For each year of renewal in respect of the 11th, 12th or 13th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "640",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-13",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (c) For each year of renewal in respect of the 11th, 12th or 13th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "830",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-14",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (d) For each year of renewal in respect of the 14th, 15th or 16th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "830",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-15",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (d) For each year of renewal in respect of the 14th, 15th or 16th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "830",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-16",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (d) For each year of renewal in respect of the 14th, 15th or 16th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "1010",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-17",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (e) For each year of renewal in respect of the 17th, 18th or 19th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "1010",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-18",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (e) For each year of renewal in respect of the 17th, 18th or 19th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "1010",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-19",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (e) For each year of renewal in respect of the 17th, 18th or 19th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "1200",
+      "category": "other",
+      "code": "sg-pat-pf20-f-for-renewal-of-the-20th-year-of-the",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (f) For renewal of the 20th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1470",
+      "category": "renewal",
+      "code": "sg-pat-pf20-y-21",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF20: (g) For each year of renewal after the 20th year of the patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "40",
+      "category": "transfer",
+      "code": "sg-pat-pf28-application-for-entry-to-be-made-or-for",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF28: Application for Entry to be Made, or for Cancellation of Entry, in Register to Effect that Licences under Patent are to be Available as of Right",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "380",
+      "category": "transfer",
+      "code": "sg-pat-na-application-for-settlement-of-terms-of-l",
+      "condition": null,
+      "currency": "SGD",
+      "label": "NA: Application for Settlement of Terms of Licence of Right",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "sg-pat-na-application-for-information-on-correspon",
+      "condition": null,
+      "currency": "SGD",
+      "label": "NA: Application for Information on Corresponding Applications for Patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "cancellation",
+      "code": "sg-pat-pf35-application-for-revocation-of-patent",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF35: Application for Revocation of Patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "other",
+      "code": "sg-pat-pf36-request-for-re-examination-of-patent-a",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF36: Request for Re-examination of Patent(a) In Response to Direction of Registrar",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3200",
+      "category": "other",
+      "code": "sg-pat-pf36-b-request-for-re-examination-after-gra",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF36: (b) Request for Re-examination after Grant",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "other",
+      "code": "sg-pat-pf37-entry-into-national-phase",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF37: Entry into National Phase",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "publication",
+      "code": "sg-pat-pf38-payment-of-fee-for-publication-of-transl",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF38: Payment of Fee for Publication of Translation of International Application and/ or any Amendment to International Application(Applicable for national phase entry made before 29 April 2022)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "160",
+      "category": "other",
+      "code": "sg-pat-na-application-to-registrar-for-internation",
+      "condition": null,
+      "currency": "SGD",
+      "label": "NA: Application to Registrar for International Application to be Treated as Application under Act",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "extension",
+      "code": "sg-pat-pf45-46-47-request-for-extension-of-time-or-period",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF45/46/47: Request for Extension of Time or Period \u2014 For an application for a patent lodged before 14 February 2014(a) Request under rule 108(3)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "extension",
+      "code": "sg-pat-pf45-46-47-request-for-extension-of-time-or-period-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF45/46/47: Request for Extension of Time or Period \u2014 (b) Request under rule 108(4) or (4A)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "extension",
+      "code": "sg-pat-pf45-46-47-request-for-extension-of-time-or-period-3",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF45/46/47: Request for Extension of Time or Period \u2014 (c) Payment of additional fee under 108(6)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "extension",
+      "code": "sg-pat-pf45-46-47-request-for-extension-of-time-or-period-4",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF45/46/47: Request for Extension of Time or Period \u2014 For an application for a patent lodged on or after 14 February 2014(a) Request under rule 108(3) or (4)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "extension",
+      "code": "sg-pat-pf45-46-47-request-for-extension-of-time-or-period-5",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF45/46/47: Request for Extension of Time or Period \u2014 (b) Request under rule 108(5)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "other",
+      "code": "sg-pat-na-payment-of-transmittal-fee-under-patent",
+      "condition": null,
+      "currency": "SGD",
+      "label": "NA: Payment of Transmittal Fee under Patent Co\u2011operation Treaty",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "sg-pat-na-notice-of-objection-to-release-of-sample",
+      "condition": null,
+      "currency": "SGD",
+      "label": "NA: Notice of objection to Release of Sample of Micro-organism to Expert",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "88",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-5-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 Renewal Fee(a) For each year of renewal in re",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "88",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-6-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 Renewal Fee(a) For each year of renewal in re",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "88",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-7-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 Renewal Fee(a) For each year of renewal in re",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "230",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-8-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (b) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "230",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-9-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (b) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "230",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-10-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (b) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "320",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-11-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (c) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "320",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-12-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (c) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "320",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-13-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (c) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "415",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-14-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (d) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "415",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-15-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (d) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "415",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-16-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (d) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "505",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-17-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (e) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "505",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-18-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (e) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "505",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-19-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (e) For each year of renewal in respect of th",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "600",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-20-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (f) For renewal of the 20th year of the paten",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "735",
+      "category": "renewal",
+      "code": "sg-pat-pf15-y-21-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (g) For each year of renewal after the 20th y",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "sg-pat-pf15-payment-of-renewal-fee-and-any-additiona-3",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 Additional Fee(a) For late payment of renewal",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "late_fee",
+      "code": "sg-pat-pf15-payment-of-renewal-fee-and-any-additiona-4",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF15: Payment of Renewal Fee and Any Additional Fee after Entry is Made in Register to Effect that Licences under Patent are to be Available as of Right \u2014 (b) For late payment of renewal fee for each ",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "950",
+      "category": "other",
+      "code": "sg-pat-pf54-application-for-extension-of-term-of-pat",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF54: Application for Extension of Term of Patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "120",
+      "category": "other",
+      "code": "sg-pat-pf57-addition-correction-or-late-declaration",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF57: Addition, Correction or Late Declaration of Priority(a) For declaration under rule 9(2) or request under rule 9(3)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "other",
+      "code": "sg-pat-pf57-b-for-request-under-rule-9a-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF57: (b) For request under rule 9A(2)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "opposition",
+      "code": "sg-pat-pf58-notice-of-opposition-a-to-an-applicat",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF58: Notice of Opposition \u2013(a) To an application under section 24",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "480",
+      "category": "other",
+      "code": "sg-pat-pf58-b-to-an-amendment-of-a-specification-a",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF58: (b) To an amendment of a specification after grant",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "90",
+      "category": "transfer",
+      "code": "sg-pat-pf58-c-to-an-application-under-section-54-1",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF58: (c) To an application under section 54(1) or (3) for cancellation of an entry in the register",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "sg-pat-pf58-d-to-the-correction-of-an-error-cleri",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF58: (d) To the correction of an error, clerical error or mistake",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "transfer",
+      "code": "sg-pat-cm4-request-for-correction-of-error-a-for-t",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM4: Request for Correction of Error(a) For the correction of form, correction of register of Patents, or correction of documents other than form or specification of a patent or of an application for ",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "transfer",
+      "code": "sg-pat-cm4-b-for-the-correction-of-error-in-name",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM4: (b) For the correction of error in name or other particular of a person in the register or other document",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "120",
+      "category": "other",
+      "code": "sg-pat-cm4-c-for-the-correction-of-specification",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM4: (c) For the correction of specification of a patent or of an application for a patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "transfer",
+      "code": "sg-pat-cm6-application-to-register-amend-or-termin",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM6: Application to Register, Amend or Terminate Licence",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "transfer",
+      "code": "sg-pat-cm7-application-to-register-amend-or-termin",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM7: Application to Register, Amend or Terminate Security Interest",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "transfer",
+      "code": "sg-pat-cm8-application-to-register-transfer-of-owne",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM8: Application to Register Transfer of Ownership",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30",
+      "category": "other",
+      "code": "sg-pat-cm10-only-e-filing-available-request-for-file-inspection",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM10 (Only e-filing available): Request for File Inspection",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "28",
+      "category": "transfer",
+      "code": "sg-pat-cm12-request-for-certified-copy-of-entry-in-r",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM12: Request for Certified Copy of Entry in Register or Certified Extract from Register/ Request for Certified Document Relating to Patent or Application for Patent(a) For certificate in electronic f",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "35",
+      "category": "other",
+      "code": "sg-pat-cm12-b-for-certificate-in-paper-form-i-e",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM12: (b) For certificate in paper form (i.e. hard copy)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "appeal",
+      "code": "sg-pat-hc1-hearing-and-decision",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC1: Hearing and decision",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "130",
+      "category": "extension",
+      "code": "sg-pat-hc3-request-for-extension-of-time-a-first-e",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC3: Request for Extension of Time(a) first extension of that period(b) second or subsequent extension of that period",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "appeal",
+      "code": "sg-pat-hc4-request-for-hearing-at-which-only-the-pa",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC4: Request for Hearing at which Only the Party Making the Request is Present (Ex Parte Hearing)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "700",
+      "category": "other",
+      "code": "sg-pat-hc5-request-for-grounds-of-decision",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC5: Request for Grounds of Decision",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "360",
+      "category": "opposition",
+      "code": "sg-pat-hc6-counter-statement",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC6: Counter-Statement",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Intellectual Property Office of Singapore (IPOS)",
+  "jurisdiction": "SG",
+  "key": "SG/IPOS/patent",
+  "notes": "PF15 renewal expands across seven year-bands (5-7 / 8-10 / 11-13 / 14-16 / 17-19 / 20 / post-20) emitting one FeeItem per year. PF11/PF12 per-claim surcharge at S$80/claim over 15 claims emits as a separate FeeCategory.excess_claims row with FeeCondition(claims_over, threshold=15, per_unit=True). PF14 multi-branch grant fee collapses to per-amount extraction; consumers needing the conditional logic should consult IPOS Patents Circular 3/2025 Annex A.",
+  "office_code": "IPOS",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+  "statutory_basis": "Patents Act 1994 (Singapore) + Patents Rules (SSO SL/PA1994-R1) First Schedule 'Fees payable'. Two-phase reform consolidated by Patents Circular 3/2025 (21 July 2025); first tranche effective 2025-09-01, second tranche effective 2026-04-01."
+}

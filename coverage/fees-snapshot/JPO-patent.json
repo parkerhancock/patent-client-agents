@@ -1,0 +1,4180 @@
+{
+  "currency": "JPY",
+  "effective_date": "2022-04-01",
+  "fees": [
+    {
+      "amount": "14000",
+      "category": "filing",
+      "code": "jp-1-patents-patent-application",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Patent application",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "22000",
+      "category": "other",
+      "code": "jp-1-patents-application-in-foreign-language",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Application in foreign language",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "14000",
+      "category": "filing",
+      "code": "jp-1-patents-submission-of-a-description-and-drawings",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Submission of a description and drawings for a patent application containing a reference to a previously filed application",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "14000",
+      "category": "other",
+      "code": "jp-1-patents-entry-into-the-national-phase-in-japan-u",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Entry into the national phase in Japan (under the PCT)",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "74000",
+      "category": "extension",
+      "code": "jp-1-patents-application-for-registration-of-an-exten",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Application for registration of an extension of the term of patent right",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "138000",
+      "category": "examination",
+      "code": "jp-1-patents-request-for-examination-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for examination",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or after April 1, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "excess_claims",
+      "code": "jp-1-patents-request-for-examination-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "Request for examination \u2014 per claim",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or after April 1, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "83000",
+      "category": "filing",
+      "code": "jp-1-patents-where-the-international-search-report-ha-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-where the international search report has been established by the JPO (under the PCT)",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or after April 1, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2400",
+      "category": "excess_claims",
+      "code": "jp-1-patents-where-the-international-search-report-ha-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "-where the international search report has been established by the JPO (under the PCT) \u2014 per claim",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or after April 1, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "110000",
+      "category": "filing",
+      "code": "jp-1-patents-where-the-search-report-has-been-establi-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-where the search report has been established by a designated searching organization",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or after April 1, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3200",
+      "category": "excess_claims",
+      "code": "jp-1-patents-where-the-search-report-has-been-establi-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "-where the search report has been established by a designated searching organization \u2014 per claim",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or after April 1, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "118000",
+      "category": "examination",
+      "code": "jp-1-patents-request-for-examination-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for examination",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or before March 31, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "excess_claims",
+      "code": "jp-1-patents-request-for-examination-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "Request for examination \u2014 per claim",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or before March 31, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "71000",
+      "category": "filing",
+      "code": "jp-1-patents-where-the-international-search-report-ha-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-where the international search report has been established by the JPO (under the PCT)",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or before March 31, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2400",
+      "category": "excess_claims",
+      "code": "jp-1-patents-where-the-international-search-report-ha-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "-where the international search report has been established by the JPO (under the PCT) \u2014 per claim",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or before March 31, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "94000",
+      "category": "filing",
+      "code": "jp-1-patents-where-the-search-report-has-been-establi-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-where the search report has been established by a designated searching organization",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or before March 31, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3200",
+      "category": "excess_claims",
+      "code": "jp-1-patents-where-the-search-report-has-been-establi-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "-where the search report has been established by a designated searching organization \u2014 per claim",
+      "notes": "JPO heading: (1)Patents; Cohort: (For patent applications filed on or before March 31, 2019)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y1-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "300",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y1-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "4300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y2-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "300",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y2-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "4300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y3-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "300",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y3-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "10300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y4-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "800",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y4-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "10300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y5-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "800",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y5-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "10300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y6-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "800",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y6-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "24800",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y7-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "1900",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y7-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "24800",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y8-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "1900",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y8-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "24800",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y9-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "1900",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y9-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y10-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y10-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y11-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y11-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y12-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y12-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y13-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y13-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y14-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y14-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y15-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y15-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y16-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y16-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y17-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y17-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y18-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y18-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y19-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y19-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y20-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y20-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y21-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y21-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y22-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y22-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y23-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y23-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y24-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y24-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "59400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y25-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "4600",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y25-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or after April 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "10300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y1-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "900",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y1-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "10300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y2-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "900",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y2-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "10300",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y3-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "900",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-1-3rd-year-annually-y3-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "16100",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y4-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "1300",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y4-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "16100",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y5-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "1300",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y5-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "16100",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y6-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "1300",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-4-6th-year-annually-y6-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "32200",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y7-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "2500",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y7-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "32200",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y8-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "2500",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y8-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "32200",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y9-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "2500",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-7-9th-year-annually-y9-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y10-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y10-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y11-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y11-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y12-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y12-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y13-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y13-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y14-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y14-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y15-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y15-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y16-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y16-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y17-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y17-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y18-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y18-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y19-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y19-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y20-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y20-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y21-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y21-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y22-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y22-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y23-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y23-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y24-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y24-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "64400",
+      "category": "maintenance",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y25-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "5000",
+      "category": "excess_claims",
+      "code": "jp-1-for-patent-ap-10-25th-year-annually-y25-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 1) For patent applications filed on or after January 1, 1988; Cohort: (For patent applications requested for examination on or before March 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "1500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y1-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "1000",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y1-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "1500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y2-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "1000",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y2-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "1500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y3-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "1000",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y3-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "4800",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y4-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "2900",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y4-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "4800",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y5-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "2900",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y5-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "4800",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y6-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "2900",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y6-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "14300",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y7-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "8800",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y7-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "14300",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y8-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "8800",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y8-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "14300",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y9-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "8800",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y9-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y10-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y10-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y11-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y11-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y12-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y12-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y13-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y13-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y14-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y14-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y15-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y15-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y16-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y16-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y17-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y17-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y18-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y18-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y19-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y19-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y20-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y20-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y21-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y21-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y22-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y22-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y23-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y23-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y24-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y24-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y25-current",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y25-current-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or after \n\t\tApril 1, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "7500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y1-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "4900",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y1-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "7500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y2-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "4900",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y2-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "7500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y3-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "4900",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-1-3rd-year-annually-y3-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "1-3rd year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "11900",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y4-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "7400",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y4-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "11900",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y5-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "7400",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y5-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "11900",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y6-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-6th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "7400",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-4-6th-year-annually-y6-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "4-6th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "23800",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y7-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "14800",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y7-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "23800",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y8-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "14800",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y8-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "23800",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y9-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "7-9th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "14800",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-7-9th-year-annually-y9-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "7-9th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y10-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y10-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y11-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y11-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y12-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y12-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y13-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y13-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y14-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y14-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y15-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y15-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y16-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y16-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y17-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y17-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y18-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y18-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y19-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y19-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y20-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y20-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y21-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y21-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y22-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y22-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y23-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y23-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y24-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y24-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "47500",
+      "category": "maintenance",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y25-legacy",
+      "condition": null,
+      "currency": "JPY",
+      "label": "10-25th year: annually,",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "29600",
+      "category": "excess_claims",
+      "code": "jp-2-for-patent-ap-10-25th-year-annually-y25-legacy-perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "10-25th year: annually, \u2014 per claim",
+      "notes": "JPO heading: 2) For patent applications filed on or before December 31, 1987; Cohort: (For patent applications requested for examination on or before \n\t\tMarch 31, 2004)",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "16500",
+      "category": "opposition",
+      "code": "jp-1-patents-opposition",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Opposition",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2400",
+      "category": "excess_claims",
+      "code": "jp-1-patents-opposition--perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "Opposition \u2014 per claim",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "49500",
+      "category": "petition",
+      "code": "jp-1-patents-request-for-correction",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for correction",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5500",
+      "category": "excess_claims",
+      "code": "jp-1-patents-request-for-correction--perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "Request for correction \u2014 per claim",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "49500",
+      "category": "appeal",
+      "code": "jp-1-patents-appeal",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Appeal",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5500",
+      "category": "excess_claims",
+      "code": "jp-1-patents-appeal--perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "Appeal \u2014 per claim",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "49500",
+      "category": "ptab",
+      "code": "jp-1-patents-trial-retrial",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Trial / Retrial",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5500",
+      "category": "excess_claims",
+      "code": "jp-1-patents-trial-retrial--perclaim",
+      "condition": {
+        "description": "JPO per-claim surcharge.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "claims_over"
+      },
+      "currency": "JPY",
+      "label": "Trial / Retrial \u2014 per claim",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55000",
+      "category": "ptab",
+      "code": "jp-1-patents-trial-retrial-for-registration-of-an-ext",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Trial / Retrial for registration of an extension of the term of patent right",
+      "notes": "JPO heading: (1)Patents",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2100",
+      "category": "extension",
+      "code": "jp-5-others-request-for-extension-of-a-period",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for extension of a period",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4200",
+      "category": "extension",
+      "code": "jp-5-others-request-for-extension-of-a-specified-tim",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for extension of a specified time limit after the expiration of the time limit (except for Request for extension of the time limit specified under the Article 50 of the Patent Act)",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "51000",
+      "category": "extension",
+      "code": "jp-5-others-request-for-extension-of-the-time-limit-",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for extension of the time limit specified under the Article 50 of the Patent Act after the expiration of the time limit",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4200",
+      "category": "transfer",
+      "code": "jp-5-others-notification-of-succession-change-in-the",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Notification of succession (Change in the name of applicant)",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1400",
+      "category": "other",
+      "code": "jp-5-others-over-the-counter",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-over the counter",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1500",
+      "category": "other",
+      "code": "jp-5-others-request-for-inspection-of-documents-pape",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for inspection of documents (paper)",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "other",
+      "code": "jp-5-others-request-for-inspection-of-the-register-p",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for inspection of the Register (paper)",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1400",
+      "category": "other",
+      "code": "jp-5-others-request-for-copy-of-documents-paper",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for copy of documents (paper)",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350",
+      "category": "other",
+      "code": "jp-5-others-request-for-copy-of-the-register-paper",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for copy of the Register (paper)",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2400",
+      "category": "other",
+      "code": "jp-5-others-fee-for-rewriting-data-into-electronic-f",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Fee for rewriting data into electronic format",
+      "notes": "JPO heading: 5. Others",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "9000",
+      "category": "other",
+      "code": "jp-6-after-registr-utility-models",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-Utility models",
+      "notes": "JPO heading: 6. After Registration",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "9000",
+      "category": "other",
+      "code": "jp-6-after-registr-designs",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-Designs",
+      "notes": "JPO heading: 6. After Registration",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30000",
+      "category": "other",
+      "code": "jp-6-after-registr-trademarks",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-Trademarks",
+      "notes": "JPO heading: 6. After Registration",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "transfer",
+      "code": "jp-6-after-registr-general-successions-inheritance-etc",
+      "condition": null,
+      "currency": "JPY",
+      "label": "-General successions (inheritance, etc)",
+      "notes": "JPO heading: 6. After Registration",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "other",
+      "code": "jp-6-after-registr-change-in-the-name-of-owner-excluding-tr",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Change in the name of owner (excluding transfer)",
+      "notes": "JPO heading: 6. After Registration",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Japan Patent Office",
+  "jurisdiction": "JP",
+  "key": "JP/JPO/patent",
+  "notes": "JPO patent annuities and examination requests are uniformly claim-count-dependent: every cell is '\u00a5X + \u00a5Y per claim'. The scraper splits these into a base FeeItem plus a separate excess_claims FeeItem with FeeCondition(trigger=claims_over, threshold=1, per_unit=True). Two annuity cohorts are emitted: 'current' for patents filed/examined on or after the relevant cutoff dates, and 'legacy' for pre-cutoff patents (mostly expired by now but still in the schedule for completeness). Year bands 1-3, 4-6, 7-9, 10-25 expanded to per-year rows. Site has flaky connect behavior from some networks; client uses HTTP/2 and a 60s timeout.",
+  "office_code": "JPO",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+  "statutory_basis": "Patent Act of Japan; supplementary fee tables under the Patent Act, Utility Model Act, Design Act, and Trademark Act."
+}

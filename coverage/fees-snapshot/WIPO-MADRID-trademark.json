@@ -1,0 +1,350 @@
+{
+  "currency": "CHF",
+  "effective_date": "2024-11-11",
+  "fees": [
+    {
+      "amount": "653",
+      "category": "filing",
+      "code": "wo-madrid-2-1-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "where no representation of the mark is in color",
+      "notes": "Madrid Schedule of Fees, item 2.1.1",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "903",
+      "category": "filing",
+      "code": "wo-madrid-2-1-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "where any representation of the mark is in color",
+      "notes": "Madrid Schedule of Fees, item 2.1.2",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "excess_classes",
+      "code": "wo-madrid-2-2",
+      "condition": {
+        "description": "Madrid supplementary fee per class beyond the first three (Madrid Protocol Article 8(2)(ii)).",
+        "per_unit": true,
+        "threshold": 3,
+        "trigger": "classes_over"
+      },
+      "currency": "CHF",
+      "label": "Supplementary fee for each class of goods and services beyond three classes, except if only Contracting Parties in respect of which individual fees (see 2.4, below) are payable are designated (Article",
+      "notes": "Madrid Schedule of Fees, item 2.2",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "designation",
+      "code": "wo-madrid-2-3",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Complementary fee for each designated Contracting Party, except if the designated Contracting Party is a Contracting Party in respect of which an individual fee (see 2.4 below) is payable (Article 8(2",
+      "notes": "Madrid Schedule of Fees, item 2.3",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "77",
+      "category": "other",
+      "code": "wo-madrid-4-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Where the goods and services are not grouped in classes",
+      "notes": "Madrid Schedule of Fees, item 4.1",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20",
+      "category": "other",
+      "code": "wo-madrid-4-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Where the classification, as appearing in the application, of one or more terms is incorrectprovided that, where the total amount due under this item in respect of an international application is less",
+      "notes": "Madrid Schedule of Fees, item 4.2",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "designation",
+      "code": "wo-madrid-5-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Basic fee",
+      "notes": "Madrid Schedule of Fees, item 5.1",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "designation",
+      "code": "wo-madrid-5-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Complementary fee for each designated Contracting Party indicated in the same request where an individual fee is not payable in respect of such designated Contracting Party (see 5.3, below)",
+      "notes": "Madrid Schedule of Fees, item 5.2",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "653",
+      "category": "renewal",
+      "code": "wo-madrid-6-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Basic fee",
+      "notes": "Madrid Schedule of Fees, item 6.1",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "100",
+      "category": "renewal",
+      "code": "wo-madrid-6-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Supplementary fee, except if the renewal is made only for designated Contracting Parties in respect of which individual fees are payable (see 6.4, below)",
+      "notes": "Madrid Schedule of Fees, item 6.2",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "100",
+      "category": "renewal",
+      "code": "wo-madrid-6-3",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Complementary fee for each designated Contracting Party in respect of which an individual fee is not payable (see 6.4, below)",
+      "notes": "Madrid Schedule of Fees, item 6.3",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "50",
+      "category": "renewal",
+      "code": "wo-madrid-6-5",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Surcharge for the use of the period of grace (Article 7(4) of the Protocol)",
+      "notes": "Madrid Schedule of Fees, item 6.5",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "177",
+      "category": "transfer",
+      "code": "wo-madrid-7-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Total transfer of an international registration",
+      "notes": "Madrid Schedule of Fees, item 7.1",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "177",
+      "category": "transfer",
+      "code": "wo-madrid-7-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Partial transfer (for some of the goods and services or for some of the Contracting Parties) of an international registration",
+      "notes": "Madrid Schedule of Fees, item 7.2",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "177",
+      "category": "transfer",
+      "code": "wo-madrid-7-3",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Limitation requested by the holder subsequent to international registration, provided that, if the limitation affects more than one Contracting Party, it is the same for all",
+      "notes": "Madrid Schedule of Fees, item 7.3",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "transfer",
+      "code": "wo-madrid-7-4",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Change in the name and/or address of the holder and/or, where the holder is a legal entity, introduction of or change in the indications concerning the legal nature of the holder and the State and, wh",
+      "notes": "Madrid Schedule of Fees, item 7.4",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "177",
+      "category": "transfer",
+      "code": "wo-madrid-7-5",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Recording of a license in respect of an international registration or amendment of the recording of a license",
+      "notes": "Madrid Schedule of Fees, item 7.5",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "transfer",
+      "code": "wo-madrid-7-6",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Request for a continued processing under Rule 5bis(1)",
+      "notes": "Madrid Schedule of Fees, item 7.6",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "177",
+      "category": "transfer",
+      "code": "wo-madrid-7-7",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Division of an international registration",
+      "notes": "Madrid Schedule of Fees, item 7.7",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5",
+      "category": "other",
+      "code": "wo-madrid-8-4",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Reprint or photocopy of the publication of an international registration, per page",
+      "notes": "Madrid Schedule of Fees, item 8.4",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "23",
+      "category": "other",
+      "code": "wo-madrid-10-1",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Fee for the International Bureau",
+      "notes": "Madrid Schedule of Fees, item 10.1",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "41",
+      "category": "other",
+      "code": "wo-madrid-10-2",
+      "condition": null,
+      "currency": "CHF",
+      "label": "Fee to be transferred by the International Bureau to the successor State",
+      "notes": "Madrid Schedule of Fees, item 10.2",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "World Intellectual Property Organization (WIPO) \u2014 International Bureau",
+  "jurisdiction": "WO",
+  "key": "WO/WIPO-MADRID/trademark",
+  "notes": "Madrid Protocol international trademark fees paid to the WIPO International Bureau, in CHF. Per-country individual designation fees (set by each Contracting Party) are NOT covered here \u2014 those live in a separate 126-row table on wipo.int/madrid/en/fees/. v1 covers basic application, supplementary/complementary fees, subsequent designations, renewal (10-year cycle), and irregularity fees. The basic fee differs based on whether the mark contains color representation (Articles 8(2)(i) of the Protocol).",
+  "office_code": "WIPO-MADRID",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
+  "statutory_basis": "Schedule of Fees annexed to the Common Regulations under the Madrid Agreement and the Madrid Protocol."
+}

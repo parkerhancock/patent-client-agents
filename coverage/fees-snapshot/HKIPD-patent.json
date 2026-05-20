@@ -1,0 +1,1180 @@
+{
+  "currency": "HKD",
+  "effective_date": "2019-12-19",
+  "fees": [
+    {
+      "amount": "345",
+      "category": "grant",
+      "code": "hk-pat-ogp-request-for-grant-of-a-standard-patent-o",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for grant of a standard patent (O)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "480",
+      "category": "grant",
+      "code": "hk-pat-ogp-request-for-grant-of-a-standard-patent-o-paper",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "Request for grant of a standard patent (O)",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "68",
+      "category": "publication",
+      "code": "hk-pat-gen-advertisement-fee",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Advertisement fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "95",
+      "category": "late_fee",
+      "code": "hk-pat-gen-additional-fee-for-late-payment-of-filin",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Additional fee for late payment of filing fee or advertisement fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-ogp-statement-of-inventorship-in-respect-of-",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Statement of inventorship in respect of a standard patent (O)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "examination",
+      "code": "hk-pat-ogp-request-for-substantive-examination-of-a",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for substantive examination of a standard patent (O) application",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1700",
+      "category": "appeal",
+      "code": "hk-pat-gen-request-to-review",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to review",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "examination",
+      "code": "hk-pat-stp-request-for-substantive-examination-of-a",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for substantive examination of a short-term patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135",
+      "category": "other",
+      "code": "hk-pat-gen-addition-of-priority-claim",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Addition of priority claim",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "405",
+      "category": "other",
+      "code": "hk-pat-gen-restoration-of-priority-right",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Restoration of priority right",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1700",
+      "category": "appeal",
+      "code": "hk-pat-gen-request-for-hearing",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for hearing",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1700",
+      "category": "other",
+      "code": "hk-pat-gen-application-to-amend-specification-after",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application to amend specification after grant under section 46(2) of the Patents Ordinance and section 38A of the Patents (General) Rules",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-application-to-amend-specification-after-2",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application to amend specification after grant under sections 43, 127B(1)(b), 127D(3)(b) of the Patents Ordinance and sections 35, 81P of the Patents (General) Rules",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1700",
+      "category": "appeal",
+      "code": "hk-pat-gen-notice-of-intention-to-appear-at-hearing",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Notice of intention to appear at hearing",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "190",
+      "category": "other",
+      "code": "hk-pat-gen-reference-to-the-registrar-of-patents-of",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Reference to the Registrar of Patents of question as to who may apply for grant of a standard patent or a licence or whether the period or terms of licence are reasonable",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "190",
+      "category": "other",
+      "code": "hk-pat-gen-application-for-authorisation-by-the-reg",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for authorisation by the Registrar of Patents under section 13(5) or 37I(4) of the Patents Ordinance",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "325",
+      "category": "opposition",
+      "code": "hk-pat-gen-filing-of-notice-of-opposition-or-counte",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Filing of notice of opposition or counter-statement other than under sections 31ZW, 38B(1), 73, 81Q(1) of and paragraph 2D of Schedule 1 to the Patents (General) Rules",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1525",
+      "category": "opposition",
+      "code": "hk-pat-gen-filing-opposition-notice-under-sections-",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Filing opposition notice under sections 38B(1), 81Q(1) of the Patents (General) Rules",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "opposition",
+      "code": "hk-pat-gen-filing-of-notice-of-intention-to-oppose-",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Filing of notice of intention to oppose under section 41AA(1) of the Patents (General) Rules",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "opposition",
+      "code": "hk-pat-gen-filing-of-notice-of-opposition-under-sec",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Filing of notice of opposition under sections 31ZW, 73 of and paragraph 2D of Schedule 1 to the Patents (General) Rules",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "275",
+      "category": "filing",
+      "code": "hk-pat-rr-request-to-record-a-designated-patent-ap",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to record a designated patent application for a standard patent (R)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "380",
+      "category": "filing",
+      "code": "hk-pat-rr-request-to-record-a-designated-patent-ap-paper",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "Request to record a designated patent application for a standard patent (R)",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "275",
+      "category": "grant",
+      "code": "hk-pat-rr-request-for-registration-of-a-designated",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for registration of a designated patent and grant of a standard patent (R)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "380",
+      "category": "grant",
+      "code": "hk-pat-rr-request-for-registration-of-a-designated-paper",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "Request for registration of a designated patent and grant of a standard patent (R)",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "545",
+      "category": "grant",
+      "code": "hk-pat-stp-request-for-grant-of-a-short-term-patent",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for grant of a short-term patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "755",
+      "category": "grant",
+      "code": "hk-pat-stp-request-for-grant-of-a-short-term-patent-paper",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "Request for grant of a short-term patent",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-stp-statement-of-inventorship-in-respect-of-",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Statement of inventorship in respect of a short-term patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135",
+      "category": "other",
+      "code": "hk-pat-gen-request-for-correction-of-error-other-th",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for correction of error (other than correction of address, address for service or agent\u2019s address)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "190",
+      "category": "translation",
+      "code": "hk-pat-gen-request-to-publish-a-corrected-translati",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to publish a corrected translation",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-request-to-amend-application-before-gran",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to amend application before grant (other than alteration of name, address, address for services or agent\u2019s details)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "270",
+      "category": "other",
+      "code": "hk-pat-rr-application-for-maintenance-for-a-furthe",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for maintenance for a further year after the expiry of the 5th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "270",
+      "category": "other",
+      "code": "hk-pat-rr-application-for-maintenance-of-any-succe",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for maintenance of any succeeding year thereafter",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "95",
+      "category": "late_fee",
+      "code": "hk-pat-rr-additional-fee-for-late-payment-of-maint",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Additional fee for late payment of maintenance fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y4",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 4th to 10th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y5",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 4th to 10th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y6",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 4th to 10th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y7",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 4th to 10th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y8",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 4th to 10th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y9",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 4th to 10th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y10",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 4th to 10th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "620",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y11",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 11th to 15th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "620",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y12",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 11th to 15th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "620",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y13",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 11th to 15th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "620",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y14",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 11th to 15th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "620",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y15",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 11th to 15th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "850",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y16",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 16th to 20th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "850",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y17",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 16th to 20th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "850",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y18",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 16th to 20th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "850",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y19",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 16th to 20th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "850",
+      "category": "renewal",
+      "code": "hk-pat-gen-renewal-y20",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a standard patent for a further year after the expiry of the 3rd year \u2014 16th to 20th year of the 20-year term",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "270",
+      "category": "late_fee",
+      "code": "hk-pat-gen-additional-fee-for-late-payment-of-a-ren",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Additional fee for late payment of a renewal fee of a standard patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1080",
+      "category": "renewal",
+      "code": "hk-pat-stp-renewal-y4",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Renewal of a short-term patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "1080",
+      "category": "renewal",
+      "code": "hk-pat-stp-renewal-y8",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Renewal of a short-term patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "270",
+      "category": "late_fee",
+      "code": "hk-pat-stp-additional-fee-for-late-payment-of-a-ren",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Additional fee for late payment of a renewal fee of a short-term patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "95",
+      "category": "other",
+      "code": "hk-pat-gen-request-for-certified-copies-or-extracts",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for certified copies or extracts",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "95",
+      "category": "other",
+      "code": "hk-pat-gen-request-for-certificate-signed-by-the-re",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for certificate signed by the Registrar of Patents",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-request-for-information",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for information",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "405",
+      "category": "other",
+      "code": "hk-pat-rr-application-to-restore-a-withdrawn-stand",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application to restore a withdrawn standard patent (R) application due to non-payment of maintenance fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "405",
+      "category": "other",
+      "code": "hk-pat-gen-application-to-restore-a-lapsed-standard",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application to restore a lapsed standard patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "405",
+      "category": "other",
+      "code": "hk-pat-stp-application-to-restore-a-lapsed-short-te",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application to restore a lapsed short-term patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "405",
+      "category": "other",
+      "code": "hk-pat-gen-notice-requesting-reinstatement-of-a-pat",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Notice requesting reinstatement of a patent application",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "405",
+      "category": "other",
+      "code": "hk-pat-gen-application-for-restoration-of-rights",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for restoration of rights",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135",
+      "category": "other",
+      "code": "hk-pat-gen-mention-of-inventor-in-the-register",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Mention of inventor in the register",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "cancellation",
+      "code": "hk-pat-rr-filing-of-notice-of-revocation-of-a-stan",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Filing of notice of revocation of a standard patent (R) under section 44(2) of the Patents Ordinance",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "190",
+      "category": "cancellation",
+      "code": "hk-pat-rr-application-for-revocation-of-a-standard",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for revocation of a standard patent (R) under section 44(4) of the Patents Ordinance",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "190",
+      "category": "cancellation",
+      "code": "hk-pat-gen-on-reference-to-the-registrar-of-patents",
+      "condition": null,
+      "currency": "HKD",
+      "label": "On reference to the Registrar of Patents under section 49 of the Patents Ordinance to revoke a patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-notice-of-offer-to-surrender-a-patent",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Notice of offer to surrender a patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-request-for-the-furnishing-of-a-sample-o",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for the furnishing of a sample of a deposited micro-organism and notice of confirmation by the Registrar of Patents",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-indication-of-applicant-s-intention-that",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Indication of applicant\u2019s intention that the sample of micro-organism should be made available only to experts",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-request-for-alteration-of-name-address-a",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for alteration of name, address, address for service or agent\u2019s details",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-request-for-correction-of-address-addres",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for correction of address, address for service or agent\u2019s details",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "325",
+      "category": "transfer",
+      "code": "hk-pat-gen-application-for-registration-or-notice-t",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for registration or notice to the Registrar of rights acquired in or under a patent or a patent application",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-pat-gen-request-to-inspect-documents-of-patent-a",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to inspect documents of patent applications or of granted patents",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "6",
+      "category": "other",
+      "code": "hk-pat-gen-request-for-a-copy-of-document",
+      "condition": {
+        "description": "Per page.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "HKD",
+      "label": "Request for a copy of document",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "215",
+      "category": "extension",
+      "code": "hk-pat-gen-request-for-extension-of-time",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for extension of time",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "190",
+      "category": "late_fee",
+      "code": "hk-pat-gen-paying-penalty-fee-for-late-filing-of-tr",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Paying penalty fee for late filing of translation",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Intellectual Property Department",
+  "jurisdiction": "HK",
+  "key": "HK/HKIPD/patent",
+  "notes": "Covers the three patent tracks (OGP / re-registration / short-term) via code-prefix encoding (hk-pat-ogp-\u2026 / hk-pat-rr-\u2026 / hk-pat-stp-\u2026 / hk-pat-gen-\u2026). Per-year renewal expansion: OGP+RR years 4-20 emit one FeeItem per year per band ($450 y4-y10, $620 y11-y15, $850 y16-y20); short-term renewal emits at year=4 and year=8 (per Cap. 514C r.61). v1 GAPS: (a) R-route pre-grant maintenance ('Application for maintenance for a further year after the expiry of the 5th year' + 'any succeeding year thereafter') emitted as FeeCategory.other without per-year expansion \u2014 the underlying statute treats them as per-application-year-kept-alive rather than per-renewal-year. (b) Rows that appear identically across the OGP / RR-record / RR-grant / STP filing tables (advertisement, late-payment-of-filing-fee) collapse to single FeeItems.",
+  "office_code": "HKIPD",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
+  "statutory_basis": "Patents (General) Rules (Cap. 514C), Schedule 4 \u2014 promulgated under Patents Ordinance Cap. 514. Amendments by subsidiary-legislation orders gazetted in the Hong Kong Government Gazette."
+}

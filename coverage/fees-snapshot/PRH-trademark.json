@@ -1,0 +1,650 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "250",
+      "category": "filing",
+      "code": "fi-prh-tm-electronic-tavaramerkin-rekisteroinnin-hakemusmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Tavaramerkin rekister\u00f6innin hakemusmaksu",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "340",
+      "category": "filing",
+      "code": "fi-prh-tm-electronic-yhteiso-ja-tarkastusmerkin-rekisteroinnin-hakemusmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Yhteis\u00f6- ja tarkastusmerkin rekister\u00f6innin hakemusmaksu",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "excess_classes",
+      "code": "fi-prh-tm-electronic-lisamaksu-luokkamaksu-rekisteroitaessa-jokaiselta-luokalta",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu, luokkamaksu rekister\u00f6it\u00e4ess\u00e4 jokaiselta luokalta ensimm\u00e4isen",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "extension",
+      "code": "fi-prh-tm-electronic-hakemuksen-kasittelyn-jatkamismaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Hakemuksen k\u00e4sittelyn jatkamismaksu",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "310",
+      "category": "other",
+      "code": "fi-prh-tm-electronic-maksu-vaitteen-tekemisesta-rekisterointia-vastaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu v\u00e4itteen tekemisest\u00e4 rekister\u00f6inti\u00e4 vastaan",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "440",
+      "category": "filing",
+      "code": "fi-prh-tm-electronic-hallinnollinen-menettamis-ja-mitatointihakemusmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Hallinnollinen menett\u00e4mis- ja mit\u00e4t\u00f6intihakemusmaksu",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "renewal",
+      "code": "fi-prh-tm-electronic-rekisteroinnin-uudistamismaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekister\u00f6innin uudistamismaksu",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "320",
+      "category": "renewal",
+      "code": "fi-prh-tm-electronic-rekisteroinnin-uudistamismaksu-jos-hakemus-jatetaan",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekister\u00f6innin uudistamismaksu, jos hakemus j\u00e4tet\u00e4\u00e4n",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "340",
+      "category": "renewal",
+      "code": "fi-prh-tm-electronic-yhteiso-ja-tarkastusmerkin-rekisteroinnin-uudistamismaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Yhteis\u00f6- ja tarkastusmerkin rekister\u00f6innin uudistamismaksu",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "410",
+      "category": "renewal",
+      "code": "fi-prh-tm-electronic-yhteiso-ja-tarkastusmerkin-rekisteroinnin-uudistamismaksu-2",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Yhteis\u00f6- ja tarkastusmerkin rekister\u00f6innin uudistamismaksu, jos hakemus",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "100",
+      "category": "excess_classes",
+      "code": "fi-prh-tm-electronic-lisamaksu-luokkamaksu-uudistettaessa-jokaiselta-luokalta-ens",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu luokkamaksu uudistettaessa jokaiselta luokalta ensimm\u00e4isen",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "extension",
+      "code": "fi-prh-tm-electronic-maksu-maaraajan-pidentamisesta",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu m\u00e4\u00e4r\u00e4ajan pident\u00e4misest\u00e4",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "filing",
+      "code": "fi-prh-tm-electronic-rekisteroidyn-merkin-muuttamishakemusmaksu",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rekister\u00f6idyn merkin muuttamishakemusmaksu",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "fi-prh-tm-electronic-maksu-tavaramerkkirekisteriin-tehtavasta-merkinnasta-kultak",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Maksu tavaramerkkirekisteriin teht\u00e4v\u00e4st\u00e4 merkinn\u00e4st\u00e4, kultakin",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "transfer",
+      "code": "fi-prh-tm-electronic-pyynto-kansallisen-rekisteroinnin-korvaamisesta-kansainvalis",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Pyynt\u00f6 kansallisen rekister\u00f6innin korvaamisesta kansainv\u00e4lisell\u00e4",
+      "notes": "channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "filing",
+      "code": "fi-prh-tm-paper-tavaramerkin-rekisteroinnin-hakemusmaksu",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Tavaramerkin rekister\u00f6innin hakemusmaksu",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "390",
+      "category": "filing",
+      "code": "fi-prh-tm-paper-yhteiso-ja-tarkastusmerkin-rekisteroinnin-hakemusmaksu",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Yhteis\u00f6- ja tarkastusmerkin rekister\u00f6innin hakemusmaksu",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "excess_classes",
+      "code": "fi-prh-tm-paper-lisamaksu-luokkamaksu-rekisteroitaessa-jokaiselta-luokalta",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu, luokkamaksu rekister\u00f6it\u00e4ess\u00e4 jokaiselta luokalta ensimm\u00e4isen",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "extension",
+      "code": "fi-prh-tm-paper-hakemuksen-kasittelyn-jatkamismaksu",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Hakemuksen k\u00e4sittelyn jatkamismaksu",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "360",
+      "category": "other",
+      "code": "fi-prh-tm-paper-maksu-vaitteen-tekemisesta-rekisterointia-vastaan",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Maksu v\u00e4itteen tekemisest\u00e4 rekister\u00f6inti\u00e4 vastaan",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "490",
+      "category": "filing",
+      "code": "fi-prh-tm-paper-hallinnollinen-menettamis-ja-mitatointihakemusmaksu",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Hallinnollinen menett\u00e4mis- ja mit\u00e4t\u00f6intihakemusmaksu",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "renewal",
+      "code": "fi-prh-tm-paper-rekisteroinnin-uudistamismaksu",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Rekister\u00f6innin uudistamismaksu",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "370",
+      "category": "renewal",
+      "code": "fi-prh-tm-paper-rekisteroinnin-uudistamismaksu-jos-hakemus-jatetaan",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Rekister\u00f6innin uudistamismaksu, jos hakemus j\u00e4tet\u00e4\u00e4n",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "390",
+      "category": "renewal",
+      "code": "fi-prh-tm-paper-yhteiso-ja-tarkastusmerkin-rekisteroinnin-uudistamismaksu",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Yhteis\u00f6- ja tarkastusmerkin rekister\u00f6innin uudistamismaksu",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "460",
+      "category": "renewal",
+      "code": "fi-prh-tm-paper-yhteiso-ja-tarkastusmerkin-rekisteroinnin-uudistamismaksu-2",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Yhteis\u00f6- ja tarkastusmerkin rekister\u00f6innin uudistamismaksu, jos hakemus",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "100",
+      "category": "excess_classes",
+      "code": "fi-prh-tm-paper-lisamaksu-luokkamaksu-uudistettaessa-jokaiselta-luokalta-ens",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Lis\u00e4maksu luokkamaksu uudistettaessa jokaiselta luokalta ensimm\u00e4isen",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "extension",
+      "code": "fi-prh-tm-paper-maksu-maaraajan-pidentamisesta",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Maksu m\u00e4\u00e4r\u00e4ajan pident\u00e4misest\u00e4",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "filing",
+      "code": "fi-prh-tm-paper-rekisteroidyn-merkin-muuttamishakemusmaksu",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Rekister\u00f6idyn merkin muuttamishakemusmaksu",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "other",
+      "code": "fi-prh-tm-paper-maksu-tavaramerkkirekisteriin-tehtavasta-merkinnasta-kultak",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Maksu tavaramerkkirekisteriin teht\u00e4v\u00e4st\u00e4 merkinn\u00e4st\u00e4, kultakin",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "transfer",
+      "code": "fi-prh-tm-paper-pyynto-kansallisen-rekisteroinnin-korvaamisesta-kansainvalis",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Pyynt\u00f6 kansallisen rekister\u00f6innin korvaamisesta kansainv\u00e4lisell\u00e4",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "170",
+      "category": "filing",
+      "code": "fi-prh-tm-paper-kansainvalisen-tavaramerkkihakemuksen-vastaanottomaksu",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Kansainv\u00e4lisen tavaramerkkihakemuksen vastaanottomaksu",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "fi-prh-tm-paper-etuoikeustodistus",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Etuoikeustodistus",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "fi-prh-tm-paper-diaaritodistus",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Diaaritodistus",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-tm-paper-oikeaksi-todistaminen",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Oikeaksi todistaminen",
+      "notes": "channel: paper | unit: +",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15",
+      "category": "other",
+      "code": "fi-prh-tm-paper-rekisteriote",
+      "condition": {
+        "description": "Paper-channel filing (non-electronic).",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Rekisteriote",
+      "notes": "channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
+  "jurisdiction": "FI",
+  "key": "FI/PRH/trademark",
+  "notes": "TM term is 10 years (TMA 2019 \u00a728); renewal FeeItems carry year=10. \u00a78 publishes the schedule twice \u2014 an electronic-channel block ('Maksut s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en') and a paper block ('Maksut muuta kuin s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en') \u2014 each row is emitted with a -electronic / -paper code suffix; paper rows carry FeeCondition(paper_filing). Per-class surcharges ('Lis\u00e4maksu, luokkamaksu') emit as FeeCategory.excess_classes with classes_over threshold=1.",
+  "office_code": "PRH",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
+  "statutory_basis": "Tavaramerkkilaki (544/2019) (Trade Marks Act). Fees set by TEM asetus 1216/2025, as amended by 171/2026 (effective 2026-04-01)."
+}

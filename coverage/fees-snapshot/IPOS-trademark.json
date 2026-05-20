@@ -1,0 +1,620 @@
+{
+  "currency": "SGD",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "280",
+      "category": "filing",
+      "code": "sg-tm-tm4-preapproved",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM4: Application to register a trade mark, collective mark or certification mark (preapproved)",
+      "notes": "Specification fully adopted from IPOS' Classification Database.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "410",
+      "category": "filing",
+      "code": "sg-tm-tm4-custom",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM4: Application to register a trade mark, collective mark or certification mark (custom)",
+      "notes": "Specification not fully adopted from IPOS' Classification Database.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280",
+      "category": "other",
+      "code": "sg-tm-tm8-request-to-divide-an-application-for-reg",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM8: Request to divide an application for registration",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "340",
+      "category": "other",
+      "code": "sg-tm-tm10-filing-or-amendment-of-regulations-gover",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM10: Filing or amendment of regulations governing the use of a collective mark or certification mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "other",
+      "code": "sg-tm-tm10-filing-or-amendment-of-regulations-gover-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM10: Filing or amendment of regulations governing the use of a collective mark or certification mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "480",
+      "category": "renewal",
+      "code": "sg-tm-tm19-application-for-renewal-restoration-of",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM19: Application for renewal / restoration of registration",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "700",
+      "category": "renewal",
+      "code": "sg-tm-tm19-application-for-renewal-restoration-of-v2",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM19: Application for renewal / restoration of registration",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "770",
+      "category": "renewal",
+      "code": "sg-tm-tm19-application-for-renewal-restoration-of-v3",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM19: Application for renewal / restoration of registration",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "sg-tm-tm27-application-to-amend-a-trade-mark-applic",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM27: Application to amend a trade mark application or registration (excluding change of name or other particular of any person)Please note that the following are not acceptable:Amendments to mark representation which substantially alter the identity of the mark.Amendments to specification of goods and/or services which lead to any expansion in the scope of protection.",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "sg-tm-tm27-application-to-amend-a-trade-mark-applic-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM27: Application to amend a trade mark application or registration (excluding change of name or other particular of any person)Please note that the following are not acceptable:Amendments to mark representation which substantially alter the identity of the mark.Amendments to specification of goods and/or services which lead to any expansion in the scope of protection.",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "sg-tm-tm27-application-to-amend-a-trade-mark-applic-v3",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM27: Application to amend a trade mark application or registration (excluding change of name or other particular of any person)Please note that the following are not acceptable:Amendments to mark representation which substantially alter the identity of the mark.Amendments to specification of goods and/or services which lead to any expansion in the scope of protection.",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "sg-tm-tm27-application-to-amend-a-trade-mark-applic-v4",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM27: Application to amend a trade mark application or registration (excluding change of name or other particular of any person)Please note that the following are not acceptable:Amendments to mark representation which substantially alter the identity of the mark.Amendments to specification of goods and/or services which lead to any expansion in the scope of protection.",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "sg-tm-tm27-application-to-amend-a-trade-mark-applic-v5",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM27: Application to amend a trade mark application or registration (excluding change of name or other particular of any person)Please note that the following are not acceptable:Amendments to mark representation which substantially alter the identity of the mark.Amendments to specification of goods and/or services which lead to any expansion in the scope of protection.",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "sg-tm-tm27-application-to-amend-a-trade-mark-applic-v6",
+      "condition": null,
+      "currency": "SGD",
+      "label": "TM27: Application to amend a trade mark application or registration (excluding change of name or other particular of any person)Please note that the following are not acceptable:Amendments to mark representation which substantially alter the identity of the mark.Amendments to specification of goods and/or services which lead to any expansion in the scope of protection.",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "sg-tm-cm4-request-for-correction-of-errorfor-the-c",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM4: Request for correction of errorFor the correction of form, register or documents, other than IP application formRequest to correct name, address, Singapore address for service or other particulars",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25",
+      "category": "extension",
+      "code": "sg-tm-cm5-request-for-extension-of-time",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM5: Request for extension of time",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "extension",
+      "code": "sg-tm-cm5-request-for-extension-of-time-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM5: Request for extension of time",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "75",
+      "category": "extension",
+      "code": "sg-tm-cm5-request-for-extension-of-time-v3",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM5: Request for extension of time",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "filing",
+      "code": "sg-tm-cm6-application-to-register-amend-or-termin",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM6: Application to register, amend or terminate a licence",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "filing",
+      "code": "sg-tm-cm7-application-to-register-amend-or-termin",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM7: Application to register, amend or terminate a security interest",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "filing",
+      "code": "sg-tm-cm8-application-to-register-a-transfer-of-ow",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM8: Application to register a transfer of ownership",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "28",
+      "category": "other",
+      "code": "sg-tm-cm12-request-for-certified-copy-of-entry-or-e",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM12: Request for certified copy of entry or extract from Register; certifying document issued by Registrar",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "35",
+      "category": "other",
+      "code": "sg-tm-cm12-request-for-certified-copy-of-entry-or-e-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM12: Request for certified copy of entry or extract from Register; certifying document issued by Registrar",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "12",
+      "category": "other",
+      "code": "sg-tm-cm12-request-for-certified-copy-of-entry-or-e-v3",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM12: Request for certified copy of entry or extract from Register; certifying document issued by Registrar",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "sg-tm-cm13-request-for-continued-processing-of-appl",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM13: Request for continued processing of application",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "410",
+      "category": "madrid",
+      "code": "sg-tm-mp1-request-to-transform-an-international-re",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "MP1: Request to transform an international registration/subsequent designation into national mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "madrid",
+      "code": "sg-tm-mm2-e-application-for-international-registrati",
+      "condition": null,
+      "currency": "SGD",
+      "label": "MM2(E): Application for international registration governed exclusively by the Madrid ProtocolFor more detailed information on Form MM2(E), please refer to the Notes on Form MM2 prepared by the World Intellectual Property Organization (WIPO).",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "420",
+      "category": "opposition",
+      "code": "sg-tm-tm11-filing-of-notice-of-opposition-to-an-app",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM11: Filing of notice of opposition to:an application for correction or rectification of an error or mistakean amendment of an application for registration of a trade mark which has been published, where the amendment affects the representation of the trade mark or the goods or services covered by the application for registrationthe registration of a trade mark, collective mark or certification markthe removal of any matter from the registerthe alteration of a registered trade markan application to amend the regulations governing the use of a registered collective mark or certification mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "420",
+      "category": "cancellation",
+      "code": "sg-tm-tm28-application-for-revocation-invalidation",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM28: Application for revocation, invalidation, or rectification",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "appeal",
+      "code": "sg-tm-hc1-hearing-and-decision",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "HC1: Hearing and decision",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "800",
+      "category": "appeal",
+      "code": "sg-tm-hc1-hearing-and-decision-v2",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "HC1: Hearing and decision",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "130",
+      "category": "opposition",
+      "code": "sg-tm-hc3-request-for-extension-of-timea-extensio",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "HC3: Request for extension of timea. Extension in relation to notice of oppositionb. Extension in relation to counter-statementc. Extension in relation to evidenced. Extension in relation to others",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "130",
+      "category": "opposition",
+      "code": "sg-tm-hc3-request-for-extension-of-timea-extensio-v2",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "HC3: Request for extension of timea. Extension in relation to notice of oppositionb. Extension in relation to counter-statementc. Extension in relation to evidenced. Extension in relation to others",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "appeal",
+      "code": "sg-tm-hc4-request-for-hearing-at-which-only-the-pa",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC4: Request for hearing at which only the party making the request is present (ex parte hearing)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "700",
+      "category": "appeal",
+      "code": "sg-tm-hc5-request-for-grounds-of-decision",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC5: Request for grounds of decision",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "360",
+      "category": "opposition",
+      "code": "sg-tm-hc6-counter-statement",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "HC6: Counter-statement",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Intellectual Property Office of Singapore (IPOS)",
+  "jurisdiction": "SG",
+  "key": "SG/IPOS/trademark",
+  "notes": "TM4 publishes TWO rates in one row: S$280 per class if the specification is fully adopted from IPOS' Classification Database, S$410 per class otherwise. Both rates emit as separate FeeItems with -preapproved / -custom suffixes \u2014 this is an applicant-strategy choice, not an entity-size tier. TM term is 10 years (TMA s.18); renewal FeeItems carry year=10. Madrid Protocol routing (MM2, MP1, MP2) emits with FeeCategory.madrid; the CHF/WIPO-administered portion is preserved verbatim in notes.",
+  "office_code": "IPOS",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+  "statutory_basis": "Trade Marks Act 1998 (Singapore) + Trade Marks Rules (SSO SL/TMA1998-R1). Consolidated by Trade Marks Circular 3/2025 (21 July 2025); two-phase implementation 2025-09-01 + 2026-04-01."
+}

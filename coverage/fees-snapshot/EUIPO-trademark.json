@@ -1,0 +1,770 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-05-20",
+  "fees": [
+    {
+      "amount": "1000",
+      "category": "filing",
+      "code": "F-001",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Basic fee for an application for an individual EU trade mark (Article 31(2) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "850",
+      "category": "filing",
+      "code": "F-001",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Basic fee for an electronic application for an individual EU trade mark (Article 31(2) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1800",
+      "category": "filing",
+      "code": "F-001",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Basic fee for an application for an EU collective mark or an EU certification mark (Article 31(2) and Article 74(3) or Article 83(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1500",
+      "category": "filing",
+      "code": "F-001",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Basic fee for an electronic application for an EU collective mark or an EU certification mark (Article 31(2) and Article 74(3) or Article 83(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "excess_classes",
+      "code": "F-002",
+      "condition": {
+        "description": "Flat fee for the second class.",
+        "per_unit": false,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Fee for the second class of goods and services in an individual EU trade mark (Article 31(2) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "excess_classes",
+      "code": "F-002",
+      "condition": {
+        "description": "Per class beyond the first two.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Fee for each class of goods and services beyond the first two classes in an individual EU trade mark (Article 31(2) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "excess_classes",
+      "code": "F-002",
+      "condition": {
+        "description": "Flat fee for the second class.",
+        "per_unit": false,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Fee for the second class of goods and services in an EU collective mark or an EU certification mark (Article 31(2) and Article 74(3) or Article 83(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "excess_classes",
+      "code": "F-002",
+      "condition": {
+        "description": "Per class beyond the first two.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Fee for each class of goods and services beyond the first two classes in an EU collective mark or an EU certification mark (Article 31(2) and Article 74(3) or Article 83(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "search",
+      "code": "F-003",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for national search reports\\n*EUR 12 multiplied by the number of central industrial property offices referred to in Article 43(2) EUTMR (currently EUR 60, corresponding to 5 offices)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "320",
+      "category": "opposition",
+      "code": "F-005",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Opposition fee (Article 46(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "renewal",
+      "code": "F-012",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Basic fee for the renewal of an individual EU trade mark (Article 53(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "850",
+      "category": "renewal",
+      "code": "F-012",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Basic fee for the electronic renewal of an individual EU trade mark (Article 53(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "50",
+      "category": "renewal",
+      "code": "F-012",
+      "condition": {
+        "description": "Flat fee for the second class.",
+        "per_unit": false,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Renewal fee for the second class of goods and services in an individual EU trade mark (Article 53(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "150",
+      "category": "renewal",
+      "code": "F-012",
+      "condition": {
+        "description": "Per class beyond the first two.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Renewal fee for each class of goods and services beyond the first two classes in an individual EU trade mark (Article 53(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1800",
+      "category": "renewal",
+      "code": "F-012",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Basic fee for the renewal of an EU collective mark or an EU certification mark (Article 53(3) and Article 74(3) or Article 83(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1500",
+      "category": "renewal",
+      "code": "F-012",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Basic fee for the electronic renewal of an EU collective mark or an EU certification mark (Article 53(3) and Article 74(3) or Article 83(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "50",
+      "category": "renewal",
+      "code": "F-012",
+      "condition": {
+        "description": "Flat fee for the second class.",
+        "per_unit": false,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Renewal fee for the second class of goods and services in an EU collective mark or an EU certification mark (Article 53(3) and Article 74(3) or Article 83(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "150",
+      "category": "renewal",
+      "code": "F-012",
+      "condition": {
+        "description": "Per class beyond the first two.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Renewal fee for each class of goods and services beyond the first two classes in an EU collective mark or an EU certification mark (Article 53(3) and Article 74(3) or Article 83(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1500",
+      "category": "renewal",
+      "code": "F-016",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Additional fee for the late payment of the renewal fee or late submission of the renewal application (Article 53(3) EUTMR): 25 % of the late renewal fee, up to a maximum of EUR 1 500.",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "630",
+      "category": "cancellation",
+      "code": "F-017",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for an application for revocation or application for a declaration of invalidity (Article 63(2) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "720",
+      "category": "appeal",
+      "code": "F-018",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Appeal fee (Article 68(1) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "petition",
+      "code": "F-019",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for a restitutio in integrum application (Article 104(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "transfer",
+      "code": "F-020",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for a request for conversion of an EU trade mark application or an EU trade mark (Article 140(1) in conjunction with Article 202(1) EUTMR): a) into a national trade mark application, b) into a designation of EU countries under the Madrid Protocol",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "transfer",
+      "code": "F-023",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for an application for the registration of a licence or other right relating to a registered EU trade mark (Article 26(2) EUTMR) or an EU trade mark application (Article 26(2) EUTMR): a) grant of a licence; b) transfer of a licence; c) creation of a right in rem; d) transfer of a right in rem; e) levy of execution (\u20ac200 per registration, up to a maximum of \u20ac1 000 if multiple requests are submitted in the same application or simultaneously)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "transfer",
+      "code": "F-024",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for the cancellation of the registration of a licence or other right (Article 29(3) EUTMR) (\u20ac200 per cancellation, up to a maximum of \u20ac1 000 if multiple requests are submitted in the same application or simultaneously)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "other",
+      "code": "F-025",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for the alteration of a registered EU trade mark (Article 54(4) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "F-026",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for issuing a copy of the EU trade mark application (Article 114(7) EUTMR), a copy of the registration certificate (Article 51(2) EUTMR) or an extract from the register (Article 111(7) EUTMR). Uncertified copy or extract: (\u20ac10). Certified copy or extract: (\u20ac30). *Free of charge online",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30",
+      "category": "other",
+      "code": "F-027",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for inspection of files (Article 114(6) EUTMR):",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "F-028",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for issuing copies of file documents (Article 114(7) EUTMR): uncertified copy (\u20ac10); certified copy (\u20ac30 + \u20ac1 per page, when exceeding 10 pages)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10",
+      "category": "other",
+      "code": "F-029",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for communicating data contained in a file (Article 114(9) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "F-030",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for a review of the decision on the procedural costs owed (Article 109(8) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400",
+      "category": "other",
+      "code": "F-033",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for a continuation of proceedings (Article 105(1) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "other",
+      "code": "F-034",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for the declaration of division of a registered EU trade mark (Article 56(4) EUTMR) or an EU trade mark application (Article 50(3) EUTMR)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "820",
+      "category": "madrid",
+      "code": "M-001",
+      "condition": null,
+      "currency": "EUR",
+      "label": "For an individual trade mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "madrid",
+      "code": "M-002",
+      "condition": {
+        "description": "Flat fee for the second class.",
+        "per_unit": false,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for the second class of goods and services",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "madrid",
+      "code": "M-002",
+      "condition": {
+        "description": "Per class beyond the first two.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for each class of goods and services contained in the international registration beyond the first two classes",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1400",
+      "category": "madrid",
+      "code": "M-001",
+      "condition": null,
+      "currency": "EUR",
+      "label": "For a collective mark or a certification mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "madrid",
+      "code": "M-002",
+      "condition": {
+        "description": "Flat fee for the second class.",
+        "per_unit": false,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for the second class of goods and services",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "madrid",
+      "code": "M-002",
+      "condition": {
+        "description": "Per class beyond the first two.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for each class of goods and services beyond the first two classes",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "820",
+      "category": "madrid",
+      "code": "M-012",
+      "condition": null,
+      "currency": "EUR",
+      "label": "For an individual trade mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "madrid",
+      "code": "M-012",
+      "condition": {
+        "description": "Flat fee for the second class.",
+        "per_unit": false,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for the second class of goods and services",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "madrid",
+      "code": "M-012",
+      "condition": {
+        "description": "Per class beyond the first two.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for each class of goods and services contained in the international registration beyond the first two classes",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1400",
+      "category": "madrid",
+      "code": "M-012",
+      "condition": null,
+      "currency": "EUR",
+      "label": "For a collective mark or a certification mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "madrid",
+      "code": "M-012",
+      "condition": {
+        "description": "Flat fee for the second class.",
+        "per_unit": false,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for the second class of goods and services",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "madrid",
+      "code": "M-012",
+      "condition": {
+        "description": "Per class beyond the first two.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for each class of goods and services beyond the first two classes",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "European Union Intellectual Property Office",
+  "jurisdiction": "EP",
+  "key": "EP/EUIPO/trademark",
+  "notes": "Sourced from the EUIPO EUTM fees page. F-xxx codes are EUTM fees; M-xxx codes are Madrid Protocol fees handled through EUIPO. Renewals are 10-year recurring (year=10). Many fees have separate 'basic' and 'electronic' rates; both are captured as distinct rows under the same code.",
+  "office_code": "EUIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
+  "statutory_basis": "EU Trade Mark Regulation (EUTMR) Annex I; Articles 31(2), 46(3), 53(3), 68(1), 104(3)"
+}

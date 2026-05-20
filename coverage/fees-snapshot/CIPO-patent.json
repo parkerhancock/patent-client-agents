@@ -1,0 +1,1275 @@
+{
+  "currency": "CAD",
+  "effective_date": "2026-01-01",
+  "fees": [
+    {
+      "amount": "297.00",
+      "category": "extension",
+      "code": "fee-for-applying-for-an-extens-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for applying for an extension of time \u2014 Fee for applying for an extension of time, in respect of each period of time referred to in the application for extensio",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fee for applying for an extension of time'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "extension",
+      "code": "fee-for-applying-for-an-extens-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for applying for an extension of time \u2014 Fee for applying for an extension of time, in respect of each period of time referred to in the application for extensio",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fee for applying for an extension of time'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "241.24",
+      "category": "filing",
+      "code": "application-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Application fee \u2014 Application fee",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "595.06",
+      "category": "filing",
+      "code": "application-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Application fee \u2014 Application fee",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "late_fee",
+      "code": "late-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Late fee \u2014 Late fee under subsection 27(7), subsection 27.1(2) or subsection 35(3) of the Patent Act under subsection 27(7), subsec",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "late_fee",
+      "code": "late-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Late fee \u2014 Late fee under subsection 27(7), subsection 27.1(2) or subsection 35(3) of the Patent Act under subsection 27(7), subsec",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "60.26",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y2-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining an application in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 2
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y2-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining an application in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 2
+    },
+    {
+      "amount": "60.26",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y3-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining an application in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y3-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining an application in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "60.26",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y4-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining an application in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y4-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining an application in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "117.94",
+      "category": "examination",
+      "code": "request-for-examination-fee-fe-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Request for examination fee \u2013 Fee for examination of an application for a patent \u2014 Basic Fee \u2013 If the application for a patent has been the subject of an international search by the Commissioner in the C",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "examination",
+      "code": "request-for-examination-fee-fe-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Request for examination fee \u2013 Fee for examination of an application for a patent \u2014 Basic Fee \u2013 If the application for a patent has been the subject of an international search by the Commissioner in the C",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "744.10",
+      "category": "examination",
+      "code": "advanced-examination-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Advanced examination fee \u2014 Fee to advance an application for a patent out of its routine order",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "744.10",
+      "category": "examination",
+      "code": "advanced-examination-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Advanced examination fee \u2014 Fee to advance an application for a patent out of its routine order",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "482.48",
+      "category": "rce",
+      "code": "fee-for-continued-examination--s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for continued examination of an application \u2014 Fee for continued examination of an application",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "1190.13",
+      "category": "rce",
+      "code": "fee-for-continued-examination--l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for continued examination of an application \u2014 Fee for continued examination of an application",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "181.20",
+      "category": "grant",
+      "code": "final-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Final fee \u2014 Basic Fee",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "446.03",
+      "category": "grant",
+      "code": "final-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Final fee \u2014 Basic Fee",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "petition",
+      "code": "reinstatement-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Reinstatement fee \u2014 Fee for reinstatement of an application deemed to be abandoned, in respect of each failure to take action",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "petition",
+      "code": "reinstatement-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Reinstatement fee \u2014 Fee for reinstatement of an application deemed to be abandoned, in respect of each failure to take action",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees respecting applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "446.03",
+      "category": "filing",
+      "code": "transmittal-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Transmittal fee \u2014 Transmittal fee for the performance of the tasks referred to in Rule 14 of the Regulations under the PCT",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "446.03",
+      "category": "filing",
+      "code": "transmittal-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Transmittal fee \u2014 Transmittal fee for the performance of the tasks referred to in Rule 14 of the Regulations under the PCT",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2380.26",
+      "category": "filing",
+      "code": "search-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Search fee \u2014 Search fee for the performance of the tasks referred to in Rule 16 of the Regulations under the PCT",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "2380.26",
+      "category": "filing",
+      "code": "search-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Search fee \u2014 Search fee for the performance of the tasks referred to in Rule 16 of the Regulations under the PCT",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2380.26",
+      "category": "filing",
+      "code": "additional-fee-for-search-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Additional fee for search \u2014 Additional fee for conducting a search under Article 17(3)(a) of the Patent Cooperation Treaty, in respect of each inven",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "2380.26",
+      "category": "filing",
+      "code": "additional-fee-for-search-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Additional fee for search \u2014 Additional fee for conducting a search under Article 17(3)(a) of the Patent Cooperation Treaty, in respect of each inven",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1190.13",
+      "category": "filing",
+      "code": "preliminary-examination-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Preliminary examination fee \u2014 Preliminary examination fee for the performance of the tasks referred to in Rule\u00a058 of the Regulations under the PCT",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "1190.13",
+      "category": "filing",
+      "code": "preliminary-examination-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Preliminary examination fee \u2014 Preliminary examination fee for the performance of the tasks referred to in Rule\u00a058 of the Regulations under the PCT",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1190.13",
+      "category": "filing",
+      "code": "additional-fee-for-examination-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Additional fee for examination \u2014 Additional fee for an international preliminary examination under Article 34(3)(a) of the Patent Cooperation Treaty, in ",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "1190.13",
+      "category": "filing",
+      "code": "additional-fee-for-examination-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Additional fee for examination \u2014 Additional fee for an international preliminary examination under Article 34(3)(a) of the Patent Cooperation Treaty, in ",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "241.24",
+      "category": "filing",
+      "code": "basic-national-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Basic national fee \u2014 Fee for entering national phase in Canada",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "595.06",
+      "category": "filing",
+      "code": "basic-national-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Basic national fee \u2014 Fee for entering national phase in Canada",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "filing",
+      "code": "fee-for-reinstatement-of-right-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for reinstatement of rights \u2014 Fee for requesting reinstatement of rights under subsection 154(3) of the Patent Rules",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "filing",
+      "code": "fee-for-reinstatement-of-right-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for reinstatement of rights \u2014 Fee for requesting reinstatement of rights under subsection 154(3) of the Patent Rules",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "filing",
+      "code": "late-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Late Fee \u2014 Additional fee for late payment under subsection 154(4) of the Patent Rules",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "filing",
+      "code": "late-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Late Fee \u2014 Additional fee for late payment under subsection 154(4) of the Patent Rules",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of international applications'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "petition",
+      "code": "fee-for-requesting-correction--s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for requesting correction of an error \u2014 Fee for requesting the correction of an error under subsection 109(1) of the Patent Rules, for each patent referred to i",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "petition",
+      "code": "fee-for-requesting-correction--l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for requesting correction of an error \u2014 Fee for requesting the correction of an error under subsection 109(1) of the Patent Rules, for each patent referred to i",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "60.26",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y2-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining the rights accorded by a patent in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application on the basis o",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 2
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y2-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining the rights accorded by a patent in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application on the basis o",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 2
+    },
+    {
+      "amount": "60.26",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y3-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining the rights accorded by a patent in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application on the basis o",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y3-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining the rights accorded by a patent in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application on the basis o",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "60.26",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y4-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining the rights accorded by a patent in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application on the basis o",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y4-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining the rights accorded by a patent in effect \u2014 For the dates of each of the second, third and fourth anniversaries of the filing date of the application on the basis o",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "410.80",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y20-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining in effect, under subsection 46.2(1) of the Patent Act, the rights accorded by a patent during an additional term. \u2014 For the dates of the 20th and each subsequent anniversary of the filing date of the application on the basis of which th",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 20
+    },
+    {
+      "amount": "1027.00",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y20-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining in effect, under subsection 46.2(1) of the Patent Act, the rights accorded by a patent during an additional term. \u2014 For the dates of the 20th and each subsequent anniversary of the filing date of the application on the basis of which th",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 20
+    },
+    {
+      "amount": "53.61",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y2-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining in effect the rights accorded by a patent granted on the basis of a category\u00a01 application \u2014 For the dates of each of the second, third and fourth anniversaries of the day on which the patent was issued",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 2
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y2-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining in effect the rights accorded by a patent granted on the basis of a category\u00a01 application \u2014 For the dates of each of the second, third and fourth anniversaries of the day on which the patent was issued",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 2
+    },
+    {
+      "amount": "53.61",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y3-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining in effect the rights accorded by a patent granted on the basis of a category\u00a01 application \u2014 For the dates of each of the second, third and fourth anniversaries of the day on which the patent was issued",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y3-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining in effect the rights accorded by a patent granted on the basis of a category\u00a01 application \u2014 For the dates of each of the second, third and fourth anniversaries of the day on which the patent was issued",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "53.61",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y4-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining in effect the rights accorded by a patent granted on the basis of a category\u00a01 application \u2014 For the dates of each of the second, third and fourth anniversaries of the day on which the patent was issued",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "134.02",
+      "category": "maintenance",
+      "code": "maintenance-fees-fee-for-maint-y4-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Maintenance fees \u2013 Fee for maintaining in effect the rights accorded by a patent granted on the basis of a category\u00a01 application \u2014 For the dates of each of the second, third and fourth anniversaries of the day on which the patent was issued",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "150.00",
+      "category": "late_fee",
+      "code": "late-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Late fee \u2014 Late fee under subsection 46(2) of the Patent Act",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "150.00",
+      "category": "late_fee",
+      "code": "late-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Late fee \u2014 Late fee under subsection 46(2) of the Patent Act",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "petition",
+      "code": "fee-for-requesting-reversal-of-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for requesting reversal of deemed expiry of a patent \u2014 Additional fee under subparagraph 46(5)(a)(iii) of the Patent Act",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "petition",
+      "code": "fee-for-requesting-reversal-of-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for requesting reversal of deemed expiry of a patent \u2014 Additional fee under subparagraph 46(5)(a)(iii) of the Patent Act",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2380.26",
+      "category": "reissue",
+      "code": "reissue-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Reissue fee \u2014 Fee for filing an application to reissue a patent",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "2380.26",
+      "category": "reissue",
+      "code": "reissue-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Reissue fee \u2014 Fee for filing an application to reissue a patent",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "other",
+      "code": "disclaimer-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Disclaimer fee \u2014 Fee for making a disclaimer to a patent",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "other",
+      "code": "disclaimer-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Disclaimer fee \u2014 Fee for making a disclaimer to a patent",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1205.14",
+      "category": "ptab",
+      "code": "re-examination-fee-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Re-examination fee \u2014 Fee for re-examination of one or more claims of a patent",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "2975.32",
+      "category": "ptab",
+      "code": "re-examination-fee-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Re-examination fee \u2014 Fee for re-examination of one or more claims of a patent",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1027.00",
+      "category": "other",
+      "code": "fees-in-respect-of-an-addition-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of an additional termFootnote 2 \u2014 Fee to apply for additional term as required under paragraph 46.1(1)(c) of the Patent Act",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "2567.50",
+      "category": "other",
+      "code": "fees-in-respect-of-an-addition-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of an additional termFootnote 2 \u2014 Fee to apply for additional term as required under paragraph 46.1(1)(c) of the Patent Act",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "3718.35",
+      "category": "other",
+      "code": "fee-for-presenting-an-applicat-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for presenting an application under section 65 or 127 of the Patent Act \u2014 For the first patent or certificate of supplementary protection to which the application relates",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "3718.35",
+      "category": "other",
+      "code": "fee-for-presenting-an-applicat-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee for presenting an application under section 65 or 127 of the Patent Act \u2014 For the first patent or certificate of supplementary protection to which the application relates",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "other",
+      "code": "fee-to-advertise-an-applicatio-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee to advertise an application \u2014 Fee to advertise an application under section 65 or 127 of the Patent Act on the website of the Canadian Intellectual Pr",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "297.00",
+      "category": "other",
+      "code": "fee-to-advertise-an-applicatio-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fee to advertise an application \u2014 Fee to advertise an application under section 65 or 127 of the Patent Act on the website of the Canadian Intellectual Pr",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "transfer",
+      "code": "registration-of-a-document-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Registration of a document \u2014 Fee for requesting the registration of a document relating to a patent or an application for a patent, for each patent o",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "transfer",
+      "code": "registration-of-a-document-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Registration of a document \u2014 Fee for requesting the registration of a document relating to a patent or an application for a patent, for each patent o",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "transfer",
+      "code": "recording-of-a-change-of-name-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Recording of a change of name \u2014 Fee for requesting the recording of a change of name, for each patent or application for a patent to which the change of",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "transfer",
+      "code": "recording-of-a-change-of-name-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Recording of a change of name \u2014 Fee for requesting the recording of a change of name, for each patent or application for a patent to which the change of",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "transfer",
+      "code": "recording-of-a-transfer-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Recording of a transfer \u2014 Fee for requesting that a transfer be recorded under section 49 of the Patent Act, for each patent or application for a ",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "transfer",
+      "code": "recording-of-a-transfer-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Recording of a transfer \u2014 Fee for requesting that a transfer be recorded under section 49 of the Patent Act, for each patent or application for a ",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "44.00",
+      "category": "other",
+      "code": "fees-in-respect-of-information-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of information or copies \u2013 Fees for requesting a certified copy in paper \u2014 For each certification",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "44.00",
+      "category": "other",
+      "code": "fees-in-respect-of-information-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of information or copies \u2013 Fees for requesting a certified copy in paper \u2014 For each certification",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "44.00",
+      "category": "other",
+      "code": "fees-in-respect-of-information-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of information or copies \u2013 Fees for requesting a certified copy in electronic form (service not available yet) \u2014 For each certification",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "44.00",
+      "category": "other",
+      "code": "fees-in-respect-of-information-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of information or copies \u2013 Fees for requesting a certified copy in electronic form (service not available yet) \u2014 For each certification",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1.00",
+      "category": "other",
+      "code": "fees-in-respect-of-information-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of information or copies \u2013 Fee for requesting a non-certified copy in paper form, for each page \u2014 If the person requesting makes the copy using Patent Office equipment",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "1.00",
+      "category": "other",
+      "code": "fees-in-respect-of-information-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of information or copies \u2013 Fee for requesting a non-certified copy in paper form, for each page \u2014 If the person requesting makes the copy using Patent Office equipment",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "13.00",
+      "category": "other",
+      "code": "fees-in-respect-of-information-s",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of information or copies \u2013 Fees for requesting a non-certified copy in electronic form \u2014 For each request",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "13.00",
+      "category": "other",
+      "code": "fees-in-respect-of-information-l",
+      "condition": null,
+      "currency": "CAD",
+      "label": "Fees in respect of information or copies \u2013 Fees for requesting a non-certified copy in electronic form \u2014 For each request",
+      "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+      "tier": "large",
+      "year": null
+    }
+  ],
+  "issuing_body": "Canadian Intellectual Property Office",
+  "jurisdiction": "CA",
+  "key": "CA/CIPO/patent",
+  "notes": "CIPO publishes annually with January 1 effective date. The small-entity discount applies under Patent Act \u00a744.1. Maintenance fees use English-band descriptions (e.g., 'second, third and fourth anniversaries') which the scraper expands into per-year FeeItem rows so lookup-by-year works. CIPO does not publish numeric fee codes; codes here are synthesized slugs.",
+  "office_code": "CIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
+  "statutory_basis": "Patent Rules SOR/2019-251, Schedule of Fees"
+}

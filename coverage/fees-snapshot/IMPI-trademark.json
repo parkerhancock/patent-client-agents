@@ -1,0 +1,585 @@
+{
+  "currency": "MXN",
+  "effective_date": "2023-05-12",
+  "fees": [
+    {
+      "amount": "638.35",
+      "category": "other",
+      "code": "impi-13",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la revisi\u00f3n de cada reposici\u00f3n de documentaci\u00f3n; complementaci\u00f3n de informaci\u00f3n faltante; aclaraci\u00f3n; enmiendas voluntarias a la descripci\u00f3n, a una o varias reivindicaciones, al resumen o dibujos ",
+      "notes": "Article 13.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2695.18",
+      "category": "grant",
+      "code": "impi-14-a",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por el estudio de una solicitud nacional para el registro de una marca, aviso comercial o nombre comercial hasta la conclusi\u00f3n del tr\u00e1mite o, en su caso, la expedici\u00f3n del t\u00edtulo",
+      "notes": "Article 14 a.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2597.77",
+      "category": "renewal",
+      "code": "impi-14-c",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la renovaci\u00f3n de un registro de marca, aviso comercial o nombre comercial nacional, por cada clase",
+      "notes": "Article 14 c.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": 10
+    },
+    {
+      "amount": "985.67",
+      "category": "declaration_of_use",
+      "code": "impi-14-d",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la declaraci\u00f3n de uso de marca",
+      "notes": "Article 14 d.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2599.22",
+      "category": "other",
+      "code": "impi-14-e",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por el estudio de la solicitud de la estimaci\u00f3n o declaraci\u00f3n de marca notoriamente conocida",
+      "notes": "Article 14 e.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "45873.28",
+      "category": "other",
+      "code": "impi-14-h",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la emisi\u00f3n de la declaraci\u00f3n de marca famosa",
+      "notes": "Article 14 h.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1234.31",
+      "category": "other",
+      "code": "impi-14-i",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la actualizaci\u00f3n de una declaraci\u00f3n de marca notoriamente conocida, por cada clase en la que se reconozca la notoriedad",
+      "notes": "Article 14 i.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "44567.37",
+      "category": "other",
+      "code": "impi-14-j",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la actualizaci\u00f3n de una declaraci\u00f3n de marca famosa",
+      "notes": "Article 14 j.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1348.51",
+      "category": "cancellation",
+      "code": "impi-16",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por el estudio y tr\u00e1mite de una solicitud de declaraci\u00f3n administrativa de nulidad, caducidad, cancelaci\u00f3n e infracci\u00f3n administrativa y por la emisi\u00f3n del dictamen t\u00e9cnico en materia de propiedad ind",
+      "notes": "Article 16.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "5026.77",
+      "category": "other",
+      "code": "impi-16-bis",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Nombramiento de perito tercero.",
+      "notes": "Article 16 bis.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "5026.77",
+      "category": "other",
+      "code": "impi-16-ter",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por el estudio y tr\u00e1mite de una solicitud de conciliaci\u00f3n.",
+      "notes": "Article 16 ter.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1349.22",
+      "category": "other",
+      "code": "impi-16-qu\u00e1ter",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Incidente de da\u00f1os y perjuicios.",
+      "notes": "Article 16 qu\u00e1ter.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "505.69",
+      "category": "other",
+      "code": "impi-17",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la visita de inspecci\u00f3n que se practique por el personal autorizado, a petici\u00f3n de parte interesada, para comprobar el cumplimiento de las legislaciones en materia de propiedad industrial o de der",
+      "notes": "Article 17.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "510.45",
+      "category": "other",
+      "code": "impi-17-bis",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Inspecciones oculares.",
+      "notes": "Article 17 bis.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "131.93",
+      "category": "other",
+      "code": "impi-18",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por cualquier inscripci\u00f3n en el Registro General de Poderes.",
+      "notes": "Article 18.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "415.11",
+      "category": "other",
+      "code": "impi-19-a",
+      "condition": null,
+      "currency": "MXN",
+      "label": "De documentos nacionales, y",
+      "notes": "Article 19 a.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "790.16",
+      "category": "other",
+      "code": "impi-19-b",
+      "condition": null,
+      "currency": "MXN",
+      "label": "De documentos disponibles en acervos extranjeros o internacionales.",
+      "notes": "Article 19 b.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "709.79",
+      "category": "other",
+      "code": "impi-20-a",
+      "condition": null,
+      "currency": "MXN",
+      "label": "De documentos nacionales, y",
+      "notes": "Article 20 a.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1111.06",
+      "category": "other",
+      "code": "impi-20-b",
+      "condition": null,
+      "currency": "MXN",
+      "label": "De documentos disponibles en acervos extranjeros o internacionales.",
+      "notes": "Article 20 b.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1647.43",
+      "category": "search",
+      "code": "impi-21",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por informe de b\u00fasqueda sobre el estado de la t\u00e9cnica en un \u00e1rea tecnol\u00f3gica espec\u00edfica, por cada uno.",
+      "notes": "Article 21.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "160.61",
+      "category": "other",
+      "code": "impi-22",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por informe sobre la vigencia de patentes, certificados de invenci\u00f3n y registros de modelos de utilidad, dise\u00f1os industriales y esquemas de trazado de circuitos integrados, nacionales.",
+      "notes": "Article 22.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "89744.80",
+      "category": "other",
+      "code": "impi-23-c",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por los servicios de vigilancia tecnol\u00f3gica de los documentos de patentes publicados en base de datos a nivel nacional e internacional.",
+      "notes": "Article 23 c.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "16073.70",
+      "category": "other",
+      "code": "impi-23-d",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por servicios de alerta tecnol\u00f3gica por 1 trimestre, de los documentos de patentes publicados en base de datos a nivel nacional e internacional.",
+      "notes": "Article 23 d.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "9376.32",
+      "category": "other",
+      "code": "impi-23-e",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la informaci\u00f3n trimestral complementaria al art\u00edculo 23 d, por cada trimestre.",
+      "notes": "Article 23 e.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "102.62",
+      "category": "other",
+      "code": "impi-24",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por el informe que se proporcione a personas que lo soliciten por escrito sobre si una marca o aviso comercial ha sido registrado, o si un nombre comercial ha sido publicado, por cada uno.",
+      "notes": "Article 24.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "14326.80",
+      "category": "other",
+      "code": "impi-26-bis",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Suscripci\u00f3n anual de la Colecci\u00f3n de Discos Compactos ESPACE-MEXICO",
+      "notes": "Article 26 BIS.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "11.46",
+      "category": "other",
+      "code": "impi-27-a",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la expedici\u00f3n de copias certificadas de documentos, por cada hoja tama\u00f1o carta u oficio, en blanco y negro",
+      "notes": "Article 27 a.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "14.60",
+      "category": "other",
+      "code": "impi-27-a-bis",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la expedici\u00f3n de copias certificadas de documentos, por cada hoja tama\u00f1o carta u oficio, a color",
+      "notes": "Article 27 a BIS.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "14.33",
+      "category": "other",
+      "code": "impi-27-b",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Compulsa de documentos, por hoja",
+      "notes": "Article 27 b.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "3.03",
+      "category": "other",
+      "code": "impi-27-c",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la expedici\u00f3n de copias simples, por cada hoja tama\u00f1o carta u oficio, en blanco y negro, y",
+      "notes": "Article 27 c.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "10.66",
+      "category": "other",
+      "code": "impi-27-c-bis",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la expedici\u00f3n de copias simples, por cada hoja tama\u00f1o carta u oficio, a color.",
+      "notes": "Article 27 c BIS.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1066.17",
+      "category": "other",
+      "code": "impi-28",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por el estudio y reconocimiento de cada derecho de prioridad relacionado con los derechos de propiedad industrial.",
+      "notes": "Article 28.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "325.77",
+      "category": "other",
+      "code": "impi-29",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la revisi\u00f3n de cada reposici\u00f3n de documentaci\u00f3n, complementaci\u00f3n de informaci\u00f3n faltante, aclaraci\u00f3n o subsanaci\u00f3n de omisiones, as\u00ed como por enmiendas voluntarias (no comprendidos en los actos en",
+      "notes": "Article 29.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "139.83",
+      "category": "extension",
+      "code": "impi-30",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por solicitud de pr\u00f3rroga, por cada mes.",
+      "notes": "Article 30.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "154.00",
+      "category": "other",
+      "code": "impi-31",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por el cumplimiento de un requerimiento del Instituto dentro de los plazos adicionales de dos meses previstos en la Ley; por cada uno de los meses adicionales.",
+      "notes": "Article 31.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "331.70",
+      "category": "cancellation",
+      "code": "impi-32",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la inscripci\u00f3n de la transmisi\u00f3n o gravamen de un derecho de propiedad industrial concedido, o que pueden derivarse de una solicitud en tr\u00e1mite, por la inscripci\u00f3n o cancelaci\u00f3n de inscripci\u00f3n de ",
+      "notes": "Article 32.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "71.08",
+      "category": "other",
+      "code": "impi-33",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por cada inscripci\u00f3n de la transformaci\u00f3n jur\u00eddica de personas morales.",
+      "notes": "Article 33.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "119.20",
+      "category": "other",
+      "code": "impi-34",
+      "condition": null,
+      "currency": "MXN",
+      "label": "Por la toma de nota del cambio de domicilio del titular de un derecho; cambio de domicilio para o\u00edr y recibir notificaciones, o cambio de ubicaci\u00f3n del establecimiento industrial, comercial o de servi",
+      "notes": "Article 34.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+      "tier": "large",
+      "year": null
+    }
+  ],
+  "issuing_body": "Instituto Mexicano de la Propiedad Industrial (IMPI)",
+  "jurisdiction": "MX",
+  "key": "MX/IMPI/trademark",
+  "notes": "Article 14 sub-letters cover filing (14a), opposition (14b), renewal (14c, year=10 per Mexican TM term), declaration of use (14d), and notorious/famous-mark proceedings (14e-14j). TM fees are NOT eligible for the Disposici\u00f3n Cuarta 50% reduction. March 2024 indigenous-collective-mark fee waiver applies to Arts. 14a-14d for indigenous + Afro-Mexican communities filing collective or certification marks tied to GIs \u2014 documented here but not emitted as a separate FeeItem track (the closed FeeItem vocab has no indigenous tier).",
+  "office_code": "IMPI",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
+  "statutory_basis": "Ley Federal de Protecci\u00f3n a la Propiedad Industrial (LFPPI), DOF 2020-07-01 (codigo=5596010), in force 2021-11-05. Tariff Acuerdo: original DOF 1995-08-23, last reform DOF 2023-05-12; March 2024 indigenous-waiver amendment at https://www.dof.gob.mx/nota_detalle.php?codigo=5720420&fecha=15/03/2024."
+}

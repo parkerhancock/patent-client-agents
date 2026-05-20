@@ -1,0 +1,750 @@
+{
+  "currency": "CNY",
+  "effective_date": "2026-05-20",
+  "fees": [
+    {
+      "amount": "900",
+      "category": "filing",
+      "code": "cn-i-1-invention",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1. Invention",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "excess_claims",
+      "code": "cn-ii-1-additional-fee-for-each-claim-exceeds-",
+      "condition": {
+        "description": "CNIPA per-claim excess over 10.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "claims_over"
+      },
+      "currency": "CNY",
+      "label": "1.Additional fee for each claim Exceeds 10 items",
+      "notes": "CNIPA section II",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "excess_pages",
+      "code": "cn-ii-2-additional-fee-for-each-page-of-the-de",
+      "condition": {
+        "description": "CNIPA per-page excess. First tier (over 30 pages): 50 CNY/page. Second tier (over 300 pages): 100 CNY/page.",
+        "per_unit": true,
+        "threshold": 30,
+        "trigger": "pages_over"
+      },
+      "currency": "CNY",
+      "label": "2.Additional fee for each page of the Description of the Application Documents Exceeds page 30",
+      "notes": "CNIPA section II",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "excess_pages",
+      "code": "cn-ii-additional-fee-for-each-page-of-the-desc",
+      "condition": {
+        "description": "CNIPA per-page excess. First tier (over 30 pages): 50 CNY/page. Second tier (over 300 pages): 100 CNY/page.",
+        "per_unit": true,
+        "threshold": 30,
+        "trigger": "pages_over"
+      },
+      "currency": "CNY",
+      "label": "Additional fee for each page of the Description of the Application Documents Exceeds page 300",
+      "notes": "CNIPA section II",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "publication",
+      "code": "cn-iii-iii-printing-fee-for-publishing-the-appl",
+      "condition": null,
+      "currency": "CNY",
+      "label": "III.Printing Fee for Publishing the Application",
+      "notes": "CNIPA section III",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "80",
+      "category": "other",
+      "code": "cn-iv-iv-fee-for-claiming-priority-each-claim",
+      "condition": null,
+      "currency": "CNY",
+      "label": "IV.Fee for Claiming Priority (Each Claim)",
+      "notes": "CNIPA section IV",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2500",
+      "category": "examination",
+      "code": "cn-v-v-fee-for-substantive-examination-for-an",
+      "condition": null,
+      "currency": "CNY",
+      "label": "V.Fee for Substantive Examination for an Application of Patent for Invention",
+      "notes": "CNIPA section V",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "ptab",
+      "code": "cn-vi-1-invention",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1. Invention",
+      "notes": "CNIPA section VI",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "maintenance",
+      "code": "cn-vii-1-3-years-each-year-y1",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1-3 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "900",
+      "category": "maintenance",
+      "code": "cn-vii-1-3-years-each-year-y2",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1-3 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "900",
+      "category": "maintenance",
+      "code": "cn-vii-1-3-years-each-year-y3",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1-3 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "1200",
+      "category": "maintenance",
+      "code": "cn-vii-4-6-years-each-year-y4",
+      "condition": null,
+      "currency": "CNY",
+      "label": "4-6 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "1200",
+      "category": "maintenance",
+      "code": "cn-vii-4-6-years-each-year-y5",
+      "condition": null,
+      "currency": "CNY",
+      "label": "4-6 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "1200",
+      "category": "maintenance",
+      "code": "cn-vii-4-6-years-each-year-y6",
+      "condition": null,
+      "currency": "CNY",
+      "label": "4-6 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "2000",
+      "category": "maintenance",
+      "code": "cn-vii-7-9-years-each-year-y7",
+      "condition": null,
+      "currency": "CNY",
+      "label": "7-9 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "2000",
+      "category": "maintenance",
+      "code": "cn-vii-7-9-years-each-year-y8",
+      "condition": null,
+      "currency": "CNY",
+      "label": "7-9 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "2000",
+      "category": "maintenance",
+      "code": "cn-vii-7-9-years-each-year-y9",
+      "condition": null,
+      "currency": "CNY",
+      "label": "7-9 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "4000",
+      "category": "maintenance",
+      "code": "cn-vii-10-12-years-each-year-y10",
+      "condition": null,
+      "currency": "CNY",
+      "label": "10-12 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "4000",
+      "category": "maintenance",
+      "code": "cn-vii-10-12-years-each-year-y11",
+      "condition": null,
+      "currency": "CNY",
+      "label": "10-12 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "4000",
+      "category": "maintenance",
+      "code": "cn-vii-10-12-years-each-year-y12",
+      "condition": null,
+      "currency": "CNY",
+      "label": "10-12 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "6000",
+      "category": "maintenance",
+      "code": "cn-vii-13-15-years-each-year-y13",
+      "condition": null,
+      "currency": "CNY",
+      "label": "13-15 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "6000",
+      "category": "maintenance",
+      "code": "cn-vii-13-15-years-each-year-y14",
+      "condition": null,
+      "currency": "CNY",
+      "label": "13-15 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "6000",
+      "category": "maintenance",
+      "code": "cn-vii-13-15-years-each-year-y15",
+      "condition": null,
+      "currency": "CNY",
+      "label": "13-15 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "cn-vii-16-20-years-each-year-y16",
+      "condition": null,
+      "currency": "CNY",
+      "label": "16-20 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "cn-vii-16-20-years-each-year-y17",
+      "condition": null,
+      "currency": "CNY",
+      "label": "16-20 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "cn-vii-16-20-years-each-year-y18",
+      "condition": null,
+      "currency": "CNY",
+      "label": "16-20 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "cn-vii-16-20-years-each-year-y19",
+      "condition": null,
+      "currency": "CNY",
+      "label": "16-20 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "cn-vii-16-20-years-each-year-y20",
+      "condition": null,
+      "currency": "CNY",
+      "label": "16-20 Years (Each Year)",
+      "notes": "CNIPA section VII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "1000",
+      "category": "petition",
+      "code": "cn-ix-ix-fee-for-requesting-restoration-of-rig",
+      "condition": null,
+      "currency": "CNY",
+      "label": "IX.Fee for Requesting Restoration of Right",
+      "notes": "CNIPA section IX",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "extension",
+      "code": "cn-x-1-fee-for-first-requesting-extension-of-",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1.Fee for First Requesting Extension of Time Limit (Each Month)",
+      "notes": "CNIPA section X",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "extension",
+      "code": "cn-x-2-fee-for-second-requesting-extension-of",
+      "condition": null,
+      "currency": "CNY",
+      "label": "2. Fee for Second Requesting Extension of Time Limit (Each Month)",
+      "notes": "CNIPA section X",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "transfer",
+      "code": "cn-xi-1-change-of-inventor-applicant-patentee",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1.Change of Inventor, Applicant, Patentee",
+      "notes": "CNIPA section XI",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "ptab",
+      "code": "cn-xiii-1-invention",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1. Invention",
+      "notes": "CNIPA section XIII",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30",
+      "category": "other",
+      "code": "cn-xiv-xiv-fee-for-certification-of-copies-of-p",
+      "condition": null,
+      "currency": "CNY",
+      "label": "XIV.Fee for Certification of Copies of Patent Document (Each Copy)",
+      "notes": "CNIPA section XIV",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2100",
+      "category": "filing",
+      "code": "cn-i-1-search-fee",
+      "condition": null,
+      "currency": "CNY",
+      "label": "(1) Search Fee",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2100",
+      "category": "filing",
+      "code": "cn-i-additional-search-fee",
+      "condition": null,
+      "currency": "CNY",
+      "label": "Additional Search Fee",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "filing",
+      "code": "cn-i-2-priority-document-fee",
+      "condition": null,
+      "currency": "CNY",
+      "label": "(2) Priority Document Fee",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1500",
+      "category": "filing",
+      "code": "cn-i-3-preliminary-examination-fee",
+      "condition": null,
+      "currency": "CNY",
+      "label": "(3) Preliminary Examination Fee",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1500",
+      "category": "filing",
+      "code": "cn-i-additional-preliminary-examination-fee",
+      "condition": null,
+      "currency": "CNY",
+      "label": "Additional Preliminary Examination Fee",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "filing",
+      "code": "cn-i-4-protest-of-the-unity-of-invention-fee",
+      "condition": null,
+      "currency": "CNY",
+      "label": "(4) Protest of the Unity of Invention Fee",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2",
+      "category": "filing",
+      "code": "cn-i-5-copy-document-fee-each-page",
+      "condition": null,
+      "currency": "CNY",
+      "label": "(5)Copy Document Fee (Each Page)",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "filing",
+      "code": "cn-i-6-late-furnishing-fee",
+      "condition": null,
+      "currency": "CNY",
+      "label": "(6) Late Furnishing Fee",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "filing",
+      "code": "cn-i-7-fee-for-requesting-restoration-of-righ",
+      "condition": null,
+      "currency": "CNY",
+      "label": "(7)Fee for Requesting Restoration of Right",
+      "notes": "CNIPA section I",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "filing",
+      "code": "cn-ii-1-surcharge-for-the-late-entry",
+      "condition": null,
+      "currency": "CNY",
+      "label": "1. Surcharge for the Late Entry",
+      "notes": "CNIPA section II",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "filing",
+      "code": "cn-ii-preliminary-examination-phase",
+      "condition": null,
+      "currency": "CNY",
+      "label": "Preliminary Examination Phase",
+      "notes": "CNIPA section II",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1200",
+      "category": "filing",
+      "code": "cn-ii-substantive-examination-phase",
+      "condition": null,
+      "currency": "CNY",
+      "label": "Substantive Examination Phase",
+      "notes": "CNIPA section II",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "filing",
+      "code": "cn-ii-3-restoration-fee-for-unity",
+      "condition": null,
+      "currency": "CNY",
+      "label": "3. Restoration Fee for Unity",
+      "notes": "CNIPA section II",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "filing",
+      "code": "cn-ii-4-restoration-fee-for-priority-rights",
+      "condition": null,
+      "currency": "CNY",
+      "label": "4. Restoration Fee for Priority Rights",
+      "notes": "CNIPA section II",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "China National Intellectual Property Administration",
+  "jurisdiction": "CN",
+  "key": "CN/CNIPA/patent",
+  "notes": "Covers invention patents only in v1. Utility-model and design fees ship under separate routes when needed (CN/CNIPA/utility_model, CN/CNIPA/design). CNIPA publishes annuities as banded ranges (1-3yr, 4-6yr, etc.); the scraper expands each band into per-year rows so a downstream lookup by year works. Excess-page fee has a two-tier structure (50 CNY/page over 30 pages, 100 CNY/page over 300 pages) \u2014 both rows are emitted with their own FeeCondition. CNIPA does not differentiate by entity size on the schedule itself; small entities apply for reductions through a separate process (per the Note in section XV).",
+  "office_code": "CNIPA",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
+  "statutory_basis": "Patent Law of the People's Republic of China and Implementing Regulations; fee schedule set by State Council Pricing Bureau and CNIPA."
+}

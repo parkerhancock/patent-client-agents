@@ -1,0 +1,330 @@
+{
+  "currency": "USD",
+  "effective_date": "2026-05-01",
+  "fees": [
+    {
+      "amount": "300.00",
+      "category": "filing",
+      "code": "1012",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Design",
+      "notes": "37 CFR \u00a7 1.16(b)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "120.00",
+      "category": "filing",
+      "code": "2012",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Design",
+      "notes": "37 CFR \u00a7 1.16(b)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "60.00",
+      "category": "filing",
+      "code": "3012",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Design",
+      "notes": "37 CFR \u00a7 1.16(b)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "micro",
+      "year": null
+    },
+    {
+      "amount": "300.00",
+      "category": "filing",
+      "code": "1017",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Design CPA",
+      "notes": "37 CFR \u00a7 1.16(b)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "120.00",
+      "category": "filing",
+      "code": "2017",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Design CPA",
+      "notes": "37 CFR \u00a7 1.16(b)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "60.00",
+      "category": "filing",
+      "code": "3017",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Design CPA",
+      "notes": "37 CFR \u00a7 1.16(b)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "micro",
+      "year": null
+    },
+    {
+      "amount": "350.00",
+      "category": "filing",
+      "code": "1019",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Reissue (Design CPA)",
+      "notes": "37 CFR \u00a7 1.16(e)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "140.00",
+      "category": "filing",
+      "code": "2019",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Reissue (Design CPA)",
+      "notes": "37 CFR \u00a7 1.16(e)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "70.00",
+      "category": "filing",
+      "code": "3019",
+      "condition": null,
+      "currency": "USD",
+      "label": "Basic filing fee - Reissue (Design CPA)",
+      "notes": "37 CFR \u00a7 1.16(e)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "micro",
+      "year": null
+    },
+    {
+      "amount": "300.00",
+      "category": "search",
+      "code": "1112",
+      "condition": null,
+      "currency": "USD",
+      "label": "Design search fee or\u00a0Design CPA search fee",
+      "notes": "37 CFR \u00a7 1.16(l)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "120.00",
+      "category": "search",
+      "code": "2112",
+      "condition": null,
+      "currency": "USD",
+      "label": "Design search fee or\u00a0Design CPA search fee",
+      "notes": "37 CFR \u00a7 1.16(l)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "60.00",
+      "category": "search",
+      "code": "3112",
+      "condition": null,
+      "currency": "USD",
+      "label": "Design search fee or\u00a0Design CPA search fee",
+      "notes": "37 CFR \u00a7 1.16(l)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "micro",
+      "year": null
+    },
+    {
+      "amount": "770.00",
+      "category": "search",
+      "code": "1114",
+      "condition": null,
+      "currency": "USD",
+      "label": "Reissue search fee or\u00a0Reissue (Design CPA) search fee",
+      "notes": "37 CFR \u00a7 1.16(n)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "308.00",
+      "category": "search",
+      "code": "2114",
+      "condition": null,
+      "currency": "USD",
+      "label": "Reissue search fee or\u00a0Reissue (Design CPA) search fee",
+      "notes": "37 CFR \u00a7 1.16(n)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "154.00",
+      "category": "search",
+      "code": "3114",
+      "condition": null,
+      "currency": "USD",
+      "label": "Reissue search fee or\u00a0Reissue (Design CPA) search fee",
+      "notes": "37 CFR \u00a7 1.16(n)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "micro",
+      "year": null
+    },
+    {
+      "amount": "700.00",
+      "category": "examination",
+      "code": "1312",
+      "condition": null,
+      "currency": "USD",
+      "label": "Design examination fee or\u00a0Design CPA examination fee",
+      "notes": "37 CFR \u00a7 1.16(p)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "280.00",
+      "category": "examination",
+      "code": "2312",
+      "condition": null,
+      "currency": "USD",
+      "label": "Design examination fee or\u00a0Design CPA examination fee",
+      "notes": "37 CFR \u00a7 1.16(p)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "140.00",
+      "category": "examination",
+      "code": "3312",
+      "condition": null,
+      "currency": "USD",
+      "label": "Design examination fee or\u00a0Design CPA examination fee",
+      "notes": "37 CFR \u00a7 1.16(p)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "micro",
+      "year": null
+    },
+    {
+      "amount": "2550.00",
+      "category": "examination",
+      "code": "1314",
+      "condition": null,
+      "currency": "USD",
+      "label": "Reissue examination fee or\u00a0Reissue (Design CPA) examination fee",
+      "notes": "37 CFR \u00a7 1.16(r)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "1020.00",
+      "category": "examination",
+      "code": "2314",
+      "condition": null,
+      "currency": "USD",
+      "label": "Reissue examination fee or\u00a0Reissue (Design CPA) examination fee",
+      "notes": "37 CFR \u00a7 1.16(r)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "510.00",
+      "category": "examination",
+      "code": "3314",
+      "condition": null,
+      "currency": "USD",
+      "label": "Reissue examination fee or\u00a0Reissue (Design CPA) examination fee",
+      "notes": "37 CFR \u00a7 1.16(r)",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "tier": "micro",
+      "year": null
+    }
+  ],
+  "issuing_body": "U.S. Patent and Trademark Office",
+  "jurisdiction": "US",
+  "key": "US/USPTO/design",
+  "notes": "USPTO maintenance fees are due at the 3.5, 7.5, and 11.5 year marks; our schema rounds the year up (4, 8, 12). Paper-filing surcharges on TM fees are flagged via FeeCondition(trigger=paper_filing). Some single-tier rows (e.g., '4011') represent tier-specific electronic-filing discounts and carry a single FeeItem under the applicable tier.",
+  "office_code": "USPTO",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+  "statutory_basis": "37 CFR Part 1 (patents); 37 CFR Part 2 (trademarks); 35 USC \u00a7\u00a7 41, 376"
+}

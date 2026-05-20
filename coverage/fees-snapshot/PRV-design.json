@@ -1,0 +1,260 @@
+{
+  "currency": "SEK",
+  "effective_date": "2025-04-25",
+  "fees": [
+    {
+      "amount": "2000",
+      "category": "filing",
+      "code": "se-des-e-service-filing-fee-for-registration-of-1-design-using-our",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Filing fee for registration of 1 design using our electronic services. One five-year period.",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Application fees for design registration in Sweden",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2500",
+      "category": "filing",
+      "code": "se-des-paper-or-other-filing-fee-for-registration-of-1-design-via-paper",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Filing fee for registration of 1 design via paper och e-mail",
+      "notes": "Filed via paper / other channel.; Section: Application fees for design registration in Sweden",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2200",
+      "category": "filing",
+      "code": "se-des-for-additional-five-year-period-of-1-design-appli",
+      "condition": null,
+      "currency": "SEK",
+      "label": "For additional five-year period of 1 design. Applies in conjunction with first registration, see above.",
+      "notes": "Section: Application fees for design registration in Sweden",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1400",
+      "category": "filing",
+      "code": "se-des-multiple-registration-fee-for-additional-design",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Multiple registration fee for additional design.",
+      "notes": "Section: Additional fees",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "publication",
+      "code": "se-des-announcement-fee-for-each-image-in-addition-to-the",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Announcement fee for each image in addition to the first.",
+      "notes": "Section: Additional fees",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "excess_classes",
+      "code": "se-des-class-fee-for-each-additional-class-a-design-or-se",
+      "condition": {
+        "description": "Per class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "SEK",
+      "label": "Class fee for each additional class a design or several designs from a multiple registration are classified in.",
+      "notes": "Section: Additional fees",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "800",
+      "category": "other",
+      "code": "se-des-storage-fee-for-each-specimen",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Storage fee for each specimen.",
+      "notes": "Section: Additional fees",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "renewal",
+      "code": "se-des-surcharge-when-renewal-fees-are-paid-after-the-reg",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Surcharge when renewal fees are paid after the registration period has expired.",
+      "notes": "Section: Additional fees",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "2500",
+      "category": "renewal",
+      "code": "se-des-e-service-renewal-fee-for-a-registered-design-using-our-elec",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Renewal fee for a registered design using our electronic services. Per five-year period. Class fee, multiple registration fee and storage fee are additional, see below.",
+      "notes": "Filed via PRV e-service (lower rate).; Section: Renewal fees",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "se-des-other-renewal-5-years",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Other renewal, 5 years.",
+      "notes": "Section: Renewal fees",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "800",
+      "category": "other",
+      "code": "se-des-storage-fee-for-each-specimen-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Storage fee for each specimen",
+      "notes": "Section: Renewal fees",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "transfer",
+      "code": "se-des-application-for-register-entry-of-a-new-owner",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for register entry of a new owner",
+      "notes": "Section: New owner and license",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "transfer",
+      "code": "se-des-application-for-register-entry-of-a-new-license",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Application for register entry of a new license",
+      "notes": "Section: New owner and license",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350",
+      "category": "other",
+      "code": "se-des-priority-document",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Priority document",
+      "notes": "Section: Certificates",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "other",
+      "code": "se-des-certificate-of-registered-design",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Certificate of registered design",
+      "notes": "Section: Certificates",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1200",
+      "category": "other",
+      "code": "se-des-fee-for-issuing-the-certificate-representative-be",
+      "condition": null,
+      "currency": "SEK",
+      "label": "Fee for issuing the certificate, representative before EUIPO",
+      "notes": "Section: Community design",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Patent- och registreringsverket (PRV)",
+  "jurisdiction": "SE",
+  "key": "SE/PRV/design",
+  "notes": "PRV design schedule. Design term: 5-year initial period renewable up to 25 years (M\u00f6nsterskyddslagen ch.5 \u00a724). Renewal FeeItems carry year=10 (end of 1st extension) as the v1 sentinel \u2014 PRV labels do not encode period ordinals on the EN page. E-service vs paper channel split is encoded in the row label itself (rather than as separate tables); the parser tags each FeeItem with the channel hint in notes + slug suffix. 'Class fee for each additional class' emits as excess_classes with classes_over threshold=1. Sweden has no tiered entity discounts \u2014 all rows use EntityTier.none.",
+  "office_code": "PRV",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
+  "statutory_basis": "Designs Protection Act 1970 (M\u00f6nsterskyddslagen 1970:485) + Designs Protection Ordinance (M\u00f6nsterskyddsf\u00f6rordningen 1970:486) + PRVFS fee orders."
+}

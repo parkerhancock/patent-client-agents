@@ -1,0 +1,465 @@
+{
+  "currency": "KRW",
+  "effective_date": "2023-08-01",
+  "fees": [
+    {
+      "amount": "52000",
+      "category": "filing",
+      "code": "kr-tm-application-fee-trademark-application-fee-for-each-class-base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Trademark application fee for each class (Electronic)",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "62000",
+      "category": "filing",
+      "code": "kr-tm-application-fee-trademark-application-fee-for-each-class-base-2",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Trademark application fee for each class (Paper) \n * Additional charge per number of designated goods exceeding 10 for each class(Electronic & Paper)",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "excess_classes",
+      "code": "kr-tm-application-fee-trademark-application-fee-for-each-class-goods-surcharge",
+      "condition": {
+        "description": "Per designated good in excess of 10 per class.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Trademark application fee for each class (Paper) \n * Additional charge per number of designated goods exceeding 10 for each class(Electronic & Paper)",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "18000",
+      "category": "other",
+      "code": "kr-tm-examination-fee-application-for-a-priority-claim-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Application for a priority claim (electronic)",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20000",
+      "category": "other",
+      "code": "kr-tm-examination-fee-application-for-a-priority-claim-paper",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Application for a priority claim (paper)",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "160000",
+      "category": "petition",
+      "code": "kr-tm-examination-fee-request-for-a-preferential-examination-base",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for a preferential examination",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "201000",
+      "category": "grant",
+      "code": "kr-tm-registration-fee-registration-for-establishment-of-right--single-lump-sum-base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Registration for establishment of right\n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class\n * Additional charge per number of designated goods exceeding 10 desi",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "excess_classes",
+      "code": "kr-tm-registration-fee-registration-for-establishment-of-right--single-lump-sum-goods-surcharge",
+      "condition": {
+        "description": "Per designated good in excess of 10 per class.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Registration for establishment of right\n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class\n * Additional charge per number of designated goods exceeding 10 desi",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "122000",
+      "category": "grant",
+      "code": "kr-tm-registration-fee-registration-for-establishment-of-right--two-installments-base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Registration for establishment of right\n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class\n * Additional charge per number of designated goods exceeding 10 desi",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "kr-tm-registration-fee-registration-for-establishment-of-right--two-installments-goods-surcharge",
+      "condition": {
+        "description": "Per designated good in excess of 10 per class.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Registration for establishment of right\n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class\n * Additional charge per number of designated goods exceeding 10 desi",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "201000",
+      "category": "grant",
+      "code": "kr-tm-registration-fee-additional-registration-of-designated-go-base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Additional registration of designated goods\n * Additional charge per number of designated goods exceeding 10 for each class",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "excess_classes",
+      "code": "kr-tm-registration-fee-additional-registration-of-designated-go-goods-surcharge",
+      "condition": {
+        "description": "Per designated good in excess of 10 per class.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Additional registration of designated goods\n * Additional charge per number of designated goods exceeding 10 for each class",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300000",
+      "category": "renewal",
+      "code": "kr-tm-registration-fee-renewal-of-registration-a-single-lump-su-single-lump-sum-base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Renewal of registration \n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class :\n * Additional charge per number of designated goods exceeding 10 for each class\n b",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "2000",
+      "category": "excess_classes",
+      "code": "kr-tm-registration-fee-renewal-of-registration-a-single-lump-su-single-lump-sum-goods-surcharge",
+      "condition": {
+        "description": "Per designated good in excess of 10 per class.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Renewal of registration \n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class :\n * Additional charge per number of designated goods exceeding 10 for each class\n b",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "184000",
+      "category": "renewal",
+      "code": "kr-tm-registration-fee-renewal-of-registration-a-single-lump-su-two-installments-base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Renewal of registration \n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class :\n * Additional charge per number of designated goods exceeding 10 for each class\n b",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "kr-tm-registration-fee-renewal-of-registration-a-single-lump-su-two-installments-goods-surcharge",
+      "condition": {
+        "description": "Per designated good in excess of 10 per class.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Renewal of registration \n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class :\n * Additional charge per number of designated goods exceeding 10 for each class\n b",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "330000",
+      "category": "late_fee",
+      "code": "kr-tm-registration-fee-late-renewal-of-registration-when-renewa-single-lump-sum-base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Late renewal of registration (When renewal is applied for after the expiration of the term of registration):\n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class ",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "2000",
+      "category": "excess_classes",
+      "code": "kr-tm-registration-fee-late-renewal-of-registration-when-renewa-single-lump-sum-goods-surcharge",
+      "condition": {
+        "description": "Per designated good in excess of 10 per class.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Late renewal of registration (When renewal is applied for after the expiration of the term of registration):\n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class ",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "203000",
+      "category": "late_fee",
+      "code": "kr-tm-registration-fee-late-renewal-of-registration-when-renewa-two-installments-base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Late renewal of registration (When renewal is applied for after the expiration of the term of registration):\n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class ",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "kr-tm-registration-fee-late-renewal-of-registration-when-renewa-two-installments-goods-surcharge",
+      "condition": {
+        "description": "Per designated good in excess of 10 per class.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Late renewal of registration (When renewal is applied for after the expiration of the term of registration):\n a. Single lump sum payment\n - Basic fee : for each class\n - Additional fee for each class ",
+      "notes": "KIPO section: Registration Fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10000",
+      "category": "other",
+      "code": "kr-tm-others-request-to-divide-types-of-goods-or-desi-base",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request to divide types of goods or designated goods :\n a. When dividing multiple-designated trademark application, for each divided application: \n b. Others:",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50000",
+      "category": "opposition",
+      "code": "kr-tm-application-fee-filling-an-opposition-to-a-registration--base",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "KRW",
+      "label": "Filling an opposition to a registration, for each class",
+      "notes": "KIPO section: Application fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "9000",
+      "category": "other",
+      "code": "kr-tm-application-fee-converted-application-fee-trademark-appl-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Converted application fee\n Trademark application into service mark application, for each case (electronic)",
+      "notes": "KIPO section: Application fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10000",
+      "category": "other",
+      "code": "kr-tm-application-fee-converted-application-fee-trademark-appl-paper",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Converted application fee\n Trademark application into service mark application, for each case (paper)",
+      "notes": "KIPO section: Application fee",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Korean Intellectual Property Office",
+  "jurisdiction": "KR",
+  "key": "KR/KIPO/trademark",
+  "notes": "KIPO publishes trademark fees in KRW with electronic + paper rate variants \u2014 both emit as separate FeeItems (``-electronic`` / ``-paper`` slug suffix). Per-class language on the row drives ``FeeCondition(classes_over, threshold=0, per_unit=True)``; additional designated-goods surcharges (per goods over 10 per class) emit as separate ``FeeCategory.excess_classes`` rows. KIPO splits Registration Fee into a single lump sum and a two-installment option \u2014 both are extracted (the second installment renders as a 1-cell continuation row, synthesized via the walker's ``pending_desc`` carry-forward). TM term is 10 years (Trademark Act \u00a783); renewal FeeItems carry year=10. KIPO entity discounts (SME / micro / individual refunds) live in a separate post-payment program and are NOT on this schedule.",
+  "office_code": "KIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+  "statutory_basis": "Enforcement Rule of the Korean Trademark Act on Collection of Trademark Fees (Korean MOIP / KIPO)."
+}

@@ -1,0 +1,510 @@
+{
+  "currency": "TWD",
+  "effective_date": "2024-05-01",
+  "fees": [
+    {
+      "amount": "3000",
+      "category": "filing",
+      "code": "tipo-tm-app-class-1to34",
+      "condition": {
+        "description": "Per-class fee in Nice Classes 1-34, \u226420 designated goods per class.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Trademark or collective trademark \u2014 application, per class in Classes 1-34 (\u226420 designated goods)",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'For a class in Classes 1 to 34'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "filing",
+      "code": "tipo-tm-app-class-1to34-over20-goods",
+      "condition": {
+        "description": "TIPO additional NT$200 per designated good over 20 goods in a single class.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Trademark application \u2014 additional per designated good over 20 in a single class (Classes 1-34)",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Additional NT$200 per designated good over 20 goods'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "filing",
+      "code": "tipo-tm-app-class-35to45",
+      "condition": {
+        "description": "Per-class fee in Nice Classes 35-45.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Trademark or collective trademark \u2014 application, per class in Classes 35-45",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'For a class in Classes'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "filing",
+      "code": "tipo-tm-app-class-35-retail-over5",
+      "condition": {
+        "description": "TIPO surcharge per retail service over 5 designated retail services of specific goods in Class 35.",
+        "per_unit": true,
+        "threshold": 5,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Trademark application \u2014 additional per retail service over 5 in Class 35 (specific goods)",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Additional NT$500 per designated retail service'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "6000",
+      "category": "examination",
+      "code": "tipo-tm-app-accelerated",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Trademark accelerated examination \u2014 additional per class",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Accelerated Examination'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5000",
+      "category": "filing",
+      "code": "tipo-tm-app-collective-cert-mark",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Collective membership mark or certification mark \u2014 application",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Collective membership mark or certification mark'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "filing",
+      "code": "tipo-tm-app-efile-discount",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Trademark application \u2014 e-filing discount per application",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'A discount of NT$300 per application'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "filing",
+      "code": "tipo-tm-app-efile-matched-terms",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Trademark application \u2014 additional e-filing discount per class for matched recommended terms",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'An additional discount of NT$300 per class'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2500",
+      "category": "grant",
+      "code": "tipo-tm-reg-trademark",
+      "condition": {
+        "description": "Per-class registration fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Trademark or collective trademark \u2014 registration, per class",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Registration Fees'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2500",
+      "category": "grant",
+      "code": "tipo-tm-reg-collective-cert-mark",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Collective membership mark or certification mark \u2014 registration",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'NT$2,500 per registration'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "renewal",
+      "code": "tipo-tm-renewal-trademark",
+      "condition": {
+        "description": "Per-class renewal fee on the 10-year cycle.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Trademark or collective trademark \u2014 renewal, per class (10-year cycle)",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Renewal Fees'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "4000",
+      "category": "renewal",
+      "code": "tipo-tm-renewal-collective-cert-mark",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Collective membership mark or certification mark \u2014 renewal (10-year cycle)",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'NT$4,000 per renewal'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "2000",
+      "category": "other",
+      "code": "tipo-tm-division-application",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Division of an application for registration \u2014 per additional application after division",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Division of an application for registration'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "other",
+      "code": "tipo-tm-division-registration",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Division of a trademark, certification mark, or collective trademark registration",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Division of a tradem'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "other",
+      "code": "tipo-tm-division-pre-disposition-surcharge",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Division surcharge \u2014 request prior to final disposition of opposition / invalidation / revocation",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Prior to the final disposition of an opposition'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "tipo-tm-amend-particulars",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Amendment or change to particulars in a registration or application \u2014 per request",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Amendment or chan'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "tipo-tm-restrict-goods-services",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Restriction of designated goods or services of a registered trademark \u2014 per request",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Restriction of designated goods or services'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "transfer",
+      "code": "tipo-tm-license-entry",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Entry of a license or sub-license \u2014 per entry",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Entry of a license'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "transfer",
+      "code": "tipo-tm-license-removal",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Entry of license or sub-license removal \u2014 per entry",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Entry of license or sub'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "transfer",
+      "code": "tipo-tm-transfer-entry",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Registration transfer entry \u2014 per entry",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Registration transfer entry'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "transfer",
+      "code": "tipo-tm-pledge-creation",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Pledge creation entry \u2014 per entry",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Pledge creation entry'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "transfer",
+      "code": "tipo-tm-pledge-extinguishment",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Pledge extinguishment entry \u2014 per entry",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Pledge extinguishment entry'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "opposition",
+      "code": "tipo-tm-opposition",
+      "condition": {
+        "description": "Per-class opposition fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Opposition \u2014 per class",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Opposition'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "7000",
+      "category": "cancellation",
+      "code": "tipo-tm-invalidation",
+      "condition": {
+        "description": "Per-class invalidation fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Invalidation \u2014 per class",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Invalidation'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "7000",
+      "category": "cancellation",
+      "code": "tipo-tm-revocation",
+      "condition": {
+        "description": "Per-class revocation fee.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "TWD",
+      "label": "Revocation \u2014 per class",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Revocation'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "other",
+      "code": "tipo-tm-intervene",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Request to intervene in an opposition, invalidation, or revocation \u2014 per request",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'Request to intervene'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "tipo-tm-certified-copy",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Request to issue a certified copy of a document \u2014 per copy",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'certified copy of a document'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "tipo-tm-file-review",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Request to review official files of a case \u2014 per request",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'review official files'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "tipo-tm-tm-agent-registration",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Trademark agent registration or change thereto \u2014 per request",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'trademark agent registrations'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "tipo-tm-replacement-registration-cert",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Request to issue a replacement registration certificate or re-issue \u2014 per request",
+      "notes": "TIPO Trademark Fee Standards (effective 2024-05-01). Verified against the bilingual PDF: phrase 'replacement registration certificate'.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Taiwan Intellectual Property Office",
+  "jurisdiction": "TW",
+  "key": "TW/TIPO/trademark",
+  "notes": "TIPO trademark fees are quoted per-class for application, registration, renewal, opposition, invalidation, and revocation. Multi-good surcharge applies over 20 designated goods in a single class (NT$200/good); Class 35 retail services surcharge applies over 5 designated services (NT$500/service). Source is a bilingual (zh-TW + EN) PDF; this scraper extracts the English side after stripping CJK characters and walking labelled NT$ amounts.",
+  "office_code": "TIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
+  "statutory_basis": "Trademark Act (\u5546\u6a19\u6cd5) and the Trademark Fee Standards published by TIPO under Article 104. Current schedule effective 2024-05-01."
+}

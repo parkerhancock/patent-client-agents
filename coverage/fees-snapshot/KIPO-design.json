@@ -1,0 +1,885 @@
+{
+  "currency": "KRW",
+  "effective_date": "2023-08-01",
+  "fees": [
+    {
+      "amount": "94000",
+      "category": "filing",
+      "code": "kr-des-application-fee-design-application-fee-electronic-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Design application fee (Electronic):",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "104000",
+      "category": "filing",
+      "code": "kr-des-application-fee-design-application-fee-paper-paper",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Design application fee(Paper):",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "45000",
+      "category": "filing",
+      "code": "kr-des-application-fee-design-application-fee-for-each-design-e-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Design application fee for each design (Electronic) :",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55000",
+      "category": "filing",
+      "code": "kr-des-application-fee-design-application-fee-for-each-design-p-paper",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Design application fee for each design (Paper):",
+      "notes": "KIPO section: Application Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "18000",
+      "category": "other",
+      "code": "kr-des-examination-fee-application-for-a-priority-design-for-ea-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Application for a priority design, for each priority design\n a. Basic fee (electronic)",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20000",
+      "category": "other",
+      "code": "kr-des-examination-fee-application-for-a-priority-design-for-ea-paper",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Application for a priority design, for each priority design\n a. Basic fee (paper)",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30000",
+      "category": "examination",
+      "code": "kr-des-examination-fee-request-for-a-reexamination-for-each-des",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for a reexamination, for each design (Electronic): \n a. Basic fee",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40000",
+      "category": "examination",
+      "code": "kr-des-examination-fee-request-for-a-reexamination-for-each-des-2",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for a reexamination, for each design (Paper):",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70000",
+      "category": "petition",
+      "code": "kr-des-examination-fee-request-for-a-preferential-examination",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for a preferential examination",
+      "notes": "KIPO section: Examination Fee",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y1",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 1)",
+      "notes": "KIPO section: Annual Fee. Band 1-3 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "25000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y2",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 2)",
+      "notes": "KIPO section: Annual Fee. Band 1-3 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "25000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y3",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 3)",
+      "notes": "KIPO section: Annual Fee. Band 1-3 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "35000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y4",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 4)",
+      "notes": "KIPO section: Annual Fee. Band 4-6 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "35000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y5",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 5)",
+      "notes": "KIPO section: Annual Fee. Band 4-6 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "35000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y6",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 6)",
+      "notes": "KIPO section: Annual Fee. Band 4-6 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "70000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y7",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 7)",
+      "notes": "KIPO section: Annual Fee. Band 7-9 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "70000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y8",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 8)",
+      "notes": "KIPO section: Annual Fee. Band 7-9 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "70000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y9",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 9)",
+      "notes": "KIPO section: Annual Fee. Band 7-9 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "140000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y10",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 10)",
+      "notes": "KIPO section: Annual Fee. Band 10-12 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "140000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y11",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 11)",
+      "notes": "KIPO section: Annual Fee. Band 10-12 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "140000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y12",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 12)",
+      "notes": "KIPO section: Annual Fee. Band 10-12 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "210000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y13",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 13)",
+      "notes": "KIPO section: Annual Fee. Band 13-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "210000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y14",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 14)",
+      "notes": "KIPO section: Annual Fee. Band 13-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "210000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y15",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 15)",
+      "notes": "KIPO section: Annual Fee. Band 13-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "210000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y16",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 16)",
+      "notes": "KIPO section: Annual Fee. Band 13-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "210000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y17",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 17)",
+      "notes": "KIPO section: Annual Fee. Band 13-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "210000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y18",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 18)",
+      "notes": "KIPO section: Annual Fee. Band 13-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "210000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y19",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 19)",
+      "notes": "KIPO section: Annual Fee. Band 13-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "210000",
+      "category": "renewal",
+      "code": "kr-des-annuity-substantive-examination-y20",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Substantive examination (year 20)",
+      "notes": "KIPO section: Annual Fee. Band 13-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "25000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y1",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 1)",
+      "notes": "KIPO section: Annual Fee. Band 1-3 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "25000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y2",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 2)",
+      "notes": "KIPO section: Annual Fee. Band 1-3 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "25000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y3",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 3)",
+      "notes": "KIPO section: Annual Fee. Band 1-3 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y4",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 4)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y5",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 5)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y6",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 6)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y7",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 7)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y8",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 8)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y9",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 9)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y10",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 10)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y11",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 11)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y12",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 12)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y13",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 13)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y14",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 14)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y15",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 15)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y16",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 16)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y17",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 17)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y18",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 18)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y19",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 19)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "34000",
+      "category": "renewal",
+      "code": "kr-des-annuity-partial-substantive-examinatio-y20",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Partial-substantive examination (year 20)",
+      "notes": "KIPO section: Annual Fee. Band 4-20 years.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "53000",
+      "category": "other",
+      "code": "kr-des-others-converting-non-substantive-examination-i",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Converting non-substantive examination into substantive examination (Electronic):",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "63000",
+      "category": "other",
+      "code": "kr-des-others-converting-non-substantive-examination-i-2",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Converting non-substantive examination into substantive examination (Paper) :",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "18000",
+      "category": "other",
+      "code": "kr-des-others-request-for-a-secret-design-for-each-des-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for a secret design, for each design : (electronic)",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20000",
+      "category": "other",
+      "code": "kr-des-others-request-for-a-secret-design-for-each-des-paper",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for a secret design, for each design : (paper)",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "21000",
+      "category": "other",
+      "code": "kr-des-others-request-for-laying-open-of-a-design-appl-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for laying-open of a design application, for each case : (electronic)",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "24000",
+      "category": "other",
+      "code": "kr-des-others-request-for-laying-open-of-a-design-appl-paper",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Request for laying-open of a design application, for each case : (paper)",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50000",
+      "category": "opposition",
+      "code": "kr-des-others-filling-an-opposition-to-a-registration-",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Filling an opposition to a registration, for each design :",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10000",
+      "category": "other",
+      "code": "kr-des-others-divisional-application-fee-when-dividing-electronic",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Divisional application fee: \n When dividing a multiple-design application, for each divided application,\n \n a. In case of division into same application\n \n \n \n \n \n \n b. In case of division partial sub",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20000",
+      "category": "other",
+      "code": "kr-des-others-divisional-application-fee-when-dividing-paper",
+      "condition": null,
+      "currency": "KRW",
+      "label": "Divisional application fee: \n When dividing a multiple-design application, for each divided application,\n \n a. In case of division into same application\n \n \n \n \n \n \n b. In case of division partial sub",
+      "notes": "KIPO section: Others",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Korean Intellectual Property Office",
+  "jurisdiction": "KR",
+  "key": "KR/KIPO/design",
+  "notes": "KIPO publishes design fees in KRW with electronic + paper rate variants \u2014 both emit as separate FeeItems. The Annual Fee table packs multiple year-bands into one row (``a. 1 to 3 years`` ... ``e. 13 to 20 years``) with one amount per band in the fee cell; the parser expands each band into per-year ``FeeCategory.renewal`` FeeItems with year=N (1..20). Partial-substantive-examination annuity track and substantive-examination annuity track emit as separate rows (description prefix disambiguates the slug). Design term is 20 years from filing (Design Protection Act \u00a791). KIPO entity discounts (SME / micro / individual refunds) live in a separate post-payment program and are NOT on this schedule.",
+  "office_code": "KIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
+  "statutory_basis": "Enforcement Rule of the Korean Design Protection Act on Collection of Design Fees (Korean MOIP / KIPO)."
+}

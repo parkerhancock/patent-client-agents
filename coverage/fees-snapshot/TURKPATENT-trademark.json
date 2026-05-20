@@ -1,0 +1,475 @@
+{
+  "currency": "TRY",
+  "effective_date": "2026-01-01",
+  "fees": [
+    {
+      "amount": "2820.00",
+      "category": "filing",
+      "code": "tr-tm-02.01.01",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Tek S\u0131n\u0131fl\u0131 Marka Ba\u015fvuru \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2820.00",
+      "category": "excess_classes",
+      "code": "tr-tm-02.01.02",
+      "condition": {
+        "description": "Per class beyond the threshold.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "TRY",
+      "label": "Marka Ba\u015fvurusu Ek S\u0131n\u0131f \u00dccreti (2.s\u0131n\u0131f)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "7010.00",
+      "category": "grant",
+      "code": "tr-tm-02.01.03",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Marka Tescil \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2890.00",
+      "category": "other",
+      "code": "tr-tm-02.01.04",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Marka Tescil Belgesi Sureti D\u00fczenleme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2890.00",
+      "category": "other",
+      "code": "tr-tm-02.01.05",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Marka Sicil Sureti D\u00fczenleme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5960.00",
+      "category": "transfer",
+      "code": "tr-tm-02.01.06",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Devir-K\u0131smi Devir \u0130\u015flemi Kay\u0131t \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4360.00",
+      "category": "transfer",
+      "code": "tr-tm-02.01.07",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Birle\u015fme B\u00f6l\u00fcnme veya Ayni Sermaye Koyma Borcu Gibi Yap\u0131sal De\u011fi\u015fikliklere \u0130li\u015fkin \u0130\u015flem \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5550.00",
+      "category": "transfer",
+      "code": "tr-tm-02.01.08",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Miras Yoluyla \u0130ntikal \u0130\u015flemi Kay\u0131t \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "9870.00",
+      "category": "renewal",
+      "code": "tr-tm-02.01.09",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Lisans Kay\u0131t ve Lisans Yenileme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "6010.00",
+      "category": "transfer",
+      "code": "tr-tm-02.01.10",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Rehin \u0130\u015flemi Kay\u0131t \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3420.00",
+      "category": "other",
+      "code": "tr-tm-02.01.14",
+      "condition": null,
+      "currency": "TRY",
+      "label": "R\u00fc\u00e7han Hakk\u0131 Kay\u0131t \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1240.00",
+      "category": "other",
+      "code": "tr-tm-02.01.15",
+      "condition": null,
+      "currency": "TRY",
+      "label": "S\u0131n\u0131fland\u0131rma Listesi D\u00fczenleme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1980.00",
+      "category": "other",
+      "code": "tr-tm-02.01.16",
+      "condition": null,
+      "currency": "TRY",
+      "label": "R\u00fc\u00e7han Hakk\u0131 Belgesi D\u00fczenleme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1150.00",
+      "category": "other",
+      "code": "tr-tm-02.01.17",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Resmi Marka B\u00fclteninde Yay\u0131mlanan Marka Ba\u015fvurular\u0131na \u0130tiraz \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280.00",
+      "category": "other",
+      "code": "tr-tm-02.01.18",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Marka Bilgilerine \u0130li\u015fkin Resmi Yaz\u0131 D\u00fczenleme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3850.00",
+      "category": "filing",
+      "code": "tr-tm-02.01.19",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Madrid Protokol\u00fc Uyar\u0131nca Uluslararas\u0131 Marka Ba\u015fvurusunun WIPO'ya Bildirilmesi \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1630.00",
+      "category": "madrid",
+      "code": "tr-tm-02.01.20",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Madrid Protokol\u00fc Uyar\u0131nca Sonraki Belirleme ve Di\u011fer Taleplerin WIPO ya Bildirilmesi \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1630.00",
+      "category": "madrid",
+      "code": "tr-tm-02.01.21",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Madrid Protokol\u00fc Uyar\u0131nca Yer De\u011fi\u015ftirme ve D\u00f6n\u00fc\u015ft\u00fcrme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4190.00",
+      "category": "other",
+      "code": "tr-tm-02.01.22",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Marka Ba\u015fvurusu B\u00f6l\u00fcnme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8730.00",
+      "category": "renewal",
+      "code": "tr-tm-02.01.23",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Marka Yenileme \u00dccreti (2 s\u0131n\u0131fa kadar)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "15420.00",
+      "category": "renewal",
+      "code": "tr-tm-02.01.24",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Koruma S\u00fcresi Sona Eren Marka Yenileme \u00dccreti (2 s\u0131n\u0131fa kadar)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "35320.00",
+      "category": "other",
+      "code": "tr-tm-02.01.27",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Tan\u0131nm\u0131\u015fl\u0131k Tespiti Talebi \u0130nceleme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3150.00",
+      "category": "excess_classes",
+      "code": "tr-tm-02.01.28",
+      "condition": {
+        "description": "Per class beyond the threshold.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "TRY",
+      "label": "Marka Ba\u015fvurusu Ek S\u0131n\u0131f \u00dccreti (3 \u00fcnc\u00fc s\u0131n\u0131f ve sonraki her bir s\u0131n\u0131f i\u00e7in-02.01.34 say\u0131l\u0131 sat\u0131r haricindeki ba\u015fvurular i\u00e7in)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "35320.00",
+      "category": "other",
+      "code": "tr-tm-02.01.30",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Marka \u0130ptal \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "35320.00",
+      "category": "other",
+      "code": "tr-tm-02.01.31",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Marka \u0130ptal Talebi Emanet Tutar\u0131",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "750.00",
+      "category": "excess_classes",
+      "code": "tr-tm-02.01.32",
+      "condition": {
+        "description": "Per class beyond the threshold.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "TRY",
+      "label": "\u0130lave Her bir S\u0131n\u0131f \u0130\u00e7in Marka Yenileme \u00dccreti (3 \u00fcnc\u00fc ve sonraki herbir s\u0131n\u0131f i\u00e7in)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1310.00",
+      "category": "excess_classes",
+      "code": "tr-tm-02.01.33",
+      "condition": {
+        "description": "Per class beyond the threshold.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "TRY",
+      "label": "\u0130lave Her bir S\u0131n\u0131f \u0130\u00e7in Koruma S\u00fcresi Sona Eren Markan\u0131n Yenileme \u00dccreti (3 \u00fcnc\u00fc ve sonraki her bir s\u0131n\u0131f i\u00e7in)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "450.00",
+      "category": "excess_classes",
+      "code": "tr-tm-02.01.34",
+      "condition": {
+        "description": "Per class beyond the threshold.",
+        "per_unit": true,
+        "threshold": 2,
+        "trigger": "classes_over"
+      },
+      "currency": "TRY",
+      "label": "Marka Ba\u015fvurusu Ek S\u0131n\u0131f \u00dccreti (35/5 inci grup alt\u0131ndaki 34 emtia s\u0131n\u0131f\u0131nda se\u00e7ilen 3 \u00fcnc\u00fc s\u0131n\u0131f ve sonraki her bir s\u0131n\u0131f i\u00e7in)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3350.00",
+      "category": "filing",
+      "code": "tr-tm-02.01.35",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Madrid Protokol\u00fc Uyar\u0131nca T\u00fcrk\u00e7e \u0130bareli Uluslararas\u0131 Marka Ba\u015fvurusunun WIPO'ya Bildirilmesi \u00dccreti",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
+  "jurisdiction": "TR",
+  "key": "TR/TURKPATENT/trademark",
+  "notes": "10-year term (Law 6769 Art. 23); renewal FeeItems carry year=10. Per-class surcharges emit as FeeCategory.excess_classes with classes_over threshold tracking the row context (1 for 2.s\u0131n\u0131f rows, 2 for 3.s\u0131n\u0131f+ rows). Madrid Protocol routing rows captured with FeeCategory.madrid where applicable.",
+  "office_code": "TURKPATENT",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
+  "statutory_basis": "S\u0131nai M\u00fclkiyet Kanunu (Law 6769) Art. 188; Resm\u00ee Gazete 5. m\u00fckerrer 31-12-2025, B\u0130K/T\u00dcRKPATENT 2026/1 (Law 6769 Art. 188) (PDF: https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-37.pdf)."
+}

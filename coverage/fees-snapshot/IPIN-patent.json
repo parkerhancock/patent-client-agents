@@ -1,0 +1,1415 @@
+{
+  "currency": "INR",
+  "effective_date": "2024-03-15",
+  "fees": [
+    {
+      "amount": "800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-3-s-e-y3",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 3)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "4000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-3-s-p-y3",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 3)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "880",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-3-l-e-y3",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 3)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "4400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-3-l-p-y3",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 3)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-4-s-e-y4",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 4)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "4000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-4-s-p-y4",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 4)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "880",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-4-l-e-y4",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 4)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "4400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-4-l-p-y4",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 4)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-5-s-e-y5",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 5)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 5
+    },
+    {
+      "amount": "4000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-5-s-p-y5",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 5)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 5
+    },
+    {
+      "amount": "880",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-5-l-e-y5",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 5)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 5
+    },
+    {
+      "amount": "4400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-5-l-p-y5",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 5)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 5
+    },
+    {
+      "amount": "800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-6-s-e-y6",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 6)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 6
+    },
+    {
+      "amount": "4000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-6-s-p-y6",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 6)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 6
+    },
+    {
+      "amount": "880",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-6-l-e-y6",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 6)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 6
+    },
+    {
+      "amount": "4400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-6-l-p-y6",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 6)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 6
+    },
+    {
+      "amount": "2400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-7-s-e-y7",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 7)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 7
+    },
+    {
+      "amount": "12000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-7-s-p-y7",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 7)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 7
+    },
+    {
+      "amount": "2650",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-7-l-e-y7",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 7)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 7
+    },
+    {
+      "amount": "13200",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-7-l-p-y7",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 7)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 7
+    },
+    {
+      "amount": "2400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-8-s-e-y8",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 8)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 8
+    },
+    {
+      "amount": "12000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-8-s-p-y8",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 8)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 8
+    },
+    {
+      "amount": "2650",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-8-l-e-y8",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 8)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 8
+    },
+    {
+      "amount": "13200",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-8-l-p-y8",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 8)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 8
+    },
+    {
+      "amount": "2400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-9-s-e-y9",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 9)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 9
+    },
+    {
+      "amount": "12000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-9-s-p-y9",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 9)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 9
+    },
+    {
+      "amount": "2650",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-9-l-e-y9",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 9)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 9
+    },
+    {
+      "amount": "13200",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-9-l-p-y9",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 9)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 9
+    },
+    {
+      "amount": "2400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-10-s-e-y10",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 10)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 10
+    },
+    {
+      "amount": "12000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-10-s-p-y10",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 10)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 10
+    },
+    {
+      "amount": "2650",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-10-l-e-y10",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 10)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 10
+    },
+    {
+      "amount": "13200",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-10-l-p-y10",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 10)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 10
+    },
+    {
+      "amount": "4800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-11-s-e-y11",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 11)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 11
+    },
+    {
+      "amount": "24000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-11-s-p-y11",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 11)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 11
+    },
+    {
+      "amount": "5300",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-11-l-e-y11",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 11)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 11
+    },
+    {
+      "amount": "26400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-11-l-p-y11",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 11)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 11
+    },
+    {
+      "amount": "4800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-12-s-e-y12",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 12)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 12
+    },
+    {
+      "amount": "24000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-12-s-p-y12",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 12)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 12
+    },
+    {
+      "amount": "5300",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-12-l-e-y12",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 12)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 12
+    },
+    {
+      "amount": "26400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-12-l-p-y12",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 12)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 12
+    },
+    {
+      "amount": "4800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-13-s-e-y13",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 13)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 13
+    },
+    {
+      "amount": "24000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-13-s-p-y13",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 13)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 13
+    },
+    {
+      "amount": "5300",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-13-l-e-y13",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 13)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 13
+    },
+    {
+      "amount": "26400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-13-l-p-y13",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 13)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 13
+    },
+    {
+      "amount": "4800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-14-s-e-y14",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 14)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 14
+    },
+    {
+      "amount": "24000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-14-s-p-y14",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 14)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 14
+    },
+    {
+      "amount": "5300",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-14-l-e-y14",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 14)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 14
+    },
+    {
+      "amount": "26400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-14-l-p-y14",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 14)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 14
+    },
+    {
+      "amount": "4800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-15-s-e-y15",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 15)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 15
+    },
+    {
+      "amount": "24000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-15-s-p-y15",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 15)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 15
+    },
+    {
+      "amount": "5300",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-15-l-e-y15",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 15)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 15
+    },
+    {
+      "amount": "26400",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-15-l-p-y15",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 15)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 15
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-16-s-e-y16",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 16)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 16
+    },
+    {
+      "amount": "40000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-16-s-p-y16",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 16)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 16
+    },
+    {
+      "amount": "8800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-16-l-e-y16",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 16)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 16
+    },
+    {
+      "amount": "44000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-16-l-p-y16",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 16)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 16
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-17-s-e-y17",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 17)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 17
+    },
+    {
+      "amount": "40000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-17-s-p-y17",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 17)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 17
+    },
+    {
+      "amount": "8800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-17-l-e-y17",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 17)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 17
+    },
+    {
+      "amount": "44000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-17-l-p-y17",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 17)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 17
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-18-s-e-y18",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 18)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 18
+    },
+    {
+      "amount": "40000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-18-s-p-y18",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 18)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 18
+    },
+    {
+      "amount": "8800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-18-l-e-y18",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 18)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 18
+    },
+    {
+      "amount": "44000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-18-l-p-y18",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 18)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 18
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-19-s-e-y19",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 19)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 19
+    },
+    {
+      "amount": "40000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-19-s-p-y19",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 19)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 19
+    },
+    {
+      "amount": "8800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-19-l-e-y19",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 19)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 19
+    },
+    {
+      "amount": "44000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-19-l-p-y19",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 19)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 19
+    },
+    {
+      "amount": "8000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-20-s-e-y20",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 20)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 20
+    },
+    {
+      "amount": "40000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-20-s-p-y20",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 20)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": 20
+    },
+    {
+      "amount": "8800",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-20-l-e-y20",
+      "condition": null,
+      "currency": "INR",
+      "label": "Renewal of patent (year 20)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 20
+    },
+    {
+      "amount": "44000",
+      "category": "maintenance",
+      "code": "in-item-18-renewal-of-patent-year-20-l-p-y20",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Renewal of patent (year 20)",
+      "notes": "Patents Rules 2003 Schedule 1, item 18, sub-item for the matching year.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": 20
+    },
+    {
+      "amount": "800",
+      "category": "other",
+      "code": "in-item-6-on-application-for-postdating-s-e",
+      "condition": null,
+      "currency": "INR",
+      "label": "On application for postdating",
+      "notes": "Patents Rules 2003 Schedule 1, item 6.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "other",
+      "code": "in-item-6-on-application-for-postdating-s-p",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "On application for postdating",
+      "notes": "Patents Rules 2003 Schedule 1, item 6.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "880",
+      "category": "other",
+      "code": "in-item-6-on-application-for-postdating-l-e",
+      "condition": null,
+      "currency": "INR",
+      "label": "On application for postdating",
+      "notes": "Patents Rules 2003 Schedule 1, item 6.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "4400",
+      "category": "other",
+      "code": "in-item-6-on-application-for-postdating-l-p",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "On application for postdating",
+      "notes": "Patents Rules 2003 Schedule 1, item 6.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "in-item-59-grace-period-s-e",
+      "condition": null,
+      "currency": "INR",
+      "label": "Grace period",
+      "notes": "Patents Rules 2003 Schedule 1, item 59.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "2500",
+      "category": "other",
+      "code": "in-item-59-grace-period-s-p",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Grace period",
+      "notes": "Patents Rules 2003 Schedule 1, item 59.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "550",
+      "category": "other",
+      "code": "in-item-59-grace-period-l-e",
+      "condition": null,
+      "currency": "INR",
+      "label": "Grace period",
+      "notes": "Patents Rules 2003 Schedule 1, item 59.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2750",
+      "category": "other",
+      "code": "in-item-59-grace-period-l-p",
+      "condition": {
+        "description": "Paper-filing variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "INR",
+      "label": "Grace period",
+      "notes": "Patents Rules 2003 Schedule 1, item 59.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+      "tier": "large",
+      "year": null
+    }
+  ],
+  "issuing_body": "Office of the Controller General of Patents, Designs and Trade Marks (CGPDTM)",
+  "jurisdiction": "IN",
+  "key": "IN/IPIN/patent",
+  "notes": "Scraped from CGPDTM's canonical Schedule 1 PDF using pypdf + regex. Each fee carries 4 rate columns: small-applicant + other(s) \u00d7 e-filing + paper. Paper-filing rows are flagged via FeeCondition(trigger=paper_filing). All 18 renewal years (years 3-20) captured. v1 GAPs: deeply nested sub-items inside non-renewal entries (per-sheet/per-claim surcharges, sequence-listing fees) are not yet extracted; PCT-specific fees live in Schedule 5 (separate PDF) and ship as a follow-up scraper. The PDF doesn't carry a revision date; the effective_date here is the most-recent gazette amendment.",
+  "office_code": "IPIN",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
+  "statutory_basis": "Patents Rules 2003 Schedule 1 (as amended through the Patents (Amendment) Rules 2024)."
+}

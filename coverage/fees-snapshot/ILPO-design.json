@@ -1,0 +1,340 @@
+{
+  "currency": "ILS",
+  "effective_date": "2026-01-01",
+  "fees": [
+    {
+      "amount": "471",
+      "category": "filing",
+      "code": "il-des-1",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design application (Law \u00a719, including supplementary design \u00a755) \u2014 per design (not part of a set)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "283",
+      "category": "filing",
+      "code": "il-des-1-small",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design application (Law \u00a719, including supplementary design \u00a755) \u2014 per design (not part of a set)",
+      "notes": "Small-entity 40% reduction: applies to a *first* patent / design application for the invention, where the applicant is an individual, a company/partnership with turnover under NIS 10 million in the preceding year, a recognized higher-education institution under \u00a7 9 of the Council for Higher Education Law 5718-1958, or a wholly-owned technology-transfer subsidiary thereof.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "707",
+      "category": "filing",
+      "code": "il-des-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design application for a set of articles (Law \u00a719, including supplementary design \u00a755) \u2014 per set",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "424",
+      "category": "filing",
+      "code": "il-des-2-small",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design application for a set of articles (Law \u00a719, including supplementary design \u00a755) \u2014 per set",
+      "notes": "Small-entity 40% reduction: applies to a *first* patent / design application for the invention, where the applicant is an individual, a company/partnership with turnover under NIS 10 million in the preceding year, a recognized higher-education institution under \u00a7 9 of the Council for Higher Education Law 5718-1958, or a wholly-owned technology-transfer subsidiary thereof.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "295",
+      "category": "examination",
+      "code": "il-des-3",
+      "condition": null,
+      "currency": "ILS",
+      "label": "On-site expedited examination (\u00a728) \u2014 per design",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "177",
+      "category": "other",
+      "code": "il-des-4",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Request to record designer name (\u00a733) \u2014 per design",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "589",
+      "category": "renewal",
+      "code": "il-des-5-1",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design renewal \u2014 first period (years 6-10 from filing)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "707",
+      "category": "renewal",
+      "code": "il-des-5-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design renewal \u2014 period from year 10 to year 15",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "825",
+      "category": "renewal",
+      "code": "il-des-5-3",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design renewal \u2014 period from year 15 to year 20",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "943",
+      "category": "renewal",
+      "code": "il-des-5-4",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design renewal \u2014 period from year 20 to year 25",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "3535",
+      "category": "renewal",
+      "code": "il-des-5-5",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Design renewal \u2014 all periods together (years 6-25, paid in advance)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "94",
+      "category": "late_fee",
+      "code": "il-des-6",
+      "condition": {
+        "description": "Per month or part thereof of late renewal payment.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "ILS",
+      "label": "Late-renewal surcharge (\u00a7\u00a741, 86(1)) \u2014 per design, per month",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "648",
+      "category": "other",
+      "code": "il-des-7",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Restoration of registration (\u00a743)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "648",
+      "category": "other",
+      "code": "il-des-8",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Register / document correction (\u00a746(a))",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "177",
+      "category": "transfer",
+      "code": "il-des-9",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Recordation of a right in a design (\u00a717)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1178",
+      "category": "cancellation",
+      "code": "il-des-10",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Third-party cancellation of design registration / restoration revocation / amendment cancellation (\u00a748)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "648",
+      "category": "appeal",
+      "code": "il-des-11",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Objection before the Registrar (\u00a796)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "648",
+      "category": "other",
+      "code": "il-des-12",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Intervention in a proceeding (\u00a798)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "94",
+      "category": "extension",
+      "code": "il-des-13",
+      "condition": {
+        "description": "Extension of time, per month or part thereof.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "ILS",
+      "label": "Extension of time (\u00a7100)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "12",
+      "category": "other",
+      "code": "il-des-14",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Certified document (\u00a7104)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "12",
+      "category": "other",
+      "code": "il-des-15",
+      "condition": null,
+      "currency": "ILS",
+      "label": "File copy (\u00a7104)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Israel Patent Office",
+  "jurisdiction": "IL",
+  "key": "IL/ILPO/design",
+  "notes": "ILPO 2026 fee schedule, gazetted 2025-12-22, effective 2026-01-01. Currency is Israeli new shekel (NIS / ILS); fees are CPI-adjusted annually and rounded to the nearest shekel. Source PDF is Hebrew-only \u2014 ILPO does not publish an English translation of the current-effective fee schedule on gov.il. Item labels in this connector are English-language summaries of the controlling Hebrew text. The Hebrew schedule is the authoritative version per Reshumot (Israeli Official Gazette).\n\nSchedule reflects the Designs Law 5777-2017 (in force 2018-08-07). Designs filed before 2018-08-07 are still governed by the legacy Patents and Designs Ordinance (1924); those legacy fees appear in the source PDF but are not emitted here \u2014 they apply only to a shrinking tail of pre-2018 registrations. The schedule supports five-year renewal periods up to a 25-year maximum (years 6-10, 10-15, 15-20, 20-25) plus an all-periods option. Items 1 and 2 (filing) are emitted twice \u2014 once at full amount, once at 60% for the first-application small-entity discount.",
+  "office_code": "ILPO",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+  "statutory_basis": "Designs Law, 5777-2017 (in force 2018-08-07) + Designs Regulations. CPI-adjusted annually; controlling text is Reshumot."
+}

@@ -1,0 +1,1330 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "97.48",
+      "category": "filing",
+      "code": "oepm-MT17",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark application \u2014 1st class (paper)",
+      "notes": "OEPM fee code MT17; channel: paper; PDF text: A. DESDE EL 1 DE ABRIL DE 2026 1\u00aa Clase",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "82.84",
+      "category": "filing",
+      "code": "oepm-ME17",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark application \u2014 1st class (electronic)",
+      "notes": "OEPM fee code ME17; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "194.91",
+      "category": "excess_classes",
+      "code": "oepm-MT18",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark application \u2014 2nd+ class each (paper)",
+      "notes": "OEPM fee code MT18; channel: paper; PDF text: 1\u00aa Clase",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "165.67",
+      "category": "excess_classes",
+      "code": "oepm-ME18",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark application \u2014 2nd+ class each (electronic)",
+      "notes": "OEPM fee code ME18; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "44.86",
+      "category": "filing",
+      "code": "oepm-MT03",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark \u2014 international registration request (paper)",
+      "notes": "OEPM fee code MT03; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "38.13",
+      "category": "filing",
+      "code": "oepm-ME06",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark \u2014 international registration request (electronic)",
+      "notes": "OEPM fee code ME06; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "57.19",
+      "category": "other",
+      "code": "oepm-MT05",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark \u2014 divisional application (paper)",
+      "notes": "OEPM fee code MT05; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "48.61",
+      "category": "other",
+      "code": "oepm-ME03",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark \u2014 divisional application (electronic)",
+      "notes": "OEPM fee code ME03; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "55.35",
+      "category": "other",
+      "code": "oepm-MT07",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark \u2014 priority claim (paper)",
+      "notes": "OEPM fee code MT07; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "47.05",
+      "category": "other",
+      "code": "oepm-ME08",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark \u2014 priority claim (electronic)",
+      "notes": "OEPM fee code ME08; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "20.65",
+      "category": "transfer",
+      "code": "oepm-MT08",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark \u2014 assignment / licence recordation (paper)",
+      "notes": "OEPM fee code MT08; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "17.55",
+      "category": "transfer",
+      "code": "oepm-ME09",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark \u2014 assignment / licence recordation (electronic)",
+      "notes": "OEPM fee code ME09; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "35.12",
+      "category": "late_fee",
+      "code": "oepm-MT15",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark \u2014 class not paid with the application (paper)",
+      "notes": "OEPM fee code MT15; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "29.86",
+      "category": "late_fee",
+      "code": "oepm-ME10",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark \u2014 class not paid with the application (electronic)",
+      "notes": "OEPM fee code ME10; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "7329.17",
+      "category": "other",
+      "code": "oepm-MX15",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark \u2014 PAGO M\u00c1XIMO cap (paper)",
+      "notes": "OEPM fee code MX15; channel: paper; PDF text: PAGO M\u00c1XIMO",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "6229.79",
+      "category": "other",
+      "code": "oepm-XM10",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark \u2014 PAGO M\u00c1XIMO cap (electronic)",
+      "notes": "OEPM fee code XM10; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "17.76",
+      "category": "other",
+      "code": "oepm-MT20",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark \u2014 certifications (paper)",
+      "notes": "OEPM fee code MT20; channel: paper; PDF text: CERTIFICACIONES",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "15.11",
+      "category": "other",
+      "code": "oepm-ME11",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark \u2014 certifications (electronic)",
+      "notes": "OEPM fee code ME11; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "cancellation",
+      "code": "oepm-MT25",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Trademark \u2014 nullity or cancellation petition (paper)",
+      "notes": "OEPM fee code MT25; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "170.00",
+      "category": "cancellation",
+      "code": "oepm-ME25",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Trademark \u2014 nullity or cancellation petition (electronic)",
+      "notes": "OEPM fee code ME25; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "107.46",
+      "category": "petition",
+      "code": "oepm-CM01",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Restoration of rights (paper)",
+      "notes": "OEPM fee code CM01; channel: paper; PDF text: ota: concedidos bajo el E.P.I. (solicitudes presentadas antes del 9.7.2003) R\u00c9GIMEN TRANSITORIO. T\u00cdTULOS Y QUINQUENIOS. DEMORAS",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "91.35",
+      "category": "petition",
+      "code": "oepm-CI01",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Restoration of rights (electronic)",
+      "notes": "OEPM fee code CI01; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "89.86",
+      "category": "appeal",
+      "code": "oepm-CM02",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Appeal / request for review (paper)",
+      "notes": "OEPM fee code CM02; channel: paper; PDF text: RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "76.39",
+      "category": "appeal",
+      "code": "oepm-CI02",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Appeal / request for review (electronic)",
+      "notes": "OEPM fee code CI02; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "3.64",
+      "category": "other",
+      "code": "oepm-CM03",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Inspection of file / case (paper)",
+      "notes": "OEPM fee code CM03; channel: paper; PDF text: CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "11.60",
+      "category": "other",
+      "code": "oepm-CM04",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Copy of file documents (paper)",
+      "notes": "OEPM fee code CM04; channel: paper; PDF text: COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "145.10",
+      "category": "publication",
+      "code": "oepm-CM05",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "BOPI announcement \u2014 contentious-administrative appeal (paper)",
+      "notes": "OEPM fee code CM05; channel: paper; PDF text: Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "123.33",
+      "category": "publication",
+      "code": "oepm-CI05",
+      "condition": null,
+      "currency": "EUR",
+      "label": "BOPI announcement \u2014 contentious-administrative appeal (electronic)",
+      "notes": "OEPM fee code CI05; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "145.10",
+      "category": "publication",
+      "code": "oepm-CM06",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "BOPI announcement \u2014 ruling on contentious-administrative appeal (paper)",
+      "notes": "OEPM fee code CM06; channel: paper; PDF text: ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "123.33",
+      "category": "publication",
+      "code": "oepm-CI06",
+      "condition": null,
+      "currency": "EUR",
+      "label": "BOPI announcement \u2014 ruling on contentious-administrative appeal (electronic)",
+      "notes": "OEPM fee code CI06; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "23.65",
+      "category": "transfer",
+      "code": "oepm-CM07",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Modifications (paper)",
+      "notes": "OEPM fee code CM07; channel: paper; PDF text: MODIFICACIONES",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "20.11",
+      "category": "transfer",
+      "code": "oepm-CI07",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Modifications (electronic)",
+      "notes": "OEPM fee code CI07; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "44.14",
+      "category": "opposition",
+      "code": "oepm-CM08",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Oppositions (paper)",
+      "notes": "OEPM fee code CM08; channel: paper; PDF text: OPOSICIONES",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "37.52",
+      "category": "opposition",
+      "code": "oepm-CI08",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Oppositions (electronic)",
+      "notes": "OEPM fee code CI08; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "16.71",
+      "category": "transfer",
+      "code": "oepm-CM09",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Change of name of holder (paper)",
+      "notes": "OEPM fee code CM09; channel: paper; PDF text: INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "14.20",
+      "category": "transfer",
+      "code": "oepm-CI09",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Change of name of holder (electronic)",
+      "notes": "OEPM fee code CI09; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2845.73",
+      "category": "other",
+      "code": "oepm-CX09",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Common \u2014 PAGO M\u00c1XIMO cap (paper)",
+      "notes": "OEPM fee code CX09; channel: paper; PDF text: PAGO M\u00c1XIMO",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "2418.87",
+      "category": "other",
+      "code": "oepm-XC09",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Common \u2014 PAGO M\u00c1XIMO cap (electronic)",
+      "notes": "OEPM fee code XC09; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "107.46",
+      "category": "petition",
+      "code": "oepm-I301",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "i\u00f3n por presentaci\u00f3n electr\u00f3nica (formato de caracteres codificado XML) REDUCCIONES APLICABLES A LA TASA DE PRESENTACI\u00d3N INTERNACIONAL REDUCCIONES APLICABLES A LA TASA DE TRAMITACI\u00d3N RESTABLECIMIENTO ",
+      "notes": "OEPM fee code I301; channel: paper; PDF text: i\u00f3n por presentaci\u00f3n electr\u00f3nica (formato de caracteres codificado XML) REDUCCIONES APLICABLES A LA TASA DE PRESENTACI\u00d3N INTERNACIONAL REDUCCIONES APLICABLES A ",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "91.35",
+      "category": "other",
+      "code": "oepm-I501",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I501",
+      "notes": "OEPM fee code I501; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "89.86",
+      "category": "appeal",
+      "code": "oepm-I302",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "notes": "OEPM fee code I302; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "76.39",
+      "category": "other",
+      "code": "oepm-I502",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I502",
+      "notes": "OEPM fee code I502; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "3.64",
+      "category": "other",
+      "code": "oepm-I303",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "notes": "OEPM fee code I303; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "11.60",
+      "category": "other",
+      "code": "oepm-I304",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "notes": "OEPM fee code I304; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "145.10",
+      "category": "publication",
+      "code": "oepm-I305",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "notes": "OEPM fee code I305; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "123.33",
+      "category": "other",
+      "code": "oepm-I505",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I505",
+      "notes": "OEPM fee code I505; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "145.10",
+      "category": "publication",
+      "code": "oepm-I306",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "notes": "OEPM fee code I306; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "123.33",
+      "category": "other",
+      "code": "oepm-I506",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I506",
+      "notes": "OEPM fee code I506; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "23.65",
+      "category": "transfer",
+      "code": "oepm-I307",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "MODIFICACIONES",
+      "notes": "OEPM fee code I307; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "20.11",
+      "category": "other",
+      "code": "oepm-I507",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I507",
+      "notes": "OEPM fee code I507; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "44.14",
+      "category": "opposition",
+      "code": "oepm-I308",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "OPOSICIONES",
+      "notes": "OEPM fee code I308; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "37.52",
+      "category": "other",
+      "code": "oepm-I508",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I508",
+      "notes": "OEPM fee code I508; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "16.71",
+      "category": "transfer",
+      "code": "oepm-I309",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR. Por registro afectado",
+      "notes": "OEPM fee code I309; channel: paper",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "14.20",
+      "category": "other",
+      "code": "oepm-I509",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I509",
+      "notes": "OEPM fee code I509; channel: electronic",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "107.46",
+      "category": "petition",
+      "code": "oepm-I701",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "RESTABLECIMIENTO DE DERECHOS",
+      "notes": "OEPM fee code I701; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "91.35",
+      "category": "other",
+      "code": "oepm-I801",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I801",
+      "notes": "OEPM fee code I801; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "44.93",
+      "category": "appeal",
+      "code": "oepm-I702",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "notes": "OEPM fee code I702; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "38.19",
+      "category": "other",
+      "code": "oepm-I802",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I802",
+      "notes": "OEPM fee code I802; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "3.64",
+      "category": "other",
+      "code": "oepm-I703",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "notes": "OEPM fee code I703; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "11.60",
+      "category": "other",
+      "code": "oepm-I704",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "notes": "OEPM fee code I704; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "145.10",
+      "category": "publication",
+      "code": "oepm-I705",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "notes": "OEPM fee code I705; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "123.33",
+      "category": "other",
+      "code": "oepm-I805",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I805",
+      "notes": "OEPM fee code I805; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "145.10",
+      "category": "publication",
+      "code": "oepm-I706",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "notes": "OEPM fee code I706; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "123.33",
+      "category": "other",
+      "code": "oepm-I806",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I806",
+      "notes": "OEPM fee code I806; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "11.84",
+      "category": "transfer",
+      "code": "oepm-I707",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "MODIFICACIONES",
+      "notes": "OEPM fee code I707; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "10.06",
+      "category": "other",
+      "code": "oepm-I807",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I807",
+      "notes": "OEPM fee code I807; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "44.14",
+      "category": "opposition",
+      "code": "oepm-I708",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "OPOSICIONES",
+      "notes": "OEPM fee code I708; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "37.52",
+      "category": "other",
+      "code": "oepm-I808",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I808",
+      "notes": "OEPM fee code I808; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "16.71",
+      "category": "transfer",
+      "code": "oepm-I709",
+      "condition": {
+        "description": "OEPM paper-filing (tr\u00e1mite no electr\u00f3nico) variant.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "EUR",
+      "label": "INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR. Por registro afectado",
+      "notes": "OEPM fee code I709; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "14.20",
+      "category": "other",
+      "code": "oepm-I809",
+      "condition": null,
+      "currency": "EUR",
+      "label": "OEPM fee code I809",
+      "notes": "OEPM fee code I809; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "1885.00",
+      "category": "transfer",
+      "code": "oepm-PCT1",
+      "condition": null,
+      "currency": "EUR",
+      "label": "abril de 2026 CONCEPTO CLAVEIMPORTE TASA DE TRANSMISION TRANSMISION DEL DOCUMENTO DE PRIORIDAD TASA DE PRESENTACI\u00d3N INTERNACIONAL (30 primeras hojas) POR HOJA ADICIONAL (a partir de la p\u00e1gina 31 inclu",
+      "notes": "OEPM fee code PCT1; channel: n/a; PDF text: abril de 2026 CONCEPTO CLAVEIMPORTE TASA DE TRANSMISION TRANSMISION DEL DOCUMENTO DE PRIORIDAD TASA DE PRESENTACI\u00d3N INTERNACIONAL (30 primeras hojas) POR HOJA A",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "18.50",
+      "category": "other",
+      "code": "oepm-DQR0",
+      "condition": null,
+      "currency": "EUR",
+      "label": "R\u00c1MITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 Sin recargo 25% Recargo 50% Recargo T\u00edtul",
+      "notes": "OEPM fee code DQR0; channel: n/a; PDF text: R\u00c1MITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 S",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "86.53",
+      "category": "other",
+      "code": "oepm-DQR1",
+      "condition": null,
+      "currency": "EUR",
+      "label": "1ER QUINQUENIO RENOVACI\u00d3N",
+      "notes": "OEPM fee code DQR1; channel: n/a",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "86.53",
+      "category": "other",
+      "code": "oepm-DQR2",
+      "condition": null,
+      "currency": "EUR",
+      "label": "2\u00ba QUINQUENIO RENOVACI\u00d3N",
+      "notes": "OEPM fee code DQR2; channel: n/a",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "18.48",
+      "category": "other",
+      "code": "oepm-BB02",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Agent \u2014 employee authorization",
+      "notes": "OEPM fee code BB02; channel: n/a; PDF text: tarjeta de cr\u00e9dito/d\u00e9bito",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    }
+  ],
+  "issuing_body": "Oficina Espa\u00f1ola de Patentes y Marcas (OEPM)",
+  "jurisdiction": "ES",
+  "key": "ES/OEPM/trademark",
+  "notes": "Scraped from OEPM's consolidated TASAS y PRECIOS P\u00daBLICOS PDF (670 KB / 17 pages, stamped 'Actualizado a fecha: 1 de abril de 2026'). Each fee row in the dual-channel sections emits one FeeItem; the 2nd character of the code marks the filing channel (T = paper, E = electronic) and is also flagged on paper rows via FeeCondition(trigger=paper_filing). Applicant tier maps as follows: IT/IE/MT/ME/DT/DE/CM/CI/ET/CP/I3/I5 \u2192 EntityTier.large; YT/YE/UT/UE/I7/I8 \u2192 EntityTier.small (PYMES + public-university 50% reduction under Ley 24/2015 art. 186). v1 GAPS: patent annuities (page 6 IP/2P/5P \u00d7 IR/2R/5R \u00d7 YP/Y2/Y5 \u00d7 UP/U2/U5), design renewal table (page 13 DT41/D241/D541), PCT international fees (pages 8-9), and precios p\u00fablicos (pages 16-17) ship as separate column structures and are not captured. Trademarks: per-class structure \u2014 first class on the MT17/ME17 row, each subsequent class on MT18/ME18 at the reduced sub-rate. PAGO M\u00c1XIMO (MX15/XM10) caps the total payable on high-multi-class filings.",
+  "office_code": "OEPM",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+  "statutory_basis": "Ley 17/2001 de Marcas (Annex); year-over-year amounts adjusted by the annual Ley de Presupuestos Generales del Estado."
+}

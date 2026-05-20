@@ -1,0 +1,285 @@
+{
+  "currency": "TRY",
+  "effective_date": "2026-01-01",
+  "fees": [
+    {
+      "amount": "2070.00",
+      "category": "filing",
+      "code": "tr-des-04.01.01",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Tasar\u0131m Tescil Ba\u015fvuru \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1674.90",
+      "category": "filing",
+      "code": "tr-des-04.01.02-d2",
+      "condition": null,
+      "currency": "TRY",
+      "label": "\u0130lave Her Tasar\u0131m \u0130\u00e7in Tasar\u0131m Tescil Ba\u015fvuru \u00dccreti (designs 2)",
+      "notes": "Ba\u015fvurudaki 2. tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 1674,90TLBa\u015fvurudaki 3. 4. ve 5. her bir tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 318,70 TLBa\u015fvurudaki 6. ve fazlas\u0131 her bir tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 760,00 TL",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "318.70",
+      "category": "filing",
+      "code": "tr-des-04.01.02-d3to5",
+      "condition": null,
+      "currency": "TRY",
+      "label": "\u0130lave Her Tasar\u0131m \u0130\u00e7in Tasar\u0131m Tescil Ba\u015fvuru \u00dccreti (designs 3-5)",
+      "notes": "Ba\u015fvurudaki 2. tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 1674,90TLBa\u015fvurudaki 3. 4. ve 5. her bir tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 318,70 TLBa\u015fvurudaki 6. ve fazlas\u0131 her bir tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 760,00 TL",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "760.00",
+      "category": "filing",
+      "code": "tr-des-04.01.02-d6plus",
+      "condition": null,
+      "currency": "TRY",
+      "label": "\u0130lave Her Tasar\u0131m \u0130\u00e7in Tasar\u0131m Tescil Ba\u015fvuru \u00dccreti (designs 6+)",
+      "notes": "Ba\u015fvurudaki 2. tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 1674,90TLBa\u015fvurudaki 3. 4. ve 5. her bir tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 318,70 TLBa\u015fvurudaki 6. ve fazlas\u0131 her bir tasar\u0131m i\u00e7in tasar\u0131m ba\u015fvuru \u00fccreti: 760,00 TL",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280.00",
+      "category": "publication",
+      "code": "tr-des-04.01.03",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Yay\u0131m \u00dccreti ( Her bir 8 x 8 cm.Alan \u0130\u00e7in)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280.00",
+      "category": "deferment",
+      "code": "tr-des-04.01.04",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Yay\u0131m Erteleme Talebi \u00dccreti (Her Bir Tasar\u0131m \u0130\u00e7in)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "6340.00",
+      "category": "renewal",
+      "code": "tr-des-04.01.05",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Yenileme Ba\u015fvuru \u00dccreti (Tek Tasar\u0131m \u0130\u00e7in)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "520.00",
+      "category": "renewal",
+      "code": "tr-des-04.01.06",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Yenileme Ba\u015fvuru \u00dccreti (\u0130lave Her Bir Tasar\u0131m \u0130\u00e7in)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "11120.00",
+      "category": "renewal",
+      "code": "tr-des-04.01.07",
+      "condition": null,
+      "currency": "TRY",
+      "label": "6 Ay S\u00fcre Uzat\u0131m\u0131 ile Yenileme Ba\u015fvuru \u00dccreti (Tek Tasar\u0131m \u0130\u00e7in)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "940.00",
+      "category": "renewal",
+      "code": "tr-des-04.01.08",
+      "condition": null,
+      "currency": "TRY",
+      "label": "6 Ay S\u00fcre Uzat\u0131m\u0131 ile Yenileme Ba\u015fvuru \u00dccreti (\u0130lave Her Bir Tasar\u0131m \u0130\u00e7in)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "5520.00",
+      "category": "transfer",
+      "code": "tr-des-04.01.09",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Devir \u0130\u015flemi Kay\u0131t \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8540.00",
+      "category": "renewal",
+      "code": "tr-des-04.01.10",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Lisans Kay\u0131t ve Lisans Yenileme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "5180.00",
+      "category": "transfer",
+      "code": "tr-des-04.01.11",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Miras Yoluyla \u0130ntikal \u0130\u015flemi Kay\u0131t \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4760.00",
+      "category": "publication",
+      "code": "tr-des-04.01.12",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Rehin \u0130\u015flemleri Kay\u0131t ve Yay\u0131m \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5470.00",
+      "category": "transfer",
+      "code": "tr-des-04.01.14",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Birle\u015fme B\u00f6l\u00fcnme veya Ayni Sermaye Koyma Borcu Gibi Yap\u0131sal De\u011fi\u015fikliklere \u0130li\u015fkin \u0130\u015flem \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3420.00",
+      "category": "other",
+      "code": "tr-des-04.01.15",
+      "condition": null,
+      "currency": "TRY",
+      "label": "R\u00fc\u00e7han Hakk\u0131 Kay\u0131t \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2090.00",
+      "category": "other",
+      "code": "tr-des-04.01.16",
+      "condition": null,
+      "currency": "TRY",
+      "label": "Tescil Belgesi Sureti veya Sicil Sureti D\u00fczenleme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3330.00",
+      "category": "other",
+      "code": "tr-des-04.01.17",
+      "condition": null,
+      "currency": "TRY",
+      "label": "R\u00fc\u00e7han Hakk\u0131 Belgesi D\u00fczenleme \u00dccreti",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
+  "jurisdiction": "TR",
+  "key": "TR/TURKPATENT/design",
+  "notes": "5-year initial term renewable up to 25 years (Law 6769 Art. 69). Renewal FeeItems carry year=10. The 04.01.02 multi-design filing row publishes three sub-amounts (2nd design / 3rd-5th / 6th+) in a prose body; the parser splits these into three FeeItems with -d2 / -d3to5 / -d6plus code suffixes.",
+  "office_code": "TURKPATENT",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
+  "statutory_basis": "S\u0131nai M\u00fclkiyet Kanunu (Law 6769) Art. 188; Resm\u00ee Gazete 5. m\u00fckerrer 31-12-2025, B\u0130K/T\u00dcRKPATENT 2026/1 (Law 6769 Art. 188) (PDF: https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-37.pdf)."
+}

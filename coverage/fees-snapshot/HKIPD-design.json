@@ -1,0 +1,605 @@
+{
+  "currency": "HKD",
+  "effective_date": "2000-06-27",
+  "fees": [
+    {
+      "amount": "235",
+      "category": "filing",
+      "code": "hk-des-1-design-for-articles-not-forming-a-set-",
+      "condition": null,
+      "currency": "HKD",
+      "label": "1 design for articles not forming a set of articles (For each article to which the design is to be applied)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "315",
+      "category": "filing",
+      "code": "hk-des-1-design-for-articles-not-forming-a-set--paper",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "1 design for articles not forming a set of articles (For each article to which the design is to be applied)",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "470",
+      "category": "other",
+      "code": "hk-des-1-design-for-1-set-of-articles",
+      "condition": null,
+      "currency": "HKD",
+      "label": "1 design for 1 set of articles",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "630",
+      "category": "other",
+      "code": "hk-des-1-design-for-1-set-of-articles-paper",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "1 design for 1 set of articles",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "235",
+      "category": "filing",
+      "code": "hk-des-2-or-more-designs-for-articles-not-formi",
+      "condition": null,
+      "currency": "HKD",
+      "label": "2 or more designs for articles not forming a set of articles (only applicable to same class of articles, please refer to How to classify my articles ) \u2014 For the first article to which the first design",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "315",
+      "category": "filing",
+      "code": "hk-des-2-or-more-designs-for-articles-not-formi-paper",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "2 or more designs for articles not forming a set of articles (only applicable to same class of articles, please refer to How to classify my articles ) \u2014 For the first article to which the first design",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "175",
+      "category": "filing",
+      "code": "hk-des-2-or-more-designs-for-articles-not-formi-2",
+      "condition": null,
+      "currency": "HKD",
+      "label": "2 or more designs for articles not forming a set of articles (only applicable to same class of articles, please refer to How to classify my articles ) \u2014 For each other article to which any of the desi",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "235",
+      "category": "filing",
+      "code": "hk-des-2-or-more-designs-for-articles-not-formi-paper-2",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "2 or more designs for articles not forming a set of articles (only applicable to same class of articles, please refer to How to classify my articles ) \u2014 For each other article to which any of the desi",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "470",
+      "category": "other",
+      "code": "hk-des-2-or-more-designs-for-articles-forming-a",
+      "condition": null,
+      "currency": "HKD",
+      "label": "2 or more designs for articles forming a set of articles (only applicable to same class of articles, please refer to How to classify my articles ) \u2014 For the first design",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "630",
+      "category": "other",
+      "code": "hk-des-2-or-more-designs-for-articles-forming-a-paper",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "2 or more designs for articles forming a set of articles (only applicable to same class of articles, please refer to How to classify my articles ) \u2014 For the first design",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "355",
+      "category": "other",
+      "code": "hk-des-2-or-more-designs-for-articles-forming-a-2",
+      "condition": null,
+      "currency": "HKD",
+      "label": "2 or more designs for articles forming a set of articles (only applicable to same class of articles, please refer to How to classify my articles ) \u2014 For each other design",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "470",
+      "category": "other",
+      "code": "hk-des-2-or-more-designs-for-articles-forming-a-paper-2",
+      "condition": {
+        "description": "Paper-filed submission; e-filing is the default discounted rate.",
+        "per_unit": false,
+        "threshold": null,
+        "trigger": "paper_filing"
+      },
+      "currency": "HKD",
+      "label": "2 or more designs for articles forming a set of articles (only applicable to same class of articles, please refer to How to classify my articles ) \u2014 For each other design",
+      "notes": "Paper-filing rate.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "62",
+      "category": "publication",
+      "code": "hk-des-for-advertisement-in-the-official-journa",
+      "condition": null,
+      "currency": "HKD",
+      "label": "For advertisement in the official journal of the registration of a design (per design)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135",
+      "category": "other",
+      "code": "hk-des-request-for-amendment-of-application-oth",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for amendment of application (other than alteration of name, address, address for service or agent\u2019s address)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135",
+      "category": "other",
+      "code": "hk-des-correction-of-error-in-the-register-or-i",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Correction of error in the register or in filed documents (other than correction of address, address for service or agent\u2019s address)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "195",
+      "category": "other",
+      "code": "hk-des-request-for-reinstatement-of-application",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for reinstatement of application",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "310",
+      "category": "extension",
+      "code": "hk-des-application-for-extension-of-time",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for extension of time",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "470",
+      "category": "transfer",
+      "code": "hk-des-application-to-register-particulars-of-t",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application to register particulars of transactions affecting rights in registered designs",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "470",
+      "category": "transfer",
+      "code": "hk-des-notice-of-transactions-affecting-rights-",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Notice of transactions affecting rights in applications",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-des-application-to-cancel-claim-to-be-mortga",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application to cancel claim to be mortgagee or licensee",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "275",
+      "category": "cancellation",
+      "code": "hk-des-application-to-the-registrar-to-revoke-r",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application to the Registrar to revoke registration",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "cancellation",
+      "code": "hk-des-filing-of-order-declaration-or-certifica",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Filing of order, declaration or certificate of the court for revocation of registration or rectification of the register",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-des-notice-to-surrender-registration",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Notice to surrender registration",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "opposition",
+      "code": "hk-des-filing-of-notice-of-intention-to-oppose",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Filing of notice of intention to oppose",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "470",
+      "category": "opposition",
+      "code": "hk-des-filing-of-notice-of-opposition-or-counte",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Filing of notice of opposition or counter-statement",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135",
+      "category": "other",
+      "code": "hk-des-application-for-certified-copies-or-extr",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for certified copies or extracts",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5",
+      "category": "other",
+      "code": "hk-des-application-for-copies-or-extracts",
+      "condition": {
+        "description": "Per page.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "HKD",
+      "label": "Application for copies or extracts",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-des-request-for-information",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for information",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-des-request-for-inspection-of-document-or-re",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for inspection of document or register",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135",
+      "category": "other",
+      "code": "hk-des-request-for-certificate-signed-by-the-re",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for certificate signed by the Registrar of Designs",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "475",
+      "category": "renewal",
+      "code": "hk-des-application-for-renewal-of-a-design-regi",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for renewal of a design registration 1st 5-year extension",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "835",
+      "category": "renewal",
+      "code": "hk-des-2nd-5-year-extension",
+      "condition": null,
+      "currency": "HKD",
+      "label": "2nd 5-year extension",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "1410",
+      "category": "renewal",
+      "code": "hk-des-3rd-5-year-extension",
+      "condition": null,
+      "currency": "HKD",
+      "label": "3rd 5-year extension",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "2420",
+      "category": "renewal",
+      "code": "hk-des-4th-5-year-extension",
+      "condition": null,
+      "currency": "HKD",
+      "label": "4th 5-year extension",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "390",
+      "category": "late_fee",
+      "code": "hk-des-additional-fee-for-late-payment-of-renew",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Additional fee for late payment of renewal fee",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-des-request-for-alteration-of-name-address-a",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for alteration of name, address, address for service or agent\u2019s details",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-des-request-for-correction-of-address-addres",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for correction of address, address for service or agent\u2019s details",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Intellectual Property Department",
+  "jurisdiction": "HK",
+  "key": "HK/HKIPD/design",
+  "notes": "5-year initial registration term, renewable in 5-year extensions up to a 25-year maximum (Cap. 522 s.28). Renewal FeeItems are tagged by terminal year of the extension (1st 5-year extension \u2192 year=10, 2nd \u2192 15, 3rd \u2192 20, 4th \u2192 25). Filing-fee table multiplies on the number of designs / articles / set status; e-filing and paper-filing rates emit as separate FeeItems with FeeCondition(paper_filing) on the paper variant.",
+  "office_code": "HKIPD",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
+  "statutory_basis": "Registered Designs Rules (Cap. 522A) \u2014 promulgated under Registered Designs Ordinance Cap. 522. Amendments by subsidiary-legislation orders gazetted in the Hong Kong Government Gazette."
+}

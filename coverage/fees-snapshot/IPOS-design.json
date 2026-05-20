@@ -1,0 +1,405 @@
+{
+  "currency": "SGD",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "200",
+      "category": "deferment",
+      "code": "sg-des-d3-application-for-registration-of-a-design",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D3: Application for registration of a design under Section 11 of the ActRequest for deferment of publication.",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "deferment",
+      "code": "sg-des-d3-application-for-registration-of-a-design-v2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D3: Application for registration of a design under Section 11 of the ActRequest for deferment of publication.",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "filing",
+      "code": "sg-des-d5-application-to-amend-an-application-for",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D5: Application to amend an application for registration of a design under Section 15 of the Act",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "220",
+      "category": "renewal",
+      "code": "sg-des-d8-application-for-extension-of-period-of-r",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D8: Application for extension of period of registration of a design under Section 21 of the Act and paragraph 3(6) of the Schedule to the Act \u2013 \u2014 (a) for the first period of 5 years",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "330",
+      "category": "renewal",
+      "code": "sg-des-d8-application-for-extension-of-period-of-r-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D8: Application for extension of period of registration of a design under Section 21 of the Act and paragraph 3(6) of the Schedule to the Act \u2013 \u2014 (b) for the second period of 5 years",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "440",
+      "category": "renewal",
+      "code": "sg-des-d8-application-for-extension-of-period-of-r-3",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D8: Application for extension of period of registration of a design under Section 21 of the Act and paragraph 3(6) of the Schedule to the Act \u2013 \u2014 (c) for the third period of 5 years",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "550",
+      "category": "renewal",
+      "code": "sg-des-d8-application-for-extension-of-period-of-r-4",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D8: Application for extension of period of registration of a design under Section 21 of the Act and paragraph 3(6) of the Schedule to the Act \u2013 \u2014 (d) for the fourth period of 5 years",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "135",
+      "category": "filing",
+      "code": "sg-des-d8-application-for-restoration-of-registrat",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D8: Application for restoration of registration of a design removed from the Register under section 21(6) of the Act",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "sg-des-d8-late-application-to-extend-period-of-reg",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D8: Late application to extend period of registration of a design under Section 21(5) of, or paragraph 3(6) of the Schedule to, the Act",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400",
+      "category": "filing",
+      "code": "sg-des-d13-application-for-revocation-of-registrati",
+      "condition": null,
+      "currency": "SGD",
+      "label": "D13: Application for revocation of registration of a design",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "sg-des-cm4-request-for-correction-of-error",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM4: Request for correction of error",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25",
+      "category": "extension",
+      "code": "sg-des-cm5-request-for-extension-of-time-by-a-perso",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM5: Request for extension of time by a person or party regarding a particular period prescribed by the Rules or specified by the Registrar for doing any act or taking any proceedings in relation to any matter, other than inter partes proceedings (proceedings with notice) \u2014 (a) For first request",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "extension",
+      "code": "sg-des-cm5-request-for-extension-of-time-by-a-perso-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM5: Request for extension of time by a person or party regarding a particular period prescribed by the Rules or specified by the Registrar for doing any act or taking any proceedings in relation to any matter, other than inter partes proceedings (proceedings with notice) \u2014 (b) For second request",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "75",
+      "category": "extension",
+      "code": "sg-des-cm5-request-for-extension-of-time-by-a-perso-3",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM5: Request for extension of time by a person or party regarding a particular period prescribed by the Rules or specified by the Registrar for doing any act or taking any proceedings in relation to any matter, other than inter partes proceedings (proceedings with notice) \u2014 (c) third and subsequent request",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "sg-des-cm6-application-to-register-the-grant-amend",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM6: Application to register the grant, amendment or termination of a licence",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "sg-des-cm7-application-to-register-the-grant-amend",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM7: Application to register the grant, amendment or termination of any security interest",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "transfer",
+      "code": "sg-des-cm8-application-to-an-assignment-of-a-regist",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM8: Application to an assignment of a registered design or any right in it",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30",
+      "category": "other",
+      "code": "sg-des-cm10-request-for-online-file-inspection",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM10: Request for online file inspection",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "28",
+      "category": "other",
+      "code": "sg-des-cm12-request-for-certified-copy-of-an-entry-i",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM12: Request for certified copy of an entry in the Register or certified extract from the Register \u2014 (a) where the certified copy or extract or document is in soft copy",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "35",
+      "category": "other",
+      "code": "sg-des-cm12-request-for-certified-copy-of-an-entry-i-2",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM12: Request for certified copy of an entry in the Register or certified extract from the Register \u2014 (b)where the certified copy or extract or document is in hard copy",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "sg-des-cm13-request-for-reinstatement-of-application",
+      "condition": null,
+      "currency": "SGD",
+      "label": "CM13: Request for reinstatement of application, right or thing",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "appeal",
+      "code": "sg-des-hc1-hearing-and-decision",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC1: Hearing and decision",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "130",
+      "category": "extension",
+      "code": "sg-des-hc3-request-for-an-extension-of-time-by-a-pe",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC3: Request for an extension of time by a person or party regarding a particular period prescribed by the Rules or specified by the Registrar for doing any act or taking any proceedings, in relation to inter partes proceedings (proceedings with notice) Request for extension of period under rule 27(6) \u2014 (b) second or subsequent extension of that period",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "appeal",
+      "code": "sg-des-hc4-request-for-ex-parte-hearing-hearing-at",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC4: Request for ex parte hearing (hearing at which only the party making the request is present)",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "700",
+      "category": "other",
+      "code": "sg-des-hc5-request-for-grounds-of-decision",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC5: Request for grounds of decision",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "360",
+      "category": "opposition",
+      "code": "sg-des-hc6-filing-a-counter-statement",
+      "condition": null,
+      "currency": "SGD",
+      "label": "HC6: Filing a counter-statement",
+      "notes": null,
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Intellectual Property Office of Singapore (IPOS)",
+  "jurisdiction": "SG",
+  "key": "SG/IPOS/design",
+  "notes": "Initial 5-year term renewable to 15 years total in 5-year periods (RDA 2000 s.21). Renewal FeeItems carry year=5. D3 publishes two amounts in a single body (S$200 per design + S$40 per deferment request); the parser emits both with -v1 / -v2 disambiguating suffixes.",
+  "office_code": "IPOS",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
+  "statutory_basis": "Registered Designs Act 2000 (Singapore) + Registered Designs Rules (SSO SL/RDA2000-R1). Consolidated by Designs Circular 1/2025 (21 July 2025); two-phase implementation 2025-09-01 + 2026-04-01."
+}

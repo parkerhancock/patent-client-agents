@@ -1,0 +1,1665 @@
+{
+  "currency": "SEK",
+  "effective_date": "2025-03-15",
+  "fees": [
+    {
+      "amount": "3000",
+      "category": "filing",
+      "code": "se-pat-se-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-1: Filing fee Application fee: 500 SEK. Search fee: 2500 SEK.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "filing",
+      "code": "se-pat-se-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-2: Filing fee for international patent application entering national phase Application fee: 500 kr. Search fee: 2500 kr.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "excess_claims",
+      "code": "se-pat-se-3",
+      "condition": {
+        "description": "Per patent claim beyond the first 10 (Patentlagen ch.2 \u00a73).",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "claims_over"
+      },
+      "currency": "SEK",
+      "label": "SE-3: Additional fee for each patent claim beyond the first ten",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "se-pat-se-4",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-4: Additional fee for additional time limit to submit translation or transcript of pursued international application",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "other",
+      "code": "se-pat-se-5",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-5: Special additional fee Fee for a completed international patent application containing an invention that has not received international novelty examination or international preliminary patentabi",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "filing",
+      "code": "se-pat-se-6",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-6: Fee payable to the patent authority according to Chapter 10, Art. 11, 13-14 of the Patents Act (lack of unity of invention)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "other",
+      "code": "se-pat-se-7",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-7: Reinstatement fee Reinstatement fee for a dismissed patent application.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "grant",
+      "code": "se-pat-se-8",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-8: Fee for grant: Basic fee for publication",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "grant",
+      "code": "se-pat-se-9",
+      "condition": {
+        "description": "Per patent claim beyond the first 10 (Patentlagen ch.2 \u00a73).",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "claims_over"
+      },
+      "currency": "SEK",
+      "label": "SE-9: Fee for grant: Additional fee for patent claim Additional fee for each claim added after the application was filed if this means that the number of claims then exceeds those for which you have p",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2500",
+      "category": "search",
+      "code": "se-pat-se-18",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-18: Search fee for additional inventions Fee for additional inventions in applications wherein PRV has identified that the patent claims comprise two or more inventions that are independent of each",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "renewal",
+      "code": "se-pat-n-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-1: 1st annual fee (due together with 3rd annual fee)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "0",
+      "category": "renewal",
+      "code": "se-pat-n-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-2: 2nd annual fee (due together with 3rd annual fee)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "1600",
+      "category": "renewal",
+      "code": "se-pat-n-3",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-3: 3rd annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "1920",
+      "category": "late_fee",
+      "code": "se-pat-n-3-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-3: 3rd annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "1800",
+      "category": "renewal",
+      "code": "se-pat-n-4",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-4: 4th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "2160",
+      "category": "late_fee",
+      "code": "se-pat-n-4-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-4: 4th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "2000",
+      "category": "renewal",
+      "code": "se-pat-n-5",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-5: 5th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "2400",
+      "category": "late_fee",
+      "code": "se-pat-n-5-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-5: 5th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "2200",
+      "category": "renewal",
+      "code": "se-pat-n-6",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-6: 6th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "2640",
+      "category": "late_fee",
+      "code": "se-pat-n-6-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-6: 6th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "2400",
+      "category": "renewal",
+      "code": "se-pat-n-7",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-7: 7th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "2880",
+      "category": "late_fee",
+      "code": "se-pat-n-7-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-7: 7th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "2900",
+      "category": "renewal",
+      "code": "se-pat-n-8",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-8: 8th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "3480",
+      "category": "late_fee",
+      "code": "se-pat-n-8-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-8: 8th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "3200",
+      "category": "renewal",
+      "code": "se-pat-n-9",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-9: 9th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "3840",
+      "category": "late_fee",
+      "code": "se-pat-n-9-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-9: 9th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "3500",
+      "category": "renewal",
+      "code": "se-pat-n-10",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-10: 10th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "4200",
+      "category": "late_fee",
+      "code": "se-pat-n-10-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-10: 10th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "4000",
+      "category": "renewal",
+      "code": "se-pat-n-11",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-11: 11th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "4800",
+      "category": "late_fee",
+      "code": "se-pat-n-11-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-11: 11th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "4400",
+      "category": "renewal",
+      "code": "se-pat-n-12",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-12: 12th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "5280",
+      "category": "late_fee",
+      "code": "se-pat-n-12-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-12: 12th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "4900",
+      "category": "renewal",
+      "code": "se-pat-n-13",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-13: 13th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "5880",
+      "category": "late_fee",
+      "code": "se-pat-n-13-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-13: 13th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "5400",
+      "category": "renewal",
+      "code": "se-pat-n-14",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-14: 14th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "6480",
+      "category": "late_fee",
+      "code": "se-pat-n-14-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-14: 14th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "5800",
+      "category": "renewal",
+      "code": "se-pat-n-15",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-15: 15th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "6960",
+      "category": "late_fee",
+      "code": "se-pat-n-15-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-15: 15th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "6300",
+      "category": "renewal",
+      "code": "se-pat-n-16",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-16: 16th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "7560",
+      "category": "late_fee",
+      "code": "se-pat-n-16-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-16: 16th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "6700",
+      "category": "renewal",
+      "code": "se-pat-n-17",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-17: 17th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "8040",
+      "category": "late_fee",
+      "code": "se-pat-n-17-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-17: 17th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "7200",
+      "category": "renewal",
+      "code": "se-pat-n-18",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-18: 18th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "8640",
+      "category": "late_fee",
+      "code": "se-pat-n-18-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-18: 18th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "7600",
+      "category": "renewal",
+      "code": "se-pat-n-19",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-19: 19th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "9120",
+      "category": "late_fee",
+      "code": "se-pat-n-19-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-19: 19th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "8000",
+      "category": "renewal",
+      "code": "se-pat-n-20",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-20: 20th annual fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "9600",
+      "category": "late_fee",
+      "code": "se-pat-n-20-increased",
+      "condition": null,
+      "currency": "SEK",
+      "label": "N-20: 20th annual fee (increased / late surcharge)",
+      "notes": "Increased annuity (20% surcharge) for late payment under Patentlagen ch.4.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "2000",
+      "category": "other",
+      "code": "se-pat-nm-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NM-1: Fee for request for re-establishment of rights",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "transfer",
+      "code": "se-pat-nm-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NM-2: Fee for registration of pledge agreement",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "transfer",
+      "code": "se-pat-nm-3",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NM-3: Application for registration of new or changed patent holder",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "transfer",
+      "code": "se-pat-nm-4",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NM-4: Application for registration of licence",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "transfer",
+      "code": "se-pat-nm-5",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NM-5: Application for registration of change of address",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "other",
+      "code": "se-pat-se-10",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-10: Fee for request for re-establishment of rights",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "transfer",
+      "code": "se-pat-se-11",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-11: Application for registration of pledge according to chapter 14, Art. 3 of the Patents Act.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5450",
+      "category": "search",
+      "code": "se-pat-se-12",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-12: Fee for International Type Search (ITS) International Type Search (ITS) fee for a national patent application where the application fee has been paid to PRV.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8450",
+      "category": "search",
+      "code": "se-pat-se-13",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-13: Fee for International Type Search (ITS) ITS fee for a national patent application where the application fee has been paid to another Nordic patent office (not to PRV).",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8450",
+      "category": "search",
+      "code": "se-pat-se-14",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-14: Fee for International Type Search (ITS) Fee for International Type Search (ITS) in a patent application from a developing country",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8450",
+      "category": "search",
+      "code": "se-pat-se-15",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-15: Additional fee for International Type Search (ITS) Fee for examination of inventions independent of the first patent claim. The fee applies to each invention or group of unitary inventions.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "search",
+      "code": "se-pat-se-16",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-16: Additional fee for International Type Search (ITS) Fee for each patent claim in excess of ten where you have not already paid a fee to the PRV.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "publication",
+      "code": "se-pat-se-17",
+      "condition": null,
+      "currency": "SEK",
+      "label": "SE-17: Fee for publication, chapter 7, Art. 2 of the Patents Act.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10000",
+      "category": "other",
+      "code": "se-pat-nt-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NT-1: Fee for application for supplementary protection certificate (SPC)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20000",
+      "category": "renewal",
+      "code": "se-pat-nt-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NT-2: Annual fee for supplementary protection certificate (SPC)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "6000",
+      "category": "other",
+      "code": "se-pat-nt-3",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NT-3: Fee for application for an extension of the duration of a supplementary protection certificate (SPC)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8500",
+      "category": "cancellation",
+      "code": "se-pat-npb-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "NPB-1: Fee for request for patent limitation or revocation of a patent",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15680",
+      "category": "filing",
+      "code": "se-pat-pct-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-1: International filing fee Fee for applications containing fewer than 30 pages (only one page of each sheet may be used)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "180",
+      "category": "excess_pages",
+      "code": "se-pat-pct-2",
+      "condition": {
+        "description": "Per sheet beyond the first 30 (PCT Rule 15.2(b)).",
+        "per_unit": true,
+        "threshold": 30,
+        "trigger": "pages_over"
+      },
+      "currency": "SEK",
+      "label": "PCT-2: Additional fee for each additional sheet.",
+      "notes": "Per sheet.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2360",
+      "category": "filing",
+      "code": "se-pat-pct-3",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-3: Fee reduction when an international application is filed electronically in PDF format using Online filing - (eOLF/epoline, ePCT) For further information see our online services.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3540",
+      "category": "filing",
+      "code": "se-pat-pct-4",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-4: Fee reduction when an international application is filed electronically in XML format using Online filing - (eOLF/epoline, ePCT) For further information see our online services.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "se-pat-pct-5",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-5: If an international application is filed electronically and sequence listings meets the requirements specified in WIPO Standard ST.26 the sequence listings submitted in text format are not incl",
+      "notes": "Formula: As described",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "other",
+      "code": "se-pat-pct-6",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-6: Fee for request for re-establishment of priority in PCT cases",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1200",
+      "category": "filing",
+      "code": "se-pat-pct-7",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-7: Transmission fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "19950",
+      "category": "search",
+      "code": "se-pat-pct-8",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-8: Search fee Reduction of the fee due to the fact that the novelty examination may be based on a previous examination decision in an application used for priority. The examination notice must com",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2800",
+      "category": "examination",
+      "code": "se-pat-pct-9",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-9: Fee reduction Reduction of the fee if you refer in your application to the priority and examination certificate of a previous international application that has been re-examined by the European",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2800",
+      "category": "search",
+      "code": "se-pat-pct-10",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-10: Fee reduction \"Fee reduction if, in an application, priority and a search and examination report are claimed from a previous, equivalent international application which has undergone an intern",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "late_fee",
+      "code": "se-pat-pct-11",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-11: Late payment fee The late payment fee is 50% of the sum of the unpaid fees. The minimum amount is the forwarding fee, and the maximum amount is 50% of the international application fee.",
+      "notes": "Formula: 50% addition",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "19950",
+      "category": "examination",
+      "code": "se-pat-pct-12",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-12: Additional fee Additional fee for examination of inventions independent of the first patent claim. The fee applies to each invention or group of unitary inventions.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "19950",
+      "category": "search",
+      "code": "se-pat-pct-14",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-14: Supplementary International Search, PCT Rule 45 bis",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5000",
+      "category": "examination",
+      "code": "se-pat-pct-15",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-15: Fee for international preliminary patentability examination",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2360",
+      "category": "other",
+      "code": "se-pat-pct-16",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-16: Handling fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5000",
+      "category": "examination",
+      "code": "se-pat-pct-17",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-17: Additional fee Additional fee for examination of inventions independent of the first patent claim. The fee applies to each invention or group of unitary inventions.",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "late_fee",
+      "code": "se-pat-pct-18",
+      "condition": null,
+      "currency": "SEK",
+      "label": "PCT-18: Late payment fee The late payment fee is 50% of the sum of the unpaid fees. The minimum amount is 50% of the processing fee, and the maximum amount is twice the processing fee.",
+      "notes": "Formula: As described",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "publication",
+      "code": "se-pat-ep-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "EP-1: Basic fee for publication of translation of the granted European patent* The fee relates to the original patent, amended scope, correction of a published translation or limitation of a patent gr",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900",
+      "category": "other",
+      "code": "se-pat-ep-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "EP-2: Fee for amendment of translation of a European patent not yet published by PRV",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "other",
+      "code": "se-pat-ep-3",
+      "condition": null,
+      "currency": "SEK",
+      "label": "EP-3: Fee for public notification of translation of patent claims in a published European patent application or correction of such translation (provisional protection)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "se-pat-b-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "B-1: Certified information from the patent application diary and the patent register",
+      "notes": "Per each.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "se-pat-b-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "B-2: Certificate of pledge",
+      "notes": "Per each.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "other",
+      "code": "se-pat-b-3",
+      "condition": null,
+      "currency": "SEK",
+      "label": "B-3: Patent diary certificate",
+      "notes": "Per each.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "other",
+      "code": "se-pat-b-4",
+      "condition": null,
+      "currency": "SEK",
+      "label": "B-4: Priority document, also applies to ordering via DAS",
+      "notes": "Per each.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "15000",
+      "category": "search",
+      "code": "se-pat-kt-1",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-1: Novelty search",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "19000",
+      "category": "search",
+      "code": "se-pat-kt-2",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-2: Novelty search - express delivery",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4200",
+      "category": "search",
+      "code": "se-pat-kt-3",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-3: Personal start kit Patents",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1700",
+      "category": "search",
+      "code": "se-pat-kt-4",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-4: Patent portfolio, company/inventor (per name searched)",
+      "notes": "Per search.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "28500",
+      "category": "search",
+      "code": "se-pat-kt-5",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-5: PCT commission",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-6",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-6: Prior Art",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-7",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-7: Freedom-to-operate search",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-8",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-8: Technical search",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-9",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-9: Validity search",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-10",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-10: Preliminary patentability examination",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-11",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-11: Sequence searches",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-12",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-12: Citation searches",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-13",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-13: Patent monitoring",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-14",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-14: Patent family search with analysis",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "search",
+      "code": "se-pat-kt-15",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-15: Patent mapping",
+      "notes": "Formula: By quotation",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1700",
+      "category": "search",
+      "code": "se-pat-kt-16",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-16: Hourly price for consultancy services comprising searches in patent-documentation and technical literature Minimum 3 hours. Administrative Fee will be added per search. \\ n- Account customers: ",
+      "notes": "Per hour.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "search",
+      "code": "se-pat-kt-18",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-18: Price per item, for copies and printing from books, magazines and other library material which is not a public document",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "325",
+      "category": "search",
+      "code": "se-pat-kt-19",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-19: Words and expressions in the patent system",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30",
+      "category": "search",
+      "code": "se-pat-kt-20",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-20: Postage fee ( invoice customer)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20",
+      "category": "search",
+      "code": "se-pat-kt-21",
+      "condition": null,
+      "currency": "SEK",
+      "label": "KT-21: Postage fee ( deposit account customer)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Patent- och registreringsverket (PRV)",
+  "jurisdiction": "SE",
+  "key": "SE/PRV/patent",
+  "notes": "PRV patent schedule. Annuity ladder (years 1-20) emits both regular and Increased-fee rows (20% surcharge for late payment under Patentlagen ch.4 \u00a747). Years 1 + 2 publish SEK 0 'due together with 3rd annual fee'. SE-3 per-claim surcharge (SEK 150 per claim beyond 10) emits as excess_claims with classes_over threshold=10. PCT-2 per-sheet surcharge (SEK 180 per sheet) emits as excess_pages with pages_over threshold=30. SPC fees (NT-*) cover the Swedish portion under EU Reg. 469/2009. v1 GAPS: KT-6..KT-15 consultancy rows priced 'By quotation' are skipped (no verifiable amount); PCT-5 / PCT-18 prose-formula amounts emit amount=0 with formula preserved in notes. Sweden has no tiered entity discounts \u2014 all rows use EntityTier.none.",
+  "office_code": "PRV",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
+  "statutory_basis": "Patents Act 1967 (Patentlagen 1967:837) + Patent Decree (Patentkung\u00f6relsen 1967:838) + PRVFS fee orders. Fee changes effective 2025-03-15 (PRV news 2025-02-05); grant fee normalised to SEK 3000 effective 2025-12-01; PCT fees adjusted 2026-01-01 and 2026-04-01 for currency drift."
+}

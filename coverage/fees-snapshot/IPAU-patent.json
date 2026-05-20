@@ -1,0 +1,420 @@
+{
+  "currency": "AUD",
+  "effective_date": "2024-10-01",
+  "fees": [
+    {
+      "amount": "100",
+      "category": "filing",
+      "code": "au-provisional-pat-provisional-patent-application",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Provisional patent application",
+      "notes": "IP Australia section: Provisional patent application fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1100",
+      "category": "search",
+      "code": "au-provisional-pat-international-type-search-request-optional",
+      "condition": null,
+      "currency": "AUD",
+      "label": "International-type search request (optional)",
+      "notes": "IP Australia section: Provisional patent application fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400",
+      "category": "filing",
+      "code": "au-standard-patent-standard-patent-application",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent application",
+      "notes": "IP Australia section: Standard patent application fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1100",
+      "category": "search",
+      "code": "au-standard-patent-preliminary-search-and-opinion-pso-optional",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Preliminary search and opinion (PSO) (optional)",
+      "notes": "IP Australia section: Standard patent application fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "filing",
+      "code": "au-postal-applicat-provisional-patent-application",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Provisional patent application",
+      "notes": "IP Australia section: Postal application fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600",
+      "category": "filing",
+      "code": "au-postal-applicat-standard-patent-application",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent application",
+      "notes": "IP Australia section: Postal application fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "extension",
+      "code": "au-extension-of-ti-error-or-omission-by-the-person-concerned-or-by-th",
+      "condition": {
+        "description": "Per month (or part-month) of extension/late period.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "AUD",
+      "label": "Error or omission by the person concerned or by their agent",
+      "notes": "IP Australia section: Extension of time",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "extension",
+      "code": "au-extension-of-ti-circumstances-beyond-the-control-of-the-person-con",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Circumstances beyond the control of the person concerned",
+      "notes": "IP Australia section: Extension of time",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "extension",
+      "code": "au-extension-of-ti-circumstances-where-due-care-has-been-taken",
+      "condition": {
+        "description": "Per month (or part-month) of extension/late period.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "AUD",
+      "label": "Circumstances where due care has been taken",
+      "notes": "IP Australia section: Extension of time",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "550",
+      "category": "examination",
+      "code": "au-fees-examination-request",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Examination request",
+      "notes": "IP Australia section: Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "examination",
+      "code": "au-voluntary-amend-amend-standard-patent-specification-before-a-reque",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Amend standard patent specification before a request for examination is made",
+      "notes": "IP Australia section: Voluntary amendments to your application",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "excess_claims",
+      "code": "au-voluntary-amend-examination-of-more-than-20-but-fewer-than-31-clai",
+      "condition": {
+        "description": "IP Australia per-claim surcharge above threshold.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "AUD",
+      "label": "Examination of more than 20 but fewer than 31 claims",
+      "notes": "IP Australia section: Voluntary amendments to your application",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "excess_claims",
+      "code": "au-voluntary-amend-examination-of-more-than-30-claims",
+      "condition": {
+        "description": "IP Australia per-claim surcharge above threshold.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "AUD",
+      "label": "Examination of more than 30 claims",
+      "notes": "IP Australia section: Voluntary amendments to your application",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "grant",
+      "code": "au-fees-standard-patent-acceptance-mandatory-up-to-20-clai",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent acceptance (mandatory) up to 20 claims",
+      "notes": "IP Australia section: Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "examination",
+      "code": "au-fees-if-the-specification-was-proposed-to-contain-21-to",
+      "condition": {
+        "description": "IP Australia per-claim surcharge above threshold.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "AUD",
+      "label": "If the specification was proposed to contain 21 to 30 claims during the examination process",
+      "notes": "IP Australia section: Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "examination",
+      "code": "au-fees-if-the-specification-was-proposed-to-contain-31-or",
+      "condition": {
+        "description": "IP Australia per-claim surcharge above threshold.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "AUD",
+      "label": "If the specification was proposed to contain 31 or more claims during the examination process",
+      "notes": "IP Australia section: Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "excess_claims",
+      "code": "au-fees-if-the-specification-contains-21-to-30-claims-at-a",
+      "condition": {
+        "description": "IP Australia per-claim surcharge above threshold.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "AUD",
+      "label": "If the specification contains 21 to 30 claims at acceptance",
+      "notes": "IP Australia section: Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "excess_claims",
+      "code": "au-fees-if-the-specification-contains-31-or-more-claims-at",
+      "condition": {
+        "description": "IP Australia per-claim surcharge above threshold.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "AUD",
+      "label": "If the specification contains 31 or more claims at acceptance",
+      "notes": "IP Australia section: Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "grant",
+      "code": "au-voluntary-amend-amend-standard-patent-specification-after-acceptan",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Amend standard patent specification after acceptance",
+      "notes": "IP Australia section: Voluntary amendments to your application",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "other",
+      "code": "au-voluntary-amend-increase-claims-in-the-complete-specification-to-a",
+      "condition": {
+        "description": "IP Australia per-claim surcharge above threshold.",
+        "per_unit": true,
+        "threshold": 20,
+        "trigger": "claims_over"
+      },
+      "currency": "AUD",
+      "label": "Increase claims in the complete specification to a total over 20 claims",
+      "notes": "IP Australia section: Voluntary amendments to your application",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "800",
+      "category": "ptab",
+      "code": "au-re-examination--re-examination-request",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Re-examination request",
+      "notes": "IP Australia section: Re-examination request",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "au-costs-of-docume-copy-of-1-3-documents-from-the-same-file",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Copy of 1-3 documents from the same file",
+      "notes": "IP Australia section: Costs of documents and certificates",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "other",
+      "code": "au-costs-of-docume-copy-of-4-documents-from-the-same-file",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Copy of 4+ documents from the same file",
+      "notes": "IP Australia section: Costs of documents and certificates",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20",
+      "category": "other",
+      "code": "au-costs-of-docume-expedited-post",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Expedited post",
+      "notes": "IP Australia section: Costs of documents and certificates",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "IP Australia",
+  "jurisdiction": "AU",
+  "key": "AU/IPAU/patent",
+  "notes": "Covers IP Australia's operational fees (filing, search, examination, acceptance, RCE-equivalent, opposition, extension-of-time, document requests). v1 GAP: annual renewal fees (years 5-20) are NOT included \u2014 they live in Schedule 7 of the Patents Regulations 1991 and are not published on the IP Australia fees page. A follow-up scraper can pull the regulation from the Federal Register of Legislation. Fees revised 2024-10-01 per the four-yearly fee review; PCT-fee AUD equivalents updated 2026-01-01.",
+  "office_code": "IPAU",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
+  "statutory_basis": "Patents Regulations 1991 (Cth) Schedule 7; fee review every 4 years, last full review effective 2024-10-01."
+}

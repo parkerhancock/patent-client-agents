@@ -1,0 +1,465 @@
+{
+  "currency": "JPY",
+  "effective_date": "2022-04-01",
+  "fees": [
+    {
+      "amount": "16000",
+      "category": "filing",
+      "code": "jp-des-design-application-1",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design application \u203b1",
+      "notes": "JPO heading: 1. Application",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5100",
+      "category": "other",
+      "code": "jp-des-request-for-secret-design-2",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Request for secret design \u203b2",
+      "notes": "JPO heading: 1. Application",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8500",
+      "category": "renewal",
+      "code": "jp-des-1-3rd-year-annually-y1",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 1-3",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "8500",
+      "category": "renewal",
+      "code": "jp-des-1-3rd-year-annually-y2",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 1-3",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "8500",
+      "category": "renewal",
+      "code": "jp-des-1-3rd-year-annually-y3",
+      "condition": null,
+      "currency": "JPY",
+      "label": "1-3rd year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 1-3",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y4",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y5",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y6",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y7",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y8",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y9",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y10",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y11",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y12",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y13",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y14",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-4-15th-year-annually-y15",
+      "condition": null,
+      "currency": "JPY",
+      "label": "4-15th year: annually,",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; year band 4-15",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y16",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 16 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-20th year: annually,\u203b1' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y17",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 17 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-20th year: annually,\u203b1' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y18",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 18 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-20th year: annually,\u203b1' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y19",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 19 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-20th year: annually,\u203b1' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y20",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 20 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-20th year: annually,\u203b1' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y21",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 21 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-25th year: annually,\u203b2' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y22",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 22 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-25th year: annually,\u203b2' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 22
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y23",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 23 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-25th year: annually,\u203b2' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 23
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y24",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 24 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-25th year: annually,\u203b2' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 24
+    },
+    {
+      "amount": "16900",
+      "category": "renewal",
+      "code": "jp-des-renewal-extension-y25",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Design annuity year 25 (extension cohort)",
+      "notes": "JPO heading: 3. Annual fee / Registration fee; cohort marker '4-25th year: annually,\u203b2' extends the 4-15 rate for newer cohorts. Applies to applications filed on or after April 1, 2007 (extension to year 20) and on or after April 1, 2020 (extension to year 25).",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": 25
+    },
+    {
+      "amount": "55000",
+      "category": "appeal",
+      "code": "jp-des-appeal",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Appeal",
+      "notes": "JPO heading: 4. Opposition/ Appeal / Trial",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55000",
+      "category": "trial",
+      "code": "jp-des-trial-retrial",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Trial / Retrial",
+      "notes": "JPO heading: 4. Opposition/ Appeal / Trial",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "9000",
+      "category": "transfer",
+      "code": "jp-des-transfer-of-right",
+      "condition": null,
+      "currency": "JPY",
+      "label": "Registration of transfer of right \u2014 Designs",
+      "notes": "JPO heading: 6. After Registration",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Japan Patent Office",
+  "jurisdiction": "JP",
+  "key": "JP/JPO/design",
+  "notes": "Design annuities published in two bands: 1-3rd year at \u00a58,500/year and 4-15th year at \u00a516,900/year. The scraper expands the 1-3 band across years 1-3 and the 4-15 band across years 4-15 (\u00a516,900/year applies to all current designs). Design term cohorts: applications filed before April 1, 2007 expire at year 15; applications filed 2007-04-01 through 2020-03-31 expire at year 20; applications filed on or after April 1, 2020 expire at year 25. The JPO page publishes empty 4-20 / 4-25 marker rows that share the \u00a516,900/year rate \u2014 those rows carry no fee value and are skipped by the parser; the year-25 cap is the statutory maximum. Design 'Request for secret design' (\u00a55,100) is a voluntary publication-deferral request, categorized as 'other' since FeeCategory.deferment is reserved for Singapore-style design deferment.",
+  "office_code": "JPO",
+  "retrieved_at": "2026-05-20",
+  "right": "design",
+  "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
+  "statutory_basis": "Design Act of Japan (Act No. 125 of 1959). Fees set under Article 67 + the Order for Enforcement of the Design Act."
+}

@@ -1,0 +1,1275 @@
+{
+  "currency": "TWD",
+  "effective_date": "2024-05-01",
+  "fees": [
+    {
+      "amount": "3500",
+      "category": "filing",
+      "code": "tipo-patent-1",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) Filing of an invention application (2) Conversion of a utility model application into an invention application (3) Division of an invention application (4) ",
+      "notes": "TIPO Schedule of Patent Fees row 1. Source row: '(1) Filing of an invention application (2) Conversion of a utility model application into an invention application (3) Division of an invention application (4) Re-examination of a design application'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3000",
+      "category": "filing",
+      "code": "tipo-patent-2",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) Filing of a utility model application (2) Conversion of an invention application or a design application into a utility model application (3) Division of a ",
+      "notes": "TIPO Schedule of Patent Fees row 2. Source row: '(1) Filing of a utility model application (2) Conversion of an invention application or a design application into a utility model application (3) Division of a utility model application (4) Filing of a design application (5) Filing of a derivative design application (6) Conversion of an application into a design application or a derivative design application (7) Filing of a divisional design application'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "8000",
+      "category": "cancellation",
+      "code": "tipo-patent-3",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Invalidation against a design patent",
+      "notes": "TIPO Schedule of Patent Fees row 3. Source row: 'Invalidation against a design patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "7000",
+      "category": "examination",
+      "code": "tipo-patent-4",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) Substantive examination of an invention application (whose description, claims, abstract, and drawings in total do not exceed 50 pages and the number of cla",
+      "notes": "TIPO Schedule of Patent Fees row 4. Source row: '(1) Substantive examination of an invention application (whose description, claims, abstract, and drawings in total do not exceed 50 pages and the number of claims is less than 10) (2) Re-examination of an invention application (whose description, claims, abstract, and drawings in total do not exceed 50 pages and the number of claims is less than 10)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "800",
+      "category": "excess_claims",
+      "code": "tipo-patent-5",
+      "condition": {
+        "description": "TIPO per-claim surcharge over 10 claims.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "claims_over"
+      },
+      "currency": "TWD",
+      "label": "(1) Additional fee for substantive examination or re-examination of an invention application whose total number of claims exceed 10 (a fee of NT$800 is required",
+      "notes": "TIPO Schedule of Patent Fees row 5. Source row: '(1) Additional fee for substantive examination or re-examination of an invention application whose total number of claims exceed 10 (a fee of NT$800 is required for each additional claim) (2) Additional fee for Invalidation against an invention patent or a utility model patent. A fee of NT$800 is required for each claim'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "500",
+      "category": "excess_pages",
+      "code": "tipo-patent-6",
+      "condition": {
+        "description": "TIPO per-50-page surcharge over 50 pages (each addl 50 pages counted as 50).",
+        "per_unit": true,
+        "threshold": 50,
+        "trigger": "pages_over"
+      },
+      "currency": "TWD",
+      "label": "Additional fee for substantive examination or re-examination of an invention whose description, claims, abstract, and drawings exceed 50 pages (a NT$500 fee is ",
+      "notes": "TIPO Schedule of Patent Fees row 6. Source row: 'Additional fee for substantive examination or re-examination of an invention whose description, claims, abstract, and drawings exceed 50 pages (a NT$500 fee is required for each addition of 50 pages; additional pages less than 50 shall be counted as 50)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5000",
+      "category": "examination",
+      "code": "tipo-patent-7",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) A technical evaluation report of a utility model patent NT$5,000 whose total number of claims is less than 10 (2) Inspection of conducted experiments or sub",
+      "notes": "TIPO Schedule of Patent Fees row 7. Source row: '(1) A technical evaluation report of a utility model patent NT$5,000 whose total number of claims is less than 10 (2) Inspection of conducted experiments or submitted models or samples (3) Invalidation against an invention patent or a utility model patent (applicable where the invalidation is on a claim-by-claim basis)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600",
+      "category": "excess_claims",
+      "code": "tipo-patent-8",
+      "condition": {
+        "description": "TIPO per-claim surcharge over 10 claims.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "claims_over"
+      },
+      "currency": "TWD",
+      "label": "Each additional claim in a technical evaluation report of a utility model patent (whose total number of claims exceeds 10)",
+      "notes": "TIPO Schedule of Patent Fees row 8. Source row: 'Each additional claim in a technical evaluation report of a utility model patent (whose total number of claims exceeds 10)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "10000",
+      "category": "cancellation",
+      "code": "tipo-patent-9",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Invalidation against an invention patent (applicable to patent term extension, where the patentee is not the owner of the ight to apply for an invention patent ",
+      "notes": "TIPO Schedule of Patent Fees row 9. Source row: 'Invalidation against an invention patent (applicable to patent term extension, where the patentee is not the owner of the ight to apply for an invention patent , or where the invention patent runs counter to the reciprocity principle)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "9000",
+      "category": "cancellation",
+      "code": "tipo-patent-10",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Invalidation against a utility model patent (applicable where the patentee is not the owner of the right to apply for a utility model patent , or where the util",
+      "notes": "TIPO Schedule of Patent Fees row 10. Source row: 'Invalidation against a utility model patent (applicable where the patentee is not the owner of the right to apply for a utility model patent , or where the utility model patent runs counter to the reciprocity principle)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "cancellation",
+      "code": "tipo-patent-11",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) Adding supplementary reasons or evidence to invalidation (2) Post-grant amendment to description, claims, or drawings of an invention patent (3) Post-grant ",
+      "notes": "TIPO Schedule of Patent Fees row 11. Source row: '(1) Adding supplementary reasons or evidence to invalidation (2) Post-grant amendment to description, claims, or drawings of an invention patent (3) Post-grant amendment to description or drawings of a design patent (4) Post-grant amendment to description, claims, or drawings of a utility model patent (consolidated procedures for invalidation and post-grant amendment) (5) Reinstatement of priority claim (6) Correction of translation errors'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "other",
+      "code": "tipo-patent-12",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) Early laying-open of an invention application (2) An interview (3) Post-grant amendment to description, claims, or drawings of a utility model patent",
+      "notes": "TIPO Schedule of Patent Fees row 12. Source row: '(1) Early laying-open of an invention application (2) An interview (3) Post-grant amendment to description, claims, or drawings of a utility model patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "examination",
+      "code": "tipo-patent-13",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Accelerated examination of an invention application based on any of the following circumstances (1) the invention application is essential to commercial exploit",
+      "notes": "TIPO Schedule of Patent Fees row 13. Source row: 'Accelerated examination of an invention application based on any of the following circumstances (1) the invention application is essential to commercial exploitation (2) the invention application is eligible under the TW-Support Using the PPH Agreement (TW-SUPA) Examination Pilot Program (3) the invention application is related to green technology'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "transfer",
+      "code": "tipo-patent-14",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) Recordation of changes to the applicant\u2019s name, seal, or signature (2) Recordation of changes to the inventor, creator or designer, or the name thereof (3) ",
+      "notes": "TIPO Schedule of Patent Fees row 14. Source row: '(1) Recordation of changes to the applicant\u2019s name, seal, or signature (2) Recordation of changes to the inventor, creator or designer, or the name thereof (3) Change of patent agent (4) Other changes to recordation of licensing, pledge, or trust of a patent right The fee is the same for more than two changes made simultaneously'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100000",
+      "category": "petition",
+      "code": "tipo-patent-15",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) Compulsory license of a patent (2) Repeal of compulsory license of a patent",
+      "notes": "TIPO Schedule of Patent Fees row 15. Source row: '(1) Compulsory license of a patent (2) Repeal of compulsory license of a patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "transfer",
+      "code": "tipo-patent-16",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) Recordation of assignment or inheritance of the right to apply for a patent (2) Recordation of assignment or inheritance of the patent (3) Recordation of li",
+      "notes": "TIPO Schedule of Patent Fees row 16. Source row: '(1) Recordation of assignment or inheritance of the right to apply for a patent (2) Recordation of assignment or inheritance of the patent (3) Recordation of licensing or sublicensing of patent right (4) Deletion of licensing recordation (5) Recordation of pledge establishment of patent right (6) Deletion of pledge establishment recordation of patent right (7) Recordation of trust of patent right (8) Deletion of trust recordation of patent right (9) Recordation of attribution of trusted patent right'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2500",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-1-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 1",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 1
+    },
+    {
+      "amount": "1700",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-1-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 1",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 1
+    },
+    {
+      "amount": "2500",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-2-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 2",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 2
+    },
+    {
+      "amount": "1700",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-2-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 2",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 2
+    },
+    {
+      "amount": "2500",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-3-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 3",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "1700",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-3-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 3",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "2500",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-1-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 1",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 1
+    },
+    {
+      "amount": "1700",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-1-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 1",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 1
+    },
+    {
+      "amount": "2500",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-2-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 2",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 2
+    },
+    {
+      "amount": "1700",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-2-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 2",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 2
+    },
+    {
+      "amount": "2500",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-3-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 3",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "1700",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-3-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 3",
+      "notes": "TIPO Schedule of Patent Fees row 17. Source row: 'Annuity for a granted invention patent or a granted utility model patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "5000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-4-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 4",
+      "notes": "TIPO Schedule of Patent Fees row 19. Source row: '(1) Annuity for a granted invention patent (4th-6th year) (2) Annuity for prolonged term of an invention patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "3800",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-4-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 4",
+      "notes": "TIPO Schedule of Patent Fees row 19. Source row: '(1) Annuity for a granted invention patent (4th-6th year) (2) Annuity for prolonged term of an invention patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "5000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-5-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 5",
+      "notes": "TIPO Schedule of Patent Fees row 19. Source row: '(1) Annuity for a granted invention patent (4th-6th year) (2) Annuity for prolonged term of an invention patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 5
+    },
+    {
+      "amount": "3800",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-5-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 5",
+      "notes": "TIPO Schedule of Patent Fees row 19. Source row: '(1) Annuity for a granted invention patent (4th-6th year) (2) Annuity for prolonged term of an invention patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 5
+    },
+    {
+      "amount": "5000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-6-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 6",
+      "notes": "TIPO Schedule of Patent Fees row 19. Source row: '(1) Annuity for a granted invention patent (4th-6th year) (2) Annuity for prolonged term of an invention patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 6
+    },
+    {
+      "amount": "3800",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-6-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 6",
+      "notes": "TIPO Schedule of Patent Fees row 19. Source row: '(1) Annuity for a granted invention patent (4th-6th year) (2) Annuity for prolonged term of an invention patent'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 6
+    },
+    {
+      "amount": "8000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-7-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 7",
+      "notes": "TIPO Schedule of Patent Fees row 21. Source row: 'Annuity for a granted invention patent (7th-9th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 7
+    },
+    {
+      "amount": "8000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-8-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 8",
+      "notes": "TIPO Schedule of Patent Fees row 21. Source row: 'Annuity for a granted invention patent (7th-9th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 8
+    },
+    {
+      "amount": "8000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-9-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 9",
+      "notes": "TIPO Schedule of Patent Fees row 21. Source row: 'Annuity for a granted invention patent (7th-9th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 9
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-10-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 10",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 10
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-11-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 11",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 11
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-12-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 12",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 12
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-13-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 13",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 13
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-14-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 14",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 14
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-15-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 15",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 15
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-16-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 16",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 16
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-17-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 17",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 17
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-18-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 18",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 18
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-19-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 19",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 19
+    },
+    {
+      "amount": "16000",
+      "category": "renewal",
+      "code": "tipo-annuity-invention-20-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted invention patent, year 20",
+      "notes": "TIPO Schedule of Patent Fees row 22. Source row: 'Annuity for a granted invention patent (10th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 20
+    },
+    {
+      "amount": "4000",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-4-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 4",
+      "notes": "TIPO Schedule of Patent Fees row 23. Source row: 'Annuity for a granted utility model patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "2800",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-4-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 4",
+      "notes": "TIPO Schedule of Patent Fees row 23. Source row: 'Annuity for a granted utility model patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "4000",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-5-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 5",
+      "notes": "TIPO Schedule of Patent Fees row 23. Source row: 'Annuity for a granted utility model patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 5
+    },
+    {
+      "amount": "2800",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-5-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 5",
+      "notes": "TIPO Schedule of Patent Fees row 23. Source row: 'Annuity for a granted utility model patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 5
+    },
+    {
+      "amount": "4000",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-6-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 6",
+      "notes": "TIPO Schedule of Patent Fees row 23. Source row: 'Annuity for a granted utility model patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 6
+    },
+    {
+      "amount": "2800",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-6-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 6",
+      "notes": "TIPO Schedule of Patent Fees row 23. Source row: 'Annuity for a granted utility model patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 6
+    },
+    {
+      "amount": "8000",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-7-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 7",
+      "notes": "TIPO Schedule of Patent Fees row 25. Source row: 'Annuity for a granted utility model patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 7
+    },
+    {
+      "amount": "8000",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-8-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 8",
+      "notes": "TIPO Schedule of Patent Fees row 25. Source row: 'Annuity for a granted utility model patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 8
+    },
+    {
+      "amount": "8000",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-9-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 9",
+      "notes": "TIPO Schedule of Patent Fees row 25. Source row: 'Annuity for a granted utility model patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 9
+    },
+    {
+      "amount": "8000",
+      "category": "renewal",
+      "code": "tipo-annuity-utility-model-10-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted utility model patent, year 10",
+      "notes": "TIPO Schedule of Patent Fees row 25. Source row: 'Annuity for a granted utility model patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 10
+    },
+    {
+      "amount": "800",
+      "category": "renewal",
+      "code": "tipo-annuity-design-1-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 1",
+      "notes": "TIPO Schedule of Patent Fees row 26. Source row: 'Annuity for a granted design patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 1
+    },
+    {
+      "amount": "0",
+      "category": "renewal",
+      "code": "tipo-annuity-design-1-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 1",
+      "notes": "TIPO Schedule of Patent Fees row 26. Source row: 'Annuity for a granted design patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 1
+    },
+    {
+      "amount": "800",
+      "category": "renewal",
+      "code": "tipo-annuity-design-2-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 2",
+      "notes": "TIPO Schedule of Patent Fees row 26. Source row: 'Annuity for a granted design patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 2
+    },
+    {
+      "amount": "0",
+      "category": "renewal",
+      "code": "tipo-annuity-design-2-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 2",
+      "notes": "TIPO Schedule of Patent Fees row 26. Source row: 'Annuity for a granted design patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 2
+    },
+    {
+      "amount": "800",
+      "category": "renewal",
+      "code": "tipo-annuity-design-3-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 3",
+      "notes": "TIPO Schedule of Patent Fees row 26. Source row: 'Annuity for a granted design patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "0",
+      "category": "renewal",
+      "code": "tipo-annuity-design-3-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 3",
+      "notes": "TIPO Schedule of Patent Fees row 26. Source row: 'Annuity for a granted design patent (1st-3rd year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "2000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-4-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 4",
+      "notes": "TIPO Schedule of Patent Fees row 28. Source row: 'Annuity for a granted design patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "800",
+      "category": "renewal",
+      "code": "tipo-annuity-design-4-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 4",
+      "notes": "TIPO Schedule of Patent Fees row 28. Source row: 'Annuity for a granted design patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "2000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-5-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 5",
+      "notes": "TIPO Schedule of Patent Fees row 28. Source row: 'Annuity for a granted design patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 5
+    },
+    {
+      "amount": "800",
+      "category": "renewal",
+      "code": "tipo-annuity-design-5-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 5",
+      "notes": "TIPO Schedule of Patent Fees row 28. Source row: 'Annuity for a granted design patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 5
+    },
+    {
+      "amount": "2000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-6-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 6",
+      "notes": "TIPO Schedule of Patent Fees row 28. Source row: 'Annuity for a granted design patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 6
+    },
+    {
+      "amount": "800",
+      "category": "renewal",
+      "code": "tipo-annuity-design-6-small",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 6",
+      "notes": "TIPO Schedule of Patent Fees row 28. Source row: 'Annuity for a granted design patent (4th-6th year)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "small",
+      "year": 6
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-7-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 7",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 7
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-8-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 8",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 8
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-9-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 9",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 9
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-10-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 10",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 10
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-11-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 11",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 11
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-12-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 12",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 12
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-13-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 13",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 13
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-14-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 14",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 14
+    },
+    {
+      "amount": "3000",
+      "category": "renewal",
+      "code": "tipo-annuity-design-15-large",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Annuity for granted design patent, year 15",
+      "notes": "TIPO Schedule of Patent Fees row 30. Source row: 'Annuity for a granted design patent (7th year and beyond)'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "large",
+      "year": 15
+    },
+    {
+      "amount": "1000",
+      "category": "other",
+      "code": "tipo-patent-31",
+      "condition": null,
+      "currency": "TWD",
+      "label": "(1) A patent certificate (2) A certified copy of a document",
+      "notes": "TIPO Schedule of Patent Fees row 31. Source row: '(1) A patent certificate (2) A certified copy of a document'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600",
+      "category": "other",
+      "code": "tipo-patent-32",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Re-issuance or replacement of a patent certificate",
+      "notes": "TIPO Schedule of Patent Fees row 32. Source row: 'Re-issuance or replacement of a patent certificate'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1500",
+      "category": "transfer",
+      "code": "tipo-patent-33",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Issuance, re-issuance, or replacement of a patent attorney license",
+      "notes": "TIPO Schedule of Patent Fees row 33. Source row: 'Issuance, re-issuance, or replacement of a patent attorney license'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1500",
+      "category": "transfer",
+      "code": "tipo-patent-34",
+      "condition": null,
+      "currency": "TWD",
+      "label": "Issuance, re-issuance, or replacement of a patent agent license",
+      "notes": "TIPO Schedule of Patent Fees row 34. Source row: 'Issuance, re-issuance, or replacement of a patent agent license'",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Taiwan Intellectual Property Office",
+  "jurisdiction": "TW",
+  "key": "TW/TIPO/patent",
+  "notes": "TIPO covers three patent right-types under one office: invention (20-yr term), utility model (10-yr term), and design (15-yr term). Annuity rows are expanded per-year, and the small-tier discount (natural persons / schools / SMEs) is emitted as a sibling row for the three years where it applies (1-3, 4-6, plus design 1-3 which goes to NT$0). Non-annuity rows are emitted at EntityTier.none since the schedule does not publish a small-tier discount for procedural fees.",
+  "office_code": "TIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
+  "statutory_basis": "Patent Act (\u5c08\u5229\u6cd5) + Patent Fee Regulations issued by TIPO. Schedule of Patent Fees published on the TIPO English site."
+}

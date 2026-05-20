@@ -1,0 +1,2330 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-05-20",
+  "fees": [
+    {
+      "amount": "285.00",
+      "category": "filing",
+      "code": "001",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Filing fee - EP direct \u2014 not online",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135.00",
+      "category": "filing",
+      "code": "001",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Filing fee - EP direct \u2014 online",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1595.00",
+      "category": "other",
+      "code": "002",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for a European search \u2014 Supplementary search for applications filed before 01.07.2005",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1595.00",
+      "category": "other",
+      "code": "002",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for a European search \u2014 Applications filed on/after 01.07.2005",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1885.00",
+      "category": "other",
+      "code": "003",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for an international search",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1485.00",
+      "category": "other",
+      "code": "004",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for an international-type search \u2014 first filings",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2320.00",
+      "category": "other",
+      "code": "004",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for an international-type search \u2014 all other cases",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "designation",
+      "code": "005",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Designation fee \u2014 For each State designated (max. 7x) for applications filed before 01.04.2009",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "720.00",
+      "category": "designation",
+      "code": "005",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Designation fee \u2014 For all contracting States designated for applications filed on/after 01.04.2009",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2240.00",
+      "category": "examination",
+      "code": "006",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Examination fee \u2014 for international applications without a supplementary European search report",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2010.00",
+      "category": "examination",
+      "code": "006",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Examination fee \u2014 for other applications",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1135.00",
+      "category": "grant",
+      "code": "007",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for grant and printing (not more than 35 pages) or fee for grant including fee for publication",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "19.00",
+      "category": "grant",
+      "code": "008",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Additional printing fee for 36th and each subsequent page",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "880.00",
+      "category": "opposition",
+      "code": "010",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Opposition fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2015.00",
+      "category": "appeal",
+      "code": "011",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for appeal \u2014 for an appeal filed by a natural person or an entity referred to in Rule 7a(2)(a)-(d) EPC",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2925.00",
+      "category": "appeal",
+      "code": "011",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for appeal \u2014 for an appeal filed by a person other than those referred to in Rule 7a(2)(a)-(d) EPC",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "790.00",
+      "category": "petition",
+      "code": "013",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for re-establishment, reinstatement, restoration (EPC, PCT)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0.00",
+      "category": "other",
+      "code": "014",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Conversion fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "290.00",
+      "category": "excess_claims",
+      "code": "015",
+      "condition": {
+        "description": "EPO charges per claim from the 16th onwards.",
+        "per_unit": true,
+        "threshold": 15,
+        "trigger": "claims_over"
+      },
+      "currency": "EUR",
+      "label": "Claims fee \u2014 for the 16th and each subsequent claim to the limit of 50",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "720.00",
+      "category": "excess_claims",
+      "code": "015",
+      "condition": {
+        "description": "EPO higher-tier per-claim fee from the 51st onwards.",
+        "per_unit": true,
+        "threshold": 50,
+        "trigger": "claims_over"
+      },
+      "currency": "EUR",
+      "label": "Claims fee \u2014 For the 51st and each subsequent claim",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "290.00",
+      "category": "excess_claims",
+      "code": "016",
+      "condition": {
+        "description": "EPO charges per claim from the 16th onwards.",
+        "per_unit": true,
+        "threshold": 15,
+        "trigger": "claims_over"
+      },
+      "currency": "EUR",
+      "label": "Claims fee in accordance with R. 71(4) \u2014 for the 16th and each subsequent claim to the limit of 50",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "720.00",
+      "category": "excess_claims",
+      "code": "016",
+      "condition": {
+        "description": "EPO higher-tier per-claim fee from the 51st onwards.",
+        "per_unit": true,
+        "threshold": 50,
+        "trigger": "claims_over"
+      },
+      "currency": "EUR",
+      "label": "Claims fee in accordance with R. 71(4) \u2014 For the 51st and each subsequent claim",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "95.00",
+      "category": "opposition",
+      "code": "017",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for the request of a decision on the fixing of costs by the opposition division (Rule 88(3) EPC)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "160.00",
+      "category": "other",
+      "code": "019",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Transmittal fee for an international application",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "285.00",
+      "category": "filing",
+      "code": "020",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Filing fee - entry EP-phase \u2014 not online",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "135.00",
+      "category": "filing",
+      "code": "020",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Filing fee - entry EP-phase \u2014 online",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2010.00",
+      "category": "other",
+      "code": "021",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for preliminary examination of int. application",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "transfer",
+      "code": "022",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Registration of transfer",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "transfer",
+      "code": "023",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Registration or cancellation of licences and other rights",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125.00",
+      "category": "other",
+      "code": "029",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Certified copy (application, priority document, patent certificate, other documents)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "725.00",
+      "category": "renewal",
+      "code": "033",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 3rd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "885.00",
+      "category": "renewal",
+      "code": "034",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 4th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "1050.00",
+      "category": "renewal",
+      "code": "035",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 5th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "1215.00",
+      "category": "renewal",
+      "code": "036",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 6th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "1375.00",
+      "category": "renewal",
+      "code": "037",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 7th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "1540.00",
+      "category": "renewal",
+      "code": "038",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 8th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "1700.00",
+      "category": "renewal",
+      "code": "039",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 9th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "040",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 10th year (constant from 10th year on)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "041",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 11th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "042",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 12th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "043",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 13th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "044",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 14th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "045",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 15th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "046",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 16th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "047",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 17th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "048",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 18th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "049",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 19th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "1865.00",
+      "category": "renewal",
+      "code": "050",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 20th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "4790.00",
+      "category": "other",
+      "code": "060",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for a technical opinion",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1070.00",
+      "category": "other",
+      "code": "062",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Protest fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "714.00",
+      "category": "other",
+      "code": "063",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Late payment fee (R. 16bis.2 PCT), maximum amount",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "430.00",
+      "category": "other",
+      "code": "064",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Late payment fee (R. 58bis.2 PCT)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280.00",
+      "category": "other",
+      "code": "066",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for late furnishing of sequence listings (R. 13ter.1, 13ter.2 PCT)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280.00",
+      "category": "other",
+      "code": "067",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for late furnishing of sequence listing (R. 30(3) EPC)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1070.00",
+      "category": "other",
+      "code": "069",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Review fee for a supplementary international search",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "362.50",
+      "category": "late_fee",
+      "code": "093",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 3rd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "442.50",
+      "category": "late_fee",
+      "code": "094",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 4th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "525.00",
+      "category": "late_fee",
+      "code": "095",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 5th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "607.50",
+      "category": "late_fee",
+      "code": "096",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 6th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "687.50",
+      "category": "late_fee",
+      "code": "097",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 7th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "770.00",
+      "category": "late_fee",
+      "code": "098",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 8th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "850.00",
+      "category": "late_fee",
+      "code": "099",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 9th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "100",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 10th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "101",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 11th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "102",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 12th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "103",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 13th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "104",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 14th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "105",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 15th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "106",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 16th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "107",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 17th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "108",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 18th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "109",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 19th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "932.50",
+      "category": "late_fee",
+      "code": "110",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 20th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "3570.00",
+      "category": "petition",
+      "code": "111",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for petition for review",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "315.00",
+      "category": "late_fee",
+      "code": "121",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for further processing (late performance of acts R. 71(3))",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "315.00",
+      "category": "late_fee",
+      "code": "122",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for further processing (non fee related cases)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0.00",
+      "category": "late_fee",
+      "code": "123",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for further processing (late payment of a fee - 50% of the relevant fee )",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1425.00",
+      "category": "other",
+      "code": "131",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Limitation fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "645.00",
+      "category": "other",
+      "code": "141",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Revocation fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "16.00",
+      "category": "other",
+      "code": "222",
+      "condition": null,
+      "currency": "EUR",
+      "label": "PCT charge per sheet in excess of 30",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "215.00",
+      "category": "other",
+      "code": "224",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Handling fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1428.00",
+      "category": "filing",
+      "code": "225",
+      "condition": null,
+      "currency": "EUR",
+      "label": "International filing fee",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "107.00",
+      "category": "other",
+      "code": "316",
+      "condition": null,
+      "currency": "EUR",
+      "label": "PCT reduction (PDF request and specification)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "215.00",
+      "category": "other",
+      "code": "318",
+      "condition": null,
+      "currency": "EUR",
+      "label": "PCT reduction (XML request / PDF specification)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "322.00",
+      "category": "other",
+      "code": "319",
+      "condition": null,
+      "currency": "EUR",
+      "label": "PCT reduction (XML request and specification)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "51.00",
+      "category": "other",
+      "code": "400",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Surcharge for extension fees",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "102.00",
+      "category": "other",
+      "code": "403",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Extension fee for Latvia (LV) (EPC Contracting State as from 1.7.2005)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "102.00",
+      "category": "other",
+      "code": "404",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Extension fee for Albania (AL) (EPC Contracting State as from 1.5.2010)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "102.00",
+      "category": "other",
+      "code": "406",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Extension fee for North Macedonia (MK) (EPC Contracting State as from 1.1.2009)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "102.00",
+      "category": "other",
+      "code": "407",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Extension fee for Croatia (HR) (EPC Contracting State as from 1. 1. 2008)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "102.00",
+      "category": "other",
+      "code": "408",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Extension fee for Bosnia and Herzegovina (BA)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "102.00",
+      "category": "other",
+      "code": "409",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Extension fee for Serbia (RS) ( filing date as of 04.06.2006-30.09.2010)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "102.00",
+      "category": "other",
+      "code": "410",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Extension fee for Montenegro (ME) (EPC Contracting State as from 1.10.2022)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "240.00",
+      "category": "other",
+      "code": "420",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Validation fee for Morocco (MA)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "other",
+      "code": "421",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Validation fee for the Republic of Moldova (MD)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "180.00",
+      "category": "other",
+      "code": "422",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Validation fee for Tunisia (TN)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "180.00",
+      "category": "other",
+      "code": "423",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Validation fee for Cambodia (KH)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200.00",
+      "category": "other",
+      "code": "424",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Validation fee for Georgia (GE)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "180.00",
+      "category": "other",
+      "code": "425",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Validation fee for Lao PDR (LA)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "120.00",
+      "category": "other",
+      "code": "450",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Surcharge on the validation fee for Morocco (MA)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "other",
+      "code": "451",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Surcharge on the validation fee for the Republic of Moldova (MD)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "90.00",
+      "category": "other",
+      "code": "452",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Surcharge on the validation fee for Tunisia (TN)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "90.00",
+      "category": "other",
+      "code": "453",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Surcharge on the validation fee for Cambodia (KH)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100.00",
+      "category": "other",
+      "code": "454",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Surcharge on the validation fee for Georgia (GE)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "90.00",
+      "category": "other",
+      "code": "455",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Surcharge on the validation fee for Lao PDR (LA)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "17.00",
+      "category": "filing",
+      "code": "501",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Additional filing fee for the 36th and each subsequent page",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "17.00",
+      "category": "filing",
+      "code": "520",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Additional filing fee for the 36th and each subsequent page - entry into EP phase",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "235.00",
+      "category": "other",
+      "code": "552",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for divisional 2nd generation",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "480.00",
+      "category": "other",
+      "code": "553",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for divisional 3rd generation",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "715.00",
+      "category": "other",
+      "code": "554",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for divisional 4th generation",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "955.00",
+      "category": "other",
+      "code": "555",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for divisional 5th or subsequent generation",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "750.00",
+      "category": "other",
+      "code": "701",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Additional fee R 10(4) UPR",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "790.00",
+      "category": "petition",
+      "code": "713",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Fee for re-establishment of rights",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "35.00",
+      "category": "renewal",
+      "code": "732",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 2nd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "105.00",
+      "category": "renewal",
+      "code": "733",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 3rd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "145.00",
+      "category": "renewal",
+      "code": "734",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 4th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "315.00",
+      "category": "renewal",
+      "code": "735",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 5th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "475.00",
+      "category": "renewal",
+      "code": "736",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 6th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "630.00",
+      "category": "renewal",
+      "code": "737",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 7th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "815.00",
+      "category": "renewal",
+      "code": "738",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 8th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "990.00",
+      "category": "renewal",
+      "code": "739",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 9th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "1175.00",
+      "category": "renewal",
+      "code": "740",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 10th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1460.00",
+      "category": "renewal",
+      "code": "741",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 11th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "1775.00",
+      "category": "renewal",
+      "code": "742",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 12th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "2105.00",
+      "category": "renewal",
+      "code": "743",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 13th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "2455.00",
+      "category": "renewal",
+      "code": "744",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 14th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "2830.00",
+      "category": "renewal",
+      "code": "745",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 15th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "3240.00",
+      "category": "renewal",
+      "code": "746",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 16th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "3640.00",
+      "category": "renewal",
+      "code": "747",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 17th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "4055.00",
+      "category": "renewal",
+      "code": "748",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 18th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "4455.00",
+      "category": "renewal",
+      "code": "749",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 19th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "4855.00",
+      "category": "renewal",
+      "code": "750",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 20th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "17.50",
+      "category": "late_fee",
+      "code": "752",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 2nd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "52.50",
+      "category": "late_fee",
+      "code": "753",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 3rd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "72.50",
+      "category": "late_fee",
+      "code": "754",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 4th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "157.50",
+      "category": "late_fee",
+      "code": "755",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 5th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "237.50",
+      "category": "late_fee",
+      "code": "756",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 6th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "315.00",
+      "category": "late_fee",
+      "code": "757",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 7th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "407.50",
+      "category": "late_fee",
+      "code": "758",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 8th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "495.00",
+      "category": "late_fee",
+      "code": "759",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 9th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "587.50",
+      "category": "late_fee",
+      "code": "760",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 10th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "730.00",
+      "category": "late_fee",
+      "code": "761",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 11th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "887.50",
+      "category": "late_fee",
+      "code": "762",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 12th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "1052.50",
+      "category": "late_fee",
+      "code": "763",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 13th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "1227.50",
+      "category": "late_fee",
+      "code": "764",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 14th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "1415.00",
+      "category": "late_fee",
+      "code": "765",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 15th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "1620.00",
+      "category": "late_fee",
+      "code": "766",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 16th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "1820.00",
+      "category": "late_fee",
+      "code": "767",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 17th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "2027.50",
+      "category": "late_fee",
+      "code": "768",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 18th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "2227.50",
+      "category": "late_fee",
+      "code": "769",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 19th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "2427.50",
+      "category": "late_fee",
+      "code": "770",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Add. fee for renewal fee 20th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "0.00",
+      "category": "other",
+      "code": "771",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Reimbursement of reduction of renewal fees",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "17.00",
+      "category": "other",
+      "code": "999",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Insignificant amount Art. 12 RFees",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/applying/fees",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "European Patent Office",
+  "jurisdiction": "EP",
+  "key": "EP/EPO/patent",
+  "notes": "Sourced from the EPO Schedule-of-Fees SPA's backing BFF (https://fees.apps.epo.org/prod/bff/api/fees). The BFF is undocumented but stable. Renewal years 2-20 covered by codes 732-750; the parallel 752-770 series is the 'additional fee' (late-payment surcharge) for the same year. Codes 100-110 are additional fees for the IP5 sharing renewal calculation. Amounts converted from European notation ('1.595,00' \u2192 1595.00).",
+  "office_code": "EPO",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.epo.org/en/applying/fees",
+  "statutory_basis": "Rules relating to Fees, EPC Implementing Regulations; set by EPO Administrative Council (CA/D decisions)."
+}

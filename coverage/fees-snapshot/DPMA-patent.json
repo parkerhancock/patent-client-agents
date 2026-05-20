@@ -1,0 +1,1410 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-05-20",
+  "fees": [
+    {
+      "amount": "40",
+      "category": "filing",
+      "code": "311 000",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- containing up to ten patent claims",
+      "notes": "DPMA fee code 311 000; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "20",
+      "category": "excess_claims",
+      "code": "311 050",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- containing more than ten patent claims: fee 311 000 plus",
+      "notes": "DPMA fee code 311 050; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "filing",
+      "code": "311 150",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- containing up to ten patent claims",
+      "notes": "DPMA fee code 311 150; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "30",
+      "category": "excess_claims",
+      "code": "311 160",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- containing more than ten patent claims: fee 311 150 plus",
+      "notes": "DPMA fee code 311 160; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "search",
+      "code": "311 200",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Search (section 43 of the Patent Act)",
+      "notes": "DPMA fee code 311 200; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "examination",
+      "code": "311 300",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- when a request under section 43 has already been filed",
+      "notes": "DPMA fee code 311 300; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350",
+      "category": "examination",
+      "code": "311 400",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- when a request under section 43 has not been filed",
+      "notes": "DPMA fee code 311 400; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "extension",
+      "code": "311 610",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- if the request is filed after the request for grant of a supplementary protection certificate",
+      "notes": "DPMA fee code 311 610; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "maintenance",
+      "code": "312 030",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 3rd year of the patent",
+      "notes": "DPMA fee code 312 030; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "35",
+      "category": "other",
+      "code": "312 031",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 031; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 032",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 032; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "70",
+      "category": "maintenance",
+      "code": "312 040",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 4th year of the patent",
+      "notes": "DPMA fee code 312 040; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "35",
+      "category": "other",
+      "code": "312 041",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 041; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 042",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 042; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "maintenance",
+      "code": "312 050",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 5th year of the patent",
+      "notes": "DPMA fee code 312 050; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "50",
+      "category": "other",
+      "code": "312 051",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 051; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 052",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 052; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "maintenance",
+      "code": "312 060",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 6th year of the patent",
+      "notes": "DPMA fee code 312 060; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "75",
+      "category": "other",
+      "code": "312 061",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 061; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 062",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 062; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "maintenance",
+      "code": "312 070",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 7th year of the patent",
+      "notes": "DPMA fee code 312 070; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "105",
+      "category": "other",
+      "code": "312 071",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 071; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 072",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 072; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280",
+      "category": "maintenance",
+      "code": "312 080",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 8th year of the patent",
+      "notes": "DPMA fee code 312 080; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "140",
+      "category": "other",
+      "code": "312 081",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 081; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 082",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 082; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350",
+      "category": "maintenance",
+      "code": "312 090",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 9th year of the patent",
+      "notes": "DPMA fee code 312 090; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "175",
+      "category": "other",
+      "code": "312 091",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 091; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 092",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 092; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "430",
+      "category": "maintenance",
+      "code": "312 100",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 10th year of the patent",
+      "notes": "DPMA fee code 312 100; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "215",
+      "category": "other",
+      "code": "312 101",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 101; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 102",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 102; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "540",
+      "category": "maintenance",
+      "code": "312 110",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 11th year of the patent",
+      "notes": "DPMA fee code 312 110; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "270",
+      "category": "other",
+      "code": "312 111",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 111; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 112",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 112; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "680",
+      "category": "maintenance",
+      "code": "312 120",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 12th year of the patent",
+      "notes": "DPMA fee code 312 120; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "340",
+      "category": "other",
+      "code": "312 121",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 121; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 122",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 122; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "830",
+      "category": "maintenance",
+      "code": "312 130",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 13th year of the patent",
+      "notes": "DPMA fee code 312 130; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "415",
+      "category": "other",
+      "code": "312 131",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 131; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 132",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 132; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "980",
+      "category": "maintenance",
+      "code": "312 140",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 14th year of the patent",
+      "notes": "DPMA fee code 312 140; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "490",
+      "category": "other",
+      "code": "312 141",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 141; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 142",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 142; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1130",
+      "category": "maintenance",
+      "code": "312 150",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 15th year of the patent",
+      "notes": "DPMA fee code 312 150; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "565",
+      "category": "other",
+      "code": "312 151",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 151; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 152",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 152; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1310",
+      "category": "maintenance",
+      "code": "312 160",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 16th year of the patent",
+      "notes": "DPMA fee code 312 160; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "655",
+      "category": "other",
+      "code": "312 161",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 161; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 162",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 162; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1490",
+      "category": "maintenance",
+      "code": "312 170",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 17th year of the patent",
+      "notes": "DPMA fee code 312 170; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "745",
+      "category": "other",
+      "code": "312 171",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 171; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 172",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 172; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1670",
+      "category": "maintenance",
+      "code": "312 180",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 18th year of the patent",
+      "notes": "DPMA fee code 312 180; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "835",
+      "category": "other",
+      "code": "312 181",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 181; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 182",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 182; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1840",
+      "category": "maintenance",
+      "code": "312 190",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 19th year of the patent",
+      "notes": "DPMA fee code 312 190; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "920",
+      "category": "other",
+      "code": "312 191",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 191; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 192",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 192; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2030",
+      "category": "maintenance",
+      "code": "312 200",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 20th year of the patent",
+      "notes": "DPMA fee code 312 200; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "1015",
+      "category": "other",
+      "code": "312 201",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 201; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 202",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 202; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "210",
+      "category": "other",
+      "code": "312 205",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Reduced fees for numbers 312 030 to 312 050",
+      "notes": "DPMA fee code 312 205; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "105",
+      "category": "other",
+      "code": "312 206",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 206; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 207",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 207; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2920",
+      "category": "other",
+      "code": "312 210",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 1st year of supplementary protection",
+      "notes": "DPMA fee code 312 210; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1460",
+      "category": "other",
+      "code": "312 211",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 211; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 212",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 212; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3240",
+      "category": "other",
+      "code": "312 220",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 2nd year of supplementary protection",
+      "notes": "DPMA fee code 312 220; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1620",
+      "category": "other",
+      "code": "312 221",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 221; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 222",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 222; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3620",
+      "category": "other",
+      "code": "312 230",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 3rd year of supplementary protection",
+      "notes": "DPMA fee code 312 230; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1810",
+      "category": "other",
+      "code": "312 231",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 231; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 232",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 232; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4020",
+      "category": "other",
+      "code": "312 240",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 4th year of supplementary protection",
+      "notes": "DPMA fee code 312 240; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2010",
+      "category": "other",
+      "code": "312 241",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 241; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 242",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 242; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4540",
+      "category": "other",
+      "code": "312 250",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 5th year of supplementary protection",
+      "notes": "DPMA fee code 312 250; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2270",
+      "category": "other",
+      "code": "312 251",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to license (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 251; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 252",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 252; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4980",
+      "category": "other",
+      "code": "312 260",
+      "condition": null,
+      "currency": "EUR",
+      "label": "for the 6th year of supplementary protection",
+      "notes": "DPMA fee code 312 260; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2490",
+      "category": "other",
+      "code": "312 261",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- in case of declaration of willingness to licence (section 23 (1) of the Patent Act)",
+      "notes": "DPMA fee code 312 261; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "late_fee",
+      "code": "312 262",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- surcharge for late payment (section 7 (1) sentence 2)",
+      "notes": "DPMA fee code 312 262; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "100",
+      "category": "late_fee",
+      "code": "313 000",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- Further processing (section 123a of the Patent Act)",
+      "notes": "DPMA fee code 313 000; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "313 200",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- Assessment procedure (section 23 (4) of the Patent Act)",
+      "notes": "DPMA fee code 313 200; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "120",
+      "category": "other",
+      "code": "313 300",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- Procedure for alteration of the assessment (section 23 (5) of the Patent Act)",
+      "notes": "DPMA fee code 313 300; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25",
+      "category": "transfer",
+      "code": "313 400",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- Entry of grant of licence (section 30 (4) sentence 1 of the Patent Act)",
+      "notes": "DPMA fee code 313 400; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25",
+      "category": "transfer",
+      "code": "313 500",
+      "condition": null,
+      "currency": "EUR",
+      "label": "- Cancellation of the entry of such grant (section 30 (4) sentence 3 of the Patent Act)",
+      "notes": "DPMA fee code 313 500; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "opposition",
+      "code": "313 600",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Opposition proceedings (section 59 (1) and (2) of the Patent Act)",
+      "notes": "DPMA fee code 313 600; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "120",
+      "category": "ptab",
+      "code": "313 700",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Procedure to limit or revoke the patent (section 64 of the Patent Act)",
+      "notes": "DPMA fee code 313 700; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "examination",
+      "code": "314 200",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Search regarding an extended patent (section 11 of the Extension Act)",
+      "notes": "DPMA fee code 314 200; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "extension",
+      "code": "315 100",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Request for rectification of duration",
+      "notes": "DPMA fee code 315 100; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "extension",
+      "code": "315 200",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Request for revocation of extension of duration",
+      "notes": "DPMA fee code 315 200; PatKostG / Schedule of Fees",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Deutsches Patent- und Markenamt (DPMA)",
+  "jurisdiction": "DE",
+  "key": "DE/DPMA/patent",
+  "notes": "Scraped from the DPMA cost-info PDF (form A 9510.1) because the English HTML fee page only lists years 3-6 of the annual fee schedule and punts to the PDF for years 7-20. PDF parsing uses pypdf with regex extraction of the uniform '<6-digit code> <description> ... <amount>' row format. Fee numbers in the 31x range are patents; UM (32x), TM (33x), design (34x) live in the same PDF but under separate routes when implemented. Half-rate 'willingness to license' variants are included as separate maintenance rows with the same year.",
+  "office_code": "DPMA",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.dpma.de/english/services/fees/patents/index.html",
+  "statutory_basis": "Patentkostengesetz (PatKostG) and the accompanying ordinance setting fee amounts; published as form A 9510.1."
+}

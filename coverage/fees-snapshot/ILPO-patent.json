@@ -1,0 +1,715 @@
+{
+  "currency": "ILS",
+  "effective_date": "2026-01-01",
+  "fees": [
+    {
+      "amount": "2402",
+      "category": "filing",
+      "code": "il-pat-1",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Filing of a patent application (Patents Law \u00a711(a)) \u2014 first 50 claims",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1441",
+      "category": "filing",
+      "code": "il-pat-1-small",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Filing of a patent application (Patents Law \u00a711(a)) \u2014 first 50 claims",
+      "notes": "Small-entity 40% reduction: applies to a *first* patent / design application for the invention, where the applicant is an individual, a company/partnership with turnover under NIS 10 million in the preceding year, a recognized higher-education institution under \u00a7 9 of the Council for Higher Education Law 5718-1958, or a wholly-owned technology-transfer subsidiary thereof.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "616",
+      "category": "excess_claims",
+      "code": "il-pat-2",
+      "condition": {
+        "description": "Per claim over 50.",
+        "per_unit": true,
+        "threshold": 50,
+        "trigger": "claims_over"
+      },
+      "currency": "ILS",
+      "label": "Per claim from the 51st onward (national application)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "excess_pages",
+      "code": "il-pat-3",
+      "condition": {
+        "description": "Per 50-page increment over 100 pages (excluding genetic sequence listings).",
+        "per_unit": true,
+        "threshold": 100,
+        "trigger": "pages_over"
+      },
+      "currency": "ILS",
+      "label": "Per 50 pages from the 101st onward (national application; excludes genetic sequence listings)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "616",
+      "category": "excess_claims",
+      "code": "il-pat-4",
+      "condition": {
+        "description": "Per claim over 50 (PCT national-phase).",
+        "per_unit": true,
+        "threshold": 50,
+        "trigger": "claims_over"
+      },
+      "currency": "ILS",
+      "label": "Per claim from the 51st onward (PCT national-phase, designating Israel)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "excess_pages",
+      "code": "il-pat-5",
+      "condition": {
+        "description": "Per 50-page increment over 100 pages (PCT national-phase, excluding genetic sequence listings).",
+        "per_unit": true,
+        "threshold": 100,
+        "trigger": "pages_over"
+      },
+      "currency": "ILS",
+      "label": "Per 50 pages from the 101st onward (PCT national-phase; excludes genetic sequence listings)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2101",
+      "category": "search",
+      "code": "il-pat-6",
+      "condition": null,
+      "currency": "ILS",
+      "label": "International-format search report (Patents Reg. 35\u05d0)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280",
+      "category": "petition",
+      "code": "il-pat-7",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Petition for patent cancellation or register correction (\u00a7\u00a773(a), 170(a), 171)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280",
+      "category": "other",
+      "code": "il-pat-7-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Submission of an amended document that postpones the filing date (\u00a723)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280",
+      "category": "transfer",
+      "code": "il-pat-7-3",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Recordation, modification, or cancellation of a right in a patent or invention (\u00a7169)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280",
+      "category": "other",
+      "code": "il-pat-7-4",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Correction of a typographical error in the specification (\u00a769)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "357",
+      "category": "examination",
+      "code": "il-pat-8-1",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Expedited examination request under \u00a719A(d), per \u00a719A(a3)-(6)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "11910",
+      "category": "examination",
+      "code": "il-pat-8-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Expedited examination request under \u00a719A(d), per \u00a719A(c)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "834",
+      "category": "examination",
+      "code": "il-pat-8-1-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "On-site expedited examination under \u00a719A(e), per \u00a719A(a3)-(6)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "5955",
+      "category": "examination",
+      "code": "il-pat-8-2-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "On-site expedited examination under \u00a719A(e), per \u00a719A(c)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "240",
+      "category": "extension",
+      "code": "il-pat-9",
+      "condition": {
+        "description": "Per month or part thereof.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "ILS",
+      "label": "Extension of time (\u00a7\u00a748D(c), 164; Regs. 5(a), 87(c)) \u2014 per month or part thereof",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "841",
+      "category": "grant",
+      "code": "il-pat-10",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Allowance fee (Reg. 52) \u2014 first-application small-entity discount available",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "505",
+      "category": "grant",
+      "code": "il-pat-10-small",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Allowance fee (Reg. 52) \u2014 first-application small-entity discount available",
+      "notes": "Small-entity 40% reduction: applies to a *first* patent / design application for the invention, where the applicant is an individual, a company/partnership with turnover under NIS 10 million in the preceding year, a recognized higher-education institution under \u00a7 9 of the Council for Higher Education Law 5718-1958, or a wholly-owned technology-transfer subsidiary thereof.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "2402",
+      "category": "opposition",
+      "code": "il-pat-11",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Filing in inter-partes proceeding (\u00a7\u00a725, 30, 61, 67, 73(c), 117, 124(b), 133, 170(c))",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "841",
+      "category": "appeal",
+      "code": "il-pat-11-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Hearing before the Registrar (\u00a7159) or appeal (\u00a7161); Regs. 42, 46(a)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "841",
+      "category": "other",
+      "code": "il-pat-11-3",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Specification correction (\u00a7\u00a729, 65)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "841",
+      "category": "other",
+      "code": "il-pat-11-4",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Restoration of a lapsed patent (\u00a759)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "961",
+      "category": "renewal",
+      "code": "il-pat-12-1",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Renewal payment within 3 months of grant \u2014 covers years 1-6",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "1921",
+      "category": "renewal",
+      "code": "il-pat-12-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Renewal payment before end of year 6 \u2014 covers years 7-10",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "2882",
+      "category": "renewal",
+      "code": "il-pat-12-3",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Renewal payment before end of year 10 \u2014 covers years 11-14",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "4803",
+      "category": "renewal",
+      "code": "il-pat-12-4",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Renewal payment before end of year 14 \u2014 covers years 15-18",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "6725",
+      "category": "renewal",
+      "code": "il-pat-12-5",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Renewal payment before end of year 18 \u2014 covers years 19-20",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "14410",
+      "category": "renewal",
+      "code": "il-pat-12-6",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Whole-period renewal (entire 20-year term, paid within 3 months of grant)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "2402",
+      "category": "filing",
+      "code": "il-pat-13",
+      "condition": null,
+      "currency": "ILS",
+      "label": "National-phase entry fee (PCT, \u00a748D(a))",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4203",
+      "category": "search",
+      "code": "il-pat-14",
+      "condition": null,
+      "currency": "ILS",
+      "label": "ISA search fee (Reg. 6(d) of PCT Implementation Regs)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "656",
+      "category": "other",
+      "code": "il-pat-15",
+      "condition": null,
+      "currency": "ILS",
+      "label": "ISA transmittal fee (Reg. 6(e) of PCT Implementation Regs)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4203",
+      "category": "search",
+      "code": "il-pat-16",
+      "condition": null,
+      "currency": "ILS",
+      "label": "ISA additional fee (\u00a748Y(d))",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1801",
+      "category": "examination",
+      "code": "il-pat-17",
+      "condition": null,
+      "currency": "ILS",
+      "label": "IPEA preliminary-examination fee (Reg. 6(g) of PCT Implementation Regs)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1801",
+      "category": "examination",
+      "code": "il-pat-18",
+      "condition": null,
+      "currency": "ILS",
+      "label": "IPEA additional fee (\u00a748YA(d))",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "540",
+      "category": "late_fee",
+      "code": "il-pat-19",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Late ISA transmittal fee (Reg. 6(h) of PCT Implementation Regs)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "280",
+      "category": "petition",
+      "code": "il-pat-20",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Petition for re-consideration (\u00a721A) or cancellation of cancellation (\u00a721B)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "205",
+      "category": "other",
+      "code": "il-pat-21",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Patent attorney examination + registration fee (\u00a7\u00a7142, 143)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "205",
+      "category": "other",
+      "code": "il-pat-21-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Annual patent attorney fee (\u00a7145)",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "52",
+      "category": "other",
+      "code": "il-pat-22",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Certified copy / register extract (\u00a7168(b))",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1297",
+      "category": "filing",
+      "code": "il-pat-pte-app",
+      "condition": null,
+      "currency": "ILS",
+      "label": "PTE application fee (PTE Reg. 2(c)(4))",
+      "notes": "Patent term extension (PTE) fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3484",
+      "category": "renewal",
+      "code": "il-pat-pte-ren-base",
+      "condition": null,
+      "currency": "ILS",
+      "label": "PTE renewal fee (PTE Reg. 7(a)(1))",
+      "notes": "Patent term extension (PTE) fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "4180",
+      "category": "renewal",
+      "code": "il-pat-pte-ren-y1",
+      "condition": null,
+      "currency": "ILS",
+      "label": "PTE renewal \u2014 before end of 1st extension year (Reg. 7(a)(2))",
+      "notes": "Patent term extension (PTE) fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 1
+    },
+    {
+      "amount": "5016",
+      "category": "renewal",
+      "code": "il-pat-pte-ren-y2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "PTE renewal \u2014 before end of 2nd extension year (Reg. 7(a)(2))",
+      "notes": "Patent term extension (PTE) fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "6019",
+      "category": "renewal",
+      "code": "il-pat-pte-ren-y3",
+      "condition": null,
+      "currency": "ILS",
+      "label": "PTE renewal \u2014 before end of 3rd extension year (Reg. 7(a)(2))",
+      "notes": "Patent term extension (PTE) fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "4804",
+      "category": "cancellation",
+      "code": "il-pat-pte-cancel",
+      "condition": null,
+      "currency": "ILS",
+      "label": "PTE cancellation application fee (PTE Reg. 4) \u2014 bundled with year-4 extension and opposition fees in source PDF",
+      "notes": "Patent term extension (PTE) fee.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Israel Patent Office",
+  "jurisdiction": "IL",
+  "key": "IL/ILPO/patent",
+  "notes": "ILPO 2026 fee schedule, gazetted 2025-12-22, effective 2026-01-01. Currency is Israeli new shekel (NIS / ILS); fees are CPI-adjusted annually and rounded to the nearest shekel. Source PDF is Hebrew-only \u2014 ILPO does not publish an English translation of the current-effective fee schedule on gov.il. Item labels in this connector are English-language summaries of the controlling Hebrew text. The Hebrew schedule is the authoritative version per Reshumot (Israeli Official Gazette).\n\nRenewal model is cumulative-coverage at four checkpoints (years 6, 10, 14, 18, 22) rather than per-annum; the connector emits one renewal FeeItem per checkpoint with `year` set to the terminal year of the period. Items 1 (filing) and 10 (allowance) are emitted twice \u2014 once at the full headline amount with `tier=none`, and once at 60% of the headline (the 40% small-entity reduction) with `tier=small`.",
+  "office_code": "ILPO",
+  "retrieved_at": "2026-05-20",
+  "right": "patent",
+  "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+  "statutory_basis": "Patents Law, 5727-1967 + Patents Regulations (Office Practice, Procedural Rules, Documents and Fees), 5728-1968 \u2014 Schedule (\"Tosefet\"). CPI-adjusted annually; the controlling text is the Reshumot (Official Gazette) supplementary issue."
+}

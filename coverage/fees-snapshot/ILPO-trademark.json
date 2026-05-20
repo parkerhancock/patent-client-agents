@@ -1,0 +1,320 @@
+{
+  "currency": "ILS",
+  "effective_date": "2026-01-01",
+  "fees": [
+    {
+      "amount": "1904",
+      "category": "filing",
+      "code": "il-tm-1",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Trade mark application (\u00a77 Ordinance) \u2014 first goods class",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1432",
+      "category": "excess_classes",
+      "code": "il-tm-1-2",
+      "condition": {
+        "description": "Per additional class beyond the first, same application.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "ILS",
+      "label": "Trade mark application \u2014 each additional goods class in the same application",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "959",
+      "category": "opposition",
+      "code": "il-tm-2",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Opposition, register-correction request, or cancellation (one mark, one class) \u2014 \u00a7\u00a724(a), 38, 41",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "893",
+      "category": "appeal",
+      "code": "il-tm-3",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Hearing in proceedings under \u00a7\u00a724(f), 29, 41(b); Reg. 73",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "3393",
+      "category": "renewal",
+      "code": "il-tm-4",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Renewal request (\u00a732 Ordinance) \u2014 first goods class (10-year term)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "2864",
+      "category": "excess_classes",
+      "code": "il-tm-4-2",
+      "condition": {
+        "description": "Per additional class beyond the first, same renewal.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "ILS",
+      "label": "Renewal \u2014 each additional goods class for the same mark in the same renewal request",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "86",
+      "category": "late_fee",
+      "code": "il-tm-5",
+      "condition": {
+        "description": "Per month or part thereof of late renewal payment.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "ILS",
+      "label": "Late renewal surcharge (Reg. 52(2)) \u2014 per month or part thereof",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1317",
+      "category": "other",
+      "code": "il-tm-6",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Restoration of registration (Reg. 53(1)) \u2014 per class",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "372",
+      "category": "transfer",
+      "code": "il-tm-7",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Change of register, transfer of ownership, or recordation of license (\u00a7\u00a720, 36(a)(3)-(5), 49(a), 51, 52)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "759",
+      "category": "search",
+      "code": "il-tm-8",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Trade mark search (Reg. 78(a))",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "57",
+      "category": "other",
+      "code": "il-tm-9",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Certified copy of registration (\u00a76(b))",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "86",
+      "category": "extension",
+      "code": "il-tm-10",
+      "condition": {
+        "description": "Per month or part thereof.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "ILS",
+      "label": "Extension of time (Reg. 82) \u2014 per month or part thereof, per mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "573",
+      "category": "other",
+      "code": "il-tm-11",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Request to make submissions in proceedings (Reg. 26)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "893",
+      "category": "examination",
+      "code": "il-tm-12",
+      "condition": null,
+      "currency": "ILS",
+      "label": "On-site expedited examination (Reg. 22(c)) \u2014 per class",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4.3",
+      "category": "other",
+      "code": "il-tm-13",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Photocopy of any document, per page",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "55",
+      "category": "other",
+      "code": "il-tm-14",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Scanned copy of registration file",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "626",
+      "category": "madrid",
+      "code": "il-tm-madrid-international-application",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Handling fee for an international registration application (\u00a756C(1) Ordinance)",
+      "notes": "Madrid Protocol handling fee (ILPO's share). WIPO-administered Madrid system fees in CHF are billed separately by the International Bureau.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "626",
+      "category": "madrid",
+      "code": "il-tm-madrid-extension-not-il",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Handling fee for an extension request not designating Israel (\u00a756C(2) Ordinance)",
+      "notes": "Madrid Protocol handling fee (ILPO's share). WIPO-administered Madrid system fees in CHF are billed separately by the International Bureau.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "626",
+      "category": "madrid",
+      "code": "il-tm-madrid-renewal",
+      "condition": null,
+      "currency": "ILS",
+      "label": "Handling fee for renewal/extension of an international registration (\u00a756J(1) Ordinance)",
+      "notes": "Madrid Protocol handling fee (ILPO's share). WIPO-administered Madrid system fees in CHF are billed separately by the International Bureau.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Israel Patent Office",
+  "jurisdiction": "IL",
+  "key": "IL/ILPO/trademark",
+  "notes": "ILPO 2026 fee schedule, gazetted 2025-12-22, effective 2026-01-01. Currency is Israeli new shekel (NIS / ILS); fees are CPI-adjusted annually and rounded to the nearest shekel. Source PDF is Hebrew-only \u2014 ILPO does not publish an English translation of the current-effective fee schedule on gov.il. Item labels in this connector are English-language summaries of the controlling Hebrew text. The Hebrew schedule is the authoritative version per Reshumot (Israeli Official Gazette).\n\nTrademark term is 10 years from registration (renewable indefinitely under \u00a7 32 of the Trade Marks Ordinance). Israel has been a Madrid Protocol member since 2010; the three Madrid-routing fees on the schedule are ILPO's share \u2014 WIPO bills the international portion separately in CHF.",
+  "office_code": "ILPO",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
+  "statutory_basis": "Trade Marks Ordinance [New Version], 5732-1972 + Trade Marks Regulations, 5700-1940. CPI-adjusted annually; controlling text is Reshumot."
+}

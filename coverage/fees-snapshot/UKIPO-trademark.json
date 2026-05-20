@@ -1,0 +1,450 @@
+{
+  "currency": "GBP",
+  "effective_date": "2026-04-01",
+  "fees": [
+    {
+      "amount": "205",
+      "category": "filing",
+      "code": "uk-tm-form-tm3",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to register a trade mark (online)",
+      "notes": "UKIPO TM form TM3; section: 1. Apply for a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "filing",
+      "code": "uk-tm-form-tm3",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to register a trade mark (paper application)",
+      "notes": "UKIPO TM form TM3; section: 1. Apply for a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "50",
+      "category": "filing",
+      "code": "uk-tm-form-mm2",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to register an International trade mark",
+      "notes": "UKIPO TM form MM2; section: 1. Apply for a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "transfer",
+      "code": "uk-tm-form-tm16",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to record a change of ownership",
+      "notes": "UKIPO TM form TM16; section: 4. Update details of the owner or the representative",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "uk-tm-form-tm16p",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to record partial assignment of good and/or services",
+      "notes": "UKIPO TM form TM16P; section: 4. Update details of the owner or the representative",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "245",
+      "category": "renewal",
+      "code": "uk-tm-form-tm11",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Renewal of trade mark registration (online service)",
+      "notes": "UKIPO TM form TM11; section: 5. Renew or restore a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "245",
+      "category": "renewal",
+      "code": "uk-tm-form-tm11",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Renewal of trade mark registration (paper application)",
+      "notes": "UKIPO TM form TM11; section: 5. Renew or restore a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "125",
+      "category": "renewal",
+      "code": "uk-tm-form-tm13",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request to restore and renew a registration",
+      "notes": "UKIPO TM form TM13; section: 5. Renew or restore a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "25",
+      "category": "other",
+      "code": "uk-tm-form-tm31c",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request for information about events relating to a UK trade mark",
+      "notes": "UKIPO TM form TM31C; section: 6. Request documents or information",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25",
+      "category": "madrid",
+      "code": "uk-tm-form-tm31m",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request for event information relating to international trade mark (UK)",
+      "notes": "UKIPO TM form TM31M; section: 6. Request documents or information",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "25",
+      "category": "other",
+      "code": "uk-tm-form-tm31r",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request for a certified copy",
+      "notes": "UKIPO TM form TM31R; section: 6. Request documents or information",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "extension",
+      "code": "uk-tm-form-tm9",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Extension of time to respond to any deadlines, set by tribunals, before the deadline has expired",
+      "notes": "UKIPO TM form TM9; section: 7. Request for an extension of time",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "extension",
+      "code": "uk-tm-form-tm9r",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request to extend a time period, set by examination or tribunals if you have missed the deadline",
+      "notes": "UKIPO TM form TM9R; section: 7. Request for an extension of time",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "300",
+      "category": "appeal",
+      "code": "uk-tm-form-tm55p",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Notice of appeal to the appointed person (inter parte)",
+      "notes": "UKIPO TM form TM55P; section: 8. Appeal an examiner or tribunal decision",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "appeal",
+      "code": "uk-tm-form-tm5",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request for a statement of reasons for registrar\u2019s decision",
+      "notes": "UKIPO TM form TM5; section: 8. Appeal an examiner or tribunal decision",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "opposition",
+      "code": "uk-tm-form-tm7",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Notice of opposition and statement of grounds (Opposition based on Section 5(1) and/or 5(2) only)",
+      "notes": "UKIPO TM form TM7; section: 9. Oppose or defend a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "opposition",
+      "code": "uk-tm-form-tm7",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Notice of opposition and statement of grounds (Opposition based on, or including, any other grounds)",
+      "notes": "UKIPO TM form TM7; section: 9. Oppose or defend a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "opposition",
+      "code": "uk-tm-form-tm7f",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Notice of FAST TRACK opposition and statement of grounds",
+      "notes": "UKIPO TM form TM7F; section: 9. Oppose or defend a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "opposition",
+      "code": "uk-tm-form-tm7g",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request to add grounds to a notice of opposition",
+      "notes": "UKIPO TM form TM7G; section: 10. Ongoing opposition procedure",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "cancellation",
+      "code": "uk-tm-form-tm26i",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to start invalidation proceedings",
+      "notes": "UKIPO TM form TM26I; section: 11. Invalidation or revocation",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "cancellation",
+      "code": "uk-tm-form-tm26n",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to revoke a trade mark for reasons of non-use",
+      "notes": "UKIPO TM form TM26N; section: 11. Invalidation or revocation",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "cancellation",
+      "code": "uk-tm-form-tm26o",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to revoke a trade mark for reasons other than non-use",
+      "notes": "UKIPO TM form TM26O; section: 11. Invalidation or revocation",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "uk-tm-form-tm24",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to record or amend a security interest",
+      "notes": "UKIPO TM form TM24; section: 13. Record, amend or cancel a security licence",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "uk-tm-form-tm24c",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to cancel a security interest",
+      "notes": "UKIPO TM form TM24C; section: 13. Record, amend or cancel a security licence",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "uk-tm-form-tm50",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to record a licensee",
+      "notes": "UKIPO TM form TM50; section: 13. Record, amend or cancel a security licence",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "60",
+      "category": "other",
+      "code": "uk-tm-form-tm51",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to remove or amend the recordal of a license",
+      "notes": "UKIPO TM form TM51; section: 13. Record, amend or cancel a security licence",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "other",
+      "code": "uk-tm-form-tm12",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Request to divide an application",
+      "notes": "UKIPO TM form TM12; section: 14. Request to merge or divide a trade mark",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "other",
+      "code": "uk-tm-form-tm35",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Regulations governing the use of certification or collective marks",
+      "notes": "UKIPO TM form TM35; section: 15. Collective or certification marks",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "125",
+      "category": "other",
+      "code": "uk-tm-form-tm36",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Application to amend the regulations governing the use of marks",
+      "notes": "UKIPO TM form TM36; section: 15. Collective or certification marks",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "UK Intellectual Property Office",
+  "jurisdiction": "GB",
+  "key": "GB/UKIPO/trademark",
+  "notes": "UKIPO TM fees scraped from the gov.uk trade-mark-forms-and-fees detail page (17 inline tables). Effective 2026-04-01. Renewals use year=10 (UKIPO TM is a 10-year renewal cycle).",
+  "office_code": "UKIPO",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
+  "statutory_basis": "Trade Marks Act 1994; Trade Marks (Fees) Rules 2008 (as amended)."
+}

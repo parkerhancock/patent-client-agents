@@ -1,0 +1,590 @@
+{
+  "currency": "HKD",
+  "effective_date": "2003-04-04",
+  "fees": [
+    {
+      "amount": "400",
+      "category": "search",
+      "code": "hk-tm-preliminary-advice-on-registrability-und",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Preliminary advice on registrability under section 11 of the Trade Marks Ordinance",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "excess_classes",
+      "code": "hk-tm-preliminary-advice-on-registrability-und-addl-class",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "HKD",
+      "label": "Preliminary advice on registrability under section 11 of the Trade Marks Ordinance \u2014 additional class",
+      "notes": "$200 per additional class",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400",
+      "category": "search",
+      "code": "hk-tm-search-of-records-preliminary-advice-on-",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Search of records \u2013 Preliminary advice on section 12 of the Trade Marks Ordinance",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "filing",
+      "code": "hk-tm-application-for-registration-of-a-trade-",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for registration of a trade mark (including certification mark and collective mark)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "hk-tm-application-for-registration-of-a-trade--addl-class",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "HKD",
+      "label": "Application for registration of a trade mark (including certification mark and collective mark) \u2014 additional class",
+      "notes": "$1,000 per additional class",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "filing",
+      "code": "hk-tm-application-for-registration-of-a-series",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for registration of a series of trade mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "hk-tm-application-for-registration-of-a-series-addl-class",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "HKD",
+      "label": "Application for registration of a series of trade mark \u2014 additional class",
+      "notes": "$1,000 per additional class",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2300",
+      "category": "filing",
+      "code": "hk-tm-application-for-registration-of-a-defens",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application for registration of a defensive trade mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1150",
+      "category": "excess_classes",
+      "code": "hk-tm-application-for-registration-of-a-defens-addl-class",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "HKD",
+      "label": "Application for registration of a defensive trade mark \u2014 additional class",
+      "notes": "$1,150 per additional class",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "650",
+      "category": "other",
+      "code": "hk-tm-request-to-divide-application-for-regist",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to divide application for registration (divide the specification of goods / services)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "650",
+      "category": "other",
+      "code": "hk-tm-request-to-divide-application-for-regist-2",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to divide application for registration (divide a series of marks)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2000",
+      "category": "excess_classes",
+      "code": "hk-tm-request-to-divide-application-for-regist-addl-class",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "HKD",
+      "label": "Request to divide application for registration (divide a series of marks) \u2014 additional class",
+      "notes": "$2,000 for the first class and $1,000 for each additional class in respect of each additional application",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-tm-request-to-merge-applications-for-regist",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to merge applications for registration",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-tm-request-to-change-name-address-address-f",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to change name, address, address for service or agent's details",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-tm-request-to-amend-application",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to amend application",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1000",
+      "category": "excess_classes",
+      "code": "hk-tm-request-to-amend-application-addl-class",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "HKD",
+      "label": "Request to amend application \u2014 additional class",
+      "notes": "$1,000 per additional class for amendment of specification",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-tm-request-to-amend-representation-of-trade",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to amend representation of trade mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "800",
+      "category": "opposition",
+      "code": "hk-tm-notice-of-opposition-objection",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Notice of opposition/objection",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "opposition",
+      "code": "hk-tm-counter-statement",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Counter-statement",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "2670",
+      "category": "renewal",
+      "code": "hk-tm-request-for-renewal-of-a-trade-mark-regi",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for renewal of a trade mark registration",
+      "notes": "Late renewal charge: HK$500 (Cap. 559A).",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1340",
+      "category": "excess_classes",
+      "code": "hk-tm-request-for-renewal-of-a-trade-mark-regi-addl-class",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "HKD",
+      "label": "Request for renewal of a trade mark registration \u2014 additional class",
+      "notes": "$1,340 per additional class",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "4000",
+      "category": "renewal",
+      "code": "hk-tm-request-for-restoration-and-renewal-of-a",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for restoration and renewal of a trade mark registration",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1340",
+      "category": "excess_classes",
+      "code": "hk-tm-request-for-restoration-and-renewal-of-a-addl-class",
+      "condition": {
+        "description": "Per additional class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "HKD",
+      "label": "Request for restoration and renewal of a trade mark registration \u2014 additional class",
+      "notes": "$1,340 per additional class",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-tm-surrender-of-registered-mark",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Surrender of registered mark",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "800",
+      "category": "transfer",
+      "code": "hk-tm-application-or-notice-to-register-regist",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application or notice to register registrable transaction (other than a licence)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "transfer",
+      "code": "hk-tm-request-to-amend-or-remove-registered-pa",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to amend or remove registered particulars of security interest",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "800",
+      "category": "transfer",
+      "code": "hk-tm-application-or-notice-to-register-a-lice",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Application or notice to register a licence",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "transfer",
+      "code": "hk-tm-request-to-amend-or-remove-registered-pa-2",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request to amend or remove registered particulars of a licence",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1700",
+      "category": "other",
+      "code": "hk-tm-notice-of-attendance-at-hearing",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Notice of attendance at hearing",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1500",
+      "category": "other",
+      "code": "hk-tm-request-for-statement-of-reasons",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for statement of reasons",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "extension",
+      "code": "hk-tm-request-for-extension-of-time",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for extension of time",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "6",
+      "category": "other",
+      "code": "hk-tm-request-for-copy",
+      "condition": {
+        "description": "Per page.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "HKD",
+      "label": "Request for copy",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "other",
+      "code": "hk-tm-request-for-certified-copy",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Request for certified copy",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "other",
+      "code": "hk-tm-request-for-certificate-under-section-79",
+      "condition": {
+        "description": "Per copy.",
+        "per_unit": true,
+        "threshold": null,
+        "trigger": "late_days"
+      },
+      "currency": "HKD",
+      "label": "Request for certificate under section 79(2)",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "0",
+      "category": "other",
+      "code": "hk-tm-trade-mark-additional-sheet",
+      "condition": null,
+      "currency": "HKD",
+      "label": "Trade mark additional sheet",
+      "notes": null,
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Intellectual Property Department",
+  "jurisdiction": "HK",
+  "key": "HK/HKIPD/trademark",
+  "notes": "10-year term, renewable indefinitely. Per-additional-class surcharges emit as separate FeeItems with FeeCategory.excess_classes and FeeCondition(classes_over, threshold=1, per_unit=True). v1 GAP: the late-renewal charge bundled inside the renewal cell ('Late renewal charge: $500') is captured in the renewal FeeItem's notes rather than as a standalone late_fee row \u2014 IPD does not publish it with its own form/code.",
+  "office_code": "HKIPD",
+  "retrieved_at": "2026-05-20",
+  "right": "trademark",
+  "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
+  "statutory_basis": "Trade Marks Rules (Cap. 559A), Schedule 1 \u2014 promulgated under Trade Marks Ordinance Cap. 559. Amendments by subsidiary-legislation orders gazetted in the Hong Kong Government Gazette."
+}
