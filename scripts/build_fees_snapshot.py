@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from patent_client_agents.fees.client import FeesClient, _to_meta
+from patent_client_agents.fees.client import _to_meta
 from patent_client_agents.fees.registry import _DISPATCH, OFFICES
 
 ROOT = Path(__file__).resolve().parent.parent

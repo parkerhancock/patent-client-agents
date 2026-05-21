@@ -27,7 +27,6 @@ from lxml import html as L
 
 from patent_client_agents.fees.models import (
     ConditionalTrigger,
-    EntityTier,
     FeeCategory,
     FeeSchedule,
     RightType,
