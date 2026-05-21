@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+# Standalone CI runs against pca's own repo, not the parent monorepo —
+# so `tool.uv.sources` workspace directives can't resolve. Tell every uv
+# invocation in this workflow to ignore sources and resolve from PyPI.
+env:
+  UV_NO_SOURCES: "1"
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -21,7 +27,7 @@ jobs:
         run: uv python install 3.11
 
       - name: Install dependencies
-        run: uv sync --group dev --all-extras --no-sources
+        run: uv sync --group dev --all-extras
 
       - name: Run ruff check
         run: uv run ruff check .
@@ -41,7 +47,7 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
       - name: Install dependencies
-        run: uv sync --group dev --all-extras --no-sources
+        run: uv sync --group dev --all-extras
       - name: Validate manifests
         run: uv run python scripts/build_coverage.py --check
 
@@ -62,7 +68,7 @@ jobs:
         run: uv python install 3.11
 
       - name: Install dependencies
-        run: uv sync --group dev --all-extras --no-sources
+        run: uv sync --group dev --all-extras
 
       - name: Run type checking
         run: uv run ty check src/
@@ -84,7 +90,7 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: uv sync --group dev --all-extras --no-sources
+        run: uv sync --group dev --all-extras
 
       - name: Run tests with coverage
         # Coverage floor: 60% (current baseline: ~71% as of 2026-05-19).

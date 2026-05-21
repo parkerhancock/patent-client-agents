@@ -20,6 +20,12 @@ permissions:
   pages: write
   id-token: write
 
+# Standalone CI runs against pca's own repo, not the parent monorepo —
+# so `tool.uv.sources` workspace directives can't resolve. Tell every uv
+# invocation in this workflow to ignore sources and resolve from PyPI.
+env:
+  UV_NO_SOURCES: "1"
+
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -41,7 +47,7 @@ jobs:
         run: uv python install 3.12
 
       - name: Install docs dependencies
-        run: uv sync --group docs --no-sources
+        run: uv sync --group docs
 
       - name: Build site
         run: uv run mkdocs build --strict
