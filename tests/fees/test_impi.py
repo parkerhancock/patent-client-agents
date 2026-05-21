@@ -130,9 +130,7 @@ class TestParseRows:
         text = impi._extract_pdf_text(FIXTURE_PDF.read_bytes())
         return impi._parse_rows(text)
 
-    def test_parses_many_rows(
-        self, parsed_rows: list[tuple[str, str, Decimal]]
-    ) -> None:
+    def test_parses_many_rows(self, parsed_rows: list[tuple[str, str, Decimal]]) -> None:
         assert len(parsed_rows) >= 70
 
     def test_filing_fee_1a(self, parsed_rows: list[tuple[str, str, Decimal]]) -> None:
@@ -141,17 +139,13 @@ class TestParseRows:
         assert len(matches) == 1
         assert matches[0][2] == Decimal("4550.00")
 
-    def test_per_additional_page_1a_bis(
-        self, parsed_rows: list[tuple[str, str, Decimal]]
-    ) -> None:
+    def test_per_additional_page_1a_bis(self, parsed_rows: list[tuple[str, str, Decimal]]) -> None:
         # Art 1a bis: $61.00 per additional page.
         matches = [r for r in parsed_rows if r[0] == "1 a bis"]
         assert len(matches) == 1
         assert matches[0][2] == Decimal("61.00")
 
-    def test_annuity_year_band_2a(
-        self, parsed_rows: list[tuple[str, str, Decimal]]
-    ) -> None:
+    def test_annuity_year_band_2a(self, parsed_rows: list[tuple[str, str, Decimal]]) -> None:
         # Art 2a: annuity years 1-5 = $1,161.90 per year.
         matches = [r for r in parsed_rows if r[0] == "2 a"]
         assert len(matches) == 1
@@ -175,18 +169,14 @@ class TestParseRows:
         assert len(matches) == 1
         assert matches[0][2] == Decimal("2597.77")
 
-    def test_no_footer_artifacts(
-        self, parsed_rows: list[tuple[str, str, Decimal]]
-    ) -> None:
+    def test_no_footer_artifacts(self, parsed_rows: list[tuple[str, str, Decimal]]) -> None:
         # Page-footer + phone-number fragments must not leak into the
         # parsed rows.
         for _, desc, _ in parsed_rows:
             assert "Periférico Sur" not in desc
             assert "gob.mx/impi" not in desc
 
-    def test_no_section_opener_rows(
-        self, parsed_rows: list[tuple[str, str, Decimal]]
-    ) -> None:
+    def test_no_section_opener_rows(self, parsed_rows: list[tuple[str, str, Decimal]]) -> None:
         # Rows whose description ends with "siguientes tarifas" are
         # group headers, not per-row fees — must be filtered.
         for _, desc, _ in parsed_rows:

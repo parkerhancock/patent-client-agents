@@ -299,7 +299,9 @@ def _categorize_patent(description: str) -> FeeCategory:
     # absorbed into the broader category.
     if "late payment" in d or "late filing" in d:
         return FeeCategory.late_fee
-    if "renewal" in d or re.search(r"\d(?:st|nd|rd|th)[- ]?(?:to[- ]?\d+(?:st|nd|rd|th))?\s+year of", d):
+    if "renewal" in d or re.search(
+        r"\d(?:st|nd|rd|th)[- ]?(?:to[- ]?\d+(?:st|nd|rd|th))?\s+year of", d
+    ):
         return FeeCategory.renewal
     if "maintenance" in d or "maintaining application" in d:
         return FeeCategory.other  # pre-grant R-route; see module docstring v1 GAPS
@@ -340,7 +342,11 @@ def _categorize_trademark(description: str) -> FeeCategory:
         return FeeCategory.late_fee
     if "restoration and renewal" in d or "request for renewal" in d:
         return FeeCategory.renewal
-    if "registration of a trade mark" in d or "registration of a series" in d or "registration of a defensive" in d:
+    if (
+        "registration of a trade mark" in d
+        or "registration of a series" in d
+        or "registration of a defensive" in d
+    ):
         return FeeCategory.filing
     if "preliminary advice" in d or "search of records" in d:
         return FeeCategory.search
@@ -350,7 +356,12 @@ def _categorize_trademark(description: str) -> FeeCategory:
         return FeeCategory.cancellation
     if "extension of time" in d:
         return FeeCategory.extension
-    if "licence" in d or "transactions" in d or "register registrable" in d or "security interest" in d:
+    if (
+        "licence" in d
+        or "transactions" in d
+        or "register registrable" in d
+        or "security interest" in d
+    ):
         return FeeCategory.transfer
     if "hearing" in d or "statement of reasons" in d:
         return FeeCategory.other
@@ -431,10 +442,7 @@ def _is_header_row(cells: list[str]) -> bool:
     if not cells:
         return False
     joined = " | ".join(cells).lower()
-    return (
-        "descriptions" in joined
-        and ("fee (hkd)" in joined or "filing fee (hkd)" in joined)
-    )
+    return "descriptions" in joined and ("fee (hkd)" in joined or "filing fee (hkd)" in joined)
 
 
 def _is_efiling_subheader(cells: list[str]) -> bool:
@@ -603,9 +611,7 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
             # rows (e.g., "Renewal of a short-term patent") classify on
             # their own; fragmentary rows pick up the route from their
             # section header via the joined string below.
-            route = _classify_patent_route(
-                description + " " + (section_context or "")
-            )
+            route = _classify_patent_route(description + " " + (section_context or ""))
             category = _categorize_patent(label)
 
             # Renewal expansion: emit one FeeItem per year if a band is
@@ -711,19 +717,21 @@ def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
             # year=10 so the FeeItem renewal validator is satisfied.
             year = 10 if category is FeeCategory.renewal else None
             code = _unique(_slugify("hk", "tm", label[:60]), seen_codes)
-            fees.append(FeeItem(
-                code=code,
-                label=label[:200],
-                category=category,
-                rights=[RightType.trademark],
-                amount=base_amount,
-                currency="HKD",
-                tier=EntityTier.none,
-                year=year,
-                condition=condition,
-                source_url=HK_IPD_TRADEMARKS_URL,
-                notes=notes,
-            ))
+            fees.append(
+                FeeItem(
+                    code=code,
+                    label=label[:200],
+                    category=category,
+                    rights=[RightType.trademark],
+                    amount=base_amount,
+                    currency="HKD",
+                    tier=EntityTier.none,
+                    year=year,
+                    condition=condition,
+                    source_url=HK_IPD_TRADEMARKS_URL,
+                    notes=notes,
+                )
+            )
 
             # Additional-fee column: per-additional-class surcharge.
             if additional_text and additional_text.strip().lower() != "nil":
@@ -733,23 +741,25 @@ def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
                         _slugify("hk", "tm", label[:60], "addl-class"),
                         seen_codes,
                     )
-                    fees.append(FeeItem(
-                        code=add_code,
-                        label=f"{label} — additional class",
-                        category=FeeCategory.excess_classes,
-                        rights=[RightType.trademark],
-                        amount=add_amount,
-                        currency="HKD",
-                        tier=EntityTier.none,
-                        condition=FeeCondition(
-                            trigger=ConditionalTrigger.classes_over,
-                            threshold=1,
-                            per_unit=True,
-                            description="Per additional class beyond the first.",
-                        ),
-                        source_url=HK_IPD_TRADEMARKS_URL,
-                        notes=additional_text,
-                    ))
+                    fees.append(
+                        FeeItem(
+                            code=add_code,
+                            label=f"{label} — additional class",
+                            category=FeeCategory.excess_classes,
+                            rights=[RightType.trademark],
+                            amount=add_amount,
+                            currency="HKD",
+                            tier=EntityTier.none,
+                            condition=FeeCondition(
+                                trigger=ConditionalTrigger.classes_over,
+                                threshold=1,
+                                per_unit=True,
+                                description="Per additional class beyond the first.",
+                            ),
+                            source_url=HK_IPD_TRADEMARKS_URL,
+                            notes=additional_text,
+                        )
+                    )
 
     return fees
 
@@ -785,19 +795,21 @@ def _build_design_fees(doc: L.HtmlElement) -> list[FeeItem]:
                     year = int(m.group(1)) * 5 + 5  # 1→10, 2→15, 3→20, 4→25
 
             code = _unique(_slugify("hk", "des", label[:60]), seen_codes)
-            fees.append(FeeItem(
-                code=code,
-                label=label[:200],
-                category=category,
-                rights=[RightType.design],
-                amount=base_amount,
-                currency="HKD",
-                tier=EntityTier.none,
-                year=year if category is FeeCategory.renewal else None,
-                condition=condition,
-                source_url=HK_IPD_DESIGNS_URL,
-                notes=None,
-            ))
+            fees.append(
+                FeeItem(
+                    code=code,
+                    label=label[:200],
+                    category=category,
+                    rights=[RightType.design],
+                    amount=base_amount,
+                    currency="HKD",
+                    tier=EntityTier.none,
+                    year=year if category is FeeCategory.renewal else None,
+                    condition=condition,
+                    source_url=HK_IPD_DESIGNS_URL,
+                    notes=None,
+                )
+            )
 
             # Paper-filing variant on the design filing table.
             paper_amount = _parse_money(paper_text or "") if paper_text else None
@@ -806,22 +818,24 @@ def _build_design_fees(doc: L.HtmlElement) -> list[FeeItem]:
                     _slugify("hk", "des", label[:60], "paper"),
                     seen_codes,
                 )
-                fees.append(FeeItem(
-                    code=paper_code,
-                    label=label[:200],
-                    category=category,
-                    rights=[RightType.design],
-                    amount=paper_amount,
-                    currency="HKD",
-                    tier=EntityTier.none,
-                    year=year if category is FeeCategory.renewal else None,
-                    condition=FeeCondition(
-                        trigger=ConditionalTrigger.paper_filing,
-                        description="Paper-filed submission; e-filing is the default discounted rate.",
-                    ),
-                    source_url=HK_IPD_DESIGNS_URL,
-                    notes="Paper-filing rate.",
-                ))
+                fees.append(
+                    FeeItem(
+                        code=paper_code,
+                        label=label[:200],
+                        category=category,
+                        rights=[RightType.design],
+                        amount=paper_amount,
+                        currency="HKD",
+                        tier=EntityTier.none,
+                        year=year if category is FeeCategory.renewal else None,
+                        condition=FeeCondition(
+                            trigger=ConditionalTrigger.paper_filing,
+                            description="Paper-filed submission; e-filing is the default discounted rate.",
+                        ),
+                        source_url=HK_IPD_DESIGNS_URL,
+                        notes="Paper-filing rate.",
+                    )
+                )
 
     return fees
 

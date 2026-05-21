@@ -117,8 +117,7 @@ class Manifest:
         sv = int(data.get("schema_version", 0))
         if sv != SCHEMA_VERSION:
             raise ValueError(
-                f"Unsupported manifest schema_version {sv}; "
-                f"this build understands {SCHEMA_VERSION}"
+                f"Unsupported manifest schema_version {sv}; this build understands {SCHEMA_VERSION}"
             )
         return cls(
             schema_version=sv,
@@ -274,9 +273,7 @@ def bootstrap_corpora(
         actual = _sha256_file(tmp)
         if actual != entry.sha256:
             tmp.unlink(missing_ok=True)
-            raise RuntimeError(
-                f"sha256 mismatch for {name}: expected {entry.sha256}, got {actual}"
-            )
+            raise RuntimeError(f"sha256 mismatch for {name}: expected {entry.sha256}, got {actual}")
         os.replace(tmp, local)
         resolved[name] = local
     return resolved
