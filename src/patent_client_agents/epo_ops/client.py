@@ -15,9 +15,9 @@ import httpx
 import lxml.etree as etree  # ty: ignore[unresolved-import]  # lxml lacks PEP 561 stubs
 from pypdf import PdfReader, PdfWriter
 
-from law_tools_core.base_client import BaseAsyncClient
-from law_tools_core.cache import build_cached_http_client
-from law_tools_core.exceptions import AuthenticationError, RateLimitError
+from mcp_data_core.base_client import BaseAsyncClient
+from mcp_data_core.cache import build_cached_http_client
+from mcp_data_core.exceptions import AuthenticationError, RateLimitError
 
 from .models import (
     BiblioResponse,

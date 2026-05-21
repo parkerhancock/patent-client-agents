@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from law_tools_core.cache import CacheManager, CacheStats, build_cached_http_client
+from mcp_data_core.cache import CacheManager, CacheStats, build_cached_http_client
 
 
 class TestCacheStats:

@@ -95,7 +95,7 @@ class BulkDataClient(UsptoOdpBaseClient):
         Returns:
             BulkDataProductResponse with product details.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         normalized_identifier = product_identifier.strip()
         if not normalized_identifier:

@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.envelope import ListEnvelope, Provenance
 from patent_client_agents.mcp.tools.epo_up_guidelines import (
     get_epo_up_guidelines_section,
     search_epo_up_guidelines,

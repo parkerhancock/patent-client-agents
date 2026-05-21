@@ -88,7 +88,7 @@ class TestGetJpoProgressDispatch:
 
     @pytest.mark.asyncio
     async def test_unknown_ip_type_raises(self, mock_client) -> None:
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         with pytest.raises(ValidationError, match="ip_type"):
             await inter.get_jpo_progress("2020123456", ip_type="utility")  # type: ignore[arg-type]
@@ -335,7 +335,7 @@ class TestGetJpoDocumentsDispatch:
 
     @pytest.mark.asyncio
     async def test_unknown_doc_kind_raises(self, mock_client) -> None:
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         with pytest.raises(ValidationError, match="doc_kind"):
             await inter.get_jpo_documents(

@@ -14,8 +14,8 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from pydantic import BaseModel
 
-from law_tools_core.envelope import ListEnvelope, Provenance
-from law_tools_core.exceptions import ValidationError
+from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.mcp.tools.trademarks import (
     _classify_tm_identifier,
     get_trademark,

@@ -10,7 +10,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from law_tools_core.envelope import ListEnvelope
+from mcp_data_core.envelope import ListEnvelope
 from patent_client_agents.mcp.tools.prh_fi import (
     download_prh_design_image,
     download_prh_trademark_image,
@@ -135,7 +135,7 @@ async def test_get_prh_patent_accepts_list(monkeypatch: pytest.MonkeyPatch) -> N
 
 @pytest.mark.asyncio
 async def test_get_prh_patent_rejects_empty_input() -> None:
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     with pytest.raises(ValidationError):
         await get_prh_patent([])

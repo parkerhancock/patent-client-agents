@@ -28,8 +28,8 @@ from __future__ import annotations
 import os
 from typing import Literal, cast
 
-from law_tools_core.exceptions import ConfigurationError
-from law_tools_core.oauth2 import OAuth2ClientCredentialsAuth
+from mcp_data_core.exceptions import ConfigurationError
+from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
 
 IpAustraliaEnvironment = Literal["production", "sandbox"]
 

@@ -20,10 +20,10 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import ListEnvelope, make_provenance
-from law_tools_core.exceptions import ValidationError
-from law_tools_core.mcp.annotations import READ_ONLY
-from law_tools_core.mcp.conditional import conditional_tool
+from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.mcp.annotations import READ_ONLY
+from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.kipo_kipris import (
     DesignRow,
     KiprisClient,

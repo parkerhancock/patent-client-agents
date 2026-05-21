@@ -22,7 +22,7 @@ from typing import Any
 import httpx
 import pytest
 
-from law_tools_core.exceptions import AuthenticationError
+from mcp_data_core.exceptions import AuthenticationError
 from patent_client_agents.inpi_pi.session import (
     BOOTSTRAP_PATH,
     DEFAULT_TOKEN_TTL_SECONDS,

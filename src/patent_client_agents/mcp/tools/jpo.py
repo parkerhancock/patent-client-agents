@@ -26,19 +26,19 @@ from typing import Annotated, Any, Literal, cast
 import httpx
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import (
+from mcp_data_core.envelope import (
     ListEnvelope,
     ResponseEnvelope,
     make_provenance,
 )
-from law_tools_core.exceptions import ValidationError
-from law_tools_core.mcp.annotations import READ_ONLY
-from law_tools_core.mcp.conditional import (
+from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.mcp.annotations import READ_ONLY
+from mcp_data_core.mcp.conditional import (
     conditional_resource,
     conditional_tool,
     register_source_if_configured,
 )
-from law_tools_core.mcp.downloads import (
+from mcp_data_core.mcp.downloads import (
     build_download_url,
     download_response,
     read_resource,

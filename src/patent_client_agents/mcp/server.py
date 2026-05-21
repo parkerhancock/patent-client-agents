@@ -9,11 +9,11 @@ extra of the ``patent-client-agents`` distribution), or directly::
 Stdio is the default transport. Pass ``--transport http`` (or use
 ``fastmcp run``) for HTTP mode.
 
-Auth is env-driven via ``law_tools_core.mcp.auth.make_auth``. For stdio
+Auth is env-driven via ``mcp_data_core.mcp.auth.make_auth``. For stdio
 and local development, leave the auth env vars unset and the server
 runs without authentication. For HTTP deployments, set
 ``LAW_TOOLS_CORE_PUBLIC_URL`` plus the Google OAuth or static bearer
-env vars described in :mod:`law_tools_core.mcp.auth`.
+env vars described in :mod:`mcp_data_core.mcp.auth`.
 
 Hosted/multi-instance deployments that need persistent OAuth/DCR
 client state (Firestore-backed storage, rate limiting, etc.) belong in
@@ -34,8 +34,8 @@ from patent_client_agents import __version__
 _mcp_import_error: ModuleNotFoundError | None = None
 
 try:
-    from law_tools_core.mcp import make_auth
-    from law_tools_core.mcp.server_factory import build_server
+    from mcp_data_core.mcp import make_auth
+    from mcp_data_core.mcp.server_factory import build_server
 
     from . import ip_mcp
 except ModuleNotFoundError as exc:

@@ -8,7 +8,7 @@ import json
 import httpx
 import pytest
 
-from law_tools_core.exceptions import AuthenticationError
+from mcp_data_core.exceptions import AuthenticationError
 from patent_client_agents.usitc.client import DataWebClient, EdisClient, HtsClient, IdsClient
 from patent_client_agents.usitc.models import (
     DataWebReport,

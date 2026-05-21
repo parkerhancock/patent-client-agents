@@ -42,7 +42,7 @@ from datetime import date
 from decimal import Decimal
 from typing import Any, Unpack, cast
 
-from law_tools_core import BaseAsyncClient
+from mcp_data_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,

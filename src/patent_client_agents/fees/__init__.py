@@ -2,7 +2,7 @@
 
 Per-office scrapers translate the upstream fee table into a uniform
 :class:`FeeSchedule`. Each scraper inherits from
-:class:`law_tools_core.BaseAsyncClient` and shares the hishel-backed
+:class:`mcp_data_core.BaseAsyncClient` and shares the hishel-backed
 SQLite cache machinery used by the rest of the connectors; default TTL
 is 7 days (fees don't change weekly, an adjustment reaches new sessions
 the same day at worst).

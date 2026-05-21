@@ -4,7 +4,7 @@ from typing import Any, cast
 
 import pytest
 
-from law_tools_core.exceptions import NotFoundError
+from mcp_data_core.exceptions import NotFoundError
 from patent_client_agents.epo_ops import api as ops_api
 from patent_client_agents.epo_ops.models import (
     BiblioRecord,

@@ -20,7 +20,7 @@ from typing import Any
 
 import httpx
 
-from law_tools_core import BaseAsyncClient
+from mcp_data_core import BaseAsyncClient
 from patent_client_agents.ip_australia_common import (
     IpAustraliaEnvironment,
     build_auth,

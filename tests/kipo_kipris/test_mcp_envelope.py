@@ -20,8 +20,8 @@ from unittest.mock import AsyncMock
 import pytest
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import ListEnvelope, Provenance
-from law_tools_core.exceptions import ValidationError
+from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import ValidationError
 
 # ──────────────────────────────────────────────────────────────────────
 # Plain "fake" row models — they only need to expose ``model_dump`` so

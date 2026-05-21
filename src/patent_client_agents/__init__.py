@@ -2,8 +2,8 @@
 
 from importlib.metadata import PackageNotFoundError, version
 
-from law_tools_core.envelope import configure as _configure_envelope
-from law_tools_core.logging import configure as _configure_logging
+from mcp_data_core.envelope import configure as _configure_envelope
+from mcp_data_core.logging import configure as _configure_logging
 
 from .unified import (
     PatentPdf,

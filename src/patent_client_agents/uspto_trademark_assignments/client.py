@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from law_tools_core.base_client import BaseAsyncClient
+from mcp_data_core.base_client import BaseAsyncClient
 
 from .models import TrademarkAssignmentRecord, TrademarkAssignmentSearchResponse
 

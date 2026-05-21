@@ -10,8 +10,8 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from law_tools_core import BaseAsyncClient
-from law_tools_core.exceptions import LawToolsCoreError
+from mcp_data_core import BaseAsyncClient
+from mcp_data_core.exceptions import McpDataCoreError
 from patent_client_agents.copyright.models import (
     Claimant,
     CopyrightRecord,
@@ -23,7 +23,7 @@ from patent_client_agents.copyright.models import (
 logger = logging.getLogger(__name__)
 
 
-class CopyrightError(LawToolsCoreError):
+class CopyrightError(McpDataCoreError):
     """Error from the Copyright Office API."""
 
 

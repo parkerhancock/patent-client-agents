@@ -27,7 +27,7 @@ from xml.etree import ElementTree as ET
 import httpx
 import pytest
 
-from law_tools_core.exceptions import (
+from mcp_data_core.exceptions import (
     ApiError,
     ConfigurationError,
     RateLimitError,

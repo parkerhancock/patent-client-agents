@@ -13,12 +13,12 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import (
+from mcp_data_core.envelope import (
     ListEnvelope,
     ResponseEnvelope,
     make_provenance,
 )
-from law_tools_core.mcp.annotations import READ_ONLY
+from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.cpc import map_classification
 from patent_client_agents.epo_ops.client import client_from_env
 

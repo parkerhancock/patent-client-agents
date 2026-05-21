@@ -20,7 +20,7 @@ import logging
 from dataclasses import dataclass
 from typing import Any
 
-from law_tools_core.exceptions import LawToolsCoreError, NotFoundError
+from mcp_data_core.exceptions import McpDataCoreError, NotFoundError
 
 logger = logging.getLogger(__name__)
 
@@ -195,7 +195,7 @@ async def get_patent_claims(patent_number: str) -> list[dict[str, Any]]:
                     )
                     for c in odp_claims
                 ]
-        except LawToolsCoreError as exc:
+        except McpDataCoreError as exc:
             logger.info("ODP grant XML unavailable for %s: %s", patent_number, exc)
 
     async with GooglePatentsClient() as client:
@@ -256,13 +256,13 @@ async def download_patent_pdf(patent_number: str) -> PatentPdf:
     rather than being masked by silent fallback. Raises :class:`NotFoundError`
     only if all three sources say the PDF does not exist.
     """
-    from law_tools_core.filenames import (
+    from mcp_data_core.filenames import (
         epo_pdf as _epo_pdf_name,
     )
-    from law_tools_core.filenames import (
+    from mcp_data_core.filenames import (
         patent_pdf as _patent_pdf_name,
     )
-    from law_tools_core.filenames import (
+    from mcp_data_core.filenames import (
         publication_pdf as _publication_pdf_name,
     )
 

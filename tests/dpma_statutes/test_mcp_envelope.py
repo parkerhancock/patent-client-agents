@@ -13,8 +13,8 @@ from pathlib import Path
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
-from law_tools_core.exceptions import ValidationError
+from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.mcp.tools.dpma_statutes import (
     get_dpma_section,
     search_dpma_statutes,

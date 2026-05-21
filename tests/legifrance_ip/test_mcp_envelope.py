@@ -12,8 +12,8 @@ from pathlib import Path
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
-from law_tools_core.exceptions import ValidationError
+from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.mcp.tools.legifrance_ip import (
     get_legifrance_section,
     search_legifrance_ip,

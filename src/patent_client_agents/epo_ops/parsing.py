@@ -6,7 +6,7 @@ from collections.abc import Iterable
 
 import lxml.etree as etree  # ty: ignore[unresolved-import]  # lxml lacks PEP 561 stubs
 
-from law_tools_core.exceptions import ParseError
+from mcp_data_core.exceptions import ParseError
 
 from .models import (
     BiblioRecord,

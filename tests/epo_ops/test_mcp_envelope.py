@@ -16,7 +16,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from law_tools_core.envelope import (
+from mcp_data_core.envelope import (
     ListEnvelope,
     Provenance,
     ResponseEnvelope,
@@ -239,7 +239,7 @@ async def test_search_epo_decodes_inbound_cursor():
     mock_client = MagicMock()
     mock_client.search_published = AsyncMock(return_value=upstream)
 
-    from law_tools_core.envelope import encode_cursor
+    from mcp_data_core.envelope import encode_cursor
 
     cursor = encode_cursor({"range_begin": 11, "range_end": 12})
     with _patch_client_from_env(mock_client):
@@ -312,7 +312,7 @@ async def test_get_epo_biblio_list_preserves_order():
 
 @pytest.mark.asyncio
 async def test_get_epo_biblio_empty_input_raises():
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     with pytest.raises(ValidationError):
         await get_epo_biblio(patent_number=[])

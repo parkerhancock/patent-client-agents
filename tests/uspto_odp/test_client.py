@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from law_tools_core.exceptions import ConfigurationError
+from mcp_data_core.exceptions import ConfigurationError
 from patent_client_agents.uspto_odp.client import BASE_URL, UsptoOdpClient
 
 

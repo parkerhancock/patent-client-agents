@@ -70,7 +70,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
         Returns:
             PtabAppealResponse with the appeal decision data.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         document_identifier = document_identifier.strip()
         if not document_identifier:
@@ -94,7 +94,7 @@ class PtabAppealsClient(UsptoOdpBaseClient):
         Returns:
             PtabAppealResponse with all decisions for the appeal.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         appeal_number = appeal_number.strip()
         if not appeal_number:

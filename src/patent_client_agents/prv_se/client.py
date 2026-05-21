@@ -19,7 +19,7 @@ from typing import Any
 
 import httpx
 
-from law_tools_core import BaseAsyncClient
+from mcp_data_core import BaseAsyncClient
 
 from .models import (
     DesignSearchResponse,

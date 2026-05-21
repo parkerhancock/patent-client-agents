@@ -14,7 +14,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance, ResponseEnvelope
+from mcp_data_core.envelope import ListEnvelope, Provenance, ResponseEnvelope
 from patent_client_agents.epo_ops.models import (
     ClassificationMapping,
     ClassificationMappingResponse,

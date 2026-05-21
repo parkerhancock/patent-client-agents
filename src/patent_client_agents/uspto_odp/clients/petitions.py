@@ -150,7 +150,7 @@ class PetitionsClient(UsptoOdpBaseClient):
         Returns:
             PetitionDecisionIdentifierResponse with decision details.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         identifier = petition_decision_record_identifier.strip()
         if not identifier:

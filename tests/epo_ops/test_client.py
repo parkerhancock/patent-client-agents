@@ -13,14 +13,14 @@ class TestExceptionHierarchy:
     """Tests for exception inheritance."""
 
     def test_authentication_error_inherits_from_core(self) -> None:
-        from law_tools_core.exceptions import AuthenticationError
+        from mcp_data_core.exceptions import AuthenticationError
 
         error = OpsAuthenticationError("test")
         assert isinstance(error, AuthenticationError)
         assert error.status_code == 401
 
     def test_forbidden_error_inherits_from_core(self) -> None:
-        from law_tools_core.exceptions import RateLimitError
+        from mcp_data_core.exceptions import RateLimitError
 
         error = OpsForbiddenError("test")
         assert isinstance(error, RateLimitError)

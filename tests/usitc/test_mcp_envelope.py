@@ -15,8 +15,8 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance, ResponseEnvelope
-from law_tools_core.exceptions import ValidationError
+from mcp_data_core.envelope import ListEnvelope, Provenance, ResponseEnvelope
+from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.mcp.tools.usitc import (
     get_usitc_investigation,
     list_usitc_attachments,

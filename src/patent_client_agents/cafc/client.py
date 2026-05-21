@@ -13,8 +13,8 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from law_tools_core import BaseAsyncClient
-from law_tools_core.exceptions import LawToolsCoreError
+from mcp_data_core import BaseAsyncClient
+from mcp_data_core.exceptions import McpDataCoreError
 from patent_client_agents.cafc.classifier import PatentClassifier
 from patent_client_agents.cafc.models import CAFCOpinion
 
@@ -56,7 +56,7 @@ _COLUMNS = [
 ]
 
 
-class CAFCError(LawToolsCoreError):
+class CAFCError(McpDataCoreError):
     """Error from the CAFC WordPress API."""
 
 

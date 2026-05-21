@@ -134,7 +134,7 @@ from typing import Literal, Unpack
 
 from lxml import html as L
 
-from law_tools_core import BaseAsyncClient
+from mcp_data_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     ConditionalTrigger,
     EntityTier,

@@ -19,7 +19,7 @@ import importlib
 import pytest
 from fastmcp import FastMCP
 
-from law_tools_core.mcp import downloads
+from mcp_data_core.mcp import downloads
 
 
 def _reload_jpo_with_fresh_mcp() -> object:

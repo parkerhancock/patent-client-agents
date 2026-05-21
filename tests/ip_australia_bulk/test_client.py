@@ -13,7 +13,7 @@ from collections.abc import Callable
 import httpx
 import pytest
 
-from law_tools_core.exceptions import ApiError
+from mcp_data_core.exceptions import ApiError
 from patent_client_agents.ip_australia_bulk import CKAN_HOST, IpAustraliaBulkClient
 
 

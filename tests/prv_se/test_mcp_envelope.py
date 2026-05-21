@@ -15,7 +15,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from law_tools_core.envelope import ListEnvelope
+from mcp_data_core.envelope import ListEnvelope
 from patent_client_agents.mcp.tools.prv_se import (
     get_prv_patent,
     search_prv_designs,
@@ -154,7 +154,7 @@ async def test_get_prv_patent_accepts_list(monkeypatch: pytest.MonkeyPatch) -> N
 
 @pytest.mark.asyncio
 async def test_get_prv_patent_rejects_empty_input() -> None:
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     with pytest.raises(ValidationError):
         await get_prv_patent([])

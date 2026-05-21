@@ -18,7 +18,7 @@ from pathlib import Path
 import pytest
 import vcr
 
-# JPO MCP tools are env-gated (see law_tools_core.mcp.conditional_tool).
+# JPO MCP tools are env-gated (see mcp_data_core.mcp.conditional_tool).
 # We need them registered during the test process so the JPO unit and
 # dispatcher tests can call into them. Setting placeholder credentials
 # at top-level conftest — before pytest collects test modules and before

@@ -10,7 +10,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Literal
 
-from law_tools_core.exceptions import AuthenticationError, ConfigurationError
+from mcp_data_core.exceptions import AuthenticationError, ConfigurationError
 
 from .models import TrademarkSearchResponse, TrademarkSearchResult
 from .token_manager import WAF_USER_AGENT, WafTokenManager

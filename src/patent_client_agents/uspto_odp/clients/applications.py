@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-from law_tools_core.cache import get_default_cache_dir
+from mcp_data_core.cache import get_default_cache_dir
 
 from ..models import (
     ApplicationResponse,
@@ -443,7 +443,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
         }
 
         if format in ("auto", "xml"):
-            from law_tools_core.exceptions import NotFoundError
+            from mcp_data_core.exceptions import NotFoundError
 
             try:
                 xml_text = await self.download_document_xml(appl, document_identifier)
@@ -606,7 +606,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
         root_application = await self.resolve_identifier(identifier, identifier_type)
         normalized_root = self._normalize_application_number(root_application)
         if not normalized_root:
-            from law_tools_core.exceptions import ValidationError
+            from mcp_data_core.exceptions import ValidationError
 
             raise ValidationError(
                 f"Could not resolve identifier '{identifier}' to an application number"
@@ -737,7 +737,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
         self, application_number: str
     ) -> dict[str, Any] | None:
         """Fetch a single application record, returning None if not found."""
-        from law_tools_core.exceptions import NotFoundError
+        from mcp_data_core.exceptions import NotFoundError
 
         try:
             response = await self.get(application_number)
@@ -790,7 +790,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
                 Controls which lookup strategy is used, avoiding ambiguity
                 between 8-digit application numbers and patent numbers.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         id_type = identifier_type.lower().strip()
 

@@ -8,8 +8,8 @@ from contextlib import asynccontextmanager
 
 import pytest
 
-from law_tools_core.exceptions import ValidationError
-from law_tools_core.mcp import downloads
+from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.mcp import downloads
 from patent_client_agents.mcp.tools import uspto as uspto_tools
 
 

@@ -15,8 +15,8 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from pydantic import BaseModel, ConfigDict
 
-from law_tools_core.envelope import ListEnvelope, Provenance
-from law_tools_core.exceptions import ValidationError
+from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.mcp.tools.euipo import (
     get_euipo_design,
     search_euipo_designs,

@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field
 if TYPE_CHECKING:  # pragma: no cover - typing only
     pass
 
-from law_tools_core.resilience import default_retryer
+from mcp_data_core.resilience import default_retryer
 
 from .cache import build_cached_http_client
 from .parsers import extract_claims, extract_figures, extract_metadata

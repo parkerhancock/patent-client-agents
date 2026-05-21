@@ -23,15 +23,15 @@ from typing import Any
 
 import httpx
 
-from law_tools_core.base_client import BaseAsyncClient
-from law_tools_core.exceptions import (
+from mcp_data_core.base_client import BaseAsyncClient
+from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
     ConfigurationError,
     NotFoundError,
     RateLimitError,
 )
-from law_tools_core.resilience import default_retryer
+from mcp_data_core.resilience import default_retryer
 
 from .models import (
     ApiResult,

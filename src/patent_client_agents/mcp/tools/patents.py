@@ -12,11 +12,11 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import ListEnvelope, make_provenance
-from law_tools_core.exceptions import NotFoundError, RateLimitError, ValidationError
-from law_tools_core.filenames import patent_pdf as _patent_pdf_name
-from law_tools_core.mcp.annotations import READ_ONLY
-from law_tools_core.mcp.downloads import (
+from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.exceptions import NotFoundError, RateLimitError, ValidationError
+from mcp_data_core.filenames import patent_pdf as _patent_pdf_name
+from mcp_data_core.mcp.annotations import READ_ONLY
+from mcp_data_core.mcp.downloads import (
     download_tool_result,
     read_resource,
     register_source,
@@ -32,7 +32,7 @@ patents_mcp = FastMCP("Patents")
 
 # ──────────────────────────────────────────────────────────────────────
 # Envelope helpers — Google Patents source-specific wrappers around
-# law_tools_core.envelope. Google Patents is a worldwide aggregator that
+# mcp_data_core.envelope. Google Patents is a worldwide aggregator that
 # indexes >100 jurisdictions including offices unreachable via authoritative
 # APIs; "Google Patents (worldwide aggregator)" is the canonical source name.
 # ──────────────────────────────────────────────────────────────────────

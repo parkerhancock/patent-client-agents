@@ -17,10 +17,10 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import ListEnvelope, make_provenance
-from law_tools_core.filenames import cafc_opinion as _cafc_name
-from law_tools_core.mcp import download_response, register_source
-from law_tools_core.mcp.annotations import READ_ONLY
+from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.filenames import cafc_opinion as _cafc_name
+from mcp_data_core.mcp import download_response, register_source
+from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.cafc import CAFCClient, PatentClassifier
 
 cafc_mcp = FastMCP("CAFC")

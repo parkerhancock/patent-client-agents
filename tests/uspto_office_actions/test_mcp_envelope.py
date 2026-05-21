@@ -16,7 +16,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from pydantic import BaseModel
 
-from law_tools_core.envelope import ListEnvelope, Provenance, decode_cursor
+from mcp_data_core.envelope import ListEnvelope, Provenance, decode_cursor
 from patent_client_agents.mcp.tools.office_actions import (
     get_office_action,
     search_office_actions,

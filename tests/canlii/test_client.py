@@ -17,7 +17,7 @@ from datetime import date
 import httpx
 import pytest
 
-from law_tools_core.exceptions import ApiError, ConfigurationError
+from mcp_data_core.exceptions import ApiError, ConfigurationError
 from patent_client_agents.canlii import (
     CanLIIClient,
     GetCaseInput,

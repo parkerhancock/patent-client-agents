@@ -15,7 +15,7 @@ import asyncio
 
 import pytest
 
-from law_tools_core.mcp import downloads
+from mcp_data_core.mcp import downloads
 from patent_client_agents.mcp import ip_mcp
 
 

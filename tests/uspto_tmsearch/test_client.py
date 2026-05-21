@@ -95,7 +95,7 @@ class TestTmsearchClientNoToken:
 
         monkeypatch.setattr(tm_module, "PLAYWRIGHT_AVAILABLE", False)
 
-        from law_tools_core.exceptions import ConfigurationError
+        from mcp_data_core.exceptions import ConfigurationError
 
         client = TmsearchClient(token_path="/nonexistent/path/token.json")
         with pytest.raises(ConfigurationError, match="No valid WAF token"):
@@ -110,7 +110,7 @@ class TestTmsearchClientNoToken:
         not the misleading 'No valid WAF token cached' ConfigurationError.
         """
         import patent_client_agents.uspto_tmsearch.token_manager as tm_module
-        from law_tools_core.exceptions import AuthenticationError
+        from mcp_data_core.exceptions import AuthenticationError
 
         # Seed a valid cached token so _init_session succeeds.
         token_path = tmp_path / "waf_token.json"

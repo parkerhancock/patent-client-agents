@@ -43,8 +43,8 @@ import os
 from collections.abc import AsyncIterator
 from typing import Any, TypeVar
 
-from law_tools_core import BaseAsyncClient
-from law_tools_core.exceptions import ConfigurationError
+from mcp_data_core import BaseAsyncClient
+from mcp_data_core.exceptions import ConfigurationError
 
 from .models import (
     PatentAlterationRow,

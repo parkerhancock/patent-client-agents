@@ -15,7 +15,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from pydantic import BaseModel
 
-from law_tools_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.envelope import ListEnvelope, Provenance
 from patent_client_agents.mcp.tools.uspto import (
     get_application,
     get_patent_assignment,

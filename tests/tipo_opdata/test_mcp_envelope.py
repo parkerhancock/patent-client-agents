@@ -19,8 +19,8 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
-from law_tools_core.exceptions import ValidationError
+from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.mcp.tools import tipo_opdata as tipo_mcp
 
 # ──────────────────────────────────────────────────────────────────────

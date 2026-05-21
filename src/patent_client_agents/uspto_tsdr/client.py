@@ -6,8 +6,8 @@ import os
 import xml.etree.ElementTree as ET
 from typing import Any
 
-from law_tools_core.base_client import BaseAsyncClient
-from law_tools_core.exceptions import ConfigurationError
+from mcp_data_core.base_client import BaseAsyncClient
+from mcp_data_core.exceptions import ConfigurationError
 
 from .models import (
     GoodsServices,

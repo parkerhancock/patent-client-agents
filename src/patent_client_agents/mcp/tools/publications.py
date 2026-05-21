@@ -8,11 +8,11 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import ListEnvelope, ResponseEnvelope, make_provenance
-from law_tools_core.exceptions import ValidationError
-from law_tools_core.filenames import publication_pdf as _publication_pdf_name
-from law_tools_core.mcp.annotations import READ_ONLY
-from law_tools_core.mcp.downloads import read_resource, register_source
+from mcp_data_core.envelope import ListEnvelope, ResponseEnvelope, make_provenance
+from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.filenames import publication_pdf as _publication_pdf_name
+from mcp_data_core.mcp.annotations import READ_ONLY
+from mcp_data_core.mcp.downloads import read_resource, register_source
 from patent_client_agents.uspto_publications import (
     PublicSearchClient,
     resolve_and_download_pdf,
@@ -23,7 +23,7 @@ publications_mcp = FastMCP("Publications")
 
 # ──────────────────────────────────────────────────────────────────────
 # Envelope helpers — PPUBS source-specific wrappers around
-# law_tools_core.envelope per CONNECTOR_STANDARDS.md §5.9. See
+# mcp_data_core.envelope per CONNECTOR_STANDARDS.md §5.9. See
 # ``uspto.py`` (USPTO Applications) for the canonical template.
 # ──────────────────────────────────────────────────────────────────────
 

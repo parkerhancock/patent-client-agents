@@ -28,8 +28,8 @@ from pathlib import Path
 import httpx
 from lxml import html
 
-from law_tools_core.corpus_compression import finalize_outline_corpus
-from law_tools_core.resilience import default_retryer
+from mcp_data_core.corpus_compression import finalize_outline_corpus
+from mcp_data_core.resilience import default_retryer
 
 from .schema import DDL, SCHEMA_VERSION
 

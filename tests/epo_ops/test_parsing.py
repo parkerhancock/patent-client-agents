@@ -17,7 +17,7 @@ class TestXmlParseError:
     """Tests for XmlParseError exception."""
 
     def test_inherits_from_core(self) -> None:
-        from law_tools_core.exceptions import ParseError
+        from mcp_data_core.exceptions import ParseError
 
         error = XmlParseError("test message")
         assert isinstance(error, ParseError)

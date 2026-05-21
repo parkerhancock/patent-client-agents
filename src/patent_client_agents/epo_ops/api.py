@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import warnings
 
-from law_tools_core.exceptions import NotFoundError
+from mcp_data_core.exceptions import NotFoundError
 
 from .client import EpoOpsClient, client_from_env
 from .models import (

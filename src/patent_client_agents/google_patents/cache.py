@@ -17,7 +17,7 @@ from typing import Any
 
 import httpx
 
-from law_tools_core.cache import get_default_cache_dir
+from mcp_data_core.cache import get_default_cache_dir
 
 logger = logging.getLogger(__name__)
 

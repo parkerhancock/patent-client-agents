@@ -2,7 +2,7 @@
 
 import pytest
 
-from law_tools_core.exceptions import ConfigurationError
+from mcp_data_core.exceptions import ConfigurationError
 from patent_client_agents.uspto_tsdr import TsdrClient
 
 

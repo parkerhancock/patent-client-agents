@@ -7,7 +7,7 @@ from datetime import date
 import pytest
 from pydantic import BaseModel
 
-from law_tools_core.exceptions import ConfigurationError
+from mcp_data_core.exceptions import ConfigurationError
 from patent_client_agents.uspto_odp.clients.base import (
     BASE_URL,
     PaginationModel,

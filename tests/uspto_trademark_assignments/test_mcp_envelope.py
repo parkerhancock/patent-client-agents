@@ -11,7 +11,7 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.envelope import ListEnvelope, Provenance
 from patent_client_agents.mcp.tools.trademarks import search_trademark_assignments
 from patent_client_agents.uspto_trademark_assignments.models import (
     Assignor,
@@ -83,7 +83,7 @@ async def test_search_trademark_assignments_full_passes_through():
 
 @pytest.mark.asyncio
 async def test_search_trademark_assignments_unknown_axis_raises():
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     with pytest.raises(ValidationError):
         await search_trademark_assignments(query="x", by="bogus")

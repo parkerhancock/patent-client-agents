@@ -17,8 +17,8 @@ from collections.abc import Callable
 import httpx
 import pytest
 
-from law_tools_core.exceptions import ConfigurationError
-from law_tools_core.oauth2 import OAuth2ClientCredentialsAuth
+from mcp_data_core.exceptions import ConfigurationError
+from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
 from patent_client_agents.ip_australia_patents import IpAustraliaPatentsClient
 
 

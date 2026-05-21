@@ -32,10 +32,14 @@ verify with `gitleaks protect --staged` before committing.
 
 ## Architecture
 
+Shared HTTP scaffolding (`BaseAsyncClient`, cache, retry, exceptions, logging,
+MCP server plumbing) lives in the separately-published
+[`mcp-data-core`](https://github.com/parkerhancock/mcp-data-core) package
+(in this monorepo at `tools/mcp-data-core/`). `patent-client-agents` depends
+on it and re-imports primitives via `from mcp_data_core import ...`.
+
 ```
 src/
-  law_tools_core/           # Shared HTTP scaffolding (BaseAsyncClient, cache, retry,
-                            #   exceptions, logging). Shipped in the same wheel.
   patent_client_agents/
     uspto_odp/              # USPTO Open Data Portal — applications, PTAB, petitions
                             #   (needs USPTO_ODP_API_KEY)
@@ -88,16 +92,16 @@ archive/                    # Deprecated modules kept for reference, not shipped
 
 Log-first pattern for API errors: `ApiError.__str__()` appends the log-file
 path so agents can inspect details without keeping full stacktraces in
-context. Base class `LawToolsCoreError` (from `law_tools_core.exceptions`)
+context. Base class `McpDataCoreError` (from `mcp_data_core.exceptions`)
 and plain validation/config errors use vanilla `Exception.__str__`.
 
 File logging is configured per consumer app via
-`law_tools_core.logging.configure(app_name)`. `patent_client_agents` calls
+`mcp_data_core.logging.configure(app_name)`. `patent_client_agents` calls
 `configure("patent_client_agents")` on import → `~/.cache/patent_client_agents/patent_client_agents.log`.
 
 ## Key Conventions
 
-- All clients extend `law_tools_core.BaseAsyncClient` and use async context managers.
+- All clients extend `mcp_data_core.BaseAsyncClient` and use async context managers.
 - HTTP caching: `hishel` + SQLite with WAL pragmas via `RetryingAsyncSqliteStorage`.
 - Retry: `tenacity` `default_retryer` (4 attempts, exponential jitter).
 - Models are Pydantic v2.

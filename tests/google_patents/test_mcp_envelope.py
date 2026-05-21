@@ -14,7 +14,7 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.envelope import ListEnvelope, Provenance
 from patent_client_agents.mcp.tools import patents as patents_module
 from patent_client_agents.mcp.tools.patents import get_patent, search_patents_global
 
@@ -247,7 +247,7 @@ async def test_get_patent_view_details_returns_metadata_subset_shape():
 
 @pytest.mark.asyncio
 async def test_get_patent_invalid_view_raises():
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     with pytest.raises(ValidationError, match="view must be"):
         await get_patent(patent_number="US10123456B2", view="bogus")

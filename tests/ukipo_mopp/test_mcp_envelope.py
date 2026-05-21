@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.envelope import ListEnvelope, Provenance
 from patent_client_agents.mcp.tools.ukipo_mopp import get_mopp_section, search_mopp
 
 # ──────────────────────────────────────────────────────────────────────

@@ -70,7 +70,7 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         Returns:
             PtabInterferenceResponse with the interference decision data.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         document_identifier = document_identifier.strip()
         if not document_identifier:
@@ -94,7 +94,7 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         Returns:
             PtabInterferenceResponse with all decisions for the interference.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         interference_number = interference_number.strip()
         if not interference_number:

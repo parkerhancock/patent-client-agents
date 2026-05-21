@@ -28,7 +28,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from law_tools_core import BaseAsyncClient
+from mcp_data_core import BaseAsyncClient
 
 from .models import BulkDataset
 
@@ -71,7 +71,7 @@ class IpAustraliaBulkClient(BaseAsyncClient):
             context=f"ip_australia_bulk.get_dataset[{dataset_id}]",
         )
         if not payload.get("success"):
-            from law_tools_core.exceptions import ApiError
+            from mcp_data_core.exceptions import ApiError
 
             raise ApiError(
                 f"CKAN package_show returned success=False for {dataset_id!r}",

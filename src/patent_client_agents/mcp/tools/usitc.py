@@ -22,17 +22,17 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import ListEnvelope, ResponseEnvelope, make_provenance
-from law_tools_core.exceptions import ValidationError
-from law_tools_core.filenames import usitc_attachment as _usitc_name
-from law_tools_core.mcp import (
+from mcp_data_core.envelope import ListEnvelope, ResponseEnvelope, make_provenance
+from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.filenames import usitc_attachment as _usitc_name
+from mcp_data_core.mcp import (
     BulkItem,
     download_bulk_response,
     download_response,
     fetch_with_cache,
     register_source,
 )
-from law_tools_core.mcp.annotations import READ_ONLY
+from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.usitc import (
     DataWebClient,
     EdisClient,

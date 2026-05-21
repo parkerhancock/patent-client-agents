@@ -9,8 +9,8 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-from law_tools_core.base_client import BaseAsyncClient
-from law_tools_core.exceptions import ConfigurationError, NotFoundError
+from mcp_data_core.base_client import BaseAsyncClient
+from mcp_data_core.exceptions import ConfigurationError, NotFoundError
 
 BASE_URL = "https://api.uspto.gov"
 

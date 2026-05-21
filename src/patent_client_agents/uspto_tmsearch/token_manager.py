@@ -23,7 +23,7 @@ import os
 from datetime import UTC, datetime
 from pathlib import Path
 
-from law_tools_core.exceptions import ConfigurationError
+from mcp_data_core.exceptions import ConfigurationError
 
 try:
     from playwright.async_api import async_playwright

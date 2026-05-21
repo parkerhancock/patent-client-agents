@@ -14,8 +14,8 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
-from law_tools_core.exceptions import NotFoundError
+from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import NotFoundError
 from patent_client_agents.mcp.tools.ip_australia_bulk import (
     download_ipa_bulk,
     list_ipa_bulk_releases,

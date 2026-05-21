@@ -6,7 +6,7 @@ import logging
 from datetime import date
 from typing import Any, Literal
 
-from law_tools_core.base_client import BaseAsyncClient
+from mcp_data_core.base_client import BaseAsyncClient
 
 from .models import AssignmentRecord, SearchResults
 

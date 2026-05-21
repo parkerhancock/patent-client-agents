@@ -1,7 +1,7 @@
 """Materialize bundled corpora from a remote manifest into the local cache.
 
-Companion to :mod:`law_tools_core.corpus_db` (read side) and
-:mod:`law_tools_core.corpus_compression` (build side). This module is the
+Companion to :mod:`mcp_data_core.corpus_db` (read side) and
+:mod:`mcp_data_core.corpus_compression` (build side). This module is the
 deploy-time link: a Cloud Run container (or a developer laptop) reads a
 manifest pointing at versioned ``.db`` blobs, downloads any that are
 missing or whose SHA-256 doesn't match, and writes them into

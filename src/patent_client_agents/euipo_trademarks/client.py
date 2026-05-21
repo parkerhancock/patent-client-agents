@@ -31,9 +31,9 @@ from typing import Any, Literal
 
 import httpx
 
-from law_tools_core import BaseAsyncClient
-from law_tools_core.exceptions import ConfigurationError
-from law_tools_core.oauth2 import OAuth2ClientCredentialsAuth
+from mcp_data_core import BaseAsyncClient
+from mcp_data_core.exceptions import ConfigurationError
+from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
 
 from .models import Trademark, TrademarkSearchResult
 

@@ -26,7 +26,7 @@ import httpx
 from lxml import html
 from lxml.html import HtmlElement
 
-from law_tools_core.base_client import BaseAsyncClient
+from mcp_data_core.base_client import BaseAsyncClient
 
 from .models import (
     UpcDecision,

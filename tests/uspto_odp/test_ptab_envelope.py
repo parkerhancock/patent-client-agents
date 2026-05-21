@@ -13,7 +13,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from pydantic import BaseModel
 
-from law_tools_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.envelope import ListEnvelope, Provenance
 from patent_client_agents.mcp.tools.uspto import (
     get_ptab,
     list_ptab_children,
@@ -172,7 +172,7 @@ async def test_search_ptab_trial_decision_full_passes_through():
 
 @pytest.mark.asyncio
 async def test_search_ptab_unknown_type_raises():
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     with pytest.raises(ValidationError):
         await search_ptab(type="bogus", query="x")
@@ -256,7 +256,7 @@ async def test_get_ptab_interference_decision_single():
 
 @pytest.mark.asyncio
 async def test_get_ptab_unknown_type_raises():
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     with pytest.raises(ValidationError):
         await get_ptab(type="bogus", identifier="x")
@@ -334,7 +334,7 @@ async def test_list_ptab_children_application_returns_appeal_decisions():
 
 @pytest.mark.asyncio
 async def test_list_ptab_children_invalid_parent_type_raises():
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     with pytest.raises(ValidationError):
         await list_ptab_children(parent_type="bogus", parent_identifier="x")

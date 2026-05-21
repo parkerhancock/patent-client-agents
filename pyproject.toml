@@ -19,6 +19,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
+    "mcp-data-core>=0.1.0",
     "anyio>=4.4",
     "httpx>=0.27",
     "h2>=4.1",
@@ -36,6 +37,9 @@ dependencies = [
     "zstandard>=0.22",
     "google-cloud-storage>=2.18",
 ]
+
+[tool.uv.sources]
+mcp-data-core = { workspace = true }
 
 [project.optional-dependencies]
 mcp = [
@@ -87,7 +91,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/patent_client_agents", "src/law_tools_core"]
+packages = ["src/patent_client_agents"]
 
 [dependency-groups]
 dev = [
@@ -120,7 +124,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["patent_client_agents", "law_tools_core"]
+known-first-party = ["patent_client_agents", "mcp_data_core"]
 
 [tool.ruff.format]
 quote-style = "double"

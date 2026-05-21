@@ -19,9 +19,9 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import ListEnvelope, make_provenance
-from law_tools_core.exceptions import ValidationError
-from law_tools_core.mcp.annotations import READ_ONLY
+from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.ipo_in_statutes import (
     IpoInStatutesClient,
     get_corpus_status,

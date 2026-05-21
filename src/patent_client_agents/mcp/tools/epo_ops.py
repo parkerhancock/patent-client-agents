@@ -8,17 +8,17 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import (
+from mcp_data_core.envelope import (
     ListEnvelope,
     ResponseEnvelope,
     decode_cursor,
     encode_cursor,
     make_provenance,
 )
-from law_tools_core.exceptions import ValidationError
-from law_tools_core.filenames import epo_pdf as _epo_pdf_name
-from law_tools_core.mcp.annotations import READ_ONLY
-from law_tools_core.mcp.downloads import (
+from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.filenames import epo_pdf as _epo_pdf_name
+from mcp_data_core.mcp.annotations import READ_ONLY
+from mcp_data_core.mcp.downloads import (
     read_resource,
     register_source,
 )

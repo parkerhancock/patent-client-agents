@@ -16,8 +16,8 @@ from unittest.mock import patch
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope
-from law_tools_core.exceptions import NotFoundError, RateLimitError
+from mcp_data_core.envelope import ListEnvelope
+from mcp_data_core.exceptions import NotFoundError, RateLimitError
 from patent_client_agents.mcp.tools import patents as patents_module
 
 

@@ -32,7 +32,7 @@ from typing import Any
 
 import httpx
 
-from law_tools_core.exceptions import AuthenticationError
+from mcp_data_core.exceptions import AuthenticationError
 
 logger = logging.getLogger(__name__)
 

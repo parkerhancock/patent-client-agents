@@ -80,7 +80,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialProceedingResponse with the proceeding data.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         trial_number = trial_number.strip()
         if not trial_number:
@@ -212,7 +212,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDecisionResponse with the decision data.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         document_identifier = document_identifier.strip()
         if not document_identifier:
@@ -236,7 +236,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDecisionResponse with all decisions for the trial.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         trial_number = trial_number.strip()
         if not trial_number:
@@ -352,7 +352,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDocumentResponse with the document data.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         document_identifier = document_identifier.strip()
         if not document_identifier:
@@ -376,7 +376,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDocumentResponse with all documents for the trial.
         """
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         trial_number = trial_number.strip()
         if not trial_number:

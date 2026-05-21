@@ -11,7 +11,7 @@ from typing import Any
 import httpx
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from law_tools_core.exceptions import ApiError
+from mcp_data_core.exceptions import ApiError
 
 from .models import PublicSearchBiblioPage, PublicSearchDocument
 from .transformers import convert_biblio_page, convert_document_payload

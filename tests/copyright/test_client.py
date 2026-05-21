@@ -227,7 +227,7 @@ class TestSearch:
 
     @pytest.mark.asyncio
     async def test_api_error_raises(self, mock_request):
-        from law_tools_core.exceptions import ServerError
+        from mcp_data_core.exceptions import ServerError
 
         mock_request.return_value = _mock_error_response(500, "Internal Server Error")
         async with CopyrightClient(use_cache=False, max_retries=1) as client:

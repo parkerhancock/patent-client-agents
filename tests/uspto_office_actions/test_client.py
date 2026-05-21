@@ -295,7 +295,7 @@ class TestClientConfig:
         # Unset env var to ensure it's not picked up
         import os
 
-        from law_tools_core.exceptions import ConfigurationError
+        from mcp_data_core.exceptions import ConfigurationError
 
         old = os.environ.pop("USPTO_ODP_API_KEY", None)
         try:

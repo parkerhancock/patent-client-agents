@@ -8,19 +8,19 @@ from urllib.parse import urlparse
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import (
+from mcp_data_core.envelope import (
     ListEnvelope,
     make_provenance,
 )
-from law_tools_core.mcp.annotations import READ_ONLY
-from law_tools_core.mcp.downloads import read_resource, register_source
+from mcp_data_core.mcp.annotations import READ_ONLY
+from mcp_data_core.mcp.downloads import read_resource, register_source
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
 
 uspto_mcp = FastMCP("USPTO")
 
 # ──────────────────────────────────────────────────────────────────────
 # Envelope helpers — USPTO ODP source-specific wrappers around
-# law_tools_core.envelope. The applications surface is the template
+# mcp_data_core.envelope. The applications surface is the template
 # referenced by CONNECTOR_STANDARDS.md §5.9; other USPTO tools (PTAB,
 # petitions, bulk data) follow the same pattern in a later sweep.
 # ──────────────────────────────────────────────────────────────────────
@@ -389,8 +389,8 @@ async def get_file_history_item(
     Call ``list_file_history`` first to discover valid
     ``document_identifier`` values for an application.
     """
-    from law_tools_core.exceptions import NotFoundError, ValidationError
-    from law_tools_core.filenames import file_history_item as _fh_name
+    from mcp_data_core.exceptions import NotFoundError, ValidationError
+    from mcp_data_core.filenames import file_history_item as _fh_name
     from patent_client_agents.uspto_odp.clients.applications import ApplicationsClient
 
     if format == "pdf":
@@ -440,7 +440,7 @@ def _parse_iso_date(value: str | None, *, field_name: str):
         return None
     from datetime import date as _date
 
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     try:
         return _date.fromisoformat(value)
@@ -489,9 +489,9 @@ async def download_file_history(
     """
     from datetime import date as _date
 
-    from law_tools_core.exceptions import ValidationError
-    from law_tools_core.filenames import file_history_item as _fh_name
-    from law_tools_core.mcp.downloads import (
+    from mcp_data_core.exceptions import ValidationError
+    from mcp_data_core.filenames import file_history_item as _fh_name
+    from mcp_data_core.mcp.downloads import (
         BulkItem,
         download_bulk_tool_result,
         fetch_with_cache,
@@ -684,7 +684,7 @@ async def get_patent_assignment(
         [application_number] if isinstance(application_number, str) else list(application_number)
     )
     if not numbers:
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         raise ValidationError("get_patent_assignment requires at least one application number")
 
@@ -937,7 +937,7 @@ async def search_ptab(
     key = type.strip().lower()
     method_name = _PTAB_SEARCH_METHOD.get(key)
     if method_name is None:
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         raise ValidationError(f"type must be one of {sorted(_PTAB_SEARCH_METHOD)}; got {type!r}")
     async with UsptoOdpClient() as client:
@@ -990,13 +990,13 @@ async def get_ptab(
     """
     key = type.strip().lower()
     if key not in _PTAB_GET_METHOD:
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         raise ValidationError(f"type must be one of {sorted(_PTAB_GET_METHOD)}; got {type!r}")
     method_name, _id_kind = _PTAB_GET_METHOD[key]
     ids = [identifier] if isinstance(identifier, str) else list(identifier)
     if not ids:
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         raise ValidationError("get_ptab requires at least one identifier")
 
@@ -1053,7 +1053,7 @@ async def list_ptab_children(
     download_ptab_trial_decisions, download_ptab_appeal_decisions,
     download_ptab_interference_decisions.
     """
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     pt = parent_type.strip().lower()
     inc = include.strip().lower()
@@ -1153,7 +1153,7 @@ def _ptab_parse_date(value: str | None, *, field_name: str):
         return None
     from datetime import date as _date
 
-    from law_tools_core.exceptions import ValidationError
+    from mcp_data_core.exceptions import ValidationError
 
     try:
         return _date.fromisoformat(value)
@@ -1183,8 +1183,8 @@ async def _run_ptab_bulk(
     manifest. Filtering (by item_ids / date) is done by the caller before
     this runs.
     """
-    from law_tools_core.exceptions import ValidationError
-    from law_tools_core.mcp.downloads import (
+    from mcp_data_core.exceptions import ValidationError
+    from mcp_data_core.mcp.downloads import (
         BulkItem,
         download_bulk_tool_result,
         fetch_with_cache,
@@ -1600,7 +1600,7 @@ def _ptab_document_filename(
     fallback_code: str | None = None,
 ) -> str:
     """Build a filename for a PTAB trial doc/decision via the shared ptab_document helper."""
-    from law_tools_core.filenames import ptab_document as _ptab_name
+    from mcp_data_core.filenames import ptab_document as _ptab_name
 
     return _ptab_name(
         proceeding_number=proceeding_number,
@@ -1618,7 +1618,7 @@ def _ptab_decision_filename(
     date: str | None,
 ) -> str:
     """Build a filename for an appeal/interference decision."""
-    from law_tools_core.filenames import ptab_document as _ptab_name
+    from mcp_data_core.filenames import ptab_document as _ptab_name
 
     return _ptab_name(
         proceeding_number=container,
@@ -1744,7 +1744,7 @@ async def get_petition(
     """
     ids = [petition_number] if isinstance(petition_number, str) else list(petition_number)
     if not ids:
-        from law_tools_core.exceptions import ValidationError
+        from mcp_data_core.exceptions import ValidationError
 
         raise ValidationError("get_petition requires at least one identifier")
 

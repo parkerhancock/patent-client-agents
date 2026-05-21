@@ -21,7 +21,7 @@ from __future__ import annotations
 import os
 from typing import Any
 
-from law_tools_core import BaseAsyncClient
+from mcp_data_core import BaseAsyncClient
 
 from .models import (
     LegislationDetail,

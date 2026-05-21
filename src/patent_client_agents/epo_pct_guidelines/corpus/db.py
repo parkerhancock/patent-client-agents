@@ -11,7 +11,7 @@ Misses raise :class:`CorpusUnavailable` with a message that tells the
 caller how to materialize the database — never a silent fallback.
 
 Lifecycle, FTS5 query plumbing, and the outline row schema live in
-:mod:`law_tools_core.corpus_db`; this module only declares the PCT
+:mod:`mcp_data_core.corpus_db`; this module only declares the PCT
 Guidelines specifics.
 """
 
@@ -19,14 +19,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from law_tools_core.corpus_db import (
+from mcp_data_core.corpus_db import (
     CorpusUnavailable,
     OutlineCorpusDB,
 )
-from law_tools_core.corpus_db import (
+from mcp_data_core.corpus_db import (
     OutlineCorpusHit as CorpusHit,
 )
-from law_tools_core.corpus_db import (
+from mcp_data_core.corpus_db import (
     OutlineCorpusSection as CorpusSection,
 )
 

@@ -9,7 +9,7 @@ and serves queries against it. Locator precedence:
 
 Misses raise :class:`CorpusUnavailable` with a hint at how to build it.
 
-Lifecycle inherits from :class:`law_tools_core.corpus_db.CorpusDBBase`;
+Lifecycle inherits from :class:`mcp_data_core.corpus_db.CorpusDBBase`;
 this module declares the IPO India row schema (statute_name +
 section_number + title + text + source_url) and its FTS5 query path.
 """
@@ -20,7 +20,7 @@ import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
-from law_tools_core.corpus_db import CorpusDBBase, CorpusUnavailable
+from mcp_data_core.corpus_db import CorpusDBBase, CorpusUnavailable
 
 
 @dataclass(frozen=True)

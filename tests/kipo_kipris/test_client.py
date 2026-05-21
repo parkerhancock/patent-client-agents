@@ -23,7 +23,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from law_tools_core.exceptions import ApiError, ConfigurationError
+from mcp_data_core.exceptions import ApiError, ConfigurationError
 from patent_client_agents.kipo_kipris import KiprisClient
 from patent_client_agents.kipo_kipris.client import (
     BASE_URL,
@@ -539,7 +539,7 @@ async def test_rate_limit_raises_rate_limit_error(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
-    from law_tools_core.exceptions import RateLimitError
+    from mcp_data_core.exceptions import RateLimitError
 
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(429, text="slow down")

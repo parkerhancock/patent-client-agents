@@ -7,16 +7,16 @@ import json
 import httpx
 import pytest
 
-from law_tools_core.base_client import BaseAsyncClient
-from law_tools_core.exceptions import (
+from mcp_data_core.base_client import BaseAsyncClient
+from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
-    LawToolsCoreError,
+    McpDataCoreError,
     NotFoundError,
     RateLimitError,
     ServerError,
 )
-from law_tools_core.resilience import is_retryable_error, with_retry
+from mcp_data_core.resilience import is_retryable_error, with_retry
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -56,21 +56,21 @@ def make_client(transport: httpx.MockTransport, **kwargs) -> BaseAsyncClient:
 
 
 # ---------------------------------------------------------------------------
-# LawToolsCoreError
+# McpDataCoreError
 # ---------------------------------------------------------------------------
 
 
-class TestLawToolsCoreError:
-    """Tests for LawToolsCoreError exception."""
+class TestMcpDataCoreError:
+    """Tests for McpDataCoreError exception."""
 
     def test_can_raise_ip_tools_error(self) -> None:
-        with pytest.raises(LawToolsCoreError):
-            raise LawToolsCoreError("test error")
+        with pytest.raises(McpDataCoreError):
+            raise McpDataCoreError("test error")
 
     def test_error_message_preserved(self) -> None:
         try:
-            raise LawToolsCoreError("custom message")
-        except LawToolsCoreError as e:
+            raise McpDataCoreError("custom message")
+        except McpDataCoreError as e:
             assert str(e) == "custom message"
 
     def test_api_error_appends_log_hint(self) -> None:

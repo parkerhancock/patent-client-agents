@@ -8,8 +8,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from law_tools_core.exceptions import ValidationError
-from law_tools_core.mcp import downloads
+from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.mcp import downloads
 from patent_client_agents.mcp.tools import uspto as uspto_tools
 
 
@@ -267,7 +267,7 @@ class TestTrialDecisions:
         result = _run(uspto_tools.download_ptab_trial_decisions("IPR2024-00001"))
         # n=1 short-circuits; confirm it uses the new trial-decisions cache prefix
         # (not ptab/documents).
-        from law_tools_core.mcp.downloads import _cache_get
+        from mcp_data_core.mcp.downloads import _cache_get
 
         assert _cache_get("ptab/trial-decisions/D1") is not None
         assert _cache_get("ptab/documents/D1") is None
