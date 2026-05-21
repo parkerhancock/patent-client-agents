@@ -1,6 +1,6 @@
 {
   "currency": "EUR",
-  "effective_date": "2026-05-20",
+  "effective_date": "2026-05-21",
   "fees": [
     {
       "amount": "285.00",
@@ -2323,7 +2323,7 @@
   "key": "EP/EPO/patent",
   "notes": "Sourced from the EPO Schedule-of-Fees SPA's backing BFF (https://fees.apps.epo.org/prod/bff/api/fees). The BFF is undocumented but stable. Renewal years 2-20 covered by codes 732-750; the parallel 752-770 series is the 'additional fee' (late-payment surcharge) for the same year. Codes 100-110 are additional fees for the IP5 sharing renewal calculation. Amounts converted from European notation ('1.595,00' \u2192 1595.00).",
   "office_code": "EPO",
-  "retrieved_at": "2026-05-20",
+  "retrieved_at": "2026-05-21",
   "right": "patent",
   "source_url": "https://www.epo.org/en/applying/fees",
   "statutory_basis": "Rules relating to Fees, EPC Implementing Regulations; set by EPO Administrative Council (CA/D decisions)."
