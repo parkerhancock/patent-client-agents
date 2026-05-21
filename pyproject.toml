@@ -150,4 +150,11 @@ markers = [
 ]
 
 [tool.uv]
+# 7-day supply-chain cooldown — rejects upstream packages newer than this
+# window so a brand-new compromised release on PyPI doesn't get pulled in
+# unnoticed.
 exclude-newer = "7 days"
+
+# First-party packages are exempt from the cooldown — we control these
+# releases, so freshly-published versions are trusted on day zero.
+exclude-newer-package = { "mcp-data-core" = "2099-01-01" }
