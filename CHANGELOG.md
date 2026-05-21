@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.21.0] — 2026-05-21
+
+### Changed
+
+- **Shared scaffolding extracted to [`mcp-data-core`](https://github.com/parkerhancock/mcp-data-core).** The `law_tools_core` subpackage that previously shipped inside this wheel now lives in a standalone package on PyPI. `patent-client-agents` depends on `mcp-data-core>=0.1.0` and imports the primitives via `from mcp_data_core import ...`. Public API is identical apart from the import path; in-tree consumers should rewrite `law_tools_core` → `mcp_data_core` and `LawToolsCoreError` → `McpDataCoreError`.
+
+### Removed
+
+- **`src/law_tools_core/` no longer ships in the `patent-client-agents` wheel.** Install `mcp-data-core` directly for the shared HTTP client base, cache, retry, OAuth2, response envelopes, exception hierarchy, file logging, corpus utilities, and MCP server scaffolding.
+
 ### Added
 
 - **Compressed outline corpora + GCS-driven bootstrap.** The eight
