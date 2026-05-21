@@ -33,6 +33,7 @@ dependencies = [
     "pytesseract>=0.3.10",
     "pdf2image>=1.17",
     "pyyaml>=6.0",
+    "zstandard>=0.22",
 ]
 
 [project.optional-dependencies]

@@ -33,6 +33,7 @@ from pathlib import Path
 import httpx
 from lxml import html
 
+from law_tools_core.corpus_compression import finalize_outline_corpus
 from law_tools_core.resilience import default_retryer
 
 from .schema import DDL, SCHEMA_VERSION
@@ -215,7 +216,7 @@ async def build_corpus(
                     logger.info("  %d/%d  %s", i, len(paths), slug)
                 if pause:
                     await asyncio.sleep(pause)
-            conn.commit()
+            finalize_outline_corpus(conn, logger=logger)
         finally:
             conn.close()
 
