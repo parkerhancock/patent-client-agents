@@ -21,7 +21,7 @@ jobs:
         run: uv python install 3.11
 
       - name: Install dependencies
-        run: uv sync --group dev --all-extras
+        run: uv sync --group dev --all-extras --no-sources
 
       - name: Run ruff check
         run: uv run ruff check .
@@ -41,7 +41,7 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
       - name: Install dependencies
-        run: uv sync --group dev --all-extras
+        run: uv sync --group dev --all-extras --no-sources
       - name: Validate manifests
         run: uv run python scripts/build_coverage.py --check
 
@@ -62,7 +62,7 @@ jobs:
         run: uv python install 3.11
 
       - name: Install dependencies
-        run: uv sync --group dev --all-extras
+        run: uv sync --group dev --all-extras --no-sources
 
       - name: Run type checking
         run: uv run ty check src/
@@ -84,7 +84,7 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: uv sync --group dev --all-extras
+        run: uv sync --group dev --all-extras --no-sources
 
       - name: Run tests with coverage
         # Coverage floor: 60% (current baseline: ~71% as of 2026-05-19).

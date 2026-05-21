@@ -59,7 +59,7 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
 
       - name: Install dependencies (library + MCP + dev)
-        run: uv sync --all-extras --group dev
+        run: uv sync --all-extras --group dev --no-sources
 
       - name: Run test suite (VCR replay; no network)
         run: uv run pytest -q

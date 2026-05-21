@@ -39,6 +39,10 @@ dependencies = [
 ]
 
 [tool.uv.sources]
+# Required by uv when both a workspace member and a published PyPI release
+# exist for the same package. Standalone CI builds (pca's own GitHub repo
+# clone, with no parent workspace) must pass `--no-sources` to ignore this
+# directive and resolve mcp-data-core from PyPI.
 mcp-data-core = { workspace = true }
 
 [project.optional-dependencies]
