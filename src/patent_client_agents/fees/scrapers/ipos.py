@@ -267,7 +267,13 @@ def _categorize_patent(form: str, label: str) -> FeeCategory:
         return FeeCategory.publication
     if "hearing" in d:
         return FeeCategory.appeal
-    if "register" in d or "transmission" in d or "licence" in d or "mortgage" in d or "assignment" in d:
+    if (
+        "register" in d
+        or "transmission" in d
+        or "licence" in d
+        or "mortgage" in d
+        or "assignment" in d
+    ):
         return FeeCategory.transfer
     if "translation" in d:
         return FeeCategory.translation
@@ -392,7 +398,11 @@ def _pf15_renewal_years(description: str) -> list[int]:
 
 def _per_class_condition(text: str) -> FeeCondition | None:
     lower = text.lower()
-    if "per class" in lower or "per additional class" in lower or "for each subsequent class" in lower:
+    if (
+        "per class" in lower
+        or "per additional class" in lower
+        or "for each subsequent class" in lower
+    ):
         if "additional class" in lower or "subsequent class" in lower:
             return FeeCondition(
                 trigger=ConditionalTrigger.classes_over,
@@ -545,30 +555,34 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
                 for amount in amounts:
                     for yr in years:
                         code = _unique(_slug("sg-pat", form, "y", str(yr)), seen_codes)
-                        fees.append(_mk_patent_fee(
-                            code=code,
-                            label=f"{form}: {description}",
-                            category=base_category,
-                            amount=amount,
-                            year=yr,
-                            condition=None,
-                            notes=None,
-                        ))
+                        fees.append(
+                            _mk_patent_fee(
+                                code=code,
+                                label=f"{form}: {description}",
+                                category=base_category,
+                                amount=amount,
+                                year=yr,
+                                condition=None,
+                                notes=None,
+                            )
+                        )
                 continue
 
             # Standard rows: emit one FeeItem per amount.
             for idx, amount in enumerate(amounts):
                 suffix = "" if idx == 0 else f"v{idx + 1}"
                 code = _unique(_slug("sg-pat", form, description[:40], suffix), seen_codes)
-                fees.append(_mk_patent_fee(
-                    code=code,
-                    label=f"{form}: {description}",
-                    category=base_category,
-                    amount=amount,
-                    year=None,
-                    condition=None,
-                    notes=None,
-                ))
+                fees.append(
+                    _mk_patent_fee(
+                        code=code,
+                        label=f"{form}: {description}",
+                        category=base_category,
+                        amount=amount,
+                        year=None,
+                        condition=None,
+                        notes=None,
+                    )
+                )
 
             # Excess-claims surcharge — emit as a separate row when the
             # cell describes per-claim surcharge in addition to the base.
@@ -580,15 +594,17 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
                     _slug("sg-pat", form, "excess-claims"),
                     seen_codes,
                 )
-                fees.append(_mk_patent_fee(
-                    code=code,
-                    label=f"{form}: excess claims surcharge",
-                    category=FeeCategory.excess_claims,
-                    amount=surcharge_amount,
-                    year=None,
-                    condition=claim_condition,
-                    notes=f"Surcharge over base {form} fee.",
-                ))
+                fees.append(
+                    _mk_patent_fee(
+                        code=code,
+                        label=f"{form}: excess claims surcharge",
+                        category=FeeCategory.excess_claims,
+                        amount=surcharge_amount,
+                        year=None,
+                        condition=claim_condition,
+                        notes=f"Surcharge over base {form} fee.",
+                    )
+                )
 
     return fees
 
@@ -655,9 +671,30 @@ def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
                         if idx == 0
                         else "Specification not fully adopted from IPOS' Classification Database."
                     )
-                    fees.append(FeeItem(
+                    fees.append(
+                        FeeItem(
+                            code=code,
+                            label=f"{form}: {description} ({spec_label})",
+                            category=category,
+                            rights=[RightType.trademark],
+                            amount=amount,
+                            currency="SGD",
+                            tier=EntityTier.none,
+                            year=year,
+                            condition=class_condition,
+                            source_url=IPOS_TRADEMARKS_URL,
+                            notes=note,
+                        )
+                    )
+                continue
+
+            for idx, amount in enumerate(amounts):
+                suffix = "" if idx == 0 else f"v{idx + 1}"
+                code = _unique(_slug("sg-tm", form, description[:40], suffix), seen_codes)
+                fees.append(
+                    FeeItem(
                         code=code,
-                        label=f"{form}: {description} ({spec_label})",
+                        label=f"{form}: {description}",
                         category=category,
                         rights=[RightType.trademark],
                         amount=amount,
@@ -666,26 +703,9 @@ def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
                         year=year,
                         condition=class_condition,
                         source_url=IPOS_TRADEMARKS_URL,
-                        notes=note,
-                    ))
-                continue
-
-            for idx, amount in enumerate(amounts):
-                suffix = "" if idx == 0 else f"v{idx + 1}"
-                code = _unique(_slug("sg-tm", form, description[:40], suffix), seen_codes)
-                fees.append(FeeItem(
-                    code=code,
-                    label=f"{form}: {description}",
-                    category=category,
-                    rights=[RightType.trademark],
-                    amount=amount,
-                    currency="SGD",
-                    tier=EntityTier.none,
-                    year=year,
-                    condition=class_condition,
-                    source_url=IPOS_TRADEMARKS_URL,
-                    notes=None,
-                ))
+                        notes=None,
+                    )
+                )
 
     return fees
 
@@ -723,19 +743,21 @@ def _build_design_fees(doc: L.HtmlElement) -> list[FeeItem]:
             for idx, amount in enumerate(amounts):
                 suffix = "" if idx == 0 else f"v{idx + 1}"
                 code = _unique(_slug("sg-des", form, description[:40], suffix), seen_codes)
-                fees.append(FeeItem(
-                    code=code,
-                    label=f"{form}: {description}",
-                    category=category,
-                    rights=[RightType.design],
-                    amount=amount,
-                    currency="SGD",
-                    tier=EntityTier.none,
-                    year=year,
-                    condition=None,
-                    source_url=IPOS_DESIGNS_URL,
-                    notes=None,
-                ))
+                fees.append(
+                    FeeItem(
+                        code=code,
+                        label=f"{form}: {description}",
+                        category=category,
+                        rights=[RightType.design],
+                        amount=amount,
+                        currency="SGD",
+                        tier=EntityTier.none,
+                        year=year,
+                        condition=None,
+                        source_url=IPOS_DESIGNS_URL,
+                        notes=None,
+                    )
+                )
 
     return fees
 
@@ -772,9 +794,7 @@ async def scrape_ipos_patents() -> FeeSchedule:
     doc = L.fromstring(html_text)
     fees = _build_patent_fees(doc)
     if not fees:
-        raise RuntimeError(
-            "IPOS patent scraper parsed zero rows — page structure may have changed"
-        )
+        raise RuntimeError("IPOS patent scraper parsed zero rows — page structure may have changed")
     return FeeSchedule(
         jurisdiction="SG",
         issuing_body="Intellectual Property Office of Singapore (IPOS)",
@@ -842,9 +862,7 @@ async def scrape_ipos_designs() -> FeeSchedule:
     doc = L.fromstring(html_text)
     fees = _build_design_fees(doc)
     if not fees:
-        raise RuntimeError(
-            "IPOS design scraper parsed zero rows — page structure may have changed"
-        )
+        raise RuntimeError("IPOS design scraper parsed zero rows — page structure may have changed")
     return FeeSchedule(
         jurisdiction="SG",
         issuing_body="Intellectual Property Office of Singapore (IPOS)",

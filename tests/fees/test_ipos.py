@@ -171,53 +171,77 @@ class TestPerClassCondition:
 
 class TestCategorizers:
     def test_patent_pf1_filing(self) -> None:
-        assert ipos._categorize_patent("PF1", "Request for the Grant of a Patent") == FeeCategory.filing
+        assert (
+            ipos._categorize_patent("PF1", "Request for the Grant of a Patent")
+            == FeeCategory.filing
+        )
 
     def test_patent_pf15_renewal(self) -> None:
-        assert ipos._categorize_patent(
-            "PF15", "For each year of renewal in respect of the 5th, 6th or 7th year of the patent"
-        ) == FeeCategory.renewal
+        assert (
+            ipos._categorize_patent(
+                "PF15",
+                "For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
+            )
+            == FeeCategory.renewal
+        )
 
     def test_patent_late_payment(self) -> None:
-        assert ipos._categorize_patent(
-            "PF15", "For late payment of renewal fee not exceeding one month"
-        ) == FeeCategory.late_fee
+        assert (
+            ipos._categorize_patent(
+                "PF15", "For late payment of renewal fee not exceeding one month"
+            )
+            == FeeCategory.late_fee
+        )
 
     def test_patent_additional_fee_section_opener_not_late_fee(self) -> None:
         # The PF15 section opener "Payment of Renewal Fee and Any
         # Additional Fee" must NOT trigger late_fee — only "late
         # payment" should.
-        assert ipos._categorize_patent(
-            "PF15",
-            "Payment of Renewal Fee and Any Additional Fee — Renewal Fee(a) For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
-        ) == FeeCategory.renewal
+        assert (
+            ipos._categorize_patent(
+                "PF15",
+                "Payment of Renewal Fee and Any Additional Fee — Renewal Fee(a) For each year of renewal in respect of the 5th, 6th or 7th year of the patent",
+            )
+            == FeeCategory.renewal
+        )
 
     def test_trademark_tm4_filing(self) -> None:
-        assert ipos._categorize_trademark(
-            "TM4", "Application to register a trade mark"
-        ) == FeeCategory.filing
+        assert (
+            ipos._categorize_trademark("TM4", "Application to register a trade mark")
+            == FeeCategory.filing
+        )
 
     def test_trademark_renewal(self) -> None:
-        assert ipos._categorize_trademark("TM19", "Application for renewal of trade mark") == FeeCategory.renewal
+        assert (
+            ipos._categorize_trademark("TM19", "Application for renewal of trade mark")
+            == FeeCategory.renewal
+        )
 
     def test_trademark_madrid(self) -> None:
-        assert ipos._categorize_trademark(
-            "MM2(E)", "Application for international registration"
-        ) == FeeCategory.madrid
+        assert (
+            ipos._categorize_trademark("MM2(E)", "Application for international registration")
+            == FeeCategory.madrid
+        )
 
     def test_design_extension_is_renewal(self) -> None:
         # The D8 "Application for extension of period of registration"
         # row is the design renewal track — must NOT be miscategorized
         # as filing despite containing "registration of a design".
-        assert ipos._categorize_design(
-            "D8",
-            "Application for extension of period of registration of a design — (a) for the first period of 5 years",
-        ) == FeeCategory.renewal
+        assert (
+            ipos._categorize_design(
+                "D8",
+                "Application for extension of period of registration of a design — (a) for the first period of 5 years",
+            )
+            == FeeCategory.renewal
+        )
 
     def test_design_d3_filing(self) -> None:
-        assert ipos._categorize_design(
-            "D3", "Application for registration of a design under Section 11"
-        ) == FeeCategory.filing
+        assert (
+            ipos._categorize_design(
+                "D3", "Application for registration of a design under Section 11"
+            )
+            == FeeCategory.filing
+        )
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -267,7 +291,8 @@ class TestBuildPatentFees:
     def test_pf15_year_band_5_to_7_at_176(self, patent_doc) -> None:
         fees = ipos._build_patent_fees(patent_doc)
         y5_7 = [
-            f for f in fees
+            f
+            for f in fees
             if f.category == FeeCategory.renewal
             and f.amount == Decimal("176")
             and f.year in (5, 6, 7)
@@ -280,22 +305,24 @@ class TestBuildPatentFees:
 
     def test_pf15_year_band_8_to_10_at_460(self, patent_doc) -> None:
         fees = ipos._build_patent_fees(patent_doc)
-        years = sorted({
-            f.year for f in fees
-            if f.category == FeeCategory.renewal
-            and f.amount == Decimal("460")
-            and f.year in (8, 9, 10)
-        })
+        years = sorted(
+            {
+                f.year
+                for f in fees
+                if f.category == FeeCategory.renewal
+                and f.amount == Decimal("460")
+                and f.year in (8, 9, 10)
+            }
+        )
         assert years == [8, 9, 10]
 
     def test_pf15_post_20_year_band(self, patent_doc) -> None:
         # PF15(g) covers "after the 20th year" — represented as year=21.
         fees = ipos._build_patent_fees(patent_doc)
         post20 = [
-            f for f in fees
-            if f.category == FeeCategory.renewal
-            and f.year == 21
-            and f.amount == Decimal("1470")
+            f
+            for f in fees
+            if f.category == FeeCategory.renewal and f.year == 21 and f.amount == Decimal("1470")
         ]
         assert post20
 
@@ -314,7 +341,11 @@ class TestBuildTrademarkFees:
         assert custom.amount == Decimal("410")
         assert preapproved.category == FeeCategory.filing
         assert custom.category == FeeCategory.filing
-        assert preapproved.notes is not None and "pre-approved" in preapproved.notes.lower() or "fully adopted" in preapproved.notes.lower()
+        assert (
+            preapproved.notes is not None
+            and "pre-approved" in preapproved.notes.lower()
+            or "fully adopted" in preapproved.notes.lower()
+        )
 
     def test_tm4_carries_per_class_condition(self, trademark_doc) -> None:
         fees = ipos._build_trademark_fees(trademark_doc)
@@ -360,9 +391,7 @@ class TestBuildDesignFees:
         # sub-row so they all classify as renewal.
         fees = ipos._build_design_fees(design_doc)
         d8_renewals = [
-            f for f in fees
-            if f.category == FeeCategory.renewal
-            and f.code.startswith("sg-des-d8-")
+            f for f in fees if f.category == FeeCategory.renewal and f.code.startswith("sg-des-d8-")
         ]
         years = sorted({f.year for f in d8_renewals if f.year is not None})
         assert years == [10, 15, 20, 25]

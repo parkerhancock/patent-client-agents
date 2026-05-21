@@ -136,13 +136,11 @@ logger = logging.getLogger(__name__)
 
 
 IMPI_FEES_PDF_URL = (
-    "https://www.gob.mx/cms/uploads/attachment/file/824879/"
-    "Acuerdo.Tarifa.12.05.23.pdf"
+    "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf"
 )
 IMPI_LAST_REFORM_DATE = date(2023, 5, 12)
 IMPI_MARCH_2024_AMENDMENT_URL = (
-    "https://www.dof.gob.mx/nota_detalle.php?"
-    "codigo=5720420&fecha=15/03/2024"
+    "https://www.dof.gob.mx/nota_detalle.php?codigo=5720420&fecha=15/03/2024"
 )
 
 
@@ -242,7 +240,7 @@ def _parse_rows(text: str) -> list[tuple[str, str, Decimal]]:
             continue
         raw_code = re.sub(r"\s+", " ", last_code_match.group(1).strip())
         desc_start = last_code_match.start(2)
-        desc = text[desc_start:amt_match.start()].strip()
+        desc = text[desc_start : amt_match.start()].strip()
         desc = re.sub(r"\s+", " ", desc).rstrip(";").rstrip()
 
         # Filter out footer artifacts (page-number + phone fragments).
@@ -272,9 +270,7 @@ def _parse_rows(text: str) -> list[tuple[str, str, Decimal]]:
 # ──────────────────────────────────────────────────────────────────────
 
 
-_CUARTA_ELIGIBLE_BASES: frozenset[int] = frozenset(
-    list(range(2, 14)) + [19, 20, 21, 22, 23]
-)
+_CUARTA_ELIGIBLE_BASES: frozenset[int] = frozenset(list(range(2, 14)) + [19, 20, 21, 22, 23])
 # Article 1 is partially eligible: 1a-1f are Cuarta-eligible, 1g/1h
 # (Certificado Complementario) and 1i/1j (PASE + explotación) are not
 # per the LFPPI reform.
@@ -463,19 +459,21 @@ def _emit_fees_for_rights(
             continue
         seen_codes.add(slug)
 
-        fees.append(FeeItem(
-            code=slug,
-            label=description[:200],
-            category=category,
-            rights=[target_right],
-            amount=amount,
-            currency="MXN",
-            tier=EntityTier.large,
-            year=year,
-            condition=None,
-            source_url=IMPI_FEES_PDF_URL,
-            notes=f"Article {code}.",
-        ))
+        fees.append(
+            FeeItem(
+                code=slug,
+                label=description[:200],
+                category=category,
+                rights=[target_right],
+                amount=amount,
+                currency="MXN",
+                tier=EntityTier.large,
+                year=year,
+                condition=None,
+                source_url=IMPI_FEES_PDF_URL,
+                notes=f"Article {code}.",
+            )
+        )
 
         if target_right is not RightType.trademark and _is_cuarta_eligible(code):
             # Disposición Cuarta — 50% reduction for individual
@@ -485,24 +483,26 @@ def _emit_fees_for_rights(
             small_slug = f"{slug}-small"
             if small_slug not in seen_codes:
                 seen_codes.add(small_slug)
-                fees.append(FeeItem(
-                    code=small_slug,
-                    label=description[:200],
-                    category=category,
-                    rights=[target_right],
-                    amount=half,
-                    currency="MXN",
-                    tier=EntityTier.small,
-                    year=year,
-                    condition=None,
-                    source_url=IMPI_FEES_PDF_URL,
-                    notes=(
-                        f"Article {code}; 50% reduction under "
-                        "Disposición Cuarta (individual inventors, "
-                        "micro/small industry, universities, public "
-                        "research institutes)."
-                    ),
-                ))
+                fees.append(
+                    FeeItem(
+                        code=small_slug,
+                        label=description[:200],
+                        category=category,
+                        rights=[target_right],
+                        amount=half,
+                        currency="MXN",
+                        tier=EntityTier.small,
+                        year=year,
+                        condition=None,
+                        source_url=IMPI_FEES_PDF_URL,
+                        notes=(
+                            f"Article {code}; 50% reduction under "
+                            "Disposición Cuarta (individual inventors, "
+                            "micro/small industry, universities, public "
+                            "research institutes)."
+                        ),
+                    )
+                )
 
     return fees
 
@@ -529,9 +529,7 @@ async def scrape_impi_patents() -> FeeSchedule:
     rows = _parse_rows(text)
     fees = _emit_fees_for_rights(rows, "patent", RightType.patent)
     if not fees:
-        raise RuntimeError(
-            "IMPI patent scraper parsed zero rows — PDF structure may have changed"
-        )
+        raise RuntimeError("IMPI patent scraper parsed zero rows — PDF structure may have changed")
     return FeeSchedule(
         jurisdiction="MX",
         issuing_body="Instituto Mexicano de la Propiedad Industrial (IMPI)",
@@ -603,9 +601,7 @@ async def scrape_impi_designs() -> FeeSchedule:
     rows = _parse_rows(text)
     fees = _emit_fees_for_rights(rows, "design", RightType.design)
     if not fees:
-        raise RuntimeError(
-            "IMPI design scraper parsed zero rows — PDF structure may have changed"
-        )
+        raise RuntimeError("IMPI design scraper parsed zero rows — PDF structure may have changed")
     return FeeSchedule(
         jurisdiction="MX",
         issuing_body="Instituto Mexicano de la Propiedad Industrial (IMPI)",

@@ -170,8 +170,7 @@ TR_TRADEMARKS_URL = f"{TR_TURKPATENT_BASE}/marka-islem-ucretleri"
 TR_DESIGNS_URL = f"{TR_TURKPATENT_BASE}/tasarim-islem-ucretleri"
 TR_GAZETTE_PDF = "https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-37.pdf"
 TR_GAZETTE_CITATION = (
-    "Resmî Gazete 5. mükerrer 31-12-2025, "
-    "BİK/TÜRKPATENT 2026/1 (Law 6769 Art. 188)"
+    "Resmî Gazete 5. mükerrer 31-12-2025, BİK/TÜRKPATENT 2026/1 (Law 6769 Art. 188)"
 )
 
 RightPath = Literal["patent", "marka", "tasarim"]
@@ -240,11 +239,7 @@ def _parse_tr_amount(raw: str) -> Decimal | None:
 def _looks_like_formula(text: str) -> bool:
     """A row is a formula if it references 'ödenmesi gereken' or 'katı'."""
     lower = text.lower()
-    return (
-        "ödenmesi gereken" in lower
-        or "katı" in lower
-        or "harç" in lower and "%" in lower
-    )
+    return "ödenmesi gereken" in lower or "katı" in lower or "harç" in lower and "%" in lower
 
 
 def _is_chf_row(text: str) -> bool:
@@ -456,7 +451,14 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
             continue
         if len(cells) < 6:
             continue
-        code, label, ucret, kdv, harc, toplam = cells[0], cells[1], cells[2], cells[3], cells[4], cells[5]
+        code, label, ucret, kdv, harc, toplam = (
+            cells[0],
+            cells[1],
+            cells[2],
+            cells[3],
+            cells[4],
+            cells[5],
+        )
         if not code.startswith("01."):
             continue
         if _is_chf_row(toplam):
@@ -488,19 +490,21 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
             # Defensive fallback so the renewal validator passes.
             year = 1
 
-        fees.append(FeeItem(
-            code=f"tr-pat-{code}",
-            label=label[:200],
-            category=category,
-            rights=[RightType.patent],
-            amount=amount,
-            currency="TRY",
-            tier=EntityTier.none,
-            year=year,
-            condition=None,
-            source_url=TR_PATENTS_URL,
-            notes=notes,
-        ))
+        fees.append(
+            FeeItem(
+                code=f"tr-pat-{code}",
+                label=label[:200],
+                category=category,
+                rights=[RightType.patent],
+                amount=amount,
+                currency="TRY",
+                tier=EntityTier.none,
+                year=year,
+                condition=None,
+                source_url=TR_PATENTS_URL,
+                notes=notes,
+            )
+        )
     return fees
 
 
@@ -543,19 +547,21 @@ def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
         # carry year=10 so the renewal validator is satisfied.
         year = 10 if category is FeeCategory.renewal else None
 
-        fees.append(FeeItem(
-            code=f"tr-tm-{code}",
-            label=label[:200],
-            category=category,
-            rights=[RightType.trademark],
-            amount=amount,
-            currency="TRY",
-            tier=EntityTier.none,
-            year=year,
-            condition=condition,
-            source_url=TR_TRADEMARKS_URL,
-            notes=None,
-        ))
+        fees.append(
+            FeeItem(
+                code=f"tr-tm-{code}",
+                label=label[:200],
+                category=category,
+                rights=[RightType.trademark],
+                amount=amount,
+                currency="TRY",
+                tier=EntityTier.none,
+                year=year,
+                condition=condition,
+                source_url=TR_TRADEMARKS_URL,
+                notes=None,
+            )
+        )
     return fees
 
 
@@ -585,18 +591,22 @@ def _build_design_fees(doc: L.HtmlElement) -> list[FeeItem]:
             sub_amounts = _parse_design_multi_body(amount_text)
             if sub_amounts:
                 for suffix, sub_amount in sub_amounts:
-                    fees.append(FeeItem(
-                        code=f"tr-des-{code}-{suffix}",
-                        label=f"{label} ({suffix.replace('to', '-').replace('d', 'designs ').replace('plus', '+')})"[:200],
-                        category=FeeCategory.filing,
-                        rights=[RightType.design],
-                        amount=sub_amount,
-                        currency="TRY",
-                        tier=EntityTier.none,
-                        condition=None,
-                        source_url=TR_DESIGNS_URL,
-                        notes=amount_text[:500],
-                    ))
+                    fees.append(
+                        FeeItem(
+                            code=f"tr-des-{code}-{suffix}",
+                            label=f"{label} ({suffix.replace('to', '-').replace('d', 'designs ').replace('plus', '+')})"[
+                                :200
+                            ],
+                            category=FeeCategory.filing,
+                            rights=[RightType.design],
+                            amount=sub_amount,
+                            currency="TRY",
+                            tier=EntityTier.none,
+                            condition=None,
+                            source_url=TR_DESIGNS_URL,
+                            notes=amount_text[:500],
+                        )
+                    )
                 continue
 
         amount = _parse_tr_amount(amount_text)
@@ -611,19 +621,21 @@ def _build_design_fees(doc: L.HtmlElement) -> list[FeeItem]:
         # the per-5yr fee, not a year-specific amount.
         year = 10 if category is FeeCategory.renewal else None
 
-        fees.append(FeeItem(
-            code=f"tr-des-{code}",
-            label=label[:200],
-            category=category,
-            rights=[RightType.design],
-            amount=amount,
-            currency="TRY",
-            tier=EntityTier.none,
-            year=year,
-            condition=None,
-            source_url=TR_DESIGNS_URL,
-            notes=None,
-        ))
+        fees.append(
+            FeeItem(
+                code=f"tr-des-{code}",
+                label=label[:200],
+                category=category,
+                rights=[RightType.design],
+                amount=amount,
+                currency="TRY",
+                tier=EntityTier.none,
+                year=year,
+                condition=None,
+                source_url=TR_DESIGNS_URL,
+                notes=None,
+            )
+        )
     return fees
 
 
@@ -633,8 +645,7 @@ def _build_design_fees(doc: L.HtmlElement) -> list[FeeItem]:
 
 
 _STATUTORY = (
-    "Sınai Mülkiyet Kanunu (Law 6769) Art. 188; "
-    f"{TR_GAZETTE_CITATION} (PDF: {TR_GAZETTE_PDF})."
+    f"Sınai Mülkiyet Kanunu (Law 6769) Art. 188; {TR_GAZETTE_CITATION} (PDF: {TR_GAZETTE_PDF})."
 )
 
 

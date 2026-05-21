@@ -12,7 +12,7 @@
   "mcpServers": {
     "patent-client-agents": {
       "command": "uvx",
-      "args": ["--from", "patent-client-agents[mcp]==0.19.0", "patent-client-agents-mcp"]
+      "args": ["--from", "patent-client-agents[mcp]==0.20.0", "patent-client-agents-mcp"]
     }
   }
 }

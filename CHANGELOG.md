@@ -9,6 +9,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- **Compressed outline corpora + GCS-driven bootstrap.** The eight
+  outline-shaped corpora (`mpep`, `tmep`, `epc`, `epo_guidelines`,
+  `epo_pct_guidelines`, `epo_up_guidelines`, `epo_case_law`,
+  `ukipo_mopp`) now ship as zstd-compressed SQLite files — total
+  footprint drops from ~228 MB to ~67 MB (-70%; per-corpus ratios
+  range from 4× to 36×, with `epc` benefiting most from
+  statute-template repetition). New `law_tools_core.corpus_compression`
+  exposes `compress_text_column(conn, table, column)` (trains a 64 KB
+  zstd dictionary on a row sample, compresses every row in-place,
+  persists the dictionary in a sidecar `compression_dict` table) and
+  `finalize_outline_corpus(conn)` (the canonical compress → FTS5
+  `optimize` → `VACUUM` build-finalization sequence). Read-side
+  decompression is transparent: `CorpusDBBase` gains a lazy
+  `_decoders` cache and `_column_value()` helper; `OutlineCorpusDB.
+  _row_to_section` reads through it, so consumers of `get_section()`
+  see decompressed `html` with zero contract change. Backward-
+  compatible: corpora without a `compression_dict` table still read
+  as plain TEXT. FTS5 indexes the unindexed `text` column, so
+  `search()` and native `snippet()` are unaffected.
+- **`corpus_bootstrap` module + `patent-client-agents-bootstrap-corpora`
+  CLI.** Manifest-driven materialization of the compressed corpora
+  into the local cache. Reads a JSON manifest from `gs://bucket/path`
+  (via `google-cloud-storage` with ADC / Workload Identity), `file://`
+  paths, or bare local paths, then for each entry: verifies the
+  cached file's SHA-256, downloads to a `.tmp` sibling and atomic-
+  renames on a miss, otherwise skips. Idempotent — designed to run
+  on every container start. Manifest `schema_version=1` shape:
+  `{schema_version, updated_at, corpora: {name → {uri, sha256,
+  size_bytes, local_filename, snapshot, built_at, section_count,
+  source_version}}}`. Cloud Run cold-start projected at 2–3 s
+  same-region (67 MB of compressed `.db` files); warm-start ~2 s
+  for SHA verification only. Adds `google-cloud-storage>=2.18` as a
+  runtime dep (lazy-imported in the GCS code path, so consumers
+  using only `file://` or local paths pay no startup cost).
+
 - **INPI France fee schedules (patent + trademark + design).** Adds
   three routes to the bundled `patent_client_agents.fees` connector:
   `FR/INPI/Fees/Patent` (49 FeeItems incl. annuity years 2-20 plus

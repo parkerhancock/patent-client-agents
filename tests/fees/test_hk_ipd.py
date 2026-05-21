@@ -27,7 +27,6 @@ from lxml import html as L
 
 from patent_client_agents.fees.models import (
     ConditionalTrigger,
-    EntityTier,
     FeeCategory,
     FeeSchedule,
     RightType,
@@ -80,9 +79,12 @@ class TestClassifyPatentRoute:
         assert hk_ipd._classify_patent_route("Request for grant of a standard patent (O)") == "ogp"
 
     def test_rr_tag(self) -> None:
-        assert hk_ipd._classify_patent_route(
-            "Request to record a designated patent application for a standard patent (R)"
-        ) == "rr"
+        assert (
+            hk_ipd._classify_patent_route(
+                "Request to record a designated patent application for a standard patent (R)"
+            )
+            == "rr"
+        )
 
     def test_short_term_patent(self) -> None:
         assert hk_ipd._classify_patent_route("Request for grant of a short-term patent") == "stp"
@@ -146,17 +148,31 @@ class TestLabelWithContext:
 class TestRenewalYears:
     def test_year_band_expands(self) -> None:
         assert hk_ipd._renewal_years("4th to 10th year of the 20-year term") == [
-            4, 5, 6, 7, 8, 9, 10
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
         ]
 
     def test_year_band_11_to_15(self) -> None:
         assert hk_ipd._renewal_years("11th to 15th year of the 20-year term") == [
-            11, 12, 13, 14, 15
+            11,
+            12,
+            13,
+            14,
+            15,
         ]
 
     def test_year_band_16_to_20(self) -> None:
         assert hk_ipd._renewal_years("16th to 20th year of the 20-year term") == [
-            16, 17, 18, 19, 20
+            16,
+            17,
+            18,
+            19,
+            20,
         ]
 
     def test_single_year_ordinal(self) -> None:
@@ -189,9 +205,7 @@ class TestIsDuplicate:
         seen: set = set()
         hk_ipd._is_duplicate("Renewal", Decimal("450"), FeeCategory.renewal, 4, seen)
         # year=5 is a distinct FeeItem.
-        assert not hk_ipd._is_duplicate(
-            "Renewal", Decimal("450"), FeeCategory.renewal, 5, seen
-        )
+        assert not hk_ipd._is_duplicate("Renewal", Decimal("450"), FeeCategory.renewal, 5, seen)
 
 
 class TestCategorizers:
@@ -201,49 +215,67 @@ class TestCategorizers:
     """
 
     def test_patent_late_fee_beats_renewal(self) -> None:
-        assert hk_ipd._categorize_patent(
-            "Additional fee for late payment of a renewal fee of a standard patent"
-        ) == FeeCategory.late_fee
+        assert (
+            hk_ipd._categorize_patent(
+                "Additional fee for late payment of a renewal fee of a standard patent"
+            )
+            == FeeCategory.late_fee
+        )
 
     def test_patent_renewal_fires_when_no_late_keyword(self) -> None:
-        assert hk_ipd._categorize_patent(
-            "Request for renewal of a standard patent for a further year after the expiry of the 3rd year"
-        ) == FeeCategory.renewal
+        assert (
+            hk_ipd._categorize_patent(
+                "Request for renewal of a standard patent for a further year after the expiry of the 3rd year"
+            )
+            == FeeCategory.renewal
+        )
 
     def test_patent_substantive_examination(self) -> None:
-        assert hk_ipd._categorize_patent(
-            "Request for substantive examination of a standard patent (O) application"
-        ) == FeeCategory.examination
+        assert (
+            hk_ipd._categorize_patent(
+                "Request for substantive examination of a standard patent (O) application"
+            )
+            == FeeCategory.examination
+        )
 
     def test_patent_advertisement_is_publication(self) -> None:
         assert hk_ipd._categorize_patent("Advertisement fee") == FeeCategory.publication
 
     def test_patent_grant_route_o(self) -> None:
-        assert hk_ipd._categorize_patent(
-            "Request for grant of a standard patent (O)"
-        ) == FeeCategory.grant
+        assert (
+            hk_ipd._categorize_patent("Request for grant of a standard patent (O)")
+            == FeeCategory.grant
+        )
 
     def test_patent_grant_route_r(self) -> None:
-        assert hk_ipd._categorize_patent(
-            "Request for registration of a designated patent and grant of a standard patent (R)"
-        ) == FeeCategory.grant
+        assert (
+            hk_ipd._categorize_patent(
+                "Request for registration of a designated patent and grant of a standard patent (R)"
+            )
+            == FeeCategory.grant
+        )
 
     def test_trademark_late_renewal_beats_renewal(self) -> None:
-        assert hk_ipd._categorize_trademark(
-            "Late renewal of a trade mark registration"
-        ) == FeeCategory.late_fee
+        assert (
+            hk_ipd._categorize_trademark("Late renewal of a trade mark registration")
+            == FeeCategory.late_fee
+        )
 
     def test_trademark_application_is_filing(self) -> None:
-        assert hk_ipd._categorize_trademark(
-            "Application for registration of a trade mark (including certification mark and collective mark)"
-        ) == FeeCategory.filing
+        assert (
+            hk_ipd._categorize_trademark(
+                "Application for registration of a trade mark (including certification mark and collective mark)"
+            )
+            == FeeCategory.filing
+        )
 
     def test_design_late_payment_beats_renewal(self) -> None:
         # Design row "Additional fee for late payment of renewal fee" must
         # not get pulled into the renewal branch.
-        assert hk_ipd._categorize_design(
-            "Additional fee for late payment of renewal fee"
-        ) == FeeCategory.late_fee
+        assert (
+            hk_ipd._categorize_design("Additional fee for late payment of renewal fee")
+            == FeeCategory.late_fee
+        )
 
     def test_design_5year_extension_is_renewal(self) -> None:
         assert hk_ipd._categorize_design("2nd 5-year extension") == FeeCategory.renewal
@@ -289,7 +321,8 @@ class TestBuildPatentFees:
     def test_ogp_grant_efiling_amount(self, patent_doc: L.HtmlElement) -> None:
         fees = hk_ipd._build_patent_fees(patent_doc)
         ogp_grant = [
-            f for f in fees
+            f
+            for f in fees
             if f.code.startswith("hk-pat-ogp-request-for-grant-of-a-standard-patent")
             and f.category == FeeCategory.grant
             and f.condition is None
@@ -302,7 +335,8 @@ class TestBuildPatentFees:
     def test_ogp_grant_paper_amount(self, patent_doc: L.HtmlElement) -> None:
         fees = hk_ipd._build_patent_fees(patent_doc)
         paper = [
-            f for f in fees
+            f
+            for f in fees
             if "request-for-grant-of-a-standard-patent" in f.code
             and f.code.startswith("hk-pat-ogp-")
             and f.condition is not None
@@ -318,7 +352,8 @@ class TestBuildPatentFees:
         # $380 paper.
         fees = hk_ipd._build_patent_fees(patent_doc)
         rr_grant_efiling = [
-            f for f in fees
+            f
+            for f in fees
             if f.code.startswith("hk-pat-rr-request-for-registration-of-a-designated")
             and f.condition is None
         ]
@@ -328,7 +363,8 @@ class TestBuildPatentFees:
     def test_substantive_examination_amount(self, patent_doc: L.HtmlElement) -> None:
         fees = hk_ipd._build_patent_fees(patent_doc)
         exam = [
-            f for f in fees
+            f
+            for f in fees
             if f.category == FeeCategory.examination
             and "substantive examination" in f.label.lower()
             and "short-term" not in f.label.lower()
@@ -351,7 +387,8 @@ class TestBuildPatentFees:
     def test_short_term_renewal_only_at_y4_and_y8(self, patent_doc: L.HtmlElement) -> None:
         fees = hk_ipd._build_patent_fees(patent_doc)
         stp_renewals = [
-            f for f in fees
+            f
+            for f in fees
             if f.category == FeeCategory.renewal
             and "short-term patent" in f.label.lower()
             and f.amount == Decimal("1080")
@@ -364,10 +401,7 @@ class TestBuildPatentFees:
         # RR-record / RR-grant / STP filing) but should collapse to one
         # FeeItem.
         fees = hk_ipd._build_patent_fees(patent_doc)
-        adverts = [
-            f for f in fees
-            if f.label == "Advertisement fee" and f.amount == Decimal("68")
-        ]
+        adverts = [f for f in fees if f.label == "Advertisement fee" and f.amount == Decimal("68")]
         assert len(adverts) == 1
 
     def test_zero_amount_rows_emit(self, patent_doc: L.HtmlElement) -> None:
@@ -387,7 +421,8 @@ class TestBuildTrademarkFees:
         fees = hk_ipd._build_trademark_fees(trademark_doc)
         # Application for registration of a trade mark (1st class): $2,000.
         filings = [
-            f for f in fees
+            f
+            for f in fees
             if f.category == FeeCategory.filing
             and "registration of a trade mark" in f.label.lower()
             and "additional class" not in f.label.lower()
@@ -398,9 +433,9 @@ class TestBuildTrademarkFees:
     def test_per_additional_class_surcharge(self, trademark_doc: L.HtmlElement) -> None:
         fees = hk_ipd._build_trademark_fees(trademark_doc)
         addl = [
-            f for f in fees
-            if f.category == FeeCategory.excess_classes
-            and "additional class" in f.label.lower()
+            f
+            for f in fees
+            if f.category == FeeCategory.excess_classes and "additional class" in f.label.lower()
         ]
         assert len(addl) >= 3
         # $1,000 per additional class on the canonical TM registration row.
@@ -429,7 +464,8 @@ class TestBuildTrademarkFees:
         # rather than emitting a standalone late_fee row.
         fees = hk_ipd._build_trademark_fees(trademark_doc)
         renewals_with_note = [
-            f for f in fees
+            f
+            for f in fees
             if f.category == FeeCategory.renewal
             and f.notes is not None
             and "Late renewal" in f.notes
@@ -453,7 +489,8 @@ class TestBuildDesignFees:
         # "1 design for articles not forming a set of articles": $235
         # e-filing, $315 paper.
         efiling = [
-            f for f in fees
+            f
+            for f in fees
             if "1 design for articles not forming a set" in f.label
             and f.condition is None
             and f.category == FeeCategory.filing
@@ -464,7 +501,8 @@ class TestBuildDesignFees:
     def test_single_design_paper_filing_amount(self, design_doc: L.HtmlElement) -> None:
         fees = hk_ipd._build_design_fees(design_doc)
         paper = [
-            f for f in fees
+            f
+            for f in fees
             if "1 design for articles not forming a set" in f.label
             and f.condition is not None
             and f.condition.trigger == ConditionalTrigger.paper_filing
@@ -541,8 +579,7 @@ async def test_scrape_hk_patents_dedupes_advertisement_fee(patch_fetch: None) ->
     """End-to-end: the 4 identical "Advertisement fee" rows collapse to one."""
     schedule = await hk_ipd.scrape_hk_patents()
     adverts = [
-        f for f in schedule.fees
-        if f.label == "Advertisement fee" and f.amount == Decimal("68")
+        f for f in schedule.fees if f.label == "Advertisement fee" and f.amount == Decimal("68")
     ]
     assert len(adverts) == 1
 

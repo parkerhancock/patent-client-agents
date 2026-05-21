@@ -115,14 +115,15 @@ class TestTmExcessClassThreshold:
     def test_2nd_class_row(self) -> None:
         # "Marka Başvurusu Ek Sınıf Ücreti (2.sınıf)" — threshold=1
         # (the fee kicks in starting at the 2nd class).
-        assert tr._tm_excess_class_threshold(
-            "Marka Başvurusu Ek Sınıf Ücreti (2.sınıf)"
-        ) == 1
+        assert tr._tm_excess_class_threshold("Marka Başvurusu Ek Sınıf Ücreti (2.sınıf)") == 1
 
     def test_3rd_class_row(self) -> None:
-        assert tr._tm_excess_class_threshold(
-            "Marka Başvurusu Ek Sınıf Ücreti (3 üncü sınıf ve sonraki her bir sınıf için)"
-        ) == 2
+        assert (
+            tr._tm_excess_class_threshold(
+                "Marka Başvurusu Ek Sınıf Ücreti (3 üncü sınıf ve sonraki her bir sınıf için)"
+            )
+            == 2
+        )
 
     def test_ilave_her_bir_row(self) -> None:
         # Threshold detection routes through the "3 üncü" substring in
@@ -132,9 +133,12 @@ class TestTmExcessClassThreshold:
         # doesn't match a plain-ASCII "i" pattern. The real-world TM
         # row 02.01.32 always carries the "3 üncü" qualifier, so the
         # detection still works in practice.
-        assert tr._tm_excess_class_threshold(
-            "İlave Her bir Sınıf İçin Marka Yenileme Ücreti (3 üncü ve sonraki herbir sınıf için)"
-        ) == 2
+        assert (
+            tr._tm_excess_class_threshold(
+                "İlave Her bir Sınıf İçin Marka Yenileme Ücreti (3 üncü ve sonraki herbir sınıf için)"
+            )
+            == 2
+        )
 
     def test_non_class_row_returns_none(self) -> None:
         assert tr._tm_excess_class_threshold("Tek Sınıflı Marka Başvuru Ücreti") is None

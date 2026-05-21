@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from patent_client_agents.fees.client import FeesClient, _to_meta
+from patent_client_agents.fees.client import _to_meta
 from patent_client_agents.fees.registry import _DISPATCH, OFFICES
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -89,9 +89,7 @@ def _write_index(meta_rows: list[dict], failures: list[tuple[str, str]]) -> None
         "schedules": meta_rows,
         "failures": [{"office_code": o, "right": r} for o, r in failures],
     }
-    (SNAPSHOT_DIR / "index.json").write_text(
-        json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    )
+    (SNAPSHOT_DIR / "index.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
 
 
 def _parse_args() -> argparse.Namespace:

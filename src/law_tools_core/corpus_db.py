@@ -55,6 +55,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import ClassVar, Self
 
+import zstandard as zstd
+
 
 class CorpusUnavailable(RuntimeError):
     """Raised when a bundled corpus database cannot be located or opened."""
@@ -94,6 +96,50 @@ class CorpusDBBase:
         self._conn = conn
         self._path = path
         conn.row_factory = sqlite3.Row
+        self._decoders: dict[str, zstd.ZstdDecompressor] | None = None
+
+    # ------------------------------------------------------------------
+    # Optional per-column zstd decompression
+    # ------------------------------------------------------------------
+
+    def _load_decoders(self) -> dict[str, zstd.ZstdDecompressor]:
+        """Read the optional ``compression_dict`` table and build per-column decoders.
+
+        Corpora built before SCHEMA_VERSION 2 omit this table entirely; the
+        method short-circuits to an empty dict, matching the no-compression
+        contract used by every existing on-disk corpus. New corpora that
+        compress one or more text columns at build time populate the table
+        with ``(column_name, dict_bytes, zstd_level)`` rows.
+        """
+        try:
+            rows = self._conn.execute(
+                "SELECT column_name, dict_bytes FROM compression_dict"
+            ).fetchall()
+        except sqlite3.OperationalError:
+            return {}
+        out: dict[str, zstd.ZstdDecompressor] = {}
+        for row in rows:
+            dict_data = zstd.ZstdCompressionDict(bytes(row["dict_bytes"]))
+            out[row["column_name"]] = zstd.ZstdDecompressor(dict_data=dict_data)
+        return out
+
+    def _column_value(self, row: sqlite3.Row, column: str) -> str:
+        """Return ``row[column]`` as text, decompressing if a decoder is registered.
+
+        For uncompressed columns this is just ``row[column]`` — the decoder
+        cache is lazy-built on first access so the read path stays cheap
+        for corpora that don't ship compression metadata.
+        """
+        if self._decoders is None:
+            self._decoders = self._load_decoders()
+        value = row[column]
+        decoder = self._decoders.get(column)
+        if decoder is None:
+            return value
+        if isinstance(value, str):
+            # Tolerate a mixed corpus where some rows escaped compression.
+            return value
+        return decoder.decompress(bytes(value)).decode("utf-8")
 
     # ------------------------------------------------------------------
     # Path resolution + install hints
@@ -304,16 +350,15 @@ class OutlineCorpusDB(CorpusDBBase):
         ).fetchone()
         return int(row["n"])
 
-    @staticmethod
-    def _row_to_section(row: sqlite3.Row) -> OutlineCorpusSection:
+    def _row_to_section(self, row: sqlite3.Row) -> OutlineCorpusSection:
         return OutlineCorpusSection(
             href=row["href"],
             section_number=row["section_number"],
             title=row["title"],
             breadcrumb=row["breadcrumb"],
             chapter=row["chapter"],
-            html=row["html"],
-            text=row["text"],
+            html=self._column_value(row, "html"),
+            text=self._column_value(row, "text"),
         )
 
 
