@@ -12,6 +12,7 @@ from mcp_data_core.envelope import (
     ListEnvelope,
     make_provenance,
 )
+from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import read_resource, register_source
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
@@ -602,9 +603,9 @@ async def download_file_history(
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def get_patent_family(
     identifier: Annotated[
-        str,
+        str | None,
         "The number to look up. Format depends on identifier_type.",
-    ],
+    ] = None,
     identifier_type: Annotated[
         str,
         "Type of identifier: 'application' (e.g. '16123456'), "
@@ -612,6 +613,18 @@ async def get_patent_family(
         "'publication' (e.g. 'US20230012345A1'). "
         "Default: 'patent'.",
     ] = "patent",
+    patent_number: Annotated[
+        str | None,
+        "Compatibility alias for identifier; sets identifier_type='patent'.",
+    ] = None,
+    publication_number: Annotated[
+        str | None,
+        "Compatibility alias for identifier; sets identifier_type='publication'.",
+    ] = None,
+    application_number: Annotated[
+        str | None,
+        "Compatibility alias for identifier; sets identifier_type='application'.",
+    ] = None,
 ) -> dict:
     """Get patent family relationships (continuations, divisionals, CIPs).
 
@@ -619,6 +632,22 @@ async def get_patent_family(
     The response includes all family members with their application numbers,
     patent numbers, and relationship types.
     """
+    if identifier is None:
+        if publication_number:
+            identifier = publication_number
+            identifier_type = "publication"
+        elif application_number:
+            identifier = application_number
+            identifier_type = "application"
+        elif patent_number:
+            identifier = patent_number
+            identifier_type = "patent"
+    if not identifier:
+        raise ValidationError(
+            "get_patent_family requires identifier, patent_number, "
+            "publication_number, or application_number"
+        )
+
     async with UsptoOdpClient() as client:
         result = await client.get_family(identifier, identifier_type=identifier_type)
         return _dump(result)  # type: ignore[return-value]

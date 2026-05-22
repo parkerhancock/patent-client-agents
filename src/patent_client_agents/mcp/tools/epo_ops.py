@@ -174,6 +174,38 @@ def _summarize_epo_number_conversion(input_number: str, record: dict) -> str:
     return f"**EPO number conversion `{input_number}`** → {rendered}."
 
 
+def _coalesce_string(
+    *,
+    primary: str | None,
+    aliases: dict[str, str | None],
+    field_name: str,
+    tool_name: str,
+) -> str:
+    if primary is not None:
+        return primary
+    for value in aliases.values():
+        if value is not None:
+            return value
+    alias_names = ", ".join(aliases)
+    raise ValidationError(f"{tool_name} requires {field_name} (or {alias_names})")
+
+
+def _coalesce_number_list(
+    *,
+    primary: str | list[str] | None,
+    aliases: dict[str, str | list[str] | None],
+    field_name: str,
+    tool_name: str,
+) -> str | list[str]:
+    if primary is not None:
+        return primary
+    for value in aliases.values():
+        if value is not None:
+            return value
+    alias_names = ", ".join(aliases)
+    raise ValidationError(f"{tool_name} requires {field_name} (or {alias_names})")
+
+
 # ---------------------------------------------------------------------------
 # EPO Open Patent Services — MCP tools
 # ---------------------------------------------------------------------------
@@ -182,13 +214,17 @@ def _summarize_epo_number_conversion(input_number: str, record: dict) -> str:
 @epo_ops_mcp.tool(annotations=READ_ONLY)
 async def search_epo(
     cql_query: Annotated[
-        str,
+        str | None,
         "CQL (Common Query Language) query string. Common examples: "
         "'ta=CRISPR and pa=Broad Institute' (title/abstract + applicant), "
         "'in=Nakamura and ic=H01L' (inventor + IPC class), "
         "'pn=EP1234567' (publication number lookup). "
         "Call ``get_epo_cql_help`` for the full field reference.",
-    ],
+    ] = None,
+    query: Annotated[
+        str | None,
+        "Compatibility alias for cql_query. Use cql_query for new callers.",
+    ] = None,
     group_by: Annotated[
         str,
         "Result grouping: 'publication' (one row per publication, default) or "
@@ -228,6 +264,12 @@ async def search_epo(
     Related tools: get_epo_cql_help, get_epo_biblio, get_epo_fulltext,
     get_epo_family, get_epo_legal_events, convert_epo_number.
     """
+    cql_query = _coalesce_string(
+        primary=cql_query,
+        aliases={"query": query},
+        field_name="cql_query",
+        tool_name="search_epo",
+    )
     group = group_by.strip().lower()
     if group not in ("publication", "family"):
         raise ValidationError(f"group_by must be 'publication' or 'family'; got {group_by!r}")
@@ -370,12 +412,21 @@ async def get_epo_cql_help() -> ResponseEnvelope[dict]:
 @epo_ops_mcp.tool(annotations=READ_ONLY)
 async def get_epo_biblio(
     patent_number: Annotated[
-        str | list[str],
+        str | list[str] | None,
         "Patent document number (e.g. 'EP1234567A1'), or a list of such "
         "numbers for portfolio workflows. Examples: 'EP1234567A1', "
         "['EP1234567A1', 'US10123456B2']. EPO OPS accepts country-prefixed "
         "publication numbers across all jurisdictions it indexes.",
-    ],
+    ] = None,
+    docdb_number: Annotated[
+        str | list[str] | None,
+        "Compatibility alias for patent_number. EPO search rows often expose "
+        "docdb_number, and agents may pass it back directly.",
+    ] = None,
+    publication_number: Annotated[
+        str | list[str] | None,
+        "Compatibility alias for patent_number.",
+    ] = None,
 ) -> ListEnvelope[dict]:
     """Get bibliographic data (title, applicants, inventors, IPC/CPC, priority) for one or more patents from EPO OPS.
 
@@ -389,6 +440,12 @@ async def get_epo_biblio(
     Related tools: search_epo, get_epo_fulltext, get_epo_family,
     get_epo_legal_events, convert_epo_number, get_epo_cql_help.
     """
+    patent_number = _coalesce_number_list(
+        primary=patent_number,
+        aliases={"docdb_number": docdb_number, "publication_number": publication_number},
+        field_name="patent_number",
+        tool_name="get_epo_biblio",
+    )
     numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
     if not numbers:
         raise ValidationError("get_epo_biblio requires at least one patent number")
@@ -563,10 +620,14 @@ async def get_epo_legal_events(
 @epo_ops_mcp.tool(annotations=READ_ONLY)
 async def convert_epo_number(
     number: Annotated[
-        str,
+        str | None,
         "Patent number to convert. Examples: 'EP1234567A1' (original), "
         "'EP.1234567.A1' (docdb), 'EP1234567' (epodoc).",
-    ],
+    ] = None,
+    patent_number: Annotated[
+        str | None,
+        "Compatibility alias for number.",
+    ] = None,
     input_format: Annotated[str, "Input format: 'original', 'docdb', or 'epodoc'."] = "original",
     output_format: Annotated[str, "Output format: 'docdb' or 'epodoc'."] = "docdb",
 ) -> ResponseEnvelope[dict]:
@@ -582,6 +643,13 @@ async def convert_epo_number(
     Related tools: search_epo, get_epo_biblio, get_epo_family,
     get_epo_legal_events, get_epo_cql_help.
     """
+    number = _coalesce_string(
+        primary=number,
+        aliases={"patent_number": patent_number},
+        field_name="number",
+        tool_name="convert_epo_number",
+    )
+
     async with client_from_env() as client:
         result = await client.convert_number(
             number=number, input_format=input_format, output_format=output_format

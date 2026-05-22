@@ -184,6 +184,20 @@ async def test_search_epo_returns_list_envelope_with_lean_stubs():
 
 
 @pytest.mark.asyncio
+async def test_search_epo_accepts_query_alias():
+    upstream = _make_search_response(total=1, ids=["1234567"])
+    mock_client = MagicMock()
+    mock_client.search_published = AsyncMock(return_value=upstream)
+
+    with _patch_client_from_env(mock_client):
+        result = await search_epo(query="ta=battery")
+
+    mock_client.search_published.assert_awaited_once()
+    assert mock_client.search_published.await_args.kwargs["query"] == "ta=battery"
+    assert "ta=battery" in result.summary
+
+
+@pytest.mark.asyncio
 async def test_search_epo_full_returns_upstream_rows():
     upstream = _make_search_response(total=2, ids=["1", "2"])
     mock_client = MagicMock()
@@ -283,6 +297,19 @@ async def test_get_epo_biblio_single_string_returns_list_envelope():
     assert "/published-data/publication/docdb/EP1234567A1/biblio" in result.provenance.source_url
     assert "EP1234567A1" in result.summary
     assert "Widget Apparatus" in result.summary
+
+
+@pytest.mark.asyncio
+async def test_get_epo_biblio_accepts_docdb_number_alias():
+    upstream = _make_biblio("US20260092972A1", title="Alias check")
+    mock_client = MagicMock()
+    mock_client.fetch_biblio = AsyncMock(return_value=upstream)
+
+    with _patch_client_from_env(mock_client):
+        result = await get_epo_biblio(docdb_number="US20260092972A1")
+
+    mock_client.fetch_biblio.assert_awaited_once_with(number="US20260092972A1")
+    assert "Alias check" in result.summary
 
 
 @pytest.mark.asyncio
@@ -443,3 +470,21 @@ async def test_convert_epo_number_returns_response_envelope():
     assert "/number-service/publication/original/EP1234567A1/docdb" in result.provenance.source_url
     assert "EP1234567A1" in result.summary
     assert result.details["output_document"]["country"] == "EP"
+
+
+@pytest.mark.asyncio
+async def test_convert_epo_number_accepts_patent_number_alias():
+    upstream = NumberConversionResponse(
+        input_document=DocumentId(country="EP", number="1234567", kind="A1", format="original"),
+        output_document=DocumentId(country="EP", number="1234567", kind="A1", format="docdb"),
+    )
+    mock_client = MagicMock()
+    mock_client.convert_number = AsyncMock(return_value=upstream)
+
+    with _patch_client_from_env(mock_client):
+        result = await convert_epo_number(patent_number="EP1234567A1")
+
+    mock_client.convert_number.assert_awaited_once_with(
+        number="EP1234567A1", input_format="original", output_format="docdb"
+    )
+    assert "EP1234567A1" in result.summary

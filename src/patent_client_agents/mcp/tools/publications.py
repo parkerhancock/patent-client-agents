@@ -94,6 +94,19 @@ def _summarize_publication(record: dict) -> str:
     return f"{head}\n{line}"
 
 
+def _coalesce_publication_number(
+    *,
+    publication_number: str | list[str] | None,
+    patent_number: str | list[str] | None,
+    tool_name: str,
+) -> str | list[str]:
+    if publication_number is not None:
+        return publication_number
+    if patent_number is not None:
+        return patent_number
+    raise ValidationError(f"{tool_name} requires publication_number (or patent_number)")
+
+
 # ---------------------------------------------------------------------------
 # Download fetcher
 # ---------------------------------------------------------------------------
@@ -188,12 +201,17 @@ async def search_patent_publications(
 @publications_mcp.tool(annotations=READ_ONLY)
 async def get_patent_publication(
     publication_number: Annotated[
-        str | list[str],
+        str | list[str] | None,
         "Patent publication number, or a list for portfolio workflows. "
         "Accepts: 'US-20230012345-A1', 'US20230012345A1', 'US-10123456-B2', "
         "or 'US10123456B2'. The 'US' prefix and dashes are optional. "
         "Examples: 'US20230012345A1', ['US20230012345A1', 'US10123456B2'].",
-    ],
+    ] = None,
+    patent_number: Annotated[
+        str | list[str] | None,
+        "Compatibility alias for publication_number. USPTO PPUBS can resolve "
+        "US patent numbers as publication identifiers.",
+    ] = None,
 ) -> ListEnvelope[dict]:
     """Get the full text of a US patent or published application (title, abstract, claims, spec).
 
@@ -207,8 +225,15 @@ async def get_patent_publication(
 
     Related tools: search_patent_publications, get_patent, download_patent_pdf.
     """
+    resolved_publication_number = _coalesce_publication_number(
+        publication_number=publication_number,
+        patent_number=patent_number,
+        tool_name="get_patent_publication",
+    )
     numbers = (
-        [publication_number] if isinstance(publication_number, str) else list(publication_number)
+        [resolved_publication_number]
+        if isinstance(resolved_publication_number, str)
+        else list(resolved_publication_number)
     )
     if not numbers:
         raise ValidationError("get_patent_publication requires at least one publication number")

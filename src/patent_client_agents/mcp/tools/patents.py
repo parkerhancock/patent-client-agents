@@ -137,6 +137,40 @@ def _details_view(record: dict) -> dict:
     }
 
 
+def _coalesce_query(
+    *,
+    query: str | None,
+    keywords: str | list[str] | None,
+    tool_name: str,
+) -> str:
+    """Accept common agent-side aliases while keeping the canonical schema."""
+    if query:
+        return query
+    if isinstance(keywords, str) and keywords.strip():
+        return keywords
+    if isinstance(keywords, list):
+        joined = " ".join(str(part).strip() for part in keywords if str(part).strip())
+        if joined:
+            return joined
+    raise ValidationError(f"{tool_name} requires query")
+
+
+def _coalesce_identifier(
+    *,
+    primary: str | list[str] | None,
+    aliases: dict[str, str | list[str] | None],
+    field_name: str,
+    tool_name: str,
+) -> str | list[str]:
+    if primary is not None:
+        return primary
+    for value in aliases.values():
+        if value is not None:
+            return value
+    alias_names = ", ".join(aliases)
+    raise ValidationError(f"{tool_name} requires {field_name} (or {alias_names})")
+
+
 # ---------------------------------------------------------------------------
 # Download fetcher: registered for signed-URL path `patents/{patent_number}`
 # ---------------------------------------------------------------------------
@@ -173,7 +207,12 @@ async def _patent_pdf_resource(publication_number: str):
 
 @patents_mcp.tool(annotations=READ_ONLY)
 async def search_patents_global(
-    query: Annotated[str, "Keyword search query"],
+    query: Annotated[str | None, "Keyword search query"] = None,
+    keywords: Annotated[
+        str | list[str] | None,
+        "Compatibility alias for query. If a client sends keywords instead "
+        "of query, the values are joined into the Google Patents keyword query.",
+    ] = None,
     cpc_codes: Annotated[list[str] | None, "CPC classification codes (e.g. ['H04L9/32'])"] = None,
     inventors: Annotated[list[str] | None, "Inventor names to filter on"] = None,
     assignees: Annotated[list[str] | None, "Assignee or applicant names"] = None,
@@ -208,9 +247,11 @@ async def search_patents_global(
 
     Related tools: get_patent, search_patent_publications, search_applications, download_patent_pdf.
     """
+    resolved_query = _coalesce_query(query=query, keywords=keywords, tool_name="search_patents_global")
+
     async with GooglePatentsClient() as client:
         response = await client.search_patents(
-            keywords=[query] if query else [],
+            keywords=[resolved_query] if resolved_query else [],
             cpc_codes=cpc_codes or [],
             inventors=inventors or [],
             assignees=assignees or [],
@@ -229,7 +270,7 @@ async def search_patents_global(
     items = rows if full else [_stub_search_hit(r) for r in rows]
     summary_total = f"{shown} of {total} hits" if total else f"{shown} hits"
     return ListEnvelope[dict](
-        summary=f"Google Patents — `{query}`: {summary_total}.",
+        summary=f"Google Patents — `{resolved_query}`: {summary_total}.",
         items=items,
         more_available=more,
         next_cursor=None,
@@ -240,14 +281,20 @@ async def search_patents_global(
 @patents_mcp.tool(annotations=READ_ONLY)
 async def get_patent(
     patent_number: Annotated[
-        str | list[str],
+        str | list[str] | None,
         "Patent number with country and kind code (or a list for portfolio "
         "workflows). Accepts patent numbers AND publication numbers from any "
         "jurisdiction — the upstream client cascades publication → grant. "
         "Examples: 'US10123456B2', 'US20230012345A1', 'EP3456789A1', "
         "['US10123456B2', 'EP3456789A1']. The 'US' prefix is added "
         "automatically when omitted for US patents.",
-    ],
+    ] = None,
+    publication_number: Annotated[
+        str | list[str] | None,
+        "Compatibility alias for patent_number. Many agents call this tool "
+        "with publication_number because Google Patents accepts publication "
+        "identifiers as well as grants.",
+    ] = None,
     view: Annotated[
         str,
         "Response detail level. 'full' (default): full Google Patents record "
@@ -276,6 +323,12 @@ async def get_patent(
     if view_key not in ("full", "details"):
         raise ValidationError(f"view must be 'full' or 'details'; got {view!r}")
 
+    patent_number = _coalesce_identifier(
+        primary=patent_number,
+        aliases={"publication_number": publication_number},
+        field_name="patent_number",
+        tool_name="get_patent",
+    )
     numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
     if not numbers:
         raise ValidationError("get_patent requires at least one patent number")

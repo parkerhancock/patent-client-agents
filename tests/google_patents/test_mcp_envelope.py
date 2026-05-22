@@ -167,6 +167,20 @@ async def test_search_patents_global_provenance_source_name():
     assert result.provenance.source_name == "Google Patents (worldwide aggregator)"
 
 
+@pytest.mark.asyncio
+async def test_search_patents_global_accepts_keywords_alias():
+    rows = [_make_search_row("US10123456B2")]
+    fake_response = _make_search_response(rows, total=1)
+    with patch.object(patents_module, "GooglePatentsClient") as mock_client_cls:
+        mock_client = mock_client_cls.return_value.__aenter__.return_value
+        mock_client.search_patents = AsyncMock(return_value=fake_response)
+        result = await search_patents_global(keywords=["Apple", "battery"])
+
+    mock_client.search_patents.assert_awaited_once()
+    assert mock_client.search_patents.await_args.kwargs["keywords"] == ["Apple battery"]
+    assert "Apple battery" in result.summary
+
+
 # ──────────────────────────────────────────────────────────────────────
 # get_patent — §5.4 list-accepting, §5.1 view='full' / view='details'
 # ──────────────────────────────────────────────────────────────────────
@@ -187,6 +201,19 @@ async def test_get_patent_single_string_returns_list_envelope():
     assert "/patent/US10123456B2" in result.provenance.source_url
     assert "US10123456B2" in result.summary
     assert "A clever invention" in result.summary
+
+
+@pytest.mark.asyncio
+async def test_get_patent_accepts_publication_number_alias():
+    fake_patent = _make_patent_data("US20230012345A1", title="Published invention")
+
+    with patch.object(patents_module, "GooglePatentsClient") as mock_client_cls:
+        mock_client = mock_client_cls.return_value.__aenter__.return_value
+        mock_client.get_patent_data = AsyncMock(return_value=fake_patent)
+        result = await get_patent(publication_number="US20230012345A1", view="details")
+
+    mock_client.get_patent_data.assert_awaited_once_with("US20230012345A1")
+    assert result.items[0]["patent_number"] == "US20230012345A1"
 
 
 @pytest.mark.asyncio

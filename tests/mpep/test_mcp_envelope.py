@@ -106,6 +106,15 @@ async def test_get_single_string_returns_list_envelope(mpep_corpus_env: Path) ->
 
 
 @pytest.mark.asyncio
+async def test_get_single_int_section_is_coerced(mpep_corpus_env: Path) -> None:
+    result = await get_mpep_section(section=2106)
+
+    assert isinstance(result, ListEnvelope)
+    assert result.items[0]["section_number"] == "2106"
+    assert "2106" in result.summary
+
+
+@pytest.mark.asyncio
 async def test_get_list_preserves_order(mpep_corpus_env: Path) -> None:
     refs = ["2106", "2143", "706"]
     result = await get_mpep_section(section=refs)
