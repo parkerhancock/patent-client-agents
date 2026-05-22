@@ -23,7 +23,7 @@ description: |
 
 Async Python clients for patent and IP data. All clients use `async with` context
 managers. All shared scaffolding (HTTP, cache, retry, errors) lives in
-`law_tools_core`, shipped in the same wheel.
+`mcp_data_core`, provided by the separate `mcp-data-core` package.
 
 ## Routing
 
@@ -151,13 +151,13 @@ detail = await get_legislation(hits.hits[0].legislation_id)
 
 ## Error Handling
 
-All clients raise typed exceptions from `law_tools_core.exceptions`. `ApiError`
+All clients raise typed exceptions from `mcp_data_core.exceptions`. `ApiError`
 and its subclasses include a path to the log file in their string representation
 so agents can inspect stacktraces without keeping them in context.
 
 ```python
-from law_tools_core.exceptions import (
-    LawToolsCoreError,
+from mcp_data_core.exceptions import (
+    McpDataCoreError,
     NotFoundError,
     RateLimitError,
 )
@@ -170,11 +170,11 @@ except NotFoundError as e:
 except RateLimitError as e:
     if e.retry_after:
         await asyncio.sleep(e.retry_after)
-except LawToolsCoreError as e:
+except McpDataCoreError as e:
     print(e)  # Fallback for any other typed error
 ```
 
-**Exception hierarchy** (from `law_tools_core.exceptions`):
+**Exception hierarchy** (from `mcp_data_core.exceptions`):
 
 | Exception | When |
 |-----------|------|
@@ -186,7 +186,7 @@ except LawToolsCoreError as e:
 | `ParseError` | Failed to parse response data |
 | `ConfigurationError` | Missing API key / invalid config |
 | `ValidationError` | Invalid input; also inherits `ValueError` |
-| `LawToolsCoreError` | Base for all typed errors |
+| `McpDataCoreError` | Base for all typed errors |
 
 **Log file:** `~/.cache/patent_client_agents/patent_client_agents.log` — full tracebacks, request/response
 details, debug info. Read this when concise error messages aren't enough.

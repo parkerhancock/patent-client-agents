@@ -267,7 +267,7 @@ JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the
 | **EPO Statutes & Case Law** | The five canonical EPO legal corpora: **EPC** (180 Articles + 176 Implementing Regulations), **Guidelines for Examination** (~1,800 sections), **PCT-EPO Guidelines** (~750 sections — applies when the EPO acts as ISA/IPEA), **Unitary Patent Guidelines** (~140 sections — UP opt-in, fees, renewals), and **Case Law of the Boards of Appeal** "white book" (~2,600 sections). Each corpus accepts native citation forms (`Art. 54`, `R. 71`, `G-II, 3.1`, `I.A.1`, dotted `1.2.1`). All five run against local SQLite/FTS5 snapshots built by `patent-client-agents-build-{epc,guidelines,pct-guidelines,up-guidelines,caselaw}-corpus`. |
 
 All sources include automatic caching (hishel + SQLite with WAL), rate limiting,
-and retry logic via `law_tools_core`.
+and retry logic via `mcp-data-core`.
 
 ## API keys
 
@@ -543,8 +543,8 @@ API errors follow a log-first pattern — concise messages with a path to
 `~/.cache/patent_client_agents/patent_client_agents.log` for full stacktraces.
 
 The shared HTTP scaffolding (`BaseAsyncClient`, cache, exceptions, retry,
-logging) ships as the `law_tools_core` package inside this same wheel —
-other libraries in the same family import it directly.
+logging, response envelopes, and MCP server helpers) now lives in the
+separate `mcp-data-core` package.
 
 ## Related
 

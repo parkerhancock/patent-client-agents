@@ -1,17 +1,18 @@
 """IP-office fee schedules — MCP tools.
 
-CONNECTOR_STANDARDS.md classification: ``category=substantive_law``,
-``transport=mcp_proxy``, ``update_strategy=live_proxy``,
-``update_cadence=annual``. The connector live-fetches each office's
-schedule (USPTO HTML page; EPO undocumented BFF JSON; EUIPO HTML +
-Next.js SSR stream) with a 7-day hishel TTL. Provenance carries
-``corpus_synced_at`` = the schedule's effective date so agents can
-quote freshness in the same shape as the bundled-corpus connectors.
+CONNECTOR_STANDARDS.md classification: ``category=fees``,
+``transport=mcp_proxy``, ``update_strategy=live_proxy``. The connector
+live-fetches each office's schedule (USPTO HTML page; EPO undocumented
+BFF JSON; EUIPO HTML + Next.js SSR stream) with a 7-day hishel TTL.
+Provenance carries ``effective_date`` — the schedule's most-recent
+revision date — so agents can quote fees with the right time stamp.
+``retrieved_at`` is when our cache last refreshed from upstream; the
+two are distinct (the schedule may have been effective for months
+before we fetched it).
 """
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -37,28 +38,22 @@ _SOURCE_NAME = "IP-office fee schedules"
 def _fees_provenance(schedule: FeeSchedule | None, fallback_url: str) -> Any:
     """Build Provenance for a fees response.
 
-    ``corpus_synced_at`` is the schedule's ``retrieved_at`` (when our cache
-    last successfully read upstream); ``corpus_version`` is a
-    ``snapshot-<effective_date>`` label so agents can cite the figures by
-    revision date.
+    Sets ``effective_date`` from the schedule's revision date — the
+    field the fees-category CI compliance test enforces. ``retrieved_at``
+    defaults to now (UTC) via :func:`make_provenance`. When no schedule
+    is in hand (cross-office summary endpoint), ``effective_date`` is
+    omitted; the compliance test skips list_fee_jurisdictions for this
+    reason — it's a discovery surface, not a quote surface.
     """
     if schedule is None:
         return make_provenance(
             source_url=fallback_url,
             source_name=_SOURCE_NAME,
-            corpus_synced_at=None,
-            corpus_version="unknown",
         )
     return make_provenance(
         source_url=schedule.source_url,
         source_name=f"{_SOURCE_NAME} — {schedule.office_code}",
-        corpus_synced_at=datetime(
-            schedule.retrieved_at.year,
-            schedule.retrieved_at.month,
-            schedule.retrieved_at.day,
-            tzinfo=UTC,
-        ),
-        corpus_version=f"snapshot-{schedule.effective_date.isoformat()}",
+        effective_date=schedule.effective_date,
     )
 
 

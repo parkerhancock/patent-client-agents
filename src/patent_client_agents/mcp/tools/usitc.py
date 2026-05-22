@@ -66,7 +66,7 @@ _IDS_BASE = "https://ids.usitc.gov"
 _USITC_FANOUT_CONCURRENCY = 5
 
 
-def _usitc_provenance(path: str) -> Any:
+def _usitc_provenance(path: str, *, as_of_status: str | None = None) -> Any:
     """Build a Provenance pointing at the appropriate USITC sub-host.
 
     ``path`` may be a full URL (https://...) or a path that will be
@@ -74,7 +74,11 @@ def _usitc_provenance(path: str) -> Any:
     investigations/documents/attachments surface).
     """
     source_url = path if path.startswith("http") else f"{_EDIS_BASE}{path}"
-    return make_provenance(source_url=source_url, source_name=_USITC_SOURCE_NAME)
+    return make_provenance(
+        source_url=source_url,
+        source_name=_USITC_SOURCE_NAME,
+        as_of_status=as_of_status,
+    )
 
 
 def _dump(obj: object) -> dict[str, Any]:
@@ -312,7 +316,7 @@ async def search_usitc_investigations(
         items=items,
         more_available=False,
         next_cursor=None,
-        provenance=_usitc_provenance(path),
+        provenance=_usitc_provenance(path, as_of_status=status or "mixed/unknown"),
     )
 
 
@@ -378,10 +382,16 @@ async def get_usitc_investigation(
         summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
 
     path = f"/data/investigation/{numbers[0]}" if len(numbers) == 1 else "/data/investigation"
+    as_of_status = None
+    statuses = {str(item.get("investigation_status")) for item in items if item.get("investigation_status")}
+    if len(statuses) == 1:
+        as_of_status = next(iter(statuses))
+    elif len(statuses) > 1:
+        as_of_status = "mixed"
     return ListEnvelope[dict](
         summary=summary,
         items=items,
-        provenance=_usitc_provenance(path),
+        provenance=_usitc_provenance(path, as_of_status=as_of_status),
     )
 
 
@@ -766,7 +776,7 @@ async def list_ids_investigations(
         items=items,
         more_available=offset + len(page) < total,
         next_cursor=None,
-        provenance=_usitc_provenance(f"{_IDS_BASE}/investigations.json"),
+        provenance=_usitc_provenance(f"{_IDS_BASE}/investigations.json", as_of_status="mixed/unknown"),
     )
 
 

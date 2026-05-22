@@ -53,7 +53,7 @@ limit: 60 requests/minute.
 | `PetitionsClient` | Petition decisions |
 | `BulkDataClient` | Bulk data product catalog |
 
-All inherit from `law_tools_core.BaseAsyncClient` — built-in hishel cache,
+All inherit from `mcp_data_core.BaseAsyncClient` — built-in hishel cache,
 tenacity retry (4 attempts, exponential jitter), structured error types,
 log-first error messages.
 
@@ -83,7 +83,7 @@ log-first error messages.
 
 ## Error handling
 
-Typed exceptions inherit from `law_tools_core.exceptions.ApiError`:
+Typed exceptions inherit from `mcp_data_core.exceptions.ApiError`:
 
 - `NotFoundError` (404) — application or document not indexed
 - `AuthenticationError` (401/403) — missing or revoked API key

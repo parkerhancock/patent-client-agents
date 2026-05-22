@@ -96,6 +96,6 @@ async with TsdrClient() as client:
 
 ## Error handling
 
-Inherits typed exceptions from `law_tools_core`:
+Inherits typed exceptions from `mcp_data_core`:
 `NotFoundError`, `RateLimitError` (TSDR sets `retry_after`),
 `AuthenticationError` (bad/missing key), `ApiError`.
