@@ -227,13 +227,24 @@ AUTH_KINDS = {
 STATUSES = {"active", "beta", "planned", "candidate", "blocked", "external", "deprecated"}
 
 # CONNECTOR_STANDARDS.md §6 closed vocabularies.
-CATEGORIES = {"registered_ip", "substantive_law"}
+#
+# Four-category model (sharpened from the original two-category split in
+# the 2026-05-21 schema pass — see CONNECTOR_STANDARDS.md §1):
+#   - registered_ip       : live register of granted rights
+#   - adjudicative_records: live docket / event stream for contested
+#                           proceedings (PTAB, USITC § 337, future:
+#                           EPO opposition, foreign nullity)
+#   - substantive_law     : bundled corpora — statutes, regulations,
+#                           examination guidelines, published precedent
+#   - fees                : office fee schedules — live-proxied, stamped
+#                           with effective_date in the response envelope
+CATEGORIES = {"registered_ip", "adjudicative_records", "substantive_law", "fees"}
 TRANSPORTS = {"mcp_proxy", "mcp_local"}
 UPDATE_STRATEGIES = {"live_proxy", "scheduled_recrawl", "vendor_changefeed", "manual"}
 UPDATE_CADENCES = {"weekly", "monthly", "quarterly", "semiannual", "annual", "irregular"}
 
 # CONNECTOR_STANDARDS.md §6 check #5: maps update_cadence → days.
-# A category-2 entry whose update_strategy is scheduled_recrawl or
+# A substantive_law entry whose update_strategy is scheduled_recrawl or
 # vendor_changefeed fails CI if `last_synced` is older than
 # 2 × the value below. `irregular` skips the staleness check.
 CADENCE_DAYS = {
@@ -368,7 +379,7 @@ def validate_source(
             fail(
                 errors,
                 path,
-                "status=active/beta requires category (registered_ip or substantive_law)",
+                f"status=active/beta requires category (one of {sorted(CATEGORIES)})",
             )
         elif category not in CATEGORIES:
             fail(errors, path, f"category {category!r} not in {sorted(CATEGORIES)}")
@@ -384,7 +395,7 @@ def validate_source(
         # connector module to expose a `get_corpus_status()` callable. As of
         # the row-18 rollout (TMEP, EPC, EPO Guidelines, EPO Case Law, PCT
         # Guidelines, EPO UP Guidelines, UKIPO MoPP, UPC Statutes — plus
-        # MPEP from row 17), all category-2 mcp_local connectors expose
+        # MPEP from row 17), all substantive_law mcp_local connectors expose
         # the callable, so this is now a hard error. Skip for
         # category=registered_ip entries (they don't owe the surface).
         if transport == "mcp_local" and category == "substantive_law" and module:
@@ -406,7 +417,7 @@ def validate_source(
                         f"get_corpus_status() callable (CONNECTOR_STANDARDS.md §4)",
                     )
 
-        # Checks #4–6 apply only to category-2 entries.
+        # Checks #4–6 apply only to substantive_law entries.
         if category == "substantive_law":
             update_strategy = source.get("update_strategy")
             update_cadence = source.get("update_cadence")

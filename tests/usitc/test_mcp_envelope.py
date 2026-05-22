@@ -100,6 +100,7 @@ async def test_search_usitc_investigations_returns_lean_list_envelope_by_default
     assert isinstance(result.provenance, Provenance)
     assert result.provenance.source_name == "U.S. International Trade Commission (USITC)"
     assert result.provenance.source_url.startswith("https://edis.usitc.gov")
+    assert result.provenance.as_of_status == "Active"
     # Live proxy → no corpus metadata.
     assert result.provenance.corpus_synced_at is None
     assert result.provenance.corpus_version is None
@@ -154,6 +155,7 @@ async def test_get_usitc_investigation_single_returns_list_envelope():
     assert isinstance(result.provenance, Provenance)
     assert result.provenance.source_name == "U.S. International Trade Commission (USITC)"
     assert "/data/investigation/337-1234" in result.provenance.source_url
+    assert result.provenance.as_of_status == "Active"
     assert len(result.items) == 1
     assert "USITC investigation 337-1234" in result.summary
     assert "Certain Widgets" in result.summary

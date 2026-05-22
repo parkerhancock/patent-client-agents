@@ -19,32 +19,72 @@ audit measures the live tool surface against §5.
 
 ## §1 Coverage scope
 
-We chase two distinct kinds of source:
+We chase four distinct kinds of source. Each has its own provenance
+contract because IP practitioners reason about them in different ways:
+"is this the current right" (registered_ip), "what's happening in this
+proceeding" (adjudicative_records), "what does the doctrine say"
+(substantive_law), and "what does this cost" (fees) are four different
+questions with four different freshness needs.
 
 **Category 1 — Registered IP** (`category: registered_ip`). The primary
 register of a patent, trademark, design, copyright, plant-variety, or GI
 right. Examples: USPTO ODP applications, EPO OPS biblio, EUIPO trademarks,
 JPO J-PlatPat, USPTO Assignment Center.
 
-The contract for category-1 connectors:
+The contract:
 - Every response carries access-time provenance (§3).
 - We do not warehouse or stale-cache rights data; we proxy live.
 - Cache TTLs are short and conservative (default ~24h, often less); the
   upstream register is always the system of record.
 
-**Category 2 — Substantive law** (`category: substantive_law`). The statutes,
+**Category 2 — Adjudicative records** (`category: adjudicative_records`).
+Live docket / event-stream data from contested proceedings: IPR/PGR/CBM
+trials, USPTO petitions, USITC § 337 investigations. Future: EPO
+opposition register, German Bundespatentgericht nullity proceedings,
+JPO/KIPO opposition and trial proceedings.
+
+The contract:
+- Every response carries access-time provenance plus `as_of_status` —
+  the proceeding's status at retrieval time (e.g., "Instituted",
+  "Final Written Decision", "Terminated-Settled"). See §3.
+- Snapshot semantics: dockets change. We record what we saw when
+  `retrieved_at` fired; callers should re-fetch for current status.
+- Live proxy with short TTL, same as registered_ip.
+- Published *opinions* / *final written decisions* from these tribunals,
+  when treated as precedent and bundled as a corpus, belong in
+  substantive_law (§4), not here. The line is docket-data (here) vs.
+  precedent-doctrine (there).
+
+**Category 3 — Substantive law** (`category: substantive_law`). The statutes,
 regulations, examination guidelines, and case law from reviewing courts that
 control how rights are granted and litigated. Examples: MPEP, EPO Guidelines,
 UKIPO MoPP, EPC, CAFC opinions, EPO Boards of Appeal case law, WIPO Lex
 legislation.
 
-The contract for category-2 connectors:
+The contract:
 - Every response carries recency metadata: when the corpus was last synced
   and what version it represents (§4).
 - An explicit update strategy + cadence is declared in the manifest and
   enforced by CI staleness gates.
 - Connectors expose a `get_corpus_status()` callable so agents can answer
   "how stale is this?" without guessing.
+
+**Category 4 — Fees** (`category: fees`). Office fee schedules: USPTO,
+EPO, EUIPO, CNIPA, CIPO, DPMA, KIPO, IPAU, UKIPO, JPO, IPIN, WIPO PCT /
+Madrid / Hague, TIPO, INPI BR, INPI FR.
+
+The contract:
+- Every response carries access-time provenance plus `effective_date` —
+  the schedule's most-recent revision date. See §3a.
+- `retrieved_at` and `effective_date` are distinct: the schedule may
+  have been effective for months before our cache last refreshed.
+- Live proxy with a 7-day hishel TTL; the upstream office page is the
+  system of record. Fee schedules don't warrant a bundled corpus
+  because (a) the surface is small enough to live-fetch and (b) stale
+  fees quoted to clients is a malpractice failure mode that bundling
+  amplifies.
+- CI enforces that every fees-category response carries
+  `effective_date` in the envelope's Provenance.
 
 **Coverage targets.** The top 30 patent offices by 2023 filing volume (WIPO
 IP Statistics Data Center) are the priority list:
@@ -77,7 +117,7 @@ primary user interface.
   Used when (a) volume is small enough to embed in the wheel or pull at
   install time, (b) upstream has a predictable changelog or sync cadence, or
   (c) upstream blocks egress / has aggressive rate limits. This is the
-  default for stable category-2 corpora (MPEP, EPC, EPO Guidelines).
+  default for stable `substantive_law` corpora (MPEP, EPC, EPO Guidelines).
 
 **Auth lives in the connector process.** Every required credential is
 sourced from env vars listed in `coverage/sources.yaml access.auth_env`.
@@ -86,13 +126,13 @@ account-level auth (OAuth password grant, cookie tokens), the connector
 handles refresh internally.
 
 **HTTP scaffolding is shared.** All clients extend
-`law_tools_core.BaseAsyncClient` and inherit `hishel` + SQLite caching with
+`mcp_data_core.BaseAsyncClient` and inherit `hishel` + SQLite caching with
 WAL pragmas via `RetryingAsyncSqliteStorage`, plus `tenacity` retry via
 `default_retryer` (4 attempts, exponential jitter). New connectors do not
 roll their own HTTP layer.
 
 **Corpus scaffolding is shared.** Every `transport: mcp_local` connector
-inherits from `law_tools_core.corpus_db.CorpusDBBase` (the universal
+inherits from `mcp_data_core.corpus_db.CorpusDBBase` (the universal
 lifecycle: path resolution from `ENV_VAR` → `~/.cache/...`, read-only
 SQLite open, install-hint error messages, `meta()` / `meta_get()`).
 Connectors with the common "outline" row schema (`href` +
@@ -110,10 +150,10 @@ the deployment environment, not just localhost.
 
 ---
 
-## §3 Provenance for registered IP
+## §3 Provenance for registered IP and adjudicative records
 
-Every category-1 response carries the following fields, surfaced through the
-response envelope (§5.9):
+Every `registered_ip` and `adjudicative_records` response carries the
+following base fields, surfaced through the response envelope (§5.9):
 
 | Field | Meaning |
 |---|---|
@@ -123,15 +163,42 @@ response envelope (§5.9):
 | `cache_hit` | `True` if served from cache; `False` if a network round-trip occurred. |
 | `connector_version` | The `patent_client_agents` package version. Lets bug reports tie back to a release. |
 
-Rationale: legal practitioners cite to a register at a point in time. The
-register can change tomorrow. We make "what was true when I asked" first-class
-metadata, not a footnote.
+`adjudicative_records` responses additionally carry:
+
+| Field | Meaning |
+|---|---|
+| `as_of_status` | Proceeding status at retrieval time — free-text upstream label (e.g., "Instituted", "Final Written Decision", "Terminated-Settled", "Pending Institution Decision"). Dockets change; this records what we saw when `retrieved_at` fired. |
+
+Rationale: legal practitioners cite to a register or a proceeding at a
+point in time. The register can change tomorrow; the docket changes by
+the hour. We make "what was true when I asked" first-class metadata,
+not a footnote.
+
+### §3a Provenance for fees
+
+Every `fees` response carries the base fields above plus:
+
+| Field | Meaning |
+|---|---|
+| `effective_date` | The schedule's most-recent revision date as published by the office. Distinct from `retrieved_at` — the schedule may have been effective for months before our cache last refreshed. Required on every fees response; CI enforces. |
+
+Optional but encouraged:
+
+| Field | Meaning |
+|---|---|
+| `currency` | ISO-4217 code (carried in the response body, not Provenance). |
+| `fee_code` | Office-stable code (carried per fee item in the body). USPTO uses `1011` etc.; EPO uses `001`/`002`/etc.; EUIPO uses F-xxx / M-xxx. Stable across revisions so agents can re-quote by code. |
+
+Rationale: a fee quote without an effective date is a malpractice trap.
+Surfacing `effective_date` separately from `retrieved_at` makes it
+impossible to accidentally quote a schedule that was revised before
+the cache last refreshed.
 
 ---
 
 ## §4 Recency for substantive law
 
-Every category-2 response carries the same `retrieved_at` / `source_url` /
+Every `substantive_law` response carries the same `retrieved_at` / `source_url` /
 `source_name` / `cache_hit` / `connector_version` fields, plus:
 
 | Field | Meaning |
@@ -139,7 +206,7 @@ Every category-2 response carries the same `retrieved_at` / `source_url` /
 | `corpus_synced_at` | When the bundled corpus was last refreshed from upstream. |
 | `corpus_version` | Vendor-style version string (e.g. MPEP "R-07.2022"). When unknown, the string `"unknown — needs verification"`. |
 
-Every category-2 connector exposes a module-level
+Every `substantive_law` connector exposes a module-level
 `get_corpus_status()` callable that returns these fields without requiring
 a live upstream call. CI uses it to detect drift.
 
@@ -296,7 +363,7 @@ Parameter names are practitioner-facing: `application_number`,
 ### §5.9 Output shape (response envelope)
 
 **Every tool returns a `ResponseEnvelope` or `ListEnvelope`.** Implemented
-in `law_tools_core.envelope`. No tool returns a raw upstream payload.
+in `mcp_data_core.envelope`. No tool returns a raw upstream payload.
 
 ```python
 class Provenance(BaseModel):
@@ -333,7 +400,7 @@ the result set ("4 active applications filed 2020-2022"); for single
 records, it describes the record ("US patent 11,234,567 — issued
 2023-04-11, expires 2041-08-17").
 
-For category-2 responses, `Provenance` additionally carries
+For `substantive_law` responses, `Provenance` additionally carries
 `corpus_synced_at` and `corpus_version` (§4).
 
 **Template: USPTO Applications** — the migrated `search_applications`,
@@ -366,10 +433,10 @@ behind explicit user consent flows.
 
 ### §5.12 Error semantics
 
-Connector errors raise `ApiError` (or a subclass) from `law_tools_core.exceptions`.
+Connector errors raise `ApiError` (or a subclass) from `mcp_data_core.exceptions`.
 `ApiError.__str__()` appends the log file path so agents can inspect details
 without keeping full stacktraces in context. File logging is configured per
-consumer app via `law_tools_core.logging.configure(app_name)`.
+consumer app via `mcp_data_core.logging.configure(app_name)`.
 
 Validation / config errors that aren't upstream failures raise plain
 `Exception` subclasses. The MCP layer surfaces both kinds as MCP error
@@ -435,7 +502,7 @@ Names are conventional so they're greppable across the catalog:
 - `_provenance(path: str) -> Provenance` (or `_<office>_provenance(...)`)
   — builds a `Provenance` pointing at the canonical upstream URL for
   this connector. Typically 2-3 lines wrapping
-  `law_tools_core.envelope.make_provenance` with the connector's base URL
+  `mcp_data_core.envelope.make_provenance` with the connector's base URL
   and source name as module-level constants. Per-module rather than shared
   because the base URL + source name are part of the connector's identity.
 
@@ -527,7 +594,7 @@ Before merging a new connector:
 - [ ] Entry added to `coverage/sources.yaml` with every §6 required field.
 - [ ] `uv run python scripts/build_coverage.py --check` passes with no
       errors and no unexpected warnings.
-- [ ] Client extends `law_tools_core.BaseAsyncClient`. No bespoke HTTP layer.
+- [ ] Client extends `mcp_data_core.BaseAsyncClient`. No bespoke HTTP layer.
 - [ ] Auth credentials sourced from env vars listed in `access.auth_env`.
 - [ ] Every MCP tool returns a `ResponseEnvelope` or `ListEnvelope` (§5.9).
 - [ ] Every MCP tool passes the elevator test (§5.13).
@@ -536,9 +603,9 @@ Before merging a new connector:
 - [ ] `get_*` tools accept `list[str]` for portfolio workflows (§5.4).
 - [ ] No `batch_*` tools.
 - [ ] No `get_by_*` family — single `get_thing` with auto-detected identifier.
-- [ ] For category-2 connectors: module-level `get_corpus_status()` callable.
+- [ ] For `substantive_law` connectors: module-level `get_corpus_status()` callable.
 - [ ] For `transport=mcp_local` connectors: `CorpusDB` inherits from
-      `law_tools_core.corpus_db.CorpusDBBase` (or `OutlineCorpusDB` for the
+      `mcp_data_core.corpus_db.CorpusDBBase` (or `OutlineCorpusDB` for the
       outline row schema). No bespoke lifecycle.
 - [ ] One MCP tool module per upstream (§5.1) — no cross-office bundling.
 - [ ] Test pattern chosen and documented (§5.14): VCR cassettes for

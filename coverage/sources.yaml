@@ -8,11 +8,28 @@
 #   uv run python scripts/build_coverage.py --check   # validate only
 #   uv run python scripts/build_coverage.py           # writes coverage/coverage.json
 #
-# Classification rules for ambiguous sources (CONNECTOR_STANDARDS.md §6):
+# Four-category model (see CONNECTOR_STANDARDS.md §1):
+#   - registered_ip       : live register of granted rights (USPTO ODP
+#                           applications, EPO biblio, EUIPO TM/designs, ...)
+#   - adjudicative_records: live docket / event stream for contested
+#                           proceedings (PTAB trials, USPTO petitions,
+#                           USITC § 337, future: EPO opposition, foreign
+#                           nullity boards)
+#   - substantive_law     : bundled corpora — statutes, regulations,
+#                           examination guidelines, published precedent
+#   - fees                : office fee schedules, stamped with
+#                           ``effective_date`` in the response envelope
+#
+# Classification rules for ambiguous sources:
 #   - CPC                       → registered_ip   (classification of the register)
-#   - USITC investigations      → registered_ip   (tribunal adjudicating rights, like PTAB)
-#   - EPO Case Law              → substantive_law, cadence: annual (bundled-artifact rhythm)
-#   - CAFC / UPC / CanLII cases → substantive_law (reviewing-court interpretation)
+#   - EPO Case Law              → substantive_law, cadence: annual (bundled corpus)
+#   - CAFC / UPC / CanLII cases → substantive_law (reviewing-court precedent)
+#   - CanLII tribunals (TMOB,   → currently bundled under CA/CanLII as
+#     PAB)                        substantive_law; split when a consumer
+#                                 wants docket-level access
+#   - PTAB precedential FWDs    → currently bundled with PTAB dockets under
+#                                 adjudicative_records; split when a
+#                                 consumer wants a precedent-only corpus
 
 sources:
 
@@ -51,7 +68,7 @@ sources:
     connector:
       module: patent_client_agents.uspto_odp
     last_verified: 2026-05-15
-    category: registered_ip
+    category: adjudicative_records
     transport: mcp_proxy
 
   - id: US/USPTO/ODP/Petitions
@@ -68,7 +85,7 @@ sources:
     connector:
       module: patent_client_agents.uspto_petitions
     last_verified: 2026-05-15
-    category: registered_ip
+    category: adjudicative_records
     transport: mcp_proxy
 
   - id: US/USPTO/PPUBS
@@ -418,11 +435,15 @@ sources:
       where authoritative registers (PPUBS, EPO OPS, JPO) don't reach.
 
   # ────────────────────────────────────────────────────────────────────
-  # US — USITC (Section 337 investigations + trade data)
+  # US — USITC
+  #   EDIS + IDS = adjudicative_records (Section 337 IP enforcement);
+  #   DataWeb + HTS = trade-stats / tariff data, not IP — tracked as
+  #   external since the shared connector ships them but they're outside
+  #   patent-client-agents' IP scope.
   # ────────────────────────────────────────────────────────────────────
 
-  - id: US/USITC
-    name: U.S. International Trade Commission (EDIS + DataWeb + HTS)
+  - id: US/USITC/EDIS
+    name: USITC EDIS — Section 337 investigations
     jurisdiction: US
     wipo_st3_code: US
     issuing_body: U.S. International Trade Commission
@@ -436,11 +457,72 @@ sources:
     connector:
       module: patent_client_agents.usitc
     last_verified: 2026-05-15
-    category: registered_ip
+    category: adjudicative_records
     transport: mcp_proxy
     notes: |
-      Classified registered_ip by analogy to PTAB: a tribunal adjudicating
-      registered patents is part of the registered-IP lifecycle.
+      Section 337 patent + trademark enforcement investigations: docket
+      entries, attachments, exclusion orders. Live docket data — treat as
+      a snapshot at retrieved_at, not a corpus.
+
+  - id: US/USITC/IDS
+    name: USITC IDS — IP investigation index
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. International Trade Commission
+    rights: [patent, trademark]
+    data_types: [tribunal_proceedings, litigation]
+    access:
+      method: rest_api
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.usitc
+    last_verified: 2026-05-15
+    category: adjudicative_records
+    transport: mcp_proxy
+    notes: |
+      Investigation-level index of IP proceedings. Lighter-weight surface
+      than EDIS — useful for cross-investigation discovery before pulling
+      EDIS attachments.
+
+  - id: US/USITC/DataWeb
+    name: USITC DataWeb — trade statistics
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. International Trade Commission
+    rights: []
+    data_types: [bulk_data]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [USITC_DATAWEB_TOKEN]
+    status: external
+    connector:
+      module: patent_client_agents.usitc
+    notes: |
+      Trade-stats backend reachable through the shared USITC connector
+      module, but trade statistics are out of patent-client-agents'
+      IP-data scope. Kept as ``external`` so the MCP tools that already
+      ship aren't dropped from the catalog; new IP work should not depend
+      on this surface.
+
+  - id: US/USITC/HTS
+    name: USITC HTS — Harmonized Tariff Schedule
+    jurisdiction: US
+    wipo_st3_code: US
+    issuing_body: U.S. International Trade Commission
+    rights: []
+    data_types: [bulk_data]
+    access:
+      method: rest_api
+      auth: none
+    status: external
+    connector:
+      module: patent_client_agents.usitc
+    notes: |
+      Tariff-code reference data — out of IP-data scope but shipped via
+      the shared USITC connector module. ``external`` for the same
+      reason as DataWeb; do not build new IP tools against it.
 
   # ════════════════════════════════════════════════════════════════════
   # SUBSTANTIVE LAW — statutes, regulations, examination guidelines
@@ -1281,7 +1363,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: annual
@@ -1305,7 +1387,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: annual
@@ -1328,7 +1410,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: annual
@@ -1350,7 +1432,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1373,7 +1455,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1394,7 +1476,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1418,7 +1500,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1445,7 +1527,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: annual
@@ -1472,7 +1554,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1498,7 +1580,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1525,7 +1607,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1552,7 +1634,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1581,7 +1663,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1604,7 +1686,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1637,7 +1719,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1669,7 +1751,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1696,7 +1778,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1723,7 +1805,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-18
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1748,7 +1830,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-19
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1779,7 +1861,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-19
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1810,7 +1892,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-19
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1847,7 +1929,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-19
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1873,7 +1955,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-19
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1904,7 +1986,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-19
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
@@ -1929,7 +2011,7 @@ sources:
     connector:
       module: patent_client_agents.fees
     last_verified: 2026-05-19
-    category: substantive_law
+    category: fees
     transport: mcp_proxy
     update_strategy: live_proxy
     update_cadence: irregular
