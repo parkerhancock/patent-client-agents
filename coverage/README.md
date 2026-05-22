@@ -10,11 +10,11 @@ every entry must satisfy.
 - **`sources.yaml`** — human-edited closed-vocabulary manifest. One entry
   per connector. The validator at `../scripts/build_coverage.py` enforces
   every field.
-- **`coverage.json`** — build artifact. Per-data-product view (40
-  granular shipped sources). Consumed by
+- **`coverage.json`** — build artifact. Per-data-product view of
+  granular sources. Consumed by
   `patentclient-web/assets/coverage.js` for the existing map + matrix.
-- **`atlas.json`** — build artifact. Per-office view (46 strategic
-  entities), fused from `coverage/sources.yaml` *and*
+- **`atlas.json`** — build artifact. Per-office view of strategic
+  entities, fused from `coverage/sources.yaml` *and*
   `../research/STATE.yaml`. Each entity carries verdict + verdict_basis,
   synopsis_url (deep-link into `docs.patentclient.com/patent-client-index/`),
   connector_status, and any shipped `sources.yaml` rows nested under
@@ -32,6 +32,21 @@ uv run python scripts/build_coverage.py           # writes coverage.json + atlas
 ```
 
 CI runs `--check` on every PR. A non-zero exit fails the build.
+
+The README hero image (`docs/_static/atlas_hero.png`) is also generated
+from the `patentclient-web` shared atlas renderer. CI checks out
+`parkerhancock/patentclient-web` and runs:
+
+```bash
+python patentclient-web/scripts/render_atlas_hero.py \
+  --atlas-json coverage/atlas.json \
+  --output docs/_static/atlas_hero.png \
+  --check
+```
+
+If the check fails after an atlas data change, regenerate the image from
+the monorepo with the command documented in the sibling
+`patentclient-web` repo's README.
 
 ## Schema summary
 
