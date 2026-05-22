@@ -34,19 +34,20 @@ uv run python scripts/build_coverage.py           # writes coverage.json + atlas
 CI runs `--check` on every PR. A non-zero exit fails the build.
 
 The README hero image (`docs/_static/atlas_hero.png`) is also generated
-from the `patentclient-web` shared atlas renderer. CI checks out
-`parkerhancock/patentclient-web` and runs:
+from the `patentclient-web` shared atlas renderer. From the monorepo,
+regenerate or check it with:
 
 ```bash
-python patentclient-web/scripts/render_atlas_hero.py \
-  --atlas-json coverage/atlas.json \
-  --output docs/_static/atlas_hero.png \
+uv run --project tools/patent-client-agents --extra tmsearch \
+  python tools/patentclient-web/scripts/render_atlas_hero.py \
+  --atlas-json tools/patent-client-agents/coverage/atlas.json \
+  --output tools/patent-client-agents/docs/_static/atlas_hero.png \
   --check
 ```
 
-If the check fails after an atlas data change, regenerate the image from
-the monorepo with the command documented in the sibling
-`patentclient-web` repo's README.
+Do not make `patent-client-agents` CI check out `patentclient-web`
+unless the workflow has an explicit cross-repo token; GitHub's default
+`GITHUB_TOKEN` cannot read private sibling repositories.
 
 ## Schema summary
 

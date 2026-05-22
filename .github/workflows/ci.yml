@@ -51,22 +51,6 @@ jobs:
       - name: Validate manifests
         run: uv run python scripts/build_coverage.py --check
 
-      - name: Check out website renderer
-        uses: actions/checkout@v6
-        with:
-          repository: parkerhancock/patentclient-web
-          path: patentclient-web
-
-      - name: Install Playwright Chromium
-        run: uv run python -m playwright install --with-deps chromium
-
-      - name: Validate README atlas image
-        run: >
-          uv run python patentclient-web/scripts/render_atlas_hero.py
-          --atlas-json coverage/atlas.json
-          --output docs/_static/atlas_hero.png
-          --check
-
       - name: Validate MCP tool counts in docs
         run: uv run python scripts/mcp_tool_counts.py --check-docs
 
