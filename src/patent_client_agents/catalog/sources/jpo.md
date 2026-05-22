@@ -45,7 +45,7 @@ The 12 JPO MCP tools and the `jpo/documents` download fetcher
 auto-register **only** when both `JPO_API_USERNAME` and
 `JPO_API_PASSWORD` are set in the server's environment. The gate is
 implemented at decorator-evaluation time via
-`law_tools_core.mcp.conditional_tool` and the parallel
+`mcp_data_core.mcp.conditional_tool` and the parallel
 `register_source_if_configured` helper — the Python functions remain
 importable for direct use, but `mcp.tool(...)` is never called on
 unconfigured deployments, so JPO tools never appear in `tool/list`.

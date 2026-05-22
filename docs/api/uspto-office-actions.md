@@ -36,7 +36,7 @@ export USPTO_ODP_API_KEY="your-api-key"
 
 ## Client
 
-`OfficeActionClient` inherits from `law_tools_core.BaseAsyncClient`.
+`OfficeActionClient` inherits from `mcp_data_core.BaseAsyncClient`.
 
 ## Functions
 
@@ -90,6 +90,6 @@ async with OfficeActionClient() as client:
 
 ## Error handling
 
-Inherits typed exceptions from `law_tools_core`:
+Inherits typed exceptions from `mcp_data_core`:
 `AuthenticationError` (401/403), `RateLimitError` (429, with `retry_after`),
 `NotFoundError` (404), `ApiError`.

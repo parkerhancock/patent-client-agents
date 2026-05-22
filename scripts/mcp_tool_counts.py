@@ -99,6 +99,12 @@ def check_docs(default_count: int, full_count: int) -> list[str]:
             f"Expect **{default_count} tools** by default",
         ),
         *_require(
+            "docs/mcp-stdio.md",
+            f"{default_count} patent + IP MCP tools are exposed by default",
+            f"up to {full_count} tools",
+            f"Expect {default_count} tools by default",
+        ),
+        *_require(
             ".claude-plugin/marketplace.json",
             f"{default_count} default MCP tools",
         ),

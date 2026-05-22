@@ -28,7 +28,7 @@ hishel cache + `default_retryer` handle transient throttling.
 
 ## Client
 
-`AssignmentCenterClient` inherits from `law_tools_core.BaseAsyncClient`.
+`AssignmentCenterClient` inherits from `mcp_data_core.BaseAsyncClient`.
 
 ## Functions
 
@@ -68,5 +68,5 @@ async with AssignmentCenterClient() as client:
 
 ## Error handling
 
-Inherits typed exceptions from `law_tools_core`:
+Inherits typed exceptions from `mcp_data_core`:
 `NotFoundError`, `ApiError`. No auth errors (public endpoint).

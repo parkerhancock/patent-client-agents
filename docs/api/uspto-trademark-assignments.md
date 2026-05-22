@@ -34,7 +34,7 @@ hishel cache + `default_retryer` handle transient throttling.
 
 ## Client
 
-`TrademarkAssignmentClient` inherits from `law_tools_core.BaseAsyncClient`.
+`TrademarkAssignmentClient` inherits from `mcp_data_core.BaseAsyncClient`.
 
 ## Functions
 
@@ -77,5 +77,5 @@ async with TrademarkAssignmentClient() as client:
 
 ## Error handling
 
-Inherits typed exceptions from `law_tools_core`:
+Inherits typed exceptions from `mcp_data_core`:
 `NotFoundError`, `ApiError`. No auth errors (public endpoint).

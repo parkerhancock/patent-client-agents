@@ -39,20 +39,16 @@ weeks.
 
 ## User-decision / enablement
 
-- [ ] **Publish `patent-client-agents` to PyPI.** Install-from-GitHub works fine and
-      the plugin's `uvx --from ${CLAUDE_PLUGIN_ROOT}[mcp]` already "just
-      works" without PyPI. PyPI would unlock the shorter `pip install patent-client-agents`
-      / `uvx --from patent-client-agents[mcp]` forms used throughout the docs, and
-      enable install-without-git-clone for non-plugin users. Register the
-      project name, set up trusted publishing from GitHub Actions, cut a
-      0.2.0 release.
+- [x] **Publish `patent-client-agents` to PyPI.** Completed before
+      v0.21.0. Docs and plugin install paths now use the PyPI package
+      form (`pip install patent-client-agents` /
+      `uvx --from patent-client-agents[mcp]==<version>`).
 
-- [ ] **Stand up the public remote MCP demo.** Deploy artifacts moved
-      to [`parkerhancock/patent-client-agents-deploy`](https://github.com/parkerhancock/patent-client-agents-deploy)
-      (Cloud Run + Google OAuth + Firestore rate limits). Still need: GCP
-      project, OAuth client, custom domain, first `terraform apply`. Once
-      live, swap the `patent-mcp-demo.example.com` placeholder in
-      `docs/installation.md` §6 for the real hostname.
+- [x] **Stand up the public remote MCP demo.** Hosted endpoint is live
+      at `https://mcp.patentclient.com/mcp` with Google OAuth and
+      public-demo rate limits. Keep credential-gated BYOK families off
+      the hosted demo unless the upstream terms permit shared-key proxy
+      operation.
 
 - [ ] **CI auto-deploy on merge to `main`.** Cloud Build trigger on the
       deploy repo pointing at `cloudbuild.yaml`. Needs the GCP project to
@@ -67,6 +63,49 @@ weeks.
       pre-warming the cache at plugin-add time (via a Claude Code install
       hook, if one ever gets blessed) or leaning on the skill-first UX
       where the agent can answer before the MCP is cold-started.
+
+## Near-term roadmap discipline
+
+- [ ] **Promote provenance compliance by category.** Current coverage:
+      representative tests for `registered_ip`, `adjudicative_records`,
+      and `substantive_law` in `tests/test_provenance_contracts.py`,
+      plus fees-specific effective-date enforcement in
+      `tests/fees/test_envelope_compliance.py`. Next step: connect
+      `coverage/sources.yaml` source rows to MCP tool modules so CI can
+      require category-specific provenance on every shipped tool, not
+      just representative helpers.
+
+- [ ] **Treat substitution rules as roadmap gates.** Before building any
+      new national connector, record why higher-layer coverage (EPO
+      OPS/INPADOC, WIPO Lex, EUIPO, Google Patents, existing static-law
+      corpora) is insufficient. The default answer should be "do not
+      build" unless the national source uniquely adds prosecution,
+      office actions, assignments, national TM/design register data, or
+      fresher authoritative status.
+
+- [ ] **Separate BYOK work from hosted-demo work.** Credential-gated
+      connectors should stay env-gated and absent from the public demo
+      unless the upstream terms permit shared-key proxy operation.
+      Hosted work should prioritize always-on/public sources, corpora,
+      fees, and smoke-test coverage.
+
+## Hosted MCP reliability
+
+- [ ] **Add a hosted smoke-check workflow.** Minimum checks: remote MCP
+      handshake, tool-count floor, one no-auth registered-IP query, one
+      corpus-backed substantive-law query, one fee lookup, and one
+      download/resource template check. Run on a schedule and after
+      deploys against `https://mcp.patentclient.com/mcp`.
+
+- [ ] **Add corpus-bootstrap health reporting.** Remote deploys should
+      expose whether each required corpus materialized, its SHA/version,
+      and its `corpus_synced_at` value. A missing corpus should fail
+      deploy health checks before users hit the tool.
+
+- [ ] **Publish operational limits in one place.** Keep public-demo rate
+      limits, credential-gated omissions, WAF/token refresh behavior,
+      and confidentiality warnings in a single hosted-demo section, then
+      link README and installation docs to it.
 
 ## Nice to have
 
@@ -100,7 +139,7 @@ weeks.
 
 - ✓ **JPO retry consolidated onto `default_retryer`.** The bespoke
   `AsyncRetrying(...)` block in `jpo/client.py:_raw_request` now
-  delegates to `law_tools_core.resilience.default_retryer` for backoff
+  delegates to `mcp_data_core.resilience.default_retryer` for backoff
   and retry-filter behavior; rate-limit acquire, token refresh on
   401/403, and 429→`RateLimitError` mapping stay inline because they
   encode JPO-specific protocol details (not generic resilience). Side
@@ -185,7 +224,7 @@ weeks.
 - ✓ Monorepo CLAUDE.md lists patent-client-agents as a library-backed skill.
 - ✓ `patent-client-agents-mcp --help` / `--version` works (was a bare `mcp.run()`).
 - ✓ `USPTO Publications _poll_print_job()` has a 5-minute bounded timeout.
-- ✓ `Google Patents` retry loop uses `law_tools_core.resilience.default_retryer`
+- ✓ `Google Patents` retry loop uses `mcp_data_core.resilience.default_retryer`
   (consolidated from a bespoke `AsyncRetrying` instance).
 - ✓ Module-level loggers + one meaningful `logger.warning()` at the XML-fallback
   path in USPTO applications / assignments / publications.
