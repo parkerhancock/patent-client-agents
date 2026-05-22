@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.21.1] — 2026-05-22
+
+### Fixed
+
+- Enforced category-specific provenance contracts across representative
+  MCP tools so list, document, statute, fee, and metadata envelopes keep
+  their source fields stable.
+- Added fee-envelope compliance coverage for the bundled fee snapshots.
+- Fixed `docs/mcp-stdio.md` MCP tool-count drift and added a script check
+  so the documented stdio surface stays aligned with the generated server.
+
+### Changed
+
+- Updated release docs, plugin metadata, and roadmap state for the published
+  PyPI package/plugin flow.
+
 ## [0.21.0] — 2026-05-21
 
 ### Changed
