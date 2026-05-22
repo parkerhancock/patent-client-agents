@@ -383,7 +383,9 @@ async def get_usitc_investigation(
 
     path = f"/data/investigation/{numbers[0]}" if len(numbers) == 1 else "/data/investigation"
     as_of_status = None
-    statuses = {str(item.get("investigation_status")) for item in items if item.get("investigation_status")}
+    statuses = {
+        str(item.get("investigation_status")) for item in items if item.get("investigation_status")
+    }
     if len(statuses) == 1:
         as_of_status = next(iter(statuses))
     elif len(statuses) > 1:
@@ -776,7 +778,9 @@ async def list_ids_investigations(
         items=items,
         more_available=offset + len(page) < total,
         next_cursor=None,
-        provenance=_usitc_provenance(f"{_IDS_BASE}/investigations.json", as_of_status="mixed/unknown"),
+        provenance=_usitc_provenance(
+            f"{_IDS_BASE}/investigations.json", as_of_status="mixed/unknown"
+        ),
     )
 
 

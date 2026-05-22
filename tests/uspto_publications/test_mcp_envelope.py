@@ -165,6 +165,19 @@ async def test_get_single_string_returns_list_envelope():
 
 
 @pytest.mark.asyncio
+async def test_get_patent_publication_accepts_patent_number_alias():
+    doc = _make_document("US10123456B2", title="Issued patent")
+    with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.resolve_document_by_publication_number = AsyncMock(return_value=doc)
+
+        result = await get_patent_publication(patent_number="US10123456B2")
+
+    mock_client.resolve_document_by_publication_number.assert_awaited_once_with("US10123456B2")
+    assert result.items[0]["publication_number"] == "US10123456B2"
+
+
+@pytest.mark.asyncio
 async def test_get_list_returns_list_envelope_and_preserves_order():
     """Numbers in request order should match results in response order (§5.4)."""
     pubs = ["US20230012345A1", "US20230099999A1", "US10123456B2"]

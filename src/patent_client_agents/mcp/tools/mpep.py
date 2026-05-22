@@ -217,7 +217,7 @@ async def search_mpep(
 @mpep_mcp.tool(annotations=READ_ONLY)
 async def get_mpep_section(
     section: Annotated[
-        str | list[str],
+        str | int | list[str | int],
         "MPEP section number (e.g. '2106', '2106.04(a)', '706.03(a)(1)'), an "
         "eMPEP href ('d0e122292.html'), or a list of either for portfolio "
         "workflows. Examples: '2106', ['2106', '2143', '706.03(a)'].",
@@ -237,7 +237,7 @@ async def get_mpep_section(
 
     Related tools: search_mpep.
     """
-    refs = [section] if isinstance(section, str) else list(section)
+    refs = [str(section)] if isinstance(section, str | int) else [str(ref) for ref in section]
     if not refs:
         raise ValidationError("get_mpep_section requires at least one section reference")
 
