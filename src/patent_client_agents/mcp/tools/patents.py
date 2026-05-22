@@ -247,7 +247,9 @@ async def search_patents_global(
 
     Related tools: get_patent, search_patent_publications, search_applications, download_patent_pdf.
     """
-    resolved_query = _coalesce_query(query=query, keywords=keywords, tool_name="search_patents_global")
+    resolved_query = _coalesce_query(
+        query=query, keywords=keywords, tool_name="search_patents_global"
+    )
 
     async with GooglePatentsClient() as client:
         response = await client.search_patents(

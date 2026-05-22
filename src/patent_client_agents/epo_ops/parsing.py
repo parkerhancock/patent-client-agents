@@ -108,15 +108,17 @@ def _parse_document_id(node: etree._Element | None) -> DocumentId:  # type: igno
     if node is None:
         return DocumentId()
     doc_type = node.tag.split("}")[-1] if "}" in node.tag else node.tag
-    return DocumentId(
-        doc_type=doc_type,
-        doc_number=_text(node, "./epo:doc-number"),
-        country=_text(node, "./epo:country"),
-        kind=_text(node, "./epo:kind"),
-        date=_text(node, "./epo:date"),
-        format=node.get("document-id-type"),
-        id_type=node.get("document-id-type"),
-        name=_text(node, "./epo:name"),
+    return DocumentId.model_validate(
+        {
+            "doc_type": doc_type,
+            "number": _text(node, "./epo:doc-number"),
+            "country": _text(node, "./epo:country"),
+            "kind": _text(node, "./epo:kind"),
+            "date": _text(node, "./epo:date"),
+            "format": node.get("document-id-type"),
+            "id_type": node.get("document-id-type"),
+            "name": _text(node, "./epo:name"),
+        }
     )
 
 

@@ -52,14 +52,16 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialProceedingResponse with matching proceedings.
         """
-        payload = SearchPayload(
-            q=query,
-            fields=list(fields) if fields else None,
-            facets=list(facets) if facets else None,
-            filters=list(filters) if filters else None,
-            range_filters=list(range_filters) if range_filters else None,
-            sort=[sort] if sort else None,
-            pagination=PaginationModel(offset=offset, limit=limit),
+        payload = SearchPayload.model_validate(
+            {
+                "q": query,
+                "fields": list(fields) if fields else None,
+                "facets": list(facets) if facets else None,
+                "filters": list(filters) if filters else None,
+                "rangeFilters": list(range_filters) if range_filters else None,
+                "sort": [sort] if sort else None,
+                "pagination": PaginationModel(offset=offset, limit=limit),
+            }
         ).model_dump_pruned()
 
         data = await self._search_with_payload(
@@ -184,14 +186,16 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDecisionResponse with matching decisions.
         """
-        payload = SearchPayload(
-            q=query,
-            fields=list(fields) if fields else None,
-            facets=list(facets) if facets else None,
-            filters=list(filters) if filters else None,
-            range_filters=list(range_filters) if range_filters else None,
-            sort=[sort] if sort else None,
-            pagination=PaginationModel(offset=offset, limit=limit),
+        payload = SearchPayload.model_validate(
+            {
+                "q": query,
+                "fields": list(fields) if fields else None,
+                "facets": list(facets) if facets else None,
+                "filters": list(filters) if filters else None,
+                "rangeFilters": list(range_filters) if range_filters else None,
+                "sort": [sort] if sort else None,
+                "pagination": PaginationModel(offset=offset, limit=limit),
+            }
         ).model_dump_pruned()
 
         data = await self._search_with_payload(
@@ -324,14 +328,16 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         Returns:
             PtabTrialDocumentResponse with matching documents.
         """
-        payload = SearchPayload(
-            q=query,
-            fields=list(fields) if fields else None,
-            facets=list(facets) if facets else None,
-            filters=list(filters) if filters else None,
-            range_filters=list(range_filters) if range_filters else None,
-            sort=[sort] if sort else None,
-            pagination=PaginationModel(offset=offset, limit=limit),
+        payload = SearchPayload.model_validate(
+            {
+                "q": query,
+                "fields": list(fields) if fields else None,
+                "facets": list(facets) if facets else None,
+                "filters": list(filters) if filters else None,
+                "rangeFilters": list(range_filters) if range_filters else None,
+                "sort": [sort] if sort else None,
+                "pagination": PaginationModel(offset=offset, limit=limit),
+            }
         ).model_dump_pruned()
 
         data = await self._search_with_payload(
