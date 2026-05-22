@@ -1,0 +1,760 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-04-27",
+  "fees": [
+    {
+      "amount": "26",
+      "category": "filing",
+      "code": "inpi-fr-patent-filing-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "D\u00e9p\u00f4t d'une demande de brevet ou de certificat d'utilit\u00e9 (inclut premi\u00e8re annuit\u00e9)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "13",
+      "category": "filing",
+      "code": "inpi-fr-patent-filing-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "D\u00e9p\u00f4t d'une demande de brevet ou de certificat d'utilit\u00e9 (inclut premi\u00e8re annuit\u00e9) (tarif r\u00e9duit)",
+      "notes": "INPI France reduced rate (personnes physiques, organismes de recherche / enseignement, entreprises <1000 salari\u00e9s et capital <25% non-qualifying).",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "520",
+      "category": "filing",
+      "code": "inpi-fr-spc-filing-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "D\u00e9p\u00f4t d'une demande de certificat compl\u00e9mentaire de protection (SPC)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "470",
+      "category": "other",
+      "code": "inpi-fr-spc-pediatric-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Prorogation d'un certificat compl\u00e9mentaire de protection (usage p\u00e9diatrique)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "520",
+      "category": "search",
+      "code": "inpi-fr-patent-search-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rapport de recherche",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "260",
+      "category": "search",
+      "code": "inpi-fr-patent-search-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rapport de recherche (tarif r\u00e9duit)",
+      "notes": "INPI France reduced rate (personnes physiques, organismes de recherche / enseignement, entreprises <1000 salari\u00e9s et capital <25% non-qualifying).",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "156",
+      "category": "search",
+      "code": "inpi-fr-patent-search-equivalent-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rapport de recherche fond\u00e9 sur priorit\u00e9 \u00e9trang\u00e8re \u00e9quivalente",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "520",
+      "category": "search",
+      "code": "inpi-fr-patent-new-claims-search-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Nouvelles revendications entra\u00eenant rapport de recherche compl\u00e9mentaire",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "260",
+      "category": "search",
+      "code": "inpi-fr-patent-new-claims-search-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Nouvelles revendications entra\u00eenant rapport de recherche compl\u00e9mentaire (tarif r\u00e9duit)",
+      "notes": "INPI France reduced rate (personnes physiques, organismes de recherche / enseignement, entreprises <1000 salari\u00e9s et capital <25% non-qualifying).",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "42",
+      "category": "excess_claims",
+      "code": "inpi-fr-patent-claim-over-11-l",
+      "condition": {
+        "description": "INPI FR per-claim surcharge from the 11th claim onward.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "claims_over"
+      },
+      "currency": "EUR",
+      "label": "Revendication \u00e0 partir de la 11\u00e8me (excess-claims surcharge)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "21",
+      "category": "excess_claims",
+      "code": "inpi-fr-patent-claim-over-11-s",
+      "condition": {
+        "description": "INPI FR per-claim surcharge from the 11th claim onward.",
+        "per_unit": true,
+        "threshold": 10,
+        "trigger": "claims_over"
+      },
+      "currency": "EUR",
+      "label": "Revendication \u00e0 partir de la 11\u00e8me (excess-claims surcharge) (tarif r\u00e9duit)",
+      "notes": "INPI France reduced rate (personnes physiques, organismes de recherche / enseignement, entreprises <1000 salari\u00e9s et capital <25% non-qualifying).",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "52",
+      "category": "other",
+      "code": "inpi-fr-patent-rectification-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Rectification d'erreurs mat\u00e9rielles par requ\u00eate",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "104",
+      "category": "petition",
+      "code": "inpi-fr-patent-continuation-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Requ\u00eate en poursuite de proc\u00e9dure",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "52",
+      "category": "petition",
+      "code": "inpi-fr-patent-continuation-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Requ\u00eate en poursuite de proc\u00e9dure (tarif r\u00e9duit)",
+      "notes": "INPI France reduced rate (personnes physiques, organismes de recherche / enseignement, entreprises <1000 salari\u00e9s et capital <25% non-qualifying).",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "90",
+      "category": "grant",
+      "code": "inpi-fr-patent-grant-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "D\u00e9livrance et impression du fascicule",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "45",
+      "category": "grant",
+      "code": "inpi-fr-patent-grant-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "D\u00e9livrance et impression du fascicule (tarif r\u00e9duit)",
+      "notes": "INPI France reduced rate (personnes physiques, organismes de recherche / enseignement, entreprises <1000 salari\u00e9s et capital <25% non-qualifying).",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "260",
+      "category": "other",
+      "code": "inpi-fr-patent-limitation-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Requ\u00eate en limitation",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "130",
+      "category": "other",
+      "code": "inpi-fr-patent-limitation-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Requ\u00eate en limitation (tarif r\u00e9duit)",
+      "notes": "INPI France reduced rate (personnes physiques, organismes de recherche / enseignement, entreprises <1000 salari\u00e9s et capital <25% non-qualifying).",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": null
+    },
+    {
+      "amount": "600",
+      "category": "opposition",
+      "code": "inpi-fr-patent-opposition-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Opposition \u00e0 un brevet",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "950",
+      "category": "renewal",
+      "code": "inpi-fr-patent-spc-annual-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un SPC (et prorogation)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 21
+    },
+    {
+      "amount": "156",
+      "category": "petition",
+      "code": "inpi-fr-patent-restoration-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Recours en restauration",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "36",
+      "category": "translation",
+      "code": "inpi-fr-ep-translation-publication-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Publication de traduction des revendications d'un brevet europ\u00e9en",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "26",
+      "category": "other",
+      "code": "inpi-fr-ep-transmission-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "\u00c9tablissement et transmission de copies d'une demande EP aux Etats destinataires",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "62",
+      "category": "other",
+      "code": "inpi-fr-pct-transmission-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Transmission d'une demande internationale PCT",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "38",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y02-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 deuxi\u00e8me annuit\u00e9 (year 2)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": 2
+    },
+    {
+      "amount": "19",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y02-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle (tarif r\u00e9duit) \u2014 deuxi\u00e8me annuit\u00e9 (year 2)",
+      "notes": "INPI France patent annuity reduced rate. GAP: pypdf reliably recovers the reduced amount for years 2-7 only; years 8-20 reduced rates exist in the source PDF but pypdf drops the second column for those rows. Caller may estimate 50% of the standard rate as an approximation but verify against the source for any specific year > 7.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": 2
+    },
+    {
+      "amount": "38",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y03-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 troisi\u00e8me annuit\u00e9 (year 3)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": 3
+    },
+    {
+      "amount": "19",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y03-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle (tarif r\u00e9duit) \u2014 troisi\u00e8me annuit\u00e9 (year 3)",
+      "notes": "INPI France patent annuity reduced rate. GAP: pypdf reliably recovers the reduced amount for years 2-7 only; years 8-20 reduced rates exist in the source PDF but pypdf drops the second column for those rows. Caller may estimate 50% of the standard rate as an approximation but verify against the source for any specific year > 7.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": 3
+    },
+    {
+      "amount": "38",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y04-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 quatri\u00e8me annuit\u00e9 (year 4)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": 4
+    },
+    {
+      "amount": "19",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y04-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle (tarif r\u00e9duit) \u2014 quatri\u00e8me annuit\u00e9 (year 4)",
+      "notes": "INPI France patent annuity reduced rate. GAP: pypdf reliably recovers the reduced amount for years 2-7 only; years 8-20 reduced rates exist in the source PDF but pypdf drops the second column for those rows. Caller may estimate 50% of the standard rate as an approximation but verify against the source for any specific year > 7.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": 4
+    },
+    {
+      "amount": "38",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y05-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 cinqui\u00e8me annuit\u00e9 (year 5)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": 5
+    },
+    {
+      "amount": "19",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y05-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle (tarif r\u00e9duit) \u2014 cinqui\u00e8me annuit\u00e9 (year 5)",
+      "notes": "INPI France patent annuity reduced rate. GAP: pypdf reliably recovers the reduced amount for years 2-7 only; years 8-20 reduced rates exist in the source PDF but pypdf drops the second column for those rows. Caller may estimate 50% of the standard rate as an approximation but verify against the source for any specific year > 7.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": 5
+    },
+    {
+      "amount": "76",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y06-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 sixi\u00e8me annuit\u00e9 (year 6)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": 6
+    },
+    {
+      "amount": "57",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y06-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle (tarif r\u00e9duit) \u2014 sixi\u00e8me annuit\u00e9 (year 6)",
+      "notes": "INPI France patent annuity reduced rate. GAP: pypdf reliably recovers the reduced amount for years 2-7 only; years 8-20 reduced rates exist in the source PDF but pypdf drops the second column for those rows. Caller may estimate 50% of the standard rate as an approximation but verify against the source for any specific year > 7.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": 6
+    },
+    {
+      "amount": "96",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y07-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 septi\u00e8me annuit\u00e9 (year 7)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "large",
+      "year": 7
+    },
+    {
+      "amount": "72",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y07-s",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle (tarif r\u00e9duit) \u2014 septi\u00e8me annuit\u00e9 (year 7)",
+      "notes": "INPI France patent annuity reduced rate. GAP: pypdf reliably recovers the reduced amount for years 2-7 only; years 8-20 reduced rates exist in the source PDF but pypdf drops the second column for those rows. Caller may estimate 50% of the standard rate as an approximation but verify against the source for any specific year > 7.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "small",
+      "year": 7
+    },
+    {
+      "amount": "136",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y08-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 huiti\u00e8me annuit\u00e9 (year 8)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "180",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y09-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 neuvi\u00e8me annuit\u00e9 (year 9)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "220",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y10-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 dixi\u00e8me annuit\u00e9 (year 10)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "260",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y11-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 onzi\u00e8me annuit\u00e9 (year 11)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "300",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y12-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 douzi\u00e8me annuit\u00e9 (year 12)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "350",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y13-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 treizi\u00e8me annuit\u00e9 (year 13)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "400",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y14-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 quatorzi\u00e8me annuit\u00e9 (year 14)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "460",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y15-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 quinzi\u00e8me annuit\u00e9 (year 15)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "520",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y16-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 seizi\u00e8me annuit\u00e9 (year 16)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "580",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y17-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 dix-septi\u00e8me annuit\u00e9 (year 17)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "650",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y18-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 dix-huiti\u00e8me annuit\u00e9 (year 18)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "730",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y19-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 dix-neuvi\u00e8me annuit\u00e9 (year 19)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "800",
+      "category": "renewal",
+      "code": "inpi-fr-annuity-y20-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Redevance annuelle de maintien en vigueur d'un brevet \u2014 vingti\u00e8me annuit\u00e9 (year 20)",
+      "notes": "INPI France patent annuity. The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 20
+    }
+  ],
+  "issuing_body": "Institut National de la Propri\u00e9t\u00e9 Industrielle (INPI)",
+  "jurisdiction": "FR",
+  "key": "FR/INPI-FR/patent",
+  "notes": "INPI France patent + utility-certificate + SPC fees in EUR. Annuities 2-20 are extracted from the PDF; reduced rates are reliably captured for years 2-7 only (years 8-20 reduced rates exist in the source but pypdf drops the second column for those rows). The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital. SPC annual fee (\u20ac950) is treated as year=21 since it covers extension beyond the 20-year patent term. v1 GAPS: register admin fees (REGISTRES NATIONAUX), GI fees, and semiconductor-topography fees are out of scope.",
+  "office_code": "INPI-FR",
+  "retrieved_at": "2026-05-22",
+  "right": "patent",
+  "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi",
+  "statutory_basis": "Code de la propri\u00e9t\u00e9 intellectuelle (CPI) Articles R.411-17 et seq.; arr\u00eat\u00e9s fixant les redevances per\u00e7ues par l'INPI."
+}

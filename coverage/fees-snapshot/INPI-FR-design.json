@@ -1,0 +1,90 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-04-27",
+  "fees": [
+    {
+      "amount": "39",
+      "category": "filing",
+      "code": "inpi-fr-design-filing-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "D\u00e9p\u00f4t du dossier de demande d'enregistrement (dessins et mod\u00e8les)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "23",
+      "category": "filing",
+      "code": "inpi-fr-design-bw-reproduction-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Suppl\u00e9ment par reproduction d\u00e9pos\u00e9e en noir et blanc",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "47",
+      "category": "filing",
+      "code": "inpi-fr-design-color-reproduction-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Suppl\u00e9ment par reproduction d\u00e9pos\u00e9e en couleur",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "52",
+      "category": "renewal",
+      "code": "inpi-fr-design-renewal-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Prorogation d'un dessin ou mod\u00e8le (5-year periods \u00d7 up to 25 years)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "78",
+      "category": "other",
+      "code": "inpi-fr-design-regularisation-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "R\u00e9gularisation / rectification / relev\u00e9 de d\u00e9ch\u00e9ance (dessins)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Institut National de la Propri\u00e9t\u00e9 Industrielle (INPI)",
+  "jurisdiction": "FR",
+  "key": "FR/INPI-FR/design",
+  "notes": "INPI France design fees in EUR. Base filing \u20ac39 plus per-reproduction surcharges (b&w \u20ac23 / colour \u20ac47). Renewal ('prorogation') \u20ac52 per 5-year period (up to 25 years total). Year=5 reflects the 5-year period mapping.",
+  "office_code": "INPI-FR",
+  "retrieved_at": "2026-05-22",
+  "right": "design",
+  "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi",
+  "statutory_basis": "Code de la propri\u00e9t\u00e9 intellectuelle (CPI) Livre V (dessins et mod\u00e8les)."
+}

@@ -1,0 +1,190 @@
+{
+  "currency": "EUR",
+  "effective_date": "2026-04-27",
+  "fees": [
+    {
+      "amount": "190",
+      "category": "filing",
+      "code": "inpi-fr-tm-filing-1class-l",
+      "condition": {
+        "description": "INPI FR base filing fee covers the first Nice class.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "D\u00e9p\u00f4t de marque pour une classe",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "350",
+      "category": "filing",
+      "code": "inpi-fr-tm-filing-collective-1class-l",
+      "condition": {
+        "description": "INPI FR collective/guarantee mark base filing covers the first Nice class.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "D\u00e9p\u00f4t de marque collective ou de garantie pour une classe",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "40",
+      "category": "excess_classes",
+      "code": "inpi-fr-tm-class-additional-l",
+      "condition": {
+        "description": "INPI FR additional-class surcharge for each Nice class beyond the first.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Par classe de produit ou de services au-del\u00e0 de la premi\u00e8re",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "104",
+      "category": "other",
+      "code": "inpi-fr-tm-regularisation-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "R\u00e9gularisation, rectification d'erreur mat\u00e9rielle (marques)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "400",
+      "category": "opposition",
+      "code": "inpi-fr-tm-opposition-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Opposition \u00e0 une marque",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600",
+      "category": "cancellation",
+      "code": "inpi-fr-tm-nullity-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Requ\u00eate en nullit\u00e9 ou d\u00e9ch\u00e9ance d'une marque",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "290",
+      "category": "renewal",
+      "code": "inpi-fr-tm-renewal-1class-l",
+      "condition": {
+        "description": "INPI FR base renewal fee covers the first Nice class on the 10-year cycle.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Renouvellement de marque pour une classe (10-year cycle)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "450",
+      "category": "renewal",
+      "code": "inpi-fr-tm-renewal-collective-1class-l",
+      "condition": {
+        "description": "INPI FR collective/guarantee mark renewal base, first class.",
+        "per_unit": true,
+        "threshold": 1,
+        "trigger": "classes_over"
+      },
+      "currency": "EUR",
+      "label": "Renouvellement de marque collective/garantie pour une classe",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "156",
+      "category": "petition",
+      "code": "inpi-fr-tm-relev\u00e9-d\u00e9ch\u00e9ance-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Requ\u00eate en relev\u00e9 de d\u00e9ch\u00e9ance (marques)",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "other",
+      "code": "inpi-fr-tm-division-l",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Division d'une marque",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.inpi.fr/inpi-block/download-document?id=20516",
+      "tier": "none",
+      "year": null
+    }
+  ],
+  "issuing_body": "Institut National de la Propri\u00e9t\u00e9 Industrielle (INPI)",
+  "jurisdiction": "FR",
+  "key": "FR/INPI-FR/trademark",
+  "notes": "INPI France trademark fees per-class (Nice classification) in EUR on a 10-year renewal cycle. Additional-class surcharge \u20ac40 per class beyond the first. Collective/guarantee marks have their own base rate. Madrid international application fees live in a separate PDF (id=20520) \u2014 not modeled in v1.",
+  "office_code": "INPI-FR",
+  "retrieved_at": "2026-05-22",
+  "right": "trademark",
+  "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi",
+  "statutory_basis": "Code de la propri\u00e9t\u00e9 intellectuelle (CPI) Articles R.411-17 et seq."
+}
