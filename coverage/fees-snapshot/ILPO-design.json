@@ -333,7 +333,7 @@
   "key": "IL/ILPO/design",
   "notes": "ILPO 2026 fee schedule, gazetted 2025-12-22, effective 2026-01-01. Currency is Israeli new shekel (NIS / ILS); fees are CPI-adjusted annually and rounded to the nearest shekel. Source PDF is Hebrew-only \u2014 ILPO does not publish an English translation of the current-effective fee schedule on gov.il. Item labels in this connector are English-language summaries of the controlling Hebrew text. The Hebrew schedule is the authoritative version per Reshumot (Israeli Official Gazette).\n\nSchedule reflects the Designs Law 5777-2017 (in force 2018-08-07). Designs filed before 2018-08-07 are still governed by the legacy Patents and Designs Ordinance (1924); those legacy fees appear in the source PDF but are not emitted here \u2014 they apply only to a shrinking tail of pre-2018 registrations. The schedule supports five-year renewal periods up to a 25-year maximum (years 6-10, 10-15, 15-20, 20-25) plus an all-periods option. Items 1 and 2 (filing) are emitted twice \u2014 once at full amount, once at 60% for the first-application small-entity discount.",
   "office_code": "ILPO",
-  "retrieved_at": "2026-05-26",
+  "retrieved_at": "2026-05-27",
   "right": "design",
   "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
   "statutory_basis": "Designs Law, 5777-2017 (in force 2018-08-07) + Designs Regulations. CPI-adjusted annually; controlling text is Reshumot."
