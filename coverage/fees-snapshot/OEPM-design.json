@@ -14,7 +14,7 @@
       },
       "currency": "EUR",
       "label": "Restoration of rights (paper)",
-      "notes": "OEPM fee code CM01; channel: paper; PDF text: ota: concedidos bajo el E.P.I. (solicitudes presentadas antes del 9.7.2003) R\u00c9GIMEN TRANSITORIO. T\u00cdTULOS Y QUINQUENIOS. DEMORAS",
+      "notes": "OEPM fee code CM01; channel: paper; PDF text: \u20ac \u20ac \u20ac (**) Nota: concedidos bajo el E.P.I. (solicitudes presentadas antes del 9.7.2003) R\u00c9GIMEN TRANSITORIO. T\u00cdTULOS Y QUINQUENIOS. DEMORAS. RESTABLECIMIENTO DE",
       "rights": [
         "design"
       ],
@@ -29,7 +29,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Restoration of rights (electronic)",
-      "notes": "OEPM fee code CI01; channel: electronic",
+      "notes": "OEPM fee code CI01; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -49,7 +49,7 @@
       },
       "currency": "EUR",
       "label": "Appeal / request for review (paper)",
-      "notes": "OEPM fee code CM02; channel: paper; PDF text: RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "notes": "OEPM fee code CM02; channel: paper; PDF text: \u20ac RECURSO. SOLICITUD DE REVISI\u00d3N",
       "rights": [
         "design"
       ],
@@ -64,7 +64,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Appeal / request for review (electronic)",
-      "notes": "OEPM fee code CI02; channel: electronic",
+      "notes": "OEPM fee code CI02; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -84,7 +84,7 @@
       },
       "currency": "EUR",
       "label": "Inspection of file / case (paper)",
-      "notes": "OEPM fee code CM03; channel: paper; PDF text: CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "notes": "OEPM fee code CM03; channel: paper; PDF text: \u20ac CONSULTA Y VISTA DE UN EXPEDIENTE",
       "rights": [
         "design"
       ],
@@ -104,7 +104,7 @@
       },
       "currency": "EUR",
       "label": "Copy of file documents (paper)",
-      "notes": "OEPM fee code CM04; channel: paper; PDF text: COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "notes": "OEPM fee code CM04; channel: paper; PDF text: \u20ac COPIA DOCUMENTOS DE UN EXPEDIENTE",
       "rights": [
         "design"
       ],
@@ -124,7 +124,7 @@
       },
       "currency": "EUR",
       "label": "BOPI announcement \u2014 contentious-administrative appeal (paper)",
-      "notes": "OEPM fee code CM05; channel: paper; PDF text: Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "notes": "OEPM fee code CM05; channel: paper; PDF text: \u20ac Por cada p\u00e1gina que exceda de diez. \u20ac ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
       "rights": [
         "design"
       ],
@@ -139,7 +139,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "BOPI announcement \u2014 contentious-administrative appeal (electronic)",
-      "notes": "OEPM fee code CI05; channel: electronic",
+      "notes": "OEPM fee code CI05; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -159,7 +159,7 @@
       },
       "currency": "EUR",
       "label": "BOPI announcement \u2014 ruling on contentious-administrative appeal (paper)",
-      "notes": "OEPM fee code CM06; channel: paper; PDF text: ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "notes": "OEPM fee code CM06; channel: paper; PDF text: \u20ac ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
       "rights": [
         "design"
       ],
@@ -174,7 +174,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "BOPI announcement \u2014 ruling on contentious-administrative appeal (electronic)",
-      "notes": "OEPM fee code CI06; channel: electronic",
+      "notes": "OEPM fee code CI06; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -194,7 +194,7 @@
       },
       "currency": "EUR",
       "label": "Modifications (paper)",
-      "notes": "OEPM fee code CM07; channel: paper; PDF text: MODIFICACIONES",
+      "notes": "OEPM fee code CM07; channel: paper; PDF text: \u20ac MODIFICACIONES",
       "rights": [
         "design"
       ],
@@ -209,7 +209,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Modifications (electronic)",
-      "notes": "OEPM fee code CI07; channel: electronic",
+      "notes": "OEPM fee code CI07; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -229,7 +229,7 @@
       },
       "currency": "EUR",
       "label": "Oppositions (paper)",
-      "notes": "OEPM fee code CM08; channel: paper; PDF text: OPOSICIONES",
+      "notes": "OEPM fee code CM08; channel: paper; PDF text: \u20ac OPOSICIONES",
       "rights": [
         "design"
       ],
@@ -244,7 +244,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Oppositions (electronic)",
-      "notes": "OEPM fee code CI08; channel: electronic",
+      "notes": "OEPM fee code CI08; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -264,7 +264,7 @@
       },
       "currency": "EUR",
       "label": "Change of name of holder (paper)",
-      "notes": "OEPM fee code CM09; channel: paper; PDF text: INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
+      "notes": "OEPM fee code CM09; channel: paper; PDF text: \u20ac INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
       "rights": [
         "design"
       ],
@@ -279,7 +279,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Change of name of holder (electronic)",
-      "notes": "OEPM fee code CI09; channel: electronic",
+      "notes": "OEPM fee code CI09; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -299,7 +299,7 @@
       },
       "currency": "EUR",
       "label": "Common \u2014 PAGO M\u00c1XIMO cap (paper)",
-      "notes": "OEPM fee code CX09; channel: paper; PDF text: PAGO M\u00c1XIMO",
+      "notes": "OEPM fee code CX09; channel: paper; PDF text: \u20ac PAGO M\u00c1XIMO",
       "rights": [
         "design"
       ],
@@ -314,7 +314,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Common \u2014 PAGO M\u00c1XIMO cap (electronic)",
-      "notes": "OEPM fee code XC09; channel: electronic",
+      "notes": "OEPM fee code XC09; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -349,7 +349,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I501",
-      "notes": "OEPM fee code I501; channel: electronic",
+      "notes": "OEPM fee code I501; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -368,7 +368,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "label": "\u20ac RECURSO. SOLICITUD DE REVISI\u00d3N",
       "notes": "OEPM fee code I302; channel: paper",
       "rights": [
         "design"
@@ -384,7 +384,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I502",
-      "notes": "OEPM fee code I502; channel: electronic",
+      "notes": "OEPM fee code I502; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -403,7 +403,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "label": "\u20ac CONSULTA Y VISTA DE UN EXPEDIENTE",
       "notes": "OEPM fee code I303; channel: paper",
       "rights": [
         "design"
@@ -423,7 +423,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "label": "\u20ac COPIA DOCUMENTOS DE UN EXPEDIENTE",
       "notes": "OEPM fee code I304; channel: paper",
       "rights": [
         "design"
@@ -443,7 +443,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "label": "\u20ac Por cada p\u00e1gina que exceda de diez. \u20ac ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
       "notes": "OEPM fee code I305; channel: paper",
       "rights": [
         "design"
@@ -459,7 +459,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I505",
-      "notes": "OEPM fee code I505; channel: electronic",
+      "notes": "OEPM fee code I505; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -478,7 +478,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "label": "\u20ac ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
       "notes": "OEPM fee code I306; channel: paper",
       "rights": [
         "design"
@@ -494,7 +494,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I506",
-      "notes": "OEPM fee code I506; channel: electronic",
+      "notes": "OEPM fee code I506; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -513,7 +513,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "MODIFICACIONES",
+      "label": "\u20ac MODIFICACIONES",
       "notes": "OEPM fee code I307; channel: paper",
       "rights": [
         "design"
@@ -529,7 +529,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I507",
-      "notes": "OEPM fee code I507; channel: electronic",
+      "notes": "OEPM fee code I507; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -548,7 +548,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "OPOSICIONES",
+      "label": "\u20ac OPOSICIONES",
       "notes": "OEPM fee code I308; channel: paper",
       "rights": [
         "design"
@@ -564,7 +564,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I508",
-      "notes": "OEPM fee code I508; channel: electronic",
+      "notes": "OEPM fee code I508; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -583,7 +583,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR. Por registro afectado",
+      "label": "\u20ac INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
       "notes": "OEPM fee code I309; channel: paper",
       "rights": [
         "design"
@@ -599,7 +599,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I509",
-      "notes": "OEPM fee code I509; channel: electronic",
+      "notes": "OEPM fee code I509; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -618,7 +618,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "RESTABLECIMIENTO DE DERECHOS",
+      "label": "\u20ac RESTABLECIMIENTO DE DERECHOS",
       "notes": "OEPM fee code I701; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -634,7 +634,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I801",
-      "notes": "OEPM fee code I801; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I801; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -653,7 +653,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "label": "\u20ac RECURSO. SOLICITUD DE REVISI\u00d3N",
       "notes": "OEPM fee code I702; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -669,7 +669,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I802",
-      "notes": "OEPM fee code I802; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I802; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -688,7 +688,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "label": "\u20ac CONSULTA Y VISTA DE UN EXPEDIENTE",
       "notes": "OEPM fee code I703; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -708,7 +708,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "label": "\u20ac COPIA DOCUMENTOS DE UN EXPEDIENTE",
       "notes": "OEPM fee code I704; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -728,7 +728,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "label": "\u20ac Por cada p\u00e1gina que exceda de diez. \u20ac ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
       "notes": "OEPM fee code I705; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -744,7 +744,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I805",
-      "notes": "OEPM fee code I805; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I805; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -763,7 +763,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "label": "\u20ac ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
       "notes": "OEPM fee code I706; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -779,7 +779,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I806",
-      "notes": "OEPM fee code I806; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I806; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -798,7 +798,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "MODIFICACIONES",
+      "label": "\u20ac MODIFICACIONES",
       "notes": "OEPM fee code I707; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -814,7 +814,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I807",
-      "notes": "OEPM fee code I807; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I807; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -833,7 +833,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "OPOSICIONES",
+      "label": "\u20ac OPOSICIONES",
       "notes": "OEPM fee code I708; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -849,7 +849,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I808",
-      "notes": "OEPM fee code I808; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I808; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -868,7 +868,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR. Por registro afectado",
+      "label": "\u20ac INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
       "notes": "OEPM fee code I709; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "design"
@@ -884,7 +884,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I809",
-      "notes": "OEPM fee code I809; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I809; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -898,8 +898,8 @@
       "code": "oepm-PCT1",
       "condition": null,
       "currency": "EUR",
-      "label": "abril de 2026 CONCEPTO CLAVEIMPORTE TASA DE TRANSMISION TRANSMISION DEL DOCUMENTO DE PRIORIDAD TASA DE PRESENTACI\u00d3N INTERNACIONAL (30 primeras hojas) POR HOJA ADICIONAL (a partir de la p\u00e1gina 31 inclu",
-      "notes": "OEPM fee code PCT1; channel: n/a; PDF text: abril de 2026 CONCEPTO CLAVEIMPORTE TASA DE TRANSMISION TRANSMISION DEL DOCUMENTO DE PRIORIDAD TASA DE PRESENTACI\u00d3N INTERNACIONAL (30 primeras hojas) POR HOJA A",
+      "label": "OS 8 TASA DE TRANSMISION \u20ac TRANSMISION DEL DOCUMENTO DE PRIORIDAD \u20ac TASA DE PRESENTACI\u00d3N INTERNACIONAL (30 primeras hojas) \u20ac POR HOJA ADICIONAL (a partir de la p\u00e1gina 31 inclusive) \u20ac TASA DE B\u00daSQUEDA",
+      "notes": "OEPM fee code PCT1; channel: n/a",
       "rights": [
         "design"
       ],
@@ -919,7 +919,7 @@
       },
       "currency": "EUR",
       "label": "Design \u2014 divisional (paper)",
-      "notes": "OEPM fee code DT25; channel: paper; PDF text: cha: 1 de abril de 2026 SOLICITUD DE REGISTRO de 11 a 20 dise\u00f1os de 21 a 30 dise\u00f1os de 31 a 40 dise\u00f1os de 41 a 50 dise\u00f1os DIVISI\u00d3N",
+      "notes": "OEPM fee code DT25; channel: paper; PDF text: 13 SOLICITUD DE REGISTRO \u20ac \u20ac de 11 a 20 dise\u00f1os \u20ac \u20ac de 21 a 30 dise\u00f1os \u20ac \u20ac de 31 a 40 dise\u00f1os \u20ac \u20ac de 41 a 50 dise\u00f1os \u20ac \u20ac DIVISI\u00d3N",
       "rights": [
         "design"
       ],
@@ -934,7 +934,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Design \u2014 divisional (electronic)",
-      "notes": "OEPM fee code DE26; channel: electronic",
+      "notes": "OEPM fee code DE26; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -954,7 +954,7 @@
       },
       "currency": "EUR",
       "label": "Design \u2014 priority or exhibition claim (paper)",
-      "notes": "OEPM fee code DT27; channel: paper; PDF text: PRIORIDAD O DE EXPOSICI\u00d3N",
+      "notes": "OEPM fee code DT27; channel: paper; PDF text: \u20ac PRIORIDAD UNIONISTA O DE EXPOSICI\u00d3N. Por cada prioridad reivindicada",
       "rights": [
         "design"
       ],
@@ -969,7 +969,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Design \u2014 priority or exhibition claim (electronic)",
-      "notes": "OEPM fee code DE27; channel: electronic",
+      "notes": "OEPM fee code DE27; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -989,7 +989,7 @@
       },
       "currency": "EUR",
       "label": "Design \u2014 assignment / licence recordation (paper)",
-      "notes": "OEPM fee code DT36; channel: paper; PDF text: CAMBIOS DE TIT., LICENCIAS, OPCS. COMPRA, ETC. (m\u00e1x",
+      "notes": "OEPM fee code DT36; channel: paper; PDF text: \u20ac INSCRIPCI\u00d3N, CANCELACION O MODIFICACI\u00d3N DE CESIONES, LICENCIAS, DERECHOS REALES, OPCIONES DE COMPRA. Por registro afectado",
       "rights": [
         "design"
       ],
@@ -1004,7 +1004,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Design \u2014 assignment / licence recordation (electronic)",
-      "notes": "OEPM fee code DE24; channel: electronic",
+      "notes": "OEPM fee code DE24; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -1024,7 +1024,7 @@
       },
       "currency": "EUR",
       "label": "Design \u2014 PAGO REGISTRO M\u00c1XIMO cap (paper)",
-      "notes": "OEPM fee code DX36; channel: paper; PDF text: PAGO REGISTRO M\u00c1XIMO",
+      "notes": "OEPM fee code DX36; channel: paper; PDF text: \u20ac PAGO M\u00c1XIMO",
       "rights": [
         "design"
       ],
@@ -1039,7 +1039,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Design \u2014 PAGO REGISTRO M\u00c1XIMO cap (electronic)",
-      "notes": "OEPM fee code XD24; channel: electronic",
+      "notes": "OEPM fee code XD24; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -1059,7 +1059,7 @@
       },
       "currency": "EUR",
       "label": "Design \u2014 certifications (paper)",
-      "notes": "OEPM fee code DT38; channel: paper; PDF text: CERTIFICACIONES",
+      "notes": "OEPM fee code DT38; channel: paper; PDF text: \u20ac CERTIFICACI\u00d3N O COPIA AUTORIZADA",
       "rights": [
         "design"
       ],
@@ -1074,7 +1074,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Design \u2014 certifications (electronic)",
-      "notes": "OEPM fee code DE25; channel: electronic",
+      "notes": "OEPM fee code DE25; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -1093,7 +1093,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "de 11 a 20 de 21 a 30 de 31 a 40 de 41 a 50 RENOVACI\u00d3N (E.P.I",
+      "label": "0 \u20ac \u20ac \u20ac \u20ac \u20ac \u20ac de 21 a 30 \u20ac \u20ac \u20ac \u20ac \u20ac \u20ac de 31 a 40 \u20ac \u20ac \u20ac \u20ac \u20ac \u20ac de 41 a 50 \u20ac \u20ac \u20ac \u20ac \u20ac \u20ac RENOVACI\u00d3N (E.P.I",
       "notes": "OEPM fee code DT35; channel: paper",
       "rights": [
         "design"
@@ -1109,7 +1109,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code DE21",
-      "notes": "OEPM fee code DE21; channel: electronic",
+      "notes": "OEPM fee code DE21; channel: electronic; PDF text: \u20ac",
       "rights": [
         "design"
       ],
@@ -1123,8 +1123,8 @@
       "code": "oepm-DQR0",
       "condition": null,
       "currency": "EUR",
-      "label": "R\u00c1MITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 Sin recargo 25% Recargo 50% Recargo T\u00edtul",
-      "notes": "OEPM fee code DQR0; channel: n/a; PDF text: R\u00c1MITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 S",
+      "label": "ITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 14 Sin recargo 25% Recargo 50% Recargo T\u00edtul",
+      "notes": "OEPM fee code DQR0; channel: n/a; PDF text: ITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 14 S",
       "rights": [
         "design"
       ],
@@ -1138,7 +1138,7 @@
       "code": "oepm-DQR1",
       "condition": null,
       "currency": "EUR",
-      "label": "1ER QUINQUENIO RENOVACI\u00d3N",
+      "label": "\u20ac 1ER QUINQUENIO RENOVACI\u00d3N",
       "notes": "OEPM fee code DQR1; channel: n/a",
       "rights": [
         "design"
@@ -1153,8 +1153,23 @@
       "code": "oepm-DQR2",
       "condition": null,
       "currency": "EUR",
-      "label": "2\u00ba QUINQUENIO RENOVACI\u00d3N",
+      "label": "\u20ac \u20ac \u20ac 2\u00ba QUINQUENIO RENOVACI\u00d3N",
       "notes": "OEPM fee code DQR2; channel: n/a",
+      "rights": [
+        "design"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "75.50",
+      "category": "other",
+      "code": "oepm-BB01",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Agent \u2014 Special Register inscription request",
+      "notes": "OEPM fee code BB01; channel: n/a; PDF text: C02 Libre Nota: las tasas marcadas con asterisco se pueden pagar mediante tarjeta de cr\u00e9dito/d\u00e9bito. 15 SOLICITUD DE INSCRIPCI\u00d3N EN EL REGISTRO ESPECIAL DE AGEN",
       "rights": [
         "design"
       ],
@@ -1169,7 +1184,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Agent \u2014 employee authorization",
-      "notes": "OEPM fee code BB02; channel: n/a; PDF text: tarjeta de cr\u00e9dito/d\u00e9bito",
+      "notes": "OEPM fee code BB02; channel: n/a; PDF text: \u20ac AUTORIZACI\u00d3N EMPLEADOS AGENTES",
       "rights": [
         "design"
       ],
@@ -1183,7 +1198,7 @@
   "key": "ES/OEPM/design",
   "notes": "Scraped from OEPM's consolidated TASAS y PRECIOS P\u00daBLICOS PDF (670 KB / 17 pages, stamped 'Actualizado a fecha: 1 de abril de 2026'). Each fee row in the dual-channel sections emits one FeeItem; the 2nd character of the code marks the filing channel (T = paper, E = electronic) and is also flagged on paper rows via FeeCondition(trigger=paper_filing). Applicant tier maps as follows: IT/IE/MT/ME/DT/DE/CM/CI/ET/CP/I3/I5 \u2192 EntityTier.large; YT/YE/UT/UE/I7/I8 \u2192 EntityTier.small (PYMES + public-university 50% reduction under Ley 24/2015 art. 186). v1 GAPS: patent annuities (page 6 IP/2P/5P \u00d7 IR/2R/5R \u00d7 YP/Y2/Y5 \u00d7 UP/U2/U5), design renewal table (page 13 DT41/D241/D541), PCT international fees (pages 8-9), and precios p\u00fablicos (pages 16-17) ship as separate column structures and are not captured. Designs: multi-design discounts (de 11 a 20, 21 a 30, \u2026) ship as bare amounts on the page-13 table \u2014 the code keys DT40/DE40 / DT41/DE41 / DT42/DE42 are listed at the bottom of the page and don't pair tightly enough with the amount cells for regex extraction. PAGO REGISTRO M\u00c1XIMO (DX36/XD24) caps the total payable on large multi-design filings.",
   "office_code": "OEPM",
-  "retrieved_at": "2026-05-28",
+  "retrieved_at": "2026-05-29",
   "right": "design",
   "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
   "statutory_basis": "Ley 20/2003 de Protecci\u00f3n Jur\u00eddica del Dise\u00f1o Industrial; year-over-year amounts adjusted by the annual Ley de Presupuestos Generales del Estado."

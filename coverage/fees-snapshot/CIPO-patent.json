@@ -1178,7 +1178,7 @@
       "code": "fees-in-respect-of-information-s",
       "condition": null,
       "currency": "CAD",
-      "label": "Fees in respect of information or copies \u2013 Fees for requesting a certified copy in electronic form (service not available yet) \u2014 For each certification",
+      "label": "Fees in respect of information or copies \u2013 Fees for requesting a certified copy in electronic form \u2014 For each certification",
       "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
       "rights": [
         "patent"
@@ -1193,7 +1193,7 @@
       "code": "fees-in-respect-of-information-l",
       "condition": null,
       "currency": "CAD",
-      "label": "Fees in respect of information or copies \u2013 Fees for requesting a certified copy in electronic form (service not available yet) \u2014 For each certification",
+      "label": "Fees in respect of information or copies \u2013 Fees for requesting a certified copy in electronic form \u2014 For each certification",
       "notes": "Patent Rules SOR/2019-251, schedule. Caption: 'Fees in respect of patents'",
       "rights": [
         "patent"
@@ -1268,7 +1268,7 @@
   "key": "CA/CIPO/patent",
   "notes": "CIPO publishes annually with January 1 effective date. The small-entity discount applies under Patent Act \u00a744.1. Maintenance fees use English-band descriptions (e.g., 'second, third and fourth anniversaries') which the scraper expands into per-year FeeItem rows so lookup-by-year works. CIPO does not publish numeric fee codes; codes here are synthesized slugs.",
   "office_code": "CIPO",
-  "retrieved_at": "2026-05-27",
+  "retrieved_at": "2026-05-29",
   "right": "patent",
   "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
   "statutory_basis": "Patent Rules SOR/2019-251, Schedule of Fees"

@@ -14,7 +14,7 @@
       },
       "currency": "EUR",
       "label": "Restoration of rights (paper)",
-      "notes": "OEPM fee code CM01; channel: paper; PDF text: ota: concedidos bajo el E.P.I. (solicitudes presentadas antes del 9.7.2003) R\u00c9GIMEN TRANSITORIO. T\u00cdTULOS Y QUINQUENIOS. DEMORAS",
+      "notes": "OEPM fee code CM01; channel: paper; PDF text: \u20ac \u20ac \u20ac (**) Nota: concedidos bajo el E.P.I. (solicitudes presentadas antes del 9.7.2003) R\u00c9GIMEN TRANSITORIO. T\u00cdTULOS Y QUINQUENIOS. DEMORAS. RESTABLECIMIENTO DE",
       "rights": [
         "patent"
       ],
@@ -29,7 +29,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Restoration of rights (electronic)",
-      "notes": "OEPM fee code CI01; channel: electronic",
+      "notes": "OEPM fee code CI01; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -49,7 +49,7 @@
       },
       "currency": "EUR",
       "label": "Appeal / request for review (paper)",
-      "notes": "OEPM fee code CM02; channel: paper; PDF text: RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "notes": "OEPM fee code CM02; channel: paper; PDF text: \u20ac RECURSO. SOLICITUD DE REVISI\u00d3N",
       "rights": [
         "patent"
       ],
@@ -64,7 +64,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Appeal / request for review (electronic)",
-      "notes": "OEPM fee code CI02; channel: electronic",
+      "notes": "OEPM fee code CI02; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -84,7 +84,7 @@
       },
       "currency": "EUR",
       "label": "Inspection of file / case (paper)",
-      "notes": "OEPM fee code CM03; channel: paper; PDF text: CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "notes": "OEPM fee code CM03; channel: paper; PDF text: \u20ac CONSULTA Y VISTA DE UN EXPEDIENTE",
       "rights": [
         "patent"
       ],
@@ -104,7 +104,7 @@
       },
       "currency": "EUR",
       "label": "Copy of file documents (paper)",
-      "notes": "OEPM fee code CM04; channel: paper; PDF text: COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "notes": "OEPM fee code CM04; channel: paper; PDF text: \u20ac COPIA DOCUMENTOS DE UN EXPEDIENTE",
       "rights": [
         "patent"
       ],
@@ -124,7 +124,7 @@
       },
       "currency": "EUR",
       "label": "BOPI announcement \u2014 contentious-administrative appeal (paper)",
-      "notes": "OEPM fee code CM05; channel: paper; PDF text: Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "notes": "OEPM fee code CM05; channel: paper; PDF text: \u20ac Por cada p\u00e1gina que exceda de diez. \u20ac ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
       "rights": [
         "patent"
       ],
@@ -139,7 +139,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "BOPI announcement \u2014 contentious-administrative appeal (electronic)",
-      "notes": "OEPM fee code CI05; channel: electronic",
+      "notes": "OEPM fee code CI05; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -159,7 +159,7 @@
       },
       "currency": "EUR",
       "label": "BOPI announcement \u2014 ruling on contentious-administrative appeal (paper)",
-      "notes": "OEPM fee code CM06; channel: paper; PDF text: ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "notes": "OEPM fee code CM06; channel: paper; PDF text: \u20ac ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
       "rights": [
         "patent"
       ],
@@ -174,7 +174,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "BOPI announcement \u2014 ruling on contentious-administrative appeal (electronic)",
-      "notes": "OEPM fee code CI06; channel: electronic",
+      "notes": "OEPM fee code CI06; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -194,7 +194,7 @@
       },
       "currency": "EUR",
       "label": "Modifications (paper)",
-      "notes": "OEPM fee code CM07; channel: paper; PDF text: MODIFICACIONES",
+      "notes": "OEPM fee code CM07; channel: paper; PDF text: \u20ac MODIFICACIONES",
       "rights": [
         "patent"
       ],
@@ -209,7 +209,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Modifications (electronic)",
-      "notes": "OEPM fee code CI07; channel: electronic",
+      "notes": "OEPM fee code CI07; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -229,7 +229,7 @@
       },
       "currency": "EUR",
       "label": "Oppositions (paper)",
-      "notes": "OEPM fee code CM08; channel: paper; PDF text: OPOSICIONES",
+      "notes": "OEPM fee code CM08; channel: paper; PDF text: \u20ac OPOSICIONES",
       "rights": [
         "patent"
       ],
@@ -244,7 +244,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Oppositions (electronic)",
-      "notes": "OEPM fee code CI08; channel: electronic",
+      "notes": "OEPM fee code CI08; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -264,7 +264,7 @@
       },
       "currency": "EUR",
       "label": "Change of name of holder (paper)",
-      "notes": "OEPM fee code CM09; channel: paper; PDF text: INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
+      "notes": "OEPM fee code CM09; channel: paper; PDF text: \u20ac INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
       "rights": [
         "patent"
       ],
@@ -279,7 +279,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Change of name of holder (electronic)",
-      "notes": "OEPM fee code CI09; channel: electronic",
+      "notes": "OEPM fee code CI09; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -299,7 +299,7 @@
       },
       "currency": "EUR",
       "label": "Common \u2014 PAGO M\u00c1XIMO cap (paper)",
-      "notes": "OEPM fee code CX09; channel: paper; PDF text: PAGO M\u00c1XIMO",
+      "notes": "OEPM fee code CX09; channel: paper; PDF text: \u20ac PAGO M\u00c1XIMO",
       "rights": [
         "patent"
       ],
@@ -314,7 +314,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Common \u2014 PAGO M\u00c1XIMO cap (electronic)",
-      "notes": "OEPM fee code XC09; channel: electronic",
+      "notes": "OEPM fee code XC09; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -334,7 +334,7 @@
       },
       "currency": "EUR",
       "label": "Patent or utility model application filing (paper)",
-      "notes": "OEPM fee code IT01; channel: paper; PDF text: rte Solicitud de una demanda de dep\u00f3sito de patente de invenci\u00f3n o modelo de utilidad, ya sea directamente o como consecuencia de la divisi\u00f3n de una solicitud i",
+      "notes": "OEPM fee code IT01; channel: paper; PDF text: marcadas con asterisco se pueden pagar mediante tarjeta de cr\u00e9dito/d\u00e9bito. 3 Solicitud de patente o modelo de utilidad",
       "rights": [
         "patent"
       ],
@@ -349,7 +349,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Patent or utility model application filing (electronic)",
-      "notes": "OEPM fee code IE01; channel: electronic",
+      "notes": "OEPM fee code IE01; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -369,7 +369,7 @@
       },
       "currency": "EUR",
       "label": "Change of protection modality (paper)",
-      "notes": "OEPM fee code IT02; channel: paper; PDF text: Solicitud de cambio de modalidad de protecci\u00f3n",
+      "notes": "OEPM fee code IT02; channel: paper; PDF text: \u20ac Solicitud de cambio de modalidad de protecci\u00f3n",
       "rights": [
         "patent"
       ],
@@ -384,7 +384,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Change of protection modality (electronic)",
-      "notes": "OEPM fee code IE02; channel: electronic",
+      "notes": "OEPM fee code IE02; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -404,7 +404,7 @@
       },
       "currency": "EUR",
       "label": "Search report (IET) request (paper)",
-      "notes": "OEPM fee code IT04; channel: paper; PDF text: Solicitud de informe sobre el estado de la t\u00e9cnica (IET",
+      "notes": "OEPM fee code IT04; channel: paper; PDF text: \u20ac Solicitud de informe sobre el estado de la t\u00e9cnica (IET",
       "rights": [
         "patent"
       ],
@@ -419,7 +419,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Search report (IET) request (electronic)",
-      "notes": "OEPM fee code IE04; channel: electronic",
+      "notes": "OEPM fee code IE04; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -439,7 +439,7 @@
       },
       "currency": "EUR",
       "label": "Substantive examination request (paper)",
-      "notes": "OEPM fee code IT22; channel: paper; PDF text: Solicitud de examen sustantivo",
+      "notes": "OEPM fee code IT22; channel: paper; PDF text: \u20ac Solicitud de examen sustantivo",
       "rights": [
         "patent"
       ],
@@ -454,7 +454,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Substantive examination request (electronic)",
-      "notes": "OEPM fee code IE22; channel: electronic",
+      "notes": "OEPM fee code IE22; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -474,7 +474,7 @@
       },
       "currency": "EUR",
       "label": "Prior examination \u2014 pre-2017 cases (paper)",
-      "notes": "OEPM fee code IT05; channel: paper; PDF text: Examen previo (s\u00f3lo para expedientes anteriores al 1.4.17",
+      "notes": "OEPM fee code IT05; channel: paper; PDF text: \u20ac Examen previo (s\u00f3lo para expedientes anteriores al 1.4.17",
       "rights": [
         "patent"
       ],
@@ -489,7 +489,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Prior examination \u2014 pre-2017 cases (electronic)",
-      "notes": "OEPM fee code IE05; channel: electronic",
+      "notes": "OEPM fee code IE05; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -509,7 +509,7 @@
       },
       "currency": "EUR",
       "label": "Urgent resolution of a file (paper)",
-      "notes": "OEPM fee code IT03; channel: paper; PDF text: tir del 1.4.17 de solicitantes que hayan declarado ser PYMES o personas f\u00edsicas emprendedoras, o de , consultar las tablas correspondientes. Solicitud de resolu",
+      "notes": "OEPM fee code IT03; channel: paper; PDF text: rtir del 1.4.17 de solicitantes que hayan declarado ser PYMES o personas f\u00edsicas emprendedoras, o de , consultar las tablas correspondientes. Solicitud de resol",
       "rights": [
         "patent"
       ],
@@ -524,7 +524,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Urgent resolution of a file (electronic)",
-      "notes": "OEPM fee code IE03; channel: electronic",
+      "notes": "OEPM fee code IE03; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -544,7 +544,7 @@
       },
       "currency": "EUR",
       "label": "Revocation or limitation request (paper)",
-      "notes": "OEPM fee code IT23; channel: paper; PDF text: Por solicitud de revocaci\u00f3n o limitaci\u00f3n",
+      "notes": "OEPM fee code IT23; channel: paper; PDF text: \u20ac Solicitud de revocaci\u00f3n o limitaci\u00f3n",
       "rights": [
         "patent"
       ],
@@ -559,7 +559,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Revocation or limitation request (electronic)",
-      "notes": "OEPM fee code IE23; channel: electronic",
+      "notes": "OEPM fee code IE23; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -579,7 +579,7 @@
       },
       "currency": "EUR",
       "label": "Priority claim \u2014 patents / UM (paper)",
-      "notes": "OEPM fee code IT06; channel: paper; PDF text: Por cada prioridad reivindicada en materia de",
+      "notes": "OEPM fee code IT06; channel: paper; PDF text: \u20ac Prioridad. Por cada prioridad reivindicada",
       "rights": [
         "patent"
       ],
@@ -594,7 +594,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Priority claim \u2014 patents / UM (electronic)",
-      "notes": "OEPM fee code IE06; channel: electronic",
+      "notes": "OEPM fee code IE06; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -614,7 +614,7 @@
       },
       "currency": "EUR",
       "label": "Response to suspension for formal defects (paper)",
-      "notes": "OEPM fee code IT08; channel: paper; PDF text: Por contestaci\u00f3n a suspenso provocado por defectos formales de cualquier tipo de expediente",
+      "notes": "OEPM fee code IT08; channel: paper; PDF text: \u20ac Contestaci\u00f3n a suspenso por defectos formales",
       "rights": [
         "patent"
       ],
@@ -629,7 +629,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Response to suspension for formal defects (electronic)",
-      "notes": "OEPM fee code IE08; channel: electronic",
+      "notes": "OEPM fee code IE08; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -649,7 +649,7 @@
       },
       "currency": "EUR",
       "label": "Licence of right offer (paper)",
-      "notes": "OEPM fee code IT11; channel: paper; PDF text: Por la tramitaci\u00f3n de cada uno de los ofrecimientos de licencias de pleno derecho o licencia obligatoria en los casos previstos por la Ley",
+      "notes": "OEPM fee code IT11; channel: paper; PDF text: \u20ac Inscripci\u00f3n de ofrecimiento de licencia de pleno derecho o licencia obligatoria",
       "rights": [
         "patent"
       ],
@@ -664,7 +664,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Licence of right offer (electronic)",
-      "notes": "OEPM fee code IE11; channel: electronic",
+      "notes": "OEPM fee code IE11; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -684,7 +684,7 @@
       },
       "currency": "EUR",
       "label": "Recordation of assignments / modifications (paper)",
-      "notes": "OEPM fee code IT20; channel: paper; PDF text: Por tramitaci\u00f3n de expedientes de inscripci\u00f3n de transmisiones o de cesiones o modificaciones. Por cada registro efectuado",
+      "notes": "OEPM fee code IT20; channel: paper; PDF text: \u20ac Inscripci\u00f3n, cancelaci\u00f3n o modificaci\u00f3n de cesiones, licencias, derechos reales, opciones de compra. Por cada registro afectado",
       "rights": [
         "patent"
       ],
@@ -699,7 +699,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Recordation of assignments / modifications (electronic)",
-      "notes": "OEPM fee code IE20; channel: electronic",
+      "notes": "OEPM fee code IE20; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -719,7 +719,7 @@
       },
       "currency": "EUR",
       "label": "Certification of registered data (paper)",
-      "notes": "OEPM fee code IT13; channel: paper; PDF text: e Por cada certificaci\u00f3n de datos registrados relativos a patentes, modelos de utilidad o o sus pr\u00f3rrogas, as\u00ed como por la expedici\u00f3n de copia autorizada de cad",
+      "notes": "OEPM fee code IT13; channel: paper; PDF text: OMPLEMENTO DE TASAS, CON documentaci\u00f3n asociada. TC01 Libre COMPLEMENTO DE TASAS, SIN documentaci\u00f3n asociada. TC02 Libre Certificaci\u00f3n o copia autorizada",
       "rights": [
         "patent"
       ],
@@ -734,7 +734,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Certification of registered data (electronic)",
-      "notes": "OEPM fee code IE13; channel: electronic",
+      "notes": "OEPM fee code IE13; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -754,7 +754,7 @@
       },
       "currency": "EUR",
       "label": "Expert report request (art. 120.7) (paper)",
-      "notes": "OEPM fee code IT24; channel: paper; PDF text: Por la solicitud de informes periciales previstos en el art. 120.7",
+      "notes": "OEPM fee code IT24; channel: paper; PDF text: \u20ac Solicitud de informes periciales (art. 120.7 LP",
       "rights": [
         "patent"
       ],
@@ -789,7 +789,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I501",
-      "notes": "OEPM fee code I501; channel: electronic",
+      "notes": "OEPM fee code I501; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -808,7 +808,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "label": "\u20ac RECURSO. SOLICITUD DE REVISI\u00d3N",
       "notes": "OEPM fee code I302; channel: paper",
       "rights": [
         "patent"
@@ -824,7 +824,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I502",
-      "notes": "OEPM fee code I502; channel: electronic",
+      "notes": "OEPM fee code I502; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -843,7 +843,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "label": "\u20ac CONSULTA Y VISTA DE UN EXPEDIENTE",
       "notes": "OEPM fee code I303; channel: paper",
       "rights": [
         "patent"
@@ -863,7 +863,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "label": "\u20ac COPIA DOCUMENTOS DE UN EXPEDIENTE",
       "notes": "OEPM fee code I304; channel: paper",
       "rights": [
         "patent"
@@ -883,7 +883,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "label": "\u20ac Por cada p\u00e1gina que exceda de diez. \u20ac ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
       "notes": "OEPM fee code I305; channel: paper",
       "rights": [
         "patent"
@@ -899,7 +899,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I505",
-      "notes": "OEPM fee code I505; channel: electronic",
+      "notes": "OEPM fee code I505; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -918,7 +918,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "label": "\u20ac ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
       "notes": "OEPM fee code I306; channel: paper",
       "rights": [
         "patent"
@@ -934,7 +934,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I506",
-      "notes": "OEPM fee code I506; channel: electronic",
+      "notes": "OEPM fee code I506; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -953,7 +953,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "MODIFICACIONES",
+      "label": "\u20ac MODIFICACIONES",
       "notes": "OEPM fee code I307; channel: paper",
       "rights": [
         "patent"
@@ -969,7 +969,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I507",
-      "notes": "OEPM fee code I507; channel: electronic",
+      "notes": "OEPM fee code I507; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -988,7 +988,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "OPOSICIONES",
+      "label": "\u20ac OPOSICIONES",
       "notes": "OEPM fee code I308; channel: paper",
       "rights": [
         "patent"
@@ -1004,7 +1004,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I508",
-      "notes": "OEPM fee code I508; channel: electronic",
+      "notes": "OEPM fee code I508; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1023,7 +1023,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR. Por registro afectado",
+      "label": "\u20ac INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
       "notes": "OEPM fee code I309; channel: paper",
       "rights": [
         "patent"
@@ -1039,7 +1039,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I509",
-      "notes": "OEPM fee code I509; channel: electronic",
+      "notes": "OEPM fee code I509; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1059,7 +1059,7 @@
       },
       "currency": "EUR",
       "label": "Patent or utility model application filing (paper)",
-      "notes": "OEPM fee code YT01; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: rte Solicitud de una demanda de dep\u00f3sito de patente de invenci\u00f3n o modelo de utilidad, ya sea directamente o como consecuencia de la divisi\u00f3n de una solicitud i",
+      "notes": "OEPM fee code YT01; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: s tablas correspondientes. 4 SOLICITADOS A PARTIR DEL 1.4.17 POR SOLICITANTES QUE HAN DECLARADO SER PYMES O PERSONAS F\u00cdSICAS EMPRENDEDORAS. Solicitud de patente",
       "rights": [
         "patent"
       ],
@@ -1074,7 +1074,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Patent or utility model application filing (electronic)",
-      "notes": "OEPM fee code YE01; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE01; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1094,7 +1094,7 @@
       },
       "currency": "EUR",
       "label": "Change of protection modality (paper)",
-      "notes": "OEPM fee code YT02; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Solicitud de cambio de modalidad de protecci\u00f3n",
+      "notes": "OEPM fee code YT02; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de cambio de modalidad de protecci\u00f3n",
       "rights": [
         "patent"
       ],
@@ -1109,7 +1109,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Change of protection modality (electronic)",
-      "notes": "OEPM fee code YE02; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE02; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1129,7 +1129,7 @@
       },
       "currency": "EUR",
       "label": "Search report (IET) request (paper)",
-      "notes": "OEPM fee code YT04; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Solicitud de informe sobre el estado de la t\u00e9cnica (IET",
+      "notes": "OEPM fee code YT04; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de informe sobre el estado de la t\u00e9cnica (IET",
       "rights": [
         "patent"
       ],
@@ -1144,7 +1144,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Search report (IET) request (electronic)",
-      "notes": "OEPM fee code YE04; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE04; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1164,7 +1164,7 @@
       },
       "currency": "EUR",
       "label": "Substantive examination request (paper)",
-      "notes": "OEPM fee code YT22; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Solicitud de examen sustantivo",
+      "notes": "OEPM fee code YT22; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de examen sustantivo",
       "rights": [
         "patent"
       ],
@@ -1179,7 +1179,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Substantive examination request (electronic)",
-      "notes": "OEPM fee code YE22; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE22; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1199,7 +1199,7 @@
       },
       "currency": "EUR",
       "label": "Urgent resolution of a file (paper)",
-      "notes": "OEPM fee code YT03; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Solicitud de resoluci\u00f3n urgente de un expediente",
+      "notes": "OEPM fee code YT03; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de resoluci\u00f3n urgente de un expediente",
       "rights": [
         "patent"
       ],
@@ -1214,7 +1214,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Urgent resolution of a file (electronic)",
-      "notes": "OEPM fee code YE03; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE03; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1234,7 +1234,7 @@
       },
       "currency": "EUR",
       "label": "Revocation or limitation request (paper)",
-      "notes": "OEPM fee code YT23; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por solicitud de revocaci\u00f3n o limitaci\u00f3n",
+      "notes": "OEPM fee code YT23; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de revocaci\u00f3n o limitaci\u00f3n",
       "rights": [
         "patent"
       ],
@@ -1249,7 +1249,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Revocation or limitation request (electronic)",
-      "notes": "OEPM fee code YE23; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE23; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1269,7 +1269,7 @@
       },
       "currency": "EUR",
       "label": "Priority claim \u2014 patents / UM (paper)",
-      "notes": "OEPM fee code YT06; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por cada prioridad reivindicada en materia de",
+      "notes": "OEPM fee code YT06; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Prioridad. Por cada prioridad reivindicada",
       "rights": [
         "patent"
       ],
@@ -1284,7 +1284,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Priority claim \u2014 patents / UM (electronic)",
-      "notes": "OEPM fee code YE06; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE06; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1304,7 +1304,7 @@
       },
       "currency": "EUR",
       "label": "Response to suspension for formal defects (paper)",
-      "notes": "OEPM fee code YT08; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por contestaci\u00f3n a suspenso provocado por defectos formales de cualquier tipo de expediente",
+      "notes": "OEPM fee code YT08; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Contestaci\u00f3n a suspenso por defectos formales",
       "rights": [
         "patent"
       ],
@@ -1319,7 +1319,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Response to suspension for formal defects (electronic)",
-      "notes": "OEPM fee code YE08; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE08; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1339,7 +1339,7 @@
       },
       "currency": "EUR",
       "label": "Licence of right offer (paper)",
-      "notes": "OEPM fee code YT11; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por la tramitaci\u00f3n de cada uno de los ofrecimientos de licencias de pleno derecho o licencia obligatoria en los casos previstos por la Ley",
+      "notes": "OEPM fee code YT11; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Inscripci\u00f3n de ofrecimiento de licencia de pleno derecho o licencia obligatoria",
       "rights": [
         "patent"
       ],
@@ -1354,7 +1354,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Licence of right offer (electronic)",
-      "notes": "OEPM fee code YE11; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE11; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1374,7 +1374,7 @@
       },
       "currency": "EUR",
       "label": "Recordation of assignments / modifications (paper)",
-      "notes": "OEPM fee code YT20; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por tramitaci\u00f3n de expedientes de inscripci\u00f3n de transmisiones o de cesiones o modificaciones. Por cada registro efectuado",
+      "notes": "OEPM fee code YT20; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Inscripci\u00f3n, cancelaci\u00f3n o modificaci\u00f3n de cesiones, licencias, derechos reales, opciones de compra. Por cada registro afectado",
       "rights": [
         "patent"
       ],
@@ -1389,7 +1389,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Recordation of assignments / modifications (electronic)",
-      "notes": "OEPM fee code YE20; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE20; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1409,7 +1409,7 @@
       },
       "currency": "EUR",
       "label": "Certification of registered data (paper)",
-      "notes": "OEPM fee code YT13; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por cada certificaci\u00f3n de datos registrados relativos a patentes, modelos de utilidad o o sus pr\u00f3rrogas, as\u00ed como por la expedici\u00f3n de copia autorizada de cada ",
+      "notes": "OEPM fee code YT13; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Certificaci\u00f3n o copia autorizada",
       "rights": [
         "patent"
       ],
@@ -1424,7 +1424,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Certification of registered data (electronic)",
-      "notes": "OEPM fee code YE13; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code YE13; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1444,7 +1444,7 @@
       },
       "currency": "EUR",
       "label": "Expert report request (art. 120.7) (paper)",
-      "notes": "OEPM fee code YT24; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por la solicitud de informes periciales previstos en el art. 120.7",
+      "notes": "OEPM fee code YT24; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de informes periciales (art. 120.7 LP",
       "rights": [
         "patent"
       ],
@@ -1464,7 +1464,7 @@
       },
       "currency": "EUR",
       "label": "Patent or utility model application filing (paper)",
-      "notes": "OEPM fee code UT01; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: rte Solicitud de una demanda de dep\u00f3sito de patente de invenci\u00f3n o modelo de utilidad, ya sea directamente o como consecuencia de la divisi\u00f3n de una solicitud i",
+      "notes": "OEPM fee code UT01; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: ndedoras, o de , consultar las tablas correspondientes. 5 SOLICITADOS A PARTIR DEL 1.4.17 POR Solicitud de patente o modelo de utilidad",
       "rights": [
         "patent"
       ],
@@ -1479,7 +1479,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Patent or utility model application filing (electronic)",
-      "notes": "OEPM fee code UE01; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE01; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1499,7 +1499,7 @@
       },
       "currency": "EUR",
       "label": "Change of protection modality (paper)",
-      "notes": "OEPM fee code UT02; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Solicitud de cambio de modalidad de protecci\u00f3n",
+      "notes": "OEPM fee code UT02; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de cambio de modalidad de protecci\u00f3n",
       "rights": [
         "patent"
       ],
@@ -1514,7 +1514,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Change of protection modality (electronic)",
-      "notes": "OEPM fee code UE02; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE02; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1534,7 +1534,7 @@
       },
       "currency": "EUR",
       "label": "Search report (IET) request (paper)",
-      "notes": "OEPM fee code UT04; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Solicitud de informe sobre el estado de la t\u00e9cnica (IET",
+      "notes": "OEPM fee code UT04; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de informe sobre el estado de la t\u00e9cnica (IET",
       "rights": [
         "patent"
       ],
@@ -1549,7 +1549,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Search report (IET) request (electronic)",
-      "notes": "OEPM fee code UE04; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE04; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1569,7 +1569,7 @@
       },
       "currency": "EUR",
       "label": "Substantive examination request (paper)",
-      "notes": "OEPM fee code UT22; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Solicitud de examen sustantivo",
+      "notes": "OEPM fee code UT22; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de examen sustantivo",
       "rights": [
         "patent"
       ],
@@ -1584,7 +1584,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Substantive examination request (electronic)",
-      "notes": "OEPM fee code UE22; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE22; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1604,7 +1604,7 @@
       },
       "currency": "EUR",
       "label": "Urgent resolution of a file (paper)",
-      "notes": "OEPM fee code UT03; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Solicitud de resoluci\u00f3n urgente de un expediente",
+      "notes": "OEPM fee code UT03; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de resoluci\u00f3n urgente de un expediente",
       "rights": [
         "patent"
       ],
@@ -1619,7 +1619,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Urgent resolution of a file (electronic)",
-      "notes": "OEPM fee code UE03; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE03; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1639,7 +1639,7 @@
       },
       "currency": "EUR",
       "label": "Revocation or limitation request (paper)",
-      "notes": "OEPM fee code UT23; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por solicitud de revocaci\u00f3n o limitaci\u00f3n",
+      "notes": "OEPM fee code UT23; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de revocaci\u00f3n o limitaci\u00f3n",
       "rights": [
         "patent"
       ],
@@ -1654,7 +1654,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Revocation or limitation request (electronic)",
-      "notes": "OEPM fee code UE23; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE23; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1674,7 +1674,7 @@
       },
       "currency": "EUR",
       "label": "Priority claim \u2014 patents / UM (paper)",
-      "notes": "OEPM fee code UT06; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por cada prioridad reivindicada en materia de",
+      "notes": "OEPM fee code UT06; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Prioridad. Por cada prioridad reivindicada",
       "rights": [
         "patent"
       ],
@@ -1689,7 +1689,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Priority claim \u2014 patents / UM (electronic)",
-      "notes": "OEPM fee code UE06; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE06; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1709,7 +1709,7 @@
       },
       "currency": "EUR",
       "label": "Response to suspension for formal defects (paper)",
-      "notes": "OEPM fee code UT08; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por contestaci\u00f3n a suspenso provocado por defectos formales de cualquier tipo de expediente",
+      "notes": "OEPM fee code UT08; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Contestaci\u00f3n a suspenso por defectos formales",
       "rights": [
         "patent"
       ],
@@ -1724,7 +1724,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Response to suspension for formal defects (electronic)",
-      "notes": "OEPM fee code UE08; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE08; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1744,7 +1744,7 @@
       },
       "currency": "EUR",
       "label": "Licence of right offer (paper)",
-      "notes": "OEPM fee code UT11; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por la tramitaci\u00f3n de cada uno de los ofrecimientos de licencias de pleno derecho o licencia obligatoria en los casos previstos por la Ley",
+      "notes": "OEPM fee code UT11; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Inscripci\u00f3n de ofrecimiento de licencia de pleno derecho o licencia obligatoria",
       "rights": [
         "patent"
       ],
@@ -1759,7 +1759,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Licence of right offer (electronic)",
-      "notes": "OEPM fee code UE11; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE11; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1779,7 +1779,7 @@
       },
       "currency": "EUR",
       "label": "Recordation of assignments / modifications (paper)",
-      "notes": "OEPM fee code UT20; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por tramitaci\u00f3n de expedientes de inscripci\u00f3n de transmisiones o de cesiones o modificaciones. Por cada registro efectuado",
+      "notes": "OEPM fee code UT20; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Inscripci\u00f3n, cancelaci\u00f3n o modificaci\u00f3n de cesiones, licencias, derechos reales, opciones de compra. Por cada registro afectado",
       "rights": [
         "patent"
       ],
@@ -1794,7 +1794,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Recordation of assignments / modifications (electronic)",
-      "notes": "OEPM fee code UE20; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE20; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1814,7 +1814,7 @@
       },
       "currency": "EUR",
       "label": "Certification of registered data (paper)",
-      "notes": "OEPM fee code UT13; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por cada certificaci\u00f3n de datos registrados relativos a patentes, modelos de utilidad o o sus pr\u00f3rrogas, as\u00ed como por la expedici\u00f3n de copia autorizada de cada ",
+      "notes": "OEPM fee code UT13; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Certificaci\u00f3n o copia autorizada",
       "rights": [
         "patent"
       ],
@@ -1829,7 +1829,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Certification of registered data (electronic)",
-      "notes": "OEPM fee code UE13; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code UE13; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1849,7 +1849,7 @@
       },
       "currency": "EUR",
       "label": "Expert report request (art. 120.7) (paper)",
-      "notes": "OEPM fee code UT24; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: Por la solicitud de informes periciales previstos en el art. 120.7",
+      "notes": "OEPM fee code UT24; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac Solicitud de informes periciales (art. 120.7 LP",
       "rights": [
         "patent"
       ],
@@ -1868,7 +1868,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "RESTABLECIMIENTO DE DERECHOS",
+      "label": "\u20ac RESTABLECIMIENTO DE DERECHOS",
       "notes": "OEPM fee code I701; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -1884,7 +1884,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I801",
-      "notes": "OEPM fee code I801; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I801; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1903,7 +1903,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "RECURSO. SOLICITUD DE REVISI\u00d3N",
+      "label": "\u20ac RECURSO. SOLICITUD DE REVISI\u00d3N",
       "notes": "OEPM fee code I702; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -1919,7 +1919,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I802",
-      "notes": "OEPM fee code I802; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I802; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -1938,7 +1938,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "CONSULTA Y VISTA DE UN EXPEDIENTE",
+      "label": "\u20ac CONSULTA Y VISTA DE UN EXPEDIENTE",
       "notes": "OEPM fee code I703; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -1958,7 +1958,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "COPIA DOCUMENTOS DE UN EXPEDIENTE",
+      "label": "\u20ac COPIA DOCUMENTOS DE UN EXPEDIENTE",
       "notes": "OEPM fee code I704; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -1978,7 +1978,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "Por cada p\u00e1gina que exceda de diez. ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
+      "label": "\u20ac Por cada p\u00e1gina que exceda de diez. \u20ac ANUNCIO BOPI INTERPOSICI\u00d3N RECURSO CONTENCIOSO-ADVO",
       "notes": "OEPM fee code I705; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -1994,7 +1994,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I805",
-      "notes": "OEPM fee code I805; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I805; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2013,7 +2013,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
+      "label": "\u20ac ANUNCIO BOPI FALLO RECURSO CONTENCIOSO- ADVO",
       "notes": "OEPM fee code I706; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -2029,7 +2029,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I806",
-      "notes": "OEPM fee code I806; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I806; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2048,7 +2048,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "MODIFICACIONES",
+      "label": "\u20ac MODIFICACIONES",
       "notes": "OEPM fee code I707; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -2064,7 +2064,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I807",
-      "notes": "OEPM fee code I807; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I807; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2083,7 +2083,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "OPOSICIONES",
+      "label": "\u20ac OPOSICIONES",
       "notes": "OEPM fee code I708; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -2099,7 +2099,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I808",
-      "notes": "OEPM fee code I808; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I808; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2118,7 +2118,7 @@
         "trigger": "paper_filing"
       },
       "currency": "EUR",
-      "label": "INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR. Por registro afectado",
+      "label": "\u20ac INSCRIPCI\u00d3N DEL CAMBIO DE NOMBRE DEL TITULAR (no implica cesi\u00f3n). Por registro afectado",
       "notes": "OEPM fee code I709; channel: paper; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
       "rights": [
         "patent"
@@ -2134,7 +2134,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code I809",
-      "notes": "OEPM fee code I809; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186",
+      "notes": "OEPM fee code I809; channel: electronic; PYMES / individual-entrepreneur / public-university 50% reduction under Ley 24/2015 art. 186; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2154,7 +2154,7 @@
       },
       "currency": "EUR",
       "label": "EP-ES \u2014 claims publication (provisional protection) (paper)",
-      "notes": "OEPM fee code ET01; channel: paper; validation_track: EP-ES (European patent translation publication); PDF text: % RECARGO REGULARIZACI\u00d3N 25% RECARGO 50% RECARGO REGULARIZACI\u00d3N . REIVINDICACIONES (PROTECCI\u00d3N PROVISIONAL",
+      "notes": "OEPM fee code ET01; channel: paper; validation_track: EP-ES (European patent translation publication); PDF text: d a partir del 1.4.17) 25% RECARGO 50% RECARGO REGULARIZACI\u00d3N 25% RECARGO 50% RECARGO REGULARIZACI\u00d3N 7 DENOMINACI\u00d3N Clave Importe Clave Importe PUBL. REIVINDICA",
       "rights": [
         "patent"
       ],
@@ -2169,7 +2169,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "EP-ES \u2014 claims publication (provisional protection) (electronic)",
-      "notes": "OEPM fee code ET02; channel: electronic; validation_track: EP-ES (European patent translation publication)",
+      "notes": "OEPM fee code ET02; channel: electronic; validation_track: EP-ES (European patent translation publication); PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2183,8 +2183,8 @@
       "code": "oepm-PCT1",
       "condition": null,
       "currency": "EUR",
-      "label": "abril de 2026 CONCEPTO CLAVEIMPORTE TASA DE TRANSMISION TRANSMISION DEL DOCUMENTO DE PRIORIDAD TASA DE PRESENTACI\u00d3N INTERNACIONAL (30 primeras hojas) POR HOJA ADICIONAL (a partir de la p\u00e1gina 31 inclu",
-      "notes": "OEPM fee code PCT1; channel: n/a; PDF text: abril de 2026 CONCEPTO CLAVEIMPORTE TASA DE TRANSMISION TRANSMISION DEL DOCUMENTO DE PRIORIDAD TASA DE PRESENTACI\u00d3N INTERNACIONAL (30 primeras hojas) POR HOJA A",
+      "label": "OS 8 TASA DE TRANSMISION \u20ac TRANSMISION DEL DOCUMENTO DE PRIORIDAD \u20ac TASA DE PRESENTACI\u00d3N INTERNACIONAL (30 primeras hojas) \u20ac POR HOJA ADICIONAL (a partir de la p\u00e1gina 31 inclusive) \u20ac TASA DE B\u00daSQUEDA",
+      "notes": "OEPM fee code PCT1; channel: n/a",
       "rights": [
         "patent"
       ],
@@ -2219,7 +2219,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC \u2014 filing (electronic)",
-      "notes": "OEPM fee code IE16; channel: electronic",
+      "notes": "OEPM fee code IE16; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2239,7 +2239,7 @@
       },
       "currency": "EUR",
       "label": "SPC \u2014 extension request (paper)",
-      "notes": "OEPM fee code PT16; channel: paper; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: Solicitud de pr\u00f3rroga de de medicamentos",
+      "notes": "OEPM fee code PT16; channel: paper; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac Solicitud de pr\u00f3rroga de de medicamentos",
       "rights": [
         "patent"
       ],
@@ -2254,7 +2254,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC \u2014 extension request (electronic)",
-      "notes": "OEPM fee code PE16; channel: electronic; subject: SPC (Certificado Complementario de Protecci\u00f3n)",
+      "notes": "OEPM fee code PE16; channel: electronic; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2268,7 +2268,7 @@
       "code": "oepm-CP00",
       "condition": null,
       "currency": "EUR",
-      "label": "Clave. Importe. DERECHOS DE CONCESI\u00d3N (Solicitudes anteriores al 1.4.17",
+      "label": "\u20ac Clave. Importe. DERECHOS DE CONCESI\u00d3N (Solicitudes anteriores al 1.4.17",
       "notes": "OEPM fee code CP00; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n)",
       "rights": [
         "patent"
@@ -2283,7 +2283,7 @@
       "code": "oepm-CPR0",
       "condition": null,
       "currency": "EUR",
-      "label": "DERECHOS DE CONCESI\u00d3N (PRORROGA) (Solicitudes anteriores al 1.4.17",
+      "label": "\u20ac DERECHOS DE CONCESI\u00d3N (PRORROGA) (Solicitudes anteriores al 1.4.17",
       "notes": "OEPM fee code CPR0; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n)",
       "rights": [
         "patent"
@@ -2299,7 +2299,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 1 (without surcharge)",
-      "notes": "OEPM fee code CP01; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: Clave. Importe. Clave. Importe. Clave. Importe. IGUAL O INFERIOR A 1 A\u00d1O; SPC annuity without surcharge",
+      "notes": "OEPM fee code CP01; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac Clave. Importe. Clave. Importe. Clave. Importe. IGUAL O INFERIOR A 1 A\u00d1O; SPC annuity without surcharge",
       "rights": [
         "patent"
       ],
@@ -2314,7 +2314,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 1 (25% surcharge)",
-      "notes": "OEPM fee code CP21; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 25% surcharge",
+      "notes": "OEPM fee code CP21; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 25% surcharge",
       "rights": [
         "patent"
       ],
@@ -2329,7 +2329,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 1 (50% surcharge)",
-      "notes": "OEPM fee code CP51; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 50% surcharge",
+      "notes": "OEPM fee code CP51; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 50% surcharge",
       "rights": [
         "patent"
       ],
@@ -2344,7 +2344,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 2 (without surcharge)",
-      "notes": "OEPM fee code CP02; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: IGUAL O INFERIOR A 2 A\u00d1OS; SPC annuity without surcharge",
+      "notes": "OEPM fee code CP02; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac IGUAL O INFERIOR A 2 A\u00d1OS; SPC annuity without surcharge",
       "rights": [
         "patent"
       ],
@@ -2359,7 +2359,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 2 (25% surcharge)",
-      "notes": "OEPM fee code CP22; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 25% surcharge",
+      "notes": "OEPM fee code CP22; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 25% surcharge",
       "rights": [
         "patent"
       ],
@@ -2374,7 +2374,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 2 (50% surcharge)",
-      "notes": "OEPM fee code CP52; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 50% surcharge",
+      "notes": "OEPM fee code CP52; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 50% surcharge",
       "rights": [
         "patent"
       ],
@@ -2389,7 +2389,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 3 (without surcharge)",
-      "notes": "OEPM fee code CP03; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: IGUAL O INFERIOR A 3 A\u00d1OS; SPC annuity without surcharge",
+      "notes": "OEPM fee code CP03; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac IGUAL O INFERIOR A 3 A\u00d1OS; SPC annuity without surcharge",
       "rights": [
         "patent"
       ],
@@ -2404,7 +2404,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 3 (25% surcharge)",
-      "notes": "OEPM fee code CP23; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 25% surcharge",
+      "notes": "OEPM fee code CP23; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 25% surcharge",
       "rights": [
         "patent"
       ],
@@ -2419,7 +2419,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 3 (50% surcharge)",
-      "notes": "OEPM fee code CP53; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 50% surcharge",
+      "notes": "OEPM fee code CP53; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 50% surcharge",
       "rights": [
         "patent"
       ],
@@ -2434,7 +2434,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 4 (without surcharge)",
-      "notes": "OEPM fee code CP04; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: IGUAL O INFERIOR A 4 A\u00d1OS; SPC annuity without surcharge",
+      "notes": "OEPM fee code CP04; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac IGUAL O INFERIOR A 4 A\u00d1OS; SPC annuity without surcharge",
       "rights": [
         "patent"
       ],
@@ -2449,7 +2449,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 4 (25% surcharge)",
-      "notes": "OEPM fee code CP24; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 25% surcharge",
+      "notes": "OEPM fee code CP24; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 25% surcharge",
       "rights": [
         "patent"
       ],
@@ -2464,7 +2464,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 4 (50% surcharge)",
-      "notes": "OEPM fee code CP54; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 50% surcharge",
+      "notes": "OEPM fee code CP54; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 50% surcharge",
       "rights": [
         "patent"
       ],
@@ -2479,7 +2479,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 5 (without surcharge)",
-      "notes": "OEPM fee code CP05; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: IGUAL O INFERIOR A 5 A\u00d1OS; SPC annuity without surcharge",
+      "notes": "OEPM fee code CP05; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac IGUAL O INFERIOR A 5 A\u00d1OS; SPC annuity without surcharge",
       "rights": [
         "patent"
       ],
@@ -2494,7 +2494,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 5 (25% surcharge)",
-      "notes": "OEPM fee code CP25; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 25% surcharge",
+      "notes": "OEPM fee code CP25; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 25% surcharge",
       "rights": [
         "patent"
       ],
@@ -2509,7 +2509,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "SPC annuity \u2014 year 5 (50% surcharge)",
-      "notes": "OEPM fee code CP55; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); SPC annuity 50% surcharge",
+      "notes": "OEPM fee code CP55; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac; SPC annuity 50% surcharge",
       "rights": [
         "patent"
       ],
@@ -2523,7 +2523,7 @@
       "code": "oepm-CPR1",
       "condition": null,
       "currency": "EUR",
-      "label": "IGUAL O INFERIOR A 1 A\u00d1O (PRORROGA",
+      "label": "\u20ac IGUAL O INFERIOR A 1 A\u00d1O (PRORROGA",
       "notes": "OEPM fee code CPR1; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n)",
       "rights": [
         "patent"
@@ -2539,7 +2539,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code CPR2",
-      "notes": "OEPM fee code CPR2; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n)",
+      "notes": "OEPM fee code CPR2; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2554,7 +2554,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "OEPM fee code CPR5",
-      "notes": "OEPM fee code CPR5; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n)",
+      "notes": "OEPM fee code CPR5; channel: n/a; subject: SPC (Certificado Complementario de Protecci\u00f3n); PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2574,7 +2574,7 @@
       },
       "currency": "EUR",
       "label": "Semiconductor topography \u2014 registration application (paper)",
-      "notes": "OEPM fee code IT14; channel: paper; PDF text: aci\u00f3n asociada.TC01 Libre COMPLEMENTO DE TASAS, SIN documentaci\u00f3n asociada.TC02 Libre DENOMINACI\u00d3N CLAVE IMPORTE CLAVE IMPORTE SOLICITUD DE REGISTRO",
+      "notes": "OEPM fee code IT14; channel: paper; PDF text: solicitantes que hayan declarado ser PYMES o personas f\u00edsicas emprendedoras, o de , consultar las tablas correspondientes. DENOMINACI\u00d3N CLAVE IMPORTE CLAVE IMPO",
       "rights": [
         "patent"
       ],
@@ -2589,7 +2589,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Semiconductor topography \u2014 registration application (electronic)",
-      "notes": "OEPM fee code IE14; channel: electronic",
+      "notes": "OEPM fee code IE14; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2609,7 +2609,7 @@
       },
       "currency": "EUR",
       "label": "Semiconductor topography \u2014 material deposit (paper)",
-      "notes": "OEPM fee code IT15; channel: paper; PDF text: DEP\u00d3SITO DE MATERIAL",
+      "notes": "OEPM fee code IT15; channel: paper; PDF text: \u20ac DEP\u00d3SITO DE MATERIAL",
       "rights": [
         "patent"
       ],
@@ -2624,7 +2624,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Semiconductor topography \u2014 material deposit (electronic)",
-      "notes": "OEPM fee code IE15; channel: electronic",
+      "notes": "OEPM fee code IE15; channel: electronic; PDF text: \u20ac",
       "rights": [
         "patent"
       ],
@@ -2638,8 +2638,8 @@
       "code": "oepm-DQR0",
       "condition": null,
       "currency": "EUR",
-      "label": "R\u00c1MITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 Sin recargo 25% Recargo 50% Recargo T\u00edtul",
-      "notes": "OEPM fee code DQR0; channel: n/a; PDF text: R\u00c1MITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 S",
+      "label": "ITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 14 Sin recargo 25% Recargo 50% Recargo T\u00edtul",
+      "notes": "OEPM fee code DQR0; channel: n/a; PDF text: ITE Y PAGO ELECTR\u00d3NICOS Sin recargo 25% de recargo 50% de recargo Sin recargo 25% de recargo 50% de recargoRENOVACIONES DISE\u00d1OS DE43 DE42 DE41 DT43DT42DT41 14 S",
       "rights": [
         "patent"
       ],
@@ -2653,7 +2653,7 @@
       "code": "oepm-DQR1",
       "condition": null,
       "currency": "EUR",
-      "label": "1ER QUINQUENIO RENOVACI\u00d3N",
+      "label": "\u20ac 1ER QUINQUENIO RENOVACI\u00d3N",
       "notes": "OEPM fee code DQR1; channel: n/a",
       "rights": [
         "patent"
@@ -2668,8 +2668,23 @@
       "code": "oepm-DQR2",
       "condition": null,
       "currency": "EUR",
-      "label": "2\u00ba QUINQUENIO RENOVACI\u00d3N",
+      "label": "\u20ac \u20ac \u20ac 2\u00ba QUINQUENIO RENOVACI\u00d3N",
       "notes": "OEPM fee code DQR2; channel: n/a",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
+      "tier": "large",
+      "year": null
+    },
+    {
+      "amount": "75.50",
+      "category": "other",
+      "code": "oepm-BB01",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Agent \u2014 Special Register inscription request",
+      "notes": "OEPM fee code BB01; channel: n/a; PDF text: C02 Libre Nota: las tasas marcadas con asterisco se pueden pagar mediante tarjeta de cr\u00e9dito/d\u00e9bito. 15 SOLICITUD DE INSCRIPCI\u00d3N EN EL REGISTRO ESPECIAL DE AGEN",
       "rights": [
         "patent"
       ],
@@ -2684,7 +2699,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Agent \u2014 employee authorization",
-      "notes": "OEPM fee code BB02; channel: n/a; PDF text: tarjeta de cr\u00e9dito/d\u00e9bito",
+      "notes": "OEPM fee code BB02; channel: n/a; PDF text: \u20ac AUTORIZACI\u00d3N EMPLEADOS AGENTES",
       "rights": [
         "patent"
       ],
@@ -2698,7 +2713,7 @@
   "key": "ES/OEPM/patent",
   "notes": "Scraped from OEPM's consolidated TASAS y PRECIOS P\u00daBLICOS PDF (670 KB / 17 pages, stamped 'Actualizado a fecha: 1 de abril de 2026'). Each fee row in the dual-channel sections emits one FeeItem; the 2nd character of the code marks the filing channel (T = paper, E = electronic) and is also flagged on paper rows via FeeCondition(trigger=paper_filing). Applicant tier maps as follows: IT/IE/MT/ME/DT/DE/CM/CI/ET/CP/I3/I5 \u2192 EntityTier.large; YT/YE/UT/UE/I7/I8 \u2192 EntityTier.small (PYMES + public-university 50% reduction under Ley 24/2015 art. 186). v1 GAPS: patent annuities (page 6 IP/2P/5P \u00d7 IR/2R/5R \u00d7 YP/Y2/Y5 \u00d7 UP/U2/U5), design renewal table (page 13 DT41/D241/D541), PCT international fees (pages 8-9), and precios p\u00fablicos (pages 16-17) ship as separate column structures and are not captured.",
   "office_code": "OEPM",
-  "retrieved_at": "2026-05-28",
+  "retrieved_at": "2026-05-29",
   "right": "patent",
   "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
   "statutory_basis": "Ley 24/2015 de Patentes (Annex) \u2014 art. 186 PYMES / entrepreneur / public-university 50% reduction; year-over-year amounts adjusted by the annual Ley de Presupuestos Generales del Estado."
