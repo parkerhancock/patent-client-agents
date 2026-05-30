@@ -278,7 +278,7 @@
   "key": "TR/TURKPATENT/design",
   "notes": "5-year initial term renewable up to 25 years (Law 6769 Art. 69). Renewal FeeItems carry year=10. The 04.01.02 multi-design filing row publishes three sub-amounts (2nd design / 3rd-5th / 6th+) in a prose body; the parser splits these into three FeeItems with -d2 / -d3to5 / -d6plus code suffixes.",
   "office_code": "TURKPATENT",
-  "retrieved_at": "2026-05-29",
+  "retrieved_at": "2026-05-30",
   "right": "design",
   "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri",
   "statutory_basis": "S\u0131nai M\u00fclkiyet Kanunu (Law 6769) Art. 188; Resm\u00ee Gazete 5. m\u00fckerrer 31-12-2025, B\u0130K/T\u00dcRKPATENT 2026/1 (Law 6769 Art. 188) (PDF: https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-37.pdf)."

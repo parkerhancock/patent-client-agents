@@ -343,7 +343,7 @@
   "key": "WO/WIPO-MADRID/trademark",
   "notes": "Madrid Protocol international trademark fees paid to the WIPO International Bureau, in CHF. Per-country individual designation fees (set by each Contracting Party) are NOT covered here \u2014 those live in a separate 126-row table on wipo.int/madrid/en/fees/. v1 covers basic application, supplementary/complementary fees, subsequent designations, renewal (10-year cycle), and irregularity fees. The basic fee differs based on whether the mark contains color representation (Articles 8(2)(i) of the Protocol).",
   "office_code": "WIPO-MADRID",
-  "retrieved_at": "2026-05-29",
+  "retrieved_at": "2026-05-30",
   "right": "trademark",
   "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched",
   "statutory_basis": "Schedule of Fees annexed to the Common Regulations under the Madrid Agreement and the Madrid Protocol."

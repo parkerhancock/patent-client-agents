@@ -458,7 +458,7 @@
   "key": "KR/KIPO/trademark",
   "notes": "KIPO publishes trademark fees in KRW with electronic + paper rate variants \u2014 both emit as separate FeeItems (``-electronic`` / ``-paper`` slug suffix). Per-class language on the row drives ``FeeCondition(classes_over, threshold=0, per_unit=True)``; additional designated-goods surcharges (per goods over 10 per class) emit as separate ``FeeCategory.excess_classes`` rows. KIPO splits Registration Fee into a single lump sum and a two-installment option \u2014 both are extracted (the second installment renders as a 1-cell continuation row, synthesized via the walker's ``pending_desc`` carry-forward). TM term is 10 years (Trademark Act \u00a783); renewal FeeItems carry year=10. KIPO entity discounts (SME / micro / individual refunds) live in a separate post-payment program and are NOT on this schedule.",
   "office_code": "KIPO",
-  "retrieved_at": "2026-05-29",
+  "retrieved_at": "2026-05-30",
   "right": "trademark",
   "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
   "statutory_basis": "Enforcement Rule of the Korean Trademark Act on Collection of Trademark Fees (Korean MOIP / KIPO)."

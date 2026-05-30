@@ -583,7 +583,7 @@
   "key": "HK/HKIPD/trademark",
   "notes": "10-year term, renewable indefinitely. Per-additional-class surcharges emit as separate FeeItems with FeeCategory.excess_classes and FeeCondition(classes_over, threshold=1, per_unit=True). v1 GAP: the late-renewal charge bundled inside the renewal cell ('Late renewal charge: $500') is captured in the renewal FeeItem's notes rather than as a standalone late_fee row \u2014 IPD does not publish it with its own form/code.",
   "office_code": "HKIPD",
-  "retrieved_at": "2026-05-29",
+  "retrieved_at": "2026-05-30",
   "right": "trademark",
   "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html",
   "statutory_basis": "Trade Marks Rules (Cap. 559A), Schedule 1 \u2014 promulgated under Trade Marks Ordinance Cap. 559. Amendments by subsidiary-legislation orders gazetted in the Hong Kong Government Gazette."
