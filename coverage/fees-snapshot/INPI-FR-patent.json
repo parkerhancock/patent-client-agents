@@ -753,7 +753,7 @@
   "key": "FR/INPI-FR/patent",
   "notes": "INPI France patent + utility-certificate + SPC fees in EUR. Annuities 2-20 are extracted from the PDF; reduced rates are reliably captured for years 2-7 only (years 8-20 reduced rates exist in the source but pypdf drops the second column for those rows). The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital. SPC annual fee (\u20ac950) is treated as year=21 since it covers extension beyond the 20-year patent term. v1 GAPS: register admin fees (REGISTRES NATIONAUX), GI fees, and semiconductor-topography fees are out of scope.",
   "office_code": "INPI-FR",
-  "retrieved_at": "2026-05-31",
+  "retrieved_at": "2026-06-01",
   "right": "patent",
   "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi",
   "statutory_basis": "Code de la propri\u00e9t\u00e9 intellectuelle (CPI) Articles R.411-17 et seq.; arr\u00eat\u00e9s fixant les redevances per\u00e7ues par l'INPI."
