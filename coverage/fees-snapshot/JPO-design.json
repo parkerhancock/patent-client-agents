@@ -458,7 +458,7 @@
   "key": "JP/JPO/design",
   "notes": "Design annuities published in two bands: 1-3rd year at \u00a58,500/year and 4-15th year at \u00a516,900/year. The scraper expands the 1-3 band across years 1-3 and the 4-15 band across years 4-15 (\u00a516,900/year applies to all current designs). Design term cohorts: applications filed before April 1, 2007 expire at year 15; applications filed 2007-04-01 through 2020-03-31 expire at year 20; applications filed on or after April 1, 2020 expire at year 25. The JPO page publishes empty 4-20 / 4-25 marker rows that share the \u00a516,900/year rate \u2014 those rows carry no fee value and are skipped by the parser; the year-25 cap is the statutory maximum. Design 'Request for secret design' (\u00a55,100) is a voluntary publication-deferral request, categorized as 'other' since FeeCategory.deferment is reserved for Singapore-style design deferment.",
   "office_code": "JPO",
-  "retrieved_at": "2026-06-02",
+  "retrieved_at": "2026-06-03",
   "right": "design",
   "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
   "statutory_basis": "Design Act of Japan (Act No. 125 of 1959). Fees set under Article 67 + the Order for Enforcement of the Design Act."
