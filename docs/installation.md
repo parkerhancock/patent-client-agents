@@ -197,7 +197,7 @@ What happens:
    plugin in the current session.
 4. On first MCP use, `uvx` fetches `patent-client-agents[mcp]` from
    **PyPI** (not from the cloned repo — the plugin manifest pins
-   `uvx --from patent-client-agents[mcp]==0.21.2 patent-client-agents-mcp`)
+   `uvx --from patent-client-agents[mcp]==0.22.0 patent-client-agents-mcp`)
    into a managed environment and launches the server. The first run
    takes ~30 seconds while ~100 packages download; subsequent runs
    are fast because uv caches the resolved environment.
