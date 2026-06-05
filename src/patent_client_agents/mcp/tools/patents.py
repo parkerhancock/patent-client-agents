@@ -444,6 +444,32 @@ async def get_patent_figures(
         return {"results": result}
 
 
+async def get_patent_figures_clean(patent_number: str) -> dict:
+    """Figures via clean public sources only (no Google).
+
+    Individual figure-image URLs with ML-extracted callout bounding boxes were
+    a Google Patents enrichment with no clean public equivalent. Clean sources
+    (USPTO PPUBS, EPO OPS) serve the drawings as PDF pages, not as labeled
+    per-figure images. This helper therefore returns the canonical drawings
+    source (the patent PDF, fetchable via the download flow) and is explicit
+    that callouts are unavailable — never a fabricated callout set and never a
+    Google call.
+    """
+    return {
+        "results": [],
+        "callouts_available": False,
+        "note": (
+            "Per-figure image URLs and callout bounding boxes are not available "
+            "from clean public sources (they were a Google Patents enrichment). "
+            "The drawings are available as PDF pages: download the patent PDF "
+            "(download_document source='patent_pdf', or download_patent_pdf) and "
+            "extract the drawing sheets."
+        ),
+        "patent_number": patent_number,
+        "pdf_source": "download_document(source='patent_pdf')",
+    }
+
+
 @patents_mcp.tool(annotations=READ_ONLY)
 async def download_patent_pdf(
     patent_number: Annotated[
@@ -480,6 +506,33 @@ async def download_patent_pdf(
     # Dynamic metadata kwargs forwarded to download_tool_result. ty can't
     # statically verify dict-spread kwargs against the function signature, so
     # the suppression is targeted to the spread site only.
+    extra: dict[str, str] = {"patent_number": pdf.patent_number, "source": pdf.source}
+    if pdf.patent_title is not None:
+        extra["patent_title"] = pdf.patent_title
+    return await download_tool_result(
+        f"{signed_path_prefix}/{pdf.patent_number}",
+        pdf.pdf_bytes,
+        filename=pdf.filename,
+        content_type="application/pdf",
+        description=pdf.patent_title,
+        **extra,  # ty: ignore[invalid-argument-type]
+    )
+
+
+async def download_patent_pdf_clean(patent_number: str):
+    """Download a patent PDF via clean public sources only (PPUBS → EPO).
+
+    Same ResourceLink / signed-URL contract as :func:`download_patent_pdf`,
+    but routes through :func:`unified.download_patent_pdf_clean` so Google
+    Patents is never touched. Not registered as an MCP tool itself — it is a
+    reusable helper for deployments (e.g. the hosted public connector) that
+    must drop the Google hop.
+    """
+    pdf = await unified.download_patent_pdf_clean(patent_number)
+    signed_path_prefix = {
+        "ppubs": "publications",
+        "epo": "epo/patents",
+    }[pdf.source]
     extra: dict[str, str] = {"patent_number": pdf.patent_number, "source": pdf.source}
     if pdf.patent_title is not None:
         extra["patent_title"] = pdf.patent_title
