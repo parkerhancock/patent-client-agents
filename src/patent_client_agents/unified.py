@@ -28,7 +28,9 @@ __all__ = [
     "PatentPdf",
     "build_canonical_claim",
     "download_patent_pdf",
+    "download_patent_pdf_clean",
     "get_patent_claims",
+    "get_patent_claims_clean",
     "google_limitations_from_html",
     "odp_limitations_from_text",
 ]
@@ -216,6 +218,98 @@ async def get_patent_claims(patent_number: str) -> list[dict[str, Any]]:
     ]
 
 
+async def get_patent_claims_clean(patent_number: str) -> list[dict[str, Any]]:
+    """Fetch canonical claims using only clean public sources: ODP → EPO.
+
+    Like :func:`get_patent_claims` but with the Google Patents HTML fallback
+    replaced by EPO OPS full text, for deployments that must not touch Google
+    Patents. Cascades:
+
+    1. USPTO ODP grant XML (authoritative for US patents post-~2000)
+    2. EPO OPS full text (worldwide fallback; EP/WO coverage is densest)
+
+    Returns claims in the canonical shape from :func:`build_canonical_claim`.
+    Raises :class:`NotFoundError` if neither clean source has the claims.
+    """
+    from patent_client_agents.epo_ops.client import client_from_env
+    from patent_client_agents.uspto_odp.clients.applications import ApplicationsClient
+
+    if patent_number.strip().upper().startswith("US"):
+        try:
+            async with ApplicationsClient() as odp:
+                odp_claims = await odp.get_granted_claims(patent_number)
+            if odp_claims:
+                return [
+                    build_canonical_claim(
+                        claim_number=c["claim_number"],
+                        limitations=odp_limitations_from_text(c["claim_text"]),
+                        claim_type=c["claim_type"],
+                        depends_on=c["depends_on"],
+                    )
+                    for c in odp_claims
+                ]
+        except McpDataCoreError as exc:
+            logger.info("ODP grant XML unavailable for %s: %s", patent_number, exc)
+
+    # EPO OPS full text (worldwide; no Google). EPO returns its own claims
+    # structure rather than the ODP/Google limitation shape, so each claim is
+    # wrapped as a single-limitation canonical claim carrying the EPO claim
+    # text — honest about source granularity without fabricating nesting.
+    try:
+        async with client_from_env() as epo:
+            fulltext = await epo.fetch_fulltext(number=patent_number, section="claims")
+    except (NotFoundError, FileNotFoundError, ValueError, RuntimeError) as exc:
+        logger.info("EPO OPS full text unavailable for %s: %s", patent_number, exc)
+        raise NotFoundError(
+            f"Claims not found for patent {patent_number} in clean sources (ODP, EPO)."
+        ) from exc
+
+    epo_claims = _epo_claim_texts(fulltext)
+    if not epo_claims:
+        raise NotFoundError(
+            f"Claims not found for patent {patent_number} in clean sources (ODP, EPO)."
+        )
+    return [
+        build_canonical_claim(
+            claim_number=num,
+            limitations=[{"depth": 0, "text": text}],
+            claim_type="independent",
+            depends_on=None,
+        )
+        for num, text in epo_claims
+    ]
+
+
+def _epo_claim_texts(fulltext: Any) -> list[tuple[int, str]]:
+    """Extract (claim_number, claim_text) pairs from an EPO FullTextResponse.
+
+    Tolerant of the parsed-model or dict shape; returns [] when no claims are
+    present so the caller can fall through to a NotFoundError.
+    """
+    data = fulltext
+    if hasattr(data, "model_dump"):
+        data = data.model_dump()
+    if not isinstance(data, dict):
+        return []
+    claims = data.get("claims") or []
+    out: list[tuple[int, str]] = []
+    for idx, claim in enumerate(claims, start=1):
+        if isinstance(claim, dict):
+            num = claim.get("number") or claim.get("claim_number") or idx
+            text = claim.get("text") or claim.get("claim_text") or ""
+        else:
+            num = idx
+            text = str(claim)
+        text = (text or "").strip()
+        if text:
+            try:
+                num_int = int(num)
+            except (TypeError, ValueError):
+                num_int = idx
+            out.append((num_int, text))
+    return out
+
+
 # ---------------------------------------------------------------------------
 # PDF download: Google → PPUBS → EPO cascade
 # ---------------------------------------------------------------------------
@@ -321,4 +415,68 @@ async def download_patent_pdf(patent_number: str) -> PatentPdf:
 
     raise NotFoundError(
         f"No PDF found for {patent_number!r} in any source. Tried: {'; '.join(tried)}"
+    )
+
+
+async def download_patent_pdf_clean(patent_number: str) -> PatentPdf:
+    """Download a patent PDF using only clean public sources: PPUBS → EPO.
+
+    Identical to :func:`download_patent_pdf` but with the Google Patents hop
+    removed, for deployments (e.g. the hosted public connector) that must not
+    touch Google Patents. Cascades:
+
+    1. USPTO PPUBS (US patents; cleanly 404s on non-US, falls through)
+    2. EPO OPS (worldwide fallback assembled from page images)
+
+    Non-not-found errors (auth, transient HTTP failures) surface immediately
+    rather than being masked by silent fallback. Raises :class:`NotFoundError`
+    only if both sources say the PDF does not exist.
+    """
+    from mcp_data_core.filenames import (
+        epo_pdf as _epo_pdf_name,
+    )
+    from mcp_data_core.filenames import (
+        publication_pdf as _publication_pdf_name,
+    )
+
+    tried: list[str] = []
+
+    # 1) USPTO PPUBS
+    try:
+        from patent_client_agents.uspto_publications import resolve_and_download_pdf
+
+        result = await resolve_and_download_pdf(patent_number)
+        pdf_bytes = base64.b64decode(result.pdf_base64)
+        pub_no = result.publication_number or patent_number
+        return PatentPdf(
+            pdf_bytes=pdf_bytes,
+            source="ppubs",
+            filename=_publication_pdf_name(pub_no),
+            patent_number=pub_no,
+            patent_title=result.patent_title,
+        )
+    except (NotFoundError, FileNotFoundError, ValueError) as exc:
+        logger.info("PPUBS did not have PDF for %s: %s", patent_number, exc)
+        tried.append(f"ppubs ({exc})")
+
+    # 2) EPO OPS
+    try:
+        from patent_client_agents.epo_ops.client import client_from_env
+
+        async with client_from_env() as client:
+            result = await client.download_pdf(number=patent_number)
+        pdf_bytes = base64.b64decode(result.pdf_base64)
+        return PatentPdf(
+            pdf_bytes=pdf_bytes,
+            source="epo",
+            filename=_epo_pdf_name(patent_number),
+            patent_number=patent_number,
+        )
+    except (NotFoundError, FileNotFoundError, ValueError, RuntimeError) as exc:
+        logger.info("EPO OPS did not have PDF for %s: %s", patent_number, exc)
+        tried.append(f"epo ({exc})")
+
+    raise NotFoundError(
+        f"No PDF found for {patent_number!r} in clean sources (PPUBS, EPO). "
+        f"Tried: {'; '.join(tried)}"
     )

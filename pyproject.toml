@@ -1,6 +1,6 @@
 [project]
 name = "patent-client-agents"
-version = "0.21.2"
+version = "0.22.0"
 description = "Intellectual property research toolkit for AI agents — patents, trademarks, and prosecution data from USPTO, EPO, JPO, EUIPO, Google Patents, CanLII, WIPO Lex, MPEP, and CPC"
 readme = "README.md"
 authors = [
@@ -48,7 +48,7 @@ mcp-data-core = { workspace = true }
 [project.optional-dependencies]
 mcp = [
     "fastmcp>=3.2.3",
-    "starlette>=0.37",
+    "starlette>=1.0.1",
     # fastmcp imports `from griffe import ...` — the 2.x release split the
     # top-level module out into a separate `griffelib` distribution, so
     # fastmcp's import fails on griffe>=2. Pin here until upstream fastmcp
@@ -155,6 +155,6 @@ markers = [
 # unnoticed.
 exclude-newer = "7 days"
 
-# First-party packages are exempt from the cooldown — we control these
-# releases, so freshly-published versions are trusted on day zero.
-exclude-newer-package = { "mcp-data-core" = "2099-01-01" }
+# First-party packages are exempt from the cooldown. Starlette is also
+# exempted here because 1.0.1 is a time-sensitive security fix.
+exclude-newer-package = { "mcp-data-core" = "2099-01-01", "starlette" = "2099-01-01" }
