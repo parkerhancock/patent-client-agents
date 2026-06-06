@@ -488,7 +488,7 @@
   "key": "WO/WIPO-HAGUE/design",
   "notes": "Hague System international design fees paid to the WIPO International Bureau, in CHF. Per-country designation fees (standard designation 3-level + individual designation per Contracting Party) are partially covered (the 3 standard levels are emitted); per-country individual fees live in a separate 48-row table on wipo.int/hague/en/fees/. v1 covers basic + publication + standard designation + additional-design + renewal-by-period. Renewal periods map: first=year 5, second=year 10, third=year 15, fourth=year 20, fifth=year 25.",
   "office_code": "WIPO-HAGUE",
-  "retrieved_at": "2026-06-05",
+  "retrieved_at": "2026-06-06",
   "right": "design",
   "source_url": "https://www.wipo.int/hague/en/fees/sched.html",
   "statutory_basis": "Schedule of Fees annexed to the Common Regulations under the 1999 Act and the 1960 Act of the Hague Agreement."

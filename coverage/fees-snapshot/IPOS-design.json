@@ -398,7 +398,7 @@
   "key": "SG/IPOS/design",
   "notes": "Initial 5-year term renewable to 15 years total in 5-year periods (RDA 2000 s.21). Renewal FeeItems carry year=5. D3 publishes two amounts in a single body (S$200 per design + S$40 per deferment request); the parser emits both with -v1 / -v2 disambiguating suffixes.",
   "office_code": "IPOS",
-  "retrieved_at": "2026-06-05",
+  "retrieved_at": "2026-06-06",
   "right": "design",
   "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/",
   "statutory_basis": "Registered Designs Act 2000 (Singapore) + Registered Designs Rules (SSO SL/RDA2000-R1). Consolidated by Designs Circular 1/2025 (21 July 2025); two-phase implementation 2025-09-01 + 2026-04-01."
