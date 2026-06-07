@@ -633,7 +633,7 @@
   "key": "SE/PRV/trademark",
   "notes": "PRV trademark schedule. The 'application' and 'changing/renewing' sections publish two tables apiece: the first is the PRV e-service rate (cheaper), the second is the paper / other-channel rate. Each rate emits as a separate FeeItem with -e-service / -paper-or-other slug suffixes. TM term is 10 years (Varum\u00e4rkeslagen ch.2 \u00a732); renewal FeeItems carry year=10. 'For each additional class' rows emit as excess_classes with classes_over threshold=1. International registration (Madrid Protocol) routing emits with FeeCategory.madrid; the WIPO-administered CHF portion is not duplicated here \u2014 see the WIPO-Madrid schedule. Sweden has no tiered entity discounts \u2014 all rows use EntityTier.none.",
   "office_code": "PRV",
-  "retrieved_at": "2026-06-06",
+  "retrieved_at": "2026-06-07",
   "right": "trademark",
   "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/",
   "statutory_basis": "Trade Marks Act 2010 (Varum\u00e4rkeslagen 2010:1877) + Trade Marks Ordinance (Varum\u00e4rkesf\u00f6rordningen 2018:10) + PRVFS fee orders. Fee changes effective 2025-04-25."

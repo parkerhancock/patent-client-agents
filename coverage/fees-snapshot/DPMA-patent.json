@@ -1,6 +1,6 @@
 {
   "currency": "EUR",
-  "effective_date": "2026-06-06",
+  "effective_date": "2026-06-07",
   "fees": [
     {
       "amount": "40",
@@ -1403,7 +1403,7 @@
   "key": "DE/DPMA/patent",
   "notes": "Scraped from the DPMA cost-info PDF (form A 9510.1) because the English HTML fee page only lists years 3-6 of the annual fee schedule and punts to the PDF for years 7-20. PDF parsing uses pypdf with regex extraction of the uniform '<6-digit code> <description> ... <amount>' row format. Fee numbers in the 31x range are patents; UM (32x), TM (33x), design (34x) live in the same PDF but under separate routes when implemented. Half-rate 'willingness to license' variants are included as separate maintenance rows with the same year.",
   "office_code": "DPMA",
-  "retrieved_at": "2026-06-06",
+  "retrieved_at": "2026-06-07",
   "right": "patent",
   "source_url": "https://www.dpma.de/english/services/fees/patents/index.html",
   "statutory_basis": "Patentkostengesetz (PatKostG) and the accompanying ordinance setting fee amounts; published as form A 9510.1."

@@ -708,7 +708,7 @@
   "key": "IL/ILPO/patent",
   "notes": "ILPO 2026 fee schedule, gazetted 2025-12-22, effective 2026-01-01. Currency is Israeli new shekel (NIS / ILS); fees are CPI-adjusted annually and rounded to the nearest shekel. Source PDF is Hebrew-only \u2014 ILPO does not publish an English translation of the current-effective fee schedule on gov.il. Item labels in this connector are English-language summaries of the controlling Hebrew text. The Hebrew schedule is the authoritative version per Reshumot (Israeli Official Gazette).\n\nRenewal model is cumulative-coverage at four checkpoints (years 6, 10, 14, 18, 22) rather than per-annum; the connector emits one renewal FeeItem per checkpoint with `year` set to the terminal year of the period. Items 1 (filing) and 10 (allowance) are emitted twice \u2014 once at the full headline amount with `tier=none`, and once at 60% of the headline (the 40% small-entity reduction) with `tier=small`.",
   "office_code": "ILPO",
-  "retrieved_at": "2026-06-06",
+  "retrieved_at": "2026-06-07",
   "right": "patent",
   "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
   "statutory_basis": "Patents Law, 5727-1967 + Patents Regulations (Office Practice, Procedural Rules, Documents and Fees), 5728-1968 \u2014 Schedule (\"Tosefet\"). CPI-adjusted annually; the controlling text is the Reshumot (Official Gazette) supplementary issue."
