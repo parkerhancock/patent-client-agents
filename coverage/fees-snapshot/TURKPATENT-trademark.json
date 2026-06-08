@@ -468,7 +468,7 @@
   "key": "TR/TURKPATENT/trademark",
   "notes": "10-year term (Law 6769 Art. 23); renewal FeeItems carry year=10. Per-class surcharges emit as FeeCategory.excess_classes with classes_over threshold tracking the row context (1 for 2.s\u0131n\u0131f rows, 2 for 3.s\u0131n\u0131f+ rows). Madrid Protocol routing rows captured with FeeCategory.madrid where applicable.",
   "office_code": "TURKPATENT",
-  "retrieved_at": "2026-06-07",
+  "retrieved_at": "2026-06-08",
   "right": "trademark",
   "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri",
   "statutory_basis": "S\u0131nai M\u00fclkiyet Kanunu (Law 6769) Art. 188; Resm\u00ee Gazete 5. m\u00fckerrer 31-12-2025, B\u0130K/T\u00dcRKPATENT 2026/1 (Law 6769 Art. 188) (PDF: https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-37.pdf)."

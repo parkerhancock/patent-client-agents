@@ -1688,7 +1688,7 @@
   "key": "SE/PRV/patent",
   "notes": "PRV patent schedule. Annuity ladder (years 1-20) emits both regular and Increased-fee rows (20% surcharge for late payment under Patentlagen ch.4 \u00a747). Years 1 + 2 publish SEK 0 'due together with 3rd annual fee'. SE-3 per-claim surcharge (SEK 150 per claim beyond 10) emits as excess_claims with classes_over threshold=10. PCT-2 per-sheet surcharge (SEK 180 per sheet) emits as excess_pages with pages_over threshold=30. SPC fees (NT-*) cover the Swedish portion under EU Reg. 469/2009. v1 GAPS: KT-6..KT-15 consultancy rows priced 'By quotation' are skipped (no verifiable amount); PCT-5 / PCT-18 prose-formula amounts emit amount=0 with formula preserved in notes. Sweden has no tiered entity discounts \u2014 all rows use EntityTier.none.",
   "office_code": "PRV",
-  "retrieved_at": "2026-06-07",
+  "retrieved_at": "2026-06-08",
   "right": "patent",
   "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/",
   "statutory_basis": "Patents Act 1967 (Patentlagen 1967:837) + Patent Decree (Patentkung\u00f6relsen 1967:838) + PRVFS fee orders. Fee changes effective 2025-03-15 (PRV news 2025-02-05); grant fee normalised to SEK 3000 effective 2025-12-01; PCT fees adjusted 2026-01-01 and 2026-04-01 for currency drift."
