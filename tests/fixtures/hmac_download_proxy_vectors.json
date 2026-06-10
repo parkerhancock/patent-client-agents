@@ -1,0 +1,22 @@
+{
+  "_comment": "Canonical HMAC vectors for the download-proxy signature scheme (mcp_data_core.mcp.downloads.sign_path). The Cloudflare Worker in patent-client-agents-deploy ports this scheme to Web Crypto and MUST reproduce these signatures exactly. If this file changes, copy it to the Worker's test fixtures and re-run both suites. sig = urlsafe_b64(HMAC_SHA256(secret, f'{path}|{bucket}')[:9]).rstrip('=').",
+  "secret": "test-shared-hmac-secret-v1",
+  "ttl_seconds_default": 86400,
+  "cases": [
+    {
+      "path": "api/v1/datasets/products/files/PTFWPRE/2011-2020-patent-filewrapper-full-json-20260607.zip",
+      "bucket": 12345,
+      "sig": "8-G0qaPCfXUj"
+    },
+    {
+      "path": "api/v1/datasets/products/files/PTFWPRD/daily-20260610.zip",
+      "bucket": 0,
+      "sig": "4a8bvEl0s4Z8"
+    },
+    {
+      "path": "api/v1/datasets/products/files/PTGRXML/grant-20260609.zip",
+      "bucket": 999999,
+      "sig": "5ijplOK0otlg"
+    }
+  ]
+}

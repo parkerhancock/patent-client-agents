@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import asyncio
+import os
 from typing import Annotated, Any, cast
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlsplit, urlunsplit
 
 from fastmcp import FastMCP
 
@@ -14,7 +15,7 @@ from mcp_data_core.envelope import (
 )
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
-from mcp_data_core.mcp.downloads import read_resource, register_source
+from mcp_data_core.mcp.downloads import read_resource, register_source, sign_path
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
 
 uspto_mcp = FastMCP("USPTO")
@@ -58,12 +59,59 @@ def _summarize_application(record: dict) -> str:
     return f"{head}\n{line}"
 
 
-# USPTO ODP URL fields that require API key auth — must be stripped from responses
+# USPTO ODP URL fields that require the server's X-API-KEY. They are
+# useless to an agent as-is, so each is either rewritten to the signed
+# download proxy (when one is configured and the URL is proxyable) or
+# removed from the response. See ``_rewrite_auth_urls``.
 _AUTH_URL_FIELDS = {"fileDownloadURI", "downloadURI", "downloadUrl", "fileLocationURI"}
+
+# Upstream host whose download URLs the proxy reverse-proxies.
+_PROXY_UPSTREAM_HOST = "api.uspto.gov"
+
+# Only these api.uspto.gov path prefixes are rewritten to the proxy.
+# Bulk-data file downloads only, for now — every other auth URL keeps
+# being stripped. MUST stay in sync with the Cloudflare Worker's path
+# allowlist (patent-client-agents-deploy).
+_PROXY_PATH_PREFIXES = ("api/v1/datasets/products/files/",)
+
+
+def _proxy_base() -> str:
+    """Configured download-proxy base URL, or '' when unset.
+
+    Set ``USPTO_ODP_PROXY_URL`` (e.g. ``https://downloads.patentclient.com``)
+    to a host that reverse-proxies ``api.uspto.gov`` and injects the API
+    key. When unset (local/stdio), auth URLs are stripped rather than
+    rewritten.
+    """
+    return os.environ.get("USPTO_ODP_PROXY_URL", "").rstrip("/")
+
+
+def _rewrite_download_url(url: str, proxy_base: str) -> str | None:
+    """Rewrite an ``api.uspto.gov`` download URL to the signed proxy, or ``None``.
+
+    Swaps the host for ``proxy_base`` (keeping the upstream path verbatim)
+    and appends an HMAC ``sig`` over the path, so the proxy can verify the
+    request, inject ``X-API-KEY``, and stream the bytes back without the
+    agent ever holding a key.
+
+    Returns ``None`` when ``url`` is not a proxyable USPTO download URL
+    (wrong host, or a path outside ``_PROXY_PATH_PREFIXES``); the caller
+    then strips the field, preserving prior behavior for non-bulk URLs.
+    """
+    parts = urlsplit(url)
+    if parts.scheme not in ("http", "https") or parts.netloc != _PROXY_UPSTREAM_HOST:
+        return None
+    path = parts.path.lstrip("/")
+    if not path.startswith(_PROXY_PATH_PREFIXES):
+        return None
+    sig = sign_path(path)
+    query = f"{parts.query}&sig={sig}" if parts.query else f"sig={sig}"
+    proxy = urlsplit(proxy_base)
+    return urlunsplit((proxy.scheme, proxy.netloc, "/" + path, query, ""))
 
 
 def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model and strip auth-required URLs.
+    """Serialize a Pydantic model and rewrite/strip auth-required URLs.
 
     Every caller passes a Pydantic model from the upstream client; the
     fallback ``return obj`` branch exists only to be defensive if a dict
@@ -76,28 +124,43 @@ def _dump(obj: object) -> dict[str, Any]:
     """
     if hasattr(obj, "model_dump"):
         data: dict[str, Any] = cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-        _strip_auth_urls(data)
+        _rewrite_auth_urls(data)
         return data
     if isinstance(obj, dict):
         return cast("dict[str, Any]", obj)
     raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
-def _strip_auth_urls(data: Any) -> None:
-    """Recursively remove auth-required URL fields from nested dicts/lists.
+def _rewrite_auth_urls(data: Any) -> None:
+    """Recursively rewrite (or strip) auth-required URL fields in place.
+
+    For each ``_AUTH_URL_FIELDS`` entry: when a download proxy is
+    configured and the URL is a proxyable bulk-file URL, rewrite it to the
+    signed proxy URL (keyless for the agent). Otherwise delete the field —
+    a key-gated URL the agent can't use is worse than its absence.
 
     Typed as ``Any`` because this walks JSON-shaped data of arbitrary
     depth — the recursion sees dicts, lists, scalars interchangeably.
     Stricter typing would force per-call casts at every recursive step.
     """
+    proxy_base = _proxy_base()
     if isinstance(data, dict):
         for key in _AUTH_URL_FIELDS & data.keys():
-            del data[key]
+            value = data[key]
+            rewritten = (
+                _rewrite_download_url(value, proxy_base)
+                if proxy_base and isinstance(value, str)
+                else None
+            )
+            if rewritten is not None:
+                data[key] = rewritten
+            else:
+                del data[key]
         for v in data.values():
-            _strip_auth_urls(v)
+            _rewrite_auth_urls(v)
     elif isinstance(data, list):
         for item in data:
-            _strip_auth_urls(item)
+            _rewrite_auth_urls(item)
 
 
 # ---------------------------------------------------------------------------
@@ -1817,9 +1880,25 @@ async def search_bulk_datasets(
 
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def get_bulk_dataset(
-    product_id: Annotated[str, "Bulk data product identifier"],
+    product_id: Annotated[str, "Bulk data product identifier (e.g. 'PTFWPRE')."],
+    latest_only: Annotated[
+        bool,
+        "Return only the most recent file in the product. Default False "
+        "returns the full file listing (some products have hundreds).",
+    ] = False,
 ) -> dict:
-    """Get details and file listing for a specific bulk data product."""
+    """Get details and the file listing for a USPTO bulk data product.
+
+    Each file's ``fileDownloadURI`` is a ready-to-use download URL when a
+    download proxy is configured — fetch it directly, no API key needed
+    (the proxy injects the key and streams the bytes). Files can be large
+    (multi-GB archives); ``fileSize`` is in bytes. Pass ``latest_only=True``
+    for just the newest file.
+
+    Related tools: search_bulk_datasets.
+    """
     async with UsptoOdpClient() as client:
-        result = await client.get_bulk_dataset_product(product_id)
+        result = await client.get_bulk_dataset_product(
+            product_id, include_files=True, latest_only=latest_only or None
+        )
         return _dump(result)  # type: ignore[return-value]
