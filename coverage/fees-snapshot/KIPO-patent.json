@@ -638,7 +638,7 @@
   "key": "KR/KIPO/patent",
   "notes": "KIPO publishes fees in KRW with electronic + paper rate variants. Annuity bands (1-3, 4-6, 7-9, 10-12, 13-15, 16-25 years) are expanded to per-year rows. Section headers ('Application Fee', 'Examination Fee', 'Annual Fee', 'Others') drive categorization. Per-claim surcharges appear as bare-amount rows immediately following a 'Basic fee' row \u2014 the scraper pairs them. KIPO entity discounts are administered through a separate refund program, not on the published schedule. v1 covers patents only; utility models ship under a separate route when needed.",
   "office_code": "KIPO",
-  "retrieved_at": "2026-06-10",
+  "retrieved_at": "2026-06-11",
   "right": "patent",
   "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01",
   "statutory_basis": "Enforcement Rule of the Korean Patent Act on Collection of Patent Fees (Korean MOIP / KIPO)."

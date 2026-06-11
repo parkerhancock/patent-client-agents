@@ -1408,7 +1408,7 @@
   "key": "IN/IPIN/patent",
   "notes": "Scraped from CGPDTM's canonical Schedule 1 PDF using pypdf + regex. Each fee carries 4 rate columns: small-applicant + other(s) \u00d7 e-filing + paper. Paper-filing rows are flagged via FeeCondition(trigger=paper_filing). All 18 renewal years (years 3-20) captured. v1 GAPs: deeply nested sub-items inside non-renewal entries (per-sheet/per-claim surcharges, sequence-listing fees) are not yet extracted; PCT-specific fees live in Schedule 5 (separate PDF) and ship as a follow-up scraper. The PDF doesn't carry a revision date; the effective_date here is the most-recent gazette amendment.",
   "office_code": "IPIN",
-  "retrieved_at": "2026-06-10",
+  "retrieved_at": "2026-06-11",
   "right": "patent",
   "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf",
   "statutory_basis": "Patents Rules 2003 Schedule 1 (as amended through the Patents (Amendment) Rules 2024)."
