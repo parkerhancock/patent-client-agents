@@ -22,6 +22,15 @@ def _reset_sources():
     downloads._SOURCES.update(saved)
 
 
+@pytest.fixture(autouse=True)
+def _enable_resource_links(monkeypatch):
+    """These tests inspect the dual-transport manifest via
+    ``structured_content``, gated behind ``LAW_TOOLS_CORE_RESOURCES_ENABLED``
+    (default off → text-only). Opt in so the structured payload is present.
+    The text-only default is covered by mcp-data-core's download tests."""
+    monkeypatch.setenv("LAW_TOOLS_CORE_RESOURCES_ENABLED", "1")
+
+
 @pytest.fixture
 def _stdio_mode(monkeypatch):
     monkeypatch.delenv("LAW_TOOLS_CORE_PUBLIC_URL", raising=False)

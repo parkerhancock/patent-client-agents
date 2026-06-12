@@ -486,14 +486,11 @@ async def download_patent_pdf(
     2. USPTO PPUBS (US patents; clean 404s on non-US numbers, fall through)
     3. EPO OPS (worldwide fallback)
 
-    Returns a ResourceLink pointing at ``pca://patent/{publication_number}``
-    (or the matching publication / EPO scheme) alongside `download_url`,
-    `filename`, `content_type`, `size_bytes`, `resource_uri`, and `source`.
-    Resource-aware MCP clients (e.g. Claude CoWork) can fetch the bytes
-    via ``resources/read`` over the MCP session; clients without that
-    affordance fetch ``download_url`` directly. Non-not-found errors
-    (auth, transient HTTP failures) surface immediately rather than
-    being masked by silent fallback.
+    Returns a signed HTTPS ``download_url`` for the PDF (good ~24h), plus
+    `filename`, `content_type`, `size_bytes`, and `source`; resource-aware
+    MCP clients also get a ``resource_link``. Non-not-found errors (auth,
+    transient HTTP failures) surface immediately rather than being masked
+    by silent fallback.
 
     Related tools: search_patents_global, get_patent, get_patent_publication.
     """
@@ -522,7 +519,7 @@ async def download_patent_pdf(
 async def download_patent_pdf_clean(patent_number: str):
     """Download a patent PDF via clean public sources only (PPUBS → EPO).
 
-    Same ResourceLink / signed-URL contract as :func:`download_patent_pdf`,
+    Same signed-URL contract as :func:`download_patent_pdf`,
     but routes through :func:`unified.download_patent_pdf_clean` so Google
     Patents is never touched. Not registered as an MCP tool itself — it is a
     reusable helper for deployments (e.g. the hosted public connector) that
