@@ -1173,7 +1173,7 @@
   "key": "HK/HKIPD/patent",
   "notes": "Covers the three patent tracks (OGP / re-registration / short-term) via code-prefix encoding (hk-pat-ogp-\u2026 / hk-pat-rr-\u2026 / hk-pat-stp-\u2026 / hk-pat-gen-\u2026). Per-year renewal expansion: OGP+RR years 4-20 emit one FeeItem per year per band ($450 y4-y10, $620 y11-y15, $850 y16-y20); short-term renewal emits at year=4 and year=8 (per Cap. 514C r.61). v1 GAPS: (a) R-route pre-grant maintenance ('Application for maintenance for a further year after the expiry of the 5th year' + 'any succeeding year thereafter') emitted as FeeCategory.other without per-year expansion \u2014 the underlying statute treats them as per-application-year-kept-alive rather than per-renewal-year. (b) Rows that appear identically across the OGP / RR-record / RR-grant / STP filing tables (advertisement, late-payment-of-filing-fee) collapse to single FeeItems.",
   "office_code": "HKIPD",
-  "retrieved_at": "2026-06-11",
+  "retrieved_at": "2026-06-12",
   "right": "patent",
   "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html",
   "statutory_basis": "Patents (General) Rules (Cap. 514C), Schedule 4 \u2014 promulgated under Patents Ordinance Cap. 514. Amendments by subsidiary-legislation orders gazetted in the Hong Kong Government Gazette."
