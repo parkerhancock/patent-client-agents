@@ -1893,7 +1893,7 @@
   "key": "SG/IPOS/patent",
   "notes": "PF15 renewal expands across seven year-bands (5-7 / 8-10 / 11-13 / 14-16 / 17-19 / 20 / post-20) emitting one FeeItem per year. PF11/PF12 per-claim surcharge at S$80/claim over 15 claims emits as a separate FeeCategory.excess_claims row with FeeCondition(claims_over, threshold=15, per_unit=True). PF14 multi-branch grant fee collapses to per-amount extraction; consumers needing the conditional logic should consult IPOS Patents Circular 3/2025 Annex A.",
   "office_code": "IPOS",
-  "retrieved_at": "2026-06-13",
+  "retrieved_at": "2026-06-14",
   "right": "patent",
   "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
   "statutory_basis": "Patents Act 1994 (Singapore) + Patents Rules (SSO SL/PA1994-R1) First Schedule 'Fees payable'. Two-phase reform consolidated by Patents Circular 3/2025 (21 July 2025); first tranche effective 2025-09-01, second tranche effective 2026-04-01."
