@@ -643,7 +643,7 @@
   "key": "FI/PRH/trademark",
   "notes": "TM term is 10 years (TMA 2019 \u00a728); renewal FeeItems carry year=10. \u00a78 publishes the schedule twice \u2014 an electronic-channel block ('Maksut s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en') and a paper block ('Maksut muuta kuin s\u00e4hk\u00f6ist\u00e4 j\u00e4rjestelm\u00e4\u00e4 k\u00e4ytt\u00e4en') \u2014 each row is emitted with a -electronic / -paper code suffix; paper rows carry FeeCondition(paper_filing). Per-class surcharges ('Lis\u00e4maksu, luokkamaksu') emit as FeeCategory.excess_classes with classes_over threshold=1.",
   "office_code": "PRH",
-  "retrieved_at": "2026-06-19",
+  "retrieved_at": "2026-06-20",
   "right": "trademark",
   "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html",
   "statutory_basis": "Tavaramerkkilaki (544/2019) (Trade Marks Act). Fees set by TEM asetus 1216/2025, as amended by 171/2026 (effective 2026-04-01)."
