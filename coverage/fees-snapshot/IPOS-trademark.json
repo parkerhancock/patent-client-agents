@@ -613,7 +613,7 @@
   "key": "SG/IPOS/trademark",
   "notes": "TM4 publishes TWO rates in one row: S$280 per class if the specification is fully adopted from IPOS' Classification Database, S$410 per class otherwise. Both rates emit as separate FeeItems with -preapproved / -custom suffixes \u2014 this is an applicant-strategy choice, not an entity-size tier. TM term is 10 years (TMA s.18); renewal FeeItems carry year=10. Madrid Protocol routing (MM2, MP1, MP2) emits with FeeCategory.madrid; the CHF/WIPO-administered portion is preserved verbatim in notes.",
   "office_code": "IPOS",
-  "retrieved_at": "2026-06-20",
+  "retrieved_at": "2026-06-21",
   "right": "trademark",
   "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
   "statutory_basis": "Trade Marks Act 1998 (Singapore) + Trade Marks Rules (SSO SL/TMA1998-R1). Consolidated by Trade Marks Circular 3/2025 (21 July 2025); two-phase implementation 2025-09-01 + 2026-04-01."
