@@ -233,15 +233,10 @@
       "year": null
     },
     {
-      "amount": "125",
+      "amount": "300",
       "category": "examination",
       "code": "au-fees-if-the-specification-was-proposed-to-contain-21-to",
-      "condition": {
-        "description": "IP Australia per-claim surcharge above threshold.",
-        "per_unit": true,
-        "threshold": 20,
-        "trigger": "claims_over"
-      },
+      "condition": null,
       "currency": "AUD",
       "label": "If the specification was proposed to contain 21 to 30 claims during the examination process",
       "notes": "IP Australia section: Fees",
@@ -253,7 +248,7 @@
       "year": null
     },
     {
-      "amount": "250",
+      "amount": "1550",
       "category": "examination",
       "code": "au-fees-if-the-specification-was-proposed-to-contain-31-or",
       "condition": {
@@ -413,7 +408,7 @@
   "key": "AU/IPAU/patent",
   "notes": "Covers IP Australia's operational fees (filing, search, examination, acceptance, RCE-equivalent, opposition, extension-of-time, document requests). v1 GAP: annual renewal fees (years 5-20) are NOT included \u2014 they live in Schedule 7 of the Patents Regulations 1991 and are not published on the IP Australia fees page. A follow-up scraper can pull the regulation from the Federal Register of Legislation. Fees revised 2024-10-01 per the four-yearly fee review; PCT-fee AUD equivalents updated 2026-01-01.",
   "office_code": "IPAU",
-  "retrieved_at": "2026-06-22",
+  "retrieved_at": "2026-06-23",
   "right": "patent",
   "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
   "statutory_basis": "Patents Regulations 1991 (Cth) Schedule 7; fee review every 4 years, last full review effective 2024-10-01."
