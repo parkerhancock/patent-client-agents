@@ -303,7 +303,7 @@
   "key": "FI/PRH/design",
   "notes": "5-year initial term, renewable in 5-year periods up to 25 years (Mallioikeuslaki \u00a724). Renewal FeeItems carry year=10 (end of first 5-year extension); consumers needing the full ladder should consult the Act. 'Yhteisrekister\u00f6intimaksu' (multi-design surcharge) emits as FeeCategory.filing; 'S\u00e4ilytysmaksu' (deposit fee) emits as FeeCategory.deferment. Community design (EUIPO) and international design (Hague) transmittal fees are also captured.",
   "office_code": "PRH",
-  "retrieved_at": "2026-06-27",
+  "retrieved_at": "2026-06-28",
   "right": "design",
   "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html",
   "statutory_basis": "Mallioikeuslaki (221/1971) (Designs Act). Fees set by TEM asetus 1216/2025, as amended by 171/2026 (effective 2026-04-01)."
