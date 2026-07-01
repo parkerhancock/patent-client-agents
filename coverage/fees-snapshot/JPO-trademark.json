@@ -318,7 +318,7 @@
   "key": "JP/JPO/trademark",
   "notes": "JPO trademark fees are universally per-classification. Each '\u00a5X + \u00a5Y per classification' row emits a base FeeItem plus a separate excess_classes FeeItem with FeeCondition(trigger=classes_over, threshold=0, per_unit=True) \u2014 the classes_over threshold is 0 because the per-class component is charged for EVERY class (not just classes over the first). For pure '\u00a5Z per classification' rows (registration, renewal), a single FeeItem emits with the per-class amount + the same FeeCondition. Trademark term is 10 years (Trademark Act Art. 19); renewal rows carry year=10. Defensive mark rows are emitted with a -defensive slug suffix. Registration + renewal publish a 10-year up-front rate and a 5-year installment rate; both are emitted, the installment row with -installment suffix.",
   "office_code": "JPO",
-  "retrieved_at": "2026-06-30",
+  "retrieved_at": "2026-07-01",
   "right": "trademark",
   "source_url": "https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html",
   "statutory_basis": "Trademark Act of Japan (Act No. 127 of 1959). Fees set under Article 76 + the Order for Enforcement of the Trademark Act."

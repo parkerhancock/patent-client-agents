@@ -1,6 +1,6 @@
 {
   "currency": "EUR",
-  "effective_date": "2026-06-30",
+  "effective_date": "2026-07-01",
   "fees": [
     {
       "amount": "1000",
@@ -763,7 +763,7 @@
   "key": "EP/EUIPO/trademark",
   "notes": "Sourced from the EUIPO EUTM fees page. F-xxx codes are EUTM fees; M-xxx codes are Madrid Protocol fees handled through EUIPO. Renewals are 10-year recurring (year=10). Many fees have separate 'basic' and 'electronic' rates; both are captured as distinct rows under the same code.",
   "office_code": "EUIPO",
-  "retrieved_at": "2026-06-30",
+  "retrieved_at": "2026-07-01",
   "right": "trademark",
   "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
   "statutory_basis": "EU Trade Mark Regulation (EUTMR) Annex I; Articles 31(2), 46(3), 53(3), 68(1), 104(3)"
