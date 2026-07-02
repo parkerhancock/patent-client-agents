@@ -1,6 +1,6 @@
 {
   "currency": "USD",
-  "effective_date": "2026-06-01",
+  "effective_date": "2026-07-01",
   "fees": [
     {
       "amount": "350.00",
@@ -6603,7 +6603,7 @@
       "year": null
     },
     {
-      "amount": "1333.00",
+      "amount": "1446.00",
       "category": "filing",
       "code": "1715",
       "condition": null,
@@ -6618,7 +6618,7 @@
       "year": null
     },
     {
-      "amount": "1333.00",
+      "amount": "1446.00",
       "category": "filing",
       "code": "1715",
       "condition": null,
@@ -6633,7 +6633,7 @@
       "year": null
     },
     {
-      "amount": "1333.00",
+      "amount": "1446.00",
       "category": "filing",
       "code": "1715",
       "condition": null,
@@ -7643,7 +7643,7 @@
   "key": "US/USPTO/patent",
   "notes": "USPTO maintenance fees are due at the 3.5, 7.5, and 11.5 year marks; our schema rounds the year up (4, 8, 12). Paper-filing surcharges on TM fees are flagged via FeeCondition(trigger=paper_filing). Some single-tier rows (e.g., '4011') represent tier-specific electronic-filing discounts and carry a single FeeItem under the applicable tier.",
   "office_code": "USPTO",
-  "retrieved_at": "2026-07-01",
+  "retrieved_at": "2026-07-02",
   "right": "patent",
   "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
   "statutory_basis": "37 CFR Part 1 (patents); 37 CFR Part 2 (trademarks); 35 USC \u00a7\u00a7 41, 376"

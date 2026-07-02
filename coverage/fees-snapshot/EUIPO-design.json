@@ -8,7 +8,7 @@
       "code": "D-101",
       "condition": null,
       "currency": "EUR",
-      "label": "Application fee (Article 36(4) of Regulation (EC) No 6/2002; Article -106ab(3) and (4) of Regulation (EC) No 2246/2002)",
+      "label": "Application fee (Article 42(4) EUDR; Article 149(3) and (4) EUDR)",
       "notes": null,
       "rights": [
         "design"
@@ -43,7 +43,7 @@
       "code": "D-021",
       "condition": null,
       "currency": "EUR",
-      "label": "Fee for deferment of publication (Article 36(4) of Regulation (EC) No 6/2002)",
+      "label": "Fee for deferment of publication (Article 42(4) EUDR)",
       "notes": null,
       "rights": [
         "design"
@@ -63,7 +63,7 @@
         "trigger": "multi_design"
       },
       "currency": "EUR",
-      "label": "Fee for each design from the second design onwards",
+      "label": "Fee for deferment of publication for each design from the second design onwards",
       "notes": null,
       "rights": [
         "design"
@@ -138,7 +138,7 @@
       "code": "D-050",
       "condition": null,
       "currency": "EUR",
-      "label": "Fee for the application for a declaration of invalidity (Article 52(2) of Regulation (EC) No 6/2002; Article 28(2) of Regulation (EC) No 2245/2002)",
+      "label": "Fee for the application for a declaration of invalidity (Article 73(2) EUDR)",
       "notes": null,
       "rights": [
         "design"
@@ -153,7 +153,7 @@
       "code": "D-052",
       "condition": null,
       "currency": "EUR",
-      "label": "Appeal fee (Article 57 of Regulation (EC) No 6/2002; Article 35(3) of Regulation (EC) No 2245/2002)",
+      "label": "Appeal fee (Article 77(2) EUDR; Article 10 EUDDR)",
       "notes": null,
       "rights": [
         "design"
@@ -168,7 +168,7 @@
       "code": "D-054",
       "condition": null,
       "currency": "EUR",
-      "label": "Fee for restitutio in integrum (Article 67(3) of Regulation (EC) No  6/2002)",
+      "label": "Fee for restitutio in integrum (Article 95(3) EUDR)",
       "notes": null,
       "rights": [
         "design"
@@ -183,7 +183,7 @@
       "code": "D-062",
       "condition": null,
       "currency": "EUR",
-      "label": "Fee for the registration of a licence or another right for a registered EU design (Article 32a(1) and (2)of Regulation (EC) No 6/2002) or an application for an EU design (Article 32a(1) and (2)of Regulation (EC) No 6/2002: (a) grant of a licence; (b) transfer of a licence; (c) creation of a right in rem; (d) transfer of a right in rem; (e) levy of execution",
+      "label": "Fee for the registration of a licence or another right for a registered EU design (Article 37(1) and (2) EUDR) or an application for an EU design (Article 37(1) and (2) EUDR: (a) grant of a licence; (b) transfer of a licence; (c) creation of a right in rem; (d) transfer of a right in rem; (e) levy of execution",
       "notes": null,
       "rights": [
         "design"
@@ -198,7 +198,7 @@
       "code": "D-080",
       "condition": null,
       "currency": "EUR",
-      "label": "Fee for the review of the determination of the procedural costs to be refunded (Article 70(7) of Regulation (EC) No 6/2002; Article 79(4) of Regulation (EC) No 2245/2002)",
+      "label": "Fee for the review of the determination of the procedural costs to be refunded (Article 101(7) EUDR; Article 101(7) EUDR)",
       "notes": null,
       "rights": [
         "design"
@@ -213,7 +213,7 @@
   "key": "EP/EUIPO/design",
   "notes": "EUIPO REUD design fees post-Regulation 2024/2822 reform. Renewal periods 1/2/3/4 map to years 5/10/15/20 with the back-loaded curve confirmed by the page (\u20ac150 / \u20ac250 / \u20ac400 / \u20ac700). Late-payment surcharges were abolished by the same reform. The 'per design' rows in Table 5 capture the multi-design renewal discount.",
   "office_code": "EUIPO",
-  "retrieved_at": "2026-07-01",
+  "retrieved_at": "2026-07-02",
   "right": "design",
   "source_url": "https://www.euipo.europa.eu/en/designs/before-applying/fees-payable-direct-to-the-euipo",
   "statutory_basis": "Council Regulation (EC) No 6/2002 (CDR) Article 36(4); Regulation (EU) 2024/2822 (REUD reform Phase I); Article 35(3) of Regulation (EU) No 386/2012."
