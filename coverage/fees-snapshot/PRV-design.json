@@ -283,7 +283,7 @@
   "key": "SE/PRV/design",
   "notes": "PRV design schedule. Design term: 5-year initial period renewable up to 25 years (M\u00f6nsterskyddslagen ch.5 \u00a724). Renewal FeeItems carry year=10 (end of 1st extension) as the v1 sentinel \u2014 PRV labels do not encode period ordinals on the EN page. E-service vs paper channel split is encoded in the row label itself (rather than as separate tables); the parser tags each FeeItem with the channel hint in notes + slug suffix. 'Class fee for each additional class' emits as excess_classes with classes_over threshold=1. Sweden has no tiered entity discounts \u2014 all rows use EntityTier.none.",
   "office_code": "PRV",
-  "retrieved_at": "2026-07-04",
+  "retrieved_at": "2026-07-05",
   "right": "design",
   "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/",
   "statutory_basis": "Designs Protection Act 1970 (M\u00f6nsterskyddslagen 1970:485) + Designs Protection Ordinance (M\u00f6nsterskyddsf\u00f6rordningen 1970:486) + PRVFS fee orders."
