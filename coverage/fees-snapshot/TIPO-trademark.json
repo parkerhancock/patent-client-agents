@@ -503,7 +503,7 @@
   "key": "TW/TIPO/trademark",
   "notes": "TIPO trademark fees are quoted per-class for application, registration, renewal, opposition, invalidation, and revocation. Multi-good surcharge applies over 20 designated goods in a single class (NT$200/good); Class 35 retail services surcharge applies over 5 designated services (NT$500/service). Source is a bilingual (zh-TW + EN) PDF; this scraper extracts the English side after stripping CJK characters and walking labelled NT$ amounts.",
   "office_code": "TIPO",
-  "retrieved_at": "2026-07-05",
+  "retrieved_at": "2026-07-06",
   "right": "trademark",
   "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html",
   "statutory_basis": "Trademark Act (\u5546\u6a19\u6cd5) and the Trademark Fee Standards published by TIPO under Article 104. Current schedule effective 2024-05-01."
