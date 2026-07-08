@@ -83,7 +83,7 @@
   "key": "FR/INPI-FR/design",
   "notes": "INPI France design fees in EUR. Base filing \u20ac39 plus per-reproduction surcharges (b&w \u20ac23 / colour \u20ac47). Renewal ('prorogation') \u20ac52 per 5-year period (up to 25 years total). Year=5 reflects the 5-year period mapping.",
   "office_code": "INPI-FR",
-  "retrieved_at": "2026-07-07",
+  "retrieved_at": "2026-07-08",
   "right": "design",
   "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi",
   "statutory_basis": "Code de la propri\u00e9t\u00e9 intellectuelle (CPI) Livre V (dessins et mod\u00e8les)."
