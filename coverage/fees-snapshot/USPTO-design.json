@@ -323,7 +323,7 @@
   "key": "US/USPTO/design",
   "notes": "USPTO maintenance fees are due at the 3.5, 7.5, and 11.5 year marks; our schema rounds the year up (4, 8, 12). Paper-filing surcharges on TM fees are flagged via FeeCondition(trigger=paper_filing). Some single-tier rows (e.g., '4011') represent tier-specific electronic-filing discounts and carry a single FeeItem under the applicable tier.",
   "office_code": "USPTO",
-  "retrieved_at": "2026-07-09",
+  "retrieved_at": "2026-07-10",
   "right": "design",
   "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
   "statutory_basis": "37 CFR Part 1 (patents); 37 CFR Part 2 (trademarks); 35 USC \u00a7\u00a7 41, 376"
