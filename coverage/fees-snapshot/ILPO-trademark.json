@@ -313,7 +313,7 @@
   "key": "IL/ILPO/trademark",
   "notes": "ILPO 2026 fee schedule, gazetted 2025-12-22, effective 2026-01-01. Currency is Israeli new shekel (NIS / ILS); fees are CPI-adjusted annually and rounded to the nearest shekel. Source PDF is Hebrew-only \u2014 ILPO does not publish an English translation of the current-effective fee schedule on gov.il. Item labels in this connector are English-language summaries of the controlling Hebrew text. The Hebrew schedule is the authoritative version per Reshumot (Israeli Official Gazette).\n\nTrademark term is 10 years from registration (renewable indefinitely under \u00a7 32 of the Trade Marks Ordinance). Israel has been a Madrid Protocol member since 2010; the three Madrid-routing fees on the schedule are ILPO's share \u2014 WIPO bills the international portion separately in CHF.",
   "office_code": "ILPO",
-  "retrieved_at": "2026-07-10",
+  "retrieved_at": "2026-07-11",
   "right": "trademark",
   "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf",
   "statutory_basis": "Trade Marks Ordinance [New Version], 5732-1972 + Trade Marks Regulations, 5700-1940. CPI-adjusted annually; controlling text is Reshumot."
