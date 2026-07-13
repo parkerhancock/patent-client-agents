@@ -308,7 +308,7 @@
   "key": "GB/UKIPO/patent",
   "notes": "Per-form fees scraped from gov.uk patent-forms-and-fees sub-pages. ~30 sub-pages fetched concurrently (bounded to 5). Effective 2026-04-01 (UKIPO's first major rise in years; ~25% average across patent/TM/design). v1 GAP: renewal fees are published on the form sub-page as a range (\u00a390-\u00a3810) rather than per-year; the high end is stored. The per-year schedule lives in The Patents (Fees) Rules 2007 statutory instrument \u2014 a follow-up scraper can pull it from legislation.gov.uk.",
   "office_code": "UKIPO",
-  "retrieved_at": "2026-07-12",
+  "retrieved_at": "2026-07-13",
   "right": "patent",
   "source_url": "https://www.gov.uk/government/publications/patent-forms-and-fees",
   "statutory_basis": "Patents Act 1977; The Patents (Fees) Rules 2007 (as amended)."
