@@ -1268,7 +1268,7 @@
   "key": "TW/TIPO/patent",
   "notes": "TIPO covers three patent right-types under one office: invention (20-yr term), utility model (10-yr term), and design (15-yr term). Annuity rows are expanded per-year, and the small-tier discount (natural persons / schools / SMEs) is emitted as a sibling row for the three years where it applies (1-3, 4-6, plus design 1-3 which goes to NT$0). Non-annuity rows are emitted at EntityTier.none since the schedule does not publish a small-tier discount for procedural fees.",
   "office_code": "TIPO",
-  "retrieved_at": "2026-07-15",
+  "retrieved_at": "2026-07-16",
   "right": "patent",
   "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html",
   "statutory_basis": "Patent Act (\u5c08\u5229\u6cd5) + Patent Fee Regulations issued by TIPO. Schedule of Patent Fees published on the TIPO English site."
