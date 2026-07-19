@@ -608,7 +608,7 @@
   "key": "BR/INPI-BR/trademark",
   "notes": "INPI Brazil trademark fees are quoted per-class in BRL for application (pre-approved vs free specification), the first 10-year term, renewal (10-yr cycle), opposition, cancellation, and administrative invalidation. Per-class amounts are flagged via FeeCondition(classes_over=1, per_unit=True). Up-to-60% discount applies per Resolution 251/2019 \u00a7I.5 for individuals, SMEs, cooperatives, ICTs, non-profits, and public bodies.",
   "office_code": "INPI-BR",
-  "retrieved_at": "2026-07-18",
+  "retrieved_at": "2026-07-19",
   "right": "trademark",
   "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
   "statutory_basis": "Lei 9.279/1996 (Brazilian IP Law); Ordinance MDIC 39/2014; ME Ordinance 516/2019; INPI Resolution 251/2019."
