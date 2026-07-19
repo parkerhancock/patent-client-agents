@@ -18,6 +18,7 @@ from patent_client_agents.uspto_odp.clients.base import (
     _format_date,
     _prune,
     _serialize_model_list,
+    _serialize_range_filters,
 )
 from patent_client_agents.uspto_odp.models import OdpFilter, OdpRangeFilter, OdpSort
 
@@ -293,6 +294,60 @@ class TestOdpFilterModels:
     def test_odp_range_filter_partial(self) -> None:
         rf = OdpRangeFilter(field="applicationMetaData.filingDate", valueFrom="2022-01-01")
         assert rf.valueTo is None
+
+
+class TestSerializeRangeFilters:
+    """Tests for _serialize_range_filters, which fills in an omitted bound.
+
+    ODP's applications-search endpoint 400s on a rangeFilters entry missing
+    either bound (confirmed live) -- unlike _serialize_model_list (used for
+    filters/sort, where an omitted key is fine), this must never emit a
+    range filter with only one of valueFrom/valueTo present.
+    """
+
+    def test_value_from_only_gets_a_value_to(self) -> None:
+        result = _serialize_range_filters(
+            [{"field": "applicationMetaData.filingDate", "valueFrom": "2022-01-01"}]
+        )
+        assert result is not None
+        assert result[0]["valueFrom"] == "2022-01-01"
+        assert result[0]["valueTo"] == date.today().isoformat()
+
+    def test_value_to_only_gets_a_value_from(self) -> None:
+        result = _serialize_range_filters(
+            [{"field": "applicationMetaData.filingDate", "valueTo": "2022-01-01"}]
+        )
+        assert result is not None
+        assert result[0]["valueFrom"] == "1776-01-01"
+        assert result[0]["valueTo"] == "2022-01-01"
+
+    def test_both_bounds_untouched(self) -> None:
+        result = _serialize_range_filters(
+            [
+                {
+                    "field": "applicationMetaData.filingDate",
+                    "valueFrom": "2022-01-01",
+                    "valueTo": "2023-12-31",
+                }
+            ]
+        )
+        assert result == [
+            {
+                "field": "applicationMetaData.filingDate",
+                "valueFrom": "2022-01-01",
+                "valueTo": "2023-12-31",
+            }
+        ]
+
+    def test_pydantic_model_input(self) -> None:
+        result = _serialize_range_filters(
+            [OdpRangeFilter(field="applicationMetaData.filingDate", valueFrom="2022-01-01")]
+        )
+        assert result is not None
+        assert result[0]["valueTo"] == date.today().isoformat()
+
+    def test_none_input(self) -> None:
+        assert _serialize_range_filters(None) is None
 
     def test_odp_sort(self) -> None:
         s = OdpSort(field="applicationMetaData.filingDate", order="Asc")

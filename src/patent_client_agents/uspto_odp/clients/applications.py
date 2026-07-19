@@ -22,7 +22,7 @@ from ..models import (
     OdpSort,
     SearchResponse,
 )
-from .base import UsptoOdpBaseClient, _prune, _serialize_model_list
+from .base import UsptoOdpBaseClient, _prune, _serialize_model_list, _serialize_range_filters
 
 logger = logging.getLogger(__name__)
 
@@ -239,7 +239,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
                 payload["facets"] = list(facets)
             if (filters_value := _serialize_model_list(filters)) is not None:
                 payload["filters"] = filters_value
-            if (ranges_value := _serialize_model_list(range_filters)) is not None:
+            if (ranges_value := _serialize_range_filters(range_filters)) is not None:
                 payload["rangeFilters"] = ranges_value
             if (sort_value := _serialize_model_list(sort)) is not None:
                 payload["sort"] = sort_value

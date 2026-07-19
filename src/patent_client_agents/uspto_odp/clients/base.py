@@ -93,6 +93,34 @@ def _serialize_model_list(items: Sequence[Any] | None) -> list[dict[str, Any]] |
     return serialized
 
 
+# Sentinel lower bound for a range filter that only specifies valueTo — well
+# before any USPTO filing date.
+_RANGE_FILTER_EPOCH = "1776-01-01"
+
+
+def _serialize_range_filters(items: Sequence[Any] | None) -> list[dict[str, Any]] | None:
+    """Serialize rangeFilters, filling in an omitted bound.
+
+    ODP's applications-search endpoint rejects a rangeFilters entry missing
+    either bound with a bare HTTP 400 (confirmed live against
+    /api/v1/patent/applications/search: valueFrom alone -> 400, valueFrom +
+    valueTo -> 200) -- a one-sided "since X" filter needs an explicit
+    open-ended valueTo, not an omitted key. `_serialize_model_list` (used
+    for `filters`/`sort` too, where omitting a key is fine) would otherwise
+    prune a caller-omitted valueTo/valueFrom away entirely via `_prune`.
+    """
+    serialized = _serialize_model_list(items)
+    if serialized is None:
+        return None
+    today = date.today().isoformat()
+    for rf in serialized:
+        if "valueFrom" in rf and "valueTo" not in rf:
+            rf["valueTo"] = today
+        elif "valueTo" in rf and "valueFrom" not in rf:
+            rf["valueFrom"] = _RANGE_FILTER_EPOCH
+    return serialized
+
+
 class PaginationModel(BaseModel):
     """Pagination parameters for ODP searches."""
 
@@ -220,4 +248,5 @@ __all__ = [
     "_format_bool",
     "_format_date",
     "_serialize_model_list",
+    "_serialize_range_filters",
 ]
