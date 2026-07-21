@@ -1,0 +1,59 @@
+interactions:
+- request:
+    body: '{"q":"decisionData.decisionTypeCategory:Decision","pagination":{"limit":5},"format":"json"}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '91'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/decisions/search/download
+  response:
+    body:
+      string: '{"patentTrialData":[{"decisionData":{"decisionTypeCategory":"Decision","trialOutcomeCategory":"Final
+        Written Decision","decisionIssueDate":"2026-07-20"},"patentOwnerData":{"realPartyInInterestName":"Yangtze
+        Memory Technologies Company, Ltd.","technologyCenterNumber":"2800","applicationNumberText":"16865056"},"trialNumber":"IPR2025-00228"},{"decisionData":{"decisionTypeCategory":"Decision","trialOutcomeCategory":"Settled
+        After Institution","decisionIssueDate":"2026-07-20"},"patentOwnerData":{"realPartyInInterestName":"Nokia
+        Technologies Oy","technologyCenterNumber":"2400","applicationNumberText":"16356733"},"trialNumber":"IPR2025-01153"},{"decisionData":{"decisionTypeCategory":"Decision","trialOutcomeCategory":"Vacated/Remanded","decisionIssueDate":"2026-07-20"},"patentOwnerData":{"realPartyInInterestName":"OpenSesame,
+        Inc.","technologyCenterNumber":"2400","applicationNumberText":"13156607"},"trialNumber":"IPR2022-01439"},{"decisionData":{"decisionTypeCategory":"Decision","trialOutcomeCategory":"Vacated/Remanded","decisionIssueDate":"2026-07-20"},"patentOwnerData":{"realPartyInInterestName":"Google
+        LLC","technologyCenterNumber":"2600","applicationNumberText":"16171495"},"trialNumber":"IPR2023-00119"},{"decisionData":{"decisionTypeCategory":"Decision","trialOutcomeCategory":"Vacated/Remanded","decisionIssueDate":"2026-07-20"},"patentOwnerData":{"realPartyInInterestName":"Google
+        LLC","technologyCenterNumber":"2600","applicationNumberText":"15346914"},"trialNumber":"IPR2023-00118"}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1504'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 01:13:46 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-6a5ec7ca-34a8ca4b018bc2272a89eae2;Parent=625b5083d8f15c41;Sampled=0;Lineage=2:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      content-disposition:
+      - attachment;filename="results-2026-07-21T01-13-46.json"
+      x-amz-apigw-id:
+      - A1QnrH2qIAMFUNQ=
+      x-amzn-RequestId:
+      - 24b5585f-f417-44d7-9e81-f7a5035b8eed
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,74 @@
+interactions:
+- request:
+    body: '{"sort":[{"field":"trialNumber","order":"asc"}],"pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '84'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/search
+  response:
+    body:
+      string: '{"count":19315,"requestIdentifier":"f940cb67-0c2a-44e9-a508-4579d0368c7d","patentTrialProceedingDataBag":[{"lastModifiedDateTime":"2025-12-12T17:01:43","patentOwnerData":{"patentOwnerName":"Versata
+        Software, Inc","patentNumber":"6553350","grantDate":"2003-04-22","technologyCenterNumber":"3600","groupArtUnitNumber":"3628","applicationNumberText":"09253427","inventorName":"THOMAS
+        CARTER"},"trialMetaData":{"accordedFilingDate":"2012-09-16","terminationDate":"2013-06-11","trialTypeCode":"CBM","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/CBM/2012/00001/CBM2012-00001.zip","institutionDecisionDate":"2013-01-09","trialStatusCategory":"Final
+        Written Decision","petitionFilingDate":"2012-09-16"},"trialNumber":"CBM2012-00001","regularPetitionerData":{"realPartyInInterestName":"SAP
+        America, Inc. et al.","counselName":"Arner, Erikaet al"}},{"lastModifiedDateTime":"2025-12-12T17:01:43","patentOwnerData":{"patentOwnerName":"Progressive
+        Casualty Insurance Company","patentNumber":"6064970","grantDate":"2000-05-16","realPartyInInterestName":"Progressive
+        Casualty Insurance Company","technologyCenterNumber":"2800","applicationNumberText":"09135034","inventorName":"ROBERT
+        MCMILLAN","counselName":"Biernacki, Johnet al"},"trialMetaData":{"accordedFilingDate":"2012-09-16","terminationDate":"2014-01-23","trialTypeCode":"CBM","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/CBM/2012/00002/CBM2012-00002.zip","institutionDecisionDate":"2013-01-25","trialStatusCategory":"Final
+        Written Decision","trialLastModifiedDate":"2022-10-10","petitionFilingDate":"2012-09-16","trialLastModifiedDateTime":"2022-10-10T11:53:44"},"trialNumber":"CBM2012-00002","regularPetitionerData":{"realPartyInInterestName":"Liberty
+        Mutual Insurance Company","counselName":"Baughman, Stevenet al"}},{"lastModifiedDateTime":"2025-12-12T17:01:43","patentOwnerData":{"patentOwnerName":"Progressive
+        Casualty Insurance Company","patentNumber":"8140358","grantDate":"2012-03-20","realPartyInInterestName":"Progressive
+        Casualty Insurance Company","technologyCenterNumber":"3600","groupArtUnitNumber":"3695","applicationNumberText":"12132487","inventorName":"Raymond
+        Scott Ling et al","counselName":"Biernacki, Johnet al"},"trialMetaData":{"accordedFilingDate":"2012-09-16","terminationDate":"2014-02-11","trialTypeCode":"CBM","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/CBM/2012/00003/CBM2012-00003.zip","institutionDecisionDate":"2013-02-12","trialStatusCategory":"Final
+        Written Decision","trialLastModifiedDate":"2022-10-10","petitionFilingDate":"2012-09-16","trialLastModifiedDateTime":"2022-10-10T11:53:23"},"trialNumber":"CBM2012-00003","regularPetitionerData":{"realPartyInInterestName":"Liberty
+        Mutual Insurance Company","counselName":"Baughman, Stevenet al"}},{"lastModifiedDateTime":"2025-12-12T17:01:43","patentOwnerData":{"patentOwnerName":"Progressive
+        Casualty Insurance Company","patentNumber":"6064970","grantDate":"2000-05-16","realPartyInInterestName":"Progressive
+        Casualty Insurance Company","technologyCenterNumber":"2800","applicationNumberText":"09135034","inventorName":"ROBERT
+        MCMILLAN","counselName":"Biernacki, Johnet al"},"trialMetaData":{"accordedFilingDate":"2012-09-16","terminationDate":"2014-01-23","trialTypeCode":"CBM","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/CBM/2012/00004/CBM2012-00004.zip","institutionDecisionDate":"2013-01-25","trialStatusCategory":"Final
+        Written Decision","trialLastModifiedDate":"2022-10-10","petitionFilingDate":"2012-09-16","trialLastModifiedDateTime":"2022-10-10T11:53:43"},"trialNumber":"CBM2012-00004","regularPetitionerData":{"realPartyInInterestName":"Liberty
+        Mutual Insurance Company","counselName":"Baughman, Stevenet al"}},{"lastModifiedDateTime":"2025-12-12T17:01:43","patentOwnerData":{"patentOwnerName":"Frontline
+        Technologies, Inc.","patentNumber":"6675151","grantDate":"2004-01-06","realPartyInInterestName":"Frontline
+        Technologies, Inc.","technologyCenterNumber":"3600","applicationNumberText":"09419266","inventorName":"ROLAND
+        THOMPSON","counselName":"Donohue, Johnet al"},"trialMetaData":{"accordedFilingDate":"2012-09-16","terminationDate":"2014-01-21","trialTypeCode":"CBM","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/CBM/2012/00005/CBM2012-00005.zip","institutionDecisionDate":"2013-01-23","trialStatusCategory":"Final
+        Written Decision","trialLastModifiedDate":"2022-10-10","petitionFilingDate":"2012-09-21","trialLastModifiedDateTime":"2022-10-10T11:53:45"},"trialNumber":"CBM2012-00005","regularPetitionerData":{"realPartyInInterestName":"CRS
+        Advanced Technology, Inc .","counselName":"Yoches, E. Robertet al"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '4662'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 01:13:45 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-6a5ec7c9-31c50b616654d7c0482e69c0;Parent=36adefc2a23bc998;Sampled=0;Lineage=2:ce682653:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - A1QnmHE7IAMFlbQ=
+      x-amzn-RequestId:
+      - f940cb67-0c2a-44e9-a508-4579d0368c7d
+    status:
+      code: 200
+      message: OK
+version: 1

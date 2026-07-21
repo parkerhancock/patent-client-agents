@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: '{"q":"documentData.filingPartyCategory:Petitioner","pagination":{"limit":5},"format":"json"}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '92'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/documents/search/download
+  response:
+    body:
+      string: '{"patentTrialData":[{"patentOwnerData":{"technologyCenterNumber":"1600"},"trialNumber":"PGR2025-00050","documentData":{"documentNumber":1278,"documentTitleText":"MSD
+        LLC v. Halozyme - Petitioner Demonstratives (Part 3 Slides 66-130)","documentTypeDescriptionText":"EXHIBIT","documentFilingDate":"2026-07-20"}},{"patentOwnerData":{"technologyCenterNumber":"1600"},"trialNumber":"PGR2025-00033","documentData":{"documentNumber":97,"documentTitleText":"Petitioner''s
+        Updated Exhibit List","documentTypeDescriptionText":"Notice:  Exhibit list","documentFilingDate":"2026-07-20"}},{"patentOwnerData":{"technologyCenterNumber":"1600"},"trialNumber":"PGR2025-00042","documentData":{"documentNumber":1278,"documentTitleText":"MSD
+        LLC v. Halozyme - Petitioner Demonstratives (Part 4 Slides 131-194)","documentTypeDescriptionText":"EXHIBIT","documentFilingDate":"2026-07-20"}},{"patentOwnerData":{"technologyCenterNumber":"2400"},"trialNumber":"IPR2025-01010","documentData":{"documentNumber":32,"documentTitleText":"Petitioner''s
+        Request for Oral Argument","documentTypeDescriptionText":"Other:  other","documentFilingDate":"2026-07-20"}},{"patentOwnerData":{"technologyCenterNumber":"1600"},"trialNumber":"PGR2025-00052","documentData":{"documentNumber":1278,"documentTitleText":"MSD
+        LLC v. Halozyme - Petitioner Demonstratives (Part 1 Slides 1-50)","documentTypeDescriptionText":"EXHIBIT","documentFilingDate":"2026-07-20"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1417'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 01:13:46 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-6a5ec7ca-3ba69ea643be3aae2ecd3991;Parent=12fac98c3cf4602a;Sampled=0;Lineage=2:56323108:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      content-disposition:
+      - attachment;filename="results-2026-07-21T01-13-46.json"
+      x-amz-apigw-id:
+      - A1QnvGzYIAMFg6A=
+      x-amzn-RequestId:
+      - d3e43ae8-bb14-4277-a259-67cea02cc2a1
+    status:
+      code: 200
+      message: OK
+version: 1

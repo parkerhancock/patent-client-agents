@@ -77,8 +77,34 @@ class TestPtabTrialsClient:
             assert "IPR2025-01319" in (proceeding.trialNumber or "")
 
     @pytest.mark.asyncio
+    async def test_search_proceedings_with_sort(self, vcr_cassette, api_key) -> None:
+        """Search proceedings with a dict-shaped sort directive.
+
+        Regression: the live API rejects string sort expressions, and the
+        client's serializer raises TypeError on them — sort must be an
+        OdpSort or a {"field", "order"} dict (a "direction" key 400s).
+        """
+        async with PtabTrialsClient(api_key=api_key) as client:
+            result = await client.search_proceedings(
+                sort={"field": "trialNumber", "order": "asc"},
+                limit=5,
+            )
+
+        assert result.count > 0
+        assert len(result.patentTrialProceedingDataBag) == 5
+        numbers = [p.trialNumber for p in result.patentTrialProceedingDataBag]
+        assert all(numbers)
+        assert numbers == sorted(numbers)
+
+    @pytest.mark.asyncio
     async def test_download_proceedings(self, vcr_cassette, api_key) -> None:
-        """Download proceedings search results."""
+        """Download proceedings search results.
+
+        Regression: the download endpoint keys its records as
+        ``patentTrialData`` (not ``patentTrialProceedingDataBag``) and omits
+        ``count``; before normalization the client silently returned an
+        empty bag for every real download.
+        """
         async with PtabTrialsClient(api_key=api_key) as client:
             result = await client.download_proceedings(
                 query="trialMetaData.trialTypeCode:IPR",
@@ -86,8 +112,11 @@ class TestPtabTrialsClient:
                 file_format="json",
             )
 
-        assert result.count >= 0
-        assert isinstance(result.patentTrialProceedingDataBag, list)
+        assert result.count == 5
+        assert len(result.patentTrialProceedingDataBag) == 5
+        proceeding = result.patentTrialProceedingDataBag[0]
+        assert proceeding.trialNumber
+        assert proceeding.trialMetaData is not None
 
     # =========================================================================
     # Trial Decisions
@@ -114,6 +143,22 @@ class TestPtabTrialsClient:
         assert result.count >= 0
         assert isinstance(result.patentTrialDocumentDataBag, list)
 
+    @pytest.mark.asyncio
+    async def test_download_decisions(self, vcr_cassette, api_key) -> None:
+        """Download decisions search results (same ``patentTrialData`` envelope)."""
+        async with PtabTrialsClient(api_key=api_key) as client:
+            result = await client.download_decisions(
+                query="decisionData.decisionTypeCategory:Decision",
+                limit=5,
+                file_format="json",
+            )
+
+        assert result.count == 5
+        assert len(result.patentTrialDocumentDataBag) == 5
+        decision = result.patentTrialDocumentDataBag[0]
+        assert decision.trialNumber
+        assert decision.decisionData is not None
+
     # =========================================================================
     # Trial Documents
     # =========================================================================
@@ -138,6 +183,22 @@ class TestPtabTrialsClient:
 
         assert result.count >= 0
         assert isinstance(result.patentTrialDocumentDataBag, list)
+
+    @pytest.mark.asyncio
+    async def test_download_documents(self, vcr_cassette, api_key) -> None:
+        """Download documents search results (same ``patentTrialData`` envelope)."""
+        async with PtabTrialsClient(api_key=api_key) as client:
+            result = await client.download_documents(
+                query="documentData.filingPartyCategory:Petitioner",
+                limit=5,
+                file_format="json",
+            )
+
+        assert result.count == 5
+        assert len(result.patentTrialDocumentDataBag) == 5
+        document = result.patentTrialDocumentDataBag[0]
+        assert document.trialNumber
+        assert document.documentData is not None
 
 
 class TestPtabAppealsClient:
@@ -296,3 +357,91 @@ class TestPtabModels:
             assert hasattr(interference, "interferenceMetaData")
             assert hasattr(interference, "seniorPartyData")
             assert hasattr(interference, "decisionDocumentData")
+
+
+class TestPtabDownloadNormalization:
+    """No-network tests for the trials download envelope normalization.
+
+    Fixture payloads are trimmed from live /search/download captures
+    (2026-07-20): records arrive under ``patentTrialData`` with no ``count``.
+    """
+
+    def test_proceedings_download_envelope(self) -> None:
+        from patent_client_agents.uspto_odp.clients.ptab_trials import (
+            _normalize_download_bag,
+        )
+        from patent_client_agents.uspto_odp.models import PtabTrialProceedingResponse
+
+        data = {
+            "patentTrialData": [
+                {
+                    "patentOwnerData": {
+                        "patentNumber": "11755816",
+                        "technologyCenterNumber": "2100",
+                        "applicationNumberText": "17830566",
+                    },
+                    "trialMetaData": {
+                        "trialStatusCategory": "Pending",
+                        "petitionFilingDate": "2026-07-16",
+                    },
+                    "trialNumber": "IPR2026-00428",
+                }
+            ]
+        }
+        result = PtabTrialProceedingResponse.model_validate(
+            _normalize_download_bag(data, "patentTrialProceedingDataBag")
+        )
+        assert result.count == 1
+        proceeding = result.patentTrialProceedingDataBag[0]
+        assert proceeding.trialNumber == "IPR2026-00428"
+        assert proceeding.trialMetaData is not None
+        assert proceeding.trialMetaData.trialStatusCategory == "Pending"
+        assert proceeding.patentOwnerData is not None
+        assert proceeding.patentOwnerData.patentNumber == "11755816"
+
+    def test_decisions_download_envelope(self) -> None:
+        from patent_client_agents.uspto_odp.clients.ptab_trials import (
+            _normalize_download_bag,
+        )
+        from patent_client_agents.uspto_odp.models import PtabTrialDecisionResponse
+
+        data = {
+            "patentTrialData": [
+                {
+                    "decisionData": {
+                        "decisionTypeCategory": "Decision",
+                        "trialOutcomeCategory": "Final Written Decision",
+                        "decisionIssueDate": "2026-07-20",
+                    },
+                    "patentOwnerData": {"technologyCenterNumber": "2800"},
+                    "trialNumber": "IPR2025-00228",
+                }
+            ]
+        }
+        result = PtabTrialDecisionResponse.model_validate(
+            _normalize_download_bag(data, "patentTrialDocumentDataBag")
+        )
+        assert result.count == 1
+        decision = result.patentTrialDocumentDataBag[0]
+        assert decision.trialNumber == "IPR2025-00228"
+        assert decision.decisionData is not None
+        assert decision.decisionData.trialOutcomeCategory == "Final Written Decision"
+
+    def test_search_shaped_payload_passes_through(self) -> None:
+        """A search-shaped payload (404 fallback or future API fix) is untouched."""
+        from patent_client_agents.uspto_odp.clients.ptab_trials import (
+            _normalize_download_bag,
+        )
+
+        data = {"count": 0, "patentTrialProceedingDataBag": []}
+        assert _normalize_download_bag(data, "patentTrialProceedingDataBag") == {
+            "count": 0,
+            "patentTrialProceedingDataBag": [],
+        }
+
+    @pytest.mark.asyncio
+    async def test_string_sort_raises_type_error(self) -> None:
+        """A plain string sort is rejected client-side, never sent to the API."""
+        async with PtabTrialsClient(api_key="test-key") as client:
+            with pytest.raises(TypeError, match="Unsupported item type"):
+                await client.search_proceedings(sort="trialNumber asc", limit=5)  # type: ignore[arg-type]

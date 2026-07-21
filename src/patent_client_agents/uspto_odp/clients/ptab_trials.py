@@ -7,11 +7,34 @@ from pathlib import Path
 from typing import Any
 
 from ..models import (
+    OdpSort,
     PtabTrialDecisionResponse,
     PtabTrialDocumentResponse,
     PtabTrialProceedingResponse,
 )
-from .base import PaginationModel, SearchPayload, UsptoOdpBaseClient, _prune
+from .base import (
+    PaginationModel,
+    SearchPayload,
+    UsptoOdpBaseClient,
+    _prune,
+    _serialize_model_list,
+)
+
+
+def _normalize_download_bag(data: dict[str, Any], bag_key: str) -> dict[str, Any]:
+    """Normalize a trials ``/search/download`` response to the search shape.
+
+    The download endpoints return records under ``patentTrialData`` and omit
+    ``count`` (confirmed live against all three trial download endpoints,
+    2026-07-20), unlike the search endpoints' ``patentTrialProceedingDataBag``
+    / ``patentTrialDocumentDataBag`` envelopes the response models expect.
+    """
+    records = data.pop("patentTrialData", None)
+    if records is not None and bag_key not in data:
+        data[bag_key] = records
+    data.setdefault(bag_key, [])
+    data.setdefault("count", len(data[bag_key]))
+    return data
 
 
 class PtabTrialsClient(UsptoOdpBaseClient):
@@ -33,7 +56,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         facets: Sequence[str] | None = None,
         filters: Sequence[str] | None = None,
         range_filters: Sequence[str] | None = None,
-        sort: str | None = None,
+        sort: OdpSort | dict[str, Any] | None = None,
         limit: int = 25,
         offset: int = 0,
     ) -> PtabTrialProceedingResponse:
@@ -45,7 +68,9 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             facets: Fields to aggregate.
             filters: Filter expressions (e.g., "trialTypeCode:IPR").
             range_filters: Range filter expressions.
-            sort: Sort expression (e.g., "petitionFilingDate desc").
+            sort: Sort directive as :class:`OdpSort` or dict (e.g.,
+                ``{"field": "trialMetaData.petitionFilingDate", "order": "desc"}``).
+                The API rejects string expressions; a ``direction`` key 400s.
             limit: Maximum results to return.
             offset: Number of results to skip.
 
@@ -105,19 +130,24 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         fields: Sequence[str] | None = None,
         filters: Sequence[str] | None = None,
         range_filters: Sequence[str] | None = None,
-        sort: str | None = None,
+        sort: OdpSort | dict[str, Any] | None = None,
         limit: int | None = None,
         offset: int | None = None,
         file_format: str | None = None,
     ) -> PtabTrialProceedingResponse:
         """Download PTAB trial proceedings search results.
 
+        Note the download endpoint returns a thinner record set than search
+        (e.g., no institution/termination dates); ``count`` is derived from
+        the returned records since the endpoint omits it.
+
         Args:
             query: Lucene-style search query.
             fields: Fields to return.
             filters: Filter expressions.
             range_filters: Range filter expressions.
-            sort: Sort expression.
+            sort: Sort directive as :class:`OdpSort` or dict
+                (``{"field": ..., "order": "asc"|"desc"}``).
             limit: Maximum results.
             offset: Results to skip.
             file_format: Output format ("json" or "csv").
@@ -135,7 +165,9 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         if range_filters:
             payload["rangeFilters"] = list(range_filters)
         if sort:
-            payload["sort"] = sort
+            # The API requires sort as a list of {field, order} objects; a
+            # bare object 400s (confirmed live 2026-07-20).
+            payload["sort"] = _serialize_model_list([sort])
         if limit is not None or offset is not None:
             pagination: dict[str, Any] = {}
             if offset is not None:
@@ -152,7 +184,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             empty_bag_key="patentTrialProceedingDataBag",
             context="download trial proceedings",
         )
-        data.setdefault("patentTrialProceedingDataBag", [])
+        data = _normalize_download_bag(data, "patentTrialProceedingDataBag")
         return PtabTrialProceedingResponse.model_validate(data)
 
     # =========================================================================
@@ -167,7 +199,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         facets: Sequence[str] | None = None,
         filters: Sequence[str] | None = None,
         range_filters: Sequence[str] | None = None,
-        sort: str | None = None,
+        sort: OdpSort | dict[str, Any] | None = None,
         limit: int = 25,
         offset: int = 0,
     ) -> PtabTrialDecisionResponse:
@@ -179,7 +211,8 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             facets: Fields to aggregate.
             filters: Filter expressions.
             range_filters: Range filter expressions.
-            sort: Sort expression.
+            sort: Sort directive as :class:`OdpSort` or dict
+                (``{"field": ..., "order": "asc"|"desc"}``).
             limit: Maximum results.
             offset: Results to skip.
 
@@ -261,12 +294,16 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         fields: Sequence[str] | None = None,
         filters: Sequence[str] | None = None,
         range_filters: Sequence[str] | None = None,
-        sort: str | None = None,
+        sort: OdpSort | dict[str, Any] | None = None,
         limit: int | None = None,
         offset: int | None = None,
         file_format: str | None = None,
     ) -> PtabTrialDecisionResponse:
-        """Download PTAB trial decisions search results."""
+        """Download PTAB trial decisions search results.
+
+        ``count`` is derived from the returned records since the download
+        endpoint omits it.
+        """
         payload: dict[str, Any] = {}
         if query:
             payload["q"] = query
@@ -277,7 +314,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         if range_filters:
             payload["rangeFilters"] = list(range_filters)
         if sort:
-            payload["sort"] = sort
+            payload["sort"] = _serialize_model_list([sort])
         if limit is not None or offset is not None:
             pagination: dict[str, Any] = {}
             if offset is not None:
@@ -294,7 +331,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             empty_bag_key="patentTrialDocumentDataBag",
             context="download trial decisions",
         )
-        data.setdefault("patentTrialDocumentDataBag", [])
+        data = _normalize_download_bag(data, "patentTrialDocumentDataBag")
         return PtabTrialDecisionResponse.model_validate(data)
 
     # =========================================================================
@@ -309,7 +346,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         facets: Sequence[str] | None = None,
         filters: Sequence[str] | None = None,
         range_filters: Sequence[str] | None = None,
-        sort: str | None = None,
+        sort: OdpSort | dict[str, Any] | None = None,
         limit: int = 25,
         offset: int = 0,
     ) -> PtabTrialDocumentResponse:
@@ -321,7 +358,8 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             facets: Fields to aggregate.
             filters: Filter expressions.
             range_filters: Range filter expressions.
-            sort: Sort expression.
+            sort: Sort directive as :class:`OdpSort` or dict
+                (``{"field": ..., "order": "asc"|"desc"}``).
             limit: Maximum results.
             offset: Results to skip.
 
@@ -403,12 +441,16 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         fields: Sequence[str] | None = None,
         filters: Sequence[str] | None = None,
         range_filters: Sequence[str] | None = None,
-        sort: str | None = None,
+        sort: OdpSort | dict[str, Any] | None = None,
         limit: int | None = None,
         offset: int | None = None,
         file_format: str | None = None,
     ) -> PtabTrialDocumentResponse:
-        """Download PTAB trial documents search results."""
+        """Download PTAB trial documents search results.
+
+        ``count`` is derived from the returned records since the download
+        endpoint omits it.
+        """
         payload: dict[str, Any] = {}
         if query:
             payload["q"] = query
@@ -419,7 +461,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
         if range_filters:
             payload["rangeFilters"] = list(range_filters)
         if sort:
-            payload["sort"] = sort
+            payload["sort"] = _serialize_model_list([sort])
         if limit is not None or offset is not None:
             pagination: dict[str, Any] = {}
             if offset is not None:
@@ -436,7 +478,7 @@ class PtabTrialsClient(UsptoOdpBaseClient):
             empty_bag_key="patentTrialDocumentDataBag",
             context="download trial documents",
         )
-        data.setdefault("patentTrialDocumentDataBag", [])
+        data = _normalize_download_bag(data, "patentTrialDocumentDataBag")
         return PtabTrialDocumentResponse.model_validate(data)
 
     # =========================================================================
