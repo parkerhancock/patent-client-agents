@@ -234,6 +234,27 @@ class TestPtabAppealsClient:
             assert isinstance(result.facets, dict)
 
     @pytest.mark.asyncio
+    async def test_search_with_sort(self, vcr_cassette, api_key) -> None:
+        """Search appeals with a dict-shaped sort directive.
+
+        Regression: the live API rejects string sort expressions, and the
+        client's serializer raises TypeError on them — sort must be an
+        OdpSort or a {"field", "order"} dict.
+        """
+        async with PtabAppealsClient(api_key=api_key) as client:
+            result = await client.search(
+                query="appellantData.technologyCenterNumber:2800",
+                sort={"field": "appealNumber", "order": "asc"},
+                limit=5,
+            )
+
+        assert result.count > 0
+        assert len(result.patentAppealDataBag) == 5
+        numbers = [a.appealNumber for a in result.patentAppealDataBag]
+        assert all(numbers)
+        assert numbers == sorted(numbers)
+
+    @pytest.mark.asyncio
     async def test_get_decisions_by_number(self, vcr_cassette, api_key) -> None:
         """Get decisions for a specific appeal number."""
         async with PtabAppealsClient(api_key=api_key) as client:
@@ -244,7 +265,13 @@ class TestPtabAppealsClient:
 
     @pytest.mark.asyncio
     async def test_download(self, vcr_cassette, api_key) -> None:
-        """Download appeal decisions search results."""
+        """Download appeal decisions search results.
+
+        Regression: the download endpoint keys its records as
+        ``patentTrialData`` (not ``patentAppealDataBag``) and omits
+        ``count``; before normalization the client silently returned an
+        empty bag for every real download.
+        """
         async with PtabAppealsClient(api_key=api_key) as client:
             result = await client.download(
                 query="appellantData.technologyCenterNumber:2800",
@@ -252,8 +279,11 @@ class TestPtabAppealsClient:
                 file_format="json",
             )
 
-        assert result.count >= 0
-        assert isinstance(result.patentAppealDataBag, list)
+        assert result.count == 5
+        assert len(result.patentAppealDataBag) == 5
+        appeal = result.patentAppealDataBag[0]
+        assert appeal.appealNumber
+        assert appeal.decisionData is not None
 
 
 class TestPtabInterferencesClient:
@@ -293,6 +323,27 @@ class TestPtabInterferencesClient:
         assert isinstance(result.patentInterferenceDataBag, list)
 
     @pytest.mark.asyncio
+    async def test_search_with_sort(self, vcr_cassette, api_key) -> None:
+        """Search interferences with a dict-shaped sort directive.
+
+        Regression: the live API rejects string sort expressions, and the
+        client's serializer raises TypeError on them — sort must be an
+        OdpSort or a {"field", "order"} dict.
+        """
+        async with PtabInterferencesClient(api_key=api_key) as client:
+            result = await client.search(
+                query="*",
+                sort={"field": "interferenceNumber", "order": "asc"},
+                limit=5,
+            )
+
+        assert result.count > 0
+        assert len(result.patentInterferenceDataBag) == 5
+        numbers = [i.interferenceNumber for i in result.patentInterferenceDataBag]
+        assert all(numbers)
+        assert numbers == sorted(numbers)
+
+    @pytest.mark.asyncio
     async def test_get_decisions_by_number(self, vcr_cassette, api_key) -> None:
         """Get decisions for a specific interference number."""
         async with PtabInterferencesClient(api_key=api_key) as client:
@@ -303,7 +354,13 @@ class TestPtabInterferencesClient:
 
     @pytest.mark.asyncio
     async def test_download(self, vcr_cassette, api_key) -> None:
-        """Download interference decisions search results."""
+        """Download interference decisions search results.
+
+        Regression: the download endpoint keys its records as
+        ``interferenceData`` (not ``patentInterferenceDataBag``) and omits
+        ``count``; before normalization the client silently returned an
+        empty bag for every real download.
+        """
         async with PtabInterferencesClient(api_key=api_key) as client:
             result = await client.download(
                 query="*",
@@ -311,8 +368,11 @@ class TestPtabInterferencesClient:
                 file_format="json",
             )
 
-        assert result.count >= 0
-        assert isinstance(result.patentInterferenceDataBag, list)
+        assert result.count == 5
+        assert len(result.patentInterferenceDataBag) == 5
+        interference = result.patentInterferenceDataBag[0]
+        assert interference.interferenceNumber
+        assert interference.documentData is not None
 
 
 class TestPtabModels:
@@ -360,10 +420,12 @@ class TestPtabModels:
 
 
 class TestPtabDownloadNormalization:
-    """No-network tests for the trials download envelope normalization.
+    """No-network tests for the PTAB download envelope normalization.
 
     Fixture payloads are trimmed from live /search/download captures
-    (2026-07-20): records arrive under ``patentTrialData`` with no ``count``.
+    (2026-07-20): records arrive under a flat key (``patentTrialData`` for
+    trials and appeals, ``interferenceData`` for interferences) with no
+    ``count``.
     """
 
     def test_proceedings_download_envelope(self) -> None:
@@ -439,9 +501,89 @@ class TestPtabDownloadNormalization:
             "patentTrialProceedingDataBag": [],
         }
 
+    def test_appeals_download_envelope(self) -> None:
+        from patent_client_agents.uspto_odp.clients.base import _normalize_download_bag
+        from patent_client_agents.uspto_odp.models import PtabAppealResponse
+
+        data = {
+            "patentTrialData": [
+                {
+                    "decisionData": {
+                        "decisionTypeCategory": "Decision",
+                        "appealOutcomeCategory": "Reversed",
+                        "decisionIssueDate": "2026-04-21",
+                    },
+                    "appealNumber": "2026000736",
+                    "appellantData": {
+                        "realPartyInInterestName": "Raytheon Company",
+                        "technologyCenterNumber": "2800",
+                        "applicationNumberText": "18354034",
+                    },
+                }
+            ]
+        }
+        result = PtabAppealResponse.model_validate(
+            _normalize_download_bag(data, "patentAppealDataBag")
+        )
+        assert result.count == 1
+        appeal = result.patentAppealDataBag[0]
+        assert appeal.appealNumber == "2026000736"
+        assert appeal.decisionData is not None
+        assert appeal.decisionData.appealOutcomeCategory == "Reversed"
+        assert appeal.appellantData is not None
+        assert appeal.appellantData.technologyCenterNumber == "2800"
+
+    def test_interferences_download_envelope(self) -> None:
+        from patent_client_agents.uspto_odp.clients.base import _normalize_download_bag
+        from patent_client_agents.uspto_odp.models import PtabInterferenceResponse
+
+        data = {
+            "interferenceData": [
+                {
+                    "interferenceNumber": "106130",
+                    "interferenceMetaData": {
+                        "interferenceStyleName": "KAPLAN v. CANI",
+                    },
+                    "documentData": {
+                        "decisionTypeCategory": "Decision",
+                        "decisionIssueDate": "2025-01-28",
+                        "interferenceOutcomeCategory": "Judgment",
+                    },
+                    "seniorPartyData": {
+                        "realPartyInInterestName": "UNIVERSITÉ CATHOLIQUE DE LOUVAIN",
+                        "applicationNumberText": "14443829",
+                    },
+                }
+            ]
+        }
+        result = PtabInterferenceResponse.model_validate(
+            _normalize_download_bag(
+                data, "patentInterferenceDataBag", records_key="interferenceData"
+            )
+        )
+        assert result.count == 1
+        interference = result.patentInterferenceDataBag[0]
+        assert interference.interferenceNumber == "106130"
+        assert interference.documentData is not None
+        assert interference.documentData.interferenceOutcomeCategory == "Judgment"
+        assert interference.seniorPartyData is not None
+        assert interference.seniorPartyData.applicationNumberText == "14443829"
+
     @pytest.mark.asyncio
     async def test_string_sort_raises_type_error(self) -> None:
         """A plain string sort is rejected client-side, never sent to the API."""
         async with PtabTrialsClient(api_key="test-key") as client:
             with pytest.raises(TypeError, match="Unsupported item type"):
                 await client.search_proceedings(sort="trialNumber asc", limit=5)  # type: ignore[arg-type]
+
+    @pytest.mark.asyncio
+    async def test_appeals_string_sort_raises_type_error(self) -> None:
+        async with PtabAppealsClient(api_key="test-key") as client:
+            with pytest.raises(TypeError, match="Unsupported item type"):
+                await client.search(sort="appealNumber asc", limit=5)  # type: ignore[arg-type]
+
+    @pytest.mark.asyncio
+    async def test_interferences_string_sort_raises_type_error(self) -> None:
+        async with PtabInterferencesClient(api_key="test-key") as client:
+            with pytest.raises(TypeError, match="Unsupported item type"):
+                await client.search(sort="interferenceNumber asc", limit=5)  # type: ignore[arg-type]

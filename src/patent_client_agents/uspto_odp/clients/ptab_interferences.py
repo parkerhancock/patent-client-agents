@@ -5,8 +5,15 @@ from __future__ import annotations
 from collections.abc import Sequence
 from typing import Any
 
-from ..models import PtabInterferenceResponse
-from .base import PaginationModel, SearchPayload, UsptoOdpBaseClient, _prune
+from ..models import OdpSort, PtabInterferenceResponse
+from .base import (
+    PaginationModel,
+    SearchPayload,
+    UsptoOdpBaseClient,
+    _normalize_download_bag,
+    _prune,
+    _serialize_model_list,
+)
 
 
 class PtabInterferencesClient(UsptoOdpBaseClient):
@@ -23,7 +30,7 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         facets: Sequence[str] | None = None,
         filters: Sequence[str] | None = None,
         range_filters: Sequence[str] | None = None,
-        sort: str | None = None,
+        sort: OdpSort | dict[str, Any] | None = None,
         limit: int = 25,
         offset: int = 0,
     ) -> PtabInterferenceResponse:
@@ -35,7 +42,9 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
             facets: Fields to aggregate.
             filters: Filter expressions.
             range_filters: Range filter expressions.
-            sort: Sort expression.
+            sort: Sort directive as :class:`OdpSort` or dict (e.g.,
+                ``{"field": "interferenceNumber", "order": "desc"}``).
+                The API rejects string expressions.
             limit: Maximum results.
             offset: Results to skip.
 
@@ -117,12 +126,16 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         fields: Sequence[str] | None = None,
         filters: Sequence[str] | None = None,
         range_filters: Sequence[str] | None = None,
-        sort: str | None = None,
+        sort: OdpSort | dict[str, Any] | None = None,
         limit: int | None = None,
         offset: int | None = None,
         file_format: str | None = None,
     ) -> PtabInterferenceResponse:
-        """Download PTAB interference decisions search results."""
+        """Download PTAB interference decisions search results.
+
+        ``count`` is derived from the returned records since the download
+        endpoint omits it.
+        """
         payload: dict[str, Any] = {}
         if query:
             payload["q"] = query
@@ -133,7 +146,9 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
         if range_filters:
             payload["rangeFilters"] = list(range_filters)
         if sort:
-            payload["sort"] = sort
+            # The API requires sort as a list of {field, order} objects; a
+            # bare object 400s (confirmed live 2026-07-20).
+            payload["sort"] = _serialize_model_list([sort])
         if limit is not None or offset is not None:
             pagination: dict[str, Any] = {}
             if offset is not None:
@@ -150,7 +165,9 @@ class PtabInterferencesClient(UsptoOdpBaseClient):
             empty_bag_key="patentInterferenceDataBag",
             context="download interferences",
         )
-        data.setdefault("patentInterferenceDataBag", [])
+        data = _normalize_download_bag(
+            data, "patentInterferenceDataBag", records_key="interferenceData"
+        )
         return PtabInterferenceResponse.model_validate(data)
 
 

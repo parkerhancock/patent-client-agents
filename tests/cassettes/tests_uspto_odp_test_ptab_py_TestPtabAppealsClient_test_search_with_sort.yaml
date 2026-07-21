@@ -1,0 +1,100 @@
+interactions:
+- request:
+    body: '{"q":"appellantData.technologyCenterNumber:2800","sort":[{"field":"appealNumber","order":"asc"}],"pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '133'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search
+  response:
+    body:
+      string: '{"count":13552,"requestIdentifier":"c07fa24b-0b73-4f1b-8e5a-61db3c008902","patentAppealDataBag":[{"appealNumber":"1994000166","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"0001-01-03","appealLastModifiedDateTime":"1997-12-19T00:00:00","appealLastModifiedDate":"1997-12-19","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/000166/1994000166.zip"},"appellantData":{"applicationNumberText":"07815316","counselName":"P.V.D.
+        WILDE","grantDate":"1999-03-09","groupArtUnitNumber":"2814","inventorName":"LEE
+        et al","realPartyInInterestName":"LEE et al","patentNumber":"5880022","patentOwnerName":"LEE
+        et al","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"1998-07-15","documentIdentifier":"199400016607815316Appeal1998-07-15-00:00:00","documentName":"1994000166_DECISION.pdf","documentSizeQuantity":20089,"documentOCRText":"D:JULY19~1FD940166.PDF\n\n\n
+        Application for patent filed December 30, 1991. 1\n\nTHIS OPINION WAS NOT
+        WRITTEN FOR PUBLICATION\n\nThe opinion in support of the decision being entered\ntoday
+        (1) was not written for publication in a law\njournal and (2) is not binding
+        precedent of the Board.\n\nPaper No. 13\n\nUNITED STATES PATENT AND TRADEMARK
+        OFFICE\n____________\n\nBEFORE THE BOARD OF PATENT APPEALS\nAND INTERFERENCES\n\n____________\n\nEx
+        parte KUO-HUA LEE and CHEN-HUA D. YU\n____________\n\nAppeal No. 94-0166\nApplication","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/000166/199400016607815316Appeal1998-07-15-00:00:00.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":[],"decisionIssueDate":"1998-07-15","decisionTypeCategory":"Decision","issueTypeBag":["112","103"]}},{"appealNumber":"1994000809","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"0001-01-03","appealLastModifiedDateTime":"1997-12-19T00:00:00","appealLastModifiedDate":"1997-12-19","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/000809/1994000809.zip"},"appellantData":{"applicationNumberText":"07707365","counselName":"JAMES
+        H.FOX","grantDate":"1999-03-09","groupArtUnitNumber":"2812","inventorName":"LEE
+        et al","realPartyInInterestName":"LEE et al","patentNumber":"5879997","patentOwnerName":"LEE
+        et al","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"1998-07-29","documentIdentifier":"199400080907707365Appeal1998-07-29-00:00:00","documentName":"1994000809_DECISION.pdf","documentSizeQuantity":21201,"documentOCRText":"D:JULY19~1FD940809.PDF\n\n\n      Application
+        for patent filed May 30, 1991.1\n\n- 1 -\n\nTHIS OPINION WAS NOT WRITTEN FOR
+        PUBLICATION\n\nThe opinion in support of the decision being entered today\n     (1)
+        was not written for publication in a law journal and\n     (2) is not binding
+        precedent of the Board.\n\nPaper No. 16\n\nUNITED STATES PATENT AND TRADEMARK
+        OFFICE\n\n____________\n\nBEFORE THE BOARD OF PATENT APPEALS\nAND INTERFERENCES\n\n____________\n\nEx
+        parte KUO-HUA LEE and JANMYE SUNG\n\n ____________\n\nAppeal No.","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/000809/199400080907707365Appeal1998-07-29-00:00:00.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"1998-07-29","decisionTypeCategory":"Decision","issueTypeBag":["103"]}},{"appealNumber":"1994000869","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"0001-01-03","appealLastModifiedDateTime":"1997-12-19T00:00:00","appealLastModifiedDate":"1997-12-19","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/000869/1994000869.zip"},"appellantData":{"applicationNumberText":"07517719","counselName":"BUCHANAN,
+        INGERSOLL & ROONEY PC","grantDate":"2000-08-22","groupArtUnitNumber":"2823","inventorName":"CHEVALLIER","realPartyInInterestName":"CHEVALLIER","patentNumber":"6107226","patentOwnerName":"CHEVALLIER","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"1999-04-30","documentIdentifier":"199400086907517719Appeal1999-04-30-00:00:00","documentName":"1994000869_DECISION.pdf","documentSizeQuantity":8767,"documentOCRText":"D:\\APRIL9~2\\RC940869.PDF\n\n\n  Application
+        for patent filed May 2, 1990.1\n\n-1-\n\nTHIS OPINION WAS NOT WRITTEN FOR
+        PUBLICATION\n\nThe opinion in support of the decision being entered\ntoday
+        (1) was not written for publication in a law\njournal and (2) is not binding
+        precedent of the Board.\n\nPaper No. 35\n\nUNITED STATES PATENT AND TRADEMARK
+        OFFICE\n\n________________\n\nBEFORE THE BOARD OF PATENT APPEALS\nAND INTERFERENCES\n________________\n\nEx
+        parte YVONICK CHEVALLIER\n________________\n\nAppeal No. 94-0869\nApplication","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/000869/199400086907517719Appeal1999-04-30-00:00:00.pdf"},"decisionData":{"appealOutcomeCategory":"Denied","statuteAndRuleBag":["37
+        CFR 1.192","37 CFR 1.196(b)","37 CFR 1.192(a)","37 CFR 1.196"],"decisionIssueDate":"1999-04-30","decisionTypeCategory":"Rehearing
+        Decision","issueTypeBag":["103"]}},{"appealNumber":"1994002080","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"0001-01-03","appealLastModifiedDateTime":"1997-12-19T00:00:00","appealLastModifiedDate":"1997-12-19","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/002080/1994002080.zip"},"appellantData":{"applicationNumberText":"07982068","counselName":"CUSHMAN,
+        DARBY AND CUSHMAN","grantDate":"1999-03-16","groupArtUnitNumber":"2814","inventorName":"UEDA
+        et al","realPartyInInterestName":"UEDA et al","patentNumber":"5883411","patentOwnerName":"UEDA
+        et al","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"1998-08-25","documentIdentifier":"199400208007982068Appeal1998-08-25-00:00:00","documentName":"1994002080_DECISION.pdf","documentSizeQuantity":27254,"documentOCRText":"D:AUGUST~1FD942080.PDF\n\n\n     Application
+        filed November 23, 1992.  According to Appellants this1\napplication is a
+        continuation of application no. 07/624,519, filed December 7,\n1990, which
+        is a continuation of application no. 07/518,328, filed May 5,\n1990, which
+        is a continuation of application no. 07/376,374, filed July 5,\n1989, which
+        is a divisional of application no. 07/122,603, filed November 18,\n1987, which
+        is a continuation of application no. 06/509,055, filed June 29,\n1983.\n\n     Administrative","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/002080/199400208007982068Appeal1998-08-25-00:00:00.pdf"},"decisionData":{"appealOutcomeCategory":"Reversed","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"1998-08-25","decisionTypeCategory":"Decision","issueTypeBag":["112","103"]}},{"appealNumber":"1994002414","appealDocumentCategory":"Decision","lastModifiedDateTime":"2026-02-26T10:59:15","appealMetaData":{"appealFilingDate":"1994-04-13","appealLastModifiedDateTime":"1997-12-19T00:00:00","appealLastModifiedDate":"1997-12-19","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/002414/1994002414.zip"},"appellantData":{"applicationNumberText":"07911504","counselName":"BANNER,
+        BIRCH, MCKIE & BECKETT","grantDate":"1999-01-19","groupArtUnitNumber":"2812","inventorName":"CHIENG
+        et al","realPartyInInterestName":"CHIENG et al","patentNumber":"5861110","patentOwnerName":"CHIENG
+        et al","technologyCenterNumber":"2800"},"documentData":{"documentFilingDate":"1997-08-12","documentIdentifier":"199400241407911504Appeal1997-08-12-00:00:00","documentName":"1994002414_DECISION.pdf","documentSizeQuantity":20158,"documentOCRText":"D:AUGUST97FD942414.PDF\n\n\n  Application
+        for patent filed July 10, 1992.  According to1\nappellants, this application
+        is a division of Application\n07/342,547 filed April 24, 1989, now U.S. Patent
+        No. 5,158,758\nissued October 27, 1992.\n\n1\n\nTHIS OPINION WAS NOT WRITTEN
+        FOR PUBLICATION\n\nThe opinion in support of the decision being entered today
+        (1)\nwas not written for publication in a law journal and (2) is not\nbinding
+        precedent of the Board.\n\nPaper No. 17\n\nUNITED STATES PATENT AND TRADEMARK
+        OFFICE\n___","documentTypeDescriptionText":"Paper","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/APP/1994/002414/199400241407911504Appeal1997-08-12-00:00:00.pdf"},"decisionData":{"appealOutcomeCategory":"Granted-In-Part","statuteAndRuleBag":["35
+        USC 134"],"decisionIssueDate":"1997-08-12","decisionTypeCategory":"Rehearing
+        Decision","issueTypeBag":["103"]}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '8826'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 01:57:18 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-6a5ed1fe-669b80c260bfac19088c4fb8;Parent=4b1157c1617e898f;Sampled=0;Lineage=2:a3758c6d:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - A1W_0FBVIAMFmoQ=
+      x-amzn-RequestId:
+      - c07fa24b-0b73-4f1b-8e5a-61db3c008902
+    status:
+      code: 200
+      message: OK
+version: 1

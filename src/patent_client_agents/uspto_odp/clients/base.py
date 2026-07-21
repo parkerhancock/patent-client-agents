@@ -93,6 +93,24 @@ def _serialize_model_list(items: Sequence[Any] | None) -> list[dict[str, Any]] |
     return serialized
 
 
+def _normalize_download_bag(
+    data: dict[str, Any], bag_key: str, records_key: str = "patentTrialData"
+) -> dict[str, Any]:
+    """Normalize a PTAB ``/search/download`` response to the search shape.
+
+    The download endpoints return records under a flat key and omit ``count``
+    (confirmed live 2026-07-20: trials and appeals use ``patentTrialData``,
+    interferences uses ``interferenceData``), unlike the search endpoints'
+    per-API ``*DataBag`` envelopes the response models expect.
+    """
+    records = data.pop(records_key, None)
+    if records is not None and bag_key not in data:
+        data[bag_key] = records
+    data.setdefault(bag_key, [])
+    data.setdefault("count", len(data[bag_key]))
+    return data
+
+
 # Sentinel lower bound for a range filter that only specifies valueTo — well
 # before any USPTO filing date.
 _RANGE_FILTER_EPOCH = "1776-01-01"
@@ -247,6 +265,7 @@ __all__ = [
     "_format_csv",
     "_format_bool",
     "_format_date",
+    "_normalize_download_bag",
     "_serialize_model_list",
     "_serialize_range_filters",
 ]

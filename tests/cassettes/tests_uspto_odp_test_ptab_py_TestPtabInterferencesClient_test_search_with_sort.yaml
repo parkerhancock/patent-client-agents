@@ -1,0 +1,90 @@
+interactions:
+- request:
+    body: '{"q":"*","sort":[{"field":"interferenceNumber","order":"asc"}],"pagination":{"offset":0,"limit":5}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '99'
+      content-type:
+      - application/json
+      host:
+      - api.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+      x-api-key:
+      - REDACTED
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/interferences/decisions/search
+  response:
+    body:
+      string: '{"count":1812,"requestIdentifier":"771ba722-6ff3-42a1-8bae-a7ebdfd1cf9d","patentInterferenceDataBag":[{"interferenceNumber":"101769","lastModifiedDateTime":"2025-12-12T17:18:56","interferenceMetaData":{"interferenceLastModifiedDateTime":"2006-02-08T00:00:00","interferenceLastModifiedDate":"2006-02-08","declarationDate":"1998-05-19","interferenceStyleName":"NGVALL","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/101769/101769.zip"},"seniorPartyData":{"applicationNumberText":"06175133","grantDate":"1983-03-08","groupArtUnitNumber":"1634","inventorName":"  NGVALL","patentNumber":"4376110","patentOwnerName":"  NGVALL","realPartyInInterestName":"  NGVALL","technologyCenterNumber":"1600"},"documentData":{"documentIdentifier":"b703ecd0d8175a6ec538be78d145b79f3f71012304656ef3d98053be","documentName":"ja101769","documentSizeQuantity":270363,"documentOCRText":"C:TEMPA769.PDF\n\n\nApplication
+        06/539,754, filed October 6, 1983.1\n\nPatent 4,376,110 issued March 8, 1983,
+        based on application 06/175,133 filed August 4, 1980.2\n\nTHIS OPINION WAS
+        NOT WRITTEN FOR PUBLICATION\n\nThe opinion in support of the decision being
+        entered today (1) was not written for publication in a\nlaw journal or reporter
+        and (2) is not binding precedent of the Board.\n\nFiled by: Merits Panel\nBox
+        Interference\nWashington, D.C. 20231\nTel: (703)308-9797\nFax: (703)308-7953\n\nPaper
+        365\n\nUNITED STATES","documentTitleText":"DECISION-101769","interferenceOutcomeCategory":"Final
+        Decision","decisionIssueDate":"1998-05-19","decisionTypeCategory":"Decision","issueTypeBag":["112"],"fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/101769/Intf608_10176906175133_895550400000.pdf","documentFilingDate":"1998-05-19"}},{"interferenceNumber":"101981","lastModifiedDateTime":"2025-12-12T17:18:56","interferenceMetaData":{"interferenceLastModifiedDateTime":"2006-02-08T00:00:00","interferenceLastModifiedDate":"2006-02-08","declarationDate":"1999-09-30","interferenceStyleName":"QADRI","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/101981/101981.zip"},"seniorPartyData":{"applicationNumberText":"07021229","grantDate":"2003-10-21","groupArtUnitNumber":"1751","inventorName":"  QADRI","patentNumber":"6635603","patentOwnerName":"  QADRI","realPartyInInterestName":"  QADRI","technologyCenterNumber":"1700"},"documentData":{"documentIdentifier":"0b79144278f83ec7628c3ae783cdc3446fdc00b598c49e39d64ddccc","documentName":"jd101981","documentSizeQuantity":236735,"documentOCRText":"Patent
+        Interference No\n\n\n1 Application 07/158,483, filed February 22, 1988.  Assignor
+        to Naval Research\nLaboratory. \n\n2 Application 07/024,653, filed March 11,
+        1987.  Assignor to IBM Corporation.\n\n3 Application 07/021,229, filed 03/03/87.
+        This application is a continuation-\nin-part of application 07/001,682, filed
+        January 9, now abandoned.  Assignor\nto Lucent Technologies, Inc.\n\nTHIS
+        OPINION WAS NOT WRITTEN FOR PUBLICATION\n\nThe opinion in support of the decision
+        being entered today (1) was\nnot written","documentTitleText":"DECISION-101981","interferenceOutcomeCategory":"Final
+        Decision","decisionIssueDate":"1999-09-30","decisionTypeCategory":"Decision","issueTypeBag":["112"],"fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/101981/Intf608_10198107021229_938664000000.pdf","documentFilingDate":"1999-09-30"}},{"interferenceNumber":"102407","lastModifiedDateTime":"2025-12-12T17:18:56","interferenceMetaData":{"interferenceLastModifiedDateTime":"2006-02-08T00:00:00","interferenceLastModifiedDate":"2006-02-08","declarationDate":"2000-09-27","interferenceStyleName":"CHADWICK","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/102407/102407.zip"},"seniorPartyData":{"applicationNumberText":"07158289","grantDate":"1989-10-31","groupArtUnitNumber":"2877","inventorName":"  CHADWICK","patentNumber":"4877326","patentOwnerName":"  CHADWICK","realPartyInInterestName":"  CHADWICK","technologyCenterNumber":"2800"},"documentData":{"documentIdentifier":"32165c3714272a660fc8f1e6d1730683637c9a0868a10a9d4e117880","documentName":"jd102407","documentSizeQuantity":7782,"documentOCRText":"JD102407.PDF\n\n\nThe
+        opinion in support of the decision being entered today was not written for
+        \npublication and is not binding precedent of the Board. \n \n\n   Paper No.
+        153 \n \n \n\nUNITED STATES PATENT AND TRADEMARK OFFICE \n________________
+        \n\n \nBEFORE THE BOARD OF PATENT APPEALS \n\nAND INTERFERENCES \n________________
+        \n\n \nCURT H. CHADWICK, ROBERT R. SHOLES, JOHN D. GREENE, \n\nFRANCIS D.
+        TUCKER III, MICHAEL E. FEIN, P.C. JANN, \nDAVID J. HARVEY and WILLIAM BELL
+        \n\n \nJunior Party,1 \n\n \nYIGAL KATZIR \n\n \nSenior","documentTitleText":"DECISION-102407","interferenceOutcomeCategory":"Final
+        Decision","decisionIssueDate":"2000-09-27","decisionTypeCategory":"Decision","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/102407/Intf608_10240707158289_970027200000.pdf","documentFilingDate":"2000-09-27"}},{"interferenceNumber":"102408","lastModifiedDateTime":"2025-12-12T17:18:56","interferenceMetaData":{"interferenceLastModifiedDateTime":"2006-02-08T00:00:00","interferenceLastModifiedDate":"2006-02-08","declarationDate":"2000-04-28","interferenceStyleName":"CHILD
+        V. CHILD","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/102408/102408.zip"},"seniorPartyData":{"applicationNumberText":"06770996","grantDate":"1998-03-08","groupArtUnitNumber":"1624","inventorName":"  CHILD","patentNumber":"4730069","patentOwnerName":"  CHILD","realPartyInInterestName":"  CHILD","technologyCenterNumber":"1600"},"juniorPartyData":{"applicationNumberText":"07358544","grantDate":"2001-08-28","groupArtUnitNumber":"1624","inventorName":"  CHILD","patentNumber":"6281365","patentOwnerName":"  CHILD","realPartyInInterestName":"  CHILD","technologyCenterNumber":"1600"},"documentData":{"documentIdentifier":"8710a64b6dae2eb762e32591b2c6ca33ec520e4805f66369bcda9302","documentName":"fd102408","documentSizeQuantity":54824,"documentOCRText":"E:\\FY2000~8\\APRIL2~5\\FD102408.PDF\n\n\nApplication
+        07/358,544, filed May 26, 1989.  Accorded the1\n\nbenefit of Application 06/824,404,
+        filed January 31, 1986, now\nU.S. Patent No. 4,880,790, issued November 14,
+        1989.  Assigned\nto American Cyanamid Company, Stamford, CT, A Corporation
+        of\nMaine.\n\nApplication 06/770,996, filed August 30, 1985, now U.S.2\n\nPatent
+        No. 4,730,069, issued March 8, 1988.  Accorded the\nbenefit of West German
+        Patent Application P 34 32 320.1, filed \n  September 3, 1984. Assigned","documentTitleText":"DECISION-102408","interferenceOutcomeCategory":"Final
+        Decision","decisionIssueDate":"2000-04-28","decisionTypeCategory":"Decision","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/102408/Intf608_10240806770996_956894400000.pdf","documentFilingDate":"2000-04-28"}},{"interferenceNumber":"102408","lastModifiedDateTime":"2025-12-12T17:18:56","interferenceMetaData":{"interferenceLastModifiedDateTime":"2006-02-08T00:00:00","interferenceLastModifiedDate":"2006-02-08","declarationDate":"2000-04-28","interferenceStyleName":"CHILD
+        V. CHILD","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/102408/102408.zip"},"seniorPartyData":{"applicationNumberText":"06770996","grantDate":"1998-03-08","groupArtUnitNumber":"1624","inventorName":"  CHILD","patentNumber":"4730069","patentOwnerName":"  CHILD","realPartyInInterestName":"  CHILD","technologyCenterNumber":"1600"},"juniorPartyData":{"applicationNumberText":"07358544","grantDate":"2001-08-28","groupArtUnitNumber":"1624","inventorName":"  CHILD","patentNumber":"6281365","patentOwnerName":"  CHILD","realPartyInInterestName":"  CHILD","technologyCenterNumber":"1600"},"documentData":{"documentIdentifier":"cff3eb1ced28b807af0171e704615b1747052067cdaf0e94933e0b0f","documentName":"fa102408","documentSizeQuantity":54824,"documentOCRText":"E:\\FY2000~8\\APRIL2~5\\FD102408.PDF\n\n\nApplication
+        07/358,544, filed May 26, 1989.  Accorded the1\n\nbenefit of Application 06/824,404,
+        filed January 31, 1986, now\nU.S. Patent No. 4,880,790, issued November 14,
+        1989.  Assigned\nto American Cyanamid Company, Stamford, CT, A Corporation
+        of\nMaine.\n\nApplication 06/770,996, filed August 30, 1985, now U.S.2\n\nPatent
+        No. 4,730,069, issued March 8, 1988.  Accorded the\nbenefit of West German
+        Patent Application P 34 32 320.1, filed \n  September 3, 1984. Assigned","documentTitleText":"DECISION-102408","interferenceOutcomeCategory":"Final
+        Decision","decisionIssueDate":"2000-04-28","decisionTypeCategory":"Decision","fileDownloadURI":"https://api.uspto.gov/api/v1/patent/ptab-files/INTF/102408/Intf608_10240807358544_956894400000.pdf","documentFilingDate":"2000-04-28"}}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '8748'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Jul 2026 01:57:19 GMT
+      X-Amzn-Trace-Id:
+      - Root=1-6a5ed1ff-384e6c381a702447333ac92b;Parent=2a64bae6f8c8504c;Sampled=0;Lineage=2:5fd89aa0:0
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - '*'
+      x-amz-apigw-id:
+      - A1XABHNeoAMFa0w=
+      x-amzn-RequestId:
+      - 771ba722-6ff3-42a1-8bae-a7ebdfd1cf9d
+    status:
+      code: 200
+      message: OK
+version: 1

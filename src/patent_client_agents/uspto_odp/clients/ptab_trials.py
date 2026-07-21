@@ -16,25 +16,10 @@ from .base import (
     PaginationModel,
     SearchPayload,
     UsptoOdpBaseClient,
+    _normalize_download_bag,
     _prune,
     _serialize_model_list,
 )
-
-
-def _normalize_download_bag(data: dict[str, Any], bag_key: str) -> dict[str, Any]:
-    """Normalize a trials ``/search/download`` response to the search shape.
-
-    The download endpoints return records under ``patentTrialData`` and omit
-    ``count`` (confirmed live against all three trial download endpoints,
-    2026-07-20), unlike the search endpoints' ``patentTrialProceedingDataBag``
-    / ``patentTrialDocumentDataBag`` envelopes the response models expect.
-    """
-    records = data.pop("patentTrialData", None)
-    if records is not None and bag_key not in data:
-        data[bag_key] = records
-    data.setdefault(bag_key, [])
-    data.setdefault("count", len(data[bag_key]))
-    return data
 
 
 class PtabTrialsClient(UsptoOdpBaseClient):
