@@ -179,9 +179,7 @@ async def _fetch_has_rej_102(
     response = await client.search_rejections(
         criteria, rows=min(len(application_numbers) * 5, 1000)
     )
-    return {
-        record.patent_application_number for record in response.results if record.has_rej_102
-    }
+    return {record.patent_application_number for record in response.results if record.has_rej_102}
 
 
 # Lucene-escape characters that have special meaning in Solr queries.
@@ -319,16 +317,13 @@ async def check_citation_hits(
     today = datetime.now(UTC).strftime("%Y-%m-%dT23:59:59")
     quoted = " OR ".join(f'"{patent_number}"' for patent_number in patent_numbers)
     criteria = (
-        f"citedDocumentIdentifier:({quoted}) "
-        f"AND officeActionDate:[{since}T00:00:00 TO {today}]"
+        f"citedDocumentIdentifier:({quoted}) AND officeActionDate:[{since}T00:00:00 TO {today}]"
     )
 
     async with OfficeActionClient() as client:
         response = await client.search_enriched_citations(criteria, rows=1000)
         examiner_cited = [
-            citation
-            for citation in response.results
-            if citation.examiner_cited_reference_indicator
+            citation for citation in response.results if citation.examiner_cited_reference_indicator
         ]
         section_102_applications = await _fetch_has_rej_102(
             client,

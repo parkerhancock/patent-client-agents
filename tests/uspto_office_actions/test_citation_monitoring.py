@@ -58,9 +58,7 @@ async def test_filters_to_examiner_citations_and_cross_checks_section_102(monkey
     client = _make_client(citation_response, rejection_response)
     monkeypatch.setattr(mod, "OfficeActionClient", MagicMock(return_value=client))
 
-    result = await mod.check_citation_hits(
-        patent_numbers=["US 10123456 B2"], since="2026-01-01"
-    )
+    result = await mod.check_citation_hits(patent_numbers=["US 10123456 B2"], since="2026-01-01")
 
     assert len(result.items) == 1
     assert result.items[0] == {
