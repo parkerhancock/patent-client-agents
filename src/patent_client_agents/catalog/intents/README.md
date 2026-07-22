@@ -23,6 +23,7 @@ Find records matching a query.
 | `search_applications` | US application metadata (ODP) | Lucene (ODP fields) |
 | `search_epo` | EPO OPS. `group_by="publication"\|"family"`. | CQL — see `get_epo_cql_help` |
 | `search_office_actions` | ODP office actions. `result_type` = `rejections` / `citations` / `text` / `enriched_citations`. | Lucene (type-specific fields) — see [office-actions.md](office-actions.md) |
+| `check_citation_hits` | New examiner citations of watched patents in third-party office actions since a date. | Normalized patent/publication identifiers + date |
 | `search_patent_assignments` | Assignment Center. `query` + `by` (assignee, assignor, correspondent, patent/application/publication number, reel/frame, etc.), with optional `executed_after/before` and `conveyance` filters. | See [assignments.md](assignments.md) |
 | `search_ptab` | ODP PTAB. `type` = `proceeding` / `trial_decision` / `trial_document` / `appeal_decision` / `interference_decision`. | See [ptab.md](ptab.md) |
 | `search_petitions` | ODP petitions | Query string |

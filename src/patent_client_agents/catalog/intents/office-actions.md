@@ -21,6 +21,20 @@ search_office_actions(
 ) -> dict
 ```
 
+For a stateless watched-patent workflow, use:
+
+```
+check_citation_hits(
+    patent_numbers=["US 10946800 B2", "WO-2017115695-A1"],
+    since="2026-01-01",
+) -> dict
+```
+
+It phrase-quotes each normalized citation identifier, filters to
+examiner-cited references, and reports whether each citing application also
+carries a §102 rejection. That §102 flag is application-level and does not
+prove the watched patent supplied the rejection basis.
+
 ## Result types
 
 | `result_type` | What you get | Key Lucene fields |

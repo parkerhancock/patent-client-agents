@@ -1,14 +1,16 @@
 """USPTO Office Action MCP tools.
 
 Search USPTO office action rejections, citations, full text, and enriched
-citation metadata. Also fetch a single office action's full content by its
-stable document identifier. Backed by the USPTO ODP office action endpoints
-on ``api.uspto.gov`` (X-API-KEY auth).
+citation metadata; monitor watched patents for new examiner citations; and
+fetch a single office action's full content by its stable document identifier.
+Backed by the USPTO ODP office action endpoints on ``api.uspto.gov``
+(X-API-KEY auth).
 """
 
 from __future__ import annotations
 
 import asyncio
+from datetime import UTC, datetime
 from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
@@ -155,6 +157,33 @@ def _summarize_office_action(record: dict) -> str:
     return f"{head}\n{line}"
 
 
+def _summarize_citation_hits(hits: list[dict[str, Any]], watched: list[str]) -> str:
+    if not hits:
+        return f"No new citation hits for {len(watched)} watched patent(s)."
+    cited = {hit["cited_patent"] for hit in hits}
+    with_102 = sum(1 for hit in hits if hit["citing_app_has_section_102"])
+    return (
+        f"{len(hits)} new citation(s) against {len(cited)} of {len(watched)} watched patent(s); "
+        f"in {with_102}, the citing application also carries a §102 rejection "
+        "(application-level — not necessarily based on the watched patent)."
+    )
+
+
+async def _fetch_has_rej_102(
+    client: OfficeActionClient, application_numbers: list[str]
+) -> set[str]:
+    """Return applications that carry a §102 rejection anywhere on record."""
+    if not application_numbers:
+        return set()
+    criteria = "patentApplicationNumber:(" + " OR ".join(application_numbers) + ")"
+    response = await client.search_rejections(
+        criteria, rows=min(len(application_numbers) * 5, 1000)
+    )
+    return {
+        record.patent_application_number for record in response.results if record.has_rej_102
+    }
+
+
 # Lucene-escape characters that have special meaning in Solr queries.
 # Conservative list — sufficient for the alphanumeric document IDs USPTO
 # emits, but defensive against any caller-supplied string.
@@ -256,6 +285,73 @@ async def search_office_actions(
         more_available=more,
         next_cursor=next_cursor,
         provenance=_office_actions_provenance(_DATASET_PATHS[rt]),
+    )
+
+
+@office_actions_mcp.tool(annotations=READ_ONLY)
+async def check_citation_hits(
+    patent_numbers: Annotated[
+        list[str],
+        "Patent or publication numbers to watch in the USPTO citation index's normalized "
+        "format, such as 'US 10946800 B2', 'US 20210274425 A1', or "
+        "'WO-2017115695-A1'. Bare numbers such as '10946800' do not match reliably; obtain "
+        "the normalized form from get_patent or get_application first if needed.",
+    ],
+    since: Annotated[str, "Only report office actions dated on or after this date (YYYY-MM-DD)."],
+) -> ListEnvelope[dict]:
+    """Find new examiner citations of watched patents in third-party office actions.
+
+    This is the stateless portfolio-monitoring workflow formerly exposed by
+    patent-prosecution-analytics. The caller supplies the watchlist and the date
+    of its last check; no watchlist is stored. Each hit reports the watched
+    patent, citing application, and office-action date.
+
+    ``citing_app_has_section_102`` is an application-level screening flag. It
+    means the citing application has a §102 rejection somewhere in its
+    prosecution; the USPTO citation dataset does not identify which reference
+    supplied that rejection, so it does not prove that the watched patent was
+    the §102 basis.
+
+    USPTO office-action data starts in October 2017 and generally trails current
+    activity by about 30 days. Related tools: search_office_actions,
+    get_application, get_patent.
+    """
+    today = datetime.now(UTC).strftime("%Y-%m-%dT23:59:59")
+    quoted = " OR ".join(f'"{patent_number}"' for patent_number in patent_numbers)
+    criteria = (
+        f"citedDocumentIdentifier:({quoted}) "
+        f"AND officeActionDate:[{since}T00:00:00 TO {today}]"
+    )
+
+    async with OfficeActionClient() as client:
+        response = await client.search_enriched_citations(criteria, rows=1000)
+        examiner_cited = [
+            citation
+            for citation in response.results
+            if citation.examiner_cited_reference_indicator
+        ]
+        section_102_applications = await _fetch_has_rej_102(
+            client,
+            [citation.patent_application_number for citation in examiner_cited],
+        )
+
+    hits = [
+        {
+            "cited_patent": citation.cited_document_identifier,
+            "citing_application": citation.patent_application_number,
+            "office_action_date": citation.office_action_date,
+            "citing_app_has_section_102": (
+                citation.patent_application_number in section_102_applications
+            ),
+        }
+        for citation in examiner_cited
+    ]
+
+    return ListEnvelope[dict](
+        summary=_summarize_citation_hits(hits, patent_numbers),
+        items=hits,
+        more_available=response.num_found > len(response.results),
+        provenance=_office_actions_provenance(_DATASET_PATHS["enriched_citations"]),
     )
 
 
