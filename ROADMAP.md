@@ -80,7 +80,7 @@ uv run --frozen ty check src/
 - [x] Run all lint, format, type, manifest, tool-count, and documentation gates.
 - [x] Build both wheel and source distributions outside the working tree.
 - [x] Review the final diff for unrelated changes and credential material.
-- [ ] Push each completed milestone as a separate commit and open a draft pull
+- [x] Push each completed milestone as a separate commit and open a draft pull
   request against `main`.
 
 Final acceptance checks:
