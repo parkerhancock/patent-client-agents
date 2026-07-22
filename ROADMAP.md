@@ -76,10 +76,10 @@ uv run --frozen ty check src/
 
 ## Milestone 4: Prove release readiness
 
-- [ ] Run the full offline test suite with the configured coverage floor.
-- [ ] Run all lint, format, type, manifest, tool-count, and documentation gates.
-- [ ] Build both wheel and source distributions outside the working tree.
-- [ ] Review the final diff for unrelated changes and credential material.
+- [x] Run the full offline test suite with the configured coverage floor.
+- [x] Run all lint, format, type, manifest, tool-count, and documentation gates.
+- [x] Build both wheel and source distributions outside the working tree.
+- [x] Review the final diff for unrelated changes and credential material.
 - [ ] Push each completed milestone as a separate commit and open a draft pull
   request against `main`.
 
