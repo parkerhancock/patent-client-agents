@@ -20,11 +20,11 @@ without refactoring product code or expanding the public API.
 
 ## Milestone 1: Restore every existing CI gate
 
-- [ ] Preserve and verify the corrected retry-behavior tests.
-- [ ] Preserve and verify the refreshed UKIPO coverage metadata and generated
+- [x] Preserve and verify the corrected retry-behavior tests.
+- [x] Preserve and verify the refreshed UKIPO coverage metadata and generated
   atlas files.
-- [ ] Replace stale MCP tool counts in user documentation and plugin metadata.
-- [ ] Confirm the generated counts remain 112 default and 169 fully configured.
+- [x] Replace stale MCP tool counts in user documentation and plugin metadata.
+- [x] Confirm the generated counts remain 112 default and 169 fully configured.
 
 Acceptance checks:
 

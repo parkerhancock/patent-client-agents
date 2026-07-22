@@ -703,13 +703,13 @@ sources:
     status: active
     connector:
       module: patent_client_agents.ukipo_mopp
-    last_verified: 2026-05-15
+    last_verified: 2026-07-21
     category: substantive_law
     transport: mcp_local
     update_strategy: scheduled_recrawl
     update_cadence: monthly
-    last_synced: 2026-05-15
-    corpus_version: "unknown — needs verification"
+    last_synced: 2026-07-21
+    corpus_version: "snapshot-2026-07-21"
 
   # ────────────────────────────────────────────────────────────────────
   # UPC — Unified Patent Court statutes

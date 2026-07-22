@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-21T17:04:30+00:00",
+  "generated_at": "2026-07-21T02:16:29+00:00",
   "schema_version": 1,
   "summary": {
     "total": 85,
@@ -1514,13 +1514,13 @@
       "connector": {
         "module": "patent_client_agents.ukipo_mopp"
       },
-      "last_verified": "2026-05-15",
+      "last_verified": "2026-07-21",
       "category": "substantive_law",
       "transport": "mcp_local",
       "update_strategy": "scheduled_recrawl",
       "update_cadence": "monthly",
-      "last_synced": "2026-05-15",
-      "corpus_version": "unknown \u2014 needs verification"
+      "last_synced": "2026-07-21",
+      "corpus_version": "snapshot-2026-07-21"
     },
     {
       "id": "UPC/UPC/Statutes",
