@@ -24,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 
 - Refreshed bundled fee snapshots through 2026-07-21.
+- Pinned GitHub Actions and uv versions, added Dependabot and Gitleaks
+  automation, aligned the pre-commit Ruff version, and required release tags to
+  point to commits contained in `main`.
 
 ## [0.24.0] — 2026-07-28
 

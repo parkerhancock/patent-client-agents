@@ -52,15 +52,17 @@ uv run --frozen python scripts/mcp_tool_counts.py --check-docs
 
 ## Milestone 3: Harden CI, dependency, and release controls
 
-- [ ] Align the Ruff pre-commit revision with the locked Ruff version.
-- [ ] Pin the uv version used by GitHub Actions and require locked dependency
-  synchronization.
-- [ ] Pin third-party GitHub Actions to immutable commit SHAs while retaining
+- [x] Align the Ruff pre-commit revision with the locked Ruff version.
+- [x] Pin the uv version used by GitHub Actions. Retain the documented
+  `UV_NO_SOURCES=1` standalone-resolution mode because uv does not permit
+  combining `--no-sources` with `--frozen`, and the monorepo source override
+  intentionally differs from the published dependency source.
+- [x] Pin third-party GitHub Actions to immutable commit SHAs while retaining
   readable version comments.
-- [ ] Triage the current Gitleaks findings and add an automated secret-scanning
+- [x] Triage the current Gitleaks findings and add an automated secret-scanning
   CI gate without weakening the configured detector globally.
-- [ ] Add Dependabot configuration for Python packages and GitHub Actions.
-- [ ] Require publish tags to resolve to commits contained in `main` before the
+- [x] Add Dependabot configuration for Python packages and GitHub Actions.
+- [x] Require publish tags to resolve to commits contained in `main` before the
   PyPI workflow can proceed.
 
 Acceptance checks:
