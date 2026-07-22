@@ -36,11 +36,11 @@ uv run --frozen python scripts/mcp_tool_counts.py --check-docs
 
 ## Milestone 2: Repair release and contributor documentation
 
-- [ ] Bring `CHANGELOG.md` through version 0.22.0 and record post-release work
+- [x] Bring `CHANGELOG.md` through version 0.22.0 and record post-release work
   under `Unreleased`.
-- [ ] Correct the installation-mode count and the documented Starlette minimum.
-- [ ] Add concise contribution and security-reporting guidance.
-- [ ] Ensure public setup, test, release, and credential-scrubbing instructions
+- [x] Correct the installation-mode count and the documented Starlette minimum.
+- [x] Add concise contribution and security-reporting guidance.
+- [x] Ensure public setup, test, release, and credential-scrubbing instructions
   agree with repository automation.
 
 Acceptance checks:

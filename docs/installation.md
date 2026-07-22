@@ -1,6 +1,6 @@
 # Installing `patent-client-agents`
 
-`patent-client-agents` covers seven install modes. Pick the one that
+`patent-client-agents` covers six install modes. Pick the one that
 matches how you're going to use it:
 
 | Mode | You want to... | Section |
@@ -110,7 +110,7 @@ Python script.
 pip install 'patent-client-agents[mcp]'
 ```
 
-The `[mcp]` extra pulls `fastmcp>=3.2.3` and `starlette>=0.37` on top
+The `[mcp]` extra pulls `fastmcp>=3.2.3` and `starlette>=1.0.1` on top
 of the base dependencies.
 
 ### What you get

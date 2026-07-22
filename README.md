@@ -524,9 +524,10 @@ No API key required, but requires a one-time corpus build —
 ```bash
 git clone https://github.com/parkerhancock/patent-client-agents.git
 cd patent-client-agents
-uv sync --group dev
+uv sync --frozen --all-extras --group dev
 uv run pytest                       # Replay VCR cassettes and offline fixtures
-uv run ruff check . && uv run ruff format .
+uv run ruff check .
+uv run ruff format --check .
 ```
 
 Tests use [vcrpy](https://vcrpy.readthedocs.io) to replay recorded HTTP interactions
@@ -545,6 +546,11 @@ API errors follow a log-first pattern — concise messages with a path to
 The shared HTTP scaffolding (`BaseAsyncClient`, cache, exceptions, retry,
 logging, response envelopes, and MCP server helpers) now lives in the
 separate `mcp-data-core` package.
+
+See the [contribution guide](https://github.com/parkerhancock/patent-client-agents/blob/main/CONTRIBUTING.md)
+for the complete validation, cassette, and release workflow. Report security
+issues privately as described in the
+[security policy](https://github.com/parkerhancock/patent-client-agents/blob/main/SECURITY.md).
 
 ## Related
 
