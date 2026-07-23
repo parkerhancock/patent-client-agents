@@ -68,7 +68,7 @@
   "key": "WO/WIPO-PCT/patent",
   "notes": "PCT international fees paid to the WIPO International Bureau, in CHF. Per-RO transmittal and search fees are NOT covered here \u2014 those vary by Receiving Office and ISA and are documented in the PCT Fee Tables PDF. v1 covers the three universal IB fees: international filing, supplementary search handling, and handling. E-filing reductions (CHF 100/200/300) and 90% applicant-type reductions are documented in the source page but not expanded as separate FeeItem rows in v1.",
   "office_code": "WIPO-PCT",
-  "retrieved_at": "2026-07-21",
+  "retrieved_at": "2026-07-23",
   "right": "patent",
   "source_url": "https://www.wipo.int/en/web/pct-system/texts/rules/rtax",
   "statutory_basis": "Schedule of Fees annexed to the Regulations under the Patent Cooperation Treaty (PCT)."

@@ -788,7 +788,7 @@
   "key": "MX/IMPI/design",
   "notes": "Article 9f (filing), 9g (grant + first 5 years), 11 (renewal, 5-year periods), 12b (rehabilitation). Renewal FeeItems carry year=5 (each renewal covers one 5-year period; LFPPI design term is 25 years total = initial 5 + four 5-year renewals). Disposici\u00f3n Cuarta 50% reduction emits as a duplicate EntityTier.small FeeItem on every eligible row.",
   "office_code": "IMPI",
-  "retrieved_at": "2026-07-21",
+  "retrieved_at": "2026-07-23",
   "right": "design",
   "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
   "statutory_basis": "Ley Federal de Protecci\u00f3n a la Propiedad Industrial (LFPPI), DOF 2020-07-01 (codigo=5596010), in force 2021-11-05. Tariff Acuerdo: original DOF 1995-08-23, last reform DOF 2023-05-12; March 2024 indigenous-waiver amendment at https://www.dof.gob.mx/nota_detalle.php?codigo=5720420&fecha=15/03/2024."
