@@ -1338,7 +1338,7 @@
   "key": "ES/OEPM/trademark",
   "notes": "Scraped from OEPM's consolidated TASAS y PRECIOS P\u00daBLICOS PDF (670 KB / 17 pages, stamped 'Actualizado a fecha: 1 de abril de 2026'). Each fee row in the dual-channel sections emits one FeeItem; the 2nd character of the code marks the filing channel (T = paper, E = electronic) and is also flagged on paper rows via FeeCondition(trigger=paper_filing). Applicant tier maps as follows: IT/IE/MT/ME/DT/DE/CM/CI/ET/CP/I3/I5 \u2192 EntityTier.large; YT/YE/UT/UE/I7/I8 \u2192 EntityTier.small (PYMES + public-university 50% reduction under Ley 24/2015 art. 186). v1 GAPS: patent annuities (page 6 IP/2P/5P \u00d7 IR/2R/5R \u00d7 YP/Y2/Y5 \u00d7 UP/U2/U5), design renewal table (page 13 DT41/D241/D541), PCT international fees (pages 8-9), and precios p\u00fablicos (pages 16-17) ship as separate column structures and are not captured. Trademarks: per-class structure \u2014 first class on the MT17/ME17 row, each subsequent class on MT18/ME18 at the reduced sub-rate. PAGO M\u00c1XIMO (MX15/XM10) caps the total payable on high-multi-class filings.",
   "office_code": "OEPM",
-  "retrieved_at": "2026-07-23",
+  "retrieved_at": "2026-07-24",
   "right": "trademark",
   "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf",
   "statutory_basis": "Ley 17/2001 de Marcas (Annex); year-over-year amounts adjusted by the annual Ley de Presupuestos Generales del Estado."

@@ -1,20 +1,12 @@
 {
   "failures": [
     {
+      "office_code": "CIPO",
+      "right": "patent"
+    },
+    {
       "office_code": "DPMA",
       "right": "patent"
-    },
-    {
-      "office_code": "KIPO",
-      "right": "patent"
-    },
-    {
-      "office_code": "KIPO",
-      "right": "trademark"
-    },
-    {
-      "office_code": "KIPO",
-      "right": "design"
     },
     {
       "office_code": "JPO",
@@ -34,7 +26,6 @@
     }
   ],
   "offices_covered": [
-    "CIPO",
     "CNIPA",
     "EPO",
     "EUIPO",
@@ -46,6 +37,7 @@
     "IPAU",
     "IPIN",
     "IPOS",
+    "KIPO",
     "OEPM",
     "PRH",
     "PRV",
@@ -66,7 +58,7 @@
       "issuing_body": "U.S. Patent and Trademark Office",
       "jurisdiction": "US",
       "office_code": "USPTO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
     },
@@ -78,7 +70,7 @@
       "issuing_body": "U.S. Patent and Trademark Office",
       "jurisdiction": "US",
       "office_code": "USPTO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
     },
@@ -90,31 +82,31 @@
       "issuing_body": "U.S. Patent and Trademark Office",
       "jurisdiction": "US",
       "office_code": "USPTO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
     },
     {
       "currency": "EUR",
       "days_since_retrieval": 0,
-      "effective_date": "2026-07-23",
+      "effective_date": "2026-07-24",
       "fee_count": 153,
       "issuing_body": "European Patent Office",
       "jurisdiction": "EP",
       "office_code": "EPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.epo.org/en/applying/fees"
     },
     {
       "currency": "EUR",
       "days_since_retrieval": 0,
-      "effective_date": "2026-07-23",
+      "effective_date": "2026-07-24",
       "fee_count": 45,
       "issuing_body": "European Union Intellectual Property Office",
       "jurisdiction": "EP",
       "office_code": "EUIPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo"
     },
@@ -126,33 +118,57 @@
       "issuing_body": "European Union Intellectual Property Office",
       "jurisdiction": "EP",
       "office_code": "EUIPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.euipo.europa.eu/en/designs/before-applying/fees-payable-direct-to-the-euipo"
     },
     {
       "currency": "CNY",
       "days_since_retrieval": 0,
-      "effective_date": "2026-07-23",
+      "effective_date": "2026-07-24",
       "fee_count": 48,
       "issuing_body": "China National Intellectual Property Administration",
       "jurisdiction": "CN",
       "office_code": "CNIPA",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html"
     },
     {
-      "currency": "CAD",
+      "currency": "KRW",
       "days_since_retrieval": 0,
-      "effective_date": "2026-01-01",
-      "fee_count": 84,
-      "issuing_body": "Canadian Intellectual Property Office",
-      "jurisdiction": "CA",
-      "office_code": "CIPO",
-      "retrieved_at": "2026-07-23",
+      "effective_date": "2023-08-01",
+      "fee_count": 40,
+      "issuing_body": "Korean Intellectual Property Office",
+      "jurisdiction": "KR",
+      "office_code": "KIPO",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
-      "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html"
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01"
+    },
+    {
+      "currency": "KRW",
+      "days_since_retrieval": 0,
+      "effective_date": "2023-08-01",
+      "fee_count": 24,
+      "issuing_body": "Korean Intellectual Property Office",
+      "jurisdiction": "KR",
+      "office_code": "KIPO",
+      "retrieved_at": "2026-07-24",
+      "right": "trademark",
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01"
+    },
+    {
+      "currency": "KRW",
+      "days_since_retrieval": 0,
+      "effective_date": "2023-08-01",
+      "fee_count": 58,
+      "issuing_body": "Korean Intellectual Property Office",
+      "jurisdiction": "KR",
+      "office_code": "KIPO",
+      "retrieved_at": "2026-07-24",
+      "right": "design",
+      "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01"
     },
     {
       "currency": "AUD",
@@ -162,7 +178,7 @@
       "issuing_body": "IP Australia",
       "jurisdiction": "AU",
       "office_code": "IPAU",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees"
     },
@@ -174,7 +190,7 @@
       "issuing_body": "UK Intellectual Property Office",
       "jurisdiction": "GB",
       "office_code": "UKIPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.gov.uk/government/publications/patent-forms-and-fees"
     },
@@ -186,7 +202,7 @@
       "issuing_body": "UK Intellectual Property Office",
       "jurisdiction": "GB",
       "office_code": "UKIPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees"
     },
@@ -198,7 +214,7 @@
       "issuing_body": "Office of the Controller General of Patents, Designs and Trade Marks (CGPDTM)",
       "jurisdiction": "IN",
       "office_code": "IPIN",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf"
     },
@@ -210,7 +226,7 @@
       "issuing_body": "Taiwan Intellectual Property Office",
       "jurisdiction": "TW",
       "office_code": "TIPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.tipo.gov.tw/en/tipo2/326.html"
     },
@@ -222,7 +238,7 @@
       "issuing_body": "Taiwan Intellectual Property Office",
       "jurisdiction": "TW",
       "office_code": "TIPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.tipo.gov.tw/en/tipo2/342.html"
     },
@@ -234,7 +250,7 @@
       "issuing_body": "Instituto Nacional da Propriedade Industrial (INPI)",
       "jurisdiction": "BR",
       "office_code": "INPI-BR",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-patents.pdf"
     },
@@ -246,7 +262,7 @@
       "issuing_body": "Instituto Nacional da Propriedade Industrial (INPI)",
       "jurisdiction": "BR",
       "office_code": "INPI-BR",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf"
     },
@@ -258,7 +274,7 @@
       "issuing_body": "Institut National de la Propri\u00e9t\u00e9 Industrielle (INPI)",
       "jurisdiction": "FR",
       "office_code": "INPI-FR",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi"
     },
@@ -270,7 +286,7 @@
       "issuing_body": "Institut National de la Propri\u00e9t\u00e9 Industrielle (INPI)",
       "jurisdiction": "FR",
       "office_code": "INPI-FR",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi"
     },
@@ -282,7 +298,7 @@
       "issuing_body": "Oficina Espa\u00f1ola de Patentes y Marcas (OEPM)",
       "jurisdiction": "ES",
       "office_code": "OEPM",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf"
     },
@@ -294,7 +310,7 @@
       "issuing_body": "Oficina Espa\u00f1ola de Patentes y Marcas (OEPM)",
       "jurisdiction": "ES",
       "office_code": "OEPM",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf"
     },
@@ -306,7 +322,7 @@
       "issuing_body": "Oficina Espa\u00f1ola de Patentes y Marcas (OEPM)",
       "jurisdiction": "ES",
       "office_code": "OEPM",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf"
     },
@@ -318,7 +334,7 @@
       "issuing_body": "Intellectual Property Department",
       "jurisdiction": "HK",
       "office_code": "HKIPD",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.ipd.gov.hk/en/patents/forms-and-fees/index.html"
     },
@@ -330,7 +346,7 @@
       "issuing_body": "Intellectual Property Department",
       "jurisdiction": "HK",
       "office_code": "HKIPD",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.ipd.gov.hk/en/trade-marks/forms-and-fees/index.html"
     },
@@ -342,7 +358,7 @@
       "issuing_body": "Intellectual Property Department",
       "jurisdiction": "HK",
       "office_code": "HKIPD",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html"
     },
@@ -354,7 +370,7 @@
       "issuing_body": "Israel Patent Office",
       "jurisdiction": "IL",
       "office_code": "ILPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf"
     },
@@ -366,7 +382,7 @@
       "issuing_body": "Israel Patent Office",
       "jurisdiction": "IL",
       "office_code": "ILPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf"
     },
@@ -378,7 +394,7 @@
       "issuing_body": "Israel Patent Office",
       "jurisdiction": "IL",
       "office_code": "ILPO",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf"
     },
@@ -390,7 +406,7 @@
       "issuing_body": "Instituto Mexicano de la Propiedad Industrial (IMPI)",
       "jurisdiction": "MX",
       "office_code": "IMPI",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf"
     },
@@ -402,7 +418,7 @@
       "issuing_body": "Instituto Mexicano de la Propiedad Industrial (IMPI)",
       "jurisdiction": "MX",
       "office_code": "IMPI",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf"
     },
@@ -414,7 +430,7 @@
       "issuing_body": "Instituto Mexicano de la Propiedad Industrial (IMPI)",
       "jurisdiction": "MX",
       "office_code": "IMPI",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf"
     },
@@ -426,7 +442,7 @@
       "issuing_body": "Intellectual Property Office of Singapore (IPOS)",
       "jurisdiction": "SG",
       "office_code": "IPOS",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/"
     },
@@ -438,7 +454,7 @@
       "issuing_body": "Intellectual Property Office of Singapore (IPOS)",
       "jurisdiction": "SG",
       "office_code": "IPOS",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/"
     },
@@ -450,7 +466,7 @@
       "issuing_body": "Intellectual Property Office of Singapore (IPOS)",
       "jurisdiction": "SG",
       "office_code": "IPOS",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.ipos.gov.sg/about-ip/designs/forms-and-fees/"
     },
@@ -462,7 +478,7 @@
       "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
       "jurisdiction": "TR",
       "office_code": "TURKPATENT",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri"
     },
@@ -474,7 +490,7 @@
       "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
       "jurisdiction": "TR",
       "office_code": "TURKPATENT",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.turkpatent.gov.tr/marka-islem-ucretleri"
     },
@@ -486,7 +502,7 @@
       "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
       "jurisdiction": "TR",
       "office_code": "TURKPATENT",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.turkpatent.gov.tr/tasarim-islem-ucretleri"
     },
@@ -498,7 +514,7 @@
       "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
       "jurisdiction": "FI",
       "office_code": "PRH",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html"
     },
@@ -510,7 +526,7 @@
       "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
       "jurisdiction": "FI",
       "office_code": "PRH",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.prh.fi/en/price-lists/trademark_fees.html"
     },
@@ -522,7 +538,7 @@
       "issuing_body": "Patentti- ja rekisterihallitus (PRH)",
       "jurisdiction": "FI",
       "office_code": "PRH",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.prh.fi/en/price-lists/hinnasto_2.html"
     },
@@ -534,7 +550,7 @@
       "issuing_body": "Patent- och registreringsverket (PRV)",
       "jurisdiction": "SE",
       "office_code": "PRV",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.prv.se/en/patents/the-advanced-patent-guide/fees-and-payment/"
     },
@@ -546,7 +562,7 @@
       "issuing_body": "Patent- och registreringsverket (PRV)",
       "jurisdiction": "SE",
       "office_code": "PRV",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.prv.se/en/trademarks/prepare-for-the-trademark-application/fees-and-payment/"
     },
@@ -558,7 +574,7 @@
       "issuing_body": "Patent- och registreringsverket (PRV)",
       "jurisdiction": "SE",
       "office_code": "PRV",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.prv.se/en/designs/prepare-for-the-design-application/fees-for-designs/"
     },
@@ -570,7 +586,7 @@
       "issuing_body": "World Intellectual Property Organization (WIPO) \u2014 International Bureau",
       "jurisdiction": "WO",
       "office_code": "WIPO-PCT",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "patent",
       "source_url": "https://www.wipo.int/en/web/pct-system/texts/rules/rtax"
     },
@@ -582,7 +598,7 @@
       "issuing_body": "World Intellectual Property Organization (WIPO) \u2014 International Bureau",
       "jurisdiction": "WO",
       "office_code": "WIPO-MADRID",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "trademark",
       "source_url": "https://www.wipo.int/en/web/madrid-system/fees/sched"
     },
@@ -594,11 +610,11 @@
       "issuing_body": "World Intellectual Property Organization (WIPO) \u2014 International Bureau",
       "jurisdiction": "WO",
       "office_code": "WIPO-HAGUE",
-      "retrieved_at": "2026-07-23",
+      "retrieved_at": "2026-07-24",
       "right": "design",
       "source_url": "https://www.wipo.int/hague/en/fees/sched.html"
     }
   ],
   "schema_version": 1,
-  "total_schedules": 45
+  "total_schedules": 47
 }
