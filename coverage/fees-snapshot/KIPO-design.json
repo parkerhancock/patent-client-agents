@@ -878,7 +878,7 @@
   "key": "KR/KIPO/design",
   "notes": "KIPO publishes design fees in KRW with electronic + paper rate variants \u2014 both emit as separate FeeItems. The Annual Fee table packs multiple year-bands into one row (``a. 1 to 3 years`` ... ``e. 13 to 20 years``) with one amount per band in the fee cell; the parser expands each band into per-year ``FeeCategory.renewal`` FeeItems with year=N (1..20). Partial-substantive-examination annuity track and substantive-examination annuity track emit as separate rows (description prefix disambiguates the slug). Design term is 20 years from filing (Design Protection Act \u00a791). KIPO entity discounts (SME / micro / individual refunds) live in a separate post-payment program and are NOT on this schedule.",
   "office_code": "KIPO",
-  "retrieved_at": "2026-07-24",
+  "retrieved_at": "2026-07-26",
   "right": "design",
   "source_url": "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01",
   "statutory_basis": "Enforcement Rule of the Korean Design Protection Act on Collection of Design Fees (Korean MOIP / KIPO)."
