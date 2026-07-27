@@ -1268,7 +1268,7 @@
   "key": "CA/CIPO/patent",
   "notes": "CIPO publishes annually with January 1 effective date. The small-entity discount applies under Patent Act \u00a744.1. Maintenance fees use English-band descriptions (e.g., 'second, third and fourth anniversaries') which the scraper expands into per-year FeeItem rows so lookup-by-year works. CIPO does not publish numeric fee codes; codes here are synthesized slugs.",
   "office_code": "CIPO",
-  "retrieved_at": "2026-07-26",
+  "retrieved_at": "2026-07-27",
   "right": "patent",
   "source_url": "https://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/wr00142.html",
   "statutory_basis": "Patent Rules SOR/2019-251, Schedule of Fees"

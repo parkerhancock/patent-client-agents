@@ -183,7 +183,7 @@
   "key": "FR/INPI-FR/trademark",
   "notes": "INPI France trademark fees per-class (Nice classification) in EUR on a 10-year renewal cycle. Additional-class surcharge \u20ac40 per class beyond the first. Collective/guarantee marks have their own base rate. Madrid international application fees live in a separate PDF (id=20520) \u2014 not modeled in v1.",
   "office_code": "INPI-FR",
-  "retrieved_at": "2026-07-26",
+  "retrieved_at": "2026-07-27",
   "right": "trademark",
   "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi",
   "statutory_basis": "Code de la propri\u00e9t\u00e9 intellectuelle (CPI) Articles R.411-17 et seq."
