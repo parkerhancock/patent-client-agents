@@ -7,6 +7,8 @@ import json
 import httpx
 import pytest
 
+# Import the consumer package so its logging and envelope configuration runs.
+import patent_client_agents  # noqa: F401
 from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
@@ -217,11 +219,12 @@ class TestRequest:
             await client._request("GET", "/missing")
 
     @pytest.mark.asyncio
-    async def test_server_error_not_retried(self) -> None:
-        """ServerError (from _raise_for_status) is NOT retryable because
-        it inherits from ApiError, not httpx.HTTPStatusError. The retry
-        predicate only matches httpx.HTTPStatusError, TransportError, and
-        RateLimitError."""
+    async def test_server_error_retried_then_exhausts(self) -> None:
+        """ServerError (from _raise_for_status) IS retryable: it inherits from
+        ApiError, and is_retryable_error retries any ApiError whose status_code
+        is in RETRYABLE_STATUS_CODES (429, 500, 502, 503, 504) — this is how
+        transient upstream 5xx (e.g. USPTO's 504s) get backed off. A persistent
+        500 therefore exhausts all attempts, then reraises ServerError."""
         call_count = {"n": 0}
 
         def handler(request: httpx.Request) -> httpx.Response:  # noqa: ARG001
@@ -232,8 +235,8 @@ class TestRequest:
         client = make_client(transport, max_retries=3)
         with pytest.raises(ServerError):
             await client._request("GET", "/flaky")
-        # Should fail on first attempt — ServerError is not retryable
-        assert call_count["n"] == 1
+        # Retried up to max_retries attempts, then reraised
+        assert call_count["n"] == 3
 
     @pytest.mark.asyncio
     async def test_retry_on_429_then_success(self) -> None:
@@ -507,8 +510,15 @@ class TestIsRetryableError:
     def test_generic_exception_not_retryable(self) -> None:
         assert is_retryable_error(ValueError("nope")) is False
 
-    def test_api_error_not_retryable(self) -> None:
-        assert is_retryable_error(ApiError("bad", 400, "")) is False
+    @pytest.mark.parametrize("status", [400, 401, 403, 404, 418])
+    def test_api_error_non_retryable_status(self, status: int) -> None:
+        assert is_retryable_error(ApiError("bad", status, "")) is False
+
+    @pytest.mark.parametrize("status", [429, 500, 502, 503, 504])
+    def test_api_error_retryable_status(self, status: int) -> None:
+        # BaseAsyncClient raises typed ApiError (not httpx.HTTPStatusError) via
+        # _raise_for_status, so this branch is what actually gates 5xx retries.
+        assert is_retryable_error(ApiError("boom", status, "")) is True
 
 
 # ---------------------------------------------------------------------------
