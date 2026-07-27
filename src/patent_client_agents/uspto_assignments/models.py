@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 from dataclasses import dataclass, field
+from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import AliasChoices, BaseModel, Field
 
 
 class Assignor(BaseModel):
@@ -13,12 +14,22 @@ class Assignor(BaseModel):
 
     assignor_name: str = Field(alias="assignorName")
     execution_date: str | None = Field(default=None, alias="executionDate")
+    acknowledgement_date: str | None = Field(default=None, alias="acknowledgementDate")
 
 
 class Property(BaseModel):
-    """A patent property referenced in an assignment."""
+    """A patent property referenced in an assignment.
 
-    sequence_number: int | None = Field(default=None, alias="sequenceNumber")
+    The v3 search response no longer carries properties; they come from
+    :meth:`AssignmentCenterClient.details`, whose payload names the
+    sequence field ``propertySequenceNumber`` (v2 search said
+    ``sequenceNumber`` — both accepted).
+    """
+
+    sequence_number: int | None = Field(
+        default=None,
+        validation_alias=AliasChoices("sequenceNumber", "propertySequenceNumber"),
+    )
     application_number: str | None = Field(default=None, alias="applicationNumber")
     filing_date: str | None = Field(default=None, alias="fillingDate")  # API typo
     patent_number: str | None = Field(default=None, alias="patentNumber")
@@ -44,11 +55,16 @@ class AssignmentRecord(BaseModel):
     reel_number: int = Field(alias="reelNumber")
     frame_number: int = Field(alias="frameNumber")
     assignor_execution_date: str | None = Field(default=None, alias="assignorExecutionDate")
+    mail_date: str | None = Field(default=None, alias="mailDate")
+    recorded: str | None = None
     correspondent_name: str | None = Field(default=None, alias="correspondentName")
     assignors: list[Assignor] = Field(default_factory=list)
     assignees: list[str] = Field(default_factory=list)
     conveyance: str | None = None
     conveyance_code: int | None = Field(default=None, alias="conveyanceCode")
+    # USPTO's July 2026 v3 search API stopped returning properties (and
+    # reports noOfProperties=0); fetch them via
+    # ``AssignmentCenterClient.details(reel_number, frame_number)``.
     number_of_properties: int = Field(default=0, alias="noOfProperties")
     properties: list[Property] = Field(default_factory=list)
 
@@ -56,6 +72,22 @@ class AssignmentRecord(BaseModel):
     def reel_frame(self) -> str:
         """Return reel/frame as a formatted string."""
         return f"{self.reel_number}/{self.frame_number}"
+
+
+class AssignmentDetail(BaseModel):
+    """Full recordation detail from the v3 by-reel/frame request.
+
+    ``assignment`` is the raw upstream dict (assignees with addresses,
+    correspondent address, recordation/mail/receipt dates, pageCount,
+    imageURL, ...); ``properties`` is the typed list that the v3 search
+    response no longer carries.
+    """
+
+    model_config = {"extra": "allow"}
+
+    assignment: dict[str, Any] = Field(default_factory=dict)
+    number_of_properties: int = Field(default=0, alias="noOfProperties")
+    properties: list[Property] = Field(default_factory=list)
 
 
 @dataclass
@@ -89,5 +121,6 @@ __all__ = [
     "Assignor",
     "Property",
     "AssignmentRecord",
+    "AssignmentDetail",
     "SearchResults",
 ]

@@ -101,4 +101,160 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '{"searchCriteria":[{"property":"16136935","searchBy":"applicationNumber","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '189'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+  response:
+    body:
+      string: '{"status":"Success","statusCode":200,"error":null,"successResponse":{"data":[{"reelNumber":58293,"frameNumber":75,"correspondentName":"KACVINSKY
+        DAISAK BLUNI PLLC (LATCH)","assignorExecutionDate":"06/01/2021","conveyance":"CHANGE
+        OF NAME","conveyanceCode":33,"mailDate":"12/08/2021","recorded":"12/01/2021","assignors":[{"assignorName":"LATCH,
+        INC.","executionDate":"06/01/2021","acknowledgementDate":null}],"assignees":["LATCH
+        SYSTEMS, INC."],"noOfProperties":0},{"reelNumber":55132,"frameNumber":647,"correspondentName":"KACVINSKY
+        DAISAK BLUNI PLLC (1950)","assignorExecutionDate":"01/04/2021","conveyance":"CHANGE
+        OF NAME","conveyanceCode":33,"mailDate":"02/04/2021","recorded":"01/27/2021","assignors":[{"assignorName":"LATCHABLE,
+        INC.","executionDate":"01/04/2021","acknowledgementDate":null}],"assignees":["LATCH,
+        INC."],"noOfProperties":0},{"reelNumber":47386,"frameNumber":595,"correspondentName":"WILMER
+        CUTLER PICKERING HALE AND DORR LLP","assignorExecutionDate":"01/30/2018","conveyance":"ASSIGNMENT
+        OF ASSIGNOR''S INTEREST","conveyanceCode":23,"mailDate":"11/02/2018","recorded":"11/01/2018","assignors":[{"assignorName":"SCHOENFELDER,
+        LUKE ANDREW","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"JONES,
+        MICHAEL BRIAN","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"MEYERHOFFER,
+        THOMAS","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"HUSSAIN,
+        ALI AKBAR","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"SOLE,
+        IVAN ALMARAL","executionDate":"01/11/2018","acknowledgementDate":null},{"assignorName":"HOLT,
+        TRAVIS","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"GRISZBACHER,
+        JAMES","executionDate":"01/30/2018","acknowledgementDate":null}],"assignees":["LATCHABLE,
+        INC."],"noOfProperties":0}],"totalRows":3,"backendPagination":false,"filteredRowsCount":0,"message":null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Jul 2026 20:37:26 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 d2c100427e6cc08d2b75af72792dd922.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - Uov5y8dk_E-dbs6gP7VKSBj_u_aroQwesn81W3-F6oLUuyniIAPZ6A==
+      X-Amz-Cf-Pop:
+      - DFW59-P8
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1910'
+      server:
+      - uvicorn
+      vary:
+      - Accept-Encoding
+      x-process-time:
+      - '120'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"searchCriteria":[{"property":"16136935","searchBy":"applicationNumber","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '189'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+  response:
+    body:
+      string: '{"status":"Success","statusCode":200,"error":null,"successResponse":{"data":[{"reelNumber":58293,"frameNumber":75,"correspondentName":"KACVINSKY
+        DAISAK BLUNI PLLC (LATCH)","assignorExecutionDate":"06/01/2021","conveyance":"CHANGE
+        OF NAME","conveyanceCode":33,"mailDate":"12/08/2021","recorded":"12/01/2021","assignors":[{"assignorName":"LATCH,
+        INC.","executionDate":"06/01/2021","acknowledgementDate":null}],"assignees":["LATCH
+        SYSTEMS, INC."],"noOfProperties":0},{"reelNumber":55132,"frameNumber":647,"correspondentName":"KACVINSKY
+        DAISAK BLUNI PLLC (1950)","assignorExecutionDate":"01/04/2021","conveyance":"CHANGE
+        OF NAME","conveyanceCode":33,"mailDate":"02/04/2021","recorded":"01/27/2021","assignors":[{"assignorName":"LATCHABLE,
+        INC.","executionDate":"01/04/2021","acknowledgementDate":null}],"assignees":["LATCH,
+        INC."],"noOfProperties":0},{"reelNumber":47386,"frameNumber":595,"correspondentName":"WILMER
+        CUTLER PICKERING HALE AND DORR LLP","assignorExecutionDate":"01/30/2018","conveyance":"ASSIGNMENT
+        OF ASSIGNOR''S INTEREST","conveyanceCode":23,"mailDate":"11/02/2018","recorded":"11/01/2018","assignors":[{"assignorName":"SCHOENFELDER,
+        LUKE ANDREW","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"JONES,
+        MICHAEL BRIAN","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"MEYERHOFFER,
+        THOMAS","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"HUSSAIN,
+        ALI AKBAR","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"SOLE,
+        IVAN ALMARAL","executionDate":"01/11/2018","acknowledgementDate":null},{"assignorName":"HOLT,
+        TRAVIS","executionDate":"01/30/2018","acknowledgementDate":null},{"assignorName":"GRISZBACHER,
+        JAMES","executionDate":"01/30/2018","acknowledgementDate":null}],"assignees":["LATCHABLE,
+        INC."],"noOfProperties":0}],"totalRows":3,"backendPagination":false,"filteredRowsCount":0,"message":null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Jul 2026 20:51:10 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 a9f98893f7a1d623b9cace367b0b4afe.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - kNeReqWJkOAM7KzS3jlUAzz_eh2qaXR5YjMpaDtae3TniP6IyAFoQw==
+      X-Amz-Cf-Pop:
+      - DFW59-P8
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1910'
+      server:
+      - uvicorn
+      vary:
+      - Accept-Encoding
+      x-process-time:
+      - '151'
+    status:
+      code: 200
+      message: OK
 version: 1

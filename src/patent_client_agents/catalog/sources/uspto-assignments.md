@@ -17,7 +17,7 @@ Patent ownership transfer records from the USPTO Assignment Center. Covers assig
 
 | Method | Path | Description |
 |--------|------|-------------|
-| POST | `/ipas/search/api/v2/public/search/patent` | Reverse-engineered from the Assignment Center web UI. Accepts a `searchCriteria` array body and returns flat recordations with conveyance populated for every search axis. |
+| POST | `/ipas/search/api/v3/public/search/patent` | Reverse-engineered from the Assignment Center web UI. Accepts a `searchCriteria` array body and returns flat recordations with conveyance populated for every search axis. (v2 retired by USPTO's July 24, 2026 Assignment Center update; payload and envelope unchanged, v3 adds `mailDate`/`recorded` and per-assignor `acknowledgementDate`.) |
 
 ## Library API
 

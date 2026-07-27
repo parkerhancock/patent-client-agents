@@ -148,8 +148,10 @@ async def search_patent_assignments(
         "conveyance, first assignor, first assignee, execution date, "
         "number of properties, plus the lead property's application/"
         "patent/publication number. When True, every hit is the full "
-        "Assignment Center record (all properties, all assignors, "
-        "correspondent, etc.).",
+        "Assignment Center record (all assignors, correspondent, etc.). "
+        "Note: USPTO's July 2026 Assignment Center update stopped "
+        "returning per-hit properties from search, so the property-"
+        "derived fields are currently always null/empty.",
     ] = False,
 ) -> ListEnvelope[dict]:
     """Search USPTO patent assignment recordations by assignee, assignor, conveyance, or patent identifier.

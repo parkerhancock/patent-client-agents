@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.23.0] — 2026-07-27
+
+### Fixed
+
+- Moved USPTO Assignment Center patent-assignment search to the v3 public
+  endpoint after USPTO's July 24, 2026 update retired v2 (searches had been
+  failing with upstream 403 errors). The request payload and response
+  envelope are unchanged.
+
+### Added
+
+- `AssignmentCenterClient.details(reel_number, frame_number)` fetches the
+  full recordation detail — including the affected properties, which the
+  v3 search response no longer carries — returning the new
+  `AssignmentDetail` model.
+- New v3 response fields: `mail_date` and `recorded` on
+  `AssignmentRecord`, and `acknowledgement_date` on `Assignor`.
+
+### Changed
+
+- Assignment-search `conveyance` filtering is now matched client-side
+  (USPTO's v3 server dropped the filter and returns zero rows for it);
+  for conveyance-filtered queries `total` reports the matched count.
+- v3 caveat, documented on the client: `totalRows` for broad name queries
+  is unreliable (the server caps its scan, observed at 10,000, and may
+  silently omit older recordations for high-volume names); number-axis
+  searches remain exact.
+
 ## [0.21.1] — 2026-05-22
 
 ### Fixed

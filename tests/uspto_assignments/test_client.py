@@ -19,10 +19,15 @@ class TestModels:
     """Tests for Pydantic models and SearchResults dataclass."""
 
     def test_assignor_model(self) -> None:
-        data = {"assignorName": "SMITH, JOHN", "executionDate": "01/15/2024"}
+        data = {
+            "assignorName": "SMITH, JOHN",
+            "executionDate": "01/15/2024",
+            "acknowledgementDate": "01/16/2024",
+        }
         a = Assignor.model_validate(data)
         assert a.assignor_name == "SMITH, JOHN"
         assert a.execution_date == "01/15/2024"
+        assert a.acknowledgement_date == "01/16/2024"
 
     def test_property_model(self) -> None:
         data = {
@@ -46,6 +51,8 @@ class TestModels:
             "frameNumber": 227,
             "correspondentName": "Lerner David LLP",
             "assignorExecutionDate": "11/12/2025",
+            "mailDate": "11/20/2025",
+            "recorded": "11/18/2025",
             "conveyance": "ASSIGNMENT OF ASSIGNOR'S INTEREST",
             "conveyanceCode": 23,
             "assignors": [{"assignorName": "SAKALKAR, VARUN", "executionDate": "11/12/2025"}],
@@ -60,6 +67,8 @@ class TestModels:
         assert r.conveyance == "ASSIGNMENT OF ASSIGNOR'S INTEREST"
         assert r.conveyance_code == 23
         assert r.correspondent_name == "Lerner David LLP"
+        assert r.mail_date == "11/20/2025"
+        assert r.recorded == "11/18/2025"
         assert r.assignors[0].assignor_name == "SAKALKAR, VARUN"
         assert r.assignees == ["GOOGLE LLC"]
         assert r.number_of_properties == 1
@@ -78,6 +87,27 @@ class TestModels:
         assert r.conveyance is None
         assert r.conveyance_code is None
         assert r.number_of_properties == 0
+
+    def test_assignment_detail_model(self) -> None:
+        """Detail payloads name the sequence field propertySequenceNumber."""
+        from patent_client_agents.uspto_assignments import AssignmentDetail
+
+        data = {
+            "assignment": {"reelNumber": 35130, "frameNumber": 327, "pageCount": 4},
+            "noOfProperties": 1,
+            "properties": [
+                {
+                    "propertySequenceNumber": 1,
+                    "applicationNumber": "14643719",
+                    "patentNumber": "10000000",
+                }
+            ],
+        }
+        d = AssignmentDetail.model_validate(data)
+        assert d.number_of_properties == 1
+        assert d.properties[0].sequence_number == 1
+        assert d.properties[0].patent_number == "10000000"
+        assert d.assignment["pageCount"] == 4
 
     def test_search_results_list_protocol(self) -> None:
         """SearchResults behaves as a list of records for the common path."""
@@ -137,11 +167,17 @@ class TestSearchLive:
 
     @pytest.mark.asyncio
     async def test_search_by_patent(self, vcr_cassette) -> None:
+        """v3 search hits carry no properties; details() restores them."""
         async with AssignmentCenterClient() as client:
             result = await client.search(query="10000000", by="patent_number")
-        assert len(result) >= 1
-        for r in result:
-            assert any(p.patent_number and "10000000" in p.patent_number for p in r.properties)
+            assert len(result) >= 1
+            r = result[0]
+            assert r.conveyance is not None
+            assert r.properties == []  # dropped by USPTO's July 2026 v3 API
+            detail = await client.details(r.reel_number, r.frame_number)
+        assert detail.number_of_properties >= 1
+        assert any(p.patent_number and "10000000" in p.patent_number for p in detail.properties)
+        assert detail.assignment["reelNumber"] == r.reel_number
 
     @pytest.mark.asyncio
     async def test_search_by_reel_frame(self, vcr_cassette) -> None:
@@ -178,24 +214,30 @@ class TestSearchLive:
 
     @pytest.mark.asyncio
     async def test_search_with_conveyance_filter(self, vcr_cassette) -> None:
-        """conveyance contains-filter narrows result set."""
+        """conveyance contains-filter (client-side since v3) narrows result set."""
         async with AssignmentCenterClient() as client:
             result = await client.search(
-                query="Google",
+                query="BARCLAYS BANK",
                 by="assignee",
                 conveyance="SECURITY",
                 limit=5,
             )
         assert result.total > 0
+        assert len(result) == 5
         for r in result:
             assert r.conveyance is not None
             assert "SECURITY" in r.conveyance.upper()
 
     @pytest.mark.asyncio
     async def test_search_truncated_flag_for_huge_query(self, vcr_cassette) -> None:
-        """An assignee with >10k recordations sets truncated=True."""
+        """An assignee that hits USPTO's 10k scan cap sets truncated=True.
+
+        v3 reports much lower (unreliable) totals for broad names than
+        v2 did — "Apple" now comes back under 7k — so this uses one of
+        the names still observed hitting the cap exactly.
+        """
         async with AssignmentCenterClient() as client:
-            result = await client.search(query="Apple", by="assignee", exact=False, limit=5)
+            result = await client.search(query="Siemens", by="assignee", exact=False, limit=5)
         assert result.truncated is True
         assert result.total >= 10_000
         assert len(result) == 5

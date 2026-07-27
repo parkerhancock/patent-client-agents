@@ -7,8 +7,9 @@ from datetime import date
 from typing import Any, Literal
 
 from mcp_data_core.base_client import BaseAsyncClient
+from mcp_data_core.exceptions import NotFoundError
 
-from .models import AssignmentRecord, SearchResults
+from .models import AssignmentDetail, AssignmentRecord, SearchResults
 
 logger = logging.getLogger(__name__)
 
@@ -51,12 +52,25 @@ class AssignmentCenterClient(BaseAsyncClient):
     """Async client for the USPTO Assignment Center API.
 
     The Assignment Center exposes an undocumented JSON API at
-    ``assignmentcenter.uspto.gov/ipas/search/api/v2/public/search/patent``.
+    ``assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent``
+    (v2 was retired by USPTO's July 24, 2026 Assignment Center update).
     This client reverse-engineers it to provide search across every
     indexed axis (assignee, assignor, correspondent, application,
     patent, publication, reel/frame, PCT, international registration)
     with conveyance-type populated, server-side execution-date
     filtering, conveyance-text contains-filtering, and pagination.
+
+    v3 behavior changes from v2:
+
+    - Search hits no longer include ``properties`` (and report
+      ``noOfProperties=0``); use :meth:`details` to fetch the affected
+      properties for a recordation.
+    - Server-side conveyance filtering is gone (the v3 server returns
+      zero rows for it), so ``conveyance`` is matched client-side here.
+    - ``totalRows`` for broad name queries is unreliable: the server
+      caps its scan (observed at 10,000) and may silently omit older
+      recordations for high-volume names. Number-axis searches
+      (application, patent, reel/frame, ...) remain exact.
 
     Example::
 
@@ -104,6 +118,10 @@ class AssignmentCenterClient(BaseAsyncClient):
                 silently ignored by the server.
             conveyance: Contains-match against the conveyance text
                 (e.g. ``"ASSIGNMENT"``, ``"SECURITY"``, ``"CHANGE OF NAME"``).
+                Matched client-side since USPTO's v3 API dropped the
+                server-side filter; when set, ``total`` reports the
+                matched count (a lower bound if ``limit`` stopped
+                paging early) rather than USPTO's row count.
             offset: Number of records to skip from the start of the
                 result set. Defaults to 0.
             limit: Maximum number of records to return. ``None`` (default)
@@ -142,18 +160,20 @@ class AssignmentCenterClient(BaseAsyncClient):
                     "searchBy": "executionDate",
                 }
             )
-        if conveyance is not None:
-            filter_by.append(
-                {
-                    "property": conveyance,
-                    "startDate": "",
-                    "endDate": "",
-                    "searchBy": "conveyance",
-                }
-            )
-
-        start_page = offset // _INTERNAL_PAGE_SIZE + 1
-        skip_in_first_page = offset % _INTERNAL_PAGE_SIZE
+        # USPTO's v3 API dropped server-side conveyance filtering (a
+        # ``searchBy: "conveyance"`` filterBy entry now returns zero
+        # rows), so conveyance is matched client-side over fetched
+        # pages. Offset then applies to the filtered stream, which
+        # forces paging from page 1.
+        conveyance_needle = conveyance.upper() if conveyance is not None else None
+        if conveyance_needle is None:
+            start_page = offset // _INTERNAL_PAGE_SIZE + 1
+            skip_in_first_page = offset % _INTERNAL_PAGE_SIZE
+            target = limit
+        else:
+            start_page = 1
+            skip_in_first_page = 0
+            target = None if limit is None else offset + limit
 
         records: list[AssignmentRecord] = []
         total = 0
@@ -178,7 +198,7 @@ class AssignmentCenterClient(BaseAsyncClient):
             }
             response = await self._request(
                 "POST",
-                "/ipas/search/api/v2/public/search/patent",
+                "/ipas/search/api/v3/public/search/patent",
                 json=payload,
                 context="Assignment search",
                 timeout=timeout,
@@ -193,14 +213,18 @@ class AssignmentCenterClient(BaseAsyncClient):
                 break
 
             batch = [AssignmentRecord.model_validate(r) for r in data]
+            server_batch_empty = not batch
+            if conveyance_needle is not None:
+                batch = [
+                    r for r in batch if r.conveyance and conveyance_needle in r.conveyance.upper()
+                ]
             if page == start_page and skip_in_first_page:
                 batch = batch[skip_in_first_page:]
             records.extend(batch)
 
-            if not batch:
+            if server_batch_empty:
                 break
-            if limit is not None and len(records) >= limit:
-                records = records[:limit]
+            if target is not None and len(records) >= target:
                 break
             # ``backendPagination=False`` means the server returned everything
             # in a single response (small result sets); no further pages.
@@ -212,7 +236,59 @@ class AssignmentCenterClient(BaseAsyncClient):
             page += 1
 
         truncated = total >= _USPTO_TOTAL_CAP
+        if conveyance_needle is not None:
+            # Server total counts unfiltered rows; report what matched
+            # instead, then apply offset to the filtered stream.
+            total = len(records)
+            records = records[offset:]
+        if limit is not None:
+            records = records[:limit]
         return SearchResults(records=records, total=total, truncated=truncated)
+
+    async def details(
+        self,
+        reel_number: int | str,
+        frame_number: int | str,
+        *,
+        timeout: float = 60.0,
+    ) -> AssignmentDetail:
+        """Fetch the full recordation detail for one reel/frame.
+
+        This is the only v3 surface that returns the affected
+        properties — USPTO's July 2026 update removed them from search
+        hits. Frame numbers may be padded or unpadded (``"0327"`` or
+        ``327``).
+
+        Returns:
+            :class:`AssignmentDetail` with typed ``properties`` plus
+            the raw ``assignment`` dict (assignee and correspondent
+            addresses, recordation/mail/receipt dates, pageCount,
+            imageURL, ...).
+
+        Raises:
+            NotFoundError: If no recordation exists at that reel/frame.
+        """
+        payload = {
+            "reelNumber": str(reel_number),
+            "frameNumber": str(frame_number),
+            "searchBy": "reelFrame",
+            "dataFilter": {"filterBy": [], "rowsPerPage": 10, "currentPage": 1},
+        }
+        response = await self._request(
+            "POST",
+            "/ipas/search/api/v3/public/search/patent",
+            json=payload,
+            context="Assignment detail",
+            timeout=timeout,
+        )
+        body: Any = response.json()
+        success = body.get("successResponse") if isinstance(body, dict) else None
+        data = success.get("data") if isinstance(success, dict) else None
+        if not isinstance(data, dict) or not data.get("assignment"):
+            raise NotFoundError(
+                f"No assignment recordation found at reel/frame {reel_number}/{frame_number}"
+            )
+        return AssignmentDetail.model_validate(data)
 
 
 def _format_yyyymmdd(d: date) -> str:

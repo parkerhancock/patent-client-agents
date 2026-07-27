@@ -26,6 +26,7 @@ Example:
 
 from .client import AssignmentCenterClient, SearchAxis
 from .models import (
+    AssignmentDetail,
     AssignmentRecord,
     Assignor,
     Property,
@@ -34,6 +35,7 @@ from .models import (
 
 __all__ = [
     "AssignmentCenterClient",
+    "AssignmentDetail",
     "AssignmentRecord",
     "Assignor",
     "Property",

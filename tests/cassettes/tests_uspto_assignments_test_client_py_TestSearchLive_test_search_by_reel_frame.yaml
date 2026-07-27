@@ -72,4 +72,124 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '{"searchCriteria":[{"property":"58293/75","searchBy":"reelFrame","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '181'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+  response:
+    body:
+      string: '{"status":"Success","statusCode":200,"error":null,"successResponse":{"data":[{"reelNumber":58293,"frameNumber":75,"correspondentName":"KACVINSKY
+        DAISAK BLUNI PLLC (LATCH)","assignorExecutionDate":"06/01/2021","conveyance":"CHANGE
+        OF NAME","conveyanceCode":33,"mailDate":"12/08/2021","recorded":"12/01/2021","assignors":[{"assignorName":"LATCH,
+        INC.","executionDate":"06/01/2021","acknowledgementDate":null}],"assignees":["LATCH
+        SYSTEMS, INC."],"noOfProperties":0}],"totalRows":1,"backendPagination":false,"filteredRowsCount":0,"message":null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '543'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Jul 2026 20:37:28 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 3dba39a7b54d7d7ff32e454cf7ed0bee.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 4tPEj2a3tTvPYEwj_mpVnG31v1uc4Ps5Tgc1M70PN-Ebleoa2BiWUQ==
+      X-Amz-Cf-Pop:
+      - DFW59-P8
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      server:
+      - uvicorn
+      x-process-time:
+      - '220'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"searchCriteria":[{"property":"58293/75","searchBy":"reelFrame","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '181'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+  response:
+    body:
+      string: '{"status":"Success","statusCode":200,"error":null,"successResponse":{"data":[{"reelNumber":58293,"frameNumber":75,"correspondentName":"KACVINSKY
+        DAISAK BLUNI PLLC (LATCH)","assignorExecutionDate":"06/01/2021","conveyance":"CHANGE
+        OF NAME","conveyanceCode":33,"mailDate":"12/08/2021","recorded":"12/01/2021","assignors":[{"assignorName":"LATCH,
+        INC.","executionDate":"06/01/2021","acknowledgementDate":null}],"assignees":["LATCH
+        SYSTEMS, INC."],"noOfProperties":0}],"totalRows":1,"backendPagination":false,"filteredRowsCount":0,"message":null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '543'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Jul 2026 20:51:11 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 4165698929ff6aa963c860cf9537dfb6.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - PFWIR0QAw-dPb6iDz05ZXb7CyHufqjScc6AV6ESqsCeCavDAEAADKA==
+      X-Amz-Cf-Pop:
+      - DFW59-P8
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      server:
+      - uvicorn
+      x-process-time:
+      - '205'
+    status:
+      code: 200
+      message: OK
 version: 1

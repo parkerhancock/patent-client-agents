@@ -67,4 +67,192 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: '{"searchCriteria":[{"property":"10000000","searchBy":"patentNumber","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '184'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+  response:
+    body:
+      string: '{"status":"Success","statusCode":200,"error":null,"successResponse":{"data":[{"reelNumber":35130,"frameNumber":327,"correspondentName":"DOCKET
+        CLERK-RAYTHEON/MWM","assignorExecutionDate":"03/06/2015","conveyance":"ASSIGNMENT
+        OF ASSIGNOR''S INTEREST","conveyanceCode":23,"mailDate":"03/11/2015","recorded":"03/10/2015","assignors":[{"assignorName":"MARRON,
+        JOSEPH","executionDate":"03/06/2015","acknowledgementDate":null}],"assignees":["RAYTHEON
+        COMPANY"],"noOfProperties":0}],"totalRows":1,"backendPagination":false,"filteredRowsCount":0,"message":null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '553'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Jul 2026 20:37:27 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 5d232f4912a063134dc9f5c99ee35f6c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - CvO0VUHPLRWGgLgz1Xm1P4fe9CHNEZRMcGZ3qORz8o19_6_eKFcvMw==
+      X-Amz-Cf-Pop:
+      - DFW59-P8
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      server:
+      - uvicorn
+      x-process-time:
+      - '131'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"searchCriteria":[{"property":"10000000","searchBy":"patentNumber","matchType":"Contains","order":1,"relation":"AND"}],"dataFilter":{"filterBy":[],"rowsPerPage":1000,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '184'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+  response:
+    body:
+      string: '{"status":"Success","statusCode":200,"error":null,"successResponse":{"data":[{"reelNumber":35130,"frameNumber":327,"correspondentName":"DOCKET
+        CLERK-RAYTHEON/MWM","assignorExecutionDate":"03/06/2015","conveyance":"ASSIGNMENT
+        OF ASSIGNOR''S INTEREST","conveyanceCode":23,"mailDate":"03/11/2015","recorded":"03/10/2015","assignors":[{"assignorName":"MARRON,
+        JOSEPH","executionDate":"03/06/2015","acknowledgementDate":null}],"assignees":["RAYTHEON
+        COMPANY"],"noOfProperties":0}],"totalRows":1,"backendPagination":false,"filteredRowsCount":0,"message":null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '553'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Jul 2026 20:51:10 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 a9f98893f7a1d623b9cace367b0b4afe.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - zXTVFWpb4wWkzgBseOzSvyLqnV27miizoe7uabPgEpCgBIIrxkQ1LA==
+      X-Amz-Cf-Pop:
+      - DFW59-P8
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      server:
+      - uvicorn
+      x-process-time:
+      - '133'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"reelNumber":"35130","frameNumber":"327","searchBy":"reelFrame","dataFilter":{"filterBy":[],"rowsPerPage":10,"currentPage":1}}'
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate, zstd
+      connection:
+      - keep-alive
+      content-length:
+      - '127'
+      content-type:
+      - application/json
+      host:
+      - assignmentcenter.uspto.gov
+      user-agent:
+      - python-httpx/0.28.1
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+  response:
+    body:
+      string: '{"status":"Success","statusCode":200,"error":null,"successResponse":{"data":{"assignment":{"assignees":[{"country":"UNITED
+        STATES","city":"WALTHAM","assigneeSequenceNumber":1,"addressLine1":"870 WINTER
+        STREET","state":"MASSACHUSETTS","addressLine2":null,"countryOrState":null,"zipCode":"02451-1449","assigneeName":"RAYTHEON
+        COMPANY","countryOrStateCode":"MA","ictStateCode":"MA","ictCountryCode":"US","addressLine3":"","addressLine4":""}],"assignors":[{"assignorSequenceNumber":1,"executionDate":"03/06/2015","assignorName":"MARRON,
+        JOSEPH","acknowledgedDate":null}],"conveyance":"ASSIGNMENT OF ASSIGNOR''S
+        INTEREST","conveyanceCode":23,"correspondent":{"name":"DOCKET CLERK-RAYTHEON/MWM","addressLine1":"P.O.DRAWER
+        800889","addressLine2":"DALLAS, TX 75380","addressLine3":null,"addressLine4":null,"country":null,"city":null,"state":null,"zipCode":null},"documents":"","frameNumber":327,"pageCount":4,"recordationDate":"03/10/2015","reelNumber":35130,"attorneyDocketNumber":"14-6582
+        ","domesticRepresentative":"","imageAvailableStatusCode":true,"imageURL":"https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/download/patent/35130/327","mailDate":"03/11/2015","processingDetails":null,"deleteStatusIndicator":false,"deleteStatusText":null,"receiptDate":"03/10/2015","assignmentSequence":1,"assignorExecutionDate":"03/06/2015","multiAssignmentSequenceNumber":0,"multiAssignmentStatusIndicator":false},"noOfProperties":1,"properties":[{"propertySequenceNumber":1,"applicationNumber":"14643719","fillingDate":"03/10/2015","publicIndicator":"Y","internationalRegistrationNumber":null,"inventionTitle":"COHERENT
+        LADAR USING INTRA-PIXEL QUADRATURE DETECTION","inventors":"Marron, Joseph","issueDate":"06/19/2018","patentNumber":"10000000","pctNumber":"","pctNumber17":"","publicationNumber":"US20160266243A1","publicationDate":"09/15/2016","internationalPublicationDate":"","propertyId":"14643719"}]},"totalRows":1,"backendPagination":false,"filteredRowsCount":0,"message":null}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 27 Jul 2026 20:51:10 GMT
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 a71acf3216acd0176b844774db5aaf64.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 4Rqq2SzxgWmxMSKyj3q-Vuq9kghbHFHBm-c_B-jeLnkA13qsIiHmpA==
+      X-Amz-Cf-Pop:
+      - DFW59-P8
+      X-Cache:
+      - Miss from cloudfront
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1981'
+      server:
+      - uvicorn
+      vary:
+      - Accept-Encoding
+      x-process-time:
+      - '121'
+    status:
+      code: 200
+      message: OK
 version: 1
