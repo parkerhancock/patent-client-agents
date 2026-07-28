@@ -58,6 +58,16 @@ os.environ.setdefault("TIPO_API_KEY", "test_tipo_tk")
 # tests/kipo_kipris/conftest.py docstring for the rationale).
 os.environ.setdefault("KIPO_KIPRIS_API_KEY", "test_kipris_servicekey")
 
+# USITC EDIS MCP tools are env-gated on USITC_EDIS_TOKEN so the public
+# demo at mcp.patentclient.com advertises no ITC surface. The placeholder
+# below keeps them registered in-process so the USITC envelope and
+# dispatcher tests still cover them. It is deliberately NOT a well-formed
+# JWT: EdisClient._decode_jwt_exp returns None for unparseable tokens, so
+# _assert_token_fresh() short-circuits and no expiry check fires during
+# replay. Tests that verify the *unset* path use monkeypatch.delenv +
+# importlib.reload (see tests/usitc/test_env_gating.py).
+os.environ.setdefault("USITC_EDIS_TOKEN", "test_edis_token")
+
 USPTO_LIVE_ENV_VAR = "USPTO_LIVE_TESTS"
 JPO_LIVE_ENV_VAR = "JPO_LIVE_TESTS"
 EUIPO_LIVE_ENV_VAR = "EUIPO_LIVE_TESTS"

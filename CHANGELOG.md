@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.24.0] — 2026-07-28
+
+### Changed
+
+- **USITC EDIS MCP tools are now env-gated on `USITC_EDIS_TOKEN`.** The six
+  EDIS tools (`search_usitc_investigations`, `get_usitc_investigation`,
+  `search_usitc_documents`, `list_usitc_attachments`,
+  `download_usitc_attachment`, `download_usitc_investigation_documents`)
+  register only when the token is set, matching the existing pattern for
+  JPO, KIPO, CanLII, and INPI. The `usitc/documents` download-proxy
+  fetcher is gated with `register_source_if_configured` for the same
+  reason.
+
+  This is a behavior change for consumers that relied on those tools being
+  registered unconditionally: without the token they no longer appear in
+  `tool/list`. The Python functions remain importable either way, so
+  library and skill callers are unaffected.
+
+  The gate is deliberately broader than the technical auth requirement —
+  only `EdisClient.download_attachment` calls `require_auth()`, so EDIS
+  search and metadata work unauthenticated. Gating the whole group lets a
+  public deployment advertise a coherent surface instead of search tools
+  whose results it cannot fetch.
+
+  `search_hts_tariffs`, `list_ids_investigations`, and `run_dataweb_report`
+  are unchanged: the first two need no auth, and DataWeb fails closed on
+  its own `USITC_DATAWEB_TOKEN`.
+
 ## [0.23.0] — 2026-07-27
 
 ### Fixed
