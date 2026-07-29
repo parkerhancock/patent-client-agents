@@ -5,14 +5,14 @@ surfaces wrapped here:
 
 * **EDIS** — Electronic Document Information System (``edis.usitc.gov``).
   Section 337 patent investigations and their full document records.
-  Bearer token via ``USITC_EDIS_TOKEN``.
+  Bearer token via ``USITC_EDIS_TOKEN`` or ``USITC_EDIS_TOKEN_FILE``.
 * **DataWeb** — official US import/export trade statistics
   (``datawebws.usitc.gov``). Bearer token via ``USITC_DATAWEB_TOKEN``.
 * **HTS** — Harmonized Tariff Schedule (``hts.usitc.gov``). No auth.
 * **IDS** — Intellectual Property Search investigation index. No auth.
 
-EDIS tools are env-gated on ``USITC_EDIS_TOKEN``: they only appear in
-tool/list when it is set. The hosted public deploy at
+EDIS tools are gated on a direct or file-mounted token: they only appear in
+tool/list when one is readable. The hosted public deploy at
 ``mcp.patentclient.com`` intentionally does not carry the token, so no
 ITC surface is advertised there; private deploys (law-tools on
 ``lawtools-mcp-prod``) flip EDIS on by mounting the secret in their own
@@ -48,12 +48,9 @@ from mcp_data_core.mcp import (
     download_bulk_response,
     download_response,
     fetch_with_cache,
+    register_source,
 )
 from mcp_data_core.mcp.annotations import READ_ONLY
-from mcp_data_core.mcp.conditional import (
-    conditional_tool,
-    register_source_if_configured,
-)
 from patent_client_agents.usitc import (
     DataWebClient,
     EdisClient,
@@ -62,10 +59,17 @@ from patent_client_agents.usitc import (
     IdsClient,
 )
 from patent_client_agents.usitc.client import build_dataweb_query
-
-_EDIS_REQUIRED_ENV: list[str] = ["USITC_EDIS_TOKEN"]
+from patent_client_agents.usitc.utils import get_env_token
 
 usitc_mcp = FastMCP("USITC")
+_EDIS_ENABLED = bool(get_env_token("USITC_EDIS_TOKEN"))
+
+
+def _edis_tool(*, annotations: Any) -> Any:
+    """Register an EDIS tool only when a direct or file-mounted token exists."""
+    if _EDIS_ENABLED:
+        return usitc_mcp.tool(annotations=annotations)
+    return lambda func: func
 
 # ──────────────────────────────────────────────────────────────────────
 # Envelope helpers (CONNECTOR_STANDARDS.md §5.9).
@@ -154,12 +158,8 @@ async def _fetch_usitc_attachment(path: str) -> tuple[bytes, str]:
         return content, filename
 
 
-register_source_if_configured(
-    "usitc/documents",
-    _fetch_usitc_attachment,
-    "application/pdf",
-    requires_env=_EDIS_REQUIRED_ENV,
-)
+if _EDIS_ENABLED:
+    register_source("usitc/documents", _fetch_usitc_attachment, "application/pdf")
 
 
 # ---------------------------------------------------------------------------
@@ -272,7 +272,7 @@ def _parse_edis_date(date_str: str | None) -> str | None:
 # ---------------------------------------------------------------------------
 
 
-@conditional_tool(usitc_mcp, requires_env=_EDIS_REQUIRED_ENV, annotations=READ_ONLY)
+@_edis_tool(annotations=READ_ONLY)
 async def search_usitc_investigations(
     investigation_number: Annotated[
         str | None,
@@ -348,7 +348,7 @@ async def search_usitc_investigations(
     )
 
 
-@conditional_tool(usitc_mcp, requires_env=_EDIS_REQUIRED_ENV, annotations=READ_ONLY)
+@_edis_tool(annotations=READ_ONLY)
 async def get_usitc_investigation(
     investigation_number: Annotated[
         str | list[str],
@@ -430,7 +430,7 @@ async def get_usitc_investigation(
 # ---------------------------------------------------------------------------
 
 
-@conditional_tool(usitc_mcp, requires_env=_EDIS_REQUIRED_ENV, annotations=READ_ONLY)
+@_edis_tool(annotations=READ_ONLY)
 async def search_usitc_documents(
     investigation_number: Annotated[
         str | None,
@@ -559,7 +559,7 @@ async def search_usitc_documents(
     )
 
 
-@conditional_tool(usitc_mcp, requires_env=_EDIS_REQUIRED_ENV, annotations=READ_ONLY)
+@_edis_tool(annotations=READ_ONLY)
 async def list_usitc_attachments(
     document_id: Annotated[int, "EDIS document ID to list attachments for."],
 ) -> ListEnvelope[dict]:
@@ -821,7 +821,7 @@ _USITC_BULK_CAP = 25
 _USITC_PAGE_LIMIT = 50  # safety: don't walk more than 50 pages of doc listings
 
 
-@conditional_tool(usitc_mcp, requires_env=_EDIS_REQUIRED_ENV, annotations=READ_ONLY)
+@_edis_tool(annotations=READ_ONLY)
 async def download_usitc_investigation_documents(
     investigation_number: Annotated[
         str,
@@ -1028,7 +1028,7 @@ async def download_usitc_investigation_documents(
     )
 
 
-@conditional_tool(usitc_mcp, requires_env=_EDIS_REQUIRED_ENV, annotations=READ_ONLY)
+@_edis_tool(annotations=READ_ONLY)
 async def download_usitc_attachment(
     document_id: Annotated[int, "EDIS document ID."],
     attachment_id: Annotated[int, "EDIS attachment ID."],

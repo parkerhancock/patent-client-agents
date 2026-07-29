@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import Any
 
 EDIS_BASE_URL = os.getenv("USITC_EDIS_BASE_URL", "https://edis.usitc.gov/data")
@@ -11,8 +12,15 @@ HTS_BASE_URL = os.getenv("USITC_HTS_BASE_URL", "https://hts.usitc.gov/reststop")
 
 def get_env_token(name: str) -> str | None:
     value = os.getenv(name)
-    if value:
-        return value.strip()
+    if value and (stripped := value.strip()):
+        return stripped
+    token_file = os.getenv(f"{name}_FILE")
+    if token_file:
+        try:
+            file_value = Path(token_file).read_text().strip()
+        except OSError:
+            return None
+        return file_value or None
     return None
 
 
