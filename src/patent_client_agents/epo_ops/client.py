@@ -35,6 +35,7 @@ from .models import (
     LegalEventsResponse,
     NumberConversionResponse,
     PdfDownloadResponse,
+    RegisterBiblioResponse,
     RegisterEventsResponse,
     RegisterProceduralStepsResponse,
     SearchResponse,
@@ -53,6 +54,7 @@ from .parsing import (
     parse_family,
     parse_legal_events,
     parse_number_conversion,
+    parse_register_biblio,
     parse_register_events,
     parse_register_procedural_steps,
     parse_search_response,
@@ -401,6 +403,28 @@ class EpoOpsClient(BaseAsyncClient):
             sub="events",
         )
         return parse_register_events(xml, epo_number=normalized)
+
+    async def fetch_register_biblio(
+        self,
+        *,
+        number: str,
+        doc_type: str = "publication",
+        fmt: str = "epodoc",
+    ) -> RegisterBiblioResponse:
+        """Fetch correction-aware bibliographic data from the EP Register.
+
+        Register designation data reflects application designations. Term-of-grant
+        lapse snapshots cover the opposition period and are not current national
+        validation or lapse status.
+        """
+        normalized = self._normalize_number(number)
+        xml = await self.fetch_register(
+            number=normalized,
+            doc_type=doc_type,
+            fmt=fmt,
+            sub="biblio",
+        )
+        return parse_register_biblio(xml, epo_number=normalized)
 
     async def fetch_register_procedural_steps(
         self,

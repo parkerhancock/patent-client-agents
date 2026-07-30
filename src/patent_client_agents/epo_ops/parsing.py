@@ -34,12 +34,26 @@ from .models import (
     LegalEvent,
     LegalEventsResponse,
     NumberConversionResponse,
+    RegisterBiblioResponse,
+    RegisterChangedText,
+    RegisterClassificationSet,
+    RegisterCountryLapse,
     RegisterDate,
+    RegisterDocumentId,
+    RegisterDocumentReference,
     RegisterEvent,
     RegisterEventsResponse,
     RegisterGazetteReference,
+    RegisterParty,
+    RegisterPartySet,
+    RegisterPatentStatus,
+    RegisterPriorityClaim,
+    RegisterPriorityClaimSet,
     RegisterProceduralStep,
     RegisterProceduralStepsResponse,
+    RegisterStateDesignation,
+    RegisterStateDesignationSet,
+    RegisterTermOfGrantSnapshot,
     RegisterText,
     SearchResponse,
     SearchResult,
@@ -63,6 +77,12 @@ class _RegisterMetadata(TypedDict):
     language: str | None
     dtd_version: str | None
     date_produced: str | None
+
+
+class _RegisterChangeMetadata(TypedDict):
+    change_date: str | None
+    change_gazette_number: str | None
+    valid_for_publications: list[str]
 
 
 class XmlParseError(ParseError):
@@ -139,6 +159,21 @@ def _parse_document_id(node: etree._Element | None) -> DocumentId:  # type: igno
             "id_type": node.get("document-id-type"),
             "name": _text(node, "./epo:name"),
         }
+    )
+
+
+def _parse_register_document_id(
+    node: etree._Element | None,  # type: ignore[attr-defined]
+) -> RegisterDocumentId:
+    if node is None:
+        return RegisterDocumentId()
+    return RegisterDocumentId(
+        country=_text(node, "./reg:country"),
+        doc_number=_text(node, "./reg:doc-number"),
+        kind=_text(node, "./reg:kind"),
+        date=_text(node, "./reg:date"),
+        language=node.get("lang"),
+        document_id_type=node.get("document-id-type"),
     )
 
 
@@ -488,9 +523,7 @@ def _parse_register_texts(
             if element_name == "event-text":
                 text_type = text_node.get("event-text-type")
             else:
-                text_type = text_node.get("step-text-type") or text_node.get(
-                    "step-texttype"
-                )
+                text_type = text_node.get("step-text-type") or text_node.get("step-texttype")
             values.append(
                 RegisterText(
                     text_type=text_type,
@@ -532,6 +565,345 @@ def _register_metadata(
         if register_document is not None
         else None,
     }
+
+
+def _register_party_name(
+    node: etree._Element,  # type: ignore[attr-defined]
+) -> str | None:
+    addressbook = _first(node.xpath("./reg:addressbook", namespaces=NS))
+    if addressbook is None:
+        return None
+    name = _text(addressbook, "./reg:name")
+    if name:
+        return " ".join(name.split())
+    parts: list[str] = []
+    for xpath in (
+        "./reg:prefix",
+        "./reg:first-name",
+        "./reg:middle-name",
+        "./reg:last-name",
+        "./reg:orgname",
+        "./reg:suffix",
+    ):
+        value = _text(addressbook, xpath)
+        if value and value not in parts:
+            parts.append(value)
+    return " ".join(parts) or None
+
+
+def _register_change_metadata(
+    node: etree._Element,  # type: ignore[attr-defined]
+) -> _RegisterChangeMetadata:
+    return {
+        "change_date": node.get("change-date"),
+        "change_gazette_number": node.get("change-gazette-num"),
+        "valid_for_publications": str(node.get("value-valid-for-publications") or "").split(),
+    }
+
+
+def _register_bool(value: str | None) -> bool | None:
+    if value is None:
+        return None
+    normalized = value.strip().lower()
+    if normalized in {"yes", "true", "1"}:
+        return True
+    if normalized in {"no", "false", "0"}:
+        return False
+    return None
+
+
+def _parse_register_party(
+    node: etree._Element,  # type: ignore[attr-defined]
+    *,
+    role: str,
+) -> RegisterParty:
+    addressbook = _first(node.xpath("./reg:addressbook", namespaces=NS))
+    address = (
+        _first(addressbook.xpath("./reg:address", namespaces=NS))
+        if addressbook is not None
+        else None
+    )
+    address_lines = (
+        [
+            value
+            for index in range(1, 6)
+            if (value := _text(address, f"./reg:address-{index}")) is not None
+        ]
+        if address is not None
+        else []
+    )
+    return RegisterParty(
+        role=role,
+        name=_register_party_name(node),
+        party_type=node.get("app-type") or node.get("rep-type"),
+        designation=node.get("designation"),
+        sequence=node.get("sequence"),
+        registered_number=_text(addressbook, "./reg:registered-number")
+        if addressbook is not None
+        else None,
+        address_lines=address_lines,
+        address_country=_text(address, "./reg:country") if address is not None else None,
+        designated_states=_collect_texts(
+            node,
+            "./reg:designated-states/reg:country",
+        ),
+        et_al=_register_bool(node.get("et-al")),
+        wishes_to_be_published=_register_bool(node.get("wishes-to-be-published")),
+    )
+
+
+def _parse_register_reference(
+    node: etree._Element,  # type: ignore[attr-defined]
+    *,
+    reference_type: str,
+) -> RegisterDocumentReference:
+    return RegisterDocumentReference(
+        **_register_change_metadata(node),
+        reference_type=reference_type,
+        application_type=node.get("appl-type"),
+        reference_id=node.get("id"),
+        documents=[
+            _parse_register_document_id(document)
+            for document in node.xpath("./reg:document-id", namespaces=NS)
+        ],
+    )
+
+
+def _parse_register_changed_text(
+    node: etree._Element,  # type: ignore[attr-defined]
+) -> RegisterChangedText | None:
+    text = " ".join("".join(node.itertext()).split())
+    if not text:
+        return None
+    return RegisterChangedText(
+        **_register_change_metadata(node),
+        text=text,
+        language=node.get("lang"),
+    )
+
+
+def _parse_register_party_set(
+    node: etree._Element,  # type: ignore[attr-defined]
+    *,
+    role: str,
+    party_element: str,
+) -> RegisterPartySet:
+    return RegisterPartySet(
+        **_register_change_metadata(node),
+        role=role,
+        transfer_of_rights=node.get("transfer-of-rights"),
+        parties=[
+            _parse_register_party(party, role=role)
+            for party in node.xpath(f"./reg:{party_element}", namespaces=NS)
+        ],
+    )
+
+
+def _parse_register_state_designation_set(
+    node: etree._Element,  # type: ignore[attr-defined]
+) -> RegisterStateDesignationSet:
+    designations: list[RegisterStateDesignation] = []
+    for branch, excluded in (
+        ("designation-pct", False),
+        ("exclusion-from-designation", True),
+    ):
+        for regional in node.xpath(
+            f"./reg:{branch}/reg:regional",
+            namespaces=NS,
+        ):
+            region = _text(regional, "./reg:region/reg:country")
+            designations.extend(
+                RegisterStateDesignation(
+                    scope="regional",
+                    region=region,
+                    country=country,
+                    excluded=excluded,
+                )
+                for country in _collect_texts(regional, "./reg:country")
+            )
+        for national in node.xpath(
+            f"./reg:{branch}/reg:national",
+            namespaces=NS,
+        ):
+            designations.extend(
+                RegisterStateDesignation(
+                    scope="national",
+                    country=country,
+                    excluded=excluded,
+                )
+                for country in _collect_texts(national, "./reg:country")
+            )
+    designations.extend(
+        RegisterStateDesignation(scope="new", country=country)
+        for country in _collect_texts(
+            node,
+            "./reg:designation-pct/reg:new-designation-country",
+        )
+    )
+    return RegisterStateDesignationSet(
+        **_register_change_metadata(node),
+        designations=designations,
+    )
+
+
+def parse_register_biblio(
+    xml_data: str | bytes,
+    *,
+    epo_number: str,
+) -> RegisterBiblioResponse:
+    """Parse correction-aware bibliographic data from the European Patent Register."""
+    root = _as_element(xml_data)
+    register_document = _first(root.xpath(".//reg:register-document", namespaces=NS))
+    biblio = (
+        _first(register_document.xpath("./reg:bibliographic-data", namespaces=NS))
+        if register_document is not None
+        else None
+    )
+
+    patent_statuses = [
+        RegisterPatentStatus(
+            status_code=node.get("status-code"),
+            text=" ".join("".join(node.itertext()).split()),
+            change_date=node.get("change-date"),
+        )
+        for node in (
+            register_document.xpath(
+                "./reg:ep-patent-statuses/reg:ep-patent-status",
+                namespaces=NS,
+            )
+            if register_document is not None
+            else []
+        )
+        if " ".join("".join(node.itertext()).split())
+    ]
+    if biblio is None:
+        return RegisterBiblioResponse(
+            **_register_metadata(register_document, epo_number=epo_number),
+            patent_statuses=patent_statuses,
+        )
+
+    publication_references = [
+        _parse_register_reference(node, reference_type="publication")
+        for node in biblio.xpath("./reg:publication-reference", namespaces=NS)
+    ]
+    application_references = [
+        _parse_register_reference(node, reference_type="application")
+        for node in biblio.xpath("./reg:application-reference", namespaces=NS)
+    ]
+    priority_claim_sets = [
+        RegisterPriorityClaimSet(
+            **_register_change_metadata(container),
+            claims=[
+                RegisterPriorityClaim(
+                    sequence=claim.get("sequence"),
+                    kind=claim.get("kind"),
+                    country=_text(claim, "./reg:country"),
+                    document_number=_text(claim, "./reg:doc-number"),
+                    date=_text(claim, "./reg:date"),
+                    office_of_filing=(
+                        _text(claim, "./reg:office-of-filing/reg:country")
+                        or _text(claim, "./reg:office-of-filing")
+                    ),
+                )
+                for claim in container.xpath(
+                    "./reg:priority-claim",
+                    namespaces=NS,
+                )
+            ],
+            incorporation_by_reference=bool(
+                container.xpath(
+                    "./reg:incorporation-by-reference",
+                    namespaces=NS,
+                )
+            ),
+        )
+        for container in biblio.xpath("./reg:priority-claims", namespaces=NS)
+    ]
+    titles = [
+        changed_text
+        for node in biblio.xpath("./reg:invention-title", namespaces=NS)
+        if (changed_text := _parse_register_changed_text(node)) is not None
+    ]
+    filing_languages = [
+        changed_text
+        for node in biblio.xpath("./reg:language-of-filing", namespaces=NS)
+        if (changed_text := _parse_register_changed_text(node)) is not None
+    ]
+    publication_languages = [
+        changed_text
+        for node in biblio.xpath("./reg:language-of-publication", namespaces=NS)
+        if (changed_text := _parse_register_changed_text(node)) is not None
+    ]
+    party_sets = [
+        _parse_register_party_set(node, role=role, party_element=party_element)
+        for container, role, party_element in (
+            ("applicants", "applicant", "applicant"),
+            ("inventors", "inventor", "inventor"),
+            ("agents", "representative", "agent"),
+        )
+        for node in biblio.xpath(
+            f"./reg:parties/reg:{container}",
+            namespaces=NS,
+        )
+    ]
+    classification_sets = [
+        RegisterClassificationSet(
+            **_register_change_metadata(container),
+            scheme="ipcr",
+            classifications=[
+                " ".join(value.split())
+                for value in _collect_texts(
+                    container,
+                    "./reg:classification-ipcr/reg:text",
+                )
+            ],
+        )
+        for container in biblio.xpath(
+            "./reg:classifications-ipcr",
+            namespaces=NS,
+        )
+    ]
+    state_designation_sets = [
+        _parse_register_state_designation_set(node)
+        for node in biblio.xpath("./reg:designation-of-states", namespaces=NS)
+    ]
+    term_of_grant_snapshots = [
+        RegisterTermOfGrantSnapshot(
+            **_register_change_metadata(container),
+            lapses=[
+                RegisterCountryLapse(
+                    country=country,
+                    date=_text(lapse, "./reg:date"),
+                    text=_text(lapse, "./reg:text"),
+                )
+                for lapse in container.xpath(
+                    "./reg:lapsed-in-country",
+                    namespaces=NS,
+                )
+                if (country := _text(lapse, "./reg:country")) is not None
+            ],
+        )
+        for container in biblio.xpath("./reg:term-of-grant", namespaces=NS)
+    ]
+
+    return RegisterBiblioResponse(
+        **_register_metadata(register_document, epo_number=epo_number),
+        bibliographic_status=biblio.get("status"),
+        bibliographic_language=biblio.get("lang"),
+        application_id=biblio.get("id"),
+        country=biblio.get("country"),
+        patent_statuses=patent_statuses,
+        publication_references=publication_references,
+        application_references=application_references,
+        priority_claim_sets=priority_claim_sets,
+        titles=titles,
+        filing_languages=filing_languages,
+        publication_languages=publication_languages,
+        party_sets=party_sets,
+        classification_sets=classification_sets,
+        state_designation_sets=state_designation_sets,
+        term_of_grant_snapshots=term_of_grant_snapshots,
+    )
 
 
 def parse_register_events(

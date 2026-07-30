@@ -14,6 +14,7 @@ from patent_client_agents.epo_ops.models import (
     CitationResponse,
     DocumentId,
     EquivalentsResponse,
+    RegisterBiblioResponse,
     RegisterEvent,
     RegisterEventsResponse,
     RegisterProceduralStep,
@@ -22,6 +23,7 @@ from patent_client_agents.epo_ops.models import (
 from patent_client_agents.epo_ops.parsing import (
     parse_citations,
     parse_equivalents,
+    parse_register_biblio,
     parse_register_events,
     parse_register_procedural_steps,
 )
@@ -29,6 +31,7 @@ from patent_client_agents.mcp.tools.epo_ops import (
     get_epo_citations,
     get_epo_equivalents,
     get_epo_procedural_steps,
+    get_epo_register_biblio,
     get_epo_register_events,
 )
 
@@ -81,6 +84,118 @@ _EQUIVALENTS_XML = """\
       </publication-reference>
     </ops:inquiry-result>
   </ops:equivalents-inquiry>
+</ops:world-patent-data>
+"""
+
+_REGISTER_BIBLIO_XML = """\
+<ops:world-patent-data xmlns:ops="http://ops.epo.org"
+                       xmlns:reg="http://www.epo.org/register">
+  <ops:register-search total-result-count="1">
+    <reg:register-documents produced-by="RO">
+        <reg:register-document status="NO OPPOSITION FILED WITHIN TIMELIMIT"
+          produced-by="RO" lang="en" dtd-version="1.0" date-produced="20260730">
+        <reg:ep-patent-statuses>
+          <reg:ep-patent-status change-date="20030212" status-code="8">Patent granted</reg:ep-patent-status>
+        </reg:ep-patent-statuses>
+        <reg:bibliographic-data status="NO OPPOSITION FILED WITHIN TIMELIMIT"
+            lang="en" id="EP99203729P" country="EP">
+          <reg:publication-reference change-date="20000517" change-gazette-num="2000/20"
+              value-valid-for-publications="A1 B1" id="EP1000000A1">
+            <reg:document-id lang="en">
+              <reg:country>EP</reg:country><reg:doc-number>1000000</reg:doc-number>
+              <reg:kind>A1</reg:kind><reg:date>20000517</reg:date>
+            </reg:document-id>
+          </reg:publication-reference>
+          <reg:publication-reference change-date="20030212" change-gazette-num="2003/07"
+              value-valid-for-publications="B1" id="EP1000000B1">
+            <reg:document-id lang="de">
+              <reg:country>EP</reg:country><reg:doc-number>1000000</reg:doc-number>
+              <reg:kind>B1</reg:kind><reg:date>20030212</reg:date>
+            </reg:document-id>
+          </reg:publication-reference>
+          <reg:classifications-ipcr change-date="20030212" change-gazette-num="2003/07">
+            <reg:classification-ipcr><reg:text>B28B5/02, B28B7/00</reg:text></reg:classification-ipcr>
+          </reg:classifications-ipcr>
+          <reg:application-reference appl-type="regional" change-date="19991108">
+            <reg:document-id>
+              <reg:country>EP</reg:country><reg:doc-number>99203729</reg:doc-number>
+              <reg:date>19991108</reg:date>
+            </reg:document-id>
+          </reg:application-reference>
+          <reg:language-of-filing change-date="19991108" change-gazette-num="1999/45">nl</reg:language-of-filing>
+          <reg:language-of-publication change-date="20000517">en</reg:language-of-publication>
+          <reg:priority-claims change-date="19991108" change-gazette-num="1999/45">
+            <reg:priority-claim sequence="1" kind="national">
+              <reg:country>NL</reg:country><reg:doc-number>19981010536</reg:doc-number>
+              <reg:date>19981112</reg:date>
+              <reg:office-of-filing><reg:country>NL</reg:country></reg:office-of-filing>
+            </reg:priority-claim>
+          </reg:priority-claims>
+          <reg:priority-claims change-date="20000114" change-gazette-num="2000/03"/>
+          <reg:parties>
+            <reg:applicants transfer-of-rights="no" change-date="19991108"
+                change-gazette-num="1999/45">
+              <reg:applicant app-type="applicant" designation="all" sequence="1">
+                <reg:addressbook>
+                  <reg:name>Example Applicant BV</reg:name>
+                  <reg:address>
+                    <reg:address-1>Example Street 1</reg:address-1>
+                    <reg:country>NL</reg:country>
+                  </reg:address>
+                </reg:addressbook>
+              </reg:applicant>
+            </reg:applicants>
+            <reg:applicants transfer-of-rights="yes" change-date="20030212"
+                change-gazette-num="2003/07">
+              <reg:applicant app-type="proprietor" designation="as-indicated" sequence="1">
+                <reg:addressbook>
+                  <reg:name>New Owner NV</reg:name>
+                  <reg:address><reg:country>BE</reg:country></reg:address>
+                </reg:addressbook>
+                <reg:designated-states><reg:country>DE</reg:country></reg:designated-states>
+              </reg:applicant>
+            </reg:applicants>
+            <reg:inventors change-date="19991108">
+              <reg:inventor sequence="1" wishes-to-be-published="yes">
+                <reg:addressbook><reg:first-name>Ada</reg:first-name><reg:last-name>Lovelace</reg:last-name></reg:addressbook>
+              </reg:inventor>
+            </reg:inventors>
+            <reg:agents change-date="19991108">
+              <reg:agent rep-type="attorney" sequence="1" et-al="yes">
+                <reg:addressbook>
+                  <reg:name>Example Patent Firm</reg:name><reg:registered-number>12345</reg:registered-number>
+                </reg:addressbook>
+              </reg:agent>
+            </reg:agents>
+          </reg:parties>
+          <reg:designation-of-states change-date="20000517" change-gazette-num="2000/20">
+            <reg:designation-pct>
+              <reg:regional>
+                <reg:region><reg:country>EP</reg:country></reg:region>
+                <reg:country>AT</reg:country><reg:country>DE</reg:country>
+              </reg:regional>
+              <reg:national><reg:country>GB</reg:country></reg:national>
+            </reg:designation-pct>
+            <reg:exclusion-from-designation>
+              <reg:regional>
+                <reg:region><reg:country>EP</reg:country></reg:region>
+                <reg:country>TR</reg:country>
+              </reg:regional>
+            </reg:exclusion-from-designation>
+          </reg:designation-of-states>
+          <reg:invention-title lang="en" change-date="20000517"
+              change-gazette-num="2000/20">Apparatus for manufacturing green bricks</reg:invention-title>
+          <reg:term-of-grant change-date="20030212" change-gazette-num="2003/07">
+            <reg:lapsed-in-country><reg:country>AT</reg:country><reg:date>20030212</reg:date></reg:lapsed-in-country>
+          </reg:term-of-grant>
+          <reg:term-of-grant change-date="20030625" change-gazette-num="2003/26">
+            <reg:lapsed-in-country><reg:country>AT</reg:country><reg:date>20030212</reg:date></reg:lapsed-in-country>
+            <reg:lapsed-in-country><reg:country>SE</reg:country><reg:date>20030625</reg:date></reg:lapsed-in-country>
+          </reg:term-of-grant>
+        </reg:bibliographic-data>
+      </reg:register-document>
+    </reg:register-documents>
+  </ops:register-search>
 </ops:world-patent-data>
 """
 
@@ -179,11 +294,9 @@ def test_structured_parsers_handle_records_without_results() -> None:
 
     assert parse_citations(empty, publication_number="EP1").citations == []
     assert parse_equivalents(empty).equivalents == []
+    assert parse_register_biblio(empty, epo_number="EP1").publication_references == []
     assert parse_register_events(empty, epo_number="EP1").events == []
-    assert (
-        parse_register_procedural_steps(empty, epo_number="EP1").procedural_steps
-        == []
-    )
+    assert parse_register_procedural_steps(empty, epo_number="EP1").procedural_steps == []
 
 
 def test_parse_register_events_preserves_typed_text_and_gazette() -> None:
@@ -200,6 +313,61 @@ def test_parse_register_events_preserves_typed_text_and_gazette() -> None:
     assert event.gazette_reference.number == "2000/20"
 
 
+def test_parse_register_biblio_preserves_status_parties_and_state_scope() -> None:
+    result = parse_register_biblio(_REGISTER_BIBLIO_XML, epo_number="EP1000000")
+
+    assert result.bibliographic_status == "NO OPPOSITION FILED WITHIN TIMELIMIT"
+    assert result.bibliographic_language == "en"
+    assert result.application_id == "EP99203729P"
+    assert [reference.documents[0].kind for reference in result.publication_references] == [
+        "A1",
+        "B1",
+    ]
+    assert result.publication_references[0].change_gazette_number == "2000/20"
+    assert result.publication_references[0].valid_for_publications == ["A1", "B1"]
+    assert result.publication_references[1].documents[0].language == "de"
+    assert result.application_references[0].documents[0].doc_number == "99203729"
+    assert result.application_references[0].application_type == "regional"
+    assert len(result.priority_claim_sets) == 2
+    assert result.priority_claim_sets[0].claims[0].country == "NL"
+    assert result.priority_claim_sets[0].claims[0].office_of_filing == "NL"
+    assert result.priority_claim_sets[1].claims == []
+    assert result.patent_statuses[0].text == "Patent granted"
+    assert result.patent_statuses[0].status_code == "8"
+    assert result.titles[0].text == "Apparatus for manufacturing green bricks"
+    assert result.titles[0].change_gazette_number == "2000/20"
+    assert result.filing_languages[0].text == "nl"
+    assert result.filing_languages[0].change_gazette_number == "1999/45"
+    assert [party_set.role for party_set in result.party_sets] == [
+        "applicant",
+        "applicant",
+        "inventor",
+        "representative",
+    ]
+    assert result.party_sets[0].parties[0].name == "Example Applicant BV"
+    assert result.party_sets[0].parties[0].address_country == "NL"
+    assert result.party_sets[1].transfer_of_rights == "yes"
+    assert result.party_sets[1].parties[0].party_type == "proprietor"
+    assert result.party_sets[1].parties[0].designation == "as-indicated"
+    assert result.party_sets[1].parties[0].designated_states == ["DE"]
+    assert result.party_sets[2].parties[0].wishes_to_be_published is True
+    assert result.party_sets[3].parties[0].registered_number == "12345"
+    assert result.party_sets[3].parties[0].et_al is True
+    assert result.classification_sets[0].classifications == ["B28B5/02, B28B7/00"]
+    assert [
+        (designation.scope, designation.country, designation.excluded)
+        for designation in result.state_designation_sets[0].designations
+    ] == [
+        ("regional", "AT", False),
+        ("regional", "DE", False),
+        ("national", "GB", False),
+        ("regional", "TR", True),
+    ]
+    assert result.state_designation_sets[0].change_gazette_number == "2000/20"
+    assert [lapse.country for lapse in result.term_of_grant_snapshots[0].lapses] == ["AT"]
+    assert [lapse.country for lapse in result.term_of_grant_snapshots[1].lapses] == ["AT", "SE"]
+
+
 def test_parse_register_steps_preserves_typed_text_and_dates() -> None:
     result = parse_register_procedural_steps(_REGISTER_STEPS_XML, epo_number="EP1000000")
 
@@ -214,17 +382,19 @@ def test_parse_register_steps_preserves_typed_text_and_dates() -> None:
 
 
 @pytest.mark.asyncio
-async def test_client_uses_exact_citation_and_equivalents_paths() -> None:
+async def test_client_uses_exact_structured_record_paths() -> None:
     client = object.__new__(EpoOpsClient)
     client._request = AsyncMock(  # type: ignore[method-assign]
         side_effect=[
             SimpleNamespace(text=_CITATIONS_XML),
             SimpleNamespace(text=_EQUIVALENTS_XML),
+            SimpleNamespace(text=_REGISTER_BIBLIO_XML),
         ]
     )
 
     await client.fetch_citations(number=" ep 1000000 a1 ")
     await client.fetch_equivalents(number=" ep 1000000 a1 ")
+    await client.fetch_register_biblio(number=" ep 1000000 ")
 
     assert client._request.await_args_list[0].args == (  # type: ignore[attr-defined]
         "GET",
@@ -234,22 +404,33 @@ async def test_client_uses_exact_citation_and_equivalents_paths() -> None:
         "GET",
         "/rest-services/published-data/publication/docdb/EP1000000A1/equivalents",
     )
+    assert client._request.await_args_list[2].args == (  # type: ignore[attr-defined]
+        "GET",
+        "/rest-services/register/publication/epodoc/EP1000000/biblio",
+    )
 
 
 @pytest.mark.asyncio
 async def test_client_register_helpers_delegate_to_supported_sub_endpoints() -> None:
     client = object.__new__(EpoOpsClient)
     client.fetch_register = AsyncMock(  # type: ignore[method-assign]
-        side_effect=[_REGISTER_EVENTS_XML, _REGISTER_STEPS_XML]
+        side_effect=[
+            _REGISTER_BIBLIO_XML,
+            _REGISTER_EVENTS_XML,
+            _REGISTER_STEPS_XML,
+        ]
     )
 
+    biblio = await client.fetch_register_biblio(number="ep1000000")
     events = await client.fetch_register_events(number="ep1000000")
     steps = await client.fetch_register_procedural_steps(number="ep1000000")
 
+    assert biblio.publication_references[0].documents[0].kind == "A1"
     assert events.events[0].event_code == "0009012"
     assert steps.procedural_steps[0].step_code == "RFEE"
-    assert client.fetch_register.await_args_list[0].kwargs["sub"] == "events"  # type: ignore[attr-defined]
-    assert client.fetch_register.await_args_list[1].kwargs["sub"] == "procedural-steps"  # type: ignore[attr-defined]
+    assert client.fetch_register.await_args_list[0].kwargs["sub"] == "biblio"  # type: ignore[attr-defined]
+    assert client.fetch_register.await_args_list[1].kwargs["sub"] == "events"  # type: ignore[attr-defined]
+    assert client.fetch_register.await_args_list[2].kwargs["sub"] == "procedural-steps"  # type: ignore[attr-defined]
 
 
 def _patch_client(mock_client: MagicMock) -> Any:
@@ -276,6 +457,13 @@ def _patch_client(mock_client: MagicMock) -> Any:
             EquivalentsResponse(equivalents=[]),
             "EP1A1",
             "/published-data/publication/docdb/EP1A1/equivalents",
+        ),
+        (
+            get_epo_register_biblio,
+            "fetch_register_biblio",
+            RegisterBiblioResponse(epo_number="EP1000000"),
+            "EP1000000",
+            "/register/publication/epodoc/EP1000000/biblio",
         ),
         (
             get_epo_register_events,
@@ -325,9 +513,7 @@ async def test_citation_mcp_view_preserves_list_order() -> None:
         "EP2A1": CitationResponse(publication_number="EP2A1"),
     }
     client = MagicMock()
-    client.fetch_citations = AsyncMock(
-        side_effect=lambda *, number: responses[number]
-    )
+    client.fetch_citations = AsyncMock(side_effect=lambda *, number: responses[number])
 
     with _patch_client(client):
         result = await get_epo_citations(["EP1A1", "EP2A1"])

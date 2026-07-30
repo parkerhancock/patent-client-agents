@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Generic, Literal, TypeVar
+
 from pydantic import BaseModel, Field
+
+from mcp_data_core.envelope import Provenance
+
+T = TypeVar("T")
 
 
 class DocumentId(BaseModel):
@@ -186,6 +192,121 @@ class RegisterDocumentMetadata(BaseModel):
     date_produced: str | None = None
 
 
+class RegisterPatentStatus(BaseModel):
+    status_code: str | None = None
+    text: str
+    change_date: str | None = None
+
+
+class RegisterChangeMetadata(BaseModel):
+    change_date: str | None = None
+    change_gazette_number: str | None = None
+    valid_for_publications: list[str] = Field(default_factory=list)
+
+
+class RegisterDocumentId(BaseModel):
+    country: str | None = None
+    doc_number: str | None = None
+    kind: str | None = None
+    date: str | None = None
+    language: str | None = None
+    document_id_type: str | None = None
+
+
+class RegisterDocumentReference(RegisterChangeMetadata):
+    reference_type: str
+    application_type: str | None = None
+    reference_id: str | None = None
+    documents: list[RegisterDocumentId] = Field(default_factory=list)
+
+
+class RegisterPriorityClaim(BaseModel):
+    sequence: str | None = None
+    kind: str | None = None
+    country: str | None = None
+    document_number: str | None = None
+    date: str | None = None
+    office_of_filing: str | None = None
+
+
+class RegisterPriorityClaimSet(RegisterChangeMetadata):
+    claims: list[RegisterPriorityClaim] = Field(default_factory=list)
+    incorporation_by_reference: bool = False
+
+
+class RegisterChangedText(RegisterChangeMetadata):
+    text: str
+    language: str | None = None
+
+
+class RegisterParty(BaseModel):
+    role: str
+    name: str | None = None
+    party_type: str | None = None
+    designation: str | None = None
+    sequence: str | None = None
+    registered_number: str | None = None
+    address_lines: list[str] = Field(default_factory=list)
+    address_country: str | None = None
+    designated_states: list[str] = Field(default_factory=list)
+    et_al: bool | None = None
+    wishes_to_be_published: bool | None = None
+
+
+class RegisterPartySet(RegisterChangeMetadata):
+    role: str
+    transfer_of_rights: str | None = None
+    parties: list[RegisterParty] = Field(default_factory=list)
+
+
+class RegisterClassificationSet(RegisterChangeMetadata):
+    scheme: str
+    classifications: list[str] = Field(default_factory=list)
+
+
+class RegisterStateDesignation(BaseModel):
+    scope: str
+    country: str
+    region: str | None = None
+    excluded: bool = False
+
+
+class RegisterStateDesignationSet(RegisterChangeMetadata):
+    designations: list[RegisterStateDesignation] = Field(default_factory=list)
+
+
+class RegisterCountryLapse(BaseModel):
+    country: str
+    date: str | None = None
+    text: str | None = None
+
+
+class RegisterTermOfGrantSnapshot(RegisterChangeMetadata):
+    """Register lapse snapshot limited to the opposition-period data supplied by EPO."""
+
+    lapses: list[RegisterCountryLapse] = Field(default_factory=list)
+
+
+class RegisterBiblioResponse(RegisterDocumentMetadata):
+    """Correction-aware bibliographic and source-status data from the EP Register."""
+
+    bibliographic_status: str | None = None
+    bibliographic_language: str | None = None
+    application_id: str | None = None
+    country: str | None = None
+    patent_statuses: list[RegisterPatentStatus] = Field(default_factory=list)
+    publication_references: list[RegisterDocumentReference] = Field(default_factory=list)
+    application_references: list[RegisterDocumentReference] = Field(default_factory=list)
+    priority_claim_sets: list[RegisterPriorityClaimSet] = Field(default_factory=list)
+    titles: list[RegisterChangedText] = Field(default_factory=list)
+    filing_languages: list[RegisterChangedText] = Field(default_factory=list)
+    publication_languages: list[RegisterChangedText] = Field(default_factory=list)
+    party_sets: list[RegisterPartySet] = Field(default_factory=list)
+    classification_sets: list[RegisterClassificationSet] = Field(default_factory=list)
+    state_designation_sets: list[RegisterStateDesignationSet] = Field(default_factory=list)
+    term_of_grant_snapshots: list[RegisterTermOfGrantSnapshot] = Field(default_factory=list)
+
+
 class RegisterEventsResponse(RegisterDocumentMetadata):
     """Structured EPO Register dossier events."""
 
@@ -196,6 +317,46 @@ class RegisterProceduralStepsResponse(RegisterDocumentMetadata):
     """Structured EPO Register procedural steps."""
 
     procedural_steps: list[RegisterProceduralStep] = Field(default_factory=list)
+
+
+class EvidenceFailure(BaseModel):
+    """A typed, expected source failure within a partial aggregate response."""
+
+    code: Literal[
+        "not_found",
+        "rate_limited",
+        "upstream_server_error",
+        "upstream_api_error",
+        "parse_error",
+        "transport_error",
+    ]
+    message: str
+    retryable: bool
+    source_name: str
+    source_url: str
+
+
+class SourceEvidence(BaseModel, Generic[T]):
+    """One independently sourced record in the family-intelligence aggregate."""
+
+    outcome: Literal["ok", "empty", "not_applicable", "not_found", "error"]
+    data: T | None = None
+    provenance: Provenance | None = None
+    failure: EvidenceFailure | None = None
+
+
+class FamilyIntelligenceResponse(BaseModel):
+    """Source-separated EPO family evidence without a family-wide legal conclusion."""
+
+    publication_number: str
+    inpadoc_family: SourceEvidence[FamilyResponse]
+    simple_family_equivalents: SourceEvidence[EquivalentsResponse]
+    backward_citations: SourceEvidence[CitationResponse]
+    worldwide_legal_events: SourceEvidence[LegalEventsResponse]
+    register_biblio: SourceEvidence[RegisterBiblioResponse]
+    register_events: SourceEvidence[RegisterEventsResponse]
+    register_procedural_steps: SourceEvidence[RegisterProceduralStepsResponse]
+    limitations: list[str] = Field(default_factory=list)
 
 
 class NumberConversionResponse(BaseModel):

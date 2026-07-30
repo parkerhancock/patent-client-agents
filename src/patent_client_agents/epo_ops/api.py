@@ -36,6 +36,7 @@ from .models import (
     LegalEventsResponse,
     NumberConversionResponse,
     PdfDownloadResponse,
+    RegisterBiblioResponse,
     RegisterEventsResponse,
     RegisterProceduralStepsResponse,
     SearchResponse,
@@ -71,6 +72,7 @@ __all__ = [
     "fetch_family_details",
     "fetch_legal_events",
     "fetch_register",
+    "fetch_register_biblio",
     "fetch_register_events",
     "fetch_register_procedural_steps",
     "get_unitary_patent_package",
@@ -78,6 +80,7 @@ __all__ = [
     "CitationResponse",
     "EquivalentsResponse",
     "RegisterEventsResponse",
+    "RegisterBiblioResponse",
     "RegisterProceduralStepsResponse",
     "convert_number",
     "number_service",
@@ -373,6 +376,33 @@ async def fetch_register_events(
         )
     async with client_from_env() as cl:
         return await cl.fetch_register_events(
+            number=number,
+            doc_type=doc_type,
+            fmt=fmt,
+        )
+
+
+async def fetch_register_biblio(
+    number: str,
+    doc_type: str = "publication",
+    fmt: str = "epodoc",
+    *,
+    client: EpoOpsClient | None = None,
+) -> RegisterBiblioResponse:
+    """Fetch correction-aware bibliographic data from the EP Register.
+
+    Designations are application-stage records. Term-of-grant lapse snapshots do
+    not represent current national validation or lapse status.
+    """
+    if client is not None:
+        _warn_client_deprecated()
+        return await client.fetch_register_biblio(
+            number=number,
+            doc_type=doc_type,
+            fmt=fmt,
+        )
+    async with client_from_env() as cl:
+        return await cl.fetch_register_biblio(
             number=number,
             doc_type=doc_type,
             fmt=fmt,
