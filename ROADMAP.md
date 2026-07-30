@@ -14,7 +14,7 @@ without refactoring product code or expanding the public API.
   timestamp and an outdated retry-behavior test expectation.
 - The working tree contains candidate fixes for those two failures, but the MCP
   tool-count check then exposes stale 111/168 counts in documentation and plugin
-  metadata. The actual counts are 106/169.
+  metadata. The actual counts are 106/171.
 - Release notes, installation guidance, contributor tooling, secret scanning,
   and workflow pinning have drifted from the current package.
 
@@ -24,7 +24,7 @@ without refactoring product code or expanding the public API.
 - [x] Preserve and verify the refreshed UKIPO coverage metadata and generated
   atlas files.
 - [x] Replace stale MCP tool counts in user documentation and plugin metadata.
-- [x] Confirm the generated counts remain 106 default and 169 fully configured.
+- [x] Confirm the generated counts remain 106 default and 171 fully configured.
 
 Acceptance checks:
 
