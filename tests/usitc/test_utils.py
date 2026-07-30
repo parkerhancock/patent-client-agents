@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from patent_client_agents.usitc.utils import (
@@ -32,6 +34,42 @@ class TestGetEnvToken:
         monkeypatch.delenv("MISSING_TOKEN", raising=False)
         result = get_env_token("MISSING_TOKEN")
         assert result is None
+
+    def test_reads_token_file(self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+        token_file = tmp_path / "edis-token"
+        token_file.write_text("  mounted_token_123  \n")
+        monkeypatch.delenv("TEST_TOKEN", raising=False)
+        monkeypatch.setenv("TEST_TOKEN_FILE", str(token_file))
+
+        assert get_env_token("TEST_TOKEN") == "mounted_token_123"
+
+    def test_direct_token_takes_precedence_over_file(
+        self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+    ) -> None:
+        token_file = tmp_path / "edis-token"
+        token_file.write_text("mounted_token")
+        monkeypatch.setenv("TEST_TOKEN", "direct_token")
+        monkeypatch.setenv("TEST_TOKEN_FILE", str(token_file))
+
+        assert get_env_token("TEST_TOKEN") == "direct_token"
+
+    def test_blank_direct_token_falls_back_to_file(
+        self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+    ) -> None:
+        token_file = tmp_path / "edis-token"
+        token_file.write_text("mounted_token")
+        monkeypatch.setenv("TEST_TOKEN", "  ")
+        monkeypatch.setenv("TEST_TOKEN_FILE", str(token_file))
+
+        assert get_env_token("TEST_TOKEN") == "mounted_token"
+
+    def test_returns_none_for_missing_token_file(
+        self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+    ) -> None:
+        monkeypatch.delenv("TEST_TOKEN", raising=False)
+        monkeypatch.setenv("TEST_TOKEN_FILE", str(tmp_path / "missing"))
+
+        assert get_env_token("TEST_TOKEN") is None
 
 
 class TestCoerceBool:

@@ -744,7 +744,5 @@ async def search_trademark_assignments(
     return ListEnvelope[dict](
         summary=summary,
         items=items,
-        provenance=_tm_assignment_provenance(
-            "/ipas/search/api/v2/public/trademark/exportTradeMarkData"
-        ),
+        provenance=_tm_assignment_provenance("/ipas/search/api/v3/public/search/trademark"),
     )

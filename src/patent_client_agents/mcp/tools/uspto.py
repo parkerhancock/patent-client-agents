@@ -476,14 +476,11 @@ async def download_file_history(
 ):
     """Bulk-download file-history documents for a USPTO application.
 
-    Returns one ``ResourceLink`` per matching PDF (or a single ResourceLink
-    if exactly one matches) alongside a structured manifest with the same
-    per-document URIs. Resource-aware MCP clients (e.g. Claude CoWork)
-    fetch the per-doc bytes through ``resources/read``; the manifest also
-    carries a zip ``download_url`` for clients that can hit the HTTP
-    fallback domain. Cap: 50 documents per call. Filters AND together;
-    if more than 50 documents match, the call refuses and asks you to
-    narrow.
+    Returns a signed HTTPS ``download_url`` for the zipped documents (and
+    per-document URLs when available), good for ~24h; resource-aware MCP
+    clients also get per-document ``resource_link``s. Cap: 50 documents per
+    call. Filters AND together; if more than 50 documents match, the call
+    refuses and asks you to narrow.
 
     Use ``list_file_history`` to discover document_identifier values and
     document codes for an application.
@@ -1342,10 +1339,9 @@ async def download_ptab_trial_documents(
 ):
     """Bulk-download party filings for one AIA trial.
 
-    Returns per-document ``ResourceLink``s (one per matching paper)
-    plus a structured manifest. Resource-aware MCP clients fetch the
-    per-doc bytes via ``resources/read``; the response also includes a
-    zip ``download_url`` for HTTP-fallback clients. Fetches everything
+    Returns a signed HTTPS ``download_url`` for the zipped papers (and
+    per-document URLs when available); resource-aware MCP clients also get
+    per-document ``resource_link``s. Fetches everything
     the parties filed in the trial — petitions, responses, motions,
     replies, exhibits, depositions, notices — all of it. Cap: 100
     documents per call. Big IPRs with many exhibits may need narrowing

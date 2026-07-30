@@ -2,7 +2,8 @@
 
 Verifies that ``patent_client_agents.mcp.tools.usitc`` registers the six
 EDIS tools (and the EDIS download fetcher) only when ``USITC_EDIS_TOKEN``
-is set, while the three unauthenticated / self-gating tools
+or ``USITC_EDIS_TOKEN_FILE`` provides a token, while the three
+unauthenticated / self-gating tools
 (``search_hts_tariffs``, ``run_dataweb_report``, ``list_ids_investigations``)
 register unconditionally.
 
@@ -22,6 +23,7 @@ registered.
 from __future__ import annotations
 
 import importlib
+from pathlib import Path
 
 import pytest
 from fastmcp import FastMCP
@@ -130,6 +132,24 @@ class TestUsitcEnvGating:
         assert EDIS_GATED_TOOLS <= names
         assert ALWAYS_REGISTERED_TOOLS <= names
 
+    @pytest.mark.asyncio
+    async def test_all_edis_tools_registered_when_token_file_set(
+        self,
+        monkeypatch: pytest.MonkeyPatch,
+        fresh_state: None,
+        tmp_path: Path,
+    ) -> None:
+        token_file = tmp_path / "edis-token"
+        token_file.write_text("test_edis_token")
+        monkeypatch.delenv("USITC_EDIS_TOKEN", raising=False)
+        monkeypatch.setenv("USITC_EDIS_TOKEN_FILE", str(token_file))
+
+        usitc_module = _reload_usitc_with_fresh_mcp()
+
+        tools = await usitc_module.usitc_mcp.list_tools()  # type: ignore[attr-defined]
+        names = {t.name for t in tools}
+        assert EDIS_GATED_TOOLS <= names
+
     def test_edis_download_source_skipped_when_env_unset(
         self, monkeypatch: pytest.MonkeyPatch, fresh_state: None
     ) -> None:
@@ -152,6 +172,22 @@ class TestUsitcEnvGating:
 
         assert "usitc/documents" in downloads._SOURCES
         assert downloads._SOURCES["usitc/documents"].mime_type == "application/pdf"
+
+    def test_edis_download_source_registered_when_token_file_set(
+        self,
+        monkeypatch: pytest.MonkeyPatch,
+        fresh_state: None,
+        tmp_path: Path,
+    ) -> None:
+        token_file = tmp_path / "edis-token"
+        token_file.write_text("test_edis_token")
+        monkeypatch.delenv("USITC_EDIS_TOKEN", raising=False)
+        monkeypatch.setenv("USITC_EDIS_TOKEN_FILE", str(token_file))
+
+        downloads._SOURCES.clear()
+        _reload_usitc_with_fresh_mcp()
+
+        assert "usitc/documents" in downloads._SOURCES
 
     def test_gated_functions_remain_importable(
         self, monkeypatch: pytest.MonkeyPatch, fresh_state: None

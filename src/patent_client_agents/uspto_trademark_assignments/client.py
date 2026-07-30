@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from mcp_data_core.base_client import BaseAsyncClient
+from mcp_data_core.exceptions import ApiError
 
 from .models import TrademarkAssignmentRecord, TrademarkAssignmentSearchResponse
 
@@ -54,29 +55,64 @@ class TrademarkAssignmentClient(BaseAsyncClient):
         Returns:
             TrademarkAssignmentSearchResponse containing matching records.
         """
-        search_criteria = list(criteria)
-
-        # Add pagination params
-        if use_pagination and start_row > 1:
-            search_criteria.append({"property": str(start_row), "searchBy": "startRow"})
-            search_criteria.append({"property": str(start_row + limit - 1), "searchBy": "endRow"})
-        search_criteria.append({"property": str(min(limit, 1000)), "searchBy": "rowsNeeded"})
-
-        payload = {"searchCriteria": search_criteria}
+        name_searches = {
+            "assigneeName",
+            "assignorName",
+            "correspondentName",
+            "domesticRepresentative",
+        }
+        search_criteria = [
+            {
+                **criterion,
+                "matchType": ("Contains" if criterion["searchBy"] in name_searches else "Exact"),
+                "order": index,
+                "relation": "" if index == 1 else "AND",
+            }
+            for index, criterion in enumerate(criteria, start=1)
+        ]
+        payload = {
+            "searchCriteria": search_criteria,
+            "dataFilter": {
+                "filterBy": [],
+                "rowsPerPage": 1000,
+                "currentPage": 1,
+            },
+        }
 
         http_response = await self._request(
             "POST",
-            "/ipas/search/api/v2/public/trademark/exportTradeMarkData",
+            "/ipas/search/api/v3/public/search/trademark",
             json=payload,
             context="Trademark assignment search",
             timeout=timeout,
         )
         response_data: Any = http_response.json()
+        success_response = (
+            response_data.get("successResponse") if isinstance(response_data, dict) else None
+        )
+        if not isinstance(success_response, dict):
+            error = response_data.get("error") if isinstance(response_data, dict) else None
+            message = (
+                error.get("error_message")
+                if isinstance(error, dict)
+                else "Unexpected Trademark Assignment Center response"
+            )
+            status_code = (
+                response_data.get("statusCode") if isinstance(response_data, dict) else None
+            )
+            raise ApiError(message, status_code=status_code, response_body=http_response.text)
 
-        # API returns a list with one element containing searchCriteria and data
-        if isinstance(response_data, list) and len(response_data) > 0:
-            return TrademarkAssignmentSearchResponse.model_validate(response_data[0])
-        return TrademarkAssignmentSearchResponse.model_validate({"searchCriteria": [], "data": []})
+        records = success_response.get("data")
+        if not isinstance(records, list):
+            records = []
+        if use_pagination:
+            start_index = max(start_row - 1, 0)
+        else:
+            start_index = 0
+        selected = records[start_index : start_index + min(limit, 1000)]
+        return TrademarkAssignmentSearchResponse.model_validate(
+            {"searchCriteria": criteria, "data": selected}
+        )
 
     async def search_by_assignee(
         self,
@@ -237,9 +273,9 @@ class TrademarkAssignmentClient(BaseAsyncClient):
             "reelFrame": reel_frame,
             "correspondentName": correspondent_name,
             "domesticRepresentative": domestic_representative,
-            "internationalRegistration": international_registration,
-            "startExecutionDate": start_execution_date,
-            "endExecutionDate": end_execution_date,
+            "internationalRegNumber": international_registration,
+            "startDate": start_execution_date,
+            "endDate": end_execution_date,
         }
 
         for search_by, value in field_map.items():
