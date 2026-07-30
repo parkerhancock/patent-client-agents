@@ -248,6 +248,7 @@ JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the
 | **IP Australia** | Australian patents, trade marks, and registered designs from IP Australia's OAuth 2.0 search APIs, plus the weekly IP RAPID bulk catalog on data.gov.au (CC-BY 4.0) — *live-search MCP tools register when `IPAUSTRALIA_CLIENT_ID` + `IPAUSTRALIA_CLIENT_SECRET` are set; bulk catalog is public, no auth* |
 | **IPOS Singapore** | The four Singapore IP statutes (Patents Act 1994, Trade Marks Act 1998, Registered Designs Act 2000, Copyright Act 2021) plus the three IPOS examination / work manuals (Patent Examination Guidelines, Trade Marks Work Manual, Industrial Designs Work Manual) — *public, no auth; runs against local SQLite/FTS5 snapshots built by `patent-client-agents-build-ipos-statutes-corpus` and `patent-client-agents-build-ipos-manuals-corpus`* |
 | **INPI Brazil** | Brazilian IP — weekly Revista da Propriedade Industrial (RPI) bulk feed (patents, trade marks, designs, GIs, IC topographies, software programs, technology contracts, INPI communications) on `dados.gov.br` (no auth; Decreto 8.777/2016), plus a corpus-backed view of the LPI (Lei 9.279/1996) — Brazil's unified IP statute (patents + designs + trade marks + GIs + trade-secrets / unfair-competition in one law). The LPI corpus bundles authoritative Portuguese (Planalto) and English (WIPO Lex) text per Article and runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-inpi-br-statutes-corpus`. |
+| **ILPO Israel** | Five Israeli IP statutes (Patents Law 1967, Trade Marks Ordinance 1972, Designs Law 2017, Copyright Act 2007, and the distinctive **Commercial Torts Law 1999** — Israel's standalone trade-secret statute with statutory damages in Art. 13), plus the data.gov.il CKAN trade-mark register feed — *statutes run against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-ilpo-statutes-corpus`; TM feed is public, no auth* |
 | **JPO** | Japanese patents, examination history, PCT national phase — *MCP tools register when `JPO_API_USERNAME` + `JPO_API_PASSWORD` are set; not exposed by the hosted demo* |
 | **TIPO Taiwan** | Taiwan patents, utility models, designs, and trademarks via the TIPO OpenData REST API — biblio-only (no claims/figures/abstracts in API); covers `TW/TIPO/Patents`, `TW/TIPO/UtilityModels`, `TW/TIPO/Designs`, and `TW/TIPO/Trademarks` with combined `*_events` surfaces for post-filing alterations / changes / divisions. *MCP tools register when `TIPO_API_KEY` (a single `tk` UUID issued by TIPO on request) is set; not exposed by the hosted demo* |
 | **KIPO Korea** | Korean patents and utility models, trademarks, and designs via the KIPRIS Plus REST API operated by KIPI on behalf of KIPO. Free-text + structured search on each register, single-number fetch with list-accept (capped at 50). *9 MCP tools register when `KIPO_KIPRIS_API_KEY` is set; BYOK per KIPRIS Plus ToS §11 — per-user keys only, no shared-key proxy permitted; not exposed by the hosted demo* |
@@ -273,9 +274,9 @@ and retry logic via `mcp-data-core`.
 
 ## API keys
 
-116 patent + IP MCP tools are exposed by default. Credentialed
+120 patent + IP MCP tools are exposed by default. Credentialed
 families register when their environment variables are present, bringing
-the local/private surface up to 181 tools when every env-gated family is
+the local/private surface up to 185 tools when every env-gated family is
 configured.
 
 | Variable | Source | Required | How to get |

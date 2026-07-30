@@ -417,6 +417,32 @@ sources:
       that route, only the bulk client needs to swap.
 
   # ────────────────────────────────────────────────────────────────────
+  # IL — ILPO Israel (trade-mark feed)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: IL/ILPO/TradeMarks
+    name: ILPO Israel — Trade Marks (data.gov.il)
+    jurisdiction: IL
+    wipo_st3_code: IL
+    issuing_body: Israel Patent Office (Ministry of Justice)
+    rights: [trademark]
+    data_types: [bulk_data, bibliographic, legal_status]
+    access:
+      method: bulk_download
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.ilpo_tm
+    last_verified: 2026-05-16
+    category: registered_ip
+    transport: mcp_proxy
+    notes: |
+      data.gov.il CKAN catalog publishes the ILPO national TM register
+      under a free open-data licence. The live ILPO TM portal at
+      trademarks.justice.gov.il is ASP.NET / Kendo UI with no documented
+      API — the CKAN feed is the proper on-ramp.
+
+  # ────────────────────────────────────────────────────────────────────
   # JP — JPO (patents, trademarks, designs)
   # ────────────────────────────────────────────────────────────────────
 
@@ -841,6 +867,38 @@ sources:
     update_cadence: quarterly
     last_synced: 2026-05-16
     corpus_version: "unknown — needs verification"
+
+  # ────────────────────────────────────────────────────────────────────
+  # IL — ILPO Israel substantive law
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: IL/ILPO/Statutes
+    name: ILPO Israel — IP statutes (Patents, TM, Designs, Copyright, Commercial Torts)
+    jurisdiction: IL
+    wipo_st3_code: IL
+    issuing_body: Israel Patent Office (Ministry of Justice)
+    rights: [patent, trademark, design, copyright]
+    data_types: [statutes]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.ilpo_statutes
+    last_verified: 2026-05-16
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: irregular
+    last_synced: 2026-05-16
+    corpus_version: "WIPO Lex authoritative EN"
+    notes: |
+      Five Israeli IP statutes — Patents Law 5727-1967, Trade Marks
+      Ordinance 5732-1972, Designs Law 5777-2017, Copyright Act
+      5768-2007, and **Commercial Torts Law 5759-1999** (the
+      distinctive piece: Israel's standalone trade-secret statute,
+      Arts. 6-9, with statutory damages in Art. 13). Bundled corpus
+      is built from WIPO Lex authoritative EN translations.
 
   # ════════════════════════════════════════════════════════════════════
   # SUBSTANTIVE LAW — reviewing-court case law (live proxy)

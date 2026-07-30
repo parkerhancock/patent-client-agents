@@ -31,6 +31,7 @@ from .tools.epo_pct_guidelines import epo_pct_guidelines_mcp
 from .tools.epo_up_guidelines import epo_up_guidelines_mcp
 from .tools.euipo import euipo_mcp
 from .tools.fees import fees_mcp
+from .tools.ilpo import ilpo_mcp
 from .tools.inpi_br_bulk import inpi_br_bulk_mcp
 from .tools.inpi_br_statutes import inpi_br_statutes_mcp
 from .tools.inpi_pi import inpi_pi_mcp
@@ -72,8 +73,8 @@ ip_mcp = FastMCP(
         "judgment database), EUIPO (EU Trade Marks + Registered "
         "Community Designs — env-gated on EUIPO_CLIENT_ID / EUIPO_CLIENT_SECRET), "
         "and UPC (Unified Patent Court decisions/orders feed + corpus-backed "
-        "UPCA / RoP / Fees statutes). 116 default read-only tools; up to "
-        "181 tools when every env-gated family is configured. Tools are grouped by intent."
+        "UPCA / RoP / Fees statutes). 120 default read-only tools; up to "
+        "185 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
 
@@ -103,6 +104,7 @@ ip_mcp.mount(ip_australia_patents_mcp)
 ip_mcp.mount(ip_australia_trademarks_mcp)
 ip_mcp.mount(ip_australia_designs_mcp)
 ip_mcp.mount(ip_australia_bulk_mcp)
+ip_mcp.mount(ilpo_mcp)
 ip_mcp.mount(ipo_in_statutes_mcp)
 ip_mcp.mount(ipo_in_mppp_mcp)
 ip_mcp.mount(ipos_mcp)
