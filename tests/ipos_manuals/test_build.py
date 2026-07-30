@@ -266,4 +266,4 @@ def test_parsed_section_immutability():
 
     sec = ParsedSection(section_label="1.5.3", title="Test", text="body")
     with pytest.raises(FrozenInstanceError):
-        sec.section_label = "1.5.4"  # type: ignore[misc]
+        sec.section_label = "1.5.4"  # ty: ignore[invalid-assignment]

@@ -33,7 +33,7 @@ from pathlib import Path
 import httpx
 from pypdf import PdfReader
 
-from law_tools_core.resilience import default_retryer
+from mcp_data_core.resilience import default_retryer
 
 from .schema import DDL, SCHEMA_VERSION
 
