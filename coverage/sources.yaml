@@ -389,6 +389,34 @@ sources:
     transport: mcp_proxy
 
   # ────────────────────────────────────────────────────────────────────
+  # BR — INPI Brazil (RPI weekly bulk feed)
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: BR/INPI/RPI
+    name: INPI Brazil — Revista da Propriedade Industrial (dados.gov.br)
+    jurisdiction: BR
+    wipo_st3_code: BR
+    issuing_body: Instituto Nacional da Propriedade Industrial
+    rights: [patent, trademark, design, gi]
+    data_types: [bulk_data, bibliographic, legal_status]
+    access:
+      method: bulk_download
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.inpi_br_bulk
+    last_verified: 2026-05-16
+    category: registered_ip
+    transport: mcp_proxy
+    notes: |
+      Brazil's weekly official IP bulletin (patents, trade marks,
+      designs, GIs, IC topographies, software programs, technology
+      contracts, and INPI communications). Open license per Decreto
+      8.777/2016. The catalog API endpoint is the legacy CKAN
+      ``package_show`` action on dados.gov.br; if the portal retires
+      that route, only the bulk client needs to swap.
+
+  # ────────────────────────────────────────────────────────────────────
   # JP — JPO (patents, trademarks, designs)
   # ────────────────────────────────────────────────────────────────────
 
@@ -710,6 +738,38 @@ sources:
     update_cadence: monthly
     last_synced: 2026-07-21
     corpus_version: "snapshot-2026-07-21"
+
+  # ────────────────────────────────────────────────────────────────────
+  # BR — LPI (Lei 9.279/1996) unified IP statute
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: BR/LPI/Statute
+    name: Lei da Propriedade Industrial (LPI / Lei 9.279/1996)
+    jurisdiction: BR
+    wipo_st3_code: BR
+    issuing_body: República Federativa do Brasil (Presidência da República)
+    rights: [patent, trademark, design, gi]
+    data_types: [statutes]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.inpi_br_statutes
+    last_verified: 2026-05-16
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: irregular
+    last_synced: 2026-05-16
+    corpus_version: "unknown — needs verification"
+    notes: |
+      Brazil's unified IP code — patents (Title I), designs (Title II),
+      trade marks (Title III), GIs (Title IV), trade secrets / unfair
+      competition (Title V, Art. 195), and criminal sanctions. Bundles
+      both PT (authoritative — Planalto) and EN (WIPO Lex translation)
+      text per Article. Cadence is irregular because the LPI is amended
+      by occasional federal laws (no published schedule).
 
   # ────────────────────────────────────────────────────────────────────
   # UPC — Unified Patent Court statutes
