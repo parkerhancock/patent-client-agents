@@ -48,6 +48,21 @@ class FamilySearchResponse(BaseModel):
     families: list[FamilySearchEntry] = Field(default_factory=list)
 
 
+class EpoCitation(BaseModel):
+    """Patent or non-patent literature cited in an EPO biblio record."""
+
+    sequence: int | None = None
+    cited_by: str | None = None
+    cited_phase: str | None = None
+    office: str | None = None
+    categories: list[str] = Field(default_factory=list)
+    relevant_claims: list[str] = Field(default_factory=list)
+    passages: list[str] = Field(default_factory=list)
+    patent_document: DocumentId | None = None
+    non_patent_literature: str | None = None
+    source_url: str | None = None
+
+
 class BiblioRecord(BaseModel):
     docdb_number: str | None = None
     application_number: str | None = None
@@ -65,6 +80,18 @@ class BiblioRecord(BaseModel):
 
 class BiblioResponse(BaseModel):
     documents: list[BiblioRecord] = Field(default_factory=list)
+
+
+class CitationResponse(BaseModel):
+    publication_number: str
+    citations: list[EpoCitation] = Field(default_factory=list)
+
+
+class EquivalentsResponse(BaseModel):
+    """Simple-family equivalents returned by the OPS equivalents endpoint."""
+
+    input_document: DocumentId | None = None
+    equivalents: list[DocumentId] = Field(default_factory=list)
 
 
 class Claim(BaseModel):
@@ -113,6 +140,62 @@ class LegalEvent(BaseModel):
 class LegalEventsResponse(BaseModel):
     publication_reference: DocumentId | None = None
     events: list[LegalEvent] = Field(default_factory=list)
+
+
+class RegisterText(BaseModel):
+    text_type: str | None = None
+    text: str
+
+
+class RegisterDate(BaseModel):
+    date_type: str | None = None
+    date: str
+
+
+class RegisterGazetteReference(BaseModel):
+    number: str | None = None
+    date: str | None = None
+
+
+class RegisterEvent(BaseModel):
+    id: str | None = None
+    event_type: str | None = None
+    event_date: str | None = None
+    event_code: str | None = None
+    description: str | None = None
+    texts: list[RegisterText] = Field(default_factory=list)
+    gazette_reference: RegisterGazetteReference | None = None
+
+
+class RegisterProceduralStep(BaseModel):
+    id: str | None = None
+    phase: str | None = None
+    step_code: str | None = None
+    description: str | None = None
+    texts: list[RegisterText] = Field(default_factory=list)
+    dates: list[RegisterDate] = Field(default_factory=list)
+    gazette_reference: RegisterGazetteReference | None = None
+
+
+class RegisterDocumentMetadata(BaseModel):
+    epo_number: str
+    status: str | None = None
+    produced_by: str | None = None
+    language: str | None = None
+    dtd_version: str | None = None
+    date_produced: str | None = None
+
+
+class RegisterEventsResponse(RegisterDocumentMetadata):
+    """Structured EPO Register dossier events."""
+
+    events: list[RegisterEvent] = Field(default_factory=list)
+
+
+class RegisterProceduralStepsResponse(RegisterDocumentMetadata):
+    """Structured EPO Register procedural steps."""
+
+    procedural_steps: list[RegisterProceduralStep] = Field(default_factory=list)
 
 
 class NumberConversionResponse(BaseModel):

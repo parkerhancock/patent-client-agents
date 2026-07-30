@@ -158,11 +158,47 @@ def _summarize_epo_family(record: dict, *, fallback_number: str) -> str:
     return f"**EPO {pub}** — INPADOC family: {num} member(s)."
 
 
+def _summarize_epo_citations(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("publication_number") or fallback_number
+    citations = record.get("citations") or []
+    patent_count = sum(
+        1
+        for citation in citations
+        if isinstance(citation, dict) and citation.get("patent_document")
+    )
+    npl_count = sum(
+        1
+        for citation in citations
+        if isinstance(citation, dict) and citation.get("non_patent_literature")
+    )
+    return (
+        f"**EPO {pub}** — {len(citations)} backward citation(s): "
+        f"{patent_count} patent, {npl_count} non-patent."
+    )
+
+
+def _summarize_epo_equivalents(record: dict, *, fallback_number: str) -> str:
+    equivalents = record.get("equivalents") or []
+    return f"**EPO {fallback_number}** — {len(equivalents)} simple-family equivalent(s)."
+
+
 def _summarize_epo_legal_events(record: dict, *, fallback_number: str) -> str:
     events = record.get("events") or []
     ref = record.get("publication_reference") or {}
     pub = ref.get("doc_number") or fallback_number
     return f"**EPO {pub}** — {len(events)} legal event(s) on file."
+
+
+def _summarize_epo_register_events(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("epo_number") or fallback_number
+    events = record.get("events") or []
+    return f"**European Patent Register {pub}** — {len(events)} dossier event(s)."
+
+
+def _summarize_epo_procedural_steps(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("epo_number") or fallback_number
+    steps = record.get("procedural_steps") or []
+    return f"**European Patent Register {pub}** — {len(steps)} procedural step(s)."
 
 
 def _summarize_epo_number_conversion(input_number: str, record: dict) -> str:
@@ -571,6 +607,78 @@ async def get_epo_family(
 
 
 @epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_citations(
+    patent_number: Annotated[
+        str | list[str],
+        "Patent document number, or a list for portfolio workflows. "
+        "Returns backward citations recorded in EPO bibliographic data.",
+    ],
+) -> ListEnvelope[dict]:
+    """Get structured backward patent and non-patent citations for one or more publications."""
+    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    if not numbers:
+        raise ValidationError("get_epo_citations requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_citations(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_citations(items[0], fallback_number=numbers[0])
+        path = f"/published-data/publication/docdb/{numbers[0]}/biblio"
+    else:
+        summary = f"EPO OPS citations — fetched {len(items)} record(s): " + ", ".join(numbers)
+        path = "/published-data/publication"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_provenance(path),
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_equivalents(
+    patent_number: Annotated[
+        str | list[str],
+        "Patent document number, or a list for portfolio workflows. "
+        "Returns simple-family publications carrying the same technical disclosure.",
+    ],
+) -> ListEnvelope[dict]:
+    """Get simple-family equivalent publications for one or more patent documents."""
+    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    if not numbers:
+        raise ValidationError("get_epo_equivalents requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_equivalents(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_equivalents(items[0], fallback_number=numbers[0])
+        path = f"/published-data/publication/docdb/{numbers[0]}/equivalents"
+    else:
+        summary = f"EPO OPS equivalents — fetched {len(items)} record(s): " + ", ".join(numbers)
+        path = "/published-data/publication"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_provenance(path),
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
 async def get_epo_legal_events(
     patent_number: Annotated[
         str | list[str],
@@ -676,11 +784,19 @@ async def convert_epo_number(
 
 _EPO_REGISTER_BASE = "https://ops.epo.org/3.2"
 _EPO_REGISTER_NAME = "EPO Register (Unitary Patent)"
+_EPO_REGISTER_RECORD_NAME = "European Patent Register"
 
 
 def _epo_register_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}`` on the EPO Register."""
     return make_provenance(source_url=f"{_EPO_REGISTER_BASE}{path}", source_name=_EPO_REGISTER_NAME)
+
+
+def _epo_register_record_provenance(path: str) -> Any:
+    return make_provenance(
+        source_url=f"{_EPO_REGISTER_BASE}{path}",
+        source_name=_EPO_REGISTER_RECORD_NAME,
+    )
 
 
 def _summarize_unitary_patent(record: dict) -> str:
@@ -704,6 +820,76 @@ def _summarize_unitary_patent(record: dict) -> str:
     return (
         f"**Unitary Patent {epo_number}** — status: {status_text} "
         f"({flag}); effective: {change_date}."
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_register_events(
+    epo_number: Annotated[
+        str | list[str],
+        "EP publication number, or a list. Examples: 'EP1000000', ['EP1000000', 'EP4108782'].",
+    ],
+) -> ListEnvelope[dict]:
+    """Get structured dossier events from the European Patent Register."""
+    numbers = [epo_number] if isinstance(epo_number, str) else list(epo_number)
+    if not numbers:
+        raise ValidationError("get_epo_register_events requires at least one EP number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_register_events(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_register_events(items[0], fallback_number=numbers[0])
+        path = f"/rest-services/register/publication/epodoc/{numbers[0]}/events"
+    else:
+        summary = f"European Patent Register events — fetched {len(items)} record(s)."
+        path = "/rest-services/register/publication/epodoc"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_register_record_provenance(path),
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_procedural_steps(
+    epo_number: Annotated[
+        str | list[str],
+        "EP publication number, or a list. Examples: 'EP1000000', ['EP1000000', 'EP4108782'].",
+    ],
+) -> ListEnvelope[dict]:
+    """Get structured procedural steps from the European Patent Register."""
+    numbers = [epo_number] if isinstance(epo_number, str) else list(epo_number)
+    if not numbers:
+        raise ValidationError("get_epo_procedural_steps requires at least one EP number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_register_procedural_steps(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_procedural_steps(items[0], fallback_number=numbers[0])
+        path = f"/rest-services/register/publication/epodoc/{numbers[0]}/procedural-steps"
+    else:
+        summary = f"European Patent Register steps — fetched {len(items)} record(s)."
+        path = "/rest-services/register/publication/epodoc"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_register_record_provenance(path),
     )
 
 

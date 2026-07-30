@@ -65,6 +65,36 @@ biblio.publication_date
 biblio.filing_date
 ```
 
+### fetch_citations(number) -> CitationResponse
+
+Get backward citations recorded in EPO bibliographic data. Patent citations
+include a canonical `docdb` identifier when available. Search-report category,
+cited phase, relevant claims, passages, and non-patent literature are retained.
+
+```python
+citations = await client.fetch_citations(number="EP1234567A1")
+for citation in citations.citations:
+    citation.patent_document
+    citation.non_patent_literature
+    citation.categories
+    citation.relevant_claims
+    citation.passages
+```
+
+### fetch_equivalents(number) -> EquivalentsResponse
+
+Get simple-family publications carrying the same technical disclosure. This is
+distinct from the broader priority-linked INPADOC family returned by
+`fetch_family`.
+
+```python
+equivalents = await client.fetch_equivalents(number="EP1234567A1")
+for publication in equivalents.equivalents:
+    publication.country
+    publication.doc_number
+    publication.kind
+```
+
 ### fetch_fulltext(doc_id, part) -> FullTextResponse
 
 Get claims or description.
@@ -105,6 +135,31 @@ for event in events.events:
     event.code
     event.description
     event.date
+```
+
+### fetch_register_events(number) -> RegisterEventsResponse
+
+Get dossier events from the European Patent Register. These are distinct from
+the worldwide INPADOC legal events returned by `fetch_legal_events`.
+
+```python
+record = await client.fetch_register_events(number="EP1000000")
+for event in record.events:
+    event.event_date
+    event.event_code
+    event.description
+```
+
+### fetch_register_procedural_steps(number) -> RegisterProceduralStepsResponse
+
+Get the structured procedural chronology for a European patent application.
+
+```python
+record = await client.fetch_register_procedural_steps(number="EP1000000")
+for step in record.procedural_steps:
+    step.phase
+    step.step_code
+    step.dates
 ```
 
 ### download_pdf(doc_id) -> PdfDownloadResponse

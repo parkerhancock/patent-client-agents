@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from typing import TypedDict
 
 import lxml.etree as etree  # ty: ignore[unresolved-import]  # lxml lacks PEP 561 stubs
 
@@ -11,6 +12,7 @@ from mcp_data_core.exceptions import ParseError
 from .models import (
     BiblioRecord,
     BiblioResponse,
+    CitationResponse,
     Claim,
     ClassificationMapping,
     ClassificationMappingResponse,
@@ -24,12 +26,21 @@ from .models import (
     CpcSearchResult,
     CpcTitlePart,
     DocumentId,
+    EpoCitation,
+    EquivalentsResponse,
     FamilyMember,
     FamilyResponse,
     FullTextResponse,
     LegalEvent,
     LegalEventsResponse,
     NumberConversionResponse,
+    RegisterDate,
+    RegisterEvent,
+    RegisterEventsResponse,
+    RegisterGazetteReference,
+    RegisterProceduralStep,
+    RegisterProceduralStepsResponse,
+    RegisterText,
     SearchResponse,
     SearchResult,
     UnitaryPatentPackage,
@@ -43,6 +54,15 @@ NS = {
     "cpc": "http://www.epo.org/cpcexport",
     "reg": "http://www.epo.org/register",
 }
+
+
+class _RegisterMetadata(TypedDict):
+    epo_number: str
+    status: str | None
+    produced_by: str | None
+    language: str | None
+    dtd_version: str | None
+    date_produced: str | None
 
 
 class XmlParseError(ParseError):
@@ -119,6 +139,44 @@ def _parse_document_id(node: etree._Element | None) -> DocumentId:  # type: igno
             "id_type": node.get("document-id-type"),
             "name": _text(node, "./epo:name"),
         }
+    )
+
+
+def _parse_citation(node: etree._Element) -> EpoCitation:  # type: ignore[attr-defined]
+    patent_node = _first(node.xpath("./*[local-name()='patcit']"))
+    document_node = None
+    if patent_node is not None:
+        document_node = _first(
+            patent_node.xpath("./*[local-name()='document-id'][@document-id-type='docdb']")
+        )
+        if document_node is None:
+            document_node = _first(patent_node.xpath("./*[local-name()='document-id']"))
+    non_patent_node = _first(node.xpath("./*[local-name()='nplcit']"))
+    non_patent_literature = None
+    if non_patent_node is not None:
+        non_patent_literature = " ".join("".join(non_patent_node.itertext()).split()) or None
+
+    sequence_raw = node.get("sequence")
+    if sequence_raw is None and patent_node is not None:
+        sequence_raw = patent_node.get("num")
+    sequence = int(sequence_raw) if sequence_raw and sequence_raw.isdigit() else None
+
+    return EpoCitation(
+        sequence=sequence,
+        cited_by=node.get("cited-by")
+        or (patent_node.get("cited-by") if patent_node is not None else None),
+        cited_phase=node.get("cited-phase")
+        or (patent_node.get("cited-phase") if patent_node is not None else None),
+        office=node.get("office"),
+        categories=_collect_texts(node, "./*[local-name()='category']"),
+        relevant_claims=_collect_texts(node, "./*[local-name()='rel-claims']"),
+        passages=_collect_texts(
+            node,
+            "./*[local-name()='rel-passage']/*[local-name()='passage']",
+        ),
+        patent_document=_parse_document_id(document_node) if document_node is not None else None,
+        non_patent_literature=non_patent_literature,
+        source_url=patent_node.get("url") if patent_node is not None else None,
     )
 
 
@@ -218,6 +276,53 @@ def parse_biblio_response(xml_data: str | bytes) -> BiblioResponse:
         )
         documents.append(record)
     return BiblioResponse(documents=documents)
+
+
+def parse_citations(
+    xml_data: str | bytes,
+    *,
+    publication_number: str,
+) -> CitationResponse:
+    """Parse patent and non-patent citations from an OPS biblio response."""
+    root = _as_element(xml_data)
+    citations = [
+        _parse_citation(node)
+        for node in root.xpath(".//*[local-name()='references-cited']/*[local-name()='citation']")
+    ]
+    return CitationResponse(
+        publication_number=publication_number,
+        citations=citations,
+    )
+
+
+def parse_equivalents(xml_data: str | bytes) -> EquivalentsResponse:
+    """Parse the OPS simple-family equivalents response."""
+    root = _as_element(xml_data)
+    input_node = _first(
+        root.xpath(
+            ".//ops:equivalents-inquiry/ops:publication-reference/epo:document-id",
+            namespaces=NS,
+        )
+    )
+    equivalents: list[DocumentId] = []
+    for publication in root.xpath(
+        ".//ops:equivalents-inquiry/ops:inquiry-result/epo:publication-reference",
+        namespaces=NS,
+    ):
+        document_node = _first(
+            publication.xpath(
+                "./epo:document-id[@document-id-type='docdb']",
+                namespaces=NS,
+            )
+        )
+        if document_node is None:
+            document_node = _first(publication.xpath("./epo:document-id", namespaces=NS))
+        if document_node is not None:
+            equivalents.append(_parse_document_id(document_node))
+    return EquivalentsResponse(
+        input_document=_parse_document_id(input_node) if input_node is not None else None,
+        equivalents=equivalents,
+    )
 
 
 def parse_claims(xml_data: str | bytes, section: str) -> FullTextResponse:
@@ -369,6 +474,139 @@ def parse_legal_events(xml_data: str | bytes) -> LegalEventsResponse:
         )
 
     return LegalEventsResponse(publication_reference=publication_reference, events=events)
+
+
+def _parse_register_texts(
+    node: etree._Element,  # type: ignore[attr-defined]
+    *,
+    element_name: str,
+) -> list[RegisterText]:
+    values: list[RegisterText] = []
+    for text_node in node.xpath(f"./reg:{element_name}", namespaces=NS):
+        text = " ".join("".join(text_node.itertext()).split())
+        if text:
+            if element_name == "event-text":
+                text_type = text_node.get("event-text-type")
+            else:
+                text_type = text_node.get("step-text-type") or text_node.get(
+                    "step-texttype"
+                )
+            values.append(
+                RegisterText(
+                    text_type=text_type,
+                    text=text,
+                )
+            )
+    return values
+
+
+def _parse_register_gazette(
+    node: etree._Element,  # type: ignore[attr-defined]
+) -> RegisterGazetteReference | None:
+    gazette = _first(node.xpath("./reg:gazette-reference", namespaces=NS))
+    if gazette is None:
+        return None
+    number = _text(gazette, "./reg:gazette-num")
+    date = _text(gazette, "./reg:date")
+    if number is None and date is None:
+        return None
+    return RegisterGazetteReference(number=number, date=date)
+
+
+def _register_metadata(
+    register_document: etree._Element | None,  # type: ignore[attr-defined]
+    *,
+    epo_number: str,
+) -> _RegisterMetadata:
+    return {
+        "epo_number": epo_number,
+        "status": register_document.get("status") if register_document is not None else None,
+        "produced_by": register_document.get("produced-by")
+        if register_document is not None
+        else None,
+        "language": register_document.get("lang") if register_document is not None else None,
+        "dtd_version": register_document.get("dtd-version")
+        if register_document is not None
+        else None,
+        "date_produced": register_document.get("date-produced")
+        if register_document is not None
+        else None,
+    }
+
+
+def parse_register_events(
+    xml_data: str | bytes,
+    *,
+    epo_number: str,
+) -> RegisterEventsResponse:
+    """Parse structured dossier events from the European Patent Register."""
+    root = _as_element(xml_data)
+    register_document = _first(root.xpath(".//reg:register-document", namespaces=NS))
+
+    events: list[RegisterEvent] = []
+    for event_node in root.xpath(".//reg:dossier-event", namespaces=NS):
+        texts = _parse_register_texts(event_node, element_name="event-text")
+        description = next(
+            (item.text for item in texts if item.text_type == "DESCRIPTION"),
+            texts[0].text if texts else None,
+        )
+        events.append(
+            RegisterEvent(
+                id=event_node.get("id"),
+                event_type=event_node.get("event-type"),
+                event_date=_text(event_node, "./reg:event-date/reg:date"),
+                event_code=_text(event_node, "./reg:event-code"),
+                description=description,
+                texts=texts,
+                gazette_reference=_parse_register_gazette(event_node),
+            )
+        )
+
+    return RegisterEventsResponse(
+        **_register_metadata(register_document, epo_number=epo_number),
+        events=events,
+    )
+
+
+def parse_register_procedural_steps(
+    xml_data: str | bytes,
+    *,
+    epo_number: str,
+) -> RegisterProceduralStepsResponse:
+    """Parse structured procedural steps from the European Patent Register."""
+    root = _as_element(xml_data)
+    register_document = _first(root.xpath(".//reg:register-document", namespaces=NS))
+    procedural_steps: list[RegisterProceduralStep] = []
+    for step_node in root.xpath(".//reg:procedural-step", namespaces=NS):
+        texts = _parse_register_texts(step_node, element_name="procedural-step-text")
+        description = next(
+            (item.text for item in texts if item.text_type == "STEP_DESCRIPTION"),
+            texts[0].text if texts else None,
+        )
+        dates = [
+            RegisterDate(
+                date_type=date_node.get("step-date-type"),
+                date=date,
+            )
+            for date_node in step_node.xpath("./reg:procedural-step-date", namespaces=NS)
+            if (date := _text(date_node, "./reg:date")) is not None
+        ]
+        procedural_steps.append(
+            RegisterProceduralStep(
+                id=step_node.get("id"),
+                phase=step_node.get("procedure-step-phase"),
+                step_code=_text(step_node, "./reg:procedural-step-code"),
+                description=description,
+                texts=texts,
+                dates=dates,
+                gazette_reference=_parse_register_gazette(step_node),
+            )
+        )
+
+    return RegisterProceduralStepsResponse(
+        **_register_metadata(register_document, epo_number=epo_number),
+        procedural_steps=procedural_steps,
+    )
 
 
 def parse_number_conversion(xml_data: str | bytes) -> NumberConversionResponse:
