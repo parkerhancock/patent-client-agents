@@ -833,7 +833,7 @@
   "key": "TR/TURKPATENT/patent",
   "notes": "All-in TOPLAM TUTAR is captured as FeeItem.amount; the base / VAT / stamp-duty breakdown is preserved in notes. Annuity expansion: years 3-20 emit one renewal FeeItem per year ('N.Y\u0131l Sicil Kay\u0131t \u00dccreti'). Formula rows (force-majeure, late-annuity, compensation) emit amount=0 with the formula text in notes. v1 GAPS: PCT priority-document fee (30 CHF) skipped \u2014 multi-currency not supported in the FeeItem model. Appeal fees on a separate page not in v1 scope. Annual republication on or about 31 December; TRY inflation drives large YoY jumps (2024\u21922025 +44%, 2025\u21922026 +20-25%) so quoted figures should be re-pulled aggressively.",
   "office_code": "TURKPATENT",
-  "retrieved_at": "2026-07-29",
+  "retrieved_at": "2026-07-30",
   "right": "patent",
   "source_url": "https://www.turkpatent.gov.tr/patent-islem-ucretleri",
   "statutory_basis": "S\u0131nai M\u00fclkiyet Kanunu (Law 6769) Art. 188; Resm\u00ee Gazete 5. m\u00fckerrer 31-12-2025, B\u0130K/T\u00dcRKPATENT 2026/1 (Law 6769 Art. 188) (PDF: https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-37.pdf)."

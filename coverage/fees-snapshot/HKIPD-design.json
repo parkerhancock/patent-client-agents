@@ -598,7 +598,7 @@
   "key": "HK/HKIPD/design",
   "notes": "5-year initial registration term, renewable in 5-year extensions up to a 25-year maximum (Cap. 522 s.28). Renewal FeeItems are tagged by terminal year of the extension (1st 5-year extension \u2192 year=10, 2nd \u2192 15, 3rd \u2192 20, 4th \u2192 25). Filing-fee table multiplies on the number of designs / articles / set status; e-filing and paper-filing rates emit as separate FeeItems with FeeCondition(paper_filing) on the paper variant.",
   "office_code": "HKIPD",
-  "retrieved_at": "2026-07-29",
+  "retrieved_at": "2026-07-30",
   "right": "design",
   "source_url": "https://www.ipd.gov.hk/en/designs/forms-and-fees/index.html",
   "statutory_basis": "Registered Designs Rules (Cap. 522A) \u2014 promulgated under Registered Designs Ordinance Cap. 522. Amendments by subsidiary-legislation orders gazetted in the Hong Kong Government Gazette."
