@@ -35,9 +35,7 @@ class TestGetEnvToken:
         result = get_env_token("MISSING_TOKEN")
         assert result is None
 
-    def test_reads_token_file(
-        self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-    ) -> None:
+    def test_reads_token_file(self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
         token_file = tmp_path / "edis-token"
         token_file.write_text("  mounted_token_123  \n")
         monkeypatch.delenv("TEST_TOKEN", raising=False)

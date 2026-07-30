@@ -71,6 +71,7 @@ def _edis_tool(*, annotations: Any) -> Any:
         return usitc_mcp.tool(annotations=annotations)
     return lambda func: func
 
+
 # ──────────────────────────────────────────────────────────────────────
 # Envelope helpers (CONNECTOR_STANDARDS.md §5.9).
 #

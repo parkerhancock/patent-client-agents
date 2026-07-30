@@ -64,9 +64,7 @@ class TrademarkAssignmentClient(BaseAsyncClient):
         search_criteria = [
             {
                 **criterion,
-                "matchType": (
-                    "Contains" if criterion["searchBy"] in name_searches else "Exact"
-                ),
+                "matchType": ("Contains" if criterion["searchBy"] in name_searches else "Exact"),
                 "order": index,
                 "relation": "" if index == 1 else "AND",
             }

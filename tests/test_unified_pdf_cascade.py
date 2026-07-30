@@ -31,7 +31,8 @@ def google_client(**behavior):
 def http_error(status: int, url: str = "https://patents.google.com/patent/X/en"):
     request = httpx.Request("GET", url)
     return httpx.HTTPStatusError(
-        f"Client error '{status}'", request=request,
+        f"Client error '{status}'",
+        request=request,
         response=httpx.Response(status, request=request),
     )
 
