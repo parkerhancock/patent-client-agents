@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import Field
+from pydantic import Field, field_validator
 
 from .base import FlexibleModel, StrictModel
 
@@ -280,6 +280,13 @@ class RecordAttorney(StrictModel):
     )
     powerOfAttorneyBag: list[Attorney] = Field(default_factory=list)
     attorneyBag: list[Attorney] = Field(default_factory=list)
+
+    @field_validator("customerNumberCorrespondenceData", mode="before")
+    @classmethod
+    def _normalize_customer_number_correspondence_data(cls, value: Any) -> Any:
+        if isinstance(value, dict):
+            return [value]
+        return value
 
 
 # =============================================================================
