@@ -736,6 +736,52 @@ sources:
     last_synced: 2026-05-15
     corpus_version: "unknown — needs verification"
 
+  # ────────────────────────────────────────────────────────────────────
+  # SG — IPOS Singapore statutes & examination manuals
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: SG/IPOS/Statutes
+    name: IPOS Singapore — IP statutes (Patents / Trade Marks / Designs / Copyright)
+    jurisdiction: SG
+    wipo_st3_code: SG
+    issuing_body: Intellectual Property Office of Singapore
+    rights: [patent, trademark, design, copyright]
+    data_types: [statutes]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.ipos_statutes
+    last_verified: 2026-05-16
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: irregular
+    last_synced: 2026-05-16
+    corpus_version: "unknown — needs verification"
+
+  - id: SG/IPOS/Manuals
+    name: IPOS Singapore — examination & work manuals (PEG / TM / Designs)
+    jurisdiction: SG
+    wipo_st3_code: SG
+    issuing_body: Intellectual Property Office of Singapore
+    rights: [patent, trademark, design]
+    data_types: [guidelines]
+    access:
+      method: mcp_passthrough
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.ipos_manuals
+    last_verified: 2026-05-16
+    category: substantive_law
+    transport: mcp_local
+    update_strategy: scheduled_recrawl
+    update_cadence: quarterly
+    last_synced: 2026-05-16
+    corpus_version: "unknown — needs verification"
+
   # ════════════════════════════════════════════════════════════════════
   # SUBSTANTIVE LAW — reviewing-court case law (live proxy)
   # ════════════════════════════════════════════════════════════════════
