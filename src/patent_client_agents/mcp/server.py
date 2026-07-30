@@ -69,7 +69,7 @@ def main(argv: list[str] | None = None) -> None:
         description=(
             "Run the patent-client-agents MCP server on stdio. Exposes 106 "
             "default patent/IP tools to any MCP client; local/private deployments "
-            "expose up to 169 tools when every env-gated family is configured. "
+            "expose up to 171 tools when every env-gated family is configured. "
             "See docs/installation.md for client configuration."
         ),
     )

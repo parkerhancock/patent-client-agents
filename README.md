@@ -257,7 +257,7 @@ JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the
 | **MPEP** | Manual of Patent Examining Procedure search and section lookup — *runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-mpep-corpus`; see docs/installation.md* |
 | **TMEP** | Trademark Manual of Examining Procedure search and section lookup — *runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-tmep-corpus`; see docs/installation.md* |
 | **CPC** | Classification hierarchy lookup, search, and CPC/IPC mapping |
-| **CanLII** | Canadian courts, tribunals, and IP statutes — Federal Court / FCA / Supreme Court IP rulings, Trade-marks Opposition Board, Patent Appeal Board, Patent Act, Trademarks Act with point-in-time queries — *MCP tools register when `CANLII_API_KEY` is set; not exposed by the hosted demo* |
+| **CanLII** | Canadian courts, tribunals, and IP statutes — Federal Court (`fct`), Federal Court of Appeal (`fca`), Supreme Court of Canada (`csc-scc`) IP rulings (post-filtered by IP-rights keywords), Trade-marks Opposition Board (`tmob-comc`), Patent Appeal Board (`cab-cab`), plus all four Canadian IP Acts (Patent Act, Trademarks Act, Industrial Design Act, Copyright Act) with point-in-time queries. `search_canlii_ip_cases` rolls all five court/tribunal databases up in one call; `list_canlii_ip_statutes` returns the statute catalog — *MCP tools register when `CANLII_API_KEY` is set; not exposed by the hosted demo* |
 | **WIPO Lex** | Global IP statute / treaty / judgment database curated by WIPO — ~50k legal documents across ~200 jurisdictions, six UN languages. v0.9 scope: legislation collection (search + detail with PDF links) |
 | **EUIPO** | EU Trade Marks (~2.3M EUTMs since 1996) + Registered Community Designs (~1.5M RCDs since 2003). RSQL search, full prosecution records, multilingual goods-and-services / product indications, sandbox toggle — *MCP tools register when `EUIPO_CLIENT_ID` + `EUIPO_CLIENT_SECRET` are set; not exposed by the hosted demo* |
 | **Federal Circuit (CAFC)** | Every patent appeal in the US is appealable to the Federal Circuit. Search opinions by date / origin (PTO, DCT, ITC, CFC), classify as patent vs. non-patent, download opinion PDFs |
@@ -273,7 +273,7 @@ and retry logic via `mcp-data-core`.
 
 106 patent + IP MCP tools are exposed by default. Credentialed
 families register when their environment variables are present, bringing
-the local/private surface up to 169 tools when every env-gated family is
+the local/private surface up to 171 tools when every env-gated family is
 configured.
 
 | Variable | Source | Required | How to get |

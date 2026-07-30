@@ -12,6 +12,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Added `check_citation_hits` for stateless monitoring of new examiner
   citations to watched patents, including an application-level §102 screening
   flag.
+- **CanLII connector — Canadian IP layer expansion.** Extends the
+  existing `patent_client_agents.canlii` package with two new
+  IP-focused MCP tools and documents the full Canadian IP surface:
+  - `search_canlii_ip_cases` (in `mcp/tools/canlii.py`) — searches the
+    five canonical Canadian IP databases in one call: Trade-marks
+    Opposition Board (`tmob-comc`), Patent Appeal Board (`cab-cab`),
+    Federal Court (`fct`), Federal Court of Appeal (`fca`), Supreme
+    Court of Canada (`csc-scc`). TMOB / PAB rows pass through (pure-IP
+    tribunals); FC / FCA / SCC rows are post-filtered by IP-rights
+    keywords ("patent", "trade-mark", "trademark", "copyright",
+    "industrial design", EN + FR) matched against case titles. Each
+    surviving hit carries a `rights` tag listing matched rights.
+  - `list_canlii_ip_statutes` — returns the four canonical Canadian IP
+    Acts as a ready-to-use catalog: Patent Act (R.S.C. 1985, c. P-4),
+    Trademarks Act (c. T-13), Industrial Design Act (c. I-9), and
+    Copyright Act (c. C-42), all under the federal-statutes database
+    (`cas`). Two new entries vs. the prior coverage: Industrial Design
+    Act and Copyright Act.
+  - Module-level constants `CANLII_IP_TRIBUNALS`,
+    `CANLII_IP_REVIEWING_COURTS`, `CANLII_IP_DATABASES`,
+    `CANLII_IP_STATUTES` for downstream reuse.
+  - `canlii/docs/usage.md` extended with the IP-databases / IP-statutes
+    tables.
+  - Envelope tests refactored to the plain `_FakeModel` pattern from
+    the IP Australia reference so `ty` no longer trips on Pydantic
+    `populate_by_name` aliases.
 
 ### Fixed
 
@@ -346,7 +372,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   `IN/IPO/Statutes` (`update_strategy: scheduled_recrawl`,
   `update_cadence: annual`) and `IN/IPO/MPPP` (`update_cadence:
   irregular`, `corpus_version: "v3.0 (2019)"`).
-
 - **IP Australia connector — first cut.** Adds Australian coverage to
   the registered-IP catalog. Four packages ship in this PR, gated on
   the shared `IPAUSTRALIA_CLIENT_ID` / `IPAUSTRALIA_CLIENT_SECRET`

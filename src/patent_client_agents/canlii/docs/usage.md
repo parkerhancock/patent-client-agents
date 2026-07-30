@@ -4,15 +4,38 @@ Read-only access to the [CanLII REST API](https://github.com/canlii/API_document
 
 ## IP-relevant databases
 
-| `database_id` | Coverage |
-|---|---|
-| `csc-scc` | Supreme Court of Canada |
-| `fca` | Federal Court of Appeal |
-| `fct` | Federal Court |
-| `tmob-comc` | Trade-marks Opposition Board / Commission des oppositions des marques de commerce |
-| `cab-cab` | Commissioner of Patents — Patent Appeal Board decisions |
-| `cas` | Federal statutes (consolidated) |
-| `car` | Federal regulations |
+Court / tribunal databases (scope: Canadian IP layer):
+
+| `database_id` | Coverage | Scope |
+|---|---|---|
+| `tmob-comc` | Trade-marks Opposition Board / Commission des oppositions des marques de commerce | Pure-IP tribunal |
+| `cab-cab` | Commissioner of Patents — Patent Appeal Board decisions | Pure-IP tribunal |
+| `fct` | Federal Court | General — IP-filtered |
+| `fca` | Federal Court of Appeal | General — IP-filtered |
+| `csc-scc` | Supreme Court of Canada | General — IP-filtered |
+| `cas` | Federal statutes (consolidated) | Statutes |
+| `car` | Federal regulations | Regulations |
+
+The MCP tool `search_canlii_ip_cases` rolls all five court / tribunal
+databases up in one call, applying an IP-rights keyword filter
+(`patent` / `trademark` / `copyright` / `design`, EN + FR) to the
+general-court rows.
+
+## Canadian IP statutes
+
+All four canonical Canadian IP Acts live in the federal-statutes
+database (`cas`):
+
+| Right | `legislation_id` | Statute |
+|---|---|---|
+| Patent | `rsc-1985-c-p-4` | Patent Act, R.S.C. 1985, c. P-4 |
+| Trademark | `rsc-1985-c-t-13` | Trademarks Act, R.S.C. 1985, c. T-13 |
+| Industrial Design | `rsc-1985-c-i-9` | Industrial Design Act, R.S.C. 1985, c. I-9 |
+| Copyright | `rsc-1985-c-c-42` | Copyright Act, R.S.C. 1985, c. C-42 |
+
+`list_canlii_ip_statutes` returns this catalog directly; pass any
+`legislation_id` to `get_canlii_legislation` for point-in-time
+metadata.
 
 ## Authentication
 

@@ -251,19 +251,26 @@ class TestTooLongEnvelope:
 class TestModuleLevelApi:
     """Smoke-test that the module-level coroutines wire up correctly."""
 
-    @pytest.mark.asyncio
-    async def test_module_api_returns_models(self, monkeypatch) -> None:
-        """Patch CanLIIClient inside api.py so the auto-managed lifecycle uses MockTransport."""
+    @staticmethod
+    def _install_factory(monkeypatch, payload: dict) -> None:
+        """Install a CanLIIClient factory that returns ``payload`` for every call."""
         from patent_client_agents.canlii import api as canlii_api
 
         def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, json=DUNSMUIR_PAYLOAD)
+            return httpx.Response(200, json=payload)
 
         def _factory(*args, **kwargs):
             transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
             return CanLIIClient(api_key="test-key", client=transport_client)
 
         monkeypatch.setattr(canlii_api, "CanLIIClient", _factory)
+
+    @pytest.mark.asyncio
+    async def test_module_api_returns_models(self, monkeypatch) -> None:
+        """Patch CanLIIClient inside api.py so the auto-managed lifecycle uses MockTransport."""
+        from patent_client_agents.canlii import api as canlii_api
+
+        self._install_factory(monkeypatch, DUNSMUIR_PAYLOAD)
 
         case = await canlii_api.get_case(GetCaseInput(database_id="csc-scc", case_id="2008scc9"))
         assert case.title == "Dunsmuir v. New Brunswick"
@@ -272,14 +279,7 @@ class TestModuleLevelApi:
     async def test_get_citator_input_threads_through(self, monkeypatch) -> None:
         from patent_client_agents.canlii import api as canlii_api
 
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, json=CITED_CASES_PAYLOAD)
-
-        def _factory(*args, **kwargs):
-            transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
-            return CanLIIClient(api_key="test-key", client=transport_client)
-
-        monkeypatch.setattr(canlii_api, "CanLIIClient", _factory)
+        self._install_factory(monkeypatch, CITED_CASES_PAYLOAD)
 
         result = await canlii_api.get_cited_cases(
             GetCitatorInput(database_id="onca", case_id="1999canlii1527")
@@ -290,16 +290,88 @@ class TestModuleLevelApi:
     async def test_get_legislation_input_threads_through(self, monkeypatch) -> None:
         from patent_client_agents.canlii import api as canlii_api
 
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, json=LEGISLATION_METADATA_PAYLOAD)
-
-        def _factory(*args, **kwargs):
-            transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
-            return CanLIIClient(api_key="test-key", client=transport_client)
-
-        monkeypatch.setattr(canlii_api, "CanLIIClient", _factory)
+        self._install_factory(monkeypatch, LEGISLATION_METADATA_PAYLOAD)
 
         leg = await canlii_api.get_legislation(
             GetLegislationInput(database_id="cas", legislation_id="rsc-1985-c-p-4")
         )
         assert leg.title == "Patent Act"
+
+    # ------------------------------------------------------------------
+    # Coverage for the remaining module-level coroutines. Each is a thin
+    # wrapper around an upstream method already validated by TestCases /
+    # TestCitator / TestLegislation; the assertions here are intentionally
+    # minimal — we just need to execute the factory + dispatch path.
+    # ------------------------------------------------------------------
+
+    @pytest.mark.asyncio
+    async def test_list_case_databases_module_api(self, monkeypatch) -> None:
+        from patent_client_agents.canlii import api as canlii_api
+
+        self._install_factory(monkeypatch, CASE_DATABASES_PAYLOAD)
+        result = await canlii_api.list_case_databases()
+        assert len(result.case_databases) == 2
+
+    @pytest.mark.asyncio
+    async def test_browse_cases_module_api(self, monkeypatch) -> None:
+        from patent_client_agents.canlii import api as canlii_api
+        from patent_client_agents.canlii.api import BrowseCasesInput
+
+        self._install_factory(monkeypatch, BROWSE_CASES_PAYLOAD)
+        result = await canlii_api.browse_cases(BrowseCasesInput(database_id="fct", result_count=10))
+        assert len(result.cases) == 1
+
+    @pytest.mark.asyncio
+    async def test_get_citing_cases_module_api(self, monkeypatch) -> None:
+        from patent_client_agents.canlii import api as canlii_api
+
+        self._install_factory(monkeypatch, {"citingCases": CITED_CASES_PAYLOAD["citedCases"]})
+        result = await canlii_api.get_citing_cases(
+            GetCitatorInput(database_id="onca", case_id="1999canlii1527")
+        )
+        assert len(result.citing_cases) == 1
+
+    @pytest.mark.asyncio
+    async def test_get_cited_legislations_module_api(self, monkeypatch) -> None:
+        from patent_client_agents.canlii import api as canlii_api
+
+        cited_legs_payload = {
+            "citedLegislations": [
+                {
+                    "databaseId": "cas",
+                    "legislationId": "rsc-1985-c-p-4",
+                    "title": "Patent Act",
+                    "citation": "R.S.C., 1985, c. P-4",
+                    "type": "STATUTE",
+                }
+            ]
+        }
+        self._install_factory(monkeypatch, cited_legs_payload)
+        result = await canlii_api.get_cited_legislations(
+            GetCitatorInput(database_id="onca", case_id="1999canlii1527")
+        )
+        assert len(result.cited_legislations) == 1
+
+    @pytest.mark.asyncio
+    async def test_list_legislation_databases_module_api(self, monkeypatch) -> None:
+        from patent_client_agents.canlii import api as canlii_api
+
+        self._install_factory(monkeypatch, LEGISLATION_DATABASES_PAYLOAD)
+        result = await canlii_api.list_legislation_databases()
+        assert len(result.legislation_databases) == 2
+
+    @pytest.mark.asyncio
+    async def test_browse_legislation_module_api(self, monkeypatch) -> None:
+        from patent_client_agents.canlii import api as canlii_api
+        from patent_client_agents.canlii.api import BrowseLegislationInput
+
+        self._install_factory(monkeypatch, BROWSE_LEGISLATION_PAYLOAD)
+        result = await canlii_api.browse_legislation(BrowseLegislationInput(database_id="cas"))
+        assert result.legislations[0].legislation_id == "rsc-1985-c-p-4"
+
+    def test_get_client_returns_canlii_client(self, monkeypatch) -> None:
+        from patent_client_agents.canlii import api as canlii_api
+
+        monkeypatch.setenv("CANLII_API_KEY", "k")
+        client = canlii_api.get_client()
+        assert isinstance(client, CanLIIClient)
