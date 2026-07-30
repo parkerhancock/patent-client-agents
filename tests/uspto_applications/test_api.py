@@ -18,9 +18,14 @@ async def test_search_applications() -> None:
     class DummyClient:
         async def search_applications(self, **kwargs: object) -> SearchResponse:
             assert kwargs["query"] == "inventor:doe"
+            assert kwargs["normalize"] is False
             return SearchResponse(count=1, patentBag=[{"applicationNumberText": "123"}])
 
-    result = await apps_api.search_applications(q="inventor:doe", client=cast(Any, DummyClient()))
+    result = await apps_api.search_applications(
+        q="inventor:doe",
+        normalize=False,
+        client=cast(Any, DummyClient()),
+    )
     assert isinstance(result, SearchResponse)
     assert result.count == 1
     assert result.patentBag[0]["applicationNumberText"] == "123"

@@ -246,6 +246,59 @@ class TestSearchProjection:
     """search() projects to STUB_APPLICATION_FIELDS by default."""
 
     @pytest.mark.asyncio
+    async def test_normalize_false_preserves_nested_application_metadata(self) -> None:
+        client = _make_client()
+        record = {
+            "applicationNumberText": "19055191",
+            "applicationMetaData": {
+                "inventionTitle": "Nested title",
+                "entityStatusData": {"smallEntityStatusIndicator": True},
+            },
+        }
+
+        with patch.object(
+            client,
+            "_search_with_payload",
+            new_callable=AsyncMock,
+            return_value={
+                "count": 1,
+                "patentFileWrapperDataBag": [record],
+                "requestIdentifier": "request-1",
+            },
+        ):
+            result = await client.search(query="applicationNumberText:19055191", normalize=False)
+
+        assert result.count == 1
+        assert result.requestIdentifier == "request-1"
+        assert result.patentBag == [record]
+        assert "inventionTitle" not in result.patentBag[0]
+        assert result.patentRecords[0].applicationMetaData is not None
+        assert result.patentRecords[0].applicationMetaData.inventionTitle == "Nested title"
+
+    @pytest.mark.asyncio
+    async def test_search_normalizes_application_metadata_by_default(self) -> None:
+        client = _make_client()
+
+        with patch.object(
+            client,
+            "_search_with_payload",
+            new_callable=AsyncMock,
+            return_value={
+                "count": 1,
+                "patentFileWrapperDataBag": [
+                    {
+                        "applicationNumberText": "19055191",
+                        "applicationMetaData": {"inventionTitle": "Flattened title"},
+                    }
+                ],
+            },
+        ):
+            result = await client.search(query="applicationNumberText:19055191")
+
+        assert result.patentBag[0]["inventionTitle"] == "Flattened title"
+        assert "applicationMetaData" not in result.patentBag[0]
+
+    @pytest.mark.asyncio
     async def test_default_projects_to_stub(self) -> None:
         from patent_client_agents.uspto_odp.clients.applications import (
             STUB_APPLICATION_FIELDS,

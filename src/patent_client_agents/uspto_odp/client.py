@@ -158,6 +158,7 @@ class UsptoOdpClient:
         limit: int = 25,
         offset: int = 0,
         full: bool = False,
+        normalize: bool = True,
         raw_payload: dict[str, Any] | None = None,
     ) -> SearchResponse:
         """Search patent applications.
@@ -165,7 +166,8 @@ class UsptoOdpClient:
         By default returns a lean projection (see
         :data:`patent_client_agents.uspto_odp.clients.applications.STUB_APPLICATION_FIELDS`).
         Pass ``full=True`` to receive the full ODP record per hit, or
-        ``fields=[...]`` to specify a custom projection.
+        ``fields=[...]`` to specify a custom projection. Pass
+        ``normalize=False`` to preserve nested ``applicationMetaData``.
         """
         return await self._applications.search(
             query=query,
@@ -177,6 +179,7 @@ class UsptoOdpClient:
             limit=limit,
             offset=offset,
             full=full,
+            normalize=normalize,
             raw_payload=raw_payload,
         )
 

@@ -119,9 +119,12 @@ def _merge_application_metadata(entry: dict[str, Any]) -> dict[str, Any]:
     return combined
 
 
-def _normalize_patent_response(data: dict[str, Any]) -> dict[str, Any]:
-    """Normalize the ODP response structure."""
-    bag = [_merge_application_metadata(item) for item in data.get("patentFileWrapperDataBag", [])]
+def _normalize_patent_response(
+    data: dict[str, Any], *, flatten_metadata: bool = True
+) -> dict[str, Any]:
+    """Convert an ODP search response to the public response wrapper."""
+    raw_bag = list(data.get("patentFileWrapperDataBag") or [])
+    bag = [_merge_application_metadata(item) for item in raw_bag] if flatten_metadata else raw_bag
     return {
         "count": data.get("count", len(bag)),
         "patentBag": bag,
@@ -194,6 +197,7 @@ class ApplicationsClient(UsptoOdpBaseClient):
         limit: int = 25,
         offset: int = 0,
         full: bool = False,
+        normalize: bool = True,
         raw_payload: dict[str, Any] | None = None,
     ) -> SearchResponse:
         """Search patent applications.
@@ -220,6 +224,10 @@ class ApplicationsClient(UsptoOdpBaseClient):
                 a small set sufficient to identify each application. Set
                 ``True`` to return the full ODP record (large; call
                 ``get()`` instead when you only need one).
+            normalize: When ``True`` (the default), flatten each record's
+                ``applicationMetaData`` into the top-level record. Set
+                ``False`` to preserve the USPTO record shape with nested
+                application metadata.
             raw_payload: Override with a custom payload dict.
 
         Returns:
@@ -252,7 +260,9 @@ class ApplicationsClient(UsptoOdpBaseClient):
             empty_bag_key="patentFileWrapperDataBag",
             context="search applications",
         )
-        return SearchResponse.model_validate(_normalize_patent_response(data))
+        return SearchResponse.model_validate(
+            _normalize_patent_response(data, flatten_metadata=normalize)
+        )
 
     async def get(self, application_number: str) -> ApplicationResponse:
         """Get a single application by number.

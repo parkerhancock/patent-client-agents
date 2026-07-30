@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+from unittest.mock import AsyncMock
+
 import pytest
 
 from mcp_data_core.exceptions import ConfigurationError
 from patent_client_agents.uspto_odp.client import BASE_URL, UsptoOdpClient
+from patent_client_agents.uspto_odp.models import SearchResponse
 
 
 class TestBaseUrl:
@@ -57,6 +60,15 @@ class TestUsptoOdpClientNormalization:
         client = UsptoOdpClient(api_key="test")
         assert client._normalize_application_number("12/345,678") == "12345678"
         assert client._normalize_application_number("  12345678  ") == "12345678"
+
+    @pytest.mark.asyncio
+    async def test_search_applications_forwards_normalize_flag(self) -> None:
+        client = UsptoOdpClient(api_key="test")
+        client._applications.search = AsyncMock(return_value=SearchResponse())
+
+        await client.search_applications(query="anything", normalize=False)
+
+        assert client._applications.search.await_args.kwargs["normalize"] is False
 
 
 class TestUsptoOdpClientSubClientProperties:

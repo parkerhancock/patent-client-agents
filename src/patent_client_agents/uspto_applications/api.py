@@ -109,6 +109,7 @@ async def search_applications(
     limit: int = 25,
     offset: int = 0,
     full: bool = False,
+    normalize: bool = True,
     raw_payload: dict[str, object] | None = None,
     client: UsptoOdpClient | None = None,
 ) -> SearchResponse:
@@ -116,7 +117,9 @@ async def search_applications(
 
     Returns a lean projection by default — pass ``full=True`` for the
     complete ODP record per hit, or ``fields=[...]`` for a custom
-    projection. See :class:`patent_client_agents.uspto_odp.UsptoOdpClient`
+    projection. Pass ``normalize=False`` to preserve the USPTO record shape
+    with nested ``applicationMetaData``. See
+    :class:`patent_client_agents.uspto_odp.UsptoOdpClient`
     ``.search_applications`` for details.
 
     If no client is provided, creates one internally and closes it after the request.
@@ -131,6 +134,7 @@ async def search_applications(
         "limit": limit,
         "offset": offset,
         "full": full,
+        "normalize": normalize,
         "raw_payload": raw_payload,
     }
 
