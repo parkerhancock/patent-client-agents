@@ -306,6 +306,31 @@ class TestSearchProjection:
         assert captured["payload"]["fields"] == ["applicationNumberText"]
 
 
+class TestSearchResponseModels:
+    def test_patent_records_accepts_single_customer_correspondence_object(self) -> None:
+        from patent_client_agents.uspto_odp.models.applications import SearchResponse
+
+        response = SearchResponse(
+            patentBag=[
+                {
+                    "applicationNumberText": "19055191",
+                    "recordAttorney": {
+                        "customerNumberCorrespondenceData": {
+                            "patronIdentifier": 62124,
+                            "organizationStandardName": "Example Firm",
+                        }
+                    },
+                }
+            ]
+        )
+
+        record = response.patentRecords[0]
+
+        assert record.recordAttorney is not None
+        assert len(record.recordAttorney.customerNumberCorrespondenceData) == 1
+        assert record.recordAttorney.customerNumberCorrespondenceData[0].patronIdentifier == 62124
+
+
 class TestResolveIdentifierDefault:
     """Default identifier_type should be 'patent'."""
 
