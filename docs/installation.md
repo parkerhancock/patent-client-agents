@@ -1,13 +1,13 @@
 # Installing `patent-client-agents`
 
-`patent-client-agents` covers seven install modes. Pick the one that
+`patent-client-agents` covers six install modes. Pick the one that
 matches how you're going to use it:
 
 | Mode | You want to... | Section |
 |---|---|---|
 | Python library | Import `patent_client_agents` in your own async code | [§1](#1-python-library) |
 | Python library + MCP runtime | Run an MCP server locally or in-process | [§2](#2-python-library-with-mcp-runtime) |
-| Claude Code plugin (from GitHub marketplace) | Add 111 patent + trademark + adjacent-IP MCP tools to Claude Code with two slash commands; private/local credentialed deployments expose up to 168 tools | [§3](#3-claude-code-plugin-from-github) |
+| Claude Code plugin (from GitHub marketplace) | Add 106 patent + trademark + adjacent-IP MCP tools to Claude Code with two slash commands; private/local credentialed deployments expose up to 169 tools | [§3](#3-claude-code-plugin-from-github) |
 | Claude Code skill (standalone, library-user) | Install the `ip_research` skill into `~/.claude/skills/` for Python-library guidance | [§4](#4-claude-code-skill-standalone-library-user) |
 | Stdio MCP (any MCP client) | Connect Claude Code / Claude Desktop / Codex CLI / Gemini CLI / Cursor / Windsurf / Cline / Zed / Continue / Copilot Chat / JetBrains / custom | [§5](#5-stdio-mcp-from-any-mcp-client) |
 | Remote MCP (hosted or self-hosted) | Point an MCP client at a deployed HTTPS endpoint — including cloud-only clients like ChatGPT Apps and Replit Agent | [§6](#6-remote-mcp) |
@@ -110,14 +110,14 @@ Python script.
 pip install 'patent-client-agents[mcp]'
 ```
 
-The `[mcp]` extra pulls `fastmcp>=3.2.3` and `starlette>=0.37` on top
+The `[mcp]` extra pulls `fastmcp>=3.2.3` and `starlette>=1.0.1` on top
 of the base dependencies.
 
 ### What you get
 
 Two new console scripts on your PATH:
 
-- `patent-client-agents-mcp` — launches the stdio MCP server (111 patent + trademark + adjacent-IP tools by default; up to 168 when every env-gated family is configured)
+- `patent-client-agents-mcp` — launches the stdio MCP server (106 patent + trademark + adjacent-IP tools by default; up to 169 when every env-gated family is configured)
 - `patent-client-agents-skill-install` — symlinks the `ip_research` skill into `~/.claude/skills/` (see §4)
 
 Plus the Python-importable MCP surface:
@@ -143,9 +143,9 @@ This is exactly how `law-tools` consumes `patent-client-agents` in the monorepo.
 
 ## 3. Claude Code plugin (from GitHub)
 
-Use this when you use Claude Code and want the 111 patent + trademark +
+Use this when you use Claude Code and want the 106 patent + trademark +
 adjacent-IP MCP tools dropped in with two slash commands. Private/local
-deployments expose up to 168 tools when the corresponding credentials
+deployments expose up to 169 tools when the corresponding credentials
 are in the environment.
 
 The plugin ships **only the MCP server** — no skill, no agents, no
@@ -295,8 +295,8 @@ List MCP tools from within a Claude Code session:
 /mcp
 ```
 
-Expect `patent-client-agents` with 111 tools by default. Local/private
-servers expose up to 168 tools when all env-gated families are configured
+Expect `patent-client-agents` with 106 tools by default. Local/private
+servers expose up to 169 tools when all env-gated families are configured
 with their corresponding credentials. Or call one directly by asking something
 patent-research-ish:
 
@@ -370,7 +370,7 @@ replaces with the symlink.
 
 |  | Plugin (§3) | Standalone skill (§4) |
 |---|---|---|
-| What it installs | MCP server only (111 default tools; up to 168 with all env-gated families configured) | Skill markdown for Python library usage |
+| What it installs | MCP server only (106 default tools; up to 169 with all env-gated families configured) | Skill markdown for Python library usage |
 | Command | `/plugin install patent-client-agents@patent-client-agents` | `patent-client-agents-skill-install` |
 | Source | Cloned marketplace repo | pip-installed package (symlinked) |
 | Updates | `/plugin marketplace update` + `/reload-plugins` | Reinstall `patent-client-agents` to pick up new skill content |
@@ -801,8 +801,8 @@ async def main():
 asyncio.run(main())
 ```
 
-Expect **111 tools** by default. Local/private servers expose up to
-**168 tools** when every env-gated family is configured. Title starts
+Expect **106 tools** by default. Local/private servers expose up to
+**169 tools** when every env-gated family is configured. Title starts
 with `2106 ... Patent Subject Matter Eligibility`.
 
 ### Troubleshooting

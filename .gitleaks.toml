@@ -19,3 +19,30 @@ paths = [
     '''resources/jpo/jpo_api_reference_e\.js''',
     '''src/patent_client_agents/uspto_odp/data/odp_swagger\.yaml''',
 ]
+
+[[allowlists]]
+description = "Generated public fee snapshots: top-level corpus key"
+condition = "AND"
+targetRules = ["generic-api-key"]
+paths = [
+    '''coverage/fees-snapshot/[^/]+\.json''',
+]
+regexTarget = "line"
+regexes = [
+    '''^\s*"key":\s*"[^"]+",?\s*$''',
+]
+
+[[allowlists]]
+description = "Public TÜRKPATENT HTML fixtures containing browser-side site keys"
+targetRules = ["generic-api-key", "gcp-api-key"]
+paths = [
+    '''tests/fees/fixtures/tr_turkpatent_designs_2026-05-19\.html''',
+    '''tests/fees/fixtures/tr_turkpatent_patents_2026-05-19\.html''',
+    '''tests/fees/fixtures/tr_turkpatent_trademarks_2026-05-19\.html''',
+]
+
+[[allowlists]]
+description = "Local agent worktrees are separate checkouts, not repository content"
+paths = [
+    '''^\.claude/worktrees/''',
+]

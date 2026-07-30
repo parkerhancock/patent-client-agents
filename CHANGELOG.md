@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Added `check_citation_hits` for stateless monitoring of new examiner
+  citations to watched patents, including an application-level §102 screening
+  flag.
+
+### Fixed
+
+- Filled omitted USPTO ODP application range-filter bounds so one-sided date
+  filters no longer produce invalid requests.
+- Corrected PTAB trial, appeal, and interference sort payloads and normalized
+  trial download responses so downloaded proceedings, decisions, and documents
+  are returned instead of empty result bags.
+
+### Changed
+
+- Refreshed bundled fee snapshots through 2026-07-21.
+- Pinned GitHub Actions and uv versions, added Dependabot and Gitleaks
+  automation, aligned the pre-commit Ruff version, and required release tags to
+  point to commits contained in `main`.
+
 ## [0.24.0] — 2026-07-28
 
 ### Changed
@@ -62,6 +83,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   is unreliable (the server caps its scan, observed at 10,000, and may
   silently omit older recordations for high-volume names); number-axis
   searches remain exact.
+
+## [0.22.0] — 2026-06-05
+
+### Added
+
+- Added clean-source patent helpers that avoid Google Patents: PDF retrieval
+  cascades from USPTO PPUBS to EPO OPS, and claim retrieval cascades from USPTO
+  grant XML to EPO full text.
+- Added an explicit clean-source figures response that directs callers to
+  patent-PDF drawing sheets and reports that per-figure callout annotations are
+  unavailable.
+
+### Changed
+
+- Updated package, plugin, and installation pins to 0.22.0.
+- Made standalone CI independent of a private cross-repository checkout,
+  updated workflow action runtimes, and added an atlas-image freshness gate.
+- Refreshed bundled fee snapshots through 2026-06-05.
+
+## [0.21.2] — 2026-05-22
+
+### Added
+
+- Added compatibility aliases for common MCP argument names across Google
+  Patents, EPO OPS, USPTO PPUBS, and patent-family tools; MPEP section lookup
+  now accepts numeric references.
+
+### Fixed
+
+- Corrected EPO document-identifier model population and PTAB request
+  serialization to use the upstream camelCase payload fields.
 
 ## [0.21.1] — 2026-05-22
 
@@ -1560,6 +1612,10 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.22.0...HEAD
+[0.22.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.21.2...v0.22.0
+[0.21.2]: https://github.com/parkerhancock/patent-client-agents/compare/v0.21.1...v0.21.2
+[0.21.1]: https://github.com/parkerhancock/patent-client-agents/releases/tag/v0.21.1
 [0.6.6]: https://github.com/parkerhancock/patent-client-agents/releases/tag/v0.6.6
 [0.6.5]: https://github.com/parkerhancock/patent-client-agents/releases/tag/v0.6.5
 [0.6.4]: https://github.com/parkerhancock/patent-client-agents/releases/tag/v0.6.4
