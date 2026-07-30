@@ -331,6 +331,46 @@ class TestSearchResponseModels:
         assert record.recordAttorney.customerNumberCorrespondenceData[0].patronIdentifier == 62124
 
 
+class TestApplicationModels:
+    def test_pta_history_accepts_fractional_event_sequence_numbers(self) -> None:
+        from patent_client_agents.uspto_odp.models.applications import (
+            PatentTermAdjustmentHistory,
+        )
+
+        history = PatentTermAdjustmentHistory.model_validate(
+            {
+                "eventSequenceNumber": 69.5,
+                "originatingEventSequenceNumber": 68.5,
+            }
+        )
+
+        assert history.eventSequenceNumber == 69.5
+        assert history.originatingEventSequenceNumber == 68.5
+
+    def test_assignment_preserves_correspondence_address(self) -> None:
+        from patent_client_agents.uspto_odp.models.applications import Assignment
+
+        assignment = Assignment.model_validate(
+            {
+                "correspondenceAddress": [
+                    {
+                        "correspondentNameText": "Example Corporation",
+                        "addressLineOneText": "123 Main Street",
+                        "addressLineTwoText": "Suite 400",
+                        "addressLineThreeText": "Austin, TX 78701",
+                        "addressLineFourText": "United States",
+                    }
+                ]
+            }
+        )
+
+        assert len(assignment.correspondenceAddress) == 1
+        address = assignment.correspondenceAddress[0]
+        assert address.correspondentNameText == "Example Corporation"
+        assert address.addressLineThreeText == "Austin, TX 78701"
+        assert address.addressLineFourText == "United States"
+
+
 class TestResolveIdentifierDefault:
     """Default identifier_type should be 'patent'."""
 
