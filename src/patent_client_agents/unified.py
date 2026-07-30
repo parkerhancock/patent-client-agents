@@ -20,6 +20,8 @@ import logging
 from dataclasses import dataclass
 from typing import Any
 
+import httpx
+
 from mcp_data_core.exceptions import McpDataCoreError, NotFoundError
 
 logger = logging.getLogger(__name__)
@@ -377,6 +379,15 @@ async def download_patent_pdf(patent_number: str) -> PatentPdf:
     except (NotFoundError, FileNotFoundError, ValueError) as exc:
         logger.info("Google Patents did not have PDF for %s: %s", patent_number, exc)
         tried.append(f"google_patents ({exc})")
+    except httpx.HTTPStatusError as exc:
+        # Google answers an unknown publication with a plain 404 rather than
+        # anything in the hierarchy above, and a very recent US publication is
+        # routinely missing there while PPUBS already has it. Without this the
+        # cascade would stop at the first source instead of falling through.
+        if exc.response.status_code != 404:
+            raise
+        logger.info("Google Patents has no page for %s yet", patent_number)
+        tried.append("google_patents (404)")
 
     # 2) USPTO PPUBS
     try:
