@@ -332,6 +332,44 @@ class TestSearchResponseModels:
 
 
 class TestApplicationModels:
+    def test_application_metadata_keeps_uspc_and_cpc_classifications_separate(self) -> None:
+        from patent_client_agents.uspto_odp.models.applications import (
+            ApplicationMetaData,
+        )
+
+        metadata = ApplicationMetaData.model_validate(
+            {
+                "class": "257",
+                "subclass": "197000",
+                "uspcSymbolText": "257/197000",
+                "cpcClassificationBag": ["H01L21/00", "H10B12/00"],
+            }
+        )
+
+        assert metadata.uspcClass == "257"
+        assert metadata.uspcSubclass == "197000"
+        assert metadata.uspcSymbolText == "257/197000"
+        assert metadata.cpcClassificationBag == ["H01L21/00", "H10B12/00"]
+        assert metadata.cpcClassificationBag_ == metadata.cpcClassificationBag
+
+    def test_application_record_types_flattened_classification_fields(self) -> None:
+        from patent_client_agents.uspto_odp.models.applications import ApplicationRecord
+
+        record = ApplicationRecord.model_validate(
+            {
+                "applicationNumberText": "16890123",
+                "class": "257",
+                "subclass": "197000",
+                "uspcSymbolText": "257/197000",
+                "cpcClassificationBag": ["H01L21/00"],
+            }
+        )
+
+        assert record.uspcClass == "257"
+        assert record.uspcSubclass == "197000"
+        assert record.uspcSymbolText == "257/197000"
+        assert record.cpcClassificationBag == ["H01L21/00"]
+
     def test_pta_history_accepts_fractional_event_sequence_numbers(self) -> None:
         from patent_client_agents.uspto_odp.models.applications import (
             PatentTermAdjustmentHistory,
