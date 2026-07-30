@@ -102,6 +102,16 @@ class AssigneeAddress(StrictModel):
     postalCode: str | None = None
 
 
+class CorrespondenceAddress(StrictModel):
+    """Correspondence address for an assignment."""
+
+    correspondentNameText: str | None = None
+    addressLineOneText: str | None = None
+    addressLineTwoText: str | None = None
+    addressLineThreeText: str | None = None
+    addressLineFourText: str | None = None
+
+
 class Assignee(StrictModel):
     """An assignee in an assignment transaction."""
 
@@ -123,6 +133,7 @@ class Assignment(StrictModel):
     conveyanceText: str | None = None
     assignorBag: list[Assignor] = Field(default_factory=list)
     assigneeBag: list[Assignee] = Field(default_factory=list)
+    correspondenceAddress: list[CorrespondenceAddress] = Field(default_factory=list)
 
 
 class AssignmentResponse(StrictModel):
@@ -196,10 +207,10 @@ class PatentTermAdjustmentHistory(StrictModel):
 
     eventDate: str | None = None
     eventDescriptionText: str | None = None
-    eventSequenceNumber: int | None = None
+    eventSequenceNumber: float | None = None
     applicantDayDelayQuantity: int | None = None
     ipOfficeDayDelayQuantity: int | None = None
-    originatingEventSequenceNumber: int | None = None
+    originatingEventSequenceNumber: float | None = None
     ptaPTECode: str | None = None
 
 
@@ -540,6 +551,7 @@ __all__ = [
     "Assignor",
     "Assignee",
     "AssigneeAddress",
+    "CorrespondenceAddress",
     "Assignment",
     # Continuity
     "ParentContinuity",
