@@ -13,7 +13,7 @@ from collections.abc import Callable
 import httpx
 import pytest
 
-from law_tools_core.exceptions import ApiError
+from mcp_data_core.exceptions import ApiError
 from patent_client_agents.inpi_br_bulk import (
     CKAN_HOST,
     INPI_BR_RPI_DATASET_ID,
