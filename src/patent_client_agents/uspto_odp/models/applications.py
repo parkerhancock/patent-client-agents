@@ -330,8 +330,10 @@ class ApplicationMetaData(StrictModel):
 
     # Classification
     groupArtUnitNumber: str | None = None
+    uspcClass: str | None = Field(default=None, alias="class")
+    uspcSubclass: str | None = Field(default=None, alias="subclass")
     uspcSymbolText: str | None = None
-    cpcClassificationBag: list[str] = Field(default_factory=list, alias="class")
+    cpcClassificationBag: list[str] = Field(default_factory=list)
 
     # Examiner
     examinerNameText: str | None = None
@@ -368,8 +370,10 @@ class ApplicationMetaData(StrictModel):
     inventorBag: list[Inventor] = Field(default_factory=list)
     applicantBag: list[Applicant] = Field(default_factory=list)
 
-    # CPC classifications (alternative field name)
-    cpcClassificationBag_: list[str] = Field(default_factory=list, alias="cpcClassificationBag")
+    @property
+    def cpcClassificationBag_(self) -> list[str]:
+        """Return CPC classifications using the former attribute name."""
+        return self.cpcClassificationBag
 
 
 # =============================================================================
@@ -406,6 +410,10 @@ class ApplicationRecord(FlexibleModel):
     inventionTitle: str | None = None
     patentNumber: str | None = None
     groupArtUnitNumber: str | None = None
+    uspcClass: str | None = Field(default=None, alias="class")
+    uspcSubclass: str | None = Field(default=None, alias="subclass")
+    uspcSymbolText: str | None = None
+    cpcClassificationBag: list[str] = Field(default_factory=list)
     examinerNameText: str | None = None
     customerNumber: int | None = None
     firstApplicantName: str | None = None
