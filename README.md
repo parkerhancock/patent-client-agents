@@ -274,9 +274,9 @@ and retry logic via `mcp-data-core`.
 
 ## API keys
 
-116 patent + IP MCP tools are exposed by default. Credentialed
+120 patent + IP MCP tools are exposed by default. Credentialed
 families register when their environment variables are present, bringing
-the local/private surface up to 181 tools when every env-gated family is
+the local/private surface up to 185 tools when every env-gated family is
 configured.
 
 | Variable | Source | Required | How to get |

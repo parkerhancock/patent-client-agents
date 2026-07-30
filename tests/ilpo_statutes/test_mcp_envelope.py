@@ -20,8 +20,8 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from law_tools_core.envelope import ListEnvelope, Provenance
-from law_tools_core.exceptions import ValidationError
+from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.ilpo_statutes.corpus.schema import DDL, SCHEMA_VERSION
 from patent_client_agents.ilpo_statutes.models import (
     IlpoSearchHit,

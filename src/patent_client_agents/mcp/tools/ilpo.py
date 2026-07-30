@@ -24,9 +24,9 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from law_tools_core.envelope import ListEnvelope, make_provenance
-from law_tools_core.exceptions import NotFoundError, ValidationError
-from law_tools_core.mcp.annotations import READ_ONLY
+from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.exceptions import NotFoundError, ValidationError
+from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.ilpo_statutes import (
     IlpoStatutesClient,
     SectionInput,
@@ -77,7 +77,10 @@ def _ilpo_tm_provenance(path: str) -> Any:
 def _dump(obj: object) -> dict[str, Any]:
     """Serialize a Pydantic model to a dict via ``model_dump(by_alias=True)``."""
     if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump(by_alias=True))  # type: ignore[union-attr]
+        return cast(
+            "dict[str, Any]",
+            obj.model_dump(by_alias=True),  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
+        )
     if isinstance(obj, dict):
         return cast("dict[str, Any]", obj)
     raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")

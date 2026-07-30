@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import re
+from typing import cast
 
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import (
@@ -179,7 +180,7 @@ class IlpoStatutesClient:
         return [
             IlpoStatute(
                 statute=str(row["statute"]),
-                section_count=int(row["section_count"]),  # type: ignore[arg-type]
+                section_count=int(cast("int", row["section_count"])),
                 source_url=(str(row["source_url"]) if row["source_url"] is not None else None),
             )
             for row in rows
