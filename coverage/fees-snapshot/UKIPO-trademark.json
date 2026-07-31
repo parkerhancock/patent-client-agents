@@ -443,7 +443,7 @@
   "key": "GB/UKIPO/trademark",
   "notes": "UKIPO TM fees scraped from the gov.uk trade-mark-forms-and-fees detail page (17 inline tables). Effective 2026-04-01. Renewals use year=10 (UKIPO TM is a 10-year renewal cycle).",
   "office_code": "UKIPO",
-  "retrieved_at": "2026-07-30",
+  "retrieved_at": "2026-07-31",
   "right": "trademark",
   "source_url": "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees",
   "statutory_basis": "Trade Marks Act 1994; Trade Marks (Fees) Rules 2008 (as amended)."
