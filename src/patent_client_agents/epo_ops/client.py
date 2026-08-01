@@ -21,11 +21,13 @@ from mcp_data_core.exceptions import AuthenticationError, RateLimitError
 
 from .models import (
     BiblioResponse,
+    CitationResponse,
     ClassificationMappingResponse,
     CpciBiblioResponse,
     CpcMediaResponse,
     CpcRetrievalResponse,
     CpcSearchResponse,
+    EquivalentsResponse,
     FamilyResponse,
     FamilySearchEntry,
     FamilySearchResponse,
@@ -33,20 +35,28 @@ from .models import (
     LegalEventsResponse,
     NumberConversionResponse,
     PdfDownloadResponse,
+    RegisterBiblioResponse,
+    RegisterEventsResponse,
+    RegisterProceduralStepsResponse,
     SearchResponse,
     UnitaryPatentPackage,
 )
 from .parsing import (
     NS,
     parse_biblio_response,
+    parse_citations,
     parse_claims,
     parse_classification_mapping,
     parse_cpc_retrieval,
     parse_cpc_search,
     parse_cpci_biblio,
+    parse_equivalents,
     parse_family,
     parse_legal_events,
     parse_number_conversion,
+    parse_register_biblio,
+    parse_register_events,
+    parse_register_procedural_steps,
     parse_search_response,
     parse_unitary_patent_package,
 )
@@ -264,6 +274,32 @@ class EpoOpsClient(BaseAsyncClient):
         response = await self._request("GET", path)
         return parse_biblio_response(response.text)
 
+    async def fetch_citations(
+        self,
+        *,
+        number: str,
+        doc_type: str = "publication",
+        fmt: str = "docdb",
+    ) -> CitationResponse:
+        """Fetch structured backward citations from an OPS biblio record."""
+        normalized = self._normalize_number(number)
+        path = f"/rest-services/published-data/{doc_type}/{fmt}/{normalized}/biblio"
+        response = await self._request("GET", path)
+        return parse_citations(response.text, publication_number=normalized)
+
+    async def fetch_equivalents(
+        self,
+        *,
+        number: str,
+        doc_type: str = "publication",
+        fmt: str = "docdb",
+    ) -> EquivalentsResponse:
+        """Fetch simple-family equivalent publications."""
+        normalized = self._normalize_number(number)
+        path = f"/rest-services/published-data/{doc_type}/{fmt}/{normalized}/equivalents"
+        response = await self._request("GET", path)
+        return parse_equivalents(response.text)
+
     async def fetch_fulltext(
         self,
         *,
@@ -350,6 +386,62 @@ class EpoOpsClient(BaseAsyncClient):
         """
         xml = await self.fetch_register(number=epo_number, doc_type=doc_type, fmt=fmt, sub="upp")
         return parse_unitary_patent_package(xml, epo_number=epo_number)
+
+    async def fetch_register_events(
+        self,
+        *,
+        number: str,
+        doc_type: str = "publication",
+        fmt: str = "epodoc",
+    ) -> RegisterEventsResponse:
+        """Fetch structured dossier events from the European Patent Register."""
+        normalized = self._normalize_number(number)
+        xml = await self.fetch_register(
+            number=normalized,
+            doc_type=doc_type,
+            fmt=fmt,
+            sub="events",
+        )
+        return parse_register_events(xml, epo_number=normalized)
+
+    async def fetch_register_biblio(
+        self,
+        *,
+        number: str,
+        doc_type: str = "publication",
+        fmt: str = "epodoc",
+    ) -> RegisterBiblioResponse:
+        """Fetch correction-aware bibliographic data from the EP Register.
+
+        Register designation data reflects application designations. Term-of-grant
+        lapse snapshots cover the opposition period and are not current national
+        validation or lapse status.
+        """
+        normalized = self._normalize_number(number)
+        xml = await self.fetch_register(
+            number=normalized,
+            doc_type=doc_type,
+            fmt=fmt,
+            sub="biblio",
+        )
+        return parse_register_biblio(xml, epo_number=normalized)
+
+    async def fetch_register_procedural_steps(
+        self,
+        *,
+        number: str,
+        doc_type: str = "publication",
+        fmt: str = "epodoc",
+    ) -> RegisterProceduralStepsResponse:
+        """Fetch structured procedural steps from the European Patent Register."""
+        normalized = self._normalize_number(number)
+        xml = await self.fetch_register(
+            number=normalized,
+            doc_type=doc_type,
+            fmt=fmt,
+            sub="procedural-steps",
+        )
+        return parse_register_procedural_steps(xml, epo_number=normalized)
 
     async def convert_number(
         self,

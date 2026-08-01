@@ -1,6 +1,6 @@
 # EPO Open Patent Services
 
-Provides access to the European Patent Office Open Patent Services (OPS) API for searching published patents, retrieving bibliographic data, full text (claims and descriptions), patent family information, legal events, CPC classification data, and downloading patent PDFs.
+Provides access to the European Patent Office Open Patent Services (OPS) API for searching published patents, retrieving bibliographic data, structured citations, simple-family equivalents, full text, patent families, worldwide legal events, European Patent Register records, CPC classification data, and patent PDFs.
 
 ## Source
 
@@ -43,9 +43,13 @@ async with client:
 | `search_published(query, range_begin, range_end)` | Search published patents using CQL query syntax |
 | `search_families(query, range_begin, range_end)` | Search patent families, grouping results by family ID |
 | `fetch_biblio(number, doc_type, fmt)` | Get bibliographic data for a patent document |
+| `fetch_citations(number, doc_type, fmt)` | Get structured backward patent and non-patent citations, including categories, relevant claims, and passages |
+| `fetch_equivalents(number, doc_type, fmt)` | Get simple-family equivalent publications, distinct from the broader INPADOC family |
 | `fetch_fulltext(number, section, doc_type, fmt)` | Get full text (claims or description) for a patent |
 | `fetch_family(number, doc_type, fmt, constituents)` | Get INPADOC patent family members |
 | `fetch_legal_events(number, doc_type, fmt)` | Get legal status events for a patent |
+| `fetch_register_events(number, doc_type, fmt)` | Get European Patent Register dossier events |
+| `fetch_register_procedural_steps(number, doc_type, fmt)` | Get European Patent Register procedural steps |
 | `convert_number(number, input_format, output_format)` | Convert patent numbers between formats (original, docdb, epodoc) |
 | `retrieve_cpc(symbol, depth, ancestors, navigation)` | Look up a CPC classification symbol with hierarchy |
 | `search_cpc(query, range_begin, range_end)` | Search CPC classifications by keyword |
@@ -61,9 +65,13 @@ async with client:
 | `search_epo(cql_query, group_by="publication"\|"family", range_begin, range_end)` | Search patents via EPO OPS. `group_by="publication"` returns one row per publication (default); `group_by="family"` deduplicates across INPADOC families. |
 | `get_epo_cql_help` | CQL field reference for building complex `search_epo` queries |
 | `get_epo_biblio` | Get bibliographic data for a patent from EPO OPS |
+| `get_epo_citations` | Get structured backward patent and non-patent citations |
+| `get_epo_equivalents` | Get simple-family equivalent publications |
 | `get_epo_fulltext` | Get full text (description and claims) of a patent |
 | `get_epo_family` | Get patent family members (INPADOC family) |
 | `get_epo_legal_events` | Get legal status events for a patent |
+| `get_epo_register_events` | Get European Patent Register dossier events |
+| `get_epo_procedural_steps` | Get European Patent Register procedural steps |
 | `convert_epo_number` | Convert a patent number between EPO formats |
 | `lookup_cpc` | Look up a CPC classification symbol to get its title and hierarchy |
 | `map_cpc_classification` | Map a patent classification between CPC, IPC, and USCLS |

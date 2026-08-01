@@ -28,12 +28,17 @@ from mcp_data_core.exceptions import NotFoundError
 from .client import EpoOpsClient, client_from_env
 from .models import (
     BiblioResponse,
+    CitationResponse,
+    EquivalentsResponse,
     FamilyResponse,
     FamilySearchResponse,
     FullTextResponse,
     LegalEventsResponse,
     NumberConversionResponse,
     PdfDownloadResponse,
+    RegisterBiblioResponse,
+    RegisterEventsResponse,
+    RegisterProceduralStepsResponse,
     SearchResponse,
     UnitaryPatentPackage,
 )
@@ -60,13 +65,23 @@ __all__ = [
     "search_published",
     "search_families",
     "fetch_biblio",
+    "fetch_citations",
+    "fetch_equivalents",
     "fetch_fulltext",
     "fetch_family",
     "fetch_family_details",
     "fetch_legal_events",
     "fetch_register",
+    "fetch_register_biblio",
+    "fetch_register_events",
+    "fetch_register_procedural_steps",
     "get_unitary_patent_package",
     "UnitaryPatentPackage",
+    "CitationResponse",
+    "EquivalentsResponse",
+    "RegisterEventsResponse",
+    "RegisterBiblioResponse",
+    "RegisterProceduralStepsResponse",
     "convert_number",
     "number_service",
     "download_pdf",
@@ -165,6 +180,38 @@ async def fetch_biblio(
 
     async with client_from_env() as cl:
         return await cl.fetch_biblio(number=number, doc_type=doc_type, fmt=fmt)
+
+
+async def fetch_citations(
+    number: str,
+    doc_type: str = "publication",
+    fmt: str = "docdb",
+    *,
+    client: EpoOpsClient | None = None,
+) -> CitationResponse:
+    """Fetch structured backward citations for a patent document."""
+    if client is not None:
+        _warn_client_deprecated()
+        return await client.fetch_citations(number=number, doc_type=doc_type, fmt=fmt)
+
+    async with client_from_env() as cl:
+        return await cl.fetch_citations(number=number, doc_type=doc_type, fmt=fmt)
+
+
+async def fetch_equivalents(
+    number: str,
+    doc_type: str = "publication",
+    fmt: str = "docdb",
+    *,
+    client: EpoOpsClient | None = None,
+) -> EquivalentsResponse:
+    """Fetch simple-family equivalent publications."""
+    if client is not None:
+        _warn_client_deprecated()
+        return await client.fetch_equivalents(number=number, doc_type=doc_type, fmt=fmt)
+
+    async with client_from_env() as cl:
+        return await cl.fetch_equivalents(number=number, doc_type=doc_type, fmt=fmt)
 
 
 async def fetch_fulltext(
@@ -310,6 +357,79 @@ async def fetch_register(
         return await client.fetch_register(number=number, doc_type=doc_type, fmt=fmt, sub=sub)
     async with client_from_env() as cl:
         return await cl.fetch_register(number=number, doc_type=doc_type, fmt=fmt, sub=sub)
+
+
+async def fetch_register_events(
+    number: str,
+    doc_type: str = "publication",
+    fmt: str = "epodoc",
+    *,
+    client: EpoOpsClient | None = None,
+) -> RegisterEventsResponse:
+    """Fetch structured dossier events from the European Patent Register."""
+    if client is not None:
+        _warn_client_deprecated()
+        return await client.fetch_register_events(
+            number=number,
+            doc_type=doc_type,
+            fmt=fmt,
+        )
+    async with client_from_env() as cl:
+        return await cl.fetch_register_events(
+            number=number,
+            doc_type=doc_type,
+            fmt=fmt,
+        )
+
+
+async def fetch_register_biblio(
+    number: str,
+    doc_type: str = "publication",
+    fmt: str = "epodoc",
+    *,
+    client: EpoOpsClient | None = None,
+) -> RegisterBiblioResponse:
+    """Fetch correction-aware bibliographic data from the EP Register.
+
+    Designations are application-stage records. Term-of-grant lapse snapshots do
+    not represent current national validation or lapse status.
+    """
+    if client is not None:
+        _warn_client_deprecated()
+        return await client.fetch_register_biblio(
+            number=number,
+            doc_type=doc_type,
+            fmt=fmt,
+        )
+    async with client_from_env() as cl:
+        return await cl.fetch_register_biblio(
+            number=number,
+            doc_type=doc_type,
+            fmt=fmt,
+        )
+
+
+async def fetch_register_procedural_steps(
+    number: str,
+    doc_type: str = "publication",
+    fmt: str = "epodoc",
+    *,
+    client: EpoOpsClient | None = None,
+) -> RegisterProceduralStepsResponse:
+    """Fetch structured procedural steps from the European Patent Register."""
+    if client is not None:
+        _warn_client_deprecated()
+        return await client.fetch_register_procedural_steps(
+            number=number,
+            doc_type=doc_type,
+            fmt=fmt,
+        )
+    async with client_from_env() as cl:
+        return await cl.fetch_register_procedural_steps(
+            number=number,
+            doc_type=doc_type,
+            fmt=fmt,
+        )
 
 
 async def get_unitary_patent_package(

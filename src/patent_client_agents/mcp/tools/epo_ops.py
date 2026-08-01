@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import asyncio
 import base64
-from typing import Annotated, Any, cast
+from collections.abc import Awaitable
+from typing import Annotated, Any, Literal, cast
 
+import httpx
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import (
@@ -15,14 +17,29 @@ from mcp_data_core.envelope import (
     encode_cursor,
     make_provenance,
 )
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import (
+    ApiError,
+    AuthenticationError,
+    ConfigurationError,
+    NotFoundError,
+    ParseError,
+    RateLimitError,
+    ServerError,
+    ValidationError,
+)
 from mcp_data_core.filenames import epo_pdf as _epo_pdf_name
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import (
     read_resource,
     register_source,
 )
+from mcp_data_core.resilience import is_retryable_error
 from patent_client_agents.epo_ops.client import client_from_env
+from patent_client_agents.epo_ops.models import (
+    EvidenceFailure,
+    FamilyIntelligenceResponse,
+    SourceEvidence,
+)
 
 epo_ops_mcp = FastMCP("EPO OPS")
 
@@ -158,11 +175,55 @@ def _summarize_epo_family(record: dict, *, fallback_number: str) -> str:
     return f"**EPO {pub}** — INPADOC family: {num} member(s)."
 
 
+def _summarize_epo_citations(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("publication_number") or fallback_number
+    citations = record.get("citations") or []
+    patent_count = sum(
+        1
+        for citation in citations
+        if isinstance(citation, dict) and citation.get("patent_document")
+    )
+    npl_count = sum(
+        1
+        for citation in citations
+        if isinstance(citation, dict) and citation.get("non_patent_literature")
+    )
+    return (
+        f"**EPO {pub}** — {len(citations)} backward citation(s): "
+        f"{patent_count} patent, {npl_count} non-patent."
+    )
+
+
+def _summarize_epo_equivalents(record: dict, *, fallback_number: str) -> str:
+    equivalents = record.get("equivalents") or []
+    return f"**EPO {fallback_number}** — {len(equivalents)} simple-family equivalent(s)."
+
+
 def _summarize_epo_legal_events(record: dict, *, fallback_number: str) -> str:
     events = record.get("events") or []
     ref = record.get("publication_reference") or {}
     pub = ref.get("doc_number") or fallback_number
     return f"**EPO {pub}** — {len(events)} legal event(s) on file."
+
+
+def _summarize_epo_register_events(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("epo_number") or fallback_number
+    events = record.get("events") or []
+    return f"**European Patent Register {pub}** — {len(events)} dossier event(s)."
+
+
+def _summarize_epo_register_biblio(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("epo_number") or fallback_number
+    titles = record.get("titles") or []
+    title = titles[0].get("text") if titles and isinstance(titles[0], dict) else "(no title)"
+    status = record.get("bibliographic_status") or record.get("status") or "unknown status"
+    return f"**European Patent Register {pub}** — {title}\nRegister status: {status}."
+
+
+def _summarize_epo_procedural_steps(record: dict, *, fallback_number: str) -> str:
+    pub = record.get("epo_number") or fallback_number
+    steps = record.get("procedural_steps") or []
+    return f"**European Patent Register {pub}** — {len(steps)} procedural step(s)."
 
 
 def _summarize_epo_number_conversion(input_number: str, record: dict) -> str:
@@ -204,6 +265,10 @@ def _coalesce_number_list(
             return value
     alias_names = ", ".join(aliases)
     raise ValidationError(f"{tool_name} requires {field_name} (or {alias_names})")
+
+
+def _normalize_epo_number(number: str) -> str:
+    return number.strip().replace(" ", "").upper()
 
 
 # ---------------------------------------------------------------------------
@@ -571,6 +636,80 @@ async def get_epo_family(
 
 
 @epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_citations(
+    patent_number: Annotated[
+        str | list[str],
+        "Patent document number, or a list for portfolio workflows. "
+        "Returns backward citations recorded in EPO bibliographic data.",
+    ],
+) -> ListEnvelope[dict]:
+    """Get structured backward patent and non-patent citations for one or more publications."""
+    raw_numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    numbers = [_normalize_epo_number(number) for number in raw_numbers]
+    if not numbers:
+        raise ValidationError("get_epo_citations requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_citations(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_citations(items[0], fallback_number=numbers[0])
+        path = f"/published-data/publication/docdb/{numbers[0]}/biblio"
+    else:
+        summary = f"EPO OPS citations — fetched {len(items)} record(s): " + ", ".join(numbers)
+        path = "/published-data/publication"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_provenance(path),
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_equivalents(
+    patent_number: Annotated[
+        str | list[str],
+        "Patent document number, or a list for portfolio workflows. "
+        "Returns simple-family publications carrying the same technical disclosure.",
+    ],
+) -> ListEnvelope[dict]:
+    """Get simple-family equivalent publications for one or more patent documents."""
+    raw_numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
+    numbers = [_normalize_epo_number(number) for number in raw_numbers]
+    if not numbers:
+        raise ValidationError("get_epo_equivalents requires at least one patent number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_equivalents(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_equivalents(items[0], fallback_number=numbers[0])
+        path = f"/published-data/publication/docdb/{numbers[0]}/equivalents"
+    else:
+        summary = f"EPO OPS equivalents — fetched {len(items)} record(s): " + ", ".join(numbers)
+        path = "/published-data/publication"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_provenance(path),
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
 async def get_epo_legal_events(
     patent_number: Annotated[
         str | list[str],
@@ -676,11 +815,179 @@ async def convert_epo_number(
 
 _EPO_REGISTER_BASE = "https://ops.epo.org/3.2"
 _EPO_REGISTER_NAME = "EPO Register (Unitary Patent)"
+_EPO_REGISTER_RECORD_NAME = "European Patent Register"
+_EPO_FAMILY_AGGREGATE_NAME = (
+    "European Patent Office services aggregate (EPO OPS and European Patent Register)"
+)
 
 
 def _epo_register_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}`` on the EPO Register."""
     return make_provenance(source_url=f"{_EPO_REGISTER_BASE}{path}", source_name=_EPO_REGISTER_NAME)
+
+
+def _epo_register_record_provenance(path: str) -> Any:
+    return make_provenance(
+        source_url=f"{_EPO_REGISTER_BASE}{path}",
+        source_name=_EPO_REGISTER_RECORD_NAME,
+    )
+
+
+_FAMILY_INTELLIGENCE_LIMITATIONS = [
+    (
+        "EPO OPS worldwide legal events may lag official national registers; "
+        "verify current validation, renewal, lapse, and revocation in each national register."
+    ),
+    (
+        "European Patent Register dossier and term-of-grant data do not establish "
+        "current enforceability in national registers."
+    ),
+    (
+        "UPC opt-out and case-management status are not exposed by EPO OPS; "
+        "verify them against the UPC register."
+    ),
+    "The evidence is source-separated; no family-wide legal-status conclusion is drawn.",
+]
+
+
+async def _capture_family_intelligence_failure(
+    request: Awaitable[object],
+) -> object | ApiError | ParseError | httpx.TransportError:
+    """Return expected source failures while propagating auth, config, and code errors."""
+    try:
+        return await request
+    except (AuthenticationError, ConfigurationError):
+        raise
+    except (ApiError, ParseError, httpx.TransportError) as exc:
+        return exc
+
+
+def _family_intelligence_failure_code(
+    exc: ApiError | ParseError | httpx.TransportError,
+) -> Literal[
+    "not_found",
+    "rate_limited",
+    "upstream_server_error",
+    "upstream_api_error",
+    "parse_error",
+    "transport_error",
+]:
+    if isinstance(exc, NotFoundError):
+        return "not_found"
+    if isinstance(exc, RateLimitError):
+        return "rate_limited"
+    if isinstance(exc, ServerError):
+        return "upstream_server_error"
+    if isinstance(exc, ParseError):
+        return "parse_error"
+    if isinstance(exc, httpx.TransportError):
+        return "transport_error"
+    return "upstream_api_error"
+
+
+def _family_intelligence_is_empty(name: str, record: dict[str, Any]) -> bool:
+    collection_fields = {
+        "inpadoc_family": "members",
+        "simple_family_equivalents": "equivalents",
+        "backward_citations": "citations",
+        "worldwide_legal_events": "events",
+        "register_events": "events",
+        "register_procedural_steps": "procedural_steps",
+    }
+    collection_field = collection_fields.get(name)
+    if collection_field is not None:
+        return not bool(record.get(collection_field))
+
+    meaningful_register_biblio_fields = (
+        "bibliographic_status",
+        "application_id",
+        "patent_statuses",
+        "publication_references",
+        "application_references",
+        "priority_claim_sets",
+        "titles",
+        "party_sets",
+        "classification_sets",
+        "state_designation_sets",
+        "term_of_grant_snapshots",
+    )
+    return not any(record.get(field) for field in meaningful_register_biblio_fields)
+
+
+def _family_intelligence_source(
+    *,
+    path: str,
+    register: bool,
+) -> tuple[str, str]:
+    if register:
+        return _EPO_REGISTER_RECORD_NAME, f"{_EPO_REGISTER_BASE}{path}"
+    return _EPO_OPS_NAME, f"{_EPO_OPS_BASE}{path}"
+
+
+def _family_intelligence_summary(details: FamilyIntelligenceResponse) -> str:
+    family_count = (
+        len(details.inpadoc_family.data.members) if details.inpadoc_family.data is not None else 0
+    )
+    equivalents_count = (
+        len(details.simple_family_equivalents.data.equivalents)
+        if details.simple_family_equivalents.data is not None
+        else 0
+    )
+    citation_count = (
+        len(details.backward_citations.data.citations)
+        if details.backward_citations.data is not None
+        else 0
+    )
+    event_count = (
+        len(details.worldwide_legal_events.data.events)
+        if details.worldwide_legal_events.data is not None
+        else 0
+    )
+    register_summary = ""
+    if details.register_biblio.outcome != "not_applicable":
+        register_biblio = "returned" if details.register_biblio.data is not None else "not returned"
+        register_event_count = (
+            len(details.register_events.data.events)
+            if details.register_events.data is not None
+            else 0
+        )
+        procedural_step_count = (
+            len(details.register_procedural_steps.data.procedural_steps)
+            if details.register_procedural_steps.data is not None
+            else 0
+        )
+        register_summary = (
+            "European Patent Register evidence: "
+            f"biblio {register_biblio}; {register_event_count} dossier event(s); "
+            f"{procedural_step_count} procedural step(s).\n"
+        )
+    evidence = (
+        details.inpadoc_family,
+        details.simple_family_equivalents,
+        details.backward_citations,
+        details.worldwide_legal_events,
+        details.register_biblio,
+        details.register_events,
+        details.register_procedural_steps,
+    )
+    unavailable = sum(item.outcome in {"not_found", "error"} for item in evidence)
+    suffix = f" {unavailable} source view(s) unavailable." if unavailable else ""
+    return (
+        f"**{details.publication_number} family evidence**: {family_count} INPADOC member(s), "
+        f"{equivalents_count} simple-family equivalent(s), {citation_count} backward "
+        f"citation(s), and {event_count} worldwide legal event(s).{suffix}\n"
+        f"{register_summary}"
+        "Source-separated records only; no family-wide legal-status conclusion."
+    )
+
+
+def _family_intelligence_provenance(*, register_attempted: bool) -> Any:
+    if not register_attempted:
+        return _epo_provenance("")
+    return make_provenance(
+        source_url=_EPO_REGISTER_BASE,
+        source_name=_EPO_FAMILY_AGGREGATE_NAME,
+    )
 
 
 def _summarize_unitary_patent(record: dict) -> str:
@@ -704,6 +1011,266 @@ def _summarize_unitary_patent(record: dict) -> str:
     return (
         f"**Unitary Patent {epo_number}** — status: {status_text} "
         f"({flag}); effective: {change_date}."
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_register_biblio(
+    epo_number: Annotated[
+        str | list[str],
+        "EP publication number, or a list. Examples: 'EP1000000', ['EP1000000', 'EP4108782'].",
+    ],
+) -> ListEnvelope[dict]:
+    """Get correction-aware European Patent Register bibliographic data.
+
+    Designations are application-stage records. Term-of-grant lapse snapshots
+    cover the opposition period, not current national validation or lapse status.
+    """
+    raw_numbers = [epo_number] if isinstance(epo_number, str) else list(epo_number)
+    numbers = [_normalize_epo_number(number) for number in raw_numbers]
+    if not numbers:
+        raise ValidationError("get_epo_register_biblio requires at least one EP number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_register_biblio(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_register_biblio(
+            items[0],
+            fallback_number=numbers[0],
+        )
+        path = f"/rest-services/register/publication/epodoc/{numbers[0]}/biblio"
+    else:
+        summary = f"European Patent Register biblio — fetched {len(items)} record(s)."
+        path = "/rest-services/register/publication/epodoc"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_register_record_provenance(path),
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_register_events(
+    epo_number: Annotated[
+        str | list[str],
+        "EP publication number, or a list. Examples: 'EP1000000', ['EP1000000', 'EP4108782'].",
+    ],
+) -> ListEnvelope[dict]:
+    """Get structured dossier events from the European Patent Register."""
+    raw_numbers = [epo_number] if isinstance(epo_number, str) else list(epo_number)
+    numbers = [_normalize_epo_number(number) for number in raw_numbers]
+    if not numbers:
+        raise ValidationError("get_epo_register_events requires at least one EP number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_register_events(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_register_events(items[0], fallback_number=numbers[0])
+        path = f"/rest-services/register/publication/epodoc/{numbers[0]}/events"
+    else:
+        summary = f"European Patent Register events — fetched {len(items)} record(s)."
+        path = "/rest-services/register/publication/epodoc"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_register_record_provenance(path),
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_procedural_steps(
+    epo_number: Annotated[
+        str | list[str],
+        "EP publication number, or a list. Examples: 'EP1000000', ['EP1000000', 'EP4108782'].",
+    ],
+) -> ListEnvelope[dict]:
+    """Get structured procedural steps from the European Patent Register."""
+    raw_numbers = [epo_number] if isinstance(epo_number, str) else list(epo_number)
+    numbers = [_normalize_epo_number(number) for number in raw_numbers]
+    if not numbers:
+        raise ValidationError("get_epo_procedural_steps requires at least one EP number")
+
+    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
+
+    async def _fetch_one(client: Any, n: str) -> dict:
+        async with semaphore:
+            return _dump(await client.fetch_register_procedural_steps(number=n))
+
+    async with client_from_env() as client:
+        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+    if len(numbers) == 1:
+        summary = _summarize_epo_procedural_steps(items[0], fallback_number=numbers[0])
+        path = f"/rest-services/register/publication/epodoc/{numbers[0]}/procedural-steps"
+    else:
+        summary = f"European Patent Register steps — fetched {len(items)} record(s)."
+        path = "/rest-services/register/publication/epodoc"
+
+    return ListEnvelope[dict](
+        summary=summary,
+        items=items,
+        provenance=_epo_register_record_provenance(path),
+    )
+
+
+@epo_ops_mcp.tool(annotations=READ_ONLY)
+async def get_epo_family_intelligence(
+    publication_number: Annotated[
+        str,
+        "One country-prefixed publication number, such as 'EP1000000A1' or "
+        "'US6000000A'. This aggregate does not accept lists.",
+    ],
+) -> ResponseEnvelope[FamilyIntelligenceResponse]:
+    """Get source-separated family, citation, legal-event, and EP Register evidence.
+
+    The aggregate fetches evidence only for the requested publication. It does
+    not fan out across family members or infer family-wide legal status or
+    current enforceability.
+
+    Related tools: get_epo_family, get_epo_equivalents, get_epo_citations,
+    get_epo_legal_events, get_epo_register_biblio, get_epo_register_events,
+    get_epo_procedural_steps.
+    """
+    if not isinstance(publication_number, str):
+        raise ValidationError("get_epo_family_intelligence requires a single publication number")
+    normalized = _normalize_epo_number(publication_number)
+    if not normalized:
+        raise ValidationError("get_epo_family_intelligence requires a publication number")
+
+    calls: list[tuple[str, Awaitable[object], str, bool]] = []
+    blocks: dict[str, SourceEvidence[Any]] = {}
+
+    async with client_from_env() as client:
+        calls.extend(
+            [
+                (
+                    "inpadoc_family",
+                    client.fetch_family(number=normalized),
+                    f"/family/publication/docdb/{normalized}",
+                    False,
+                ),
+                (
+                    "simple_family_equivalents",
+                    client.fetch_equivalents(number=normalized),
+                    f"/published-data/publication/docdb/{normalized}/equivalents",
+                    False,
+                ),
+                (
+                    "backward_citations",
+                    client.fetch_citations(number=normalized),
+                    f"/published-data/publication/docdb/{normalized}/biblio",
+                    False,
+                ),
+                (
+                    "worldwide_legal_events",
+                    client.fetch_legal_events(number=normalized),
+                    f"/legal/publication/docdb/{normalized}",
+                    False,
+                ),
+            ]
+        )
+        if normalized.startswith("EP"):
+            calls.extend(
+                [
+                    (
+                        "register_biblio",
+                        client.fetch_register_biblio(number=normalized),
+                        f"/rest-services/register/publication/epodoc/{normalized}/biblio",
+                        True,
+                    ),
+                    (
+                        "register_events",
+                        client.fetch_register_events(number=normalized),
+                        f"/rest-services/register/publication/epodoc/{normalized}/events",
+                        True,
+                    ),
+                    (
+                        "register_procedural_steps",
+                        client.fetch_register_procedural_steps(number=normalized),
+                        (
+                            "/rest-services/register/publication/epodoc/"
+                            f"{normalized}/procedural-steps"
+                        ),
+                        True,
+                    ),
+                ]
+            )
+        else:
+            blocks["register_biblio"] = SourceEvidence[Any](outcome="not_applicable")
+            blocks["register_events"] = SourceEvidence[Any](outcome="not_applicable")
+            blocks["register_procedural_steps"] = SourceEvidence[Any](outcome="not_applicable")
+
+        results = await asyncio.gather(
+            *[_capture_family_intelligence_failure(call[1]) for call in calls]
+        )
+
+    failures: list[ApiError | ParseError | httpx.TransportError] = []
+    successful = 0
+    for (name, _, path, register), result in zip(calls, results, strict=True):
+        if isinstance(result, (ApiError, ParseError, httpx.TransportError)):
+            failures.append(result)
+            source_name, source_url = _family_intelligence_source(
+                path=path,
+                register=register,
+            )
+            outcome = "not_found" if isinstance(result, NotFoundError) else "error"
+            blocks[name] = SourceEvidence[Any](
+                outcome=outcome,
+                failure=EvidenceFailure(
+                    code=_family_intelligence_failure_code(result),
+                    message=str(result),
+                    retryable=is_retryable_error(result),
+                    source_name=source_name,
+                    source_url=source_url,
+                ),
+            )
+            continue
+
+        successful += 1
+        record = _dump(result)
+        provenance = _epo_register_record_provenance(path) if register else _epo_provenance(path)
+        blocks[name] = SourceEvidence[Any](
+            outcome="empty" if _family_intelligence_is_empty(name, record) else "ok",
+            data=record,
+            provenance=provenance,
+        )
+
+    if successful == 0 and failures:
+        raise failures[0]
+
+    details = FamilyIntelligenceResponse.model_validate(
+        {
+            "publication_number": normalized,
+            "inpadoc_family": blocks["inpadoc_family"].model_dump(),
+            "simple_family_equivalents": blocks["simple_family_equivalents"].model_dump(),
+            "backward_citations": blocks["backward_citations"].model_dump(),
+            "worldwide_legal_events": blocks["worldwide_legal_events"].model_dump(),
+            "register_biblio": blocks["register_biblio"].model_dump(),
+            "register_events": blocks["register_events"].model_dump(),
+            "register_procedural_steps": blocks["register_procedural_steps"].model_dump(),
+            "limitations": list(_FAMILY_INTELLIGENCE_LIMITATIONS),
+        }
+    )
+    return ResponseEnvelope[FamilyIntelligenceResponse](
+        summary=_family_intelligence_summary(details),
+        details=details,
+        provenance=_family_intelligence_provenance(register_attempted=normalized.startswith("EP")),
     )
 
 
@@ -735,6 +1302,7 @@ async def get_epo_unitary_patent_status(
 
     Related tools: get_epo_biblio, get_epo_legal_events, search_epo.
     """
+    epo_number = _normalize_epo_number(epo_number)
     async with client_from_env() as client:
         result = await client.get_unitary_patent_package(epo_number)
 
