@@ -44,6 +44,7 @@ from .tools.ipo_in_statutes import ipo_in_statutes_mcp
 from .tools.ipos import ipos_mcp
 from .tools.jpo import jpo_mcp
 from .tools.kipo_kipris import kipo_kipris_mcp
+from .tools.legifrance_ip import legifrance_ip_mcp
 from .tools.mpep import mpep_mcp
 from .tools.office_actions import office_actions_mcp
 from .tools.patent_assignments import patent_assignments_mcp
@@ -73,8 +74,8 @@ ip_mcp = FastMCP(
         "judgment database), EUIPO (EU Trade Marks + Registered "
         "Community Designs — env-gated on EUIPO_CLIENT_ID / EUIPO_CLIENT_SECRET), "
         "and UPC (Unified Patent Court decisions/orders feed + corpus-backed "
-        "UPCA / RoP / Fees statutes). 126 default read-only tools; up to "
-        "191 tools when every env-gated family is configured. Tools are grouped by intent."
+        "UPCA / RoP / Fees statutes). 128 default read-only tools; up to "
+        "193 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
 
@@ -115,6 +116,7 @@ ip_mcp.mount(prh_fi_mcp)
 ip_mcp.mount(tipo_opdata_mcp)
 ip_mcp.mount(tw_trade_secrets_mcp)
 ip_mcp.mount(kipo_kipris_mcp)
+ip_mcp.mount(legifrance_ip_mcp)
 ip_mcp.mount(inpi_br_bulk_mcp)
 ip_mcp.mount(inpi_br_statutes_mcp)
 ip_mcp.mount(upc_mcp)

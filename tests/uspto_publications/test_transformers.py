@@ -448,6 +448,13 @@ class TestConvertDocumentPayload:
         result = convert_document_payload(data)
         assert len(result["document"]["claims"]) == 2
 
+    def test_normalizes_government_interest_list(self) -> None:
+        data = {"governmentInterest": ["First statement", "Second statement"]}
+
+        result = convert_document_payload(data)
+
+        assert result["document"]["government_interest"] == ("First statement\nSecond statement")
+
     def test_extracts_inventors(self) -> None:
         data = {
             "inventorsName": ["John Doe", "Jane Smith"],
