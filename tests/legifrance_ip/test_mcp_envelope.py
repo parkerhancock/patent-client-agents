@@ -139,3 +139,11 @@ async def test_no_batch_tool_present() -> None:
 
     assert not hasattr(mod, "batch_get_legifrance_section")
     assert not hasattr(mod, "batch_legifrance_section")
+
+
+async def test_tools_are_mounted_on_root_server() -> None:
+    from patent_client_agents.mcp import ip_mcp
+
+    tool_names = {tool.name for tool in await ip_mcp.list_tools()}
+
+    assert {"search_legifrance_ip", "get_legifrance_section"} <= tool_names

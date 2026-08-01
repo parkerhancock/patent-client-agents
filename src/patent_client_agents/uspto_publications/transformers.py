@@ -248,9 +248,12 @@ def convert_biblio_page(data: dict[str, Any]) -> dict[str, Any]:
 
 def convert_document_payload(data: dict[str, Any]) -> dict[str, Any]:
     parser = ClaimsParser()
+    government_interest = data.get("governmentInterest")
+    if isinstance(government_interest, list):
+        government_interest = "\n".join(str(item) for item in government_interest)
     document = {
         "abstract_html": data.get("abstractHtml"),
-        "government_interest": data.get("governmentInterest"),
+        "government_interest": government_interest,
         "background_html": data.get("backgroundTextHtml"),
         "brief_html": data.get("briefHtml"),
         "description_html": data.get("descriptionHtml"),
