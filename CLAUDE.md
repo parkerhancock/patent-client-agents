@@ -6,7 +6,7 @@ substantive-law research.
 ## Development
 
 ```bash
-uv sync --group dev              # Install dependencies
+uv sync --frozen --group dev     # Install dependencies
 uv run pytest                    # Run the offline/VCR replay suite
 uv run ruff check src/ tests/    # Lint
 uv run ruff format src/ tests/   # Format

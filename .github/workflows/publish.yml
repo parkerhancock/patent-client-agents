@@ -18,12 +18,6 @@ on:
 permissions:
   contents: read
 
-# Standalone CI runs against pca's own repo, not the parent monorepo —
-# so `tool.uv.sources` workspace directives can't resolve. Tell every uv
-# invocation in this workflow to ignore sources and resolve from PyPI.
-env:
-  UV_NO_SOURCES: "1"
-
 jobs:
   verify:
     name: Verify tag matches pyproject version
@@ -74,7 +68,7 @@ jobs:
         run: uv python install ${{ matrix.python-version }}
 
       - name: Install dependencies (library + MCP + dev)
-        run: uv sync --all-extras --group dev
+        run: uv sync --frozen --all-extras --group dev
 
       - name: Run test suite (VCR replay; no network)
         run: uv run pytest -q
