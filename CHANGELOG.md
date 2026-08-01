@@ -7,11 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.25.0] — 2026-08-01
+
 ### Added
 
 - Added `check_citation_hits` for stateless monitoring of new examiner
   citations to watched patents, including an application-level §102 screening
   flag.
+- Added structured EPO OPS citation, equivalent-publication, legal-event,
+  register-bibliography, register-event, procedural-step, and family-intelligence
+  views. The family-intelligence tool combines bibliographic, family, citation,
+  legal-event, and register data in one fault-tolerant response.
+- Added an opt-in raw-record mode to USPTO ODP application searches for callers
+  that need the complete upstream record alongside the normalized result.
 - **CanLII connector — Canadian IP layer expansion.** Extends the
   existing `patent_client_agents.canlii` package with two new
   IP-focused MCP tools and documents the full Canadian IP surface:
@@ -169,13 +177,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Filled omitted USPTO ODP application range-filter bounds so one-sided date
   filters no longer produce invalid requests.
+- Preserved USPTO ODP assignment data, separated USPC from CPC classifications,
+  and accepted singleton attorney-correspondence records.
 - Corrected PTAB trial, appeal, and interference sort payloads and normalized
   trial download responses so downloaded proceedings, decisions, and documents
   are returned instead of empty result bags.
+- Normalized list-valued USPTO government-interest text, allowed Google Patents
+  PDF 404 responses to fall through to later sources, and added file-mounted
+  USITC token support.
 
 ### Changed
 
-- Refreshed bundled fee snapshots through 2026-07-21.
+- Mounted the Singapore, Brazil, Israel, and Légifrance connectors on the root
+  MCP server. The server now exposes 128 default tools and up to 193 configured
+  tools.
+- Refreshed bundled fee snapshots through 2026-08-01.
+- Removed local source overrides from frozen builds and CI now uses the
+  published `mcp-data-core` package.
 - Pinned GitHub Actions and uv versions, added Dependabot and Gitleaks
   automation, aligned the pre-commit Ruff version, and required release tags to
   point to commits contained in `main`.
@@ -1763,7 +1781,10 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.22.0...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.25.0...HEAD
+[0.25.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.24.0...v0.25.0
+[0.24.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.23.0...v0.24.0
+[0.23.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.21.2...v0.22.0
 [0.21.2]: https://github.com/parkerhancock/patent-client-agents/compare/v0.21.1...v0.21.2
 [0.21.1]: https://github.com/parkerhancock/patent-client-agents/releases/tag/v0.21.1
