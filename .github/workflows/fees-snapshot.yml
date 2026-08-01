@@ -22,12 +22,6 @@ on:
 permissions:
   contents: write
 
-# Standalone CI runs against pca's own repo, not the parent monorepo —
-# so `tool.uv.sources` workspace directives can't resolve. Tell every uv
-# invocation in this workflow to ignore sources and resolve from PyPI.
-env:
-  UV_NO_SOURCES: "1"
-
 jobs:
   rebuild:
     runs-on: ubuntu-latest
@@ -43,7 +37,7 @@ jobs:
         run: uv python install 3.11
 
       - name: Install dependencies
-        run: uv sync --group dev --all-extras
+        run: uv sync --frozen --group dev --all-extras
 
       - name: Rebuild fees snapshot
         id: build
