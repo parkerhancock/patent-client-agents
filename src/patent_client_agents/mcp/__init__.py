@@ -73,8 +73,8 @@ ip_mcp = FastMCP(
         "judgment database), EUIPO (EU Trade Marks + Registered "
         "Community Designs — env-gated on EUIPO_CLIENT_ID / EUIPO_CLIENT_SECRET), "
         "and UPC (Unified Patent Court decisions/orders feed + corpus-backed "
-        "UPCA / RoP / Fees statutes). 120 default read-only tools; up to "
-        "185 tools when every env-gated family is configured. Tools are grouped by intent."
+        "UPCA / RoP / Fees statutes). 126 default read-only tools; up to "
+        "191 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
 
