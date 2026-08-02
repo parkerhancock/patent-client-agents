@@ -31,18 +31,18 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-05-18  # Africa wave shipped — 4 surveyed nationals (all red) + 39 transitive entries (ARIPO + OAPI member states, all green_transitive via EPO OPS AP/OA codes)
+last_updated: 2026-08-02  # Completed the next four unblocked source surveys
 
 stats:
-  total_entities: 88
-  synopses_filled: 37        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
-  connectors_shipped: 15
+  total_entities: 116
+  synopses_filled: 41        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
+  connectors_shipped: 14
   connectors_in_progress: 0
   connectors_spec_ready: 0
-  connectors_planned: 7      # DE/DPMA + CH/IPI + SE/PRV + FI/PRH + ES/OEPM + NZ/IPONZ + TH/DIP
-  connectors_blocked: 7      # UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
-  next_unblocked_synopses: 3 # SA, AE, TR remaining (ZA shipped 2026-05-18; Africa wave added EG/NG/MA all red)
-  green_transitive_states: 39 # 22 ARIPO + 17 OAPI member states; patents covered via EPO OPS country codes AP/OA
+  connectors_planned: 5
+  connectors_blocked: 0
+  next_unblocked_synopses: 0
+  green_transitive_states: 67
 
 entities:
 
@@ -226,18 +226,21 @@ entities:
     name: Eurasian Patent Office
     layer: regional
     iso2: n/a
-    rights: [patent]
-    synopsis: null
-    detail_survey: null
+    rights: [patent, design]
+    synopsis: regional/eapo.md
+    detail_survey: waves/2026-08-02-roadmap-batch/eapo.md
     connector_spec: null
-    rating: tbd
-    rating_basis: Not yet researched
-    connector_status: none
+    rating: red_no_api
+    rating_basis: Public patent and design registers are browser services. Their undocumented backend is disallowed by EAPO robots.txt, and EAPO publishes no supported API or bulk feed.
+    connector_status: skipped
     manifest_ids: []
-    next_action: synopsis_discovery
+    next_action: none
     blocked_by: []
-    last_verified: 2026-05-16
-    notes: 8 Eurasian states; Rospatent-adjacent; politics complicate
+    last_verified: 2026-08-02
+    notes: |
+      Official registers remain useful for manual verification. Do not
+      automate the undocumented /pubservices/prod/ backend. Monitor EAPO
+      announcements for a supported API or bulk-data service.
 
   - id: AP/ARIPO
     name: African Regional Intellectual Property Organization
@@ -730,17 +733,23 @@ entities:
     layer: national
     iso2: TR
     rights: [patent, trademark, design]
-    synopsis: null
-    detail_survey: null
+    synopsis: national/tr-turkpatent.md
+    detail_survey: waves/2026-08-02-roadmap-batch/tr-turkpatent.md
     connector_spec: null
-    rating: tbd
-    rating_basis: Not yet researched
-    connector_status: none
-    manifest_ids: []
-    next_action: synopsis_discovery
+    rating: green
+    rating_basis: Official TÜRKPATENT fee pages expose server-rendered HTML tables with a matching Resmî Gazete authority. Public register searches exist, but no supported register API or bulk feed was found.
+    connector_status: shipped
+    manifest_ids:
+      - TR/TURKPATENT/Fees/Patent
+      - TR/TURKPATENT/Fees/Trademark
+      - TR/TURKPATENT/Fees/Design
+    next_action: none
     blocked_by: []
-    last_verified: never
-    notes: Top-30 office
+    last_verified: 2026-08-02
+    notes: |
+      The existing fee connector ships patent and utility-model,
+      trademark, and design schedules. Treat browser register searches
+      as manual references until TÜRKPATENT publishes a supported API.
 
   - id: CH/IPI
     name: Swiss Federal Institute of Intellectual Property
@@ -1070,34 +1079,39 @@ entities:
     layer: national
     iso2: AE
     rights: [patent, trademark, design]
-    synopsis: null
-    detail_survey: null
+    synopsis: national/ae-moe.md
+    detail_survey: waves/2026-08-02-roadmap-batch/ae-moe.md
     connector_spec: null
-    rating: tbd
-    rating_basis: UAE Patent Hive 2025 initiative; not yet researched
-    connector_status: none
+    rating: red_no_api
+    rating_basis: The public IPDL is a session-based OutSystems application without a documented API. Current open-data workbooks contain aggregate statistics, not application records.
+    connector_status: skipped
     manifest_ids: []
-    next_action: synopsis_discovery
+    next_action: none
     blocked_by: []
-    last_verified: never
-    notes: Watchlist (BACKLOG); MoET Patent Hive 2025
+    last_verified: 2026-08-02
+    notes: |
+      Patent Hive is a service initiative, not a public data interface.
+      Monitor the Ministry open-data catalog for record-level IP datasets
+      or a documented API.
 
   - id: SA/SAIP
     name: SAIP Saudi Arabia
     layer: national
     iso2: SA
     rights: [patent, trademark, design]
-    synopsis: null
-    detail_survey: null
+    synopsis: national/sa-saip.md
+    detail_survey: waves/2026-08-02-roadmap-batch/sa-saip.md
     connector_spec: null
-    rating: tbd
-    rating_basis: Saudi Vision 2030 initiative; not yet researched
-    connector_status: none
+    rating: red_no_api
+    rating_basis: SAIP publishes public search and service landing pages, but the direct IP Search application timed out from US egress and no supported API or bulk feed was found.
+    connector_status: skipped
     manifest_ids: []
-    next_action: synopsis_discovery
+    next_action: none
     blocked_by: []
-    last_verified: never
-    notes: Only Gulf national office with usable public search per BACKLOG
+    last_verified: 2026-08-02
+    notes: |
+      Official service pages are suitable for manual fee reference. Reopen
+      register work only if SAIP publishes a supported API or bulk feed.
 
   - id: EG/EAIP
     name: Egyptian Authority for Intellectual Property (consolidating EGYPO + ITDA)

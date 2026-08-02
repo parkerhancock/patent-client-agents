@@ -2183,3 +2183,74 @@ sources:
       INPI France design fees in EUR. Base filing €39 plus per-
       reproduction surcharges (b&w €23, colour €47). Renewal
       ('prorogation') €52 per 5-year period (up to 25 years total).
+
+  - id: TR/TURKPATENT/Fees/Patent
+    name: TÜRKPATENT — Fees (Patent and Utility Model)
+    jurisdiction: TR
+    wipo_st3_code: TR
+    issuing_body: Türk Patent ve Marka Kurumu (TÜRKPATENT)
+    rights: [patent]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-08-02
+    category: fees
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: annual
+    notes: >-
+      Scrapes the official patent and utility-model fee table. Amounts
+      use the all-in TOPLAM TUTAR column and retain base fee, VAT, and
+      stamp-duty components in notes. The 2026 authority is Resmî
+      Gazete 31-12-2025, fifth supplementary issue,
+      BİK/TÜRKPATENT 2026/1.
+
+  - id: TR/TURKPATENT/Fees/Trademark
+    name: TÜRKPATENT — Fees (Trademark)
+    jurisdiction: TR
+    wipo_st3_code: TR
+    issuing_body: Türk Patent ve Marka Kurumu (TÜRKPATENT)
+    rights: [trademark]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-08-02
+    category: fees
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: annual
+    notes: >-
+      Scrapes the official trademark fee table in TRY. The connector
+      models first-class filing, additional-class charges, grant,
+      renewal, opposition, cancellation, and recordation fees.
+
+  - id: TR/TURKPATENT/Fees/Design
+    name: TÜRKPATENT — Fees (Industrial Design)
+    jurisdiction: TR
+    wipo_st3_code: TR
+    issuing_body: Türk Patent ve Marka Kurumu (TÜRKPATENT)
+    rights: [design]
+    data_types: [fees]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.fees
+    last_verified: 2026-08-02
+    category: fees
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: annual
+    notes: >-
+      Scrapes the official industrial-design fee table in TRY. The
+      connector expands the multi-design filing row into separate
+      second-design, third-through-fifth, and sixth-plus fee items.

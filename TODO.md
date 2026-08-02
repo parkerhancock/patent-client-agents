@@ -66,16 +66,13 @@ weeks.
 
 ## Near-term roadmap discipline
 
-- [ ] **Promote provenance compliance by category.** Current coverage:
-      representative tests for `registered_ip`, `adjudicative_records`,
-      and `substantive_law` in `tests/test_provenance_contracts.py`,
-      plus fees-specific effective-date enforcement in
-      `tests/fees/test_envelope_compliance.py`. Next step: connect
-      `coverage/sources.yaml` source rows to MCP tool modules so CI can
-      require category-specific provenance on every shipped tool, not
-      just representative helpers.
+- [x] **Promote provenance compliance by category.** CI checks read-only
+      annotations and provenance schemas across all 193 default and
+      credential-gated tools. It tracks 22 legacy non-envelope exceptions.
+      `coverage/tool-sources.yaml` now connects every shipped MCP tool to
+      active source rows and derives one non-null category for each group.
 
-- [ ] **Treat substitution rules as roadmap gates.** Before building any
+- [x] **Treat substitution rules as roadmap gates.** Before building any
       new national connector, record why higher-layer coverage (EPO
       OPS/INPADOC, WIPO Lex, EUIPO, Google Patents, existing static-law
       corpora) is insufficient. The default answer should be "do not
@@ -83,7 +80,7 @@ weeks.
       office actions, assignments, national TM/design register data, or
       fresher authoritative status.
 
-- [ ] **Separate BYOK work from hosted-demo work.** Credential-gated
+- [x] **Separate BYOK work from hosted-demo work.** Credential-gated
       connectors should stay env-gated and absent from the public demo
       unless the upstream terms permit shared-key proxy operation.
       Hosted work should prioritize always-on/public sources, corpora,
@@ -91,18 +88,21 @@ weeks.
 
 ## Hosted MCP reliability
 
-- [ ] **Add a hosted smoke-check workflow.** Minimum checks: remote MCP
-      handshake, tool-count floor, one no-auth registered-IP query, one
-      corpus-backed substantive-law query, one fee lookup, and one
-      download/resource template check. Run on a schedule and after
-      deploys against `https://mcp.patentclient.com/mcp`.
+- [x] **Add a hosted availability workflow.** The library repository checks
+      the health route, OAuth protected-resource metadata, and MCP ingress
+      each hour and after deployment notifications.
 
-- [ ] **Add corpus-bootstrap health reporting.** Remote deploys should
-      expose whether each required corpus materialized, its SHA/version,
-      and its `corpus_synced_at` value. A missing corpus should fail
-      deploy health checks before users hit the tool.
+- [ ] **Enable deployment-owned authenticated smoke checks.** The deployment
+      repository owns the curated public tool contract and its existing
+      `scripts/hosted_smoke.py`. Configure `PATENT_MCP_SMOKE_BEARER_TOKEN`
+      there so CI verifies tool count, required tools, and hidden tools.
 
-- [ ] **Publish operational limits in one place.** Keep public-demo rate
+- [x] **Add corpus-bootstrap health reporting.** The bootstrap CLI now
+      supports `--check` and `--json`, reports snapshot and SHA details,
+      and exits nonzero for missing or mismatched files. Deploy pipelines
+      can use it as a pre-traffic health gate.
+
+- [x] **Publish operational limits in one place.** Keep public-demo rate
       limits, credential-gated omissions, WAF/token refresh behavior,
       and confidentiality warnings in a single hosted-demo section, then
       link README and installation docs to it.

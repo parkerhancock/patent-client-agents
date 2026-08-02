@@ -60,6 +60,12 @@ jobs:
       - name: Validate MCP tool counts in docs
         run: uv run python scripts/mcp_tool_counts.py --check-docs
 
+      - name: Validate MCP read-only and provenance contracts
+        run: uv run python scripts/validate_mcp_contracts.py
+
+      - name: Validate research pipeline stats
+        run: uv run python scripts/next_actions.py --check-stats
+
       - name: Purge jsDelivr coverage cache
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |

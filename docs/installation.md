@@ -287,6 +287,17 @@ If a call is made before the corpus exists, the client raises
 `CorpusUnavailable` with the build command in the message — there is
 no silent fallback to live HTTP.
 
+When deployments use a corpus manifest, check local readiness without
+downloading files:
+
+```bash
+patent-client-agents-bootstrap-corpora MANIFEST_URI --check
+patent-client-agents-bootstrap-corpora MANIFEST_URI --check --json
+```
+
+The command exits with status 1 when a selected corpus is missing or its
+SHA-256 does not match the manifest.
+
 ### Verify
 
 List MCP tools from within a Claude Code session:
@@ -842,11 +853,12 @@ any MCP client with just the URL — no tokens, no setup:
 ```
 
 The first time you connect, you'll be sent to Google sign-in. Approve,
-and you're done. Any verified Google account works. Usage is rate-limited
-per account (100 MB/day, 20 MB/minute).
+and you're done. Any verified Google account works.
 
-This is a public demo — don't send confidential material through it.
-See the [Terms of Use](https://mcp.patentclient.com/terms).
+The demo has per-account limits and a curated tool surface. Do not send
+confidential material through it. See the
+[hosted-demo operations guide](hosted-demo.md) for limits, omissions,
+WAF behavior, and confidentiality guidance.
 
 ### Cloud-only clients
 

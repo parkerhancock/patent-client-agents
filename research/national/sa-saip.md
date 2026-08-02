@@ -5,9 +5,17 @@
 **Issuing body:** Saudi Authority for Intellectual Property (الهيئة السعودية للملكية الفكرية), established by Council of Ministers Decision No. 496 (2018)
 **Rights administered:** patent, utility model (*model of utility*), industrial design, integrated-circuit layout-design, plant variety, trademark, copyright (administrative registration), geographical indication
 **Working languages:** Arabic (primary, authoritative for all gazetted texts); English (institutional pages on `saip.gov.sa/en/`, EN translations of some Implementing Regulations on WIPO Lex)
-**Connector status:** **register: red — packet-level geo-block from US egress**; **fees: red for clean FeeItem extraction; yellow for service-catalog reference document** (architectural difference — fees calculated at point of filing in eServices portal, no consolidated PDF schedule analogous to OEPM/INPI/IPOS); **statutes: yellow — WIPO Lex carries Implementing Regulations PDFs but consolidated only up to 2019-05-09 and the SAIP Board resolution track is needed for current amounts**
-**Last verified:** 2026-05-19
+**Connector status:** **register: skipped until SAIP publishes a supported API or bulk feed**; **fees: manual reference from official service pages**; **statutes: WIPO Lex reference only**
+**Last verified:** 2026-08-02
 **Manifest entry:** not yet listed in `coverage/sources.yaml`
+
+> **August 2026 correction.** SAIP now publishes an indexed service
+> directory, service-specific fee pages, an IP Search landing page,
+> gazettes, and open-data links on its main site. The direct IP Search
+> application still timed out from US egress during this survey, and
+> no documented API or bulk feed was found. The May 2026 reachability
+> and fee-source conclusions below are historical probe notes, not the
+> current connector decision.
 
 **Higher layers covering this office transitively:**
 - **EPO INPADOC / OPS** — Saudi Arabia is recognized in INPADOC; SA patents flow through OPS biblio + family + legal events for filings published in the INPADOC window.
@@ -326,4 +334,5 @@ Primary sources first; mirrors and analyses only where they cite primary sources
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-08-02 | Corrected the main-site reachability conclusion. SAIP now exposes public service and fee pages, but its IP Search application remained unreachable from US egress and no supported API or bulk feed was found. Register work is skipped until that changes. | [SAIP IP Search](https://www.saip.gov.sa/en/resources/tools-and-research/ip-search-engine); [SAIP service directory](https://www.saip.gov.sa/en/services/service-directory) |
 | 2026-05-19 | Initial synopsis. **Fees rated red for clean FeeItem extraction; yellow for service-catalog reference document.** Architectural difference: unlike OEPM Spain, INPI France, IMPI Mexico, or IPOS Singapore, SAIP does not publish a standalone gazette annex or downloadable consolidated PDF — fees are calculated at the point of filing in the eServices portal, with statutory authority fragmented across the principal laws, their Implementing Regulations, and periodic SAIP Board resolutions formally published in *Umm al-Qura*. Every primary-source path (eServices unified portal `eservices.saip.gov.sa`, legacy TM portal `tm.saip.gov.sa`, SAIP main site `saip.gov.sa`, Umm al-Qura gazette `uqn.gov.sa`) **ConnectTimeout at the TCP layer from US residential egress** — packet-level filtering, not a WAF challenge. WIPO Lex reachable and carries the [Implementing Regulations PDF — WIPO Lex 19743](https://www.wipo.int/wipolex/en/legislation/details/19743) with the fee-schedule Schedule for patents/UM/IC/PV/designs, but consolidated only through SAIP Board Decision No. 5/8/2019 of 9 May 2019 — does not reflect the [June 2022 TM publication-fee reduction](https://www.saip.gov.sa/en/news/) or the 2024 amendments to industrial-designs protection duration. Key facts from user-sourced notes: TM filing SAR 1,000/class (~USD 270), TM publication SAR 500, TM renewal publication ~USD 310 (post-June-2022); SAR pegged to USD at ~3.75 (no currency volatility); TM registration 10 **Hijri** years from filing (~9y 8m Gregorian — docketing trap); 2024 examination amendment eliminated the 10-day refusal-amendment window in favor of outright rejection + 60-day non-extendable appeal. Saudi Arabia is **not yet a Madrid Protocol contracting party** — TMs filed nationally. Recommended v1 deliverable: Option A — service-catalog reference document with explicit "fee calculated at filing time" caveat. Option B (paid stealth proxy + eServices scrape) requires recurring spend and may be blocked by Nafath digital-identity gating regardless. Coverage for SA register flows transitively through EPO INPADOC + Patentscope + Hague Express; no Madrid coverage. | This session; live probes 2026-05-19; user-sourced notes; [WIPO Lex SA](https://www.wipo.int/wipolex/en/main/profile/SA). |

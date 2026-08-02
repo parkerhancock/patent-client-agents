@@ -5,9 +5,9 @@
 **Issuing body:** Türk Patent ve Marka Kurumu (Turkish Patent and Trademark Office, "TÜRKPATENT")
 **Rights administered:** patent, utility model (*faydalı model*), industrial design (*tasarım*), trademark (*marka*), integrated-circuit topography (*entegre devre topoğrafyası*), geographical indication (*coğrafi işaret*), traditional product name (*geleneksel ürün adı*)
 **Working languages:** Turkish (primary); English mirrors exist for navigation, but the Turkish-language texts are the gazette-authoritative versions
-**Connector status:** **fees: ready to build (green — schedule reachable on TÜRKPATENT site + Resmî Gazete primary source); register: not yet surveyed**
-**Last verified:** 2026-05-19
-**Manifest entry:** not yet listed (fees scheduled for next build wave)
+**Connector status:** **fees: shipped** (patent and utility model, trademark, and design); **register: skipped until TÜRKPATENT publishes a supported API or bulk feed**
+**Last verified:** 2026-08-02
+**Manifest entries:** `TR/TURKPATENT/Fees/{Patent,Trademark,Design}`
 
 **Higher layers covering this office transitively:**
 - **EPO INPADOC / OPS** — Turkey is a [contracting state of the European Patent Convention since 2000-11-01](https://www.epo.org/en/about-us/foundation/member-states); TR-designated European Patents and validated EP patents in Turkey flow through OPS biblio + family + legal events.
@@ -51,18 +51,16 @@ any higher layer at full fidelity:
 - **TR integrated-circuit topographies** — sui generis right
   under Law No. 5147.
 
-## §3 Programmatic surfaces — to be surveyed
+## §3 Programmatic surfaces
 
-Status: deferred. Register-level connector surveying not yet
-done; fees connector takes priority because the surface is
-fully open. A follow-up sweep should cover:
+TÜRKPATENT provides public browser search for patents, trademarks,
+and designs. The official help pages describe interactive searches,
+not a documented API or bulk-data service. The August 2026 survey
+found no supported register interface suitable for a connector.
 
-- TÜRKPATENT online search portals (EPATS, marka araştırma,
-  tasarım araştırma)
-- Bulk data feeds (if any) for the official gazette (*Resmi
-  Patent Bülteni*, *Resmi Marka Bülteni*, *Resmi Tasarım
-  Bülteni*)
-- EPO Federated Register Service participation status
+The fee pages are different. They publish server-rendered HTML
+tables and have a matching Resmî Gazete authority. The planned
+connector is therefore limited to fees.
 
 ## §4 Fees
 
@@ -143,7 +141,7 @@ quotation, with a forward-volatility note.
 
 - [Sınai Mülkiyet Kanunu (Law No. 6769) — Resmî Gazete publication, 10-01-2017 (Issue No. 29944)](https://www.resmigazete.gov.tr/eskiler/2017/01/20170110.htm) — the consolidated Industrial Property Code, replacing the prior Decree-Laws KHK/551 (patents), KHK/554 (designs), KHK/555 (GIs), and KHK/556 (trademarks). Annual fee schedules are issued under Article 188 of Law 6769 by Cabinet/Office decision and published in the Resmî Gazete.
 
-**v1 connector plan — `TR/TURKPATENT/Fees/{Patent, UtilityModel, Design, Trademark, Appeal}`:**
+**Shipped v1 routes — `TR/TURKPATENT/Fees/{Patent,Trademark,Design}`:**
 
 - **Source:** the three TÜRKPATENT HTML pages (patent / marka / tasarim) as the extraction target; the Resmî Gazete PDF (`20251231M5-37.pdf`) as the cited authority and version pin.
 - **Parser pattern:** `lxml` table extraction — 6-column shape per page, hierarchical KOD prefix splits row population across right types. Annuity rows expand into per-year FeeItems via the "N.Yıl Sicil Kayıt Ücreti" pattern.
@@ -155,29 +153,19 @@ quotation, with a forward-volatility note.
 
 ## §5 Connector strategy
 
-### Fees connector (this wave)
+### Fees connector (shipped)
 
-Ship `TR/TURKPATENT/Fees/{Patent, UtilityModel, Design,
-Trademark, Appeal}` per §4 — five routes from three HTML
-pages plus the appeal schedule. The TÜRKPATENT HTML route is
-the practical scraping target; the Resmî Gazete PDF is the
-authoritative version pin and citation source.
+The shared `patent_client_agents.fees` connector serves patent and
+utility-model, trademark, and design schedules from the three official
+HTML pages. The Resmî Gazete PDF is the authority and version pin.
+Appeal fees remain outside v1.
 
-### Register connector (deferred)
+### Register connector (closed for now)
 
-Surface survey pending. Open questions for the survey:
+Do not reverse engineer the browser applications. Reopen this
+decision if TÜRKPATENT publishes a documented API or bulk feed.
 
-- Does TÜRKPATENT publish a documented REST/JSON API for
-  patent / TM / design search?
-- Are the EPATS portals (e.g., `epats.turkpatent.gov.tr`)
-  account-gated or guest-accessible for read-only search?
-- Is TÜRKPATENT listed in the [WIPO IP API Catalog](https://apicatalog.wipo.int/)? (Quick probe TBD.)
-- Does TÜRKPATENT participate in EPO Federated Register
-  Service?
-- Is the Resmi Patent / Marka / Tasarım Bülteni available as
-  structured data feeds (XML/JSON) or PDF only?
-
-Until surveyed, MX register coverage flows transitively
+TR register coverage flows transitively
 through EPO OPS / INPADOC (granted TR national + TR-validated
 EP patents), WIPO Madrid Monitor (Madrid IRs designating
 TR), WIPO Hague Express (Hague IRs designating TR), and
@@ -185,9 +173,8 @@ Patentscope (PCT national-phase entries).
 
 ## §6 Open questions
 
-- **Register-side connector feasibility.** Surface survey
-  deferred to a later wave; the §3 placeholder enumerates
-  the questions.
+- **Register API watch.** Check periodically for a documented
+  TÜRKPATENT API or bulk-data announcement.
 - **English-language fee-schedule fidelity.** TÜRKPATENT
   hosts English mirrors of the fee pages; do they get
   updated synchronously with the Turkish gazetted schedule,
@@ -230,4 +217,6 @@ Patentscope (PCT national-phase entries).
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-08-02 | Reconciled the research state with the existing shipped fee scraper, tests, and fee snapshots. Added the missing coverage manifest entries. | `src/patent_client_agents/fees/scrapers/turkpatent.py`; `tests/fees/test_turkpatent.py` |
+| 2026-08-02 | Closed the register survey. Public browser searches exist, but no supported API or bulk feed was found. Kept the fee connector planned because the official HTML tables and Resmî Gazete source remain suitable. | [TÜRKPATENT patent search guide](https://portal.turkpatent.gov.tr/yardim/kilavuz/patent-arastirma); official fee pages and Gazette sources in §7 |
 | 2026-05-19 | Initial synopsis, **fee-focused**. Fees rated **green (ready to build)**: TÜRKPATENT publishes annual fee schedules in the Resmî Gazete (current: 5th mükerrer of 31-12-2025, BİK/TÜRKPATENT 2026/1, [`20251231M5-37.pdf`](https://www.resmigazete.gov.tr/eskiler/2025/12/20251231M5-37.pdf)) and re-hosts them as native HTML tables on three site pages (patent / marka / tasarım), all anonymously fetchable from US egress with valid SSL. Six-column shape: KOD / AÇIKLAMA / ÜCRET / KDV / HARÇ / TOPLAM TUTAR; 57 patent rows observed. Earlier "21 scripts, 0 tables, JS-SPA" finding in `FEES_TOP30_GAP.md` superseded — the pages have real server-rendered tables. Annual republication cadence (2024→2025 +44%, 2025→2026 +20–25% per TRY inflation); freshness window ~90d. Statutory basis: Law 6769 Sınai Mülkiyet Kanunu, in force since 10-01-2017. Register-side connector survey deferred. Coverage of TR-national patents/TMs/designs at biblio fidelity flows transitively through EPO INPADOC (granted patents + EP validations), Madrid Monitor (Madrid IRs designating TR), Hague Express (Hague IRs designating TR), and Patentscope (PCT national-phase entries). | This session; live probes 2026-05-19 |

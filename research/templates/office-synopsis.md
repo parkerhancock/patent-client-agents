@@ -53,6 +53,14 @@ covered by any higher layer at the same fidelity). This drives §5
 - e.g. National-language full text
 - e.g. National-only TM filings (no Madrid IR)
 
+### Substitution gate
+
+| Candidate data | Best existing substitute | Material fidelity gap | Build decision |
+|---|---|---|---|
+| {data type} | {EPO OPS / WIPO / EUIPO / Google Patents / corpus} | {specific missing field, freshness, or authority} | build / skip |
+
+Do not queue a connector unless this table identifies a material gap.
+
 ## §3 Programmatic surfaces
 
 For each surface (REST API, bulk feed, SFTP, HTML scrape, SOAP, Atom,
@@ -108,6 +116,7 @@ amounts or dates)*:
 ### What we should add (if anything)
 
 If queued: cross-reference [`BACKLOG.md`](../BACKLOG.md) entry rank and rationale.
+State which substitution-gate gap the connector closes.
 
 ### What we should NOT add
 

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Added a checked MCP tool-to-source manifest. CI now requires every shipped
+  tool to resolve to active coverage rows with one non-null connector category.
+- Added the missing coverage manifest and documentation for the existing
+  TÜRKPATENT fee routes: patent and utility model, trademark, and design.
+- Added one hosted-demo operations guide for limits, tool omissions, WAF
+  behavior, confidentiality, and reliability ownership. Connector standards
+  now require a higher-layer substitution gate and keep BYOK work separate
+  from the hosted public surface.
+
 ## [0.25.0] — 2026-08-01
 
 ### Added

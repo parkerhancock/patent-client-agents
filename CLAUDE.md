@@ -96,6 +96,8 @@ src/
     ilpo_statutes/          # ILPO Israel — 5 IP statutes incl. Commercial Torts Law
                             #   (trade-secret regime) via WIPO Lex (mcp_local corpus)
     ilpo_tm/                # ILPO Israel — data.gov.il TM register feed (CKAN, no auth)
+    fees/                   # Live fee schedules for 25 offices and systems,
+                            #   including TÜRKPATENT patent/TM/design routes.
     cpc/                    # CPC classification lookups (via EPO OPS)
     mpep/                   # Manual of Patent Examining Procedure search
     skills/ip_research/     # Skill content packaged with the wheel; downstream
