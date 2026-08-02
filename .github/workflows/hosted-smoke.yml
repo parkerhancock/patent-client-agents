@@ -1,0 +1,41 @@
+name: Hosted MCP smoke
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [hosted-deploy]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    env:
+      PCA_HOSTED_SMOKE_TOKEN: ${{ secrets.PCA_HOSTED_SMOKE_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.11.10"
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync --frozen --extra mcp
+
+      - name: Check hosted availability
+        run: uv run python scripts/hosted_smoke.py --availability-only
+
+      - name: Run authenticated functional smoke
+        if: env.PCA_HOSTED_SMOKE_TOKEN != ''
+        run: uv run python scripts/hosted_smoke.py
+
+      - name: Note missing functional smoke token
+        if: env.PCA_HOSTED_SMOKE_TOKEN == ''
+        run: echo "PCA_HOSTED_SMOKE_TOKEN is not configured; authenticated checks were skipped."

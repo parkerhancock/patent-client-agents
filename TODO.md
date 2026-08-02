@@ -67,13 +67,11 @@ weeks.
 ## Near-term roadmap discipline
 
 - [ ] **Promote provenance compliance by category.** Current coverage:
-      representative tests for `registered_ip`, `adjudicative_records`,
-      and `substantive_law` in `tests/test_provenance_contracts.py`,
-      plus fees-specific effective-date enforcement in
-      `tests/fees/test_envelope_compliance.py`. Next step: connect
-      `coverage/sources.yaml` source rows to MCP tool modules so CI can
-      require category-specific provenance on every shipped tool, not
-      just representative helpers.
+      CI now checks read-only annotations and provenance schemas across
+      all 193 default and credential-gated tools. It tracks 22 legacy
+      non-envelope exceptions. Runtime category tests still cover
+      representative helpers and fees. Next, connect source rows to MCP
+      tools and require non-null category values for every shipped tool.
 
 - [ ] **Treat substitution rules as roadmap gates.** Before building any
       new national connector, record why higher-layer coverage (EPO
@@ -95,12 +93,14 @@ weeks.
       handshake, tool-count floor, one no-auth registered-IP query, one
       corpus-backed substantive-law query, one fee lookup, and one
       download/resource template check. Run on a schedule and after
-      deploys against `https://mcp.patentclient.com/mcp`.
+      deploys against `https://mcp.patentclient.com/mcp`. The workflow and
+      checks are present. Configure `PCA_HOSTED_SMOKE_TOKEN` to enable
+      functional checks; availability checks run without it.
 
-- [ ] **Add corpus-bootstrap health reporting.** Remote deploys should
-      expose whether each required corpus materialized, its SHA/version,
-      and its `corpus_synced_at` value. A missing corpus should fail
-      deploy health checks before users hit the tool.
+- [x] **Add corpus-bootstrap health reporting.** The bootstrap CLI now
+      supports `--check` and `--json`, reports snapshot and SHA details,
+      and exits nonzero for missing or mismatched files. Deploy pipelines
+      can use it as a pre-traffic health gate.
 
 - [ ] **Publish operational limits in one place.** Keep public-demo rate
       limits, credential-gated omissions, WAF/token refresh behavior,
