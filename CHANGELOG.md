@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Added a checked MCP tool-to-source manifest. CI now requires every shipped
   tool to resolve to active coverage rows with one non-null connector category.
+- Added the missing coverage manifest and documentation for the existing
+  TÜRKPATENT fee routes: patent and utility model, trademark, and design.
 
 ## [0.25.0] — 2026-08-01
 

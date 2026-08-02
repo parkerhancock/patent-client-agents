@@ -36,10 +36,10 @@ last_updated: 2026-08-02  # Completed the next four unblocked source surveys
 stats:
   total_entities: 116
   synopses_filled: 41        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
-  connectors_shipped: 13
+  connectors_shipped: 14
   connectors_in_progress: 0
   connectors_spec_ready: 0
-  connectors_planned: 6
+  connectors_planned: 5
   connectors_blocked: 0
   next_unblocked_synopses: 0
   green_transitive_states: 67
@@ -738,14 +738,18 @@ entities:
     connector_spec: null
     rating: green
     rating_basis: Official TÜRKPATENT fee pages expose server-rendered HTML tables with a matching Resmî Gazete authority. Public register searches exist, but no supported register API or bulk feed was found.
-    connector_status: planned
-    manifest_ids: []
-    next_action: spec_writing
+    connector_status: shipped
+    manifest_ids:
+      - TR/TURKPATENT/Fees/Patent
+      - TR/TURKPATENT/Fees/Trademark
+      - TR/TURKPATENT/Fees/Design
+    next_action: none
     blocked_by: []
     last_verified: 2026-08-02
     notes: |
-      Build only the fee connector. Treat browser register searches as
-      manual references until TÜRKPATENT publishes a supported interface.
+      The existing fee connector ships patent and utility-model,
+      trademark, and design schedules. Treat browser register searches
+      as manual references until TÜRKPATENT publishes a supported API.
 
   - id: CH/IPI
     name: Swiss Federal Institute of Intellectual Property
