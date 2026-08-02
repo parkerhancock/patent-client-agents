@@ -66,12 +66,11 @@ weeks.
 
 ## Near-term roadmap discipline
 
-- [ ] **Promote provenance compliance by category.** Current coverage:
-      CI now checks read-only annotations and provenance schemas across
-      all 193 default and credential-gated tools. It tracks 22 legacy
-      non-envelope exceptions. Runtime category tests still cover
-      representative helpers and fees. Next, connect source rows to MCP
-      tools and require non-null category values for every shipped tool.
+- [x] **Promote provenance compliance by category.** CI checks read-only
+      annotations and provenance schemas across all 193 default and
+      credential-gated tools. It tracks 22 legacy non-envelope exceptions.
+      `coverage/tool-sources.yaml` now connects every shipped MCP tool to
+      active source rows and derives one non-null category for each group.
 
 - [ ] **Treat substitution rules as roadmap gates.** Before building any
       new national connector, record why higher-layer coverage (EPO

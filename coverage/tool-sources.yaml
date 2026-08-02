@@ -1,0 +1,145 @@
+# MCP tool groups linked to the authoritative rows in coverage/sources.yaml.
+#
+# A group without `tools` covers every tool exposed by that named subserver.
+# A group with `tools` covers only that subset. The contract validator rejects
+# missing tools, duplicate mappings, unknown source modules, inactive sources,
+# and groups whose source rows do not resolve to one non-null category.
+
+version: 1
+groups:
+  - server: cafc_mcp
+    connector_modules: [patent_client_agents.cafc]
+  - server: canlii_mcp
+    connector_modules: [patent_client_agents.canlii]
+  - server: copyright_mcp
+    connector_modules: [patent_client_agents.copyright]
+  - server: cpc_mcp
+    connector_modules: [patent_client_agents.cpc]
+  - server: dpma_statutes_mcp
+    connector_modules: [patent_client_agents.dpma_statutes]
+  - server: epc_mcp
+    connector_modules: [patent_client_agents.epc]
+  - server: epo_case_law_mcp
+    connector_modules: [patent_client_agents.epo_case_law]
+  - server: epo_guidelines_mcp
+    connector_modules: [patent_client_agents.epo_guidelines]
+  - server: epo_ops_mcp
+    connector_modules: [patent_client_agents.epo_ops]
+  - server: epo_pct_guidelines_mcp
+    connector_modules: [patent_client_agents.epo_pct_guidelines]
+  - server: epo_up_guidelines_mcp
+    connector_modules: [patent_client_agents.epo_up_guidelines]
+  - server: euipo_mcp
+    connector_modules:
+      - patent_client_agents.euipo_trademarks
+      - patent_client_agents.euipo_designs
+  - server: fees_mcp
+    connector_modules: [patent_client_agents.fees]
+  - server: inpi_br_bulk_mcp
+    connector_modules: [patent_client_agents.inpi_br_bulk]
+  - server: inpi_br_statutes_mcp
+    connector_modules: [patent_client_agents.inpi_br_statutes]
+  - server: inpi_pi_mcp
+    connector_modules: [patent_client_agents.inpi_pi]
+  - server: ip_australia_bulk_mcp
+    connector_modules: [patent_client_agents.ip_australia_bulk]
+  - server: ip_australia_designs_mcp
+    connector_modules: [patent_client_agents.ip_australia_designs]
+  - server: ip_australia_patents_mcp
+    connector_modules: [patent_client_agents.ip_australia_patents]
+  - server: ip_australia_trademarks_mcp
+    connector_modules: [patent_client_agents.ip_australia_trademarks]
+  - server: ipo_in_mppp_mcp
+    connector_modules: [patent_client_agents.ipo_in_mppp]
+  - server: ipo_in_statutes_mcp
+    connector_modules: [patent_client_agents.ipo_in_statutes]
+  - server: jpo_mcp
+    connector_modules: [patent_client_agents.jpo]
+  - server: kipo_kipris_mcp
+    connector_modules: [patent_client_agents.kipo_kipris]
+  - server: legifrance_ip_mcp
+    connector_modules: [patent_client_agents.legifrance_ip]
+  - server: mpep_mcp
+    connector_modules: [patent_client_agents.mpep]
+  - server: office_actions_mcp
+    connector_modules: [patent_client_agents.uspto_office_actions]
+  - server: patent_assignments_mcp
+    connector_modules: [patent_client_agents.uspto_assignments]
+  - server: patents_mcp
+    connector_modules: [patent_client_agents.google_patents]
+  - server: prh_fi_mcp
+    connector_modules: [patent_client_agents.prh_fi]
+  - server: prv_se_mcp
+    connector_modules: [patent_client_agents.prv_se]
+  - server: publications_mcp
+    connector_modules: [patent_client_agents.uspto_publications]
+  - server: tipo_opdata_mcp
+    connector_modules: [patent_client_agents.tipo_opdata]
+  - server: tw_trade_secrets_mcp
+    connector_modules: [patent_client_agents.tw_trade_secrets]
+  - server: ukipo_mopp_mcp
+    connector_modules: [patent_client_agents.ukipo_mopp]
+  - server: usitc_mcp
+    connector_modules: [patent_client_agents.usitc]
+  - server: wipo_lex_mcp
+    connector_modules: [patent_client_agents.wipo_lex]
+
+  # Mixed-source subservers need explicit tool subsets.
+  - server: ilpo_mcp
+    tools: [search_ilpo_statutes, get_ilpo_section]
+    connector_modules: [patent_client_agents.ilpo_statutes]
+  - server: ilpo_mcp
+    tools: [list_ilpo_tm_releases, download_ilpo_tm]
+    connector_modules: [patent_client_agents.ilpo_tm]
+  - server: ipos_mcp
+    tools: [search_ipos_statutes, get_ipos_section, list_ipos_statutes]
+    connector_modules: [patent_client_agents.ipos_statutes]
+  - server: ipos_mcp
+    tools: [search_ipos_manuals, get_ipos_manual_section, list_ipos_manuals]
+    connector_modules: [patent_client_agents.ipos_manuals]
+  - server: trademarks_mcp
+    tools: [search_trademarks]
+    connector_modules: [patent_client_agents.uspto_tmsearch]
+  - server: trademarks_mcp
+    tools: [get_trademark, get_trademark_status, get_trademark_documents, get_trademark_last_update]
+    connector_modules: [patent_client_agents.uspto_tsdr]
+  - server: trademarks_mcp
+    tools: [search_tmep, get_tmep_section]
+    connector_modules: [patent_client_agents.tmep]
+  - server: trademarks_mcp
+    tools: [search_trademark_assignments]
+    connector_modules: [patent_client_agents.uspto_trademark_assignments]
+  - server: upc_mcp
+    tools: [search_upc_decisions, get_upc_decision, list_upc_divisions, list_upc_languages]
+    connector_modules: [patent_client_agents.upc_decisions]
+  - server: upc_mcp
+    tools: [search_upc_statutes, get_upc_section, list_upc_instruments]
+    connector_modules: [patent_client_agents.upc_statutes]
+  - server: uspto_mcp
+    tools:
+      - search_applications
+      - get_application
+      - list_file_history
+      - get_file_history_item
+      - download_file_history
+      - get_patent_family
+    connector_modules: [patent_client_agents.uspto_applications]
+  - server: uspto_mcp
+    tools: [get_patent_assignment]
+    connector_modules: [patent_client_agents.uspto_assignments]
+  - server: uspto_mcp
+    tools:
+      - search_ptab
+      - get_ptab
+      - list_ptab_children
+      - download_ptab_trial_documents
+      - download_ptab_trial_decisions
+      - download_ptab_appeal_decisions
+      - download_ptab_interference_decisions
+    connector_modules: [patent_client_agents.uspto_odp]
+  - server: uspto_mcp
+    tools: [search_petitions, get_petition]
+    connector_modules: [patent_client_agents.uspto_petitions]
+  - server: uspto_mcp
+    tools: [search_bulk_datasets, get_bulk_dataset]
+    connector_modules: [patent_client_agents.uspto_bulkdata]

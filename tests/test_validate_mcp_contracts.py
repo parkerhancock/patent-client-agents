@@ -90,3 +90,89 @@ def test_validate_tools_rejects_stale_legacy_exception():
     assert contracts.validate_tools([_tool(name="legacy")]) == [
         "legacy: now compliant; remove its legacy exception"
     ]
+
+
+def _source(source_id="US/Example", module="example.module", category="registered_ip"):
+    return {
+        "id": source_id,
+        "status": "active",
+        "category": category,
+        "connector": {"module": module},
+    }
+
+
+def test_validate_tool_sources_accepts_complete_mapping():
+    errors = contracts.validate_tool_sources(
+        [_tool()],
+        {"example_mcp": {"example"}},
+        [_source()],
+        [{"server": "example_mcp", "connector_modules": ["example.module"]}],
+    )
+
+    assert errors == []
+
+
+def test_validate_tool_sources_reports_missing_tool_and_source():
+    errors = contracts.validate_tool_sources(
+        [_tool()],
+        {"example_mcp": {"example"}},
+        [_source(), _source("US/Orphan", "orphan.module")],
+        [],
+    )
+
+    assert errors == [
+        "unmapped MCP tools: example",
+        "active source rows without MCP tools: US/Example, US/Orphan",
+    ]
+
+
+def test_validate_tool_sources_rejects_unknowns_duplicates_and_mixed_categories():
+    errors = contracts.validate_tool_sources(
+        [_tool()],
+        {"example_mcp": {"example"}},
+        [
+            _source(),
+            _source("US/Other", "other.module", "fees"),
+        ],
+        [
+            {
+                "server": "example_mcp",
+                "tools": ["example", "missing"],
+                "connector_modules": ["example.module", "other.module"],
+            },
+            {
+                "server": "example_mcp",
+                "connector_modules": ["example.module"],
+            },
+            {
+                "server": "missing_mcp",
+                "connector_modules": ["missing.module"],
+            },
+        ],
+    )
+
+    assert errors == [
+        "tool source group 1: tools not exposed by example_mcp: missing",
+        "tool source group 1: source rows resolve to multiple categories: fees, registered_ip",
+        "tool source group 3: unknown MCP server 'missing_mcp'",
+        "multiply mapped MCP tools: example",
+    ]
+
+
+def test_validate_tool_sources_rejects_null_category_and_missing_module():
+    errors = contracts.validate_tool_sources(
+        [_tool()],
+        {"example_mcp": {"example"}},
+        [_source(category=None)],
+        [
+            {
+                "server": "example_mcp",
+                "connector_modules": ["example.module", "missing.module"],
+            }
+        ],
+    )
+
+    assert errors == [
+        "tool source group 1: no active source rows for missing.module",
+        "tool source group 1: source rows must have non-null categories",
+    ]
