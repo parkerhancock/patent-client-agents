@@ -35,11 +35,12 @@ Desktop, ChatGPT Apps, Replit Agent, CoWork, …) at the public demo at
 Most clients also expose a "custom connector" / "add MCP server" UI
 that takes just the URL `https://mcp.patentclient.com/mcp` — no tokens
 to paste. On first connect you'll be sent to Google sign-in; approve
-and you're in. Any verified Google account works. Usage is
-rate-limited per account (100 MB/day, 20 MB/minute).
+and you're in. Any verified Google account works.
 
-This is a public demo — don't send confidential material through it.
-See the [Terms of Use](https://mcp.patentclient.com/terms).
+The demo has per-account limits and a curated tool surface. Do not send
+confidential material through it. See the
+[hosted-demo operations guide](https://docs.patentclient.com/hosted-demo/)
+for limits, omissions, WAF behavior, and confidentiality guidance.
 
 ## Or install locally
 

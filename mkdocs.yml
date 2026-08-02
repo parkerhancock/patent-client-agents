@@ -87,6 +87,7 @@ hooks:
 nav:
   - Home: index.md
   - Installation: installation.md
+  - Hosted demo: hosted-demo.md
   - MCP Reference: mcp-stdio.md
   # Patent Client Index: children injected by docs_hooks/sync_patent_client_index.py
   - Patent Client Index: patent-client-index/index.md

@@ -853,11 +853,12 @@ any MCP client with just the URL — no tokens, no setup:
 ```
 
 The first time you connect, you'll be sent to Google sign-in. Approve,
-and you're done. Any verified Google account works. Usage is rate-limited
-per account (100 MB/day, 20 MB/minute).
+and you're done. Any verified Google account works.
 
-This is a public demo — don't send confidential material through it.
-See the [Terms of Use](https://mcp.patentclient.com/terms).
+The demo has per-account limits and a curated tool surface. Do not send
+confidential material through it. See the
+[hosted-demo operations guide](hosted-demo.md) for limits, omissions,
+WAF behavior, and confidentiality guidance.
 
 ### Cloud-only clients
 

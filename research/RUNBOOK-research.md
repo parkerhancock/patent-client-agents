@@ -75,6 +75,8 @@ You will produce TWO files:
    - Header table (layer, jurisdiction, rights, connector status, last_verified, manifest entry)
    - §1 Mission
    - §2 What's unique here (not covered by higher layers)
+   - §2 substitution-gate table naming the best existing substitute,
+     its material fidelity gap, and the build-or-skip decision
    - §3 Programmatic surfaces — per-surface mini-table with verdict (🟢/🟡/🔴) + primary-source URL
    - §4 Fees — link only. State the local currency, list the fee categories the office charges in structural terms, and name any discount programs. **Do not paste tables, percentages, or effective dates.** See [`templates/office-synopsis.md`](templates/office-synopsis.md) §4 for the policy.
    - §5 Connector strategy — what we cover today (cross-reference existing manifest IDs); what we should add; what we should NOT add (with reason); next steps
@@ -109,6 +111,9 @@ The agent writes exactly two files. The orchestrator:
    - `connector_status:` advance to `none` (if verdict = red) or `planned` (if verdict = green/yellow)
    - `next_action: spec_writing` (if connector should be planned) or `monitor` (if red) or `none`
    - `last_verified: <today>`
+
+Do not set `next_action: spec_writing` unless the synopsis substitution gate
+identifies a material gap that the proposed connector closes.
 
 ### Pitfalls
 

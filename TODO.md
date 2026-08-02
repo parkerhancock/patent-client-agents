@@ -72,7 +72,7 @@ weeks.
       `coverage/tool-sources.yaml` now connects every shipped MCP tool to
       active source rows and derives one non-null category for each group.
 
-- [ ] **Treat substitution rules as roadmap gates.** Before building any
+- [x] **Treat substitution rules as roadmap gates.** Before building any
       new national connector, record why higher-layer coverage (EPO
       OPS/INPADOC, WIPO Lex, EUIPO, Google Patents, existing static-law
       corpora) is insufficient. The default answer should be "do not
@@ -80,7 +80,7 @@ weeks.
       office actions, assignments, national TM/design register data, or
       fresher authoritative status.
 
-- [ ] **Separate BYOK work from hosted-demo work.** Credential-gated
+- [x] **Separate BYOK work from hosted-demo work.** Credential-gated
       connectors should stay env-gated and absent from the public demo
       unless the upstream terms permit shared-key proxy operation.
       Hosted work should prioritize always-on/public sources, corpora,
@@ -102,7 +102,7 @@ weeks.
       and exits nonzero for missing or mismatched files. Deploy pipelines
       can use it as a pre-traffic health gate.
 
-- [ ] **Publish operational limits in one place.** Keep public-demo rate
+- [x] **Publish operational limits in one place.** Keep public-demo rate
       limits, credential-gated omissions, WAF/token refresh behavior,
       and confidentiality warnings in a single hosted-demo section, then
       link README and installation docs to it.

@@ -100,6 +100,20 @@ office's website static content, anything that requires manual scraping per
 filing. We cover the offices that issue rights and the reviewing tribunals
 that interpret them.
 
+### National-source substitution gate
+
+Before a national connector enters specification or build work, its synopsis
+must identify the best existing higher-layer substitute. It must then state the
+specific fidelity gap that only the national source closes. Common substitutes
+include EPO OPS and INPADOC, WIPO services, EUIPO, Google Patents, WIPO Lex,
+and an existing static-law corpus.
+
+Do not build when the substitute supplies the same data at the same useful
+fidelity. A build candidate must add at least one material capability, such as
+prosecution history, office actions, assignments, national trademark or design
+records, authoritative current status, or materially fresher data. Record this
+decision in synopsis §2 and §5 before setting `next_action: spec_writing`.
+
 ---
 
 ## §2 Architecture defaults
@@ -124,6 +138,13 @@ sourced from env vars listed in `coverage/sources.yaml access.auth_env`.
 End users never paste API keys into the agent. If a source requires
 account-level auth (OAuth password grant, cookie tokens), the connector
 handles refresh internally.
+
+**BYOK and hosted-demo work are separate tracks.** A connector that requires a
+user-specific credential remains env-gated and absent from the public demo.
+Mount a shared service credential only when the upstream terms permit proxy use
+for multiple users. Hosted-demo work prioritizes public sources, deploy-safe
+corpora, fee schedules, and deployment smoke coverage. The deployment
+repository owns the curated public tool contract.
 
 **HTTP scaffolding is shared.** All clients extend
 `mcp_data_core.BaseAsyncClient` and inherit `hishel` + SQLite caching with
