@@ -141,9 +141,9 @@ status_filter:
   blocked_by: []
 ```
 
-A future `scripts/next-actions.py` (not yet written) would parse
-STATE.yaml and emit these lists. For now, eyeball it — STATE.yaml is
-short enough.
+Run `uv run python scripts/next_actions.py` to list unblocked active rows.
+Use `--action`, `--status`, or `--rating` to select a batch. CI runs
+`--check-stats` to keep the summary synchronized with entity rows.
 
 ## §6 What to tell the user at each step
 
@@ -176,9 +176,8 @@ After running a batch:
 
 ## §9 What's missing — future improvements
 
-- `scripts/next-actions.py` — script that reads STATE.yaml and emits batch candidates
 - `scripts/update-state.py` — script that takes a research-agent output file + updates the STATE.yaml row programmatically
 - Automated quarterly recheck cron — re-run discovery agents on entities with `last_verified > 90 days ago`
 - A status dashboard — render STATE.yaml as a coverage matrix HTML page
 
-For now, the workflow is manual STATE edits + agent-orchestrated batches.
+For now, state updates remain manual. The next-actions script selects and validates batches.

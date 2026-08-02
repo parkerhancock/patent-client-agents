@@ -31,18 +31,18 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-05-18  # Africa wave shipped — 4 surveyed nationals (all red) + 39 transitive entries (ARIPO + OAPI member states, all green_transitive via EPO OPS AP/OA codes)
+last_updated: 2026-08-01  # Reconciled summary stats with current entity rows
 
 stats:
-  total_entities: 88
+  total_entities: 116
   synopses_filled: 37        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
-  connectors_shipped: 15
+  connectors_shipped: 13
   connectors_in_progress: 0
   connectors_spec_ready: 0
-  connectors_planned: 7      # DE/DPMA + CH/IPI + SE/PRV + FI/PRH + ES/OEPM + NZ/IPONZ + TH/DIP
-  connectors_blocked: 7      # UKIPO, CIPO + WIPO trio + Madrid + Hague + CNIPA
-  next_unblocked_synopses: 3 # SA, AE, TR remaining (ZA shipped 2026-05-18; Africa wave added EG/NG/MA all red)
-  green_transitive_states: 39 # 22 ARIPO + 17 OAPI member states; patents covered via EPO OPS country codes AP/OA
+  connectors_planned: 5
+  connectors_blocked: 0
+  next_unblocked_synopses: 4
+  green_transitive_states: 67
 
 entities:
 
