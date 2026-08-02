@@ -92,10 +92,10 @@ weeks.
       the health route, OAuth protected-resource metadata, and MCP ingress
       each hour and after deployment notifications.
 
-- [ ] **Enable deployment-owned authenticated smoke checks.** The deployment
-      repository owns the curated public tool contract and its existing
-      `scripts/hosted_smoke.py`. Configure `PATENT_MCP_SMOKE_BEARER_TOKEN`
-      there so CI verifies tool count, required tools, and hidden tools.
+- [x] **Enable deployment-owned authenticated smoke checks.** The deployment
+      repository now requires `PATENT_MCP_SMOKE_BEARER_TOKEN` in its daily
+      workflow. CI verifies the public tool count, required tools, and hidden
+      tools against the live hosted endpoint.
 
 - [x] **Add corpus-bootstrap health reporting.** The bootstrap CLI now
       supports `--check` and `--json`, reports snapshot and SHA details,
