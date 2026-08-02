@@ -287,6 +287,17 @@ If a call is made before the corpus exists, the client raises
 `CorpusUnavailable` with the build command in the message — there is
 no silent fallback to live HTTP.
 
+When deployments use a corpus manifest, check local readiness without
+downloading files:
+
+```bash
+patent-client-agents-bootstrap-corpora MANIFEST_URI --check
+patent-client-agents-bootstrap-corpora MANIFEST_URI --check --json
+```
+
+The command exits with status 1 when a selected corpus is missing or its
+SHA-256 does not match the manifest.
+
 ### Verify
 
 List MCP tools from within a Claude Code session:

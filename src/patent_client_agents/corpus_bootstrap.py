@@ -136,6 +136,58 @@ class Manifest:
         }
 
 
+@dataclasses.dataclass(frozen=True)
+class CorpusHealth:
+    """Health of one local corpus file against its manifest entry."""
+
+    name: str
+    status: str
+    path: Path
+    snapshot: str
+    expected_sha256: str
+    actual_sha256: str | None
+    expected_size_bytes: int
+    actual_size_bytes: int | None
+
+    @property
+    def healthy(self) -> bool:
+        return self.status == "ready"
+
+    def to_dict(self) -> dict:
+        return {
+            "name": self.name,
+            "status": self.status,
+            "healthy": self.healthy,
+            "path": str(self.path),
+            "snapshot": self.snapshot,
+            "expected_sha256": self.expected_sha256,
+            "actual_sha256": self.actual_sha256,
+            "expected_size_bytes": self.expected_size_bytes,
+            "actual_size_bytes": self.actual_size_bytes,
+        }
+
+
+@dataclasses.dataclass(frozen=True)
+class CorpusHealthReport:
+    """Health report for all selected manifest corpora."""
+
+    manifest_uri: str
+    manifest_updated_at: str
+    corpora: tuple[CorpusHealth, ...]
+
+    @property
+    def healthy(self) -> bool:
+        return all(corpus.healthy for corpus in self.corpora)
+
+    def to_dict(self) -> dict:
+        return {
+            "manifest_uri": self.manifest_uri,
+            "manifest_updated_at": self.manifest_updated_at,
+            "healthy": self.healthy,
+            "corpora": [corpus.to_dict() for corpus in self.corpora],
+        }
+
+
 # ----------------------------------------------------------------------
 # URI helpers
 # ----------------------------------------------------------------------
@@ -210,6 +262,48 @@ def _sha256_file(path: Path) -> str:
 def load_manifest(manifest_uri: str) -> Manifest:
     raw = _read_manifest_bytes(manifest_uri)
     return Manifest.from_json(json.loads(raw))
+
+
+def check_corpora_health(
+    manifest_uri: str,
+    cache_dir: Path | None = None,
+    *,
+    only: Iterable[str] | None = None,
+) -> CorpusHealthReport:
+    """Compare selected local corpora with a manifest without downloading files."""
+    cache = (cache_dir or DEFAULT_CACHE_DIR).expanduser()
+    manifest = load_manifest(manifest_uri)
+    wanted = set(only) if only else None
+    health = []
+    for name, entry in manifest.corpora.items():
+        if wanted is not None and name not in wanted:
+            continue
+        path = cache / entry.local_filename
+        if not path.exists():
+            status = "missing"
+            actual_sha256 = None
+            actual_size_bytes = None
+        else:
+            actual_size_bytes = path.stat().st_size
+            actual_sha256 = _sha256_file(path)
+            status = "ready" if actual_sha256 == entry.sha256 else "sha_mismatch"
+        health.append(
+            CorpusHealth(
+                name=name,
+                status=status,
+                path=path,
+                snapshot=entry.snapshot,
+                expected_sha256=entry.sha256,
+                actual_sha256=actual_sha256,
+                expected_size_bytes=entry.size_bytes,
+                actual_size_bytes=actual_size_bytes,
+            )
+        )
+    return CorpusHealthReport(
+        manifest_uri=manifest_uri,
+        manifest_updated_at=manifest.updated_at,
+        corpora=tuple(health),
+    )
 
 
 def bootstrap_corpora(
@@ -318,16 +412,45 @@ def main(argv: list[str] | None = None) -> int:
         help="Re-download even when SHA matches.",
     )
     parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Report local corpus health without downloading files.",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Print the health report as JSON. Requires --check.",
+    )
+    parser.add_argument(
         "--verbose",
         "-v",
         action="store_true",
         help="Log per-corpus progress to stderr.",
     )
     args = parser.parse_args(argv)
+    if args.json and not args.check:
+        parser.error("--json requires --check")
+    if args.check and args.force:
+        parser.error("--force cannot be used with --check")
     logging.basicConfig(
         level=logging.INFO if args.verbose else logging.WARNING,
         format="%(asctime)s %(levelname)s %(message)s",
     )
+    if args.check:
+        report = check_corpora_health(
+            args.manifest_uri,
+            cache_dir=args.cache_dir,
+            only=args.only or None,
+        )
+        if args.json:
+            print(json.dumps(report.to_dict(), indent=2))
+        else:
+            for corpus in report.corpora:
+                print(f"{corpus.status:<13} {corpus.name:<22} {corpus.path}")
+            result = "healthy" if report.healthy else "unhealthy"
+            print(f"Checked {len(report.corpora)} corpora: {result}")
+        return 0 if report.healthy else 1
+
     resolved = bootstrap_corpora(
         args.manifest_uri,
         cache_dir=args.cache_dir,
