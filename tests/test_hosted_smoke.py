@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import importlib.util
 from pathlib import Path
-from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -17,6 +16,8 @@ SPEC.loader.exec_module(smoke)
 @pytest.mark.asyncio
 async def test_check_availability_accepts_oauth_challenge():
     def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/-/health":
+            return httpx.Response(200, json={"status": "ok"})
         if ".well-known" in str(request.url):
             return httpx.Response(200, json={"resource": "https://example.test/mcp"})
         return httpx.Response(401)
@@ -26,12 +27,19 @@ async def test_check_availability_accepts_oauth_challenge():
             "https://example.test/mcp", attempts=1, client=client
         )
 
-    assert report == {"metadata_status": 200, "endpoint_status": 401, "attempts": 1}
+    assert report == {
+        "health_status": 200,
+        "metadata_status": 200,
+        "endpoint_status": 401,
+        "attempts": 1,
+    }
 
 
 @pytest.mark.asyncio
 async def test_check_availability_rejects_server_error():
     def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/-/health":
+            return httpx.Response(200, json={"status": "ok"})
         if ".well-known" in str(request.url):
             return httpx.Response(200, json={})
         return httpx.Response(503)
@@ -41,42 +49,16 @@ async def test_check_availability_rejects_server_error():
             await smoke.check_availability("https://example.test/mcp", attempts=1, client=client)
 
 
-class _FakeMcpClient:
-    def __init__(self, _url: str, **_kwargs):
-        self.calls = []
-
-    async def __aenter__(self):
-        return self
-
-    async def __aexit__(self, *_args):
-        return None
-
-    async def list_tools(self):
-        names = smoke.REQUIRED_TOOLS | {f"extra_{index}" for index in range(3)}
-        return [SimpleNamespace(name=name) for name in names]
-
-    async def call_tool(self, name, arguments):
-        self.calls.append((name, arguments))
-        return SimpleNamespace(isError=False)
-
-    async def list_resource_templates(self):
-        return [SimpleNamespace(uriTemplate="pca://downloads/{path}")]
-
-
 @pytest.mark.asyncio
-async def test_check_functional_covers_representative_surfaces():
-    report = await smoke.check_functional(
-        "https://example.test/mcp",
-        "token",
-        min_tools=6,
-        client_factory=_FakeMcpClient,
-    )
+async def test_check_availability_rejects_bad_health_payload():
+    def handler(request: httpx.Request) -> httpx.Response:
+        if request.url.path == "/-/health":
+            return httpx.Response(200, json={"status": "starting"})
+        return httpx.Response(200, json={})
 
-    assert report == {
-        "tool_count": 6,
-        "tool_checks": ["fees", "registered_ip", "substantive_law"],
-        "resource_template_count": 1,
-    }
+    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+        with pytest.raises(smoke.SmokeFailure, match="health response did not report ok"):
+            await smoke.check_availability("https://example.test/mcp", attempts=1, client=client)
 
 
 def test_protected_resource_url_preserves_mcp_path():
@@ -84,3 +66,7 @@ def test_protected_resource_url_preserves_mcp_path():
         smoke.protected_resource_url("https://example.test/mcp")
         == "https://example.test/.well-known/oauth-protected-resource/mcp"
     )
+
+
+def test_health_url_uses_host_root():
+    assert smoke.health_url("https://example.test/mcp") == "https://example.test/-/health"

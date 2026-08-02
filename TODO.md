@@ -89,13 +89,14 @@ weeks.
 
 ## Hosted MCP reliability
 
-- [ ] **Add a hosted smoke-check workflow.** Minimum checks: remote MCP
-      handshake, tool-count floor, one no-auth registered-IP query, one
-      corpus-backed substantive-law query, one fee lookup, and one
-      download/resource template check. Run on a schedule and after
-      deploys against `https://mcp.patentclient.com/mcp`. The workflow and
-      checks are present. Configure `PCA_HOSTED_SMOKE_TOKEN` to enable
-      functional checks; availability checks run without it.
+- [x] **Add a hosted availability workflow.** The library repository checks
+      the health route, OAuth protected-resource metadata, and MCP ingress
+      each hour and after deployment notifications.
+
+- [ ] **Enable deployment-owned authenticated smoke checks.** The deployment
+      repository owns the curated public tool contract and its existing
+      `scripts/hosted_smoke.py`. Configure `PATENT_MCP_SMOKE_BEARER_TOKEN`
+      there so CI verifies tool count, required tools, and hidden tools.
 
 - [x] **Add corpus-bootstrap health reporting.** The bootstrap CLI now
       supports `--check` and `--json`, reports snapshot and SHA details,

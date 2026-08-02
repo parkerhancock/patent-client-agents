@@ -1,22 +1,15 @@
-# Repository Health Remediation Roadmap
+# Completed Repository Health Remediation Roadmap
 
 This roadmap converts the July 22, 2026 repository-health audit into a bounded
 set of changes. The goal is to restore a green, reproducible release path
 without refactoring product code or expanding the public API.
 
-## Current state
+## Completion state
 
-- The local test suite passes with 3,013 tests passing, 31 skipped, and 72.76%
-  statement coverage.
-- Ruff lint, Ruff formatting, `ty`, the coverage manifest validator, and package
-  builds pass locally.
-- GitHub Actions is red on `main`. The latest run exposed a stale UKIPO corpus
-  timestamp and an outdated retry-behavior test expectation.
-- The working tree contains candidate fixes for those two failures, but the MCP
-  tool-count check then exposes stale 111/168 counts in documentation and plugin
-  metadata. The actual counts are 120/185.
-- Release notes, installation guidance, contributor tooling, secret scanning,
-  and workflow pinning have drifted from the current package.
+This July 2026 remediation plan is complete. Current work is tracked in
+`TODO.md`, while connector research state lives in `research/STATE.yaml`.
+The August 2026 validation baseline is 3,345 passing tests, 31 skipped tests,
+and 128 default or 193 fully configured MCP tools.
 
 ## Milestone 1: Restore every existing CI gate
 
@@ -24,7 +17,7 @@ without refactoring product code or expanding the public API.
 - [x] Preserve and verify the refreshed UKIPO coverage metadata and generated
   atlas files.
 - [x] Replace stale MCP tool counts in user documentation and plugin metadata.
-- [x] Confirm the generated counts remain 120 default and 185 fully configured.
+- [x] Confirm generated tool counts and keep them synchronized with docs.
 
 Acceptance checks:
 
