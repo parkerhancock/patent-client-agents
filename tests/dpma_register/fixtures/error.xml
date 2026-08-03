@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e:Error xmlns:e="urn:dpma:mock:error">
+  <e:code>MOCK-400</e:code>
+  <e:message>Invalid expert query</e:message>
+</e:Error>

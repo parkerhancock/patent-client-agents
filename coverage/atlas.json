@@ -1,22 +1,21 @@
 {
-  "generated_at": "2026-07-21T02:16:29+00:00",
+  "generated_at": "2026-08-03T14:55:05+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 116,
     "by_rating": {
       "red_tos": 5,
-      "green": 11,
-      "tbd": 4,
-      "red_no_api": 19,
+      "green": 12,
+      "red_no_api": 22,
       "yellow_byok": 7,
       "red_blocked": 3,
       "green_transitive": 67
     },
     "by_connector_status": {
-      "skipped": 94,
-      "shipped": 13,
-      "none": 4,
-      "planned": 5
+      "skipped": 97,
+      "shipped": 14,
+      "spec_ready": 1,
+      "planned": 4
     },
     "by_region": {
       "multilateral": 6,
@@ -32,7 +31,7 @@
       "regional": 7,
       "national": 103
     },
-    "synopses_filled": 37
+    "synopses_filled": 41
   },
   "entities": [
     {
@@ -375,16 +374,17 @@
       "iso2": null,
       "region": "regional",
       "rights": [
-        "patent"
+        "patent",
+        "design"
       ],
-      "rating": "tbd",
-      "rating_emoji": "\u26aa",
-      "rating_label": "TBD",
-      "rating_basis": "Not yet researched",
-      "connector_status": "none",
-      "last_verified": "2026-05-16",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "rating": "red_no_api",
+      "rating_emoji": "\ud83d\udd34",
+      "rating_label": "Red \u2014 No API",
+      "rating_basis": "Public patent and design registers are browser services. Their undocumented backend is disallowed by EAPO robots.txt, and EAPO publishes no supported API or bulk feed.",
+      "connector_status": "skipped",
+      "last_verified": "2026-08-02",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/regional/eapo/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/regional/eapo.md",
       "shipped_sources": []
     },
     {
@@ -924,11 +924,59 @@
       "rating_emoji": "\ud83d\udfe1",
       "rating_label": "Yellow \u2014 BYOK",
       "rating_basis": "DPMAconnectPlus REST permits per-user self-hosted access \u2014 EUR 200 one-time Datenempf\u00e4nger contract, fixed-IP Basic-auth credentials, no German residency required, EU-SCC auto-attached for non-EU recipients (\u00a78). Prior red_contract reading misread \u00a73.2 \u2014 the clause prohibits rebroadcasting data records (zero-infra proxy is barred), NOT self-hosted BYOK by the contracting party. Synopsis update + BACKLOG entry queued 2026-05-18. Statutes corpus already shipped separately.",
-      "connector_status": "planned",
-      "last_verified": "2026-05-18",
+      "connector_status": "spec_ready",
+      "last_verified": "2026-08-03",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/de-dpma/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/de-dpma.md",
       "shipped_sources": [
+        {
+          "id": "DE/DPMA/Patents",
+          "name": "DPMA Germany \u2014 Patents and Utility Models (DPMAconnectPlus)",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "classification",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "account_required",
+          "status": "beta",
+          "module": "patent_client_agents.dpma_register"
+        },
+        {
+          "id": "DE/DPMA/Trademarks",
+          "name": "DPMA Germany \u2014 National Trademarks (DPMAconnectPlus)",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "classification",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "account_required",
+          "status": "beta",
+          "module": "patent_client_agents.dpma_register"
+        },
+        {
+          "id": "DE/DPMA/Designs",
+          "name": "DPMA Germany \u2014 National Designs (DPMAconnectPlus)",
+          "rights": [
+            "design"
+          ],
+          "data_types": [
+            "bibliographic",
+            "classification",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "account_required",
+          "status": "beta",
+          "module": "patent_client_agents.dpma_register"
+        },
         {
           "id": "DE/DPMA/Statutes",
           "name": "DPMA Germany \u2014 IP statutes (PatG, MarkenG, GebrMG, DesignG, UrhG, GeschGehG)",
@@ -1322,6 +1370,25 @@
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/br-inpi.md",
       "shipped_sources": [
         {
+          "id": "BR/INPI/RPI",
+          "name": "INPI Brazil \u2014 Revista da Propriedade Industrial (dados.gov.br)",
+          "rights": [
+            "patent",
+            "trademark",
+            "design",
+            "gi"
+          ],
+          "data_types": [
+            "bulk_data",
+            "bibliographic",
+            "legal_status"
+          ],
+          "access_method": "bulk_download",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.inpi_br_bulk"
+        },
+        {
           "id": "BR/INPI/Fees/Patent",
           "name": "INPI Brazil \u2014 Fees (Patent)",
           "rights": [
@@ -1370,7 +1437,41 @@
       "last_verified": "2026-05-18",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/sg-ipos/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/sg-ipos.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "SG/IPOS/Statutes",
+          "name": "IPOS Singapore \u2014 IP statutes (Patents / Trade Marks / Designs / Copyright)",
+          "rights": [
+            "patent",
+            "trademark",
+            "design",
+            "copyright"
+          ],
+          "data_types": [
+            "statutes"
+          ],
+          "access_method": "mcp_passthrough",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.ipos_statutes"
+        },
+        {
+          "id": "SG/IPOS/Manuals",
+          "name": "IPOS Singapore \u2014 examination & work manuals (PEG / TM / Designs)",
+          "rights": [
+            "patent",
+            "trademark",
+            "design"
+          ],
+          "data_types": [
+            "guidelines"
+          ],
+          "access_method": "mcp_passthrough",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.ipos_manuals"
+        }
+      ]
     },
     {
       "id": "IL/ILPO",
@@ -1391,7 +1492,41 @@
       "last_verified": "2026-05-18",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/il-ilpo/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/il-ilpo.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "IL/ILPO/TradeMarks",
+          "name": "ILPO Israel \u2014 Trade Marks (data.gov.il)",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bulk_data",
+            "bibliographic",
+            "legal_status"
+          ],
+          "access_method": "bulk_download",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.ilpo_tm"
+        },
+        {
+          "id": "IL/ILPO/Statutes",
+          "name": "ILPO Israel \u2014 IP statutes (Patents, TM, Designs, Copyright, Commercial Torts)",
+          "rights": [
+            "patent",
+            "trademark",
+            "design",
+            "copyright"
+          ],
+          "data_types": [
+            "statutes"
+          ],
+          "access_method": "mcp_passthrough",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.ilpo_statutes"
+        }
+      ]
     },
     {
       "id": "TW/TIPO",
@@ -1582,15 +1717,58 @@
         "trademark",
         "design"
       ],
-      "rating": "tbd",
-      "rating_emoji": "\u26aa",
-      "rating_label": "TBD",
-      "rating_basis": "Not yet researched",
-      "connector_status": "none",
-      "last_verified": "never",
-      "synopsis_url": null,
-      "github_research_url": null,
-      "shipped_sources": []
+      "rating": "green",
+      "rating_emoji": "\ud83d\udfe2",
+      "rating_label": "Green",
+      "rating_basis": "Official T\u00dcRKPATENT fee pages expose server-rendered HTML tables with a matching Resm\u00ee Gazete authority. Public register searches exist, but no supported register API or bulk feed was found.",
+      "connector_status": "shipped",
+      "last_verified": "2026-08-02",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/tr-turkpatent/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/tr-turkpatent.md",
+      "shipped_sources": [
+        {
+          "id": "TR/TURKPATENT/Fees/Patent",
+          "name": "T\u00dcRKPATENT \u2014 Fees (Patent and Utility Model)",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
+        },
+        {
+          "id": "TR/TURKPATENT/Fees/Trademark",
+          "name": "T\u00dcRKPATENT \u2014 Fees (Trademark)",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
+        },
+        {
+          "id": "TR/TURKPATENT/Fees/Design",
+          "name": "T\u00dcRKPATENT \u2014 Fees (Industrial Design)",
+          "rights": [
+            "design"
+          ],
+          "data_types": [
+            "fees"
+          ],
+          "access_method": "website_scrape",
+          "auth": "none",
+          "status": "active",
+          "module": "patent_client_agents.fees"
+        }
+      ]
     },
     {
       "id": "CH/IPI",
@@ -1985,14 +2163,14 @@
         "trademark",
         "design"
       ],
-      "rating": "tbd",
-      "rating_emoji": "\u26aa",
-      "rating_label": "TBD",
-      "rating_basis": "UAE Patent Hive 2025 initiative; not yet researched",
-      "connector_status": "none",
-      "last_verified": "never",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "rating": "red_no_api",
+      "rating_emoji": "\ud83d\udd34",
+      "rating_label": "Red \u2014 No API",
+      "rating_basis": "The public IPDL is a session-based OutSystems application without a documented API. Current open-data workbooks contain aggregate statistics, not application records.",
+      "connector_status": "skipped",
+      "last_verified": "2026-08-02",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/ae-moe/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/ae-moe.md",
       "shipped_sources": []
     },
     {
@@ -2006,14 +2184,14 @@
         "trademark",
         "design"
       ],
-      "rating": "tbd",
-      "rating_emoji": "\u26aa",
-      "rating_label": "TBD",
-      "rating_basis": "Saudi Vision 2030 initiative; not yet researched",
-      "connector_status": "none",
-      "last_verified": "never",
-      "synopsis_url": null,
-      "github_research_url": null,
+      "rating": "red_no_api",
+      "rating_emoji": "\ud83d\udd34",
+      "rating_label": "Red \u2014 No API",
+      "rating_basis": "SAIP publishes public search and service landing pages, but the direct IP Search application timed out from US egress and no supported API or bulk feed was found.",
+      "connector_status": "skipped",
+      "last_verified": "2026-08-02",
+      "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/sa-saip/",
+      "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/sa-saip.md",
       "shipped_sources": []
     },
     {
@@ -3798,6 +3976,38 @@
       "update_cadence": "annual",
       "last_synced": "2026-05-15",
       "corpus_version": "unknown \u2014 needs verification"
+    },
+    {
+      "id": "BR/LPI/Statute",
+      "name": "Lei da Propriedade Industrial (LPI / Lei 9.279/1996)",
+      "jurisdiction": "BR",
+      "wipo_st3_code": "BR",
+      "issuing_body": "Rep\u00fablica Federativa do Brasil (Presid\u00eancia da Rep\u00fablica)",
+      "rights": [
+        "patent",
+        "trademark",
+        "design",
+        "gi"
+      ],
+      "data_types": [
+        "statutes"
+      ],
+      "access": {
+        "method": "mcp_passthrough",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.inpi_br_statutes"
+      },
+      "last_verified": "2026-05-16",
+      "category": "substantive_law",
+      "transport": "mcp_local",
+      "update_strategy": "scheduled_recrawl",
+      "update_cadence": "irregular",
+      "last_synced": "2026-05-16",
+      "corpus_version": "unknown \u2014 needs verification",
+      "notes": "Brazil's unified IP code \u2014 patents (Title I), designs (Title II),\ntrade marks (Title III), GIs (Title IV), trade secrets / unfair\ncompetition (Title V, Art. 195), and criminal sanctions. Bundles\nboth PT (authoritative \u2014 Planalto) and EN (WIPO Lex translation)\ntext per Article. Cadence is irregular because the LPI is amended\nby occasional federal laws (no published schedule).\n"
     },
     {
       "id": "US/CAFC/Opinions",

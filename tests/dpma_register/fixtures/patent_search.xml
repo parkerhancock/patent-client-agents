@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:PatentHitList xmlns:p="urn:dpma:mock:patent-hit-list">
+  <p:hitCount>2</p:hitCount>
+  <p:PatentHit>
+    <p:leading-registered-number>10 2023 123 456.7</p:leading-registered-number>
+    <p:document-number>DE102023123456A1</p:document-number>
+    <p:title>Adaptive charging controller</p:title>
+    <p:applicant>Necktie Labs, LLC</p:applicant>
+    <p:ipc>H02J 7/00</p:ipc>
+    <p:status>Application pending</p:status>
+    <p:application-date>20230105</p:application-date>
+    <p:publication-date>2024-07-11</p:publication-date>
+    <p:kind-code>A1</p:kind-code>
+    <p:future-extension>preserved</p:future-extension>
+  </p:PatentHit>
+  <p:PatentHit>
+    <p:leading-registered-number>20 2023 012 345.6</p:leading-registered-number>
+    <p:document-number>DE202023012345U1</p:document-number>
+    <p:title>Connector housing</p:title>
+    <p:applicant>Example GmbH</p:applicant>
+    <p:ipc>H01R 13/00</p:ipc>
+    <p:status>Registered</p:status>
+    <p:kind-code>U1</p:kind-code>
+  </p:PatentHit>
+</p:PatentHitList>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<st86:DesignRecord xmlns:st86="urn:wipo:mock:st86" xmlns:dpma="urn:dpma:mock:extension">
+  <st86:DesignIdentifier>402024000123-0001</st86:DesignIdentifier>
+  <st86:ApplicationNumber>402024000123</st86:ApplicationNumber>
+  <st86:RegistrationNumber>402024000123-0001</st86:RegistrationNumber>
+  <st86:ProductIndication>Computer enclosure</st86:ProductIndication>
+  <st86:Owner>Necktie Labs, LLC</st86:Owner>
+  <st86:LocarnoClassification>14-02</st86:LocarnoClassification>
+  <st86:RegistrationDate>2024-08-01</st86:RegistrationDate>
+  <dpma:representation-reference>mock-representation-id</dpma:representation-reference>
+</st86:DesignRecord>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<d:DesignHitList xmlns:d="urn:dpma:mock:design-hit-list">
+  <d:hitCount>1</d:hitCount>
+  <d:DesignHit>
+    <d:DesignIdentifier>402024000123-0001</d:DesignIdentifier>
+    <d:ApplicationNumber>402024000123</d:ApplicationNumber>
+    <d:ProductIndication>Computer enclosure</d:ProductIndication>
+    <d:Applicant>Necktie Labs, LLC</d:Applicant>
+    <d:LocarnoClassification>14-02</d:LocarnoClassification>
+    <d:Status>Registered</d:Status>
+  </d:DesignHit>
+</d:DesignHitList>

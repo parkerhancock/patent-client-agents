@@ -22,6 +22,7 @@ from .tools.cafc import cafc_mcp
 from .tools.canlii import canlii_mcp
 from .tools.copyright import copyright_mcp
 from .tools.cpc import cpc_mcp
+from .tools.dpma_register import dpma_register_mcp
 from .tools.dpma_statutes import dpma_statutes_mcp
 from .tools.epc import epc_mcp
 from .tools.epo_case_law import epo_case_law_mcp
@@ -75,7 +76,7 @@ ip_mcp = FastMCP(
         "Community Designs — env-gated on EUIPO_CLIENT_ID / EUIPO_CLIENT_SECRET), "
         "and UPC (Unified Patent Court decisions/orders feed + corpus-backed "
         "UPCA / RoP / Fees statutes). 128 default read-only tools; up to "
-        "193 tools when every env-gated family is configured. Tools are grouped by intent."
+        "199 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
 
@@ -111,6 +112,7 @@ ip_mcp.mount(ipo_in_mppp_mcp)
 ip_mcp.mount(ipos_mcp)
 ip_mcp.mount(inpi_pi_mcp)
 ip_mcp.mount(dpma_statutes_mcp)
+ip_mcp.mount(dpma_register_mcp)
 ip_mcp.mount(prv_se_mcp)
 ip_mcp.mount(prh_fi_mcp)
 ip_mcp.mount(tipo_opdata_mcp)

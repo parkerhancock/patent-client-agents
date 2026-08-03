@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<st36:PatentDocument xmlns:st36="urn:wipo:mock:st36" xmlns:dpma="urn:dpma:mock:extension">
+  <st36:application-number>10 2023 123 456.7</st36:application-number>
+  <st36:publication-number>DE102023123456A1</st36:publication-number>
+  <st36:registration-number>DE102023123456B4</st36:registration-number>
+  <st36:invention-title>Adaptive charging controller</st36:invention-title>
+  <st36:applicant>Necktie Labs, LLC</st36:applicant>
+  <st36:inventor>Ada Example</st36:inventor>
+  <st36:ipc>H02J 7/00</st36:ipc>
+  <st36:legal-status>Granted</st36:legal-status>
+  <st36:filing-date>20230105</st36:filing-date>
+  <dpma:event-history><dpma:event><dpma:event-code>GRANT</dpma:event-code></dpma:event></dpma:event-history>
+</st36:PatentDocument>

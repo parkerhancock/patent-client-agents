@@ -58,6 +58,12 @@ os.environ.setdefault("TIPO_API_KEY", "test_tipo_tk")
 # tests/kipo_kipris/conftest.py docstring for the rationale).
 os.environ.setdefault("KIPO_KIPRIS_API_KEY", "test_kipris_servicekey")
 
+# DPMAconnectPlus tools need both Basic-auth values. DPMA tests use only
+# synthetic XML fixtures and httpx.MockTransport, so these placeholders never
+# reach the live service.
+os.environ.setdefault("DPMA_CONNECTPLUS_USERNAME", "test_dpma_user")
+os.environ.setdefault("DPMA_CONNECTPLUS_PASSWORD", "test_dpma_password")
+
 # USITC EDIS MCP tools are env-gated on USITC_EDIS_TOKEN so the public
 # demo at mcp.patentclient.com advertises no ITC surface. The placeholder
 # below keeps them registered in-process so the USITC envelope and

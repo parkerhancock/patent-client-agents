@@ -111,7 +111,7 @@ fetch time.
 
 ## §5 Manifest entries
 
-Add three active `registered_ip` rows at integration:
+Add three beta `registered_ip` rows at integration:
 
 | ID | Rights | Data types |
 |---|---|---|
@@ -120,7 +120,7 @@ Add three active `registered_ip` rows at integration:
 | `DE/DPMA/Designs` | `[design]` | `[bibliographic, classification, legal_status]` |
 
 Use `rest_api`, `account_required`, both auth environment variables,
-`patent_client_agents.dpma_register`, `mcp_proxy`, and `active`. The patents
+`patent_client_agents.dpma_register`, `mcp_proxy`, and `beta`. The patents
 row name and notes must state that the service also covers utility models,
 because `utility_model` is not in the manifest rights vocabulary.
 
@@ -141,9 +141,12 @@ Required checks:
 - six tools are absent without both variables and present with both variables
 - manifest, tool-source mapping, documentation counts, and changelog are updated
 
-Add a `--run-live-dpma` flag and `DPMA_LIVE_TESTS=1` gate. Live validation must
-run from the IP registered with DPMA. Until credentials exist, CI uses fixtures
-and records the missing live check in the connector's usage resource.
+Do not add a live-test flag or record authenticated cassettes. CI is fixture-only
+until a contributor with a DPMAconnectPlus account can validate from its
+registered IP. State this limit in the package, tools, provenance, manifest,
+README, changelog, and usage resource. Invite community testing and sanitized
+response samples that contain no credentials, personal data, or confidential
+records.
 
 Run `scripts/verify_connector.py dpma_register --jurisdiction "DPMA Germany"`
 before integration, followed by the coverage, tool-count, lint, type, and
@@ -158,8 +161,9 @@ focused test gates.
 - Confirm whether DPMA now accepts signed electronic contract copies. The
   current official page still instructs users to send two originally signed
   copies by post.
-- Obtain a test account before claiming live compatibility. Public documents
-  define the schemas and operations but do not prove current account behavior.
+- Do not claim live compatibility. Public documents define the schemas and
+  operations but do not prove current account behavior. Community support from
+  an account holder is welcome for live testing and sanitized schema samples.
 - Treat the 2020 contract PDF as the current linked German form. The English
   page, updated 2026-07-27, states that updated documents are forthcoming.
 

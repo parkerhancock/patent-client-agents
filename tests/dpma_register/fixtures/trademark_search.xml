@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<m:TrademarkHitList xmlns:m="urn:dpma:mock:trademark-hit-list">
+  <m:hitCount>1</m:hitCount>
+  <m:TrademarkHit>
+    <m:ApplicationNumber>302024001234</m:ApplicationNumber>
+    <m:RegistrationNumber>302024001234</m:RegistrationNumber>
+    <m:MarkText>NECKTIE</m:MarkText>
+    <m:Applicant>Necktie Labs, LLC</m:Applicant>
+    <m:NiceClassification>42</m:NiceClassification>
+    <m:Status>Registered</m:Status>
+  </m:TrademarkHit>
+</m:TrademarkHitList>

@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Added the `dpma_register` connector with six env-gated DPMAconnectPlus tools
+  for German patents and utility models, trademarks, and designs. The connector
+  is fixture-tested only and marked beta. Live account testing and sanitized
+  community samples are welcome.
 - Added a checked MCP tool-to-source manifest. CI now requires every shipped
   tool to resolve to active coverage rows with one non-null connector category.
 - Added the missing coverage manifest and documentation for the existing

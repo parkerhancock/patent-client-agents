@@ -17,6 +17,8 @@ groups:
     connector_modules: [patent_client_agents.cpc]
   - server: dpma_statutes_mcp
     connector_modules: [patent_client_agents.dpma_statutes]
+  - server: dpma_register_mcp
+    connector_modules: [patent_client_agents.dpma_register]
   - server: epc_mcp
     connector_modules: [patent_client_agents.epc]
   - server: epo_case_law_mcp

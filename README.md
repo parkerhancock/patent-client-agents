@@ -225,7 +225,7 @@ Ask your agent to research patents and trademarks in natural language:
 `patent-client-agents` covers the major patent and trademark offices worldwide — see the full map at **[patentclient.com/atlas](https://patentclient.com/atlas)**.
 
 - **Americas** — USPTO (patents, trademarks, assignments, office actions), US Copyright Office, Federal Circuit (CAFC), US International Trade Commission (Section 337), CanLII Canada
-- **Europe** — EPO OPS, EUIPO (EU trademarks + designs), Unified Patent Court (decisions + statutes), DPMA Germany (statutes), INPI France (TM + designs), Légifrance (French IP code + trade secrets)
+- **Europe** — EPO OPS, EUIPO (EU trademarks + designs), Unified Patent Court (decisions + statutes), DPMA Germany (registers + statutes), INPI France (TM + designs), Légifrance (French IP code + trade secrets)
 - **Asia** — JPO Japan, KIPO Korea, TIPO Taiwan, IPO India (Acts + MPPP), Taiwan Trade Secrets Act
 - **Oceania** — IP Australia (patents, trade marks, designs, bulk catalog)
 - **Multilateral** — Google Patents (global search), WIPO Lex (~50k IP statutes across ~200 jurisdictions)
@@ -256,7 +256,7 @@ JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the
 | **INPI France** | French national trademarks (WIPO ST.66 v1.0) and designs (WIPO ST.86 v1.0) from `api-gateway.inpi.fr` — search + fetch with Nice / Locarno class, applicant, status, and date-range filters. TM + Design only; FR patents covered through EPO OPS (INPADOC). *MCP tools register when `INPI_USERNAME` + `INPI_PASSWORD` are set; BYOK — production deployers must register a personal `data.inpi.fr` account.* |
 | **IP-office fee schedules** | Live patent, trademark, and design fee schedules for 25 offices and international systems. TÜRKPATENT coverage includes official patent and utility-model, trademark, and industrial-design tables in TRY, with the Resmî Gazete authority recorded in each schedule. |
 | **IPO India** | The four core Indian IP Acts (Patents Act 1970 with §3(d), §25, §84; Designs Act 2000; Trade Marks Act 1999; Copyright Act 1957) + Patent Rules 2003 (incl. 2024 amendments), plus the IPO India Manual of Patent Practice & Procedure (MPPP v3.0, 2019). Citation forms: `Section 3(d) Patents Act`, `Rule 71 Patent Rules`, `MPPP Chapter 04.05.01`. *Runs against local SQLite/FTS5 snapshots built by `patent-client-agents-build-ipo-in-statutes-corpus` and `patent-client-agents-build-ipo-in-mppp-corpus`* |
-| **DPMA Germany** | The six core German IP statutes — Patentgesetz (PatG), Markengesetz (MarkenG), Gebrauchsmustergesetz (GebrMG), Designgesetz (DesignG), Urheberrechtsgesetz (UrhG), and Geschäftsgeheimnisgesetz (GeschGehG) — bundled into one searchable corpus. Citation forms: `§ 1 PatG`, `§ 139 PatG`, `§ 14 MarkenG`, `§ 5 GeschGehG`. *Runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-dpma-statutes-corpus`* |
+| **DPMA Germany** | German patents and utility models, national trademarks, and national designs through DPMAconnectPlus, plus six bundled German IP statutes. *The 6 register tools need `DPMA_CONNECTPLUS_USERNAME` + `DPMA_CONNECTPLUS_PASSWORD` and requests from the account's registered static IP. The register connector is mock-only tested; live compatibility is unverified. Community testing or sanitized XML samples are welcome. Private BYOK only; not exposed by the hosted demo.* |
 | **Légifrance IP** | The French intellectual-property statutes — Code de la propriété intellectuelle (CPI: patents L.611, trade marks L.711, designs L.511, copyright L.111) plus the Code de commerce L.151 trade-secret regime — bundled into one searchable corpus. Citation forms: `L. 611-10 CPI`, `Art. L. 611-10 CPI`, `L611-10 CPI`, `L. 151-1 Code de commerce`. *Runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-legifrance-ip-corpus`* |
 | **Taiwan Trade Secrets** | The Taiwan Trade Secrets Act (營業秘密法) in the official English translation published by law.moj.gov.tw/Eng — Articles 1, 2, 3, 10, 11, 13, and 13-1 (legislative purpose, trade-secret definition, employee-derived ownership, acts of misappropriation, injunction + damages, treble damages, criminal liability). Citation forms: `Art. 2 Trade Secrets Act`, `Section 13 Trade Secrets Act`, `Art. 13-1`, bare numeric `13` / `13-1`. *Runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-tw-trade-secrets-corpus`* |
 | **MPEP** | Manual of Patent Examining Procedure search and section lookup — *runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-mpep-corpus`; see docs/installation.md* |
@@ -278,7 +278,7 @@ and retry logic via `mcp-data-core`.
 
 128 patent + IP MCP tools are exposed by default. Credentialed
 families register when their environment variables are present, bringing
-the local/private surface up to 193 tools when every env-gated family is
+the local/private surface up to 199 tools when every env-gated family is
 configured.
 
 | Variable | Source | Required | How to get |
@@ -287,6 +287,7 @@ configured.
 | `USPTO_TSDR_API_KEY` | USPTO TSDR | All TSDR trademark tools | [account.uspto.gov/api-manager/](https://account.uspto.gov/api-manager/) (free MyUSPTO account) |
 | `EPO_OPS_API_KEY`, `EPO_OPS_API_SECRET` | EPO OPS | All EPO tools | [developers.epo.org](https://developers.epo.org/) (free) |
 | `JPO_API_USERNAME`, `JPO_API_PASSWORD` | JPO | All JPO library + MCP tools (env-gated on the stdio server / plugin; not set on the hosted demo) | [j-platpat.inpit.go.jp](https://www.j-platpat.inpit.go.jp/) |
+| `DPMA_CONNECTPLUS_USERNAME`, `DPMA_CONNECTPLUS_PASSWORD` | DPMAconnectPlus | Six German register tools (env-gated; private BYOK only; mock-only tested) | [DPMAconnectPlus application information](https://www.dpma.de/english/search/data_supply_services/dpmaconnect/index.html). DPMA also requires a registered static IP. |
 | `CANLII_API_KEY` | CanLII | All CanLII library + MCP tools (env-gated on the stdio server / plugin; not set on the hosted demo) | [canlii.org/en/feedback/feedback.html](https://www.canlii.org/en/feedback/feedback.html) (free, by request) |
 | `EUIPO_CLIENT_ID`, `EUIPO_CLIENT_SECRET` | EUIPO | All EUIPO library + MCP tools (env-gated; not set on the hosted demo). Set `EUIPO_ENV=sandbox` to use the open sandbox environment instead of production. | [dev.euipo.europa.eu](https://dev.euipo.europa.eu/) (sandbox auto-approves; production requires ID-document review) |
 | `USITC_EDIS_TOKEN` | USITC EDIS | EDIS document/attachment downloads (also rejected for *public* docs without a token); investigation+document search itself works without one | [edis.usitc.gov](https://edis.usitc.gov) → API Token Generator (free, Login.gov account). JWT, ~2 wk lifetime |

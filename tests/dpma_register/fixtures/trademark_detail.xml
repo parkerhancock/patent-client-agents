@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<st66:TrademarkRecord xmlns:st66="urn:wipo:mock:st66" xmlns:dpma="urn:dpma:mock:extension">
+  <st66:ApplicationNumber>302024001234</st66:ApplicationNumber>
+  <st66:RegistrationNumber>302024001234</st66:RegistrationNumber>
+  <st66:MarkText>NECKTIE</st66:MarkText>
+  <st66:Owner>Necktie Labs, LLC</st66:Owner>
+  <st66:NiceClassification>42</st66:NiceClassification>
+  <st66:ViennaClassification>27.05.01</st66:ViennaClassification>
+  <st66:RegistrationDate>20240801</st66:RegistrationDate>
+  <dpma:image-reference>mock-image-id</dpma:image-reference>
+</st66:TrademarkRecord>

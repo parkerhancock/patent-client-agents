@@ -1,11 +1,12 @@
 {
-  "generated_at": "2026-07-21T02:16:29+00:00",
+  "generated_at": "2026-08-03T14:55:05+00:00",
   "schema_version": 1,
   "summary": {
-    "total": 85,
+    "total": 97,
     "by_status": {
-      "active": 83,
-      "external": 2
+      "active": 92,
+      "external": 2,
+      "beta": 3
     },
     "active_jurisdictions": [
       "AU",
@@ -18,10 +19,13 @@
       "FI",
       "FR",
       "GB",
+      "IL",
       "IN",
       "JP",
       "KR",
       "SE",
+      "SG",
+      "TR",
       "TW",
       "UP",
       "UPC",
@@ -99,7 +103,8 @@
         "GB",
         "FR",
         "SE",
-        "TW"
+        "TW",
+        "SG"
       ],
       "missing": [
         "MX",
@@ -111,7 +116,6 @@
         "BE",
         "PL",
         "DK",
-        "SG",
         "HK",
         "TH",
         "MY",
@@ -120,7 +124,7 @@
         "ID",
         "KH"
       ],
-      "tracked_count": 13,
+      "tracked_count": 14,
       "total": 30,
       "source": "WIPO IP Statistics Data Center (https://www.wipo.int/ipstats/en/), WIPI 2024 report, 2023 filing data"
     }
@@ -164,9 +168,29 @@
     },
     {
       "jurisdiction": "BR",
+      "right": "design",
+      "status": "active",
+      "sources": [
+        "BR/INPI/RPI",
+        "BR/LPI/Statute"
+      ]
+    },
+    {
+      "jurisdiction": "BR",
+      "right": "gi",
+      "status": "active",
+      "sources": [
+        "BR/INPI/RPI",
+        "BR/LPI/Statute"
+      ]
+    },
+    {
+      "jurisdiction": "BR",
       "right": "patent",
       "status": "active",
       "sources": [
+        "BR/INPI/RPI",
+        "BR/LPI/Statute",
         "BR/INPI/Fees/Patent"
       ]
     },
@@ -175,6 +199,8 @@
       "right": "trademark",
       "status": "active",
       "sources": [
+        "BR/INPI/RPI",
+        "BR/LPI/Statute",
         "BR/INPI/Fees/Trademark"
       ]
     },
@@ -216,6 +242,7 @@
       "right": "design",
       "status": "active",
       "sources": [
+        "DE/DPMA/Designs",
         "DE/DPMA/Statutes"
       ]
     },
@@ -224,6 +251,7 @@
       "right": "patent",
       "status": "active",
       "sources": [
+        "DE/DPMA/Patents",
         "DE/DPMA/Statutes",
         "DE/DPMA/Fees/Patents"
       ]
@@ -233,6 +261,7 @@
       "right": "trademark",
       "status": "active",
       "sources": [
+        "DE/DPMA/Trademarks",
         "DE/DPMA/Statutes"
       ]
     },
@@ -369,6 +398,39 @@
       ]
     },
     {
+      "jurisdiction": "IL",
+      "right": "copyright",
+      "status": "active",
+      "sources": [
+        "IL/ILPO/Statutes"
+      ]
+    },
+    {
+      "jurisdiction": "IL",
+      "right": "design",
+      "status": "active",
+      "sources": [
+        "IL/ILPO/Statutes"
+      ]
+    },
+    {
+      "jurisdiction": "IL",
+      "right": "patent",
+      "status": "active",
+      "sources": [
+        "IL/ILPO/Statutes"
+      ]
+    },
+    {
+      "jurisdiction": "IL",
+      "right": "trademark",
+      "status": "active",
+      "sources": [
+        "IL/ILPO/TradeMarks",
+        "IL/ILPO/Statutes"
+      ]
+    },
+    {
       "jurisdiction": "IN",
       "right": "copyright",
       "status": "active",
@@ -475,6 +537,65 @@
       "status": "active",
       "sources": [
         "SE/PRV/Trademarks"
+      ]
+    },
+    {
+      "jurisdiction": "SG",
+      "right": "copyright",
+      "status": "active",
+      "sources": [
+        "SG/IPOS/Statutes"
+      ]
+    },
+    {
+      "jurisdiction": "SG",
+      "right": "design",
+      "status": "active",
+      "sources": [
+        "SG/IPOS/Statutes",
+        "SG/IPOS/Manuals"
+      ]
+    },
+    {
+      "jurisdiction": "SG",
+      "right": "patent",
+      "status": "active",
+      "sources": [
+        "SG/IPOS/Statutes",
+        "SG/IPOS/Manuals"
+      ]
+    },
+    {
+      "jurisdiction": "SG",
+      "right": "trademark",
+      "status": "active",
+      "sources": [
+        "SG/IPOS/Statutes",
+        "SG/IPOS/Manuals"
+      ]
+    },
+    {
+      "jurisdiction": "TR",
+      "right": "design",
+      "status": "active",
+      "sources": [
+        "TR/TURKPATENT/Fees/Design"
+      ]
+    },
+    {
+      "jurisdiction": "TR",
+      "right": "patent",
+      "status": "active",
+      "sources": [
+        "TR/TURKPATENT/Fees/Patent"
+      ]
+    },
+    {
+      "jurisdiction": "TR",
+      "right": "trademark",
+      "status": "active",
+      "sources": [
+        "TR/TURKPATENT/Fees/Trademark"
       ]
     },
     {
@@ -1140,6 +1261,63 @@
       "transport": "mcp_proxy"
     },
     {
+      "id": "BR/INPI/RPI",
+      "name": "INPI Brazil \u2014 Revista da Propriedade Industrial (dados.gov.br)",
+      "jurisdiction": "BR",
+      "wipo_st3_code": "BR",
+      "issuing_body": "Instituto Nacional da Propriedade Industrial",
+      "rights": [
+        "patent",
+        "trademark",
+        "design",
+        "gi"
+      ],
+      "data_types": [
+        "bulk_data",
+        "bibliographic",
+        "legal_status"
+      ],
+      "access": {
+        "method": "bulk_download",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.inpi_br_bulk"
+      },
+      "last_verified": "2026-05-16",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Brazil's weekly official IP bulletin (patents, trade marks,\ndesigns, GIs, IC topographies, software programs, technology\ncontracts, and INPI communications). Open license per Decreto\n8.777/2016. The catalog API endpoint is the legacy CKAN\n``package_show`` action on dados.gov.br; if the portal retires\nthat route, only the bulk client needs to swap.\n"
+    },
+    {
+      "id": "IL/ILPO/TradeMarks",
+      "name": "ILPO Israel \u2014 Trade Marks (data.gov.il)",
+      "jurisdiction": "IL",
+      "wipo_st3_code": "IL",
+      "issuing_body": "Israel Patent Office (Ministry of Justice)",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bulk_data",
+        "bibliographic",
+        "legal_status"
+      ],
+      "access": {
+        "method": "bulk_download",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.ilpo_tm"
+      },
+      "last_verified": "2026-05-16",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "data.gov.il CKAN catalog publishes the ILPO national TM register\nunder a free open-data licence. The live ILPO TM portal at\ntrademarks.justice.gov.il is ASP.NET / Kendo UI with no documented\nAPI \u2014 the CKAN feed is the proper on-ramp.\n"
+    },
+    {
       "id": "JP/JPO",
       "name": "Japan Patent Office (JPO) \u2014 Open API",
       "jurisdiction": "JP",
@@ -1523,6 +1701,38 @@
       "corpus_version": "snapshot-2026-07-21"
     },
     {
+      "id": "BR/LPI/Statute",
+      "name": "Lei da Propriedade Industrial (LPI / Lei 9.279/1996)",
+      "jurisdiction": "BR",
+      "wipo_st3_code": "BR",
+      "issuing_body": "Rep\u00fablica Federativa do Brasil (Presid\u00eancia da Rep\u00fablica)",
+      "rights": [
+        "patent",
+        "trademark",
+        "design",
+        "gi"
+      ],
+      "data_types": [
+        "statutes"
+      ],
+      "access": {
+        "method": "mcp_passthrough",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.inpi_br_statutes"
+      },
+      "last_verified": "2026-05-16",
+      "category": "substantive_law",
+      "transport": "mcp_local",
+      "update_strategy": "scheduled_recrawl",
+      "update_cadence": "irregular",
+      "last_synced": "2026-05-16",
+      "corpus_version": "unknown \u2014 needs verification",
+      "notes": "Brazil's unified IP code \u2014 patents (Title I), designs (Title II),\ntrade marks (Title III), GIs (Title IV), trade secrets / unfair\ncompetition (Title V, Art. 195), and criminal sanctions. Bundles\nboth PT (authoritative \u2014 Planalto) and EN (WIPO Lex translation)\ntext per Article. Cadence is irregular because the LPI is amended\nby occasional federal laws (no published schedule).\n"
+    },
+    {
       "id": "UPC/UPC/Statutes",
       "name": "Unified Patent Court \u2014 Statutes & Rules of Procedure",
       "jurisdiction": "UPC",
@@ -1549,6 +1759,99 @@
       "update_cadence": "irregular",
       "last_synced": "2026-05-15",
       "corpus_version": "unknown \u2014 needs verification"
+    },
+    {
+      "id": "SG/IPOS/Statutes",
+      "name": "IPOS Singapore \u2014 IP statutes (Patents / Trade Marks / Designs / Copyright)",
+      "jurisdiction": "SG",
+      "wipo_st3_code": "SG",
+      "issuing_body": "Intellectual Property Office of Singapore",
+      "rights": [
+        "patent",
+        "trademark",
+        "design",
+        "copyright"
+      ],
+      "data_types": [
+        "statutes"
+      ],
+      "access": {
+        "method": "mcp_passthrough",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.ipos_statutes"
+      },
+      "last_verified": "2026-05-16",
+      "category": "substantive_law",
+      "transport": "mcp_local",
+      "update_strategy": "scheduled_recrawl",
+      "update_cadence": "irregular",
+      "last_synced": "2026-05-16",
+      "corpus_version": "unknown \u2014 needs verification"
+    },
+    {
+      "id": "SG/IPOS/Manuals",
+      "name": "IPOS Singapore \u2014 examination & work manuals (PEG / TM / Designs)",
+      "jurisdiction": "SG",
+      "wipo_st3_code": "SG",
+      "issuing_body": "Intellectual Property Office of Singapore",
+      "rights": [
+        "patent",
+        "trademark",
+        "design"
+      ],
+      "data_types": [
+        "guidelines"
+      ],
+      "access": {
+        "method": "mcp_passthrough",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.ipos_manuals"
+      },
+      "last_verified": "2026-05-16",
+      "category": "substantive_law",
+      "transport": "mcp_local",
+      "update_strategy": "scheduled_recrawl",
+      "update_cadence": "quarterly",
+      "last_synced": "2026-05-16",
+      "corpus_version": "unknown \u2014 needs verification"
+    },
+    {
+      "id": "IL/ILPO/Statutes",
+      "name": "ILPO Israel \u2014 IP statutes (Patents, TM, Designs, Copyright, Commercial Torts)",
+      "jurisdiction": "IL",
+      "wipo_st3_code": "IL",
+      "issuing_body": "Israel Patent Office (Ministry of Justice)",
+      "rights": [
+        "patent",
+        "trademark",
+        "design",
+        "copyright"
+      ],
+      "data_types": [
+        "statutes"
+      ],
+      "access": {
+        "method": "mcp_passthrough",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.ilpo_statutes"
+      },
+      "last_verified": "2026-05-16",
+      "category": "substantive_law",
+      "transport": "mcp_local",
+      "update_strategy": "scheduled_recrawl",
+      "update_cadence": "irregular",
+      "last_synced": "2026-05-16",
+      "corpus_version": "WIPO Lex authoritative EN",
+      "notes": "Five Israeli IP statutes \u2014 Patents Law 5727-1967, Trade Marks\nOrdinance 5732-1972, Designs Law 5777-2017, Copyright Act\n5768-2007, and **Commercial Torts Law 5759-1999** (the\ndistinctive piece: Israel's standalone trade-secret statute,\nArts. 6-9, with statutory damages in Art. 13). Bundled corpus\nis built from WIPO Lex authoritative EN translations.\n"
     },
     {
       "id": "US/CAFC/Opinions",
@@ -1727,6 +2030,99 @@
       "update_cadence": "irregular",
       "last_synced": "2026-05-16",
       "corpus_version": "v3.0 (2019)"
+    },
+    {
+      "id": "DE/DPMA/Patents",
+      "name": "DPMA Germany \u2014 Patents and Utility Models (DPMAconnectPlus)",
+      "jurisdiction": "DE",
+      "wipo_st3_code": "DE",
+      "issuing_body": "Deutsches Patent- und Markenamt",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "classification",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "account_required",
+        "auth_env": [
+          "DPMA_CONNECTPLUS_USERNAME",
+          "DPMA_CONNECTPLUS_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.dpma_register"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Mock-only tested with synthetic namespace-bearing XML fixtures; live compatibility is unverified. Covers patents and utility models. Basic Auth and a registered static IP are required. Private BYOK only. Community validation and sanitized response samples are welcome."
+    },
+    {
+      "id": "DE/DPMA/Trademarks",
+      "name": "DPMA Germany \u2014 National Trademarks (DPMAconnectPlus)",
+      "jurisdiction": "DE",
+      "wipo_st3_code": "DE",
+      "issuing_body": "Deutsches Patent- und Markenamt",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "classification",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "account_required",
+        "auth_env": [
+          "DPMA_CONNECTPLUS_USERNAME",
+          "DPMA_CONNECTPLUS_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.dpma_register"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Mock-only tested with synthetic namespace-bearing XML fixtures; live compatibility is unverified. Basic Auth and a registered static IP are required. Private BYOK only. Community validation and sanitized response samples are welcome."
+    },
+    {
+      "id": "DE/DPMA/Designs",
+      "name": "DPMA Germany \u2014 National Designs (DPMAconnectPlus)",
+      "jurisdiction": "DE",
+      "wipo_st3_code": "DE",
+      "issuing_body": "Deutsches Patent- und Markenamt",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "bibliographic",
+        "classification",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "account_required",
+        "auth_env": [
+          "DPMA_CONNECTPLUS_USERNAME",
+          "DPMA_CONNECTPLUS_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.dpma_register"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Mock-only tested with synthetic namespace-bearing XML fixtures; live compatibility is unverified. Basic Auth and a registered static IP are required. Private BYOK only. Community validation and sanitized response samples are welcome."
     },
     {
       "id": "DE/DPMA/Statutes",
@@ -2974,6 +3370,87 @@
       "update_strategy": "live_proxy",
       "update_cadence": "irregular",
       "notes": "INPI France design fees in EUR. Base filing \u20ac39 plus per- reproduction surcharges (b&w \u20ac23, colour \u20ac47). Renewal ('prorogation') \u20ac52 per 5-year period (up to 25 years total)."
+    },
+    {
+      "id": "TR/TURKPATENT/Fees/Patent",
+      "name": "T\u00dcRKPATENT \u2014 Fees (Patent and Utility Model)",
+      "jurisdiction": "TR",
+      "wipo_st3_code": "TR",
+      "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-08-02",
+      "category": "fees",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "annual",
+      "notes": "Scrapes the official patent and utility-model fee table. Amounts use the all-in TOPLAM TUTAR column and retain base fee, VAT, and stamp-duty components in notes. The 2026 authority is Resm\u00ee Gazete 31-12-2025, fifth supplementary issue, B\u0130K/T\u00dcRKPATENT 2026/1."
+    },
+    {
+      "id": "TR/TURKPATENT/Fees/Trademark",
+      "name": "T\u00dcRKPATENT \u2014 Fees (Trademark)",
+      "jurisdiction": "TR",
+      "wipo_st3_code": "TR",
+      "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-08-02",
+      "category": "fees",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "annual",
+      "notes": "Scrapes the official trademark fee table in TRY. The connector models first-class filing, additional-class charges, grant, renewal, opposition, cancellation, and recordation fees."
+    },
+    {
+      "id": "TR/TURKPATENT/Fees/Design",
+      "name": "T\u00dcRKPATENT \u2014 Fees (Industrial Design)",
+      "jurisdiction": "TR",
+      "wipo_st3_code": "TR",
+      "issuing_body": "T\u00fcrk Patent ve Marka Kurumu (T\u00dcRKPATENT)",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "fees"
+      ],
+      "access": {
+        "method": "website_scrape",
+        "auth": "none"
+      },
+      "status": "active",
+      "connector": {
+        "module": "patent_client_agents.fees"
+      },
+      "last_verified": "2026-08-02",
+      "category": "fees",
+      "transport": "mcp_proxy",
+      "update_strategy": "live_proxy",
+      "update_cadence": "annual",
+      "notes": "Scrapes the official industrial-design fee table in TRY. The connector expands the multi-design filing row into separate second-design, third-through-fifth, and sixth-plus fee items."
     }
   ]
 }
