@@ -31,15 +31,15 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-08-03  # Marked DPMA Germany shipped as mock-only beta
+last_updated: 2026-08-03  # Promoted Swiss IPI to spec-ready
 
 stats:
   total_entities: 116
   synopses_filled: 41        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
   connectors_shipped: 15
   connectors_in_progress: 0
-  connectors_spec_ready: 0
-  connectors_planned: 4
+  connectors_spec_ready: 1
+  connectors_planned: 3
   connectors_blocked: 0
   next_unblocked_synopses: 0
   green_transitive_states: 67
@@ -764,14 +764,14 @@ entities:
     rights: [patent, trademark, design]
     synopsis: national/ch-ipi.md
     detail_survey: null
-    connector_spec: null
+    connector_spec: specs/ch-ipi-connector-spec.md
     rating: yellow_byok
     rating_basis: IPI datadelivery API at swissreg.ch/public/api/v1 is XML over HTTPS POST + OIDC ROPC auth (Keycloak at idp.ipi.ch). Free; 2 GiB/24h rolling quota. Covers TMs, patents, patent pubs, SPCs, SPC pubs — NOT designs. ToU §2 forbids credential sharing → BYOK only.
-    connector_status: planned
+    connector_status: spec_ready
     manifest_ids: []
-    next_action: spec_writing
+    next_action: connector_build
     blocked_by: []
-    last_verified: 2026-05-18
+    last_verified: 2026-08-03
     notes: |
       Synopsis 2026-05-18. SPCs are unique to IPI (EPO doesn't
       register national SPCs). CH+LI unified patent territory
