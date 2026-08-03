@@ -5,9 +5,9 @@
 **Issuing body:** Deutsches Patent- und Markenamt (German Patent and Trade Mark Office)
 **Rights administered:** patent, utility_model, trademark, design, copyright (registers; copyright is largely automatic in DE)
 **Working languages:** German (primary); English (partial — some service pages, fee schedules)
-**Connector status:** **spec_ready (BYOK)** — DPMAconnectPlus REST permits self-hosted access by the contracting party; statutes already shipped
+**Connector status:** **shipped beta (BYOK)** — register support is mock-only tested; statutes are fully shipped
 **Last verified:** 2026-08-03
-**Manifest entry:** [`coverage/sources.yaml` `DE/DPMA/Statutes`](../../coverage/sources.yaml) (statutes only — `patent_client_agents.dpma_statutes`). Live-register manifest rows pending build of `patent_client_agents.dpma_register`.
+**Manifest entries:** [`coverage/sources.yaml`](../../coverage/sources.yaml) rows `DE/DPMA/Patents`, `DE/DPMA/Trademarks`, and `DE/DPMA/Designs` are beta. `DE/DPMA/Statutes` is active.
 
 **Detail surveys:**
 - [`connectors/dpma.md`](../connectors/dpma.md) — 2026-05 detail survey (211 lines; covers DPMAregister UI, DEPATISnet, DPMAconnectPlus REST, backfile, BPatG/BGH case law, gesetze-im-internet)
@@ -120,12 +120,14 @@ contract) has its own separate access fee.
 
 ### What we cover today
 
+- [`patent_client_agents.dpma_register`](../../src/patent_client_agents/dpma_register/) — six env-gated DPMAconnectPlus tools for German patents and utility models, national trademarks, and national designs. This beta is tested only with synthetic XML fixtures. Live account compatibility is not verified.
 - [`patent_client_agents.dpma_statutes`](../../src/patent_client_agents/dpma_statutes/) — bundled SQLite/FTS5 corpus of the six core German IP Acts (PatG, MarkenG, GebrMG, DesignG, UrhG, GeschGehG); manifest entry `DE/DPMA/Statutes`.
 - DE patent biblio + family via [`patent_client_agents.epo_ops`](../regional/epo.md) (transitive).
 
-### What we CAN add as BYOK (queued)
+### Community validation needed
 
-- **`patent_client_agents.dpma_register`** — DPMAconnectPlus REST connector following the JPO / KIPO / TIPO / INPI France pattern. Env-gates MCP tools on `DPMA_CONNECTPLUS_USERNAME` + `DPMA_CONNECTPLUS_PASSWORD`; not exposed by the hosted demo. Three services × ~10 functions for patents, utility models, trademarks, and designs. Estimated ~3-5 days build per the BYOK rating memo. **Adds the only authoritative path to DE Gebrauchsmuster, national-only DE TMs, and national-only DE designs.** See [BACKLOG entry](../BACKLOG.md) row "DPMA contract re-read" for the queued spec.
+- A DPMAconnectPlus account holder should test the beta from its registered static IP. Sanitized XML samples are welcome if they contain no credentials, personal data, or confidential records.
+- Until that validation occurs, describe the connector as provisional or beta support. Do not call it production-ready or live-verified.
 
 ### What we should NOT add (and why)
 
@@ -139,9 +141,9 @@ contract) has its own separate access fee.
 
 ### Next steps
 
-1. Build `dpma_register` from [`specs/de-dpma-connector-spec.md`](../specs/de-dpma-connector-spec.md). Pattern: KIPO XML parsing, JPO two-credential env-gating, and Basic auth.
-2. Decide whether to record live cassettes (requires paying the EUR 200 connection fee + registering a fixed IP) or ship with synthesized fixtures (KIPO / INPI France precedent — live cassettes pending downstream-user credentials).
-3. Watch BPatG case-law coverage as a substantive-law expansion target — redistribution-clean and adds real value for DE IP litigation work.
+1. Seek live community validation without collecting or sharing credentials.
+2. Adjust XML field mappings only after sanitized real responses show a schema difference.
+3. Watch BPatG case-law coverage as a substantive-law expansion target.
 
 ## §6 Open questions
 
@@ -181,3 +183,4 @@ Primary sources only.
 | 2026-05-16 | Initial synopsis. Reconciled the original "Tier 2 paid+contract" framing — the actual blocker is **contract §3.2 (no third-party redistribution)**, not the EUR 200 cost. | [waves/2026-05-16-registered-ip-discovery/dpma-germany.md](../waves/2026-05-16-registered-ip-discovery/dpma-germany.md) |
 | 2026-05-18 | **BYOK unlock.** Contract re-read of the actual `standardvertrag_dpmaconnectplus.pdf` (Stand 01.04.2020) — earlier framing "§3.2 prohibits proxy use" was a misread of a clause that actually prohibits **rebroadcasting the data records**, with an explicit carve-out for purpose §3.1(b). Self-hosted per-user access by the contracting party is permitted; the older URL the synopsis cited (`dpmaconnectplusvertragsbedingungen.pdf`) 404s. Rating updated red_contract → yellow_byok; connector queued. | [waves/2026-05-18-priority-2-synopses/dpma-byok-rating.md](../waves/2026-05-18-priority-2-synopses/dpma-byok-rating.md) |
 | 2026-08-03 | Rechecked the service page, interface description, and standard contract. Corrected the design schema reference to ST.86 and promoted the connector to `spec_ready`. | [specs/de-dpma-connector-spec.md](../specs/de-dpma-connector-spec.md) |
+| 2026-08-03 | Shipped `dpma_register` as a beta with synthetic XML tests. Live DPMAconnectPlus compatibility remains unverified, and community validation is invited. | [`patent_client_agents.dpma_register`](../../src/patent_client_agents/dpma_register/) |

@@ -31,14 +31,14 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-08-03  # Promoted DPMA Germany to spec-ready
+last_updated: 2026-08-03  # Marked DPMA Germany shipped as mock-only beta
 
 stats:
   total_entities: 116
   synopses_filled: 41        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
-  connectors_shipped: 14
+  connectors_shipped: 15
   connectors_in_progress: 0
-  connectors_spec_ready: 1
+  connectors_spec_ready: 0
   connectors_planned: 4
   connectors_blocked: 0
   next_unblocked_synopses: 0
@@ -432,9 +432,13 @@ entities:
     connector_spec: specs/de-dpma-connector-spec.md
     rating: yellow_byok
     rating_basis: DPMAconnectPlus REST permits per-user self-hosted access — EUR 200 one-time Datenempfänger contract, fixed-IP Basic-auth credentials, no German residency required, EU-SCC auto-attached for non-EU recipients (§8). Prior red_contract reading misread §3.2 — the clause prohibits rebroadcasting data records (zero-infra proxy is barred), NOT self-hosted BYOK by the contracting party. Synopsis update + BACKLOG entry queued 2026-05-18. Statutes corpus already shipped separately.
-    connector_status: spec_ready
-    manifest_ids: [DE/DPMA/Statutes]
-    next_action: connector_build
+    connector_status: shipped
+    manifest_ids:
+      - DE/DPMA/Patents
+      - DE/DPMA/Trademarks
+      - DE/DPMA/Designs
+      - DE/DPMA/Statutes
+    next_action: none
     blocked_by: []
     last_verified: 2026-08-03
     notes: |
@@ -445,9 +449,11 @@ entities:
       synopsis's older citation of dpmaconnectplusvertragsbedingungen.pdf
       404s and needs to be corrected. DPMAregister UI + DEPATISnet
       remain 🔴 (5,000-hit/day per-IP cap, UI-shaped, no per-user
-      creds to gate on). Connector should follow the JPO/KIPO/INPI
-      France pattern: env-gate MCP tools on DPMA_CONNECTPLUS_USERNAME
-      + DPMA_CONNECTPLUS_PASSWORD; not exposed by hosted demo.
+      creds to gate on). The dpma_register connector ships as a beta
+      with six env-gated MCP tools. Tests use synthetic XML fixtures;
+      live account compatibility remains unverified. Community testing
+      and sanitized response samples are welcome. The hosted demo does
+      not expose this BYOK connector.
 
   - id: GB/UKIPO
     name: UKIPO United Kingdom

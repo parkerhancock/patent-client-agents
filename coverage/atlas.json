@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T14:55:05+00:00",
+  "generated_at": "2026-08-03T15:09:29+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 116,
@@ -13,8 +13,7 @@
     },
     "by_connector_status": {
       "skipped": 97,
-      "shipped": 14,
-      "spec_ready": 1,
+      "shipped": 15,
       "planned": 4
     },
     "by_region": {
@@ -924,7 +923,7 @@
       "rating_emoji": "\ud83d\udfe1",
       "rating_label": "Yellow \u2014 BYOK",
       "rating_basis": "DPMAconnectPlus REST permits per-user self-hosted access \u2014 EUR 200 one-time Datenempf\u00e4nger contract, fixed-IP Basic-auth credentials, no German residency required, EU-SCC auto-attached for non-EU recipients (\u00a78). Prior red_contract reading misread \u00a73.2 \u2014 the clause prohibits rebroadcasting data records (zero-infra proxy is barred), NOT self-hosted BYOK by the contracting party. Synopsis update + BACKLOG entry queued 2026-05-18. Statutes corpus already shipped separately.",
-      "connector_status": "spec_ready",
+      "connector_status": "shipped",
       "last_verified": "2026-08-03",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/de-dpma/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/de-dpma.md",
