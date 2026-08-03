@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info:PatentsUpdatedResponse xmlns:info="http://www.iponz.govt.nz/XMLSchema/patents/information">
+  <info:TransactionDateTime>2026-08-03T10:00:00Z</info:TransactionDateTime>
+  <info:PatentsUpdated>
+    <info:UpdatedDateRange><info:FromDate>2026-08-01</info:FromDate><info:ToDate>2026-08-03</info:ToDate></info:UpdatedDateRange>
+    <info:Patents>
+      <info:Patent><info:PatentNumber>765432</info:PatentNumber><info:PatentCurrentStatusCode>Granted</info:PatentCurrentStatusCode><info:FilingDate>2023-02-03</info:FilingDate></info:Patent>
+      <info:Patent><info:PatentNumber>765433</info:PatentNumber><info:PatentCurrentStatusCode>Pending</info:PatentCurrentStatusCode><info:FilingDate>2024-05-06</info:FilingDate></info:Patent>
+    </info:Patents>
+  </info:PatentsUpdated>
+</info:PatentsUpdatedResponse>

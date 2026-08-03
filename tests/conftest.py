@@ -69,6 +69,13 @@ os.environ.setdefault("DPMA_CONNECTPLUS_PASSWORD", "test_dpma_password")
 os.environ.setdefault("IPI_DATA_USERNAME", "test_ipi_user")
 os.environ.setdefault("IPI_DATA_PASSWORD", "test_ipi_password")
 
+# The OEPM, IPONZ, and Thailand DIP connectors use only synthetic contract
+# fixtures. Placeholders register their private BYOK tools for MCP tests.
+os.environ.setdefault("OEPM_CEO_USERNAME", "test_oepm_user")
+os.environ.setdefault("OEPM_CEO_PASSWORD", "test_oepm_password")
+os.environ.setdefault("IPONZ_SUBSCRIPTION_KEY", "test_iponz_key")
+os.environ.setdefault("DIP_DATA_EXCHANGE_TOKEN", "test_dip_token")
+
 # USITC EDIS MCP tools are env-gated on USITC_EDIS_TOKEN so the public
 # demo at mcp.patentclient.com advertises no ITC surface. The placeholder
 # below keeps them registered in-process so the USITC envelope and

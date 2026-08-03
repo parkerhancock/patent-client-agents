@@ -158,3 +158,6 @@ Specs in this folder (added as they're written):
 | [`fr-inpi-connector-spec.md`](fr-inpi-connector-spec.md) | INPI France — TM + Design (yellow BYOK) | 2026-05-16 | spec_ready |
 | [`de-dpma-connector-spec.md`](de-dpma-connector-spec.md) | DPMA Germany — DPMAconnectPlus (yellow BYOK) | 2026-08-03 | spec_ready |
 | [`ch-ipi-connector-spec.md`](ch-ipi-connector-spec.md) | Swiss IPI — datadelivery API (yellow BYOK) | 2026-08-03 | shipped beta |
+| [`es-oepm-connector-spec.md`](es-oepm-connector-spec.md) | OEPM Spain — CEO SOAP exact-file service (yellow BYOK) | 2026-08-03 | shipped beta |
+| [`nz-iponz-connector-spec.md`](nz-iponz-connector-spec.md) | IPONZ New Zealand — v5 API (yellow BYOK) | 2026-08-03 | shipped beta |
+| [`th-dip-connector-spec.md`](th-dip-connector-spec.md) | Thailand DIP — Data Exchange API (yellow BYOK) | 2026-08-03 | shipped beta |

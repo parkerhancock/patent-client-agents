@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-08-03T15:59:38+00:00",
+  "generated_at": "2026-08-03T19:30:30+00:00",
   "schema_version": 1,
   "summary": {
-    "total": 100,
+    "total": 111,
     "by_status": {
       "active": 92,
       "external": 2,
-      "beta": 6
+      "beta": 17
     },
     "active_jurisdictions": [
       "AU",
@@ -17,6 +17,7 @@
       "DE",
       "EM",
       "EP",
+      "ES",
       "FI",
       "FR",
       "GB",
@@ -24,8 +25,10 @@
       "IN",
       "JP",
       "KR",
+      "NZ",
       "SE",
       "SG",
+      "TH",
       "TR",
       "TW",
       "UP",
@@ -103,29 +106,29 @@
         "AU",
         "GB",
         "FR",
+        "ES",
         "SE",
         "CH",
         "TW",
-        "SG"
+        "SG",
+        "TH"
       ],
       "missing": [
         "MX",
         "RU",
         "IT",
-        "ES",
         "NL",
         "BE",
         "PL",
         "DK",
         "HK",
-        "TH",
         "MY",
         "PH",
         "VN",
         "ID",
         "KH"
       ],
-      "tracked_count": 15,
+      "tracked_count": 17,
       "total": 30,
       "source": "WIPO IP Statistics Data Center (https://www.wipo.int/ipstats/en/), WIPI 2024 report, 2023 filing data"
     }
@@ -326,6 +329,30 @@
       "status": "active",
       "sources": [
         "EP/EUIPO/Fees/Trademarks"
+      ]
+    },
+    {
+      "jurisdiction": "ES",
+      "right": "design",
+      "status": "beta",
+      "sources": [
+        "ES/OEPM/Designs"
+      ]
+    },
+    {
+      "jurisdiction": "ES",
+      "right": "patent",
+      "status": "beta",
+      "sources": [
+        "ES/OEPM/Patents"
+      ]
+    },
+    {
+      "jurisdiction": "ES",
+      "right": "trademark",
+      "status": "beta",
+      "sources": [
+        "ES/OEPM/Trademarks"
       ]
     },
     {
@@ -533,6 +560,30 @@
       ]
     },
     {
+      "jurisdiction": "NZ",
+      "right": "design",
+      "status": "beta",
+      "sources": [
+        "NZ/IPONZ/Designs"
+      ]
+    },
+    {
+      "jurisdiction": "NZ",
+      "right": "patent",
+      "status": "beta",
+      "sources": [
+        "NZ/IPONZ/Patents"
+      ]
+    },
+    {
+      "jurisdiction": "NZ",
+      "right": "trademark",
+      "status": "beta",
+      "sources": [
+        "NZ/IPONZ/Trademarks"
+      ]
+    },
+    {
       "jurisdiction": "SE",
       "right": "design",
       "status": "active",
@@ -590,6 +641,46 @@
       "sources": [
         "SG/IPOS/Statutes",
         "SG/IPOS/Manuals"
+      ]
+    },
+    {
+      "jurisdiction": "TH",
+      "right": "copyright",
+      "status": "beta",
+      "sources": [
+        "TH/DIP/Copyright"
+      ]
+    },
+    {
+      "jurisdiction": "TH",
+      "right": "design",
+      "status": "beta",
+      "sources": [
+        "TH/DIP/Designs"
+      ]
+    },
+    {
+      "jurisdiction": "TH",
+      "right": "gi",
+      "status": "beta",
+      "sources": [
+        "TH/DIP/GIs"
+      ]
+    },
+    {
+      "jurisdiction": "TH",
+      "right": "patent",
+      "status": "beta",
+      "sources": [
+        "TH/DIP/Patents"
+      ]
+    },
+    {
+      "jurisdiction": "TH",
+      "right": "trademark",
+      "status": "beta",
+      "sources": [
+        "TH/DIP/Trademarks"
       ]
     },
     {
@@ -2810,6 +2901,338 @@
       "category": "registered_ip",
       "transport": "mcp_proxy",
       "notes": "Locarno classification; ~34k national designs back to 1971. RCDs covered transitively via EUIPO. Hague IR coverage via WIPO Hague."
+    },
+    {
+      "id": "ES/OEPM/Patents",
+      "name": "OEPM Spain \u2014 Patents and Utility Models (CEO)",
+      "jurisdiction": "ES",
+      "wipo_st3_code": "ES",
+      "issuing_body": "Oficina Espa\u00f1ola de Patentes y Marcas",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "prosecution",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "account_required",
+        "auth_env": [
+          "OEPM_CEO_USERNAME",
+          "OEPM_CEO_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.oepm_spain"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Exact-file SOAP lookups only. Tested against the public CEO WSDL with synthetic XML fixtures; live account compatibility is unverified. Private BYOK only."
+    },
+    {
+      "id": "ES/OEPM/Trademarks",
+      "name": "OEPM Spain \u2014 Trademarks and Trade Names (CEO)",
+      "jurisdiction": "ES",
+      "wipo_st3_code": "ES",
+      "issuing_body": "Oficina Espa\u00f1ola de Patentes y Marcas",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "prosecution",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "account_required",
+        "auth_env": [
+          "OEPM_CEO_USERNAME",
+          "OEPM_CEO_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.oepm_spain"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Exact-file SOAP lookups only. Tested against the public CEO WSDL with synthetic XML fixtures; live account compatibility is unverified. Private BYOK only."
+    },
+    {
+      "id": "ES/OEPM/Designs",
+      "name": "OEPM Spain \u2014 Industrial Designs (CEO)",
+      "jurisdiction": "ES",
+      "wipo_st3_code": "ES",
+      "issuing_body": "Oficina Espa\u00f1ola de Patentes y Marcas",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "bibliographic",
+        "prosecution",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "account_required",
+        "auth_env": [
+          "OEPM_CEO_USERNAME",
+          "OEPM_CEO_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.oepm_spain"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Exact-file SOAP lookups only. Tested against the public CEO WSDL with synthetic XML fixtures; live account compatibility is unverified. Private BYOK only."
+    },
+    {
+      "id": "NZ/IPONZ/Patents",
+      "name": "IPONZ New Zealand \u2014 Patents",
+      "jurisdiction": "NZ",
+      "wipo_st3_code": "NZ",
+      "issuing_body": "Intellectual Property Office of New Zealand",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "full_text",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "api_key",
+        "auth_env": [
+          "IPONZ_SUBSCRIPTION_KEY"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.iponz_new_zealand"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Public OpenAPI and XSD-contract tested with synthetic XML fixtures; live MBIE subscription compatibility is unverified. Private BYOK only. Optional caller-supplied bearer tokens use IPONZ_ACCESS_TOKEN."
+    },
+    {
+      "id": "NZ/IPONZ/Trademarks",
+      "name": "IPONZ New Zealand \u2014 Trade Marks",
+      "jurisdiction": "NZ",
+      "wipo_st3_code": "NZ",
+      "issuing_body": "Intellectual Property Office of New Zealand",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "api_key",
+        "auth_env": [
+          "IPONZ_SUBSCRIPTION_KEY"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.iponz_new_zealand"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Public OpenAPI and XSD-contract tested with synthetic XML fixtures; live MBIE subscription compatibility is unverified. Private BYOK only. Optional caller-supplied bearer tokens use IPONZ_ACCESS_TOKEN."
+    },
+    {
+      "id": "NZ/IPONZ/Designs",
+      "name": "IPONZ New Zealand \u2014 Designs",
+      "jurisdiction": "NZ",
+      "wipo_st3_code": "NZ",
+      "issuing_body": "Intellectual Property Office of New Zealand",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "api_key",
+        "auth_env": [
+          "IPONZ_SUBSCRIPTION_KEY"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.iponz_new_zealand"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Public OpenAPI and XSD-contract tested with synthetic XML fixtures; live MBIE subscription compatibility is unverified. Private BYOK only. Optional caller-supplied bearer tokens use IPONZ_ACCESS_TOKEN."
+    },
+    {
+      "id": "TH/DIP/Patents",
+      "name": "Thailand DIP \u2014 Patents and Petty Patents",
+      "jurisdiction": "TH",
+      "wipo_st3_code": "TH",
+      "issuing_body": "Department of Intellectual Property, Thailand",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "full_text",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "api_key",
+        "auth_env": [
+          "DIP_DATA_EXCHANGE_TOKEN"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.thai_dip"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Tested with synthetic JSON fixtures derived from the official DIP Data Exchange catalogue; live account compatibility is unverified. The catalogue does not expose a usable OpenAPI document. Private BYOK only."
+    },
+    {
+      "id": "TH/DIP/Designs",
+      "name": "Thailand DIP \u2014 Design Patents",
+      "jurisdiction": "TH",
+      "wipo_st3_code": "TH",
+      "issuing_body": "Department of Intellectual Property, Thailand",
+      "rights": [
+        "design"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "api_key",
+        "auth_env": [
+          "DIP_DATA_EXCHANGE_TOKEN"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.thai_dip"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Tested with synthetic JSON fixtures derived from the official DIP Data Exchange catalogue; live account compatibility is unverified. The catalogue does not expose a usable OpenAPI document. Private BYOK only."
+    },
+    {
+      "id": "TH/DIP/Trademarks",
+      "name": "Thailand DIP \u2014 Trademarks",
+      "jurisdiction": "TH",
+      "wipo_st3_code": "TH",
+      "issuing_body": "Department of Intellectual Property, Thailand",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status",
+        "classification"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "api_key",
+        "auth_env": [
+          "DIP_DATA_EXCHANGE_TOKEN"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.thai_dip"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Tested with synthetic JSON fixtures derived from the official DIP Data Exchange catalogue; live account compatibility is unverified. The catalogue does not expose a usable OpenAPI document. Private BYOK only."
+    },
+    {
+      "id": "TH/DIP/Copyright",
+      "name": "Thailand DIP \u2014 Copyright Notifications and Music Copyright",
+      "jurisdiction": "TH",
+      "wipo_st3_code": "TH",
+      "issuing_body": "Department of Intellectual Property, Thailand",
+      "rights": [
+        "copyright"
+      ],
+      "data_types": [
+        "bibliographic"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "api_key",
+        "auth_env": [
+          "DIP_DATA_EXCHANGE_TOKEN"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.thai_dip"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Thailand uses a voluntary copyright notification dataset; this row does not imply constitutive registration. Tested with catalogue-derived synthetic fixtures; live compatibility is unverified. Private BYOK only."
+    },
+    {
+      "id": "TH/DIP/GIs",
+      "name": "Thailand DIP \u2014 Geographical Indications",
+      "jurisdiction": "TH",
+      "wipo_st3_code": "TH",
+      "issuing_body": "Department of Intellectual Property, Thailand",
+      "rights": [
+        "gi"
+      ],
+      "data_types": [
+        "bibliographic",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "api_key",
+        "auth_env": [
+          "DIP_DATA_EXCHANGE_TOKEN"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.thai_dip"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Tested with synthetic JSON fixtures derived from the official DIP Data Exchange catalogue; live account compatibility is unverified. The catalogue does not expose a usable OpenAPI document. Private BYOK only."
     },
     {
       "id": "US/USPTO/Fees/Patents",

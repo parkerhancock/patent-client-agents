@@ -40,20 +40,23 @@ from .tools.ip_australia_bulk import ip_australia_bulk_mcp
 from .tools.ip_australia_designs import ip_australia_designs_mcp
 from .tools.ip_australia_patents import ip_australia_patents_mcp
 from .tools.ip_australia_trademarks import ip_australia_trademarks_mcp
+from .tools.ipi_swissreg import ipi_swissreg_mcp
 from .tools.ipo_in_mppp import ipo_in_mppp_mcp
 from .tools.ipo_in_statutes import ipo_in_statutes_mcp
-from .tools.ipi_swissreg import ipi_swissreg_mcp
+from .tools.iponz_new_zealand import iponz_new_zealand_mcp
 from .tools.ipos import ipos_mcp
 from .tools.jpo import jpo_mcp
 from .tools.kipo_kipris import kipo_kipris_mcp
 from .tools.legifrance_ip import legifrance_ip_mcp
 from .tools.mpep import mpep_mcp
+from .tools.oepm_spain import oepm_spain_mcp
 from .tools.office_actions import office_actions_mcp
 from .tools.patent_assignments import patent_assignments_mcp
 from .tools.patents import patents_mcp
 from .tools.prh_fi import prh_fi_mcp
 from .tools.prv_se import prv_se_mcp
 from .tools.publications import publications_mcp
+from .tools.thai_dip import thai_dip_mcp
 from .tools.tipo_opdata import tipo_opdata_mcp
 from .tools.trademarks import trademarks_mcp
 from .tools.tw_trade_secrets import tw_trade_secrets_mcp
@@ -77,7 +80,7 @@ ip_mcp = FastMCP(
         "Community Designs — env-gated on EUIPO_CLIENT_ID / EUIPO_CLIENT_SECRET), "
         "and UPC (Unified Patent Court decisions/orders feed + corpus-backed "
         "UPCA / RoP / Fees statutes). 128 default read-only tools; up to "
-        "207 tools when every env-gated family is configured. Tools are grouped by intent."
+        "226 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
 
@@ -107,17 +110,20 @@ ip_mcp.mount(ip_australia_patents_mcp)
 ip_mcp.mount(ip_australia_trademarks_mcp)
 ip_mcp.mount(ip_australia_designs_mcp)
 ip_mcp.mount(ip_australia_bulk_mcp)
+ip_mcp.mount(iponz_new_zealand_mcp)
 ip_mcp.mount(ilpo_mcp)
 ip_mcp.mount(ipo_in_statutes_mcp)
 ip_mcp.mount(ipo_in_mppp_mcp)
 ip_mcp.mount(ipi_swissreg_mcp)
 ip_mcp.mount(ipos_mcp)
 ip_mcp.mount(inpi_pi_mcp)
+ip_mcp.mount(oepm_spain_mcp)
 ip_mcp.mount(dpma_statutes_mcp)
 ip_mcp.mount(dpma_register_mcp)
 ip_mcp.mount(prv_se_mcp)
 ip_mcp.mount(prh_fi_mcp)
 ip_mcp.mount(tipo_opdata_mcp)
+ip_mcp.mount(thai_dip_mcp)
 ip_mcp.mount(tw_trade_secrets_mcp)
 ip_mcp.mount(kipo_kipris_mcp)
 ip_mcp.mount(legifrance_ip_mcp)

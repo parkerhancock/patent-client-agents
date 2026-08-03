@@ -31,15 +31,15 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-08-03  # Shipped Swiss IPI as a schema-tested beta
+last_updated: 2026-08-03  # Shipped OEPM, IPONZ, and Thailand DIP BYOK betas
 
 stats:
   total_entities: 116
   synopses_filled: 41        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
-  connectors_shipped: 16
+  connectors_shipped: 19
   connectors_in_progress: 0
   connectors_spec_ready: 0
-  connectors_planned: 3
+  connectors_planned: 0
   connectors_blocked: 0
   next_unblocked_synopses: 0
   green_transitive_states: 67
@@ -911,23 +911,25 @@ entities:
     rights: [patent, trademark, design]
     synopsis: national/es-oepm.md
     detail_survey: null
-    connector_spec: null
+    connector_spec: specs/es-oepm-connector-spec.md
     rating: yellow_byok
     rating_basis: OEPM publishes 5 free SOAP/XML web services (INVENES + Diseños, CEO, CLINMAR, Localizador de marcas, BOPI-LOPD) requiring per-applicant credentials. WIPO ST.36/66/86 compliance (since 2019-01-01 for ST.36). Aviso legal explicitly permits commercial AND non-commercial reuse with attribution under Ley 37/2007 (EU Open Data Directive transposition).
-    connector_status: planned
-    manifest_ids: []
-    next_action: spec_writing
+    connector_status: shipped
+    manifest_ids:
+      - ES/OEPM/Patents
+      - ES/OEPM/Trademarks
+      - ES/OEPM/Designs
+    next_action: none
     blocked_by: []
-    last_verified: 2026-05-18
+    last_verified: 2026-08-03
     notes: |
       Synopsis 2026-05-18. Strongest standards posture + most
       permissive licence of the secondary-nationals wave. ES is
       non-UPC (the major EU holdout). JPO-shaped BYOK pattern.
-      Open question: shared-key permission — services are
-      credentialed, SOAP licence isn't separately published.
-      Submit acceso-a-servicios-web form with simultaneous
-      shared-key question; if permitted, rerate to
-      green-restricted (EPO-OPS shape).
+      The shipped beta exposes three exact-file CEO SOAP tools
+      for patents, trademarks, and designs. Public-WSDL contract
+      tests pass, but live account compatibility remains unverified.
+      Shared-key permission remains an open question.
 
   - id: IT/UIBM
     name: UIBM Italy
@@ -961,23 +963,26 @@ entities:
     rights: [patent, trademark, design]
     synopsis: national/nz-iponz.md
     detail_survey: null
-    connector_spec: null
+    connector_spec: specs/nz-iponz-connector-spec.md
     rating: yellow_byok
     rating_basis: v5 API on MBIE shared gateway at api.business.govt.nz/gateway/iponz/v5/; portal at portal.api.business.govt.nz/api/iponz. Every caller needs RealMe + MBIE subscription key + optional OAuth2 bearer. Chargeable ops require direct-debit/credit billing. IPONZ copyright statement carves the *registers* out of the otherwise-permissive Crown-copyright reuse grant.
-    connector_status: planned
-    manifest_ids: []
-    next_action: spec_writing
+    connector_status: shipped
+    manifest_ids:
+      - NZ/IPONZ/Patents
+      - NZ/IPONZ/Trademarks
+      - NZ/IPONZ/Designs
+    next_action: none
     blocked_by: []
-    last_verified: 2026-05-18
+    last_verified: 2026-08-03
     notes: |
       Synopsis 2026-05-18. Despite Trans-Tasman branding, IPONZ
       does NOT share IP Australia's OAuth2 infrastructure — IPONZ
       runs on MBIE Azure APIM (shared with NZBN/Companies/PPSR/
       Disclose); IP Australia runs on a separate OAuth2 server.
-      Zero credential reuse. Plan iponz_common + iponz_patents +
-      iponz_trademarks + iponz_designs mirroring the ip_australia_*
-      template. Env-gate on IPONZ_SUBSCRIPTION_KEY + optional
-      IPONZ_OAUTH_CLIENT_ID/SECRET. PVR + GI stay uncovered.
+      Zero credential reuse. The shipped beta uses the public v5
+      OpenAPI and XSD contracts for seven patent, trademark, and
+      design tools. It needs IPONZ_SUBSCRIPTION_KEY and accepts an
+      optional current IPONZ_ACCESS_TOKEN. PVR + GI stay uncovered.
 
   - id: ZA/CIPC
     name: CIPC South Africa
@@ -1037,17 +1042,22 @@ entities:
     name: DIP Thailand
     layer: national
     iso2: TH
-    rights: [patent, trademark, design]
+    rights: [patent, trademark, design, copyright, gi]
     synopsis: national/th-dip.md
     detail_survey: null
-    connector_spec: null
+    connector_spec: specs/th-dip-connector-spec.md
     rating: yellow_byok
     rating_basis: DIP Data Exchange platform at api.ipthailand.go.th/data-exchange/ catalogues 21 documented REST APIs across all six DIP rights (patents, petty patents, designs, TMs, copyright, music copyright, GI, statistics). Bearer-token auth via two-step paper-contract registration (DPMA / KIPO shape).
-    connector_status: planned
-    manifest_ids: []
-    next_action: spec_writing
+    connector_status: shipped
+    manifest_ids:
+      - TH/DIP/Patents
+      - TH/DIP/Designs
+      - TH/DIP/Trademarks
+      - TH/DIP/Copyright
+      - TH/DIP/GIs
+    next_action: none
     blocked_by: []
-    last_verified: 2026-05-18
+    last_verified: 2026-08-03
     notes: |
       Synopsis 2026-05-18. Unlike most SEA offices (ID/PH/SG all
       red register-side), DIP runs a real REST/JSON platform —
@@ -1057,8 +1067,9 @@ entities:
       1 TM-application search, 13 statistics views. Statutes-side
       🟢 green via www.ocs.go.th (formerly krisdika.go.th post-OCS
       rebrand). Hague accession in legislative pipeline but not
-      yet ratified. Build: DPMA-shaped Bearer auth + catalogue-
-      resolved per-API URL + JSON POST.
+      yet ratified. The shipped beta exposes nine Bearer-authenticated
+      tools across seven official catalogue datasets. Contract tests
+      use synthetic responses because live token access is pending.
 
   - id: PH/IPOPHL
     name: IPOPHL Philippines

@@ -54,6 +54,12 @@ src/
     jpo/                    # Japan Patent Office (needs JPO_API_USERNAME/PASSWORD)
     ipi_swissreg/           # Swiss IPI patents, TMs, SPCs, and publication notices.
                             #   Schema-tested BYOK beta; needs IPI_DATA_USERNAME/PASSWORD.
+    oepm_spain/             # Spain OEPM CEO exact-file SOAP register lookups.
+                            #   WSDL-tested BYOK beta; needs OEPM_CEO_USERNAME/PASSWORD.
+    iponz_new_zealand/      # New Zealand patents, TMs, and designs via MBIE IPONZ v5.
+                            #   Contract-tested BYOK beta; needs IPONZ_SUBSCRIPTION_KEY.
+    thai_dip/               # Thailand DIP Data Exchange registered-IP datasets.
+                            #   Catalogue-tested BYOK beta; needs DIP_DATA_EXCHANGE_TOKEN.
     kipo_kipris/            # KIPO Korea — KIPRIS Plus REST API for patents,
                             #   utility models, trademarks, designs.
                             #   BYOK per ToS §11; needs KIPO_KIPRIS_API_KEY.

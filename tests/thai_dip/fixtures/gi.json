@@ -1,0 +1,15 @@
+[
+  {
+    "APP_NO_NUMBER": 90001,
+    "REQUEST": "GI-250001",
+    "APPLICATIONNUMBER": "TH-GI-250001",
+    "APPLICATIONDATE": "2025-01-05",
+    "PUBLICATIONDATE": "2025-07-05",
+    "GINAME": "Synthetic Highland Rice",
+    "GIPRODUCT": "Rice",
+    "GICATEGORYNAME": "Agriculture",
+    "GITYPENAME": "Rice",
+    "PROVINCENAME": "Example Province",
+    "REGIONNAME": "North"
+  }
+]

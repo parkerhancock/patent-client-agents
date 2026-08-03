@@ -5,9 +5,9 @@
 **Issuing body:** Department of Intellectual Property (กรมทรัพย์สินทางปัญญา), Ministry of Commerce
 **Rights administered:** patent (invention), patent (petty / utility model), design, trademark, copyright, geographical_indication
 **Working languages:** Thai (primary), English (partial)
-**Connector status:** **planned (BYOK)** — DIP Data Exchange platform permits per-user/per-org self-hosted access via Bearer token issued through paper-contract registration
-**Last verified:** 2026-05-18
-**Manifest entry:** not yet listed (planned)
+**Connector status:** **beta (BYOK)** — implemented from DIP's public catalogue field contract; synthetic-fixture tested; live account compatibility unverified
+**Last verified:** 2026-08-03
+**Manifest entries:** `TH/DIP/Patents`, `TH/DIP/Designs`, `TH/DIP/Trademarks`, `TH/DIP/Copyright`, `TH/DIP/GIs`
 
 **Detail surveys:**
 - [`waves/2026-05-18-secondary-nationals-wave/th-dip.md`](../waves/2026-05-18-secondary-nationals-wave/th-dip.md) — 2026-05-18 grounded API discovery
@@ -90,9 +90,9 @@ DIP publishes fee schedules (in THB) for filing, examination, grant, opposition,
 - TH patents with EP/PCT counterparts via [`patent_client_agents.epo_ops`](../regional/epo.md) (transitive).
 - TH TMs via ASEAN TMview / WIPO Madrid Monitor (transitive).
 
-### What we should add (planned — BYOK)
+### What we added (beta — BYOK)
 
-- **`patent_client_agents.dip_register`** — DIP Data Exchange connector following the DPMA / KIPO BYOK pattern. Env-gates MCP tools on `DIP_DATA_EXCHANGE_TOKEN`; not exposed by the hosted demo. Covers patents, petty patents, designs, TMs, copyright, music copyright, GI, statistics. Estimated 4-6 days build given the catalogue-resolved per-API base URLs (portal-then-host indirection) and ASP.NET WebForms response shapes.
+- **`patent_client_agents.thai_dip`** — DIP Data Exchange connector following the DPMA / KIPO BYOK pattern. It env-gates nine MCP tools on `DIP_DATA_EXCHANGE_TOKEN` and is not exposed by the hosted demo. It covers invention patents, petty patents, design patents, trademarks, copyright notifications, music copyright, and geographical indications. The implementation uses the exact request examples and response fields published in DIP's catalogue. It is synthetic-fixture tested and live unverified. See [`specs/th-dip-connector-spec.md`](../specs/th-dip-connector-spec.md).
 - **`th_statutes`** — static-law SQLite/FTS5 corpus over `www.ocs.go.th` + WIPO Lex covering the six core TH IP statutes. Same pattern as `ipo_in_statutes` / `dpma_statutes` / `legifrance_ip` / `tw_trade_secrets`.
 
 ### What we should NOT add (and why)
@@ -103,8 +103,8 @@ DIP publishes fee schedules (in THB) for filing, examination, grant, opposition,
 ### Next steps
 
 1. Register on Data Exchange and send the paper request letter to the DIP ICT Center. No documented foreign-developer eligibility constraint, but bilingual TH/EN paperwork.
-2. Write `specs/th-dip-connector-spec.md`. Pattern: DPMA-shaped Bearer auth + catalogue-resolved per-API URL discovery + JSON POST request bodies + per-right response model.
-3. Decide whether to record live cassettes (requires the token) or ship with synthesized fixtures (KIPO / INPI France precedent).
+2. Run a private smoke test for all seven datasets with an approved token.
+3. Report sanitized response-shape differences without sharing tokens, personal data, protected works, or confidential records.
 
 ## §6 Open questions
 
@@ -138,4 +138,5 @@ Primary sources only.
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-08-03 | Implemented the BYOK connector with nine MCP tools over seven register datasets. The build uses DIP's public request examples and response field tables. It remains live unverified. | [DIP catalogue](https://api.ipthailand.go.th/data-exchange/view/home.aspx) · [`specs/th-dip-connector-spec.md`](../specs/th-dip-connector-spec.md) |
 | 2026-05-18 | Initial synopsis. Rating: yellow_byok. DIP runs a documented Bearer-token REST surface with 21 APIs across all six rights families; gate is paper-contract registration (DPMA / KIPO shape). Statutes-side is separately 🟢 green via `www.ocs.go.th` + WIPO Lex. | [waves/2026-05-18-secondary-nationals-wave/th-dip.md](../waves/2026-05-18-secondary-nationals-wave/th-dip.md) |

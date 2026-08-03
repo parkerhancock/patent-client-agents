@@ -1,0 +1,15 @@
+[
+  {
+    "REQ_NO": "250000001",
+    "REQ_DATE": "2025-01-02",
+    "REGIS_NO": "TH-90001",
+    "TR_NAME": "SYNTHETIC MARK",
+    "TRADEMARK_STATUS": "Registered",
+    "REGIS_DATE": "2025-06-03",
+    "PUBLIC_DATE": "2025-04-01",
+    "EXPIRE_DATE": "2035-06-03",
+    "OWNER_NAME": "Synthetic Owner Co.",
+    "NICE_CLASS_CODE": "42",
+    "NICE_CLASS_TNAME": "Technology services"
+  }
+]

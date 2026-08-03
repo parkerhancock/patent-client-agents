@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info:DesignInformationResponse
+    xmlns:info="http://www.iponz.govt.nz/XMLSchema/designs/information"
+    xmlns:ds="http://www.iponz.govt.nz/XMLSchema/designs">
+  <info:TransactionDateTime>2026-08-03T10:00:00Z</info:TransactionDateTime>
+  <info:DesignInformation>
+    <ds:Design>
+      <ds:DesignIdentifier>998877</ds:DesignIdentifier>
+      <ds:ApplicationDate>2023-06-01</ds:ApplicationDate>
+      <ds:RegistrationNumber>998877</ds:RegistrationNumber>
+      <ds:RegistrationDate>2024-01-15</ds:RegistrationDate>
+      <ds:DesignTitle>Necktie clasp</ds:DesignTitle>
+      <ds:NoveltyStatement>The shape shown in the representations.</ds:NoveltyStatement>
+      <ds:ExpiryDate>2039-01-15</ds:ExpiryDate>
+      <ds:DesignCurrentStatusCode>Registered</ds:DesignCurrentStatusCode>
+      <ds:DesignArticleDetails><ds:DesignArticle><ds:ArticleTitle>Clasp</ds:ArticleTitle></ds:DesignArticle></ds:DesignArticleDetails>
+      <ds:ApplicantDetails><ds:Applicant><ds:ApplicantAddressBook><ds:FormattedNameAddress><ds:Name><ds:FormattedName><ds:OrganizationName>Necktie Labs NZ Limited</ds:OrganizationName></ds:FormattedName></ds:Name><ds:Address><ds:FormattedAddress><ds:AddressLine>1 Test Street</ds:AddressLine></ds:FormattedAddress></ds:Address></ds:FormattedNameAddress></ds:ApplicantAddressBook></ds:Applicant></ds:ApplicantDetails>
+    </ds:Design>
+  </info:DesignInformation>
+</info:DesignInformationResponse>

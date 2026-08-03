@@ -5,9 +5,9 @@
 **Issuing body:** Oficina Española de Patentes y Marcas (Spanish Patent and Trade Mark Office, OEPM)
 **Rights administered:** patent, utility_model (*modelo de utilidad*), trademark, trade name (*nombre comercial*), industrial design (*diseño industrial*), supplementary protection certificate (SPC), semiconductor topography; Latipat coordination for 18 Latin American offices
 **Working languages:** Spanish (primary); English (institutional pages + EN versions of Sede electrónica + Opendata documentation); the BOPI gazette is Spanish-only
-**Connector status:** **register: planned (yellow — BYOK); fees: ready to build (green — consolidated PDF reachable, single-document extraction)**
-**Last verified:** 2026-05-19
-**Manifest entry:** not yet listed (planned)
+**Connector status:** **register: shipped beta (yellow — BYOK, CEO exact-file lookup); fees: ready to build (green — consolidated PDF reachable, single-document extraction)**
+**Last verified:** 2026-08-03
+**Manifest entries:** `ES/OEPM/Patents`, `ES/OEPM/Trademarks`, `ES/OEPM/Designs`
 
 **Detail surveys:**
 - [`waves/2026-05-18-secondary-nationals-wave/es-oepm.md`](../waves/2026-05-18-secondary-nationals-wave/es-oepm.md) — 2026-05-18 grounded API discovery
@@ -60,9 +60,9 @@ gazette in Spanish-language XML.
 
 | Field | Value |
 |---|---|
-| Endpoint | Five SOAP/XML services advertised at [`sede.oepm.gob.es/eSede/datos/es/servicios-web/`](https://sede.oepm.gob.es/eSede/datos/es/servicios-web/) — INVENES + Diseños, CEO, CLINMAR, Localizador de marcas, BOPI-LOPD-protected |
+| Endpoint | Five SOAP/XML services advertised at [`sede.oepm.gob.es/eSede/datos/es/servicios-web/`](https://sede.oepm.gob.es/eSede/datos/es/servicios-web/) — INVENES + Diseños, CEO, CLINMAR, Localizador de marcas, BOPI-LOPD-protected. The CEO WSDL is public at [`consultas2.oepm.es/ceo/WSDetalleExpedienteOEPM?wsdl`](https://consultas2.oepm.es/ceo/WSDetalleExpedienteOEPM?wsdl). |
 | Auth | **free username + password issued via [Formulario de acceso a servicios web](https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/acceso-a-servicios-web/)** — per-applicant; no OAuth, no shared-key option contemplated on the public form |
-| Format | SOAP/XML; per-service WSDL + PDF technical manual distributed to credentialed users (not on public web) |
+| Format | SOAP/XML. The CEO WSDL and specification PDF are public. Availability of the other current service contracts still needs verification. |
 | Rate limit | not published on public web; may be specified in per-service registered-user PDFs |
 | ToS posture | [Aviso legal Opendata OEPM](https://sede.oepm.gob.es/eSede/datos/es/aviso-legal/) at the Opendata layer permits commercial + non-commercial reuse with attribution; SOAP-service-specific licence not separately published on public web |
 | Rating (zero-infra proxy) | 🟡 **Yellow — BYOK** |
@@ -79,9 +79,10 @@ intercambio de datos entre aplicaciones." Per-service detail:
 - **Localizador de marcas** ([Sede ES](https://sede.oepm.gob.es/eSede/datos/es/servicios-web/localizador-de-marcas/)) — fielded TM/distinctive-sign search.
 - **Datos protegidos LOPD** ([form](https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/lopd/)) — personal-data-bearing BOPI / Opendata feeds, separate consent track.
 
-What pushes this to yellow rather than green: per-applicant credentials,
-WSDL behind registration wall, hosted-proxy posture not addressed by
-the public access form.
+What pushes this to yellow rather than green: per-applicant credentials and a
+hosted-proxy posture that the public access form does not address. The CEO WSDL
+and its embedded schemas are now anonymously reachable; live calls still need
+issued credentials.
 
 ### OEPM Opendata bulk catalogues
 
@@ -327,19 +328,16 @@ finalized). Current version: **1 April 2026.**
 - **Latipat patents** — transitively via EPO OPS through the Espacenet-Latipat interface.
 - **NOT covered: UPC.** Spain is not in the UPC system. ES patent disputes route through national civil courts only (out of scope for this connector layer).
 
-### What we should add (planned — yellow, BYOK)
+### What we ship (beta — yellow, BYOK)
 
-- **`patent_client_agents.oepm`** — JPO-shaped BYOK SOAP client. Per-user credentials obtained via the [acceso-a-servicios-web form](https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/acceso-a-servicios-web/). One client class per right modality:
-  - `OepmInvencionesClient` (INVENES + Diseños) — ES national patents, utility models, designs, Latipat.
-  - `OepmCeoClient` — file history across all modalities (the SITADEX successor).
-  - `OepmLocalizadorClient` — TM / distinctive sign search.
-  - `OepmClinmarClient` — Nice classification (low priority; EUIPO TMclass covers same).
+- **`patent_client_agents.oepm_spain`** — a hand-rolled SOAP client for the
+  public CEO WSDL. Three list-accepting tools fetch exact invention, trademark
+  or trade-name, and design file numbers. The fixtures derive from the embedded
+  WSDL schemas. Live account compatibility remains unverified.
 
-**Closes the ES-national-only patent + utility-model + TM + design + expediente + SPC gaps.**
-Estimated 1-2 weeks build once credentials are issued — SOAP via
-`zeep` if WSDLs ship to credentialed users, otherwise hand-rolled
-`lxml` clients. Response models derive from WIPO ST.36 / ST.66 / ST.86
-schemas (same standards as DPMA, EUIPO RCD bulk, and INPI designs).
+Search is absent by design. CEO exposes only `detalleExpedienteOEPM`. INVENES,
+the trademark locator, and CLINMAR are separate services whose current
+contracts need independent verification.
 
 ### What we should NOT add
 
@@ -351,18 +349,19 @@ schemas (same standards as DPMA, EUIPO RCD bulk, and INPI designs).
 
 ### Next steps
 
-1. **Submit the [acceso-a-servicios-web form](https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/acceso-a-servicios-web/)** identifying the project. In the same submission, request clarification on:
+1. **Submit the [acceso-a-servicios-web form](https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/acceso-a-servicios-web/)** identifying the project. Validate the beta CEO connector and request clarification on:
    - whether **shared-technical-account use** is permitted under the access conditions (would unlock hosted-proxy posture, similar to EPO OPS);
    - whether the per-service **WSDLs and technical PDFs** can be referenced in published documentation;
    - whether any **rate limits** or per-call quotas apply.
-2. **If shared-key permitted:** rerate to 🟢 green-restricted (similar to EPO OPS shape — shared key with attribution); build a hosted proxy.
-3. **If shared-key not permitted (likely):** treat as yellow_byok, build the per-user BYOK pattern uniformly with JPO and (planned) INPI BYOK paths.
-4. **Independent of credentials:** confirm ES utility model coverage depth in EPO INPADOC empirically — if INPADOC carries ES UMs at full fidelity, the priority of the INVENES SOAP client drops.
+2. Compare a sanitized live CEO response with the WSDL-derived fixtures.
+3. Verify the separate INVENES and trademark-locator contracts before adding search.
+4. Confirm ES utility model coverage depth in EPO INPADOC empirically.
 
 ## §6 Open questions
 
 - **Shared-key vs. per-user policy.** Direct enquiry to OEPM (`opendata@oepm.es` / [Sede contact](https://sede.oepm.gob.es/eSede/datos/es/contacto/)) needed. The acceso-a-servicios-web form is per-applicant; whether a project applicant can request a shared technical account is unstated.
-- **WSDL public availability.** Are the WSDL files downloadable post-registration from a known URL, or do they ship as PDF attachments to the credential-issue email?
+- **Other WSDL availability.** CEO is public. Confirm whether current INVENES,
+  design, trademark-locator, and CLINMAR WSDLs are also public and stable.
 - **Rate limits.** Not on public web. Per-service registered-user PDFs likely state — empirical probe after registration.
 - **Aviso legal applicability to credentialed SOAP services.** The Aviso legal is hosted on the Opendata section; whether the same redistribution permission applies to the credentialed SOAP layer is the gating legal question for any hosted-proxy posture.
 - **CEO vs. legacy SITADEX completeness.** Per [news article](https://oepm.es/es/detalle-noticia/La-aplicacion-de-Consulta-de-Situacion-de-Expedientes-SITADEX-seguira-actualizando-los-relativos-a-Signos-Distintivos-hasta-el-30-de-mayo-de-2017/), SITADEX was sunset 2017-05-30 for distinctive signs. The [datos.gob.es SITADEX dataset entry](https://datos.gob.es/en/catalogo/ea0038829-sitadex-base-de-datos-de-la-situacion-juridica-de-expedientes-de-la-oficina-espanola-de-patentes-y-marcas-oepm) is still indexed — confirm it points to CEO data or is dormant.
@@ -386,6 +385,8 @@ Primary sources only — `oepm.es`, `sede.oepm.gob.es`,
 - [SW Invenes and Designs — Sede (EN)](https://sede.oepm.gob.es/eSede/datos/en/servicios-web/invenes-y-disenos/)
 - [CEO web service (EN)](https://www.oepm.es/en/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/CEO/)
 - [CEO — Sede (EN)](https://sede.oepm.gob.es/eSede/datos/en/servicios-web/ceo/)
+- [CEO service specification PDF](https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/varios_todas_modalidades/Servicio_web_CEO_Especificacion_Servicios.pdf)
+- [Public CEO WSDL](https://consultas2.oepm.es/ceo/WSDetalleExpedienteOEPM?wsdl)
 - [CLINMAR web service (EN)](https://www.oepm.es/en/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/CLINMAR/)
 - [Localizador de marcas — Sede](https://sede.oepm.gob.es/eSede/datos/es/servicios-web/localizador-de-marcas/)
 - [LOPD form — protected BOPI / Opendata](https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/lopd/)
@@ -434,5 +435,6 @@ Primary sources only — `oepm.es`, `sede.oepm.gob.es`,
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-08-03 | Rechecked the official web-services page, CEO specification PDF, and live public WSDL. Added `oepm_spain` with three exact-file tools for inventions, trademarks and trade names, and designs. The connector is public-WSDL tested and live unverified. Search remains deferred because CEO exposes no search operation. | [`es-oepm-connector-spec.md`](../specs/es-oepm-connector-spec.md) |
 | 2026-05-19 | **Fees re-rated green → ready to build.** The earlier wave's "OEPM tasas page 410 Gone, BOE statutory route as backup" finding is partially superseded: it is true that `/en/tasas-y-precios-publicos/tasas-de-signos-distintivos/` and `/.../tasas-de-disenos-industriales/` both return 410 Gone, but OEPM publishes a **single consolidated PDF** covering every fee surface — patents / UM / SPCs / designs / TMs / trade names / semiconductor topographies / PCT national-phase / *precios públicos* — at [`oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf`](https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf), 670 KB / 17 pages, stamped "Actualizado a fecha: 1 de abril de 2026" on page 1. Parses cleanly with `pypdf`. Structure: dual-channel pricing (`MTnn`/`MEnn` for TMs non-electronic vs electronic with ~15% reduction; `ITnn`/`IEnn` for patents) with `(*)` asterisk on electronic keys flagging rows eligible for Ley 24/2015 art. 186 SME / individual-entrepreneur / public-university 50% reduction (separate from the 15% e-channel reduction — both can stack). Per-class TM structure (`1ª Clase` ~€150.45 paper / €127.88 electronic; `2ª Clase y cada sucesiva` ~€97.48 / €82.84). Statutory basis: Ley 24/2015 Annex (patents) + Ley 17/2001 Annex (TMs) + Ley 20/2003 (designs), with year-over-year amounts adjusted by the annual *Ley de Presupuestos Generales del Estado* (e.g., Ley 22/2021 art. 66 applied a 1% bump). Connector plan: `ES/OEPM/Fees/{Patent,UtilityModel,Design,Trademark,SPC,SemiconductorTopography,PrecioPublico}` — seven routes from one PDF. EP-validation rows tagged with `validation_track = "EP-ES"` (translation publication + ES annuities flow through OEPM; EPO grant fee is separate). Register-side rating (`yellow_byok`) unchanged. | This session; live probes 2026-05-19; [Consolidated PDF](https://www.oepm.es/export/sites/portal/comun/documentos_relacionados/PDF/TASAS_y_PRECIOS_PUBLICOS.pdf). |
 | 2026-05-18 | Initial synopsis; rating **`yellow_byok`**. Findings: (a) OEPM publishes a documented catalogue of five free SOAP/XML web services (INVENES + Diseños, CEO, CLINMAR, Localizador de marcas, BOPI-LOPD-protected) at [`sede.oepm.gob.es/eSede/datos/es/servicios-web/`](https://sede.oepm.gob.es/eSede/datos/es/servicios-web/), all gated by a per-applicant [acceso-a-servicios-web](https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/servicios-gratuitos/Servicios-web-de-la-OEPM/acceso-a-servicios-web/) form issuing free username/password credentials — JPO-shaped BYOK pattern; (b) parallel Opendata bulk distributions ship in **WIPO ST.36 (since 2019-01-01), ST.66, and ST.86** under a permissive [Aviso legal](https://sede.oepm.gob.es/eSede/datos/es/aviso-legal/) explicitly authorising commercial and non-commercial reuse with attribution, under the statutory cover of [Ley 37/2007](https://www.boe.es/buscar/act.php?id=BOE-A-2007-19814) transposing [EU Directive 2019/1024](https://eur-lex.europa.eu/eli/dir/2019/1024); (c) Spain is **NOT in the UPC system** per [Baker McKenzie 2026-02](https://www.bakermckenzie.com/en/insight/publications/2026/02/emea-upcs-long-arm-jurisdiction) — ES patent disputes route through national courts (`Tribunales de lo Mercantil de Madrid / Barcelona`) only; (d) ES national TMs and designs flow into TMview / DesignView through the EUIPN [CTI](https://www.euipn.org/bg/tools/Common-Tools-Integration-CTI) back-office bridge — the SOAP path adds full register-event fidelity beyond CTI's bibliographic slice; (e) [WIPO IP API Catalog](https://apicatalog.wipo.int/) returns 0 OEPM entries — services are undocumented from the canonical-inventory standpoint; (f) the OEPM web search UIs at `consultas2.oepm.es` are classical JSF/Struts2 server-rendered pages — unlike SE/PRV's SPA-on-undocumented-JSON pattern, the documented SOAP services are the intended programmatic path, not a reverse-engineerable JSON layer. Connector status: **planned (yellow — BYOK)**; queue `patent_client_agents.oepm` as a JPO-shaped client once credentials issued. Highest-priority gap closure: ES utility models, ES-national-only TMs / designs, and CEO file-history fidelity. | [waves/2026-05-18-secondary-nationals-wave/es-oepm.md](../waves/2026-05-18-secondary-nationals-wave/es-oepm.md) |

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info:PatentInformationResponse
+    xmlns:info="http://www.iponz.govt.nz/XMLSchema/patents/information"
+    xmlns:pat="http://www.iponz.govt.nz/XMLSchema/patents">
+  <info:TransactionDateTime>2026-08-03T10:00:00Z</info:TransactionDateTime>
+  <info:PatentInformation>
+    <pat:Patent>
+      <pat:PatentNumber>765432</pat:PatentNumber>
+      <pat:InternationalApplicationNumber>PCT/NZ2023/000001</pat:InternationalApplicationNumber>
+      <pat:WIPOPublicationNumber>WO2024000001</pat:WIPOPublicationNumber>
+      <pat:PatentCurrentStatusCode>Granted</pat:PatentCurrentStatusCode>
+      <pat:CompleteFiledDate>2023-02-03</pat:CompleteFiledDate>
+      <pat:NationalPhaseEntryDate>2024-01-12</pat:NationalPhaseEntryDate>
+      <pat:PublishedDate>2024-07-12</pat:PublishedDate>
+      <pat:GrantDate>2025-04-05</pat:GrantDate>
+      <pat:ExpiryDate>2043-02-03</pat:ExpiryDate>
+      <pat:PatentTitle>Adaptive necktie controller</pat:PatentTitle>
+      <pat:PatentAbstract>A synthetic schema test record.</pat:PatentAbstract>
+      <pat:ClassificationDetails>
+        <pat:Classification>
+          <pat:ClassificationKindCode>IPC</pat:ClassificationKindCode>
+          <pat:ClassDescriptionDetails><pat:ClassDescription>G06F 1/00</pat:ClassDescription></pat:ClassDescriptionDetails>
+        </pat:Classification>
+      </pat:ClassificationDetails>
+      <pat:ApplicantDetails>
+        <pat:Applicant>
+          <pat:ApplicantAddressBook>
+            <pat:FormattedNameAddress>
+              <pat:Name><pat:FormattedName><pat:OrganizationName>Necktie Labs NZ Limited</pat:OrganizationName></pat:FormattedName></pat:Name>
+              <pat:Address><pat:FormattedAddress><pat:AddressLine>1 Test Street</pat:AddressLine></pat:FormattedAddress></pat:Address>
+            </pat:FormattedNameAddress>
+          </pat:ApplicantAddressBook>
+        </pat:Applicant>
+      </pat:ApplicantDetails>
+      <pat:InventorDetails>
+        <pat:Inventor>
+          <pat:Name><pat:FormattedName><pat:PersonName><pat:FirstName>Aroha</pat:FirstName><pat:LastName>Ngata</pat:LastName></pat:PersonName></pat:FormattedName></pat:Name>
+        </pat:Inventor>
+      </pat:InventorDetails>
+    </pat:Patent>
+  </info:PatentInformation>
+</info:PatentInformationResponse>

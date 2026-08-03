@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:oepm="http://detalleExpOEPM.ws.ceo.oepm.es/">
+  <soap:Body>
+    <oepm:detalleExpedienteOEPMResponse>
+      <response>
+        <resultado><estado>0</estado><mensaje>OK</mensaje></resultado>
+        <datosBibliograficos>
+          <identificacion>
+            <numeroSolicitud>D0500000</numeroSolicitud>
+            <estado>VIGOR</estado>
+            <codigoEstado>01</codigoEstado>
+          </identificacion>
+          <detallesDiseno>
+            <numeroSolicitud>D0500000</numeroSolicitud>
+            <fechaSolicitud>20240102</fechaSolicitud>
+            <lugarPresentacion>Madrid</lugarPresentacion>
+            <fechaResolucion>2024-04-05</fechaResolucion>
+            <codigoEstado>CONCEDIDO</codigoEstado>
+            <fechaPublicacion>2024-05-06</fechaPublicacion>
+          </detallesDiseno>
+          <personas>
+            <solicitante><nombre>Necktie Labs, LLC</nombre></solicitante>
+            <creadores><creador>Carmen Creadora</creador></creadores>
+          </personas>
+        </datosBibliograficos>
+      </response>
+    </oepm:detalleExpedienteOEPMResponse>
+  </soap:Body>
+</soap:Envelope>

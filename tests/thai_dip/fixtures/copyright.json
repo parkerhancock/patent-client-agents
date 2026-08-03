@@ -1,0 +1,13 @@
+[
+  {
+    "REQUEST_NO": "CR-250001",
+    "SUBMIT_DATE": "2025-03-04",
+    "REGISTER_NO": 90001,
+    "WORK_NAME": "Synthetic handbook",
+    "CATEGORY": "Literary work",
+    "TYPENAME": "Book",
+    "OWNER_NAME": "Synthetic Owner",
+    "CREATOR_NAME": "Example Creator",
+    "WORK_DESCRIPTION": "Synthetic fixture description"
+  }
+]

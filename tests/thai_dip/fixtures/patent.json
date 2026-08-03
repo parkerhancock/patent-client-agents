@@ -1,0 +1,24 @@
+[
+  {
+    "APP_NO": "2501000001",
+    "REQ_PAT_TYPE": "1",
+    "PAT_TYPE_CHAR": "Patent",
+    "FILING_DATE": "15-01-2025",
+    "PUB_NO": "2501000001A",
+    "PATENT_NO": "90001",
+    "PATENT_NAME": "Synthetic water sensor",
+    "LATEST_STATUS": "Granted",
+    "APPLICANT": "Synthetic Applicant Co.",
+    "INV": "Example Inventor",
+    "AGE": "Example Agent",
+    "IPC": "G01N 1/00",
+    "APP_ABS": "Synthetic fixture abstract",
+    "PUBLIC_DATE": "2025-07-01",
+    "GRANT_DATE": "01-08-2025",
+    "FUTURE_FIELD": "preserved"
+  },
+  {
+    "APP_NO": "2501000002",
+    "PATENT_NAME": "Synthetic second sensor"
+  }
+]

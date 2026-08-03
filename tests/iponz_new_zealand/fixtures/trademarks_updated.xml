@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info:TradeMarksUpdatedResponse xmlns:info="http://www.iponz.govt.nz/XMLSchema/trademarks/information">
+  <info:TransactionDateTime>2026-08-03T10:00:00Z</info:TransactionDateTime>
+  <info:TradeMarksUpdated>
+    <info:UpdatedDateRange><info:FromDate>2026-08-01</info:FromDate><info:ToDate>2026-08-03</info:ToDate></info:UpdatedDateRange>
+    <info:TradeMarks>
+      <info:TradeMark><info:ApplicationNumber>1234567</info:ApplicationNumber><info:MarkCurrentStatusCode>Registered</info:MarkCurrentStatusCode><info:FilingDate>2023-03-04</info:FilingDate></info:TradeMark>
+    </info:TradeMarks>
+  </info:TradeMarksUpdated>
+</info:TradeMarksUpdatedResponse>

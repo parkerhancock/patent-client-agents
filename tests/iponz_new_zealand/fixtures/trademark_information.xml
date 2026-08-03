@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info:TradeMarkInformationResponse
+    xmlns:info="http://www.iponz.govt.nz/XMLSchema/trademarks/information"
+    xmlns:tm="http://www.iponz.govt.nz/XMLSchema/trademarks">
+  <info:TransactionDateTime>2026-08-03T10:00:00Z</info:TransactionDateTime>
+  <info:TradeMarkInformation>
+    <tm:TradeMark>
+      <tm:RegistrationOfficeCode>NZ</tm:RegistrationOfficeCode>
+      <tm:ApplicationNumber>1234567</tm:ApplicationNumber>
+      <tm:InternationalRegistrationNumber>IR987654</tm:InternationalRegistrationNumber>
+      <tm:ApplicationDate>2023-03-04</tm:ApplicationDate>
+      <tm:RegistrationNumber>1234567</tm:RegistrationNumber>
+      <tm:RegistrationDate>2024-02-01</tm:RegistrationDate>
+      <tm:ExpiryDate>2034-02-01</tm:ExpiryDate>
+      <tm:MarkCurrentStatusCode>Registered</tm:MarkCurrentStatusCode>
+      <tm:MarkTitle>NECKTIE LABS</tm:MarkTitle>
+      <tm:WordMarkDetails><tm:WordMarkSpecification><tm:MarkVerbalElementText>NECKTIE LABS</tm:MarkVerbalElementText></tm:WordMarkSpecification></tm:WordMarkDetails>
+      <tm:GoodsServicesDetails><tm:GoodsServices><tm:ClassDescriptionDetails><tm:ClassDescription><tm:ClassNumber>42</tm:ClassNumber><tm:GoodsServicesDescription>Software services.</tm:GoodsServicesDescription></tm:ClassDescription></tm:ClassDescriptionDetails></tm:GoodsServices></tm:GoodsServicesDetails>
+      <tm:ApplicantDetails><tm:Applicant><tm:ApplicantAddressBook><tm:FormattedNameAddress><tm:Name><tm:FormattedName><tm:OrganizationName>Necktie Labs NZ Limited</tm:OrganizationName></tm:FormattedName></tm:Name><tm:Address><tm:FormattedAddress><tm:AddressLine>1 Test Street</tm:AddressLine></tm:FormattedAddress></tm:Address></tm:FormattedNameAddress></tm:ApplicantAddressBook></tm:Applicant></tm:ApplicantDetails>
+    </tm:TradeMark>
+  </info:TradeMarkInformation>
+</info:TradeMarkInformationResponse>

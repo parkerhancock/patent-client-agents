@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info:PatentInformationResponse xmlns:info="http://www.iponz.govt.nz/XMLSchema/patents/information">
+  <info:TransactionDateTime>2026-08-03T10:00:00Z</info:TransactionDateTime>
+  <info:TransactionError>
+    <info:TransactionErrorCode>INVALID_CASE</info:TransactionErrorCode>
+    <info:TransactionErrorText>Invalid patent number</info:TransactionErrorText>
+  </info:TransactionError>
+</info:PatentInformationResponse>

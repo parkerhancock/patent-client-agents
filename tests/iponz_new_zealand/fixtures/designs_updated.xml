@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<info:DesignsUpdatedResponse xmlns:info="http://www.iponz.govt.nz/XMLSchema/designs/information">
+  <info:TransactionDateTime>2026-08-03T10:00:00Z</info:TransactionDateTime>
+  <info:DesignsUpdated>
+    <info:UpdatedDateRange><info:FromDate>2026-08-01</info:FromDate><info:ToDate>2026-08-03</info:ToDate></info:UpdatedDateRange>
+    <info:Designs>
+      <info:Design><info:RegistrationNumber>998877</info:RegistrationNumber><info:DesignCurrentStatusCode>Registered</info:DesignCurrentStatusCode><info:RegistrationDate>2024-01-15</info:RegistrationDate></info:Design>
+    </info:Designs>
+  </info:DesignsUpdated>
+</info:DesignsUpdatedResponse>

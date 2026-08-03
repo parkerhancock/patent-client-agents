@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T15:59:38+00:00",
+  "generated_at": "2026-08-03T19:30:30+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 116,
@@ -13,8 +13,7 @@
     },
     "by_connector_status": {
       "skipped": 97,
-      "shipped": 16,
-      "planned": 3
+      "shipped": 19
     },
     "by_region": {
       "multilateral": 6,
@@ -2068,11 +2067,61 @@
       "rating_emoji": "\ud83d\udfe1",
       "rating_label": "Yellow \u2014 BYOK",
       "rating_basis": "OEPM publishes 5 free SOAP/XML web services (INVENES + Dise\u00f1os, CEO, CLINMAR, Localizador de marcas, BOPI-LOPD) requiring per-applicant credentials. WIPO ST.36/66/86 compliance (since 2019-01-01 for ST.36). Aviso legal explicitly permits commercial AND non-commercial reuse with attribution under Ley 37/2007 (EU Open Data Directive transposition).",
-      "connector_status": "planned",
-      "last_verified": "2026-05-18",
+      "connector_status": "shipped",
+      "last_verified": "2026-08-03",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/es-oepm/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/es-oepm.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "ES/OEPM/Patents",
+          "name": "OEPM Spain \u2014 Patents and Utility Models (CEO)",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "prosecution",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "account_required",
+          "status": "beta",
+          "module": "patent_client_agents.oepm_spain"
+        },
+        {
+          "id": "ES/OEPM/Trademarks",
+          "name": "OEPM Spain \u2014 Trademarks and Trade Names (CEO)",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "prosecution",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "account_required",
+          "status": "beta",
+          "module": "patent_client_agents.oepm_spain"
+        },
+        {
+          "id": "ES/OEPM/Designs",
+          "name": "OEPM Spain \u2014 Industrial Designs (CEO)",
+          "rights": [
+            "design"
+          ],
+          "data_types": [
+            "bibliographic",
+            "prosecution",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "account_required",
+          "status": "beta",
+          "module": "patent_client_agents.oepm_spain"
+        }
+      ]
     },
     {
       "id": "IT/UIBM",
@@ -2110,11 +2159,60 @@
       "rating_emoji": "\ud83d\udfe1",
       "rating_label": "Yellow \u2014 BYOK",
       "rating_basis": "v5 API on MBIE shared gateway at api.business.govt.nz/gateway/iponz/v5/; portal at portal.api.business.govt.nz/api/iponz. Every caller needs RealMe + MBIE subscription key + optional OAuth2 bearer. Chargeable ops require direct-debit/credit billing. IPONZ copyright statement carves the *registers* out of the otherwise-permissive Crown-copyright reuse grant.",
-      "connector_status": "planned",
-      "last_verified": "2026-05-18",
+      "connector_status": "shipped",
+      "last_verified": "2026-08-03",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/nz-iponz/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/nz-iponz.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "NZ/IPONZ/Patents",
+          "name": "IPONZ New Zealand \u2014 Patents",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "full_text",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "api_key",
+          "status": "beta",
+          "module": "patent_client_agents.iponz_new_zealand"
+        },
+        {
+          "id": "NZ/IPONZ/Trademarks",
+          "name": "IPONZ New Zealand \u2014 Trade Marks",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "api_key",
+          "status": "beta",
+          "module": "patent_client_agents.iponz_new_zealand"
+        },
+        {
+          "id": "NZ/IPONZ/Designs",
+          "name": "IPONZ New Zealand \u2014 Designs",
+          "rights": [
+            "design"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "api_key",
+          "status": "beta",
+          "module": "patent_client_agents.iponz_new_zealand"
+        }
+      ]
     },
     {
       "id": "ZA/CIPC",
@@ -2168,17 +2266,98 @@
       "rights": [
         "patent",
         "trademark",
-        "design"
+        "design",
+        "copyright",
+        "gi"
       ],
       "rating": "yellow_byok",
       "rating_emoji": "\ud83d\udfe1",
       "rating_label": "Yellow \u2014 BYOK",
       "rating_basis": "DIP Data Exchange platform at api.ipthailand.go.th/data-exchange/ catalogues 21 documented REST APIs across all six DIP rights (patents, petty patents, designs, TMs, copyright, music copyright, GI, statistics). Bearer-token auth via two-step paper-contract registration (DPMA / KIPO shape).",
-      "connector_status": "planned",
-      "last_verified": "2026-05-18",
+      "connector_status": "shipped",
+      "last_verified": "2026-08-03",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/th-dip/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/th-dip.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "TH/DIP/Patents",
+          "name": "Thailand DIP \u2014 Patents and Petty Patents",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "full_text",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "api_key",
+          "status": "beta",
+          "module": "patent_client_agents.thai_dip"
+        },
+        {
+          "id": "TH/DIP/Designs",
+          "name": "Thailand DIP \u2014 Design Patents",
+          "rights": [
+            "design"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "api_key",
+          "status": "beta",
+          "module": "patent_client_agents.thai_dip"
+        },
+        {
+          "id": "TH/DIP/Trademarks",
+          "name": "Thailand DIP \u2014 Trademarks",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status",
+            "classification"
+          ],
+          "access_method": "rest_api",
+          "auth": "api_key",
+          "status": "beta",
+          "module": "patent_client_agents.thai_dip"
+        },
+        {
+          "id": "TH/DIP/Copyright",
+          "name": "Thailand DIP \u2014 Copyright Notifications and Music Copyright",
+          "rights": [
+            "copyright"
+          ],
+          "data_types": [
+            "bibliographic"
+          ],
+          "access_method": "rest_api",
+          "auth": "api_key",
+          "status": "beta",
+          "module": "patent_client_agents.thai_dip"
+        },
+        {
+          "id": "TH/DIP/GIs",
+          "name": "Thailand DIP \u2014 Geographical Indications",
+          "rights": [
+            "gi"
+          ],
+          "data_types": [
+            "bibliographic",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "api_key",
+          "status": "beta",
+          "module": "patent_client_agents.thai_dip"
+        }
+      ]
     },
     {
       "id": "PH/IPOPHL",

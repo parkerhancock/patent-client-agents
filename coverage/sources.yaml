@@ -1623,6 +1623,227 @@ sources:
       WIPO Hague.
 
   # ────────────────────────────────────────────────────────────────────
+  # ES — OEPM Spain CEO register service
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: ES/OEPM/Patents
+    name: OEPM Spain — Patents and Utility Models (CEO)
+    jurisdiction: ES
+    wipo_st3_code: ES
+    issuing_body: Oficina Española de Patentes y Marcas
+    rights: [patent]
+    data_types: [bibliographic, prosecution, legal_status]
+    access:
+      method: rest_api
+      auth: account_required
+      auth_env: [OEPM_CEO_USERNAME, OEPM_CEO_PASSWORD]
+    status: beta
+    connector:
+      module: patent_client_agents.oepm_spain
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Exact-file SOAP lookups only. Tested against the public CEO WSDL with synthetic XML fixtures; live account compatibility is unverified. Private BYOK only.
+
+  - id: ES/OEPM/Trademarks
+    name: OEPM Spain — Trademarks and Trade Names (CEO)
+    jurisdiction: ES
+    wipo_st3_code: ES
+    issuing_body: Oficina Española de Patentes y Marcas
+    rights: [trademark]
+    data_types: [bibliographic, prosecution, legal_status, classification]
+    access:
+      method: rest_api
+      auth: account_required
+      auth_env: [OEPM_CEO_USERNAME, OEPM_CEO_PASSWORD]
+    status: beta
+    connector:
+      module: patent_client_agents.oepm_spain
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Exact-file SOAP lookups only. Tested against the public CEO WSDL with synthetic XML fixtures; live account compatibility is unverified. Private BYOK only.
+
+  - id: ES/OEPM/Designs
+    name: OEPM Spain — Industrial Designs (CEO)
+    jurisdiction: ES
+    wipo_st3_code: ES
+    issuing_body: Oficina Española de Patentes y Marcas
+    rights: [design]
+    data_types: [bibliographic, prosecution, legal_status]
+    access:
+      method: rest_api
+      auth: account_required
+      auth_env: [OEPM_CEO_USERNAME, OEPM_CEO_PASSWORD]
+    status: beta
+    connector:
+      module: patent_client_agents.oepm_spain
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Exact-file SOAP lookups only. Tested against the public CEO WSDL with synthetic XML fixtures; live account compatibility is unverified. Private BYOK only.
+
+  # ────────────────────────────────────────────────────────────────────
+  # NZ — Intellectual Property Office of New Zealand v5 API
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: NZ/IPONZ/Patents
+    name: IPONZ New Zealand — Patents
+    jurisdiction: NZ
+    wipo_st3_code: NZ
+    issuing_body: Intellectual Property Office of New Zealand
+    rights: [patent]
+    data_types: [bibliographic, full_text, legal_status, classification]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [IPONZ_SUBSCRIPTION_KEY]
+    status: beta
+    connector:
+      module: patent_client_agents.iponz_new_zealand
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Public OpenAPI and XSD-contract tested with synthetic XML fixtures; live MBIE subscription compatibility is unverified. Private BYOK only. Optional caller-supplied bearer tokens use IPONZ_ACCESS_TOKEN.
+
+  - id: NZ/IPONZ/Trademarks
+    name: IPONZ New Zealand — Trade Marks
+    jurisdiction: NZ
+    wipo_st3_code: NZ
+    issuing_body: Intellectual Property Office of New Zealand
+    rights: [trademark]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [IPONZ_SUBSCRIPTION_KEY]
+    status: beta
+    connector:
+      module: patent_client_agents.iponz_new_zealand
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Public OpenAPI and XSD-contract tested with synthetic XML fixtures; live MBIE subscription compatibility is unverified. Private BYOK only. Optional caller-supplied bearer tokens use IPONZ_ACCESS_TOKEN.
+
+  - id: NZ/IPONZ/Designs
+    name: IPONZ New Zealand — Designs
+    jurisdiction: NZ
+    wipo_st3_code: NZ
+    issuing_body: Intellectual Property Office of New Zealand
+    rights: [design]
+    data_types: [bibliographic, legal_status]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [IPONZ_SUBSCRIPTION_KEY]
+    status: beta
+    connector:
+      module: patent_client_agents.iponz_new_zealand
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Public OpenAPI and XSD-contract tested with synthetic XML fixtures; live MBIE subscription compatibility is unverified. Private BYOK only. Optional caller-supplied bearer tokens use IPONZ_ACCESS_TOKEN.
+
+  # ────────────────────────────────────────────────────────────────────
+  # TH — Department of Intellectual Property Data Exchange
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: TH/DIP/Patents
+    name: Thailand DIP — Patents and Petty Patents
+    jurisdiction: TH
+    wipo_st3_code: TH
+    issuing_body: Department of Intellectual Property, Thailand
+    rights: [patent]
+    data_types: [bibliographic, full_text, legal_status, classification]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [DIP_DATA_EXCHANGE_TOKEN]
+    status: beta
+    connector:
+      module: patent_client_agents.thai_dip
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Tested with synthetic JSON fixtures derived from the official DIP Data Exchange catalogue; live account compatibility is unverified. The catalogue does not expose a usable OpenAPI document. Private BYOK only.
+
+  - id: TH/DIP/Designs
+    name: Thailand DIP — Design Patents
+    jurisdiction: TH
+    wipo_st3_code: TH
+    issuing_body: Department of Intellectual Property, Thailand
+    rights: [design]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [DIP_DATA_EXCHANGE_TOKEN]
+    status: beta
+    connector:
+      module: patent_client_agents.thai_dip
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Tested with synthetic JSON fixtures derived from the official DIP Data Exchange catalogue; live account compatibility is unverified. The catalogue does not expose a usable OpenAPI document. Private BYOK only.
+
+  - id: TH/DIP/Trademarks
+    name: Thailand DIP — Trademarks
+    jurisdiction: TH
+    wipo_st3_code: TH
+    issuing_body: Department of Intellectual Property, Thailand
+    rights: [trademark]
+    data_types: [bibliographic, legal_status, classification]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [DIP_DATA_EXCHANGE_TOKEN]
+    status: beta
+    connector:
+      module: patent_client_agents.thai_dip
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Tested with synthetic JSON fixtures derived from the official DIP Data Exchange catalogue; live account compatibility is unverified. The catalogue does not expose a usable OpenAPI document. Private BYOK only.
+
+  - id: TH/DIP/Copyright
+    name: Thailand DIP — Copyright Notifications and Music Copyright
+    jurisdiction: TH
+    wipo_st3_code: TH
+    issuing_body: Department of Intellectual Property, Thailand
+    rights: [copyright]
+    data_types: [bibliographic]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [DIP_DATA_EXCHANGE_TOKEN]
+    status: beta
+    connector:
+      module: patent_client_agents.thai_dip
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Thailand uses a voluntary copyright notification dataset; this row does not imply constitutive registration. Tested with catalogue-derived synthetic fixtures; live compatibility is unverified. Private BYOK only.
+
+  - id: TH/DIP/GIs
+    name: Thailand DIP — Geographical Indications
+    jurisdiction: TH
+    wipo_st3_code: TH
+    issuing_body: Department of Intellectual Property, Thailand
+    rights: [gi]
+    data_types: [bibliographic, legal_status]
+    access:
+      method: rest_api
+      auth: api_key
+      auth_env: [DIP_DATA_EXCHANGE_TOKEN]
+    status: beta
+    connector:
+      module: patent_client_agents.thai_dip
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Tested with synthetic JSON fixtures derived from the official DIP Data Exchange catalogue; live account compatibility is unverified. The catalogue does not expose a usable OpenAPI document. Private BYOK only.
+
+  # ────────────────────────────────────────────────────────────────────
   # IP-office fee schedules — live-fetch with 7-day hishel cache
   # ────────────────────────────────────────────────────────────────────
   # Substantive-law category because schedules are set by statute /

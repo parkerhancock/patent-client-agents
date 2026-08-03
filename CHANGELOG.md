@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Added three private BYOK connector families in parallel: `oepm_spain` with
+  three exact-file CEO SOAP tools, `iponz_new_zealand` with seven patent,
+  trade-mark, and design tools, and `thai_dip` with nine tools across seven
+  official Data Exchange datasets. All three are contract-tested betas with
+  live subscriber validation pending.
 - Added the `ipi_swissreg` connector with eight env-gated Swiss IPI tools for
   patents, patent publications, national trademarks, SPCs, and SPC publications.
   The beta connector is tested against synthetic XML fixtures derived from the

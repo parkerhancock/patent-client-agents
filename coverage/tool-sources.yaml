@@ -43,8 +43,12 @@ groups:
     connector_modules: [patent_client_agents.inpi_br_statutes]
   - server: inpi_pi_mcp
     connector_modules: [patent_client_agents.inpi_pi]
+  - server: iponz_new_zealand_mcp
+    connector_modules: [patent_client_agents.iponz_new_zealand]
   - server: ipi_swissreg_mcp
     connector_modules: [patent_client_agents.ipi_swissreg]
+  - server: oepm_spain_mcp
+    connector_modules: [patent_client_agents.oepm_spain]
   - server: ip_australia_bulk_mcp
     connector_modules: [patent_client_agents.ip_australia_bulk]
   - server: ip_australia_designs_mcp
@@ -79,6 +83,8 @@ groups:
     connector_modules: [patent_client_agents.uspto_publications]
   - server: tipo_opdata_mcp
     connector_modules: [patent_client_agents.tipo_opdata]
+  - server: thai_dip_mcp
+    connector_modules: [patent_client_agents.thai_dip]
   - server: tw_trade_secrets_mcp
     connector_modules: [patent_client_agents.tw_trade_secrets]
   - server: ukipo_mopp_mcp

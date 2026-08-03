@@ -1,0 +1,13 @@
+[
+  {
+    "PKID": 90001,
+    "ID": "S-90001",
+    "REG_SONGS_NAME": "Synthetic melody",
+    "ALBUM_NAME": "Fixture album",
+    "LYRIC_AUTHOR_NAME": "Example Lyricist",
+    "COMPOSE_AUTHOR_NAME": "Example Composer",
+    "SONG_TYPE": "Pop",
+    "LICENSE_OWNER_NAME": "Synthetic Music Co.",
+    "LICENSE_TERMINATION_DATE": "2030-01-01"
+  }
+]

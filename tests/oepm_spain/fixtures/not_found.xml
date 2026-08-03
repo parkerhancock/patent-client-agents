@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:oepm="http://detalleExpOEPM.ws.ceo.oepm.es/">
+  <soap:Body><oepm:detalleExpedienteOEPMResponse><response>
+    <resultado><estado>-3</estado><mensaje>Expediente no encontrado</mensaje></resultado>
+  </response></oepm:detalleExpedienteOEPMResponse></soap:Body>
+</soap:Envelope>

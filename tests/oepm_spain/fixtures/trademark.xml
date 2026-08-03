@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:oepm="http://detalleExpOEPM.ws.ceo.oepm.es/">
+  <soap:Body>
+    <oepm:detalleExpedienteOEPMResponse>
+      <response>
+        <resultado><estado>0</estado><mensaje>OK</mensaje></resultado>
+        <datosBibliograficos>
+          <identificacion>
+            <numeroSolicitud>M4000000</numeroSolicitud>
+            <denominacion>NECKTIE</denominacion>
+            <tipoMarca>D_DENOMINATIVO</tipoMarca>
+            <estado>VIGOR</estado>
+            <codigoEstado>02</codigoEstado>
+            <imagen>https://consultas2.oepm.es/mock/mark.png</imagen>
+          </identificacion>
+          <personas>
+            <solicitante><nombre>Necktie Labs</nombre></solicitante>
+            <titular><nombre>Necktie Labs, LLC</nombre></titular>
+          </personas>
+          <detallesMarca>
+            <fechaSolicitud>02/01/2024</fechaSolicitud>
+            <fechaPublicacion>2024-03-04</fechaPublicacion>
+            <fechaProxRenova>2034-01-02</fechaProxRenova>
+            <visible>true</visible>
+          </detallesMarca>
+          <clases>
+            <clasificacionViena>
+              <claseViena><categoria>27</categoria><division>05</division><seccion>01</seccion></claseViena>
+            </clasificacionViena>
+            <clasesSolicitadas>
+              <claseNiza><codigoClase>42</codigoClase><productos>Servicios de software</productos></claseNiza>
+              <claseNiza><codigoClase>9</codigoClase><productos>Software</productos></claseNiza>
+            </clasesSolicitadas>
+          </clases>
+        </datosBibliograficos>
+      </response>
+    </oepm:detalleExpedienteOEPMResponse>
+  </soap:Body>
+</soap:Envelope>

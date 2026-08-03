@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:oepm="http://detalleExpOEPM.ws.ceo.oepm.es/">
+  <soap:Body>
+    <oepm:detalleExpedienteOEPMResponse>
+      <response>
+        <resultado><estado>0</estado><mensaje>OK</mensaje></resultado>
+        <datosBibliograficos>
+          <identificacion>
+            <numeroSolicitud>P202400001</numeroSolicitud>
+            <estado>VIGOR</estado>
+            <codigoEstado>01</codigoEstado>
+          </identificacion>
+          <detallesInvencion>
+            <numeroSolicitud>P202400001</numeroSolicitud>
+            <fechaPresentacion>2024-01-02</fechaPresentacion>
+            <numeroPrioridad>EP23123456</numeroPrioridad>
+            <fechaPrioridad>2023-02-03</fechaPrioridad>
+            <numeroPublicacion>ES3000001</numeroPublicacion>
+            <numeroPublicacionOEP>EP4000001</numeroPublicacionOEP>
+            <numeroPublicacionPCT>WO2024000001</numeroPublicacionPCT>
+            <fechaPublicacion>2024-07-15</fechaPublicacion>
+            <fechaConcesion>2025-05-06</fechaConcesion>
+            <titulo>Controlador adaptativo</titulo>
+            <estado>EN VIGOR</estado>
+            <publicable>true</publicable>
+          </detallesInvencion>
+          <personas>
+            <solicitante><nombre>Necktie Labs</nombre></solicitante>
+            <titular><nombre>Necktie Labs</nombre><apellidos>LLC</apellidos></titular>
+            <inventores><inventor>Ana Inventora</inventor></inventores>
+            <representante><nombre>Rosa</nombre><apellidos>Representante</apellidos></representante>
+          </personas>
+          <extensionFutura><dato>preservar</dato></extensionFutura>
+        </datosBibliograficos>
+        <actosTramitacion>
+          <actoTramitacion><fecha>2024-07-15</fecha><descripcion>Publicación</descripcion></actoTramitacion>
+        </actosTramitacion>
+      </response>
+    </oepm:detalleExpedienteOEPMResponse>
+  </soap:Body>
+</soap:Envelope>

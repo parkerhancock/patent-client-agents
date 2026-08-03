@@ -5,9 +5,9 @@
 **Issuing body:** Intellectual Property Office of New Zealand (IPONZ), a business unit of the Ministry of Business, Innovation and Employment (MBIE)
 **Rights administered:** patent, trademark, design, plant_variety, geographical_indication
 **Working languages:** English
-**Connector status:** **planned (yellow — BYOK, well-documented)**
-**Last verified:** 2026-05-18
-**Manifest entry:** not yet listed (planned)
+**Connector status:** **shipped beta (yellow — BYOK, public-contract tested; live subscription unverified)**
+**Last verified:** 2026-08-03
+**Manifest entries:** `NZ/IPONZ/Patents`, `NZ/IPONZ/Trademarks`, `NZ/IPONZ/Designs`
 
 **Detail surveys:**
 - [`waves/2026-05-18-secondary-nationals-wave/nz-iponz.md`](../waves/2026-05-18-secondary-nationals-wave/nz-iponz.md) — 2026-05-18 grounded API discovery
@@ -72,8 +72,8 @@ explicit sandbox tier.
 
 | Field | Value |
 |---|---|
-| Endpoint (prod) | `https://api.business.govt.nz/gateway/iponz/v5/` |
-| Endpoint (sandbox) | `https://api.business.govt.nz/sandbox/iponz/…` |
+| Endpoint (prod) | `https://api.business.govt.nz/gateway/intellectual-property-office-nz/v5/` |
+| Endpoint (sandbox) | `https://api.business.govt.nz/sandbox/intellectual-property-office-nz/v5/` |
 | Developer portal | [`portal.api.business.govt.nz/api/iponz`](https://portal.api.business.govt.nz/api/iponz) |
 | Auth | RealMe login → MBIE subscription key + optional OAuth2 bearer; chargeable operations require a registered IPONZ user with direct-debit/credit billing |
 | Format | REST + JSON (search, renewals, public-data); SOAP + XML (document retrieval, application submit, correspondence) |
@@ -173,24 +173,24 @@ policy)*:
   PATENTSCOPE coverage.
 - **Trans-Tasman attorney register data** — out of scope for
   subject-matter IP coverage.
-- **Nothing direct** — IPONZ has no shipped connector and IP
-  Australia coverage does *not* cross the Tasman.
+- **Direct IPONZ beta connector** — seven read-only tools retrieve
+  patent, trade mark, and design details and date-range change lists.
+  The connector uses each caller's MBIE subscription key. It is tested
+  against the public OpenAPI definition and official XSDs, but not a
+  live subscription.
 
-### What we should add (planned — yellow, BYOK)
+### What we added (shipped beta — yellow, BYOK)
 
-- **`patent_client_agents.iponz`** — env-gated BYOK connector
-  against the MBIE-gateway v5 surface. Pattern: mirror the shipped
-  `ip_australia_*` template. Initial scope:
-  - `iponz_common` — shared MBIE-gateway scaffold (subscription
-    key + optional OAuth2 bearer; sandbox vs prod base URL toggle).
-  - `iponz_patents` — `POST /patentsearch`, case-number lookup,
-    "updated since" delta sync, document retrieval (SOAP).
-  - `iponz_trademarks` — `POST /trademarksearch` (≤2,000 hits),
-    case lookup, delta sync. Carries both national and IR
-    designations.
-  - `iponz_designs` — analogous search + lookup + retrieval.
-  - Env gates: `IPONZ_SUBSCRIPTION_KEY` + optional
-    `IPONZ_OAUTH_CLIENT_ID` / `IPONZ_OAUTH_CLIENT_SECRET`.
+- **`patent_client_agents.iponz_new_zealand`** — one env-gated BYOK
+  package for the MBIE v5 surface. `IPONZ_SUBSCRIPTION_KEY` is the
+  required gate. `IPONZ_ENV=sandbox` selects the sandbox. A caller may
+  provide an optional current bearer token through
+  `IPONZ_ACCESS_TOKEN`.
+- **Patent operations** — detail lookup and updated date-range list.
+- **Trade mark operations** — detail lookup and updated date-range list.
+- **Design operations** — detail lookup, updated list, and registered list.
+- **Safety boundary** — no renewals, applications, correspondence, fee
+  checks, or document downloads.
 
 **Closes the entire NZ patent / TM / design coverage gap.** The
 unique value: there is no upstream substitute for NZ patents (no EPC
@@ -220,25 +220,10 @@ the IR-designation slice of TMs.
 
 ### Next steps
 
-1. **Subscribe to the IPONZ API Product** under a project RealMe
-   identity to obtain a sandbox subscription key. The MBIE API
-   support team may request "further information" before approval
-   — be transparent that this is for a hosted research-tooling
-   layer with end-users supplying their own future credentials.
-2. **Download the v5 OpenAPI spec + data-dictionary PDFs** from
-   the portal once subscribed, and persist them in
-   `research/openapi/iponz-v5.json` (or the equivalent).
-3. **Probe the sandbox** end-to-end on patent / TM / design search
-   + case lookup + delta-sync + document retrieval, confirming
-   actual quota and pagination behaviour.
-4. **Write `specs/nz-iponz-connector-spec.md`** following the
-   `ip_australia_*` template — env-gated tools, sandbox/prod
-   toggle, shared `iponz_common` scaffold, polite caching (5 min
-   for status, 24 h for record bodies), retry on Azure APIM 429s.
-5. **Open question to clarify with IPONZ support** — whether a
-   "public-data-only" subscription tier exists that we can offer
-   to end-users without the direct-debit billing requirement
-   (chargeable operations would be out of scope for the proxy).
+1. Obtain an approved sandbox subscription and run the seven read-only tools.
+2. Confirm quota behavior and whether list responses can exceed practical payload limits.
+3. Submit sanitized contract differences without credentials or private records.
+4. Revisit SOAP trade mark search only after sandbox response behavior is confirmed.
 
 ## §6 Open questions
 
@@ -325,4 +310,5 @@ Primary sources only — `iponz.govt.nz`, `mbie.govt.nz`,
 
 | Date | Change | Source |
 |---|---|---|
+| 2026-08-03 | Shipped the schema-backed `iponz_new_zealand` beta connector with seven read-only tools. The implementation uses the public v5 OpenAPI export and official patent, trade mark, and design XSD bundles. All synthetic fixtures validate against those XSDs. Live subscription validation remains pending. | [`specs/nz-iponz-connector-spec.md`](../specs/nz-iponz-connector-spec.md) |
 | 2026-05-18 | Initial synopsis; rating **`yellow_byok`**. Findings: (a) IPONZ ships a documented, versioned **v5 API** on the **MBIE shared API gateway** at [`api.business.govt.nz/gateway/iponz/v5/`](https://portal.api.business.govt.nz/api/iponz) (sandbox: `…/sandbox/iponz/…`) with portal at [`portal.api.business.govt.nz/api/iponz`](https://portal.api.business.govt.nz/api/iponz), covering patents, trade marks, and designs through REST/JSON + legacy SOAP/XML; (b) authentication is per-user — RealMe login → MBIE subscription key → optional OAuth2 bearer, with chargeable operations gated on a registered-IPONZ-user direct-debit/credit arrangement; (c) v5 PDF data dictionaries are downloadable from the portal; (d) NZ is **not EPC**, so EPO OPS / INPADOC carries **none** of the patent register — the IPONZ API is the only programmatic path; NZ is also **not Hague**, so designs have no IR substitute; (e) plant variety rights and geographical indications are **NOT** in the v5 API — PVR sits behind the Case Management Facility (`EXTRA_pvr_qbe`), GI on a static register page; (f) the [IPONZ copyright statement](https://www.iponz.govt.nz/about-iponz/copyright/) **explicitly carves the registers out** of the personal/in-house Crown-copyright reuse grant — register reuse is on a subscription contract basis; (g) **Trans-Tasman sibling check** — IPONZ does **NOT** share the `ip_australia_*` OAuth2 infrastructure: IPONZ runs on MBIE Azure APIM (`api.business.govt.nz`, shared with NZBN / Companies / PPSR / Disclose); IP Australia runs on a separate OAuth2 server at [`portal.api.ipaustralia.gov.au`](https://portal.api.ipaustralia.gov.au/). The joint AU-NZ "single application process" is a co-filing convention, not a unified API; (h) the [WIPO IP API Catalog](https://apicatalog.wipo.int/) holds zero IPONZ entries as of probe (179 office APIs across 10 organisations). Connector verdict: **planned** — mirror the shipped `ip_australia_*` BYOK template (`iponz_common` + `iponz_patents` + `iponz_trademarks` + `iponz_designs`); PVR + GI uncovered until IPONZ extends the v5 surface. | [waves/2026-05-18-secondary-nationals-wave/nz-iponz.md](../waves/2026-05-18-secondary-nationals-wave/nz-iponz.md) |
