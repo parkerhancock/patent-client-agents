@@ -4088,7 +4088,7 @@
   "key": "BR/INPI-BR/patent",
   "notes": "INPI Brazil covers invention patents (20-yr), utility model patents (15-yr), and certificates of addition under a single fee schedule. The 'discounted' column (mapped to EntityTier.small) applies a reduction up to 60% to individuals, micro-enterprises, SMEs, cooperatives, ICTs, non-profits, and public bodies under Resolution 251/2019 \u00a7I.5. v1 GAPS: (a) multi-tier per-claim surcharges for examination requests are published as prose (R$100 from 11-15, R$200 from 16-30, R$500 from 31+) and not as numeric columns \u2014 not captured; (b) PCT-section variable-amount rows are skipped; (c) a 2025 Portaria 10 update is announced but INPI has not yet republished the English PDF at this URL \u2014 figures here are the 2019/2020 schedule. The pt-BR landing page at /inpi/pt-br/servicos/tabelas-de-retribuicao is Plone-role-restricted ('Conte\u00fado Restrito') and not crawlable; this scraper uses the /inpi/en/costs-and-payment/ PDFs which are anonymous-accessible.",
   "office_code": "INPI-BR",
-  "retrieved_at": "2026-08-02",
+  "retrieved_at": "2026-08-03",
   "right": "patent",
   "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-patents.pdf",
   "statutory_basis": "Lei 9.279/1996 (Brazilian IP Law); Ordinance MDIC 39/2014; ME Ordinance 516/2019; INPI Resolution 251/2019."
