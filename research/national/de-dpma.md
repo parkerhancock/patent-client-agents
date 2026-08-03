@@ -5,8 +5,8 @@
 **Issuing body:** Deutsches Patent- und Markenamt (German Patent and Trade Mark Office)
 **Rights administered:** patent, utility_model, trademark, design, copyright (registers; copyright is largely automatic in DE)
 **Working languages:** German (primary); English (partial — some service pages, fee schedules)
-**Connector status:** **planned (BYOK)** — DPMAconnectPlus REST permits self-hosted access by the contracting party; statutes already shipped
-**Last verified:** 2026-05-18
+**Connector status:** **spec_ready (BYOK)** — DPMAconnectPlus REST permits self-hosted access by the contracting party; statutes already shipped
+**Last verified:** 2026-08-03
 **Manifest entry:** [`coverage/sources.yaml` `DE/DPMA/Statutes`](../../coverage/sources.yaml) (statutes only — `patent_client_agents.dpma_statutes`). Live-register manifest rows pending build of `patent_client_agents.dpma_register`.
 
 **Detail surveys:**
@@ -54,7 +54,7 @@ rebroadcasting data records forecloses zero-infra proxy.
 |---|---|
 | Endpoint | `https://dpmaconnect.dpma.de/dpmaws/rest-services/` (separate services per right) |
 | Auth | HTTP Basic (username + password); signed Datenempfänger contract required (per user) |
-| Format | XML on ST.36 (patents) / ST.66 (TMs) / ST.87 (designs) extension schemas |
+| Format | XML on ST.36 (patents) / ST.66 (TMs) / ST.86 (designs) extension schemas |
 | Cost | EUR 200 one-time connection fee (§4.2); per-record retrieval free; optional Frontfile/backfile packages priced separately |
 | Rate limit | 1,000 hits per search query for production accounts; 100 for test accounts; §2.2 lets DPMA cap volume if a user impairs availability |
 | ToS posture | §3.2 forbids **rebroadcasting the data records** to third parties (with carve-out for purpose §3.1(b)); §2.1 requires a registered, non-dynamic IP — exactly the self-host shape. **Per-user BYOK is permitted; zero-infra proxy is not.** |
@@ -139,7 +139,7 @@ contract) has its own separate access fee.
 
 ### Next steps
 
-1. Write `specs/de-dpma-connector-spec.md` for the `dpma_register` connector. Pattern: JPO env-gating + Basic auth + ST.36/66/87 XML parsing.
+1. Build `dpma_register` from [`specs/de-dpma-connector-spec.md`](../specs/de-dpma-connector-spec.md). Pattern: KIPO XML parsing, JPO two-credential env-gating, and Basic auth.
 2. Decide whether to record live cassettes (requires paying the EUR 200 connection fee + registering a fixed IP) or ship with synthesized fixtures (KIPO / INPI France precedent — live cassettes pending downstream-user credentials).
 3. Watch BPatG case-law coverage as a substantive-law expansion target — redistribution-clean and adds real value for DE IP litigation work.
 
@@ -180,3 +180,4 @@ Primary sources only.
 |---|---|---|
 | 2026-05-16 | Initial synopsis. Reconciled the original "Tier 2 paid+contract" framing — the actual blocker is **contract §3.2 (no third-party redistribution)**, not the EUR 200 cost. | [waves/2026-05-16-registered-ip-discovery/dpma-germany.md](../waves/2026-05-16-registered-ip-discovery/dpma-germany.md) |
 | 2026-05-18 | **BYOK unlock.** Contract re-read of the actual `standardvertrag_dpmaconnectplus.pdf` (Stand 01.04.2020) — earlier framing "§3.2 prohibits proxy use" was a misread of a clause that actually prohibits **rebroadcasting the data records**, with an explicit carve-out for purpose §3.1(b). Self-hosted per-user access by the contracting party is permitted; the older URL the synopsis cited (`dpmaconnectplusvertragsbedingungen.pdf`) 404s. Rating updated red_contract → yellow_byok; connector queued. | [waves/2026-05-18-priority-2-synopses/dpma-byok-rating.md](../waves/2026-05-18-priority-2-synopses/dpma-byok-rating.md) |
+| 2026-08-03 | Rechecked the service page, interface description, and standard contract. Corrected the design schema reference to ST.86 and promoted the connector to `spec_ready`. | [specs/de-dpma-connector-spec.md](../specs/de-dpma-connector-spec.md) |

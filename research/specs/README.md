@@ -156,3 +156,4 @@ Specs in this folder (added as they're written):
 | [`tw-tipo-connector-spec.md`](tw-tipo-connector-spec.md) | TIPO Taiwan — OpenData REST (green) | 2026-05-16 | spec_ready |
 | [`kr-kipo-connector-spec.md`](kr-kipo-connector-spec.md) | KIPO Korea — KIPRIS Plus (yellow BYOK) | 2026-05-16 | spec_ready |
 | [`fr-inpi-connector-spec.md`](fr-inpi-connector-spec.md) | INPI France — TM + Design (yellow BYOK) | 2026-05-16 | spec_ready |
+| [`de-dpma-connector-spec.md`](de-dpma-connector-spec.md) | DPMA Germany — DPMAconnectPlus (yellow BYOK) | 2026-08-03 | spec_ready |

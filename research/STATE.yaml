@@ -31,15 +31,15 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-08-02  # Completed the next four unblocked source surveys
+last_updated: 2026-08-03  # Promoted DPMA Germany to spec-ready
 
 stats:
   total_entities: 116
   synopses_filled: 41        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
   connectors_shipped: 14
   connectors_in_progress: 0
-  connectors_spec_ready: 0
-  connectors_planned: 5
+  connectors_spec_ready: 1
+  connectors_planned: 4
   connectors_blocked: 0
   next_unblocked_synopses: 0
   green_transitive_states: 67
@@ -429,14 +429,14 @@ entities:
     rights: [patent, utility_model, trademark, design]
     synopsis: national/de-dpma.md
     detail_survey: connectors/dpma.md
-    connector_spec: null
+    connector_spec: specs/de-dpma-connector-spec.md
     rating: yellow_byok
     rating_basis: DPMAconnectPlus REST permits per-user self-hosted access — EUR 200 one-time Datenempfänger contract, fixed-IP Basic-auth credentials, no German residency required, EU-SCC auto-attached for non-EU recipients (§8). Prior red_contract reading misread §3.2 — the clause prohibits rebroadcasting data records (zero-infra proxy is barred), NOT self-hosted BYOK by the contracting party. Synopsis update + BACKLOG entry queued 2026-05-18. Statutes corpus already shipped separately.
-    connector_status: planned
+    connector_status: spec_ready
     manifest_ids: [DE/DPMA/Statutes]
-    next_action: spec_writing
+    next_action: connector_build
     blocked_by: []
-    last_verified: 2026-05-18
+    last_verified: 2026-08-03
     notes: |
       BYOK rating unlock confirmed by contract-text agent
       2026-05-18 (memo at waves/2026-05-18-priority-2-synopses/
