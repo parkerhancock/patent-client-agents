@@ -43,6 +43,8 @@ groups:
     connector_modules: [patent_client_agents.inpi_br_statutes]
   - server: inpi_pi_mcp
     connector_modules: [patent_client_agents.inpi_pi]
+  - server: ipi_swissreg_mcp
+    connector_modules: [patent_client_agents.ipi_swissreg]
   - server: ip_australia_bulk_mcp
     connector_modules: [patent_client_agents.ip_australia_bulk]
   - server: ip_australia_designs_mcp

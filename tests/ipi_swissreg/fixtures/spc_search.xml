@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:ApiResponse xmlns:core="urn:ige:schema:xsd:datadeliverycore-1.0.0"
+                  xmlns:common="urn:ige:schema:xsd:datadeliverycommon-1.0.0"
+                  xmlns:spc="urn:ige:schema:xsd:mock-st96-spc">
+  <core:Result success="true">
+    <core:Meta><common:TotalItemCount>1</common:TotalItemCount><common:ItemCountOffset>0</common:ItemCountOffset><common:ItemCount>1</common:ItemCount></core:Meta>
+    <core:Data>
+      <spc:SPCRecord>
+        <spc:SPCNumber>C01234567</spc:SPCNumber>
+        <spc:ApplicationNumber>C00001/2024</spc:ApplicationNumber>
+        <spc:Product>Example active ingredient</spc:Product>
+        <spc:BasicPatentNumber>CH700001</spc:BasicPatentNumber>
+        <spc:AuthorisationNumber>EU/1/24/001</spc:AuthorisationNumber>
+        <spc:IPRightStatus>Granted</spc:IPRightStatus>
+        <spc:ApplicationDate>2024-02-01</spc:ApplicationDate>
+        <spc:GrantDate>2025-03-01</spc:GrantDate>
+        <spc:MaximumTermOfProtectionDate>2030-03-01</spc:MaximumTermOfProtectionDate>
+        <spc:OwnerName>Example Pharma AG</spc:OwnerName>
+      </spc:SPCRecord>
+    </core:Data>
+  </core:Result>
+</core:ApiResponse>

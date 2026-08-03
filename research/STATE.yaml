@@ -31,14 +31,14 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-08-03  # Promoted Swiss IPI to spec-ready
+last_updated: 2026-08-03  # Shipped Swiss IPI as a schema-tested beta
 
 stats:
   total_entities: 116
   synopses_filled: 41        # African wave entries use detail_survey only (wave file); per-office synopses not yet written for the 4 nationals
-  connectors_shipped: 15
+  connectors_shipped: 16
   connectors_in_progress: 0
-  connectors_spec_ready: 1
+  connectors_spec_ready: 0
   connectors_planned: 3
   connectors_blocked: 0
   next_unblocked_synopses: 0
@@ -767,9 +767,12 @@ entities:
     connector_spec: specs/ch-ipi-connector-spec.md
     rating: yellow_byok
     rating_basis: IPI datadelivery API at swissreg.ch/public/api/v1 is XML over HTTPS POST + OIDC ROPC auth (Keycloak at idp.ipi.ch). Free; 2 GiB/24h rolling quota. Covers TMs, patents, patent pubs, SPCs, SPC pubs — NOT designs. ToU §2 forbids credential sharing → BYOK only.
-    connector_status: spec_ready
-    manifest_ids: []
-    next_action: connector_build
+    connector_status: shipped
+    manifest_ids:
+      - CH/IPI/Patents
+      - CH/IPI/Trademarks
+      - CH/IPI/SPCs
+    next_action: none
     blocked_by: []
     last_verified: 2026-08-03
     notes: |
@@ -777,8 +780,11 @@ entities:
       register national SPCs). CH+LI unified patent territory
       under 1978 Treaty. Registration: wet-signed ToU posted to
       Stauffacherstrasse 65/59g, 3003 Bern — foreign signup
-      permitted, no Swiss-residency requirement. Designs route via
-      WIPO Designview only (no DesignSearch action on the IPI API).
+      permitted, no Swiss-residency requirement. The connector ships
+      eight env-gated tools for patents, patent publications, national
+      trademarks, SPCs, and SPC publications. It is schema-tested with
+      public XSD-derived fixtures; live compatibility is unverified.
+      Designs route via WIPO Designview only (no DesignSearch action).
 
   # ────────────────────────────────────────────────────────────────────
   # National — Nordics, Western Europe, Pacific (10)

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:ApiResponse xmlns:core="urn:ige:schema:xsd:datadeliverycore-1.0.0"
+                  xmlns:common="urn:ige:schema:xsd:datadeliverycommon-1.0.0"
+                  xmlns:pat="urn:ige:schema:xsd:mock-st96-patent">
+  <core:Result success="true">
+    <core:Meta>
+      <common:TotalItemCount>2</common:TotalItemCount>
+      <common:ItemCountOffset>0</common:ItemCountOffset>
+      <common:ItemCount>1</common:ItemCount>
+    </core:Meta>
+    <core:DataBag>
+      <core:Data>
+        <core:Wrapper>
+          <pat:PatentRecord>
+        <pat:PatentNumber>CH718001</pat:PatentNumber>
+        <pat:ApplicationNumber>CH00001/2023</pat:ApplicationNumber>
+        <pat:PublicationNumber>CH718001A1</pat:PublicationNumber>
+        <pat:InventionTitle>Adaptive charging controller</pat:InventionTitle>
+        <pat:IPRightStatus>Active</pat:IPRightStatus>
+        <pat:ApplicationDate>2023-01-05</pat:ApplicationDate>
+        <pat:PublicationDate>2024-07-15T00:00:00Z</pat:PublicationDate>
+        <pat:GrantDate>2025-02-10</pat:GrantDate>
+        <pat:OwnerName>Necktie Labs, LLC</pat:OwnerName>
+        <pat:IPCClassification>H02J7/00</pat:IPCClassification>
+        <pat:CPCClassification>H02J7/0042</pat:CPCClassification>
+        <pat:InventorName>Ada Example</pat:InventorName>
+        <pat:FutureExtension code="x">preserved</pat:FutureExtension>
+          </pat:PatentRecord>
+        </core:Wrapper>
+      </core:Data>
+    </core:DataBag>
+    <core:Continuations>
+      <core:Continuation name="NextPage">opaque-patent-page-2</core:Continuation>
+    </core:Continuations>
+  </core:Result>
+</core:ApiResponse>

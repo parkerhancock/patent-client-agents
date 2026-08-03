@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:ApiResponse xmlns:core="urn:ige:schema:xsd:datadeliverycore-1.0.0">
+  <core:Result success="false">
+    <core:Log><core:LogEntry level="ERROR">Invalid Swiss IPI query</core:LogEntry></core:Log>
+  </core:Result>
+</core:ApiResponse>

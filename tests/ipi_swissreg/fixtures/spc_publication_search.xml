@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:ApiResponse xmlns:core="urn:ige:schema:xsd:datadeliverycore-1.0.0"
+                  xmlns:common="urn:ige:schema:xsd:datadeliverycommon-1.0.0"
+                  xmlns:pub="urn:ige:schema:xsd:mock-st96-publication">
+  <core:Result success="true">
+    <core:Meta><common:TotalItemCount>1</common:TotalItemCount><common:ItemCountOffset>0</common:ItemCountOffset><common:ItemCount>1</common:ItemCount></core:Meta>
+    <core:Data>
+      <pub:SPCPublication>
+        <pub:IPRightNumber>C01234567</pub:IPRightNumber>
+        <pub:PublicationTitle>SPC grant</pub:PublicationTitle>
+        <pub:PublicationText>Certificate granted.</pub:PublicationText>
+        <pub:ReasonForPublication>Grant</pub:ReasonForPublication>
+        <pub:PublicationDate>2025-03-01</pub:PublicationDate>
+        <pub:OwnerName>Example Pharma AG</pub:OwnerName>
+      </pub:SPCPublication>
+    </core:Data>
+  </core:Result>
+</core:ApiResponse>

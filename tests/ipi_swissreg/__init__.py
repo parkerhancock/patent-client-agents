@@ -1,0 +1,1 @@
+"""Swiss IPI connector tests."""

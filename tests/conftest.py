@@ -64,6 +64,11 @@ os.environ.setdefault("KIPO_KIPRIS_API_KEY", "test_kipris_servicekey")
 os.environ.setdefault("DPMA_CONNECTPLUS_USERNAME", "test_dpma_user")
 os.environ.setdefault("DPMA_CONNECTPLUS_PASSWORD", "test_dpma_password")
 
+# Swiss IPI tools need both password-grant values. These placeholders register
+# the tools for fixture-only tests and never reach the live service.
+os.environ.setdefault("IPI_DATA_USERNAME", "test_ipi_user")
+os.environ.setdefault("IPI_DATA_PASSWORD", "test_ipi_password")
+
 # USITC EDIS MCP tools are env-gated on USITC_EDIS_TOKEN so the public
 # demo at mcp.patentclient.com advertises no ITC surface. The placeholder
 # below keeps them registered in-process so the USITC envelope and

@@ -7,7 +7,7 @@ matches how you're going to use it:
 |---|---|---|
 | Python library | Import `patent_client_agents` in your own async code | [§1](#1-python-library) |
 | Python library + MCP runtime | Run an MCP server locally or in-process | [§2](#2-python-library-with-mcp-runtime) |
-| Claude Code plugin (from GitHub marketplace) | Add 128 patent + trademark + adjacent-IP MCP tools to Claude Code with two slash commands; private/local credentialed deployments expose up to 199 tools | [§3](#3-claude-code-plugin-from-github) |
+| Claude Code plugin (from GitHub marketplace) | Add 128 patent + trademark + adjacent-IP MCP tools to Claude Code with two slash commands; private/local credentialed deployments expose up to 207 tools | [§3](#3-claude-code-plugin-from-github) |
 | Claude Code skill (standalone, library-user) | Install the `ip_research` skill into `~/.claude/skills/` for Python-library guidance | [§4](#4-claude-code-skill-standalone-library-user) |
 | Stdio MCP (any MCP client) | Connect Claude Code / Claude Desktop / Codex CLI / Gemini CLI / Cursor / Windsurf / Cline / Zed / Continue / Copilot Chat / JetBrains / custom | [§5](#5-stdio-mcp-from-any-mcp-client) |
 | Remote MCP (hosted or self-hosted) | Point an MCP client at a deployed HTTPS endpoint — including cloud-only clients like ChatGPT Apps and Replit Agent | [§6](#6-remote-mcp) |
@@ -52,6 +52,7 @@ these unlock the full surface:
 | `EPO_OPS_API_KEY`, `EPO_OPS_API_SECRET` | EPO Open Patent Services | [developers.epo.org](https://developers.epo.org/) (free, 4 GB/week) |
 | `JPO_API_USERNAME`, `JPO_API_PASSWORD` | JPO J-PlatPat | Contact JPO (restricted). JPO MCP tools register in local/private servers when both variables are set; they are intentionally absent from the public hosted demo. |
 | `DPMA_CONNECTPLUS_USERNAME`, `DPMA_CONNECTPLUS_PASSWORD` | DPMAconnectPlus | [Apply through DPMA](https://www.dpma.de/english/search/data_supply_services/dpmaconnect/index.html). A registered static IP is also required. The connector is mock-only tested and live compatibility is unverified. |
+| `IPI_DATA_USERNAME`, `IPI_DATA_PASSWORD` | Swiss IPI datadelivery | [Apply through IPI](https://www.ige.ch/en/services/digital-resources/ip-data/data-delivery-api) by submitting signed Terms of Use. The connector is schema-tested only and live compatibility is unverified. Set optional `IPI_DATA_TOTP_TOKEN` for an MFA account. |
 | `CANLII_API_KEY` | CanLII | [canlii.org/en/feedback/feedback.html](https://www.canlii.org/en/feedback/feedback.html) (free, by request) |
 | `EUIPO_CLIENT_ID`, `EUIPO_CLIENT_SECRET` | EUIPO Trademark + Design Search | [dev.euipo.europa.eu](https://dev.euipo.europa.eu/) (sandbox auto-approves; production requires ID-document review). Set `EUIPO_ENV=sandbox` to point at the sandbox. |
 | `USITC_EDIS_TOKEN` | USITC EDIS (Section 337) | [edis.usitc.gov](https://edis.usitc.gov) → API Token Generator (free Login.gov account). JWT, ~2 wk lifetime. Required for attachment downloads even on public documents. |
@@ -118,7 +119,7 @@ of the base dependencies.
 
 Two new console scripts on your PATH:
 
-- `patent-client-agents-mcp` — launches the stdio MCP server (128 patent + trademark + adjacent-IP tools by default; up to 199 when every env-gated family is configured)
+- `patent-client-agents-mcp` — launches the stdio MCP server (128 patent + trademark + adjacent-IP tools by default; up to 207 when every env-gated family is configured)
 - `patent-client-agents-skill-install` — symlinks the `ip_research` skill into `~/.claude/skills/` (see §4)
 
 Plus the Python-importable MCP surface:
@@ -146,7 +147,7 @@ This is exactly how `law-tools` consumes `patent-client-agents` in the monorepo.
 
 Use this when you use Claude Code and want the 128 patent + trademark +
 adjacent-IP MCP tools dropped in with two slash commands. Private/local
-deployments expose up to 199 tools when the corresponding credentials
+deployments expose up to 207 tools when the corresponding credentials
 are in the environment.
 
 The plugin ships **only the MCP server** — no skill, no agents, no
@@ -308,7 +309,7 @@ List MCP tools from within a Claude Code session:
 ```
 
 Expect `patent-client-agents` with 128 tools by default. Local/private
-servers expose up to 199 tools when all env-gated families are configured
+servers expose up to 207 tools when all env-gated families are configured
 with their corresponding credentials. Or call one directly by asking something
 patent-research-ish:
 
@@ -382,7 +383,7 @@ replaces with the symlink.
 
 |  | Plugin (§3) | Standalone skill (§4) |
 |---|---|---|
-| What it installs | MCP server only (128 default tools; up to 199 with all env-gated families configured) | Skill markdown for Python library usage |
+| What it installs | MCP server only (128 default tools; up to 207 with all env-gated families configured) | Skill markdown for Python library usage |
 | Command | `/plugin install patent-client-agents@patent-client-agents` | `patent-client-agents-skill-install` |
 | Source | Cloned marketplace repo | pip-installed package (symlinked) |
 | Updates | `/plugin marketplace update` + `/reload-plugins` | Reinstall `patent-client-agents` to pick up new skill content |
@@ -814,7 +815,7 @@ asyncio.run(main())
 ```
 
 Expect **128 tools** by default. Local/private servers expose up to
-**199 tools** when every env-gated family is configured. Title starts
+**207 tools** when every env-gated family is configured. Title starts
 with `2106 ... Patent Subject Matter Eligibility`.
 
 ### Troubleshooting

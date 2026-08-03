@@ -3,6 +3,7 @@
 **Source synopsis:** [`../national/ch-ipi.md`](../national/ch-ipi.md)
 **Source detail survey:** [`../waves/2026-05-18-secondary-nationals-wave/ch-ipi.md`](../waves/2026-05-18-secondary-nationals-wave/ch-ipi.md)
 **Authoring date:** 2026-08-03
+**Implementation status:** Shipped beta on 2026-08-03; schema-tested, live account validation pending.
 **Rating basis:** The IPI datadelivery API permits private use with individual credentials after signed Terms of Use. It uses OpenID Connect password-grant authentication and XML POST requests. Shared project credentials remain out of scope.
 
 ## §1 Scope and package layout

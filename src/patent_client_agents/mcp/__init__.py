@@ -42,6 +42,7 @@ from .tools.ip_australia_patents import ip_australia_patents_mcp
 from .tools.ip_australia_trademarks import ip_australia_trademarks_mcp
 from .tools.ipo_in_mppp import ipo_in_mppp_mcp
 from .tools.ipo_in_statutes import ipo_in_statutes_mcp
+from .tools.ipi_swissreg import ipi_swissreg_mcp
 from .tools.ipos import ipos_mcp
 from .tools.jpo import jpo_mcp
 from .tools.kipo_kipris import kipo_kipris_mcp
@@ -76,7 +77,7 @@ ip_mcp = FastMCP(
         "Community Designs — env-gated on EUIPO_CLIENT_ID / EUIPO_CLIENT_SECRET), "
         "and UPC (Unified Patent Court decisions/orders feed + corpus-backed "
         "UPCA / RoP / Fees statutes). 128 default read-only tools; up to "
-        "199 tools when every env-gated family is configured. Tools are grouped by intent."
+        "207 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
 
@@ -109,6 +110,7 @@ ip_mcp.mount(ip_australia_bulk_mcp)
 ip_mcp.mount(ilpo_mcp)
 ip_mcp.mount(ipo_in_statutes_mcp)
 ip_mcp.mount(ipo_in_mppp_mcp)
+ip_mcp.mount(ipi_swissreg_mcp)
 ip_mcp.mount(ipos_mcp)
 ip_mcp.mount(inpi_pi_mcp)
 ip_mcp.mount(dpma_statutes_mcp)

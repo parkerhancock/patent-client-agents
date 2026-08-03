@@ -5,9 +5,9 @@
 **Issuing body:** Eidgenössisches Institut für Geistiges Eigentum / Institut Fédéral de la Propriété Intellectuelle (IPI / IGE)
 **Rights administered:** patent, trademark, design, SPC (supplementary protection certificate, including paediatric extension)
 **Working languages:** German, French, Italian, English (API docs English-only)
-**Connector status:** **spec_ready (BYOK)** — IPI datadelivery API permits per-user self-hosted access via signed Terms of Use
+**Connector status:** **shipped beta (BYOK)** — eight env-gated tools cover patents, patent publications, national trademarks, SPCs, and SPC publications
 **Last verified:** 2026-08-03
-**Manifest entry:** not yet listed (planned)
+**Manifest entries:** `CH/IPI/Patents`, `CH/IPI/Trademarks`, `CH/IPI/SPCs`
 
 **Detail surveys:**
 - [`waves/2026-05-18-secondary-nationals-wave/ch-ipi.md`](../waves/2026-05-18-secondary-nationals-wave/ch-ipi.md) — 2026-05-18 grounded API discovery (437 lines)
@@ -97,9 +97,9 @@ IPI publishes a fee schedule (in CHF) covering filing, examination, grant, oppos
 - CH-validated EP patents at biblio/family fidelity via [`patent_client_agents.epo_ops`](../regional/epo.md) (transitive).
 - CH designs via WIPO Designview (no direct IPI surface).
 
-### What we should add (spec ready, BYOK)
+### What we ship (beta, BYOK)
 
-- **`patent_client_agents.ipi_swissreg`** — datadelivery API connector following the JPO / INPI France BYOK pattern. Env-gates MCP tools on `IPI_DATA_USERNAME` + `IPI_DATA_PASSWORD`; not exposed by the hosted demo. Covers `TrademarkSearch`, `PatentSearch`, `PatentPublicationSearch`, `SPCSearch`, `SPCPublicationSearch`. **Closes the SPC + CH-national TM + CH-language full-text gaps.** Estimated 4-6 days build given the XML query language + cursor pagination + penalty-model error handling (which is unusual — accumulates 4xx/5xx penalties that slow concurrency before hard cooldown; clients with sloppy error handling can dig themselves into a hole).
+- **`patent_client_agents.ipi_swissreg`** — datadelivery API connector following the JPO / INPI France BYOK pattern. Eight MCP tools register when `IPI_DATA_USERNAME` and `IPI_DATA_PASSWORD` are set; the hosted demo omits them. The connector covers `TrademarkSearch`, `PatentSearch`, `PatentPublicationSearch`, `SPCSearch`, and `SPCPublicationSearch`, with cursor pagination and token reuse. Synthetic namespace-bearing fixtures derive from the public XSDs. Live account compatibility remains unverified.
 
 ### What we should NOT add (and why)
 
@@ -110,9 +110,9 @@ IPI publishes a fee schedule (in CHF) covering filing, examination, grant, oppos
 
 ### Next steps
 
-1. Sign and post the IPI Terms of Use to Stauffacherstrasse 65/59g, 3003 Bern — wet signature, no self-service portal. Foreign signup is permitted (no Swiss-residency requirement on the ToU's face), but the postal step adds real latency.
-2. Build [`ipi_swissreg`](../specs/ch-ipi-connector-spec.md) with environment gating, token refresh, XML `ApiRequest` construction, and continuation pagination.
-3. Use fixtures derived from the public XSDs until a contributor can validate with a live account.
+1. Sign and post the IPI Terms of Use to Stauffacherstrasse 65/59g, 3003 Bern. Foreign signup is permitted.
+2. Validate the beta connector with a live account and compare sanitized responses with the schema-derived fixtures.
+3. Report schema differences or contribute sanitized samples that contain no credentials, personal data, or confidential records.
 
 ## §6 Open questions
 
@@ -155,3 +155,4 @@ Primary sources only.
 |---|---|---|
 | 2026-05-18 | Initial synopsis. Rating: yellow_byok. Datadelivery API is clean and free; blockers are contractual (wet-signed ToU posted to Bern + §2 prohibits credential sharing). Designs are an explicit gap on the API — only WIPO Designview covers them. | [waves/2026-05-18-secondary-nationals-wave/ch-ipi.md](../waves/2026-05-18-secondary-nationals-wave/ch-ipi.md) |
 | 2026-08-03 | Rechecked the official API documentation and public XSD catalog. Added a connector specification and promoted the connector to `spec_ready`. | [`ch-ipi-connector-spec.md`](../specs/ch-ipi-connector-spec.md) |
+| 2026-08-03 | Shipped `ipi_swissreg` as an env-gated beta with eight tools. Public XSD-derived fixtures cover all five search actions; live account compatibility remains unverified. | [`ch-ipi-connector-spec.md`](../specs/ch-ipi-connector-spec.md) |

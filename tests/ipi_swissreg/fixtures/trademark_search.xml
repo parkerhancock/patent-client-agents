@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:ApiResponse xmlns:core="urn:ige:schema:xsd:datadeliverycore-1.0.0"
+                  xmlns:common="urn:ige:schema:xsd:datadeliverycommon-1.0.0"
+                  xmlns:tm="urn:ige:schema:xsd:mock-st96-trademark">
+  <core:Result success="true">
+    <core:Meta><common:TotalItemCount>1</common:TotalItemCount><common:ItemCountOffset>0</common:ItemCountOffset><common:ItemCount>1</common:ItemCount></core:Meta>
+    <core:Data>
+      <tm:TradeMarkRecord>
+        <tm:TradeMarkNumber>CH812345</tm:TradeMarkNumber>
+        <tm:ApplicationNumber>01001/2024</tm:ApplicationNumber>
+        <tm:TradeMarkTitle>NECKTIE</tm:TradeMarkTitle>
+        <tm:MarkVerbalElementText>NECKTIE</tm:MarkVerbalElementText>
+        <tm:IPRightStatus>Registered</tm:IPRightStatus>
+        <tm:ApplicationDate>2024-01-02</tm:ApplicationDate>
+        <tm:RegistrationDate>2024-08-01</tm:RegistrationDate>
+        <tm:ExpiryDate>2034-01-02</tm:ExpiryDate>
+        <tm:OwnerName>Necktie Labs, LLC</tm:OwnerName>
+        <tm:NiceClassNumber>42</tm:NiceClassNumber>
+      </tm:TradeMarkRecord>
+    </core:Data>
+  </core:Result>
+</core:ApiResponse>

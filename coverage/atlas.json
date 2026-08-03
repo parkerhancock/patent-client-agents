@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T15:09:29+00:00",
+  "generated_at": "2026-08-03T15:59:38+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 116,
@@ -13,8 +13,8 @@
     },
     "by_connector_status": {
       "skipped": 97,
-      "shipped": 15,
-      "planned": 4
+      "shipped": 16,
+      "planned": 3
     },
     "by_region": {
       "multilateral": 6,
@@ -1784,11 +1784,61 @@
       "rating_emoji": "\ud83d\udfe1",
       "rating_label": "Yellow \u2014 BYOK",
       "rating_basis": "IPI datadelivery API at swissreg.ch/public/api/v1 is XML over HTTPS POST + OIDC ROPC auth (Keycloak at idp.ipi.ch). Free; 2 GiB/24h rolling quota. Covers TMs, patents, patent pubs, SPCs, SPC pubs \u2014 NOT designs. ToU \u00a72 forbids credential sharing \u2192 BYOK only.",
-      "connector_status": "planned",
-      "last_verified": "2026-05-18",
+      "connector_status": "shipped",
+      "last_verified": "2026-08-03",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/national/ch-ipi/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/national/ch-ipi.md",
-      "shipped_sources": []
+      "shipped_sources": [
+        {
+          "id": "CH/IPI/Patents",
+          "name": "Swiss IPI \u2014 Patents and Patent Publications (Swissreg datadelivery)",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "classification",
+            "full_text",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "oauth2_password",
+          "status": "beta",
+          "module": "patent_client_agents.ipi_swissreg"
+        },
+        {
+          "id": "CH/IPI/Trademarks",
+          "name": "Swiss IPI \u2014 National Trademarks (Swissreg datadelivery)",
+          "rights": [
+            "trademark"
+          ],
+          "data_types": [
+            "bibliographic",
+            "classification",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "oauth2_password",
+          "status": "beta",
+          "module": "patent_client_agents.ipi_swissreg"
+        },
+        {
+          "id": "CH/IPI/SPCs",
+          "name": "Swiss IPI \u2014 Supplementary Protection Certificates (Swissreg datadelivery)",
+          "rights": [
+            "patent"
+          ],
+          "data_types": [
+            "bibliographic",
+            "full_text",
+            "legal_status"
+          ],
+          "access_method": "rest_api",
+          "auth": "oauth2_password",
+          "status": "beta",
+          "module": "patent_client_agents.ipi_swissreg"
+        }
+      ]
     },
     {
       "id": "NL/RVO",

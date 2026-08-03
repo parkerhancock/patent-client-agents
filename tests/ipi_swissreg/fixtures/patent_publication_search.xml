@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:ApiResponse xmlns:core="urn:ige:schema:xsd:datadeliverycore-1.0.0"
+                  xmlns:common="urn:ige:schema:xsd:datadeliverycommon-1.0.0"
+                  xmlns:pub="urn:ige:schema:xsd:mock-st96-publication">
+  <core:Result success="true">
+    <core:Meta><common:TotalItemCount>1</common:TotalItemCount><common:ItemCountOffset>0</common:ItemCountOffset><common:ItemCount>1</common:ItemCount></core:Meta>
+    <core:Data>
+      <pub:PatentPublication>
+        <pub:IPRightNumber>CH718001</pub:IPRightNumber>
+        <pub:PublicationTitle>Patent grant</pub:PublicationTitle>
+        <pub:PublicationText>Grant entered in the register.</pub:PublicationText>
+        <pub:PublishedRemark>Example notice</pub:PublishedRemark>
+        <pub:ReasonForPublication>Grant</pub:ReasonForPublication>
+        <pub:PublicationDate>2025-02-10</pub:PublicationDate>
+        <pub:OwnerName>Necktie Labs, LLC</pub:OwnerName>
+        <pub:IPCClassification>H02J7/00</pub:IPCClassification>
+      </pub:PatentPublication>
+    </core:Data>
+  </core:Result>
+</core:ApiResponse>

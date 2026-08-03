@@ -1,17 +1,18 @@
 {
-  "generated_at": "2026-08-03T14:55:05+00:00",
+  "generated_at": "2026-08-03T15:59:38+00:00",
   "schema_version": 1,
   "summary": {
-    "total": 97,
+    "total": 100,
     "by_status": {
       "active": 92,
       "external": 2,
-      "beta": 3
+      "beta": 6
     },
     "active_jurisdictions": [
       "AU",
       "BR",
       "CA",
+      "CH",
       "CN",
       "DE",
       "EM",
@@ -103,6 +104,7 @@
         "GB",
         "FR",
         "SE",
+        "CH",
         "TW",
         "SG"
       ],
@@ -112,7 +114,6 @@
         "IT",
         "ES",
         "NL",
-        "CH",
         "BE",
         "PL",
         "DK",
@@ -124,7 +125,7 @@
         "ID",
         "KH"
       ],
-      "tracked_count": 14,
+      "tracked_count": 15,
       "total": 30,
       "source": "WIPO IP Statistics Data Center (https://www.wipo.int/ipstats/en/), WIPI 2024 report, 2023 filing data"
     }
@@ -219,6 +220,23 @@
       "status": "active",
       "sources": [
         "CA/CanLII"
+      ]
+    },
+    {
+      "jurisdiction": "CH",
+      "right": "patent",
+      "status": "beta",
+      "sources": [
+        "CH/IPI/Patents",
+        "CH/IPI/SPCs"
+      ]
+    },
+    {
+      "jurisdiction": "CH",
+      "right": "trademark",
+      "status": "beta",
+      "sources": [
+        "CH/IPI/Trademarks"
       ]
     },
     {
@@ -2030,6 +2048,100 @@
       "update_cadence": "irregular",
       "last_synced": "2026-05-16",
       "corpus_version": "v3.0 (2019)"
+    },
+    {
+      "id": "CH/IPI/Patents",
+      "name": "Swiss IPI \u2014 Patents and Patent Publications (Swissreg datadelivery)",
+      "jurisdiction": "CH",
+      "wipo_st3_code": "CH",
+      "issuing_body": "Swiss Federal Institute of Intellectual Property",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "classification",
+        "full_text",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "oauth2_password",
+        "auth_env": [
+          "IPI_DATA_USERNAME",
+          "IPI_DATA_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.ipi_swissreg"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Schema-tested with synthetic XML fixtures derived from public IPI XSDs; live account compatibility is unverified. Covers the unified CH and LI patent territory. Signed Terms of Use and an IPI account are required. Optional MFA uses IPI_DATA_TOTP_TOKEN. Community validation and sanitized response samples are welcome."
+    },
+    {
+      "id": "CH/IPI/Trademarks",
+      "name": "Swiss IPI \u2014 National Trademarks (Swissreg datadelivery)",
+      "jurisdiction": "CH",
+      "wipo_st3_code": "CH",
+      "issuing_body": "Swiss Federal Institute of Intellectual Property",
+      "rights": [
+        "trademark"
+      ],
+      "data_types": [
+        "bibliographic",
+        "classification",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "oauth2_password",
+        "auth_env": [
+          "IPI_DATA_USERNAME",
+          "IPI_DATA_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.ipi_swissreg"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Schema-tested with synthetic XML fixtures derived from public IPI XSDs; live account compatibility is unverified. Signed Terms of Use and an IPI account are required. Optional MFA uses IPI_DATA_TOTP_TOKEN. Community validation and sanitized response samples are welcome."
+    },
+    {
+      "id": "CH/IPI/SPCs",
+      "name": "Swiss IPI \u2014 Supplementary Protection Certificates (Swissreg datadelivery)",
+      "jurisdiction": "CH",
+      "wipo_st3_code": "CH",
+      "issuing_body": "Swiss Federal Institute of Intellectual Property",
+      "rights": [
+        "patent"
+      ],
+      "data_types": [
+        "bibliographic",
+        "full_text",
+        "legal_status"
+      ],
+      "access": {
+        "method": "rest_api",
+        "auth": "oauth2_password",
+        "auth_env": [
+          "IPI_DATA_USERNAME",
+          "IPI_DATA_PASSWORD"
+        ]
+      },
+      "status": "beta",
+      "connector": {
+        "module": "patent_client_agents.ipi_swissreg"
+      },
+      "last_verified": "2026-08-03",
+      "category": "registered_ip",
+      "transport": "mcp_proxy",
+      "notes": "Schema-tested with synthetic XML fixtures derived from public IPI XSDs; live account compatibility is unverified. Signed Terms of Use and an IPI account are required. Optional MFA uses IPI_DATA_TOTP_TOKEN. Community validation and sanitized response samples are welcome."
     },
     {
       "id": "DE/DPMA/Patents",

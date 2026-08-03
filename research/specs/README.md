@@ -157,4 +157,4 @@ Specs in this folder (added as they're written):
 | [`kr-kipo-connector-spec.md`](kr-kipo-connector-spec.md) | KIPO Korea — KIPRIS Plus (yellow BYOK) | 2026-05-16 | spec_ready |
 | [`fr-inpi-connector-spec.md`](fr-inpi-connector-spec.md) | INPI France — TM + Design (yellow BYOK) | 2026-05-16 | spec_ready |
 | [`de-dpma-connector-spec.md`](de-dpma-connector-spec.md) | DPMA Germany — DPMAconnectPlus (yellow BYOK) | 2026-08-03 | spec_ready |
-| [`ch-ipi-connector-spec.md`](ch-ipi-connector-spec.md) | Swiss IPI — datadelivery API (yellow BYOK) | 2026-08-03 | spec_ready |
+| [`ch-ipi-connector-spec.md`](ch-ipi-connector-spec.md) | Swiss IPI — datadelivery API (yellow BYOK) | 2026-08-03 | shipped beta |

@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Added the `ipi_swissreg` connector with eight env-gated Swiss IPI tools for
+  patents, patent publications, national trademarks, SPCs, and SPC publications.
+  The beta connector is tested against synthetic XML fixtures derived from the
+  public IPI XSDs. Live account testing and sanitized community samples are welcome.
 - Added the `dpma_register` connector with six env-gated DPMAconnectPlus tools
   for German patents and utility models, trademarks, and designs. The connector
   is fixture-tested only and marked beta. Live account testing and sanitized

@@ -52,6 +52,8 @@ src/
     epo_ops/                # EPO Open Patent Services (needs EPO_OPS_API_KEY/SECRET)
     google_patents/         # Scrapes Google Patents (no API key)
     jpo/                    # Japan Patent Office (needs JPO_API_USERNAME/PASSWORD)
+    ipi_swissreg/           # Swiss IPI patents, TMs, SPCs, and publication notices.
+                            #   Schema-tested BYOK beta; needs IPI_DATA_USERNAME/PASSWORD.
     kipo_kipris/            # KIPO Korea — KIPRIS Plus REST API for patents,
                             #   utility models, trademarks, designs.
                             #   BYOK per ToS §11; needs KIPO_KIPRIS_API_KEY.

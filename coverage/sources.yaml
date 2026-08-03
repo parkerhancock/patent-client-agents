@@ -1028,6 +1028,67 @@ sources:
     corpus_version: "v3.0 (2019)"
 
   # ────────────────────────────────────────────────────────────────────
+  # CH — Swiss IPI Swissreg registers
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: CH/IPI/Patents
+    name: Swiss IPI — Patents and Patent Publications (Swissreg datadelivery)
+    jurisdiction: CH
+    wipo_st3_code: CH
+    issuing_body: Swiss Federal Institute of Intellectual Property
+    rights: [patent]
+    data_types: [bibliographic, classification, full_text, legal_status]
+    access:
+      method: rest_api
+      auth: oauth2_password
+      auth_env: [IPI_DATA_USERNAME, IPI_DATA_PASSWORD]
+    status: beta
+    connector:
+      module: patent_client_agents.ipi_swissreg
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Schema-tested with synthetic XML fixtures derived from public IPI XSDs; live account compatibility is unverified. Covers the unified CH and LI patent territory. Signed Terms of Use and an IPI account are required. Optional MFA uses IPI_DATA_TOTP_TOKEN. Community validation and sanitized response samples are welcome.
+
+  - id: CH/IPI/Trademarks
+    name: Swiss IPI — National Trademarks (Swissreg datadelivery)
+    jurisdiction: CH
+    wipo_st3_code: CH
+    issuing_body: Swiss Federal Institute of Intellectual Property
+    rights: [trademark]
+    data_types: [bibliographic, classification, legal_status]
+    access:
+      method: rest_api
+      auth: oauth2_password
+      auth_env: [IPI_DATA_USERNAME, IPI_DATA_PASSWORD]
+    status: beta
+    connector:
+      module: patent_client_agents.ipi_swissreg
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Schema-tested with synthetic XML fixtures derived from public IPI XSDs; live account compatibility is unverified. Signed Terms of Use and an IPI account are required. Optional MFA uses IPI_DATA_TOTP_TOKEN. Community validation and sanitized response samples are welcome.
+
+  - id: CH/IPI/SPCs
+    name: Swiss IPI — Supplementary Protection Certificates (Swissreg datadelivery)
+    jurisdiction: CH
+    wipo_st3_code: CH
+    issuing_body: Swiss Federal Institute of Intellectual Property
+    rights: [patent]
+    data_types: [bibliographic, full_text, legal_status]
+    access:
+      method: rest_api
+      auth: oauth2_password
+      auth_env: [IPI_DATA_USERNAME, IPI_DATA_PASSWORD]
+    status: beta
+    connector:
+      module: patent_client_agents.ipi_swissreg
+    last_verified: 2026-08-03
+    category: registered_ip
+    transport: mcp_proxy
+    notes: Schema-tested with synthetic XML fixtures derived from public IPI XSDs; live account compatibility is unverified. Signed Terms of Use and an IPI account are required. Optional MFA uses IPI_DATA_TOTP_TOKEN. Community validation and sanitized response samples are welcome.
+
+  # ────────────────────────────────────────────────────────────────────
   # DE — DPMA Germany registers and statutes
   # ────────────────────────────────────────────────────────────────────
 
