@@ -12,6 +12,7 @@ shape, not the upstream EPO OPS HTTP layer.
 
 from __future__ import annotations
 
+from contextlib import AbstractContextManager
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -49,7 +50,7 @@ from patent_client_agents.mcp.tools.epo_ops import (
 )
 
 
-def _patch_client_from_env(mock_client) -> object:
+def _patch_client_from_env(mock_client: MagicMock) -> AbstractContextManager[MagicMock]:
     """Patch ``client_from_env`` so its async-context-manager yields ``mock_client``."""
     cm = MagicMock()
     cm.__aenter__ = AsyncMock(return_value=mock_client)
@@ -193,8 +194,42 @@ async def test_search_epo_accepts_query_alias():
         result = await search_epo(query="ta=battery")
 
     mock_client.search_published.assert_awaited_once()
+    assert mock_client.search_published.await_args is not None
     assert mock_client.search_published.await_args.kwargs["query"] == "ta=battery"
     assert "ta=battery" in result.summary
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("jurisdiction", ["CN", "DE", "KR"])
+async def test_search_epo_applies_jurisdiction_recipe(jurisdiction: str):
+    upstream = _make_search_response(total=1, ids=["1234567"])
+    mock_client = MagicMock()
+    mock_client.search_published = AsyncMock(return_value=upstream)
+
+    with _patch_client_from_env(mock_client):
+        result = await search_epo(
+            cql_query="ta=battery",
+            jurisdiction=jurisdiction,  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
+        )
+
+    expected_query = f"(ta=battery) and pn={jurisdiction}"
+    mock_client.search_published.assert_awaited_once_with(
+        query=expected_query,
+        range_begin=1,
+        range_end=25,
+    )
+    assert expected_query in result.summary
+
+
+@pytest.mark.asyncio
+async def test_search_epo_rejects_unsupported_jurisdiction_recipe():
+    from mcp_data_core.exceptions import ValidationError
+
+    with pytest.raises(ValidationError, match="jurisdiction"):
+        await search_epo(
+            cql_query="ta=battery",
+            jurisdiction="US",  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
+        )
 
 
 @pytest.mark.asyncio
@@ -441,6 +476,11 @@ async def test_get_epo_cql_help_returns_response_envelope():
     assert "fields" in result.details
     assert "operators" in result.details
     assert "examples" in result.details
+    assert result.details["jurisdiction_recipes"] == {
+        "CN": "pn=CN",
+        "DE": "pn=DE",
+        "KR": "pn=KR",
+    }
     # First sentence already validated in docstring tests above; double-check
     # the user-facing summary leads with the practical promise.
     assert "CQL" in result.summary or "syntax" in result.summary.lower()

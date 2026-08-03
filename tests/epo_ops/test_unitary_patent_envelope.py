@@ -11,6 +11,7 @@ HTTP path is not exercised here.
 
 from __future__ import annotations
 
+from contextlib import AbstractContextManager
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -27,7 +28,7 @@ from patent_client_agents.mcp.tools.epo_ops import (
 )
 
 
-def _patch_client_from_env(mock_client) -> object:
+def _patch_client_from_env(mock_client: MagicMock) -> AbstractContextManager[MagicMock]:
     """Patch ``client_from_env`` so its async-context-manager yields mock_client."""
     cm = MagicMock()
     cm.__aenter__ = AsyncMock(return_value=mock_client)

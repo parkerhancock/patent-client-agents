@@ -62,8 +62,8 @@ async with client:
 
 | Tool | Description |
 |------|-------------|
-| `search_epo(cql_query, group_by="publication"\|"family", range_begin, range_end)` | Search patents via EPO OPS. `group_by="publication"` returns one row per publication (default); `group_by="family"` deduplicates across INPADOC families. |
-| `get_epo_cql_help` | CQL field reference for building complex `search_epo` queries |
+| `search_epo(cql_query, group_by="publication"\|"family", jurisdiction="CN"\|"DE"\|"KR", range_begin, range_end)` | Search patents via EPO OPS. The optional jurisdiction recipe adds the official publication-country filter. `group_by="family"` deduplicates across INPADOC families. |
+| `get_epo_cql_help` | CQL field reference and CN, DE, and KR jurisdiction recipes for `search_epo` |
 | `get_epo_biblio` | Get bibliographic data for a patent from EPO OPS |
 | `get_epo_citations` | Get structured backward patent and non-patent citations |
 | `get_epo_equivalents` | Get simple-family equivalent publications |

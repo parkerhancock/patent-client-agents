@@ -31,7 +31,7 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-08-03  # Shipped OEPM, IPONZ, and Thailand DIP BYOK betas
+last_updated: 2026-08-03  # Added EPO CN, DE, and KR jurisdiction recipes
 
 stats:
   total_entities: 116
@@ -174,10 +174,10 @@ entities:
     rating_basis: Free OAuth2 OPS API; INPADOC backbone for ~100 offices
     connector_status: shipped
     manifest_ids: [EP/EPO/OPS, EP/EPO/CPC, EP/EPC/Statute, EP/EPO/Guidelines, EP/EPO/CaseLaw, UP/EPO/UPGuidelines]
-    next_action: per_jurisdiction_recipes
+    next_action: none
     blocked_by: []
-    last_verified: 2026-05-18
-    notes: Highest-leverage connector in catalog; §5.9 envelope sweep complete (2026-05-18). Next is per-jurisdiction recipe helpers (CN/DE/KR via INPADOC).
+    last_verified: 2026-08-03
+    notes: Highest-leverage connector in catalog; §5.9 envelope sweep complete. The canonical search_epo tool now composes CN, DE, and KR publication-country filters while existing fetch tools handle bibliography, families, full text, and legal events.
 
   - id: EM/EUIPO
     name: European Union Intellectual Property Office

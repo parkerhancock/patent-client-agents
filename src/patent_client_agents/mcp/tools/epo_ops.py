@@ -102,6 +102,11 @@ async def _epo_patent_pdf_resource(publication_number: str):
 _EPO_OPS_BASE = "https://ops.epo.org/3.2/rest-services"
 _EPO_OPS_NAME = "European Patent Office Open Patent Services (EPO OPS)"
 _EPO_FANOUT_CONCURRENCY = 5
+_EPO_JURISDICTION_RECIPES = {
+    "CN": "pn=CN",
+    "DE": "pn=DE",
+    "KR": "pn=KR",
+}
 
 
 def _epo_provenance(path: str) -> Any:
@@ -310,6 +315,12 @@ async def search_epo(
         "For deep bibliographic data on one publication, prefer "
         "``get_epo_biblio``.",
     ] = False,
+    jurisdiction: Annotated[
+        Literal["CN", "DE", "KR"] | None,
+        "Optional national publication filter. CN searches Chinese publications, "
+        "DE searches German publications, and KR searches Korean publications. "
+        "The filter is combined with cql_query and reuses the existing EPO fetch tools.",
+    ] = None,
 ) -> ListEnvelope[dict]:
     """Search worldwide patents (US, EP, WO, JP, CN, KR, and more) via EPO Open Patent Services.
 
@@ -335,6 +346,12 @@ async def search_epo(
         field_name="cql_query",
         tool_name="search_epo",
     )
+    if jurisdiction is not None:
+        recipe = _EPO_JURISDICTION_RECIPES.get(jurisdiction)
+        if recipe is None:
+            supported = ", ".join(_EPO_JURISDICTION_RECIPES)
+            raise ValidationError(f"jurisdiction must be one of {supported}; got {jurisdiction!r}")
+        cql_query = f"({cql_query}) and {recipe}"
     group = group_by.strip().lower()
     if group not in ("publication", "family"):
         raise ValidationError(f"group_by must be 'publication' or 'family'; got {group_by!r}")
@@ -461,6 +478,7 @@ async def get_epo_cql_help() -> ResponseEnvelope[dict]:
                 "description": "Find patents that cite EP1234567",
             },
         ],
+        "jurisdiction_recipes": dict(_EPO_JURISDICTION_RECIPES),
         "coverage": (
             "EPO OPS covers patents worldwide including US, EP, WO, JP, CN, "
             "KR, and many other national offices. Use country-prefixed "

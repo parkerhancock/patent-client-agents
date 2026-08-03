@@ -112,7 +112,10 @@ Discount programs:
 ### What we should improve
 
 - **§5.9 envelope sweep on EPO tools** — completed 2026-05-18 ✅. All `search_epo`/`get_epo_*`/`get_epo_cql_help` tools on the envelope, with list-accept on the four single-record gets (biblio/family/fulltext/legal_events) and cross-refs.
-- **Per-jurisdiction recipe helpers** — `get_de_biblio(de_application_number)`, `get_cn_biblio(...)`, `get_kr_biblio(...)` etc. — wraps OPS jurisdiction-specific search patterns. Documented as "Tier 1 Rank 12" in BACKLOG.
+- **Per-jurisdiction recipes** — completed 2026-08-03. The canonical
+  `search_epo` tool accepts CN, DE, and KR publication filters, then routes
+  returned numbers to the existing bibliography, family, full-text, and legal-event tools.
+  This avoids duplicate country-specific fetch tools.
 
 ### What we should NOT add
 
@@ -120,8 +123,8 @@ Discount programs:
 
 ### Next steps
 
-1. Ship per-jurisdiction recipe helpers (especially CN — see [BACKLOG Tier 1 Rank 12 `cn_via_epo_ops`](../BACKLOG.md)) to make INPADOC's transitive coverage discoverable for agents.
-2. Update fee-aware tooling once we expose fees via MCP — EPO 2026-04-01 schedule is now effective; old fee logic with 2024 figures will misquote.
+1. Update fee-aware tooling once we expose fees via MCP. The EPO 2026-04-01
+   schedule is now effective, so older fee logic can misquote current charges.
 
 ## §6 Open questions
 
@@ -156,3 +159,4 @@ Primary sources only.
 |---|---|---|
 | 2026-05-16 | Initial synopsis. Flagged §5.9 envelope sweep as pending. | — |
 | 2026-05-18 | §5.9 envelope sweep on EPO tools complete; next step is per-jurisdiction recipe helpers (CN/DE/KR via INPADOC). | — |
+| 2026-08-03 | Added CN, DE, and KR publication recipes to `search_epo`; kept existing fetch tools canonical. | [EPO OPS reference guide](https://link.epo.org/web/searching-for-patents/data/en-ops-v3.2-documentation-version-1.3.20.pdf) |

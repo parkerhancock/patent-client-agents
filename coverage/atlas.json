@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-03T19:30:30+00:00",
+  "generated_at": "2026-08-03T20:36:48+00:00",
   "schema_version": 1,
   "summary": {
     "total_entities": 116,
@@ -186,7 +186,7 @@
       "rating_label": "Green",
       "rating_basis": "Free OAuth2 OPS API; INPADOC backbone for ~100 offices",
       "connector_status": "shipped",
-      "last_verified": "2026-05-18",
+      "last_verified": "2026-08-03",
       "synopsis_url": "https://docs.patentclient.com/patent-client-index/regional/epo/",
       "github_research_url": "https://github.com/parkerhancock/patent-client-agents/blob/main/research/regional/epo.md",
       "shipped_sources": [

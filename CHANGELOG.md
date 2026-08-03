@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Added CN, DE, and KR publication recipes to the `epo_ops` connector's
+  canonical `search_epo` tool. The optional `jurisdiction` filter composes
+  official EPO CQL country clauses while the existing EPO tools continue to
+  fetch bibliography, families, full text, and worldwide legal events.
 - Added three private BYOK connector families in parallel: `oepm_spain` with
   three exact-file CEO SOAP tools, `iponz_new_zealand` with seven patent,
   trade-mark, and design tools, and `thai_dip` with nine tools across seven

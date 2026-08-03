@@ -108,7 +108,7 @@ once the first is built.
 | 9 | `kipo_kipris_patents` | KIPRIS Plus — patent endpoints | XML over ServiceKey; ~46 services × 126 products; **gated on confirming foreign-developer ServiceKey path** |
 | 10 | `kipo_kipris_trademarks` | KIPRIS Plus — TM endpoints | Same auth as #9; Nice classes localize to EN; low marginal cost |
 | 11 | `kr_statutes` | `law.go.kr/eng` fetcher | Patent / Trademark / Design Act + UCPA (trade secrets); small static fetcher mirroring `mpep` |
-| 12 | `cn_via_epo_ops` | Extend `epo_ops` with CN helpers | Free, already-built backbone; `get_cn_biblio` / `get_cn_legal_events` recipes covering ~95% of practical CN patent needs |
+| 12 | `cn_via_epo_ops` | Shipped in `search_epo` | The canonical search tool now composes CN, DE, and KR publication-country recipes and routes returned numbers to the existing EPO fetch tools. |
 | 13 | `wipo_patentscope_cn` | WIPO PATENTSCOPE CN feed | Free; full-text where EPO OPS lacks it; English MT |
 | 14 | `wipo_hague_express` | Hague Express (post-2022 CN designs included) | Free polite scrape; trivial; also covers other Hague-system designs |
 | 15 | `cn_statutes` | Static CN law corpus | Patent Law (2020), Implementing Regs (2024), Examination Guidelines (2026 ed.), Trademark Law, AUCL (trade secrets), Copyright Law, GI/PVP Regs — mirror once from WIPO Lex, expose article-by-article like `mpep` |

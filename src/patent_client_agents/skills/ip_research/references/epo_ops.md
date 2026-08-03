@@ -189,9 +189,16 @@ Search CPC classifications.
 results = await client.search_cpc("neural network")
 ```
 
+## MCP jurisdiction recipes
+
+The canonical `search_epo` MCP tool accepts `jurisdiction="CN"`, `"DE"`, or
+`"KR"`. It combines the selected publication-country clause with the caller's
+CQL query. Use the existing `get_epo_biblio`, `get_epo_family`, and
+`get_epo_legal_events` tools on returned publication numbers.
+
 ## CQL Query Syntax
 
-EPO uses Cooperative Query Language:
+EPO uses Common Query Language:
 
 ```
 # Title/abstract search
@@ -211,6 +218,9 @@ cpc="G06N"
 
 # Combined
 ta="neural" and applicant="IBM" and pd>=2020
+
+# Chinese publications
+ta="battery" and pn=CN
 ```
 
 ## Rate Limits
