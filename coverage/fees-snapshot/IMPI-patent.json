@@ -1553,7 +1553,7 @@
   "key": "MX/IMPI/patent",
   "notes": "Bundles utility-model (Art. 9a-9d, 10a-10b, 12a) and integrated-circuit-layout (Art. 9e, 9e bis, parts of 10) rows under RightType.patent \u2014 the FeeItem closed vocab doesn't have a separate sub-track and LFPPI treats them together. Disposici\u00f3n Cuarta 50% reduction emits as a duplicate FeeItem with EntityTier.small on every eligible row (Arts. 1a-1f, 2-13, 19-23, 26 BIS). Article 35 PCT international-phase fees skipped \u2014 they publish USD/CHF references to the WIPO tariff rather than fixed MXN values.",
   "office_code": "IMPI",
-  "retrieved_at": "2026-08-03",
+  "retrieved_at": "2026-08-04",
   "right": "patent",
   "source_url": "https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf",
   "statutory_basis": "Ley Federal de Protecci\u00f3n a la Propiedad Industrial (LFPPI), DOF 2020-07-01 (codigo=5596010), in force 2021-11-05. Tariff Acuerdo: original DOF 1995-08-23, last reform DOF 2023-05-12; March 2024 indigenous-waiver amendment at https://www.dof.gob.mx/nota_detalle.php?codigo=5720420&fecha=15/03/2024."
