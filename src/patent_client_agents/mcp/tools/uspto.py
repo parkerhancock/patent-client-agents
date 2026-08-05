@@ -372,18 +372,18 @@ async def get_file_history_item(
     ],
     format: Annotated[
         str,
-        "Content format. 'auto' (default): readable structured text — XML "
-        "parsed when available, else PDF text layer, else Tesseract OCR for "
-        "image-only PDFs. 'xml': raw ST.96 XML (raises if XML was not filed "
-        "for this document). For PDFs of one or more documents, use "
+        "Content format. 'auto' (default): readable structured text from XML "
+        "when available, else from the PDF text layer. Image-only PDFs are not "
+        "OCRed. 'xml': raw ST.96 XML (raises if XML was not filed for this "
+        "document). For PDFs of one or more documents, use "
         "``download_file_history`` instead (it handles n=1 as a raw PDF).",
     ] = "auto",
 ) -> dict:
     """Get the text content of a file-history document.
 
-    Returns readable text regardless of how USPTO filed the document —
-    agents do not need to pre-check format availability. Focused on
-    *content* (structured text or XML); for PDF bytes, call
+    Returns readable text when USPTO provides XML or an embedded PDF text
+    layer. Image-only PDFs raise an error with download guidance; this tool
+    does not perform OCR. For PDF bytes, call
     ``download_file_history`` (with ``item_ids=[document_identifier]``
     for a single document, or a list for bulk).
 

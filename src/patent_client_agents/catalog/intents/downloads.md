@@ -122,6 +122,6 @@ reference, status-code semantics, and quirks.
   with their own identifier space. n=1 is a raw PDF; n>1 is a zip.
 - File-history documents — use `download_file_history(application_number,
   item_ids=[document_identifier])` for a single PDF (or a list of
-  identifiers for a bulk zip). Use `get_file_history_item` only for text
-  content (XML parsing, PDF text extraction, OCR); its `format='pdf'`
+  identifiers for a bulk zip). Use `get_file_history_item` only for available
+  text content (XML parsing or PDF text extraction, without OCR); its `format='pdf'`
   mode was removed in favor of `download_file_history`.

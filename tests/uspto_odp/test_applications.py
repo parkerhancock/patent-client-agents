@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ParseError, ValidationError
 from patent_client_agents.uspto_odp.clients.applications import (
     ApplicationsClient,
     _clean_patent_identifier,
@@ -47,6 +47,61 @@ class TestCleanPatentIdentifier:
 
 def _make_client() -> ApplicationsClient:
     return ApplicationsClient(api_key="test", base_url="https://test.api.com")
+
+
+class TestGetDocumentContent:
+    @pytest.mark.asyncio
+    async def test_pdf_text_layer_is_returned(self) -> None:
+        client = _make_client()
+        extracted = "Readable file-history text. " * 10
+
+        with (
+            patch.object(
+                client,
+                "download_document_xml",
+                new_callable=AsyncMock,
+                side_effect=NotFoundError("missing XML"),
+            ),
+            patch.object(
+                client,
+                "download_document",
+                new_callable=AsyncMock,
+                return_value=b"PDF with text",
+            ),
+            patch(
+                "patent_client_agents.uspto_odp.clients.applications._extract_pdf_text",
+                return_value=(extracted, 2),
+            ),
+        ):
+            result = await client.get_document_content("16123456", "DOC123", format="auto")
+
+        assert result["source_format"] == "pdf_text"
+        assert result["content"] == extracted
+
+    @pytest.mark.asyncio
+    async def test_image_only_pdf_raises_without_ocr(self) -> None:
+        client = _make_client()
+
+        with (
+            patch.object(
+                client,
+                "download_document_xml",
+                new_callable=AsyncMock,
+                side_effect=NotFoundError("missing XML"),
+            ),
+            patch.object(
+                client,
+                "download_document",
+                new_callable=AsyncMock,
+                return_value=b"image-only PDF",
+            ),
+            patch(
+                "patent_client_agents.uspto_odp.clients.applications._extract_pdf_text",
+                return_value=("", 2),
+            ),
+        ):
+            with pytest.raises(ParseError, match="no usable text layer.*OCR is disabled"):
+                await client.get_document_content("16123456", "DOC123", format="auto")
 
 
 def _search_response(app_number: str | None = None):

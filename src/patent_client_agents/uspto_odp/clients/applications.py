@@ -7,8 +7,6 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-from mcp_data_core.cache import get_default_cache_dir
-
 from ..models import (
     ApplicationResponse,
     AssignmentResponse,
@@ -26,8 +24,7 @@ from .base import UsptoOdpBaseClient, _prune, _serialize_model_list, _serialize_
 
 logger = logging.getLogger(__name__)
 
-_OCR_CACHE_DIR = get_default_cache_dir() / "ifw_ocr"
-_OCR_MIN_CHARS_PER_PAGE = 50
+_PDF_MIN_CHARS_PER_PAGE = 50
 
 # Lean projection sent when callers don't request a full record. Keeps search
 # responses small enough to fit comfortably in an agent's context window —
@@ -64,29 +61,8 @@ def _extract_pdf_text(pdf_bytes: bytes) -> tuple[str, int]:
     return "\n\n".join(pages).strip(), len(pages)
 
 
-def _pdf_needs_ocr(text: str, page_count: int) -> bool:
-    if page_count == 0:
-        return False
-    return (len(text) / page_count) < _OCR_MIN_CHARS_PER_PAGE
-
-
-def _ocr_pdf(pdf_bytes: bytes, cache_key: str) -> str:
-    """OCR a PDF with Tesseract, caching the result under cache_key.
-
-    Requires ``tesseract-ocr`` and ``poppler-utils`` installed on the host.
-    """
-    cache_path = _OCR_CACHE_DIR / f"{cache_key}.txt"
-    if cache_path.exists():
-        return cache_path.read_text()
-
-    import pytesseract
-    from pdf2image import convert_from_bytes
-
-    images = convert_from_bytes(pdf_bytes)
-    text = "\n\n".join(pytesseract.image_to_string(img) for img in images)
-    _OCR_CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    cache_path.write_text(text)
-    return text
+def _pdf_has_usable_text(text: str, page_count: int) -> bool:
+    return page_count > 0 and (len(text) / page_count) >= _PDF_MIN_CHARS_PER_PAGE
 
 
 def _merge_application_metadata(entry: dict[str, Any]) -> dict[str, Any]:
@@ -431,17 +407,17 @@ class ApplicationsClient(UsptoOdpBaseClient):
         Modes:
 
         - ``"auto"`` (default): readable structured text. Tries ST.96 XML
-          first (parsed into claims/spec/abstract/office-action structure);
-          falls back to PDF text-layer extraction; falls back to Tesseract
-          OCR for image-only PDFs. OCR results are cached under
-          ``~/.cache/patent_client_agents/ifw_ocr/{document_identifier}.txt``.
+          first (parsed into claims/spec/abstract/office-action structure),
+          then falls back to PDF text-layer extraction. Image-only PDFs raise
+          ``ParseError`` with guidance to download the original PDF. This path
+          never performs OCR.
         - ``"pdf"``: base64-encoded PDF bytes (for display/download).
         - ``"xml"``: raw ST.96 XML string (raises if XML not filed).
 
         Returns a dict whose shape depends on the mode. All responses
         include ``application_number``, ``document_identifier``, and
         ``format``. ``auto`` additionally includes ``source_format``
-        (``"xml"`` | ``"pdf_text"`` | ``"pdf_ocr"``) and ``content``.
+        (``"xml"`` | ``"pdf_text"``) and ``content``.
         """
         if format not in ("auto", "pdf", "xml"):
             raise ValueError(f"format must be 'auto', 'pdf', or 'xml', got {format!r}")
@@ -495,13 +471,18 @@ class ApplicationsClient(UsptoOdpBaseClient):
         result["format"] = "text"
         result["page_count"] = page_count
 
-        if _pdf_needs_ocr(text, page_count):
-            ocr_text = await asyncio.to_thread(_ocr_pdf, pdf_bytes, document_identifier)
-            result["source_format"] = "pdf_ocr"
-            result["content"] = ocr_text
-        else:
-            result["source_format"] = "pdf_text"
-            result["content"] = text
+        if not _pdf_has_usable_text(text, page_count):
+            from mcp_data_core.exceptions import ParseError
+
+            raise ParseError(
+                f"File-history PDF {document_identifier} for application {appl} has no "
+                "usable text layer. OCR is disabled for file-history documents; use "
+                "download_file_history to retrieve the original PDF.",
+                source=f"uspto-file-history:{appl}/{document_identifier}",
+            )
+
+        result["source_format"] = "pdf_text"
+        result["content"] = text
         return result
 
     async def download_documents(

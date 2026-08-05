@@ -82,7 +82,7 @@ async with UsptoOdpClient() as client:
 | `search_applications` | Search USPTO patent applications by keyword or application number |
 | `get_application` | Get full metadata for a patent application |
 | `list_file_history` | List prosecution file-history documents with available formats per document |
-| `get_file_history_item` | Get a file-history item's **text content** (format="auto" → readable text via XML → PDF text layer → OCR; "xml" → raw ST.96 XML). PDF bytes moved to `download_file_history`. |
+| `get_file_history_item` | Get a file-history item's **text content** from XML or an embedded PDF text layer. Image-only PDFs are not OCRed. `format="xml"` returns raw ST.96 XML. PDF bytes moved to `download_file_history`. |
 | `download_file_history` | Bulk-download file-history PDFs for one application as a zip (n=1 → raw PDF). Cap: 50. Filters: `item_ids`, `document_codes`, `after`, `before`. |
 | `get_patent_family` | Get patent family relationships (continuations, divisionals) |
 | `get_patent_assignment` | Get assignment and ownership history for an application |

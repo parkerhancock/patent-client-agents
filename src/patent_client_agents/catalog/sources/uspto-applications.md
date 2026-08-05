@@ -66,7 +66,7 @@ is a Python-API convenience, not a separate MCP surface.
 | `search_applications` | Search USPTO patent applications |
 | `get_application` | Get a single application by number |
 | `list_file_history` | List prosecution history documents |
-| `get_file_history_item` | Fetch structured **text content** of one file-wrapper document (XML / PDF-text / OCR). PDF bytes: use `download_file_history`. |
+| `get_file_history_item` | Fetch structured **text content** from XML or an embedded PDF text layer. Image-only PDFs are not OCRed. PDF bytes: use `download_file_history`. |
 | `download_file_history` | Bulk-download PDFs for one application's file wrapper as a zip (n=1 → raw PDF). Cap: 50. Filters: `item_ids`, `document_codes`, `after`, `before`. |
 | `get_patent_family` | Continuity and foreign priority graph |
 
