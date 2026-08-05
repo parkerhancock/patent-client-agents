@@ -7,6 +7,7 @@ from typing import Annotated, Any, cast
 from urllib.parse import urlparse
 
 from fastmcp import FastMCP
+from fastmcp.tools.tool import ToolResult  # ty: ignore[unresolved-import]
 
 from mcp_data_core.envelope import (
     ListEnvelope,
@@ -14,7 +15,7 @@ from mcp_data_core.envelope import (
 )
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
-from mcp_data_core.mcp.downloads import read_resource, register_source
+from mcp_data_core.mcp.downloads import download_tool_result, read_resource, register_source
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
 
 uspto_mcp = FastMCP("USPTO")
@@ -373,26 +374,28 @@ async def get_file_history_item(
     format: Annotated[
         str,
         "Content format. 'auto' (default): readable structured text from XML "
-        "when available, else from the PDF text layer. Image-only PDFs are not "
-        "OCRed. 'xml': raw ST.96 XML (raises if XML was not filed for this "
-        "document). For PDFs of one or more documents, use "
-        "``download_file_history`` instead (it handles n=1 as a raw PDF).",
+        "when available, else from the PDF text layer. If the PDF has no text "
+        "layer, returns the original PDF as a signed download without OCR. "
+        "'xml': raw ST.96 XML (raises if XML was not filed for this document). "
+        "For PDFs of one or more known documents, use ``download_file_history``.",
     ] = "auto",
-) -> dict:
-    """Get the text content of a file-history document.
+) -> dict | ToolResult:
+    """Get the content of a file-history document.
 
     Returns readable text when USPTO provides XML or an embedded PDF text
-    layer. Image-only PDFs raise an error with download guidance; this tool
-    does not perform OCR. For PDF bytes, call
-    ``download_file_history`` (with ``item_ids=[document_identifier]``
-    for a single document, or a list for bulk).
+    layer. For an image-only PDF, returns the original PDF as a signed download.
+    This tool does not perform OCR or repeat the USPTO PDF request. For known
+    PDF items, ``download_file_history`` also supports single and bulk downloads.
 
     Call ``list_file_history`` first to discover valid
     ``document_identifier`` values for an application.
     """
     from mcp_data_core.exceptions import NotFoundError, ValidationError
     from mcp_data_core.filenames import file_history_item as _fh_name
-    from patent_client_agents.uspto_odp.clients.applications import ApplicationsClient
+    from patent_client_agents.uspto_odp.clients.applications import (
+        ApplicationsClient,
+        ImageOnlyFileHistoryPdf,
+    )
 
     if format == "pdf":
         raise ValidationError(
@@ -406,6 +409,27 @@ async def get_file_history_item(
             result = await client.get_document_content(
                 application_number, document_identifier, format=format
             )
+            if isinstance(result, ImageOnlyFileHistoryPdf):
+                filename = _fh_name(
+                    application_number=result.application_number,
+                    document_code=None,
+                    mail_date=None,
+                    document_identifier=result.document_identifier,
+                    extension="pdf",
+                )
+                return await download_tool_result(
+                    "uspto/applications/"
+                    f"{result.application_number}/documents/{result.document_identifier}",
+                    result.pdf_bytes,
+                    filename=filename,
+                    content_type="application/pdf",
+                    description="Original USPTO file-history PDF without a text layer.",
+                    application_number=result.application_number,
+                    document_identifier=result.document_identifier,
+                    page_count=result.page_count,
+                    source_format="pdf_image",
+                    text_available=False,
+                )
             if result.get("format") == "xml":
                 result["filename"] = _fh_name(
                     application_number=application_number,

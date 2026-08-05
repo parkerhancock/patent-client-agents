@@ -18,10 +18,12 @@ from pydantic import BaseModel
 from mcp_data_core.envelope import ListEnvelope, Provenance
 from patent_client_agents.mcp.tools.uspto import (
     get_application,
+    get_file_history_item,
     get_patent_assignment,
     list_file_history,
     search_applications,
 )
+from patent_client_agents.uspto_odp.clients.applications import ImageOnlyFileHistoryPdf
 
 # ──────────────────────────────────────────────────────────────────────
 # Fakes — minimal Pydantic models that mimic UsptoOdpClient return types
@@ -219,6 +221,49 @@ async def test_list_file_history_returns_list_envelope():
     }
     assert result.items[0]["formats"] == ["PDF", "MS_WORD"]
     assert "/api/v1/patent/applications/16123456/documents" in result.provenance.source_url
+
+
+@pytest.mark.asyncio
+async def test_get_file_history_item_returns_image_only_pdf_without_second_fetch():
+    pdf_result = ImageOnlyFileHistoryPdf(
+        application_number="16123456",
+        document_identifier="ABC123",
+        pdf_bytes=b"original image-only PDF",
+        page_count=12,
+    )
+    download_result = object()
+
+    with (
+        patch(
+            "patent_client_agents.uspto_odp.clients.applications.ApplicationsClient"
+        ) as mock_client_cls,
+        patch(
+            "patent_client_agents.mcp.tools.uspto.download_tool_result",
+            new_callable=AsyncMock,
+            return_value=download_result,
+        ) as mock_download_result,
+    ):
+        mock_client = mock_client_cls.return_value.__aenter__.return_value
+        mock_client.get_document_content = AsyncMock(return_value=pdf_result)
+
+        result = await get_file_history_item(
+            application_number="16123456",
+            document_identifier="ABC123",
+        )
+
+    assert result is download_result
+    mock_client.get_document_content.assert_awaited_once_with(
+        "16123456", "ABC123", format="auto"
+    )
+    mock_download_result.assert_awaited_once()
+    args, kwargs = mock_download_result.await_args
+    assert args == (
+        "uspto/applications/16123456/documents/ABC123",
+        b"original image-only PDF",
+    )
+    assert kwargs["content_type"] == "application/pdf"
+    assert kwargs["page_count"] == 12
+    assert kwargs["text_available"] is False
 
 
 # ──────────────────────────────────────────────────────────────────────

@@ -6,9 +6,10 @@ from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from mcp_data_core.exceptions import NotFoundError, ParseError, ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.uspto_odp.clients.applications import (
     ApplicationsClient,
+    ImageOnlyFileHistoryPdf,
     _clean_patent_identifier,
 )
 
@@ -79,7 +80,7 @@ class TestGetDocumentContent:
         assert result["content"] == extracted
 
     @pytest.mark.asyncio
-    async def test_image_only_pdf_raises_without_ocr(self) -> None:
+    async def test_image_only_pdf_returns_original_bytes_without_ocr(self) -> None:
         client = _make_client()
 
         with (
@@ -94,14 +95,21 @@ class TestGetDocumentContent:
                 "download_document",
                 new_callable=AsyncMock,
                 return_value=b"image-only PDF",
-            ),
+            ) as download_pdf,
             patch(
                 "patent_client_agents.uspto_odp.clients.applications._extract_pdf_text",
                 return_value=("", 2),
             ),
         ):
-            with pytest.raises(ParseError, match="no usable text layer.*OCR is disabled"):
-                await client.get_document_content("16123456", "DOC123", format="auto")
+            result = await client.get_document_content("16123456", "DOC123", format="auto")
+
+        assert result == ImageOnlyFileHistoryPdf(
+            application_number="16123456",
+            document_identifier="DOC123",
+            pdf_bytes=b"image-only PDF",
+            page_count=2,
+        )
+        download_pdf.assert_awaited_once_with("16123456", "DOC123")
 
 
 def _search_response(app_number: str | None = None):

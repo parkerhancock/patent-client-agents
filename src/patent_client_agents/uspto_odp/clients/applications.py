@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 from collections.abc import Sequence
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -25,6 +26,16 @@ from .base import UsptoOdpBaseClient, _prune, _serialize_model_list, _serialize_
 logger = logging.getLogger(__name__)
 
 _PDF_MIN_CHARS_PER_PAGE = 50
+
+
+@dataclass(frozen=True)
+class ImageOnlyFileHistoryPdf:
+    """Original file-history PDF when no usable text layer exists."""
+
+    application_number: str
+    document_identifier: str
+    pdf_bytes: bytes
+    page_count: int
 
 # Lean projection sent when callers don't request a full record. Keeps search
 # responses small enough to fit comfortably in an agent's context window —
@@ -401,22 +412,23 @@ class ApplicationsClient(UsptoOdpBaseClient):
         document_identifier: str,
         *,
         format: str = "auto",
-    ) -> dict[str, Any]:
+    ) -> dict[str, Any] | ImageOnlyFileHistoryPdf:
         """Fetch a file-wrapper document in the best available format.
 
         Modes:
 
         - ``"auto"`` (default): readable structured text. Tries ST.96 XML
           first (parsed into claims/spec/abstract/office-action structure),
-          then falls back to PDF text-layer extraction. Image-only PDFs raise
-          ``ParseError`` with guidance to download the original PDF. This path
-          never performs OCR.
+          then falls back to PDF text-layer extraction. For an image-only PDF,
+          returns the original bytes as ``ImageOnlyFileHistoryPdf`` so the MCP
+          layer can provide a signed download. This path never performs OCR.
         - ``"pdf"``: base64-encoded PDF bytes (for display/download).
         - ``"xml"``: raw ST.96 XML string (raises if XML not filed).
 
-        Returns a dict whose shape depends on the mode. All responses
-        include ``application_number``, ``document_identifier``, and
-        ``format``. ``auto`` additionally includes ``source_format``
+        Returns a dict whose shape depends on the mode, except that ``auto``
+        returns ``ImageOnlyFileHistoryPdf`` when the PDF lacks usable text.
+        Dict responses include ``application_number``, ``document_identifier``,
+        and ``format``. Text responses also include ``source_format``
         (``"xml"`` | ``"pdf_text"``) and ``content``.
         """
         if format not in ("auto", "pdf", "xml"):
@@ -472,13 +484,11 @@ class ApplicationsClient(UsptoOdpBaseClient):
         result["page_count"] = page_count
 
         if not _pdf_has_usable_text(text, page_count):
-            from mcp_data_core.exceptions import ParseError
-
-            raise ParseError(
-                f"File-history PDF {document_identifier} for application {appl} has no "
-                "usable text layer. OCR is disabled for file-history documents; use "
-                "download_file_history to retrieve the original PDF.",
-                source=f"uspto-file-history:{appl}/{document_identifier}",
+            return ImageOnlyFileHistoryPdf(
+                application_number=appl,
+                document_identifier=document_identifier,
+                pdf_bytes=pdf_bytes,
+                page_count=page_count,
             )
 
         result["source_format"] = "pdf_text"
