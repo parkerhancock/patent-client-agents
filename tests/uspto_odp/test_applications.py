@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from types import SimpleNamespace
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -9,9 +10,9 @@ import pytest
 from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.uspto_odp.clients.applications import (
     ApplicationsClient,
-    ImageOnlyFileHistoryPdf,
     _clean_patent_identifier,
 )
+from patent_client_agents.uspto_odp.models.applications import DocumentRecord, DocumentsResponse
 
 # ---------------------------------------------------------------------------
 # _clean_patent_identifier
@@ -50,66 +51,76 @@ def _make_client() -> ApplicationsClient:
     return ApplicationsClient(api_key="test", base_url="https://test.api.com")
 
 
-class TestGetDocumentContent:
+class TestDownloadDocumentDocx:
     @pytest.mark.asyncio
-    async def test_pdf_text_layer_is_returned(self) -> None:
+    async def test_uses_advertised_ms_word_url(self) -> None:
         client = _make_client()
-        extracted = "Readable file-history text. " * 10
-
-        with (
-            patch.object(
-                client,
-                "download_document_xml",
-                new_callable=AsyncMock,
-                side_effect=NotFoundError("missing XML"),
-            ),
-            patch.object(
-                client,
-                "download_document",
-                new_callable=AsyncMock,
-                return_value=b"PDF with text",
-            ),
-            patch(
-                "patent_client_agents.uspto_odp.clients.applications._extract_pdf_text",
-                return_value=(extracted, 2),
-            ),
-        ):
-            result = await client.get_document_content("16123456", "DOC123", format="auto")
-
-        assert result["source_format"] == "pdf_text"
-        assert result["content"] == extracted
-
-    @pytest.mark.asyncio
-    async def test_image_only_pdf_returns_original_bytes_without_ocr(self) -> None:
-        client = _make_client()
-
-        with (
-            patch.object(
-                client,
-                "download_document_xml",
-                new_callable=AsyncMock,
-                side_effect=NotFoundError("missing XML"),
-            ),
-            patch.object(
-                client,
-                "download_document",
-                new_callable=AsyncMock,
-                return_value=b"image-only PDF",
-            ) as download_pdf,
-            patch(
-                "patent_client_agents.uspto_odp.clients.applications._extract_pdf_text",
-                return_value=("", 2),
-            ),
-        ):
-            result = await client.get_document_content("16123456", "DOC123", format="auto")
-
-        assert result == ImageOnlyFileHistoryPdf(
-            application_number="16123456",
-            document_identifier="DOC123",
-            pdf_bytes=b"image-only PDF",
-            page_count=2,
+        documents = DocumentsResponse(
+            documents=[
+                DocumentRecord(
+                    documentIdentifier="DOC123",
+                    downloadOptionBag=[
+                        {
+                            "mimeTypeIdentifier": "PDF",
+                            "downloadUrl": "https://api.uspto.gov/example.pdf",
+                        },
+                        {
+                            "mimeTypeIdentifier": "MS_WORD",
+                            "downloadUrl": (
+                                "https://api.uspto.gov/api/v1/download/applications/"
+                                "16123456/DOC123/files/Office%20Action.docx"
+                            ),
+                        },
+                    ],
+                )
+            ]
         )
-        download_pdf.assert_awaited_once_with("16123456", "DOC123")
+
+        with (
+            patch.object(
+                client,
+                "get_documents",
+                new_callable=AsyncMock,
+                return_value=documents,
+            ) as get_documents,
+            patch.object(
+                client,
+                "_request",
+                new_callable=AsyncMock,
+                return_value=SimpleNamespace(content=b"original DOCX"),
+            ) as request,
+        ):
+            result = await client.download_document_docx("16123456", "DOC123")
+
+        assert result == b"original DOCX"
+        get_documents.assert_awaited_once_with("16123456", include_associated=False)
+        request.assert_awaited_once_with(
+            "GET",
+            "/api/v1/download/applications/16123456/DOC123/files/Office%20Action.docx",
+            context="download DOCX for DOC123 of 16123456",
+            timeout=120.0,
+        )
+
+    @pytest.mark.asyncio
+    async def test_missing_docx_raises_not_found(self) -> None:
+        client = _make_client()
+        documents = DocumentsResponse(
+            documents=[
+                DocumentRecord(
+                    documentIdentifier="DOC123",
+                    downloadOptionBag=[{"mimeTypeIdentifier": "PDF"}],
+                )
+            ]
+        )
+
+        with patch.object(
+            client,
+            "get_documents",
+            new_callable=AsyncMock,
+            return_value=documents,
+        ):
+            with pytest.raises(NotFoundError, match="has no DOCX version"):
+                await client.download_document_docx("16123456", "DOC123")
 
 
 def _search_response(app_number: str | None = None):

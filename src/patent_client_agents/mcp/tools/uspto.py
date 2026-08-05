@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any, Literal, cast
 from urllib.parse import urlparse
 
 from fastmcp import FastMCP
@@ -308,8 +308,8 @@ async def list_file_history(
 
     Returns each document with its identifier, code, description, date,
     direction (incoming/outgoing/internal), page count, and available
-    formats (XML, PDF, MS_WORD). Pass the ``document_identifier`` to
-    ``get_file_history_item`` to fetch the content.
+    formats (`pdf`, `xml`, `docx`). Pass the ``document_identifier`` to
+    ``get_file_history_item`` to download an exact artifact.
 
     Key document codes: CLM (claims as filed/amended), SPEC (specification),
     ABST (abstract), CTFR/CTNF (office actions), REM (applicant remarks),
@@ -324,9 +324,9 @@ async def list_file_history(
     documents: list[dict[str, object]] = []
     for raw in response.model_dump().get("documents", []):
         formats = [
-            opt.get("mimeTypeIdentifier")
+            "docx" if value == "MS_WORD" else str(value).lower()
             for opt in (raw.get("downloadOptionBag") or [])
-            if opt.get("mimeTypeIdentifier")
+            if (value := opt.get("mimeTypeIdentifier"))
         ]
         documents.append(
             {
@@ -372,75 +372,68 @@ async def get_file_history_item(
         "Document identifier from list_file_history (e.g. 'IGBCPFXCPXXIFW3').",
     ],
     format: Annotated[
-        str,
-        "Content format. 'auto' (default): readable structured text from XML "
-        "when available, else from the PDF text layer. If the PDF has no text "
-        "layer, returns the original PDF as a signed download without OCR. "
-        "'xml': raw ST.96 XML (raises if XML was not filed for this document). "
-        "For PDFs of one or more known documents, use ``download_file_history``.",
-    ] = "auto",
-) -> dict | ToolResult:
-    """Get the content of a file-history document.
+        Literal["pdf", "xml", "docx"],
+        "Artifact format: 'pdf' (default), 'xml', or 'docx'. The requested "
+        "file is returned as a signed download without OCR or text extraction. "
+        "XML and DOCX are available only when listed by list_file_history.",
+    ] = "pdf",
+) -> ToolResult:
+    """Download one file-history document in an exact USPTO format.
 
-    Returns readable text when USPTO provides XML or an embedded PDF text
-    layer. For an image-only PDF, returns the original PDF as a signed download.
-    This tool does not perform OCR or repeat the USPTO PDF request. For known
-    PDF items, ``download_file_history`` also supports single and bulk downloads.
+    PDF is the default. XML and DOCX must be available for the selected item.
+    The tool returns a signed download and does not run OCR or text extraction.
 
     Call ``list_file_history`` first to discover valid
     ``document_identifier`` values for an application.
     """
-    from mcp_data_core.exceptions import NotFoundError, ValidationError
+    from mcp_data_core.exceptions import NotFoundError
     from mcp_data_core.filenames import file_history_item as _fh_name
-    from patent_client_agents.uspto_odp.clients.applications import (
-        ApplicationsClient,
-        ImageOnlyFileHistoryPdf,
-    )
-
-    if format == "pdf":
-        raise ValidationError(
-            "format='pdf' was removed from get_file_history_item — use "
-            "download_file_history(application_number, item_ids=[document_identifier]) "
-            "to get a PDF download_url."
-        )
+    from patent_client_agents.uspto_odp.clients.applications import ApplicationsClient
 
     async with ApplicationsClient() as client:
         try:
-            result = await client.get_document_content(
-                application_number, document_identifier, format=format
+            if format == "pdf":
+                content = await client.download_document(application_number, document_identifier)
+                content_type = "application/pdf"
+                description = "Original USPTO file-history PDF."
+                resource_suffix = document_identifier
+            elif format == "xml":
+                xml = await client.download_document_xml(application_number, document_identifier)
+                content = xml.encode("utf-8")
+                content_type = "application/xml"
+                description = "Original USPTO ST.96 file-history XML."
+                resource_suffix = f"{document_identifier}/xml"
+            else:
+                content = await client.download_document_docx(
+                    application_number, document_identifier
+                )
+                content_type = (
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                )
+                description = "Original USPTO file-history DOCX."
+                resource_suffix = f"{document_identifier}/docx"
+
+            filename = _fh_name(
+                application_number=application_number,
+                document_code=None,
+                mail_date=None,
+                document_identifier=document_identifier,
+                extension=format,
             )
-            if isinstance(result, ImageOnlyFileHistoryPdf):
-                filename = _fh_name(
-                    application_number=result.application_number,
-                    document_code=None,
-                    mail_date=None,
-                    document_identifier=result.document_identifier,
-                    extension="pdf",
-                )
-                return await download_tool_result(
-                    "uspto/applications/"
-                    f"{result.application_number}/documents/{result.document_identifier}",
-                    result.pdf_bytes,
-                    filename=filename,
-                    content_type="application/pdf",
-                    description="Original USPTO file-history PDF without a text layer.",
-                    application_number=result.application_number,
-                    document_identifier=result.document_identifier,
-                    page_count=result.page_count,
-                    source_format="pdf_image",
-                    text_available=False,
-                )
-            if result.get("format") == "xml":
-                result["filename"] = _fh_name(
-                    application_number=application_number,
-                    document_code=None,
-                    mail_date=None,
-                    document_identifier=document_identifier,
-                    extension="xml",
-                )
-            return result
-        except NotFoundError:
+            return await download_tool_result(
+                f"uspto/applications/{application_number}/documents/{resource_suffix}",
+                content,
+                filename=filename,
+                content_type=content_type,
+                description=description,
+                application_number=application_number,
+                document_identifier=document_identifier,
+                source_format=format,
+            )
+        except NotFoundError as exc:
             response = await client.get_documents(application_number)
+            if any(d.documentIdentifier == document_identifier for d in response.documents):
+                raise exc
             sample = [
                 {
                     "document_identifier": d.documentIdentifier,

@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import logging
 from collections.abc import Sequence
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 from ..models import (
     ApplicationResponse,
@@ -24,18 +24,6 @@ from ..models import (
 from .base import UsptoOdpBaseClient, _prune, _serialize_model_list, _serialize_range_filters
 
 logger = logging.getLogger(__name__)
-
-_PDF_MIN_CHARS_PER_PAGE = 50
-
-
-@dataclass(frozen=True)
-class ImageOnlyFileHistoryPdf:
-    """Original file-history PDF when no usable text layer exists."""
-
-    application_number: str
-    document_identifier: str
-    pdf_bytes: bytes
-    page_count: int
 
 # Lean projection sent when callers don't request a full record. Keeps search
 # responses small enough to fit comfortably in an agent's context window —
@@ -59,21 +47,6 @@ STUB_APPLICATION_FIELDS: tuple[str, ...] = (
     "applicationMetaData.docketNumber",
     "applicationMetaData.cpcClassificationBag",
 )
-
-
-def _extract_pdf_text(pdf_bytes: bytes) -> tuple[str, int]:
-    """Extract the text layer from a PDF. Returns (text, page_count)."""
-    import io
-
-    from pypdf import PdfReader
-
-    reader = PdfReader(io.BytesIO(pdf_bytes))
-    pages = [page.extract_text() or "" for page in reader.pages]
-    return "\n\n".join(pages).strip(), len(pages)
-
-
-def _pdf_has_usable_text(text: str, page_count: int) -> bool:
-    return page_count > 0 and (len(text) / page_count) >= _PDF_MIN_CHARS_PER_PAGE
 
 
 def _merge_application_metadata(entry: dict[str, Any]) -> dict[str, Any]:
@@ -406,94 +379,54 @@ class ApplicationsClient(UsptoOdpBaseClient):
 
         raise ValueError(f"No XML file found in archive for {document_identifier}")
 
-    async def get_document_content(
+    async def download_document_docx(
         self,
         application_number: str,
         document_identifier: str,
-        *,
-        format: str = "auto",
-    ) -> dict[str, Any] | ImageOnlyFileHistoryPdf:
-        """Fetch a file-wrapper document in the best available format.
+    ) -> bytes:
+        """Download the DOCX version of a file-wrapper document.
 
-        Modes:
-
-        - ``"auto"`` (default): readable structured text. Tries ST.96 XML
-          first (parsed into claims/spec/abstract/office-action structure),
-          then falls back to PDF text-layer extraction. For an image-only PDF,
-          returns the original bytes as ``ImageOnlyFileHistoryPdf`` so the MCP
-          layer can provide a signed download. This path never performs OCR.
-        - ``"pdf"``: base64-encoded PDF bytes (for display/download).
-        - ``"xml"``: raw ST.96 XML string (raises if XML not filed).
-
-        Returns a dict whose shape depends on the mode, except that ``auto``
-        returns ``ImageOnlyFileHistoryPdf`` when the PDF lacks usable text.
-        Dict responses include ``application_number``, ``document_identifier``,
-        and ``format``. Text responses also include ``source_format``
-        (``"xml"`` | ``"pdf_text"``) and ``content``.
+        DOCX filenames are document-specific. This method reads the document
+        metadata, selects the advertised ``MS_WORD`` URL, and returns its bytes
+        unchanged.
         """
-        if format not in ("auto", "pdf", "xml"):
-            raise ValueError(f"format must be 'auto', 'pdf', or 'xml', got {format!r}")
+        from mcp_data_core.exceptions import NotFoundError
 
         appl = self._normalize_application_number(application_number)
-        result: dict[str, Any] = {
-            "application_number": appl,
-            "document_identifier": document_identifier,
-        }
-
-        if format in ("auto", "xml"):
-            from mcp_data_core.exceptions import NotFoundError
-
-            try:
-                xml_text = await self.download_document_xml(appl, document_identifier)
-            except (ValueError, NotFoundError) as exc:
-                if format == "xml":
-                    raise
-                logger.warning(
-                    "XML fetch failed for %s/%s (%s); falling back to PDF.",
-                    appl,
-                    document_identifier,
-                    exc,
-                )
-                xml_text = None
-            if xml_text is not None:
-                if format == "xml":
-                    result["format"] = "xml"
-                    result["content"] = xml_text
-                    return result
-                from ..xml_parser import parse_document_xml
-
-                result["format"] = "text"
-                result["source_format"] = "xml"
-                result["content"] = parse_document_xml(xml_text)
-                return result
-
-        import asyncio
-        import base64
-
-        pdf_bytes = await self.download_document(appl, document_identifier)
-
-        if format == "pdf":
-            result["format"] = "pdf"
-            result["content_type"] = "application/pdf"
-            result["content_base64"] = base64.b64encode(pdf_bytes).decode()
-            result["size_bytes"] = len(pdf_bytes)
-            return result
-
-        text, page_count = await asyncio.to_thread(_extract_pdf_text, pdf_bytes)
-        result["format"] = "text"
-        result["page_count"] = page_count
-
-        if not _pdf_has_usable_text(text, page_count):
-            return ImageOnlyFileHistoryPdf(
-                application_number=appl,
-                document_identifier=document_identifier,
-                pdf_bytes=pdf_bytes,
-                page_count=page_count,
+        documents = await self.get_documents(appl, include_associated=False)
+        document = next(
+            (item for item in documents.documents if item.documentIdentifier == document_identifier),
+            None,
+        )
+        if document is None:
+            raise NotFoundError(
+                f"Document {document_identifier!r} not found in application {appl}."
             )
 
-        result["source_format"] = "pdf_text"
-        result["content"] = text
-        return result
+        option = next(
+            (
+                item
+                for item in (document.downloadOptionBag or [])
+                if item.get("mimeTypeIdentifier") == "MS_WORD" and item.get("downloadUrl")
+            ),
+            None,
+        )
+        if option is None:
+            raise NotFoundError(
+                f"Document {document_identifier!r} in application {appl} has no DOCX version."
+            )
+
+        parsed = urlparse(str(option["downloadUrl"]))
+        if parsed.hostname not in (None, "api.uspto.gov"):
+            raise ValueError(f"Unexpected USPTO document host: {parsed.hostname}")
+        path = parsed.path + (f"?{parsed.query}" if parsed.query else "")
+        response = await self._request(
+            "GET",
+            path,
+            context=f"download DOCX for {document_identifier} of {application_number}",
+            timeout=120.0,
+        )
+        return response.content
 
     async def download_documents(
         self,

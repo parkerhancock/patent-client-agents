@@ -23,7 +23,6 @@ from patent_client_agents.mcp.tools.uspto import (
     list_file_history,
     search_applications,
 )
-from patent_client_agents.uspto_odp.clients.applications import ImageOnlyFileHistoryPdf
 
 # ──────────────────────────────────────────────────────────────────────
 # Fakes — minimal Pydantic models that mimic UsptoOdpClient return types
@@ -219,18 +218,12 @@ async def test_list_file_history_returns_list_envelope():
         "page_count",
         "formats",
     }
-    assert result.items[0]["formats"] == ["PDF", "MS_WORD"]
+    assert result.items[0]["formats"] == ["pdf", "docx"]
     assert "/api/v1/patent/applications/16123456/documents" in result.provenance.source_url
 
 
 @pytest.mark.asyncio
-async def test_get_file_history_item_returns_image_only_pdf_without_second_fetch():
-    pdf_result = ImageOnlyFileHistoryPdf(
-        application_number="16123456",
-        document_identifier="ABC123",
-        pdf_bytes=b"original image-only PDF",
-        page_count=12,
-    )
+async def test_get_file_history_item_defaults_to_original_pdf():
     download_result = object()
 
     with (
@@ -244,7 +237,7 @@ async def test_get_file_history_item_returns_image_only_pdf_without_second_fetch
         ) as mock_download_result,
     ):
         mock_client = mock_client_cls.return_value.__aenter__.return_value
-        mock_client.get_document_content = AsyncMock(return_value=pdf_result)
+        mock_client.download_document = AsyncMock(return_value=b"original PDF")
 
         result = await get_file_history_item(
             application_number="16123456",
@@ -252,18 +245,69 @@ async def test_get_file_history_item_returns_image_only_pdf_without_second_fetch
         )
 
     assert result is download_result
-    mock_client.get_document_content.assert_awaited_once_with(
-        "16123456", "ABC123", format="auto"
-    )
+    mock_client.download_document.assert_awaited_once_with("16123456", "ABC123")
+    mock_client.download_document_xml.assert_not_called()
+    mock_client.download_document_docx.assert_not_called()
     mock_download_result.assert_awaited_once()
     args, kwargs = mock_download_result.await_args
     assert args == (
         "uspto/applications/16123456/documents/ABC123",
-        b"original image-only PDF",
+        b"original PDF",
     )
     assert kwargs["content_type"] == "application/pdf"
-    assert kwargs["page_count"] == 12
-    assert kwargs["text_available"] is False
+    assert kwargs["source_format"] == "pdf"
+    assert kwargs["filename"].endswith(".pdf")
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("format", "method_name", "upstream_content", "expected_content", "content_type"),
+    [
+        ("xml", "download_document_xml", "<document />", b"<document />", "application/xml"),
+        (
+            "docx",
+            "download_document_docx",
+            b"original DOCX",
+            b"original DOCX",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ),
+    ],
+)
+async def test_get_file_history_item_returns_requested_artifact(
+    format, method_name, upstream_content, expected_content, content_type
+):
+    download_result = object()
+
+    with (
+        patch(
+            "patent_client_agents.uspto_odp.clients.applications.ApplicationsClient"
+        ) as mock_client_cls,
+        patch(
+            "patent_client_agents.mcp.tools.uspto.download_tool_result",
+            new_callable=AsyncMock,
+            return_value=download_result,
+        ) as mock_download_result,
+    ):
+        mock_client = mock_client_cls.return_value.__aenter__.return_value
+        method = AsyncMock(return_value=upstream_content)
+        setattr(mock_client, method_name, method)
+
+        result = await get_file_history_item(
+            application_number="16123456",
+            document_identifier="ABC123",
+            format=format,
+        )
+
+    assert result is download_result
+    method.assert_awaited_once_with("16123456", "ABC123")
+    args, kwargs = mock_download_result.await_args
+    assert args == (
+        f"uspto/applications/16123456/documents/ABC123/{format}",
+        expected_content,
+    )
+    assert kwargs["content_type"] == content_type
+    assert kwargs["source_format"] == format
+    assert kwargs["filename"].endswith(f".{format}")
 
 
 # ──────────────────────────────────────────────────────────────────────

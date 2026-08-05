@@ -91,7 +91,7 @@ Find records matching a query.
 
 | Tool | Notes |
 |---|---|
-| `get_file_history_item` | Fetch one prosecution document. `format="auto"` returns XML-derived text, embedded PDF text, or a signed original PDF download when no text layer exists. It never runs OCR. `format="xml"` returns raw ST.96. |
+| `get_file_history_item` | Download one prosecution document as `pdf` (default), `xml`, or `docx`. It returns the requested artifact without OCR or text extraction. |
 | `download_file_history` | Bulk-download file-wrapper PDFs for one application as a zip (n=1 → raw PDF). Cap 50. Filters: `item_ids`, `document_codes`, `after`, `before`. |
 
 ## Downloads ⭑
