@@ -46,7 +46,7 @@ mcp = [
     # top-level module out into a separate `griffelib` distribution, so
     # fastmcp's import fails on griffe>=2. Pin here until upstream fastmcp
     # either migrates to griffelib or re-adds the compat shim.
-    "griffe<2",
+    "griffe<3",
 ]
 tmsearch = [
     # USPTO Trademark Search sits behind AWS WAF. curl_cffi gives us the
@@ -110,7 +110,7 @@ docs = [
     # pygments 2.20 changed filename handling in a way that breaks
     # pymdownx.highlight (filename=None passed through to html.escape).
     # Pin until pymdownx releases a fix.
-    "pygments<2.20",
+    "pygments<2.21",
 ]
 
 [tool.ruff]
