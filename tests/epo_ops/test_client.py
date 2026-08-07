@@ -2,11 +2,62 @@
 
 from __future__ import annotations
 
+import datetime as dt
+import time
+
+import httpx
+
 from patent_client_agents.epo_ops.client import (
     EpoOpsClient,
+    OpsAuth,
     OpsAuthenticationError,
     OpsForbiddenError,
 )
+
+
+class TestOpsAuthTokenExpiry:
+    """Token-expiry check must compare offset-aware datetimes."""
+
+    def _refresh_token(self, auth: OpsAuth) -> None:
+        """Drive auth_flow through a 401 → token refresh → retry cycle."""
+        request = httpx.Request("GET", "https://ops.epo.org/3.2/rest-services/x")
+        flow = auth.auth_flow(request)
+        first = next(flow)
+        refresh_request = flow.send(httpx.Response(401, request=first))
+        issued_at_ms = int(time.time() * 1000)
+        token_response = httpx.Response(
+            200,
+            json={
+                "issued_at": str(issued_at_ms),
+                "expires_in": "1200",
+                "access_token": "test-token",
+            },
+            request=refresh_request,
+        )
+        retried = flow.send(token_response)
+        assert retried.headers["Authorization"] == "Bearer test-token"
+
+    def test_expires_is_offset_aware_after_refresh(self) -> None:
+        auth = OpsAuth("key", "secret")
+        self._refresh_token(auth)
+        assert auth._expires is not None
+        assert auth._expires.tzinfo is not None
+
+    def test_token_expired_does_not_raise_after_refresh(self) -> None:
+        # Regression: _expires was naive local time while _token_expired()
+        # compared it against dt.datetime.now(dt.UTC), so any 400 response
+        # after a refresh raised "can't compare offset-naive and
+        # offset-aware datetimes".
+        auth = OpsAuth("key", "secret")
+        self._refresh_token(auth)
+        assert auth._token_expired() is False
+
+    def test_freshly_issued_token_not_expired_regardless_of_local_tz(self) -> None:
+        auth = OpsAuth("key", "secret")
+        self._refresh_token(auth)
+        assert auth._expires is not None
+        remaining = auth._expires - dt.datetime.now(dt.UTC)
+        assert dt.timedelta(minutes=19) < remaining <= dt.timedelta(minutes=20)
 
 
 class TestExceptionHierarchy:

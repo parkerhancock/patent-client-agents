@@ -120,7 +120,7 @@ class OpsAuth(httpx.Auth):
                 logger.debug("EPO OPS authentication failed: %s", token_response.text)
                 raise OpsAuthenticationError("Invalid EPO OPS credentials")
             data = token_response.json()
-            issued_at = dt.datetime.fromtimestamp(int(data["issued_at"]) / 1000)
+            issued_at = dt.datetime.fromtimestamp(int(data["issued_at"]) / 1000, tz=dt.UTC)
             expires_in = dt.timedelta(seconds=int(data["expires_in"]))
             self._expires = issued_at + expires_in
             self.authorization_header = f"Bearer {data['access_token']}"
