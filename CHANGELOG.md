@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.26.0] — 2026-08-07
+
 ### Added
 
 - Added CN, DE, and KR publication recipes to the `epo_ops` connector's
@@ -34,6 +36,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   behavior, confidentiality, and reliability ownership. Connector standards
   now require a higher-layer substitution gate and keep BYOK work separate
   from the hosted public surface.
+
+### Changed
+
+- Simplified USPTO file history downloads: OCR is no longer applied during
+  retrieval, and file-history PDFs are returned as image-only documents.
+
+### Fixed
+
+- Fixed a naive/offset-aware datetime crash in EPO OPS token-expiry handling.
+  `OpsAuth` stored the token expiry as a naive local-time datetime, so once a
+  token expired mid-process, every EPO tool call raised "can't compare
+  offset-naive and offset-aware datetimes" instead of refreshing the token.
 
 ## [0.25.0] — 2026-08-01
 
