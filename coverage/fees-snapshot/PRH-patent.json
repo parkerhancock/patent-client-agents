@@ -1508,7 +1508,7 @@
   "key": "FI/PRH/patent",
   "notes": "Bundles \u00a71 national patents, \u00a72 utility models, \u00a73 PCT, \u00a74 EP validation, and \u00a75 Supplementary Protection Certificate (SPC). Patent annuities (years 1-20) and SPC annuities (years 1-6) each emit one FeeItem per year. UM renewal periods (4-yr / 2-yr) emit with year=4 / year=10. The \u00a71 patent claims-over-15 surcharge and \u00a72 UM claims-over-5 surcharge emit as FeeCategory.excess_claims with FeeCondition(claims_over, threshold). Paper-channel rows carry FeeCondition(paper_filing).",
   "office_code": "PRH",
-  "retrieved_at": "2026-08-08",
+  "retrieved_at": "2026-08-09",
   "right": "patent",
   "source_url": "https://www.prh.fi/en/price-lists/pathakmaks.html",
   "statutory_basis": "Patenttilaki (550/1967) (Patents Act) + Hy\u00f6dyllisyysmallilaki (800/1991) (Utility Models Act). Fees set by TEM asetus 1216/2025 (effective 2026-01-01), as amended by 171/2026 (effective 2026-04-01)."
