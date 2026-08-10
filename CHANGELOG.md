@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.26.1] — 2026-08-10
+
+### Changed
+
+- Updated supported Python dependencies to releases that satisfy the project's
+  seven-day package age policy.
+
+### Fixed
+
+- Synchronized the Claude plugin version and install pin with the package
+  release version.
+- Applied the required Ruff formatting to the USPTO ODP applications client.
+
 ## [0.26.0] — 2026-08-07
 
 ### Added
