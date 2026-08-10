@@ -395,7 +395,11 @@ class ApplicationsClient(UsptoOdpBaseClient):
         appl = self._normalize_application_number(application_number)
         documents = await self.get_documents(appl, include_associated=False)
         document = next(
-            (item for item in documents.documents if item.documentIdentifier == document_identifier),
+            (
+                item
+                for item in documents.documents
+                if item.documentIdentifier == document_identifier
+            ),
             None,
         )
         if document is None:
