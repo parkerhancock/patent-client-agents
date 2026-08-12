@@ -49,14 +49,14 @@ os.environ.setdefault("EUIPO_CLIENT_SECRET", "test_euipo_secret")
 # ``filter_query_parameters`` config below.
 os.environ.setdefault("TIPO_API_KEY", "test_tipo_tk")
 
-# KIPRIS Plus (kipo_kipris) MCP tools are env-gated on a single per-user
-# ``serviceKey`` (ToS §11 BYOK). KIPRIS responses are XML — no OAuth
-# token endpoint to scrub. The placeholder below registers the env-gated
-# tools so the MCP-envelope tests can call into them; the value never
-# reaches the network because every KIPRIS test uses httpx.MockTransport
-# (no live cassettes recorded for KIPRIS in v1 — see
+# KIPRIS Plus (kipo_kipris) MCP tools are env-gated on a per-user
+# ``serviceKey`` (ToS §11 BYOK) and an operator-supplied HTTPS endpoint.
+# The placeholders below register the tools for tests; neither value
+# reaches the network because every KIPRIS request test uses
+# httpx.MockTransport (no live cassettes recorded for KIPRIS in v1 — see
 # tests/kipo_kipris/conftest.py docstring for the rationale).
 os.environ.setdefault("KIPO_KIPRIS_API_KEY", "test_kipris_servicekey")
+os.environ.setdefault("KIPO_KIPRIS_BASE_URL", "https://kipris.test/openapi/service")
 
 # DPMAconnectPlus tools need both Basic-auth values. DPMA tests use only
 # synthetic XML fixtures and httpx.MockTransport, so these placeholders never

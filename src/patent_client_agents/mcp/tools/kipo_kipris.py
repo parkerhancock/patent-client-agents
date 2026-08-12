@@ -2,8 +2,9 @@
 
 Read-only access to the live Korean Intellectual Property Office
 registers (patents + utility models, trademarks, designs) via the
-KIPRIS Plus REST API. Env-gated: registers only when
-``KIPO_KIPRIS_API_KEY`` is set (ToS §11 BYOK — per-user keys only).
+KIPRIS Plus REST API. Env-gated: registers only when the per-user
+``KIPO_KIPRIS_API_KEY`` and an operator-verified HTTPS endpoint in
+``KIPO_KIPRIS_BASE_URL`` are set.
 
 The KIPRIS Plus API is XML-only on the dev tier. Lean responses drop
 the Korean-only abstract (``astrt_cont``) and the raw upstream
@@ -16,7 +17,10 @@ contract.
 from __future__ import annotations
 
 import asyncio
+import os
+from collections.abc import Callable
 from typing import Annotated, Any, cast
+from urllib.parse import urlsplit
 
 from fastmcp import FastMCP
 
@@ -48,7 +52,7 @@ from patent_client_agents.kipo_kipris.client import (
 
 kipo_kipris_mcp = FastMCP("KIPO — KIPRIS Plus")
 
-_KIPO_REQUIRED_ENV: list[str] = ["KIPO_KIPRIS_API_KEY"]
+_KIPO_REQUIRED_ENV: list[str] = ["KIPO_KIPRIS_API_KEY", "KIPO_KIPRIS_BASE_URL"]
 
 # §5 Provenance — Provenance has no ``attribution`` slot; we encode the
 # ToS §11 BYOK constraint into ``source_name`` so it surfaces on every
@@ -59,6 +63,18 @@ _KIPO_ATTRIBUTION = (
 )
 
 _KIPO_FANOUT_CONCURRENCY = 5
+
+
+def _kipo_tool(func: Callable[..., Any]) -> Callable[..., Any]:
+    """Register a KIPRIS tool only with credentials and an HTTPS endpoint."""
+    base_url = os.getenv("KIPO_KIPRIS_BASE_URL", "")
+    if urlsplit(base_url).scheme.lower() != "https":
+        return func
+    return conditional_tool(
+        kipo_kipris_mcp,
+        requires_env=_KIPO_REQUIRED_ENV,
+        annotations=READ_ONLY,
+    )(func)
 
 
 def _kipo_provenance(service: str, operation: str) -> Any:
@@ -138,7 +154,7 @@ def _validate_raw_items(items: list[dict], model: type[Any]) -> list[Any]:
 # ──────────────────────────────────────────────────────────────────────
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def search_kipo_patents(
     query: Annotated[
         str,
@@ -202,7 +218,7 @@ async def search_kipo_patents(
     )
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def search_kipo_patents_advanced(
     invention_title: Annotated[
         str | None, "Match against invention title (Korean or English)."
@@ -272,7 +288,7 @@ async def search_kipo_patents_advanced(
     )
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def get_kipo_patent(
     application_number: Annotated[
         str | list[str],
@@ -329,7 +345,7 @@ async def get_kipo_patent(
 # ──────────────────────────────────────────────────────────────────────
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def search_kipo_trademarks(
     query: Annotated[
         str,
@@ -364,7 +380,7 @@ async def search_kipo_trademarks(
     )
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def search_kipo_trademarks_advanced(
     title: Annotated[str | None, "Match against mark text."] = None,
     applicant: Annotated[str | None, "Match against applicant name."] = None,
@@ -411,7 +427,7 @@ async def search_kipo_trademarks_advanced(
     )
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def get_kipo_trademark(
     application_number: Annotated[
         str | list[str],
@@ -458,7 +474,7 @@ async def get_kipo_trademark(
 # ──────────────────────────────────────────────────────────────────────
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def search_kipo_designs(
     query: Annotated[
         str,
@@ -493,7 +509,7 @@ async def search_kipo_designs(
     )
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def search_kipo_designs_advanced(
     article_name: Annotated[
         str | None, "Match against article name (the product the design covers)."
@@ -540,7 +556,7 @@ async def search_kipo_designs_advanced(
     )
 
 
-@conditional_tool(kipo_kipris_mcp, requires_env=_KIPO_REQUIRED_ENV, annotations=READ_ONLY)
+@_kipo_tool
 async def get_kipo_design(
     application_number: Annotated[
         str | list[str],

@@ -85,14 +85,41 @@ def test_service_key_empty_string_raises_configuration_error(
         KiprisClient(service_key="")
 
 
-def test_default_base_url(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_base_url_env_fallback(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
+    monkeypatch.setenv("KIPO_KIPRIS_BASE_URL", "https://kipris.example.test/openapi/service")
     client = KiprisClient()
-    assert client.base_url == BASE_URL
+    assert client.base_url == "https://kipris.example.test/openapi/service"
+
+
+def test_base_url_missing_raises_configuration_error(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
+    monkeypatch.delenv("KIPO_KIPRIS_BASE_URL", raising=False)
+    with pytest.raises(ConfigurationError, match="HTTPS endpoint"):
+        KiprisClient()
+
+
+@pytest.mark.parametrize("base_url", [BASE_URL, "http://example.test/openapi/service"])
+def test_cleartext_base_url_raises_configuration_error(
+    monkeypatch: pytest.MonkeyPatch, base_url: str
+) -> None:
+    monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
+    with pytest.raises(ConfigurationError, match="HTTPS"):
+        KiprisClient(base_url=base_url)
+
+
+def test_cleartext_base_url_from_env_raises_configuration_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
+    monkeypatch.setenv("KIPO_KIPRIS_BASE_URL", BASE_URL)
+    with pytest.raises(ConfigurationError, match="HTTPS"):
+        KiprisClient()
 
 
 def test_base_url_override(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
+    monkeypatch.setenv("KIPO_KIPRIS_BASE_URL", "http://unsafe.example.test")
     client = KiprisClient(base_url="https://example.test")
     assert client.base_url == "https://example.test"
 

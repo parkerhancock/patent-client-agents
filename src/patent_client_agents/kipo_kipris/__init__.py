@@ -7,7 +7,8 @@ helpers + MCP tool surface (this commit), (4) tests. See
 ``research/specs/kr-kipo-connector-spec.md`` for the full contract.
 
 Auth is BYOK per ToS §11: a single per-user ``serviceKey`` exposed via
-the ``KIPO_KIPRIS_API_KEY`` environment variable.
+the ``KIPO_KIPRIS_API_KEY`` environment variable. Operators must also
+set ``KIPO_KIPRIS_BASE_URL`` to a verified HTTPS endpoint.
 """
 
 from .client import KiprisClient

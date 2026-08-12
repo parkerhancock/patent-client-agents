@@ -1,8 +1,8 @@
 """Tests for env-gated KIPO KIPRIS MCP tool registration.
 
 Verifies that ``patent_client_agents.mcp.tools.kipo_kipris`` registers
-the 9 KIPO tools only when ``KIPO_KIPRIS_API_KEY`` is set (ToS §11
-BYOK — per-user keys only).
+the 9 KIPO tools only when both the BYOK API key and operator-supplied
+HTTPS endpoint are set.
 
 Test strategy: each test ``importlib.reload``s the kipo_kipris module
 under a controlled env, then inspects a fresh ``FastMCP`` instance to
@@ -83,11 +83,36 @@ class TestKipoEnvGating:
         assert names & EXPECTED_KIPO_TOOLS == set()
 
     @pytest.mark.asyncio
+    async def test_no_tools_registered_when_base_url_unset(
+        self, monkeypatch: pytest.MonkeyPatch, fresh_state: None
+    ) -> None:
+        monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "some-service-key")
+        monkeypatch.delenv("KIPO_KIPRIS_BASE_URL", raising=False)
+
+        kipo = _reload_kipo_with_fresh_mcp()
+
+        names = await _list_tool_names(kipo)
+        assert names & EXPECTED_KIPO_TOOLS == set()
+
+    @pytest.mark.asyncio
+    async def test_no_tools_registered_when_base_url_uses_http(
+        self, monkeypatch: pytest.MonkeyPatch, fresh_state: None
+    ) -> None:
+        monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "some-service-key")
+        monkeypatch.setenv("KIPO_KIPRIS_BASE_URL", "http://kipris.example.test/openapi/service")
+
+        kipo = _reload_kipo_with_fresh_mcp()
+
+        names = await _list_tool_names(kipo)
+        assert names & EXPECTED_KIPO_TOOLS == set()
+
+    @pytest.mark.asyncio
     async def test_all_tools_registered_when_env_set(
         self, monkeypatch: pytest.MonkeyPatch, fresh_state: None
     ) -> None:
-        """With KIPO_KIPRIS_API_KEY set, every KIPO tool registers."""
+        """With both required values set, every KIPO tool registers."""
         monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "some-service-key")
+        monkeypatch.setenv("KIPO_KIPRIS_BASE_URL", "https://kipris.example.test/openapi/service")
 
         kipo = _reload_kipo_with_fresh_mcp()
 
