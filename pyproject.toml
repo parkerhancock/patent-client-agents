@@ -1,6 +1,6 @@
 [project]
 name = "patent-client-agents"
-version = "0.26.2"
+version = "0.26.3"
 description = "Intellectual property research toolkit for AI agents — patents, trademarks, and prosecution data from USPTO, EPO, JPO, EUIPO, Google Patents, CanLII, WIPO Lex, MPEP, and CPC"
 readme = "README.md"
 authors = [
@@ -19,7 +19,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "mcp-data-core>=0.1.0",
+    "mcp-data-core>=0.11.2",
     "anyio>=4.4",
     "httpx>=0.27",
     "h2>=4.1",

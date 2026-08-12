@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import base64
 import datetime as dt
 import logging
@@ -17,7 +18,11 @@ from pypdf import PdfReader, PdfWriter
 
 from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.cache import build_cached_http_client
-from mcp_data_core.exceptions import AuthenticationError, RateLimitError
+from mcp_data_core.exceptions import (
+    AuthenticationError,
+    RateLimitError,
+    RetryableAuthenticationError,
+)
 
 from .models import (
     BiblioResponse,
@@ -108,24 +113,68 @@ class OpsAuth(httpx.Auth):
     def __init__(self, key: str, secret: str) -> None:
         self.key = key
         self.secret = secret
-        self.authorization_header = "<unset>"
+        self.authorization_header: str | None = None
         self._expires: dt.datetime | None = None
+        self._refresh_lock = asyncio.Lock()
 
-    def auth_flow(self, request: httpx.Request):  # type: ignore[override]
-        request.headers["Authorization"] = self.authorization_header
+    async def async_auth_flow(self, request: httpx.Request):  # type: ignore[override]
+        async with self._refresh_lock:
+            if self._token_expired():
+                token_response = yield self._build_refresh_request()
+                self._store_token(token_response)
+
+        assert self.authorization_header is not None
+        token_used = self.authorization_header
+        request.headers["Authorization"] = token_used
         response = yield request
-        if response.status_code == 401 or (response.status_code == 400 and self._token_expired()):
-            token_response = yield self._build_refresh_request()
-            if token_response.status_code != 200:
-                logger.debug("EPO OPS authentication failed: %s", token_response.text)
-                raise OpsAuthenticationError("Invalid EPO OPS credentials")
-            data = token_response.json()
-            issued_at = dt.datetime.fromtimestamp(int(data["issued_at"]) / 1000, tz=dt.UTC)
-            expires_in = dt.timedelta(seconds=int(data["expires_in"]))
-            self._expires = issued_at + expires_in
-            self.authorization_header = f"Bearer {data['access_token']}"
-            request.headers["Authorization"] = self.authorization_header
-            yield request
+        if not self._invalid_access_token(response):
+            return
+
+        async with self._refresh_lock:
+            if self.authorization_header == token_used:
+                token_response = yield self._build_refresh_request()
+                self._store_token(token_response)
+
+        assert self.authorization_header is not None
+        request.headers["Authorization"] = self.authorization_header
+        retry_response = yield request
+        if self._invalid_access_token(retry_response):
+            raise RetryableAuthenticationError(
+                "EPO OPS rejected an access token after refresh",
+                retry_response.status_code,
+                retry_response.text[:500],
+            )
+
+    def _store_token(self, response: httpx.Response) -> None:
+        if response.status_code != 200:
+            logger.warning(
+                "EPO OPS token request failed with HTTP %s: %s",
+                response.status_code,
+                response.text[:500],
+            )
+            if response.status_code == 429 or response.status_code >= 500:
+                raise RetryableAuthenticationError(
+                    "EPO OPS token request failed",
+                    response.status_code,
+                    response.text[:500],
+                )
+            raise OpsAuthenticationError(
+                "EPO OPS rejected the configured credentials",
+                response.status_code,
+                response.text[:500],
+            )
+
+        data = response.json()
+        issued_at = dt.datetime.fromtimestamp(int(data["issued_at"]) / 1000, tz=dt.UTC)
+        expires_in = dt.timedelta(seconds=int(data["expires_in"]))
+        self._expires = issued_at + expires_in
+        self.authorization_header = f"Bearer {data['access_token']}"
+
+    @staticmethod
+    def _invalid_access_token(response: httpx.Response) -> bool:
+        return response.status_code == 401 or (
+            response.status_code == 400 and "invalid_access_token" in response.text
+        )
 
     def _token_expired(self) -> bool:
         if self._expires is None:
@@ -155,6 +204,7 @@ class EpoOpsClient(BaseAsyncClient):
         api_secret: str,
         cache_path: Path | None = None,
         timeout: float = 60.0,
+        auth: OpsAuth | None = None,
     ) -> None:
         # Build the HTTP client directly to pass EPO-specific kwargs
         # (base_url, policy, http2) that BaseAsyncClient doesn't forward.
@@ -173,7 +223,7 @@ class EpoOpsClient(BaseAsyncClient):
             cache_name=self.CACHE_NAME,
             cache_dir=cache_dir,
             headers=headers,
-            auth=OpsAuth(api_key, api_secret),
+            auth=auth or OpsAuth(api_key, api_secret),
             timeout=timeout,
             base_url=BASE_URL,
             policy=hishel.SpecificationPolicy(),
@@ -581,6 +631,16 @@ class EpoOpsClient(BaseAsyncClient):
         )
 
 
+_shared_auth: OpsAuth | None = None
+
+
+def _get_shared_auth(key: str, secret: str) -> OpsAuth:
+    global _shared_auth
+    if _shared_auth is None or _shared_auth.key != key or _shared_auth.secret != secret:
+        _shared_auth = OpsAuth(key, secret)
+    return _shared_auth
+
+
 def client_from_env() -> EpoOpsClient:
     """Instantiate an EpoOpsClient using the standard environment variables."""
 
@@ -590,4 +650,4 @@ def client_from_env() -> EpoOpsClient:
         raise RuntimeError(
             "Set EPO_OPS_API_KEY/EPO_OPS_API_SECRET (or legacy EPO_API_KEY/EPO_API_SECRET)."
         )
-    return EpoOpsClient(api_key=key, api_secret=secret)
+    return EpoOpsClient(api_key=key, api_secret=secret, auth=_get_shared_auth(key, secret))

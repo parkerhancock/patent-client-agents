@@ -356,6 +356,7 @@ class TestGetJpoDocumentsDispatch:
         # Pin a public URL so download_response returns a signed download_url
         # rather than a tempfile file_path — keeps the assertion stable.
         monkeypatch.setenv("LAW_TOOLS_CORE_PUBLIC_URL", "https://mcp.example.com")
+        monkeypatch.setenv("LAW_TOOLS_CORE_API_KEY", "test-signing-key")
 
         zip_bytes = make_mailed_bundle_zip()
         mock_client.get_patent_mailed_documents = AsyncMock(
