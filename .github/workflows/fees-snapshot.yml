@@ -3,13 +3,13 @@ name: Nightly fee snapshot
 # Rebuilds coverage/fees-snapshot/ each night by running every fee
 # scraper against the live office pages. The output is the artifact
 # patentclient.com/fees consumes via jsDelivr — keeping this fresh is
-# the *only* path data updates reach the website.
+# the *only* path data updates reach the website after review and merge.
 #
 # Failure policy: partial failures are EXPECTED (e.g. INPI-FR 503's
 # every few days). The build script records each failure in
 # index.json's `failures` array so the UI can show "Currently
-# unavailable" rows. We commit whatever the build produces and only
-# fail the workflow if *every* scraper failed.
+# unavailable" rows. We propose whatever the build produces in a pull
+# request and only fail the workflow if *every* scraper failed.
 
 on:
   schedule:
@@ -21,12 +21,19 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+
+concurrency:
+  group: fees-snapshot
+  cancel-in-progress: false
 
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Install uv
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -48,7 +55,7 @@ jobs:
           set -e
 
           if [ "$BUILD_STATUS" -eq 1 ]; then
-            echo "::warning::One or more fee scrapers failed; publishing partial results."
+            echo "::warning::One or more fee scrapers failed; proposing partial results."
           elif [ "$BUILD_STATUS" -ne 0 ]; then
             echo "::error::Fee snapshot build failed with status $BUILD_STATUS; refusing to commit."
             exit 1
@@ -70,9 +77,13 @@ jobs:
             git diff --stat -- coverage/fees-snapshot/ | tail -20
           fi
 
-      - name: Commit + push
+      - name: Commit snapshot branch
         if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          AUTOMATION_BRANCH="automation/fees-snapshot"
+          gh auth setup-git
           git config user.name  "patent-client-agents bot"
           git config user.email "bot@patentclient.com"
           git add coverage/fees-snapshot/
@@ -83,7 +94,34 @@ jobs:
             | sort -u | tr '\n' ' ')
           git commit -m "chore(fees): nightly snapshot $(date -u +%Y-%m-%d)" \
                      -m "Refreshed schedules: ${CHANGED:-(none)}"
-          git push
+          if git ls-remote --exit-code --heads origin "$AUTOMATION_BRANCH" >/dev/null; then
+            git fetch origin "$AUTOMATION_BRANCH:refs/remotes/origin/$AUTOMATION_BRANCH"
+          fi
+          git push --force-with-lease origin "HEAD:refs/heads/$AUTOMATION_BRANCH"
+
+      - name: Create or update snapshot pull request
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          AUTOMATION_BRANCH="automation/fees-snapshot"
+          PR_TITLE="chore(fees): nightly snapshot"
+          PR_BODY="Automated nightly fee snapshot refresh. Review the changed schedules and recorded scraper failures before merge."
+          PR_URL=$(gh pr list \
+            --base main \
+            --head "$AUTOMATION_BRANCH" \
+            --state open \
+            --json url \
+            --jq '.[0].url // empty')
+          if [ -n "$PR_URL" ]; then
+            gh pr edit "$PR_URL" --title "$PR_TITLE" --body "$PR_BODY"
+          else
+            gh pr create \
+              --base main \
+              --head "$AUTOMATION_BRANCH" \
+              --title "$PR_TITLE" \
+              --body "$PR_BODY"
+          fi
 
       - name: Surface failures in workflow summary
         run: |

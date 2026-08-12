@@ -349,6 +349,7 @@ class TestGetJpoDocumentsDispatch:
         self,
         mock_client,
         monkeypatch: pytest.MonkeyPatch,
+        tmp_path,
     ) -> None:
         """``parse=False`` skips the parser and returns metadata + signed URL only."""
         from tests.jpo.fixtures.document_bundles import make_mailed_bundle_zip
@@ -357,6 +358,7 @@ class TestGetJpoDocumentsDispatch:
         # rather than a tempfile file_path — keeps the assertion stable.
         monkeypatch.setenv("LAW_TOOLS_CORE_PUBLIC_URL", "https://mcp.example.com")
         monkeypatch.setenv("LAW_TOOLS_CORE_API_KEY", "test-signing-key")
+        monkeypatch.setenv("LAW_TOOLS_CORE_DOWNLOAD_CACHE", str(tmp_path))
 
         zip_bytes = make_mailed_bundle_zip()
         mock_client.get_patent_mailed_documents = AsyncMock(
