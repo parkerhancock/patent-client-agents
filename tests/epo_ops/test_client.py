@@ -9,13 +9,13 @@ import time
 import httpx
 import pytest
 
+from mcp_data_core.exceptions import RetryableAuthenticationError
 from patent_client_agents.epo_ops.client import (
     BASE_URL,
     EpoOpsClient,
     OpsAuth,
     OpsAuthenticationError,
     OpsForbiddenError,
-    RetryableAuthenticationError,
     _get_shared_auth,
 )
 

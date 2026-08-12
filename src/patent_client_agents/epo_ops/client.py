@@ -18,12 +18,11 @@ from pypdf import PdfReader, PdfWriter
 
 from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.cache import build_cached_http_client
-from mcp_data_core.exceptions import AuthenticationError, RateLimitError
-
-try:
-    from mcp_data_core.exceptions import RetryableAuthenticationError
-except ImportError:  # Compatibility until the new core release reaches package CI.
-    from mcp_data_core.exceptions import ServerError as RetryableAuthenticationError
+from mcp_data_core.exceptions import (
+    AuthenticationError,
+    RateLimitError,
+    RetryableAuthenticationError,
+)
 
 from .models import (
     BiblioResponse,
