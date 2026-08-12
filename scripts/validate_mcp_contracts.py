@@ -63,6 +63,7 @@ CONTRACT_ENV = {
     "JPO_API_USERNAME": "contract-check",
     "JPO_API_PASSWORD": "contract-check",
     "KIPO_KIPRIS_API_KEY": "contract-check",
+    "KIPO_KIPRIS_BASE_URL": "https://kipris.example.test/openapi/service",
     "TIPO_API_KEY": "contract-check",
     "USITC_EDIS_TOKEN": "contract-check",
 }

@@ -2,8 +2,8 @@
 
 Each helper opens a :class:`KiprisClient` via ``async with`` and
 delegates to the corresponding instance method. All helpers require
-``KIPO_KIPRIS_API_KEY`` to be set (ToS §11 BYOK); they raise
-``ConfigurationError`` otherwise.
+``KIPO_KIPRIS_API_KEY`` and an operator-verified HTTPS endpoint in
+``KIPO_KIPRIS_BASE_URL``; they raise ``ConfigurationError`` otherwise.
 
 Returns are kept as ``(items, pagination)`` tuples shaped like the
 client methods — the MCP tool layer maps them onto :class:`ListEnvelope`.

@@ -32,6 +32,7 @@ CREDENTIAL_ENV_VARS = (
     "IPAUSTRALIA_CLIENT_ID",
     "IPAUSTRALIA_CLIENT_SECRET",
     "KIPO_KIPRIS_API_KEY",
+    "KIPO_KIPRIS_BASE_URL",
     "DPMA_CONNECTPLUS_USERNAME",
     "DPMA_CONNECTPLUS_PASSWORD",
     "IPI_DATA_USERNAME",
@@ -64,7 +65,11 @@ def _count_tools(*, all_configured: bool) -> int:
     env["PYTHONPATH"] = str(ROOT / "src")
     for name in CREDENTIAL_ENV_VARS:
         if all_configured:
-            env[name] = "test"
+            env[name] = (
+                "https://kipris.example.test/openapi/service"
+                if name == "KIPO_KIPRIS_BASE_URL"
+                else "test"
+            )
         else:
             env.pop(name, None)
 

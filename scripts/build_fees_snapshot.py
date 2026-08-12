@@ -11,7 +11,7 @@ fetches from the edge CDN. The website never talks to the MCP server
 at runtime — it reads these static files. The live MCP path remains
 available for "refresh on demand" workflows.
 
-Exit 0 on success, non-zero if any scraper fails.
+Exit 0 on success, 1 on partial success, and 2 if every scraper fails.
 
 Usage:
     uv run python scripts/build_fees_snapshot.py
@@ -130,6 +130,13 @@ async def _main() -> int:
         # --check is the path to actually publish.
         for path in SNAPSHOT_DIR.glob("*.json"):
             path.unlink()
+    elif not meta_rows:
+        # Keep the last known-good index. The nightly workflow treats this
+        # result as a hard failure and must not publish an empty index.
+        print(
+            f"\nNo schedules built; {SNAPSHOT_DIR / 'index.json'} left untouched",
+            file=sys.stderr,
+        )
     elif only:
         # Partial build — do NOT rewrite index.json with incomplete data;
         # only the per-route schedule files we just touched are valid.
@@ -145,7 +152,10 @@ async def _main() -> int:
         print(f"\n{len(failures)} failures:", file=sys.stderr)
         for office, right in failures:
             print(f"  - {office}/{right}", file=sys.stderr)
-        return 1
+        return 2 if not meta_rows else 1
+
+    if not meta_rows:
+        return 2
 
     print(f"All {len(meta_rows)} schedules built successfully.")
     return 0

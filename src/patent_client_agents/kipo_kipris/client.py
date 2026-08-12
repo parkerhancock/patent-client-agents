@@ -34,6 +34,9 @@ Usage::
 Environment Variables:
     KIPO_KIPRIS_API_KEY: per-user KIPRIS Plus ``serviceKey`` issued at
         ``https://plus.kipris.or.kr/eng/main.do`` (ToS §11 BYOK).
+    KIPO_KIPRIS_BASE_URL: operator-verified HTTPS base endpoint. The
+        endpoint documented by KIPRIS uses HTTP and is disabled because
+        every request carries the API key in its query string.
 """
 
 from __future__ import annotations
@@ -43,6 +46,7 @@ import os
 import xml.etree.ElementTree as ET
 from collections.abc import AsyncIterator
 from typing import Any
+from urllib.parse import urlsplit
 
 import httpx
 
@@ -58,9 +62,9 @@ from .models import DesignRow, PatentUtilityRow, TrademarkRow
 
 logger = logging.getLogger(__name__)
 
-# KIPRIS Plus docs cite this host (HTTP, not HTTPS in current docs). If
-# HTTPS works once cassettes are recorded in chunk 4, update the scheme
-# at that point — for now, document what the primary source says.
+# KIPRIS Plus documents this HTTP endpoint. It remains public for source
+# attribution and compatibility, but the client rejects it for authenticated
+# requests. Operators must supply an HTTPS endpoint they have verified.
 BASE_URL = "http://kipo-api.kipi.or.kr/openapi/service"
 
 # Service prefixes (each prefix maps to a KIPRIS Plus service; operations
@@ -105,11 +109,13 @@ class KiprisClient(BaseAsyncClient):
         Args:
             service_key: Per-user KIPRIS Plus ``serviceKey``. Falls back
                 to ``KIPO_KIPRIS_API_KEY``.
-            base_url: Override the default API base URL.
+            base_url: Operator-verified HTTPS API base URL. Falls back to
+                ``KIPO_KIPRIS_BASE_URL``.
             client: Existing httpx.AsyncClient (for testing).
 
         Raises:
-            ConfigurationError: If no ``serviceKey`` is resolvable.
+            ConfigurationError: If no ``serviceKey`` or secure endpoint is
+                resolvable, or if the endpoint does not use HTTPS.
         """
         resolved_key = service_key or os.getenv("KIPO_KIPRIS_API_KEY")
         if not resolved_key:
@@ -121,8 +127,21 @@ class KiprisClient(BaseAsyncClient):
             )
         self._service_key = resolved_key
 
+        resolved_base_url = base_url or os.getenv("KIPO_KIPRIS_BASE_URL")
+        if not resolved_base_url:
+            raise ConfigurationError(
+                "KIPRIS Plus HTTPS endpoint required. Set KIPO_KIPRIS_BASE_URL "
+                "or pass base_url. The documented HTTP endpoint is disabled "
+                "because requests include the API key in the query string."
+            )
+        if urlsplit(resolved_base_url).scheme.lower() != "https":
+            raise ConfigurationError(
+                "KIPRIS Plus base URL must use HTTPS; refusing to send the API key "
+                f"to {resolved_base_url!r}."
+            )
+
         super().__init__(
-            base_url=base_url,
+            base_url=resolved_base_url,
             client=client,
             use_cache=True,
             headers={"Accept": "application/xml"},

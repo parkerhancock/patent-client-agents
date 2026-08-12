@@ -41,11 +41,19 @@ jobs:
 
       - name: Rebuild fees snapshot
         id: build
-        # `|| true` so partial scraper failures don't kill the workflow.
-        # The script's index.json records what failed so the UI can
-        # surface gaps to users without hiding them.
         run: |
-          uv run python scripts/build_fees_snapshot.py 2>&1 | tee /tmp/build.log || true
+          set +e
+          uv run python scripts/build_fees_snapshot.py 2>&1 | tee /tmp/build.log
+          BUILD_STATUS=${PIPESTATUS[0]}
+          set -e
+
+          if [ "$BUILD_STATUS" -eq 1 ]; then
+            echo "::warning::One or more fee scrapers failed; publishing partial results."
+          elif [ "$BUILD_STATUS" -ne 0 ]; then
+            echo "::error::Fee snapshot build failed with status $BUILD_STATUS; refusing to commit."
+            exit 1
+          fi
+
           if [ ! -f coverage/fees-snapshot/index.json ]; then
             echo "::error::Build produced no index.json — total failure, refusing to commit."
             exit 1
