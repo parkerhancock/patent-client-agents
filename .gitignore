@@ -39,3 +39,7 @@ docs/patent-client-index/
 
 # Research-helper artifacts
 .cache/
+
+# Local generated artifacts
+/output/
+/tmp/
