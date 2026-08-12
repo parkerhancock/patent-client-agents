@@ -101,7 +101,7 @@ async def _epo_patent_pdf_resource(publication_number: str):
 
 _EPO_OPS_BASE = "https://ops.epo.org/3.2/rest-services"
 _EPO_OPS_NAME = "European Patent Office Open Patent Services (EPO OPS)"
-_EPO_FANOUT_CONCURRENCY = 5
+_EPO_FANOUT_CONCURRENCY = 4
 _EPO_JURISDICTION_RECIPES = {
     "CN": "pn=CN",
     "DE": "pn=DE",
