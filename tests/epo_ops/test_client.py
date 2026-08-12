@@ -70,7 +70,34 @@ def _token_response(token: str) -> httpx.Response:
     )
 
 
+class _StreamingTokenBody(httpx.AsyncByteStream):
+    async def __aiter__(self):
+        yield (
+            b'{"issued_at":"'
+            + str(int(time.time() * 1000)).encode()
+            + b'","expires_in":"1200","access_token":"token-1"}'
+        )
+
+
 class TestOpsAuthFlow:
+    async def test_reads_streamed_token_response_before_parsing(self) -> None:
+        def handler(request: httpx.Request) -> httpx.Response:
+            if request.url.path.endswith("/auth/accesstoken"):
+                return httpx.Response(
+                    200,
+                    headers={"content-type": "application/json"},
+                    stream=_StreamingTokenBody(),
+                )
+            assert request.headers["Authorization"] == "Bearer token-1"
+            return httpx.Response(200, text="ok")
+
+        async with httpx.AsyncClient(
+            auth=OpsAuth("key", "secret"), transport=httpx.MockTransport(handler)
+        ) as client:
+            response = await client.get(f"{BASE_URL}/rest-services/test")
+
+        assert response.status_code == 200
+
     async def test_fetches_token_before_first_data_request(self) -> None:
         paths: list[str] = []
 
