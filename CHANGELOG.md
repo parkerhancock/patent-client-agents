@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.26.4] — 2026-08-12
+
+### Fixed
+
+- Read streamed EPO OPS authentication responses before parsing access tokens.
+
 ## [0.26.3] — 2026-08-12
 
 ### Fixed
@@ -1857,7 +1863,8 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.3...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.4...HEAD
+[0.26.4]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.3...v0.26.4
 [0.26.3]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.2...v0.26.3
 [0.26.2]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.1...v0.26.2
 [0.26.1]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.0...v0.26.1

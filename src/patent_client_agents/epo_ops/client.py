@@ -121,23 +121,27 @@ class OpsAuth(httpx.Auth):
         async with self._refresh_lock:
             if self._token_expired():
                 token_response = yield self._build_refresh_request()
+                await token_response.aread()
                 self._store_token(token_response)
 
         assert self.authorization_header is not None
         token_used = self.authorization_header
         request.headers["Authorization"] = token_used
         response = yield request
+        await response.aread()
         if not self._invalid_access_token(response):
             return
 
         async with self._refresh_lock:
             if self.authorization_header == token_used:
                 token_response = yield self._build_refresh_request()
+                await token_response.aread()
                 self._store_token(token_response)
 
         assert self.authorization_header is not None
         request.headers["Authorization"] = self.authorization_header
         retry_response = yield request
+        await retry_response.aread()
         if self._invalid_access_token(retry_response):
             raise RetryableAuthenticationError(
                 "EPO OPS rejected an access token after refresh",
