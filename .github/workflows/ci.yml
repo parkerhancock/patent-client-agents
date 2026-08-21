@@ -57,6 +57,9 @@ jobs:
       - name: Validate manifests
         run: uv run python scripts/build_coverage.py --check
 
+      - name: Validate worldwide source catalog
+        run: uv run python scripts/build_source_catalog.py --check
+
       - name: Validate MCP tool counts in docs
         run: uv run python scripts/mcp_tool_counts.py --check-docs
 

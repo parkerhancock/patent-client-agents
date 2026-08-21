@@ -47,8 +47,8 @@ from .tools.ipo_in_mppp import ipo_in_mppp_mcp
 from .tools.ipo_in_statutes import ipo_in_statutes_mcp
 from .tools.iponz_new_zealand import iponz_new_zealand_mcp
 from .tools.ipos import ipos_mcp
-from .tools.jpo import jpo_mcp
 from .tools.japan_ip_high_court import japan_ip_high_court_mcp
+from .tools.jpo import jpo_mcp
 from .tools.kipo_kipris import kipo_kipris_mcp
 from .tools.legifrance_ip import legifrance_ip_mcp
 from .tools.mpep import mpep_mcp

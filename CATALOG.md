@@ -5,6 +5,11 @@ Two-layer documentation for `patent-client-agents`:
 - **[src/patent_client_agents/catalog/sources/](src/patent_client_agents/catalog/sources/)** — per-backend Python client reference (one file per upstream service).
 - **[src/patent_client_agents/catalog/intents/](src/patent_client_agents/catalog/intents/)** — MCP tool reference, grouped by what you want to do. Cross-source fused tools are documented here.
 
+The separate **[worldwide source catalog](catalog/README.md)** inventories
+litigation sources whether or not they have a connector. Its current JP/CN/KR
+pilot includes manual, restricted, blocked, and commercial sources as well as
+the connected sources listed below.
+
 ## Active sources
 
 | Source | Description | Auth | Rate Limit |

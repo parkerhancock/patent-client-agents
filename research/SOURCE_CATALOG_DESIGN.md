@@ -1,6 +1,7 @@
 # Worldwide source catalog design
 
-**Status:** Deferred TODO; design direction recorded 2026-08-21
+**Status:** JP/CN/KR pilot implemented 2026-08-21; expansion and manifest
+migration remain TODO
 
 ## Purpose
 
@@ -10,9 +11,10 @@ not only shipped connectors, but also sources that are manual, restricted,
 commercial, technically blocked, legally unsuitable for automation, retired,
 or merely known to exist.
 
-This is a design record, not an implemented schema. No current manifest or
-generated artifact should be treated as migrated until the pilot and migration
-work below are complete.
+The pilot schema, validator, canonical records, and generated country and
+worldwide views now live under `catalog/`. No current coverage or research
+manifest should be treated as migrated until the remaining work below is
+complete.
 
 ## Decisions
 
@@ -82,7 +84,7 @@ The canonical records should generate:
 
 Generated pages and JSON are views, not places for manual edits.
 
-## Proposed layout
+## Implemented pilot layout
 
 Group records by jurisdiction while retaining one file per source:
 
@@ -103,14 +105,17 @@ catalog/sources/
 Regional and multilateral sources should use corresponding identifiers, such
 as `upc/`, `epo/`, or `wipo/`, rather than being forced into a country.
 
-## Proposed record shape
+## Pilot record shape
 
-The exact vocabulary remains subject to the pilot. The working shape is:
+The pilot uses this working shape. It adds a `name`, a `rights` list, a
+`jurisdictions` list for multi-country sources, plural `formats`, and plural
+connector `blockers` to the initial proposal:
 
 ```yaml
 ---
 id: JP/IPHC/PatentUtilityModelCaseLists
-jurisdiction: JP
+name: Japan IP High Court patent and utility-model case lists
+jurisdictions: [JP]
 institution: Intellectual Property High Court
 source_type: case_list
 official_url: https://www.courts.go.jp/ip/
@@ -119,7 +124,7 @@ source_status: active
 access:
   availability: public
   audience: public
-  format: xls
+  formats: [xls]
   automation_posture: permitted
 capabilities:
   pending_cases: partial
@@ -134,6 +139,7 @@ capabilities:
 connector:
   status: shipped
   module: patent_client_agents.japan_ip_high_court
+  blockers: []
 ---
 ```
 
@@ -186,20 +192,26 @@ but source scope and connector status should stop being duplicated there.
 `research/STATE.yaml` should eventually be generated from the canonical
 Markdown records or retired. That decision should be made only after the pilot.
 
-## Deferred implementation plan
+## Implementation and remaining migration plan
 
-- [ ] Draft complete source records for Japan, China, and Korea, including
-      shipped, connectable, manual, commercial, blocked, and known-missing
-      litigation sources.
-- [ ] Render one country page for each pilot jurisdiction and compare the
+- [x] Draft pilot source records for Japan, China, and Korea, including
+      shipped, connectable, manual, commercial, and blocked litigation
+      sources.
+- [x] Render one country page for each pilot jurisdiction and compare the
       result against the research questions that prompted this design:
       pending-case coverage, party discovery, exact-case lookup, documents,
       and patent identifiers.
-- [ ] Finalize controlled vocabularies and validation rules based on the pilot.
-- [ ] Decide whether the new records live under the existing
-      `src/patent_client_agents/catalog/` tree or a new top-level catalog tree.
-- [ ] Build validation and generation tooling for country pages, the worldwide
-      matrix, `coverage.json`, and `atlas.json`.
+- [x] Establish pilot controlled vocabularies and validation rules.
+- [x] Place the source inventory in a new top-level `catalog/` tree, leaving
+      connector API documentation under `src/patent_client_agents/catalog/`.
+- [x] Build validation and generation tooling for country pages and the
+      worldwide matrix, including separate upstream and connected-capability
+      rollups.
+- [ ] Decide whether and how the canonical records should generate
+      `coverage.json` and `atlas.json` without weakening their existing
+      connector and office-level contracts.
+- [ ] Expand the source inventory beyond the initial eight records and three
+      jurisdictions.
 - [ ] Migrate current source records without losing narrative limitations or
       provenance.
 - [ ] Generate or retire overlapping fields in `coverage/sources.yaml` and

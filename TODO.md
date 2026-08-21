@@ -66,12 +66,17 @@ weeks.
 
 ## Near-term roadmap discipline
 
-- [ ] **Pilot the worldwide source catalog after current priority work.** Use
-      Japan, China, and Korea to test one canonical Markdown record per
-      upstream source, including sources that are manual, commercial,
-      restricted, or impossible to connect. Do not migrate the current
-      manifests until the pilot proves the record shape and generated country
-      views. Design decisions and the full migration checklist are in
+- [x] **Pilot the worldwide source catalog.** Japan, China, and Korea now test
+      one canonical Markdown record per upstream source, including manual,
+      commercial, restricted, and blocked sources. CI validates eight records
+      and generated country/worldwide views.
+
+- [ ] **Expand and migrate the worldwide source catalog.** Add jurisdictions
+      and sources beyond the JP/CN/KR pilot, then decide whether the canonical
+      records should generate or replace overlapping fields in
+      `coverage/sources.yaml` and `research/STATE.yaml`. Do not migrate those
+      manifests until parity checks pass. Design decisions and the migration
+      checklist are in
       [`research/SOURCE_CATALOG_DESIGN.md`](research/SOURCE_CATALOG_DESIGN.md).
 
 - [x] **Promote provenance compliance by category.** CI checks read-only
