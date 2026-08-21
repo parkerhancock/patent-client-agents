@@ -66,6 +66,14 @@ weeks.
 
 ## Near-term roadmap discipline
 
+- [ ] **Pilot the worldwide source catalog after current priority work.** Use
+      Japan, China, and Korea to test one canonical Markdown record per
+      upstream source, including sources that are manual, commercial,
+      restricted, or impossible to connect. Do not migrate the current
+      manifests until the pilot proves the record shape and generated country
+      views. Design decisions and the full migration checklist are in
+      [`research/SOURCE_CATALOG_DESIGN.md`](research/SOURCE_CATALOG_DESIGN.md).
+
 - [x] **Promote provenance compliance by category.** CI checks read-only
       annotations and provenance schemas across all 193 default and
       credential-gated tools. It tracks 22 legacy non-envelope exceptions.
