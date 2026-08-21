@@ -9,6 +9,8 @@ version: 1
 groups:
   - server: cafc_mcp
     connector_modules: [patent_client_agents.cafc]
+  - server: canada_federal_court_mcp
+    connector_modules: [patent_client_agents.canada_federal_court]
   - server: canlii_mcp
     connector_modules: [patent_client_agents.canlii]
   - server: copyright_mcp

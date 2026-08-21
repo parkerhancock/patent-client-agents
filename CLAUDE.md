@@ -91,6 +91,8 @@ src/
     canlii/                 # CanLII REST — Canadian IP cases (FC/FCA/SCC IP-filtered,
                             #   TMOB, PAB) + IP statutes (Patent / Trademarks /
                             #   Industrial Design / Copyright Acts). Needs CANLII_API_KEY.
+    canada_federal_court/   # Official Canadian Federal Court party search,
+                            #   case metadata, patent references, and live dockets.
     ipos_statutes/          # IPOS Singapore statutes — Patents/TM/Designs/Copyright Acts
                             #   (SSO mirror; corpus built once via build script)
     ipos_manuals/           # IPOS Singapore manuals — PEG / TM / Designs work manuals

@@ -19,6 +19,7 @@ from __future__ import annotations
 from fastmcp import FastMCP
 
 from .tools.cafc import cafc_mcp
+from .tools.canada_federal_court import canada_federal_court_mcp
 from .tools.canlii import canlii_mcp
 from .tools.copyright import copyright_mcp
 from .tools.cpc import cpc_mcp
@@ -73,14 +74,15 @@ ip_mcp = FastMCP(
         "Office Actions, PTAB, Petitions, Bulk Data, TSDR, TESS trademark "
         "search, Trademark Assignments), EPO OPS, Google Patents, CPC, "
         "MPEP, TMEP, US Copyright Office, Federal Circuit (CAFC) opinions, "
-        "USITC (EDIS Section 337 + DataWeb + HTS + IDS), CanLII "
+        "USITC (EDIS Section 337 + DataWeb + HTS + IDS), Canada Federal Court "
+        "case files and dockets, CanLII "
         "(Canadian courts, tribunals, and IP statutes — env-gated on "
         "CANLII_API_KEY), WIPO Lex (global IP statute / treaty / "
         "judgment database), EUIPO (EU Trade Marks + Registered "
         "Community Designs — env-gated on EUIPO_CLIENT_ID / EUIPO_CLIENT_SECRET), "
         "and UPC (Unified Patent Court decisions/orders feed + corpus-backed "
-        "UPCA / RoP / Fees statutes). 128 default read-only tools; up to "
-        "226 tools when every env-gated family is configured. Tools are grouped by intent."
+        "UPCA / RoP / Fees statutes). 131 default read-only tools; up to "
+        "229 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
 
@@ -101,6 +103,7 @@ ip_mcp.mount(epo_up_guidelines_mcp)
 ip_mcp.mount(epc_mcp)
 ip_mcp.mount(epo_case_law_mcp)
 ip_mcp.mount(cafc_mcp)
+ip_mcp.mount(canada_federal_court_mcp)
 ip_mcp.mount(canlii_mcp)
 ip_mcp.mount(copyright_mcp)
 ip_mcp.mount(usitc_mcp)

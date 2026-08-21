@@ -10,7 +10,7 @@
     {
       "name": "patent-client-agents",
       "source": "./plugins/patent-client-agents",
-      "description": "Intellectual property research toolkit — async Python clients and 128 default MCP tools for patent, trademark, litigation, fee, and substantive-law research."
+      "description": "Intellectual property research toolkit — async Python clients and 131 default MCP tools for patent, trademark, litigation, fee, and substantive-law research."
     }
   ]
 }
