@@ -472,8 +472,35 @@ sources:
       docket or an authoritative open/closed case-status service.
 
   # ────────────────────────────────────────────────────────────────────
-  # JP — JPO (patents, trademarks, designs)
+  # JP — IP High Court case lists and JPO registered-IP data
   # ────────────────────────────────────────────────────────────────────
+
+  - id: JP/IPHC/PatentUtilityModelCaseLists
+    name: Japan Intellectual Property High Court — Patent and Utility-Model Case Lists
+    jurisdiction: JP
+    wipo_st3_code: JP
+    issuing_body: Japan Intellectual Property High Court
+    # The closed-vocabulary rights field has no utility_model value; the
+    # official workbook covers both patents and utility models.
+    rights: [patent]
+    data_types: [tribunal_proceedings, litigation]
+    access:
+      method: bulk_download
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.japan_ip_high_court
+    last_verified: 2026-08-21
+    category: adjudicative_records
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: weekly
+    notes: |
+      Official weekly workbook of pending and recently closed suits seeking
+      cancellation of JPO patent or utility-model decisions. Records include
+      court case number, proceeding type, patent/application number, division,
+      and scheduled judgment or disposition fields. The workbook does not
+      publish party names and is not a general patent-infringement docket.
 
   - id: JP/JPO
     name: Japan Patent Office (JPO) — Open API

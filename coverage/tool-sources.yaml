@@ -67,6 +67,8 @@ groups:
     connector_modules: [patent_client_agents.ipo_in_statutes]
   - server: jpo_mcp
     connector_modules: [patent_client_agents.jpo]
+  - server: japan_ip_high_court_mcp
+    connector_modules: [patent_client_agents.japan_ip_high_court]
   - server: kipo_kipris_mcp
     connector_modules: [patent_client_agents.kipo_kipris]
   - server: legifrance_ip_mcp

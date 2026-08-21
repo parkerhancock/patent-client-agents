@@ -48,6 +48,7 @@ from .tools.ipo_in_statutes import ipo_in_statutes_mcp
 from .tools.iponz_new_zealand import iponz_new_zealand_mcp
 from .tools.ipos import ipos_mcp
 from .tools.jpo import jpo_mcp
+from .tools.japan_ip_high_court import japan_ip_high_court_mcp
 from .tools.kipo_kipris import kipo_kipris_mcp
 from .tools.legifrance_ip import legifrance_ip_mcp
 from .tools.mpep import mpep_mcp
@@ -76,14 +77,15 @@ ip_mcp = FastMCP(
         "search, Trademark Assignments), EPO OPS, Google Patents, CPC, "
         "MPEP, TMEP, US Copyright Office, Federal Circuit (CAFC) opinions, "
         "USITC (EDIS Section 337 + DataWeb + HTS + IDS), Canada Federal Court "
-        "case files and dockets, China SPC IP Court hearing notices, CanLII "
+        "case files and dockets, China SPC IP Court hearing notices, Japan IP "
+        "High Court patent and utility-model case lists, CanLII "
         "(Canadian courts, tribunals, and IP statutes — env-gated on "
         "CANLII_API_KEY), WIPO Lex (global IP statute / treaty / "
         "judgment database), EUIPO (EU Trade Marks + Registered "
         "Community Designs — env-gated on EUIPO_CLIENT_ID / EUIPO_CLIENT_SECRET), "
         "and UPC (Unified Patent Court decisions/orders feed + corpus-backed "
-        "UPCA / RoP / Fees statutes). 134 default read-only tools; up to "
-        "232 tools when every env-gated family is configured. Tools are grouped by intent."
+        "UPCA / RoP / Fees statutes). 136 default read-only tools; up to "
+        "234 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
 
@@ -93,6 +95,7 @@ ip_mcp.mount(publications_mcp)
 ip_mcp.mount(epo_ops_mcp)
 ip_mcp.mount(cpc_mcp)
 ip_mcp.mount(jpo_mcp)
+ip_mcp.mount(japan_ip_high_court_mcp)
 ip_mcp.mount(office_actions_mcp)
 ip_mcp.mount(patent_assignments_mcp)
 ip_mcp.mount(trademarks_mcp)

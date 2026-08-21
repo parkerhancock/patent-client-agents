@@ -226,7 +226,7 @@ Ask your agent to research patents and trademarks in natural language:
 
 - **Americas** — USPTO (patents, trademarks, assignments, office actions), US Copyright Office, Federal Circuit (CAFC), US International Trade Commission (Section 337), CanLII Canada
 - **Europe** — EPO OPS, EUIPO (EU trademarks + designs), Unified Patent Court (decisions + statutes), DPMA Germany (registers + statutes), INPI France (TM + designs), Légifrance (French IP code + trade secrets)
-- **Asia** — China SPC IP Court hearing notices, JPO Japan, KIPO Korea, TIPO Taiwan, IPO India (Acts + MPPP), Taiwan Trade Secrets Act
+- **Asia** — China SPC IP Court hearing notices, Japan IP High Court patent and utility-model case lists, JPO Japan, KIPO Korea, TIPO Taiwan, IPO India (Acts + MPPP), Taiwan Trade Secrets Act
 - **Oceania** — IP Australia (patents, trade marks, designs, bulk catalog)
 - **Multilateral** — Google Patents (global search), WIPO Lex (~50k IP statutes across ~200 jurisdictions)
 - **Examiner & classification corpora** — MPEP, TMEP, EPC + four EPO Guidelines families, Case Law of the Boards of Appeal, CPC (with IPC mapping)
@@ -251,6 +251,7 @@ JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the
 | **INPI Brazil** | Brazilian IP — weekly Revista da Propriedade Industrial (RPI) bulk feed (patents, trade marks, designs, GIs, IC topographies, software programs, technology contracts, INPI communications) on `dados.gov.br` (no auth; Decreto 8.777/2016), plus a corpus-backed view of the LPI (Lei 9.279/1996) — Brazil's unified IP statute (patents + designs + trade marks + GIs + trade-secrets / unfair-competition in one law). The LPI corpus bundles authoritative Portuguese (Planalto) and English (WIPO Lex) text per Article and runs against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-inpi-br-statutes-corpus`. |
 | **ILPO Israel** | Five Israeli IP statutes (Patents Law 1967, Trade Marks Ordinance 1972, Designs Law 2017, Copyright Act 2007, and the distinctive **Commercial Torts Law 1999** — Israel's standalone trade-secret statute with statutory damages in Art. 13), plus the data.gov.il CKAN trade-mark register feed — *statutes run against a local SQLite/FTS5 snapshot built by `patent-client-agents-build-ilpo-statutes-corpus`; TM feed is public, no auth* |
 | **JPO** | Japanese patents, examination history, PCT national phase — *MCP tools register when `JPO_API_USERNAME` + `JPO_API_PASSWORD` are set; not exposed by the hosted demo* |
+| **Japan IP High Court** | Official weekly workbook of pending and recently closed suits seeking cancellation of JPO patent or utility-model decisions. Search by court case number, patent/application number, proceeding type, division, disposition, or date. The workbook does not publish parties and is not a general infringement docket — *public, no auth* |
 | **TIPO Taiwan** | Taiwan patents, utility models, designs, and trademarks via the TIPO OpenData REST API — biblio-only (no claims/figures/abstracts in API); covers `TW/TIPO/Patents`, `TW/TIPO/UtilityModels`, `TW/TIPO/Designs`, and `TW/TIPO/Trademarks` with combined `*_events` surfaces for post-filing alterations / changes / divisions. *MCP tools register when `TIPO_API_KEY` (a single `tk` UUID issued by TIPO on request) is set; not exposed by the hosted demo* |
 | **KIPO Korea** | Korean patents and utility models, trademarks, and designs via the KIPRIS Plus REST API operated by KIPI on behalf of KIPO. Free-text + structured search on each register, single-number fetch with list-accept (capped at 50). *9 MCP tools register when `KIPO_KIPRIS_API_KEY` and an operator-verified HTTPS `KIPO_KIPRIS_BASE_URL` are set. The documented HTTP endpoint is disabled because it would expose the query-string API key. BYOK per KIPRIS Plus ToS §11 — per-user keys only, no shared-key proxy permitted; not exposed by the hosted demo.* |
 | **China SPC IP Court** | Public scheduled-hearing notices from China's national appellate court for patent and other technology-related IP matters, plus official-site search. Extracts hearing date, party roles, venue, and dispute type where published. This is a hearing calendar rather than a complete docket, and notices often omit case and patent numbers — *public, no auth* |
@@ -282,9 +283,9 @@ and retry logic via `mcp-data-core`.
 
 ## API keys
 
-134 patent + IP MCP tools are exposed by default. Credentialed
+136 patent + IP MCP tools are exposed by default. Credentialed
 families register when their environment variables are present, bringing
-the local/private surface up to 232 tools when every env-gated family is
+the local/private surface up to 234 tools when every env-gated family is
 configured.
 
 | Variable | Source | Required | How to get |
@@ -308,7 +309,8 @@ configured.
 **No API key needed:** Google Patents, USPTO Publications (PPUBS), USPTO
 Assignments, USPTO Trademark Assignments, MPEP, TMEP, CPC, WIPO Lex,
 Federal Circuit (CAFC), Canada Federal Court case files, China SPC IP Court
-hearing notices, USITC HTS, USITC IDS, US Copyright Office.
+hearing notices, Japan IP High Court patent and utility-model case lists, USITC HTS, USITC IDS,
+US Copyright Office.
 
 ### `tmsearch` extra (Playwright + curl_cffi)
 

@@ -238,7 +238,8 @@ details, debug info. Read this when concise error messages aren't enough.
 
 USPTO Publications, USPTO Assignments, USPTO Trademark Assignments,
 Google Patents, MPEP, TMEP, Canada Federal Court case files, China SPC IP
-Court hearing notices, and WIPO Lex require no API key.
+Court hearing notices, Japan IP High Court patent and utility-model case lists, and WIPO Lex
+require no API key.
 
 ## Cache Management
 
@@ -267,6 +268,7 @@ if applicable.
 - [uspto_trademark_assignments.md](references/uspto_trademark_assignments.md) — Trademark ownership transfers
 - [epo_ops.md](references/epo_ops.md) — EPO bibliographic, family, legal status
 - [jpo.md](references/jpo.md) — Japan Patent Office
+- [japan-ip-high-court.md](references/japan-ip-high-court.md) — Japan IP High Court pending and closed patent and utility-model case lists
 - [mpep.md](references/mpep.md) — Manual of Patent Examining Procedure
 - [tmep.md](references/tmep.md) — Trademark Manual of Examining Procedure
 - [cpc.md](references/cpc.md) — CPC classification lookup

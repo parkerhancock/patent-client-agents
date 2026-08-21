@@ -52,6 +52,7 @@ src/
     epo_ops/                # EPO Open Patent Services (needs EPO_OPS_API_KEY/SECRET)
     google_patents/         # Scrapes Google Patents (no API key)
     jpo/                    # Japan Patent Office (needs JPO_API_USERNAME/PASSWORD)
+    japan_ip_high_court/    # Japan IP High Court weekly patent/utility-model cases (no auth)
     china_spc_ip_court/     # China SPC IP Court public hearing notices and site search.
     ipi_swissreg/           # Swiss IPI patents, TMs, SPCs, and publication notices.
                             #   Schema-tested BYOK beta; needs IPI_DATA_USERNAME/PASSWORD.

@@ -104,6 +104,7 @@ nav:
     - USPTO Trademark Search (TESS): api/uspto-tmsearch.md
     - EPO OPS: api/epo-ops.md
     - JPO: api/jpo.md
+    - Japan IP High Court: api/japan-ip-high-court.md
     - Google Patents: api/google-patents.md
     - MPEP: api/mpep.md
     - TMEP: api/tmep.md
