@@ -47,6 +47,7 @@ No sources are currently cataloged in this category.
 
 ## Known coverage gaps
 
+- **Jurisdiction scope:** capability grades apply within each source's stated scope; they do not establish comprehensive jurisdiction-wide coverage.
 - **Pending cases:** connected coverage is only partial.
 - **Closed cases:** connected coverage is only partial.
 - **Party search:** no connected source provides this capability; only partial upstream coverage is cataloged (Clarivate Darts-IP litigation intelligence).

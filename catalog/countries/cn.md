@@ -48,6 +48,7 @@ No sources are currently cataloged in this category.
 
 ## Known coverage gaps
 
+- **Jurisdiction scope:** capability grades apply within each source's stated scope; they do not establish comprehensive jurisdiction-wide coverage.
 - **Pending cases:** connected coverage is only partial.
 - **Closed cases:** no connected source provides this capability; only partial upstream coverage is cataloged (China Judgments Online, China Trial Process Information Disclosure Network, Clarivate Darts-IP litigation intelligence).
 - **Party search:** connected coverage is only partial.

@@ -2,16 +2,20 @@
 
 # Worldwide litigation-source catalog
 
-This matrix currently reflects the Japan, China, and South Korea pilot. Values are
-the best capability grade among cataloged sources, including commercial and
-restricted sources, followed by the best grade from a shipped connector. Thus
+This matrix reflects the litigation and adjudicative sources currently cataloged.
+Values are the best capability grade among all cataloged sources, including
+commercial and restricted sources, followed by the best grade from a shipped
+connector. Thus
 `full / none` means that a source has the capability but our tools do not.
 These values do not imply comprehensive national coverage.
 
 | Jurisdiction | Sources | Pending cases | Party search | Exact-case lookup | Docket events | Filed documents | Decisions | Patent identifiers |
 |---|---:|---|---|---|---|---|---|---|
+| [Canada (CA)](countries/ca.md) | 2 | partial / partial | full / full | full / full | full / full | partial / partial | partial / partial | partial / partial |
 | [China (CN)](countries/cn.md) | 4 | full / partial | partial / partial | full / none | full / none | full / none | full / none | partial / none |
 | [Japan (JP)](countries/jp.md) | 3 | partial / partial | partial / none | partial / partial | none / none | partial / none | partial / none | partial / partial |
 | [South Korea (KR)](countries/kr.md) | 3 | partial / none | partial / none | full / none | partial / none | partial / none | partial / none | partial / none |
+| [Unified Patent Court (UPC)](countries/upc.md) | 1 | none / none | partial / partial | partial / partial | none / none | partial / partial | partial / partial | none / none |
+| [United States (US)](countries/us.md) | 5 | full / full | full / full | full / full | full / full | full / full | full / full | full / full |
 
 Canonical records live under [`catalog/sources/`](sources/).

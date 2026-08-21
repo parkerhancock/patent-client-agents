@@ -207,6 +207,9 @@ Markdown records or retired. That decision should be made only after the pilot.
 - [x] Build validation and generation tooling for country pages and the
       worldwide matrix, including separate upstream and connected-capability
       rollups.
+- [x] Migrate every shipped source classified as litigation or adjudicative
+      records in `coverage/sources.yaml`, with CI-enforced ID, jurisdiction,
+      connector-module, and rights parity.
 - [ ] Decide whether and how the canonical records should generate
       `coverage.json` and `atlas.json` without weakening their existing
       connector and office-level contracts.
@@ -227,4 +230,5 @@ Markdown records or retired. That decision should be made only after the pilot.
   filing data; litigation coverage requires court or litigation-specific
   sources.
 - Do not force narrative evidence or nuanced limitations into YAML fields.
-- Do not migrate existing manifests until the JP/CN/KR pilot proves the model.
+- Do not retire existing manifests until generated replacements preserve their
+  downstream contracts and parity checks pass.

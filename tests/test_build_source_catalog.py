@@ -10,6 +10,17 @@ def test_repository_catalog_is_valid() -> None:
     records, parse_errors = build_source_catalog.load_records()
 
     assert not build_source_catalog.validate_catalog(records, parse_errors)
+    assert not build_source_catalog.validate_litigation_manifest_parity(records)
+
+
+def test_litigation_manifest_selector_excludes_substantive_law_compendium() -> None:
+    manifest_records, errors = build_source_catalog.load_litigation_manifest_records()
+
+    assert not errors
+    ids = {record["id"] for record in manifest_records}
+    assert len(ids) == 10
+    assert "EP/EPO/CaseLaw" not in ids
+    assert "UPC/UPC/Decisions" in ids
 
 
 def test_generated_source_catalog_views_are_current() -> None:
