@@ -13,6 +13,8 @@ groups:
     connector_modules: [patent_client_agents.canada_federal_court]
   - server: canlii_mcp
     connector_modules: [patent_client_agents.canlii]
+  - server: china_spc_ip_court_mcp
+    connector_modules: [patent_client_agents.china_spc_ip_court]
   - server: copyright_mcp
     connector_modules: [patent_client_agents.copyright]
   - server: cpc_mcp

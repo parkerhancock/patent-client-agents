@@ -10,6 +10,7 @@ description: |
   - Looking up MPEP or TMEP sections, or CPC classifications
   - Searching Canadian case law / IP statutes via CanLII (Federal Court, FCA, SCC, TMOB, Patent Appeal Board, Patent Act, Trademarks Act)
   - Searching official Canadian Federal Court case files and recorded dockets by party
+  - Monitoring China SPC IP Court scheduled hearings and semiconductor-related court materials
   - Searching global IP statutes / treaties via WIPO Lex (~200 jurisdictions)
   - Finding patent or trademark assignments / ownership history
   - Fetching USPTO publication full-text data
@@ -49,6 +50,7 @@ managers. All shared scaffolding (HTTP, cache, retry, errors) lives in
 | CPC lookup / search / mapping | `patent_client_agents.cpc` | [cpc.md](references/cpc.md) |
 | Canadian case law + IP statutes (FC / FCA / SCC / TMOB / Patent Appeal Board) | `patent_client_agents.canlii` | [canlii.md](references/canlii.md) |
 | Canadian Federal Court party search + live dockets | `patent_client_agents.canada_federal_court` | [canada-federal-court.md](references/canada-federal-court.md) |
+| China SPC IP Court scheduled hearings + site search | `patent_client_agents.china_spc_ip_court` | [china-spc-ip-court.md](references/china-spc-ip-court.md) |
 | Global IP statutes via WIPO Lex (~200 jurisdictions) | `patent_client_agents.wipo_lex` | [wipo_lex.md](references/wipo_lex.md) |
 | EU Trade Marks (EUTM register, ~2.3M marks) | `patent_client_agents.euipo_trademarks` | [euipo.md](references/euipo.md) |
 | EU Registered Community Designs (~1.5M designs) | `patent_client_agents.euipo_designs` | [euipo.md](references/euipo.md) |
@@ -151,6 +153,21 @@ The Court does not publish an official open/closed field. Treat
 `likely_pending` / `likely_closed` as conservative docket-text inferences and
 `unknown` as unresolved, not as evidence that no case is pending.
 
+### Monitor China SPC IP Court hearings
+
+```python
+from patent_client_agents.china_spc_ip_court import ChinaSpcIpCourtClient
+
+async with ChinaSpcIpCourtClient() as client:
+    index = await client.list_hearing_index(page=1)
+    notice = await client.get_hearing_notice(index.notices[0].notice_id)
+    chip_material = await client.search_site("芯片")
+```
+
+Hearing notices are pending-hearing signals, not complete dockets. They often
+omit case and patent numbers, and the official site may be unreachable from
+some foreign DNS or cloud-egress environments.
+
 ### Fetch a global IP statute via WIPO Lex
 
 ```python
@@ -220,8 +237,8 @@ details, debug info. Read this when concise error messages aren't enough.
 | `CANLII_API_KEY` | CanLII (Canadian courts + IP statutes); free key by request |
 
 USPTO Publications, USPTO Assignments, USPTO Trademark Assignments,
-Google Patents, MPEP, TMEP, Canada Federal Court case files, and WIPO Lex
-require no API key.
+Google Patents, MPEP, TMEP, Canada Federal Court case files, China SPC IP
+Court hearing notices, and WIPO Lex require no API key.
 
 ## Cache Management
 

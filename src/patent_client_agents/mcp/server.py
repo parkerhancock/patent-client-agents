@@ -67,9 +67,9 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         prog="patent-client-agents-mcp",
         description=(
-            "Run the patent-client-agents MCP server on stdio. Exposes 131 "
+            "Run the patent-client-agents MCP server on stdio. Exposes 134 "
             "default patent/IP tools to any MCP client; local/private deployments "
-            "expose up to 229 tools when every env-gated family is configured. "
+            "expose up to 232 tools when every env-gated family is configured. "
             "See docs/installation.md for client configuration."
         ),
     )

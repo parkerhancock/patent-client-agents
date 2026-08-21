@@ -226,7 +226,7 @@ Ask your agent to research patents and trademarks in natural language:
 
 - **Americas** — USPTO (patents, trademarks, assignments, office actions), US Copyright Office, Federal Circuit (CAFC), US International Trade Commission (Section 337), CanLII Canada
 - **Europe** — EPO OPS, EUIPO (EU trademarks + designs), Unified Patent Court (decisions + statutes), DPMA Germany (registers + statutes), INPI France (TM + designs), Légifrance (French IP code + trade secrets)
-- **Asia** — JPO Japan, KIPO Korea, TIPO Taiwan, IPO India (Acts + MPPP), Taiwan Trade Secrets Act
+- **Asia** — China SPC IP Court hearing notices, JPO Japan, KIPO Korea, TIPO Taiwan, IPO India (Acts + MPPP), Taiwan Trade Secrets Act
 - **Oceania** — IP Australia (patents, trade marks, designs, bulk catalog)
 - **Multilateral** — Google Patents (global search), WIPO Lex (~50k IP statutes across ~200 jurisdictions)
 - **Examiner & classification corpora** — MPEP, TMEP, EPC + four EPO Guidelines families, Case Law of the Boards of Appeal, CPC (with IPC mapping)
@@ -253,6 +253,7 @@ JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the
 | **JPO** | Japanese patents, examination history, PCT national phase — *MCP tools register when `JPO_API_USERNAME` + `JPO_API_PASSWORD` are set; not exposed by the hosted demo* |
 | **TIPO Taiwan** | Taiwan patents, utility models, designs, and trademarks via the TIPO OpenData REST API — biblio-only (no claims/figures/abstracts in API); covers `TW/TIPO/Patents`, `TW/TIPO/UtilityModels`, `TW/TIPO/Designs`, and `TW/TIPO/Trademarks` with combined `*_events` surfaces for post-filing alterations / changes / divisions. *MCP tools register when `TIPO_API_KEY` (a single `tk` UUID issued by TIPO on request) is set; not exposed by the hosted demo* |
 | **KIPO Korea** | Korean patents and utility models, trademarks, and designs via the KIPRIS Plus REST API operated by KIPI on behalf of KIPO. Free-text + structured search on each register, single-number fetch with list-accept (capped at 50). *9 MCP tools register when `KIPO_KIPRIS_API_KEY` and an operator-verified HTTPS `KIPO_KIPRIS_BASE_URL` are set. The documented HTTP endpoint is disabled because it would expose the query-string API key. BYOK per KIPRIS Plus ToS §11 — per-user keys only, no shared-key proxy permitted; not exposed by the hosted demo.* |
+| **China SPC IP Court** | Public scheduled-hearing notices from China's national appellate court for patent and other technology-related IP matters, plus official-site search. Extracts hearing date, party roles, venue, and dispute type where published. This is a hearing calendar rather than a complete docket, and notices often omit case and patent numbers — *public, no auth* |
 | **INPI France** | French national trademarks (WIPO ST.66 v1.0) and designs (WIPO ST.86 v1.0) from `api-gateway.inpi.fr` — search + fetch with Nice / Locarno class, applicant, status, and date-range filters. TM + Design only; FR patents covered through EPO OPS (INPADOC). *MCP tools register when `INPI_USERNAME` + `INPI_PASSWORD` are set; BYOK — production deployers must register a personal `data.inpi.fr` account.* |
 | **IP-office fee schedules** | Live patent, trademark, and design fee schedules for 25 offices and international systems. TÜRKPATENT coverage includes official patent and utility-model, trademark, and industrial-design tables in TRY, with the Resmî Gazete authority recorded in each schedule. |
 | **IPO India** | The four core Indian IP Acts (Patents Act 1970 with §3(d), §25, §84; Designs Act 2000; Trade Marks Act 1999; Copyright Act 1957) + Patent Rules 2003 (incl. 2024 amendments), plus the IPO India Manual of Patent Practice & Procedure (MPPP v3.0, 2019). Citation forms: `Section 3(d) Patents Act`, `Rule 71 Patent Rules`, `MPPP Chapter 04.05.01`. *Runs against local SQLite/FTS5 snapshots built by `patent-client-agents-build-ipo-in-statutes-corpus` and `patent-client-agents-build-ipo-in-mppp-corpus`* |
@@ -281,9 +282,9 @@ and retry logic via `mcp-data-core`.
 
 ## API keys
 
-131 patent + IP MCP tools are exposed by default. Credentialed
+134 patent + IP MCP tools are exposed by default. Credentialed
 families register when their environment variables are present, bringing
-the local/private surface up to 229 tools when every env-gated family is
+the local/private surface up to 232 tools when every env-gated family is
 configured.
 
 | Variable | Source | Required | How to get |
@@ -306,8 +307,8 @@ configured.
 
 **No API key needed:** Google Patents, USPTO Publications (PPUBS), USPTO
 Assignments, USPTO Trademark Assignments, MPEP, TMEP, CPC, WIPO Lex,
-Federal Circuit (CAFC), Canada Federal Court case files, USITC HTS,
-USITC IDS, US Copyright Office.
+Federal Circuit (CAFC), Canada Federal Court case files, China SPC IP Court
+hearing notices, USITC HTS, USITC IDS, US Copyright Office.
 
 ### `tmsearch` extra (Playwright + curl_cffi)
 

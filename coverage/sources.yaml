@@ -443,6 +443,35 @@ sources:
       API — the CKAN feed is the proper on-ramp.
 
   # ────────────────────────────────────────────────────────────────────
+  # CN — Supreme People's Court Intellectual Property Court
+  # ────────────────────────────────────────────────────────────────────
+
+  - id: CN/SPC_IPCourt/HearingNotices
+    name: Supreme People's Court Intellectual Property Court — Hearing Notices
+    jurisdiction: CN
+    wipo_st3_code: CN
+    issuing_body: Supreme People's Court Intellectual Property Court
+    rights: [patent, design, copyright, trade_secret, plant_variety]
+    data_types: [tribunal_proceedings, litigation]
+    access:
+      method: website_scrape
+      auth: none
+    status: active
+    connector:
+      module: patent_client_agents.china_spc_ip_court
+    last_verified: 2026-08-21
+    category: adjudicative_records
+    transport: mcp_proxy
+    update_strategy: live_proxy
+    update_cadence: daily
+    notes: |
+      Public scheduled-hearing notices from China's national appellate
+      court for technology-related IP matters. Notices usually identify
+      hearing date, party roles, venue, and dispute type, but often omit
+      case and patent numbers. This is a hearing calendar, not a complete
+      docket or an authoritative open/closed case-status service.
+
+  # ────────────────────────────────────────────────────────────────────
   # JP — JPO (patents, trademarks, designs)
   # ────────────────────────────────────────────────────────────────────
 
