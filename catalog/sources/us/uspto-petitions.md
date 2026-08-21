@@ -1,17 +1,21 @@
 ---
 id: US/USPTO/ODP/Petitions
 name: USPTO Open Data Portal — petition decisions
-jurisdictions: [US]
+jurisdictions:
+- US
 institution: U.S. Patent and Trademark Office
 source_type: judgment_database
 official_url: https://data.uspto.gov/apis/petition-decision
 last_verified: 2026-08-21
 source_status: active
-rights: [patent]
+rights:
+- patent
 access:
   availability: credentialed
   audience: registered_users
-  formats: [json, pdf]
+  formats:
+  - json
+  - pdf
   automation_posture: byok_only
 capabilities:
   pending_cases: none
@@ -27,6 +31,21 @@ connector:
   status: shipped
   module: patent_client_agents.uspto_petitions
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 2
+  name: USPTO Open Data Portal — Petitions
+  last_verified: 2026-05-15
+  wipo_st3_code: US
+  data_types:
+  - tribunal_proceedings
+  - prosecution
+  access:
+    method: rest_api
+    auth: none
+  status: active
+  category: adjudicative_records
+  transport: mcp_proxy
 ---
 
 # USPTO Open Data Portal — petition decisions

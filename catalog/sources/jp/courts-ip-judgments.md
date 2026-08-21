@@ -1,17 +1,26 @@
 ---
 id: JP/Courts/IPJudgmentSearch
 name: Courts of Japan intellectual-property judgment search
-jurisdictions: [JP]
+jurisdictions:
+- JP
 institution: Supreme Court of Japan
 source_type: judgment_database
 official_url: https://www.courts.go.jp/hanrei/search7/index.html
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, utility_model, trademark, design, copyright, unfair_competition]
+rights:
+- patent
+- utility_model
+- trademark
+- design
+- copyright
+- unfair_competition
 access:
   availability: public
   audience: public
-  formats: [html, pdf]
+  formats:
+  - html
+  - pdf
   automation_posture: unclear
 capabilities:
   pending_cases: none
@@ -26,6 +35,7 @@ capabilities:
 connector:
   status: candidate
   blockers: []
+category: adjudicative_records
 ---
 
 # Courts of Japan intellectual-property judgment search

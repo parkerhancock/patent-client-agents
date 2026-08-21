@@ -5,7 +5,14 @@
 This page summarizes the canonical source records for this jurisdiction. Capability
 grades describe the upstream source, not merely the connector we have built.
 
-## Coverage at a glance
+## Inventory at a glance
+
+| Category | Sources | Connected |
+|---|---:|---:|
+| Litigation and adjudicative records | 1 | 1 |
+| Substantive law | 1 | 1 |
+
+## Litigation and adjudicative records capabilities
 
 | Capability | Best source coverage | Connected coverage | Best source(s) |
 |---|---|---|---|
@@ -19,11 +26,24 @@ grades describe the upstream source, not merely the connector we have built.
 | Decisions | partial | partial | [Unified Patent Court — decisions and orders](../sources/upc/decisions-orders.md) |
 | Patent identifiers | none | none | [Unified Patent Court — decisions and orders](../sources/upc/decisions-orders.md) |
 
+## Substantive law capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Guidelines | none | none | [Unified Patent Court — Statutes & Rules of Procedure](../sources/upc/upc-statutes.md) |
+| Case law | none | none | [Unified Patent Court — Statutes & Rules of Procedure](../sources/upc/upc-statutes.md) |
+| Statutes | partial | partial | [Unified Patent Court — Statutes & Rules of Procedure](../sources/upc/upc-statutes.md) |
+| Treaties | none | none | [Unified Patent Court — Statutes & Rules of Procedure](../sources/upc/upc-statutes.md) |
+| Full-text search | partial | partial | [Unified Patent Court — Statutes & Rules of Procedure](../sources/upc/upc-statutes.md) |
+| Citation lookup | unknown | unknown | [Unified Patent Court — Statutes & Rules of Procedure](../sources/upc/upc-statutes.md) |
+| Point-in-time law | unknown | unknown | [Unified Patent Court — Statutes & Rules of Procedure](../sources/upc/upc-statutes.md) |
+
 ## Connected sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [Unified Patent Court — decisions and orders](../sources/upc/decisions-orders.md) | judgment_database | public | unclear | shipped |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Unified Patent Court — decisions and orders](../sources/upc/decisions-orders.md) | Litigation and adjudicative records | judgment_database | public | unclear | shipped |
+| [Unified Patent Court — Statutes & Rules of Procedure](../sources/upc/upc-statutes.md) | Substantive law | legal_corpus | public | permitted | shipped |
 
 ## Connectable sources not yet built
 
@@ -44,14 +64,6 @@ No sources are currently cataloged in this category.
 ## Known coverage gaps
 
 - **Jurisdiction scope:** capability grades apply within each source's stated scope; they do not establish comprehensive jurisdiction-wide coverage.
-- **Pending cases:** no connected or cataloged source provides this capability.
-- **Closed cases:** connected coverage is only partial.
-- **Party search:** connected coverage is only partial.
-- **Broad discovery:** connected coverage is only partial.
-- **Exact-case lookup:** connected coverage is only partial.
-- **Docket events:** no connected or cataloged source provides this capability.
-- **Filed documents:** connected coverage is only partial.
-- **Decisions:** connected coverage is only partial.
-- **Patent identifiers:** no connected or cataloged source provides this capability.
+- **Capability confidence:** mechanically migrated `partial` grades preserve the legacy manifest's positive coverage claim without asserting completeness.
 
 See each source record for scope limitations and supporting evidence.

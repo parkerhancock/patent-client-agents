@@ -71,12 +71,11 @@ weeks.
       commercial, restricted, and blocked sources. CI validates eight records
       and generated country/worldwide views.
 
-- [ ] **Expand and migrate the worldwide source catalog.** Add jurisdictions
-      and sources beyond the JP/CN/KR pilot, then decide whether the canonical
-      records should generate or replace overlapping fields in
-      `coverage/sources.yaml` and `research/STATE.yaml`. Do not migrate those
-      manifests until parity checks pass. Design decisions and the migration
-      checklist are in
+- [x] **Expand and migrate the worldwide source catalog.** All shipped source
+      rows now have canonical Markdown records, and `coverage/sources.yaml` is
+      generated after exact row parity. `research/STATE.yaml` remains the
+      office-level roadmap rather than duplicating source records. Design
+      decisions and the migration checklist are in
       [`research/SOURCE_CATALOG_DESIGN.md`](research/SOURCE_CATALOG_DESIGN.md).
 
 - [x] **Promote provenance compliance by category.** CI checks read-only

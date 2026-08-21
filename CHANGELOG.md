@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Consolidated all 114 shipped coverage products and six additional known
+  litigation sources into canonical, human-readable Markdown records under
+  `catalog/sources/`. Country summaries, the worldwide inventory,
+  `coverage/sources.yaml`, `coverage.json`, and `atlas.json` are now generated
+  from those records, eliminating the parallel hand-edited coverage manifest.
+
 ## [0.26.4] — 2026-08-12
 
 ### Fixed

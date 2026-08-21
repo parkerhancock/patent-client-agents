@@ -5,7 +5,15 @@
 This page summarizes the canonical source records for this jurisdiction. Capability
 grades describe the upstream source, not merely the connector we have built.
 
-## Coverage at a glance
+## Inventory at a glance
+
+| Category | Sources | Connected |
+|---|---:|---:|
+| Litigation and adjudicative records | 3 | 0 |
+| Registered IP | 3 | 3 |
+| Fees | 1 | 1 |
+
+## Litigation and adjudicative records capabilities
 
 | Capability | Best source coverage | Connected coverage | Best source(s) |
 |---|---|---|---|
@@ -19,27 +27,55 @@ grades describe the upstream source, not merely the connector we have built.
 | Decisions | partial | none | [Korean Judiciary Comprehensive Legal Information System](../sources/kr/comprehensive-legal-information.md), [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) |
 | Patent identifiers | partial | none | [Korean Judiciary Comprehensive Legal Information System](../sources/kr/comprehensive-legal-information.md), [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) |
 
+## Registered IP capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Bibliographic data | partial | partial | [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md), [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md), [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) |
+| Full text | none | none | [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md), [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md), [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) |
+| Prosecution history | none | none | [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md), [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md), [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) |
+| Legal status | partial | partial | [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md), [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md), [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) |
+| Assignments | none | none | [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md), [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md), [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) |
+| Oppositions | none | none | [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md), [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md), [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) |
+| Classification | partial | partial | [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md), [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md), [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) |
+| Bulk data | none | none | [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md), [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md), [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) |
+
+## Fees capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Current schedule | partial | partial | [KIPO Fee Schedule — Patents](../sources/kr/kipo-fees-patents.md) |
+| Effective date | partial | partial | [KIPO Fee Schedule — Patents](../sources/kr/kipo-fees-patents.md) |
+| Historical schedules | unknown | unknown | [KIPO Fee Schedule — Patents](../sources/kr/kipo-fees-patents.md) |
+| Machine-readable fees | partial | partial | [KIPO Fee Schedule — Patents](../sources/kr/kipo-fees-patents.md) |
+| Fee calculator | unknown | unknown | [KIPO Fee Schedule — Patents](../sources/kr/kipo-fees-patents.md) |
+
 ## Connected sources
 
-No sources are currently cataloged in this category.
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [KIPO Fee Schedule — Patents](../sources/kr/kipo-fees-patents.md) | Fees | fee_schedule | public | unclear | shipped |
+| [KIPO Korea — Designs (KIPRIS Plus)](../sources/kr/kipo-designs.md) | Registered IP | registry | credentialed | byok_only | shipped |
+| [KIPO Korea — Patents and Utility Models (KIPRIS Plus)](../sources/kr/kipo-patents.md) | Registered IP | registry | credentialed | byok_only | shipped |
+| [KIPO Korea — Trademarks (KIPRIS Plus)](../sources/kr/kipo-trademarks.md) | Registered IP | registry | credentialed | byok_only | shipped |
 
 ## Connectable sources not yet built
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [Korean Judiciary Comprehensive Legal Information System](../sources/kr/comprehensive-legal-information.md) | judgment_database | public | unclear | candidate |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Korean Judiciary Comprehensive Legal Information System](../sources/kr/comprehensive-legal-information.md) | Litigation and adjudicative records | judgment_database | public | unclear | candidate |
 
 ## Manual or restricted sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [Korean Judiciary My Case Search](../sources/kr/my-case-search.md) | case_lookup | manual_only | technically_blocked | blocked |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Korean Judiciary My Case Search](../sources/kr/my-case-search.md) | Litigation and adjudicative records | case_lookup | manual_only | technically_blocked | blocked |
 
 ## Commercial sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) | commercial_database | commercial | contract_required | external |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) | Litigation and adjudicative records | commercial_database | commercial | contract_required | external |
 
 ## Unavailable sources
 
@@ -48,14 +84,6 @@ No sources are currently cataloged in this category.
 ## Known coverage gaps
 
 - **Jurisdiction scope:** capability grades apply within each source's stated scope; they do not establish comprehensive jurisdiction-wide coverage.
-- **Pending cases:** no connected source provides this capability; only partial upstream coverage is cataloged (Korean Judiciary My Case Search, Clarivate Darts-IP litigation intelligence).
-- **Closed cases:** no connected source provides this capability; only partial upstream coverage is cataloged (Korean Judiciary Comprehensive Legal Information System, Korean Judiciary My Case Search, Clarivate Darts-IP litigation intelligence).
-- **Party search:** no connected source provides this capability; only partial upstream coverage is cataloged (Clarivate Darts-IP litigation intelligence).
-- **Broad discovery:** no connected source provides this capability; only partial upstream coverage is cataloged (Korean Judiciary Comprehensive Legal Information System, Clarivate Darts-IP litigation intelligence).
-- **Exact-case lookup:** no connected source provides this capability; full upstream coverage is restricted (Korean Judiciary My Case Search: manual_only).
-- **Docket events:** no connected source provides this capability; only partial upstream coverage is cataloged (Korean Judiciary My Case Search).
-- **Filed documents:** no connected source provides this capability; only partial upstream coverage is cataloged (Clarivate Darts-IP litigation intelligence).
-- **Decisions:** no connected source provides this capability; only partial upstream coverage is cataloged (Korean Judiciary Comprehensive Legal Information System, Clarivate Darts-IP litigation intelligence).
-- **Patent identifiers:** no connected source provides this capability; only partial upstream coverage is cataloged (Korean Judiciary Comprehensive Legal Information System, Clarivate Darts-IP litigation intelligence).
+- **Capability confidence:** mechanically migrated `partial` grades preserve the legacy manifest's positive coverage claim without asserting completeness.
 
 See each source record for scope limitations and supporting evidence.

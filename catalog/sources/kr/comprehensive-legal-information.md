@@ -1,17 +1,26 @@
 ---
 id: KR/Judiciary/ComprehensiveLegalInformation
 name: Korean Judiciary Comprehensive Legal Information System
-jurisdictions: [KR]
+jurisdictions:
+- KR
 institution: Supreme Court of Korea
 source_type: judgment_database
 official_url: https://glaw.scourt.go.kr/wsjo/intesrch/sjo022.do
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, utility_model, trademark, design, copyright, unfair_competition]
+rights:
+- patent
+- utility_model
+- trademark
+- design
+- copyright
+- unfair_competition
 access:
   availability: public
   audience: public
-  formats: [html, pdf]
+  formats:
+  - html
+  - pdf
   automation_posture: unclear
 capabilities:
   pending_cases: none
@@ -26,6 +35,7 @@ capabilities:
 connector:
   status: candidate
   blockers: []
+category: adjudicative_records
 ---
 
 # Korean Judiciary Comprehensive Legal Information System

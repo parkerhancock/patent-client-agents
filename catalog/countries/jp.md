@@ -5,7 +5,15 @@
 This page summarizes the canonical source records for this jurisdiction. Capability
 grades describe the upstream source, not merely the connector we have built.
 
-## Coverage at a glance
+## Inventory at a glance
+
+| Category | Sources | Connected |
+|---|---:|---:|
+| Litigation and adjudicative records | 3 | 1 |
+| Registered IP | 1 | 1 |
+| Fees | 1 | 1 |
+
+## Litigation and adjudicative records capabilities
 
 | Capability | Best source coverage | Connected coverage | Best source(s) |
 |---|---|---|---|
@@ -19,17 +27,42 @@ grades describe the upstream source, not merely the connector we have built.
 | Decisions | partial | none | [Courts of Japan intellectual-property judgment search](../sources/jp/courts-ip-judgments.md), [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) |
 | Patent identifiers | partial | partial | [Courts of Japan intellectual-property judgment search](../sources/jp/courts-ip-judgments.md), [Japan IP High Court patent and utility-model case lists](../sources/jp/ip-high-court-case-lists.md), [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) |
 
+## Registered IP capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Bibliographic data | partial | partial | [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) |
+| Full text | none | none | [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) |
+| Prosecution history | partial | partial | [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) |
+| Legal status | partial | partial | [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) |
+| Assignments | none | none | [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) |
+| Oppositions | none | none | [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) |
+| Classification | none | none | [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) |
+| Bulk data | none | none | [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) |
+
+## Fees capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Current schedule | partial | partial | [JPO Fee Schedule — Patents](../sources/jp/jpo-fees-patents.md) |
+| Effective date | partial | partial | [JPO Fee Schedule — Patents](../sources/jp/jpo-fees-patents.md) |
+| Historical schedules | unknown | unknown | [JPO Fee Schedule — Patents](../sources/jp/jpo-fees-patents.md) |
+| Machine-readable fees | partial | partial | [JPO Fee Schedule — Patents](../sources/jp/jpo-fees-patents.md) |
+| Fee calculator | unknown | unknown | [JPO Fee Schedule — Patents](../sources/jp/jpo-fees-patents.md) |
+
 ## Connected sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [Japan IP High Court patent and utility-model case lists](../sources/jp/ip-high-court-case-lists.md) | case_list | public | permitted | shipped |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Japan IP High Court patent and utility-model case lists](../sources/jp/ip-high-court-case-lists.md) | Litigation and adjudicative records | case_list | public | permitted | shipped |
+| [Japan Patent Office (JPO) — Open API](../sources/jp/jpo.md) | Registered IP | registry | credentialed | byok_only | shipped |
+| [JPO Fee Schedule — Patents](../sources/jp/jpo-fees-patents.md) | Fees | fee_schedule | public | unclear | shipped |
 
 ## Connectable sources not yet built
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [Courts of Japan intellectual-property judgment search](../sources/jp/courts-ip-judgments.md) | judgment_database | public | unclear | candidate |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Courts of Japan intellectual-property judgment search](../sources/jp/courts-ip-judgments.md) | Litigation and adjudicative records | judgment_database | public | unclear | candidate |
 
 ## Manual or restricted sources
 
@@ -37,9 +70,9 @@ No sources are currently cataloged in this category.
 
 ## Commercial sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) | commercial_database | commercial | contract_required | external |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) | Litigation and adjudicative records | commercial_database | commercial | contract_required | external |
 
 ## Unavailable sources
 
@@ -48,14 +81,6 @@ No sources are currently cataloged in this category.
 ## Known coverage gaps
 
 - **Jurisdiction scope:** capability grades apply within each source's stated scope; they do not establish comprehensive jurisdiction-wide coverage.
-- **Pending cases:** connected coverage is only partial.
-- **Closed cases:** connected coverage is only partial.
-- **Party search:** no connected source provides this capability; only partial upstream coverage is cataloged (Clarivate Darts-IP litigation intelligence).
-- **Broad discovery:** connected coverage is only partial.
-- **Exact-case lookup:** connected coverage is only partial.
-- **Docket events:** no connected or cataloged source provides this capability.
-- **Filed documents:** no connected source provides this capability; only partial upstream coverage is cataloged (Clarivate Darts-IP litigation intelligence).
-- **Decisions:** no connected source provides this capability; only partial upstream coverage is cataloged (Courts of Japan intellectual-property judgment search, Clarivate Darts-IP litigation intelligence).
-- **Patent identifiers:** connected coverage is only partial.
+- **Capability confidence:** mechanically migrated `partial` grades preserve the legacy manifest's positive coverage claim without asserting completeness.
 
 See each source record for scope limitations and supporting evidence.

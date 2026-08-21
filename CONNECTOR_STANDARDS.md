@@ -231,7 +231,8 @@ Every `substantive_law` connector exposes a module-level
 `get_corpus_status()` callable that returns these fields without requiring
 a live upstream call. CI uses it to detect drift.
 
-**Update strategy** is declared per connector in `coverage/sources.yaml`:
+**Update strategy** is declared in the connector's canonical
+`catalog/sources/` record and projected into `coverage/sources.yaml`:
 
 - `live_proxy` — no bundled corpus; freshness is whatever the upstream
   serves on demand.
@@ -554,9 +555,10 @@ The canonical examples live in
 
 ## §6 Manifest contract
 
-Every connector has an entry in `coverage/sources.yaml`. The
-[`scripts/build_coverage.py`](scripts/build_coverage.py) validator enforces
-the closed vocabularies below; CI fails on any deviation.
+Every connector has a canonical record under `catalog/sources/` with a
+`coverage` projection block. `scripts/build_source_catalog.py` generates
+`coverage/sources.yaml`, and [`scripts/build_coverage.py`](scripts/build_coverage.py)
+validates the projected closed vocabularies below. CI fails on any deviation.
 
 | Field | Required | Vocabulary |
 |---|---|---|
@@ -574,7 +576,7 @@ the closed vocabularies below; CI fails on any deviation.
 | `notes` | required for status ∈ {blocked, deprecated, candidate, external} | free text |
 | `connector.module` | required for status ∈ {active, beta} | Python module path; must exist on disk |
 | `last_verified` | required for status ∈ {active, beta} | YAML date; max 365d old |
-| `category` | required for status ∈ {active, beta} | `{registered_ip, substantive_law}` |
+| `category` | required for status ∈ {active, beta} | `{registered_ip, adjudicative_records, substantive_law, fees}` |
 | `transport` | required for status ∈ {active, beta} | `{mcp_proxy, mcp_local}` |
 | `update_strategy` | required for category=substantive_law | `{live_proxy, scheduled_recrawl, vendor_changefeed, manual}` |
 | `update_cadence` | required for category=substantive_law | `{weekly, monthly, quarterly, semiannual, annual, irregular}` |
@@ -598,9 +600,8 @@ Validator checks beyond shape:
 - **CPC** — `registered_ip`. CPC is a classification system used to index
   the patent register; it sits on the registered-IP side even though it's
   also referenced in substantive examination work.
-- **USITC investigations** — `registered_ip`. By analogy to PTAB: a
-  tribunal proceeding adjudicating registered patents is part of the
-  registered-IP lifecycle, not substantive law.
+- **USITC investigations** — `adjudicative_records`. They are live contested
+  proceedings with investigation status and document activity.
 - **EPO Case Law** — `substantive_law`, cadence `annual`. The bundled
   artifact is the Boards of Appeal compendium republished annually; even
   though individual decisions issue continuously upstream, the cadence
@@ -612,7 +613,9 @@ Validator checks beyond shape:
 
 Before merging a new connector:
 
-- [ ] Entry added to `coverage/sources.yaml` with every §6 required field.
+- [ ] Canonical record added under `catalog/sources/` with a complete
+      `coverage` block; regenerate `coverage/sources.yaml`.
+- [ ] `uv run python scripts/build_source_catalog.py --check` passes.
 - [ ] `uv run python scripts/build_coverage.py --check` passes with no
       errors and no unexpected warnings.
 - [ ] Client extends `mcp_data_core.BaseAsyncClient`. No bespoke HTTP layer.

@@ -1,17 +1,22 @@
 ---
 id: US/USPTO/ODP/PTAB
 name: USPTO Open Data Portal — PTAB trial proceedings
-jurisdictions: [US]
+jurisdictions:
+- US
 institution: U.S. Patent and Trademark Office (Patent Trial and Appeal Board)
 source_type: case_lookup
 official_url: https://data.uspto.gov/apis/ptab-trials
 last_verified: 2026-08-21
 source_status: active
-rights: [patent]
+rights:
+- patent
 access:
   availability: credentialed
   audience: registered_users
-  formats: [json, csv, pdf]
+  formats:
+  - json
+  - csv
+  - pdf
   automation_posture: byok_only
 capabilities:
   pending_cases: full
@@ -27,6 +32,21 @@ connector:
   status: shipped
   module: patent_client_agents.uspto_odp
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 1
+  name: USPTO Open Data Portal — PTAB proceedings
+  last_verified: 2026-05-15
+  wipo_st3_code: US
+  data_types:
+  - tribunal_proceedings
+  - prosecution
+  access:
+    method: rest_api
+    auth: none
+  status: active
+  category: adjudicative_records
+  transport: mcp_proxy
 ---
 
 # USPTO Open Data Portal — PTAB trial proceedings

@@ -1,17 +1,26 @@
 ---
 id: US/USITC/IDS
 name: USITC Investigations Database System — IP investigation index
-jurisdictions: [US]
+jurisdictions:
+- US
 institution: U.S. International Trade Commission
 source_type: case_list
 official_url: https://ids.usitc.gov/
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, trademark, design, copyright, trade_secret, unfair_competition]
+rights:
+- patent
+- trademark
+- design
+- copyright
+- trade_secret
+- unfair_competition
 access:
   availability: public
   audience: public
-  formats: [html, json]
+  formats:
+  - html
+  - json
   automation_posture: permitted
 capabilities:
   pending_cases: full
@@ -27,6 +36,31 @@ connector:
   status: shipped
   module: patent_client_agents.usitc
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 26
+  name: USITC IDS — IP investigation index
+  rights:
+  - patent
+  - trademark
+  last_verified: 2026-05-15
+  wipo_st3_code: US
+  data_types:
+  - tribunal_proceedings
+  - litigation
+  access:
+    method: rest_api
+    auth: none
+  status: active
+  category: adjudicative_records
+  transport: mcp_proxy
+  notes: 'Investigation-level index of IP proceedings. Lighter-weight surface
+
+    than EDIS — useful for cross-investigation discovery before pulling
+
+    EDIS attachments.
+
+    '
 ---
 
 # USITC Investigations Database System — IP investigation index

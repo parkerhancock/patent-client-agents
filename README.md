@@ -235,6 +235,11 @@ JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the
 
 ## Coverage
 
+The canonical, human-readable inventory is the
+[`catalog/`](https://github.com/parkerhancock/patent-client-agents/tree/main/catalog).
+It includes shipped data products and known sources that are restricted,
+blocked, commercial, or not yet connected.
+
 | Source | What You Get |
 |--------|--------------|
 | **Google Patents** | Global search, full-text, citations, PDFs, families |

@@ -1,17 +1,27 @@
 ---
 id: US/USITC/EDIS
 name: USITC EDIS — Section 337 investigation dockets
-jurisdictions: [US]
+jurisdictions:
+- US
 institution: U.S. International Trade Commission
 source_type: case_lookup
 official_url: https://edis.usitc.gov/
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, trademark, design, copyright, trade_secret, unfair_competition]
+rights:
+- patent
+- trademark
+- design
+- copyright
+- trade_secret
+- unfair_competition
 access:
   availability: credentialed
   audience: registered_users
-  formats: [json, xml, pdf]
+  formats:
+  - json
+  - xml
+  - pdf
   automation_posture: byok_only
 capabilities:
   pending_cases: full
@@ -27,6 +37,33 @@ connector:
   status: shipped
   module: patent_client_agents.usitc
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 25
+  name: USITC EDIS — Section 337 investigations
+  rights:
+  - patent
+  - trademark
+  last_verified: 2026-05-15
+  wipo_st3_code: US
+  data_types:
+  - tribunal_proceedings
+  - litigation
+  access:
+    method: rest_api
+    auth: api_key
+    auth_env:
+    - USITC_EDIS_TOKEN
+  status: active
+  category: adjudicative_records
+  transport: mcp_proxy
+  notes: 'Section 337 patent + trademark enforcement investigations: docket
+
+    entries, attachments, exclusion orders. Live docket data — treat as
+
+    a snapshot at retrieved_at, not a corpus.
+
+    '
 ---
 
 # USITC EDIS — Section 337 investigation dockets

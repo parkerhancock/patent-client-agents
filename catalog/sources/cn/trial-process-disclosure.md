@@ -1,17 +1,27 @@
 ---
 id: CN/SPC/TrialProcessDisclosure
 name: China Trial Process Information Disclosure Network
-jurisdictions: [CN]
+jurisdictions:
+- CN
 institution: Supreme People's Court of the People's Republic of China
 source_type: case_lookup
 official_url: https://splcgk.court.gov.cn/gzfwww/
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, utility_model, trademark, design, copyright, trade_secret, plant_variety, unfair_competition]
+rights:
+- patent
+- utility_model
+- trademark
+- design
+- copyright
+- trade_secret
+- plant_variety
+- unfair_competition
 access:
   availability: parties_only
   audience: parties
-  formats: [html]
+  formats:
+  - html
   automation_posture: technically_blocked
 capabilities:
   pending_cases: full
@@ -25,7 +35,11 @@ capabilities:
   patent_identifiers: unknown
 connector:
   status: blocked
-  blockers: [identity_verification, parties_only, no_api]
+  blockers:
+  - identity_verification
+  - parties_only
+  - no_api
+category: adjudicative_records
 ---
 
 # China Trial Process Information Disclosure Network

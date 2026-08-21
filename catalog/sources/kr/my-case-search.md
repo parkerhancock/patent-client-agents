@@ -1,17 +1,25 @@
 ---
 id: KR/Judiciary/MyCaseSearch
 name: Korean Judiciary My Case Search
-jurisdictions: [KR]
+jurisdictions:
+- KR
 institution: Supreme Court of Korea
 source_type: case_lookup
 official_url: https://ssgo.scourt.go.kr/ssgo/index.on?cortId=www
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, utility_model, trademark, design, copyright, unfair_competition]
+rights:
+- patent
+- utility_model
+- trademark
+- design
+- copyright
+- unfair_competition
 access:
   availability: manual_only
   audience: public
-  formats: [html]
+  formats:
+  - html
   automation_posture: technically_blocked
 capabilities:
   pending_cases: partial
@@ -25,7 +33,11 @@ capabilities:
   patent_identifiers: none
 connector:
   status: blocked
-  blockers: [captcha, required_identifiers, no_api]
+  blockers:
+  - captcha
+  - required_identifiers
+  - no_api
+category: adjudicative_records
 ---
 
 # Korean Judiciary My Case Search

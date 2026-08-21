@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Build ``coverage/coverage.json`` from ``coverage/sources.yaml``.
+"""Build ``coverage/coverage.json`` from generated ``coverage/sources.yaml``.
 
-The YAML is the human-edited source of truth; the JSON is the build
-artifact the public coverage page fetches at runtime.
+Canonical human-edited records live under ``catalog/sources``. The catalog
+builder projects them into the YAML compatibility artifact consumed here; the
+JSON is the build artifact the public coverage page fetches at runtime.
 
 Validates against closed vocabularies, computes rollup stats, and
 writes a JSON document shaped for the matrix/map UI.

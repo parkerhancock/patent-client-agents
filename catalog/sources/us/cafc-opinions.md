@@ -1,17 +1,22 @@
 ---
 id: US/CAFC/Opinions
 name: U.S. Court of Appeals for the Federal Circuit — opinions and orders
-jurisdictions: [US]
+jurisdictions:
+- US
 institution: U.S. Court of Appeals for the Federal Circuit
 source_type: judgment_database
 official_url: https://www.cafc.uscourts.gov/home/case-information/opinions-orders/
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, trademark]
+rights:
+- patent
+- trademark
 access:
   availability: public
   audience: public
-  formats: [html, pdf]
+  formats:
+  - html
+  - pdf
   automation_posture: unclear
 capabilities:
   pending_cases: none
@@ -27,6 +32,23 @@ connector:
   status: shipped
   module: patent_client_agents.cafc
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 43
+  name: U.S. Court of Appeals for the Federal Circuit — Opinions
+  last_verified: 2026-05-15
+  wipo_st3_code: US
+  data_types:
+  - case_law
+  - litigation
+  access:
+    method: website_scrape
+    auth: none
+  status: active
+  category: substantive_law
+  transport: mcp_proxy
+  update_strategy: live_proxy
+  update_cadence: weekly
 ---
 
 # U.S. Court of Appeals for the Federal Circuit — opinions and orders

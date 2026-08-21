@@ -5,7 +5,14 @@
 This page summarizes the canonical source records for this jurisdiction. Capability
 grades describe the upstream source, not merely the connector we have built.
 
-## Coverage at a glance
+## Inventory at a glance
+
+| Category | Sources | Connected |
+|---|---:|---:|
+| Litigation and adjudicative records | 4 | 1 |
+| Fees | 1 | 1 |
+
+## Litigation and adjudicative records capabilities
 
 | Capability | Best source coverage | Connected coverage | Best source(s) |
 |---|---|---|---|
@@ -19,11 +26,22 @@ grades describe the upstream source, not merely the connector we have built.
 | Decisions | full | none | [China Trial Process Information Disclosure Network](../sources/cn/trial-process-disclosure.md) |
 | Patent identifiers | partial | none | [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) |
 
+## Fees capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Current schedule | partial | partial | [CNIPA Fee Schedule — Patents](../sources/cn/cnipa-fees-patents.md) |
+| Effective date | partial | partial | [CNIPA Fee Schedule — Patents](../sources/cn/cnipa-fees-patents.md) |
+| Historical schedules | unknown | unknown | [CNIPA Fee Schedule — Patents](../sources/cn/cnipa-fees-patents.md) |
+| Machine-readable fees | partial | partial | [CNIPA Fee Schedule — Patents](../sources/cn/cnipa-fees-patents.md) |
+| Fee calculator | unknown | unknown | [CNIPA Fee Schedule — Patents](../sources/cn/cnipa-fees-patents.md) |
+
 ## Connected sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [China SPC Intellectual Property Court hearing notices](../sources/cn/spc-ip-court-hearing-notices.md) | hearing_calendar | public | permitted | shipped |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [China SPC Intellectual Property Court hearing notices](../sources/cn/spc-ip-court-hearing-notices.md) | Litigation and adjudicative records | hearing_calendar | public | permitted | shipped |
+| [CNIPA Fee Schedule — Patents](../sources/cn/cnipa-fees-patents.md) | Fees | fee_schedule | public | unclear | shipped |
 
 ## Connectable sources not yet built
 
@@ -31,16 +49,16 @@ No sources are currently cataloged in this category.
 
 ## Manual or restricted sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [China Judgments Online](../sources/cn/china-judgments-online.md) | judgment_database | credentialed | technically_blocked | blocked |
-| [China Trial Process Information Disclosure Network](../sources/cn/trial-process-disclosure.md) | case_lookup | parties_only | technically_blocked | blocked |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [China Judgments Online](../sources/cn/china-judgments-online.md) | Litigation and adjudicative records | judgment_database | credentialed | technically_blocked | blocked |
+| [China Trial Process Information Disclosure Network](../sources/cn/trial-process-disclosure.md) | Litigation and adjudicative records | case_lookup | parties_only | technically_blocked | blocked |
 
 ## Commercial sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) | commercial_database | commercial | contract_required | external |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Clarivate Darts-IP litigation intelligence](../sources/wo/darts-ip.md) | Litigation and adjudicative records | commercial_database | commercial | contract_required | external |
 
 ## Unavailable sources
 
@@ -49,14 +67,6 @@ No sources are currently cataloged in this category.
 ## Known coverage gaps
 
 - **Jurisdiction scope:** capability grades apply within each source's stated scope; they do not establish comprehensive jurisdiction-wide coverage.
-- **Pending cases:** connected coverage is only partial.
-- **Closed cases:** no connected source provides this capability; only partial upstream coverage is cataloged (China Judgments Online, China Trial Process Information Disclosure Network, Clarivate Darts-IP litigation intelligence).
-- **Party search:** connected coverage is only partial.
-- **Broad discovery:** connected coverage is only partial.
-- **Exact-case lookup:** no connected source provides this capability; full upstream coverage is restricted (China Trial Process Information Disclosure Network: parties_only).
-- **Docket events:** no connected source provides this capability; full upstream coverage is restricted (China Trial Process Information Disclosure Network: parties_only).
-- **Filed documents:** no connected source provides this capability; full upstream coverage is restricted (China Trial Process Information Disclosure Network: parties_only).
-- **Decisions:** no connected source provides this capability; full upstream coverage is restricted (China Trial Process Information Disclosure Network: parties_only).
-- **Patent identifiers:** no connected source provides this capability; only partial upstream coverage is cataloged (Clarivate Darts-IP litigation intelligence).
+- **Capability confidence:** mechanically migrated `partial` grades preserve the legacy manifest's positive coverage claim without asserting completeness.
 
 See each source record for scope limitations and supporting evidence.

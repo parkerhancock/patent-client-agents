@@ -5,7 +5,17 @@
 This page summarizes the canonical source records for this jurisdiction. Capability
 grades describe the upstream source, not merely the connector we have built.
 
-## Coverage at a glance
+## Inventory at a glance
+
+| Category | Sources | Connected |
+|---|---:|---:|
+| Litigation and adjudicative records | 5 | 5 |
+| Registered IP | 9 | 9 |
+| Substantive law | 2 | 2 |
+| Fees | 3 | 3 |
+| External data | 2 | 2 |
+
+## Litigation and adjudicative records capabilities
 
 | Capability | Best source coverage | Connected coverage | Best source(s) |
 |---|---|---|---|
@@ -19,15 +29,73 @@ grades describe the upstream source, not merely the connector we have built.
 | Decisions | full | full | [U.S. Court of Appeals for the Federal Circuit — opinions and orders](../sources/us/cafc-opinions.md), [USITC EDIS — Section 337 investigation dockets](../sources/us/usitc-edis.md), [USPTO Open Data Portal — petition decisions](../sources/us/uspto-petitions.md), [USPTO Open Data Portal — PTAB trial proceedings](../sources/us/uspto-ptab.md) |
 | Patent identifiers | full | full | [USITC Investigations Database System — IP investigation index](../sources/us/usitc-ids.md), [USPTO Open Data Portal — PTAB trial proceedings](../sources/us/uspto-ptab.md) |
 
+## Registered IP capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Bibliographic data | partial | partial | [U.S. Copyright Office — Public Records](../sources/us/usco-registrations.md), [USPTO Open Data Portal — Applications](../sources/us/uspto-odp-applications.md), [USPTO Patent Public Search (PPUBS)](../sources/us/uspto-ppubs.md), [USPTO Trademark Search (TESS replacement)](../sources/us/uspto-tmsearch.md), [USPTO Trademark Status & Document Retrieval (TSDR)](../sources/us/uspto-tsdr.md) |
+| Full text | partial | partial | [USPTO Patent Public Search (PPUBS)](../sources/us/uspto-ppubs.md) |
+| Prosecution history | partial | partial | [USPTO Open Data Portal — Applications](../sources/us/uspto-odp-applications.md), [USPTO Office Actions Dataset](../sources/us/uspto-officeactions.md), [USPTO Trademark Status & Document Retrieval (TSDR)](../sources/us/uspto-tsdr.md) |
+| Legal status | partial | partial | [U.S. Copyright Office — Public Records](../sources/us/usco-registrations.md), [USPTO Open Data Portal — Applications](../sources/us/uspto-odp-applications.md), [USPTO Trademark Status & Document Retrieval (TSDR)](../sources/us/uspto-tsdr.md) |
+| Assignments | partial | partial | [U.S. Copyright Office — Public Records](../sources/us/usco-registrations.md), [USPTO Patent Assignment Center](../sources/us/uspto-assignments-patents.md), [USPTO Trademark Assignment Center](../sources/us/uspto-assignments-trademarks.md) |
+| Oppositions | none | none | [U.S. Copyright Office — Public Records](../sources/us/usco-registrations.md), [USPTO Patent Assignment Center](../sources/us/uspto-assignments-patents.md), [USPTO Trademark Assignment Center](../sources/us/uspto-assignments-trademarks.md), [USPTO Bulk Data Storage System (BDSS)](../sources/us/uspto-bulkdata.md), [USPTO Open Data Portal — Applications](../sources/us/uspto-odp-applications.md), [USPTO Office Actions Dataset](../sources/us/uspto-officeactions.md), [USPTO Patent Public Search (PPUBS)](../sources/us/uspto-ppubs.md), [USPTO Trademark Search (TESS replacement)](../sources/us/uspto-tmsearch.md), [USPTO Trademark Status & Document Retrieval (TSDR)](../sources/us/uspto-tsdr.md) |
+| Classification | none | none | [U.S. Copyright Office — Public Records](../sources/us/usco-registrations.md), [USPTO Patent Assignment Center](../sources/us/uspto-assignments-patents.md), [USPTO Trademark Assignment Center](../sources/us/uspto-assignments-trademarks.md), [USPTO Bulk Data Storage System (BDSS)](../sources/us/uspto-bulkdata.md), [USPTO Open Data Portal — Applications](../sources/us/uspto-odp-applications.md), [USPTO Office Actions Dataset](../sources/us/uspto-officeactions.md), [USPTO Patent Public Search (PPUBS)](../sources/us/uspto-ppubs.md), [USPTO Trademark Search (TESS replacement)](../sources/us/uspto-tmsearch.md), [USPTO Trademark Status & Document Retrieval (TSDR)](../sources/us/uspto-tsdr.md) |
+| Bulk data | partial | partial | [USPTO Bulk Data Storage System (BDSS)](../sources/us/uspto-bulkdata.md) |
+
+## Substantive law capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Guidelines | partial | partial | [Manual of Patent Examining Procedure (MPEP)](../sources/us/uspto-mpep.md), [Trademark Manual of Examining Procedure (TMEP)](../sources/us/uspto-tmep.md) |
+| Case law | none | none | [Manual of Patent Examining Procedure (MPEP)](../sources/us/uspto-mpep.md), [Trademark Manual of Examining Procedure (TMEP)](../sources/us/uspto-tmep.md) |
+| Statutes | none | none | [Manual of Patent Examining Procedure (MPEP)](../sources/us/uspto-mpep.md), [Trademark Manual of Examining Procedure (TMEP)](../sources/us/uspto-tmep.md) |
+| Treaties | none | none | [Manual of Patent Examining Procedure (MPEP)](../sources/us/uspto-mpep.md), [Trademark Manual of Examining Procedure (TMEP)](../sources/us/uspto-tmep.md) |
+| Full-text search | partial | partial | [Manual of Patent Examining Procedure (MPEP)](../sources/us/uspto-mpep.md), [Trademark Manual of Examining Procedure (TMEP)](../sources/us/uspto-tmep.md) |
+| Citation lookup | unknown | unknown | [Manual of Patent Examining Procedure (MPEP)](../sources/us/uspto-mpep.md), [Trademark Manual of Examining Procedure (TMEP)](../sources/us/uspto-tmep.md) |
+| Point-in-time law | unknown | unknown | [Manual of Patent Examining Procedure (MPEP)](../sources/us/uspto-mpep.md), [Trademark Manual of Examining Procedure (TMEP)](../sources/us/uspto-tmep.md) |
+
+## Fees capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Current schedule | partial | partial | [USPTO Fee Schedule — Designs](../sources/us/uspto-fees-designs.md), [USPTO Fee Schedule — Patents](../sources/us/uspto-fees-patents.md), [USPTO Fee Schedule — Trademarks](../sources/us/uspto-fees-trademarks.md) |
+| Effective date | partial | partial | [USPTO Fee Schedule — Designs](../sources/us/uspto-fees-designs.md), [USPTO Fee Schedule — Patents](../sources/us/uspto-fees-patents.md), [USPTO Fee Schedule — Trademarks](../sources/us/uspto-fees-trademarks.md) |
+| Historical schedules | unknown | unknown | [USPTO Fee Schedule — Designs](../sources/us/uspto-fees-designs.md), [USPTO Fee Schedule — Patents](../sources/us/uspto-fees-patents.md), [USPTO Fee Schedule — Trademarks](../sources/us/uspto-fees-trademarks.md) |
+| Machine-readable fees | partial | partial | [USPTO Fee Schedule — Designs](../sources/us/uspto-fees-designs.md), [USPTO Fee Schedule — Patents](../sources/us/uspto-fees-patents.md), [USPTO Fee Schedule — Trademarks](../sources/us/uspto-fees-trademarks.md) |
+| Fee calculator | unknown | unknown | [USPTO Fee Schedule — Designs](../sources/us/uspto-fees-designs.md), [USPTO Fee Schedule — Patents](../sources/us/uspto-fees-patents.md), [USPTO Fee Schedule — Trademarks](../sources/us/uspto-fees-trademarks.md) |
+
+## External data capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Query API | partial | partial | [USITC DataWeb — trade statistics](../sources/us/usitc-dataweb.md), [USITC HTS — Harmonized Tariff Schedule](../sources/us/usitc-hts.md) |
+| Bulk data | partial | partial | [USITC DataWeb — trade statistics](../sources/us/usitc-dataweb.md), [USITC HTS — Harmonized Tariff Schedule](../sources/us/usitc-hts.md) |
+
 ## Connected sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [U.S. Court of Appeals for the Federal Circuit — opinions and orders](../sources/us/cafc-opinions.md) | judgment_database | public | unclear | shipped |
-| [USITC EDIS — Section 337 investigation dockets](../sources/us/usitc-edis.md) | case_lookup | credentialed | byok_only | shipped |
-| [USITC Investigations Database System — IP investigation index](../sources/us/usitc-ids.md) | case_list | public | permitted | shipped |
-| [USPTO Open Data Portal — petition decisions](../sources/us/uspto-petitions.md) | judgment_database | credentialed | byok_only | shipped |
-| [USPTO Open Data Portal — PTAB trial proceedings](../sources/us/uspto-ptab.md) | case_lookup | credentialed | byok_only | shipped |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [Manual of Patent Examining Procedure (MPEP)](../sources/us/uspto-mpep.md) | Substantive law | legal_corpus | public | permitted | shipped |
+| [Trademark Manual of Examining Procedure (TMEP)](../sources/us/uspto-tmep.md) | Substantive law | legal_corpus | public | permitted | shipped |
+| [U.S. Copyright Office — Public Records](../sources/us/usco-registrations.md) | Registered IP | registry | public | permitted | shipped |
+| [U.S. Court of Appeals for the Federal Circuit — opinions and orders](../sources/us/cafc-opinions.md) | Litigation and adjudicative records | judgment_database | public | unclear | shipped |
+| [USITC DataWeb — trade statistics](../sources/us/usitc-dataweb.md) | External data | external_dataset | credentialed | byok_only | shipped |
+| [USITC EDIS — Section 337 investigation dockets](../sources/us/usitc-edis.md) | Litigation and adjudicative records | case_lookup | credentialed | byok_only | shipped |
+| [USITC HTS — Harmonized Tariff Schedule](../sources/us/usitc-hts.md) | External data | external_dataset | public | permitted | shipped |
+| [USITC Investigations Database System — IP investigation index](../sources/us/usitc-ids.md) | Litigation and adjudicative records | case_list | public | permitted | shipped |
+| [USPTO Bulk Data Storage System (BDSS)](../sources/us/uspto-bulkdata.md) | Registered IP | data_feed | public | permitted | shipped |
+| [USPTO Fee Schedule — Designs](../sources/us/uspto-fees-designs.md) | Fees | fee_schedule | public | unclear | shipped |
+| [USPTO Fee Schedule — Patents](../sources/us/uspto-fees-patents.md) | Fees | fee_schedule | public | unclear | shipped |
+| [USPTO Fee Schedule — Trademarks](../sources/us/uspto-fees-trademarks.md) | Fees | fee_schedule | public | unclear | shipped |
+| [USPTO Office Actions Dataset](../sources/us/uspto-officeactions.md) | Registered IP | registry | public | permitted | shipped |
+| [USPTO Open Data Portal — Applications](../sources/us/uspto-odp-applications.md) | Registered IP | registry | public | permitted | shipped |
+| [USPTO Open Data Portal — petition decisions](../sources/us/uspto-petitions.md) | Litigation and adjudicative records | judgment_database | credentialed | byok_only | shipped |
+| [USPTO Open Data Portal — PTAB trial proceedings](../sources/us/uspto-ptab.md) | Litigation and adjudicative records | case_lookup | credentialed | byok_only | shipped |
+| [USPTO Patent Assignment Center](../sources/us/uspto-assignments-patents.md) | Registered IP | assignment_database | public | permitted | shipped |
+| [USPTO Patent Public Search (PPUBS)](../sources/us/uspto-ppubs.md) | Registered IP | registry | public | permitted | shipped |
+| [USPTO Trademark Assignment Center](../sources/us/uspto-assignments-trademarks.md) | Registered IP | assignment_database | public | permitted | shipped |
+| [USPTO Trademark Search (TESS replacement)](../sources/us/uspto-tmsearch.md) | Registered IP | registry | credentialed | unclear | shipped |
+| [USPTO Trademark Status & Document Retrieval (TSDR)](../sources/us/uspto-tsdr.md) | Registered IP | registry | credentialed | byok_only | shipped |
 
 ## Connectable sources not yet built
 
@@ -48,5 +116,6 @@ No sources are currently cataloged in this category.
 ## Known coverage gaps
 
 - **Jurisdiction scope:** capability grades apply within each source's stated scope; they do not establish comprehensive jurisdiction-wide coverage.
+- **Capability confidence:** mechanically migrated `partial` grades preserve the legacy manifest's positive coverage claim without asserting completeness.
 
 See each source record for scope limitations and supporting evidence.

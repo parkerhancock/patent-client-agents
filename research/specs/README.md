@@ -84,17 +84,16 @@ For each tool, specify:
 - Cross-reference to "Related tools" in docstring per §5.6
 - Citation form parsing if applicable (e.g., `parse_citation(text) -> (section, statute)`)
 
-## §4 Manifest entries
+## §4 Canonical source records
 
-Add to `coverage/sources.yaml`:
+Add one Markdown record per covered product under
+`catalog/sources/{{ iso2 | lower }}/`, starting from
+`catalog/_SOURCE_TEMPLATE.md`. Include a `coverage` projection like this:
 
 ```yaml
-- id: {{ entity_id }}/Patents     # one row per right covered
-  name: {{ office_name }} — Patents
-  jurisdiction: {{ iso2 }}
-  wipo_st3_code: {{ wipo_st3 }}
-  issuing_body: {{ official_name }}
-  rights: [patent]
+coverage:
+  order: {{ next_unique_order }}
+  id: {{ entity_id }}/Patents     # one record per right covered
   data_types: [bibliographic, full_text, prosecution, legal_status]
   access:
     method: {{ method }}            # rest_api / mcp_passthrough / etc
@@ -103,11 +102,13 @@ Add to `coverage/sources.yaml`:
   status: active
   connector:
     module: patent_client_agents.{{ package_slug }}
-  last_verified: {{ date }}
-  category: registered_ip
   transport: mcp_proxy               # or mcp_local for corpus-backed
   update_strategy: live_proxy        # or scheduled_recrawl
 ```
+
+The record's top-level frontmatter supplies its name, jurisdiction, issuing
+body, rights, category, verification date, and capability assessment. Run
+`scripts/build_source_catalog.py` to regenerate `coverage/sources.yaml`.
 
 ## §5 Test coverage
 

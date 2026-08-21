@@ -3,6 +3,8 @@ from __future__ import annotations
 import datetime as dt
 from pathlib import Path
 
+import yaml
+
 from scripts import build_source_catalog
 
 
@@ -10,17 +12,44 @@ def test_repository_catalog_is_valid() -> None:
     records, parse_errors = build_source_catalog.load_records()
 
     assert not build_source_catalog.validate_catalog(records, parse_errors)
-    assert not build_source_catalog.validate_litigation_manifest_parity(records)
+    assert len(records) == 120
 
 
-def test_litigation_manifest_selector_excludes_substantive_law_compendium() -> None:
-    manifest_records, errors = build_source_catalog.load_litigation_manifest_records()
+def test_coverage_manifest_is_fully_projected_from_canonical_records() -> None:
+    records, _ = build_source_catalog.load_records()
+    projected = build_source_catalog.build_coverage_sources(records)
 
-    assert not errors
-    ids = {record["id"] for record in manifest_records}
-    assert len(ids) == 10
-    assert "EP/EPO/CaseLaw" not in ids
-    assert "UPC/UPC/Decisions" in ids
+    assert len(projected) == 114
+    assert len({source["id"] for source in projected}) == 114
+    orders = sorted(record.coverage["order"] for record in records if record.coverage)
+    assert orders == list(range(114))
+
+
+def test_rendered_coverage_manifest_matches_projected_records() -> None:
+    records, _ = build_source_catalog.load_records()
+
+    rendered = yaml.safe_load(build_source_catalog.render_coverage_manifest(records))
+
+    assert rendered["sources"] == build_source_catalog.build_coverage_sources(records)
+
+
+def test_catalog_rejects_noncontiguous_coverage_order() -> None:
+    records, _ = build_source_catalog.load_records()
+    original = [record for record in records if record.coverage][:2]
+    first = build_source_catalog.SourceRecord(
+        path=original[0].path,
+        metadata={**original[0].metadata, "coverage": {**original[0].coverage, "order": 0}},
+        body=original[0].body,
+    )
+    second = build_source_catalog.SourceRecord(
+        path=original[1].path,
+        metadata={**original[1].metadata, "coverage": {**original[1].coverage, "order": 2}},
+        body=original[1].body,
+    )
+
+    errors = build_source_catalog.validate_catalog([first, second])
+
+    assert any("coverage.order values must be contiguous" in error for error in errors)
 
 
 def test_generated_source_catalog_views_are_current() -> None:
@@ -54,6 +83,7 @@ def test_blocked_record_requires_a_blocker(tmp_path: Path) -> None:
         "official_url": "https://example.com",
         "last_verified": dt.date(2026, 8, 21),
         "source_status": "active",
+        "category": "adjudicative_records",
         "rights": ["patent"],
         "access": {
             "availability": "manual_only",

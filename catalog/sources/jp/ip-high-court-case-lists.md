@@ -1,17 +1,21 @@
 ---
 id: JP/IPHC/PatentUtilityModelCaseLists
 name: Japan IP High Court patent and utility-model case lists
-jurisdictions: [JP]
+jurisdictions:
+- JP
 institution: Japan Intellectual Property High Court
 source_type: case_list
 official_url: https://www.courts.go.jp/ip/vc-files/ip/jikenitiran.xls
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, utility_model]
+rights:
+- patent
+- utility_model
 access:
   availability: public
   audience: public
-  formats: [xls]
+  formats:
+  - xls
   automation_posture: permitted
 capabilities:
   pending_cases: partial
@@ -27,6 +31,35 @@ connector:
   status: shipped
   module: patent_client_agents.japan_ip_high_court
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 22
+  name: Japan Intellectual Property High Court — Patent and Utility-Model Case Lists
+  rights:
+  - patent
+  wipo_st3_code: JP
+  data_types:
+  - tribunal_proceedings
+  - litigation
+  access:
+    method: bulk_download
+    auth: none
+  status: active
+  category: adjudicative_records
+  transport: mcp_proxy
+  update_strategy: live_proxy
+  update_cadence: weekly
+  notes: 'Official weekly workbook of pending and recently closed suits seeking
+
+    cancellation of JPO patent or utility-model decisions. Records include
+
+    court case number, proceeding type, patent/application number, division,
+
+    and scheduled judgment or disposition fields. The workbook does not
+
+    publish party names and is not a general patent-infringement docket.
+
+    '
 ---
 
 # Japan IP High Court patent and utility-model case lists

@@ -1,17 +1,27 @@
 ---
 id: WO/Clarivate/DartsIP
 name: Clarivate Darts-IP litigation intelligence
-jurisdictions: [CN, JP, KR]
+jurisdictions:
+- CN
+- JP
+- KR
 institution: Clarivate
 source_type: commercial_database
 official_url: https://clarivate.com/intellectual-property/litigation-intelligence/
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, utility_model, trademark, design, copyright, unfair_competition]
+rights:
+- patent
+- utility_model
+- trademark
+- design
+- copyright
+- unfair_competition
 access:
   availability: commercial
   audience: subscribers
-  formats: [proprietary]
+  formats:
+  - proprietary
   automation_posture: contract_required
 capabilities:
   pending_cases: partial
@@ -25,7 +35,9 @@ capabilities:
   patent_identifiers: partial
 connector:
   status: external
-  blockers: [commercial_contract]
+  blockers:
+  - commercial_contract
+category: adjudicative_records
 ---
 
 # Clarivate Darts-IP litigation intelligence

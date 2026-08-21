@@ -1,17 +1,21 @@
 ---
 id: UPC/UPC/Decisions
 name: Unified Patent Court — decisions and orders
-jurisdictions: [UPC]
+jurisdictions:
+- UPC
 institution: Unified Patent Court
 source_type: judgment_database
 official_url: https://www.unifiedpatentcourt.org/en/decisions-and-orders
 last_verified: 2026-05-15
 source_status: active
-rights: [patent]
+rights:
+- patent
 access:
   availability: public
   audience: public
-  formats: [html, pdf]
+  formats:
+  - html
+  - pdf
   automation_posture: unclear
 capabilities:
   pending_cases: none
@@ -27,6 +31,23 @@ connector:
   status: shipped
   module: patent_client_agents.upc_decisions
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 44
+  name: Unified Patent Court — Decisions
+  wipo_st3_code: UPC
+  data_types:
+  - case_law
+  - tribunal_proceedings
+  - litigation
+  access:
+    method: rest_api
+    auth: none
+  status: active
+  category: substantive_law
+  transport: mcp_proxy
+  update_strategy: live_proxy
+  update_cadence: weekly
 ---
 
 # Unified Patent Court — decisions and orders

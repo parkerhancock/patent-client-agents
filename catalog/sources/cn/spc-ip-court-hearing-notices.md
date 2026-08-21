@@ -1,17 +1,25 @@
 ---
 id: CN/SPC_IPCourt/HearingNotices
 name: China SPC Intellectual Property Court hearing notices
-jurisdictions: [CN]
+jurisdictions:
+- CN
 institution: Supreme People's Court Intellectual Property Court
 source_type: hearing_calendar
 official_url: https://ipc.court.gov.cn/zh-cn/news/more-4-15.html
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, utility_model, design, copyright, trade_secret, plant_variety]
+rights:
+- patent
+- utility_model
+- design
+- copyright
+- trade_secret
+- plant_variety
 access:
   availability: public
   audience: public
-  formats: [html]
+  formats:
+  - html
   automation_posture: permitted
 capabilities:
   pending_cases: partial
@@ -27,6 +35,39 @@ connector:
   status: shipped
   module: patent_client_agents.china_spc_ip_court
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 21
+  name: Supreme People's Court Intellectual Property Court — Hearing Notices
+  rights:
+  - patent
+  - design
+  - copyright
+  - trade_secret
+  - plant_variety
+  wipo_st3_code: CN
+  data_types:
+  - tribunal_proceedings
+  - litigation
+  access:
+    method: website_scrape
+    auth: none
+  status: active
+  category: adjudicative_records
+  transport: mcp_proxy
+  update_strategy: live_proxy
+  update_cadence: daily
+  notes: 'Public scheduled-hearing notices from China''s national appellate
+
+    court for technology-related IP matters. Notices usually identify
+
+    hearing date, party roles, venue, and dispute type, but often omit
+
+    case and patent numbers. This is a hearing calendar, not a complete
+
+    docket or an authoritative open/closed case-status service.
+
+    '
 ---
 
 # China SPC Intellectual Property Court hearing notices

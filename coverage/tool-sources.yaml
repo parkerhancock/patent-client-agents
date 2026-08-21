@@ -1,4 +1,5 @@
-# MCP tool groups linked to the authoritative rows in coverage/sources.yaml.
+# MCP tool groups linked to rows in generated coverage/sources.yaml. Canonical
+# source records live under catalog/sources/.
 #
 # A group without `tools` covers every tool exposed by that named subserver.
 # A group with `tools` covers only that subset. The contract validator rejects

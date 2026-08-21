@@ -5,7 +5,14 @@
 This page summarizes the canonical source records for this jurisdiction. Capability
 grades describe the upstream source, not merely the connector we have built.
 
-## Coverage at a glance
+## Inventory at a glance
+
+| Category | Sources | Connected |
+|---|---:|---:|
+| Litigation and adjudicative records | 2 | 2 |
+| Fees | 1 | 1 |
+
+## Litigation and adjudicative records capabilities
 
 | Capability | Best source coverage | Connected coverage | Best source(s) |
 |---|---|---|---|
@@ -19,12 +26,23 @@ grades describe the upstream source, not merely the connector we have built.
 | Decisions | partial | partial | [CanLII — Canadian case law](../sources/ca/canlii-case-law.md) |
 | Patent identifiers | partial | partial | [CanLII — Canadian case law](../sources/ca/canlii-case-law.md), [Federal Court of Canada — Court Files](../sources/ca/federal-court-court-files.md) |
 
+## Fees capabilities
+
+| Capability | Best source coverage | Connected coverage | Best source(s) |
+|---|---|---|---|
+| Current schedule | partial | partial | [CIPO Fee Schedule — Patents](../sources/ca/cipo-fees-patents.md) |
+| Effective date | partial | partial | [CIPO Fee Schedule — Patents](../sources/ca/cipo-fees-patents.md) |
+| Historical schedules | unknown | unknown | [CIPO Fee Schedule — Patents](../sources/ca/cipo-fees-patents.md) |
+| Machine-readable fees | partial | partial | [CIPO Fee Schedule — Patents](../sources/ca/cipo-fees-patents.md) |
+| Fee calculator | unknown | unknown | [CIPO Fee Schedule — Patents](../sources/ca/cipo-fees-patents.md) |
+
 ## Connected sources
 
-| Source | Type | Access | Automation | Connector |
-|---|---|---|---|---|
-| [CanLII — Canadian case law](../sources/ca/canlii-case-law.md) | judgment_database | public | byok_only | shipped |
-| [Federal Court of Canada — Court Files](../sources/ca/federal-court-court-files.md) | case_lookup | public | unclear | shipped |
+| Source | Category | Type | Access | Automation | Connector |
+|---|---|---|---|---|---|
+| [CanLII — Canadian case law](../sources/ca/canlii-case-law.md) | Litigation and adjudicative records | judgment_database | public | byok_only | shipped |
+| [CIPO Fee Schedule — Patents](../sources/ca/cipo-fees-patents.md) | Fees | fee_schedule | public | unclear | shipped |
+| [Federal Court of Canada — Court Files](../sources/ca/federal-court-court-files.md) | Litigation and adjudicative records | case_lookup | public | unclear | shipped |
 
 ## Connectable sources not yet built
 
@@ -45,10 +63,6 @@ No sources are currently cataloged in this category.
 ## Known coverage gaps
 
 - **Jurisdiction scope:** capability grades apply within each source's stated scope; they do not establish comprehensive jurisdiction-wide coverage.
-- **Pending cases:** connected coverage is only partial.
-- **Closed cases:** connected coverage is only partial.
-- **Filed documents:** connected coverage is only partial.
-- **Decisions:** connected coverage is only partial.
-- **Patent identifiers:** connected coverage is only partial.
+- **Capability confidence:** mechanically migrated `partial` grades preserve the legacy manifest's positive coverage claim without asserting completeness.
 
 See each source record for scope limitations and supporting evidence.

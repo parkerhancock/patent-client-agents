@@ -1,17 +1,22 @@
 ---
 id: CA/CanLII
 name: CanLII — Canadian case law
-jurisdictions: [CA]
+jurisdictions:
+- CA
 institution: Canadian Legal Information Institute
 source_type: judgment_database
 official_url: https://www.canlii.org/en/
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, trademark]
+rights:
+- patent
+- trademark
 access:
   availability: public
   audience: public
-  formats: [html, json]
+  formats:
+  - html
+  - json
   automation_posture: byok_only
 capabilities:
   pending_cases: none
@@ -27,6 +32,26 @@ connector:
   status: shipped
   module: patent_client_agents.canlii
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 45
+  name: CanLII — Canadian patent / trademark case law and statutes
+  last_verified: 2026-05-15
+  wipo_st3_code: CA
+  data_types:
+  - case_law
+  - statutes
+  - litigation
+  access:
+    method: rest_api
+    auth: api_key
+    auth_env:
+    - CANLII_API_KEY
+  status: active
+  category: substantive_law
+  transport: mcp_proxy
+  update_strategy: live_proxy
+  update_cadence: weekly
 ---
 
 # CanLII — Canadian case law

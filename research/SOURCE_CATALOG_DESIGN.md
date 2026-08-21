@@ -169,15 +169,14 @@ The Markdown body should use these headings:
 
 ## Relationship to current files
 
-The repository is partway toward this design, but current artifacts answer
-different questions:
+The consolidated artifacts answer different questions:
 
 - `CATALOG.md` and `src/patent_client_agents/catalog/sources/` document
   implemented Python clients. They generally do not inventory unconnected or
   inaccessible sources by jurisdiction.
-- `coverage/sources.yaml` is the human-edited manifest for shipped source
-  coverage and generated coverage artifacts. It can represent several statuses,
-  but is currently connector-centered and contains little narrative evidence.
+- `coverage/sources.yaml` is generated from canonical records carrying a
+  `coverage` block. It preserves the shipped-coverage contract for downstream
+  coverage, atlas, and connector tooling.
 - `research/STATE.yaml` tracks office or entity research and connector roadmap
   state. Its unit of record is broader than an individual upstream source.
 - `research/national/`, `research/regional/`, and `research/multilateral/`
@@ -186,11 +185,9 @@ different questions:
 - `research/ip-research-courts.md` is an older survey and should not be treated
   as current catalog state without re-verification.
 
-During migration, the office synopses can remain as institutional background,
-but source scope and connector status should stop being duplicated there.
-`coverage/sources.yaml` and the relevant source-level fields in
-`research/STATE.yaml` should eventually be generated from the canonical
-Markdown records or retired. That decision should be made only after the pilot.
+Office synopses remain institutional background. Source scope and connector
+status belong in canonical catalog records; office-level roadmap verdicts and
+priorities remain in `research/STATE.yaml`.
 
 ## Implementation and remaining migration plan
 
@@ -210,19 +207,21 @@ Markdown records or retired. That decision should be made only after the pilot.
 - [x] Migrate every shipped source classified as litigation or adjudicative
       records in `coverage/sources.yaml`, with CI-enforced ID, jurisdiction,
       connector-module, and rights parity.
-- [ ] Decide whether and how the canonical records should generate
+- [x] Decide whether and how the canonical records should generate
       `coverage.json` and `atlas.json` without weakening their existing
-      connector and office-level contracts.
-- [ ] Expand the source inventory beyond the initial eight records and three
+      connector and office-level contracts. Canonical records generate
+      `coverage/sources.yaml`; the existing coverage builder consumes that
+      compatibility artifact to generate both JSON files.
+- [x] Expand the source inventory beyond the initial eight records and three
       jurisdictions.
-- [ ] Migrate current source records without losing narrative limitations or
+- [x] Migrate current source records without losing narrative limitations or
       provenance.
-- [ ] Generate or retire overlapping fields in `coverage/sources.yaml` and
-      `research/STATE.yaml` only after parity checks pass.
+- [x] Generate `coverage/sources.yaml` from canonical records after exact
+      114-row parity passed. Retain `research/STATE.yaml` for office-level state.
 - [ ] Replace or clearly archive stale standalone surveys after their useful
       findings have been incorporated.
 
-## Non-goals for the deferred work
+## Continuing constraints
 
 - Do not imply that every known source is automatable.
 - Do not equate published judgments with pending-case or docket coverage.
@@ -230,5 +229,5 @@ Markdown records or retired. That decision should be made only after the pilot.
   filing data; litigation coverage requires court or litigation-specific
   sources.
 - Do not force narrative evidence or nuanced limitations into YAML fields.
-- Do not retire existing manifests until generated replacements preserve their
-  downstream contracts and parity checks pass.
+- Do not edit generated `coverage/sources.yaml`; change the canonical record and
+  rebuild it.

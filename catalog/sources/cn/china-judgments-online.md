@@ -1,17 +1,27 @@
 ---
 id: CN/SPC/ChinaJudgmentsOnline
 name: China Judgments Online
-jurisdictions: [CN]
+jurisdictions:
+- CN
 institution: Supreme People's Court of the People's Republic of China
 source_type: judgment_database
 official_url: https://wenshu.court.gov.cn/
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, utility_model, trademark, design, copyright, trade_secret, plant_variety, unfair_competition]
+rights:
+- patent
+- utility_model
+- trademark
+- design
+- copyright
+- trade_secret
+- plant_variety
+- unfair_competition
 access:
   availability: credentialed
   audience: registered_users
-  formats: [html]
+  formats:
+  - html
   automation_posture: technically_blocked
 capabilities:
   pending_cases: none
@@ -25,7 +35,11 @@ capabilities:
   patent_identifiers: unknown
 connector:
   status: blocked
-  blockers: [account_required, no_api, unstable_coverage]
+  blockers:
+  - account_required
+  - no_api
+  - unstable_coverage
+category: adjudicative_records
 ---
 
 # China Judgments Online

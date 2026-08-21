@@ -1,17 +1,24 @@
 ---
 id: CA/FederalCourt/CourtFiles
 name: Federal Court of Canada — Court Files
-jurisdictions: [CA]
+jurisdictions:
+- CA
 institution: Federal Court of Canada
 source_type: case_lookup
 official_url: https://www-u.fct-cf.gc.ca/en/court-files-and-decisions/court-files
 last_verified: 2026-08-21
 source_status: active
-rights: [patent, trademark, copyright]
+rights:
+- patent
+- trademark
+- copyright
 access:
   availability: public
   audience: public
-  formats: [html, json, pdf]
+  formats:
+  - html
+  - json
+  - pdf
   automation_posture: unclear
 capabilities:
   pending_cases: partial
@@ -27,6 +34,32 @@ connector:
   status: shipped
   module: patent_client_agents.canada_federal_court
   blockers: []
+category: adjudicative_records
+coverage:
+  order: 27
+  wipo_st3_code: CA
+  data_types:
+  - tribunal_proceedings
+  - litigation
+  access:
+    method: rest_api
+    auth: none
+  status: active
+  category: adjudicative_records
+  transport: mcp_proxy
+  update_strategy: live_proxy
+  update_cadence: weekly
+  notes: 'Official party/corporation search, exact case-file metadata, public
+
+    parties/counsel, IP names and numbers, and recorded docket entries.
+
+    The upstream search does not publish an authoritative open/closed
+
+    status; connector status assessments are conservative docket-text
+
+    inferences and are labeled as such.
+
+    '
 ---
 
 # Federal Court of Canada — Court Files

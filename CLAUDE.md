@@ -146,11 +146,13 @@ connector must satisfy. It covers coverage scope (top 30 patent offices +
 substantive law), architecture defaults (MCP-first, proxy → fallback to
 bundled corpus), provenance (§3) and recency (§4) metadata, MCP tool
 design rules (§5.1-§5.13 — catalog discipline, response envelope,
-elevator test, etc.), and the closed-vocabulary manifest at
-`coverage/sources.yaml` (§6).
+elevator test, etc.), and the canonical source-record contract under
+`catalog/sources/` (§6). `coverage/sources.yaml` is generated from those records.
 
-The [`scripts/build_coverage.py`](scripts/build_coverage.py) validator
-enforces §6 against the manifest; CI fails on any deviation. Read the
+The [`scripts/build_source_catalog.py`](scripts/build_source_catalog.py)
+validator enforces the canonical contract and generates the manifest;
+[`scripts/build_coverage.py`](scripts/build_coverage.py) validates the
+compatibility projection. CI fails on any deviation. Read the
 standards doc before adding a new connector or refactoring an existing
 tool surface.
 
