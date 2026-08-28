@@ -31,14 +31,14 @@ Patent Public Search (PPUBS) for searching and downloading US patent publication
 from patent_client_agents.uspto_publications import PublicSearchClient
 
 async with PublicSearchClient() as client:
-    page = await client.search_biblio(query="machine learning", limit=25)
+    page = await client.search_biblio(query="machine learning", limit=20)
     doc = await client.get_document(guid, source="US-PGPUB")
     pdf = await client.download_pdf(doc)
 ```
 
 | Method | Returns | Description |
 |--------|---------|-------------|
-| `search_biblio(query, start=0, limit=500, sort="date_publ desc", sources=["US-PGPUB","USPAT","USOCR"])` | `PublicSearchBiblioPage` | Search patents by keyword with Boolean support |
+| `search_biblio(query, start=0, limit=20, sort="date_publ desc", sources=["US-PGPUB","USPAT","USOCR"])` | `PublicSearchBiblioPage` | Search patents by keyword with Boolean support (one page, capped at 20) |
 | `get_document(guid, source=)` | `PublicSearchDocument` | Get full document metadata by GUID and source |
 | `download_pdf(document)` | `bytes` | Download document as PDF bytes |
 | `download_pdf_base64(document)` | `str` | Download document as base64-encoded PDF |

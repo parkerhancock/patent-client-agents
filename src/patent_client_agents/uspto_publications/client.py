@@ -9,9 +9,15 @@ from pathlib import Path
 from typing import Any
 
 import httpx
-from tenacity import retry, stop_after_attempt, wait_exponential
 
-from mcp_data_core.exceptions import ApiError
+from mcp_data_core.exceptions import (
+    ApiError,
+    RateLimitError,
+    RetryableAuthenticationError,
+    ServerError,
+    ValidationError,
+)
+from mcp_data_core.resilience import with_retry
 
 from .models import PublicSearchBiblioPage, PublicSearchDocument
 from .transformers import convert_biblio_page, convert_document_payload
@@ -34,6 +40,40 @@ _HEADERS = {
 
 _BASE_URL = "https://ppubs.uspto.gov"
 _DATA_PATH = Path(__file__).resolve().parent / "data" / "search_query.json"
+_DEFAULT_TIMEOUT = httpx.Timeout(30.0, connect=10.0)
+_MAX_SEARCH_PAGE_SIZE = 20
+
+
+async def _raise_retryable_status(response: httpx.Response, *, operation: str) -> None:
+    """Convert transient PPUBS statuses into the shared retryable errors."""
+    status = response.status_code
+    body = response.text[:500]
+    if status in {401, 403}:
+        raise RetryableAuthenticationError(
+            f"PPUBS rejected the temporary browser session during {operation}",
+            status_code=status,
+            response_body=body,
+        )
+    if status == 429:
+        raw_retry_after = response.headers.get("x-rate-limit-retry-after-seconds")
+        try:
+            retry_after = float(raw_retry_after) if raw_retry_after else None
+        except ValueError:
+            retry_after = None
+        if retry_after is not None:
+            await asyncio.sleep(retry_after)
+        raise RateLimitError(
+            f"PPUBS rate limited {operation}",
+            status_code=status,
+            response_body=body,
+            retry_after=retry_after,
+        )
+    if status >= 500:
+        raise ServerError(
+            f"PPUBS server error during {operation}",
+            status_code=status,
+            response_body=body,
+        )
 
 
 class PublicSearchError(ApiError):
@@ -63,7 +103,10 @@ class PublicSearchClient:
 
     def __init__(self, client: httpx.AsyncClient | None = None) -> None:
         self._client = client or httpx.AsyncClient(
-            headers=_HEADERS.copy(), http2=True, follow_redirects=True
+            headers=_HEADERS.copy(),
+            http2=True,
+            follow_redirects=True,
+            timeout=_DEFAULT_TIMEOUT,
         )
         self._owns_client = client is None
         self._session_lock = asyncio.Lock()
@@ -89,14 +132,24 @@ class PublicSearchClient:
                 return
             await self._refresh_session()
 
+    @with_retry(max_attempts=4, initial_wait=1.0, max_wait=8.0)
     async def _refresh_session(self) -> None:
+        await self._refresh_session_once()
+
+    async def _refresh_session_once(self) -> None:
+        self._case_id = None
+        self._access_token = None
+        self._client.headers.pop("X-Access-Token", None)
         self._client.cookies = httpx.Cookies()
-        await self._client.get(f"{_BASE_URL}/pubwebapp/")
+        landing = await self._client.get(f"{_BASE_URL}/pubwebapp/")
+        await _raise_retryable_status(landing, operation="session bootstrap")
+        landing.raise_for_status()
         response = await self._client.post(
             f"{_BASE_URL}/api/users/me/session",
             json=-1,
             headers={"referer": f"{_BASE_URL}/pubwebapp/"},
         )
+        await _raise_retryable_status(response, operation="session bootstrap")
         response.raise_for_status()
         session = response.json()
         self._case_id = session["userCase"]["caseId"]
@@ -104,17 +157,28 @@ class PublicSearchClient:
         if self._access_token:
             self._client.headers["X-Access-Token"] = self._access_token
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=15))
+    @with_retry(max_attempts=4, initial_wait=1.0, max_wait=8.0)
     async def _request(self, method: str, url: str, **kwargs: Any) -> httpx.Response:
+        request_case_id = self._case_id
         response = await self._client.request(method, url, **kwargs)
-        if response.status_code == 403:
-            await self._refresh_session()
+        if response.status_code in {401, 403}:
+            async with self._session_lock:
+                if self._case_id is None or self._case_id == request_case_id:
+                    await self._refresh_session_once()
+                self._update_request_case_id(kwargs)
             response = await self._client.request(method, url, **kwargs)
-        if response.status_code == 429:
-            wait_time = int(response.headers.get("x-rate-limit-retry-after-seconds", "1")) + 1
-            await asyncio.sleep(wait_time)
-            response = await self._client.request(method, url, **kwargs)
+        await _raise_retryable_status(response, operation=f"{method} {url}")
         return response
+
+    def _update_request_case_id(self, kwargs: dict[str, Any]) -> None:
+        payload = kwargs.get("json")
+        if not isinstance(payload, dict):
+            return
+        if "caseId" in payload:
+            payload["caseId"] = self._case_id
+        query = payload.get("query")
+        if isinstance(query, dict) and "caseId" in query:
+            query["caseId"] = self._case_id
 
     def _build_search_payload(
         self,
@@ -149,7 +213,7 @@ class PublicSearchClient:
         *,
         query: str,
         start: int = 0,
-        limit: int = 500,
+        limit: int = _MAX_SEARCH_PAGE_SIZE,
         sort: str = "date_publ desc",
         default_operator: str = "OR",
         sources: list[str] | None = None,
@@ -158,11 +222,13 @@ class PublicSearchClient:
     ) -> PublicSearchBiblioPage:
         if not query:
             raise ValueError("query must be provided")
+        if limit < 1:
+            raise ValidationError("limit must be at least 1")
         await self._ensure_session()
         payload = self._build_search_payload(
             query,
             start=start,
-            limit=min(limit, 500),
+            limit=min(limit, _MAX_SEARCH_PAGE_SIZE),
             sort=sort,
             default_operator=default_operator,
             sources=sources or ["US-PGPUB", "USPAT", "USOCR"],
@@ -291,7 +357,7 @@ class PublicSearchClient:
         page = await self.search_biblio(
             query=query,
             start=0,
-            limit=25,
+            limit=_MAX_SEARCH_PAGE_SIZE,
             sources=["US-PGPUB", "USPAT", "USOCR"],
         )
         if not page.docs:

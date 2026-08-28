@@ -151,11 +151,11 @@ async def search_patent_publications(
         str,
         "Search query using USPTO Patent Public Search (PPUBS) syntax. "
         "Supports Boolean operators (AND/OR/NOT) and field codes: CLM (claims), "
-        "SPEC (description), AB (abstract), TTL (title), IN (inventor), AS "
+        "SPEC (description), AB (abstract), TI (title), IN (inventor), AS "
         "(assignee), CPC (classification). Example: "
-        "'\"machine learning\" AND CLM/neural.CLM.' or 'blockchain.TTL.'",
+        "'\"machine learning\" AND neural.CLM.' or 'blockchain.TI.'",
     ],
-    limit: Annotated[int, "Maximum number of results to return"] = 25,
+    limit: Annotated[int, "Maximum number of results to return (1-20)"] = 20,
     full: Annotated[
         bool,
         "When False (the default), each hit is a lean stub: publication "
