@@ -83,9 +83,7 @@ async def test_429_is_typed_rate_limit_error() -> None:
         new=AsyncMock(),
     ) as sleep:
         with pytest.raises(RateLimitError) as exc_info:
-            await client._request.__wrapped__(
-                client, "POST", "https://ppubs.uspto.gov/api/test"
-            )
+            await client._request.__wrapped__(client, "POST", "https://ppubs.uspto.gov/api/test")
 
     assert exc_info.value.retry_after == 3
     sleep.assert_awaited_once_with(3)
