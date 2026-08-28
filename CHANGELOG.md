@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.26.5] — 2026-08-28
+
+### Fixed
+
+- Hardened USPTO Patent Public Search against transient timeouts, expired
+  sessions, rate limits, and server errors. Concurrent session refreshes now
+  share the replacement session and replay requests with its current case ID.
+- Limited PPUBS search pages to its reliable 20-result size and corrected the
+  MCP query example.
+
 ## [0.26.4] — 2026-08-12
 
 ### Fixed
@@ -1863,7 +1873,8 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.4...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.5...HEAD
+[0.26.5]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.4...v0.26.5
 [0.26.4]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.3...v0.26.4
 [0.26.3]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.2...v0.26.3
 [0.26.2]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.1...v0.26.2
