@@ -335,8 +335,8 @@ def _match_body_unless_oauth(r1, r2) -> bool:
     return r1.body == r2.body
 
 
-def _patch_vcr_httpcore_for_str_bodies() -> None:
-    """Coerce vcr-deserialized response bodies to bytes for httpcore.
+def _patch_vcr_httpx_for_str_bodies() -> None:
+    """Coerce VCR-deserialized response bodies to bytes for HTTPX.
 
     vcrpy 8.x stores YAML responses as Python strings (not bytes) when the
     body is ASCII. It then passes that ``str`` straight to
@@ -350,25 +350,25 @@ def _patch_vcr_httpcore_for_str_bodies() -> None:
     We monkey-patch once at import time. This is idempotent and only
     affects the deserialization path — recording is untouched.
     """
-    import vcr.stubs.httpcore_stubs as h
+    import vcr.stubs.httpx_stubs as h
 
     if getattr(h._deserialize_response, "_patched_for_str_bodies", False):
         return
 
     original = h._deserialize_response
 
-    def _patched(vcr_response):
+    def _patched(vcr_response, httpx):
         body = vcr_response.get("body", {})
         s = body.get("string", "") if isinstance(body, dict) else ""
         if isinstance(s, str):
             body["string"] = s.encode("utf-8")
-        return original(vcr_response)
+        return original(vcr_response, httpx)
 
     _patched._patched_for_str_bodies = True  # type: ignore[attr-defined]
     h._deserialize_response = _patched
 
 
-_patch_vcr_httpcore_for_str_bodies()
+_patch_vcr_httpx_for_str_bodies()
 
 
 def _chain_request_scrubbers(*scrubbers):
