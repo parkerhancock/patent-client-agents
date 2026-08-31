@@ -30,7 +30,9 @@ dependencies = [
     "tenacity>=8.4",
     "hishel[async]>=1.1.3",
     "markitdown[pdf]>=0.1.3",
-    "pypdf>=4.2",
+    # pypdf 6.15+ changes layout-mode spacing for the PRH fee PDF and
+    # prevents the section parser from recognizing the statutory tables.
+    "pypdf>=4.2,<6.15",
     "pyyaml>=6.0",
     "zstandard>=0.22",
     "google-cloud-storage>=2.18",
@@ -41,10 +43,7 @@ dependencies = [
 mcp = [
     "fastmcp>=3.2.3",
     "starlette>=1.0.1",
-    # fastmcp imports `from griffe import ...` — the 2.x release split the
-    # top-level module out into a separate `griffelib` distribution, so
-    # fastmcp's import fails on griffe>=2. Pin here until upstream fastmcp
-    # either migrates to griffelib or re-adds the compat shim.
+    # FastMCP 3.4.7 includes the griffe 2 compatibility work.
     "griffe<3",
 ]
 tmsearch = [
@@ -106,9 +105,7 @@ dev = [
 docs = [
     "mkdocs-material>=9.5",
     "mkdocs-include-markdown-plugin>=6.2",
-    # pygments 2.20 changed filename handling in a way that breaks
-    # pymdownx.highlight (filename=None passed through to html.escape).
-    # Pin until pymdownx releases a fix.
+    # Pygments 2.22 remains outside the currently verified docs toolchain.
     "pygments<2.22",
 ]
 
