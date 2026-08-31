@@ -1,0 +1,26 @@
+{
+  "atlas": {
+    "entities": 116,
+    "researched_synopses": 41,
+    "shipped_entities": 19
+  },
+  "catalog": {
+    "active_products": 95,
+    "beta_products": 17,
+    "canonical_records": 120,
+    "data_types": 14,
+    "external_products": 2,
+    "projected_products": 114,
+    "rights": 7
+  },
+  "mcp_tools": {
+    "all_configured": 234,
+    "default": 136,
+    "environment_gated": 98
+  },
+  "profiles": {
+    "jurisdictions": 194
+  },
+  "release_version": "0.27.0",
+  "schema_version": 1
+}

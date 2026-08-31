@@ -74,6 +74,7 @@ jobs:
         run: |
           curl -fsS https://purge.jsdelivr.net/gh/parkerhancock/patent-client-agents@main/coverage/atlas.json
           curl -fsS https://purge.jsdelivr.net/gh/parkerhancock/patent-client-agents@main/coverage/coverage.json
+          curl -fsS https://purge.jsdelivr.net/gh/parkerhancock/patent-client-agents@main/coverage/site-facts.json
 
   typecheck:
     runs-on: ubuntu-latest
