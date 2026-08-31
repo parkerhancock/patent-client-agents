@@ -1,6 +1,6 @@
 {
   "currency": "USD",
-  "effective_date": "2026-08-01",
+  "effective_date": "2026-08-14",
   "fees": [
     {
       "amount": "350.00",
@@ -2288,7 +2288,7 @@
       "code": "1558",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay less than or equal to two years",
+      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -2303,7 +2303,7 @@
       "code": "2558",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay less than or equal to two years",
+      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -2318,7 +2318,7 @@
       "code": "3558",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay less than or equal to two years",
+      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -2333,7 +2333,7 @@
       "code": "1560",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay greater than two years",
+      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -2348,7 +2348,7 @@
       "code": "2560",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay greater than two years",
+      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -2363,7 +2363,7 @@
       "code": "3560",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay greater than two years",
+      "label": "Petition for the delayed payment of the fee for maintaining a patent in force, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4628,7 +4628,7 @@
       "code": "1453",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay less than or equal to two years",
+      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4643,7 +4643,7 @@
       "code": "2453",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay less than or equal to two years",
+      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4658,7 +4658,7 @@
       "code": "3453",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay less than or equal to two years",
+      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4673,7 +4673,7 @@
       "code": "1468",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay greater than two years",
+      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4688,7 +4688,7 @@
       "code": "2468",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay greater than two years",
+      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4703,7 +4703,7 @@
       "code": "3468",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay greater than two years",
+      "label": "Petition for revival of an abandoned application for a patent, for the delayed payment of the fee for issuing each patent, or for the delayed response by the patent owner in any reexamination proceeding, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4718,7 +4718,7 @@
       "code": "1454",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed submission of a priority or benefit claim, delay less than or equal to two years",
+      "label": "Petition for the delayed submission of a priority or benefit claim, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4733,7 +4733,7 @@
       "code": "2454",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed submission of a priority or benefit claim, delay less than or equal to two years",
+      "label": "Petition for the delayed submission of a priority or benefit claim, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4748,7 +4748,7 @@
       "code": "3454",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed submission of a priority or benefit claim, delay less than or equal to two years",
+      "label": "Petition for the delayed submission of a priority or benefit claim, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4763,7 +4763,7 @@
       "code": "1469",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed submission of a priority or benefit claim, delay greater than two years",
+      "label": "Petition for the delayed submission of a priority or benefit claim, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4778,7 +4778,7 @@
       "code": "2469",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed submission of a priority or benefit claim, delay greater than two years",
+      "label": "Petition for the delayed submission of a priority or benefit claim, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4793,7 +4793,7 @@
       "code": "3469",
       "condition": null,
       "currency": "USD",
-      "label": "Petition for the delayed submission of a priority or benefit claim, delay greater than two years",
+      "label": "Petition for the delayed submission of a priority or benefit claim, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4808,7 +4808,7 @@
       "code": "1784",
       "condition": null,
       "currency": "USD",
-      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay less than or equal to two years",
+      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4823,7 +4823,7 @@
       "code": "2784",
       "condition": null,
       "currency": "USD",
-      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay less than or equal to two years",
+      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4838,7 +4838,7 @@
       "code": "3784",
       "condition": null,
       "currency": "USD",
-      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay less than or equal to two years",
+      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay less than or equal to one year",
       "notes": "37 CFR \u00a7 1.17(m)(2)",
       "rights": [
         "patent"
@@ -4853,7 +4853,7 @@
       "code": "1785",
       "condition": null,
       "currency": "USD",
-      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay greater than two years",
+      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4868,7 +4868,7 @@
       "code": "2785",
       "condition": null,
       "currency": "USD",
-      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay greater than two years",
+      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -4883,7 +4883,7 @@
       "code": "3785",
       "condition": null,
       "currency": "USD",
-      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay greater than two years",
+      "label": "Petition to excuse applicant's failure to act within prescribed time limits in an international design application, delay greater than one year",
       "notes": "37 CFR \u00a7 1.17(m)(1)",
       "rights": [
         "patent"
@@ -7643,7 +7643,7 @@
   "key": "US/USPTO/patent",
   "notes": "USPTO maintenance fees are due at the 3.5, 7.5, and 11.5 year marks; our schema rounds the year up (4, 8, 12). Paper-filing surcharges on TM fees are flagged via FeeCondition(trigger=paper_filing). Some single-tier rows (e.g., '4011') represent tier-specific electronic-filing discounts and carry a single FeeItem under the applicable tier.",
   "office_code": "USPTO",
-  "retrieved_at": "2026-08-12",
+  "retrieved_at": "2026-08-31",
   "right": "patent",
   "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
   "statutory_basis": "37 CFR Part 1 (patents); 37 CFR Part 2 (trademarks); 35 USC \u00a7\u00a7 41, 376"
