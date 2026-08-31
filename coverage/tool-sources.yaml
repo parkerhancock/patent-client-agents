@@ -1,4 +1,5 @@
-# MCP tool groups linked to the authoritative rows in coverage/sources.yaml.
+# MCP tool groups linked to rows in generated coverage/sources.yaml. Canonical
+# source records live under catalog/sources/.
 #
 # A group without `tools` covers every tool exposed by that named subserver.
 # A group with `tools` covers only that subset. The contract validator rejects
@@ -9,8 +10,12 @@ version: 1
 groups:
   - server: cafc_mcp
     connector_modules: [patent_client_agents.cafc]
+  - server: canada_federal_court_mcp
+    connector_modules: [patent_client_agents.canada_federal_court]
   - server: canlii_mcp
     connector_modules: [patent_client_agents.canlii]
+  - server: china_spc_ip_court_mcp
+    connector_modules: [patent_client_agents.china_spc_ip_court]
   - server: copyright_mcp
     connector_modules: [patent_client_agents.copyright]
   - server: cpc_mcp
@@ -63,6 +68,8 @@ groups:
     connector_modules: [patent_client_agents.ipo_in_statutes]
   - server: jpo_mcp
     connector_modules: [patent_client_agents.jpo]
+  - server: japan_ip_high_court_mcp
+    connector_modules: [patent_client_agents.japan_ip_high_court]
   - server: kipo_kipris_mcp
     connector_modules: [patent_client_agents.kipo_kipris]
   - server: legifrance_ip_mcp
