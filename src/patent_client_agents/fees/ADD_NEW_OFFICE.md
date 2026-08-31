@@ -421,7 +421,7 @@ For office code `XYZ` with rights `{patent, trademark, design}`:
 | `src/patent_client_agents/fees/registry.py`                     | Import the module; add rows to `_DISPATCH` and `OFFICES`. |
 | `src/patent_client_agents/fees/client.py`                       | Add aliases to `_OFFICE_ALIASES` (full name, abbreviation, common typos). |
 | `tests/fees/test_parsers.py`                                    | Pure-function unit tests for any new helpers (money parsing, year extraction, conditional detection). |
-| `coverage/sources.yaml`                                         | One entry per `(jurisdiction, right)` route. Follow the template in §5. |
+| `catalog/sources/<cc>/`                                         | One canonical record per `(jurisdiction, right)` route. Follow §10 and `catalog/_SOURCE_TEMPLATE.md`. |
 | `research/<region>/<cc>-<office>.md` §4 Fees                    | Update last-verified date + flag any new statutory basis. |
 
 Files you do **not** need to change:
@@ -522,39 +522,37 @@ don't tell the whole story.
 
 ---
 
-## 10 — `coverage/sources.yaml` template
+## 10 — Catalog coverage projection
 
-Append one block per `(jurisdiction, right)` route at the bottom of the
-file. Required fields enforced by `scripts/build_coverage.py`:
+Create one canonical Markdown record per `(jurisdiction, right)` route under
+`catalog/sources/<cc>/`. Start with `catalog/_SOURCE_TEMPLATE.md`; the record's
+`coverage` block carries the compatibility fields below. Do not edit
+`coverage/sources.yaml` directly because it is generated.
 
 ```yaml
-  - id: <CC>/<OFFICE>/Fees/<Right>
-    name: <Office> Fee Schedule — <Right>
-    jurisdiction: <CC>           # ISO 3166 alpha-2 or 'EP' / 'UPC' / 'UP'
-    wipo_st3_code: <CC>          # optional; same as jurisdiction for most
-    issuing_body: <Full office name>
-    rights: [<right>]
-    data_types: [fees]
-    access:
-      method: <website_scrape | rest_api>
-      auth: <none | api_key | oauth2_client_credentials>
-      auth_env: [ENV_VAR_NAME]   # only if auth != none
-    status: active
-    connector:
-      module: patent_client_agents.fees
-    last_verified: <YYYY-MM-DD>
-    category: substantive_law    # fees are regulations, not register rows
-    transport: mcp_proxy         # live fetch through hishel cache
-    update_strategy: live_proxy
-    update_cadence: <annual | irregular>
-    notes: >-
-      <One paragraph: source URL flavor, statutory basis, parsing quirks,
-      anything a future maintainer will need.>
+coverage:
+  order: <next unique integer>
+  id: <CC>/<OFFICE>/Fees/<Right>
+  data_types: [fees]
+  access:
+    method: <website_scrape | rest_api>
+    auth: <none | api_key | oauth2_client_credentials>
+    auth_env: [ENV_VAR_NAME]   # only if auth != none
+  status: active
+  connector:
+    module: patent_client_agents.fees
+  transport: mcp_proxy         # live fetch through hishel cache
+  update_strategy: live_proxy
+  update_cadence: <annual | irregular>
+  notes: >-
+    <One paragraph: source URL flavor, statutory basis, parsing quirks,
+    anything a future maintainer will need.>
 ```
 
 Then run:
 
 ```bash
+uv run python scripts/build_source_catalog.py
 uv run python scripts/build_coverage.py --check
 ```
 

@@ -9,6 +9,7 @@ as the second top-level strategic doc.
 
 - [`COVERAGE_STRATEGY.md`](COVERAGE_STRATEGY.md) — the *why* (IP-system layering, substitution rules, decision heuristics)
 - **This doc** — the *what next* (ranked work queue with verdicts)
+- [`SOURCE_CATALOG_DESIGN.md`](SOURCE_CATALOG_DESIGN.md) — deferred design and migration TODO for a human-readable worldwide source catalog
 - [`multilateral/`](multilateral/), [`regional/`](regional/), [`national/`](national/) — per-office strategic synopses (current state, distilled from detail surveys + waves + reconciliation)
 - [`connectors/`](connectors/) — detail surveys per office (the deep dives, dated mostly 2026-05; treat as canonical detail-research)
 - [`waves/`](waves/) — time-stamped research products (frozen audit trail; latest: [`2026-05-16-registered-ip-discovery/`](waves/2026-05-16-registered-ip-discovery/))

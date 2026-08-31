@@ -51,34 +51,13 @@ All tools return the §5.9 ListEnvelope. Lean projection drops `xml_detail_url` 
 **Provenance (§3 standards):** every envelope's `provenance.attribution = "Source: Intellectual Property Office, Ministry of Economic Affairs, Taiwan (TIPO/MOEA). Licence: Taiwan Open Government Data License v1.0."`
 **Pagination:** `top` clamped to 6,000 (empirical hard cap); `paginate()` helper auto-walks `skip` for callers needing > 6,000 rows.
 
-## §4 Manifest entries
+## §4 Canonical source records
 
-Add to `coverage/sources.yaml` (one row per right; all share module + auth):
-
-```yaml
-- id: TW/TIPO/Patents
-  name: TIPO Taiwan — Patents (invention)
-  jurisdiction: TW
-  wipo_st3_code: TW
-  issuing_body: Intellectual Property Office, Ministry of Economic Affairs (TIPO/MOEA)
-  rights: [patent]
-  data_types: [bibliographic, legal_status, classification]
-  access: { method: rest_api, auth: api_key, auth_env: [TIPO_API_KEY] }
-  status: active
-  connector: { module: patent_client_agents.tipo_opdata }
-  last_verified: 2026-05-16
-  category: registered_ip
-  transport: mcp_proxy
-  update_strategy: live_proxy
-  notes: applclass=1; biblio-only (no claims/figures/abstracts in API)
-
-- id: TW/TIPO/UtilityModels
-  # same shape; rights: [utility_model]; notes: applclass=2
-- id: TW/TIPO/Designs
-  # same shape; rights: [design]; notes: applclass=3 (TW treats design as Patent Act category)
-- id: TW/TIPO/Trademarks
-  # same shape; rights: [trademark]; data_types add Nice classification
-```
+The four shipped products now live in `catalog/sources/tw/` as
+`tipo-patents.md`, `tipo-utilitymodels.md`, `tipo-designs.md`, and
+`tipo-trademarks.md`. Each is a complete canonical record with a `coverage`
+projection. Future changes belong there; run `scripts/build_source_catalog.py`
+to regenerate the compatibility manifest.
 
 ## §5 Test coverage
 

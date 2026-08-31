@@ -1,20 +1,21 @@
 # Coverage manifest
 
-The single source of truth for "what data sources does
-`patent-client-agents` actually cover, and how fresh is each one." See
+Generated compatibility artifacts describing what data sources
+`patent-client-agents` covers and how fresh each one is. Canonical human-edited
+records live under [`../catalog/sources/`](../catalog/sources/). See
 [`../CONNECTOR_STANDARDS.md`](../CONNECTOR_STANDARDS.md) for the contract
 every entry must satisfy.
 
 ## Files
 
-- **`sources.yaml`** — human-edited closed-vocabulary manifest. One entry
-  per connector. The validator at `../scripts/build_coverage.py` enforces
-  every field.
+- **`sources.yaml`** — generated closed-vocabulary compatibility manifest. One
+  entry per catalog record carrying a `coverage` block. The catalog builder
+  writes it, and `../scripts/build_coverage.py` enforces every projected field.
 - **`coverage.json`** — build artifact. Per-data-product view of
   granular sources. Consumed by
   `patentclient-web/assets/coverage.js` for the existing map + matrix.
 - **`atlas.json`** — build artifact. Per-office view of strategic
-  entities, fused from `coverage/sources.yaml` *and*
+  entities, fused from generated `coverage/sources.yaml` *and*
   `../research/STATE.yaml`. Each entity carries verdict + verdict_basis,
   synopsis_url (deep-link into `docs.patentclient.com/patent-client-index/`),
   connector_status, and any shipped `sources.yaml` rows nested under
@@ -26,12 +27,16 @@ office-centric data model and cross-consumer plan.
 ## Workflow
 
 ```bash
-# After editing sources.yaml or research/STATE.yaml:
+# After editing a canonical catalog record:
+uv run python scripts/build_source_catalog.py
+
+# After regenerating sources.yaml or editing research/STATE.yaml:
 uv run python scripts/build_coverage.py --check   # validate, don't write
 uv run python scripts/build_coverage.py           # writes coverage.json + atlas.json
 ```
 
-CI runs `--check` on every PR. A non-zero exit fails the build.
+CI first checks that catalog outputs are current, then validates the projected
+manifest. A non-zero exit fails the build.
 
 The README hero image (`docs/_static/atlas_hero.png`) is also generated
 from the `patentclient-web` shared atlas renderer. From the monorepo,
@@ -58,8 +63,8 @@ unless the workflow has an explicit cross-repo token; GitHub's default
 | `jurisdiction` | always | ISO 3166 alpha-2, or `UPC`, or `UP` |
 | `wipo_st3_code` | optional | WIPO ST.3 code |
 | `issuing_body` | always | free text |
-| `rights` | always | ⊆ `{patent, trademark, design, copyright, plant_variety, gi}` |
-| `data_types` | always | ⊆ `{bibliographic, full_text, prosecution, legal_status, assignments, oppositions, tribunal_proceedings, litigation, classification, guidelines, case_law, statutes, treaties, bulk_data}` |
+| `rights` | always | ⊆ `{patent, trademark, design, copyright, plant_variety, gi, trade_secret}` |
+| `data_types` | always | ⊆ `{bibliographic, full_text, prosecution, legal_status, assignments, oppositions, tribunal_proceedings, litigation, classification, guidelines, case_law, statutes, treaties, bulk_data, fees}` |
 | `access.method` | always | `{rest_api, bulk_download, website_scrape, pdf_download, ftp, mcp_passthrough}` |
 | `access.auth` | always | `{none, api_key, oauth2_client_credentials, oauth2_password, cookie_token, account_required}` |
 | `access.auth_env` | when auth ≠ none | list of env var names |
@@ -67,7 +72,7 @@ unless the workflow has an explicit cross-repo token; GitHub's default
 | `notes` | when status ∈ {blocked, deprecated, candidate, external} | free text |
 | `connector.module` | when status ∈ {active, beta} | importable Python module path |
 | `last_verified` | when status ∈ {active, beta} | YAML date, max 365d old |
-| `category` | when status ∈ {active, beta} | `{registered_ip, substantive_law}` |
+| `category` | when status ∈ {active, beta} | `{registered_ip, adjudicative_records, substantive_law, fees}` |
 | `transport` | when status ∈ {active, beta} | `{mcp_proxy, mcp_local}` |
 | `update_strategy` | when category=substantive_law | `{live_proxy, scheduled_recrawl, vendor_changefeed, manual}` |
 | `update_cadence` | when category=substantive_law | `{weekly, monthly, quarterly, semiannual, annual, irregular}` |
@@ -78,10 +83,9 @@ unless the workflow has an explicit cross-repo token; GitHub's default
 
 1. Every active/beta entry has `category`.
 2. Every active/beta entry has `transport`.
-3. `transport=mcp_local` + `category=substantive_law` connectors should
-   expose a module-level `get_corpus_status()` callable. Currently a CI
-   **warning**; will become a hard error once the rollout PR lands and
-   every category-2 connector implements the surface.
+3. `transport=mcp_local` + `category=substantive_law` connectors must
+   expose a module-level `get_corpus_status()` callable. This is a hard
+   CI error.
 4. `category=substantive_law` requires `update_strategy` + `update_cadence`.
 5. For `update_strategy ∈ {scheduled_recrawl, vendor_changefeed}` with a
    non-`irregular` cadence, `last_synced` must be ≤ `2 × cadence` days old.

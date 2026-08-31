@@ -141,6 +141,18 @@ async def test_search_more_available_false_when_exhausted():
     assert result.more_available is False
 
 
+@pytest.mark.asyncio
+async def test_search_default_uses_reliable_ppubs_page_size():
+    page = _FakeBiblioPage(num_found=0, per_page=20, docs=[])
+    with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.search_biblio = AsyncMock(return_value=page)
+
+        await search_patent_publications(query="neural.CLM.")
+
+    mock_client.search_biblio.assert_awaited_once_with(query="neural.CLM.", limit=20)
+
+
 # ──────────────────────────────────────────────────────────────────────
 # get_patent_publication — §5.4 list-accepting
 # ──────────────────────────────────────────────────────────────────────

@@ -5,7 +5,7 @@ WIPO Country IP Profiles (https://www.wipo.int/en/web/country-profiles/) aggrega
 per-jurisdiction reference data: WIPO membership year, treaty count, national IP
 office names + location, GII ranking, plus links to WIPO Lex / statistical IP
 profile PDFs / PCT eGuide / treaty filings. Useful as a starting point when we
-research a new IP office to add to coverage/sources.yaml.
+research a new IP office to add to the canonical catalog under catalog/sources/.
 
 The hub page (.../country-profiles/) is sat behind an AWS WAF JS challenge that
 defeats plain HTTP. We use a headless Chromium via Playwright to pass the

@@ -1,7 +1,7 @@
 {
   "name": "patent-client-agents",
-  "description": "Intellectual property research toolkit — async Python clients and 128 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
-  "version": "0.26.4",
+  "description": "Intellectual property research toolkit — async Python clients and 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
+  "version": "0.26.5",
   "author": {
     "name": "Parker Hancock",
     "url": "https://github.com/parkerhancock"
@@ -12,7 +12,7 @@
   "mcpServers": {
     "patent-client-agents": {
       "command": "uvx",
-      "args": ["--from", "patent-client-agents[mcp]==0.26.4", "patent-client-agents-mcp"]
+      "args": ["--from", "patent-client-agents[mcp]==0.26.5", "patent-client-agents-mcp"]
     }
   }
 }
