@@ -24,6 +24,7 @@ connector:
   module: patent_client_agents.usitc
   blockers: []
 coverage:
+  atlas_standalone_reason: out_of_scope
   order: 29
   last_verified: null
   wipo_st3_code: US

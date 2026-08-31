@@ -112,7 +112,13 @@ catalog/sources/*.md ──► coverage/sources.yaml ──┤
 
 - `region` is derived (asia / europe / americas / africa / oceania / multilateral / regional) from ISO 3166 or layer.
 - `synopsis_url` is null when STATE.yaml has `synopsis: null`.
-- `shipped_sources` carries the granular data products from `coverage/sources.yaml` that map to this office (via jurisdiction code).
+- `shipped_sources` carries the granular data products from
+  `coverage/sources.yaml` that map to this office. Matching uses the entity ID
+  prefix first and the entity's explicit `manifest_ids` list for stable source
+  IDs that use a different authority prefix.
+- `unattached_sources` is retained as a compatibility key for intentionally
+  standalone products outside the office-centric entity model. Each row must
+  declare `atlas_standalone_reason`; the build rejects unexplained rows.
 
 ---
 
@@ -123,7 +129,8 @@ catalog/sources/*.md ──► coverage/sources.yaml ──┤
 Goal: ship `coverage/atlas.json` as a build artifact + CI gate.
 
 - [ ] **1.1** Extend `scripts/build_coverage.py` to read `research/STATE.yaml` and emit `coverage/atlas.json`.
-  - Match `coverage/sources.yaml` rows to STATE entities by jurisdiction code prefix (`US/...` → US/USPTO).
+  - Match `coverage/sources.yaml` rows to STATE entities by entity ID prefix,
+    with `manifest_ids` as the explicit cross-prefix fallback.
   - Compute `region` from ISO 3166 for national; layer for multilateral/regional.
   - Compute `synopsis_url` only when STATE row has a non-null `synopsis`.
   - Re-use the verdict label table from `docs_hooks/sync_patent_client_index.py` (lift it into a shared module).
@@ -131,7 +138,11 @@ Goal: ship `coverage/atlas.json` as a build artifact + CI gate.
 - [ ] **1.3** Update `.github/workflows/...` (if any) to re-run `build_coverage.py --check` on PR.
 - [ ] **1.4** Bump `coverage.json` and write a fresh `atlas.json`. Commit.
 
-**Acceptance:** `uv run python scripts/build_coverage.py --check` returns 0, both JSONs exist on `main`, every STATE row appears in `atlas.json.entities`, every `sources.yaml` row appears nested under exactly one entity's `shipped_sources`.
+**Acceptance:** `uv run python scripts/build_coverage.py --check` returns 0,
+both JSONs exist on `main`, every STATE row appears in `atlas.json.entities`,
+and every `sources.yaml` row is either nested under one entity's
+`shipped_sources` or carries a validated `atlas_standalone_reason` in the
+compatibility `unattached_sources` list.
 
 ### Phase 2 — Viz layer (in `patentclient-web`)
 

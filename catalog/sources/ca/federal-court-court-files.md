@@ -36,6 +36,7 @@ connector:
   blockers: []
 category: adjudicative_records
 coverage:
+  atlas_standalone_reason: adjudicative_body
   order: 27
   wipo_st3_code: CA
   data_types:

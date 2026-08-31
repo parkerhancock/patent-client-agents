@@ -380,6 +380,7 @@ sources:
     hearing date, party roles, venue, and dispute type, but often omit
     case and patent numbers. This is a hearing calendar, not a complete
     docket or an authoritative open/closed case-status service.
+  atlas_standalone_reason: adjudicative_body
 - id: JP/IPHC/PatentUtilityModelCaseLists
   name: Japan Intellectual Property High Court — Patent and Utility-Model Case Lists
   jurisdiction: JP
@@ -404,6 +405,7 @@ sources:
     court case number, proceeding type, patent/application number, division,
     and scheduled judgment or disposition fields. The workbook does not
     publish party names and is not a general patent-infringement docket.
+  atlas_standalone_reason: adjudicative_body
 - id: JP/JPO
   name: Japan Patent Office (JPO) — Open API
   jurisdiction: JP
@@ -440,6 +442,7 @@ sources:
   notes: |
     Non-authoritative aggregator; primary use is cross-jurisdiction reach
     where authoritative registers (PPUBS, EPO OPS, JPO) don't reach.
+  atlas_standalone_reason: cross_office_service
 - id: US/USITC/EDIS
   name: USITC EDIS — Section 337 investigations
   jurisdiction: US
@@ -461,6 +464,7 @@ sources:
     Section 337 patent + trademark enforcement investigations: docket
     entries, attachments, exclusion orders. Live docket data — treat as
     a snapshot at retrieved_at, not a corpus.
+  atlas_standalone_reason: adjudicative_body
 - id: US/USITC/IDS
   name: USITC IDS — IP investigation index
   jurisdiction: US
@@ -481,6 +485,7 @@ sources:
     Investigation-level index of IP proceedings. Lighter-weight surface
     than EDIS — useful for cross-investigation discovery before pulling
     EDIS attachments.
+  atlas_standalone_reason: adjudicative_body
 - id: CA/FederalCourt/CourtFiles
   name: Federal Court of Canada — Court Files
   jurisdiction: CA
@@ -505,6 +510,7 @@ sources:
     The upstream search does not publish an authoritative open/closed
     status; connector status assessments are conservative docket-text
     inferences and are labeled as such.
+  atlas_standalone_reason: adjudicative_body
 - id: US/USITC/DataWeb
   name: USITC DataWeb — trade statistics
   jurisdiction: US
@@ -525,6 +531,7 @@ sources:
     IP-data scope. Kept as ``external`` so the MCP tools that already
     ship aren't dropped from the catalog; new IP work should not depend
     on this surface.
+  atlas_standalone_reason: out_of_scope
 - id: US/USITC/HTS
   name: USITC HTS — Harmonized Tariff Schedule
   jurisdiction: US
@@ -542,6 +549,7 @@ sources:
     Tariff-code reference data — out of IP-data scope but shipped via
     the shared USITC connector module. ``external`` for the same
     reason as DataWeb; do not build new IP tools against it.
+  atlas_standalone_reason: out_of_scope
 - id: US/USPTO/MPEP
   name: Manual of Patent Examining Procedure (MPEP)
   jurisdiction: US
@@ -665,6 +673,7 @@ sources:
   update_cadence: annual
   last_synced: 2026-05-15
   corpus_version: unknown — needs verification
+  atlas_standalone_reason: independent_legal_authority
 - id: UP/EPO/UPGuidelines
   name: Unitary Patent Guidelines
   jurisdiction: UP
@@ -732,6 +741,7 @@ sources:
     both PT (authoritative — Planalto) and EN (WIPO Lex translation)
     text per Article. Cadence is irregular because the LPI is amended
     by occasional federal laws (no published schedule).
+  atlas_standalone_reason: independent_legal_authority
 - id: UPC/UPC/Statutes
   name: Unified Patent Court — Statutes & Rules of Procedure
   jurisdiction: UPC
@@ -837,6 +847,7 @@ sources:
   transport: mcp_proxy
   update_strategy: live_proxy
   update_cadence: weekly
+  atlas_standalone_reason: independent_legal_authority
 - id: UPC/UPC/Decisions
   name: Unified Patent Court — Decisions
   jurisdiction: UPC
@@ -1988,6 +1999,7 @@ sources:
     to the WIPO International Bureau, in CHF. Per-RO transmittal and per-ISA search fees vary by Receiving
     Office and are documented in the PCT Fee Tables PDF — not covered in this route. Source: PCT Schedule
     of Fees annexed to the Regulations under the PCT (wipo.int/en/web/pct-system/texts/rules/rtax).'
+  atlas_standalone_reason: cross_office_service
 - id: WO/WIPO/Fees/Madrid
   name: WIPO Madrid Protocol — Schedule of Fees
   jurisdiction: WO
