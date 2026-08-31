@@ -441,7 +441,15 @@ def _per_claim_condition(text: str) -> FeeCondition | None:
 
 
 def _row_cells(tr: L.HtmlElement) -> list[str]:
-    return [re.sub(r"\s+", " ", c.text_content().strip()) for c in tr.cssselect("td, th")]
+    cells = []
+    for cell in tr.cssselect("td, th"):
+        visible_text = cell.xpath(
+            ".//text()[not(ancestor::*[@aria-hidden='true']) and "
+            "not(ancestor::*[contains(concat(' ', normalize-space(@class), ' '), "
+            "' sr-only ')])]"
+        )
+        cells.append(re.sub(r"\s+", " ", "".join(visible_text).strip()))
+    return cells
 
 
 def _is_fee_table(table: L.HtmlElement) -> bool:
