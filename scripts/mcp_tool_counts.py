@@ -132,6 +132,21 @@ def check_docs(default_count: int, full_count: int) -> list[str]:
         *_require(
             "plugins/patent-client-agents/.claude-plugin/plugin.json",
             f"{default_count} default MCP tools",
+        ),
+        *_require(
+            "plugins/patent-client-agents/.codex-plugin/plugin.json",
+            f"{default_count} default MCP tools",
+        ),
+        *_require(
+            "plugins/patent-client-agents/.mcp.json",
+            f"patent-client-agents[mcp]=={version}",
+        ),
+        *_require(
+            "plugins/patent-client-agents/plugin.json",
+            f"{default_count} default MCP tools",
+        ),
+        *_require(
+            "plugins/patent-client-agents/mcp_config.json",
             f"patent-client-agents[mcp]=={version}",
         ),
         *_require(

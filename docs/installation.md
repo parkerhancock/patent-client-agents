@@ -7,14 +7,14 @@ matches how you're going to use it:
 |---|---|---|
 | Python library | Import `patent_client_agents` in your own async code | [§1](#1-python-library) |
 | Python library + MCP runtime | Run an MCP server locally or in-process | [§2](#2-python-library-with-mcp-runtime) |
-| Claude Code plugin (from GitHub marketplace) | Add 136 patent + trademark + adjacent-IP MCP tools to Claude Code with two slash commands; private/local credentialed deployments expose up to 234 tools | [§3](#3-claude-code-plugin-from-github) |
+| Agent plugin | Add the same MCP tool package to Claude Code, OpenAI Codex CLI, or Google Antigravity CLI | [§3](#3-agent-plugins) |
 | Claude Code skill (standalone, library-user) | Install the `ip_research` skill into `~/.claude/skills/` for Python-library guidance | [§4](#4-claude-code-skill-standalone-library-user) |
-| Stdio MCP (any MCP client) | Connect Claude Code / Claude Desktop / Codex CLI / Gemini CLI / Cursor / Windsurf / Cline / Zed / Continue / Copilot Chat / JetBrains / custom | [§5](#5-stdio-mcp-from-any-mcp-client) |
+| Stdio MCP (any MCP client) | Connect Claude Code / Codex CLI / Antigravity CLI / Gemini CLI / Cursor / Windsurf / Cline / Zed / Continue / Copilot Chat / JetBrains / custom | [§5](#5-stdio-mcp-from-any-mcp-client) |
 | Remote MCP (hosted or self-hosted) | Point an MCP client at a deployed HTTPS endpoint — including cloud-only clients like ChatGPT Apps and Replit Agent | [§6](#6-remote-mcp) |
 
 Skip to the section you need — they're independent.
 
-**The Claude Code plugin** (§3) ships the MCP server only. The
+**The agent plugins** (§3) ship the MCP server only. The
 `ip_research` skill is a separate artifact aimed at Python-library
 users (§4); the plugin installs MCP tools whose in-schema descriptions
 already cover the routing/usage guidance a skill would otherwise
@@ -146,12 +146,22 @@ This is exactly how `law-tools` consumes `patent-client-agents` in the monorepo.
 
 ---
 
-## 3. Claude Code plugin (from GitHub)
+## 3. Agent plugins
 
-Use this when you use Claude Code and want the 136 patent + trademark +
-adjacent-IP MCP tools dropped in with two slash commands. Private/local
-deployments expose up to 234 tools when the corresponding credentials
-are in the environment.
+Claude Code, OpenAI Codex CLI, and Google Antigravity CLI are equal
+deployment targets. Each native plugin launches the same pinned PyPI
+release. Add 136 patent + trademark + adjacent-IP MCP tools to any of
+the three clients by default. Private/local deployments expose up to 234
+tools when the corresponding credentials are in the environment.
+
+The package metadata is maintained once in `satchel.yaml` and generated
+for all three hosts with Satchel. Do not edit the generated marketplace or
+plugin manifests directly. Contributors can regenerate and verify them with:
+
+```bash
+uvx --from git+https://github.com/parkerhancock/satchel@9c9117a3be6810ad847f3b27f4ab658465f77b2f satchel generate .
+uvx --from git+https://github.com/parkerhancock/satchel@9c9117a3be6810ad847f3b27f4ab658465f77b2f satchel check . --release --host
+```
 
 The plugin ships **only the MCP server** — no skill, no agents, no
 hooks. The MCP tools' in-schema descriptions already carry the
@@ -161,7 +171,7 @@ for US patents"; `get_epo_cql_help` is itself a tool).
 
 ### Prereq
 
-`uv` needs to be on `PATH`. The plugin's MCP server spawns via `uvx`,
+`uv` needs to be on `PATH`. Each plugin's MCP server spawns via `uvx`,
 which handles the Python runtime (`fastmcp` and friends) in a managed
 environment so you don't have to `pip install` anything.
 
@@ -170,7 +180,7 @@ environment so you don't have to `pip install` anything.
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### Install
+### Install in Claude Code
 
 Claude Code's plugin install goes through a **marketplace** — a small
 catalog manifest that lists one or more plugins. This repo ships its
@@ -186,7 +196,36 @@ Run these **inside a Claude Code session** (slash commands, not shell):
 /reload-plugins
 ```
 
-What happens:
+### Install in OpenAI Codex CLI
+
+Run these in your shell:
+
+```bash
+codex plugin marketplace add parkerhancock/patent-client-agents
+codex plugin add patent-client-agents@patent-client-agents
+```
+
+The repository marketplace at `.agents/plugins/marketplace.json`
+points Codex at `plugins/patent-client-agents/`. That package declares
+the server in `.codex-plugin/plugin.json` and `.mcp.json`. Start a new
+Codex session after installation.
+
+### Install in Google Antigravity CLI
+
+Antigravity installs a plugin from a local or remote directory. Clone
+the repository, then install its shared plugin package:
+
+```bash
+git clone --depth 1 https://github.com/parkerhancock/patent-client-agents.git
+agy plugin install ./patent-client-agents/plugins/patent-client-agents
+```
+
+Antigravity reads `plugin.json` and `mcp_config.json` from that package.
+Start a new `agy` session after installation.
+
+### What the packages do
+
+For Claude Code specifically:
 
 1. `/plugin marketplace add parkerhancock/patent-client-agents` clones this repo
    into `~/.claude/plugins/marketplaces/`, parses
@@ -238,6 +277,22 @@ If you need to force a clean reinstall:
 /reload-plugins
 ```
 
+For Codex, refresh and reinstall from the configured marketplace:
+
+```bash
+codex plugin marketplace upgrade patent-client-agents
+codex plugin remove patent-client-agents
+codex plugin add patent-client-agents@patent-client-agents
+```
+
+For Antigravity, update the clone and reinstall the directory:
+
+```bash
+git -C ./patent-client-agents pull --ff-only
+agy plugin uninstall patent-client-agents
+agy plugin install ./patent-client-agents/plugins/patent-client-agents
+```
+
 ### Remove
 
 ```
@@ -247,8 +302,8 @@ If you need to force a clean reinstall:
 
 ### Configure API keys
 
-API keys are read from environment. For a global Claude Code install,
-export them in your shell profile:
+API keys are read from environment. Export them in the shell profile
+used to launch Claude Code, Codex, or Antigravity:
 
 ```bash
 export USPTO_ODP_API_KEY="…"
@@ -257,7 +312,7 @@ export EPO_OPS_API_KEY="…"
 export EPO_OPS_API_SECRET="…"
 ```
 
-Restart Claude Code so the new env reaches the MCP subprocess. Without
+Restart the agent client so the new environment reaches the MCP subprocess. Without
 keys, Google Patents / PPUBS / Assignments / Trademark Assignments
 still work; USPTO ODP, USPTO TSDR, and EPO tools will return auth
 errors. MPEP and TMEP no longer hit USPTO at runtime — see "MPEP /
@@ -305,10 +360,12 @@ SHA-256 does not match the manifest.
 
 ### Verify
 
-List MCP tools from within a Claude Code session:
+List MCP tools from within the installed agent client:
 
 ```
-/mcp
+Claude Code: /mcp
+Codex CLI:   /mcp
+Antigravity: /mcp
 ```
 
 Expect `patent-client-agents` with 136 tools by default. Local/private
@@ -334,8 +391,8 @@ error (upgrade `uv` to latest).
 session takes 30s, something is evicting uv's cache. Check that
 `~/.cache/uv/` is persistent.
 
-**Plugin shows 0 tools after install** — `/reload-plugins` didn't
-pick it up. Fully exit Claude Code and restart the session.
+**Plugin shows 0 tools after install** — In Claude Code, try
+`/reload-plugins`. In Codex or Antigravity, start a new session.
 
 ---
 
@@ -405,7 +462,7 @@ your client. The server is a short-lived subprocess speaking JSON-RPC
 over stdio.
 
 Confirmed-working clients: **Claude Code**, **Claude Desktop**, **OpenAI
-Codex CLI**, **Google Gemini CLI**, **Cursor**, **Windsurf**, **Cline**,
+Codex CLI**, **Google Antigravity CLI**, **Google Gemini CLI**, **Cursor**, **Windsurf**, **Cline**,
 **Zed**, **Continue.dev**, **VS Code Copilot Chat** (Agent mode), and
 **JetBrains AI Assistant**. Snippets for each are below.
 
@@ -424,6 +481,7 @@ This gives you the `patent-client-agents-mcp` console script on PATH.
 | Claude Code | use `claude mcp add` (writes to `.mcp.json` / `~/.claude.json`) | `mcpServers` | `command` | `url` |
 | Claude Desktop | `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) | `mcpServers` | `command` | UI only (Pro+) |
 | Codex CLI | `~/.codex/config.toml` | `[mcp_servers.<name>]` | `command` | `url` |
+| Antigravity CLI | `~/.gemini/antigravity-cli/mcp_config.json` (or `.agents/mcp_config.json`) | `mcpServers` | `command` | `serverUrl` |
 | Gemini CLI | `~/.gemini/settings.json` | `mcpServers` | `command` | `httpUrl` |
 | Cursor | `~/.cursor/mcp.json` (or `.cursor/mcp.json`) | `mcpServers` | `command` | `url` |
 | Windsurf | `~/.codeium/windsurf/mcp_config.json` | `mcpServers` | `command` | `serverUrl` |
@@ -436,7 +494,7 @@ This gives you the `patent-client-agents-mcp` console script on PATH.
 Three things differ across clients that look like they should be standardized but aren't:
 
 1. **Root key:** `mcpServers` (most), `servers` (VS Code), `context_servers` (Zed), `[mcp_servers.<name>]` (Codex TOML).
-2. **Remote URL field:** `url` (most), `httpUrl` (Gemini), `serverUrl` (Windsurf).
+2. **Remote URL field:** `url` (most), `httpUrl` (Gemini), `serverUrl` (Antigravity and Windsurf).
 3. **Streamable-HTTP type field spelling:** `streamableHttp` (Cline), `streamable-http` (Continue), `http` (VS Code). Same protocol, three names.
 
 ### Wire the MCP client
@@ -530,6 +588,40 @@ tool_timeout_sec = 60
 ```
 
 See the [Codex config reference](https://developers.openai.com/codex/config-reference).
+
+#### Google Antigravity CLI
+
+`~/.gemini/antigravity-cli/mcp_config.json` (global) or
+`.agents/mcp_config.json` (workspace):
+
+```json
+{
+  "mcpServers": {
+    "patent-client-agents": {
+      "command": "patent-client-agents-mcp",
+      "args": [],
+      "env": {
+        "USPTO_ODP_API_KEY": "$USPTO_ODP_API_KEY"
+      }
+    }
+  }
+}
+```
+
+Remote connections use `serverUrl`:
+
+```json
+{
+  "mcpServers": {
+    "patent-client-agents": {
+      "serverUrl": "https://mcp.patentclient.com/mcp"
+    }
+  }
+}
+```
+
+Use `/mcp` inside Antigravity to inspect status and connection logs. See
+the [official Antigravity MCP guide](https://antigravity.google/docs/cli/mcp/).
 
 #### Google Gemini CLI
 
@@ -911,8 +1003,8 @@ Streamable HTTP. Point ChatGPT or Replit at that wrapper's URL.
   ├── yes → §1 (bare) or §2 (with MCP runtime)
   └── no ↓
 
-  Are you a Claude Code user?
-  ├── yes → §3 (plugin install from GitHub)
+  Are you using Claude Code, Codex CLI, or Antigravity CLI?
+  ├── yes → §3 (native agent plugin)
   │         plus §5 if you also want the tools as MCP locally
   └── no ↓
 
@@ -920,7 +1012,7 @@ Streamable HTTP. Point ChatGPT or Replit at that wrapper's URL.
   ├── yes → §6 (remote MCP — point at hosted demo or your HTTPS deploy)
   └── no ↓
 
-  Any other MCP client (Codex CLI, Gemini CLI, Cursor, Windsurf, Cline,
+  Any other MCP client (Gemini CLI, Cursor, Windsurf, Cline,
   Zed, Continue.dev, VS Code Copilot Chat, JetBrains AI, Claude Desktop)?
   ├── local subprocess → §5 (stdio MCP)
   └── pointing at a deployed server → §6 (remote MCP)

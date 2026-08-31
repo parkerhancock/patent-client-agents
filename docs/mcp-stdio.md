@@ -2,7 +2,7 @@
 
 The `[mcp]` extra ships a ready-to-run stdio MCP server that exposes
 all patent and IP tools to any MCP-speaking client — Claude Code,
-Claude Desktop, OpenAI Codex CLI, Google Gemini CLI, Cursor, Windsurf,
+OpenAI Codex CLI, Google Antigravity CLI, Claude Desktop, Google Gemini CLI, Cursor, Windsurf,
 Cline, Zed, Continue.dev, VS Code Copilot Chat, JetBrains AI Assistant,
 CoWork, or a homegrown fastmcp Client. See
 [installation.md §5](installation.md#5-stdio-mcp-from-any-mcp-client)
@@ -31,15 +31,15 @@ python -m patent_client_agents.mcp.server
 fastmcp run patent_client_agents.mcp.server:mcp
 ```
 
-## MCP client configuration (example: Claude Code)
+## MCP client configuration
 
-Per-client config locations and exact syntax for Codex CLI, Gemini CLI,
+Native plugin packages for Claude Code, Codex CLI, and Antigravity CLI,
+plus per-client config locations and exact syntax for Gemini CLI,
 Cursor, Windsurf, Cline, Zed, Continue.dev, VS Code Copilot Chat,
 JetBrains AI, and Claude Desktop are in
 [installation.md §5](installation.md#5-stdio-mcp-from-any-mcp-client).
-For Claude Code specifically — add one of the following blocks to your
-MCP config (`.mcp.json` at the project root or `~/.claude.json` for
-user-scope):
+The JSON below is the common stdio shape used by Claude Code and
+Antigravity CLI. Codex expresses the same fields in TOML.
 
 ```json
 {

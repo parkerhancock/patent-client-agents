@@ -1,0 +1,20 @@
+{
+  "name": "patent-client-agents",
+  "interface": {
+    "displayName": "Patent Client Agents"
+  },
+  "plugins": [
+    {
+      "name": "patent-client-agents",
+      "source": {
+        "source": "local",
+        "path": "./plugins/patent-client-agents"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Education & Research"
+    }
+  ]
+}

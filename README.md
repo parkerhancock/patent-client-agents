@@ -17,7 +17,7 @@
 ## Use the hosted demo
 
 The fastest path — nothing to install. Point any MCP-speaking client
-(Claude Code, OpenAI Codex CLI, Google Gemini CLI, Cursor, Windsurf,
+(Claude Code, OpenAI Codex CLI, Google Antigravity CLI, Google Gemini CLI, Cursor, Windsurf,
 Cline, Zed, Continue.dev, VS Code Copilot Chat, JetBrains AI, Claude
 Desktop, ChatGPT Apps, Replit Agent, CoWork, …) at the public demo at
 **[mcp.patentclient.com](https://mcp.patentclient.com)**:
@@ -45,12 +45,20 @@ for limits, omissions, WAF behavior, and confidentiality guidance.
 ## Or install locally
 
 `patent-client-agents` is an MCP server, so it works with **any
-MCP-speaking client** — Claude Code, OpenAI Codex CLI, Google Gemini
-CLI, Cursor, Windsurf, Cline, Zed, Continue.dev, VS Code Copilot Chat,
-JetBrains AI Assistant, Claude Desktop, ChatGPT (remote URL), and
-Replit Agent (remote URL). Three install paths cover everything:
+MCP-speaking client**. Claude Code, OpenAI Codex CLI, and Google
+Antigravity CLI are first-class deployment targets with native plugin
+packages. Cursor, Windsurf, Cline, Zed, Continue.dev, VS Code Copilot
+Chat, JetBrains AI Assistant, Claude Desktop, ChatGPT (remote URL), and
+Replit Agent (remote URL) can connect directly through MCP.
 
-### Path A — Claude Code plugin (one-liner)
+### Path A — Native agent plugin
+
+Each plugin launches the same pinned PyPI release through `uvx` and exposes
+136 tools by default, or up to 234 when private credentials are configured.
+The three host packages are generated from `satchel.yaml`; that manifest is
+the source of truth for their shared identity, version, and MCP component.
+
+**Claude Code**
 
 ```
 /plugin marketplace add parkerhancock/patent-client-agents
@@ -58,7 +66,25 @@ Replit Agent (remote URL). Three install paths cover everything:
 /reload-plugins
 ```
 
-### Path B — Any other MCP client
+**OpenAI Codex CLI**
+
+```bash
+codex plugin marketplace add parkerhancock/patent-client-agents
+codex plugin add patent-client-agents@patent-client-agents
+```
+
+**Google Antigravity CLI**
+
+```bash
+git clone --depth 1 https://github.com/parkerhancock/patent-client-agents.git
+agy plugin install ./patent-client-agents/plugins/patent-client-agents
+```
+
+Start a new agent session after installing. See the
+[installation guide](https://docs.patentclient.com/installation/#3-agent-plugins)
+for updates, removal, verification, and credential setup.
+
+### Path B — Direct MCP connection
 
 ```bash
 pip install 'patent-client-agents[mcp]'
@@ -77,6 +103,24 @@ env = { USPTO_ODP_API_KEY = "…" }
 ```
 
 Or use the CLI: `codex mcp add patent-client-agents --env USPTO_ODP_API_KEY=… -- patent-client-agents-mcp`.
+</details>
+
+<details>
+<summary><strong>Google Antigravity CLI</strong> — <code>~/.gemini/antigravity-cli/mcp_config.json</code></summary>
+
+```json
+{
+  "mcpServers": {
+    "patent-client-agents": {
+      "command": "patent-client-agents-mcp",
+      "env": { "USPTO_ODP_API_KEY": "$USPTO_ODP_API_KEY" }
+    }
+  }
+}
+```
+
+Workspace-local configuration can instead live at `.agents/mcp_config.json`.
+Launch `agy` and use `/mcp` to verify the server.
 </details>
 
 <details>
@@ -231,7 +275,7 @@ Ask your agent to research patents and trademarks in natural language:
 - **Multilateral** — Google Patents (global search), WIPO Lex (~50k IP statutes across ~200 jurisdictions)
 - **Examiner & classification corpora** — MPEP, TMEP, EPC + four EPO Guidelines families, Case Law of the Boards of Appeal, CPC (with IPC mapping)
 
-JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the local stdio server and the Claude Code plugin only when their credentials are set in the environment; the hosted demo at `mcp.patentclient.com` does not carry those credentials, so those tool families don't appear there.
+JPO, CanLII, EUIPO, IP Australia, KIPO, TIPO, and INPI MCP tools register on the local stdio server and native agent plugins only when their credentials are set in the environment; the hosted demo at `mcp.patentclient.com` does not carry those credentials, so those tool families don't appear there.
 
 ## Coverage
 
@@ -489,7 +533,7 @@ No API key required, but requires a one-time corpus build —
 <summary><strong>JPO (Japan Patent Office)</strong></summary>
 
 > **JPO MCP tools are env-gated.** The local stdio MCP server and the
-> Claude Code plugin register 12 JPO MCP tools (plus the
+> native agent plugins register 12 JPO MCP tools (plus the
 > `pca://jpo/documents/...` resource template) when `JPO_API_USERNAME`
 > and `JPO_API_PASSWORD` are set in the server's env. The hosted demo
 > at `mcp.patentclient.com` does not carry JPO credentials, so JPO
@@ -513,7 +557,7 @@ No API key required, but requires a one-time corpus build —
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
-│     Any MCP-speaking agent — Claude Code, Codex CLI, Gemini CLI,     │
+│  Any MCP-speaking agent — Claude Code, Codex CLI, Antigravity CLI,  │
 │     Cursor, Windsurf, Cline, Zed, Continue, Copilot Chat, JetBrains, │
 │     Claude Desktop, ChatGPT (remote), Replit Agent (remote)          │
 ├──────────────────────────────────────────────────────────────────────┤
