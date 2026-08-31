@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.27.0] — 2026-08-31
+
+### Added
+
+- Added a Canada Federal Court case-file connector for official party and
+  corporation search, case metadata, public parties and counsel, patent
+  references, and recorded docket entries.
+- Added a China Supreme People's Court Intellectual Property Court connector
+  for official scheduled-hearing notices and official-site search.
+- Added a Japan Intellectual Property High Court connector for the official
+  weekly workbook of pending and recently closed suits seeking cancellation of
+  JPO patent and utility-model decisions.
+
 ### Changed
 
 - Consolidated all 114 shipped coverage products and six additional known
@@ -14,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   `catalog/sources/`. Country summaries, the worldwide inventory,
   `coverage/sources.yaml`, `coverage.json`, and `atlas.json` are now generated
   from those records, eliminating the parallel hand-edited coverage manifest.
+- Updated the supported Python dependency set while retaining `pypdf<6.15` to
+  preserve Finnish PRH statutory-fee PDF parsing.
 
 ## [0.26.5] — 2026-08-28
 
@@ -1881,7 +1896,8 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.5...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.0...HEAD
+[0.27.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.5...v0.27.0
 [0.26.5]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.4...v0.26.5
 [0.26.4]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.3...v0.26.4
 [0.26.3]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.2...v0.26.3
