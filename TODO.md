@@ -66,6 +66,18 @@ weeks.
 
 ## Near-term roadmap discipline
 
+- [x] **Pilot the worldwide source catalog.** Japan, China, and Korea now test
+      one canonical Markdown record per upstream source, including manual,
+      commercial, restricted, and blocked sources. CI validates eight records
+      and generated country/worldwide views.
+
+- [x] **Expand and migrate the worldwide source catalog.** All shipped source
+      rows now have canonical Markdown records, and `coverage/sources.yaml` is
+      generated after exact row parity. `research/STATE.yaml` remains the
+      office-level roadmap rather than duplicating source records. Design
+      decisions and the migration checklist are in
+      [`research/SOURCE_CATALOG_DESIGN.md`](research/SOURCE_CATALOG_DESIGN.md).
+
 - [x] **Promote provenance compliance by category.** CI checks read-only
       annotations and provenance schemas across all 193 default and
       credential-gated tools. It tracks 22 legacy non-envelope exceptions.

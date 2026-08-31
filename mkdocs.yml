@@ -104,10 +104,13 @@ nav:
     - USPTO Trademark Search (TESS): api/uspto-tmsearch.md
     - EPO OPS: api/epo-ops.md
     - JPO: api/jpo.md
+    - Japan IP High Court: api/japan-ip-high-court.md
     - Google Patents: api/google-patents.md
     - MPEP: api/mpep.md
     - TMEP: api/tmep.md
     - CPC: api/cpc.md
+    - Canada Federal Court case files: api/canada-federal-court.md
+    - China SPC IP Court hearings: api/china-spc-ip-court.md
     - CanLII: api/canlii.md
     - WIPO Lex: api/wipo-lex.md
     - EUIPO: api/euipo.md

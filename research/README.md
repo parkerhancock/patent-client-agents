@@ -85,7 +85,7 @@ research/
 ## Update protocol
 
 1. **New office research:** add a wave under `waves/<date>-<subject>/`; write deep-dive files there. Update the relevant synopsis file in `multilateral/` or `regional/` or `national/` to integrate the findings. Add a row to the BACKLOG reconciliation log if the wave contradicts a prior entry.
-2. **New connector ships:** update the relevant synopsis §5 (Connector strategy). Update `coverage/sources.yaml` (the manifest). Update `COVERAGE_STRATEGY.md` §5 if the coverage matrix shifts.
+2. **New connector ships:** update the relevant synopsis §5 (Connector strategy). Add or update its canonical record under `catalog/sources/`, including the `coverage` projection block, then run `scripts/build_source_catalog.py`. Update `COVERAGE_STRATEGY.md` §5 if the coverage matrix shifts.
 3. **Quarterly watch-list rechecks:** see `BACKLOG.md` quarterly watch list. Update the reconciliation log if anything moved.
 
 ## Glossary
@@ -93,4 +93,4 @@ research/
 - **Synopsis** — the per-office strategic doc in `multilateral/`, `regional/`, `national/`. 150–200 lines. Current-state view; links to detail.
 - **Survey** — the older detailed research in `connectors/<office>.md`. 100–400 lines. Asset-by-asset deep dive; canonical reference for technical specifics.
 - **Wave** — time-stamped batch research product under `waves/<date>-<subject>/`. Frozen audit trail with full primary-source citations.
-- **Manifest** — [`coverage/sources.yaml`](../coverage/sources.yaml) — the closed-vocabulary list of what we cover today, validated by [`scripts/build_coverage.py`](../scripts/build_coverage.py).
+- **Manifest** — [`coverage/sources.yaml`](../coverage/sources.yaml) — the generated closed-vocabulary compatibility view of shipped products. Its canonical records live under [`catalog/sources/`](../catalog/sources/) and are validated and projected by [`scripts/build_source_catalog.py`](../scripts/build_source_catalog.py).

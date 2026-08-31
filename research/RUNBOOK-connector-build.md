@@ -48,7 +48,7 @@ You are implementing a new connector for {{ entity_name }} ({{ entity_id }}) per
 **Inputs to read first, in this order:**
 1. `{{ spec_path }}` — the concrete deliverable spec (env vars, tool names, response shapes, test fixtures)
 2. `{{ synopsis_path }}` — strategic context (what's unique, what we should NOT add, primary-source URLs)
-3. `CONNECTOR_STANDARDS.md` — the contract every connector must satisfy (§5 tool design rules, §6 manifest entry, §7 connector shapes)
+3. `CONNECTOR_STANDARDS.md` — the contract every connector must satisfy (§5 tool design rules, §6 source record, §7 connector shapes)
 4. The canonical template connector: `src/patent_client_agents/{{ canonical_template_package }}/` — copy this and adapt
 
 **Your deliverables:**
@@ -75,8 +75,9 @@ You are implementing a new connector for {{ entity_name }} ({{ entity_id }}) per
    - `test_api.py`, `test_build.py` (if static), `test_client.py`, `test_corpus_status.py` (if static), `test_mcp_envelope.py`
    - Target ≥80% per-file coverage; verify_connector enforces
 
-4. **Manifest entries** in `coverage/sources.yaml`:
-   - One row per right covered, IDs per §6 closed vocabulary: `{{ manifest_ids }}`
+4. **Canonical source records** under `catalog/sources/`:
+   - One record per right covered, with a `coverage` projection and IDs per §6 closed vocabulary: `{{ manifest_ids }}`
+   - Run `scripts/build_source_catalog.py` to regenerate `coverage/sources.yaml` and the human-readable catalog views
 
 5. **Doc updates** (verify_connector requires):
    - `CHANGELOG.md` `[Unreleased]` section mentioning the package
@@ -108,7 +109,7 @@ This runs 5 checks: ruff check, ruff format --check, ty check, pytest --cov ≥8
 - **Watchdog stalls at 600s.** Long uv operations, long pytest runs, slow web fetches all risk this. Keep operations short; use the bundled seed pattern (static `data/seed.jsonl`) for static-law connectors.
 - **Editable-install drift.** Do not run `uv sync` from inside the worktree — it can point the parent venv at the wrong source tree. Inherit the parent venv.
 - **Worktree base inconsistency.** Verify the worktree was created from a recent main (or the current feature branch) before starting. `git log --oneline -3` should show the verify_connector commit (cb44af3 or later).
-- **Manifest validation.** `scripts/build_coverage.py` validates `coverage/sources.yaml`. Run it before claiming done if you added manifest rows.
+- **Catalog and manifest validation.** `scripts/build_source_catalog.py --check` validates canonical records and their generated views. Then `scripts/build_coverage.py --check` validates the projected manifest. Run both before claiming done if you added source records.
 - **Plain `_FakeModel` not `BaseModel(extra="allow")`** in envelope tests — `ty` does not understand Pydantic's dynamic kwargs and emits unknown-argument errors. See `tests/ipo_in_statutes/test_mcp_envelope.py` for the pattern.
 
 **Reporting on completion:**
@@ -129,7 +130,7 @@ Do NOT modify STATE.yaml — the orchestrator handles that.
 
 The agent produces:
 
-- A working branch with the new package + tests + manifest entry + doc updates
+- A working branch with the new package + tests + canonical source record + doc updates
 - `verify_connector.py` VERDICT: PASS on that branch
 - Return summary with branch name and SHA
 
@@ -168,7 +169,7 @@ Each connector lives in its own package, but:
 - `CHANGELOG.md` — all agents append to `[Unreleased]`; merge conflicts likely
 - `README.md` — same
 - `CLAUDE.md` — same
-- `coverage/sources.yaml` — same
+- `catalog/sources/<jurisdiction>/` — agents working in the same jurisdiction may overlap
 - `src/patent_client_agents/mcp/__init__.py` — all register tool modules; merge conflicts likely
 
 When fanning out multiple coding agents, accept that these shared files will conflict on integration. Resolution is always "keep both sides" (additive). Use `git rerere` or resolve manually per cherry-pick.
@@ -213,7 +214,7 @@ See PIPELINE.md §4 for the canonical batch protocol.
 Coding agents DO:
 - Write to `src/patent_client_agents/<new_package>/`
 - Write to `tests/<new_package>/`
-- Append manifest rows to `coverage/sources.yaml`
+- Add canonical records under `catalog/sources/` and regenerate catalog outputs
 - Append CHANGELOG/README/CLAUDE.md entries
 - Run `verify_connector.py`
 - Commit on a feature branch

@@ -52,6 +52,8 @@ src/
     epo_ops/                # EPO Open Patent Services (needs EPO_OPS_API_KEY/SECRET)
     google_patents/         # Scrapes Google Patents (no API key)
     jpo/                    # Japan Patent Office (needs JPO_API_USERNAME/PASSWORD)
+    japan_ip_high_court/    # Japan IP High Court weekly patent/utility-model cases (no auth)
+    china_spc_ip_court/     # China SPC IP Court public hearing notices and site search.
     ipi_swissreg/           # Swiss IPI patents, TMs, SPCs, and publication notices.
                             #   Schema-tested BYOK beta; needs IPI_DATA_USERNAME/PASSWORD.
     oepm_spain/             # Spain OEPM CEO exact-file SOAP register lookups.
@@ -91,6 +93,8 @@ src/
     canlii/                 # CanLII REST — Canadian IP cases (FC/FCA/SCC IP-filtered,
                             #   TMOB, PAB) + IP statutes (Patent / Trademarks /
                             #   Industrial Design / Copyright Acts). Needs CANLII_API_KEY.
+    canada_federal_court/   # Official Canadian Federal Court party search,
+                            #   case metadata, patent references, and live dockets.
     ipos_statutes/          # IPOS Singapore statutes — Patents/TM/Designs/Copyright Acts
                             #   (SSO mirror; corpus built once via build script)
     ipos_manuals/           # IPOS Singapore manuals — PEG / TM / Designs work manuals
@@ -142,11 +146,13 @@ connector must satisfy. It covers coverage scope (top 30 patent offices +
 substantive law), architecture defaults (MCP-first, proxy → fallback to
 bundled corpus), provenance (§3) and recency (§4) metadata, MCP tool
 design rules (§5.1-§5.13 — catalog discipline, response envelope,
-elevator test, etc.), and the closed-vocabulary manifest at
-`coverage/sources.yaml` (§6).
+elevator test, etc.), and the canonical source-record contract under
+`catalog/sources/` (§6). `coverage/sources.yaml` is generated from those records.
 
-The [`scripts/build_coverage.py`](scripts/build_coverage.py) validator
-enforces §6 against the manifest; CI fails on any deviation. Read the
+The [`scripts/build_source_catalog.py`](scripts/build_source_catalog.py)
+validator enforces the canonical contract and generates the manifest;
+[`scripts/build_coverage.py`](scripts/build_coverage.py) validates the
+compatibility projection. CI fails on any deviation. Read the
 standards doc before adding a new connector or refactoring an existing
 tool surface.
 

@@ -162,7 +162,7 @@ After running a batch:
 - **Don't relaunch failed agents from the last batch in the next batch** — diagnose first. The 2026-05-16 fan-out wave taught us this; failed agents hit the same watchdog wall on retry.
 - **Don't run coding agents outside worktrees** — production code, conflicts.
 - **Don't write a synopsis without primary-source citations** — the whole research pipeline depends on grounded research, not memory.
-- **Don't update `coverage/sources.yaml` from a research-only agent** — manifest changes happen at integration, not in research.
+- **Don't add or change canonical `catalog/sources/` records from a research-only agent** — catalog changes happen at integration, not in research. `coverage/sources.yaml` is generated from those records.
 - **Don't skip verify_connector** — it's the merge gate, not a suggestion.
 
 ## §8 Decision log

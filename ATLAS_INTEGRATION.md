@@ -7,6 +7,11 @@
 > This doc is preserved as the original plan artifact; do not delete
 > the unchecked boxes below — they're a useful audit trail showing
 > what was originally scoped vs. what shipped.
+>
+> **Current authoring model (2026-08-21):** canonical data-product records
+> live under `catalog/sources/`. `scripts/build_source_catalog.py` projects
+> them into `coverage/sources.yaml`; the architecture below otherwise remains
+> the same. Historical row counts are retained as part of this plan artifact.
 
 **Goal:** unify the data layer behind both `patentclient.com/atlas` (map +
 card grid, marketing audience) and `docs.patentclient.com/patent-client-index/`
@@ -42,7 +47,7 @@ An office maps to multiple sources (USPTO has Applications + Publications + Assi
 ```
 research/STATE.yaml ─────────┐
 research/{layer}/*.md ───────┤
-coverage/sources.yaml ───────┤
+catalog/sources/*.md ──► coverage/sources.yaml ──┤
                              ▼
                   scripts/build_coverage.py   ← extended
                              │
@@ -198,7 +203,8 @@ Goal: `/atlas` is canonical; `/coverage` is a 301 alias.
 
 - `docs_hooks/sync_patent_client_index.py` — the synopsis publisher (built 2026-05-18)
 - `scripts/build_coverage.py` — the existing coverage.json builder
-- `coverage/sources.yaml` — shipped manifest
+- `catalog/sources/` — canonical human-edited source records
+- `coverage/sources.yaml` — generated shipped-manifest compatibility view
 - `research/STATE.yaml` — research truth
 - `patentclient-web/coverage.html` + `assets/coverage.js` + `assets/coverage.css` — existing map
 

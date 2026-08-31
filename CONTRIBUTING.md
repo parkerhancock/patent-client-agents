@@ -13,7 +13,9 @@ uv run pre-commit install
 ```
 
 Read `CONNECTOR_STANDARDS.md` before adding or changing a connector. Reuse the
-existing client, response-envelope, and manifest patterns.
+existing client and response-envelope patterns. Add or change source metadata
+in the canonical Markdown records under `catalog/sources/`; do not edit the
+generated `coverage/sources.yaml` manifest directly.
 
 ## Validate a change
 
@@ -25,6 +27,7 @@ uv run ruff check .
 uv run ruff format --check .
 uv run ty check src/
 uv run pytest --cov=patent_client_agents --cov-report=term --cov-fail-under=60
+uv run python scripts/build_source_catalog.py --check
 uv run python scripts/build_coverage.py --check
 uv run python scripts/mcp_tool_counts.py --check-docs
 uv run mkdocs build --strict
