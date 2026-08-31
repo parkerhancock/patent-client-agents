@@ -1,0 +1,5 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "patent-client-agents",
+  "description": "Intellectual property research toolkit with 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research."
+}

@@ -1,18 +1,22 @@
 {
   "name": "patent-client-agents",
-  "description": "Intellectual property research toolkit — async Python clients and 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
+  "displayName": "Patent Client Agents",
   "version": "0.27.0",
+  "description": "Intellectual property research toolkit with 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
   "author": {
     "name": "Parker Hancock",
     "url": "https://github.com/parkerhancock"
   },
+  "homepage": "https://patentclient.com/",
   "repository": "https://github.com/parkerhancock/patent-client-agents",
   "license": "Apache-2.0",
-  "keywords": ["patent", "trademark", "intellectual-property", "uspto", "epo", "mcp"],
-  "mcpServers": {
-    "patent-client-agents": {
-      "command": "uvx",
-      "args": ["--from", "patent-client-agents[mcp]==0.27.0", "patent-client-agents-mcp"]
-    }
-  }
+  "keywords": [
+    "patent",
+    "trademark",
+    "intellectual-property",
+    "uspto",
+    "epo",
+    "mcp"
+  ],
+  "mcpServers": "./plugins/patent-client-agents/.mcp.json"
 }

@@ -1,16 +1,34 @@
 {
   "$schema": "https://docs.claude.com/schemas/claude-plugin-marketplace-v1.json",
   "name": "patent-client-agents",
-  "owner": {
-    "name": "Parker Hancock",
-    "url": "https://github.com/parkerhancock"
-  },
-  "description": "Patent client tools for AI agents — global patent, trademark, litigation, fee, and substantive-law research.",
+  "description": "Intellectual property research toolkit with 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
   "plugins": [
     {
       "name": "patent-client-agents",
       "source": "./plugins/patent-client-agents",
-      "description": "Intellectual property research toolkit — async Python clients and 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research."
+      "description": "Intellectual property research toolkit with 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.",
+      "version": "0.27.0",
+      "displayName": "Patent Client Agents",
+      "author": {
+        "name": "Parker Hancock",
+        "url": "https://github.com/parkerhancock"
+      },
+      "homepage": "https://patentclient.com/",
+      "repository": "https://github.com/parkerhancock/patent-client-agents",
+      "license": "Apache-2.0",
+      "keywords": [
+        "patent",
+        "trademark",
+        "intellectual-property",
+        "uspto",
+        "epo",
+        "mcp"
+      ],
+      "category": "Education & Research"
     }
-  ]
+  ],
+  "owner": {
+    "name": "Parker Hancock",
+    "url": "https://github.com/parkerhancock"
+  }
 }

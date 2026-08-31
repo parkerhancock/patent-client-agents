@@ -63,6 +63,9 @@ jobs:
       - name: Validate MCP tool counts in docs
         run: uv run python scripts/mcp_tool_counts.py --check-docs
 
+      - name: Validate generated agent packages
+        run: uvx --from git+https://github.com/parkerhancock/satchel@9c9117a3be6810ad847f3b27f4ab658465f77b2f satchel check . --release
+
       - name: Validate MCP read-only and provenance contracts
         run: uv run python scripts/validate_mcp_contracts.py
 
