@@ -1,5 +1,5 @@
 site_name: patent-client-agents
-site_description: Async Python library and MCP server for patent + trademark data — USPTO (ODP, PPUBS, Assignments, TSDR, Trademark Assignments), EPO, JPO, Google Patents, MPEP, TMEP, CPC, CanLII, WIPO Lex.
+site_description: Open-source Python clients and MCP tools for public patent, trademark, design, copyright, IP-law, litigation, and fee data.
 site_author: Parker Hancock
 site_url: https://docs.patentclient.com/
 
@@ -79,16 +79,16 @@ markdown_extensions:
 
 plugins:
   - search
-  - include-markdown
 
 hooks:
   - docs_hooks/sync_patent_client_index.py
 
 nav:
   - Home: index.md
-  - Installation: installation.md
-  - Hosted demo: hosted-demo.md
-  - MCP Reference: mcp-stdio.md
+  - Get started:
+    - Installation: installation.md
+    - Hosted service: hosted-demo.md
+    - Local MCP server: mcp-stdio.md
   # Patent Client Index: children injected by docs_hooks/sync_patent_client_index.py
   - Patent Client Index: patent-client-index/index.md
   - API Reference:

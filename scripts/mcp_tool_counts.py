@@ -15,6 +15,7 @@ server help text from drifting.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import subprocess
 import sys
@@ -111,6 +112,12 @@ def check_docs(default_count: int, full_count: int) -> list[str]:
             f"Add {default_count} patent + trademark + adjacent-IP MCP tools",
             f"up to {full_count} tools",
             f"Expect **{default_count} tools** by default",
+            f"patent-client-agents[mcp]=={version}",
+        ),
+        *_require(
+            "docs/index.md",
+            f"{default_count} tools by default",
+            f"up to {full_count} when every gated family is configured",
         ),
         *_require(
             "docs/mcp-stdio.md",
@@ -140,9 +147,64 @@ def check_docs(default_count: int, full_count: int) -> list[str]:
     ]
 
 
+def _site_facts(default_count: int, full_count: int) -> dict[str, object]:
+    coverage = json.loads((ROOT / "coverage" / "coverage.json").read_text())
+    atlas = json.loads((ROOT / "coverage" / "atlas.json").read_text())
+    profiles = json.loads((ROOT / "coverage" / "profiles-snapshot" / "index.json").read_text())
+    coverage_summary = coverage["summary"]
+    atlas_summary = atlas["summary"]
+    catalog_records = len(list((ROOT / "catalog" / "sources").glob("**/*.md")))
+
+    return {
+        "schema_version": 1,
+        "release_version": _project_version(),
+        "mcp_tools": {
+            "default": default_count,
+            "all_configured": full_count,
+            "environment_gated": full_count - default_count,
+        },
+        "catalog": {
+            "canonical_records": catalog_records,
+            "projected_products": coverage_summary["total"],
+            "active_products": coverage_summary["by_status"]["active"],
+            "beta_products": coverage_summary["by_status"]["beta"],
+            "external_products": coverage_summary["by_status"]["external"],
+            "rights": len(coverage_summary["rights_covered"]),
+            "data_types": len(coverage_summary["data_types_covered"]),
+        },
+        "atlas": {
+            "entities": atlas_summary["total_entities"],
+            "shipped_entities": atlas_summary["by_connector_status"]["shipped"],
+            "researched_synopses": atlas_summary["synopses_filled"],
+        },
+        "profiles": {
+            "jurisdictions": profiles["total_profiles"],
+        },
+    }
+
+
+def _site_facts_text(default_count: int, full_count: int) -> str:
+    return json.dumps(_site_facts(default_count, full_count), indent=2, sort_keys=True) + "\n"
+
+
+def _check_site_facts(default_count: int, full_count: int) -> list[str]:
+    path = ROOT / "coverage" / "site-facts.json"
+    expected = _site_facts_text(default_count, full_count)
+    if not path.exists():
+        return ["coverage/site-facts.json: missing; run with --write-site-facts"]
+    if path.read_text() != expected:
+        return ["coverage/site-facts.json: stale; run with --write-site-facts"]
+    return []
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check-docs", action="store_true", help="Fail if docs are stale.")
+    parser.add_argument(
+        "--write-site-facts",
+        action="store_true",
+        help="Write coverage/site-facts.json for patentclient.com.",
+    )
     args = parser.parse_args()
 
     default_count = _count_tools(all_configured=False)
@@ -151,8 +213,16 @@ def main() -> int:
     print(f"all_configured={full_count}")
     print(f"env_gated={full_count - default_count}")
 
+    if args.write_site_facts:
+        path = ROOT / "coverage" / "site-facts.json"
+        path.write_text(_site_facts_text(default_count, full_count))
+        print(f"wrote={path.relative_to(ROOT)}")
+
     if args.check_docs:
-        errors = check_docs(default_count, full_count)
+        errors = [
+            *check_docs(default_count, full_count),
+            *_check_site_facts(default_count, full_count),
+        ]
         if errors:
             for error in errors:
                 print(error, file=sys.stderr)
