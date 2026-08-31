@@ -169,6 +169,31 @@ class TestPerClassCondition:
         assert ipos._per_class_condition("S$1,250") is None
 
 
+class TestRowCells:
+    def test_excludes_accessibility_only_external_link_text(self) -> None:
+        row = L.fromstring(
+            """
+            <tr>
+              <td>PF34</td>
+              <td>
+                Request under <a href="https://example.test">
+                  Section 34
+                  <span aria-hidden="true"> ↗</span>
+                  <span class="sr-only"> (opens in new tab)</span>
+                </a>
+              </td>
+              <td>S$100</td>
+            </tr>
+            """
+        )
+
+        assert ipos._row_cells(row) == [
+            "PF34",
+            "Request under Section 34",
+            "S$100",
+        ]
+
+
 class TestCategorizers:
     def test_patent_pf1_filing(self) -> None:
         assert (
