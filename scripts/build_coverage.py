@@ -226,6 +226,12 @@ AUTH_KINDS = {
     "account_required",
 }
 STATUSES = {"active", "beta", "planned", "candidate", "blocked", "external", "deprecated"}
+ATLAS_STANDALONE_REASONS = {
+    "adjudicative_body",
+    "cross_office_service",
+    "independent_legal_authority",
+    "out_of_scope",
+}
 
 # CONNECTOR_STANDARDS.md §6 closed vocabularies.
 #
@@ -336,6 +342,15 @@ def validate_source(
     status = source.get("status")
     if status and status not in STATUSES:
         fail(errors, path, f"status {status!r} not in {sorted(STATUSES)}")
+
+    standalone_reason = source.get("atlas_standalone_reason")
+    if standalone_reason is not None and standalone_reason not in ATLAS_STANDALONE_REASONS:
+        fail(
+            errors,
+            path,
+            "atlas_standalone_reason "
+            f"{standalone_reason!r} not in {sorted(ATLAS_STANDALONE_REASONS)}",
+        )
 
     if status in {"blocked", "deprecated", "candidate", "external"} and not source.get("notes"):
         fail(errors, path, f"status={status!r} requires a notes field explaining the rationale")
@@ -625,6 +640,27 @@ def _source_matches_entity(source_id: str, entity_id: str) -> bool:
     return source_id == entity_id or source_id.startswith(entity_id + "/")
 
 
+def _source_entity_id(
+    source_id: str,
+    state_entities: list[dict[str, Any]],
+) -> str | None:
+    """Resolve a source to its primary atlas entity.
+
+    Prefix matching preserves the established owner for ordinary source IDs.
+    ``manifest_ids`` is the explicit fallback for sources whose stable ID uses
+    a different authority prefix, such as ``CA/CanLII`` under ``CA/CIPO``.
+    """
+    entity_ids_sorted = sorted((e.get("id", "") for e in state_entities), key=len, reverse=True)
+    for entity_id in entity_ids_sorted:
+        if entity_id and _source_matches_entity(source_id, entity_id):
+            return entity_id
+
+    explicit = [
+        e.get("id", "") for e in state_entities if source_id in (e.get("manifest_ids") or [])
+    ]
+    return explicit[0] if len(explicit) == 1 else None
+
+
 def _region_for(entity: dict[str, Any]) -> str:
     layer = entity.get("layer", "")
     if layer == "multilateral":
@@ -656,16 +692,12 @@ def build_atlas_entities(
     state: dict[str, Any],
 ) -> list[dict[str, Any]]:
     state_entities = state.get("entities", [])
-    # Match sources to entities longest-prefix first so e.g.
-    # ``US/USPTO/ODP/Applications`` binds to ``US/USPTO`` rather than ``US``.
-    entity_ids_sorted = sorted((e.get("id", "") for e in state_entities), key=len, reverse=True)
-    sources_by_entity: dict[str, list[dict[str, Any]]] = {eid: [] for eid in entity_ids_sorted}
+    entity_ids = [e.get("id", "") for e in state_entities]
+    sources_by_entity: dict[str, list[dict[str, Any]]] = {eid: [] for eid in entity_ids}
     for src in sources:
-        sid = src.get("id", "")
-        for eid in entity_ids_sorted:
-            if eid and _source_matches_entity(sid, eid):
-                sources_by_entity[eid].append(src)
-                break
+        entity_id = _source_entity_id(src.get("id", ""), state_entities)
+        if entity_id:
+            sources_by_entity[entity_id].append(src)
 
     out: list[dict[str, Any]] = []
     for entity in state_entities:
@@ -715,17 +747,16 @@ def build_atlas_unattached_sources(
     sources: list[dict[str, Any]],
     state_entities: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    """Sources that don't bind to any STATE entity (third-party DBs, court
-    repositories, substantive-law corpora not tied to a registry office).
-    Kept as a separate top-level list so the office-centric atlas stays
-    clean.
+    """Return intentionally standalone sources outside the office atlas.
+
+    ``unattached_sources`` remains the public JSON key for compatibility, but
+    every row must now declare why it is standalone. An unexplained source is
+    a coverage-model error rather than an implicit backlog item.
     """
-    entity_ids_sorted = sorted((e.get("id", "") for e in state_entities), key=len, reverse=True)
     unattached = []
     for src in sources:
         sid = src.get("id", "")
-        matched = any(eid and _source_matches_entity(sid, eid) for eid in entity_ids_sorted)
-        if not matched:
+        if _source_entity_id(sid, state_entities) is None:
             unattached.append(src)
     return unattached
 
@@ -810,12 +841,24 @@ def main() -> int:
 
     state = yaml.safe_load(STATE_YAML.read_text()) if STATE_YAML.exists() else {"entities": []}
     atlas_payload = build_atlas_payload(sources, state)
+    unexplained_standalone = [
+        source.get("id", "")
+        for source in atlas_payload["unattached_sources"]
+        if not source.get("atlas_standalone_reason")
+    ]
+    if unexplained_standalone:
+        print(
+            "coverage-model error: standalone atlas sources require "
+            "atlas_standalone_reason: " + ", ".join(unexplained_standalone),
+            file=sys.stderr,
+        )
+        return 1
 
     if args.check:
         print(
             f"OK — {len(sources)} sources validated; "
             f"{len(atlas_payload['entities'])} atlas entities; "
-            f"{len(atlas_payload['unattached_sources'])} unattached sources"
+            f"{len(atlas_payload['unattached_sources'])} intentional standalone sources"
         )
         return 0
 
@@ -826,7 +869,7 @@ def main() -> int:
     print(
         f"Wrote {ATLAS_JSON.relative_to(ROOT)} — "
         f"{len(atlas_payload['entities'])} entities, "
-        f"{len(atlas_payload['unattached_sources'])} unattached sources"
+        f"{len(atlas_payload['unattached_sources'])} intentional standalone sources"
     )
     return 0
 

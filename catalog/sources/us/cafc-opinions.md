@@ -34,6 +34,7 @@ connector:
   blockers: []
 category: adjudicative_records
 coverage:
+  atlas_standalone_reason: independent_legal_authority
   order: 43
   name: U.S. Court of Appeals for the Federal Circuit — Opinions
   last_verified: 2026-05-15
