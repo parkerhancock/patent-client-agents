@@ -19,6 +19,9 @@ sign-in. Any verified Google account can request access.
 }
 ```
 
+After sign-in, complete [your first research task](first-research-task.md) to
+verify that the service can retrieve a public patent record with provenance.
+
 ## Usage limits
 
 The service applies byte limits to each authenticated account:

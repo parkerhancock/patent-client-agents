@@ -170,13 +170,9 @@ Antigravity: /mcp
 
 Expect `patent-client-agents` with 136 tools by default. Local/private
 servers expose up to 234 tools when all env-gated families are configured
-with their corresponding credentials. Or call one directly by asking something
-patent-research-ish:
-
-> "What's in MPEP section 2106?"
-
-Claude invokes `get_mpep_section` via the MCP server and returns the
-text of MPEP 2106: Patent Subject Matter Eligibility.
+with their corresponding credentials. Then complete
+[your first research task](../first-research-task.md), a live patent lookup
+that works without an API key or local corpus.
 
 ## Troubleshooting
 

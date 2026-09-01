@@ -8,7 +8,11 @@ managing a local Python install.
 
 ## Use the public hosted service
 
-The public endpoint is `https://mcp.patentclient.com/mcp`. Read the [hosted service guide](../hosted-demo.md) before using it for limits, tool availability, and confidentiality guidance.
+The public endpoint is `https://mcp.patentclient.com/mcp`. Read the
+[hosted service guide](../hosted-demo.md) before using it for limits, tool
+availability, and confidentiality guidance. After connecting, complete
+[your first research task](../first-research-task.md) to verify the session
+with a public patent record.
 
 ## Connect cloud-only clients
 

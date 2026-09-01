@@ -448,15 +448,19 @@ async def main():
     async with Client(StdioTransport(command="patent-client-agents-mcp", args=[])) as c:
         tools = await c.list_tools()
         print(f"{len(tools)} tools")
-        result = await c.call_tool("get_mpep_section", {"section": "2106"})
-        print(result.data.get("title"))
+        result = await c.call_tool(
+            "get_patent",
+            {"patent_number": "US10000000B2", "view": "details"},
+        )
+        print(result.data.items[0]["title"])
 
 asyncio.run(main())
 ```
 
 Expect **136 tools** by default. Local/private servers expose up to
-**234 tools** when every env-gated family is configured. Title starts
-with `2106 ... Patent Subject Matter Eligibility`.
+**234 tools** when every env-gated family is configured. The expected title is
+`Coherent LADAR using intra-pixel quadrature detection`. Agent users can run
+the equivalent [first research task](../first-research-task.md) as a prompt.
 
 ## Troubleshooting
 
