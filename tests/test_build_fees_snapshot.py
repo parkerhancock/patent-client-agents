@@ -25,7 +25,9 @@ async def test_all_scraper_failures_leave_index_untouched(
     index = tmp_path / "index.json"
     index.write_text('{"total_schedules": 12}\n')
 
-    async def all_failed(only: set[str] | None) -> tuple[list[dict], list[tuple[str, str]]]:
+    async def all_failed(
+        only: set[str] | None, *, write_files: bool
+    ) -> tuple[list[dict], list[tuple[str, str]]]:
         return [], [("USPTO", "patent")]
 
     monkeypatch.setattr(build_fees_snapshot, "SNAPSHOT_DIR", tmp_path)
@@ -43,7 +45,9 @@ async def test_empty_build_without_reported_failures_leaves_index_untouched(
     index = tmp_path / "index.json"
     index.write_text('{"total_schedules": 12}\n')
 
-    async def empty_build(only: set[str] | None) -> tuple[list[dict], list[tuple[str, str]]]:
+    async def empty_build(
+        only: set[str] | None, *, write_files: bool
+    ) -> tuple[list[dict], list[tuple[str, str]]]:
         return [], []
 
     monkeypatch.setattr(build_fees_snapshot, "SNAPSHOT_DIR", tmp_path)
@@ -60,6 +64,8 @@ async def test_partial_success_writes_index_and_returns_partial_status(
 ) -> None:
     async def partly_succeeded(
         only: set[str] | None,
+        *,
+        write_files: bool,
     ) -> tuple[list[dict], list[tuple[str, str]]]:
         return [{"office_code": "EPO"}], [("USPTO", "patent")]
 
@@ -69,6 +75,32 @@ async def test_partial_success_writes_index_and_returns_partial_status(
 
     assert await build_fees_snapshot._main() == 1
     assert '"total_schedules": 1' in (tmp_path / "index.json").read_text()
+
+
+@pytest.mark.asyncio
+async def test_check_mode_does_not_modify_snapshot_files(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    index = tmp_path / "index.json"
+    index.write_text('{"total_schedules": 12}\n')
+
+    def check_args() -> Namespace:
+        return Namespace(check=True, offices=None)
+
+    async def succeeded_without_writing(
+        only: set[str] | None,
+        *,
+        write_files: bool,
+    ) -> tuple[list[dict], list[tuple[str, str]]]:
+        assert write_files is False
+        return [{"office_code": "EPO"}], []
+
+    monkeypatch.setattr(build_fees_snapshot, "SNAPSHOT_DIR", tmp_path)
+    monkeypatch.setattr(build_fees_snapshot, "_parse_args", check_args)
+    monkeypatch.setattr(build_fees_snapshot, "_build_all", succeeded_without_writing)
+
+    assert await build_fees_snapshot._main() == 0
+    assert index.read_text() == '{"total_schedules": 12}\n'
 
 
 def test_turkpatent_fixtures_do_not_contain_live_google_keys() -> None:
@@ -108,3 +140,4 @@ def test_fee_snapshot_workflow_opens_review_pr() -> None:
     assert "gh pr list" in pr_step["run"]
     assert "gh pr edit" in pr_step["run"]
     assert "gh pr create" in pr_step["run"]
+    assert "approve its CI run" in pr_step["run"]

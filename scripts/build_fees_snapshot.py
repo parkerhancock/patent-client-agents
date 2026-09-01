@@ -50,11 +50,14 @@ async def _build_one(
     )
 
 
-async def _build_all(only: set[str] | None) -> tuple[list[dict], list[tuple[str, str]]]:
+async def _build_all(
+    only: set[str] | None, *, write_files: bool = True
+) -> tuple[list[dict], list[tuple[str, str]]]:
     """Run every scraper and return (meta_rows, failures)."""
     meta_rows: list[dict] = []
     failures: list[tuple[str, str]] = []
-    SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
+    if write_files:
+        SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
 
     for (office, right), scraper in _DISPATCH.items():
         if only and office not in only:
@@ -65,8 +68,9 @@ async def _build_all(only: set[str] | None) -> tuple[list[dict], list[tuple[str,
             failures.append((office, right.value))
             print("FAIL")
             continue
-        out = SNAPSHOT_DIR / f"{office}-{right.value}.json"
-        out.write_text(json.dumps(schedule_dict, indent=2, sort_keys=True) + "\n")
+        if write_files:
+            out = SNAPSHOT_DIR / f"{office}-{right.value}.json"
+            out.write_text(json.dumps(schedule_dict, indent=2, sort_keys=True) + "\n")
         meta_rows.append(meta_dict)
         print(f"ok ({len(schedule_dict['fees'])} fees)")
 
@@ -123,13 +127,11 @@ async def _main() -> int:
     if args.check:
         print("(--check mode: not writing files)")
 
-    meta_rows, failures = await _build_all(only)
+    meta_rows, failures = await _build_all(only, write_files=not args.check)
 
     if args.check:
-        # Throw away artifacts written during --check; re-running without
-        # --check is the path to actually publish.
-        for path in SNAPSHOT_DIR.glob("*.json"):
-            path.unlink()
+        # Re-running without --check is the path to actually publish.
+        print("Check complete; no snapshot files written.")
     elif not meta_rows:
         # Keep the last known-good index. The nightly workflow treats this
         # result as a hard failure and must not publish an empty index.
