@@ -199,7 +199,12 @@ class IPOSFeesClient(BaseAsyncClient):
 # Money parsing
 # ──────────────────────────────────────────────────────────────────────
 
-_SGD_AMOUNT_RE = re.compile(r"S?\$\s*(\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?)")
+_SGD_TOKEN = r"(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d{1,2})?"
+_SGD_AMOUNT_RE = re.compile(rf"S?\$\s*({_SGD_TOKEN})")
+_PER_CLAIM_AMOUNT_RE = re.compile(
+    rf"S?\$\s*({_SGD_TOKEN})\s+for each claim",
+    re.IGNORECASE,
+)
 
 
 def _parse_sgd_amounts(raw: str) -> list[Decimal]:
@@ -217,6 +222,14 @@ def _parse_sgd_amounts(raw: str) -> list[Decimal]:
         except Exception:
             pass
     return out
+
+
+def _per_claim_amount(raw: str) -> Decimal | None:
+    """Return the amount immediately attached to a per-claim surcharge."""
+    match = _PER_CLAIM_AMOUNT_RE.search(raw)
+    if match is None:
+        return None
+    return Decimal(match.group(1).replace(",", ""))
 
 
 def _has_no_fee(raw: str) -> bool:
@@ -554,6 +567,19 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
 
             base_category = _categorize_patent(form, description)
             claim_condition = _per_claim_condition(fee_text)
+            acceleration_marker = "additional fee for request for patent acceleration"
+            has_acceleration = acceleration_marker in description.lower()
+            acceleration_amounts: list[Decimal] = []
+            standard_amounts = amounts
+            if has_acceleration:
+                if description.lower().startswith(acceleration_marker):
+                    standard_amounts = []
+                    acceleration_amounts = amounts
+                elif len(amounts) >= 4:
+                    # PF12 concatenates base, per-claim, Fast 4, and Fast 8
+                    # amounts into one DOM cell.
+                    standard_amounts = amounts[:-2]
+                    acceleration_amounts = amounts[-2:]
 
             # PF15 renewal-year expansion.
             if base_category is FeeCategory.renewal:
@@ -577,7 +603,7 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
                 continue
 
             # Standard rows: emit one FeeItem per amount.
-            for idx, amount in enumerate(amounts):
+            for idx, amount in enumerate(standard_amounts):
                 suffix = "" if idx == 0 else f"v{idx + 1}"
                 code = _unique(_slug("sg-pat", form, description[:40], suffix), seen_codes)
                 fees.append(
@@ -592,12 +618,31 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
                     )
                 )
 
+            acceleration_variants = (
+                ["SG Patents Fast 4", "SG Patents Fast 8"]
+                if len(acceleration_amounts) == 2
+                else ["Patent acceleration"] * len(acceleration_amounts)
+            )
+            for amount, variant in zip(acceleration_amounts, acceleration_variants, strict=True):
+                code = _unique(_slug("sg-pat", form, "acceleration", variant), seen_codes)
+                fees.append(
+                    _mk_patent_fee(
+                        code=code,
+                        label=f"{form}: Additional fee for {variant}",
+                        category=base_category,
+                        amount=amount,
+                        year=None,
+                        condition=None,
+                        notes=None,
+                    )
+                )
+
             # Excess-claims surcharge — emit as a separate row when the
             # cell describes per-claim surcharge in addition to the base.
             if claim_condition is not None and len(amounts) >= 2:
-                # The per-claim amount is typically the SECOND $ in the
-                # cell ("S$2,050 plus S$80 for each claim over 15").
-                surcharge_amount = amounts[-1]
+                surcharge_amount = _per_claim_amount(fee_text)
+                if surcharge_amount is None:
+                    continue
                 code = _unique(
                     _slug("sg-pat", form, "excess-claims"),
                     seen_codes,

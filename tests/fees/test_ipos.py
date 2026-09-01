@@ -313,6 +313,45 @@ class TestBuildPatentFees:
         assert cond.trigger == ConditionalTrigger.claims_over
         assert cond.threshold == 15
 
+    def test_acceleration_fees_keep_four_digit_amounts_and_claim_surcharge(self) -> None:
+        doc = L.fromstring(
+            b"""
+            <table>
+              <tr><th>Form</th><th>Description</th><th>Fee</th></tr>
+              <tr>
+                <td>PF11</td>
+                <td>Request for Search and Examination Report</td>
+                <td>S$1,750 plus S$80 for each claim over 15 claims</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Additional fee for request for patent acceleration</td>
+                <td>$1800.00$900.00</td>
+              </tr>
+              <tr>
+                <td>PF12</td>
+                <td>Request for Examination Report Additional fee for request for patent
+                    acceleration</td>
+                <td>S$1,420 plus S$80 for each claim over 15 claims$1200.00$600.00</td>
+              </tr>
+            </table>
+            """
+        )
+
+        fees = ipos._build_patent_fees(doc)
+
+        acceleration = {fee.label: fee.amount for fee in fees if "Fast" in fee.label}
+        assert acceleration == {
+            "PF11: Additional fee for SG Patents Fast 4": Decimal("1800.00"),
+            "PF11: Additional fee for SG Patents Fast 8": Decimal("900.00"),
+            "PF12: Additional fee for SG Patents Fast 4": Decimal("1200.00"),
+            "PF12: Additional fee for SG Patents Fast 8": Decimal("600.00"),
+        }
+        pf12_surcharge = next(fee for fee in fees if fee.code == "sg-pat-pf12-excess-claims")
+        assert pf12_surcharge.amount == Decimal("80")
+        assert Decimal("120") not in {fee.amount for fee in fees}
+        assert Decimal("180") not in {fee.amount for fee in fees}
+
     def test_pf15_year_band_5_to_7_at_176(self, patent_doc) -> None:
         fees = ipos._build_patent_fees(patent_doc)
         y5_7 = [
