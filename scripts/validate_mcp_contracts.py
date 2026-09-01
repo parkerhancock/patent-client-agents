@@ -198,8 +198,9 @@ def _validate_provenance_schema(name: str, output_schema: Any) -> list[str]:
 async def _run() -> int:
     for name, value in CONTRACT_ENV.items():
         os.environ.setdefault(name, value)
-    import patent_client_agents.mcp as mcp_package
-    from patent_client_agents.mcp import ip_mcp
+    import patent_client_agents.mcp.full as mcp_package
+
+    ip_mcp = mcp_package.ip_mcp
 
     tools = await ip_mcp.list_tools()
     errors = validate_tools(tools)
