@@ -106,7 +106,7 @@ jobs:
         run: |
           AUTOMATION_BRANCH="automation/fees-snapshot"
           PR_TITLE="chore(fees): nightly snapshot"
-          PR_BODY="Automated nightly fee snapshot refresh. Review the changed schedules and recorded scraper failures before merge."
+          PR_BODY="Automated nightly fee snapshot refresh. Review the changed schedules and recorded scraper failures before merge. Because this PR is created by GitHub Actions, a maintainer must approve its CI run before the required checks start."
           PR_URL=$(gh pr list \
             --base main \
             --head "$AUTOMATION_BRANCH" \

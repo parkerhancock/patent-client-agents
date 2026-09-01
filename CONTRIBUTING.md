@@ -68,3 +68,10 @@ use a stored PyPI API token.
    push the tag.
 4. Confirm that the tag verification, three-version test matrix, package build,
    and OIDC publish jobs complete successfully.
+5. Run the Satchel release check and clean-copy host smoke commands documented
+   in `docs/installation.md` against the tagged commit.
+6. After PyPI publishes the version, install the plugin in fresh Claude Code,
+   Codex, and Antigravity profiles. Confirm that each host sees 136 default
+   tools and can retrieve MPEP section 2106 without credentials.
+7. Create the GitHub Release from the tag. Use the matching `CHANGELOG.md`
+   entry for the release notes and link to the published PyPI version.
