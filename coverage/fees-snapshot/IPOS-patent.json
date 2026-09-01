@@ -223,6 +223,36 @@
       "year": null
     },
     {
+      "amount": "1800.00",
+      "category": "search",
+      "code": "sg-pat-pf11-acceleration-sg-patents-fast-4",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF11: Additional fee for SG Patents Fast 4",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "900.00",
+      "category": "search",
+      "code": "sg-pat-pf11-acceleration-sg-patents-fast-8",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF11: Additional fee for SG Patents Fast 8",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
       "amount": "1420",
       "category": "examination",
       "code": "sg-pat-pf12-request-for-examination-reportsave-on-of",
@@ -244,6 +274,36 @@
       "condition": null,
       "currency": "SGD",
       "label": "PF12: Request for Examination ReportSave on official examination fees under the PPH pilot. Find out more",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "1200.00",
+      "category": "examination",
+      "code": "sg-pat-pf12-acceleration-sg-patents-fast-4",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF12: Additional fee for SG Patents Fast 4",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "600.00",
+      "category": "examination",
+      "code": "sg-pat-pf12-acceleration-sg-patents-fast-8",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF12: Additional fee for SG Patents Fast 8",
       "notes": null,
       "rights": [
         "patent"
@@ -294,6 +354,21 @@
       "condition": null,
       "currency": "SGD",
       "label": "PF13A: Response to written opinion or a response to an invitation to amend (whether amending the specification of the application or rejecting the invitation) \u2014 For PF11, PF12 or PF12A filed on or aft",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "150",
+      "category": "examination",
+      "code": "sg-pat-pf13a-acceleration-patent-acceleration",
+      "condition": null,
+      "currency": "SGD",
+      "label": "PF13A: Additional fee for Patent acceleration",
       "notes": null,
       "rights": [
         "patent"
@@ -1893,7 +1968,7 @@
   "key": "SG/IPOS/patent",
   "notes": "PF15 renewal expands across seven year-bands (5-7 / 8-10 / 11-13 / 14-16 / 17-19 / 20 / post-20) emitting one FeeItem per year. PF11/PF12 per-claim surcharge at S$80/claim over 15 claims emits as a separate FeeCategory.excess_claims row with FeeCondition(claims_over, threshold=15, per_unit=True). PF14 multi-branch grant fee collapses to per-amount extraction; consumers needing the conditional logic should consult IPOS Patents Circular 3/2025 Annex A.",
   "office_code": "IPOS",
-  "retrieved_at": "2026-08-31",
+  "retrieved_at": "2026-09-01",
   "right": "patent",
   "source_url": "https://www.ipos.gov.sg/about-ip/patents/forms-and-fees-singapore/",
   "statutory_basis": "Patents Act 1994 (Singapore) + Patents Rules (SSO SL/PA1994-R1) First Schedule 'Fees payable'. Two-phase reform consolidated by Patents Circular 3/2025 (21 July 2025); first tranche effective 2025-09-01, second tranche effective 2026-04-01."
