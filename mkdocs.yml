@@ -86,7 +86,12 @@ hooks:
 nav:
   - Home: index.md
   - Get started:
-    - Installation: installation.md
+    - Choose a setup: installation.md
+    - Agent plugins: install/agent-plugins.md
+    - Python library: install/python.md
+    - Credentials and corpora: install/local-runtime.md
+    - Other MCP clients: install/mcp-clients.md
+    - Remote MCP: install/remote-mcp.md
     - Hosted service: hosted-demo.md
     - Local MCP server: mcp-stdio.md
   # Patent Client Index: children injected by docs_hooks/sync_patent_client_index.py

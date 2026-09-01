@@ -4,8 +4,8 @@ The `[mcp]` extra ships a ready-to-run stdio MCP server that exposes
 all patent and IP tools to any MCP-speaking client — Claude Code,
 OpenAI Codex CLI, Google Antigravity CLI, Claude Desktop, Google Gemini CLI, Cursor, Windsurf,
 Cline, Zed, Continue.dev, VS Code Copilot Chat, JetBrains AI Assistant,
-CoWork, or a homegrown fastmcp Client. See
-[installation.md §5](installation.md#5-stdio-mcp-from-any-mcp-client)
+CoWork, or a homegrown fastmcp Client. See the
+[MCP client configuration guide](install/mcp-clients.md)
 for per-client config snippets.
 
 ## Install
@@ -36,8 +36,8 @@ fastmcp run patent_client_agents.mcp.server:mcp
 Native plugin packages for Claude Code, Codex CLI, and Antigravity CLI,
 plus per-client config locations and exact syntax for Gemini CLI,
 Cursor, Windsurf, Cline, Zed, Continue.dev, VS Code Copilot Chat,
-JetBrains AI, and Claude Desktop are in
-[installation.md §5](installation.md#5-stdio-mcp-from-any-mcp-client).
+JetBrains AI, and Claude Desktop are in the
+[MCP client configuration guide](install/mcp-clients.md).
 The JSON below is the common stdio shape used by Claude Code and
 Antigravity CLI. Codex expresses the same fields in TOML.
 
@@ -71,7 +71,8 @@ If you prefer to invoke a specific venv or Python interpreter:
 The server starts with no authentication in stdio mode. Any env vars
 set in the `env` block are available to the connectors — USPTO ODP,
 EPO OPS, and JPO all consume credentials from env (see each connector's
-`CATALOG.md` entry).
+`CATALOG.md` entry). The [local source access guide](install/local-runtime.md)
+lists the supported credentials and corpus builders.
 
 ## Tools exposed
 
