@@ -1,6 +1,6 @@
 {
   "currency": "EUR",
-  "effective_date": "2026-04-27",
+  "effective_date": "2026-07-02",
   "fees": [
     {
       "amount": "26",
@@ -9,7 +9,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "D\u00e9p\u00f4t d'une demande de brevet ou de certificat d'utilit\u00e9 (inclut premi\u00e8re annuit\u00e9)",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -39,7 +39,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "D\u00e9p\u00f4t d'une demande de certificat compl\u00e9mentaire de protection (SPC)",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -54,7 +54,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Prorogation d'un certificat compl\u00e9mentaire de protection (usage p\u00e9diatrique)",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -69,7 +69,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Rapport de recherche",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -99,7 +99,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Rapport de recherche fond\u00e9 sur priorit\u00e9 \u00e9trang\u00e8re \u00e9quivalente",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -114,7 +114,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Nouvelles revendications entra\u00eenant rapport de recherche compl\u00e9mentaire",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -149,7 +149,7 @@
       },
       "currency": "EUR",
       "label": "Revendication \u00e0 partir de la 11\u00e8me (excess-claims surcharge)",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -184,7 +184,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Rectification d'erreurs mat\u00e9rielles par requ\u00eate",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -199,7 +199,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Requ\u00eate en poursuite de proc\u00e9dure",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -228,8 +228,8 @@
       "code": "inpi-fr-patent-grant-l",
       "condition": null,
       "currency": "EUR",
-      "label": "D\u00e9livrance et impression du fascicule",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "label": "D\u00e9livrance",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -243,7 +243,7 @@
       "code": "inpi-fr-patent-grant-s",
       "condition": null,
       "currency": "EUR",
-      "label": "D\u00e9livrance et impression du fascicule (tarif r\u00e9duit)",
+      "label": "D\u00e9livrance (tarif r\u00e9duit)",
       "notes": "INPI France reduced rate (personnes physiques, organismes de recherche / enseignement, entreprises <1000 salari\u00e9s et capital <25% non-qualifying).",
       "rights": [
         "patent"
@@ -259,7 +259,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Requ\u00eate en limitation",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -289,7 +289,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Opposition \u00e0 un brevet",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -304,7 +304,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Redevance annuelle de maintien en vigueur d'un SPC (et prorogation)",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -319,7 +319,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Recours en restauration",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -334,7 +334,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Publication de traduction des revendications d'un brevet europ\u00e9en",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -349,7 +349,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "\u00c9tablissement et transmission de copies d'une demande EP aux Etats destinataires",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -364,7 +364,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Transmission d'une demande internationale PCT",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "patent"
       ],
@@ -753,7 +753,7 @@
   "key": "FR/INPI-FR/patent",
   "notes": "INPI France patent + utility-certificate + SPC fees in EUR. Annuities 2-20 are extracted from the PDF; reduced rates are reliably captured for years 2-7 only (years 8-20 reduced rates exist in the source but pypdf drops the second column for those rows). The reduced rate applies to natural persons, non-profit research/education organisations, and companies <1000 employees with <25% non-qualifying capital. SPC annual fee (\u20ac950) is treated as year=21 since it covers extension beyond the 20-year patent term. v1 GAPS: register admin fees (REGISTRES NATIONAUX), GI fees, and semiconductor-topography fees are out of scope.",
   "office_code": "INPI-FR",
-  "retrieved_at": "2026-07-02",
+  "retrieved_at": "2026-09-01",
   "right": "patent",
   "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi",
   "statutory_basis": "Code de la propri\u00e9t\u00e9 intellectuelle (CPI) Articles R.411-17 et seq.; arr\u00eat\u00e9s fixant les redevances per\u00e7ues par l'INPI."

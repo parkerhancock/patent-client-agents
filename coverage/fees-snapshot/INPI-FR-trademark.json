@@ -1,6 +1,6 @@
 {
   "currency": "EUR",
-  "effective_date": "2026-04-27",
+  "effective_date": "2026-07-02",
   "fees": [
     {
       "amount": "190",
@@ -14,7 +14,7 @@
       },
       "currency": "EUR",
       "label": "D\u00e9p\u00f4t de marque pour une classe",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -34,7 +34,7 @@
       },
       "currency": "EUR",
       "label": "D\u00e9p\u00f4t de marque collective ou de garantie pour une classe",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -54,7 +54,7 @@
       },
       "currency": "EUR",
       "label": "Par classe de produit ou de services au-del\u00e0 de la premi\u00e8re",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -69,7 +69,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "R\u00e9gularisation, rectification d'erreur mat\u00e9rielle (marques)",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -84,7 +84,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Opposition \u00e0 une marque",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -99,7 +99,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Requ\u00eate en nullit\u00e9 ou d\u00e9ch\u00e9ance d'une marque",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -119,7 +119,7 @@
       },
       "currency": "EUR",
       "label": "Renouvellement de marque pour une classe (10-year cycle)",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -139,7 +139,7 @@
       },
       "currency": "EUR",
       "label": "Renouvellement de marque collective/garantie pour une classe",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -154,7 +154,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Requ\u00eate en relev\u00e9 de d\u00e9ch\u00e9ance (marques)",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -169,7 +169,7 @@
       "condition": null,
       "currency": "EUR",
       "label": "Division d'une marque",
-      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 27 avril 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
+      "notes": "INPI France 'Tarifs des proc\u00e9dures applicables au 2 juillet 2026'. Source PDF discovered via the landing page anchor; the inpi-block download URL is the canonical fetch path.",
       "rights": [
         "trademark"
       ],
@@ -183,7 +183,7 @@
   "key": "FR/INPI-FR/trademark",
   "notes": "INPI France trademark fees per-class (Nice classification) in EUR on a 10-year renewal cycle. Additional-class surcharge \u20ac40 per class beyond the first. Collective/guarantee marks have their own base rate. Madrid international application fees live in a separate PDF (id=20520) \u2014 not modeled in v1.",
   "office_code": "INPI-FR",
-  "retrieved_at": "2026-08-31",
+  "retrieved_at": "2026-09-01",
   "right": "trademark",
   "source_url": "https://www.inpi.fr/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi",
   "statutory_basis": "Code de la propri\u00e9t\u00e9 intellectuelle (CPI) Articles R.411-17 et seq."
