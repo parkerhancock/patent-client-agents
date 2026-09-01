@@ -183,7 +183,7 @@ def check_docs(default_count: int, full_count: int) -> list[str]:
             f"patent-client-agents[mcp]=={version}",
         ),
         *_require(
-            "src/patent_client_agents/mcp/__init__.py",
+            "src/patent_client_agents/mcp/full.py",
             f"{default_count} default read-only tools",
             f"{full_count} tools",
         ),
