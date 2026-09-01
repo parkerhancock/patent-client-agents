@@ -18,6 +18,9 @@ Antigravity. It installs the same Satchel-generated package in each host. Use a
 direct MCP configuration when you need another client or want to control the
 server command yourself.
 
+After setup, run [your first research task](first-research-task.md) to verify a
+live, source-backed patent lookup without adding an API key or local corpus.
+
 ## 1. Python library
 
 Install the base package when Python code will call the clients directly. The

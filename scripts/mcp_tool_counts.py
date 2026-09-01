@@ -112,11 +112,40 @@ def check_docs(default_count: int, full_count: int) -> list[str]:
             f"Add {default_count} patent + trademark + adjacent-IP MCP tools",
             f"up to {full_count} tools",
             f"patent-client-agents[mcp]=={version}",
+            "../first-research-task.md",
         ),
         *_require(
             "docs/install/mcp-clients.md",
             f"Expect **{default_count} tools** by default",
             f"up to **{full_count} tools**",
+            "get_patent",
+            "US10000000B2",
+        ),
+        *_require(
+            "docs/first-research-task.md",
+            "get_patent",
+            "US10000000B2",
+            "Coherent LADAR using intra-pixel quadrature detection",
+            "https://patents.google.com/patent/US10000000B2",
+            "Claude Code",
+            "OpenAI Codex",
+            "Google Antigravity",
+        ),
+        *_require(
+            "docs/installation.md",
+            "first-research-task.md",
+        ),
+        *_require(
+            "docs/hosted-demo.md",
+            "first-research-task.md",
+        ),
+        *_require(
+            "docs/install/remote-mcp.md",
+            "../first-research-task.md",
+        ),
+        *_require(
+            "mkdocs.yml",
+            "Your first research task: first-research-task.md",
         ),
         *_require(
             "docs/index.md",

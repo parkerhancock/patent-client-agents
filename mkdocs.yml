@@ -87,6 +87,7 @@ nav:
   - Home: index.md
   - Get started:
     - Choose a setup: installation.md
+    - Your first research task: first-research-task.md
     - Agent plugins: install/agent-plugins.md
     - Python library: install/python.md
     - Credentials and corpora: install/local-runtime.md
