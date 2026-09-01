@@ -568,11 +568,15 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
             base_category = _categorize_patent(form, description)
             claim_condition = _per_claim_condition(fee_text)
             acceleration_marker = "additional fee for request for patent acceleration"
-            has_acceleration = acceleration_marker in description.lower()
+            description_lower = description.lower()
+            has_acceleration = acceleration_marker in description_lower
             acceleration_amounts: list[Decimal] = []
             standard_amounts = amounts
+            standard_description = description
             if has_acceleration:
-                if description.lower().startswith(acceleration_marker):
+                if description_lower.startswith(acceleration_marker) or (
+                    f" — {acceleration_marker}" in description_lower
+                ):
                     standard_amounts = []
                     acceleration_amounts = amounts
                 elif len(amounts) >= 4:
@@ -580,6 +584,8 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
                     # amounts into one DOM cell.
                     standard_amounts = amounts[:-2]
                     acceleration_amounts = amounts[-2:]
+                    marker_index = description_lower.index(acceleration_marker)
+                    standard_description = description[:marker_index].rstrip(" —")
 
             # PF15 renewal-year expansion.
             if base_category is FeeCategory.renewal:
@@ -605,11 +611,11 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
             # Standard rows: emit one FeeItem per amount.
             for idx, amount in enumerate(standard_amounts):
                 suffix = "" if idx == 0 else f"v{idx + 1}"
-                code = _unique(_slug("sg-pat", form, description[:40], suffix), seen_codes)
+                code = _unique(_slug("sg-pat", form, standard_description[:40], suffix), seen_codes)
                 fees.append(
                     _mk_patent_fee(
                         code=code,
-                        label=f"{form}: {description}",
+                        label=f"{form}: {standard_description}",
                         category=base_category,
                         amount=amount,
                         year=None,

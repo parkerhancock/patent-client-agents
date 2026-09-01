@@ -334,6 +334,16 @@ class TestBuildPatentFees:
                     acceleration</td>
                 <td>S$1,420 plus S$80 for each claim over 15 claims$1200.00$600.00</td>
               </tr>
+              <tr>
+                <td>PF13A</td>
+                <td>Response to written opinion</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Additional fee for request for patent acceleration</td>
+                <td>$150</td>
+              </tr>
             </table>
             """
         )
@@ -349,6 +359,13 @@ class TestBuildPatentFees:
         }
         pf12_surcharge = next(fee for fee in fees if fee.code == "sg-pat-pf12-excess-claims")
         assert pf12_surcharge.amount == Decimal("80")
+        pf12_base = next(fee for fee in fees if fee.amount == Decimal("1420"))
+        assert pf12_base.label == "PF12: Request for Examination Report"
+        pf13_acceleration = next(
+            fee for fee in fees if fee.code == "sg-pat-pf13a-acceleration-patent-acceleration"
+        )
+        assert pf13_acceleration.label == "PF13A: Additional fee for Patent acceleration"
+        assert pf13_acceleration.amount == Decimal("150")
         assert Decimal("120") not in {fee.amount for fee in fees}
         assert Decimal("180") not in {fee.amount for fee in fees}
 
