@@ -48,6 +48,7 @@ separate route when needed.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import re
 from datetime import date
@@ -73,6 +74,7 @@ KIPO_FEES_URL = "https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01"
 KIPO_TM_DES_FEES_URL = "https://www.kipo.go.kr/en/HtmlApp?c=93006&catmenu=ek04_04_01"
 
 KIPO_EFFECTIVE_DATE = date(2023, 8, 1)
+KIPO_REQUEST_DEADLINE_SECONDS = 45.0
 
 
 class KIPOFeesClient(BaseAsyncClient):
@@ -104,25 +106,36 @@ class KIPOFeesClient(BaseAsyncClient):
         )
         super().__init__(**kwargs)
 
+    async def _fetch_page(self, *, c: str, catmenu: str, context: str) -> str:
+        try:
+            async with asyncio.timeout(KIPO_REQUEST_DEADLINE_SECONDS):
+                response = await self._request(
+                    "GET",
+                    "/en/HtmlApp",
+                    params={"c": c, "catmenu": catmenu},
+                    context=context,
+                )
+        except TimeoutError as exc:
+            raise TimeoutError(
+                f"KIPO fee page request exceeded {KIPO_REQUEST_DEADLINE_SECONDS:g} seconds"
+            ) from exc
+        return response.text
+
     async def fetch_html(self) -> str:
         """Fetch the patents + utility models + PCT fees page."""
-        r = await self._request(
-            "GET",
-            "/en/HtmlApp",
-            params={"c": "92004", "catmenu": "ek03_04_01"},
+        return await self._fetch_page(
+            c="92004",
+            catmenu="ek03_04_01",
             context="kipo_fees",
         )
-        return r.text
 
     async def fetch_tm_des_html(self) -> str:
         """Fetch the trademarks + designs fees page."""
-        r = await self._request(
-            "GET",
-            "/en/HtmlApp",
-            params={"c": "93006", "catmenu": "ek04_04_01"},
+        return await self._fetch_page(
+            c="93006",
+            catmenu="ek04_04_01",
             context="kipo_tm_des_fees",
         )
-        return r.text
 
 
 # ──────────────────────────────────────────────────────────────────────

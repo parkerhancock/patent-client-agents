@@ -1,7 +1,9 @@
 """Regression tests for the nightly fee snapshot publication policy."""
 
+import json
 import re
 from argparse import Namespace
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -67,7 +69,7 @@ async def test_partial_success_writes_index_and_returns_partial_status(
         *,
         write_files: bool,
     ) -> tuple[list[dict], list[tuple[str, str]]]:
-        return [{"office_code": "EPO"}], [("USPTO", "patent")]
+        return [{"office_code": "EPO", "right": "patent"}], [("USPTO", "patent")]
 
     monkeypatch.setattr(build_fees_snapshot, "SNAPSHOT_DIR", tmp_path)
     monkeypatch.setattr(build_fees_snapshot, "_parse_args", _args)
@@ -75,6 +77,48 @@ async def test_partial_success_writes_index_and_returns_partial_status(
 
     assert await build_fees_snapshot._main() == 1
     assert '"total_schedules": 1' in (tmp_path / "index.json").read_text()
+
+
+@pytest.mark.asyncio
+async def test_partial_success_retains_last_known_good_failed_schedule(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    retrieved_at = date(2026, 8, 31)
+    prior_kipo = {
+        "office_code": "KIPO",
+        "right": "patent",
+        "retrieved_at": retrieved_at.isoformat(),
+        "days_since_retrieval": 0,
+    }
+    (tmp_path / "index.json").write_text(
+        json.dumps({"schedules": [prior_kipo], "total_schedules": 1})
+    )
+    (tmp_path / "KIPO-patent.json").write_text("{}")
+
+    async def partly_succeeded(
+        only: set[str] | None,
+        *,
+        write_files: bool,
+    ) -> tuple[list[dict], list[tuple[str, str]]]:
+        return [
+            {
+                "office_code": "EPO",
+                "right": "patent",
+                "retrieved_at": date.today().isoformat(),
+                "days_since_retrieval": 0,
+            }
+        ], [("KIPO", "patent")]
+
+    monkeypatch.setattr(build_fees_snapshot, "SNAPSHOT_DIR", tmp_path)
+    monkeypatch.setattr(build_fees_snapshot, "_parse_args", _args)
+    monkeypatch.setattr(build_fees_snapshot, "_build_all", partly_succeeded)
+
+    assert await build_fees_snapshot._main() == 1
+    payload = json.loads((tmp_path / "index.json").read_text())
+    assert payload["total_schedules"] == 2
+    retained = next(row for row in payload["schedules"] if row["office_code"] == "KIPO")
+    assert retained["days_since_retrieval"] == (date.today() - retrieved_at).days
+    assert payload["failures"] == [{"office_code": "KIPO", "right": "patent"}]
 
 
 @pytest.mark.asyncio

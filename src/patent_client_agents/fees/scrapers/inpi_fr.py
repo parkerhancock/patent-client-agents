@@ -9,7 +9,7 @@ from:
 The page is HTML but the fee schedule itself lives in a PDF at:
 
     https://www.inpi.fr/inpi-block/download-document?id=20516
-    "Tarifs des procédures applicables au 27 avril 2026.pdf"
+    "Tarifs des procédures applicables au 2 juillet 2026.pdf"
 
 This is the **patents + trademarks + designs + GIs** combined
 schedule (2 pages, ~6,000 chars of extracted text). The companion
@@ -62,7 +62,7 @@ Statutory basis
 ---------------
 Code de la propriété intellectuelle (CPI) Articles R.411-17 et seq.;
 arrêtés fixant les redevances perçues par l'INPI; most recent rate
-adjustment effective 2026-04-27.
+adjustment effective 2026-07-02.
 
 v1 scope
 --------
@@ -106,6 +106,7 @@ INPI_FR_TARIFS_PAGE = "https://www.inpi.fr/ressources/propriete-intellectuelle/t
 # text "Tarifs des procédures applicables au ...".
 INPI_FR_PROCEDURES_PDF_PATH = "/inpi-block/download-document?id=20516"
 INPI_FR_PROCEDURES_PDF_URL = f"https://www.inpi.fr{INPI_FR_PROCEDURES_PDF_PATH}"
+INPI_FR_EFFECTIVE_DATE = date(2026, 7, 2)
 
 
 class INPIFranceFeesClient(BaseAsyncClient):
@@ -382,9 +383,9 @@ _FEE_CATALOG: list[
     ),
     (
         "patent-grant",
-        "Délivrance et impression du fascicule",
+        "Délivrance",
         FeeCategory.grant,
-        "Délivrance et impression du fascicule",
+        "Délivrance",
         90,
         45,
         None,
@@ -726,7 +727,7 @@ def _build_catalog_fees(text: str, right_filter: RightType) -> list[FeeItem]:
                 condition=condition,
                 source_url=INPI_FR_PROCEDURES_PDF_URL,
                 notes=(
-                    "INPI France 'Tarifs des procédures applicables au 27 avril 2026'. "
+                    "INPI France 'Tarifs des procédures applicables au 2 juillet 2026'. "
                     "Source PDF discovered via the landing page anchor; the inpi-block "
                     "download URL is the canonical fetch path."
                 ),
@@ -861,7 +862,7 @@ async def scrape_inpi_fr_patents() -> FeeSchedule:
         office_code="INPI-FR",
         right=RightType.patent,
         currency="EUR",
-        effective_date=date(2026, 4, 27),
+        effective_date=INPI_FR_EFFECTIVE_DATE,
         source_url=INPI_FR_TARIFS_PAGE,
         statutory_basis=(
             "Code de la propriété intellectuelle (CPI) Articles R.411-17 et "
@@ -899,7 +900,7 @@ async def scrape_inpi_fr_trademarks() -> FeeSchedule:
         office_code="INPI-FR",
         right=RightType.trademark,
         currency="EUR",
-        effective_date=date(2026, 4, 27),
+        effective_date=INPI_FR_EFFECTIVE_DATE,
         source_url=INPI_FR_TARIFS_PAGE,
         statutory_basis=("Code de la propriété intellectuelle (CPI) Articles R.411-17 et seq."),
         retrieved_at=date.today(),
@@ -927,7 +928,7 @@ async def scrape_inpi_fr_designs() -> FeeSchedule:
         office_code="INPI-FR",
         right=RightType.design,
         currency="EUR",
-        effective_date=date(2026, 4, 27),
+        effective_date=INPI_FR_EFFECTIVE_DATE,
         source_url=INPI_FR_TARIFS_PAGE,
         statutory_basis=("Code de la propriété intellectuelle (CPI) Livre V (dessins et modèles)."),
         retrieved_at=date.today(),
@@ -944,6 +945,7 @@ async def scrape_inpi_fr_designs() -> FeeSchedule:
 __all__ = [
     "INPI_FR_TARIFS_PAGE",
     "INPI_FR_PROCEDURES_PDF_URL",
+    "INPI_FR_EFFECTIVE_DATE",
     "INPIFranceFeesClient",
     "scrape_inpi_fr_patents",
     "scrape_inpi_fr_trademarks",

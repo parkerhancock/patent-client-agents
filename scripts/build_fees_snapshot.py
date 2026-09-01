@@ -25,6 +25,7 @@ import argparse
 import asyncio
 import json
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -68,6 +69,7 @@ async def _build_all(
             failures.append((office, right.value))
             print("FAIL")
             continue
+        assert meta_dict is not None
         if write_files:
             out = SNAPSHOT_DIR / f"{office}-{right.value}.json"
             out.write_text(json.dumps(schedule_dict, indent=2, sort_keys=True) + "\n")
@@ -77,12 +79,44 @@ async def _build_all(
     return meta_rows, failures
 
 
+def _retain_last_known_good(meta_rows: list[dict], failures: list[tuple[str, str]]) -> list[dict]:
+    """Carry failed routes forward from the previous valid snapshot index."""
+    rows_by_key = {(row["office_code"], row["right"]): row for row in meta_rows}
+    failed_keys = set(failures)
+    index_path = SNAPSHOT_DIR / "index.json"
+
+    if failed_keys and index_path.exists():
+        previous = json.loads(index_path.read_text())
+        for prior_row in previous.get("schedules", []):
+            key = (prior_row["office_code"], prior_row["right"])
+            schedule_path = SNAPSHOT_DIR / f"{key[0]}-{key[1]}.json"
+            if key not in failed_keys or key in rows_by_key or not schedule_path.exists():
+                continue
+            retained = dict(prior_row)
+            retrieved_at = retained.get("retrieved_at")
+            if isinstance(retrieved_at, str):
+                retrieved = date.fromisoformat(retrieved_at)
+                retained["days_since_retrieval"] = max(0, (date.today() - retrieved).days)
+            rows_by_key[key] = retained
+
+    ordered_rows: list[dict] = []
+    for office, right in _DISPATCH:
+        row = rows_by_key.pop((office, right.value), None)
+        if row is not None:
+            ordered_rows.append(row)
+    ordered_rows.extend(rows_by_key.values())
+    return ordered_rows
+
+
 def _write_index(meta_rows: list[dict], failures: list[tuple[str, str]]) -> None:
     """Write index.json — lean rows for the browse page.
 
     Includes a ``failures`` array so the UI can show "currently unavailable"
     rows for offices whose upstream is temporarily down (e.g. INPI-FR 503).
+    Failed routes retain their last-known-good metadata when the corresponding
+    schedule file still exists.
     """
+    meta_rows = _retain_last_known_good(meta_rows, failures)
     by_office: dict[str, list[dict]] = {}
     for row in meta_rows:
         by_office.setdefault(row["office_code"], []).append(row)

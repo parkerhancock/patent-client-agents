@@ -22,6 +22,7 @@ from __future__ import annotations
 from decimal import Decimal
 from pathlib import Path
 
+import httpx
 import pytest
 from lxml import html as L
 
@@ -366,12 +367,27 @@ class TestBuildDesignFees:
 
 @pytest.fixture
 def patch_fetch(monkeypatch: pytest.MonkeyPatch) -> None:
-    html_text = JPO_FIXTURE.read_text()
+    html_bytes = JPO_FIXTURE.read_bytes()
 
-    async def fake_fetch(self: jpo.JPOFeesClient) -> str:
-        return html_text
+    async def fake_fetch(self: jpo.JPOFeesClient) -> bytes:
+        return html_bytes
 
     monkeypatch.setattr(jpo.JPOFeesClient, "fetch_html", fake_fetch)
+
+
+@pytest.mark.asyncio
+async def test_live_xhtml_encoding_declaration_is_parsed_as_bytes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    async def fake_request(self: jpo.JPOFeesClient, *args, **kwargs) -> httpx.Response:
+        content = JPO_FIXTURE.read_bytes().removeprefix(b"\xef\xbb\xbf")
+        return httpx.Response(200, content=content)
+
+    monkeypatch.setattr(jpo.JPOFeesClient, "_request", fake_request)
+
+    schedule = await jpo.scrape_jpo_trademarks()
+
+    assert schedule.fees
 
 
 @pytest.mark.asyncio
