@@ -12,7 +12,7 @@ decisions, and official fee schedules. It exposes source-specific clients as
 typed tools without hiding where a record came from.
 
 [Try the hosted service](https://mcp.patentclient.com/){ .md-button .md-button--primary }
-[Install an agent plugin](installation.md#3-agent-plugins){ .md-button }
+[Install an agent plugin](install/agent-plugins.md){ .md-button }
 [Browse the source atlas](https://patentclient.com/atlas){ .md-button }
 
 ## Choose the right way to run it
@@ -20,9 +20,9 @@ typed tools without hiding where a record came from.
 | Use | Best for | What you control |
 | --- | --- | --- |
 | [Hosted MCP](hosted-demo.md) | A first query with no local setup | Google sign-in and a deliberately curated public surface |
-| [Agent plugin](installation.md#3-agent-plugins) | Private research in Claude Code, OpenAI Codex CLI, or Google Antigravity CLI | The same Satchel-generated package in each client; 136 tools by default, up to 234 when every gated family is configured |
+| [Agent plugin](install/agent-plugins.md) | Private research in Claude Code, OpenAI Codex CLI, or Google Antigravity CLI | The same Satchel-generated package in each client; 136 tools by default, up to 234 when every gated family is configured |
 | [Stdio MCP server](mcp-stdio.md) | Other MCP clients or a hand-managed local configuration | The server command, environment, and client configuration |
-| [Python library](installation.md#1-python-library) | Application code and source-specific integrations | The exact clients, credentials, caching, and runtime your application needs |
+| [Python library](install/python.md) | Application code and source-specific integrations | The exact clients, credentials, caching, and runtime your application needs |
 
 The hosted service is convenient, but it is not the full product surface and
 should not receive confidential material. The agent plugins are the shortest
@@ -92,7 +92,7 @@ search index, bulk dataset, and published document.
 
 ## Next steps
 
-1. [Install the shared agent plugin](installation.md#3-agent-plugins) in Claude Code, Codex, or Antigravity.
+1. [Install the shared agent plugin](install/agent-plugins.md) in Claude Code, Codex, or Antigravity.
 2. For another client, [configure the local MCP server](mcp-stdio.md).
 3. Find the source you need in the [Patent Client Index](patent-client-index/index.md).
 4. Open its page under **API Reference** for exact methods, models, limits, and examples.

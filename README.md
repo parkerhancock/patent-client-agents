@@ -81,7 +81,7 @@ agy plugin install ./patent-client-agents/plugins/patent-client-agents
 ```
 
 Start a new agent session after installing. See the
-[installation guide](https://docs.patentclient.com/installation/#3-agent-plugins)
+[installation guide](https://docs.patentclient.com/install/agent-plugins/)
 for updates, removal, verification, and credential setup.
 
 ### Path B — Direct MCP connection
@@ -495,7 +495,7 @@ No API key required, but requires a one-time corpus build —
 — before the first call. MPEP has the matching
 `patent-client-agents-build-mpep-corpus` CLI. Cloud deployments point
 `TMEP_CORPUS_PATH` / `MPEP_CORPUS_PATH` at any path. See
-[docs/installation.md](docs/installation.md#mpep--tmep-corpus-setup).
+[local source access guide](docs/install/local-runtime.md#build-local-corpora).
 
 </details>
 

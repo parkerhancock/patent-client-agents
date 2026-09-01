@@ -108,11 +108,15 @@ def check_docs(default_count: int, full_count: int) -> list[str]:
             f"up to {full_count} tools",
         ),
         *_require(
-            "docs/installation.md",
+            "docs/install/agent-plugins.md",
             f"Add {default_count} patent + trademark + adjacent-IP MCP tools",
             f"up to {full_count} tools",
-            f"Expect **{default_count} tools** by default",
             f"patent-client-agents[mcp]=={version}",
+        ),
+        *_require(
+            "docs/install/mcp-clients.md",
+            f"Expect **{default_count} tools** by default",
+            f"up to **{full_count} tools**",
         ),
         *_require(
             "docs/index.md",
