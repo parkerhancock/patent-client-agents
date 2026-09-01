@@ -12,7 +12,7 @@ decisions, and official fee schedules. It exposes source-specific clients as
 typed tools without hiding where a record came from.
 
 [Try the hosted service](https://mcp.patentclient.com/){ .md-button .md-button--primary }
-[Install locally](installation.md){ .md-button }
+[Install an agent plugin](installation.md#3-agent-plugins){ .md-button }
 [Browse the source atlas](https://patentclient.com/atlas){ .md-button }
 
 ## Choose the right way to run it
@@ -20,13 +20,15 @@ typed tools without hiding where a record came from.
 | Use | Best for | What you control |
 | --- | --- | --- |
 | [Hosted MCP](hosted-demo.md) | A first query with no local setup | Google sign-in and a deliberately curated public surface |
-| [Local MCP server](mcp-stdio.md) | Private agent research and credentialed sources | 136 tools by default; up to 234 when every gated family is configured |
+| [Agent plugin](installation.md#3-agent-plugins) | Private research in Claude Code, OpenAI Codex CLI, or Google Antigravity CLI | The same Satchel-generated package in each client; 136 tools by default, up to 234 when every gated family is configured |
+| [Stdio MCP server](mcp-stdio.md) | Other MCP clients or a hand-managed local configuration | The server command, environment, and client configuration |
 | [Python library](installation.md#1-python-library) | Application code and source-specific integrations | The exact clients, credentials, caching, and runtime your application needs |
 
 The hosted service is convenient, but it is not the full product surface and
-should not receive confidential material. Run locally when the work uses client
-information, private credentials, or a source that is not suitable for a shared
-endpoint.
+should not receive confidential material. The agent plugins are the shortest
+path to a private local setup in Claude Code, Codex, or Antigravity. Configure
+the stdio server directly for other MCP clients or when you need to control the
+command and environment yourself.
 
 ## Start from a research task
 
@@ -90,8 +92,8 @@ search index, bulk dataset, and published document.
 
 ## Next steps
 
-1. [Install the library or MCP server](installation.md).
-2. [Review the local MCP configuration and credential model](mcp-stdio.md).
+1. [Install the shared agent plugin](installation.md#3-agent-plugins) in Claude Code, Codex, or Antigravity.
+2. For another client, [configure the local MCP server](mcp-stdio.md).
 3. Find the source you need in the [Patent Client Index](patent-client-index/index.md).
 4. Open its page under **API Reference** for exact methods, models, limits, and examples.
 
