@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.27.1] — 2026-09-01
+
+### Added
+
+- Added native Claude Code, Codex CLI, and Antigravity CLI package manifests
+  generated from one Satchel configuration, with equal installation guidance
+  and a client-neutral first research task.
+
+### Changed
+
+- Made MCP package initialization lazy so importing the package or an
+  individual tool module no longer constructs the complete MCP tool surface.
+- Classified intentional standalone Atlas sources and generated site facts
+  from the canonical coverage data.
+- Made fee-snapshot checks non-writing and preserved last-known-good schedule
+  rows when an upstream fee route fails, while keeping failures and stale age
+  visible.
+
+### Fixed
+
+- Updated INPI France fees, preserved JPO XML encoding declarations, and
+  bounded KIPO fee-page fetches.
+- Corrected IPOS fee labels and amounts after upstream markup and acceleration
+  fee changes, including hidden link annotations, four-digit SGD values, and
+  excess-claim surcharges.
+- Fixed documentation navigation after the installation-guide and source-page
+  redesigns.
+
 ## [0.27.0] — 2026-08-31
 
 ### Added
@@ -1896,7 +1924,8 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.0...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.1...HEAD
+[0.27.1]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.0...v0.27.1
 [0.27.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.5...v0.27.0
 [0.26.5]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.4...v0.26.5
 [0.26.4]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.3...v0.26.4

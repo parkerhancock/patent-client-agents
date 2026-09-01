@@ -1,6 +1,6 @@
 schema: satchel/v0
 name: patent-client-agents
-version: 0.27.0
+version: 0.27.1
 description: Intellectual property research toolkit with 136 default MCP tools for patent, trademark, litigation, fee, and substantive-law research.
 author:
   name: Parker Hancock
