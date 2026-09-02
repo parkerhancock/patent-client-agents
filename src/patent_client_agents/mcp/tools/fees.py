@@ -26,7 +26,7 @@ from patent_client_agents.fees import (
     UnknownJurisdictionError,
 )
 from patent_client_agents.fees.client import resolve_jurisdiction
-from patent_client_agents.fees.models import EntityTier, FeeSchedule
+from patent_client_agents.fees.models import EntityTier, FeeSchedule, RecurringFeeCoverage
 from patent_client_agents.fees.registry import OFFICES, get_scraper
 
 fees_mcp = FastMCP("IP fee schedules")
@@ -64,6 +64,19 @@ def _summarize_schedule(s: FeeSchedule) -> str:
         f"{len(s.fees)} fees in {s.currency}. "
         f"Source: {s.source_url}"
     )
+
+
+def _summarize_recurring_coverage(coverage: RecurringFeeCoverage) -> str:
+    parts: list[str] = [f"Recurring-fee coverage: {coverage.status.value}"]
+    if coverage.missing_categories:
+        categories = ", ".join(category.value for category in coverage.missing_categories)
+        parts.append(f"missing categories: {categories}")
+    if coverage.missing_years:
+        years = ", ".join(str(year) for year in coverage.missing_years)
+        parts.append(f"missing years: {years}")
+    if coverage.notes:
+        parts.append(coverage.notes)
+    return "; ".join(parts) + "."
 
 
 def _resolve_right(right: str) -> RightType:
@@ -239,6 +252,8 @@ async def lookup_fee(
         f"{len(items)} fee{'s' if len(items) != 1 else ''} "
         f"(schedule effective {schedule.effective_date.isoformat()})."
     )
+    if not items:
+        summary += f" No matching fees found. {_summarize_recurring_coverage(schedule.recurring_fee_coverage)}"
 
     return ListEnvelope[dict](
         summary=summary,

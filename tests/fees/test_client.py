@@ -18,6 +18,8 @@ from patent_client_agents.fees.models import (
     FeeCategory,
     FeeItem,
     FeeSchedule,
+    RecurringFeeCoverage,
+    RecurringFeeCoverageStatus,
 )
 
 
@@ -178,3 +180,27 @@ class TestFeesClientLookup:
         # Only filing rows should come back (year=None filter excludes maintenance)
         codes = sorted(h.code for h in hits)
         assert codes == ["1011"]
+
+    @pytest.mark.asyncio
+    async def test_list_schedules_carries_recurring_coverage(self) -> None:
+        partial_schedule = _fixture_schedule().model_copy(
+            update={
+                "recurring_fee_coverage": RecurringFeeCoverage(
+                    status=RecurringFeeCoverageStatus.partial,
+                    missing_years=[12],
+                )
+            }
+        )
+
+        async def _fake_scraper() -> FeeSchedule:
+            return partial_schedule
+
+        with patch.dict(
+            registry._DISPATCH,
+            {("USPTO", RightType.patent): _fake_scraper},
+            clear=True,
+        ):
+            rows = await FeesClient().list_schedules()
+
+        assert len(rows) == 1
+        assert rows[0].recurring_fee_coverage == partial_schedule.recurring_fee_coverage

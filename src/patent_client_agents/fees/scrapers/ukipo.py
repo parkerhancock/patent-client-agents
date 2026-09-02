@@ -16,14 +16,9 @@ the fee amount (£) in a ``<h3 id="cost">Cost</h3>`` section.
   is needed for TM.
 
 Fees revised 2026-04-01 (UKIPO's first fee increase in years; ~25%
-average rise). All amounts in GBP.
-
-v1 GAP for patents: the renewal-fee sub-page publishes a *range*
-("£90 - £810 dependent how long since patent was granted") rather than
-the per-year breakdown. The per-year schedule lives in The Patents
-(Fees) Rules 2007 (statutory instrument). The scraper emits a single
-renewal row with the range as a label; per-year expansion ships as a
-follow-up against legislation.gov.uk.
+average rise). All amounts in GBP. The per-form renewal page publishes
+only a range, so the exact year 5–20 ladder is supplied from UKIPO's
+official 2026 fee table rather than inferred from that range.
 """
 
 from __future__ import annotations
@@ -44,6 +39,8 @@ from patent_client_agents.fees.models import (
     FeeClientKwargs,
     FeeItem,
     FeeSchedule,
+    RecurringFeeCoverage,
+    RecurringFeeCoverageStatus,
     RightType,
 )
 
@@ -52,6 +49,10 @@ logger = logging.getLogger(__name__)
 UKIPO_PATENTS_INDEX = "https://www.gov.uk/government/publications/patent-forms-and-fees"
 UKIPO_PATENTS_DETAIL = (
     "https://www.gov.uk/government/publications/patent-forms-and-fees/patent-forms-and-fees"
+)
+UKIPO_PATENT_FEES_2026 = (
+    "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-"
+    "from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents"
 )
 UKIPO_TM_DETAIL = (
     "https://www.gov.uk/government/publications/trade-mark-forms-and-fees/trade-mark-forms-and-fees"
@@ -93,6 +94,25 @@ class UKIPOFeesClient(BaseAsyncClient):
 _GBP_RE = re.compile(r"£\s*(\d[\d,]*(?:\.\d+)?)")
 _RANGE_RE = re.compile(r"£\s*(\d[\d,]*)\s*[-–]\s*£\s*(\d[\d,]*)")
 
+_PATENT_RENEWAL_FEES: tuple[tuple[int, str], ...] = (
+    (5, "90"),
+    (6, "120"),
+    (7, "150"),
+    (8, "170"),
+    (9, "200"),
+    (10, "230"),
+    (11, "250"),
+    (12, "290"),
+    (13, "340"),
+    (14, "400"),
+    (15, "480"),
+    (16, "560"),
+    (17, "620"),
+    (18, "690"),
+    (19, "760"),
+    (20, "810"),
+)
+
 
 def _parse_gbp(raw: str) -> Decimal | None:
     """Pull the first £-amount out of a text blob."""
@@ -118,6 +138,29 @@ def _parse_gbp_range(raw: str) -> tuple[Decimal, Decimal] | None:
         )
     except Exception:
         return None
+
+
+def _patent_renewal_fees() -> list[FeeItem]:
+    """Return the official 2026 UK patent renewal ladder."""
+    return [
+        FeeItem(
+            code=f"uk-patent-renewal-y{year}",
+            label=f"Patent renewal fee, year {year}",
+            category=FeeCategory.maintenance,
+            rights=[RightType.patent],
+            amount=Decimal(amount),
+            currency="GBP",
+            tier=EntityTier.none,
+            year=year,
+            source_url=UKIPO_PATENT_FEES_2026,
+            notes=(
+                "Ordinary renewal fee effective 2026-04-01. Licence-of-right "
+                "reductions, late-payment surcharges, and transitional payment-date "
+                "rules are conditional and are not applied to this amount."
+            ),
+        )
+        for year, amount in _PATENT_RENEWAL_FEES
+    ]
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -262,6 +305,7 @@ async def scrape_ukipo_patents() -> FeeSchedule:
 
     fees: list[FeeItem] = []
     seen: set[str] = set()
+    parsed_fee_rows = 0
     for heading, form_number, title, sub_url in rows:
         html_text = sub_pages.get(sub_url, "")
         if not html_text:
@@ -280,7 +324,11 @@ async def scrape_ukipo_patents() -> FeeSchedule:
         amount = _parse_gbp(cost_source) if rng is None else rng[1]  # use high end for ranges
         if amount is None:
             continue
+        parsed_fee_rows += 1
         category = _categorize_patent(heading, title)
+        if category == FeeCategory.maintenance:
+            # The exact ladder above replaces the per-form page's range.
+            continue
         key = f"{form_number}|{title[:60]}|{amount}"
         if key in seen:
             continue
@@ -292,12 +340,6 @@ async def scrape_ukipo_patents() -> FeeSchedule:
             if heading
             else f"UKIPO form {form_number}"
         )
-        if rng is not None:
-            notes += (
-                f". Published as a range £{rng[0]}-£{rng[1]}; year-by-year "
-                "schedule lives in The Patents (Fees) Rules 2007 — high end "
-                "stored as the fee amount."
-            )
         fees.append(
             FeeItem(
                 code=f"uk-patent-form-{re.sub(r'[^A-Za-z0-9]+', '-', form_number).strip('-').lower() or 'misc'}",
@@ -307,22 +349,18 @@ async def scrape_ukipo_patents() -> FeeSchedule:
                 amount=amount,
                 currency="GBP",
                 tier=EntityTier.none,
-                # For maintenance rows we need a year. Renewal range rows
-                # (rng != None) store the high end (year 20) per UKIPO's
-                # 5→20 year curve. Non-range maintenance rows that slip
-                # through the categorizer get year=20 as a fallback;
-                # ideally those rows are downgraded to `other` upstream.
-                year=20 if category == FeeCategory.maintenance else None,
+                year=None,
                 condition=None,
                 source_url=sub_url,
                 notes=notes,
             )
         )
 
-    if not fees:
+    if not parsed_fee_rows:
         raise RuntimeError(
             "UKIPO patent scraper parsed zero rows — page structure may have changed"
         )
+    fees.extend(_patent_renewal_fees())
 
     return FeeSchedule(
         jurisdiction="GB",
@@ -335,16 +373,21 @@ async def scrape_ukipo_patents() -> FeeSchedule:
         statutory_basis=("Patents Act 1977; The Patents (Fees) Rules 2007 (as amended)."),
         retrieved_at=date.today(),
         fees=fees,
+        recurring_fee_coverage=RecurringFeeCoverage(
+            status=RecurringFeeCoverageStatus.complete,
+            notes=(
+                "Complete ordinary patent renewal ladder for years 5-20. "
+                "Licence-of-right reductions, late fees, late grants, and the "
+                "2026 payment-date transition require additional right facts."
+            ),
+        ),
         notes=(
             "Per-form fees scraped from gov.uk patent-forms-and-fees "
             "sub-pages. ~30 sub-pages fetched concurrently (bounded "
             "to 5). Effective 2026-04-01 (UKIPO's first major rise in "
-            "years; ~25% average across patent/TM/design). "
-            "v1 GAP: renewal fees are published on the form sub-page as "
-            "a range (£90-£810) rather than per-year; the high end is "
-            "stored. The per-year schedule lives in The Patents (Fees) "
-            "Rules 2007 statutory instrument — a follow-up scraper can "
-            "pull it from legislation.gov.uk."
+            "years; ~25% average across patent/TM/design). The exact "
+            "year 5-20 renewal ladder comes from UKIPO's official 2026 "
+            "fee table because the per-form page publishes only a range."
         ),
     )
 
@@ -461,6 +504,7 @@ async def scrape_ukipo_trademarks() -> FeeSchedule:
 
 __all__ = [
     "UKIPO_PATENTS_INDEX",
+    "UKIPO_PATENT_FEES_2026",
     "UKIPO_TM_DETAIL",
     "UKIPOFeesClient",
     "scrape_ukipo_patents",
