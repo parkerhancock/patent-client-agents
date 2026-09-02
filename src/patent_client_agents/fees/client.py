@@ -40,6 +40,10 @@ _OFFICE_ALIASES: dict[str, tuple[str, str]] = {
     # EPO
     "EPO": ("EP", "EPO"),
     "EUROPEAN PATENT OFFICE": ("EP", "EPO"),
+    # European patent with unitary effect (distinct post-grant schedule)
+    "EPO-UP": ("UP", "EPO-UP"),
+    "UP": ("UP", "EPO-UP"),
+    "UNITARY PATENT": ("UP", "EPO-UP"),
     # EUIPO
     "EUIPO": ("EP", "EUIPO"),
     "EU INTELLECTUAL PROPERTY OFFICE": ("EP", "EUIPO"),
@@ -336,6 +340,7 @@ def _to_meta(s: FeeSchedule) -> JurisdictionMeta:
         source_url=s.source_url,
         fee_count=len(s.fees),
         days_since_retrieval=max(0, (today - s.retrieved_at).days),
+        recurring_fee_coverage=s.recurring_fee_coverage,
     )
 
 

@@ -184,6 +184,19 @@ def jpo_doc() -> L.HtmlElement:
     return L.fromstring(JPO_FIXTURE.read_bytes())
 
 
+class TestBuildPatentFees:
+    def test_per_claim_component_counts_every_claim(self, jpo_doc) -> None:
+        fees = jpo._build_patent_fees(jpo_doc)
+        per_claim = [
+            fee
+            for fee in fees
+            if fee.category == FeeCategory.excess_claims and fee.condition is not None
+        ]
+
+        assert per_claim
+        assert all(fee.condition.threshold == 0 for fee in per_claim if fee.condition)
+
+
 class TestBuildTrademarkFees:
     def test_yields_substantial_schedule(self, jpo_doc) -> None:
         fees = jpo._build_trademark_fees(jpo_doc)

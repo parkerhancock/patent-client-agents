@@ -12,13 +12,10 @@ What this scraper covers:
 * Filing, search, examination, acceptance, RCE-equivalent, opposition
   fees (everything published on the timeframes-and-fees page)
 
-What this scraper does NOT cover (v1 gap):
-* **Annual renewal fees** — IP Australia publishes the renewal fee
-  schedule in Schedule 7 of the Patents Regulations 1991, not on the
-  fees page. Years 5-20 renewal fees are not currently scraped. The
-  schedule notes this gap explicitly and links to the regulations.
-  A follow-up scraper can pull Schedule 7 from the AustLII federal
-  register feed (https://www.legislation.gov.au/F2024L01237/latest).
+The ordinary standard-patent online renewal ladder is supplied from IP
+Australia's renewal page and Schedule 7 of the Patents Regulations 1991.
+Other payment channels and pharmaceutical term-extension years remain
+explicitly outside that ordinary ladder.
 
 Fees revised 2024-10-01 (full fee review); PCT fee equivalents
 updated 2026-01-01.
@@ -42,12 +39,34 @@ from patent_client_agents.fees.models import (
     FeeCondition,
     FeeItem,
     FeeSchedule,
+    RecurringFeeCoverage,
+    RecurringFeeCoverageStatus,
     RightType,
 )
 
 logger = logging.getLogger(__name__)
 
 IPA_FEES_URL = "https://www.ipaustralia.gov.au/patents/timeframes-and-fees"
+IPA_RENEWAL_FEES_URL = "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right"
+
+_STANDARD_PATENT_ONLINE_RENEWAL_FEES: tuple[tuple[int, str], ...] = (
+    (4, "300"),
+    (5, "315"),
+    (6, "345"),
+    (7, "380"),
+    (8, "420"),
+    (9, "465"),
+    (10, "540"),
+    (11, "645"),
+    (12, "780"),
+    (13, "945"),
+    (14, "1140"),
+    (15, "1385"),
+    (16, "1675"),
+    (17, "2010"),
+    (18, "2390"),
+    (19, "2815"),
+)
 
 
 class IPAustraliaFeesClient(BaseAsyncClient):
@@ -167,6 +186,29 @@ def _slugify(heading: str, description: str) -> str:
     return f"au-{h_slug}-{base}" if h_slug else f"au-{base}"
 
 
+def _standard_patent_online_renewal_fees() -> list[FeeItem]:
+    """Return ordinary online standard-patent renewal fees, years 4–19."""
+    return [
+        FeeItem(
+            code=f"au-standard-patent-online-renewal-y{year}",
+            label=f"Standard patent online renewal fee, anniversary year {year}",
+            category=FeeCategory.renewal,
+            rights=[RightType.patent],
+            amount=Decimal(amount),
+            currency="AUD",
+            tier=EntityTier.none,
+            year=year,
+            source_url=IPA_RENEWAL_FEES_URL,
+            notes=(
+                "Ordinary online renewal amount. Other payment methods cost "
+                "AUD 50 more; years 20-24 apply only when a pharmaceutical "
+                "term extension has been granted."
+            ),
+        )
+        for year, amount in _STANDARD_PATENT_ONLINE_RENEWAL_FEES
+    ]
+
+
 # ──────────────────────────────────────────────────────────────────────
 # Table walker
 # ──────────────────────────────────────────────────────────────────────
@@ -241,6 +283,7 @@ async def scrape_ipaustralia_patents() -> FeeSchedule:
         raise RuntimeError(
             "IP Australia patent scraper parsed zero rows — page structure may have changed"
         )
+    fees.extend(_standard_patent_online_renewal_fees())
 
     return FeeSchedule(
         jurisdiction="AU",
@@ -256,22 +299,30 @@ async def scrape_ipaustralia_patents() -> FeeSchedule:
         ),
         retrieved_at=date.today(),
         fees=fees,
+        recurring_fee_coverage=RecurringFeeCoverage(
+            status=RecurringFeeCoverageStatus.partial,
+            missing_years=[20, 21, 22, 23, 24],
+            notes=(
+                "Complete ordinary online renewal ladder for a standard patent, "
+                "anniversary years 4-19. Other payment channels, late fees, "
+                "pharmaceutical term-extension years 20-24, patents of addition, "
+                "and restored or extended-time cases are conditional and excluded."
+            ),
+        ),
         notes=(
             "Covers IP Australia's operational fees (filing, search, "
             "examination, acceptance, RCE-equivalent, opposition, "
-            "extension-of-time, document requests). v1 GAP: annual "
-            "renewal fees (years 5-20) are NOT included — they live in "
-            "Schedule 7 of the Patents Regulations 1991 and are not "
-            "published on the IP Australia fees page. A follow-up "
-            "scraper can pull the regulation from the Federal Register "
-            "of Legislation. Fees revised 2024-10-01 per the four-yearly "
-            "fee review; PCT-fee AUD equivalents updated 2026-01-01."
+            "extension-of-time, document requests), plus the official "
+            "ordinary online standard-patent renewal ladder for anniversary "
+            "years 4-19. Fees revised 2024-10-01 per the four-yearly fee "
+            "review; PCT-fee AUD equivalents updated 2026-01-01."
         ),
     )
 
 
 __all__ = [
     "IPA_FEES_URL",
+    "IPA_RENEWAL_FEES_URL",
     "IPAustraliaFeesClient",
     "scrape_ipaustralia_patents",
 ]

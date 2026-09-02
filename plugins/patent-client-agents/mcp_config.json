@@ -4,7 +4,7 @@
       "command": "uvx",
       "args": [
         "--from",
-        "patent-client-agents[mcp]==0.27.1",
+        "patent-client-agents[mcp]==0.28.0",
         "patent-client-agents-mcp"
       ]
     }

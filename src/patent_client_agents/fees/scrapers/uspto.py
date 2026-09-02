@@ -81,7 +81,10 @@ _EFFECTIVE_RE = re.compile(
     r"Effective\s+(\w+\s+\d+,\s*\d{4})\s*\(Last revised\s+(\w+\s+\d+,\s*\d{4})",
     re.IGNORECASE,
 )
-_MAINT_YEAR_RE = re.compile(r"due at (\d+(?:\.\d+)?)\s*year", re.IGNORECASE)
+_MAINT_YEAR_RE = re.compile(
+    r"(?:due at\s+|surcharge\s*-\s*)(\d+(?:\.\d+)?)\s*years?",
+    re.IGNORECASE,
+)
 
 
 def _parse_money(raw: str) -> Decimal | None:
@@ -317,7 +320,11 @@ def _build_patent_fees(
             if not codes:
                 continue
             category = _categorize_patent_table(caption, description, cfr)
-            year = _maintenance_year(description) if category == FeeCategory.maintenance else None
+            year = (
+                _maintenance_year(description)
+                if category in {FeeCategory.maintenance, FeeCategory.late_fee}
+                else None
+            )
             condition = _detect_condition(description)
 
             amounts: dict[EntityTier, Decimal | None] = {

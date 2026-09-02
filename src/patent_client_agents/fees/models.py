@@ -114,6 +114,86 @@ class FeeCategory(StrEnum):
     other = "other"
 
 
+class RecurringFeeCoverageStatus(StrEnum):
+    """How completely a schedule represents recurring fees."""
+
+    complete = "complete"
+    partial = "partial"
+    not_applicable = "not_applicable"
+
+
+class RecurringFeeCoverage(BaseModel):
+    """Machine-readable completeness statement for recurring fees.
+
+    Existing scrapers default to ``partial`` with an explicit unaudited
+    note. A schedule must opt in before callers may treat an empty
+    renewal or maintenance lookup as authoritative.
+    """
+
+    model_config = ConfigDict(frozen=True)
+
+    status: RecurringFeeCoverageStatus = RecurringFeeCoverageStatus.partial
+    missing_categories: list[FeeCategory] = Field(
+        default_factory=list,
+        description="Recurring categories known to be absent from the schedule.",
+    )
+    missing_years: list[PositiveInt] = Field(
+        default_factory=list,
+        description="Renewal or maintenance years known to be absent from the schedule.",
+    )
+    notes: str | None = Field(
+        default=None,
+        description="Coverage qualification when missing categories or years are insufficient.",
+    )
+
+    @model_validator(mode="before")
+    @classmethod
+    def _legacy_default_is_explicit(cls, data: object) -> object:
+        if isinstance(data, dict) and not data:
+            return {
+                **data,
+                "notes": "Recurring-fee coverage has not been audited for completeness.",
+            }
+        return data
+
+    @field_validator("missing_categories")
+    @classmethod
+    def _only_recurring_categories(cls, values: list[FeeCategory]) -> list[FeeCategory]:
+        recurring = {FeeCategory.renewal, FeeCategory.maintenance}
+        invalid = [value.value for value in values if value not in recurring]
+        if invalid:
+            raise ValueError(
+                f"missing_categories may contain only renewal or maintenance (got {invalid!r})"
+            )
+        return values
+
+    @field_validator("notes")
+    @classmethod
+    def _notes_not_blank(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        stripped = value.strip()
+        if not stripped:
+            raise ValueError("notes must not be blank")
+        return stripped
+
+    @model_validator(mode="after")
+    def _gaps_match_status(self) -> RecurringFeeCoverage:
+        has_gaps = bool(self.missing_categories or self.missing_years)
+        if self.status == RecurringFeeCoverageStatus.partial:
+            if not has_gaps and self.notes is None:
+                raise ValueError(
+                    "partial recurring-fee coverage requires missing categories, "
+                    "missing years, or notes"
+                )
+        elif has_gaps:
+            raise ValueError(
+                f"{self.status.value} recurring-fee coverage cannot declare missing "
+                "categories or years"
+            )
+        return self
+
+
 class ConditionalTrigger(StrEnum):
     """What triggers a conditional / surcharge fee.
 
@@ -274,6 +354,10 @@ class FeeSchedule(BaseModel):
         description="Date the schedule was last fetched from upstream.",
     )
     fees: list[FeeItem] = Field(min_length=1)
+    recurring_fee_coverage: RecurringFeeCoverage = Field(
+        default_factory=RecurringFeeCoverage,
+        description="Completeness of renewal and maintenance fee coverage.",
+    )
     notes: str | None = None
 
     @field_validator("currency")
@@ -327,6 +411,10 @@ class JurisdictionMeta(BaseModel):
     source_url: str
     fee_count: NonNegativeInt
     days_since_retrieval: NonNegativeInt
+    recurring_fee_coverage: RecurringFeeCoverage = Field(
+        default_factory=RecurringFeeCoverage,
+        description="Completeness of renewal and maintenance fee coverage.",
+    )
 
 
 # Type alias used by the lookup API; declared here so importers can
@@ -359,6 +447,8 @@ __all__ = [
     "RightType",
     "EntityTier",
     "FeeCategory",
+    "RecurringFeeCoverageStatus",
+    "RecurringFeeCoverage",
     "ConditionalTrigger",
     "FeeCondition",
     "FeeItem",
