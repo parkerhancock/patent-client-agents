@@ -93,21 +93,6 @@
       "year": null
     },
     {
-      "amount": "810",
-      "category": "maintenance",
-      "code": "uk-patent-form-12",
-      "condition": null,
-      "currency": "GBP",
-      "label": "Renew patents",
-      "notes": "UKIPO form 12; section: 4. Renew, reinstate or restore a patent. Published as a range \u00a390-\u00a3810; year-by-year schedule lives in The Patents (Fees) Rules 2007 \u2014 high end stored as the fee amount.",
-      "rights": [
-        "patent"
-      ],
-      "source_url": "https://www.gov.uk/government/publications/payment-of-renewal-fee",
-      "tier": "none",
-      "year": 20
-    },
-    {
       "amount": "200",
       "category": "petition",
       "code": "uk-patent-form-14",
@@ -301,14 +286,260 @@
       "source_url": "https://www.gov.uk/government/publications/application-to-extend-a-supplementary-protection-certificate",
       "tier": "none",
       "year": null
+    },
+    {
+      "amount": "90",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y5",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 5",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "120",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y6",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 6",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "150",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y7",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 7",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "170",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y8",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 8",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "200",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y9",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 9",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "230",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y10",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 10",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "250",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y11",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 11",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "290",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y12",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 12",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "340",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y13",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 13",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "400",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y14",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 14",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "480",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y15",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 15",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "560",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y16",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 16",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "620",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y17",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 17",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "690",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y18",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 18",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "760",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y19",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 19",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "810",
+      "category": "maintenance",
+      "code": "uk-patent-renewal-y20",
+      "condition": null,
+      "currency": "GBP",
+      "label": "Patent renewal fee, year 20",
+      "notes": "Ordinary renewal fee effective 2026-04-01. Licence-of-right reductions, late-payment surcharges, and transitional payment-date rules are conditional and are not applied to this amount.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.gov.uk/government/publications/intellectual-property-office-new-fees-from-1-april-2026/new-fees-from-1-april-2026-for-designs-trade-marks-and-patents",
+      "tier": "none",
+      "year": 20
     }
   ],
   "issuing_body": "UK Intellectual Property Office",
   "jurisdiction": "GB",
   "key": "GB/UKIPO/patent",
-  "notes": "Per-form fees scraped from gov.uk patent-forms-and-fees sub-pages. ~30 sub-pages fetched concurrently (bounded to 5). Effective 2026-04-01 (UKIPO's first major rise in years; ~25% average across patent/TM/design). v1 GAP: renewal fees are published on the form sub-page as a range (\u00a390-\u00a3810) rather than per-year; the high end is stored. The per-year schedule lives in The Patents (Fees) Rules 2007 statutory instrument \u2014 a follow-up scraper can pull it from legislation.gov.uk.",
+  "notes": "Per-form fees scraped from gov.uk patent-forms-and-fees sub-pages. ~30 sub-pages fetched concurrently (bounded to 5). Effective 2026-04-01 (UKIPO's first major rise in years; ~25% average across patent/TM/design). The exact year 5-20 renewal ladder comes from UKIPO's official 2026 fee table because the per-form page publishes only a range.",
   "office_code": "UKIPO",
-  "retrieved_at": "2026-09-01",
+  "recurring_fee_coverage": {
+    "missing_categories": [],
+    "missing_years": [],
+    "notes": "Complete ordinary patent renewal ladder for years 5-20. Licence-of-right reductions, late fees, late grants, and the 2026 payment-date transition require additional right facts.",
+    "status": "complete"
+  },
+  "retrieved_at": "2026-09-07",
   "right": "patent",
   "source_url": "https://www.gov.uk/government/publications/patent-forms-and-fees",
   "statutory_basis": "Patents Act 1977; The Patents (Fees) Rules 2007 (as amended)."

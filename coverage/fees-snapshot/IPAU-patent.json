@@ -401,14 +401,266 @@
       "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
       "tier": "none",
       "year": null
+    },
+    {
+      "amount": "300",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y4",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 4",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "315",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y5",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 5",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "345",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y6",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 6",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "380",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y7",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 7",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "420",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y8",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 8",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "465",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y9",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 9",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "540",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y10",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 10",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "645",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y11",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 11",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "780",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y12",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 12",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "945",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y13",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 13",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "1140",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y14",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 14",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "1385",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y15",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 15",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "1675",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y16",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 16",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "2010",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y17",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 17",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "2390",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y18",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 18",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "2815",
+      "category": "renewal",
+      "code": "au-standard-patent-online-renewal-y19",
+      "condition": null,
+      "currency": "AUD",
+      "label": "Standard patent online renewal fee, anniversary year 19",
+      "notes": "Ordinary online renewal amount. Other payment methods cost AUD 50 more; years 20-24 apply only when a pharmaceutical term extension has been granted.",
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right",
+      "tier": "none",
+      "year": 19
     }
   ],
   "issuing_body": "IP Australia",
   "jurisdiction": "AU",
   "key": "AU/IPAU/patent",
-  "notes": "Covers IP Australia's operational fees (filing, search, examination, acceptance, RCE-equivalent, opposition, extension-of-time, document requests). v1 GAP: annual renewal fees (years 5-20) are NOT included \u2014 they live in Schedule 7 of the Patents Regulations 1991 and are not published on the IP Australia fees page. A follow-up scraper can pull the regulation from the Federal Register of Legislation. Fees revised 2024-10-01 per the four-yearly fee review; PCT-fee AUD equivalents updated 2026-01-01.",
+  "notes": "Covers IP Australia's operational fees (filing, search, examination, acceptance, RCE-equivalent, opposition, extension-of-time, document requests), plus the official ordinary online standard-patent renewal ladder for anniversary years 4-19. Fees revised 2024-10-01 per the four-yearly fee review; PCT-fee AUD equivalents updated 2026-01-01.",
   "office_code": "IPAU",
-  "retrieved_at": "2026-09-01",
+  "recurring_fee_coverage": {
+    "missing_categories": [],
+    "missing_years": [
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "notes": "Complete ordinary online renewal ladder for a standard patent, anniversary years 4-19. Other payment channels, late fees, pharmaceutical term-extension years 20-24, patents of addition, and restored or extended-time cases are conditional and excluded.",
+    "status": "partial"
+  },
+  "retrieved_at": "2026-09-07",
   "right": "patent",
   "source_url": "https://www.ipaustralia.gov.au/patents/timeframes-and-fees",
   "statutory_basis": "Patents Regulations 1991 (Cth) Schedule 7; fee review every 4 years, last full review effective 2024-10-01."

@@ -1,0 +1,686 @@
+{
+  "currency": "EUR",
+  "effective_date": "2023-06-01",
+  "fees": [
+    {
+      "amount": "35",
+      "category": "renewal",
+      "code": "upp-renewal-2",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 2nd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "17.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-2",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 2nd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 2
+    },
+    {
+      "amount": "105",
+      "category": "renewal",
+      "code": "upp-renewal-3",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 3rd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "52.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-3",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 3rd year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 3
+    },
+    {
+      "amount": "145",
+      "category": "renewal",
+      "code": "upp-renewal-4",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 4th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "72.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-4",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 4th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 4
+    },
+    {
+      "amount": "315",
+      "category": "renewal",
+      "code": "upp-renewal-5",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 5th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "157.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-5",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 5th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 5
+    },
+    {
+      "amount": "475",
+      "category": "renewal",
+      "code": "upp-renewal-6",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 6th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "237.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-6",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 6th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 6
+    },
+    {
+      "amount": "630",
+      "category": "renewal",
+      "code": "upp-renewal-7",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 7th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "315",
+      "category": "late_fee",
+      "code": "upp-late-renewal-7",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 7th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 7
+    },
+    {
+      "amount": "815",
+      "category": "renewal",
+      "code": "upp-renewal-8",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 8th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "407.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-8",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 8th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 8
+    },
+    {
+      "amount": "990",
+      "category": "renewal",
+      "code": "upp-renewal-9",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 9th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "495",
+      "category": "late_fee",
+      "code": "upp-late-renewal-9",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 9th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 9
+    },
+    {
+      "amount": "1175",
+      "category": "renewal",
+      "code": "upp-renewal-10",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 10th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "587.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-10",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 10th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 10
+    },
+    {
+      "amount": "1460",
+      "category": "renewal",
+      "code": "upp-renewal-11",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 11th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "730",
+      "category": "late_fee",
+      "code": "upp-late-renewal-11",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 11th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 11
+    },
+    {
+      "amount": "1775",
+      "category": "renewal",
+      "code": "upp-renewal-12",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 12th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "887.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-12",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 12th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 12
+    },
+    {
+      "amount": "2105",
+      "category": "renewal",
+      "code": "upp-renewal-13",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 13th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "1052.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-13",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 13th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 13
+    },
+    {
+      "amount": "2455",
+      "category": "renewal",
+      "code": "upp-renewal-14",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 14th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "1227.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-14",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 14th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 14
+    },
+    {
+      "amount": "2830",
+      "category": "renewal",
+      "code": "upp-renewal-15",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 15th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "1415",
+      "category": "late_fee",
+      "code": "upp-late-renewal-15",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 15th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 15
+    },
+    {
+      "amount": "3240",
+      "category": "renewal",
+      "code": "upp-renewal-16",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 16th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "1620",
+      "category": "late_fee",
+      "code": "upp-late-renewal-16",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 16th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 16
+    },
+    {
+      "amount": "3640",
+      "category": "renewal",
+      "code": "upp-renewal-17",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 17th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "1820",
+      "category": "late_fee",
+      "code": "upp-late-renewal-17",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 17th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 17
+    },
+    {
+      "amount": "4055",
+      "category": "renewal",
+      "code": "upp-renewal-18",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 18th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "2027.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-18",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 18th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 18
+    },
+    {
+      "amount": "4455",
+      "category": "renewal",
+      "code": "upp-renewal-19",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 19th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "2227.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-19",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 19th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 19
+    },
+    {
+      "amount": "4855",
+      "category": "renewal",
+      "code": "upp-renewal-20",
+      "condition": null,
+      "currency": "EUR",
+      "label": "Renewal fee for the 20th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 20
+    },
+    {
+      "amount": "2427.5",
+      "category": "late_fee",
+      "code": "upp-late-renewal-20",
+      "condition": {
+        "description": "Applies when the renewal fee is paid within the six-month period under Rule 13(3) UPR; surcharge is 50% of the renewal fee.",
+        "per_unit": false,
+        "threshold": 0,
+        "trigger": "late_days"
+      },
+      "currency": "EUR",
+      "label": "Additional fee for late payment of the 20th year",
+      "notes": null,
+      "rights": [
+        "patent"
+      ],
+      "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+      "tier": "none",
+      "year": 20
+    }
+  ],
+  "issuing_body": "European Patent Office",
+  "jurisdiction": "UP",
+  "key": "UP/EPO-UP/patent",
+  "notes": "Complete ordinary renewal ladder for years 2-20, plus the 50% late-payment surcharge for each year. Fees are due only for years following the calendar year in which grant is mentioned. Rule 13 controls due dates, early payment, the six-month late period, and registration-notification timing (https://www.epo.org/en/legal/up-upc/2022/upr_13.html). A 15% licence-of-right reduction is not applied by this schedule.",
+  "office_code": "EPO-UP",
+  "recurring_fee_coverage": {
+    "missing_categories": [],
+    "missing_years": [],
+    "notes": null,
+    "status": "complete"
+  },
+  "retrieved_at": "2026-09-07",
+  "right": "patent",
+  "source_url": "https://www.epo.org/en/legal/up-upc/2022/upf_2.html",
+  "statutory_basis": "Article 2, Rules relating to Fees for Unitary Patent Protection; Rule 13, Rules relating to Unitary Patent Protection."
+}
