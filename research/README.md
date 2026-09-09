@@ -1,3 +1,12 @@
+## Research ownership — September 9, 2026
+
+Maintained general research: [Patent data sources](../../../../research/applied-ai/patent-data-sources.md).
+
+This project continues to own its code, datasets, experiment records, and
+operational guidance. Integrate reusable findings in the linked vault topics;
+keep exact runs, restricted sources, and project-specific decisions here.
+Consolidation does not change access boundaries or operational instructions.
+
 # Research
 
 Living knowledge base for the `patent-client-agents` connector strategy.
