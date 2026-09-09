@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from patent_client_agents.uspto_publications.utils import (
     ClaimsParser,
     html_to_text,
@@ -161,6 +163,15 @@ class TestClaimsParser:
         assert result[0]["number"] == 1
         assert result[1]["number"] == 2
         assert result[2]["number"] == 3
+
+    @pytest.mark.parametrize("range_prefix", ["1-3.", ".Iadd.1-3.", ".[1-3."])
+    def test_marked_up_range_preserves_claims_and_dependencies(self, range_prefix: str) -> None:
+        claims_text = f"{range_prefix} A method.\n4. The method of claim 2."
+        result = ClaimsParser().parse(claims_text)
+        assert [claim["number"] for claim in result] == [1, 2, 3, 4]
+        assert all(claim["limitations"] == ["A method."] for claim in result[:3])
+        assert result[3]["depends_on"] == [2]
+        assert result[1]["dependent_claims"] == [4]
 
     def test_depends_on_all_foregoing(self) -> None:
         parser = ClaimsParser()

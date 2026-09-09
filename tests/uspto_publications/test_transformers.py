@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import datetime as dt
 
+import pytest
+
 from patent_client_agents.uspto_publications.transformers import (
     _coerce_int,
     _ensure_list,
@@ -447,6 +449,27 @@ class TestConvertDocumentPayload:
         data = {"claimsHtml": "1. A method.\n2. The method of claim 1."}
         result = convert_document_payload(data)
         assert len(result["document"]["claims"]) == 2
+
+    @pytest.mark.parametrize("invalid_month", ["202300", "202313", "000005"])
+    def test_invalid_reference_month_preserves_document(self, invalid_month: str) -> None:
+        data = {
+            "pubRefDocNumber": "US10123456B2",
+            "inventionTitle": "Test Patent",
+            "claimsHtml": "1. A method.",
+            "foreignRefPatentNumber": ["EP1234567", "EP2345678"],
+            "foreignRefCountryCode": ["EP", "EP"],
+            "foreignRefPubDate": [invalid_month, "202305"],
+        }
+        result = convert_document_payload(data)
+        assert result["publication_number"] == "US10123456B2"
+        assert result["patent_title"] == "Test Patent"
+        assert result["document"]["claims"][0]["number"] == 1
+        references = result["foreign_references"]
+        assert [reference["patent_number"] for reference in references] == [
+            "EP1234567",
+            "EP2345678",
+        ]
+        assert [reference["pub_month"] for reference in references] == [None, "2023-05-01"]
 
     def test_normalizes_government_interest_list(self) -> None:
         data = {"governmentInterest": ["First statement", "Second statement"]}

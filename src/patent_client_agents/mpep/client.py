@@ -41,7 +41,7 @@ def _translate_fts_query(query: str, syntax: str) -> str:
     if syntax in ("adj", "exact"):
         escaped = cleaned.replace('"', '""')
         return f'"{escaped}"'
-    tokens = [t for t in re.split(r"\s+", cleaned) if t]
+    tokens = ['"' + t.replace('"', '""') + '"' for t in re.split(r"\s+", cleaned) if t]
     if syntax == "or":
         return " OR ".join(tokens)
     return " ".join(tokens)

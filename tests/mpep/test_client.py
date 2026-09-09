@@ -99,6 +99,28 @@ class TestMpepClientSearch:
         # OR should never return fewer hits than the same-terms phrase query.
         assert len(or_.hits) >= len(adj.hits)
 
+    @pytest.mark.parametrize(
+        ("syntax", "expected_hrefs"),
+        [
+            ("and", set()),
+            ("or", {"d0e_2106.html", "d0e_706_03_a.html", "d0e_2143.html"}),
+        ],
+    )
+    async def test_search_punctuation_preserves_boolean_semantics(
+        self, mpep_corpus_env: Path, syntax: str, expected_hrefs: set[str]
+    ) -> None:
+        async with MpepClient() as client:
+            results = await client.search("U.S.C. obviousness", syntax=syntax)
+        assert {hit.href for hit in results.hits} == expected_hrefs
+
+    @pytest.mark.parametrize("syntax", ["and", "or", "adj", "exact"])
+    async def test_search_embedded_quote_is_literal(
+        self, mpep_corpus_env: Path, syntax: str
+    ) -> None:
+        async with MpepClient() as client:
+            results = await client.search('Alice"Mayo', syntax=syntax)
+        assert [hit.href for hit in results.hits] == ["d0e_2106_04_a.html"]
+
     @pytest.mark.asyncio
     async def test_search_pagination_and_has_more(self, mpep_corpus_env: Path) -> None:
         async with MpepClient() as client:
