@@ -71,7 +71,7 @@ class ClaimsParser:
                 continue
             if "-" in claim_number:
                 claim_number = claim_number.replace(".", "")
-                start, end, *_ = re.split(r"[^\d]+", claim_number)
+                start, end, *_ = re.findall(r"\d+", claim_number)
                 for num in range(int(start), int(end) + 1):
                     claims.append(f"{num}. {claim_body}")
             else:
