@@ -365,3 +365,101 @@ def test_docstrings_carry_related_tools_lines():
     for tool in (search_ptab, get_ptab, list_ptab_children):
         doc = tool.__doc__ or ""
         assert "Related tools:" in doc, f"{tool.__name__} missing Related tools: line"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "kind,method,bag",
+    [
+        ("proceeding", "search_trial_proceedings", "patentTrialProceedingDataBag"),
+        ("trial_decision", "search_trial_decisions", "patentTrialDocumentDataBag"),
+        ("trial_document", "search_trial_documents", "patentTrialDocumentDataBag"),
+        ("appeal_decision", "search_appeal_decisions", "patentAppealDataBag"),
+        ("interference_decision", "search_interference_decisions", "patentInterferenceDataBag"),
+    ],
+)
+async def test_search_ptab_continuation_for_every_record_type(kind, method, bag):
+    from mcp_data_core.envelope import decode_cursor
+
+    responses = [
+        _FakeResponse(
+            payload={"count": 3, bag: [{"trialNumber": "first"}, {"trialNumber": "second"}]}
+        ),
+        _FakeResponse(payload={"count": 3, bag: [{"trialNumber": "third"}]}),
+    ]
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as cls:
+        source = AsyncMock(side_effect=responses)
+        setattr(cls.return_value.__aenter__.return_value, method, source)
+        first = await search_ptab(type=kind, query="q", limit=2)
+        last = await search_ptab(type=kind, query="q", next_cursor=first.next_cursor)
+
+    assert first.more_available is True
+    assert decode_cursor(first.next_cursor) == {"offset": 2, "limit": 2}
+    assert last.more_available is False
+    assert last.next_cursor is None
+    assert len(last.items) == 1
+    source.assert_awaited_with(query="q", limit=2, offset=2)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("count,rows,offset", [(5, [], 2), (1, [{}, {}], 0), (None, [], 0)])
+async def test_search_ptab_rejects_inconsistent_coverage(count, rows, offset):
+    from mcp_data_core.exceptions import ParseError
+
+    fake = _FakeResponse(payload={"count": count, "patentTrialProceedingDataBag": rows})
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as cls:
+        cls.return_value.__aenter__.return_value.search_trial_proceedings = AsyncMock(
+            return_value=fake
+        )
+        with pytest.raises(ParseError):
+            await search_ptab(type="proceeding", query="q", offset=offset)
+
+
+@pytest.mark.asyncio
+async def test_search_ptab_missing_count_is_not_an_empty_result():
+    from mcp_data_core.exceptions import ParseError
+    from patent_client_agents.uspto_odp.models import PtabTrialProceedingResponse
+
+    fake = PtabTrialProceedingResponse()
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as cls:
+        cls.return_value.__aenter__.return_value.search_trial_proceedings = AsyncMock(
+            return_value=fake
+        )
+        with pytest.raises(ParseError, match="coverage is unknown"):
+            await search_ptab(type="proceeding", query="q")
+
+
+@pytest.mark.asyncio
+async def test_search_ptab_explicit_zero_count_is_complete():
+    from patent_client_agents.uspto_odp.models import PtabTrialProceedingResponse
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as cls:
+        cls.return_value.__aenter__.return_value.search_trial_proceedings = AsyncMock(
+            return_value=PtabTrialProceedingResponse(count=0)
+        )
+        result = await search_ptab(type="proceeding", query="q")
+    assert not result.more_available
+    assert result.next_cursor is None
+    assert result.items == []
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "kwargs",
+    [
+        {"offset": -1},
+        {"limit": 0},
+        {"limit": -1},
+        {"next_cursor": "garbage"},
+        {"next_cursor": "e30"},
+        {"offset": True},
+        {"limit": 1.5},
+    ],
+)
+async def test_search_ptab_invalid_pagination_fails_before_request(kwargs):
+    from mcp_data_core.exceptions import ValidationError
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as cls:
+        with pytest.raises(ValidationError):
+            await search_ptab(type="proceeding", query="q", **kwargs)
+    cls.assert_not_called()

@@ -11,9 +11,11 @@ from fastmcp.tools.tool import ToolResult  # ty: ignore[unresolved-import]
 
 from mcp_data_core.envelope import (
     ListEnvelope,
+    decode_cursor,
+    encode_cursor,
     make_provenance,
 )
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import ParseError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import download_tool_result, read_resource, register_source
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
@@ -963,6 +965,11 @@ async def search_ptab(
         "decision_type + outcome. When True, every hit is the full PTAB "
         "record — large; prefer ``get_ptab`` for one.",
     ] = False,
+    next_cursor: Annotated[
+        str | None,
+        "Continuation from the previous response; overrides offset and limit. "
+        "Keep type and query unchanged.",
+    ] = None,
 ) -> ListEnvelope[dict]:
     """Search Patent Trial and Appeal Board (PTAB) records across AIA trials, ex parte appeals, and pre-AIA interferences.
 
@@ -971,7 +978,9 @@ async def search_ptab(
     pre-AIA interferences. The ``type`` parameter picks which record kind
     to search; appeals and interferences are legally distinct from AIA
     trials. Returns a lean stub per hit by default; pass ``full=True`` for
-    the upstream PTAB record per hit.
+    the upstream PTAB record per hit. Pass ``next_cursor`` to continue with
+    the same type and query. ``more_available=False`` ends the current
+    source query, not a frozen snapshot of the index.
 
     Related tools: get_ptab, list_ptab_children, download_ptab_trial_documents,
     download_ptab_trial_decisions, download_ptab_appeal_decisions,
@@ -980,9 +989,17 @@ async def search_ptab(
     key = type.strip().lower()
     method_name = _PTAB_SEARCH_METHOD.get(key)
     if method_name is None:
-        from mcp_data_core.exceptions import ValidationError
-
         raise ValidationError(f"type must be one of {sorted(_PTAB_SEARCH_METHOD)}; got {type!r}")
+    if next_cursor is not None:
+        try:
+            cursor = decode_cursor(next_cursor)
+            offset, limit = cursor["offset"], cursor["limit"]
+        except (ValueError, KeyError) as exc:
+            raise ValidationError("invalid PTAB next_cursor") from exc
+    if isinstance(offset, bool) or not isinstance(offset, int) or offset < 0:
+        raise ValidationError("offset must be a non-negative integer")
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit <= 0:
+        raise ValidationError("limit must be a positive integer")
     async with UsptoOdpClient() as client:
         method = getattr(client, method_name)
         result = await method(query=query, limit=limit, offset=offset)
@@ -991,15 +1008,23 @@ async def search_ptab(
     bag_key = _PTAB_BAG_KEY[key]
     raw_items = list(dumped.get(bag_key) or [])
     total = dumped.get("count")
+    # ODP models default omitted counts to zero; that is not evidence of completion.
+    if "count" in getattr(result.__class__, "model_fields", {}):
+        if "count" not in result.model_fields_set:
+            total = None
     items = raw_items if full else [_stub_ptab_record(r, key) for r in raw_items]
     shown = len(items)
-    more = bool(total and shown + offset < int(total))
-    summary_total = f"{shown} of {total} hits" if total else f"{shown} hits"
+    if isinstance(total, bool) or not isinstance(total, int) or total < 0:
+        raise ParseError("PTAB search omitted a valid total count; coverage is unknown")
+    if (shown and offset + shown > total) or (not shown and offset < total):
+        raise ParseError("PTAB search page contradicts its total count; retry the source query")
+    more = offset + shown < total
+    summary_total = f"{shown} of {total} hits at offset {offset}"
     return ListEnvelope[dict](
         summary=f"PTAB {key} — `{query}`: {summary_total}.",
         items=items,
         more_available=more,
-        next_cursor=None,
+        next_cursor=encode_cursor({"offset": offset + shown, "limit": limit}) if more else None,
         provenance=_odp_provenance(f"/api/v1/ptab/{key.replace('_', '-')}s/search"),
     )
 
