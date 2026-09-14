@@ -40,9 +40,12 @@ from patent_client_agents.fees.models import (
     FeeCategory,
     FeeItem,
     FeeSchedule,
+    RecurringFeeCoverage,
+    RecurringFeeCoverageStatus,
 )
 from patent_client_agents.mcp.tools.fees import (
     _fees_provenance,
+    fees_mcp,
     get_fee_schedule,
     lookup_fee,
 )
@@ -51,6 +54,13 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCES_YAML = ROOT / "coverage" / "sources.yaml"
 
 KNOWN_EFFECTIVE_DATE = date(2026, 5, 1)
+
+
+@pytest.mark.asyncio
+async def test_public_fee_surface_remains_data_only() -> None:
+    names = {tool.name for tool in await fees_mcp.list_tools()}
+
+    assert "estimate_patent_fee_exposure" not in names
 
 
 def _load_fees_entries() -> list[dict]:
@@ -169,6 +179,12 @@ async def test_get_fee_schedule_returns_envelope_with_effective_date(
 
     assert isinstance(envelope, ResponseEnvelope)
     assert envelope.provenance.effective_date == KNOWN_EFFECTIVE_DATE
+    assert envelope.details["recurring_fee_coverage"] == {
+        "status": "partial",
+        "missing_categories": [],
+        "missing_years": [],
+        "notes": "Recurring-fee coverage has not been audited for completeness.",
+    }
 
 
 @pytest.mark.asyncio
@@ -180,3 +196,47 @@ async def test_lookup_fee_returns_envelope_with_effective_date(
 
     assert isinstance(envelope, ListEnvelope)
     assert envelope.provenance.effective_date == KNOWN_EFFECTIVE_DATE
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("coverage", "expected"),
+    [
+        (
+            RecurringFeeCoverage(
+                status=RecurringFeeCoverageStatus.partial,
+                missing_categories=[FeeCategory.maintenance],
+                missing_years=[8, 12],
+            ),
+            "Recurring-fee coverage: partial; missing categories: maintenance; "
+            "missing years: 8, 12.",
+        ),
+        (
+            RecurringFeeCoverage(status=RecurringFeeCoverageStatus.complete),
+            "Recurring-fee coverage: complete.",
+        ),
+    ],
+)
+async def test_empty_lookup_distinguishes_recurring_coverage(
+    coverage: RecurringFeeCoverage,
+    expected: str,
+) -> None:
+    schedule = _synthetic_schedule().model_copy(update={"recurring_fee_coverage": coverage})
+
+    async def _fake_scraper() -> FeeSchedule:
+        return schedule
+
+    with patch.dict(
+        registry._DISPATCH,
+        {("USPTO", RightType.patent): _fake_scraper},
+    ):
+        envelope = await lookup_fee(
+            jurisdiction="USPTO",
+            category="maintenance",
+            year=12,
+            right="patent",
+        )
+
+    assert envelope.items == []
+    assert "No matching fees found." in envelope.summary
+    assert expected in envelope.summary

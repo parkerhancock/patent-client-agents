@@ -35,6 +35,8 @@ from .models import (
     FeeItem,
     FeeSchedule,
     JurisdictionMeta,
+    RecurringFeeCoverage,
+    RecurringFeeCoverageStatus,
     RightType,
 )
 from .registry import OFFICES, list_supported_routes
@@ -51,6 +53,8 @@ __all__ = [
     "RightType",
     "ConditionalTrigger",
     "JurisdictionMeta",
+    "RecurringFeeCoverage",
+    "RecurringFeeCoverageStatus",
     "get_schedule",
     "list_jurisdictions",
     "lookup_fee",

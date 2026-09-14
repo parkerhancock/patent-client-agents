@@ -63,6 +63,9 @@ class TestUSPTOMaintenanceYear:
     def test_no_match_returns_none(self) -> None:
         assert uspto_mod._maintenance_year("Basic filing fee") is None
 
+    def test_late_surcharge_keeps_maintenance_stage(self) -> None:
+        assert uspto_mod._maintenance_year("Surcharge - 3.5 year maintenance fee") == 4
+
 
 class TestUSPTOConditionDetection:
     def test_independent_claims_over(self) -> None:

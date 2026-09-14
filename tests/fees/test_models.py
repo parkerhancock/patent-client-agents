@@ -14,6 +14,8 @@ from patent_client_agents.fees.models import (
     FeeCondition,
     FeeItem,
     FeeSchedule,
+    RecurringFeeCoverage,
+    RecurringFeeCoverageStatus,
     RightType,
 )
 
@@ -112,3 +114,45 @@ class TestFeeScheduleValidation:
     def test_empty_fees_rejected(self) -> None:
         with pytest.raises(ValidationError):
             self._schedule(fees=[])
+
+    def test_existing_schedule_defaults_to_explicit_partial_coverage(self) -> None:
+        coverage = self._schedule().recurring_fee_coverage
+
+        assert coverage.status == RecurringFeeCoverageStatus.partial
+        assert coverage.notes == "Recurring-fee coverage has not been audited for completeness."
+
+    def test_complete_recurring_coverage_is_supported(self) -> None:
+        coverage = RecurringFeeCoverage(status=RecurringFeeCoverageStatus.complete)
+
+        assert coverage.status == RecurringFeeCoverageStatus.complete
+        assert coverage.missing_categories == []
+        assert coverage.missing_years == []
+
+    def test_not_applicable_recurring_coverage_is_supported(self) -> None:
+        coverage = RecurringFeeCoverage(status=RecurringFeeCoverageStatus.not_applicable)
+
+        assert coverage.status == RecurringFeeCoverageStatus.not_applicable
+
+    def test_partial_coverage_accepts_explicit_gaps(self) -> None:
+        coverage = RecurringFeeCoverage(
+            status=RecurringFeeCoverageStatus.partial,
+            missing_categories=[FeeCategory.renewal],
+            missing_years=[5, 6],
+        )
+
+        assert coverage.missing_categories == [FeeCategory.renewal]
+        assert coverage.missing_years == [5, 6]
+
+    def test_non_recurring_missing_category_rejected(self) -> None:
+        with pytest.raises(ValidationError, match="only renewal or maintenance"):
+            RecurringFeeCoverage(
+                status=RecurringFeeCoverageStatus.partial,
+                missing_categories=[FeeCategory.filing],
+            )
+
+    def test_complete_coverage_cannot_declare_gaps(self) -> None:
+        with pytest.raises(ValidationError, match="cannot declare missing"):
+            RecurringFeeCoverage(
+                status=RecurringFeeCoverageStatus.complete,
+                missing_years=[5],
+            )

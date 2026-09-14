@@ -85,3 +85,34 @@ async def test_cached_other_version_does_not_borrow_check_time(tmp_path):
         with pytest.raises(RuntimeError, match="without source revalidation"):
             await client.fetch_html(refresh=True)
         assert client.source_metadata["refresh_outcome"] == "failed"
+
+
+def test_unknown_retrieval_age_is_not_reported_as_zero():
+    from datetime import date
+    from decimal import Decimal
+
+    from patent_client_agents.fees.api import estimate_freshness
+    from patent_client_agents.fees.models import FeeItem, FeeSchedule
+
+    schedule = FeeSchedule(
+        jurisdiction="US",
+        issuing_body="USPTO",
+        office_code="USPTO",
+        right="patent",
+        currency="USD",
+        effective_date=date(2025, 1, 19),
+        source_url="https://www.uspto.gov",
+        retrieved_at=None,
+        fees=[
+            FeeItem(
+                code="1001",
+                label="test",
+                category="filing",
+                rights=["patent"],
+                amount=Decimal("1"),
+                currency="USD",
+            )
+        ],
+    )
+    assert estimate_freshness(schedule)["days_since_retrieval"] is None
+    assert estimate_freshness(schedule)["retrieved_at"] is None

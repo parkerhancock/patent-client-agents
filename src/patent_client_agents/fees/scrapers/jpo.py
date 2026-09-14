@@ -381,7 +381,7 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
                             year=year,
                             condition=FeeCondition(
                                 trigger="claims_over",
-                                threshold=1,
+                                threshold=0,
                                 per_unit=True,
                                 description="JPO per-claim surcharge.",
                             ),
@@ -421,7 +421,7 @@ async def scrape_jpo_patents() -> FeeSchedule:
             "claim-count-dependent: every cell is '¥X + ¥Y per claim'. "
             "The scraper splits these into a base FeeItem plus a separate "
             "excess_claims FeeItem with FeeCondition(trigger=claims_over, "
-            "threshold=1, per_unit=True). Two annuity cohorts are emitted: "
+            "threshold=0, per_unit=True). Two annuity cohorts are emitted: "
             "'current' for patents filed/examined on or after the relevant "
             "cutoff dates, and 'legacy' for pre-cutoff patents (mostly "
             "expired by now but still in the schedule for completeness). "
