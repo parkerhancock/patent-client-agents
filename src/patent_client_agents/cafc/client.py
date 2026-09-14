@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from mcp_data_core import BaseAsyncClient
-from mcp_data_core.exceptions import McpDataCoreError
+from mcp_data_core.exceptions import McpDataCoreError, ValidationError
 from patent_client_agents.cafc.classifier import PatentClassifier
 from patent_client_agents.cafc.models import CAFCOpinion
 
@@ -112,6 +112,7 @@ class CAFCClient(BaseAsyncClient):
         date_to: date | None = None,
         origins: list[str] | None = None,
         max_results: int | None = None,
+        offset: int = 0,
     ) -> list[CAFCOpinion]:
         """Search CAFC opinions with optional text, date, and origin filters.
 
@@ -122,18 +123,29 @@ class CAFCClient(BaseAsyncClient):
                 returns the full recent list and any client-side filter
                 only sees ``length`` rows — which usually misses hits.
             date_from: Start date (inclusive).
-            date_to: End date (inclusive). Defaults to today.
+            date_to: End date (inclusive), requiring date_from. Defaults to today.
             origins: Origin codes to filter (e.g. ``["PTO", "DCT"]``).
-            max_results: Cap on number of results.
+            max_results: Positive cap on number of results, or None for all.
+            offset: Non-negative offset into the upstream filtered index.
 
         Returns:
             List of :class:`CAFCOpinion` objects.
         """
-        opinions: list[CAFCOpinion] = []
-        page_size = 100
-        start = 0
+        if isinstance(offset, bool) or not isinstance(offset, int) or offset < 0:
+            raise ValidationError("offset must be a non-negative integer")
+        if max_results is not None and (
+            isinstance(max_results, bool) or not isinstance(max_results, int) or max_results <= 0
+        ):
+            raise ValidationError("max_results must be a positive integer")
+        if date_to is not None and date_from is None:
+            raise ValidationError("date_to requires date_from; an end-only range is unsupported")
+        if date_from is not None and date_from > (date_to or date.today()):
+            raise ValidationError("date_from must not be later than date_to (default: today)")
 
+        opinions: list[CAFCOpinion] = []
+        start = offset
         while True:
+            page_size = min(100, max_results - len(opinions)) if max_results else 100
             result = await self._fetch_page(
                 start=start,
                 length=page_size,
@@ -142,20 +154,42 @@ class CAFCClient(BaseAsyncClient):
                 date_to=date_to,
                 origins=origins,
             )
-            rows = result.get("data", [])
-            if not rows:
+            if not isinstance(result, dict) or not isinstance(result.get("data"), list):
+                raise CAFCError("CAFC response omitted a valid data array; coverage is unknown")
+            if result.get("error"):
+                raise CAFCError("CAFC reported a source error; coverage is unknown")
+            rows = result["data"]
+            if len(rows) > page_size or any(
+                not isinstance(row, list)
+                or len(row) < 7
+                or any(not isinstance(cell, str) for cell in row[:7])
+                for row in rows
+            ):
+                raise CAFCError("CAFC returned malformed or oversized rows; coverage is unknown")
+            # recordsTotal is unfiltered; only recordsFiltered locates this query's end.
+            counts: dict[str, int] = {}
+            for key in ("recordsFiltered", "recordsTotal"):
+                if key == "recordsTotal" and key not in result:
+                    continue
+                value = result.get(key)
+                if isinstance(value, str) and re.fullmatch(r"[0-9]+", value):
+                    value = int(value)
+                if type(value) is not int or value < 0:
+                    raise CAFCError(f"CAFC omitted a valid {key}; coverage is unknown")
+                counts[key] = value
+            total = counts["recordsFiltered"]
+            if (
+                (rows and start + len(rows) > total)
+                or (not rows and start < total)
+                or ("recordsTotal" in counts and total > counts["recordsTotal"])
+            ):
+                raise CAFCError("CAFC page contradicts its total count; retry the source query")
+            opinions.extend(self._parse_row(row) for row in rows)
+            start += len(rows)
+            if max_results is not None and len(opinions) >= max_results:
                 break
-
-            for row in rows:
-                opinion = self._parse_row(row)
-                opinions.append(opinion)
-                if max_results and len(opinions) >= max_results:
-                    return opinions
-
-            if len(rows) < page_size:
+            if start >= total:
                 break
-            start += page_size
-
         return opinions
 
     async def search_patent_opinions(
@@ -164,6 +198,7 @@ class CAFCClient(BaseAsyncClient):
         date_from: date | None = None,
         date_to: date | None = None,
         max_results: int | None = None,
+        offset: int = 0,
     ) -> list[CAFCOpinion]:
         """Search only patent-relevant opinions (PTO, DCT, ITC, CFC origins)."""
         return await self.search(
@@ -171,6 +206,7 @@ class CAFCClient(BaseAsyncClient):
             date_to=date_to,
             origins=list(_PATENT_ORIGINS),
             max_results=max_results,
+            offset=offset,
         )
 
     async def recent(self, days: int = 30) -> list[CAFCOpinion]:

@@ -17,7 +17,8 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope, decode_cursor, encode_cursor, make_provenance
+from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.filenames import cafc_opinion as _cafc_name
 from mcp_data_core.mcp import download_response, register_source
 from mcp_data_core.mcp.annotations import READ_ONLY
@@ -57,6 +58,20 @@ def _dump(obj: object) -> dict[str, Any]:
     if isinstance(obj, dict):
         return cast("dict[str, Any]", obj)
     raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
+
+
+def _page_args(offset: int, limit: int, next_cursor: str | None) -> tuple[int, int]:
+    if next_cursor is not None:
+        try:
+            cursor = decode_cursor(next_cursor)
+            offset, limit = cursor["offset"], cursor["limit"]
+        except (ValueError, KeyError) as exc:
+            raise ValidationError("invalid CAFC next_cursor") from exc
+    if type(offset) is not int or offset < 0:
+        raise ValidationError("offset must be a non-negative integer")
+    if type(limit) is not int or not 1 <= limit <= 100:
+        raise ValidationError("CAFC page size must be between 1 and 100")
+    return offset, limit
 
 
 def _stub_opinion(record: dict) -> dict:
@@ -111,8 +126,10 @@ register_source("cafc/opinions", _fetch_cafc_opinion, "application/pdf")
 @cafc_mcp.tool(annotations=READ_ONLY)
 async def search_cafc_opinions(
     query: Annotated[str | None, "Search text to filter CAFC opinions"] = None,
-    patent_only: Annotated[bool, "Only return patent-related opinions"] = False,
-    limit: Annotated[int, "Maximum number of results"] = 25,
+    patent_only: Annotated[
+        bool, "Apply a heuristic case-name patent classifier to each source page"
+    ] = False,
+    limit: Annotated[int, "Maximum source rows per page (1-100)"] = 25,
     full: Annotated[
         bool,
         "When False (the default), each hit is a lean stub: appeal "
@@ -121,25 +138,31 @@ async def search_cafc_opinions(
         "each hit carries the full CAFCOpinion record (file_path, "
         "patent_confidence, patent_keywords, etc.).",
     ] = False,
+    offset: Annotated[int, "Offset into the upstream filtered index"] = 0,
+    next_cursor: Annotated[
+        str | None, "Continuation from the previous page; overrides offset and page size"
+    ] = None,
 ) -> ListEnvelope[dict]:
     """Search U.S. Court of Appeals for the Federal Circuit opinions and orders.
 
     Free-text search across the upstream DataTables index — passes ``query``
     to the search field rather than filtering a paginated fetch client-side.
-    ``patent_only=True`` runs the local PatentClassifier over case names.
+    ``patent_only=True`` runs a heuristic PatentClassifier over case names;
+    it is not complete patent-case coverage. Pages may have zero matching
+    items while more_available remains true. Continue with next_cursor and
+    the same query/patent_only filters; cursors are offsets, not snapshots.
     Returns lean stubs by default so an agent can triage hits; pass
     ``full=True`` for the upstream row shape. Use ``download_cafc_pdf`` with
     an appeal number to pull a specific opinion PDF.
 
     Related tools: search_cafc_patent_opinions, download_cafc_pdf.
     """
+    offset, limit = _page_args(offset, limit, next_cursor)
     async with CAFCClient() as client:
-        # Pass query through to the upstream DataTables search field.
-        # Filtering client-side over a paginated fetch effectively
-        # filtered only the most recent ``limit`` rows and almost always
-        # returned 0 hits — the upstream search is what actually finds
-        # matches across the full corpus.
-        opinions = await client.search(query=query, max_results=limit)
+        opinions = await client.search(query=query, max_results=limit + 1, offset=offset)
+        more = len(opinions) > limit
+        opinions = opinions[:limit]
+        source_rows = len(opinions)
         if patent_only:
             classifier = PatentClassifier()
             opinions = [o for o in opinions if classifier.classify(o.case_name)[0]]
@@ -148,10 +171,17 @@ async def search_cafc_opinions(
     items = dumped if full else [_stub_opinion(r) for r in dumped]  # type: ignore[arg-type]
 
     query_label = f"`{query}`" if query else "(recent opinions)"
-    scope = " (patent only)" if patent_only else ""
+    scope = " (patent only; heuristic case-name filter)" if patent_only else ""
     return ListEnvelope[dict](
-        summary=f"CAFC opinions — {query_label}{scope}: {len(items)} hits.",
+        summary=(
+            f"CAFC opinions — {query_label}{scope}: {len(items)} hits. "
+            f"Inspected {source_rows} source rows at offset {offset}."
+        ),
         items=items,
+        more_available=more,
+        next_cursor=encode_cursor({"offset": offset + source_rows, "limit": limit})
+        if more
+        else None,
         provenance=_cafc_provenance("/home/case-information/opinions-orders/"),
     )
 
@@ -160,7 +190,7 @@ async def search_cafc_opinions(
 async def search_cafc_patent_opinions(
     date_from: Annotated[str | None, "Start date (YYYY-MM-DD) to filter opinions"] = None,
     date_to: Annotated[str | None, "End date (YYYY-MM-DD) to filter opinions"] = None,
-    max_results: Annotated[int, "Maximum number of results"] = 25,
+    max_results: Annotated[int, "Maximum source rows per page (1-100)"] = 25,
     full: Annotated[
         bool,
         "When False (the default), each hit is a lean stub: appeal "
@@ -168,12 +198,19 @@ async def search_cafc_patent_opinions(
         "precedential status, patent classification, PDF URL. When True, "
         "each hit carries the full CAFCOpinion record.",
     ] = False,
+    offset: Annotated[int, "Offset into the upstream filtered index"] = 0,
+    next_cursor: Annotated[
+        str | None, "Continuation from the previous page; overrides offset and page size"
+    ] = None,
 ) -> ListEnvelope[dict]:
     """Search U.S. Court of Appeals for the Federal Circuit opinions from patent-relevant origins.
 
     Filters to opinions whose origin is PTO, DCT, ITC, or CFC — the four
     paths that bring patent cases to the Federal Circuit. Optional date
-    range narrows the window. Returns lean stubs by default; pass
+    range narrows the window; date_to requires date_from, and reversed
+    bounds are rejected. Origins include non-patent cases as well.
+    Continue with next_cursor and the same dates; cursors are offsets, not
+    snapshots. Returns lean stubs by default; pass
     ``full=True`` for the upstream row shape. Use ``download_cafc_pdf``
     with an appeal number to pull a specific opinion PDF.
 
@@ -181,13 +218,22 @@ async def search_cafc_patent_opinions(
     """
     from datetime import date as date_type
 
+    offset, max_results = _page_args(offset, max_results, next_cursor)
+    try:
+        start_date = date_type.fromisoformat(date_from) if date_from is not None else None
+        end_date = date_type.fromisoformat(date_to) if date_to is not None else None
+    except ValueError as exc:
+        raise ValidationError("dates must use YYYY-MM-DD") from exc
+    if end_date is not None and start_date is None:
+        raise ValidationError("date_to requires date_from; an end-only range is unsupported")
+    if start_date is not None and start_date > (end_date or date_type.today()):
+        raise ValidationError("date_from must not be later than date_to (default: today)")
     async with CAFCClient() as client:
-        kwargs: dict = {"max_results": max_results}
-        if date_from:
-            kwargs["date_from"] = date_type.fromisoformat(date_from)
-        if date_to:
-            kwargs["date_to"] = date_type.fromisoformat(date_to)
-        opinions = await client.search_patent_opinions(**kwargs)
+        opinions = await client.search_patent_opinions(
+            date_from=start_date, date_to=end_date, max_results=max_results + 1, offset=offset
+        )
+    more = len(opinions) > max_results
+    opinions = opinions[:max_results]
 
     dumped = [_dump(o) for o in opinions]
     items = dumped if full else [_stub_opinion(r) for r in dumped]  # type: ignore[arg-type]
@@ -199,8 +245,17 @@ async def search_cafc_patent_opinions(
         range_bits.append(f"to {date_to}")
     range_label = " ".join(range_bits) or "(no date range)"
     return ListEnvelope[dict](
-        summary=f"CAFC patent opinions — {range_label}: {len(items)} hits.",
+        summary=(
+            f"CAFC patent opinions — {range_label}: {len(items)} hits. "
+            f"PTO/DCT/ITC/CFC origin scope at offset {offset}; may include non-patent cases."
+        ),
         items=items,
+        more_available=more,
+        next_cursor=(
+            encode_cursor({"offset": offset + len(opinions), "limit": max_results})
+            if more
+            else None
+        ),
         provenance=_cafc_provenance("/home/case-information/opinions-orders/"),
     )
 
