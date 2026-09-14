@@ -14,9 +14,11 @@ The public surface here is preserved exactly so callers don't change:
 
 from __future__ import annotations
 
+import hashlib
 import os
 import re
 from typing import Any
+from urllib.parse import urlencode
 
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import MpepSearchHit, MpepSearchResponse, MpepSection, MpepVersion
@@ -117,13 +119,23 @@ class MpepClient:
             self._db = CorpusDB.open(self._corpus_path)
         return self._db
 
+    def _check_version(self, version: str) -> dict[str, str]:
+        meta = self._open().meta()
+        installed = meta.get("source_version", "unknown")
+        if version != "current" and (installed in {"current", "unknown"} or version != installed):
+            raise ValueError(
+                f"MPEP version {version!r} is unavailable; only the installed snapshot "
+                f"({installed}) is retained. 'current' selects that snapshot, not a live release."
+            )
+        return meta
+
     async def resolve_section_href(
         self,
         section_number: str,
         *,
-        version: str = "current",  # accepted for API parity; corpus is single-snapshot
+        version: str = "current",
     ) -> str | None:
-        del version
+        self._check_version(version)
         db = self._open()
         row = db.get_section(section_number=section_number)
         return row.href if row else None
@@ -146,7 +158,8 @@ class MpepClient:
         # Corpus snapshot doesn't distinguish content / index / notes / form
         # paragraphs — all body text is indexed together. We accept the
         # flags for API parity but have no separate corpus to filter on.
-        del version, include_content, include_index, include_notes
+        self._check_version(version)
+        del include_content, include_index, include_notes
         del include_form_paragraphs, snippet
         db = self._open()
         fts_query = _translate_fts_query(query, syntax)
@@ -170,6 +183,7 @@ class MpepClient:
         del (
             highlight_query
         )  # the corpus stores the canonical HTML; no need to re-fetch a highlighted view
+        meta = self._check_version(version)
         db = self._open()
         if SECTION_NUMBER_PATTERN.match(section):
             row = db.get_section(section_number=section)
@@ -184,8 +198,40 @@ class MpepClient:
             href=row.href,
             html=row.html,
             text=row.text,
-            version=version,
+            version=(
+                meta.get("source_version") if meta.get("source_version") != "current" else None
+            )
+            or "unknown",
             title=row.title,
+            source_url=f"{self.base_url}/RDMS/MPEP/result?"
+            + urlencode(
+                {
+                    "href": row.href,
+                    "version": meta.get("source_version")
+                    if meta.get("source_version") not in {None, "unknown"}
+                    else "current",
+                }
+            ),
+            content_sha256=hashlib.sha256(row.html.encode()).hexdigest(),
+            section_revision=(
+                match.group(0)
+                if (match := re.search(r"\[R-[^\]]+\]", row.title or row.text[:500]))
+                else None
+            ),
+            corpus_metadata={
+                key: meta.get(key)
+                for key in (
+                    "source_version",
+                    "edition",
+                    "revision",
+                    "publication_date",
+                    "substantive_cutoff_date",
+                    "build_id",
+                    "synced_at",
+                    "snapshot_date",
+                    "interim_updates_coverage",
+                )
+            },
         )
 
     async def list_versions(self) -> list[MpepVersion]:
@@ -193,16 +239,18 @@ class MpepClient:
 
         The corpus only ships one MPEP version (the snapshot recorded
         when ``patent-client-agents-build-mpep-corpus`` last ran);
-        return a value field of ``"current"`` so callers passing it to
-        :meth:`search` continue to work.
+        return its recorded identifier when known. ``current`` remains an
+        alias for the installed snapshot, never a claim of source freshness.
         """
         db = self._open()
         meta = db.meta()
         snapshot = meta.get("snapshot_date", "unknown")
         return [
             MpepVersion(
-                label=f"current (snapshot {snapshot})",
-                value="current",
+                label=f"{meta.get('source_version', 'unknown')} (installed snapshot {snapshot})",
+                value=meta.get("source_version", "current")
+                if meta.get("source_version") not in {None, "unknown"}
+                else "current",
                 current=True,
             )
         ]

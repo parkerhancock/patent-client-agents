@@ -64,3 +64,11 @@ async with CAFCClient() as client:
 | `download_cafc_pdf` | Fetch an opinion PDF by appeal number; returns a signed `download_url` |
 
 The `download_cafc_pdf` tool registers a `pca://cafc/opinions/{appeal_number}` download fetcher so resource-aware MCP clients (CoWork) can stream the PDF via `resources/read` instead of the HTTP `download_url`.
+
+Exact document retrieval: pass `document_url` from a discovery row to
+`download_cafc_pdf`. The URL identifies the document separately from its appeal;
+ambiguous appeal-only requests fail. Each call fetches current bytes and returns
+`content_sha256`, `bytes_retrieved_at`, and `source_checked_at`. Downloads are
+stored under a content-addressed path so replacements do not overwrite older
+returned artifacts. Compare hashes across observations to detect same-URL byte
+changes; the connector does not infer legal supersession from a hash change.

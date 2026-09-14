@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import logging
 import re
 import sqlite3
@@ -34,6 +35,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import cast
 
 import httpx
 from lxml import html
@@ -199,7 +201,7 @@ def parse_chapter_html(fetched_href: str, html_text: str) -> ParsedPage:
         breadcrumb = (
             f"Chapter {resolved_chapter} > {section_number}" if resolved_chapter else section_number
         )
-        section_html = html.tostring(container, encoding="unicode")
+        section_html = cast(str, html.tostring(container, encoding="unicode"))
         section_text = _normalize_whitespace(container.text_content() or "")
         sections.append(
             ParsedSection(
@@ -322,7 +324,9 @@ class MpepScraper:
         return pages
 
 
-def write_corpus(pages: Iterable[ParsedPage], output: Path) -> int:
+def write_corpus(
+    pages: Iterable[ParsedPage], output: Path, *, release_metadata: dict[str, str] | None = None
+) -> int:
     """Initialize the schema and insert section rows. Returns row count."""
     output.parent.mkdir(parents=True, exist_ok=True)
     if output.exists():
@@ -332,6 +336,7 @@ def write_corpus(pages: Iterable[ParsedPage], output: Path) -> int:
         conn.executescript(DDL)
         seen: set[str] = set()
         inserted = 0
+        digest = hashlib.sha256()
         for page in pages:
             for section in page.sections:
                 if section.href in seen:
@@ -353,14 +358,19 @@ def write_corpus(pages: Iterable[ParsedPage], output: Path) -> int:
                         section.text,
                     ),
                 )
+                digest.update(section.href.encode() + b"\0" + section.html.encode() + b"\0")
                 inserted += 1
         snapshot_date = datetime.now(UTC).strftime("%Y-%m-%d")
         meta_rows = [
             ("schema_version", str(SCHEMA_VERSION)),
             ("snapshot_date", snapshot_date),
-            ("source_version", "current"),
+            ("source_version", "unknown"),
+            ("build_id", digest.hexdigest()),
+            ("synced_at", datetime.now(UTC).isoformat()),
+            ("interim_updates_coverage", "not_included"),
             ("section_count", str(inserted)),
         ]
+        meta_rows.extend((release_metadata or {}).items())
         conn.executemany(
             "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
             meta_rows,
@@ -377,10 +387,13 @@ async def build_corpus(
     seed_hrefs: Iterable[str],
     max_pages: int | None,
     base_url: str,
+    release_metadata: dict[str, str] | None = None,
 ) -> int:
-    async with MpepScraper(base_url=base_url) as scraper:
+    async with MpepScraper(
+        base_url=base_url, version=(release_metadata or {}).get("source_version", "current")
+    ) as scraper:
         pages = await scraper.crawl(seed_hrefs=seed_hrefs, max_pages=max_pages)
-    return write_corpus(pages, output)
+    return write_corpus(pages, output, release_metadata=release_metadata)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -427,6 +440,16 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="Log per-chapter progress to stderr.",
     )
+    for field in (
+        "source_version",
+        "edition",
+        "revision",
+        "publication_date",
+        "substantive_cutoff_date",
+    ):
+        parser.add_argument(
+            "--" + field.replace("_", "-"), help="Exact official release metadata; omit if unknown."
+        )
     args = parser.parse_args(argv)
     logging.basicConfig(
         level=logging.INFO if args.verbose else logging.WARNING,
@@ -438,6 +461,17 @@ def main(argv: list[str] | None = None) -> int:
         count = asyncio.run(
             build_corpus(
                 args.output,
+                release_metadata={
+                    field: getattr(args, field)
+                    for field in (
+                        "source_version",
+                        "edition",
+                        "revision",
+                        "publication_date",
+                        "substantive_cutoff_date",
+                    )
+                    if getattr(args, field)
+                },
                 seed_hrefs=seeds,
                 max_pages=args.max_pages,
                 base_url=args.base_url,

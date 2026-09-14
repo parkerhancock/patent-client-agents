@@ -12,8 +12,11 @@ the standard provenance fields only — ``corpus_synced_at`` /
 
 from __future__ import annotations
 
+import hashlib
+from datetime import UTC, datetime
 from pathlib import PurePosixPath
 from typing import Annotated, Any, cast
+from urllib.parse import urlsplit
 
 from fastmcp import FastMCP
 
@@ -23,6 +26,7 @@ from mcp_data_core.filenames import cafc_opinion as _cafc_name
 from mcp_data_core.mcp import download_response, register_source
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.cafc import CAFCClient, PatentClassifier
+from patent_client_agents.cafc.models import CAFCOpinion
 
 cafc_mcp = FastMCP("CAFC")
 
@@ -103,14 +107,13 @@ async def _fetch_cafc_opinion(path: str) -> tuple[bytes, str]:
     """Fetch a CAFC opinion PDF. Path: ``{appeal_number}``."""
     appeal_number = path.strip("/")
     async with CAFCClient() as client:
-        opinions = await client.search(query=appeal_number, max_results=20)
-        match = None
-        for o in opinions:
-            if o.appeal_number and appeal_number in o.appeal_number:
-                match = o
-                break
-        if match is None:
-            raise ValueError(f"No CAFC opinion found for {appeal_number}")
+        opinions = await client.search(query=appeal_number, max_results=100)
+        matches = {
+            o.pdf_url: o for o in opinions if o.appeal_number and appeal_number in o.appeal_number
+        }
+        if len(matches) != 1 or len(opinions) >= 100:
+            raise ValidationError("Select exact document_url using download_cafc_pdf")
+        match = next(iter(matches.values()))
         pdf_bytes = await client.download_pdf(match)
         return pdf_bytes, f"cafc_{appeal_number}.pdf"
 
@@ -263,6 +266,7 @@ async def search_cafc_patent_opinions(
 @cafc_mcp.tool(annotations=READ_ONLY)
 async def download_cafc_pdf(
     appeal_number: Annotated[str, "CAFC appeal number (e.g. '2023-1234')"],
+    document_url: Annotated[str | None, "Exact official PDF URL from discovery"] = None,
 ) -> dict:
     """Download a U.S. Court of Appeals for the Federal Circuit opinion PDF by appeal number.
 
@@ -271,17 +275,37 @@ async def download_cafc_pdf(
 
     Related tools: search_cafc_opinions, search_cafc_patent_opinions.
     """
+    if document_url is not None:
+        parsed = urlsplit(document_url)
+        if (
+            parsed.scheme != "https"
+            or parsed.netloc != "www.cafc.uscourts.gov"
+            or not parsed.path.startswith("/opinions-orders/")
+            or not parsed.path.lower().endswith(".pdf")
+            or parsed.query
+            or parsed.fragment
+        ):
+            raise ValidationError("document_url must be an official CAFC opinions-orders PDF URL")
     async with CAFCClient() as client:
-        opinions = await client.search(query=appeal_number, max_results=20)
-        match = None
-        for o in opinions:
-            if o.appeal_number and appeal_number in o.appeal_number:
-                match = o
-                break
-        if match is None:
-            raise ValueError(f"No CAFC opinion found for appeal number {appeal_number}")
+        if document_url is not None:
+            match = CAFCOpinion(
+                appeal_number=appeal_number, pdf_url=document_url, file_path=parsed.path
+            )
+        else:
+            opinions = await client.search(query=appeal_number, max_results=100)
+            matches = {
+                o.pdf_url: o
+                for o in opinions
+                if o.appeal_number and appeal_number in o.appeal_number
+            }
+            if len(matches) != 1 or len(opinions) >= 100:
+                raise ValidationError(
+                    "Select document_url from discovery; appeal is ambiguous, absent, or capped"
+                )
+            match = next(iter(matches.values()))
         pdf_bytes = await client.download_pdf(match)
 
+        retrieved_at = datetime.now(UTC).isoformat()
         native = PurePosixPath(match.file_path or "").name if match.file_path else ""
         if native.lower().endswith(".pdf"):
             filename = native
@@ -300,12 +324,19 @@ async def download_cafc_pdf(
                 ),
             )
         return await download_response(
-            f"cafc/opinions/{appeal_number}",
+            f"cafc/documents/{hashlib.sha256(pdf_bytes).hexdigest()}",
             pdf_bytes,
             filename=filename,
             content_type="application/pdf",
             appeal_number=appeal_number,
             case_name=match.case_name,
+            document_id=match.pdf_url,
+            source_url=match.pdf_url,
+            content_sha256=hashlib.sha256(pdf_bytes).hexdigest(),
+            bytes_retrieved_at=retrieved_at,
+            source_checked_at=retrieved_at,
+            cache_state="live_fetch",
+            source_revision=None,
         )
 
 

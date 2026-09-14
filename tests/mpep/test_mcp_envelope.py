@@ -72,7 +72,7 @@ async def test_search_provenance_carries_corpus_fields(mpep_corpus_env: Path) ->
     """
     result = await search_mpep(query="patent")
 
-    assert result.provenance.corpus_version == "current"
+    assert result.provenance.corpus_version == "unknown"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
 
 
@@ -101,7 +101,7 @@ async def test_get_single_string_returns_list_envelope(mpep_corpus_env: Path) ->
     # Summary is Markdown leading with the corpus version + section number
     # so agents can paste it as a freshness-aware citation (§4 / §5.13).
     assert "MPEP" in result.summary
-    assert "current" in result.summary
+    assert "unknown" in result.summary
     assert "2106" in result.summary
 
 
@@ -138,7 +138,7 @@ async def test_get_provenance_carries_corpus_fields(mpep_corpus_env: Path) -> No
     """
     result = await get_mpep_section(section="2106")
 
-    assert result.provenance.corpus_version == "current"
+    assert result.provenance.corpus_version == "unknown"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
 
 

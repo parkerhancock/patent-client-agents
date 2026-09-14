@@ -52,7 +52,8 @@ class CorpusStatus(TypedDict):
     ``corpus_version`` mirrors the vendor's version label as recorded in
     ``meta.source_version`` — for MPEP that is the eMPEP ``version=`` query
     parameter the scraper passed to ``mpep.uspto.gov/RDMS/MPEP/content``
-    (typically ``"current"``). When the corpus is unbundled or unreadable
+    when explicitly known. Legacy ``"current"`` labels remain unknown.
+    When the corpus is unbundled or unreadable
     the version falls back to ``"unknown"`` and the sync timestamp to
     ``None`` — we never fabricate values.
     """
@@ -94,7 +95,9 @@ def get_corpus_status() -> CorpusStatus:
         return CorpusStatus(corpus_synced_at=None, corpus_version="unknown")
 
     version = meta.get("source_version") or "unknown"
-    snapshot_raw = meta.get("snapshot_date")
+    if version == "current":
+        version = "unknown"
+    snapshot_raw = meta.get("synced_at") or meta.get("snapshot_date")
     return CorpusStatus(
         corpus_synced_at=_parse_snapshot_date(snapshot_raw),
         corpus_version=version,
@@ -102,10 +105,13 @@ def get_corpus_status() -> CorpusStatus:
 
 
 def _parse_snapshot_date(value: str | None) -> datetime | None:
-    """Parse ``meta.snapshot_date`` (ISO YYYY-MM-DD) into a UTC datetime."""
+    """Parse a precise build timestamp or legacy snapshot date into UTC."""
     if not value:
         return None
     try:
+        if "T" in value:
+            parsed = datetime.fromisoformat(value)
+            return parsed.replace(tzinfo=UTC) if parsed.tzinfo is None else parsed.astimezone(UTC)
         parsed_date = date.fromisoformat(value)
     except ValueError:
         _logger.debug("MPEP get_corpus_status: snapshot_date %r is not ISO date", value)

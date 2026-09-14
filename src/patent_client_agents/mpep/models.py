@@ -23,6 +23,10 @@ class MpepSection(BaseModel):
     text: str
     version: str
     title: str | None = None
+    source_url: str | None = None
+    content_sha256: str | None = None
+    section_revision: str | None = None
+    corpus_metadata: dict[str, str | None] = Field(default_factory=dict)
 
 
 class MpepVersion(BaseModel):

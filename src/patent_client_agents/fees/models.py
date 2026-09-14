@@ -9,7 +9,7 @@ not permitted in fee categorization.
 
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, datetime
 from decimal import Decimal
 from enum import StrEnum
 from pathlib import Path
@@ -270,9 +270,18 @@ class FeeSchedule(BaseModel):
         default=None,
         description="Statute / regulation the schedule is set under (e.g., '37 CFR 1.16').",
     )
-    retrieved_at: date = Field(
+    retrieved_at: date | None = Field(
         description="Date the schedule was last fetched from upstream.",
     )
+    bytes_retrieved_at: datetime | None = None
+    source_checked_at: datetime | None = None
+    content_sha256: str | None = None
+    cache_state: str = "unknown"
+    refresh_outcome: str = "not_requested"
+    refresh_error: str | None = None
+    refresh_attempted_at: datetime | None = None
+    source_revision_date: date | None = None
+    schedule_status: str = "unknown"
     fees: list[FeeItem] = Field(min_length=1)
     notes: str | None = None
 
@@ -323,10 +332,10 @@ class JurisdictionMeta(BaseModel):
     right: RightType
     currency: str
     effective_date: date
-    retrieved_at: date
+    retrieved_at: date | None
     source_url: str
     fee_count: NonNegativeInt
-    days_since_retrieval: NonNegativeInt
+    days_since_retrieval: NonNegativeInt | None
 
 
 # Type alias used by the lookup API; declared here so importers can

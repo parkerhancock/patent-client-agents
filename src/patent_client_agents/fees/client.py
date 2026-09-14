@@ -252,11 +252,30 @@ class FeesClient:
         self,
         jurisdiction: str,
         right: RightType | str = RightType.patent,
+        *,
+        refresh: bool = False,
     ) -> FeeSchedule:
         """Fetch the full schedule for ``(jurisdiction, right)``."""
         right_enum = right if isinstance(right, RightType) else RightType(right)
         _, office = resolve_jurisdiction(jurisdiction, right_enum)
         scraper = get_scraper(office, right_enum)
+        if refresh:
+            if office != "USPTO":
+                raise ValueError(
+                    "Fresh fee-source revalidation is currently supported only for USPTO"
+                )
+            from .scrapers.uspto import (
+                scrape_uspto_designs,
+                scrape_uspto_patents,
+                scrape_uspto_trademarks,
+            )
+
+            scrapers = {
+                RightType.patent: scrape_uspto_patents,
+                RightType.design: scrape_uspto_designs,
+                RightType.trademark: scrape_uspto_trademarks,
+            }
+            return await scrapers[right_enum](refresh=True)
         return await scraper()
 
     # ──────────────────────────────────────────────────────────────────
@@ -335,7 +354,7 @@ def _to_meta(s: FeeSchedule) -> JurisdictionMeta:
         retrieved_at=s.retrieved_at,
         source_url=s.source_url,
         fee_count=len(s.fees),
-        days_since_retrieval=max(0, (today - s.retrieved_at).days),
+        days_since_retrieval=max(0, (today - s.retrieved_at).days) if s.retrieved_at else None,
     )
 
 

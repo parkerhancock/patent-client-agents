@@ -4,8 +4,8 @@ CONNECTOR_STANDARDS.md classification: ``category=fees``,
 ``transport=mcp_proxy``, ``update_strategy=live_proxy``. The connector
 live-fetches each office's schedule (USPTO HTML page; EPO undocumented
 BFF JSON; EUIPO HTML + Next.js SSR stream) with a 7-day hishel TTL.
-Provenance carries ``effective_date`` — the schedule's most-recent
-revision date — so agents can quote fees with the right time stamp.
+Provenance carries the source effective date; USPTO revision dates are
+reported separately in schedule metadata.
 ``retrieved_at`` is when our cache last refreshed from upstream; the
 two are distinct (the schedule may have been effective for months
 before we fetched it).
@@ -13,6 +13,7 @@ before we fetched it).
 
 from __future__ import annotations
 
+from datetime import UTC, datetime
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -29,6 +30,11 @@ from patent_client_agents.fees.client import resolve_jurisdiction
 from patent_client_agents.fees.models import EntityTier, FeeSchedule
 from patent_client_agents.fees.registry import OFFICES, get_scraper
 
+
+class FeeLookupEnvelope(ListEnvelope[dict]):
+    source_metadata: dict[str, Any]
+
+
 fees_mcp = FastMCP("IP fee schedules")
 
 
@@ -38,9 +44,9 @@ _SOURCE_NAME = "IP-office fee schedules"
 def _fees_provenance(schedule: FeeSchedule | None, fallback_url: str) -> Any:
     """Build Provenance for a fees response.
 
-    Sets ``effective_date`` from the schedule's revision date — the
+    Sets ``effective_date`` from the schedule's effective date — the
     field the fees-category CI compliance test enforces. ``retrieved_at``
-    defaults to now (UTC) via :func:`make_provenance`. When no schedule
+    uses retained byte evidence when available. When no schedule
     is in hand (cross-office summary endpoint), ``effective_date`` is
     omitted; the compliance test skips list_fee_jurisdictions for this
     reason — it's a discovery surface, not a quote surface.
@@ -50,11 +56,22 @@ def _fees_provenance(schedule: FeeSchedule | None, fallback_url: str) -> Any:
             source_url=fallback_url,
             source_name=_SOURCE_NAME,
         )
-    return make_provenance(
+    provenance = make_provenance(
         source_url=schedule.source_url,
         source_name=f"{_SOURCE_NAME} — {schedule.office_code}",
         effective_date=schedule.effective_date,
+        retrieved_at=schedule.bytes_retrieved_at
+        or (
+            datetime.combine(schedule.retrieved_at, datetime.min.time(), UTC)
+            if schedule.retrieved_at
+            else None
+        ),
+        cache_hit=schedule.cache_state == "cached",
+        as_of_status="byte retrieval time unknown; envelope timestamp is processing time"
+        if schedule.office_code == "USPTO" and schedule.bytes_retrieved_at is None
+        else None,
     )
+    return provenance
 
 
 def _summarize_schedule(s: FeeSchedule) -> str:
@@ -92,6 +109,7 @@ async def get_fee_schedule(
         "Which IP right's schedule: 'patent' (default), 'trademark', or "
         "'design'. EPO has only patents; EUIPO has only trademarks + designs.",
     ] = "patent",
+    refresh: Annotated[bool, "Force source revalidation (USPTO only); failures propagate."] = False,
 ) -> ResponseEnvelope[dict]:
     """Fetch the full fee schedule for an IP office.
 
@@ -99,7 +117,7 @@ async def get_fee_schedule(
     right, with amounts in the office's native currency, entity-tier
     where applicable (USPTO large/small/micro), and a ``year`` field on
     renewal/maintenance rows. The schedule's ``effective_date`` is the
-    most-recent revision date the office surfaces; ``retrieved_at`` is
+    effective date the office surfaces; ``retrieved_at`` is
     when our cache last refreshed from upstream.
 
     Examples:
@@ -116,8 +134,12 @@ async def get_fee_schedule(
     except UnknownJurisdictionError as exc:
         raise ValidationError(str(exc)) from exc
 
-    scraper = get_scraper(office_code, right_enum)
-    schedule = await scraper()
+    if refresh:
+        async with FeesClient() as client:
+            schedule = await client.get_schedule(jurisdiction, right_enum, refresh=True)
+    else:
+        scraper = get_scraper(office_code, right_enum)
+        schedule = await scraper()
     summary = _summarize_schedule(schedule)
 
     return ResponseEnvelope[dict](
@@ -189,7 +211,8 @@ async def lookup_fee(
         str,
         "'patent' (default), 'trademark', or 'design'.",
     ] = "patent",
-) -> ListEnvelope[dict]:
+    refresh: Annotated[bool, "Force source revalidation (USPTO only); failures propagate."] = False,
+) -> FeeLookupEnvelope:
     """Filter a fee schedule down to matching line items.
 
     Returns a list (possibly empty) of fees matching ALL provided
@@ -219,15 +242,14 @@ async def lookup_fee(
 
     async with FeesClient() as client:
         try:
-            fees = await client.lookup_fee(
-                jurisdiction,
-                category=category,
-                tier=tier_enum,
-                year=year,
-                right=right_enum,
-            )
-            # Reach into the same scraper to lift a schedule for provenance.
-            schedule = await client.get_schedule(jurisdiction, right_enum)
+            schedule = await client.get_schedule(jurisdiction, right_enum, refresh=refresh)
+            fees = [
+                fee
+                for fee in schedule.fees
+                if (category is None or fee.category.value == category)
+                and (fee.tier == EntityTier.none or fee.tier == tier_enum)
+                and (fee.year == year)
+            ]
         except UnknownJurisdictionError as exc:
             raise ValidationError(str(exc)) from exc
 
@@ -240,7 +262,10 @@ async def lookup_fee(
         f"(schedule effective {schedule.effective_date.isoformat()})."
     )
 
-    return ListEnvelope[dict](
+    return FeeLookupEnvelope(
+        source_metadata=schedule.model_dump(
+            mode="json", exclude={"fees", "notes", "statutory_basis"}
+        ),
         summary=summary,
         items=items,
         provenance=_fees_provenance(schedule, schedule.source_url),

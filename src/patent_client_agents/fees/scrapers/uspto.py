@@ -16,15 +16,20 @@ A description-keyword filter splits utility/design/plant subtypes.
 
 from __future__ import annotations
 
+import hashlib
+import json
 import logging
+import os
 import re
-from datetime import date
+import tempfile
+from datetime import UTC, date, datetime
 from decimal import Decimal
-from typing import Unpack
+from typing import Any, Unpack
 
 from lxml import html as L
 
 from mcp_data_core import BaseAsyncClient
+from mcp_data_core.cache import get_default_cache_dir
 from patent_client_agents.fees.models import (
     EntityTier,
     FeeCategory,
@@ -61,15 +66,84 @@ class USPTOFeesClient(BaseAsyncClient):
                 "User-Agent": "patent-client-agents (https://patentclient.com)",
             },
         )
+        self._receipt_dir = kwargs.get("cache_path") or get_default_cache_dir()
+        self.source_metadata: dict[str, Any] = {}
         super().__init__(**kwargs)
 
-    async def fetch_html(self) -> str:
-        response = await self._request(
-            "GET",
-            "/learning-and-resources/fees-and-payment/uspto-fee-schedule",
-            context="uspto_fee_schedule",
+    async def fetch_html(self, *, refresh: bool = False) -> str:
+        receipt_path = self._receipt_dir / "uspto-fees-receipt.json"
+        prior = json.loads(receipt_path.read_text()) if receipt_path.exists() else {}
+        try:
+            response = await self._request(
+                "GET",
+                "/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+                context="uspto_fee_schedule",
+                headers={"Cache-Control": "no-cache"} if refresh else {},
+            )
+            if (
+                refresh
+                and response.extensions.get("hishel_from_cache")
+                and not response.extensions.get("hishel_revalidated")
+            ):
+                raise RuntimeError(
+                    "USPTO fee refresh returned cached bytes without source revalidation"
+                )
+        except Exception as exc:
+            if refresh:
+                self.source_metadata = {
+                    **prior,
+                    "refresh_outcome": "failed",
+                    "refresh_error": type(exc).__name__,
+                    "refresh_attempted_at": datetime.now(UTC).isoformat(),
+                }
+                self._save_receipt()
+            raise
+        digest = hashlib.sha256(response.content).hexdigest()
+        now = datetime.now(UTC)
+        cached = bool(response.extensions.get("hishel_from_cache", False))
+        revalidated = bool(response.extensions.get("hishel_revalidated", False))
+        created = response.extensions.get("hishel_created_at")
+        retrieved = (
+            datetime.fromtimestamp(created, UTC).isoformat()
+            if created and not revalidated
+            else None
         )
+        if not cached and not revalidated:
+            retrieved = now.isoformat()
+        if prior.get("content_sha256") == digest:
+            retrieved = prior.get("bytes_retrieved_at") or retrieved
+        checked = (
+            now.isoformat()
+            if not cached or revalidated
+            else prior.get("source_checked_at", retrieved)
+            if prior.get("content_sha256") == digest
+            else retrieved
+        )
+        if refresh and cached and not revalidated:
+            raise RuntimeError(
+                "USPTO fee refresh returned cached bytes without source revalidation"
+            )
+        self.source_metadata = {
+            "content_sha256": digest,
+            "bytes_retrieved_at": retrieved,
+            "source_checked_at": checked,
+            "cache_state": "revalidated" if revalidated else "cached" if cached else "fresh",
+            "refresh_outcome": "succeeded"
+            if refresh or not cached or revalidated
+            else prior.get("refresh_outcome", "not_requested"),
+            "refresh_error": None if not cached or revalidated else prior.get("refresh_error"),
+            "refresh_attempted_at": now.isoformat()
+            if refresh
+            else prior.get("refresh_attempted_at"),
+        }
+        self._save_receipt()
         return response.text
+
+    def _save_receipt(self) -> None:
+        self._receipt_dir.mkdir(parents=True, exist_ok=True)
+        with tempfile.NamedTemporaryFile(mode="w", dir=self._receipt_dir, delete=False) as receipt:
+            json.dump(self.source_metadata, receipt)
+        os.replace(receipt.name, self._receipt_dir / "uspto-fees-receipt.json")
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -100,26 +174,13 @@ def _parse_money(raw: str) -> Decimal | None:
 
 
 def _parse_effective_date(doc: L.HtmlElement) -> date:
-    """Pull the most-recent revision date from the page header.
-
-    Format: ``"Effective January 19, 2025 (Last revised May 1, 2026, …)"``.
-    We use the *last revised* date because that's when the figures we're
-    scraping last changed; the original effective date stamps the
-    legislative baseline. Falls back to today if the header changes shape.
-    """
-    text = doc.text_content()
-    m = _EFFECTIVE_RE.search(text)
-    if not m:
-        logger.warning("USPTO fees: effective-date header not found; falling back to today")
-        return date.today()
-    revised_raw = m.group(2).strip()
-    try:
-        from datetime import datetime
-
-        return datetime.strptime(revised_raw, "%B %d, %Y").date()
-    except ValueError:
-        logger.warning("USPTO fees: could not parse revised date %r", revised_raw)
-        return date.today()
+    """Preserve the source's effective date; never substitute its revision date."""
+    match = re.search(r"Effective\s+(\w+\s+\d+,\s*\d{4})", doc.text_content(), re.IGNORECASE)
+    if not match:
+        raise ValueError(
+            "USPTO fee schedule effective date is unknown; source header was not recognized"
+        )
+    return datetime.strptime(match.group(1), "%B %d, %Y").date()
 
 
 def _is_design_row(description: str) -> bool:
@@ -482,13 +543,19 @@ def _build_renewal_year_for_tm(_descr: str) -> int | None:
 # ──────────────────────────────────────────────────────────────────────
 
 
-async def _fetch_doc() -> tuple[L.HtmlElement, date]:
+async def _fetch_doc(*, refresh: bool = False) -> tuple[L.HtmlElement, date, dict[str, Any]]:
     """Fetch and parse the USPTO fee schedule, returning (doc, effective_date)."""
     async with USPTOFeesClient() as client:
-        html_text = await client.fetch_html()
+        html_text = await client.fetch_html(refresh=refresh)
     doc = L.fromstring(html_text)
     effective = _parse_effective_date(doc)
-    return doc, effective
+    metadata = dict(client.source_metadata)
+    match = _EFFECTIVE_RE.search(doc.text_content())
+    metadata["source_revision_date"] = (
+        datetime.strptime(match.group(2), "%B %d, %Y").date() if match else None
+    )
+    metadata["schedule_status"] = "future" if effective > date.today() else "effective"
+    return doc, effective, metadata
 
 
 def _wrap(
@@ -496,7 +563,10 @@ def _wrap(
     *,
     right: RightType,
     effective_date: date,
+    metadata: dict[str, Any] | None = None,
 ) -> FeeSchedule:
+    metadata = metadata or {}
+    retrieved = metadata.get("bytes_retrieved_at")
     return FeeSchedule(
         jurisdiction="US",
         issuing_body="U.S. Patent and Trademark Office",
@@ -506,7 +576,8 @@ def _wrap(
         effective_date=effective_date,
         source_url=USPTO_FEES_URL,
         statutory_basis="37 CFR Part 1 (patents); 37 CFR Part 2 (trademarks); 35 USC §§ 41, 376",
-        retrieved_at=date.today(),
+        retrieved_at=datetime.fromisoformat(retrieved).date() if retrieved else None,
+        **metadata,
         fees=fees,
         notes=(
             "USPTO maintenance fees are due at the 3.5, 7.5, and 11.5 year "
@@ -519,38 +590,38 @@ def _wrap(
     )
 
 
-async def scrape_uspto_patents() -> FeeSchedule:
+async def scrape_uspto_patents(*, refresh: bool = False) -> FeeSchedule:
     """Scrape the USPTO utility-patent fee schedule (excludes design + plant rows)."""
-    doc, effective = await _fetch_doc()
+    doc, effective, metadata = await _fetch_doc(refresh=refresh)
     fees = _build_patent_fees(doc, right=RightType.patent)
     if not fees:
         raise RuntimeError("USPTO patent scraper parsed zero rows — page structure likely changed")
-    return _wrap(fees, right=RightType.patent, effective_date=effective)
+    return _wrap(fees, right=RightType.patent, effective_date=effective, metadata=metadata)
 
 
-async def scrape_uspto_trademarks() -> FeeSchedule:
+async def scrape_uspto_trademarks(*, refresh: bool = False) -> FeeSchedule:
     """Scrape the USPTO trademark fee schedule."""
-    doc, effective = await _fetch_doc()
+    doc, effective, metadata = await _fetch_doc(refresh=refresh)
     fees = _build_trademark_fees(doc)
     if not fees:
         raise RuntimeError(
             "USPTO trademark scraper parsed zero rows — page structure likely changed"
         )
-    return _wrap(fees, right=RightType.trademark, effective_date=effective)
+    return _wrap(fees, right=RightType.trademark, effective_date=effective, metadata=metadata)
 
 
-async def scrape_uspto_designs() -> FeeSchedule:
+async def scrape_uspto_designs(*, refresh: bool = False) -> FeeSchedule:
     """Scrape USPTO design-patent-specific fee rows.
 
     Returns only rows tagged as "Design" in the schedule (filing, issue,
     design CPA). Shared procedural fees (extensions, appeals, petitions)
     are NOT included — call :func:`scrape_uspto_patents` for those.
     """
-    doc, effective = await _fetch_doc()
+    doc, effective, metadata = await _fetch_doc(refresh=refresh)
     fees = _build_patent_fees(doc, right=RightType.design)
     if not fees:
         raise RuntimeError("USPTO design scraper parsed zero rows — page structure likely changed")
-    return _wrap(fees, right=RightType.design, effective_date=effective)
+    return _wrap(fees, right=RightType.design, effective_date=effective, metadata=metadata)
 
 
 __all__ = [
