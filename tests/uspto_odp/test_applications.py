@@ -51,6 +51,47 @@ def _make_client() -> ApplicationsClient:
     return ApplicationsClient(api_key="test", base_url="https://test.api.com")
 
 
+class TestGetAssignment:
+    @pytest.mark.asyncio
+    async def test_unwraps_patent_file_wrapper_response(self) -> None:
+        client = _make_client()
+        document_url = "https://assignmentcenter.uspto.gov/example.pdf"
+        response = {
+            "count": 1,
+            "patentFileWrapperDataBag": [
+                {
+                    "applicationNumberText": "13599647",
+                    "assignmentBag": [
+                        {
+                            "reelAndFrameNumber": "050756/0285",
+                            "assignmentDocumentLocationURI": document_url,
+                            "correspondenceAddress": {
+                                "correspondentNameText": "Example Corporation"
+                            },
+                        }
+                    ],
+                }
+            ],
+            "requestIdentifier": "request-1",
+        }
+
+        with patch.object(
+            client,
+            "_get_with_404_handling",
+            new_callable=AsyncMock,
+            return_value=response,
+        ):
+            result = await client.get_assignment("13599647")
+
+        assert result.applicationNumberText == "13599647"
+        assert result.requestIdentifier == "request-1"
+        assert len(result.assignmentBag) == 1
+        assert result.assignmentBag[0].assignmentDocumentLocationURI == document_url
+        assert result.assignmentBag[0].correspondenceAddress[0].correspondentNameText == (
+            "Example Corporation"
+        )
+
+
 class TestDownloadDocumentDocx:
     @pytest.mark.asyncio
     async def test_uses_advertised_ms_word_url(self) -> None:

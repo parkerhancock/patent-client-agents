@@ -135,6 +135,13 @@ class Assignment(StrictModel):
     assigneeBag: list[Assignee] = Field(default_factory=list)
     correspondenceAddress: list[CorrespondenceAddress] = Field(default_factory=list)
 
+    @field_validator("correspondenceAddress", mode="before")
+    @classmethod
+    def _normalize_correspondence_address(cls, value: Any) -> Any:
+        if isinstance(value, dict):
+            return [value]
+        return value
+
 
 class AssignmentResponse(StrictModel):
     """Response from the assignment endpoint."""
