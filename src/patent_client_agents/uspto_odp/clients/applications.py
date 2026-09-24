@@ -518,9 +518,11 @@ class ApplicationsClient(UsptoOdpBaseClient):
             empty_bag_key="assignmentBag",
             context=f"get assignment for {application_number}",
         )
+        records = data.get("patentFileWrapperDataBag") or []
+        assignment_data = records[0] if records else data
         return AssignmentResponse(
             applicationNumberText=appl,
-            assignmentBag=data.get("assignmentBag", []),
+            assignmentBag=assignment_data.get("assignmentBag", []),
             requestIdentifier=data.get("requestIdentifier"),
         )
 
