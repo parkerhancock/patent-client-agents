@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.29.0] — 2026-09-25
+
+### Changed
+
+- `get_file_history_item` now maps the legacy `format='auto'` to PDF instead
+  of DOCX, rejects unknown formats, and names the available formats when a
+  requested format is missing. XML misses raise `NotFoundError`.
+- `search_patent_assignments` fills a one-sided execution-date range (through
+  today, or from 1980-01-01) instead of raising.
+
+### Fixed
+
+- Clean-source claim lookups for US publications, reissues, and bare numbers
+  now try PPUBS full text before EPO OPS, and prefix-less numbers are treated
+  as US.
+- PPUBS publication-number normalization handles a lone kind letter
+  (`USD1142829S`, `USRE46070E`, `US5668033A`) and zero-pads docdb-style
+  numbers such as `US2016309324A1`.
+- EPO OPS lookups convert printed US publication numbers to docdb form.
+- `list_ptab_children(parent_type='application')` returns an empty list when
+  ODP answers 404 for an application with no appeals.
+- USPTO ODP assignment records nested in `patentFileWrapperDataBag` are now
+  read, so `get_uspto(dataset="assignment")` no longer returns an empty list
+  for assigned applications.
+- MPEP searches containing punctuation no longer raise FTS syntax errors, and
+  malformed reference months or marked-up claim ranges no longer abort patent
+  retrieval.
+- Refreshed the UKIPO MoPP source sync date so coverage manifests validate.
+
 ## [0.28.0] — 2026-09-01
 
 ### Added
