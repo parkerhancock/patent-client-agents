@@ -707,13 +707,13 @@ sources:
   status: active
   connector:
     module: patent_client_agents.ukipo_mopp
-  last_verified: 2026-07-21
+  last_verified: 2026-09-25
   category: substantive_law
   transport: mcp_local
   update_strategy: scheduled_recrawl
   update_cadence: monthly
-  last_synced: 2026-07-21
-  corpus_version: snapshot-2026-07-21
+  last_synced: 2026-09-25
+  corpus_version: snapshot-2026-09-25
 - id: BR/LPI/Statute
   name: Lei da Propriedade Industrial (LPI / Lei 9.279/1996)
   jurisdiction: BR

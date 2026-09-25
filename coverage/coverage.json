@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T22:32:04+00:00",
+  "generated_at": "2026-09-25T16:23:03+00:00",
   "schema_version": 1,
   "summary": {
     "total": 114,
@@ -1944,13 +1944,13 @@
       "connector": {
         "module": "patent_client_agents.ukipo_mopp"
       },
-      "last_verified": "2026-07-21",
+      "last_verified": "2026-09-25",
       "category": "substantive_law",
       "transport": "mcp_local",
       "update_strategy": "scheduled_recrawl",
       "update_cadence": "monthly",
-      "last_synced": "2026-07-21",
-      "corpus_version": "snapshot-2026-07-21"
+      "last_synced": "2026-09-25",
+      "corpus_version": "snapshot-2026-09-25"
     },
     {
       "id": "BR/LPI/Statute",

@@ -6,7 +6,7 @@ jurisdictions:
 institution: UK Intellectual Property Office
 source_type: legal_corpus
 official_url: https://www.gov.uk/guidance/manual-of-patent-practice-mopp
-last_verified: 2026-07-21
+last_verified: 2026-09-25
 source_status: active
 category: substantive_law
 rights:
@@ -42,8 +42,8 @@ coverage:
   transport: mcp_local
   update_strategy: scheduled_recrawl
   update_cadence: monthly
-  last_synced: 2026-07-21
-  corpus_version: snapshot-2026-07-21
+  last_synced: 2026-09-25
+  corpus_version: snapshot-2026-09-25
 ---
 
 # UKIPO Manual of Patent Practice (MoPP)
