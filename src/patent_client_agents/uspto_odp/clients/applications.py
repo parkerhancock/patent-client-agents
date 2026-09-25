@@ -377,7 +377,9 @@ class ApplicationsClient(UsptoOdpBaseClient):
                 if extracted is not None:
                     return extracted.read().decode("utf-8")
 
-        raise ValueError(f"No XML file found in archive for {document_identifier}")
+        from mcp_data_core.exceptions import NotFoundError
+
+        raise NotFoundError(f"No XML file found in archive for {document_identifier}")
 
     async def download_document_docx(
         self,

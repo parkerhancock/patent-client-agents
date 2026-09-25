@@ -98,6 +98,9 @@ def _parse_date(value: str | None, *, field: str) -> date | None:
 
 _VALID_AXES = tuple(_SEARCH_AXIS_TO_API.keys())
 
+#: Earliest recordation date in USPTO's electronic assignment database.
+_ASSIGNMENT_RECORDS_START = date(1980, 1, 1)
+
 
 @patent_assignments_mcp.tool(annotations=READ_ONLY)
 async def search_patent_assignments(
@@ -120,14 +123,15 @@ async def search_patent_assignments(
     executed_after: Annotated[
         str | None,
         "Narrow to recordations whose assignor execution date is on or "
-        "after this date (YYYY-MM-DD). Pair with ``executed_before`` for a "
-        "range. Note: only assignor execution date is honored by USPTO; "
+        "after this date (YYYY-MM-DD). Without ``executed_before`` the range "
+        "runs through today. Note: only assignor execution date is honored by USPTO; "
         "recordation, mail, and receipt date filters are ignored.",
     ] = None,
     executed_before: Annotated[
         str | None,
         "Narrow to recordations whose assignor execution date is on or "
-        "before this date (YYYY-MM-DD).",
+        "before this date (YYYY-MM-DD). Without ``executed_after`` the range "
+        "starts at 1980-01-01, the start of USPTO's assignment records.",
     ] = None,
     conveyance: Annotated[
         str | None,
@@ -169,10 +173,12 @@ async def search_patent_assignments(
         raise ValidationError(f"`by` must be one of {_VALID_AXES}; got {by!r}")
     after = _parse_date(executed_after, field="executed_after")
     before = _parse_date(executed_before, field="executed_before")
-    if (after is None) != (before is None):
-        raise ValidationError(
-            "executed_after and executed_before must be set together (or both omitted)"
-        )
+    # USPTO only accepts a closed range, so fill an open end: from the start
+    # of the assignment database, or through today.
+    if after is not None and before is None:
+        before = date.today()
+    elif before is not None and after is None:
+        after = _ASSIGNMENT_RECORDS_START
     executed_between = (after, before) if after and before else None
 
     async with AssignmentCenterClient() as client:

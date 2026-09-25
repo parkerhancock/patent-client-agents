@@ -365,3 +365,20 @@ def test_docstrings_carry_related_tools_lines():
     for tool in (search_ptab, get_ptab, list_ptab_children):
         doc = tool.__doc__ or ""
         assert "Related tools:" in doc, f"{tool.__name__} missing Related tools: line"
+
+
+@pytest.mark.asyncio
+async def test_list_ptab_children_application_without_appeals_is_empty():
+    """ODP answers 404 for an application with no appeals; that is an empty list."""
+    from mcp_data_core.exceptions import NotFoundError
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_appeal_decisions_by_number = AsyncMock(
+            side_effect=NotFoundError("get decisions for appeal 16017536: No matching records")
+        )
+        result = await list_ptab_children(parent_type="application", parent_identifier="16017536")
+
+    assert isinstance(result, ListEnvelope)
+    assert result.items == []
+    assert "0 decisions" in result.summary

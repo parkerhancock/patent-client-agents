@@ -116,11 +116,20 @@ PUB_NUMBER_CLEAN_RE = re.compile(r"[^A-Z0-9]")
 
 _KIND_CODE_RE = re.compile(r"[A-Z]\d$")
 
+#: Lone kind letter on a design/reissue/plant/utility grant (``D1142829S``,
+#: ``RE46070E``). Only stripped after at least one digit, so bare prefixes stay.
+_BARE_KIND_LETTER_RE = re.compile(r"(?<=\d)[A-Z]$")
+
+#: EPO docdb form of a US pre-grant publication: year + 6-digit serial.
+_DOCDB_PGPUB_RE = re.compile(r"^(20\d{2})(\d{6})$")
+
 
 def normalize_publication_number(value: str | None) -> str:
     """Normalize a publication number for PPUBS PN searches.
 
-    Strips country prefix, kind codes, and non-alphanumeric characters.
+    Strips country prefix, kind codes (``B2`` or a lone ``S``/``E``), and
+    non-alphanumeric characters, and expands the EPO docdb form of a US
+    pre-grant publication (year + 6-digit serial) to PPUBS's year + 7 digits.
     PPUBS does not index kind codes in the .pn. field, so including them
     causes zero results.
     """
@@ -129,5 +138,12 @@ def normalize_publication_number(value: str | None) -> str:
     cleaned = PUB_NUMBER_CLEAN_RE.sub("", value.upper())
     if cleaned.startswith("US"):
         cleaned = cleaned[2:]
-    cleaned = _KIND_CODE_RE.sub("", cleaned)
+    stripped = _KIND_CODE_RE.sub("", cleaned)
+    if stripped == cleaned:
+        stripped = _BARE_KIND_LETTER_RE.sub("", cleaned)
+    cleaned = stripped
+    # ``US2016309324A1`` (EPO docdb style) → PPUBS's ``20160309324``.
+    docdb = _DOCDB_PGPUB_RE.match(cleaned)
+    if docdb:
+        cleaned = f"{docdb.group(1)}0{docdb.group(2)}"
     return cleaned

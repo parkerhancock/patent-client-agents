@@ -254,6 +254,16 @@ class TestNormalization:
         assert EpoOpsClient._normalize_number("US 12 34 567") == "US1234567"
         assert EpoOpsClient._normalize_number("  ep1234567  ") == "EP1234567"
 
+    def test_ops_number_converts_printed_us_pgpub_to_docdb(self) -> None:
+        ops = EpoOpsClient._ops_number
+        assert ops("US20050262543A1", doc_type="publication", fmt="docdb") == "US2005262543A1"
+        assert ops("US20050262543", doc_type="publication", fmt="epodoc") == "US2005262543"
+        # Grants, non-US numbers, and the 'original' format pass through.
+        assert ops("US10123456B2", doc_type="publication", fmt="docdb") == "US10123456B2"
+        assert ops("EP1234567A1", doc_type="publication", fmt="docdb") == "EP1234567A1"
+        assert ops("US20050262543A1", doc_type="publication", fmt="original") == ("US20050262543A1")
+        assert ops("US20050262543A1", doc_type="application", fmt="docdb") == ("US20050262543A1")
+
     def test_normalize_symbol(self) -> None:
         assert EpoOpsClient._normalize_symbol("H01 L 21/00") == "H01L21/00"
         assert EpoOpsClient._normalize_symbol("  g06f 3/00  ") == "G06F3/00"
