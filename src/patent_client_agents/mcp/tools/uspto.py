@@ -13,7 +13,7 @@ from mcp_data_core.envelope import (
     ListEnvelope,
     make_provenance,
 )
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import download_tool_result, read_resource, register_source
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
@@ -390,6 +390,13 @@ async def get_file_history_item(
     from mcp_data_core.filenames import file_history_item as _fh_name
     from patent_client_agents.uspto_odp.clients.applications import ApplicationsClient
 
+    # Direct Python callers built against the pre-0.26 signature still pass
+    # the old default ``format="auto"``; the MCP schema never allows it.
+    if format == "auto":  # type: ignore[comparison-overlap]
+        format = "pdf"
+    if format not in ("pdf", "xml", "docx"):
+        raise ValidationError(f"format must be 'pdf', 'xml', or 'docx'; got {format!r}.")
+
     async with ApplicationsClient() as client:
         try:
             if format == "pdf":
@@ -432,8 +439,23 @@ async def get_file_history_item(
             )
         except NotFoundError as exc:
             response = await client.get_documents(application_number)
-            if any(d.documentIdentifier == document_identifier for d in response.documents):
-                raise exc
+            match = next(
+                (d for d in response.documents if d.documentIdentifier == document_identifier),
+                None,
+            )
+            if match is not None:
+                if format == "pdf":
+                    raise exc
+                available = [
+                    "docx" if value == "MS_WORD" else str(value).lower()
+                    for opt in (match.downloadOptionBag or [])
+                    if (value := opt.get("mimeTypeIdentifier"))
+                ]
+                raise NotFoundError(
+                    f"Document {document_identifier!r} in application {application_number} "
+                    f"has no {format.upper()} version. Available formats: "
+                    f"{available or ['pdf']}. Retry with format='pdf'."
+                ) from None
             sample = [
                 {
                     "document_identifier": d.documentIdentifier,
@@ -1139,7 +1161,11 @@ async def list_ptab_children(
         if pt == "application":
             if inc not in ("decisions",):
                 raise ValidationError("parent_type='application' only supports include='decisions'")
-            result = _dump(await client.get_appeal_decisions_by_number(parent_identifier))
+            try:
+                result = _dump(await client.get_appeal_decisions_by_number(parent_identifier))
+            except NotFoundError:
+                # ODP answers 404 when an application has no appeal decisions.
+                result = {}
             items = [
                 _stub_ptab_record(entry, "appeal_decision")
                 for entry in result.get("patentAppealDataBag") or []

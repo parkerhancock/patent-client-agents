@@ -7,6 +7,7 @@ import base64
 import datetime as dt
 import logging
 import os
+import re
 from io import BytesIO
 from pathlib import Path
 from typing import Any
@@ -67,6 +68,9 @@ from .parsing import (
 )
 
 logger = logging.getLogger(__name__)
+
+#: Printed US pre-grant publication number: US + year + "0" + 6-digit serial.
+_US_PGPUB_PRINTED_RE = re.compile(r"^US(20\d{2})0(\d{6})([A-Z]\d?)?$")
 
 BASE_URL = "https://ops.epo.org/3.2"
 CACHE_DIR = Path.home() / ".cache" / "epo_ops_mcp"
@@ -276,6 +280,23 @@ class EpoOpsClient(BaseAsyncClient):
     def _normalize_number(number: str) -> str:
         return number.strip().replace(" ", "").upper()
 
+    @classmethod
+    def _ops_number(cls, number: str, *, doc_type: str, fmt: str) -> str:
+        """Normalize a document number for a published-data/family/legal OPS path.
+
+        US pre-grant publications are printed as year + 7-digit serial
+        (``US20050262543A1``), but OPS docdb/epodoc index them as year +
+        6-digit serial (``US2005262543A1``). Sending the printed form returns
+        ``SERVER.EntityNotFound``, so convert it here.
+        """
+        normalized = cls._normalize_number(number)
+        if doc_type == "publication" and fmt in ("docdb", "epodoc"):
+            match = _US_PGPUB_PRINTED_RE.match(normalized)
+            if match:
+                year, serial, kind = match.groups()
+                normalized = f"US{year}{serial}{kind or ''}"
+        return normalized
+
     @staticmethod
     def _normalize_symbol(symbol: str) -> str:
         return symbol.strip().replace(" ", "").upper()
@@ -323,7 +344,7 @@ class EpoOpsClient(BaseAsyncClient):
         doc_type: str = "publication",
         fmt: str = "docdb",
     ) -> BiblioResponse:
-        normalized = self._normalize_number(number)
+        normalized = self._ops_number(number, doc_type=doc_type, fmt=fmt)
         path = f"/rest-services/published-data/{doc_type}/{fmt}/{normalized}/biblio"
         response = await self._request("GET", path)
         return parse_biblio_response(response.text)
@@ -336,7 +357,7 @@ class EpoOpsClient(BaseAsyncClient):
         fmt: str = "docdb",
     ) -> CitationResponse:
         """Fetch structured backward citations from an OPS biblio record."""
-        normalized = self._normalize_number(number)
+        normalized = self._ops_number(number, doc_type=doc_type, fmt=fmt)
         path = f"/rest-services/published-data/{doc_type}/{fmt}/{normalized}/biblio"
         response = await self._request("GET", path)
         return parse_citations(response.text, publication_number=normalized)
@@ -349,7 +370,7 @@ class EpoOpsClient(BaseAsyncClient):
         fmt: str = "docdb",
     ) -> EquivalentsResponse:
         """Fetch simple-family equivalent publications."""
-        normalized = self._normalize_number(number)
+        normalized = self._ops_number(number, doc_type=doc_type, fmt=fmt)
         path = f"/rest-services/published-data/{doc_type}/{fmt}/{normalized}/equivalents"
         response = await self._request("GET", path)
         return parse_equivalents(response.text)
@@ -364,7 +385,7 @@ class EpoOpsClient(BaseAsyncClient):
     ) -> FullTextResponse:
         if section not in {"claims", "description"}:
             raise ValueError("section must be either 'claims' or 'description'")
-        normalized = self._normalize_number(number)
+        normalized = self._ops_number(number, doc_type=doc_type, fmt=fmt)
         path = f"/rest-services/published-data/{doc_type}/{fmt}/{normalized}/{section}"
         response = await self._request("GET", path)
         return parse_claims(response.text, section=section)
@@ -377,7 +398,7 @@ class EpoOpsClient(BaseAsyncClient):
         fmt: str = "docdb",
         constituents: str | None = None,
     ) -> FamilyResponse:
-        normalized = self._normalize_number(number)
+        normalized = self._ops_number(number, doc_type=doc_type, fmt=fmt)
         path = f"/rest-services/family/{doc_type}/{fmt}/{normalized}"
         if constituents:
             path = f"{path}/{constituents}"
@@ -391,7 +412,7 @@ class EpoOpsClient(BaseAsyncClient):
         doc_type: str = "publication",
         fmt: str = "docdb",
     ) -> LegalEventsResponse:
-        normalized = self._normalize_number(number)
+        normalized = self._ops_number(number, doc_type=doc_type, fmt=fmt)
         path = f"/rest-services/legal/{doc_type}/{fmt}/{normalized}"
         response = await self._request("GET", path)
         return parse_legal_events(response.text)
