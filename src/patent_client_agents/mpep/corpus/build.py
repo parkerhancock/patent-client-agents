@@ -36,6 +36,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import cast
+from urllib.parse import urlencode
 
 import httpx
 from lxml import html
@@ -101,6 +102,8 @@ class ParsedPage:
     chapter: str | None
     sections: list[ParsedSection]
     discovered_hrefs: set[str]
+    source_version: str | None = None
+    source_url: str | None = None
 
 
 def _normalize_whitespace(text: str) -> str:
@@ -152,19 +155,19 @@ def _href_from_element(element: html.HtmlElement) -> str:
     return f"{node_id}.html"
 
 
-def _harvest_cross_links(tree: html.HtmlElement) -> set[str]:
+def _harvest_cross_links(tree: html.HtmlElement, source_version: str | None = None) -> set[str]:
     """Collect bare and hash-form section hrefs to feed back into the crawl.
 
     Catches:
-    - ``#/current/d0e189.html``  (SPA navigation links)
+    - ``#/current/d0e189.html`` or a selected release (SPA navigation links)
     - ``d0e189.html``            (in-page anchors)
     """
     hrefs: set[str] = set()
     for a in tree.xpath("//a[@href]"):
         raw = a.get("href", "")
-        m = re.match(r"^#?/current/([\w]+\.html)$", raw)
-        if m:
-            hrefs.add(m.group(1))
+        m = re.match(r"^#?/([\w.-]+)/([\w]+\.html)$", raw)
+        if m and m.group(1) in {"current", source_version}:
+            hrefs.add(m.group(2))
             continue
         m = re.match(r"^([\w]+\.html)$", raw)
         if m and _SECTION_ID_RE.match(m.group(1).removesuffix(".html")):
@@ -172,7 +175,9 @@ def _harvest_cross_links(tree: html.HtmlElement) -> set[str]:
     return hrefs
 
 
-def parse_chapter_html(fetched_href: str, html_text: str) -> ParsedPage:
+def parse_chapter_html(
+    fetched_href: str, html_text: str, *, source_url: str | None = None
+) -> ParsedPage:
     """Split a chapter content page into per-section records.
 
     Each section's body is the outerHTML of the smallest section-id-bearing
@@ -180,6 +185,14 @@ def parse_chapter_html(fetched_href: str, html_text: str) -> ParsedPage:
     with whitespace collapsed.
     """
     tree = html.fromstring(html_text)
+    selected = tree.xpath('//select[@id="edition-select"]/option[@selected]')
+    source_version = None
+    if selected:
+        if len(selected) != 1:
+            raise ValueError("MPEP page has ambiguous selected release metadata")
+        source_version = selected[0].get("class", "").strip()
+        if not re.fullmatch(r"[A-Za-z0-9_.-]+", source_version) or source_version == "current":
+            raise ValueError("MPEP page has invalid selected release identity")
     chapter = _extract_chapter(tree)
     sections: list[ParsedSection] = []
     seen_hrefs: set[str] = set()
@@ -216,12 +229,14 @@ def parse_chapter_html(fetched_href: str, html_text: str) -> ParsedPage:
         )
         seen_hrefs.add(href)
 
-    discovered = _harvest_cross_links(tree) - seen_hrefs - {fetched_href}
+    discovered = _harvest_cross_links(tree, source_version) - seen_hrefs - {fetched_href}
     return ParsedPage(
         fetched_href=fetched_href,
         chapter=chapter,
         sections=sections,
         discovered_hrefs=discovered,
+        source_version=source_version,
+        source_url=source_url,
     )
 
 
@@ -301,7 +316,14 @@ class MpepScraper:
             except Exception as exc:
                 logger.warning("Skipping %s: %s", href, exc)
                 continue
-            page = parse_chapter_html(href, doc)
+            source_url = f"{self._base_url}/RDMS/MPEP/content?" + urlencode(
+                {"version": self._version, "href": href}
+            )
+            page = parse_chapter_html(href, doc, source_url=source_url)
+            if page.source_version is not None:
+                if self._version != "current" and page.source_version != self._version:
+                    raise ValueError("MPEP selected release does not match the requested version")
+                self._version = page.source_version
             elapsed = time.monotonic() - t0
             for section in page.sections:
                 extracted_outputs.add(section.href)
@@ -328,6 +350,18 @@ def write_corpus(
     pages: Iterable[ParsedPage], output: Path, *, release_metadata: dict[str, str] | None = None
 ) -> int:
     """Initialize the schema and insert section rows. Returns row count."""
+    pages = list(pages)
+    identities = {page.source_version for page in pages}
+    if len(identities) > 1:
+        raise ValueError("MPEP corpus contains mixed release identities")
+    detected = next(iter(identities), None)
+    metadata = dict(release_metadata or {})
+    if detected is not None:
+        if metadata.get("source_version", detected) != detected:
+            raise ValueError("MPEP explicit release metadata does not match the selected release")
+        metadata["source_version"] = detected
+    if pages and pages[0].source_url:
+        metadata["source_url"] = pages[0].source_url
     output.parent.mkdir(parents=True, exist_ok=True)
     if output.exists():
         output.unlink()
@@ -370,7 +404,7 @@ def write_corpus(
             ("interim_updates_coverage", "not_included"),
             ("section_count", str(inserted)),
         ]
-        meta_rows.extend((release_metadata or {}).items())
+        meta_rows.extend(metadata.items())
         conn.executemany(
             "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
             meta_rows,
