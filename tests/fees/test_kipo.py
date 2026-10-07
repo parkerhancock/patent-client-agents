@@ -15,6 +15,7 @@ Refresh the fixture by re-fetching:
 
 from __future__ import annotations
 
+import asyncio
 from decimal import Decimal
 from pathlib import Path
 
@@ -428,3 +429,19 @@ def test_registry_dispatches_all_three_kr_routes() -> None:
     assert p is kipo.scrape_kipo_patents
     assert tm is kipo.scrape_kipo_trademarks
     assert d is kipo.scrape_kipo_designs
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("method_name", ["fetch_html", "fetch_tm_des_html"])
+async def test_live_fetch_has_total_deadline(
+    monkeypatch: pytest.MonkeyPatch, method_name: str
+) -> None:
+    async def never_connects(self: kipo.KIPOFeesClient, *args, **kwargs):
+        await asyncio.Event().wait()
+
+    monkeypatch.setattr(kipo, "KIPO_REQUEST_DEADLINE_SECONDS", 0.01, raising=False)
+    monkeypatch.setattr(kipo.KIPOFeesClient, "_request", never_connects)
+
+    async with kipo.KIPOFeesClient(use_cache=False) as client:
+        with pytest.raises(TimeoutError, match="KIPO fee page request exceeded"):
+            await asyncio.wait_for(getattr(client, method_name)(), timeout=0.2)

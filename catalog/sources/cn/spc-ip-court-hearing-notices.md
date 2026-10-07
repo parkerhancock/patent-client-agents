@@ -37,6 +37,7 @@ connector:
   blockers: []
 category: adjudicative_records
 coverage:
+  atlas_standalone_reason: adjudicative_body
   order: 21
   name: Supreme People's Court Intellectual Property Court — Hearing Notices
   rights:

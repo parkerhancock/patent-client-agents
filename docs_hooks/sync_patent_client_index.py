@@ -29,11 +29,13 @@ from __future__ import annotations
 import posixpath
 import re
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import yaml
-from mkdocs.structure.files import File, Files
-from mkdocs.structure.nav import Navigation
+
+if TYPE_CHECKING:
+    from mkdocs.structure.files import Files
+    from mkdocs.structure.nav import Navigation
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RESEARCH_DIR = REPO_ROOT / "research"
@@ -114,6 +116,8 @@ def on_files(files: Files, config: dict[str, Any]) -> Files:
     ``config["nav"]`` so the synopses appear in the Material sidebar
     (not as orphan pages).
     """
+    from mkdocs.structure.files import File
+
     # 1) Virtual-mount each synopsis (and collect them for the nav build)
     by_layer: dict[str, list[tuple[str, str]]] = {lyr: [] for lyr in LAYERS}
     for layer in LAYERS:
@@ -330,8 +334,18 @@ def _short_rights(rights: list[str]) -> list[str]:
 
 _SECTION_RENAMES = [
     # Preserve §-prefixes so the rendered ToC reads continuously §1..§7.
-    ("## §5 Connector strategy", "## §5 Access via patent-client-agents"),
-    ("## §6 Open questions", "## §6 Known unknowns"),
+    (
+        "## §5 Connector strategy",
+        "## §5 Access via patent-client-agents",
+        "#5-connector-strategy",
+        "#5-access-via-patent-client-agents",
+    ),
+    (
+        "## §6 Open questions",
+        "## §6 Known unknowns",
+        "#6-open-questions",
+        "#6-known-unknowns",
+    ),
 ]
 
 
@@ -366,8 +380,9 @@ def _transform_synopsis(markdown: str, layer: str, entity: dict[str, Any] | None
         )
 
     # 2) Rename sections
-    for old, new in _SECTION_RENAMES:
+    for old, new, old_anchor, new_anchor in _SECTION_RENAMES:
         markdown = markdown.replace(old, new)
+        markdown = markdown.replace(f"]({old_anchor})", f"]({new_anchor})")
 
     # 3) Collapse §8 change log to a footer line
     markdown = _collapse_change_log(markdown)

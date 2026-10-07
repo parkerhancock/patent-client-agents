@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from patent_client_agents.uspto_publications.utils import (
     ClaimsParser,
     html_to_text,
@@ -78,6 +80,18 @@ class TestNormalizePublicationNumber:
     def test_bare_number_unchanged(self) -> None:
         result = normalize_publication_number("10123456")
         assert result == "10123456"
+
+    def test_strips_lone_design_kind_letter(self) -> None:
+        assert normalize_publication_number("USD1142829S") == "D1142829"
+
+    def test_strips_lone_reissue_kind_letter(self) -> None:
+        assert normalize_publication_number("USRE46070E") == "RE46070"
+
+    def test_strips_lone_utility_kind_letter(self) -> None:
+        assert normalize_publication_number("US5668033A") == "5668033"
+
+    def test_expands_docdb_pgpub_serial(self) -> None:
+        assert normalize_publication_number("US2016309324A1") == "20160309324"
 
     def test_handles_none(self) -> None:
         result = normalize_publication_number(None)
@@ -161,6 +175,15 @@ class TestClaimsParser:
         assert result[0]["number"] == 1
         assert result[1]["number"] == 2
         assert result[2]["number"] == 3
+
+    @pytest.mark.parametrize("range_prefix", ["1-3.", ".Iadd.1-3.", ".[1-3."])
+    def test_marked_up_range_preserves_claims_and_dependencies(self, range_prefix: str) -> None:
+        claims_text = f"{range_prefix} A method.\n4. The method of claim 2."
+        result = ClaimsParser().parse(claims_text)
+        assert [claim["number"] for claim in result] == [1, 2, 3, 4]
+        assert all(claim["limitations"] == ["A method."] for claim in result[:3])
+        assert result[3]["depends_on"] == [2]
+        assert result[1]["dependent_claims"] == [4]
 
     def test_depends_on_all_foregoing(self) -> None:
         parser = ClaimsParser()

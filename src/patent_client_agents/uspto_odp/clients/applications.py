@@ -377,7 +377,9 @@ class ApplicationsClient(UsptoOdpBaseClient):
                 if extracted is not None:
                     return extracted.read().decode("utf-8")
 
-        raise ValueError(f"No XML file found in archive for {document_identifier}")
+        from mcp_data_core.exceptions import NotFoundError
+
+        raise NotFoundError(f"No XML file found in archive for {document_identifier}")
 
     async def download_document_docx(
         self,
@@ -518,9 +520,11 @@ class ApplicationsClient(UsptoOdpBaseClient):
             empty_bag_key="assignmentBag",
             context=f"get assignment for {application_number}",
         )
+        records = data.get("patentFileWrapperDataBag") or []
+        assignment_data = records[0] if records else data
         return AssignmentResponse(
             applicationNumberText=appl,
-            assignmentBag=data.get("assignmentBag", []),
+            assignmentBag=assignment_data.get("assignmentBag", []),
             requestIdentifier=data.get("requestIdentifier"),
         )
 

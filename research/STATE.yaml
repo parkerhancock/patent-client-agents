@@ -31,7 +31,7 @@
 # When updating: bump `last_updated` and the affected row's `last_verified`.
 
 schema_version: 1
-last_updated: 2026-08-03  # Added EPO CN, DE, and KR jurisdiction recipes
+last_updated: 2026-08-31  # Reconciled cross-prefix atlas source mappings
 
 stats:
   total_entities: 116
@@ -78,7 +78,7 @@ entities:
     rating: red_tos
     rating_basis: ToS §6 bans automated queries (≤10 actions/min/IP); CHF 30,000/yr ICC FTP bulk is only programmatic path
     connector_status: skipped
-    manifest_ids: []
+    manifest_ids: [WO/WIPO/Fees/Madrid]
     next_action: monitor_partner_api
     blocked_by: []
     last_verified: 2026-05-16
@@ -95,7 +95,7 @@ entities:
     rating: red_tos
     rating_basis: Hague Express is just a collection=Hague filter on Global Design DB (same backend, same ToS, robots.txt disallow); Hague Web Services is partner-IP-office-only
     connector_status: skipped
-    manifest_ids: []
+    manifest_ids: [WO/WIPO/Fees/Hague]
     next_action: monitor_partner_api
     blocked_by: []
     last_verified: 2026-05-16
@@ -190,7 +190,7 @@ entities:
     rating: green
     rating_basis: Free OAuth2 OpenAPI; EUTM + REUD (formerly RCD)
     connector_status: shipped
-    manifest_ids: [EM/EUIPO/Trademarks, EM/EUIPO/Designs]
+    manifest_ids: [EM/EUIPO/Trademarks, EM/EUIPO/Designs, EP/EUIPO/Fees/Trademarks, EP/EUIPO/Fees/Designs]
     next_action: rcd_to_reud_cleanup
     blocked_by: []
     last_verified: 2026-05-16
@@ -534,7 +534,7 @@ entities:
     rating: green
     rating_basis: Modern OAuth2 OpenAPI across all rights + IP RAPID bulk (CC-BY 4.0)
     connector_status: shipped
-    manifest_ids: [AU/IPAustralia/Patents, AU/IPAustralia/Trademarks, AU/IPAustralia/Designs, AU/IPAustralia/Bulk]
+    manifest_ids: [AU/IPAustralia/Patents, AU/IPAustralia/Trademarks, AU/IPAustralia/Designs, AU/IPAustralia/Bulk, AU/IPAU/Fees/Patents]
     next_action: monitor
     blocked_by: []
     last_verified: 2026-05-16
@@ -555,7 +555,7 @@ entities:
     rating: red_no_api
     rating_basis: Per older survey — every live asset CAPTCHA-gated; statutes shipped
     connector_status: skipped
-    manifest_ids: [IN/IPO/Statutes, IN/IPO/MPPP]
+    manifest_ids: [IN/IPO/Statutes, IN/IPO/MPPP, IN/IPIN/Fees/Patents]
     next_action: write_synopsis
     blocked_by: []
     last_verified: 2026-05  # older survey

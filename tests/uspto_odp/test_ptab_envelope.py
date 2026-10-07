@@ -463,3 +463,20 @@ async def test_search_ptab_invalid_pagination_fails_before_request(kwargs):
         with pytest.raises(ValidationError):
             await search_ptab(type="proceeding", query="q", **kwargs)
     cls.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_list_ptab_children_application_without_appeals_is_empty():
+    """ODP answers 404 for an application with no appeals; that is an empty list."""
+    from mcp_data_core.exceptions import NotFoundError
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_appeal_decisions_by_number = AsyncMock(
+            side_effect=NotFoundError("get decisions for appeal 16017536: No matching records")
+        )
+        result = await list_ptab_children(parent_type="application", parent_identifier="16017536")
+
+    assert isinstance(result, ListEnvelope)
+    assert result.items == []
+    assert "0 decisions" in result.summary

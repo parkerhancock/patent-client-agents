@@ -121,13 +121,13 @@ class JPOFeesClient(BaseAsyncClient):
         )
         super().__init__(**kwargs)
 
-    async def fetch_html(self) -> str:
+    async def fetch_html(self) -> bytes:
         r = await self._request(
             "GET",
             "/e/system/process/tesuryo/hyou.html",
             context="jpo_fees",
         )
-        return r.text
+        return r.content
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -396,8 +396,8 @@ def _build_patent_fees(doc: L.HtmlElement) -> list[FeeItem]:
 async def scrape_jpo_patents() -> FeeSchedule:
     """Scrape JPO Japan patent fees (JPY, claim-count-dependent at every band)."""
     async with JPOFeesClient() as client:
-        html_text = await client.fetch_html()
-    doc = L.fromstring(html_text)
+        html_bytes = await client.fetch_html()
+    doc = L.fromstring(html_bytes)
     fees = _build_patent_fees(doc)
     if not fees:
         raise RuntimeError("JPO patent scraper parsed zero rows — page structure may have changed")
@@ -952,8 +952,8 @@ def _unique_slug(parts: list[str], seen: set[str]) -> str:
 async def scrape_jpo_trademarks() -> FeeSchedule:
     """Scrape JPO Japan trademark fees from the English fee table."""
     async with JPOFeesClient() as client:
-        html_text = await client.fetch_html()
-    doc = L.fromstring(html_text)
+        html_bytes = await client.fetch_html()
+    doc = L.fromstring(html_bytes)
     fees = _build_trademark_fees(doc)
     if not fees:
         raise RuntimeError(
@@ -997,8 +997,8 @@ async def scrape_jpo_trademarks() -> FeeSchedule:
 async def scrape_jpo_designs() -> FeeSchedule:
     """Scrape JPO Japan design fees from the English fee table."""
     async with JPOFeesClient() as client:
-        html_text = await client.fetch_html()
-    doc = L.fromstring(html_text)
+        html_bytes = await client.fetch_html()
+    doc = L.fromstring(html_bytes)
     fees = _build_design_fees(doc)
     if not fees:
         raise RuntimeError("JPO design scraper parsed zero rows — page structure may have changed")

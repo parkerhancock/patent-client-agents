@@ -25,6 +25,7 @@ import argparse
 import asyncio
 import json
 import sys
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -50,11 +51,14 @@ async def _build_one(
     )
 
 
-async def _build_all(only: set[str] | None) -> tuple[list[dict], list[tuple[str, str]]]:
+async def _build_all(
+    only: set[str] | None, *, write_files: bool = True
+) -> tuple[list[dict], list[tuple[str, str]]]:
     """Run every scraper and return (meta_rows, failures)."""
     meta_rows: list[dict] = []
     failures: list[tuple[str, str]] = []
-    SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
+    if write_files:
+        SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
 
     for (office, right), scraper in _DISPATCH.items():
         if only and office not in only:
@@ -65,12 +69,43 @@ async def _build_all(only: set[str] | None) -> tuple[list[dict], list[tuple[str,
             failures.append((office, right.value))
             print("FAIL")
             continue
-        out = SNAPSHOT_DIR / f"{office}-{right.value}.json"
-        out.write_text(json.dumps(schedule_dict, indent=2, sort_keys=True) + "\n")
+        assert meta_dict is not None
+        if write_files:
+            out = SNAPSHOT_DIR / f"{office}-{right.value}.json"
+            out.write_text(json.dumps(schedule_dict, indent=2, sort_keys=True) + "\n")
         meta_rows.append(meta_dict)
         print(f"ok ({len(schedule_dict['fees'])} fees)")
 
     return meta_rows, failures
+
+
+def _retain_last_known_good(meta_rows: list[dict], failures: list[tuple[str, str]]) -> list[dict]:
+    """Carry failed routes forward from the previous valid snapshot index."""
+    rows_by_key = {(row["office_code"], row["right"]): row for row in meta_rows}
+    failed_keys = set(failures)
+    index_path = SNAPSHOT_DIR / "index.json"
+
+    if failed_keys and index_path.exists():
+        previous = json.loads(index_path.read_text())
+        for prior_row in previous.get("schedules", []):
+            key = (prior_row["office_code"], prior_row["right"])
+            schedule_path = SNAPSHOT_DIR / f"{key[0]}-{key[1]}.json"
+            if key not in failed_keys or key in rows_by_key or not schedule_path.exists():
+                continue
+            retained = dict(prior_row)
+            retrieved_at = retained.get("retrieved_at")
+            if isinstance(retrieved_at, str):
+                retrieved = date.fromisoformat(retrieved_at)
+                retained["days_since_retrieval"] = max(0, (date.today() - retrieved).days)
+            rows_by_key[key] = retained
+
+    ordered_rows: list[dict] = []
+    for office, right in _DISPATCH:
+        row = rows_by_key.pop((office, right.value), None)
+        if row is not None:
+            ordered_rows.append(row)
+    ordered_rows.extend(rows_by_key.values())
+    return ordered_rows
 
 
 def _write_index(meta_rows: list[dict], failures: list[tuple[str, str]]) -> None:
@@ -78,7 +113,10 @@ def _write_index(meta_rows: list[dict], failures: list[tuple[str, str]]) -> None
 
     Includes a ``failures`` array so the UI can show "currently unavailable"
     rows for offices whose upstream is temporarily down (e.g. INPI-FR 503).
+    Failed routes retain their last-known-good metadata when the corresponding
+    schedule file still exists.
     """
+    meta_rows = _retain_last_known_good(meta_rows, failures)
     by_office: dict[str, list[dict]] = {}
     for row in meta_rows:
         by_office.setdefault(row["office_code"], []).append(row)
@@ -123,13 +161,11 @@ async def _main() -> int:
     if args.check:
         print("(--check mode: not writing files)")
 
-    meta_rows, failures = await _build_all(only)
+    meta_rows, failures = await _build_all(only, write_files=not args.check)
 
     if args.check:
-        # Throw away artifacts written during --check; re-running without
-        # --check is the path to actually publish.
-        for path in SNAPSHOT_DIR.glob("*.json"):
-            path.unlink()
+        # Re-running without --check is the path to actually publish.
+        print("Check complete; no snapshot files written.")
     elif not meta_rows:
         # Keep the last known-good index. The nightly workflow treats this
         # result as a hard failure and must not publish an empty index.

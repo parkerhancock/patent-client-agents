@@ -33,6 +33,7 @@ connector:
   blockers: []
 category: adjudicative_records
 coverage:
+  atlas_standalone_reason: adjudicative_body
   order: 22
   name: Japan Intellectual Property High Court — Patent and Utility-Model Case Lists
   rights:

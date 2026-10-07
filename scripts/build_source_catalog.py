@@ -67,6 +67,12 @@ FEE_CAPABILITIES = (
     "machine_readable",
     "calculator",
 )
+ATLAS_STANDALONE_REASONS = {
+    "adjudicative_body",
+    "cross_office_service",
+    "independent_legal_authority",
+    "out_of_scope",
+}
 EXTERNAL_CAPABILITIES = ("query_api", "bulk_data")
 CATEGORY_CAPABILITIES = {
     "adjudicative_records": LITIGATION_CAPABILITIES,
@@ -457,6 +463,12 @@ def validate_record(record: SourceRecord, *, today: dt.date | None = None) -> li
             errors.append("coverage.data_types must be a list")
         if not isinstance(coverage.get("access"), dict):
             errors.append("coverage.access must be a mapping")
+        standalone_reason = coverage.get("atlas_standalone_reason")
+        if standalone_reason is not None and standalone_reason not in ATLAS_STANDALONE_REASONS:
+            errors.append(
+                "coverage.atlas_standalone_reason must be one of "
+                f"{sorted(ATLAS_STANDALONE_REASONS)}"
+            )
     return errors
 
 
@@ -542,6 +554,7 @@ def build_coverage_source(record: SourceRecord) -> dict[str, Any] | None:
         "last_synced",
         "corpus_version",
         "notes",
+        "atlas_standalone_reason",
     ):
         if coverage.get(field) is not None:
             projected[field] = coverage[field]

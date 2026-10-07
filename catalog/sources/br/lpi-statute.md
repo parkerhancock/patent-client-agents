@@ -33,6 +33,7 @@ connector:
   module: patent_client_agents.inpi_br_statutes
   blockers: []
 coverage:
+  atlas_standalone_reason: independent_legal_authority
   order: 38
   wipo_st3_code: BR
   data_types:

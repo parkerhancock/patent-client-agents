@@ -110,9 +110,9 @@ def _parse_month(value: Any) -> str | None:
     try:
         year = int(string[:4])
         month = int(string[4:6])
+        return dt.date(year, month, 1).isoformat()
     except ValueError:
         return None
-    return dt.date(year, month, 1).isoformat()
 
 
 def _split(value: Any, delimiter: str = ";") -> list[str]:

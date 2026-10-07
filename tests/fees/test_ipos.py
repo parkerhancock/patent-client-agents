@@ -169,6 +169,31 @@ class TestPerClassCondition:
         assert ipos._per_class_condition("S$1,250") is None
 
 
+class TestRowCells:
+    def test_excludes_accessibility_only_external_link_text(self) -> None:
+        row = L.fromstring(
+            """
+            <tr>
+              <td>PF34</td>
+              <td>
+                Request under <a href="https://example.test">
+                  Section 34
+                  <span aria-hidden="true"> ↗</span>
+                  <span class="sr-only"> (opens in new tab)</span>
+                </a>
+              </td>
+              <td>S$100</td>
+            </tr>
+            """
+        )
+
+        assert ipos._row_cells(row) == [
+            "PF34",
+            "Request under Section 34",
+            "S$100",
+        ]
+
+
 class TestCategorizers:
     def test_patent_pf1_filing(self) -> None:
         assert (
@@ -287,6 +312,62 @@ class TestBuildPatentFees:
         assert cond is not None
         assert cond.trigger == ConditionalTrigger.claims_over
         assert cond.threshold == 15
+
+    def test_acceleration_fees_keep_four_digit_amounts_and_claim_surcharge(self) -> None:
+        doc = L.fromstring(
+            b"""
+            <table>
+              <tr><th>Form</th><th>Description</th><th>Fee</th></tr>
+              <tr>
+                <td>PF11</td>
+                <td>Request for Search and Examination Report</td>
+                <td>S$1,750 plus S$80 for each claim over 15 claims</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Additional fee for request for patent acceleration</td>
+                <td>$1800.00$900.00</td>
+              </tr>
+              <tr>
+                <td>PF12</td>
+                <td>Request for Examination Report Additional fee for request for patent
+                    acceleration</td>
+                <td>S$1,420 plus S$80 for each claim over 15 claims$1200.00$600.00</td>
+              </tr>
+              <tr>
+                <td>PF13A</td>
+                <td>Response to written opinion</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Additional fee for request for patent acceleration</td>
+                <td>$150</td>
+              </tr>
+            </table>
+            """
+        )
+
+        fees = ipos._build_patent_fees(doc)
+
+        acceleration = {fee.label: fee.amount for fee in fees if "Fast" in fee.label}
+        assert acceleration == {
+            "PF11: Additional fee for SG Patents Fast 4": Decimal("1800.00"),
+            "PF11: Additional fee for SG Patents Fast 8": Decimal("900.00"),
+            "PF12: Additional fee for SG Patents Fast 4": Decimal("1200.00"),
+            "PF12: Additional fee for SG Patents Fast 8": Decimal("600.00"),
+        }
+        pf12_surcharge = next(fee for fee in fees if fee.code == "sg-pat-pf12-excess-claims")
+        assert pf12_surcharge.amount == Decimal("80")
+        pf12_base = next(fee for fee in fees if fee.amount == Decimal("1420"))
+        assert pf12_base.label == "PF12: Request for Examination Report"
+        pf13_acceleration = next(
+            fee for fee in fees if fee.code == "sg-pat-pf13a-acceleration-patent-acceleration"
+        )
+        assert pf13_acceleration.label == "PF13A: Additional fee for Patent acceleration"
+        assert pf13_acceleration.amount == Decimal("150")
+        assert Decimal("120") not in {fee.amount for fee in fees}
+        assert Decimal("180") not in {fee.amount for fee in fees}
 
     def test_pf15_year_band_5_to_7_at_176(self, patent_doc) -> None:
         fees = ipos._build_patent_fees(patent_doc)

@@ -7,6 +7,103 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.29.0] — 2026-09-25
+
+### Changed
+
+- `get_file_history_item` now maps the legacy `format='auto'` to PDF instead
+  of DOCX, rejects unknown formats, and names the available formats when a
+  requested format is missing. XML misses raise `NotFoundError`.
+- `search_patent_assignments` fills a one-sided execution-date range (through
+  today, or from 1980-01-01) instead of raising.
+
+### Fixed
+
+- Clean-source claim lookups for US publications, reissues, and bare numbers
+  now try PPUBS full text before EPO OPS, and prefix-less numbers are treated
+  as US.
+- PPUBS publication-number normalization handles a lone kind letter
+  (`USD1142829S`, `USRE46070E`, `US5668033A`) and zero-pads docdb-style
+  numbers such as `US2016309324A1`.
+- EPO OPS lookups convert printed US publication numbers to docdb form.
+- `list_ptab_children(parent_type='application')` returns an empty list when
+  ODP answers 404 for an application with no appeals.
+- USPTO ODP assignment records nested in `patentFileWrapperDataBag` are now
+  read, so `get_uspto(dataset="assignment")` no longer returns an empty list
+  for assigned applications.
+- MPEP searches containing punctuation no longer raise FTS syntax errors, and
+  malformed reference months or marked-up claim ranges no longer abort patent
+  retrieval.
+- Refreshed the UKIPO MoPP source sync date so coverage manifests validate.
+
+## [0.28.0] — 2026-09-01
+
+### Added
+
+- Added the official Unitary Patent renewal ladder for years 2–20, including
+  the 50% late-payment surcharge and EPO source provenance.
+- Added machine-readable recurring-fee coverage metadata. Schedules now report
+  whether renewal and maintenance coverage is complete, partial, or not
+  applicable, with known missing categories, years, and qualifications.
+
+### Changed
+
+- Added the complete ordinary UK patent renewal ladder for years 5–20 and the
+  ordinary online Australian standard-patent ladder for anniversary years
+  4–19. Conditional reductions, late fees, term extensions, and other excluded
+  cases remain explicit in schedule coverage notes.
+- Included recurring-fee coverage in jurisdiction metadata and empty fee
+  lookup summaries so callers can distinguish an unsupported or incomplete
+  schedule from an authoritative empty result.
+
+### Fixed
+
+- Applied JPO per-claim renewal charges to every claim rather than only claims
+  above one.
+- Assigned USPTO maintenance-fee surcharge rows to their applicable payment
+  stages so late-fee lookups can resolve stage-specific amounts.
+
+## [0.27.1] — 2026-09-01
+
+### Added
+
+- Added native Claude Code, Codex CLI, and Antigravity CLI package manifests
+  generated from one Satchel configuration, with equal installation guidance
+  and a client-neutral first research task.
+
+### Changed
+
+- Made MCP package initialization lazy so importing the package or an
+  individual tool module no longer constructs the complete MCP tool surface.
+- Classified intentional standalone Atlas sources and generated site facts
+  from the canonical coverage data.
+- Made fee-snapshot checks non-writing and preserved last-known-good schedule
+  rows when an upstream fee route fails, while keeping failures and stale age
+  visible.
+
+### Fixed
+
+- Updated INPI France fees, preserved JPO XML encoding declarations, and
+  bounded KIPO fee-page fetches.
+- Corrected IPOS fee labels and amounts after upstream markup and acceleration
+  fee changes, including hidden link annotations, four-digit SGD values, and
+  excess-claim surcharges.
+- Fixed documentation navigation after the installation-guide and source-page
+  redesigns.
+
+## [0.27.0] — 2026-08-31
+
+### Added
+
+- Added a Canada Federal Court case-file connector for official party and
+  corporation search, case metadata, public parties and counsel, patent
+  references, and recorded docket entries.
+- Added a China Supreme People's Court Intellectual Property Court connector
+  for official scheduled-hearing notices and official-site search.
+- Added a Japan Intellectual Property High Court connector for the official
+  weekly workbook of pending and recently closed suits seeking cancellation of
+  JPO patent and utility-model decisions.
+
 ### Changed
 
 - Consolidated all 114 shipped coverage products and six additional known
@@ -14,6 +111,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
   `catalog/sources/`. Country summaries, the worldwide inventory,
   `coverage/sources.yaml`, `coverage.json`, and `atlas.json` are now generated
   from those records, eliminating the parallel hand-edited coverage manifest.
+- Updated the supported Python dependency set while retaining `pypdf<6.15` to
+  preserve Finnish PRH statutory-fee PDF parsing.
+
+## [0.26.5] — 2026-08-28
+
+### Fixed
+
+- Hardened USPTO Patent Public Search against transient timeouts, expired
+  sessions, rate limits, and server errors. Concurrent session refreshes now
+  share the replacement session and replay requests with its current case ID.
+- Limited PPUBS search pages to its reliable 20-result size and corrected the
+  MCP query example.
 
 ## [0.26.4] — 2026-08-12
 
@@ -1871,7 +1980,11 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.4...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.28.0...HEAD
+[0.28.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.1...v0.28.0
+[0.27.1]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.0...v0.27.1
+[0.27.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.5...v0.27.0
+[0.26.5]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.4...v0.26.5
 [0.26.4]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.3...v0.26.4
 [0.26.3]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.2...v0.26.3
 [0.26.2]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.1...v0.26.2

@@ -38,6 +38,7 @@ connector:
   blockers: []
 category: adjudicative_records
 coverage:
+  atlas_standalone_reason: adjudicative_body
   order: 26
   name: USITC IDS — IP investigation index
   rights:

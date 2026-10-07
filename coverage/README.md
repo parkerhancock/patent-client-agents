@@ -19,7 +19,11 @@ every entry must satisfy.
   `../research/STATE.yaml`. Each entity carries verdict + verdict_basis,
   synopsis_url (deep-link into `docs.patentclient.com/patent-client-index/`),
   connector_status, and any shipped `sources.yaml` rows nested under
-  `shipped_sources`. Consumed by `patentclient-web/assets/atlas.js`.
+  `shipped_sources`. The compatibility field `unattached_sources` contains
+  intentionally standalone products, such as court repositories and
+  cross-office services. Every standalone row declares an
+  `atlas_standalone_reason`; an unexplained row fails the build. Consumed by
+  `patentclient-web/assets/atlas.js`.
 
 See [`../ATLAS_INTEGRATION.md`](../ATLAS_INTEGRATION.md) for the
 office-centric data model and cross-consumer plan.
@@ -78,6 +82,7 @@ unless the workflow has an explicit cross-repo token; GitHub's default
 | `update_cadence` | when category=substantive_law | `{weekly, monthly, quarterly, semiannual, annual, irregular}` |
 | `last_synced` | when category=substantive_law + transport=mcp_local | YAML date |
 | `corpus_version` | when category=substantive_law + transport=mcp_local | free text |
+| `atlas_standalone_reason` | when a source intentionally has no `research/STATE.yaml` entity | `{adjudicative_body, cross_office_service, independent_legal_authority, out_of_scope}` |
 
 ## Validator checks beyond shape
 

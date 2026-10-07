@@ -39,6 +39,7 @@ connector:
   blockers: []
 category: adjudicative_records
 coverage:
+  atlas_standalone_reason: adjudicative_body
   order: 25
   name: USITC EDIS — Section 337 investigations
   rights:

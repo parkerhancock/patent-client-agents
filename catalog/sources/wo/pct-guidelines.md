@@ -30,6 +30,7 @@ connector:
   module: patent_client_agents.epo_pct_guidelines
   blockers: []
 coverage:
+  atlas_standalone_reason: independent_legal_authority
   order: 35
   wipo_st3_code: WO
   data_types:

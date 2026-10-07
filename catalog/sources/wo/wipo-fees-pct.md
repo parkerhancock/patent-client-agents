@@ -28,6 +28,7 @@ connector:
   module: patent_client_agents.fees
   blockers: []
 coverage:
+  atlas_standalone_reason: cross_office_service
   order: 101
   wipo_st3_code: WO
   data_types:

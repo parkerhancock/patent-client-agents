@@ -374,3 +374,65 @@ async def test_get_patent_assignment_list_preserves_order():
     assert returned == appls
     assert result.provenance.source_url.endswith("/api/v1/patent/applications/assignment")
     assert "Fetched assignments for 3 applications" in result.summary
+
+
+@pytest.mark.asyncio
+async def test_get_file_history_item_legacy_auto_format_downloads_pdf():
+    """Callers pinned to the old signature pass format='auto'; serve the PDF."""
+    download_result = object()
+
+    with (
+        patch(
+            "patent_client_agents.uspto_odp.clients.applications.ApplicationsClient"
+        ) as mock_client_cls,
+        patch(
+            "patent_client_agents.mcp.tools.uspto.download_tool_result",
+            new_callable=AsyncMock,
+            return_value=download_result,
+        ),
+    ):
+        mock_client = mock_client_cls.return_value.__aenter__.return_value
+        mock_client.download_document = AsyncMock(return_value=b"original PDF")
+
+        result = await get_file_history_item(
+            application_number="16123456",
+            document_identifier="ABC123",
+            format="auto",  # type: ignore[arg-type]
+        )
+
+    assert result is download_result
+    mock_client.download_document.assert_awaited_once_with("16123456", "ABC123")
+    mock_client.download_document_docx.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_get_file_history_item_missing_format_lists_available_formats():
+    from types import SimpleNamespace
+
+    from mcp_data_core.exceptions import NotFoundError
+
+    document = SimpleNamespace(
+        documentIdentifier="ABC123",
+        downloadOptionBag=[{"mimeTypeIdentifier": "PDF"}, {"mimeTypeIdentifier": "XML"}],
+    )
+
+    with patch(
+        "patent_client_agents.uspto_odp.clients.applications.ApplicationsClient"
+    ) as mock_client_cls:
+        mock_client = mock_client_cls.return_value.__aenter__.return_value
+        mock_client.download_document_docx = AsyncMock(
+            side_effect=NotFoundError("Document 'ABC123' in application 16123456 has no DOCX.")
+        )
+        mock_client.get_documents = AsyncMock(return_value=SimpleNamespace(documents=[document]))
+
+        with pytest.raises(NotFoundError) as excinfo:
+            await get_file_history_item(
+                application_number="16123456",
+                document_identifier="ABC123",
+                format="docx",
+            )
+
+    message = str(excinfo.value)
+    assert "has no DOCX version" in message
+    assert "['pdf', 'xml']" in message
+    assert "format='pdf'" in message

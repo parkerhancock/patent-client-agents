@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import base64
 import logging
+import re
 from dataclasses import dataclass
 from typing import Any
 
@@ -221,14 +222,16 @@ async def get_patent_claims(patent_number: str) -> list[dict[str, Any]]:
 
 
 async def get_patent_claims_clean(patent_number: str) -> list[dict[str, Any]]:
-    """Fetch canonical claims using only clean public sources: ODP → EPO.
+    """Fetch canonical claims using only clean public sources: ODP → PPUBS → EPO.
 
     Like :func:`get_patent_claims` but with the Google Patents HTML fallback
-    replaced by EPO OPS full text, for deployments that must not touch Google
-    Patents. Cascades:
+    replaced by USPTO Public Search and EPO OPS full text, for deployments
+    that must not touch Google Patents. Cascades:
 
     1. USPTO ODP grant XML (authoritative for US patents post-~2000)
-    2. EPO OPS full text (worldwide fallback; EP/WO coverage is densest)
+    2. USPTO PPUBS full text (US pre-grant publications, reissues, designs,
+       and grants whose XML ODP lacks). EPO OPS has no US full text.
+    3. EPO OPS full text (worldwide fallback; EP/WO coverage is densest)
 
     Returns claims in the canonical shape from :func:`build_canonical_claim`.
     Raises :class:`NotFoundError` if neither clean source has the claims.
@@ -236,7 +239,8 @@ async def get_patent_claims_clean(patent_number: str) -> list[dict[str, Any]]:
     from patent_client_agents.epo_ops.client import client_from_env
     from patent_client_agents.uspto_odp.clients.applications import ApplicationsClient
 
-    if patent_number.strip().upper().startswith("US"):
+    is_us = _is_us_number(patent_number)
+    if is_us:
         try:
             async with ApplicationsClient() as odp:
                 odp_claims = await odp.get_granted_claims(patent_number)
@@ -253,6 +257,12 @@ async def get_patent_claims_clean(patent_number: str) -> list[dict[str, Any]]:
         except McpDataCoreError as exc:
             logger.info("ODP grant XML unavailable for %s: %s", patent_number, exc)
 
+        ppubs_claims = await _ppubs_claims(patent_number)
+        if ppubs_claims:
+            return ppubs_claims
+
+    sources = "ODP, PPUBS, EPO" if is_us else "ODP, EPO"
+
     # EPO OPS full text (worldwide; no Google). EPO returns its own claims
     # structure rather than the ODP/Google limitation shape, so each claim is
     # wrapped as a single-limitation canonical claim carrying the EPO claim
@@ -263,13 +273,13 @@ async def get_patent_claims_clean(patent_number: str) -> list[dict[str, Any]]:
     except (NotFoundError, FileNotFoundError, ValueError, RuntimeError) as exc:
         logger.info("EPO OPS full text unavailable for %s: %s", patent_number, exc)
         raise NotFoundError(
-            f"Claims not found for patent {patent_number} in clean sources (ODP, EPO)."
+            f"Claims not found for patent {patent_number} in clean sources ({sources})."
         ) from exc
 
     epo_claims = _epo_claim_texts(fulltext)
     if not epo_claims:
         raise NotFoundError(
-            f"Claims not found for patent {patent_number} in clean sources (ODP, EPO)."
+            f"Claims not found for patent {patent_number} in clean sources ({sources})."
         )
     return [
         build_canonical_claim(
@@ -280,6 +290,71 @@ async def get_patent_claims_clean(patent_number: str) -> list[dict[str, Any]]:
         )
         for num, text in epo_claims
     ]
+
+
+#: Bare US grant/publication number with no country prefix (``10301023``,
+#: ``10,301,023``).
+_BARE_US_NUMBER_RE = re.compile(r"^[\d,]+$")
+
+#: Start of one numbered claim in PPUBS ``claims_text`` (reissue additions
+#: carry an ``.Iadd.`` marker in front of the number).
+_PPUBS_CLAIM_START_RE = re.compile(r"^(?:\.Iadd\.)?\s*(\d+)\s*\.\s*(.*)$", re.DOTALL)
+_CLAIM_REF_RE = re.compile(r"\bclaims?\s+(\d+)", re.IGNORECASE)
+
+
+def _is_us_number(patent_number: str) -> bool:
+    """True for ``US``-prefixed numbers and bare (prefix-less) numbers."""
+    cleaned = patent_number.strip().upper()
+    return cleaned.startswith("US") or bool(_BARE_US_NUMBER_RE.match(cleaned))
+
+
+def _ppubs_claim_texts(claims_text: str | None) -> list[tuple[int, str]]:
+    """Split PPUBS ``claims_text`` into (claim_number, claim_text) pairs.
+
+    PPUBS separates claims with blank lines and starts each with ``N.``.
+    Unnumbered paragraphs continue the previous claim; a lone unnumbered
+    claim (design patents) becomes claim 1.
+    """
+    claims: list[list[Any]] = []
+    for para in re.split(r"\n\s*\n", claims_text or ""):
+        para = para.strip()
+        if not para:
+            continue
+        match = _PPUBS_CLAIM_START_RE.match(para)
+        if match:
+            claims.append([int(match.group(1)), match.group(2).strip()])
+        elif claims:
+            claims[-1][1] = f"{claims[-1][1]}\n{para}"
+        else:
+            claims.append([1, para])
+    return [(num, text) for num, text in claims if text]
+
+
+async def _ppubs_claims(patent_number: str) -> list[dict[str, Any]]:
+    """Canonical claims from USPTO Public Search full text, or [] when unavailable."""
+    from patent_client_agents.uspto_publications.client import PublicSearchClient
+
+    try:
+        async with PublicSearchClient() as ppubs:
+            document = await ppubs.resolve_document_by_publication_number(patent_number)
+    except (McpDataCoreError, ValueError) as exc:
+        logger.info("PPUBS full text unavailable for %s: %s", patent_number, exc)
+        return []
+
+    claims_text = document.document.claims_text if document.document else None
+    out: list[dict[str, Any]] = []
+    for num, text in _ppubs_claim_texts(claims_text):
+        ref = _CLAIM_REF_RE.search(text)
+        depends_on = int(ref.group(1)) if ref and int(ref.group(1)) < num else None
+        out.append(
+            build_canonical_claim(
+                claim_number=num,
+                limitations=[{"depth": 0, "text": text}],
+                claim_type="dependent" if depends_on else "independent",
+                depends_on=depends_on,
+            )
+        )
+    return out
 
 
 def _epo_claim_texts(fulltext: Any) -> list[tuple[int, str]]:

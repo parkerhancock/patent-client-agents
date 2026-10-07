@@ -2,10 +2,10 @@
 
 The `[mcp]` extra ships a ready-to-run stdio MCP server that exposes
 all patent and IP tools to any MCP-speaking client — Claude Code,
-Claude Desktop, OpenAI Codex CLI, Google Gemini CLI, Cursor, Windsurf,
+OpenAI Codex CLI, Google Antigravity CLI, Claude Desktop, Google Gemini CLI, Cursor, Windsurf,
 Cline, Zed, Continue.dev, VS Code Copilot Chat, JetBrains AI Assistant,
-CoWork, or a homegrown fastmcp Client. See
-[installation.md §5](installation.md#5-stdio-mcp-from-any-mcp-client)
+CoWork, or a homegrown fastmcp Client. See the
+[MCP client configuration guide](install/mcp-clients.md)
 for per-client config snippets.
 
 ## Install
@@ -31,15 +31,15 @@ python -m patent_client_agents.mcp.server
 fastmcp run patent_client_agents.mcp.server:mcp
 ```
 
-## MCP client configuration (example: Claude Code)
+## MCP client configuration
 
-Per-client config locations and exact syntax for Codex CLI, Gemini CLI,
+Native plugin packages for Claude Code, Codex CLI, and Antigravity CLI,
+plus per-client config locations and exact syntax for Gemini CLI,
 Cursor, Windsurf, Cline, Zed, Continue.dev, VS Code Copilot Chat,
-JetBrains AI, and Claude Desktop are in
-[installation.md §5](installation.md#5-stdio-mcp-from-any-mcp-client).
-For Claude Code specifically — add one of the following blocks to your
-MCP config (`.mcp.json` at the project root or `~/.claude.json` for
-user-scope):
+JetBrains AI, and Claude Desktop are in the
+[MCP client configuration guide](install/mcp-clients.md).
+The JSON below is the common stdio shape used by Claude Code and
+Antigravity CLI. Codex expresses the same fields in TOML.
 
 ```json
 {
@@ -71,7 +71,8 @@ If you prefer to invoke a specific venv or Python interpreter:
 The server starts with no authentication in stdio mode. Any env vars
 set in the `env` block are available to the connectors — USPTO ODP,
 EPO OPS, and JPO all consume credentials from env (see each connector's
-`CATALOG.md` entry).
+`CATALOG.md` entry). The [local source access guide](install/local-runtime.md)
+lists the supported credentials and corpus builders.
 
 ## Tools exposed
 
@@ -164,15 +165,19 @@ async def main():
     async with Client(StdioTransport(command="patent-client-agents-mcp", args=[])) as c:
         tools = await c.list_tools()
         print(len(tools), "tools")
-        result = await c.call_tool("get_mpep_section", {"section": "2106"})
-        print(result.data.get("title") if result.data else None)
+        result = await c.call_tool(
+            "get_patent",
+            {"patent_number": "US10000000B2", "view": "details"},
+        )
+        print(result.data.items[0]["title"] if result.data else None)
 
 asyncio.run(main())
 ```
 
 Expect 136 tools by default and up to 234 tools when every env-gated
-family is configured. Title should be `2106 … Patent Subject Matter
-Eligibility`.
+family is configured. The expected title is `Coherent LADAR using intra-pixel
+quadrature detection`. Agent users can run the equivalent
+[first research task](first-research-task.md) as a prompt.
 
 ## Not installed?
 

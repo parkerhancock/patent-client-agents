@@ -85,7 +85,9 @@ async with TmsearchClient() as client:
 
 ## Token refresh on the deploy server
 
-The hosted `mcp.patentclient.com` instance runs a separate Cloud Run Job (`law_tools.uspto_tmsearch.refresh_job`) on a 3-day cron that mints a fresh `aws-waf-token` via Playwright and writes it as a new Secret Manager secret version. The MCP service mounts that secret as `PCA_WAF_TOKEN_JSON` (or legacy `LAW_TOOLS_WAF_TOKEN_JSON`) on the next deployment. The in-process token-refresh path is the fallback when the env-supplied token gets WAF-rejected mid-request.
+The production infrastructure runs a separate Cloud Run Job (`patent_mcp_deploy.waf_refresh`) every four hours. It mints a fresh `aws-waf-token` through Playwright and writes a new Secret Manager secret version. A new MCP service instance reads that secret through `PCA_WAF_TOKEN_JSON`; the in-process token-refresh path remains the fallback when an environment-supplied token is rejected mid-request.
+
+The public `mcp.patentclient.com` facade does not advertise `search_trademarks`. The refresh job maintains the credential path for controlled deployments, but it does not change the public-demo visibility rule.
 
 ## Stability Notes
 

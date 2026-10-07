@@ -129,3 +129,33 @@ def test_docstring_carries_related_tools_line():
     assert "Related tools:" in doc
     assert "get_application" in doc
     assert "get_patent" in doc
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("kwargs", "expected"),
+    [
+        ({"executed_after": "2020-01-01"}, ("2020-01-01", "today")),
+        ({"executed_before": "2021-06-30"}, ("1980-01-01", "2021-06-30")),
+        (
+            {"executed_after": "2020-01-01", "executed_before": "2021-06-30"},
+            ("2020-01-01", "2021-06-30"),
+        ),
+    ],
+)
+async def test_search_patent_assignments_fills_open_date_range(kwargs, expected):
+    from datetime import date
+
+    results = SearchResults(records=[], total=0, truncated=False)
+
+    with patch(
+        "patent_client_agents.mcp.tools.patent_assignments.AssignmentCenterClient"
+    ) as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.search = AsyncMock(return_value=results)
+        await search_patent_assignments(query="GIESECKE", by="assignee", **kwargs)
+
+    start, end = mock_client.search.await_args.kwargs["executed_between"]
+    want_start, want_end = expected
+    assert start == date.fromisoformat(want_start)
+    assert end == (date.today() if want_end == "today" else date.fromisoformat(want_end))
