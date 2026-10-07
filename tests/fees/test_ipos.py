@@ -7,7 +7,8 @@ Two layers:
   per-claim condition detection, categorizers.
 * **Integration tests** that drive the per-right builders against
   the cached IPOS HTML pages
-  (``tests/fees/fixtures/sg_ipos_{patents,trademarks,designs}_2026-05-19.html``).
+  (``tests/fees/fixtures/sg_ipos_{patents,trademarks,designs}_2026-05-19.html``,
+  plus ``sg_ipos_trademarks_2026-10-07.html`` for the TM4 acceleration layout).
 
 Refresh the fixtures by re-fetching:
 
@@ -35,6 +36,8 @@ from patent_client_agents.fees.scrapers import ipos
 FIXTURE_DIR = Path(__file__).parent / "fixtures"
 PATENT_FIXTURE = FIXTURE_DIR / "sg_ipos_patents_2026-05-19.html"
 TM_FIXTURE = FIXTURE_DIR / "sg_ipos_trademarks_2026-05-19.html"
+# 2026-10 layout: TM4 cell adds SG Trade Marks Fast acceleration add-ons.
+TM_ACCELERATION_FIXTURE = FIXTURE_DIR / "sg_ipos_trademarks_2026-10-07.html"
 DESIGN_FIXTURE = FIXTURE_DIR / "sg_ipos_designs_2026-05-19.html"
 
 
@@ -65,6 +68,17 @@ class TestParseSgdAmounts:
             "Classification Database:S$410 per class"
         )
         assert amounts == [Decimal("280"), Decimal("410")]
+
+    def test_tm4_acceleration_add_ons_are_split_from_base(self) -> None:
+        base, add_ons = ipos._split_add_on_amounts(
+            "goods and servicesS$280 per classRequest for acceleration of the first "
+            "examination stage under SG Trade Marks Fast: + $200 per classFor class(es) "
+            "whose specification items are not fully adopted from IPOS' Classification "
+            "Database:S$410 per classRequest for acceleration of the first examination "
+            "stage under SG Trade Marks Fast: + $250 per class"
+        )
+        assert base == [Decimal("280"), Decimal("410")]
+        assert add_ons == [Decimal("200"), Decimal("250")]
 
     def test_design_d3_multi_amount(self) -> None:
         # D3 publishes two amounts in one body — per design + per
@@ -427,6 +441,17 @@ class TestBuildTrademarkFees:
             and "pre-approved" in preapproved.notes.lower()
             or "fully adopted" in preapproved.notes.lower()
         )
+
+    def test_tm4_acceleration_layout_keeps_base_prices(self) -> None:
+        doc = L.fromstring(TM_ACCELERATION_FIXTURE.read_bytes())
+        by_code = {f.code: f for f in ipos._build_trademark_fees(doc)}
+        assert by_code["sg-tm-tm4-preapproved"].amount == Decimal("280")
+        assert by_code["sg-tm-tm4-custom"].amount == Decimal("410")
+        assert by_code["sg-tm-tm4-acceleration-preapproved"].amount == Decimal("200")
+        assert by_code["sg-tm-tm4-acceleration-custom"].amount == Decimal("250")
+        accel = by_code["sg-tm-tm4-acceleration-custom"]
+        assert accel.condition is not None
+        assert accel.condition.trigger == ConditionalTrigger.classes_over
 
     def test_tm4_carries_per_class_condition(self, trademark_doc) -> None:
         fees = ipos._build_trademark_fees(trademark_doc)
