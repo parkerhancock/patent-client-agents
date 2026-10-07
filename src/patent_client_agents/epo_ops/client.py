@@ -20,6 +20,7 @@ from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.cache import build_cached_http_client
 from mcp_data_core.exceptions import (
     AuthenticationError,
+    NotFoundError,
     RateLimitError,
     RetryableAuthenticationError,
 )
@@ -288,7 +289,20 @@ class EpoOpsClient(BaseAsyncClient):
         range_end: int = 25,
     ) -> SearchResponse:
         params = {"q": query, "Range": f"{range_begin}-{range_end}"}
-        response = await self._request("GET", "/rest-services/published-data/search", params=params)
+        try:
+            response = await self._request(
+                "GET", "/rest-services/published-data/search", params=params
+            )
+        except NotFoundError as exc:
+            body = exc.response_body or ""
+            if "SERVER.EntityNotFound" not in body or "No results found" not in body:
+                raise
+            return SearchResponse(
+                query=query,
+                range_begin=range_begin,
+                range_end=range_end,
+                total_results=0,
+            )
         return parse_search_response(response.text)
 
     async def search_families(

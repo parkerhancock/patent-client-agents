@@ -5,11 +5,12 @@ from __future__ import annotations
 import asyncio
 import datetime as dt
 import time
+from unittest.mock import AsyncMock
 
 import httpx
 import pytest
 
-from mcp_data_core.exceptions import RetryableAuthenticationError
+from mcp_data_core.exceptions import NotFoundError, RetryableAuthenticationError
 from patent_client_agents.epo_ops.client import (
     BASE_URL,
     EpoOpsClient,
@@ -292,3 +293,35 @@ class TestForbiddenErrorBuilder:
         response = httpx.Response(403, headers={})
         error = EpoOpsClient._build_forbidden_error(response)
         assert "rate limited or quota exceeded" in str(error)
+
+
+class TestSearchNoResults:
+    @pytest.mark.asyncio
+    async def test_entity_not_found_returns_empty_search(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        fault = (
+            "<fault><code>SERVER.EntityNotFound</code><message>No results found</message></fault>"
+        )
+        request = AsyncMock(side_effect=NotFoundError("search failed", 404, fault))
+        monkeypatch.setattr(EpoOpsClient, "_request", request)
+        client = object.__new__(EpoOpsClient)
+
+        result = await client.search_published(query="ta=absent", range_begin=1, range_end=25)
+        families = await client.search_families(query="ta=absent")
+
+        assert result.query == "ta=absent"
+        assert result.total_results == 0
+        assert result.results == []
+        assert families.total_results == 0
+        assert families.families == []
+
+    @pytest.mark.asyncio
+    async def test_other_404_still_raises(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        error = NotFoundError("wrong endpoint", 404, "<fault>other cause</fault>")
+        monkeypatch.setattr(EpoOpsClient, "_request", AsyncMock(side_effect=error))
+        client = object.__new__(EpoOpsClient)
+
+        with pytest.raises(NotFoundError) as exc:
+            await client.search_published(query="ta=example")
+        assert exc.value is error
