@@ -1269,7 +1269,7 @@ async def _run_ptab_bulk(
     container_metadata: dict,
     cap: int,
     container_kind: str,
-) -> dict:
+) -> ToolResult:
     """Shared bulk-download pipeline for the 4 PTAB tools.
 
     Each candidate dict must carry: ``item_id``, ``resource_path``,
