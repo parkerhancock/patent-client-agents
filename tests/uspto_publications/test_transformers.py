@@ -510,3 +510,11 @@ class TestConvertDocumentPayload:
         result = convert_document_payload({})
         assert result["guid"] is None
         assert result["document"]["claims"] == []
+
+
+def test_convert_biblio_page_keeps_family_total():
+    from patent_client_agents.uspto_publications.transformers import convert_biblio_page
+
+    page = convert_biblio_page({"numFound": 20, "numberOfFamilies": 102, "patents": []})
+    assert page["num_found"] == 20
+    assert page["num_families"] == 102

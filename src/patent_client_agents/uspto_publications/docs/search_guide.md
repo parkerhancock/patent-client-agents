@@ -15,8 +15,10 @@ Use these tips whenever you call `publications.search`:
    “Invalid date” errors. Prefer explicit ranges via `@PD>=...<=...` or post-filter results.
 6. **Sort parameter quirks:** PPUBS intermittently returns HTTP 500 when custom `sort`
    strings are supplied via the API. Allow the default ordering and sort client-side instead.
-7. **Pagination limits:** The API caps `limit` at 20 reliably. Iterate `start` in increments of
-   20 to harvest deeper result sets.
+7. **Pagination counts families.** Results are grouped by patent family, and `limit` and
+   `start` count families, not documents. A 20-family page often holds 30-60 documents. The API
+   caps `limit` at 20 reliably; advance `start` by the page's family count (`num_found`) until it
+   reaches `num_families`. `num_documents` is the total document count.
 8. **Handle error payloads:** Failures sometimes arrive as plain text (not JSON), which can break
    structured parsers. Wrap search calls to surface the underlying HTTP status message.
 

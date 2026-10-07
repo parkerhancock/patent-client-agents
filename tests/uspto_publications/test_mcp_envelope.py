@@ -42,6 +42,8 @@ class _FakeBiblioPage(BaseModel):
     num_found: int
     per_page: int = 25
     page: int = 0
+    num_families: int | None = None
+    num_documents: int | None = None
     docs: list[_FakeBiblio] = []
 
 
@@ -80,7 +82,9 @@ def _make_document(pub_no: str, *, title: str = "Test") -> _FakeDocument:
 @pytest.mark.asyncio
 async def test_search_returns_lean_list_envelope_by_default():
     page = _FakeBiblioPage(
-        num_found=42,
+        num_found=2,
+        num_families=42,
+        num_documents=97,
         docs=[_make_biblio("US20230012345A1", title="First"), _make_biblio("US20230099999A1")],
     )
     with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
@@ -95,9 +99,10 @@ async def test_search_returns_lean_list_envelope_by_default():
     assert "ppubs.uspto.gov" in result.provenance.source_url
     assert "searchWithBeFamily" in result.provenance.source_url
     assert len(result.items) == 2
-    assert result.more_available is True  # 42 total, 2 shown
+    assert result.more_available is True  # 42 families, 2 shown
     assert "machine learning" in result.summary
-    assert "2 of 42" in result.summary
+    assert "2 documents in 2 of 42 families" in result.summary
+    assert "97 documents in all" in result.summary
     # Lean projection per §5.5 — fixed scalar field set, not the raw biblio.
     assert set(result.items[0].keys()) == {
         "publication_number",
@@ -115,7 +120,7 @@ async def test_search_returns_lean_list_envelope_by_default():
 
 @pytest.mark.asyncio
 async def test_search_full_true_returns_upstream_shape():
-    page = _FakeBiblioPage(num_found=1, docs=[_make_biblio("US20230012345A1")])
+    page = _FakeBiblioPage(num_found=1, num_families=1, docs=[_make_biblio("US20230012345A1")])
     with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
         mock_client = mock_cls.return_value.__aenter__.return_value
         mock_client.search_biblio = AsyncMock(return_value=page)
@@ -132,6 +137,7 @@ async def test_search_full_true_returns_upstream_shape():
 async def test_search_more_available_false_when_exhausted():
     page = _FakeBiblioPage(
         num_found=2,
+        num_families=2,
         docs=[_make_biblio("US20230012345A1"), _make_biblio("US20230099999A1")],
     )
     with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
@@ -139,18 +145,80 @@ async def test_search_more_available_false_when_exhausted():
         mock_client.search_biblio = AsyncMock(return_value=page)
         result = await search_patent_publications(query="*", limit=25)
     assert result.more_available is False
+    assert result.next_cursor is None
 
 
 @pytest.mark.asyncio
 async def test_search_default_uses_reliable_ppubs_page_size():
-    page = _FakeBiblioPage(num_found=0, per_page=20, docs=[])
+    page = _FakeBiblioPage(num_found=0, num_families=0, per_page=20, docs=[])
     with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
         mock_client = mock_cls.return_value.__aenter__.return_value
         mock_client.search_biblio = AsyncMock(return_value=page)
 
         await search_patent_publications(query="neural.CLM.")
 
-    mock_client.search_biblio.assert_awaited_once_with(query="neural.CLM.", limit=20)
+    mock_client.search_biblio.assert_awaited_once_with(query="neural.CLM.", start=0, limit=20)
+
+
+@pytest.mark.asyncio
+async def test_search_continues_by_family_offset():
+    """Pages advance by families, and a family can carry several documents (#91)."""
+    from mcp_data_core.envelope import decode_cursor
+
+    first_page = _FakeBiblioPage(
+        num_found=2,
+        num_families=3,
+        num_documents=5,
+        docs=[_make_biblio(f"US2023000000{i}A1") for i in range(4)],
+    )
+    last_page = _FakeBiblioPage(
+        num_found=1, num_families=3, num_documents=5, docs=[_make_biblio("US20230000009A1")]
+    )
+    with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.search_biblio = AsyncMock(side_effect=[first_page, last_page])
+        first = await search_patent_publications(query="q", limit=2)
+        last = await search_patent_publications(query="q", next_cursor=first.next_cursor)
+
+    assert len(first.items) == 4
+    assert first.more_available is True
+    assert decode_cursor(first.next_cursor) == {"offset": 2, "limit": 2}
+    assert "4 documents in 2 of 3 families at family offset 0" in first.summary
+    assert last.more_available is False
+    assert last.next_cursor is None
+    mock_client.search_biblio.assert_awaited_with(query="q", start=2, limit=2)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "num_found,num_families,offset",
+    [(2, None, 0), (5, 3, 0), (0, 3, 1)],
+)
+async def test_search_rejects_unknown_or_inconsistent_family_counts(
+    num_found, num_families, offset
+):
+    from mcp_data_core.exceptions import ParseError
+
+    page = _FakeBiblioPage(num_found=num_found, num_families=num_families, docs=[])
+    with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.search_biblio = AsyncMock(return_value=page)
+        with pytest.raises(ParseError):
+            await search_patent_publications(query="q", offset=offset)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "kwargs",
+    [{"offset": -1}, {"limit": 0}, {"offset": True}, {"next_cursor": "garbage"}],
+)
+async def test_search_invalid_pagination_fails_before_request(kwargs):
+    from mcp_data_core.exceptions import ValidationError
+
+    with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
+        with pytest.raises(ValidationError):
+            await search_patent_publications(query="q", **kwargs)
+    mock_cls.assert_not_called()
 
 
 # ──────────────────────────────────────────────────────────────────────

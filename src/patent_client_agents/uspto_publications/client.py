@@ -20,7 +20,7 @@ from mcp_data_core.exceptions import (
 from mcp_data_core.resilience import with_retry
 
 from .models import PublicSearchBiblioPage, PublicSearchDocument
-from .transformers import convert_biblio_page, convert_document_payload
+from .transformers import _coerce_int, convert_biblio_page, convert_document_payload
 from .utils import normalize_publication_number
 
 logger = logging.getLogger(__name__)
@@ -251,6 +251,7 @@ class PublicSearchClient:
                 f"Error #{result['error'].get('errorCode')}: {result['error'].get('errorMessage')}"
             )
         converted = convert_biblio_page(result)
+        converted["num_documents"] = _coerce_int(counts.json().get("numResults"))
         return PublicSearchBiblioPage.model_validate(converted)
 
     async def get_document(self, guid: str, *, source: str) -> PublicSearchDocument:

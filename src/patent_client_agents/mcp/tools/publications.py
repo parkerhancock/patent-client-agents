@@ -8,8 +8,14 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, ResponseEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.envelope import (
+    ListEnvelope,
+    ResponseEnvelope,
+    decode_cursor,
+    encode_cursor,
+    make_provenance,
+)
+from mcp_data_core.exceptions import ParseError, ValidationError
 from mcp_data_core.filenames import publication_pdf as _publication_pdf_name
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import read_resource, register_source
@@ -155,7 +161,12 @@ async def search_patent_publications(
         "(assignee), CPC (classification). Example: "
         "'\"machine learning\" AND neural.CLM.' or 'blockchain.TI.'",
     ],
-    limit: Annotated[int, "Maximum number of results to return (1-20)"] = 20,
+    limit: Annotated[
+        int,
+        "Maximum number of patent families per page (1-20). A family can "
+        "contribute several documents, so a page can hold more than limit hits.",
+    ] = 20,
+    offset: Annotated[int, "Number of patent families to skip"] = 0,
     full: Annotated[
         bool,
         "When False (the default), each hit is a lean stub: publication "
@@ -165,6 +176,11 @@ async def search_patent_publications(
         "examiner, document structure, etc.) — large; prefer "
         "``get_patent_publication`` for one record.",
     ] = False,
+    next_cursor: Annotated[
+        str | None,
+        "Continuation from the previous response; overrides offset and limit. "
+        "Keep query unchanged.",
+    ] = None,
 ) -> ListEnvelope[dict]:
     """Search the full text of US patents and published applications.
 
@@ -174,26 +190,53 @@ async def search_patent_publications(
     instead. Returns lean stubs by default; pass ``full=True`` for the
     upstream-shaped biblio row.
 
+    PPUBS groups hits by patent family. ``limit`` and ``offset`` count
+    families, and each family returns all of its matching documents, so a
+    page can hold more than ``limit`` items. Pass ``next_cursor`` to continue
+    with the same query.
+
     Related tools: get_patent_publication, get_patent, download_patent_pdf,
     search_applications.
     """
+    if next_cursor is not None:
+        try:
+            cursor = decode_cursor(next_cursor)
+            offset, limit = cursor["offset"], cursor["limit"]
+        except (ValueError, KeyError) as exc:
+            raise ValidationError("invalid PPUBS next_cursor") from exc
+    if isinstance(offset, bool) or not isinstance(offset, int) or offset < 0:
+        raise ValidationError("offset must be a non-negative integer")
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit <= 0:
+        raise ValidationError("limit must be a positive integer")
     async with PublicSearchClient() as client:
-        page = await client.search_biblio(query=query, limit=limit)
+        page = await client.search_biblio(query=query, start=offset, limit=limit)
 
     dumped = _dump(page)
     if not isinstance(dumped, dict):  # pragma: no cover - upstream always Pydantic
         dumped = {}
     rows = list(dumped.get("docs") or [])
-    total = dumped.get("num_found")
-    shown = len(rows)
-    more = bool(total is not None and shown < int(total))
+    families = dumped.get("num_found")
+    total_families = dumped.get("num_families")
+    total_documents = dumped.get("num_documents")
+    if not isinstance(families, int) or not isinstance(total_families, int):
+        raise ParseError("PPUBS search omitted its family counts; coverage is unknown")
+    if (families and offset + families > total_families) or (
+        not families and offset < total_families
+    ):
+        raise ParseError("PPUBS search page contradicts its family total; retry the query")
+    more = offset + families < total_families
     items = rows if full else [_stub_publication(r) for r in rows]
-    summary_total = f"{shown} of {total} hits" if total is not None else f"{shown} hits"
+    summary_total = (
+        f"{len(rows)} documents in {families} of {total_families} families "
+        f"at family offset {offset}"
+    )
+    if isinstance(total_documents, int):
+        summary_total += f" ({total_documents} documents in all)"
     return ListEnvelope[dict](
         summary=f"USPTO Patent Publications — `{query}`: {summary_total}.",
         items=items,
         more_available=more,
-        next_cursor=None,
+        next_cursor=encode_cursor({"offset": offset + families, "limit": limit}) if more else None,
         provenance=_ppubs_provenance("/api/searches/searchWithBeFamily"),
     )
 
