@@ -159,6 +159,9 @@ async def search_mpep(
         "the upstream MpepSearchHit shape (title prefixed with section_number, "
         "the full result_url, and the path breadcrumb).",
     ] = False,
+    version: Annotated[
+        str, "Installed release identifier; current selects the installed snapshot."
+    ] = "current",
 ) -> ListEnvelope[dict]:
     """Search the Manual of Patent Examining Procedure (MPEP) for relevant sections.
 
@@ -183,6 +186,7 @@ async def search_mpep(
     async with MpepClient() as client:
         response = await client.search(
             query=query,
+            version=version,
             syntax=syntax,
             sort=sort,
             per_page=limit,
@@ -222,6 +226,9 @@ async def get_mpep_section(
         "eMPEP href ('d0e122292.html'), or a list of either for portfolio "
         "workflows. Examples: '2106', ['2106', '2143', '706.03(a)'].",
     ],
+    version: Annotated[
+        str, "Installed release identifier; unsupported retained versions fail."
+    ] = "current",
 ) -> ListEnvelope[dict]:
     """Get one or more MPEP sections by number (or eMPEP href).
 
@@ -245,7 +252,7 @@ async def get_mpep_section(
 
     async def _fetch_one(client: MpepClient, ref: str) -> dict:
         async with semaphore:
-            record = await client.get_section(ref)
+            record = await client.get_section(ref, version=version)
             # When the caller passes a section number, ``ref`` already is
             # the section number. When they pass an href, we don't have
             # the section number on the model itself; the breadcrumb on

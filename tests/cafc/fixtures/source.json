@@ -1,0 +1,13 @@
+{
+  "captured_on": "2026-09-14",
+  "source_url": "https://www.cafc.uscourts.gov/wp-admin/admin-ajax.php?action=get_wdtable&table_id=1",
+  "method": "POST",
+  "query": {
+    "start": 0,
+    "length": 1,
+    "date_from": "2024-01-01",
+    "date_to": "2024-01-31"
+  },
+  "fixture": "opinions_2024_01.json",
+  "notes": "Public official court response; recordsFiltered and recordsTotal are decimal strings. No nonce or request headers retained."
+}

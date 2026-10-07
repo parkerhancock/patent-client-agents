@@ -53,7 +53,7 @@ async def lookup_fee(
         )
 
 
-def estimate_freshness(schedule: FeeSchedule) -> dict[str, int | str | bool]:
+def estimate_freshness(schedule: FeeSchedule) -> dict[str, int | str | bool | None]:
     """Compute a small dict describing how stale a schedule is.
 
     Returns ``{"days_since_retrieval", "days_since_effective",
@@ -62,9 +62,11 @@ def estimate_freshness(schedule: FeeSchedule) -> dict[str, int | str | bool]:
     """
     today = date.today()
     return {
-        "retrieved_at": schedule.retrieved_at.isoformat(),
+        "retrieved_at": schedule.retrieved_at.isoformat() if schedule.retrieved_at else None,
         "effective_date": schedule.effective_date.isoformat(),
-        "days_since_retrieval": max(0, (today - schedule.retrieved_at).days),
+        "days_since_retrieval": max(0, (today - schedule.retrieved_at).days)
+        if schedule.retrieved_at
+        else None,
         "days_since_effective": max(0, (today - schedule.effective_date).days),
     }
 

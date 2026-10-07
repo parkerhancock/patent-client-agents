@@ -24,10 +24,15 @@ them interchangeably:
 
 ## MCP tools
 
-### `search_ptab(type, query, limit, offset)`
+### `search_ptab(type, query, limit, offset, full, next_cursor)`
 
-Search any of the five types by query. Returns a list of matching records
-in that type's shape.
+Search any of the five types by query. Returns lean records in a list envelope;
+use `full=True` for full records or `get_ptab` for selected records. Pass the
+returned `next_cursor` with the same type and query to continue. The cursor
+carries the next offset and page size, overriding `offset` and `limit`, with no
+server-side session. `more_available=False` means the source query has ended;
+the index is not a frozen snapshot. A missing or contradictory upstream count
+raises a source error rather than claiming completion.
 
 ```python
 # AIA trials mentioning "machine learning":

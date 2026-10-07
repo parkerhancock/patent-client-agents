@@ -28,11 +28,9 @@ class TestGetCorpusStatusShape:
 
 class TestGetCorpusStatusFromBundledCorpus:
     def test_version_string_is_source_version_from_meta(self, mpep_corpus_env: Path) -> None:
-        """``write_corpus`` stamps ``source_version='current'`` (see
-        ``corpus/build.py``). The callable surfaces it verbatim.
-        """
+        """Absent release evidence remains unknown, rather than claiming current."""
         status = get_corpus_status()
-        assert status["corpus_version"] == "current"
+        assert status["corpus_version"] == "unknown"
 
     def test_synced_at_is_utc_datetime_from_snapshot_date(self, mpep_corpus_env: Path) -> None:
         """``meta.snapshot_date`` is ISO ``YYYY-MM-DD``; we lift it to a
@@ -47,17 +45,12 @@ class TestGetCorpusStatusFromBundledCorpus:
         # is today's date — just assert the year is reasonable.
         assert synced.year >= 2024
 
-    def test_synced_at_normalized_to_midnight(self, mpep_corpus_env: Path) -> None:
-        """Snapshot_date carries no time component; the lift to datetime
-        normalizes to UTC midnight so downstream consumers get a stable
-        value.
-        """
-        status = get_corpus_status()
-        synced = status["corpus_synced_at"]
-        assert synced is not None
-        assert synced.hour == 0
-        assert synced.minute == 0
-        assert synced.second == 0
+    def test_synced_at_preserves_build_timestamp(self, mpep_corpus_env: Path) -> None:
+        from patent_client_agents.mpep.corpus.db import CorpusDB
+
+        with CorpusDB.open() as db:
+            expected = datetime.fromisoformat(db.meta()["synced_at"])
+        assert get_corpus_status()["corpus_synced_at"] == expected
 
 
 class TestGetCorpusStatusMissingCorpus:
