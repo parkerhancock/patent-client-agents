@@ -1,4 +1,7 @@
 {
+  "bytes_retrieved_at": null,
+  "cache_state": "unknown",
+  "content_sha256": null,
   "currency": "SGD",
   "effective_date": "2026-04-01",
   "fees": [
@@ -35,6 +38,46 @@
       "currency": "SGD",
       "label": "TM4: Application to register a trade mark, collective mark or certification mark (custom)",
       "notes": "Specification not fully adopted from IPOS' Classification Database.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "200",
+      "category": "filing",
+      "code": "sg-tm-tm4-acceleration-preapproved",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM4: Acceleration under SG Trade Marks Fast (preapproved)",
+      "notes": "Added to the TM4 class fee; requested only at filing.",
+      "rights": [
+        "trademark"
+      ],
+      "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
+      "tier": "none",
+      "year": null
+    },
+    {
+      "amount": "250",
+      "category": "filing",
+      "code": "sg-tm-tm4-acceleration-custom",
+      "condition": {
+        "description": "Per class.",
+        "per_unit": true,
+        "threshold": 0,
+        "trigger": "classes_over"
+      },
+      "currency": "SGD",
+      "label": "TM4: Acceleration under SG Trade Marks Fast (custom)",
+      "notes": "Added to the TM4 class fee; requested only at filing.",
       "rights": [
         "trademark"
       ],
@@ -613,8 +656,20 @@
   "key": "SG/IPOS/trademark",
   "notes": "TM4 publishes TWO rates in one row: S$280 per class if the specification is fully adopted from IPOS' Classification Database, S$410 per class otherwise. Both rates emit as separate FeeItems with -preapproved / -custom suffixes \u2014 this is an applicant-strategy choice, not an entity-size tier. TM term is 10 years (TMA s.18); renewal FeeItems carry year=10. Madrid Protocol routing (MM2, MP1, MP2) emits with FeeCategory.madrid; the CHF/WIPO-administered portion is preserved verbatim in notes.",
   "office_code": "IPOS",
-  "retrieved_at": "2026-09-01",
+  "recurring_fee_coverage": {
+    "missing_categories": [],
+    "missing_years": [],
+    "notes": "Recurring-fee coverage has not been audited for completeness.",
+    "status": "partial"
+  },
+  "refresh_attempted_at": null,
+  "refresh_error": null,
+  "refresh_outcome": "not_requested",
+  "retrieved_at": "2026-10-07",
   "right": "trademark",
+  "schedule_status": "unknown",
+  "source_checked_at": null,
+  "source_revision_date": null,
   "source_url": "https://www.ipos.gov.sg/about-ip/trade-marks/forms-and-fees/",
   "statutory_basis": "Trade Marks Act 1998 (Singapore) + Trade Marks Rules (SSO SL/TMA1998-R1). Consolidated by Trade Marks Circular 3/2025 (21 July 2025); two-phase implementation 2025-09-01 + 2026-04-01."
 }

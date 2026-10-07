@@ -1,4 +1,7 @@
 {
+  "bytes_retrieved_at": null,
+  "cache_state": "unknown",
+  "content_sha256": null,
   "currency": "BRL",
   "effective_date": "2019-10-02",
   "fees": [
@@ -608,8 +611,20 @@
   "key": "BR/INPI-BR/trademark",
   "notes": "INPI Brazil trademark fees are quoted per-class in BRL for application (pre-approved vs free specification), the first 10-year term, renewal (10-yr cycle), opposition, cancellation, and administrative invalidation. Per-class amounts are flagged via FeeCondition(classes_over=1, per_unit=True). Up-to-60% discount applies per Resolution 251/2019 \u00a7I.5 for individuals, SMEs, cooperatives, ICTs, non-profits, and public bodies.",
   "office_code": "INPI-BR",
-  "retrieved_at": "2026-09-01",
+  "recurring_fee_coverage": {
+    "missing_categories": [],
+    "missing_years": [],
+    "notes": "Recurring-fee coverage has not been audited for completeness.",
+    "status": "partial"
+  },
+  "refresh_attempted_at": null,
+  "refresh_error": null,
+  "refresh_outcome": "not_requested",
+  "retrieved_at": "2026-10-07",
   "right": "trademark",
+  "schedule_status": "unknown",
+  "source_checked_at": null,
+  "source_revision_date": null,
   "source_url": "https://www.gov.br/inpi/en/costs-and-payment/schedule-of-fees-trademarks.pdf",
   "statutory_basis": "Lei 9.279/1996 (Brazilian IP Law); Ordinance MDIC 39/2014; ME Ordinance 516/2019; INPI Resolution 251/2019."
 }

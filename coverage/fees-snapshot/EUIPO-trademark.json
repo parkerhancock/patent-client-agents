@@ -1,6 +1,9 @@
 {
+  "bytes_retrieved_at": null,
+  "cache_state": "unknown",
+  "content_sha256": null,
   "currency": "EUR",
-  "effective_date": "2026-09-01",
+  "effective_date": "2026-10-07",
   "fees": [
     {
       "amount": "1000",
@@ -763,8 +766,20 @@
   "key": "EP/EUIPO/trademark",
   "notes": "Sourced from the EUIPO EUTM fees page. F-xxx codes are EUTM fees; M-xxx codes are Madrid Protocol fees handled through EUIPO. Renewals are 10-year recurring (year=10). Many fees have separate 'basic' and 'electronic' rates; both are captured as distinct rows under the same code.",
   "office_code": "EUIPO",
-  "retrieved_at": "2026-09-01",
+  "recurring_fee_coverage": {
+    "missing_categories": [],
+    "missing_years": [],
+    "notes": "Recurring-fee coverage has not been audited for completeness.",
+    "status": "partial"
+  },
+  "refresh_attempted_at": null,
+  "refresh_error": null,
+  "refresh_outcome": "not_requested",
+  "retrieved_at": "2026-10-07",
   "right": "trademark",
+  "schedule_status": "unknown",
+  "source_checked_at": null,
+  "source_revision_date": null,
   "source_url": "https://www.euipo.europa.eu/en/trade-marks/before-applying/fees-payable-direct-to-the-euipo",
   "statutory_basis": "EU Trade Mark Regulation (EUTMR) Annex I; Articles 31(2), 46(3), 53(3), 68(1), 104(3)"
 }
