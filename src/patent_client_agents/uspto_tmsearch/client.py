@@ -87,6 +87,7 @@ class TmsearchClient:
     async def _init_session(self) -> None:
         """Initialize curl_cffi session with WAF token."""
         self._token = await self._token_manager.get_token()
+        assert AsyncSession is not None  # __init__ rejects a missing curl_cffi
         self._session = AsyncSession(impersonate="chrome120")
 
     async def close(self) -> None:
