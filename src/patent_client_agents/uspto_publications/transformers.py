@@ -242,6 +242,7 @@ def convert_biblio_page(data: dict[str, Any]) -> dict[str, Any]:
         "num_found": _coerce_int(data.get("numFound")) or 0,
         "per_page": _coerce_int(data.get("perPage")) or 0,
         "page": _coerce_int(data.get("page")) or 0,
+        "num_families": _coerce_int(data.get("numberOfFamilies")),
         "docs": docs,
     }
 

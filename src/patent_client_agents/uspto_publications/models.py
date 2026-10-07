@@ -236,7 +236,11 @@ class PublicSearchBiblio(BaseModel):
 
 
 class PublicSearchBiblioPage(BaseModel):
+    # PPUBS groups hits by family: ``num_found`` and ``start`` count families,
+    # and one family can contribute several documents to ``docs``.
     num_found: int
     per_page: int
     page: int
+    num_families: int | None = None
+    num_documents: int | None = None
     docs: list[PublicSearchBiblio] = Field(default_factory=list)
