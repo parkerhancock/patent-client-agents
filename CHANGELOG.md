@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.30.0] — 2026-10-07
+
+### Added
+
+- `search_patent_publications` pages through results with `offset` and
+  `next_cursor`. Both count patent families, and results report the true
+  family and document totals (`num_families`, `num_documents`) instead of the
+  page size (#91).
+- `search_ptab` and `search_cafc_patent_opinions` return stateless
+  `next_cursor` continuations and raise when the source's counts contradict
+  the page.
+- PPUBS searches reject wildcards inside quoted phrases and operators in
+  positions PPUBS can't parse, naming the token and the fix, before any
+  request is sent (#92).
+- USPTO fee schedules and MPEP sections report source evidence: content
+  SHA-256, byte retrieval and check times, refresh outcome, and the exact
+  MPEP release. See `docs/source-freshness.md`.
+- Recurring-fee coverage metadata on fee schedules, Unitary Patent renewal
+  fees, and fuller IP Australia and UKIPO renewal schedules.
+- IPOS TM4 SG Trade Marks Fast acceleration fees (S$200 and S$250 per class).
+
+### Changed
+
+- Supports fastmcp 4 (and MCP SDK 2) as well as fastmcp 3; requires
+  `mcp-data-core>=0.11.3` (#85).
+- `tzdata` is a declared dependency (#86).
+- The USPTO fee schedule reports its effective date (January 19, 2025), not
+  its last-revised date.
+- CAFC searches reject an end date without a start date, and a start date
+  after the end date.
+- MPEP corpus builds keep the selected official release identity.
+
+### Fixed
+
+- `import patent_client_agents.mcp` no longer fails on fastmcp 4 (#85) or on
+  Windows hosts without a time zone database (#86).
+- PPUBS `/counts` errors stop the search with the PPUBS error, and an HTTP 500
+  on an oversized query explains that no search ran and how to shrink it (#92).
+- IPOS TM4 custom-specification fee reads S$410 again after IPOS added
+  acceleration add-ons to the same table cell.
+- EPO OPS searches with no matches return an empty result instead of raising.
+
 ## [0.29.0] — 2026-09-25
 
 ### Changed
@@ -1980,7 +2022,9 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.28.0...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.30.0...HEAD
+[0.30.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.29.0...v0.30.0
+[0.29.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.28.0...v0.29.0
 [0.28.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.1...v0.28.0
 [0.27.1]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.0...v0.27.1
 [0.27.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.26.5...v0.27.0
