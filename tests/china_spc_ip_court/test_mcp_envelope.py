@@ -109,3 +109,18 @@ async def test_site_search_returns_semiconductor_material() -> None:
     assert result.items[0]["title"].startswith("锂电池")
     assert result.more_available is True
     assert result.next_cursor == "2"
+
+
+def test_module_import_does_not_require_tz_database():
+    """A missing tz database (Windows without tzdata) must not break import (#86)."""
+    import importlib
+    import zoneinfo
+    from unittest.mock import patch
+
+    import patent_client_agents.mcp.tools.china_spc_ip_court as module
+
+    with patch.object(
+        zoneinfo, "ZoneInfo", side_effect=zoneinfo.ZoneInfoNotFoundError("Asia/Shanghai")
+    ):
+        importlib.reload(module)
+    importlib.reload(module)

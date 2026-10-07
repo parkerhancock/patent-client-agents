@@ -7,7 +7,7 @@ from typing import Annotated, Any, Literal, cast
 from urllib.parse import urlparse
 
 from fastmcp import FastMCP
-from fastmcp.tools.tool import ToolResult  # ty: ignore[unresolved-import]
+from fastmcp.tools import ToolResult
 
 from mcp_data_core.envelope import (
     ListEnvelope,
