@@ -1,6 +1,9 @@
 {
+  "bytes_retrieved_at": null,
+  "cache_state": "unknown",
+  "content_sha256": null,
   "currency": "CNY",
-  "effective_date": "2026-09-01",
+  "effective_date": "2026-10-07",
   "fees": [
     {
       "amount": "900",
@@ -743,8 +746,20 @@
   "key": "CN/CNIPA/patent",
   "notes": "Covers invention patents only in v1. Utility-model and design fees ship under separate routes when needed (CN/CNIPA/utility_model, CN/CNIPA/design). CNIPA publishes annuities as banded ranges (1-3yr, 4-6yr, etc.); the scraper expands each band into per-year rows so a downstream lookup by year works. Excess-page fee has a two-tier structure (50 CNY/page over 30 pages, 100 CNY/page over 300 pages) \u2014 both rows are emitted with their own FeeCondition. CNIPA does not differentiate by entity size on the schedule itself; small entities apply for reductions through a separate process (per the Note in section XV).",
   "office_code": "CNIPA",
-  "retrieved_at": "2026-09-01",
+  "recurring_fee_coverage": {
+    "missing_categories": [],
+    "missing_years": [],
+    "notes": "Recurring-fee coverage has not been audited for completeness.",
+    "status": "partial"
+  },
+  "refresh_attempted_at": null,
+  "refresh_error": null,
+  "refresh_outcome": "not_requested",
+  "retrieved_at": "2026-10-07",
   "right": "patent",
+  "schedule_status": "unknown",
+  "source_checked_at": null,
+  "source_revision_date": null,
   "source_url": "https://english.cnipa.gov.cn/col/col3000/index.html",
   "statutory_basis": "Patent Law of the People's Republic of China and Implementing Regulations; fee schedule set by State Council Pricing Bureau and CNIPA."
 }
