@@ -4,6 +4,7 @@ import asyncio
 import base64
 import json
 import logging
+import re
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -89,6 +90,48 @@ class PublicSearchError(ApiError):
         response_body: str | None = None,
     ) -> None:
         super().__init__(message, status_code, response_body)
+
+
+# PPUBS reads these as operators in any letter case.
+_OPERATOR = re.compile(r"^(?:AND|OR|NOT|XOR|SAME|WITH|ADJ\d*|NEAR\d*)$", re.IGNORECASE)
+_PHRASE = re.compile(r'"([^"]*)"')
+
+
+def check_query_syntax(query: str) -> None:
+    """Reject query mistakes that PPUBS answers with no hits or an opaque error."""
+    for phrase in _PHRASE.findall(query):
+        if "$" in phrase or "?" in phrase:
+            raise ValidationError(
+                f'PPUBS does not expand wildcards inside quoted phrases: "{phrase}". '
+                f"Join the words with ADJ instead: {' ADJ '.join(phrase.split())}"
+            )
+    tokens = re.findall(r"[()]|[^\s()]+", _PHRASE.sub('""', query))
+    for i, token in enumerate(tokens):
+        if not _OPERATOR.match(token):
+            continue
+        before = tokens[i - 1] if i else "("
+        after = tokens[i + 1] if i + 1 < len(tokens) else ")"
+        if after == ")" or _OPERATOR.match(after):
+            problem = f"is followed by {after!r}" if after != ")" else "ends a query or group"
+        elif before == "(" and token.upper() != "NOT":
+            problem = "starts a query or group"
+        else:
+            continue
+        raise ValidationError(
+            f"PPUBS reads {token!r} as the {token.upper()} operator, and here it {problem}. "
+            "Operators are case-insensitive, so a word like 'not' or 'with' cannot be "
+            "searched as plain text; drop or rephrase it."
+        )
+
+
+def _upstream_message(body: str | None) -> str:
+    try:
+        payload = json.loads(body or "")
+    except ValueError:
+        return (body or "no response body")[:200]
+    if not isinstance(payload, dict):
+        return str(payload)[:200]
+    return str(payload.get("developerMessage") or payload.get("message") or payload)[:200]
 
 
 class PublicSearchClient:
@@ -224,6 +267,7 @@ class PublicSearchClient:
             raise ValueError("query must be provided")
         if limit < 1:
             raise ValidationError("limit must be at least 1")
+        check_query_syntax(query)
         await self._ensure_session()
         payload = self._build_search_payload(
             query,
@@ -235,15 +279,42 @@ class PublicSearchClient:
             expand_plurals=expand_plurals,
             british_equivalents=british_equivalents,
         )
-        counts = await self._request(
-            "POST", f"{_BASE_URL}/api/searches/counts", json=payload["query"]
-        )
+        try:
+            counts = await self._request(
+                "POST", f"{_BASE_URL}/api/searches/counts", json=payload["query"]
+            )
+        except ServerError as exc:
+            raise PublicSearchError(
+                "PPUBS could not process the query at /counts, so no search ran "
+                f"({_upstream_message(exc.response_body)}). This repeats for queries whose "
+                "truncated terms ($, ?) expand to too many words, especially across SAME or "
+                "AND: replace some truncations with explicit words or split the query. If a "
+                "short query fails this way, PPUBS itself is having trouble; retry later.",
+                status_code=exc.status_code,
+                response_body=exc.response_body,
+            ) from exc
         counts.raise_for_status()
-        response = await self._request(
-            "POST",
-            f"{_BASE_URL}/api/searches/searchWithBeFamily",
-            json=payload,
-        )
+        counts_payload = counts.json()
+        if counts_payload.get("error"):
+            error = counts_payload["error"]
+            raise PublicSearchError(
+                f"PPUBS rejected the query: Error #{error.get('errorCode')}: "
+                f"{error.get('errorMessage')}"
+            )
+        try:
+            response = await self._request(
+                "POST",
+                f"{_BASE_URL}/api/searches/searchWithBeFamily",
+                json=payload,
+            )
+        except ServerError as exc:
+            # Kept retryable: the query was valid, so this is an upstream failure.
+            raise ServerError(
+                f"PPUBS accepted the query at /counts ({counts_payload.get('numResults')} "
+                f"documents) but the search call failed ({_upstream_message(exc.response_body)})",
+                status_code=exc.status_code,
+                response_body=exc.response_body,
+            ) from exc
         response.raise_for_status()
         result = response.json()
         if result.get("error"):
@@ -251,7 +322,7 @@ class PublicSearchClient:
                 f"Error #{result['error'].get('errorCode')}: {result['error'].get('errorMessage')}"
             )
         converted = convert_biblio_page(result)
-        converted["num_documents"] = _coerce_int(counts.json().get("numResults"))
+        converted["num_documents"] = _coerce_int(counts_payload.get("numResults"))
         return PublicSearchBiblioPage.model_validate(converted)
 
     async def get_document(self, guid: str, *, source: str) -> PublicSearchDocument:

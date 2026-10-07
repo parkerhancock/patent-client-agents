@@ -286,3 +286,89 @@ async def test_search_rejects_non_positive_limit_before_network_call() -> None:
         await client.search_biblio(query="neural.CLM.", limit=0)
 
     http.request.assert_not_awaited()
+
+
+# Query pre-flight and upstream error context (#92). Cases mirror live PPUBS
+# behavior observed on 2026-10-07.
+
+
+@pytest.mark.parametrize(
+    "query",
+    [
+        'motion ADJ compensat$ AND "reference picture"',
+        "neural and network",
+        "interpolation adj filter$",
+        "NOT neural",
+        "(neural ADJ2 network) SAME picture",
+        "(without OR (avoid$ ADJ stor$))",
+        "@AD>=19760101<=20120112 AND neural.CLM.",
+    ],
+)
+def test_query_syntax_accepts_valid_queries(query: str) -> None:
+    from patent_client_agents.uspto_publications.client import check_query_syntax
+
+    check_query_syntax(query)
+
+
+@pytest.mark.parametrize(
+    "query,match",
+    [
+        ('"motion compensat$" AND "reference picture"', "motion ADJ compensat\\$"),
+        ('"neural networ?"', "wildcards inside quoted phrases"),
+        ("(without OR (not ADJ stor$) OR avoid$)", "'not' as the NOT operator.*'ADJ'"),
+        ("neural AND NOT network", "'AND' as the AND operator"),
+        ("neural AND", "ends a query or group"),
+        ("(neural OR) AND x", "'OR' as the OR operator.*ends"),
+        ("(or neural) AND x", "starts a query or group"),
+    ],
+)
+def test_query_syntax_names_the_problem(query: str, match: str) -> None:
+    from patent_client_agents.uspto_publications.client import check_query_syntax
+
+    with pytest.raises(ValidationError, match=match):
+        check_query_syntax(query)
+
+
+def _search_client(*responses: object) -> PublicSearchClient:
+    client = PublicSearchClient(client=AsyncMock(spec=httpx.AsyncClient))
+    client._case_id = 123
+    client._request = AsyncMock(side_effect=list(responses))
+    return client
+
+
+@pytest.mark.asyncio
+async def test_search_stops_on_counts_error_payload() -> None:
+    from patent_client_agents.uspto_publications.client import PublicSearchError
+
+    client = _search_client(
+        _response(
+            200,
+            json={"error": {"errorCode": 121, "errorMessage": "Cannot start a group"}},
+        )
+    )
+    with pytest.raises(PublicSearchError, match="Error #121: Cannot start a group"):
+        await client.search_biblio(query="neural")
+    assert client._request.await_count == 1
+
+
+@pytest.mark.asyncio
+async def test_counts_server_error_explains_query_was_not_run() -> None:
+    from mcp_data_core.exceptions import ServerError
+    from patent_client_agents.uspto_publications.client import PublicSearchError
+
+    body = '{"status":"INTERNAL_SERVER_ERROR","developerMessage":"Unable to Process"}'
+    client = _search_client(ServerError("PPUBS server error", status_code=500, response_body=body))
+    with pytest.raises(PublicSearchError, match="at /counts, so no search ran.*Unable to Process"):
+        await client.search_biblio(query="neural")
+
+
+@pytest.mark.asyncio
+async def test_search_server_error_after_counts_stays_retryable() -> None:
+    from mcp_data_core.exceptions import ServerError
+
+    client = _search_client(
+        _response(200, json={"numResults": 214}),
+        ServerError("PPUBS server error", status_code=500, response_body="{}"),
+    )
+    with pytest.raises(ServerError, match="accepted the query at /counts \\(214 documents\\)"):
+        await client.search_biblio(query="neural")
