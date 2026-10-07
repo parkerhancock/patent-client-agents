@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import functools
 from datetime import UTC, date, datetime
 from typing import Annotated, Any
 from urllib.parse import quote_plus
@@ -21,7 +22,6 @@ _SOURCE_NAME = "Supreme People's Court Intellectual Property Court — Hearing N
 _BASE_URL = "https://ipc.court.gov.cn"
 _INDEX_PATH = "/zh-cn/news/more-4-15.html"
 _FANOUT_CONCURRENCY = 5
-_CHINA_TIME = ZoneInfo("Asia/Shanghai")
 
 
 def _provenance(path: str = _INDEX_PATH, *, status: str) -> Any:
@@ -54,11 +54,18 @@ def _terms(query: str | list[str] | None) -> list[str]:
     return terms
 
 
+@functools.cache
+def _china_time() -> ZoneInfo:
+    # Resolved on first use so a host without a tz database fails this source,
+    # not the import of every MCP server that mounts it.
+    return ZoneInfo("Asia/Shanghai")
+
+
 def _china_today(now: datetime | None = None) -> date:
     instant = now or datetime.now(UTC)
     if instant.tzinfo is None:
         raise ValueError("now must be timezone-aware")
-    return instant.astimezone(_CHINA_TIME).date()
+    return instant.astimezone(_china_time()).date()
 
 
 @china_spc_ip_court_mcp.tool(annotations=READ_ONLY)

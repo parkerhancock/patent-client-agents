@@ -19,7 +19,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "mcp-data-core>=0.11.2",
+    "mcp-data-core>=0.11.3",
     "anyio>=4.4",
     "httpx>=0.27",
     "h2>=4.1",
@@ -37,6 +37,8 @@ dependencies = [
     "zstandard>=0.22",
     "google-cloud-storage>=2.18",
     "xlrd>=2.0.1,<3",
+    # zoneinfo has no tz database on Windows without this package.
+    "tzdata>=2024.1",
 ]
 
 [project.optional-dependencies]

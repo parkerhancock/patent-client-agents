@@ -1573,7 +1573,7 @@ wheels = [
 
 [[package]]
 name = "mcp-data-core"
-version = "0.11.2"
+version = "0.11.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -1586,9 +1586,9 @@ dependencies = [
     { name = "tenacity" },
     { name = "zstandard" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6b/a3/0d855a90408336b89062c1d159cdcbb7b2d9505e1537b5bdd73ac9dc5ea3/mcp_data_core-0.11.2.tar.gz", hash = "sha256:91e19a3d33c0b17af8603582464e7438f08617c211e4594a0645bef47d145b01", size = 210722, upload-time = "2026-08-12T17:28:23.411Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c0/8b/2fcae6af4c8b4366ccf759031ed44b76a4deec8dbe2e519191ca85da2ce8/mcp_data_core-0.11.3.tar.gz", hash = "sha256:b732312a8e96abcb97f7dfb6a34ab61d63e00704fd559781416c28eed1431675", size = 210836, upload-time = "2026-10-07T16:08:49.33Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/bf/40/7dbf5578853f441aac6f656631b8291ba5e18284d8249da700adc2deff48/mcp_data_core-0.11.2-py3-none-any.whl", hash = "sha256:368a09a95667d95dc44e66a46ab7340cc3b3aea37c63c5d225e90538e8729040", size = 68388, upload-time = "2026-08-12T17:28:22.104Z" },
+    { url = "https://files.pythonhosted.org/packages/1d/5b/bbcf5dc339255fa783aa1fcdd23bd3c4eae8bf9fc4e683a32721ec3f72c6/mcp_data_core-0.11.3-py3-none-any.whl", hash = "sha256:aedda0c831d82d303db249a5d2a6625889646314a232cf74958176177c559d71", size = 68416, upload-time = "2026-10-07T16:08:47.745Z" },
 ]
 
 [[package]]
@@ -1943,6 +1943,7 @@ dependencies = [
     { name = "python-dateutil" },
     { name = "pyyaml" },
     { name = "tenacity" },
+    { name = "tzdata" },
     { name = "xlrd" },
     { name = "zstandard" },
 ]
@@ -1987,7 +1988,7 @@ requires-dist = [
     { name = "httpx", specifier = ">=0.27" },
     { name = "lxml", specifier = ">=5.2" },
     { name = "markitdown", extras = ["pdf"], specifier = ">=0.1.3" },
-    { name = "mcp-data-core", specifier = ">=0.11.2" },
+    { name = "mcp-data-core", specifier = ">=0.11.3" },
     { name = "playwright", marker = "extra == 'tmsearch'", specifier = ">=1.40" },
     { name = "pydantic", specifier = ">=2.7" },
     { name = "pypdf", specifier = ">=4.2,<6.15" },
@@ -1995,6 +1996,7 @@ requires-dist = [
     { name = "pyyaml", specifier = ">=6.0" },
     { name = "starlette", marker = "extra == 'mcp'", specifier = ">=1.0.1" },
     { name = "tenacity", specifier = ">=8.4" },
+    { name = "tzdata", specifier = ">=2024.1" },
     { name = "xlrd", specifier = ">=2.0.1,<3" },
     { name = "zstandard", specifier = ">=0.22" },
 ]
@@ -3068,6 +3070,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/55/e3/70399cb7dd41c10ac53367ae42139cf4b1ca5f36bb3dc6c9d33acdb43655/typing_inspection-0.4.2.tar.gz", hash = "sha256:ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464", size = 75949, upload-time = "2025-10-01T02:14:41.687Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl", hash = "sha256:4ed1cacbdc298c220f1bd249ed5287caa16f34d44ef4e9c3d0cbad5b521545e7", size = 14611, upload-time = "2025-10-01T02:14:40.154Z" },
+]
+
+[[package]]
+name = "tzdata"
+version = "2026.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e4/31/3d74fa778a63b98b7374323befcc0be5ab3bd94afd4096a0124e7379152c/tzdata-2026.4.tar.gz", hash = "sha256:f1b8bd365d8d210c55353f4d7f8d6d8561c0ba50d704b700d195a9424bba0d79", size = 199350, upload-time = "2026-09-12T12:56:03.251Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f9/bc/8737e8d54cf51106118039b83f485a4783112fab49ea9d044b234978a46e/tzdata-2026.4-py2.py3-none-any.whl", hash = "sha256:c2169a8b0a7a5e9674da5a135ccdfb2b3e671b333ed9fed17b41f73c34476e81", size = 347494, upload-time = "2026-09-12T12:56:01.67Z" },
 ]
 
 [[package]]

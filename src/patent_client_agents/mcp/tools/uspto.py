@@ -7,7 +7,7 @@ from typing import Annotated, Any, Literal, cast
 from urllib.parse import urlparse
 
 from fastmcp import FastMCP
-from fastmcp.tools.tool import ToolResult  # ty: ignore[unresolved-import]
+from fastmcp.tools import ToolResult
 
 from mcp_data_core.envelope import (
     ListEnvelope,
@@ -1269,7 +1269,7 @@ async def _run_ptab_bulk(
     container_metadata: dict,
     cap: int,
     container_kind: str,
-) -> dict:
+) -> ToolResult:
     """Shared bulk-download pipeline for the 4 PTAB tools.
 
     Each candidate dict must carry: ``item_id``, ``resource_path``,
