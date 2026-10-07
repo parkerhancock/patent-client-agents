@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 from datetime import date
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 from urllib.parse import quote_plus
 
 from fastmcp import FastMCP
@@ -12,7 +12,7 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import McpDataCoreError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
-from patent_client_agents.canada_federal_court import CanadaFederalCourtClient, CourtDivision
+from patent_client_agents.canada_federal_court import CanadaFederalCourtClient
 
 canada_federal_court_mcp = FastMCP("Canada Federal Court")
 
@@ -100,7 +100,7 @@ async def search_canada_federal_court_patent_cases(
     """
     if division not in {"t", "a", "b"}:
         raise ValidationError("division must be 't', 'a', or 'b'")
-    resolved_division = cast("CourtDivision", division)
+    resolved_division = division
     if (filed_from is None) != (filed_to is None):
         raise ValidationError("filed_from and filed_to must be supplied together")
     start = _parse_date(filed_from, field="filed_from")
@@ -181,7 +181,7 @@ async def get_canada_federal_court_case(
     """
     if division not in {"t", "a", "b"}:
         raise ValidationError("division must be 't', 'a', or 'b'")
-    resolved_division = cast("CourtDivision", division)
+    resolved_division = division
     numbers = [court_number] if isinstance(court_number, str) else court_number
     if not numbers:
         raise ValidationError("court_number list must not be empty")
@@ -238,7 +238,7 @@ async def list_canada_federal_court_docket_entries(
     """
     if division not in {"t", "a", "b"}:
         raise ValidationError("division must be 't', 'a', or 'b'")
-    resolved_division = cast("CourtDivision", division)
+    resolved_division = division
     async with CanadaFederalCourtClient() as client:
         docket = await client.list_docket_entries(
             court_number,

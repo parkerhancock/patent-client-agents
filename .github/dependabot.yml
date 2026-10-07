@@ -5,6 +5,11 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # pypdf 6.15+ changes layout-mode spacing and breaks the PRH fee PDF
+      # parser; see the pin in pyproject.toml.
+      - dependency-name: "pypdf"
+        versions: [">=6.15"]
     groups:
       python-dependencies:
         patterns:

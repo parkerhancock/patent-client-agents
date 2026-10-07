@@ -637,9 +637,10 @@ class ApplicationsClient(UsptoOdpBaseClient):
             "edgeCount": len(edges),
             "missingCount": len(missing),
         }
+        sorted_nodes = sorted(nodes.values(), key=lambda node: node.applicationNumber)
         return FamilyGraphResponse(
             rootApplication=normalized_root,
-            nodes=sorted(nodes.values(), key=lambda node: node.applicationNumber),
+            nodes=sorted_nodes,
             edges=edges,
             missingApplications=sorted(missing),
             metadata=metadata,

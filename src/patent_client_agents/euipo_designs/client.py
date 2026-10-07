@@ -65,7 +65,7 @@ class EuipoDesignsClient(BaseAsyncClient):
             raise ConfigurationError(
                 f"EUIPO environment must be 'production' or 'sandbox', got {env_raw!r}"
             )
-        resolved_env: EuipoEnvironment = env_raw  # type: ignore[assignment]  # ty: ignore[invalid-assignment]
+        resolved_env: EuipoEnvironment = env_raw  # type: ignore[assignment]
 
         resolved_base_url = base_url or (
             _SANDBOX_BASE_URL if resolved_env == "sandbox" else _PROD_BASE_URL
