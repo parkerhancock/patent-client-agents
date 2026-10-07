@@ -159,7 +159,11 @@ async def search_patent_publications(
         "Supports Boolean operators (AND/OR/NOT) and field codes: CLM (claims), "
         "SPEC (description), AB (abstract), TI (title), IN (inventor), AS "
         "(assignee), CPC (classification). Example: "
-        "'\"machine learning\" AND neural.CLM.' or 'blockchain.TI.'",
+        "'\"machine learning\" AND neural.CLM.' or 'blockchain.TI.'. "
+        "Wildcards ($, ?) don't expand inside quotes: write "
+        "'motion ADJ compensat$', not '\"motion compensat$\"'. Operators "
+        "(AND, OR, NOT, ADJ, NEAR, SAME, WITH) work in any case, so words "
+        "like 'not' or 'with' can't be searched as text.",
     ],
     limit: Annotated[
         int,
