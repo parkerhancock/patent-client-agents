@@ -23,6 +23,8 @@ from patent_client_agents.mcp.tools.uspto import (
     list_file_history,
     search_applications,
 )
+from patent_client_agents.uspto_odp.clients.applications import _normalize_patent_response
+from patent_client_agents.uspto_odp.models import ApplicationResponse
 
 # ──────────────────────────────────────────────────────────────────────
 # Fakes — minimal Pydantic models that mimic UsptoOdpClient return types
@@ -163,6 +165,79 @@ async def test_get_application_fanout_preserves_order():
 
     returned = [item["patentBag"][0]["applicationNumberText"] for item in result.items]
     assert returned == appls
+
+
+def _raw_odp_application(appl: str, meta: dict) -> dict:
+    """A raw ODP ``/applications/{appl}`` payload (metadata nested)."""
+    return {
+        "count": 1,
+        "patentFileWrapperDataBag": [
+            {
+                "applicationNumberText": appl,
+                "applicationMetaData": meta,
+                "grantDocumentMetaData": {"zipFileName": "ipg210126.zip"},
+            }
+        ],
+    }
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("appl", "meta", "expected"),
+    [
+        (
+            "16123456",
+            {
+                "inventionTitle": "Granted widget",
+                "applicationStatusDescriptionText": "Patented Case",
+                "filingDate": "2018-07-20",
+                "patentNumber": "10902286",
+                "grantDate": "2021-01-26",
+            },
+            [
+                "Granted widget",
+                "Status: Patented Case",
+                "Filed 2018-07-20",
+                "issued as US 10902286 on 2021-01-26",
+            ],
+        ),
+        (
+            "18900000",
+            {
+                "inventionTitle": "Pending widget",
+                "applicationStatusDescriptionText": "Docketed New Case - Ready for Examination",
+                "filingDate": "2023-12-01",
+            },
+            [
+                "Pending widget",
+                "Status: Docketed New Case - Ready for Examination",
+                "Filed 2023-12-01.",
+            ],
+        ),
+    ],
+)
+async def test_get_application_summary_reads_client_flattened_metadata(appl, meta, expected):
+    """Regression: the real client flattens applicationMetaData to the top level.
+
+    The summary previously read only the nested block, so production
+    summaries showed "(no title)", "(unknown status)", and "Filed ?".
+    """
+    response = ApplicationResponse.model_validate(
+        _normalize_patent_response(_raw_odp_application(appl, meta))
+    )
+    assert "applicationMetaData" not in response.model_dump()["patentBag"][0]
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as mock_client_cls:
+        mock_client = mock_client_cls.return_value.__aenter__.return_value
+        mock_client.get_application = AsyncMock(return_value=response)
+
+        result = await get_application(application_number=appl)
+
+    assert f"**US application {appl}**" in result.summary
+    for fragment in expected:
+        assert fragment in result.summary
+    for placeholder in ("(no title)", "(unknown status)", "Filed ?"):
+        assert placeholder not in result.summary
 
 
 # ──────────────────────────────────────────────────────────────────────
