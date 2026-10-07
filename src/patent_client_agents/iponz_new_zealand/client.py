@@ -11,7 +11,7 @@ import os
 import re
 import xml.etree.ElementTree as ET
 from datetime import date
-from typing import Any, Literal, cast
+from typing import Any, Literal
 from urllib.parse import quote
 
 import httpx
@@ -305,7 +305,7 @@ class IponzClient(BaseAsyncClient):
             raise ConfigurationError(
                 f"IPONZ_ENV must be 'production' or 'sandbox', got {env_raw!r}"
             )
-        self.environment = cast("IponzEnvironment", env_raw)
+        self.environment = env_raw
         resolved_base = base_url or (
             SANDBOX_BASE_URL if self.environment == "sandbox" else PRODUCTION_BASE_URL
         )

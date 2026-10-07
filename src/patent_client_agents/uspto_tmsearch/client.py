@@ -22,7 +22,7 @@ try:
 
     CURL_CFFI_AVAILABLE = True
 except ImportError:
-    AsyncSession = None  # type: ignore[assignment,misc]  # ty: ignore[invalid-assignment]
+    AsyncSession = None  # type: ignore[assignment,misc]
     CURL_CFFI_AVAILABLE = False
 
 

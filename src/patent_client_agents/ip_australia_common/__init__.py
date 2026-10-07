@@ -26,7 +26,7 @@ and the live ``production.api.ipaustralia.gov.au`` hosts.
 from __future__ import annotations
 
 import os
-from typing import Literal, cast
+from typing import Literal
 
 from mcp_data_core.exceptions import ConfigurationError
 from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
@@ -45,7 +45,7 @@ def resolve_environment(environment: IpAustraliaEnvironment | None) -> IpAustral
         raise ConfigurationError(
             f"IPAUSTRALIA_ENV must be 'production' or 'sandbox', got {env_raw!r}"
         )
-    return cast("IpAustraliaEnvironment", env_raw)
+    return env_raw
 
 
 def host_for(environment: IpAustraliaEnvironment) -> str:
