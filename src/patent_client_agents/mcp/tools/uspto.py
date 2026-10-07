@@ -42,8 +42,14 @@ def _odp_provenance(path: str) -> Any:
 
 
 def _summarize_application(record: dict) -> str:
-    """One-line Markdown summary for a single application record."""
-    meta = record.get("applicationMetaData") or {}
+    """One-line Markdown summary for a single application record.
+
+    ``ApplicationsClient`` flattens ODP's nested ``applicationMetaData``
+    into the top-level record, so read fields from there; fall back to the
+    nested block for unflattened (raw ODP) payloads.
+    """
+    nested = record.get("applicationMetaData") or {}
+    meta = {**nested, **{k: v for k, v in record.items() if v is not None}}
     appl = record.get("applicationNumberText") or "(no appl#)"
     title = meta.get("inventionTitle") or "(no title)"
     status = meta.get("applicationStatusDescriptionText") or "(unknown status)"
