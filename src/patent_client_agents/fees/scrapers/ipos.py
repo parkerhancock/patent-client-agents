@@ -224,6 +224,16 @@ def _parse_sgd_amounts(raw: str) -> list[Decimal]:
     return out
 
 
+def _split_add_on_amounts(raw: str) -> tuple[list[Decimal], list[Decimal]]:
+    """Split a cell's amounts into base fees and ``+ $N`` add-on fees, in order."""
+    base: list[Decimal] = []
+    add_ons: list[Decimal] = []
+    for m in _SGD_AMOUNT_RE.finditer(raw):
+        amount = Decimal(m.group(1).replace(",", ""))
+        (add_ons if raw[: m.start()].rstrip().endswith("+") else base).append(amount)
+    return base, add_ons
+
+
 def _per_claim_amount(raw: str) -> Decimal | None:
     """Return the amount immediately attached to a per-claim surcharge."""
     match = _PER_CLAIM_AMOUNT_RE.search(raw)
@@ -720,9 +730,11 @@ def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
 
             # TM4 special-case: published TWO prices in one cell
             # (pre-approved S$280 vs custom S$410). Emit each with a
-            # disambiguating suffix.
-            if form.upper() == "TM4" and len(amounts) >= 2:
-                for idx, amount in enumerate(amounts[:2]):
+            # disambiguating suffix. Since 2026-10 the cell also lists an
+            # SG Trade Marks Fast acceleration add-on ("+ $200") after each.
+            base_amounts, add_on_amounts = _split_add_on_amounts(fee_text)
+            if form.upper() == "TM4" and len(base_amounts) >= 2:
+                for idx, amount in enumerate(base_amounts[:2]):
                     spec_label = "preapproved" if idx == 0 else "custom"
                     code = _unique(_slug("sg-tm", form, spec_label), seen_codes)
                     note = (
@@ -743,6 +755,25 @@ def _build_trademark_fees(doc: L.HtmlElement) -> list[FeeItem]:
                             condition=class_condition,
                             source_url=IPOS_TRADEMARKS_URL,
                             notes=note,
+                        )
+                    )
+                for idx, amount in enumerate(add_on_amounts[:2]):
+                    spec_label = "preapproved" if idx == 0 else "custom"
+                    fees.append(
+                        FeeItem(
+                            code=_unique(
+                                _slug("sg-tm", form, "acceleration", spec_label), seen_codes
+                            ),
+                            label=f"{form}: Acceleration under SG Trade Marks Fast ({spec_label})",
+                            category=category,
+                            rights=[RightType.trademark],
+                            amount=amount,
+                            currency="SGD",
+                            tier=EntityTier.none,
+                            year=year,
+                            condition=class_condition,
+                            source_url=IPOS_TRADEMARKS_URL,
+                            notes="Added to the TM4 class fee; requested only at filing.",
                         )
                     )
                 continue
