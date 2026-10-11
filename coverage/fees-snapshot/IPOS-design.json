@@ -410,7 +410,7 @@
   "refresh_attempted_at": null,
   "refresh_error": null,
   "refresh_outcome": "not_requested",
-  "retrieved_at": "2026-10-07",
+  "retrieved_at": "2026-10-11",
   "right": "design",
   "schedule_status": "unknown",
   "source_checked_at": null,
