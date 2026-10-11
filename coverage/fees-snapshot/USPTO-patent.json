@@ -1,7 +1,7 @@
 {
-  "bytes_retrieved_at": "2026-10-07T17:16:16.891487Z",
+  "bytes_retrieved_at": "2026-10-11T02:33:43.588770Z",
   "cache_state": "fresh",
-  "content_sha256": "ce07e5e1c44d435ebe25a4bcd2630ae868a61e57f645e61ced468126658ca5f4",
+  "content_sha256": "4abef3258d222937a8ab03ff0673e883a885889a03adf07977cc52bdb03dcb3b",
   "currency": "USD",
   "effective_date": "2025-01-19",
   "fees": [
@@ -7655,10 +7655,10 @@
   "refresh_attempted_at": null,
   "refresh_error": null,
   "refresh_outcome": "succeeded",
-  "retrieved_at": "2026-10-07",
+  "retrieved_at": "2026-10-11",
   "right": "patent",
   "schedule_status": "effective",
-  "source_checked_at": "2026-10-07T17:16:16.891487Z",
+  "source_checked_at": "2026-10-11T02:33:43.588770Z",
   "source_revision_date": "2026-08-14",
   "source_url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
   "statutory_basis": "37 CFR Part 1 (patents); 37 CFR Part 2 (trademarks); 35 USC \u00a7\u00a7 41, 376"
