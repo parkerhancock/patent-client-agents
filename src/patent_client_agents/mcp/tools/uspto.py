@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, Literal, cast
+from typing import Annotated, Any, Literal
 from urllib.parse import urlparse
 
 from fastmcp import FastMCP
@@ -18,6 +18,7 @@ from mcp_data_core.envelope import (
 from mcp_data_core.exceptions import NotFoundError, ParseError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import download_tool_result, read_resource, register_source
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
 
 uspto_mcp = FastMCP("USPTO")
@@ -72,24 +73,11 @@ _AUTH_URL_FIELDS = {"fileDownloadURI", "downloadURI", "downloadUrl", "fileLocati
 
 
 def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model and strip auth-required URLs.
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback ``return obj`` branch exists only to be defensive if a dict
-    slips through. Typed as ``dict[str, Any]`` so call sites can use
-    ``.get(...)`` and similar without per-call type narrowing.
-
-    ``hasattr`` and ``isinstance(obj, dict)`` don't narrow ``object`` in
-    ty's view, so we cast the results. The pyright/mypy ``union-attr``
-    suppression remains for the model_dump attribute lookup.
-    """
+    """Serialize like :func:`dump`, then strip auth-required URLs from models."""
+    data = dump(obj)
     if hasattr(obj, "model_dump"):
-        data: dict[str, Any] = cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
         _strip_auth_urls(data)
-        return data
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
+    return data
 
 
 def _strip_auth_urls(data: Any) -> None:

@@ -14,7 +14,7 @@ the standard provenance fields only — ``corpus_synced_at`` /
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -31,6 +31,7 @@ from patent_client_agents.canlii import (
     GetLegislationInput,
     Language,
 )
+from patent_client_agents.shared.envelope import dump
 
 canlii_mcp = FastMCP("CanLII")
 
@@ -125,21 +126,6 @@ def _canlii_provenance(path: str) -> Any:
     )
 
 
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts).
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback exists to be defensive if a dict slips through. Typed as
-    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
-    per-call narrowing.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
-
-
 def _stub_case_ref(record: dict) -> dict:
     """Lean projection of a CanLII case-list row (§5.5).
 
@@ -223,7 +209,7 @@ async def list_canlii_case_databases(
     """
     async with CanLIIClient() as client:
         response = await client.list_case_databases(language=language)
-    items = [_dump(db) for db in response.case_databases]
+    items = [dump(db) for db in response.case_databases]
     return ListEnvelope[dict](
         summary=f"CanLII case databases ({language}): {len(items)} courts / tribunals.",
         items=items,
@@ -247,7 +233,7 @@ async def list_canlii_legislation_databases(
     """
     async with CanLIIClient() as client:
         response = await client.list_legislation_databases(language=language)
-    items = [_dump(db) for db in response.legislation_databases]
+    items = [dump(db) for db in response.legislation_databases]
     return ListEnvelope[dict](
         summary=f"CanLII legislation databases ({language}): {len(items)} databases.",
         items=items,
@@ -343,7 +329,7 @@ async def search_canlii_cases(
     async with CanLIIClient() as client:
         response = await client.browse_cases(**params.model_dump())
 
-    dumped = _dump(response)
+    dumped = dump(response)
     raw_cases = list(dumped.get("cases") or [])
     items = raw_cases if full else [_stub_case_ref(c) for c in raw_cases]
     return ListEnvelope[dict](
@@ -427,7 +413,7 @@ async def search_canlii_ip_cases(
                 decision_date_before=decision_date_before,
             )
             response = await client.browse_cases(**params.model_dump())
-            dumped = _dump(response)
+            dumped = dump(response)
             raw_rows = list(dumped.get("cases") or [])
 
         # Pure-IP tribunal databases pass every row through; reviewing
@@ -512,7 +498,7 @@ async def get_canlii_case(
     async def _fetch_one(client: CanLIIClient, cid: str) -> dict:
         async with semaphore:
             params = GetCaseInput(database_id=database_id, case_id=cid, language=language)
-            return _dump(await client.get_case(**params.model_dump()))  # type: ignore[return-value]
+            return dump(await client.get_case(**params.model_dump()))  # type: ignore[return-value]
 
     async with CanLIIClient() as client:
         results = await asyncio.gather(*[_fetch_one(client, cid) for cid in ids])
@@ -559,7 +545,7 @@ async def get_canlii_cited_cases(
     async with CanLIIClient() as client:
         response = await client.get_cited_cases(**params.model_dump())
 
-    dumped = _dump(response)
+    dumped = dump(response)
     raw = list(dumped.get("cited_cases") or [])
     items = [_stub_case_ref(c) for c in raw]
     return ListEnvelope[dict](
@@ -591,7 +577,7 @@ async def get_canlii_citing_cases(
     async with CanLIIClient() as client:
         response = await client.get_citing_cases(**params.model_dump())
 
-    dumped = _dump(response)
+    dumped = dump(response)
     raw = list(dumped.get("citing_cases") or [])
     items = [_stub_case_ref(c) for c in raw]
     return ListEnvelope[dict](
@@ -623,7 +609,7 @@ async def get_canlii_cited_legislations(
     async with CanLIIClient() as client:
         response = await client.get_cited_legislations(**params.model_dump())
 
-    dumped = _dump(response)
+    dumped = dump(response)
     raw = list(dumped.get("cited_legislations") or [])
     items = [_stub_legislation_ref(leg) for leg in raw]
     return ListEnvelope[dict](
@@ -670,7 +656,7 @@ async def search_canlii_legislation(
     async with CanLIIClient() as client:
         response = await client.browse_legislation(**params.model_dump())
 
-    dumped = _dump(response)
+    dumped = dump(response)
     raw = list(dumped.get("legislations") or [])
     items = raw if full else [_stub_legislation_ref(leg) for leg in raw]
     return ListEnvelope[dict](
@@ -718,7 +704,7 @@ async def get_canlii_legislation(
             params = GetLegislationInput(
                 database_id=database_id, legislation_id=lid, language=language
             )
-            return _dump(await client.get_legislation(**params.model_dump()))  # type: ignore[return-value]
+            return dump(await client.get_legislation(**params.model_dump()))  # type: ignore[return-value]
 
     async with CanLIIClient() as client:
         results = await asyncio.gather(*[_fetch_one(client, lid) for lid in ids])

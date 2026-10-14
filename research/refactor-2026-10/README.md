@@ -157,7 +157,13 @@ family onto them. Each step is its own PR with the suite green.
 - The target is ~1.6 s and well under the current 196 MB at import. Re-measure
   afterward.
 
-### Phase 3: primitives in mcp-data-core
+### Phase 3: primitives in `patent_client_agents.shared`
+
+Decided 2026-10-14: these live in a `shared/` package inside this repo, not in
+mcp-data-core. That avoids a release per change and leaves law-tools
+untouched. A proven helper can move down later if law-tools needs it. The
+cache-hit flag goes in a thin `BaseAsyncClient` subclass in `shared/client.py`.
+The list below was written for mcp-data-core; read it as `shared/`.
 
 These are shared with law-tools, which has 21 `BaseAsyncClient` subclasses, so
 keep the changes additive.

@@ -239,17 +239,8 @@ def test_lean_recurses_into_dicts_and_lists() -> None:
 
 
 # ──────────────────────────────────────────────────────────────────────
-# _project + _dump fallbacks
+# _project fallbacks
 # ──────────────────────────────────────────────────────────────────────
-
-
-def test_dump_passthrough_dict() -> None:
-    assert tipo_mcp._dump({"k": 1}) == {"k": 1}
-
-
-def test_dump_invalid_type_raises() -> None:
-    with pytest.raises(TypeError, match="model or dict"):
-        tipo_mcp._dump(object())
 
 
 def test_coerce_list_string_input() -> None:

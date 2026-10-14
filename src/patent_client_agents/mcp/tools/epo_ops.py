@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import base64
 from collections.abc import Awaitable
-from typing import Annotated, Any, Literal, cast
+from typing import Annotated, Any, Literal
 
 import httpx
 from fastmcp import FastMCP
@@ -40,23 +40,9 @@ from patent_client_agents.epo_ops.models import (
     FamilyIntelligenceResponse,
     SourceEvidence,
 )
+from patent_client_agents.shared.envelope import dump
 
 epo_ops_mcp = FastMCP("EPO OPS")
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts).
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback exists to be defensive if a dict slips through. Typed as
-    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
-    per-call narrowing.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 # ---------------------------------------------------------------------------
@@ -374,7 +360,7 @@ async def search_epo(
                 query=cql_query, range_begin=range_begin, range_end=range_end
             )
 
-    dumped = _dump(result)
+    dumped = dump(result)
     raw = dumped.get("families") if group == "family" else dumped.get("results")
     raw_rows: list[dict[str, Any]] = raw if isinstance(raw, list) else []
     items: list[dict[str, Any]]
@@ -537,7 +523,7 @@ async def get_epo_biblio(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_biblio(number=n))  # type: ignore[return-value]
+            return dump(await client.fetch_biblio(number=n))  # type: ignore[return-value]
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -585,7 +571,7 @@ async def get_epo_fulltext(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_fulltext(number=n))  # type: ignore[return-value]
+            return dump(await client.fetch_fulltext(number=n))  # type: ignore[return-value]
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -634,7 +620,7 @@ async def get_epo_family(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_family(number=n))  # type: ignore[return-value]
+            return dump(await client.fetch_family(number=n))  # type: ignore[return-value]
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -671,7 +657,7 @@ async def get_epo_citations(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_citations(number=n))
+            return dump(await client.fetch_citations(number=n))
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -708,7 +694,7 @@ async def get_epo_equivalents(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_equivalents(number=n))
+            return dump(await client.fetch_equivalents(number=n))
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -755,7 +741,7 @@ async def get_epo_legal_events(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_legal_events(number=n))  # type: ignore[return-value]
+            return dump(await client.fetch_legal_events(number=n))  # type: ignore[return-value]
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -812,7 +798,7 @@ async def convert_epo_number(
             number=number, input_format=input_format, output_format=output_format
         )
 
-    details: dict = _dump(result)  # type: ignore[assignment]
+    details: dict = dump(result)  # type: ignore[assignment]
     path = f"/number-service/publication/{input_format}/{number}/{output_format}"
     return ResponseEnvelope[dict](
         summary=_summarize_epo_number_conversion(number, details),
@@ -1053,7 +1039,7 @@ async def get_epo_register_biblio(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_register_biblio(number=n))
+            return dump(await client.fetch_register_biblio(number=n))
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -1092,7 +1078,7 @@ async def get_epo_register_events(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_register_events(number=n))
+            return dump(await client.fetch_register_events(number=n))
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -1128,7 +1114,7 @@ async def get_epo_procedural_steps(
 
     async def _fetch_one(client: Any, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.fetch_register_procedural_steps(number=n))
+            return dump(await client.fetch_register_procedural_steps(number=n))
 
     async with client_from_env() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -1261,7 +1247,7 @@ async def get_epo_family_intelligence(
             continue
 
         successful += 1
-        record = _dump(result)
+        record = dump(result)
         provenance = _epo_register_record_provenance(path) if register else _epo_provenance(path)
         blocks[name] = SourceEvidence[Any](
             outcome="empty" if _family_intelligence_is_empty(name, record) else "ok",

@@ -14,7 +14,7 @@ ID documents to ``docs.apiplatform@euipo.europa.eu``.
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -24,6 +24,7 @@ from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.euipo_designs import EuipoDesignsClient
 from patent_client_agents.euipo_trademarks import EuipoTrademarksClient
+from patent_client_agents.shared.envelope import dump
 
 euipo_mcp = FastMCP("EUIPO")
 
@@ -45,19 +46,6 @@ def _euipo_provenance(path: str) -> Any:
         source_url=f"{_EUIPO_BASE}{path}",
         source_name=_EUIPO_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model (with ``by_alias=True``) to a dict.
-
-    EUIPO models use camelCase aliases at the wire boundary; we surface
-    those in the envelope payload to match the upstream contract.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump(by_alias=True))  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _first_applicant_name(record: dict) -> str | None:
@@ -185,7 +173,7 @@ async def search_euipo_trademarks(
     async with EuipoTrademarksClient() as client:
         result = await client.search(query=query, page=page, size=size, sort=sort, fields=fields)
 
-    dumped = _dump(result)
+    dumped = dump(result, by_alias=True)
     assert isinstance(dumped, dict)
     rows = list(dumped.get("trademarks") or [])
     total = dumped.get("totalElements")
@@ -238,7 +226,7 @@ async def get_euipo_trademark(
     async def _fetch_one(client: EuipoTrademarksClient, appno: str) -> dict:
         async with semaphore:
             record = await client.get_trademark(appno)
-            return _dump(record)  # type: ignore[return-value]
+            return dump(record, by_alias=True)  # type: ignore[return-value]
 
     async with EuipoTrademarksClient() as client:
         results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -299,7 +287,7 @@ async def search_euipo_designs(
     async with EuipoDesignsClient() as client:
         result = await client.search(query=query, page=page, size=size, sort=sort, fields=fields)
 
-    dumped = _dump(result)
+    dumped = dump(result, by_alias=True)
     assert isinstance(dumped, dict)
     rows = list(dumped.get("designs") or [])
     total = dumped.get("totalElements")
@@ -349,7 +337,7 @@ async def get_euipo_design(
     async def _fetch_one(client: EuipoDesignsClient, dno: str) -> dict:
         async with semaphore:
             record = await client.get_design(dno)
-            return _dump(record)  # type: ignore[return-value]
+            return dump(record, by_alias=True)  # type: ignore[return-value]
 
     async with EuipoDesignsClient() as client:
         results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])

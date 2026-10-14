@@ -36,7 +36,7 @@ import asyncio
 import base64
 from datetime import date as _date
 from pathlib import PurePosixPath
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -51,6 +51,7 @@ from mcp_data_core.mcp import (
     register_source,
 )
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.usitc import (
     DataWebClient,
     EdisClient,
@@ -107,21 +108,6 @@ def _usitc_provenance(path: str, *, as_of_status: str | None = None) -> Any:
         source_name=_USITC_SOURCE_NAME,
         as_of_status=as_of_status,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts).
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback exists to be defensive if a dict slips through. Typed as
-    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
-    per-call narrowing.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _parse_iso_date(value: str | None, *, field_name: str) -> _date | None:
@@ -203,7 +189,7 @@ def _summarize_usitc_investigation(record: dict) -> str:
 
 def _clean_edis_document(doc: object) -> dict:
     """Dump an EdisDocument and remove upstream URLs that require EDIS auth."""
-    item = _dump(doc)
+    item = dump(doc)
     # attachment_list_uri points to edis.usitc.gov and requires a token —
     # agents should use list_usitc_attachments(document_id=...) instead
     if isinstance(item, dict):
@@ -321,7 +307,7 @@ async def search_usitc_investigations(
             **kwargs,
         )
 
-    dumped = [_dump(r) for r in results]
+    dumped = [dump(r) for r in results]
     items = dumped if full else [_stub_investigation(r) for r in dumped]  # type: ignore[arg-type]
 
     filter_bits: list[str] = []
@@ -389,7 +375,7 @@ async def get_usitc_investigation(
         # prefer an exact investigation_number match, else fall back to
         # the first row (some EDIS rows carry the full investigation
         # number including a phase suffix).
-        dumped_rows = [_dump(r) for r in results]
+        dumped_rows = [dump(r) for r in results]
         for row in dumped_rows:
             if isinstance(row, dict) and row.get("investigation_number") == number:
                 return row
@@ -578,7 +564,7 @@ async def list_usitc_attachments(
 
     items: list[dict] = []
     for att in results:
-        item = _dump(att)
+        item = dump(att)
         if isinstance(item, dict):
             # download_uri points at edis.usitc.gov and requires the
             # EDIS bearer token — strip it so agents use the registered
@@ -625,7 +611,7 @@ async def search_hts_tariffs(
     async with HtsClient() as client:
         results = await client.search(keyword=query)
 
-    dumped = [_dump(r) for r in results]
+    dumped = [dump(r) for r in results]
     items = dumped if full else [_stub_hts_result(r) for r in dumped]  # type: ignore[arg-type]
     return ListEnvelope[dict](
         summary=f"USITC HTS — `{query}`: {len(items)} hits.",
@@ -713,7 +699,7 @@ async def run_dataweb_report(
 
     async with DataWebClient() as client:
         result = await client.run_report(query)
-    details = _dump(result)
+    details = dump(result)
     if not isinstance(details, dict):
         details = {"raw": details}
 

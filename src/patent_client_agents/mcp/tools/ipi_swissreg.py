@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable, Callable
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -27,6 +27,7 @@ from patent_client_agents.ipi_swissreg.models import (
     IpiTrademarkRecord,
 )
 from patent_client_agents.ipi_swissreg.resources import USAGE
+from patent_client_agents.shared.envelope import dump
 
 ipi_swissreg_mcp = FastMCP("Swiss IPI, Swissreg datadelivery")
 _REQUIRED_ENV = ["IPI_DATA_USERNAME", "IPI_DATA_PASSWORD"]
@@ -39,10 +40,6 @@ _FANOUT_CONCURRENCY = 5
 
 def _provenance() -> Any:
     return make_provenance(source_url=BASE_URL, source_name=_SOURCE_NAME)
-
-
-def _dump(record: Any) -> dict[str, Any]:
-    return cast("dict[str, Any]", record.model_dump(mode="json"))
 
 
 def _date(value: Any) -> str | None:
@@ -136,7 +133,7 @@ def _search_envelope(
     lean: Callable[[Any], dict[str, Any]],
     full: bool,
 ) -> ListEnvelope[dict]:
-    items = [_dump(row) for row in rows] if full else [lean(row) for row in rows]
+    items = [dump(row, mode="json") for row in rows] if full else [lean(row) for row in rows]
     count = (
         f"{len(items)} of {meta.total_item_count}"
         if meta.total_item_count is not None
@@ -168,7 +165,7 @@ async def _fetch(
                 return await method(number)
 
         rows = await asyncio.gather(*(one(number) for number in numbers))
-    items = [_dump(row) for row in rows] if full else [lean(row) for row in rows]
+    items = [dump(row, mode="json") for row in rows] if full else [lean(row) for row in rows]
     return ListEnvelope(
         summary=f"Swiss IPI {label} fetch: {len(items)} records. Schema-tested only.",
         items=items,

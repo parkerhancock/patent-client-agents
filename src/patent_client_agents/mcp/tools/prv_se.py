@@ -12,7 +12,7 @@ changes.
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -21,6 +21,7 @@ from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.prv_se import PrvClient
 from patent_client_agents.prv_se.client import API_HOST, DV_HOST, PATENTS_HOST
+from patent_client_agents.shared.envelope import dump
 
 prv_se_mcp = FastMCP("PRV Sweden")
 
@@ -38,18 +39,14 @@ def _provenance(source_url: str) -> Any:
     return make_provenance(source_url=source_url, source_name=_PRV_SOURCE_NAME)
 
 
-def _dump(model: Any) -> dict[str, Any]:
-    return cast("dict[str, Any]", model.model_dump(by_alias=True, exclude_none=False))
-
-
 def _project_search_row(row: Any, *, full: bool) -> dict[str, Any]:
     """Dump a search-row model; lean view leaves it alone (already lean)."""
-    return _dump(row)
+    return dump(row, by_alias=True)
 
 
 def _project_patent_get(record: Any, *, full: bool) -> dict[str, Any]:
     """Dump a PatentGetRecord; lean view drops the ~32KB drawing payload."""
-    data = _dump(record)
+    data = dump(record, by_alias=True)
     if full:
         return data
     drawing = data.get("firstDrawing")

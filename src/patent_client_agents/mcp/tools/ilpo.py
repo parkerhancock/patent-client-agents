@@ -38,6 +38,7 @@ from patent_client_agents.ilpo_statutes import (
 from patent_client_agents.ilpo_statutes.client import _resolve_statute, parse_citation
 from patent_client_agents.ilpo_tm import CKAN_HOST as ILPO_TM_HOST
 from patent_client_agents.ilpo_tm import IlpoTmClient
+from patent_client_agents.shared.envelope import dump
 
 ilpo_mcp = FastMCP("ILPO Israel")
 
@@ -72,18 +73,6 @@ def _ilpo_tm_provenance(path: str) -> Any:
         source_url=f"{ILPO_TM_HOST}{path}",
         source_name=_ILPO_TM_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict via ``model_dump(by_alias=True)``."""
-    if hasattr(obj, "model_dump"):
-        return cast(
-            "dict[str, Any]",
-            obj.model_dump(by_alias=True),  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-        )
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 _STATUTES_FANOUT_CONCURRENCY = 5
@@ -130,7 +119,7 @@ async def search_ilpo_statutes(
         page=page,
     )
     response = await search(params)
-    dumped = _dump(response)
+    dumped = dump(response, by_alias=True)
     items = list(dumped.get("hits") or [])
     has_more = bool(dumped.get("has_more"))
 
@@ -238,7 +227,7 @@ async def list_ilpo_tm_releases(
     async with IlpoTmClient() as client:
         dataset = await client.get_dataset(dataset_id)
 
-    dumped = _dump(dataset)
+    dumped = dump(dataset, by_alias=True)
     raw_resources = list(dumped.get("resources") or [])
     items: list[dict] = []
     for raw in raw_resources:
@@ -294,7 +283,7 @@ async def download_ilpo_tm(
     async with IlpoTmClient() as client:
         dataset = await client.get_dataset(dataset_id)
 
-    dumped = _dump(dataset)
+    dumped = dump(dataset, by_alias=True)
     for raw in dumped.get("resources") or []:
         if raw.get("id") == resource_id:
             return {

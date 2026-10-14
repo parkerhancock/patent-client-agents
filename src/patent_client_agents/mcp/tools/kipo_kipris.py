@@ -19,7 +19,7 @@ from __future__ import annotations
 import asyncio
 import os
 from collections.abc import Callable
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 from urllib.parse import urlsplit
 
 from fastmcp import FastMCP
@@ -49,6 +49,7 @@ from patent_client_agents.kipo_kipris.client import (
 from patent_client_agents.kipo_kipris.client import (
     TM as _TM_SERVICE,
 )
+from patent_client_agents.shared.envelope import dump
 
 kipo_kipris_mcp = FastMCP("KIPO — KIPRIS Plus")
 
@@ -83,11 +84,6 @@ def _kipo_provenance(service: str, operation: str) -> Any:
         source_url=f"{_KIPRIS_BASE_URL}/{service}/{operation}",
         source_name=_KIPO_ATTRIBUTION,
     )
-
-
-def _dump(model: Any) -> dict[str, Any]:
-    """Serialize a Pydantic row to a dict via ``model_dump(by_alias=True)``."""
-    return cast("dict[str, Any]", model.model_dump(by_alias=True))
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -204,7 +200,7 @@ async def search_kipo_patents(
         page_no=page_no,
     )
     rows = _validate_raw_items(items, PatentUtilityRow)
-    out = [_dump(r) for r in rows] if full else [_lean_patent(r) for r in rows]
+    out = [dump(r, by_alias=True) for r in rows] if full else [_lean_patent(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
     summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
@@ -274,7 +270,7 @@ async def search_kipo_patents_advanced(
         page_no=page_no,
     )
     rows = _validate_raw_items(items, PatentUtilityRow)
-    out = [_dump(r) for r in rows] if full else [_lean_patent(r) for r in rows]
+    out = [dump(r, by_alias=True) for r in rows] if full else [_lean_patent(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
     summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
@@ -329,7 +325,9 @@ async def get_kipo_patent(
             items, _ = await client.get_patent(num)
             all_rows.extend(_validate_raw_items(items, PatentUtilityRow))
 
-    out = [_dump(r) for r in all_rows] if full else [_lean_patent(r) for r in all_rows]
+    out = (
+        [dump(r, by_alias=True) for r in all_rows] if full else [_lean_patent(r) for r in all_rows]
+    )
     summary = f"Fetched {len(out)} KIPO patent/UM record(s) for {len(numbers)} number(s)."
     return ListEnvelope[dict](
         summary=summary,
@@ -366,7 +364,7 @@ async def search_kipo_trademarks(
         query=query, num_of_rows=num_of_rows, page_no=page_no
     )
     rows = _validate_raw_items(items, TrademarkRow)
-    out = [_dump(r) for r in rows] if full else [_lean_trademark(r) for r in rows]
+    out = [dump(r, by_alias=True) for r in rows] if full else [_lean_trademark(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
     summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
@@ -413,7 +411,7 @@ async def search_kipo_trademarks_advanced(
         page_no=page_no,
     )
     rows = _validate_raw_items(items, TrademarkRow)
-    out = [_dump(r) for r in rows] if full else [_lean_trademark(r) for r in rows]
+    out = [dump(r, by_alias=True) for r in rows] if full else [_lean_trademark(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
     summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
@@ -458,7 +456,11 @@ async def get_kipo_trademark(
             items, _ = await client.get_trademark(num)
             all_rows.extend(_validate_raw_items(items, TrademarkRow))
 
-    out = [_dump(r) for r in all_rows] if full else [_lean_trademark(r) for r in all_rows]
+    out = (
+        [dump(r, by_alias=True) for r in all_rows]
+        if full
+        else [_lean_trademark(r) for r in all_rows]
+    )
     summary = f"Fetched {len(out)} KIPO trademark record(s) for {len(numbers)} number(s)."
     return ListEnvelope[dict](
         summary=summary,
@@ -495,7 +497,7 @@ async def search_kipo_designs(
         query=query, num_of_rows=num_of_rows, page_no=page_no
     )
     rows = _validate_raw_items(items, DesignRow)
-    out = [_dump(r) for r in rows] if full else [_lean_design(r) for r in rows]
+    out = [dump(r, by_alias=True) for r in rows] if full else [_lean_design(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
     summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
@@ -542,7 +544,7 @@ async def search_kipo_designs_advanced(
         page_no=page_no,
     )
     rows = _validate_raw_items(items, DesignRow)
-    out = [_dump(r) for r in rows] if full else [_lean_design(r) for r in rows]
+    out = [dump(r, by_alias=True) for r in rows] if full else [_lean_design(r) for r in rows]
     total = pagination.get("totalCount")
     shown = len(out)
     summary_total = f"{shown} of {total} hits" if isinstance(total, int) else f"{shown} hits"
@@ -588,7 +590,9 @@ async def get_kipo_design(
             items, _ = await client.get_design(num)
             all_rows.extend(_validate_raw_items(items, DesignRow))
 
-    out = [_dump(r) for r in all_rows] if full else [_lean_design(r) for r in all_rows]
+    out = (
+        [dump(r, by_alias=True) for r in all_rows] if full else [_lean_design(r) for r in all_rows]
+    )
     summary = f"Fetched {len(out)} KIPO design record(s) for {len(numbers)} number(s)."
     return ListEnvelope[dict](
         summary=summary,

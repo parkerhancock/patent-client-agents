@@ -8,13 +8,14 @@ tools backed by ``patent_client_agents.uspto_assignments``.
 from __future__ import annotations
 
 from datetime import date, datetime
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.uspto_assignments import AssignmentCenterClient
 from patent_client_agents.uspto_assignments.client import _SEARCH_AXIS_TO_API
 
@@ -37,21 +38,6 @@ def _patent_assignment_provenance(path: str) -> Any:
         source_url=f"{_ASSIGNMENT_BASE}{path}",
         source_name=_ASSIGNMENT_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts).
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback exists to be defensive if a dict slips through. Typed as
-    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
-    per-call narrowing.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _stub_patent_assignment(record: Any) -> dict:
@@ -194,7 +180,7 @@ async def search_patent_assignments(
 
     raw_records = list(result.records)
     items = (
-        [_dump(r) for r in raw_records]
+        [dump(r) for r in raw_records]
         if full
         else [_stub_patent_assignment(r) for r in raw_records]
     )

@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.copyright import CopyrightClient
+from patent_client_agents.shared.envelope import dump
 
 copyright_mcp = FastMCP("Copyright")
 
@@ -29,21 +30,6 @@ def _uscopyright_provenance(path: str) -> Any:
         source_url=f"{_USCO_BASE}{path}",
         source_name=_USCO_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts).
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback exists to be defensive if a dict slips through. Typed as
-    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
-    per-call narrowing.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _first(values: object) -> str | None:
@@ -135,10 +121,10 @@ async def search_copyright(
     async with CopyrightClient() as client:
         response = await client.search(query, field=field, page=page, page_size=page_size)
 
-    raw_results = [_dump(r) for r in response.records]
+    raw_results = [dump(r) for r in response.records]
     items = raw_results if full else [_stub_copyright(r) for r in raw_results]  # type: ignore[arg-type]
 
-    metadata = _dump(response.metadata)
+    metadata = dump(response.metadata)
     total = metadata.get("hit_count") if isinstance(metadata, dict) else None  # type: ignore[union-attr]
     shown = len(items)
     more = bool(total and (page * page_size) < int(total))
@@ -187,7 +173,7 @@ async def get_copyright_record(
     async def _fetch_one(client: CopyrightClient, prid: str) -> dict | None:
         async with semaphore:
             record = await client.get_record(prid)
-            return _dump(record) if record is not None else None  # type: ignore[return-value]
+            return dump(record) if record is not None else None  # type: ignore[return-value]
 
     async with CopyrightClient() as client:
         fetched = await asyncio.gather(*[_fetch_one(client, n) for n in ids])

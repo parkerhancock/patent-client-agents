@@ -21,6 +21,7 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.wipo_lex import (
     SubjectMatter,
     TypeOfText,
@@ -47,21 +48,6 @@ def _wipo_lex_provenance(path: str) -> Any:
         source_url=f"{_WIPO_LEX_BASE}{path}",
         source_name=_WIPO_LEX_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts).
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback exists to be defensive if a dict slips through. Typed as
-    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
-    per-call narrowing.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _stub_hit(hit: dict) -> dict:
@@ -156,7 +142,7 @@ async def search_wipo_lex_legislation(
             include_historical=include_historical,
         )
 
-    dumped = _dump(response)
+    dumped = dump(response)
     hits = list(dumped.get("hits") or [])
     items = hits if full else [_stub_hit(h) for h in hits]
 
@@ -202,7 +188,7 @@ async def get_wipo_lex_legislation(
 
     async def _fetch_one(client: WipoLexClient, lid: str) -> dict:
         async with semaphore:
-            return _dump(await client.get_legislation(lid))  # type: ignore[return-value]
+            return dump(await client.get_legislation(lid))  # type: ignore[return-value]
 
     async with WipoLexClient() as client:
         results = await asyncio.gather(*[_fetch_one(client, lid) for lid in ids])

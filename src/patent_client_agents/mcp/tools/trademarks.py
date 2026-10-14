@@ -16,13 +16,14 @@ from __future__ import annotations
 
 import asyncio
 from datetime import datetime
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.tmep import TmepClient, get_corpus_status
 from patent_client_agents.uspto_tmsearch import TmsearchClient
 from patent_client_agents.uspto_trademark_assignments import TrademarkAssignmentClient
@@ -31,23 +32,8 @@ from patent_client_agents.uspto_tsdr import TsdrClient
 trademarks_mcp = FastMCP("Trademarks")
 
 
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts).
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback exists to be defensive if a dict slips through. Typed as
-    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
-    per-call narrowing.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
-
-
 def _dump_list(items: list) -> dict:
-    return {"results": [_dump(i) for i in items]}
+    return {"results": [dump(i) for i in items]}
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -285,7 +271,7 @@ async def search_trademarks(
             else:
                 kwargs["wordmark"] = query
             raw_results = await client.search_all(**kwargs)
-            results = [_dump(r) for r in raw_results]
+            results = [dump(r) for r in raw_results]
         else:
             if field == "wordmark":
                 response = await client.search(wordmark=query)
@@ -293,7 +279,7 @@ async def search_trademarks(
                 response = await client.search_owner(query)
             else:  # goods_services
                 response = await client.search(goods_services=query)
-            results = [_dump(r) for r in (response.results or [])]
+            results = [dump(r) for r in (response.results or [])]
 
     items = results if full else [_stub_trademark(r) for r in results]
     return ListEnvelope[dict](
@@ -337,7 +323,7 @@ async def get_trademark(
                 record = await client.get_by_serial(ident)
             else:
                 record = await client.get_by_registration(ident)
-        return _dump(record) if record is not None else None  # type: ignore[return-value]
+        return dump(record) if record is not None else None  # type: ignore[return-value]
 
     async with TmsearchClient() as client:
         fetched = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -400,7 +386,7 @@ async def get_trademark_status(
 
     async def _fetch_one(client: TsdrClient, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.get_status(n))  # type: ignore[return-value]
+            return dump(await client.get_status(n))  # type: ignore[return-value]
 
     async with TsdrClient() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -433,7 +419,7 @@ async def get_trademark_documents(
     async with TsdrClient() as client:
         docs = await client.get_documents(serial_number)
 
-    items = [_dump(d) for d in docs]
+    items = [dump(d) for d in docs]
     return ListEnvelope[dict](
         summary=(
             f"TSDR prosecution documents for USPTO trademark {serial_number} "
@@ -468,7 +454,7 @@ async def get_trademark_last_update(
 
     async def _fetch_one(client: TsdrClient, n: str) -> dict:
         async with semaphore:
-            return _dump(await client.get_last_update(n))  # type: ignore[return-value]
+            return dump(await client.get_last_update(n))  # type: ignore[return-value]
 
     async with TsdrClient() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -742,9 +728,7 @@ async def search_trademark_assignments(
         else:  # reel_frame
             records = await client.search_by_reel_frame(query)
 
-    items = (
-        [_dump(r) for r in records] if full else [_stub_trademark_assignment(r) for r in records]
-    )
+    items = [dump(r) for r in records] if full else [_stub_trademark_assignment(r) for r in records]
     shown = len(items)
     summary = (
         f"USPTO trademark assignments (by {axis}) — `{query}`: {shown} hit"

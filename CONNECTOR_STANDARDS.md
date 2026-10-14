@@ -541,10 +541,17 @@ Names are conventional so they're greppable across the catalog:
   identifiers an agent can quote (e.g., country + doc_number + kind →
   `publication_number`).
 
-These helpers are deliberately per-module, not shared. Each connector's
-record shape is different enough that a generic helper would be a thin
-shim with no real abstraction. Repetition is acceptable; consistency in
-naming is what makes the catalog navigable.
+`_summarize_*` and `_stub_*` stay per-module: each connector's record
+shape is different enough that a generic helper would be a thin shim.
+`_provenance` keeps the connector's base URL and source name in the module.
+
+Mechanics that are the same everywhere belong in
+`patent_client_agents.shared` instead of being copied into each module. Use
+`shared.envelope.dump(obj, **model_dump_kwargs)` to serialize records, and
+pass the `model_dump` options your tool's output shape needs (for example
+`by_alias=True` or `mode="json"`). Don't define a local `_dump`. Add a
+shared helper when the same logic appears in several modules and differs
+only in parameters; keep connector-specific shape and identity local.
 
 The canonical examples live in
 [`src/patent_client_agents/mcp/tools/uspto.py`](src/patent_client_agents/mcp/tools/uspto.py)

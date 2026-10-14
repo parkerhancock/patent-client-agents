@@ -12,7 +12,7 @@ The default is production.
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -21,6 +21,7 @@ from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.ip_australia_patents import IpAustraliaPatentsClient
+from patent_client_agents.shared.envelope import dump
 
 ip_australia_patents_mcp = FastMCP("IP Australia — Patents")
 
@@ -43,15 +44,6 @@ def _ipa_patents_provenance(path: str) -> Any:
         source_url=f"{_IPA_BASE}{_IPA_API_PATH}{path}",
         source_name=_IPA_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict via ``model_dump(by_alias=True)``."""
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump(by_alias=True))  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _stub_ipa_patent(row: dict) -> dict:
@@ -144,7 +136,7 @@ async def search_ipa_patents(
             sort_direction=sort_direction,
         )
 
-    dumped = _dump(result)
+    dumped = dump(result, by_alias=True)
     rows = list(dumped.get("results") or [])
     total = dumped.get("total")
     items = rows if full else [_stub_ipa_patent(r) for r in rows]
@@ -195,7 +187,7 @@ async def get_ipa_patent(
     async def _fetch_one(client: IpAustraliaPatentsClient, num: str) -> dict:
         async with semaphore:
             record = await client.get_patent(num)
-            return _dump(record)
+            return dump(record, by_alias=True)
 
     async with IpAustraliaPatentsClient() as client:
         results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
