@@ -156,6 +156,7 @@ class MpepClient:
         sort: str = "relevance",
         per_page: int = 10,
         page: int = 1,
+        offset: int | None = None,
     ) -> MpepSearchResponse:
         # Corpus snapshot doesn't distinguish content / index / notes / form
         # paragraphs — all body text is indexed together. We accept the
@@ -167,7 +168,9 @@ class MpepClient:
         fts_query = _translate_fts_query(query, syntax)
         if not fts_query:
             return MpepSearchResponse(hits=[], page=page, per_page=per_page, has_more=False)
-        offset = max(0, (page - 1) * per_page)
+        # A row ``offset`` takes precedence over ``page`` when given.
+        if offset is None:
+            offset = max(0, (page - 1) * per_page)
         # Fetch one extra row to detect whether more pages exist.
         rows = db.search(fts_query, limit=per_page + 1, offset=offset, sort=sort)
         has_more = len(rows) > per_page

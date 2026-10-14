@@ -222,6 +222,7 @@ class DpmaStatutesClient:
         sort: str = "relevance",
         per_page: int = 10,
         page: int = 1,
+        offset: int | None = None,
     ) -> DpmaSearchResult:
         db = self._open()
         canon = _resolve_statute(statute)
@@ -235,7 +236,9 @@ class DpmaStatutesClient:
                 per_page=per_page,
                 has_more=False,
             )
-        offset = max(0, (page - 1) * per_page)
+        # A row ``offset`` takes precedence over ``page`` when given.
+        if offset is None:
+            offset = max(0, (page - 1) * per_page)
         rows = db.search(
             fts_query,
             statute=canon,

@@ -12,12 +12,15 @@ from datetime import datetime
 from pathlib import Path
 
 import pytest
+from fastmcp import Client
+from fastmcp.exceptions import ToolError
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
 from mcp_data_core.exceptions import ValidationError
 from patent_client_agents.mcp.tools.tw_trade_secrets import (
     get_tw_trade_secrets_section,
     search_tw_trade_secrets,
+    tw_trade_secrets_mcp,
 )
 
 # ──────────────────────────────────────────────────────────────────────
@@ -64,10 +67,12 @@ async def test_search_provenance_carries_corpus_fields(
 
 
 async def test_search_limit_validation(tw_trade_secrets_corpus_env: Path) -> None:
-    with pytest.raises(ValidationError, match="between 1 and 100"):
-        await search_tw_trade_secrets(query="x", limit=0)
-    with pytest.raises(ValidationError, match="between 1 and 100"):
-        await search_tw_trade_secrets(query="x", limit=999)
+    # The bounds live in the tool schema, so FastMCP rejects them before the body runs.
+    async with Client(tw_trade_secrets_mcp) as client:
+        with pytest.raises(ToolError, match="greater than or equal to 1"):
+            await client.call_tool("search_tw_trade_secrets", {"query": "x", "limit": 0})
+        with pytest.raises(ToolError, match="less than or equal to 100"):
+            await client.call_tool("search_tw_trade_secrets", {"query": "x", "limit": 999})
 
 
 async def test_search_pagination_summary(tw_trade_secrets_corpus_env: Path) -> None:
