@@ -45,8 +45,6 @@ from datetime import date
 from decimal import Decimal
 from typing import Unpack
 
-import pypdf
-
 from mcp_data_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
@@ -102,6 +100,8 @@ class IPOIndiaFeesClient(BaseAsyncClient):
 
 
 def _extract_pdf_text(pdf_bytes: bytes) -> str:
+    import pypdf  # deferred: only the scrape path needs it
+
     reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
     parts: list[str] = []
     for page in reader.pages:

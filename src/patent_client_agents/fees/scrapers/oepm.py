@@ -102,8 +102,6 @@ from datetime import date
 from decimal import Decimal
 from typing import Unpack
 
-import pypdf
-
 from mcp_data_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
@@ -169,6 +167,8 @@ class OEPMFeesClient(BaseAsyncClient):
 
 def _extract_pdf_text(pdf_bytes: bytes) -> str:
     """Whitespace-collapsed text of the consolidated TASAS PDF."""
+    import pypdf  # deferred: only the scrape path needs it
+
     reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
     parts = [page.extract_text() or "" for page in reader.pages]
     raw = "\n".join(parts)

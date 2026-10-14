@@ -84,7 +84,6 @@ from datetime import date
 from decimal import Decimal
 from typing import Unpack
 
-import pypdf
 from lxml import html as L
 
 from mcp_data_core import BaseAsyncClient
@@ -150,6 +149,8 @@ class INPIFranceFeesClient(BaseAsyncClient):
 
 def _extract_pdf_text(pdf_bytes: bytes) -> str:
     """Return collapsed-whitespace text of the procedures PDF."""
+    import pypdf  # deferred: only the scrape path needs it
+
     reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
     parts = [p.extract_text() or "" for p in reader.pages]
     raw = "\n".join(parts)

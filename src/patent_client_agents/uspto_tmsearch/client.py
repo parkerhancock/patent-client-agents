@@ -7,6 +7,7 @@ when needed and lasts ~4 days. See ``token_manager.py`` for details.
 
 from __future__ import annotations
 
+import importlib.util
 from pathlib import Path
 from typing import Any, Literal
 
@@ -15,15 +16,9 @@ from mcp_data_core.exceptions import AuthenticationError, ConfigurationError
 from .models import TrademarkSearchResponse, TrademarkSearchResult
 from .token_manager import WAF_USER_AGENT, WafTokenManager
 
-# curl_cffi is imported lazily so the import-time path doesn't pull in
-# its native deps for callers that never use the trademark search.
-try:
-    from curl_cffi.requests import AsyncSession
-
-    CURL_CFFI_AVAILABLE = True
-except ImportError:
-    AsyncSession = None  # type: ignore[assignment,misc]
-    CURL_CFFI_AVAILABLE = False
+# curl_cffi is imported when a session opens, so importing this module
+# doesn't load its native deps for callers that never search trademarks.
+CURL_CFFI_AVAILABLE = importlib.util.find_spec("curl_cffi") is not None
 
 
 # AWS WAF binds the token to (UA + cookie). The headers below mirror
@@ -87,7 +82,8 @@ class TmsearchClient:
     async def _init_session(self) -> None:
         """Initialize curl_cffi session with WAF token."""
         self._token = await self._token_manager.get_token()
-        assert AsyncSession is not None  # __init__ rejects a missing curl_cffi
+        from curl_cffi.requests import AsyncSession  # __init__ rejects a missing curl_cffi
+
         self._session = AsyncSession(impersonate="chrome120")
 
     async def close(self) -> None:
