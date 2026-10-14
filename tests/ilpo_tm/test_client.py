@@ -117,4 +117,4 @@ async def test_download_resource_streams_bytes() -> None:
 
     assert data == b"id,owner\n123,Acme"
     assert captured[0].method == "GET"
-    assert str(captured[0].url).endswith("/tm.csv")
+    assert str(captured[0].url) == "https://data.gov.il/dataset/x/resource/r-1/download/tm.csv"

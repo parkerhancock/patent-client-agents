@@ -115,4 +115,6 @@ async def test_download_resource_streams_bytes() -> None:
 
     assert data == b"binary-payload"
     assert captured[0].method == "GET"
-    assert str(captured[0].url).endswith("/iprapid.zip")
+    assert str(captured[0].url) == (
+        "https://data.gov.au/data/dataset/x/resource/r-1/download/iprapid.zip"
+    )

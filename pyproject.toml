@@ -19,7 +19,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "mcp-data-core>=0.11.3",
+    "mcp-data-core>=0.12.0",
     "anyio>=4.4",
     "httpx>=0.27",
     "h2>=4.1",
