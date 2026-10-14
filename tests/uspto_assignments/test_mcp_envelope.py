@@ -51,7 +51,6 @@ def _make_record(
     )
 
 
-@pytest.mark.xfail(strict=True, reason="provenance reports retired host; see PR")
 @pytest.mark.asyncio
 async def test_search_patent_assignments_provenance_matches_request_url():
     """Provenance must name the endpoint AssignmentCenterClient actually calls."""

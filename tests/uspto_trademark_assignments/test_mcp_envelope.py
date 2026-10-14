@@ -46,7 +46,6 @@ def _make_record(reel: int = 9006, frame: str = "0093") -> TrademarkAssignmentRe
     )
 
 
-@pytest.mark.xfail(strict=True, reason="provenance reports retired host; see PR")
 @pytest.mark.asyncio
 async def test_search_trademark_assignments_provenance_matches_request_url():
     """Provenance must name the endpoint TrademarkAssignmentClient actually calls."""
