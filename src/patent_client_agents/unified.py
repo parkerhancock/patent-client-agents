@@ -25,6 +25,8 @@ import httpx
 
 from mcp_data_core.exceptions import McpDataCoreError, NotFoundError
 
+from .identifiers import PatentNumber
+
 logger = logging.getLogger(__name__)
 
 __all__ = [
@@ -292,10 +294,6 @@ async def get_patent_claims_clean(patent_number: str) -> list[dict[str, Any]]:
     ]
 
 
-#: Bare US grant/publication number with no country prefix (``10301023``,
-#: ``10,301,023``).
-_BARE_US_NUMBER_RE = re.compile(r"^[\d,]+$")
-
 #: Start of one numbered claim in PPUBS ``claims_text`` (reissue additions
 #: carry an ``.Iadd.`` marker in front of the number).
 _PPUBS_CLAIM_START_RE = re.compile(r"^(?:\.Iadd\.)?\s*(\d+)\s*\.\s*(.*)$", re.DOTALL)
@@ -304,8 +302,7 @@ _CLAIM_REF_RE = re.compile(r"\bclaims?\s+(\d+)", re.IGNORECASE)
 
 def _is_us_number(patent_number: str) -> bool:
     """True for ``US``-prefixed numbers and bare (prefix-less) numbers."""
-    cleaned = patent_number.strip().upper()
-    return cleaned.startswith("US") or bool(_BARE_US_NUMBER_RE.match(cleaned))
+    return PatentNumber.parse(patent_number).is_us()
 
 
 def _ppubs_claim_texts(claims_text: str | None) -> list[tuple[int, str]]:

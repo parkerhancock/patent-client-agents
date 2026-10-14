@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from ...identifiers import PatentNumber
 from ..models import (
     ApplicationResponse,
     AssignmentResponse,
@@ -99,14 +100,7 @@ def _clean_patent_identifier(identifier: str) -> str:
     and non-alphanumeric characters to produce a bare number
     suitable for ODP patentNumber search.
     """
-    import re
-
-    cleaned = "".join(ch for ch in identifier.upper() if ch.isalnum())
-    if cleaned.startswith("US"):
-        cleaned = cleaned[2:]
-    # Strip trailing kind codes (e.g. B1, B2, A1, A2, S1, P2, E1, H1)
-    cleaned = re.sub(r"[A-Z]\d$", "", cleaned)
-    return cleaned
+    return PatentNumber.parse(identifier).odp_patent_query()
 
 
 def _extract_parents(record: dict[str, Any]) -> list[dict[str, Any]]:

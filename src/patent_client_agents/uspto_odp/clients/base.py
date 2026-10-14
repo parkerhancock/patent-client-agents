@@ -12,6 +12,8 @@ from pydantic import BaseModel, Field
 from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import ConfigurationError, NotFoundError
 
+from ...identifiers import PatentNumber
+
 BASE_URL = "https://api.uspto.gov"
 
 # ODP release this client is verified against. Bump when re-reviewing
@@ -227,8 +229,7 @@ class UsptoOdpBaseClient(BaseAsyncClient):
 
     def _normalize_application_number(self, application_number: str) -> str:
         """Normalize application number by removing separators."""
-        normalized = application_number.strip().replace("/", "").replace(",", "").replace(" ", "")
-        return normalized
+        return PatentNumber.parse(application_number).odp_application()
 
     async def _search_with_payload(
         self,

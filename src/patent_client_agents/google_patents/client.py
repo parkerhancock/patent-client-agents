@@ -21,6 +21,7 @@ if TYPE_CHECKING:  # pragma: no cover - typing only
 
 from mcp_data_core.resilience import default_retryer
 
+from ..identifiers import PatentNumber
 from .cache import build_cached_http_client
 from .parsers import extract_claims, extract_figures, extract_metadata
 
@@ -908,25 +909,7 @@ def _parse_search_results(payload: dict[str, Any], query_url: str) -> GooglePate
 
 
 def _normalize_patent_number(patent_number: str) -> str:
-    normalized = patent_number.upper().strip()
-
-    if normalized and normalized[0].isdigit():
-        normalized = f"US{normalized}"
-
-    if re.match(r"^US\d{4}\d{6}A1$", normalized) and len(normalized) == 14:
-        normalized = f"{normalized[:6]}0{normalized[6:]}"
-
-    if re.match(r"^WO\d{2}[0-9]+[A-Z][0-9]*$", normalized) and len(normalized) <= 12:
-        year_part = normalized[2:4]
-        century = "19" if int(year_part) >= 80 else "20"
-        suffix = normalized[4:]
-        normalized = (
-            f"WO{century}{year_part}0{suffix}"
-            if len(suffix) >= 5
-            else f"WO{century}{normalized[2:]}"
-        )
-
-    return normalized
+    return PatentNumber.parse(patent_number).google_slug()
 
 
 async def fetch_patent_from_google_patents(
