@@ -250,15 +250,6 @@ async def test_waiting_request_recovers_after_concurrent_refresh_failure(
     assert json.loads(last_counts["network.CLM."].content)["caseId"] != 123
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "Source bug: when a session refresh fails, the request's retry attempt "
-        "still carries the stale caseId in its JSON body (only the refresh path "
-        "rewrites it), so PPUBS 403s it and the client refreshes a second, "
-        "unneeded time, invalidating the session the other request just got."
-    ),
-)
 @pytest.mark.asyncio
 async def test_failed_refresh_does_not_force_an_extra_session(ppubs: FakePpubs) -> None:
     async with _client(ppubs) as client:

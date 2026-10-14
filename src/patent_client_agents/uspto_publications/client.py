@@ -208,6 +208,10 @@ class PublicSearchClient:
 
     @with_retry(max_attempts=4, initial_wait=1.0, max_wait=8.0)
     async def _request(self, method: str, url: str, **kwargs: Any) -> httpx.Response:
+        # A retry reuses kwargs, so bring the body's caseId up to the current
+        # session first; otherwise a stale caseId forces another refresh.
+        if self._case_id is not None:
+            self._update_request_case_id(kwargs)
         request_case_id = self._case_id
         response = await self._client.request(method, url, **kwargs)
         if response.status_code in {401, 403}:
