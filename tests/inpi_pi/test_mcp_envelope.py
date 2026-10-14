@@ -20,7 +20,7 @@ import pytest
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 
 
 class _FakeRow:
@@ -221,17 +221,37 @@ async def test_get_trademark_single_string(inpi_mcp: Any, mock_client: AsyncMock
 @pytest.mark.asyncio
 async def test_get_trademark_list_combined_envelope(inpi_mcp: Any, mock_client: AsyncMock) -> None:
     mock_client.get_trademark = AsyncMock(
-        return_value=[
-            _FakeRow(**_tm_payload("A1")),
-            _FakeRow(**_tm_payload("A2")),
-            _FakeRow(**_tm_payload("A3")),
-        ]
+        side_effect=lambda appno: [_FakeRow(**_tm_payload(appno))]
     )
     result = await inpi_mcp.get_inpi_trademark(application_number=["A1", "A2", "A3"])
     assert len(result.items) == 3
     appnos = {row["ApplicationNumber"] for row in result.items}
     assert appnos == {"A1", "A2", "A3"}
-    assert "3 INPI trademarks" in result.summary
+    assert result.summary == "Fetched 3 of 3 INPI trademarks."
+    assert mock_client.get_trademark.await_count == 3
+
+
+@pytest.mark.asyncio
+async def test_get_trademark_list_reports_not_found(inpi_mcp: Any, mock_client: AsyncMock) -> None:
+    def fetch(appno: str) -> list[_FakeRow]:
+        if appno == "404":
+            raise NotFoundError("missing", 404, "")
+        if appno == "EMPTY":
+            return []
+        return [_FakeRow(**_tm_payload(appno))]
+
+    mock_client.get_trademark = AsyncMock(side_effect=fetch)
+    result = await inpi_mcp.get_inpi_trademark(application_number=["A1", "404", "EMPTY"])
+    assert [row["ApplicationNumber"] for row in result.items] == ["A1"]
+    assert result.not_found == ["404", "EMPTY"]
+    assert result.summary == "Fetched 1 of 3 INPI trademarks. Not found: 404, EMPTY."
+
+
+@pytest.mark.asyncio
+async def test_get_trademark_single_not_found_raises(inpi_mcp: Any, mock_client: AsyncMock) -> None:
+    mock_client.get_trademark = AsyncMock(side_effect=NotFoundError("missing", 404, ""))
+    with pytest.raises(NotFoundError):
+        await inpi_mcp.get_inpi_trademark(application_number="404")
 
 
 @pytest.mark.asyncio
@@ -305,14 +325,11 @@ async def test_get_design_single_string(inpi_mcp: Any, mock_client: AsyncMock) -
 @pytest.mark.asyncio
 async def test_get_design_list_combined(inpi_mcp: Any, mock_client: AsyncMock) -> None:
     mock_client.get_design = AsyncMock(
-        return_value=[
-            _FakeRow(**_design_payload("FR1")),
-            _FakeRow(**_design_payload("FR2")),
-        ]
+        side_effect=lambda appno: [_FakeRow(**_design_payload(appno))]
     )
     result = await inpi_mcp.get_inpi_design(application_number=["FR1", "FR2"])
     assert len(result.items) == 2
-    assert "2 INPI designs" in result.summary
+    assert result.summary == "Fetched 2 of 2 INPI designs."
 
 
 @pytest.mark.asyncio

@@ -8,17 +8,16 @@ both set.
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.ip_australia_designs import IpAustraliaDesignsClient
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 ip_australia_designs_mcp = FastMCP("IP Australia — Designs")
 
@@ -65,9 +64,6 @@ def _summarize_ipa_design(record: dict) -> str:
         line += f"; registered {reg}"
     line += f". Locarno: {locarno_str}."
     return f"{head}\n{line}"
-
-
-_IPA_DESIGNS_FANOUT_CONCURRENCY = 5
 
 
 # ---------------------------------------------------------------------------
@@ -158,7 +154,7 @@ async def get_ipa_design(
         "workflows. Pass a list to fetch many records concurrently; the "
         "response shape stays a ListEnvelope.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get full Australian registered design records by design number.
 
     Accepts either a single design number or a list (§5.4) and fans
@@ -168,32 +164,29 @@ async def get_ipa_design(
 
     Related tools: search_ipa_designs, get_ipa_patent, get_ipa_trademark.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_ipa_design requires at least one application_number")
+    numbers = as_id_list(application_number, noun="design number")
 
-    semaphore = asyncio.Semaphore(_IPA_DESIGNS_FANOUT_CONCURRENCY)
+    async with IpAustraliaDesignsClient() as client:
 
-    async def _fetch_one(client: IpAustraliaDesignsClient, num: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(num: str) -> dict:
             record = await client.get_design(num)
             return dump(record, by_alias=True)
 
-    async with IpAustraliaDesignsClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
 
-    if len(results) == 1:
+    if len(numbers) == 1:
         summary = _summarize_ipa_design(results[0])
         path = f"/design/{numbers[0]}"
     else:
-        summary = f"Fetched {len(results)} Australian designs: {', '.join(numbers)}."
+        summary = fetched_summary(len(results), len(numbers), "Australian designs", not_found)
         path = "/design"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_ipa_designs_provenance(path),
     )
 

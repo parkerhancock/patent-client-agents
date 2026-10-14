@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.ipi_swissreg.models import (
     IpiPatentRecord,
     IpiPublicationRecord,
@@ -176,3 +176,50 @@ async def test_usage_and_validation() -> None:
         await tools.get_ipi_patent([])
     with pytest.raises(ValidationError):
         await tools.get_ipi_spc([str(index) for index in range(51)])
+
+
+def _client_with(method_name: str, side_effect: object) -> type:
+    inner = AsyncMock()
+    getattr(inner, method_name).side_effect = side_effect
+
+    class Context:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            pass
+
+        async def __aenter__(self) -> AsyncMock:
+            return inner
+
+        async def __aexit__(self, *exc: object) -> None:
+            return None
+
+    return Context
+
+
+@pytest.mark.asyncio
+async def test_list_fetch_reports_not_found(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.ipi_swissreg as tools
+
+    async def fetch_one(number: str, *args: object, **kwargs: object) -> object:
+        if number == "404":
+            raise NotFoundError(f"missing {number}", 404, "")
+        return IpiSpcRecord(identifier=number, raw={})
+
+    monkeypatch.setattr(tools, "IpiSwissregClient", _client_with("get_spc", fetch_one))
+    result = await tools.get_ipi_spc(["S1", "404"])
+
+    assert len(result.items) == 1
+    assert result.not_found == ["404"]
+    assert result.summary == "Fetched 1 of 2 Swiss IPI SPCs. Not found: 404."
+
+
+@pytest.mark.asyncio
+async def test_single_fetch_not_found_raises(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.ipi_swissreg as tools
+
+    monkeypatch.setattr(
+        tools,
+        "IpiSwissregClient",
+        _client_with("get_spc", NotFoundError("missing", 404, "")),
+    )
+    with pytest.raises(NotFoundError):
+        await tools.get_ipi_spc("404")

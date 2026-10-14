@@ -23,7 +23,6 @@ BASE_URL = "https://dpmaconnect.dpma.de/dpmaws/rest-services"
 PATENT_SERVICE = "DPMAregisterPatService"
 TRADEMARK_SERVICE = "DPMAregisterMarkeService"
 DESIGN_SERVICE = "DPMAregisterGsmService"
-LIST_ACCEPT_CAP = 50
 ACCOUNT_RESULT_CAP = 1000
 TEST_RESULT_CAP = 100
 _SIGNUP_URL = "https://www.dpma.de/english/search/data_supply_services/dpmaconnect/index.html"

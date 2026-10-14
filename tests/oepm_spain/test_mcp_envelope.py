@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.oepm_spain.models import (
     OepmDesignRecord,
     OepmPatentRecord,
@@ -81,7 +81,8 @@ async def test_fetch_tools_use_one_bounded_client(
     assert result.items[0][lean_field]
     assert "raw" not in result.items[0]
     assert full_result.items[0]["raw"]
-    assert "Public-WSDL tested only" in result.summary
+    assert "Public-WSDL tested only" in full_result.summary
+    assert result.summary.startswith("Fetched 2 of 2 OEPM")
     assert "live account compatibility unverified" in result.provenance.source_name
     assert getattr(inner, method_name).await_count == 3
 
@@ -100,3 +101,50 @@ async def test_usage_and_identifier_validation() -> None:
         await tools.get_oepm_trademark([" "])
     with pytest.raises(ValidationError):
         await tools.get_oepm_design([str(index) for index in range(51)])
+
+
+def _client_with(method_name: str, side_effect: object) -> type:
+    inner = AsyncMock()
+    getattr(inner, method_name).side_effect = side_effect
+
+    class Context:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            pass
+
+        async def __aenter__(self) -> AsyncMock:
+            return inner
+
+        async def __aexit__(self, *exc: object) -> None:
+            return None
+
+    return Context
+
+
+@pytest.mark.asyncio
+async def test_list_fetch_reports_not_found(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.oepm_spain as tools
+
+    async def fetch_one(number: str, *args: object, **kwargs: object) -> object:
+        if number == "404":
+            raise NotFoundError(f"missing {number}", 404, "")
+        return OepmTrademarkRecord(identifier=number, modality="M", raw={})
+
+    monkeypatch.setattr(tools, "OepmSpainClient", _client_with("get_trademark", fetch_one))
+    result = await tools.get_oepm_trademark(["M1", "404"])
+
+    assert len(result.items) == 1
+    assert result.not_found == ["404"]
+    assert result.summary == "Fetched 1 of 2 OEPM trademark files. Not found: 404."
+
+
+@pytest.mark.asyncio
+async def test_single_fetch_not_found_raises(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.oepm_spain as tools
+
+    monkeypatch.setattr(
+        tools,
+        "OepmSpainClient",
+        _client_with("get_trademark", NotFoundError("missing", 404, "")),
+    )
+    with pytest.raises(NotFoundError):
+        await tools.get_oepm_trademark("404")

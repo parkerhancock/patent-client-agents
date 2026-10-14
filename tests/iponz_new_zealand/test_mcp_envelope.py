@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.iponz_new_zealand.models import (
     IponzDesignRecord,
     IponzPatentRecord,
@@ -133,3 +133,50 @@ async def test_usage_and_validation() -> None:
         await tools.list_iponz_patents_updated(date(2026, 1, 1), date(2026, 1, 2), limit=0)
     with pytest.raises(ValidationError):
         await tools.list_iponz_designs_registered(date(2026, 1, 1), date(2026, 1, 2), limit=2001)
+
+
+def _client_with(method_name: str, side_effect: object) -> type:
+    inner = AsyncMock()
+    getattr(inner, method_name).side_effect = side_effect
+
+    class Context:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            pass
+
+        async def __aenter__(self) -> AsyncMock:
+            return inner
+
+        async def __aexit__(self, *exc: object) -> None:
+            return None
+
+    return Context
+
+
+@pytest.mark.asyncio
+async def test_list_fetch_reports_not_found(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.iponz_new_zealand as tools
+
+    async def fetch_one(number: str, *args: object, **kwargs: object) -> object:
+        if number == "404":
+            raise NotFoundError(f"missing {number}", 404, "")
+        return IponzDesignRecord(identifier=number, registration_number=number, raw={})
+
+    monkeypatch.setattr(tools, "IponzClient", _client_with("get_design", fetch_one))
+    result = await tools.get_iponz_design(["D1", "404"])
+
+    assert len(result.items) == 1
+    assert result.not_found == ["404"]
+    assert result.summary == "Fetched 1 of 2 IPONZ designs. Not found: 404."
+
+
+@pytest.mark.asyncio
+async def test_single_fetch_not_found_raises(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.iponz_new_zealand as tools
+
+    monkeypatch.setattr(
+        tools,
+        "IponzClient",
+        _client_with("get_design", NotFoundError("missing", 404, "")),
+    )
+    with pytest.raises(NotFoundError):
+        await tools.get_iponz_design("404")

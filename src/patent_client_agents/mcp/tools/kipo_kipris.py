@@ -16,7 +16,6 @@ contract.
 
 from __future__ import annotations
 
-import asyncio
 import os
 from collections.abc import Callable
 from typing import Annotated, Any
@@ -25,7 +24,6 @@ from urllib.parse import urlsplit
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.kipo_kipris import (
@@ -41,15 +39,19 @@ from patent_client_agents.kipo_kipris.client import (
     DESIGN as _DESIGN_SERVICE,
 )
 from patent_client_agents.kipo_kipris.client import (
-    LIST_ACCEPT_CAP,
-)
-from patent_client_agents.kipo_kipris.client import (
     PAT_UTL as _PAT_UTL_SERVICE,
 )
 from patent_client_agents.kipo_kipris.client import (
     TM as _TM_SERVICE,
 )
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import (
+    LIST_CAP,
+    FetchedList,
+    as_id_list,
+    fetch_many,
+    fetched_summary,
+)
 
 kipo_kipris_mcp = FastMCP("KIPO — KIPRIS Plus")
 
@@ -62,8 +64,6 @@ _KIPO_ATTRIBUTION = (
     "Source: Korean Intellectual Property Office (KIPO), via KIPRIS "
     "Plus operated by KIPI. Per-user API key required by ToS §11."
 )
-
-_KIPO_FANOUT_CONCURRENCY = 5
 
 
 def _kipo_tool(func: Callable[..., Any]) -> Callable[..., Any]:
@@ -84,6 +84,25 @@ def _kipo_provenance(service: str, operation: str) -> Any:
         source_url=f"{_KIPRIS_BASE_URL}/{service}/{operation}",
         source_name=_KIPO_ATTRIBUTION,
     )
+
+
+async def _fetch_rows(
+    value: str | list[str],
+    numbers: list[str],
+    method_name: str,
+    row_cls: type[Any],
+) -> tuple[list[Any], list[str]]:
+    """Fetch each number serially (ToS §11 quota); an empty hit list means not found."""
+    async with KiprisClient() as client:
+
+        async def fetch_one(num: str) -> list[Any] | None:
+            items, _ = await getattr(client, method_name)(num)
+            return _validate_raw_items(items, row_cls) or None
+
+        found, not_found = await fetch_many(
+            numbers, fetch_one, single=isinstance(value, str), concurrency=1
+        )
+    return [row for rows in found for row in rows], not_found
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -289,14 +308,14 @@ async def get_kipo_patent(
     application_number: Annotated[
         str | list[str],
         "KIPO application or publication number (digits-only), or a list "
-        f"(capped at {LIST_ACCEPT_CAP}) for portfolio workflows. Fan-out "
+        f"(capped at {LIST_CAP}) for portfolio workflows. Fan-out "
         "is serial — KIPRIS has no batch endpoint.",
     ],
     full: Annotated[
         bool,
         "When True, return full upstream rows (default lean).",
     ] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch a single KIPO patent / utility model by application or publication number.
 
     Accepts a single number or a list (capped at 50 per spec §6).
@@ -308,30 +327,24 @@ async def get_kipo_patent(
     requirement; prefer KIPO only for KR-language full text, prosecution
     depth, or utility models.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
+    numbers = as_id_list(application_number, noun="application number")
+    all_rows, not_found = await _fetch_rows(
+        application_number, numbers, "get_patent", PatentUtilityRow
     )
-    if not numbers:
-        raise ValidationError("get_kipo_patent requires at least one application_number")
-    if len(numbers) > LIST_ACCEPT_CAP:
-        raise ValidationError(
-            f"get_kipo_patent capped at {LIST_ACCEPT_CAP} numbers per call "
-            f"(received {len(numbers)})"
-        )
-
-    all_rows: list[PatentUtilityRow] = []
-    async with KiprisClient() as client:
-        for num in numbers:
-            items, _ = await client.get_patent(num)
-            all_rows.extend(_validate_raw_items(items, PatentUtilityRow))
 
     out = (
         [dump(r, by_alias=True) for r in all_rows] if full else [_lean_patent(r) for r in all_rows]
     )
-    summary = f"Fetched {len(out)} KIPO patent/UM record(s) for {len(numbers)} number(s)."
-    return ListEnvelope[dict](
+    if len(numbers) == 1:
+        summary = f"Fetched {len(out)} KIPO patent/UM record(s) for {len(numbers)} number(s)."
+    else:
+        summary = fetched_summary(
+            len(numbers) - len(not_found), len(numbers), "KIPO patent/UM records", not_found
+        )
+    return FetchedList[dict](
         summary=summary,
         items=out,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_kipo_provenance(_PAT_UTL_SERVICE, "getAdvancedSearch"),
@@ -430,41 +443,35 @@ async def get_kipo_trademark(
     application_number: Annotated[
         str | list[str],
         "KIPO trademark application or registration number (digits-only), "
-        f"or a list (capped at {LIST_ACCEPT_CAP}). Fan-out is serial — "
+        f"or a list (capped at {LIST_CAP}). Fan-out is serial — "
         "KIPRIS has no batch endpoint.",
     ],
     full: Annotated[bool, "When True, return full upstream rows (default lean)."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch a single KIPO trademark by application or registration number.
 
     Accepts a single number or a list (capped at 50).
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
+    numbers = as_id_list(application_number, noun="application number")
+    all_rows, not_found = await _fetch_rows(
+        application_number, numbers, "get_trademark", TrademarkRow
     )
-    if not numbers:
-        raise ValidationError("get_kipo_trademark requires at least one application_number")
-    if len(numbers) > LIST_ACCEPT_CAP:
-        raise ValidationError(
-            f"get_kipo_trademark capped at {LIST_ACCEPT_CAP} numbers per call "
-            f"(received {len(numbers)})"
-        )
-
-    all_rows: list[TrademarkRow] = []
-    async with KiprisClient() as client:
-        for num in numbers:
-            items, _ = await client.get_trademark(num)
-            all_rows.extend(_validate_raw_items(items, TrademarkRow))
 
     out = (
         [dump(r, by_alias=True) for r in all_rows]
         if full
         else [_lean_trademark(r) for r in all_rows]
     )
-    summary = f"Fetched {len(out)} KIPO trademark record(s) for {len(numbers)} number(s)."
-    return ListEnvelope[dict](
+    if len(numbers) == 1:
+        summary = f"Fetched {len(out)} KIPO trademark record(s) for {len(numbers)} number(s)."
+    else:
+        summary = fetched_summary(
+            len(numbers) - len(not_found), len(numbers), "KIPO trademarks", not_found
+        )
+    return FetchedList[dict](
         summary=summary,
         items=out,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_kipo_provenance(_TM_SERVICE, "getAdvancedSearch"),
@@ -563,49 +570,36 @@ async def get_kipo_design(
     application_number: Annotated[
         str | list[str],
         "KIPO design application or registration number (digits-only), "
-        f"or a list (capped at {LIST_ACCEPT_CAP}). Fan-out is serial — "
+        f"or a list (capped at {LIST_CAP}). Fan-out is serial — "
         "KIPRIS has no batch endpoint.",
     ],
     full: Annotated[bool, "When True, return full upstream rows (default lean)."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch a single KIPO design by application or registration number.
 
     Accepts a single number or a list (capped at 50). Always includes
     the ``drawing`` image URL field.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_kipo_design requires at least one application_number")
-    if len(numbers) > LIST_ACCEPT_CAP:
-        raise ValidationError(
-            f"get_kipo_design capped at {LIST_ACCEPT_CAP} numbers per call "
-            f"(received {len(numbers)})"
-        )
-
-    all_rows: list[DesignRow] = []
-    async with KiprisClient() as client:
-        for num in numbers:
-            items, _ = await client.get_design(num)
-            all_rows.extend(_validate_raw_items(items, DesignRow))
+    numbers = as_id_list(application_number, noun="application number")
+    all_rows, not_found = await _fetch_rows(application_number, numbers, "get_design", DesignRow)
 
     out = (
         [dump(r, by_alias=True) for r in all_rows] if full else [_lean_design(r) for r in all_rows]
     )
-    summary = f"Fetched {len(out)} KIPO design record(s) for {len(numbers)} number(s)."
-    return ListEnvelope[dict](
+    if len(numbers) == 1:
+        summary = f"Fetched {len(out)} KIPO design record(s) for {len(numbers)} number(s)."
+    else:
+        summary = fetched_summary(
+            len(numbers) - len(not_found), len(numbers), "KIPO designs", not_found
+        )
+    return FetchedList[dict](
         summary=summary,
         items=out,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_kipo_provenance(_DESIGN_SERVICE, "getAdvancedSearch"),
     )
-
-
-# Silence unused-import lints — re-exported for downstream callers and
-# kept available in module namespace for tests.
-_ = asyncio  # noqa: F841
 
 
 __all__ = ["kipo_kipris_mcp"]

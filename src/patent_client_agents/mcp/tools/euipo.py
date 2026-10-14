@@ -13,18 +13,17 @@ ID documents to ``docs.apiplatform@euipo.europa.eu``.
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.euipo_designs import EuipoDesignsClient
 from patent_client_agents.euipo_trademarks import EuipoTrademarksClient
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 euipo_mcp = FastMCP("EUIPO")
 
@@ -124,9 +123,6 @@ def _summarize_euipo_design(record: dict) -> str:
     return f"{head}\n{line}"
 
 
-_EUIPO_FANOUT_CONCURRENCY = 5
-
-
 # ---------------------------------------------------------------------------
 # Trademarks
 # ---------------------------------------------------------------------------
@@ -203,7 +199,7 @@ async def get_euipo_trademark(
             "portfolio workflows; the response shape stays a ListEnvelope."
         ),
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get full European Union trademark records by EUTM application number.
 
     Accepts either a single application number or a list (§5.4) and fans
@@ -215,32 +211,29 @@ async def get_euipo_trademark(
 
     Related tools: search_euipo_trademarks, get_euipo_design.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_euipo_trademark requires at least one application_number")
+    numbers = as_id_list(application_number, noun="EUIPO trademark application number")
 
-    semaphore = asyncio.Semaphore(_EUIPO_FANOUT_CONCURRENCY)
+    async with EuipoTrademarksClient() as client:
 
-    async def _fetch_one(client: EuipoTrademarksClient, appno: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(appno: str) -> dict:
             record = await client.get_trademark(appno)
             return dump(record, by_alias=True)  # type: ignore[return-value]
 
-    async with EuipoTrademarksClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
 
-    if len(results) == 1:
+    if len(numbers) == 1:
         summary = _summarize_euipo_trademark(results[0])
         path = f"/trademark-search/trademarks/{numbers[0]}"
     else:
-        summary = f"Fetched {len(results)} EUIPO trademarks: {', '.join(numbers)}."
+        summary = fetched_summary(len(results), len(numbers), "EUIPO trademarks", not_found)
         path = "/trademark-search/trademarks"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_euipo_provenance(path),
     )
 
@@ -316,7 +309,7 @@ async def get_euipo_design(
             "ListEnvelope."
         ),
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get full Registered Community Design records by design number.
 
     Accepts either a single design number or a list (§5.4) and fans out
@@ -328,30 +321,29 @@ async def get_euipo_design(
 
     Related tools: search_euipo_designs, get_euipo_trademark.
     """
-    numbers = [design_number] if isinstance(design_number, str) else list(design_number)
-    if not numbers:
-        raise ValidationError("get_euipo_design requires at least one design_number")
+    numbers = as_id_list(design_number, noun="EUIPO design number")
 
-    semaphore = asyncio.Semaphore(_EUIPO_FANOUT_CONCURRENCY)
+    async with EuipoDesignsClient() as client:
 
-    async def _fetch_one(client: EuipoDesignsClient, dno: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(dno: str) -> dict:
             record = await client.get_design(dno)
             return dump(record, by_alias=True)  # type: ignore[return-value]
 
-    async with EuipoDesignsClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(design_number, str)
+        )
 
-    if len(results) == 1:
+    if len(numbers) == 1:
         summary = _summarize_euipo_design(results[0])
         path = f"/design-search/designs/{numbers[0]}"
     else:
-        summary = f"Fetched {len(results)} EUIPO designs: {', '.join(numbers)}."
+        summary = fetched_summary(len(results), len(numbers), "EUIPO designs", not_found)
         path = "/design-search/designs"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_euipo_provenance(path),
     )
 

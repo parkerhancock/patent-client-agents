@@ -2,17 +2,15 @@
 
 from __future__ import annotations
 
-import asyncio
 from collections.abc import Awaitable, Callable
 from typing import Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.envelope import make_provenance
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_resource, conditional_tool
-from patent_client_agents.oepm_spain.client import BASE_URL, LIST_ACCEPT_CAP, OepmSpainClient
+from patent_client_agents.oepm_spain.client import BASE_URL, OepmSpainClient
 from patent_client_agents.oepm_spain.models import (
     OepmDesignRecord,
     OepmPatentRecord,
@@ -20,6 +18,7 @@ from patent_client_agents.oepm_spain.models import (
 )
 from patent_client_agents.oepm_spain.resources import USAGE
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 oepm_spain_mcp = FastMCP("Spain OEPM CEO register")
 _REQUIRED_ENV = ["OEPM_CEO_USERNAME", "OEPM_CEO_PASSWORD"]
@@ -27,7 +26,6 @@ _SOURCE_NAME = (
     "Oficina Espanola de Patentes y Marcas (OEPM), CEO web service. "
     "Tested against the public WSDL with synthetic fixtures; live account compatibility unverified."
 )
-_FANOUT_CONCURRENCY = 5
 
 
 def _provenance() -> Any:
@@ -93,40 +91,30 @@ def _lean_design(record: OepmDesignRecord) -> dict[str, Any]:
     }
 
 
-def _identifiers(value: str | list[str]) -> list[str]:
-    values = [value] if isinstance(value, str) else list(value)
-    if not values or any(not identifier.strip() for identifier in values):
-        raise ValidationError("At least one non-empty OEPM file number is required")
-    if len(values) > LIST_ACCEPT_CAP:
-        raise ValidationError(f"A maximum of {LIST_ACCEPT_CAP} OEPM file numbers is allowed")
-    return values
-
-
 async def _fetch(
     values: str | list[str],
     method_name: str,
     lean: Callable[[Any], dict[str, Any]],
     label: str,
     full: bool,
-) -> ListEnvelope[dict]:
-    identifiers = _identifiers(values)
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+) -> FetchedList[dict]:
+    identifiers = as_id_list(values, noun="OEPM file number")
     async with OepmSpainClient() as client:
         method: Callable[[str], Awaitable[Any]] = getattr(client, method_name)
-
-        async def one(identifier: str) -> Any:
-            async with semaphore:
-                return await method(identifier)
-
-        records = await asyncio.gather(*(one(identifier) for identifier in identifiers))
+        records, not_found = await fetch_many(identifiers, method, single=isinstance(values, str))
     items = (
         [dump(record, mode="json") for record in records]
         if full
         else [lean(record) for record in records]
     )
-    return ListEnvelope(
-        summary=f"OEPM {label} fetch: {len(items)} records. Public-WSDL tested only.",
+    if len(identifiers) == 1:
+        summary = f"OEPM {label} fetch: {len(items)} records. Public-WSDL tested only."
+    else:
+        summary = fetched_summary(len(items), len(identifiers), f"OEPM {label} files", not_found)
+    return FetchedList[dict](
+        summary=summary,
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(),
@@ -146,7 +134,7 @@ async def oepm_spain_usage() -> str:
 
 
 @conditional_tool(oepm_spain_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_oepm_patent(file_number: str | list[str], full: bool = False) -> ListEnvelope[dict]:
+async def get_oepm_patent(file_number: str | list[str], full: bool = False) -> FetchedList[dict]:
     """Fetch Spanish patent, utility-model, or related invention files by exact number.
 
     Related tools: get_oepm_trademark, get_oepm_design.
@@ -155,9 +143,7 @@ async def get_oepm_patent(file_number: str | list[str], full: bool = False) -> L
 
 
 @conditional_tool(oepm_spain_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_oepm_trademark(
-    file_number: str | list[str], full: bool = False
-) -> ListEnvelope[dict]:
+async def get_oepm_trademark(file_number: str | list[str], full: bool = False) -> FetchedList[dict]:
     """Fetch Spanish trademark or trade-name files by exact number.
 
     Related tools: get_oepm_patent, get_oepm_design.
@@ -166,7 +152,7 @@ async def get_oepm_trademark(
 
 
 @conditional_tool(oepm_spain_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_oepm_design(file_number: str | list[str], full: bool = False) -> ListEnvelope[dict]:
+async def get_oepm_design(file_number: str | list[str], full: bool = False) -> FetchedList[dict]:
     """Fetch Spanish industrial-design files by exact number.
 
     Related tools: get_oepm_patent, get_oepm_trademark.

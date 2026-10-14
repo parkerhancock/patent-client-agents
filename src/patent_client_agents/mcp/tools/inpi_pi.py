@@ -30,12 +30,12 @@ from typing import Annotated, Any
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.inpi_pi import InpiPiClient
 from patent_client_agents.inpi_pi.models import InpiDesignRow, InpiTrademarkRow
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 inpi_pi_mcp = FastMCP("INPI-PI")
 
@@ -208,35 +208,43 @@ async def get_inpi_trademark(
             "projection."
         ),
     ] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch full FR national trademark record(s) by application number.
 
     ST.66 v1.0 bibliographic record. List-accept per §5.4 (cap 50).
     Related: ``search_inpi_trademarks``, ``get_euipo_trademark`` for
     EUTM coverage of FR-designated marks.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_inpi_trademark requires at least one application_number")
+    numbers = as_id_list(application_number, noun="INPI application number")
 
     async with InpiPiClient() as client:
-        rows = await client.get_trademark(numbers)
+
+        async def fetch_one(appno: str) -> InpiTrademarkRow | None:
+            rows = await client.get_trademark(appno)
+            return rows[0] if rows else None
+
+        # Serial: the client's 10 req/min throttle paces every call anyway.
+        rows, not_found = await fetch_many(
+            numbers, fetch_one, single=isinstance(application_number, str), concurrency=1
+        )
 
     dumped = [dump(row, by_alias=True) for row in rows]
     items = dumped if full else [_project_lean(r, _LEAN_TM_FIELDS) for r in dumped]
 
-    if len(items) == 1:
+    if len(numbers) == 1 and dumped:
         summary = _summarize_tm(dumped[0])
         path = f"/services/apidiffusion/api/marques/{numbers[0]}"
+    elif len(numbers) == 1:
+        summary = f"INPI trademark {numbers[0]} — not found."
+        path = f"/services/apidiffusion/api/marques/{numbers[0]}"
     else:
-        summary = f"Fetched {len(items)} INPI trademarks: {', '.join(numbers)}."
+        summary = fetched_summary(len(items), len(numbers), "INPI trademarks", not_found)
         path = "/services/apidiffusion/api/marques"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_inpi_provenance(path),
     )
 
@@ -322,35 +330,43 @@ async def get_inpi_design(
         bool,
         "When True, return the full ST.86 v1.0 record; default lean projection.",
     ] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch full FR national design record(s) by application number.
 
     ST.86 v1.0 bibliographic record. List-accept per §5.4 (cap 50).
     Related: ``search_inpi_designs``, ``get_euipo_design`` for RCD
     coverage of FR-relevant designs.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_inpi_design requires at least one application_number")
+    numbers = as_id_list(application_number, noun="INPI application number")
 
     async with InpiPiClient() as client:
-        rows = await client.get_design(numbers)
+
+        async def fetch_one(appno: str) -> InpiDesignRow | None:
+            rows = await client.get_design(appno)
+            return rows[0] if rows else None
+
+        # Serial: the client's 10 req/min throttle paces every call anyway.
+        rows, not_found = await fetch_many(
+            numbers, fetch_one, single=isinstance(application_number, str), concurrency=1
+        )
 
     dumped = [dump(row, by_alias=True) for row in rows]
     items = dumped if full else [_project_lean(r, _LEAN_DESIGN_FIELDS) for r in dumped]
 
-    if len(items) == 1:
+    if len(numbers) == 1 and dumped:
         summary = _summarize_design(dumped[0])
         path = f"/services/apidiffusion/api/dessins/{numbers[0]}"
+    elif len(numbers) == 1:
+        summary = f"INPI design {numbers[0]} — not found."
+        path = f"/services/apidiffusion/api/dessins/{numbers[0]}"
     else:
-        summary = f"Fetched {len(items)} INPI designs: {', '.join(numbers)}."
+        summary = fetched_summary(len(items), len(numbers), "INPI designs", not_found)
         path = "/services/apidiffusion/api/dessins"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_inpi_provenance(path),
     )
 

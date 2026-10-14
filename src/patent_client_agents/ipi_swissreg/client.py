@@ -39,7 +39,6 @@ TOKEN_URL = "https://idp.ipi.ch/auth/realms/egov/protocol/openid-connect/token"
 TOKEN_CLIENT_ID = "datadelivery-api-client"
 CORE_NS = "urn:ige:schema:xsd:datadeliverycore-1.0.0"
 COMMON_NS = "urn:ige:schema:xsd:datadeliverycommon-1.0.0"
-LIST_ACCEPT_CAP = 50
 MAX_PAGE_SIZE = 64
 _SIGNUP_URL = "https://www.ige.ch/en/services/digital-resources/ip-data/data-delivery-api"
 

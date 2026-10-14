@@ -16,7 +16,7 @@ import pytest
 from pydantic import BaseModel, ConfigDict
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.mcp.tools.euipo import (
     get_euipo_design,
     search_euipo_designs,
@@ -183,10 +183,38 @@ async def test_get_euipo_design_list_preserves_order():
     assert isinstance(result, ListEnvelope)
     assert [r["designNumber"] for r in result.items] == numbers
     assert result.provenance.source_url.endswith("/design-search/designs")
-    assert "Fetched 3 EUIPO designs" in result.summary
+    assert result.summary == "Fetched 3 of 3 EUIPO designs."
 
 
 @pytest.mark.asyncio
 async def test_get_euipo_design_empty_list_raises():
     with pytest.raises(ValidationError, match="at least one"):
         await get_euipo_design(design_number=[])
+
+
+@pytest.mark.asyncio
+async def test_get_euipo_design_list_reports_not_found():
+    async def fetch_one(number: str) -> _FakeModel:
+        if number == "099037115-0002":
+            raise NotFoundError("missing", 404, "")
+        return _make_detail(number)
+
+    with patch("patent_client_agents.mcp.tools.euipo.EuipoDesignsClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_design = AsyncMock(side_effect=fetch_one)
+
+        result = await get_euipo_design(design_number=["099037115-0001", "099037115-0002"])
+
+    assert len(result.items) == 1
+    assert result.not_found == ["099037115-0002"]
+    assert result.summary == "Fetched 1 of 2 EUIPO designs. Not found: 099037115-0002."
+
+
+@pytest.mark.asyncio
+async def test_get_euipo_design_single_not_found_raises():
+    with patch("patent_client_agents.mcp.tools.euipo.EuipoDesignsClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_design = AsyncMock(side_effect=NotFoundError("missing", 404, ""))
+
+        with pytest.raises(NotFoundError):
+            await get_euipo_design(design_number="099037115-0002")

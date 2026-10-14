@@ -16,7 +16,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.mcp.tools.ip_australia_patents import (
     get_ipa_patent,
     search_ipa_patents,
@@ -179,10 +179,42 @@ async def test_get_ipa_patent_list_preserves_order():
     assert [r["applicationNumber"] for r in result.items] == numbers
     # Multi-fetch points provenance at the collection URL.
     assert result.provenance.source_url.endswith("/public/australian-patent-search-api/v1/patent")
-    assert "Fetched 3 Australian patents" in result.summary
+    assert result.summary == "Fetched 3 of 3 Australian patents."
 
 
 @pytest.mark.asyncio
 async def test_get_ipa_patent_empty_list_raises():
     with pytest.raises(ValidationError, match="at least one"):
         await get_ipa_patent(application_number=[])
+
+
+@pytest.mark.asyncio
+async def test_get_ipa_patent_list_reports_not_found():
+    async def fetch_one(number: str) -> _FakeModel:
+        if number == "2019204206":
+            raise NotFoundError("missing", 404, "")
+        return _make_detail(number)
+
+    with patch(
+        "patent_client_agents.mcp.tools.ip_australia_patents.IpAustraliaPatentsClient"
+    ) as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_patent = AsyncMock(side_effect=fetch_one)
+
+        result = await get_ipa_patent(application_number=["2019204205", "2019204206"])
+
+    assert len(result.items) == 1
+    assert result.not_found == ["2019204206"]
+    assert result.summary == "Fetched 1 of 2 Australian patents. Not found: 2019204206."
+
+
+@pytest.mark.asyncio
+async def test_get_ipa_patent_single_not_found_raises():
+    with patch(
+        "patent_client_agents.mcp.tools.ip_australia_patents.IpAustraliaPatentsClient"
+    ) as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_patent = AsyncMock(side_effect=NotFoundError("missing", 404, ""))
+
+        with pytest.raises(NotFoundError):
+            await get_ipa_patent(application_number="2019204206")

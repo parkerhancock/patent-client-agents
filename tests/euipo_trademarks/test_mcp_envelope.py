@@ -16,7 +16,7 @@ import pytest
 from pydantic import BaseModel, ConfigDict
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.mcp.tools.euipo import (
     get_euipo_trademark,
     search_euipo_trademarks,
@@ -190,10 +190,38 @@ async def test_get_euipo_trademark_list_preserves_order():
     assert [r["applicationNumber"] for r in result.items] == appnos
     # Multi-call provenance should point at the collection, not a single record.
     assert result.provenance.source_url.endswith("/trademark-search/trademarks")
-    assert "Fetched 3 EUIPO trademarks" in result.summary
+    assert result.summary == "Fetched 3 of 3 EUIPO trademarks."
 
 
 @pytest.mark.asyncio
 async def test_get_euipo_trademark_empty_list_raises():
     with pytest.raises(ValidationError, match="at least one"):
         await get_euipo_trademark(application_number=[])
+
+
+@pytest.mark.asyncio
+async def test_get_euipo_trademark_list_reports_not_found():
+    async def fetch_one(number: str) -> _FakeModel:
+        if number == "000274085":
+            raise NotFoundError("missing", 404, "")
+        return _make_detail(number)
+
+    with patch("patent_client_agents.mcp.tools.euipo.EuipoTrademarksClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_trademark = AsyncMock(side_effect=fetch_one)
+
+        result = await get_euipo_trademark(application_number=["000274084", "000274085"])
+
+    assert len(result.items) == 1
+    assert result.not_found == ["000274085"]
+    assert result.summary == "Fetched 1 of 2 EUIPO trademarks. Not found: 000274085."
+
+
+@pytest.mark.asyncio
+async def test_get_euipo_trademark_single_not_found_raises():
+    with patch("patent_client_agents.mcp.tools.euipo.EuipoTrademarksClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_trademark = AsyncMock(side_effect=NotFoundError("missing", 404, ""))
+
+        with pytest.raises(NotFoundError):
+            await get_euipo_trademark(application_number="000274085")
