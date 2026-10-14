@@ -81,7 +81,18 @@ class TestSearch:
         async with MpppClient() as c:
             r = await c.search("section", sort="outline")
         nums = [h.section_number for h in r.hits]
-        assert nums == sorted(nums)
+        assert nums == [
+            "03.04",
+            "04.05",
+            "04.05.01",
+            "04.05.02",
+            "04.06",
+            "05.03",
+            "05.04",
+            "06.02",
+            "07.02",
+            "08.04",
+        ]
 
     async def test_pagination(self) -> None:
         async with MpppClient() as c:

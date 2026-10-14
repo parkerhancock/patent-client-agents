@@ -140,8 +140,14 @@ class TestSearch:
 
     async def test_outline_sort(self) -> None:
         async with DpmaStatutesClient() as c:
-            r = await c.search("Erfindung", sort="outline", per_page=5)
-        assert r.hits
+            r = await c.search("oder", sort="outline", per_page=5)
+        # Ordered by (statute, section); relevance order differs for this query.
+        assert [(h.statute, h.section) for h in r.hits] == [
+            ("DesignG", "1"),
+            ("GeschGehG", "2"),
+            ("PatG", "3"),
+            ("UrhG", "97"),
+        ]
 
     async def test_empty_query_returns_empty(self) -> None:
         async with DpmaStatutesClient() as c:

@@ -75,9 +75,9 @@ async def test_search_with_pagination_params() -> None:
 
 @pytest.mark.asyncio
 async def test_search_with_sort_outline() -> None:
-    response = await search(SearchInput(query="patente", sort="outline"))
+    response = await search(SearchInput(query="utilidade", sort="outline"))
     # Order by article_number (string sort, so "Art. 10" sorts before "Art. 6").
-    assert response.hits
+    assert [h.article_number for h in response.hits] == ["Art. 10", "Art. 6"]
 
 
 @pytest.mark.asyncio

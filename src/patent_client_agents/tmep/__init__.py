@@ -49,8 +49,9 @@ class CorpusStatus(TypedDict):
     refreshed from upstream (parsed from the corpus ``meta.snapshot_date``).
     ``corpus_version`` mirrors the vendor's version label as recorded in
     ``meta.source_version`` — for TMEP that is the eTMEP ``version=`` query
-    parameter the scraper passed to ``tmep.uspto.gov/RDMS/TMEP/content``
-    (typically ``"current"``). When the corpus is unbundled or unreadable
+    parameter the scraper passed to ``tmep.uspto.gov/RDMS/TMEP/content``.
+    ``"current"`` is a moving label, not a version, so it reports as
+    ``"unknown"`` like MPEP. When the corpus is unbundled or unreadable
     the version falls back to ``"unknown"`` and the sync timestamp to
     ``None`` — we never fabricate values.
     """
@@ -92,6 +93,8 @@ def get_corpus_status() -> CorpusStatus:
         return CorpusStatus(corpus_synced_at=None, corpus_version="unknown")
 
     version = meta.get("source_version") or "unknown"
+    if version == "current":
+        version = "unknown"
     snapshot_raw = meta.get("snapshot_date")
     return CorpusStatus(
         corpus_synced_at=_parse_snapshot_date(snapshot_raw),

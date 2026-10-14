@@ -134,7 +134,8 @@ def _split_articles(text: str, pattern: re.Pattern[str]) -> dict[str, str]:
 
 def _title_from_body(body: str, *, max_chars: int = 120) -> str:
     """Pull a one-line title from the first sentence-ish chunk of a body."""
-    first = re.split(r"(?<=[.;])\s", body, maxsplit=1)[0]
+    # Don't end the sentence at the period in the "Art." heading.
+    first = re.split(r"(?<=[.;])(?<!Art\.)\s", body, maxsplit=1)[0]
     if len(first) > max_chars:
         first = first[: max_chars - 1].rstrip() + "…"
     return first
