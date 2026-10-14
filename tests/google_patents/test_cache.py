@@ -59,12 +59,9 @@ class TestPatentCache:
 
     def test_set_and_get(self, temp_cache: PatentCache) -> None:
         url = "https://patents.google.com/patent/US10123456"
-        html = "<html>Test content</html>"
-        temp_cache.set(url, html, 200)
-        result = temp_cache.get(url)
-        assert result is not None
-        assert result[0] == html
-        assert result[1] == 200
+        html = b"<html>Test content</html>"
+        temp_cache.set(url, html, 200, "text/html; charset=utf-8")
+        assert temp_cache.get(url) == (html, 200, "text/html; charset=utf-8")
 
     def test_get_returns_none_for_missing(self, temp_cache: PatentCache) -> None:
         result = temp_cache.get("https://example.com/not-cached")
@@ -72,18 +69,18 @@ class TestPatentCache:
 
     def test_set_overwrites_existing(self, temp_cache: PatentCache) -> None:
         url = "https://example.com/test"
-        temp_cache.set(url, "old content", 200)
-        temp_cache.set(url, "new content", 200)
+        temp_cache.set(url, b"old content", 200)
+        temp_cache.set(url, b"new content", 200)
         result = temp_cache.get(url)
         assert result is not None
-        assert result[0] == "new content"
+        assert result[0] == b"new content"
 
     def test_expired_entries_deleted(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             db_path = Path(tmp_dir) / "expired_cache.db"
             cache = PatentCache(db_path, ttl_seconds=1)
             url = "https://example.com/expires"
-            cache.set(url, "content", 200)
+            cache.set(url, b"content", 200)
             time.sleep(1.1)
             result = cache.get(url)
             assert result is None
@@ -150,12 +147,12 @@ class TestCachingAsyncClient:
             assert response.status_code == 200
             cached = temp_cache.get(url)
             assert cached is not None
-            assert cached[0] == "<html>Mocked response</html>"
+            assert cached[0] == b"<html>Mocked response</html>"
 
     @pytest.mark.asyncio
     async def test_get_returns_cached_response(self, temp_cache: PatentCache) -> None:
         url = "https://patents.google.com/patent/US10123456"
-        temp_cache.set(url, "<html>Cached content</html>", 200)
+        temp_cache.set(url, b"<html>Cached content</html>", 200, "text/html; charset=utf-8")
 
         call_count = 0
 
@@ -172,6 +169,28 @@ class TestCachingAsyncClient:
             assert response.status_code == 200
             assert response.text == "<html>Cached content</html>"
             assert call_count == 0
+
+    @pytest.mark.asyncio
+    async def test_cached_pdf_keeps_its_bytes_and_content_type(
+        self, temp_cache: PatentCache
+    ) -> None:
+        pdf = b"%PDF-1.4\n\xe2\xe3\xcf\xd3\n1 0 obj\n\xff\xfe\x00binary"
+        calls = 0
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            nonlocal calls
+            calls += 1
+            return httpx.Response(200, content=pdf, headers={"content-type": "application/pdf"})
+
+        url = "https://patentimages.storage.googleapis.com/x/US10123456.pdf"
+        for _ in range(2):
+            async with CachingAsyncClient(
+                cache=temp_cache, transport=httpx.MockTransport(handler)
+            ) as client:
+                response = await client.get(url)
+            assert response.content == pdf
+            assert response.headers["content-type"] == "application/pdf"
+        assert calls == 1
 
     @pytest.mark.asyncio
     async def test_get_without_cache(self) -> None:
