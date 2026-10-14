@@ -342,8 +342,11 @@ class FeeSchedule(BaseModel):
     )
     right: RightType
     currency: str = Field(min_length=3, max_length=3)
-    effective_date: date = Field(
-        description="Date the schedule became (or becomes) the operative fee table.",
+    effective_date: date | None = Field(
+        description=(
+            "Date the schedule became (or becomes) the operative fee table, as published "
+            "by the office. None when the office publishes no effective date for it."
+        ),
     )
     source_url: str = Field(description="Canonical upstream URL for the schedule.")
     statutory_basis: str | None = Field(
@@ -415,7 +418,7 @@ class JurisdictionMeta(BaseModel):
     issuing_body: str
     right: RightType
     currency: str
-    effective_date: date
+    effective_date: date | None
     retrieved_at: date | None
     source_url: str
     fee_count: NonNegativeInt

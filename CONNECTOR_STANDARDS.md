@@ -75,7 +75,8 @@ Madrid / Hague, TIPO, INPI BR, INPI FR.
 
 The contract:
 - Every response carries access-time provenance plus `effective_date` —
-  the schedule's most-recent revision date. See §3a.
+  the schedule's most-recent revision date, or null with an `as_of_status`
+  note when the office publishes none. See §3a.
 - `retrieved_at` and `effective_date` are distinct: the schedule may
   have been effective for months before our cache last refreshed.
 - Live proxy with a 7-day hishel TTL; the upstream office page is the
@@ -83,8 +84,8 @@ The contract:
   because (a) the surface is small enough to live-fetch and (b) stale
   fees quoted to clients is a malpractice failure mode that bundling
   amplifies.
-- CI enforces that every fees-category response carries
-  `effective_date` in the envelope's Provenance.
+- CI enforces that every fees-category response sets `effective_date` in
+  the envelope's Provenance from the schedule.
 
 **Coverage targets.** The top 30 patent offices by 2023 filing volume (WIPO
 IP Statistics Data Center) are the priority list:
@@ -201,7 +202,7 @@ Every `fees` response carries the base fields above plus:
 
 | Field | Meaning |
 |---|---|
-| `effective_date` | The schedule's most-recent revision date as published by the office. Distinct from `retrieved_at` — the schedule may have been effective for months before our cache last refreshed. Required on every fees response; CI enforces. |
+| `effective_date` | The schedule's most-recent revision date as published by the office. Distinct from `retrieved_at` — the schedule may have been effective for months before our cache last refreshed. Set on every fees response; CI enforces. When the office publishes no effective date (CNIPA, DPMA, EPO and EUIPO trademarks today), it is null and `as_of_status` reads "effective date not published by the office". Never substitute the fetch date. |
 
 Optional but encouraged:
 

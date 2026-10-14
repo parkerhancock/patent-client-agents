@@ -240,3 +240,25 @@ async def test_empty_lookup_distinguishes_recurring_coverage(
     assert envelope.items == []
     assert "No matching fees found." in envelope.summary
     assert expected in envelope.summary
+
+
+@pytest.mark.asyncio
+async def test_unpublished_effective_date_is_reported_as_unknown_not_as_today() -> None:
+    """Offices that publish no effective date (CNIPA, DPMA, EPO, EUIPO TM) leave it
+    unset, and the response says so instead of quoting the fetch date."""
+    schedule = _synthetic_schedule().model_copy(update={"effective_date": None})
+
+    async def _fake_scraper() -> FeeSchedule:
+        return schedule
+
+    with patch.dict(registry._DISPATCH, {("USPTO", RightType.patent): _fake_scraper}):
+        envelope = await get_fee_schedule(jurisdiction="USPTO", right="patent")
+        lookup = await lookup_fee(jurisdiction="USPTO", category="filing", right="patent")
+
+    for result in (envelope, lookup):
+        assert result.provenance.effective_date is None
+        assert "effective date not published by the office" in (
+            result.provenance.as_of_status or ""
+        )
+        assert "effective date not published by the office" in result.summary
+        assert date.today().isoformat() not in result.summary

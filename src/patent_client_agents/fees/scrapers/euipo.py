@@ -266,7 +266,7 @@ async def scrape_euipo_trademarks() -> FeeSchedule:
         office_code="EUIPO",
         right=RightType.trademark,
         currency="EUR",
-        effective_date=date.today(),  # EUIPO page does not expose a per-revision date
+        effective_date=None,  # EUIPO page does not expose a per-revision date
         source_url=EUIPO_TM_URL,
         statutory_basis="EU Trade Mark Regulation (EUTMR) Annex I; Articles 31(2), 46(3), 53(3), 68(1), 104(3)",
         retrieved_at=date.today(),
