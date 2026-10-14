@@ -36,7 +36,6 @@ from .models import (
 PRODUCTION_BASE_URL = "https://api.business.govt.nz/gateway/intellectual-property-office-nz/v5"
 SANDBOX_BASE_URL = "https://api.business.govt.nz/sandbox/intellectual-property-office-nz/v5"
 PORTAL_URL = "https://portal.api.business.govt.nz/api/iponz"
-LIST_ACCEPT_CAP = 50
 MAX_LIST_RESULTS = 2000
 
 IponzEnvironment = Literal["production", "sandbox"]

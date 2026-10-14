@@ -20,7 +20,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.mcp.tools.canlii import (
     get_canlii_case,
     get_canlii_cited_cases,
@@ -264,12 +264,39 @@ async def test_get_canlii_case_list_preserves_order():
 
     assert isinstance(result, ListEnvelope)
     assert [r["case_id"] for r in result.items] == ids
-    # Multi-record summary lists the IDs.
-    assert "Fetched 3" in result.summary
-    for cid in ids:
-        assert cid in result.summary
+    assert result.summary == "Fetched 3 of 3 CanLII cases from `csc-scc` (en)."
     # Multi-record path is the database root, not a specific case.
     assert result.provenance.source_url.endswith("/v1/caseBrowse/en/csc-scc/")
+
+
+@pytest.mark.asyncio
+async def test_get_canlii_case_list_reports_not_found():
+    async def get_case(**kwargs: Any) -> _FakeModel:
+        if kwargs["case_id"] == "1999missing":
+            raise NotFoundError("missing", 404, "")
+        return _make_case_metadata(kwargs["case_id"])
+
+    with patch("patent_client_agents.mcp.tools.canlii.CanLIIClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_case = AsyncMock(side_effect=get_case)
+
+        result = await get_canlii_case(database_id="csc-scc", case_id=["2008scc9", "1999missing"])
+
+    assert [r["case_id"] for r in result.items] == ["2008scc9"]
+    assert result.not_found == ["1999missing"]
+    assert result.summary == (
+        "Fetched 1 of 2 CanLII cases from `csc-scc` (en). Not found: 1999missing."
+    )
+
+
+@pytest.mark.asyncio
+async def test_get_canlii_case_single_not_found_raises():
+    with patch("patent_client_agents.mcp.tools.canlii.CanLIIClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_case = AsyncMock(side_effect=NotFoundError("missing", 404, ""))
+
+        with pytest.raises(NotFoundError):
+            await get_canlii_case(database_id="csc-scc", case_id="1999missing")
 
 
 @pytest.mark.asyncio
@@ -416,10 +443,37 @@ async def test_get_canlii_legislation_list_preserves_order():
 
     assert isinstance(result, ListEnvelope)
     assert [r["legislation_id"] for r in result.items] == ids
-    assert "Fetched 3" in result.summary
-    for lid in ids:
-        assert lid in result.summary
+    assert result.summary == "Fetched 3 of 3 CanLII legislation entries from `cas` (en)."
     assert result.provenance.source_url.endswith("/v1/legislationBrowse/en/cas/")
+
+
+@pytest.mark.asyncio
+async def test_get_canlii_legislation_list_reports_not_found():
+    async def get_legislation(**kwargs: Any) -> _FakeModel:
+        if kwargs["legislation_id"] == "missing":
+            raise NotFoundError("missing", 404, "")
+        return _make_legislation_metadata(kwargs["legislation_id"])
+
+    with patch("patent_client_agents.mcp.tools.canlii.CanLIIClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_legislation = AsyncMock(side_effect=get_legislation)
+
+        result = await get_canlii_legislation(
+            database_id="cas", legislation_id=["rsc-1985-c-p-4", "missing"]
+        )
+
+    assert [r["legislation_id"] for r in result.items] == ["rsc-1985-c-p-4"]
+    assert result.not_found == ["missing"]
+
+
+@pytest.mark.asyncio
+async def test_get_canlii_legislation_single_not_found_raises():
+    with patch("patent_client_agents.mcp.tools.canlii.CanLIIClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_legislation = AsyncMock(side_effect=NotFoundError("missing", 404, ""))
+
+        with pytest.raises(NotFoundError):
+            await get_canlii_legislation(database_id="cas", legislation_id="missing")
 
 
 @pytest.mark.asyncio

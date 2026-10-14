@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any, Literal
 from urllib.parse import quote
 
@@ -17,7 +16,6 @@ from patent_client_agents.dpma_register.client import (
     ACCOUNT_RESULT_CAP,
     BASE_URL,
     DESIGN_SERVICE,
-    LIST_ACCEPT_CAP,
     PATENT_SERVICE,
     TRADEMARK_SERVICE,
     DpmaRegisterClient,
@@ -29,6 +27,7 @@ from patent_client_agents.dpma_register.models import (
 )
 from patent_client_agents.dpma_register.resources import USAGE
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 dpma_register_mcp = FastMCP("DPMA Germany, DPMAconnectPlus")
 _REQUIRED_ENV = ["DPMA_CONNECTPLUS_USERNAME", "DPMA_CONNECTPLUS_PASSWORD"]
@@ -36,7 +35,6 @@ _SOURCE_NAME = (
     "German Patent and Trade Mark Office (DPMA), via DPMAconnectPlus. "
     "Mock-only tested; live compatibility unverified."
 )
-_FANOUT_CONCURRENCY = 5
 
 
 def _provenance(service: str, operation: str, value: str) -> Any:
@@ -114,15 +112,6 @@ def _summary(label: str, query: str, shown: int, total: int | None) -> str:
     return f"DPMA {label} search for `{query}`: {count} hits.{cap} Mock-only tested."
 
 
-def _numbers(value: str | list[str]) -> list[str]:
-    values = [value] if isinstance(value, str) else list(value)
-    if not values:
-        raise ValidationError("At least one register number is required")
-    if len(values) > LIST_ACCEPT_CAP:
-        raise ValidationError(f"A maximum of {LIST_ACCEPT_CAP} register numbers is allowed")
-    return values
-
-
 @conditional_resource(
     dpma_register_mcp,
     "pca://dpma-register/usage",
@@ -165,24 +154,30 @@ async def search_dpma_patents(
 @conditional_tool(dpma_register_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_dpma_patent(
     application_number: str | list[str], full: bool = False
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch German patent or utility-model records. Mock-only tested."""
-    numbers = _numbers(application_number)
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
-
+    numbers = as_id_list(application_number, noun="application number")
     async with DpmaRegisterClient() as client:
 
         async def fetch(number: str) -> PatentUtilityRecord:
-            async with semaphore:
-                return await client.get_patent(number)
+            return await client.get_patent(number)
 
-        rows = await asyncio.gather(*(fetch(number) for number in numbers))
+        rows, not_found = await fetch_many(
+            numbers, fetch, single=isinstance(application_number, str)
+        )
     items = (
         [dump(row, mode="json") for row in rows] if full else [_lean_patent(row) for row in rows]
     )
-    return ListEnvelope(
-        summary=f"DPMA patent and utility-model fetch: {len(items)} records. Mock-only tested.",
+    if len(numbers) == 1:
+        summary = f"DPMA patent and utility-model fetch: {len(items)} records. Mock-only tested."
+    else:
+        summary = fetched_summary(
+            len(items), len(numbers), "DPMA patent and utility-model records", not_found
+        )
+    return FetchedList[dict](
+        summary=summary,
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(PATENT_SERVICE, "getRegisterInfo", numbers[0]),
@@ -212,23 +207,28 @@ async def search_dpma_trademarks(
 @conditional_tool(dpma_register_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_dpma_trademark(
     application_number: str | list[str], full: bool = False
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch German national trademark records. Mock-only tested."""
-    numbers = _numbers(application_number)
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+    numbers = as_id_list(application_number, noun="application number")
     async with DpmaRegisterClient() as client:
 
         async def fetch(number: str) -> TrademarkRecord:
-            async with semaphore:
-                return await client.get_trademark(number)
+            return await client.get_trademark(number)
 
-        rows = await asyncio.gather(*(fetch(number) for number in numbers))
+        rows, not_found = await fetch_many(
+            numbers, fetch, single=isinstance(application_number, str)
+        )
     items = (
         [dump(row, mode="json") for row in rows] if full else [_lean_trademark(row) for row in rows]
     )
-    return ListEnvelope(
-        summary=f"DPMA trademark fetch: {len(items)} records. Mock-only tested.",
+    if len(numbers) == 1:
+        summary = f"DPMA trademark fetch: {len(items)} records. Mock-only tested."
+    else:
+        summary = fetched_summary(len(items), len(numbers), "DPMA trademarks", not_found)
+    return FetchedList[dict](
+        summary=summary,
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(TRADEMARK_SERVICE, "getRegisterInfo", numbers[0]),
@@ -256,23 +256,26 @@ async def search_dpma_designs(
 
 
 @conditional_tool(dpma_register_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_dpma_design(design_number: str | list[str], full: bool = False) -> ListEnvelope[dict]:
+async def get_dpma_design(design_number: str | list[str], full: bool = False) -> FetchedList[dict]:
     """Fetch German national design records. Mock-only tested."""
-    numbers = _numbers(design_number)
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+    numbers = as_id_list(design_number, noun="design number")
     async with DpmaRegisterClient() as client:
 
         async def fetch(number: str) -> DesignRecord:
-            async with semaphore:
-                return await client.get_design(number)
+            return await client.get_design(number)
 
-        rows = await asyncio.gather(*(fetch(number) for number in numbers))
+        rows, not_found = await fetch_many(numbers, fetch, single=isinstance(design_number, str))
     items = (
         [dump(row, mode="json") for row in rows] if full else [_lean_design(row) for row in rows]
     )
-    return ListEnvelope(
-        summary=f"DPMA design fetch: {len(items)} records. Mock-only tested.",
+    if len(numbers) == 1:
+        summary = f"DPMA design fetch: {len(items)} records. Mock-only tested."
+    else:
+        summary = fetched_summary(len(items), len(numbers), "DPMA designs", not_found)
+    return FetchedList[dict](
+        summary=summary,
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(DESIGN_SERVICE, "getRegisterInfo", numbers[0]),

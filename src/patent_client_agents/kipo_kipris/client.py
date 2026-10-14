@@ -77,9 +77,6 @@ DESIGN = "designInfoSearchService"
 DEFAULT_NUM_OF_ROWS = 10
 MAX_NUM_OF_ROWS = 1000
 
-# Cap list-accept fan-out per spec §6 to bound latency on serial fetches.
-LIST_ACCEPT_CAP = 50
-
 _SIGNUP_URL = "https://plus.kipris.or.kr/eng/main.do"
 
 
@@ -567,7 +564,6 @@ __all__ = [
     "DESIGN",
     "DesignRow",
     "KiprisClient",
-    "LIST_ACCEPT_CAP",
     "MAX_NUM_OF_ROWS",
     "PAT_UTL",
     "PatentUtilityRow",

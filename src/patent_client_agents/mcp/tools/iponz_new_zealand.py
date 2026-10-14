@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 from collections.abc import Awaitable, Callable
 from datetime import date
 from typing import Any
@@ -15,7 +14,6 @@ from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_resource, conditional_tool
 from patent_client_agents.iponz_new_zealand import api
 from patent_client_agents.iponz_new_zealand.client import (
-    LIST_ACCEPT_CAP,
     MAX_LIST_RESULTS,
     PORTAL_URL,
     PRODUCTION_BASE_URL,
@@ -29,6 +27,7 @@ from patent_client_agents.iponz_new_zealand.models import (
 )
 from patent_client_agents.iponz_new_zealand.resources import USAGE
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 iponz_new_zealand_mcp = FastMCP("New Zealand IPONZ")
 _REQUIRED_ENV = ["IPONZ_SUBSCRIPTION_KEY"]
@@ -36,7 +35,6 @@ _SOURCE_NAME = (
     "Intellectual Property Office of New Zealand (IPONZ) v5 API. "
     "Schema-tested against public OpenAPI and XSD contracts; live subscription unverified."
 )
-_FANOUT_CONCURRENCY = 5
 
 
 def _provenance() -> Any:
@@ -109,15 +107,6 @@ def _lean_summary(record: IponzRegisterSummary) -> dict[str, Any]:
     }
 
 
-def _numbers(value: str | list[str]) -> list[str]:
-    values = [value] if isinstance(value, str) else list(value)
-    if not values or any(not number.strip() for number in values):
-        raise ValidationError("At least one non-empty IPONZ register number is required")
-    if len(values) > LIST_ACCEPT_CAP:
-        raise ValidationError(f"A maximum of {LIST_ACCEPT_CAP} register numbers is allowed")
-    return values
-
-
 def _validate_limit(limit: int) -> None:
     if not 1 <= limit <= MAX_LIST_RESULTS:
         raise ValidationError(f"limit must be between 1 and {MAX_LIST_RESULTS}")
@@ -129,21 +118,20 @@ async def _fetch(
     lean: Callable[[Any], dict[str, Any]],
     label: str,
     full: bool,
-) -> ListEnvelope[dict]:
-    numbers = _numbers(values)
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+) -> FetchedList[dict]:
+    numbers = as_id_list(values, noun=f"IPONZ {label} number")
     async with IponzClient() as client:
         method: Callable[[str], Awaitable[Any]] = getattr(client, method_name)
-
-        async def one(number: str) -> Any:
-            async with semaphore:
-                return await method(number)
-
-        rows = await asyncio.gather(*(one(number) for number in numbers))
+        rows, not_found = await fetch_many(numbers, method, single=isinstance(values, str))
     items = [dump(row, mode="json") for row in rows] if full else [lean(row) for row in rows]
-    return ListEnvelope(
-        summary=f"IPONZ {label} fetch: {len(items)} records. Schema-tested only.",
+    if len(numbers) == 1:
+        summary = f"IPONZ {label} fetch: {len(items)} records. Schema-tested only."
+    else:
+        summary = fetched_summary(len(items), len(numbers), f"IPONZ {label}s", not_found)
+    return FetchedList[dict](
+        summary=summary,
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(),
@@ -191,9 +179,7 @@ async def iponz_new_zealand_usage() -> str:
 
 
 @conditional_tool(iponz_new_zealand_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_iponz_patent(
-    patent_number: str | list[str], full: bool = False
-) -> ListEnvelope[dict]:
+async def get_iponz_patent(patent_number: str | list[str], full: bool = False) -> FetchedList[dict]:
     """Fetch public New Zealand patent records by official patent number.
 
     Related tools: list_iponz_patents_updated.
@@ -217,7 +203,7 @@ async def list_iponz_patents_updated(
 @conditional_tool(iponz_new_zealand_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_iponz_trademark(
     trademark_number: str | list[str], full: bool = False
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch public New Zealand trade mark records by official number.
 
     Related tools: list_iponz_trademarks_updated.
@@ -239,9 +225,7 @@ async def list_iponz_trademarks_updated(
 
 
 @conditional_tool(iponz_new_zealand_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_iponz_design(
-    design_number: str | list[str], full: bool = False
-) -> ListEnvelope[dict]:
+async def get_iponz_design(design_number: str | list[str], full: bool = False) -> FetchedList[dict]:
     """Fetch public New Zealand design records by official number.
 
     Related tools: list_iponz_designs_updated, list_iponz_designs_registered.

@@ -11,17 +11,16 @@ The default is production.
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.ip_australia_patents import IpAustraliaPatentsClient
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 ip_australia_patents_mcp = FastMCP("IP Australia — Patents")
 
@@ -76,9 +75,6 @@ def _summarize_ipa_patent(record: dict) -> str:
     else:
         line += "."
     return f"{head}\n{line}"
-
-
-_IPA_PATENTS_FANOUT_CONCURRENCY = 5
 
 
 # ---------------------------------------------------------------------------
@@ -166,7 +162,7 @@ async def get_ipa_patent(
         "Pass a list to fetch many records concurrently; the response "
         "shape stays a ListEnvelope.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get full Australian patent records by application number.
 
     Accepts either a single application number or a list (§5.4) and
@@ -176,32 +172,29 @@ async def get_ipa_patent(
 
     Related tools: search_ipa_patents, get_ipa_trademark, get_ipa_design.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_ipa_patent requires at least one application_number")
+    numbers = as_id_list(application_number, noun="application number")
 
-    semaphore = asyncio.Semaphore(_IPA_PATENTS_FANOUT_CONCURRENCY)
+    async with IpAustraliaPatentsClient() as client:
 
-    async def _fetch_one(client: IpAustraliaPatentsClient, num: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(num: str) -> dict:
             record = await client.get_patent(num)
             return dump(record, by_alias=True)
 
-    async with IpAustraliaPatentsClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
 
-    if len(results) == 1:
+    if len(numbers) == 1:
         summary = _summarize_ipa_patent(results[0])
         path = f"/patent/{numbers[0]}"
     else:
-        summary = f"Fetched {len(results)} Australian patents: {', '.join(numbers)}."
+        summary = fetched_summary(len(results), len(numbers), "Australian patents", not_found)
         path = "/patent"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_ipa_patents_provenance(path),
     )
 
