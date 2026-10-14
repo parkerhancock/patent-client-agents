@@ -30,6 +30,7 @@ from typing import Literal
 
 from mcp_data_core.exceptions import ConfigurationError
 from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
+from patent_client_agents.shared.auth import shared_oauth2
 
 IpAustraliaEnvironment = Literal["production", "sandbox"]
 
@@ -81,7 +82,7 @@ def build_auth(
             "IP Australia client_secret not provided. Set IPAUSTRALIA_CLIENT_SECRET "
             "or pass client_secret=..."
         )
-    return OAuth2ClientCredentialsAuth(
+    return shared_oauth2(
         token_url=token_url_for(environment),
         client_id=resolved_id,
         client_secret=resolved_secret,

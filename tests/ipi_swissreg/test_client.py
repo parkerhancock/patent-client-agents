@@ -232,8 +232,9 @@ async def test_auth_rate_limit_refresh_and_one_401_retry(fixture_dir: Path) -> N
             return httpx.Response(429, headers={"Retry-After": "9"}, text="slow")
         raise AssertionError("unexpected API call")
 
+    # A different account, so this client has to log in rather than reuse the token above.
     async with IpiSwissregClient(
-        "user", "password", transport=httpx.MockTransport(throttled)
+        "user-2", "password", transport=httpx.MockTransport(throttled)
     ) as client:
         with pytest.raises(RateLimitError) as raised:
             await client.search_patents("q")
