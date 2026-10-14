@@ -35,8 +35,9 @@ from lxml import html
 
 from mcp_data_core.corpus_compression import finalize_outline_corpus
 from patent_client_agents.shared.corpus import atomic_output, fetch_text, run_build_cli
+from patent_client_agents.shared.corpus.outline import init_outline_corpus, insert_outline_section
 
-from .schema import DDL, SCHEMA_VERSION
+from .schema import SCHEMA_VERSION
 
 logger = logging.getLogger(__name__)
 
@@ -157,18 +158,13 @@ async def build_corpus(
 
             conn = sqlite3.connect(tmp_path)
             try:
-                conn.executescript(DDL)
-                conn.execute(
-                    "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-                    ("schema_version", str(SCHEMA_VERSION)),
-                )
-                conn.execute(
-                    "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-                    ("source", f"{base_url}{INDEX_PATH}"),
-                )
-                conn.execute(
-                    "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-                    ("snapshot_date", datetime.now(UTC).strftime("%Y-%m-%d")),
+                init_outline_corpus(
+                    conn,
+                    [
+                        ("schema_version", str(SCHEMA_VERSION)),
+                        ("source", f"{base_url}{INDEX_PATH}"),
+                        ("snapshot_date", datetime.now(UTC).strftime("%Y-%m-%d")),
+                    ],
                 )
 
                 rows = 0
@@ -181,19 +177,15 @@ async def build_corpus(
                     slug = path.rsplit("/", 1)[-1]
                     section_number = _slug_to_section_number(slug)
                     title = page_title or _slug_to_title(slug)
-                    conn.execute(
-                        "INSERT OR REPLACE INTO sections "
-                        "(href, section_number, title, breadcrumb, chapter, html, text) "
-                        "VALUES (?, ?, ?, ?, ?, ?, ?)",
-                        (
-                            slug,
-                            section_number,
-                            title,
-                            None,
-                            None,
-                            html_fragment,
-                            text,
-                        ),
+                    insert_outline_section(
+                        conn,
+                        href=slug,
+                        section_number=section_number,
+                        title=title,
+                        breadcrumb=None,
+                        chapter=None,
+                        html=html_fragment,
+                        text=text,
                     )
                     rows += 1
                     if i % 10 == 0 or i == len(paths):

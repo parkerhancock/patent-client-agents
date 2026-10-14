@@ -1,35 +1,29 @@
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from patent_client_agents.shared.corpus.outline.models import (
+    OutlineSearchHit,
+    OutlineSearchResponse,
+    OutlineSection,
+    OutlineVersion,
+)
 
 
-class MpepSearchHit(BaseModel):
-    title: str
-    href: str
-    path: list[str] = Field(default_factory=list)
-    result_url: str
+class MpepSearchHit(OutlineSearchHit):
+    pass
 
 
-class MpepSearchResponse(BaseModel):
+class MpepSearchResponse(OutlineSearchResponse):
     hits: list[MpepSearchHit]
-    page: int
-    per_page: int
-    has_more: bool
 
 
-class MpepSection(BaseModel):
-    href: str
-    html: str
-    text: str
-    version: str
-    title: str | None = None
+class MpepSection(OutlineSection):
     source_url: str | None = None
     content_sha256: str | None = None
     section_revision: str | None = None
     corpus_metadata: dict[str, str | None] = Field(default_factory=dict)
 
 
-class MpepVersion(BaseModel):
-    label: str
-    value: str
-    current: bool = False
+class MpepVersion(OutlineVersion):
+    pass

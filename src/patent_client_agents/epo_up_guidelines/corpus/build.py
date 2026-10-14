@@ -16,32 +16,26 @@ Run manually::
 
 from __future__ import annotations
 
-import argparse
-import asyncio
 import logging
 import re
-import sqlite3
 import sys
-from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
 from lxml import html
 
-from mcp_data_core.corpus_compression import finalize_outline_corpus
-from patent_client_agents.shared.corpus import atomic_output, fetch_text, run_build_cli
-
-from .schema import DDL, SCHEMA_VERSION
+from patent_client_agents.shared.corpus import fetch_text
+from patent_client_agents.shared.corpus.epo_legal import (
+    DEFAULT_BASE_URL,
+    DEFAULT_USER_AGENT,
+    BookPages,
+    build_book_corpus,
+    run_book_cli,
+)
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_BASE_URL = "https://www.epo.org"
 DEFAULT_UP_GUIDELINES_YEAR = "2026"
-DEFAULT_USER_AGENT = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-    "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/127.0.0.0 Safari/537.36"
-)
 
 _SLUG_RE = re.compile(r"^section(?:_\d+)+$", re.IGNORECASE)
 
@@ -58,14 +52,6 @@ def _section_number_from_slug(slug: str) -> str | None:
 def _chapter_from_slug(slug: str) -> str | None:
     m = re.match(r"^section_(\d+)", slug, re.IGNORECASE)
     return m.group(1) if m else None
-
-
-async def _enumerate_from_sitemap(client: httpx.AsyncClient, year: str) -> list[str]:
-    sitemap = await fetch_text(client, "/en/legal/sitemap/sitemap-en-1.xml")
-    pattern = re.compile(
-        rf"<loc>https?://[^/]+/en/legal/guidelines-up/{year}/(section(?:_\d+)+)</loc>"
-    )
-    return sorted({m.group(1) for m in pattern.finditer(sitemap)})
 
 
 def _extract_main_content(page_html: str) -> tuple[str, str, str | None]:
@@ -103,6 +89,25 @@ def _extract_main_content(page_html: str) -> tuple[str, str, str | None]:
     return fragment, text, title
 
 
+# UP pages are served without an ``.html`` suffix.
+_PAGES = BookPages(
+    section_number_for=_section_number_from_slug,
+    chapter_for=_chapter_from_slug,
+    extract=_extract_main_content,
+    page_suffix="",
+)
+
+
+async def _discover(client: httpx.AsyncClient, base_path: str) -> list[str]:
+    """The ``section_*`` URLs the legal sitemap lists for this edition."""
+    logger.info("Discovering UP Guidelines sections from sitemap")
+    sitemap = await fetch_text(client, "/en/legal/sitemap/sitemap-en-1.xml")
+    pattern = re.compile(rf"<loc>https?://[^/]+{re.escape(base_path)}/(section(?:_\d+)+)</loc>")
+    slugs = sorted({m.group(1) for m in pattern.finditer(sitemap)})
+    logger.info("Sitemap enumerates %d UP Guidelines sections", len(slugs))
+    return slugs
+
+
 async def build_corpus(
     output_path: Path,
     *,
@@ -112,104 +117,29 @@ async def build_corpus(
     pause: float = 0.3,
     limit: int | None = None,
 ) -> int:
-    with atomic_output(output_path) as tmp_path:
-        headers = {"User-Agent": user_agent, "Accept": "text/html"}
-        async with httpx.AsyncClient(
-            base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
-        ) as client:
-            base_path = f"/en/legal/guidelines-up/{up_guidelines_year}"
-            logger.info("Discovering UP Guidelines sections from sitemap")
-            slugs = await _enumerate_from_sitemap(client, up_guidelines_year)
-            if limit:
-                slugs = slugs[:limit]
-            logger.info("Sitemap enumerates %d UP Guidelines sections", len(slugs))
-
-            conn = sqlite3.connect(tmp_path)
-            try:
-                conn.executescript(DDL)
-                now = datetime.now(UTC).strftime("%Y-%m-%d")
-                for key, val in (
-                    ("schema_version", str(SCHEMA_VERSION)),
-                    ("source", f"{base_url}{base_path}"),
-                    ("snapshot_date", now),
-                    ("up_guidelines_year", up_guidelines_year),
-                ):
-                    conn.execute(
-                        "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", (key, val)
-                    )
-
-                rows = 0
-                for i, slug in enumerate(slugs, 1):
-                    path = f"{base_path}/{slug}"
-                    try:
-                        page_html = await fetch_text(client, path)
-                    except Exception as exc:
-                        logger.warning("Skipping %s: %s", path, exc)
-                        continue
-                    fragment, text, page_title = _extract_main_content(page_html)
-                    if not text:
-                        logger.warning("Empty body for %s — skipping", path)
-                        continue
-                    section_number = _section_number_from_slug(slug)
-                    conn.execute(
-                        "INSERT OR REPLACE INTO sections "
-                        "(href, section_number, title, breadcrumb, chapter, html, text) "
-                        "VALUES (?, ?, ?, ?, ?, ?, ?)",
-                        (
-                            slug,
-                            section_number,
-                            page_title or section_number or slug,
-                            None,
-                            _chapter_from_slug(slug),
-                            fragment,
-                            text,
-                        ),
-                    )
-                    rows += 1
-                    if i % 25 == 0 or i == len(slugs):
-                        logger.info("  %d/%d  %s", i, len(slugs), slug)
-                    if pause:
-                        await asyncio.sleep(pause)
-                finalize_outline_corpus(conn, logger=logger)
-            finally:
-                conn.close()
-
-    logger.info("Wrote %d sections to %s", rows, output_path)
-    return rows
+    return await build_book_corpus(
+        output_path,
+        book="guidelines-up",
+        year_key="up_guidelines_year",
+        year=up_guidelines_year,
+        pages=_PAGES,
+        discover=_discover,
+        base_url=base_url,
+        user_agent=user_agent,
+        pause=pause,
+        limit=limit,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="Build an EPO Unitary Patent (UP) Guidelines SQLite/FTS5 corpus."
-    )
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=Path.home() / ".cache" / "patent_client_agents" / "up_guidelines.db",
-    )
-    parser.add_argument(
-        "--year",
-        default=DEFAULT_UP_GUIDELINES_YEAR,
-        help=f"UP Guidelines year (default: {DEFAULT_UP_GUIDELINES_YEAR})",
-    )
-    parser.add_argument("--base-url", default=DEFAULT_BASE_URL)
-    parser.add_argument("--user-agent", default=DEFAULT_USER_AGENT)
-    parser.add_argument("--pause", type=float, default=0.3)
-    parser.add_argument("--limit", type=int, default=None, help="For testing only.")
-    parser.add_argument("--verbose", action="store_true")
-    args = parser.parse_args(argv)
-
-    return run_build_cli(
-        lambda: build_corpus(
-            args.output,
-            up_guidelines_year=args.year,
-            base_url=args.base_url,
-            user_agent=args.user_agent,
-            pause=args.pause,
-            limit=args.limit,
-        ),
-        verbose=args.verbose,
-        done=lambda count, _elapsed: f"Wrote {count} sections to {args.output}",
+    return run_book_cli(
+        argv,
+        description="Build an EPO Unitary Patent (UP) Guidelines SQLite/FTS5 corpus.",
+        default_output="up_guidelines.db",
+        default_year=DEFAULT_UP_GUIDELINES_YEAR,
+        year_help="UP Guidelines year",
+        build=build_corpus,
+        year_kwarg="up_guidelines_year",
     )
 
 

@@ -1,30 +1,21 @@
-"""Async API for eGUIDELINES.
+"""Async API for the PCT-EPO Guidelines.
 
-Usage
------
-Preferred: use the client as a context manager for proper resource cleanup::
+Preferred: use the client as a context manager::
 
     async with PctGuidelinesClient() as client:
-        results = await client.search(query="obviousness")
-        section = await client.get_section(href="d0e122292.html")
+        results = await client.search(query="unity of invention")
+        section = await client.get_section("B-IV, 1")
 
-One-shot convenience functions (create and close client automatically)::
+One-shot functions open and close a client per call::
 
-    results = await search(SearchInput(query="obviousness"))
+    results = await search(SearchInput(query="unity of invention"))
 
-Legacy: passing client= parameter (deprecated, will be removed in v1.0)::
-
-    client = get_client()
-    results = await search(params, client=client)
-    await client.close()  # Manual cleanup required
+Passing ``client=`` to them is deprecated and will be removed in v1.0.
 """
 
 from __future__ import annotations
 
-import warnings
-from typing import Any
-
-from pydantic import BaseModel, Field
+from patent_client_agents.shared.corpus.outline import api as outline_api
 
 from .client import PctGuidelinesClient
 from .models import PctGuidelinesSearchResponse, PctGuidelinesSection, PctGuidelinesVersion
@@ -46,50 +37,20 @@ __all__ = [
 ]
 
 
-class SearchInput(BaseModel):
-    query: str
-    version: str = "current"
-    include_index: bool = False
-    include_notes: bool = False
-    include_form_paragraphs: bool = False
-    syntax: str = Field(default="adj", description="adj, and, or, exact")
-    snippet: str = Field(default="compact", description="compact or full")
-    sort: str = Field(default="relevance", description="relevance or outline")
-    per_page: int = Field(default=10, ge=1, le=100)
-    page: int = Field(default=1, ge=1)
+class SearchInput(outline_api.OutlineSearchInput):
+    pass
 
 
-class SectionInput(BaseModel):
+class SectionInput(outline_api.OutlineSectionInput):
     """Input for getting an GUIDELINES section.
 
     Accepts either a section number (e.g., "2106", "2106.04(a)") or an href
     (e.g., "d0e122292.html"). Section numbers are automatically resolved.
     """
 
-    section: str = Field(
-        description="Section number (e.g., '2106') or href (e.g., 'd0e122292.html')"
-    )
-    version: str = "current"
-    highlight_query: str | None = Field(
-        default=None,
-        description="Optional query for highlighted view",
-    )
-
-    # Backwards compatibility: allow 'href' as an alias for 'section'
-    def __init__(self, **data):
-        # If 'href' is provided but not 'section', use href as section
-        if "href" in data and "section" not in data:
-            data["section"] = data.pop("href")
-        super().__init__(**data)
-
 
 def get_client() -> PctGuidelinesClient:
-    """Create an PctGuidelinesClient.
-
-    Prefer using the client as a context manager::
-
-        async with PctGuidelinesClient() as client:
-            ...
+    """Create a PctGuidelinesClient. Prefer ``async with PctGuidelinesClient() as client:``.
 
     If you use get_client() directly, you are responsible for calling
     ``await client.close()`` when done.
@@ -97,44 +58,13 @@ def get_client() -> PctGuidelinesClient:
     return PctGuidelinesClient()
 
 
-def _warn_client_deprecated() -> None:
-    warnings.warn(
-        "Passing client= is deprecated and will be removed in v1.0. "
-        "Use 'async with PctGuidelinesClient() as client:' instead.",
-        DeprecationWarning,
-        stacklevel=3,
-    )
-
-
 async def search(
     params: SearchInput,
     *,
     client: PctGuidelinesClient | None = None,
 ) -> PctGuidelinesSearchResponse:
-    """Search the GUIDELINES.
-
-    If no client is provided, creates one internally and closes it after the request.
-    """
-    search_kwargs: dict[str, Any] = {
-        "query": params.query,
-        "version": params.version,
-        "include_content": True,
-        "include_index": params.include_index,
-        "include_notes": params.include_notes,
-        "include_form_paragraphs": params.include_form_paragraphs,
-        "syntax": params.syntax,
-        "snippet": params.snippet,
-        "sort": params.sort,
-        "per_page": params.per_page,
-        "page": params.page,
-    }
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search(**search_kwargs)
-
-    async with PctGuidelinesClient() as cl:
-        return await cl.search(**search_kwargs)
+    """Search the PCT-EPO Guidelines."""
+    return await outline_api.search(PctGuidelinesClient, params, client=client)
 
 
 async def get_section(
@@ -142,58 +72,15 @@ async def get_section(
     *,
     client: PctGuidelinesClient | None = None,
 ) -> PctGuidelinesSection:
-    """Get a specific GUIDELINES section.
-
-    Args:
-        params: Either a SectionInput object or a section number/href string.
-            Section numbers (e.g., "2106", "2106.04(a)") are automatically
-            resolved to hrefs.
-        client: Deprecated. Use PctGuidelinesClient as context manager instead.
-
-    Returns:
-        PctGuidelinesSection with content.
-
-    Examples:
-        # Using section number directly
-        section = await get_section("2106")
-
-        # Using SectionInput
-        section = await get_section(SectionInput(section="2106.04(a)"))
-
-        # Using href (backwards compatible)
-        section = await get_section(SectionInput(href="d0e197244.html"))
-    """
-    # Handle string input for convenience
+    """Get one PCT-EPO Guidelines section by citation, section number, or href."""
     if isinstance(params, str):
         params = SectionInput(section=params)
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_section(
-            section=params.section,
-            version=params.version,
-            highlight_query=params.highlight_query,
-        )
-
-    async with PctGuidelinesClient() as cl:
-        return await cl.get_section(
-            section=params.section,
-            version=params.version,
-            highlight_query=params.highlight_query,
-        )
+    return await outline_api.get_section(PctGuidelinesClient, params, client=client)
 
 
 async def list_versions(
     *,
     client: PctGuidelinesClient | None = None,
 ) -> list[PctGuidelinesVersion]:
-    """List available GUIDELINES versions.
-
-    If no client is provided, creates one internally and closes it after the request.
-    """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.list_versions()
-
-    async with PctGuidelinesClient() as cl:
-        return await cl.list_versions()
+    """List the installed PCT-EPO Guidelines snapshot."""
+    return await outline_api.list_versions(PctGuidelinesClient, client=client)

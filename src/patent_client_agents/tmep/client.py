@@ -12,10 +12,8 @@ from __future__ import annotations
 
 import os
 import re
-from typing import Any
 
-from patent_client_agents.fts_query import translate_fts_query
-from patent_client_agents.shared.errors import SectionNotFoundError
+from patent_client_agents.shared.corpus.outline import OutlineCorpusClient
 
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import TmepSearchHit, TmepSearchResponse, TmepSection, TmepVersion
@@ -32,26 +30,7 @@ def _normalize_href(value: str) -> str:
     return h
 
 
-def _hit_to_model(hit: Any, base_url: str) -> TmepSearchHit:
-    title = (
-        f"{hit.section_number} - {hit.title}"
-        if hit.section_number and hit.title
-        else hit.title or hit.section_number or ""
-    )
-    path: list[str] = []
-    if hit.chapter:
-        path.append(f"Chapter {hit.chapter}")
-    if hit.section_number:
-        path.append(hit.section_number)
-    return TmepSearchHit(
-        title=title,
-        href=hit.href,
-        path=path,
-        result_url=f"{base_url}/RDMS/TMEP/result?href={hit.href}",
-    )
-
-
-class TmepClient:
+class TmepClient(OutlineCorpusClient[TmepSearchResponse, TmepSection, TmepVersion]):
     """Corpus-backed eTMEP client.
 
     Opens the corpus lazily on first use. Construction in environments
@@ -62,48 +41,23 @@ class TmepClient:
     DEFAULT_BASE_URL: str = os.getenv("TMEP_BASE_URL", "https://tmep.uspto.gov")
     CACHE_NAME: str = "tmep"
 
-    def __init__(
-        self,
-        *,
-        corpus_path: str | os.PathLike[str] | None = None,
-        base_url: str | None = None,
-    ) -> None:
-        self._corpus_path = corpus_path
-        self._base_url = (base_url or self.DEFAULT_BASE_URL).rstrip("/")
-        self._db: CorpusDB | None = None
+    CORPUS_DB = CorpusDB
+    HIT_MODEL = TmepSearchHit
+    RESPONSE_MODEL = TmepSearchResponse
+    SECTION_MODEL = TmepSection
+    VERSION_MODEL = TmepVersion
+    NOT_FOUND_LABEL = "TMEP"
+    SECTION_NUMBER_PATTERN = SECTION_NUMBER_PATTERN
 
-    async def __aenter__(self) -> TmepClient:
-        return self
+    def _normalize_href(self, value: str) -> str:
+        return _normalize_href(value)
 
-    async def __aexit__(self, *_exc: object) -> None:
-        await self.close()
+    def _result_url(self, href: str, edition: str | None) -> str:
+        return f"{self.base_url}/RDMS/TMEP/result?href={href}"
 
-    async def close(self) -> None:
-        if self._db is not None:
-            self._db.close()
-            self._db = None
-
-    @property
-    def base_url(self) -> str:
-        return self._base_url
-
-    def _open(self) -> CorpusDB:
-        if self._db is None:
-            self._db = CorpusDB.open(self._corpus_path)
-        return self._db
-
-    async def resolve_section_href(
-        self,
-        section_number: str,
-        *,
-        version: str = "current",
-    ) -> str | None:
-        del version
-        db = self._open()
-        row = db.get_section(section_number=section_number)
-        return row.href if row else None
-
-    async def search(
+    # TMEP has no form paragraphs, so its ``search`` takes no
+    # ``include_form_paragraphs`` flag.
+    async def search(  # ty: ignore[invalid-method-override]
         self,
         query: str,
         *,
@@ -118,57 +72,19 @@ class TmepClient:
         page: int = 1,
         offset: int | None = None,
     ) -> TmepSearchResponse:
-        del version, include_content, include_index, include_notes, snippet
-        db = self._open()
-        fts_query = translate_fts_query(query, syntax)
-        if not fts_query:
-            return TmepSearchResponse(hits=[], page=page, per_page=per_page, has_more=False)
-        # A row ``offset`` takes precedence over ``page`` when given.
-        if offset is None:
-            offset = max(0, (page - 1) * per_page)
-        rows = db.search(fts_query, limit=per_page + 1, offset=offset, sort=sort)
-        has_more = len(rows) > per_page
-        rows = rows[:per_page]
-        hits = [_hit_to_model(r, self._base_url) for r in rows]
-        return TmepSearchResponse(hits=hits, page=page, per_page=per_page, has_more=has_more)
-
-    async def get_section(
-        self,
-        section: str,
-        *,
-        version: str = "current",
-        highlight_query: str | None = None,
-    ) -> TmepSection:
-        del highlight_query
-        db = self._open()
-        if SECTION_NUMBER_PATTERN.match(section):
-            row = db.get_section(section_number=section)
-            if row is None:
-                raise SectionNotFoundError(f"Could not find TMEP section '{section}'")
-        else:
-            href = _normalize_href(section)
-            row = db.get_section(href=href)
-            if row is None:
-                raise SectionNotFoundError(f"Could not find TMEP href '{section}'")
-        return TmepSection(
-            href=row.href,
-            html=row.html,
-            text=row.text,
+        return await super().search(
+            query,
             version=version,
-            title=row.title,
+            include_content=include_content,
+            include_index=include_index,
+            include_notes=include_notes,
+            syntax=syntax,
+            snippet=snippet,
+            sort=sort,
+            per_page=per_page,
+            page=page,
+            offset=offset,
         )
-
-    async def list_versions(self) -> list[TmepVersion]:
-        db = self._open()
-        meta = db.meta()
-        snapshot = meta.get("snapshot_date", "unknown")
-        return [
-            TmepVersion(
-                label=f"current (snapshot {snapshot})",
-                value="current",
-                current=True,
-            )
-        ]
 
 
 __all__ = ["TmepClient", "SECTION_NUMBER_PATTERN", "CorpusUnavailable"]

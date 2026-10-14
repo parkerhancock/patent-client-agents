@@ -34,7 +34,7 @@ import os
 import re
 from typing import Any
 
-from patent_client_agents.fts_query import translate_fts_query
+from patent_client_agents.shared.corpus.fts_query import translate_fts_query
 from patent_client_agents.shared.errors import SectionNotFoundError
 
 from .corpus.db import CorpusDB, CorpusUnavailable

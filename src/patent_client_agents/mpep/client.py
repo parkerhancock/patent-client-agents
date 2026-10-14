@@ -17,10 +17,10 @@ from __future__ import annotations
 import hashlib
 import os
 import re
-from typing import Any
 from urllib.parse import urlencode
 
-from patent_client_agents.shared.errors import SectionNotFoundError
+from mcp_data_core.corpus_db import OutlineCorpusSection
+from patent_client_agents.shared.corpus.outline import OutlineCorpusClient
 
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import MpepSearchHit, MpepSearchResponse, MpepSection, MpepVersion
@@ -30,25 +30,17 @@ from .models import MpepSearchHit, MpepSearchResponse, MpepSection, MpepVersion
 # Hrefs: d0e197244.html, ch2100_d29a1b_13a9e_2dc.html
 SECTION_NUMBER_PATTERN = re.compile(r"^\d+(\.\d+)?(\([a-z]\))?(\(\d+\))?$", re.IGNORECASE)
 
-
-def _translate_fts_query(query: str, syntax: str) -> str:
-    """Convert eMPEP-API search params to an FTS5 MATCH expression.
-
-    - ``adj`` / ``exact`` → quoted phrase (multi-word terms stay
-      adjacent, which matches eMPEP's ``adj`` semantics).
-    - ``or`` → ``term1 OR term2`` between whitespace-separated terms.
-    - ``and`` / anything else → space-separated terms (FTS5's default).
-    """
-    cleaned = query.strip()
-    if not cleaned:
-        return ""
-    if syntax in ("adj", "exact"):
-        escaped = cleaned.replace('"', '""')
-        return f'"{escaped}"'
-    tokens = ['"' + t.replace('"', '""') + '"' for t in re.split(r"\s+", cleaned) if t]
-    if syntax == "or":
-        return " OR ".join(tokens)
-    return " ".join(tokens)
+_CORPUS_METADATA_KEYS = (
+    "source_version",
+    "edition",
+    "revision",
+    "publication_date",
+    "substantive_cutoff_date",
+    "build_id",
+    "synced_at",
+    "snapshot_date",
+    "interim_updates_coverage",
+)
 
 
 def _normalize_href(value: str) -> str:
@@ -60,66 +52,34 @@ def _normalize_href(value: str) -> str:
     return h
 
 
-def _hit_to_model(hit: Any, base_url: str) -> MpepSearchHit:
-    title = (
-        f"{hit.section_number} - {hit.title}"
-        if hit.section_number and hit.title
-        else hit.title or hit.section_number or ""
-    )
-    path: list[str] = []
-    if hit.chapter:
-        path.append(f"Chapter {hit.chapter}")
-    if hit.section_number:
-        path.append(hit.section_number)
-    return MpepSearchHit(
-        title=title,
-        href=hit.href,
-        path=path,
-        result_url=f"{base_url}/RDMS/MPEP/result?href={hit.href}",
-    )
-
-
-class MpepClient:
+class MpepClient(OutlineCorpusClient[MpepSearchResponse, MpepSection, MpepVersion]):
     """Corpus-backed eMPEP client.
 
     The corpus is opened lazily on first use so consumers can still
     construct clients in environments where the database hasn't been
     materialized yet (it'll raise ``CorpusUnavailable`` on the first
     actual call instead).
+
+    Unlike the other outline clients, ``version`` is checked against the
+    installed snapshot, and sections carry release metadata.
     """
 
     DEFAULT_BASE_URL: str = os.getenv("MPEP_BASE_URL", "https://mpep.uspto.gov")
     CACHE_NAME: str = "mpep"
 
-    def __init__(
-        self,
-        *,
-        corpus_path: str | os.PathLike[str] | None = None,
-        base_url: str | None = None,
-    ) -> None:
-        self._corpus_path = corpus_path
-        self._base_url = (base_url or self.DEFAULT_BASE_URL).rstrip("/")
-        self._db: CorpusDB | None = None
+    CORPUS_DB = CorpusDB
+    HIT_MODEL = MpepSearchHit
+    RESPONSE_MODEL = MpepSearchResponse
+    SECTION_MODEL = MpepSection
+    VERSION_MODEL = MpepVersion
+    NOT_FOUND_LABEL = "MPEP"
+    SECTION_NUMBER_PATTERN = SECTION_NUMBER_PATTERN
 
-    async def __aenter__(self) -> MpepClient:
-        return self
+    def _normalize_href(self, value: str) -> str:
+        return _normalize_href(value)
 
-    async def __aexit__(self, *_exc: object) -> None:
-        await self.close()
-
-    async def close(self) -> None:
-        if self._db is not None:
-            self._db.close()
-            self._db = None
-
-    @property
-    def base_url(self) -> str:
-        return self._base_url
-
-    def _open(self) -> CorpusDB:
-        if self._db is None:
-            self._db = CorpusDB.open(self._corpus_path)
-        return self._db
+    def _result_url(self, href: str, edition: str | None) -> str:
+        return f"{self.base_url}/RDMS/MPEP/result?href={href}"
 
     def _check_version(self, version: str) -> dict[str, str]:
         meta = self._open().meta()
@@ -131,89 +91,23 @@ class MpepClient:
             )
         return meta
 
-    async def resolve_section_href(
-        self,
-        section_number: str,
-        *,
-        version: str = "current",
-    ) -> str | None:
-        self._check_version(version)
-        db = self._open()
-        row = db.get_section(section_number=section_number)
-        return row.href if row else None
-
-    async def search(
-        self,
-        query: str,
-        *,
-        version: str = "current",
-        include_content: bool = True,
-        include_index: bool = False,
-        include_notes: bool = False,
-        include_form_paragraphs: bool = False,
-        syntax: str = "adj",
-        snippet: str = "compact",  # FTS5 snippet is always compact-ish
-        sort: str = "relevance",
-        per_page: int = 10,
-        page: int = 1,
-        offset: int | None = None,
-    ) -> MpepSearchResponse:
-        # Corpus snapshot doesn't distinguish content / index / notes / form
-        # paragraphs — all body text is indexed together. We accept the
-        # flags for API parity but have no separate corpus to filter on.
-        self._check_version(version)
-        del include_content, include_index, include_notes
-        del include_form_paragraphs, snippet
-        db = self._open()
-        fts_query = _translate_fts_query(query, syntax)
-        if not fts_query:
-            return MpepSearchResponse(hits=[], page=page, per_page=per_page, has_more=False)
-        # A row ``offset`` takes precedence over ``page`` when given.
-        if offset is None:
-            offset = max(0, (page - 1) * per_page)
-        # Fetch one extra row to detect whether more pages exist.
-        rows = db.search(fts_query, limit=per_page + 1, offset=offset, sort=sort)
-        has_more = len(rows) > per_page
-        rows = rows[:per_page]
-        hits = [_hit_to_model(r, self._base_url) for r in rows]
-        return MpepSearchResponse(hits=hits, page=page, per_page=per_page, has_more=has_more)
-
-    async def get_section(
-        self,
-        section: str,
-        *,
-        version: str = "current",
-        highlight_query: str | None = None,  # noqa: ARG002 — API parity
+    def _to_section(
+        self, row: OutlineCorpusSection, version: str, meta: dict[str, str] | None
     ) -> MpepSection:
-        del (
-            highlight_query
-        )  # the corpus stores the canonical HTML; no need to re-fetch a highlighted view
-        meta = self._check_version(version)
-        db = self._open()
-        if SECTION_NUMBER_PATTERN.match(section):
-            row = db.get_section(section_number=section)
-            if row is None:
-                raise SectionNotFoundError(f"Could not find MPEP section '{section}'")
-        else:
-            href = _normalize_href(section)
-            row = db.get_section(href=href)
-            if row is None:
-                raise SectionNotFoundError(f"Could not find MPEP href '{section}'")
+        meta = meta or {}
+        source_version = meta.get("source_version")
         return MpepSection(
             href=row.href,
             html=row.html,
             text=row.text,
-            version=(
-                meta.get("source_version") if meta.get("source_version") != "current" else None
-            )
-            or "unknown",
+            version=(source_version if source_version != "current" else None) or "unknown",
             title=row.title,
             source_url=f"{self.base_url}/RDMS/MPEP/result?"
             + urlencode(
                 {
                     "href": row.href,
-                    "version": meta.get("source_version")
-                    if meta.get("source_version") not in {None, "unknown"}
+                    "version": source_version
+                    if source_version not in {None, "unknown"}
                     else "current",
                 }
             ),
@@ -223,20 +117,7 @@ class MpepClient:
                 if (match := re.search(r"\[R-[^\]]+\]", row.title or row.text[:500]))
                 else None
             ),
-            corpus_metadata={
-                key: meta.get(key)
-                for key in (
-                    "source_version",
-                    "edition",
-                    "revision",
-                    "publication_date",
-                    "substantive_cutoff_date",
-                    "build_id",
-                    "synced_at",
-                    "snapshot_date",
-                    "interim_updates_coverage",
-                )
-            },
+            corpus_metadata={key: meta.get(key) for key in _CORPUS_METADATA_KEYS},
         )
 
     async def list_versions(self) -> list[MpepVersion]:
@@ -247,8 +128,7 @@ class MpepClient:
         return its recorded identifier when known. ``current`` remains an
         alias for the installed snapshot, never a claim of source freshness.
         """
-        db = self._open()
-        meta = db.meta()
+        meta = self._open().meta()
         snapshot = meta.get("snapshot_date", "unknown")
         return [
             MpepVersion(

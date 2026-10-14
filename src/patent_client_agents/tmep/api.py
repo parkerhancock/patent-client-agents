@@ -17,6 +17,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel, Field
 
+from patent_client_agents.shared.corpus.outline import api as outline_api
+
 from .client import TmepClient
 from .models import TmepSearchResponse, TmepSection, TmepVersion
 from .resources import USAGE_RESOURCE_URI, get_usage_resource
@@ -50,7 +52,7 @@ class SearchInput(BaseModel):
     page: int = Field(default=1, ge=1)
 
 
-class SectionInput(BaseModel):
+class SectionInput(outline_api.OutlineSectionInput):
     """Input for getting a TMEP section.
 
     Accepts either a section number (e.g., "1207", "1207.01(a)") or an href
@@ -60,87 +62,23 @@ class SectionInput(BaseModel):
     section: str = Field(
         description="Section number (e.g., '1207') or href (e.g., 'TMEP-1200d1e8145.html')"
     )
-    version: str = "current"
-    highlight_query: str | None = Field(
-        default=None,
-        description="Optional query for highlighted view",
-    )
-
-    # Backwards compatibility: allow 'href' as an alias for 'section'
-    def __init__(self, **data):
-        if "href" in data and "section" not in data:
-            data["section"] = data.pop("href")
-        super().__init__(**data)
 
 
 async def search(params: SearchInput) -> TmepSearchResponse:
-    """Search the TMEP.
-
-    Creates a client internally and closes it after the request.
-
-    Args:
-        params: Search parameters.
-
-    Returns:
-        TmepSearchResponse with search hits.
-    """
-    async with TmepClient() as client:
-        return await client.search(
-            query=params.query,
-            version=params.version,
-            include_content=True,
-            include_index=params.include_index,
-            include_notes=params.include_notes,
-            syntax=params.syntax,
-            snippet=params.snippet,
-            sort=params.sort,
-            per_page=params.per_page,
-            page=params.page,
-        )
+    """Search the TMEP. Creates a client internally and closes it after the request."""
+    return await outline_api.search(TmepClient, params)
 
 
 async def get_section(params: SectionInput | str) -> TmepSection:
-    """Get a specific TMEP section.
+    """Get one TMEP section by section number (``"1207.01"``) or href.
 
     Creates a client internally and closes it after the request.
-
-    Args:
-        params: Either a SectionInput object or a section number/href string.
-            Section numbers (e.g., "1207", "1207.01(a)") are automatically
-            resolved to hrefs.
-
-    Returns:
-        TmepSection with content.
-
-    Examples:
-        # Using section number directly
-        section = await get_section("1207")
-
-        # Using SectionInput
-        section = await get_section(SectionInput(section="1207.01"))
-
-        # Using href (backwards compatible)
-        section = await get_section(SectionInput(href="TMEP-1200d1e8145.html"))
     """
-    # Handle string input for convenience
     if isinstance(params, str):
         params = SectionInput(section=params)
-
-    async with TmepClient() as client:
-        return await client.get_section(
-            section=params.section,
-            version=params.version,
-            highlight_query=params.highlight_query,
-        )
+    return await outline_api.get_section(TmepClient, params)
 
 
 async def list_versions() -> list[TmepVersion]:
-    """List available TMEP versions.
-
-    Creates a client internally and closes it after the request.
-
-    Returns:
-        List of TmepVersion objects.
-    """
-    async with TmepClient() as client:
-        return await client.list_versions()
+    """List the installed TMEP snapshot."""
+    return await outline_api.list_versions(TmepClient)

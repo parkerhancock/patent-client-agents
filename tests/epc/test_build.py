@@ -10,6 +10,7 @@ import pytest
 
 from patent_client_agents.epc import get_corpus_status
 from patent_client_agents.epc.corpus import build as build_mod
+from patent_client_agents.shared.corpus import epo_legal
 from tests.corpus_build_support import read_corpus, serve, today
 
 _PAGES = {
@@ -62,7 +63,8 @@ def test_failed_build_keeps_previous_corpus(
     def boom(*_args: object, **_kwargs: object) -> None:
         raise RuntimeError("finalize failed")
 
-    monkeypatch.setattr(build_mod, "finalize_outline_corpus", boom)
+    # The shared epo.org crawler finalizes the corpus for every EPO book.
+    monkeypatch.setattr(epo_legal, "finalize_outline_corpus", boom)
     with pytest.raises(RuntimeError, match="finalize failed"):
         asyncio.run(build_mod.build_corpus(out, pause=0))
     assert out.read_bytes() == b"previous corpus"

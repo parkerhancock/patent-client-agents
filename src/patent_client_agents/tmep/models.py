@@ -1,39 +1,26 @@
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from patent_client_agents.shared.corpus.outline.models import (
+    OutlineSearchHit,
+    OutlineSearchResponse,
+    OutlineSection,
+    OutlineVersion,
+)
 
 
-class TmepSearchHit(BaseModel):
+class TmepSearchHit(OutlineSearchHit):
     """A single search result from the TMEP."""
 
-    title: str
-    href: str
-    path: list[str] = Field(default_factory=list)
-    result_url: str
 
-
-class TmepSearchResponse(BaseModel):
+class TmepSearchResponse(OutlineSearchResponse):
     """Response from a TMEP search query."""
 
     hits: list[TmepSearchHit]
-    page: int
-    per_page: int
-    has_more: bool
 
 
-class TmepSection(BaseModel):
+class TmepSection(OutlineSection):
     """A section of the TMEP."""
 
-    href: str
-    html: str
-    text: str
-    version: str
-    title: str | None = None
 
-
-class TmepVersion(BaseModel):
+class TmepVersion(OutlineVersion):
     """An available TMEP version."""
-
-    label: str
-    value: str
-    current: bool = False

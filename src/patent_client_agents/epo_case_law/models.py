@@ -1,31 +1,24 @@
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from patent_client_agents.shared.corpus.outline.models import (
+    OutlineSearchHit,
+    OutlineSearchResponse,
+    OutlineSection,
+    OutlineVersion,
+)
 
 
-class CaseLawSearchHit(BaseModel):
-    title: str
-    href: str
-    path: list[str] = Field(default_factory=list)
-    result_url: str
+class CaseLawSearchHit(OutlineSearchHit):
+    pass
 
 
-class CaseLawSearchResponse(BaseModel):
+class CaseLawSearchResponse(OutlineSearchResponse):
     hits: list[CaseLawSearchHit]
-    page: int
-    per_page: int
-    has_more: bool
 
 
-class CaseLawSection(BaseModel):
-    href: str
-    html: str
-    text: str
-    version: str
-    title: str | None = None
+class CaseLawSection(OutlineSection):
+    pass
 
 
-class CaseLawVersion(BaseModel):
-    label: str
-    value: str
-    current: bool = False
+class CaseLawVersion(OutlineVersion):
+    pass
