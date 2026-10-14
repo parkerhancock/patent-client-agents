@@ -214,6 +214,7 @@ class EpoOpsClient(BaseAsyncClient):
         cache_path: Path | None = None,
         timeout: float = 60.0,
         auth: OpsAuth | None = None,
+        transport: httpx.AsyncBaseTransport | None = None,
     ) -> None:
         # Build the HTTP client directly to pass EPO-specific kwargs
         # (base_url, policy, http2) that BaseAsyncClient doesn't forward.
@@ -237,6 +238,7 @@ class EpoOpsClient(BaseAsyncClient):
             base_url=BASE_URL,
             policy=hishel.SpecificationPolicy(),
             http2=False,
+            transport=transport,
         )
 
     def _build_url(self, path: str) -> str:

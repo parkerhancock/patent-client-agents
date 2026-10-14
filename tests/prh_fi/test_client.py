@@ -14,7 +14,6 @@ from patent_client_agents.prh_fi.client import (
     DEFAULT_PATENT_STATUSES,
     DEFAULT_PATENT_TYPES,
     DEFAULT_PUBLICATION_TYPES,
-    DEFAULT_USER_AGENT,
     DESIGN_HOST,
     DESIGN_PATH,
     PATENT_HOST,
@@ -28,8 +27,8 @@ from patent_client_agents.prh_fi.client import (
 )
 
 
-def _mock(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.AsyncClient:
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+def _mock(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.MockTransport:
+    return httpx.MockTransport(handler)
 
 
 def _fixture(name: str) -> dict:
@@ -88,13 +87,19 @@ async def test_search_patents_routes_to_patent_host() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("patent-search.json"))
 
-    async with PrhClient(client=_mock(handler)) as client:
-        await client.search_patents(applicant="Audience")
+    async with PrhClient(transport=_mock(handler), use_cache=False) as client:
+        result = await client.search_patents(applicant="Audience")
 
+    assert result.total_results == 13
     assert len(captured) == 1
-    assert str(captured[0].url).startswith(PATENT_HOST)
-    assert captured[0].url.path == PATENT_PATH
-    body = json.loads(captured[0].content)
+    req = captured[0]
+    assert req.method == "POST"
+    assert str(req.url) == f"{PATENT_HOST}{PATENT_PATH}"
+    # The client's own headers reach the wire: courtesy UA names a contact.
+    assert "patent-client-agents" in req.headers["User-Agent"]
+    assert "avoindata@prh.fi" in req.headers["User-Agent"]
+    assert req.headers["Content-Type"] == "application/json"
+    body = json.loads(req.content)
     assert body["applicant"] == "Audience"
     assert body["patentTypes"] == DEFAULT_PATENT_TYPES
 
@@ -107,17 +112,20 @@ async def test_get_patent_routes_to_patent_host() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("patent-get.json"))
 
-    async with PrhClient(client=_mock(handler)) as client:
-        await client.get_patent("20100001")
+    async with PrhClient(transport=_mock(handler), use_cache=False) as client:
+        patent = await client.get_patent("20100001")
+
+    assert patent.application_number == "20100001"
 
     req = captured[0]
-    assert str(req.url).startswith(PATENT_HOST)
-    assert req.url.path == f"{PATENT_PATH}/20100001"
+    assert str(req.url) == f"{PATENT_HOST}{PATENT_PATH}/20100001"
 
 
 @pytest.mark.asyncio
 async def test_get_patent_rejects_empty_application_number() -> None:
-    async with PrhClient(client=_mock(lambda _: httpx.Response(200, json={}))) as client:
+    async with PrhClient(
+        transport=_mock(lambda _: httpx.Response(200, json={})), use_cache=False
+    ) as client:
         with pytest.raises(ValueError):
             await client.get_patent("")
 
@@ -130,11 +138,10 @@ async def test_search_trademarks_routes_to_trademark_host() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("tm-search.json"))
 
-    async with PrhClient(client=_mock(handler)) as client:
+    async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_trademarks(trademark_word="AUDI")
 
-    assert str(captured[0].url).startswith(TRADEMARK_HOST)
-    assert captured[0].url.path == TRADEMARK_PATH
+    assert str(captured[0].url) == f"{TRADEMARK_HOST}{TRADEMARK_PATH}"
 
 
 @pytest.mark.asyncio
@@ -145,11 +152,10 @@ async def test_search_well_known_routes_to_tmr_path() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("tmr-search.json"))
 
-    async with PrhClient(client=_mock(handler)) as client:
+    async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_well_known_trademarks()
 
-    assert str(captured[0].url).startswith(TRADEMARK_HOST)
-    assert captured[0].url.path == TMR_PATH
+    assert str(captured[0].url) == f"{TRADEMARK_HOST}{TMR_PATH}"
 
 
 @pytest.mark.asyncio
@@ -160,21 +166,10 @@ async def test_search_designs_routes_to_design_host() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("design-search.json"))
 
-    async with PrhClient(client=_mock(handler)) as client:
+    async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_designs(applicant_name="Marimekko")
 
-    assert str(captured[0].url).startswith(DESIGN_HOST)
-    assert captured[0].url.path == DESIGN_PATH
-
-
-# ----------------------------------------------------------------------
-# User-Agent identifies project + contact
-# ----------------------------------------------------------------------
-
-
-def test_default_user_agent_identifies_project() -> None:
-    assert "patent-client-agents" in DEFAULT_USER_AGENT
-    assert "avoindata@prh.fi" in DEFAULT_USER_AGENT
+    assert str(captured[0].url) == f"{DESIGN_HOST}{DESIGN_PATH}"
 
 
 # ----------------------------------------------------------------------
@@ -236,13 +231,12 @@ async def test_download_trademark_image_routes_with_regno() -> None:
         captured.append(request)
         return httpx.Response(200, content=b"GIF89a fake", headers={"content-type": "image/gif"})
 
-    async with PrhClient(client=_mock(handler)) as client:
+    async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         content, ct = await client.download_trademark_image("T196503880", "49497")
 
     assert content.startswith(b"GIF89a")
     assert ct == "image/gif"
-    assert str(captured[0].url).startswith(TRADEMARK_HOST)
-    assert captured[0].url.path == "/opendata/trademark/image/T196503880/49497"
+    assert str(captured[0].url) == f"{TRADEMARK_HOST}/opendata/trademark/image/T196503880/49497"
 
 
 @pytest.mark.asyncio
@@ -253,7 +247,7 @@ async def test_download_trademark_image_without_regno() -> None:
         captured.append(request)
         return httpx.Response(200, content=b"GIF", headers={"content-type": "image/gif"})
 
-    async with PrhClient(client=_mock(handler)) as client:
+    async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         await client.download_trademark_image("2007007", variant="thumbnail")
 
     # TMR rows reach the image surface with just the application number.
@@ -262,7 +256,9 @@ async def test_download_trademark_image_without_regno() -> None:
 
 @pytest.mark.asyncio
 async def test_download_trademark_image_rejects_bad_variant() -> None:
-    async with PrhClient(client=_mock(lambda _: httpx.Response(200, b""))) as client:
+    async with PrhClient(
+        transport=_mock(lambda _: httpx.Response(200, b"")), use_cache=False
+    ) as client:
         with pytest.raises(ValueError, match="variant must be"):
             await client.download_trademark_image("X", variant="huge")
 
@@ -277,19 +273,20 @@ async def test_download_design_image_routes() -> None:
             200, content=b"\xff\xd8\xff fake jpeg", headers={"content-type": "image/jpeg"}
         )
 
-    async with PrhClient(client=_mock(handler)) as client:
+    async with PrhClient(transport=_mock(handler), use_cache=False) as client:
         content, ct = await client.download_design_image(
             "M19710014.1.1", variant="thumbnail/medium"
         )
 
     assert ct == "image/jpeg"
-    assert str(captured[0].url).startswith(DESIGN_HOST)
-    assert captured[0].url.path == "/opendata/design/thumbnail/medium/M19710014.1.1"
+    assert str(captured[0].url) == f"{DESIGN_HOST}/opendata/design/thumbnail/medium/M19710014.1.1"
 
 
 @pytest.mark.asyncio
 async def test_download_design_image_rejects_empty_id() -> None:
-    async with PrhClient(client=_mock(lambda _: httpx.Response(200, b""))) as client:
+    async with PrhClient(
+        transport=_mock(lambda _: httpx.Response(200, b"")), use_cache=False
+    ) as client:
         with pytest.raises(ValueError, match="image_id must be"):
             await client.download_design_image("")
 
