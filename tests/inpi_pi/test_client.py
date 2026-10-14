@@ -30,6 +30,7 @@ import pytest
 from mcp_data_core.exceptions import (
     ApiError,
     ConfigurationError,
+    NotFoundError,
     RateLimitError,
     ValidationError,
 )
@@ -760,3 +761,14 @@ class TestModelBehaviorViaClient:
 
 # Silence ruff: imported helper is used in TestSlidingWindowThrottle indirectly.
 _ = asyncio
+
+
+@pytest.mark.asyncio
+async def test_404_raises_not_found_error(no_retry_backoff: None) -> None:
+    def search_handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(404, text="no such record")
+
+    handler = _make_auth_handler({"/services/apidiffusion/api/marques/search": search_handler})
+    async with _make_client(handler) as client:
+        with pytest.raises(NotFoundError):
+            await client.search_trademarks()

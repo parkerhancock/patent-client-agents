@@ -6,7 +6,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from mcp_data_core.exceptions import ApiError, ConfigurationError, RateLimitError
+from mcp_data_core.exceptions import ApiError, ConfigurationError, NotFoundError, RateLimitError
 from patent_client_agents.dpma_register.client import DpmaRegisterClient
 
 
@@ -118,4 +118,15 @@ async def test_rate_limit_maps_to_domain_error() -> None:
     http_client = httpx.AsyncClient(transport=httpx.MockTransport(throttled))
     async with DpmaRegisterClient("user", "password", client=http_client) as client:
         with pytest.raises(RateLimitError):
+            await client.get_design("1")
+
+
+@pytest.mark.asyncio
+async def test_missing_record_maps_to_not_found() -> None:
+    async def missing(_: httpx.Request) -> httpx.Response:
+        return httpx.Response(404, text="no such record")
+
+    http_client = httpx.AsyncClient(transport=httpx.MockTransport(missing))
+    async with DpmaRegisterClient("user", "password", client=http_client) as client:
+        with pytest.raises(NotFoundError):
             await client.get_design("1")
