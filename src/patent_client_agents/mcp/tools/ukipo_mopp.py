@@ -17,9 +17,9 @@ from typing import Annotated, Any
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.paging import Limit100, Offset
 from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.ukipo_mopp import MoppClient, get_corpus_status
 
@@ -115,8 +115,8 @@ async def search_mopp(
         "'industrial application'. By default treated as an adjacent-word "
         "phrase; set ``syntax='or'`` to widen.",
     ],
-    limit: Annotated[int, "Maximum hits to return (1-100)."] = 25,
-    offset: Annotated[int, "Result offset for pagination."] = 0,
+    limit: Limit100 = 25,
+    offset: Offset = 0,
     syntax: Annotated[
         str,
         "Query syntax. 'adj' (default) — adjacent-word phrase match. "
@@ -152,17 +152,13 @@ async def search_mopp(
 
     Related tools: get_mopp_section.
     """
-    if limit < 1 or limit > 100:
-        raise ValidationError(f"limit must be between 1 and 100; got {limit}")
-
-    page = (offset // limit) + 1 if offset >= 0 else 1
     async with MoppClient() as client:
         response = await client.search(
             query=query,
             syntax=syntax,
             sort=sort,
             per_page=limit,
-            page=page,
+            offset=offset,
         )
 
     hits = [h.model_dump() for h in response.hits]

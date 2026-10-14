@@ -229,6 +229,7 @@ class IpoInStatutesClient:
         sort: str = "relevance",
         per_page: int = 10,
         page: int = 1,
+        offset: int | None = None,
     ) -> IpoInSearchResponse:
         db = self._open()
         statute = _resolve_statute(statute_name)
@@ -242,7 +243,9 @@ class IpoInStatutesClient:
                 per_page=per_page,
                 has_more=False,
             )
-        offset = max(0, (page - 1) * per_page)
+        # A row ``offset`` takes precedence over ``page`` when given.
+        if offset is None:
+            offset = max(0, (page - 1) * per_page)
         rows = db.search(
             fts_query,
             statute_name=statute,
