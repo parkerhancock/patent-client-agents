@@ -207,7 +207,7 @@ def test_main_handles_keyboard_interrupt(monkeypatch, tmp_path: Path):
     def _boom(*_, **__):
         raise KeyboardInterrupt()
 
-    monkeypatch.setattr(build_mod, "asyncio", MagicMock(run=_boom))
+    monkeypatch.setattr(build_mod, "build_corpus", _boom)
     out = tmp_path / "corpus.db"
     rc = main(["--output", str(out)])
     assert rc == 130

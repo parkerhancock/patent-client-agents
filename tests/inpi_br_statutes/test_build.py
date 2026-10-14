@@ -136,12 +136,12 @@ async def test_build_corpus_writes_sqlite_with_pt_and_en(tmp_path: Path) -> None
     """End-to-end: build → SQLite → read-back via CorpusDB."""
     out = tmp_path / "inpi_br_statutes.db"
 
-    async def fake_fetch(client, url):  # noqa: ARG001 — signature mirrors _fetch
+    async def fake_fetch(client, url):  # noqa: ARG001 — signature mirrors fetch_text
         if "wipo" in url or "wipolex" in url:
             return _FAKE_EN_HTML
         return _FAKE_PT_HTML
 
-    with patch("patent_client_agents.inpi_br_statutes.corpus.build._fetch", new=fake_fetch):
+    with patch("patent_client_agents.inpi_br_statutes.corpus.build.fetch_text", new=fake_fetch):
         rows = await build_corpus(
             out,
             pt_url="https://www.planalto.gov.br/ccivil_03/leis/l9279.htm",
@@ -179,7 +179,7 @@ async def test_build_corpus_pt_only_when_en_fetch_fails(tmp_path: Path) -> None:
             raise RuntimeError("EN unavailable")
         return _FAKE_PT_HTML
 
-    with patch("patent_client_agents.inpi_br_statutes.corpus.build._fetch", new=fake_fetch):
+    with patch("patent_client_agents.inpi_br_statutes.corpus.build.fetch_text", new=fake_fetch):
         rows = await build_corpus(
             out,
             pt_url="https://www.planalto.gov.br/ccivil_03/leis/l9279.htm",
@@ -201,7 +201,7 @@ async def test_build_corpus_pt_only_when_en_url_not_supplied(tmp_path: Path) -> 
     async def fake_fetch(client, url):  # noqa: ARG001
         return _FAKE_PT_HTML
 
-    with patch("patent_client_agents.inpi_br_statutes.corpus.build._fetch", new=fake_fetch):
+    with patch("patent_client_agents.inpi_br_statutes.corpus.build.fetch_text", new=fake_fetch):
         rows = await build_corpus(out)
 
     assert rows >= 2
@@ -254,7 +254,7 @@ def test_build_corpus_replaces_existing_file(tmp_path: Path) -> None:
 
     import asyncio
 
-    with patch("patent_client_agents.inpi_br_statutes.corpus.build._fetch", new=fake_fetch):
+    with patch("patent_client_agents.inpi_br_statutes.corpus.build.fetch_text", new=fake_fetch):
         rows = asyncio.run(build_corpus(out))
 
     assert rows >= 2
