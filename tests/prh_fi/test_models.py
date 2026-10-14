@@ -10,28 +10,28 @@ from patent_client_agents.prh_fi.models import (
     DossierSearchResponse,
     PatentGetRecord,
     PatentSearchResponse,
-    _parse_iso_date,
 )
+from patent_client_agents.shared.models import parse_ymd_date
 
 
 def test_parse_iso_date_valid() -> None:
-    assert _parse_iso_date("2026-05-19") == date(2026, 5, 19)
+    assert parse_ymd_date("2026-05-19") == date(2026, 5, 19)
 
 
 def test_parse_iso_date_passthrough() -> None:
     today = date(2024, 1, 1)
-    assert _parse_iso_date(today) is today
+    assert parse_ymd_date(today) is today
 
 
 def test_parse_iso_date_none_and_empty() -> None:
-    assert _parse_iso_date(None) is None
-    assert _parse_iso_date("") is None
-    assert _parse_iso_date("   ") is None
+    assert parse_ymd_date(None) is None
+    assert parse_ymd_date("") is None
+    assert parse_ymd_date("   ") is None
 
 
 def test_parse_iso_date_malformed() -> None:
-    assert _parse_iso_date("not-a-date") is None
-    assert _parse_iso_date("2026/05/19") is None
+    assert parse_ymd_date("not-a-date") is None
+    assert parse_ymd_date("2026/05/19") is None
 
 
 # Patent search ----------------------------------------------------------

@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 from datetime import date, datetime
-from typing import Any
+from typing import Annotated, Any
 
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import BaseModel, BeforeValidator, ConfigDict
 
 
 def parse_dip_date(value: Any) -> date | None:
@@ -21,6 +21,9 @@ def parse_dip_date(value: Any) -> date | None:
         except ValueError:
             continue
     return None
+
+
+_DipDate = Annotated[date | None, BeforeValidator(parse_dip_date)]
 
 
 class _ThaiDipRecord(BaseModel):
@@ -39,20 +42,15 @@ class ThaiDipPatentRecord(_ThaiDipRecord):
     patent_number: str | None = None
     title: str | None = None
     status: str | None = None
-    filing_date: date | None = None
-    publication_date: date | None = None
-    grant_date: date | None = None
-    expiry_date: date | None = None
+    filing_date: _DipDate = None
+    publication_date: _DipDate = None
+    grant_date: _DipDate = None
+    expiry_date: _DipDate = None
     applicant: str | None = None
     inventor: str | None = None
     agent: str | None = None
     ipc: str | None = None
     abstract: str | None = None
-
-    @field_validator("filing_date", "publication_date", "grant_date", "expiry_date", mode="before")
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_dip_date(value)
 
 
 class ThaiDipTrademarkRecord(_ThaiDipRecord):
@@ -62,20 +60,13 @@ class ThaiDipTrademarkRecord(_ThaiDipRecord):
     registration_number: str | None = None
     mark_name: str | None = None
     status: str | None = None
-    application_date: date | None = None
-    registration_date: date | None = None
-    publication_date: date | None = None
-    expiry_date: date | None = None
+    application_date: _DipDate = None
+    registration_date: _DipDate = None
+    publication_date: _DipDate = None
+    expiry_date: _DipDate = None
     owner: str | None = None
     nice_class: str | None = None
     goods: str | None = None
-
-    @field_validator(
-        "application_date", "registration_date", "publication_date", "expiry_date", mode="before"
-    )
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_dip_date(value)
 
 
 class ThaiDipCopyrightRecord(_ThaiDipRecord):
@@ -86,15 +77,10 @@ class ThaiDipCopyrightRecord(_ThaiDipRecord):
     work_name: str | None = None
     category: str | None = None
     work_type: str | None = None
-    submit_date: date | None = None
+    submit_date: _DipDate = None
     owner: str | None = None
     creator: str | None = None
     description: str | None = None
-
-    @field_validator("submit_date", mode="before")
-    @classmethod
-    def parse_submit_date(cls, value: Any) -> date | None:
-        return parse_dip_date(value)
 
 
 class ThaiDipSongRecord(_ThaiDipRecord):
@@ -106,12 +92,7 @@ class ThaiDipSongRecord(_ThaiDipRecord):
     composer: str | None = None
     song_type: str | None = None
     license_owner: str | None = None
-    license_end_date: date | None = None
-
-    @field_validator("license_end_date", mode="before")
-    @classmethod
-    def parse_license_end_date(cls, value: Any) -> date | None:
-        return parse_dip_date(value)
+    license_end_date: _DipDate = None
 
 
 class ThaiDipGiRecord(_ThaiDipRecord):
@@ -125,10 +106,5 @@ class ThaiDipGiRecord(_ThaiDipRecord):
     product_type: str | None = None
     province: str | None = None
     region: str | None = None
-    application_date: date | None = None
-    publication_date: date | None = None
-
-    @field_validator("application_date", "publication_date", mode="before")
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_dip_date(value)
+    application_date: _DipDate = None
+    publication_date: _DipDate = None

@@ -6,64 +6,60 @@ from typing import Any
 
 from pydantic import BaseModel, Field, field_validator
 
+from patent_client_agents.shared.models import ApiModel
 
-class OfficeActionRejection(BaseModel):
+
+class OfficeActionRejection(ApiModel):
     """A single office action rejection record."""
 
     id: str = ""
-    patent_application_number: str = Field("", alias="patentApplicationNumber")
-    legal_section_code: str = Field("", alias="legalSectionCode")
-    action_type_category: str = Field("", alias="actionTypeCategory")
-    legacy_document_code_identifier: str = Field("", alias="legacyDocumentCodeIdentifier")
-    submission_date: str = Field("", alias="submissionDate")
-    group_art_unit_number: str = Field("", alias="groupArtUnitNumber")
-    national_class: str = Field("", alias="nationalClass")
-    national_subclass: str = Field("", alias="nationalSubclass")
-    claim_number_array_document: list[str] = Field(
-        default_factory=list, alias="claimNumberArrayDocument"
-    )
-    has_rej_101: int = Field(0, alias="hasRej101")
-    has_rej_102: int = Field(0, alias="hasRej102")
-    has_rej_103: int = Field(0, alias="hasRej103")
-    has_rej_112: int = Field(0, alias="hasRej112")
+    patent_application_number: str = ""
+    legal_section_code: str = ""
+    action_type_category: str = ""
+    legacy_document_code_identifier: str = ""
+    submission_date: str = ""
+    group_art_unit_number: str = ""
+    national_class: str = ""
+    national_subclass: str = ""
+    claim_number_array_document: list[str] = Field(default_factory=list)
+    has_rej_101: int = 0
+    has_rej_102: int = 0
+    has_rej_103: int = 0
+    has_rej_112: int = 0
     has_rej_dp: int = Field(0, alias="hasRejDP")
-    cite_103_max: int = Field(0, alias="cite103Max")
+    cite_103_max: int = 0
     cite_103_eq1: int = Field(0, alias="cite103EQ1")
     cite_103_gt3: int = Field(0, alias="cite103GT3")
-    allowed_claim_indicator: bool = Field(False, alias="allowedClaimIndicator")
-    alice_indicator: bool = Field(False, alias="aliceIndicator")
-    bilski_indicator: bool = Field(False, alias="bilskiIndicator")
-    mayo_indicator: bool = Field(False, alias="mayoIndicator")
-    myriad_indicator: bool = Field(False, alias="myriadIndicator")
-    closing_missing: int = Field(0, alias="closingMissing")
-    header_missing: int = Field(0, alias="headerMissing")
-    form_paragraph_missing: int = Field(0, alias="formParagraphMissing")
+    allowed_claim_indicator: bool = False
+    alice_indicator: bool = False
+    bilski_indicator: bool = False
+    mayo_indicator: bool = False
+    myriad_indicator: bool = False
+    closing_missing: int = 0
+    header_missing: int = 0
+    form_paragraph_missing: int = 0
     reject_form_mismatch: int = Field(0, alias="rejectFormMissmatch")
-    paragraph_number: str = Field("", alias="paragraphNumber")
+    paragraph_number: str = ""
 
     model_config = {"populate_by_name": True, "extra": "allow"}
 
 
-class OfficeActionCitation(BaseModel):
+class OfficeActionCitation(ApiModel):
     """A single office action citation record."""
 
     id: str = ""
-    patent_application_number: str = Field("", alias="patentApplicationNumber")
-    reference_identifier: str = Field("", alias="referenceIdentifier")
-    parsed_reference_identifier: str = Field("", alias="parsedReferenceIdentifier")
-    legal_section_code: str = Field("", alias="legalSectionCode")
-    action_type_category: str = Field("", alias="actionTypeCategory")
-    group_art_unit_number: str = Field("", alias="groupArtUnitNumber")
-    tech_center: str = Field("", alias="techCenter")
-    work_group: str = Field("", alias="workGroup")
-    paragraph_number: str = Field("", alias="paragraphNumber")
-    examiner_cited_reference_indicator: bool = Field(False, alias="examinerCitedReferenceIndicator")
-    applicant_cited_examiner_reference_indicator: bool = Field(
-        False, alias="applicantCitedExaminerReferenceIndicator"
-    )
-    office_action_citation_reference_indicator: bool = Field(
-        False, alias="officeActionCitationReferenceIndicator"
-    )
+    patent_application_number: str = ""
+    reference_identifier: str = ""
+    parsed_reference_identifier: str = ""
+    legal_section_code: str = ""
+    action_type_category: str = ""
+    group_art_unit_number: str = ""
+    tech_center: str = ""
+    work_group: str = ""
+    paragraph_number: str = ""
+    examiner_cited_reference_indicator: bool = False
+    applicant_cited_examiner_reference_indicator: bool = False
+    office_action_citation_reference_indicator: bool = False
 
     model_config = {"populate_by_name": True, "extra": "allow"}
 
@@ -75,7 +71,7 @@ def _coerce_str(v: Any) -> str:
     return str(v) if v is not None else ""
 
 
-class OfficeActionText(BaseModel):
+class OfficeActionText(ApiModel):
     """A single office action text record.
 
     The oa_actions Solr endpoint returns many scalar fields as single-element
@@ -83,20 +79,20 @@ class OfficeActionText(BaseModel):
     """
 
     id: str = ""
-    patent_application_number: str = Field("", alias="patentApplicationNumber")
-    submission_date: str = Field("", alias="submissionDate")
-    legacy_document_code_identifier: str = Field("", alias="legacyDocumentCodeIdentifier")
-    body_text: list[str] = Field(default_factory=list, alias="bodyText")
-    invention_title: str = Field("", alias="inventionTitle")
-    application_status_number: int = Field(0, alias="applicationStatusNumber")
-    filing_date: str = Field("", alias="filingDate")
-    grant_date: str = Field("", alias="grantDate")
-    patent_number: str = Field("", alias="patentNumber")
-    group_art_unit_number: str = Field("", alias="groupArtUnitNumber")
-    national_class: list[str] = Field(default_factory=list, alias="nationalClass")
-    work_group: list[str] = Field(default_factory=list, alias="workGroup")
-    customer_number: int | None = Field(None, alias="customerNumber")
-    application_type_category: str = Field("", alias="applicationTypeCategory")
+    patent_application_number: str = ""
+    submission_date: str = ""
+    legacy_document_code_identifier: str = ""
+    body_text: list[str] = Field(default_factory=list)
+    invention_title: str = ""
+    application_status_number: int = 0
+    filing_date: str = ""
+    grant_date: str = ""
+    patent_number: str = ""
+    group_art_unit_number: str = ""
+    national_class: list[str] = Field(default_factory=list)
+    work_group: list[str] = Field(default_factory=list)
+    customer_number: int | None = None
+    application_type_category: str = ""
     sections: list[dict[str, Any]] = Field(default_factory=list)
 
     @field_validator(
@@ -118,38 +114,36 @@ class OfficeActionText(BaseModel):
     model_config = {"populate_by_name": True, "extra": "allow"}
 
 
-class EnrichedCitation(BaseModel):
+class EnrichedCitation(ApiModel):
     """A single enriched citation metadata record."""
 
     id: str = ""
-    patent_application_number: str = Field("", alias="patentApplicationNumber")
-    cited_document_identifier: str = Field("", alias="citedDocumentIdentifier")
-    publication_number: str = Field("", alias="publicationNumber")
-    inventor_name_text: str = Field("", alias="inventorNameText")
-    kind_code: str = Field("", alias="kindCode")
-    country_code: str = Field("", alias="countryCode")
-    office_action_date: str = Field("", alias="officeActionDate")
-    office_action_category: str = Field("", alias="officeActionCategory")
-    citation_category_code: str = Field("", alias="citationCategoryCode")
-    related_claim_number_text: str = Field("", alias="relatedClaimNumberText")
-    passage_location_text: list[str] = Field(default_factory=list, alias="passageLocationText")
-    quality_summary_text: str = Field("", alias="qualitySummaryText")
-    group_art_unit_number: str = Field("", alias="groupArtUnitNumber")
-    tech_center: str = Field("", alias="techCenter")
-    work_group_number: str = Field("", alias="workGroupNumber")
-    npl_indicator: bool = Field(False, alias="nplIndicator")
-    examiner_cited_reference_indicator: bool = Field(False, alias="examinerCitedReferenceIndicator")
-    applicant_cited_examiner_reference_indicator: bool = Field(
-        False, alias="applicantCitedExaminerReferenceIndicator"
-    )
+    patent_application_number: str = ""
+    cited_document_identifier: str = ""
+    publication_number: str = ""
+    inventor_name_text: str = ""
+    kind_code: str = ""
+    country_code: str = ""
+    office_action_date: str = ""
+    office_action_category: str = ""
+    citation_category_code: str = ""
+    related_claim_number_text: str = ""
+    passage_location_text: list[str] = Field(default_factory=list)
+    quality_summary_text: str = ""
+    group_art_unit_number: str = ""
+    tech_center: str = ""
+    work_group_number: str = ""
+    npl_indicator: bool = False
+    examiner_cited_reference_indicator: bool = False
+    applicant_cited_examiner_reference_indicator: bool = False
 
     model_config = {"populate_by_name": True, "extra": "allow"}
 
 
-class DatasetApiResponse(BaseModel):
+class DatasetApiResponse(ApiModel):
     """Standard response from USPTO Dataset API endpoints."""
 
-    num_found: int = Field(0, alias="numFound")
+    num_found: int = 0
     start: int = 0
     docs: list[dict[str, Any]] = Field(default_factory=list)
 
