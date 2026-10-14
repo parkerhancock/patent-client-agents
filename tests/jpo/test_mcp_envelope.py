@@ -23,6 +23,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope, Provenance, ResponseEnvelope
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.jpo import (
     ApplicantAttorney,
     DivisionalAppInfoData,
@@ -93,12 +94,57 @@ async def test_get_jpo_progress_list_preserves_order(mock_client) -> None:
 
 
 @pytest.mark.asyncio
-async def test_get_jpo_progress_empty_record_yields_empty_item(mock_client) -> None:
+async def test_get_jpo_progress_empty_record_reports_not_found(mock_client) -> None:
     mock_client.get_patent_progress = AsyncMock(return_value=None)
     result = await inter.get_jpo_progress("9999999999", ip_type="patent")
     assert isinstance(result, ListEnvelope)
-    assert result.items == [{}]
+    assert result.items == []
+    assert result.not_found == ["9999999999"]
     assert "no data" in result.summary.lower()
+
+
+@pytest.mark.asyncio
+async def test_get_jpo_progress_list_leaves_out_not_found(mock_client) -> None:
+    async def _progress(appl: str) -> PatentProgressData:
+        if appl == "2020100002":
+            raise NotFoundError("missing")
+        return PatentProgressData(applicationNumber=appl)
+
+    mock_client.get_patent_progress = AsyncMock(side_effect=_progress)
+    result = await inter.get_jpo_progress(["2020100001", "2020100002", "2020100003"])
+
+    assert [item["application_number"] for item in result.items] == [
+        "2020100001",
+        "2020100003",
+    ]
+    assert result.not_found == ["2020100002"]
+    assert result.summary == ("Fetched 2 of 3 JPO patent progress records. Not found: 2020100002.")
+
+
+@pytest.mark.asyncio
+async def test_get_jpo_progress_single_not_found_raises(mock_client) -> None:
+    mock_client.get_patent_progress = AsyncMock(side_effect=NotFoundError("missing"))
+    with pytest.raises(NotFoundError):
+        await inter.get_jpo_progress("2020100002")
+
+
+@pytest.mark.asyncio
+async def test_get_jpo_registration_info_list_reports_unregistered(mock_client) -> None:
+    mock_client.get_patent_registration_info = AsyncMock(
+        side_effect=[RegistrationInfo(registrationNumber="REG1"), None]
+    )
+    result = await inter.get_jpo_registration_info(["2020100001", "2020100002"])
+
+    assert [r["registration_number"] for r in result.items] == ["REG1"]
+    assert result.not_found == ["2020100002"]
+
+
+@pytest.mark.asyncio
+async def test_get_jpo_progress_over_cap_rejected_before_request(mock_client) -> None:
+    mock_client.get_patent_progress = AsyncMock()
+    with pytest.raises(ValidationError, match="limit 50"):
+        await inter.get_jpo_progress([f"20201{i:05d}" for i in range(51)])
+    mock_client.get_patent_progress.assert_not_awaited()
 
 
 # ──────────────────────────────────────────────────────────────────────

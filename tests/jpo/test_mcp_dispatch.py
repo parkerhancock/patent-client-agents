@@ -94,11 +94,12 @@ class TestGetJpoProgressDispatch:
             await inter.get_jpo_progress("2020123456", ip_type="utility")  # type: ignore[arg-type]
 
     @pytest.mark.asyncio
-    async def test_returns_empty_dict_when_no_data(self, mock_client) -> None:
+    async def test_reports_not_found_when_no_data(self, mock_client) -> None:
         mock_client.get_patent_progress = AsyncMock(return_value=None)
         result = await inter.get_jpo_progress("9999999999", ip_type="patent")
-        # Single-id call still returns ListEnvelope per §5.4; item is {}.
-        assert result.items == [{}]
+        # A None record is reported in not_found rather than as an empty item.
+        assert result.items == []
+        assert result.not_found == ["9999999999"]
 
 
 # ---------------------------------------------------------------------------
@@ -165,10 +166,11 @@ class TestGetJpoRegistrationInfoDispatch:
         assert result.items[0]["registration_number"] == "1234567"
 
     @pytest.mark.asyncio
-    async def test_returns_empty_for_unregistered(self, mock_client) -> None:
+    async def test_reports_unregistered_as_not_found(self, mock_client) -> None:
         mock_client.get_trademark_registration_info = AsyncMock(return_value=None)
         result = await inter.get_jpo_registration_info("2024123456", ip_type="trademark")
-        assert result.items == [{}]
+        assert result.items == []
+        assert result.not_found == ["2024123456"]
 
 
 # ---------------------------------------------------------------------------
