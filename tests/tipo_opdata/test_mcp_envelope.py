@@ -20,7 +20,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.mcp.tools import tipo_opdata as tipo_mcp
 
 # ──────────────────────────────────────────────────────────────────────
@@ -243,17 +243,76 @@ def test_lean_recurses_into_dicts_and_lists() -> None:
 # ──────────────────────────────────────────────────────────────────────
 
 
-def test_coerce_list_string_input() -> None:
-    assert tipo_mcp._coerce_list("A1", tool="t") == ["A1"]
+@pytest.mark.asyncio
+async def test_get_tipo_patent_over_cap_rejected_before_request(mock_client: AsyncMock) -> None:
+    mock_client.search_patent_appl = AsyncMock()
+    with pytest.raises(ValidationError, match="limit 50"):
+        await tipo_mcp.get_tipo_patent(appl_no=[f"A{i}" for i in range(51)])
+    mock_client.search_patent_appl.assert_not_awaited()
 
 
-def test_coerce_list_mixed_blank_filtered() -> None:
-    assert tipo_mcp._coerce_list(["A1", "  ", "A2"], tool="t") == ["A1", "A2"]
+@pytest.mark.asyncio
+async def test_get_tipo_patent_list_leaves_out_not_found(mock_client: AsyncMock) -> None:
+    async def _appl(appl_no: str) -> list[_FakeRow]:
+        if appl_no == "A2":
+            raise NotFoundError("missing")
+        return [_FakeRow(**_patent_payload(appl_no))]
+
+    mock_client.search_patent_appl = AsyncMock(side_effect=_appl)
+    result = await tipo_mcp.get_tipo_patent(appl_no=["A1", "A2", "A3"])
+
+    assert [r["appl-no"] for r in result.items] == ["A1", "A3"]
+    assert result.not_found == ["A2"]
+    assert "Fetched 2 of 3" in result.summary
+    assert "Not found: A2." in result.summary
 
 
-def test_coerce_list_all_blank_raises() -> None:
-    with pytest.raises(ValidationError):
-        tipo_mcp._coerce_list(["", " "], tool="t")
+@pytest.mark.asyncio
+async def test_get_tipo_patent_list_reports_empty_rows_as_not_found(
+    mock_client: AsyncMock,
+) -> None:
+    mock_client.search_patent_appl = AsyncMock(
+        side_effect=[[_FakeRow(**_patent_payload("A1"))], []]
+    )
+    result = await tipo_mcp.get_tipo_patent(appl_no=["A1", "A2"])
+
+    assert [r["appl-no"] for r in result.items] == ["A1"]
+    assert result.not_found == ["A2"]
+
+
+@pytest.mark.asyncio
+async def test_get_tipo_patent_single_not_found_raises(mock_client: AsyncMock) -> None:
+    mock_client.search_patent_appl = AsyncMock(side_effect=NotFoundError("missing"))
+    with pytest.raises(NotFoundError):
+        await tipo_mcp.get_tipo_patent(appl_no="A2")
+
+
+@pytest.mark.asyncio
+async def test_get_tipo_patent_priority_empty_rows_is_not_not_found(
+    mock_client: AsyncMock,
+) -> None:
+    mock_client.get_patent_priority = AsyncMock(side_effect=[[_FakeRow(sequence=1)], []])
+    result = await tipo_mcp.get_tipo_patent_priority(appl_no=["A1", "A2"])
+
+    assert len(result.items) == 1
+    assert result.not_found == []
+
+
+@pytest.mark.asyncio
+async def test_get_tipo_trademark_events_list_leaves_out_not_found(
+    mock_client: AsyncMock,
+) -> None:
+    async def _change(appl_no: str) -> list[_FakeRow]:
+        if appl_no == "T2":
+            raise NotFoundError("missing")
+        return [_FakeRow(sequence=1)]
+
+    mock_client.get_tmark_change = AsyncMock(side_effect=_change)
+    mock_client.get_tmark_divide = AsyncMock(return_value=[])
+    result = await tipo_mcp.get_tipo_trademark_events(appl_no=["T1", "T2"])
+
+    assert [item["appl_no"] for item in result.items] == ["T1"]
+    assert result.not_found == ["T2"]
 
 
 # ──────────────────────────────────────────────────────────────────────

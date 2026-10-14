@@ -23,6 +23,7 @@ from mcp_data_core.envelope import (
     ResponseEnvelope,
     decode_cursor,
 )
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.epo_ops.models import (
     BiblioRecord,
     BiblioResponse,
@@ -46,6 +47,7 @@ from patent_client_agents.mcp.tools.epo_ops import (
     get_epo_family,
     get_epo_fulltext,
     get_epo_legal_events,
+    get_epo_register_events,
     search_epo,
 )
 
@@ -378,6 +380,62 @@ async def test_get_epo_biblio_empty_input_raises():
 
     with pytest.raises(ValidationError):
         await get_epo_biblio(patent_number=[])
+
+
+@pytest.mark.asyncio
+async def test_get_epo_biblio_list_leaves_out_not_found():
+    mock_client = MagicMock()
+
+    async def _fake_fetch(*, number: str):
+        if number == "EP2.A1":
+            raise NotFoundError("missing")
+        return _make_biblio(number, title=number)
+
+    mock_client.fetch_biblio = AsyncMock(side_effect=_fake_fetch)
+
+    with _patch_client_from_env(mock_client):
+        result = await get_epo_biblio(patent_number=["EP1.A1", "EP2.A1", "EP3.A1"])
+
+    assert [item["documents"][0]["title"] for item in result.items] == ["EP1.A1", "EP3.A1"]
+    assert result.not_found == ["EP2.A1"]
+    assert result.summary == "Fetched 2 of 3 EPO OPS biblio records. Not found: EP2.A1."
+
+
+@pytest.mark.asyncio
+async def test_get_epo_biblio_single_not_found_raises():
+    mock_client = MagicMock()
+    mock_client.fetch_biblio = AsyncMock(side_effect=NotFoundError("missing"))
+
+    with _patch_client_from_env(mock_client), pytest.raises(NotFoundError):
+        await get_epo_biblio(patent_number="EP2.A1")
+
+
+@pytest.mark.asyncio
+async def test_get_epo_biblio_alias_over_cap_rejected_before_client():
+    with (
+        patch("patent_client_agents.mcp.tools.epo_ops.client_from_env") as factory,
+        pytest.raises(ValidationError, match="limit 50"),
+    ):
+        await get_epo_biblio(publication_number=[f"EP{i}A1" for i in range(51)])
+    factory.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_get_epo_register_events_list_leaves_out_not_found():
+    mock_client = MagicMock()
+
+    async def _fake_fetch(*, number: str):
+        if number == "EP2":
+            raise NotFoundError("missing")
+        return {"epo_number": number, "events": []}
+
+    mock_client.fetch_register_events = AsyncMock(side_effect=_fake_fetch)
+
+    with _patch_client_from_env(mock_client):
+        result = await get_epo_register_events([" ep1 ", "EP2"])
+
+    assert [item["epo_number"] for item in result.items] == ["EP1"]
+    assert result.not_found == ["EP2"]
 
 
 # ──────────────────────────────────────────────────────────────────────
