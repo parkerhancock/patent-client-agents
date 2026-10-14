@@ -290,11 +290,9 @@ async def scrape_dpma_patents() -> FeeSchedule:
         office_code="DPMA",
         right=RightType.patent,
         currency="EUR",
-        # DPMA does not stamp a revision date in the PDF metadata; we
-        # treat the schedule as current-as-of-fetch. PatKostG amendments
-        # are gazetted and bind the office, so the operative effective
-        # date is the most-recent PatKostG amendment.
-        effective_date=date.today(),
+        # DPMA does not stamp a revision date in the PDF. The operative date is
+        # the most recent PatKostG amendment, which the page doesn't state.
+        effective_date=None,
         source_url=DPMA_FEES_HTML_URL,
         statutory_basis=(
             "Patentkostengesetz (PatKostG) and the accompanying ordinance "

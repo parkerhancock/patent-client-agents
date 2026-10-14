@@ -13,7 +13,7 @@ before we fetched it).
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -39,13 +39,15 @@ fees_mcp = FastMCP("IP fee schedules")
 
 
 _SOURCE_NAME = "IP-office fee schedules"
+_NO_EFFECTIVE_DATE = "effective date not published by the office"
 
 
 def _fees_provenance(schedule: FeeSchedule | None, fallback_url: str) -> Any:
     """Build Provenance for a fees response.
 
     Sets ``effective_date`` from the schedule's effective date — the
-    field the fees-category CI compliance test enforces. ``retrieved_at``
+    field the fees-category CI compliance test enforces. When the office
+    publishes no effective date, it stays None and ``as_of_status`` says so. ``retrieved_at``
     uses retained byte evidence when available. When no schedule
     is in hand (cross-office summary endpoint), ``effective_date`` is
     omitted; the compliance test skips list_fee_jurisdictions for this
@@ -56,6 +58,11 @@ def _fees_provenance(schedule: FeeSchedule | None, fallback_url: str) -> Any:
             source_url=fallback_url,
             source_name=_SOURCE_NAME,
         )
+    notes = []
+    if schedule.effective_date is None:
+        notes.append(_NO_EFFECTIVE_DATE)
+    if schedule.office_code == "USPTO" and schedule.bytes_retrieved_at is None:
+        notes.append("byte retrieval time unknown; envelope timestamp is processing time")
     provenance = make_provenance(
         source_url=schedule.source_url,
         source_name=f"{_SOURCE_NAME} — {schedule.office_code}",
@@ -67,17 +74,19 @@ def _fees_provenance(schedule: FeeSchedule | None, fallback_url: str) -> Any:
             else None
         ),
         cache_hit=schedule.cache_state == "cached",
-        as_of_status="byte retrieval time unknown; envelope timestamp is processing time"
-        if schedule.office_code == "USPTO" and schedule.bytes_retrieved_at is None
-        else None,
+        as_of_status="; ".join(notes) or None,
     )
     return provenance
+
+
+def _effective_phrase(effective_date: date | None) -> str:
+    return f"effective {effective_date.isoformat()}" if effective_date else _NO_EFFECTIVE_DATE
 
 
 def _summarize_schedule(s: FeeSchedule) -> str:
     return (
         f"**{s.office_code} {s.right.value} fee schedule** "
-        f"({s.jurisdiction}) — effective {s.effective_date.isoformat()}, "
+        f"({s.jurisdiction}) — {_effective_phrase(s.effective_date)}, "
         f"{len(s.fees)} fees in {s.currency}. "
         f"Source: {s.source_url}"
     )
@@ -272,7 +281,7 @@ async def lookup_fee(
     summary = (
         f"{schedule.office_code} {right_enum.value}{cat_part}{year_part}: "
         f"{len(items)} fee{'s' if len(items) != 1 else ''} "
-        f"(schedule effective {schedule.effective_date.isoformat()})."
+        f"(schedule {_effective_phrase(schedule.effective_date)})."
     )
     if not items:
         summary += f" No matching fees found. {_summarize_recurring_coverage(schedule.recurring_fee_coverage)}"

@@ -63,11 +63,13 @@ def estimate_freshness(schedule: FeeSchedule) -> dict[str, int | str | bool | No
     today = date.today()
     return {
         "retrieved_at": schedule.retrieved_at.isoformat() if schedule.retrieved_at else None,
-        "effective_date": schedule.effective_date.isoformat(),
+        "effective_date": schedule.effective_date.isoformat() if schedule.effective_date else None,
         "days_since_retrieval": max(0, (today - schedule.retrieved_at).days)
         if schedule.retrieved_at
         else None,
-        "days_since_effective": max(0, (today - schedule.effective_date).days),
+        "days_since_effective": max(0, (today - schedule.effective_date).days)
+        if schedule.effective_date
+        else None,
     }
 
 

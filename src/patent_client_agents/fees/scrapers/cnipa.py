@@ -361,11 +361,8 @@ async def scrape_cnipa_patents() -> FeeSchedule:
         office_code="CNIPA",
         right=RightType.patent,
         currency="CNY",
-        # CNIPA's English page does not surface a per-revision date; we
-        # treat the schedule as "current as of fetch" with the office's
-        # publication-date convention being the official PRC State
-        # Council pricing bureau notice.
-        effective_date=date.today(),
+        # CNIPA's English page does not surface a per-revision date.
+        effective_date=None,
         source_url=CNIPA_FEES_URL,
         statutory_basis=(
             "Patent Law of the People's Republic of China and Implementing "

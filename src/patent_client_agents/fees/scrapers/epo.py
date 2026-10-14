@@ -28,8 +28,8 @@ Notes:
 * Parents with children carry no amount; the children are the priced rows.
 * Parents without children are themselves the priced rows.
 * EPO does not publish a single "effective_date" alongside the API
-  payload; we capture today as ``retrieved_at`` and rely on EPO's
-  cadence (revisions every 1-2 years per Administrative Council decision).
+  payload, so ``effective_date`` is None (revisions follow Administrative
+  Council decisions every 1-2 years).
 
 Statutory basis: Rules relating to Fees, EPC Implementing Regulations.
 """
@@ -280,9 +280,8 @@ async def scrape_epo_patents() -> FeeSchedule:
         right=RightType.patent,
         currency="EUR",
         # EPO doesn't surface a single "effective_date" alongside the API
-        # payload; we stamp today as a conservative effective date and let
-        # callers consult the source_url for the canonical revision history.
-        effective_date=date.today(),
+        # payload; callers can consult source_url for the revision history.
+        effective_date=None,
         source_url=EPO_FEES_OFFICIAL_PAGE,
         statutory_basis=(
             "Rules relating to Fees, EPC Implementing Regulations; "
