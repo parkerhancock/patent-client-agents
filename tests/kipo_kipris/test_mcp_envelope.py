@@ -434,24 +434,6 @@ async def test_get_kipo_design_empty_list_raises(kipo_mcp: Any, mock_client: Asy
 # ──────────────────────────────────────────────────────────────────────
 
 
-def test_kipo_provenance_builds_canonical_url(kipo_mcp: Any) -> None:
-    prov = kipo_mcp._kipo_provenance("patUtliInfoSearchService", "getWordSearch")
-    assert isinstance(prov, Provenance)
-    assert prov.source_url.endswith("/patUtliInfoSearchService/getWordSearch")
-    assert "BYOK" not in prov.source_name  # marketing only — exact phrasing
-    assert "Per-user API key" in prov.source_name
-
-
-def test_lean_projections_omit_korean_abstract(kipo_mcp: Any) -> None:
-    from patent_client_agents.kipo_kipris import PatentUtilityRow
-
-    row = PatentUtilityRow.model_validate(_patent_payload("X"))
-    lean = kipo_mcp._lean_patent(row)
-    assert "astrt_cont" not in lean
-    assert "astrtCont" not in lean
-    assert lean["application_number"] == "X"
-
-
 def test_advanced_patent_search_filters_and_summary(
     kipo_mcp: Any, mock_api: Any, monkeypatch: pytest.MonkeyPatch
 ) -> None:

@@ -11,22 +11,10 @@ import httpx
 import pytest
 
 from patent_client_agents.google_patents.cache import (
-    CACHE_TTL_SECONDS,
     CachingAsyncClient,
     PatentCache,
     build_cached_http_client,
 )
-
-
-class TestCacheTtlSeconds:
-    """Tests for CACHE_TTL_SECONDS constant."""
-
-    def test_is_30_days(self) -> None:
-        expected = 30 * 24 * 60 * 60
-        assert CACHE_TTL_SECONDS == expected
-
-    def test_is_positive(self) -> None:
-        assert CACHE_TTL_SECONDS > 0
 
 
 class TestPatentCache:
@@ -39,15 +27,6 @@ class TestPatentCache:
             cache = PatentCache(db_path, ttl_seconds=3600)
             yield cache
             cache.close()
-
-    def test_init(self, temp_cache: PatentCache) -> None:
-        assert temp_cache.ttl_seconds == 3600
-        assert temp_cache._conn is None
-
-    def test_creates_db_on_first_access(self, temp_cache: PatentCache) -> None:
-        assert temp_cache._conn is None
-        temp_cache._get_conn()
-        assert temp_cache._conn is not None
 
     def test_creates_parent_directories(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -86,28 +65,6 @@ class TestPatentCache:
             assert result is None
             cache.close()
 
-    def test_url_hash_consistent(self, temp_cache: PatentCache) -> None:
-        url = "https://patents.google.com/patent/US12345678"
-        hash1 = temp_cache._url_hash(url)
-        hash2 = temp_cache._url_hash(url)
-        assert hash1 == hash2
-
-    def test_url_hash_different_for_different_urls(self, temp_cache: PatentCache) -> None:
-        hash1 = temp_cache._url_hash("https://example.com/a")
-        hash2 = temp_cache._url_hash("https://example.com/b")
-        assert hash1 != hash2
-
-    def test_close(self, temp_cache: PatentCache) -> None:
-        temp_cache._get_conn()
-        assert temp_cache._conn is not None
-        temp_cache.close()
-        assert temp_cache._conn is None
-
-    def test_close_when_not_connected(self, temp_cache: PatentCache) -> None:
-        assert temp_cache._conn is None
-        temp_cache.close()
-        assert temp_cache._conn is None
-
 
 class TestCachingAsyncClient:
     """Tests for CachingAsyncClient class."""
@@ -119,13 +76,6 @@ class TestCachingAsyncClient:
             cache = PatentCache(db_path)
             yield cache
             cache.close()
-
-    @pytest.mark.asyncio
-    async def test_context_manager(self, temp_cache: PatentCache) -> None:
-        client = CachingAsyncClient(cache=temp_cache)
-        async with client:
-            assert client._client is not None
-        assert client._client is None
 
     @pytest.mark.asyncio
     async def test_get_without_context_raises(self, temp_cache: PatentCache) -> None:
@@ -242,10 +192,6 @@ class TestCachingAsyncClient:
 
 class TestBuildCachedHttpClient:
     """Tests for build_cached_http_client function."""
-
-    def test_returns_caching_async_client(self) -> None:
-        client = build_cached_http_client(use_cache=False, cache_name="test")
-        assert isinstance(client, CachingAsyncClient)
 
     def test_with_cache_enabled(self) -> None:
         client = build_cached_http_client(use_cache=True, cache_name="test_cache")

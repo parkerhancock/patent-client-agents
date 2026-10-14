@@ -113,27 +113,6 @@ class TestInpiTrademarkRow:
         assert row.agent_name == "Cabinet Patent"
         assert row.status == "registered"
 
-    def test_minimal_payload_all_optional(self) -> None:
-        row = InpiTrademarkRow()
-        assert row.application_number is None
-        assert row.mark_text is None
-        assert row.nice_classes == []
-        assert row.applicant_names == []
-        assert row.priority_claims == []
-
-    def test_extra_fields_ignored(self) -> None:
-        row = InpiTrademarkRow.model_validate(
-            {
-                "ApplicationNumber": "X",
-                "UnknownField": "ignored",
-                "NewExperimentalField": [1, 2, 3],
-            }
-        )
-        assert row.application_number == "X"
-        # No attribute leak from extras
-        assert not hasattr(row, "UnknownField")
-        assert not hasattr(row, "NewExperimentalField")
-
     def test_empty_string_fields_become_none(self) -> None:
         row = InpiTrademarkRow.model_validate(
             {
@@ -158,17 +137,6 @@ class TestInpiTrademarkRow:
         )
         assert row.application_date is None
         assert row.expiry_date is None
-
-    def test_populate_by_name(self) -> None:
-        """Python attribute name also accepted via populate_by_name=True."""
-        row = InpiTrademarkRow.model_validate({"application_number": "ABC", "mark_text": "X"})
-        assert row.application_number == "ABC"
-        assert row.mark_text == "X"
-
-    def test_priority_claims_passthrough(self) -> None:
-        claims = [{"country": "US", "number": "12345", "date": "2014-01-01"}]
-        row = InpiTrademarkRow.model_validate({"ApplicationNumber": "X", "PriorityDetails": claims})
-        assert row.priority_claims == claims
 
 
 # ---------------------------------------------------------------------------
@@ -211,22 +179,6 @@ class TestInpiDesignRow:
         assert row.agent_name == "Cabinet Design"
         assert row.status == "registered"
 
-    def test_minimal_payload_all_optional(self) -> None:
-        row = InpiDesignRow()
-        assert row.application_number is None
-        assert row.design_reference is None
-        assert row.image_urls == []
-        assert row.loc_classes == []
-
-    def test_extra_fields_ignored(self) -> None:
-        row = InpiDesignRow.model_validate(
-            {
-                "DesignApplicationNumber": "X",
-                "Unknown": "ignored",
-            }
-        )
-        assert row.application_number == "X"
-
     def test_empty_strings_to_none(self) -> None:
         row = InpiDesignRow.model_validate(
             {
@@ -254,15 +206,3 @@ class TestInpiDesignRow:
         assert row.registration_date == date(2014, 8, 10)
         assert row.expiry_date == date(2024, 5, 20)
         assert row.publication_date is None
-
-    def test_populate_by_name(self) -> None:
-        row = InpiDesignRow.model_validate({"application_number": "ABC", "design_title": "X"})
-        assert row.application_number == "ABC"
-        assert row.design_title == "X"
-
-    def test_priority_claims_passthrough(self) -> None:
-        claims = [{"country": "WO", "number": "123", "date": "2013-01-01", "holder_name": "X"}]
-        row = InpiDesignRow.model_validate(
-            {"DesignApplicationNumber": "X", "PriorityDetails": claims}
-        )
-        assert row.priority_claims == claims

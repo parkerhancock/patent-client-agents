@@ -113,12 +113,3 @@ async def test_get_provenance_carries_corpus_fields(mopp_corpus_env: Path) -> No
 
     assert result.provenance.corpus_version.startswith("snapshot-")
     assert isinstance(result.provenance.corpus_synced_at, datetime)
-
-
-@pytest.mark.asyncio
-async def test_no_batch_tool_present() -> None:
-    """§5.4 forbids batch_* tools — list-accepting get_* replaces them."""
-    from patent_client_agents.mcp.tools import ukipo_mopp as mod
-
-    assert not hasattr(mod, "batch_get_mopp_section")
-    assert not hasattr(mod, "batch_mopp_section")

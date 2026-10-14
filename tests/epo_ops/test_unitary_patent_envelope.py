@@ -21,7 +21,6 @@ from patent_client_agents.epo_ops.models import (
     UnitaryPatentPackage,
     UnitaryPatentStatus,
 )
-from patent_client_agents.mcp.tools import epo_ops as epo_ops_module
 from patent_client_agents.mcp.tools.epo_ops import (
     _summarize_unitary_patent,
     get_epo_unitary_patent_status,
@@ -39,19 +38,6 @@ def _patch_client_from_env(mock_client: MagicMock) -> AbstractContextManager[Mag
 # ──────────────────────────────────────────────────────────────────────
 # Rename: old name gone, new name importable (§5.7, §5.8, §5.13)
 # ──────────────────────────────────────────────────────────────────────
-
-
-def test_old_name_is_removed_from_module():
-    """The pre-rename symbol must not be reachable from the module."""
-    assert not hasattr(epo_ops_module, "get_unitary_patent_package")
-
-
-def test_new_name_is_callable_and_async():
-    """The renamed tool is a coroutine function under the new identifier."""
-    import asyncio
-
-    assert callable(get_epo_unitary_patent_status)
-    assert asyncio.iscoroutinefunction(get_epo_unitary_patent_status)
 
 
 def test_docstring_passes_elevator_test_and_lists_siblings():

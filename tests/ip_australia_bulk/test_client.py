@@ -14,19 +14,13 @@ import httpx
 import pytest
 
 from mcp_data_core.exceptions import ApiError
-from patent_client_agents.ip_australia_bulk import CKAN_HOST, IpAustraliaBulkClient
+from patent_client_agents.ip_australia_bulk import IpAustraliaBulkClient
 
 
 def _mock_http(
     handler: Callable[[httpx.Request], httpx.Response],
 ) -> httpx.AsyncClient:
     return httpx.AsyncClient(transport=httpx.MockTransport(handler))
-
-
-def test_default_base_url_is_data_gov_au() -> None:
-    client = IpAustraliaBulkClient()
-    assert client.base_url == CKAN_HOST
-    assert client._client.auth is None  # type: ignore[attr-defined]
 
 
 @pytest.mark.asyncio

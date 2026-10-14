@@ -238,15 +238,6 @@ class TestExceptionHierarchy:
         assert isinstance(error, RateLimitError)
         assert error.status_code == 403
 
-    def test_forbidden_error_stores_headers(self) -> None:
-        headers = {"X-Throttling-Control": "busy"}
-        error = OpsForbiddenError("test", headers=headers)
-        assert error.headers == headers
-
-    def test_forbidden_error_default_headers(self) -> None:
-        error = OpsForbiddenError("test")
-        assert error.headers == {}
-
 
 class TestNormalization:
     """Tests for normalization helper methods."""

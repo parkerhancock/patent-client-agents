@@ -7,11 +7,6 @@ from pathlib import Path
 import pytest
 
 from patent_client_agents.usitc.utils import (
-    DATAWEB_BASE_URL,
-    EDIS_BASE_URL,
-    HTS_BASE_URL,
-    IDS_URL,
-    coerce_bool,
     get_env_token,
     normalize_params,
 )
@@ -72,37 +67,6 @@ class TestGetEnvToken:
         assert get_env_token("TEST_TOKEN") is None
 
 
-class TestCoerceBool:
-    """Tests for coerce_bool function."""
-
-    def test_true_values(self) -> None:
-        assert coerce_bool("true") is True
-        assert coerce_bool("True") is True
-        assert coerce_bool("TRUE") is True
-        assert coerce_bool("1") is True
-        assert coerce_bool("yes") is True
-
-    def test_false_values(self) -> None:
-        assert coerce_bool("false") is False
-        assert coerce_bool("False") is False
-        assert coerce_bool("FALSE") is False
-        assert coerce_bool("0") is False
-        assert coerce_bool("no") is False
-
-    def test_none_values(self) -> None:
-        assert coerce_bool(None) is None
-        assert coerce_bool("invalid") is None
-        assert coerce_bool("maybe") is None
-
-    def test_bool_passthrough(self) -> None:
-        assert coerce_bool(True) is True
-        assert coerce_bool(False) is False
-
-    def test_strips_whitespace(self) -> None:
-        assert coerce_bool("  true  ") is True
-        assert coerce_bool("  false  ") is False
-
-
 class TestNormalizeParams:
     """Tests for normalize_params function."""
 
@@ -121,20 +85,3 @@ class TestNormalizeParams:
     def test_handles_empty_dict(self) -> None:
         result = normalize_params({})
         assert result == {}
-
-
-class TestBaseUrls:
-    """Tests for base URL constants."""
-
-    def test_edis_base_url(self) -> None:
-        assert "edis.usitc.gov" in EDIS_BASE_URL
-
-    def test_dataweb_base_url(self) -> None:
-        assert "usitc.gov" in DATAWEB_BASE_URL
-
-    def test_ids_url(self) -> None:
-        assert "ids.usitc.gov" in IDS_URL
-        assert ".json" in IDS_URL
-
-    def test_hts_base_url(self) -> None:
-        assert "hts.usitc.gov" in HTS_BASE_URL

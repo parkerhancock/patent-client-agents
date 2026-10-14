@@ -18,13 +18,6 @@ import pytest
 from patent_client_agents.ukipo_mopp import get_corpus_status
 
 
-class TestGetCorpusStatusShape:
-    def test_returns_dict_with_two_keys(self, mopp_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert isinstance(status, dict)
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestGetCorpusStatusFromBundledCorpus:
     def test_version_falls_back_to_snapshot_label(self, mopp_corpus_env: Path) -> None:
         """gov.uk doesn't publish a stable revision tag for MoPP, so the

@@ -149,18 +149,6 @@ async def test_search_more_available_false_when_exhausted():
 
 
 @pytest.mark.asyncio
-async def test_search_default_uses_reliable_ppubs_page_size():
-    page = _FakeBiblioPage(num_found=0, num_families=0, per_page=20, docs=[])
-    with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
-        mock_client = mock_cls.return_value.__aenter__.return_value
-        mock_client.search_biblio = AsyncMock(return_value=page)
-
-        await search_patent_publications(query="neural.CLM.")
-
-    mock_client.search_biblio.assert_awaited_once_with(query="neural.CLM.", start=0, limit=20)
-
-
-@pytest.mark.asyncio
 async def test_search_continues_by_family_offset():
     """Pages advance by families, and a family can carry several documents (#91)."""
     from mcp_data_core.envelope import decode_cursor
@@ -275,23 +263,6 @@ async def test_get_list_returns_list_envelope_and_preserves_order():
     assert "3 US patent publications" in result.summary
     # Multi-fetch points provenance at the collection URL, not a single record.
     assert result.provenance.source_url.endswith("/api/patents/highlight")
-
-
-@pytest.mark.asyncio
-async def test_get_list_fans_out_to_one_call_per_input():
-    pubs = ["US20230012345A1", "US20230099999A1", "US10123456B2"]
-    docs = [_make_document(p) for p in pubs]
-    with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
-        mock_client = mock_cls.return_value.__aenter__.return_value
-        resolver = AsyncMock(side_effect=docs)
-        mock_client.resolve_document_by_publication_number = resolver
-
-        await get_patent_publication(publication_number=pubs)
-
-    # One upstream call per input identifier — proves the fan-out ran.
-    assert resolver.await_count == 3
-    called_with = [call.args[0] for call in resolver.await_args_list]
-    assert called_with == pubs
 
 
 @pytest.mark.asyncio

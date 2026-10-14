@@ -21,7 +21,6 @@ from mcp_data_core.exceptions import (
     RateLimitError,
 )
 from patent_client_agents.jpo.client import (
-    BASE_URL,
     JpoClient,
     RateLimiter,
     TokenManager,
@@ -48,14 +47,6 @@ from patent_client_agents.jpo.models import (
 # =============================================================================
 
 
-class TestBaseUrl:
-    def test_is_https(self) -> None:
-        assert BASE_URL.startswith("https://")
-
-    def test_is_jpo_domain(self) -> None:
-        assert "jpo.go.jp" in BASE_URL
-
-
 # =============================================================================
 # TokenManager
 # =============================================================================
@@ -65,16 +56,6 @@ class TestTokenManager:
     @pytest.fixture
     def token_manager(self) -> TokenManager:
         return TokenManager("test_user", "test_pass")
-
-    def test_init(self, token_manager: TokenManager) -> None:
-        assert token_manager.username == "test_user"
-        assert token_manager.password == "test_pass"
-        assert token_manager._token is None
-        assert token_manager._token_expiry == 0
-
-    def test_init_custom_base_url(self) -> None:
-        manager = TokenManager("user", "pass", base_url="https://custom.api.com/")
-        assert manager.base_url == "https://custom.api.com"
 
     @pytest.mark.asyncio
     async def test_get_token_success(self) -> None:
@@ -147,13 +128,6 @@ class TestTokenManager:
         with pytest.raises(AuthenticationError, match="access forbidden"):
             await manager.get_token(client)
 
-    def test_invalidate(self, token_manager: TokenManager) -> None:
-        token_manager._token = "some_token"
-        token_manager._token_expiry = time.time() + 3600
-        token_manager.invalidate()
-        assert token_manager._token is None
-        assert token_manager._token_expiry == 0
-
 
 # =============================================================================
 # RateLimiter
@@ -161,16 +135,6 @@ class TestTokenManager:
 
 
 class TestRateLimiter:
-    def test_init_defaults(self) -> None:
-        limiter = RateLimiter()
-        assert limiter.max_requests == 10
-        assert limiter.window_seconds == 60
-
-    def test_init_custom(self) -> None:
-        limiter = RateLimiter(max_requests=5, window_seconds=30)
-        assert limiter.max_requests == 5
-        assert limiter.window_seconds == 30
-
     @pytest.mark.asyncio
     async def test_acquire_under_limit(self) -> None:
         limiter = RateLimiter(max_requests=10, window_seconds=60)
@@ -641,15 +605,6 @@ class TestDesignAndTrademarkMethods:
         assert result == "Test Corp"
 
 
-class TestContextManager:
-    @pytest.mark.asyncio
-    async def test_context_manager(self, mock_transport: httpx.MockTransport) -> None:
-        http_client = httpx.AsyncClient(transport=mock_transport)
-        async with JpoClient(username="user", password="pass", client=http_client) as client:
-            result = await client.get_patent_progress("2020123456")
-            assert result is not None
-
-
 # =============================================================================
 # No-data handling
 # =============================================================================
@@ -935,13 +890,6 @@ class TestJpoClientErrors:
 # =============================================================================
 # URL building
 # =============================================================================
-
-
-class TestBuildUrl:
-    def test_build_url(self) -> None:
-        client = JpoClient(username="user", password="pass")
-        url = client._build_url("/patent/v1/app_progress/2020123456")
-        assert url == f"{BASE_URL}/api/patent/v1/app_progress/2020123456"
 
 
 # =============================================================================

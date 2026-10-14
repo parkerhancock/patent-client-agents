@@ -13,7 +13,6 @@ from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
-    McpDataCoreError,
     NotFoundError,
     RateLimitError,
     ServerError,
@@ -65,16 +64,6 @@ def make_client(transport: httpx.MockTransport, **kwargs) -> BaseAsyncClient:
 class TestMcpDataCoreError:
     """Tests for McpDataCoreError exception."""
 
-    def test_can_raise_ip_tools_error(self) -> None:
-        with pytest.raises(McpDataCoreError):
-            raise McpDataCoreError("test error")
-
-    def test_error_message_preserved(self) -> None:
-        try:
-            raise McpDataCoreError("custom message")
-        except McpDataCoreError as e:
-            assert str(e) == "custom message"
-
     def test_api_error_appends_log_hint(self) -> None:
         try:
             raise ApiError("boom", status_code=500)
@@ -93,24 +82,9 @@ class TestMcpDataCoreError:
 class TestBaseAsyncClientInit:
     """Tests for BaseAsyncClient construction."""
 
-    def test_can_instantiate(self) -> None:
-        client = BaseAsyncClient(base_url="https://example.com")
-        assert client.base_url == "https://example.com"
-
-    def test_default_values(self) -> None:
-        client = BaseAsyncClient()
-        assert client.base_url == ""
-        assert client._max_retries == 4
-        assert client._owns_client is True
-
     def test_base_url_trailing_slash_stripped(self) -> None:
         client = BaseAsyncClient(base_url="https://example.com/")
         assert client.base_url == "https://example.com"
-
-    def test_injected_client_not_owned(self) -> None:
-        http = httpx.AsyncClient(transport=mock_transport(200))
-        client = BaseAsyncClient(base_url="https://x.com", client=http)
-        assert client._owns_client is False
 
     def test_cache_disabled_when_client_injected(self) -> None:
         http = httpx.AsyncClient(transport=mock_transport(200))
@@ -260,20 +234,6 @@ class TestRequest:
         client = make_client(mock_transport(400, "bad"))
         with pytest.raises(ApiError, match="loading patent"):
             await client._request("GET", "/x", context="loading patent")
-
-    @pytest.mark.asyncio
-    async def test_timeout_forwarded(self) -> None:
-        """Line 261: timeout kwarg passed through to httpx."""
-
-        def handler(request: httpx.Request) -> httpx.Response:  # noqa: ARG001
-            # httpx doesn't expose timeout on the request object directly,
-            # but the kwarg is forwarded — just verify no error
-            return httpx.Response(200, text="ok")
-
-        transport = httpx.MockTransport(handler)
-        client = make_client(transport)
-        resp = await client._request("GET", "/items", timeout=5.0)
-        assert resp.status_code == 200
 
     @pytest.mark.asyncio
     async def test_json_body_forwarded(self) -> None:

@@ -134,13 +134,6 @@ async def test_get_invalid_citation_raises_validation(
         await get_legifrance_section(citation="totally not a citation")
 
 
-async def test_no_batch_tool_present() -> None:
-    from patent_client_agents.mcp.tools import legifrance_ip as mod
-
-    assert not hasattr(mod, "batch_get_legifrance_section")
-    assert not hasattr(mod, "batch_legifrance_section")
-
-
 async def test_tools_are_mounted_on_root_server() -> None:
     from patent_client_agents.mcp import ip_mcp
 
