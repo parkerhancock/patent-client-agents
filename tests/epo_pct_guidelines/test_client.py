@@ -32,3 +32,11 @@ class TestPctGuidelines:
             r = await c.search("Discoveries")
         assert r.hits
         assert r.hits[0].result_url.startswith("https://www.epo.org/en/legal/guidelines-pct/")
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("syntax", ["and", "or"])
+async def test_search_accepts_citation_punctuation(syntax: str) -> None:
+    # FTS5 rejects bare punctuation; citations like these used to raise OperationalError.
+    async with PctGuidelinesClient() as client:
+        await client.search("Art. 54(2) G-II, 1207.01(a) L.611-10 NOT", syntax=syntax)

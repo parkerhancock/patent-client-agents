@@ -9,10 +9,7 @@ from patent_client_agents.legifrance_ip import (
     LegifranceIpClient,
     parse_citation,
 )
-from patent_client_agents.legifrance_ip.client import (
-    _normalize_section,
-    _translate_fts_query,
-)
+from patent_client_agents.legifrance_ip.client import _normalize_section
 from patent_client_agents.legifrance_ip.corpus import CorpusUnavailable
 
 
@@ -77,17 +74,6 @@ class TestNormalizeSection:
 
     def test_dot_between_digits(self) -> None:
         assert _normalize_section("L 611.10") == "L611-10"
-
-
-class TestTranslateFtsQuery:
-    def test_strips_whitespace(self) -> None:
-        assert _translate_fts_query("  brevetabilité  ") == "brevetabilité"
-
-    def test_joins_tokens_with_space(self) -> None:
-        assert _translate_fts_query("activité  inventive") == "activité inventive"
-
-    def test_empty_query_returns_empty(self) -> None:
-        assert _translate_fts_query("   ") == ""
 
 
 class TestGetSection:
@@ -178,3 +164,10 @@ class TestCorpusUnavailable:
         async with LegifranceIpClient() as c:
             with pytest.raises(CorpusUnavailable):
                 await c.get_section("L. 611-10 CPI")
+
+
+@pytest.mark.asyncio
+async def test_search_accepts_citation_punctuation() -> None:
+    # FTS5 rejects bare punctuation; citations like these used to raise OperationalError.
+    async with LegifranceIpClient() as client:
+        await client.search("L. 611-10 brevet NOT")

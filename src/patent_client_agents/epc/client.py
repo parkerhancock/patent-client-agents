@@ -25,6 +25,8 @@ import os
 import re
 from typing import Any
 
+from patent_client_agents.fts_query import translate_fts_query
+
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import EpcSearchHit, EpcSearchResponse, EpcSection, EpcVersion
 
@@ -51,19 +53,6 @@ def _citation_to_slug(text: str) -> str | None:
     kind = m.group("kind").lower().rstrip(".")
     prefix = "a" if kind in {"article", "art", "a"} else "r"
     return f"{prefix}{m.group('num').lower()}"
-
-
-def _translate_fts_query(query: str, syntax: str) -> str:
-    cleaned = query.strip()
-    if not cleaned:
-        return ""
-    if syntax in ("adj", "exact"):
-        escaped = cleaned.replace('"', '""')
-        return f'"{escaped}"'
-    tokens = [t for t in re.split(r"\s+", cleaned) if t]
-    if syntax == "or":
-        return " OR ".join(tokens)
-    return " ".join(tokens)
 
 
 def _normalize_href(value: str) -> str:
@@ -163,7 +152,7 @@ class EpcClient:
         del version, include_content, include_index, include_notes
         del include_form_paragraphs, snippet
         db = self._open()
-        fts_query = _translate_fts_query(query, syntax)
+        fts_query = translate_fts_query(query, syntax)
         if not fts_query:
             return EpcSearchResponse(hits=[], page=page, per_page=per_page, has_more=False)
         offset = max(0, (page - 1) * per_page)
