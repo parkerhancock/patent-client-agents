@@ -187,7 +187,35 @@ async def test_get_usitc_investigation_partial_not_found_lists_missing():
         result = await get_usitc_investigation(investigation_number=["337-1234", "337-9999"])
 
     assert len(result.items) == 1
+    assert result.not_found == ["337-9999"]
     assert "Not found: 337-9999" in result.summary
+
+
+@pytest.mark.asyncio
+async def test_get_usitc_investigation_list_skips_upstream_not_found_error():
+    from mcp_data_core.exceptions import NotFoundError
+
+    async def _list(*, investigation_number: str):
+        if investigation_number == "337-9999":
+            raise NotFoundError(f"no investigation {investigation_number}")
+        return [_make_investigation(investigation_number)]
+
+    with patch("patent_client_agents.mcp.tools.usitc.EdisClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.list_investigations = AsyncMock(side_effect=_list)
+
+        result = await get_usitc_investigation(
+            investigation_number=["337-1234", "337-9999", "337-5678"]
+        )
+        assert len(result.items) == 2
+        assert result.not_found == ["337-9999"]
+
+        # A single string keeps today's behavior: an empty EDIS result is
+        # reported in the summary rather than raised.
+        mock_client.list_investigations = AsyncMock(return_value=[])
+        single = await get_usitc_investigation(investigation_number="337-9999")
+        assert single.items == []
+        assert single.summary == "USITC investigation 337-9999 — not found."
 
 
 @pytest.mark.asyncio

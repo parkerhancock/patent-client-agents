@@ -114,6 +114,24 @@ async def test_exact_lookup_normalizes_parentheses() -> None:
 
 
 @pytest.mark.asyncio
+async def test_exact_lookup_list_reports_missing_case() -> None:
+    from mcp_data_core.exceptions import NotFoundError
+
+    missing = "令和7年（行ケ）第99999号"
+    with patch("patent_client_agents.mcp.tools.japan_ip_high_court.JapanIpHighCourtClient") as cls:
+        client = cls.return_value.__aenter__.return_value
+        client.list_cases = AsyncMock(return_value=_case_list())
+
+        result = await get_japan_ip_high_court_case(["令和7年（行ケ）第10011号", missing])
+        assert [item["case_number"] for item in result.items] == ["令和7年（行ケ）第10011号"]
+        assert result.not_found == [missing]
+        assert f"Not found: {missing}." in result.summary
+
+        with pytest.raises(NotFoundError):
+            await get_japan_ip_high_court_case(missing)
+
+
+@pytest.mark.asyncio
 async def test_search_rejects_reversed_dates() -> None:
     with pytest.raises(ValidationError, match="date_from"):
         await search_japan_ip_high_court_cases(

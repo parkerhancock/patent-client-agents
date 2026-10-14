@@ -19,6 +19,7 @@ from mcp_data_core.exceptions import (
     ValidationError,
 )
 from mcp_data_core.resilience import with_retry
+from patent_client_agents.shared.errors import DocumentNotFoundError
 
 from .models import PublicSearchBiblioPage, PublicSearchDocument
 from .transformers import _coerce_int, convert_biblio_page, convert_document_payload
@@ -443,7 +444,9 @@ class PublicSearchClient:
             sources=["US-PGPUB", "USPAT", "USOCR"],
         )
         if not page.docs:
-            raise ValueError(f"No documents found for publication number {publication_number!r}")
+            raise DocumentNotFoundError(
+                f"No documents found for publication number {publication_number!r}"
+            )
 
         async def _fetch(doc_guid: str, doc_source: str) -> PublicSearchDocument:
             document = await self.get_document(doc_guid, source=doc_source)

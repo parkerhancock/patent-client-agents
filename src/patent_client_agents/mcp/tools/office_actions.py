@@ -9,7 +9,6 @@ Backed by the USPTO ODP office action endpoints on ``api.uspto.gov``
 
 from __future__ import annotations
 
-import asyncio
 from datetime import UTC, datetime
 from typing import Annotated, Any
 
@@ -19,6 +18,7 @@ from mcp_data_core.envelope import ListEnvelope, encode_cursor, make_provenance
 from mcp_data_core.exceptions import NotFoundError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.uspto_office_actions import OfficeActionClient
 
 office_actions_mcp = FastMCP("Office Actions")
@@ -190,9 +190,6 @@ def _escape_lucene(value: str) -> str:
     return "".join(out)
 
 
-_OA_FANOUT_CONCURRENCY = 5
-
-
 @office_actions_mcp.tool(annotations=READ_ONLY)
 async def search_office_actions(
     criteria: Annotated[
@@ -350,7 +347,7 @@ async def get_office_action(
         "from ``search_office_actions``; e.g. 'oa001'). Pass a list for "
         "portfolio workflows; the response shape stays a ListEnvelope.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more USPTO office actions in full — body text, sections, and metadata.
 
     Resolves each ``document_identifier`` against the ``oa_actions``
@@ -365,43 +362,33 @@ async def get_office_action(
     Related tools: search_office_actions, search_applications,
     list_file_history, get_application.
     """
-    ids = (
-        [document_identifier] if isinstance(document_identifier, str) else list(document_identifier)
-    )
-    if not ids:
-        raise ValidationError("get_office_action requires at least one document_identifier")
-
-    semaphore = asyncio.Semaphore(_OA_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: OfficeActionClient, doc_id: str) -> dict | None:
-        query = f"id:{_escape_lucene(doc_id)}"
-        async with semaphore:
-            response = await client.search_office_action_text(query, start=0, rows=1)
-        dumped = dump(response)
-        results = list(dumped.get("results") or [])
-        return results[0] if results else None
+    ids = as_id_list(document_identifier, noun="office-action document identifier")
+    single = isinstance(document_identifier, str)
 
     async with OfficeActionClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, d) for d in ids])
 
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [d for d, r in zip(ids, fetched, strict=True) if r is None]
+        async def _fetch_one(doc_id: str) -> dict | None:
+            query = f"id:{_escape_lucene(doc_id)}"
+            response = await client.search_office_action_text(query, start=0, rows=1)
+            dumped = dump(response)
+            results = list(dumped.get("results") or [])
+            return results[0] if results else None
 
-    if len(ids) == 1:
-        if not items:
-            raise NotFoundError(
-                f"Office action {ids[0]!r} not found. Use search_office_actions "
-                f"with result_type='text' to discover valid document identifiers."
-            )
+        items, not_found = await fetch_many(ids, _fetch_one, single=single)
+
+    if single and not items:
+        raise NotFoundError(
+            f"Office action {ids[0]!r} not found. Use search_office_actions "
+            f"with result_type='text' to discover valid document identifiers."
+        )
+    if len(ids) == 1 and items:
         summary = _summarize_office_action(items[0])
-        path = _DATASET_PATHS["text"]
     else:
-        head = f"Fetched {len(items)} of {len(ids)} USPTO office actions."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
-        path = _DATASET_PATHS["text"]
+        summary = fetched_summary(len(items), len(ids), "USPTO office actions", not_found)
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
-        provenance=_office_actions_provenance(path),
+        not_found=not_found,
+        provenance=_office_actions_provenance(_DATASET_PATHS["text"]),
     )

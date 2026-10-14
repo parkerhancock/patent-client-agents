@@ -132,7 +132,34 @@ async def test_get_petition_list_preserves_order():
     ]
     assert returned == ids
     assert result.provenance.source_url.endswith("/api/v1/patent/petitions")
-    assert "Fetched 3 USPTO petition decisions" in result.summary
+    assert result.summary == "Fetched 3 of 3 USPTO petition decisions."
+    assert result.not_found == []
+
+
+@pytest.mark.asyncio
+async def test_get_petition_list_reports_missing_identifier():
+    from mcp_data_core.exceptions import NotFoundError
+
+    async def _get(pid: str):
+        if pid == "P2":
+            raise NotFoundError(f"no petition {pid}")
+        return _FakeResponse(payload={"petitionDecisionDataBag": [_make_petition(pid)]})
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_petition = AsyncMock(side_effect=_get)
+        result = await get_petition(petition_number=["P1", "P2", "P3"])
+
+        returned = [
+            item["petitionDecisionDataBag"][0]["petitionDecisionRecordIdentifier"]
+            for item in result.items
+        ]
+        assert returned == ["P1", "P3"]
+        assert result.not_found == ["P2"]
+        assert "Not found: P2." in result.summary
+
+        with pytest.raises(NotFoundError):
+            await get_petition(petition_number="P2")
 
 
 # ──────────────────────────────────────────────────────────────────────

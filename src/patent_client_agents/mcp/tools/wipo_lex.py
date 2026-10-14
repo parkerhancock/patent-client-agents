@@ -13,15 +13,14 @@ the standard provenance fields only — ``corpus_synced_at`` /
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.wipo_lex import (
     SubjectMatter,
     TypeOfText,
@@ -38,8 +37,6 @@ wipo_lex_mcp = FastMCP("WIPO Lex")
 
 _WIPO_LEX_BASE = "https://www.wipo.int"
 _WIPO_LEX_NAME = "WIPO Lex"
-
-_WIPO_LEX_FANOUT_CONCURRENCY = 5
 
 
 def _wipo_lex_provenance(path: str) -> Any:
@@ -169,7 +166,7 @@ async def get_wipo_lex_legislation(
         "WIPO Lex internal ID, or a list of IDs for portfolio workflows. "
         "Examples: '23293' (Canadian Patent Act), ['23293', '23437'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more WIPO Lex (global IP legislation database) entries by ID.
 
     Returns title, jurisdiction, summary line (year, assent date, type,
@@ -180,29 +177,30 @@ async def get_wipo_lex_legislation(
 
     Related tools: search_wipo_lex_legislation.
     """
-    ids = [legislation_id] if isinstance(legislation_id, str) else list(legislation_id)
-    if not ids:
-        raise ValidationError("get_wipo_lex_legislation requires at least one legislation_id")
-
-    semaphore = asyncio.Semaphore(_WIPO_LEX_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: WipoLexClient, lid: str) -> dict:
-        async with semaphore:
-            return dump(await client.get_legislation(lid))  # type: ignore[return-value]
+    ids = as_id_list(legislation_id, noun="WIPO Lex legislation ID")
 
     async with WipoLexClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, lid) for lid in ids])
 
-    if len(results) == 1:
+        async def _fetch_one(lid: str) -> dict:
+            return dump(await client.get_legislation(lid))  # type: ignore[return-value]
+
+        results, not_found = await fetch_many(
+            ids, _fetch_one, single=isinstance(legislation_id, str)
+        )
+
+    if len(ids) == 1 and results:
         summary = _summarize_detail(results[0])
+    else:
+        summary = fetched_summary(len(results), len(ids), "WIPO Lex legislation entries", not_found)
+    if len(ids) == 1:
         path = f"/wipolex/en/legislation/details/{ids[0]}"
     else:
-        summary = f"Fetched {len(results)} WIPO Lex legislation entries: " + ", ".join(ids)
         path = "/wipolex/en/legislation/details"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_wipo_lex_provenance(path),
     )
 

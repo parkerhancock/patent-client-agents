@@ -168,10 +168,8 @@ async def test_get_list_preserves_order():
 
     assert isinstance(result, ListEnvelope)
     assert [r["legislation_id"] for r in result.items] == ids
-    # Multi-record summary lists the IDs.
-    assert "Fetched 3" in result.summary
-    for lid in ids:
-        assert lid in result.summary
+    assert result.summary == "Fetched 3 of 3 WIPO Lex legislation entries."
+    assert result.not_found == []
     # Multi-record path is the collection root, not a specific record.
     assert result.provenance.source_url.endswith("/wipolex/en/legislation/details")
 
@@ -196,3 +194,25 @@ async def test_no_batch_tool_present():
 
     assert not hasattr(wl_module, "batch_wipo_lex_legislation")
     assert not hasattr(wl_module, "batch_get_wipo_lex_legislation")
+
+
+@pytest.mark.asyncio
+async def test_get_list_reports_missing_id():
+    from mcp_data_core.exceptions import NotFoundError
+
+    async def _get(lid: str):
+        if lid == "99999":
+            raise NotFoundError(f"no legislation {lid}")
+        return _make_detail(lid)
+
+    with patch("patent_client_agents.mcp.tools.wipo_lex.WipoLexClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_legislation = AsyncMock(side_effect=_get)
+
+        result = await get_wipo_lex_legislation(legislation_id=["23293", "99999", "23437"])
+        assert [r["legislation_id"] for r in result.items] == ["23293", "23437"]
+        assert result.not_found == ["99999"]
+        assert "Not found: 99999." in result.summary
+
+        with pytest.raises(NotFoundError):
+            await get_wipo_lex_legislation(legislation_id="99999")

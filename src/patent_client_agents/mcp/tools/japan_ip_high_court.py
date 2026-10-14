@@ -17,6 +17,7 @@ from patent_client_agents.japan_ip_high_court import (
     normalize_case_number,
 )
 from patent_client_agents.japan_ip_high_court.models import JapanIpHighCourtCaseList
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 japan_ip_high_court_mcp = FastMCP("Japan Intellectual Property High Court")
 
@@ -163,27 +164,31 @@ async def get_japan_ip_high_court_case(
         Literal["pending", "closed", "all"],
         "Limit lookup to one workbook sheet or search both.",
     ] = "all",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get exact official Japanese IP High Court case-list records.
 
     Width variants in parentheses and whitespace are normalized. Related
     tool: search_japan_ip_high_court_cases.
     """
-    values = [case_number] if isinstance(case_number, str) else case_number
-    if not values:
-        raise ValidationError("case_number list must not be empty")
-    if len(values) > 25:
-        raise ValidationError("case_number accepts at most 25 values per call")
+    values = as_id_list(case_number, noun="case number")
 
     async with JapanIpHighCourtClient() as client:
         case_list = await client.list_cases()
-    records = [
-        find_case(case_list, value, case_status=case_status).model_dump(mode="json")
-        for value in values
-    ]
-    return ListEnvelope[dict](
-        summary=f"Fetched {len(records)} official Japan IP High Court case-list record(s).",
+
+    async def fetch(value: str) -> dict[str, Any]:
+        return find_case(case_list, value, case_status=case_status).model_dump(mode="json")
+
+    records, not_found = await fetch_many(values, fetch, single=isinstance(case_number, str))
+    if len(values) == 1 and records:
+        summary = "Fetched 1 official Japan IP High Court case-list record(s)."
+    else:
+        summary = fetched_summary(
+            len(records), len(values), "official Japan IP High Court case-list records", not_found
+        )
+    return FetchedList[dict](
+        summary=summary,
         items=records,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(case_list),

@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Every list-accepting `get_*` tool follows one set of rules (#132, #134-#137):
+  - A list returns the records that were found. IDs the source has no record
+    for are named in the summary and listed in a new `not_found` field.
+    Previously most tools failed the whole call when any ID was missing.
+  - A single string still raises when its record is missing.
+  - Other errors (authentication, rate limits, upstream failures after
+    retries) still fail the whole call.
+  - Lists are limited to 50 IDs, checked before any request. Several tools
+    had no limit, and the court tools allowed 25.
+  - Multi-ID summaries read "Fetched N of M ... Not found: ...".
+- Corpus clients raise `SectionNotFoundError`, and PPUBS raises
+  `DocumentNotFoundError`, for a missing section or publication; both are
+  `NotFoundError` and still `ValueError`.
 - `search_trademarks` and `get_trademark` lean results replace the
   always-empty `status_code` / `status_text` keys with `status` (`"live"` or
   `"dead"`), and now fill serial number, owner and dates (#112).

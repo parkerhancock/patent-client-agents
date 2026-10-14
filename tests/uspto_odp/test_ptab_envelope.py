@@ -220,7 +220,33 @@ async def test_get_ptab_list_preserves_order():
     assert returned == trial_ids
     # Multi-id provenance points at the collection URL.
     assert result.provenance.source_url.endswith("/api/v1/ptab/proceedings")
-    assert "Fetched 3 PTAB proceeding records" in result.summary
+    assert result.summary == "Fetched 3 of 3 PTAB proceeding records."
+    assert result.not_found == []
+
+
+@pytest.mark.asyncio
+async def test_get_ptab_list_reports_missing_identifier():
+    from mcp_data_core.exceptions import NotFoundError
+
+    async def _get(trial: str):
+        if trial == "IPR2024-00002":
+            raise NotFoundError(f"no proceeding {trial}")
+        return _FakeResponse(payload={"patentTrialProceedingDataBag": [_make_proceeding(trial)]})
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_trial_proceeding = AsyncMock(side_effect=_get)
+        result = await get_ptab(
+            type="proceeding", identifier=["IPR2024-00001", "IPR2024-00002", "IPR2024-00003"]
+        )
+
+        returned = [item["patentTrialProceedingDataBag"][0]["trialNumber"] for item in result.items]
+        assert returned == ["IPR2024-00001", "IPR2024-00003"]
+        assert result.not_found == ["IPR2024-00002"]
+        assert "Not found: IPR2024-00002." in result.summary
+
+        with pytest.raises(NotFoundError):
+            await get_ptab(type="proceeding", identifier="IPR2024-00002")
 
 
 @pytest.mark.asyncio

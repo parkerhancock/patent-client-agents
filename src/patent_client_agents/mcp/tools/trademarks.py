@@ -14,7 +14,6 @@ Tools backed by:
 
 from __future__ import annotations
 
-import asyncio
 from datetime import datetime
 from typing import Annotated, Any
 
@@ -54,11 +53,6 @@ _TMEP_NAME = "USPTO TMEP (Trademark Manual of Examining Procedure)"
 # raw column can run long when the surrounding context is dense; truncate
 # so a 25-hit page fits comfortably under the §5.5 token budget.
 _TMEP_LEAN_SNIPPET_CHARS = 400
-
-# Bounded fan-out for list-accepting get_tmep_section (§5.4). SQLite reads
-# are fast so the concurrency budget is conservative — the cap exists so a
-# 50-section portfolio doesn't open 50 connections at once.
-_TMEP_FANOUT_CONCURRENCY = 5
 
 
 def _tmsearch_provenance(path: str) -> Any:
@@ -205,9 +199,6 @@ def _classify_tm_identifier(value: str) -> str:
         f"trademark identifier {value!r} has {len(raw)} digits; expected 8 (serial) "
         f"or 6-7 (registration)."
     )
-
-
-_TM_FANOUT_CONCURRENCY = 5
 
 
 # ---------------------------------------------------------------
@@ -360,7 +351,7 @@ async def get_trademark_status(
         "USPTO trademark serial number, or a list for portfolio status checks. "
         "Examples: '97123456', ['97123456', '97654321'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get current trademark status from TSDR for one or many marks.
 
     Accepts a single serial number or a list (§5.4) and returns a
@@ -373,29 +364,28 @@ async def get_trademark_status(
 
     Related tools: get_trademark, get_trademark_documents, get_trademark_last_update.
     """
-    numbers = [serial_number] if isinstance(serial_number, str) else list(serial_number)
-    if not numbers:
-        raise ValidationError("get_trademark_status requires at least one serial number")
-
-    semaphore = asyncio.Semaphore(_TM_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: TsdrClient, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.get_status(n))  # type: ignore[return-value]
+    numbers = as_id_list(serial_number, noun="trademark serial number")
 
     async with TsdrClient() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.get_status(n))  # type: ignore[return-value]
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(serial_number, str)
+        )
 
     if len(numbers) == 1:
         summary = f"TSDR status for USPTO trademark {numbers[0]}."
         path = f"/ts/cd/casestatus/sn{numbers[0]}/info.xml"
     else:
-        summary = f"TSDR status for {len(numbers)} USPTO trademarks: {', '.join(numbers)}."
+        summary = fetched_summary(len(items), len(numbers), "TSDR trademark statuses", not_found)
         path = "/ts/cd/casestatus"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_tsdr_provenance(path),
     )
 
@@ -432,7 +422,7 @@ async def get_trademark_last_update(
         "USPTO trademark serial number, or a list for portfolio checks. "
         "Examples: '97123456', ['97123456', '97654321'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get last-update timestamps for one or many trademark cases (TSDR).
 
     Returns a ListEnvelope of records reporting when each trademark case was
@@ -441,29 +431,30 @@ async def get_trademark_last_update(
 
     Related tools: get_trademark_status, get_trademark_documents.
     """
-    numbers = [serial_number] if isinstance(serial_number, str) else list(serial_number)
-    if not numbers:
-        raise ValidationError("get_trademark_last_update requires at least one serial number")
-
-    semaphore = asyncio.Semaphore(_TM_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: TsdrClient, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.get_last_update(n))  # type: ignore[return-value]
+    numbers = as_id_list(serial_number, noun="trademark serial number")
 
     async with TsdrClient() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.get_last_update(n))  # type: ignore[return-value]
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(serial_number, str)
+        )
 
     if len(numbers) == 1:
         summary = f"TSDR last-update for USPTO trademark {numbers[0]}."
         path = f"/ts/cd/caselastupdate/sn{numbers[0]}"
     else:
-        summary = f"TSDR last-update for {len(numbers)} trademarks: {', '.join(numbers)}."
+        summary = fetched_summary(
+            len(items), len(numbers), "TSDR trademark last-update records", not_found
+        )
         path = "/ts/cd/caselastupdate"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_tsdr_provenance(path),
     )
 
@@ -558,7 +549,7 @@ async def get_tmep_section(
         "eTMEP href ('TMEP-1200d1e8145.html'), or a list of either for "
         "portfolio workflows. Examples: '1207', ['1207', '1209.03(u)', '1402'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more TMEP sections by number (or eTMEP href).
 
     Returns each section's title, full HTML, plaintext, and the resolved
@@ -573,14 +564,12 @@ async def get_tmep_section(
 
     Related tools: search_tmep.
     """
-    refs = [section] if isinstance(section, str) else list(section)
-    if not refs:
-        raise ValidationError("get_tmep_section requires at least one section reference")
+    refs = as_id_list(section, noun="TMEP section reference")
+    single = isinstance(section, str)
 
-    semaphore = asyncio.Semaphore(_TMEP_FANOUT_CONCURRENCY)
+    async with TmepClient() as client:
 
-    async def _fetch_one(client: TmepClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict | None:
             record = await client.get_section(ref)
             # When the caller passes a section number, ``ref`` already is
             # the section number. When they pass an href, the corpus row
@@ -592,26 +581,29 @@ async def get_tmep_section(
             section_number = ref if SECTION_NUMBER_PATTERN.match(ref) else None
             return _tmep_section_to_dict(record, section_number=section_number)
 
-    async with TmepClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        results, not_found = await fetch_many(refs, _fetch_one, single=single)
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
+    if len(refs) == 1 and results:
         summary = _summarize_tmep_section(results[0], corpus_label)
+    else:
+        summary = fetched_summary(
+            len(results), len(refs), f"TMEP sections ({corpus_label})", not_found
+        )
+    if len(refs) == 1:
         ref = refs[0]
         if ref.endswith(".html") or "/" in ref:
             path = f"/RDMS/TMEP/result?href={ref.lstrip('/')}"
         else:
             path = f"/RDMS/TMEP/result?section={ref}"
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} TMEP sections ({corpus_label}): {joined}"
         path = "/RDMS/TMEP/result"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_tmep_provenance(path),
     )
 

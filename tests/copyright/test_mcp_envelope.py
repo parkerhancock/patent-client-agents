@@ -196,6 +196,24 @@ async def test_get_copyright_record_accepts_list_and_preserves_order():
 
 
 @pytest.mark.asyncio
+async def test_get_copyright_record_list_reports_missing_id():
+    async def _get(prid: str):
+        return None if prid == "voyager_missing" else _make_record(prid)
+
+    with patch("patent_client_agents.mcp.tools.copyright.CopyrightClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_record = AsyncMock(side_effect=_get)
+
+        result = await get_copyright_record(
+            public_records_id=["voyager_a", "voyager_missing", "voyager_c"]
+        )
+
+    assert [r["public_records_id"] for r in result.items] == ["voyager_a", "voyager_c"]
+    assert result.not_found == ["voyager_missing"]
+    assert result.summary == "Fetched 2 of 3 U.S. Copyright records. Not found: voyager_missing."
+
+
+@pytest.mark.asyncio
 async def test_get_copyright_record_handles_not_found():
     with patch("patent_client_agents.mcp.tools.copyright.CopyrightClient") as mock_cls:
         mock_client = mock_cls.return_value.__aenter__.return_value

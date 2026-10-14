@@ -15,7 +15,7 @@ import pytest
 from pydantic import BaseModel
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.mcp.tools.trademarks import (
     _classify_tm_identifier,
     get_trademark,
@@ -259,6 +259,26 @@ async def test_get_trademark_status_list_fans_out():
     assert [r["serialNumber"] for r in result.items] == serials
 
 
+@pytest.mark.asyncio
+async def test_get_trademark_status_list_reports_missing_serial():
+    async def _status(serial: str) -> _FakeTsdrStatus:
+        if serial == "97000002":
+            raise NotFoundError(f"no case {serial}")
+        return _FakeTsdrStatus(serialNumber=serial)
+
+    with patch("patent_client_agents.mcp.tools.trademarks.TsdrClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_status = AsyncMock(side_effect=_status)
+
+        result = await get_trademark_status(serial_number=["97000001", "97000002", "97000003"])
+        assert [r["serialNumber"] for r in result.items] == ["97000001", "97000003"]
+        assert result.not_found == ["97000002"]
+        assert "Not found: 97000002." in result.summary
+
+        with pytest.raises(NotFoundError):
+            await get_trademark_status(serial_number="97000002")
+
+
 # ──────────────────────────────────────────────────────────────────────
 # get_trademark_documents
 # ──────────────────────────────────────────────────────────────────────
@@ -315,3 +335,25 @@ async def test_get_trademark_last_update_list():
 
     assert len(result.items) == 2
     assert [r["serialNumber"] for r in result.items] == serials
+
+
+@pytest.mark.asyncio
+async def test_get_trademark_last_update_list_reports_missing_serial():
+    async def _last_update(serial: str) -> _FakeLastUpdate:
+        if serial == "97000002":
+            raise NotFoundError(f"no case {serial}")
+        return _FakeLastUpdate(serialNumber=serial, lastUpdate="2024-01-01")
+
+    with patch("patent_client_agents.mcp.tools.trademarks.TsdrClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_last_update = AsyncMock(side_effect=_last_update)
+
+        result = await get_trademark_last_update(serial_number=["97000001", "97000002"])
+        assert [r["serialNumber"] for r in result.items] == ["97000001"]
+        assert result.not_found == ["97000002"]
+        assert result.summary == (
+            "Fetched 1 of 2 TSDR trademark last-update records. Not found: 97000002."
+        )
+
+        with pytest.raises(NotFoundError):
+            await get_trademark_last_update(serial_number="97000002")

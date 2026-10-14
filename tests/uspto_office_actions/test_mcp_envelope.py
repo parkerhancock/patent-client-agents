@@ -254,6 +254,31 @@ async def test_get_office_action_list_preserves_order():
     assert "3 of 3 USPTO office actions" in result.summary
 
 
+@pytest.mark.asyncio
+async def test_get_office_action_list_reports_missing_identifier():
+    from mcp_data_core.exceptions import NotFoundError
+
+    async def _search(query: str, **kwargs) -> _FakeSearchResponse:
+        doc_id = query.removeprefix("id:")
+        if doc_id == "oa_missing":
+            return _FakeSearchResponse(num_found=0, results=[])
+        return _FakeSearchResponse(num_found=1, results=[_text_doc(doc_id=doc_id, appl="16000")])
+
+    with patch(
+        "patent_client_agents.mcp.tools.office_actions.OfficeActionClient"
+    ) as mock_client_cls:
+        mock_client = mock_client_cls.return_value.__aenter__.return_value
+        mock_client.search_office_action_text = AsyncMock(side_effect=_search)
+
+        result = await get_office_action(document_identifier=["oa_A", "oa_missing", "oa_C"])
+        assert [item["id"] for item in result.items] == ["oa_A", "oa_C"]
+        assert result.not_found == ["oa_missing"]
+        assert "Not found: oa_missing." in result.summary
+
+        with pytest.raises(NotFoundError, match="oa_missing"):
+            await get_office_action(document_identifier="oa_missing")
+
+
 # ──────────────────────────────────────────────────────────────────────
 # §5.2 — orphan-search fixed, §5.4 — no batch tool
 # ──────────────────────────────────────────────────────────────────────

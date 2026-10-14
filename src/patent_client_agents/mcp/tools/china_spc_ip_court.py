@@ -15,6 +15,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.china_spc_ip_court import ChinaSpcIpCourtClient
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 china_spc_ip_court_mcp = FastMCP("China SPC Intellectual Property Court")
 
@@ -168,32 +169,33 @@ async def get_china_spc_ip_hearing_notice(
         bool,
         "False returns lean normalized fields; True includes the complete Chinese notice text.",
     ] = True,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get exact official Chinese SPC IP Court scheduled-hearing notices.
 
     Related tools: search_china_spc_ip_hearing_notices,
     search_china_spc_ip_court_site.
     """
-    values = [notice] if isinstance(notice, str) else notice
-    if not values:
-        raise ValidationError("notice list must not be empty")
-    if len(values) > 25:
-        raise ValidationError("notice accepts at most 25 IDs/URLs per call")
+    values = as_id_list(notice, noun="hearing notice ID or URL")
 
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
     async with ChinaSpcIpCourtClient() as client:
 
         async def fetch(value: str) -> dict[str, Any]:
-            async with semaphore:
-                item = await client.get_hearing_notice(value)
+            item = await client.get_hearing_notice(value)
             return item.model_dump(mode="json")
 
-        records = list(await asyncio.gather(*(fetch(value) for value in values)))
+        records, not_found = await fetch_many(values, fetch, single=isinstance(notice, str))
     items = records if full else [_lean_hearing(record) for record in records]
+    if len(values) == 1 and items:
+        summary = "Fetched 1 official China SPC IP Court hearing notice(s)."
+    else:
+        summary = fetched_summary(
+            len(items), len(values), "official China SPC IP Court hearing notices", not_found
+        )
     statuses = sorted({str(record.get("hearing_date") or "date unknown") for record in records})
-    return ListEnvelope[dict](
-        summary=f"Fetched {len(items)} official China SPC IP Court hearing notice(s).",
+    return FetchedList[dict](
+        summary=summary,
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(status=f"scheduled hearing date(s): {', '.join(statuses)}"),

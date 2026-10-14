@@ -13,6 +13,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import McpDataCoreError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.canada_federal_court import CanadaFederalCourtClient
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 canada_federal_court_mcp = FastMCP("Canada Federal Court")
 
@@ -169,7 +170,7 @@ async def get_canada_federal_court_case(
         str,
         "Court selector: 't' Federal Court, 'a' Federal Court of Appeal, 'b' both.",
     ] = "t",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get official Canadian Federal Court case metadata, parties/counsel, and patent references.
 
     The exact-file record includes the Registry's public party/counsel list,
@@ -179,34 +180,35 @@ async def get_canada_federal_court_case(
     Related tools: search_canada_federal_court_patent_cases,
     list_canada_federal_court_docket_entries.
     """
+    numbers = as_id_list(court_number, noun="Federal Court file number")
     if division not in {"t", "a", "b"}:
         raise ValidationError("division must be 't', 'a', or 'b'")
     resolved_division = division
-    numbers = [court_number] if isinstance(court_number, str) else court_number
-    if not numbers:
-        raise ValidationError("court_number list must not be empty")
-    if len(numbers) > 25:
-        raise ValidationError("court_number accepts at most 25 files per call")
 
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
     async with CanadaFederalCourtClient() as client:
 
         async def fetch(number: str) -> dict[str, Any]:
-            async with semaphore:
-                record, docket = await asyncio.gather(
-                    client.get_case(number, division=resolved_division),
-                    client.list_docket_entries(number, division=resolved_division, limit=10),
-                )
+            record, docket = await asyncio.gather(
+                client.get_case(number, division=resolved_division),
+                client.list_docket_entries(number, division=resolved_division, limit=10),
+            )
             item = record.model_dump(mode="json")
             item["status_assessment"] = docket.status.model_dump()
             return item
 
-        items = await asyncio.gather(*(fetch(number) for number in numbers))
+        items, not_found = await fetch_many(numbers, fetch, single=isinstance(court_number, str))
 
+    if len(numbers) == 1 and items:
+        summary = f"Fetched 1 Canadian Federal Court file(s): {numbers[0]}."
+    else:
+        summary = fetched_summary(
+            len(items), len(numbers), "Canadian Federal Court files", not_found
+        )
     statuses = sorted({str(item["status_assessment"]["assessment"]) for item in items})
-    return ListEnvelope[dict](
-        summary=f"Fetched {len(items)} Canadian Federal Court file(s): {', '.join(numbers)}.",
-        items=list(items),
+    return FetchedList[dict](
+        summary=summary,
+        items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(status=", ".join(statuses)),
