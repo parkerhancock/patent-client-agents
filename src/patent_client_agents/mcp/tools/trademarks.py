@@ -24,6 +24,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.tmep import TmepClient, get_corpus_status
 from patent_client_agents.uspto_tmsearch import TmsearchClient
 from patent_client_agents.uspto_trademark_assignments import TrademarkAssignmentClient
@@ -297,7 +298,7 @@ async def get_trademark(
         "number (typically 7 digits, e.g. '1234567'). Auto-detected by digit count. "
         "Pass a list for portfolio workflows; the response shape stays a ListEnvelope.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more USPTO trademark records (TESS) by serial or registration number.
 
     Auto-detects serial vs. registration by digit count (8 → serial, 6-7 →
@@ -310,34 +311,27 @@ async def get_trademark(
 
     Related tools: search_trademarks, get_trademark_status, get_trademark_documents.
     """
-    numbers = [serial_number] if isinstance(serial_number, str) else list(serial_number)
-    if not numbers:
-        raise ValidationError("get_trademark requires at least one identifier")
+    numbers = as_id_list(serial_number, noun="trademark serial or registration number")
 
-    semaphore = asyncio.Semaphore(_TM_FANOUT_CONCURRENCY)
+    async with TmsearchClient() as client:
 
-    async def _fetch_one(client: TmsearchClient, ident: str) -> dict | None:
-        kind = _classify_tm_identifier(ident)
-        async with semaphore:
-            if kind == "serial":
+        async def _fetch_one(ident: str) -> dict | None:
+            if _classify_tm_identifier(ident) == "serial":
                 record = await client.get_by_serial(ident)
             else:
                 record = await client.get_by_registration(ident)
-        return dump(record) if record is not None else None  # type: ignore[return-value]
+            return dump(record) if record is not None else None
 
-    async with TmsearchClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
-
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [n for n, r in zip(numbers, fetched, strict=True) if r is None]
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(serial_number, str)
+        )
 
     if len(numbers) == 1 and items:
         summary = _summarize_trademark(items[0])
     elif len(numbers) == 1:
         summary = f"USPTO trademark {numbers[0]} — not found."
     else:
-        head = f"Fetched {len(items)} of {len(numbers)} USPTO trademarks."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+        summary = fetched_summary(len(items), len(numbers), "USPTO trademarks", not_found)
 
     # Provenance: per-record path for single ID, base path for multi.
     if len(numbers) == 1:
@@ -346,9 +340,10 @@ async def get_trademark(
     else:
         path = "/prod-stage-v1-0-0/tmsearch"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_tmsearch_provenance(path),
     )
 
