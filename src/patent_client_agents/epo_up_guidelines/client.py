@@ -23,10 +23,8 @@ from __future__ import annotations
 
 import os
 import re
-from typing import Any
 
-from patent_client_agents.fts_query import translate_fts_query
-from patent_client_agents.shared.errors import SectionNotFoundError
+from patent_client_agents.shared.corpus.epo_legal import EpoLegalClient
 
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import (
@@ -65,180 +63,32 @@ def _citation_to_slug(text: str) -> str | None:
     return f"section_{chain}"
 
 
-def _normalize_href(value: str) -> str:
-    """Normalize any of the input forms to a bare slug.
-
-    Accepts:
-
-    - bare slug ``section_1_2_1`` (passthrough)
-    - relative path ``/en/legal/guidelines-up/2026/section_1_2_1``
-    - absolute URL ``https://www.epo.org/en/legal/guidelines-up/2026/section_1_2_1``
-    """
-    h = value.strip()
-    if h.startswith("http"):
-        h = h.split("://", 1)[1].split("/", 1)[1]
-    h = h.lstrip("/")
-    # Strip the date-versioned URL prefix in any of the common shapes.
-    h = re.sub(r"^(?:en/)?legal/guidelines-up/\d{4}/", "", h)
-    h = h.removesuffix(".html")
-    return h.lower()
-
-
-def _build_result_url(base_url: str, version: str, href: str) -> str:
-    return f"{base_url}/en/legal/guidelines-up/{version}/{href}"
-
-
-def _hit_to_model(hit: Any, base_url: str, version: str) -> UpGuidelinesSearchHit:
-    title = (
-        f"{hit.section_number} - {hit.title}"
-        if hit.section_number and hit.title
-        else hit.title or hit.section_number or ""
-    )
-    path: list[str] = []
-    if hit.chapter:
-        path.append(f"Chapter {hit.chapter}")
-    if hit.section_number:
-        path.append(hit.section_number)
-    return UpGuidelinesSearchHit(
-        title=title,
-        href=hit.href,
-        path=path,
-        result_url=_build_result_url(base_url, version, hit.href),
-    )
-
-
-class UpGuidelinesClient:
+class UpGuidelinesClient(
+    EpoLegalClient[UpGuidelinesSearchResponse, UpGuidelinesSection, UpGuidelinesVersion]
+):
     """Corpus-backed EPO Unitary Patent (UP) Guidelines client."""
 
     DEFAULT_BASE_URL: str = os.getenv("UP_GUIDELINES_BASE_URL", "https://www.epo.org")
     CACHE_NAME: str = "up_guidelines"
     DEFAULT_VERSION: str = os.getenv("UP_GUIDELINES_VERSION", "2026")
 
-    def __init__(
-        self,
-        *,
-        corpus_path: str | os.PathLike[str] | None = None,
-        base_url: str | None = None,
-    ) -> None:
-        self._corpus_path = corpus_path
-        self._base_url = (base_url or self.DEFAULT_BASE_URL).rstrip("/")
-        self._db: CorpusDB | None = None
+    CORPUS_DB = CorpusDB
+    HIT_MODEL = UpGuidelinesSearchHit
+    RESPONSE_MODEL = UpGuidelinesSearchResponse
+    SECTION_MODEL = UpGuidelinesSection
+    VERSION_MODEL = UpGuidelinesVersion
+    NOT_FOUND_LABEL = "UP Guidelines"
+    BOOK = "guidelines-up"
+    # UP pages have no ``.html`` suffix.
+    RESULT_SUFFIX = ""
+    EDITION_META_KEY = "up_guidelines_year"
 
-    async def __aenter__(self) -> UpGuidelinesClient:
-        return self
+    def _citation_to_slug(self, section: str) -> str | None:
+        return _citation_to_slug(section)
 
-    async def __aexit__(self, *_exc: object) -> None:
-        await self.close()
-
-    async def close(self) -> None:
-        if self._db is not None:
-            self._db.close()
-            self._db = None
-
-    @property
-    def base_url(self) -> str:
-        return self._base_url
-
-    def _open(self) -> CorpusDB:
-        if self._db is None:
-            self._db = CorpusDB.open(self._corpus_path)
-        return self._db
-
-    async def resolve_section_href(
-        self,
-        section_number: str,
-        *,
-        version: str = "current",  # API parity; single-snapshot corpus
-    ) -> str | None:
-        del version
-        db = self._open()
-        row = db.get_section(section_number=section_number)
-        return row.href if row else None
-
-    async def search(
-        self,
-        query: str,
-        *,
-        version: str = "current",
-        include_content: bool = True,
-        include_index: bool = False,
-        include_notes: bool = False,
-        include_form_paragraphs: bool = False,
-        syntax: str = "adj",
-        snippet: str = "compact",
-        sort: str = "relevance",
-        per_page: int = 10,
-        page: int = 1,
-        offset: int | None = None,
-    ) -> UpGuidelinesSearchResponse:
-        del version, include_content, include_index, include_notes
-        del include_form_paragraphs, snippet
-        db = self._open()
-        fts_query = translate_fts_query(query, syntax)
-        if not fts_query:
-            return UpGuidelinesSearchResponse(hits=[], page=page, per_page=per_page, has_more=False)
-        # A row ``offset`` takes precedence over ``page`` when given.
-        if offset is None:
-            offset = max(0, (page - 1) * per_page)
-        rows = db.search(fts_query, limit=per_page + 1, offset=offset, sort=sort)
-        has_more = len(rows) > per_page
-        rows = rows[:per_page]
-        meta = db.meta()
-        guideline_year = meta.get("up_guidelines_year", self.DEFAULT_VERSION)
-        hits = [_hit_to_model(r, self._base_url, guideline_year) for r in rows]
-        return UpGuidelinesSearchResponse(
-            hits=hits, page=page, per_page=per_page, has_more=has_more
-        )
-
-    async def get_section(
-        self,
-        section: str,
-        *,
-        version: str = "current",
-        highlight_query: str | None = None,  # noqa: ARG002 — API parity
-    ) -> UpGuidelinesSection:
-        del highlight_query
-        db = self._open()
-        # Try citation-to-slug first (e.g. "G-II, 3.1" → "g_ii_3_1").
-        candidate = _citation_to_slug(section)
-        if candidate:
-            row = db.get_section(href=candidate)
-            if row is None:
-                # Maybe the corpus indexed it as a section_number too.
-                row = db.get_section(section_number=candidate)
-            if row is not None:
-                return UpGuidelinesSection(
-                    href=row.href,
-                    html=row.html,
-                    text=row.text,
-                    version=version,
-                    title=row.title,
-                )
-        # Fall back to bare-slug / URL normalization.
-        href = _normalize_href(section)
-        row = db.get_section(href=href)
-        if row is None:
-            raise SectionNotFoundError(f"Could not find UP Guidelines section '{section}'")
-        return UpGuidelinesSection(
-            href=row.href,
-            html=row.html,
-            text=row.text,
-            version=version,
-            title=row.title,
-        )
-
-    async def list_versions(self) -> list[UpGuidelinesVersion]:
-        db = self._open()
-        meta = db.meta()
-        snapshot = meta.get("snapshot_date", "unknown")
-        gle_year = meta.get("up_guidelines_year", "unknown")
-        return [
-            UpGuidelinesVersion(
-                label=f"{gle_year} edition (snapshot {snapshot})",
-                value="current",
-                current=True,
-            )
-        ]
+    def _section_number_for_slug(self, slug: str) -> str | None:
+        # Maybe the corpus indexed the slug as a section_number too.
+        return slug
 
 
 __all__ = [

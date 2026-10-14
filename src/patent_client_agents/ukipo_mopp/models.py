@@ -1,31 +1,24 @@
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from patent_client_agents.shared.corpus.outline.models import (
+    OutlineSearchHit,
+    OutlineSearchResponse,
+    OutlineSection,
+    OutlineVersion,
+)
 
 
-class MoppSearchHit(BaseModel):
-    title: str
-    href: str
-    path: list[str] = Field(default_factory=list)
-    result_url: str
+class MoppSearchHit(OutlineSearchHit):
+    pass
 
 
-class MoppSearchResponse(BaseModel):
+class MoppSearchResponse(OutlineSearchResponse):
     hits: list[MoppSearchHit]
-    page: int
-    per_page: int
-    has_more: bool
 
 
-class MoppSection(BaseModel):
-    href: str
-    html: str
-    text: str
-    version: str
-    title: str | None = None
+class MoppSection(OutlineSection):
+    pass
 
 
-class MoppVersion(BaseModel):
-    label: str
-    value: str
-    current: bool = False
+class MoppVersion(OutlineVersion):
+    pass

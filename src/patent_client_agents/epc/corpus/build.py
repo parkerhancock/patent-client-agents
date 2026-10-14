@@ -22,32 +22,25 @@ at the output path.
 
 from __future__ import annotations
 
-import argparse
-import asyncio
 import logging
 import re
-import sqlite3
 import sys
-from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
-from lxml import html
 
-from mcp_data_core.corpus_compression import finalize_outline_corpus
-from patent_client_agents.shared.corpus import atomic_output, fetch_text, run_build_cli
-
-from .schema import DDL, SCHEMA_VERSION
+from patent_client_agents.shared.corpus import fetch_text
+from patent_client_agents.shared.corpus.epo_legal import (
+    DEFAULT_BASE_URL,
+    DEFAULT_USER_AGENT,
+    BookPages,
+    build_book_corpus,
+    run_book_cli,
+)
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_BASE_URL = "https://www.epo.org"
 DEFAULT_EPC_YEAR = "2020"
-DEFAULT_USER_AGENT = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-    "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/127.0.0.0 Safari/537.36"
-)
 
 _ARTICLE_HREF = re.compile(r'"/en/legal/epc/\d{4}/(a\d+[a-z]?)\.html"')
 _RULE_HREF = re.compile(r'"/en/legal/epc/\d{4}/(r\d+[a-z]?)\.html"')
@@ -70,24 +63,18 @@ def _chapter_from_slug(slug: str) -> str | None:
     return "Article" if slug[0].lower() == "a" else "Rule"
 
 
-def _extract_main_content(page_html: str) -> tuple[str, str, str | None]:
-    tree = html.fromstring(page_html)
-    mains = tree.xpath("//main")
-    if not mains:
-        return "", "", None
-    main = mains[0]
-    for sel in (".//nav", ".//script", ".//style", ".//footer"):
-        for node in main.xpath(sel):
-            parent = node.getparent()
-            if parent is not None:
-                parent.remove(node)
-    fragment = html.tostring(main, encoding="unicode")
-    text = re.sub(r"\s+", " ", main.text_content()).strip()
-    title = None
-    h1s = main.xpath(".//h1")
-    if h1s:
-        title = re.sub(r"\s+", " ", h1s[0].text_content()).strip() or None
-    return fragment, text, title
+_PAGES = BookPages(section_number_for=_section_number_from_slug, chapter_for=_chapter_from_slug)
+
+
+async def _discover(client: httpx.AsyncClient, base_path: str) -> list[str]:
+    """Articles from ``convention.html``, then Rules from ``regulations.html``."""
+    logger.info("Discovering articles + rules from EPC TOC pages")
+    convention_html = await fetch_text(client, f"{base_path}/convention.html")
+    regulations_html = await fetch_text(client, f"{base_path}/regulations.html")
+    article_slugs = sorted({m.group(1) for m in _ARTICLE_HREF.finditer(convention_html)})
+    rule_slugs = sorted({m.group(1) for m in _RULE_HREF.finditer(regulations_html)})
+    logger.info("Discovered %d articles + %d rules", len(article_slugs), len(rule_slugs))
+    return article_slugs + rule_slugs
 
 
 async def build_corpus(
@@ -99,113 +86,29 @@ async def build_corpus(
     pause: float = 0.3,
     limit: int | None = None,
 ) -> int:
-    with atomic_output(output_path) as tmp_path:
-        headers = {"User-Agent": user_agent, "Accept": "text/html"}
-        async with httpx.AsyncClient(
-            base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
-        ) as client:
-            base_path = f"/en/legal/epc/{epc_year}"
-            logger.info("Discovering articles + rules from EPC TOC pages")
-            convention_html = await fetch_text(client, f"{base_path}/convention.html")
-            regulations_html = await fetch_text(client, f"{base_path}/regulations.html")
-            article_slugs = sorted({m.group(1) for m in _ARTICLE_HREF.finditer(convention_html)})
-            rule_slugs = sorted({m.group(1) for m in _RULE_HREF.finditer(regulations_html)})
-            slugs = article_slugs + rule_slugs
-            if limit:
-                slugs = slugs[:limit]
-            logger.info(
-                "Discovered %d articles + %d rules (%d total)",
-                len(article_slugs),
-                len(rule_slugs),
-                len(slugs),
-            )
-
-            conn = sqlite3.connect(tmp_path)
-            try:
-                conn.executescript(DDL)
-                now = datetime.now(UTC).strftime("%Y-%m-%d")
-                for key, val in (
-                    ("schema_version", str(SCHEMA_VERSION)),
-                    ("source", f"{base_url}{base_path}"),
-                    ("snapshot_date", now),
-                    ("epc_year", epc_year),
-                ):
-                    conn.execute(
-                        "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", (key, val)
-                    )
-
-                rows = 0
-                for i, slug in enumerate(slugs, 1):
-                    path = f"{base_path}/{slug}.html"
-                    try:
-                        page_html = await fetch_text(client, path)
-                    except Exception as exc:
-                        logger.warning("Skipping %s: %s", path, exc)
-                        continue
-                    fragment, text, page_title = _extract_main_content(page_html)
-                    if not text:
-                        logger.warning("Empty body for %s — skipping", path)
-                        continue
-                    section_number = _section_number_from_slug(slug)
-                    conn.execute(
-                        "INSERT OR REPLACE INTO sections "
-                        "(href, section_number, title, breadcrumb, chapter, html, text) "
-                        "VALUES (?, ?, ?, ?, ?, ?, ?)",
-                        (
-                            slug,
-                            section_number,
-                            page_title or section_number or slug,
-                            None,
-                            _chapter_from_slug(slug),
-                            fragment,
-                            text,
-                        ),
-                    )
-                    rows += 1
-                    if i % 25 == 0 or i == len(slugs):
-                        logger.info("  %d/%d  %s", i, len(slugs), slug)
-                    if pause:
-                        await asyncio.sleep(pause)
-                finalize_outline_corpus(conn, logger=logger)
-            finally:
-                conn.close()
-
-    logger.info("Wrote %d sections to %s", rows, output_path)
-    return rows
+    return await build_book_corpus(
+        output_path,
+        book="epc",
+        year_key="epc_year",
+        year=epc_year,
+        pages=_PAGES,
+        discover=_discover,
+        base_url=base_url,
+        user_agent=user_agent,
+        pause=pause,
+        limit=limit,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="Build an EPC SQLite/FTS5 corpus from www.epo.org."
-    )
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=Path.home() / ".cache" / "patent_client_agents" / "epc.db",
-    )
-    parser.add_argument(
-        "--year",
-        default=DEFAULT_EPC_YEAR,
-        help=f"EPC edition year (default: {DEFAULT_EPC_YEAR})",
-    )
-    parser.add_argument("--base-url", default=DEFAULT_BASE_URL)
-    parser.add_argument("--user-agent", default=DEFAULT_USER_AGENT)
-    parser.add_argument("--pause", type=float, default=0.3)
-    parser.add_argument("--limit", type=int, default=None, help="For testing only.")
-    parser.add_argument("--verbose", action="store_true")
-    args = parser.parse_args(argv)
-
-    return run_build_cli(
-        lambda: build_corpus(
-            args.output,
-            epc_year=args.year,
-            base_url=args.base_url,
-            user_agent=args.user_agent,
-            pause=args.pause,
-            limit=args.limit,
-        ),
-        verbose=args.verbose,
-        done=lambda count, _elapsed: f"Wrote {count} sections to {args.output}",
+    return run_book_cli(
+        argv,
+        description="Build an EPC SQLite/FTS5 corpus from www.epo.org.",
+        default_output="epc.db",
+        default_year=DEFAULT_EPC_YEAR,
+        year_help="EPC edition year",
+        build=build_corpus,
+        year_kwarg="epc_year",
     )
 
 
