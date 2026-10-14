@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Corpus search tools declare their `limit` (1-100) and `offset` (>= 0) bounds
+  in their input schemas, so out-of-range values are rejected before the tool
+  runs; a negative `offset` is no longer treated as page 1 (#141).
+- Corpus builds write to a temporary file and swap it in, so a failed or
+  interrupted build leaves the existing corpus in place (#143).
+- Every bundled corpus reports the moving `"current"` version label as
+  `"unknown"`, and reads full ISO timestamps in `snapshot_date` (#143).
 - Every list-accepting `get_*` tool follows one set of rules (#132, #134-#137):
   - A list returns the records that were found. IDs the source has no record
     for are named in the summary and listed in a new `not_found` field.
@@ -39,6 +46,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Corpus search tools return the exact rows for any `offset`; an offset that
+  wasn't a multiple of `limit` used to repeat earlier rows (MPEP, TMEP, EPC,
+  the EPO guidelines and case law, UKIPO MoPP, DPMA, IPO India, INPI Brazil
+  statutes, Taiwan trade secrets) (#141).
 - IP Australia, EUIPO, JPO, Swiss IPI and INPI France reuse one login per
   account for the whole process instead of fetching a new token or session
   on every tool call. JPO's 10-requests-per-minute limit and INPI's request
