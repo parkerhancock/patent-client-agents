@@ -23,12 +23,12 @@ patent_assignments_mcp = FastMCP("PatentAssignments")
 
 # ──────────────────────────────────────────────────────────────────────
 # Envelope helpers — Assignment Center is a distinct USPTO endpoint
-# from ODP (assignment-api.uspto.gov vs api.uspto.gov), so it gets its
+# from ODP (assignmentcenter.uspto.gov vs api.uspto.gov), so it gets its
 # own provenance helper. See CONNECTOR_STANDARDS.md §5.9 + uspto.py for
 # the canonical template.
 # ──────────────────────────────────────────────────────────────────────
 
-_ASSIGNMENT_BASE = "https://assignment-api.uspto.gov"
+_ASSIGNMENT_BASE = "https://assignmentcenter.uspto.gov"
 _ASSIGNMENT_NAME = "USPTO Patent Assignment Center"
 
 
@@ -212,7 +212,5 @@ async def search_patent_assignments(
         items=items,
         more_available=more,
         next_cursor=None,
-        provenance=_patent_assignment_provenance(
-            "/PatentAssignmentSearch/assignment/search/searchByPropertyMethod"
-        ),
+        provenance=_patent_assignment_provenance("/ipas/search/api/v3/public/search/patent"),
     )

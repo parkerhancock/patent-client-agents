@@ -47,6 +47,21 @@ def _make_record(reel: int = 9006, frame: str = "0093") -> TrademarkAssignmentRe
 
 
 @pytest.mark.asyncio
+async def test_search_trademark_assignments_provenance_matches_request_url():
+    """Provenance must name the endpoint TrademarkAssignmentClient actually calls."""
+    records = [_make_record(reel=9006, frame="0093")]
+
+    with patch("patent_client_agents.mcp.tools.trademarks.TrademarkAssignmentClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.search_by_assignee = AsyncMock(return_value=records)
+        result = await search_trademark_assignments(query="Acme Corp", by="assignee")
+
+    assert result.provenance.source_url == (
+        "https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/trademark"
+    )
+
+
+@pytest.mark.asyncio
 async def test_search_trademark_assignments_returns_lean_envelope():
     records = [_make_record(reel=9006 + i, frame=f"{93 + i:04d}") for i in range(2)]
 
@@ -58,7 +73,6 @@ async def test_search_trademark_assignments_returns_lean_envelope():
     assert isinstance(result, ListEnvelope)
     assert isinstance(result.provenance, Provenance)
     assert result.provenance.source_name == "USPTO Trademark Assignment Center"
-    assert "assignment-api.uspto.gov" in result.provenance.source_url
     assert len(result.items) == 2
     first = result.items[0]
     assert first["reel_frame"] == "9006/0093"

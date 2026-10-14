@@ -303,12 +303,16 @@ class TestClientConfig:
     @pytest.mark.asyncio
     async def test_sends_api_key(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Office action client sends X-API-KEY header."""
-        mock_request = AsyncMock(
+        # Patch ``send`` (not ``request``) so the captured httpx.Request
+        # carries the client's merged default headers.
+        mock_send = AsyncMock(
             return_value=_make_response({"response": {"numFound": 0, "start": 0, "docs": []}})
         )
-        monkeypatch.setattr(httpx.AsyncClient, "request", mock_request)
+        monkeypatch.setattr(httpx.AsyncClient, "send", mock_send)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             await client.search_rejections("*:*", rows=1)
 
-        assert mock_request.call_args is not None
+        sent = mock_send.call_args.args[0]
+        assert isinstance(sent, httpx.Request)
+        assert sent.headers["X-API-KEY"] == API_KEY

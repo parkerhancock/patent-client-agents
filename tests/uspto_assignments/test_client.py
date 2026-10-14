@@ -153,8 +153,13 @@ class TestSearchLive:
                 executed_between=(start, end),
                 limit=5,
             )
-        # The total before slicing should differ when filter narrows
-        assert filtered.total <= unfiltered.total
+        # Recorded totals: 7593 unfiltered vs 2762 with the 2024 window.
+        assert unfiltered.total == 7593
+        assert filtered.total == 2762
+        # Every filtered recordation has an assignor executing in 2024.
+        assert len(filtered) == 5
+        for r in filtered:
+            assert any(a.execution_date.endswith("/2024") for a in r.assignors)
 
     @pytest.mark.asyncio
     async def test_search_with_conveyance_filter(self, vcr_cassette) -> None:

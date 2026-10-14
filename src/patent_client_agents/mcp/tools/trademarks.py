@@ -648,7 +648,7 @@ _TM_ASSIGNMENT_AXES = (
     "reel_frame",
 )
 
-_TM_ASSIGNMENT_BASE = "https://assignment-api.uspto.gov"
+_TM_ASSIGNMENT_BASE = "https://assignmentcenter.uspto.gov"
 _TM_ASSIGNMENT_NAME = "USPTO Trademark Assignment Center"
 
 
