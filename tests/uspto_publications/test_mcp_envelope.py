@@ -299,6 +299,34 @@ async def test_get_fan_out_runs_concurrently():
 
 
 @pytest.mark.asyncio
+async def test_get_list_reports_missing_publication():
+    async def _resolve(pub_no: str) -> _FakeDocument:
+        if pub_no == "US20239999999A1":
+            raise ValueError(f"No documents found for publication number {pub_no!r}")
+        return _make_document(pub_no)
+
+    with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.resolve_document_by_publication_number = AsyncMock(side_effect=_resolve)
+
+        result = await get_patent_publication(
+            publication_number=["US20230012345A1", "US20239999999A1", "US10123456B2"]
+        )
+        assert [item["publication_number"] for item in result.items] == [
+            "US20230012345A1",
+            "US10123456B2",
+        ]
+        assert result.not_found == ["US20239999999A1"]
+        assert result.summary == (
+            "Fetched 2 of 3 US patent publications. Not found: US20239999999A1."
+        )
+
+        # A single string keeps raising the client's error.
+        with pytest.raises(ValueError, match="No documents found"):
+            await get_patent_publication(publication_number="US20239999999A1")
+
+
+@pytest.mark.asyncio
 async def test_get_empty_list_raises():
     with pytest.raises(ValidationError, match="at least one publication number"):
         await get_patent_publication(publication_number=[])

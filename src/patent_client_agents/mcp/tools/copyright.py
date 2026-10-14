@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -11,6 +10,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.copyright import CopyrightClient
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 copyright_mcp = FastMCP("Copyright")
 
@@ -76,9 +76,6 @@ def _summarize_record(record: dict) -> str:
     else:
         line += "."
     return f"{head}\n{line}"
-
-
-_GET_RECORD_FANOUT_CONCURRENCY = 5
 
 
 # ---------------------------------------------------------------------
@@ -155,7 +152,7 @@ async def get_copyright_record(
         "'card_catalog_CC19381945B_390000-391999.1449', or a list of "
         "such IDs for portfolio workflows.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more U.S. Copyright Office records by their Public Records identifier.
 
     Accepts either a single identifier or a list (per §5.4); the response
@@ -166,31 +163,28 @@ async def get_copyright_record(
 
     Related tools: search_copyright.
     """
-    ids = [public_records_id] if isinstance(public_records_id, str) else list(public_records_id)
+    ids = as_id_list(public_records_id, noun="Public Records identifier")
 
-    semaphore = asyncio.Semaphore(_GET_RECORD_FANOUT_CONCURRENCY)
+    async with CopyrightClient() as client:
 
-    async def _fetch_one(client: CopyrightClient, prid: str) -> dict | None:
-        async with semaphore:
+        async def _fetch_one(prid: str) -> dict | None:
             record = await client.get_record(prid)
             return dump(record) if record is not None else None  # type: ignore[return-value]
 
-    async with CopyrightClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, n) for n in ids])
-
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [n for n, r in zip(ids, fetched, strict=True) if r is None]
+        items, not_found = await fetch_many(
+            ids, _fetch_one, single=isinstance(public_records_id, str)
+        )
 
     if len(ids) == 1 and items:
         summary = _summarize_record(items[0])
-    elif len(ids) == 1:
+    elif isinstance(public_records_id, str):
         summary = f"U.S. Copyright record {ids[0]} — not found."
     else:
-        head = f"Fetched {len(items)} of {len(ids)} U.S. Copyright records."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+        summary = fetched_summary(len(items), len(ids), "U.S. Copyright records", not_found)
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_uscopyright_provenance("/search_service_external/simple_search_dsl"),
     )

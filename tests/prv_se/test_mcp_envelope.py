@@ -153,6 +153,35 @@ async def test_get_prv_patent_accepts_list(monkeypatch: pytest.MonkeyPatch) -> N
 
 
 @pytest.mark.asyncio
+async def test_get_prv_patent_list_reports_missing_number(monkeypatch: pytest.MonkeyPatch) -> None:
+    from mcp_data_core.exceptions import NotFoundError
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "9999" in str(request.url):
+            return httpx.Response(404, json={"message": "not found"})
+        return httpx.Response(200, json=_fixture("patent-get.json"))
+
+    @asynccontextmanager
+    async def _factory() -> AsyncIterator[PrvClient]:
+        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        async with PrvClient(client=client) as c:
+            yield c
+
+    monkeypatch.setattr(
+        "patent_client_agents.mcp.tools.prv_se.PrvClient",
+        lambda: _factory(),
+    )
+
+    result = await get_prv_patent(["SE2615555-6", "SE2699999-9"])
+    assert len(result.items) == 1
+    assert result.not_found == ["SE2699999-9"]
+    assert result.summary == "Fetched 1 of 2 PRV patent records. Not found: SE2699999-9."
+
+    with pytest.raises(NotFoundError):
+        await get_prv_patent("SE2699999-9")
+
+
+@pytest.mark.asyncio
 async def test_get_prv_patent_rejects_empty_input() -> None:
     from mcp_data_core.exceptions import ValidationError
 

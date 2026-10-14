@@ -448,7 +448,35 @@ async def test_get_patent_assignment_list_preserves_order():
     returned = [item["applicationNumberText"] for item in result.items]
     assert returned == appls
     assert result.provenance.source_url.endswith("/api/v1/patent/applications/assignment")
-    assert "Fetched assignments for 3 applications" in result.summary
+    assert result.summary == "Fetched 3 of 3 USPTO assignment records."
+    assert result.not_found == []
+
+
+@pytest.mark.asyncio
+async def test_get_patent_assignment_list_reports_missing_application():
+    from mcp_data_core.exceptions import NotFoundError
+
+    async def _get_assignment(appl: str):
+        if appl == "17654321":
+            raise NotFoundError(f"no application {appl}")
+        return _FakeAssignmentResponse(payload=_make_assignment_response(appl))
+
+    with patch("patent_client_agents.mcp.tools.uspto.UsptoOdpClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_assignment = AsyncMock(side_effect=_get_assignment)
+        result = await get_patent_assignment(
+            application_number=["16123456", "17654321", "18900000"]
+        )
+
+        assert [item["applicationNumberText"] for item in result.items] == [
+            "16123456",
+            "18900000",
+        ]
+        assert result.not_found == ["17654321"]
+        assert "Not found: 17654321." in result.summary
+
+        with pytest.raises(NotFoundError):
+            await get_patent_assignment(application_number="17654321")
 
 
 @pytest.mark.asyncio

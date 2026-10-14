@@ -11,22 +11,20 @@ changes.
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.prv_se import PrvClient
 from patent_client_agents.prv_se.client import API_HOST, DV_HOST, PATENTS_HOST
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 prv_se_mcp = FastMCP("PRV Sweden")
 
 _PRV_SOURCE_NAME = "Patent- och registreringsverket (PRV, Sweden)"
-_PRV_FANOUT_CONCURRENCY = 5
 
 # ----------------------------------------------------------------------
 # Projection helpers (§5.5 lean defaults)
@@ -54,14 +52,6 @@ def _project_patent_get(record: Any, *, full: bool) -> dict[str, Any]:
         drawing = {k: v for k, v in drawing.items() if k != "data"}
         data["firstDrawing"] = drawing
     return data
-
-
-def _coerce_list(value: str | list[str], *, tool: str) -> list[str]:
-    items = [value] if isinstance(value, str) else list(value)
-    items = [s.strip() for s in items if isinstance(s, str) and s.strip()]
-    if not items:
-        raise ValidationError(f"{tool} requires at least one application number")
-    return items
 
 
 def _summarize_search(label: str, total: int, returned: int, text: str | None) -> str:
@@ -145,7 +135,7 @@ async def get_prv_patent(
         "When False (default), drops ~32 KB of base64-encoded first-"
         "drawing image bytes. When True, returns the upstream-shaped record.",
     ] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch one or more Sweden patent register records from PRV.
 
     Wraps ``GET api.prv.se/patents/applications/{number}``. Returns the
@@ -158,24 +148,26 @@ async def get_prv_patent(
     numbers; ``get_epo_biblio`` for SE-validated EP patents at INPADOC
     fidelity.
     """
-    numbers = _coerce_list(application_number, tool="get_prv_patent")
-    semaphore = asyncio.Semaphore(_PRV_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: PrvClient, num: str) -> Any:
-        async with semaphore:
-            return await client.get_patent(num, application_type=application_type)
+    numbers = as_id_list(application_number, noun="PRV application number")
 
     async with PrvClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+        async def _fetch_one(num: str) -> Any:
+            return await client.get_patent(num, application_type=application_type)
+
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
 
     rows = [_project_patent_get(r, full=full) for r in results]
-    summary = (
-        f"PRV patent records — {len(rows)} record{'s' if len(rows) != 1 else ''} "
-        f"for {', '.join(numbers[:5])}{' …' if len(numbers) > 5 else ''}."
-    )
-    return ListEnvelope[dict](
+    if len(numbers) == 1 and rows:
+        summary = f"PRV patent records — 1 record for {numbers[0]}."
+    else:
+        summary = fetched_summary(len(rows), len(numbers), "PRV patent records", not_found)
+    return FetchedList[dict](
         summary=summary,
         items=rows,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(f"{API_HOST}/patents/applications/"),

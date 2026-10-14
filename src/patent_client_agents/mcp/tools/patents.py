@@ -24,9 +24,9 @@ from mcp_data_core.mcp.downloads import (
 from patent_client_agents import unified
 from patent_client_agents.google_patents import GooglePatentsClient
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 _GET_PATENT_BUDGET_SECONDS = 60.0
-_GP_FANOUT_CONCURRENCY = 5
 
 patents_mcp = FastMCP("Patents")
 
@@ -298,7 +298,7 @@ async def get_patent(
         "assignee, inventors, status, claim_count, abstract. Use 'details' "
         "for triage; 'full' when you need the claims/description/citations.",
     ] = "full",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get worldwide patent data from Google Patents (the worldwide patent search aggregator): title, abstract, claims, description, and citations.
 
     Accepts a single patent number or a list (§5.4) and always returns a
@@ -323,14 +323,11 @@ async def get_patent(
         field_name="patent_number",
         tool_name="get_patent",
     )
-    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
-    if not numbers:
-        raise ValidationError("get_patent requires at least one patent number")
+    numbers = as_id_list(patent_number, noun="patent number")
 
-    semaphore = asyncio.Semaphore(_GP_FANOUT_CONCURRENCY)
+    async with GooglePatentsClient() as client:
 
-    async def _fetch_one(client: GooglePatentsClient, pat_no: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(pat_no: str) -> dict:
             try:
                 async with asyncio.timeout(_GET_PATENT_BUDGET_SECONDS):
                     record = await client.get_patent_data(pat_no)
@@ -342,24 +339,25 @@ async def get_patent(
                     f"{int(_GET_PATENT_BUDGET_SECONDS)}s — usually upstream rate limiting. "
                     "Retry shortly."
                 ) from exc
-        return dump(record)  # type: ignore[return-value]
+            return dump(record)  # type: ignore[return-value]
 
-    async with GooglePatentsClient() as client:
-        full_records = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        full_records, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(patent_number, str)
+        )
 
     items = full_records if view_key == "full" else [_details_view(r) for r in full_records]
 
-    if len(numbers) == 1:
+    if len(numbers) == 1 and items:
         # _summarize_patent reads the same scalar fields from either view.
         summary = _summarize_patent(items[0])
-        path = f"/patent/{numbers[0]}"
     else:
-        summary = f"Fetched {len(items)} patents: " + ", ".join(numbers)
-        path = "/patent"
+        summary = fetched_summary(len(items), len(numbers), "patents", not_found)
+    path = f"/patent/{numbers[0]}" if len(numbers) == 1 else "/patent"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_google_patents_provenance(path),
     )
 

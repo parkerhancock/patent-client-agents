@@ -17,11 +17,8 @@ import sys
 from pathlib import Path
 
 PENDING: set[str] = {
-    "get_canada_federal_court_case",
     "get_canlii_case",
     "get_canlii_legislation",
-    "get_china_spc_ip_hearing_notice",
-    "get_copyright_record",
     "get_dpma_design",
     "get_dpma_patent",
     "get_dpma_section",
@@ -59,7 +56,6 @@ PENDING: set[str] = {
     "get_iponz_trademark",
     "get_ipos_manual_section",
     "get_ipos_section",
-    "get_japan_ip_high_court_case",
     "get_jpo_progress",
     "get_jpo_progress_simple",
     "get_jpo_registration_info",
@@ -72,14 +68,6 @@ PENDING: set[str] = {
     "get_oepm_design",
     "get_oepm_patent",
     "get_oepm_trademark",
-    "get_office_action",
-    "get_patent",
-    "get_patent_assignment",
-    "get_patent_publication",
-    "get_petition",
-    "get_prh_patent",
-    "get_prv_patent",
-    "get_ptab",
     "get_thai_dip_copyright",
     "get_thai_dip_geographical_indication",
     "get_thai_dip_patent",
@@ -96,14 +84,9 @@ PENDING: set[str] = {
     "get_tipo_trademark_image_urls",
     "get_tipo_trademark_priority",
     "get_tipo_trademark_rights",
-    "get_tmep_section",
-    "get_trademark_last_update",
-    "get_trademark_status",
     "get_tw_trade_secrets_section",
     "get_upc_decision",
     "get_upc_section",
-    "get_usitc_investigation",
-    "get_wipo_lex_legislation",
 }
 
 _CHECK = """

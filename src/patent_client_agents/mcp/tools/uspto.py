@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any, Literal
 from urllib.parse import urlparse
 
@@ -686,9 +685,6 @@ async def get_patent_family(
 # ---------------------------------------------------------------------------
 
 
-_PATENT_ASSIGNMENT_FANOUT_CONCURRENCY = 5
-
-
 def _summarize_patent_assignment_response(record: dict) -> str:
     """One-line Markdown summary of an ODP assignment response for one application."""
     appl = record.get("applicationNumberText") or "(no appl#)"
@@ -724,7 +720,7 @@ async def get_patent_assignment(
         "NOT a patent number or publication number. The response is always "
         "a ListEnvelope so the shape is stable.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get USPTO patent assignment and ownership-transfer history for one or many applications.
 
     Returns recorded assignments (reel/frame, conveyance type, assignors,
@@ -737,33 +733,30 @@ async def get_patent_assignment(
     Related tools: search_patent_assignments, get_application,
     search_applications.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        from mcp_data_core.exceptions import ValidationError
-
-        raise ValidationError("get_patent_assignment requires at least one application number")
-
-    semaphore = asyncio.Semaphore(_PATENT_ASSIGNMENT_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: UsptoOdpClient, appl: str) -> dict:
-        async with semaphore:
-            return _dump(await client.get_assignment(appl))  # type: ignore[return-value]
+    numbers = as_id_list(application_number, noun="application number")
 
     async with UsptoOdpClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(results) == 1:
+        async def _fetch_one(appl: str) -> dict:
+            return _dump(await client.get_assignment(appl))
+
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
+
+    if len(numbers) == 1 and results:
         summary = _summarize_patent_assignment_response(results[0])
+    else:
+        summary = fetched_summary(len(results), len(numbers), "USPTO assignment records", not_found)
+    if len(numbers) == 1:
         path = f"/api/v1/patent/applications/{numbers[0]}/assignment"
     else:
-        summary = f"Fetched assignments for {len(results)} applications: " + ", ".join(numbers)
         path = "/api/v1/patent/applications/assignment"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_odp_provenance(path),
     )
 
@@ -802,8 +795,6 @@ _PTAB_BAG_KEY = {
     "appeal_decision": "patentAppealDataBag",
     "interference_decision": "patentInterferenceDataBag",
 }
-
-_PTAB_FANOUT_CONCURRENCY = 5
 
 
 def _stub_ptab_record(record: dict, ptab_type: str) -> dict:
@@ -1056,7 +1047,7 @@ async def get_ptab(
         "identifier for all other types. Pass a list for portfolio workflows; "
         "the response is always a ListEnvelope.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch one or more Patent Trial and Appeal Board (PTAB) records — proceeding, decision, or document — by identifier.
 
     The PTAB is the USPTO administrative tribunal for AIA trials, ex parte
@@ -1068,39 +1059,32 @@ async def get_ptab(
     download_ptab_trial_decisions, download_ptab_appeal_decisions,
     download_ptab_interference_decisions.
     """
+    ids = as_id_list(identifier, noun="PTAB identifier")
     key = type.strip().lower()
     if key not in _PTAB_GET_METHOD:
-        from mcp_data_core.exceptions import ValidationError
-
         raise ValidationError(f"type must be one of {sorted(_PTAB_GET_METHOD)}; got {type!r}")
     method_name, _id_kind = _PTAB_GET_METHOD[key]
-    ids = [identifier] if isinstance(identifier, str) else list(identifier)
-    if not ids:
-        from mcp_data_core.exceptions import ValidationError
-
-        raise ValidationError("get_ptab requires at least one identifier")
-
-    semaphore = asyncio.Semaphore(_PTAB_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: UsptoOdpClient, ident: str) -> dict:
-        async with semaphore:
-            method = getattr(client, method_name)
-            return _dump(await method(ident))  # type: ignore[return-value]
 
     async with UsptoOdpClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, i) for i in ids])
+        method = getattr(client, method_name)
 
-    if len(results) == 1:
+        async def _fetch_one(ident: str) -> dict:
+            return _dump(await method(ident))
+
+        results, not_found = await fetch_many(ids, _fetch_one, single=isinstance(identifier, str))
+
+    if len(ids) == 1 and results:
         first = _extract_ptab_first(results[0], key)
         summary = _summarize_ptab(first, key)
     else:
-        summary = f"Fetched {len(results)} PTAB {key} records: " + ", ".join(ids)
+        summary = fetched_summary(len(results), len(ids), f"PTAB {key} records", not_found)
 
     base_path = f"/api/v1/ptab/{key.replace('_', '-')}s"
     path = base_path + ("/" + ids[0] if len(ids) == 1 else "")
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_odp_provenance(path),
     )
 
@@ -1716,9 +1700,6 @@ def _ptab_decision_filename(
 # ---------------------------------------------------------------------------
 
 
-_PETITION_FANOUT_CONCURRENCY = 5
-
-
 def _stub_petition(record: dict) -> dict:
     """Lean projection (§5.5) of a USPTO petition decision record."""
     return {
@@ -1812,7 +1793,7 @@ async def get_petition(
         "a list of such identifiers for portfolio workflows. The response "
         "shape stays a ListEnvelope whether you pass one or many.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more USPTO petition decision records by identifier.
 
     Accepts either a single petition decision identifier or a list (§5.4);
@@ -1825,31 +1806,28 @@ async def get_petition(
 
     Related tools: search_petitions, search_applications, get_application.
     """
-    ids = [petition_number] if isinstance(petition_number, str) else list(petition_number)
-    if not ids:
-        from mcp_data_core.exceptions import ValidationError
-
-        raise ValidationError("get_petition requires at least one identifier")
-
-    semaphore = asyncio.Semaphore(_PETITION_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: UsptoOdpClient, pid: str) -> dict:
-        async with semaphore:
-            return _dump(await client.get_petition(pid))  # type: ignore[return-value]
+    ids = as_id_list(petition_number, noun="petition decision identifier")
 
     async with UsptoOdpClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, p) for p in ids])
 
-    if len(results) == 1:
+        async def _fetch_one(pid: str) -> dict:
+            return _dump(await client.get_petition(pid))
+
+        results, not_found = await fetch_many(
+            ids, _fetch_one, single=isinstance(petition_number, str)
+        )
+
+    if len(ids) == 1 and results:
         first = _extract_petition_first(results[0])
         summary = _summarize_petition(first)
     else:
-        summary = f"Fetched {len(results)} USPTO petition decisions: " + ", ".join(ids)
+        summary = fetched_summary(len(results), len(ids), "USPTO petition decisions", not_found)
 
     path = "/api/v1/patent/petitions" + ("/" + ids[0] if len(ids) == 1 else "")
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_odp_provenance(path),
     )
 

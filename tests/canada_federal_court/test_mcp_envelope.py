@@ -101,6 +101,35 @@ async def test_get_case_includes_parties_patents_and_status() -> None:
 
 
 @pytest.mark.asyncio
+async def test_get_case_list_reports_missing_file() -> None:
+    from mcp_data_core.exceptions import NotFoundError
+
+    record = FederalCourtCaseRecord(case=_case())
+
+    async def _get_case(number: str, *, division: str) -> FederalCourtCaseRecord:
+        if number == "T-9999-99":
+            raise NotFoundError(f"Federal Court file not found: {number}")
+        return record
+
+    with patch(
+        "patent_client_agents.mcp.tools.canada_federal_court.CanadaFederalCourtClient"
+    ) as cls:
+        client = cls.return_value.__aenter__.return_value
+        client.get_case = AsyncMock(side_effect=_get_case)
+        client.list_docket_entries = AsyncMock(return_value=_docket())
+
+        result = await get_canada_federal_court_case(["T-2962-24", "T-9999-99"])
+        assert len(result.items) == 1
+        assert result.not_found == ["T-9999-99"]
+        assert result.summary == (
+            "Fetched 1 of 2 Canadian Federal Court files. Not found: T-9999-99."
+        )
+
+        with pytest.raises(NotFoundError):
+            await get_canada_federal_court_case("T-9999-99")
+
+
+@pytest.mark.asyncio
 async def test_docket_returns_lean_entries_and_status_provenance() -> None:
     with patch(
         "patent_client_agents.mcp.tools.canada_federal_court.CanadaFederalCourtClient"

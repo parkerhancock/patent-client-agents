@@ -52,6 +52,7 @@ from mcp_data_core.mcp import (
 )
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.usitc import (
     DataWebClient,
     EdisClient,
@@ -87,12 +88,6 @@ _EDIS_BASE = "https://edis.usitc.gov"
 _DATAWEB_BASE = "https://datawebws.usitc.gov"
 _HTS_BASE = "https://hts.usitc.gov"
 _IDS_BASE = "https://ids.usitc.gov"
-
-# Bounded fan-out for list-accepting get_usitc_investigation (§5.4).
-# EDIS responses are XML-parsed in-process — the cap keeps a 25-item
-# portfolio from opening 25 sockets simultaneously while still amortizing
-# Akamai TLS handshakes across the batch.
-_USITC_FANOUT_CONCURRENCY = 5
 
 
 def _usitc_provenance(path: str, *, as_of_status: str | None = None) -> Any:
@@ -343,7 +338,7 @@ async def get_usitc_investigation(
         "list of such numbers for portfolio workflows. Pass without the "
         "'TA-' infix (use '337-1234', not '337-TA-1234').",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch one or more U.S. International Trade Commission (USITC) investigations from EDIS.
 
     EDIS (Electronic Document Information System) treats the investigation
@@ -356,45 +351,35 @@ async def get_usitc_investigation(
     Related tools: search_usitc_investigations, list_usitc_attachments,
     search_usitc_documents, download_usitc_investigation_documents.
     """
-    numbers = (
-        [investigation_number]
-        if isinstance(investigation_number, str)
-        else list(investigation_number)
-    )
-    if not numbers:
-        raise ValidationError("get_usitc_investigation requires at least one investigation_number")
-
-    semaphore = asyncio.Semaphore(_USITC_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: EdisClient, number: str) -> dict | None:
-        async with semaphore:
-            results = await client.list_investigations(investigation_number=number)
-        if not results:
-            return None
-        # EDIS returns a list even for a single-number path lookup;
-        # prefer an exact investigation_number match, else fall back to
-        # the first row (some EDIS rows carry the full investigation
-        # number including a phase suffix).
-        dumped_rows = [dump(r) for r in results]
-        for row in dumped_rows:
-            if isinstance(row, dict) and row.get("investigation_number") == number:
-                return row
-        first = dumped_rows[0]
-        return first if isinstance(first, dict) else None
+    numbers = as_id_list(investigation_number, noun="USITC investigation number")
 
     async with EdisClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [n for n, r in zip(numbers, fetched, strict=True) if r is None]
+        async def _fetch_one(number: str) -> dict | None:
+            results = await client.list_investigations(investigation_number=number)
+            if not results:
+                return None
+            # EDIS returns a list even for a single-number path lookup;
+            # prefer an exact investigation_number match, else fall back to
+            # the first row (some EDIS rows carry the full investigation
+            # number including a phase suffix).
+            dumped_rows = [dump(r) for r in results]
+            for row in dumped_rows:
+                if isinstance(row, dict) and row.get("investigation_number") == number:
+                    return row
+            first = dumped_rows[0]
+            return first if isinstance(first, dict) else None
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(investigation_number, str)
+        )
 
     if len(numbers) == 1 and items:
         summary = _summarize_usitc_investigation(items[0])
-    elif len(numbers) == 1:
+    elif isinstance(investigation_number, str):
         summary = f"USITC investigation {numbers[0]} — not found."
     else:
-        head = f"Fetched {len(items)} of {len(numbers)} USITC investigations."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+        summary = fetched_summary(len(items), len(numbers), "USITC investigations", not_found)
 
     path = f"/data/investigation/{numbers[0]}" if len(numbers) == 1 else "/data/investigation"
     as_of_status = None
@@ -405,9 +390,10 @@ async def get_usitc_investigation(
         as_of_status = next(iter(statuses))
     elif len(statuses) > 1:
         as_of_status = "mixed"
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_usitc_provenance(path, as_of_status=as_of_status),
     )
 

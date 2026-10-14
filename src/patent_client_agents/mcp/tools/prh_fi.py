@@ -11,13 +11,11 @@ required; production callers should send a courtesy registration to
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import download_response
 from patent_client_agents.prh_fi import PrhClient
@@ -32,23 +30,15 @@ from patent_client_agents.prh_fi.client import (
     TRADEMARK_PATH,
 )
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 prh_fi_mcp = FastMCP("PRH Finland")
 
 _PRH_SOURCE_NAME = "Patentti- ja rekisterihallitus (PRH, Finland)"
-_PRH_FANOUT_CONCURRENCY = 5
 
 
 def _provenance(source_url: str) -> Any:
     return make_provenance(source_url=source_url, source_name=_PRH_SOURCE_NAME)
-
-
-def _coerce_list(value: str | list[str], *, tool: str) -> list[str]:
-    items = [value] if isinstance(value, str) else list(value)
-    items = [s.strip() for s in items if isinstance(s, str) and s.strip()]
-    if not items:
-        raise ValidationError(f"{tool} requires at least one application number")
-    return items
 
 
 def _project_dossier_row(row: Any, *, full: bool) -> dict[str, Any]:
@@ -200,7 +190,7 @@ async def get_prh_patent(
         "When False (default), drops the file-history pointer list, "
         "payment timeline, and raw events array to keep responses lean.",
     ] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch one or more Finland patent register records from PRH.
 
     Wraps ``GET patenttitietopalvelu.prh.fi/nis-api-gateway-pat/patent/{n}``.
@@ -212,24 +202,26 @@ async def get_prh_patent(
     application numbers; ``get_epo_biblio`` for FI-validated EP patents
     at INPADOC fidelity.
     """
-    numbers = _coerce_list(application_number, tool="get_prh_patent")
-    semaphore = asyncio.Semaphore(_PRH_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: PrhClient, num: str) -> Any:
-        async with semaphore:
-            return await client.get_patent(num)
+    numbers = as_id_list(application_number, noun="PRH application number")
 
     async with PrhClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+
+        async def _fetch_one(num: str) -> Any:
+            return await client.get_patent(num)
+
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
 
     items = [_project_patent_get(r, full=full) for r in results]
-    summary = (
-        f"PRH patent records — {len(items)} record{'s' if len(items) != 1 else ''} "
-        f"for {', '.join(numbers[:5])}{' …' if len(numbers) > 5 else ''}."
-    )
-    return ListEnvelope[dict](
+    if len(numbers) == 1 and items:
+        summary = f"PRH patent records — 1 record for {numbers[0]}."
+    else:
+        summary = fetched_summary(len(items), len(numbers), "PRH patent records", not_found)
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(f"{PATENT_HOST}{PATENT_PATH}/"),

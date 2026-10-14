@@ -112,10 +112,8 @@ async def test_get_list_preserves_order(tmep_corpus_env: Path) -> None:
 
     assert isinstance(result, ListEnvelope)
     assert [item["section_number"] for item in result.items] == refs
-    # Multi-record summary lists the section numbers.
-    assert "Fetched 3" in result.summary
-    for ref in refs:
-        assert ref in result.summary
+    assert result.summary.startswith("Fetched 3 of 3 TMEP sections")
+    assert result.not_found == []
     # Multi-record path is the collection root, not a specific record.
     assert result.provenance.source_url.endswith("/RDMS/TMEP/result")
 
@@ -132,3 +130,18 @@ async def test_get_provenance_carries_corpus_fields(tmep_corpus_env: Path) -> No
     assert result.provenance.corpus_version == "unknown"
     assert "unknown" in result.summary
     assert isinstance(result.provenance.corpus_synced_at, datetime)
+
+
+@pytest.mark.asyncio
+async def test_get_list_reports_missing_section(tmep_corpus_env: Path) -> None:
+    result = await get_tmep_section(section=["1207", "9999.99", "1402"])
+
+    assert [item["section_number"] for item in result.items] == ["1207", "1402"]
+    assert result.not_found == ["9999.99"]
+    assert "Not found: 9999.99." in result.summary
+
+
+@pytest.mark.asyncio
+async def test_get_single_missing_section_still_raises(tmep_corpus_env: Path) -> None:
+    with pytest.raises(ValueError):
+        await get_tmep_section(section="9999.99")

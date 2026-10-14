@@ -87,6 +87,28 @@ async def test_get_exact_notice_can_return_full_text() -> None:
 
 
 @pytest.mark.asyncio
+async def test_get_notice_list_reports_missing_notice() -> None:
+    from mcp_data_core.exceptions import NotFoundError
+
+    async def _get(value: str) -> ChinaSpcIpHearingNotice:
+        if value == "1":
+            raise NotFoundError(f"SPC IP Court hearing notice not found: {value}")
+        return _notice()
+
+    with patch("patent_client_agents.mcp.tools.china_spc_ip_court.ChinaSpcIpCourtClient") as cls:
+        client = cls.return_value.__aenter__.return_value
+        client.get_hearing_notice = AsyncMock(side_effect=_get)
+
+        result = await get_china_spc_ip_hearing_notice(["9999", "1"])
+        assert [item["notice_id"] for item in result.items] == ["9999"]
+        assert result.not_found == ["1"]
+        assert "Not found: 1." in result.summary
+
+        with pytest.raises(NotFoundError):
+            await get_china_spc_ip_hearing_notice("1")
+
+
+@pytest.mark.asyncio
 async def test_site_search_returns_semiconductor_material() -> None:
     response = ChinaSpcIpSiteSearchResponse(
         query="芯片",

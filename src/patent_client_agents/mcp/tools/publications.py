@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import base64
 from typing import Annotated, Any
 
@@ -20,6 +19,7 @@ from mcp_data_core.filenames import publication_pdf as _publication_pdf_name
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import read_resource, register_source
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.uspto_publications import (
     PublicSearchClient,
     resolve_and_download_pdf,
@@ -136,9 +136,6 @@ async def _publication_pdf_resource(publication_number: str):
 # ---------------------------------------------------------------------------
 
 
-_PUB_FANOUT_CONCURRENCY = 5
-
-
 @publications_mcp.tool(annotations=READ_ONLY)
 async def search_patent_publications(
     query: Annotated[
@@ -247,7 +244,7 @@ async def get_patent_publication(
         "Compatibility alias for publication_number. USPTO PPUBS can resolve "
         "US patent numbers as publication identifiers.",
     ] = None,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get the full text of a US patent or published application (title, abstract, claims, spec).
 
     Accepts either a single publication number or a list (§5.4) and always
@@ -265,34 +262,36 @@ async def get_patent_publication(
         patent_number=patent_number,
         tool_name="get_patent_publication",
     )
-    numbers = (
-        [resolved_publication_number]
-        if isinstance(resolved_publication_number, str)
-        else list(resolved_publication_number)
-    )
-    if not numbers:
-        raise ValidationError("get_patent_publication requires at least one publication number")
-
-    semaphore = asyncio.Semaphore(_PUB_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: PublicSearchClient, pub_no: str) -> dict:
-        async with semaphore:
-            record = await client.resolve_document_by_publication_number(pub_no)
-        return dump(record, mode="json")  # type: ignore[return-value]
+    numbers = as_id_list(resolved_publication_number, noun="publication number")
+    single = isinstance(resolved_publication_number, str)
 
     async with PublicSearchClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(pub_no: str) -> dict | None:
+            try:
+                record = await client.resolve_document_by_publication_number(pub_no)
+            except ValueError:
+                # The PPUBS client reports an unresolvable number as ValueError.
+                if single:
+                    raise
+                return None
+            return dump(record, mode="json")  # type: ignore[return-value]
+
+        results, not_found = await fetch_many(numbers, _fetch_one, single=single)
+
+    if len(numbers) == 1 and results:
         summary = _summarize_publication(results[0])
+    else:
+        summary = fetched_summary(len(results), len(numbers), "US patent publications", not_found)
+    if len(numbers) == 1:
         path = f"/api/patents/highlight?publicationNumber={numbers[0]}"
     else:
-        summary = f"Fetched {len(results)} US patent publications: " + ", ".join(numbers)
         path = "/api/patents/highlight"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_ppubs_provenance(path),
     )
 
