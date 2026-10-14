@@ -16,6 +16,8 @@ from __future__ import annotations
 import os
 import re
 
+from patent_client_agents.shared.errors import SectionNotFoundError
+
 from .corpus.db import CorpusDB, CorpusSection, CorpusUnavailable
 from .models import MpppCorpusMeta, MpppSearchHit, MpppSearchResponse, MpppSection
 
@@ -131,7 +133,7 @@ class MpppClient:
         section_number = normalize_section_reference(section_reference)
         row = db.get_section(section_number=section_number)
         if row is None:
-            raise ValueError(f"MPPP section {section_reference!r} not found.")
+            raise SectionNotFoundError(f"MPPP section {section_reference!r} not found.")
         return _section_to_model(row)
 
     async def search(

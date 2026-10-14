@@ -23,6 +23,8 @@ from __future__ import annotations
 import os
 import re
 
+from patent_client_agents.shared.errors import SectionNotFoundError
+
 from .corpus.db import CorpusDB, CorpusSection, CorpusUnavailable
 from .models import (
     TwTradeSecretsCorpusMeta,
@@ -170,7 +172,7 @@ class TwTradeSecretsClient:
         )
         row = db.get_section(normalized)
         if row is None:
-            raise ValueError(
+            raise SectionNotFoundError(
                 f"Article {normalized!r} not found in the Taiwan Trade Secrets Act corpus."
             )
         return _section_to_model(row)

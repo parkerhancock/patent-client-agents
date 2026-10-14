@@ -226,6 +226,7 @@ async def test_get_ipos_manual_section_partial_not_found_in_summary():
 
     assert len(result.items) == 1
     assert "Not found" in result.summary
+    assert result.not_found == ["IPOS PEG 9.9.9"]
 
 
 @pytest.mark.asyncio

@@ -194,6 +194,19 @@ async def test_get_upc_section_list_preserves_order():
 
 
 @pytest.mark.asyncio
+async def test_get_upc_section_partial_not_found_lists_missing():
+    with patch("patent_client_agents.mcp.tools.upc.UpcStatutesClient") as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_instrument = AsyncMock(side_effect=[_make_instrument_text("upca"), None])
+
+        result = await get_upc_section(instrument=["upca", "nope"])
+
+    assert [r["instrument"] for r in result.items] == ["upca"]
+    assert result.not_found == ["nope"]
+    assert result.summary == "Fetched 1 of 2 UPC instruments. Not found: nope."
+
+
+@pytest.mark.asyncio
 async def test_get_upc_section_empty_list_raises():
     with pytest.raises(ValidationError, match="at least one"):
         await get_upc_section(instrument=[])

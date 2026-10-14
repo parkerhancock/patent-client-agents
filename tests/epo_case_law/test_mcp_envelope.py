@@ -99,10 +99,8 @@ async def test_get_list_preserves_order() -> None:
     assert isinstance(result, ListEnvelope)
     hrefs = [item["href"] for item in result.items]
     assert hrefs == ["clr_i_d_3", "clr_i_a_1", "clr_i_a"]
-    # Multi-record summary lists the section numbers.
-    assert "Fetched 3" in result.summary
-    for ref in refs:
-        assert ref in result.summary
+    assert result.summary.startswith("Fetched 3 of 3 ")
+    assert result.not_found == []
     # Multi-record path is the collection root.
     assert result.provenance.source_url.endswith("/en/legal/case-law")
 
@@ -112,3 +110,11 @@ async def test_get_provenance_carries_corpus_fields() -> None:
 
     assert result.provenance.corpus_version == "2022"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
+
+
+async def test_get_list_reports_missing_citation() -> None:
+    result = await get_epo_case_law_section(section=["I.D.3", "IX.Z.99"])
+    assert len(result.items) == 1
+    assert result.not_found == ["IX.Z.99"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: IX.Z.99.")

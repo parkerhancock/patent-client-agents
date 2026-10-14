@@ -41,6 +41,7 @@ from patent_client_agents.epo_ops.models import (
     SourceEvidence,
 )
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 epo_ops_mcp = FastMCP("EPO OPS")
 
@@ -87,7 +88,6 @@ async def _epo_patent_pdf_resource(publication_number: str):
 
 _EPO_OPS_BASE = "https://ops.epo.org/3.2/rest-services"
 _EPO_OPS_NAME = "European Patent Office Open Patent Services (EPO OPS)"
-_EPO_FANOUT_CONCURRENCY = 4
 _EPO_JURISDICTION_RECIPES = {
     "CN": "pn=CN",
     "DE": "pn=DE",
@@ -496,7 +496,7 @@ async def get_epo_biblio(
         str | list[str] | None,
         "Compatibility alias for patent_number.",
     ] = None,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get bibliographic data (title, applicants, inventors, IPC/CPC, priority) for one or more patents from EPO OPS.
 
     Accepts a single number or a list (per §5.4); the response is always
@@ -515,29 +515,28 @@ async def get_epo_biblio(
         field_name="patent_number",
         tool_name="get_epo_biblio",
     )
-    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
-    if not numbers:
-        raise ValidationError("get_epo_biblio requires at least one patent number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_biblio(number=n))  # type: ignore[return-value]
+    numbers = as_id_list(patent_number, noun="patent number")
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_biblio(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(patent_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_biblio(items[0], fallback_number=numbers[0])
         path = f"/published-data/publication/docdb/{numbers[0]}/biblio"
     else:
-        summary = f"EPO OPS biblio — fetched {len(items)} record(s): " + ", ".join(numbers)
+        summary = fetched_summary(len(items), len(numbers), "EPO OPS biblio records", not_found)
         path = "/published-data/publication"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_provenance(path),
     )
 
@@ -549,7 +548,7 @@ async def get_epo_fulltext(
         "Patent document number (e.g. 'EP1234567A1'), or a list for portfolio "
         "workflows. Examples: 'EP1234567A1', ['EP1234567A1', 'EP9876543B1'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get full text (claims + description) for one or more patents from EPO OPS.
 
     Accepts a single number or a list (per §5.4); the response is always
@@ -563,29 +562,28 @@ async def get_epo_fulltext(
     Related tools: search_epo, get_epo_biblio, get_epo_family,
     get_epo_legal_events, convert_epo_number.
     """
-    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
-    if not numbers:
-        raise ValidationError("get_epo_fulltext requires at least one patent number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_fulltext(number=n))  # type: ignore[return-value]
+    numbers = as_id_list(patent_number, noun="patent number")
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_fulltext(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(patent_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_fulltext(items[0], fallback_number=numbers[0])
         path = f"/published-data/publication/docdb/{numbers[0]}/claims"
     else:
-        summary = f"EPO OPS fulltext — fetched {len(items)} record(s): " + ", ".join(numbers)
+        summary = fetched_summary(len(items), len(numbers), "EPO OPS fulltext records", not_found)
         path = "/published-data/publication"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_provenance(path),
     )
 
@@ -598,7 +596,7 @@ async def get_epo_family(
         "Examples: 'EP1234567A1', ['EP1234567A1', 'US10123456B2']. EPO uses "
         "INPADOC families (priority-linked publications across jurisdictions).",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get INPADOC patent family members (priority-linked publications across jurisdictions) for one or more patents.
 
     Accepts a single number or a list (per §5.4); the response is always
@@ -612,29 +610,28 @@ async def get_epo_family(
     Related tools: search_epo, get_epo_biblio, get_epo_fulltext,
     get_epo_legal_events, convert_epo_number.
     """
-    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
-    if not numbers:
-        raise ValidationError("get_epo_family requires at least one patent number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_family(number=n))  # type: ignore[return-value]
+    numbers = as_id_list(patent_number, noun="patent number")
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_family(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(patent_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_family(items[0], fallback_number=numbers[0])
         path = f"/family/publication/docdb/{numbers[0]}"
     else:
-        summary = f"EPO OPS family — fetched {len(items)} record(s): " + ", ".join(numbers)
+        summary = fetched_summary(len(items), len(numbers), "EPO OPS family records", not_found)
         path = "/family/publication"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_provenance(path),
     )
 
@@ -646,32 +643,30 @@ async def get_epo_citations(
         "Patent document number, or a list for portfolio workflows. "
         "Returns backward citations recorded in EPO bibliographic data.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get structured backward patent and non-patent citations for one or more publications."""
-    raw_numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
-    numbers = [_normalize_epo_number(number) for number in raw_numbers]
-    if not numbers:
-        raise ValidationError("get_epo_citations requires at least one patent number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_citations(number=n))
+    numbers = [_normalize_epo_number(n) for n in as_id_list(patent_number, noun="patent number")]
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_citations(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(patent_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_citations(items[0], fallback_number=numbers[0])
         path = f"/published-data/publication/docdb/{numbers[0]}/biblio"
     else:
-        summary = f"EPO OPS citations — fetched {len(items)} record(s): " + ", ".join(numbers)
+        summary = fetched_summary(len(items), len(numbers), "EPO OPS citation records", not_found)
         path = "/published-data/publication"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_provenance(path),
     )
 
@@ -683,32 +678,32 @@ async def get_epo_equivalents(
         "Patent document number, or a list for portfolio workflows. "
         "Returns simple-family publications carrying the same technical disclosure.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get simple-family equivalent publications for one or more patent documents."""
-    raw_numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
-    numbers = [_normalize_epo_number(number) for number in raw_numbers]
-    if not numbers:
-        raise ValidationError("get_epo_equivalents requires at least one patent number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_equivalents(number=n))
+    numbers = [_normalize_epo_number(n) for n in as_id_list(patent_number, noun="patent number")]
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_equivalents(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(patent_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_equivalents(items[0], fallback_number=numbers[0])
         path = f"/published-data/publication/docdb/{numbers[0]}/equivalents"
     else:
-        summary = f"EPO OPS equivalents — fetched {len(items)} record(s): " + ", ".join(numbers)
+        summary = fetched_summary(
+            len(items), len(numbers), "EPO OPS equivalents records", not_found
+        )
         path = "/published-data/publication"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_provenance(path),
     )
 
@@ -720,7 +715,7 @@ async def get_epo_legal_events(
         "Patent document number, or a list for portfolio workflows. "
         "Examples: 'EP1234567A1', ['EP1234567A1', 'EP9876543B1'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get the legal-status event timeline (filing, publication, grant, lapse) for one or more patents from EPO OPS.
 
     Accepts a single number or a list (per §5.4); the response is always
@@ -733,29 +728,30 @@ async def get_epo_legal_events(
     Related tools: search_epo, get_epo_biblio, get_epo_family,
     get_epo_fulltext, convert_epo_number, get_epo_unitary_patent_status.
     """
-    numbers = [patent_number] if isinstance(patent_number, str) else list(patent_number)
-    if not numbers:
-        raise ValidationError("get_epo_legal_events requires at least one patent number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_legal_events(number=n))  # type: ignore[return-value]
+    numbers = as_id_list(patent_number, noun="patent number")
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_legal_events(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(patent_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_legal_events(items[0], fallback_number=numbers[0])
         path = f"/legal/publication/docdb/{numbers[0]}"
     else:
-        summary = f"EPO OPS legal events — fetched {len(items)} record(s): " + ", ".join(numbers)
+        summary = fetched_summary(
+            len(items), len(numbers), "EPO OPS legal-event records", not_found
+        )
         path = "/legal/publication"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_provenance(path),
     )
 
@@ -1024,39 +1020,41 @@ async def get_epo_register_biblio(
         str | list[str],
         "EP publication number, or a list. Examples: 'EP1000000', ['EP1000000', 'EP4108782'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get correction-aware European Patent Register bibliographic data.
 
     Designations are application-stage records. Term-of-grant lapse snapshots
     cover the opposition period, not current national validation or lapse status.
     """
-    raw_numbers = [epo_number] if isinstance(epo_number, str) else list(epo_number)
-    numbers = [_normalize_epo_number(number) for number in raw_numbers]
-    if not numbers:
-        raise ValidationError("get_epo_register_biblio requires at least one EP number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_register_biblio(number=n))
+    numbers = [
+        _normalize_epo_number(n) for n in as_id_list(epo_number, noun="EP publication number")
+    ]
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_register_biblio(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(epo_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_register_biblio(
             items[0],
             fallback_number=numbers[0],
         )
         path = f"/rest-services/register/publication/epodoc/{numbers[0]}/biblio"
     else:
-        summary = f"European Patent Register biblio — fetched {len(items)} record(s)."
+        summary = fetched_summary(
+            len(items), len(numbers), "European Patent Register biblio records", not_found
+        )
         path = "/rest-services/register/publication/epodoc"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_register_record_provenance(path),
     )
 
@@ -1067,32 +1065,34 @@ async def get_epo_register_events(
         str | list[str],
         "EP publication number, or a list. Examples: 'EP1000000', ['EP1000000', 'EP4108782'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get structured dossier events from the European Patent Register."""
-    raw_numbers = [epo_number] if isinstance(epo_number, str) else list(epo_number)
-    numbers = [_normalize_epo_number(number) for number in raw_numbers]
-    if not numbers:
-        raise ValidationError("get_epo_register_events requires at least one EP number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_register_events(number=n))
+    numbers = [
+        _normalize_epo_number(n) for n in as_id_list(epo_number, noun="EP publication number")
+    ]
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_register_events(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(epo_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_register_events(items[0], fallback_number=numbers[0])
         path = f"/rest-services/register/publication/epodoc/{numbers[0]}/events"
     else:
-        summary = f"European Patent Register events — fetched {len(items)} record(s)."
+        summary = fetched_summary(
+            len(items), len(numbers), "European Patent Register event records", not_found
+        )
         path = "/rest-services/register/publication/epodoc"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_register_record_provenance(path),
     )
 
@@ -1103,32 +1103,34 @@ async def get_epo_procedural_steps(
         str | list[str],
         "EP publication number, or a list. Examples: 'EP1000000', ['EP1000000', 'EP4108782'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get structured procedural steps from the European Patent Register."""
-    raw_numbers = [epo_number] if isinstance(epo_number, str) else list(epo_number)
-    numbers = [_normalize_epo_number(number) for number in raw_numbers]
-    if not numbers:
-        raise ValidationError("get_epo_procedural_steps requires at least one EP number")
-
-    semaphore = asyncio.Semaphore(_EPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: Any, n: str) -> dict:
-        async with semaphore:
-            return dump(await client.fetch_register_procedural_steps(number=n))
+    numbers = [
+        _normalize_epo_number(n) for n in as_id_list(epo_number, noun="EP publication number")
+    ]
 
     async with client_from_env() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(numbers) == 1:
+        async def _fetch_one(n: str) -> dict:
+            return dump(await client.fetch_register_procedural_steps(number=n))
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(epo_number, str), concurrency=4
+        )
+
+    if len(numbers) == 1 and items:
         summary = _summarize_epo_procedural_steps(items[0], fallback_number=numbers[0])
         path = f"/rest-services/register/publication/epodoc/{numbers[0]}/procedural-steps"
     else:
-        summary = f"European Patent Register steps — fetched {len(items)} record(s)."
+        summary = fetched_summary(
+            len(items), len(numbers), "European Patent Register procedural-step records", not_found
+        )
         path = "/rest-services/register/publication/epodoc"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_epo_register_record_provenance(path),
     )
 

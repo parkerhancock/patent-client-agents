@@ -13,7 +13,6 @@ agents can warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -26,6 +25,7 @@ from patent_client_agents.dpma_statutes import (
     get_corpus_status,
     parse_citation,
 )
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 dpma_statutes_mcp = FastMCP("DPMA Germany — Statutes")
 
@@ -40,8 +40,6 @@ dpma_statutes_mcp = FastMCP("DPMA Germany — Statutes")
 
 _DPMA_SOURCE_NAME = "DPMA Germany — IP statutes"
 _GESETZE_BASE = "https://www.gesetze-im-internet.de"
-
-_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5).
 _LEAN_SNIPPET_CHARS = 400
@@ -189,7 +187,7 @@ async def get_dpma_section(
         "shorthand. Pass a list for portfolio workflows. Examples: "
         "'§ 139 PatG', ['§ 1 PatG', '§ 14 MarkenG', '§ 97 UrhG'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more sections of the bundled German IP Acts by citation.
 
     Accepts free-text citations like '§ 139 PatG' or 'Section 14 MarkenG';
@@ -203,33 +201,29 @@ async def get_dpma_section(
 
     Related tools: search_dpma_statutes.
     """
-    refs = [citation] if isinstance(citation, str) else list(citation)
-    if not refs:
-        raise ValidationError("get_dpma_section requires at least one citation")
+    refs = as_id_list(citation, noun="DPMA statute citation")
 
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+    async with DpmaStatutesClient() as client:
 
-    async def _fetch_one(client: DpmaStatutesClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section_by_citation(ref)
             return record.model_dump()
 
-    async with DpmaStatutesClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
+    elif len(refs) == 1:
+        summary = f"DPMA statute section {refs[0]} — not found."
     else:
-        summary = (
-            f"Fetched {len(results)} DPMA statute sections (corpus {corpus_label}): "
-            + ", ".join(refs)
-        )
+        summary = fetched_summary(len(items), len(refs), "DPMA statute sections", not_found)
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_statutes_provenance(f"{_GESETZE_BASE}/"),
     )
 
