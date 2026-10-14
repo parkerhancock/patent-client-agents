@@ -15,7 +15,7 @@ from urllib.parse import quote
 import httpx
 
 from mcp_data_core.base_client import BaseAsyncClient
-from mcp_data_core.exceptions import ApiError, ConfigurationError, RateLimitError
+from mcp_data_core.exceptions import ApiError, ConfigurationError, NotFoundError, RateLimitError
 
 from .models import DesignRecord, PatentUtilityRecord, TrademarkRecord, parse_dpma_date
 
@@ -218,6 +218,8 @@ class DpmaRegisterClient(BaseAsyncClient):
         response = await self._client.get(url)
         if response.status_code == 429:
             raise RateLimitError("DPMAconnectPlus rate limit exceeded", 429, response.text[:500])
+        if response.status_code == 404:
+            raise NotFoundError("DPMAconnectPlus has no such record", 404, response.text[:500])
         if not response.is_success:
             raise ApiError(
                 f"DPMAconnectPlus HTTP {response.status_code}",

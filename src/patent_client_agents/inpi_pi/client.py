@@ -45,6 +45,7 @@ from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
     ConfigurationError,
+    NotFoundError,
     RateLimitError,
     ValidationError,
 )
@@ -373,6 +374,9 @@ class InpiPiClient(BaseAsyncClient):
                         response.status_code,
                         response.text[:500],
                     )
+
+                if response.status_code == 404:
+                    raise NotFoundError("INPI has no such record", 404, response.text[:500])
 
                 if not response.is_success:
                     raise ApiError(
