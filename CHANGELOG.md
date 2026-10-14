@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- `search_trademarks` and `get_trademark` lean results replace the
+  always-empty `status_code` / `status_text` keys with `status` (`"live"` or
+  `"dead"`), and now fill serial number, owner and dates (#112).
+- Fee schedules whose office publishes no effective date (CNIPA patents, DPMA
+  patents, EPO patents, EUIPO trademarks) report `effective_date: null`, with
+  `as_of_status` saying so, instead of the date they were fetched.
+  `FeeSchedule.effective_date` is now `date | None` (#117).
+- Google Patents descriptions convert to Markdown through markdownify
+  directly; output is unchanged. The `markitdown[pdf]` dependency is replaced
+  by `markdownify` and `beautifulsoup4`, which removes magika, onnxruntime,
+  numpy, pdfminer and pdfplumber from installs (#130).
+- Starting the MCP server no longer loads markitdown, pypdf, curl_cffi or
+  playwright; each loads when its connector first needs it (#129).
+- Requires `mcp-data-core>=0.13.0` (#111, #122).
+
+### Fixed
+
+- CKAN bulk downloads (IP Australia, ILPO, INPI Brazil) request the
+  resource's real URL instead of one with the base URL prefixed (#111).
+- Thai DIP `get_trademark` returns the exact application, not the first
+  longer number that contains it (#113).
+- EPO OPS 403 errors include the rejection reason, throttling state and quota
+  usage (#114).
+- Corpus searches with citation punctuation (`Art. 54`, `1207.01(a)`,
+  `L. 611-10`) or operator words in `and`/`or` mode return results instead of
+  raising an SQLite syntax error (TMEP, EPC, the EPO guidelines and case law,
+  UKIPO MoPP, INPI Brazil statutes, Légifrance) (#115).
+- Google Patents PDFs served from cache keep their bytes and content type
+  (#116).
+- Patent and trademark assignment provenance names the Assignment Center
+  endpoint actually queried (#119).
+- TMEP reports its corpus version as `"unknown"` rather than the moving
+  `"current"` label; INPI Brazil corpus builds keep full section titles
+  instead of `"Art."` (#121).
+- TIPO trademark records include their goods and services classes (#123).
+- EUIPO trademark records with a description or disclaimer parse instead of
+  failing validation (#125).
+- PPUBS sends the current session's caseId on every retry, avoiding an extra
+  session refresh after a failed one (#127).
+
 ## [0.30.0] — 2026-10-07
 
 ### Added
