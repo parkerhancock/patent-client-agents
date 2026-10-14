@@ -24,6 +24,7 @@ from __future__ import annotations
 import warnings
 
 from mcp_data_core.exceptions import NotFoundError
+from patent_client_agents.shared.api import one_shot
 
 from .client import EpoOpsClient, client_from_env
 from .models import (
@@ -121,6 +122,7 @@ def _warn_client_deprecated() -> None:
     )
 
 
+@one_shot(get_client, EpoOpsClient.search_published, deprecated_client=_warn_client_deprecated)
 async def search_published(
     query: str,
     range_begin: int = 1,
@@ -132,16 +134,9 @@ async def search_published(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_published(
-            query=query, range_begin=range_begin, range_end=range_end
-        )
-
-    async with client_from_env() as cl:
-        return await cl.search_published(query=query, range_begin=range_begin, range_end=range_end)
 
 
+@one_shot(get_client, EpoOpsClient.search_families, deprecated_client=_warn_client_deprecated)
 async def search_families(
     query: str,
     range_begin: int = 1,
@@ -153,16 +148,9 @@ async def search_families(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_families(
-            query=query, range_begin=range_begin, range_end=range_end
-        )
-
-    async with client_from_env() as cl:
-        return await cl.search_families(query=query, range_begin=range_begin, range_end=range_end)
 
 
+@one_shot(get_client, EpoOpsClient.fetch_biblio, deprecated_client=_warn_client_deprecated)
 async def fetch_biblio(
     number: str,
     doc_type: str = "publication",
@@ -174,14 +162,9 @@ async def fetch_biblio(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_biblio(number=number, doc_type=doc_type, fmt=fmt)
-
-    async with client_from_env() as cl:
-        return await cl.fetch_biblio(number=number, doc_type=doc_type, fmt=fmt)
 
 
+@one_shot(get_client, EpoOpsClient.fetch_citations, deprecated_client=_warn_client_deprecated)
 async def fetch_citations(
     number: str,
     doc_type: str = "publication",
@@ -190,14 +173,9 @@ async def fetch_citations(
     client: EpoOpsClient | None = None,
 ) -> CitationResponse:
     """Fetch structured backward citations for a patent document."""
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_citations(number=number, doc_type=doc_type, fmt=fmt)
-
-    async with client_from_env() as cl:
-        return await cl.fetch_citations(number=number, doc_type=doc_type, fmt=fmt)
 
 
+@one_shot(get_client, EpoOpsClient.fetch_equivalents, deprecated_client=_warn_client_deprecated)
 async def fetch_equivalents(
     number: str,
     doc_type: str = "publication",
@@ -206,12 +184,6 @@ async def fetch_equivalents(
     client: EpoOpsClient | None = None,
 ) -> EquivalentsResponse:
     """Fetch simple-family equivalent publications."""
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_equivalents(number=number, doc_type=doc_type, fmt=fmt)
-
-    async with client_from_env() as cl:
-        return await cl.fetch_equivalents(number=number, doc_type=doc_type, fmt=fmt)
 
 
 async def fetch_fulltext(
@@ -260,6 +232,7 @@ def _no_fulltext_error(*, number: str, section: str) -> ValueError:
     )
 
 
+@one_shot(get_client, EpoOpsClient.fetch_family, deprecated_client=_warn_client_deprecated)
 async def fetch_family(
     number: str,
     doc_type: str = "publication",
@@ -272,24 +245,9 @@ async def fetch_family(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_family(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-            constituents=constituents,
-        )
-
-    async with client_from_env() as cl:
-        return await cl.fetch_family(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-            constituents=constituents,
-        )
 
 
+@one_shot(get_client, EpoOpsClient.fetch_family, deprecated_client=_warn_client_deprecated)
 async def fetch_family_details(
     number: str,
     doc_type: str = "publication",
@@ -302,24 +260,9 @@ async def fetch_family_details(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_family(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-            constituents=constituents,
-        )
-
-    async with client_from_env() as cl:
-        return await cl.fetch_family(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-            constituents=constituents,
-        )
 
 
+@one_shot(get_client, EpoOpsClient.fetch_legal_events, deprecated_client=_warn_client_deprecated)
 async def fetch_legal_events(
     number: str,
     doc_type: str = "publication",
@@ -331,14 +274,9 @@ async def fetch_legal_events(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_legal_events(number=number, doc_type=doc_type, fmt=fmt)
-
-    async with client_from_env() as cl:
-        return await cl.fetch_legal_events(number=number, doc_type=doc_type, fmt=fmt)
 
 
+@one_shot(get_client, EpoOpsClient.fetch_register, deprecated_client=_warn_client_deprecated)
 async def fetch_register(
     number: str,
     doc_type: str = "publication",
@@ -352,13 +290,9 @@ async def fetch_register(
     ``sub`` is one of ``biblio``, ``events``, ``procedural-steps``, ``upp``.
     See :meth:`EpoOpsClient.fetch_register` for details.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_register(number=number, doc_type=doc_type, fmt=fmt, sub=sub)
-    async with client_from_env() as cl:
-        return await cl.fetch_register(number=number, doc_type=doc_type, fmt=fmt, sub=sub)
 
 
+@one_shot(get_client, EpoOpsClient.fetch_register_events, deprecated_client=_warn_client_deprecated)
 async def fetch_register_events(
     number: str,
     doc_type: str = "publication",
@@ -367,21 +301,9 @@ async def fetch_register_events(
     client: EpoOpsClient | None = None,
 ) -> RegisterEventsResponse:
     """Fetch structured dossier events from the European Patent Register."""
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_register_events(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-        )
-    async with client_from_env() as cl:
-        return await cl.fetch_register_events(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-        )
 
 
+@one_shot(get_client, EpoOpsClient.fetch_register_biblio, deprecated_client=_warn_client_deprecated)
 async def fetch_register_biblio(
     number: str,
     doc_type: str = "publication",
@@ -394,21 +316,13 @@ async def fetch_register_biblio(
     Designations are application-stage records. Term-of-grant lapse snapshots do
     not represent current national validation or lapse status.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_register_biblio(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-        )
-    async with client_from_env() as cl:
-        return await cl.fetch_register_biblio(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-        )
 
 
+@one_shot(
+    get_client,
+    EpoOpsClient.fetch_register_procedural_steps,
+    deprecated_client=_warn_client_deprecated,
+)
 async def fetch_register_procedural_steps(
     number: str,
     doc_type: str = "publication",
@@ -417,21 +331,11 @@ async def fetch_register_procedural_steps(
     client: EpoOpsClient | None = None,
 ) -> RegisterProceduralStepsResponse:
     """Fetch structured procedural steps from the European Patent Register."""
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_register_procedural_steps(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-        )
-    async with client_from_env() as cl:
-        return await cl.fetch_register_procedural_steps(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-        )
 
 
+@one_shot(
+    get_client, EpoOpsClient.get_unitary_patent_package, deprecated_client=_warn_client_deprecated
+)
 async def get_unitary_patent_package(
     epo_number: str,
     doc_type: str = "publication",
@@ -444,13 +348,9 @@ async def get_unitary_patent_package(
     See :meth:`EpoOpsClient.get_unitary_patent_package` for details.
     Returns ``None`` when the EP wasn't elected for unitary effect.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_unitary_patent_package(epo_number, doc_type=doc_type, fmt=fmt)
-    async with client_from_env() as cl:
-        return await cl.get_unitary_patent_package(epo_number, doc_type=doc_type, fmt=fmt)
 
 
+@one_shot(get_client, EpoOpsClient.convert_number, deprecated_client=_warn_client_deprecated)
 async def convert_number(
     number: str,
     doc_type: str = "publication",
@@ -463,24 +363,9 @@ async def convert_number(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.convert_number(
-            number=number,
-            doc_type=doc_type,
-            input_format=input_format,
-            output_format=output_format,
-        )
-
-    async with client_from_env() as cl:
-        return await cl.convert_number(
-            number=number,
-            doc_type=doc_type,
-            input_format=input_format,
-            output_format=output_format,
-        )
 
 
+@one_shot(get_client, EpoOpsClient.convert_number, deprecated_client=_warn_client_deprecated)
 async def number_service(
     number: str,
     doc_type: str = "publication",
@@ -493,24 +378,9 @@ async def number_service(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.convert_number(
-            number=number,
-            doc_type=doc_type,
-            input_format=input_format,
-            output_format=output_format,
-        )
-
-    async with client_from_env() as cl:
-        return await cl.convert_number(
-            number=number,
-            doc_type=doc_type,
-            input_format=input_format,
-            output_format=output_format,
-        )
 
 
+@one_shot(get_client, EpoOpsClient.download_pdf, deprecated_client=_warn_client_deprecated)
 async def download_pdf(
     number: str,
     doc_type: str = "publication",
@@ -522,9 +392,3 @@ async def download_pdf(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.download_pdf(number=number, doc_type=doc_type, fmt=fmt)
-
-    async with client_from_env() as cl:
-        return await cl.download_pdf(number=number, doc_type=doc_type, fmt=fmt)

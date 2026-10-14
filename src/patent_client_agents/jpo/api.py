@@ -17,6 +17,8 @@ environment variables to be set.
 
 from __future__ import annotations
 
+from patent_client_agents.shared.api import one_shot
+
 from .client import JpoClient
 from .models import (
     ApplicantAttorney,
@@ -102,11 +104,19 @@ __all__ = [
 ]
 
 
+_CREDENTIALS = ("username", "password")
+
+
+def _new_client(*, username: str | None = None, password: str | None = None) -> JpoClient:
+    return JpoClient(username=username, password=password)
+
+
 # =============================================================================
 # Patent API Functions
 # =============================================================================
 
 
+@one_shot(_new_client, JpoClient.get_patent_progress, factory_args=_CREDENTIALS)
 async def get_patent_progress(
     application_number: str,
     *,
@@ -123,10 +133,9 @@ async def get_patent_progress(
     Returns:
         Patent progress data or ``None`` if not found.
     """
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_progress(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_progress_simple, factory_args=_CREDENTIALS)
 async def get_patent_progress_simple(
     application_number: str,
     *,
@@ -134,10 +143,9 @@ async def get_patent_progress_simple(
     password: str | None = None,
 ) -> SimplifiedPatentProgressData | None:
     """Get simplified patent progress information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_progress_simple(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_divisional_info, factory_args=_CREDENTIALS)
 async def get_patent_divisional_info(
     application_number: str,
     *,
@@ -145,10 +153,9 @@ async def get_patent_divisional_info(
     password: str | None = None,
 ) -> DivisionalAppInfoData | None:
     """Get divisional application family (parent + descendants)."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_divisional_info(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_priority_info, factory_args=_CREDENTIALS)
 async def get_patent_priority_info(
     application_number: str,
     *,
@@ -156,10 +163,9 @@ async def get_patent_priority_info(
     password: str | None = None,
 ) -> list[PriorityInfo]:
     """Get priority claim information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_priority_info(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_applicant_by_code, factory_args=_CREDENTIALS)
 async def get_patent_applicant_by_code(
     applicant_code: str,
     *,
@@ -167,10 +173,9 @@ async def get_patent_applicant_by_code(
     password: str | None = None,
 ) -> str | None:
     """Get applicant name from a 9-digit applicant code."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_applicant_by_code(applicant_code)
 
 
+@one_shot(_new_client, JpoClient.get_patent_applicant_by_name, factory_args=_CREDENTIALS)
 async def get_patent_applicant_by_name(
     applicant_name: str,
     *,
@@ -178,10 +183,9 @@ async def get_patent_applicant_by_name(
     password: str | None = None,
 ) -> list[ApplicantAttorney]:
     """Get applicant code(s) for an exact applicant name."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_applicant_by_name(applicant_name)
 
 
+@one_shot(_new_client, JpoClient.get_patent_number_reference, factory_args=_CREDENTIALS)
 async def get_patent_number_reference(
     kind: CaseNumberKind | str,
     number: str,
@@ -190,10 +194,9 @@ async def get_patent_number_reference(
     password: str | None = None,
 ) -> NumberReference | None:
     """Cross-reference application/publication/registration numbers."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_number_reference(kind, number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_application_documents, factory_args=_CREDENTIALS)
 async def get_patent_application_documents(
     application_number: str,
     *,
@@ -201,10 +204,9 @@ async def get_patent_application_documents(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get applicant-filed documents (opinions/amendments) as a ZIP bundle."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_application_documents(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_mailed_documents, factory_args=_CREDENTIALS)
 async def get_patent_mailed_documents(
     application_number: str,
     *,
@@ -212,10 +214,9 @@ async def get_patent_mailed_documents(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get JPO-mailed documents (rejections + decisions) as a ZIP bundle."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_mailed_documents(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_refusal_notices, factory_args=_CREDENTIALS)
 async def get_patent_refusal_notices(
     application_number: str,
     *,
@@ -223,10 +224,9 @@ async def get_patent_refusal_notices(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get notices of reasons for refusal as a ZIP bundle."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_refusal_notices(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_cited_documents, factory_args=_CREDENTIALS)
 async def get_patent_cited_documents(
     application_number: str,
     *,
@@ -234,10 +234,9 @@ async def get_patent_cited_documents(
     password: str | None = None,
 ) -> CitedDocumentsData | None:
     """Get patent + non-patent cited documents."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_cited_documents(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_registration_info, factory_args=_CREDENTIALS)
 async def get_patent_registration_info(
     application_number: str,
     *,
@@ -245,10 +244,9 @@ async def get_patent_registration_info(
     password: str | None = None,
 ) -> RegistrationInfo | None:
     """Get patent registration record."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_registration_info(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_jplatpat_url, factory_args=_CREDENTIALS)
 async def get_patent_jplatpat_url(
     application_number: str,
     *,
@@ -256,10 +254,9 @@ async def get_patent_jplatpat_url(
     password: str | None = None,
 ) -> str | None:
     """Get J-PlatPat fixed-address URL for a patent application."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_jplatpat_url(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_patent_pct_national_number, factory_args=_CREDENTIALS)
 async def get_patent_pct_national_number(
     kind: PctKind | str,
     number: str,
@@ -268,8 +265,6 @@ async def get_patent_pct_national_number(
     password: str | None = None,
 ) -> PctNationalPhaseData | None:
     """Get the JP national-phase application number for a PCT number."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_patent_pct_national_number(kind, number)
 
 
 # =============================================================================
@@ -277,6 +272,7 @@ async def get_patent_pct_national_number(
 # =============================================================================
 
 
+@one_shot(_new_client, JpoClient.get_design_progress, factory_args=_CREDENTIALS)
 async def get_design_progress(
     application_number: str,
     *,
@@ -284,10 +280,9 @@ async def get_design_progress(
     password: str | None = None,
 ) -> DesignProgressData | None:
     """Get design application progress information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_progress(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_design_progress_simple, factory_args=_CREDENTIALS)
 async def get_design_progress_simple(
     application_number: str,
     *,
@@ -295,10 +290,9 @@ async def get_design_progress_simple(
     password: str | None = None,
 ) -> DesignProgressData | None:
     """Get simplified design progress information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_progress_simple(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_design_priority_info, factory_args=_CREDENTIALS)
 async def get_design_priority_info(
     application_number: str,
     *,
@@ -306,10 +300,9 @@ async def get_design_priority_info(
     password: str | None = None,
 ) -> list[PriorityInfo]:
     """Get design priority information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_priority_info(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_design_applicant_by_code, factory_args=_CREDENTIALS)
 async def get_design_applicant_by_code(
     applicant_code: str,
     *,
@@ -317,10 +310,9 @@ async def get_design_applicant_by_code(
     password: str | None = None,
 ) -> str | None:
     """Get design applicant name from code."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_applicant_by_code(applicant_code)
 
 
+@one_shot(_new_client, JpoClient.get_design_applicant_by_name, factory_args=_CREDENTIALS)
 async def get_design_applicant_by_name(
     applicant_name: str,
     *,
@@ -328,10 +320,9 @@ async def get_design_applicant_by_name(
     password: str | None = None,
 ) -> list[ApplicantAttorney]:
     """Get design applicant code by exact name."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_applicant_by_name(applicant_name)
 
 
+@one_shot(_new_client, JpoClient.get_design_number_reference, factory_args=_CREDENTIALS)
 async def get_design_number_reference(
     kind: CaseNumberKind | str,
     number: str,
@@ -340,10 +331,9 @@ async def get_design_number_reference(
     password: str | None = None,
 ) -> NumberReference | None:
     """Get design number cross-reference."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_number_reference(kind, number)
 
 
+@one_shot(_new_client, JpoClient.get_design_application_documents, factory_args=_CREDENTIALS)
 async def get_design_application_documents(
     application_number: str,
     *,
@@ -351,10 +341,9 @@ async def get_design_application_documents(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get design application documents."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_application_documents(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_design_mailed_documents, factory_args=_CREDENTIALS)
 async def get_design_mailed_documents(
     application_number: str,
     *,
@@ -362,10 +351,9 @@ async def get_design_mailed_documents(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get mailed design documents."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_mailed_documents(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_design_refusal_notices, factory_args=_CREDENTIALS)
 async def get_design_refusal_notices(
     application_number: str,
     *,
@@ -373,10 +361,9 @@ async def get_design_refusal_notices(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get design refusal notices."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_refusal_notices(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_design_registration_info, factory_args=_CREDENTIALS)
 async def get_design_registration_info(
     application_number: str,
     *,
@@ -384,10 +371,9 @@ async def get_design_registration_info(
     password: str | None = None,
 ) -> RegistrationInfo | None:
     """Get design registration information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_registration_info(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_design_jplatpat_url, factory_args=_CREDENTIALS)
 async def get_design_jplatpat_url(
     application_number: str,
     *,
@@ -395,8 +381,6 @@ async def get_design_jplatpat_url(
     password: str | None = None,
 ) -> str | None:
     """Get J-PlatPat URL for a design application."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_design_jplatpat_url(application_number)
 
 
 # =============================================================================
@@ -404,6 +388,7 @@ async def get_design_jplatpat_url(
 # =============================================================================
 
 
+@one_shot(_new_client, JpoClient.get_trademark_progress, factory_args=_CREDENTIALS)
 async def get_trademark_progress(
     application_number: str,
     *,
@@ -411,10 +396,9 @@ async def get_trademark_progress(
     password: str | None = None,
 ) -> TrademarkProgressData | None:
     """Get trademark application progress information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_progress(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_progress_simple, factory_args=_CREDENTIALS)
 async def get_trademark_progress_simple(
     application_number: str,
     *,
@@ -422,10 +406,9 @@ async def get_trademark_progress_simple(
     password: str | None = None,
 ) -> TrademarkProgressData | None:
     """Get simplified trademark progress information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_progress_simple(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_priority_info, factory_args=_CREDENTIALS)
 async def get_trademark_priority_info(
     application_number: str,
     *,
@@ -433,10 +416,9 @@ async def get_trademark_priority_info(
     password: str | None = None,
 ) -> list[PriorityInfo]:
     """Get trademark priority information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_priority_info(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_applicant_by_code, factory_args=_CREDENTIALS)
 async def get_trademark_applicant_by_code(
     applicant_code: str,
     *,
@@ -444,10 +426,9 @@ async def get_trademark_applicant_by_code(
     password: str | None = None,
 ) -> str | None:
     """Get trademark applicant name from code."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_applicant_by_code(applicant_code)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_applicant_by_name, factory_args=_CREDENTIALS)
 async def get_trademark_applicant_by_name(
     applicant_name: str,
     *,
@@ -455,10 +436,9 @@ async def get_trademark_applicant_by_name(
     password: str | None = None,
 ) -> list[ApplicantAttorney]:
     """Get trademark applicant code by exact name."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_applicant_by_name(applicant_name)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_number_reference, factory_args=_CREDENTIALS)
 async def get_trademark_number_reference(
     kind: CaseNumberKind | str,
     number: str,
@@ -467,10 +447,9 @@ async def get_trademark_number_reference(
     password: str | None = None,
 ) -> NumberReference | None:
     """Get trademark number cross-reference."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_number_reference(kind, number)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_application_documents, factory_args=_CREDENTIALS)
 async def get_trademark_application_documents(
     application_number: str,
     *,
@@ -478,10 +457,9 @@ async def get_trademark_application_documents(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get trademark application documents."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_application_documents(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_mailed_documents, factory_args=_CREDENTIALS)
 async def get_trademark_mailed_documents(
     application_number: str,
     *,
@@ -489,10 +467,9 @@ async def get_trademark_mailed_documents(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get mailed trademark documents."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_mailed_documents(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_refusal_notices, factory_args=_CREDENTIALS)
 async def get_trademark_refusal_notices(
     application_number: str,
     *,
@@ -500,10 +477,9 @@ async def get_trademark_refusal_notices(
     password: str | None = None,
 ) -> DocumentBundleResult:
     """Get trademark refusal notices."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_refusal_notices(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_registration_info, factory_args=_CREDENTIALS)
 async def get_trademark_registration_info(
     application_number: str,
     *,
@@ -511,10 +487,9 @@ async def get_trademark_registration_info(
     password: str | None = None,
 ) -> RegistrationInfo | None:
     """Get trademark registration information."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_registration_info(application_number)
 
 
+@one_shot(_new_client, JpoClient.get_trademark_jplatpat_url, factory_args=_CREDENTIALS)
 async def get_trademark_jplatpat_url(
     application_number: str,
     *,
@@ -522,5 +497,3 @@ async def get_trademark_jplatpat_url(
     password: str | None = None,
 ) -> str | None:
     """Get J-PlatPat URL for a trademark application."""
-    async with JpoClient(username=username, password=password) as client:
-        return await client.get_trademark_jplatpat_url(application_number)

@@ -305,14 +305,6 @@ class TestModuleLevelApi:
     # ------------------------------------------------------------------
 
     @pytest.mark.asyncio
-    async def test_list_case_databases_module_api(self, monkeypatch) -> None:
-        from patent_client_agents.canlii import api as canlii_api
-
-        self._install_factory(monkeypatch, CASE_DATABASES_PAYLOAD)
-        result = await canlii_api.list_case_databases()
-        assert len(result.case_databases) == 2
-
-    @pytest.mark.asyncio
     async def test_browse_cases_module_api(self, monkeypatch) -> None:
         from patent_client_agents.canlii import api as canlii_api
         from patent_client_agents.canlii.api import BrowseCasesInput
@@ -353,14 +345,6 @@ class TestModuleLevelApi:
         assert len(result.cited_legislations) == 1
 
     @pytest.mark.asyncio
-    async def test_list_legislation_databases_module_api(self, monkeypatch) -> None:
-        from patent_client_agents.canlii import api as canlii_api
-
-        self._install_factory(monkeypatch, LEGISLATION_DATABASES_PAYLOAD)
-        result = await canlii_api.list_legislation_databases()
-        assert len(result.legislation_databases) == 2
-
-    @pytest.mark.asyncio
     async def test_browse_legislation_module_api(self, monkeypatch) -> None:
         from patent_client_agents.canlii import api as canlii_api
         from patent_client_agents.canlii.api import BrowseLegislationInput
@@ -369,9 +353,50 @@ class TestModuleLevelApi:
         result = await canlii_api.browse_legislation(BrowseLegislationInput(database_id="cas"))
         assert result.legislations[0].legislation_id == "rsc-1985-c-p-4"
 
-    def test_get_client_returns_canlii_client(self, monkeypatch) -> None:
+    @pytest.mark.parametrize(
+        ("function", "path", "payload", "field"),
+        [
+            ("list_case_databases", "/caseBrowse/fr/", CASE_DATABASES_PAYLOAD, "case_databases"),
+            (
+                "list_legislation_databases",
+                "/legislationBrowse/fr/",
+                LEGISLATION_DATABASES_PAYLOAD,
+                "legislation_databases",
+            ),
+        ],
+    )
+    @pytest.mark.asyncio
+    async def test_list_databases_one_shot(
+        self, monkeypatch, function: str, path: str, payload: dict, field: str
+    ) -> None:
+        """One-shot list helpers build a client from the env key, call it once, close it."""
         from patent_client_agents.canlii import api as canlii_api
 
-        monkeypatch.setenv("CANLII_API_KEY", "k")
-        client = canlii_api.get_client()
-        assert isinstance(client, CanLIIClient)
+        requests: list[httpx.Request] = []
+        opened: list[CanLIIClient] = []
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            requests.append(request)
+            return httpx.Response(200, json=payload)
+
+        class TrackedClient(CanLIIClient):
+            def __init__(self) -> None:
+                super().__init__(client=httpx.AsyncClient(transport=httpx.MockTransport(handler)))
+                self.closes = 0
+                opened.append(self)
+
+            async def close(self) -> None:
+                self.closes += 1
+                await super().close()
+
+        monkeypatch.setenv("CANLII_API_KEY", "env-key")
+        monkeypatch.setattr(canlii_api, "CanLIIClient", TrackedClient)
+
+        result = await getattr(canlii_api, function)(language="fr")
+
+        (request,) = requests
+        assert request.url.path.endswith(path)
+        assert request.url.params["api_key"] == "env-key"
+        assert len(getattr(result, field)) == 2
+        (client,) = opened
+        assert client.closes == 1

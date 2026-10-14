@@ -1,39 +1,57 @@
 from __future__ import annotations
 
-from typing import Any
-from unittest.mock import AsyncMock
+import xml.etree.ElementTree as ET
+from pathlib import Path
 
+import httpx
 import pytest
+
+from patent_client_agents.oepm_spain import api
+from patent_client_agents.oepm_spain.client import BASE_URL, SERVICE_NS, OepmSpainClient
 
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    ("helper", "method", "identifier", "expected"),
+    ("helper", "fixture", "identifier", "field", "value"),
     [
-        ("get_oepm_patent", "get_patent", "P1", "patent"),
-        ("get_oepm_trademark", "get_trademark", "M1", "trademark"),
-        ("get_oepm_design", "get_design", "D1", "design"),
+        ("get_oepm_patent", "patent.xml", "P202400001", "title", "Controlador adaptativo"),
+        ("get_oepm_trademark", "trademark.xml", "M4000000", "denomination", "NECKTIE"),
+        ("get_oepm_design", "design.xml", "D0500000", "creators", ["Carmen Creadora"]),
     ],
 )
-async def test_api_helpers_delegate(
+async def test_get_helpers_send_soap_lookup_and_parse(
     monkeypatch: pytest.MonkeyPatch,
+    fixture_dir: Path,
     helper: str,
-    method: str,
+    fixture: str,
     identifier: str,
-    expected: str,
+    field: str,
+    value: object,
 ) -> None:
-    from patent_client_agents.oepm_spain import api
+    captured: list[httpx.Request] = []
+    closed: list[OepmSpainClient] = []
 
-    inner = AsyncMock()
-    getattr(inner, method).return_value = expected
+    async def handler(request: httpx.Request) -> httpx.Response:
+        captured.append(request)
+        return httpx.Response(200, content=(fixture_dir / fixture).read_bytes())
 
-    class Context:
-        async def __aenter__(self) -> AsyncMock:
-            return inner
+    class Tracked(OepmSpainClient):
+        async def __aexit__(self, *exc: object) -> None:
+            await super().__aexit__(*exc)
+            closed.append(self)
 
-        async def __aexit__(self, *exc: Any) -> None:
-            return None
+    def factory() -> OepmSpainClient:
+        http = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        return Tracked("user", "password", client=http)
 
-    monkeypatch.setattr(api, "OepmSpainClient", Context)
-    assert await getattr(api, helper)(identifier) == expected
-    getattr(inner, method).assert_awaited_once_with(identifier)
+    monkeypatch.setattr(api, "OepmSpainClient", factory)
+
+    record = await getattr(api, helper)(identifier)
+
+    assert getattr(record, field) == value
+    assert str(captured[0].url) == BASE_URL
+    body = ET.fromstring(captured[0].content)
+    assert body.findtext(f".//{{{SERVICE_NS}}}detalleExpedienteOEPM/request/numExpediente") == (
+        identifier
+    )
+    assert len(closed) == 1

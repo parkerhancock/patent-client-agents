@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from datetime import date
 
+from patent_client_agents.shared.api import one_shot
+
 from .client import IponzClient
 from .models import (
     IponzDesignRecord,
@@ -13,36 +15,33 @@ from .models import (
 )
 
 
-async def get_iponz_patent(number: str) -> IponzPatentRecord:
-    async with IponzClient() as client:
-        return await client.get_patent(number)
+def _new_client() -> IponzClient:
+    return IponzClient()
 
 
-async def list_iponz_patents_updated(start: date, end: date) -> list[IponzRegisterSummary]:
-    async with IponzClient() as client:
-        return await client.list_patents_updated(start, end)
+@one_shot(_new_client, IponzClient.get_patent)
+async def get_iponz_patent(number: str) -> IponzPatentRecord: ...
 
 
-async def get_iponz_trademark(number: str) -> IponzTrademarkRecord:
-    async with IponzClient() as client:
-        return await client.get_trademark(number)
+@one_shot(_new_client, IponzClient.list_patents_updated)
+async def list_iponz_patents_updated(start: date, end: date) -> list[IponzRegisterSummary]: ...
 
 
-async def list_iponz_trademarks_updated(start: date, end: date) -> list[IponzRegisterSummary]:
-    async with IponzClient() as client:
-        return await client.list_trademarks_updated(start, end)
+@one_shot(_new_client, IponzClient.get_trademark)
+async def get_iponz_trademark(number: str) -> IponzTrademarkRecord: ...
 
 
-async def get_iponz_design(number: str) -> IponzDesignRecord:
-    async with IponzClient() as client:
-        return await client.get_design(number)
+@one_shot(_new_client, IponzClient.list_trademarks_updated)
+async def list_iponz_trademarks_updated(start: date, end: date) -> list[IponzRegisterSummary]: ...
 
 
-async def list_iponz_designs_updated(start: date, end: date) -> list[IponzRegisterSummary]:
-    async with IponzClient() as client:
-        return await client.list_designs_updated(start, end)
+@one_shot(_new_client, IponzClient.get_design)
+async def get_iponz_design(number: str) -> IponzDesignRecord: ...
 
 
-async def list_iponz_designs_registered(start: date, end: date) -> list[IponzRegisterSummary]:
-    async with IponzClient() as client:
-        return await client.list_designs_registered(start, end)
+@one_shot(_new_client, IponzClient.list_designs_updated)
+async def list_iponz_designs_updated(start: date, end: date) -> list[IponzRegisterSummary]: ...
+
+
+@one_shot(_new_client, IponzClient.list_designs_registered)
+async def list_iponz_designs_registered(start: date, end: date) -> list[IponzRegisterSummary]: ...
