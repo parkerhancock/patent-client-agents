@@ -46,6 +46,7 @@ from patent_client_agents.ipos_statutes import get_corpus_status as _statutes_st
 from patent_client_agents.ipos_statutes import list_statutes as _list_statutes
 from patent_client_agents.ipos_statutes import search as _search_statutes
 from patent_client_agents.ipos_statutes.client import parse_citation as _parse_statute_citation
+from patent_client_agents.shared.envelope import dump_any
 
 ipos_mcp = FastMCP("IPOS Singapore")
 
@@ -79,17 +80,6 @@ def _manuals_provenance(source_url: str) -> Any:
         corpus_synced_at=status["corpus_synced_at"],
         corpus_version=status["corpus_version"],
     )
-
-
-def _dump(obj: object) -> Any:
-    """Serialize a Pydantic model or list of models; pass through dicts/None."""
-    if obj is None:
-        return None
-    if hasattr(obj, "model_dump"):
-        return obj.model_dump()  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, list):
-        return [_dump(item) for item in obj]
-    return obj
 
 
 def _summarize_statute_section(record: dict) -> str:
@@ -152,7 +142,7 @@ async def search_ipos_statutes(
         page=page,
     )
     response = await _search_statutes(params)
-    dumped = cast("dict[str, Any]", _dump(response) or {})
+    dumped = cast("dict[str, Any]", dump_any(response) or {})
     items = list(dumped.get("hits") or [])
     has_more = bool(dumped.get("has_more"))
     statute_label = statute or "all"
@@ -200,7 +190,7 @@ async def get_ipos_section(
     async def _fetch_one(client: IposStatutesClient, cite: str) -> dict | None:
         async with semaphore:
             record = await client.get_by_citation(cite)
-        return _dump(record) if record is not None else None  # type: ignore[return-value]
+        return dump_any(record) if record is not None else None  # type: ignore[return-value]
 
     async with IposStatutesClient() as client:
         fetched = await asyncio.gather(*[_fetch_one(client, c) for c in citations])
@@ -242,7 +232,7 @@ async def list_ipos_statutes() -> ListEnvelope[dict]:
     Related tools: search_ipos_statutes, get_ipos_section.
     """
     statutes = await _list_statutes()
-    items: list[dict] = [_dump(s) for s in statutes]  # type: ignore[misc]
+    items: list[dict] = [dump_any(s) for s in statutes]  # type: ignore[misc]
     return ListEnvelope[dict](
         summary=f"IPOS Singapore statutes — {len(items)} Acts.",
         items=items,
@@ -286,7 +276,7 @@ async def search_ipos_manuals(
         page=page,
     )
     response = await _search_manuals(params)
-    dumped = cast("dict[str, Any]", _dump(response) or {})
+    dumped = cast("dict[str, Any]", dump_any(response) or {})
     items = list(dumped.get("hits") or [])
     has_more = bool(dumped.get("has_more"))
     manual_label = manual or "all"
@@ -332,7 +322,7 @@ async def get_ipos_manual_section(
     async def _fetch_one(client: IposManualsClient, cite: str) -> dict | None:
         async with semaphore:
             record = await client.get_by_citation(cite)
-        return _dump(record) if record is not None else None  # type: ignore[return-value]
+        return dump_any(record) if record is not None else None  # type: ignore[return-value]
 
     async with IposManualsClient() as client:
         fetched = await asyncio.gather(*[_fetch_one(client, c) for c in citations])
@@ -372,7 +362,7 @@ async def list_ipos_manuals() -> ListEnvelope[dict]:
     Related tools: search_ipos_manuals, get_ipos_manual_section.
     """
     manuals = await _list_manuals()
-    items: list[dict] = [_dump(m) for m in manuals]  # type: ignore[misc]
+    items: list[dict] = [dump_any(m) for m in manuals]  # type: ignore[misc]
     return ListEnvelope[dict](
         summary=f"IPOS Singapore manuals — {len(items)} manuals.",
         items=items,

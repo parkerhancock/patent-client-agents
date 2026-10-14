@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, Literal, cast
+from typing import Annotated, Any, Literal
 from urllib.parse import quote
 
 from fastmcp import FastMCP
@@ -28,6 +28,7 @@ from patent_client_agents.dpma_register.models import (
     TrademarkRecord,
 )
 from patent_client_agents.dpma_register.resources import USAGE
+from patent_client_agents.shared.envelope import dump
 
 dpma_register_mcp = FastMCP("DPMA Germany, DPMAconnectPlus")
 _REQUIRED_ENV = ["DPMA_CONNECTPLUS_USERNAME", "DPMA_CONNECTPLUS_PASSWORD"]
@@ -43,10 +44,6 @@ def _provenance(service: str, operation: str, value: str) -> Any:
         source_url=f"{BASE_URL}/{service}/{operation}/{quote(value, safe='')}",
         source_name=_SOURCE_NAME,
     )
-
-
-def _dump(record: Any) -> dict[str, Any]:
-    return cast("dict[str, Any]", record.model_dump(mode="json"))
 
 
 def _lean_patent(record: PatentUtilityRecord) -> dict[str, Any]:
@@ -153,7 +150,9 @@ async def search_dpma_patents(
         raise ValidationError("limit must be between 1 and 1000")
     rows, total = await api.search_dpma_patents(expert_query, limit=limit)
     rows = [row for row in rows if right_type == "both" or row.right_type == right_type]
-    items = [_dump(row) for row in rows] if full else [_lean_patent(row) for row in rows]
+    items = (
+        [dump(row, mode="json") for row in rows] if full else [_lean_patent(row) for row in rows]
+    )
     return ListEnvelope(
         summary=_summary("patent and utility-model", expert_query, len(items), total),
         items=items,
@@ -178,7 +177,9 @@ async def get_dpma_patent(
                 return await client.get_patent(number)
 
         rows = await asyncio.gather(*(fetch(number) for number in numbers))
-    items = [_dump(row) for row in rows] if full else [_lean_patent(row) for row in rows]
+    items = (
+        [dump(row, mode="json") for row in rows] if full else [_lean_patent(row) for row in rows]
+    )
     return ListEnvelope(
         summary=f"DPMA patent and utility-model fetch: {len(items)} records. Mock-only tested.",
         items=items,
@@ -196,7 +197,9 @@ async def search_dpma_trademarks(
     if not 1 <= limit <= ACCOUNT_RESULT_CAP:
         raise ValidationError("limit must be between 1 and 1000")
     rows, total = await api.search_dpma_trademarks(expert_query, limit=limit)
-    items = [_dump(row) for row in rows] if full else [_lean_trademark(row) for row in rows]
+    items = (
+        [dump(row, mode="json") for row in rows] if full else [_lean_trademark(row) for row in rows]
+    )
     return ListEnvelope(
         summary=_summary("trademark", expert_query, len(items), total),
         items=items,
@@ -220,7 +223,9 @@ async def get_dpma_trademark(
                 return await client.get_trademark(number)
 
         rows = await asyncio.gather(*(fetch(number) for number in numbers))
-    items = [_dump(row) for row in rows] if full else [_lean_trademark(row) for row in rows]
+    items = (
+        [dump(row, mode="json") for row in rows] if full else [_lean_trademark(row) for row in rows]
+    )
     return ListEnvelope(
         summary=f"DPMA trademark fetch: {len(items)} records. Mock-only tested.",
         items=items,
@@ -238,7 +243,9 @@ async def search_dpma_designs(
     if not 1 <= limit <= ACCOUNT_RESULT_CAP:
         raise ValidationError("limit must be between 1 and 1000")
     rows, total = await api.search_dpma_designs(expert_query, limit=limit)
-    items = [_dump(row) for row in rows] if full else [_lean_design(row) for row in rows]
+    items = (
+        [dump(row, mode="json") for row in rows] if full else [_lean_design(row) for row in rows]
+    )
     return ListEnvelope(
         summary=_summary("design", expert_query, len(items), total),
         items=items,
@@ -260,7 +267,9 @@ async def get_dpma_design(design_number: str | list[str], full: bool = False) ->
                 return await client.get_design(number)
 
         rows = await asyncio.gather(*(fetch(number) for number in numbers))
-    items = [_dump(row) for row in rows] if full else [_lean_design(row) for row in rows]
+    items = (
+        [dump(row, mode="json") for row in rows] if full else [_lean_design(row) for row in rows]
+    )
     return ListEnvelope(
         summary=f"DPMA design fetch: {len(items)} records. Mock-only tested.",
         items=items,

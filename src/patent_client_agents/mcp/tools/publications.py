@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -19,6 +19,7 @@ from mcp_data_core.exceptions import ParseError, ValidationError
 from mcp_data_core.filenames import publication_pdf as _publication_pdf_name
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import read_resource, register_source
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.uspto_publications import (
     PublicSearchClient,
     resolve_and_download_pdf,
@@ -43,19 +44,6 @@ def _ppubs_provenance(path: str) -> Any:
         source_url=f"{_PPUBS_BASE}{path}",
         source_name=_PPUBS_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model (JSON mode) to a dict (or pass through dicts).
-
-    JSON mode coerces datetimes/Decimals/etc to strings — keeps the
-    payload JSON-safe at the envelope boundary.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump(mode="json"))  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _stub_publication(record: dict) -> dict:
@@ -215,7 +203,7 @@ async def search_patent_publications(
     async with PublicSearchClient() as client:
         page = await client.search_biblio(query=query, start=offset, limit=limit)
 
-    dumped = _dump(page)
+    dumped = dump(page, mode="json")
     if not isinstance(dumped, dict):  # pragma: no cover - upstream always Pydantic
         dumped = {}
     rows = list(dumped.get("docs") or [])
@@ -290,7 +278,7 @@ async def get_patent_publication(
     async def _fetch_one(client: PublicSearchClient, pub_no: str) -> dict:
         async with semaphore:
             record = await client.resolve_document_by_publication_number(pub_no)
-        return _dump(record)  # type: ignore[return-value]
+        return dump(record, mode="json")  # type: ignore[return-value]
 
     async with PublicSearchClient() as client:
         results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -329,7 +317,7 @@ async def resolve_publication_number(
     async with PublicSearchClient() as client:
         record = await client.resolve_document_by_publication_number(publication_number)
 
-    dumped = _dump(record)
+    dumped = dump(record, mode="json")
     if not isinstance(dumped, dict):  # pragma: no cover - upstream always Pydantic
         dumped = {}
     return ResponseEnvelope[dict](

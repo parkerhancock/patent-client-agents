@@ -9,7 +9,7 @@ an attorney can verify a title or mapping against the upstream OPS endpoint.
 
 from __future__ import annotations
 
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -21,17 +21,9 @@ from mcp_data_core.envelope import (
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.cpc import map_classification
 from patent_client_agents.epo_ops.client import client_from_env
+from patent_client_agents.shared.envelope import dump
 
 cpc_mcp = FastMCP("CPC")
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts)."""
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 # ---------------------------------------------------------------------------
@@ -137,7 +129,7 @@ async def lookup_cpc(
     async with client_from_env() as client:
         result = await client.retrieve_cpc(symbol=symbol)
 
-    payload: dict = _dump(result)  # type: ignore[assignment]
+    payload: dict = dump(result)  # type: ignore[assignment]
     return ResponseEnvelope[dict](
         summary=_summarize_cpc_retrieval(symbol, payload),
         details=payload,
@@ -175,7 +167,7 @@ async def search_cpc(
     async with client_from_env() as client:
         result = await client.search_cpc(query=query, range_begin=range_begin, range_end=range_end)
 
-    payload: dict = _dump(result)  # type: ignore[assignment]
+    payload: dict = dump(result)  # type: ignore[assignment]
     raw_results = list(payload.get("results") or [])
     items = raw_results if full else [_stub_cpc_search_hit(r) for r in raw_results]
     total = payload.get("total_results")
@@ -225,7 +217,7 @@ async def map_cpc_classification(
         symbol=symbol,
         output_schema=to_scheme,
     )
-    payload: dict = _dump(result)  # type: ignore[assignment]
+    payload: dict = dump(result)  # type: ignore[assignment]
     path = f"/rest-services/classification/map/{from_scheme.lower()}/{symbol}/{to_scheme.lower()}"
     return ResponseEnvelope[dict](
         summary=_summarize_cpc_mapping(symbol, from_scheme, to_scheme, payload),

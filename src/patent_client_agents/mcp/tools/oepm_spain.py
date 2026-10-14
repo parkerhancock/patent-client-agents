@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable, Callable
-from typing import Any, cast
+from typing import Any
 
 from fastmcp import FastMCP
 
@@ -19,6 +19,7 @@ from patent_client_agents.oepm_spain.models import (
     OepmTrademarkRecord,
 )
 from patent_client_agents.oepm_spain.resources import USAGE
+from patent_client_agents.shared.envelope import dump
 
 oepm_spain_mcp = FastMCP("Spain OEPM CEO register")
 _REQUIRED_ENV = ["OEPM_CEO_USERNAME", "OEPM_CEO_PASSWORD"]
@@ -31,10 +32,6 @@ _FANOUT_CONCURRENCY = 5
 
 def _provenance() -> Any:
     return make_provenance(source_url=BASE_URL, source_name=_SOURCE_NAME)
-
-
-def _dump(record: Any) -> dict[str, Any]:
-    return cast("dict[str, Any]", record.model_dump(mode="json"))
 
 
 def _date(value: Any) -> str | None:
@@ -122,7 +119,11 @@ async def _fetch(
                 return await method(identifier)
 
         records = await asyncio.gather(*(one(identifier) for identifier in identifiers))
-    items = [_dump(record) for record in records] if full else [lean(record) for record in records]
+    items = (
+        [dump(record, mode="json") for record in records]
+        if full
+        else [lean(record) for record in records]
+    )
     return ListEnvelope(
         summary=f"OEPM {label} fetch: {len(items)} records. Public-WSDL tested only.",
         items=items,

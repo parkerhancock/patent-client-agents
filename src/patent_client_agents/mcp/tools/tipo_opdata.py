@@ -17,7 +17,7 @@ spec §3 for the full tool table.
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -25,6 +25,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.tipo_opdata import TipoClient
 
 tipo_opdata_mcp = FastMCP("TIPO Taiwan — OpenData")
@@ -59,15 +60,6 @@ def _tipo_provenance(path: str) -> Any:
         source_url=f"{_TIPO_BASE}{path}",
         source_name=_TIPO_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict via ``model_dump(by_alias=True)``."""
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump(by_alias=True))  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -114,7 +106,7 @@ def _lean(row: dict[str, Any]) -> dict[str, Any]:
 
 def _project(rows: list[Any], *, full: bool) -> list[dict[str, Any]]:
     """Serialize + (optionally) lean a list of row models."""
-    dumped = [_dump(r) for r in rows]
+    dumped = [dump(r, by_alias=True) for r in rows]
     if full:
         return dumped
     return [_lean(r) for r in dumped]
@@ -469,7 +461,7 @@ async def get_tipo_patent_events(
             ("divide", div_rows),
         ):
             for row in batch:
-                dumped = _dump(row)
+                dumped = dump(row, by_alias=True)
                 projected = dumped if full else _lean(dumped)
                 projected = {"event_type": tag, "appl_no": num, **projected}
                 items.append(projected)
@@ -676,7 +668,7 @@ async def get_tipo_trademark_events(
         chg_rows, div_rows = results[idx * 2 : idx * 2 + 2]
         for tag, batch in (("change", chg_rows), ("divide", div_rows)):
             for row in batch:
-                dumped = _dump(row)
+                dumped = dump(row, by_alias=True)
                 projected = dumped if full else _lean(dumped)
                 projected = {"event_type": tag, "appl_no": num, **projected}
                 items.append(projected)

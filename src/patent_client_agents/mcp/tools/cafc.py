@@ -15,7 +15,7 @@ from __future__ import annotations
 import hashlib
 from datetime import UTC, datetime
 from pathlib import PurePosixPath
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 from urllib.parse import urlsplit
 
 from fastmcp import FastMCP
@@ -27,6 +27,7 @@ from mcp_data_core.mcp import download_response, register_source
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.cafc import CAFCClient, PatentClassifier
 from patent_client_agents.cafc.models import CAFCOpinion
+from patent_client_agents.shared.envelope import dump
 
 cafc_mcp = FastMCP("CAFC")
 
@@ -47,21 +48,6 @@ def _cafc_provenance(path: str) -> Any:
         source_url=f"{_CAFC_BASE}{path}",
         source_name=_CAFC_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts).
-
-    Every caller passes a Pydantic model from the upstream client; the
-    fallback exists to be defensive if a dict slips through. Typed as
-    ``dict[str, Any]`` so call sites can use ``.get(...)`` without
-    per-call narrowing.
-    """
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _page_args(offset: int, limit: int, next_cursor: str | None) -> tuple[int, int]:
@@ -170,7 +156,7 @@ async def search_cafc_opinions(
             classifier = PatentClassifier()
             opinions = [o for o in opinions if classifier.classify(o.case_name)[0]]
 
-    dumped = [_dump(o) for o in opinions]
+    dumped = [dump(o) for o in opinions]
     items = dumped if full else [_stub_opinion(r) for r in dumped]  # type: ignore[arg-type]
 
     query_label = f"`{query}`" if query else "(recent opinions)"
@@ -238,7 +224,7 @@ async def search_cafc_patent_opinions(
     more = len(opinions) > max_results
     opinions = opinions[:max_results]
 
-    dumped = [_dump(o) for o in opinions]
+    dumped = [dump(o) for o in opinions]
     items = dumped if full else [_stub_opinion(r) for r in dumped]  # type: ignore[arg-type]
 
     range_bits: list[str] = []

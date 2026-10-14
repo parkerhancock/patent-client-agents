@@ -12,7 +12,7 @@ required; production callers should send a courtesy registration to
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -31,6 +31,7 @@ from patent_client_agents.prh_fi.client import (
     TRADEMARK_HOST,
     TRADEMARK_PATH,
 )
+from patent_client_agents.shared.envelope import dump
 
 prh_fi_mcp = FastMCP("PRH Finland")
 
@@ -40,10 +41,6 @@ _PRH_FANOUT_CONCURRENCY = 5
 
 def _provenance(source_url: str) -> Any:
     return make_provenance(source_url=source_url, source_name=_PRH_SOURCE_NAME)
-
-
-def _dump(model: Any) -> dict[str, Any]:
-    return cast("dict[str, Any]", model.model_dump(by_alias=True, exclude_none=False))
 
 
 def _coerce_list(value: str | list[str], *, tool: str) -> list[str]:
@@ -58,7 +55,7 @@ def _project_dossier_row(row: Any, *, full: bool) -> dict[str, Any]:
     """Dump a dossier-search row. Lean view drops the thumbnail URL
     triplet (the image_url alone is sufficient) and the ``ordinal``
     field (a 1-indexed echo of result-list position)."""
-    data = _dump(row)
+    data = dump(row, by_alias=True)
     if full:
         return data
     for k in ("thumbnailUrl", "largeThumbnailUrl", "ordinal"):
@@ -68,7 +65,7 @@ def _project_dossier_row(row: Any, *, full: bool) -> dict[str, Any]:
 
 def _project_patent_search_row(row: Any, *, full: bool) -> dict[str, Any]:
     """Dump a patent-search row. Lean view drops the ``ordinal`` slot."""
-    data = _dump(row)
+    data = dump(row, by_alias=True)
     if full:
         return data
     data.pop("ordinal", None)
@@ -88,7 +85,7 @@ _PATENT_GET_LEAN_DROP = {
 def _project_patent_get(record: Any, *, full: bool) -> dict[str, Any]:
     """Dump a PatentGetRecord. Lean view drops the file-history pointer
     list, payment timeline, and raw events."""
-    data = _dump(record)
+    data = dump(record, by_alias=True)
     if full:
         return data
     for k in _PATENT_GET_LEAN_DROP:

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Any, Literal, cast
+from typing import Any, Literal
 
 from fastmcp import FastMCP
 
@@ -11,6 +11,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_resource, conditional_tool
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.thai_dip import api
 from patent_client_agents.thai_dip.client import (
     BASE_URL,
@@ -43,10 +44,7 @@ def _provenance(endpoint: str) -> Any:
 
 
 def _dump(record: Any, full: bool) -> dict[str, Any]:
-    return cast(
-        "dict[str, Any]",
-        record.model_dump(mode="json", exclude=None if full else {"raw"}),
-    )
+    return dump(record, mode="json", exclude=None if full else {"raw"})
 
 
 def _numbers(value: str | list[str]) -> list[str]:

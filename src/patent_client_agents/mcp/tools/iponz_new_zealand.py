@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 from collections.abc import Awaitable, Callable
 from datetime import date
-from typing import Any, cast
+from typing import Any
 
 from fastmcp import FastMCP
 
@@ -28,6 +28,7 @@ from patent_client_agents.iponz_new_zealand.models import (
     IponzTrademarkRecord,
 )
 from patent_client_agents.iponz_new_zealand.resources import USAGE
+from patent_client_agents.shared.envelope import dump
 
 iponz_new_zealand_mcp = FastMCP("New Zealand IPONZ")
 _REQUIRED_ENV = ["IPONZ_SUBSCRIPTION_KEY"]
@@ -40,10 +41,6 @@ _FANOUT_CONCURRENCY = 5
 
 def _provenance() -> Any:
     return make_provenance(source_url=PRODUCTION_BASE_URL, source_name=_SOURCE_NAME)
-
-
-def _dump(record: Any) -> dict[str, Any]:
-    return cast("dict[str, Any]", record.model_dump(mode="json"))
 
 
 def _date(value: Any) -> str | None:
@@ -143,7 +140,7 @@ async def _fetch(
                 return await method(number)
 
         rows = await asyncio.gather(*(one(number) for number in numbers))
-    items = [_dump(row) for row in rows] if full else [lean(row) for row in rows]
+    items = [dump(row, mode="json") for row in rows] if full else [lean(row) for row in rows]
     return ListEnvelope(
         summary=f"IPONZ {label} fetch: {len(items)} records. Schema-tested only.",
         items=items,
@@ -162,7 +159,11 @@ def _list_envelope(
     full: bool,
 ) -> ListEnvelope[dict]:
     selected = rows[:limit]
-    items = [_dump(row) for row in selected] if full else [_lean_summary(row) for row in selected]
+    items = (
+        [dump(row, mode="json") for row in selected]
+        if full
+        else [_lean_summary(row) for row in selected]
+    )
     truncated = len(rows) > limit
     summary = f"IPONZ {label} from {start} through {end}: {len(items)} records."
     if truncated:

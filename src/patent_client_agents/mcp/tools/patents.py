@@ -8,7 +8,7 @@ view shapes, and signed-URL packaging; fusion semantics live in the library.
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -23,6 +23,7 @@ from mcp_data_core.mcp.downloads import (
 )
 from patent_client_agents import unified
 from patent_client_agents.google_patents import GooglePatentsClient
+from patent_client_agents.shared.envelope import dump
 
 _GET_PATENT_BUDGET_SECONDS = 60.0
 _GP_FANOUT_CONCURRENCY = 5
@@ -47,15 +48,6 @@ def _google_patents_provenance(path: str) -> Any:
         source_url=f"{_GOOGLE_PATENTS_BASE}{path}",
         source_name=_GOOGLE_PATENTS_NAME,
     )
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts)."""
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 # Country code is the leading two-letter prefix of a publication_number
@@ -350,7 +342,7 @@ async def get_patent(
                     f"{int(_GET_PATENT_BUDGET_SECONDS)}s — usually upstream rate limiting. "
                     "Retry shortly."
                 ) from exc
-        return _dump(record)  # type: ignore[return-value]
+        return dump(record)  # type: ignore[return-value]
 
     async with GooglePatentsClient() as client:
         full_records = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])

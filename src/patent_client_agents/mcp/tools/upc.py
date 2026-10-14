@@ -32,6 +32,7 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.envelope import dump_any
 from patent_client_agents.upc_decisions import (
     DecisionSearchInput,
     UpcDecisionsClient,
@@ -88,23 +89,6 @@ def _upc_statutes_provenance(source_url: str) -> Any:
         corpus_synced_at=status["corpus_synced_at"],
         corpus_version=status["corpus_version"],
     )
-
-
-def _dump(obj: object) -> Any:
-    """Serialize a Pydantic model or pass through.
-
-    Recursive — handles ``None``, lists (recursing per-element), and dicts.
-    Return type is ``Any`` because the helper genuinely produces multiple
-    shapes (dict for models, list for sequences, None for empties); call
-    sites narrow at use.
-    """
-    if obj is None:
-        return None
-    if hasattr(obj, "model_dump"):
-        return obj.model_dump()  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, list):
-        return [_dump(item) for item in obj]
-    return obj
 
 
 def _stub_decision(record: dict) -> dict:
@@ -210,7 +194,7 @@ async def search_upc_decisions(
         proceedings_lang=proceedings_lang,
     )
     response = await search_decisions(params)
-    dumped = _dump(response) or {}
+    dumped = dump_any(response) or {}
     hits = list(dumped.get("hits") or [])  # type: ignore[union-attr]
     items = hits if full else [_stub_decision(h) for h in hits]
     total_pages = dumped.get("total_pages")  # type: ignore[union-attr]
@@ -271,7 +255,7 @@ async def get_upc_decision(
     async def _fetch_one(client: UpcDecisionsClient, cid: str) -> dict | None:
         async with semaphore:
             record = await client.get_decision(cid)
-        return _dump(record) if record is not None else None  # type: ignore[return-value]
+        return dump_any(record) if record is not None else None  # type: ignore[return-value]
 
     async with UpcDecisionsClient() as client:
         fetched = await asyncio.gather(*[_fetch_one(client, cid) for cid in case_ids])
@@ -308,7 +292,7 @@ async def list_upc_divisions() -> ListEnvelope[dict]:
     Related tools: search_upc_decisions, list_upc_languages.
     """
     divisions = await list_divisions()
-    items: list[dict] = [_dump(d) for d in divisions]  # type: ignore[misc]
+    items: list[dict] = [dump_any(d) for d in divisions]  # type: ignore[misc]
     return ListEnvelope[dict](
         summary=f"UPC divisions — {len(items)} options.",
         items=items,
@@ -329,7 +313,7 @@ async def list_upc_languages() -> ListEnvelope[dict]:
     Related tools: search_upc_decisions, list_upc_divisions.
     """
     langs = await list_languages()
-    items: list[dict] = [_dump(lang) for lang in langs]  # type: ignore[misc]
+    items: list[dict] = [dump_any(lang) for lang in langs]  # type: ignore[misc]
     return ListEnvelope[dict](
         summary=f"UPC procedural languages — {len(items)} options.",
         items=items,
@@ -378,7 +362,7 @@ async def search_upc_statutes(
         page=page,
     )
     response = await search(params)
-    dumped = _dump(response) or {}
+    dumped = dump_any(response) or {}
     # Upstream ``UpcStatuteSearchHit`` is already lean (5 fields:
     # instrument, short_name, language, snippet, rank) so no
     # ``full=True`` toggle is needed per §5.5.
@@ -433,7 +417,7 @@ async def get_upc_section(
     async def _fetch_one(client: UpcStatutesClient, key: str) -> dict | None:
         async with semaphore:
             record = await client.get_instrument(instrument=key, language=language)
-        return _dump(record) if record is not None else None  # type: ignore[return-value]
+        return dump_any(record) if record is not None else None  # type: ignore[return-value]
 
     async with UpcStatutesClient() as client:
         fetched = await asyncio.gather(*[_fetch_one(client, k) for k in keys])
@@ -477,7 +461,7 @@ async def list_upc_instruments(
     Related tools: search_upc_statutes, get_upc_section.
     """
     instruments = await list_instruments(language=language)
-    items: list[dict] = [_dump(i) for i in instruments]  # type: ignore[misc]
+    items: list[dict] = [dump_any(i) for i in instruments]  # type: ignore[misc]
     lang_label = language or "all"
     return ListEnvelope[dict](
         summary=f"UPC statutes instruments (lang={lang_label}) — {len(items)} entries.",

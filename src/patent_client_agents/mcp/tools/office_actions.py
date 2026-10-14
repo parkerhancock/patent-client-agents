@@ -11,13 +11,14 @@ from __future__ import annotations
 
 import asyncio
 from datetime import UTC, datetime
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, encode_cursor, make_provenance
 from mcp_data_core.exceptions import NotFoundError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.envelope import dump
 from patent_client_agents.uspto_office_actions import OfficeActionClient
 
 office_actions_mcp = FastMCP("Office Actions")
@@ -55,15 +56,6 @@ _SEARCH_METHODS = {
     "text": "search_office_action_text",
     "enriched_citations": "search_enriched_citations",
 }
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic record to a dict (or pass through dicts)."""
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 def _stub_rejection(rec: dict) -> dict:
@@ -262,7 +254,7 @@ async def search_office_actions(
         method = getattr(client, method_name)
         result = await method(criteria, start=start, rows=rows)
 
-    dumped = _dump(result)
+    dumped = dump(result)
     raw_items = list(dumped.get("results") or [])
     total = int(dumped.get("num_found") or 0)
     shown = len(raw_items)
@@ -385,7 +377,7 @@ async def get_office_action(
         query = f"id:{_escape_lucene(doc_id)}"
         async with semaphore:
             response = await client.search_office_action_text(query, start=0, rows=1)
-        dumped = _dump(response)
+        dumped = dump(response)
         results = list(dumped.get("results") or [])
         return results[0] if results else None
 

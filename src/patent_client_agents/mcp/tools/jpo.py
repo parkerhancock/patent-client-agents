@@ -21,7 +21,7 @@ Information Retrieval API base.
 from __future__ import annotations
 
 import asyncio
-from typing import Annotated, Any, Literal, cast
+from typing import Annotated, Any, Literal
 
 import httpx
 from fastmcp import FastMCP
@@ -43,19 +43,11 @@ from mcp_data_core.mcp.downloads import (
     download_response,
     read_resource,
 )
+from patent_client_agents.shared.envelope import dump
 
 _JPO_REQUIRED_ENV: list[str] = ["JPO_API_USERNAME", "JPO_API_PASSWORD"]
 
 jpo_mcp = FastMCP("JPO")
-
-
-def _dump(obj: object) -> dict[str, Any]:
-    """Serialize a Pydantic model to a dict (or pass through dicts)."""
-    if hasattr(obj, "model_dump"):
-        return cast("dict[str, Any]", obj.model_dump())  # type: ignore[union-attr]  # ty: ignore[call-non-callable]
-    if isinstance(obj, dict):
-        return cast("dict[str, Any]", obj)
-    raise TypeError(f"_dump expected a Pydantic model or dict, got {type(obj).__name__}")
 
 
 # ---------------------------------------------------------------------------
@@ -336,7 +328,7 @@ async def get_jpo_progress(
         async with semaphore:
             method = getattr(client, _JPO_PROGRESS_METHODS[ip])
             result = await method(appl)
-            return _dump(result) if result else {}  # type: ignore[return-value]
+            return dump(result) if result else {}  # type: ignore[return-value]
 
     async with JpoClient() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -391,7 +383,7 @@ async def get_jpo_progress_simple(
         async with semaphore:
             method = getattr(client, _JPO_PROGRESS_SIMPLE_METHODS[ip])
             result = await method(appl)
-            return _dump(result) if result else {}  # type: ignore[return-value]
+            return dump(result) if result else {}  # type: ignore[return-value]
 
     async with JpoClient() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -436,7 +428,7 @@ async def get_jpo_priority_info(
         method = getattr(client, _JPO_PRIORITY_METHODS[ip])
         priorities = await method(application_number)
 
-    items = [_dump(p) for p in priorities]
+    items = [dump(p) for p in priorities]
     return ListEnvelope[dict](
         summary=_summarize_jpo_priority(application_number, items),
         items=items,
@@ -481,7 +473,7 @@ async def get_jpo_registration_info(
         async with semaphore:
             method = getattr(client, _JPO_REGISTRATION_METHODS[ip])
             result = await method(appl)
-            return _dump(result) if result else {}  # type: ignore[return-value]
+            return dump(result) if result else {}  # type: ignore[return-value]
 
     async with JpoClient() as client:
         items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
@@ -536,7 +528,7 @@ async def get_jpo_number_reference(
         method = getattr(client, _JPO_NUMBER_REF_METHODS[ip])
         result = await method(kind, number)
 
-    details: dict = _dump(result) if result else {}  # type: ignore[assignment]
+    details: dict = dump(result) if result else {}  # type: ignore[assignment]
     return ResponseEnvelope[dict](
         summary=_summarize_jpo_number_reference(number, kind, details),
         details=details,
@@ -621,7 +613,7 @@ async def get_jpo_applicant(
         else:
             method = getattr(client, _JPO_APPLICANT_BY_NAME_METHODS[ip])
             applicants = await method(applicant)
-            rows = [_dump(a) for a in applicants]
+            rows = [dump(a) for a in applicants]
             details = {"results": rows}
             path = f"/{ip}/v1/applicant_attorney/{applicant}"
             summary = (
@@ -662,7 +654,7 @@ async def get_jpo_patent_divisional_info(
     async with JpoClient() as client:
         result = await client.get_patent_divisional_info(application_number)
 
-    details: dict = _dump(result) if result else {}  # type: ignore[assignment]
+    details: dict = dump(result) if result else {}  # type: ignore[assignment]
     summary = (
         f"**JPO patent {application_number}** — divisional family resolved."
         if details
@@ -693,7 +685,7 @@ async def get_jpo_patent_cited_documents(
     async with JpoClient() as client:
         result = await client.get_patent_cited_documents(application_number)
 
-    details: dict = _dump(result) if result else {}  # type: ignore[assignment]
+    details: dict = dump(result) if result else {}  # type: ignore[assignment]
     summary = (
         f"**JPO patent {application_number}** — citation record resolved."
         if details
@@ -732,7 +724,7 @@ async def get_jpo_pct_national_phase_number(
     async with JpoClient() as client:
         result = await client.get_patent_pct_national_number(kind, number)
 
-    details: dict = _dump(result) if result else {}  # type: ignore[assignment]
+    details: dict = dump(result) if result else {}  # type: ignore[assignment]
     summary = (
         f"**PCT {number}** — JP national phase resolved."
         if details

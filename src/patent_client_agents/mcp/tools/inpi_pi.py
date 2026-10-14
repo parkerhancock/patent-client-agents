@@ -25,7 +25,7 @@ dedicated attribution field; ``coverage/sources.yaml`` carries the
 
 from __future__ import annotations
 
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
@@ -35,6 +35,7 @@ from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.inpi_pi import InpiPiClient
 from patent_client_agents.inpi_pi.models import InpiDesignRow, InpiTrademarkRow
+from patent_client_agents.shared.envelope import dump
 
 inpi_pi_mcp = FastMCP("INPI-PI")
 
@@ -58,15 +59,6 @@ def _inpi_provenance(path: str) -> Any:
         source_url=f"{_INPI_BASE}{path}",
         source_name=_INPI_ATTRIBUTION,
     )
-
-
-def _dump(model: Any) -> dict[str, Any]:
-    """Serialize a Pydantic row to dict with INPI's ST.66/ST.86 aliases."""
-    if hasattr(model, "model_dump"):
-        return cast("dict[str, Any]", model.model_dump(by_alias=True))
-    if isinstance(model, dict):
-        return cast("dict[str, Any]", model)
-    raise TypeError(f"_dump expected Pydantic model or dict, got {type(model).__name__}")
 
 
 # Lean-vs-full projection (§5.5). Lean drops raw ST.66/ST.86 XML notice,
@@ -183,7 +175,7 @@ async def search_inpi_trademarks(
             limit=limit,
         )
 
-    dumped = [_dump(row) for row in rows]
+    dumped = [dump(row, by_alias=True) for row in rows]
     items = dumped if full else [_project_lean(r, _LEAN_TM_FIELDS) for r in dumped]
     more = total is not None and (offset + len(items)) < total
     query_label = f"`{query}`" if query else "(structured)"
@@ -232,7 +224,7 @@ async def get_inpi_trademark(
     async with InpiPiClient() as client:
         rows = await client.get_trademark(numbers)
 
-    dumped = [_dump(row) for row in rows]
+    dumped = [dump(row, by_alias=True) for row in rows]
     items = dumped if full else [_project_lean(r, _LEAN_TM_FIELDS) for r in dumped]
 
     if len(items) == 1:
@@ -303,7 +295,7 @@ async def search_inpi_designs(
             limit=limit,
         )
 
-    dumped = [_dump(row) for row in rows]
+    dumped = [dump(row, by_alias=True) for row in rows]
     items = dumped if full else [_project_lean(r, _LEAN_DESIGN_FIELDS) for r in dumped]
     more = total is not None and (offset + len(items)) < total
     query_label = f"`{query}`" if query else "(structured)"
@@ -346,7 +338,7 @@ async def get_inpi_design(
     async with InpiPiClient() as client:
         rows = await client.get_design(numbers)
 
-    dumped = [_dump(row) for row in rows]
+    dumped = [dump(row, by_alias=True) for row in rows]
     items = dumped if full else [_project_lean(r, _LEAN_DESIGN_FIELDS) for r in dumped]
 
     if len(items) == 1:
