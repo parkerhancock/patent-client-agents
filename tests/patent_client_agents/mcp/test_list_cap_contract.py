@@ -16,36 +16,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-PENDING: set[str] = {
-    "get_canlii_case",
-    "get_canlii_legislation",
-    "get_dpma_design",
-    "get_dpma_patent",
-    "get_dpma_trademark",
-    "get_euipo_design",
-    "get_euipo_trademark",
-    "get_inpi_design",
-    "get_inpi_trademark",
-    "get_ipa_design",
-    "get_ipa_patent",
-    "get_ipa_trademark",
-    "get_ipi_patent",
-    "get_ipi_spc",
-    "get_ipi_trademark",
-    "get_iponz_design",
-    "get_iponz_patent",
-    "get_iponz_trademark",
-    "get_kipo_design",
-    "get_kipo_patent",
-    "get_kipo_trademark",
-    "get_oepm_design",
-    "get_oepm_patent",
-    "get_oepm_trademark",
-    "get_thai_dip_copyright",
-    "get_thai_dip_geographical_indication",
-    "get_thai_dip_patent",
-    "get_thai_dip_trademark",
-}
+PENDING: set[str] = set()
 
 _CHECK = """
 import asyncio, json, os, sys

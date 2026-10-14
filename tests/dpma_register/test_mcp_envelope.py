@@ -6,7 +6,7 @@ from unittest.mock import AsyncMock
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.dpma_register.models import (
     DesignRecord,
     PatentUtilityRecord,
@@ -205,3 +205,47 @@ async def test_tool_validation_rejects_bad_limits_and_lists() -> None:
         await tools.get_dpma_patent([])
     with pytest.raises(ValidationError):
         await tools.get_dpma_design([str(index) for index in range(51)])
+
+
+def _client_with(method_name: str, side_effect: object) -> type:
+    inner = AsyncMock()
+    getattr(inner, method_name).side_effect = side_effect
+
+    class Context:
+        async def __aenter__(self) -> AsyncMock:
+            return inner
+
+        async def __aexit__(self, *exc: object) -> None:
+            return None
+
+    return Context
+
+
+@pytest.mark.asyncio
+async def test_list_fetch_reports_not_found(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.dpma_register as tools
+
+    async def get_design(number: str) -> DesignRecord:
+        if number == "404":
+            raise NotFoundError(f"missing {number}", 404, "")
+        return DesignRecord(identifier=number, raw={})
+
+    monkeypatch.setattr(tools, "DpmaRegisterClient", _client_with("get_design", get_design))
+    result = await tools.get_dpma_design(["D1", "404"])
+
+    assert [item["identifier"] for item in result.items] == ["D1"]
+    assert result.not_found == ["404"]
+    assert result.summary == "Fetched 1 of 2 DPMA designs. Not found: 404."
+
+
+@pytest.mark.asyncio
+async def test_single_fetch_not_found_raises(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.dpma_register as tools
+
+    monkeypatch.setattr(
+        tools,
+        "DpmaRegisterClient",
+        _client_with("get_design", NotFoundError("missing", 404, "")),
+    )
+    with pytest.raises(NotFoundError):
+        await tools.get_dpma_design("404")

@@ -32,6 +32,7 @@ from patent_client_agents.canlii import (
     Language,
 )
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 canlii_mcp = FastMCP("CanLII")
 
@@ -46,9 +47,8 @@ _CANLII_REQUIRED_ENV: list[str] = ["CANLII_API_KEY"]
 _CANLII_BASE = "https://api.canlii.org"
 _CANLII_NAME = "CanLII (Canadian Legal Information Institute)"
 
-# Bounded fan-out for list-accepting get_canlii_case / get_canlii_legislation
-# (§5.4). CanLII is rate-limited; 5 concurrent fetches keeps headroom while
-# still parallelizing portfolio workflows.
+# Bounded fan-out across databases in search_canlii_ip_cases. CanLII is
+# rate-limited; 5 concurrent fetches keeps headroom while still parallelizing.
 _CANLII_FANOUT_CONCURRENCY = 5
 
 # ──────────────────────────────────────────────────────────────────────
@@ -475,7 +475,7 @@ async def get_canlii_case(
         "databases).",
     ],
     language: Annotated[Language, "'en' or 'fr'"] = "en",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get CanLII (Canadian Legal Information Institute) case metadata by case_id.
 
     Returns title (style of cause), citation, docket number, decision
@@ -489,33 +489,29 @@ async def get_canlii_case(
     Related tools: search_canlii_cases, get_canlii_cited_cases,
     get_canlii_citing_cases, get_canlii_cited_legislations.
     """
-    ids = [case_id] if isinstance(case_id, str) else list(case_id)
-    if not ids:
-        raise ValidationError("get_canlii_case requires at least one case_id")
+    ids = as_id_list(case_id, noun="case_id")
 
-    semaphore = asyncio.Semaphore(_CANLII_FANOUT_CONCURRENCY)
+    async with CanLIIClient() as client:
 
-    async def _fetch_one(client: CanLIIClient, cid: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(cid: str) -> dict:
             params = GetCaseInput(database_id=database_id, case_id=cid, language=language)
             return dump(await client.get_case(**params.model_dump()))  # type: ignore[return-value]
 
-    async with CanLIIClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, cid) for cid in ids])
+        results, not_found = await fetch_many(ids, _fetch_one, single=isinstance(case_id, str))
 
-    if len(results) == 1:
+    if len(ids) == 1:
         summary = _summarize_case(results[0])
         path = f"/v1/caseBrowse/{language}/{database_id}/{ids[0]}/"
     else:
-        summary = (
-            f"Fetched {len(results)} CanLII cases from `{database_id}` "
-            f"({language}): {', '.join(ids)}"
+        summary = fetched_summary(
+            len(results), len(ids), f"CanLII cases from `{database_id}` ({language})", not_found
         )
         path = f"/v1/caseBrowse/{language}/{database_id}/"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_canlii_provenance(path),
     )
 
@@ -680,7 +676,7 @@ async def get_canlii_legislation(
         "spans multiple databases).",
     ],
     language: Annotated[Language, "'en' or 'fr'"] = "en",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get CanLII (Canadian Legal Information Institute) statute or regulation metadata.
 
     Returns ``start_date`` / ``end_date`` and ``repealed`` flags for
@@ -693,35 +689,36 @@ async def get_canlii_legislation(
     Related tools: search_canlii_legislation, list_canlii_legislation_databases,
     get_canlii_cited_legislations.
     """
-    ids = [legislation_id] if isinstance(legislation_id, str) else list(legislation_id)
-    if not ids:
-        raise ValidationError("get_canlii_legislation requires at least one legislation_id")
+    ids = as_id_list(legislation_id, noun="legislation_id")
 
-    semaphore = asyncio.Semaphore(_CANLII_FANOUT_CONCURRENCY)
+    async with CanLIIClient() as client:
 
-    async def _fetch_one(client: CanLIIClient, lid: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(lid: str) -> dict:
             params = GetLegislationInput(
                 database_id=database_id, legislation_id=lid, language=language
             )
             return dump(await client.get_legislation(**params.model_dump()))  # type: ignore[return-value]
 
-    async with CanLIIClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, lid) for lid in ids])
+        results, not_found = await fetch_many(
+            ids, _fetch_one, single=isinstance(legislation_id, str)
+        )
 
-    if len(results) == 1:
+    if len(ids) == 1:
         summary = _summarize_legislation(results[0])
         path = f"/v1/legislationBrowse/{language}/{database_id}/{ids[0]}/"
     else:
-        summary = (
-            f"Fetched {len(results)} CanLII legislation entries from "
-            f"`{database_id}` ({language}): {', '.join(ids)}"
+        summary = fetched_summary(
+            len(results),
+            len(ids),
+            f"CanLII legislation entries from `{database_id}` ({language})",
+            not_found,
         )
         path = f"/v1/legislationBrowse/{language}/{database_id}/"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_canlii_provenance(path),
     )
 

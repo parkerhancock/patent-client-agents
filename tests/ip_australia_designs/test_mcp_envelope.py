@@ -12,7 +12,7 @@ from unittest.mock import AsyncMock, patch
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 from patent_client_agents.mcp.tools.ip_australia_designs import (
     get_ipa_design,
     search_ipa_designs,
@@ -157,10 +157,42 @@ async def test_get_ipa_design_list_preserves_order():
     assert isinstance(result, ListEnvelope)
     assert [r["designNumber"] for r in result.items] == numbers
     assert result.provenance.source_url.endswith("/public/australian-design-search-api/v1/design")
-    assert "Fetched 3 Australian designs" in result.summary
+    assert result.summary == "Fetched 3 of 3 Australian designs."
 
 
 @pytest.mark.asyncio
 async def test_get_ipa_design_empty_list_raises():
     with pytest.raises(ValidationError, match="at least one"):
         await get_ipa_design(application_number=[])
+
+
+@pytest.mark.asyncio
+async def test_get_ipa_design_list_reports_not_found():
+    async def fetch_one(number: str) -> _FakeModel:
+        if number == "202410456":
+            raise NotFoundError("missing", 404, "")
+        return _make_detail(number)
+
+    with patch(
+        "patent_client_agents.mcp.tools.ip_australia_designs.IpAustraliaDesignsClient"
+    ) as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_design = AsyncMock(side_effect=fetch_one)
+
+        result = await get_ipa_design(application_number=["202410123", "202410456"])
+
+    assert len(result.items) == 1
+    assert result.not_found == ["202410456"]
+    assert result.summary == "Fetched 1 of 2 Australian designs. Not found: 202410456."
+
+
+@pytest.mark.asyncio
+async def test_get_ipa_design_single_not_found_raises():
+    with patch(
+        "patent_client_agents.mcp.tools.ip_australia_designs.IpAustraliaDesignsClient"
+    ) as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.get_design = AsyncMock(side_effect=NotFoundError("missing", 404, ""))
+
+        with pytest.raises(NotFoundError):
+            await get_ipa_design(application_number="202410456")

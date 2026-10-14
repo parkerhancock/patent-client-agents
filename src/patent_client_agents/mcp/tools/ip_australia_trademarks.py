@@ -8,17 +8,16 @@ API. Env-gated: registers only when ``IPAUSTRALIA_CLIENT_ID`` and
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.ip_australia_trademarks import IpAustraliaTrademarksClient
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 ip_australia_trademarks_mcp = FastMCP("IP Australia — Trade Marks")
 
@@ -64,9 +63,6 @@ def _summarize_ipa_trademark(record: dict) -> str:
     else:
         line += "."
     return f"{head}\n{line}"
-
-
-_IPA_TRADEMARKS_FANOUT_CONCURRENCY = 5
 
 
 # ---------------------------------------------------------------------------
@@ -160,7 +156,7 @@ async def get_ipa_trademark(
         "list for portfolio workflows. Pass a list to fetch many "
         "records concurrently; the response shape stays a ListEnvelope.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get full Australian trade mark records by serial number.
 
     Accepts either a single serial number or a list (§5.4) and fans
@@ -170,30 +166,29 @@ async def get_ipa_trademark(
 
     Related tools: search_ipa_trademarks, get_ipa_patent, get_ipa_design.
     """
-    numbers = [serial_number] if isinstance(serial_number, str) else list(serial_number)
-    if not numbers:
-        raise ValidationError("get_ipa_trademark requires at least one serial_number")
-
-    semaphore = asyncio.Semaphore(_IPA_TRADEMARKS_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: IpAustraliaTrademarksClient, sn: str) -> dict:
-        async with semaphore:
-            record = await client.get_trademark(sn)
-            return dump(record, by_alias=True)
+    numbers = as_id_list(serial_number, noun="trade mark serial number")
 
     async with IpAustraliaTrademarksClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(results) == 1:
+        async def _fetch_one(num: str) -> dict:
+            record = await client.get_trademark(num)
+            return dump(record, by_alias=True)
+
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(serial_number, str)
+        )
+
+    if len(numbers) == 1:
         summary = _summarize_ipa_trademark(results[0])
         path = f"/trade-mark/{numbers[0]}"
     else:
-        summary = f"Fetched {len(results)} Australian trade marks: {', '.join(numbers)}."
+        summary = fetched_summary(len(results), len(numbers), "Australian trade marks", not_found)
         path = "/trade-mark"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_ipa_trademarks_provenance(path),
     )
 

@@ -21,7 +21,7 @@ import pytest
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
 
 # ──────────────────────────────────────────────────────────────────────
 # Plain "fake" row models — they only need to expose ``model_dump`` so
@@ -285,6 +285,34 @@ async def test_get_kipo_patent_list_returns_combined_envelope(
 
 
 @pytest.mark.asyncio
+async def test_get_kipo_patent_list_reports_not_found(
+    kipo_mcp: Any, mock_client: AsyncMock
+) -> None:
+    async def get_patent(num: str) -> tuple[list[dict], dict]:
+        if num == "404":
+            raise NotFoundError(f"missing {num}", 404, "")
+        if num == "EMPTY":
+            return [], {}
+        return [_patent_payload(num)], {}
+
+    mock_client.get_patent = AsyncMock(side_effect=get_patent)
+    result = await kipo_mcp.get_kipo_patent(application_number=["A1", "404", "EMPTY"])
+
+    assert [r["application_number"] for r in result.items] == ["A1"]
+    assert result.not_found == ["404", "EMPTY"]
+    assert result.summary == "Fetched 1 of 3 KIPO patent/UM records. Not found: 404, EMPTY."
+
+
+@pytest.mark.asyncio
+async def test_get_kipo_patent_single_not_found_raises(
+    kipo_mcp: Any, mock_client: AsyncMock
+) -> None:
+    mock_client.get_patent = AsyncMock(side_effect=NotFoundError("missing", 404, ""))
+    with pytest.raises(NotFoundError):
+        await kipo_mcp.get_kipo_patent(application_number="404")
+
+
+@pytest.mark.asyncio
 async def test_get_kipo_patent_empty_list_raises(kipo_mcp: Any, mock_client: AsyncMock) -> None:
     with pytest.raises(ValidationError, match="at least one"):
         await kipo_mcp.get_kipo_patent(application_number=[])
@@ -294,10 +322,10 @@ async def test_get_kipo_patent_empty_list_raises(kipo_mcp: Any, mock_client: Asy
 async def test_get_kipo_patent_list_cap_exceeded_raises(
     kipo_mcp: Any, mock_client: AsyncMock
 ) -> None:
-    from patent_client_agents.kipo_kipris.client import LIST_ACCEPT_CAP
+    from patent_client_agents.shared.fanout import LIST_CAP
 
-    too_many = [f"A{i}" for i in range(LIST_ACCEPT_CAP + 1)]
-    with pytest.raises(ValidationError, match="capped at"):
+    too_many = [f"A{i}" for i in range(LIST_CAP + 1)]
+    with pytest.raises(ValidationError, match=f"limit {LIST_CAP}"):
         await kipo_mcp.get_kipo_patent(application_number=too_many)
 
 

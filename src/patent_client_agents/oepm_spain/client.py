@@ -36,7 +36,6 @@ BASE_URL = "https://consultas2.oepm.es/ceo/WSDetalleExpedienteOEPM"
 WSDL_URL = f"{BASE_URL}?wsdl"
 SOAP_NS = "http://schemas.xmlsoap.org/soap/envelope/"
 SERVICE_NS = "http://detalleExpOEPM.ws.ceo.oepm.es/"
-LIST_ACCEPT_CAP = 50
 _SIGNUP_URL = (
     "https://www.oepm.es/es/sobre-OEPM/servicios-al-ciudadano/"
     "servicios-gratuitos/Servicios-web-de-la-OEPM/"

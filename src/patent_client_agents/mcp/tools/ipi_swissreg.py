@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 from collections.abc import Awaitable, Callable
 from typing import Annotated, Any
 
@@ -15,7 +14,6 @@ from mcp_data_core.mcp.conditional import conditional_resource, conditional_tool
 from patent_client_agents.ipi_swissreg import api
 from patent_client_agents.ipi_swissreg.client import (
     BASE_URL,
-    LIST_ACCEPT_CAP,
     MAX_PAGE_SIZE,
     IpiSwissregClient,
 )
@@ -28,6 +26,7 @@ from patent_client_agents.ipi_swissreg.models import (
 )
 from patent_client_agents.ipi_swissreg.resources import USAGE
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 ipi_swissreg_mcp = FastMCP("Swiss IPI, Swissreg datadelivery")
 _REQUIRED_ENV = ["IPI_DATA_USERNAME", "IPI_DATA_PASSWORD"]
@@ -35,7 +34,6 @@ _SOURCE_NAME = (
     "Swiss Federal Institute of Intellectual Property (IPI), Swissreg datadelivery API. "
     "Schema-tested against public IPI XSDs; live account compatibility unverified."
 )
-_FANOUT_CONCURRENCY = 5
 
 
 def _provenance() -> Any:
@@ -116,15 +114,6 @@ def _validate_limit(limit: int) -> None:
         raise ValidationError(f"limit must be between 1 and {MAX_PAGE_SIZE}")
 
 
-def _numbers(value: str | list[str]) -> list[str]:
-    values = [value] if isinstance(value, str) else list(value)
-    if not values or any(not number.strip() for number in values):
-        raise ValidationError("At least one non-empty register number is required")
-    if len(values) > LIST_ACCEPT_CAP:
-        raise ValidationError(f"A maximum of {LIST_ACCEPT_CAP} register numbers is allowed")
-    return values
-
-
 def _search_envelope(
     label: str,
     query: str,
@@ -154,21 +143,20 @@ async def _fetch(
     lean: Callable[[Any], dict[str, Any]],
     label: str,
     full: bool,
-) -> ListEnvelope[dict]:
-    numbers = _numbers(values)
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+) -> FetchedList[dict]:
+    numbers = as_id_list(values, noun=f"{label} number")
     async with IpiSwissregClient() as client:
         method: Callable[[str], Awaitable[Any]] = getattr(client, method_name)
-
-        async def one(number: str) -> Any:
-            async with semaphore:
-                return await method(number)
-
-        rows = await asyncio.gather(*(one(number) for number in numbers))
+        rows, not_found = await fetch_many(numbers, method, single=isinstance(values, str))
     items = [dump(row, mode="json") for row in rows] if full else [lean(row) for row in rows]
-    return ListEnvelope(
-        summary=f"Swiss IPI {label} fetch: {len(items)} records. Schema-tested only.",
+    if len(numbers) == 1:
+        summary = f"Swiss IPI {label} fetch: {len(items)} records. Schema-tested only."
+    else:
+        summary = fetched_summary(len(items), len(numbers), f"Swiss IPI {label}s", not_found)
+    return FetchedList[dict](
+        summary=summary,
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_provenance(),
@@ -201,7 +189,7 @@ async def search_ipi_patents(
 
 
 @conditional_tool(ipi_swissreg_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_ipi_patent(patent_number: str | list[str], full: bool = False) -> ListEnvelope[dict]:
+async def get_ipi_patent(patent_number: str | list[str], full: bool = False) -> FetchedList[dict]:
     """Fetch Swiss patents. Prefer EPO OPS for ordinary CH bibliography."""
     return await _fetch(patent_number, "get_patent", _lean_patent, "patent", full)
 
@@ -235,7 +223,7 @@ async def search_ipi_trademarks(
 @conditional_tool(ipi_swissreg_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
 async def get_ipi_trademark(
     trademark_number: str | list[str], full: bool = False
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Swiss trademark records by trademark number. Schema-tested only."""
     return await _fetch(trademark_number, "get_trademark", _lean_trademark, "trademark", full)
 
@@ -254,7 +242,7 @@ async def search_ipi_spcs(
 
 
 @conditional_tool(ipi_swissreg_mcp, requires_env=_REQUIRED_ENV, annotations=READ_ONLY)
-async def get_ipi_spc(spc_number: str | list[str], full: bool = False) -> ListEnvelope[dict]:
+async def get_ipi_spc(spc_number: str | list[str], full: bool = False) -> FetchedList[dict]:
     """Fetch Swiss SPC records by certificate number. Schema-tested only."""
     return await _fetch(spc_number, "get_spc", _lean_spc, "SPC", full)
 

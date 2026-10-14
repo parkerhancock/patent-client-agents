@@ -31,7 +31,6 @@ from .models import (
 
 BASE_URL = "https://api.ipthailand.go.th/DIP-APIDynamic/api/Search"
 CATALOGUE_URL = "https://api.ipthailand.go.th/data-exchange/view/home.aspx"
-LIST_ACCEPT_CAP = 50
 RESULT_LIMIT = 100
 
 PatentKind = Literal["invention", "design", "petty_patent"]

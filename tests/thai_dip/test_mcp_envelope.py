@@ -5,7 +5,8 @@ from unittest.mock import AsyncMock
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope
-from mcp_data_core.exceptions import ValidationError
+from mcp_data_core.exceptions import NotFoundError, ValidationError
+from patent_client_agents.shared.fanout import FetchedList
 from patent_client_agents.thai_dip.models import (
     ThaiDipCopyrightRecord,
     ThaiDipGiRecord,
@@ -145,7 +146,51 @@ async def test_fetch_envelopes_use_one_client(
     assert "raw" not in result.items[0]
     assert full_result.items[0]["raw"]
     assert getattr(inner, method).await_count == 3
-    assert "no distinct fetch operation" in result.summary
+    assert result.summary.startswith("Fetched 2 of 2 Thailand DIP")
+    assert "no distinct fetch operation" in full_result.summary
+
+
+def _client_with(method: str, side_effect: object) -> type:
+    inner = AsyncMock()
+    getattr(inner, method).side_effect = side_effect
+
+    class Context:
+        async def __aenter__(self) -> AsyncMock:
+            return inner
+
+        async def __aexit__(self, *exc: object) -> None:
+            return None
+
+    return Context
+
+
+@pytest.mark.asyncio
+async def test_list_fetch_reports_not_found(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.thai_dip as tools
+
+    async def get_trademark(number: str) -> ThaiDipTrademarkRecord:
+        if number == "404":
+            raise NotFoundError(f"missing {number}", 404, "")
+        return ThaiDipTrademarkRecord(identifier=number, mark_name="MARK", raw={})
+
+    monkeypatch.setattr(tools, "ThaiDipClient", _client_with("get_trademark", get_trademark))
+    result = await tools.get_thai_dip_trademark(["T1", "404"])
+
+    assert isinstance(result, FetchedList)
+    assert [item["identifier"] for item in result.items] == ["T1"]
+    assert result.not_found == ["404"]
+    assert "Not found: 404" in result.summary
+
+
+@pytest.mark.asyncio
+async def test_single_fetch_not_found_raises(monkeypatch: pytest.MonkeyPatch) -> None:
+    import patent_client_agents.mcp.tools.thai_dip as tools
+
+    monkeypatch.setattr(
+        tools, "ThaiDipClient", _client_with("get_trademark", NotFoundError("missing", 404, ""))
+    )
+    with pytest.raises(NotFoundError):
+        await tools.get_thai_dip_trademark("404")
 
 
 @pytest.mark.asyncio
