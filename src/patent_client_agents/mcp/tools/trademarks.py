@@ -22,6 +22,12 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.corpus.tools import (
+    corpus_get,
+    corpus_search,
+    hits_summary,
+    truncate,
+)
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.shared.paging import Limit100, Offset
@@ -65,30 +71,6 @@ def _tsdr_provenance(path: str) -> Any:
     return provenance_for(source_url=f"{_TSDR_BASE}{path}", source_name=_TSDR_NAME)
 
 
-def _tmep_provenance(path: str) -> Any:
-    """Build a Provenance pointing at ``{base}{path}`` with corpus metadata.
-
-    Reads ``corpus_synced_at`` / ``corpus_version`` from
-    :func:`patent_client_agents.tmep.get_corpus_status` so the values
-    track the bundled corpus without per-call hardcoding. Mirrors the
-    MPEP pattern (CONNECTOR_STANDARDS.md §4 / §5.9).
-    """
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=f"{_TMEP_BASE}{path}",
-        source_name=_TMEP_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
-
-
-def _truncate(text: str, limit: int) -> str:
-    """Cap a string at ``limit`` chars, appending an ellipsis on overflow."""
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 1)].rstrip() + "…"
-
-
 def _stub_tmep_hit(hit: dict) -> dict:
     """Lean projection of a TMEP search hit (§5.5).
 
@@ -110,7 +92,7 @@ def _stub_tmep_hit(hit: dict) -> dict:
     return {
         "section_number": section_number,
         "title": title_only,
-        "snippet": _truncate(hit.get("snippet") or "", _TMEP_LEAN_SNIPPET_CHARS),
+        "snippet": truncate(hit.get("snippet") or "", _TMEP_LEAN_SNIPPET_CHARS),
         "href": hit.get("href"),
     }
 
@@ -509,32 +491,22 @@ async def search_tmep(
 
     Related tools: get_tmep_section.
     """
-    async with TmepClient() as client:
-        response = await client.search(
+    return await corpus_search(
+        TmepClient,
+        lambda client: client.search(
             query=query,
             syntax=syntax,
             sort=sort,
             per_page=limit,
             offset=offset,
-        )
-
-    hits = [h.model_dump() for h in response.hits]
-    items = hits if full else [_stub_tmep_hit(h) for h in hits]
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    summary = f"TMEP ({corpus_label}) — `{query}`: {len(items)} hit{'s' if len(items) != 1 else ''}"
-    if response.has_more:
-        summary += " (more available)."
-    else:
-        summary += "."
-
-    return ListEnvelope[dict](
-        summary=summary,
-        items=items,
-        more_available=response.has_more,
-        next_cursor=None,
-        provenance=_tmep_provenance("/RDMS/TMEP/search"),
+        ),
+        corpus_status=get_corpus_status,
+        project=None if full else _stub_tmep_hit,
+        summary=lambda response, items, corpus_label: hits_summary(
+            f"TMEP ({corpus_label}) — `{query}`", len(items), response.has_more
+        ),
+        source_url=f"{_TMEP_BASE}/RDMS/TMEP/search",
+        source_name=_TMEP_NAME,
     )
 
 
@@ -564,30 +536,18 @@ async def get_tmep_section(
     refs = as_id_list(section, noun="TMEP section reference")
     single = isinstance(section, str)
 
-    async with TmepClient() as client:
+    async def _fetch_one(client: Any, ref: str) -> dict | None:
+        record = await client.get_section(ref)
+        # When the caller passes a section number, ``ref`` already is
+        # the section number. When they pass an href, the corpus row
+        # carries the section_number but the TmepSection model drops
+        # it. Resolve via SECTION_NUMBER_PATTERN so the returned dict
+        # carries section_number when we know it.
+        from patent_client_agents.tmep.client import SECTION_NUMBER_PATTERN
 
-        async def _fetch_one(ref: str) -> dict | None:
-            record = await client.get_section(ref)
-            # When the caller passes a section number, ``ref`` already is
-            # the section number. When they pass an href, the corpus row
-            # carries the section_number but the TmepSection model drops
-            # it. Resolve via SECTION_NUMBER_PATTERN so the returned dict
-            # carries section_number when we know it.
-            from patent_client_agents.tmep.client import SECTION_NUMBER_PATTERN
+        section_number = ref if SECTION_NUMBER_PATTERN.match(ref) else None
+        return _tmep_section_to_dict(record, section_number=section_number)
 
-            section_number = ref if SECTION_NUMBER_PATTERN.match(ref) else None
-            return _tmep_section_to_dict(record, section_number=section_number)
-
-        results, not_found = await fetch_many(refs, _fetch_one, single=single)
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    if len(refs) == 1 and results:
-        summary = _summarize_tmep_section(results[0], corpus_label)
-    else:
-        summary = fetched_summary(
-            len(results), len(refs), f"TMEP sections ({corpus_label})", not_found
-        )
     if len(refs) == 1:
         ref = refs[0]
         if ref.endswith(".html") or "/" in ref:
@@ -597,11 +557,17 @@ async def get_tmep_section(
     else:
         path = "/RDMS/TMEP/result"
 
-    return FetchedList[dict](
-        summary=summary,
-        items=results,
-        not_found=not_found,
-        provenance=_tmep_provenance(path),
+    return await corpus_get(
+        TmepClient,
+        refs,
+        _fetch_one,
+        single=single,
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize_tmep_section,
+        missing=None,
+        noun_plural=lambda corpus_label: f"TMEP sections ({corpus_label})",
+        source_url=f"{_TMEP_BASE}{path}",
+        source_name=_TMEP_NAME,
     )
 
 

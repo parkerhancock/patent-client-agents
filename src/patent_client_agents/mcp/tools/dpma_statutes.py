@@ -24,9 +24,14 @@ from patent_client_agents.dpma_statutes import (
     get_corpus_status,
     parse_citation,
 )
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.corpus.tools import (
+    corpus_get,
+    corpus_search,
+    hits_summary,
+    truncate,
+)
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 from patent_client_agents.shared.paging import Limit100, Offset
-from patent_client_agents.shared.provenance import provenance_for
 
 dpma_statutes_mcp = FastMCP("DPMA Germany — Statutes")
 
@@ -46,30 +51,13 @@ _GESETZE_BASE = "https://www.gesetze-im-internet.de"
 _LEAN_SNIPPET_CHARS = 400
 
 
-def _statutes_provenance(source_url: str) -> Any:
-    """Build a Provenance for the statutes corpus."""
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=source_url,
-        source_name=_DPMA_SOURCE_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
-
-
-def _truncate(text: str, limit: int) -> str:
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 1)].rstrip() + "…"
-
-
 def _stub_hit(hit: dict) -> dict:
     """Lean projection of a statute search hit (§5.5)."""
     return {
         "statute": hit.get("statute"),
         "section": hit.get("section"),
         "title": hit.get("title"),
-        "snippet": _truncate(hit.get("snippet") or "", _LEAN_SNIPPET_CHARS),
+        "snippet": truncate(hit.get("snippet") or "", _LEAN_SNIPPET_CHARS),
     }
 
 
@@ -136,37 +124,31 @@ async def search_dpma_statutes(
 
     Related tools: get_dpma_section.
     """
-    async with DpmaStatutesClient() as client:
-        response = await client.search(
+
+    def _summary(response: Any, items: list[dict], corpus_label: str) -> str:
+        scope = f" ({response.statute})" if response.statute else ""
+        return hits_summary(
+            f"DPMA Germany statutes{scope} — `{query}`",
+            len(items),
+            response.has_more,
+            f" (corpus {corpus_label})",
+        )
+
+    return await corpus_search(
+        DpmaStatutesClient,
+        lambda client: client.search(
             query,
             statute=statute,
             syntax=syntax,
             sort=sort,
             per_page=limit,
             offset=offset,
-        )
-
-    hits = [h.model_dump() for h in response.hits]
-    items = hits if full else [_stub_hit(h) for h in hits]
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    scope = f" ({response.statute})" if response.statute else ""
-    summary = (
-        f"DPMA Germany statutes{scope} — `{query}`: "
-        f"{len(items)} hit{'s' if len(items) != 1 else ''} (corpus {corpus_label})"
-    )
-    if response.has_more:
-        summary += " (more available)."
-    else:
-        summary += "."
-
-    return ListEnvelope[dict](
-        summary=summary,
-        items=items,
-        more_available=response.has_more,
-        next_cursor=None,
-        provenance=_statutes_provenance(f"{_GESETZE_BASE}/"),
+        ),
+        corpus_status=get_corpus_status,
+        project=None if full else _stub_hit,
+        summary=_summary,
+        source_url=f"{_GESETZE_BASE}/",
+        source_name=_DPMA_SOURCE_NAME,
     )
 
 
@@ -200,28 +182,21 @@ async def get_dpma_section(
     """
     refs = as_id_list(citation, noun="DPMA statute citation")
 
-    async with DpmaStatutesClient() as client:
+    async def _fetch_one(client: Any, ref: str) -> dict:
+        record = await client.get_section_by_citation(ref)
+        return record.model_dump()
 
-        async def _fetch_one(ref: str) -> dict:
-            record = await client.get_section_by_citation(ref)
-            return record.model_dump()
-
-        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    if len(refs) == 1 and items:
-        summary = _summarize_section(items[0], corpus_label)
-    elif len(refs) == 1:
-        summary = f"DPMA statute section {refs[0]} — not found."
-    else:
-        summary = fetched_summary(len(items), len(refs), "DPMA statute sections", not_found)
-
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_statutes_provenance(f"{_GESETZE_BASE}/"),
+    return await corpus_get(
+        DpmaStatutesClient,
+        refs,
+        _fetch_one,
+        single=isinstance(citation, str),
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize_section,
+        missing=lambda ref: f"DPMA statute section {ref} — not found.",
+        noun_plural="DPMA statute sections",
+        source_url=f"{_GESETZE_BASE}/",
+        source_name=_DPMA_SOURCE_NAME,
     )
 
 

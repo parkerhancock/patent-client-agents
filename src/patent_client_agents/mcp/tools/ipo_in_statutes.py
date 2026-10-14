@@ -25,9 +25,14 @@ from patent_client_agents.ipo_in_statutes import (
     get_corpus_status,
     parse_citation,
 )
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.corpus.tools import (
+    corpus_get,
+    corpus_search,
+    hits_summary,
+    truncate,
+)
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 from patent_client_agents.shared.paging import Limit100, Offset
-from patent_client_agents.shared.provenance import provenance_for
 
 ipo_in_statutes_mcp = FastMCP("IPO India — Statutes")
 
@@ -48,35 +53,13 @@ _IPINDIA_BASE = "https://ipindia.gov.in"
 _LEAN_SNIPPET_CHARS = 400
 
 
-def _statutes_provenance(source_url: str) -> Any:
-    """Build a Provenance for the statutes corpus.
-
-    Reads ``corpus_synced_at`` / ``corpus_version`` from
-    :func:`patent_client_agents.ipo_in_statutes.get_corpus_status` so
-    the values track the bundled corpus without per-call hardcoding.
-    """
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=source_url,
-        source_name=_IPO_IN_SOURCE_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
-
-
-def _truncate(text: str, limit: int) -> str:
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 1)].rstrip() + "…"
-
-
 def _stub_hit(hit: dict) -> dict:
     """Lean projection of a statute search hit (§5.5)."""
     return {
         "statute_name": hit.get("statute_name"),
         "section_number": hit.get("section_number"),
         "title": hit.get("title"),
-        "snippet": _truncate(hit.get("snippet") or "", _LEAN_SNIPPET_CHARS),
+        "snippet": truncate(hit.get("snippet") or "", _LEAN_SNIPPET_CHARS),
     }
 
 
@@ -144,37 +127,31 @@ async def search_ipo_in_statutes(
 
     Related tools: get_ipo_in_section, search_ipo_in_mppp.
     """
-    async with IpoInStatutesClient() as client:
-        response = await client.search(
+
+    def _summary(response: Any, items: list[dict], corpus_label: str) -> str:
+        scope = f" ({response.statute_name})" if response.statute_name else ""
+        return hits_summary(
+            f"IPO India statutes{scope} — `{query}`",
+            len(items),
+            response.has_more,
+            f" (corpus {corpus_label})",
+        )
+
+    return await corpus_search(
+        IpoInStatutesClient,
+        lambda client: client.search(
             query,
             statute_name=statute,
             syntax=syntax,
             sort=sort,
             per_page=limit,
             offset=offset,
-        )
-
-    hits = [h.model_dump() for h in response.hits]
-    items = hits if full else [_stub_hit(h) for h in hits]
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    scope = f" ({response.statute_name})" if response.statute_name else ""
-    summary = (
-        f"IPO India statutes{scope} — `{query}`: "
-        f"{len(items)} hit{'s' if len(items) != 1 else ''} (corpus {corpus_label})"
-    )
-    if response.has_more:
-        summary += " (more available)."
-    else:
-        summary += "."
-
-    return ListEnvelope[dict](
-        summary=summary,
-        items=items,
-        more_available=response.has_more,
-        next_cursor=None,
-        provenance=_statutes_provenance(f"{_INDIACODE_BASE}/handle/123456789"),
+        ),
+        corpus_status=get_corpus_status,
+        project=None if full else _stub_hit,
+        summary=_summary,
+        source_url=f"{_INDIACODE_BASE}/handle/123456789",
+        source_name=_IPO_IN_SOURCE_NAME,
     )
 
 
@@ -211,33 +188,26 @@ async def get_ipo_in_section(
     """
     refs = as_id_list(citation, noun="IPO India statute citation")
 
-    async with IpoInStatutesClient() as client:
+    async def _fetch_one(client: Any, ref: str) -> dict:
+        record = await client.get_section_by_citation(ref)
+        return record.model_dump()
 
-        async def _fetch_one(ref: str) -> dict:
-            record = await client.get_section_by_citation(ref)
-            return record.model_dump()
+    def _source_url(items: list[dict], corpus_label: str) -> str:
+        if len(refs) == 1 and items:
+            return items[0].get("source_url") or f"{_IPINDIA_BASE}/"
+        return f"{_INDIACODE_BASE}/handle/123456789"
 
-        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    if len(refs) == 1 and items:
-        summary = _summarize_section(items[0], corpus_label)
-        src_url = items[0].get("source_url") or f"{_IPINDIA_BASE}/"
-    else:
-        if len(refs) == 1:
-            summary = f"IPO India statute section {refs[0]} — not found."
-        else:
-            summary = fetched_summary(
-                len(items), len(refs), "IPO India statute sections", not_found
-            )
-        src_url = f"{_INDIACODE_BASE}/handle/123456789"
-
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_statutes_provenance(src_url),
+    return await corpus_get(
+        IpoInStatutesClient,
+        refs,
+        _fetch_one,
+        single=isinstance(citation, str),
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize_section,
+        missing=lambda ref: f"IPO India statute section {ref} — not found.",
+        noun_plural="IPO India statute sections",
+        source_url=_source_url,
+        source_name=_IPO_IN_SOURCE_NAME,
     )
 
 
