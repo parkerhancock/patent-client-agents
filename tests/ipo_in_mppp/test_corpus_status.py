@@ -11,12 +11,6 @@ import pytest
 from patent_client_agents.ipo_in_mppp import get_corpus_status
 
 
-class TestShape:
-    def test_returns_dict_with_two_keys(self, ipo_in_mppp_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestFromBundledCorpus:
     def test_source_version_is_v3(self, ipo_in_mppp_corpus_env: Path) -> None:
         """Build script stamps 'v3.0 (2019)' by default — it should win

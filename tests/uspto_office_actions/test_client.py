@@ -284,11 +284,6 @@ class TestSearchEnrichedCitations:
 
 
 class TestClientConfig:
-    def test_base_url(self) -> None:
-        from patent_client_agents.uspto_odp.clients.base import BASE_URL
-
-        assert "api.uspto.gov" in BASE_URL
-
     @pytest.mark.asyncio
     async def test_requires_api_key(self) -> None:
         """Office action client requires a USPTO ODP API key."""

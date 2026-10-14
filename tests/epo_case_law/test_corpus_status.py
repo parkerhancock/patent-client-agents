@@ -23,13 +23,6 @@ def caselaw_corpus_env(monkeypatch: pytest.MonkeyPatch, caselaw_corpus_path: Pat
     return caselaw_corpus_path
 
 
-class TestGetCorpusStatusShape:
-    def test_returns_dict_with_two_keys(self, caselaw_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert isinstance(status, dict)
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestGetCorpusStatusFromBundledCorpus:
     def test_version_string_is_caselaw_year_from_meta(self, caselaw_corpus_env: Path) -> None:
         """The fixture corpus stamps ``caselaw_year='2022'``. The

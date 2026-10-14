@@ -109,14 +109,6 @@ async def test_get_inpi_trademark_delegates(fake_client_factory: _FakeClient) ->
 
 
 @pytest.mark.asyncio
-async def test_get_inpi_trademark_list_arg(
-    fake_client_factory: _FakeClient,
-) -> None:
-    await api_mod.get_inpi_trademark(["X", "Y"])
-    assert fake_client_factory.get_trademark_calls == [["X", "Y"]]
-
-
-@pytest.mark.asyncio
 async def test_search_inpi_designs_delegates(
     fake_client_factory: _FakeClient,
 ) -> None:

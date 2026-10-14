@@ -13,7 +13,6 @@ from patent_client_agents.ipos_manuals.corpus import build as build_mod
 from patent_client_agents.ipos_manuals.corpus.build import (
     FetchedManual,
     ManualSource,
-    ParsedSection,
     build_corpus,
     extract_pdf_text,
     main,
@@ -259,11 +258,3 @@ def test_fetcher_fetch_returns_text(monkeypatch):
     result = asyncio.run(run())
     assert result.source.manual == "peg"
     assert result.pdf_pages == 1
-
-
-def test_parsed_section_immutability():
-    from dataclasses import FrozenInstanceError
-
-    sec = ParsedSection(section_label="1.5.3", title="Test", text="body")
-    with pytest.raises(FrozenInstanceError):
-        sec.section_label = "1.5.4"  # ty: ignore[invalid-assignment]

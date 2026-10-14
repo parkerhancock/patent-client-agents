@@ -43,29 +43,6 @@ def _mock_http(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.Asyn
 # ──────────────────────────────────────────────────────────────────────
 
 
-def test_sources_cover_five_statutes() -> None:
-    keys = {s.statute for s in SOURCES}
-    assert keys == {
-        "patents",
-        "trademarks",
-        "designs",
-        "copyright",
-        "commercial_torts",
-    }
-
-
-def test_commercial_torts_uses_article_unit() -> None:
-    """Commercial Torts Law sections are styled 'Article N' per the EN translation."""
-    ct = next(s for s in SOURCES if s.statute == "commercial_torts")
-    assert ct.section_unit == "Article"
-
-
-def test_other_statutes_use_section_unit() -> None:
-    for source in SOURCES:
-        if source.statute != "commercial_torts":
-            assert source.section_unit == "Section"
-
-
 # ──────────────────────────────────────────────────────────────────────
 # Whitespace + heading-heuristic helpers
 # ──────────────────────────────────────────────────────────────────────

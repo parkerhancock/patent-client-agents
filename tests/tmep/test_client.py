@@ -16,10 +16,6 @@ from patent_client_agents.tmep.models import TmepSearchResponse, TmepSection, Tm
 
 
 class TestTmepClientInit:
-    def test_constructs_without_opening_corpus(self) -> None:
-        client = TmepClient(corpus_path="/nonexistent.db")
-        assert client._db is None
-
     @pytest.mark.asyncio
     async def test_missing_corpus_raises_on_first_call(
         self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path

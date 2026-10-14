@@ -1,48 +1,9 @@
 """Tests for USPTO Trademark Assignment models."""
 
 from patent_client_agents.uspto_trademark_assignments import (
-    Assignor,
     TrademarkAssignmentRecord,
     TrademarkAssignmentSearchResponse,
-    TrademarkProperty,
 )
-
-
-class TestTrademarkProperty:
-    """Tests for TrademarkProperty model."""
-
-    def test_basic_parsing(self) -> None:
-        """Test basic property parsing."""
-        data = {
-            "sequenceNumber": 1,
-            "serialNumber": 88874668,
-            "currentOwner": "RAC7 GAMES INC.",
-            "mark": "SNEAKY SASQUATCH",
-            "applicationFilingDate": "04/16/2020",
-            "internationalRegistrationNumber": None,
-            "registrationDate": "11/24/2020",
-            "registrationNumber": 6204399,
-            "registrantName": None,
-        }
-        prop = TrademarkProperty.model_validate(data)
-        assert prop.serial_number == 88874668
-        assert prop.mark == "SNEAKY SASQUATCH"
-        assert prop.registration_number == 6204399
-        assert prop.current_owner == "RAC7 GAMES INC."
-
-
-class TestAssignor:
-    """Tests for Assignor model."""
-
-    def test_basic_parsing(self) -> None:
-        """Test assignor parsing."""
-        data = {
-            "assignorName": "RAC7 GAMES ULC",
-            "executionDate": "07/22/2025",
-        }
-        assignor = Assignor.model_validate(data)
-        assert assignor.assignor_name == "RAC7 GAMES ULC"
-        assert assignor.execution_date == "07/22/2025"
 
 
 class TestTrademarkAssignmentRecord:

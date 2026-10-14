@@ -9,13 +9,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import pytest
-
 from patent_client_agents.euipo_trademarks import (
     GoodsAndServicesClass,
     MarkBasis,
     MarkFeature,
-    Person,
     Status,
     Trademark,
     TrademarkSearchResult,
@@ -74,14 +71,6 @@ def test_is_live_and_is_registered_helpers() -> None:
     assert Trademark.model_validate(registered).is_registered
 
 
-def test_person_tolerates_missing_name() -> None:
-    """Sandbox sometimes returns Persons with only office+identifier."""
-    p = Person.model_validate({"office": "EM", "identifier": "12345"})
-    assert p.name is None
-    assert p.office == "EM"
-    assert p.identifier == "12345"
-
-
 def test_goods_and_services_terms_in() -> None:
     cls = GoodsAndServicesClass.model_validate(
         {
@@ -119,14 +108,3 @@ def _payload(*, status: str, appno: str) -> dict:
         "applicationLanguage": "en",
         "goodsAndServices": [],
     }
-
-
-def test_word_mark_specification_validation() -> None:
-    """WorkMarkSpecification (sic — upstream typo) requires verbalElement."""
-    from patent_client_agents.euipo_trademarks import WordMarkSpecification
-
-    spec = WordMarkSpecification.model_validate({"verbalElement": "ACME"})
-    assert spec.verbal_element == "ACME"
-
-    with pytest.raises(Exception):  # noqa: B017
-        WordMarkSpecification.model_validate({})

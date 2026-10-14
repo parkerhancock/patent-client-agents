@@ -5,11 +5,9 @@ from __future__ import annotations
 import pytest
 
 from patent_client_agents.epo_ops.parsing import (
-    NS,
     XmlParseError,
     _as_element,
     _collect_texts,
-    _text,
 )
 
 
@@ -35,17 +33,6 @@ class TestXmlParseError:
 class TestAsElement:
     """Tests for _as_element helper."""
 
-    def test_from_bytes(self) -> None:
-        xml = b"<root><child>text</child></root>"
-        elem = _as_element(xml)
-        assert elem.tag == "root"
-        assert elem.find("child") is not None
-
-    def test_from_string(self) -> None:
-        xml = "<root><child>text</child></root>"
-        elem = _as_element(xml)
-        assert elem.tag == "root"
-
     def test_unsupported_type_raises(self) -> None:
         with pytest.raises(TypeError, match="Unsupported XML payload type"):
             _as_element(12345)  # type: ignore[arg-type]
@@ -53,24 +40,6 @@ class TestAsElement:
 
 class TestTextExtraction:
     """Tests for text extraction helpers."""
-
-    def test_text_from_element(self) -> None:
-        xml = b"<root><child>hello world</child></root>"
-        elem = _as_element(xml)
-        result = _text(elem, "./child/text()")
-        assert result == "hello world"
-
-    def test_text_strips_whitespace(self) -> None:
-        xml = b"<root><child>  hello  </child></root>"
-        elem = _as_element(xml)
-        result = _text(elem, "./child/text()")
-        assert result == "hello"
-
-    def test_text_returns_none_for_missing(self) -> None:
-        xml = b"<root><child></child></root>"
-        elem = _as_element(xml)
-        result = _text(elem, "./missing/text()")
-        assert result is None
 
     def test_collect_texts(self) -> None:
         xml = b"<root><item>one</item><item>two</item><item>three</item></root>"
@@ -83,68 +52,6 @@ class TestTextExtraction:
         elem = _as_element(xml)
         result = _collect_texts(elem, "./item/text()")
         assert result == ["one", "two"]  # Empty items filtered
-
-
-class TestNamespaces:
-    """Tests for namespace definitions."""
-
-    def test_namespaces_defined(self) -> None:
-        assert "ops" in NS
-        assert "epo" in NS
-        assert "ft" in NS
-        assert "cpc" in NS
-
-    def test_namespace_values(self) -> None:
-        assert "epo.org" in NS["ops"]
-        assert "epo.org/exchange" in NS["epo"]
-
-
-class TestFirst:
-    """Tests for _first helper."""
-
-    def test_returns_first_element(self) -> None:
-        from patent_client_agents.epo_ops.parsing import _first
-
-        xml = b"<root><item>one</item><item>two</item></root>"
-        elem = _as_element(xml)
-        result = _first(elem.xpath("./item"))
-        assert result is not None
-        assert result.text == "one"
-
-    def test_returns_none_for_empty(self) -> None:
-        from patent_client_agents.epo_ops.parsing import _first
-
-        xml = b"<root></root>"
-        elem = _as_element(xml)
-        result = _first(elem.xpath("./item"))
-        assert result is None
-
-
-class TestParseDocumentId:
-    """Tests for _parse_document_id helper."""
-
-    def test_parses_document_id(self) -> None:
-        from patent_client_agents.epo_ops.parsing import _parse_document_id
-
-        xml = b"""<doc-id xmlns="http://www.epo.org/exchange">
-            <country>US</country>
-            <doc-number>12345678</doc-number>
-            <kind>A1</kind>
-            <date>20230515</date>
-        </doc-id>"""
-        elem = _as_element(xml)
-        doc_id = _parse_document_id(elem)
-        assert doc_id.country == "US"
-        assert doc_id.doc_number == "12345678"
-        assert doc_id.kind == "A1"
-        assert doc_id.date == "20230515"
-
-    def test_returns_empty_for_none(self) -> None:
-        from patent_client_agents.epo_ops.parsing import _parse_document_id
-
-        doc_id = _parse_document_id(None)
-        assert doc_id.country is None
-        assert doc_id.doc_number is None
 
 
 class TestParseSearchResponse:

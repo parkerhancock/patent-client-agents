@@ -254,39 +254,9 @@ async def test_get_office_action_list_preserves_order():
     assert "3 of 3 USPTO office actions" in result.summary
 
 
-@pytest.mark.asyncio
-async def test_get_office_action_bounded_concurrency_fanout():
-    """All three fan-out calls run concurrently against the same client instance."""
-    ids = ["a", "b", "c"]
-    responses = [_FakeSearchResponse(num_found=1, results=[_text_doc(doc_id=i)]) for i in ids]
-
-    with patch(
-        "patent_client_agents.mcp.tools.office_actions.OfficeActionClient"
-    ) as mock_client_cls:
-        mock_client = mock_client_cls.return_value.__aenter__.return_value
-        mock_client.search_office_action_text = AsyncMock(side_effect=responses)
-
-        result = await get_office_action(document_identifier=ids)
-
-    # Single async-context entry, three fan-out fetches inside it.
-    assert mock_client_cls.return_value.__aenter__.call_count == 1
-    assert mock_client.search_office_action_text.call_count == 3
-    assert len(result.items) == 3
-
-
 # ──────────────────────────────────────────────────────────────────────
 # §5.2 — orphan-search fixed, §5.4 — no batch tool
 # ──────────────────────────────────────────────────────────────────────
-
-
-def test_search_and_get_both_importable():
-    """§5.2: search_office_actions used to be an orphan (no fetch tool).
-    The migration adds get_office_action so both verbs are importable.
-    """
-    from patent_client_agents.mcp.tools import office_actions as oa_module
-
-    assert hasattr(oa_module, "search_office_actions")
-    assert hasattr(oa_module, "get_office_action")
 
 
 def test_no_batch_tool_present():

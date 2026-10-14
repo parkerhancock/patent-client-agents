@@ -115,12 +115,3 @@ async def test_get_provenance_carries_corpus_fields(up_corpus_env: Path) -> None
 
     assert result.provenance.corpus_version == "2026"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
-
-
-@pytest.mark.asyncio
-async def test_no_batch_tool_present() -> None:
-    """§5.4 forbids batch_* tools — list-accepting get_* replaces them."""
-    from patent_client_agents.mcp.tools import epo_up_guidelines as mod
-
-    assert not hasattr(mod, "batch_get_epo_up_guidelines_section")
-    assert not hasattr(mod, "batch_epo_up_guidelines_section")

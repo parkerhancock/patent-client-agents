@@ -24,18 +24,5 @@ def get_env_token(name: str) -> str | None:
     return None
 
 
-def coerce_bool(value: str | bool | None) -> bool | None:
-    if isinstance(value, bool):
-        return value
-    if value is None:
-        return None
-    lowered = value.strip().lower()
-    if lowered in {"true", "1", "yes"}:
-        return True
-    if lowered in {"false", "0", "no"}:
-        return False
-    return None
-
-
 def normalize_params(params: dict[str, Any]) -> dict[str, Any]:
     return {k: v for k, v in params.items() if v not in (None, "")}

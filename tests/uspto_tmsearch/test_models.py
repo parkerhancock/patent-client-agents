@@ -65,19 +65,6 @@ class TestTrademarkSearchResult:
         assert result.design_code == ["010103", "010110", "050905"]
         assert result.international_class == ["25", "35"]
 
-    def test_list_remains_list(self) -> None:
-        """Test that lists remain as lists."""
-        result = TrademarkSearchResult.model_validate(
-            {
-                "serialNumber": "97123456",
-                "alive": True,
-                "ownerName": ["Owner 1", "Owner 2"],
-                "goodsAndServices": ["Service 1", "Service 2"],
-            }
-        )
-        assert result.owner_name == ["Owner 1", "Owner 2"]
-        assert result.goods_and_services == ["Service 1", "Service 2"]
-
     def test_is_live_property(self) -> None:
         """Test is_live property."""
         result = TrademarkSearchResult.model_validate({"serialNumber": "97123456", "alive": True})

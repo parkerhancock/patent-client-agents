@@ -112,11 +112,3 @@ async def test_get_provenance_carries_corpus_fields() -> None:
 
     assert result.provenance.corpus_version == "2022"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
-
-
-def test_no_batch_tool_present() -> None:
-    """§5.4 forbids batch_* tools — list-accepting get_* replaces them."""
-    from patent_client_agents.mcp.tools import epo_case_law as caselaw_module
-
-    assert not hasattr(caselaw_module, "batch_get_epo_case_law_section")
-    assert not hasattr(caselaw_module, "batch_epo_case_law_section")

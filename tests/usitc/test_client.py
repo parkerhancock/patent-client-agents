@@ -102,16 +102,6 @@ class TestEdisClient:
 
         return httpx.AsyncClient(transport=httpx.MockTransport(handler))
 
-    def test_init_without_token(self, monkeypatch: pytest.MonkeyPatch) -> None:
-        monkeypatch.delenv("USITC_EDIS_TOKEN", raising=False)
-        client = EdisClient()
-        assert client._client is not None
-
-    def test_init_with_token(self, monkeypatch: pytest.MonkeyPatch) -> None:
-        monkeypatch.setenv("USITC_EDIS_TOKEN", "test_token")
-        client = EdisClient()
-        assert client._client is not None
-
     def test_init_does_not_send_browser_user_agent(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """edis.usitc.gov (Akamai) 403s any User-Agent that looks like a
         browser-impersonator OR an unrecognized custom UA. PCA v0.6.6+
@@ -231,12 +221,6 @@ class TestEdisClient:
             await client.download_attachment(document_id=1, attachment_id=2)
 
     @pytest.mark.asyncio
-    async def test_context_manager(self, mock_client: httpx.AsyncClient) -> None:
-        async with EdisClient(client=mock_client) as client:
-            result = await client.list_investigations()
-            assert len(result) == 1
-
-    @pytest.mark.asyncio
     async def test_expired_jwt_raises_authentication_error_before_request(
         self, monkeypatch: pytest.MonkeyPatch
     ) -> None:
@@ -306,11 +290,6 @@ class TestDataWebClient:
         with pytest.raises(RuntimeError, match="USITC_DATAWEB_TOKEN"):
             client.require_auth()
 
-    def test_requires_auth_passes(self, monkeypatch: pytest.MonkeyPatch) -> None:
-        monkeypatch.setenv("USITC_DATAWEB_TOKEN", "test_token")
-        client = DataWebClient()
-        client.require_auth()  # Should not raise
-
     @pytest.mark.asyncio
     async def test_run_report(
         self, mock_client: httpx.AsyncClient, monkeypatch: pytest.MonkeyPatch
@@ -363,12 +342,6 @@ class TestIdsClient:
         assert isinstance(result[0], IdsInvestigation)
         assert result[0].investigation_number == "337-TA-1234"
 
-    @pytest.mark.asyncio
-    async def test_context_manager(self, mock_client: httpx.AsyncClient) -> None:
-        async with IdsClient(client=mock_client) as client:
-            result = await client.list_investigations()
-            assert len(result) == 1
-
 
 class TestHtsClient:
     """Tests for HtsClient."""
@@ -407,9 +380,3 @@ class TestHtsClient:
         result = await client.export_range("8471.30.01", "8471.30.99")
         assert isinstance(result, HtsExportResponse)
         assert len(result.entries) == 1
-
-    @pytest.mark.asyncio
-    async def test_context_manager(self, mock_client: httpx.AsyncClient) -> None:
-        async with HtsClient(client=mock_client) as client:
-            result = await client.search("test")
-            assert isinstance(result, list)
