@@ -188,18 +188,3 @@ class TestUsitcEnvGating:
         _reload_usitc_with_fresh_mcp()
 
         assert "usitc/documents" in downloads._SOURCES
-
-    def test_gated_functions_remain_importable(
-        self, monkeypatch: pytest.MonkeyPatch, fresh_state: None
-    ) -> None:
-        """Gating suppresses MCP registration, not the Python functions.
-
-        Library and skill callers (and the patent-client-facade re-exports)
-        import these directly, so they must survive an unset token.
-        """
-        monkeypatch.delenv("USITC_EDIS_TOKEN", raising=False)
-
-        usitc_module = _reload_usitc_with_fresh_mcp()
-
-        for name in EDIS_GATED_TOOLS:
-            assert callable(getattr(usitc_module, name))

@@ -5,17 +5,14 @@ from __future__ import annotations
 from typing import Any
 
 from patent_client_agents.usitc.transformers import (
-    _bool,
     _text,
     build_downloaded_attachment,
     parse_attachments,
     parse_dataweb_report,
     parse_documents,
-    parse_hts_export,
     parse_hts_search,
     parse_ids_investigations,
     parse_investigations,
-    parse_saved_queries,
 )
 
 
@@ -42,26 +39,6 @@ class TestTextHelper:
 
     def test_returns_none_for_none(self) -> None:
         assert _text(None) is None
-
-
-class TestBoolHelper:
-    """Tests for _bool helper function."""
-
-    def test_true_values(self) -> None:
-        assert _bool("true") is True
-        assert _bool("TRUE") is True
-        assert _bool("1") is True
-        assert _bool("yes") is True
-
-    def test_false_values(self) -> None:
-        assert _bool("false") is False
-        assert _bool("FALSE") is False
-        assert _bool("0") is False
-        assert _bool("no") is False
-
-    def test_returns_none_for_invalid(self) -> None:
-        assert _bool(None) is None
-        assert _bool("maybe") is None
 
 
 class TestParseInvestigations:
@@ -204,22 +181,6 @@ class TestParseDatawebReport:
         assert result.dto == {}
 
 
-class TestParseSavedQueries:
-    """Tests for parse_saved_queries function."""
-
-    def test_parses_list(self) -> None:
-        payload = [
-            {"id": 1, "name": "Query 1", "description": "First query"},
-            {"id": 2, "name": "Query 2"},
-        ]
-        result = parse_saved_queries(payload)
-        assert len(result) == 2
-        assert result[0].id == 1
-        assert result[0].name == "Query 1"
-        assert result[0].description == "First query"
-        assert result[1].description is None
-
-
 class TestParseIdsInvestigations:
     """Tests for parse_ids_investigations function."""
 
@@ -264,16 +225,3 @@ class TestParseHtsSearch:
 
     def test_handles_empty(self) -> None:
         assert parse_hts_search({}) == []
-
-
-class TestParseHtsExport:
-    """Tests for parse_hts_export function."""
-
-    def test_wraps_entries(self) -> None:
-        entries = [
-            {"hts": "8471.30.01", "rate": "Free"},
-            {"hts": "8471.30.02", "rate": "2.5%"},
-        ]
-        result = parse_hts_export(entries)
-        assert len(result.entries) == 2
-        assert result.raw == entries

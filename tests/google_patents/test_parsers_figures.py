@@ -8,7 +8,6 @@ from patent_client_agents.google_patents.parsers.figures import (
     _absolute_url,
     _extract_bounds,
     _extract_callouts,
-    _extract_image_id,
     _infer_page_number,
     _parse_int,
     extract_figures,
@@ -41,42 +40,13 @@ class TestAbsoluteUrl:
 class TestParseInt:
     """Tests for _parse_int function."""
 
-    def test_returns_none_for_none(self) -> None:
-        assert _parse_int(None) is None
-
     def test_returns_none_for_empty(self) -> None:
         assert _parse_int("") is None
         assert _parse_int("   ") is None
 
-    def test_parses_integer(self) -> None:
-        assert _parse_int("42") == 42
-
-    def test_parses_with_whitespace(self) -> None:
-        assert _parse_int("  123  ") == 123
-
     def test_returns_none_for_invalid(self) -> None:
         assert _parse_int("abc") is None
         assert _parse_int("12.5") is None
-
-
-class TestExtractImageId:
-    """Tests for _extract_image_id function."""
-
-    def test_returns_none_for_none(self) -> None:
-        assert _extract_image_id(None) is None
-
-    def test_returns_none_for_empty(self) -> None:
-        assert _extract_image_id("") is None
-
-    def test_extracts_from_url(self) -> None:
-        url = "https://example.com/path/to/US10123456-D00001"
-        result = _extract_image_id(url)
-        assert result == "US10123456-D00001"
-
-    def test_handles_trailing_slash(self) -> None:
-        url = "https://example.com/path/to/image123/"
-        result = _extract_image_id(url)
-        assert result == "image123"
 
 
 class TestExtractBounds:

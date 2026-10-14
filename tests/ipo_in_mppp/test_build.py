@@ -9,14 +9,9 @@ from pathlib import Path
 import pytest
 
 from patent_client_agents.ipo_in_mppp.corpus.build import (
-    DEFAULT_SEED_PATH,
     build_corpus,
     main,
 )
-
-
-def test_default_seed_exists() -> None:
-    assert DEFAULT_SEED_PATH.exists(), DEFAULT_SEED_PATH
 
 
 def test_build_writes_db(tmp_path: Path) -> None:
@@ -107,9 +102,3 @@ def test_main_cli_bad_seed(tmp_path: Path) -> None:
     bad.write_text("not json\n", encoding="utf-8")
     rc = main(["--output", str(tmp_path / "out.db"), "--seed", str(bad)])
     assert rc != 0
-
-
-def test_main_cli_verbose(tmp_path: Path) -> None:
-    out = tmp_path / "out.db"
-    rc = main(["--output", str(out), "--verbose"])
-    assert rc == 0

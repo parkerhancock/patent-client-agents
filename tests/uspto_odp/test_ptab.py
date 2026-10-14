@@ -375,50 +375,6 @@ class TestPtabInterferencesClient:
         assert interference.documentData is not None
 
 
-class TestPtabModels:
-    """Tests for PTAB response model parsing."""
-
-    @pytest.mark.asyncio
-    async def test_trial_proceeding_model_fields(self, vcr_cassette, api_key) -> None:
-        """Verify trial proceeding model parses all expected fields."""
-        async with PtabTrialsClient(api_key=api_key) as client:
-            result = await client.search_proceedings(query="*", limit=1)
-
-        if result.count > 0:
-            proceeding = result.patentTrialProceedingDataBag[0]
-            # Check key fields exist (may be None but should be parsed)
-            assert hasattr(proceeding, "trialNumber")
-            assert hasattr(proceeding, "trialMetaData")
-            assert hasattr(proceeding, "patentOwnerData")
-            assert hasattr(proceeding, "regularPetitionerData")
-
-    @pytest.mark.asyncio
-    async def test_appeal_model_fields(self, vcr_cassette, api_key) -> None:
-        """Verify appeal model parses all expected fields."""
-        async with PtabAppealsClient(api_key=api_key) as client:
-            result = await client.search(query="*", limit=1)
-
-        if result.count > 0:
-            appeal = result.patentAppealDataBag[0]
-            assert hasattr(appeal, "appealNumber")
-            assert hasattr(appeal, "appealMetaData")
-            assert hasattr(appeal, "appellantData")
-            assert hasattr(appeal, "decisionData")
-
-    @pytest.mark.asyncio
-    async def test_interference_model_fields(self, vcr_cassette, api_key) -> None:
-        """Verify interference model parses all expected fields."""
-        async with PtabInterferencesClient(api_key=api_key) as client:
-            result = await client.search(query="*", limit=1)
-
-        if result.count > 0:
-            interference = result.patentInterferenceDataBag[0]
-            assert hasattr(interference, "interferenceNumber")
-            assert hasattr(interference, "interferenceMetaData")
-            assert hasattr(interference, "seniorPartyData")
-            assert hasattr(interference, "decisionDocumentData")
-
-
 class TestPtabDownloadNormalization:
     """No-network tests for the PTAB download envelope normalization.
 

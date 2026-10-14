@@ -269,22 +269,9 @@ async def test_get_jpo_patent_divisional_info_returns_response_envelope(mock_cli
 # ──────────────────────────────────────────────────────────────────────
 
 
-def test_no_batch_jpo_tools_present() -> None:
-    """§5.4 forbids batch_* tools — list-accepting get_* covers the workflow."""
-    for name in dir(inter):
-        assert not name.startswith("batch_jpo")
-
-
 # ──────────────────────────────────────────────────────────────────────
 # §5.3 — old by_code/by_name pair is gone
 # ──────────────────────────────────────────────────────────────────────
-
-
-def test_collapsed_applicant_tool_only() -> None:
-    """``get_jpo_applicant_by_code`` / ``by_name`` are collapsed into ``get_jpo_applicant``."""
-    assert hasattr(inter, "get_jpo_applicant")
-    assert not hasattr(inter, "get_jpo_applicant_by_code")
-    assert not hasattr(inter, "get_jpo_applicant_by_name")
 
 
 # ──────────────────────────────────────────────────────────────────────

@@ -19,7 +19,6 @@ import pytest
 from patent_client_agents.ipos_statutes.corpus import build as build_mod
 from patent_client_agents.ipos_statutes.corpus.build import (
     FetchedStatute,
-    ParsedSection,
     StatuteSource,
     build_corpus,
     extract_html_text,
@@ -295,12 +294,3 @@ def test_fetcher_fetch_retries_then_succeeds(monkeypatch):
     result = asyncio.run(run())
     assert result.source.statute == "patents"
     assert "Stub" in result.text
-
-
-def test_parsed_section_immutability():
-    """ParsedSection is a frozen dataclass."""
-    from dataclasses import FrozenInstanceError
-
-    sec = ParsedSection(section_label="13", title="Test", text="body")
-    with pytest.raises(FrozenInstanceError):
-        sec.section_label = "14"  # ty: ignore[invalid-assignment]

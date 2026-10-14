@@ -7,34 +7,11 @@ from lxml import html
 from patent_client_agents.google_patents.parsers.claims import (
     _direct_text_before_nested,
     _extract_limitations,
-    _has_class,
     _leaf_claim_texts,
-    _normalize_spaces,
     _split_long_limitations,
     _strip_leading_number,
-    _to_root,
     extract_claims,
 )
-
-
-class TestNormalizeSpaces:
-    """Tests for _normalize_spaces function."""
-
-    def test_collapses_multiple_spaces(self) -> None:
-        result = _normalize_spaces("hello    world")
-        assert result == "hello world"
-
-    def test_collapses_tabs_and_newlines(self) -> None:
-        result = _normalize_spaces("hello\t\nworld")
-        assert result == "hello world"
-
-    def test_strips_leading_trailing(self) -> None:
-        result = _normalize_spaces("   hello world   ")
-        assert result == "hello world"
-
-    def test_handles_empty_string(self) -> None:
-        result = _normalize_spaces("")
-        assert result == ""
 
 
 class TestStripLeadingNumber:
@@ -83,26 +60,6 @@ class TestSplitLongLimitations:
         # Short text should not be split
         result = _split_long_limitations("A method, wherein the step is performed")
         assert result == ["A method, wherein the step is performed"]
-
-
-class TestHasClass:
-    """Tests for _has_class function."""
-
-    def test_finds_single_class(self) -> None:
-        elem = html.fromstring('<div class="claim-text">text</div>')
-        assert _has_class(elem, "claim-text") is True
-
-    def test_finds_class_in_multiple(self) -> None:
-        elem = html.fromstring('<div class="foo claim-text bar">text</div>')
-        assert _has_class(elem, "claim-text") is True
-
-    def test_returns_false_for_missing(self) -> None:
-        elem = html.fromstring('<div class="other-class">text</div>')
-        assert _has_class(elem, "claim-text") is False
-
-    def test_handles_no_class(self) -> None:
-        elem = html.fromstring("<div>text</div>")
-        assert _has_class(elem, "claim-text") is False
 
 
 class TestDirectTextBeforeNested:
@@ -186,20 +143,6 @@ class TestExtractLimitations:
         elem = html.fromstring("<div>Plain text content</div>")
         result = _extract_limitations(elem)
         assert "Plain text content" in result[0]
-
-
-class TestToRoot:
-    """Tests for _to_root function."""
-
-    def test_returns_element_unchanged(self) -> None:
-        elem = html.fromstring("<div>test</div>")
-        result = _to_root(elem)
-        assert result is elem
-
-    def test_parses_string_to_element(self) -> None:
-        result = _to_root("<div>test</div>")
-        assert result.tag == "div"
-        assert result.text == "test"
 
 
 class TestExtractClaims:

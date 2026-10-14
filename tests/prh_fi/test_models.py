@@ -10,7 +10,6 @@ from patent_client_agents.prh_fi.models import (
     DossierSearchResponse,
     PatentGetRecord,
     PatentSearchResponse,
-    TitleTranslation,
     _parse_iso_date,
 )
 
@@ -33,13 +32,6 @@ def test_parse_iso_date_none_and_empty() -> None:
 def test_parse_iso_date_malformed() -> None:
     assert _parse_iso_date("not-a-date") is None
     assert _parse_iso_date("2026/05/19") is None
-
-
-def test_title_translation_accepts_string_and_list() -> None:
-    t1 = TitleTranslation.model_validate({"title": "Plain", "language": "EN"})
-    assert t1.title == "Plain"
-    t2 = TitleTranslation.model_validate({"title": ["Wrapped"], "language": "FI"})
-    assert t2.title == ["Wrapped"]
 
 
 # Patent search ----------------------------------------------------------

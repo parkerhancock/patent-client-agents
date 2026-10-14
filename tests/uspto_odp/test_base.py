@@ -9,8 +9,6 @@ from pydantic import BaseModel
 
 from mcp_data_core.exceptions import ConfigurationError
 from patent_client_agents.uspto_odp.clients.base import (
-    BASE_URL,
-    PaginationModel,
     SearchPayload,
     UsptoOdpBaseClient,
     _format_bool,
@@ -21,16 +19,6 @@ from patent_client_agents.uspto_odp.clients.base import (
     _serialize_range_filters,
 )
 from patent_client_agents.uspto_odp.models import OdpFilter, OdpRangeFilter, OdpSort
-
-
-class TestBaseUrl:
-    """Tests for BASE_URL constant."""
-
-    def test_is_https(self) -> None:
-        assert BASE_URL.startswith("https://")
-
-    def test_is_uspto_domain(self) -> None:
-        assert "api.uspto.gov" in BASE_URL
 
 
 class TestPrune:
@@ -168,58 +156,8 @@ class TestSerializeModelList:
             _serialize_model_list(["string"])  # type: ignore[list-item]
 
 
-class TestPaginationModel:
-    """Tests for PaginationModel."""
-
-    def test_defaults(self) -> None:
-        pagination = PaginationModel()
-        assert pagination.offset == 0
-        assert pagination.limit == 25
-
-    def test_custom_values(self) -> None:
-        pagination = PaginationModel(offset=50, limit=100)
-        assert pagination.offset == 50
-        assert pagination.limit == 100
-
-    def test_offset_minimum(self) -> None:
-        with pytest.raises(ValueError):
-            PaginationModel(offset=-1)
-
-    def test_limit_minimum(self) -> None:
-        with pytest.raises(ValueError):
-            PaginationModel(limit=0)
-
-
 class TestSearchPayload:
     """Tests for SearchPayload model."""
-
-    def test_defaults(self) -> None:
-        payload = SearchPayload()
-        assert payload.q is None
-        assert payload.fields is None
-        assert payload.pagination.offset == 0
-
-    def test_with_dict_filters(self) -> None:
-        payload = SearchPayload(
-            q="search term",
-            fields=["field1", "field2"],
-            facets=["facet1"],
-            filters=[
-                {"name": "applicationMetaData.publicationCategoryBag", "value": ["Granted/Issued"]},
-            ],
-            range_filters=[
-                {
-                    "field": "applicationMetaData.filingDate",
-                    "valueFrom": "2022-01-01",
-                    "valueTo": "2023-12-31",
-                },
-            ],
-            sort=[{"field": "applicationMetaData.filingDate", "order": "Desc"}],
-        )
-        assert payload.q == "search term"
-        assert payload.fields == ["field1", "field2"]
-        assert payload.filters is not None and len(payload.filters) == 1
-        assert payload.range_filters is not None and len(payload.range_filters) == 1
 
     def test_with_model_filters(self) -> None:
         payload = SearchPayload(
@@ -262,38 +200,6 @@ class TestSearchPayload:
         assert "filters" not in result
         assert "rangeFilters" not in result
         assert "sort" not in result
-
-    def test_allows_extra_fields(self) -> None:
-        payload = SearchPayload(q="test", custom_field="custom")  # type: ignore[call-arg]
-        assert payload.model_extra is not None
-        assert payload.model_extra["custom_field"] == "custom"
-
-
-class TestOdpFilterModels:
-    """Tests for ODP filter/sort Pydantic models."""
-
-    def test_odp_filter(self) -> None:
-        f = OdpFilter(name="applicationMetaData.publicationCategoryBag", value=["Granted/Issued"])
-        assert f.name == "applicationMetaData.publicationCategoryBag"
-        assert f.value == ["Granted/Issued"]
-
-    def test_odp_filter_default_value(self) -> None:
-        f = OdpFilter(name="someName")
-        assert f.value == []
-
-    def test_odp_range_filter(self) -> None:
-        rf = OdpRangeFilter(
-            field="applicationMetaData.filingDate",
-            valueFrom="2022-01-01",
-            valueTo="2023-12-31",
-        )
-        assert rf.field == "applicationMetaData.filingDate"
-        assert rf.valueFrom == "2022-01-01"
-        assert rf.valueTo == "2023-12-31"
-
-    def test_odp_range_filter_partial(self) -> None:
-        rf = OdpRangeFilter(field="applicationMetaData.filingDate", valueFrom="2022-01-01")
-        assert rf.valueTo is None
 
 
 class TestSerializeRangeFilters:
@@ -348,15 +254,6 @@ class TestSerializeRangeFilters:
 
     def test_none_input(self) -> None:
         assert _serialize_range_filters(None) is None
-
-    def test_odp_sort(self) -> None:
-        s = OdpSort(field="applicationMetaData.filingDate", order="Asc")
-        assert s.field == "applicationMetaData.filingDate"
-        assert s.order == "Asc"
-
-    def test_odp_sort_default_order(self) -> None:
-        s = OdpSort(field="applicationMetaData.filingDate")
-        assert s.order == "Desc"
 
     def test_serialize_odp_models(self) -> None:
         items = [

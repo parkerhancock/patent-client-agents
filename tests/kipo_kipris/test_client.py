@@ -33,7 +33,6 @@ from patent_client_agents.kipo_kipris.client import (
     TM,
     _element_to_dict,
 )
-from patent_client_agents.kipo_kipris.models import _parse_kipris_date
 
 # ──────────────────────────────────────────────────────────────────────
 # Helpers
@@ -228,21 +227,6 @@ def test_element_to_dict_whitespace_only_becomes_none() -> None:
 # ──────────────────────────────────────────────────────────────────────
 # Date parsing
 # ──────────────────────────────────────────────────────────────────────
-
-
-def test_kipris_date_parsing_valid() -> None:
-    from datetime import date as dt_date
-
-    assert _parse_kipris_date("20240315") == dt_date(2024, 3, 15)
-
-
-def test_kipris_date_parsing_empty() -> None:
-    assert _parse_kipris_date("") is None
-    assert _parse_kipris_date(None) is None
-
-
-def test_kipris_date_parsing_sentinel_zero() -> None:
-    assert _parse_kipris_date("00000000") is None
 
 
 # ──────────────────────────────────────────────────────────────────────

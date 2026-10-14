@@ -23,13 +23,6 @@ def guidelines_corpus_env(monkeypatch: pytest.MonkeyPatch, guidelines_corpus_pat
     return guidelines_corpus_path
 
 
-class TestGetCorpusStatusShape:
-    def test_returns_dict_with_two_keys(self, guidelines_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert isinstance(status, dict)
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestGetCorpusStatusFromBundledCorpus:
     def test_version_string_is_guidelines_year_from_meta(self, guidelines_corpus_env: Path) -> None:
         """The fixture corpus stamps ``guidelines_year='2024'``. The

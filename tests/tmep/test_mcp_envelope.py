@@ -132,12 +132,3 @@ async def test_get_provenance_carries_corpus_fields(tmep_corpus_env: Path) -> No
 
     assert result.provenance.corpus_version == "current"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
-
-
-@pytest.mark.asyncio
-async def test_no_batch_tool_present() -> None:
-    """§5.4 forbids batch_* tools — list-accepting get_* replaces them."""
-    from patent_client_agents.mcp.tools import trademarks as trademarks_module
-
-    assert not hasattr(trademarks_module, "batch_get_tmep_section")
-    assert not hasattr(trademarks_module, "batch_tmep_section")

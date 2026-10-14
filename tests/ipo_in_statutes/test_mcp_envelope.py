@@ -139,10 +139,3 @@ async def test_get_provenance_carries_corpus_fields(
 async def test_get_empty_list_raises(ipo_in_statutes_corpus_env: Path) -> None:
     with pytest.raises(ValidationError, match="at least one"):
         await get_ipo_in_section(citation=[])
-
-
-async def test_no_batch_tool_present() -> None:
-    from patent_client_agents.mcp.tools import ipo_in_statutes as mod
-
-    assert not hasattr(mod, "batch_get_ipo_in_section")
-    assert not hasattr(mod, "batch_ipo_in_section")

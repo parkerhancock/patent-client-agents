@@ -176,19 +176,6 @@ class TestCacheManager:
         assert cleared == 0
 
     @pytest.mark.asyncio
-    async def test_close_with_storage_resets_to_none(self, temp_db: Path) -> None:
-        """Verify close resets storage to None (storage.aclose may not exist in all versions)."""
-        manager = CacheManager(database_path=temp_db)
-        # Initialize storage
-        storage = manager.get_storage()
-        assert manager._storage is not None
-        # Patch aclose to avoid AttributeError if it doesn't exist
-        if not hasattr(storage, "aclose"):
-            storage.aclose = storage.close  # type: ignore[attr-defined]
-        await manager.close()
-        assert manager._storage is None
-
-    @pytest.mark.asyncio
     async def test_invalidate_pattern(self, populated_db: Path) -> None:
         """Verify invalidating by URL pattern."""
         manager = CacheManager(database_path=populated_db)

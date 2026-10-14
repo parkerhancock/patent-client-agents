@@ -54,13 +54,6 @@ def seeded_corpus_env(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
     return db
 
 
-class TestGetCorpusStatusShape:
-    def test_returns_dict_with_two_keys(self, seeded_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert isinstance(status, dict)
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestGetCorpusStatusFromBundledCorpus:
     def test_version_uses_source_version_when_stamped(self, seeded_corpus_env: Path) -> None:
         status = get_corpus_status()

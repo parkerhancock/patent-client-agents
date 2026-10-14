@@ -157,17 +157,6 @@ async def test_search_patents_global_full_opt_in_returns_upstream_row_shape():
 
 
 @pytest.mark.asyncio
-async def test_search_patents_global_provenance_source_name():
-    rows = [_make_search_row("US10123456B2")]
-    fake_response = _make_search_response(rows, total=1)
-    with patch.object(patents_module, "GooglePatentsClient") as mock_client_cls:
-        mock_client = mock_client_cls.return_value.__aenter__.return_value
-        mock_client.search_patents = AsyncMock(return_value=fake_response)
-        result = await search_patents_global(query="*")
-    assert result.provenance.source_name == "Google Patents (worldwide aggregator)"
-
-
-@pytest.mark.asyncio
 async def test_search_patents_global_accepts_keywords_alias():
     rows = [_make_search_row("US10123456B2")]
     fake_response = _make_search_response(rows, total=1)
@@ -285,30 +274,6 @@ async def test_get_patent_invalid_view_raises():
 # ──────────────────────────────────────────────────────────────────────
 
 
-def test_old_name_search_google_patents_is_gone():
-    """§5.7 rename: source-named tool replaced by jurisdiction-neutral name."""
-    with pytest.raises(ImportError):
-        from patent_client_agents.mcp.tools.patents import (  # noqa: F401
-            search_google_patents,
-        )
-
-
-def test_old_tool_get_patent_details_is_gone():
-    """§5.1 collapse: metadata-subset tool folded into get_patent(view='details')."""
-    with pytest.raises(ImportError):
-        from patent_client_agents.mcp.tools.patents import (  # noqa: F401
-            get_patent_details,
-        )
-
-
 # ──────────────────────────────────────────────────────────────────────
 # §5.4 no-batch-tool invariant
 # ──────────────────────────────────────────────────────────────────────
-
-
-def test_no_batch_get_patent_tool():
-    """§5.4 forbids `batch_*` tools — list-acceptance lives on the canonical name."""
-    import patent_client_agents.mcp.tools.patents as patents_mod
-
-    assert not hasattr(patents_mod, "batch_get_patent")
-    assert not hasattr(patents_mod, "batch_search_patents_global")

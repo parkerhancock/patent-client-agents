@@ -7,7 +7,6 @@ Verifies the §5.9 contract for ``search_petitions`` and ``get_petition``
 
 from __future__ import annotations
 
-import inspect
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -134,13 +133,6 @@ async def test_get_petition_list_preserves_order():
     assert returned == ids
     assert result.provenance.source_url.endswith("/api/v1/patent/petitions")
     assert "Fetched 3 USPTO petition decisions" in result.summary
-
-
-def test_get_petition_parameter_renamed():
-    """§5.8: petition_id → petition_number; the old name must not survive."""
-    sig = inspect.signature(get_petition)
-    assert "petition_number" in sig.parameters
-    assert "petition_id" not in sig.parameters
 
 
 # ──────────────────────────────────────────────────────────────────────

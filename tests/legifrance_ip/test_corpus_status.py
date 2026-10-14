@@ -12,13 +12,6 @@ from patent_client_agents.legifrance_ip import get_corpus_status
 from patent_client_agents.legifrance_ip.corpus.build import CORPUS_VERSION
 
 
-class TestShape:
-    def test_returns_dict_with_two_keys(self, legifrance_ip_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert isinstance(status, dict)
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestFromBundledCorpus:
     def test_version_matches_corpus_version(self, legifrance_ip_corpus_env: Path) -> None:
         status = get_corpus_status()

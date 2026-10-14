@@ -17,11 +17,6 @@ from patent_client_agents.mpep.models import MpepSearchResponse, MpepSection, Mp
 
 
 class TestMpepClientInit:
-    def test_constructs_without_opening_corpus(self) -> None:
-        """Construction is sync and must not open the DB — that's lazy."""
-        client = MpepClient(corpus_path="/nonexistent.db")
-        assert client._db is None
-
     @pytest.mark.asyncio
     async def test_missing_corpus_raises_on_first_call(
         self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path

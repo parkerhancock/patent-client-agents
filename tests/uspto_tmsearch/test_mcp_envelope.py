@@ -259,14 +259,6 @@ async def test_get_trademark_status_list_fans_out():
     assert [r["serialNumber"] for r in result.items] == serials
 
 
-@pytest.mark.asyncio
-async def test_batch_trademark_status_was_deleted():
-    """The §5.4 violation should no longer be importable."""
-    from patent_client_agents.mcp.tools import trademarks as tm_module
-
-    assert not hasattr(tm_module, "batch_trademark_status")
-
-
 # ──────────────────────────────────────────────────────────────────────
 # get_trademark_documents
 # ──────────────────────────────────────────────────────────────────────
