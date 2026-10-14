@@ -63,14 +63,6 @@ async def test_search_full_true_returns_upstream_shape(tmep_corpus_env: Path) ->
     assert "title" in item
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "Source bug: TMEP get_corpus_status surfaces the eTMEP 'current' query label "
-        "as corpus_version; per CONNECTOR_STANDARDS.md §4 and the MPEP precedent, "
-        "absent release evidence must report 'unknown'."
-    ),
-)
 @pytest.mark.asyncio
 async def test_search_provenance_carries_corpus_fields(tmep_corpus_env: Path) -> None:
     """§4: substantive-law Provenance must surface ``corpus_synced_at`` and
@@ -128,14 +120,6 @@ async def test_get_list_preserves_order(tmep_corpus_env: Path) -> None:
     assert result.provenance.source_url.endswith("/RDMS/TMEP/result")
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "Source bug: TMEP get_corpus_status surfaces the eTMEP 'current' query label "
-        "as corpus_version; per CONNECTOR_STANDARDS.md §4 and the MPEP precedent, "
-        "absent release evidence must report 'unknown'."
-    ),
-)
 @pytest.mark.asyncio
 async def test_get_provenance_carries_corpus_fields(tmep_corpus_env: Path) -> None:
     """The Provenance.corpus_version stamp must be present on get_* too,

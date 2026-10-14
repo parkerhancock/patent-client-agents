@@ -27,14 +27,6 @@ class TestGetCorpusStatusShape:
 
 
 class TestGetCorpusStatusFromBundledCorpus:
-    @pytest.mark.xfail(
-        strict=True,
-        reason=(
-            "Source bug: TMEP get_corpus_status surfaces the eTMEP 'current' query label "
-            "as corpus_version; per CONNECTOR_STANDARDS.md §4 and the MPEP precedent, "
-            "absent release evidence must report 'unknown'."
-        ),
-    )
     def test_current_source_version_reports_unknown(self, tmep_corpus_env: Path) -> None:
         """``write_corpus`` stamps ``source_version='current'`` (see
         ``corpus/build.py``). That label is the eTMEP query parameter, not

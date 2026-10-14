@@ -100,13 +100,6 @@ class TestTitleFromBody:
         body = "Primeira frase curta. Segunda frase mais longa segue."
         assert _title_from_body(body) == "Primeira frase curta."
 
-    @pytest.mark.xfail(
-        strict=True,
-        reason=(
-            "Source bug: _title_from_body treats the period in the 'Art.' heading "
-            "as a sentence break, so every Planalto article title becomes 'Art.'."
-        ),
-    )
     def test_does_not_split_inside_article_heading(self) -> None:
         body = "Art. 6º Primeira frase curta. Segunda frase mais longa segue."
         assert _title_from_body(body) == "Art. 6º Primeira frase curta."
