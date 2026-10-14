@@ -15,6 +15,7 @@ Tools backed by:
 from __future__ import annotations
 
 import asyncio
+from datetime import datetime
 from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
@@ -159,27 +160,35 @@ def _tmep_section_to_dict(section: Any, *, section_number: str | None) -> dict:
     return data
 
 
+def _iso_date(value: Any) -> str | None:
+    return value.date().isoformat() if isinstance(value, datetime) else None
+
+
+def _tm_status(record: dict) -> str | None:
+    live = record.get("status_live")
+    return None if live is None else ("live" if live else "dead")
+
+
 def _stub_trademark(record: dict) -> dict:
-    """Lean projection of a TESS trademark search row (§5.5)."""
+    """Lean projection of a ``TrademarkSearchResult`` dump (§5.5)."""
     return {
-        "serial_number": record.get("serialNumber"),
-        "registration_number": record.get("registrationNumber"),
-        "wordmark": record.get("wordmark") or record.get("markIdentification"),
-        "owner_name": record.get("ownerName"),
-        "filing_date": record.get("filingDate"),
-        "registration_date": record.get("registrationDate"),
-        "status_code": record.get("statusCode"),
-        "status_text": record.get("statusText") or record.get("status"),
+        "serial_number": record.get("serial_number"),
+        "registration_number": record.get("registration_number"),
+        "wordmark": record.get("wordmark"),
+        "owner_name": record.get("owner_name"),
+        "filing_date": _iso_date(record.get("filed_date")),
+        "registration_date": _iso_date(record.get("registration_date")),
+        "status": _tm_status(record),
     }
 
 
 def _summarize_trademark(record: dict) -> str:
     """One-line Markdown summary of a single trademark record."""
-    serial = record.get("serialNumber") or "(no serial)"
-    mark = record.get("wordmark") or record.get("markIdentification") or "(no mark)"
-    owner = record.get("ownerName") or "(no owner)"
-    status = record.get("statusText") or record.get("status") or "(unknown status)"
-    reg = record.get("registrationNumber")
+    serial = record.get("serial_number") or "(no serial)"
+    mark = record.get("wordmark") or "(no mark)"
+    owner = "; ".join(record.get("owner_name") or []) or "(no owner)"
+    status = _tm_status(record) or "(unknown status)"
+    reg = record.get("registration_number")
     head = f"**US trademark {serial}** — {mark} (owner: {owner})"
     line = f"Status: {status}."
     if reg:

@@ -24,25 +24,14 @@ from patent_client_agents.mcp.tools.trademarks import (
     get_trademark_status,
     search_trademarks,
 )
+from patent_client_agents.uspto_tmsearch.models import (
+    TrademarkSearchResponse,
+    TrademarkSearchResult,
+)
 
 # ──────────────────────────────────────────────────────────────────────
 # Fakes
 # ──────────────────────────────────────────────────────────────────────
-
-
-class _FakeTrademark(BaseModel):
-    serialNumber: str
-    registrationNumber: str | None = None
-    wordmark: str = "TESTMARK"
-    ownerName: str = "Test Co."
-    filingDate: str = "2020-01-15"
-    registrationDate: str | None = None
-    statusCode: str = "700"
-    statusText: str = "Registered"
-
-
-class _FakeSearchResponse(BaseModel):
-    results: list[_FakeTrademark] = []
 
 
 class _FakeTsdrStatus(BaseModel):
@@ -62,8 +51,21 @@ class _FakeLastUpdate(BaseModel):
     lastUpdate: str
 
 
-def _make_tm(serial: str, *, wordmark: str = "TESTMARK", reg: str | None = None) -> _FakeTrademark:
-    return _FakeTrademark(serialNumber=serial, wordmark=wordmark, registrationNumber=reg)
+def _make_tm(
+    serial: str, *, wordmark: str = "TESTMARK", reg: str | None = None
+) -> TrademarkSearchResult:
+    """A real result model, parsed from the camelCase shape the TMSearch API returns."""
+    return TrademarkSearchResult.model_validate(
+        {
+            "serialNumber": serial,
+            "registrationNumber": reg,
+            "wordmark": wordmark,
+            "alive": True,
+            "ownerName": ["Test Co."],
+            "filedDate": "2020-01-15T00:00:00Z",
+            "registrationDate": "2021-03-02T00:00:00Z" if reg else None,
+        }
+    )
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -100,7 +102,7 @@ class TestClassifyIdentifier:
 
 @pytest.mark.asyncio
 async def test_search_trademarks_returns_lean_list_envelope_by_default():
-    response = _FakeSearchResponse(
+    response = TrademarkSearchResponse(
         results=[_make_tm("97123456", wordmark="ACME"), _make_tm("97654321", wordmark="WIDGET")]
     )
     with patch("patent_client_agents.mcp.tools.trademarks.TmsearchClient") as mock_cls:
@@ -120,24 +122,31 @@ async def test_search_trademarks_returns_lean_list_envelope_by_default():
         "owner_name",
         "filing_date",
         "registration_date",
-        "status_code",
-        "status_text",
+        "status",
     }
-    assert result.items[0]["serial_number"] == "97123456"
+    assert result.items[0] == {
+        "serial_number": "97123456",
+        "registration_number": None,
+        "wordmark": "ACME",
+        "owner_name": ["Test Co."],
+        "filing_date": "2020-01-15",
+        "registration_date": None,
+        "status": "live",
+    }
     assert "ACME" in result.summary
 
 
 @pytest.mark.asyncio
 async def test_search_trademarks_full_true_returns_upstream_shape():
-    response = _FakeSearchResponse(results=[_make_tm("97123456")])
+    response = TrademarkSearchResponse(results=[_make_tm("97123456")])
     with patch("patent_client_agents.mcp.tools.trademarks.TmsearchClient") as mock_cls:
         mock_client = mock_cls.return_value.__aenter__.return_value
         mock_client.search = AsyncMock(return_value=response)
 
         result = await search_trademarks(query="ACME", full=True)
 
-    assert "serialNumber" in result.items[0]
-    assert result.items[0]["serialNumber"] == "97123456"
+    assert result.items[0]["serial_number"] == "97123456"
+    assert result.items[0]["goods_and_services"] is None
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -159,8 +168,7 @@ async def test_get_trademark_single_serial_dispatches_to_serial_method():
     mock_client.get_by_registration.assert_not_awaited()
     assert isinstance(result, ListEnvelope)
     assert len(result.items) == 1
-    assert "97123456" in result.summary
-    assert "ACME" in result.summary
+    assert result.summary == ("**US trademark 97123456** — ACME (owner: Test Co.)\nStatus: live.")
 
 
 @pytest.mark.asyncio
@@ -176,6 +184,7 @@ async def test_get_trademark_single_registration_dispatches_to_registration_meth
     mock_client.get_by_registration.assert_awaited_once_with("1234567")
     mock_client.get_by_serial.assert_not_awaited()
     assert len(result.items) == 1
+    assert "Registration 1234567." in result.summary
 
 
 @pytest.mark.asyncio
@@ -187,7 +196,7 @@ async def test_get_trademark_list_preserves_order():
 
         result = await get_trademark(serial_number=["97000001", "97000002", "97000003"])
 
-    assert [r["serialNumber"] for r in result.items] == ["97000001", "97000002", "97000003"]
+    assert [r["serial_number"] for r in result.items] == ["97000001", "97000002", "97000003"]
     assert "3 of 3" in result.summary
 
 
