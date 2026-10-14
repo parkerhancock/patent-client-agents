@@ -28,6 +28,44 @@ All estimates come from the agents' line counts and haven't been checked by
 implementing anything. The corpus estimate is the softest of them: 2,200 of its
 6,700 lines depend on how cleanly the 8 outline packages fold into one generic layer.
 
+## Status (updated 2026-10-14)
+
+Phase 0 is closed and Phase 1 is done. Fixed and merged:
+
+- the 4 bugs confirmed below
+- the fee effective dates (#117)
+- 8 more bugs found while tightening tests: the TMSearch lean fields,
+  Thai DIP exact match, EPO quota headers, Assignment Center provenance,
+  TMEP "current" version, INPI Brazil titles, TIPO goods classes, EUIPO
+  multilingual fields, and PPUBS stale caseId (#112-#127)
+
+The `_build_url` passthrough and `transport=` shipped in mcp-data-core
+0.12.0 and 0.13.0.
+
+Test-suite work done in Phase 0:
+
+- Removed the DELETE-verdict tests that no other coverage depends on, with no
+  coverage loss (#118). The rest are listed in `tests-kept-for-coverage.md`.
+- Fixed tests that passed without checking behavior (#119-#121).
+- Moved the IP Australia, EUIPO, Thai DIP, IPONZ, Swiss IPI, EPO/CPC, PRH,
+  PRV and PPUBS suites from `client=` to `transport=`, so auth runs under
+  test (#122-#126).
+
+Left open when Phase 0 stopped:
+
+- About 149 `client=` uses in tests. Most are the `api.py` wrapper tests,
+  which go away with `one_shot()` in Phase 4.
+- Envelope shape-assertion cleanup. This is smaller than estimated: about 300
+  assertions and 24 shape-only tests, since `validate_mcp_contracts.py`
+  already checks shape.
+- Moving `test_core.py` and `test_cache.py` to mcp-data-core.
+- Gap tests:
+  - fee source fixtures for 15 routes
+  - collection paging, including the `offset // limit` rounding
+  - collection build smoke tests
+  - a Google Patents page fixture
+  - `ApplicationsClient` over HTTP
+
 ## Bugs found
 
 These were confirmed by running code or by reading the line that causes them:
