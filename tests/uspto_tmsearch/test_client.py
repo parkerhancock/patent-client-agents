@@ -59,8 +59,8 @@ class TestTmsearchClient:
     async def test_get_by_serial(self, client: TmsearchClient) -> None:
         """Test getting a trademark by serial number."""
         result = await client.get_by_serial("97123456")
-        if result:
-            assert result.serial_number == "97123456"
+        assert result is not None
+        assert result.serial_number == "97123456"
 
     async def test_combined_search(self, client: TmsearchClient) -> None:
         """Test combined search criteria."""
@@ -79,8 +79,9 @@ class TestTmsearchClient:
         page1 = await client.search_wordmark("APPLE", size=10, from_=0)
         page2 = await client.search_wordmark("APPLE", size=10, from_=10)
 
-        if page1.results and page2.results:
-            assert page1.results[0].serial_number != page2.results[0].serial_number
+        assert len(page1.results) == 10
+        assert len(page2.results) == 10
+        assert page1.results[0].serial_number != page2.results[0].serial_number
 
 
 class TestTmsearchClientNoToken:

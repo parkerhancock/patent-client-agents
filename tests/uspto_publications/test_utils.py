@@ -22,23 +22,17 @@ class TestHtmlToText:
     def test_converts_br_tags_to_newlines(self) -> None:
         html = "Line one<br>Line two"
         result = html_to_text(html)
-        assert result is not None
-        assert "Line one" in result
-        assert "Line two" in result
+        assert result == "Line one\n\nLine two"
 
     def test_converts_br_self_closing(self) -> None:
         html = "Line one<br/>Line two"
         result = html_to_text(html)
-        assert result is not None
-        assert "Line one" in result
-        assert "Line two" in result
+        assert result == "Line one\n\nLine two"
 
     def test_converts_br_with_space(self) -> None:
         html = "Line one<br />Line two"
         result = html_to_text(html)
-        assert result is not None
-        assert "Line one" in result
-        assert "Line two" in result
+        assert result == "Line one\n\nLine two"
 
     def test_strips_nested_tags(self) -> None:
         html = "<div><p><b>Bold</b> and <i>italic</i></p></div>"

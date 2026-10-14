@@ -51,6 +51,24 @@ def _make_record(
     )
 
 
+@pytest.mark.xfail(strict=True, reason="provenance reports retired host; see PR")
+@pytest.mark.asyncio
+async def test_search_patent_assignments_provenance_matches_request_url():
+    """Provenance must name the endpoint AssignmentCenterClient actually calls."""
+    results = SearchResults(records=[_make_record(reel=100, frame=10)], total=1, truncated=False)
+
+    with patch(
+        "patent_client_agents.mcp.tools.patent_assignments.AssignmentCenterClient"
+    ) as mock_cls:
+        mock_client = mock_cls.return_value.__aenter__.return_value
+        mock_client.search = AsyncMock(return_value=results)
+        result = await search_patent_assignments(query="Acme Corp", by="assignee")
+
+    assert result.provenance.source_url == (
+        "https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent"
+    )
+
+
 @pytest.mark.asyncio
 async def test_search_patent_assignments_returns_lean_envelope():
     records = [_make_record(reel=100 + i, frame=10 + i) for i in range(3)]
@@ -66,8 +84,6 @@ async def test_search_patent_assignments_returns_lean_envelope():
     assert isinstance(result, ListEnvelope)
     assert isinstance(result.provenance, Provenance)
     assert result.provenance.source_name == "USPTO Patent Assignment Center"
-    assert "assignment-api.uspto.gov" in result.provenance.source_url
-    assert "/PatentAssignmentSearch/" in result.provenance.source_url
     assert len(result.items) == 3
     assert "3 of 42 hits" in result.summary
     # Lean projection: practitioner-facing fields only.

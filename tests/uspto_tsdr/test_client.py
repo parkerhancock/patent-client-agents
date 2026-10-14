@@ -60,13 +60,26 @@ class TestTsdrClientLive:
         async with TsdrClient() as client:
             info = await client.get_last_update("78787878")
             assert info.serial_number == "78787878"
+            # Derived from the most recent prosecution-history event.
+            assert info.last_update_date == "2020-10-14"
 
     @pytest.mark.asyncio
     async def test_get_documents(self, vcr_cassette) -> None:
         """Test getting document list."""
         async with TsdrClient() as client:
             docs = await client.get_documents("78787878")
-            assert isinstance(docs, list)
+            assert len(docs) == 16
+            first = docs[0]
+            assert first.doc_id == "78787878-CDR"
+            assert first.doc_type == "CDR"
+            assert first.doc_category == "Incoming"
+            assert first.doc_date == "2025-01-02"
+            assert first.description == "Change Domestic Rep."
+            assert first.page_count == 10
+            last = docs[-1]
+            assert last.doc_type == "FTK"
+            assert last.description == "TEAS Plus New Appl"
+            assert last.doc_date == "2006-01-09"
 
     @pytest.mark.asyncio
     async def test_get_image(self, vcr_cassette) -> None:
