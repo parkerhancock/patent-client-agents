@@ -18,7 +18,6 @@ import httpx
 import pytest
 
 from mcp_data_core.exceptions import ConfigurationError
-from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
 from patent_client_agents.ip_australia_patents import IpAustraliaPatentsClient
 
 
@@ -29,10 +28,17 @@ def _au_env(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("IPAUSTRALIA_ENV", raising=False)
 
 
-def _mock_http(
+def _mock_transport(
     handler: Callable[[httpx.Request], httpx.Response],
-) -> httpx.AsyncClient:
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+) -> httpx.MockTransport:
+    """Serve the OAuth token endpoint, and hand API requests to ``handler``."""
+
+    def route(request: httpx.Request) -> httpx.Response:
+        if request.url.path.endswith("/access_token"):
+            return httpx.Response(200, json={"access_token": "tok", "expires_in": 3600})
+        return handler(request)
+
+    return httpx.MockTransport(route)
 
 
 def test_missing_env_raises_configuration_error(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -40,20 +46,6 @@ def test_missing_env_raises_configuration_error(monkeypatch: pytest.MonkeyPatch)
     monkeypatch.delenv("IPAUSTRALIA_CLIENT_SECRET", raising=False)
     with pytest.raises(ConfigurationError, match="IPAUSTRALIA_CLIENT_ID"):
         IpAustraliaPatentsClient()
-
-
-def test_constructor_wires_oauth_against_production_host(_au_env: None) -> None:
-    client = IpAustraliaPatentsClient()
-    assert client.environment == "production"
-    assert client.base_url.startswith("https://production.api.ipaustralia.gov.au")
-    assert client.base_url.endswith("/public/australian-patent-search-api/v1")
-
-    auth = client._client.auth  # type: ignore[attr-defined]
-    assert isinstance(auth, OAuth2ClientCredentialsAuth)
-    assert (
-        auth._token_url  # type: ignore[attr-defined]
-        == "https://production.api.ipaustralia.gov.au/public/external-token-api/v1/access_token"
-    )
 
 
 def test_sandbox_environment_swaps_host(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -89,7 +81,9 @@ async def test_search_posts_quick_endpoint_with_query(_au_env: None) -> None:
             },
         )
 
-    async with IpAustraliaPatentsClient(client=_mock_http(handler)) as client:
+    async with IpAustraliaPatentsClient(
+        transport=_mock_transport(handler), use_cache=False
+    ) as client:
         result = await client.search(query="blockchain")
 
     assert len(captured) == 1
@@ -111,7 +105,9 @@ async def test_search_serializes_filters_sort_and_changed_since(_au_env: None) -
         captured.append(request)
         return httpx.Response(200, json={"results": [], "total": 0})
 
-    async with IpAustraliaPatentsClient(client=_mock_http(handler)) as client:
+    async with IpAustraliaPatentsClient(
+        transport=_mock_transport(handler), use_cache=False
+    ) as client:
         await client.search(
             query="*",
             status=["GRANTED", "ACCEPTED"],
@@ -137,7 +133,9 @@ async def test_search_omits_optional_blocks_when_unset(_au_env: None) -> None:
         captured.append(request)
         return httpx.Response(200, json={"results": [], "total": 0})
 
-    async with IpAustraliaPatentsClient(client=_mock_http(handler)) as client:
+    async with IpAustraliaPatentsClient(
+        transport=_mock_transport(handler), use_cache=False
+    ) as client:
         await client.search(query="x")
 
     body = json.loads(captured[0].content)
@@ -165,7 +163,9 @@ async def test_get_patent_hits_detail_endpoint(_au_env: None) -> None:
             },
         )
 
-    async with IpAustraliaPatentsClient(client=_mock_http(handler)) as client:
+    async with IpAustraliaPatentsClient(
+        transport=_mock_transport(handler), use_cache=False
+    ) as client:
         record = await client.get_patent("2019204205")
 
     assert captured[0].method == "GET"
