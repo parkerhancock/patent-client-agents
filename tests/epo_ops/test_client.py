@@ -276,26 +276,21 @@ class TestForbiddenErrorBuilder:
     def test_builds_error_with_all_headers(self) -> None:
         import httpx
 
-        # Note: httpx lowercases header keys, so the client code needs to
-        # handle case-insensitive header lookup. This test verifies behavior
-        # with the actual lowercase keys httpx returns.
         response = httpx.Response(
             403,
             headers={
-                "x-rejection-reason": "IndividualQuotaPerHour",
-                "x-throttling-control": "busy",
-                "x-individualquotaperhour-used": "100",
-                "x-registeredquotaperweek-used": "500",
-                "x-registeredpayingquotaperweek-used": "0",
+                "X-Rejection-Reason": "IndividualQuotaPerHour",
+                "X-Throttling-Control": "busy",
+                "X-IndividualQuotaPerHour-Used": "100",
+                "X-RegisteredQuotaPerWeek-Used": "500",
+                "X-RegisteredPayingQuotaPerWeek-Used": "0",
             },
         )
         error = EpoOpsClient._build_forbidden_error(response)
-        # Due to case sensitivity in dict.get(), this currently doesn't extract headers.
-        # This test documents the current behavior. A future fix should make it
-        # case-insensitive.
-        # For now, verify it at least returns a valid error
-        assert "EPO OPS returned 403" in str(error)
-        assert error.headers is not None
+        assert str(error).startswith(
+            "EPO OPS returned 403 (reason=IndividualQuotaPerHour; throttling=busy; "
+            "hourly_used=100; weekly_used=500; paid_used=0)"
+        )
 
     def test_builds_error_with_no_headers(self) -> None:
         import httpx

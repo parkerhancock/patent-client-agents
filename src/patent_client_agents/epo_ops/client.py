@@ -255,11 +255,13 @@ class EpoOpsClient(BaseAsyncClient):
     def _build_forbidden_error(response: httpx.Response) -> OpsForbiddenError:
         headers = {k: v for k, v in response.headers.items()}
         details = []
-        reason = headers.get("X-Rejection-Reason")
-        throttling = headers.get("X-Throttling-Control")
-        hourly = headers.get("X-IndividualQuotaPerHour-Used")
-        weekly = headers.get("X-RegisteredQuotaPerWeek-Used")
-        paid = headers.get("X-RegisteredPayingQuotaPerWeek-Used")
+        # Read from response.headers: it's case-insensitive, while the plain dict
+        # copy holds httpx's lowercased names.
+        reason = response.headers.get("X-Rejection-Reason")
+        throttling = response.headers.get("X-Throttling-Control")
+        hourly = response.headers.get("X-IndividualQuotaPerHour-Used")
+        weekly = response.headers.get("X-RegisteredQuotaPerWeek-Used")
+        paid = response.headers.get("X-RegisteredPayingQuotaPerWeek-Used")
         if reason:
             details.append(f"reason={reason}")
         if throttling:
