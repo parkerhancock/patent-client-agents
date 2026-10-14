@@ -28,8 +28,8 @@ from patent_client_agents.prv_se.client import (
 )
 
 
-def _mock(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.AsyncClient:
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+def _mock(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.MockTransport:
+    return httpx.MockTransport(handler)
 
 
 def _fixture(name: str) -> dict:
@@ -110,14 +110,21 @@ async def test_search_patents_routes_to_patents_host() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("patents-search.json"))
 
-    async with PrvClient(client=_mock(handler)) as client:
-        await client.search_patents(text="Volvo", page_size=5)
+    async with PrvClient(transport=_mock(handler), use_cache=False) as client:
+        result = await client.search_patents(text="Volvo", page_size=5)
 
+    assert result.total_hits == 3309
     assert len(captured) == 1
-    assert str(captured[0].url).startswith(PATENTS_HOST)
-    assert captured[0].url.path == "/searchpatent/patentsimplesearch/"
-    body = json.loads(captured[0].content)
+    req = captured[0]
+    assert req.method == "POST"
+    assert str(req.url) == f"{PATENTS_HOST}/searchpatent/patentsimplesearch/"
+    # The client's own headers reach the wire: courtesy UA names a contact.
+    assert "patent-client-agents" in req.headers["User-Agent"]
+    assert "data@prv.se" in req.headers["User-Agent"]
+    assert req.headers["Content-Type"] == "application/json"
+    body = json.loads(req.content)
     assert body["simpleSearchText"] == "Volvo"
+    assert body["pageSize"] == 5
 
 
 @pytest.mark.asyncio
@@ -128,11 +135,10 @@ async def test_search_trademarks_routes_to_dv_host() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("tm-search.json"))
 
-    async with PrvClient(client=_mock(handler)) as client:
+    async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_trademarks(text="IKEA")
 
-    assert str(captured[0].url).startswith(DV_HOST)
-    assert captured[0].url.path == "/searchtrademark/tmsimplesearch/"
+    assert str(captured[0].url) == f"{DV_HOST}/searchtrademark/tmsimplesearch/"
 
 
 @pytest.mark.asyncio
@@ -143,11 +149,10 @@ async def test_search_designs_routes_to_dv_host() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("design-search.json"))
 
-    async with PrvClient(client=_mock(handler)) as client:
+    async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_designs(text="stol")
 
-    assert str(captured[0].url).startswith(DV_HOST)
-    assert captured[0].url.path == "/searchdesign/dssimplesearch/"
+    assert str(captured[0].url) == f"{DV_HOST}/searchdesign/dssimplesearch/"
 
 
 @pytest.mark.asyncio
@@ -158,13 +163,12 @@ async def test_get_patent_routes_to_api_host_with_query_param() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("patent-get.json"))
 
-    async with PrvClient(client=_mock(handler)) as client:
+    async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.get_patent("SE2615555-6")
 
     req = captured[0]
-    assert str(req.url).startswith(API_HOST)
-    assert req.url.path == "/patents/applications/SE2615555-6"
-    assert req.url.params["applicationType"] == "NAT"
+    assert str(req.url) == f"{API_HOST}/patents/applications/SE2615555-6?applicationType=NAT"
+    assert req.method == "GET"
 
 
 @pytest.mark.asyncio
@@ -175,7 +179,7 @@ async def test_get_patent_accepts_application_type_override() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("patent-get.json"))
 
-    async with PrvClient(client=_mock(handler)) as client:
+    async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.get_patent("SE2615555-6", application_type="EP")
 
     assert captured[0].url.params["applicationType"] == "EP"
@@ -183,21 +187,11 @@ async def test_get_patent_accepts_application_type_override() -> None:
 
 @pytest.mark.asyncio
 async def test_get_patent_rejects_empty_application_number() -> None:
-    async with PrvClient(client=_mock(lambda _: httpx.Response(200, json={}))) as client:
+    async with PrvClient(
+        transport=_mock(lambda _: httpx.Response(200, json={})), use_cache=False
+    ) as client:
         with pytest.raises(ValueError):
             await client.get_patent("")
-
-
-# ----------------------------------------------------------------------
-# Courtesy User-Agent identifies project + contact
-# ----------------------------------------------------------------------
-
-
-def test_default_user_agent_identifies_project() -> None:
-    from patent_client_agents.prv_se.client import DEFAULT_USER_AGENT
-
-    assert "patent-client-agents" in DEFAULT_USER_AGENT
-    assert "data@prv.se" in DEFAULT_USER_AGENT
 
 
 # ----------------------------------------------------------------------
@@ -276,12 +270,11 @@ async def test_search_spcs_routes_to_patents_host_with_wrapper_body() -> None:
         captured.append(request)
         return httpx.Response(200, json=_fixture("spc-search.json"))
 
-    async with PrvClient(client=_mock(handler)) as client:
+    async with PrvClient(transport=_mock(handler), use_cache=False) as client:
         await client.search_spcs(applicants="AstraZeneca")
 
     req = captured[0]
-    assert str(req.url).startswith(PATENTS_HOST)
-    assert req.url.path == "/searchpatentspc/patentsearchspc/"
+    assert str(req.url) == f"{PATENTS_HOST}/searchpatentspc/patentsearchspc/"
     body = json.loads(req.content)
     # Filter wrapped as {value, searchType}.
     assert body["applicants"] == {"value": "AstraZeneca", "searchType": "CONTAINS"}
@@ -289,7 +282,9 @@ async def test_search_spcs_routes_to_patents_host_with_wrapper_body() -> None:
 
 @pytest.mark.asyncio
 async def test_search_spcs_rejects_empty_filters() -> None:
-    async with PrvClient(client=_mock(lambda _: httpx.Response(200, json={}))) as client:
+    async with PrvClient(
+        transport=_mock(lambda _: httpx.Response(200, json={})), use_cache=False
+    ) as client:
         with pytest.raises(ValueError, match="search_spcs requires"):
             await client.search_spcs()
 

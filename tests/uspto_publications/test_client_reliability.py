@@ -1,291 +1,308 @@
-"""Reliability regressions for the USPTO Patent Public Search client."""
+"""Reliability regressions for the USPTO Patent Public Search client.
+
+Every client test drives the public ``PublicSearchClient`` methods against
+``FakePpubs``, an in-process PPUBS served through ``httpx.MockTransport``.
+The real session bootstrap, session refresh, caseId rewrite, typed-error
+mapping and retry decorator all run; only the network and the retry backoff
+are replaced.
+"""
 
 from __future__ import annotations
 
 import asyncio
-from unittest.mock import AsyncMock, patch
+import json
+from typing import Any
+from unittest.mock import AsyncMock, call, patch
 
 import httpx
 import pytest
+import tenacity
 
+import mcp_data_core.resilience as resilience
 from mcp_data_core.exceptions import (
     RateLimitError,
     RetryableAuthenticationError,
+    ServerError,
     ValidationError,
 )
-from patent_client_agents.uspto_publications.client import PublicSearchClient
+from patent_client_agents.uspto_publications.client import (
+    PublicSearchClient,
+    PublicSearchError,
+    check_query_syntax,
+)
+from tests.uspto_publications.fake_ppubs import (
+    BASE,
+    COUNTS,
+    HIGHLIGHT,
+    SEARCH,
+    SESSION,
+    FakePpubs,
+)
 
 
-def _response(status_code: int, *, json: object | None = None) -> httpx.Response:
-    return httpx.Response(
-        status_code,
-        json=json,
-        request=httpx.Request("POST", "https://ppubs.uspto.gov/api/test"),
-    )
+@pytest.fixture(autouse=True)
+def _no_retry_backoff(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Keep the real retry policy (attempts, retryable errors) but skip backoff."""
+    real = resilience.default_retryer
+
+    def no_wait(**kwargs: Any) -> tenacity.AsyncRetrying:
+        retryer = real(**kwargs)
+        retryer.wait = tenacity.wait_none()
+        return retryer
+
+    monkeypatch.setattr(resilience, "default_retryer", no_wait)
 
 
-@pytest.mark.asyncio
-async def test_request_retries_transient_server_error() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    http.request = AsyncMock(side_effect=[_response(500), _response(200, json={})])
-    client = PublicSearchClient(client=http)
-
-    response = await client._request("POST", "https://ppubs.uspto.gov/api/test")
-
-    assert response.status_code == 200
-    assert http.request.await_count == 2
+@pytest.fixture
+def ppubs() -> FakePpubs:
+    return FakePpubs()
 
 
-@pytest.mark.asyncio
-async def test_request_retries_transport_timeout() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    http.request = AsyncMock(
-        side_effect=[
-            httpx.ReadTimeout("PPUBS read timed out"),
-            _response(200, json={}),
-        ]
-    )
-    client = PublicSearchClient(client=http)
-
-    response = await client._request("POST", "https://ppubs.uspto.gov/api/test")
-
-    assert response.status_code == 200
-    assert http.request.await_count == 2
+def _client(ppubs: FakePpubs) -> PublicSearchClient:
+    return PublicSearchClient(transport=ppubs.transport())
 
 
 @pytest.mark.asyncio
-async def test_persistent_403_is_typed_retryable_authentication_error() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    http.request = AsyncMock(side_effect=[_response(403), _response(403)])
-    client = PublicSearchClient(client=http)
-    client._refresh_session_once = AsyncMock()
+async def test_search_bootstraps_session_and_sends_its_token_and_case_id(
+    ppubs: FakePpubs,
+) -> None:
+    async with _client(ppubs) as client:
+        page = await client.search_biblio(query="neural.CLM.")
 
-    with pytest.raises(RetryableAuthenticationError):
-        await client._request.__wrapped__(client, "POST", "https://ppubs.uspto.gov/api/test")
-
-    client._refresh_session_once.assert_awaited_once()
+    assert [d.publication_number for d in page.docs] == ["20230123456"]
+    assert page.num_documents == 1
+    assert [str(r.url) for r in ppubs.requests] == [
+        f"{BASE}/pubwebapp/",
+        f"{BASE}{SESSION}",
+        f"{BASE}{COUNTS}",
+        f"{BASE}{SEARCH}",
+    ]
+    counts, search = ppubs.hits(COUNTS)[0], ppubs.hits(SEARCH)[0]
+    assert counts.headers["X-Access-Token"] == "token-123"
+    assert json.loads(counts.content)["caseId"] == 123
+    assert json.loads(search.content)["query"]["caseId"] == 123
 
 
 @pytest.mark.asyncio
-async def test_429_is_typed_rate_limit_error() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    http.request = AsyncMock(
-        return_value=httpx.Response(
-            429,
-            headers={"x-rate-limit-retry-after-seconds": "3"},
-            request=httpx.Request("POST", "https://ppubs.uspto.gov/api/test"),
-        )
-    )
-    client = PublicSearchClient(client=http)
+async def test_request_retries_transient_server_error(ppubs: FakePpubs) -> None:
+    ppubs.queue(COUNTS, httpx.Response(500))
 
-    with patch(
-        "patent_client_agents.uspto_publications.client.asyncio.sleep",
-        new=AsyncMock(),
-    ) as sleep:
-        with pytest.raises(RateLimitError) as exc_info:
-            await client._request.__wrapped__(client, "POST", "https://ppubs.uspto.gov/api/test")
+    async with _client(ppubs) as client:
+        page = await client.search_biblio(query="neural.CLM.")
+
+    assert len(page.docs) == 1
+    assert len(ppubs.hits(COUNTS)) == 2
+
+
+@pytest.mark.asyncio
+async def test_request_retries_transport_timeout(ppubs: FakePpubs) -> None:
+    ppubs.queue(SEARCH, httpx.ReadTimeout("PPUBS read timed out"))
+
+    async with _client(ppubs) as client:
+        page = await client.search_biblio(query="neural.CLM.")
+
+    assert len(page.docs) == 1
+    assert len(ppubs.hits(SEARCH)) == 2
+
+
+@pytest.mark.asyncio
+async def test_persistent_403_is_typed_retryable_authentication_error(ppubs: FakePpubs) -> None:
+    ppubs.always(COUNTS, httpx.Response(403))
+
+    async with _client(ppubs) as client:
+        with pytest.raises(RetryableAuthenticationError):
+            await client.search_biblio(query="neural.CLM.")
+
+    # Bootstrap, then one refresh per request attempt (4 attempts), each
+    # attempt sending the request before and after its refresh.
+    assert len(ppubs.hits(SESSION)) == 1 + 4
+    assert len(ppubs.hits(COUNTS)) == 4 * 2
+    assert ppubs.hits(SEARCH) == []
+
+
+@pytest.mark.asyncio
+async def test_request_uses_one_session_refresh_attempt_per_request_attempt(
+    ppubs: FakePpubs,
+) -> None:
+    async with _client(ppubs) as client:
+        await client.search_biblio(query="warm.CLM.")
+        ppubs.always(COUNTS, httpx.Response(403))
+        ppubs.always(SESSION, httpx.Response(403))
+        with pytest.raises(RetryableAuthenticationError, match="session bootstrap"):
+            await client.search_biblio(query="neural.CLM.")
+
+    # The failed refresh ends the attempt; it is not retried inside it.
+    assert len(ppubs.hits(SESSION)) == 1 + 4
+    assert len(ppubs.hits(COUNTS)) == 1 + 4
+
+
+@pytest.mark.asyncio
+async def test_429_is_typed_rate_limit_error(ppubs: FakePpubs) -> None:
+    ppubs.always(COUNTS, httpx.Response(429, headers={"x-rate-limit-retry-after-seconds": "3"}))
+
+    with patch("asyncio.sleep", new=AsyncMock()) as sleep:
+        async with _client(ppubs) as client:
+            with pytest.raises(RateLimitError) as exc_info:
+                await client.search_biblio(query="neural.CLM.")
 
     assert exc_info.value.retry_after == 3
-    sleep.assert_awaited_once_with(3)
+    assert len(ppubs.hits(COUNTS)) == 4
+    # PPUBS's own retry-after header is honored before every attempt gives up.
+    assert sleep.await_args_list.count(call(3.0)) == 4
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("nested", [False, True])
-async def test_request_updates_case_id_after_session_refresh(nested: bool) -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    http.request = AsyncMock(side_effect=[_response(403), _response(200, json={})])
-    client = PublicSearchClient(client=http)
-    client._case_id = 123
+@pytest.mark.parametrize(
+    ("path", "nested"),
+    [(COUNTS, False), (SEARCH, True)],
+    ids=["top-level-case-id", "nested-case-id"],
+)
+async def test_request_updates_case_id_after_session_refresh(
+    ppubs: FakePpubs, path: str, nested: bool
+) -> None:
+    async def expire_then_reject(request: httpx.Request) -> httpx.Response:
+        ppubs.expire_session()
+        return httpx.Response(403)
 
-    async def refresh() -> None:
-        client._case_id = 456
+    ppubs.queue(path, expire_then_reject)
 
-    client._refresh_session_once = AsyncMock(side_effect=refresh)
-    payload = {"query": {"caseId": 123}} if nested else {"caseId": 123}
+    async with _client(ppubs) as client:
+        page = await client.search_biblio(query="neural.CLM.")
 
-    await client._request.__wrapped__(
-        client,
-        "POST",
-        "https://ppubs.uspto.gov/api/test",
-        json=payload,
-    )
-
-    second_payload = http.request.await_args_list[1].kwargs["json"]
-    expected = second_payload["query"]["caseId"] if nested else second_payload["caseId"]
-    assert expected == 456
-
-
-@pytest.mark.asyncio
-async def test_request_uses_one_session_refresh_attempt_per_request_attempt() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    http.request = AsyncMock(return_value=_response(403))
-    client = PublicSearchClient(client=http)
-    client._refresh_session_once = AsyncMock(
-        side_effect=RetryableAuthenticationError("bootstrap failed", status_code=403)
-    )
-
-    with pytest.raises(RetryableAuthenticationError):
-        await client._request.__wrapped__(client, "POST", "https://ppubs.uspto.gov/api/test")
-
-    client._refresh_session_once.assert_awaited_once()
+    assert len(page.docs) == 1
+    assert len(ppubs.hits(SESSION)) == 2
+    stale, retried = ppubs.hits(path)
+    body = json.loads(retried.content)
+    assert (body["query"]["caseId"] if nested else body["caseId"]) == 456
+    assert stale.headers["X-Access-Token"] == "token-123"
+    assert retried.headers["X-Access-Token"] == "token-456"
 
 
 @pytest.mark.asyncio
-async def test_concurrent_403s_share_one_refreshed_session() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    both_old_requests_started = asyncio.Event()
-    old_request_count = 0
+async def test_document_fetch_recovers_from_expired_session(ppubs: FakePpubs) -> None:
+    async with _client(ppubs) as client:
+        await client.search_biblio(query="warm.CLM.")
+        ppubs.expire_session()
+        document = await client.get_document("US-20230123456-A1", source="US-PGPUB")
 
-    async def request(method: str, url: str, **kwargs: object) -> httpx.Response:
-        nonlocal old_request_count
-        payload = kwargs["json"]
-        assert isinstance(payload, dict)
-        if payload["caseId"] == 123:
-            old_request_count += 1
-            if old_request_count == 2:
-                both_old_requests_started.set()
-            await both_old_requests_started.wait()
-            return _response(403)
-        return _response(200, json={})
+    assert document.publication_number == "20230123456"
+    assert len(ppubs.hits(SESSION)) == 2
+    stale, retried = ppubs.hits(f"{HIGHLIGHT}/US-20230123456-A1")
+    assert stale.headers["X-Access-Token"] == "token-123"
+    assert retried.headers["X-Access-Token"] == "token-456"
 
-    http.request = AsyncMock(side_effect=request)
-    client = PublicSearchClient(client=http)
-    client._case_id = 123
 
-    async def refresh() -> None:
-        client._case_id = 456
+async def _two_requests_in_flight_then_403(ppubs: FakePpubs) -> None:
+    """Make the next two COUNTS calls both arrive before either is rejected."""
+    both_in_flight = asyncio.Event()
+    arrived = 0
 
-    client._refresh_session_once = AsyncMock(side_effect=refresh)
-    payloads = [{"caseId": 123}, {"caseId": 123}]
+    async def reject_when_both_arrived(request: httpx.Request) -> httpx.Response:
+        nonlocal arrived
+        arrived += 1
+        if arrived == 2:
+            both_in_flight.set()
+        await both_in_flight.wait()
+        return httpx.Response(403)
 
-    responses = await asyncio.gather(
-        *(
-            client._request.__wrapped__(
-                client,
-                "POST",
-                "https://ppubs.uspto.gov/api/test",
-                json=payload,
-            )
-            for payload in payloads
+    ppubs.queue(COUNTS, reject_when_both_arrived, reject_when_both_arrived)
+
+
+@pytest.mark.asyncio
+async def test_concurrent_403s_share_one_refreshed_session(ppubs: FakePpubs) -> None:
+    async with _client(ppubs) as client:
+        await client.search_biblio(query="warm.CLM.")
+        ppubs.expire_session()
+        await _two_requests_in_flight_then_403(ppubs)
+
+        pages = await asyncio.gather(
+            client.search_biblio(query="neural.CLM."),
+            client.search_biblio(query="network.CLM."),
         )
-    )
 
-    assert [response.status_code for response in responses] == [200, 200]
-    assert payloads == [{"caseId": 456}, {"caseId": 456}]
-    client._refresh_session_once.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_waiting_request_recovers_after_concurrent_refresh_failure() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    both_old_requests_started = asyncio.Event()
-    old_request_count = 0
-
-    async def request(method: str, url: str, **kwargs: object) -> httpx.Response:
-        nonlocal old_request_count
-        payload = kwargs["json"]
-        assert isinstance(payload, dict)
-        if payload["caseId"] == 123:
-            old_request_count += 1
-            if old_request_count == 2:
-                both_old_requests_started.set()
-            await both_old_requests_started.wait()
-            return _response(403)
-        if payload["caseId"] == 456:
-            return _response(200, json={})
-        return _response(403)
-
-    http.request = AsyncMock(side_effect=request)
-    client = PublicSearchClient(client=http)
-    client._case_id = 123
-    refresh_attempt = 0
-
-    async def refresh() -> None:
-        nonlocal refresh_attempt
-        refresh_attempt += 1
-        client._case_id = None
-        if refresh_attempt == 1:
-            raise RetryableAuthenticationError("bootstrap failed", status_code=403)
-        client._case_id = 456
-
-    client._refresh_session_once = AsyncMock(side_effect=refresh)
-    payloads = [{"caseId": 123}, {"caseId": 123}]
-
-    results = await asyncio.gather(
-        *(
-            client._request.__wrapped__(
-                client,
-                "POST",
-                "https://ppubs.uspto.gov/api/test",
-                json=payload,
-            )
-            for payload in payloads
-        ),
-        return_exceptions=True,
-    )
-
-    assert sum(isinstance(result, RetryableAuthenticationError) for result in results) == 1
-    assert sum(isinstance(result, httpx.Response) for result in results) == 1
-    assert sum(payload["caseId"] == 456 for payload in payloads) == 1
-    assert client._refresh_session_once.await_count == 2
+    assert [len(p.docs) for p in pages] == [1, 1]
+    # Warm-up bootstrap plus exactly one refresh shared by both requests.
+    assert len(ppubs.hits(SESSION)) == 2
+    retried = ppubs.hits(COUNTS)[-2:]
+    assert [json.loads(r.content)["caseId"] for r in retried] == [456, 456]
 
 
 @pytest.mark.asyncio
-async def test_session_bootstrap_retries_server_error() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    http.cookies = httpx.Cookies()
-    http.headers = httpx.Headers()
-    http.get = AsyncMock(return_value=_response(200, json={}))
-    http.post = AsyncMock(
-        side_effect=[
-            _response(500),
-            httpx.Response(
-                200,
-                json={"userCase": {"caseId": 123}},
-                headers={"X-Access-Token": "token"},
-                request=httpx.Request("POST", "https://ppubs.uspto.gov/api/users/me/session"),
-            ),
-        ]
-    )
-    client = PublicSearchClient(client=http)
+async def test_waiting_request_recovers_after_concurrent_refresh_failure(
+    ppubs: FakePpubs,
+) -> None:
+    async with _client(ppubs) as client:
+        await client.search_biblio(query="warm.CLM.")
+        ppubs.expire_session()
+        await _two_requests_in_flight_then_403(ppubs)
+        ppubs.queue(SESSION, httpx.Response(403))
 
-    await client._refresh_session()
+        pages = await asyncio.gather(
+            client.search_biblio(query="neural.CLM."),
+            client.search_biblio(query="network.CLM."),
+        )
 
-    assert client._case_id == 123
-    assert http.post.await_count == 2
+    assert [len(p.docs) for p in pages] == [1, 1]
+    # Each request's accepted call (the last one per query) left the expired
+    # caseId behind; the fake only answers 200 for the then-current session.
+    last_counts = {json.loads(r.content)["q"]: r for r in ppubs.hits(COUNTS)}
+    assert json.loads(last_counts["neural.CLM."].content)["caseId"] != 123
+    assert json.loads(last_counts["network.CLM."].content)["caseId"] != 123
+
+
+@pytest.mark.xfail(
+    strict=True,
+    reason=(
+        "Source bug: when a session refresh fails, the request's retry attempt "
+        "still carries the stale caseId in its JSON body (only the refresh path "
+        "rewrites it), so PPUBS 403s it and the client refreshes a second, "
+        "unneeded time, invalidating the session the other request just got."
+    ),
+)
+@pytest.mark.asyncio
+async def test_failed_refresh_does_not_force_an_extra_session(ppubs: FakePpubs) -> None:
+    async with _client(ppubs) as client:
+        await client.search_biblio(query="warm.CLM.")
+        ppubs.expire_session()
+        await _two_requests_in_flight_then_403(ppubs)
+        ppubs.queue(SESSION, httpx.Response(403))
+
+        await asyncio.gather(
+            client.search_biblio(query="neural.CLM."),
+            client.search_biblio(query="network.CLM."),
+        )
+
+    # Warm-up bootstrap, the failed refresh, and one successful refresh.
+    assert len(ppubs.hits(SESSION)) == 3
 
 
 @pytest.mark.asyncio
-async def test_search_caps_one_upstream_page_at_twenty() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    client = PublicSearchClient(client=http)
-    client._case_id = 123
-    client._request = AsyncMock(
-        side_effect=[
-            _response(200, json={}),
-            _response(200, json={"results": []}),
-        ]
-    )
+async def test_session_bootstrap_retries_server_error(ppubs: FakePpubs) -> None:
+    ppubs.queue(SESSION, httpx.Response(500))
 
-    with patch(
-        "patent_client_agents.uspto_publications.client.convert_biblio_page",
-        return_value={"num_found": 0, "per_page": 20, "page": 0, "docs": []},
-    ):
+    async with _client(ppubs) as client:
+        page = await client.search_biblio(query="neural.CLM.")
+
+    assert len(page.docs) == 1
+    assert len(ppubs.hits(SESSION)) == 2
+    assert json.loads(ppubs.hits(COUNTS)[0].content)["caseId"] == 123
+
+
+@pytest.mark.asyncio
+async def test_search_caps_one_upstream_page_at_twenty(ppubs: FakePpubs) -> None:
+    async with _client(ppubs) as client:
         await client.search_biblio(query="neural.CLM.", limit=25)
 
-    search_payload = client._request.await_args_list[1].kwargs["json"]
-    assert search_payload["pageCount"] == 20
+    assert json.loads(ppubs.hits(SEARCH)[0].content)["pageCount"] == 20
 
 
 @pytest.mark.asyncio
-async def test_search_rejects_non_positive_limit_before_network_call() -> None:
-    http = AsyncMock(spec=httpx.AsyncClient)
-    client = PublicSearchClient(client=http)
+async def test_search_rejects_non_positive_limit_before_network_call(ppubs: FakePpubs) -> None:
+    async with _client(ppubs) as client:
+        with pytest.raises(ValidationError, match="limit must be at least 1"):
+            await client.search_biblio(query="neural.CLM.", limit=0)
 
-    with pytest.raises(ValidationError, match="limit must be at least 1"):
-        await client.search_biblio(query="neural.CLM.", limit=0)
-
-    http.request.assert_not_awaited()
+    assert ppubs.requests == []
 
 
 # Query pre-flight and upstream error context (#92). Cases mirror live PPUBS
@@ -305,8 +322,6 @@ async def test_search_rejects_non_positive_limit_before_network_call() -> None:
     ],
 )
 def test_query_syntax_accepts_valid_queries(query: str) -> None:
-    from patent_client_agents.uspto_publications.client import check_query_syntax
-
     check_query_syntax(query)
 
 
@@ -323,52 +338,49 @@ def test_query_syntax_accepts_valid_queries(query: str) -> None:
     ],
 )
 def test_query_syntax_names_the_problem(query: str, match: str) -> None:
-    from patent_client_agents.uspto_publications.client import check_query_syntax
-
     with pytest.raises(ValidationError, match=match):
         check_query_syntax(query)
 
 
-def _search_client(*responses: object) -> PublicSearchClient:
-    client = PublicSearchClient(client=AsyncMock(spec=httpx.AsyncClient))
-    client._case_id = 123
-    client._request = AsyncMock(side_effect=list(responses))
-    return client
-
-
 @pytest.mark.asyncio
-async def test_search_stops_on_counts_error_payload() -> None:
-    from patent_client_agents.uspto_publications.client import PublicSearchError
-
-    client = _search_client(
-        _response(
-            200,
-            json={"error": {"errorCode": 121, "errorMessage": "Cannot start a group"}},
-        )
+async def test_search_stops_on_counts_error_payload(ppubs: FakePpubs) -> None:
+    ppubs.queue(
+        COUNTS,
+        httpx.Response(
+            200, json={"error": {"errorCode": 121, "errorMessage": "Cannot start a group"}}
+        ),
     )
-    with pytest.raises(PublicSearchError, match="Error #121: Cannot start a group"):
-        await client.search_biblio(query="neural")
-    assert client._request.await_count == 1
+
+    async with _client(ppubs) as client:
+        with pytest.raises(PublicSearchError, match="Error #121: Cannot start a group"):
+            await client.search_biblio(query="neural")
+
+    assert len(ppubs.hits(COUNTS)) == 1
+    assert ppubs.hits(SEARCH) == []
 
 
 @pytest.mark.asyncio
-async def test_counts_server_error_explains_query_was_not_run() -> None:
-    from mcp_data_core.exceptions import ServerError
-    from patent_client_agents.uspto_publications.client import PublicSearchError
-
+async def test_counts_server_error_explains_query_was_not_run(ppubs: FakePpubs) -> None:
     body = '{"status":"INTERNAL_SERVER_ERROR","developerMessage":"Unable to Process"}'
-    client = _search_client(ServerError("PPUBS server error", status_code=500, response_body=body))
-    with pytest.raises(PublicSearchError, match="at /counts, so no search ran.*Unable to Process"):
-        await client.search_biblio(query="neural")
+    ppubs.always(COUNTS, httpx.Response(500, text=body))
+
+    async with _client(ppubs) as client:
+        with pytest.raises(
+            PublicSearchError, match="at /counts, so no search ran.*Unable to Process"
+        ):
+            await client.search_biblio(query="neural")
+
+    assert len(ppubs.hits(COUNTS)) == 4
+    assert ppubs.hits(SEARCH) == []
 
 
 @pytest.mark.asyncio
-async def test_search_server_error_after_counts_stays_retryable() -> None:
-    from mcp_data_core.exceptions import ServerError
+async def test_search_server_error_after_counts_stays_retryable(ppubs: FakePpubs) -> None:
+    ppubs.queue(COUNTS, httpx.Response(200, json={"numResults": 214}))
+    ppubs.always(SEARCH, httpx.Response(500, text="{}"))
 
-    client = _search_client(
-        _response(200, json={"numResults": 214}),
-        ServerError("PPUBS server error", status_code=500, response_body="{}"),
-    )
-    with pytest.raises(ServerError, match="accepted the query at /counts \\(214 documents\\)"):
-        await client.search_biblio(query="neural")
+    async with _client(ppubs) as client:
+        with pytest.raises(ServerError, match="accepted the query at /counts \\(214 documents\\)"):
+            await client.search_biblio(query="neural")
+
+    assert len(ppubs.hits(SEARCH)) == 4

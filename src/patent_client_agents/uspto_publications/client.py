@@ -144,12 +144,18 @@ class PublicSearchClient:
             doc = await client.get_document(guid, source="US-PGPUB")
     """
 
-    def __init__(self, client: httpx.AsyncClient | None = None) -> None:
+    def __init__(
+        self,
+        client: httpx.AsyncClient | None = None,
+        *,
+        transport: httpx.AsyncBaseTransport | None = None,
+    ) -> None:
         self._client = client or httpx.AsyncClient(
             headers=_HEADERS.copy(),
             http2=True,
             follow_redirects=True,
             timeout=_DEFAULT_TIMEOUT,
+            transport=transport,
         )
         self._owns_client = client is None
         self._session_lock = asyncio.Lock()

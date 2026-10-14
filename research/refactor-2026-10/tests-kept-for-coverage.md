@@ -7,7 +7,7 @@ stay until a behavioral test covers the same lines; then delete them.
 | Test | Only coverage of |
 | --- | --- |
 | `tests/canlii/test_client.py::TestModuleLevelApi::test_get_client_returns_canlii_client` | `canlii/api.py` (1 lines) |
-| `tests/cpc/test_api.py::TestGetClient::test_creates_client_with_both` | `cpc/api.py` (1 lines); `epo_ops/client.py` (19 lines) |
+| `tests/cpc/test_api.py::TestGetClient::test_creates_client_with_both` | `cpc/api.py` (1 lines; `epo_ops/client.py` is now covered by the transport tests) |
 | `tests/dpma_register/test_api.py::test_api_helper_delegates_to_client` | `dpma_register/api.py` (12 lines) |
 | `tests/dpma_statutes/test_api.py::test_get_client_returns_client` | `dpma_statutes/api.py` (1 lines) |
 | `tests/epo_ops/test_api.py::test_convert_number` | `epo_ops/api.py` (7 lines) |
