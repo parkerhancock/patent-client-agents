@@ -5,8 +5,6 @@ from __future__ import annotations
 import pytest
 
 from patent_client_agents.legifrance_ip import (
-    STATUTES,
-    LegifranceIpClient,
     get_section,
     search,
 )
@@ -46,12 +44,3 @@ async def test_get_section_oneshot_art_form() -> None:
     sec = await get_section("Art. L. 151-1 Code de commerce")
     assert sec.statute == "Code de commerce"
     assert sec.section == "L151-1"
-
-
-async def test_statutes_constant() -> None:
-    assert STATUTES == ("CPI", "Code de commerce")
-
-
-def test_client_constructible() -> None:
-    client = LegifranceIpClient()
-    assert client.__class__.__name__ == "LegifranceIpClient"

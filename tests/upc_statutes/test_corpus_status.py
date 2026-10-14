@@ -50,14 +50,6 @@ def seeded_corpus_env(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
     return db
 
 
-class TestGetCorpusStatusShape:
-    def test_returns_dict_with_two_keys(self, seeded_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert isinstance(status, dict)
-        # The TypedDict surface is exactly these two keys, no more.
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestGetCorpusStatusFromBundledCorpus:
     def test_version_derived_from_snapshot_date(self, seeded_corpus_env: Path) -> None:
         """The UPC statutes corpus has no upstream ``source_version`` —

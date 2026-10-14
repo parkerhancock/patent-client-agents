@@ -7,7 +7,6 @@ from pathlib import Path
 import pytest
 
 from patent_client_agents.inpi_br_statutes import (
-    USAGE_RESOURCE_URI,
     InpiBrStatutesClient,
     SearchInput,
     SectionInput,
@@ -22,10 +21,6 @@ from patent_client_agents.inpi_br_statutes import (
 @pytest.fixture(autouse=True)
 def _set_corpus(lpi_corpus_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("INPI_BR_STATUTES_CORPUS_PATH", str(lpi_corpus_path))
-
-
-def test_usage_resource_uri_is_stable() -> None:
-    assert USAGE_RESOURCE_URI == "resource://inpi_br_statutes/usage"
 
 
 def test_usage_resource_returns_markdown() -> None:

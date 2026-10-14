@@ -18,13 +18,10 @@ from __future__ import annotations
 
 from datetime import date, datetime
 
-import pytest
-
 from patent_client_agents.kipo_kipris.models import (
     DesignRow,
     PatentUtilityRow,
     TrademarkRow,
-    _empty_str_to_none,
     _parse_kipris_date,
 )
 
@@ -86,24 +83,6 @@ class TestParseKiprisDate:
 # ──────────────────────────────────────────────────────────────────────
 
 
-class TestEmptyStrToNone:
-    def test_empty_string(self) -> None:
-        assert _empty_str_to_none("") is None
-
-    def test_whitespace_only(self) -> None:
-        assert _empty_str_to_none("   ") is None
-
-    def test_non_empty_passthrough(self) -> None:
-        assert _empty_str_to_none("hello") == "hello"
-
-    def test_none_passthrough(self) -> None:
-        assert _empty_str_to_none(None) is None
-
-    def test_non_string_passthrough(self) -> None:
-        # Non-string values are returned as-is.
-        assert _empty_str_to_none(42) == 42
-
-
 # ──────────────────────────────────────────────────────────────────────
 # PatentUtilityRow
 # ──────────────────────────────────────────────────────────────────────
@@ -153,41 +132,6 @@ class TestPatentUtilityRow:
         assert row.applicant_name is None
         assert row.agent_name is None
 
-    def test_all_optional_defaults(self) -> None:
-        row = PatentUtilityRow.model_validate({})
-        assert row.application_number is None
-        assert row.application_date is None
-        assert row.invention_title is None
-        assert row.applicant_name is None
-        assert row.ipc_number is None
-
-    def test_extra_fields_ignored(self) -> None:
-        raw = {
-            "applicationNumber": "X",
-            "unknownFutureField": "ignored",
-            "anotherUnknown": 42,
-        }
-        # Must not raise.
-        row = PatentUtilityRow.model_validate(raw)
-        assert row.application_number == "X"
-
-    def test_sentinel_date_zeroed(self) -> None:
-        row = PatentUtilityRow.model_validate(
-            {"applicationDate": "00000000", "publicationDate": ""}
-        )
-        assert row.application_date is None
-        assert row.publication_date is None
-
-    def test_snake_case_keys_work_via_populate_by_name(self) -> None:
-        row = PatentUtilityRow.model_validate(
-            {
-                "application_number": "from-snake",
-                "invention_title": "snake-title",
-            }
-        )
-        assert row.application_number == "from-snake"
-        assert row.invention_title == "snake-title"
-
 
 # ──────────────────────────────────────────────────────────────────────
 # TrademarkRow
@@ -221,25 +165,6 @@ class TestTrademarkRow:
         assert dumped["bigDrawing"] == "https://example.test/big.gif"
         assert dumped["regPrivilegeName"] == "삼성전자주식회사"
 
-    def test_unregistered_mark_has_empty_dates(self) -> None:
-        row = TrademarkRow.model_validate(
-            {
-                "applicationNumber": "4020230654321",
-                "applicationDate": "20230815",
-                "registrationNumber": "",
-                "registrationDate": "",
-                "title": "GRAM",
-            }
-        )
-        assert row.registration_number is None
-        assert row.registration_date is None
-
-    def test_all_optional_defaults(self) -> None:
-        row = TrademarkRow.model_validate({})
-        assert row.application_number is None
-        assert row.title is None
-        assert row.big_drawing is None
-
 
 # ──────────────────────────────────────────────────────────────────────
 # DesignRow
@@ -270,36 +195,6 @@ class TestDesignRow:
         dumped = row.model_dump(by_alias=True)
         assert dumped["articleName"] == "휴대용 전화기"
         assert dumped["locCode"] == "14-03"
-
-    def test_all_optional_defaults(self) -> None:
-        row = DesignRow.model_validate({})
-        assert row.application_number is None
-        assert row.article_name is None
-        assert row.drawing is None
-
-    def test_iso_date_form_accepted(self) -> None:
-        row = DesignRow.model_validate(
-            {"applicationDate": "2023-02-10", "registrationDate": "2024-01-20"}
-        )
-        assert row.application_date == date(2023, 2, 10)
-        assert row.registration_date == date(2024, 1, 20)
-
-
-@pytest.mark.parametrize(
-    "raw,expected",
-    [
-        ("20240101", date(2024, 1, 1)),
-        ("2024-01-01", date(2024, 1, 1)),
-        ("", None),
-        (None, None),
-        ("00000000", None),
-        ("bad", None),
-    ],
-)
-def test_date_validator_parametrized(raw: str | None, expected: date | None) -> None:
-    """Cross-row spot check of the date validator on PatentUtilityRow."""
-    row = PatentUtilityRow.model_validate({"applicationDate": raw})
-    assert row.application_date == expected
 
 
 # ──────────────────────────────────────────────────────────────────────

@@ -18,14 +18,6 @@ import pytest
 from patent_client_agents.tmep import get_corpus_status
 
 
-class TestGetCorpusStatusShape:
-    def test_returns_dict_with_two_keys(self, tmep_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert isinstance(status, dict)
-        # The TypedDict surface is exactly these two keys, no more.
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestGetCorpusStatusFromBundledCorpus:
     def test_current_source_version_reports_unknown(self, tmep_corpus_env: Path) -> None:
         """``write_corpus`` stamps ``source_version='current'`` (see

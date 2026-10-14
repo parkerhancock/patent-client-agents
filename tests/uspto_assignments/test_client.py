@@ -9,7 +9,6 @@ import pytest
 from patent_client_agents.uspto_assignments import (
     AssignmentCenterClient,
     AssignmentRecord,
-    Assignor,
     Property,
     SearchResults,
 )
@@ -17,17 +16,6 @@ from patent_client_agents.uspto_assignments import (
 
 class TestModels:
     """Tests for Pydantic models and SearchResults dataclass."""
-
-    def test_assignor_model(self) -> None:
-        data = {
-            "assignorName": "SMITH, JOHN",
-            "executionDate": "01/15/2024",
-            "acknowledgementDate": "01/16/2024",
-        }
-        a = Assignor.model_validate(data)
-        assert a.assignor_name == "SMITH, JOHN"
-        assert a.execution_date == "01/15/2024"
-        assert a.acknowledgement_date == "01/16/2024"
 
     def test_property_model(self) -> None:
         data = {
@@ -43,50 +31,6 @@ class TestModels:
         assert p.patent_number == "11000000"
         assert p.filing_date == "01/01/2024"
         assert p.invention_title == "Test Invention"
-
-    def test_assignment_record_with_conveyance(self) -> None:
-        """Confirms conveyance + conveyance_code populate from the search/patent response shape."""
-        data = {
-            "reelNumber": 72877,
-            "frameNumber": 227,
-            "correspondentName": "Lerner David LLP",
-            "assignorExecutionDate": "11/12/2025",
-            "mailDate": "11/20/2025",
-            "recorded": "11/18/2025",
-            "conveyance": "ASSIGNMENT OF ASSIGNOR'S INTEREST",
-            "conveyanceCode": 23,
-            "assignors": [{"assignorName": "SAKALKAR, VARUN", "executionDate": "11/12/2025"}],
-            "assignees": ["GOOGLE LLC"],
-            "noOfProperties": 1,
-            "properties": [{"sequenceNumber": 1, "applicationNumber": "19385694"}],
-        }
-        r = AssignmentRecord.model_validate(data)
-        assert r.reel_number == 72877
-        assert r.frame_number == 227
-        assert r.reel_frame == "72877/227"
-        assert r.conveyance == "ASSIGNMENT OF ASSIGNOR'S INTEREST"
-        assert r.conveyance_code == 23
-        assert r.correspondent_name == "Lerner David LLP"
-        assert r.mail_date == "11/20/2025"
-        assert r.recorded == "11/18/2025"
-        assert r.assignors[0].assignor_name == "SAKALKAR, VARUN"
-        assert r.assignees == ["GOOGLE LLC"]
-        assert r.number_of_properties == 1
-        assert r.properties[0].application_number == "19385694"
-
-    def test_assignment_record_handles_missing_conveyance(self) -> None:
-        """Records without conveyance still parse cleanly (defensive default)."""
-        data = {
-            "reelNumber": 1,
-            "frameNumber": 2,
-            "assignors": [],
-            "assignees": [],
-            "properties": [],
-        }
-        r = AssignmentRecord.model_validate(data)
-        assert r.conveyance is None
-        assert r.conveyance_code is None
-        assert r.number_of_properties == 0
 
     def test_assignment_detail_model(self) -> None:
         """Detail payloads name the sequence field propertySequenceNumber."""

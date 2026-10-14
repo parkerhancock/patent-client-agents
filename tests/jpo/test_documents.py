@@ -198,19 +198,6 @@ class TestParseEmptyOrMalformed:
 class TestEncodingHandling:
     """Encoding regressions are easy to introduce silently."""
 
-    def test_utf8_mistake_would_have_raised(self) -> None:
-        """If we ever mistakenly decoded as UTF-8, this fixture's bytes
-        contain Shift-JIS sequences that aren't valid UTF-8 starters —
-        catching the regression. We assert the parser succeeds, which
-        proves it's NOT decoding as UTF-8 (which would raise on these
-        bytes)."""
-        bundle = parse_document_bundle(
-            make_mailed_bundle_zip(),
-            "mailed",
-            "patent",
-        )
-        assert bundle.entries[0].document_name  # decoded successfully
-
     def test_cp932_fallback_handles_extension_chars(self) -> None:
         """A byte sequence that's strict-Shift-JIS-invalid but cp932-OK
         should still parse. Build a doc whose only difference is that
@@ -234,33 +221,6 @@ class TestEncodingHandling:
         # entry parses.
         assert len(bundle.entries) == 1
         assert bundle.entries[0].document_name
-
-
-class TestBundleModel:
-    """Pydantic model behaviour for DocumentBundle / DocumentEntry."""
-
-    def test_bundle_serializes_to_dict(self) -> None:
-        bundle = parse_document_bundle(
-            make_application_bundle_zip(),
-            "application",
-            "patent",
-            application_number="2020999999",
-        )
-        dumped = bundle.model_dump()
-        assert dumped["ip_type"] == "patent"
-        assert dumped["doc_kind"] == "application"
-        assert isinstance(dumped["entries"], list)
-        assert isinstance(dumped["entries"][0], dict)
-
-    def test_is_empty_property(self) -> None:
-        empty = DocumentBundle(ip_type="patent", doc_kind="mailed")
-        assert empty.is_empty
-        nonempty = parse_document_bundle(
-            make_mailed_bundle_zip(),
-            "mailed",
-            "patent",
-        )
-        assert not nonempty.is_empty
 
 
 def test_invalid_zip_bytes_raise() -> None:

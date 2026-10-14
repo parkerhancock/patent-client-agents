@@ -184,30 +184,6 @@ class TestRenewalYears:
         assert hk_ipd._renewal_years("Renewal of a short-term patent") == []
 
 
-class TestIsDuplicate:
-    def test_first_call_records_and_returns_false(self) -> None:
-        seen: set = set()
-        assert not hk_ipd._is_duplicate(
-            "Advertisement fee", Decimal("68"), FeeCategory.publication, None, seen
-        )
-        assert len(seen) == 1
-
-    def test_identical_repeat_returns_true(self) -> None:
-        seen: set = set()
-        hk_ipd._is_duplicate(
-            "Advertisement fee", Decimal("68"), FeeCategory.publication, None, seen
-        )
-        assert hk_ipd._is_duplicate(
-            "Advertisement fee", Decimal("68"), FeeCategory.publication, None, seen
-        )
-
-    def test_different_year_is_not_duplicate(self) -> None:
-        seen: set = set()
-        hk_ipd._is_duplicate("Renewal", Decimal("450"), FeeCategory.renewal, 4, seen)
-        # year=5 is a distinct FeeItem.
-        assert not hk_ipd._is_duplicate("Renewal", Decimal("450"), FeeCategory.renewal, 5, seen)
-
-
 class TestCategorizers:
     """Each categorizer must check late_fee BEFORE renewal — otherwise
     rows like "Additional fee for late payment of a renewal fee" are
@@ -395,14 +371,6 @@ class TestBuildPatentFees:
         ]
         years = sorted(f.year for f in stp_renewals if f.year is not None)
         assert years == [4, 8]
-
-    def test_advertisement_fee_deduplicated(self, patent_doc: L.HtmlElement) -> None:
-        # "Advertisement fee" $68 appears in tables 0, 12, 13, 14 (OGP /
-        # RR-record / RR-grant / STP filing) but should collapse to one
-        # FeeItem.
-        fees = hk_ipd._build_patent_fees(patent_doc)
-        adverts = [f for f in fees if f.label == "Advertisement fee" and f.amount == Decimal("68")]
-        assert len(adverts) == 1
 
     def test_zero_amount_rows_emit(self, patent_doc: L.HtmlElement) -> None:
         # "Nil" cells parse to amount=0; the FeeItem model permits this

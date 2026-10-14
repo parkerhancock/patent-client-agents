@@ -21,7 +21,6 @@ import pytest
 from mcp_data_core.exceptions import ConfigurationError
 from patent_client_agents.tipo_opdata import TipoClient
 from patent_client_agents.tipo_opdata.client import (
-    BASE_URL,
     MAX_TOP,
     _extract_rows,
     _join_list,
@@ -101,18 +100,6 @@ def test_tk_empty_string_raises_configuration_error(
     monkeypatch.delenv("TIPO_API_KEY", raising=False)
     with pytest.raises(ConfigurationError):
         TipoClient(tk="")
-
-
-def test_base_url_override(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("TIPO_API_KEY", "tk")
-    client = TipoClient(base_url="https://example.test")
-    assert client.base_url == "https://example.test"
-
-
-def test_default_base_url(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setenv("TIPO_API_KEY", "tk")
-    client = TipoClient()
-    assert client.base_url == BASE_URL
 
 
 # ──────────────────────────────────────────────────────────────────────

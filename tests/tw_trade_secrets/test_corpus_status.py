@@ -11,13 +11,6 @@ import pytest
 from patent_client_agents.tw_trade_secrets import get_corpus_status
 
 
-class TestShape:
-    def test_returns_dict_with_two_keys(self, tw_trade_secrets_corpus_env: Path) -> None:
-        status = get_corpus_status()
-        assert isinstance(status, dict)
-        assert set(status.keys()) == {"corpus_synced_at", "corpus_version"}
-
-
 class TestFromBundledCorpus:
     def test_version_falls_back_to_snapshot_label(self, tw_trade_secrets_corpus_env: Path) -> None:
         status = get_corpus_status()

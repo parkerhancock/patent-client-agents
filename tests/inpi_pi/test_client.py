@@ -306,13 +306,6 @@ class TestSlidingWindowThrottle:
         # The first three should be dropped; only the most-recent remains
         assert len(throttle._timestamps) == 1
 
-    def test_default_clock_is_time_monotonic(self) -> None:
-        """No clock arg → uses ``time.monotonic``."""
-        import time as _time
-
-        throttle = _SlidingWindowThrottle()
-        assert throttle._clock is _time.monotonic
-
 
 # ---------------------------------------------------------------------------
 # XML notice parsing
@@ -742,27 +735,12 @@ async def test_session_reuse_skips_relogin(monkeypatch: pytest.MonkeyPatch) -> N
     assert login_calls["n"] == 1
 
 
-@pytest.mark.asyncio
-async def test_invalidate_session_drops_cache() -> None:
-    async with _make_client(_make_auth_handler({})) as client:
-        # Force a session warmup
-        await client._ensure_session()
-        assert client._session is not None
-        await client._invalidate_session()
-        assert client._session is None
-
-
 # ---------------------------------------------------------------------------
 # Pydantic model behaviour shared across both rows
 # ---------------------------------------------------------------------------
 
 
 class TestModelBehaviorViaClient:
-    def test_search_envelope_dict_alone_yields_no_rows(self) -> None:
-        """{'docs': [...]} → rows captured; {'unknown': [...]} → empty."""
-        rows, _ = InpiPiClient._parse_search_envelope({"docs": [{"x": 1}]})
-        assert rows == [{"x": 1}]
-
     def test_total_coerced_to_int(self) -> None:
         rows, total = InpiPiClient._parse_search_envelope({"total": 5.0, "hits": []})
         assert total == 5

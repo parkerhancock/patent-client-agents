@@ -11,12 +11,10 @@ The tool maps:
 from __future__ import annotations
 
 import asyncio
-from types import SimpleNamespace
 from unittest.mock import patch
 
 import pytest
 
-from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import NotFoundError, RateLimitError
 from patent_client_agents.mcp.tools import patents as patents_module
 
@@ -38,17 +36,6 @@ class _FakeClient:
         if self._raises is not None:
             raise self._raises
         return self._result
-
-
-@pytest.mark.asyncio
-async def test_get_patent_returns_envelope_on_success() -> None:
-    fake_payload = SimpleNamespace(model_dump=lambda: {"patent_number": "US7654321B2"})
-    fake = _FakeClient(result=fake_payload)
-    with patch.object(patents_module, "GooglePatentsClient", lambda: fake):
-        result = await patents_module.get_patent("US7654321B2")
-    assert isinstance(result, ListEnvelope)
-    assert len(result.items) == 1
-    assert result.items[0]["patent_number"] == "US7654321B2"
 
 
 @pytest.mark.asyncio

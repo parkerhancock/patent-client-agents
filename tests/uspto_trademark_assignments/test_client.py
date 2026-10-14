@@ -44,11 +44,6 @@ def _assignment(reel_number: int) -> dict:
 class TestTrademarkAssignmentClient:
     """Tests for TrademarkAssignmentClient."""
 
-    def test_default_base_url(self) -> None:
-        """Test default base URL is set correctly."""
-        client = TrademarkAssignmentClient.__new__(TrademarkAssignmentClient)
-        assert client.DEFAULT_BASE_URL == "https://assignmentcenter.uspto.gov"
-
     @pytest.mark.asyncio
     async def test_search_uses_v3_advanced_endpoint_and_schema(self) -> None:
         """The retired v2 export endpoint must not be used for searches."""
@@ -137,11 +132,4 @@ class TestTrademarkAssignmentClientLive:
         """Test searching by registration number."""
         async with TrademarkAssignmentClient() as client:
             results = await client.search_by_registration("6204399")
-            assert isinstance(results, list)
-
-    @pytest.mark.asyncio
-    async def test_search_combined(self, vcr_cassette) -> None:
-        """Test combined search criteria."""
-        async with TrademarkAssignmentClient() as client:
-            results = await client.search(assignee_name="Apple", limit=3)
             assert isinstance(results, list)

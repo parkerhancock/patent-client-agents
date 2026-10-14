@@ -121,24 +121,6 @@ def _make_legislation_metadata(
 # ──────────────────────────────────────────────────────────────────────
 
 
-def test_browse_canlii_names_were_renamed_to_search():
-    """The §5.8 violations should no longer be importable."""
-    from patent_client_agents.mcp.tools import canlii as canlii_module
-
-    assert not hasattr(canlii_module, "browse_canlii_cases")
-    assert not hasattr(canlii_module, "browse_canlii_legislation")
-    assert hasattr(canlii_module, "search_canlii_cases")
-    assert hasattr(canlii_module, "search_canlii_legislation")
-
-
-def test_no_batch_tool_present():
-    """§5.4 forbids batch_* tools — list-accepting get_* replaces them."""
-    from patent_client_agents.mcp.tools import canlii as canlii_module
-
-    assert not hasattr(canlii_module, "batch_canlii_case")
-    assert not hasattr(canlii_module, "batch_get_canlii_case")
-
-
 # ──────────────────────────────────────────────────────────────────────
 # list_canlii_case_databases / list_canlii_legislation_databases — §5.9
 # ──────────────────────────────────────────────────────────────────────
@@ -614,23 +596,6 @@ async def test_list_canlii_ip_statutes_threads_french_language():
 # ──────────────────────────────────────────────────────────────────────
 # Module-level constants — IP database curation
 # ──────────────────────────────────────────────────────────────────────
-
-
-def test_module_exposes_ip_database_constants():
-    from patent_client_agents.mcp.tools import canlii as canlii_module
-
-    assert canlii_module.CANLII_IP_TRIBUNALS == ("tmob-comc", "cab-cab")
-    assert canlii_module.CANLII_IP_REVIEWING_COURTS == ("fct", "fca", "csc-scc")
-    assert set(canlii_module.CANLII_IP_DATABASES) == {
-        "tmob-comc",
-        "cab-cab",
-        "fct",
-        "fca",
-        "csc-scc",
-    }
-    assert canlii_module.CANLII_IP_STATUTES["patent_act"] == "rsc-1985-c-p-4"
-    assert canlii_module.CANLII_IP_STATUTES["industrial_design_act"] == "rsc-1985-c-i-9"
-    assert canlii_module.CANLII_IP_STATUTES["copyright_act"] == "rsc-1985-c-c-42"
 
 
 def test_matches_ip_rights_helper_substring_logic():

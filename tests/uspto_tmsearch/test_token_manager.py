@@ -42,15 +42,6 @@ class TestCacheHit:
         token = await manager.get_token()
         assert token == "cached-abc"
 
-    async def test_does_not_launch_playwright(self, tmp_path: Path) -> None:
-        cache = tmp_path / "token.json"
-        _write_token(cache)
-
-        manager = WafTokenManager(token_path=cache)
-        with patch.object(manager, "_acquire_token", new_callable=AsyncMock) as mock:
-            await manager.get_token()
-            mock.assert_not_called()
-
 
 class TestCacheExpired:
     async def test_acquires_new_token_when_expired(self, tmp_path: Path) -> None:

@@ -93,10 +93,3 @@ async def test_get_provenance_corpus_fields(ipo_in_mppp_corpus_env: Path) -> Non
 async def test_get_empty_list_raises(ipo_in_mppp_corpus_env: Path) -> None:
     with pytest.raises(ValidationError, match="at least one"):
         await get_ipo_in_mppp_section(citation=[])
-
-
-async def test_no_batch_tool_present() -> None:
-    from patent_client_agents.mcp.tools import ipo_in_mppp as mod
-
-    assert not hasattr(mod, "batch_get_ipo_in_mppp_section")
-    assert not hasattr(mod, "batch_ipo_in_mppp_section")

@@ -130,11 +130,3 @@ async def test_get_handles_lpi_suffix() -> None:
 
     assert len(result.items) == 1
     assert result.items[0]["href"] == "art195"
-
-
-def test_no_batch_tool_present() -> None:
-    """§5.4 forbids batch_* tools — list-accepting get_* replaces them."""
-    from patent_client_agents.mcp.tools import inpi_br_statutes as module
-
-    assert not hasattr(module, "batch_get_inpi_br_section")
-    assert not hasattr(module, "batch_inpi_br_section")

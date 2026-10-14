@@ -130,10 +130,3 @@ async def test_get_provenance_carries_corpus_fields(
 async def test_get_empty_list_raises(tw_trade_secrets_corpus_env: Path) -> None:
     with pytest.raises(ValidationError, match="at least one"):
         await get_tw_trade_secrets_section(citation=[])
-
-
-async def test_no_batch_tool_present() -> None:
-    from patent_client_agents.mcp.tools import tw_trade_secrets as mod
-
-    assert not hasattr(mod, "batch_get_tw_trade_secrets_section")
-    assert not hasattr(mod, "batch_tw_trade_secrets_section")

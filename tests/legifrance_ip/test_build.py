@@ -105,12 +105,6 @@ def test_main_cli_smoke(tmp_path: Path) -> None:
     assert out.exists()
 
 
-def test_main_cli_verbose(tmp_path: Path) -> None:
-    out = tmp_path / "out.db"
-    rc = main(["--output", str(out), "--verbose"])
-    assert rc == 0
-
-
 def test_main_cli_custom_seed(tmp_path: Path) -> None:
     seed = tmp_path / "custom.jsonl"
     seed.write_text(

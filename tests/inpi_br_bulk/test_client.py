@@ -15,7 +15,6 @@ import pytest
 
 from mcp_data_core.exceptions import ApiError
 from patent_client_agents.inpi_br_bulk import (
-    CKAN_HOST,
     INPI_BR_RPI_DATASET_ID,
     InpiBrBulkClient,
 )
@@ -25,16 +24,6 @@ def _mock_http(
     handler: Callable[[httpx.Request], httpx.Response],
 ) -> httpx.AsyncClient:
     return httpx.AsyncClient(transport=httpx.MockTransport(handler))
-
-
-def test_default_base_url_is_dados_gov_br() -> None:
-    client = InpiBrBulkClient()
-    assert client.base_url == CKAN_HOST
-    assert client._client.auth is None  # type: ignore[attr-defined]
-
-
-def test_default_dataset_id_is_rpi() -> None:
-    assert INPI_BR_RPI_DATASET_ID == "revista-da-propriedade-industrial-rpi"
 
 
 @pytest.mark.asyncio

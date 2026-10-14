@@ -25,17 +25,6 @@ def _text(value: ET.Element | None) -> str | None:
     return value.text.strip() or None
 
 
-def _bool(text: str | None) -> bool | None:
-    if text is None:
-        return None
-    lowered = text.lower()
-    if lowered in {"true", "1", "yes"}:
-        return True
-    if lowered in {"false", "0", "no"}:
-        return False
-    return None
-
-
 def parse_investigations(xml_text: str) -> list[EdisInvestigation]:
     root = ET.fromstring(xml_text)
     results: list[EdisInvestigation] = []

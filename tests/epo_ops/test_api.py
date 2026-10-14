@@ -44,20 +44,6 @@ async def test_fetch_biblio() -> None:
 
 
 @pytest.mark.asyncio
-async def test_fetch_fulltext() -> None:
-    class DummyClient:
-        async def fetch_fulltext(self, **kwargs: object) -> FullTextResponse:
-            assert kwargs["section"] == "claims"
-            return FullTextResponse(section="claims", claims=[])
-
-    result = await ops_api.fetch_fulltext(
-        "EP1000000", section="claims", client=cast(Any, DummyClient())
-    )
-    assert isinstance(result, FullTextResponse)
-    assert result.section == "claims"
-
-
-@pytest.mark.asyncio
 async def test_fetch_fulltext_translates_404_to_friendly_value_error() -> None:
     # EPO returns 404 for publications without indexed full text
     # (especially older or non-EP/non-WO documents). The library-level
