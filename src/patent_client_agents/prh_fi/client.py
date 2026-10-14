@@ -32,7 +32,7 @@ from typing import Any
 
 import httpx
 
-from mcp_data_core import BaseAsyncClient
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     DossierSearchResponse,
@@ -325,7 +325,7 @@ def build_design_search_body(
     }
 
 
-class PrhClient(BaseAsyncClient):
+class PrhClient(ConnectorClient):
     """Async client for PRH's three public JSON APIs.
 
     All methods are read-only. The client shares one cache database

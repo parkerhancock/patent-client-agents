@@ -40,7 +40,6 @@ from xml.etree import ElementTree as ET
 
 import httpx
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
@@ -50,6 +49,7 @@ from mcp_data_core.exceptions import (
     ValidationError,
 )
 from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import InpiDesignRow, InpiTrademarkRow
 from .session import XSRF_HEADER_NAME, InpiSession, fetch_xsrf, login, refresh
@@ -207,7 +207,7 @@ class _SlidingWindowThrottle:
 # =============================================================================
 
 
-class InpiPiClient(BaseAsyncClient):
+class InpiPiClient(ConnectorClient):
     """Async client for INPI France ``api-gateway.inpi.fr`` (TM + Design).
 
     Handles the XSRF-bootstrap → login → bearer + refresh-on-401

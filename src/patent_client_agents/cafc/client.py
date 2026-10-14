@@ -13,10 +13,10 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import McpDataCoreError, ValidationError
 from patent_client_agents.cafc.classifier import PatentClassifier
 from patent_client_agents.cafc.models import CAFCOpinion
+from patent_client_agents.shared.client import ConnectorClient
 
 logger = logging.getLogger(__name__)
 
@@ -60,7 +60,7 @@ class CAFCError(McpDataCoreError):
     """Error from the CAFC WordPress API."""
 
 
-class CAFCClient(BaseAsyncClient):
+class CAFCClient(ConnectorClient):
     """Async client for Federal Circuit opinions.
 
     Fetches opinions from the CAFC website's WordPress DataTables API.

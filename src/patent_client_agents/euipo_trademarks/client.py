@@ -31,9 +31,9 @@ from typing import Any, Literal
 
 import httpx
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import ConfigurationError
 from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import Trademark, TrademarkSearchResult
 
@@ -49,7 +49,7 @@ _MAX_PAGE_SIZE = 100
 _MIN_PAGE_SIZE = 10
 
 
-class EuipoTrademarksClient(BaseAsyncClient):
+class EuipoTrademarksClient(ConnectorClient):
     """Async client for ``api(-sandbox).euipo.europa.eu/trademark-search``.
 
     See module docstring for the auth + environment contract.

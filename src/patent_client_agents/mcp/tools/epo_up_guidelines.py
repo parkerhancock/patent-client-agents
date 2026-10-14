@@ -16,11 +16,12 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.epo_up_guidelines import UpGuidelinesClient, get_corpus_status
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 epo_up_guidelines_mcp = FastMCP("EPO UP Guidelines")
 
@@ -50,7 +51,7 @@ def _up_guidelines_provenance(path: str) -> Any:
     so the values track the bundled corpus without per-call hardcoding.
     """
     status = get_corpus_status()
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_UP_GUIDELINES_BASE}{path}",
         source_name=_UP_GUIDELINES_NAME,
         corpus_synced_at=status["corpus_synced_at"],

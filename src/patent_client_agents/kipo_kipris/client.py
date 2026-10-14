@@ -50,13 +50,13 @@ from urllib.parse import urlsplit
 
 import httpx
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
     ConfigurationError,
     RateLimitError,
 )
 from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import DesignRow, PatentUtilityRow, TrademarkRow
 
@@ -80,7 +80,7 @@ MAX_NUM_OF_ROWS = 1000
 _SIGNUP_URL = "https://plus.kipris.or.kr/eng/main.do"
 
 
-class KiprisClient(BaseAsyncClient):
+class KiprisClient(ConnectorClient):
     """Async client over the three KIPRIS Plus information-search services.
 
     One client instance covers ``patUtliInfoSearchService`` (patents +

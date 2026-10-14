@@ -16,12 +16,12 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import (
     ListEnvelope,
     ResponseEnvelope,
-    make_provenance,
 )
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.cpc import map_classification
 from patent_client_agents.epo_ops.client import client_from_env
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.provenance import provenance_for
 
 cpc_mcp = FastMCP("CPC")
 
@@ -36,7 +36,7 @@ _CPC_NAME = "Cooperative Patent Classification (CPC)"
 
 def _cpc_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}`` on EPO OPS."""
-    return make_provenance(source_url=f"{_CPC_BASE}{path}", source_name=_CPC_NAME)
+    return provenance_for(source_url=f"{_CPC_BASE}{path}", source_name=_CPC_NAME)
 
 
 def _first_cpc_item(payload: dict) -> dict | None:

@@ -8,8 +8,8 @@ from typing import Any
 
 import httpx
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import NotFoundError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     CourtDivision,
@@ -98,7 +98,7 @@ def assess_docket_status(entries: list[FederalCourtDocketEntry]) -> DocketStatus
     )
 
 
-class CanadaFederalCourtClient(BaseAsyncClient):
+class CanadaFederalCourtClient(ConnectorClient):
     """Read-only client for official Federal Court case-file JSON endpoints."""
 
     DEFAULT_BASE_URL = DEFAULT_BASE_URL

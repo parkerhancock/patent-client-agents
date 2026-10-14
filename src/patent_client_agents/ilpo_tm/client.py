@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from mcp_data_core import BaseAsyncClient
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import IlpoTmDataset
 
@@ -32,7 +32,7 @@ _PACKAGE_PATH = "/api/3/action/package_show"
 _DEFAULT_DATASET_ID = "trade-marks"
 
 
-class IlpoTmClient(BaseAsyncClient):
+class IlpoTmClient(ConnectorClient):
     """Async client for the data.gov.il CKAN catalog (ILPO TM dataset).
 
     No auth required for ``package_show`` reads. Downloads stream

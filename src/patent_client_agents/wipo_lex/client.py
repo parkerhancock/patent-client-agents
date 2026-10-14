@@ -21,7 +21,7 @@ from __future__ import annotations
 import os
 from typing import Any
 
-from mcp_data_core import BaseAsyncClient
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     LegislationDetail,
@@ -32,7 +32,7 @@ from .models import (
 from .transformers import parse_legislation_detail, parse_legislation_search
 
 
-class WipoLexClient(BaseAsyncClient):
+class WipoLexClient(ConnectorClient):
     """Async client for ``www.wipo.int/wipolex``.
 
     See the module docstring for the scope and stability contract.

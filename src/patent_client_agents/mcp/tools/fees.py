@@ -18,7 +18,7 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, ResponseEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope, ResponseEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.fees import (
@@ -29,6 +29,7 @@ from patent_client_agents.fees import (
 from patent_client_agents.fees.client import resolve_jurisdiction
 from patent_client_agents.fees.models import EntityTier, FeeSchedule, RecurringFeeCoverage
 from patent_client_agents.fees.registry import OFFICES, get_scraper
+from patent_client_agents.shared.provenance import provenance_for
 
 
 class FeeLookupEnvelope(ListEnvelope[dict]):
@@ -54,7 +55,7 @@ def _fees_provenance(schedule: FeeSchedule | None, fallback_url: str) -> Any:
     reason — it's a discovery surface, not a quote surface.
     """
     if schedule is None:
-        return make_provenance(
+        return provenance_for(
             source_url=fallback_url,
             source_name=_SOURCE_NAME,
         )
@@ -63,7 +64,7 @@ def _fees_provenance(schedule: FeeSchedule | None, fallback_url: str) -> Any:
         notes.append(_NO_EFFECTIVE_DATE)
     if schedule.office_code == "USPTO" and schedule.bytes_retrieved_at is None:
         notes.append("byte retrieval time unknown; envelope timestamp is processing time")
-    provenance = make_provenance(
+    provenance = provenance_for(
         source_url=schedule.source_url,
         source_name=f"{_SOURCE_NAME} — {schedule.office_code}",
         effective_date=schedule.effective_date,

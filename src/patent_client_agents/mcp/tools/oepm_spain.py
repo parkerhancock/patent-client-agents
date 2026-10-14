@@ -7,7 +7,6 @@ from typing import Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import make_provenance
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_resource, conditional_tool
 from patent_client_agents.oepm_spain.client import BASE_URL, OepmSpainClient
@@ -19,6 +18,7 @@ from patent_client_agents.oepm_spain.models import (
 from patent_client_agents.oepm_spain.resources import USAGE
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 oepm_spain_mcp = FastMCP("Spain OEPM CEO register")
 _REQUIRED_ENV = ["OEPM_CEO_USERNAME", "OEPM_CEO_PASSWORD"]
@@ -29,7 +29,7 @@ _SOURCE_NAME = (
 
 
 def _provenance() -> Any:
-    return make_provenance(source_url=BASE_URL, source_name=_SOURCE_NAME)
+    return provenance_for(source_url=BASE_URL, source_name=_SOURCE_NAME)
 
 
 def _date(value: Any) -> str | None:

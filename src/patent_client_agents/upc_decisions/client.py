@@ -26,7 +26,7 @@ import httpx
 from lxml import html
 from lxml.html import HtmlElement
 
-from mcp_data_core.base_client import BaseAsyncClient
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     UpcDecision,
@@ -230,7 +230,7 @@ def _parse_options(tree: HtmlElement, select_name: str) -> list[tuple[str, str]]
     return options
 
 
-class UpcDecisionsClient(BaseAsyncClient):
+class UpcDecisionsClient(ConnectorClient):
     """HTML-scraping client for the UPC decisions-and-orders feed."""
 
     DEFAULT_BASE_URL = DEFAULT_BASE_URL

@@ -6,8 +6,8 @@ import logging
 from datetime import date
 from typing import Any, Literal
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import NotFoundError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import AssignmentDetail, AssignmentRecord, SearchResults
 
@@ -48,7 +48,7 @@ _USPTO_TOTAL_CAP = 10_000
 _INTERNAL_PAGE_SIZE = 1000
 
 
-class AssignmentCenterClient(BaseAsyncClient):
+class AssignmentCenterClient(ConnectorClient):
     """Async client for the USPTO Assignment Center API.
 
     The Assignment Center exposes an undocumented JSON API at

@@ -525,7 +525,8 @@ Names are conventional so they're greppable across the catalog:
 - `_provenance(path: str) -> Provenance` (or `_<office>_provenance(...)`)
   — builds a `Provenance` pointing at the canonical upstream URL for
   this connector. Typically 2-3 lines wrapping
-  `mcp_data_core.envelope.make_provenance` with the connector's base URL
+  `patent_client_agents.shared.provenance.provenance_for` (not
+  `make_provenance`, which can't see cache hits) with the connector's base URL
   and source name as module-level constants. Per-module rather than shared
   because the base URL + source name are part of the connector's identity.
 
@@ -549,7 +550,9 @@ Mechanics that are the same everywhere belong in
 `patent_client_agents.shared` instead of being copied into each module. Use
 `shared.envelope.dump(obj, **model_dump_kwargs)` to serialize records, and
 pass the `model_dump` options your tool's output shape needs (for example
-`by_alias=True` or `mode="json"`). Don't define a local `_dump`. Add a
+`by_alias=True` or `mode="json"`). Don't define a local `_dump`. HTTP connector clients subclass
+`shared.client.ConnectorClient` so `provenance_for` can report `cache_hit` and
+the original `retrieved_at` (§3). Add a
 shared helper when the same logic appears in several modules and differs
 only in parameters; keep connector-specific shape and identity local.
 

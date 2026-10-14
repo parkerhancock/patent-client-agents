@@ -28,7 +28,7 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import NotFoundError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.inpi_br_bulk import (
@@ -37,6 +37,7 @@ from patent_client_agents.inpi_br_bulk import (
     InpiBrBulkClient,
 )
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.provenance import provenance_for
 
 inpi_br_bulk_mcp = FastMCP("INPI Brazil — RPI")
 
@@ -45,7 +46,7 @@ _INPI_BR_BULK_NAME = "INPI Brazil — RPI (dados.gov.br)"
 
 def _inpi_br_bulk_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{CKAN_HOST}{path}``."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{CKAN_HOST}{path}",
         source_name=_INPI_BR_BULK_NAME,
     )

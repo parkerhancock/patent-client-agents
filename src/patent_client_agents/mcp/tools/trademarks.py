@@ -19,11 +19,12 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.tmep import TmepClient, get_corpus_status
 from patent_client_agents.uspto_tmsearch import TmsearchClient
 from patent_client_agents.uspto_trademark_assignments import TrademarkAssignmentClient
@@ -56,11 +57,11 @@ _TMEP_LEAN_SNIPPET_CHARS = 400
 
 
 def _tmsearch_provenance(path: str) -> Any:
-    return make_provenance(source_url=f"{_TMSEARCH_BASE}{path}", source_name=_TMSEARCH_NAME)
+    return provenance_for(source_url=f"{_TMSEARCH_BASE}{path}", source_name=_TMSEARCH_NAME)
 
 
 def _tsdr_provenance(path: str) -> Any:
-    return make_provenance(source_url=f"{_TSDR_BASE}{path}", source_name=_TSDR_NAME)
+    return provenance_for(source_url=f"{_TSDR_BASE}{path}", source_name=_TSDR_NAME)
 
 
 def _tmep_provenance(path: str) -> Any:
@@ -72,7 +73,7 @@ def _tmep_provenance(path: str) -> Any:
     MPEP pattern (CONNECTOR_STANDARDS.md §4 / §5.9).
     """
     status = get_corpus_status()
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_TMEP_BASE}{path}",
         source_name=_TMEP_NAME,
         corpus_synced_at=status["corpus_synced_at"],
@@ -626,7 +627,7 @@ _TM_ASSIGNMENT_NAME = "USPTO Trademark Assignment Center"
 
 
 def _tm_assignment_provenance(path: str) -> Any:
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_TM_ASSIGNMENT_BASE}{path}",
         source_name=_TM_ASSIGNMENT_NAME,
     )

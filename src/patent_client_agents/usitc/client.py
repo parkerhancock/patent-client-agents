@@ -8,8 +8,8 @@ from typing import Any
 
 import httpx
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import AuthenticationError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     DataWebReport,
@@ -59,7 +59,7 @@ def _decode_jwt_exp(token: str) -> datetime | None:
         return None
 
 
-class EdisClient(BaseAsyncClient):
+class EdisClient(ConnectorClient):
     DEFAULT_BASE_URL = os.getenv("USITC_EDIS_BASE_URL", "https://edis.usitc.gov/data")
     CACHE_NAME = "usitc_edis"
 
@@ -306,7 +306,7 @@ def build_dataweb_query(
     }
 
 
-class DataWebClient(BaseAsyncClient):
+class DataWebClient(ConnectorClient):
     DEFAULT_BASE_URL = os.getenv("USITC_DATAWEB_BASE_URL", "https://datawebws.usitc.gov/dataweb")
     CACHE_NAME = "usitc_dataweb"
     DEFAULT_TIMEOUT = 60.0
@@ -349,7 +349,7 @@ class DataWebClient(BaseAsyncClient):
         return parse_saved_queries(payload)
 
 
-class IdsClient(BaseAsyncClient):
+class IdsClient(ConnectorClient):
     DEFAULT_BASE_URL = os.getenv("USITC_IDS_BASE_URL", "https://ids.usitc.gov")
     CACHE_NAME = "usitc_ids"
     DEFAULT_TIMEOUT = 10.0
@@ -362,7 +362,7 @@ class IdsClient(BaseAsyncClient):
         return parse_ids_investigations(payload)
 
 
-class HtsClient(BaseAsyncClient):
+class HtsClient(ConnectorClient):
     DEFAULT_BASE_URL = os.getenv("USITC_HTS_BASE_URL", "https://hts.usitc.gov/reststop")
     CACHE_NAME = "usitc_hts"
 

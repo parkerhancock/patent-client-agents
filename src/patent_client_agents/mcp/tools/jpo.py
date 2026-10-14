@@ -28,7 +28,6 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import (
     ListEnvelope,
     ResponseEnvelope,
-    make_provenance,
 )
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
@@ -44,6 +43,7 @@ from mcp_data_core.mcp.downloads import (
 )
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 _JPO_REQUIRED_ENV: list[str] = ["JPO_API_USERNAME", "JPO_API_PASSWORD"]
 
@@ -168,7 +168,7 @@ _JPO_NAME = "Japan Patent Office (JPO)"
 
 def _jpo_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}/api{path}`` on the JPO API."""
-    return make_provenance(source_url=f"{_JPO_BASE}/api{path}", source_name=_JPO_NAME)
+    return provenance_for(source_url=f"{_JPO_BASE}/api{path}", source_name=_JPO_NAME)
 
 
 def _summarize_jpo_progress(application_number: str, record: dict) -> str:

@@ -12,12 +12,13 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.ip_australia_designs import IpAustraliaDesignsClient
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 ip_australia_designs_mcp = FastMCP("IP Australia — Designs")
 
@@ -30,7 +31,7 @@ _IPA_API_PATH = "/public/australian-design-search-api/v1"
 
 def _ipa_designs_provenance(path: str) -> Any:
     """Build a Provenance for an Australian Designs Search API path."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_IPA_BASE}{_IPA_API_PATH}{path}",
         source_name=_IPA_NAME,
     )

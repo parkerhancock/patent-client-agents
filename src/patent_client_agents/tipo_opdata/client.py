@@ -43,8 +43,8 @@ import os
 from collections.abc import AsyncIterator
 from typing import Any, TypeVar
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import ConfigurationError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     PatentAlterationRow,
@@ -108,7 +108,7 @@ def _extract_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
     return []
 
 
-class TipoClient(BaseAsyncClient):
+class TipoClient(ConnectorClient):
     """Async client for the TIPO Taiwan OpenData REST API.
 
     All methods are read-only ``GET``\\ s against

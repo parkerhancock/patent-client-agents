@@ -28,7 +28,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from mcp_data_core import BaseAsyncClient
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import BulkDataset
 
@@ -37,7 +37,7 @@ _PACKAGE_PATH = "/data/api/3/action/package_show"
 _DEFAULT_DATASET_ID = "iprapid"
 
 
-class IpAustraliaBulkClient(BaseAsyncClient):
+class IpAustraliaBulkClient(ConnectorClient):
     """Async client for the data.gov.au CKAN catalog (IP RAPID dataset).
 
     No auth; the CKAN ``package_show`` action is public. Downloads

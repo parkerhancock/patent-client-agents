@@ -12,10 +12,11 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.uspto_assignments import AssignmentCenterClient
 from patent_client_agents.uspto_assignments.client import _SEARCH_AXIS_TO_API
 
@@ -34,7 +35,7 @@ _ASSIGNMENT_NAME = "USPTO Patent Assignment Center"
 
 
 def _patent_assignment_provenance(path: str) -> Any:
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_ASSIGNMENT_BASE}{path}",
         source_name=_ASSIGNMENT_NAME,
     )

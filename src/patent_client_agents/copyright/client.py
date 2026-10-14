@@ -10,7 +10,6 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import McpDataCoreError
 from patent_client_agents.copyright.models import (
     Claimant,
@@ -19,6 +18,7 @@ from patent_client_agents.copyright.models import (
     SearchMetadata,
     SearchResponse,
 )
+from patent_client_agents.shared.client import ConnectorClient
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +27,7 @@ class CopyrightError(McpDataCoreError):
     """Error from the Copyright Office API."""
 
 
-class CopyrightClient(BaseAsyncClient):
+class CopyrightClient(ConnectorClient):
     """Async client for the Copyright Office Public Records search API.
 
     Uses the undocumented JSON API behind publicrecords.copyright.gov.

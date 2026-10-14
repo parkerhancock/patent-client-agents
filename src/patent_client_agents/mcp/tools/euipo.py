@@ -17,13 +17,14 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.euipo_designs import EuipoDesignsClient
 from patent_client_agents.euipo_trademarks import EuipoTrademarksClient
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 euipo_mcp = FastMCP("EUIPO")
 
@@ -41,7 +42,7 @@ _EUIPO_NAME = "EUIPO"
 
 def _euipo_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}`` for EUIPO REST APIs."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_EUIPO_BASE}{path}",
         source_name=_EUIPO_NAME,
     )

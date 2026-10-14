@@ -7,7 +7,7 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_resource, conditional_tool
@@ -27,6 +27,7 @@ from patent_client_agents.ipi_swissreg.models import (
 from patent_client_agents.ipi_swissreg.resources import USAGE
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 ipi_swissreg_mcp = FastMCP("Swiss IPI, Swissreg datadelivery")
 _REQUIRED_ENV = ["IPI_DATA_USERNAME", "IPI_DATA_PASSWORD"]
@@ -37,7 +38,7 @@ _SOURCE_NAME = (
 
 
 def _provenance() -> Any:
-    return make_provenance(source_url=BASE_URL, source_name=_SOURCE_NAME)
+    return provenance_for(source_url=BASE_URL, source_name=_SOURCE_NAME)
 
 
 def _date(value: Any) -> str | None:

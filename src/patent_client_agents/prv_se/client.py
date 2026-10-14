@@ -19,7 +19,7 @@ from typing import Any
 
 import httpx
 
-from mcp_data_core import BaseAsyncClient
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     DesignSearchResponse,
@@ -115,7 +115,7 @@ def _build_advanced_search_body(
     return body
 
 
-class PrvClient(BaseAsyncClient):
+class PrvClient(ConnectorClient):
     """Async client for PRV's three public JSON APIs.
 
     All methods are read-only. The client shares one cache database

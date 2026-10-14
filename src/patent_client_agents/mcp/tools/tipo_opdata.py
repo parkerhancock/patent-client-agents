@@ -21,11 +21,12 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.tipo_opdata import TipoClient
 
 tipo_opdata_mcp = FastMCP("TIPO Taiwan — OpenData")
@@ -55,7 +56,7 @@ def _tipo_provenance(path: str) -> Any:
     :data:`_TIPO_ATTRIBUTION` for callers (and the usage resource) so
     agents can surface it verbatim per spec §3.
     """
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_TIPO_BASE}{path}",
         source_name=_TIPO_NAME,
     )

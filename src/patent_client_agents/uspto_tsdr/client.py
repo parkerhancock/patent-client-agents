@@ -6,8 +6,8 @@ import os
 import xml.etree.ElementTree as ET
 from typing import Any
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import ConfigurationError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     GoodsServices,
@@ -19,7 +19,7 @@ from .models import (
 )
 
 
-class TsdrClient(BaseAsyncClient):
+class TsdrClient(ConnectorClient):
     """Async client for the USPTO TSDR API.
 
     Provides programmatic access to trademark status, documents, and images.

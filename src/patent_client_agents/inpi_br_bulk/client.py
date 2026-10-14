@@ -34,7 +34,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from mcp_data_core import BaseAsyncClient
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import BulkDataset
 
@@ -43,7 +43,7 @@ _PACKAGE_PATH = "/api/3/action/package_show"
 INPI_BR_RPI_DATASET_ID = "revista-da-propriedade-industrial-rpi"
 
 
-class InpiBrBulkClient(BaseAsyncClient):
+class InpiBrBulkClient(ConnectorClient):
     """Async client for the dados.gov.br catalog (INPI RPI dataset).
 
     No auth; the CKAN ``package_show`` action is public. Downloads

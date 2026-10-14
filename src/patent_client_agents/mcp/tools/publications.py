@@ -12,7 +12,6 @@ from mcp_data_core.envelope import (
     ResponseEnvelope,
     decode_cursor,
     encode_cursor,
-    make_provenance,
 )
 from mcp_data_core.exceptions import ParseError, ValidationError
 from mcp_data_core.filenames import publication_pdf as _publication_pdf_name
@@ -20,6 +19,7 @@ from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import read_resource, register_source
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.uspto_publications import (
     PublicSearchClient,
     resolve_and_download_pdf,
@@ -40,7 +40,7 @@ _PPUBS_NAME = "USPTO Patent Public Search (PPUBS)"
 
 def _ppubs_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}`` for the PPUBS upstream."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_PPUBS_BASE}{path}",
         source_name=_PPUBS_NAME,
     )

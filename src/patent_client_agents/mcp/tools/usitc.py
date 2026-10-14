@@ -40,7 +40,7 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, ResponseEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope, ResponseEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.filenames import usitc_attachment as _usitc_name
 from mcp_data_core.mcp import (
@@ -53,6 +53,7 @@ from mcp_data_core.mcp import (
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.usitc import (
     DataWebClient,
     EdisClient,
@@ -98,7 +99,7 @@ def _usitc_provenance(path: str, *, as_of_status: str | None = None) -> Any:
     investigations/documents/attachments surface).
     """
     source_url = path if path.startswith("http") else f"{_EDIS_BASE}{path}"
-    return make_provenance(
+    return provenance_for(
         source_url=source_url,
         source_name=_USITC_SOURCE_NAME,
         as_of_status=as_of_status,

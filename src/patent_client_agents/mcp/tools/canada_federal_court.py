@@ -9,11 +9,12 @@ from urllib.parse import quote_plus
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import McpDataCoreError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.canada_federal_court import CanadaFederalCourtClient
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 canada_federal_court_mcp = FastMCP("Canada Federal Court")
 
@@ -29,7 +30,7 @@ _UNKNOWN_STATUS = {
 
 
 def _provenance(path: str = _COURT_FILES_PATH, *, status: str) -> Any:
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_BASE_URL}{path}",
         source_name=_SOURCE_NAME,
         as_of_status=status,

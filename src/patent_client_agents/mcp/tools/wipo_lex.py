@@ -17,10 +17,11 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.wipo_lex import (
     SubjectMatter,
     TypeOfText,
@@ -41,7 +42,7 @@ _WIPO_LEX_NAME = "WIPO Lex"
 
 def _wipo_lex_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}``."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_WIPO_LEX_BASE}{path}",
         source_name=_WIPO_LEX_NAME,
     )

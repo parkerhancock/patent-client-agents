@@ -15,12 +15,13 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.prv_se import PrvClient
 from patent_client_agents.prv_se.client import API_HOST, DV_HOST, PATENTS_HOST
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 prv_se_mcp = FastMCP("PRV Sweden")
 
@@ -34,7 +35,7 @@ _LEAN_PATENT_GET_DROP = {"first_drawing"}
 
 
 def _provenance(source_url: str) -> Any:
-    return make_provenance(source_url=source_url, source_name=_PRV_SOURCE_NAME)
+    return provenance_for(source_url=source_url, source_name=_PRV_SOURCE_NAME)
 
 
 def _project_search_row(row: Any, *, full: bool) -> dict[str, Any]:
