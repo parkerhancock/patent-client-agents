@@ -63,17 +63,25 @@ async def test_search_full_true_returns_upstream_shape(tmep_corpus_env: Path) ->
     assert "title" in item
 
 
+@pytest.mark.xfail(
+    strict=True,
+    reason=(
+        "Source bug: TMEP get_corpus_status surfaces the eTMEP 'current' query label "
+        "as corpus_version; per CONNECTOR_STANDARDS.md §4 and the MPEP precedent, "
+        "absent release evidence must report 'unknown'."
+    ),
+)
 @pytest.mark.asyncio
 async def test_search_provenance_carries_corpus_fields(tmep_corpus_env: Path) -> None:
     """§4: substantive-law Provenance must surface ``corpus_synced_at`` and
     ``corpus_version``. They flow from ``get_corpus_status()`` (which
     reads ``meta.source_version`` / ``meta.snapshot_date``) — never
     hardcoded in the tool function. The fixture corpus stamps
-    ``source_version='current'``.
+    ``source_version='current'``, which is not release evidence.
     """
     result = await search_tmep(query="specimen")
 
-    assert result.provenance.corpus_version == "current"
+    assert result.provenance.corpus_version == "unknown"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
 
 
@@ -102,7 +110,6 @@ async def test_get_single_string_returns_list_envelope(tmep_corpus_env: Path) ->
     # Summary is Markdown leading with the corpus version + section number
     # so agents can paste it as a freshness-aware citation (§4 / §5.13).
     assert "TMEP" in result.summary
-    assert "current" in result.summary
     assert "1207" in result.summary
 
 
@@ -121,6 +128,14 @@ async def test_get_list_preserves_order(tmep_corpus_env: Path) -> None:
     assert result.provenance.source_url.endswith("/RDMS/TMEP/result")
 
 
+@pytest.mark.xfail(
+    strict=True,
+    reason=(
+        "Source bug: TMEP get_corpus_status surfaces the eTMEP 'current' query label "
+        "as corpus_version; per CONNECTOR_STANDARDS.md §4 and the MPEP precedent, "
+        "absent release evidence must report 'unknown'."
+    ),
+)
 @pytest.mark.asyncio
 async def test_get_provenance_carries_corpus_fields(tmep_corpus_env: Path) -> None:
     """The Provenance.corpus_version stamp must be present on get_* too,
@@ -130,7 +145,8 @@ async def test_get_provenance_carries_corpus_fields(tmep_corpus_env: Path) -> No
     """
     result = await get_tmep_section(section="1207")
 
-    assert result.provenance.corpus_version == "current"
+    assert result.provenance.corpus_version == "unknown"
+    assert "unknown" in result.summary
     assert isinstance(result.provenance.corpus_synced_at, datetime)
 
 

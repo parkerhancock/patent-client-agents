@@ -133,7 +133,13 @@ class TestSearch:
         async with IpoInStatutesClient() as c:
             r = await c.search("section", sort="outline", per_page=5)
         # outline sort returns rows in statute_name, section_number order
-        assert r.hits
+        assert [(h.statute_name, h.section_number) for h in r.hits] == [
+            ("Copyright Act", "13"),
+            ("Designs Act", "2(d)"),
+            ("Patent Rules", "71"),
+            ("Patents Act", "122"),
+            ("Patents Act", "25(1)"),
+        ]
 
     async def test_empty_query_returns_empty(self) -> None:
         async with IpoInStatutesClient() as c:

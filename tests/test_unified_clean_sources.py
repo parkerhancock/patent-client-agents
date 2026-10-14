@@ -76,9 +76,16 @@ async def test_claims_clean_never_imports_google():
     epo.__aexit__ = AsyncMock(return_value=False)
     epo.fetch_fulltext = AsyncMock(return_value={"claims": []})
 
-    with patch("patent_client_agents.epo_ops.client.client_from_env", return_value=epo):
+    with (
+        patch("patent_client_agents.epo_ops.client.client_from_env", return_value=epo),
+        patch(
+            "patent_client_agents.google_patents.GooglePatentsClient",
+            side_effect=AssertionError("Google must not be called"),
+        ) as google,
+    ):
         with pytest.raises(NotFoundError):
             await unified.get_patent_claims_clean("EP0000000A1")
+    google.assert_not_called()
 
 
 def _odp_without_grant_xml():

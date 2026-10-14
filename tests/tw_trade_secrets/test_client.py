@@ -103,13 +103,14 @@ class TestSearch:
         # FTS5 doesn't treat them as operators.
         async with TwTradeSecretsClient() as c:
             r = await c.search("NT$1,000,000")
-        # Either matches Art. 13-1 or returns no hits — but must not raise.
-        assert isinstance(r.hits, list)
+        # The quoted phrase matches only the Art. 13-1 fine amount.
+        assert [h.section for h in r.hits] == ["13-1"]
 
     async def test_outline_sort(self) -> None:
         async with TwTradeSecretsClient() as c:
             r = await c.search("trade", sort="outline", syntax="or")
-        assert r.hits
+        # Documented string sort over section labels, not numeric outline.
+        assert [h.section for h in r.hits] == ["1", "10", "11", "13", "13-1", "2", "3"]
 
     async def test_empty_query_returns_empty(self) -> None:
         async with TwTradeSecretsClient() as c:

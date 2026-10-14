@@ -96,16 +96,20 @@ class TestTitleFromBody:
         assert title.endswith("…")
 
     def test_splits_on_first_period(self) -> None:
-        """``_title_from_body`` splits on the first period — that yields a
-        short head for LPI bodies (because Planalto's article heads carry
-        ``Art. 6º`` followed by a period). The implementation prefers a
-        short, syntactically clean head over a more semantically rich one.
-        """
+        """``_title_from_body`` keeps the first sentence, up to its period."""
+        body = "Primeira frase curta. Segunda frase mais longa segue."
+        assert _title_from_body(body) == "Primeira frase curta."
+
+    @pytest.mark.xfail(
+        strict=True,
+        reason=(
+            "Source bug: _title_from_body treats the period in the 'Art.' heading "
+            "as a sentence break, so every Planalto article title becomes 'Art.'."
+        ),
+    )
+    def test_does_not_split_inside_article_heading(self) -> None:
         body = "Art. 6º Primeira frase curta. Segunda frase mais longa segue."
-        title = _title_from_body(body)
-        # The first period inside ``Art.`` is treated as a sentence break.
-        assert title  # any non-empty string is fine — the contract is "short"
-        assert "Segunda" not in title
+        assert _title_from_body(body) == "Art. 6º Primeira frase curta."
 
     def test_max_chars_cap(self) -> None:
         body = "Sentença longa sem qualquer ponto até o final atinge o cap"

@@ -12,7 +12,7 @@ from __future__ import annotations
 import asyncio
 import sqlite3
 from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 
@@ -258,43 +258,46 @@ def test_main_handles_keyboard_interrupt(monkeypatch, tmp_path: Path):
 
 
 def test_fetcher_fetch_retries_then_succeeds(monkeypatch):
-    """The fetcher returns plain text from a happy-path HTTP response."""
+    """A transient 503 is retried and the second attempt's text is returned."""
+    import httpx
+
+    from mcp_data_core import default_retryer
     from patent_client_agents.ipos_statutes.corpus.build import IposStatutesFetcher
 
-    response = MagicMock()
-    response.content = b"<html><body><p>13. Stub heading</p></body></html>"
-    response.raise_for_status = MagicMock()
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request.url.path)
+        if len(calls) == 1:
+            return httpx.Response(503, content=b"busy")
+        return httpx.Response(200, content=b"<html><body><p>13. Stub heading</p></body></html>")
+
+    # Real retry policy, zero backoff so the test does not sleep.
+    monkeypatch.setattr(
+        build_mod,
+        "default_retryer",
+        lambda: default_retryer(initial_wait=0, max_wait=0),
+    )
 
     async def run():
         fetcher = IposStatutesFetcher()
-        # Patch the internal client.get method
-        fetcher._client = MagicMock()
-        fetcher._client.get = AsyncMock(return_value=response)
-        with patch("patent_client_agents.ipos_statutes.corpus.build.default_retryer") as r:
-            # Single iteration succeeding
-            class _AttemptContext:
-                def __enter__(self):
-                    return self
-
-                def __exit__(self, *_):
-                    return None
-
-            async def _aiter():
-                yield _AttemptContext()
-
-            r.return_value.__aiter__ = lambda self: _aiter()
+        await fetcher._client.aclose()
+        fetcher._client = httpx.AsyncClient(
+            base_url="https://sso.example", transport=httpx.MockTransport(handler)
+        )
+        async with fetcher:
             source = StatuteSource(
                 statute="patents",
                 short_name="Patents Act",
                 title="Patents Act 1994",
                 path="/Act/PA1994",
             )
-            result = await fetcher.fetch(source)
-            return result
+            return await fetcher.fetch(source)
 
     result = asyncio.run(run())
+    assert calls == ["/Act/PA1994", "/Act/PA1994"]
     assert result.source.statute == "patents"
-    assert "Stub" in result.text
+    assert "13. Stub heading" in result.text
 
 
 def test_parsed_section_immutability():

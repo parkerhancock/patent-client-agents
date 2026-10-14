@@ -27,12 +27,21 @@ class TestGetCorpusStatusShape:
 
 
 class TestGetCorpusStatusFromBundledCorpus:
-    def test_version_string_is_source_version_from_meta(self, tmep_corpus_env: Path) -> None:
+    @pytest.mark.xfail(
+        strict=True,
+        reason=(
+            "Source bug: TMEP get_corpus_status surfaces the eTMEP 'current' query label "
+            "as corpus_version; per CONNECTOR_STANDARDS.md §4 and the MPEP precedent, "
+            "absent release evidence must report 'unknown'."
+        ),
+    )
+    def test_current_source_version_reports_unknown(self, tmep_corpus_env: Path) -> None:
         """``write_corpus`` stamps ``source_version='current'`` (see
-        ``corpus/build.py``). The callable surfaces it verbatim.
+        ``corpus/build.py``). That label is the eTMEP query parameter, not
+        release evidence, so the callable should report ``'unknown'``.
         """
         status = get_corpus_status()
-        assert status["corpus_version"] == "current"
+        assert status["corpus_version"] == "unknown"
 
     def test_synced_at_is_utc_datetime_from_snapshot_date(self, tmep_corpus_env: Path) -> None:
         """``meta.snapshot_date`` is ISO ``YYYY-MM-DD``; we lift it to a
