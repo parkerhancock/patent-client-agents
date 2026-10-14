@@ -22,10 +22,10 @@ from typing import Annotated, Any
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.tipo_opdata import TipoClient
 
 tipo_opdata_mcp = FastMCP("TIPO Taiwan — OpenData")
@@ -44,7 +44,6 @@ _TIPO_ATTRIBUTION = (
     "Source: Intellectual Property Office, Ministry of Economic Affairs, Taiwan (TIPO/MOEA). "
     "Licence: Taiwan Open Government Data License v1.0."
 )
-_TIPO_FANOUT_CONCURRENCY = 5
 _TIPO_DEFAULT_TOP = 100
 
 
@@ -110,15 +109,6 @@ def _project(rows: list[Any], *, full: bool) -> list[dict[str, Any]]:
     if full:
         return dumped
     return [_lean(r) for r in dumped]
-
-
-def _coerce_list(value: str | list[str], *, tool: str) -> list[str]:
-    """Normalize a ``str | list[str]`` input to a non-empty list."""
-    items = [value] if isinstance(value, str) else list(value)
-    items = [s.strip() for s in items if isinstance(s, str) and s.strip()]
-    if not items:
-        raise ValidationError(f"{tool} requires at least one application number")
-    return items
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -208,38 +198,48 @@ async def _fetch_by_appl_no(
     full: bool,
     endpoint: str,
     label: str,
-    tool: str,
-) -> ListEnvelope[dict]:
+    empty_is_not_found: bool = False,
+) -> FetchedList[dict]:
     """Run a TipoClient fetch method across one or more appl-no values.
 
-    Bounded concurrency per ``_TIPO_FANOUT_CONCURRENCY``. Order in the
-    response items list matches input order for list inputs.
+    Fans out through ``shared.fanout.fetch_many``; items keep input order.
+    TIPO usually answers an unknown number with zero rows, not an error, so
+    record-level endpoints pass ``empty_is_not_found=True`` to report such
+    numbers in ``not_found``. Facet endpoints (priority, annuity, ...) leave
+    it False, because zero rows there means "no such facet", not "no such
+    application".
     """
-    numbers = _coerce_list(appl_no, tool=tool)
-    semaphore = asyncio.Semaphore(_TIPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: TipoClient, num: str) -> list[Any]:
-        async with semaphore:
-            method = getattr(client, method_name)
-            return await method(appl_no=num)
+    numbers = as_id_list(appl_no, noun="TIPO application number")
 
     async with TipoClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        method = getattr(client, method_name)
+
+        async def _fetch_one(num: str) -> list[Any] | None:
+            rows = await method(appl_no=num)
+            return None if empty_is_not_found and not rows else rows
+
+        results, not_found = await fetch_many(numbers, _fetch_one, single=isinstance(appl_no, str))
 
     rows: list[Any] = [r for batch in results for r in batch]
     items = _project(rows, full=full)
-    summary = (
-        f"TIPO {label} — {len(items)} rows for "
-        f"{len(numbers)} application{'s' if len(numbers) != 1 else ''}: "
-        f"{', '.join(numbers[:5])}{' …' if len(numbers) > 5 else ''}."
-    )
-    return ListEnvelope[dict](
-        summary=summary,
+    return FetchedList[dict](
+        summary=_rows_summary(label, "rows for", len(items), numbers, len(results), not_found),
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_tipo_provenance(endpoint),
     )
+
+
+def _rows_summary(
+    label: str, unit: str, item_count: int, numbers: list[str], found: int, not_found: list[str]
+) -> str:
+    """Summary for a by-appl-no fetch: one-ID wording, or the shared multi-ID wording."""
+    if len(numbers) == 1:
+        return f"TIPO {label} — {item_count} {unit} 1 application: {numbers[0]}."
+    head = fetched_summary(found, len(numbers), f"applications for TIPO {label}", not_found)
+    return f"{head} {item_count} {unit.split()[0]}."
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -255,7 +255,7 @@ async def get_tipo_patent(
         "portfolio fan-outs. Each list element is fetched concurrently.",
     ],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch one or more Taiwan patent application biblio records.
 
     Wraps ``/PatentAppl?appl-no=...``. Returns the application-side
@@ -273,7 +273,7 @@ async def get_tipo_patent(
         full=full,
         endpoint="/PatentAppl",
         label="patent applications",
-        tool="get_tipo_patent",
+        empty_is_not_found=True,
     )
 
 
@@ -284,7 +284,7 @@ async def get_tipo_patent_publication(
         "TW patent / UM / design application number, or a list.",
     ],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan patent publication records (KOKAI + KOKOKU).
 
     Wraps ``/PatentPub``. Carries the publication reference, the
@@ -299,7 +299,6 @@ async def get_tipo_patent_publication(
         full=full,
         endpoint="/PatentPub",
         label="patent publications",
-        tool="get_tipo_patent_publication",
     )
 
 
@@ -310,7 +309,7 @@ async def get_tipo_patent_rights(
         "TW patent / UM / design application number, or a list.",
     ],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan patent grant + status records (with ``twins-flag``).
 
     Wraps ``/PatentRights``. Carries the grant status, registration
@@ -326,7 +325,6 @@ async def get_tipo_patent_rights(
         full=full,
         endpoint="/PatentRights",
         label="patent rights",
-        tool="get_tipo_patent_rights",
     )
 
 
@@ -337,7 +335,7 @@ async def get_tipo_patent_priority(
         "TW patent / UM / design application number, or a list.",
     ],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan Paris priority claim records for a patent.
 
     Wraps ``/PatentPriority``. One row per application; the
@@ -352,7 +350,6 @@ async def get_tipo_patent_priority(
         full=full,
         endpoint="/PatentPriority",
         label="patent priority",
-        tool="get_tipo_patent_priority",
     )
 
 
@@ -363,7 +360,7 @@ async def get_tipo_patent_annuity(
         "TW patent / UM / design application number, or a list.",
     ],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan annuity payment schedule for a patent.
 
     Wraps ``/PatentAnnuity``. Carries paid-through dates and per-year
@@ -378,7 +375,6 @@ async def get_tipo_patent_annuity(
         full=full,
         endpoint="/PatentAnnuity",
         label="patent annuity",
-        tool="get_tipo_patent_annuity",
     )
 
 
@@ -389,7 +385,7 @@ async def get_tipo_patent_twins(
         "TW patent application number, or a list.",
     ],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan Article 32 invention / UM "twin" pair records.
 
     Wraps ``/PatentTwins``. TW Patent Act Article 32 permits dual
@@ -407,7 +403,6 @@ async def get_tipo_patent_twins(
         full=full,
         endpoint="/PatentTwins",
         label="patent twins",
-        tool="get_tipo_patent_twins",
     )
 
 
@@ -418,7 +413,7 @@ async def get_tipo_patent_events(
         "TW patent / UM / design application number, or a list.",
     ],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan patent post-filing events (alterations, changes, divides).
 
     Combined surface per spec §3, §5.6: merges
@@ -431,49 +426,39 @@ async def get_tipo_patent_events(
     Related tools: ``get_tipo_patent`` (application biblio);
     ``get_tipo_patent_rights`` (grant status); no upstream substitute.
     """
-    numbers = _coerce_list(appl_no, tool="get_tipo_patent_events")
-    semaphore = asyncio.Semaphore(_TIPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one_kind(client: TipoClient, method_name: str, num: str) -> list[Any]:
-        async with semaphore:
-            method = getattr(client, method_name)
-            return await method(appl_no=num)
+    numbers = as_id_list(appl_no, noun="TIPO application number")
 
     async with TipoClient() as client:
-        coroutines = []
-        for num in numbers:
-            coroutines.extend(
-                [
-                    _fetch_one_kind(client, "get_patent_alteration", num),
-                    _fetch_one_kind(client, "get_patent_change", num),
-                    _fetch_one_kind(client, "get_patent_divide", num),
-                ]
+
+        async def _fetch_one(num: str) -> list[dict[str, Any]]:
+            endpoints = (
+                ("alteration", "get_patent_alteration"),
+                ("change", "get_patent_change"),
+                ("divide", "get_patent_divide"),
             )
-        results = await asyncio.gather(*coroutines)
+            # One ID's endpoints run together; concurrency=2 keeps total in-flight near 5.
+            batches = await asyncio.gather(
+                *(getattr(client, method_name)(appl_no=num) for _, method_name in endpoints)
+            )
+            events: list[dict[str, Any]] = []
+            for (tag, _), rows in zip(endpoints, batches, strict=True):
+                for row in rows:
+                    dumped = dump(row, by_alias=True)
+                    projected = dumped if full else _lean(dumped)
+                    events.append({"event_type": tag, "appl_no": num, **projected})
+            return events
 
-    # Triplets of (alteration, change, divide) per appl_no, in order.
-    items: list[dict[str, Any]] = []
-    for idx, num in enumerate(numbers):
-        alt_rows, chg_rows, div_rows = results[idx * 3 : idx * 3 + 3]
-        for tag, batch in (
-            ("alteration", alt_rows),
-            ("change", chg_rows),
-            ("divide", div_rows),
-        ):
-            for row in batch:
-                dumped = dump(row, by_alias=True)
-                projected = dumped if full else _lean(dumped)
-                projected = {"event_type": tag, "appl_no": num, **projected}
-                items.append(projected)
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(appl_no, str), concurrency=2
+        )
 
-    summary = (
-        f"TIPO patent events — {len(items)} events across "
-        f"{len(numbers)} application{'s' if len(numbers) != 1 else ''}: "
-        f"{', '.join(numbers[:5])}{' …' if len(numbers) > 5 else ''}."
-    )
-    return ListEnvelope[dict](
-        summary=summary,
+    items = [event for batch in results for event in batch]
+    return FetchedList[dict](
+        summary=_rows_summary(
+            "patent events", "events across", len(items), numbers, len(results), not_found
+        ),
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_tipo_provenance("/PatentAlteration+Change+Divide"),
@@ -542,7 +527,7 @@ async def search_tipo_trademarks(
 async def get_tipo_trademark(
     appl_no: Annotated[str | list[str], "TW trademark application number, or a list."],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch one or more Taiwan trademark application records.
 
     Wraps ``/TmarkAppl?appl-no=...``. Returns biblio + Nice class +
@@ -557,7 +542,7 @@ async def get_tipo_trademark(
         full=full,
         endpoint="/TmarkAppl",
         label="trademark applications",
-        tool="get_tipo_trademark",
+        empty_is_not_found=True,
     )
 
 
@@ -565,7 +550,7 @@ async def get_tipo_trademark(
 async def get_tipo_trademark_rights(
     appl_no: Annotated[str | list[str], "TW trademark application number, or a list."],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan trademark registration + status records.
 
     Wraps ``/TmarkRights``. Carries the full status grid
@@ -581,7 +566,6 @@ async def get_tipo_trademark_rights(
         full=full,
         endpoint="/TmarkRights",
         label="trademark rights",
-        tool="get_tipo_trademark_rights",
     )
 
 
@@ -589,7 +573,7 @@ async def get_tipo_trademark_rights(
 async def get_tipo_trademark_priority(
     appl_no: Annotated[str | list[str], "TW trademark application number, or a list."],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan trademark Paris priority claim records.
 
     Wraps ``/TmarkPriority``.
@@ -602,7 +586,6 @@ async def get_tipo_trademark_priority(
         full=full,
         endpoint="/TmarkPriority",
         label="trademark priority",
-        tool="get_tipo_trademark_priority",
     )
 
 
@@ -610,7 +593,7 @@ async def get_tipo_trademark_priority(
 async def get_tipo_trademark_image_urls(
     appl_no: Annotated[str | list[str], "TW trademark application number, or a list."],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan trademark image URLs.
 
     Wraps ``/TmarkPics``. Returns image URLs only — Pillow rendering
@@ -626,7 +609,6 @@ async def get_tipo_trademark_image_urls(
         full=full,
         endpoint="/TmarkPics",
         label="trademark images",
-        tool="get_tipo_trademark_image_urls",
     )
 
 
@@ -634,7 +616,7 @@ async def get_tipo_trademark_image_urls(
 async def get_tipo_trademark_events(
     appl_no: Annotated[str | list[str], "TW trademark application number, or a list."],
     full: Annotated[bool, "Lean (default) vs upstream-shaped rows."] = False,
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch Taiwan trademark post-filing events (changes, divisions).
 
     Combined surface per spec §3, §5.6: merges ``/TmarkChange``
@@ -644,43 +626,38 @@ async def get_tipo_trademark_events(
 
     Related tools: ``get_tipo_trademark_rights`` for current status.
     """
-    numbers = _coerce_list(appl_no, tool="get_tipo_trademark_events")
-    semaphore = asyncio.Semaphore(_TIPO_FANOUT_CONCURRENCY)
-
-    async def _fetch_one_kind(client: TipoClient, method_name: str, num: str) -> list[Any]:
-        async with semaphore:
-            method = getattr(client, method_name)
-            return await method(appl_no=num)
+    numbers = as_id_list(appl_no, noun="TIPO application number")
 
     async with TipoClient() as client:
-        coroutines = []
-        for num in numbers:
-            coroutines.extend(
-                [
-                    _fetch_one_kind(client, "get_tmark_change", num),
-                    _fetch_one_kind(client, "get_tmark_divide", num),
-                ]
+
+        async def _fetch_one(num: str) -> list[dict[str, Any]]:
+            endpoints = (
+                ("change", "get_tmark_change"),
+                ("divide", "get_tmark_divide"),
             )
-        results = await asyncio.gather(*coroutines)
+            # One ID's endpoints run together; concurrency=2 keeps total in-flight near 5.
+            batches = await asyncio.gather(
+                *(getattr(client, method_name)(appl_no=num) for _, method_name in endpoints)
+            )
+            events: list[dict[str, Any]] = []
+            for (tag, _), rows in zip(endpoints, batches, strict=True):
+                for row in rows:
+                    dumped = dump(row, by_alias=True)
+                    projected = dumped if full else _lean(dumped)
+                    events.append({"event_type": tag, "appl_no": num, **projected})
+            return events
 
-    items: list[dict[str, Any]] = []
-    for idx, num in enumerate(numbers):
-        chg_rows, div_rows = results[idx * 2 : idx * 2 + 2]
-        for tag, batch in (("change", chg_rows), ("divide", div_rows)):
-            for row in batch:
-                dumped = dump(row, by_alias=True)
-                projected = dumped if full else _lean(dumped)
-                projected = {"event_type": tag, "appl_no": num, **projected}
-                items.append(projected)
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(appl_no, str), concurrency=2
+        )
 
-    summary = (
-        f"TIPO trademark events — {len(items)} events across "
-        f"{len(numbers)} application{'s' if len(numbers) != 1 else ''}: "
-        f"{', '.join(numbers[:5])}{' …' if len(numbers) > 5 else ''}."
-    )
-    return ListEnvelope[dict](
-        summary=summary,
+    items = [event for batch in results for event in batch]
+    return FetchedList[dict](
+        summary=_rows_summary(
+            "trademark events", "events across", len(items), numbers, len(results), not_found
+        ),
         items=items,
+        not_found=not_found,
         more_available=False,
         next_cursor=None,
         provenance=_tipo_provenance("/TmarkChange+Divide"),
