@@ -221,6 +221,7 @@ class ThaiDipClient(BaseAsyncClient):
         *,
         base_url: str | None = None,
         client: httpx.AsyncClient | None = None,
+        transport: httpx.AsyncBaseTransport | None = None,
     ) -> None:
         resolved_token = token or os.getenv("DIP_DATA_EXCHANGE_TOKEN")
         if not resolved_token:
@@ -239,6 +240,7 @@ class ThaiDipClient(BaseAsyncClient):
         super().__init__(
             base_url=resolved_base,
             client=client,
+            transport=transport,
             headers=headers,
             timeout=30.0,
             use_cache=True,
