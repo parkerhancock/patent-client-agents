@@ -35,6 +35,7 @@ import os
 import time
 from collections import deque
 from collections.abc import Callable, Iterable
+from dataclasses import dataclass, field
 from typing import Any
 from xml.etree import ElementTree as ET
 
@@ -49,6 +50,7 @@ from mcp_data_core.exceptions import (
     ValidationError,
 )
 from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.auth import LoopLock, process_shared
 from patent_client_agents.shared.client import ConnectorClient
 
 from .models import InpiDesignRow, InpiTrademarkRow
@@ -161,6 +163,14 @@ def _build_solr_query(
 # =============================================================================
 
 
+@dataclass
+class _SharedSession:
+    """An INPI login shared by every client for the same account."""
+
+    session: InpiSession | None = None
+    lock: LoopLock = field(default_factory=LoopLock)
+
+
 class _SlidingWindowThrottle:
     """Bounded-rate sliding-window throttle.
 
@@ -181,7 +191,7 @@ class _SlidingWindowThrottle:
         self.window_seconds = window_seconds
         self._clock = clock or time.monotonic
         self._timestamps: deque[float] = deque()
-        self._lock = asyncio.Lock()
+        self._lock = LoopLock()
 
     async def acquire(self) -> None:
         """Block until a request can be made within the rate cap."""
@@ -266,9 +276,15 @@ class InpiPiClient(ConnectorClient):
 
         self._username = resolved_username
         self._password = resolved_password
-        self._session: InpiSession | None = None
-        self._session_lock = asyncio.Lock()
-        self._throttle = _SlidingWindowThrottle(clock=clock)
+        # One login and one request budget per account, shared across clients.
+        self._login = process_shared(
+            ("inpi.session", self.base_url, resolved_username, resolved_password), _SharedSession
+        )
+        self._throttle = (
+            _SlidingWindowThrottle(clock=clock)
+            if clock is not None
+            else process_shared(("inpi.throttle", self.base_url), _SlidingWindowThrottle)
+        )
 
     # ------------------------------------------------------------------
     # Session lifecycle
@@ -282,23 +298,23 @@ class InpiPiClient(ConnectorClient):
         refresh; if refresh fails (or no refresh-token is available),
         falls back to a fresh bootstrap + login.
         """
-        async with self._session_lock:
-            if self._session is None:
+        async with self._login.lock:
+            if self._login.session is None:
                 logger.debug("INPI: bootstrapping fresh session")
                 xsrf = await fetch_xsrf(self._client, base_url=self.base_url)
-                self._session = await login(
+                self._login.session = await login(
                     self._client,
                     self._username,
                     self._password,
                     xsrf,
                     base_url=self.base_url,
                 )
-                return self._session
+                return self._login.session
 
-            if self._session.is_expired():
-                refreshed = await self._refresh_or_relogin(self._session)
-                self._session = refreshed
-            return self._session
+            if self._login.session.is_expired():
+                refreshed = await self._refresh_or_relogin(self._login.session)
+                self._login.session = refreshed
+            return self._login.session
 
     async def _refresh_or_relogin(self, current: InpiSession) -> InpiSession:
         """Refresh the access token, or fall back to a full re-login."""
@@ -320,8 +336,8 @@ class InpiPiClient(ConnectorClient):
 
     async def _invalidate_session(self) -> None:
         """Drop the cached session so the next call re-bootstraps."""
-        async with self._session_lock:
-            self._session = None
+        async with self._login.lock:
+            self._login.session = None
 
     # ------------------------------------------------------------------
     # Low-level transport

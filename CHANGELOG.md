@@ -39,6 +39,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- IP Australia, EUIPO, JPO, Swiss IPI and INPI France reuse one login per
+  account for the whole process instead of fetching a new token or session
+  on every tool call. JPO's 10-requests-per-minute limit and INPI's request
+  throttle now apply across calls rather than per client.
 - Tool provenance reports `cache_hit: true` when every response in the call
   came from the HTTP cache, and `retrieved_at` as the original upstream fetch
   time rather than the time the cache was read (CONNECTOR_STANDARDS §3).

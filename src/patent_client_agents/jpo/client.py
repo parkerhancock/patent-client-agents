@@ -31,6 +31,7 @@ from mcp_data_core.exceptions import (
     RateLimitError,
 )
 from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.auth import LoopLock, process_shared
 from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
@@ -108,7 +109,7 @@ class TokenManager:
         self.token_path = token_path
         self._token: str | None = None
         self._token_expiry: float = 0
-        self._lock = asyncio.Lock()
+        self._lock = LoopLock()
 
     async def get_token(self, client: httpx.AsyncClient) -> str:
         """Get a valid access token, refreshing if needed.
@@ -188,7 +189,7 @@ class RateLimiter:
         self.max_requests = max_requests
         self.window_seconds = window_seconds
         self._timestamps: deque[float] = deque()
-        self._lock = asyncio.Lock()
+        self._lock = LoopLock()
 
     async def acquire(self) -> None:
         """Wait until a request can be made within the rate limit."""
@@ -275,13 +276,17 @@ class JpoClient(ConnectorClient):
             timeout=self.DEFAULT_TIMEOUT,
         )
 
-        self._token_manager = TokenManager(
-            resolved_username,
-            resolved_password,
-            base_url=self.base_url,
-            token_path=token_path,
+        # Shared across clients: one token per account, one 10/min budget per host.
+        self._token_manager = process_shared(
+            ("jpo.token", self.base_url, token_path, resolved_username, resolved_password),
+            lambda: TokenManager(
+                resolved_username,
+                resolved_password,
+                base_url=self.base_url,
+                token_path=token_path,
+            ),
         )
-        self._rate_limiter = RateLimiter()
+        self._rate_limiter = process_shared(("jpo.rate", self.base_url), RateLimiter)
 
     # ------------------------------------------------------------------
     # Low-level transport

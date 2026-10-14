@@ -25,7 +25,7 @@ from typing import Any, Literal
 import httpx
 
 from mcp_data_core.exceptions import ConfigurationError
-from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
+from patent_client_agents.shared.auth import shared_oauth2
 from patent_client_agents.shared.client import ConnectorClient
 
 from .models import Design, DesignSearchResult
@@ -88,7 +88,7 @@ class EuipoDesignsClient(ConnectorClient):
                     "Set EUIPO_CLIENT_SECRET or pass client_secret=..., "
                     "or supply a pre-built auth handler via auth=..."
                 )
-            auth = OAuth2ClientCredentialsAuth(
+            auth = shared_oauth2(
                 token_url=resolved_token_url,
                 client_id=resolved_client_id,
                 client_secret=resolved_secret,

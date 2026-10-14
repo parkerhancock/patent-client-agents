@@ -772,3 +772,23 @@ async def test_404_raises_not_found_error(no_retry_backoff: None) -> None:
     async with _make_client(handler) as client:
         with pytest.raises(NotFoundError):
             await client.search_trademarks()
+
+
+@pytest.mark.asyncio
+async def test_clients_for_the_same_account_share_one_login() -> None:
+    body = json.loads((FIXTURES_DIR / "tm_search_2hits.json").read_text())
+    logins = 0
+    base = _make_auth_handler(
+        {"/services/apidiffusion/api/marques/search": lambda r: httpx.Response(200, json=body)}
+    )
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        nonlocal logins
+        if request.url.path == LOGIN_PATH:
+            logins += 1
+        return base(request)
+
+    for _ in range(3):
+        async with _make_client(handler) as client:
+            await client.search_trademarks()
+    assert logins == 1

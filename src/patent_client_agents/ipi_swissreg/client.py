@@ -23,6 +23,7 @@ from mcp_data_core.exceptions import (
     NotFoundError,
     RateLimitError,
 )
+from patent_client_agents.shared.auth import process_shared
 from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
@@ -46,6 +47,15 @@ ET.register_namespace("core", CORE_NS)
 ET.register_namespace("common", COMMON_NS)
 
 RecordT = TypeVar("RecordT")
+
+
+@dataclass
+class _TokenState:
+    """One Swiss IPI login, shared by every client for the same account."""
+
+    access_token: str | None = None
+    refresh_token: str | None = None
+    expires_at: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -351,16 +361,16 @@ class IpiSwissregClient(ConnectorClient):
             timeout=60.0,
             use_cache=False,
         )
-        self._access_token: str | None = None
-        self._refresh_token: str | None = None
-        self._token_expires_at = 0.0
+        self._tokens = process_shared(
+            ("ipi.token", self.token_url, self.username, self.password), _TokenState
+        )
 
     async def _fetch_token(self, *, refresh: bool = False) -> str:
-        if refresh and self._refresh_token:
+        if refresh and self._tokens.refresh_token:
             data = {
                 "client_id": TOKEN_CLIENT_ID,
                 "grant_type": "refresh_token",
-                "refresh_token": self._refresh_token,
+                "refresh_token": self._tokens.refresh_token,
             }
         else:
             data = {
@@ -385,20 +395,22 @@ class IpiSwissregClient(ConnectorClient):
             access_token = payload["access_token"]
         except (ValueError, KeyError, TypeError) as exc:
             raise AuthenticationError("Swiss IPI token response lacks an access token") from exc
-        self._access_token = str(access_token)
+        self._tokens.access_token = str(access_token)
         refresh_value = payload.get("refresh_token")
-        self._refresh_token = str(refresh_value) if refresh_value else self._refresh_token
+        self._tokens.refresh_token = (
+            str(refresh_value) if refresh_value else self._tokens.refresh_token
+        )
         try:
             expires_in = float(payload.get("expires_in", 600))
         except (TypeError, ValueError):
             expires_in = 600
-        self._token_expires_at = time.monotonic() + max(0, expires_in)
-        return self._access_token
+        self._tokens.expires_at = time.monotonic() + max(0, expires_in)
+        return self._tokens.access_token
 
     async def _token(self) -> str:
-        if self._access_token and time.monotonic() < self._token_expires_at - 30:
-            return self._access_token
-        return await self._fetch_token(refresh=bool(self._refresh_token))
+        if self._tokens.access_token and time.monotonic() < self._tokens.expires_at - 30:
+            return self._tokens.access_token
+        return await self._fetch_token(refresh=bool(self._tokens.refresh_token))
 
     @staticmethod
     def _rate_limit(response: httpx.Response) -> RateLimitError:
@@ -427,8 +439,8 @@ class IpiSwissregClient(ConnectorClient):
                 },
             )
             if response.status_code == 401 and attempt == 0:
-                self._access_token = None
-                self._refresh_token = None
+                self._tokens.access_token = None
+                self._tokens.refresh_token = None
                 continue
             if response.status_code in {401, 403}:
                 raise AuthenticationError(

@@ -459,3 +459,13 @@ def vcr_cassette(request: pytest.FixtureRequest):
     my_vcr = _create_vcr()
     with my_vcr.use_cassette(str(cassette_path)):  # type: ignore[attr-defined]
         yield cassette_path
+
+
+@pytest.fixture(autouse=True)
+def _isolate_shared_auth():
+    """Each test starts without tokens, sessions or rate limiters from earlier tests."""
+    from patent_client_agents.shared.auth import reset_process_shared
+
+    reset_process_shared()
+    yield
+    reset_process_shared()
