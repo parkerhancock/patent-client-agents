@@ -30,7 +30,6 @@ For cloud deploys, build in the image and point
 from __future__ import annotations
 
 import argparse
-import asyncio
 import logging
 import re
 import sqlite3
@@ -41,7 +40,7 @@ from pathlib import Path
 import httpx
 from lxml import html
 
-from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.corpus import atomic_output, fetch_text, run_build_cli
 
 from .schema import DDL, SCHEMA_VERSION
 
@@ -78,16 +77,6 @@ def _article_label_pt(num: str) -> str:
 
 def _article_label_en(num: str) -> str:
     return f"Article {num}"
-
-
-async def _fetch(client: httpx.AsyncClient, url: str) -> str:
-    retryer = default_retryer()
-    async for attempt in retryer:
-        with attempt:
-            response = await client.get(url, follow_redirects=True)
-            response.raise_for_status()
-            return response.text
-    raise RuntimeError("unreachable: default_retryer reraises")
 
 
 def _strip_html(page_html: str) -> str:
@@ -149,85 +138,78 @@ async def build_corpus(
     lpi_year: str = DEFAULT_LPI_YEAR,
     user_agent: str = DEFAULT_USER_AGENT,
 ) -> int:
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    tmp_path = output_path.with_suffix(output_path.suffix + ".tmp")
-    if tmp_path.exists():
-        tmp_path.unlink()
+    with atomic_output(output_path) as tmp_path:
+        headers = {"User-Agent": user_agent, "Accept": "text/html"}
+        async with httpx.AsyncClient(
+            headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
+        ) as client:
+            logger.info("Fetching LPI PT consolidation from %s", pt_url)
+            pt_html = await fetch_text(client, pt_url)
+            pt_text = _strip_html(pt_html)
+            pt_articles = _split_articles(pt_text, _ARTICLE_HEAD_PT)
+            logger.info("PT split: %d Articles", len(pt_articles))
 
-    headers = {"User-Agent": user_agent, "Accept": "text/html"}
-    async with httpx.AsyncClient(
-        headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
-    ) as client:
-        logger.info("Fetching LPI PT consolidation from %s", pt_url)
-        pt_html = await _fetch(client, pt_url)
-        pt_text = _strip_html(pt_html)
-        pt_articles = _split_articles(pt_text, _ARTICLE_HEAD_PT)
-        logger.info("PT split: %d Articles", len(pt_articles))
+            en_articles: dict[str, str] = {}
+            if en_url:
+                try:
+                    logger.info("Fetching LPI EN translation from %s", en_url)
+                    en_html = await fetch_text(client, en_url)
+                    en_text = _strip_html(en_html)
+                    en_articles = _split_articles(en_text, _ARTICLE_HEAD_EN)
+                    logger.info("EN split: %d Articles", len(en_articles))
+                except Exception as exc:
+                    logger.warning("EN fetch failed (%s); shipping PT-only rows.", exc)
 
-        en_articles: dict[str, str] = {}
-        if en_url:
-            try:
-                logger.info("Fetching LPI EN translation from %s", en_url)
-                en_html = await _fetch(client, en_url)
-                en_text = _strip_html(en_html)
-                en_articles = _split_articles(en_text, _ARTICLE_HEAD_EN)
-                logger.info("EN split: %d Articles", len(en_articles))
-            except Exception as exc:
-                logger.warning("EN fetch failed (%s); shipping PT-only rows.", exc)
+        conn = sqlite3.connect(tmp_path)
+        try:
+            conn.executescript(DDL)
+            now = datetime.now(UTC).strftime("%Y-%m-%d")
+            for key, val in (
+                ("schema_version", str(SCHEMA_VERSION)),
+                ("source_pt", pt_url),
+                ("source_en", en_url or ""),
+                ("snapshot_date", now),
+                ("lpi_year", lpi_year),
+            ):
+                conn.execute("INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", (key, val))
 
-    conn = sqlite3.connect(tmp_path)
-    try:
-        conn.executescript(DDL)
-        now = datetime.now(UTC).strftime("%Y-%m-%d")
-        for key, val in (
-            ("schema_version", str(SCHEMA_VERSION)),
-            ("source_pt", pt_url),
-            ("source_en", en_url or ""),
-            ("snapshot_date", now),
-            ("lpi_year", lpi_year),
-        ):
-            conn.execute("INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", (key, val))
+            rows = 0
+            for num in sorted(pt_articles, key=lambda n: (len(n), n)):
+                pt_body = pt_articles[num]
+                en_body = en_articles.get(num)
+                slug = _slug_from_num(num)
+                pt_label = _article_label_pt(num)
+                en_label = _article_label_en(num) if en_body else None
+                pt_title = _title_from_body(pt_body)
+                en_title = _title_from_body(en_body) if en_body else None
+                conn.execute(
+                    "INSERT OR REPLACE INTO sections "
+                    "(href, article_number, title_pt, title_en, title_section, "
+                    " text_pt, text_en, html_pt, html_en) "
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (
+                        slug,
+                        pt_label,
+                        pt_title,
+                        en_title,
+                        None,
+                        pt_body,
+                        en_body,
+                        f"<p>{pt_body}</p>",
+                        f"<p>{en_body}</p>" if en_body else None,
+                    ),
+                )
+                rows += 1
+                del en_label  # not stored — only used to gate en_title above
 
-        rows = 0
-        for num in sorted(pt_articles, key=lambda n: (len(n), n)):
-            pt_body = pt_articles[num]
-            en_body = en_articles.get(num)
-            slug = _slug_from_num(num)
-            pt_label = _article_label_pt(num)
-            en_label = _article_label_en(num) if en_body else None
-            pt_title = _title_from_body(pt_body)
-            en_title = _title_from_body(en_body) if en_body else None
             conn.execute(
-                "INSERT OR REPLACE INTO sections "
-                "(href, article_number, title_pt, title_en, title_section, "
-                " text_pt, text_en, html_pt, html_en) "
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                (
-                    slug,
-                    pt_label,
-                    pt_title,
-                    en_title,
-                    None,
-                    pt_body,
-                    en_body,
-                    f"<p>{pt_body}</p>",
-                    f"<p>{en_body}</p>" if en_body else None,
-                ),
+                "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
+                ("section_count", str(rows)),
             )
-            rows += 1
-            del en_label  # not stored — only used to gate en_title above
+            conn.commit()
+        finally:
+            conn.close()
 
-        conn.execute(
-            "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-            ("section_count", str(rows)),
-        )
-        conn.commit()
-    finally:
-        conn.close()
-
-    if output_path.exists():
-        output_path.unlink()
-    tmp_path.rename(output_path)
     logger.info("Wrote %d sections to %s", rows, output_path)
     return rows
 
@@ -259,29 +241,17 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
 
-    logging.basicConfig(
-        level=logging.INFO if args.verbose else logging.WARNING,
-        format="%(asctime)s %(levelname)s %(message)s",
+    return run_build_cli(
+        lambda: build_corpus(
+            args.output,
+            pt_url=args.pt_url,
+            en_url=args.wipo_en_url,
+            lpi_year=args.year,
+            user_agent=args.user_agent,
+        ),
+        verbose=args.verbose,
+        done=lambda count, _elapsed: f"Wrote {count} sections to {args.output}",
     )
-
-    try:
-        count = asyncio.run(
-            build_corpus(
-                args.output,
-                pt_url=args.pt_url,
-                en_url=args.wipo_en_url,
-                lpi_year=args.year,
-                user_agent=args.user_agent,
-            )
-        )
-    except KeyboardInterrupt:
-        print("Interrupted", file=sys.stderr)
-        return 130
-    except Exception as exc:  # noqa: BLE001
-        print(f"Build failed: {exc}", file=sys.stderr)
-        return 1
-    print(f"Wrote {count} sections to {args.output}")
-    return 0
 
 
 if __name__ == "__main__":

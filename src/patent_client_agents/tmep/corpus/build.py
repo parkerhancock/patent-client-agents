@@ -20,11 +20,9 @@ Run manually::
 from __future__ import annotations
 
 import argparse
-import asyncio
 import logging
 import re
 import sqlite3
-import sys
 import time
 from collections.abc import Iterable
 from dataclasses import dataclass
@@ -36,6 +34,7 @@ from lxml import html
 
 from mcp_data_core.corpus_compression import finalize_outline_corpus
 from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.corpus import atomic_output, run_build_cli
 
 from .schema import DDL, SCHEMA_VERSION
 
@@ -294,50 +293,48 @@ class TmepScraper:
 
 def write_corpus(pages: Iterable[ParsedPage], output: Path) -> int:
     """Initialize the schema and insert section rows. Returns row count."""
-    output.parent.mkdir(parents=True, exist_ok=True)
-    if output.exists():
-        output.unlink()
-    conn = sqlite3.connect(output)
-    try:
-        conn.executescript(DDL)
-        seen: set[str] = set()
-        inserted = 0
-        for page in pages:
-            for section in page.sections:
-                if section.href in seen:
-                    continue
-                seen.add(section.href)
-                conn.execute(
-                    """
-                    INSERT INTO sections
-                        (href, section_number, title, breadcrumb, chapter, html, text)
-                    VALUES (?, ?, ?, ?, ?, ?, ?)
-                    """,
-                    (
-                        section.href,
-                        section.section_number,
-                        section.title,
-                        section.breadcrumb,
-                        section.chapter,
-                        section.html,
-                        section.text,
-                    ),
-                )
-                inserted += 1
-        snapshot_date = datetime.now(UTC).strftime("%Y-%m-%d")
-        meta_rows = [
-            ("schema_version", str(SCHEMA_VERSION)),
-            ("snapshot_date", snapshot_date),
-            ("source_version", "current"),
-            ("section_count", str(inserted)),
-        ]
-        conn.executemany(
-            "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-            meta_rows,
-        )
-        finalize_outline_corpus(conn, logger=logger)
-    finally:
-        conn.close()
+    with atomic_output(output) as tmp_path:
+        conn = sqlite3.connect(tmp_path)
+        try:
+            conn.executescript(DDL)
+            seen: set[str] = set()
+            inserted = 0
+            for page in pages:
+                for section in page.sections:
+                    if section.href in seen:
+                        continue
+                    seen.add(section.href)
+                    conn.execute(
+                        """
+                        INSERT INTO sections
+                            (href, section_number, title, breadcrumb, chapter, html, text)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        (
+                            section.href,
+                            section.section_number,
+                            section.title,
+                            section.breadcrumb,
+                            section.chapter,
+                            section.html,
+                            section.text,
+                        ),
+                    )
+                    inserted += 1
+            snapshot_date = datetime.now(UTC).strftime("%Y-%m-%d")
+            meta_rows = [
+                ("schema_version", str(SCHEMA_VERSION)),
+                ("snapshot_date", snapshot_date),
+                ("source_version", "current"),
+                ("section_count", str(inserted)),
+            ]
+            conn.executemany(
+                "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
+                meta_rows,
+            )
+            finalize_outline_corpus(conn, logger=logger)
+        finally:
+            conn.close()
     return inserted
 
 
@@ -398,30 +395,19 @@ def main(argv: list[str] | None = None) -> int:
         help="Log per-chapter progress to stderr.",
     )
     args = parser.parse_args(argv)
-    logging.basicConfig(
-        level=logging.INFO if args.verbose else logging.WARNING,
-        format="%(asctime)s %(levelname)s %(message)s",
-    )
     seeds = args.seed or [DEFAULT_SEED_HREF]
-    started = time.monotonic()
-    try:
-        count = asyncio.run(
-            build_corpus(
-                args.output,
-                seed_hrefs=seeds,
-                max_pages=args.max_pages,
-                base_url=args.base_url,
-            )
-        )
-    except KeyboardInterrupt:
-        print("Interrupted", file=sys.stderr)
-        return 130
-    elapsed = time.monotonic() - started
-    print(
-        f"Wrote {count} sections to {args.output} in {elapsed:.1f}s",
-        file=sys.stderr,
+    return run_build_cli(
+        lambda: build_corpus(
+            args.output,
+            seed_hrefs=seeds,
+            max_pages=args.max_pages,
+            base_url=args.base_url,
+        ),
+        verbose=args.verbose,
+        done=lambda count, elapsed: f"Wrote {count} sections to {args.output} in {elapsed:.1f}s",
+        to_stderr=True,
+        catch_errors=False,
     )
-    return 0
 
 
 if __name__ == "__main__":

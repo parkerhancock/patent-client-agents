@@ -1,11 +1,8 @@
-"""Tests for the module-level ``get_corpus_status()`` callable.
+"""MPEP ``get_corpus_status()`` against a corpus written by the real build.
 
-This is the row-17 template for the eight ``mcp_local`` substantive-law
-corpora in row 18. Asserts the shape (typed dict with the two keys),
-that values come from the SQLite ``meta`` table when the corpus is
-present, and that a missing / unreadable corpus degrades to the
-documented ``corpus_version='unknown'`` / ``corpus_synced_at=None``
-fallback rather than raising.
+MPEP reads the build's precise ``synced_at`` timestamp before
+``snapshot_date``. The shared contract lives in
+``tests/shared/test_corpus_status.py``.
 """
 
 from __future__ import annotations
@@ -73,54 +70,3 @@ class TestGetCorpusStatusFromBundledCorpus:
         with CorpusDB.open() as db:
             expected = datetime.fromisoformat(db.meta()["synced_at"])
         assert get_corpus_status()["corpus_synced_at"] == expected
-
-
-class TestGetCorpusStatusMissingCorpus:
-    def test_returns_unknown_when_corpus_missing(
-        self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-    ) -> None:
-        """When no corpus file exists at the resolved path, the callable
-        degrades gracefully: ``corpus_version='unknown'`` /
-        ``corpus_synced_at=None``. Importantly, it does NOT raise — the
-        validator and Provenance helper call this on every request and
-        must never crash on a missing bundle.
-        """
-        monkeypatch.setenv("MPEP_CORPUS_PATH", str(tmp_path / "missing.db"))
-        status = get_corpus_status()
-        assert status["corpus_version"] == "unknown"
-        assert status["corpus_synced_at"] is None
-
-    def test_returns_unknown_when_snapshot_date_malformed(
-        self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-    ) -> None:
-        """If the meta table carries a non-ISO ``snapshot_date``,
-        ``corpus_synced_at`` falls back to ``None`` while
-        ``corpus_version`` still surfaces from ``source_version``.
-        Tests the parser is defensive — the corpus may be hand-edited or
-        carry an older snapshot format.
-        """
-        import sqlite3
-
-        db_path = tmp_path / "bad_meta.db"
-        from patent_client_agents.mpep.corpus.schema import DDL
-
-        conn = sqlite3.connect(db_path)
-        try:
-            conn.executescript(DDL)
-            conn.executemany(
-                "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-                [
-                    ("schema_version", "1"),
-                    ("snapshot_date", "not-a-date"),
-                    ("source_version", "R-07.2022"),
-                    ("section_count", "0"),
-                ],
-            )
-            conn.commit()
-        finally:
-            conn.close()
-
-        monkeypatch.setenv("MPEP_CORPUS_PATH", str(db_path))
-        status = get_corpus_status()
-        assert status["corpus_version"] == "R-07.2022"
-        assert status["corpus_synced_at"] is None
