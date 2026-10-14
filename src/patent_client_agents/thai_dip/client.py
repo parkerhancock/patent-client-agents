@@ -314,10 +314,14 @@ class ThaiDipClient(BaseAsyncClient):
         return await self._post("TM", _query(_TRADEMARK_FIELDS[field], query), _trademark, limit)
 
     async def get_trademark(self, number: str) -> ThaiDipTrademarkRecord:
-        rows, _ = await self.search_trademarks(number, field="application_number", limit=1)
-        if not rows:
-            raise NotFoundError(f"Thailand DIP trademark not found: {number}", 404, "")
-        return rows[0]
+        # The application-number filter is a substring match, so keep only the exact row.
+        rows, _ = await self.search_trademarks(
+            number, field="application_number", limit=RESULT_LIMIT
+        )
+        for row in rows:
+            if row.application_number == number.strip():
+                return row
+        raise NotFoundError(f"Thailand DIP trademark not found: {number}", 404, "")
 
     async def search_copyrights(
         self, query: str, *, field: CopyrightField = "work_name", limit: int = 25

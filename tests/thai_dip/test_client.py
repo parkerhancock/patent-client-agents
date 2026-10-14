@@ -107,6 +107,30 @@ async def test_fetch_uses_exact_identifier_search(
     assert getattr(row, field) == expected
 
 
+@pytest.mark.asyncio
+async def test_get_trademark_returns_the_exact_application_not_a_longer_match() -> None:
+    # The DIP application-number filter is a substring match, so a lookup can
+    # return longer numbers that merely contain the one requested.
+    rows = [
+        {"REQ_NO": "2500000019", "TR_NAME": "WRONG MARK"},
+        {"REQ_NO": "25000001", "TR_NAME": "RIGHT MARK"},
+    ]
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json=rows)
+
+    http_client = httpx.AsyncClient(
+        transport=httpx.MockTransport(handler), base_url="https://mock.test"
+    )
+    async with ThaiDipClient(
+        "explicit-token", base_url="https://mock.test", client=http_client
+    ) as client:
+        record = await client.get_trademark("25000001")
+        assert record.mark_name == "RIGHT MARK"
+        with pytest.raises(NotFoundError):
+            await client.get_trademark("2500000")
+
+
 def test_credentials_and_https_are_required(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("DIP_DATA_EXCHANGE_TOKEN", raising=False)
     with pytest.raises(ConfigurationError, match="DIP_DATA_EXCHANGE_TOKEN"):
