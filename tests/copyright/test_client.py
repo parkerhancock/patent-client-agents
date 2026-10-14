@@ -8,7 +8,7 @@ from unittest.mock import AsyncMock, patch
 import httpx
 import pytest
 
-from patent_client_agents.copyright.client import CopyrightClient, CopyrightError
+from patent_client_agents.copyright.client import CopyrightClient
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -231,11 +231,10 @@ class TestSearch:
 
         mock_request.return_value = _mock_error_response(500, "Internal Server Error")
         async with CopyrightClient(use_cache=False, max_retries=1) as client:
-            # BaseAsyncClient raises ServerError for 5xx; the legacy
-            # CopyrightError type also still works as a catch-all alias
-            # for users who imported it directly.
-            with pytest.raises((CopyrightError, ServerError)):
+            # BaseAsyncClient raises ServerError for 5xx.
+            with pytest.raises(ServerError) as excinfo:
                 await client.search("test")
+        assert excinfo.value.status_code == 500
 
 
 # ---------------------------------------------------------------------------

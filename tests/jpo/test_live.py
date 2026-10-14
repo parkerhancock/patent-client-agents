@@ -36,7 +36,6 @@ from patent_client_agents.jpo import (
     NumberReference,
     PatentProgressData,
     PctKind,
-    PctNationalPhaseData,
     RegistrationInfo,
     SimplifiedPatentProgressData,
     TrademarkProgressData,
@@ -141,10 +140,13 @@ class TestPatentDocumentsLive:
         async with JpoClient() as client:
             bundle = await client.get_patent_mailed_documents(PATENT_APP)
             assert isinstance(bundle, DocumentBundleResult)
-            if bundle.zip_bytes is not None:
-                assert bundle.zip_bytes.startswith(b"PK\x03\x04")
-            else:
-                assert bundle.is_empty or bundle.download_url
+            # The cassette returns an inline ZIP, not a download URL.
+            assert bundle.application_number == PATENT_APP
+            assert bundle.is_empty is False
+            assert bundle.download_url == ""
+            assert bundle.zip_bytes is not None
+            assert bundle.zip_bytes.startswith(b"PK\x03\x04")
+            assert len(bundle.zip_bytes) == 6194
 
     @pytest.mark.asyncio
     async def test_get_refusal_notices(self, vcr_cassette) -> None:
@@ -158,10 +160,17 @@ class TestPatentDocumentsLive:
     async def test_get_cited_documents(self, vcr_cassette) -> None:
         async with JpoClient() as client:
             cites = await client.get_patent_cited_documents(PATENT_APP)
-            assert cites is None or isinstance(cites, CitedDocumentsData)
-            if cites is not None:
-                # 2020123456 had several patent citations during prosecution.
-                assert len(cites.patent_doc) > 0
+            assert isinstance(cites, CitedDocumentsData)
+            assert cites.application_number == PATENT_APP
+            # 2020123456: 6 citations drafted 2024-02-20, 7 drafted 2024-07-04.
+            assert len(cites.patent_doc) == 13
+            first = cites.patent_doc[0]
+            assert first.draft_date == "20240220"
+            assert first.citation_type == "19"
+            assert first.citation_order == "1"
+            assert first.document_number == "JPA 414233033"
+            assert cites.patent_doc[-1].document_number == "JPA 415248131"
+            assert cites.non_patent_doc == []
 
 
 # =============================================================================
@@ -183,10 +192,12 @@ class TestNumberReferenceLive:
     @pytest.mark.asyncio
     async def test_cross_reference_by_publication(self, vcr_cassette) -> None:
         async with JpoClient() as client:
-            # Either response shape (NumberReference or None) is fine —
-            # this exercises the kind=publication path.
+            # Publication 2020-123456 belongs to application 2019013554.
             ref = await client.get_patent_number_reference(CaseNumberKind.PUBLICATION, "2020123456")
-            assert ref is None or isinstance(ref, NumberReference)
+            assert isinstance(ref, NumberReference)
+            assert ref.application_number == "2019013554"
+            assert ref.publication_number == "2020123456"
+            assert ref.registration_number == "7193363"
 
 
 # =============================================================================
@@ -248,9 +259,12 @@ class TestPriorityAndFamilyLive:
     async def test_divisional_info(self, vcr_cassette) -> None:
         async with JpoClient() as client:
             div = await client.get_patent_divisional_info(PATENT_APP)
-            assert div is None or isinstance(div, DivisionalAppInfoData)
-            if div is not None:
-                assert div.application_number == PATENT_APP
+            assert isinstance(div, DivisionalAppInfoData)
+            assert div.application_number == PATENT_APP
+            # 2020123456 is not a divisional and has no divisionals.
+            assert div.parent_application_information is not None
+            assert div.parent_application_information.parent_application_number == ""
+            assert div.divisional_application_information == []
 
     @pytest.mark.asyncio
     async def test_registration_info(self, vcr_cassette) -> None:
@@ -265,13 +279,17 @@ class TestPriorityAndFamilyLive:
 class TestPctNationalPhaseLive:
     @pytest.mark.asyncio
     async def test_pct_lookup_no_data(self, vcr_cassette) -> None:
-        """A non-existent PCT number gracefully returns None."""
+        """A non-existent PCT number gracefully returns None.
+
+        The cassette's upstream answer is statusCode 107 ("no matching
+        data") with an empty ``data`` object, which the client maps to None.
+        """
         async with JpoClient() as client:
             data = await client.get_patent_pct_national_number(
                 PctKind.INTERNATIONAL_APPLICATION,
                 "JP9999999999",
             )
-            assert data is None or isinstance(data, PctNationalPhaseData)
+            assert data is None
 
 
 # =============================================================================

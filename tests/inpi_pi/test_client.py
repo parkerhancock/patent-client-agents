@@ -665,8 +665,20 @@ async def test_401_retries_with_fresh_session() -> None:
     assert attempt_counter["n"] >= 2  # at least one retry
 
 
+@pytest.fixture
+def no_retry_backoff(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Keep the real retry policy (attempts, retryable errors) but skip the
+    exponential backoff sleeps between attempts."""
+    from mcp_data_core.resilience import default_retryer
+
+    def _no_wait_retryer(**kwargs):
+        return default_retryer(**{**kwargs, "initial_wait": 0, "max_wait": 0})
+
+    monkeypatch.setattr("patent_client_agents.inpi_pi.client.default_retryer", _no_wait_retryer)
+
+
 @pytest.mark.asyncio
-async def test_429_raises_rate_limit_error() -> None:
+async def test_429_raises_rate_limit_error(no_retry_backoff: None) -> None:
     def search_handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(429, text="throttled")
 
@@ -677,7 +689,7 @@ async def test_429_raises_rate_limit_error() -> None:
 
 
 @pytest.mark.asyncio
-async def test_5xx_raises_api_error() -> None:
+async def test_5xx_raises_api_error(no_retry_backoff: None) -> None:
     def search_handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(500, text="boom")
 

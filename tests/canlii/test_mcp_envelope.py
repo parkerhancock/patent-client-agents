@@ -147,7 +147,7 @@ async def test_list_case_databases_returns_list_envelope():
     assert result.provenance.source_name == "CanLII (Canadian Legal Information Institute)"
     assert "/v1/caseBrowse/en/" in result.provenance.source_url
     assert len(result.items) == 2
-    assert "2 courts" in result.summary or "2 " in result.summary
+    assert result.summary == "CanLII case databases (en): 2 courts / tribunals."
 
 
 @pytest.mark.asyncio

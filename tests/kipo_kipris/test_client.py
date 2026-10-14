@@ -531,9 +531,22 @@ async def test_get_design_by_number(monkeypatch: pytest.MonkeyPatch) -> None:
 # ──────────────────────────────────────────────────────────────────────
 
 
+@pytest.fixture
+def no_retry_backoff(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Keep the real retry policy (attempts, retryable errors) but skip the
+    exponential backoff sleeps between attempts."""
+    from mcp_data_core.resilience import default_retryer
+
+    def _no_wait_retryer(**kwargs):
+        return default_retryer(**{**kwargs, "initial_wait": 0, "max_wait": 0})
+
+    monkeypatch.setattr("patent_client_agents.kipo_kipris.client.default_retryer", _no_wait_retryer)
+
+
 @pytest.mark.asyncio
 async def test_non_success_status_raises_api_error(
     monkeypatch: pytest.MonkeyPatch,
+    no_retry_backoff: None,
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
 
@@ -548,6 +561,7 @@ async def test_non_success_status_raises_api_error(
 @pytest.mark.asyncio
 async def test_rate_limit_raises_rate_limit_error(
     monkeypatch: pytest.MonkeyPatch,
+    no_retry_backoff: None,
 ) -> None:
     monkeypatch.setenv("KIPO_KIPRIS_API_KEY", "k")
     from mcp_data_core.exceptions import RateLimitError

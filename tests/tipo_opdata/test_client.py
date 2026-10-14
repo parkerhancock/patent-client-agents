@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import os
 from collections.abc import Callable
+from datetime import date
 
 import httpx
 import pytest
@@ -805,7 +806,12 @@ async def test_live_patent_appl_smoke(
     tk = os.environ.get("TIPO_API_KEY") or "test_tipo_tk"
     async with TipoClient(tk=tk) as client:
         rows = await client.search_patent_appl(top=2)
-    assert isinstance(rows, list)
+    assert [r.appl_no for r in rows] == ["06202104", "06210001"]
+    assert [r.appl_date for r in rows] == [date(1972, 7, 26), date(1973, 1, 3)]
+    assert [r.appl_countrycode for r in rows] == ["TW", None]
+    assert [r.publish_flag for r in rows] == ["2", "0"]
+    assert rows[0].classification_ipc[0]["ipc-full"] == "F23D"
+    assert rows[1].classification_ipc == []
 
 
 @pytest.mark.asyncio
@@ -818,4 +824,8 @@ async def test_live_tmark_appl_smoke(
     tk = os.environ.get("TIPO_API_KEY") or "test_tipo_tk"
     async with TipoClient(tk=tk) as client:
         rows = await client.search_tmark_appl(top=2)
-    assert isinstance(rows, list)
+    assert [r.appl_no for r in rows] == ["000000001", "000000002"]
+    assert [r.appl_date for r in rows] == [date(1951, 2, 27), date(1951, 2, 27)]
+    assert [r.tmark_name for r in rows] == ["林森", "林森"]
+    assert [r.tmark_class_desc for r in rows] == ["商標", "商標"]
+    assert rows[0].parties["applicants"][0]["chinese-name"] == "盛香堂\u3000許鉗"

@@ -53,10 +53,9 @@ class TestParseEsAmount:
     def test_empty_returns_none(self) -> None:
         assert oepm._parse_es_amount("") is None
 
-    def test_bare_integer_returns_none(self) -> None:
-        # Bare integers aren't a valid OEPM amount (the schedule always
-        # carries ,NN cents); we expect this to parse as Decimal but the
-        # row regex never produces them in the first place.
+    def test_bare_integer_parses_as_decimal(self) -> None:
+        # The schedule always carries ,NN cents, so the row regex never
+        # hands a bare integer to the parser; if it did, it still parses.
         assert oepm._parse_es_amount("100") == Decimal("100")
 
     def test_garbage_returns_none(self) -> None:
