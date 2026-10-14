@@ -16,6 +16,7 @@ spec §3 for the full tool table.
 
 from __future__ import annotations
 
+import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -430,19 +431,26 @@ async def get_tipo_patent_events(
     async with TipoClient() as client:
 
         async def _fetch_one(num: str) -> list[dict[str, Any]]:
-            events: list[dict[str, Any]] = []
-            for tag, method_name in (
+            endpoints = (
                 ("alteration", "get_patent_alteration"),
                 ("change", "get_patent_change"),
                 ("divide", "get_patent_divide"),
-            ):
-                for row in await getattr(client, method_name)(appl_no=num):
+            )
+            # One ID's endpoints run together; concurrency=2 keeps total in-flight near 5.
+            batches = await asyncio.gather(
+                *(getattr(client, method_name)(appl_no=num) for _, method_name in endpoints)
+            )
+            events: list[dict[str, Any]] = []
+            for (tag, _), rows in zip(endpoints, batches, strict=True):
+                for row in rows:
                     dumped = dump(row, by_alias=True)
                     projected = dumped if full else _lean(dumped)
                     events.append({"event_type": tag, "appl_no": num, **projected})
             return events
 
-        results, not_found = await fetch_many(numbers, _fetch_one, single=isinstance(appl_no, str))
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(appl_no, str), concurrency=2
+        )
 
     items = [event for batch in results for event in batch]
     return FetchedList[dict](
@@ -623,18 +631,25 @@ async def get_tipo_trademark_events(
     async with TipoClient() as client:
 
         async def _fetch_one(num: str) -> list[dict[str, Any]]:
-            events: list[dict[str, Any]] = []
-            for tag, method_name in (
+            endpoints = (
                 ("change", "get_tmark_change"),
                 ("divide", "get_tmark_divide"),
-            ):
-                for row in await getattr(client, method_name)(appl_no=num):
+            )
+            # One ID's endpoints run together; concurrency=2 keeps total in-flight near 5.
+            batches = await asyncio.gather(
+                *(getattr(client, method_name)(appl_no=num) for _, method_name in endpoints)
+            )
+            events: list[dict[str, Any]] = []
+            for (tag, _), rows in zip(endpoints, batches, strict=True):
+                for row in rows:
                     dumped = dump(row, by_alias=True)
                     projected = dumped if full else _lean(dumped)
                     events.append({"event_type": tag, "appl_no": num, **projected})
             return events
 
-        results, not_found = await fetch_many(numbers, _fetch_one, single=isinstance(appl_no, str))
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(appl_no, str), concurrency=2
+        )
 
     items = [event for batch in results for event in batch]
     return FetchedList[dict](
