@@ -90,3 +90,11 @@ class TestCorpusUnavailable:
         async with MoppClient() as c:
             with pytest.raises(CorpusUnavailable):
                 await c.get_section("1")
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("syntax", ["and", "or"])
+async def test_search_accepts_citation_punctuation(syntax: str) -> None:
+    # FTS5 rejects bare punctuation; citations like these used to raise OperationalError.
+    async with MoppClient() as client:
+        await client.search("Art. 54(2) G-II, 1207.01(a) L.611-10 NOT", syntax=syntax)

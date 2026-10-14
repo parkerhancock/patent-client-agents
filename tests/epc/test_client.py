@@ -77,3 +77,11 @@ class TestSearch:
         for h in r.hits:
             assert h.result_url.startswith("https://www.epo.org/en/legal/epc/2020/")
             assert h.result_url.endswith(".html")
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("syntax", ["and", "or"])
+async def test_search_accepts_citation_punctuation(syntax: str) -> None:
+    # FTS5 rejects bare punctuation; citations like these used to raise OperationalError.
+    async with EpcClient() as client:
+        await client.search("Art. 54(2) G-II, 1207.01(a) L.611-10 NOT", syntax=syntax)

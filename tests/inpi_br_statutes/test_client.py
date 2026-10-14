@@ -96,3 +96,11 @@ class TestListVersions:
         assert versions
         assert versions[0].current is True
         assert "1996" in versions[0].label
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("syntax", ["and", "or"])
+async def test_search_accepts_citation_punctuation(syntax: str) -> None:
+    # FTS5 rejects bare punctuation; citations like these used to raise OperationalError.
+    async with InpiBrStatutesClient() as client:
+        await client.search("Art. 54(2) G-II, 1207.01(a) L.611-10 NOT", syntax=syntax)

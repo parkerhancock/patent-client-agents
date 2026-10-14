@@ -13,6 +13,8 @@ from __future__ import annotations
 import os
 import re
 
+from patent_client_agents.fts_query import translate_fts_query
+
 from .corpus.db import CorpusDB
 from .models import LegifranceSearchHit, LegifranceSearchResult, LegifranceSection
 from .resources import parse_citation
@@ -32,21 +34,6 @@ def _normalize_section(value: str) -> str:
     if cleaned.startswith("L-"):
         cleaned = "L" + cleaned[2:]
     return cleaned
-
-
-def _translate_fts_query(query: str) -> str:
-    """Convert a free-text query to an FTS5 MATCH expression.
-
-    French statutory queries are usually short phrases (``activité
-    inventive``, ``secret des affaires``) — the simplest robust shape
-    is to space-separate the tokens so FTS5 treats them as AND, which
-    matches what a French practitioner expects from a register search.
-    """
-    cleaned = query.strip()
-    if not cleaned:
-        return ""
-    tokens = [t for t in re.split(r"\s+", cleaned) if t]
-    return " ".join(tokens)
 
 
 class LegifranceIpClient:
@@ -94,7 +81,7 @@ class LegifranceIpClient:
             page: 1-indexed page number.
         """
         db = self._open()
-        fts_query = _translate_fts_query(query)
+        fts_query = translate_fts_query(query)
         if not fts_query:
             return LegifranceSearchResult(hits=[], page=page, per_page=per_page, has_more=False)
         offset = max(0, (page - 1) * per_page)

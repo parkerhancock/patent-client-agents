@@ -116,3 +116,11 @@ class TestTmepClientVersions:
         assert v.value == "current"
         assert v.current is True
         assert "snapshot" in v.label
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("syntax", ["and", "or"])
+async def test_search_accepts_citation_punctuation(tmep_corpus_env: Path, syntax: str) -> None:
+    # FTS5 rejects bare punctuation; citations like these used to raise OperationalError.
+    async with TmepClient() as client:
+        await client.search("Art. 54(2) G-II, 1207.01(a) L.611-10 NOT", syntax=syntax)
