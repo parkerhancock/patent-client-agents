@@ -18,9 +18,14 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.mpep import MpepClient, get_corpus_status
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.corpus.tools import (
+    corpus_get,
+    corpus_search,
+    hits_summary,
+    truncate,
+)
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 from patent_client_agents.shared.paging import Limit100, Offset
-from patent_client_agents.shared.provenance import provenance_for
 
 mpep_mcp = FastMCP("MPEP")
 
@@ -41,30 +46,6 @@ _MPEP_NAME = "USPTO MPEP (Manual of Patent Examining Procedure)"
 # (e.g. examination-procedure tables). Truncate so a 25-hit page fits
 # comfortably under the §5.5 token budget.
 _MPEP_LEAN_SNIPPET_CHARS = 400
-
-
-def _mpep_provenance(path: str) -> Any:
-    """Build a Provenance pointing at ``{base}{path}`` with corpus metadata.
-
-    Reads ``corpus_synced_at`` / ``corpus_version`` from
-    :func:`patent_client_agents.mpep.get_corpus_status` so the values
-    track the bundled corpus without per-call hardcoding. This is the
-    template all 8 ``mcp_local`` substantive-law corpora in row 18 copy.
-    """
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=f"{_MPEP_BASE}{path}",
-        source_name=_MPEP_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
-
-
-def _truncate(text: str, limit: int) -> str:
-    """Cap a string at ``limit`` chars, appending an ellipsis on overflow."""
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 1)].rstrip() + "…"
 
 
 def _stub_hit(hit: Any) -> dict:
@@ -91,7 +72,7 @@ def _stub_hit(hit: Any) -> dict:
     return {
         "section_number": section_number,
         "title": title_only,
-        "snippet": _truncate(hit.get("snippet") or "", _MPEP_LEAN_SNIPPET_CHARS),
+        "snippet": truncate(hit.get("snippet") or "", _MPEP_LEAN_SNIPPET_CHARS),
         "href": hit.get("href"),
     }
 
@@ -174,33 +155,23 @@ async def search_mpep(
 
     Related tools: get_mpep_section.
     """
-    async with MpepClient() as client:
-        response = await client.search(
+    return await corpus_search(
+        MpepClient,
+        lambda client: client.search(
             query=query,
             version=version,
             syntax=syntax,
             sort=sort,
             per_page=limit,
             offset=offset,
-        )
-
-    hits = [h.model_dump() for h in response.hits]
-    items = hits if full else [_stub_hit(h) for h in hits]
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    summary = f"MPEP ({corpus_label}) — `{query}`: {len(items)} hit{'s' if len(items) != 1 else ''}"
-    if response.has_more:
-        summary += " (more available)."
-    else:
-        summary += "."
-
-    return ListEnvelope[dict](
-        summary=summary,
-        items=items,
-        more_available=response.has_more,
-        next_cursor=None,
-        provenance=_mpep_provenance("/RDMS/MPEP/search"),
+        ),
+        corpus_status=get_corpus_status,
+        project=None if full else _stub_hit,
+        summary=lambda response, items, corpus_label: hits_summary(
+            f"MPEP ({corpus_label}) — `{query}`", len(items), response.has_more
+        ),
+        source_url=f"{_MPEP_BASE}/RDMS/MPEP/search",
+        source_name=_MPEP_NAME,
     )
 
 
@@ -241,47 +212,41 @@ async def get_mpep_section(
         noun="MPEP section reference",
     )
 
-    async with MpepClient() as client:
+    async def _fetch_one(client: Any, ref: str) -> dict:
+        record = await client.get_section(ref, version=version)
+        # When the caller passes a section number, ``ref`` already is
+        # the section number. When they pass an href, we don't have
+        # the section number on the model itself; the breadcrumb on
+        # the corpus row carries it but the MpepSection model drops
+        # it. Resolve via the corpus' SECTION_NUMBER_PATTERN so the
+        # returned dict carries section_number when we know it.
+        from patent_client_agents.mpep.client import SECTION_NUMBER_PATTERN
 
-        async def _fetch_one(ref: str) -> dict:
-            record = await client.get_section(ref, version=version)
-            # When the caller passes a section number, ``ref`` already is
-            # the section number. When they pass an href, we don't have
-            # the section number on the model itself; the breadcrumb on
-            # the corpus row carries it but the MpepSection model drops
-            # it. Resolve via the corpus' SECTION_NUMBER_PATTERN so the
-            # returned dict carries section_number when we know it.
-            from patent_client_agents.mpep.client import SECTION_NUMBER_PATTERN
+        section_number = ref if SECTION_NUMBER_PATTERN.match(ref) else None
+        return _section_to_dict(record, section_number=section_number)
 
-            section_number = ref if SECTION_NUMBER_PATTERN.match(ref) else None
-            return _section_to_dict(record, section_number=section_number)
+    def _source_url(items: list[dict], corpus_label: str) -> str:
+        if len(refs) == 1 and items:
+            # If the single ref looks like an href, point provenance at the
+            # canonical result URL for that href; otherwise at the section
+            # number path.
+            ref = refs[0]
+            if ref.endswith(".html") or "/" in ref:
+                return f"{_MPEP_BASE}/RDMS/MPEP/result?href={ref.lstrip('/')}"
+            return f"{_MPEP_BASE}/RDMS/MPEP/result?section={ref}"
+        return f"{_MPEP_BASE}/RDMS/MPEP/result"
 
-        items, not_found = await fetch_many(refs, _fetch_one, single=single)
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    if len(refs) == 1 and items:
-        summary = _summarize_section(items[0], corpus_label)
-        # If the single ref looks like an href, point provenance at the
-        # canonical result URL for that href; otherwise at the section
-        # number path.
-        ref = refs[0]
-        if ref.endswith(".html") or "/" in ref:
-            path = f"/RDMS/MPEP/result?href={ref.lstrip('/')}"
-        else:
-            path = f"/RDMS/MPEP/result?section={ref}"
-    else:
-        if len(refs) == 1:
-            summary = f"MPEP section {refs[0]} — not found."
-        else:
-            summary = fetched_summary(len(items), len(refs), "MPEP sections", not_found)
-        path = "/RDMS/MPEP/result"
-
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_mpep_provenance(path),
+    return await corpus_get(
+        MpepClient,
+        refs,
+        _fetch_one,
+        single=single,
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize_section,
+        missing=lambda ref: f"MPEP section {ref} — not found.",
+        noun_plural="MPEP sections",
+        source_url=_source_url,
+        source_name=_MPEP_NAME,
     )
 
 

@@ -22,9 +22,15 @@ from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.epo_case_law import CaseLawClient, get_corpus_status
 from patent_client_agents.epo_case_law.client import _CITATION_PATTERN, _SLUG_PATTERN
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.corpus.tools import (
+    corpus_get,
+    corpus_search,
+    hits_summary,
+    truncate,
+)
+from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 from patent_client_agents.shared.paging import Limit100, Offset
-from patent_client_agents.shared.provenance import provenance_for
 
 epo_case_law_mcp = FastMCP("EPO Case Law")
 
@@ -44,30 +50,6 @@ _CASELAW_NAME = "EPO Boards of Appeal Case Law Compendium"
 _CASELAW_LEAN_SNIPPET_CHARS = 400
 
 
-def _caselaw_provenance(path: str) -> Any:
-    """Build a Provenance pointing at ``{base}{path}`` with corpus metadata.
-
-    Reads ``corpus_synced_at`` / ``corpus_version`` from
-    :func:`patent_client_agents.epo_case_law.get_corpus_status` so the
-    values track the bundled corpus without per-call hardcoding. Mirrors
-    the MPEP template for substantive-law ``mcp_local`` corpora.
-    """
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=f"{_CASELAW_BASE}{path}",
-        source_name=_CASELAW_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
-
-
-def _truncate(text: str, limit: int) -> str:
-    """Cap a string at ``limit`` chars, appending an ellipsis on overflow."""
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 1)].rstrip() + "…"
-
-
 def _stub_hit(hit: dict) -> dict:
     """Lean projection of a Case Law search hit (§5.5).
 
@@ -84,7 +66,7 @@ def _stub_hit(hit: dict) -> dict:
     return {
         "section_number": section_number,
         "title": title,
-        "snippet": _truncate(hit.get("snippet") or "", _CASELAW_LEAN_SNIPPET_CHARS),
+        "snippet": truncate(hit.get("snippet") or "", _CASELAW_LEAN_SNIPPET_CHARS),
         "href": hit.get("href"),
     }
 
@@ -97,13 +79,6 @@ def _summarize_section(record: dict, corpus_version: str) -> str:
     if href:
         return f"{head}\nSource: {_CASELAW_BASE}/en/legal/case-law/{corpus_version}/{href}.html"
     return head
-
-
-def _section_to_dict(section: Any) -> dict:
-    """Dump a CaseLawSection model to a dict."""
-    if hasattr(section, "model_dump"):
-        return section.model_dump()
-    return dict(section)
 
 
 def _looks_like_section_ref(ref: str) -> bool:
@@ -165,35 +140,22 @@ async def search_epo_case_law(
 
     Related tools: get_epo_case_law_section.
     """
-    async with CaseLawClient() as client:
-        response = await client.search(
+    return await corpus_search(
+        CaseLawClient,
+        lambda client: client.search(
             query=query,
             syntax=syntax,
             sort=sort,
             per_page=limit,
             offset=offset,
-        )
-
-    hits = [h.model_dump() for h in response.hits]
-    items = hits if full else [_stub_hit(h) for h in hits]
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    summary = (
-        f"EPO Case Law ({corpus_label}) — `{query}`: "
-        f"{len(items)} hit{'s' if len(items) != 1 else ''}"
-    )
-    if response.has_more:
-        summary += " (more available)."
-    else:
-        summary += "."
-
-    return ListEnvelope[dict](
-        summary=summary,
-        items=items,
-        more_available=response.has_more,
-        next_cursor=None,
-        provenance=_caselaw_provenance("/en/legal/case-law"),
+        ),
+        corpus_status=get_corpus_status,
+        project=None if full else _stub_hit,
+        summary=lambda response, items, corpus_label: hits_summary(
+            f"EPO Case Law ({corpus_label}) — `{query}`", len(items), response.has_more
+        ),
+        source_url=f"{_CASELAW_BASE}/en/legal/case-law",
+        source_name=_CASELAW_NAME,
     )
 
 
@@ -229,36 +191,30 @@ async def get_epo_case_law_section(
     """
     refs = as_id_list(section, noun="Case Law section reference")
 
-    async with CaseLawClient() as client:
+    async def _fetch_one(client: Any, ref: str) -> dict:
+        record = await client.get_section(ref)
+        return dump(record)
 
-        async def _fetch_one(ref: str) -> dict:
-            record = await client.get_section(ref)
-            return _section_to_dict(record)
+    def _source_url(items: list[dict], corpus_label: str) -> str:
+        # If the single ref looks like a citation/slug, point provenance
+        # at the specific section's URL; otherwise at the collection root.
+        if len(refs) == 1 and items:
+            href = items[0].get("href")
+            if href and _looks_like_section_ref(refs[0]):
+                return f"{_CASELAW_BASE}/en/legal/case-law/{corpus_label}/{href}.html"
+        return f"{_CASELAW_BASE}/en/legal/case-law"
 
-        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(section, str))
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    if len(refs) == 1 and items:
-        summary = _summarize_section(items[0], corpus_label)
-        ref = refs[0]
-        href = items[0].get("href")
-        if href and _looks_like_section_ref(ref):
-            path = f"/en/legal/case-law/{corpus_label}/{href}.html"
-        else:
-            path = "/en/legal/case-law"
-    else:
-        if len(refs) == 1:
-            summary = f"EPO Case Law section {refs[0]} — not found."
-        else:
-            summary = fetched_summary(len(items), len(refs), "EPO Case Law sections", not_found)
-        path = "/en/legal/case-law"
-
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_caselaw_provenance(path),
+    return await corpus_get(
+        CaseLawClient,
+        refs,
+        _fetch_one,
+        single=isinstance(section, str),
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize_section,
+        missing=lambda ref: f"EPO Case Law section {ref} — not found.",
+        noun_plural="EPO Case Law sections",
+        source_url=_source_url,
+        source_name=_CASELAW_NAME,
     )
 
 

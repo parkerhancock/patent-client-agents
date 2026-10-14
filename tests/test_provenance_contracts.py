@@ -17,6 +17,7 @@ from mcp_data_core.envelope import Provenance
 from patent_client_agents.mcp.tools import epc as epc_tools
 from patent_client_agents.mcp.tools.publications import _ppubs_provenance
 from patent_client_agents.mcp.tools.usitc import _usitc_provenance
+from patent_client_agents.shared.corpus.tools import corpus_provenance
 
 
 def test_registered_ip_provenance_has_standard_fields_only() -> None:
@@ -57,7 +58,11 @@ def test_substantive_law_provenance_carries_corpus_fields(monkeypatch) -> None:
         lambda: {"corpus_synced_at": synced_at, "corpus_version": "2026"},
     )
 
-    provenance: Provenance = epc_tools._epc_provenance("/en/legal/epc")
+    provenance: Provenance = corpus_provenance(
+        epc_tools.get_corpus_status(),
+        source_url=f"{epc_tools._EPC_BASE}/en/legal/epc",
+        source_name=epc_tools._EPC_NAME,
+    )
 
     assert provenance.source_name == "European Patent Convention"
     assert provenance.source_url.endswith("/en/legal/epc")

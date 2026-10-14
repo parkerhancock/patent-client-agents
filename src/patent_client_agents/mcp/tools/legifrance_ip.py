@@ -34,8 +34,14 @@ from patent_client_agents.legifrance_ip import (
     get_corpus_status,
 )
 from patent_client_agents.legifrance_ip.resources import STATUTES
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
-from patent_client_agents.shared.provenance import provenance_for
+from patent_client_agents.shared.corpus.tools import (
+    corpus_get,
+    corpus_search,
+    hits_summary,
+    truncate,
+)
+from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 
 legifrance_ip_mcp = FastMCP("Légifrance IP")
 
@@ -57,29 +63,6 @@ _LEGIFRANCE_NAME = "Légifrance — French IP statutes (CPI + Code de commerce L
 _LEGIFRANCE_LEAN_SNIPPET_CHARS = 400
 
 
-def _legifrance_provenance(path: str) -> Any:
-    """Build a Provenance pointing at ``{base}{path}`` with corpus metadata.
-
-    Reads ``corpus_synced_at`` / ``corpus_version`` from
-    :func:`patent_client_agents.legifrance_ip.get_corpus_status` so the
-    values track the bundled corpus without per-call hardcoding.
-    """
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=f"{_LEGIFRANCE_BASE}{path}",
-        source_name=_LEGIFRANCE_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
-
-
-def _truncate(text: str, limit: int) -> str:
-    """Cap a string at ``limit`` chars, appending an ellipsis on overflow."""
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 1)].rstrip() + "…"
-
-
 def _hit_to_dict(hit: Any) -> dict:
     """Lean projection of a LegifranceSearchHit (§5.5).
 
@@ -94,15 +77,8 @@ def _hit_to_dict(hit: Any) -> dict:
         "statute": data.get("statute"),
         "section": data.get("section"),
         "title": data.get("title"),
-        "snippet": _truncate(data.get("snippet") or "", _LEGIFRANCE_LEAN_SNIPPET_CHARS),
+        "snippet": truncate(data.get("snippet") or "", _LEGIFRANCE_LEAN_SNIPPET_CHARS),
     }
-
-
-def _section_to_dict(section: Any) -> dict:
-    """Dump a LegifranceSection model to a plain dict."""
-    if hasattr(section, "model_dump"):
-        return section.model_dump()
-    return dict(section)
 
 
 def _validate_statute_filter(statute: str | None) -> str | None:
@@ -153,25 +129,19 @@ async def search_legifrance_ip(
     Related tools: get_legifrance_section.
     """
     statute = _validate_statute_filter(statute)
-    async with LegifranceIpClient() as client:
-        response = await client.search(query, statute=statute, per_page=25, page=1)
-
-    items = [_hit_to_dict(hit) for hit in response.hits]
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
     statute_label = f" [{statute}]" if statute else ""
-    summary = (
-        f"Légifrance IP ({corpus_label}){statute_label} — `{query}`: "
-        f"{len(items)} hit{'s' if len(items) != 1 else ''}"
-    )
-    summary += " (more available)." if response.has_more else "."
-
-    return ListEnvelope[dict](
-        summary=summary,
-        items=items,
-        more_available=response.has_more,
-        next_cursor=None,
-        provenance=_legifrance_provenance("/codes/section_lc/LEGITEXT000006069414"),
+    return await corpus_search(
+        LegifranceIpClient,
+        lambda client: client.search(query, statute=statute, per_page=25, page=1),
+        corpus_status=get_corpus_status,
+        project=_hit_to_dict,
+        summary=lambda response, items, corpus_label: hits_summary(
+            f"Légifrance IP ({corpus_label}){statute_label} — `{query}`",
+            len(items),
+            response.has_more,
+        ),
+        source_url=f"{_LEGIFRANCE_BASE}/codes/section_lc/LEGITEXT000006069414",
+        source_name=_LEGIFRANCE_NAME,
     )
 
 
@@ -201,35 +171,30 @@ async def get_legifrance_section(
     """
     refs = as_id_list(citation, noun="Légifrance citation")
 
-    async with LegifranceIpClient() as client:
+    async def _fetch_one(client: Any, ref: str) -> dict:
+        try:
+            section = await client.get_section(ref)
+        except CitationParseError as exc:
+            raise ValidationError(str(exc)) from exc
+        return dump(section)
 
-        async def _fetch_one(ref: str) -> dict:
-            try:
-                section = await client.get_section(ref)
-            except CitationParseError as exc:
-                raise ValidationError(str(exc)) from exc
-            return _section_to_dict(section)
-
-        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    if len(refs) == 1 and items:
-        record = items[0]
-        summary = (
+    def _summarize(record: dict, corpus_label: str) -> str:
+        return (
             f"**Légifrance IP {corpus_label} — {record.get('statute')} "
             f"art. {record.get('section')}: {record.get('title') or '(sans titre)'}**"
         )
-    elif len(refs) == 1:
-        summary = f"Légifrance IP article {refs[0]} — not found."
-    else:
-        summary = fetched_summary(len(items), len(refs), "Légifrance IP articles", not_found)
 
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_legifrance_provenance("/codes"),
+    return await corpus_get(
+        LegifranceIpClient,
+        refs,
+        _fetch_one,
+        single=isinstance(citation, str),
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize,
+        missing=lambda ref: f"Légifrance IP article {ref} — not found.",
+        noun_plural="Légifrance IP articles",
+        source_url=f"{_LEGIFRANCE_BASE}/codes",
+        source_name=_LEGIFRANCE_NAME,
     )
 
 

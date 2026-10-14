@@ -37,8 +37,9 @@ from patent_client_agents.ilpo_statutes import (
 from patent_client_agents.ilpo_statutes.client import _resolve_statute, parse_citation
 from patent_client_agents.ilpo_tm import CKAN_HOST as ILPO_TM_HOST
 from patent_client_agents.ilpo_tm import IlpoTmClient
+from patent_client_agents.shared.corpus.tools import corpus_get, corpus_provenance
 from patent_client_agents.shared.envelope import dump
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 from patent_client_agents.shared.provenance import provenance_for
 
 ilpo_mcp = FastMCP("ILPO Israel")
@@ -60,12 +61,8 @@ _ILPO_TM_NAME = "ILPO Israel — Trade Marks (data.gov.il)"
 
 
 def _ilpo_statutes_provenance(source_url: str = _ILPO_STATUTES_URL) -> Any:
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=source_url,
-        source_name=_ILPO_STATUTES_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
+    return corpus_provenance(
+        get_corpus_status(), source_url=source_url, source_name=_ILPO_STATUTES_NAME
     )
 
 
@@ -164,34 +161,26 @@ async def get_ilpo_section(
     """
     citations = as_id_list(citation, noun="ILPO statute citation")
 
-    async with IlpoStatutesClient() as client:
+    async def _fetch_one(client: Any, cit: str) -> dict | None:
+        section = await client.get_section_by_citation(cit)
+        return dump(section) if section is not None else None
 
-        async def _fetch_one(cit: str) -> dict | None:
-            section = await client.get_section_by_citation(cit)
-            return dump(section) if section is not None else None
-
-        items, not_found = await fetch_many(citations, _fetch_one, single=isinstance(citation, str))
-
-    if len(citations) == 1 and items:
-        first = items[0]
+    def _summarize(first: dict, corpus_label: str) -> str:
         title = first.get("title") or "(no title)"
-        summary = f"**{first.get('section_label', citations[0])}** — {title}"
-    elif len(citations) == 1:
-        summary = f"ILPO Israel section {citations[0]!r} — not found."
-    else:
-        summary = fetched_summary(len(items), len(citations), "ILPO sections", not_found)
+        return f"**{first.get('section_label', citations[0])}** — {title}"
 
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_ilpo_statutes_provenance(),
+    return await corpus_get(
+        IlpoStatutesClient,
+        citations,
+        _fetch_one,
+        single=isinstance(citation, str),
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize,
+        missing=lambda cit: f"ILPO Israel section {cit!r} — not found.",
+        noun_plural="ILPO sections",
+        source_url=_ILPO_STATUTES_URL,
+        source_name=_ILPO_STATUTES_NAME,
     )
-
-
-# ---------------------------------------------------------------------------
-# data.gov.il trade-mark feed (CKAN)
-# ---------------------------------------------------------------------------
 
 
 @ilpo_mcp.tool(annotations=READ_ONLY)

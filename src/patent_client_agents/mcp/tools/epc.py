@@ -21,9 +21,15 @@ from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.epc import EpcClient, get_corpus_status
 from patent_client_agents.epc.client import _CITATION_PATTERN, _SLUG_PATTERN
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.corpus.tools import (
+    corpus_get,
+    corpus_search,
+    hits_summary,
+    truncate,
+)
+from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 from patent_client_agents.shared.paging import Limit100, Offset
-from patent_client_agents.shared.provenance import provenance_for
 
 epc_mcp = FastMCP("EPC")
 
@@ -45,30 +51,6 @@ _EPC_NAME = "European Patent Convention"
 _EPC_LEAN_SNIPPET_CHARS = 400
 
 
-def _epc_provenance(path: str) -> Any:
-    """Build a Provenance pointing at ``{base}{path}`` with corpus metadata.
-
-    Reads ``corpus_synced_at`` / ``corpus_version`` from
-    :func:`patent_client_agents.epc.get_corpus_status` so the values
-    track the bundled corpus without per-call hardcoding. Mirrors the
-    MPEP template for substantive-law ``mcp_local`` corpora.
-    """
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=f"{_EPC_BASE}{path}",
-        source_name=_EPC_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
-
-
-def _truncate(text: str, limit: int) -> str:
-    """Cap a string at ``limit`` chars, appending an ellipsis on overflow."""
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 1)].rstrip() + "…"
-
-
 def _stub_hit(hit: dict) -> dict:
     """Lean projection of an EPC search hit (§5.5).
 
@@ -88,7 +70,7 @@ def _stub_hit(hit: dict) -> dict:
     return {
         "section_number": section_number,
         "title": title,
-        "snippet": _truncate(hit.get("snippet") or "", _EPC_LEAN_SNIPPET_CHARS),
+        "snippet": truncate(hit.get("snippet") or "", _EPC_LEAN_SNIPPET_CHARS),
         "href": hit.get("href"),
     }
 
@@ -105,13 +87,6 @@ def _summarize_section(record: dict, corpus_version: str) -> str:
     if href:
         return f"{head}\nSource: {_EPC_BASE}/en/legal/epc/{corpus_version}/{href}.html"
     return head
-
-
-def _section_to_dict(section: Any) -> dict:
-    """Dump an EpcSection model to a dict."""
-    if hasattr(section, "model_dump"):
-        return section.model_dump()
-    return dict(section)
 
 
 def _looks_like_section_ref(ref: str) -> bool:
@@ -172,32 +147,22 @@ async def search_epc(
 
     Related tools: get_epc_section.
     """
-    async with EpcClient() as client:
-        response = await client.search(
+    return await corpus_search(
+        EpcClient,
+        lambda client: client.search(
             query=query,
             syntax=syntax,
             sort=sort,
             per_page=limit,
             offset=offset,
-        )
-
-    hits = [h.model_dump() for h in response.hits]
-    items = hits if full else [_stub_hit(h) for h in hits]
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    summary = f"EPC ({corpus_label}) — `{query}`: {len(items)} hit{'s' if len(items) != 1 else ''}"
-    if response.has_more:
-        summary += " (more available)."
-    else:
-        summary += "."
-
-    return ListEnvelope[dict](
-        summary=summary,
-        items=items,
-        more_available=response.has_more,
-        next_cursor=None,
-        provenance=_epc_provenance("/en/legal/epc"),
+        ),
+        corpus_status=get_corpus_status,
+        project=None if full else _stub_hit,
+        summary=lambda response, items, corpus_label: hits_summary(
+            f"EPC ({corpus_label}) — `{query}`", len(items), response.has_more
+        ),
+        source_url=f"{_EPC_BASE}/en/legal/epc",
+        source_name=_EPC_NAME,
     )
 
 
@@ -232,38 +197,30 @@ async def get_epc_section(
     """
     refs = as_id_list(section, noun="EPC section reference")
 
-    async with EpcClient() as client:
+    async def _fetch_one(client: Any, ref: str) -> dict:
+        record = await client.get_section(ref)
+        return dump(record)
 
-        async def _fetch_one(ref: str) -> dict:
-            record = await client.get_section(ref)
-            return _section_to_dict(record)
-
-        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(section, str))
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    if len(refs) == 1 and items:
-        summary = _summarize_section(items[0], corpus_label)
-        ref = refs[0]
+    def _source_url(items: list[dict], corpus_label: str) -> str:
         # If the single ref looks like a citation/slug, point provenance
         # at the specific section's URL; otherwise at the collection root.
-        href = items[0].get("href")
-        if href and _looks_like_section_ref(ref):
-            path = f"/en/legal/epc/{corpus_label}/{href}.html"
-        else:
-            path = "/en/legal/epc"
-    else:
-        if len(refs) == 1:
-            summary = f"EPC section {refs[0]} — not found."
-        else:
-            summary = fetched_summary(len(items), len(refs), "EPC sections", not_found)
-        path = "/en/legal/epc"
+        if len(refs) == 1 and items:
+            href = items[0].get("href")
+            if href and _looks_like_section_ref(refs[0]):
+                return f"{_EPC_BASE}/en/legal/epc/{corpus_label}/{href}.html"
+        return f"{_EPC_BASE}/en/legal/epc"
 
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_epc_provenance(path),
+    return await corpus_get(
+        EpcClient,
+        refs,
+        _fetch_one,
+        single=isinstance(section, str),
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize_section,
+        missing=lambda ref: f"EPC section {ref} — not found.",
+        noun_plural="EPC sections",
+        source_url=_source_url,
+        source_name=_EPC_NAME,
     )
 
 
