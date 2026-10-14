@@ -168,14 +168,6 @@ async def test_get_trademark_requests_detail_path_and_parses_record() -> None:
     assert tm.publications[0].publication_date == date(1998, 4, 27)
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "Source bug: Trademark.description/disclaimer are typed `str | None`, but the "
-        "EUIPO spec defines both as MultilingualElement (array of {language, text}), "
-        "so any detail record carrying them fails validation."
-    ),
-)
 async def test_get_trademark_parses_multilingual_description_and_disclaimer() -> None:
     payload = {
         **TRADEMARK_DETAIL,
@@ -185,7 +177,10 @@ async def test_get_trademark_parses_multilingual_description_and_disclaimer() ->
     seen: list[httpx.Request] = []
     async with _client(lambda r: httpx.Response(200, json=payload), seen) as client:
         tm = await client.get_trademark("000428557")
-    assert tm.description is not None
+    assert [(d.language, d.text) for d in tm.description] == [("en", "The mark is golden.")]
+    assert [(d.language, d.text) for d in tm.disclaimer] == [
+        ("en", "No exclusive right to 'Apple'.")
+    ]
 
 
 @pytest.mark.parametrize(
