@@ -30,6 +30,7 @@ from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.corpus.tools import corpus_get, corpus_provenance
 from patent_client_agents.shared.envelope import dump, dump_any
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.shared.provenance import provenance_for
@@ -82,12 +83,8 @@ def _upc_statutes_provenance(source_url: str) -> Any:
     values track the bundled corpus without per-call hardcoding
     (CONNECTOR_STANDARDS.md §4).
     """
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=source_url,
-        source_name=_UPC_STATUTES_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
+    return corpus_provenance(
+        get_corpus_status(), source_url=source_url, source_name=_UPC_STATUTES_NAME
     )
 
 
@@ -399,28 +396,21 @@ async def get_upc_section(
     """
     keys = as_id_list(instrument, noun="UPC instrument key")
 
-    async with UpcStatutesClient() as client:
+    async def _fetch_one(client: Any, key: str) -> dict | None:
+        record = await client.get_instrument(instrument=key, language=language)
+        return dump(record) if record is not None else None
 
-        async def _fetch_one(key: str) -> dict | None:
-            record = await client.get_instrument(instrument=key, language=language)
-            return dump(record) if record is not None else None
-
-        items, not_found = await fetch_many(keys, _fetch_one, single=isinstance(instrument, str))
-
-    if len(keys) == 1 and items:
-        summary = _summarize_instrument(items[0])
-    elif len(keys) == 1:
-        summary = f"UPC instrument {keys[0]} — not found."
-    else:
-        summary = fetched_summary(len(items), len(keys), "UPC instruments", not_found)
-
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_upc_statutes_provenance(
-            "https://www.unifiedpatentcourt.org/en/court/legal-documents"
-        ),
+    return await corpus_get(
+        UpcStatutesClient,
+        keys,
+        _fetch_one,
+        single=isinstance(instrument, str),
+        corpus_status=get_corpus_status,
+        summarize_one=lambda record, corpus_label: _summarize_instrument(record),
+        missing=lambda key: f"UPC instrument {key} — not found.",
+        noun_plural="UPC instruments",
+        source_url="https://www.unifiedpatentcourt.org/en/court/legal-documents",
+        source_name=_UPC_STATUTES_NAME,
     )
 
 

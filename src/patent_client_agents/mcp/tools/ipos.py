@@ -44,9 +44,9 @@ from patent_client_agents.ipos_statutes import get_corpus_status as _statutes_st
 from patent_client_agents.ipos_statutes import list_statutes as _list_statutes
 from patent_client_agents.ipos_statutes import search as _search_statutes
 from patent_client_agents.ipos_statutes.client import parse_citation as _parse_statute_citation
+from patent_client_agents.shared.corpus.tools import corpus_get, corpus_provenance
 from patent_client_agents.shared.envelope import dump, dump_any
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
-from patent_client_agents.shared.provenance import provenance_for
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 
 ipos_mcp = FastMCP("IPOS Singapore")
 
@@ -62,24 +62,12 @@ _IPOS_BASE = "https://www.ipos.gov.sg"
 
 def _statutes_provenance(source_url: str) -> Any:
     """Build a Provenance for an IPOS statutes corpus response."""
-    status = _statutes_status()
-    return provenance_for(
-        source_url=source_url,
-        source_name=_IPOS_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
+    return corpus_provenance(_statutes_status(), source_url=source_url, source_name=_IPOS_NAME)
 
 
 def _manuals_provenance(source_url: str) -> Any:
     """Build a Provenance for an IPOS manuals corpus response."""
-    status = _manuals_status()
-    return provenance_for(
-        source_url=source_url,
-        source_name=_IPOS_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
+    return corpus_provenance(_manuals_status(), source_url=source_url, source_name=_IPOS_NAME)
 
 
 def _summarize_statute_section(record: dict) -> str:
@@ -180,31 +168,30 @@ async def get_ipos_section(
     """
     citations = as_id_list(citation, noun="IPOS statute citation")
 
-    async with IposStatutesClient() as client:
+    async def _fetch_one(client: Any, cite: str) -> dict | None:
+        record = await client.get_by_citation(cite)
+        return dump(record) if record is not None else None
 
-        async def _fetch_one(cite: str) -> dict | None:
-            record = await client.get_by_citation(cite)
-            return dump(record) if record is not None else None
+    def _source_url(items: list[dict], corpus_label: str) -> str:
+        if len(citations) == 1 and items:
+            # Try to point provenance at the specific section URL we resolved.
+            parsed = _parse_statute_citation(citations[0])
+            path = f"/Act/{parsed[0].upper()}#pr{parsed[1]}-" if parsed else "/Browse/Act-Rev"
+        else:
+            path = "/Browse/Act-Rev"
+        return f"{_SSO_BASE}{path}"
 
-        items, not_found = await fetch_many(citations, _fetch_one, single=isinstance(citation, str))
-
-    if len(citations) == 1 and items:
-        summary = _summarize_statute_section(items[0])
-        # Try to point provenance at the specific section URL we resolved.
-        parsed = _parse_statute_citation(citations[0])
-        path = f"/Act/{parsed[0].upper()}#pr{parsed[1]}-" if parsed else "/Browse/Act-Rev"
-    elif len(citations) == 1:
-        summary = f"IPOS section `{citations[0]}` — not found."
-        path = "/Browse/Act-Rev"
-    else:
-        summary = fetched_summary(len(items), len(citations), "IPOS statute sections", not_found)
-        path = "/Browse/Act-Rev"
-
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_statutes_provenance(f"{_SSO_BASE}{path}"),
+    return await corpus_get(
+        IposStatutesClient,
+        citations,
+        _fetch_one,
+        single=isinstance(citation, str),
+        corpus_status=_statutes_status,
+        summarize_one=lambda record, corpus_label: _summarize_statute_section(record),
+        missing=lambda cite: f"IPOS section `{cite}` — not found.",
+        noun_plural="IPOS statute sections",
+        source_url=_source_url,
+        source_name=_IPOS_NAME,
     )
 
 
@@ -305,30 +292,29 @@ async def get_ipos_manual_section(
     """
     citations = as_id_list(citation, noun="IPOS manual citation")
 
-    async with IposManualsClient() as client:
+    async def _fetch_one(client: Any, cite: str) -> dict | None:
+        record = await client.get_by_citation(cite)
+        return dump(record) if record is not None else None
 
-        async def _fetch_one(cite: str) -> dict | None:
-            record = await client.get_by_citation(cite)
-            return dump(record) if record is not None else None
+    def _source_url(items: list[dict], corpus_label: str) -> str:
+        if len(citations) == 1 and items:
+            parsed = _parse_manual_citation(citations[0])
+            path = f"/about-ip/patents/guides#{parsed[0]}-{parsed[1]}" if parsed else "/about-ip"
+        else:
+            path = "/about-ip"
+        return f"{_IPOS_BASE}{path}"
 
-        items, not_found = await fetch_many(citations, _fetch_one, single=isinstance(citation, str))
-
-    if len(citations) == 1 and items:
-        summary = _summarize_manual_section(items[0])
-        parsed = _parse_manual_citation(citations[0])
-        path = f"/about-ip/patents/guides#{parsed[0]}-{parsed[1]}" if parsed else "/about-ip"
-    elif len(citations) == 1:
-        summary = f"IPOS manual section `{citations[0]}` — not found."
-        path = "/about-ip"
-    else:
-        summary = fetched_summary(len(items), len(citations), "IPOS manual sections", not_found)
-        path = "/about-ip"
-
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_manuals_provenance(f"{_IPOS_BASE}{path}"),
+    return await corpus_get(
+        IposManualsClient,
+        citations,
+        _fetch_one,
+        single=isinstance(citation, str),
+        corpus_status=_manuals_status,
+        summarize_one=lambda record, corpus_label: _summarize_manual_section(record),
+        missing=lambda cite: f"IPOS manual section `{cite}` — not found.",
+        noun_plural="IPOS manual sections",
+        source_url=_source_url,
+        source_name=_IPOS_NAME,
     )
 
 

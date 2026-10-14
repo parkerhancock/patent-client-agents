@@ -18,9 +18,14 @@ from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
-from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.corpus.tools import (
+    corpus_get,
+    corpus_search,
+    hits_summary,
+    truncate,
+)
+from patent_client_agents.shared.fanout import FetchedList, as_id_list
 from patent_client_agents.shared.paging import Limit100, Offset
-from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.ukipo_mopp import MoppClient, get_corpus_status
 
 ukipo_mopp_mcp = FastMCP("UKIPO MoPP")
@@ -44,29 +49,6 @@ _MOPP_INDEX_PATH = "/guidance/manual-of-patent-practice-mopp"
 _MOPP_LEAN_SNIPPET_CHARS = 400
 
 
-def _mopp_provenance(path: str) -> Any:
-    """Build a Provenance pointing at ``{base}{path}`` with corpus metadata.
-
-    Reads ``corpus_synced_at`` / ``corpus_version`` from
-    :func:`patent_client_agents.ukipo_mopp.get_corpus_status` so the
-    values track the bundled corpus without per-call hardcoding.
-    """
-    status = get_corpus_status()
-    return provenance_for(
-        source_url=f"{_MOPP_BASE}{path}",
-        source_name=_MOPP_NAME,
-        corpus_synced_at=status["corpus_synced_at"],
-        corpus_version=status["corpus_version"],
-    )
-
-
-def _truncate(text: str, limit: int) -> str:
-    """Cap a string at ``limit`` chars, appending an ellipsis on overflow."""
-    if len(text) <= limit:
-        return text
-    return text[: max(0, limit - 1)].rstrip() + "…"
-
-
 def _stub_hit(hit: dict) -> dict:
     """Lean projection of a MoPP search hit (§5.5).
 
@@ -86,7 +68,7 @@ def _stub_hit(hit: dict) -> dict:
     return {
         "section_number": section_number,
         "title": title_only,
-        "snippet": _truncate(title_only, _MOPP_LEAN_SNIPPET_CHARS),
+        "snippet": truncate(title_only, _MOPP_LEAN_SNIPPET_CHARS),
         "href": hit.get("href"),
     }
 
@@ -152,32 +134,22 @@ async def search_mopp(
 
     Related tools: get_mopp_section.
     """
-    async with MoppClient() as client:
-        response = await client.search(
+    return await corpus_search(
+        MoppClient,
+        lambda client: client.search(
             query=query,
             syntax=syntax,
             sort=sort,
             per_page=limit,
             offset=offset,
-        )
-
-    hits = [h.model_dump() for h in response.hits]
-    items = hits if full else [_stub_hit(h) for h in hits]
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    summary = f"MoPP ({corpus_label}) — `{query}`: {len(items)} hit{'s' if len(items) != 1 else ''}"
-    if response.has_more:
-        summary += " (more available)."
-    else:
-        summary += "."
-
-    return ListEnvelope[dict](
-        summary=summary,
-        items=items,
-        more_available=response.has_more,
-        next_cursor=None,
-        provenance=_mopp_provenance(_MOPP_INDEX_PATH),
+        ),
+        corpus_status=get_corpus_status,
+        project=None if full else _stub_hit,
+        summary=lambda response, items, corpus_label: hits_summary(
+            f"MoPP ({corpus_label}) — `{query}`", len(items), response.has_more
+        ),
+        source_url=f"{_MOPP_BASE}{_MOPP_INDEX_PATH}",
+        source_name=_MOPP_NAME,
     )
 
 
@@ -215,33 +187,27 @@ async def get_mopp_section(
     """
     refs = as_id_list(section, noun="MoPP section reference")
 
-    async with MoppClient() as client:
+    async def _fetch_one(client: Any, ref: str) -> dict:
+        record = await client.get_section(ref)
+        return record.model_dump()
 
-        async def _fetch_one(ref: str) -> dict:
-            record = await client.get_section(ref)
-            return record.model_dump()
+    def _source_url(items: list[dict], corpus_label: str) -> str:
+        if len(refs) == 1 and items:
+            href = items[0].get("href") or refs[0]
+            return f"{_MOPP_BASE}{_MOPP_INDEX_PATH}/{href.lstrip('-')}"
+        return f"{_MOPP_BASE}{_MOPP_INDEX_PATH}"
 
-        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(section, str))
-
-    status = get_corpus_status()
-    corpus_label = status["corpus_version"]
-    if len(refs) == 1 and items:
-        summary = _summarize_section(items[0], corpus_label)
-        ref = refs[0]
-        href = items[0].get("href") or ref
-        path = f"{_MOPP_INDEX_PATH}/{href.lstrip('-')}"
-    else:
-        if len(refs) == 1:
-            summary = f"MoPP section {refs[0]} — not found."
-        else:
-            summary = fetched_summary(len(items), len(refs), "MoPP sections", not_found)
-        path = _MOPP_INDEX_PATH
-
-    return FetchedList[dict](
-        summary=summary,
-        items=items,
-        not_found=not_found,
-        provenance=_mopp_provenance(path),
+    return await corpus_get(
+        MoppClient,
+        refs,
+        _fetch_one,
+        single=isinstance(section, str),
+        corpus_status=get_corpus_status,
+        summarize_one=_summarize_section,
+        missing=lambda ref: f"MoPP section {ref} — not found.",
+        noun_plural="MoPP sections",
+        source_url=_source_url,
+        source_name=_MOPP_NAME,
     )
 
 
