@@ -64,7 +64,6 @@ from datetime import date
 from decimal import Decimal
 from typing import Unpack
 
-import pypdf
 from lxml import html as L
 
 from mcp_data_core import BaseAsyncClient
@@ -443,6 +442,8 @@ def _extract_pdf_text(pdf_bytes: bytes) -> str:
     ``<label> <amount> NT$<amount> per <unit>`` (the amount appears
     twice because the Chinese column also uses Arabic numerals).
     """
+    import pypdf  # deferred: only the scrape path needs it
+
     reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
     parts = [page.extract_text() or "" for page in reader.pages]
     raw = "\n".join(parts)

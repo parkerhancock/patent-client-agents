@@ -17,6 +17,7 @@ schedule) and feed the JSON via ``PCA_WAF_TOKEN_JSON`` env var or
 from __future__ import annotations
 
 import asyncio
+import importlib.util
 import json
 import logging
 import os
@@ -25,13 +26,8 @@ from pathlib import Path
 
 from mcp_data_core.exceptions import ConfigurationError
 
-try:
-    from playwright.async_api import async_playwright
-
-    PLAYWRIGHT_AVAILABLE = True
-except ImportError:
-    async_playwright = None  # type: ignore[assignment]
-    PLAYWRIGHT_AVAILABLE = False
+# Playwright is imported only when a fresh token is needed.
+PLAYWRIGHT_AVAILABLE = importlib.util.find_spec("playwright") is not None
 
 logger = logging.getLogger(__name__)
 
@@ -231,7 +227,8 @@ class WafTokenManager:
         Returns:
             Tuple of (token_value, expiry_timestamp).
         """
-        assert async_playwright is not None
+        from playwright.async_api import async_playwright
+
         logger.info("Acquiring WAF token via Playwright...")
 
         pw = await async_playwright().start()

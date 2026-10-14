@@ -100,8 +100,6 @@ from datetime import date
 from decimal import Decimal
 from typing import Unpack
 
-import pypdf
-
 from mcp_data_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     EntityTier,
@@ -177,6 +175,8 @@ def _parse_br_amount(raw: str) -> Decimal | None:
 
 def _extract_pdf_text(pdf_bytes: bytes) -> str:
     """Return whitespace-collapsed text of the fee PDF."""
+    import pypdf  # deferred: only the scrape path needs it
+
     reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
     parts = [page.extract_text() or "" for page in reader.pages]
     raw = "\n".join(parts)

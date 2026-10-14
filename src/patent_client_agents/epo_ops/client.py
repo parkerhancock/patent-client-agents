@@ -15,7 +15,6 @@ from typing import Any
 import hishel
 import httpx
 import lxml.etree as etree  # ty: ignore[unresolved-import]  # lxml lacks PEP 561 stubs
-from pypdf import PdfReader, PdfWriter
 
 from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.cache import build_cached_http_client
@@ -648,6 +647,8 @@ class EpoOpsClient(BaseAsyncClient):
         if not link or not num_pages_str or not num_pages_str.isdigit():
             raise RuntimeError("Incomplete image metadata returned by OPS.")
         num_pages = int(num_pages_str)
+        from pypdf import PdfReader, PdfWriter  # only the PDF download path needs pypdf
+
         pdf_writer = PdfWriter()
         for page in range(1, num_pages + 1):
             page_url = self._build_url(f"/rest-services/{link}.pdf")

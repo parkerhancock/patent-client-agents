@@ -146,8 +146,6 @@ from datetime import date
 from decimal import Decimal
 from typing import Unpack
 
-import pypdf
-
 from mcp_data_core import BaseAsyncClient
 from patent_client_agents.fees.models import (
     ConditionalTrigger,
@@ -257,6 +255,8 @@ def _extract_pdf_lines(pdf_bytes: bytes) -> list[str]:
     line breaks are preserved so the row walker can use them. Empty
     lines are dropped.
     """
+    import pypdf  # deferred: only the scrape path needs it
+
     reader = pypdf.PdfReader(io.BytesIO(pdf_bytes))
     parts: list[str] = []
     for page in reader.pages:

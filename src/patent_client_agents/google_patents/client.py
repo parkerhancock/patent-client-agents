@@ -13,7 +13,6 @@ from datetime import date, datetime
 from typing import TYPE_CHECKING, Any
 
 from lxml import html
-from markitdown import MarkItDown
 from pydantic import BaseModel, Field
 
 if TYPE_CHECKING:  # pragma: no cover - typing only
@@ -112,6 +111,9 @@ def _html_to_markdown(html_string: str | None) -> str | None:
     try:
         # Preprocess to preserve paragraph numbers
         preprocessed = _preprocess_patent_html(html_string)
+        # Imported here: markitdown loads magika/onnxruntime/numpy (~50 MB).
+        from markitdown import MarkItDown
+
         md = MarkItDown(enable_plugins=False)
         stream = io.BytesIO(preprocessed.encode("utf-8"))
         result = md.convert_stream(stream, file_extension=".html")
