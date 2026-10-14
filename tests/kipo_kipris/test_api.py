@@ -74,7 +74,7 @@ async def test_get_kipo_patent_delegates(mock_client: AsyncMock) -> None:
     mock_client.get_patent = AsyncMock(return_value=([{"applicationNumber": "X"}], {}))
     items, _ = await api.get_kipo_patent("1020230012345")
     assert items[0]["applicationNumber"] == "X"
-    mock_client.get_patent.assert_awaited_with("1020230012345")
+    mock_client.get_patent.assert_awaited_with(number="1020230012345")
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -114,7 +114,7 @@ async def test_get_kipo_trademark_delegates(mock_client: AsyncMock) -> None:
     mock_client.get_trademark = AsyncMock(return_value=([{"title": "GALAXY"}], {}))
     items, _ = await api.get_kipo_trademark("4020230123456")
     assert items[0]["title"] == "GALAXY"
-    mock_client.get_trademark.assert_awaited_with("4020230123456")
+    mock_client.get_trademark.assert_awaited_with(number="4020230123456")
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -151,4 +151,4 @@ async def test_get_kipo_design_delegates(mock_client: AsyncMock) -> None:
     mock_client.get_design = AsyncMock(return_value=([{"articleName": "전화기"}], {}))
     items, _ = await api.get_kipo_design("3020230012345")
     assert items[0]["articleName"] == "전화기"
-    mock_client.get_design.assert_awaited_with("3020230012345")
+    mock_client.get_design.assert_awaited_with(number="3020230012345")

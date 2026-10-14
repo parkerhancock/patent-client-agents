@@ -37,6 +37,7 @@ from patent_client_agents.epo_ops.resources import (
     CQL_GUIDE,
     CQL_GUIDE_RESOURCE_URI,
 )
+from patent_client_agents.shared.api import one_shot
 
 __all__ = [
     "EpoOpsClient",
@@ -85,6 +86,7 @@ def _warn_client_deprecated() -> None:
     )
 
 
+@one_shot(get_client, EpoOpsClient.retrieve_cpc, deprecated_client=_warn_client_deprecated)
 async def retrieve_cpc(
     symbol: str,
     depth: int | str | None = None,
@@ -97,24 +99,9 @@ async def retrieve_cpc(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.retrieve_cpc(
-            symbol=symbol,
-            depth=depth,
-            ancestors=ancestors,
-            navigation=navigation,
-        )
-
-    async with client_from_env() as cl:
-        return await cl.retrieve_cpc(
-            symbol=symbol,
-            depth=depth,
-            ancestors=ancestors,
-            navigation=navigation,
-        )
 
 
+@one_shot(get_client, EpoOpsClient.search_cpc, deprecated_client=_warn_client_deprecated)
 async def search_cpc(
     query: str,
     range_begin: int = 1,
@@ -126,14 +113,9 @@ async def search_cpc(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_cpc(query=query, range_begin=range_begin, range_end=range_end)
-
-    async with client_from_env() as cl:
-        return await cl.search_cpc(query=query, range_begin=range_begin, range_end=range_end)
 
 
+@one_shot(get_client, EpoOpsClient.map_classification, deprecated_client=_warn_client_deprecated)
 async def map_classification(
     input_schema: str,
     symbol: str,
@@ -146,24 +128,9 @@ async def map_classification(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.map_classification(
-            input_schema=input_schema,
-            symbol=symbol,
-            output_schema=output_schema,
-            additional=additional,
-        )
-
-    async with client_from_env() as cl:
-        return await cl.map_classification(
-            input_schema=input_schema,
-            symbol=symbol,
-            output_schema=output_schema,
-            additional=additional,
-        )
 
 
+@one_shot(get_client, EpoOpsClient.fetch_cpc_media, deprecated_client=_warn_client_deprecated)
 async def fetch_media(
     media_id: str,
     accept: str = "image/gif",
@@ -174,14 +141,9 @@ async def fetch_media(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_cpc_media(media_id=media_id, accept=accept)
-
-    async with client_from_env() as cl:
-        return await cl.fetch_cpc_media(media_id=media_id, accept=accept)
 
 
+@one_shot(get_client, EpoOpsClient.fetch_cpci_biblio, deprecated_client=_warn_client_deprecated)
 async def fetch_biblio_cpci(
     number: str,
     doc_type: str = "publication",
@@ -194,19 +156,3 @@ async def fetch_biblio_cpci(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.fetch_cpci_biblio(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-            condensed=condensed,
-        )
-
-    async with client_from_env() as cl:
-        return await cl.fetch_cpci_biblio(
-            number=number,
-            doc_type=doc_type,
-            fmt=fmt,
-            condensed=condensed,
-        )

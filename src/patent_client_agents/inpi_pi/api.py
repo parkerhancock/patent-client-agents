@@ -27,6 +27,8 @@ All helpers require ``INPI_USERNAME`` and ``INPI_PASSWORD`` env vars
 
 from __future__ import annotations
 
+from patent_client_agents.shared.api import one_shot
+
 from .client import InpiPiClient
 from .models import InpiDesignRow, InpiTrademarkRow
 
@@ -41,11 +43,16 @@ __all__ = [
 ]
 
 
+def _new_client(*, username: str | None = None, password: str | None = None) -> InpiPiClient:
+    return InpiPiClient(username=username, password=password)
+
+
 # =============================================================================
 # Trademark (marques) — ST.66 v1.0
 # =============================================================================
 
 
+@one_shot(_new_client, InpiPiClient.search_trademarks, factory_args=("username", "password"))
 async def search_inpi_trademarks(
     query: str | None = None,
     *,
@@ -60,19 +67,9 @@ async def search_inpi_trademarks(
     password: str | None = None,
 ) -> tuple[list[InpiTrademarkRow], int | None]:
     """Search FR national trademarks (ST.66 v1.0)."""
-    async with InpiPiClient(username=username, password=password) as client:
-        return await client.search_trademarks(
-            query,
-            nice_class=nice_class,
-            applicant=applicant,
-            status=status,
-            date_from=date_from,
-            date_to=date_to,
-            offset=offset,
-            limit=limit,
-        )
 
 
+@one_shot(_new_client, InpiPiClient.get_trademark, factory_args=("username", "password"))
 async def get_inpi_trademark(
     application_number: str | list[str],
     *,
@@ -80,8 +77,6 @@ async def get_inpi_trademark(
     password: str | None = None,
 ) -> list[InpiTrademarkRow]:
     """Fetch one or more FR national trademark records by application number."""
-    async with InpiPiClient(username=username, password=password) as client:
-        return await client.get_trademark(application_number)
 
 
 # =============================================================================
@@ -89,6 +84,7 @@ async def get_inpi_trademark(
 # =============================================================================
 
 
+@one_shot(_new_client, InpiPiClient.search_designs, factory_args=("username", "password"))
 async def search_inpi_designs(
     query: str | None = None,
     *,
@@ -103,19 +99,9 @@ async def search_inpi_designs(
     password: str | None = None,
 ) -> tuple[list[InpiDesignRow], int | None]:
     """Search FR national designs (ST.86 v1.0)."""
-    async with InpiPiClient(username=username, password=password) as client:
-        return await client.search_designs(
-            query,
-            locarno_class=locarno_class,
-            applicant=applicant,
-            status=status,
-            date_from=date_from,
-            date_to=date_to,
-            offset=offset,
-            limit=limit,
-        )
 
 
+@one_shot(_new_client, InpiPiClient.get_design, factory_args=("username", "password"))
 async def get_inpi_design(
     application_number: str | list[str],
     *,
@@ -123,5 +109,3 @@ async def get_inpi_design(
     password: str | None = None,
 ) -> list[InpiDesignRow]:
     """Fetch one or more FR national design records by application number."""
-    async with InpiPiClient(username=username, password=password) as client:
-        return await client.get_design(application_number)

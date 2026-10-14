@@ -139,17 +139,25 @@ def run(
             monkeypatch.setenv("EPO_OPS_API_KEY", "key")
             monkeypatch.setenv("EPO_OPS_API_SECRET", "secret")
             monkeypatch.setattr(epo_client, "_shared_auth", None)
-            monkeypatch.setattr(
-                epo_client,
-                "EpoOpsClient",
-                functools.partial(EpoOpsClient, transport=transport, cache_path=tmp_path),
-            )
-            return await call()
+            opened: list[EpoOpsClient] = []
+
+            def build(**kwargs: Any) -> EpoOpsClient:
+                opened.append(EpoOpsClient(**kwargs, transport=transport, cache_path=tmp_path))
+                return opened[-1]
+
+            monkeypatch.setattr(epo_client, "EpoOpsClient", build)
+            result = await call()
+            (one_shot_client,) = opened
+            assert one_shot_client._client.is_closed
+            return result
         async with EpoOpsClient(
             api_key="key", api_secret="secret", transport=transport, cache_path=tmp_path
         ) as client:
-            with pytest.warns(DeprecationWarning, match="client= is deprecated"):
-                return await call(client=client)
+            with pytest.warns(DeprecationWarning, match="client= is deprecated") as caught:
+                result = await call(client=client)
+            assert [w.filename for w in caught] == [__file__]
+            assert not client._client.is_closed
+            return result
 
     return _run
 
@@ -273,10 +281,27 @@ class TestGetClient:
         with pytest.raises(ValueError, match="Both api_key and api_secret are required"):
             cpc_api.get_client(api_secret="test_secret")
 
-    def test_creates_client_with_both(self) -> None:
-        # Kept for coverage: the only test of get_client's explicit-credentials
-        # return (cpc/api.py); get_client takes no transport, so the behavioral
-        # tests above cannot reach that line.
-        client = cpc_api.get_client(api_key="test_key", api_secret="test_secret")
-        assert client is not None
-        assert isinstance(client, cpc_api.EpoOpsClient)
+    @pytest.mark.asyncio
+    async def test_explicit_credentials_authenticate_requests(
+        self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+    ) -> None:
+        ops = FakeOps(httpx.Response(200, text=SEARCH_XML))
+        monkeypatch.setattr(
+            cpc_api,
+            "EpoOpsClient",
+            functools.partial(
+                EpoOpsClient, transport=httpx.MockTransport(ops.handle), cache_path=tmp_path
+            ),
+        )
+        client = cpc_api.get_client(api_key="explicit-key", api_secret="explicit-secret")
+
+        with pytest.warns(DeprecationWarning, match="Passing client= is deprecated"):
+            result = await cpc_api.search_cpc("battery", client=client)
+
+        (token_request,) = ops.token_requests
+        assert token_request.headers["Authorization"] == (
+            base64.b64encode(b"explicit-key:explicit-secret").decode()
+        )
+        assert ops.request.headers["Authorization"] == "Bearer ops-token"
+        assert result.total_results == 57
+        await client.close()
