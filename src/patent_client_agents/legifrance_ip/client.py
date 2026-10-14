@@ -14,6 +14,7 @@ import os
 import re
 
 from patent_client_agents.fts_query import translate_fts_query
+from patent_client_agents.shared.errors import SectionNotFoundError
 
 from .corpus.db import CorpusDB
 from .models import LegifranceSearchHit, LegifranceSearchResult, LegifranceSection
@@ -124,7 +125,7 @@ class LegifranceIpClient:
         db = self._open()
         row = db.get_section(statute, section)
         if row is None:
-            raise ValueError(
+            raise SectionNotFoundError(
                 f"could not find Légifrance article {section} in {statute!r}; "
                 "is the corpus built and does the seed cover this article?"
             )
@@ -150,7 +151,7 @@ class LegifranceIpClient:
         db = self._open()
         row = db.get_section(statute, canonical_section)
         if row is None:
-            raise ValueError(
+            raise SectionNotFoundError(
                 f"could not find Légifrance article {canonical_section} in {statute!r}"
             )
         return LegifranceSection(

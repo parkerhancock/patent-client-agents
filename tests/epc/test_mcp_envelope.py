@@ -14,6 +14,7 @@ from pathlib import Path
 import pytest
 
 from mcp_data_core.envelope import ListEnvelope, Provenance
+from mcp_data_core.exceptions import NotFoundError
 from patent_client_agents.mcp.tools.epc import get_epc_section, search_epc
 
 
@@ -105,10 +106,8 @@ async def test_get_list_preserves_order() -> None:
     # Order is preserved across the fan-out.
     hrefs = [item["href"] for item in result.items]
     assert hrefs == ["a54", "a56", "r71"]
-    # Multi-record summary lists the section numbers.
-    assert "Fetched 3" in result.summary
-    for ref in refs:
-        assert ref in result.summary
+    assert result.summary.startswith("Fetched 3 of 3 ")
+    assert result.not_found == []
     # Multi-record path is the collection root.
     assert result.provenance.source_url.endswith("/en/legal/epc")
 
@@ -122,3 +121,16 @@ async def test_get_provenance_carries_corpus_fields() -> None:
 
     assert result.provenance.corpus_version == "2020"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
+
+
+async def test_get_list_reports_missing_citation() -> None:
+    result = await get_epc_section(section=["Article 54", "Article 999"])
+    assert len(result.items) == 1
+    assert result.not_found == ["Article 999"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: Article 999.")
+
+
+async def test_get_single_missing_citation_raises() -> None:
+    with pytest.raises(NotFoundError, match="Could not find EPC section"):
+        await get_epc_section(section="Article 999")

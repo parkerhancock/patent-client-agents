@@ -100,9 +100,8 @@ async def test_get_list_preserves_order(mopp_corpus_env: Path) -> None:
     assert "Patentability" in titles[0]
     assert "treatment" in titles[1].lower()
     assert titles[2].startswith("Section 14")
-    assert "Fetched 3" in result.summary
-    for ref in refs:
-        assert ref in result.summary
+    assert result.summary.startswith("Fetched 3 of 3 ")
+    assert result.not_found == []
     # Multi-record path is the collection root, not a specific record.
     assert result.provenance.source_url.endswith("/guidance/manual-of-patent-practice-mopp")
 
@@ -113,3 +112,12 @@ async def test_get_provenance_carries_corpus_fields(mopp_corpus_env: Path) -> No
 
     assert result.provenance.corpus_version.startswith("snapshot-")
     assert isinstance(result.provenance.corpus_synced_at, datetime)
+
+
+@pytest.mark.asyncio
+async def test_get_list_reports_missing_citation(mopp_corpus_env: Path) -> None:
+    result = await get_mopp_section(section=["1", "999"])
+    assert len(result.items) == 1
+    assert result.not_found == ["999"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: 999.")

@@ -12,7 +12,6 @@ can warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -21,6 +20,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.ipo_in_mppp import MpppClient, get_corpus_status
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 ipo_in_mppp_mcp = FastMCP("IPO India — MPPP")
 
@@ -36,7 +36,6 @@ _MPPP_PDF_URL = (
     "Manual_for_Patent_Office_Practice_and_Procedure_.pdf"
 )
 
-_FANOUT_CONCURRENCY = 5
 _LEAN_SNIPPET_CHARS = 400
 
 
@@ -174,7 +173,7 @@ async def get_ipo_in_mppp_section(
         "('MPPP Chapter 04.05.01'). Pass a list for portfolio workflows. "
         "Examples: '04.05.01', ['04.05.01', '05.04', '07.02'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more sections from the IPO India MPPP by citation.
 
     Returns each section's title, chapter, full text, and source URL.
@@ -185,32 +184,29 @@ async def get_ipo_in_mppp_section(
 
     Related tools: search_ipo_in_mppp, get_ipo_in_section.
     """
-    refs = [citation] if isinstance(citation, str) else list(citation)
-    if not refs:
-        raise ValidationError("get_ipo_in_mppp_section requires at least one citation")
+    refs = as_id_list(citation, noun="MPPP citation")
 
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+    async with MpppClient() as client:
 
-    async def _fetch_one(client: MpppClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section(ref)
             return record.model_dump()
 
-    async with MpppClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
+    elif len(refs) == 1:
+        summary = f"MPPP section {refs[0]} — not found."
     else:
-        summary = f"Fetched {len(results)} MPPP sections (corpus {corpus_label}): " + ", ".join(
-            refs
-        )
+        summary = fetched_summary(len(items), len(refs), "MPPP sections", not_found)
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_mppp_provenance(_MPPP_PDF_URL),
     )
 

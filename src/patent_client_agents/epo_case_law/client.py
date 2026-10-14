@@ -24,6 +24,7 @@ import re
 from typing import Any
 
 from patent_client_agents.fts_query import translate_fts_query
+from patent_client_agents.shared.errors import SectionNotFoundError
 
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import CaseLawSearchHit, CaseLawSearchResponse, CaseLawSection, CaseLawVersion
@@ -194,7 +195,7 @@ class CaseLawClient:
         href = _normalize_href(section)
         row = db.get_section(href=href)
         if row is None:
-            raise ValueError(f"Could not find Case Law section '{section}'")
+            raise SectionNotFoundError(f"Could not find Case Law section '{section}'")
         return CaseLawSection(
             href=row.href,
             html=row.html,

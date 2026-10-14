@@ -100,10 +100,8 @@ async def test_get_list_preserves_order() -> None:
     assert isinstance(result, ListEnvelope)
     hrefs = [item["href"] for item in result.items]
     assert hrefs == ["g_ii_3_1", "g_ii_3", "h"]
-    # Multi-record summary lists the section numbers.
-    assert "Fetched 3" in result.summary
-    for ref in refs:
-        assert ref in result.summary
+    assert result.summary.startswith("Fetched 3 of 3 ")
+    assert result.not_found == []
     # Multi-record path is the collection root.
     assert result.provenance.source_url.endswith("/en/legal/guidelines-epc")
 
@@ -113,3 +111,11 @@ async def test_get_provenance_carries_corpus_fields() -> None:
 
     assert result.provenance.corpus_version == "2024"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
+
+
+async def test_get_list_reports_missing_citation() -> None:
+    result = await get_epo_guidelines_section(section=["G-II, 3.1", "H-IX, 99"])
+    assert len(result.items) == 1
+    assert result.not_found == ["H-IX, 99"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: H-IX, 99.")

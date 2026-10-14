@@ -107,9 +107,8 @@ async def test_get_list_preserves_order(pct_corpus_env: Path) -> None:
         "g_iii_1",
         "b_iv_1_1",
     ]
-    assert "Fetched 3" in result.summary
-    for ref in refs:
-        assert ref in result.summary
+    assert result.summary.startswith("Fetched 3 of 3 ")
+    assert result.not_found == []
     # Multi-record path is the collection root, not a specific record.
     assert result.provenance.source_url.endswith("/en/legal/guidelines-pct")
 
@@ -120,3 +119,12 @@ async def test_get_provenance_carries_corpus_fields(pct_corpus_env: Path) -> Non
 
     assert result.provenance.corpus_version == "2024"
     assert isinstance(result.provenance.corpus_synced_at, datetime)
+
+
+@pytest.mark.asyncio
+async def test_get_list_reports_missing_citation(pct_corpus_env: Path) -> None:
+    result = await get_epo_pct_guidelines_section(section=["G-II, 3.1", "H-IX, 99"])
+    assert len(result.items) == 1
+    assert result.not_found == ["H-IX, 99"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: H-IX, 99.")

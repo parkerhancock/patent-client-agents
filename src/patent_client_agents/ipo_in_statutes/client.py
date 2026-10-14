@@ -25,6 +25,8 @@ from __future__ import annotations
 import os
 import re
 
+from patent_client_agents.shared.errors import SectionNotFoundError
+
 from .corpus.db import CorpusDB, CorpusSection, CorpusUnavailable
 from .corpus.schema import STATUTE_KEYS
 from .models import IpoInCorpusMeta, IpoInSearchHit, IpoInSearchResponse, IpoInSection
@@ -194,12 +196,14 @@ class IpoInStatutesClient:
         if statute is not None:
             row = db.get_section(statute_name=statute, section_number=section_number)
             if row is None:
-                raise ValueError(f"Section {section_number!r} not found in {statute!r}.")
+                raise SectionNotFoundError(f"Section {section_number!r} not found in {statute!r}.")
             return _section_to_model(row)
         # Statute not specified — disambiguate via cross-statute lookup.
         rows = db.find_section_by_number(section_number)
         if not rows:
-            raise ValueError(f"Section {section_number!r} not found in any bundled statute.")
+            raise SectionNotFoundError(
+                f"Section {section_number!r} not found in any bundled statute."
+            )
         if len(rows) > 1:
             names = ", ".join(r.statute_name for r in rows)
             raise ValueError(

@@ -21,7 +21,6 @@ Two tools:
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -35,6 +34,7 @@ from patent_client_agents.legifrance_ip import (
     get_corpus_status,
 )
 from patent_client_agents.legifrance_ip.resources import STATUTES
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 legifrance_ip_mcp = FastMCP("Légifrance IP")
 
@@ -49,11 +49,6 @@ legifrance_ip_mcp = FastMCP("Légifrance IP")
 
 _LEGIFRANCE_BASE = "https://www.legifrance.gouv.fr"
 _LEGIFRANCE_NAME = "Légifrance — French IP statutes (CPI + Code de commerce L.151 trade secrets)"
-
-# Bounded fan-out for list-accepting get_legifrance_section (§5.4).
-# SQLite reads are fast; the budget is conservative so a 50-citation
-# batch doesn't open 50 connections at once.
-_LEGIFRANCE_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5). FTS5 returns short snippets already, but
 # the raw column can sprawl when the article body is long. Truncate so
@@ -193,7 +188,7 @@ async def get_legifrance_section(
         "'L611-10 CPI', 'L. 151-1 Code de commerce'. Examples: "
         "'L. 611-10 CPI', ['L. 611-1 CPI', 'L. 151-1 Code de commerce'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more Légifrance IP articles by practitioner citation.
 
     Returns each article's statute, section, title, and full text.
@@ -203,39 +198,36 @@ async def get_legifrance_section(
 
     Related tools: search_legifrance_ip.
     """
-    refs = [citation] if isinstance(citation, str) else list(citation)
-    if not refs:
-        raise ValidationError("get_legifrance_section requires at least one citation")
+    refs = as_id_list(citation, noun="Légifrance citation")
 
-    semaphore = asyncio.Semaphore(_LEGIFRANCE_FANOUT_CONCURRENCY)
+    async with LegifranceIpClient() as client:
 
-    async def _fetch_one(client: LegifranceIpClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             try:
                 section = await client.get_section(ref)
             except CitationParseError as exc:
                 raise ValidationError(str(exc)) from exc
             return _section_to_dict(section)
 
-    async with LegifranceIpClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        record = results[0]
-        head = (
+    if len(refs) == 1 and items:
+        record = items[0]
+        summary = (
             f"**Légifrance IP {corpus_label} — {record.get('statute')} "
             f"art. {record.get('section')}: {record.get('title') or '(sans titre)'}**"
         )
-        summary = head
+    elif len(refs) == 1:
+        summary = f"Légifrance IP article {refs[0]} — not found."
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} Légifrance IP articles ({corpus_label}): {joined}"
+        summary = fetched_summary(len(items), len(refs), "Légifrance IP articles", not_found)
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_legifrance_provenance("/codes"),
     )
 

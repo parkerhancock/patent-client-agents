@@ -20,6 +20,8 @@ import re
 from typing import Any
 from urllib.parse import urlencode
 
+from patent_client_agents.shared.errors import SectionNotFoundError
+
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import MpepSearchHit, MpepSearchResponse, MpepSection, MpepVersion
 
@@ -188,12 +190,12 @@ class MpepClient:
         if SECTION_NUMBER_PATTERN.match(section):
             row = db.get_section(section_number=section)
             if row is None:
-                raise ValueError(f"Could not find MPEP section '{section}'")
+                raise SectionNotFoundError(f"Could not find MPEP section '{section}'")
         else:
             href = _normalize_href(section)
             row = db.get_section(href=href)
             if row is None:
-                raise ValueError(f"Could not find MPEP href '{section}'")
+                raise SectionNotFoundError(f"Could not find MPEP href '{section}'")
         return MpepSection(
             href=row.href,
             html=row.html,

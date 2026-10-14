@@ -169,6 +169,7 @@ async def test_get_upc_decision_partial_not_found_lists_missing():
     assert len(result.items) == 1
     assert "UPC_CFI_9999/2099" in result.summary
     assert "Not found" in result.summary
+    assert result.not_found == ["UPC_CFI_9999/2099"]
 
 
 @pytest.mark.asyncio
