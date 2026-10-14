@@ -24,15 +24,14 @@ registered.
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
-from patent_client_agents.shared.envelope import dump_any
+from patent_client_agents.shared.envelope import dump, dump_any
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.upc_decisions import (
     DecisionSearchInput,
     UpcDecisionsClient,
@@ -136,10 +135,6 @@ def _summarize_instrument(record: dict) -> str:
     return f"{head}\n{line}"
 
 
-_UPC_DECISIONS_FANOUT_CONCURRENCY = 5
-_UPC_STATUTES_FANOUT_CONCURRENCY = 5
-
-
 # ---------------------------------------------------------------------------
 # Decisions and Orders
 # ---------------------------------------------------------------------------
@@ -236,7 +231,7 @@ async def get_upc_decision(
             "normalized."
         ),
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch one or more Unified Patent Court (UPC) decisions by case identifier.
 
     Walks the decisions listing until each requested case is found.
@@ -246,35 +241,28 @@ async def get_upc_decision(
 
     Related tools: search_upc_decisions, list_upc_divisions, list_upc_languages.
     """
-    case_ids = [case_id] if isinstance(case_id, str) else list(case_id)
-    if not case_ids:
-        raise ValidationError("get_upc_decision requires at least one case_id")
-
-    semaphore = asyncio.Semaphore(_UPC_DECISIONS_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: UpcDecisionsClient, cid: str) -> dict | None:
-        async with semaphore:
-            record = await client.get_decision(cid)
-        return dump_any(record) if record is not None else None  # type: ignore[return-value]
+    case_ids = as_id_list(case_id, noun="UPC case identifier")
 
     async with UpcDecisionsClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, cid) for cid in case_ids])
 
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [cid for cid, r in zip(case_ids, fetched, strict=True) if r is None]
+        async def _fetch_one(cid: str) -> dict | None:
+            record = await client.get_decision(cid)
+            return dump(record) if record is not None else None
+
+        items, not_found = await fetch_many(case_ids, _fetch_one, single=isinstance(case_id, str))
 
     if len(case_ids) == 1 and items:
         summary = _summarize_decision(items[0])
     elif len(case_ids) == 1:
         summary = f"UPC decision {case_ids[0]} — not found."
     else:
-        head = f"Fetched {len(items)} of {len(case_ids)} UPC decisions."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+        summary = fetched_summary(len(items), len(case_ids), "UPC decisions", not_found)
 
     path = "/en/decisions-and-orders" + (f"?case_id={case_ids[0]}" if len(case_ids) == 1 else "")
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_upc_provenance(path),
     )
 
@@ -396,7 +384,7 @@ async def get_upc_section(
         ),
     ],
     language: Annotated[str, "ISO 639-1: 'en' (default), 'fr', or 'de'."] = "en",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch the full plain text of one or more Unified Patent Court (UPC) legal instruments.
 
     Note: section-level (per-Article, per-Rule) retrieval is not yet
@@ -408,34 +396,27 @@ async def get_upc_section(
 
     Related tools: search_upc_statutes, list_upc_instruments.
     """
-    keys = [instrument] if isinstance(instrument, str) else list(instrument)
-    if not keys:
-        raise ValidationError("get_upc_section requires at least one instrument key")
-
-    semaphore = asyncio.Semaphore(_UPC_STATUTES_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: UpcStatutesClient, key: str) -> dict | None:
-        async with semaphore:
-            record = await client.get_instrument(instrument=key, language=language)
-        return dump_any(record) if record is not None else None  # type: ignore[return-value]
+    keys = as_id_list(instrument, noun="UPC instrument key")
 
     async with UpcStatutesClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, k) for k in keys])
 
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [k for k, r in zip(keys, fetched, strict=True) if r is None]
+        async def _fetch_one(key: str) -> dict | None:
+            record = await client.get_instrument(instrument=key, language=language)
+            return dump(record) if record is not None else None
+
+        items, not_found = await fetch_many(keys, _fetch_one, single=isinstance(instrument, str))
 
     if len(keys) == 1 and items:
         summary = _summarize_instrument(items[0])
     elif len(keys) == 1:
         summary = f"UPC instrument {keys[0]} — not found."
     else:
-        head = f"Fetched {len(items)} of {len(keys)} UPC instruments."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+        summary = fetched_summary(len(items), len(keys), "UPC instruments", not_found)
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_upc_statutes_provenance(
             "https://www.unifiedpatentcourt.org/en/court/legal-documents"
         ),

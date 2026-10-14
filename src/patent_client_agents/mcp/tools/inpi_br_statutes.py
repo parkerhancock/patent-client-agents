@@ -16,7 +16,6 @@ agents can warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -32,6 +31,7 @@ from patent_client_agents.inpi_br_statutes.client import (
     _CITATION_PATTERN,
     _SLUG_PATTERN,
 )
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 inpi_br_statutes_mcp = FastMCP("INPI Brazil — LPI")
 
@@ -46,10 +46,6 @@ inpi_br_statutes_mcp = FastMCP("INPI Brazil — LPI")
 
 _INPI_BR_BASE = "https://www.planalto.gov.br/ccivil_03/leis/l9279.htm"
 _INPI_BR_NAME = "INPI Brazil — LPI (Lei 9.279/1996)"
-
-# Bounded fan-out for list-accepting get_inpi_br_section (§5.4). SQLite
-# reads are fast so the concurrency budget is conservative.
-_INPI_BR_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5). FTS5 already returns short snippets, but the
 # raw column can blow past this when the surrounding context is dense.
@@ -225,7 +221,7 @@ async def get_inpi_br_section(
         "Planalto URLs with anchors. Examples: 'Art. 195', "
         "['Art. 6', 'Art. 122', 'Art. 195'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more LPI (Lei 9.279/1996) Articles by citation.
 
     Returns each Article's PT (authoritative — Planalto) and EN (WIPO
@@ -242,38 +238,37 @@ async def get_inpi_br_section(
 
     Related tools: search_inpi_br_statutes, list_inpi_br_bulk_releases.
     """
-    refs = [citation] if isinstance(citation, str) else list(citation)
-    if not refs:
-        raise ValidationError("get_inpi_br_section requires at least one citation reference")
+    refs = as_id_list(citation, noun="LPI citation")
 
-    semaphore = asyncio.Semaphore(_INPI_BR_FANOUT_CONCURRENCY)
+    async with InpiBrStatutesClient() as client:
 
-    async def _fetch_one(client: InpiBrStatutesClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section(ref)
             return _section_to_dict(record)
 
-    async with InpiBrStatutesClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
         ref = refs[0]
-        href = results[0].get("href")
+        href = items[0].get("href")
         if href and _looks_like_section_ref(ref) and href.startswith("art"):
             url = f"{_INPI_BR_BASE}#Art{href[3:]}"
         else:
             url = _INPI_BR_BASE
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} LPI Articles ({corpus_label}): {joined}"
+        if len(refs) == 1:
+            summary = f"LPI Article {refs[0]} — not found."
+        else:
+            summary = fetched_summary(len(items), len(refs), "LPI Articles", not_found)
         url = _INPI_BR_BASE
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_inpi_br_provenance(url),
     )
 

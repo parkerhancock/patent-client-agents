@@ -12,7 +12,6 @@ agents can warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -21,6 +20,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.epo_up_guidelines import UpGuidelinesClient, get_corpus_status
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 epo_up_guidelines_mcp = FastMCP("EPO UP Guidelines")
 
@@ -36,12 +36,6 @@ epo_up_guidelines_mcp = FastMCP("EPO UP Guidelines")
 
 _UP_GUIDELINES_BASE = "https://www.epo.org"
 _UP_GUIDELINES_NAME = "Unitary Patent Guidelines"
-
-# Bounded fan-out for list-accepting get_epo_up_guidelines_section
-# (§5.4). SQLite reads are fast so the concurrency budget is
-# conservative — the cap exists so a multi-section portfolio doesn't
-# open many connections at once.
-_UP_GUIDELINES_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5). Truncate so a multi-hit page fits comfortably
 # under the §5.5 token budget.
@@ -207,7 +201,7 @@ async def get_epo_up_guidelines_section(
         "or a list of either for portfolio workflows. Examples: '2.1', "
         "['2.1', '3.2', 'section_4_1'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more EPO Unitary Patent (UP) Guidelines sections by citation or slug.
 
     Returns each section's title, full HTML, plaintext, and the resolved
@@ -223,37 +217,34 @@ async def get_epo_up_guidelines_section(
 
     Related tools: search_epo_up_guidelines.
     """
-    refs = [section] if isinstance(section, str) else list(section)
-    if not refs:
-        raise ValidationError(
-            "get_epo_up_guidelines_section requires at least one section reference"
-        )
+    refs = as_id_list(section, noun="UP Guidelines section reference")
 
-    semaphore = asyncio.Semaphore(_UP_GUIDELINES_FANOUT_CONCURRENCY)
+    async with UpGuidelinesClient() as client:
 
-    async def _fetch_one(client: UpGuidelinesClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section(ref)
             return record.model_dump()
 
-    async with UpGuidelinesClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(section, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
         ref = refs[0]
-        href = results[0].get("href") or ref
+        href = items[0].get("href") or ref
         path = f"/en/legal/guidelines-up/{corpus_label}/{href}"
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} UP Guidelines sections ({corpus_label}): {joined}"
+        if len(refs) == 1:
+            summary = f"UP Guidelines section {refs[0]} — not found."
+        else:
+            summary = fetched_summary(len(items), len(refs), "UP Guidelines sections", not_found)
         path = "/en/legal/guidelines-up"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_up_guidelines_provenance(path),
     )
 

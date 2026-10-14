@@ -13,7 +13,6 @@ when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -23,6 +22,7 @@ from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.epc import EpcClient, get_corpus_status
 from patent_client_agents.epc.client import _CITATION_PATTERN, _SLUG_PATTERN
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 epc_mcp = FastMCP("EPC")
 
@@ -37,11 +37,6 @@ epc_mcp = FastMCP("EPC")
 
 _EPC_BASE = "https://www.epo.org"
 _EPC_NAME = "European Patent Convention"
-
-# Bounded fan-out for list-accepting get_epc_section (§5.4). SQLite reads
-# are fast so the concurrency budget is conservative — the cap exists so
-# a 50-article portfolio doesn't open 50 connections at once.
-_EPC_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5). FTS5 already returns short snippets, but the
 # raw column can blow past this when the surrounding context is dense.
@@ -224,7 +219,7 @@ async def get_epc_section(
         "URL slugs like 'a54' or 'r71', or full epo.org URLs. Examples: "
         "'Article 54', ['Article 54', 'Article 56', 'Rule 71'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more EPC Articles or Rules by citation.
 
     Returns each section's title, full HTML, plaintext, and the resolved
@@ -239,40 +234,39 @@ async def get_epc_section(
 
     Related tools: search_epc.
     """
-    refs = [section] if isinstance(section, str) else list(section)
-    if not refs:
-        raise ValidationError("get_epc_section requires at least one section reference")
+    refs = as_id_list(section, noun="EPC section reference")
 
-    semaphore = asyncio.Semaphore(_EPC_FANOUT_CONCURRENCY)
+    async with EpcClient() as client:
 
-    async def _fetch_one(client: EpcClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section(ref)
             return _section_to_dict(record)
 
-    async with EpcClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(section, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
+        ref = refs[0]
         # If the single ref looks like a citation/slug, point provenance
         # at the specific section's URL; otherwise at the collection root.
-        ref = refs[0]
-        href = results[0].get("href")
+        href = items[0].get("href")
         if href and _looks_like_section_ref(ref):
             path = f"/en/legal/epc/{corpus_label}/{href}.html"
         else:
             path = "/en/legal/epc"
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} EPC sections ({corpus_label}): {joined}"
+        if len(refs) == 1:
+            summary = f"EPC section {refs[0]} — not found."
+        else:
+            summary = fetched_summary(len(items), len(refs), "EPC sections", not_found)
         path = "/en/legal/epc"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_epc_provenance(path),
     )
 

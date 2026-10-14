@@ -139,3 +139,13 @@ async def test_get_provenance_carries_corpus_fields(
 async def test_get_empty_list_raises(ipo_in_statutes_corpus_env: Path) -> None:
     with pytest.raises(ValidationError, match="at least one"):
         await get_ipo_in_section(citation=[])
+
+
+async def test_get_list_reports_missing_citation(ipo_in_statutes_corpus_env: Path) -> None:
+    result = await get_ipo_in_section(
+        citation=["Section 3(d) Patents Act", "Section 9999 Patents Act"]
+    )
+    assert len(result.items) == 1
+    assert result.not_found == ["Section 9999 Patents Act"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: Section 9999 Patents Act.")

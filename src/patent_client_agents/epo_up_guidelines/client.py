@@ -26,6 +26,7 @@ import re
 from typing import Any
 
 from patent_client_agents.fts_query import translate_fts_query
+from patent_client_agents.shared.errors import SectionNotFoundError
 
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import (
@@ -214,7 +215,7 @@ class UpGuidelinesClient:
         href = _normalize_href(section)
         row = db.get_section(href=href)
         if row is None:
-            raise ValueError(f"Could not find UP Guidelines section '{section}'")
+            raise SectionNotFoundError(f"Could not find UP Guidelines section '{section}'")
         return UpGuidelinesSection(
             href=row.href,
             html=row.html,

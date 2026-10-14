@@ -20,13 +20,11 @@ registered.
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.ipos_manuals import (
     IposManualsClient,
@@ -46,7 +44,8 @@ from patent_client_agents.ipos_statutes import get_corpus_status as _statutes_st
 from patent_client_agents.ipos_statutes import list_statutes as _list_statutes
 from patent_client_agents.ipos_statutes import search as _search_statutes
 from patent_client_agents.ipos_statutes.client import parse_citation as _parse_statute_citation
-from patent_client_agents.shared.envelope import dump_any
+from patent_client_agents.shared.envelope import dump, dump_any
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 ipos_mcp = FastMCP("IPOS Singapore")
 
@@ -102,9 +101,6 @@ def _summarize_manual_section(record: dict) -> str:
     if title:
         head += f" — {title}"
     return head
-
-
-_IPOS_FANOUT_CONCURRENCY = 5
 
 
 # ---------------------------------------------------------------------------
@@ -170,7 +166,7 @@ async def get_ipos_section(
             "suffixes (13A, 27(1)) are preserved verbatim."
         ),
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch the full text of one or more Singapore IP statute sections by citation.
 
     Accepts either a single citation string or a list (§5.4); the
@@ -181,22 +177,15 @@ async def get_ipos_section(
 
     Related tools: search_ipos_statutes, get_ipos_manual_section.
     """
-    citations = [citation] if isinstance(citation, str) else list(citation)
-    if not citations:
-        raise ValidationError("get_ipos_section requires at least one citation")
-
-    semaphore = asyncio.Semaphore(_IPOS_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: IposStatutesClient, cite: str) -> dict | None:
-        async with semaphore:
-            record = await client.get_by_citation(cite)
-        return dump_any(record) if record is not None else None  # type: ignore[return-value]
+    citations = as_id_list(citation, noun="IPOS statute citation")
 
     async with IposStatutesClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, c) for c in citations])
 
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [c for c, r in zip(citations, fetched, strict=True) if r is None]
+        async def _fetch_one(cite: str) -> dict | None:
+            record = await client.get_by_citation(cite)
+            return dump(record) if record is not None else None
+
+        items, not_found = await fetch_many(citations, _fetch_one, single=isinstance(citation, str))
 
     if len(citations) == 1 and items:
         summary = _summarize_statute_section(items[0])
@@ -207,13 +196,13 @@ async def get_ipos_section(
         summary = f"IPOS section `{citations[0]}` — not found."
         path = "/Browse/Act-Rev"
     else:
-        head = f"Fetched {len(items)} of {len(citations)} IPOS statute sections."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+        summary = fetched_summary(len(items), len(citations), "IPOS statute sections", not_found)
         path = "/Browse/Act-Rev"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_statutes_provenance(f"{_SSO_BASE}{path}"),
     )
 
@@ -302,7 +291,7 @@ async def get_ipos_manual_section(
             "'Designs Work Manual 2.1'. The 'IPOS ' prefix is optional."
         ),
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch the full text of one or more IPOS manual sections by citation.
 
     Accepts either a single citation string or a list (§5.4); the
@@ -313,22 +302,15 @@ async def get_ipos_manual_section(
 
     Related tools: search_ipos_manuals, get_ipos_section.
     """
-    citations = [citation] if isinstance(citation, str) else list(citation)
-    if not citations:
-        raise ValidationError("get_ipos_manual_section requires at least one citation")
-
-    semaphore = asyncio.Semaphore(_IPOS_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: IposManualsClient, cite: str) -> dict | None:
-        async with semaphore:
-            record = await client.get_by_citation(cite)
-        return dump_any(record) if record is not None else None  # type: ignore[return-value]
+    citations = as_id_list(citation, noun="IPOS manual citation")
 
     async with IposManualsClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, c) for c in citations])
 
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [c for c, r in zip(citations, fetched, strict=True) if r is None]
+        async def _fetch_one(cite: str) -> dict | None:
+            record = await client.get_by_citation(cite)
+            return dump(record) if record is not None else None
+
+        items, not_found = await fetch_many(citations, _fetch_one, single=isinstance(citation, str))
 
     if len(citations) == 1 and items:
         summary = _summarize_manual_section(items[0])
@@ -338,13 +320,13 @@ async def get_ipos_manual_section(
         summary = f"IPOS manual section `{citations[0]}` — not found."
         path = "/about-ip"
     else:
-        head = f"Fetched {len(items)} of {len(citations)} IPOS manual sections."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+        summary = fetched_summary(len(items), len(citations), "IPOS manual sections", not_found)
         path = "/about-ip"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_manuals_provenance(f"{_IPOS_BASE}{path}"),
     )
 

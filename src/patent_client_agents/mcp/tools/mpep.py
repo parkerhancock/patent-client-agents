@@ -11,7 +11,6 @@ can warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -20,6 +19,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.mpep import MpepClient, get_corpus_status
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 mpep_mcp = FastMCP("MPEP")
 
@@ -34,11 +34,6 @@ mpep_mcp = FastMCP("MPEP")
 
 _MPEP_BASE = "https://mpep.uspto.gov"
 _MPEP_NAME = "USPTO MPEP (Manual of Patent Examining Procedure)"
-
-# Bounded fan-out for list-accepting get_mpep_section (§5.4). SQLite reads
-# are fast so the concurrency budget is conservative — the cap exists so a
-# 50-section portfolio doesn't open 50 connections at once.
-_MPEP_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5). FTS5 already returns short snippets, but the
 # raw column can blow past this when the surrounding context is dense
@@ -229,7 +224,7 @@ async def get_mpep_section(
     version: Annotated[
         str, "Installed release identifier; unsupported retained versions fail."
     ] = "current",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more MPEP sections by number (or eMPEP href).
 
     Returns each section's title, full HTML, plaintext, and the resolved
@@ -244,14 +239,15 @@ async def get_mpep_section(
 
     Related tools: search_mpep.
     """
-    refs = [str(section)] if isinstance(section, str | int) else [str(ref) for ref in section]
-    if not refs:
-        raise ValidationError("get_mpep_section requires at least one section reference")
+    single = isinstance(section, str | int)
+    refs = as_id_list(
+        str(section) if single else [str(ref) for ref in section],
+        noun="MPEP section reference",
+    )
 
-    semaphore = asyncio.Semaphore(_MPEP_FANOUT_CONCURRENCY)
+    async with MpepClient() as client:
 
-    async def _fetch_one(client: MpepClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section(ref, version=version)
             # When the caller passes a section number, ``ref`` already is
             # the section number. When they pass an href, we don't have
@@ -264,13 +260,12 @@ async def get_mpep_section(
             section_number = ref if SECTION_NUMBER_PATTERN.match(ref) else None
             return _section_to_dict(record, section_number=section_number)
 
-    async with MpepClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=single)
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
         # If the single ref looks like an href, point provenance at the
         # canonical result URL for that href; otherwise at the section
         # number path.
@@ -280,13 +275,16 @@ async def get_mpep_section(
         else:
             path = f"/RDMS/MPEP/result?section={ref}"
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} MPEP sections ({corpus_label}): {joined}"
+        if len(refs) == 1:
+            summary = f"MPEP section {refs[0]} — not found."
+        else:
+            summary = fetched_summary(len(items), len(refs), "MPEP sections", not_found)
         path = "/RDMS/MPEP/result"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_mpep_provenance(path),
     )
 
