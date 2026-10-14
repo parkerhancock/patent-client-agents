@@ -328,6 +328,7 @@ class IpiSwissregClient(BaseAsyncClient):
         base_url: str | None = None,
         token_url: str | None = None,
         client: httpx.AsyncClient | None = None,
+        transport: httpx.AsyncBaseTransport | None = None,
     ) -> None:
         self.username = username or os.getenv("IPI_DATA_USERNAME")
         self.password = password or os.getenv("IPI_DATA_PASSWORD")
@@ -346,6 +347,7 @@ class IpiSwissregClient(BaseAsyncClient):
         super().__init__(
             base_url=resolved_base,
             client=client,
+            transport=transport,
             headers={"Accept": "application/xml"},
             timeout=60.0,
             use_cache=False,

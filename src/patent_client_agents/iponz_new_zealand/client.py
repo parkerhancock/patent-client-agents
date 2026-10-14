@@ -293,6 +293,7 @@ class IponzClient(BaseAsyncClient):
         environment: IponzEnvironment | None = None,
         base_url: str | None = None,
         client: httpx.AsyncClient | None = None,
+        transport: httpx.AsyncBaseTransport | None = None,
     ) -> None:
         resolved_key = subscription_key or os.getenv("IPONZ_SUBSCRIPTION_KEY")
         if not resolved_key:
@@ -322,6 +323,7 @@ class IponzClient(BaseAsyncClient):
         super().__init__(
             base_url=resolved_base.rstrip("/"),
             client=client,
+            transport=transport,
             headers=headers,
             timeout=60.0,
             use_cache=False,

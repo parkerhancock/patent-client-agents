@@ -13,7 +13,7 @@ from mcp_data_core.exceptions import (
     NotFoundError,
     RateLimitError,
 )
-from patent_client_agents.thai_dip.client import PatentKind, ThaiDipClient
+from patent_client_agents.thai_dip.client import BASE_URL, PatentKind, ThaiDipClient
 from patent_client_agents.thai_dip.models import parse_dip_date
 
 
@@ -37,10 +37,7 @@ def _client_for(
         filename = fixture_by_endpoint[request.url.path.rsplit("/", 1)[-1]]
         return httpx.Response(200, content=(fixture_dir / filename).read_bytes())
 
-    http_client = httpx.AsyncClient(
-        transport=httpx.MockTransport(handler), base_url="https://mock.test"
-    )
-    return ThaiDipClient("explicit-token", base_url="https://mock.test", client=http_client)
+    return ThaiDipClient("explicit-token", transport=httpx.MockTransport(handler))
 
 
 @pytest.mark.asyncio
@@ -55,35 +52,47 @@ async def test_patent_search_uses_documented_body_and_bearer_token(fixture_dir: 
     assert rows[0].filing_date is not None
     assert rows[0].filing_date.isoformat() == "2025-01-15"
     assert rows[0].raw["FUTURE_FIELD"] == "preserved"
+    assert captured[0].method == "POST"
+    assert str(captured[0].url) == f"{BASE_URL}/PATENT_NOIP"
     assert captured[0].headers["Authorization"] == "Bearer explicit-token"
     assert json.loads(captured[0].content) == {"patent_name": "%sensor%"}
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("right_type", ["invention", "design", "petty_patent"])
-async def test_all_patent_datasets(right_type: PatentKind, fixture_dir: Path) -> None:
-    async with _client_for(fixture_dir) as client:
+@pytest.mark.parametrize(
+    ("right_type", "endpoint"),
+    [("invention", "PATENT_NOIP"), ("design", "PRODUCTPATENT"), ("petty_patent", "PETTYPATENT")],
+)
+async def test_all_patent_datasets(
+    right_type: PatentKind, endpoint: str, fixture_dir: Path
+) -> None:
+    captured: list[httpx.Request] = []
+    async with _client_for(fixture_dir, captured) as client:
         rows, _ = await client.search_patents(
             "2501000001", right_type=right_type, field="application_number"
         )
     assert rows[0].right_type == right_type
+    assert str(captured[0].url) == f"{BASE_URL}/{endpoint}"
+    assert json.loads(captured[0].content) == {"app_no": "2501000001"}
 
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    ("method", "field", "expected"),
+    ("method", "endpoint", "field", "expected"),
     [
-        ("search_trademarks", "mark_name", "SYNTHETIC MARK"),
-        ("search_copyrights", "work_name", "Synthetic handbook"),
-        ("search_songs", "song_name", "Synthetic melody"),
-        ("search_geographical_indications", "name", "Synthetic Highland Rice"),
+        ("search_trademarks", "TM", "mark_name", "SYNTHETIC MARK"),
+        ("search_copyrights", "CPR", "work_name", "Synthetic handbook"),
+        ("search_songs", "CPRSONG", "song_name", "Synthetic melody"),
+        ("search_geographical_indications", "GI", "name", "Synthetic Highland Rice"),
     ],
 )
 async def test_other_catalogue_schemas(
-    method: str, field: str, expected: str, fixture_dir: Path
+    method: str, endpoint: str, field: str, expected: str, fixture_dir: Path
 ) -> None:
-    async with _client_for(fixture_dir) as client:
+    captured: list[httpx.Request] = []
+    async with _client_for(fixture_dir, captured) as client:
         rows, total = await getattr(client, method)("Synthetic")
+    assert str(captured[0].url) == f"{BASE_URL}/{endpoint}"
     assert total == 1
     assert getattr(rows[0], field) == expected
     assert rows[0].raw
@@ -119,12 +128,7 @@ async def test_get_trademark_returns_the_exact_application_not_a_longer_match() 
     def handler(request: httpx.Request) -> httpx.Response:
         return httpx.Response(200, json=rows)
 
-    http_client = httpx.AsyncClient(
-        transport=httpx.MockTransport(handler), base_url="https://mock.test"
-    )
-    async with ThaiDipClient(
-        "explicit-token", base_url="https://mock.test", client=http_client
-    ) as client:
+    async with ThaiDipClient("explicit-token", transport=httpx.MockTransport(handler)) as client:
         record = await client.get_trademark("25000001")
         assert record.mark_name == "RIGHT MARK"
         with pytest.raises(NotFoundError):
@@ -168,8 +172,7 @@ async def test_http_errors_map_to_domain_errors(status: int, error_type: type[Ex
     async def handler(_: httpx.Request) -> httpx.Response:
         return httpx.Response(status, text="upstream error")
 
-    http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
-    async with ThaiDipClient("token", client=http_client) as client:
+    async with ThaiDipClient("token", transport=httpx.MockTransport(handler)) as client:
         with pytest.raises(error_type):
             await client.search_songs("melody")
 
@@ -183,8 +186,7 @@ async def test_invalid_response_shapes_raise_api_error(content: bytes, match: st
     async def handler(_: httpx.Request) -> httpx.Response:
         return httpx.Response(200, content=content)
 
-    http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
-    async with ThaiDipClient("token", client=http_client) as client:
+    async with ThaiDipClient("token", transport=httpx.MockTransport(handler)) as client:
         with pytest.raises(ApiError, match=match):
             await client.search_geographical_indications("rice")
 
@@ -196,8 +198,7 @@ async def test_missing_record_and_identifier_raise_domain_errors() -> None:
     async def handler(_: httpx.Request) -> httpx.Response:
         return httpx.Response(200, content=next(responses))
 
-    http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
-    async with ThaiDipClient("token", client=http_client) as client:
+    async with ThaiDipClient("token", transport=httpx.MockTransport(handler)) as client:
         with pytest.raises(NotFoundError):
             await client.get_trademark("missing")
         with pytest.raises(ApiError, match="lacks an identifier"):

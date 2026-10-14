@@ -36,7 +36,7 @@ def _client_for(
 
     return IponzClient(
         "mock-subscription",
-        client=httpx.AsyncClient(transport=httpx.MockTransport(handler)),
+        transport=httpx.MockTransport(handler),
         environment=environment,
         access_token=access_token,
     )
@@ -44,17 +44,39 @@ def _client_for(
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    ("method", "number", "fixture", "field", "expected"),
+    ("method", "number", "path", "fixture", "field", "expected"),
     [
-        ("get_patent", "765432", "patent_information.xml", "title", "Adaptive necktie controller"),
-        ("get_trademark", "1234567", "trademark_information.xml", "title", "NECKTIE LABS"),
-        ("get_design", "998877", "design_information.xml", "title", "Necktie clasp"),
+        (
+            "get_patent",
+            "765432",
+            "/patent/765432",
+            "patent_information.xml",
+            "title",
+            "Adaptive necktie controller",
+        ),
+        (
+            "get_trademark",
+            "1234567",
+            "/trademarks/1234567",
+            "trademark_information.xml",
+            "title",
+            "NECKTIE LABS",
+        ),
+        (
+            "get_design",
+            "998877",
+            "/design/998877",
+            "design_information.xml",
+            "title",
+            "Necktie clasp",
+        ),
     ],
 )
 async def test_detail_operations_use_exact_paths_and_parse_official_schemas(
     fixture_dir: Path,
     method: str,
     number: str,
+    path: str,
     fixture: str,
     field: str,
     expected: str,
@@ -63,7 +85,8 @@ async def test_detail_operations_use_exact_paths_and_parse_official_schemas(
     async with _client_for(fixture_dir, fixture, captured) as client:
         row = await getattr(client, method)(number)
     assert getattr(row, field) == expected
-    assert str(captured[0].url).startswith(PRODUCTION_BASE_URL)
+    assert captured[0].method == "GET"
+    assert str(captured[0].url) == f"{PRODUCTION_BASE_URL}{path}"
     assert captured[0].headers["Ocp-Apim-Subscription-Key"] == "mock-subscription"
     assert row.raw
 
@@ -131,7 +154,7 @@ async def test_date_range_operations(
         rows = await getattr(client, method)(date(2026, 8, 1), date(2026, 8, 3))
     assert rows[0].right_type == right_type
     assert rows[0].event_date
-    assert captured[0].url.path.endswith(path)
+    assert str(captured[0].url) == f"{PRODUCTION_BASE_URL}{path}"
 
 
 def test_configuration_and_environment(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -148,7 +171,7 @@ def test_configuration_and_environment(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_register_number_validation() -> None:
     async with IponzClient(
         "key",
-        client=httpx.AsyncClient(transport=httpx.MockTransport(lambda _: httpx.Response(500))),
+        transport=httpx.MockTransport(lambda _: httpx.Response(500)),
     ) as client:
         with pytest.raises(ConfigurationError, match="only digits"):
             await client.get_patent("NZ/123")
@@ -167,7 +190,8 @@ async def test_sandbox_and_optional_bearer_headers(fixture_dir: Path) -> None:
         access_token="mock-bearer",
     ) as client:
         await client.get_patent("765432")
-    assert str(captured[0].url).startswith(SANDBOX_BASE_URL)
+    assert str(captured[0].url) == f"{SANDBOX_BASE_URL}/patent/765432"
+    assert captured[0].headers["Ocp-Apim-Subscription-Key"] == "mock-subscription"
     assert captured[0].headers["Authorization"] == "Bearer mock-bearer"
 
 
@@ -183,7 +207,7 @@ async def test_sandbox_and_optional_bearer_headers(fixture_dir: Path) -> None:
 async def test_date_range_validation(start: date, end: date, message: str) -> None:
     async with IponzClient(
         "key",
-        client=httpx.AsyncClient(transport=httpx.MockTransport(lambda _: httpx.Response(500))),
+        transport=httpx.MockTransport(lambda _: httpx.Response(500)),
     ) as client:
         with pytest.raises(ConfigurationError, match=message):
             await client.list_patents_updated(start, end)
@@ -203,9 +227,7 @@ async def test_http_errors(status: int, exception: type[Exception]) -> None:
     async def handler(_: httpx.Request) -> httpx.Response:
         return httpx.Response(status, text="upstream failure")
 
-    async with IponzClient(
-        "key", client=httpx.AsyncClient(transport=httpx.MockTransport(handler))
-    ) as client:
+    async with IponzClient("key", transport=httpx.MockTransport(handler)) as client:
         with pytest.raises(exception):
             await client.get_patent("765432")
 
@@ -215,9 +237,7 @@ async def test_rate_limit_transaction_error_and_malformed_xml(fixture_dir: Path)
     async def throttled(_: httpx.Request) -> httpx.Response:
         return httpx.Response(429, headers={"Retry-After": "7"}, text="slow")
 
-    async with IponzClient(
-        "key", client=httpx.AsyncClient(transport=httpx.MockTransport(throttled))
-    ) as client:
+    async with IponzClient("key", transport=httpx.MockTransport(throttled)) as client:
         with pytest.raises(RateLimitError) as raised:
             await client.get_patent("765432")
     assert raised.value.retry_after == 7
@@ -229,8 +249,6 @@ async def test_rate_limit_transaction_error_and_malformed_xml(fixture_dir: Path)
     async def malformed(_: httpx.Request) -> httpx.Response:
         return httpx.Response(200, content=b"not xml")
 
-    async with IponzClient(
-        "key", client=httpx.AsyncClient(transport=httpx.MockTransport(malformed))
-    ) as client:
+    async with IponzClient("key", transport=httpx.MockTransport(malformed)) as client:
         with pytest.raises(ApiError, match="malformed XML"):
             await client.get_patent("765432")

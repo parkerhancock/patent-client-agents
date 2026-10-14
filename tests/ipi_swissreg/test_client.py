@@ -48,7 +48,7 @@ def _client_for(
         "explicit-user",
         "explicit-password",
         totp_token=totp_token,
-        client=httpx.AsyncClient(transport=httpx.MockTransport(handler)),
+        transport=httpx.MockTransport(handler),
     )
 
 
@@ -64,6 +64,8 @@ async def test_patent_search_authenticates_builds_contract_and_parses_metadata(
         await client.search_patents("second call", limit=3)
 
     assert len([request for request in captured if str(request.url) == TOKEN_URL]) == 1
+    assert str(captured[0].url) == TOKEN_URL
+    assert captured[0].method == "POST"
     token_form = parse_qs(captured[0].content.decode())
     assert token_form == {
         "client_id": ["datadelivery-api-client"],
@@ -73,6 +75,7 @@ async def test_patent_search_authenticates_builds_contract_and_parses_metadata(
         "totp": ["123456"],
     }
     request = captured[1]
+    assert request.method == "POST"
     assert str(request.url) == BASE_URL
     assert request.headers["Authorization"] == "Bearer mock-access"
     root = ET.fromstring(request.content)
@@ -184,7 +187,7 @@ async def test_error_malformed_empty_and_not_found(fixture_dir: Path) -> None:
         return httpx.Response(200, content=b"not xml")
 
     async with IpiSwissregClient(
-        "user", "password", client=httpx.AsyncClient(transport=httpx.MockTransport(malformed))
+        "user", "password", transport=httpx.MockTransport(malformed)
     ) as client:
         with pytest.raises(ApiError, match="malformed XML"):
             await client.search_patents("bad")
@@ -199,7 +202,7 @@ async def test_error_malformed_empty_and_not_found(fixture_dir: Path) -> None:
         return httpx.Response(200, content=empty)
 
     async with IpiSwissregClient(
-        "user", "password", client=httpx.AsyncClient(transport=httpx.MockTransport(no_rows))
+        "user", "password", transport=httpx.MockTransport(no_rows)
     ) as client:
         with pytest.raises(NotFoundError):
             await client.get_patent("missing")
@@ -219,7 +222,7 @@ async def test_auth_rate_limit_refresh_and_one_401_retry(fixture_dir: Path) -> N
         return httpx.Response(200, content=(fixture_dir / "patent_search.xml").read_bytes())
 
     async with IpiSwissregClient(
-        "user", "password", client=httpx.AsyncClient(transport=httpx.MockTransport(unauthorized))
+        "user", "password", transport=httpx.MockTransport(unauthorized)
     ) as client:
         rows, _ = await client.search_patents("q")
     assert rows and calls == 2
@@ -230,7 +233,7 @@ async def test_auth_rate_limit_refresh_and_one_401_retry(fixture_dir: Path) -> N
         raise AssertionError("unexpected API call")
 
     async with IpiSwissregClient(
-        "user", "password", client=httpx.AsyncClient(transport=httpx.MockTransport(throttled))
+        "user", "password", transport=httpx.MockTransport(throttled)
     ) as client:
         with pytest.raises(RateLimitError) as raised:
             await client.search_patents("q")
@@ -239,9 +242,7 @@ async def test_auth_rate_limit_refresh_and_one_401_retry(fixture_dir: Path) -> N
     async def denied(_: httpx.Request) -> httpx.Response:
         return httpx.Response(401, text="credentials rejected")
 
-    async with IpiSwissregClient(
-        "user", "secret", client=httpx.AsyncClient(transport=httpx.MockTransport(denied))
-    ) as client:
+    async with IpiSwissregClient("user", "secret", transport=httpx.MockTransport(denied)) as client:
         with pytest.raises(AuthenticationError) as raised_auth:
             await client.search_patents("q")
     assert raised_auth.value.response_body is None
