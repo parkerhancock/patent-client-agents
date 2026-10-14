@@ -26,7 +26,7 @@ CACHE_TTL_SECONDS = 30 * 24 * 60 * 60
 
 
 class PatentCache:
-    """Simple SQLite-based cache for patent HTML responses.
+    """Simple SQLite-based cache for Google Patents responses (HTML pages and PDFs).
 
     This provides reliable caching regardless of HTTP headers, with configurable TTL.
     """
@@ -42,11 +42,14 @@ class PatentCache:
             self._conn = sqlite3.connect(str(self.db_path), timeout=10.0)
             self._conn.execute("PRAGMA journal_mode=WAL")
             self._conn.execute("PRAGMA synchronous=NORMAL")
+            # Bodies are stored as bytes with their content type so PDFs survive
+            # a cache hit. (The older text-only ``html_cache`` table is no longer read.)
             self._conn.execute("""
-                CREATE TABLE IF NOT EXISTS html_cache (
+                CREATE TABLE IF NOT EXISTS response_cache (
                     url_hash TEXT PRIMARY KEY,
                     url TEXT NOT NULL,
-                    html TEXT NOT NULL,
+                    body BLOB NOT NULL,
+                    content_type TEXT,
                     status_code INTEGER NOT NULL,
                     cached_at REAL NOT NULL
                 )
@@ -57,42 +60,44 @@ class PatentCache:
     def _url_hash(self, url: str) -> str:
         return hashlib.sha256(url.encode()).hexdigest()
 
-    def get(self, url: str) -> tuple[str, int] | None:
-        """Get cached HTML for URL if not expired.
+    def get(self, url: str) -> tuple[bytes, int, str | None] | None:
+        """Get the cached response for URL if not expired.
 
         Returns:
-            Tuple of (html, status_code) or None if not cached/expired
+            Tuple of (body, status_code, content_type) or None if not cached/expired
         """
         conn = self._get_conn()
         url_hash = self._url_hash(url)
         cursor = conn.execute(
-            "SELECT html, status_code, cached_at FROM html_cache WHERE url_hash = ?",
+            "SELECT body, status_code, content_type, cached_at FROM response_cache "
+            "WHERE url_hash = ?",
             (url_hash,),
         )
         row = cursor.fetchone()
         if row is None:
             return None
 
-        html, status_code, cached_at = row
+        body, status_code, content_type, cached_at = row
         if time.time() - cached_at > self.ttl_seconds:
             # Expired - delete and return None
-            conn.execute("DELETE FROM html_cache WHERE url_hash = ?", (url_hash,))
+            conn.execute("DELETE FROM response_cache WHERE url_hash = ?", (url_hash,))
             conn.commit()
             return None
 
         logger.debug("Cache hit for %s", url)
-        return html, status_code
+        return bytes(body), status_code, content_type
 
-    def set(self, url: str, html: str, status_code: int) -> None:
-        """Store HTML in cache."""
+    def set(self, url: str, body: bytes, status_code: int, content_type: str | None = None) -> None:
+        """Store a response body in cache."""
         conn = self._get_conn()
         url_hash = self._url_hash(url)
         conn.execute(
             """
-            INSERT OR REPLACE INTO html_cache (url_hash, url, html, status_code, cached_at)
-            VALUES (?, ?, ?, ?, ?)
+            INSERT OR REPLACE INTO response_cache
+                (url_hash, url, body, content_type, status_code, cached_at)
+            VALUES (?, ?, ?, ?, ?, ?)
             """,
-            (url_hash, url, html, status_code, time.time()),
+            (url_hash, url, body, content_type, status_code, time.time()),
         )
         conn.commit()
         logger.debug("Cached response for %s", url)
@@ -141,12 +146,13 @@ class CachingAsyncClient:
         if self._cache:
             cached = self._cache.get(url)
             if cached:
-                html, status_code = cached
+                body, status_code, content_type = cached
                 logger.info("Cache HIT for %s", url)
                 # Create a mock response from cache
                 return httpx.Response(
                     status_code=status_code,
-                    content=html.encode("utf-8"),
+                    content=body,
+                    headers={"content-type": content_type} if content_type else None,
                     request=httpx.Request("GET", url),
                 )
             else:
@@ -157,7 +163,9 @@ class CachingAsyncClient:
 
         # Cache successful responses
         if self._cache and response.status_code == 200:
-            self._cache.set(url, response.text, response.status_code)
+            self._cache.set(
+                url, response.content, response.status_code, response.headers.get("content-type")
+            )
 
         return response
 
