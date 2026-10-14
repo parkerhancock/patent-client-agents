@@ -193,6 +193,7 @@ class TwTradeSecretsClient:
         sort: str = "relevance",
         per_page: int = 10,
         page: int = 1,
+        offset: int | None = None,
     ) -> TwTradeSecretsSearchResult:
         db = self._open()
         fts_query = _translate_fts_query(query, syntax)
@@ -204,7 +205,9 @@ class TwTradeSecretsClient:
                 per_page=per_page,
                 has_more=False,
             )
-        offset = max(0, (page - 1) * per_page)
+        # A row ``offset`` takes precedence over ``page`` when given.
+        if offset is None:
+            offset = max(0, (page - 1) * per_page)
         rows = db.search(
             fts_query,
             limit=per_page + 1,

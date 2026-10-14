@@ -18,6 +18,8 @@ from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from patent_client_agents.shared.models import ApiModel
+
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
 
 
@@ -85,16 +87,16 @@ class Person(BaseModel):
     model_config = _BASE_CONFIG
 
 
-class WordMarkSpecification(BaseModel):
-    verbal_element: str = Field(alias="verbalElement")
+class WordMarkSpecification(ApiModel):
+    verbal_element: str
 
     model_config = _BASE_CONFIG
 
 
-class Publication(BaseModel):
-    bulletin_number: str = Field(alias="bulletinNumber")
-    publication_section: str = Field(alias="publicationSection")
-    publication_date: date = Field(alias="publicationDate")
+class Publication(ApiModel):
+    bulletin_number: str
+    publication_section: str
+    publication_date: date
 
     model_config = _BASE_CONFIG
 
@@ -117,10 +119,10 @@ class MultilingualText(BaseModel):
     model_config = _BASE_CONFIG
 
 
-class GoodsAndServicesClass(BaseModel):
+class GoodsAndServicesClass(ApiModel):
     """A Nice class with its multilingual goods-and-services terms."""
 
-    class_number: int = Field(alias="classNumber")
+    class_number: int
     description: list[GoodsAndServicesTerms] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
@@ -133,26 +135,24 @@ class GoodsAndServicesClass(BaseModel):
         return []
 
 
-class TrademarkSearchResultItem(BaseModel):
+class TrademarkSearchResultItem(ApiModel):
     """Lean row returned by ``GET /trademarks`` (search)."""
 
-    application_number: str = Field(alias="applicationNumber")
+    application_number: str
     status: Status
-    mark_feature: MarkFeature = Field(alias="markFeature")
-    nice_classes: list[int] = Field(alias="niceClasses", default_factory=list)
+    mark_feature: MarkFeature
+    nice_classes: list[int] = Field(default_factory=list)
 
-    applicant_reference: str | None = Field(default=None, alias="applicantReference")
-    mark_kind: MarkKind | None = Field(default=None, alias="markKind")
-    mark_basis: MarkBasis | None = Field(default=None, alias="markBasis")
-    word_mark_specification: WordMarkSpecification | None = Field(
-        default=None, alias="wordMarkSpecification"
-    )
+    applicant_reference: str | None = None
+    mark_kind: MarkKind | None = None
+    mark_basis: MarkBasis | None = None
+    word_mark_specification: WordMarkSpecification | None = None
     applicants: list[Person] = Field(default_factory=list)
     representatives: list[Person] = Field(default_factory=list)
-    application_date: date | None = Field(default=None, alias="applicationDate")
-    registration_date: date | None = Field(default=None, alias="registrationDate")
-    designation_date: date | None = Field(default=None, alias="designationDate")
-    expiry_date: date | None = Field(default=None, alias="expiryDate")
+    application_date: date | None = None
+    registration_date: date | None = None
+    designation_date: date | None = None
+    expiry_date: date | None = None
     publications: list[Publication] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
@@ -174,12 +174,12 @@ class TrademarkSearchResultItem(BaseModel):
         return self.status == Status.REGISTERED
 
 
-class TrademarkSearchResult(BaseModel):
+class TrademarkSearchResult(ApiModel):
     """Envelope returned by ``GET /trademarks``."""
 
     trademarks: list[TrademarkSearchResultItem]
-    total_elements: int = Field(alias="totalElements")
-    total_pages: int = Field(alias="totalPages")
+    total_elements: int
+    total_pages: int
     size: int
     page: int
 
@@ -194,27 +194,21 @@ class Trademark(TrademarkSearchResultItem):
     rare ones flow through via ``extra="allow"``.
     """
 
-    application_language: str | None = Field(default=None, alias="applicationLanguage")
-    second_language: str | None = Field(default=None, alias="secondLanguage")
-    receipt_date: date | None = Field(default=None, alias="receiptDate")
-    publication_date: date | None = Field(default=None, alias="publicationDate")
-    status_date: date | None = Field(default=None, alias="statusDate")
+    application_language: str | None = None
+    second_language: str | None = None
+    receipt_date: date | None = None
+    publication_date: date | None = None
+    status_date: date | None = None
 
     description: list[MultilingualText] = Field(default_factory=list)
     disclaimer: list[MultilingualText] = Field(default_factory=list)
-    goods_and_services: list[GoodsAndServicesClass] = Field(
-        alias="goodsAndServices", default_factory=list
-    )
+    goods_and_services: list[GoodsAndServicesClass] = Field(default_factory=list)
 
-    opposition_period_start_date: date | None = Field(
-        default=None, alias="oppositionPeriodStartDate"
-    )
-    opposition_period_end_date: date | None = Field(default=None, alias="oppositionPeriodEndDate")
-    renewal_status: str | None = Field(default=None, alias="renewalStatus")
-    fast_track_indicator: bool | None = Field(default=None, alias="fastTrackIndicator")
-    trade_distinctiveness_indicator: bool | None = Field(
-        default=None, alias="tradeDistinctivenessIndicator"
-    )
+    opposition_period_start_date: date | None = None
+    opposition_period_end_date: date | None = None
+    renewal_status: str | None = None
+    fast_track_indicator: bool | None = None
+    trade_distinctiveness_indicator: bool | None = None
 
     model_config = _BASE_CONFIG
 

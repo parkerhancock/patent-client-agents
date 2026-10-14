@@ -36,7 +36,7 @@ import httpx
 from lxml import html
 
 from mcp_data_core.corpus_compression import finalize_outline_corpus
-from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.corpus import atomic_output, fetch_text, run_build_cli
 
 from .schema import DDL, SCHEMA_VERSION
 
@@ -89,16 +89,6 @@ def _part_from_slug(slug: str) -> str | None:
     return slug[0].upper() if slug else None
 
 
-async def _fetch(client: httpx.AsyncClient, url: str) -> str:
-    retryer = default_retryer()
-    async for attempt in retryer:
-        with attempt:
-            response = await client.get(url, follow_redirects=True)
-            response.raise_for_status()
-            return response.text
-    raise RuntimeError("unreachable: default_retryer reraises")
-
-
 def _enumerate_section_paths(page_html: str) -> set[str]:
     """Pull every ``X_Y_Z.html`` link off one page (returns filenames)."""
     return {m.group(1).lower() for m in _LINK_HREF_RE.finditer(page_html)}
@@ -144,87 +134,82 @@ async def build_corpus(
     pause: float = 0.3,
     limit: int | None = None,
 ) -> int:
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    tmp_path = output_path.with_suffix(output_path.suffix + ".tmp")
-    if tmp_path.exists():
-        tmp_path.unlink()
+    with atomic_output(output_path) as tmp_path:
+        headers = {"User-Agent": user_agent, "Accept": "text/html"}
+        async with httpx.AsyncClient(
+            base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
+        ) as client:
+            base_path = f"/en/legal/guidelines-epc/{guidelines_year}"
+            logger.info("Fetching Guidelines index: %s%s/index.html", base_url, base_path)
+            index_html = await fetch_text(client, f"{base_path}/index.html")
+            seeds = _enumerate_section_paths(index_html)
+            logger.info("Index page links to %d chapter/section files", len(seeds))
 
-    headers = {"User-Agent": user_agent, "Accept": "text/html"}
-    async with httpx.AsyncClient(
-        base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
-    ) as client:
-        base_path = f"/en/legal/guidelines-epc/{guidelines_year}"
-        logger.info("Fetching Guidelines index: %s%s/index.html", base_url, base_path)
-        index_html = await _fetch(client, f"{base_path}/index.html")
-        seeds = _enumerate_section_paths(index_html)
-        logger.info("Index page links to %d chapter/section files", len(seeds))
+            conn = sqlite3.connect(tmp_path)
+            try:
+                conn.executescript(DDL)
+                now = datetime.now(UTC).strftime("%Y-%m-%d")
+                for key, val in (
+                    ("schema_version", str(SCHEMA_VERSION)),
+                    ("source", f"{base_url}{base_path}"),
+                    ("snapshot_date", now),
+                    ("guidelines_year", guidelines_year),
+                ):
+                    conn.execute(
+                        "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", (key, val)
+                    )
 
-        conn = sqlite3.connect(tmp_path)
-        try:
-            conn.executescript(DDL)
-            now = datetime.now(UTC).strftime("%Y-%m-%d")
-            for key, val in (
-                ("schema_version", str(SCHEMA_VERSION)),
-                ("source", f"{base_url}{base_path}"),
-                ("snapshot_date", now),
-                ("guidelines_year", guidelines_year),
-            ):
-                conn.execute("INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", (key, val))
+                queue: deque[str] = deque(sorted(seeds))
+                seen: set[str] = set()
+                rows = 0
 
-            queue: deque[str] = deque(sorted(seeds))
-            seen: set[str] = set()
-            rows = 0
+                while queue:
+                    if limit and rows >= limit:
+                        break
+                    name = queue.popleft()
+                    if name in seen:
+                        continue
+                    seen.add(name)
+                    slug = name.removesuffix(".html")
+                    if not _SLUG_RE.match(slug):
+                        continue
+                    path = f"{base_path}/{name}"
+                    try:
+                        page_html = await fetch_text(client, path)
+                    except Exception as exc:
+                        logger.warning("Skipping %s: %s", path, exc)
+                        continue
+                    for link in _enumerate_section_paths(page_html):
+                        if link not in seen:
+                            queue.append(link)
+                    fragment, text, page_title = _extract_main_content(page_html)
+                    if not text:
+                        logger.warning("Empty body for %s — skipping", path)
+                        continue
+                    section_number = _section_number_from_slug(slug)
+                    conn.execute(
+                        "INSERT OR REPLACE INTO sections "
+                        "(href, section_number, title, breadcrumb, chapter, html, text) "
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                        (
+                            slug,
+                            section_number,
+                            page_title or section_number or slug,
+                            None,
+                            _part_from_slug(slug),
+                            fragment,
+                            text,
+                        ),
+                    )
+                    rows += 1
+                    if rows % 25 == 0:
+                        logger.info("  %d crawled (%d queued)", rows, len(queue))
+                    if pause:
+                        await asyncio.sleep(pause)
+                finalize_outline_corpus(conn, logger=logger)
+            finally:
+                conn.close()
 
-            while queue:
-                if limit and rows >= limit:
-                    break
-                name = queue.popleft()
-                if name in seen:
-                    continue
-                seen.add(name)
-                slug = name.removesuffix(".html")
-                if not _SLUG_RE.match(slug):
-                    continue
-                path = f"{base_path}/{name}"
-                try:
-                    page_html = await _fetch(client, path)
-                except Exception as exc:
-                    logger.warning("Skipping %s: %s", path, exc)
-                    continue
-                for link in _enumerate_section_paths(page_html):
-                    if link not in seen:
-                        queue.append(link)
-                fragment, text, page_title = _extract_main_content(page_html)
-                if not text:
-                    logger.warning("Empty body for %s — skipping", path)
-                    continue
-                section_number = _section_number_from_slug(slug)
-                conn.execute(
-                    "INSERT OR REPLACE INTO sections "
-                    "(href, section_number, title, breadcrumb, chapter, html, text) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    (
-                        slug,
-                        section_number,
-                        page_title or section_number or slug,
-                        None,
-                        _part_from_slug(slug),
-                        fragment,
-                        text,
-                    ),
-                )
-                rows += 1
-                if rows % 25 == 0:
-                    logger.info("  %d crawled (%d queued)", rows, len(queue))
-                if pause:
-                    await asyncio.sleep(pause)
-            finalize_outline_corpus(conn, logger=logger)
-        finally:
-            conn.close()
-
-    if output_path.exists():
-        output_path.unlink()
-    tmp_path.rename(output_path)
     logger.info("Wrote %d sections to %s", rows, output_path)
     return rows
 
@@ -250,30 +235,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
 
-    logging.basicConfig(
-        level=logging.INFO if args.verbose else logging.WARNING,
-        format="%(asctime)s %(levelname)s %(message)s",
+    return run_build_cli(
+        lambda: build_corpus(
+            args.output,
+            guidelines_year=args.year,
+            base_url=args.base_url,
+            user_agent=args.user_agent,
+            pause=args.pause,
+            limit=args.limit,
+        ),
+        verbose=args.verbose,
+        done=lambda count, _elapsed: f"Wrote {count} sections to {args.output}",
     )
-
-    try:
-        count = asyncio.run(
-            build_corpus(
-                args.output,
-                guidelines_year=args.year,
-                base_url=args.base_url,
-                user_agent=args.user_agent,
-                pause=args.pause,
-                limit=args.limit,
-            )
-        )
-    except KeyboardInterrupt:
-        print("Interrupted", file=sys.stderr)
-        return 130
-    except Exception as exc:  # noqa: BLE001
-        print(f"Build failed: {exc}", file=sys.stderr)
-        return 1
-    print(f"Wrote {count} sections to {args.output}")
-    return 0
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 Covers:
 
-* ``_parse_kipris_date`` validator across all accepted forms (``YYYYMMDD``,
+* ``parse_iso_date`` validator across all accepted forms (``YYYYMMDD``,
   ``YYYY-MM-DD``, sentinel ``"00000000"``, empty/None, ``date``/``datetime``,
   unsupported types).
 * Alias round-trip: camelCase XML keys deserialize into snake_case
@@ -22,64 +22,64 @@ from patent_client_agents.kipo_kipris.models import (
     DesignRow,
     PatentUtilityRow,
     TrademarkRow,
-    _parse_kipris_date,
 )
+from patent_client_agents.shared.models import parse_iso_date
 
 # ──────────────────────────────────────────────────────────────────────
-# _parse_kipris_date validator
+# parse_iso_date validator
 # ──────────────────────────────────────────────────────────────────────
 
 
 class TestParseKiprisDate:
     def test_yyyymmdd_valid(self) -> None:
-        assert _parse_kipris_date("20240315") == date(2024, 3, 15)
+        assert parse_iso_date("20240315") == date(2024, 3, 15)
 
     def test_yyyymmdd_with_whitespace(self) -> None:
-        assert _parse_kipris_date("  20240315  ") == date(2024, 3, 15)
+        assert parse_iso_date("  20240315  ") == date(2024, 3, 15)
 
     def test_iso_8601_valid(self) -> None:
-        assert _parse_kipris_date("2024-03-15") == date(2024, 3, 15)
+        assert parse_iso_date("2024-03-15") == date(2024, 3, 15)
 
     def test_empty_string_returns_none(self) -> None:
-        assert _parse_kipris_date("") is None
+        assert parse_iso_date("") is None
 
     def test_whitespace_only_returns_none(self) -> None:
-        assert _parse_kipris_date("   ") is None
+        assert parse_iso_date("   ") is None
 
     def test_none_returns_none(self) -> None:
-        assert _parse_kipris_date(None) is None
+        assert parse_iso_date(None) is None
 
     def test_sentinel_zeros_returns_none(self) -> None:
-        assert _parse_kipris_date("00000000") is None
+        assert parse_iso_date("00000000") is None
 
     def test_yyyymmdd_invalid_day_returns_none(self) -> None:
         # February 30th — not a valid calendar date.
-        assert _parse_kipris_date("20240230") is None
+        assert parse_iso_date("20240230") is None
 
     def test_malformed_string_returns_none(self) -> None:
-        assert _parse_kipris_date("not-a-date") is None
+        assert parse_iso_date("not-a-date") is None
 
     def test_short_digit_string_returns_none(self) -> None:
-        assert _parse_kipris_date("2024") is None
+        assert parse_iso_date("2024") is None
 
     def test_eight_chars_but_non_digit_returns_none(self) -> None:
-        assert _parse_kipris_date("abcdefgh") is None
+        assert parse_iso_date("abcdefgh") is None
 
     def test_already_date_passthrough(self) -> None:
         d = date(2024, 1, 1)
-        assert _parse_kipris_date(d) is d
+        assert parse_iso_date(d) is d
 
     def test_datetime_converted_to_date(self) -> None:
         dt = datetime(2024, 6, 1, 12, 30, 0)
-        assert _parse_kipris_date(dt) == date(2024, 6, 1)
+        assert parse_iso_date(dt) == date(2024, 6, 1)
 
     def test_unsupported_type_returns_none(self) -> None:
-        assert _parse_kipris_date(12345) is None
-        assert _parse_kipris_date([2024, 1, 1]) is None
+        assert parse_iso_date(12345) is None
+        assert parse_iso_date([2024, 1, 1]) is None
 
 
 # ──────────────────────────────────────────────────────────────────────
-# _empty_str_to_none helper
+# empty_str_to_none helper
 # ──────────────────────────────────────────────────────────────────────
 
 

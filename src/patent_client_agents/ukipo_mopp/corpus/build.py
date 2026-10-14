@@ -34,7 +34,7 @@ import httpx
 from lxml import html
 
 from mcp_data_core.corpus_compression import finalize_outline_corpus
-from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.corpus import atomic_output, fetch_text, run_build_cli
 
 from .schema import DDL, SCHEMA_VERSION
 
@@ -63,16 +63,6 @@ _SECTION_SLUG_RE = re.compile(
 def _slug_to_section_number(slug: str) -> str | None:
     m = _SECTION_SLUG_RE.search(slug)
     return m.group("num").upper() if m else None
-
-
-async def _fetch(client: httpx.AsyncClient, url: str) -> str:
-    retryer = default_retryer()
-    async for attempt in retryer:
-        with attempt:
-            response = await client.get(url, follow_redirects=True)
-            response.raise_for_status()
-            return response.text
-    raise RuntimeError("unreachable: default_retryer reraises")
 
 
 def _enumerate_section_paths(index_html: str) -> list[str]:
@@ -153,76 +143,67 @@ async def build_corpus(
     of gov.uk does cap automated traffic. ``limit`` (if set) processes
     only the first N pages — useful for testing the wiring.
     """
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    # Build into a temp path first so a half-finished crawl doesn't
-    # corrupt an existing corpus.
-    tmp_path = output_path.with_suffix(output_path.suffix + ".tmp")
-    if tmp_path.exists():
-        tmp_path.unlink()
+    with atomic_output(output_path) as tmp_path:
+        headers = {"User-Agent": user_agent, "Accept": "text/html"}
+        async with httpx.AsyncClient(
+            base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
+        ) as client:
+            logger.info("Fetching MoPP index from %s%s", base_url, INDEX_PATH)
+            index_html = await fetch_text(client, INDEX_PATH)
+            paths = _enumerate_section_paths(index_html)
+            if limit:
+                paths = paths[:limit]
+            logger.info("Found %d section pages", len(paths))
 
-    headers = {"User-Agent": user_agent, "Accept": "text/html"}
-    async with httpx.AsyncClient(
-        base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
-    ) as client:
-        logger.info("Fetching MoPP index from %s%s", base_url, INDEX_PATH)
-        index_html = await _fetch(client, INDEX_PATH)
-        paths = _enumerate_section_paths(index_html)
-        if limit:
-            paths = paths[:limit]
-        logger.info("Found %d section pages", len(paths))
-
-        conn = sqlite3.connect(tmp_path)
-        try:
-            conn.executescript(DDL)
-            conn.execute(
-                "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-                ("schema_version", str(SCHEMA_VERSION)),
-            )
-            conn.execute(
-                "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-                ("source", f"{base_url}{INDEX_PATH}"),
-            )
-            conn.execute(
-                "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-                ("snapshot_date", datetime.now(UTC).strftime("%Y-%m-%d")),
-            )
-
-            rows = 0
-            for i, path in enumerate(paths, 1):
-                page_html = await _fetch(client, path)
-                html_fragment, text, page_title = _extract_main_content(page_html)
-                if not text:
-                    logger.warning("Empty body for %s — skipping", path)
-                    continue
-                slug = path.rsplit("/", 1)[-1]
-                section_number = _slug_to_section_number(slug)
-                title = page_title or _slug_to_title(slug)
+            conn = sqlite3.connect(tmp_path)
+            try:
+                conn.executescript(DDL)
                 conn.execute(
-                    "INSERT OR REPLACE INTO sections "
-                    "(href, section_number, title, breadcrumb, chapter, html, text) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    (
-                        slug,
-                        section_number,
-                        title,
-                        None,
-                        None,
-                        html_fragment,
-                        text,
-                    ),
+                    "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
+                    ("schema_version", str(SCHEMA_VERSION)),
                 )
-                rows += 1
-                if i % 10 == 0 or i == len(paths):
-                    logger.info("  %d/%d  %s", i, len(paths), slug)
-                if pause:
-                    await asyncio.sleep(pause)
-            finalize_outline_corpus(conn, logger=logger)
-        finally:
-            conn.close()
+                conn.execute(
+                    "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
+                    ("source", f"{base_url}{INDEX_PATH}"),
+                )
+                conn.execute(
+                    "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
+                    ("snapshot_date", datetime.now(UTC).strftime("%Y-%m-%d")),
+                )
 
-    if output_path.exists():
-        output_path.unlink()
-    tmp_path.rename(output_path)
+                rows = 0
+                for i, path in enumerate(paths, 1):
+                    page_html = await fetch_text(client, path)
+                    html_fragment, text, page_title = _extract_main_content(page_html)
+                    if not text:
+                        logger.warning("Empty body for %s — skipping", path)
+                        continue
+                    slug = path.rsplit("/", 1)[-1]
+                    section_number = _slug_to_section_number(slug)
+                    title = page_title or _slug_to_title(slug)
+                    conn.execute(
+                        "INSERT OR REPLACE INTO sections "
+                        "(href, section_number, title, breadcrumb, chapter, html, text) "
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                        (
+                            slug,
+                            section_number,
+                            title,
+                            None,
+                            None,
+                            html_fragment,
+                            text,
+                        ),
+                    )
+                    rows += 1
+                    if i % 10 == 0 or i == len(paths):
+                        logger.info("  %d/%d  %s", i, len(paths), slug)
+                    if pause:
+                        await asyncio.sleep(pause)
+                finalize_outline_corpus(conn, logger=logger)
+            finally:
+                conn.close()
+
     logger.info("Wrote %d sections to %s", rows, output_path)
     return rows
 
@@ -266,30 +247,17 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    logging.basicConfig(
-        level=logging.INFO if args.verbose else logging.WARNING,
-        format="%(asctime)s %(levelname)s %(message)s",
+    return run_build_cli(
+        lambda: build_corpus(
+            args.output,
+            base_url=args.base_url,
+            user_agent=args.user_agent,
+            pause=args.pause,
+            limit=args.limit,
+        ),
+        verbose=args.verbose,
+        done=lambda count, _elapsed: f"Wrote {count} sections to {args.output}",
     )
-
-    try:
-        count = asyncio.run(
-            build_corpus(
-                args.output,
-                base_url=args.base_url,
-                user_agent=args.user_agent,
-                pause=args.pause,
-                limit=args.limit,
-            )
-        )
-    except KeyboardInterrupt:
-        print("Interrupted", file=sys.stderr)
-        return 130
-    except Exception as exc:  # noqa: BLE001 — CLI top-level boundary
-        print(f"Build failed: {exc}", file=sys.stderr)
-        return 1
-
-    print(f"Wrote {count} sections to {args.output}")
-    return 0
 
 
 if __name__ == "__main__":

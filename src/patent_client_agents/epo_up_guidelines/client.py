@@ -169,6 +169,7 @@ class UpGuidelinesClient:
         sort: str = "relevance",
         per_page: int = 10,
         page: int = 1,
+        offset: int | None = None,
     ) -> UpGuidelinesSearchResponse:
         del version, include_content, include_index, include_notes
         del include_form_paragraphs, snippet
@@ -176,7 +177,9 @@ class UpGuidelinesClient:
         fts_query = translate_fts_query(query, syntax)
         if not fts_query:
             return UpGuidelinesSearchResponse(hits=[], page=page, per_page=per_page, has_more=False)
-        offset = max(0, (page - 1) * per_page)
+        # A row ``offset`` takes precedence over ``page`` when given.
+        if offset is None:
+            offset = max(0, (page - 1) * per_page)
         rows = db.search(fts_query, limit=per_page + 1, offset=offset, sort=sort)
         has_more = len(rows) > per_page
         rows = rows[:per_page]

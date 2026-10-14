@@ -33,12 +33,13 @@ import argparse
 import json
 import logging
 import sqlite3
-import sys
 from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from importlib import resources
 from pathlib import Path
+
+from patent_client_agents.shared.corpus import atomic_output, run_build_cli
 
 from .schema import DDL, SCHEMA_VERSION
 
@@ -104,45 +105,43 @@ def load_seed(path: Path | None = None) -> list[SeedRow]:
 
 def write_corpus(rows: Iterable[SeedRow], output: Path) -> int:
     """Initialize the schema and insert article rows. Returns row count."""
-    output.parent.mkdir(parents=True, exist_ok=True)
-    if output.exists():
-        output.unlink()
-    conn = sqlite3.connect(output)
-    try:
-        conn.executescript(DDL)
-        seen: set[tuple[str, str]] = set()
-        inserted = 0
-        for row in rows:
-            key = (row.statute, row.section)
-            if key in seen:
-                continue
-            seen.add(key)
-            conn.execute(
-                """
-                INSERT INTO sections (statute, section, title, text)
-                VALUES (?, ?, ?, ?)
-                """,
-                (row.statute, row.section, row.title, row.text),
+    with atomic_output(output) as tmp_path:
+        conn = sqlite3.connect(tmp_path)
+        try:
+            conn.executescript(DDL)
+            seen: set[tuple[str, str]] = set()
+            inserted = 0
+            for row in rows:
+                key = (row.statute, row.section)
+                if key in seen:
+                    continue
+                seen.add(key)
+                conn.execute(
+                    """
+                    INSERT INTO sections (statute, section, title, text)
+                    VALUES (?, ?, ?, ?)
+                    """,
+                    (row.statute, row.section, row.title, row.text),
+                )
+                inserted += 1
+            snapshot_date = datetime.now(UTC).strftime("%Y-%m-%d")
+            meta_rows = [
+                ("schema_version", str(SCHEMA_VERSION)),
+                ("snapshot_date", snapshot_date),
+                ("source_version", CORPUS_VERSION),
+                ("section_count", str(inserted)),
+            ]
+            conn.executemany(
+                "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
+                meta_rows,
             )
-            inserted += 1
-        snapshot_date = datetime.now(UTC).strftime("%Y-%m-%d")
-        meta_rows = [
-            ("schema_version", str(SCHEMA_VERSION)),
-            ("snapshot_date", snapshot_date),
-            ("source_version", CORPUS_VERSION),
-            ("section_count", str(inserted)),
-        ]
-        conn.executemany(
-            "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)",
-            meta_rows,
-        )
-        conn.execute("INSERT INTO sections_fts(sections_fts) VALUES ('optimize')")
-        conn.commit()
-        # VACUUM must run outside any open transaction.
-        conn.isolation_level = None
-        conn.execute("VACUUM")
-    finally:
-        conn.close()
+            conn.execute("INSERT INTO sections_fts(sections_fts) VALUES ('optimize')")
+            conn.commit()
+            # VACUUM must run outside any open transaction.
+            conn.isolation_level = None
+            conn.execute("VACUUM")
+        finally:
+            conn.close()
     return inserted
 
 
@@ -181,20 +180,15 @@ def main(argv: list[str] | None = None) -> int:
         help="Log build progress to stderr.",
     )
     args = parser.parse_args(argv)
-    logging.basicConfig(
-        level=logging.INFO if args.verbose else logging.WARNING,
-        format="%(asctime)s %(levelname)s %(message)s",
+    return run_build_cli(
+        lambda: build_corpus(args.output, seed_path=args.seed),
+        verbose=args.verbose,
+        done=lambda count, _elapsed: (
+            f"Wrote {count} Légifrance IP articles to {args.output} (version {CORPUS_VERSION})"
+        ),
+        to_stderr=True,
+        catch_errors=False,
     )
-    try:
-        count = build_corpus(args.output, seed_path=args.seed)
-    except KeyboardInterrupt:
-        print("Interrupted", file=sys.stderr)
-        return 130
-    print(
-        f"Wrote {count} Légifrance IP articles to {args.output} (version {CORPUS_VERSION})",
-        file=sys.stderr,
-    )
-    return 0
 
 
 if __name__ == "__main__":

@@ -12,10 +12,12 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from patent_client_agents.shared.models import ApiModel
+
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
 
 
-class TrademarkSearchHit(BaseModel):
+class TrademarkSearchHit(ApiModel):
     """Lean row from ``POST /search/quick`` on the trade marks API.
 
     Each hit carries the Australian trade mark number (``serial_number``)
@@ -23,13 +25,13 @@ class TrademarkSearchHit(BaseModel):
     quick-search list view.
     """
 
-    serial_number: str | None = Field(default=None, alias="serialNumber")
-    word_mark: str | None = Field(default=None, alias="wordMark")
+    serial_number: str | None = None
+    word_mark: str | None = None
     status: str | None = None
-    mark_type: str | None = Field(default=None, alias="markType")
-    application_date: str | None = Field(default=None, alias="applicationDate")
-    registration_date: str | None = Field(default=None, alias="registrationDate")
-    nice_classes: list[Any] = Field(default_factory=list, alias="niceClasses")
+    mark_type: str | None = None
+    application_date: str | None = None
+    registration_date: str | None = None
+    nice_classes: list[Any] = Field(default_factory=list)
     owners: list[Any] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
@@ -44,20 +46,20 @@ class TrademarkSearchResult(BaseModel):
     model_config = _BASE_CONFIG
 
 
-class Trademark(BaseModel):
+class Trademark(ApiModel):
     """Full Australian trade mark record from ``GET /trade-mark/{id}``."""
 
-    serial_number: str | None = Field(default=None, alias="serialNumber")
-    word_mark: str | None = Field(default=None, alias="wordMark")
+    serial_number: str | None = None
+    word_mark: str | None = None
     status: str | None = None
-    mark_type: str | None = Field(default=None, alias="markType")
-    application_date: str | None = Field(default=None, alias="applicationDate")
-    registration_date: str | None = Field(default=None, alias="registrationDate")
-    renewal_date: str | None = Field(default=None, alias="renewalDate")
-    expiry_date: str | None = Field(default=None, alias="expiryDate")
-    nice_classes: list[Any] = Field(default_factory=list, alias="niceClasses")
+    mark_type: str | None = None
+    application_date: str | None = None
+    registration_date: str | None = None
+    renewal_date: str | None = None
+    expiry_date: str | None = None
+    nice_classes: list[Any] = Field(default_factory=list)
     owners: list[Any] = Field(default_factory=list)
-    goods_and_services: list[Any] = Field(default_factory=list, alias="goodsAndServices")
+    goods_and_services: list[Any] = Field(default_factory=list)
     representatives: list[Any] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG

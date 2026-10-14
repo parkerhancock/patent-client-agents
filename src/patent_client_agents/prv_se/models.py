@@ -13,28 +13,11 @@ validate.
 
 from __future__ import annotations
 
-from datetime import date, datetime
-from typing import Any
+from pydantic import BaseModel, ConfigDict, Field
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from patent_client_agents.shared.models import ApiModel, YmdDate
 
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
-
-
-def _parse_iso_date(value: Any) -> date | None:
-    if value is None:
-        return None
-    if isinstance(value, date):
-        return value
-    if not isinstance(value, str):
-        return None
-    raw = value.strip()
-    if not raw:
-        return None
-    try:
-        return datetime.strptime(raw, "%Y-%m-%d").date()
-    except ValueError:
-        return None
 
 
 # ---------------------------------------------------------------------------
@@ -57,7 +40,7 @@ class Party(BaseModel):
     model_config = _BASE_CONFIG
 
 
-class PublicationStatus(BaseModel):
+class PublicationStatus(ApiModel):
     """Status block on patent-search rows.
 
     Carries the numeric ``status`` code plus multilingual display-text
@@ -66,12 +49,12 @@ class PublicationStatus(BaseModel):
     """
 
     status: str | None = None
-    status_text: str | None = Field(default=None, alias="statusText")
-    status_display_text_en: str | None = Field(default=None, alias="statusDisplayTextEn")
-    status_display_text_sv: str | None = Field(default=None, alias="statusDisplayTextSv")
-    status_sub_text: str | None = Field(default=None, alias="statusSubText")
-    status_display_sub_text_en: str | None = Field(default=None, alias="statusDisplaySubTextEn")
-    status_display_sub_text_sv: str | None = Field(default=None, alias="statusDisplaySubTextSv")
+    status_text: str | None = None
+    status_display_text_en: str | None = None
+    status_display_text_sv: str | None = None
+    status_sub_text: str | None = None
+    status_display_sub_text_en: str | None = None
+    status_display_sub_text_sv: str | None = None
 
     model_config = _BASE_CONFIG
 
@@ -88,34 +71,24 @@ class Publication(BaseModel):
 class RegistryEntry(BaseModel):
     """One register timeline entry on a patent-get record."""
 
-    entry_date: date | None = Field(default=None, alias="date")
+    entry_date: YmdDate = Field(default=None, alias="date")
     event: str | None = None
 
     model_config = _BASE_CONFIG
 
-    @field_validator("entry_date", mode="before")
-    @classmethod
-    def _coerce_date(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class GazetteAnnouncement(BaseModel):
+class GazetteAnnouncement(ApiModel):
     """One gazette announcement on a patent-get record."""
 
     issue: str | None = None
     type: str | None = None
     text: str | None = None
-    announcement_date: date | None = Field(default=None, alias="announcementDate")
+    announcement_date: YmdDate = None
 
     model_config = _BASE_CONFIG
 
-    @field_validator("announcement_date", mode="before")
-    @classmethod
-    def _coerce_date(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class Drawing(BaseModel):
+class Drawing(ApiModel):
     """First-drawing block on a patent-get record.
 
     Carries the base64-encoded image bytes in ``data``. MCP lean
@@ -123,8 +96,8 @@ class Drawing(BaseModel):
     budget; the metadata (application number, page number) is kept.
     """
 
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    page_number: int | None = Field(default=None, alias="pageNumber")
+    application_number: str | None = None
+    page_number: int | None = None
     data: str | None = None
 
     model_config = _BASE_CONFIG
@@ -135,7 +108,7 @@ class Drawing(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class PatentSearchRow(BaseModel):
+class PatentSearchRow(ApiModel):
     """One row in the patent simple-search response.
 
     Returned by ``POST patents-search-api.prv.se/searchpatent/patentsimplesearch/``.
@@ -143,38 +116,31 @@ class PatentSearchRow(BaseModel):
     display text resolves on the patent-get endpoint.
     """
 
-    id_patent: int | None = Field(default=None, alias="idPatent")
-    application_number_formatted: str | None = Field(
-        default=None, alias="applicationNumberFormatted"
-    )
-    application_type: str | None = Field(default=None, alias="applicationType")
+    id_patent: int | None = None
+    application_number_formatted: str | None = None
+    application_type: str | None = None
     title: str | None = None
-    filing_date: date | None = Field(default=None, alias="filingDate")
-    publication_date: date | None = Field(default=None, alias="publicationDate")
-    grant_date: date | None = Field(default=None, alias="grantDate")
-    publication_number: str | None = Field(default=None, alias="publicationNumber")
+    filing_date: YmdDate = None
+    publication_date: YmdDate = None
+    grant_date: YmdDate = None
+    publication_number: str | None = None
     reference: str | None = None
     applicants: list[Party] = Field(default_factory=list)
     inventors: list[Party] = Field(default_factory=list)
     representatives: list[Party] = Field(default_factory=list)
-    cpc_classes: list[str] = Field(default_factory=list, alias="cpcClasses")
-    ipc_classes: list[str] = Field(default_factory=list, alias="ipcClasses")
-    dpk_classes: list[str] = Field(default_factory=list, alias="dpkClasses")
+    cpc_classes: list[str] = Field(default_factory=list)
+    ipc_classes: list[str] = Field(default_factory=list)
+    dpk_classes: list[str] = Field(default_factory=list)
     status: PublicationStatus | None = None
 
     model_config = _BASE_CONFIG
 
-    @field_validator("filing_date", "publication_date", "grant_date", mode="before")
-    @classmethod
-    def _coerce_dates(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class PatentSearchResponse(BaseModel):
+class PatentSearchResponse(ApiModel):
     """Top-level envelope for patent simple-search responses."""
 
-    total_hits: int = Field(default=0, alias="totalHits")
-    total_pages: int = Field(default=0, alias="totalPages")
+    total_hits: int = 0
+    total_pages: int = 0
     hits: int = 0
     page: int = 0
     search_patent_dtos: list[PatentSearchRow] = Field(
@@ -189,7 +155,7 @@ class PatentSearchResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class PatentGetRecord(BaseModel):
+class PatentGetRecord(ApiModel):
     """Full patent record from ``GET api.prv.se/patents/applications/{n}``.
 
     Carries the resolved status text (multilingual), prosecution
@@ -200,70 +166,43 @@ class PatentGetRecord(BaseModel):
     flat strings on this endpoint (the search endpoint returns dicts).
     """
 
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    application_number_formatted: str | None = Field(
-        default=None, alias="applicationNumberFormatted"
-    )
-    application_type: str | None = Field(default=None, alias="applicationType")
+    application_number: str | None = None
+    application_number_formatted: str | None = None
+    application_type: str | None = None
     status: str | None = None
-    status_text: str | None = Field(default=None, alias="statusText")
-    status_sub_text: str | None = Field(default=None, alias="statusSubText")
-    status_display_text_sv: str | None = Field(default=None, alias="statusDisplayTextSv")
-    status_display_text_en: str | None = Field(default=None, alias="statusDisplayTextEn")
-    status_display_sub_text_sv: str | None = Field(default=None, alias="statusDisplaySubTextSv")
-    status_display_sub_text_en: str | None = Field(default=None, alias="statusDisplaySubTextEn")
-    info_sv: str | None = Field(default=None, alias="infoSv")
-    info_en: str | None = Field(default=None, alias="infoEn")
-    filing_date: date | None = Field(default=None, alias="filingDate")
-    available_to_the_public_date: date | None = Field(
-        default=None, alias="availableToThePublicDate"
-    )
+    status_text: str | None = None
+    status_sub_text: str | None = None
+    status_display_text_sv: str | None = None
+    status_display_text_en: str | None = None
+    status_display_sub_text_sv: str | None = None
+    status_display_sub_text_en: str | None = None
+    info_sv: str | None = None
+    info_en: str | None = None
+    filing_date: YmdDate = None
+    available_to_the_public_date: YmdDate = None
     title: str | None = None
     reference: str | None = None
-    applicants_short_format: str | None = Field(default=None, alias="applicantsShortFormat")
+    applicants_short_format: str | None = None
     applicants: list[str] = Field(default_factory=list)
     inventors: list[str] = Field(default_factory=list)
     representatives: list[str] = Field(default_factory=list)
-    gazette_announcements_sv: list[GazetteAnnouncement] = Field(
-        default_factory=list, alias="gazetteAnnouncementsSv"
-    )
-    gazette_announcements_en: list[GazetteAnnouncement] = Field(
-        default_factory=list, alias="gazetteAnnouncementsEn"
-    )
-    electronic_announcements_sv: list[GazetteAnnouncement] = Field(
-        default_factory=list, alias="electronicAnnouncementsSv"
-    )
-    electronic_announcements_en: list[GazetteAnnouncement] = Field(
-        default_factory=list, alias="electronicAnnouncementsEn"
-    )
-    registry_entries_sv: list[RegistryEntry] = Field(
-        default_factory=list, alias="registryEntriesSv"
-    )
-    registry_entries_en: list[RegistryEntry] = Field(
-        default_factory=list, alias="registryEntriesEn"
-    )
-    mo_deposit: str | None = Field(default=None, alias="moDeposit")
+    gazette_announcements_sv: list[GazetteAnnouncement] = Field(default_factory=list)
+    gazette_announcements_en: list[GazetteAnnouncement] = Field(default_factory=list)
+    electronic_announcements_sv: list[GazetteAnnouncement] = Field(default_factory=list)
+    electronic_announcements_en: list[GazetteAnnouncement] = Field(default_factory=list)
+    registry_entries_sv: list[RegistryEntry] = Field(default_factory=list)
+    registry_entries_en: list[RegistryEntry] = Field(default_factory=list)
+    mo_deposit: str | None = None
     source: str | None = None
-    updated: date | None = None
+    updated: YmdDate = None
     md5: str | None = None
-    next_payment_date: date | None = Field(default=None, alias="nextPaymentDate")
+    next_payment_date: YmdDate = None
     increesed_fee: bool | None = Field(default=None, alias="IncreesedFee")
-    first_drawing: Drawing | None = Field(default=None, alias="firstDrawing")
-    number_of_drawing_pages: int | None = Field(default=None, alias="numberOfDrawingPages")
+    first_drawing: Drawing | None = None
+    number_of_drawing_pages: int | None = None
     publications: list[Publication] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
-
-    @field_validator(
-        "filing_date",
-        "available_to_the_public_date",
-        "updated",
-        "next_payment_date",
-        mode="before",
-    )
-    @classmethod
-    def _coerce_dates(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
 
 # ---------------------------------------------------------------------------
@@ -271,7 +210,7 @@ class PatentGetRecord(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class TrademarkSearchRow(BaseModel):
+class TrademarkSearchRow(ApiModel):
     """One row in the trademark simple-search response.
 
     Returned by ``POST dv-search-api.prv.se/searchtrademark/tmsimplesearch/``.
@@ -279,35 +218,30 @@ class TrademarkSearchRow(BaseModel):
     trademark") from Madrid IRs designating SE.
     """
 
-    id_trademark: int | None = Field(default=None, alias="idTrademark")
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    registration_number: str | None = Field(default=None, alias="registrationNumber")
-    mark_specification: str | None = Field(default=None, alias="markSpecification")
-    mark_feature_en: str | None = Field(default=None, alias="markFeatureEn")
-    mark_feature_sv: str | None = Field(default=None, alias="markFeatureSv")
-    dossier_type_en: str | None = Field(default=None, alias="dossierTypeEn")
-    dossier_type_sv: str | None = Field(default=None, alias="dossierTypeSv")
-    status_en: str | None = Field(default=None, alias="statusEn")
-    status_sv: str | None = Field(default=None, alias="statusSv")
-    filing_date: date | None = Field(default=None, alias="filingDate")
-    expiry_date: date | None = Field(default=None, alias="expiryDate")
+    id_trademark: int | None = None
+    application_number: str | None = None
+    registration_number: str | None = None
+    mark_specification: str | None = None
+    mark_feature_en: str | None = None
+    mark_feature_sv: str | None = None
+    dossier_type_en: str | None = None
+    dossier_type_sv: str | None = None
+    status_en: str | None = None
+    status_sv: str | None = None
+    filing_date: YmdDate = None
+    expiry_date: YmdDate = None
     classes: list[str] = Field(default_factory=list)
     applicants: list[Party] = Field(default_factory=list)
     representatives: list[str | Party] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
 
-    @field_validator("filing_date", "expiry_date", mode="before")
-    @classmethod
-    def _coerce_dates(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class TrademarkSearchResponse(BaseModel):
+class TrademarkSearchResponse(ApiModel):
     """Top-level envelope for trademark simple-search responses."""
 
-    total_hits: int = Field(default=0, alias="totalHits")
-    total_pages: int = Field(default=0, alias="totalPages")
+    total_hits: int = 0
+    total_pages: int = 0
     hits: int = 0
     page: int = 0
     trademarks: list[TrademarkSearchRow] = Field(default_factory=list)
@@ -320,7 +254,7 @@ class TrademarkSearchResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class DesignSearchRow(BaseModel):
+class DesignSearchRow(ApiModel):
     """One row in the design simple-search response.
 
     Returned by ``POST dv-search-api.prv.se/searchdesign/dssimplesearch/``.
@@ -329,34 +263,29 @@ class DesignSearchRow(BaseModel):
     position.
     """
 
-    id_design: int | None = Field(default=None, alias="idDesign")
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    registration_number: str | None = Field(default=None, alias="registrationNumber")
-    design_id: str | None = Field(default=None, alias="designId")
-    design_number: int | None = Field(default=None, alias="designNumber")
-    designs_total: int | None = Field(default=None, alias="designsTotal")
-    product_title: str | None = Field(default=None, alias="productTitle")
-    status_en: str | None = Field(default=None, alias="statusEn")
-    status_sv: str | None = Field(default=None, alias="statusSv")
-    filing_date: date | None = Field(default=None, alias="filingDate")
-    expiry_date: date | None = Field(default=None, alias="expiryDate")
+    id_design: int | None = None
+    application_number: str | None = None
+    registration_number: str | None = None
+    design_id: str | None = None
+    design_number: int | None = None
+    designs_total: int | None = None
+    product_title: str | None = None
+    status_en: str | None = None
+    status_sv: str | None = None
+    filing_date: YmdDate = None
+    expiry_date: YmdDate = None
     classes: list[str] = Field(default_factory=list)
     applicants: list[Party] = Field(default_factory=list)
     representatives: list[Party] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
 
-    @field_validator("filing_date", "expiry_date", mode="before")
-    @classmethod
-    def _coerce_dates(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class DesignSearchResponse(BaseModel):
+class DesignSearchResponse(ApiModel):
     """Top-level envelope for design simple-search responses."""
 
-    total_hits: int = Field(default=0, alias="totalHits")
-    total_pages: int = Field(default=0, alias="totalPages")
+    total_hits: int = 0
+    total_pages: int = 0
     hits: int = 0
     page: int = 0
     designs: list[DesignSearchRow] = Field(default_factory=list)
@@ -369,7 +298,7 @@ class DesignSearchResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class SpcSearchRow(BaseModel):
+class SpcSearchRow(ApiModel):
     """One row in the SPC search response.
 
     Returned by ``POST patents-search-api.prv.se/searchpatentspc/patentsearchspc/``.
@@ -379,32 +308,23 @@ class SpcSearchRow(BaseModel):
     ``valid_until_date`` bracket the SPC term.
     """
 
-    id_spc: int | None = Field(default=None, alias="idSpc")
-    application_number_formatted: str | None = Field(
-        default=None, alias="applicationNumberFormatted"
-    )
-    application_number_spc_formatted: str | None = Field(
-        default=None, alias="applicationNumberSpcFormatted"
-    )
-    publication_number: str | None = Field(default=None, alias="publicationNumber")
+    id_spc: int | None = None
+    application_number_formatted: str | None = None
+    application_number_spc_formatted: str | None = None
+    publication_number: str | None = None
     substance: str | None = None
-    valid_from_date: date | None = Field(default=None, alias="validFromDate")
-    valid_until_date: date | None = Field(default=None, alias="validUntilDate")
+    valid_from_date: YmdDate = None
+    valid_until_date: YmdDate = None
     applicants: list[Party] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
 
-    @field_validator("valid_from_date", "valid_until_date", mode="before")
-    @classmethod
-    def _coerce_dates(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class SpcSearchResponse(BaseModel):
+class SpcSearchResponse(ApiModel):
     """Top-level envelope for SPC search responses."""
 
-    total_hits: int = Field(default=0, alias="totalHits")
-    total_pages: int = Field(default=0, alias="totalPages")
+    total_hits: int = 0
+    total_pages: int = 0
     hits: int = 0
     page: int = 0
     search_spc_dtos: list[SpcSearchRow] = Field(default_factory=list, alias="searchSpcDTOS")

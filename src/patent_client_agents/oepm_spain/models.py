@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 from datetime import date, datetime
-from typing import Any
+from typing import Annotated, Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, BeforeValidator, ConfigDict, Field
 
 
 def parse_oepm_date(value: Any) -> date | None:
@@ -25,16 +25,14 @@ def parse_oepm_date(value: Any) -> date | None:
     return None
 
 
+_OepmDate = Annotated[date | None, BeforeValidator(parse_oepm_date)]
+
+
 class OepmProceedingAct(BaseModel):
     """One public processing act from an OEPM file."""
 
-    act_date: date | None = None
+    act_date: _OepmDate = None
     description: str | None = None
-
-    @field_validator("act_date", mode="before")
-    @classmethod
-    def parse_date(cls, value: Any) -> date | None:
-        return parse_oepm_date(value)
 
 
 class _OepmRecord(BaseModel):
@@ -59,19 +57,12 @@ class OepmPatentRecord(_OepmRecord):
     epo_publication_number: str | None = None
     pct_publication_number: str | None = None
     title: str | None = None
-    filing_date: date | None = None
+    filing_date: _OepmDate = None
     priority_number: str | None = None
-    priority_date: date | None = None
-    publication_date: date | None = None
-    grant_date: date | None = None
+    priority_date: _OepmDate = None
+    publication_date: _OepmDate = None
+    grant_date: _OepmDate = None
     inventors: list[str] = Field(default_factory=list)
-
-    @field_validator(
-        "filing_date", "priority_date", "publication_date", "grant_date", mode="before"
-    )
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_oepm_date(value)
 
 
 class OepmTrademarkRecord(_OepmRecord):
@@ -81,29 +72,19 @@ class OepmTrademarkRecord(_OepmRecord):
     denomination: str | None = None
     mark_type: str | None = None
     image_url: str | None = None
-    filing_date: date | None = None
-    publication_date: date | None = None
-    next_renewal_date: date | None = None
+    filing_date: _OepmDate = None
+    publication_date: _OepmDate = None
+    next_renewal_date: _OepmDate = None
     nice_classes: list[str] = Field(default_factory=list)
     vienna_classes: list[str] = Field(default_factory=list)
-
-    @field_validator("filing_date", "publication_date", "next_renewal_date", mode="before")
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_oepm_date(value)
 
 
 class OepmDesignRecord(_OepmRecord):
     """Spanish industrial-design file."""
 
     application_number: str | None = None
-    filing_date: date | None = None
-    publication_date: date | None = None
-    resolution_date: date | None = None
+    filing_date: _OepmDate = None
+    publication_date: _OepmDate = None
+    resolution_date: _OepmDate = None
     filing_place: str | None = None
     creators: list[str] = Field(default_factory=list)
-
-    @field_validator("filing_date", "publication_date", "resolution_date", mode="before")
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_oepm_date(value)

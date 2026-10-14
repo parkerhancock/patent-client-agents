@@ -35,7 +35,7 @@ import httpx
 from lxml import html
 
 from mcp_data_core.corpus_compression import finalize_outline_corpus
-from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.corpus import atomic_output, fetch_text, run_build_cli
 
 from .schema import DDL, SCHEMA_VERSION
 
@@ -70,16 +70,6 @@ def _chapter_from_slug(slug: str) -> str | None:
     return "Article" if slug[0].lower() == "a" else "Rule"
 
 
-async def _fetch(client: httpx.AsyncClient, url: str) -> str:
-    retryer = default_retryer()
-    async for attempt in retryer:
-        with attempt:
-            response = await client.get(url, follow_redirects=True)
-            response.raise_for_status()
-            return response.text
-    raise RuntimeError("unreachable: default_retryer reraises")
-
-
 def _extract_main_content(page_html: str) -> tuple[str, str, str | None]:
     tree = html.fromstring(page_html)
     mains = tree.xpath("//main")
@@ -109,82 +99,77 @@ async def build_corpus(
     pause: float = 0.3,
     limit: int | None = None,
 ) -> int:
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    tmp_path = output_path.with_suffix(output_path.suffix + ".tmp")
-    if tmp_path.exists():
-        tmp_path.unlink()
+    with atomic_output(output_path) as tmp_path:
+        headers = {"User-Agent": user_agent, "Accept": "text/html"}
+        async with httpx.AsyncClient(
+            base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
+        ) as client:
+            base_path = f"/en/legal/epc/{epc_year}"
+            logger.info("Discovering articles + rules from EPC TOC pages")
+            convention_html = await fetch_text(client, f"{base_path}/convention.html")
+            regulations_html = await fetch_text(client, f"{base_path}/regulations.html")
+            article_slugs = sorted({m.group(1) for m in _ARTICLE_HREF.finditer(convention_html)})
+            rule_slugs = sorted({m.group(1) for m in _RULE_HREF.finditer(regulations_html)})
+            slugs = article_slugs + rule_slugs
+            if limit:
+                slugs = slugs[:limit]
+            logger.info(
+                "Discovered %d articles + %d rules (%d total)",
+                len(article_slugs),
+                len(rule_slugs),
+                len(slugs),
+            )
 
-    headers = {"User-Agent": user_agent, "Accept": "text/html"}
-    async with httpx.AsyncClient(
-        base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
-    ) as client:
-        base_path = f"/en/legal/epc/{epc_year}"
-        logger.info("Discovering articles + rules from EPC TOC pages")
-        convention_html = await _fetch(client, f"{base_path}/convention.html")
-        regulations_html = await _fetch(client, f"{base_path}/regulations.html")
-        article_slugs = sorted({m.group(1) for m in _ARTICLE_HREF.finditer(convention_html)})
-        rule_slugs = sorted({m.group(1) for m in _RULE_HREF.finditer(regulations_html)})
-        slugs = article_slugs + rule_slugs
-        if limit:
-            slugs = slugs[:limit]
-        logger.info(
-            "Discovered %d articles + %d rules (%d total)",
-            len(article_slugs),
-            len(rule_slugs),
-            len(slugs),
-        )
+            conn = sqlite3.connect(tmp_path)
+            try:
+                conn.executescript(DDL)
+                now = datetime.now(UTC).strftime("%Y-%m-%d")
+                for key, val in (
+                    ("schema_version", str(SCHEMA_VERSION)),
+                    ("source", f"{base_url}{base_path}"),
+                    ("snapshot_date", now),
+                    ("epc_year", epc_year),
+                ):
+                    conn.execute(
+                        "INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", (key, val)
+                    )
 
-        conn = sqlite3.connect(tmp_path)
-        try:
-            conn.executescript(DDL)
-            now = datetime.now(UTC).strftime("%Y-%m-%d")
-            for key, val in (
-                ("schema_version", str(SCHEMA_VERSION)),
-                ("source", f"{base_url}{base_path}"),
-                ("snapshot_date", now),
-                ("epc_year", epc_year),
-            ):
-                conn.execute("INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", (key, val))
+                rows = 0
+                for i, slug in enumerate(slugs, 1):
+                    path = f"{base_path}/{slug}.html"
+                    try:
+                        page_html = await fetch_text(client, path)
+                    except Exception as exc:
+                        logger.warning("Skipping %s: %s", path, exc)
+                        continue
+                    fragment, text, page_title = _extract_main_content(page_html)
+                    if not text:
+                        logger.warning("Empty body for %s — skipping", path)
+                        continue
+                    section_number = _section_number_from_slug(slug)
+                    conn.execute(
+                        "INSERT OR REPLACE INTO sections "
+                        "(href, section_number, title, breadcrumb, chapter, html, text) "
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                        (
+                            slug,
+                            section_number,
+                            page_title or section_number or slug,
+                            None,
+                            _chapter_from_slug(slug),
+                            fragment,
+                            text,
+                        ),
+                    )
+                    rows += 1
+                    if i % 25 == 0 or i == len(slugs):
+                        logger.info("  %d/%d  %s", i, len(slugs), slug)
+                    if pause:
+                        await asyncio.sleep(pause)
+                finalize_outline_corpus(conn, logger=logger)
+            finally:
+                conn.close()
 
-            rows = 0
-            for i, slug in enumerate(slugs, 1):
-                path = f"{base_path}/{slug}.html"
-                try:
-                    page_html = await _fetch(client, path)
-                except Exception as exc:
-                    logger.warning("Skipping %s: %s", path, exc)
-                    continue
-                fragment, text, page_title = _extract_main_content(page_html)
-                if not text:
-                    logger.warning("Empty body for %s — skipping", path)
-                    continue
-                section_number = _section_number_from_slug(slug)
-                conn.execute(
-                    "INSERT OR REPLACE INTO sections "
-                    "(href, section_number, title, breadcrumb, chapter, html, text) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    (
-                        slug,
-                        section_number,
-                        page_title or section_number or slug,
-                        None,
-                        _chapter_from_slug(slug),
-                        fragment,
-                        text,
-                    ),
-                )
-                rows += 1
-                if i % 25 == 0 or i == len(slugs):
-                    logger.info("  %d/%d  %s", i, len(slugs), slug)
-                if pause:
-                    await asyncio.sleep(pause)
-            finalize_outline_corpus(conn, logger=logger)
-        finally:
-            conn.close()
-
-    if output_path.exists():
-        output_path.unlink()
-    tmp_path.rename(output_path)
     logger.info("Wrote %d sections to %s", rows, output_path)
     return rows
 
@@ -210,30 +195,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
 
-    logging.basicConfig(
-        level=logging.INFO if args.verbose else logging.WARNING,
-        format="%(asctime)s %(levelname)s %(message)s",
+    return run_build_cli(
+        lambda: build_corpus(
+            args.output,
+            epc_year=args.year,
+            base_url=args.base_url,
+            user_agent=args.user_agent,
+            pause=args.pause,
+            limit=args.limit,
+        ),
+        verbose=args.verbose,
+        done=lambda count, _elapsed: f"Wrote {count} sections to {args.output}",
     )
-
-    try:
-        count = asyncio.run(
-            build_corpus(
-                args.output,
-                epc_year=args.year,
-                base_url=args.base_url,
-                user_agent=args.user_agent,
-                pause=args.pause,
-                limit=args.limit,
-            )
-        )
-    except KeyboardInterrupt:
-        print("Interrupted", file=sys.stderr)
-        return 130
-    except Exception as exc:  # noqa: BLE001
-        print(f"Build failed: {exc}", file=sys.stderr)
-        return 1
-    print(f"Wrote {count} sections to {args.output}")
-    return 0
 
 
 if __name__ == "__main__":

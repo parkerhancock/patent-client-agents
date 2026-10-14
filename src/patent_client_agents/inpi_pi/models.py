@@ -60,7 +60,7 @@ Conventions
   lapsed marks).
 * **Date parsing**: INPI emits dates as ``YYYY-MM-DD`` ISO 8601 in
   JSON responses and ``YYYYMMDD`` in XML notices. The
-  ``_parse_iso_date`` validator accepts both forms (and empty
+  shared ``IsoDate`` type accepts both forms (and empty
   strings) and coerces to ``date | None``.
 * **Repeated fields**: ST.66/ST.86 elements like ``ApplicantDetails``
   and ``IndicationProductDetails/ClassDescription`` are inherently
@@ -84,62 +84,11 @@ in ``__init__.py`` documents this substitution.
 
 from __future__ import annotations
 
-from datetime import date, datetime
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-
-def _parse_iso_date(value: Any) -> date | None:
-    """Coerce INPI date strings to ``date``.
-
-    Accepted forms:
-
-    * ``"2024-03-15"`` — ISO 8601 (default JSON response format)
-    * ``"20240315"`` — 8-digit (XML notice format and SolR query format)
-    * ``""`` / ``None`` / whitespace → ``None``
-    * Already-parsed ``date`` / ``datetime`` → ``date`` (passthrough)
-    * ``"00000000"`` or other sentinel-for-unknown → ``None``
-
-    Anything else is returned as ``None`` rather than raising — INPI
-    occasionally emits sentinel strings for "unknown" dates, and we
-    treat all such cases as missing data.
-    """
-    if value is None:
-        return None
-    if isinstance(value, date) and not isinstance(value, datetime):
-        return value
-    if isinstance(value, datetime):
-        return value.date()
-    if not isinstance(value, str):
-        return None
-    cleaned = value.strip()
-    if not cleaned or cleaned == "00000000":
-        return None
-    # ISO 8601 first (JSON default)
-    try:
-        return date.fromisoformat(cleaned)
-    except ValueError:
-        pass
-    # 8-digit YYYYMMDD (XML notices)
-    if len(cleaned) == 8 and cleaned.isdigit():
-        try:
-            return datetime.strptime(cleaned, "%Y%m%d").date()
-        except ValueError:
-            return None
-    return None
-
-
-def _empty_str_to_none(value: Any) -> Any:
-    """Coerce empty/whitespace strings to ``None`` for ``Optional[str]`` fields.
-
-    INPI regularly emits empty XML elements (``<Mark></Mark>``) for
-    missing fields rather than omitting them, which would otherwise
-    leave us with ``""`` instead of ``None``.
-    """
-    if isinstance(value, str) and not value.strip():
-        return None
-    return value
+from patent_client_agents.shared.models import EmptyStrNone, IsoDate
 
 
 def _coerce_to_list(value: Any) -> Any:
@@ -202,39 +151,39 @@ class InpiTrademarkRow(_InpiRowBase):
     """
 
     # --- Identifiers (INID 220, 111) ----------------------------------
-    application_number: str | None = Field(
+    application_number: EmptyStrNone = Field(
         default=None,
         alias="ApplicationNumber",
         description="National application number, e.g. '4216963' (INID 220)",
     )
-    application_date: date | None = Field(
+    application_date: IsoDate = Field(
         default=None,
         alias="ApplicationDate",
         description="Filing date (INID 220 date)",
     )
-    registration_number: str | None = Field(
+    registration_number: EmptyStrNone = Field(
         default=None,
         alias="RegistrationNumber",
         description="Registration number once granted (INID 111)",
     )
-    registration_date: date | None = Field(
+    registration_date: IsoDate = Field(
         default=None,
         alias="RegistrationDate",
         description="Registration date (INID 151)",
     )
-    expiry_date: date | None = Field(
+    expiry_date: IsoDate = Field(
         default=None,
         alias="ExpiryDate",
         description="Expiry / next-renewal-deadline date (INID 156)",
     )
-    publication_date: date | None = Field(
+    publication_date: IsoDate = Field(
         default=None,
         alias="PublicationDate",
         description="Publication-of-application date (INID 442 date)",
     )
 
     # --- Mark representation (INID 540, 550) --------------------------
-    mark_text: str | None = Field(
+    mark_text: EmptyStrNone = Field(
         default=None,
         alias="Mark",
         description=(
@@ -243,7 +192,7 @@ class InpiTrademarkRow(_InpiRowBase):
             "with text; figurative-only marks may have an empty value"
         ),
     )
-    mark_image_url: str | None = Field(
+    mark_image_url: EmptyStrNone = Field(
         default=None,
         alias="MarkImageURI",
         description=(
@@ -252,7 +201,7 @@ class InpiTrademarkRow(_InpiRowBase):
             "``/marques/image/{appl_no}/std`` on the INPI API gateway"
         ),
     )
-    kind_of_mark: str | None = Field(
+    kind_of_mark: EmptyStrNone = Field(
         default=None,
         alias="KindMark",
         description=(
@@ -301,7 +250,7 @@ class InpiTrademarkRow(_InpiRowBase):
             "from the original applicant"
         ),
     )
-    agent_name: str | None = Field(
+    agent_name: EmptyStrNone = Field(
         default=None,
         alias="RepresentativeName",
         description=(
@@ -322,7 +271,7 @@ class InpiTrademarkRow(_InpiRowBase):
     )
 
     # --- Status (INID 442 related) ------------------------------------
-    status: str | None = Field(
+    status: EmptyStrNone = Field(
         default=None,
         alias="MarkCurrentStatusCode",
         description=(
@@ -332,33 +281,6 @@ class InpiTrademarkRow(_InpiRowBase):
             "validated against live responses (spec §6 open item)"
         ),
     )
-
-    # --- Date validators ----------------------------------------------
-    @field_validator(
-        "application_date",
-        "registration_date",
-        "expiry_date",
-        "publication_date",
-        mode="before",
-    )
-    @classmethod
-    def _coerce_date(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
-
-    # --- String validators (empty → None) -----------------------------
-    @field_validator(
-        "application_number",
-        "registration_number",
-        "mark_text",
-        "mark_image_url",
-        "kind_of_mark",
-        "agent_name",
-        "status",
-        mode="before",
-    )
-    @classmethod
-    def _coerce_empty(cls, value: Any) -> Any:
-        return _empty_str_to_none(value)
 
     # --- List validators (scalar/None → list) -------------------------
     @field_validator(
@@ -407,7 +329,7 @@ class InpiDesignRow(_InpiRowBase):
     """
 
     # --- Identifiers (INID 21, 11, 22) --------------------------------
-    application_number: str | None = Field(
+    application_number: EmptyStrNone = Field(
         default=None,
         alias="DesignApplicationNumber",
         description=(
@@ -416,7 +338,7 @@ class InpiDesignRow(_InpiRowBase):
             "individual designs"
         ),
     )
-    design_reference: str | None = Field(
+    design_reference: EmptyStrNone = Field(
         default=None,
         alias="DesignReference",
         description=(
@@ -425,12 +347,12 @@ class InpiDesignRow(_InpiRowBase):
             "``application_number``"
         ),
     )
-    application_date: date | None = Field(
+    application_date: IsoDate = Field(
         default=None,
         alias="DesignApplicationDate",
         description="Filing date (INID 22)",
     )
-    registration_number: str | None = Field(
+    registration_number: EmptyStrNone = Field(
         default=None,
         alias="RegistrationNumber",
         description=(
@@ -439,12 +361,12 @@ class InpiDesignRow(_InpiRowBase):
             "number"
         ),
     )
-    registration_date: date | None = Field(
+    registration_date: IsoDate = Field(
         default=None,
         alias="RegistrationDate",
         description="Registration date (INID 11 date)",
     )
-    expiry_date: date | None = Field(
+    expiry_date: IsoDate = Field(
         default=None,
         alias="ExpiryDate",
         description=(
@@ -453,14 +375,14 @@ class InpiDesignRow(_InpiRowBase):
             "may be extended 4 × 5 years to a 25-year maximum"
         ),
     )
-    publication_date: date | None = Field(
+    publication_date: IsoDate = Field(
         default=None,
         alias="PublicationDate",
         description="Publication date (INID 45) — BOPI publication",
     )
 
     # --- Title / representation (INID 54, 57) -------------------------
-    design_title: str | None = Field(
+    design_title: EmptyStrNone = Field(
         default=None,
         alias="DesignTitle",
         description=(
@@ -519,7 +441,7 @@ class InpiDesignRow(_InpiRowBase):
             "national filings frequently omit it"
         ),
     )
-    agent_name: str | None = Field(
+    agent_name: EmptyStrNone = Field(
         default=None,
         alias="RepresentativeName",
         description=("Representative / agent name (INID 74) — ``MANDATAIRE`` in INPI search index"),
@@ -538,7 +460,7 @@ class InpiDesignRow(_InpiRowBase):
     )
 
     # --- Status (INID 18 related) -------------------------------------
-    status: str | None = Field(
+    status: EmptyStrNone = Field(
         default=None,
         alias="DesignCurrentStatusCode",
         description=(
@@ -549,32 +471,6 @@ class InpiDesignRow(_InpiRowBase):
             "item)"
         ),
     )
-
-    # --- Date validators ----------------------------------------------
-    @field_validator(
-        "application_date",
-        "registration_date",
-        "expiry_date",
-        "publication_date",
-        mode="before",
-    )
-    @classmethod
-    def _coerce_date(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
-
-    # --- String validators (empty → None) -----------------------------
-    @field_validator(
-        "application_number",
-        "design_reference",
-        "registration_number",
-        "design_title",
-        "agent_name",
-        "status",
-        mode="before",
-    )
-    @classmethod
-    def _coerce_empty(cls, value: Any) -> Any:
-        return _empty_str_to_none(value)
 
     # --- List validators (scalar/None → list) -------------------------
     @field_validator(

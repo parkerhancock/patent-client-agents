@@ -550,7 +550,9 @@ Mechanics that are the same everywhere belong in
 `patent_client_agents.shared` instead of being copied into each module. Use
 `shared.envelope.dump(obj, **model_dump_kwargs)` to serialize records, and
 pass the `model_dump` options your tool's output shape needs (for example
-`by_alias=True` or `mode="json"`). Don't define a local `_dump`. HTTP connector clients subclass
+`by_alias=True` or `mode="json"`). Don't define a local `_dump`. Declare a 1-100 `limit` and a
+zero-based `offset` with `shared.paging.Limit100` and `shared.paging.Offset`,
+which put the bounds in the tool schema, instead of checking them in the body. HTTP connector clients subclass
 `shared.client.ConnectorClient` so `provenance_for` can report `cache_hit` and
 the original `retrieved_at` (§3). Module-level functions in `<pkg>/api.py`
 that only open a client, call one method and close it are declared as

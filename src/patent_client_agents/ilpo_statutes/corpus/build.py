@@ -26,11 +26,9 @@ ILPO / the Israeli Ministry of Justice.
 from __future__ import annotations
 
 import argparse
-import asyncio
 import logging
 import re
 import sqlite3
-import sys
 import time
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -41,6 +39,7 @@ import httpx
 from pypdf import PdfReader
 
 from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.corpus import atomic_output, run_build_cli
 
 from .schema import DDL, SCHEMA_VERSION
 
@@ -276,41 +275,39 @@ def write_corpus(
     snapshot_date: str,
     source_version: str,
 ) -> int:
-    output.parent.mkdir(parents=True, exist_ok=True)
-    if output.exists():
-        output.unlink()
-    conn = sqlite3.connect(output)
-    try:
-        conn.executescript(DDL)
-        for section in sections:
-            conn.execute(
-                """
-                INSERT INTO sections
-                    (statute, section_number, section_label, title, text, source_url)
-                VALUES (?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    section.statute,
-                    section.section_number,
-                    section.section_label,
-                    section.title,
-                    section.text,
-                    section.source_url,
-                ),
-            )
-        meta_rows = [
-            ("schema_version", str(SCHEMA_VERSION)),
-            ("snapshot_date", snapshot_date),
-            ("source_version", source_version),
-            ("section_count", str(len(sections))),
-        ]
-        conn.executemany("INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", meta_rows)
-        conn.execute("INSERT INTO sections_fts(sections_fts) VALUES ('optimize')")
-        conn.commit()
-        conn.isolation_level = None
-        conn.execute("VACUUM")
-    finally:
-        conn.close()
+    with atomic_output(output) as tmp_path:
+        conn = sqlite3.connect(tmp_path)
+        try:
+            conn.executescript(DDL)
+            for section in sections:
+                conn.execute(
+                    """
+                    INSERT INTO sections
+                        (statute, section_number, section_label, title, text, source_url)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        section.statute,
+                        section.section_number,
+                        section.section_label,
+                        section.title,
+                        section.text,
+                        section.source_url,
+                    ),
+                )
+            meta_rows = [
+                ("schema_version", str(SCHEMA_VERSION)),
+                ("snapshot_date", snapshot_date),
+                ("source_version", source_version),
+                ("section_count", str(len(sections))),
+            ]
+            conn.executemany("INSERT OR REPLACE INTO meta(key, value) VALUES (?, ?)", meta_rows)
+            conn.execute("INSERT INTO sections_fts(sections_fts) VALUES ('optimize')")
+            conn.commit()
+            conn.isolation_level = None
+            conn.execute("VACUUM")
+        finally:
+            conn.close()
     return len(sections)
 
 
@@ -370,22 +367,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--verbose", "-v", action="store_true", help="Log per-statute progress.")
     args = parser.parse_args(argv)
-    logging.basicConfig(
-        level=logging.INFO if args.verbose else logging.WARNING,
-        format="%(asctime)s %(levelname)s %(message)s",
+    return run_build_cli(
+        lambda: build_corpus(args.output),
+        verbose=args.verbose,
+        done=lambda count, elapsed: f"Wrote {count} sections to {args.output} in {elapsed:.1f}s",
+        to_stderr=True,
+        catch_errors=False,
     )
-    started = time.monotonic()
-    try:
-        count = asyncio.run(build_corpus(args.output))
-    except KeyboardInterrupt:
-        print("Interrupted", file=sys.stderr)
-        return 130
-    elapsed = time.monotonic() - started
-    print(
-        f"Wrote {count} sections to {args.output} in {elapsed:.1f}s",
-        file=sys.stderr,
-    )
-    return 0
 
 
 if __name__ == "__main__":

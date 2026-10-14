@@ -22,6 +22,7 @@ Legacy: passing client= parameter (deprecated, will be removed in v1.0)::
 from __future__ import annotations
 
 import warnings
+from typing import Any
 
 from pydantic import BaseModel, Field
 
@@ -114,7 +115,7 @@ async def search(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    search_kwargs = {
+    search_kwargs: dict[str, Any] = {
         "query": params.query,
         "version": params.version,
         "include_content": True,

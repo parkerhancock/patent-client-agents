@@ -1,13 +1,21 @@
-"""Tests for the MoPP build helpers (slug parsing, content extraction)."""
+"""Tests for the MoPP build helpers and an offline build smoke test."""
 
 from __future__ import annotations
+
+import asyncio
+from pathlib import Path
+
+import httpx
+import pytest
 
 from patent_client_agents.ukipo_mopp.corpus.build import (
     _enumerate_section_paths,
     _extract_main_content,
     _slug_to_section_number,
     _slug_to_title,
+    build_corpus,
 )
+from tests.corpus_build_support import read_corpus, serve, today
 
 
 class TestSlugToSectionNumber:
@@ -88,3 +96,40 @@ class TestExtractMainContent:
         assert frag == ""
         assert text == ""
         assert title is None
+
+
+_INDEX = "/guidance/manual-of-patent-practice-mopp"
+_PAGES = {
+    _INDEX: (
+        f'<a href="{_INDEX}/section-1-patentability">s1</a>'
+        f'<a href="{_INDEX}/-section-4a-methods-of-treatment">s4A</a>'
+        f'<a href="{_INDEX}">self</a>'
+    ),
+    f"{_INDEX}/section-1-patentability": (
+        "<main><h1>Manual of Patent Practice</h1><h2>Section 1: Patentability</h2>"
+        "<p>Inventions.</p><form>search</form></main>"
+    ),
+    f"{_INDEX}/-section-4a-methods-of-treatment": "<main><p>Methods of treatment.</p></main>",
+}
+
+
+def _pages(request: httpx.Request) -> str | None:
+    return _PAGES.get(request.url.path)
+
+
+def test_build_corpus_end_to_end(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    serve(monkeypatch, _pages)
+    out = tmp_path / "mopp.db"
+
+    count = asyncio.run(build_corpus(out, pause=0))
+
+    assert count == 2
+    rows, meta = read_corpus(out, columns="href, section_number, title, text")
+    assert [tuple(row)[:3] for row in rows] == [
+        ("-section-4a-methods-of-treatment", "4A", "Section 4A: methods of treatment"),
+        ("section-1-patentability", "1", "Section 1: Patentability"),
+    ]
+    assert "search" not in rows[1]["text"]
+    assert meta["source"] == f"https://www.gov.uk{_INDEX}"
+    assert meta["snapshot_date"] == today()
+    assert "source_version" not in meta

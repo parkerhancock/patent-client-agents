@@ -13,6 +13,8 @@ from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from patent_client_agents.shared.models import ApiModel
+
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
 
 
@@ -68,44 +70,44 @@ class ProductIndicationTerms(BaseModel):
     model_config = _BASE_CONFIG
 
 
-class View(BaseModel):
+class View(ApiModel):
     """One angle of a design representation (e.g. front, side, top)."""
 
     order: int
-    image_format: str = Field(alias="imageFormat")
+    image_format: str
 
     model_config = _BASE_CONFIG
 
 
-class Model3D(BaseModel):
+class Model3D(ApiModel):
     """3D model attached to a design."""
 
-    model_format: str = Field(alias="modelFormat")
+    model_format: str
 
     model_config = _BASE_CONFIG
 
 
-class Publication(BaseModel):
-    bulletin_number: str = Field(alias="bulletinNumber")
-    publication_section: str = Field(alias="publicationSection")
-    publication_date: date = Field(alias="publicationDate")
+class Publication(ApiModel):
+    bulletin_number: str
+    publication_section: str
+    publication_date: date
 
     model_config = _BASE_CONFIG
 
 
-class DesignSearchResultItem(BaseModel):
+class DesignSearchResultItem(ApiModel):
     """Lean row returned by ``GET /designs`` (search)."""
 
-    design_number: str = Field(alias="designNumber")
-    application_date: date = Field(alias="applicationDate")
+    design_number: str
+    application_date: date
     status: Status
     applicants: list[Person]
 
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    applicant_reference: str | None = Field(default=None, alias="applicantReference")
-    registration_date: date | None = Field(default=None, alias="registrationDate")
-    expiry_date: date | None = Field(default=None, alias="expiryDate")
-    locarno_classes: list[str] = Field(alias="locarnoClasses", default_factory=list)
+    application_number: str | None = None
+    applicant_reference: str | None = None
+    registration_date: date | None = None
+    expiry_date: date | None = None
+    locarno_classes: list[str] = Field(default_factory=list)
     representatives: list[Person] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
@@ -131,12 +133,12 @@ class DesignSearchResultItem(BaseModel):
         }
 
 
-class DesignSearchResult(BaseModel):
+class DesignSearchResult(ApiModel):
     """Envelope returned by ``GET /designs``."""
 
     designs: list[DesignSearchResultItem]
-    total_elements: int = Field(alias="totalElements")
-    total_pages: int = Field(alias="totalPages")
+    total_elements: int
+    total_pages: int
     size: int
     page: int
 
@@ -150,20 +152,16 @@ class Design(DesignSearchResultItem):
     metadata. Rare fields flow through via ``extra="allow"``.
     """
 
-    application_language: str | None = Field(default=None, alias="applicationLanguage")
-    second_language: str | None = Field(default=None, alias="secondLanguage")
-    status_date: date | None = Field(default=None, alias="statusDate")
-    effective_date: date | None = Field(default=None, alias="effectiveDate")
-    publication_deferment_indicator: bool | None = Field(
-        default=None, alias="publicationDefermentIndicator"
-    )
-    deferment_expiration_date: date | None = Field(default=None, alias="defermentExpirationDate")
-    renewal_status: str | None = Field(default=None, alias="renewalStatus")
+    application_language: str | None = None
+    second_language: str | None = None
+    status_date: date | None = None
+    effective_date: date | None = None
+    publication_deferment_indicator: bool | None = None
+    deferment_expiration_date: date | None = None
+    renewal_status: str | None = None
 
-    verbal_element: str | None = Field(default=None, alias="verbalElement")
-    product_indications: list[ProductIndicationTerms] = Field(
-        alias="productIndications", default_factory=list
-    )
+    verbal_element: str | None = None
+    product_indications: list[ProductIndicationTerms] = Field(default_factory=list)
 
     views: list[View] = Field(default_factory=list)
     model: Model3D | None = None

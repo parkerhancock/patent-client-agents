@@ -12,6 +12,8 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
+from patent_client_agents.shared.models import ApiModel
+
 Language = Literal["en", "fr"]
 """Output language code accepted by CanLII."""
 
@@ -22,10 +24,10 @@ class LegislationType(StrEnum):
     ANNUAL_STATUTE = "ANNUAL_STATUTE"
 
 
-class CaseDatabase(BaseModel):
+class CaseDatabase(ApiModel):
     """A CanLII court / tribunal database (one per court)."""
 
-    database_id: str = Field(alias="databaseId")
+    database_id: str
     jurisdiction: str
     name: str
 
@@ -39,30 +41,30 @@ class CaseId(BaseModel):
     fr: str | None = None
 
 
-class CaseRef(BaseModel):
+class CaseRef(ApiModel):
     """Lightweight case reference returned by browse/citator endpoints."""
 
-    database_id: str = Field(alias="databaseId")
-    case_id: CaseId = Field(alias="caseId")
+    database_id: str
+    case_id: CaseId
     title: str
     citation: str
 
     model_config = {"populate_by_name": True}
 
 
-class CaseMetadata(BaseModel):
+class CaseMetadata(ApiModel):
     """Full metadata for a single case."""
 
-    database_id: str = Field(alias="databaseId")
-    case_id: str = Field(alias="caseId")
+    database_id: str
+    case_id: str
     url: str
     title: str
     citation: str
     language: Language
-    docket_number: str | None = Field(default=None, alias="docketNumber")
-    decision_date: date | None = Field(default=None, alias="decisionDate")
+    docket_number: str | None = None
+    decision_date: date | None = None
     keywords: str | None = None
-    concatenated_id: str | None = Field(default=None, alias="concatenatedId")
+    concatenated_id: str | None = None
 
     model_config = {"populate_by_name": True}
 
@@ -73,23 +75,23 @@ class CaseList(BaseModel):
     cases: list[CaseRef]
 
 
-class CitedCasesResponse(BaseModel):
-    cited_cases: list[CaseRef] = Field(alias="citedCases")
+class CitedCasesResponse(ApiModel):
+    cited_cases: list[CaseRef]
 
     model_config = {"populate_by_name": True}
 
 
-class CitingCasesResponse(BaseModel):
-    citing_cases: list[CaseRef] = Field(alias="citingCases")
+class CitingCasesResponse(ApiModel):
+    citing_cases: list[CaseRef]
 
     model_config = {"populate_by_name": True}
 
 
-class CitedLegislationRef(BaseModel):
+class CitedLegislationRef(ApiModel):
     """A legislation reference returned by the citator."""
 
-    database_id: str = Field(alias="databaseId")
-    legislation_id: str = Field(alias="legislationId")
+    database_id: str
+    legislation_id: str
     title: str
     citation: str | None = None
     type: LegislationType | None = None
@@ -97,16 +99,16 @@ class CitedLegislationRef(BaseModel):
     model_config = {"populate_by_name": True}
 
 
-class CitedLegislationsResponse(BaseModel):
-    cited_legislations: list[CitedLegislationRef] = Field(alias="citedLegislations")
+class CitedLegislationsResponse(ApiModel):
+    cited_legislations: list[CitedLegislationRef]
 
     model_config = {"populate_by_name": True}
 
 
-class LegislationDatabase(BaseModel):
+class LegislationDatabase(ApiModel):
     """A CanLII legislation database (statutes or regulations, scoped by jurisdiction)."""
 
-    database_id: str = Field(alias="databaseId")
+    database_id: str
     type: LegislationType
     jurisdiction: str
     name: str
@@ -114,11 +116,11 @@ class LegislationDatabase(BaseModel):
     model_config = {"populate_by_name": True}
 
 
-class LegislationRef(BaseModel):
+class LegislationRef(ApiModel):
     """A legislation reference returned by browse."""
 
-    database_id: str = Field(alias="databaseId")
-    legislation_id: str = Field(alias="legislationId")
+    database_id: str
+    legislation_id: str
     title: str
     citation: str
     type: LegislationType
@@ -130,41 +132,41 @@ class LegislationList(BaseModel):
     legislations: list[LegislationRef]
 
 
-class LegislationPart(BaseModel):
+class LegislationPart(ApiModel):
     """A part (chapter / division) of a statute or regulation."""
 
-    part_id: str = Field(alias="partId")
-    part_name: str = Field(alias="partName")
+    part_id: str
+    part_name: str
 
     model_config = {"populate_by_name": True}
 
 
-class LegislationMetadata(BaseModel):
+class LegislationMetadata(ApiModel):
     """Full metadata for a single statute or regulation."""
 
-    legislation_id: str = Field(alias="legislationId")
+    legislation_id: str
     url: str
     title: str
     citation: str
     type: LegislationType
     language: Language
-    date_scheme: str | None = Field(default=None, alias="dateScheme")
-    start_date: date | None = Field(default=None, alias="startDate")
-    end_date: date | None = Field(default=None, alias="endDate")
+    date_scheme: str | None = None
+    start_date: date | None = None
+    end_date: date | None = None
     repealed: str | None = None
     content: list[LegislationPart] = Field(default_factory=list)
 
     model_config = {"populate_by_name": True}
 
 
-class CaseDatabaseList(BaseModel):
-    case_databases: list[CaseDatabase] = Field(alias="caseDatabases")
+class CaseDatabaseList(ApiModel):
+    case_databases: list[CaseDatabase]
 
     model_config = {"populate_by_name": True}
 
 
-class LegislationDatabaseList(BaseModel):
-    legislation_databases: list[LegislationDatabase] = Field(alias="legislationDatabases")
+class LegislationDatabaseList(ApiModel):
+    legislation_databases: list[LegislationDatabase]
 
     model_config = {"populate_by_name": True}
 

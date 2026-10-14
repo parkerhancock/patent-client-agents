@@ -23,39 +23,22 @@ Conventions:
 
 from __future__ import annotations
 
-from datetime import date, datetime
-from typing import Any
+from datetime import date
+from typing import Annotated, Any
 
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator
+from pydantic import AliasChoices, BaseModel, BeforeValidator, ConfigDict, Field
+
+from patent_client_agents.shared.models import lenient_date
 
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
 
 
-def _parse_tipo_date(value: Any) -> date | None:
-    """Parse a TIPO ``YYYY/MM/DD`` date string into a ``date``.
-
-    TIPO converts Republic of China era dates to Gregorian for the
-    public OpenData feed, so a value like ``"2017/03/03"`` is the
-    canonical Gregorian year. Empty strings, whitespace, ``"0/0/0"``
-    placeholders, and other non-parseable input return ``None`` so the
-    row model still validates.
-    """
-
-    if value is None:
-        return None
-    if isinstance(value, date):
-        return value
-    if not isinstance(value, str):
-        return None
-    raw = value.strip()
-    if not raw or raw in {"0/0/0", "0000/00/00"}:
-        return None
-    for fmt in ("%Y/%m/%d", "%Y-%m-%d"):
-        try:
-            return datetime.strptime(raw, fmt).date()
-        except ValueError:
-            continue
-    return None
+# TIPO converts Republic of China era dates to Gregorian for the public
+# OpenData feed, so ``"2017/03/03"`` is the Gregorian year. Blank strings,
+# ``"0/0/0"`` / ``"0000/00/00"`` placeholders, and anything else unparseable
+# become ``None`` so the row model still validates.
+_parse_tipo_date = lenient_date("%Y/%m/%d", "%Y-%m-%d", keep_datetime=True)
+_TipoDate = Annotated[date | None, BeforeValidator(_parse_tipo_date)]
 
 
 # ---------------------------------------------------------------------------
@@ -153,14 +136,9 @@ class PublicationReference(BaseModel):
     notice_no: int | None = Field(default=None, alias="notice-no")
     notice_volno: int | None = Field(default=None, alias="notice-volno")
     notice_isuno: int | None = Field(default=None, alias="notice-isuno")
-    notice_date: date | None = Field(default=None, alias="notice-date")
+    notice_date: _TipoDate = Field(default=None, alias="notice-date")
 
     model_config = _BASE_CONFIG
-
-    @field_validator("notice_date", mode="before")
-    @classmethod
-    def _parse_notice_date(cls, value: Any) -> date | None:
-        return _parse_tipo_date(value)
 
 
 class ApplicationReference(BaseModel):
@@ -172,36 +150,23 @@ class ApplicationReference(BaseModel):
     """
 
     appl_no: str | None = Field(default=None, alias="appl-no")
-    appl_date: date | None = Field(default=None, alias="appl-date")
-    first_date: date | None = Field(default=None, alias="first-date")
+    appl_date: _TipoDate = Field(default=None, alias="appl-date")
+    first_date: _TipoDate = Field(default=None, alias="first-date")
     foreign_language: str | None = Field(default=None, alias="foreign-language")
     foreign_language_desc: str | None = Field(default=None, alias="foreign-language-desc")
     desing_type: str | None = Field(default=None, alias="desing-type")
     desing_type_desc: str | None = Field(default=None, alias="desing-type-desc")
     appl_class: str | None = Field(default=None, alias="appl-class")
     appl_class_desc: str | None = Field(default=None, alias="appl-class-desc")
-    material_appl_date: date | None = Field(default=None, alias="material-appl-date")
+    material_appl_date: _TipoDate = Field(default=None, alias="material-appl-date")
     material_flag: str | None = Field(default=None, alias="material-flag")
-    faplexm_date: date | None = Field(default=None, alias="faplexm-date")
-    reappl_date: date | None = Field(default=None, alias="reappl-date")
-    raplexam_date: date | None = Field(default=None, alias="raplexam-date")
+    faplexm_date: _TipoDate = Field(default=None, alias="faplexm-date")
+    reappl_date: _TipoDate = Field(default=None, alias="reappl-date")
+    raplexam_date: _TipoDate = Field(default=None, alias="raplexam-date")
     agree_flag: str | None = Field(default=None, alias="agree-flag")
     twins_flag: str | None = Field(default=None, alias="twins-flag")
 
     model_config = _BASE_CONFIG
-
-    @field_validator(
-        "appl_date",
-        "first_date",
-        "material_appl_date",
-        "faplexm_date",
-        "reappl_date",
-        "raplexam_date",
-        mode="before",
-    )
-    @classmethod
-    def _parse_dates(cls, value: Any) -> date | None:
-        return _parse_tipo_date(value)
 
 
 class PatentTitle(BaseModel):
@@ -216,12 +181,12 @@ class PatentTitle(BaseModel):
 class PatentRight(BaseModel):
     """``patent-right`` sub-object on PatentRightsRow."""
 
-    licence_date: date | None = Field(default=None, alias="licence-date")
-    relicence_date: date | None = Field(default=None, alias="relicence-date")
+    licence_date: _TipoDate = Field(default=None, alias="licence-date")
+    relicence_date: _TipoDate = Field(default=None, alias="relicence-date")
     patent_no: str | None = Field(default=None, alias="patent-no")
-    patent_bdate: date | None = Field(default=None, alias="patent-bdate")
-    patent_edate: date | None = Field(default=None, alias="patent-edate")
-    charge_expir_date: date | None = Field(default=None, alias="charge-expir-date")
+    patent_bdate: _TipoDate = Field(default=None, alias="patent-bdate")
+    patent_edate: _TipoDate = Field(default=None, alias="patent-edate")
+    charge_expir_date: _TipoDate = Field(default=None, alias="charge-expir-date")
     charge_expir_year: str | None = Field(default=None, alias="charge-expir-year")
     rent_status: int | None = Field(default=None, alias="rent-status")
     mortgage_status: int | None = Field(default=None, alias="mortgage-status")
@@ -232,28 +197,14 @@ class PatentRight(BaseModel):
     nullity_status: int | None = Field(default=None, alias="nullity-status")
     continue_status: int | None = Field(default=None, alias="continue-status")
     expand_status: int | None = Field(default=None, alias="expand-status")
-    cancel_date: date | None = Field(default=None, alias="cancel-date")
+    cancel_date: _TipoDate = Field(default=None, alias="cancel-date")
     cancel_result: str | None = Field(default=None, alias="cancel-result")
-    revoke_date: date | None = Field(default=None, alias="revoke-date")
+    revoke_date: _TipoDate = Field(default=None, alias="revoke-date")
     revoke_code: str | None = Field(default=None, alias="revoke-code")
     dep_patent_class: str | None = Field(default=None, alias="dep-patent-class")
     dep_appl_no: str | None = Field(default=None, alias="dep-appl-no")
 
     model_config = _BASE_CONFIG
-
-    @field_validator(
-        "licence_date",
-        "relicence_date",
-        "patent_bdate",
-        "patent_edate",
-        "charge_expir_date",
-        "cancel_date",
-        "revoke_date",
-        mode="before",
-    )
-    @classmethod
-    def _parse_dates(cls, value: Any) -> date | None:
-        return _parse_tipo_date(value)
 
 
 # ---------------------------------------------------------------------------
@@ -273,7 +224,7 @@ class PatentApplRow(BaseModel):
 
     sequence: int | None = None
     appl_no: str | None = Field(default=None, alias="appl-no")
-    appl_date: date | None = Field(default=None, alias="appl-date")
+    appl_date: _TipoDate = Field(default=None, alias="appl-date")
     appl_countrycode: str | None = Field(default=None, alias="appl-countrycode")
     appl_country: str | None = Field(default=None, alias="appl-country")
     publish_flag: str | None = Field(default=None, alias="publish-flag")
@@ -281,11 +232,6 @@ class PatentApplRow(BaseModel):
     classification_loc: list[Any] = Field(default_factory=list, alias="classification-loc")
 
     model_config = _BASE_CONFIG
-
-    @field_validator("appl_date", mode="before")
-    @classmethod
-    def _parse_appl_date(cls, value: Any) -> date | None:
-        return _parse_tipo_date(value)
 
 
 class PatentPubRow(BaseModel):
@@ -346,25 +292,15 @@ class PatentAnnuityRow(BaseModel):
 
     sequence: int | None = None
     appl_no: str | None = Field(default=None, alias="appl-no")
-    licence_date: date | None = Field(default=None, alias="licence-date")
-    relicence_date: date | None = Field(default=None, alias="relicence-date")
+    licence_date: _TipoDate = Field(default=None, alias="licence-date")
+    relicence_date: _TipoDate = Field(default=None, alias="relicence-date")
     patent_no: str | None = Field(default=None, alias="patent-no")
     publish_no: str | None = Field(default=None, alias="publish-no")
-    charge_expir_date: date | None = Field(default=None, alias="charge-expir-date")
+    charge_expir_date: _TipoDate = Field(default=None, alias="charge-expir-date")
     charge_expir_year: str | None = Field(default=None, alias="charge-expir-year")
     charges: list[Any] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
-
-    @field_validator(
-        "licence_date",
-        "relicence_date",
-        "charge_expir_date",
-        mode="before",
-    )
-    @classmethod
-    def _parse_dates(cls, value: Any) -> date | None:
-        return _parse_tipo_date(value)
 
 
 class PatentTwinsRow(BaseModel):
@@ -433,7 +369,7 @@ class TmarkApplRow(BaseModel):
 
     sequence: int | None = None
     appl_no: str | None = Field(default=None, alias="appl-no")
-    appl_date: date | None = Field(default=None, alias="appl-date")
+    appl_date: _TipoDate = Field(default=None, alias="appl-date")
     tmark_name: str | None = Field(default=None, alias="tmark-name")
     tmark_class: str | None = Field(default=None, alias="tmark-class")
     tmark_class_desc: str | None = Field(default=None, alias="tmark-class-desc")
@@ -451,15 +387,10 @@ class TmarkApplRow(BaseModel):
     goodsclass: list[Any] = Field(
         default_factory=list, validation_alias=AliasChoices("goodsclasses", "goodsclass")
     )
-    receive_date: date | None = Field(default=None, alias="receive-date")
+    receive_date: _TipoDate = Field(default=None, alias="receive-date")
     parties: dict[str, Any] | None = None
 
     model_config = _BASE_CONFIG
-
-    @field_validator("appl_date", "receive_date", mode="before")
-    @classmethod
-    def _parse_dates(cls, value: Any) -> date | None:
-        return _parse_tipo_date(value)
 
 
 class TmarkRightsRow(BaseModel):
@@ -485,12 +416,12 @@ class TmarkRightsRow(BaseModel):
     goodsclass: list[Any] = Field(
         default_factory=list, validation_alias=AliasChoices("goodsclasses", "goodsclass")
     )
-    deadline: date | None = None
-    receive_date: date | None = Field(default=None, alias="receive-date")
-    appl_date: date | None = Field(default=None, alias="appl-date")
-    reg_date: date | None = Field(default=None, alias="reg-date")
-    reg_notice_date: date | None = Field(default=None, alias="reg-notice-date")
-    exam_notice_date: date | None = Field(default=None, alias="exam-notice-date")
+    deadline: _TipoDate = None
+    receive_date: _TipoDate = Field(default=None, alias="receive-date")
+    appl_date: _TipoDate = Field(default=None, alias="appl-date")
+    reg_date: _TipoDate = Field(default=None, alias="reg-date")
+    reg_notice_date: _TipoDate = Field(default=None, alias="reg-notice-date")
+    exam_notice_date: _TipoDate = Field(default=None, alias="exam-notice-date")
     del_reason: str | None = Field(default=None, alias="del-reason")
     vol_no1: str | None = Field(default=None, alias="vol-no1")
     vol_no2: str | None = Field(default=None, alias="vol-no2")
@@ -511,19 +442,6 @@ class TmarkRightsRow(BaseModel):
     parties: dict[str, Any] | None = None
 
     model_config = _BASE_CONFIG
-
-    @field_validator(
-        "deadline",
-        "receive_date",
-        "appl_date",
-        "reg_date",
-        "reg_notice_date",
-        "exam_notice_date",
-        mode="before",
-    )
-    @classmethod
-    def _parse_dates(cls, value: Any) -> date | None:
-        return _parse_tipo_date(value)
 
 
 class TmarkPriorityRow(BaseModel):
@@ -586,18 +504,13 @@ class TmarkDivideRow(BaseModel):
     goodsclass: list[Any] = Field(
         default_factory=list, validation_alias=AliasChoices("goodsclasses", "goodsclass")
     )
-    divide_date: date | None = Field(default=None, alias="divide-date")
+    divide_date: _TipoDate = Field(default=None, alias="divide-date")
     origin_exam_no: dict[str, Any] | str | None = Field(default=None, alias="origin-exam-no")
     origin_tmark_class: str | None = Field(default=None, alias="origin-tmark-class")
     origin_tmark_class_desc: str | None = Field(default=None, alias="origin-tmark-class-desc")
     divide_count: int | None = Field(default=None, alias="divide-count")
 
     model_config = _BASE_CONFIG
-
-    @field_validator("divide_date", mode="before")
-    @classmethod
-    def _parse_divide_date(cls, value: Any) -> date | None:
-        return _parse_tipo_date(value)
 
 
 __all__ = [
