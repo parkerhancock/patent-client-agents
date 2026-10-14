@@ -21,6 +21,7 @@ import re
 from typing import Any
 
 from patent_client_agents.fts_query import translate_fts_query
+from patent_client_agents.shared.errors import SectionNotFoundError
 
 from .corpus.db import CorpusDB, CorpusUnavailable
 from .models import MoppSearchHit, MoppSearchResponse, MoppSection, MoppVersion
@@ -172,12 +173,12 @@ class MoppClient:
         if SECTION_NUMBER_PATTERN.match(section):
             row = db.get_section(section_number=section)
             if row is None:
-                raise ValueError(f"Could not find MOPP section '{section}'")
+                raise SectionNotFoundError(f"Could not find MOPP section '{section}'")
         else:
             href = _normalize_href(section)
             row = db.get_section(href=href)
             if row is None:
-                raise ValueError(f"Could not find MOPP href '{section}'")
+                raise SectionNotFoundError(f"Could not find MOPP href '{section}'")
         return MoppSection(
             href=row.href,
             html=row.html,

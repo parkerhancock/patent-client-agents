@@ -140,3 +140,11 @@ async def test_tools_are_mounted_on_root_server() -> None:
     tool_names = {tool.name for tool in await ip_mcp.list_tools()}
 
     assert {"search_legifrance_ip", "get_legifrance_section"} <= tool_names
+
+
+async def test_get_list_reports_missing_citation(legifrance_ip_corpus_env: Path) -> None:
+    result = await get_legifrance_section(citation=["L. 611-10 CPI", "L. 999-99 CPI"])
+    assert len(result.items) == 1
+    assert result.not_found == ["L. 999-99 CPI"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: L. 999-99 CPI.")

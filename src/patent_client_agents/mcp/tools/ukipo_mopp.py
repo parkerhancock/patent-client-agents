@@ -12,7 +12,6 @@ warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -20,6 +19,7 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.ukipo_mopp import MoppClient, get_corpus_status
 
 ukipo_mopp_mcp = FastMCP("UKIPO MoPP")
@@ -37,12 +37,6 @@ ukipo_mopp_mcp = FastMCP("UKIPO MoPP")
 _MOPP_BASE = "https://www.gov.uk"
 _MOPP_NAME = "UKIPO Manual of Patent Practice (MoPP)"
 _MOPP_INDEX_PATH = "/guidance/manual-of-patent-practice-mopp"
-
-# Bounded fan-out for list-accepting get_mopp_section (§5.4). SQLite
-# reads are fast so the concurrency budget is conservative — the cap
-# exists so a multi-section portfolio doesn't open many connections at
-# once.
-_MOPP_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5). Truncate so a multi-hit page fits comfortably
 # under the §5.5 token budget.
@@ -205,7 +199,7 @@ async def get_mopp_section(
         "either for portfolio workflows. Examples: '1', "
         "['1', '4A', '14', 'glossary-of-terms-and-abbreviations-used-in-this-manual'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more UKIPO Manual of Patent Practice (MoPP) sections by number or slug.
 
     Returns each section's title, full HTML, plaintext, and the resolved
@@ -222,34 +216,34 @@ async def get_mopp_section(
 
     Related tools: search_mopp.
     """
-    refs = [section] if isinstance(section, str) else list(section)
-    if not refs:
-        raise ValidationError("get_mopp_section requires at least one section reference")
+    refs = as_id_list(section, noun="MoPP section reference")
 
-    semaphore = asyncio.Semaphore(_MOPP_FANOUT_CONCURRENCY)
+    async with MoppClient() as client:
 
-    async def _fetch_one(client: MoppClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section(ref)
             return record.model_dump()
 
-    async with MoppClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(section, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
-        href = results[0].get("href") or refs[0]
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
+        ref = refs[0]
+        href = items[0].get("href") or ref
         path = f"{_MOPP_INDEX_PATH}/{href.lstrip('-')}"
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} MoPP sections ({corpus_label}): {joined}"
+        if len(refs) == 1:
+            summary = f"MoPP section {refs[0]} — not found."
+        else:
+            summary = fetched_summary(len(items), len(refs), "MoPP sections", not_found)
         path = _MOPP_INDEX_PATH
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_mopp_provenance(path),
     )
 

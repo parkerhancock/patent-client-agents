@@ -14,7 +14,6 @@ agents can warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -27,6 +26,7 @@ from patent_client_agents.ipo_in_statutes import (
     get_corpus_status,
     parse_citation,
 )
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 ipo_in_statutes_mcp = FastMCP("IPO India — Statutes")
 
@@ -42,8 +42,6 @@ ipo_in_statutes_mcp = FastMCP("IPO India — Statutes")
 _IPO_IN_SOURCE_NAME = "IPO India — IP statutes"
 _INDIACODE_BASE = "https://indiacode.nic.in"
 _IPINDIA_BASE = "https://ipindia.gov.in"
-
-_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5).
 _LEAN_SNIPPET_CHARS = 400
@@ -199,7 +197,7 @@ async def get_ipo_in_section(
         "['Section 3(d) Patents Act', 'Section 84 Patents Act', "
         "'Section 9 Trade Marks Act'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more sections of the bundled Indian IP Acts by citation.
 
     Accepts free-text citations like 'Section 3(d) Patents Act' or
@@ -214,35 +212,34 @@ async def get_ipo_in_section(
 
     Related tools: search_ipo_in_statutes, get_ipo_in_mppp_section.
     """
-    refs = [citation] if isinstance(citation, str) else list(citation)
-    if not refs:
-        raise ValidationError("get_ipo_in_section requires at least one citation")
+    refs = as_id_list(citation, noun="IPO India statute citation")
 
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+    async with IpoInStatutesClient() as client:
 
-    async def _fetch_one(client: IpoInStatutesClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section_by_citation(ref)
             return record.model_dump()
 
-    async with IpoInStatutesClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
-        src_url = results[0].get("source_url") or f"{_IPINDIA_BASE}/"
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
+        src_url = items[0].get("source_url") or f"{_IPINDIA_BASE}/"
     else:
-        summary = (
-            f"Fetched {len(results)} IPO India statute sections (corpus {corpus_label}): "
-            + ", ".join(refs)
-        )
+        if len(refs) == 1:
+            summary = f"IPO India statute section {refs[0]} — not found."
+        else:
+            summary = fetched_summary(
+                len(items), len(refs), "IPO India statute sections", not_found
+            )
         src_url = f"{_INDIACODE_BASE}/handle/123456789"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_statutes_provenance(src_url),
     )
 

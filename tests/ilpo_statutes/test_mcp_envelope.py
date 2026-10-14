@@ -241,6 +241,7 @@ async def test_get_ilpo_section_partial_not_found_path():
     assert len(result.items) == 1
     assert "1 of 2" in result.summary
     assert "Not found" in result.summary
+    assert result.not_found == ["Section 9999 Patents Law"]
 
 
 @pytest.mark.asyncio

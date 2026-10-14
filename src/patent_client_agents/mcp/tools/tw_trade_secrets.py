@@ -17,7 +17,6 @@ scope is statute corpus only.
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -25,6 +24,7 @@ from fastmcp import FastMCP
 from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.tw_trade_secrets import (
     TwTradeSecretsClient,
     get_corpus_status,
@@ -45,8 +45,6 @@ tw_trade_secrets_mcp = FastMCP("Taiwan — Trade Secrets Act")
 _TW_SOURCE_NAME = "Taiwan — Trade Secrets Act (EN translation)"
 _LAW_MOJ_BASE = "https://law.moj.gov.tw/Eng"
 _LAW_MOJ_TRADE_SECRETS_URL = f"{_LAW_MOJ_BASE}/LawClass/LawAll.aspx?pcode=J0080028"
-
-_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5).
 _LEAN_SNIPPET_CHARS = 400
@@ -190,7 +188,7 @@ async def get_tw_trade_secrets_section(
         "workflows. Examples: 'Art. 2 Trade Secrets Act', ['Art. 2', "
         "'Art. 13', 'Art. 13-1'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more Articles of the Taiwan Trade Secrets Act by citation.
 
     Accepts free-text citations like 'Art. 2 Trade Secrets Act' or
@@ -204,33 +202,29 @@ async def get_tw_trade_secrets_section(
 
     Related tools: search_tw_trade_secrets.
     """
-    refs = [citation] if isinstance(citation, str) else list(citation)
-    if not refs:
-        raise ValidationError("get_tw_trade_secrets_section requires at least one citation")
+    refs = as_id_list(citation, noun="Taiwan Trade Secrets Act citation")
 
-    semaphore = asyncio.Semaphore(_FANOUT_CONCURRENCY)
+    async with TwTradeSecretsClient() as client:
 
-    async def _fetch_one(client: TwTradeSecretsClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section_by_citation(ref)
             return record.model_dump()
 
-    async with TwTradeSecretsClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(citation, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
+    elif len(refs) == 1:
+        summary = f"Taiwan Trade Secrets Article {refs[0]} — not found."
     else:
-        summary = (
-            f"Fetched {len(results)} Taiwan Trade Secrets Articles (corpus {corpus_label}): "
-            + ", ".join(refs)
-        )
+        summary = fetched_summary(len(items), len(refs), "Taiwan Trade Secrets Articles", not_found)
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_statutes_provenance(_LAW_MOJ_TRADE_SECRETS_URL),
     )
 

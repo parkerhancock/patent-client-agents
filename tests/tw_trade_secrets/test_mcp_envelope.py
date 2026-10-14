@@ -130,3 +130,13 @@ async def test_get_provenance_carries_corpus_fields(
 async def test_get_empty_list_raises(tw_trade_secrets_corpus_env: Path) -> None:
     with pytest.raises(ValidationError, match="at least one"):
         await get_tw_trade_secrets_section(citation=[])
+
+
+async def test_get_list_reports_missing_citation(tw_trade_secrets_corpus_env: Path) -> None:
+    result = await get_tw_trade_secrets_section(
+        citation=["Art. 2 Trade Secrets Act", "Art. 99 Trade Secrets Act"]
+    )
+    assert len(result.items) == 1
+    assert result.not_found == ["Art. 99 Trade Secrets Act"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: Art. 99 Trade Secrets Act.")

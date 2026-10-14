@@ -21,6 +21,8 @@ from __future__ import annotations
 import os
 import re
 
+from patent_client_agents.shared.errors import SectionNotFoundError
+
 from .corpus.db import CorpusDB, CorpusSection, CorpusUnavailable
 from .corpus.schema import STATUTE_KEYS
 from .models import DpmaCorpusMeta, DpmaSearchHit, DpmaSearchResult, DpmaSection
@@ -193,11 +195,11 @@ class DpmaStatutesClient:
         if canon is not None:
             row = db.get_section(statute=canon, section=section)
             if row is None:
-                raise ValueError(f"Section {section!r} not found in {canon!r}.")
+                raise SectionNotFoundError(f"Section {section!r} not found in {canon!r}.")
             return _section_to_model(row)
         rows = db.find_section_by_number(section)
         if not rows:
-            raise ValueError(f"Section {section!r} not found in any bundled statute.")
+            raise SectionNotFoundError(f"Section {section!r} not found in any bundled statute.")
         if len(rows) > 1:
             names = ", ".join(r.statute for r in rows)
             raise ValueError(

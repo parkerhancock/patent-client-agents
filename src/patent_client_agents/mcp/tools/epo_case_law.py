@@ -14,7 +14,6 @@ can warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -24,6 +23,7 @@ from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.epo_case_law import CaseLawClient, get_corpus_status
 from patent_client_agents.epo_case_law.client import _CITATION_PATTERN, _SLUG_PATTERN
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 epo_case_law_mcp = FastMCP("EPO Case Law")
 
@@ -38,9 +38,6 @@ epo_case_law_mcp = FastMCP("EPO Case Law")
 
 _CASELAW_BASE = "https://www.epo.org"
 _CASELAW_NAME = "EPO Boards of Appeal Case Law Compendium"
-
-# Bounded fan-out for list-accepting get_epo_case_law_section (§5.4).
-_CASELAW_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5).
 _CASELAW_LEAN_SNIPPET_CHARS = 400
@@ -217,7 +214,7 @@ async def get_epo_case_law_section(
         "like 'clr_i_a_1', or full epo.org URLs. Examples: 'I.D.3', "
         "['I.D.3', 'II.E.1', 'II.C.4'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more EPO Case Law sections by citation or slug.
 
     Returns each section's title, full HTML, plaintext, and the resolved
@@ -233,38 +230,37 @@ async def get_epo_case_law_section(
 
     Related tools: search_epo_case_law.
     """
-    refs = [section] if isinstance(section, str) else list(section)
-    if not refs:
-        raise ValidationError("get_epo_case_law_section requires at least one section reference")
+    refs = as_id_list(section, noun="Case Law section reference")
 
-    semaphore = asyncio.Semaphore(_CASELAW_FANOUT_CONCURRENCY)
+    async with CaseLawClient() as client:
 
-    async def _fetch_one(client: CaseLawClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section(ref)
             return _section_to_dict(record)
 
-    async with CaseLawClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(section, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
         ref = refs[0]
-        href = results[0].get("href")
+        href = items[0].get("href")
         if href and _looks_like_section_ref(ref):
             path = f"/en/legal/case-law/{corpus_label}/{href}.html"
         else:
             path = "/en/legal/case-law"
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} EPO Case Law sections ({corpus_label}): {joined}"
+        if len(refs) == 1:
+            summary = f"EPO Case Law section {refs[0]} — not found."
+        else:
+            summary = fetched_summary(len(items), len(refs), "EPO Case Law sections", not_found)
         path = "/en/legal/case-law"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_caselaw_provenance(path),
     )
 

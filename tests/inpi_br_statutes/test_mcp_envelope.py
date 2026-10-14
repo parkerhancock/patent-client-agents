@@ -110,9 +110,8 @@ async def test_get_list_preserves_order() -> None:
     assert isinstance(result, ListEnvelope)
     hrefs = [item["href"] for item in result.items]
     assert hrefs == ["art6", "art125", "art195"]
-    assert "Fetched 3" in result.summary
-    for ref in refs:
-        assert ref in result.summary
+    assert result.summary.startswith("Fetched 3 of 3 ")
+    assert result.not_found == []
     # Multi-record path is the collection root.
     assert result.provenance.source_url.endswith("l9279.htm")
 
@@ -130,3 +129,11 @@ async def test_get_handles_lpi_suffix() -> None:
 
     assert len(result.items) == 1
     assert result.items[0]["href"] == "art195"
+
+
+async def test_get_list_reports_missing_citation() -> None:
+    result = await get_inpi_br_section(citation=["Art. 6", "Art. 9999"])
+    assert len(result.items) == 1
+    assert result.not_found == ["Art. 9999"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: Art. 9999.")

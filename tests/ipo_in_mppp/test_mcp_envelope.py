@@ -93,3 +93,11 @@ async def test_get_provenance_corpus_fields(ipo_in_mppp_corpus_env: Path) -> Non
 async def test_get_empty_list_raises(ipo_in_mppp_corpus_env: Path) -> None:
     with pytest.raises(ValidationError, match="at least one"):
         await get_ipo_in_mppp_section(citation=[])
+
+
+async def test_get_list_reports_missing_citation(ipo_in_mppp_corpus_env: Path) -> None:
+    result = await get_ipo_in_mppp_section(citation=["04.05.01", "99.99.99"])
+    assert len(result.items) == 1
+    assert result.not_found == ["99.99.99"]
+    assert result.summary.startswith("Fetched 1 of 2 ")
+    assert result.summary.endswith("Not found: 99.99.99.")

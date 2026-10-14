@@ -19,13 +19,12 @@ standalone trade-secret statute rather than a Civil Code section.
 
 from __future__ import annotations
 
-import asyncio
-from typing import Annotated, Any, cast
+from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import ListEnvelope, make_provenance
-from mcp_data_core.exceptions import NotFoundError, ValidationError
+from mcp_data_core.exceptions import NotFoundError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.ilpo_statutes import (
     IlpoStatutesClient,
@@ -39,6 +38,7 @@ from patent_client_agents.ilpo_statutes.client import _resolve_statute, parse_ci
 from patent_client_agents.ilpo_tm import CKAN_HOST as ILPO_TM_HOST
 from patent_client_agents.ilpo_tm import IlpoTmClient
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 ilpo_mcp = FastMCP("ILPO Israel")
 
@@ -75,7 +75,6 @@ def _ilpo_tm_provenance(path: str) -> Any:
     )
 
 
-_STATUTES_FANOUT_CONCURRENCY = 5
 _DEFAULT_TM_DATASET_ID = "trade-marks"
 
 
@@ -151,7 +150,7 @@ async def get_ilpo_section(
             "'Section 3 Patents Law'] for a batch read."
         ),
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Fetch one or more sections from the ILPO Israel statutes corpus by citation.
 
     Resolves citations like ``Section 3 Patents Law`` or
@@ -162,24 +161,15 @@ async def get_ilpo_section(
 
     Related tools: search_ilpo_statutes.
     """
-    citations = [citation] if isinstance(citation, str) else list(citation)
-    if not citations:
-        raise ValidationError("get_ilpo_section requires at least one citation")
-
-    semaphore = asyncio.Semaphore(_STATUTES_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: IlpoStatutesClient, cit: str) -> dict | None:
-        async with semaphore:
-            section = await client.get_section_by_citation(cit)
-        if section is None:
-            return None
-        return cast("dict[str, Any]", section.model_dump())
+    citations = as_id_list(citation, noun="ILPO statute citation")
 
     async with IlpoStatutesClient() as client:
-        fetched = await asyncio.gather(*[_fetch_one(client, c) for c in citations])
 
-    items: list[dict] = [r for r in fetched if r is not None]
-    not_found = [c for c, r in zip(citations, fetched, strict=True) if r is None]
+        async def _fetch_one(cit: str) -> dict | None:
+            section = await client.get_section_by_citation(cit)
+            return dump(section) if section is not None else None
+
+        items, not_found = await fetch_many(citations, _fetch_one, single=isinstance(citation, str))
 
     if len(citations) == 1 and items:
         first = items[0]
@@ -188,12 +178,12 @@ async def get_ilpo_section(
     elif len(citations) == 1:
         summary = f"ILPO Israel section {citations[0]!r} — not found."
     else:
-        head = f"Fetched {len(items)} of {len(citations)} ILPO sections."
-        summary = head + (f" Not found: {', '.join(not_found)}." if not_found else "")
+        summary = fetched_summary(len(items), len(citations), "ILPO sections", not_found)
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_ilpo_statutes_provenance(),
     )
 

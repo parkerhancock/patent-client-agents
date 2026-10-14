@@ -20,7 +20,6 @@ Information Retrieval API base.
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any, Literal
 
 import httpx
@@ -44,6 +43,7 @@ from mcp_data_core.mcp.downloads import (
     read_resource,
 )
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 _JPO_REQUIRED_ENV: list[str] = ["JPO_API_USERNAME", "JPO_API_PASSWORD"]
 
@@ -164,7 +164,6 @@ async def _jpo_document_bundle_resource(ip_type: str, application_number: str, d
 
 _JPO_BASE = "https://ip-data.jpo.go.jp"
 _JPO_NAME = "Japan Patent Office (JPO)"
-_JPO_FANOUT_CONCURRENCY = 5
 
 
 def _jpo_provenance(path: str) -> Any:
@@ -298,7 +297,7 @@ async def get_jpo_progress(
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get full prosecution status for a JPO patent, design, or trademark filing.
 
     Returns title, applicants, filing/publication/registration dates,
@@ -307,42 +306,39 @@ async def get_jpo_progress(
     the file-wrapper inventory.
 
     Per §5.4 accepts a single number or a list; the response is always a
-    ListEnvelope. Each item is the per-application record, or ``{}`` for
-    an unknown number (status 107 / 111). Bounded concurrent fan-out
+    ListEnvelope. An unknown number (status 107 / 111) is left out of
+    ``items`` and listed in ``not_found``. Bounded concurrent fan-out
     internally.
 
     Related tools: get_jpo_progress_simple, get_jpo_priority_info,
     get_jpo_registration_info, get_jpo_documents, get_jpo_jplatpat_url.
     """
+    numbers = as_id_list(application_number, noun="JP application number")
     ip = _validate_ip_type(ip_type)
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_jpo_progress requires at least one application number")
-
-    semaphore = asyncio.Semaphore(_JPO_FANOUT_CONCURRENCY)
     from patent_client_agents.jpo import JpoClient
 
-    async def _fetch_one(client: Any, appl: str) -> dict:
-        async with semaphore:
-            method = getattr(client, _JPO_PROGRESS_METHODS[ip])
-            result = await method(appl)
-            return dump(result) if result else {}  # type: ignore[return-value]
-
     async with JpoClient() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        method = getattr(client, _JPO_PROGRESS_METHODS[ip])
+
+        async def _fetch_one(appl: str) -> dict | None:
+            result = await method(appl)
+            return dump(result) if result else None
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
 
     if len(numbers) == 1:
-        summary = _summarize_jpo_progress(numbers[0], items[0])
+        summary = _summarize_jpo_progress(numbers[0], items[0] if items else {})
         path = f"/{ip}/v1/app_progress/{numbers[0]}"
     else:
-        summary = f"Fetched {len(items)} JPO {ip} progress records: " + ", ".join(numbers)
+        summary = fetched_summary(len(items), len(numbers), f"JPO {ip} progress records", not_found)
         path = f"/{ip}/v1/app_progress"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_jpo_provenance(path),
     )
 
@@ -357,7 +353,7 @@ async def get_jpo_progress_simple(
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get a simplified JPO status (no priority or family detail).
 
     Works for patent, design, or trademark applications. Cheaper than
@@ -369,35 +365,34 @@ async def get_jpo_progress_simple(
     Related tools: get_jpo_progress, get_jpo_priority_info,
     get_jpo_registration_info, get_jpo_documents.
     """
+    numbers = as_id_list(application_number, noun="JP application number")
     ip = _validate_ip_type(ip_type)
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_jpo_progress_simple requires at least one application number")
-
-    semaphore = asyncio.Semaphore(_JPO_FANOUT_CONCURRENCY)
     from patent_client_agents.jpo import JpoClient
 
-    async def _fetch_one(client: Any, appl: str) -> dict:
-        async with semaphore:
-            method = getattr(client, _JPO_PROGRESS_SIMPLE_METHODS[ip])
-            result = await method(appl)
-            return dump(result) if result else {}  # type: ignore[return-value]
-
     async with JpoClient() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        method = getattr(client, _JPO_PROGRESS_SIMPLE_METHODS[ip])
+
+        async def _fetch_one(appl: str) -> dict | None:
+            result = await method(appl)
+            return dump(result) if result else None
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
 
     if len(numbers) == 1:
-        summary = _summarize_jpo_progress(numbers[0], items[0])
+        summary = _summarize_jpo_progress(numbers[0], items[0] if items else {})
         path = f"/{ip}/v1/app_progress_simple/{numbers[0]}"
     else:
-        summary = f"Fetched {len(items)} JPO {ip} simplified status records."
+        summary = fetched_summary(
+            len(items), len(numbers), f"JPO {ip} simplified status records", not_found
+        )
         path = f"/{ip}/v1/app_progress_simple"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_jpo_provenance(path),
     )
 
@@ -446,48 +441,47 @@ async def get_jpo_registration_info(
         Literal["patent", "design", "trademark"],
         "Which JPO register to query. The same tool works for all three.",
     ] = "patent",
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get the JPO granted-rights record for a patent, design, or trademark filing.
 
     Includes registration number/date, decision date, current rights
     holders, claim count (patents) / design article (designs) /
     trademark display (trademarks), expiration, next pension payment
     due date, last paid year, erasure flag/date, and last update date.
-    Per §5.4 accepts a single number or a list. Each item is ``{}`` when
-    the application is not registered.
+    Per §5.4 accepts a single number or a list. An application that is not
+    registered is left out of ``items`` and listed in ``not_found``.
 
     Related tools: get_jpo_progress, get_jpo_priority_info,
     get_jpo_number_reference.
     """
+    numbers = as_id_list(application_number, noun="JP application number")
     ip = _validate_ip_type(ip_type)
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-    if not numbers:
-        raise ValidationError("get_jpo_registration_info requires at least one application number")
-
-    semaphore = asyncio.Semaphore(_JPO_FANOUT_CONCURRENCY)
     from patent_client_agents.jpo import JpoClient
 
-    async def _fetch_one(client: Any, appl: str) -> dict:
-        async with semaphore:
-            method = getattr(client, _JPO_REGISTRATION_METHODS[ip])
-            result = await method(appl)
-            return dump(result) if result else {}  # type: ignore[return-value]
-
     async with JpoClient() as client:
-        items = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
+        method = getattr(client, _JPO_REGISTRATION_METHODS[ip])
+
+        async def _fetch_one(appl: str) -> dict | None:
+            result = await method(appl)
+            return dump(result) if result else None
+
+        items, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
 
     if len(numbers) == 1:
-        summary = _summarize_jpo_registration(numbers[0], items[0])
+        summary = _summarize_jpo_registration(numbers[0], items[0] if items else {})
         path = f"/{ip}/v1/registration_info/{numbers[0]}"
     else:
-        summary = f"Fetched {len(items)} JPO {ip} registration records."
+        summary = fetched_summary(
+            len(items), len(numbers), f"JPO {ip} registration records", not_found
+        )
         path = f"/{ip}/v1/registration_info"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=items,
+        not_found=not_found,
         provenance=_jpo_provenance(path),
     )
 

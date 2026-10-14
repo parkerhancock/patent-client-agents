@@ -12,7 +12,6 @@ agents can warn when the bundle is stale (§4).
 
 from __future__ import annotations
 
-import asyncio
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -21,6 +20,7 @@ from mcp_data_core.envelope import ListEnvelope, make_provenance
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.epo_pct_guidelines import PctGuidelinesClient, get_corpus_status
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 
 epo_pct_guidelines_mcp = FastMCP("EPO PCT-EPO Guidelines")
 
@@ -35,12 +35,6 @@ epo_pct_guidelines_mcp = FastMCP("EPO PCT-EPO Guidelines")
 
 _PCT_GUIDELINES_BASE = "https://www.epo.org"
 _PCT_GUIDELINES_NAME = "PCT-EPO Guidelines for Examination"
-
-# Bounded fan-out for list-accepting get_epo_pct_guidelines_section
-# (§5.4). SQLite reads are fast so the concurrency budget is
-# conservative — the cap exists so a multi-section portfolio doesn't
-# open many connections at once.
-_PCT_GUIDELINES_FANOUT_CONCURRENCY = 5
 
 # Lean snippet cap (§5.5). Truncate so a multi-hit page fits comfortably
 # under the §5.5 token budget.
@@ -205,7 +199,7 @@ async def get_epo_pct_guidelines_section(
         "'g_ii_3_1.html'; or a list of either for portfolio workflows. Examples: "
         "'G-II, 3.1', ['G-II, 3.1', 'G-III, 1', 'B-IV, 1.1'].",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get one or more PCT-EPO Guidelines for Examination sections by citation or href.
 
     Returns each section's title, full HTML, plaintext, and the resolved
@@ -222,38 +216,37 @@ async def get_epo_pct_guidelines_section(
 
     Related tools: search_epo_pct_guidelines.
     """
-    refs = [section] if isinstance(section, str) else list(section)
-    if not refs:
-        raise ValidationError(
-            "get_epo_pct_guidelines_section requires at least one section reference"
-        )
+    refs = as_id_list(section, noun="PCT-EPO Guidelines section reference")
 
-    semaphore = asyncio.Semaphore(_PCT_GUIDELINES_FANOUT_CONCURRENCY)
+    async with PctGuidelinesClient() as client:
 
-    async def _fetch_one(client: PctGuidelinesClient, ref: str) -> dict:
-        async with semaphore:
+        async def _fetch_one(ref: str) -> dict:
             record = await client.get_section(ref)
             return record.model_dump()
 
-    async with PctGuidelinesClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, ref) for ref in refs])
+        items, not_found = await fetch_many(refs, _fetch_one, single=isinstance(section, str))
 
     status = get_corpus_status()
     corpus_label = status["corpus_version"]
-    if len(results) == 1:
-        summary = _summarize_section(results[0], corpus_label)
+    if len(refs) == 1 and items:
+        summary = _summarize_section(items[0], corpus_label)
         ref = refs[0]
         # Single-record provenance points at the canonical section URL.
-        href = results[0].get("href") or ref
+        href = items[0].get("href") or ref
         path = f"/en/legal/guidelines-pct/{corpus_label}/{href}.html"
     else:
-        joined = ", ".join(refs)
-        summary = f"Fetched {len(results)} PCT-EPO Guidelines sections ({corpus_label}): {joined}"
+        if len(refs) == 1:
+            summary = f"PCT-EPO Guidelines section {refs[0]} — not found."
+        else:
+            summary = fetched_summary(
+                len(items), len(refs), "PCT-EPO Guidelines sections", not_found
+            )
         path = "/en/legal/guidelines-pct"
 
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
-        items=results,
+        items=items,
+        not_found=not_found,
         provenance=_pct_guidelines_provenance(path),
     )
 
