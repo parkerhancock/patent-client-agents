@@ -19,6 +19,7 @@ from mcp_data_core.exceptions import NotFoundError, ParseError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import download_tool_result, read_resource, register_source
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
 
 uspto_mcp = FastMCP("USPTO")
@@ -238,9 +239,6 @@ async def search_applications(
     )
 
 
-_GET_APPLICATION_FANOUT_CONCURRENCY = 5
-
-
 @uspto_mcp.tool(annotations=READ_ONLY)
 async def get_application(
     application_number: Annotated[
@@ -251,7 +249,7 @@ async def get_application(
         "(like 'US20230012345A1'). If you have a patent number, use "
         "get_patent_family to find the application number first.",
     ],
-) -> ListEnvelope[dict]:
+) -> FetchedList[dict]:
     """Get application metadata: status, filing/grant dates, examiner, CPC, and title.
 
     Accepts either a single application number or a list (per §5.4); the
@@ -265,29 +263,27 @@ async def get_application(
     Related tools: search_applications, list_file_history, get_patent_family,
     get_patent_assignment.
     """
-    numbers = (
-        [application_number] if isinstance(application_number, str) else list(application_number)
-    )
-
-    semaphore = asyncio.Semaphore(_GET_APPLICATION_FANOUT_CONCURRENCY)
-
-    async def _fetch_one(client: UsptoOdpClient, appl: str) -> dict:
-        async with semaphore:
-            response = await client.get_application(appl)
-            return _dump(response)  # type: ignore[return-value]
+    numbers = as_id_list(application_number, noun="application number")
 
     async with UsptoOdpClient() as client:
-        results = await asyncio.gather(*[_fetch_one(client, n) for n in numbers])
 
-    if len(results) == 1:
+        async def _fetch_one(appl: str) -> dict:
+            return _dump(await client.get_application(appl))
+
+        results, not_found = await fetch_many(
+            numbers, _fetch_one, single=isinstance(application_number, str)
+        )
+
+    if len(numbers) == 1 and results:
         summary = _summarize_application(_extract_first_record(results[0]))
     else:
-        summary = f"Fetched {len(results)} USPTO applications: " + ", ".join(numbers)
+        summary = fetched_summary(len(results), len(numbers), "USPTO applications", not_found)
 
     path = "/api/v1/patent/applications" + ("/" + numbers[0] if len(numbers) == 1 else "")
-    return ListEnvelope[dict](
+    return FetchedList[dict](
         summary=summary,
         items=results,
+        not_found=not_found,
         provenance=_odp_provenance(path),
     )
 
