@@ -25,10 +25,17 @@ def _au_env(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("IPAUSTRALIA_ENV", raising=False)
 
 
-def _mock_http(
+def _mock_transport(
     handler: Callable[[httpx.Request], httpx.Response],
-) -> httpx.AsyncClient:
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+) -> httpx.MockTransport:
+    """Serve the OAuth token endpoint, and hand API requests to ``handler``."""
+
+    def route(request: httpx.Request) -> httpx.Response:
+        if request.url.path.endswith("/access_token"):
+            return httpx.Response(200, json={"access_token": "tok", "expires_in": 3600})
+        return handler(request)
+
+    return httpx.MockTransport(route)
 
 
 def test_missing_env_raises_configuration_error(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -76,7 +83,9 @@ async def test_search_posts_quick_endpoint_with_query(_au_env: None) -> None:
             },
         )
 
-    async with IpAustraliaDesignsClient(client=_mock_http(handler)) as client:
+    async with IpAustraliaDesignsClient(
+        transport=_mock_transport(handler), use_cache=False
+    ) as client:
         result = await client.search(query="bottle")
 
     assert len(captured) == 1
@@ -98,7 +107,9 @@ async def test_search_serializes_classification_and_status_filters(_au_env: None
         captured.append(request)
         return httpx.Response(200, json={"results": [], "total": 0})
 
-    async with IpAustraliaDesignsClient(client=_mock_http(handler)) as client:
+    async with IpAustraliaDesignsClient(
+        transport=_mock_transport(handler), use_cache=False
+    ) as client:
         await client.search(
             query="*",
             classification=["0202c"],
@@ -127,7 +138,9 @@ async def test_search_omits_optional_blocks_when_unset(_au_env: None) -> None:
         captured.append(request)
         return httpx.Response(200, json={"results": [], "total": 0})
 
-    async with IpAustraliaDesignsClient(client=_mock_http(handler)) as client:
+    async with IpAustraliaDesignsClient(
+        transport=_mock_transport(handler), use_cache=False
+    ) as client:
         await client.search(query="x")
 
     body = json.loads(captured[0].content)
@@ -155,7 +168,9 @@ async def test_get_design_hits_detail_endpoint(_au_env: None) -> None:
             },
         )
 
-    async with IpAustraliaDesignsClient(client=_mock_http(handler)) as client:
+    async with IpAustraliaDesignsClient(
+        transport=_mock_transport(handler), use_cache=False
+    ) as client:
         record = await client.get_design("202210123")
 
     assert captured[0].method == "GET"
