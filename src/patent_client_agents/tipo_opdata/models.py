@@ -26,7 +26,7 @@ from __future__ import annotations
 from datetime import date, datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator
 
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
 
@@ -447,7 +447,10 @@ class TmarkApplRow(BaseModel):
     tmark_draft_j: str | None = Field(default=None, alias="tmark-draft-j")
     tmark_sign: str | None = Field(default=None, alias="tmark-sign")
     word_description: str | None = Field(default=None, alias="word-description")
-    goodsclass: list[Any] = Field(default_factory=list)
+    # TIPO sends ``goodsclasses``; accept the singular too in case an endpoint differs.
+    goodsclass: list[Any] = Field(
+        default_factory=list, validation_alias=AliasChoices("goodsclasses", "goodsclass")
+    )
     receive_date: date | None = Field(default=None, alias="receive-date")
     parties: dict[str, Any] | None = None
 
@@ -478,7 +481,10 @@ class TmarkRightsRow(BaseModel):
     tmark_draft_j: str | None = Field(default=None, alias="tmark-draft-j")
     tmark_sign: str | None = Field(default=None, alias="tmark-sign")
     word_description: str | None = Field(default=None, alias="word-description")
-    goodsclass: list[Any] = Field(default_factory=list)
+    # TIPO sends ``goodsclasses``; accept the singular too in case an endpoint differs.
+    goodsclass: list[Any] = Field(
+        default_factory=list, validation_alias=AliasChoices("goodsclasses", "goodsclass")
+    )
     deadline: date | None = None
     receive_date: date | None = Field(default=None, alias="receive-date")
     appl_date: date | None = Field(default=None, alias="appl-date")
@@ -576,7 +582,10 @@ class TmarkDivideRow(BaseModel):
     tmark_class_desc: str | None = Field(default=None, alias="tmark-class-desc")
     exam_no: str | None = Field(default=None, alias="exam-no")
     tmark_name: str | None = Field(default=None, alias="tmark-name")
-    goodsclass: list[Any] = Field(default_factory=list)
+    # TIPO sends ``goodsclasses``; accept the singular too in case an endpoint differs.
+    goodsclass: list[Any] = Field(
+        default_factory=list, validation_alias=AliasChoices("goodsclasses", "goodsclass")
+    )
     divide_date: date | None = Field(default=None, alias="divide-date")
     origin_exam_no: dict[str, Any] | str | None = Field(default=None, alias="origin-exam-no")
     origin_tmark_class: str | None = Field(default=None, alias="origin-tmark-class")

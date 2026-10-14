@@ -829,3 +829,4 @@ async def test_live_tmark_appl_smoke(
     assert [r.tmark_name for r in rows] == ["林森", "林森"]
     assert [r.tmark_class_desc for r in rows] == ["商標", "商標"]
     assert rows[0].parties["applicants"][0]["chinese-name"] == "盛香堂\u3000許鉗"
+    assert [r.goodsclass[0]["goodsclass-code"] for r in rows] == ["032", "033"]
