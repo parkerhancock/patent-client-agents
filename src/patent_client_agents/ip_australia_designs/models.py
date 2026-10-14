@@ -12,10 +12,12 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from patent_client_agents.shared.models import ApiModel
+
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
 
 
-class DesignSearchHit(BaseModel):
+class DesignSearchHit(ApiModel):
     """Lean row from ``POST /search/quick`` on the designs API.
 
     Each hit carries the Australian design number plus the
@@ -23,13 +25,13 @@ class DesignSearchHit(BaseModel):
     view.
     """
 
-    design_number: str | None = Field(default=None, alias="designNumber")
-    application_number: str | None = Field(default=None, alias="applicationNumber")
+    design_number: str | None = None
+    application_number: str | None = None
     title: str | None = None
     status: str | None = None
-    application_date: str | None = Field(default=None, alias="applicationDate")
-    registration_date: str | None = Field(default=None, alias="registrationDate")
-    locarno_classes: list[Any] = Field(default_factory=list, alias="locarnoClasses")
+    application_date: str | None = None
+    registration_date: str | None = None
+    locarno_classes: list[Any] = Field(default_factory=list)
     classifications: list[Any] = Field(default_factory=list)
     owners: list[Any] = Field(default_factory=list)
 
@@ -45,23 +47,23 @@ class DesignSearchResult(BaseModel):
     model_config = _BASE_CONFIG
 
 
-class Design(BaseModel):
+class Design(ApiModel):
     """Full Australian design record from ``GET /design/{ipRightIdentifier}``."""
 
-    design_number: str | None = Field(default=None, alias="designNumber")
-    application_number: str | None = Field(default=None, alias="applicationNumber")
+    design_number: str | None = None
+    application_number: str | None = None
     title: str | None = None
     status: str | None = None
-    application_date: str | None = Field(default=None, alias="applicationDate")
-    registration_date: str | None = Field(default=None, alias="registrationDate")
-    examination_date: str | None = Field(default=None, alias="examinationDate")
-    expiry_date: str | None = Field(default=None, alias="expiryDate")
-    locarno_classes: list[Any] = Field(default_factory=list, alias="locarnoClasses")
+    application_date: str | None = None
+    registration_date: str | None = None
+    examination_date: str | None = None
+    expiry_date: str | None = None
+    locarno_classes: list[Any] = Field(default_factory=list)
     classifications: list[Any] = Field(default_factory=list)
     owners: list[Any] = Field(default_factory=list)
     designers: list[Any] = Field(default_factory=list)
     representatives: list[Any] = Field(default_factory=list)
-    priority_claims: list[Any] = Field(default_factory=list, alias="priorityClaims")
+    priority_claims: list[Any] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
 

@@ -16,10 +16,12 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from patent_client_agents.shared.models import ApiModel
+
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
 
 
-class PatentSearchHit(BaseModel):
+class PatentSearchHit(ApiModel):
     """Lean row from the Australian Patent Search quick-search response.
 
     Each hit carries the Australian patent / application number plus the
@@ -27,15 +29,15 @@ class PatentSearchHit(BaseModel):
     view. Additional fields flow through via ``extra="allow"``.
     """
 
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    patent_number: str | None = Field(default=None, alias="patentNumber")
+    application_number: str | None = None
+    patent_number: str | None = None
     title: str | None = None
     status: str | None = None
-    application_date: str | None = Field(default=None, alias="applicationDate")
-    grant_date: str | None = Field(default=None, alias="grantDate")
+    application_date: str | None = None
+    grant_date: str | None = None
     applicants: list[Any] = Field(default_factory=list)
     inventors: list[Any] = Field(default_factory=list)
-    ipc_classifications: list[Any] = Field(default_factory=list, alias="ipcClassifications")
+    ipc_classifications: list[Any] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
 
@@ -49,7 +51,7 @@ class PatentSearchResult(BaseModel):
     model_config = _BASE_CONFIG
 
 
-class Patent(BaseModel):
+class Patent(ApiModel):
     """Full Australian patent record from ``GET /patent/{ipRightIdentifier}``.
 
     The Australian Patent Search API publishes "all publicly available
@@ -57,18 +59,18 @@ class Patent(BaseModel):
     fields and let everything else flow through ``extra="allow"``.
     """
 
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    patent_number: str | None = Field(default=None, alias="patentNumber")
+    application_number: str | None = None
+    patent_number: str | None = None
     title: str | None = None
     abstract: str | None = None
     status: str | None = None
-    application_date: str | None = Field(default=None, alias="applicationDate")
-    grant_date: str | None = Field(default=None, alias="grantDate")
-    publication_date: str | None = Field(default=None, alias="publicationDate")
+    application_date: str | None = None
+    grant_date: str | None = None
+    publication_date: str | None = None
     applicants: list[Any] = Field(default_factory=list)
     inventors: list[Any] = Field(default_factory=list)
-    ipc_classifications: list[Any] = Field(default_factory=list, alias="ipcClassifications")
-    priority_claims: list[Any] = Field(default_factory=list, alias="priorityClaims")
+    ipc_classifications: list[Any] = Field(default_factory=list)
+    priority_claims: list[Any] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
 

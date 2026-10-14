@@ -19,65 +19,64 @@ import pytest
 from patent_client_agents.inpi_pi.models import (
     InpiDesignRow,
     InpiTrademarkRow,
-    _empty_str_to_none,
-    _parse_iso_date,
 )
+from patent_client_agents.shared.models import empty_str_to_none, parse_iso_date
 
 # ---------------------------------------------------------------------------
-# _parse_iso_date
+# parse_iso_date
 # ---------------------------------------------------------------------------
 
 
 class TestParseIsoDate:
     @pytest.mark.parametrize("value", [None, "", "   ", "00000000"])
     def test_empty_or_sentinel(self, value: Any) -> None:
-        assert _parse_iso_date(value) is None
+        assert parse_iso_date(value) is None
 
     def test_iso_8601_string(self) -> None:
-        assert _parse_iso_date("2024-03-15") == date(2024, 3, 15)
+        assert parse_iso_date("2024-03-15") == date(2024, 3, 15)
 
     def test_yyyymmdd_string(self) -> None:
-        assert _parse_iso_date("20240315") == date(2024, 3, 15)
+        assert parse_iso_date("20240315") == date(2024, 3, 15)
 
     def test_invalid_yyyymmdd_returns_none(self) -> None:
         # Month 99 → datetime.strptime raises → returns None
-        assert _parse_iso_date("20249915") is None
+        assert parse_iso_date("20249915") is None
 
     def test_random_string_returns_none(self) -> None:
-        assert _parse_iso_date("hello") is None
+        assert parse_iso_date("hello") is None
 
     def test_passthrough_date(self) -> None:
         d = date(2024, 1, 1)
-        assert _parse_iso_date(d) == d
+        assert parse_iso_date(d) == d
 
     def test_datetime_truncates_to_date(self) -> None:
         dt = datetime(2024, 1, 1, 12, 30, 0)
-        assert _parse_iso_date(dt) == date(2024, 1, 1)
+        assert parse_iso_date(dt) == date(2024, 1, 1)
 
     def test_non_string_returns_none(self) -> None:
-        assert _parse_iso_date(12345) is None
-        assert _parse_iso_date([]) is None
+        assert parse_iso_date(12345) is None
+        assert parse_iso_date([]) is None
 
 
 # ---------------------------------------------------------------------------
-# _empty_str_to_none
+# empty_str_to_none
 # ---------------------------------------------------------------------------
 
 
 class TestEmptyStrToNone:
     def test_empty_string(self) -> None:
-        assert _empty_str_to_none("") is None
+        assert empty_str_to_none("") is None
 
     def test_whitespace_only(self) -> None:
-        assert _empty_str_to_none("   ") is None
+        assert empty_str_to_none("   ") is None
 
     def test_non_empty_preserved(self) -> None:
-        assert _empty_str_to_none("hello") == "hello"
+        assert empty_str_to_none("hello") == "hello"
 
     def test_non_string_passthrough(self) -> None:
-        assert _empty_str_to_none(None) is None
-        assert _empty_str_to_none(0) == 0
-        assert _empty_str_to_none(["a"]) == ["a"]
+        assert empty_str_to_none(None) is None
+        assert empty_str_to_none(0) == 0
+        assert empty_str_to_none(["a"]) == ["a"]
 
 
 # ---------------------------------------------------------------------------

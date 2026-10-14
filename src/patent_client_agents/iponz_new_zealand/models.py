@@ -2,28 +2,13 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 
+from patent_client_agents.shared.models import IsoTimestampDate, parse_iso_timestamp_date
 
-def parse_iponz_date(value: Any) -> date | None:
-    """Parse dates from the published IPONZ XML schemas."""
-    if value is None or isinstance(value, date):
-        return value.date() if isinstance(value, datetime) else value
-    if not isinstance(value, str):
-        return None
-    text = value.strip()
-    if not text:
-        return None
-    try:
-        return datetime.fromisoformat(text.replace("Z", "+00:00")).date()
-    except ValueError:
-        try:
-            return datetime.strptime(text, "%Y%m%d").date()
-        except ValueError:
-            return None
+parse_iponz_date = parse_iso_timestamp_date
 
 
 class _IponzRecord(BaseModel):
@@ -42,26 +27,14 @@ class IponzPatentRecord(_IponzRecord):
     wipo_publication_number: str | None = None
     title: str | None = None
     abstract: str | None = None
-    complete_filed_date: date | None = None
-    national_phase_entry_date: date | None = None
-    published_date: date | None = None
-    grant_date: date | None = None
-    expiry_date: date | None = None
+    complete_filed_date: IsoTimestampDate = None
+    national_phase_entry_date: IsoTimestampDate = None
+    published_date: IsoTimestampDate = None
+    grant_date: IsoTimestampDate = None
+    expiry_date: IsoTimestampDate = None
     applicants: list[str] = Field(default_factory=list)
     inventors: list[str] = Field(default_factory=list)
     classifications: list[str] = Field(default_factory=list)
-
-    @field_validator(
-        "complete_filed_date",
-        "national_phase_entry_date",
-        "published_date",
-        "grant_date",
-        "expiry_date",
-        mode="before",
-    )
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_iponz_date(value)
 
 
 class IponzTrademarkRecord(_IponzRecord):
@@ -71,17 +44,12 @@ class IponzTrademarkRecord(_IponzRecord):
     registration_number: str | None = None
     international_registration_number: str | None = None
     title: str | None = None
-    application_date: date | None = None
-    registration_date: date | None = None
-    expiry_date: date | None = None
+    application_date: IsoTimestampDate = None
+    registration_date: IsoTimestampDate = None
+    expiry_date: IsoTimestampDate = None
     applicants: list[str] = Field(default_factory=list)
     nice_classes: list[str] = Field(default_factory=list)
     word_marks: list[str] = Field(default_factory=list)
-
-    @field_validator("application_date", "registration_date", "expiry_date", mode="before")
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_iponz_date(value)
 
 
 class IponzDesignRecord(_IponzRecord):
@@ -91,25 +59,15 @@ class IponzDesignRecord(_IponzRecord):
     design_identifier: str | None = None
     title: str | None = None
     novelty_statement: str | None = None
-    application_date: date | None = None
-    registration_date: date | None = None
-    expiry_date: date | None = None
+    application_date: IsoTimestampDate = None
+    registration_date: IsoTimestampDate = None
+    expiry_date: IsoTimestampDate = None
     applicants: list[str] = Field(default_factory=list)
     articles: list[str] = Field(default_factory=list)
-
-    @field_validator("application_date", "registration_date", "expiry_date", mode="before")
-    @classmethod
-    def parse_dates(cls, value: Any) -> date | None:
-        return parse_iponz_date(value)
 
 
 class IponzRegisterSummary(_IponzRecord):
     """One record from an IPONZ updated or registered date-range list."""
 
     right_type: Literal["patent", "trademark", "design"]
-    event_date: date | None = None
-
-    @field_validator("event_date", mode="before")
-    @classmethod
-    def parse_event_date(cls, value: Any) -> date | None:
-        return parse_iponz_date(value)
+    event_date: IsoTimestampDate = None

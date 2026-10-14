@@ -19,28 +19,13 @@ timeline, and document file-history pointers.
 
 from __future__ import annotations
 
-from datetime import date, datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field
+
+from patent_client_agents.shared.models import ApiModel, YmdDate
 
 _BASE_CONFIG: ConfigDict = ConfigDict(populate_by_name=True, extra="allow")
-
-
-def _parse_iso_date(value: Any) -> date | None:
-    if value is None:
-        return None
-    if isinstance(value, date):
-        return value
-    if not isinstance(value, str):
-        return None
-    raw = value.strip()
-    if not raw:
-        return None
-    try:
-        return datetime.strptime(raw, "%Y-%m-%d").date()
-    except ValueError:
-        return None
 
 
 # ---------------------------------------------------------------------------
@@ -48,7 +33,7 @@ def _parse_iso_date(value: Any) -> date | None:
 # ---------------------------------------------------------------------------
 
 
-class Party(BaseModel):
+class Party(ApiModel):
     """One party (applicant, representative, inventor, owner).
 
     Two shapes appear across the surface:
@@ -58,45 +43,41 @@ class Party(BaseModel):
     """
 
     name: str | None = None
-    company_name: str | None = Field(default=None, alias="companyName")
+    company_name: str | None = None
     ordinal: int | None = None
 
     model_config = _BASE_CONFIG
 
 
-class GoodsAndServicesClass(BaseModel):
+class GoodsAndServicesClass(ApiModel):
     """One Nice class entry on a trademark dossier."""
 
-    class_number: int | None = Field(default=None, alias="classNumber")
+    class_number: int | None = None
     ordinal: int | None = None
 
     model_config = _BASE_CONFIG
 
 
-class LocarnoClass(BaseModel):
+class LocarnoClass(ApiModel):
     """One Locarno class entry on a design dossier."""
 
-    class_number: str | None = Field(default=None, alias="classNumber")
-    sub_class_number: str | None = Field(default=None, alias="subClassNumber")
+    class_number: str | None = None
+    sub_class_number: str | None = None
     ordinal: int | None = None
 
     model_config = _BASE_CONFIG
 
 
-class DesignEmbodiment(BaseModel):
+class DesignEmbodiment(ApiModel):
     """One design embodiment within a design dossier's ``designs`` array."""
 
     title: str | None = None
-    title_second_lng: str | None = Field(default=None, alias="titleSecondLng")
+    title_second_lng: str | None = None
     number: int | None = None
-    dominant_view_number: int | None = Field(default=None, alias="dominantViewNumber")
-    dominant_view_image_url: str | None = Field(default=None, alias="dominantViewImageUrl")
-    dominant_view_small_thumbnail_url: str | None = Field(
-        default=None, alias="dominantViewSmallThumbnailUrl"
-    )
-    dominant_view_medium_thumbnail_url: str | None = Field(
-        default=None, alias="dominantViewMediumThumbnailUrl"
-    )
+    dominant_view_number: int | None = None
+    dominant_view_image_url: str | None = None
+    dominant_view_small_thumbnail_url: str | None = None
+    dominant_view_medium_thumbnail_url: str | None = None
     ordinal: int | None = None
 
     model_config = _BASE_CONFIG
@@ -134,60 +115,45 @@ class Classification(BaseModel):
     model_config = _BASE_CONFIG
 
 
-class PatentPublication(BaseModel):
+class PatentPublication(ApiModel):
     """One publication entry on a patent search row."""
 
-    publication_date: date | None = Field(default=None, alias="publicationDate")
+    publication_date: YmdDate = None
     type: str | None = None
-    publication_section: str | None = Field(default=None, alias="publicationSection")
+    publication_section: str | None = None
     ordinal: int | None = None
 
     model_config = _BASE_CONFIG
 
-    @field_validator("publication_date", mode="before")
-    @classmethod
-    def _coerce_date(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class PriorityClaim(BaseModel):
+class PriorityClaim(ApiModel):
     """One Paris priority claim on a patent GET record."""
 
-    office_code: str | None = Field(default=None, alias="officeCode")
-    filing_date: date | None = Field(default=None, alias="filingDate")
-    application_number: str | None = Field(default=None, alias="applicationNumber")
+    office_code: str | None = None
+    filing_date: YmdDate = None
+    application_number: str | None = None
     ordinal: int | None = None
 
     model_config = _BASE_CONFIG
 
-    @field_validator("filing_date", mode="before")
-    @classmethod
-    def _coerce_date(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class Examiner(BaseModel):
+class Examiner(ApiModel):
     """Named examiner on a patent GET record."""
 
-    full_name: str | None = Field(default=None, alias="fullName")
+    full_name: str | None = None
 
     model_config = _BASE_CONFIG
 
 
-class DossierPriority(BaseModel):
+class DossierPriority(ApiModel):
     """One priority claim on a TM/design dossier row."""
 
-    office_code: str | None = Field(default=None, alias="officeCode")
-    application_date: date | None = Field(default=None, alias="applicationDate")
-    application_number: str | None = Field(default=None, alias="applicationNumber")
+    office_code: str | None = None
+    application_date: YmdDate = None
+    application_number: str | None = None
     ordinal: int | None = None
 
     model_config = _BASE_CONFIG
-
-    @field_validator("application_date", mode="before")
-    @classmethod
-    def _coerce_date(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
 
 # ---------------------------------------------------------------------------
@@ -195,7 +161,7 @@ class DossierPriority(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class DossierSearchRow(BaseModel):
+class DossierSearchRow(ApiModel):
     """One row in the trademark, well-known-trademark, or design search.
 
     PRH ships an identical row shape across the three rights — what
@@ -205,42 +171,35 @@ class DossierSearchRow(BaseModel):
     + ``imageUrl`` for trademarks).
     """
 
-    dossier_id: int | None = Field(default=None, alias="dossierId")
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    registration_number: str | None = Field(default=None, alias="registrationNumber")
-    dossier_status: str | None = Field(default=None, alias="dossierStatus")
-    dossier_sub_type: str | None = Field(default=None, alias="dossierSubType")
-    application_date: date | None = Field(default=None, alias="applicationDate")
-    registration_date: date | None = Field(default=None, alias="registrationDate")
-    expiration_date: date | None = Field(default=None, alias="expirationDate")
+    dossier_id: int | None = None
+    application_number: str | None = None
+    registration_number: str | None = None
+    dossier_status: str | None = None
+    dossier_sub_type: str | None = None
+    application_date: YmdDate = None
+    registration_date: YmdDate = None
+    expiration_date: YmdDate = None
     applicants: list[Party] = Field(default_factory=list)
     representatives: list[Party] = Field(default_factory=list)
     priorities: list[DossierPriority] = Field(default_factory=list)
-    trademark_word: str | None = Field(default=None, alias="trademarkWord")
-    trademark_has_image: bool | None = Field(default=None, alias="trademarkHasImage")
-    goods_and_services: list[GoodsAndServicesClass] = Field(
-        default_factory=list, alias="goodsAndServices"
-    )
-    target_group: str | None = Field(default=None, alias="targetGroup")
+    trademark_word: str | None = None
+    trademark_has_image: bool | None = None
+    goods_and_services: list[GoodsAndServicesClass] = Field(default_factory=list)
+    target_group: str | None = None
     locarnos: list[LocarnoClass] = Field(default_factory=list)
     designs: list[DesignEmbodiment] = Field(default_factory=list)
-    image_url: str | None = Field(default=None, alias="imageUrl")
-    thumbnail_url: str | None = Field(default=None, alias="thumbnailUrl")
-    large_thumbnail_url: str | None = Field(default=None, alias="largeThumbnailUrl")
+    image_url: str | None = None
+    thumbnail_url: str | None = None
+    large_thumbnail_url: str | None = None
     ordinal: int | None = None
 
     model_config = _BASE_CONFIG
 
-    @field_validator("application_date", "registration_date", "expiration_date", mode="before")
-    @classmethod
-    def _coerce_dates(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class DossierSearchResponse(BaseModel):
+class DossierSearchResponse(ApiModel):
     """Top-level envelope for TM, TMR, and design search responses."""
 
-    total_results: int = Field(default=0, alias="totalResults")
+    total_results: int = 0
     results: list[DossierSearchRow] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
@@ -251,7 +210,7 @@ class DossierSearchResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class PatentSearchRow(BaseModel):
+class PatentSearchRow(ApiModel):
     """One row in the PRH patent corpus search.
 
     Covers FI-national patents (``dossierType=PatentDossier``), utility
@@ -260,12 +219,12 @@ class PatentSearchRow(BaseModel):
     (``Spc``).
     """
 
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    registration_number: str | None = Field(default=None, alias="registrationNumber")
-    dossier_status: str | None = Field(default=None, alias="dossierStatus")
-    dossier_type: str | None = Field(default=None, alias="dossierType")
-    application_date: date | None = Field(default=None, alias="applicationDate")
-    status_date: date | None = Field(default=None, alias="statusDate")
+    application_number: str | None = None
+    registration_number: str | None = None
+    dossier_status: str | None = None
+    dossier_type: str | None = None
+    application_date: YmdDate = None
+    status_date: YmdDate = None
     applicants: list[Party] = Field(default_factory=list)
     owners: list[Party] = Field(default_factory=list)
     classifications: list[Classification] = Field(default_factory=list)
@@ -276,16 +235,11 @@ class PatentSearchRow(BaseModel):
 
     model_config = _BASE_CONFIG
 
-    @field_validator("application_date", "status_date", mode="before")
-    @classmethod
-    def _coerce_dates(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
-
-class PatentSearchResponse(BaseModel):
+class PatentSearchResponse(ApiModel):
     """Top-level envelope for patent search responses."""
 
-    total_results: int = Field(default=0, alias="totalResults")
+    total_results: int = 0
     results: list[PatentSearchRow] = Field(default_factory=list)
 
     model_config = _BASE_CONFIG
@@ -296,7 +250,7 @@ class PatentSearchResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-class PatentGetRecord(BaseModel):
+class PatentGetRecord(ApiModel):
     """Full patent register record from ``GET /patent/{appno}``.
 
     Carries the trilingual title + abstracts (FI/SV/EN), prosecution
@@ -306,20 +260,20 @@ class PatentGetRecord(BaseModel):
     from PCT national-phase entries and EP-FI validations.
     """
 
-    application_number: str | None = Field(default=None, alias="applicationNumber")
-    application_type: str | None = Field(default=None, alias="applicationType")
-    registration_number: str | None = Field(default=None, alias="registrationNumber")
-    related_dossier_type: str | None = Field(default=None, alias="relatedDossierType")
-    base_patent_number: str | None = Field(default=None, alias="basePatentNumber")
-    t3_publication_date: date | None = Field(default=None, alias="t3PublicationDate")
-    application_date: date | None = Field(default=None, alias="applicationDate")
-    filing_date: date | None = Field(default=None, alias="filingDate")
-    grant_date: date | None = Field(default=None, alias="grantDate")
-    publication_date: date | None = Field(default=None, alias="publicationDate")
-    dossier_status: str | None = Field(default=None, alias="dossierStatus")
-    dossier_status_date: date | None = Field(default=None, alias="dossierStatusDate")
-    filing_language: str | None = Field(default=None, alias="filingLanguage")
-    patent_title: list[TitleTranslation] = Field(default_factory=list, alias="patentTitle")
+    application_number: str | None = None
+    application_type: str | None = None
+    registration_number: str | None = None
+    related_dossier_type: str | None = None
+    base_patent_number: str | None = None
+    t3_publication_date: YmdDate = None
+    application_date: YmdDate = None
+    filing_date: YmdDate = None
+    grant_date: YmdDate = None
+    publication_date: YmdDate = None
+    dossier_status: str | None = None
+    dossier_status_date: YmdDate = None
+    filing_language: str | None = None
+    patent_title: list[TitleTranslation] = Field(default_factory=list)
     abstracts: list[AbstractTranslation] = Field(default_factory=list)
     events: list[Any] = Field(default_factory=list)
     documents: Any | None = None
@@ -328,28 +282,15 @@ class PatentGetRecord(BaseModel):
     applicants: list[Party] = Field(default_factory=list)
     owners: list[Party] = Field(default_factory=list)
     representatives: list[Party] = Field(default_factory=list)
-    ipc_classifications: list[str] = Field(default_factory=list, alias="ipcClassifications")
-    cpc_classifications: list[str] = Field(default_factory=list, alias="cpcClassifications")
-    payment_details: Any | None = Field(default=None, alias="paymentDetails")
-    priority_claims: list[PriorityClaim] = Field(default_factory=list, alias="priorityClaims")
-    related_dossiers: list[Any] = Field(default_factory=list, alias="relatedDossiers")
-    spc_authorizations: list[Any] = Field(default_factory=list, alias="spcAuthorizations")
-    image_url: str | None = Field(default=None, alias="imageUrl")
+    ipc_classifications: list[str] = Field(default_factory=list)
+    cpc_classifications: list[str] = Field(default_factory=list)
+    payment_details: Any | None = None
+    priority_claims: list[PriorityClaim] = Field(default_factory=list)
+    related_dossiers: list[Any] = Field(default_factory=list)
+    spc_authorizations: list[Any] = Field(default_factory=list)
+    image_url: str | None = None
 
     model_config = _BASE_CONFIG
-
-    @field_validator(
-        "application_date",
-        "filing_date",
-        "grant_date",
-        "publication_date",
-        "dossier_status_date",
-        "t3_publication_date",
-        mode="before",
-    )
-    @classmethod
-    def _coerce_dates(cls, value: Any) -> Any:
-        return _parse_iso_date(value)
 
 
 __all__ = [
