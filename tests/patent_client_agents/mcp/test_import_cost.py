@@ -11,7 +11,17 @@ import json
 import subprocess
 import sys
 
-DEFERRED = ["markitdown", "magika", "onnxruntime", "numpy", "pypdf", "curl_cffi", "playwright"]
+DEFERRED = [
+    "markitdown",
+    "magika",
+    "onnxruntime",
+    "numpy",
+    "pypdf",
+    "curl_cffi",
+    "playwright",
+    "bs4",
+    "markdownify",
+]
 
 
 def test_server_import_does_not_load_deferred_libraries() -> None:

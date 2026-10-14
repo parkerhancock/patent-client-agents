@@ -2,8 +2,11 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
+      # Golden fixtures must stay byte-exact.
       - id: trailing-whitespace
+        exclude: ^tests/google_patents/fixtures/description_markdown/
       - id: end-of-file-fixer
+        exclude: ^tests/google_patents/fixtures/description_markdown/
       - id: check-yaml
       - id: check-added-large-files
       - id: check-merge-conflict

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import asyncio
-import io
 import json
 import logging
 import re
@@ -105,19 +104,13 @@ def _preprocess_patent_html(html_string: str) -> str:
 
 
 def _html_to_markdown(html_string: str | None) -> str | None:
-    """Convert HTML string to markdown using MarkItDown."""
+    """Convert description HTML to Markdown, keeping paragraph numbers."""
     if not html_string:
         return None
-    try:
-        # Preprocess to preserve paragraph numbers
-        preprocessed = _preprocess_patent_html(html_string)
-        # Imported here: markitdown loads magika/onnxruntime/numpy (~50 MB).
-        from markitdown import MarkItDown
+    from .markdown import html_to_markdown  # bs4 + markdownify load only when needed
 
-        md = MarkItDown(enable_plugins=False)
-        stream = io.BytesIO(preprocessed.encode("utf-8"))
-        result = md.convert_stream(stream, file_extension=".html")
-        return result.text_content
+    try:
+        return html_to_markdown(_preprocess_patent_html(html_string))
     except Exception as exc:  # pragma: no cover - defensive
         logger.warning("Failed to convert HTML to markdown: %s", exc)
         return None
