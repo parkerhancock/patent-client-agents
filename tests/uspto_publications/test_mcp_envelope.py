@@ -21,6 +21,7 @@ from patent_client_agents.mcp.tools.publications import (
     get_patent_publication,
     search_patent_publications,
 )
+from patent_client_agents.shared.errors import DocumentNotFoundError
 
 # ──────────────────────────────────────────────────────────────────────
 # Fakes — minimal Pydantic models that mimic PublicSearchClient returns
@@ -302,7 +303,9 @@ async def test_get_fan_out_runs_concurrently():
 async def test_get_list_reports_missing_publication():
     async def _resolve(pub_no: str) -> _FakeDocument:
         if pub_no == "US20239999999A1":
-            raise ValueError(f"No documents found for publication number {pub_no!r}")
+            raise DocumentNotFoundError(f"No documents found for publication number {pub_no!r}")
+        if pub_no == "!!!":
+            raise ValueError("publication_number must include alphanumeric characters")
         return _make_document(pub_no)
 
     with patch("patent_client_agents.mcp.tools.publications.PublicSearchClient") as mock_cls:
@@ -321,9 +324,13 @@ async def test_get_list_reports_missing_publication():
             "Fetched 2 of 3 US patent publications. Not found: US20239999999A1."
         )
 
-        # A single string keeps raising the client's error.
+        # A single string keeps raising the client's error (still a ValueError).
         with pytest.raises(ValueError, match="No documents found"):
             await get_patent_publication(publication_number="US20239999999A1")
+
+        # A malformed number is not "not found": it fails the whole call.
+        with pytest.raises(ValueError, match="alphanumeric"):
+            await get_patent_publication(publication_number=["US20230012345A1", "!!!"])
 
 
 @pytest.mark.asyncio

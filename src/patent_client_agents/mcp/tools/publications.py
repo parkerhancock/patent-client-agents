@@ -268,13 +268,7 @@ async def get_patent_publication(
     async with PublicSearchClient() as client:
 
         async def _fetch_one(pub_no: str) -> dict | None:
-            try:
-                record = await client.resolve_document_by_publication_number(pub_no)
-            except ValueError:
-                # The PPUBS client reports an unresolvable number as ValueError.
-                if single:
-                    raise
-                return None
+            record = await client.resolve_document_by_publication_number(pub_no)
             return dump(record, mode="json")  # type: ignore[return-value]
 
         results, not_found = await fetch_many(numbers, _fetch_one, single=single)

@@ -570,13 +570,7 @@ async def get_tmep_section(
     async with TmepClient() as client:
 
         async def _fetch_one(ref: str) -> dict | None:
-            try:
-                record = await client.get_section(ref)
-            except ValueError:
-                # The TMEP client reports a missing section as ValueError.
-                if single:
-                    raise
-                return None
+            record = await client.get_section(ref)
             # When the caller passes a section number, ``ref`` already is
             # the section number. When they pass an href, the corpus row
             # carries the section_number but the TmepSection model drops
