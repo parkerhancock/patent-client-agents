@@ -108,6 +108,15 @@ class GoodsAndServicesTerms(BaseModel):
     model_config = _BASE_CONFIG
 
 
+class MultilingualText(BaseModel):
+    """One language's text for a multilingual field (the spec's ``MultilingualElement``)."""
+
+    language: str
+    text: str
+
+    model_config = _BASE_CONFIG
+
+
 class GoodsAndServicesClass(BaseModel):
     """A Nice class with its multilingual goods-and-services terms."""
 
@@ -191,8 +200,8 @@ class Trademark(TrademarkSearchResultItem):
     publication_date: date | None = Field(default=None, alias="publicationDate")
     status_date: date | None = Field(default=None, alias="statusDate")
 
-    description: str | None = None
-    disclaimer: str | None = None
+    description: list[MultilingualText] = Field(default_factory=list)
+    disclaimer: list[MultilingualText] = Field(default_factory=list)
     goods_and_services: list[GoodsAndServicesClass] = Field(
         alias="goodsAndServices", default_factory=list
     )
