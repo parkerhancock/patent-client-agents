@@ -1,172 +1,153 @@
-"""Smoke tests for the TIPO module-level helpers.
+"""Behavioral tests for the TIPO module-level helpers.
 
-Each helper opens a context-managed ``TipoClient`` and delegates to
-the matching client method. We mock ``TipoClient`` so these tests are
-pure delegation contract checks — separate from the client-level
-request/response tests in :mod:`test_client`.
+Each helper is exercised end to end through a real ``TipoClient`` wired to an
+``httpx.MockTransport``: the outgoing query string, the parsed rows, and that
+the client is exited after the call.
 """
 
 from __future__ import annotations
 
 from typing import Any
-from unittest.mock import AsyncMock
 
+import httpx
 import pytest
 
 import patent_client_agents.tipo_opdata.api as api
+from patent_client_agents.tipo_opdata import models
+from patent_client_agents.tipo_opdata.client import TipoClient
 
 
 @pytest.fixture
-def mock_client(monkeypatch: pytest.MonkeyPatch) -> AsyncMock:
-    """Patch ``TipoClient`` with an async-context AsyncMock and return the inner mock."""
-    inner = AsyncMock()
+def wire(
+    monkeypatch: pytest.MonkeyPatch,
+) -> tuple[list[httpx.Request], list[TipoClient]]:
+    """Route ``api`` through a real client answering one ``sequence: 7`` row.
 
-    class _MockCtx:
-        async def __aenter__(self) -> AsyncMock:
-            return inner
+    Returns ``(captured, closed)``: requests and exited clients.
+    """
+    captured: list[httpx.Request] = []
+    closed: list[TipoClient] = []
 
-        async def __aexit__(self, *exc: Any) -> None:
-            return None
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured.append(request)
+        payload = {"status": "OK", "total-count": 1, "wrapper": {"content": [{"sequence": 7}]}}
+        return httpx.Response(200, json=payload)
 
-    def _factory(*args: Any, **kwargs: Any) -> _MockCtx:
-        return _MockCtx()
+    class Tracked(TipoClient):
+        async def __aexit__(self, *exc: object) -> None:
+            await super().__aexit__(*exc)
+            closed.append(self)
 
-    monkeypatch.setattr(api, "TipoClient", _factory)
-    return inner
+    def factory() -> TipoClient:
+        http = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        return Tracked(tk="test-tk", client=http)
 
-
-# ──────────────────────────────────────────────────────────────────────
-# Patent helpers
-# ──────────────────────────────────────────────────────────────────────
-
-
-@pytest.mark.asyncio
-async def test_search_tipo_patents_delegates(mock_client: AsyncMock) -> None:
-    mock_client.search_patent_appl = AsyncMock(return_value=["x"])
-    out = await api.search_tipo_patents(q="TSMC", applclass=1, top=10)
-    assert out == ["x"]
-    mock_client.search_patent_appl.assert_awaited_once()
+    monkeypatch.setattr(api, "TipoClient", factory)
+    return captured, closed
 
 
 @pytest.mark.asyncio
-async def test_get_tipo_patent_delegates(mock_client: AsyncMock) -> None:
-    mock_client.search_patent_appl = AsyncMock(return_value=["x"])
-    out = await api.get_tipo_patent("112100001")
-    assert out == ["x"]
-    mock_client.search_patent_appl.assert_awaited_once_with(appl_no="112100001", top=100, skip=0)
+@pytest.mark.parametrize(
+    ("helper", "path", "row_type", "kwargs", "expected_params"),
+    [
+        (
+            "search_tipo_patents",
+            "/PatentAppl",
+            models.PatentApplRow,
+            {"q": "TSMC", "applclass": 1, "applicant": "TSMC", "appl_date_from": "2023/01/01"},
+            {"q": "TSMC", "applclass": "1", "applicant": "TSMC", "appl-date-from": "2023/01/01"},
+        ),
+        (
+            "search_tipo_trademarks",
+            "/TmarkAppl",
+            models.TmarkApplRow,
+            {"q": "APPLE", "tmark_class": 9, "appl_date_to": "2024/12/31"},
+            {"q": "APPLE", "tmark-class": "9", "appl-date-to": "2024/12/31"},
+        ),
+    ],
+)
+async def test_search_helpers_send_filters_and_paging(
+    wire: tuple[list[httpx.Request], list[TipoClient]],
+    helper: str,
+    path: str,
+    row_type: type[Any],
+    kwargs: dict[str, Any],
+    expected_params: dict[str, str],
+) -> None:
+    captured, closed = wire
+
+    rows = await getattr(api, helper)(**kwargs, top=10, skip=20, **{"extra-filter": "x"})
+
+    assert isinstance(rows[0], row_type)
+    assert rows[0].sequence == 7
+    request = captured[0]
+    assert request.url.path.endswith(path)
+    params = dict(request.url.params)
+    assert params["tk"] == "test-tk"
+    assert params["top"] == "10"
+    assert params["skip"] == "20"
+    assert params["extra-filter"] == "x"
+    for key, value in expected_params.items():
+        assert params[key] == value
+    assert len(closed) == 1
 
 
 @pytest.mark.asyncio
-async def test_get_tipo_patent_publication_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_patent_pub = AsyncMock(return_value=["p"])
-    out = await api.get_tipo_patent_publication("A1")
-    assert out == ["p"]
-    mock_client.get_patent_pub.assert_awaited_once_with(appl_no="A1", top=100, skip=0)
+async def test_search_helper_defaults_reach_the_wire(
+    wire: tuple[list[httpx.Request], list[TipoClient]],
+) -> None:
+    captured, closed = wire
+
+    await api.search_tipo_patents()
+
+    params = dict(captured[0].url.params)
+    assert params["top"] == "100"
+    assert params["skip"] == "0"
+    assert "q" not in params
+    assert len(closed) == 1
 
 
 @pytest.mark.asyncio
-async def test_get_tipo_patent_rights_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_patent_rights = AsyncMock(return_value=["r"])
-    out = await api.get_tipo_patent_rights("A1")
-    assert out == ["r"]
-    mock_client.get_patent_rights.assert_awaited_once()
+@pytest.mark.parametrize(
+    ("helper", "path", "row_type"),
+    [
+        ("get_tipo_patent", "/PatentAppl", models.PatentApplRow),
+        ("get_tipo_patent_publication", "/PatentPub", models.PatentPubRow),
+        ("get_tipo_patent_rights", "/PatentRights", models.PatentRightsRow),
+        ("get_tipo_patent_priority", "/PatentPriority", models.PatentPriorityRow),
+        ("get_tipo_patent_annuity", "/PatentAnnuity", models.PatentAnnuityRow),
+        ("get_tipo_patent_twins", "/PatentTwins", models.PatentTwinsRow),
+        ("get_tipo_patent_alteration", "/PatentAlteration", models.PatentAlterationRow),
+        ("get_tipo_patent_change", "/PatentChange", models.PatentChangeRow),
+        ("get_tipo_patent_divide", "/PatentDivide", models.PatentDivideRow),
+        ("get_tipo_trademark", "/TmarkAppl", models.TmarkApplRow),
+        ("get_tipo_trademark_rights", "/TmarkRights", models.TmarkRightsRow),
+        ("get_tipo_trademark_priority", "/TmarkPriority", models.TmarkPriorityRow),
+        ("get_tipo_trademark_image_urls", "/TmarkPics", models.TmarkPicsRow),
+        ("get_tipo_trademark_change", "/TmarkChange", models.TmarkChangeRow),
+        ("get_tipo_trademark_divide", "/TmarkDivide", models.TmarkDivideRow),
+    ],
+)
+async def test_get_helpers_fetch_by_application_number(
+    wire: tuple[list[httpx.Request], list[TipoClient]],
+    helper: str,
+    path: str,
+    row_type: type[Any],
+) -> None:
+    captured, closed = wire
 
+    rows = await getattr(api, helper)(["112100001", "112100002"], top=5, skip=15)
+    await getattr(api, helper)("112100003")
 
-@pytest.mark.asyncio
-async def test_get_tipo_patent_priority_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_patent_priority = AsyncMock(return_value=[])
-    await api.get_tipo_patent_priority("A1")
-    mock_client.get_patent_priority.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_patent_annuity_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_patent_annuity = AsyncMock(return_value=[])
-    await api.get_tipo_patent_annuity("A1")
-    mock_client.get_patent_annuity.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_patent_twins_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_patent_twins = AsyncMock(return_value=[])
-    await api.get_tipo_patent_twins("A1")
-    mock_client.get_patent_twins.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_patent_alteration_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_patent_alteration = AsyncMock(return_value=[])
-    await api.get_tipo_patent_alteration("A1")
-    mock_client.get_patent_alteration.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_patent_change_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_patent_change = AsyncMock(return_value=[])
-    await api.get_tipo_patent_change("A1")
-    mock_client.get_patent_change.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_patent_divide_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_patent_divide = AsyncMock(return_value=[])
-    await api.get_tipo_patent_divide("A1")
-    mock_client.get_patent_divide.assert_awaited_once()
-
-
-# ──────────────────────────────────────────────────────────────────────
-# Trademark helpers
-# ──────────────────────────────────────────────────────────────────────
-
-
-@pytest.mark.asyncio
-async def test_search_tipo_trademarks_delegates(mock_client: AsyncMock) -> None:
-    mock_client.search_tmark_appl = AsyncMock(return_value=["t"])
-    out = await api.search_tipo_trademarks(q="WAVE", tmark_class=9, top=20)
-    assert out == ["t"]
-    mock_client.search_tmark_appl.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_trademark_delegates(mock_client: AsyncMock) -> None:
-    mock_client.search_tmark_appl = AsyncMock(return_value=[])
-    await api.get_tipo_trademark("T1")
-    mock_client.search_tmark_appl.assert_awaited_once_with(appl_no="T1", top=100, skip=0)
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_trademark_rights_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_tmark_rights = AsyncMock(return_value=[])
-    await api.get_tipo_trademark_rights("T1")
-    mock_client.get_tmark_rights.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_trademark_priority_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_tmark_priority = AsyncMock(return_value=[])
-    await api.get_tipo_trademark_priority("T1")
-    mock_client.get_tmark_priority.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_trademark_image_urls_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_tmark_pics = AsyncMock(return_value=[])
-    await api.get_tipo_trademark_image_urls("T1")
-    mock_client.get_tmark_pics.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_trademark_change_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_tmark_change = AsyncMock(return_value=[])
-    await api.get_tipo_trademark_change("T1")
-    mock_client.get_tmark_change.assert_awaited_once()
-
-
-@pytest.mark.asyncio
-async def test_get_tipo_trademark_divide_delegates(mock_client: AsyncMock) -> None:
-    mock_client.get_tmark_divide = AsyncMock(return_value=[])
-    await api.get_tipo_trademark_divide("T1")
-    mock_client.get_tmark_divide.assert_awaited_once()
+    assert isinstance(rows[0], row_type)
+    assert rows[0].sequence == 7
+    explicit, defaults = (dict(request.url.params) for request in captured)
+    assert captured[0].url.path.endswith(path)
+    assert explicit["appl-no"] == "112100001,112100002"
+    assert (explicit["top"], explicit["skip"]) == ("5", "15")
+    assert defaults["appl-no"] == "112100003"
+    assert (defaults["top"], defaults["skip"]) == ("100", "0")
+    assert len(closed) == 2
 
 
 # ──────────────────────────────────────────────────────────────────────

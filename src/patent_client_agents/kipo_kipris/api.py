@@ -13,7 +13,14 @@ from __future__ import annotations
 
 from typing import Any
 
+from patent_client_agents.shared.api import one_shot
+
 from .client import KiprisClient
+
+
+def _new_client() -> KiprisClient:
+    return KiprisClient()
+
 
 # ----------------------------------------------------------------------
 # Patents + Utility Models
@@ -41,6 +48,7 @@ async def search_kipo_patents(
         )
 
 
+@one_shot(_new_client, KiprisClient.search_patents_advanced)
 async def search_kipo_patents_advanced(
     *,
     invention_title: str | None = None,
@@ -58,28 +66,11 @@ async def search_kipo_patents_advanced(
     **extra: Any,
 ) -> tuple[list[dict], dict]:
     """Structured-field advanced search over patents + utility models."""
-    async with KiprisClient() as client:
-        return await client.search_patents_advanced(
-            invention_title=invention_title,
-            astrt_cont=astrt_cont,
-            claim_scope=claim_scope,
-            applicant=applicant,
-            inventor=inventor,
-            ipc=ipc,
-            application_date=application_date,
-            publication_date=publication_date,
-            patent=patent,
-            utility=utility,
-            num_of_rows=num_of_rows,
-            page_no=page_no,
-            **extra,
-        )
 
 
+@one_shot(_new_client, KiprisClient.get_patent)
 async def get_kipo_patent(number: str, **extra: Any) -> tuple[list[dict], dict]:
     """Fetch a single patent / UM by application or publication number."""
-    async with KiprisClient() as client:
-        return await client.get_patent(number, **extra)
 
 
 # ----------------------------------------------------------------------
@@ -104,6 +95,7 @@ async def search_kipo_trademarks(
         )
 
 
+@one_shot(_new_client, KiprisClient.search_trademarks_advanced)
 async def search_kipo_trademarks_advanced(
     *,
     title: str | None = None,
@@ -117,24 +109,11 @@ async def search_kipo_trademarks_advanced(
     **extra: Any,
 ) -> tuple[list[dict], dict]:
     """Structured-field advanced search over trademarks."""
-    async with KiprisClient() as client:
-        return await client.search_trademarks_advanced(
-            title=title,
-            applicant=applicant,
-            classification=classification,
-            vienna_code=vienna_code,
-            application_date=application_date,
-            registration_date=registration_date,
-            num_of_rows=num_of_rows,
-            page_no=page_no,
-            **extra,
-        )
 
 
+@one_shot(_new_client, KiprisClient.get_trademark)
 async def get_kipo_trademark(number: str, **extra: Any) -> tuple[list[dict], dict]:
     """Fetch a single trademark by application or registration number."""
-    async with KiprisClient() as client:
-        return await client.get_trademark(number, **extra)
 
 
 # ----------------------------------------------------------------------
@@ -159,6 +138,7 @@ async def search_kipo_designs(
         )
 
 
+@one_shot(_new_client, KiprisClient.search_designs_advanced)
 async def search_kipo_designs_advanced(
     *,
     article_name: str | None = None,
@@ -171,23 +151,11 @@ async def search_kipo_designs_advanced(
     **extra: Any,
 ) -> tuple[list[dict], dict]:
     """Structured-field advanced search over designs."""
-    async with KiprisClient() as client:
-        return await client.search_designs_advanced(
-            article_name=article_name,
-            applicant=applicant,
-            loc_code=loc_code,
-            application_date=application_date,
-            registration_date=registration_date,
-            num_of_rows=num_of_rows,
-            page_no=page_no,
-            **extra,
-        )
 
 
+@one_shot(_new_client, KiprisClient.get_design)
 async def get_kipo_design(number: str, **extra: Any) -> tuple[list[dict], dict]:
     """Fetch a single design by application or registration number."""
-    async with KiprisClient() as client:
-        return await client.get_design(number, **extra)
 
 
 __all__ = [

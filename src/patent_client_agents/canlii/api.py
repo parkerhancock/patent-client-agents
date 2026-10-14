@@ -27,6 +27,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel, Field
 
+from patent_client_agents.shared.api import one_shot
+
 from .client import CanLIIClient
 from .models import (
     CaseDatabase,
@@ -145,9 +147,8 @@ def get_client() -> CanLIIClient:
 # ---------------------------------------------------------------------------
 
 
-async def list_case_databases(language: Language = "en") -> CaseDatabaseList:
-    async with CanLIIClient() as client:
-        return await client.list_case_databases(language=language)
+@one_shot(get_client, CanLIIClient.list_case_databases)
+async def list_case_databases(language: Language = "en") -> CaseDatabaseList: ...
 
 
 async def browse_cases(params: BrowseCasesInput) -> CaseList:
@@ -185,9 +186,8 @@ async def get_cited_legislations(params: GetCitatorInput) -> CitedLegislationsRe
 # ---------------------------------------------------------------------------
 
 
-async def list_legislation_databases(language: Language = "en") -> LegislationDatabaseList:
-    async with CanLIIClient() as client:
-        return await client.list_legislation_databases(language=language)
+@one_shot(get_client, CanLIIClient.list_legislation_databases)
+async def list_legislation_databases(language: Language = "en") -> LegislationDatabaseList: ...
 
 
 async def browse_legislation(params: BrowseLegislationInput) -> LegislationList:

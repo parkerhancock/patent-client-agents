@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import warnings
 
+from patent_client_agents.shared.api import one_shot
 from patent_client_agents.uspto_odp import UsptoOdpClient
 from patent_client_agents.uspto_odp.models import (
     PetitionDecisionIdentifierResponse,
@@ -63,6 +64,11 @@ def _warn_client_deprecated() -> None:
     )
 
 
+def _new_client() -> UsptoOdpClient:
+    return UsptoOdpClient()
+
+
+@one_shot(_new_client, UsptoOdpClient.search_petitions, deprecated_client=_warn_client_deprecated)
 async def search_petitions(
     *,
     q: str | None = None,
@@ -79,25 +85,9 @@ async def search_petitions(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    kwargs = {
-        "q": q,
-        "filters": filters,
-        "range_filters": range_filters,
-        "sort": sort,
-        "fields": fields,
-        "facets": facets,
-        "limit": limit,
-        "offset": offset,
-    }
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_petitions(**kwargs)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.search_petitions(**kwargs)
 
 
+@one_shot(_new_client, UsptoOdpClient.get_petition, deprecated_client=_warn_client_deprecated)
 async def get_petition(
     petition_decision_record_identifier: str,
     *,
@@ -108,20 +98,9 @@ async def get_petition(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_petition(
-            petition_decision_record_identifier,
-            include_documents=include_documents,
-        )
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_petition(
-            petition_decision_record_identifier,
-            include_documents=include_documents,
-        )
 
 
+@one_shot(_new_client, UsptoOdpClient.download_petitions, deprecated_client=_warn_client_deprecated)
 async def download_petitions(
     *,
     q: str | None = None,
@@ -138,20 +117,3 @@ async def download_petitions(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    kwargs = {
-        "q": q,
-        "filters": filters,
-        "range_filters": range_filters,
-        "sort": sort,
-        "fields": fields,
-        "limit": limit,
-        "offset": offset,
-        "file_format": file_format,
-    }
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.download_petitions(**kwargs)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.download_petitions(**kwargs)

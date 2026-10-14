@@ -552,7 +552,10 @@ Mechanics that are the same everywhere belong in
 pass the `model_dump` options your tool's output shape needs (for example
 `by_alias=True` or `mode="json"`). Don't define a local `_dump`. HTTP connector clients subclass
 `shared.client.ConnectorClient` so `provenance_for` can report `cache_hit` and
-the original `retrieved_at` (§3). Add a
+the original `retrieved_at` (§3). Module-level functions in `<pkg>/api.py`
+that only open a client, call one method and close it are declared as
+stubs decorated with `shared.api.one_shot(factory, Client.method)` rather than
+written out by hand. Add a
 shared helper when the same logic appears in several modules and differs
 only in parameters; keep connector-specific shape and identity local.
 

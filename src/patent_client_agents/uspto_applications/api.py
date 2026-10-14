@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import warnings
 
+from patent_client_agents.shared.api import one_shot
 from patent_client_agents.uspto_odp import UsptoOdpClient
 from patent_client_agents.uspto_odp.models import (
     ApplicationResponse,
@@ -98,6 +99,10 @@ def _warn_client_deprecated() -> None:
     )
 
 
+def _new_client() -> UsptoOdpClient:
+    return UsptoOdpClient()
+
+
 async def search_applications(
     *,
     q: str | None = None,
@@ -148,6 +153,7 @@ async def search_applications(
         return await cl.search_applications(**kwargs)  # ty: ignore[invalid-argument-type]
 
 
+@one_shot(_new_client, UsptoOdpClient.get_application, deprecated_client=_warn_client_deprecated)
 async def get_application(
     application_number: str,
     *,
@@ -157,14 +163,9 @@ async def get_application(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_application(application_number)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_application(application_number)
 
 
+@one_shot(_new_client, UsptoOdpClient.get_documents, deprecated_client=_warn_client_deprecated)
 async def list_documents(
     application_number: str,
     *,
@@ -175,20 +176,9 @@ async def list_documents(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_documents(
-            application_number,
-            include_associated=include_associated,
-        )
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_documents(
-            application_number,
-            include_associated=include_associated,
-        )
 
 
+@one_shot(_new_client, UsptoOdpClient.get_family, deprecated_client=_warn_client_deprecated)
 async def get_family(
     identifier: str,
     *,
@@ -198,12 +188,6 @@ async def get_family(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_family(identifier)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_family(identifier)
 
 
 # ---------------------------------------------------------------------------
@@ -211,6 +195,9 @@ async def get_family(
 # ---------------------------------------------------------------------------
 
 
+@one_shot(
+    _new_client, UsptoOdpClient.search_trial_proceedings, deprecated_client=_warn_client_deprecated
+)
 async def search_trial_proceedings(
     *,
     query: str | None = None,
@@ -227,25 +214,11 @@ async def search_trial_proceedings(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    kwargs = {
-        "query": query,
-        "fields": fields,
-        "facets": facets,
-        "filters": filters,
-        "range_filters": range_filters,
-        "sort": sort,
-        "limit": limit,
-        "offset": offset,
-    }
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_trial_proceedings(**kwargs)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.search_trial_proceedings(**kwargs)
 
 
+@one_shot(
+    _new_client, UsptoOdpClient.get_trial_proceeding, deprecated_client=_warn_client_deprecated
+)
 async def get_trial_proceeding(
     trial_number: str,
     *,
@@ -255,12 +228,6 @@ async def get_trial_proceeding(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_trial_proceeding(trial_number)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_trial_proceeding(trial_number)
 
 
 # ---------------------------------------------------------------------------
@@ -268,6 +235,9 @@ async def get_trial_proceeding(
 # ---------------------------------------------------------------------------
 
 
+@one_shot(
+    _new_client, UsptoOdpClient.search_trial_decisions, deprecated_client=_warn_client_deprecated
+)
 async def search_trial_decisions(
     *,
     query: str | None = None,
@@ -284,25 +254,13 @@ async def search_trial_decisions(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    kwargs = {
-        "query": query,
-        "fields": fields,
-        "facets": facets,
-        "filters": filters,
-        "range_filters": range_filters,
-        "sort": sort,
-        "limit": limit,
-        "offset": offset,
-    }
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_trial_decisions(**kwargs)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.search_trial_decisions(**kwargs)
 
 
+@one_shot(
+    _new_client,
+    UsptoOdpClient.get_trial_decisions_by_trial,
+    deprecated_client=_warn_client_deprecated,
+)
 async def get_trial_decisions_by_trial(
     trial_number: str,
     *,
@@ -312,12 +270,6 @@ async def get_trial_decisions_by_trial(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_trial_decisions_by_trial(trial_number)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_trial_decisions_by_trial(trial_number)
 
 
 # ---------------------------------------------------------------------------
@@ -325,6 +277,9 @@ async def get_trial_decisions_by_trial(
 # ---------------------------------------------------------------------------
 
 
+@one_shot(
+    _new_client, UsptoOdpClient.search_trial_documents, deprecated_client=_warn_client_deprecated
+)
 async def search_trial_documents(
     *,
     query: str | None = None,
@@ -341,25 +296,13 @@ async def search_trial_documents(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    kwargs = {
-        "query": query,
-        "fields": fields,
-        "facets": facets,
-        "filters": filters,
-        "range_filters": range_filters,
-        "sort": sort,
-        "limit": limit,
-        "offset": offset,
-    }
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_trial_documents(**kwargs)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.search_trial_documents(**kwargs)
 
 
+@one_shot(
+    _new_client,
+    UsptoOdpClient.get_trial_documents_by_trial,
+    deprecated_client=_warn_client_deprecated,
+)
 async def get_trial_documents_by_trial(
     trial_number: str,
     *,
@@ -369,12 +312,6 @@ async def get_trial_documents_by_trial(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_trial_documents_by_trial(trial_number)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_trial_documents_by_trial(trial_number)
 
 
 # ---------------------------------------------------------------------------
@@ -382,6 +319,9 @@ async def get_trial_documents_by_trial(
 # ---------------------------------------------------------------------------
 
 
+@one_shot(
+    _new_client, UsptoOdpClient.search_appeal_decisions, deprecated_client=_warn_client_deprecated
+)
 async def search_appeal_decisions(
     *,
     query: str | None = None,
@@ -398,25 +338,13 @@ async def search_appeal_decisions(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    kwargs = {
-        "query": query,
-        "fields": fields,
-        "facets": facets,
-        "filters": filters,
-        "range_filters": range_filters,
-        "sort": sort,
-        "limit": limit,
-        "offset": offset,
-    }
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_appeal_decisions(**kwargs)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.search_appeal_decisions(**kwargs)
 
 
+@one_shot(
+    _new_client,
+    UsptoOdpClient.get_appeal_decisions_by_number,
+    deprecated_client=_warn_client_deprecated,
+)
 async def get_appeal_decisions_by_number(
     appeal_number: str,
     *,
@@ -426,12 +354,6 @@ async def get_appeal_decisions_by_number(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_appeal_decisions_by_number(appeal_number)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_appeal_decisions_by_number(appeal_number)
 
 
 # ---------------------------------------------------------------------------
@@ -439,6 +361,11 @@ async def get_appeal_decisions_by_number(
 # ---------------------------------------------------------------------------
 
 
+@one_shot(
+    _new_client,
+    UsptoOdpClient.search_interference_decisions,
+    deprecated_client=_warn_client_deprecated,
+)
 async def search_interference_decisions(
     *,
     query: str | None = None,
@@ -455,25 +382,13 @@ async def search_interference_decisions(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    kwargs = {
-        "query": query,
-        "fields": fields,
-        "facets": facets,
-        "filters": filters,
-        "range_filters": range_filters,
-        "sort": sort,
-        "limit": limit,
-        "offset": offset,
-    }
-
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.search_interference_decisions(**kwargs)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.search_interference_decisions(**kwargs)
 
 
+@one_shot(
+    _new_client,
+    UsptoOdpClient.get_interference_decisions_by_number,
+    deprecated_client=_warn_client_deprecated,
+)
 async def get_interference_decisions_by_number(
     interference_number: str,
     *,
@@ -483,9 +398,3 @@ async def get_interference_decisions_by_number(
 
     If no client is provided, creates one internally and closes it after the request.
     """
-    if client is not None:
-        _warn_client_deprecated()
-        return await client.get_interference_decisions_by_number(interference_number)
-
-    async with UsptoOdpClient() as cl:
-        return await cl.get_interference_decisions_by_number(interference_number)

@@ -136,6 +136,14 @@ line-ending = "auto"
 [tool.ty.environment]
 python-version = "3.11"
 
+# Module-level functions built with ``shared.api.one_shot`` are declared as
+# ``async def name(...) -> T: ...``; the decorator supplies the body.
+[[tool.ty.overrides]]
+include = ["src/patent_client_agents/*/api.py"]
+
+[tool.ty.overrides.rules]
+empty-body = "ignore"
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
