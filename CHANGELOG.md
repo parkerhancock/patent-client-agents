@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.31.0] — 2026-10-14
+
+### Added
+
+- `patent_client_agents.identifiers.PatentNumber`: one frozen parse of a
+  patent, publication, or application number (`country`, `series`,
+  `number`, `kind`, `raw`, `ambiguous`) via `PatentNumber.parse(s, hint=None)`.
+  Legacy emitters (`ppubs_pn`, `odp_patent_query`, `odp_application`,
+  `epo_original`, `epo_docdb`, `google_slug`, `is_us`) reproduce each
+  connector's existing normalizer byte for byte.
+
+### Changed
+
+- The PPUBS, ODP, EPO OPS, Google Patents, and unified patent-number
+  normalizers now delegate to `PatentNumber`. Behavior is unchanged; a
+  differential test pins every emitter to a frozen copy of the original
+  normalizer over 770 inputs. Cross-connector disagreements (for example
+  `US2023012345A1` and `RE46070E`) are preserved for now.
+
 ## [0.30.0] — 2026-10-07
 
 ### Added
@@ -2022,7 +2041,8 @@ release so existing internal callers don't break.
   bool` field on the result so callers can distinguish authoritative
   vs estimated values.
 
-[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.30.0...HEAD
+[Unreleased]: https://github.com/parkerhancock/patent-client-agents/compare/v0.31.0...HEAD
+[0.31.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.30.0...v0.31.0
 [0.30.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.29.0...v0.30.0
 [0.29.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.28.0...v0.29.0
 [0.28.0]: https://github.com/parkerhancock/patent-client-agents/compare/v0.27.1...v0.28.0

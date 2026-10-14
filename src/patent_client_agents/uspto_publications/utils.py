@@ -5,6 +5,8 @@ from itertools import zip_longest
 
 import lxml.html as lh
 
+from ..identifiers import PatentNumber
+
 __all__ = ["html_to_text", "ClaimsParser", "normalize_publication_number"]
 
 _NEWLINE_RE = re.compile(r"<br\s*/?>\s*", flags=re.IGNORECASE)
@@ -111,19 +113,6 @@ class ClaimsParser:
         return []
 
 
-PUB_NUMBER_CLEAN_RE = re.compile(r"[^A-Z0-9]")
-
-
-_KIND_CODE_RE = re.compile(r"[A-Z]\d$")
-
-#: Lone kind letter on a design/reissue/plant/utility grant (``D1142829S``,
-#: ``RE46070E``). Only stripped after at least one digit, so bare prefixes stay.
-_BARE_KIND_LETTER_RE = re.compile(r"(?<=\d)[A-Z]$")
-
-#: EPO docdb form of a US pre-grant publication: year + 6-digit serial.
-_DOCDB_PGPUB_RE = re.compile(r"^(20\d{2})(\d{6})$")
-
-
 def normalize_publication_number(value: str | None) -> str:
     """Normalize a publication number for PPUBS PN searches.
 
@@ -133,17 +122,4 @@ def normalize_publication_number(value: str | None) -> str:
     PPUBS does not index kind codes in the .pn. field, so including them
     causes zero results.
     """
-    if not value:
-        return ""
-    cleaned = PUB_NUMBER_CLEAN_RE.sub("", value.upper())
-    if cleaned.startswith("US"):
-        cleaned = cleaned[2:]
-    stripped = _KIND_CODE_RE.sub("", cleaned)
-    if stripped == cleaned:
-        stripped = _BARE_KIND_LETTER_RE.sub("", cleaned)
-    cleaned = stripped
-    # ``US2016309324A1`` (EPO docdb style) → PPUBS's ``20160309324``.
-    docdb = _DOCDB_PGPUB_RE.match(cleaned)
-    if docdb:
-        cleaned = f"{docdb.group(1)}0{docdb.group(2)}"
-    return cleaned
+    return PatentNumber.parse(value).ppubs_pn()

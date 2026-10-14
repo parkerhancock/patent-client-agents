@@ -7,7 +7,6 @@ import base64
 import datetime as dt
 import logging
 import os
-import re
 from io import BytesIO
 from pathlib import Path
 from typing import Any
@@ -26,6 +25,7 @@ from mcp_data_core.exceptions import (
     RetryableAuthenticationError,
 )
 
+from ..identifiers import PatentNumber
 from .models import (
     BiblioResponse,
     CitationResponse,
@@ -69,9 +69,6 @@ from .parsing import (
 )
 
 logger = logging.getLogger(__name__)
-
-#: Printed US pre-grant publication number: US + year + "0" + 6-digit serial.
-_US_PGPUB_PRINTED_RE = re.compile(r"^US(20\d{2})0(\d{6})([A-Z]\d?)?$")
 
 BASE_URL = "https://ops.epo.org/3.2"
 CACHE_DIR = Path.home() / ".cache" / "epo_ops_mcp"
@@ -279,7 +276,7 @@ class EpoOpsClient(BaseAsyncClient):
 
     @staticmethod
     def _normalize_number(number: str) -> str:
-        return number.strip().replace(" ", "").upper()
+        return PatentNumber.parse(number).epo_original()
 
     @classmethod
     def _ops_number(cls, number: str, *, doc_type: str, fmt: str) -> str:
@@ -290,13 +287,9 @@ class EpoOpsClient(BaseAsyncClient):
         6-digit serial (``US2005262543A1``). Sending the printed form returns
         ``SERVER.EntityNotFound``, so convert it here.
         """
-        normalized = cls._normalize_number(number)
         if doc_type == "publication" and fmt in ("docdb", "epodoc"):
-            match = _US_PGPUB_PRINTED_RE.match(normalized)
-            if match:
-                year, serial, kind = match.groups()
-                normalized = f"US{year}{serial}{kind or ''}"
-        return normalized
+            return PatentNumber.parse(number).epo_docdb()
+        return cls._normalize_number(number)
 
     @staticmethod
     def _normalize_symbol(symbol: str) -> str:

@@ -40,6 +40,7 @@ from patent_client_agents.epo_ops.models import (
     FamilyIntelligenceResponse,
     SourceEvidence,
 )
+from patent_client_agents.identifiers import PatentNumber
 
 epo_ops_mcp = FastMCP("EPO OPS")
 
@@ -273,7 +274,7 @@ def _coalesce_number_list(
 
 
 def _normalize_epo_number(number: str) -> str:
-    return number.strip().replace(" ", "").upper()
+    return PatentNumber.parse(number).epo_original()
 
 
 # ---------------------------------------------------------------------------
