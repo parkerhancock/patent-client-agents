@@ -12,7 +12,6 @@ from typing import Any, Literal, TypeVar, cast
 
 import httpx
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
@@ -20,6 +19,7 @@ from mcp_data_core.exceptions import (
     NotFoundError,
     RateLimitError,
 )
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     ThaiDipCopyrightRecord,
@@ -208,7 +208,7 @@ def _gi(row: dict[str, Any]) -> ThaiDipGiRecord:
     )
 
 
-class ThaiDipClient(BaseAsyncClient):
+class ThaiDipClient(ConnectorClient):
     """Client for seven register datasets in Thailand's DIP Data Exchange."""
 
     DEFAULT_BASE_URL = BASE_URL

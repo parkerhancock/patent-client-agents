@@ -15,7 +15,6 @@ from mcp_data_core.envelope import (
     ResponseEnvelope,
     decode_cursor,
     encode_cursor,
-    make_provenance,
 )
 from mcp_data_core.exceptions import (
     ApiError,
@@ -42,6 +41,7 @@ from patent_client_agents.epo_ops.models import (
 )
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 epo_ops_mcp = FastMCP("EPO OPS")
 
@@ -97,7 +97,7 @@ _EPO_JURISDICTION_RECIPES = {
 
 def _epo_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}`` on EPO OPS."""
-    return make_provenance(source_url=f"{_EPO_OPS_BASE}{path}", source_name=_EPO_OPS_NAME)
+    return provenance_for(source_url=f"{_EPO_OPS_BASE}{path}", source_name=_EPO_OPS_NAME)
 
 
 def _stub_epo_search_hit(record: dict) -> dict:
@@ -823,11 +823,11 @@ _EPO_FAMILY_AGGREGATE_NAME = (
 
 def _epo_register_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}`` on the EPO Register."""
-    return make_provenance(source_url=f"{_EPO_REGISTER_BASE}{path}", source_name=_EPO_REGISTER_NAME)
+    return provenance_for(source_url=f"{_EPO_REGISTER_BASE}{path}", source_name=_EPO_REGISTER_NAME)
 
 
 def _epo_register_record_provenance(path: str) -> Any:
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_EPO_REGISTER_BASE}{path}",
         source_name=_EPO_REGISTER_RECORD_NAME,
     )
@@ -984,7 +984,7 @@ def _family_intelligence_summary(details: FamilyIntelligenceResponse) -> str:
 def _family_intelligence_provenance(*, register_attempted: bool) -> Any:
     if not register_attempted:
         return _epo_provenance("")
-    return make_provenance(
+    return provenance_for(
         source_url=_EPO_REGISTER_BASE,
         source_name=_EPO_FAMILY_AGGREGATE_NAME,
     )

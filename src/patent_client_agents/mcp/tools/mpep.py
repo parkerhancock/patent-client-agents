@@ -15,11 +15,12 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.mpep import MpepClient, get_corpus_status
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 mpep_mcp = FastMCP("MPEP")
 
@@ -51,7 +52,7 @@ def _mpep_provenance(path: str) -> Any:
     template all 8 ``mcp_local`` substantive-law corpora in row 18 copy.
     """
     status = get_corpus_status()
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_MPEP_BASE}{path}",
         source_name=_MPEP_NAME,
         corpus_synced_at=status["corpus_synced_at"],

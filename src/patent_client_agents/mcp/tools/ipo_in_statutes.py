@@ -18,7 +18,7 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.ipo_in_statutes import (
@@ -27,6 +27,7 @@ from patent_client_agents.ipo_in_statutes import (
     parse_citation,
 )
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 ipo_in_statutes_mcp = FastMCP("IPO India — Statutes")
 
@@ -55,7 +56,7 @@ def _statutes_provenance(source_url: str) -> Any:
     the values track the bundled corpus without per-call hardcoding.
     """
     status = get_corpus_status()
-    return make_provenance(
+    return provenance_for(
         source_url=source_url,
         source_name=_IPO_IN_SOURCE_NAME,
         corpus_synced_at=status["corpus_synced_at"],

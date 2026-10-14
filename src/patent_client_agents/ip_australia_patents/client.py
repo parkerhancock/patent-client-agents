@@ -25,20 +25,20 @@ from typing import Any
 
 import httpx
 
-from mcp_data_core import BaseAsyncClient
 from patent_client_agents.ip_australia_common import (
     IpAustraliaEnvironment,
     build_auth,
     host_for,
     resolve_environment,
 )
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import Patent, PatentSearchResult
 
 _API_PATH = "/public/australian-patent-search-api/v1"
 
 
-class IpAustraliaPatentsClient(BaseAsyncClient):
+class IpAustraliaPatentsClient(ConnectorClient):
     """Async client for the Australian Patent Search API."""
 
     CACHE_NAME: str = "ip_australia_patents"

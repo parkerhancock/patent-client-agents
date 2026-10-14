@@ -12,13 +12,13 @@ from mcp_data_core.envelope import (
     ListEnvelope,
     decode_cursor,
     encode_cursor,
-    make_provenance,
 )
 from mcp_data_core.exceptions import NotFoundError, ParseError, ValidationError
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import download_tool_result, read_resource, register_source
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 from patent_client_agents.uspto_odp import PtabTrialsClient, UsptoOdpClient
 
 uspto_mcp = FastMCP("USPTO")
@@ -36,7 +36,7 @@ _USPTO_ODP_NAME = "USPTO Open Data Portal"
 
 def _odp_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}``."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_USPTO_ODP_BASE}{path}",
         source_name=_USPTO_ODP_NAME,
     )

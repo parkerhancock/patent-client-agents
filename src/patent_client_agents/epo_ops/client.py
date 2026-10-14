@@ -16,7 +16,6 @@ import hishel
 import httpx
 import lxml.etree as etree  # ty: ignore[unresolved-import]  # lxml lacks PEP 561 stubs
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.cache import build_cached_http_client
 from mcp_data_core.exceptions import (
     AuthenticationError,
@@ -24,6 +23,7 @@ from mcp_data_core.exceptions import (
     RateLimitError,
     RetryableAuthenticationError,
 )
+from patent_client_agents.shared.client import ConnectorClient, install_fetch_recording
 
 from .models import (
     BiblioResponse,
@@ -200,7 +200,7 @@ class OpsAuth(httpx.Auth):
         )
 
 
-class EpoOpsClient(BaseAsyncClient):
+class EpoOpsClient(ConnectorClient):
     DEFAULT_BASE_URL = BASE_URL
     CACHE_NAME = "epo_ops"
     DEFAULT_TIMEOUT = 60.0
@@ -239,6 +239,8 @@ class EpoOpsClient(BaseAsyncClient):
             http2=False,
             transport=transport,
         )
+        # Built here rather than by BaseAsyncClient.__init__, so add the hook directly.
+        install_fetch_recording(self._client)
 
     def _build_url(self, path: str) -> str:
         """Build a full URL, passing through absolute URLs unchanged."""

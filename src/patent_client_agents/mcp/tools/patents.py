@@ -12,7 +12,7 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.exceptions import NotFoundError, RateLimitError, ValidationError
 from mcp_data_core.filenames import patent_pdf as _patent_pdf_name
 from mcp_data_core.mcp.annotations import READ_ONLY
@@ -25,6 +25,7 @@ from patent_client_agents import unified
 from patent_client_agents.google_patents import GooglePatentsClient
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 _GET_PATENT_BUDGET_SECONDS = 60.0
 
@@ -44,7 +45,7 @@ _GOOGLE_PATENTS_NAME = "Google Patents (worldwide aggregator)"
 
 def _google_patents_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}`` for the Google Patents upstream."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_GOOGLE_PATENTS_BASE}{path}",
         source_name=_GOOGLE_PATENTS_NAME,
     )

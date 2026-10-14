@@ -29,13 +29,14 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.inpi_pi import InpiPiClient
 from patent_client_agents.inpi_pi.models import InpiDesignRow, InpiTrademarkRow
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 inpi_pi_mcp = FastMCP("INPI-PI")
 
@@ -55,7 +56,7 @@ _INPI_BASE = "https://api-gateway.inpi.fr"
 
 def _inpi_provenance(path: str) -> Any:
     """Build a Provenance pointing at the canonical INPI gateway path."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_INPI_BASE}{path}",
         source_name=_INPI_ATTRIBUTION,
     )

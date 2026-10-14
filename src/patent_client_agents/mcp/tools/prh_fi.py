@@ -15,7 +15,7 @@ from typing import Annotated, Any
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.downloads import download_response
 from patent_client_agents.prh_fi import PrhClient
@@ -31,6 +31,7 @@ from patent_client_agents.prh_fi.client import (
 )
 from patent_client_agents.shared.envelope import dump
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 prh_fi_mcp = FastMCP("PRH Finland")
 
@@ -38,7 +39,7 @@ _PRH_SOURCE_NAME = "Patentti- ja rekisterihallitus (PRH, Finland)"
 
 
 def _provenance(source_url: str) -> Any:
-    return make_provenance(source_url=source_url, source_name=_PRH_SOURCE_NAME)
+    return provenance_for(source_url=source_url, source_name=_PRH_SOURCE_NAME)
 
 
 def _project_dossier_row(row: Any, *, full: bool) -> dict[str, Any]:

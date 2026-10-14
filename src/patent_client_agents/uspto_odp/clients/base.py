@@ -9,8 +9,8 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import ConfigurationError, NotFoundError
+from patent_client_agents.shared.client import ConnectorClient
 
 BASE_URL = "https://api.uspto.gov"
 
@@ -182,7 +182,7 @@ class SearchPayload(BaseModel):
         return _prune(data)
 
 
-class UsptoOdpBaseClient(BaseAsyncClient):
+class UsptoOdpBaseClient(ConnectorClient):
     """Base client for USPTO Open Data Portal APIs.
 
     Handles API key authentication and common utilities.

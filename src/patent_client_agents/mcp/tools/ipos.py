@@ -24,7 +24,7 @@ from typing import Annotated, Any, cast
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.ipos_manuals import (
     IposManualsClient,
@@ -46,6 +46,7 @@ from patent_client_agents.ipos_statutes import search as _search_statutes
 from patent_client_agents.ipos_statutes.client import parse_citation as _parse_statute_citation
 from patent_client_agents.shared.envelope import dump, dump_any
 from patent_client_agents.shared.fanout import FetchedList, as_id_list, fetch_many, fetched_summary
+from patent_client_agents.shared.provenance import provenance_for
 
 ipos_mcp = FastMCP("IPOS Singapore")
 
@@ -62,7 +63,7 @@ _IPOS_BASE = "https://www.ipos.gov.sg"
 def _statutes_provenance(source_url: str) -> Any:
     """Build a Provenance for an IPOS statutes corpus response."""
     status = _statutes_status()
-    return make_provenance(
+    return provenance_for(
         source_url=source_url,
         source_name=_IPOS_NAME,
         corpus_synced_at=status["corpus_synced_at"],
@@ -73,7 +74,7 @@ def _statutes_provenance(source_url: str) -> Any:
 def _manuals_provenance(source_url: str) -> Any:
     """Build a Provenance for an IPOS manuals corpus response."""
     status = _manuals_status()
-    return make_provenance(
+    return provenance_for(
         source_url=source_url,
         source_name=_IPOS_NAME,
         corpus_synced_at=status["corpus_synced_at"],

@@ -20,7 +20,7 @@ from urllib.parse import urlsplit
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, decode_cursor, encode_cursor, make_provenance
+from mcp_data_core.envelope import ListEnvelope, decode_cursor, encode_cursor
 from mcp_data_core.exceptions import ValidationError
 from mcp_data_core.filenames import cafc_opinion as _cafc_name
 from mcp_data_core.mcp import download_response, register_source
@@ -28,6 +28,7 @@ from mcp_data_core.mcp.annotations import READ_ONLY
 from patent_client_agents.cafc import CAFCClient, PatentClassifier
 from patent_client_agents.cafc.models import CAFCOpinion
 from patent_client_agents.shared.envelope import dump
+from patent_client_agents.shared.provenance import provenance_for
 
 cafc_mcp = FastMCP("CAFC")
 
@@ -44,7 +45,7 @@ _CAFC_NAME = "U.S. Court of Appeals for the Federal Circuit"
 
 def _cafc_provenance(path: str) -> Any:
     """Build a Provenance pointing at ``{base}{path}``."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_CAFC_BASE}{path}",
         source_name=_CAFC_NAME,
     )

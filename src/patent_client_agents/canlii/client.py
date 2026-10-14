@@ -16,8 +16,8 @@ from __future__ import annotations
 import os
 from typing import Any
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import ApiError, ConfigurationError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     CaseDatabaseList,
@@ -35,7 +35,7 @@ from .models import (
 _MAX_RESULT_COUNT = 10_000
 
 
-class CanLIIClient(BaseAsyncClient):
+class CanLIIClient(ConnectorClient):
     """Async client for ``api.canlii.org``.
 
     See module docstring for the auth + pagination contract.

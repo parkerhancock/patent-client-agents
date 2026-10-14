@@ -39,6 +39,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 
+- Tool provenance reports `cache_hit: true` when every response in the call
+  came from the HTTP cache, and `retrieved_at` as the original upstream fetch
+  time rather than the time the cache was read (CONNECTOR_STANDARDS §3).
+  Previously every non-fee tool reported `cache_hit: false` and the current
+  time.
 - CKAN bulk downloads (IP Australia, ILPO, INPI Brazil) request the
   resource's real URL instead of one with the base URL prefixed (#111).
 - Thai DIP `get_trademark` returns the exact application, not the first

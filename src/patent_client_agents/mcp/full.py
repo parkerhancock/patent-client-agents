@@ -18,6 +18,7 @@ from __future__ import annotations
 
 from fastmcp import FastMCP
 
+from .middleware import FetchTracking
 from .tools.cafc import cafc_mcp
 from .tools.canada_federal_court import canada_federal_court_mcp
 from .tools.canlii import canlii_mcp
@@ -88,6 +89,9 @@ ip_mcp = FastMCP(
         "234 tools when every env-gated family is configured. Tools are grouped by intent."
     ),
 )
+
+# Lets tool provenance report cache hits (shared.provenance).
+ip_mcp.add_middleware(FetchTracking())
 
 ip_mcp.mount(patents_mcp)
 ip_mcp.mount(uspto_mcp)

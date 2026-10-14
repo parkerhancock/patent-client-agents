@@ -16,7 +16,6 @@ from urllib.parse import quote
 
 import httpx
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
@@ -24,6 +23,7 @@ from mcp_data_core.exceptions import (
     NotFoundError,
     RateLimitError,
 )
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     IponzDesignRecord,
@@ -278,7 +278,7 @@ def _identifier(value: str, *, numeric: bool) -> str:
     return quote(resolved, safe="")
 
 
-class IponzClient(BaseAsyncClient):
+class IponzClient(ConnectorClient):
     """Read-only client for public IPONZ patent, trade mark, and design data."""
 
     DEFAULT_BASE_URL = PRODUCTION_BASE_URL

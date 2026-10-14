@@ -10,8 +10,8 @@ from urllib.parse import urljoin
 import httpx
 from lxml import html
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import NotFoundError, ParseError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     ChinaSpcIpHearingIndexItem,
@@ -269,7 +269,7 @@ def parse_site_search(
     )
 
 
-class ChinaSpcIpCourtClient(BaseAsyncClient):
+class ChinaSpcIpCourtClient(ConnectorClient):
     """Read-only client for the SPC IP Court's public website."""
 
     DEFAULT_BASE_URL = DEFAULT_BASE_URL

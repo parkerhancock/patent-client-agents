@@ -4,13 +4,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import ApiError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import TrademarkAssignmentRecord, TrademarkAssignmentSearchResponse
 
 
-class TrademarkAssignmentClient(BaseAsyncClient):
+class TrademarkAssignmentClient(ConnectorClient):
     """Async client for the USPTO Trademark Assignment Center API.
 
     Provides programmatic access to trademark assignment records, supporting

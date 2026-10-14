@@ -14,7 +14,6 @@ from typing import Any, Literal
 
 import httpx
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
@@ -23,6 +22,7 @@ from mcp_data_core.exceptions import (
     RateLimitError,
     ValidationError,
 )
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     OepmDesignRecord,
@@ -271,7 +271,7 @@ def _design(response: ET.Element, identifier: str, modality: str) -> OepmDesignR
     )
 
 
-class OepmSpainClient(BaseAsyncClient):
+class OepmSpainClient(ConnectorClient):
     """Client for exact-number lookups in Spain's OEPM CEO register."""
 
     DEFAULT_BASE_URL = BASE_URL

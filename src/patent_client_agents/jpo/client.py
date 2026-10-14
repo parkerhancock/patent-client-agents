@@ -23,7 +23,6 @@ from typing import Any
 
 import httpx
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
@@ -32,6 +31,7 @@ from mcp_data_core.exceptions import (
     RateLimitError,
 )
 from mcp_data_core.resilience import default_retryer
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     ApiResult,
@@ -210,7 +210,7 @@ class RateLimiter:
             self._timestamps.append(time.time())
 
 
-class JpoClient(BaseAsyncClient):
+class JpoClient(ConnectorClient):
     """Async client for JPO Patent Information Retrieval API.
 
     Handles OAuth2 authentication, in-process rate limiting, and exposes

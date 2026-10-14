@@ -23,7 +23,7 @@ from urllib.parse import urlsplit
 
 from fastmcp import FastMCP
 
-from mcp_data_core.envelope import ListEnvelope, make_provenance
+from mcp_data_core.envelope import ListEnvelope
 from mcp_data_core.mcp.annotations import READ_ONLY
 from mcp_data_core.mcp.conditional import conditional_tool
 from patent_client_agents.kipo_kipris import (
@@ -52,6 +52,7 @@ from patent_client_agents.shared.fanout import (
     fetch_many,
     fetched_summary,
 )
+from patent_client_agents.shared.provenance import provenance_for
 
 kipo_kipris_mcp = FastMCP("KIPO — KIPRIS Plus")
 
@@ -80,7 +81,7 @@ def _kipo_tool(func: Callable[..., Any]) -> Callable[..., Any]:
 
 def _kipo_provenance(service: str, operation: str) -> Any:
     """Build a Provenance for a KIPRIS Plus operation URL."""
-    return make_provenance(
+    return provenance_for(
         source_url=f"{_KIPRIS_BASE_URL}/{service}/{operation}",
         source_name=_KIPO_ATTRIBUTION,
     )

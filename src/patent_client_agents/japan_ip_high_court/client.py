@@ -10,8 +10,8 @@ from typing import Any, Literal
 import httpx
 import xlrd
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import NotFoundError, ParseError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import JapanIpHighCourtCase, JapanIpHighCourtCaseList
 
@@ -191,7 +191,7 @@ def find_case(
     raise NotFoundError(f"Japan IP High Court case not found: {case_number}")
 
 
-class JapanIpHighCourtClient(BaseAsyncClient):
+class JapanIpHighCourtClient(ConnectorClient):
     """Read-only client for the weekly patent and utility-model case workbook."""
 
     DEFAULT_BASE_URL = DEFAULT_BASE_URL

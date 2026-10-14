@@ -24,9 +24,9 @@ from typing import Any, Literal
 
 import httpx
 
-from mcp_data_core import BaseAsyncClient
 from mcp_data_core.exceptions import ConfigurationError
 from mcp_data_core.oauth2 import OAuth2ClientCredentialsAuth
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import Design, DesignSearchResult
 
@@ -42,7 +42,7 @@ _MAX_PAGE_SIZE = 100
 _MIN_PAGE_SIZE = 10
 
 
-class EuipoDesignsClient(BaseAsyncClient):
+class EuipoDesignsClient(ConnectorClient):
     """Async client for ``api(-sandbox).euipo.europa.eu/design-search``."""
 
     CACHE_NAME: str = "euipo_designs"

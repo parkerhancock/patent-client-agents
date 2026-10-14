@@ -16,7 +16,6 @@ from typing import Any, Generic, Literal, TypeVar
 
 import httpx
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import (
     ApiError,
     AuthenticationError,
@@ -24,6 +23,7 @@ from mcp_data_core.exceptions import (
     NotFoundError,
     RateLimitError,
 )
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import (
     IpiPatentRecord,
@@ -312,7 +312,7 @@ def _check_result(result: ET.Element) -> None:
         raise ApiError(f"Swiss IPI API error: {message or 'request failed'}", -1, "")
 
 
-class IpiSwissregClient(BaseAsyncClient):
+class IpiSwissregClient(ConnectorClient):
     """Client for Swiss patent, trademark, SPC, and publication searches."""
 
     DEFAULT_BASE_URL = BASE_URL

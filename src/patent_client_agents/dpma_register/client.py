@@ -14,8 +14,8 @@ from urllib.parse import quote
 
 import httpx
 
-from mcp_data_core.base_client import BaseAsyncClient
 from mcp_data_core.exceptions import ApiError, ConfigurationError, NotFoundError, RateLimitError
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import DesignRecord, PatentUtilityRecord, TrademarkRecord, parse_dpma_date
 
@@ -177,7 +177,7 @@ def _design(element: ET.Element) -> DesignRecord:
     )
 
 
-class DpmaRegisterClient(BaseAsyncClient):
+class DpmaRegisterClient(ConnectorClient):
     """Client for DPMA patent, trademark, and design register services."""
 
     DEFAULT_BASE_URL = BASE_URL

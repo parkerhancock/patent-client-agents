@@ -19,20 +19,20 @@ from typing import Any
 
 import httpx
 
-from mcp_data_core import BaseAsyncClient
 from patent_client_agents.ip_australia_common import (
     IpAustraliaEnvironment,
     build_auth,
     host_for,
     resolve_environment,
 )
+from patent_client_agents.shared.client import ConnectorClient
 
 from .models import Trademark, TrademarkSearchResult
 
 _API_PATH = "/public/australian-trade-mark-search-api/v1"
 
 
-class IpAustraliaTrademarksClient(BaseAsyncClient):
+class IpAustraliaTrademarksClient(ConnectorClient):
     """Async client for the Australian Trade Mark Search API."""
 
     CACHE_NAME: str = "ip_australia_trademarks"
