@@ -28,9 +28,54 @@ async function recording<T>(
   name: string,
   key: string | undefined,
   run: (client: TsdrClient) => Promise<T>,
+  retryRecorded = false,
 ) {
-  const path = resolve(import.meta.dir, "cassettes", `tsdr-live-${name}.yaml`);
-  const failurePath = path.replace(/\.yaml$/, ".failure.json");
+  let path = resolve(import.meta.dir, "cassettes", `tsdr-live-${name}.yaml`);
+  const basePath = path;
+  let attempt = 0;
+  for (;;) {
+    const next = basePath.replace(
+      ".yaml",
+      `-retry${attempt ? `-${attempt + 1}` : ""}.yaml`,
+    );
+    if (
+      !existsSync(next) &&
+      !existsSync(next.replace(".yaml", ".failure.json"))
+    )
+      break;
+    path = next;
+    attempt++;
+  }
+  if (retryRecorded) {
+    const previous = existsSync(path) ? new Cassette(path) : undefined;
+    previous?.load();
+    const unsuccessful =
+      existsSync(path.replace(".yaml", ".failure.json")) ||
+      previous?.interactions.some((i) => i.response.status >= 400);
+    if (!previous && !unsuccessful)
+      throw new Error(
+        "Explicit retry requires a previously unsuccessful recording.",
+      );
+    if (unsuccessful) {
+      const throttled = previous?.interactions.find(
+        (i) => i.response.status === 429,
+      );
+      if (throttled) {
+        const delay = Number(
+          throttled.response.headers["retry-after"]?.[0] ?? 60,
+        );
+        if (Date.now() < Date.parse(throttled.recordedAt) + delay * 1000)
+          throw new Error(
+            "Recorded TSDR Retry-After interval has not elapsed.",
+          );
+      }
+      path = basePath.replace(
+        ".yaml",
+        `-retry${attempt ? `-${attempt + 1}` : ""}.yaml`,
+      );
+    }
+  }
+  const failurePath = path.replace(".yaml", ".failure.json");
   if (existsSync(failurePath)) {
     const failure = (await Bun.file(failurePath).json()) as {
       status: number;
@@ -52,6 +97,7 @@ async function recording<T>(
     },
   });
   cassette.load();
+  if (record) await Bun.sleep(6000);
   const fetcher = Object.assign(
     async (input: RequestInfo | URL, init?: RequestInit) => {
       const request = new Request(input, init);
@@ -68,6 +114,8 @@ async function recording<T>(
             `/ts/cd/casestatus/sn${serial}/content.html`,
             `/ts/cd/casedocs/sn${serial}/bundle`,
             "/ts/cd/casedocs/bundle.xml",
+            "/ts/cd/casedocs/bundle.pdf",
+            "/ts/cd/casedocs/bundle.zip",
             "/ts/cd/caseMultiStatus/sn",
             "/last-update/info.xml",
             "/last-update/info.json",
@@ -76,8 +124,11 @@ async function recording<T>(
             `^/ts/cd/casedoc/sn${serial}/[A-Z]+[0-9]{14}/(info|(content|download)[.](pdf|zip)|1/media)$`,
           ).test(url.pathname) ||
           new RegExp(
-            `^/ts/cd/casestatus/sn${serial}/(content|download)[.](pdf|zip)$`,
-          ).test(url.pathname)
+            `^/ts/cd/(casestatus|casedocs)/sn${serial}/(content|download)[.](pdf|zip)$`,
+          ).test(url.pathname) ||
+          /^\/ts\/cd\/casedocs\/sn75757575\/(content|download)[.](pdf|zip)$/.test(
+            url.pathname,
+          )
         )
       )
         throw new Error("Unexpected TSDR recording route.");
@@ -95,11 +146,19 @@ async function recording<T>(
           ),
         });
       }
-      await Bun.sleep(1100);
       const response = await fetch(request, {
         redirect: "manual",
         signal: AbortSignal.timeout(20_000),
       });
+      const announced = Number(response.headers.get("content-length"));
+      if (announced > limit) {
+        await response.body?.cancel();
+        throw new ApiError(
+          "TSDR recording exceeds its size bound.",
+          0,
+          "RESPONSE_TOO_LARGE",
+        );
+      }
       const chunks: Uint8Array[] = [];
       let size = 0;
       const reader = response.body?.getReader();
@@ -111,7 +170,11 @@ async function recording<T>(
             size += chunk.value.byteLength;
             if (size > limit) {
               await reader.cancel();
-              throw new Error("TSDR recording size limit exceeded.");
+              throw new ApiError(
+                "TSDR recording exceeds its size bound.",
+                0,
+                "RESPONSE_TOO_LARGE",
+              );
             }
             chunks.push(chunk.value);
           }
@@ -160,6 +223,25 @@ async function recording<T>(
   };
   try {
     return await run(new TsdrClient(options));
+  } catch (error) {
+    if (record && error instanceof ApiError && error.status === 0)
+      await Bun.write(
+        failurePath,
+        JSON.stringify(
+          {
+            verified: false,
+            status: error.status,
+            code: error.code,
+            observed_at: new Date().toISOString(),
+            timeout_ms: 20000,
+            max_response_bytes: limit,
+            note: "Bounded live attempt did not capture a complete HTTP response; not an upstream HTTP cassette.",
+          },
+          null,
+          2,
+        ),
+      );
+    throw error;
   } finally {
     if (record) await save();
   }
@@ -167,6 +249,7 @@ async function recording<T>(
 export async function tsdrFeatureRecordings(
   key?: string,
   report: (value: TsdrOutcome) => void = () => {},
+  selection: { only?: string; retryRecorded?: boolean } = {},
 ) {
   const outcomes: TsdrOutcome[] = [];
   let stopped = false;
@@ -175,9 +258,15 @@ export async function tsdrFeatureRecordings(
     run: (client: TsdrClient) => Promise<T>,
     summarize: (result: T) => Partial<TsdrOutcome>,
   ) {
-    if (stopped) return undefined;
+    if (stopped || (selection.only && name !== selection.only))
+      return undefined;
     try {
-      const result = await recording(name, key, run);
+      const result = await recording(
+        name,
+        key,
+        run,
+        selection.retryRecorded && selection.only === name,
+      );
       const outcome = { name, verified: true, ...summarize(result) };
       outcomes.push(outcome);
       report(outcome);
@@ -227,7 +316,7 @@ export async function tsdrFeatureRecordings(
       d.pageCount != null &&
       d.pageCount <= 2 &&
       /^[A-Z]+[0-9]{14}$/.test(d.docId ?? ""),
-  );
+  ) ?? { docId: "NOA20070926100613" };
   if (doc?.docId) {
     const documentId = doc.docId;
     await step(
@@ -302,5 +391,33 @@ export async function tsdrFeatureRecordings(
           c.downloadStatus(serial, { delivery, format, timeoutMs: 20_000 }),
         (r) => ({ bytes: r.data.length }),
       );
+  for (const delivery of ["content", "download"] as const)
+    for (const format of ["pdf", "zip"] as const)
+      await step(
+        `small-case-documents-${delivery}-${format}`,
+        (c) =>
+          c.downloadCaseDocuments("75757575", {
+            delivery,
+            format,
+            timeoutMs: 20_000,
+          }),
+        (r) => ({ bytes: r.data.length }),
+      );
+  for (const format of ["pdf", "zip"] as const)
+    await step(
+      `bundle-${format}`,
+      (c) =>
+        c.downloadBundle([serial], {
+          format,
+          date: "2007-09-25",
+          timeoutMs: 20_000,
+        }),
+      (r) => ({ bytes: r.data.length }),
+    );
+  await step(
+    "small-case-candidates",
+    (c) => c.getBundleXml(["75757575", "75008897", "72131351", "76515878"]),
+    (r) => ({ bytes: r.data.length }),
+  );
   return outcomes;
 }

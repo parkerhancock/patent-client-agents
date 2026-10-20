@@ -1,0 +1,9 @@
+{
+  "verified": false,
+  "status": 0,
+  "code": "RESPONSE_TOO_LARGE",
+  "observed_at": "2026-10-20T17:31:24.517Z",
+  "timeout_ms": 20000,
+  "max_response_bytes": 4194304,
+  "note": "Bounded live attempt did not capture a complete HTTP response; not an upstream HTTP cassette."
+}

@@ -19,7 +19,7 @@ synthetic contracts. The Python package remains separate.
 | Patent and trademark assignments | Implemented | Three current Assignment Center v3 recordings, including 99 NIKE trademark matches |
 | Patent Public Search | Search, document, publication resolution, PDF/base64 implemented | Native Bun live search/document/PDF success: 18 pages, 1,214,076 bytes; archived document verifies all 26 parsed claims |
 | Trademark Search | Implemented with supplied WAF session and refresh callback | Fresh native Bun HTTP200 using the deployed WAF session and matching User-Agent; one-result query replays offline |
-| TSDR | All 25 archived official routes; source-derived document IDs; separate API key | Complete route-contract tests; Fresh authenticated status JSON/XML/HTML, listing, update JSON/XML, image, batch and bundle XML, document XML/PDF; further variants stopped at429 |
+| TSDR | All 25 archived official routes; source-derived document IDs; separate API key | Complete route-contract tests; successful live recordings for all 25 declared operations plus mark image; PDF/ZIP/XML/HTML checked offline; historical failures retained |
 | Search guides, field/status catalogs, schemas and Swagger resources | Eleven labeled MCP resources and pure library helpers | Resource enumeration, content and authorization tests; historical source labels preserved |
 | REST document retrieval | MCP-issued single-use links by default; authenticated REST concurrently available; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
 
@@ -32,12 +32,14 @@ tools rather than one tool per REST route.
 
 ## Remaining verification and deployment limits
 
-All eight portal Swagger entry definitions are archived with hashes. Seven
-companion files referenced by the main ODP index are not archived locally; the
-current Swagger UI renders their operations. The schema-bundle completeness
-flag stays false. Live data and contract tests
-support the implemented routes; the incomplete bundle is not treated as proof
-of complete upstream schema coverage. See [source review](odp-research.md).
+All eight portal Swagger entry definitions and all seven original companions
+are archived with hashes. Dev-browser captured the companion response bodies;
+the captured main file matches the existing archive hash. All referenced files
+are present, but two petition schema pointers in the official main file target
+missing definitions in the official common file. The original archive is
+complete; transitive schema resolution remains incomplete. Source files are
+preserved without silently repairing those upstream defects. See
+[source review](odp-research.md).
 
 TSDR uses USPTO_TSDR_API_KEY; fresh verification used the existing deployed
 Secret Manager key without saving its value locally. See [deployed authentication](deployed-uspto-auth.md).
@@ -47,9 +49,10 @@ The port does not automate browser challenge acquisition or claim that native
 Fetch duplicates Python curl_cffi's TLS behavior. PPUBS native Bun behavior was
 verified for the recorded sample, not guaranteed for every future WAF policy.
 
-The [operation evidence map](uspto-operation-coverage.md) distinguishes successful
-recordings from remaining schema-only verification. Default tests never silently
-fall back to live traffic.
+The [operation evidence map](uspto-operation-coverage.md) now links successful
+recordings for all 92 inventoried method/path operations. This verifies the
+recorded public samples, not every parameter combination or every record.
+Default tests never silently fall back to live traffic.
 Missing required cassettes fail. Recorders are deliberate and bounded; signed
 redirect credentials must be scrubbed from locations and response bodies as
 well as request URIs. Preserve successful recordings when refreshing a subset,

@@ -1,0 +1,428 @@
+openapi: 3.0.3
+info:
+  title: Patent Trial Proceedings API
+  version: 1.0.0
+  description: 'Search, download, and retrieve PTAB trials proceedings data.
+
+    '
+servers:
+- url: https://api.uspto.gov
+- url: https://sandbox-api.uspto.gov
+
+paths:
+  /api/v1/patent/proceedings/search:
+    post:
+      tags:
+      - PTAB Trials:Proceedings
+      summary: Search trials proceedings using json payload 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./trial-common.yaml#/components/schemas/SearchRequest
+            example:
+              q: trialMetaData.trialTypeCode:IPR
+              filters: [{"name": "patentOwnerData.groupArtUnitNumber","value": ["2884"]}]
+              rangeFilters: []    
+              sort: [{"field": "patentOwnerData.technologyCenterNumber","order": "desc"} ]
+              pagination: {"offset": 0,"limit": 25}
+              fields: ["patentOwnerData.groupArtUnitNumber","patentOwnerData.inventorName","respondentData.counselName"]      
+              facets: ["trialMetaData.trialTypeCode","trialMetaData.trialStatusCategory"]
+              
+
+      responses:
+        '200':
+          $ref: '#/components/responses/Proceeding200'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+    get:
+      tags:
+      - PTAB Trials:Proceedings 
+      summary: Search trials proceedings using query parameters
+      parameters:
+       - name: q
+         in: query
+         description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+         allowReserved: true
+         schema:
+            type: string
+         examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: Pending
+              description: Search text 'Pending' across the searchable data fields
+            Exact Phrase AND:
+              value: Pending AND 2800
+              description: Search text 'Pending' AND '2800' across all searchable fields within data set
+            Search By Field Value:
+              value: trialMetaData.trialTypeCode:IPR
+              description: Search data for trialTypeCode IPR
+            Boolean OR:
+              value: trialMetaData.trialTypeCode:IPR OR patentOwnerData.groupArtUnitNumber:2884
+              description: Search data where trialTypeCode is IPR Or groupArtUnitNumber is 2884
+            Boolean AND:
+              value: trialMetaData.trialTypeCode:IPR AND patentOwnerData.groupArtUnitNumber:2884
+              description: Search data where trialTypeCode is both IPR and groupArtUnitNumber value is 2884
+            Wildcard:
+              value: patentOwnerData.inventorName:Yong*
+              description: Search data where inventorName has text Yong followed by any character
+            Range:
+              value: patentOwnerData.grantDate:[2023-07-18 TO 2024-07-18]
+              description: Search data where grantDate range is between 2023-07-18 TO 2024-07-18
+            Comparison:
+              value: patentOwnerData.groupArtUnitNumber:>600
+              description: Search all records where groupArtUnitNumber is greater than 600
+       - name: sort
+         in: query
+         description: Field to be sorted followed by sort order
+         schema:
+            type: string
+         examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: patentOwnerData.technologyCenterNumber asc
+              description: Sort by technologyCenterNumber ascending order
+            Descending:
+              value: patentOwnerData.technologyCenterNumber desc
+              description: Sort by technologyCenterNumber descending order
+       - name: offset
+         in: query
+         description: Position in the dataset of a particular record
+         schema:
+            type: integer
+            minimum: 0
+         example: 0
+       - name: limit
+         in: query
+         description: Limit the number of results returned
+         schema:
+            type: integer
+            minimum: 1
+         example: 25
+       - name: facets
+         in: query
+         description: List of fields names to be faceted upon separated by comma (<b>,</b>)
+         schema:
+            type: string
+         examples:
+            No Facets:
+              value:
+              description: No faceting option
+            Facets Example 1:
+              value: trialMetaData.trialTypeCode,trialMetaData.trialStatusCategory
+              description: Faceting by trialTypeCode and trialStatusCategory
+            Facets Example 2:
+              value: patentOwnerData.groupArtUnitNumber
+              description: Faceting by groupArtUnitNumber
+       - name: fields
+         in: query
+         description: Limits the response by specifying which fields from dataset should be included.
+         schema:
+            type: string
+         examples:
+            All Available Data Set Fields:
+              value:
+              description: Returns all available data set fields
+            Selected Fields:
+              value: patentOwnerData.groupArtUnitNumber,patentOwnerData.inventorName,respondentData.counselName
+              description: Include only groupArtUnitNumber,inventorName and counselName in search result
+       - name: filters
+         in: query
+         description: Filter data by supplying filter parameter. Provide field name and its value.
+         schema:
+            type: string
+         examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: patentOwnerData.technologyCenterNumber 3700
+              description: Filter data where technologyCenterNumber value is 3700
+            Filters Example 2:
+              value: trialMetaData.trialTypeCode IPR
+              description: Filter data where trialTypeCode value is IPR
+            Filters Single Value:
+              value: trialMetaData.petitionFilingDate 2025-07-17
+              description: Filter data where filingDate value is 2025-07-17
+            Filters Multi Value:
+              value: patentOwnerData.groupArtUnitNumber 2136,2884
+              description: Filter data where groupArtUnitNumber value is 2136 or 2884
+       - name: rangeFilters
+         in: query
+         description: Filter the data by supplying range of values. Applicable for number and date type fields.
+         schema:
+            type: string
+         examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: respondentData.grantDate 2023-07-18:2024-07-18
+              description: Filter data where grant date is between 2023-07-18 and 2024-07-18
+            Number Range Filter:
+              value: respondentData.grantDate 2023-07-18:2024-07-18
+              description: Filter data where grant date is between 2023-07-18:2024-07-18
+      
+      responses:
+        '200':
+          $ref: '#/components/responses/Proceeding200'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+  /api/v1/patent/proceedings/search/download:
+    post:
+      tags:
+      - PTAB Trials:Proceedings 
+      summary: Download trials proceedings search results in json or csv format using json payload
+      requestBody:
+        required: true
+        description: Proceeding download request. Same structure as PatentDownloadRequest.
+        content:
+          application/json:
+            schema:
+              $ref: ./trial-common.yaml#/components/schemas/DownloadRequest
+            example:
+              q: trialMetaData.trialTypeCode:IPR
+              sort: [{"field": "patentOwnerData.technologyCenterNumber","order": "desc"} ]
+              pagination: {"offset": 0,"limit": 25}
+              fields: ["patentOwnerData.groupArtUnitNumber","patentOwnerData.inventorName","respondentData.counselName"]
+              filters: [{"name": "patentOwnerData.technologyCenterNumber","value": ["3700"]}]   
+              rangeFilters: [{"field": "respondentData.grantDate","valueFrom": '2023-01-01',"valueTo": '2024-12-31'}]      
+              format: csv
+
+      responses:
+        '200':
+          $ref: '#/components/responses/Proceeding200'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+    get:
+      tags:
+      - PTAB Trials:Proceedings 
+      summary: Download trials proceedings search results in json or csv format using query parameters
+      parameters:
+       - name: q
+         in: query
+         description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+         allowReserved: true
+         schema:
+            type: string
+         examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: Pending
+              description: Search text 'Pending' across the searchable data fields
+            Exact Phrase AND:
+              value: Pending AND 2800
+              description: Search text 'Pending' AND '2800' across all searchable fields within data set
+            Search By Field Value:
+              value: trialNumber:IPR2025-01319
+              description: Search data for trial number IPR2025-01319
+            Boolean OR:
+              value: trialMetaData.trialTypeCode:IPR OR patentOwnerData.groupArtUnitNumber:2884
+              description: Search data where trialTypeCode is IPR Or groupArtUnitNumber is 2884
+            Boolean AND:
+              value: trialMetaData.trialTypeCode:IPR AND patentOwnerData.groupArtUnitNumber:2884
+              description: Search data where trialTypeCode is both IPR and groupArtUnitNumber value is 2884
+            Wildcard:
+              value: respondentData.inventorName:Yong*
+              description: Search data where inventorName has text Yong followed by any character
+            Range:
+              value: respondentData.grantDate:[2023-07-18 TO 2024-07-18]
+              description: Search data where grantDate range is between 2023-07-18 TO 2024-07-18
+            Comparison:
+              value: patentOwnerData.groupArtUnitNumber:>600
+              description: Search all records where groupArtUnitNumber is greater than 600
+       - name: sort
+         in: query
+         description: Field to be sorted followed by sort order
+         schema:
+            type: string
+         examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: patentOwnerData.technologyCenterNumber asc
+              description: Sort by technologyCenterNumber ascending order
+            Descending:
+              value: patentOwnerData.technologyCenterNumber desc
+              description: Sort bytechnologyCenterNumber descending order
+       - name: offset
+         in: query
+         description: Position in the dataset of a particular record
+         schema:
+            type: integer
+            minimum: 0
+         example: 0
+       - name: limit
+         in: query
+         description: Limit the number of results returned
+         schema:
+            type: integer
+            minimum: 1
+         example: 25
+       - name: facets
+         in: query
+         description: List of fields names to be faceted upon separated by comma (<b>,</b>)
+         schema:
+            type: string
+         examples:
+            No Facets:
+              value:
+              description: No faceting option
+            Facets Example 1:
+              value: trialMetaData.trialTypeCode,trialMetaData.trialStatusCategory
+              description: Faceting by trialTypeCode and trialStatusCategory
+            Facets Example 2:
+              value: patentOwnerData.groupArtUnitNumber,patentOwnerData.inventorName,respondentData.counselName
+              description: Faceting by groupArtUnitNumber,inventorName,counselName
+       - name: fields
+         in: query
+         description: Limits the response by specifying which fields from dataset should be included.
+         schema:
+            type: string
+         examples:
+            All Available Data Set Fields:
+              value:
+              description: Returns all available data set fields
+            Selected Fields:
+              value: patentOwnerData.groupArtUnitNumber,patentOwnerData.inventorName,respondentData.counselName
+              description: Include only groupArtUnitNumber,inventorName and counselName in search result
+       - name: filters
+         in: query
+         description: Filter data by supplying filter parameter. Provide field name and its value.
+         schema:
+            type: string
+         examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: patentOwnerData.applicationNumberText 17980669
+              description: Filter data where applicationNumberText value is 17980669
+            Filters Example 2:
+              value: trialMetaData.trialTypeCode IPR
+              description: Filter data where trialTypeCode value is IPR
+            Filters Single Value:
+              value: trialMetaData.petitionFilingDate 2025-07-17
+              description: Filter data where filingDate value is 2025-07-17
+            Filters Multi Value:
+              value: patentOwnerData.groupArtUnitNumber 2136,2884
+              description: Filter data where groupArtUnitNumber value is 2136 or 2884
+       - name: rangeFilters
+         in: query
+         description: Filter the data by supplying range of values. Applicable for number and date type fields.
+         schema:
+            type: string
+         examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: respondentData.grantDate 2023-07-18:2024-07-18
+              description: Filter data where grant date is between 2023-07-18 and 2024-07-18
+            Number Range Filter:
+              value: respondentData.grantDate 2023-07-18:2024-07-18
+              description: Filter data where grant date is between 2023-07-18:2024-07-18
+       - name: format
+         in: query
+         description: Download Format
+         schema:
+            type: string
+         examples:
+            json:
+              value: json
+            csv:
+              value: csv
+      responses:
+        '200':
+          $ref: '#/components/responses/Proceeding200'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+  /api/v1/patent/proceedings/{trialNumber}:
+    get:
+      tags:
+      - PTAB Trials:Proceedings 
+      summary: Retrieve a single trials proceeding by trial number
+      parameters:
+        - name: trialNumber
+          in: path
+          description: trialNumber number. 
+          schema:
+            type: string
+          required: true
+          example: IPR2025-01319
+      responses:
+        '200':
+          $ref: '#/components/responses/Proceeding200'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+components:
+  schemas:
+    patentTrialProceedingDataBag:
+      type: object
+      description: A single PTAB trial proceeding record.
+      properties:
+        trialNumber:
+          type: string
+          example: IPR2024-00001
+        lastModifiedDateTime:
+          type: string
+          example: "2025-07-17T20:24:01"
+        trialMetaData:
+          $ref: ./trial-common.yaml#/components/schemas/TrialMetaData
+        patentOwnerData:
+          $ref: ./trial-common.yaml#/components/schemas/PatentOwnerData
+        regularPetitionerData:
+          $ref: ./trial-common.yaml#/components/schemas/RegularPetitionerData
+        respondentData: 
+          $ref: ./trial-common.yaml#/components/schemas/RespondentData
+        derivationPetitionerData:
+          $ref: ./trial-common.yaml#/components/schemas/DerivationPetitionerData
+
+    ProceedingDataResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+        requestIdentifier: 
+          type: string
+          example: 501eacc7-c785-4d85-96ac-a39f3f5533aa
+        patentTrialProceedingDataBag:
+          type: array
+          items:
+            $ref: '#/components/schemas/patentTrialProceedingDataBag'
+  responses:
+    Proceeding200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProceedingDataResponse'
+  
+
+    

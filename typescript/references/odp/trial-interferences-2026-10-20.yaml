@@ -1,0 +1,460 @@
+openapi: 3.0.3
+info:
+  title: PTAB Interferences (Decisions)
+  version: 1.0.0
+servers:
+- url: https://api.uspto.gov
+- url: https://sandbox-api.uspto.gov
+
+paths:
+  /api/v1/patent/interferences/decisions/search:
+    post:
+      tags : [PTAB Interferences]
+      summary: Search interferences decisions using json payload
+      description: Request body matches PatentSearchRequest; example tailored for interferences.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: ./odp-common-base.yaml#/components/schemas/PatentSearchRequest }
+            example:
+              q: interferenceDocumentCategory:Decision
+              sort: ['decisionDocumentData.decisionIssueDate desc']
+              offset: 0
+              limit: 25
+              fields:
+                - interferenceNumber
+                - interferenceMetaData.interferenceStyleName
+                - decisionDocumentData.documentIdentifier
+                - decisionDocumentData.decisionIssueDate
+                - decisionDocumentData.decisionTypeCategory
+              filters:
+                - { field: 'seniorPartyData.patentOwnerName', value: 'TANG' }
+              rangeFilters:
+                - { field: 'decisionDocumentData.decisionIssueDate', valueFrom: '2002-01-01', valueTo: '2002-12-31' }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+        
+    get:
+      tags : [PTAB Interferences]
+      summary: Search interferences decisions using query parameters
+      description: Query interference decisions (decision type/category, party names, date ranges, etc.).
+      parameters:
+       - name: q
+         in: query
+         description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+         allowReserved: true
+         schema:
+            type: string
+         examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: TANG
+              description: Search text 'TANG' across the searchable data fields
+            Exact Phrase AND:
+              value: TANG AND 1700
+              description: Search text 'TANG' AND '1700' across all searchable fields within data set
+            Search By Field Value:
+              value: interferenceNumber:103751
+              description: Search data for interference number 103751
+            Boolean OR:
+              value: seniorPartyData.patentOwnerName:TANG OR seniorPartyData.groupArtUnitNumber:1763
+              description: Search data where patentOwnerName is TANG groupArtUnitNumber is 1763
+            Boolean AND:
+              value: seniorPartyData.patentOwnerName:TANG AND seniorPartyData.groupArtUnitNumber:1763
+              description: Search data where patentOwnerName is both TANG and groupArtUnitNumber value is 1763
+            Wildcard:
+              value: seniorPartyData.patentNumber:66145*
+              description: Search data where patentNumber has text 66145 followed by any character
+            Range:
+              value: seniorPartyData.grantDate:[2003-07-18 TO 2004-07-18]
+              description: Search data where grantDate range is between 2003-07-18 TO 2004-07-18
+            Comparison:
+              value: seniorPartyData.groupArtUnitNumber:>600
+              description: Search all records where groupArtUnitNumber is greater than 600
+       - name: sort
+         in: query
+         description: Field to be sorted followed by sort order
+         schema:
+            type: string
+         examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: seniorPartyData.technologyCenterNumber asc
+              description: Sort by technologyCenterNumber ascending order
+            Descending:
+              value: seniorPartyData.technologyCenterNumber desc
+              description: Sort by technologyCenterNumber descending order
+       - name: offset
+         in: query
+         description: Position in the dataset of a particular record
+         schema:
+            type: integer
+            minimum: 0
+         example: 0
+       - name: limit
+         in: query
+         description: Limit the number of results returned
+         schema:
+            type: integer
+            minimum: 1
+         example: 25
+       - name: facets
+         in: query
+         description: List of fields names to be faceted upon separated by comma (<b>,</b>)
+         schema:
+            type: string
+         examples:
+            No Facets:
+              value:
+              description: No faceting option
+            Facets Example 1:
+              value: seniorPartyData.technologyCenterNumber,seniorPartyData.patentOwnerName
+              description: Faceting by technologyCenterNumber and patentOwnerName
+            Facets Example 2:
+              value: seniorPartyData.groupArtUnitNumber,seniorPartyData.technologyCenterNumber,seniorPartyData.realPartyInInterestName
+              description: Faceting by groupArtUnitNumber,technologyCenterNumbe,realPartyInInterestName
+       - name: fields
+         in: query
+         description: Limits the response by specifying which fields from dataset should be included.
+         schema:
+            type: string
+         examples:
+            All Available Data Set Fields:
+              value:
+              description: Returns all available data set fields
+            Selected Fields:
+              value: seniorPartyData.groupArtUnitNumber,seniorPartyData.patentOwnerName,seniorPartyData.applicationNumberText,decisionDocumentData,juniorPartyData
+              description: Include only groupArtUnitNumber,patentOwnerName,applicationNumberText,juniorPartyData and decisionDocumentData in search result
+       - name: filters
+         in: query
+         description: Filter data by supplying filter parameter. Provide field name and its value.
+         schema:
+            type: string
+         examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: seniorPartyData.applicationNumberText 07996817
+              description: Filter data where applicationNumberText value is 07996817
+            Filters Example 2:
+              value: seniorPartyData.patentOwnerName TANG
+              description: Filter data where patentOwnerName value is TANG
+            Filters Single Value:
+              value: seniorPartyData.grantDate 2003-09-02
+              description: Filter data where grantDate value is 2003-09-02
+            Filters Multi Value:
+              value: seniorPartyData.groupArtUnitNumber 1763,2884
+              description: Filter data where groupArtUnitNumber value is 1763 or 2884
+       - name: rangeFilters
+         in: query
+         description: Filter the data by supplying range of values. Applicable for number and date type fields.
+         schema:
+            type: string
+         examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: seniorPartyData.grantDate 2003-07-18:2004-07-18
+              description: Filter data where grant date is between 2003-07-18 and 2004-07-18
+            Number Range Filter:
+              value: seniorPartyData.grantDate 2003-07-18:2004-07-18
+              description: Filter data where grant date is between 2003-07-18:2004-07-18
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse
+              example:
+                count: 1490
+                requestIdentifier: 'cff9c3ed-82ca-4d2c-a2e6-c43d5710c2ce'
+                patentInterferenceDataBag:
+                  - interferenceNumber: '103751'
+                    lastModifiedDateTime: '2025-07-28T21:03:54'
+                    interferenceMetaData:
+                      interferenceStyleName: 'TANG'
+                    seniorPartyData:
+                      applicationNumberText: '07996817'
+                      grantDate: '2003-09-02'
+                      groupArtUnitNumber: '1763'
+                      realPartyInInterestName: 'TANG'
+                      patentNumber: '6614529'
+                      patentOwnerName: 'TANG'
+                      technologyCenterNumber: '1700'
+                    decisionDocumentData:
+                      documentIdentifier: 'a1adf3e98f9e0727...'
+                      documentName: 'jd103751'
+                      documentSizeQuantity: 45224
+                      documentTitleText: 'DECISION-103751'
+                      interferenceOutcomeCategory: 'Interference'
+                      statuteAndRuleBag: ['']
+                      decisionIssueDate: '2002-02-25'
+                      decisionTypeCategory: 'Decision'
+                      issueTypeBag: ['']
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+
+  /api/v1/patent/interferences/decisions/search/download:
+    post:
+      tags : [PTAB Interferences]
+      summary: Download interferences decisions search results in json or csv format using json payload
+      description: Request body matches PatentDownloadRequest; example tailored for interferences.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: ./odp-common-base.yaml#/components/schemas/PatentDownloadRequest }
+            example:
+              q: interferenceDocumentCategory:Decision
+              sort: ['decisionDocumentData.decisionIssueDate desc']
+              fields:
+                - interferenceNumber
+                - interferenceMetaData.interferenceStyleName
+                - decisionDocumentData.documentIdentifier
+                - decisionDocumentData.decisionIssueDate
+                - decisionDocumentData.decisionTypeCategory
+              filters:
+                - { field: 'seniorPartyData.patentOwnerName', value: 'TANG' }
+              rangeFilters:
+                - { field: 'decisionDocumentData.decisionIssueDate', valueFrom: '2002-01-01', valueTo: '2002-12-31' }
+              format: csv
+      responses:
+        '200':
+          description: OK (file or JSON depending on format)
+          content:
+            application/json:
+              schema:
+                $ref: ./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+
+    get:
+      tags : [PTAB Interferences]
+      summary: Download interferences decisions search results in json or csv format using query parameters
+      description: Same parameters as search; add `format` for export type.
+      parameters:
+       - name: q
+         in: query
+         description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+         allowReserved: true
+         schema:
+            type: string
+         examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: TANG
+              description: Search text 'TANG' across the searchable data fields
+            Exact Phrase AND:
+              value: TANG AND 1700
+              description: Search text 'TANG' AND '1700' across all searchable fields within data set
+            Search By Field Value:
+              value: interferenceNumber:103751
+              description: Search data for interference number 103751
+            Boolean OR:
+              value: seniorPartyData.patentOwnerName:TANG OR seniorPartyData.groupArtUnitNumber:1763
+              description: Search data where patentOwnerName is TANG groupArtUnitNumber is 1763
+            Boolean AND:
+              value: seniorPartyData.patentOwnerName:TANG AND seniorPartyData.groupArtUnitNumber:1763
+              description: Search data where patentOwnerName is both TANG and groupArtUnitNumber value is 1763
+            Wildcard:
+              value: seniorPartyData.patentNumber:66145*
+              description: Search data where patentNumber has text 66145 followed by any character
+            Range:
+              value: seniorPartyData.grantDate:[2003-07-18 TO 2004-07-18]
+              description: Search data where grantDate range is between 2003-07-18 TO 2004-07-18
+            Comparison:
+              value: seniorPartyData.groupArtUnitNumber:>600
+              description: Search all records where groupArtUnitNumber is greater than 600
+       - name: sort
+         in: query
+         description: Field to be sorted followed by sort order
+         schema:
+            type: string
+         examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: seniorPartyData.technologyCenterNumber asc
+              description: Sort by technologyCenterNumber ascending order
+            Descending:
+              value: seniorPartyData.technologyCenterNumber desc
+              description: Sort by technologyCenterNumber descending order
+       - name: offset
+         in: query
+         description: Position in the dataset of a particular record
+         schema:
+            type: integer
+            minimum: 0
+         example: 0
+       - name: limit
+         in: query
+         description: Limit the number of results returned
+         schema:
+            type: integer
+            minimum: 1
+         example: 25
+       - name: facets
+         in: query
+         description: List of fields names to be faceted upon separated by comma (<b>,</b>)
+         schema:
+            type: string
+         examples:
+            No Facets:
+              value:
+              description: No faceting option
+            Facets Example 1:
+              value: seniorPartyData.technologyCenterNumber,seniorPartyData.patentOwnerName
+              description: Faceting by technologyCenterNumber and patentOwnerName
+            Facets Example 2:
+              value: seniorPartyData.groupArtUnitNumber,seniorPartyData.technologyCenterNumber,seniorPartyData.realPartyInInterestName
+              description: Faceting by groupArtUnitNumber,technologyCenterNumbe,realPartyInInterestName
+       - name: fields
+         in: query
+         description: Limits the response by specifying which fields from dataset should be included.
+         schema:
+            type: string
+         examples:
+            All Available Data Set Fields:
+              value:
+              description: Returns all available data set fields
+            Selected Fields:
+              value: seniorPartyData.groupArtUnitNumber,seniorPartyData.patentOwnerName,seniorPartyData.applicationNumberText,decisionDocumentData,juniorPartyData
+              description: Include only groupArtUnitNumber,patentOwnerName,applicationNumberText,juniorPartyData and decisionDocumentData in search result
+       - name: filters
+         in: query
+         description: Filter data by supplying filter parameter. Provide field name and its value.
+         schema:
+            type: string
+         examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: seniorPartyData.applicationNumberText 07996817
+              description: Filter data where applicationNumberText value is 07996817
+            Filters Example 2:
+              value: seniorPartyData.patentOwnerName TANG
+              description: Filter data where patentOwnerName value is TANG
+            Filters Single Value:
+              value: seniorPartyData.grantDate 2003-09-02
+              description: Filter data where grantDate value is 2003-09-02
+            Filters Multi Value:
+              value: seniorPartyData.groupArtUnitNumber 1763,2884
+              description: Filter data where groupArtUnitNumber value is 1763 or 2884
+       - name: rangeFilters
+         in: query
+         description: Filter the data by supplying range of values. Applicable for number and date type fields.
+         schema:
+            type: string
+         examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: seniorPartyData.grantDate 2003-07-18:2004-07-18
+              description: Filter data where grant date is between 2003-07-18 and 2004-07-18
+            Number Range Filter:
+              value: seniorPartyData.grantDate 2003-07-18:2004-07-18
+              description: Filter data where grant date is between 2003-07-18:2004-07-18
+       - name: format
+         in: query
+         description: Download Format
+         schema:
+            type: string
+         examples:
+            json:
+              value: json
+            csv:
+              value: csv
+      responses:
+        '200':
+          description: OK (file or JSON depending on format)
+          content:
+            application/json:
+              schema:
+                $ref: ./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+  /api/v1/patent/interferences/{interferenceNumber}/decisions:
+    get:
+      tags : [PTAB Interferences]
+      summary: Retrieve interferences decisions by interference number
+      description: Returns one or more interference decision records for the provided `interferenceNumber`.
+      parameters:
+        - name: interferenceNumber
+          in: path
+          required: true
+          description: Interference number (e.g., 103751).
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+  /api/v1/patent/interferences/decisions/{documentIdentifier}:
+    get:
+      tags : [PTAB Interferences]
+      summary: Retrieve interferences decisions by document identifier
+      description: Returns a single interference decision document for the provided `documentIdentifier`.
+      parameters:
+        - name: documentIdentifier
+          in: path
+          required: true
+          description: Unique document identifier (opaque string).
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }

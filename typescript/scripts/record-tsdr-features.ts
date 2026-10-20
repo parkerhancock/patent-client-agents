@@ -3,6 +3,14 @@ import { tsdrFeatureRecordings } from "../tests/tsdr-live-recordings.js";
 const record = Bun.argv.includes("--record"),
   replay = Bun.argv.includes("--replay");
 if (record === replay) throw new Error("Choose --record or --replay.");
+const onlyArgument = Bun.argv.find((argument) =>
+  argument.startsWith("--only="),
+);
+const only = onlyArgument?.slice(7);
+if ((onlyArgument && !only?.trim()) || Bun.argv.includes("--only"))
+  throw new Error(
+    "--only requires a non-empty operation name using --only=NAME.",
+  );
 let key: string | undefined = record
   ? Bun.env.USPTO_TSDR_API_KEY?.trim() || undefined
   : undefined;
@@ -40,33 +48,29 @@ if (record && !key && deployedSecret) {
     );
   key = output.trim();
 }
+const retryRecorded = Bun.argv.includes("--retry-recorded");
+if (retryRecorded && (!record || !only))
+  throw new Error("--retry-recorded requires --record and --only=NAME.");
 try {
-  const outcomes = await tsdrFeatureRecordings(key, (value) =>
-    console.log(JSON.stringify(value)),
+  const outcomes = await tsdrFeatureRecordings(
+    key,
+    (value) => console.log(JSON.stringify(value)),
+    { ...(only ? { only } : {}), retryRecorded },
   );
+  if (!outcomes.length) {
+    console.log(
+      JSON.stringify({
+        stopped: true,
+        reason: "Unknown TSDR operation selection.",
+      }),
+    );
+    process.exitCode = 1;
+  }
   const failures = outcomes.filter((value) => !value.verified);
-  if (record) {
+  if (record || only) {
     if (failures.length) process.exitCode = 1;
   } else {
-    const expectedFailures = [
-      {
-        name: "case-bundle-xml",
-        verified: false,
-        status: 0,
-        code: "NETWORK_ERROR",
-      },
-      {
-        name: "single-document-content-zip",
-        verified: false,
-        status: 429,
-        code: "HTTP_ERROR",
-      },
-    ];
-    if (
-      outcomes.filter((value) => value.verified).length !== 13 ||
-      JSON.stringify(failures) !== JSON.stringify(expectedFailures)
-    )
-      process.exitCode = 1;
+    if (outcomes.length !== 28 || failures.length) process.exitCode = 1;
   }
 } catch {
   console.log(

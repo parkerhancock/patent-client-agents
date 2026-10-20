@@ -283,7 +283,7 @@
     "added_path_entries": [],
     "notes": [
       "Petition decision definitions are a separate Swagger UI selection; removal from main spec does not establish API retirement.",
-      "Current schema entries reference companion YAML files; response-shape comparison requires those sources."
+      "Current schema entries reference companion YAML files; all seven original companion files are now archived for comparison."
     ]
   },
   "swagger_ui_definitions": [
@@ -370,7 +370,7 @@
     }
   ],
   "notes": [
-    "All eight dropdown definition entry files are archived with receipts; the main index still requires seven companion files.",
+    "All eight dropdown entry files and seven original companions are archived with receipts; two upstream schema pointers remain dangling.",
     "Schema validation and operation enumeration do not establish live upstream behavior or implementation coverage."
   ],
   "additional_specifications": [
@@ -1048,23 +1048,142 @@
     "operation_count": 48,
     "method": "DOM-backed visible operation method/path extraction in Chrome",
     "sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
-    "original_companion_schema_bytes_archived": false
+    "original_companion_schema_bytes_archived": false,
+    "scope_at_observation_time": "Historical observation before original companions were captured; original_companion_schema_bytes_archived reflects that observation time."
   },
   "operation_coverage_audit": {
     "archive": "uspto-operation-coverage.json",
     "documentation": "../../docs/uspto-operation-coverage.md",
     "operation_count": 92,
     "raw_entry_operation_count": 63,
-    "rendered_companion_operation_count": 29,
     "schema_bundle_complete": false,
-    "behavioral_parity_proven": false
+    "behavioral_parity_proven": false,
+    "original_contract_operation_count": 92,
+    "rendered_only_operation_count": 0,
+    "schema_bundle_archived": true,
+    "schema_bundle_resolved": false,
+    "historical_rendered_companion_operation_count": 29,
+    "operations_with_recorded_http_200": 91,
+    "operations_with_successful_recording": 92,
+    "operations_with_declared_redirect_workflow": 1,
+    "coverage_archive_sha256": "a95bebaf1f74cd85066b181d3ae8d79f768fd225fd6b0eaf661dd2a5f2260b8d",
+    "fresh_recording_scope": "Successful method/path recordings, including separately identified declared bulk302\u2192200 workflow; format/parameter/error completeness requires semantic tests. Historical negative receipts retained."
   },
   "companion_archive_followup": {
-    "archive": "schema-archive-attempt-2026-10-20.json",
-    "sha256": "e5dfdbf7e339cb3f9d85256a6ed1ea30aeedbff424a9be5560700690154e9868",
-    "reference_validation": "schema-reference-validation-2026-10-20.json",
-    "reference_validation_sha256": "b595196ac655cc44d1003180298b2bd04942970120e7fa0d7d7bbd481610cb6a",
-    "new_original_companion_archives": 0,
-    "schema_bundle_complete": false
+    "historical_browser_attempt": "schema-archive-attempt-2026-10-20.json",
+    "historical_browser_attempt_sha256": "e5dfdbf7e339cb3f9d85256a6ed1ea30aeedbff424a9be5560700690154e9868",
+    "archive": "companion-original-capture-2026-10-20.json",
+    "sha256": "ee36ac78f31cdb6f85fd69f6836b230a6422040e59fc88b1ec02835d11caf1c0",
+    "new_original_companion_archives": 7,
+    "schema_bundle_archived": true,
+    "schema_bundle_resolved": false,
+    "resolution": "User explicitly requested dev-browser; ordinary official Swagger page loaded all seven companions successfully with HTTP200. Prior Chrome client refusals are historical and do not establish upstream denial."
+  },
+  "current_schema_bundle_archived": true,
+  "current_schema_bundle_complete": false,
+  "current_schema_bundle_resolved": false,
+  "current_companion_specs": [
+    {
+      "url": "https://data.uspto.gov/swagger/trial-proceedings.yaml",
+      "file": "trial-proceedings.yaml",
+      "status": 200,
+      "size": 18281,
+      "sha256": "21306d5f1c730a140d7b00452d32d4e9c02506c3149bac053dab7e4dc77be58c",
+      "content_type": "application/yaml",
+      "captured_at": "2026-10-20T17:26:27.738Z",
+      "method": "dev-browser standalone Playwright response.body() from normal official Swagger UI page loads; unmodified decoded HTTP entity bytes",
+      "archive": "trial-proceedings-2026-10-20.yaml"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/trial-common.yaml",
+      "file": "trial-common.yaml",
+      "status": 200,
+      "size": 13539,
+      "sha256": "335dd8a37df6806a7ac607948f6db94215b0045288a81714b41bf23ac623122f",
+      "content_type": "application/yaml",
+      "captured_at": "2026-10-20T17:26:27.738Z",
+      "method": "dev-browser standalone Playwright response.body() from normal official Swagger UI page loads; unmodified decoded HTTP entity bytes",
+      "archive": "trial-common-2026-10-20.yaml"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/odp-common-base.yaml",
+      "file": "odp-common-base.yaml",
+      "status": 200,
+      "size": 49751,
+      "sha256": "b793469a103afd78cc72c3ca3a41a4673588cf56a0b178f0d23b2974bb36121c",
+      "content_type": "application/yaml",
+      "captured_at": "2026-10-20T17:26:27.759Z",
+      "method": "dev-browser standalone Playwright response.body() from normal official Swagger UI page loads; unmodified decoded HTTP entity bytes",
+      "archive": "odp-common-base-2026-10-20.yaml"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/trial-decisions.yaml",
+      "file": "trial-decisions.yaml",
+      "status": 200,
+      "size": 19767,
+      "sha256": "f42d53381f9c1fbdfb9c85aadf12b9f1d15d553d538029110d140925a36840ef",
+      "content_type": "application/yaml",
+      "captured_at": "2026-10-20T17:26:27.760Z",
+      "method": "dev-browser standalone Playwright response.body() from normal official Swagger UI page loads; unmodified decoded HTTP entity bytes",
+      "archive": "trial-decisions-2026-10-20.yaml"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/trial-documents.yaml",
+      "file": "trial-documents.yaml",
+      "status": 200,
+      "size": 19775,
+      "sha256": "ea313858f6869d29614fa93fc888fac319e279bf56fa7ff5ae68cbbcb60c04e7",
+      "content_type": "application/yaml",
+      "captured_at": "2026-10-20T17:26:27.760Z",
+      "method": "dev-browser standalone Playwright response.body() from normal official Swagger UI page loads; unmodified decoded HTTP entity bytes",
+      "archive": "trial-documents-2026-10-20.yaml"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/trial-appeal-decisions.yaml",
+      "file": "trial-appeal-decisions.yaml",
+      "status": 200,
+      "size": 22601,
+      "sha256": "a29d8b6992495594f6ba38149ef054ab032cfe1af56526554cbedee769625890",
+      "content_type": "application/yaml",
+      "captured_at": "2026-10-20T17:26:27.780Z",
+      "method": "dev-browser standalone Playwright response.body() from normal official Swagger UI page loads; unmodified decoded HTTP entity bytes",
+      "archive": "trial-appeal-decisions-2026-10-20.yaml"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/trial-interferences.yaml",
+      "file": "trial-interferences.yaml",
+      "status": 200,
+      "size": 21056,
+      "sha256": "26cda11c3bf0f9d0898d1d3f217db12922dbb4a78810185dda392b6af054d5a2",
+      "content_type": "application/yaml",
+      "captured_at": "2026-10-20T17:26:27.863Z",
+      "method": "dev-browser standalone Playwright response.body() from normal official Swagger UI page loads; unmodified decoded HTTP entity bytes",
+      "archive": "trial-interferences-2026-10-20.yaml"
+    }
+  ],
+  "original_schema_reference_validation": {
+    "archive": "schema-reference-validation-2026-10-20.json",
+    "sha256": "93bcb226c8050a0ce1f27542da5ea5c04766a5d19c13d2df6d91c83a40a1a1bd",
+    "original_file_count": 15,
+    "reference_occurrence_count": 1039,
+    "missing_external_file_count": 0,
+    "unresolved_pointer_count": 2,
+    "unresolved_pointers": [
+      {
+        "archive": "swagger-2026-10-20.yaml",
+        "location": "/components/schemas/PetitionDecisionResponseBag/$ref",
+        "ref": "./odp-common-base.yaml#/components/schemas/PetitionDecisionResponseBag",
+        "target_archive": "odp-common-base-2026-10-20.yaml",
+        "resolution": "unresolved_json_pointer"
+      },
+      {
+        "archive": "swagger-2026-10-20.yaml",
+        "location": "/components/schemas/PetitionDecisionIdentifierResponseBag/$ref",
+        "ref": "./odp-common-base.yaml#/components/schemas/PetitionDecisionIdentifierResponseBag",
+        "target_archive": "odp-common-base-2026-10-20.yaml",
+        "resolution": "unresolved_json_pointer"
+      }
+    ],
+    "source_bytes_modified": false
   }
 }

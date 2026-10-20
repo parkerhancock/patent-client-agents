@@ -26,6 +26,13 @@ export type PtabInterferenceResponse = RecordResponse<
   "patentInterferenceDataBag",
   PtabRecord
 >;
+// These GET exports advertise facets; POST and appeal exports omit them.
+const getExportFacetsPaths = new Set([
+  "/api/v1/patent/trials/proceedings",
+  "/api/v1/patent/trials/decisions",
+  "/api/v1/patent/trials/documents",
+  "/api/v1/patent/interferences/decisions",
+]);
 // Concrete ODP record routes share payload and response contracts across PTAB datasets.
 class PtabRecords<K extends string> {
   protected readonly transport: OdpTransport;
@@ -84,7 +91,7 @@ class PtabRecords<K extends string> {
       key,
       PtabRecordSchema,
       {
-        ...recordRequest(options, true, "json"),
+        ...recordRequest(options, true, "json", getExportFacetsPaths.has(path)),
         ...(options.signal ? { signal: options.signal } : {}),
         emptyOn404: { count: 0, [key]: [] },
       },
@@ -99,7 +106,12 @@ class PtabRecords<K extends string> {
       options.method ?? "POST",
       `${path}/search/download`,
       {
-        ...recordRequest(options, true, options.fileFormat ?? "json"),
+        ...recordRequest(
+          options,
+          true,
+          options.fileFormat ?? "json",
+          getExportFacetsPaths.has(path),
+        ),
         ...(options.signal ? { signal: options.signal } : {}),
         timeoutMs: 120000,
       },

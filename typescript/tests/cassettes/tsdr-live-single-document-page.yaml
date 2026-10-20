@@ -1,0 +1,45 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/1/media
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - application/xml;charset=UTF-8
+      date:
+      - Tue, 20 Oct 2026 17:23:08 GMT
+      expires:
+      - "0"
+      keep-alive:
+      - timeout=60
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-l7-reqid:
+      - 000001a10cdb451d-1c51803
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\r\n<uspto-tm-document document-type=\"ab2\" document-subtype=\"ab2\" description=\"Notice of Abandonment\" system-creator=\"ClearPath\" version=\"2.1\" version-date=\"20070910\" copyright=\"Copyright 1999-2002 United States Patent and Trademark Office\"><trademark-postcard><header><notice-type>ab2</notice-type><orgname>United States Patent and Trademark Office</orgname><notice-title>Notice of Abandonment</notice-title><notice-date>20070925</notice-date><last-action-date>Feb 6, 2007</last-action-date></header>\r\n<return-address>\r\n<orgname>UNITED STATES PATENT AND TRADEMARK OFFICE</orgname>\r\n<address-1>COMMISSIONER FOR TRADEMARKS</address-1>\r\n<address-2>P.O. BOX 1451</address-2>\r\n<city>ALEXANDRIA</city>\r\n<state>VA</state>\r\n<postcode>22313-1451</postcode>\r\n<country-name>US</country-name>\r\n<email></email>\r\n</return-address>\r\n<correspondence><addressee>\r\n\t<name> \r\nMICHAEL T EVANGELISTI \r\n</name>\r\n\t<orgname> \r\nFARRIS MATHEWS BRANAN BOBANGO HELLEN &amp; D \r\n</orgname>\r\n\t<address-1> \r\n1100 RIDGEWAY LOOP RD STE 400 \r\n</address-1>\r\n\t<city> \r\nMEMPHIS \r\n</city>\r\n\t<state>TN </state>\r\n\t<postcode>38120-4058          </postcode>\r\n\t<country-name> \r\nUNITED STATES \r\n</country-name>\r\n</addressee></correspondence>\r\n<messages>\r\n\t<message><label-name>serialnumber</label-name>\r\n\t\t<label-value>78787878</label-value></message>\r\n\t<message><label-name>marktext</label-name>\r\n\t\t<label-value> \r\nMAC MEMPHIS ATHLETIC CAMPUS \r\n</label-value></message>\r\n\t<message><label-name>postcarddate</label-name>\r\n\t\t<label-value data-type=\"date\">20070925</label-value></message>\r\n\t<message><label-name>lastactiondate</label-name>\r\n\t\t<label-value>Feb 6, 2007 </label-value></message>\r\n\t<message><label-name>mailingdate</label-name>\r\n\t\t<label-value>Sep 25, 2007</label-value></message>\r\n\t<message><label-name>ownername</label-name>\r\n\t\t<label-value> \r\nMEMPHIS ATHLETIC CAMPUS FOUNDATION \r\n</label-value></message>\r\n</messages>\r\n</trademark-postcard></uspto-tm-document>\r\n\r\n"
+  recorded_at: 2026-10-20T17:23:14.485Z

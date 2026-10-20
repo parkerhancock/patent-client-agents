@@ -91,8 +91,8 @@ test("current TSDR numeric queries strip matching case prefixes and preserve doc
     "/last-update/info.json?sn=12345678",
     "/last-update/info.xml?sn=12345678",
     "/ts/cd/rawImage/12345678",
-    "/ts/cd/caseMultiStatus/rn?ids=12345%2C67890&from=1&to=2",
-    "/ts/cd/casedocs/bundle.xml?ir=12345%2C67890",
+    "/ts/cd/caseMultiStatus/rn?ids=12345,67890&from=1&to=2",
+    "/ts/cd/casedocs/bundle.xml?ir=12345,67890",
     "/ts/cd/casedocs/bundle.zip?ref=12345",
   ]);
   expect(
@@ -316,4 +316,64 @@ test("assignment records expose reel/frame helpers while preserving trademark fr
   expect((await trademark.searchByAssignee("x")).data[0]?.reelFrame).toBe(
     "1/0093",
   );
+});
+
+test("Madrid reference identifiers retain letters through actual TSDR paths and queries", async () => {
+  const paths: string[] = [];
+  const client = new TsdrClient({
+    apiKey: "synthetic-key",
+    retryLimit: 0,
+    fetch: mock((request) => {
+      const url = new URL(request.url);
+      paths.push(url.pathname + url.search);
+      return request.url.includes("caseMultiStatus")
+        ? Response.json({})
+        : new Response("fixture");
+    }),
+  });
+  expect(formatTsdrCaseId("refZ1231384")).toBe("refZ1231384");
+  expect(formatTsdrCaseId("REFZ1231384")).toBe("refZ1231384");
+  expect(formatTsdrCaseId("Z1231384", "ref")).toBe("refZ1231384");
+  expect(formatTsdrCaseId("IR0012345")).toBe("ir0012345");
+  await client.getStatusXml("refZ1231384");
+  await client.downloadBundle(["Z1231384"], { idType: "ref" });
+  await client.batchStatus(["refZ1231384"], { idType: "ref" });
+  expect(paths).toEqual([
+    "/ts/cd/casestatus/refZ1231384/info",
+    "/ts/cd/casedocs/bundle.pdf?ref=Z1231384",
+    "/ts/cd/caseMultiStatus/ref?ids=Z1231384",
+  ]);
+  expect(() => formatTsdrCaseId("snZ1231384")).toThrow();
+  expect(() => formatTsdrCaseId("irZ1231384")).toThrow();
+  expect(() => formatTsdrCaseId("Z1231384")).toThrow();
+});
+
+test("TSDR bundles transmit documented filters without permitting identifier overrides", async () => {
+  const queries: string[] = [];
+  const client = new TsdrClient({
+    apiKey: "synthetic-key",
+    retryLimit: 0,
+    fetch: mock((request) => {
+      queries.push(new URL(request.url).search);
+      return new Response("fixture");
+    }),
+  });
+  await client.getBundleXml(["75008897"], {
+    fromDate: "2006-01-01",
+    toDate: "2006-12-31",
+    type: "SPE",
+    category: "RC",
+    sort: "date:A",
+  });
+  await client.downloadBundle(["72131351"], { date: "2003-11-30" });
+  expect(queries).toEqual([
+    "?sn=75008897&fromDate=2006-01-01&toDate=2006-12-31&type=SPE&category=RC&sort=date:A",
+    "?sn=72131351&date=2003-11-30",
+  ]);
+  expect(() =>
+    client.getBundleXml(["72131351"], {
+      searchParams: { sn: "99999999" },
+    } as never),
+  ).toThrow("raw identifier query overrides");
+  expect(queries).toHaveLength(2);
 });

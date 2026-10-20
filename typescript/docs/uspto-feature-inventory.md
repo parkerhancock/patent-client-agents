@@ -166,10 +166,19 @@ it does not refresh historical documentation against current upstream behavior.
 The [current operation audit](uspto-operation-coverage.md) maps 92 method/path
 operations across the eight current portal definitions to client methods,
 declared request/response contracts, tests, and recorded HTTP interactions.
-Sixty-three operations come from archived original entry files and 29 PTAB
-operations were confirmed in the rendered current Swagger UI. It found 15 GET
+All 92 operations now have archived original contract evidence across eight
+entry files and seven companions. The earlier rendered PTAB observation is
+retained as historical evidence. It found 15 GET
 variants that the earlier 70-method name check did not detect; the owning
 workers added their dispatch and query handling. All 92 now have named entry
 points, with per-operation evidence and limitations in the machine-readable
 map. Neither that mapping nor a matching method declaration proves complete
-behavioral parity or a resolved upstream schema bundle.
+behavioral parity. All original schema files are archived, but two dangling
+upstream schema pointers prevent full reference resolution.
+
+The final October 20 recording pass covers all 92 declared method/path
+operations: 91 direct HTTP 200 responses and one declared bulk-file redirect
+followed by a recorded HTTP 200 ZIP download. All 25 declared TSDR routes have
+successful recordings; historical negative receipts remain separate. This is
+route coverage, with semantic assertions in the linked replay tests, and does
+not establish every parameter/format combination.

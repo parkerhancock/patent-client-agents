@@ -2,8 +2,10 @@
 
 Checked October 20, 2026. **The current portal release is 5.0, dated October 2,
 2026**, verified in the rendered official portal. The current main OpenAPI file
-was downloaded through the official Swagger UI; its external companion schemas
-still need to be retrieved and compared. All eight Swagger dropdown definition entry files are now archived.
+was downloaded through the official Swagger UI. All eight dropdown entry files
+and all seven original companion schemas are now archived with hashes. Two
+dangling pointers in the original main definition prevent complete reference
+resolution; source bytes were preserved.
 The separate current Office Actions specification is also archived and fully
 reference-resolved. The TypeScript port can start from the existing Python
 contracts, but must account for the newer Office Action
@@ -72,9 +74,10 @@ OpenAPI is 3.0.1 and `info.version` remains 1.0.0 despite portal release 5.0.
 The main file is an index into a multi-file specification: 36 path entries,
 19 inline operations, 19 path references, and 41 schema entries. It contains
 63 unique external references across seven companion files. There are no
-unresolved local-only references in the index; the referenced companion
-files have not yet been archived, so the complete schema bundle is not
-resolved. The seven files are `odp-common-base.yaml`, `trial-common.yaml`,
+unresolved local-only references in the index; all seven original companion files are now archived. Complete reference
+resolution remains false because the main index references two absent common
+schema names, `PetitionDecisionResponseBag` and
+`PetitionDecisionIdentifierResponseBag`. The seven files are `odp-common-base.yaml`, `trial-common.yaml`,
 `trial-proceedings.yaml`, `trial-decisions.yaml`, `trial-documents.yaml`,
 `trial-appeal-decisions.yaml`, and `trial-interferences.yaml`.
 
@@ -83,8 +86,8 @@ contains the three Petition Decision paths (five operations). The current
 Swagger UI offers Petition Decisions as a separate definition; this is not
 evidence of API retirement. Application search/get/document route names and
 GET parameter names are unchanged. The document-list endpoint supports
-`documentCodes`, `officialDateFrom`, and `officialDateTo`. Current response
-field-shape comparison still requires `odp-common-base.yaml`.
+`documentCodes`, `officialDateFrom`, and `officialDateTo`. The current common response schemas are archived in
+[`odp-common-base-2026-10-20.yaml`](../references/odp/odp-common-base-2026-10-20.yaml).
 
 `/api/v1/patent/applications/text-to-search` is a metadata-only placeholder in
 both snapshots: no HTTP method is declared. Do not implement it as a confirmed
@@ -258,7 +261,7 @@ are visible, including separate search/download request types and a
 [observation receipt](../references/odp/petition-decisions-browser-observation.md)
 records the exact route and model list. The raw YAML was subsequently downloaded through a plain source-link click in Chrome and is included in the archive inventory below.
 
-The in-app browser became unavailable after a turn interruption. A fresh public Chrome research tab successfully retrieved all six remaining dropdown definition entry files through their visible source links. Earlier direct navigation to the common-base YAML was blocked by ChatGPT; no bypass was attempted. Seven main companion files remain unarchived, so the full current schema bundle is still incomplete. No complete current-schema claim follows from successful code tests.
+The in-app browser became unavailable after a turn interruption. A fresh public Chrome research tab successfully retrieved all six remaining dropdown definition entry files through their visible source links. Earlier direct navigation to the common-base YAML was blocked by ChatGPT; no bypass was attempted. At that stage, seven main companion files remained unarchived. The subsequent dev-browser capture below supersedes that archive limitation. No complete current-schema claim follows from successful code tests.
 
 The [Python USPTO feature inventory](uspto-feature-inventory.md) enumerates 70
 public domain-client methods across 12 clients, delegating facades, local XML
@@ -281,4 +284,30 @@ Retrieved October 20 through the visible source links in the official Swagger UI
 
 The four migrated analytics definitions each declare GET searchable-field metadata and POST record search, so their current eight operations exceed the four Python search helpers. Each uses `application/x-www-form-urlencoded` for POST search rather than the new Office Action API’s JSON body. TSDR declares 25 GET operations, covering case status, single documents/pages, multi-case status, bundles, and downloads. Its specification describes limited availability during upgrades without a dated outage window; that text is a source observation and does not establish current service health.
 
-Each archive has a matching `*-operations.json` inventory, with URL, retrieval date, byte count, digest, own version, operation list, schema names, and reference validation. The main operation catalog includes these six inventories alongside the main index and current Office Actions schema. The source receipt flag `current_schema_bundle_complete` remains false because the seven main companions have not been retrieved.
+Each archive has a matching `*-operations.json` inventory, with URL, retrieval date, byte count, digest, own version, operation list, schema names, and reference validation. The main operation catalog includes these six inventories alongside the main index and current Office Actions schema. The subsequent dev-browser pass archived all seven main companions. The `current_schema_bundle_complete` flag remains false because two original schema pointers are dangling; `current_schema_bundle_archived` is true.
+
+## Original companion archive followup
+
+At the user's request, the `dev-browser` skill captured the ordinary public
+Swagger page's seven companion responses as HTTP 200 `application/yaml`.
+Decoded HTTP response bytes were preserved without YAML serialization. The
+main YAML captured at the same time matches the earlier archive hash exactly.
+[Safe capture receipts](../references/odp/companion-original-capture-2026-10-20.json)
+record URLs, status, content types, byte sizes, timestamps, and SHA-256 hashes.
+No cookies, request authentication headers, raw HAR, or browser session state
+are included in the source archive.
+
+[Reference validation](../references/odp/schema-reference-validation-2026-10-20.json)
+checks 1,039 reference occurrences across 15 original files. No referenced
+files are missing; two original main-index schema pointers are dangling, as
+listed above. Bun's YAML parser accepts the original files; PyYAML rejects
+trailing tabs after a colon in the appeal companion. The archived bytes retain
+those tabs. Proceedings paths in the companion omit `/trials`, while the main
+index mounts them at `/patent/trials/proceedings`; the operation map preserves
+both declarations. The separate Petition Decisions definition works independently
+of the two stale main-index schema names.
+
+Earlier direct-fetch HTML shells and Chrome client refusals remain historical
+receipts. They were limitations of those retrieval methods, not evidence of
+upstream authentication denial. The requested workflow change yielded all
+original files. Archive completeness is true; full reference resolution is false.

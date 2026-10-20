@@ -328,7 +328,7 @@ describe("TSDR contract", () => {
       "/ts/cd/rawImage/12345678",
       "/ts/cd/casestatus/sn12345678/content.html",
       "/last-update/info.json?sn=12345678",
-      "/ts/cd/caseMultiStatus/sn?ids=12345678%2C87654321",
+      "/ts/cd/caseMultiStatus/sn?ids=12345678,87654321",
     ]);
   });
 });

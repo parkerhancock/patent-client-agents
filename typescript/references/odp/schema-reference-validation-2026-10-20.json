@@ -1,18 +1,12 @@
 {
   "checked_at": "2026-10-20",
   "original_entry_archive_count": 8,
+  "original_companion_archive_count": 7,
+  "yaml_parser": "Bun.YAML.parse; byte archives unchanged",
   "archived_entry_bytes_unchanged": true,
   "resolved_bundle": false,
-  "missing_direct_external_files": [
-    "./odp-common-base.yaml",
-    "./trial-appeal-decisions.yaml",
-    "./trial-common.yaml",
-    "./trial-decisions.yaml",
-    "./trial-documents.yaml",
-    "./trial-interferences.yaml",
-    "./trial-proceedings.yaml"
-  ],
-  "note": "Only original archived entry files are checked. Missing companion bytes prevent validating transitive dependencies. Dated local archive names map to original basenames without modifying source bytes.",
+  "missing_direct_external_files": [],
+  "note": "All eight original entry and seven original companion files are checked, including transitive references. Dated local archive names map to original basenames without modifying source bytes.",
   "entries": [
     {
       "archive": "oa-citations-2026-10-20.yaml",
@@ -37,6 +31,151 @@
       "sha256": "e0c5398114e22a20fbd6687efd9793d89c0d22e988d159a5ac605d997da17529",
       "ref_occurrences": 0,
       "references": []
+    },
+    {
+      "archive": "odp-common-base-2026-10-20.yaml",
+      "sha256": "b793469a103afd78cc72c3ca3a41a4673588cf56a0b178f0d23b2974bb36121c",
+      "ref_occurrences": 23,
+      "references": [
+        {
+          "location": "/components/schemas/PatentSearchRequest/properties/filters/items/$ref",
+          "ref": "#/components/schemas/Filter",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentSearchRequest/properties/rangeFilters/items/$ref",
+          "ref": "#/components/schemas/Range",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentSearchRequest/properties/sort/items/$ref",
+          "ref": "#/components/schemas/Sort",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentSearchRequest/properties/pagination/$ref",
+          "ref": "#/components/schemas/Pagination",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDownloadRequest/properties/filters/items/$ref",
+          "ref": "#/components/schemas/Filter",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDownloadRequest/properties/rangeFilters/items/$ref",
+          "ref": "#/components/schemas/Range",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDownloadRequest/properties/sort/items/$ref",
+          "ref": "#/components/schemas/Sort",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDownloadRequest/properties/pagination/$ref",
+          "ref": "#/components/schemas/Pagination",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/applicationMetaData/$ref",
+          "ref": "#/components/schemas/ApplicationMetaData",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/assignmentBag/items/$ref",
+          "ref": "#/components/schemas/Assignment",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/recordAttorney/$ref",
+          "ref": "#/components/schemas/RecordAttorney",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/foreignPriorityBag/items/$ref",
+          "ref": "#/components/schemas/ForeignPriority",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/parentContinuityBag/items/$ref",
+          "ref": "#/components/schemas/ParentContinuityData",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/childContinuityBag/items/$ref",
+          "ref": "#/components/schemas/ChildContinuityData",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/patentTermAdjustmentData/$ref",
+          "ref": "#/components/schemas/PatentTermAdjustment",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/eventDataBag/items/$ref",
+          "ref": "#/components/schemas/EventData",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/pgpubDocumentMetaData/$ref",
+          "ref": "#/components/schemas/PGPubFileMetaData",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/PatentDataResponse/properties/patentFileWrapperDataBag/items/properties/grantDocumentMetaData/$ref",
+          "ref": "#/components/schemas/GrantFileMetaData",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/StatusCodeSearchRequest/properties/pagination/$ref",
+          "ref": "#/components/schemas/Pagination",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/BulkDataProductBag/properties/productFileBag/$ref",
+          "ref": "#/components/schemas/ProductFileBag",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/BdssResponseProductBag/properties/bulkDataProductBag/items/$ref",
+          "ref": "#/components/schemas/BulkDataProductBag",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/BdssResponseBag/properties/bulkDataProductBag/items/$ref",
+          "ref": "#/components/schemas/BulkDataProductBag",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/BdssResponseBag/properties/facets/$ref",
+          "ref": "#/components/schemas/Facets",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        }
+      ]
     },
     {
       "archive": "office-actions-2026-10-20.yaml",
@@ -882,512 +1021,1880 @@
         {
           "location": "/paths//api/v1/patent/applications/search/post/requestBody/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentSearchRequest",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/search/post/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/search/post/responses/413/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/Status413",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/search/get/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/search/get/responses/413/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/Status413",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/search/download/post/requestBody/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentDownloadRequest",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/search/download/post/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/search/download/get/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/get/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/meta-data/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/applicationMetaData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ApplicationMetaData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/adjustment/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/patentTermAdjustmentData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentTermAdjustment",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/assignment/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/assignmentBag/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/Assignment",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/attorney/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/recordAttorney/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/RecordAttorney",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/continuity/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/parentContinuityBag/items/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParentContinuityData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/continuity/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/childContinuityBag/items/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ChildContinuityData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/foreign-priority/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/foreignPriorityBag/items/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ForeignPriority",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/transactions/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/eventDataBag/items/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/EventData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/documents/get/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/DocumentBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/associated-documents/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/pgpubDocumentMetaData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PGPubFileMetaData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/applications/{applicationNumberText}/associated-documents/get/responses/200/content/application/json/schema/properties/patentFileWrapperDataBag/items/properties/grantDocumentMetaData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/GrantFileMetaData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/status-codes/post/requestBody/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/StatusCodeSearchRequest",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/status-codes/post/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/status-codes/get/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/datasets/products/search/get/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/BdssResponseBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/datasets/products/{productIdentifier}/get/responses/200/content/application/json/schema/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/BdssResponseProductBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/proceedings/search/$ref",
           "ref": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/proceedings/search/download/$ref",
           "ref": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search~1download",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/proceedings/{trialNumber}/$ref",
           "ref": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1{trialNumber}",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/decisions/search/$ref",
           "ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/decisions/search/download/$ref",
           "ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search~1download",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/decisions/{documentIdentifier}/$ref",
           "ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1{documentIdentifier}",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/{trialNumber}/decisions/$ref",
           "ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1decisions",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/documents/search/$ref",
           "ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/documents/search/download/$ref",
           "ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search~1download",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/documents/{documentIdentifier}/$ref",
           "ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1{documentIdentifier}",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/trials/{trialNumber}/documents/$ref",
           "ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1documents",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/appeals/decisions/search/$ref",
           "ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/appeals/decisions/search/download/$ref",
           "ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search~1download",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/appeals/decisions/{documentIdentifier}/$ref",
           "ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1{documentIdentifier}",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/appeals/{appealNumber}/decisions/$ref",
           "ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1{appealNumber}~1decisions",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/interferences/decisions/search/$ref",
           "ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-interferences-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/interferences/decisions/search/download/$ref",
           "ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search~1download",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-interferences-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/interferences/{interferenceNumber}/decisions/$ref",
           "ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1{interferenceNumber}~1decisions",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-interferences-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/paths//api/v1/patent/interferences/decisions/{documentIdentifier}/$ref",
           "ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1{documentIdentifier}",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-interferences-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PatentSearchRequest/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentSearchRequest",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PatentDownloadRequest/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentDownloadRequest",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PatentDataResponse/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/ApplicationMetaData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ApplicationMetaData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PatentTermAdjustment/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PatentTermAdjustment",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/Assignment/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/Assignment",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/RecordAttorney/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/RecordAttorney",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/ParentContinuityData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParentContinuityData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/ChildContinuityData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ChildContinuityData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/ForeignPriority/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ForeignPriority",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/EventData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/EventData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/DocumentBag/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/DocumentBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PGPubFileMetaData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PGPubFileMetaData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/GrantFileMetaData/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/GrantFileMetaData",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/StatusCodeSearchResponse/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/BdssResponseProductBag/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/BdssResponseProductBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PetitionDecisionResponseBag/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PetitionDecisionResponseBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "unresolved_json_pointer"
         },
         {
           "location": "/components/schemas/PetitionDecisionIdentifierResponseBag/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/PetitionDecisionIdentifierResponseBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "unresolved_json_pointer"
         },
         {
           "location": "/components/schemas/ProceedingDataResponse/$ref",
           "ref": "./trial-proceedings.yaml#/components/schemas/ProceedingDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PatentTrialProceedingDataBag/$ref",
           "ref": "./trial-proceedings.yaml#/components/schemas/patentTrialProceedingDataBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/DocumentDataResponse/$ref",
           "ref": "./trial-documents.yaml#/components/schemas/DocumentDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PatentTrialDocumentDataBag/$ref",
           "ref": "./trial-documents.yaml#/components/schemas/patentTrialDocumentDataBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/DecisionDataResponse/$ref",
           "ref": "./trial-decisions.yaml#/components/schemas/DecisionDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PatentTrialDecisionDataBag/$ref",
           "ref": "./trial-decisions.yaml#/components/schemas/patentTrialDecisionDataBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/InterferenceDecisionDataResponse/$ref",
           "ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/AppealDecisionDataResponse/$ref",
           "ref": "./trial-appeal-decisions.yaml#/components/schemas/AppealDecisionDataResponse",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/PatentAppealDataBag/$ref",
           "ref": "./trial-appeal-decisions.yaml#/components/schemas/patentAppealDataBag",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/q/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamQ",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/sort/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamSort",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/offset/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamOffset",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/limit/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamLimit",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/facets/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamFacets",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/fields/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamFields",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/filters/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamFilters",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/rangeFilters/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamRangeFilters",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/format/$ref",
           "ref": "./odp-common-base.yaml#/components/schemas/ParamFormat",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/BadRequest/$ref",
           "ref": "./trial-common.yaml#/components/schemas/BadRequest",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/Forbidden/$ref",
           "ref": "./trial-common.yaml#/components/schemas/Forbidden",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/NotFound/$ref",
           "ref": "./trial-common.yaml#/components/schemas/NotFound",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/Status413/$ref",
           "ref": "./trial-common.yaml#/components/schemas/Status413",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
         },
         {
           "location": "/components/schemas/InternalError/$ref",
           "ref": "./trial-common.yaml#/components/schemas/InternalError",
-          "target_archive": null,
-          "resolution": "missing_external_archive"
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        }
+      ]
+    },
+    {
+      "archive": "trial-appeal-decisions-2026-10-20.yaml",
+      "sha256": "a29d8b6992495594f6ba38149ef054ab032cfe1af56526554cbedee769625890",
+      "ref_occurrences": 39,
+      "references": [
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./odp-common-base.yaml#/components/schemas/PatentSearchRequest",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/post/responses/200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/AppealDecisionDataResponse",
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/get/responses/200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/AppealDecisionDataResponse",
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DownloadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/post/responses/200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/AppealDecisionDataResponse",
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/get/responses/200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/AppealDecisionDataResponse",
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/search/download/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/{documentIdentifier}/get/responses/200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/AppealDecisionDataResponse",
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/{documentIdentifier}/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/{documentIdentifier}/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/{documentIdentifier}/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/{documentIdentifier}/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/decisions/{documentIdentifier}/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/{appealNumber}/decisions/get/responses/200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/AppealDecisionDataResponse",
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/{appealNumber}/decisions/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/{appealNumber}/decisions/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/{appealNumber}/decisions/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/{appealNumber}/decisions/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/appeals/{appealNumber}/decisions/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/AppealDecisionDataResponse/properties/patentAppealDataBag/items/$ref",
+          "ref": "#/components/schemas/patentAppealDataBag",
+          "target_archive": "trial-appeal-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        }
+      ]
+    },
+    {
+      "archive": "trial-common-2026-10-20.yaml",
+      "sha256": "335dd8a37df6806a7ac607948f6db94215b0045288a81714b41bf23ac623122f",
+      "ref_occurrences": 9,
+      "references": [
+        {
+          "location": "/components/schemas/SearchRequest/allOf/0/$ref",
+          "ref": "./odp-common-base.yaml#/components/schemas/PatentSearchRequest",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/DownloadRequest/allOf/0/$ref",
+          "ref": "./odp-common-base.yaml#/components/schemas/PatentDownloadRequest",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/Facet/properties/trialTypeCategory/items/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/FacetItem",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/Facet/properties/trialStatusCategory/items/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/FacetItem",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/Facet/properties/statuteAndRuleBag/items/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/FacetItem",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/InterferenceDecisionDataResponse/properties/patentInterferenceDataBag/items/$ref",
+          "ref": "#/components/schemas/InterferenceDecisionRecord",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/InterferenceDecisionRecord/properties/seniorPartyData/$ref",
+          "ref": "#/components/schemas/InterferencePartyData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/InterferenceDecisionRecord/properties/juniorPartyData/$ref",
+          "ref": "#/components/schemas/InterferencePartyData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/InterferenceDecisionRecord/properties/decisionDocumentData/$ref",
+          "ref": "#/components/schemas/InterferenceDecisionDocumentData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        }
+      ]
+    },
+    {
+      "archive": "trial-decisions-2026-10-20.yaml",
+      "sha256": "f42d53381f9c1fbdfb9c85aadf12b9f1d15d553d538029110d140925a36840ef",
+      "ref_occurrences": 48,
+      "references": [
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./odp-common-base.yaml#/components/schemas/PatentSearchRequest",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/post/responses/200/$ref",
+          "ref": "#/components/responses/Decision200",
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/get/responses/200/$ref",
+          "ref": "#/components/responses/Decision200",
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DownloadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/post/responses/200/$ref",
+          "ref": "#/components/responses/Decision200",
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/get/responses/200/$ref",
+          "ref": "#/components/responses/Decision200",
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/search/download/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/{documentIdentifier}/get/responses/200/$ref",
+          "ref": "#/components/responses/Decision200",
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/{documentIdentifier}/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/{documentIdentifier}/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/{documentIdentifier}/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/{documentIdentifier}/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/decisions/{documentIdentifier}/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/decisions/get/responses/200/$ref",
+          "ref": "#/components/responses/Decision200",
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/decisions/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/decisions/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/decisions/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/decisions/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/decisions/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDecisionDataBag/properties/trialMetaData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/TrialMetaData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDecisionDataBag/properties/patentOwnerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/PatentOwnerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDecisionDataBag/properties/regularPetitionerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/RegularPetitionerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDecisionDataBag/properties/respondentData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/RespondentData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDecisionDataBag/properties/derivationPetitionerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DerivationPetitionerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDecisionDataBag/properties/documentData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DocumentData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDecisionDataBag/properties/decisionData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DecisionData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/DecisionDataResponse/properties/patentTrialDecisionDataBag/items/$ref",
+          "ref": "#/components/schemas/patentTrialDecisionDataBag",
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/DecisionDataResponse/properties/facets/items/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Facet",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/responses/Decision200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/DecisionDataResponse",
+          "target_archive": "trial-decisions-2026-10-20.yaml",
+          "resolution": "resolved"
+        }
+      ]
+    },
+    {
+      "archive": "trial-documents-2026-10-20.yaml",
+      "sha256": "ea313858f6869d29614fa93fc888fac319e279bf56fa7ff5ae68cbbcb60c04e7",
+      "ref_occurrences": 48,
+      "references": [
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/SearchRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/post/responses/200/$ref",
+          "ref": "#/components/responses/Document200",
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/get/responses/200/$ref",
+          "ref": "#/components/responses/Document200",
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DownloadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/post/responses/200/$ref",
+          "ref": "#/components/responses/Document200",
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/get/responses/200/$ref",
+          "ref": "#/components/responses/Document200",
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/search/download/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/{documentIdentifier}/get/responses/200/$ref",
+          "ref": "#/components/responses/Document200",
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/{documentIdentifier}/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/{documentIdentifier}/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/{documentIdentifier}/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/{documentIdentifier}/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/documents/{documentIdentifier}/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/documents/get/responses/200/$ref",
+          "ref": "#/components/responses/Document200",
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/documents/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/documents/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/documents/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/documents/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/trials/{trialNumber}/documents/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDocumentDataBag/properties/trialMetaData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/TrialMetaData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDocumentDataBag/properties/patentOwnerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/PatentOwnerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDocumentDataBag/properties/regularPetitionerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/RegularPetitionerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDocumentDataBag/properties/respondentData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/RespondentData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDocumentDataBag/properties/derivationPetitionerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DerivationPetitionerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDocumentDataBag/properties/documentData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DocumentData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialDocumentDataBag/properties/decisionData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DecisionData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/DocumentDataResponse/properties/patentTrialDocumentDataBag/items/$ref",
+          "ref": "#/components/schemas/patentTrialDocumentDataBag",
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/DocumentDataResponse/properties/facets/items/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Facet",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/responses/Document200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/DocumentDataResponse",
+          "target_archive": "trial-documents-2026-10-20.yaml",
+          "resolution": "resolved"
+        }
+      ]
+    },
+    {
+      "archive": "trial-interferences-2026-10-20.yaml",
+      "sha256": "26cda11c3bf0f9d0898d1d3f217db12922dbb4a78810185dda392b6af054d5a2",
+      "ref_occurrences": 38,
+      "references": [
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./odp-common-base.yaml#/components/schemas/PatentSearchRequest",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/post/responses/200/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/get/responses/200/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./odp-common-base.yaml#/components/schemas/PatentDownloadRequest",
+          "target_archive": "odp-common-base-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/post/responses/200/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/get/responses/200/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/search/download/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/{interferenceNumber}/decisions/get/responses/200/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/{interferenceNumber}/decisions/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/{interferenceNumber}/decisions/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/{interferenceNumber}/decisions/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/{interferenceNumber}/decisions/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/{interferenceNumber}/decisions/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/{documentIdentifier}/get/responses/200/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/{documentIdentifier}/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/{documentIdentifier}/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/{documentIdentifier}/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/{documentIdentifier}/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/interferences/decisions/{documentIdentifier}/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        }
+      ]
+    },
+    {
+      "archive": "trial-proceedings-2026-10-20.yaml",
+      "sha256": "21306d5f1c730a140d7b00452d32d4e9c02506c3149bac053dab7e4dc77be58c",
+      "ref_occurrences": 39,
+      "references": [
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/SearchRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/post/responses/200/$ref",
+          "ref": "#/components/responses/Proceeding200",
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/get/responses/200/$ref",
+          "ref": "#/components/responses/Proceeding200",
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/post/requestBody/content/application/json/schema/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DownloadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/post/responses/200/$ref",
+          "ref": "#/components/responses/Proceeding200",
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/post/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/post/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/post/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/post/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/post/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/get/responses/200/$ref",
+          "ref": "#/components/responses/Proceeding200",
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/search/download/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/{trialNumber}/get/responses/200/$ref",
+          "ref": "#/components/responses/Proceeding200",
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/{trialNumber}/get/responses/400/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/BadRequest",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/{trialNumber}/get/responses/403/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Forbidden",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/{trialNumber}/get/responses/404/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/NotFound",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/{trialNumber}/get/responses/413/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/Status413",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/paths//api/v1/patent/proceedings/{trialNumber}/get/responses/500/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/InternalError",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialProceedingDataBag/properties/trialMetaData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/TrialMetaData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialProceedingDataBag/properties/patentOwnerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/PatentOwnerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialProceedingDataBag/properties/regularPetitionerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/RegularPetitionerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialProceedingDataBag/properties/respondentData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/RespondentData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/patentTrialProceedingDataBag/properties/derivationPetitionerData/$ref",
+          "ref": "./trial-common.yaml#/components/schemas/DerivationPetitionerData",
+          "target_archive": "trial-common-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/schemas/ProceedingDataResponse/properties/patentTrialProceedingDataBag/items/$ref",
+          "ref": "#/components/schemas/patentTrialProceedingDataBag",
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
+        },
+        {
+          "location": "/components/responses/Proceeding200/content/application/json/schema/$ref",
+          "ref": "#/components/schemas/ProceedingDataResponse",
+          "target_archive": "trial-proceedings-2026-10-20.yaml",
+          "resolution": "resolved"
         }
       ]
     },

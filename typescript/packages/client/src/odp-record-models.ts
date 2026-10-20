@@ -180,10 +180,13 @@ export function recordRequest(
   options: RecordSearchOptions = {},
   download = false,
   format?: "json" | "csv",
+  getDownloadFacets = false,
 ) {
   const method = z.enum(["GET", "POST"]).parse(options.method ?? "POST");
   const body = recordPayload(options, download, format);
   if (method === "POST") return { method, body };
+  if (download && getDownloadFacets && options.facets?.length)
+    body.facets = options.facets;
   const { q, fields, facets, filters, rangeFilters, sort, pagination } =
     body as {
       q?: string;

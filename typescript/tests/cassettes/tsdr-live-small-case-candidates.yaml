@@ -1,0 +1,44 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://tsdrapi.uspto.gov/ts/cd/casedocs/bundle.xml?sn=75757575%2C75008897%2C72131351%2C76515878
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 400
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - text/plain;charset=UTF-8
+      date:
+      - Tue, 20 Oct 2026 17:31:53 GMT
+      expires:
+      - "0"
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-cnection:
+      - close, close
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-l7-reqid:
+      - 000001a105f49446-1f5c280
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: 75757575%2C75008897%2C72131351%2C76515878 is not a valid SerialNumber
+  recorded_at: 2026-10-20T17:32:00.658Z

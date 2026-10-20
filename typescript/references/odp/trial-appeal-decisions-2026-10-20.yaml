@@ -1,0 +1,551 @@
+openapi: 3.0.3
+info:
+  title: PTAB Trial Appeal Decisions API
+  version: 1.0.0
+  description: Endpoints to access appeal decision documents from PTAB.
+
+paths:
+  /api/v1/patent/appeals/decisions/search:
+    post:
+      tags:
+      - PTAB Appeals
+      summary: Search appeals decisions using json payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ./odp-common-base.yaml#/components/schemas/PatentSearchRequest
+            example:
+              q: appellantData.groupArtUnitNumber:2145
+              sort: [{"field": "appellantData.technologyCenterNumber","order": "desc"} ]
+              pagination: {"offset": 0,"limit": 25}
+              fields: ["appellantData.groupArtUnitNumber","appellantData.inventorName","respondentData.counselName"]
+              filters: [{"name": "decisionData.decisionTypeCategory","value": ["Rehearing"]}]   
+              rangeFilters: [{"field": "documentData.documentFilingDate","valueFrom": '2016-01-01',"valueTo": '2024-12-31'}]      
+              facets: ["appellantData.groupArtUnitNumber","appellantData.technologyCenterNumber"]
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppealDecisionDataResponse'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+    get:
+      tags:
+      - PTAB Appeals
+      summary: Search appeals decisions using query parameters
+      parameters:
+       - name: q
+         in: query
+         description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+         allowReserved: true
+         schema:
+            type: string
+         examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: Appeal
+              description: Search text 'Appeal' across the searchable data fields
+            Exact Phrase AND:
+              value: Appeal AND 1600
+              description: Search text 'Appeal' AND '1600' across all searchable fields within data set
+            Search By Field Value:
+              value: appealNumber:2015000194
+              description: Search data for appealNumber 2015000194
+            Boolean OR:
+              value: appellantData.applicationNumberText:12608694 OR appellantData.groupArtUnitNumber:2145
+              description: Search data where applicationNumberText is 12608694 Or groupArtUnitNumber is 2145
+            Boolean AND:
+              value: appellantData.applicationNumberText:12608694 AND appellantData.groupArtUnitNumber:2145
+              description: Search data where applicationNumberText is both 12608694 and groupArtUnitNumber value is 2145
+            Wildcard:
+              value: appellantData.inventorName:Timothy*
+              description: Search data where inventorName has text Yong followed by any character
+            Range:
+              value: documentData.documentFilingDate:[2016-08-26 TO 2024-07-18]
+              description: Search data where documentFilingDate range is between 2016-08-26 TO 2024-07-18
+            Comparison:
+              value: appellantData.groupArtUnitNumber:>600
+              description: Search all records where groupArtUnitNumber is greater than 600
+       - name: sort
+         in: query
+         description: Field to be sorted followed by sort order
+         schema:
+            type: string
+         examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: appellantData.technologyCenterNumber asc
+              description: Sort by technologyCenterNumber ascending order
+            Descending:
+              value: appellantData.technologyCenterNumber desc
+              description: Sort bytechnologyCenterNumber descending order
+       - name: offset
+         in: query
+         description: Position in the dataset of a particular record
+         schema:
+            type: integer
+            minimum: 0
+         example: 0
+       - name: limit
+         in: query
+         description: Limit the number of results returned
+         schema:
+            type: integer
+            minimum: 1
+         example: 25
+       - name: facets
+         in: query
+         description: List of fields names to be faceted upon separated by comma (<b>,</b>)
+         schema:
+            type: string
+         examples:
+            No Facets:
+              value:
+              description: No faceting option
+            Facets Example 1:
+              value: appellantData.groupArtUnitNumber,appellantData.technologyCenterNumber
+              description: Faceting by groupArtUnitNumber and technologyCenterNumber
+            Facets Example 2:
+              value: appealDocumentCategory,appellantData.groupArtUnitNumber,appellantData.technologyCenterNumber,documentData.documentTypeDescriptionText,documentData.decisionData.statuteAndRuleBag,documentData.decisionData.issueTypeBag
+              description: Faceting by appealDocumentCategory,appellantData.groupArtUnitNumber,appellantData.technologyCenterNumber,documentData.documentTypeDescriptionText,documentData.decisionData.statuteAndRuleBag,documentData.decisionData.issueTypeBag
+       - name: fields
+         in: query
+         description: Limits the response by specifying which fields from dataset should be included.
+         schema:
+            type: string
+         examples:
+            All Available Data Set Fields:
+              value:
+              description: Returns all available data set fields
+            Selected Fields:
+              value: appellantData.groupArtUnitNumber,appellantData.inventorName,respondentData.counselName,documentData,decisionData
+              description: Include only groupArtUnitNumber,inventorName and counselName in search result
+       - name: filters
+         in: query
+         description: Filter data by supplying filter parameter. Provide field name and its value.
+         schema:
+            type: string
+         examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: appellantData.technologyCenterNumber 2800
+              description: Filter data where technologyCenterNumber value is 2800
+            Filters Example 2:
+              value: decisionData.decisionTypeCategory Rehearing
+              description: Filter data where decisionTypeCategory value is Rehearing
+            Filters Single Value:
+              value: appellantData.groupArtUnitNumber 2136
+              description: Filter data where groupArtUnitNumber value is 2136
+            Filters Multi Value:
+              value: appellantData.groupArtUnitNumber 2136,2145
+              description: Filter data where groupArtUnitNumber value is 2136 or 2145
+       - name: rangeFilters
+         in: query
+         description: Filter the data by supplying range of values. Applicable for number and date type fields.
+         schema:
+            type: string
+         examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: documentData.documentFilingDate 2016-07-18:2024-07-18
+              description: Filter data where documentFilingDate is between 2016-07-18 and 2024-07-18
+            Number Range Filter:
+              value: documentData.documentFilingDate 2023-07-18:2024-07-18
+              description: Filter data where documentFilingDate date is between 2023-07-18:2024-07-18
+
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppealDecisionDataResponse'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+          
+          
+  /api/v1/patent/appeals/decisions/search/download:
+    post:
+      tags:
+      - PTAB Appeals
+      summary: Download appeals decisions search results in json or csv format using json payload
+      requestBody:
+        required: true
+        description: Download request. Same structure as PatentDownloadRequest.
+        content:
+          application/json:
+            schema:
+              $ref: ./trial-common.yaml#/components/schemas/DownloadRequest
+            example:
+              q: appellantData.groupArtUnitNumber:2145
+              sort: [{"field": "appellantData.technologyCenterNumber","order": "desc"} ]
+              pagination: {"offset": 0,"limit": 25}
+              fields: ["appellantData.groupArtUnitNumber","appellantData.inventorName","appellantData.counselName"]
+              filters: [{"name": "decisionData.decisionTypeCategory","value": ["Rehearing"]}]   
+              rangeFilters: [{"field": "documentData.documentFilingDate","valueFrom": '2016-01-01',"valueTo": '2024-12-31'}]      
+              format: csv
+
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppealDecisionDataResponse'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+    get:
+      tags:
+      - PTAB Appeals
+      summary: Download appeals decisions search results in json or csv format using query parameters
+      parameters:
+       - name: q
+         in: query
+         description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+         allowReserved: true
+         schema:
+            type: string
+
+         examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: Appeal
+              description: Search text 'Appeal' across the searchable data fields
+            Exact Phrase AND:
+              value: Appeal AND 2800
+              description: Search text 'Appeal' AND '2800' across all searchable fields within data set
+            Search By Field Value:
+              value: appealNumber:2015000194
+              description: Search data for trial number IPR2025-01319
+            Boolean OR:
+              value: appellantData.applicationNumberText:12608694 OR appellantData.groupArtUnitNumber:2145
+              description: Search data where applicationNumberText is IPR Or groupArtUnitNumber is 2145
+            Boolean AND:
+              value: appellantData.applicationNumberText:12608694 AND appellantData.groupArtUnitNumber:2145
+              description: Search data where applicationNumberText is both IPR and groupArtUnitNumber value is 2145
+            Wildcard:
+              value: appellantData.inventorName:Timothy*
+              description: Search data where inventorName has text Yong followed by any character
+            Range:
+              value: documentData.documentFilingDate:[2016-08-26 TO 2024-07-18]
+              description: Search data where documentFilingDate range is between 2023-07-18 TO 2024-07-18
+            Comparison:
+              value: appellantData.groupArtUnitNumber:>600
+              description: Search all records where groupArtUnitNumber is greater than 600
+       - name: sort
+         in: query
+         description: Field to be sorted followed by sort order
+         schema:
+            type: string
+         examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: appellantData.technologyCenterNumber asc
+              description: Sort by technologyCenterNumber ascending order
+            Descending:
+              value: appellantData.technologyCenterNumber desc
+              description: Sort bytechnologyCenterNumber descending order
+       - name: offset
+         in: query
+         description: Position in the dataset of a particular record
+         schema:
+            type: integer
+            minimum: 0
+         example: 0
+       - name: limit
+         in: query
+         description: Limit the number of results returned
+         schema:
+            type: integer
+            minimum: 1
+         example: 25
+       - name: fields
+         in: query
+         description: Limits the response by specifying which fields from dataset should be included.
+         schema:
+            type: string
+         examples:
+            All Available Data Set Fields:
+              value:
+              description: Returns all available data set fields
+            Selected Fields:
+              value: appellantData.groupArtUnitNumber,appellantData.inventorName,appellantData.counselName
+              description: Include only groupArtUnitNumber,inventorName and counselName in search result
+       - name: filters
+         in: query
+         description: Filter data by supplying filter parameter. Provide field name and its value.
+         schema:
+            type: string
+         examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: appellantData.technologyCenterNumber 2800
+              description: Filter data where technologyCenterNumber value is 2800
+            Filters Example 2:
+              value: decisionData.decisionTypeCategory Rehearing
+              description: Filter data where decisionTypeCategory value is Rehearing
+            Filters Single Value:
+              value: appellantData.groupArtUnitNumber 2136
+              description: Filter data where groupArtUnitNumber value is 2136
+            Filters Multi Value:
+              value: appellantData.groupArtUnitNumber 2136,2145
+              description: Filter data where groupArtUnitNumber value is 2136 or 2145
+       - name: rangeFilters
+         in: query
+         description: Filter the data by supplying range of values. Applicable for number and date type fields.
+         schema:
+            type: string
+         examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: documentData.documentFilingDate 2016-07-18:2024-07-18
+              description: Filter data where documentFilingDate is between 2016-07-18 and 2024-07-18
+            Number Range Filter:
+              value: documentData.documentSizeQuantity  402004:602005
+              description: Filter data where documentSizeQuantity is between 402004:602005
+       - name: format
+         in: query
+         description: Download Format
+         schema:
+            type: string
+         examples:
+            json:
+              value: json
+            csv:
+              value: csv
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppealDecisionDataResponse'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+
+  /api/v1/patent/appeals/decisions/{documentIdentifier}:
+    get:
+      tags:
+      - PTAB Appeals
+      summary: Retrieve appeals decisions by document Identifier
+      parameters:
+        - name: documentIdentifier
+          in: path
+          description: document Identifier. 
+          schema:
+            type: string
+          required: true
+          example: 05468ead-25e9-4806-b4ef-ce5585689b80
+      responses:
+        '200':
+          description: Appeal decision found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppealDecisionDataResponse'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+          
+  /api/v1/patent/appeals/{appealNumber}/decisions:
+    get:
+      tags:
+      - PTAB Appeals
+      summary: Retrieve appeals decisions by appeal number
+      parameters:
+      - name: appealNumber
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '2024518758'
+      responses:
+        '200':
+          description: Appeal decision found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppealDecisionDataResponse'
+        '400': { $ref: ./trial-common.yaml#/components/schemas/BadRequest }
+        '403': { $ref: ./trial-common.yaml#/components/schemas/Forbidden }
+        '404': { $ref: ./trial-common.yaml#/components/schemas/NotFound }
+        '413': { $ref: ./trial-common.yaml#/components/schemas/Status413 }
+        '500': { $ref: ./trial-common.yaml#/components/schemas/InternalError }
+
+components:
+  schemas:
+    patentAppealDataBag:
+      type: object
+      properties:
+        appealNumber:
+          type: string
+          example: '2024518758'
+        lastModifiedDateTime:
+          type: string
+          example: '2024-05-05T00:00:00Z'
+        appealDocumentCategory:
+          type: string
+          example: decision document
+        appealMetaData:
+          type: object
+          properties:
+            docketNoticeMailedDate:
+              type: string
+              format: date
+              example: '2024-05-05'
+            appealFilingDate:		        
+              type: string
+              format: date
+              example: '2024-05-05'
+            appealLastModifiedDate: 
+              type: string
+              format: date
+              example: '2024-05-05'
+            appealLastModifiedDateTime:
+              type: string
+              format: date
+              example: '2024-05-05T00:00:00Z'
+            applicationTypeCategory:
+              type: string
+              example: 'Affirmed-in-Part'
+            fileDownloadURI: 
+              type: string
+              example: '/download'
+        appellantData:
+          type: object
+          properties:
+            applicationNumberText:
+              type: string
+              example: '8357487'
+            counselName:
+              type: string
+              example: TARROLL, SUMDHEIM
+            groupArtUnitNumber:
+              type: string
+              example: STIC
+            inventorName:
+              type: string
+              example: Sultan, Tarik et al
+            realPartyInInterestName:
+              type: string
+              example: Unicorn Pharmaceuticals
+            patentNumber:
+              type: string
+              example: '4678439'
+            patentOwnerName:
+              type: string
+              example: Unicorn Pharmaceuticals
+            publicationDate:
+              type: string
+              example: '2022-05-27'
+            publicationNumber:
+              type: string
+              example: 20210628467A1
+            technologyCenterNumber:
+              type: string
+              example: RD00
+            grantDate:
+              type: string
+              format: date
+              example: '2022-05-27'
+        thirdPartyRequesterData:
+          type: object
+          properties:
+            thirdPartyName:
+              type: string
+              example: null
+        documentData:
+          type: object
+          properties:
+            documentFilingDate:
+              type: string
+              example: '2022-02-26'
+            documentIdentifier:
+              type: string
+              example: PTAB/e010a6e7-b2df-4f72-b800-e232b89585ab
+            documentName:
+              type: string
+              example: Final Decision Document
+            documentSizeQuantity:
+              type: integer
+              example: 102113
+            documentOCRText:
+              type: string
+              example: Some OCR content
+            documentTypeDescriptionText:
+              type: string
+              example: Rehearing
+            fileDownloadURI:
+              type: string
+              example: https://ptab.uspto.gov/appeal/document/download
+        decisionData:
+          type: object
+          properties:
+            appealOutcomeCategory:
+              type: string
+              example: 'sample'
+            statuteAndRuleBag:
+              type: array
+              items: { type: string }
+              example: ["37 CFR 42.100","37 CFR 43.100"]
+            decisionIssueDate:       { type: string, format: date, example: "2002-02-25" }
+            decisionTypeCategory:    { type: string, example: "Decision" }
+            issueTypeBag:
+              type: array
+              items: { type: string }
+              example: ["Substantive","Procedural"]
+
+    AppealDecisionDataResponse:
+      type: object
+      properties:
+        requestIdentifier: 
+          type: string
+          example: 501eacc7-c785-4d85-96ac-a39f3f5533aa
+        count:
+          type: integer
+          example: 1
+        patentAppealDataBag:
+          type: array
+          items:
+            $ref: '#/components/schemas/patentAppealDataBag'

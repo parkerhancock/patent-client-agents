@@ -140,17 +140,22 @@ identified separately and do not establish successful live feature coverage.
 Live recordings include application search/retrieval/history and seven dataset
 views, status codes, PDF/XML/DOCX, 32 granted claims, seven PTAB/petition/bulk
 searches, details and exports, all current Office Actions and legacy analytics
-operations, a PTAB PDF, a small bulk ZIP, and current Assignment Center v3 responses. Native Bun Patent Public Search also retrieved an official
-18-page PDF; its archived response fixture verifies all 26 claims. TSDR uses
+operations, a PTAB PDF, a small bulk ZIP, and current Assignment Center v3
+responses. Native Bun Patent Public Search also retrieved an official 18-page PDF; its archived response fixture verifies all 26 claims. TSDR uses
 separate credentials, and Trademark Search requires an externally provided WAF
-session. Fresh authenticated TSDR recordings cover status, listing, update timestamps,
-image, batch and bundle XML, and single-document XML/PDF. Further variants stopped
-at an upstream429. Native Bun Trademark Search also passed a bounded query using
-the deployed session; see [deployed authentication](docs/deployed-uspto-auth.md).
+session. Fresh authenticated TSDR recordings cover status, listing, update
+timestamps, image, batch and bundle XML, and single-document XML/PDF. All 25
+declared TSDR operations now have successful recordings; historical rate-limit
+and rejection receipts are retained. Native Bun Trademark Search also passed a
+bounded query using the deployed session; see [deployed authentication](docs/deployed-uspto-auth.md).
 
 TSDR replay uses `bun run replay:tsdr`. Recording uses `bun run record:tsdr`
 with `USPTO_TSDR_API_KEY`, or `bun run record:tsdr --deployed-secret` for the
 existing authorized deployment secret. The latter captures the value in memory.
+The TSDR recorder preserves successful captures and historical failures. To
+retry one previously failed operation after its recorded `Retry-After`, use
+`bun run record:tsdr --deployed-secret --only=OPERATION --retry-recorded`.
+Unknown or empty selections fail; ordinary tests never retry live traffic.
 Trademark Search uses `bun run record:trademark-search --deployed-secret` for a
 single bounded query with the existing WAF session. Tests replay both offline.
 

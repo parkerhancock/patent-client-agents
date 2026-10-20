@@ -90,13 +90,15 @@ test("PTAB and petition search/export support every documented GET variant", asy
       method: "GET",
       fileFormat: "csv",
       limit: 2,
-      facets: ["omitted"],
+      facets: ["datasetFacet"],
     });
     const params = new URL(m.requests[0]?.url ?? "https://invalid.test")
       .searchParams;
     expect(m.requests[0]?.method).toBe("GET");
     expect(params.get("format")).toBe("csv");
-    expect(params.has("facets")).toBe(false);
+    expect(params.get("facets")).toBe(
+      Class === PtabInterferencesClient ? "datasetFacet" : null,
+    );
   }
 });
 test("GET multiple clauses fail before HTTP while POST preserves them", async () => {
@@ -334,4 +336,63 @@ test("PTAB PDF identifiers resolve advertised absolute URLs and reject HTML or f
       "/api/v1/patent/ptab-files/doc.pdf",
     ),
   ).rejects.toMatchObject({ code: "INVALID_RESPONSE" });
+});
+
+test("only source-supported PTAB GET exports preserve facets in JSON and raw downloads", async () => {
+  const facets = [
+    "trialMetaData.trialTypeCode",
+    "trialMetaData.trialStatusCategory",
+  ];
+  for (const method of ["GET", "POST", undefined] as const) {
+    const m = mock({ count: 0 });
+    const trials = new PtabTrialsClient(m.options);
+    const appeals = new PtabAppealsClient(m.options);
+    const interferences = new PtabInterferencesClient(m.options);
+    const petitions = new PetitionsClient(m.options);
+    const options = { facets, ...(method ? { method } : {}) };
+    for (const [normalized, raw, supportsFacets] of [
+      [
+        trials.downloadProceedings.bind(trials),
+        trials.downloadProceedingsFile.bind(trials),
+        true,
+      ],
+      [
+        trials.downloadDecisions.bind(trials),
+        trials.downloadDecisionsFile.bind(trials),
+        true,
+      ],
+      [
+        trials.downloadDocuments.bind(trials),
+        trials.downloadDocumentsFile.bind(trials),
+        true,
+      ],
+      [
+        interferences.download.bind(interferences),
+        interferences.downloadFile.bind(interferences),
+        true,
+      ],
+      [
+        appeals.download.bind(appeals),
+        appeals.downloadFile.bind(appeals),
+        false,
+      ],
+      [
+        petitions.download.bind(petitions),
+        petitions.downloadFile.bind(petitions),
+        false,
+      ],
+    ] as const) {
+      await normalized(options);
+      await raw({ ...options, fileFormat: "csv" });
+      for (const request of m.requests.slice(-2)) {
+        const url = new URL(request.url);
+        expect(request.method).toBe(method ?? "POST");
+        expect(url.searchParams.get("facets")).toBe(
+          method === "GET" && supportsFacets ? facets.join(",") : null,
+        );
+        if (request.method === "POST")
+          expect(await request.json()).not.toHaveProperty("facets");
+      }
+    }
+  }
 });

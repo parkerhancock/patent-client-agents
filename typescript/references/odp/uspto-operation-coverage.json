@@ -1,22 +1,27 @@
 {
   "checked_at": "2026-10-20",
   "scope": "Method+path coverage for eight current portal Swagger entry definitions; excludes separate PPUBS/Assignment Center/TMSearch clients and public methods not represented by these entry definitions.",
-  "source_method": "63 operations parsed from original archived entry files; 29 companion operations read from current rendered official Swagger UI.",
+  "source_method": "92 exposed operations parsed from eight original entry files and seven original companions, preserving main-entry paths when referenced companion paths differ.",
+  "schema_bundle_archived": true,
   "schema_bundle_complete": false,
+  "schema_bundle_resolved": false,
+  "unresolved_original_schema_refs": [
+    "./odp-common-base.yaml#/components/schemas/PetitionDecisionResponseBag",
+    "./odp-common-base.yaml#/components/schemas/PetitionDecisionIdentifierResponseBag"
+  ],
   "behavioral_parity_proven": false,
   "operation_count": 92,
   "source_counts": {
-    "archived_official_openapi": 63,
-    "rendered_official_swagger_ui": 29
+    "archived_official_openapi": 92
   },
   "source_symbols_present": 92,
-  "operations_with_recorded_http_200": 77,
-  "operations_with_successful_recording": 78,
+  "operations_with_recorded_http_200": 91,
+  "operations_with_successful_recording": 92,
   "operations_with_declared_redirect_workflow": 1,
   "evidence_limits": [
     "Method symbol presence and test-file links are navigation evidence, not proof of every parameter, content type or error contract.",
     "Direct live evidence is matching method/path HTTP200 interactions; declared bulk HTTP302 followed by approved-host HTTP200 is counted separately as a successful workflow. Replay tests establish semantic validation separately.",
-    "Raw PTAB companion bytes and common schema remain unarchived. Rendered operation names verify HTTP method/path, not complete schema resolution.",
+    "All seven original companions are archived. Two main-index petition response schema references point to missing definitions in the original common file; complete reference resolution remains false.",
     "The main text-to-search entry declares no HTTP operation and is excluded."
   ],
   "supplemental_successful_routes": [
@@ -50,6 +55,9 @@
       "method": "GET",
       "path": "/api/v1/datasets/products/files/{productIdentifier}/{fileName}",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/datasets/products/files/{productIdentifier}/{fileName}",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -146,6 +154,9 @@
       "method": "GET",
       "path": "/api/v1/datasets/products/search",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/datasets/products/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -280,6 +291,9 @@
       "method": "GET",
       "path": "/api/v1/datasets/products/{productIdentifier}",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/datasets/products/{productIdentifier}",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -390,16 +404,69 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/appeals/decisions/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-appeal-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/appeals/decisions/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "a29d8b6992495594f6ba38149ef054ab032cfe1af56526554cbedee769625890",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/AppealDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -407,7 +474,7 @@
         "class": "PtabAppealsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "search",
-        "line": 108,
+        "line": 120,
         "options": {
           "method": "GET"
         },
@@ -478,16 +545,69 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/appeals/decisions/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-appeal-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/appeals/decisions/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "a29d8b6992495594f6ba38149ef054ab032cfe1af56526554cbedee769625890",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/AppealDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -495,7 +615,7 @@
         "class": "PtabAppealsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadFile",
-        "line": 122,
+        "line": 134,
         "options": {
           "method": "GET"
         },
@@ -547,16 +667,33 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/appeals/decisions/{documentIdentifier}",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-appeal-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/appeals/decisions/{documentIdentifier}",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1{documentIdentifier}",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "a29d8b6992495594f6ba38149ef054ab032cfe1af56526554cbedee769625890",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "documentIdentifier",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/AppealDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -564,7 +701,7 @@
         "class": "PtabAppealsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getDecision",
-        "line": 174,
+        "line": 186,
         "options": {},
         "symbol_present": true
       },
@@ -606,16 +743,33 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/appeals/{appealNumber}/decisions",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-appeal-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/appeals/{appealNumber}/decisions",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1{appealNumber}~1decisions",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "a29d8b6992495594f6ba38149ef054ab032cfe1af56526554cbedee769625890",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "appealNumber",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/AppealDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -623,7 +777,7 @@
         "class": "PtabAppealsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getDecisionsByNumber",
-        "line": 290,
+        "line": 302,
         "options": {},
         "symbol_present": true
       },
@@ -655,6 +809,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/search",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -823,6 +980,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/search/download",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -925,6 +1085,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1058,6 +1221,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/adjustment",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/adjustment",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1147,6 +1313,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/assignment",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/assignment",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1230,6 +1399,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/associated-documents",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/associated-documents",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1337,6 +1509,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/attorney",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/attorney",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1426,6 +1601,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/continuity",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/continuity",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1528,6 +1706,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/documents",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/documents",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1675,6 +1856,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/foreign-priority",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/foreign-priority",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1767,6 +1951,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/meta-data",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/meta-data",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1858,6 +2045,9 @@
       "method": "GET",
       "path": "/api/v1/patent/applications/{applicationNumberText}/transactions",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/{applicationNumberText}/transactions",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -1949,16 +2139,69 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/interferences/decisions/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-interferences-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/interferences/decisions/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "26cda11c3bf0f9d0898d1d3f217db12922dbb4a78810185dda392b6af054d5a2",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -1966,7 +2209,7 @@
         "class": "PtabInterferencesClient",
         "file": "packages/client/src/ptab.ts",
         "method": "search",
-        "line": 108,
+        "line": 120,
         "options": {
           "method": "GET"
         },
@@ -2037,16 +2280,74 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/interferences/decisions/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-interferences-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/interferences/decisions/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "26cda11c3bf0f9d0898d1d3f217db12922dbb4a78810185dda392b6af054d5a2",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -2054,7 +2355,7 @@
         "class": "PtabInterferencesClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadFile",
-        "line": 122,
+        "line": 134,
         "options": {
           "method": "GET"
         },
@@ -2106,16 +2407,33 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/interferences/decisions/{documentIdentifier}",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-interferences-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/interferences/decisions/{documentIdentifier}",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1{documentIdentifier}",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "26cda11c3bf0f9d0898d1d3f217db12922dbb4a78810185dda392b6af054d5a2",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "documentIdentifier",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -2123,7 +2441,7 @@
         "class": "PtabInterferencesClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getDecision",
-        "line": 174,
+        "line": 186,
         "options": {},
         "symbol_present": true
       },
@@ -2165,16 +2483,33 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/interferences/{interferenceNumber}/decisions",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-interferences-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/interferences/{interferenceNumber}/decisions",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1{interferenceNumber}~1decisions",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "26cda11c3bf0f9d0898d1d3f217db12922dbb4a78810185dda392b6af054d5a2",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "interferenceNumber",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -2182,7 +2517,7 @@
         "class": "PtabInterferencesClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getDecisionsByNumber",
-        "line": 290,
+        "line": 302,
         "options": {},
         "symbol_present": true
       },
@@ -2214,6 +2549,9 @@
       "method": "GET",
       "path": "/api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields",
       "source_archive": "oa-enriched-citations-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields",
+      "entry_archive": "oa-enriched-citations-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "10df3aa6688dd5856b0285789f04a7eb766da5f4e5ebb00a0162dba245682052",
       "operation_id": "list-searchable-fields",
@@ -2292,6 +2630,9 @@
       "method": "GET",
       "path": "/api/v1/patent/oa/oa_actions/v1/fields",
       "source_archive": "oa-text-retrieval-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/oa/oa_actions/v1/fields",
+      "entry_archive": "oa-text-retrieval-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "e0c5398114e22a20fbd6687efd9793d89c0d22e988d159a5ac605d997da17529",
       "operation_id": "list-searchable-fields",
@@ -2370,6 +2711,9 @@
       "method": "GET",
       "path": "/api/v1/patent/oa/oa_citations/v2/fields",
       "source_archive": "oa-citations-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/oa/oa_citations/v2/fields",
+      "entry_archive": "oa-citations-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "5388cd1728405286215180987b5aeaf27ab955f5b646c26c418631efc04091cf",
       "operation_id": "list-searchable-fields",
@@ -2448,6 +2792,9 @@
       "method": "GET",
       "path": "/api/v1/patent/oa/oa_rejections/v2/fields",
       "source_archive": "oa-rejections-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/oa/oa_rejections/v2/fields",
+      "entry_archive": "oa-rejections-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "028af96714af6d30392be0bc8b830d4618ec86d70fa9d3463efad38401acf5c9",
       "operation_id": "list-searchable-fields",
@@ -2526,6 +2873,9 @@
       "method": "GET",
       "path": "/api/v1/patent/office-action/search",
       "source_archive": "office-actions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/office-action/search",
+      "entry_archive": "office-actions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
       "operation_id": "searchOfficeActionsGet",
@@ -2667,6 +3017,9 @@
       "method": "GET",
       "path": "/api/v1/patent/office-action/search/download",
       "source_archive": "office-actions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/office-action/search/download",
+      "entry_archive": "office-actions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
       "operation_id": "downloadOfficeActionsGet",
@@ -2840,6 +3193,9 @@
       "method": "GET",
       "path": "/api/v1/patent/office-action/{officeActionRecordIdentifier}",
       "source_archive": "office-actions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/office-action/{officeActionRecordIdentifier}",
+      "entry_archive": "office-actions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
       "operation_id": "getOfficeActionById",
@@ -3010,6 +3366,9 @@
       "method": "GET",
       "path": "/api/v1/patent/office-action/{officeActionRecordIdentifier}/download/officeActionText",
       "source_archive": "office-actions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/office-action/{officeActionRecordIdentifier}/download/officeActionText",
+      "entry_archive": "office-actions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
       "operation_id": "downloadOfficeActionText",
@@ -3074,6 +3433,9 @@
       "method": "GET",
       "path": "/api/v1/patent/status-codes",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/status-codes",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -3148,16 +3510,69 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/decisions/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/decisions/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "f42d53381f9c1fbdfb9c85aadf12b9f1d15d553d538029110d140925a36840ef",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3165,7 +3580,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "searchDecisions",
-        "line": 145,
+        "line": 157,
         "options": {
           "method": "GET"
         },
@@ -3206,16 +3621,74 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/decisions/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/decisions/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "f42d53381f9c1fbdfb9c85aadf12b9f1d15d553d538029110d140925a36840ef",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3223,7 +3696,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadDecisionsFile",
-        "line": 246,
+        "line": 258,
         "options": {
           "method": "GET"
         },
@@ -3269,16 +3742,33 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/decisions/{documentIdentifier}",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/decisions/{documentIdentifier}",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1{documentIdentifier}",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "f42d53381f9c1fbdfb9c85aadf12b9f1d15d553d538029110d140925a36840ef",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "documentIdentifier",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3286,7 +3776,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getDecision",
-        "line": 174,
+        "line": 186,
         "options": {},
         "symbol_present": true
       },
@@ -3328,16 +3818,69 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/documents/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-documents-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/documents/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "ea313858f6869d29614fa93fc888fac319e279bf56fa7ff5ae68cbbcb60c04e7",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DocumentDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3345,7 +3888,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "searchDocuments",
-        "line": 154,
+        "line": 166,
         "options": {
           "method": "GET"
         },
@@ -3380,16 +3923,74 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/documents/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-documents-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/documents/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "ea313858f6869d29614fa93fc888fac319e279bf56fa7ff5ae68cbbcb60c04e7",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DocumentDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3397,7 +3998,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadDocumentsFile",
-        "line": 249,
+        "line": 261,
         "options": {
           "method": "GET"
         },
@@ -3441,16 +4042,33 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/documents/{documentIdentifier}",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-documents-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/documents/{documentIdentifier}",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1{documentIdentifier}",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "ea313858f6869d29614fa93fc888fac319e279bf56fa7ff5ae68cbbcb60c04e7",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "documentIdentifier",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DocumentDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3458,7 +4076,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getDocument",
-        "line": 185,
+        "line": 197,
         "options": {},
         "symbol_present": true
       },
@@ -3511,16 +4129,70 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/proceedings/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-proceedings-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/proceedings/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "21306d5f1c730a140d7b00452d32d4e9c02506c3149bac053dab7e4dc77be58c",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/ProceedingDataResponse"
+        }
+      },
+      "entry_path_alias_note": "Use exposed main-entry path; companion source path differs. Both exact declarations are preserved.",
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3528,7 +4200,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "searchProceedings",
-        "line": 136,
+        "line": 148,
         "options": {
           "method": "GET"
         },
@@ -3563,16 +4235,75 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/proceedings/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-proceedings-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/proceedings/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "21306d5f1c730a140d7b00452d32d4e9c02506c3149bac053dab7e4dc77be58c",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer",
+          "minimum": 1
+        },
+        {
+          "name": "facets",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "fields",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "filters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "rangeFilters",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "format",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/ProceedingDataResponse"
+        }
+      },
+      "entry_path_alias_note": "Use exposed main-entry path; companion source path differs. Both exact declarations are preserved.",
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3580,7 +4311,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadProceedingsFile",
-        "line": 243,
+        "line": 255,
         "options": {
           "method": "GET"
         },
@@ -3624,16 +4355,34 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/proceedings/{trialNumber}",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-proceedings-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/proceedings/{trialNumber}",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1{trialNumber}",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "21306d5f1c730a140d7b00452d32d4e9c02506c3149bac053dab7e4dc77be58c",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "trialNumber",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/ProceedingDataResponse"
+        }
+      },
+      "entry_path_alias_note": "Use exposed main-entry path; companion source path differs. Both exact declarations are preserved.",
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3641,7 +4390,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getProceeding",
-        "line": 163,
+        "line": 175,
         "options": {},
         "symbol_present": true
       },
@@ -3683,16 +4432,33 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/{trialNumber}/decisions",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/{trialNumber}/decisions",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1decisions",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "f42d53381f9c1fbdfb9c85aadf12b9f1d15d553d538029110d140925a36840ef",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "trialNumber",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3700,7 +4466,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getDecisionsByTrial",
-        "line": 196,
+        "line": 208,
         "options": {},
         "symbol_present": true
       },
@@ -3731,16 +4497,33 @@
     {
       "method": "GET",
       "path": "/api/v1/patent/trials/{trialNumber}/documents",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-documents-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/{trialNumber}/documents",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1documents",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "ea313858f6869d29614fa93fc888fac319e279bf56fa7ff5ae68cbbcb60c04e7",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [
+        {
+          "name": "trialNumber",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "request_content_types": [],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DocumentDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -3748,7 +4531,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "getDocumentsByTrial",
-        "line": 206,
+        "line": 218,
         "options": {},
         "symbol_present": true
       },
@@ -3780,6 +4563,9 @@
       "method": "GET",
       "path": "/api/v1/petition/decisions/search",
       "source_archive": "petition-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/petition/decisions/search",
+      "entry_archive": "petition-decisions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "7165b546a7754cb699028d36cb07d23f562110debc5acddbc622e53d18437d09",
       "operation_id": "searchPetitionDecisionsGet",
@@ -3929,6 +4715,9 @@
       "method": "GET",
       "path": "/api/v1/petition/decisions/search/download",
       "source_archive": "petition-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/petition/decisions/search/download",
+      "entry_archive": "petition-decisions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "7165b546a7754cb699028d36cb07d23f562110debc5acddbc622e53d18437d09",
       "operation_id": "downloadPetitionDecisionsGet",
@@ -4069,6 +4858,9 @@
       "method": "GET",
       "path": "/api/v1/petition/decisions/{petitionDecisionRecordIdentifier}",
       "source_archive": "petition-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/petition/decisions/{petitionDecisionRecordIdentifier}",
+      "entry_archive": "petition-decisions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "7165b546a7754cb699028d36cb07d23f562110debc5acddbc622e53d18437d09",
       "operation_id": "getPetitionDecisionById",
@@ -4160,6 +4952,9 @@
       "method": "GET",
       "path": "/last-update/info.json",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/last-update/info.json",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getcaseUpdateInfo",
@@ -4191,7 +4986,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getStatusJson",
-        "line": 302,
+        "line": 305,
         "options": {},
         "symbol_present": true
       },
@@ -4210,7 +5005,7 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 212,
+          "line": 301,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4235,6 +5030,9 @@
       "method": "GET",
       "path": "/last-update/info.xml",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/last-update/info.xml",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getcaseUpdateInfoXml",
@@ -4266,7 +5064,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getLastUpdateXml",
-        "line": 407,
+        "line": 410,
         "options": {},
         "symbol_present": true
       },
@@ -4279,7 +5077,7 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 217,
+          "line": 306,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4304,6 +5102,9 @@
       "method": "GET",
       "path": "/ts/cd/caseMultiStatus/{type}",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/caseMultiStatus/{type}",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getList",
@@ -4351,7 +5152,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "batchStatus",
-        "line": 371,
+        "line": 374,
         "options": {
           "idType": "sn|rn|ir|ref"
         },
@@ -4372,7 +5173,7 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 261,
+          "line": 350,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4397,6 +5198,9 @@
       "method": "GET",
       "path": "/ts/cd/casedoc/{caseid}/{docid}/content.pdf",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedoc/{caseid}/{docid}/content.pdf",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getDocumentContentPdf",
@@ -4434,7 +5238,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadDocument",
-        "line": 424,
+        "line": 427,
         "options": {
           "format": "pdf",
           "delivery": "content"
@@ -4450,13 +5254,13 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 240,
+          "line": 329,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 284,
+          "line": 373,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4481,6 +5285,9 @@
       "method": "GET",
       "path": "/ts/cd/casedoc/{caseid}/{docid}/content.zip",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedoc/{caseid}/{docid}/content.zip",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getDocumentContentZip",
@@ -4524,13 +5331,13 @@
           ]
         }
       ],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadDocument",
-        "line": 424,
+        "line": 427,
         "options": {
           "format": "zip",
           "delivery": "content"
@@ -4546,25 +5353,40 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 240,
+          "line": 329,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 284,
+          "line": 373,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedoc/sn78787878/NOA20070926100613/content.zip",
+          "cassette": "tests/cassettes/tsdr-live-single-document-content-zip-retry.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/zip;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casedoc/{caseid}/{docid}/download.pdf",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedoc/{caseid}/{docid}/download.pdf",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getDocumentContentPdfDownload",
@@ -4614,7 +5436,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadDocument",
-        "line": 424,
+        "line": 427,
         "options": {
           "format": "pdf",
           "delivery": "download"
@@ -4630,13 +5452,13 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 240,
+          "line": 329,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 284,
+          "line": 373,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4661,6 +5483,9 @@
       "method": "GET",
       "path": "/ts/cd/casedoc/{caseid}/{docid}/download.zip",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedoc/{caseid}/{docid}/download.zip",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getDocumentContentZipDownload",
@@ -4691,14 +5516,26 @@
           "$ref": "#/components/schemas/Document"
         }
       },
-      "negative_evidence": [],
-      "successful_recording_present": false,
+      "negative_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedoc/sn78787878/NOA20070926100613/download.zip",
+          "cassette": "tests/cassettes/tsdr-live-single-document-download-zip.yaml",
+          "interaction_index": 0,
+          "http_status": 429,
+          "response_content_type": [
+            "text/plain;charset=UTF-8"
+          ]
+        }
+      ],
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadDocument",
-        "line": 424,
+        "line": 427,
         "options": {
           "format": "zip",
           "delivery": "download"
@@ -4714,25 +5551,40 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 240,
+          "line": 329,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 284,
+          "line": 373,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedoc/sn78787878/NOA20070926100613/download.zip",
+          "cassette": "tests/cassettes/tsdr-live-single-document-download-zip-retry.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/zip;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casedoc/{caseid}/{docid}/info",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedoc/{caseid}/{docid}/info",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getDocumentInfoXml",
@@ -4782,7 +5634,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getDocumentInfoXml",
-        "line": 413,
+        "line": 416,
         "options": {},
         "symbol_present": true
       },
@@ -4795,7 +5647,7 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 235,
+          "line": 324,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4820,6 +5672,9 @@
       "method": "GET",
       "path": "/ts/cd/casedoc/{caseid}/{docid}/{pageid}/media",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedoc/{caseid}/{docid}/{pageid}/media",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getPageContentMedia",
@@ -4857,13 +5712,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getDocumentPage",
-        "line": 438,
+        "line": 441,
         "options": {},
         "symbol_present": true
       },
@@ -4876,19 +5731,34 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 293,
+          "line": 382,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedoc/sn78787878/NOA20070926100613/1/media",
+          "cassette": "tests/cassettes/tsdr-live-single-document-page.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/xml;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casedocs/bundle.pdf",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/bundle.pdf",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getBundleInfoPdf",
@@ -4911,13 +5781,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadBundle",
-        "line": 466,
+        "line": 472,
         "options": {
           "format": "pdf"
         },
@@ -4935,10 +5805,28 @@
           "line": 361,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 410,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/bundle.pdf",
+          "cassette": "tests/cassettes/tsdr-live-bundle-pdf.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/pdf;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": [
         "Official operation omits identifier query parameters; client supplies sn/rn/ir/ref bundles."
       ]
@@ -4947,6 +5835,9 @@
       "method": "GET",
       "path": "/ts/cd/casedocs/bundle.xml",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/bundle.xml",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getBundleInfoXml",
@@ -4968,14 +5859,26 @@
           }
         }
       },
-      "negative_evidence": [],
+      "negative_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/bundle.xml",
+          "cassette": "tests/cassettes/tsdr-live-small-case-candidates.yaml",
+          "interaction_index": 0,
+          "http_status": 400,
+          "response_content_type": [
+            "text/plain;charset=UTF-8"
+          ]
+        }
+      ],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getBundleXml",
-        "line": 457,
+        "line": 462,
         "options": {},
         "symbol_present": true
       },
@@ -4988,7 +5891,13 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 271,
+          "line": 360,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 419,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4999,6 +5908,17 @@
           "host": "tsdrapi.uspto.gov",
           "path": "/ts/cd/casedocs/bundle.xml",
           "cassette": "tests/cassettes/tsdr-live-bundle-xml.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/xml;charset=UTF-8"
+          ]
+        },
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/bundle.xml",
+          "cassette": "tests/cassettes/tsdr-live-small-case-candidates-retry.yaml",
           "interaction_index": 0,
           "http_status": 200,
           "response_content_type": [
@@ -5015,6 +5935,9 @@
       "method": "GET",
       "path": "/ts/cd/casedocs/bundle.zip",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/bundle.zip",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getBundleInfoZip",
@@ -5037,13 +5960,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadBundle",
-        "line": 466,
+        "line": 472,
         "options": {
           "format": "zip"
         },
@@ -5061,10 +5984,28 @@
           "line": 361,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 410,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/bundle.zip",
+          "cassette": "tests/cassettes/tsdr-live-bundle-zip.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/zip;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": [
         "Official operation omits identifier query parameters; client supplies sn/rn/ir/ref bundles."
       ]
@@ -5073,6 +6014,9 @@
       "method": "GET",
       "path": "/ts/cd/casedocs/{caseid}/bundle",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/{caseid}/bundle",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseBundleContentXml",
@@ -5102,13 +6046,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getCaseBundleXml",
-        "line": 450,
+        "line": 453,
         "options": {},
         "symbol_present": true
       },
@@ -5121,19 +6065,34 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 266,
+          "line": 355,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/sn78787878/bundle",
+          "cassette": "tests/cassettes/tsdr-live-case-bundle-xml-retry.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/xml;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casedocs/{caseid}/content.pdf",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/{caseid}/content.pdf",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseDocsPdf",
@@ -5163,13 +6122,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadCaseDocuments",
-        "line": 483,
+        "line": 489,
         "options": {
           "format": "pdf",
           "delivery": "content"
@@ -5182,16 +6141,37 @@
           "line": 354,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 399,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/sn75757575/content.pdf",
+          "cassette": "tests/cassettes/tsdr-live-small-case-documents-content-pdf.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/pdf;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casedocs/{caseid}/content.zip",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/{caseid}/content.zip",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseDocsZip",
@@ -5221,13 +6201,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadCaseDocuments",
-        "line": 483,
+        "line": 489,
         "options": {
           "format": "zip",
           "delivery": "content"
@@ -5240,16 +6220,37 @@
           "line": 354,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 399,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/sn75757575/content.zip",
+          "cassette": "tests/cassettes/tsdr-live-small-case-documents-content-zip.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/zip;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casedocs/{caseid}/download.pdf",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/{caseid}/download.pdf",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseDocsPdfDownload",
@@ -5279,13 +6280,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadCaseDocuments",
-        "line": 483,
+        "line": 489,
         "options": {
           "format": "pdf",
           "delivery": "download"
@@ -5298,16 +6299,37 @@
           "line": 354,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 399,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/sn75757575/download.pdf",
+          "cassette": "tests/cassettes/tsdr-live-small-case-documents-download-pdf.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/pdf;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casedocs/{caseid}/download.zip",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/{caseid}/download.zip",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseDocsZipDownload",
@@ -5336,14 +6358,26 @@
           }
         }
       },
-      "negative_evidence": [],
-      "successful_recording_present": false,
+      "negative_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/sn75757575/download.zip",
+          "cassette": "tests/cassettes/tsdr-live-small-case-documents-download-zip.yaml",
+          "interaction_index": 0,
+          "http_status": 429,
+          "response_content_type": [
+            "text/plain;charset=UTF-8"
+          ]
+        }
+      ],
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadCaseDocuments",
-        "line": 483,
+        "line": 489,
         "options": {
           "format": "zip",
           "delivery": "download"
@@ -5356,16 +6390,37 @@
           "line": 354,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 399,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/sn75757575/download.zip",
+          "cassette": "tests/cassettes/tsdr-live-small-case-documents-download-zip-retry.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/zip;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casedocs/{caseid}/info",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casedocs/{caseid}/info",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseDocsInfoXml",
@@ -5401,7 +6456,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getDocumentsXml",
-        "line": 323,
+        "line": 326,
         "options": {},
         "symbol_present": true
       },
@@ -5433,6 +6488,9 @@
       "method": "GET",
       "path": "/ts/cd/casestatus/{caseid}/content.html",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casestatus/{caseid}/content.html",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseStatusInfoContentHtml",
@@ -5464,7 +6522,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getStatusHtml",
-        "line": 364,
+        "line": 367,
         "options": {},
         "symbol_present": true
       },
@@ -5483,7 +6541,7 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 256,
+          "line": 345,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -5508,6 +6566,9 @@
       "method": "GET",
       "path": "/ts/cd/casestatus/{caseid}/content.pdf",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casestatus/{caseid}/content.pdf",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseStatusInfoContentPdf",
@@ -5533,13 +6594,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadStatus",
-        "line": 496,
+        "line": 502,
         "options": {
           "format": "pdf",
           "delivery": "content"
@@ -5555,19 +6616,34 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 302,
+          "line": 391,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casestatus/sn78787878/content.pdf",
+          "cassette": "tests/cassettes/tsdr-live-status-content-pdf.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/pdf;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casestatus/{caseid}/content.zip",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casestatus/{caseid}/content.zip",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseStatusInfoContentZip",
@@ -5593,13 +6669,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadStatus",
-        "line": 496,
+        "line": 502,
         "options": {
           "format": "zip",
           "delivery": "content"
@@ -5615,19 +6691,34 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 302,
+          "line": 391,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casestatus/sn78787878/content.zip",
+          "cassette": "tests/cassettes/tsdr-live-status-content-zip.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/zip;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casestatus/{caseid}/download.pdf",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casestatus/{caseid}/download.pdf",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseStatusInfoPdfDownload",
@@ -5653,13 +6744,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadStatus",
-        "line": 496,
+        "line": 502,
         "options": {
           "format": "pdf",
           "delivery": "download"
@@ -5675,19 +6766,34 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 302,
+          "line": 391,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casestatus/sn78787878/download.pdf",
+          "cassette": "tests/cassettes/tsdr-live-status-download-pdf.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/pdf;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casestatus/{caseid}/download.zip",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casestatus/{caseid}/download.zip",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "getCaseStatusInfoZipDownload",
@@ -5713,13 +6819,13 @@
         }
       },
       "negative_evidence": [],
-      "successful_recording_present": false,
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "downloadStatus",
-        "line": 496,
+        "line": 502,
         "options": {
           "format": "zip",
           "delivery": "download"
@@ -5735,19 +6841,34 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 302,
+          "line": 391,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casestatus/sn78787878/download.zip",
+          "cassette": "tests/cassettes/tsdr-live-status-download-zip.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/zip;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
       "method": "GET",
       "path": "/ts/cd/casestatus/{caseid}/info",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casestatus/{caseid}/info",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "loadXML",
@@ -5779,7 +6900,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getStatusXml",
-        "line": 395,
+        "line": 398,
         "options": {},
         "symbol_present": true
       },
@@ -5798,13 +6919,13 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 246,
+          "line": 335,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 251,
+          "line": 340,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -5842,6 +6963,9 @@
       "method": "GET",
       "path": "/ts/cd/casestatus/{caseid}/v1/info",
       "source_archive": "tsdr-swagger-2026-10-20.yaml",
+      "source_path": "/ts/cd/casestatus/{caseid}/v1/info",
+      "entry_archive": "tsdr-swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16",
       "operation_id": "loadOldXML",
@@ -5873,7 +6997,7 @@
         "class": "TsdrClient",
         "file": "packages/client/src/tsdr.ts",
         "method": "getStatusXml",
-        "line": 395,
+        "line": 398,
         "options": {
           "legacy": true
         },
@@ -5894,13 +7018,13 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 246,
+          "line": 335,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 251,
+          "line": 340,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -5926,16 +7050,28 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/appeals/decisions/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-appeal-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/appeals/decisions/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "a29d8b6992495594f6ba38149ef054ab032cfe1af56526554cbedee769625890",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/AppealDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -5943,7 +7079,7 @@
         "class": "PtabAppealsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "search",
-        "line": 108,
+        "line": 120,
         "options": {
           "method": "POST"
         },
@@ -6012,16 +7148,28 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/appeals/decisions/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-appeal-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/appeals/decisions/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "a29d8b6992495594f6ba38149ef054ab032cfe1af56526554cbedee769625890",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/AppealDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -6029,7 +7177,7 @@
         "class": "PtabAppealsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadFile",
-        "line": 122,
+        "line": 134,
         "options": {
           "method": "POST"
         },
@@ -6069,6 +7217,9 @@
       "method": "POST",
       "path": "/api/v1/patent/applications/search",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -6205,6 +7356,9 @@
       "method": "POST",
       "path": "/api/v1/patent/applications/search/download",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/applications/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -6263,16 +7417,28 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/interferences/decisions/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-interferences-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/interferences/decisions/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "26cda11c3bf0f9d0898d1d3f217db12922dbb4a78810185dda392b6af054d5a2",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -6280,7 +7446,7 @@
         "class": "PtabInterferencesClient",
         "file": "packages/client/src/ptab.ts",
         "method": "search",
-        "line": 108,
+        "line": 120,
         "options": {
           "method": "POST"
         },
@@ -6349,16 +7515,28 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/interferences/decisions/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-interferences-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/interferences/decisions/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "26cda11c3bf0f9d0898d1d3f217db12922dbb4a78810185dda392b6af054d5a2",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -6366,7 +7544,7 @@
         "class": "PtabInterferencesClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadFile",
-        "line": 122,
+        "line": 134,
         "options": {
           "method": "POST"
         },
@@ -6406,6 +7584,9 @@
       "method": "POST",
       "path": "/api/v1/patent/oa/enriched_cited_reference_metadata/v3/records",
       "source_archive": "oa-enriched-citations-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/oa/enriched_cited_reference_metadata/v3/records",
+      "entry_archive": "oa-enriched-citations-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "10df3aa6688dd5856b0285789f04a7eb766da5f4e5ebb00a0162dba245682052",
       "operation_id": "perform-search",
@@ -6517,6 +7698,9 @@
       "method": "POST",
       "path": "/api/v1/patent/oa/oa_actions/v1/records",
       "source_archive": "oa-text-retrieval-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/oa/oa_actions/v1/records",
+      "entry_archive": "oa-text-retrieval-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "e0c5398114e22a20fbd6687efd9793d89c0d22e988d159a5ac605d997da17529",
       "operation_id": "perform-search",
@@ -6628,6 +7812,9 @@
       "method": "POST",
       "path": "/api/v1/patent/oa/oa_citations/v2/records",
       "source_archive": "oa-citations-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/oa/oa_citations/v2/records",
+      "entry_archive": "oa-citations-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "5388cd1728405286215180987b5aeaf27ab955f5b646c26c418631efc04091cf",
       "operation_id": "perform-search",
@@ -6739,6 +7926,9 @@
       "method": "POST",
       "path": "/api/v1/patent/oa/oa_rejections/v2/records",
       "source_archive": "oa-rejections-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/oa/oa_rejections/v2/records",
+      "entry_archive": "oa-rejections-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "028af96714af6d30392be0bc8b830d4618ec86d70fa9d3463efad38401acf5c9",
       "operation_id": "perform-search",
@@ -6850,6 +8040,9 @@
       "method": "POST",
       "path": "/api/v1/patent/office-action/search",
       "source_archive": "office-actions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/office-action/search",
+      "entry_archive": "office-actions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
       "operation_id": "searchOfficeActionsPost",
@@ -6939,6 +8132,9 @@
       "method": "POST",
       "path": "/api/v1/patent/office-action/search/download",
       "source_archive": "office-actions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/office-action/search/download",
+      "entry_archive": "office-actions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
       "operation_id": "downloadOfficeActionsPost",
@@ -7055,6 +8251,9 @@
       "method": "POST",
       "path": "/api/v1/patent/status-codes",
       "source_archive": "swagger-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/status-codes",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
       "operation_id": null,
@@ -7113,16 +8312,28 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/trials/decisions/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/decisions/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "f42d53381f9c1fbdfb9c85aadf12b9f1d15d553d538029110d140925a36840ef",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -7130,7 +8341,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "searchDecisions",
-        "line": 145,
+        "line": 157,
         "options": {
           "method": "POST"
         },
@@ -7169,16 +8380,28 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/trials/decisions/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/decisions/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "f42d53381f9c1fbdfb9c85aadf12b9f1d15d553d538029110d140925a36840ef",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DecisionDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -7186,7 +8409,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadDecisionsFile",
-        "line": 246,
+        "line": 258,
         "options": {
           "method": "POST"
         },
@@ -7230,16 +8453,28 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/trials/documents/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-documents-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/documents/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "ea313858f6869d29614fa93fc888fac319e279bf56fa7ff5ae68cbbcb60c04e7",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DocumentDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -7247,7 +8482,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "searchDocuments",
-        "line": 154,
+        "line": 166,
         "options": {
           "method": "POST"
         },
@@ -7280,16 +8515,28 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/trials/documents/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-documents-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/trials/documents/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "ea313858f6869d29614fa93fc888fac319e279bf56fa7ff5ae68cbbcb60c04e7",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/DocumentDataResponse"
+        }
+      },
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -7297,7 +8544,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadDocumentsFile",
-        "line": 249,
+        "line": 261,
         "options": {
           "method": "POST"
         },
@@ -7339,16 +8586,29 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/trials/proceedings/search",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-proceedings-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/proceedings/search",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "21306d5f1c730a140d7b00452d32d4e9c02506c3149bac053dab7e4dc77be58c",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/ProceedingDataResponse"
+        }
+      },
+      "entry_path_alias_note": "Use exposed main-entry path; companion source path differs. Both exact declarations are preserved.",
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -7356,7 +8616,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "searchProceedings",
-        "line": 136,
+        "line": 148,
         "options": {
           "method": "POST"
         },
@@ -7389,16 +8649,29 @@
     {
       "method": "POST",
       "path": "/api/v1/patent/trials/proceedings/search/download",
-      "source_archive": "swagger-ui-operations-2026-10-20.json",
-      "source_kind": "rendered_official_swagger_ui",
-      "source_sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+      "source_archive": "trial-proceedings-2026-10-20.yaml",
+      "source_path": "/api/v1/patent/proceedings/search/download",
+      "entry_archive": "swagger-2026-10-20.yaml",
+      "entry_path_ref": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search~1download",
+      "source_kind": "archived_official_openapi",
+      "source_sha256": "21306d5f1c730a140d7b00452d32d4e9c02506c3149bac053dab7e4dc77be58c",
       "operation_id": null,
-      "declared_success_statuses": null,
-      "parameters": null,
-      "request_content_types": null,
-      "response_content_types": null,
-      "response_schema_refs": null,
-      "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "declared_success_statuses": [
+        "200"
+      ],
+      "parameters": [],
+      "request_content_types": [
+        "application/json"
+      ],
+      "response_content_types": [
+        "application/json"
+      ],
+      "response_schema_refs": {
+        "application/json": {
+          "$ref": "#/components/schemas/ProceedingDataResponse"
+        }
+      },
+      "entry_path_alias_note": "Use exposed main-entry path; companion source path differs. Both exact declarations are preserved.",
       "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
@@ -7406,7 +8679,7 @@
         "class": "PtabTrialsClient",
         "file": "packages/client/src/ptab.ts",
         "method": "downloadProceedingsFile",
-        "line": 243,
+        "line": 255,
         "options": {
           "method": "POST"
         },
@@ -7438,6 +8711,9 @@
       "method": "POST",
       "path": "/api/v1/petition/decisions/search",
       "source_archive": "petition-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/petition/decisions/search",
+      "entry_archive": "petition-decisions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "7165b546a7754cb699028d36cb07d23f562110debc5acddbc622e53d18437d09",
       "operation_id": "searchPetitionDecisionsPost",
@@ -7533,6 +8809,9 @@
       "method": "POST",
       "path": "/api/v1/petition/decisions/search/download",
       "source_archive": "petition-decisions-2026-10-20.yaml",
+      "source_path": "/api/v1/petition/decisions/search/download",
+      "entry_archive": "petition-decisions-2026-10-20.yaml",
+      "entry_path_ref": null,
       "source_kind": "archived_official_openapi",
       "source_sha256": "7165b546a7754cb699028d36cb07d23f562110debc5acddbc622e53d18437d09",
       "operation_id": "downloadPetitionDecisionsPost",

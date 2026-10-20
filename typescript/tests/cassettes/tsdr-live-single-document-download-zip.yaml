@@ -1,0 +1,41 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/download.zip
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 429
+    headers:
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - text/plain;charset=UTF-8
+      date:
+      - Tue, 20 Oct 2026 17:20:29 GMT
+      keep-alive:
+      - timeout=60
+      retry-after:
+      - "60"
+      strict-transport-security:
+      - max-age=31536000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: >-
+        Internal Server Error
+        [000001a10cdb451d-1c507f0]{"timestamp":1792516829149,"status":429,"error":"Service Unavailable","message":"Max transaction limit reached
+        per user" }
+  recorded_at: 2026-10-20T17:20:35.612Z

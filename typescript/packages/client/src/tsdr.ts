@@ -83,20 +83,23 @@ const string = (value: unknown) =>
   value === null || value === undefined ? null : String(value).trim() || null;
 const date = (value: unknown) => string(value)?.slice(0, 10) ?? null;
 const idTypeSchema = z.enum(["sn", "rn", "ir", "ref"]);
-function cleanIdentifier(identifier: string) {
+function cleanIdentifier(identifier: string, defaultType: TsdrIdType = "sn") {
   const clean = identifier.replace(/[-\s]/g, "");
-  if (!/^(?:(?:sn|rn|ir|ref))?\d+$/i.test(clean))
+  const prefix = /^(sn|rn|ir|ref)/i.exec(clean)?.[1];
+  const type = prefix?.toLowerCase() ?? defaultType;
+  const value = prefix ? clean.slice(prefix.length) : clean;
+  if (!(type === "ref" ? /^[a-z0-9]+$/i : /^\d+$/).test(value))
     throw new TypeError(
-      "Trademark identifier must contain digits with an optional sn/rn/ir/ref prefix.",
+      "Trademark identifier must contain digits, or alphanumeric characters for a Madrid reference.",
     );
-  return clean.toLowerCase();
+  return prefix ? `${prefix.toLowerCase()}${value}` : value;
 }
 export function formatTsdrCaseId(
   identifier: string,
   idType: "sn" | "rn" | "ir" | "ref" = "sn",
 ) {
   const type = idTypeSchema.parse(idType);
-  const clean = cleanIdentifier(identifier);
+  const clean = cleanIdentifier(identifier, type);
   return /^(sn|rn|ir|ref)/.test(clean) ? clean : `${type}${clean}`;
 }
 export function parseTrademarkStatus(
@@ -379,17 +382,17 @@ export class TsdrClient {
     if (!serialNumbers.length)
       throw new TypeError("At least one serial number is required.");
     const idType = idTypeSchema.parse(options.idType ?? "sn");
-    return this.http.json("GET", `/ts/cd/caseMultiStatus/${idType}`, {
-      timeoutMs: 60000,
-      ...options,
-      searchParams: {
+    return this.http.json(
+      "GET",
+      tsdrQuery(`/ts/cd/caseMultiStatus/${idType}`, {
         ids: serialNumbers
           .map((value) => numericIdentifier(value, idType))
           .join(","),
         from: options.from,
         to: options.to,
-      },
-    });
+      }),
+      { timeoutMs: 60000, ...options, searchParams: {} },
+    );
   }
   /** Current official specification advertises ST96 XML; some deployments return JSON. */
   getStatusXml(
@@ -448,35 +451,38 @@ export class TsdrClient {
     );
   }
   getCaseBundleXml(identifier: string, options: TransportRequestOptions = {}) {
+    const headers = new Headers(options.headers);
+    headers.set("accept", "application/xml");
     return this.http.text(
       "GET",
       `/ts/cd/casedocs/${formatTsdrCaseId(identifier)}/bundle`,
-      options,
+      { ...options, headers },
     );
   }
-  getBundleXml(
-    identifiers: string[],
-    options: TransportRequestOptions & { idType?: TsdrIdType } = {},
-  ) {
-    return this.http.text("GET", "/ts/cd/casedocs/bundle.xml", {
-      ...options,
-      searchParams: bundleParameters(identifiers, options.idType ?? "sn"),
-    });
+  getBundleXml(identifiers: string[], options: TsdrBundleOptions = {}) {
+    return this.http.text(
+      "GET",
+      tsdrQuery(
+        "/ts/cd/casedocs/bundle.xml",
+        bundleParameters(identifiers, options),
+      ),
+      { ...options, searchParams: {} },
+    );
   }
   downloadBundle(
     identifiers: string[],
-    options: TransportRequestOptions & {
-      idType?: TsdrIdType;
-      format?: "pdf" | "zip";
-    } = {},
+    options: TsdrBundleOptions & { format?: "pdf" | "zip" } = {},
   ) {
     return this.http.bytes(
       "GET",
-      `/ts/cd/casedocs/bundle.${options.format ?? "pdf"}`,
+      tsdrQuery(
+        `/ts/cd/casedocs/bundle.${options.format ?? "pdf"}`,
+        bundleParameters(identifiers, options),
+      ),
       {
         timeoutMs: 120000,
         ...options,
-        searchParams: bundleParameters(identifiers, options.idType ?? "sn"),
+        searchParams: {},
       },
     );
   }
@@ -509,6 +515,19 @@ export class TsdrClient {
 }
 
 export type TsdrIdType = "sn" | "rn" | "ir" | "ref";
+/** Documented USPTO bundle filters; identifiers remain controlled by the first argument. */
+export type TsdrBundleOptions = Omit<
+  TransportRequestOptions,
+  "searchParams"
+> & {
+  idType?: TsdrIdType;
+  date?: string;
+  fromDate?: string;
+  toDate?: string;
+  type?: string;
+  category?: string;
+  sort?: string;
+};
 function documentSegment(value: string) {
   if (!value.trim() || value === "." || value === "..")
     throw new TypeError(
@@ -516,21 +535,39 @@ function documentSegment(value: string) {
     );
   return encodeURIComponent(value);
 }
-function bundleParameters(identifiers: string[], idType: TsdrIdType) {
+function bundleParameters(identifiers: string[], options: TsdrBundleOptions) {
   if (!identifiers.length)
     throw new TypeError("At least one trademark identifier is required.");
-  const type = idTypeSchema.parse(idType);
+  if ("searchParams" in options)
+    throw new TypeError(
+      "Use named bundle filters; raw identifier query overrides are not allowed.",
+    );
+  const type = idTypeSchema.parse(options.idType ?? "sn");
   return {
     [type]: identifiers
       .map((value) => numericIdentifier(value, type))
       .join(","),
+    date: options.date,
+    fromDate: options.fromDate,
+    toDate: options.toDate,
+    type: options.type,
+    category: options.category,
+    sort: options.sort,
   };
 }
 
 function numericIdentifier(identifier: string, idType: TsdrIdType) {
-  const clean = cleanIdentifier(identifier);
+  const clean = cleanIdentifier(identifier, idType);
   const prefix = /^(sn|rn|ir|ref)/.exec(clean)?.[1];
   if (prefix && prefix !== idType)
     throw new TypeError(`Expected ${idType} identifiers for this request.`);
   return prefix ? clean.slice(prefix.length) : clean;
+}
+
+// TSDR interprets percent-encoded list separators literally, unlike ordinary query parsers.
+function tsdrQuery(path: string, values: Record<string, string | undefined>) {
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(values))
+    if (value !== undefined) query.set(key, value);
+  return `${path}?${query.toString().replaceAll("%2C", ",").replaceAll("%3A", ":")}`;
 }

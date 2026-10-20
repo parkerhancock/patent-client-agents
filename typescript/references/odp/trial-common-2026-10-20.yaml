@@ -1,0 +1,444 @@
+openapi: 3.0.3
+info:
+  title: "PTAB Trials \xB7 Shared Components"
+  version: 1.1.0
+  description: Re-usable request bodies, error payloads, and field entities.
+components:
+  schemas:
+    SearchRequest:
+      allOf:
+      - $ref: ./odp-common-base.yaml#/components/schemas/PatentSearchRequest
+    DownloadRequest:
+      allOf:
+      - $ref: './odp-common-base.yaml#/components/schemas/PatentDownloadRequest'
+    LookupRequest:
+      type: object
+      required:
+      - trialNumber
+      properties:
+        trialNumber:
+          type: string
+          example: IPR2024-00001
+    TrialMetaData:
+      type: object
+      properties:
+        accordedFilingDate:
+          type: string
+          format: date
+          example: '2024-02-15'
+        institutionDecisionDate:
+          type: string
+          format: date
+          example: '2024-08-20'
+        latestDecisionDate:
+          type: string
+          format: date
+          example: '2025-01-12'
+        petitionFilingDate:
+          type: string
+          format: date
+          example: '2024-01-30'
+        terminationDate:
+          type: string
+          format: date
+          example: '2025-05-05'
+        trialLastModifiedDateTime:
+          type: string
+          example: '2025-05-05T10:22:11Z'
+        trialLastModifiedDate:
+           type: string
+           format: date
+           example: '2025-05-05'
+        trialStatusCategory:
+          type: string
+          example: "Terminated"
+        trialTypeCode:
+          type: string
+          example: "102"
+    PatentOwnerData:
+      type: object
+      properties:
+        applicationNumberText:
+          type: string
+          example: '14412875'
+        counselName:
+          type: string
+          example: Jane Q. Attorney
+        grantDate:
+          type: string
+          format: date
+          example: '2019-09-10'
+        groupArtUnitNumber:
+          type: string
+          example: '3689'
+        inventorName:
+          type: string
+          example: Liam Johnson
+        realPartyInInterestName:
+          type: string
+          example: ABC Corp.
+        patentNumber:
+          type: string
+          example: US9876543B2
+        patentOwnerName:
+          type: string
+          example: XYZ Holdings LLC
+        technologyCenterNumber:
+          type: string
+          example: '3600'
+    RegularPetitionerData:
+      type: object
+      properties:
+        applicationNumberText:
+          type: string
+          example: '16123456'
+        counselName:
+          type: string
+          example: John D. Counsel
+        realPartyInInterestName:
+          type: string
+          example: DEF Inc.
+        grantDate:
+          type: string
+          format: date
+          example: '2020-03-22'
+        groupArtUnitNumber:
+          type: string
+          example: '1790'
+        inventorName:
+          type: string
+          example: Emma Smith
+        patentNumber:
+          type: string
+          example: US10203040B2
+        patentOwnerName:
+          type: string
+          example: JKL Holdings
+        technologyCenterNumber:
+          type: string
+          example: '1700'
+    RespondentData:
+      type: object
+      properties:
+        applicationNumberText:
+          type: string
+          example: '16123456'
+        counselName:
+          type: string
+          example: Mary R. Lawyer
+        grantDate:
+          type: string
+          format: date
+          example: '2020-03-22'
+        groupArtUnitNumber:
+          type: string
+          example: '1790'
+        inventorName:
+          type: string
+          example: Emma Smith
+        realPartyInInterestName:
+          type: string
+          example: GHI LLC
+        patentNumber:
+          type: string
+          example: US10203040B2
+        patentOwnerName:
+          type: string
+          example: JKL Holdings
+        technologyCenterNumber:
+          type: string
+          example: '1700'
+    DerivationPetitionerData:
+      type: object
+      properties:
+        applicationNumberText:
+          type: string
+          example: '13112233'
+        counselName:
+          type: string
+          example: Alex M. Advocate
+        grantDate:
+          type: string
+          format: date
+          example: '2018-11-05'
+        groupArtUnitNumber:
+          type: string
+          example: '2876'
+        inventorName:
+          type: string
+          example: Noah Davis
+        realPartyInInterestName:
+          type: string
+          example: MNO Partners
+        patentNumber:
+          type: string
+          example: US9001002B1
+        technologyCenterNumber:
+          type: string
+          example: '2800'
+        patentOwnerName:
+          type: string
+          example: PQR Ventures
+    DocumentData:
+      type: object
+      properties:
+        documentCategory:
+          type: string
+          example: Petition
+        documentFilingDate:
+          type: string
+          format: date
+          example: '2024-04-12'
+        documentIdentifier:
+          type: string
+          example: '100012345'
+        documentName:
+          type: string
+          example: petition.pdf
+        documentNumber:
+          type: integer
+          example: 1
+        documentSizeQuantity:
+          type: integer
+          example: 123456
+        documentOCRText:
+          type: string
+          example: "\u2026"
+        documentTitleText:
+          type: string
+          example: Petition
+        documentTypeDescriptionText:
+          type: string
+          example: Petition Type
+        fileDownloadURI:
+          type: string
+          format: uri
+          example: https://ptab.uspto.gov/doc/100012345
+        filingPartyCategory:
+          type: string
+          example: Petitioner
+        mimeTypeIdentifier:
+          type: string
+          example: application/pdf
+    DecisionData:
+      type: object
+      properties:
+        statuteAndRuleBag:
+          type: array
+          items: { type: string }
+          example: ["37 CFR 42.100","37 CFR 43.100"]
+        decisionIssueDate:
+          type: string
+          format: date
+          example: '2025-01-15'
+        decisionTypeCategory:
+          type: string
+          example: Final Written Decision
+        issueTypeBag:
+          type: array
+          items: { type: string }
+          example: ["112","103"]
+        trialOutcomeCategory:
+          type: string
+          example: Denied
+        appealOutcomeCategory:
+          type: string
+          example: Denied        
+    FacetItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: IPR
+        quantity:
+          type: integer
+          example: 16951
+    Facet:
+      type: object
+      properties:
+        trialTypeCategory:
+          type: array
+          items:
+            $ref: ./trial-common.yaml#/components/schemas/FacetItem
+        trialStatusCategory:
+          type: array
+          items:
+            $ref: './trial-common.yaml#/components/schemas/FacetItem'
+        statuteAndRuleBag:
+          type: array
+          items:
+            $ref: './trial-common.yaml#/components/schemas/FacetItem'
+    
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                example: 400
+              error:
+                example: Bad Request
+              errorDetails:
+                example: Invalid request, review patent data request filter section and try again
+              requestIdentifier:
+                example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: integer
+                example: 403
+              error:
+                 type: string
+                 example: Forbidden
+          
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: integer
+                example: 404
+              error:
+                type: string
+                example: Not Found
+              errorDetails:
+                type: string
+                example: No matching records found
+              requestIdentifier:
+                type: string
+                example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    Status413:
+      description: Payload Too Large
+      content:
+        application/json:
+          schema:
+            properties:
+             code:
+              type: integer
+              example: 413
+             message:
+              type: string
+              example: Payload Too Large
+             detailedMessage:
+              type: string
+              example: Response payload exceeds allowed limit of 6MB, please refine your search criteria or reduce payload size by reducing page size
+             requestIdentifier:
+              type: string
+              example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    InternalError:
+      description: Internal Error
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: integer
+                example: 500
+              error:
+                type: string
+                example: Internal Server Error
+              errorDetails:
+                type: string
+                example: Internal Server Error. Please contact Help Desk.
+              requestIdentifier:
+                type: string
+                example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    InterferenceDecisionDataResponse:
+      type: object
+      required: [count, requestIdentifier, patentInterferenceDataBag]
+      properties:
+        count:
+          type: integer
+          format: int32
+          example: 1490
+        requestIdentifier:
+          type: string
+          example: "cff9c3ed-82ca-4d2c-a2e6-c43d5710c2ce"
+        patentInterferenceDataBag:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterferenceDecisionRecord'
+    InterferenceDecisionRecord:
+      type: object
+      required: [interferenceNumber, decisionDocumentData]
+      properties:
+        interferenceNumber:
+          type: string
+          example: "103751"
+        lastModifiedDateTime:
+          type: string
+          example: "2025-07-28T21:03:54"
+        interferenceMetaData:
+          type: object
+          properties:
+            interferenceStyleName:
+              type: string
+              example: "TANG"
+            interferenceLastModifiedDate:
+              type: string
+              format: date
+              example: "2025-05-05"
+            fileDownloadURI: 
+              type: string
+              example: "/download"     
+        seniorPartyData:
+          $ref: '#/components/schemas/InterferencePartyData'
+        juniorPartyData:
+          $ref: '#/components/schemas/InterferencePartyData'
+        additionalPartyDataBag:
+          type: array
+          items:
+            type: object
+            properties:
+              applicationNumberText: { type: string, example: "07996817" }
+              inventorName:         { type: string, example: "DOE, JOHN" }
+              additionalPartyName:  { type: string, example: "ACME CORP" }
+              patentNumber:         { type: string, example: "6614529" }
+        decisionDocumentData:
+          $ref: '#/components/schemas/InterferenceDecisionDocumentData'
+
+    InterferencePartyData:
+      type: object
+      properties:
+        applicationNumberText:  { type: string, example: "07996817" }
+        counselName:            { type: string, example: "SMITH, JANE" }
+        grantDate:              { type: string, format: date, example: "2003-09-02" }
+        groupArtUnitNumber:     { type: string, example: "1763" }
+        inventorName:           { type: string, example: "TANG" }
+        realPartyInInterestName: { type: string, example: "TANG" }
+        patentNumber:           { type: string, example: "6614529" }
+        patentOwnerName:        { type: string, example: "TANG" }
+        technologyCenterNumber: { type: string, example: "1700" }
+        publicationDate:        { type: string, format: date, example: "2002-01-15" }
+        publicationNumber:      { type: string, example: "US2002XXXXXXA1" }
+
+    InterferenceDecisionDocumentData:
+      type: object
+      properties:
+        documentFilingDate:      { type: string, format: date, example: "2002-02-01" }
+        documentIdentifier:      { type: string, example: "a1adf3e98f9e07271420b607222b5ad0..." }
+        documentName:            { type: string, example: "jd103751" }
+        documentSizeQuantity:    { type: integer, format: int64, example: 45224 }
+        documentOCRText:         { type: string, example: "The opinion in support of the decision..." }
+        documentTitleText:       { type: string, example: "DECISION-103751" }
+        fileDownloadURI:             { type: string, example: "https://example.org/path/to/document.pdf" }
+        statuteAndRuleBag:
+          type: array
+          items: { type: string }
+          example: ["37 CFR 42.100","37 CFR 43.100"]
+        decisionIssueDate:       { type: string, format: date, example: "2002-02-25" }
+        decisionTypeCategory:    { type: string, example: "Decision" }
+        issueTypeBag:
+          type: array
+          items: { type: string }
+          example: ["Substantive","Procedural"]
+        interferenceOutcomeCategory:
+          type: string
+          example: "Interference"
