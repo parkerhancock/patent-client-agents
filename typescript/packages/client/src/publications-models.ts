@@ -155,6 +155,7 @@ function application(v: unknown) {
 }
 export function convertBiblio(d: Record<string, unknown>): PublicationRecord {
   return {
+    ...d,
     guid: d.guid as string,
     type: d.type as string,
     publication_number: d.publicationReferenceDocumentNumber as string,
@@ -219,6 +220,7 @@ function records(
 }
 export function convertDocument(d: Record<string, unknown>): PublicationRecord {
   const result: PublicationRecord = {
+    ...d,
     guid: d.guid as string,
     type: d.type as string,
     publication_number: d.pubRefDocNumber as string,

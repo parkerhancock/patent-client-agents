@@ -2,7 +2,9 @@ import { createHash } from "node:crypto";
 import type {
   AssignmentCenterClient,
   TrademarkAssignmentClient,
+  TsdrBundleOptions,
   TsdrClient,
+  TsdrIdType,
 } from "@patent-client-agents/client";
 import { parseTrademarkStatus } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
@@ -21,6 +23,42 @@ export interface RegisterClients {
   tsdr?: TsdrClient;
 }
 const cursorInput = z.string().max(2048).optional();
+const identifierType = z.enum(["sn", "rn", "ir", "ref"]);
+const bundleFilters = z.strictObject({
+  date: z.string().min(1).max(100).optional(),
+  from_date: z.string().min(1).max(100).optional(),
+  to_date: z.string().min(1).max(100).optional(),
+  type: z.string().min(1).max(100).optional(),
+  category: z.string().min(1).max(100).optional(),
+  sort: z.string().min(1).max(100).optional(),
+});
+function batchType(identifiers: string[], explicit?: TsdrIdType): TsdrIdType {
+  const prefixes = new Set(
+    identifiers.flatMap((identifier) => {
+      const prefix = /^(sn|rn|ir|ref)/i.exec(
+        identifier.replace(/[-\s]/g, ""),
+      )?.[1];
+      return prefix ? [identifierType.parse(prefix.toLowerCase())] : [];
+    }),
+  );
+  if (
+    prefixes.size > 1 ||
+    (explicit && [...prefixes].some((p) => p !== explicit))
+  )
+    throw new Error("A trademark batch must use one matching identifier type.");
+  return explicit ?? [...prefixes][0] ?? "sn";
+}
+function bundleOptions(
+  filters?: z.infer<typeof bundleFilters>,
+): TsdrBundleOptions {
+  if (!filters) return {};
+  const options: TsdrBundleOptions = {};
+  for (const key of ["date", "type", "category", "sort"] as const)
+    if (filters[key] !== undefined) options[key] = filters[key];
+  if (filters.from_date !== undefined) options.fromDate = filters.from_date;
+  if (filters.to_date !== undefined) options.toDate = filters.to_date;
+  return options;
+}
 function pageQuery(input: { offset: number; cursor?: string | undefined }) {
   const { offset: _offset, cursor: _cursor, ...query } = input;
   return createHash("sha256").update(JSON.stringify(query)).digest("hex");
@@ -274,13 +312,17 @@ export function registerRegisterTools(
       ...listToolOptions(auth),
       name: "get_trademark",
       description:
-        "Retrieve US trademark status, owners, goods/services, prosecution history or last-update data from TSDR.",
+        "Retrieve US trademark status, owners, goods/services, prosecution history or last-update data from TSDR. Arrays support status or bundle_xml, with a shared identifier_type inferred from prefixes or defaulting to sn. Batch status accepts from/to; bundle_xml accepts bundle_filters.",
       input: z.object({
         serial_number: z.union([
           z.string().min(1),
           z.array(z.string().min(1)).min(1).max(20),
         ]),
         document_id: z.string().min(1).optional(),
+        identifier_type: identifierType.optional(),
+        from: z.string().min(1).max(100).optional(),
+        to: z.string().min(1).max(100).optional(),
+        bundle_filters: bundleFilters.optional(),
         view: z
           .enum([
             "status",
@@ -300,9 +342,37 @@ export function registerRegisterTools(
     async (input) => {
       const number = input.serial_number;
       if (Array.isArray(number)) {
+        const idType = batchType(number, input.identifier_type);
+        if (input.view === "bundle_xml") {
+          if (input.from !== undefined || input.to !== undefined)
+            throw new Error("from/to apply only to batch status.");
+          const response = await tsdr.getBundleXml(number, {
+            idType,
+            ...bundleOptions(input.bundle_filters),
+          });
+          const metadata = await downloadResult(
+            new TextEncoder().encode(response.data),
+            `${number[0]}.xml`,
+            "application/xml",
+            response.provenance,
+          );
+          return listEnvelope(
+            "Trademark bundle ready for download.",
+            [metadata],
+            response.provenance,
+          );
+        }
         if (input.view !== "status")
-          throw new Error("Batch trademark lookup supports status view only.");
-        const response = await tsdr.batchStatus(number);
+          throw new Error(
+            "Batch trademark lookup supports status or bundle_xml only.",
+          );
+        if (input.bundle_filters !== undefined)
+          throw new Error("bundle_filters apply only to multicase bundles.");
+        const response = await tsdr.batchStatus(number, {
+          idType,
+          ...(input.from !== undefined ? { from: input.from } : {}),
+          ...(input.to !== undefined ? { to: input.to } : {}),
+        });
         const parsed = z
           .object({
             transactionList: z.array(
@@ -344,6 +414,15 @@ export function registerRegisterTools(
           { count: items.length },
         );
       }
+      if (
+        input.identifier_type !== undefined ||
+        input.from !== undefined ||
+        input.to !== undefined ||
+        input.bundle_filters !== undefined
+      )
+        throw new Error(
+          "Batch options require an array of trademark identifiers.",
+        );
       const result =
         input.view === "documents_xml"
           ? await tsdr.getDocumentsXml(number)
@@ -429,7 +508,7 @@ export function registerRegisterTools(
       ...detailToolOptions(auth),
       name: "download_trademark_documents",
       description:
-        "Download US trademark documents, a single document/page, status PDF/ZIP, or a multicase document bundle through a separate download URL. TSDR imposes stricter download rate limits.",
+        "Download US trademark documents, a single document/page, status PDF/ZIP, or a multicase document bundle through a separate download URL. Arrays accept identifier_type and bundle_filters; prefixes infer a shared type, defaulting to sn. TSDR imposes stricter download rate limits.",
       input: z.object({
         serial_number: z.union([
           z.string().min(1),
@@ -441,17 +520,29 @@ export function registerRegisterTools(
           .default("documents"),
         document_id: z.string().min(1).optional(),
         page_id: z.string().min(1).optional(),
+        identifier_type: identifierType.optional(),
+        bundle_filters: bundleFilters.optional(),
       }),
     },
     async (input) => {
       if (Array.isArray(input.serial_number) && input.target !== "documents")
         throw new Error("A multicase bundle supports documents target only.");
+      if (
+        !Array.isArray(input.serial_number) &&
+        (input.identifier_type !== undefined ||
+          input.bundle_filters !== undefined)
+      )
+        throw new Error(
+          "Bundle options require an array of trademark identifiers.",
+        );
       const number = Array.isArray(input.serial_number)
         ? (input.serial_number[0] ?? "")
         : input.serial_number;
       const response = Array.isArray(input.serial_number)
         ? await tsdr.downloadBundle(input.serial_number, {
             format: input.format,
+            idType: batchType(input.serial_number, input.identifier_type),
+            ...bundleOptions(input.bundle_filters),
           })
         : input.target === "status"
           ? await tsdr.downloadStatus(number, { format: input.format })

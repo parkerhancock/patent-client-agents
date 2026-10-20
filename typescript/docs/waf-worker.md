@@ -84,7 +84,7 @@ trigger browser acquisition inside a research request.
 
 This change does not create or update a production job, schedule, secret, IAM
 policy, or deployment. The existing Python job remains in place until a separate
-cutover. A container build still requires an available Docker engine.
+cutover.
 
 ## Validation
 
@@ -104,3 +104,31 @@ fresh session, verifies `0600` file delivery through the default MCP client
 despite a synthetic stale environment snapshot, performs one public search,
 and removes its private temporary file. It reports only verification stage
 and cleanup status. It never changes a production secret.
+
+To verify the built worker image itself, mount only the verification script:
+
+```sh
+docker run --rm --init --shm-size=1g \
+  --mount "type=bind,source=$(pwd)/scripts/verify-waf-container.ts,target=/app/scripts/verify-waf-container.ts,readonly" \
+  --entrypoint bun pca-waf-worker:local \
+  --no-env-file scripts/verify-waf-container.ts --live
+```
+
+This checks Linux non-root execution, actual Chromium acquisition, `0600` file
+publication, provider delivery and one native-client search. The temporary
+credential stays inside the container and is removed; only verification stage
+and cleanup status are printed. It does not mount host credentials or exercise
+MCP inside the worker image. The separate host smoke test above verifies default
+MCP wiring. Ordinary tests do not run either live command.
+
+On October 20, 2026, both `linux/arm64` and `linux/amd64` images built and passed
+this live verification under OrbStack Docker 29.4.0. The AMD64 run used local
+emulation; it does not establish hosted Cloud Run or workload-identity behavior.
+The recorded local image IDs were `aca14a765583` (ARM64, `pca-waf-worker:local`)
+and `6bcf91560ee3` (AMD64, `pca-waf-worker:amd64`). Build AMD64 explicitly with
+`docker build --platform linux/amd64 -f packages/waf-worker/Dockerfile -t pca-waf-worker:amd64 .`
+and add `--platform linux/amd64` to the verification command when testing that
+tag on ARM64. No image was pushed and no production configuration changed.
+The AMD64 image's default CLI also successfully published to a private file
+inside an automatically removed container. Without a destination, the default
+CLI returned only `INVALID_CONFIGURATION` and exited with status 1 as expected.

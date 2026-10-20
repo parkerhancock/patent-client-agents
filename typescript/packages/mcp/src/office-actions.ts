@@ -294,7 +294,7 @@ export function registerOfficeActionTools(
       ...listToolOptions(auth),
       name: "search_office_action_analytics",
       description:
-        "Search legacy USPTO rejection, citation, text metadata, or enriched citation datasets using Solr criteria. Document text and sections are omitted; use the library for raw records. Use next_cursor for another page, or advance start.",
+        "Search legacy USPTO rejection, citation, text metadata, or enriched citation datasets using Solr criteria. Document text and sections are omitted; use download_office_action_analytics for raw records. Use next_cursor for another page, or advance start.",
       input: z.object({
         dataset: z.enum(OFFICE_ACTION_ANALYTICS_DATASETS),
         criteria: z.string().min(1),

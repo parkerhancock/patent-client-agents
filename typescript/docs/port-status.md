@@ -18,8 +18,8 @@ synthetic contracts. The Python package remains separate.
 | Four legacy Office Action analytics datasets | All eight current records/field operations implemented | Live responses for all eight records/field operations |
 | Patent and trademark assignments | Implemented | Three current Assignment Center v3 recordings, including 99 NIKE trademark matches |
 | Patent Public Search | Search, document, publication resolution, PDF/base64 implemented | Native Bun live search/document/PDF success: 18 pages, 1,214,076 bytes; archived document verifies all 26 parsed claims |
-| Trademark Search | Implemented with supplied WAF session and refresh callback | Fresh native Bun HTTP200 using the deployed WAF session and matching User-Agent; one-result query replays offline |
-| TSDR | All 25 archived official routes; source-derived document IDs; separate API key | Complete route-contract tests; successful live recordings for all 25 declared operations plus mark image; PDF/ZIP/XML/HTML checked offline; historical failures retained |
+| Trademark Search | Implemented with supplied WAF session, refresh callback or fresh-session provider; separate browser worker | Native Bun HTTP200 replays offline; fresh worker acquisition and protected-file delivery passed through default MCP and both Linux ARM64/AMD64 worker images |
+| TSDR | All 25 archived official routes; source-derived document IDs; separate API key; MCP batch identifier types, ranges and filtered multicase XML/PDF/ZIP | Complete route-contract tests; successful live recordings for all 25 declared operations plus mark image; PDF/ZIP/XML/HTML checked offline; actual MCP option-forwarding and invalid-combination regressions |
 | Search guides, field/status catalogs, schemas and Swagger resources | Eleven labeled MCP resources and pure library helpers | Resource enumeration, content and authorization tests; historical source labels preserved |
 | REST document retrieval | MCP-issued single-use links by default; authenticated REST concurrently available; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
 
@@ -60,6 +60,12 @@ Missing required cassettes fail. Recorders are deliberate and bounded; signed
 redirect credentials must be scrubbed from locations and response bodies as
 well as request URIs. Preserve successful recordings when refreshing a subset,
 and respect upstream 429 responses.
+
+A final library/MCP audit closed PPUBS unknown-field preservation and TSDR MCP
+batch/bundle option gaps. Normalized PPUBS values remain authoritative over raw
+name collisions. No further missing method or route was found within the stated
+70-method, 12-client USPTO network scope; legal manuals, fees and CPC remain
+outside that inventory.
 
 Remote identity-provider login/discovery and hosted HTTPS are not deployed.
 MCP-issued single-use links are the default until host credential injection
