@@ -1,0 +1,58 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/datasets/products/search?offset=0&limit=1
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:38:05 GMT
+      x-amz-apigw-id:
+      - FjTVGEm0oAMFX_g=
+      x-amzn-requestid:
+      - 16ca3bde-3aa0-4a95-a517-b464ec07b956
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad798ec-36b275d723eaa2bb15e4262c;Parent=406f60d193213fde;Sampled=0;Lineage=2:b3566003:0
+    body:
+      type: json
+      content:
+        count: 1
+        bulkDataProductBag:
+        - productIdentifier: PTFWPRE
+          productDescriptionText: >-
+            Bibliographic and assignments static patent data compiled into file sets. The
+            Weekly Datasets (10-year increments) can be downloaded in bulk.
+          productTitleText: Patent File Wrapper (Bulk Datasets) - Weekly
+          productFrequencyText: WEEKLY
+          daysOfWeekText: SUNDAY
+          productLabelArrayText:
+          - Patent
+          productDatasetArrayText:
+          - Research
+          productDatasetCategoryArrayText:
+          - Patent file wrapper
+          productFromDate: 2001-01-01
+          productToDate: 2026-12-31
+          productTotalFileSize: 65066242145.0
+          productFileTotalQuantity: 3
+          lastModifiedDateTime: 2026-10-20 02:09:45
+          mimeTypeIdentifierArrayText:
+          - JSON
+  recorded_at: 2026-10-20T16:38:05.074Z

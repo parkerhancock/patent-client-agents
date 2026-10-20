@@ -1,0 +1,75 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/applications/14412875/continuity
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:40:17 GMT
+      x-amz-apigw-id:
+      - FjTp3FKEoAMFfWg=
+      x-amzn-requestid:
+      - 999b4a77-a4cd-4b5b-9289-8725d49d04f9
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79971-32e6927f174e4e4449c6cb5b;Parent=5d47810f102fe284;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: json
+      content:
+        count: 1
+        patentFileWrapperDataBag:
+        - parentContinuityBag:
+          - parentApplicationStatusCode: 150
+            claimParentageTypeCode: NST
+            claimParentageTypeCodeDescriptionText: is a National Stage Entry of
+            parentApplicationStatusDescriptionText: Patented Case
+            parentApplicationNumberText: PCTIB2013001896
+            parentApplicationFilingDate: 2013-07-02
+            childApplicationNumberText: "14412875"
+          childContinuityBag:
+          - firstInventorToFileIndicator: false
+            childApplicationStatusDescriptionText: Patent Expired Due to NonPayment of Maintenance Fees Under 37 CFR 1.362
+            claimParentageTypeCode: CON
+            childApplicationStatusCode: 250
+            claimParentageTypeCodeDescriptionText: is a Continuation of
+            childPatentNumber: "10806943"
+            parentApplicationNumberText: "14412875"
+            childApplicationFilingDate: 2019-05-17
+            childApplicationNumberText: "16415927"
+          - firstInventorToFileIndicator: false
+            childApplicationStatusDescriptionText: Patented Case
+            claimParentageTypeCode: CON
+            childApplicationStatusCode: 150
+            claimParentageTypeCodeDescriptionText: is a Continuation of
+            childPatentNumber: "11612758"
+            parentApplicationNumberText: "14412875"
+            childApplicationFilingDate: 2020-09-04
+            childApplicationNumberText: "17013096"
+          - firstInventorToFileIndicator: false
+            childApplicationStatusDescriptionText: Non Final Action Mailed
+            claimParentageTypeCode: CON
+            childApplicationStatusCode: 41
+            claimParentageTypeCodeDescriptionText: is a Continuation of
+            parentApplicationNumberText: "14412875"
+            childApplicationFilingDate: 2023-03-27
+            childApplicationNumberText: "18190466"
+          applicationNumberText: "14412875"
+        requestIdentifier: 999b4a77-a4cd-4b5b-9289-8725d49d04f9
+  recorded_at: 2026-10-20T16:40:17.977Z

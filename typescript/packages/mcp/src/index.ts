@@ -1,16 +1,74 @@
 import { createHash } from "node:crypto";
 import {
   ApplicationsClient,
+  AssignmentCenterClient,
+  BulkDataClient,
+  OfficeActionAnalyticsClient,
+  OfficeActionsClient,
+  PetitionsClient,
+  PtabAppealsClient,
+  PtabInterferencesClient,
+  PtabTrialsClient,
+  PublicationsClient,
   SearchOptionsSchema,
+  TrademarkAssignmentClient,
+  TrademarkSearchClient,
+  TsdrClient,
 } from "@patent-client-agents/client";
 import {
   FastMCP,
+  type FastMCPOptions,
   jwtVerifier,
   requireScopes,
 } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
+import { registerApplicationExtraTools } from "./applications-extra.js";
+import {
+  type DownloadOptions,
+  DownloadStore,
+  downloadContext,
+} from "./downloads.js";
+import { registerOdpRecordTools } from "./odp-records.js";
+import { registerOfficeActionTools } from "./office-actions.js";
+import { registerRegisterTools } from "./registers.js";
+import { registerUsptoResources } from "./resources.js";
+import { registerPortalSearchTools } from "./search-portals.js";
 
+export interface UsptoClients {
+  applications: ApplicationsClient;
+  trials: PtabTrialsClient;
+  appeals: PtabAppealsClient;
+  interferences: PtabInterferencesClient;
+  petitions: PetitionsClient;
+  bulk: BulkDataClient;
+  officeActions: OfficeActionsClient;
+  analytics: OfficeActionAnalyticsClient;
+  assignments: AssignmentCenterClient;
+  trademarkAssignments: TrademarkAssignmentClient;
+  tsdr: TsdrClient;
+  publications: PublicationsClient;
+  trademarkSearch: TrademarkSearchClient;
+}
+/** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
+function lazyClient<T extends object>(factory: () => T): T {
+  let instance: T | undefined;
+  return new Proxy({} as T, {
+    get(_target, property) {
+      return (...args: unknown[]) => {
+        instance ??= factory();
+        const method = Reflect.get(instance, property);
+        if (typeof method !== "function")
+          throw new Error("Unknown connector operation.");
+        return Reflect.apply(method, instance, args);
+      };
+    },
+  });
+}
 export interface ServerOptions {
+  clients?: Partial<UsptoClients>;
+  downloads?: DownloadOptions;
+  /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
+  downloadAuth?: { jwksUri: string; issuer: string; audience: string };
   client?: Pick<ApplicationsClient, "search" | "get" | "getDocuments">;
   auth?: { jwksUri: string; issuer: string; audience: string };
 }
@@ -107,15 +165,89 @@ function tokenVerifier(auth: NonNullable<ServerOptions["auth"]>) {
   };
 }
 
+class DocumentServer extends FastMCP {
+  constructor(
+    options: FastMCPOptions,
+    private readonly artifacts: DownloadStore,
+  ) {
+    super(options);
+  }
+  override async close(): Promise<void> {
+    try {
+      await super.close();
+    } finally {
+      await this.artifacts.close();
+    }
+  }
+}
 export function createServer(options: ServerOptions = {}): FastMCP {
-  const client = options.client ?? new ApplicationsClient();
-  const server = new FastMCP({
-    name: "patent-client-agents",
-    version: "0.1.0",
-    ...(options.auth ? { auth: tokenVerifier(options.auth) } : {}),
-    http: { cors: false },
-    logLevel: "warn",
+  const provided = options.clients ?? {};
+  const applications =
+    provided.applications ?? lazyClient(() => new ApplicationsClient());
+  const client = options.client ?? applications;
+  const downloads = new DownloadStore(options.downloads);
+  const server = new DocumentServer(
+    {
+      name: "patent-client-agents",
+      version: "0.1.0",
+      ...(options.auth ? { auth: tokenVerifier(options.auth) } : {}),
+      http: { cors: false },
+      logLevel: "warn",
+    },
+    downloads,
+  );
+  const downloadVerifier = options.downloadAuth ?? options.auth;
+  const verifyDownloadToken = downloadVerifier
+    ? tokenVerifier(downloadVerifier)
+    : undefined;
+  function ownerOf(identity: {
+    claims: Record<string, unknown>;
+    clientId?: string;
+  }): string {
+    const subject = identity.claims.sub ?? identity.clientId;
+    if (typeof subject !== "string" || !subject)
+      throw new Error("Document access requires an identified subject.");
+    return JSON.stringify([identity.claims.iss, subject]);
+  }
+  server.use({
+    onCallTool: (context, next) => {
+      const owner = context.mcpContext.auth
+        ? ownerOf(context.mcpContext.auth)
+        : undefined;
+      return downloadContext.run(
+        { store: downloads, ...(owner ? { owner } : {}) },
+        next,
+      );
+    },
   });
+  server.customRoute(
+    { path: "/downloads", methods: ["GET", "HEAD"] },
+    async (request) => {
+      if (downloads.mode === "signed") return downloads.handle(request);
+      const token = /^Bearer ([^\s]+)$/i.exec(
+        request.headers.get("authorization") ?? "",
+      )?.[1];
+      const headers = {
+        "Cache-Control": "no-store",
+        "WWW-Authenticate": 'Bearer scope="documents:read"',
+      };
+      if (!token || !verifyDownloadToken)
+        return new Response("Authentication required", {
+          status: 401,
+          headers,
+        });
+      let owner: string;
+      try {
+        const identity = await verifyDownloadToken.verify(token);
+        if (!identity.scopes.includes("documents:read"))
+          return new Response("Insufficient scope", { status: 403, headers });
+        owner = ownerOf(identity);
+      } catch {
+        return new Response("Invalid access token", { status: 401, headers });
+      }
+      return downloads.handle(request, owner);
+    },
+  );
   const common = {
     output: envelopeSchema,
     annotations: {
@@ -247,5 +379,61 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       };
     },
   );
+  const auth = options.auth ? requireScopes("odp:read") : undefined;
+  registerApplicationExtraTools(server, applications, auth);
+  registerOfficeActionTools(
+    server,
+    {
+      officeActions:
+        provided.officeActions ?? lazyClient(() => new OfficeActionsClient()),
+      analytics:
+        provided.analytics ??
+        lazyClient(() => new OfficeActionAnalyticsClient()),
+    },
+    auth,
+  );
+  registerOdpRecordTools(
+    server,
+    {
+      trials: provided.trials ?? lazyClient(() => new PtabTrialsClient()),
+      appeals: provided.appeals ?? lazyClient(() => new PtabAppealsClient()),
+      interferences:
+        provided.interferences ??
+        lazyClient(() => new PtabInterferencesClient()),
+      petitions: provided.petitions ?? lazyClient(() => new PetitionsClient()),
+      bulk: provided.bulk ?? lazyClient(() => new BulkDataClient()),
+    },
+    auth,
+  );
+  const tsdr =
+    provided.tsdr ??
+    (process.env.USPTO_TSDR_API_KEY
+      ? lazyClient(() => new TsdrClient())
+      : undefined);
+  const externalAuth = options.auth ? requireScopes("uspto:read") : undefined;
+  registerRegisterTools(
+    server,
+    {
+      assignments:
+        provided.assignments ?? lazyClient(() => new AssignmentCenterClient()),
+      trademarkAssignments:
+        provided.trademarkAssignments ??
+        lazyClient(() => new TrademarkAssignmentClient()),
+      ...(tsdr ? { tsdr } : {}),
+    },
+    externalAuth,
+  );
+  registerPortalSearchTools(
+    server,
+    {
+      publications:
+        provided.publications ?? lazyClient(() => new PublicationsClient()),
+      trademarkSearch:
+        provided.trademarkSearch ??
+        lazyClient(() => new TrademarkSearchClient()),
+    },
+    externalAuth,
+  );
+  registerUsptoResources(server, auth);
   return server;
 }

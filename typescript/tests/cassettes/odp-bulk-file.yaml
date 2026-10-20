@@ -1,0 +1,100 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/datasets/products/files/TRTDXFAG/asb261018.zip
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 302
+    headers:
+      cache-control:
+      - no-cache, no-store
+      connection:
+      - keep-alive
+      content-length:
+      - "619"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:40:19 GMT
+      location:
+      - >-
+        https://data.uspto.gov/files/TRTDXFAG/asb261018.zip?Expires=[FILTERED]&Signature=[FILTERED]&Key-Pair-Id=[FILTERED]
+      x-amz-apigw-id:
+      - FjTp8GXUIAMFllA=
+      x-amzn-requestid:
+      - 0983b16d-3170-48e1-aa54-66eecee8ccd8
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79972-1beaaf2c18585d0f0c8fa1dd;Parent=230a9870f294c242;Sampled=0;Lineage=2:4935383e:0
+    body:
+      type: json
+      content: "Use redirect URL to download: https://data.uspto.gov/files/TRTDXFAG/asb261018.zip?Expires=[FILTERED]&Signature=[FILTERED]&Key-Pair-Id=[FILTERED] IMPORTANT: Please note that you submitted 3 allowed requests URL out of 20                             for this URL per 31536000 sec."
+  recorded_at: 2026-10-20T16:40:19.160Z
+- request:
+    method: GET
+    uri: >-
+      https://data.uspto.gov/files/TRTDXFAG/asb261018.zip?Expires=[FILTERED]&Signature=[FILTERED]&Key-Pair-Id=[FILTERED]
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      connection:
+      - keep-alive
+      content-length:
+      - "1635"
+      content-security-policy:
+      - "default-src 'self'  https://www.google.com/ www.youtube.com *.uspto.gov validator.swagger.io; script-src 'self' 'unsafe-inline' 'unsafe-eval' dap.digitalgov.gov www.youtube.com components.uspto.gov https://www.gstatic.com/recaptcha/releases/PcIQSvk4Y5ANjYUx0f4froA1/recaptcha__en.js *.sdk.awswaf.com www.google.com www.googletagmanager.com www.google-analytics.com code.jquery.com *.qualtrics.com *.us-east-1.token.awswaf.com *.us-east-1.captcha.awswaf.com components.uspto.gov cdn.jsdelivr.net code.jquery.com *.uspto.gov; img-src 'self' data: i.ytimg.com img.youtube.com www.google-analytics.com validator.swagger.io www.w3.org data.uspto.gov validator.swagger.io; style-src 'self' 'unsafe-inline'; font-src 'self' fonts.gstatic.com; connect-src 'self' cdn.jsdelivr.net *.sdk.awswaf.com *.us-east-1.token.awswaf.com *.us-east-1.captcha.awswaf.com *.uspto.gov www.googletagmanager.com www.google-analytics.com *.qualtrics.com region1.google-analytics.com www.google.com; frame-ancestors 'self' www.google.com"
+      content-type:
+      - application/octet-stream
+      date:
+      - Tue, 20 Oct 2026 16:40:19 GMT
+      etag:
+      - "\"cb55d5023c8e4798db495f4c7bee0215\""
+      last-modified:
+      - Mon, 19 Oct 2026 09:08:51 GMT
+      referrer-policy:
+      - same-origin
+      server:
+      - AmazonS3
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      vary:
+      - Origin
+      via:
+      - 1.1 51d286010644edbf8af1fde52337e29a.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - TVs8TYmqQCogV_D2qnE_i9VOT_i9Z_Aq_18gBMGmtNE9EHN4BWOWOA==
+      x-amz-cf-pop:
+      - DFW57-P8
+      x-amz-server-side-encryption:
+      - aws:kms
+      x-amz-server-side-encryption-aws-kms-key-id:
+      - arn:aws:kms:us-east-1:831714700926:key/mrk-45c918df322a47a2bed19b20f7783119
+      x-amz-server-side-encryption-bucket-key-enabled:
+      - "true"
+      x-amz-version-id:
+      - 8uvNJCHdJ_7mDDAkv7m6ZCtBZ64YCZp1
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: binary
+      content: >-
+        504b03041400000008001749535d68b22625e7050000ff1000000d0000006173623236313031382e786d6c95586d6fda4810feee5f31977e21bd2c369056cd8992a381dea11240e054579d4ed5c65e8815e3e576d7104ef7e36f76fd820d1b4e8d906aefcececb33cfcc8edbbd7d59c7b06542463cf978d16a7a17c092808751b2fa7891aa25f97071db73ba3f0da677feb7d91094a0215b53f14ca894d12a59b34449f8b3fb132180320ff7c3890f467230fc3c9a8cfcd174029fa773f0e7fdc1f0be3fff02fdc562f4db440b2e9c395b32810619a8a748c2c01f0095307bf8341eddc10571dd87c5cc9fbaaede28357caf6880afe833b4bd56877837c47be7bac3c90538ce1d4f140dd42fce4373d1841955e827d02404bf0800a6cb6514306718b340099e44018c9225176baa100b98091ea601c63688b69146c79935a74df8c45fa075fdce73fa317b417d22a257f0b50fed76a7d571a24df86b2a378a37577ceb386ff51f2cfcfedc87f9f0eb68a1c1f87db4f0a7f36f60369d56dbf55a6edbf33ce887210ba17ff7e5fba0ef0fa13140a7a11f3c277c17b370c5c24b501c66a8ec1bb09869e49b8ed771bdf7fa7c1b1e36219e088b3d48e89a497d24e0262e73da9fc230514c6c44241948852150717406b5be735bd775ad1bc1374ca87da91e15474910a721ab603aa63b7c6314e5b6344e9934aa6eb4aa4e1ee0b8bff0c9c34cc7484ca0792cda3df5c4602578ba29ad740f34eba15f1fdc36feb4b222dad2affa395446c310f8462793c6a5be910e3e3129a63199b3552491d25a884cd2f523134de7bc66099261d26392f02b10d5f309875da49e0e363754600ad09ed3f09f18c2bd8c581c4a58d33d245cc12303baa5514c1f6306bb2796204111d38a83350390180701eb6423505da22e9b4ecb73f1671099b335df62fee586623d3d32b563a8f2d8c5026d5d0b1aeebf314986f0baa8812a25a2c754b1aa622c856da4b919f220d5b4cb2a04c9a30c0b01ab066ba7ea771558c88075bc1b1779a54b356742c276455ea4d111f0f5864b34c497805ca6e820559abe8a4689d4e8fc713f46d20a2ccc54209e6857a68f045d8a54c464d3314505c3c9e0957ac37d8710ddd086e3a1e955f686d6c85be2156013d1e478667b826d915de90e98c87c55171c8a949d9044870e7259b592ab8342af614fbe48b4169b340a41e3cdec0eaba46fddd707ed12475edb858e23b14bd9a383864e1029f96bc0817fab586056c4fee79ae3b633d6082b468d1a681c560ac0b990c52363f8987702e441cde6e12034046359e12e75659a24c4542a929ad66912817a52b16298c9300aa8e2e24a539111c1022eb008709fe276c0d344dd5e213905d6e2862721faa95f932ddb53bcd088622faae6486edc8e72e1907df7d849bbd491e376a15a3076914380f6fda3205f13aa00030dbc3b24961117f85bd124fa27ebb9fa8ec22486218228490b012d9edb95e74ee5f9fab606ea19bd76bf0afdadf3dbedf3db9df3dbd7af6c9b4681bc2de8cc45bd3e32ae62573b8f979e529888f7a46cc10850f888e5f84c09566575b9e8a9842f6beb250e156c35e641a4f6f88f51a15f35cfc59ee844e12bb667a5db203eb21716a4a6376a4ae1826116adcc2bb816b3155e95a63fef4d45e05a71fb6a43b55c9e866587b16ed92e73e28c5d4c476bdf3100d8b7aa98d8250a98ecbb27a0d8c52a38d90532b660ef2be8c4988d4e0cef8833657228395d7e3fc8a2d394a18e825a3f44a71350ce31c5e6a51d232bfd4b51bcb0f4fc80839ada5fbead5ed8e53234b21e95715817067e2dec756164b30ad6559dc55abc3450e377a6a2bed7f7fd317e10e047178e307bd48ae3b4b9f0e1cde87e361e0d0735af8c71bb86ccb1ffd350711b1a659075da1c2e52244e3ef65b25b0745e1f86317f87d92aa63ba2cc77012934e23eceba315eac2bbc88eb18965aeba11633dbf14c6b1d21ce1a87868a1531dfb179672bdf4326031199ef86ba53a5c4eb192e452a4aec215442af0afc85d93e387e185d64cf01fcebe62363f6565d41087bf825dc758ba112dfcd919a90ee8a3d3d817b37ad8aac59ce0c14e7737b4773646fd0efbac76bd9c1e36112cdb4dfb7bcd64dd73dd9ca4e1ca2ab8ecd15afd1ade309b337e9bab6e5dcf9d7541a1f4effdfa2f71f504b010214031400000008001749535d68b22625e7050000ff1000000d0000000000000000000000a481000000006173623236313031382e786d6c504b050600000000010001003b000000120600000000
+  recorded_at: 2026-10-20T16:40:19.375Z

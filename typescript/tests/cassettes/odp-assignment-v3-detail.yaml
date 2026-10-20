@@ -1,0 +1,137 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        reelNumber: "35130"
+        frameNumber: "327"
+        searchBy: reelFrame
+        dataFilter:
+          filterBy: []
+          rowsPerPage: 10
+          currentPage: 1
+  response:
+    status: 200
+    headers:
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:40:04 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      server:
+      - uvicorn
+      strict-transport-security:
+      - max-age=31536000
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 f2fec38d5d165e5fc04d935e0a4a7fe8.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - LPNA-h_ECwk4gPvBTXvU53yeWmYpxJKxNjBcZWFLWv4Otf3wosqvfQ==
+      x-amz-cf-pop:
+      - DFW59-P8
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-process-time:
+      - "137"
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        status: Success
+        statusCode: 200
+        error: null
+        successResponse:
+          data:
+            assignment:
+              assignees:
+              - country: UNITED STATES
+                city: WALTHAM
+                assigneeSequenceNumber: 1
+                addressLine1: 870 WINTER STREET
+                state: MASSACHUSETTS
+                addressLine2: null
+                countryOrState: null
+                zipCode: 02451-1449
+                assigneeName: RAYTHEON COMPANY
+                countryOrStateCode: MA
+                ictStateCode: MA
+                ictCountryCode: US
+                addressLine3: ""
+                addressLine4: ""
+              assignors:
+              - assignorSequenceNumber: 1
+                executionDate: 03/06/2015
+                assignorName: MARRON, JOSEPH
+                acknowledgedDate: null
+              conveyance: ASSIGNMENT OF ASSIGNOR'S INTEREST
+              conveyanceCode: 23
+              correspondent:
+                name: DOCKET CLERK-RAYTHEON/MWM
+                addressLine1: P.O.DRAWER 800889
+                addressLine2: DALLAS, TX 75380
+                addressLine3: null
+                addressLine4: null
+                country: null
+                city: null
+                state: null
+                zipCode: null
+              documents: ""
+              frameNumber: 327
+              pageCount: 4
+              recordationDate: 03/10/2015
+              reelNumber: 35130
+              attorneyDocketNumber: "14-6582 "
+              domesticRepresentative: ""
+              imageAvailableStatusCode: true
+              imageURL: >-
+                https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/download/patent/35130/327
+              mailDate: 03/11/2015
+              processingDetails: null
+              deleteStatusIndicator: false
+              deleteStatusText: null
+              receiptDate: 03/10/2015
+              assignmentSequence: 1
+              assignorExecutionDate: 03/06/2015
+              multiAssignmentSequenceNumber: 0
+              multiAssignmentStatusIndicator: false
+            noOfProperties: 1
+            properties:
+            - propertySequenceNumber: 1
+              applicationNumber: "14643719"
+              fillingDate: 03/10/2015
+              publicIndicator: "Y"
+              internationalRegistrationNumber: null
+              inventionTitle: COHERENT LADAR USING INTRA-PIXEL QUADRATURE DETECTION
+              inventors: Marron, Joseph
+              issueDate: 06/19/2018
+              patentNumber: "10000000"
+              pctNumber: ""
+              pctNumber17: ""
+              publicationNumber: US20160266243A1
+              publicationDate: 09/15/2016
+              internationalPublicationDate: ""
+              propertyId: "14643719"
+          totalRows: 1
+          backendPagination: false
+          filteredRowsCount: 0
+          message: null
+  recorded_at: 2026-10-20T16:40:04.621Z

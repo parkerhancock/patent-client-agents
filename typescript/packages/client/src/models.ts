@@ -4,7 +4,8 @@ const nullableText = z.string().nullable().optional();
 
 export const ProvenanceSchema = z.object({
   source_url: z.url(),
-  source_name: z.literal("USPTO Open Data Portal"),
+  source_name: z.string().min(1),
+  as_of_status: z.string().optional(),
   retrieved_at: z.iso.datetime(),
   cache_hit: z.literal(false),
 });

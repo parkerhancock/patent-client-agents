@@ -3,7 +3,7 @@
 Checked October 20, 2026. **The current portal release is 5.0, dated October 2,
 2026**, verified in the rendered official portal. The current main OpenAPI file
 was downloaded through the official Swagger UI; its external companion schemas
-and some additional API definitions still need to be retrieved and compared.
+still need to be retrieved and compared. All eight Swagger dropdown definition entry files are now archived.
 The separate current Office Actions specification is also archived and fully
 reference-resolved. The TypeScript port can start from the existing Python
 contracts, but must account for the newer Office Action
@@ -113,8 +113,7 @@ It declares OpenAPI 3.0.3 and `info.version: 1.0.0`; generated-at metadata is
 `2026-08-06T21:27:37.243116Z`. Its four paths contain the six operations above,
 15 schemas, and 32 unique local references, all resolved. There are no
 external references. These are verified schema contracts, not implemented or
-live-tested TypeScript coverage. The other definitions still require their
-own review; the initial three-method port is intentionally only a slice.
+live-tested TypeScript coverage. The other seven definition entry files are now archived as described below. Source verification does not establish implementation or live behavior.
 
 [`current-operations.json`](../references/odp/current-operations.json) tracks
 the downloaded index and separate Office Actions definition separately.
@@ -245,3 +244,41 @@ Decision features solely from the release descriptions. Do not claim support
 for portal Smart Search, new trademark datasets, or altered limits from stale
 local files or third-party client descriptions. Track those as review
 questions until their current official schemas and behavior can be inspected.
+
+## Petition definition and remaining archive gaps
+
+A further signed-out Swagger UI review on October 20 confirmed the separate
+Petition Decisions API (`info.version: 1.0.0`, OAS 3.0) and its source link,
+[`petition-decisions.yaml`](https://data.uspto.gov/swagger/petition-decisions.yaml).
+The rendered page exposes GET/POST `.../petition/decisions/search`, GET/POST
+`.../petition/decisions/search/download`, and GET
+`.../petition/decisions/{petitionDecisionRecordIdentifier}`. Fifteen schema names
+are visible, including separate search/download request types and a
+`PetitionDecisionDocument` model. The
+[observation receipt](../references/odp/petition-decisions-browser-observation.md)
+records the exact route and model list. The raw YAML was subsequently downloaded through a plain source-link click in Chrome and is included in the archive inventory below.
+
+The in-app browser became unavailable after a turn interruption. A fresh public Chrome research tab successfully retrieved all six remaining dropdown definition entry files through their visible source links. Earlier direct navigation to the common-base YAML was blocked by ChatGPT; no bypass was attempted. Seven main companion files remain unarchived, so the full current schema bundle is still incomplete. No complete current-schema claim follows from successful code tests.
+
+The [Python USPTO feature inventory](uspto-feature-inventory.md) enumerates 70
+public domain-client methods across 12 clients, delegating facades, local XML
+and claims parsing helpers, and bundled documentation resources. It provides
+the parity checklist beyond ODP alone. Implementation and behavioral evidence
+remain separately tracked in [port-status.md](port-status.md).
+
+## Additional current source archives
+
+Retrieved October 20 through the visible source links in the official Swagger UI using a new public Chrome tab. Original bytes are preserved; the TSDR asset uses JSON syntax despite its `.yaml` filename. All six files parse and all their local references resolve. They contain no external references.
+
+| Original source filename | Archive | Operations | Schemas | SHA-256 |
+| --- | --- | ---: | ---: | --- |
+| [petition-decisions.yaml](https://data.uspto.gov/swagger/petition-decisions.yaml) | [petition-decisions-2026-10-20.yaml](../references/odp/petition-decisions-2026-10-20.yaml) | 5 | 15 | `7165b546a7754cb699028d36cb07d23f562110debc5acddbc622e53d18437d09` |
+| [tsdr-swagger.yaml](https://data.uspto.gov/swagger/tsdr-swagger.yaml) | [tsdr-swagger-2026-10-20.yaml](../references/odp/tsdr-swagger-2026-10-20.yaml) | 25 | 289 | `2e72951da2b0e26e1dcdcf625f08a93b4fcbf0e770b3a7d2d153e25234658d16` |
+| [oa-rejections.yaml](https://data.uspto.gov/swagger/oa-rejections.yaml) | [oa-rejections-2026-10-20.yaml](../references/odp/oa-rejections-2026-10-20.yaml) | 2 | 0 | `028af96714af6d30392be0bc8b830d4618ec86d70fa9d3463efad38401acf5c9` |
+| [oa-text-retrieval.yaml](https://data.uspto.gov/swagger/oa-text-retrieval.yaml) | [oa-text-retrieval-2026-10-20.yaml](../references/odp/oa-text-retrieval-2026-10-20.yaml) | 2 | 0 | `e0c5398114e22a20fbd6687efd9793d89c0d22e988d159a5ac605d997da17529` |
+| [oa-citations.yaml](https://data.uspto.gov/swagger/oa-citations.yaml) | [oa-citations-2026-10-20.yaml](../references/odp/oa-citations-2026-10-20.yaml) | 2 | 0 | `5388cd1728405286215180987b5aeaf27ab955f5b646c26c418631efc04091cf` |
+| [oa-enriched-citations.yaml](https://data.uspto.gov/swagger/oa-enriched-citations.yaml) | [oa-enriched-citations-2026-10-20.yaml](../references/odp/oa-enriched-citations-2026-10-20.yaml) | 2 | 0 | `10df3aa6688dd5856b0285789f04a7eb766da5f4e5ebb00a0162dba245682052` |
+
+The four migrated analytics definitions each declare GET searchable-field metadata and POST record search, so their current eight operations exceed the four Python search helpers. Each uses `application/x-www-form-urlencoded` for POST search rather than the new Office Action API’s JSON body. TSDR declares 25 GET operations, covering case status, single documents/pages, multi-case status, bundles, and downloads. Its specification describes limited availability during upgrades without a dated outage window; that text is a source observation and does not establish current service health.
+
+Each archive has a matching `*-operations.json` inventory, with URL, retrieval date, byte count, digest, own version, operation list, schema names, and reference validation. The main operation catalog includes these six inventories alongside the main index and current Office Actions schema. The source receipt flag `current_schema_bundle_complete` remains false because the seven main companions have not been retrieved.

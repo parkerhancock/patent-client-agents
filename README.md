@@ -14,6 +14,11 @@
 
 **Project home: [patentclient.com](https://patentclient.com/)** · **Full documentation: [docs.patentclient.com](https://docs.patentclient.com/)**
 
+The independent [TypeScript/Bun port](typescript/README.md) provides a usable
+USPTO library, a thin MCP server, and authenticated REST document retrieval.
+See its [implementation and verification status](typescript/docs/port-status.md).
+The Python package and hosted service remain separate.
+
 ## Use the hosted demo
 
 The fastest path — nothing to install. Point any MCP-speaking client

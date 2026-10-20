@@ -1,0 +1,44 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/applications/14412875/foreign-priority
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:39:37 GMT
+      x-amz-apigw-id:
+      - FjTjeEb8IAMFx_g=
+      x-amzn-requestid:
+      - 440d79ab-e9a3-4760-8b6b-3ca8b7183cc6
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79948-4b1c28dd296fa5e57223479b;Parent=324b171ac450300e;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: json
+      content:
+        count: 1
+        patentFileWrapperDataBag:
+        - applicationNumberText: "14412875"
+          foreignPriorityBag:
+          - filingDate: 2012-07-05
+            applicationNumberText: 10 2012 013 534.3
+            ipOfficeName: GERMANY
+        requestIdentifier: 440d79ab-e9a3-4760-8b6b-3ca8b7183cc6
+  recorded_at: 2026-10-20T16:39:37.055Z

@@ -1,0 +1,233 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/applications/14412875/assignment
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:39:57 GMT
+      x-amz-apigw-id:
+      - FjTmoFrsoAMFlfQ=
+      x-amzn-requestid:
+      - 409a0cca-6d74-45a6-898f-51eddac1317e
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad7995d-6c8f948f19df047d0c998d36;Parent=5bcc9dbc7f7fa77c;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: json
+      content:
+        count: 1
+        patentFileWrapperDataBag:
+        - assignmentBag:
+          - assignmentDocumentLocationURI: >-
+              https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/download/patent/35731/345
+            assignmentReceivedDate: 2015-05-28
+            reelAndFrameNumber: 035731/0345
+            frameNumber: 345
+            assignmentRecordedDate: 2015-05-28
+            conveyanceText: ASSIGNMENT OF ASSIGNOR'S INTEREST
+            imageAvailableStatusCode: true
+            assigneeBag:
+            - assigneeAddress:
+                cityName: PULLACH IM ISARTAL
+                geographicRegionCode: DEX
+                postalCode: "82049"
+                ictCountryCode: DE
+                countryName: GERMANY
+                addressLineOneText: GISTLSTRABE 35
+              assigneeNameText: MAGLETICS GMBH
+            assignmentMailedDate: 2015-05-29
+            reelNumber: 35731
+            correspondenceAddress:
+              addressLineThreeText: COSTA MESA, CA 92626
+              addressLineOneText: 611 ANTON BLVD.
+              correspondentNameText: RUTAN & TUCKER, LLP
+              addressLineTwoText: SUITE 1400
+            assignorBag:
+            - executionDate: 2015-03-24
+              assignorName: SOKOLOWSKI, TOBIAS
+            pageTotalQuantity: 2
+            attorneyDocketNumber: 101820.0020P
+          - assignmentDocumentLocationURI: >-
+              https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/download/patent/45582/497
+            assignmentReceivedDate: 2018-04-19
+            reelAndFrameNumber: 045582/0497
+            frameNumber: 497
+            assignmentRecordedDate: 2018-04-19
+            conveyanceText: ASSIGNMENT OF ASSIGNOR'S INTEREST
+            imageAvailableStatusCode: true
+            assigneeBag:
+            - assigneeAddress:
+                cityName: PRAHA 4 BRANIK
+                geographicRegionCode: CZX
+                postalCode: "14700"
+                countryName: CZECH REPUBLIC
+                addressLineOneText: STARA CESTA 12/15
+              assigneeNameText: NOVAK, FILIP
+            assignmentMailedDate: 2018-04-20
+            reelNumber: 45582
+            correspondenceAddress:
+              addressLineThreeText: WAYNE, PA 19087
+              addressLineOneText: 1285 DRUMMERS LANE, SUITE 202
+              correspondentNameText: LISA STANTON/RIVERSIDE LAW LLP
+              addressLineTwoText: GLENHARDIE CORPORATE CENTER
+            assignorBag:
+            - executionDate: 2018-03-23
+              assignorName: MAGLETICS GMBH
+            pageTotalQuantity: 2
+            attorneyDocketNumber: 206265-0005-00-US.607405
+          - assignmentDocumentLocationURI: >-
+              https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/download/patent/49102/599
+            assignmentReceivedDate: 2019-05-07
+            reelAndFrameNumber: 049102/0599
+            frameNumber: 599
+            assignmentRecordedDate: 2019-05-07
+            conveyanceText: ASSIGNMENT OF ASSIGNOR'S INTEREST
+            imageAvailableStatusCode: true
+            assigneeBag:
+            - assigneeAddress:
+                cityName: PRAGUE 6
+                geographicRegionCode: CZX
+                postalCode: 160 00
+                countryName: CZECH REPUBLIC
+                addressLineOneText: EVROPSKA 423/178
+              assigneeNameText: MEDICAL TECHNOLOGIES CZ A.S.
+            assignmentMailedDate: 2019-05-08
+            reelNumber: 49102
+            correspondenceAddress:
+              addressLineOneText: 1100 NEW YORK AVE NW
+              correspondentNameText: STERNE KESSLER GOLDSTEIN & FOX P.L.L.C.
+              addressLineTwoText: WASHINGTON, DC 20005
+            assignorBag:
+            - executionDate: 2019-05-06
+              assignorName: NOVAK, FILIP
+            pageTotalQuantity: 2
+            attorneyDocketNumber: "4387.0210001"
+          - assignmentDocumentLocationURI: >-
+              https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/download/patent/50034/451
+            assignmentReceivedDate: 2019-08-13
+            reelAndFrameNumber: 050034/0451
+            frameNumber: 451
+            assignmentRecordedDate: 2019-08-13
+            conveyanceText: MERGER
+            imageAvailableStatusCode: true
+            assigneeBag:
+            - assigneeAddress:
+                cityName: PRAGUE 6
+                geographicRegionCode: CZX
+                countryName: CZECH REPUBLIC
+                addressLineOneText: EVROPSKÁ 423/178
+                addressLineTwoText: VOKOVICE, 160 00
+              assigneeNameText: BTL MEDICAL TECHNOLOGIES S.R.O.
+            assignmentMailedDate: 2019-08-14
+            reelNumber: 50034
+            correspondenceAddress:
+              addressLineOneText: 1100 NEW YORK AVENUE, N.W.
+              correspondentNameText: STERNE, KESSLER, GOLDSTEIN & FOX P.L.L.C.
+              addressLineTwoText: WASHINGTON, DC 20005
+            assignorBag:
+            - executionDate: 2019-07-31
+              assignorName: MEDICAL TECHNOLOGIES CZ A.S.
+            pageTotalQuantity: 9
+            attorneyDocketNumber: "4387.0000000"
+          - assignmentDocumentLocationURI: >-
+              https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/download/patent/56526/492
+            assignmentReceivedDate: 2021-06-09
+            reelAndFrameNumber: 056526/0492
+            frameNumber: 492
+            assignmentRecordedDate: 2021-06-09
+            conveyanceText: ASSIGNMENT OF ASSIGNOR'S INTEREST
+            imageAvailableStatusCode: true
+            assigneeBag:
+            - assigneeAddress:
+                cityName: PRAGUE 2
+                geographicRegionCode: CZX
+                postalCode: 120 00
+                countryName: CZECH REPUBLIC
+                addressLineOneText: STEPANSKA 535/6
+                addressLineTwoText: NOVE MESTO
+              assigneeNameText: BTL HEALTHCARE TECHNOLOGIES A.S.
+            assignmentMailedDate: 2021-06-15
+            reelNumber: 56526
+            correspondenceAddress:
+              addressLineOneText: 1100 NEW YORK AVENUE, N.W.
+              correspondentNameText: STERNE, KESSLER, GOLDSTEIN & FOX P.L.L.C.
+              addressLineTwoText: WASHINGTON, DC 20005
+            assignorBag:
+            - executionDate: 2021-06-01
+              assignorName: BTL MEDICAL TECHNOLOGIES S.R.O.
+            pageTotalQuantity: 17
+            attorneyDocketNumber: "4387.0000000"
+          - assignmentDocumentLocationURI: >-
+              https://assignmentcenter.uspto.gov/ipas/search/api/v2/public/download/patent/61479/154
+            assignmentReceivedDate: 2022-10-20
+            reelAndFrameNumber: 061479/0154
+            frameNumber: 154
+            assignmentRecordedDate: 2022-10-20
+            conveyanceText: ASSIGNMENT OF ASSIGNOR'S INTEREST
+            imageAvailableStatusCode: true
+            assigneeBag:
+            - assigneeAddress:
+                cityName: PRAGUE 1
+                geographicRegionCode: CZX
+                postalCode: 110 00
+                countryName: CZECH REPUBLIC
+                addressLineOneText: CELETNA 600/7, STARE MESTO
+              assigneeNameText: BTL MEDICAL SOLUTIONS A.S.
+            assignmentMailedDate: 2022-10-21
+            reelNumber: 61479
+            correspondenceAddress:
+              addressLineOneText: 1100 NEW YORK AVE NW
+              correspondentNameText: STERNE, KESSLER, GOLDSTEIN & FOX P.L.L.C.
+              addressLineTwoText: WASHINGTON, DC 20005
+            assignorBag:
+            - executionDate: 2022-07-26
+              assignorName: BTL HEALTHCARE TECHNOLOGIES A.S.
+            pageTotalQuantity: 19
+            attorneyDocketNumber: "4387.0210001"
+          - assignmentDocumentLocationURI: >-
+              https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/download/patent/63272/50
+            assignmentReceivedDate: 2022-08-05
+            reelAndFrameNumber: 063272/0050
+            frameNumber: 50
+            assignmentRecordedDate: 2022-08-05
+            conveyanceText: ASSIGNMENT OF ASSIGNOR'S INTEREST
+            imageAvailableStatusCode: true
+            assigneeBag:
+            - assigneeAddress:
+                cityName: PRAGUE 1
+                geographicRegionCode: CZX
+                postalCode: 110 00
+                countryName: CZECH REPUBLIC
+                addressLineOneText: CELETNA 600/7, STARE MESTO
+              assigneeNameText: BTL MEDICAL SOLUTIONS A.S.
+            assignmentMailedDate: 2023-04-11
+            reelNumber: 63272
+            correspondenceAddress:
+              addressLineOneText: 1100 NEW YORK AVE NW
+              correspondentNameText: STERNE, KESSLER, GOLDSTEIN & FOX P.L.L.C.
+              addressLineTwoText: WASHINGTON, DC 20005
+            assignorBag:
+            - executionDate: 2022-07-26
+              assignorName: BTL HEALTHCARE TECHNOLOGIES A.S.
+            pageTotalQuantity: 20
+          applicationNumberText: "14412875"
+        requestIdentifier: 409a0cca-6d74-45a6-898f-51eddac1317e
+  recorded_at: 2026-10-20T16:39:57.273Z

@@ -1,0 +1,45 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/status-codes
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        q: applicationStatusCode:150
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:39:37 GMT
+      x-amz-apigw-id:
+      - FjTjhEJBIAMFtsA=
+      x-amzn-requestid:
+      - f260b753-5a19-4988-ae5d-80dfc38dcb75
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79949-144e89fc06ce4d5b259555f5;Parent=5b24744b2e89f7d7;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: json
+      content:
+        count: 1
+        statusCodeBag:
+        - applicationStatusCode: 150
+          applicationStatusDescriptionText: Patented Case
+        requestIdentifier: f260b753-5a19-4988-ae5d-80dfc38dcb75
+  recorded_at: 2026-10-20T16:39:37.369Z

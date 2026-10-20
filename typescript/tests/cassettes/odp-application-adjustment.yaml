@@ -1,0 +1,1151 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/applications/14412875/adjustment
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:39:57 GMT
+      x-amz-apigw-id:
+      - FjTmmG4LoAMFfbw=
+      x-amzn-requestid:
+      - 8f2737bc-13fd-40c7-a69b-0963b35931bd
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad7995c-1ab8a13a5cf455bc61baa4fe;Parent=529cd1375bacf370;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: json
+      content:
+        count: 1
+        patentFileWrapperDataBag:
+        - patentTermAdjustmentData:
+            applicantDayDelayQuantity: 703
+            overlappingDayQuantity: 0
+            ipOfficeAdjustmentDelayQuantity: 0
+            cDelayQuantity: 0
+            adjustmentTotalQuantity: 4
+            bDelayQuantity: 280
+            nonOverlappingDayDelayQuantity: 707
+            aDelayQuantity: 427
+            patentTermAdjustmentHistoryDataBag:
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: PTA 36 Months
+              eventSequenceNumber: 163.5
+              originatingEventSequenceNumber: 163.4
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 280
+              eventDate: 2020-09-08
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Commencement Date
+              eventSequenceNumber: 163.4
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Patent Issue Date Used in PTA Calculation
+              eventSequenceNumber: 163
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-09-08
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Export to Final Data Capture
+              eventSequenceNumber: 162
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-08-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Dispatch to FDC
+              eventSequenceNumber: 161
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-07-31
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Application Is Considered Ready for Issue
+              eventSequenceNumber: 160
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-07-30
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Issue Fee Payment Verified
+              eventSequenceNumber: 159
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-07-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Entity Status Set To Undiscounted (Initial Default Setting or Status Change)
+              eventSequenceNumber: 158
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-07-27
+            - applicantDayDelayQuantity: 44
+              eventDescriptionText: Workflow - Drawings Finished
+              eventSequenceNumber: 157
+              originatingEventSequenceNumber: 163
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-07-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Issue Fee Payment Received
+              eventSequenceNumber: 156
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-07-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Finished Initial Data Capture
+              eventSequenceNumber: 155
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 154
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-15
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Printer Rush- No mailing
+              eventSequenceNumber: 153
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-15
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mailing Corrected Notice of Allowability
+              eventSequenceNumber: 152
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-15
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 151
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-11
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 150
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-11
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Reasons for Allowance
+              eventSequenceNumber: 149
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-10
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Corrected Notice of Allowability
+              eventSequenceNumber: 148
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-10
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Pubs Case Remand to TC
+              eventSequenceNumber: 147
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-06-06
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Electronic Review
+              eventSequenceNumber: 146
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Export to Initial Data Capture
+              eventSequenceNumber: 145
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-24
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 144
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Notice of Allowance
+              eventSequenceNumber: 143
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 142
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 141
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 140
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 139
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 138
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Issue Revision Completed
+              eventSequenceNumber: 137
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Document Verification
+              eventSequenceNumber: 136
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Notice of Allowance Data Verification Completed
+              eventSequenceNumber: 135
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Examiner's Amendment Communication
+              eventSequenceNumber: 134
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: After Final Consideration Program Additional Consideration and/or updated search
+              eventSequenceNumber: 133
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Reasons for Allowance
+              eventSequenceNumber: 132
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Interview Summary - Examiner Initiated - Telephonic
+              eventSequenceNumber: 131
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Allowability Notice
+              eventSequenceNumber: 130
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Information Disclosure Statement considered
+              eventSequenceNumber: 129
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-21
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Date Forwarded to Examiner
+              eventSequenceNumber: 128
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-19
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Response after Final Action
+              eventSequenceNumber: 127
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-17
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: PILOT- Request for After Final Consideration Program
+              eventSequenceNumber: 126
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-04-17
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Information Disclosure Statement (IDS) Filed
+              eventSequenceNumber: 125
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-01-27
+            - applicantDayDelayQuantity: 18
+              eventDescriptionText: Information Disclosure Statement (IDS) Filed
+              eventSequenceNumber: 124
+              originatingEventSequenceNumber: 109
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-11-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Information Disclosure Statement (IDS) Filed
+              eventSequenceNumber: 123
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-01-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Electronic Review
+              eventSequenceNumber: 122
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-01-17
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 121
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-01-17
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Final Rejection (PTOL - 326)
+              eventSequenceNumber: 120
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-01-17
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Final Rejection
+              eventSequenceNumber: 119
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-01-13
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Information Disclosure Statement considered
+              eventSequenceNumber: 118
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2020-01-13
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 117
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-11-18
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 116
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-11-18
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Filing Receipt - Corrected
+              eventSequenceNumber: 115
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-11-18
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Change in Power of Attorney (May Include Associate POA)
+              eventSequenceNumber: 114
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-11-18
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 113
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-11-06
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Change in Power of Attorney (May Include Associate POA)
+              eventSequenceNumber: 112
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-11-06
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Information Disclosure Statement (IDS) Filed
+              eventSequenceNumber: 111
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-11-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Date Forwarded to Examiner
+              eventSequenceNumber: 110
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-10-18
+            - applicantDayDelayQuantity: 94
+              eventDescriptionText: Response after Non-Final Action
+              eventSequenceNumber: 109
+              originatingEventSequenceNumber: 96
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-10-14
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Request for Extension of Time - Granted
+              eventSequenceNumber: 108
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-10-14
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 107
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-06-14
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Miscellaneous Communication to Applicant
+              eventSequenceNumber: 106
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-06-14
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Miscellaneous Communication to Applicant - No Action Count
+              eventSequenceNumber: 105
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-06-11
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Miscellaneous Incoming Letter
+              eventSequenceNumber: 104
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-05-21
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 103
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-05-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 102
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-05-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Filing Receipt - Corrected
+              eventSequenceNumber: 101
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-05-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Change in Power of Attorney (May Include Associate POA)
+              eventSequenceNumber: 100
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-05-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Correspondence Address Change
+              eventSequenceNumber: 99
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-05-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Electronic Review
+              eventSequenceNumber: 98
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-04-12
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 97
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-04-12
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Non-Final Rejection
+              eventSequenceNumber: 96
+              originatingEventSequenceNumber: 87
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 193
+              eventDate: 2019-04-12
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Non-Final Rejection
+              eventSequenceNumber: 95
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-04-09
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Request for Refund
+              eventSequenceNumber: 90
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-04-04
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Date Forwarded to Examiner
+              eventSequenceNumber: 89
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-04-03
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Amendment Submitted/Entered with Filing of CPA/RCE
+              eventSequenceNumber: 88
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-06-01
+            - applicantDayDelayQuantity: 204
+              eventDescriptionText: Request for Continued Examination (RCE)
+              eventSequenceNumber: 87
+              originatingEventSequenceNumber: 45
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-06-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Disposal for a RCE / CPA / R129
+              eventSequenceNumber: 86
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-04-03
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Notice of Rescinded Abandonment
+              eventSequenceNumber: 85
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-03-21
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Notice of Rescinded Abandonment in TCs
+              eventSequenceNumber: 84
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-04-02
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Case Docketed to Examiner in GAU
+              eventSequenceNumber: 83
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-04-02
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 82
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-03-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Pet Dec Routed to Tech Center
+              eventSequenceNumber: 81
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-03-21
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 80
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-03-20
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail-Petition to Revive Application - Granted
+              eventSequenceNumber: 79
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-03-21
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Petition to Revive Application - Granted
+              eventSequenceNumber: 78
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-03-20
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Pet Dec Routed to Tech Center
+              eventSequenceNumber: 77
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-03-20
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Petition Entered
+              eventSequenceNumber: 75
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-10-09
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Electronic Review
+              eventSequenceNumber: 74
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-10-02
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 73
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-10-02
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail O.P. Petition Decision
+              eventSequenceNumber: 72
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-10-02
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 71
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-09-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail-Petition Decision - Dismissed
+              eventSequenceNumber: 70
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-09-28
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Petition Decision - Dismissed
+              eventSequenceNumber: 69
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-09-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 68
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-09-27
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: O.P. Petition Decision
+              eventSequenceNumber: 67
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-09-27
+            - applicantDayDelayQuantity: 253
+              eventDescriptionText: Petition Entered
+              eventSequenceNumber: 66
+              originatingEventSequenceNumber: 48
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2019-02-09
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Workflow - Request for RCE - Begin
+              eventSequenceNumber: 65
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-06-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 64
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-06-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 63
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-06-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Filing Receipt - Replacement
+              eventSequenceNumber: 62
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-06-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Change in Power of Attorney (May Include Associate POA)
+              eventSequenceNumber: 61
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-06-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Correspondence Address Change
+              eventSequenceNumber: 60
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-31
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Electronic Review
+              eventSequenceNumber: 59
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 58
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Pre-Exam Notice
+              eventSequenceNumber: 57
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Correspondence Address Change
+              eventSequenceNumber: 56
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Correspondence Address Change
+              eventSequenceNumber: 55
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-22
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Electronic Review
+              eventSequenceNumber: 54
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 53
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Pre-Exam Notice
+              eventSequenceNumber: 52
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-05-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 51
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-02-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Abandonment for Failure to Respond to Office Action
+              eventSequenceNumber: 50
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-02-23
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 49
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-02-20
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Aband. for Failure to Respond to O. A.
+              eventSequenceNumber: 48
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2018-02-20
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Electronic Review
+              eventSequenceNumber: 47
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-08-09
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 46
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-08-09
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Final Rejection (PTOL - 326)
+              eventSequenceNumber: 45
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-08-09
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 44
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-08-04
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 43
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-08-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 42
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-07-31
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 41
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-07-31
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Final Rejection
+              eventSequenceNumber: 40
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-07-31
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Date Forwarded to Examiner
+              eventSequenceNumber: 39
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-05-08
+            - applicantDayDelayQuantity: 90
+              eventDescriptionText: Response after Non-Final Action
+              eventSequenceNumber: 38
+              originatingEventSequenceNumber: 34
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-04-25
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Request for Extension of Time - Granted
+              eventSequenceNumber: 37
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2017-04-25
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Electronic Review
+              eventSequenceNumber: 36
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2016-10-25
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 35
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2016-10-25
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Mail Non-Final Rejection
+              eventSequenceNumber: 34
+              originatingEventSequenceNumber: 163.4
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 234
+              eventDate: 2016-10-25
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Office Action Review
+              eventSequenceNumber: 33
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2016-10-20
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Non-Final Rejection
+              eventSequenceNumber: 32
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2016-10-19
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Information Disclosure Statement considered
+              eventSequenceNumber: 27
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2016-10-19
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Case Docketed to Examiner in GAU
+              eventSequenceNumber: 26
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2016-06-14
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Application ready for PDX access by participating foreign offices
+              eventSequenceNumber: 25
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-08-31
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 24
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-06-12
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: PG-Pub Issue Notification
+              eventSequenceNumber: 23
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-06-11
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 22
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-04-14
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Change in Power of Attorney (May Include Associate POA)
+              eventSequenceNumber: 21
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-04-14
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Case Docketed to Examiner in GAU
+              eventSequenceNumber: 20
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-04-01
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Substitute Specification Filed
+              eventSequenceNumber: 19
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Request for Foreign Priority (Priority Papers May Be Included)
+              eventSequenceNumber: 18
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Information Disclosure Statement (IDS) Filed
+              eventSequenceNumber: 17
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Preliminary Amendment
+              eventSequenceNumber: 16
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Application Is Now Complete
+              eventSequenceNumber: 15
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-03-16
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Application Dispatched from OIPE
+              eventSequenceNumber: 14
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-03-16
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 13
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-03-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Email Notification
+              eventSequenceNumber: 12
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-03-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: 371 Completion Date
+              eventSequenceNumber: 11
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Sent to Classification Contractor
+              eventSequenceNumber: 10
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-03-04
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: FITF set to NO - revise initial setting
+              eventSequenceNumber: 9
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-03-04
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Patent Term Adjustment - Ready for Examination
+              eventSequenceNumber: 8
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Filing Receipt
+              eventSequenceNumber: 7
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-03-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Notice of DO/EO Acceptance Mailed
+              eventSequenceNumber: 6
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-03-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: >-
+                Applicant Has Filed a Verified Statement of Small Entity Status in Compliance
+                with 37 CFR 1.27
+              eventSequenceNumber: 5
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-08
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Information Disclosure Statement (IDS) Filed
+              eventSequenceNumber: 4
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Cleared by OIPE CSR
+              eventSequenceNumber: 3
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Entity Status Set To Undiscounted (Initial Default Setting or Status Change)
+              eventSequenceNumber: 2
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: Initial Exam Team nn
+              eventSequenceNumber: 1
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2015-01-05
+            - applicantDayDelayQuantity: 0
+              eventDescriptionText: International Filing date
+              eventSequenceNumber: 0.5
+              originatingEventSequenceNumber: 0
+              ptaPTECode: PTA
+              ipOfficeDayDelayQuantity: 0
+              eventDate: 2013-07-02
+          applicationNumberText: "14412875"
+        requestIdentifier: 8f2737bc-13fd-40c7-a69b-0963b35931bd
+  recorded_at: 2026-10-20T16:39:57.130Z

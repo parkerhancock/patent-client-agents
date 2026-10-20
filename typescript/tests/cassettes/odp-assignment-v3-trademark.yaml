@@ -1,0 +1,2461 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/trademark
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        searchCriteria:
+        - property: NIKE
+          searchBy: assigneeName
+          matchType: Contains
+          order: 1
+          relation: ""
+        dataFilter:
+          filterBy: []
+          rowsPerPage: 1000
+          currentPage: 1
+  response:
+    status: 200
+    headers:
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:39:57 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      server:
+      - uvicorn
+      strict-transport-security:
+      - max-age=31536000
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding
+      via:
+      - 1.1 f2fec38d5d165e5fc04d935e0a4a7fe8.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - fmfsFkPlMOsFVUJPtKfFntq3HbO379yrZMwjNYcNEwlSDYctsAsbEQ==
+      x-amz-cf-pop:
+      - DFW59-P8
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-process-time:
+      - "236"
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        status: Success
+        statusCode: 200
+        error: null
+        successResponse:
+          data:
+          - reelNumber: 8979
+            frameNumber: "0980"
+            assignorExecutionDate: 08/25/2025
+            correspondentName: "LI CHUNYU "
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: "RONG, HUANG "
+              executionDate: 08/25/2025
+            assignees:
+            - WUHAN NIKE TECHNOLOGY CO., LTD.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 90246396
+              currentOwner: WUHAN NIKE TECHNOLOGY CO., LTD.
+              mark: KOLUCIA
+              applicationFilingDate: 10/10/2020
+              internationalRegistrationNumber: null
+              registrationDate: 08/17/2021
+              registrationNumber: 6452428
+              registrantName: null
+          - reelNumber: 8266
+            frameNumber: "0070"
+            assignorExecutionDate: 10/25/2023
+            correspondentName: NIKE S.R.L.
+            conveyance: CHANGE OF ADDRESS
+            conveyanceCode: 40
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE S.R.L.
+              executionDate: 10/25/2023
+            assignees:
+            - NIKE S.R.L.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 79376276
+              currentOwner: Nike S.r.l.
+              mark: NILUFAR
+              applicationFilingDate: 03/23/2023
+              internationalRegistrationNumber: "1745029"
+              registrationDate: 12/24/2024
+              registrationNumber: 7616732
+              registrantName: null
+          - reelNumber: 8127
+            frameNumber: "0472"
+            assignorExecutionDate: 07/06/2023
+            correspondentName: CHEN, ZHENMU
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: CHEN, ZHENMU
+              executionDate: 07/06/2023
+            assignees:
+            - SHENZHEN NIKE MADING E-COMMERCE CO., LTD
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 90421746
+              currentOwner: SHENZHEN NIKE MADING E-COMMERCE CO., LTD
+              mark: BAYLYJAY
+              applicationFilingDate: 12/28/2020
+              internationalRegistrationNumber: null
+              registrationDate: 10/19/2021
+              registrationNumber: 6527289
+              registrantName: null
+          - reelNumber: 7639
+            frameNumber: "0895"
+            assignorExecutionDate: 02/18/2022
+            correspondentName: YU, YANG
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: SHENZHEN NICAI TECHNOLOGY CO.,LTD.
+              executionDate: 02/18/2022
+            assignees:
+            - SHENZHEN NIKE INTELLIGENT EQUIPMENT CO., LTD.
+            noOfProperties: 2
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 88347805
+              currentOwner: SHENZHEN NIKE INTELLIGENT EQUIPMENT CO., LTD.
+              mark: NICARE
+              applicationFilingDate: 03/20/2019
+              internationalRegistrationNumber: null
+              registrationDate: 10/01/2019
+              registrationNumber: 5872746
+              registrantName: null
+          - reelNumber: 7334
+            frameNumber: "0543"
+            assignorExecutionDate: 04/28/2021
+            correspondentName: HELEN HILL MINSKER / ARNOLD & PORTER
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: SNKSTR LLC
+              executionDate: 04/28/2021
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 88676035
+              currentOwner: NIKE, INC.
+              mark: SNKSTR
+              applicationFilingDate: 10/31/2019
+              internationalRegistrationNumber: null
+              registrationDate: 06/22/2021
+              registrationNumber: 6392368
+              registrantName: null
+          - reelNumber: 7267
+            frameNumber: "0744"
+            assignorExecutionDate: 04/12/2021
+            correspondentName: CHRISTINE FELLER, SCHIFF HARDIN LLP
+            conveyance: ASSIGNMENT OF AN UNDIVIDED PART OF ASSIGNORS INTEREST
+            conveyanceCode: 23
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: JUMP 23, INC.
+              executionDate: 04/12/2021
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75778238
+              currentOwner: JUMP 23 MANAGEMENT INCORPORATED
+              mark: "23"
+              applicationFilingDate: 08/18/1999
+              internationalRegistrationNumber: null
+              registrationDate: 07/23/2002
+              registrationNumber: 2598522
+              registrantName: null
+          - reelNumber: 6784
+            frameNumber: "0325"
+            assignorExecutionDate: 10/04/2019
+            correspondentName: JENNIFER MARTIN REYNOLDS
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: TRACEME INC.
+              executionDate: 10/04/2019
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 87378987
+              currentOwner: NIKE, INC.
+              mark: TRACEME
+              applicationFilingDate: 03/21/2017
+              internationalRegistrationNumber: null
+              registrationDate: 12/04/2018
+              registrationNumber: 5623373
+              registrantName: null
+          - reelNumber: 6747
+            frameNumber: "0302"
+            assignorExecutionDate: 09/17/2019
+            correspondentName: ALEXANDRA H. BISTLINE
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BARTLETT, RENEE
+              executionDate: 09/17/2019
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 86804441
+              currentOwner: NIKE, INC.
+              mark: SPACEHIPPY
+              applicationFilingDate: 10/30/2015
+              internationalRegistrationNumber: null
+              registrationDate: 06/14/2016
+              registrationNumber: 4978097
+              registrantName: null
+          - reelNumber: 6177
+            frameNumber: "0387"
+            assignorExecutionDate: 09/14/2017
+            correspondentName: HELEN HILL MINSKER
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: ECOMMERCE CENTRAL LLC
+              executionDate: 09/14/2017
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 86695746
+              currentOwner: NIKE, INC.
+              mark: METCON
+              applicationFilingDate: 07/16/2015
+              internationalRegistrationNumber: null
+              registrationDate: 06/14/2016
+              registrationNumber: 4980107
+              registrantName: null
+          - reelNumber: 6293
+            frameNumber: "0372"
+            assignorExecutionDate: 02/15/2017
+            correspondentName: MEG AUGUSTINE
+            conveyance: BANKRUPTCY
+            conveyanceCode: 40
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: LUKE'S LOCKER INCORPORATED
+              executionDate: 02/15/2017
+            assignees:
+            - NIKE USA, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 76689139
+              currentOwner: LOCKER HOLDINGS, LLC
+              mark: LUKE S LOCKER
+              applicationFilingDate: 04/30/2008
+              internationalRegistrationNumber: null
+              registrationDate: 06/16/2009
+              registrationNumber: 3637177
+              registrantName: null
+          - reelNumber: 5692
+            frameNumber: "0333"
+            assignorExecutionDate: 12/15/2015
+            correspondentName: JASON ZEDECK
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: AMUSEMENT PARK ENTERTAINMENT, LLC
+              executionDate: 12/15/2015
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 85614687
+              currentOwner: NIKE, INC.
+              mark: DOS ANGELES
+              applicationFilingDate: 05/02/2012
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 5502
+            frameNumber: "0569"
+            assignorExecutionDate: 04/09/2015
+            correspondentName: NIKE, INC.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: RAISE THE BAR, INC.
+              executionDate: 04/09/2015
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 86062328
+              currentOwner: NIKE, INC.
+              mark: YOU ARE AN ATHLETE. TRAIN LIKE ONE.
+              applicationFilingDate: 09/12/2013
+              internationalRegistrationNumber: null
+              registrationDate: 05/20/2014
+              registrationNumber: 4532872
+              registrantName: null
+          - reelNumber: 5344
+            frameNumber: "0925"
+            assignorExecutionDate: 07/10/2014
+            correspondentName: NIKE, INC.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: GOLF GALAXY GOLFWORKS, INC.
+              executionDate: 07/10/2014
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 77978625
+              currentOwner: NIKE, INC.
+              mark: N-GAGE
+              applicationFilingDate: 02/13/2008
+              internationalRegistrationNumber: null
+              registrationDate: 04/27/2010
+              registrationNumber: 3782716
+              registrantName: null
+          - reelNumber: 5261
+            frameNumber: "0949"
+            assignorExecutionDate: 04/15/2014
+            correspondentName: VIRGINIA F. MANN
+            conveyance: "RELEASE OF SECURITY INTEREST ON TRADEMARKS RECORDED AT R/F: 3867/454, 3867/445, 4536/627,5021/167, 4536/613, 3763/319, 4220/497, 4536/620, 4889/485, 4891/180"
+            conveyanceCode: 40
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: GENERAL ELECTRIC CAPITAL CORPORATION
+              executionDate: 04/15/2014
+            - assignorName: GE CANADA FINANCE HOLDING COMPANY
+              executionDate: 04/15/2014
+            assignees:
+            - NIKE BAUER HOCKEY U.S.A., INC.
+            noOfProperties: 95
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78783060
+              currentOwner: Mission I-Tech Hockey Ltd.
+              mark: ITECH THE FACE OF HOCKEY
+              applicationFilingDate: 12/30/2005
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 5173
+            frameNumber: "0717"
+            assignorExecutionDate: 12/11/2013
+            correspondentName: KRISTEN K. DOWNER
+            conveyance: NUNC PRO TUNC ASSIGNMENT EFFECTIVE 06/10/2002
+            conveyanceCode: 34
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE USA, INC.
+              executionDate: 12/11/2013
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75854397
+              currentOwner: NIKE, INC.
+              mark: SPL28
+              applicationFilingDate: 11/22/1999
+              internationalRegistrationNumber: null
+              registrationDate: 07/09/2002
+              registrationNumber: 2592297
+              registrantName: null
+          - reelNumber: 5087
+            frameNumber: "0323"
+            assignorExecutionDate: 06/03/2013
+            correspondentName: JAIME M. LEMONS
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: GPCG. LLC
+              executionDate: 06/03/2013
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 77613031
+              currentOwner: NIKE, INC.
+              mark: MAKE IT COUNT
+              applicationFilingDate: 11/12/2008
+              internationalRegistrationNumber: null
+              registrationDate: 03/09/2010
+              registrationNumber: 3758827
+              registrantName: null
+          - reelNumber: 4489
+            frameNumber: "0369"
+            assignorExecutionDate: 12/16/2010
+            correspondentName: JAIME M. LEMONS
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: VINSON, MELVIN L, JR
+              executionDate: 12/16/2010
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 3
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 76499643
+              currentOwner: NIKE, INC.
+              mark: >-
+                MELO KATS/ALWAYS BALLIN GEAR MELO JEANS MELO GEAR MELO WEAR MELO KATS ALL ARE
+                LOGO'S FOR ONE CLOTHING LINE
+              applicationFilingDate: 03/21/2003
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 4250
+            frameNumber: "0800"
+            assignorExecutionDate: 05/25/2010
+            correspondentName: NIKE GLOBAL SERVICES PTE. LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: UMBRO INTERNATIONAL LIMITED
+              executionDate: 05/25/2010
+            assignees:
+            - NIKE GLOBAL SERVICES PTE. LTD.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 79048423
+              currentOwner: Umbro IP Holdings LLC
+              mark: null
+              applicationFilingDate: 11/05/2007
+              internationalRegistrationNumber: "0949325"
+              registrationDate: 09/23/2008
+              registrationNumber: 3505613
+              registrantName: null
+          - reelNumber: 4250
+            frameNumber: "0798"
+            assignorExecutionDate: 05/25/2010
+            correspondentName: NIKE GLOBAL SERVICES PTE. LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: UMBRO INTERNATIONAL LIMITED
+              executionDate: 05/25/2010
+            assignees:
+            - NIKE GLOBAL SERVICES PTE. LTD.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 79047817
+              currentOwner: Umbro IP Holdings LLC
+              mark: UMBRO
+              applicationFilingDate: 11/05/2007
+              internationalRegistrationNumber: "0947709"
+              registrationDate: 09/23/2008
+              registrationNumber: 3505607
+              registrantName: null
+          - reelNumber: 4250
+            frameNumber: "0796"
+            assignorExecutionDate: 05/25/2010
+            correspondentName: NIKE GLOBAL SERVICES PTE. LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: UMBRO INTERNATIONAL LIMITED
+              executionDate: 05/25/2010
+            assignees:
+            - NIKE GLOBAL SERVICES PTE. LTD.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 79044312
+              currentOwner: Iconix Luxembourg Holdings SARL
+              mark: SX
+              applicationFilingDate: 09/14/2007
+              internationalRegistrationNumber: "0938740"
+              registrationDate: 07/08/2008
+              registrationNumber: 3462679
+              registrantName: null
+          - reelNumber: 4250
+            frameNumber: "0794"
+            assignorExecutionDate: 05/25/2010
+            correspondentName: NIKE GLOBAL SERVICES PTE. LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: UMBRO INTERNATIONAL LIMITED
+              executionDate: 05/25/2010
+            assignees:
+            - NIKE GLOBAL SERVICES PTE. LTD.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 79043023
+              currentOwner: Umbro IP Holdings LLC
+              mark: PRO UMBRO
+              applicationFilingDate: 07/30/2007
+              internationalRegistrationNumber: "0935500"
+              registrationDate: 07/01/2008
+              registrationNumber: 3458405
+              registrantName: null
+          - reelNumber: 4250
+            frameNumber: "0792"
+            assignorExecutionDate: 05/25/2010
+            correspondentName: NIKE GLOBAL SERVICES PTE. LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: UMBRO INTERNATIONAL LIMITED
+              executionDate: 05/25/2010
+            assignees:
+            - NIKE GLOBAL SERVICES PTE. LTD.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 79007816
+              currentOwner: Umbro IP Holdings LLC
+              mark: null
+              applicationFilingDate: 06/14/2004
+              internationalRegistrationNumber: "0840265"
+              registrationDate: 07/11/2006
+              registrationNumber: 3114430
+              registrantName: null
+          - reelNumber: 4161
+            frameNumber: "0882"
+            assignorExecutionDate: 01/25/2010
+            correspondentName: ALLEMAN HALL MCCOY RUSSELL & TUTTLE LLP
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: UMBRO INTERNATIONAL LIMITED
+              executionDate: 01/25/2010
+            assignees:
+            - NIKE GLOBAL SERVICES PTE. LTD.
+            noOfProperties: 10
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 77565637
+              currentOwner: UMBRO IP HOLDINGS LLC
+              mark: UMBRO SPECIALI
+              applicationFilingDate: 09/09/2008
+              internationalRegistrationNumber: null
+              registrationDate: 06/29/2010
+              registrationNumber: 3808968
+              registrantName: null
+          - reelNumber: 4051
+            frameNumber: "0176"
+            assignorExecutionDate: 07/17/2009
+            correspondentName: NIKE INTERNATIONAL LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: SPARQ, INC.
+              executionDate: 07/17/2009
+            assignees:
+            - NIKE INTERNATIONAL LTD.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 79015449
+              currentOwner: Nike International Ltd.
+              mark: SPARQ
+              applicationFilingDate: 02/25/2005
+              internationalRegistrationNumber: "0862494"
+              registrationDate: 11/11/2008
+              registrationNumber: 3531097
+              registrantName: null
+          - reelNumber: 4017
+            frameNumber: "0174"
+            assignorExecutionDate: 07/02/2009
+            correspondentName: JAIME M. SCHWARTZ
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: SPARQ, INC.
+              executionDate: 07/02/2009
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78758608
+              currentOwner: BC Sports, Inc.
+              mark: SPARQ
+              applicationFilingDate: 11/21/2005
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 3974
+            frameNumber: "0467"
+            assignorExecutionDate: 01/08/2009
+            correspondentName: JOSEPH QUIGLEY
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: SPARQ, INC.
+              executionDate: 01/08/2009
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 3
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78332147
+              currentOwner: NIKE, INC.
+              mark: SPARQ
+              applicationFilingDate: 11/24/2003
+              internationalRegistrationNumber: null
+              registrationDate: 03/01/2005
+              registrationNumber: 2928815
+              registrantName: null
+          - reelNumber: 3960
+            frameNumber: "0702"
+            assignorExecutionDate: 01/08/2009
+            correspondentName: JOSEPH QUIGLEY
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: SPARQ, INC.
+              executionDate: 01/08/2009
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78787501
+              currentOwner: NIKE, INC.
+              mark: SPARQ
+              applicationFilingDate: 01/09/2006
+              internationalRegistrationNumber: null
+              registrationDate: 03/10/2009
+              registrationNumber: 3589078
+              registrantName: null
+          - reelNumber: 3845
+            frameNumber: "0643"
+            assignorExecutionDate: 06/27/2008
+            correspondentName: NIKE, INC.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: 3 FOR ALL PARTNERS, LLC
+              executionDate: 06/27/2008
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 4
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78882832
+              currentOwner: NIKE, INC.
+              mark: RUNNERS' STATION
+              applicationFilingDate: 05/12/2006
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 3776
+            frameNumber: "0250"
+            assignorExecutionDate: 04/16/2008
+            correspondentName: CAROLE DOBBINS C/O KATTEN MUCHIN
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE, INC.
+              executionDate: 04/16/2008
+            assignees:
+            - NIKE BAUER HOCKEY U.S.A., INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73721018
+              currentOwner: NIKE, INC.
+              mark: HOCKEY LOCKER
+              applicationFilingDate: 04/07/1988
+              internationalRegistrationNumber: null
+              registrationDate: 03/13/1990
+              registrationNumber: 1586763
+              registrantName: null
+          - reelNumber: 3776
+            frameNumber: "0133"
+            assignorExecutionDate: 04/16/2008
+            correspondentName: CAROLE DOBBINS C/O KATTEN MUCHIN
+            conveyance: >-
+              CORRECTIVE ASSIGNMENT TO CORRECT THE TRADEMARK SERIAL NOS. BEING ASSIGNED.
+              SERIAL NO. 73271018 IS NOT ASSIGNED.  SERIAL NO. 73721018 IS ASSIGNED PER THE
+              ASSIGNMENT PREVIOUSLY RECORDED ON  REEL 003763 FRAME 0303. ASSIGNOR(S) HEREBY CONFIRMS
+              THE ASSIGNMENT OF THE ENTIRE INTEREST AND GOODWILL OF ALL OF THE TRADEMARKS LISTED
+              IN THE TRADEMARK ASSIGNMENT..
+            conveyanceCode: 40
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE, INC.
+              executionDate: 04/16/2008
+            assignees:
+            - NIKE BAUER HOCKEY U.S.A., INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73271018
+              currentOwner: NIKE BAUER HOCKEY U.S.A., INC.
+              mark: WEATHER TIGHT
+              applicationFilingDate: 07/21/1980
+              internationalRegistrationNumber: null
+              registrationDate: 11/10/1981
+              registrationNumber: 1177227
+              registrantName: null
+          - reelNumber: 3763
+            frameNumber: "0303"
+            assignorExecutionDate: 04/16/2008
+            correspondentName: CAROLE DOBBINS C/O KATTEN MUCHIN
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE, INC.
+              executionDate: 04/16/2008
+            assignees:
+            - NIKE BAUER HOCKEY U.S.A., INC.
+            noOfProperties: 34
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75101855
+              currentOwner: BAUER HOCKEY, LLC
+              mark: BAUER
+              applicationFilingDate: 05/09/1996
+              internationalRegistrationNumber: null
+              registrationDate: 06/17/2014
+              registrationNumber: 4551961
+              registrantName: null
+          - reelNumber: 3749
+            frameNumber: "0980"
+            assignorExecutionDate: 03/28/2008
+            correspondentName: CHRISTIE BATY HEINZE
+            conveyance: >-
+              CORRECTIVE ASSIGNMENT TO CORRECT THE CONVEYING PARTY'S NAME IN THE NUNC PRO
+              TUNC ASSIGNMENT PREVIOUSLY RECORDED ON  REEL 003720 FRAME 0244. ASSIGNOR(S) HEREBY
+              CONFIRMS THE ASSIGNMENT TO NIKE, INC. AS OF NOVEMBER 1, 2002.
+            conveyanceCode: 40
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE BAUER HOCKEY CORP.
+              executionDate: 03/28/2008
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75881485
+              currentOwner: BAUER HOCKEY, LLC
+              mark: null
+              applicationFilingDate: 12/28/1999
+              internationalRegistrationNumber: null
+              registrationDate: 03/26/2002
+              registrationNumber: 2551672
+              registrantName: null
+          - reelNumber: 3720
+            frameNumber: "0244"
+            assignorExecutionDate: 02/02/2008
+            correspondentName: CHRISTIE BATY HEINZE
+            conveyance: NUNC PRO TUNC ASSIGNMENT EFFECTIVE 11012002
+            conveyanceCode: 34
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER NIKE HOCKEY INC.
+              executionDate: 02/02/2008
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75881485
+              currentOwner: BAUER HOCKEY, LLC
+              mark: null
+              applicationFilingDate: 12/28/1999
+              internationalRegistrationNumber: null
+              registrationDate: 03/26/2002
+              registrationNumber: 2551672
+              registrantName: null
+          - reelNumber: 3740
+            frameNumber: "0842"
+            assignorExecutionDate: 06/30/2007
+            correspondentName: CHRISTIE BATY HEINZE
+            conveyance: MERGER EFFECTIVE 06302007
+            conveyanceCode: 28
+            domesticRepresentative: FINNEGAN, HENDERSON, FARABOW, ET AL.
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: 3218080 NOVA SCOTIA LIMITED
+              executionDate: 06/30/2007
+            - assignorName: NIKE BAUER HOCKEY INC.
+              executionDate: 06/30/2007
+            assignees:
+            - NIKE BAUER HOCKEY CORP.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75881485
+              currentOwner: BAUER HOCKEY, LLC
+              mark: null
+              applicationFilingDate: 12/28/1999
+              internationalRegistrationNumber: null
+              registrationDate: 03/26/2002
+              registrationNumber: 2551672
+              registrantName: null
+          - reelNumber: 3615
+            frameNumber: "0711"
+            assignorExecutionDate: 06/20/2007
+            correspondentName: RICHARD L. KIRKPATRICK
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: DL SPORTS & MARKETING LTDA
+              executionDate: 06/20/2007
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 12
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78921232
+              currentOwner: NIKE, INC.
+              mark: R 10
+              applicationFilingDate: 06/30/2006
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 3740
+            frameNumber: "0836"
+            assignorExecutionDate: 06/19/2007
+            correspondentName: CHRISTIE BATY HEINZE
+            conveyance: CONTINUANCE
+            conveyanceCode: 40
+            domesticRepresentative: FINNEGAN, HENDERSON, FARABOW, ET AL.
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE BAUER HOCKEY INC.
+              executionDate: 06/19/2007
+            assignees:
+            - NIKE BAUER HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75881485
+              currentOwner: BAUER HOCKEY, LLC
+              mark: null
+              applicationFilingDate: 12/28/1999
+              internationalRegistrationNumber: null
+              registrationDate: 03/26/2002
+              registrationNumber: 2551672
+              registrantName: null
+          - reelNumber: 3399
+            frameNumber: "0652"
+            assignorExecutionDate: 09/01/2006
+            correspondentName: KEITH W. MEDANSKY
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: LANDSHIRE, INC.
+              executionDate: 09/01/2006
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78248500
+              currentOwner: NIKE, INC.
+              mark: NIKE
+              applicationFilingDate: 05/12/2003
+              internationalRegistrationNumber: null
+              registrationDate: 11/07/2006
+              registrationNumber: 3167342
+              registrantName: null
+          - reelNumber: 3510
+            frameNumber: "0458"
+            assignorExecutionDate: 06/29/2006
+            correspondentName: KEITH W. MEDANSKY
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BOOTH, DAVID LAMAR
+              executionDate: 06/29/2006
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78079889
+              currentOwner: NIKE, INC.
+              mark: KINGS OF THE COURT
+              applicationFilingDate: 08/17/2001
+              internationalRegistrationNumber: null
+              registrationDate: 10/22/2002
+              registrationNumber: 2639721
+              registrantName: null
+          - reelNumber: 3285
+            frameNumber: "0543"
+            assignorExecutionDate: 04/10/2006
+            correspondentName: MARGO S. FOWLER
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: MAXIMUM PERFORMANCE, INC.
+              executionDate: 04/10/2006
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74480193
+              currentOwner: NIKE, INC.
+              mark: STROBESPEX
+              applicationFilingDate: 01/14/1994
+              internationalRegistrationNumber: null
+              registrationDate: 10/10/1995
+              registrationNumber: 1926334
+              registrantName: null
+          - reelNumber: 3740
+            frameNumber: "0839"
+            assignorExecutionDate: 01/25/2006
+            correspondentName: CHRISTIE BATY HEINZE
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: FINNEGAN, HENDERSON, FARABOW, ET AL.
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER NIKE HOCKEY INC.
+              executionDate: 01/25/2006
+            assignees:
+            - NIKE BAUER HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75881485
+              currentOwner: BAUER HOCKEY, LLC
+              mark: null
+              applicationFilingDate: 12/28/1999
+              internationalRegistrationNumber: null
+              registrationDate: 03/26/2002
+              registrationNumber: 2551672
+              registrantName: null
+          - reelNumber: 3247
+            frameNumber: "0935"
+            assignorExecutionDate: 01/17/2006
+            correspondentName: PHILIP M. DAVISON
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: FOOT LOCKER RETAIL, INC.
+              executionDate: 01/17/2006
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 78153636
+              currentOwner: NIKE, INC.
+              mark: HOUSE OF HOOPS
+              applicationFilingDate: 08/13/2002
+              internationalRegistrationNumber: null
+              registrationDate: 10/11/2005
+              registrationNumber: 3006345
+              registrantName: null
+          - reelNumber: 3131
+            frameNumber: "0641"
+            assignorExecutionDate: 05/31/2005
+            correspondentName: SARAH OTTE GRABER
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: OFFICIAL STARTER LLC
+              executionDate: 05/31/2005
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 71
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 76594828
+              currentOwner: NIKE, INC.
+              mark: 23:12
+              applicationFilingDate: 06/01/2004
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 2679
+            frameNumber: "0964"
+            assignorExecutionDate: 02/12/2003
+            correspondentName: NIKE, INC.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: MASTERGRIP, INC.
+              executionDate: 02/12/2003
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74302626
+              currentOwner: NIKE, INC.
+              mark: SLING SHOT
+              applicationFilingDate: 08/10/1992
+              internationalRegistrationNumber: null
+              registrationDate: 11/30/1993
+              registrationNumber: 1808554
+              registrantName: null
+          - reelNumber: 3207
+            frameNumber: "0854"
+            assignorExecutionDate: 11/01/2002
+            correspondentName: CHRISTIE BATY HEINZE
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER  NIKE HOCKEY INC.
+              executionDate: 11/01/2002
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 35
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75163780
+              currentOwner: NIKE, INC.
+              mark: B BAUER
+              applicationFilingDate: 09/10/1996
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 2576
+            frameNumber: "0789"
+            assignorExecutionDate: 05/09/2002
+            correspondentName: NIKE, INC.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: CLOSSON, ADDISON W.
+              executionDate: 05/09/2002
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75341489
+              currentOwner: Closson, Addison W.
+              mark: PRESTOE
+              applicationFilingDate: 08/15/1997
+              internationalRegistrationNumber: null
+              registrationDate: 10/20/1998
+              registrationNumber: 2197949
+              registrantName: null
+          - reelNumber: 2576
+            frameNumber: "0791"
+            assignorExecutionDate: 05/07/2002
+            correspondentName: NIKE, INC.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: JORDAN, MICHAEL
+              executionDate: 05/07/2002
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73197202
+              currentOwner: PANAJE, INC.
+              mark: MICHAEL JORDAN
+              applicationFilingDate: 12/18/1978
+              internationalRegistrationNumber: null
+              registrationDate: 04/28/1981
+              registrationNumber: 1152497
+              registrantName: null
+          - reelNumber: 2420
+            frameNumber: "0503"
+            assignorExecutionDate: 08/28/2001
+            correspondentName: SHAWPITTMAN LLP
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: KELLY PIONEER GROUP
+              executionDate: 08/28/2001
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74518060
+              currentOwner: NIKE, INC.
+              mark: PRESTO
+              applicationFilingDate: 04/28/1994
+              internationalRegistrationNumber: null
+              registrationDate: 12/31/1996
+              registrationNumber: 2027449
+              registrantName: null
+          - reelNumber: 2520
+            frameNumber: "0816"
+            assignorExecutionDate: 05/31/2001
+            correspondentName: SHAWPITTMAN LLP
+            conveyance: MERGER
+            conveyanceCode: 28
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE TEAM SPORTS, INC.
+              executionDate: 05/31/2001
+            assignees:
+            - NIKE USA, INC.
+            noOfProperties: 9
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75854397
+              currentOwner: NIKE, INC.
+              mark: SPL28
+              applicationFilingDate: 11/22/1999
+              internationalRegistrationNumber: null
+              registrationDate: 07/09/2002
+              registrationNumber: 2592297
+              registrantName: null
+          - reelNumber: 2512
+            frameNumber: "0453"
+            assignorExecutionDate: 01/28/1999
+            correspondentName: SHAWPITTMAN LLP
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: SPORT SPECIALTIES CORPORATION
+              executionDate: 01/28/1999
+            assignees:
+            - NIKE TEAM SPORTS, INC.
+            noOfProperties: 9
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75854397
+              currentOwner: NIKE, INC.
+              mark: SPL28
+              applicationFilingDate: 11/22/1999
+              internationalRegistrationNumber: null
+              registrationDate: 07/09/2002
+              registrationNumber: 2592297
+              registrantName: null
+          - reelNumber: 3758
+            frameNumber: "0061"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: CHRISTIE BATY HEINZE
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73721018
+              currentOwner: NIKE, INC.
+              mark: HOCKEY LOCKER
+              applicationFilingDate: 04/07/1988
+              internationalRegistrationNumber: null
+              registrationDate: 03/13/1990
+              registrationNumber: 1586763
+              registrantName: null
+          - reelNumber: 2785
+            frameNumber: "0267"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: CHRISTIE BATY HEINZE
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 18
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75163778
+              currentOwner: NIKE, INC.
+              mark: B BAUER
+              applicationFilingDate: 09/10/1996
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 2770
+            frameNumber: "0274"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW ET AL.
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75216268
+              currentOwner: NIKE, INC.
+              mark: IMPACT
+              applicationFilingDate: 12/20/1996
+              internationalRegistrationNumber: null
+              registrationDate: 10/21/2003
+              registrationNumber: 2775902
+              registrantName: null
+          - reelNumber: 2570
+            frameNumber: "0562"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW & ET AL.
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 2
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75163780
+              currentOwner: NIKE, INC.
+              mark: B BAUER
+              applicationFilingDate: 09/10/1996
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 2472
+            frameNumber: "0308"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW ET AL.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73641056
+              currentOwner: BAUER HOCKEY, LLC
+              mark: TUUK
+              applicationFilingDate: 01/23/1987
+              internationalRegistrationNumber: null
+              registrationDate: 12/01/1987
+              registrationNumber: 1467513
+              registrantName: null
+          - reelNumber: 2441
+            frameNumber: "0320"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW, ET AL
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73118104
+              currentOwner: BAUER NIKE HOCKEY INC.
+              mark: MICRON
+              applicationFilingDate: 03/07/1977
+              internationalRegistrationNumber: null
+              registrationDate: 04/21/1981
+              registrationNumber: 1151769
+              registrantName: null
+          - reelNumber: 2128
+            frameNumber: "0723"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW, GARRETT &
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75101852
+              currentOwner: NIKE, INC.
+              mark: null
+              applicationFilingDate: 05/09/1996
+              internationalRegistrationNumber: null
+              registrationDate: 08/14/2001
+              registrationNumber: 2476882
+              registrantName: null
+          - reelNumber: 2123
+            frameNumber: "0459"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW, ET AL.
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75216264
+              currentOwner: BAUER NIKE HOCKEY INC.
+              mark: AUTHENTIC AND PROUD
+              applicationFilingDate: 12/20/1996
+              internationalRegistrationNumber: null
+              registrationDate: 12/25/2001
+              registrationNumber: 2521447
+              registrantName: null
+          - reelNumber: 2106
+            frameNumber: "0112"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON ET AL.
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75029489
+              currentOwner: NIKE, INC.
+              mark: VELOCITY
+              applicationFilingDate: 12/07/1995
+              internationalRegistrationNumber: null
+              registrationDate: 02/27/2001
+              registrationNumber: 2430589
+              registrantName: null
+          - reelNumber: 2053
+            frameNumber: "0422"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW, ET AL
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75352837
+              currentOwner: NIKE, INC.
+              mark: VAPOR
+              applicationFilingDate: 09/08/1997
+              internationalRegistrationNumber: null
+              registrationDate: 03/13/2001
+              registrationNumber: 2434459
+              registrantName: null
+          - reelNumber: 2024
+            frameNumber: "0457"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW ET AL.
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 2
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75216262
+              currentOwner: NIKE, INC.
+              mark: STYLE & INSTINCT
+              applicationFilingDate: 12/20/1996
+              internationalRegistrationNumber: null
+              registrationDate: 10/30/2001
+              registrationNumber: 2501163
+              registrantName: null
+          - reelNumber: 2004
+            frameNumber: "0788"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW ET AL
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER, INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74656146
+              currentOwner: LES VETEMENTS S P INC.
+              mark: FLO KNIT
+              applicationFilingDate: 04/05/1995
+              internationalRegistrationNumber: null
+              registrationDate: 01/29/2002
+              registrationNumber: 2534348
+              registrantName: null
+          - reelNumber: 1986
+            frameNumber: "0593"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW, ET AL.
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74479168
+              currentOwner: NIKE BAUER HOCKEY U.S.A., INC.
+              mark: REACTOR
+              applicationFilingDate: 01/13/1994
+              internationalRegistrationNumber: null
+              registrationDate: 02/27/2001
+              registrationNumber: 2431885
+              registrantName: null
+          - reelNumber: 1935
+            frameNumber: "0599"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: RADER, FISHMAN & GRAUER
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75216265
+              currentOwner: TSA CORPORATE SERVICES, INC.
+              mark: POWER & AUTHORITY
+              applicationFilingDate: 12/20/1996
+              internationalRegistrationNumber: null
+              registrationDate: 10/05/1999
+              registrationNumber: 2282414
+              registrantName: null
+          - reelNumber: 1929
+            frameNumber: "0917"
+            assignorExecutionDate: 12/01/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW, ET AL.
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 12/01/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75101853
+              currentOwner: BAUER HOCKEY, LLC
+              mark: SUPREME
+              applicationFilingDate: 05/09/1996
+              internationalRegistrationNumber: null
+              registrationDate: 08/01/2000
+              registrationNumber: 2373125
+              registrantName: null
+          - reelNumber: 2243
+            frameNumber: "0902"
+            assignorExecutionDate: 11/17/1998
+            correspondentName: FINNEGAN, HENDERSON, FARABOW, GARRETT &
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BAUER INC.
+              executionDate: 11/17/1998
+            assignees:
+            - BAUER NIKE HOCKEY INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75163781
+              currentOwner: BAUER INC.
+              mark: LEAVE AN IMPRESSION
+              applicationFilingDate: 09/10/1996
+              internationalRegistrationNumber: null
+              registrationDate: ""
+              registrationNumber: null
+              registrantName: null
+          - reelNumber: 1842
+            frameNumber: "0724"
+            assignorExecutionDate: 05/20/1998
+            correspondentName: SHAW PITTMAN POTTS ET AL.
+            conveyance: NUNC PRO TUNC ASSIGNMENT
+            conveyanceCode: 34
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 05/20/1998
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74428751
+              currentOwner: Nike, Inc.
+              mark: NIKE
+              applicationFilingDate: 08/26/1993
+              internationalRegistrationNumber: null
+              registrationDate: 08/11/1998
+              registrationNumber: 2180866
+              registrantName: null
+          - reelNumber: 3726
+            frameNumber: "0188"
+            assignorExecutionDate: 05/20/1997
+            correspondentName: JOSEPH QUIGLEY
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 05/20/1997
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73714272
+              currentOwner: NIKE, INC.
+              mark: AIR MAX
+              applicationFilingDate: 03/01/1988
+              internationalRegistrationNumber: null
+              registrationDate: 10/11/1988
+              registrationNumber: 1508348
+              registrantName: null
+          - reelNumber: 1555
+            frameNumber: "0690"
+            assignorExecutionDate: 02/11/1997
+            correspondentName: JOANNE LUDOVICI-LINT, ESQ.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 02/11/1997
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74449158
+              currentOwner: BRS, Inc.
+              mark: CB 34
+              applicationFilingDate: 10/21/1993
+              internationalRegistrationNumber: null
+              registrationDate: 04/16/1996
+              registrationNumber: 1968792
+              registrantName: null
+          - reelNumber: 1542
+            frameNumber: "0052"
+            assignorExecutionDate: 12/30/1996
+            correspondentName: BANNER & WITCOFF
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 12/30/1996
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74384106
+              currentOwner: NIKE, INC
+              mark: NIKE
+              applicationFilingDate: 04/29/1993
+              internationalRegistrationNumber: null
+              registrationDate: 10/03/1995
+              registrationNumber: 1924353
+              registrantName: null
+          - reelNumber: 1842
+            frameNumber: "0715"
+            assignorExecutionDate: 11/22/1996
+            correspondentName: SHAW PITTMAN POTTS & TROWBRIDGE
+            conveyance: NUNC PRO TUNC ASSIGNMENT
+            conveyanceCode: 34
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 11/22/1996
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75975826
+              currentOwner: NIKE, INC.
+              mark: NIKE
+              applicationFilingDate: 08/26/1993
+              internationalRegistrationNumber: null
+              registrationDate: 10/07/1997
+              registrationNumber: 2104329
+              registrantName: null
+          - reelNumber: 1535
+            frameNumber: "0262"
+            assignorExecutionDate: 11/18/1996
+            correspondentName: BANNER & WITCOFF
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 11/18/1996
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74401913
+              currentOwner: BRS, Inc.
+              mark: null
+              applicationFilingDate: 06/15/1993
+              internationalRegistrationNumber: null
+              registrationDate: 09/03/1996
+              registrationNumber: 1998515
+              registrantName: null
+          - reelNumber: 1515
+            frameNumber: "0695"
+            assignorExecutionDate: 10/09/1996
+            correspondentName: BANNER & WITCOFF, LTD.
+            conveyance: ASSIGNMENT OF AN UNDIVIDED PART OF ASSIGNORS INTEREST
+            conveyanceCode: 23
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 10/09/1996
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74401914
+              currentOwner: NIKE, INC.
+              mark: NIKE REGRIND
+              applicationFilingDate: 06/15/1993
+              internationalRegistrationNumber: null
+              registrationDate: 12/10/1996
+              registrationNumber: 2022321
+              registrantName: null
+          - reelNumber: 1553
+            frameNumber: "0339"
+            assignorExecutionDate: 05/23/1996
+            correspondentName: BANNER & ALLEGRETTI, LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 05/23/1996
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 75975473
+              currentOwner: NIKE, INC.
+              mark: NIKE
+              applicationFilingDate: 08/26/1993
+              internationalRegistrationNumber: null
+              registrationDate: 12/17/1996
+              registrationNumber: 2024717
+              registrantName: null
+          - reelNumber: 1445
+            frameNumber: "0299"
+            assignorExecutionDate: 02/23/1996
+            correspondentName: BANNER & ALLEGRETTI, LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 02/23/1996
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74398767
+              currentOwner: NIKE, INC.
+              mark: TAILWIND
+              applicationFilingDate: 06/07/1993
+              internationalRegistrationNumber: null
+              registrationDate: 11/07/1995
+              registrationNumber: 1933600
+              registrantName: null
+          - reelNumber: 1493
+            frameNumber: "0159"
+            assignorExecutionDate: 01/18/1996
+            correspondentName: BANNER & ALLERGRETI, LTD
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 01/18/1996
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74446657
+              currentOwner: NIKE, INC.
+              mark: AIR MAX 2
+              applicationFilingDate: 10/13/1993
+              internationalRegistrationNumber: null
+              registrationDate: 04/22/1997
+              registrationNumber: 2055699
+              registrantName: null
+          - reelNumber: 1426
+            frameNumber: "0782"
+            assignorExecutionDate: 12/19/1995
+            correspondentName: BANNER & ALLEGRETTI, LTD.
+            conveyance: ASSIGNMENT OF AN UNDIVIDED PART OF ASSIGNORS INTEREST
+            conveyanceCode: 23
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 12/19/1995
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74384109
+              currentOwner: NIKE, INC.
+              mark: JUST DO IT
+              applicationFilingDate: 04/29/1993
+              internationalRegistrationNumber: null
+              registrationDate: 10/31/1995
+              registrationNumber: 1931937
+              registrantName: null
+          - reelNumber: 1417
+            frameNumber: "0917"
+            assignorExecutionDate: 11/27/1995
+            correspondentName: BANNER & ALLEGRETTI, LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 11/27/1995
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74434099
+              currentOwner: BRS, Inc.
+              mark: NIKE AEROBICS
+              applicationFilingDate: 09/10/1993
+              internationalRegistrationNumber: null
+              registrationDate: 08/15/1995
+              registrationNumber: 1911466
+              registrantName: null
+          - reelNumber: 1417
+            frameNumber: "0914"
+            assignorExecutionDate: 11/20/1995
+            correspondentName: BANNER & ALLEGRETTI, LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 11/20/1995
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74386739
+              currentOwner: NIKE , INC
+              mark: null
+              applicationFilingDate: 05/05/1993
+              internationalRegistrationNumber: null
+              registrationDate: 10/10/1995
+              registrationNumber: 1926168
+              registrantName: null
+          - reelNumber: 1601
+            frameNumber: "0190"
+            assignorExecutionDate: 09/20/1995
+            correspondentName: BANNER & ALLEGRETTI, LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 09/20/1995
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74449159
+              currentOwner: BRS, Inc.
+              mark: NIKE
+              applicationFilingDate: 10/21/1993
+              internationalRegistrationNumber: null
+              registrationDate: 01/30/1996
+              registrationNumber: 1953593
+              registrantName: null
+          - reelNumber: 1361
+            frameNumber: "0495"
+            assignorExecutionDate: 05/08/1995
+            correspondentName: KATHY J. MCKNIGHT
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 05/08/1995
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74384105
+              currentOwner: NIKE, INC.
+              mark: NIKE
+              applicationFilingDate: 04/29/1993
+              internationalRegistrationNumber: null
+              registrationDate: 12/06/1994
+              registrationNumber: 1866140
+              registrantName: null
+          - reelNumber: 1277
+            frameNumber: "0403"
+            assignorExecutionDate: 01/03/1995
+            correspondentName: BANNER, BIRCH, MCKIE & BECKETT
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 01/03/1995
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74444967
+              currentOwner: BRS, Inc.
+              mark: FORCE
+              applicationFilingDate: 10/07/1993
+              internationalRegistrationNumber: null
+              registrationDate: 04/18/1995
+              registrationNumber: 1889948
+              registrantName: null
+          - reelNumber: 1167
+            frameNumber: "0170"
+            assignorExecutionDate: 06/06/1994
+            correspondentName: BANNER, BIRCH, MCKIE & BECKETT
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 06/06/1994
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74000763
+              currentOwner: NIKE, INC.
+              mark: NIKE INTERNATIONAL
+              applicationFilingDate: 11/16/1989
+              internationalRegistrationNumber: null
+              registrationDate: 12/15/1992
+              registrationNumber: 1740436
+              registrantName: null
+          - reelNumber: 1159
+            frameNumber: "0220"
+            assignorExecutionDate: 05/27/1994
+            correspondentName: BANNER, BIRCH, MCKIE & BECKETT
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 05/27/1994
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 124
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74105421
+              currentOwner: Nike, Inc.
+              mark: "180"
+              applicationFilingDate: 10/12/1990
+              internationalRegistrationNumber: null
+              registrationDate: 10/13/1992
+              registrationNumber: 1724677
+              registrantName: null
+          - reelNumber: 1368
+            frameNumber: "0302"
+            assignorExecutionDate: 08/11/1993
+            correspondentName: ROYLANCE, ABRAMS, BERDO & GOODMAN
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE HYDRAULICS SWEDEN AKTIEBOLAG
+              executionDate: 08/11/1993
+            assignees:
+            - NIKE HYDRAULICS AKTIEBOLAG
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 72034404
+              currentOwner: REHOBOT HYDRAULICS AB
+              mark: NIKE
+              applicationFilingDate: 07/26/1957
+              internationalRegistrationNumber: null
+              registrationDate: 10/14/1958
+              registrationNumber: 668306
+              registrantName: null
+          - reelNumber: 1368
+            frameNumber: "0286"
+            assignorExecutionDate: 03/17/1993
+            correspondentName: GARRETT V. DAVIS, ESQ.
+            conveyance: BANKRUPTCY DEED OF TRANSFER
+            conveyanceCode: 40
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: NIKE AB
+              executionDate: 03/17/1993
+            assignees:
+            - NIKE HYDRAULICS SWEDEN AB
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 72034404
+              currentOwner: REHOBOT HYDRAULICS AB
+              mark: NIKE
+              applicationFilingDate: 07/26/1957
+              internationalRegistrationNumber: null
+              registrationDate: 10/14/1958
+              registrationNumber: 668306
+              registrantName: null
+          - reelNumber: 821
+            frameNumber: "0642"
+            assignorExecutionDate: 09/30/1991
+            correspondentName: BANNER, BIRCH, MCKIE & BECKETT
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: FLIGHT 23 BY JORDAN, INCORPORATED
+              executionDate: 09/30/1991
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 2
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 72046900
+              currentOwner: CLUETT, PEABODY & CO., INC.
+              mark: FLIGHT
+              applicationFilingDate: 03/03/1958
+              internationalRegistrationNumber: null
+              registrationDate: 12/23/1958
+              registrationNumber: 671593
+              registrantName: null
+          - reelNumber: 838
+            frameNumber: "0502"
+            assignorExecutionDate: 09/26/1991
+            correspondentName: MCANDREWS, HELD & MALLOY, LTD.
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: CLAYTON BROWN & ASSOCIATES, INC.
+              executionDate: 09/26/1991
+            assignees:
+            - NIKE FINANCIAL ADVISORY SERVICES L.P.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 74207630
+              currentOwner: FIRST TRUST PORTFOLIOS L.P.
+              mark: FIRST TRUST
+              applicationFilingDate: 09/27/1991
+              internationalRegistrationNumber: null
+              registrationDate: 08/25/1992
+              registrationNumber: 1710408
+              registrantName: null
+          - reelNumber: 1368
+            frameNumber: "0271"
+            assignorExecutionDate: 09/27/1990
+            correspondentName: GARRETT V. DAVIS, ESQ.
+            conveyance: CHANGE OF NAME
+            conveyanceCode: 33
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: AKTIEBOLAGET NIKE
+              executionDate: 09/27/1990
+            assignees:
+            - NIKE AKTIEBOLAG
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 72034404
+              currentOwner: REHOBOT HYDRAULICS AB
+              mark: NIKE
+              applicationFilingDate: 07/26/1957
+              internationalRegistrationNumber: null
+              registrationDate: 10/14/1958
+              registrationNumber: 668306
+              registrantName: null
+          - reelNumber: 734
+            frameNumber: "0542"
+            assignorExecutionDate: 08/31/1990
+            correspondentName: BANNER, BIRCH, MCKIE & BECKETT
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: OCEAN PACIFIC SUNWEAR, LTD.
+              executionDate: 08/31/1990
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 3
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73735066
+              currentOwner: OCEAN PACIFIC SUNWEAR, LTD.
+              mark: ONE EIGHTY SOUTH
+              applicationFilingDate: 06/20/1988
+              internationalRegistrationNumber: null
+              registrationDate: 04/10/1990
+              registrationNumber: 1590977
+              registrantName: null
+          - reelNumber: 696
+            frameNumber: "0951"
+            assignorExecutionDate: 02/21/1990
+            correspondentName: null
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: L. E. WILLIAMS ENTERPRISES, INC.
+              executionDate: 02/21/1990
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73723179
+              currentOwner: WILLIAMS, EMORY LAMARR
+              mark: FIT
+              applicationFilingDate: 04/18/1988
+              internationalRegistrationNumber: null
+              registrationDate: 10/31/1989
+              registrationNumber: 1563445
+              registrantName: null
+          - reelNumber: 642
+            frameNumber: "0622"
+            assignorExecutionDate: 02/08/1989
+            correspondentName: BANNER, BIRCH, MCKIE & BECKETT
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: FILOFIBRA, INCORPORATED
+              executionDate: 02/08/1989
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73539215
+              currentOwner: NIKE, INC.
+              mark: RELAY
+              applicationFilingDate: 05/23/1985
+              internationalRegistrationNumber: null
+              registrationDate: 01/06/1987
+              registrationNumber: 1423968
+              registrantName: null
+          - reelNumber: 1377
+            frameNumber: "0672"
+            assignorExecutionDate: 08/21/1986
+            correspondentName: GARRETT V. DAVIS, ESQ.
+            conveyance: ASSIGNS THE ENTIRE INTEREST
+            conveyanceCode: 22
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BT INDUSTRIES AKTIEBOLAG
+              executionDate: 08/21/1986
+            assignees:
+            - AB NIKE
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 72034404
+              currentOwner: REHOBOT HYDRAULICS AB
+              mark: NIKE
+              applicationFilingDate: 07/26/1957
+              internationalRegistrationNumber: null
+              registrationDate: 10/14/1958
+              registrationNumber: 668306
+              registrantName: null
+          - reelNumber: 422
+            frameNumber: "0627"
+            assignorExecutionDate: 01/19/1982
+            correspondentName: SCHUYLER, BANNER, ET AL.
+            conveyance: MERGER 19811231OR
+            conveyanceCode: 9
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: 01/19/1982
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 41
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 72414177
+              currentOwner: NIKE, INC.
+              mark: null
+              applicationFilingDate: 01/31/1972
+              internationalRegistrationNumber: null
+              registrationDate: 01/22/1974
+              registrationNumber: 977190
+              registrantName: null
+          - reelNumber: 253
+            frameNumber: "0766"
+            assignorExecutionDate: 03/11/1974
+            correspondentName: HASELTINE, LAKE & WATERS
+            conveyance: CHANGE OF NAME 19720921
+            conveyanceCode: 14
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: DOMKRAFTAKTIEBOLAGET NIKE
+              executionDate: 03/11/1974
+            assignees:
+            - AKTIEBOLAGET NIKE HYDRAULIK
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 72034404
+              currentOwner: REHOBOT HYDRAULICS AB
+              mark: NIKE
+              applicationFilingDate: 07/26/1957
+              internationalRegistrationNumber: null
+              registrationDate: 10/14/1958
+              registrationNumber: 668306
+              registrantName: null
+          - reelNumber: 348
+            frameNumber: "0317"
+            assignorExecutionDate: 01/16/1973
+            correspondentName: ERIC Y. MUNSON
+            conveyance: CHANGE OF NAME 19720921
+            conveyanceCode: 14
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: DOMKRAFTAKTIEBOLAGET NIKE
+              executionDate: 01/16/1973
+            assignees:
+            - AKTIEBOLAGET NIKE HYDRAULIK
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 72384625
+              currentOwner: DOMKRAFTAKTIEBOLAGET NIKE
+              mark: NIKE
+              applicationFilingDate: 02/23/1971
+              internationalRegistrationNumber: null
+              registrationDate: 08/14/1973
+              registrationNumber: 966001
+              registrantName: null
+          - reelNumber: 587
+            frameNumber: "0259"
+            assignorExecutionDate: ""
+            correspondentName: BANNER BIRCH, MCKIE ET AL.
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: WILCO INDUSTRIES (USA) INC.
+              executionDate: ""
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73510245
+              currentOwner: WILCO INDUSTRIES U.S.A. INC.
+              mark: I.E.
+              applicationFilingDate: 11/23/1984
+              internationalRegistrationNumber: null
+              registrationDate: 08/13/1985
+              registrationNumber: 1354328
+              registrantName: null
+          - reelNumber: 521
+            frameNumber: "0253"
+            assignorExecutionDate: ""
+            correspondentName: BANNER, BIRCH, ET AL.
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: LUCKY COMPANY, THE
+              executionDate: ""
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73187187
+              currentOwner: LUCKY COMPANY, THE
+              mark: MAKO SPORT SPEED STRENGTH
+              applicationFilingDate: 09/27/1978
+              internationalRegistrationNumber: null
+              registrationDate: 04/08/1980
+              registrationNumber: 1132755
+              registrantName: null
+          - reelNumber: 442
+            frameNumber: "0905"
+            assignorExecutionDate: ""
+            correspondentName: SCHUYLER, BANNER, ET AL.
+            conveyance: ASSIGNS THE ENTIRE INTEREST AND THE GOODWILL
+            conveyanceCode: 1
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: RUDY, MARION F.
+              executionDate: ""
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73172398
+              currentOwner: NIKE, INC.
+              mark: AIR-SOLE
+              applicationFilingDate: 05/30/1978
+              internationalRegistrationNumber: null
+              registrationDate: 01/13/1981
+              registrationNumber: 1145812
+              registrantName: null
+          - reelNumber: 422
+            frameNumber: F627
+            assignorExecutionDate: ""
+            correspondentName: SCHUYLER, BANNER, ET AL
+            conveyance: MERGER 19811231OR
+            conveyanceCode: 9
+            domesticRepresentative: ""
+            deleteStatusIndicator: false
+            assignors:
+            - assignorName: BRS, INC.
+              executionDate: ""
+            assignees:
+            - NIKE, INC.
+            noOfProperties: 1
+            properties:
+            - sequenceNumber: 1
+              serialNumber: 73304174
+              currentOwner: Nike, Inc.
+              mark: null
+              applicationFilingDate: 04/03/1981
+              internationalRegistrationNumber: null
+              registrationDate: 01/17/1984
+              registrationNumber: 1264529
+              registrantName: null
+          totalRows: 99
+          backendPagination: false
+          filteredRowsCount: 0
+          message: null
+  recorded_at: 2026-10-20T16:39:57.542Z

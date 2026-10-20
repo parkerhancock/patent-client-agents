@@ -1,0 +1,34 @@
+{
+  "title": "USPTO Data Set API",
+  "info_version": "1.0.0",
+  "openapi": "3.0.1",
+  "source_url": "https://data.uspto.gov/swagger/oa-rejections.yaml",
+  "retrieved_at": "2026-10-20",
+  "archive": "oa-rejections-2026-10-20.yaml",
+  "size_bytes": 5466,
+  "sha256": "028af96714af6d30392be0bc8b830d4618ec86d70fa9d3463efad38401acf5c9",
+  "source_kind": "Official Swagger UI source-link plain click in Chrome; copied original download bytes",
+  "schema_verified": true,
+  "live_behavior_verified": false,
+  "operation_count": 2,
+  "path_count": 2,
+  "schema_count": 0,
+  "unique_ref_count": 0,
+  "unresolved_refs": [],
+  "external_refs": [],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/oa/oa_rejections/v2/fields",
+      "operation_id": "list-searchable-fields",
+      "summary": "Provides the general information about the API and the list of fields that can be used to query the dataset."
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/oa/oa_rejections/v2/records",
+      "operation_id": "perform-search",
+      "summary": "Provides search capability for the data set with the given search criteria."
+    }
+  ],
+  "schema_names": []
+}

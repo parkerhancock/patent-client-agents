@@ -1,0 +1,2077 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/download/applications/14412875/LAQYXZN3XBLUEX4.pdf
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 302
+    headers:
+      cache-control:
+      - no-store, no-cache
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:40:19 GMT
+      location:
+      - >-
+        https://data-documents.uspto.gov/redirect/download/applications/14412875/LAQYXZN3XBLUEX4.pdf?redirect_request_id=5c92132f-6561-443f-8e9b-2f56686a68d9
+      x-amz-apigw-id:
+      - FjTqAFSnIAMFfCQ=
+      x-amzn-requestid:
+      - 5c92132f-6561-443f-8e9b-2f56686a68d9
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79972-3e1ee0b952ae86983e2fdfc2;Parent=42f106fb230a0210;Sampled=0;Lineage=2:e65dcd32:0
+    body:
+      type: json
+      content: "Please use redirect URL to download: https://data-documents.uspto.gov/redirect/download/applications/14412875/LAQYXZN3XBLUEX4.pdf?redirect_request_id=5c92132f-6561-443f-8e9b-2f56686a68d9. This URL is valid only for 30 seconds."
+  recorded_at: 2026-10-20T16:40:19.195Z
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/applications/14412875/documents
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - "*"
+      access-control-allow-methods:
+      - GET, OPTIONS
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:40:18 GMT
+      x-amz-apigw-id:
+      - FjTp5FSkIAMF8sg=
+      x-amzn-requestid:
+      - c1f56af0-f272-4c90-b582-9de77fb9b765
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79972-3ffce9d320aea6823a3eec0b;Parent=455f51fd707df6ff;Sampled=0;Lineage=2:27db1b9e:0
+    body:
+      type: json
+      content:
+        count: 184
+        documentBag:
+        - applicationNumberText: "14412875"
+          officialDate: 2022-11-22T10:54:42.000-0500
+          documentIdentifier: LAQYXZN3XBLUEX4
+          documentCode: N570
+          documentCodeDescriptionText: "Communication - Re:  Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/LAQYXZN3XBLUEX4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2022-11-22T10:54:39.000-0500
+          documentIdentifier: LAQYXX62XBLUEX4
+          documentCode: N570
+          documentCodeDescriptionText: "Communication - Re:  Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/LAQYXX62XBLUEX4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2022-11-15T20:37:33.000-0500
+          documentIdentifier: LAIZ4F3LGREENX2
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/LAIZ4F3LGREENX2.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2022-11-15T20:37:33.000-0500
+          documentIdentifier: LAIZ4F3MGREENX2
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/LAIZ4F3MGREENX2.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2022-11-15T20:37:33.000-0500
+          documentIdentifier: LAIZ4F3NGREENX2
+          documentCode: R3.73
+          documentCodeDescriptionText: Assignee showing of ownership per 37 CFR 3.73
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/LAIZ4F3NGREENX2.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2022-11-15T20:37:33.000-0500
+          documentIdentifier: LAIZ4F81GREENX5
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/LAIZ4F81GREENX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2022-11-15T20:37:33.000-0500
+          documentIdentifier: LAIZ4F82GREENX5
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/LAIZ4F82GREENX5.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2020-08-19T20:22:21.000-0400
+          documentIdentifier: KE228WM9RXEAPX1
+          documentCode: ISSUE.NTF
+          documentCodeDescriptionText: Issue Notification
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KE228WM9RXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-08-03T19:05:50.000-0400
+          documentIdentifier: KDF4GVODRXEAPX5
+          documentCode: SPEC
+          documentCodeDescriptionText: Specification
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KDF4GVODRXEAPX5.pdf
+            pageTotalQuantity: 1
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/KDF4GVODRXEAPX5/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:27:15.000-0400
+          documentIdentifier: KD4YPZETRXEAPX2
+          documentCode: SCORE
+          documentCodeDescriptionText: >-
+            Placeholder sheet indicating presence of supplemental content in Supplemental
+            Complex Repository for Examiners(SCORE)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD4YPZETRXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:01:39.000-0400
+          documentIdentifier: KD4XT21ZRXEAPX0
+          documentCode: A.NA
+          documentCodeDescriptionText: Amendment after Notice of Allowance (Rule 312)
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD4XT21ZRXEAPX0.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:01:39.000-0400
+          documentIdentifier: KD4XT222RXEAPX0
+          documentCode: DRW.NONBW
+          documentCodeDescriptionText: Drawings-other than black and white line drawings
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD4XT222RXEAPX0.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:01:39.000-0400
+          documentIdentifier: KD4XT2TORXEAPX2
+          documentCode: SES.LOSS
+          documentCodeDescriptionText: Notification of loss of entitlement to small entity status
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD4XT2TORXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:01:39.000-0400
+          documentIdentifier: KD4XT2TPRXEAPX2
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD4XT2TPRXEAPX2.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:01:39.000-0400
+          documentIdentifier: KD4XT2TQRXEAPX2
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD4XT2TQRXEAPX2.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:01:39.000-0400
+          documentIdentifier: KD4XT2TRRXEAPX2
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD4XT2TRRXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:01:39.000-0400
+          documentIdentifier: KD4XT2TSRXEAPX2
+          documentCode: IFEE
+          documentCodeDescriptionText: Issue Fee Payment (PTO-85B)
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD4XT2TSRXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T16:01:39.000-0400
+          documentIdentifier: KD6200J4LXEAPX2
+          documentCode: REM
+          documentCodeDescriptionText: Applicant Arguments/Remarks Made in an Amendment
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KD6200J4LXEAPX2.pdf
+            pageTotalQuantity: 2
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/KD6200J4LXEAPX2/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T00:00:00.000-0400
+          documentIdentifier: 09323b678396e284
+          documentCode: DRW.SUPP
+          documentCodeDescriptionText: Drawings-black and white line and/or other drawings
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/09323b678396e284/files/2_2.pdf
+        - applicationNumberText: "14412875"
+          officialDate: 2020-07-27T00:00:00.000-0400
+          documentIdentifier: 09323b678396e285
+          documentCode: DRW.SUPP
+          documentCodeDescriptionText: Drawings-black and white line and/or other drawings
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/09323b678396e285/files/2020-07-27-Drawings-Replacement-4387-0210001.PDF
+        - applicationNumberText: "14412875"
+          officialDate: 2020-06-15T10:46:34.000-0400
+          documentIdentifier: KBAWAOALRXEAPX0
+          documentCode: NOA
+          documentCodeDescriptionText: Notice of Allowance and Fees Due (PTOL-85)
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/KBAWAOALRXEAPX0.pdf
+            pageTotalQuantity: 8
+          - mimeTypeIdentifier: MS_WORD
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/KBAWAOALRXEAPX0/files/Corrected%20Notice%20of%20Allowability.docx
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/KBAWAOALRXEAPX0/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-27T07:06:18.000-0400
+          documentIdentifier: K9CNUZOFRXEAPX5
+          documentCode: NOA
+          documentCodeDescriptionText: Notice of Allowance and Fees Due (PTOL-85)
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOFRXEAPX5.pdf
+            pageTotalQuantity: 11
+          - mimeTypeIdentifier: MS_WORD
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOFRXEAPX5/files/Allowability%20Notice.docx
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOFRXEAPX5/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-27T07:06:18.000-0400
+          documentIdentifier: K9CNUZOGRXEAPX5
+          documentCode: EXIN
+          documentCodeDescriptionText: Examiner Interview Summary Record (PTOL - 413)
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOGRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-27T07:06:18.000-0400
+          documentIdentifier: K9CNUZOIRXEAPX5
+          documentCode: SRFW
+          documentCodeDescriptionText: >-
+            Search information including classification, databases and other search related
+            notes
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOIRXEAPX5.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-27T07:06:18.000-0400
+          documentIdentifier: K9CNUZOJRXEAPX5
+          documentCode: IIFW
+          documentCodeDescriptionText: >-
+            Issue Information including classification, examiner, name, claim, renumbering,
+            etc.
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOJRXEAPX5.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-27T07:06:18.000-0400
+          documentIdentifier: K9CNUZOKRXEAPX5
+          documentCode: A.NE.AFCP.D
+          documentCodeDescriptionText: After Final Consideration Program Decision
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOKRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-27T07:06:18.000-0400
+          documentIdentifier: K9CNUZOLRXEAPX5
+          documentCode: "1449"
+          documentCodeDescriptionText: List of References cited by applicant and considered by examiner
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOLRXEAPX5.pdf
+            pageTotalQuantity: 4
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-27T07:06:18.000-0400
+          documentIdentifier: K9CNUZOMRXEAPX5
+          documentCode: SRNT
+          documentCodeDescriptionText: Examiner's search strategy and results
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZOMRXEAPX5.pdf
+            pageTotalQuantity: 20
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-27T07:06:18.000-0400
+          documentIdentifier: K9CNUZONRXEAPX5
+          documentCode: IMIS
+          documentCodeDescriptionText: Miscellaneous Internal Document
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K9CNUZONRXEAPX5.pdf
+            pageTotalQuantity: 6
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-17T15:19:58.000-0400
+          documentIdentifier: K97FQ435RXEAPX5
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K97FQ435RXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-17T11:52:01.000-0400
+          documentIdentifier: K94DF01VRXEAPX3
+          documentCode: A.NE
+          documentCodeDescriptionText: Response After Final Action
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K94DF01VRXEAPX3.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-17T11:52:01.000-0400
+          documentIdentifier: K94DF01WRXEAPX3
+          documentCode: SPEC
+          documentCodeDescriptionText: Specification
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K94DF01WRXEAPX3.pdf
+            pageTotalQuantity: 1
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K94DF01WRXEAPX3/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-17T11:52:01.000-0400
+          documentIdentifier: K94DF01XRXEAPX3
+          documentCode: CLM
+          documentCodeDescriptionText: Claims
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K94DF01XRXEAPX3.pdf
+            pageTotalQuantity: 6
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K94DF01XRXEAPX3/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-17T11:52:01.000-0400
+          documentIdentifier: K94DF01YRXEAPX3
+          documentCode: REM
+          documentCodeDescriptionText: Applicant Arguments/Remarks Made in an Amendment
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K94DF01YRXEAPX3.pdf
+            pageTotalQuantity: 4
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K94DF01YRXEAPX3/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-17T11:52:01.000-0400
+          documentIdentifier: K94DF01ZRXEAPX3
+          documentCode: A.NE.AFCP
+          documentCodeDescriptionText: After Final Consideration Program Request
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K94DF01ZRXEAPX3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-17T11:52:01.000-0400
+          documentIdentifier: K94DF020RXEAPX3
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K94DF020RXEAPX3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2020-04-17T11:52:01.000-0400
+          documentIdentifier: K94DF021RXEAPX3
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K94DF021RXEAPX3.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68O2RXEAPX5
+          documentCode: IDS
+          documentCodeDescriptionText: Information Disclosure Statement (IDS) Form (SB08)
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68O2RXEAPX5.pdf
+            pageTotalQuantity: 4
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68O2RXEAPX5/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68O4RXEAPX5
+          documentCode: FOR
+          documentCodeDescriptionText: Foreign Reference
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68O4RXEAPX5.pdf
+            pageTotalQuantity: 7
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68O5RXEAPX5
+          documentCode: FOR
+          documentCodeDescriptionText: Foreign Reference
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68O5RXEAPX5.pdf
+            pageTotalQuantity: 18
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68O6RXEAPX5
+          documentCode: FOR
+          documentCodeDescriptionText: Foreign Reference
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68O6RXEAPX5.pdf
+            pageTotalQuantity: 11
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68O7RXEAPX5
+          documentCode: FOR
+          documentCodeDescriptionText: Foreign Reference
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68O7RXEAPX5.pdf
+            pageTotalQuantity: 9
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68O8RXEAPX5
+          documentCode: FOR
+          documentCodeDescriptionText: Foreign Reference
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68O8RXEAPX5.pdf
+            pageTotalQuantity: 22
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68OBRXEAPX5
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68OBRXEAPX5.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68OCRXEAPX5
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68OCRXEAPX5.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-27T16:39:44.000-0500
+          documentIdentifier: K5WZ68ODRXEAPX5
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5WZ68ODRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-17T08:33:20.000-0500
+          documentIdentifier: K5FCIIKNRXEAPX5
+          documentCode: CTFR
+          documentCodeDescriptionText: Final Rejection
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5FCIIKNRXEAPX5.pdf
+            pageTotalQuantity: 12
+          - mimeTypeIdentifier: MS_WORD
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K5FCIIKNRXEAPX5/files/Final%20Rejection.docx
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K5FCIIKNRXEAPX5/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-17T08:33:20.000-0500
+          documentIdentifier: K5FCIIKORXEAPX5
+          documentCode: "892"
+          documentCodeDescriptionText: List of references cited by examiner
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5FCIIKORXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-17T08:33:20.000-0500
+          documentIdentifier: K5FCIIKPRXEAPX5
+          documentCode: FWCLM
+          documentCodeDescriptionText: Index of Claims
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5FCIIKPRXEAPX5.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-17T08:33:20.000-0500
+          documentIdentifier: K5FCIIKQRXEAPX5
+          documentCode: SRFW
+          documentCodeDescriptionText: >-
+            Search information including classification, databases and other search related
+            notes
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5FCIIKQRXEAPX5.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-17T08:33:20.000-0500
+          documentIdentifier: K5FCIIKRRXEAPX5
+          documentCode: "1449"
+          documentCodeDescriptionText: List of References cited by applicant and considered by examiner
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5FCIIKRRXEAPX5.pdf
+            pageTotalQuantity: 15
+        - applicationNumberText: "14412875"
+          officialDate: 2020-01-17T08:33:20.000-0500
+          documentIdentifier: K5FCIIKSRXEAPX5
+          documentCode: SRNT
+          documentCodeDescriptionText: Examiner's search strategy and results
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K5FCIIKSRXEAPX5.pdf
+            pageTotalQuantity: 17
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-18T08:46:49.000-0500
+          documentIdentifier: K3074SG8RXEAPX1
+          documentCode: APP.FILE.REC
+          documentCodeDescriptionText: Filing Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K3074SG8RXEAPX1.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-18T08:46:24.000-0500
+          documentIdentifier: K307493JRXEAPX3
+          documentCode: N570
+          documentCodeDescriptionText: "Communication - Re:  Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K307493JRXEAPX3.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-12T16:34:18.000-0500
+          documentIdentifier: K2WDIFFHRXEAPX3
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2WDIFFHRXEAPX3.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-12T16:34:18.000-0500
+          documentIdentifier: K2WDIFPERXEAPX0
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2WDIFPERXEAPX0.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-12T16:34:18.000-0500
+          documentIdentifier: K2WDIFPFRXEAPX0
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2WDIFPFRXEAPX0.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-12T16:34:18.000-0500
+          documentIdentifier: K2WDIFPGRXEAPX0
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2WDIFPGRXEAPX0.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-12T16:34:18.000-0500
+          documentIdentifier: K2WDIFPHRXEAPX0
+          documentCode: R46C.REQ
+          documentCodeDescriptionText: Request under 37CFR1.46(c) to correct, update, change applicant
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2WDIFPHRXEAPX0.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-12T16:34:18.000-0500
+          documentIdentifier: K2WDIFPIRXEAPX0
+          documentCode: ADS
+          documentCodeDescriptionText: Application Data Sheet
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2WDIFPIRXEAPX0.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-12T16:34:18.000-0500
+          documentIdentifier: K2WDIFPJRXEAPX0
+          documentCode: R3.73
+          documentCodeDescriptionText: Assignee showing of ownership per 37 CFR 3.73
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2WDIFPJRXEAPX0.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-06T09:36:59.000-0500
+          documentIdentifier: K2LYISSRRXEAPX4
+          documentCode: N572
+          documentCodeDescriptionText: "Response - Re:  Informal Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2LYISSRRXEAPX4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:54.000-0400
+          documentIdentifier: K2GOOR3VRXEAPX1
+          documentCode: IDS
+          documentCodeDescriptionText: Information Disclosure Statement (IDS) Form (SB08)
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR3VRXEAPX1.pdf
+            pageTotalQuantity: 15
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR3VRXEAPX1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:54.000-0400
+          documentIdentifier: K2GOOR3WRXEAPX1
+          documentCode: FOR
+          documentCodeDescriptionText: Foreign Reference
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR3WRXEAPX1.pdf
+            pageTotalQuantity: 9
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:54.000-0400
+          documentIdentifier: K2GOOR3YRXEAPX1
+          documentCode: FOR
+          documentCodeDescriptionText: Foreign Reference
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR3YRXEAPX1.pdf
+            pageTotalQuantity: 90
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:54.000-0400
+          documentIdentifier: K2GOOR3ZRXEAPX1
+          documentCode: FOR
+          documentCodeDescriptionText: Foreign Reference
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR3ZRXEAPX1.pdf
+            pageTotalQuantity: 150
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:54.000-0400
+          documentIdentifier: K2GOOR5IRXEAPX1
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR5IRXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:54.000-0400
+          documentIdentifier: K2GOOR5JRXEAPX1
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR5JRXEAPX1.pdf
+            pageTotalQuantity: 11
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:54.000-0400
+          documentIdentifier: K2GOOR5KRXEAPX1
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR5KRXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:54.000-0400
+          documentIdentifier: K2GOOR5LRXEAPX1
+          documentCode: R46C.REQ
+          documentCodeDescriptionText: Request under 37CFR1.46(c) to correct, update, change applicant
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GOOR5LRXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:51.000-0400
+          documentIdentifier: K2GONHNQRXEAPX3
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GONHNQRXEAPX3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:51.000-0400
+          documentIdentifier: K2GONHOIRXEAPX5
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GONHOIRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:51.000-0400
+          documentIdentifier: K2GONHOJRXEAPX5
+          documentCode: ADS
+          documentCodeDescriptionText: Application Data Sheet
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GONHOJRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:51.000-0400
+          documentIdentifier: K2GONHOKRXEAPX5
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GONHOKRXEAPX5.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-11-01T18:01:31.000-0400
+          documentIdentifier: K2GONC93RXEAPX3
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K2GONC93RXEAPX3.pdf
+            pageTotalQuantity: 5
+        - applicationNumberText: "14412875"
+          officialDate: 2019-10-14T14:47:09.000-0400
+          documentIdentifier: K1QRRRPARXEAPX1
+          documentCode: A...
+          documentCodeDescriptionText: Amendment/Request for Reconsideration-After Non-Final Rejection
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPARXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-10-14T14:47:09.000-0400
+          documentIdentifier: K1QRRRPBRXEAPX1
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPBRXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-10-14T14:47:09.000-0400
+          documentIdentifier: K1QRRRPCRXEAPX1
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPCRXEAPX1.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2019-10-14T14:47:09.000-0400
+          documentIdentifier: K1QRRRPDRXEAPX1
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPDRXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-10-14T14:47:09.000-0400
+          documentIdentifier: K1QRRRPERXEAPX1
+          documentCode: XT/
+          documentCodeDescriptionText: Extension of Time
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPERXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-10-14T14:47:09.000-0400
+          documentIdentifier: K1QRRRPFRXEAPX1
+          documentCode: REM
+          documentCodeDescriptionText: Applicant Arguments/Remarks Made in an Amendment
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPFRXEAPX1.pdf
+            pageTotalQuantity: 6
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPFRXEAPX1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2019-10-14T14:47:09.000-0400
+          documentIdentifier: K1QRRRPGRXEAPX1
+          documentCode: CLM
+          documentCodeDescriptionText: Claims
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPGRXEAPX1.pdf
+            pageTotalQuantity: 7
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/K1QRRRPGRXEAPX1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2019-06-14T12:36:10.000-0400
+          documentIdentifier: JWUVXJ9YRXEAPX5
+          documentCode: M327
+          documentCodeDescriptionText: Miscellaneous Communication to Applicant - No Action Count
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JWUVXJ9YRXEAPX5.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-23T14:08:04.000-0400
+          documentIdentifier: JVZJIZKBRXEAPX4
+          documentCode: APP.FILE.REC
+          documentCodeDescriptionText: Filing Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVZJIZKBRXEAPX4.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-23T14:07:38.000-0400
+          documentIdentifier: JVZJIFMKRXEAPX5
+          documentCode: N570
+          documentCodeDescriptionText: "Communication - Re:  Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVZJIFMKRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-23T14:07:29.000-0400
+          documentIdentifier: JVZJI8GJRXEAPX2
+          documentCode: N570
+          documentCodeDescriptionText: "Communication - Re:  Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVZJI8GJRXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-21T16:52:37.000-0400
+          documentIdentifier: JVY9YR8ZRXEAPX1
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVY9YR8ZRXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-21T16:52:37.000-0400
+          documentIdentifier: JVY9YR90RXEAPX1
+          documentCode: R46C.REQ
+          documentCodeDescriptionText: Request under 37CFR1.46(c) to correct, update, change applicant
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVY9YR90RXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-21T16:52:37.000-0400
+          documentIdentifier: JVY9YR91RXEAPX1
+          documentCode: ADS
+          documentCodeDescriptionText: Application Data Sheet
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVY9YR91RXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-21T16:52:37.000-0400
+          documentIdentifier: JVY9YR92RXEAPX1
+          documentCode: R3.73
+          documentCodeDescriptionText: Assignee showing of ownership per 37 CFR 3.73
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVY9YR92RXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-21T16:52:37.000-0400
+          documentIdentifier: JVY9YR93RXEAPX1
+          documentCode: 136A
+          documentCodeDescriptionText: Authorization for Extension of Time all replies
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVY9YR93RXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-21T16:52:37.000-0400
+          documentIdentifier: JVY9YR94RXEAPX1
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVY9YR94RXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-05-21T16:52:37.000-0400
+          documentIdentifier: JVY9YR95RXEAPX1
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JVY9YR95RXEAPX1.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-12T08:58:17.000-0400
+          documentIdentifier: JUB7YU6TRXEAPX5
+          documentCode: CTNF
+          documentCodeDescriptionText: Non-Final Rejection
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JUB7YU6TRXEAPX5.pdf
+            pageTotalQuantity: 10
+          - mimeTypeIdentifier: MS_WORD
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JUB7YU6TRXEAPX5/files/Non-Final%20Rejection.docx
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JUB7YU6TRXEAPX5/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-12T08:58:17.000-0400
+          documentIdentifier: JUB7YU6VRXEAPX5
+          documentCode: "892"
+          documentCodeDescriptionText: List of references cited by examiner
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JUB7YU6VRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-12T08:58:17.000-0400
+          documentIdentifier: JUB7YU6WRXEAPX5
+          documentCode: FWCLM
+          documentCodeDescriptionText: Index of Claims
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JUB7YU6WRXEAPX5.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-12T08:58:17.000-0400
+          documentIdentifier: JUB7YU6XRXEAPX5
+          documentCode: SRFW
+          documentCodeDescriptionText: >-
+            Search information including classification, databases and other search related
+            notes
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JUB7YU6XRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-12T08:58:17.000-0400
+          documentIdentifier: JUB7YU6YRXEAPX5
+          documentCode: BIB
+          documentCodeDescriptionText: Bibliographic Data Sheet
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JUB7YU6YRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-12T08:58:17.000-0400
+          documentIdentifier: JUB7YU6ZRXEAPX5
+          documentCode: SRNT
+          documentCodeDescriptionText: Examiner's search strategy and results
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JUB7YU6ZRXEAPX5.pdf
+            pageTotalQuantity: 13
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-08T15:34:38.000-0400
+          documentIdentifier: JU8R8TNURXEAPX1
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JU8R8TNURXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-04T06:40:59.000-0400
+          documentIdentifier: JU2IF54DRXEAPX1
+          documentCode: RFN.REQ
+          documentCodeDescriptionText: Refund Request
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JU2IF54DRXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-04-04T06:40:59.000-0400
+          documentIdentifier: JU2IF54FRXEAPX1
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JU2IF54FRXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2019-03-21T11:05:26.000-0400
+          documentIdentifier: JTIRPATCRXEAPX5
+          documentCode: PET.DEC.TC
+          documentCodeDescriptionText: >-
+            Petition decision routed to the Technology Center to act on the decision or
+            continue prosecution
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JTIRPATCRXEAPX5.pdf
+            pageTotalQuantity: 3
+          - mimeTypeIdentifier: MS_WORD
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JTIRPATCRXEAPX5/files/Pet%20Dec%20Routed%20to%20Tech%20Center.docx
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JTIRPATCRXEAPX5/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2018-10-09T00:00:00.000-0400
+          documentIdentifier: JN1X2XF5RXEAPX1
+          documentCode: PET.PCT
+          documentCodeDescriptionText: Petition for review by the PCT legal office
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JN1X2XF5RXEAPX1.pdf
+            pageTotalQuantity: 3
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JN1X2XF5RXEAPX1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2018-10-09T00:00:00.000-0400
+          documentIdentifier: JN1X2XF6RXEAPX1
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JN1X2XF6RXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2018-10-02T00:00:00.000-0400
+          documentIdentifier: JMLXZMV0RXEAPX5
+          documentCode: PET.OP.DEC
+          documentCodeDescriptionText: Office of Petitions Decision (PTO-90)
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JMLXZMV0RXEAPX5.pdf
+            pageTotalQuantity: 4
+          - mimeTypeIdentifier: MS_WORD
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JMLXZMV0RXEAPX5/files/O.P.%20Petition%20Decision.DOCM
+        - applicationNumberText: "14412875"
+          officialDate: 2018-10-02T00:00:00.000-0400
+          documentIdentifier: JMLXZMV1RXEAPX5
+          documentCode: PETDEC
+          documentCodeDescriptionText: Petition Decision
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JMLXZMV1RXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-10-02T00:00:00.000-0400
+          documentIdentifier: JMLXZMV2RXEAPX5
+          documentCode: IMIS
+          documentCodeDescriptionText: Miscellaneous Internal Document
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JMLXZMV2RXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T15:48:41.000-0400
+          documentIdentifier: JU1MJMI5RXEAPX0
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JU1MJMI5RXEAPX0.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T15:34:35.000-0400
+          documentIdentifier: JU8R8R6LRXEAPX3
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JU8R8R6LRXEAPX3.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHUI4XGLRXEAPX5
+          documentCode: N570
+          documentCodeDescriptionText: "Communication - Re:  Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHUI4XGLRXEAPX5.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHUI4Y1KRXEAPX4
+          documentCode: N570
+          documentCodeDescriptionText: "Communication - Re:  Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHUI4Y1KRXEAPX4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHUI67UURXEAPX2
+          documentCode: APP.FILE.REC
+          documentCodeDescriptionText: Filing Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHUI67UURXEAPX2.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHW7VCX7RXEAPX3
+          documentCode: PET.PCT
+          documentCodeDescriptionText: Petition for review by the PCT legal office
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHW7VCX7RXEAPX3.pdf
+            pageTotalQuantity: 4
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JHW7VCX7RXEAPX3/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHW7VCX8RXEAPX3
+          documentCode: AMSB
+          documentCodeDescriptionText: >-
+            Amendment Submitted/Entered with Filing of Continued Prosecution Application
+            (CPA)/Request for Continued Examination(RCE)
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHW7VCX8RXEAPX3.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JI1L9UVKPXXIFW2
+          documentCode: CLM
+          documentCodeDescriptionText: Claims
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JI1L9UVKPXXIFW2.pdf
+            pageTotalQuantity: 5
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JI1L9UVKPXXIFW2/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JI1L9UXHPXXIFW2
+          documentCode: ABST
+          documentCodeDescriptionText: Abstract
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JI1L9UXHPXXIFW2.pdf
+            pageTotalQuantity: 1
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JI1L9UXHPXXIFW2/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JI1LA6JFPXXIFW2
+          documentCode: REM
+          documentCodeDescriptionText: Applicant Arguments/Remarks Made in an Amendment
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JI1LA6JFPXXIFW2.pdf
+            pageTotalQuantity: 5
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/JI1LA6JFPXXIFW2/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHW7VCXARXEAPX3
+          documentCode: XT/
+          documentCodeDescriptionText: Extension of Time
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHW7VCXARXEAPX3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHW7VDNURXEAPX1
+          documentCode: RCEX
+          documentCodeDescriptionText: Request for Continued Examination (RCE)
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHW7VDNURXEAPX1.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHW7VDNVRXEAPX1
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHW7VDNVRXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2018-06-01T00:00:00.000-0400
+          documentIdentifier: JHW7VDNWRXEAPX1
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHW7VDNWRXEAPX1.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-23T00:00:00.000-0400
+          documentIdentifier: JHHPPFCDRXEAPX1
+          documentCode: PEFN
+          documentCodeDescriptionText: Pre-Exam Formalities Notice
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHHPPFCDRXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-23T00:00:00.000-0400
+          documentIdentifier: JHJ94EV7RXEAPX2
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHJ94EV7RXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-23T00:00:00.000-0400
+          documentIdentifier: JHJ94EV8RXEAPX2
+          documentCode: R3.73
+          documentCodeDescriptionText: Assignee showing of ownership per 37 CFR 3.73
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHJ94EV8RXEAPX2.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-23T00:00:00.000-0400
+          documentIdentifier: JHJ94EV9RXEAPX2
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHJ94EV9RXEAPX2.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-23T00:00:00.000-0400
+          documentIdentifier: JHJ94EVARXEAPX2
+          documentCode: ADS
+          documentCodeDescriptionText: Application Data Sheet
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHJ94EVARXEAPX2.pdf
+            pageTotalQuantity: 6
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-23T00:00:00.000-0400
+          documentIdentifier: JHJGM750RXEAPX1
+          documentCode: N572
+          documentCodeDescriptionText: "Response - Re:  Informal Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JHJGM750RXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-09T00:00:00.000-0400
+          documentIdentifier: JGZ300WLRXEAPX1
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JGZ300WLRXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-09T00:00:00.000-0400
+          documentIdentifier: JGZ300WMRXEAPX1
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JGZ300WMRXEAPX1.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-09T00:00:00.000-0400
+          documentIdentifier: JGZ300WNRXEAPX1
+          documentCode: ADS
+          documentCodeDescriptionText: Application Data Sheet
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JGZ300WNRXEAPX1.pdf
+            pageTotalQuantity: 6
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-09T00:00:00.000-0400
+          documentIdentifier: JGZ300WORXEAPX1
+          documentCode: R3.73
+          documentCodeDescriptionText: Assignee showing of ownership per 37 CFR 3.73
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JGZ300WORXEAPX1.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-01T00:00:00.000-0400
+          documentIdentifier: JGMJA3MWRXEAPX1
+          documentCode: PEFN
+          documentCodeDescriptionText: Pre-Exam Formalities Notice
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JGMJA3MWRXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-05-01T00:00:00.000-0400
+          documentIdentifier: JGQM5JIPRXEAPX0
+          documentCode: N572
+          documentCodeDescriptionText: "Response - Re:  Informal Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JGQM5JIPRXEAPX0.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2018-04-20T00:00:00.000-0400
+          documentIdentifier: JG86PRNYRXEAPX4
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JG86PRNYRXEAPX4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2018-04-20T00:00:00.000-0400
+          documentIdentifier: JG86PRNZRXEAPX4
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JG86PRNZRXEAPX4.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2018-02-23T00:00:00.000-0500
+          documentIdentifier: JDX97OOJRXEAPX3
+          documentCode: ABN
+          documentCodeDescriptionText: Abandonment
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/JDX97OOJRXEAPX3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2017-08-09T00:00:00.000-0400
+          documentIdentifier: J63XKR92RXEAPX1
+          documentCode: CTFR
+          documentCodeDescriptionText: Final Rejection
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J63XKR92RXEAPX1.pdf
+            pageTotalQuantity: 14
+          - mimeTypeIdentifier: MS_WORD
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/J63XKR92RXEAPX1/files/Final%20Rejection.DOCM
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/J63XKR92RXEAPX1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2017-08-09T00:00:00.000-0400
+          documentIdentifier: J63XKR93RXEAPX1
+          documentCode: "892"
+          documentCodeDescriptionText: List of references cited by examiner
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J63XKR93RXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2017-08-09T00:00:00.000-0400
+          documentIdentifier: J63XKR94RXEAPX1
+          documentCode: SRFW
+          documentCodeDescriptionText: >-
+            Search information including classification, databases and other search related
+            notes
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J63XKR94RXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2017-08-09T00:00:00.000-0400
+          documentIdentifier: J63XKR95RXEAPX1
+          documentCode: SRNT
+          documentCodeDescriptionText: Examiner's search strategy and results
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J63XKR95RXEAPX1.pdf
+            pageTotalQuantity: 8
+        - applicationNumberText: "14412875"
+          officialDate: 2017-08-09T00:00:00.000-0400
+          documentIdentifier: J63XKR97RXEAPX1
+          documentCode: FWCLM
+          documentCodeDescriptionText: Index of Claims
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J63XKR97RXEAPX1.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2017-04-25T00:00:00.000-0400
+          documentIdentifier: J1Y7RH6GRXEAPX0
+          documentCode: A...
+          documentCodeDescriptionText: Amendment/Request for Reconsideration-After Non-Final Rejection
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J1Y7RH6GRXEAPX0.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2017-04-25T00:00:00.000-0400
+          documentIdentifier: J1ZGAC9QPXXIFW2
+          documentCode: SPEC
+          documentCodeDescriptionText: Specification
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J1ZGAC9QPXXIFW2.pdf
+            pageTotalQuantity: 1
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/J1ZGAC9QPXXIFW2/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2017-04-25T00:00:00.000-0400
+          documentIdentifier: J1ZGACBJPXXIFW2
+          documentCode: CLM
+          documentCodeDescriptionText: Claims
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J1ZGACBJPXXIFW2.pdf
+            pageTotalQuantity: 3
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/J1ZGACBJPXXIFW2/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2017-04-25T00:00:00.000-0400
+          documentIdentifier: J1ZGACDDPXXIFW2
+          documentCode: REM
+          documentCodeDescriptionText: Applicant Arguments/Remarks Made in an Amendment
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J1ZGACDDPXXIFW2.pdf
+            pageTotalQuantity: 5
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/J1ZGACDDPXXIFW2/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2017-04-25T00:00:00.000-0400
+          documentIdentifier: J1Y7RH6HRXEAPX0
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J1Y7RH6HRXEAPX0.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2017-04-25T00:00:00.000-0400
+          documentIdentifier: J1Y7RH6IRXEAPX0
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J1Y7RH6IRXEAPX0.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2017-04-25T00:00:00.000-0400
+          documentIdentifier: J2J6CID3RXEAPX3
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/J2J6CID3RXEAPX3.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2016-10-25T00:00:00.000-0400
+          documentIdentifier: IUK02UKVRXEAPX2
+          documentCode: CTNF
+          documentCodeDescriptionText: Non-Final Rejection
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UKVRXEAPX2.pdf
+            pageTotalQuantity: 8
+          - mimeTypeIdentifier: MS_WORD
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UKVRXEAPX2/files/Non-Final%20Rejection.DOCM
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UKVRXEAPX2/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2016-10-25T00:00:00.000-0400
+          documentIdentifier: IUK02UKWRXEAPX2
+          documentCode: "892"
+          documentCodeDescriptionText: List of references cited by examiner
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UKWRXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2016-10-25T00:00:00.000-0400
+          documentIdentifier: IUK02UKXRXEAPX2
+          documentCode: BIB
+          documentCodeDescriptionText: Bibliographic Data Sheet
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UKXRXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2016-10-25T00:00:00.000-0400
+          documentIdentifier: IUK02UKYRXEAPX2
+          documentCode: FWCLM
+          documentCodeDescriptionText: Index of Claims
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UKYRXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2016-10-25T00:00:00.000-0400
+          documentIdentifier: IUK02UKZRXEAPX2
+          documentCode: SRFW
+          documentCodeDescriptionText: >-
+            Search information including classification, databases and other search related
+            notes
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UKZRXEAPX2.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2016-10-25T00:00:00.000-0400
+          documentIdentifier: IUK02UL0RXEAPX2
+          documentCode: "1449"
+          documentCodeDescriptionText: List of References cited by applicant and considered by examiner
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UL0RXEAPX2.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2016-10-25T00:00:00.000-0400
+          documentIdentifier: IUK02UL2RXEAPX2
+          documentCode: SRNT
+          documentCodeDescriptionText: Examiner's search strategy and results
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/IUK02UL2RXEAPX2.pdf
+            pageTotalQuantity: 6
+        - applicationNumberText: "14412875"
+          officialDate: 2015-06-11T00:00:00.000-0400
+          documentIdentifier: IAS7WCWVPXXIFW4
+          documentCode: NTC.PUB
+          documentCodeDescriptionText: Notice of Publication
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/IAS7WCWVPXXIFW4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2015-04-14T00:00:00.000-0400
+          documentIdentifier: I8FTAQIEPXXIFW4
+          documentCode: N570
+          documentCodeDescriptionText: "Communication - Re:  Power of Attorney (PTOL-308)"
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I8FTAQIEPXXIFW4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2015-04-09T00:00:00.000-0400
+          documentIdentifier: I8ACS7RZPXXIFW3
+          documentCode: PA..
+          documentCodeDescriptionText: Power of Attorney
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I8ACS7RZPXXIFW3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2015-04-09T00:00:00.000-0400
+          documentIdentifier: I8ACS7V9PXXIFW3
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I8ACS7V9PXXIFW3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2015-04-09T00:00:00.000-0400
+          documentIdentifier: I8ACS7VHPXXIFW3
+          documentCode: OATH
+          documentCodeDescriptionText: Oath or Declaration filed
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I8ACS7VHPXXIFW3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2015-03-05T00:00:00.000-0500
+          documentIdentifier: I6UQY828PXXIFW4
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I6UQY828PXXIFW4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2015-03-05T00:00:00.000-0500
+          documentIdentifier: I6UQYG8OPXXIFW4
+          documentCode: WCLM
+          documentCodeDescriptionText: Claims Worksheet (PTO-2022)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I6UQYG8OPXXIFW4.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2015-03-05T00:00:00.000-0500
+          documentIdentifier: I6UR9MXTPXXIFW4
+          documentCode: M903
+          documentCodeDescriptionText: Notice of Designated Office (DO) / Elected Office (EO) Acceptance Mailed
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I6UR9MXTPXXIFW4.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2015-03-05T00:00:00.000-0500
+          documentIdentifier: I6URAYQEPXXIFW4
+          documentCode: APP.FILE.REC
+          documentCodeDescriptionText: Filing Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I6URAYQEPXXIFW4.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DOHPXXIFW3
+          documentCode: A.PE
+          documentCodeDescriptionText: Preliminary Amendment
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DOHPXXIFW3.pdf
+            pageTotalQuantity: 1
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4LIZHXCPXXIFW1
+          documentCode: SPEC
+          documentCodeDescriptionText: Specification
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4LIZHXCPXXIFW1.pdf
+            pageTotalQuantity: 1
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/I4LIZHXCPXXIFW1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4LIZHZ4PXXIFW1
+          documentCode: REM
+          documentCodeDescriptionText: Applicant Arguments/Remarks Made in an Amendment
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4LIZHZ4PXXIFW1.pdf
+            pageTotalQuantity: 1
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/I4LIZHZ4PXXIFW1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4LIZHZHPXXIFW1
+          documentCode: SPEC
+          documentCodeDescriptionText: Specification
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4LIZHZHPXXIFW1.pdf
+            pageTotalQuantity: 22
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/I4LIZHZHPXXIFW1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4LIZHZVPXXIFW1
+          documentCode: SPEC
+          documentCodeDescriptionText: Specification
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4LIZHZVPXXIFW1.pdf
+            pageTotalQuantity: 22
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/I4LIZHZVPXXIFW1/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DOSPXXIFW3
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DOSPXXIFW3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DP2PXXIFW3
+          documentCode: N417
+          documentCodeDescriptionText: Electronic Filing System Acknowledgment Receipt
+          directionCategory: OUTGOING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DP2PXXIFW3.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DPCPXXIFW3
+          documentCode: TRNA
+          documentCodeDescriptionText: Transmittal of New Application
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DPCPXXIFW3.pdf
+            pageTotalQuantity: 3
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DPJPXXIFW3
+          documentCode: ADS
+          documentCodeDescriptionText: Application Data Sheet
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DPJPXXIFW3.pdf
+            pageTotalQuantity: 6
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DPSPXXIFW3
+          documentCode: SPEC
+          documentCodeDescriptionText: Specification
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DPSPXXIFW3.pdf
+            pageTotalQuantity: 22
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DPSPXXIFW3/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DPZPXXIFW3
+          documentCode: CLM
+          documentCodeDescriptionText: Claims
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DPZPXXIFW3.pdf
+            pageTotalQuantity: 3
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DPZPXXIFW3/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DQ7PXXIFW3
+          documentCode: DRW
+          documentCodeDescriptionText: Drawings-only black and white line drawings
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DQ7PXXIFW3.pdf
+            pageTotalQuantity: 8
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5DQFPXXIFW3
+          documentCode: TRAN.LET
+          documentCodeDescriptionText: Transmittal Letter
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5DQFPXXIFW3.pdf
+            pageTotalQuantity: 2
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4KC5EBRPXXIFW3
+          documentCode: IDS
+          documentCodeDescriptionText: Information Disclosure Statement (IDS) Form (SB08)
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5EBRPXXIFW3.pdf
+            pageTotalQuantity: 2
+          - mimeTypeIdentifier: XML
+            downloadUrl: >-
+              https://api.uspto.gov/api/v1/download/applications/14412875/I4KC5EBRPXXIFW3/xmlarchive
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4L9SSC0PXXIFW4
+          documentCode: P.N.101.CONV
+          documentCodeDescriptionText: PCT/RO/101 - Request form for new International Application - Conventional
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4L9SSC0PXXIFW4.pdf
+            pageTotalQuantity: 5
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4L9SSQHPXXIFW4
+          documentCode: FRPR
+          documentCodeDescriptionText: Certified Copy of Foreign Priority Application
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4L9SSQHPXXIFW4.pdf
+            pageTotalQuantity: 129
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I4LC0G9NPXXIFW4
+          documentCode: P.PAMPHLET
+          documentCodeDescriptionText: WIPO Publication - Non-English version
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I4LC0G9NPXXIFW4.pdf
+            pageTotalQuantity: 48
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I6TBNUAVPXXIFW2
+          documentCode: 371P
+          documentCodeDescriptionText: Documents submitted with 371 (National Stage) Applications
+          directionCategory: INCOMING
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I6TBNUAVPXXIFW2.pdf
+            pageTotalQuantity: 6
+        - applicationNumberText: "14412875"
+          officialDate: 2015-01-05T00:00:00.000-0500
+          documentIdentifier: I7XP61FNPXXIFW4
+          documentCode: WFEE
+          documentCodeDescriptionText: Fee Worksheet (SB06)
+          directionCategory: INTERNAL
+          downloadOptionBag:
+          - mimeTypeIdentifier: PDF
+            downloadUrl: https://api.uspto.gov/api/v1/download/applications/14412875/I7XP61FNPXXIFW4.pdf
+            pageTotalQuantity: 1
+  recorded_at: 2026-10-20T16:40:18.750Z
+- request:
+    method: GET
+    uri: >-
+      https://data-documents.uspto.gov/redirect/download/applications/14412875/LAQYXZN3XBLUEX4.pdf?redirect_request_id=5c92132f-6561-443f-8e9b-2f56686a68d9
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment; filename="LAQYXZN3XBLUEX4.pdf"
+      content-type:
+      - application/octet-stream
+      date:
+      - Tue, 20 Oct 2026 16:40:19 GMT
+      server:
+      - waitress
+    body:
+      type: binary
+      content: >-
+        255044462d312e320d25d4d2a4cb0d312030206f626a0d3c3c0d0a092f4372656174696f6e4461746520284f63742032302c20323032362c2031323a34303a3139e280af504d290d0a092f50726f64756365722028555350544f290d0a092f5469746c6520284170706c69636174696f6e49443a203134343132383735290d0a092f43726561746f722028555350544f20504446204275696c646572290d0a3e3e0d0a0d656e646f626a0d0a322030206f626a0d5b202f504446202f496d61676542205d0d656e646f626a0d0a332030206f626a0d3c3c0d0a092f50616765732034203020520d0a092f54797065202f436174616c6f670d0a092f506167654d6f6465202f5573654e6f6e650d0a092f4f75746c696e65732035203020520d0a3e3e0d0a0d656e646f626a0d0a372030206f626a0d3c3c0d0a092f54797065202f506167650d0a092f436f6e74656e7473205b203820302052205d0d0a092f506172656e742034203020520d0a092f5265736f7572636573203c3c20202f50726f6353657420322030205220202f584f626a656374203c3c20202f696d37203920302052203e3e20203e3e200d0a092f4d65646961426f78205b203020302036313220373932205d0d0a3e3e0d0a0d656e646f626a0d0a382030206f626a0d3c3c20202f4c656e677468203631203e3e200d73747265616d0d71203631322e3030303020302e3030303020302e30303030203739322e3030303020302e3030303020302e3030303020636d202f696d3720446f0d510d0a656e6473747265616d0d0a656e646f626a0d0a392030206f626a0d3c3c20202f54797065202f584f626a65637420202f4c656e67746820323337393220202f46696c746572202f43434954544661784465636f646520202f436f6c6f725370616365202f4465766963654772617920202f4465636f64655061726d73203c3c20202f436f6c756d6e73203235353020202f4b202d3120202f526f77732033333030203e3e2020202f486569676874203333303020202f53756274797065202f496d61676520202f5769647468203235353020202f42697473506572436f6d706f6e656e74203120202f4e616d65202f696d37203e3e200d73747265616d0dfffffffffffffffffffffffffffffffffffffffffffffffffffffffffff26d5034c9b101af26de0cb26c6a0c10305e5ba582e4a0312dd6439580b0820c1c2098708841b3e166038408847d972061c1044b8b6ec11761870811ace50e08babbaa23c0c3a408f11c7bfb6e088ba943b7d51c71f6719d4704112065cdb74f0f5a29c8c807848b1f1fff8c30dc24124088fca1fca87fe8b1db70810230fbb238ec2686fd5329c30c3a0958f7bedc2f8c30c38408a06c223e82053d888888a48cec18759dfb1d8fedd05f618d2436e12dfa5a3f86e913ff108368b1fc3a562db08830d01be1048370b7c22301a042fde9bb411ac351afba2ce5c0371330c1500b8d91c53d9a1c10204677062681082080cd140c9df5e61d04455506f48111fea9f508241b1d2ee12062130c1114cc888adb0e935841061dd291f7d6920836c576dc247e6c42047619874a1b0e904e0d04c30fc36f49ba41b8ede94f761041361a45bdb84b41a082418314820447dbd46291a05743dba5a08f0376184b7d028408d8cea0d20db0848fb0f48b9d41120841a4a436088e93e1040811745f0411f323c781b99995644498c309037493f7a48e8148e41b060db84b758ef4920cdf6d83b64874dd650edb4926c186c32044ed6627e93ad258361c1b0db5413baa6d525494361b77717749374956b70c1b628b1df412041b0824102221088f033082b5265c30c4c70f498a54cf8f6ed03061dd3d2419c50920cae250819e6194247c2c3061d04dd29c70c57b62832a6e306186db77fba5df7b86d83ba27dba0ac306125a0cd1123a0673c48ec90c3764711f8b4b9a84c339df061861bb6258f6ead2e1bedee770c18361db3bafa46849040b0608f1033d0f33744c625f123b060c5850fc557b04479876d82419c80c37a4713d2eb093c361b6c5b6186db85beb29c2ac12cf60c1d861897891060c361edb23414a02991010d119101b0ae140d0570b139e5129e977867a0b66806c36186fa0b7e110607c1e0882ed715a41bd57447090e08bf860c1861b77d3fd11d8e0f4478e920b15e10340c41086c9d83320bf365899db6c106104081c32321c8f09f4209bf4c35f0db088e8fa70c3618370edf776a83bbc2dd020c3a41116024832b56c22e4484cd87a4c08718978f4478329c6fb493ef5bd37ffb0de0c84e2b1b6d0860c30dffbfa0fb75bd37a943b55b7483dbdb3f020c1b11f5d6bffbaf5c31d61a76dbf506463b1460ffbedfe937ac34b7709dddf23646c88f77fbfffb75b0e93cc3874cac6db420f79edff1f1c57fd6de783ddb742de16fececccbfacef0537d20917628212f8823d9a6520f87c3d136c53f981940423885c1411c1b980d906418173f138172386c0443383a47234030470d860650211c0b927140c90291c1be660a08712036198372e29a8648ce80dcf0a682856cb8372386c23853c041b0d9e104d5b6ed9487b6dbb57ed861549d93b864e90c9786c82564acbbdc959710cb3d139fee4766bb26786c1852504ef61b61064e6f64a8ec32736c9521e15c951b50ab64a90cb3c30912f8659f5495260f4133a0ac3e06db729c323afc36d355be1dc1b902080b758587c3a41f496161f70db50b0ea1b69c1bdc3ab836e1db5570db50b770f8769041f0fab844754dc6db2adbb762820877f74d57bbedb075bdd6fbd3eb75beff5bff87f6ef0deedf7bf5fbefabef58842adc361dbeefdbfff5bfedb0eb74eb7f57d53addfbff5bfbf74fbfd53df4bbf7fa7fd308e2a06c33e1907a15857147da40f7f6fffbee187fffefbc42ffdefade71ddfb7fce3f6f7b9c7ce3fbd05fbefd3efd84176c43df76ca24d0bfce3bf1c71ec3638ce3b1c71b1848c3b1c719c778e2bca1dfbfeb7f8daeb7fafe38ea38f1238d6c43b2adf7ffedff9eb72060bfbf9fe1c8308bf9fbbfa6f6feffa7df3dce3ebaff5fcfacfdd67fa46ae9b25d091d586c33cedd3fedfffe4502f4dfec851b240d37fedfafb7ffaffff697de9697fffff15b86cae6dedbd7fbff85ec1bd7f0b20ba4afe177fa6f7ffd249fbc2edae93eba7f85c2fe17f920121ddef6f7fdff1f87e9be361f4df1f7eb7dffe17bf8f7afbc25fd471eb1f4ae44b3a1b6dbf8ffb7ffefab7e187abfedfd3edffc4249bffd749b8ad75ffe91f3a8223ecf8c33a0223e1d9e851233477fb7fcbbfb7ff2f21bebe5e76fd6f6ffe17fc9df6ebf85a30ff93bcd9f3552f3d07d3dbb0c3b6ca876f7bfb7fe1ffd0bf720c3e85fbedfc7b7ff27c1217fbeda5a1727c0b4aeeb0fbfdefd7fd95cdabb77d37bf7ffffff72907fefb7e9edfff7fefffede93baefbeefbea5735095f897f061891f6754845e1efd6c3ff1e8a7ab47407e20df2880fc70dfa31de1bffdb47407d63b7a39c3c37109b6fc71efc7488a3e88a83b24f10527c8f867f3a9b85bbaedffebfaffebfedfd3eff5eda4fafbe93f74dba5fffe3a0884bb099eb5b6f77afd6c7f90fea1fd3f9d11cbe9bf21fb1eb7b1ebefdfe43f6befebebf7f3a2fe113eedbbc5b2bfdabb6bbffeba5abffd6affefd3efd7dfe96bfabf7b6daff6bf594eb081f4db3d4d950edb7c2f695bfebd43ad6fd6fd6f55df56f7d2bdd26fafeb49bdbedb4b5eeb5e20f84fdd03f41efb1edd7a7aae12b5ead3d6d7ed3d53f5b4fc25f6be12d53155fbfb4177ba5af0f48b83c07c4a723a6197223eca0bb56d84937d7550943092a77eb06926b7ebbfdefaaab176a12d53eef6c8eae1860c257ab0c2ebeb497c9094f03e1def6b60c12041ba0c20c21842a41dd041820c26130870c1208304184c20d0c106e830818420f042820d070d08c2184184218421b161308361841041841840d8341043e7a0ba1a431830ce0818bdeb62b7fe14d8217ff10bffdff785ef0bfff0c57ec574930f8230e670823a83cce20ee271c1891d68a723c830b7fe084182ffe54c2fffff782f0f05fe185e0c17e0c2fca1c18aa15fdb7b29f7bd88b888888888888888888b888b888888888888888888f885a045c2a5447389270d045f7f7111f0eaa4de88f2183856c130c7938f5bd282b8786425931ddb29e71650bf4aa102194ee54c23a844e1a447d945b085fceab4a28419cb888740813395ce95f3d0e1041a238592100d204ec3b9ac040327af8978d1501c861e2de792fff48ea209a8c18738f0d8471fc7f5a334bb2f52470447c30fa6186bffa1e90c22fb65f270ca240c1140bbfffc27e19203606c8eb928e3ff090d061832570eca2dcab7fe79fa29043449832672a811099756209ffbfd120f0c3786b65156567e3f8308f9a92213041995ac20843fce6be28270c19b40d36ca1ca28dafe3f08210c62db4475c796b9a88605239999170847060b8305c108c66d1b060d334060b830799b45008660c170421e4e087c18238cd065c1823999917060d44660b9ac8c22733319a0c8e2998a47060c0210c8da300bffd20ec311fc184184d86103052e0b8832fa0cd818408c6b2dcb8f2e0b8832fa10231a832f03066f865e07832edcb72e21e0819be1b0d4b82de11b0f42fa11b012846b3d3040f040cbf832eda3e0250cbfffd2398b655aff69b1ebf7c36931d6f75fba4c7b7beddedd6f6bbb6d56e104dee9384130ed6d77db498f7ff6110ab748baffefadf7d86907add6b7dd20fb0f7db5eeb7943fdefadd26f7093a4df287ca1f287ff6120fbf9ffe45a6707f9fffca1dffe6d3efffa2877fe6d3fef9c4fe8a1dfffb6b9c4edffab79b5fab72876bedaf822a3ff9c5fc2ed91a62c90c45d61821ff6fadfffb7adfeb7fedffffffadfe50ffdbeb7affa7afebfafffdfff1ed84136c2650dd3ff6fff51ee18ffdffa8c31ef51fef4bfffd45bffef515d6fffff51d25f51f3c05861906d9115127fede38ffb0638a4e38fb07fae924fa438eda5eade38ffe3fb697ba5eba58ebf5db041433a22eb9fbfffc7f07ff1c1fc7a5f07ffc7ffc7fffffc707c7c52d8608223a34ce2274c3613280fdffb7f2e3e1bf6f9710dfcd1885b7045dfff345bff971fffffe5c608c5cb8dd04e1895d0b670cba3e983610ad7fedfff83e97f83fef2ea5edfb697bb7ffffeda5eda5efdfbf536b0f82db522f143618975effedfefe0dfdfb837fbfffffeedffeffffffeffefebc18feab618417e97fb7fe6d79a27d0ff368ba7ff36b43ffffcda63fafca13d7ffff985f942f30bc792e21f127b60944e4360daef5fdff1fab7e57fc7b7eb1f95fdbf6fc77ff16ffdbf6fc7db7f1fcdde7760c3bfcf0ac3c8ea9c2faffebaffb7ebfaebedfffebeda5e93697ffebfa5fe8770618315661820f3aa618b289c7a7adfffabac7feebafd2fcbafff7ff7ffffffcba7fffe1b9c7d448b0e906c3082d47b5dff5d2d7bf5d74b5fbffdaf57db4b6d26d2daf6bffdb4b5db972765501f125e55de7104290365289f191d6c526ffae12a23e964fbfad11f4b4b5d37d87a7fa98df0c3096da4186104be9febb0db096b787761b50c98e0962367b061b1e35111111111111111111111111111111111111111111111111111111111111f08cd3b0c368111f840c44b03939b6475a2a35c7d912fee110cb280f6503e8d1ed9e1329c6662e0813121a3c85a8920d67c62b88feb408e3060810fc3b0d36df866fff750618b9061e184c4223ed87dd6bc2db0c1c105609f77b0f8bfe7d2e480b77974decab61b51ef5b0c1f921ff6cb735edb723ad7f61b7e09ed953e1dc5c3ffc7870c21b1c304540776ca3d8eb2d7710c0a4d0cea66d1d860876664500c11723b991564433385bb2a22386188a04250e0c12045595c559567e3b95655694184184546e11ac12832f030f2e0d10e1c2361ce08be8cecbaefcf0254207070765595c543c205affb49e931edf5bf8413692a4a9ef0c44a9896e42386c20c1b8b2b8ab041bd9557fccd69399a24d76422258badfd26ffffd20c8e2c5030cf2cc2651053844755aafb5fbfffffffab4ad356db82491381224448e1867c2b0ac2a1a61069578fdbaafaaf5bfa578e23ef09060cb85ce1b2eeecac2b0a8c557ebc3155f55fff5bffa1243e191c2391c2876d95c55b653b64c7ad79c330ce102067ccd0f644f067860819e234323ae8f9020cf91c23102067423c661999e389765d9f23479f238cdb391a11e32f65cbc2061032e666466576d84188950088fb2f2f16cae042833ce97dc261f08d01af0784687a3d868ab1e904687846b0c384f08cec384d3f0e8111e08ced3d1ec30d84c2611a1874088f6c2f0c106083845c308d6f6e08a7c38e9c5877b504612ff660f0c12b681286c304ad86095b57884ad8612bd98618256ecc1cd03e2955b4681ab76608c35b88faffd2b56fe9222bd32398e50af7ff5fa7fab4b07ffab86f2c3fd5d3ff4e93fd7abd5effd75ffd757f49050e2bdb870db5ffffd7dc977b5ebc8ba5af5ff6bfdfa16bdd7aadae5d297febaf6db4827108f03eca1c42238602e925fff1f9427c4178dbc4178ff105fff105f8ff10be9bd7fd47ed25aa4acb8c10a7ffffe5a3dbe7d987cdabce8cc5cb0fe08d1fff0468fcc1fce32ef8bfff1966c5178c486c708da44790ba04470a47df4ab5ff0453fff30905e08a787d05e08a7fe97ffe97ffe82f96f6ebffbb650828692471c18848313e85694a9baffdc114f5bfffdcd11847fd7f7335faffafafab9a2fd7fbfff04544cd76c2521983d0496c34118d9ea6ffaffadab7ebaebadadfebf7fe5d6bedafeaeb6bfffb6da5fb695adb3ace6f624187098c2a0cb86141158434de92b15fb14d8498323ba23e9315231ec53612d2e451ec36c25ec706477f1287fc191db1287b612fe3fc30c25fb693697ef0d34beeb6c9b9dfd506120c20c20da0c427874184d530da621450206d4370c5041841b4d30c20c20da86081840da61b50d88410610683649c3083083861884103081841b061923612edb86ec4197f6458fb4120d6aa2222222222222222222222222222222222222222222222222236cf65c88e9b915d84221b3ceb4474d83e955e2b7c312196399c88edd562e835d2edabe1b704db287fe1a0b9e557d6218640b8f069e2088e1184e1a0969fb0c1048312b103244086cee25db918f67814820825bc65d4ee0c34139382ddb1373468184104aa8bebb0d5b67018300dcb8a8ee0c3c1046c129e48d8a5864788fa5b6826d86cf06838410415c1286825558eae37c1b0c18841374820c1204924271d65ae2889f24844833c44e44732832e29c3308f19845c53e67d9986c2e1ed82045f866619ce01734231b082205f06a8eed22d7108285456323a08f854f041e0818208d6094235825060915879b0cd679c19fcaa882712e211390e83cc82390c393f231c82797053257fdb060c204170824092d86d54387483a0995e111f4088fc223e8223ae9e9f4832bed6fb2ab3fc23e30cf81833f07cd078833fc1b0c299cf108f60976904111fc306781020ba441be24b7ff4b4995dffff49d27d2657bfff70820cf96f7eb7df6ab7def6a1864803047c86282088fb846b21384104102040f48223af575bfffffff5b6fce21ffa7df6d0447fff8447ffd27bcef488fb618a0820920f0820c11c0cafeb6569eba7db4bdb4bf7dfa7bfff15bfffafc1151dbeb7ff54d6e1a08208288cb91e0cdaaa492c9ecf598c8f1b66d91d1888e8c6a2b7ffffdf7eb6feba5d3fff7fffdffef61b62986191008088f99e0540815820842495840b08178845614e55d0251ff6d2f6d2f0c950953e19f31c8a226ffc105a4938e3a8e1bc716c6dbabb5082412affd2d2f5ededffffffc306183fef9ef3de3f885a4937c7bfb26c85f84126c308f8c209025e92dbffe386363feda5eda5e748917efefb73e7e78c8b4fcf7efd83b0c5045d4324c20410441b53a830aa87ffcf40d87fffffe71365d37fb7fffff73ebfdf7f29ed821b9033041040a810a595dfff0d86ddebffbff7df7a6fc76f1fdf42ffefc9d3761866b86186149d0835810408c39f50926fffb368115704546c9d5aee97ba5f7dfdab7ffdaedf2bfe2616dfef7684e6e9198a81524f5ededfb636f6efbd7ffffffbd7e68bcbafaefeffdbfbef60ac3425ba440c0bd7d6ed07683e0ed2b48df6932a6bbfbfb4ad2d9534c7ffedaede93fafffdc424dc84ccfe75449c8e89341b0c8e98647d061a840838413db0933e24dfb7fa23e9511f4b65623fbebe9619f02dffff63ed2fb62b42b7a422222222222221a0d041e081841e081820741aa0d0206c20837043040d8c20d92f0d87a7faa6fd11d256c238eba4904c5242222222222222222222222220818418418206086106e103a6ae0870eb5047858888888888ddcda0da47892d961ab065120618681884081044740c30bd6c36292ed761b48d0c192d930411c710cbe2082debd855ed22d80b10906538845b2423e471c3618929b081050c2541067b0c23e1eb3e06bd2045fb7243b0da0bb4976d26f6dd51544dede4c72a0361849b6292dd27dffde1b06210a0d9177e8ffb0482fffd04474834aedba86c20aeda4bd2656bce3366477a5c3fdb48111f60c2483d25d7f49150186985f837f6fa86186825650efad2f8a49db4b4b0ff0d86d282239830c111a0ce36c50515f3e07b6dfedfdfc70c190b117f9c8f87ff4bfee21143f0c852956ca7c24bfdbf7d2ff860d84a5e21821020421ab67762105b63fe9f10dff6fc36408ad05f75f345fe8111ec90926d2b22e88208b91a81ae1ca1e18213e2edae95d6fffc3608b1c541188a80a540b1b692041067b123989bd109e1082c1a0f38621856c312dfb0c51deed8a42222222222230db5e08e38223c0816dce3f4ad86a90fcc44a42bbbc208286c57ed83fbd6b612a1d9146cf9ddc561833a0c8ea088ed1c729d17ce323b23b31a41dec4a070c36b040bf15e13bfdfa08b652649328c9464ba3af0c19d063158af84161b484122d94e8285c84238ff2919f67d9a6671af28cf99e76c35ff1f1492870e2184d088a69a61530bd2045fb6e08a8ffdb092bf6ea543956d156c3a2a1875455137060c6dafe08bab37882048111fff49d2c5f17ff7b0c7ffd8c20b6ff4bfffd0223e834ae186fbfed0492f3ccb997660ce65f3f66323c5f366de6f3665d9e46f2f1bce18e3d75a5dfc30c57ec4420bf08f10d309150c20c8fa04a1323904787a41420447d022e284197d423c3aa09612fc1bf96ea42086120440c224de932b021dc30b093868f7bb69070e1a67b8616fba42c3d878e1bf861888416df1e2bffe2bffffe2aa4e9bdb3059f5ff0c82258243e72208111ffff04088fbffffe08111fadf7f4bfe186094affa088fa0bfff41763eda5fe82d24bf1e21bfc30c104937d9b495d7ffe97fb15fe96925fe51a4da52dccc172260c7ed8effedffedf8473fff137a46faebff864340404b7c1849bb50453fb4fed48e88f7f2247fb53a8d0a31a59ed2f378b6949b501513421869341c304c26836191f08308323b04ef085b1168436191e5592f0e0c20f64e62a4d830d4111111111111111071195e533a58e97495284ad2886499cd0729b4b55f2c0b991ccb8a4732e291ccbc6d978db23a3088ec206619219f66ccbb86834ca841a33c35083878250998c3048a80d022e60c36985fffff4b0d5e93a4c2369dfdda5765d5d8fdbefab7eade95d0223fba0447f74088ffc31ffffdbfffffffb0ffffffe9696969696475e1bffdb4bdb1b1b1b1b1b1b1f822afffb15fffffedf4b6e8239f4deaaaaa8dfa0ed2bf0815a4739121a5ddddddf60c8ea1020e8104c30c1edb06f11111111111c444657c478492f69420c324cc0311fffe5712013024ff3320112655224cbe4997fffffffffffffffffffffe6535fcec22270e6c39b109c5331984508a0172e2998cf9198cf91982e7010864470e660b970f9dad02e5c1827148e4663332308d633e1c8c3330a668ea8f8cc2308ea0853a2805c8e0be77a82e47148e1c9029b05cd08cc64e89c88644705c8e0849a270e6c39b109c53319845089c8cc64705f3b488a0172e0b9714e0cea087519d06611714c0a4705cc02e6646633e325f2382e4714b82e4710d017fa866c0c336061820c208dd59f0f90c208d8186c3083619b020cd6e103371e66a433707866a432ec106106c308117908d81866e0d3c15208dd65566c0d67c3e43353866a43083370611f33e1f21b0c250dc20cd4833606a19b030cd81860830823754361853e1f3acf87ccf87cb0830819b0308d81846e861060833533e1f21b0c208d81f3e1f21853e1f21820cd4fedc36e1b69a49eeb769041b6da6da69a749db7776f7769a69b69041d041b76d1eda3cd229e924ecaae0c3badddf7769db49eb76dab749ddc1876e1b70db4d24f6db55bf75bd6ef4e0c34106d2769277addb69041baaddaadda77ffb7b7e93ffeb7fff70447f6ff6ffffd275bdba7a51d249d9555bfffffdbdfffee088ffedfb7b7e93fffffffb696dada4fd7ffeb6bffffff4088f7ffa4e8111e4bf49b943be50eff943d7fc7fc7f943bd2d26fc71f4927656b6d0223c97e3e3feca75f2877a0447a50f5f1db4088f7ffa4e8111e943bd2fd0223c97a5ef5b693693e1058a5f2877a4de97e97f8fffffffc71ff6fdbffbaff335fe66bfdbf1ffeb5fffc71ccd799afec471dbffbaf335fffffffb78e3f8e238b697ffe9666871dbfd21c71c7ccd7d26fffd2149bf49bdbf6ffdd7ffffffdbd249bfa5f486f6d26fffffbf6f49bdd7fdb49bfff48526f6ff49bf6d76d26d21d2ff6f49bffffffd75ffffedfb7ff7fa5fa5ebfedffe925f5bffffebe930fdbffbffffebafff6ffff6ebffd2ff6ffffffeadebafeadfff7f7fef5c54784b8ffefcd337fe1241d6bdfab7c7c7e1261fdeadef5c7eadebafeadf7fab7fa5ffc71fdfe97fc7faf09612febffdfdffed79c7cff882e7fffbf8617c41026bfff5f3ff9ffc4106fdfafb5e7ffd784b097f5effd7ec7ffdcfff7ffff9fff5b88510bf5bffdbf6ffdebcf3de77fbffb7ed7cef2adfffeb7efefcef0dfb7adef5efeb710a217eb7b7fadfb5ffceef7f6fffff7fd3cfa1f4fd3ffedfb7ff6beffb7fffb7ffedbd7ffd3ffffb61bf6fa7ed7ffa79f43e9fa7dbfe9fffff6ffdbfd2ffffc5fff17ffb7edffbd7b78edf8ffb7ffedbafffc5f8f8fb6dfb7c5ef5e3f17ffc5edff17ffffb78fb7ffff8fd1e7ff6d1e7f6d2d8f63ff5ffdbfff636f6d2dbff6fd2479fffdb3c9fd8d1e7f5fd2479ffdb479f63f479ffd26d26f6ff636d2ffffd7f942fafff7dff62bfca177fe50bdfffbebffebf285ff77fbd7b15e50bebfca17d7bfd7ffffb7942f7f4bfca1650beadffed94256fdb4bfdd2ffff6ffffdbdb4b6e97db285e92b7fffb6ffeadfffa4adffed94256ffd5bff49b49b285b7ffb697ffffebfd76d6bf7adf7bf6bd2d76ffd7ddbdeb6d7ddb5ad2afd7fdbbaf7af6bd74abfd76d6bdfebfc91e93d36bb7afbbd1ffff5d7eb69a6a124db0825b4d361849374ddb0927a6a92854dbd34d4249a6ec34986124db27682aedb08255092da6a174d34db86124d375b4f4d42a8496d34d4249b6104b69ba7ada69a6aa1261849b0824ed42a69bb0c24a9269a6a1250bf0830841840c218418647818418418418621041b841b861041d041821082141036f081842308308370c8a2042081b6c8d1040f0c8d10420820c20c20c215840c20c206dc117208308370830843a0830850210410610830818430830c8f0308437083c20c20c20c20c107821041884191f06108a08308370c42f08308308308610af88888888888888888888888e222222222222e34222238888888888888888888888888e2222222222222222222223fd94917ff652b5fff4bffb3975ffc47ffffffffffffffffffffffffff8888ff8ffc9b9aa20f3a443cd68ea4499137a19188d71999168f91a8c8844dfb2b64641796f4c90475220a67522211a8cd466a323142ad28508308f819982e68142340616823406430b410611a030a750a5b8b82824e4c22ecee70231417b39ab6a8308f819982e11a030830a11a0308d0184680c2c2aaa854d26ea926c2aa4dd2a693616a5f17cc971e9072ac60a77c3d5158d26e926d30a9369369361617f0a8d8d2d5526c2e936ba36349b0ab0b7076a9c1c1c1dad26d2d526d1b18549b49b49b0b453d75453e9d5b9d1946c249b453f49b945f4e9368a7ca6ea5df157fc552756e74526e9d14f49b49b49b453e2ea928ba4dfd52f8ba5ea924df8bad7fffaffd57a4d8bfff8bf471fa38fe9fd2e96fd6eba75bebff7fd1c7a5fa5add3eb6b6b7fafafffd57ffd7ffd7dfbffafff5ffffffeba4be9778f074fa54f06925d3f0638fffae3578f4e97d3d3d3fd2f4bc7d2a83fff83c7fe0feeff4b5d2af1fffffd7d7edd2a0d6fd6d07eb7a0f29c79832464e32715b1271e705331e4e33319814e19e173829feba6e956fd6d6d6fe97497d36977fd7dd57f7846b0f0830508d6c235e1846b0f0ce73587846b0da0c20d046be19e74b413697f5ffffd755f58682a2189faf9988abf9d44d26e2c2a4dd3b6937a4937a4db5d53e9055d38682af5ffffe97a5f4da837ffe0df5f837a4dc95b075b5761a4de924de9376eaafa40e96136d7ebffffd755fb7bff5ef5fefa4dd3ffeda4de924de936f7fe97584dbffffffebaafa50e837faf86d52fc37fd37fde1bfd05ffdf57e82d735143af4bffffa5e97d238f57fff7ebf7d6ff1ec5b5bd25bd6fd6c74b4b7471ebf5ffffebaaf4926fffafe92fff7df0ac30defaefeef74c3d7adb49bfd2ffffebaafa4906e9ff5f754bf7fff08ef6dfe2fffb471eadc5ebba41baf4bffffa122dd0914f495d7ffff4bffffc105b0dbf963bffffd872c77a122d5575f4bfffff5ea937ef5d3d74af5fffe96186ffb7ffbd5d061edfe937bd2ef4f4f5fd7ebebfd7f5afffff4b0e754fffffdaba87fffebebffff910f29de96ebdafdafa56bfdd75a5b7f75b775dd3d5edede5be3f75b54bb5b5b5fffa450bfafffad2285fd6fffe6d3defedbfbf1b14689f6febff48a17ffffd2f492fadeb49eb49249ebfd74bfdff5dbd7d7f7dbffe9e924b7a7a7afffa4a72e948692fff3c92d25fca125b75fdf7dd375db75b74d55fdfa5d29d2f497ffffffa1a6df84e9b4bdb48275a1b69613adb4b4bc2840ba6d5b4b6db4b6d2dfadbf3f6dfab6921eda4da4da5d3d2d34adb4aa1a4da49a4da50d24926d24e1a49b6936824e4570e1a574da49b6da49b69570d24db4fb4136956da4926da4da4da49c107f820d5db495b09369020f6d26c25ab69020db0902061884191d030c26a441808c6120c420830830c420830c427a91303083083e1849b495db494106da4da4da408388e2220e1921b06188438621307886210b062222223861088888d388888b061920a10844310831083108638888888888888888888d2d56828ffffe4040d0a4188571a10ec684820c20c8632823c1b0d91e0d04e2140874190c0b982083240ca08a7194104192a19d466b2358e83083ff87aaf841ff841841820c20c10709a77fddf7e9df7a61341841a0f69ffdffe9ffa69a69a7445e68898efffd7d1131df7a2263bfe827841bf92199243fb220b841bff841b44774476d11db4476f4da4f7fef6bfa4f7de93d3d3d3d3d5d26effdfd7d26efbd26d21a756e9f5d3ffffc90efe9ffe9ffaffff7ffc90f963d2ffefbfebffea3dc90ffffb5fffb921fc90ffb53043ee3e927effd2ffdbf49fbfbd27d0696a97fdf90d19d7fd2fff7f7ff4d2f4bfedff15bd7dffedfb7fc59204bca04ffdff5ffbfff7f7fdd3ad7fdff85dae97ffbfbff22e61dac3ffdff0fffbffefeffa6ee3bffbf24337bd7bffefefff9d0573a8bffbfe491ff4bffefeffa70ec851e1fb696c7fb7daf17eda5b1ec6da5f6d776c865fbffffaffefbffb8612bffffffffffffff2e58e60bdeda5bffef5dfb696fbb693fffdd6d7ffffd7ed7fed6d7cc157ed26d2dfff8f9223eda5beeda47cba6d5b56d6c358617ffffefe185ff86176c2da56b6958a62b7ffdad5fd8adf762b8a638a63d35bffff5fb5beed6f4d5434d7ff7ff7ed7fb5b4d34d584185bfeffabf8616fb8616c269a6a0c20c211111111111110c211110c210c2060830818288888888ffffffe5342e21958865a086448214b16575219ac883c97c97cb60b4180832823419a0cc0373c1a020c861b0ab19200b91c0b84192034138ca08f037363240cd432820832702e608106500de106106aab0c20feb86107af841c3fdb4bc20fd07d34ff869dff69f7e9ddffde9f84fa278d13b7fe9bdaf69ffa77fb75e9fdf49b413aaada2263ffd1131ebe8898fbfd6f444c7e88bcfd3ed850a164a9841bd6a4819243841b92176461118508372487f2411d7c20d90cb413c91b694da59a0421842184db49effdd27ff49f7bf75bd27fa6fafbffba4dbcb1ffba4debe937bdfdd5e937eaffe87ffa7fb4bfa7e4877f4fffbafd3fd7ff204c8c6463fffffff4bfffbfbabfffffafffdbabfff7fff7f243fdd2921ff7ea3c57ffd27bffd249fdbf49f4bbfbfbd27faf5982ff5feba90d9f5f90d05d7ffaefc86c235bfffc86c6e68b841ffa5ff6bc57fdffc56dfc7b7fffc2517fc7efff5fefff5dfb5dffff4a478ffafd5eb85fa5ffc2dffdffff84a9bfebeffe1ffdffc3efdaeffff84a9ffaf7abe481bf9213bffdefc90177fff9236d12dbfe17febc923fa5ffc923dfb5dffff4157fc903696af5edb69717eda5b7b1fec6da5ff417ffffffffafffeffbffb6432e82ffff63ffffffffffffffa4fffb69547fb6977eda5fbfeeda5f7fafffb5ebfb5d7ed7fffed7dd7a56bfeda4effb6972447db4bf7fddb4bed2ff5ff0c2fc828cf0c2fdfc30bff20a03fc30bec359050dccb6d7fd8aaafd8ad5fd8afdff762bd8af219fda5fed7fed75fb5fbfeed7d7e2bfda7fedafbf6bbfff6bc35d435fe185bfb8616afe185beffb8617b0b8b084444308444443084444430844444444308441843111111ffffcaea8295c2c522053b33108410ed0295c710c8b45820cd00b9c0d878082833ab330d84c33a99c0d8083041943220361f02020c20c86c880c020cd00b9b0d87d9f33ab2a08980d01065067565382e41b234c10741fc3ff4b41a0fe1841841f0683ffc27841ba507e83a25cfeeff4b44b9a25cfed12f6897bed12e7fde83d12f76b7e89fba08367572c21643f96094a5a80836820df2d416434106d041be59da08367572d47d138cb08106dba9687e906f4ff87bfd2e9e9ff0e936937e1ba7fef49bd26dd2dfd04f49ffbbfd2d2749ffb49d26fdb49ffbe9f49bb5dbf56fdfef2c7fe97df7fbd5d3fbf7fcb1fff4edd6ff5ffffbfd2ffffd5d6fdbfffbff5b74bfd2ffffb7fa5ffffd74fffffb7ff4f6bffbec7ff7fd2ec6c7ff1ffec7fdf6d2fdb4bff1dfff7fa5ddffaadfb77ff7daeb6f5fe9587fa5b7fa5b0d87fa554ffb0ffdbdd2e9d8ad7fc8551ff7fd2e42d642d5ffffe42a8fefb10bff4bfb07c868f84bbe434015390d1406c1f21a27097ffb07c8689fbda90233b5aff0c1fc56dfeb860c307f1594027fe183ff6f097ed457f061fd7fc4cef061830febfff061fffa7fa75fc1be5840f6f9608ae589306f96a03fffc1be5a8ede898ece52c674e17f2bad8bf2c3edfd37916148817e587c887ff9182ffb7a4daffcb13fc3fedffd3e1c3fedfffe1fffd27ff45bbff86fff6fe9bc361bffbed7f0dffb7a4dd76ab7fe53b95cb1bfefbff7906dcdb7fddf7af48e37ff7ea3dea9ff6fffff7fbfffffaffffff7effa4dffffffdbfdbffffefb5ffffdbf6bb55bff5fffeffdffffefbd7a5ffefefbd24dfedd5bafef8fdbdba6ebfbb5b5f56ebfe3fed69ffbfaffefefebaffb6ada5e96bfef69eda4b7fb69586bfff908fbd86ac35ff3edb56d2f0930d7ff6d3db4926f2a1e443c886da99bc309720df3ef20df3b720df830943094867c20dfbec30898f6184a433e0a8612e41bf77b44ddec30953fc867cc867cc30970c57f7bfef8628315fdec42762ba0c57fbb15ec52dfff862b26e2f9fcc0cb8cc66065f3032f99e5c65c6633f98cbe633e32e33198cc67c65c6632f98cf8cb8cc65f319f197198cc6633e32e33197cc67c65c6632e32f99e5f3033032e33f98cc65f3033e32f98cb8cbe6797198cc0cbe6797198cb8cbe6797198cb8cbe6797cc0cc0cb8cfe633197cc67c65c6632f9fcc0cb8cc7617ffff7b0985ff86b0c2e0985ffb4de184937ffec2ffffffffffffffffffffffffffffffffffffffffffffffff830844444443888830818422221c3042184220c211111060844308444444441843fffffffffffffffffffffffffffffffffffffffffffffffc711c444447ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe12097fffffffffffffffffffffffffffffffffffffffffffffffaafffffffffffffffffffffffffffffffffffffffffffffffe23ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffcb20b89fffffffffffffffffffffffffffffffffffffffffffffffcae4b92f9ac66a190867567c361864364832199ad8419d00828675321089066b670361c33ab3ccd4ccc3613067566a6436483fffffffffffffffffffffffffffffffffffffffffffffffeaa106107fdad6a1070f4b74bfffed6bffffffffffffffffffffffffffffffffffffffffffffffffa69dfbdeda4897bbd2ffbffbdefffffffffffffffffffffffffffffffffffffffffffffffffe894344a1fcb2ff7a4106e590f4936f960ffcb04ffffffffffffffffffffffffffffffffffffffffffffffffff55841e107bfd56d526f0fa5e977ff7eabfffffffffffffffffffffffffffffffffffffffffffffffc2855b5bbfbe9ba49bef4a67ff7ff7df5fffffffffffffffffffffffffffffffffffffffffffffffcae0a1086129e9e58ff79877ba54fbe92db7f2c7ffcb1fbcc3bffffffffffffffffffffffffffffffffffffffffffffffffffff7fff6ab7fa5fa5f7ffdffffffffffffffffffffffffffffffffffffffffffffffffffffff6ff5756ea9ff4926ffdbffdbf575fffffffffffffffffffffffffffffffffffffffffffffffe5755646349b49bdffee9d7ff4bdbfdfff7feebfffffffffffffffffffffffffffffffffffffffffffffffffff7edd7dd2dfe97e97dfff7b75ffffffffffffffffffffffffffffffffffffffffffffffffffff6ffdf74a9f4b4926ffdbffdbfdffffffffffffffffffffffffffffffffffffffffffffffffffffbfebd5affe97b75efffbfaf5fffffffffffffffffffffffffffffffffffffffffffffffffffbe4347ead5bafc25a7fac868edff21a00b7f56bfffffffffffffffffffffffffffffffffffffffffffffffffff6fdbfd8af8ad526dbfdbffdbdbffffffffffffffffffffffffffffffffffffffffffffffffffffffeafff5133bfebfffff57fffffffffffffffffffffffffffffffffffffffffffffffffffedf2d47ba6be1d5feb2c1dbfe5825bfeebffffffffffffffffffffffffffffffffffffffffffffffffffedff5ab5f2c3d36936dfedffedfd6bffffffffffffffffffffffffffffffffffffffffffffffffffffdbdfff6e9e3ebffffdbdffffffffffffffffffffffffffffffffffffffffffffffffffffb7faff6bf4daebedffedfaffffffffffffffffffffffffffffffffffffffffffffffffffffdffeeb7adfbb6ff7ffdffbafffffffffffffffffffffffffffffffffffffffffffffffffffdfbd6bffef2c8f5f7ffdef5afffffffffffffffffffffffffffffffffffffffffffffffff6d26d2dbf8dfed7f6d6f5f6fff6f8dffffffffffffffffffffffffffffffffffffffffffffffffffffbff1ef5fdd3b7fbffeff1fffffffffffffffffffffffffffffffffffffffffffffffffffe3eabb5ef6ffaf8db4be3aaffffffffffffffffffffffffffffffffffffffffffffffffeda4da5befeda5fba56c7effeeffffffffffffffffffffffffffffffffffffffffffffffffffffff7db4bfbdffdb4b211f99bdca1fffffffffffffffffffffffffffffffffffffffffffffffff6c24d84b7906f4fb0c25fb7f520deef0c1641be77ffffffffffffffffffffffffffffffffffffffffffffffffffec5315bf55b15dee95bfbb10bf7eabffffffffffffffffffffffffffffffffffffffffffffffffed35fbbe185fdeffe1affddffffffffffffffffffffffffffffffffffffffffffffffffe22c2610888888610888888888830421c444447fffffffffffffffffffffffffffffffffffffffffffffff8888fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff097fffffffffffffffffffffffffffffffffffffffffffffffafffffffffffffffffffffffffffffffffffffffffffffffe222222222222222222222222388a88860c4444444444444444423ec14211111167372ac20c20ca08864482219120886590c886448224110cb24110cbe61041a69a69a69a6a1069841841841a841a7985050a897344f9a69a69a69e9a69a69e9a60a171a0836820e8bb68bb68bb68bb68bb68bb61517945db9779779770a8bca2edc7060a1074ad26d26d26d26d26d26c169b49d041b4106d041b05a6d26c182a088fadd3d3d3d3d3d3d3fbd37fffef4e8223f5ba7c7fffffca2af1fff2455fade9d6d249b49b49b49b49b49bc74bfff1d26e9e234fffffffe9660d8612618498612d2f11ffffffffae136298a62b5fffffffff9d0a2da69ac865fffffffff87278d068341f0fe5b928a7606215210ecb05ffffffff231d36117cc22f9845f3ca77f2b95b21b241920810650cd4cfb3e67561064e05c20c9067564683008329066a19ac66a192031fffffffedd3d3d3d3edfed6b41ffe107841fc1a0c20c20c20c20fb5ce8fffffff7f49b49b49bdfef7e8973fef44bde897bbed13f69a69a7bd375ffffffffffffffd34106fff4106cd4d041bf9676906d13c6894344a1a250e66a9235fb5b5b5b5b5b5ccefffff3f76bd57a7fef49bd26efc3682749b841e107841f7ab57a7a7a7a7a7afdfffffdeb7d4cf49ffbd27d26efdb56e9d6d6d6f8615b4ad6d6d6d6d6d76d6d2b5b5b5db5b5bcc3bd6fbfe58feafa7963fdeba6e9e9e9f6184986ada4da4da4da4da4da5da56ada4da4da5da4da5ffffffbd5f5befdb4b5ffff6298a8e38e38e3d8a6298a6298ad8a8fabaa4dfffb7d7d3edffbffffa86134d34d34d35b4d34d35b4d7eebec7fdfc7fdffc7d26d26d26f0c20c10610610610610610616c20c20c20c20c2d841856ebfeffef5d6fbf6d2ffffc44444444444444447efa4db0ffdbeba7dbff15fffa2e3ebd7c85abfbfffbffd7ffc43f56bec1c7f7fff7febfff76ff49b0c1fedf94027fb7fe12fff93c7d5ff061ffffffffa5fff41bfdd78372eafb7fffb7fe12fff49fd6a9364b8bfedf910ffdbff097ff8ddbdf8c3ffffffffe97ffbf5f50dffb7dfdaedff94ed05ffffeeace37ff7dfdeb7f49bd05fffdeb59647ffefd7fefff417fff8df5bfff6fbfb5dbff549b49b49b4bf1d3fffbefef5bfa4dd57ff9cbd57b75ff1daf6bc7ade97ffda57d2bd7fddb5db4b7d26d2db49b49b4bfbeec35ffdb5db4bcfbc24dafffeda5ff8612ff761844c7ec3096fc543094867f6126c24d84ac2ea92b0c57fbb109f62b7e8315b14c5314c55df7617fe1af0c2fe0984ad34d3511110610888886084430844388308584c2610305111c44447f84b51fffffe4060c0c1d882359130cf3256c8be41e6b8f8cd6335c7c66a19ac66a1e0fff55a083083a083083083083d9127fffe9a7a69a69e59df6bffaa278d13c6a89e344a1a278d13c7c37f8faad24da4dd24dc20e936937dbffc285e9e9fa75ba7a7efc111e461fe40c21d022d374dad374f4dd37db2817218ffc9c5c9c6752fe975e97f5d7f8418442787fe10666f083083cfbfffffffff84f4f6d2c27e9a7e55b221ffffa4dfff6e4f3a278ffe4f3e89e344ac7fa5fe97ffffd04d865d106ffd04dfd06e107ff1515c57c5457fbe97b697bfa5ae3fd575f55fafa6ffebfa6e9fd55557d57ffafdfffafff41209504bc2412f8fefba58ffba4ffa49697a497c2f5ff85faffd42412509784825f270fc7df9387f8ffe82412a09784825f05fdd2c17fffd24b4bd24be8851fffe8851ffffaa0904a82f4120ba488fbcc25b5d11f7e619fe90482a417a0905f417fbd682ffffd0482d05e82417e17dffc2feffd5249526d2492e97f943ed7ffca1b6bf55555f55d7ffdebfffffd24b4bd24ba5aeda5ffafb695afafaeda5fc256bdfc7dafdef9f7f5f5ffe29b5db096d6dafb6128617fe433e10cf190cfec25219ec8675c52a261c3917857f130e1fb14c4b1ffafaec57e0985bb5fb0bf69affa55a569562184ee184222184e221840c21111c4716108c44444444447fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe5a15043b388655886496212c10ca621d8621d9688643621916892d1629d0608190c334d8c1033a06512e0a0861940882ea0889c8280c867a88e645d08f520b8a833a0cea335886b14e8304417d48650103350182303402064314a064819c0ca3e0a01033501820621d03348e19a0819a81410c53a0cf8651c14e82ef083f41f0f09f0e0fbc2683fef09e107c3083ed786107fe1070eff5fa7e107de835b87fa0c20fd7d07a7c34f5fb4f5f4eff6eb7a7e9f7a7777de9a7f77a7a7da6ffda7dfa777fff4fd7bd3eeff4d7ff4f4fd3bebb4ffd3bfdb4b7a213dfa2179fe884f6bdf7a213da2179fade884f7a213df6884f7dfe884f7afa213df7fff4106cd63e106e4652461b9198083dc8c37233ff4107841bfbf41079195041b918b119e820dbeb2326461b4106e460ac84190834106e461bf91a4696fa7f413fbf4dfbe1befa6d04ffdf4df4fe1ba7d6bde9ffe9f7bf7f7a4dff7efa4e9efbf7a4fdfa77a4fa4dfe937c98ffdd26f4fd26f7bfb4bf4fe93ffd3c8c7fedff4e93fc8c7fd3f4fef4f7fff4fc8c7fd3ffefef5bfaffd2d2ff7ef4bafd2ef4bd6ff5b7effd6f4bf5bfbfb4bf4ffbffe3dffff8effdfe3d3ff4fae97f4ff7f4fffbf918efffc7ffdfff918eff1fde463bffffff7ffff7fff918efeebb7adfa5e9692fa5b7ede9251afb7a5adfeb6f5fe92debfade96dfbaffa7fe40c03ac818fd5ebffffd5ffc818109e41417ad3dff206275a79050915fd3ebfc8180dd76ffff8afde2bfdbffdf6ffffaffbae2bfdffe2b6fd8fffffd7af5ffffafffff85fd5d7afd7ffaff6bb7fffd792031575fedf92031f57b7e480c7fc7efff5fd5ffd6dffdbfffe17fbc2ff6fffdf6ffffafebae17fbffc2dbf6bffffc3fd787ffffc8f5afffffd7df7f0ff5ffe1fffdbfff9194b91abf577fedfffd5edff2317f23165efeb2326fe4654affef6f918a2fffff2321ffbc8c87fffffefffffd7eaff2321ffbffc8c87fff6fb5ffdfbd7dffdbeffd7dbefed7856bfd7bdaebfdaefb7ed77debdbf7dc8c1c5efa5efb91836fe2f7dc8c1ef5c8c9eaebfddeb8bf7adf7ffc7ff9ac7f7faf7ff1fe6b1faf1ffffefdff7fafff7c7fded7f5ffbffff7bf5ff7bfb5fb5f8afed7fed7f7ffbd7dffeeb7fafeeb7fdfbaef5ef51bfef5dfbd7fff7b5f75ffb55fd2f7b575f5ded7b5fb56bfed75fb5fdffbb697dd7fb6b7fafbb6b75f7bb6bb697b697feda5dfb697efffb5f6d7fed647a7f097f6adafc8f4fdaf6bf6bd7f6bc8f4fdaffff76184be184a432c4790cba030aaff1fbb0616184bd5f760c2c865830c25ec3096f2197dd8612d5fd8612fde432eafd8af62bfd8fbfafd8d8afefd8f62bd8a7ff62befd8afffeed7bffb21b07d7f5eec86c1eff5eec86c1fb5ed557ed75fb5fbff76bdaff69d5febdda76bd5f769f6bdaffdad5fdafdffed7b0be1ed757c385fb5b0beafdaf6bda7fe1b5d5fb5c3ffee185e185ef86b5f782f70d6185ebee1af0c2f0c2dfdc30b5fc30b7dfe220c108830422220c1088888888830420c10888888304220c1088304222220c10888883042222231111111111fffffffffffff2b8981730c88645991765bab656017324190846490cdb38c96324f20f35c48c90183a47c66a19ac66a1fffe0c2e17f55a5e820c20c20c20fff95c6992b7dae43666d7ffff4d34d395cb5ffff2d0e093f82ffd7995d13c6894344f1a278fe223fef5fd0faad2f4937083a4da4dfffdbe67ffe142e17e9d6e9e9fffefadffe53843a0453c135a6e9e9ba6fe6c8841914191722623419d466b23a911044319d47920bcd91d07e68442c653c4417fe4322322411d07e5033a97f5f4bfaebfc20ccd841918c20c8c671841918d420c20cfb0830819a30830830830884e0611097083083f0819f668ccd8419a350818442084d84423909e0cd1a9b61061067d9430884b2f2106107ffaffffff4f4f4fd3d534f4c27a69a784fd34fc26eba7a84fff09eba69f5fa69e543221e437fe937ffe27ce89e744f3f3e7d13c689e626b6895be7ca27944f1e895be27ca278fd12b777a278fd12b7ffa256ff9f289e375fd13c68958fd2f4bffffd37a4de937c53710541b49b841e1078a6d26e836197e1070cb9a6e837ac20ff541b882841c32c226c32e65cc20f10514dd06ef0cb9fa0dc20fff45c78af8a8afa7ebebe9e92ebed6e9eb4bd6fa74bd25b7d52e96fff5baa74bebf4b5ffe21f5f55ffdfdffaa6f7a7a7fde9be9ffa6f5a7b5e9baa7ffe9ebe9b75fe9ba7f5ed57d57d7e3e3d7af8ffd78afff5af15fcc3bd7ff49bffeb5effd7ffae4f1d04bc2412ffdf7fd6f74da4dfdefa4dffbd24dff5bd24dffe9375fbf5fee93ffd06f4bd24bff0f87ff5c3fff875fffd70bdf75afffffffadd7faffd749d425e12097fd9080ec8407fe36421fffb210e3fff8e588f6bf1ffa4dffff1dd7f1ffd637412f0904bfec1ec1ffec1fffb07ffffff575ffc7ffffafffffbe97a497fc3786fff0dfff86ffffff7ffff5ffff7ffffd7d505e82417fc1bc1bff9923fff06e612fff309ffdd662ffeffff9823afe619febe905e82417fc1bc1bffc1bfff06ffffffb5fffe591ffffd7fffffd05e82417fc3e1ffec3fff87bfffbffababff5bfffedffeffd7d526d2492ff986f9b6fff94330ded26d2f30df287b697f943db49ffca1eda5d3fb697f943baff286dafd64f755f55ffffffffffffffffffff63ffffffffe3fffffed2d2f492ffbfbffeda4fdadafbeda5dafeda5dac74da5dae95fdafeda4ffb695afafebb697ffed2ed2ffbed2e9ebed2bf7afefde9aefdebdfdebfbebfbdffadb4abff25dffed7b5ff6c256b0c2c30bf6ad84b8617f6c25c30bed84b8617ff8617f6c25fed84a185ffb0bc867f61290cf6433f7fec56c57fb14c545315ec531522d8a916fb15b15bb15b15a5722d917057ec535fb14c4b1febb14bb15fffdadaff69a96e830bda69c309fdac30ba6b0c2f7770c2fdaff69afeb6a95a55e2222184218422221841858610610886106138613888610861088610861088bb86108886162221840c2111c4182c5842231111c4444444444444468444447affd75e594507ebd447ffffffffcb71602e6195805cc90642116e0d95464433b2c67193264d19d9d991232b0cd4cecd59da533ccecb43416e4aff0617fffffffffdae7467d9da5bc94bff2a4fffcaabfcee6f291f2dc29f2d0e093ffffffffffe5967fef5fe3e38e3fffe3fffdbe67fffffffffffdf5bffffffffffe6c8e83f272214329e25cbff2191191208e83c90454c8ecd4bcd9108324c535914e59184751720c8882cd91d053a0f3647519a864611311a0c8b16420cea5e6cbcd91d064c0a6b235964411d4529cbf22f1a0c9823a9119144663350cd446a22208865938c8c23a11d47f083083f0819e668ccd8419a350818442084d84420e42783346a6d8418419f650c221381918ca1840ccd93b29d9c6106110910833361061067d84199b083ce30830830884b2e60cd1841e1061061078418418419a3083231a8419f890c2079a1841841f8419e650c2212e1061061067d8419f61079e610610666c20c2210c48c64ec22120b397c5bc20c20c20668d4db50830833cc20c20668c20c20f083346106106107f4d3f09bae9ea13ffc27ae9a7d613e827fe9fa7a613d3d3f0984fc27a7a6134f4d34f4f54ef09e9269fa7d7a6984f4f4fc2613d3ffff54c2613d754d3d309e9a7a7a6134e5b8cf89f289e3f44addde89e3f44adffe895bfe7ca278dd744adbaa256ffe7cf13e744f327989adc4d6fe4edc9e7d12b7cf989f327944f3135b44f1a278f9f3e89e3d244ade92278d12b1c4d6dd789f289e393cc4d6e26b7f276e4f3cf9ffffd13c7276d12b7fe89e344f3135b44adf3e512b1a278f9f3276d13c7083e9ba0deb083fd506e20a1070cb089b0cbf2e61078828a6e8377865f841ef841ff8a6c32fd37a4da09b841e107f4106d04d865cf083c5374da09b49b841e83741b8a6e20a836fc20fa541b841e107bc32e69ba0da09b841e107f4106d04dc53619637f0cbff10541b4106e107882882a0da4dc20f083c537083d06e29b4106e8374fa74bd25b7d52e96fff5baa74beb5be96ffa7e9faf7efbf5f7f5ba7a7debed2d2e9e92ef5bd0496bf7d74e97bf7dfafbd3ffff496badd525d7dadd3ae974eba5effa6f5a7b5e9baa7ffe9ebe9b75e9dd69fffffdeba7a7fa7afe9ffebde9e9ba6fea9bd2a7d2a6e9e9dd7fa6eba7a7fa7aff90233ff54dd3d3d5537bd3d3fd3d37f4f4dd7ad78afe61debffa4dfff5af7ff7fff5f5f8fffff7fff5d7f8f6baf5ebbffa4bff77f5afffffdfd7fffebf7febe3ff5faf5f6bfff7a49bfeb7a49bffd26ebf7eb49be926fffffb1e9ba6fd2c7f49bff1ee9f7dfeb7ba49bd2dd27a7ebfdc7a6e9bf4b1fffffadd2d26eab7ba6d26fd27dfd2f7ffd70bdf75afffffffadd7f75fffffe185fffc42ffff8587f5d7fd7afeb5ffbaff585fffc42ff2c67ffaf1ffae1ffffd7f8d7ff8e597f6bf1ffa4dffff1dd7f75fffffb21127fff2a03ffff938764203f1c7fc6ffc5c7ff75fc64187fffca80ffffff1fff1b2129fffe3fe3bffffd5d7ff1ffffebfebfffffb060bfff82ffff82b07ffff75f231dfffaff82fffe0bffffffffb07ffffffdafffdffffd7fffdffdffffffc368851ffffa2147ffffa214786fffff5fafff7ffd10a3ffff4428fffffffffc37ffffffd85fcc27ff7598bffbfffe608ebfbafffffc1b447dfffd11f7fffd11f41bf98418bfe609afa6e619feebf98488fbfffa23efffffcc35ff98c3ffff98bfe66ea63fffdaffff2c8ffffebfebfffff83682ffff417fffe82c1bffffbfeafffd7fd05fffe82fffffffff06fffffffff7ff5757feb7fffdbffbffffff8785fffe50e17ffff0b0ff77fdebfbdffbffdc2ffff2870bfffffbca1ffd87ffffbfca1dffca1eda4ffe50f6d2e9fdb4bfca1dd6da574da5ffff986ff695a5edffeda5ffe6dbda5943ca1ff9437a6d2dbca1b6b695d7f943fb4ad2f6fffffffca1b7b697e50cdb7b49b4bdb5ca1fb7e50fffffec7ffffffffc7fc7faffffffffffffffffffffffdffffff1fffffffffffafaffffffffffffffffdb4bb58e9b4bb5d2bfb5fdb49fb57b5ffffdfd6d6d7ed2d7ed7ff57ed5b49b4bf6d263b5db6d2b5b57fdb4b5b5b5fb4b5fffff6d2b4ad7db49fb5b5fb56d2fb49b4bfdfbd35dfbd7bfbd7f7d6f54f56bfffda56bd75efdafbd7fdada5a57dffdf4f5ddefe957f7daf5d7bf6bf9a3ed7b5ef7debefb4ba7af7eff7effed84b8617db0970c2fff0c2fed84be185e1856d7fffb56d61858617e1849b5f8617fdb5b586936126c25fb612e185ddb09430b0d2ff6c24dac30b0c2fc30936bffb6bb6bb61286128617db095ac30b0c2fc30ad84be1849b097f62b62b762b62b4ae45822e0afd8a6a45b14d315130ffe458fb15130e1c5457b15130e1c8b762bfe261c362a61c6c5315fb14d315b6c5312c7cc38da916fb15130e1c5457b15130e1fc8b9e261f22d8987ec5314c57b14c545315ec4b1ec57b14c57f6b0c2e9ac30bdddc30bf6b70c2c309aff7fda6172dd4b75e1a616f8617fb0b6b6134d7ed6185db4d7b0b7f6985cb752dd786985fbfb5bb5ed06830bda6a5ba0c2f6b6bc34d44443084308443084308445dc30844430b70c2c3083084445c444308309f0c2c30844308309dc43084444309c308430830830844430843084430818422185b888610613e18586108861061388b888610b86108861061061088610616184184220c210c2110c20c288888888d08d088888e388888888888888888d0888e38888888888888e22222355f5ffffffaafafeabebfcb3850cee63f2cba0ffd57d7faafafe22222223ff96b862c9b6338ce33533b5267192c6767664a8c8c676b667696ca227193868041920341e0208de4c0cd4327fffffe17a083d07c35083083bfffe6a64b1feba84f44fdf784c26dffffffe0b4a4ed907241b960cb21f276e4edf1fc7fffaf41075413f875410741076ffffffeb5692b7f616aeafffffffd2bd57ee460457576ff9b23a8c8d19f23a0b938cd45e432f36474191a23a0cad8a742cd0b21c663350c863290b24e3419a88ea4464665fea97ffffcb715668ccd9b7f84184192ec20c2610666f083083c2213c184424420c20c976106106799a3336106107841e79a841841841840c221352de106106103346a107afa5bffffddd7ff4d3d34c27e9a7e13f4d3d34dd709a7a7ea9a6984fd530984f54fafac7f2adffbeeffe26b689e389e33db93cfa278d12b1e895be27ca278f9f289e3bbe4f28958d12b1fa278d13ca27944adfe89e393b6895bf44ac6a3aa5fe38f7fafe107a0dc2629d04dfd06e1070cb9841c32fd3741b8a6e837f4826e107841e20a8369369370838658c10541b4106e107882841f4abf4b492efaffda5ed3efe96beb7d3a5d3a5bebbaebd25d75adf496badd2faaffeabed7fe9e9baaebfa6e9fa7fe9bfa6ed7ae9e9ea9bdf7a7ea9ba7a7aa7a35095c811384b20421d04fcc3bffed7fffd7fffad7ad7e61dffffaf8e3febf7ffac25f8ae1426ffd7f4fbfe3fee93e937feffbff43a4e93d6f76937d6e96937493f0ebeb870fbeebffd7f85faffffebfadf750bffd70e1ffd78fff9104bcb061e4488d65ed7fff8ff280ff1ffffc7f1daf9081fff8d9087210bff8ffff0dd7cb0f86c37fabaffffc17fffffffeae817ffd8360ffffffdb5fdbdb6fbffffffa2147fffffffeffa2147fff86c37fffffef594effddffbafff3097d11f7e611fffe612f303eea88fbffcc61837ff30cfffeadfefffb5fffffd05ffffffff6be82fffc1b06ffffffccdffff92ef30ffd5d7ff7fc2feffffefefaba85fff61c3ffde50ffffeb5ffffeffff69650ffffca1b6bb697f943fca1bffedab6be50cdb72eddb4bf286deda5b6bbeadd7fbefff63ffffffffffffffff63fffffffffffffffbfefffac75fdab697fafb695af6bfb697b69475adadaeda4fbf6beda5695af6adda5b697fda5692daffd2bffb5fbdfdebfbfef6bb57dfefb4ad27afbdf7adfdb5a6d7fc90db56d7337ffe1a4d84bf6d7db09430bc30bfb612f6c25edac30b0c2ed84ad6d6185f6c250c250c2f0c2f692c3097ff695a5fdff9871b15fc4c387ec5312c7c8b82a458ec57b15bc4c386c4b1ec4b1fb14c5314c57b14c5315b12c7ec5618afbf6298aafd7fb09afd85fb4d6e184fed7b5d30b6b6bda69a0c2f6834185b5bb5b0bff69af88888886106108886138886103085c309c443084430844309c18420c2110c20c20c20c2110c20c20c210610d86108308444443083094622222222222222222222222e22235fb697ee96fba56ea23ffffffffe5a42629da7c9b89190acec9f045f034cec6a3b03823bb2ae4d33b2b88154106f3b4833b26349b2207e762e32ac749b681c1d5c1da681c1e958ff588fd5b3b7593344bacecb51534a26a59d8aac8c5d26d755d575d75fffffffff5b5d5755d75d7eebaaeabaebafacb8cd8c9c89c50884e3a08c83d9672288239cc190c67c66c611084109730648221088632466d84424c920f65f109c452e47e43864244c19233414a7cdb218c2213ce724192064673d96193784425cc190cab61c3847b611ae197f08d619e208308d708d6f08308d61870e1969cb9d0611ed846b0c2358678820c32ce7b678820c32e66b846b0c19620bfa0c14235ce8410611ac30cb9c2358611ed846b670820c235c32e741847b7f7741374f8549b7455e9d26e2d26ddff455d04da56936e8abe826dd157e9d26ff455c2d3ba2ae937854ad04da4dba2ae93fa2ae826ffeb6af83a4db6dabadc95b49bffb6d6d2749b6dbd6db6f5749bfb6c1d5db6d26f0749d6d6db6d27edb5bffa5ffa4dd7ff4e937ff5a5ada4dd7a5d7fa4dfd7fd6937eb697f5afd697ffdbbfffeffa6fffff6e9afff6ffbffffbfffe9adbffaffdbffa1d8fadfd88feb7ffe878adfe87fd8adfff63eb7f8a18ffffa1ffe6ac3fdfd86177dfffe627dff993fd87bffec3fdfd6614faffccd216ffdbfff6c23bfffffffffff6ffff6ffffc23bffffee97ec3fff61820bffffffffffd87fffb0ffffc105ffffeffc30fffc30d2fffffffffff0c3fffc30ffffd2fffffff61fffc3a5fffffddfff7f87fffc3fffdda5ffff77afc909bfbaf6d2fabafffc90bbaff242fdbbaffdbfbaff2424bffff242dafb69184feff9b4ffeffffb69393a7ff6d2fcfa77fff3c9fdff7274da5ff7feda57afb5dff5fdff4b5fffb5b4b5fed7fdf5fff7fd7ed2b5ff7ffb5b696b612bfdbafbeff6eb5ffb09430add7f612fef6ebffbfdbaf8616c257fdffd84ada4da2876c57565d6da5fd614114f49b49b450eecbab2ebd8a629b4becba62becbae9b4bb2ebfebdb4acbad8a62b0a08a7ed841d975ec5430c20a457b50d261a6da49a70d2915c36d04da522bd86c34d369a6d24d361b49a6c386936926c34d34e1a49a6da4c34da6a4570d34d8943a61a69b50c420d41061488841061884834e4410134191ea2106a09a6826130c20c20c4241a6d06120d36a440821040da0984c20e44a834c3109a0830c20c20c2690698614134130986158422222222222222222222222222222222222222222222222222222236eddbb70c3832230e3fff96902664a33b0432dd3e572a1488334337d34c23bb2a51048a5323235c56e4cec563b9c11b8308eec23bb4fe9364b464a860a75190c649479d8d8ceec6104c349b49bed34ae0e0e0e0e0e0ed0383a41b57576a23d7ff8fadf5d0cb505110b4565289295ffe77eb22112a5a4da8a8d5575fff5d574affffffffffbfd5575fff5d575bfaaaebffebaafff2cd15cc4664482368c0cd8cd333cc4664519b33c648228cdb0884c22883d909511504b884e22e843cc8c83c19c84898320c5cc190c67c66c7941f98321910879a667988cc8864110932441378442791a7212e60c8654e0887721fce724192668a82a611ed846b1870e0a0a9847b67882610611ed9e20830cbf35c1432d39ae11ed865ccd7065a0d6182a6197f41846be8308d61870f846be10611ed846b8282a611ed846b0c32ce7b611ae197435861973a0c23db5b0659cba42358611edc2aa09b49ddc28554136e8ab68aca09b7455fa70bd3a09be9f49b0abe8abd3e8aba4dbbe93c5a09b49c2855413695e826d27d26fd1574137fe152b413706cc4b693f83836625b6db6d6db6f5707d5d6f57d26c1b3176dabdb6937fa4f256d6d270706cc4b693eb693e937db6b7fe0e93ade852fffa14baad2ebfffd2ffd26e87afeb49bfd7a74b5fa14b5bd2d7d26fad2fff5b4bfb697ffb7fedff7fdfb7dffffdffffd74dedd7fb74d7b75fffedfff4d6df43fff43fd0ffb1fb143ec75bffb1f5bfffd0ffd0f1d0ff5bfd0fffc50fcdafff993fe64ff61fb0e6aec3f7ff61feffafbcc4ffcd579b5feffcc4ffeb333413fffffffdbf6fdbfffdbffffffffffffffffffffffffffb0fd87ec3fffd87ffffffffffffffbd7ffffffffff0c3f0c3f0c3fffc30fffffffffffffffb5fffdfffdff7f87f0f787fffc3ffffff7ff77dffffdfff77f08a1dfff9217f9217edfb79216df75fedfdd7ffd6485ff8229fe1143feebfc909ebff242eda5ffeda5fb697e793f9ad3b6967d3efff9a93fbffdfeda57fb69393adb4afdffdb4bff7274da5ed5bffed7fb5ff7fded7dfd7ff7fd7f7f4ad5ffb5b4bb57fd7fb56d2fed2b5f612b0bafd84bfb097f7fdf612efdbaffbfdbad7bfec257fd84a185ec257edd7f6126d2fe185b0976298db450efd8afd8afb0453ebb2eba62acbaeb6d2ecbafebdb49b450ef6c20f498a6c20fd8a62acba629b083b2e9b4acbaf629ebf6298aa6d3220f915e9a6d269a6d269b0e1a49b0e1a4d30e1a49b6926c34d3869269b6948af4d8943a6d04d3128749a6d34c3698943a61b6930d34da6d24d34da6a106184c161a8208430c241a0c26184834da912b0da910809a912a061884106d04c27226309862106a0820c30a08323d020c28208430c20c26830830a09a0c426826130c261841040c206106184185111c44444444444444444444444444444444444444444444444444188422223c7fffd38271fff2d22664dcab2b79d9966415c23bb2705cece294e215d4652da699dfe99dac8533113a4d864fc96e6e0b05ff0c10617577061bd283b4d2b4d34d7adbd6f11b1dc6a3b640d5e64a8bcadacef55e4ad1535f6d7471ea9ea9afaafdbe71dfffffffdb5f4b5471dea8e3b5f55febb7ebbebbafaacb4a060887d79a0c2213c8c47f28193e6d92064833511466ccf19208a336c22106d59d73044f982cd3282281844271d04641ecb26acea2998a4f998a1109e4673d961920c908e699b648c2210c11f108cd3208d61832c45b08d6c32e86b7b69611ad9c208308d6c2340611ed9e209841847b678820c32c56e0a982a782846b0c235b0cbf846b0cf1041ee11ae11ae0a11ae197435b38410611ac308f6fce104182865819ad865b48749bfd26f49bff49b7455d26d2645c09b7455b456504dba2aff854776151dde152b49bc2a4dba2aff4f4e169f49b7455d2b4137ee8ab85d26fa4dfeb7adfa5adb6dadd4b9edb6db5b6dbd2b06c360d86f0749d6f0749b6db4ad5d5c1d5f5b6db49d6fdb6c1f5be937ffffb7ff5fada5d56975fbd3d3fadffa4dd7bfffffd6b697f5fffffffff4bfffdf6ffdbfd2befbfa6bfffd2bbefefffe9adbffffeb7f8f8fb7e3f8fe87fa1ffbfffe23fadfef6363d8e3fe287ffe3fdff0b85fac2f85be64ff993fd6f7dfd42fefeb6c361ec3c2facc05ffc2fffc23bf08efdb5c23bfc23bfffffebfffc23bfffeb6dbdbc23bfffffc23bfffd020bc105fd6082fc105f5ffff1fffe082fffe361b0f61e082fffffc105fff54bd2f6d74bf4b6fffff4743fffd2fffd1d0c30c30f0c3d2fffffd2fffd25e97fe97e96da57fdffbfffda5fffee1c3e1f4bfbbfff4bf75ea97a5ec5697e96c42c90bfc90bf4afaebf4bfbaf4adb6f6f4bff242fff4beffd7ffffffa3d4d2fdb4bfdfffdc9d7fbffb9f4e613e713ffee4e9b49ebfffebe97ffb5fffa56bfdafe95ebafda5ffafa57befefffda56b6bfffdbaf4afeffeffbd6c25fd84bf33b7ebaf8616ff6ebf7befefeff8616c25ffe675fdb4bc25850453b2eb0a5d5d7850453fc28229c8440afd8afb2e935bb4ad2f62b0a5d5975b697adf5d7d5975850453f6298a6d2fecba4f0a08a765d5b493504148ae1b0e4570d374e4570d34e4570e41e6934d36934d8769a7695a49a6d48ae1b0d36d24d34d38694349386930e4570d34da69b4934d361dc8ae1b0e1884103084e9c269a0c268107408186134834c309a6c30906830986120d369d061384472844720830830c20c269a0830c4241a68309c89e44f0e443a0c269069861061361241a6106d386134d4444444444444444467c6222222220e238e2222222222222222222222220c8a65111a4435f8f4b4bd2af5f5d25f5da482f41586121f1b149a70c1041841c447ffcb34cd158ccd103322c64519419a8cd46768456333440cc8b191364833519a8ced1930290c5218a4285212210c88ce864470919821b0202b292066604041e11a0308d0184680c2466086c080aca4819981010784184680c234061422e0308b80c22e032300808b80cd6611a030a11a030b4ba0acea1d26ab6b6b6974159d43a4d535b5b0a9369369374936104b6156c2d25c2b69e9aa5695a5692e15b4f4d534ad2b0a93a4e93e93841256152b0b4ab0adaeabbefba55856d7555df70bdf7dfda5b85dc2d7a4546e7b753dbd6d6d6d7a4546e7b753dbe7b6b6b68a8aebaf4b8496d1515b454694aaa2eda41d520ebffe94aaa2eda41d520ea907ff17fff5f4bc5fc5face8fd73a35a38f5b5b5bd6747eb9d1ad1c7d6b6b7df7df3a37a4b7adf5eabb57aa574bfff5eabb57aa574b57ffeeaeaeaaaebffff0ffc7f1fffff87fe3f8fe3fff6b6b6bf6a97ffd244217ede2ba5adadad94e324662491085fb78ae97adad94e324662dba6e9ba156eb5bd6ff0ebeaa92fffc235860a9f0ebeaa92ebfc235860a9f10a21442a884bfffed7f5ebfff49b0abdafebd7ffa4d855da69a56a410bfffadfda5a4bfffa4d836625bfb4b4974bfd26c1b316db6dedc9587fffd3afaaa4bfff49ba1d3afaaa4baff49ba1d86c361d30d26ffff9d422fd2d57ffffe7508bf4b55d7fffb6db6adf7fffc1baf4a925fffd6fc1baf4a925d2ff5bf08c3c230f08c3e8230fffffe1d7d2548a0225fffefe1d7d2548a0225a5ffbf9a040936126c24d9b08a126f6cc04fffeffd75c41fffffbff5d71075ffffab6adab7eadfffffdebd2a4bfffffdebd2a4bd2ffffe9e9e9faa7fffffbafa44e952275ef4f4f5feebe913a5489d7a408a8d3d7feaeaeafaabfef5bd7ffd25d25ffffffff497497d25fffff7df7fdffffff55d5255490ffff75f55d5255490f497fdd78fff8d7be3fff734b5f435432909e9e9e9fdcd2d7d0d50c932437a7a7ffffd7fdeb7afa0697ebaffffafa0697ebaebffaff5d75f5d7fff86925ea92ef4f4f4dd7c3492f549757a7a6ebdf7df49f6f7adeb28adc57a4bafaebab696dc57a4baebaeada5f757575dd3d6bebaf6b09e9696dd374dd36927b584f4b4b49ba6e9b49309ba4e93a5ba5a4dd04dba09f70c124081d697bd3d3d0621041b86092040eb4bf7a7a0c42083040db49b49b4926d20dd3d0206f4081bf111c444431083108310847111c444443108310844431083108310843108310831084310846da4222da42222222237a7ab693695b49b4ada4da50cad8e10656c70a2223ffffffffffffffffffffffffffffffffffffffffffffe5941c6516897755055e0fffa59a24bebffe96a97d7e662e110932320f06e3c1a648e45a7411af8659cd6182a60a9847b611af55a7f49b0a86a826e9d7abfa4d83662306625b57f5fe937434297f55bffff6ef5f63eb7e8763e987fbfcd587556ffff6d7b0ffff61fa0c3fffc30eaa1fffec3af6feebf2426fe689fdff6d2309fa5bfebf6bba5eff6ebec257ffaecba6d2f62bae94349361b69269b50d24bc89c1b41884106106185226788888888f11fffffffffffffe571b03a832f8ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff96ce64a1911f5eaabe0b85c2c1705ff2d72b8c1940c906623e455c419040c8cb84c20c20f083c20ff169a1a7a7f93b68bea277978f44ed860bd07a784e827e107ff63abedeb7fa7ebafa7ff82fa1ffff381fffffe117ffffffa0bf984bffb5fbdfb5ff5abad99bdebf616c2c3561a5c30bf8a886c715b15f9874c841ec883dadafe1a0c270c2c30b0c2fe222388888ff91397f5ed7b15da886147fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff800800800a656e6473747265616d0d0a656e646f626a0d0a342030206f626a0d3c3c0d0a092f54797065202f50616765730d0a092f436f756e7420310d0a092f4b696473205b203720302052205d0d0a3e3e0d0a0d656e646f626a0d0a352030206f626a0d3c3c0d0a092f4c6173742036203020520d0a092f436f756e7420310d0a092f46697273742036203020520d0a3e3e0d0a0d656e646f626a0d0a362030206f626a0d3c3c0d0a092f44657374205b203720302052202f58595a206e756c6c206e756c6c206e756c6c205d0d0a092f506172656e742035203020520d0a092f5469746c652028446f63756d656e744964204c415159585a4e3358424c55455834290d0a3e3e0d0a0d656e646f626a0d0a787265660d302031300d303030303030303030302036353533352066200a30303030303030303135203030303030206e200a30303030303030313732203030303030206e200a30303030303030323035203030303030206e200a30303030303234363333203030303030206e200a30303030303234373032203030303030206e200a30303030303234373637203030303030206e200a30303030303030333031203030303030206e200a30303030303030343731203030303030206e200a30303030303030353836203030303030206e200a747261696c65720d3c3c0d2f53697a652031300d2f526f6f742033203020520d2f496e666f2031203020520d3e3e0d7374617274787265660a32343838340a2525454f460d0a
+  recorded_at: 2026-10-20T16:40:19.674Z

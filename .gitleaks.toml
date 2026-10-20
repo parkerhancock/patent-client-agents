@@ -17,6 +17,7 @@ targetRules = ["curl-auth-header"]
 paths = [
     '''^typescript/references/odp/swagger-2026-10-20\.yaml$''',
     '''^typescript/references/odp/office-actions-2026-10-20\.yaml$''',
+    '''^typescript/references/odp/petition-decisions-2026-10-20\.yaml$''',
 ]
 regexTarget = "line"
 regexes = ['''YOUR_API_KEY''']

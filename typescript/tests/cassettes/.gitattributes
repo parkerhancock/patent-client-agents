@@ -1,0 +1,2 @@
+# Preserve captured response bodies, including their original whitespace.
+*.yaml -text -whitespace

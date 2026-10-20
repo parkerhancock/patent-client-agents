@@ -15,16 +15,22 @@
     "build": "tsc -b",
     "lint": "biome check .",
     "format": "biome check --write .",
-    "check": "bun run lint && bun run typecheck && bun test"
+    "check": "bun run lint && bun run typecheck && bun test",
+    "record:uspto": "bun scripts/record-uspto.ts --record",
+    "replay:uspto": "bun scripts/record-uspto.ts --replay",
+    "record:applications": "bun scripts/record-application-features.ts --record",
+    "replay:applications": "bun scripts/record-application-features.ts --replay",
+    "record:bulk-file": "bun scripts/record-bulk-file.ts --record"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
-    "@types/bun": "1.4.3",
-    "cassetter": "0.11.0",
-    "typescript": "5.9.3",
     "@patent-client-agents/client": "workspace:*",
     "@patent-client-agents/mcp": "workspace:*",
     "@prefecthq/fastmcp-ts": "1.7.3",
-    "ky": "2.2.0"
+    "@types/bun": "1.4.3",
+    "cassetter": "0.11.0",
+    "ky": "2.2.0",
+    "typescript": "5.9.3",
+    "zod": "4.3.6"
   }
 }

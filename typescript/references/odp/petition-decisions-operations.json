@@ -1,0 +1,68 @@
+{
+  "title": "Petition Decisions API",
+  "info_version": "1.0.0",
+  "openapi": "3.0.3",
+  "source_url": "https://data.uspto.gov/swagger/petition-decisions.yaml",
+  "retrieved_at": "2026-10-20",
+  "archive": "petition-decisions-2026-10-20.yaml",
+  "size_bytes": 34644,
+  "sha256": "7165b546a7754cb699028d36cb07d23f562110debc5acddbc622e53d18437d09",
+  "source_kind": "Official Swagger UI source-link plain click in Chrome; copied original download bytes",
+  "schema_verified": true,
+  "live_behavior_verified": false,
+  "operation_count": 5,
+  "path_count": 3,
+  "schema_count": 15,
+  "unique_ref_count": 31,
+  "unresolved_refs": [],
+  "external_refs": [],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/v1/petition/decisions/search",
+      "operation_id": "searchPetitionDecisionsGet",
+      "summary": "Search petition decisions by query parameters"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/petition/decisions/search",
+      "operation_id": "searchPetitionDecisionsPost",
+      "summary": "Search petition decisions by JSON request body"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/petition/decisions/search/download",
+      "operation_id": "downloadPetitionDecisionsGet",
+      "summary": "Download petition decisions by query parameters"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/petition/decisions/search/download",
+      "operation_id": "downloadPetitionDecisionsPost",
+      "summary": "Download petition decisions by JSON request body"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/petition/decisions/{petitionDecisionRecordIdentifier}",
+      "operation_id": "getPetitionDecisionById",
+      "summary": "Get a single petition decision by record identifier"
+    }
+  ],
+  "schema_names": [
+    "PetitionDecisionSearchRequest",
+    "PetitionDecisionDownloadRequest",
+    "PetitionDecisionSearchResponse",
+    "PetitionDecision",
+    "PetitionDecisionDocument",
+    "PetitionDecisionFilter",
+    "PetitionDecisionRange",
+    "PetitionDecisionSort",
+    "Pagination",
+    "FacetValue",
+    "Response400",
+    "Response401",
+    "Response403",
+    "Response404",
+    "Response500"
+  ]
+}

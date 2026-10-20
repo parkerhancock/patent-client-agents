@@ -57,11 +57,17 @@ test("MCP initializes, advertises schemas, calls the library, and binds cursors 
   try {
     expect(client.getServerInfo()?.name).toBe("patent-client-agents");
     const tools = await client.listTools();
-    expect(tools.map((tool) => tool.name).sort()).toEqual([
-      "get_application",
-      "list_file_history",
-      "search_applications",
-    ]);
+    expect(tools.map((tool) => tool.name).sort()).toEqual(
+      expect.arrayContaining([
+        "get_application",
+        "list_file_history",
+        "search_applications",
+        "search_ptab",
+        "search_office_actions",
+        "search_assignments",
+        "search_patents",
+      ]),
+    );
     expect(
       tools.every(
         (tool) => tool.annotations?.readOnlyHint && tool.outputSchema,
@@ -226,7 +232,7 @@ test("Bun HTTP rejects missing, wrong-audience, and expired tokens and enforces 
       versionNegotiation: { mode: "legacy" },
     });
     try {
-      expect((await client.listTools()).length).toBe(3);
+      expect((await client.listTools()).length).toBeGreaterThan(20);
       expect((await client.callTool("search_applications", {})).isError).toBe(
         false,
       );

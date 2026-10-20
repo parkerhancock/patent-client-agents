@@ -1,0 +1,637 @@
+{
+  "audited_at": "2026-10-20",
+  "scope": "Python domain clients; name-level current TypeScript mapping only, not behavioral or live verification",
+  "method_count": 70,
+  "methods": [
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "search",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "search",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "get",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "get",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "get_documents",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "getDocuments",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "download_document",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "downloadDocument",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "download_document_xml",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "downloadDocumentXml",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "download_document_docx",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "downloadDocumentDocx",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "download_documents",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "downloadDocuments",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "get_assignment",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "getAssignment",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "get_family",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "getFamily",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "get_granted_claims",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "getGrantedClaims",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/applications.py",
+      "python_class": "ApplicationsClient",
+      "python_method": "resolve_identifier",
+      "typescript_file": "typescript/packages/client/src/applications.ts",
+      "typescript_method": "resolveIdentifier",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/bulkdata.py",
+      "python_class": "BulkDataClient",
+      "python_method": "search",
+      "typescript_file": "typescript/packages/client/src/bulkdata.ts",
+      "typescript_method": "search",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/bulkdata.py",
+      "python_class": "BulkDataClient",
+      "python_method": "get_product",
+      "typescript_file": "typescript/packages/client/src/bulkdata.ts",
+      "typescript_method": "getProduct",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/petitions.py",
+      "python_class": "PetitionsClient",
+      "python_method": "search",
+      "typescript_file": "typescript/packages/client/src/petitions.ts",
+      "typescript_method": "search",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/petitions.py",
+      "python_class": "PetitionsClient",
+      "python_method": "download",
+      "typescript_file": "typescript/packages/client/src/petitions.ts",
+      "typescript_method": "download",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/petitions.py",
+      "python_class": "PetitionsClient",
+      "python_method": "get",
+      "typescript_file": "typescript/packages/client/src/petitions.ts",
+      "typescript_method": "get",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "search_proceedings",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "searchProceedings",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "get_proceeding",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getProceeding",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "download_proceedings",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "downloadProceedings",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "search_decisions",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "searchDecisions",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "get_decision",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getDecision",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "get_decisions_by_trial",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getDecisionsByTrial",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "download_decisions",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "downloadDecisions",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "search_documents",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "searchDocuments",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "get_document",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getDocument",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "get_documents_by_trial",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getDocumentsByTrial",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "download_documents",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "downloadDocuments",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_trials.py",
+      "python_class": "PtabTrialsClient",
+      "python_method": "download_document_pdf",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "downloadDocumentPdf",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_appeals.py",
+      "python_class": "PtabAppealsClient",
+      "python_method": "search",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "search",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_appeals.py",
+      "python_class": "PtabAppealsClient",
+      "python_method": "get_decision",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getDecision",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_appeals.py",
+      "python_class": "PtabAppealsClient",
+      "python_method": "get_decisions_by_number",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getDecisionsByNumber",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_appeals.py",
+      "python_class": "PtabAppealsClient",
+      "python_method": "download",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "download",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_interferences.py",
+      "python_class": "PtabInterferencesClient",
+      "python_method": "search",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "search",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_interferences.py",
+      "python_class": "PtabInterferencesClient",
+      "python_method": "get_decision",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getDecision",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_interferences.py",
+      "python_class": "PtabInterferencesClient",
+      "python_method": "get_decisions_by_number",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "getDecisionsByNumber",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_odp/clients/ptab_interferences.py",
+      "python_class": "PtabInterferencesClient",
+      "python_method": "download",
+      "typescript_file": "typescript/packages/client/src/ptab.ts",
+      "typescript_method": "download",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_office_actions/client.py",
+      "python_class": "OfficeActionClient",
+      "python_method": "search_rejections",
+      "typescript_file": "typescript/packages/client/src/office-action-analytics.ts",
+      "typescript_method": "searchRejections",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_office_actions/client.py",
+      "python_class": "OfficeActionClient",
+      "python_method": "search_citations",
+      "typescript_file": "typescript/packages/client/src/office-action-analytics.ts",
+      "typescript_method": "searchCitations",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_office_actions/client.py",
+      "python_class": "OfficeActionClient",
+      "python_method": "search_office_action_text",
+      "typescript_file": "typescript/packages/client/src/office-action-analytics.ts",
+      "typescript_method": "searchOfficeActionText",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_office_actions/client.py",
+      "python_class": "OfficeActionClient",
+      "python_method": "search_enriched_citations",
+      "typescript_file": "typescript/packages/client/src/office-action-analytics.ts",
+      "typescript_method": "searchEnrichedCitations",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_assignments/client.py",
+      "python_class": "AssignmentCenterClient",
+      "python_method": "search",
+      "typescript_file": "typescript/packages/client/src/assignments.ts",
+      "typescript_method": "search",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_assignments/client.py",
+      "python_class": "AssignmentCenterClient",
+      "python_method": "details",
+      "typescript_file": "typescript/packages/client/src/assignments.ts",
+      "typescript_method": "details",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_trademark_assignments/client.py",
+      "python_class": "TrademarkAssignmentClient",
+      "python_method": "search_by_assignee",
+      "typescript_file": "typescript/packages/client/src/trademark-assignments.ts",
+      "typescript_method": "searchByAssignee",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_trademark_assignments/client.py",
+      "python_class": "TrademarkAssignmentClient",
+      "python_method": "search_by_assignor",
+      "typescript_file": "typescript/packages/client/src/trademark-assignments.ts",
+      "typescript_method": "searchByAssignor",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_trademark_assignments/client.py",
+      "python_class": "TrademarkAssignmentClient",
+      "python_method": "search_by_serial",
+      "typescript_file": "typescript/packages/client/src/trademark-assignments.ts",
+      "typescript_method": "searchBySerial",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_trademark_assignments/client.py",
+      "python_class": "TrademarkAssignmentClient",
+      "python_method": "search_by_registration",
+      "typescript_file": "typescript/packages/client/src/trademark-assignments.ts",
+      "typescript_method": "searchByRegistration",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_trademark_assignments/client.py",
+      "python_class": "TrademarkAssignmentClient",
+      "python_method": "search_by_reel_frame",
+      "typescript_file": "typescript/packages/client/src/trademark-assignments.ts",
+      "typescript_method": "searchByReelFrame",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_trademark_assignments/client.py",
+      "python_class": "TrademarkAssignmentClient",
+      "python_method": "search",
+      "typescript_file": "typescript/packages/client/src/trademark-assignments.ts",
+      "typescript_method": "search",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_trademark_assignments/client.py",
+      "python_class": "TrademarkAssignmentClient",
+      "python_method": "search_all",
+      "typescript_file": "typescript/packages/client/src/trademark-assignments.ts",
+      "typescript_method": "searchAll",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "get_status",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "getStatus",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "get_status_json",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "getStatusJson",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "get_last_update",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "getLastUpdate",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "get_documents",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "getDocuments",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "download_documents_pdf",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "downloadDocumentsPdf",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "download_documents_zip",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "downloadDocumentsZip",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "get_image",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "getImage",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "get_status_html",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "getStatusHtml",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tsdr/client.py",
+      "python_class": "TsdrClient",
+      "python_method": "batch_status",
+      "typescript_file": "typescript/packages/client/src/tsdr.ts",
+      "typescript_method": "batchStatus",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_publications/client.py",
+      "python_class": "PublicSearchClient",
+      "python_method": "search_biblio",
+      "typescript_file": "typescript/packages/client/src/publications.ts",
+      "typescript_method": "searchBiblio",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_publications/client.py",
+      "python_class": "PublicSearchClient",
+      "python_method": "get_document",
+      "typescript_file": "typescript/packages/client/src/publications.ts",
+      "typescript_method": "getDocument",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_publications/client.py",
+      "python_class": "PublicSearchClient",
+      "python_method": "download_pdf",
+      "typescript_file": "typescript/packages/client/src/publications.ts",
+      "typescript_method": "downloadPdf",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_publications/client.py",
+      "python_class": "PublicSearchClient",
+      "python_method": "download_pdf_base64",
+      "typescript_file": "typescript/packages/client/src/publications.ts",
+      "typescript_method": "downloadPdfBase64",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_publications/client.py",
+      "python_class": "PublicSearchClient",
+      "python_method": "resolve_document_by_publication_number",
+      "typescript_file": "typescript/packages/client/src/publications.ts",
+      "typescript_method": "resolveDocumentByPublicationNumber",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tmsearch/client.py",
+      "python_class": "TmsearchClient",
+      "python_method": "search_wordmark",
+      "typescript_file": "typescript/packages/client/src/trademark-search.ts",
+      "typescript_method": "searchWordmark",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tmsearch/client.py",
+      "python_class": "TmsearchClient",
+      "python_method": "search_owner",
+      "typescript_file": "typescript/packages/client/src/trademark-search.ts",
+      "typescript_method": "searchOwner",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tmsearch/client.py",
+      "python_class": "TmsearchClient",
+      "python_method": "search_goods_services",
+      "typescript_file": "typescript/packages/client/src/trademark-search.ts",
+      "typescript_method": "searchGoodsServices",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tmsearch/client.py",
+      "python_class": "TmsearchClient",
+      "python_method": "get_by_serial",
+      "typescript_file": "typescript/packages/client/src/trademark-search.ts",
+      "typescript_method": "getBySerial",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tmsearch/client.py",
+      "python_class": "TmsearchClient",
+      "python_method": "get_by_registration",
+      "typescript_file": "typescript/packages/client/src/trademark-search.ts",
+      "typescript_method": "getByRegistration",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tmsearch/client.py",
+      "python_class": "TmsearchClient",
+      "python_method": "search",
+      "typescript_file": "typescript/packages/client/src/trademark-search.ts",
+      "typescript_method": "search",
+      "method_name_present": true,
+      "behavior_verified": false
+    },
+    {
+      "python_module": "uspto_tmsearch/client.py",
+      "python_class": "TmsearchClient",
+      "python_method": "search_all",
+      "typescript_file": "typescript/packages/client/src/trademark-search.ts",
+      "typescript_method": "searchAll",
+      "method_name_present": true,
+      "behavior_verified": false
+    }
+  ]
+}

@@ -4,8 +4,9 @@ A Bun workspace containing an independent patent research library and a thin
 MCP server. This is an incremental port; the Python package continues to be
 maintained separately.
 
-The first slice implements USPTO ODP application search, application retrieval,
-and prosecution-document listing. It does not yet implement all ODP 5.0 APIs.
+The USPTO API port covers the 70 inventoried public Python domain methods,
+current ODP Office Actions and Petition Decisions, and all 25 archived TSDR
+routes. Live verification varies by family; see [port status](docs/port-status.md).
 See the [source review](docs/odp-research.md) and [stack decisions](docs/stack.md).
 
 ## Development
@@ -48,8 +49,7 @@ const history = await applications.getDocuments("14412875", {
 Search defaults to a lean projection. `full: true` requests the full upstream
 record; explicit `fields` overrides that choice. Application metadata is
 flattened by default; `normalize: false` preserves the upstream search shape.
-The results include access-time provenance. There is no runtime HTTP cache in
-this first slice. Unknown response fields are retained rather than discarded.
+The results include access-time provenance. There is no runtime HTTP response cache. Unknown response fields are retained rather than discarded.
 
 Clients accept an `AbortSignal` per operation. Requests have a bounded total
 time budget and retry transient failures, including read-only search POSTs.
@@ -66,17 +66,33 @@ bun run --cwd packages/mcp start
 MCP_TRANSPORT=http MCP_HOST=127.0.0.1 MCP_PORT=3000 \
 MCP_JWKS_URL=https://identity.example/.well-known/jwks.json \
 MCP_ISSUER=https://identity.example/ MCP_AUDIENCE=patent-client-agents \
+MCP_PUBLIC_BASE_URL=https://patents.example \
 bun run --cwd packages/mcp start
 ```
 
-The tools are `search_applications`, `get_application`, and `list_file_history`.
-They declare input/output schemas and read-only annotations, return the existing
-summary/items/provenance envelope, and support opaque pagination cursors.
-`get_application` accepts one number or a portfolio of up to 20 numbers.
+Tools cover application search and data, file history and downloads, family and
+claims retrieval, PTAB, petitions, bulk products, Office Actions, assignments,
+Patent Public Search, and trademark search/status/documents. Input/output
+schemas, read-only annotations, lean defaults and query-bound cursors keep the
+MCP adapter small. TSDR tools are advertised when `USPTO_TSDR_API_KEY` is set or
+a client is injected. Historical search guides and schemas remain available as
+explicitly labeled MCP resources.
 
-HTTP mode requires identity configuration and the `odp:read` scope. Put HTTPS
-in front of the loopback HTTP listener for remote deployments. No identity
-provider, login UI, discovery integration, or hosted deployment is created here.
+HTTP mode requires identity configuration. ODP tools require `odp:read`;
+other USPTO families require `uspto:read`. Document REST retrieval requires
+`documents:read` and the originating caller's issuer/subject. Put HTTPS in front
+of the loopback listener. No hosted identity provider, login UI, or deployment
+is configured by this project.
+
+Document tools return filename, MIME type, size, expiry, provenance, and a
+REST URL, with local file paths in stdio mode. Authenticated REST is the default;
+a trusted host download tool must attach OAuth credentials outside the model
+context and save response bytes to a file. Ordinary URL fetchers do not
+automatically inherit MCP authentication. `MCP_DOWNLOAD_MODE=signed` explicitly
+selects short-lived, document-specific signed links for hosts that cannot
+attach credentials. These links are bearer capabilities, not single-use tokens.
+See [document transport](docs/stack.md#document-retrieval-outside-model-context).
+
 The CLI uses FastMCP's authenticated listener; its low-level `fetch()` entrypoint
 does not itself enforce the configured authentication and must not be substituted
 without explicit verification. The framework's public handler context does not
@@ -94,8 +110,14 @@ Secret filtering runs before recordings are written.
 # Explicitly record successful upstream interactions using your own key.
 bun run record:odp
 
-# Verify available upstream recordings offline.
+# More USPTO families and application datasets/downloads.
+bun run record:uspto
+bun run record:applications
+
+# Verify recordings offline.
 bun run replay:odp
+bun run replay:uspto
+bun run replay:applications
 ```
 
 Configure the key in the ignored local `.env` or through your existing secret
@@ -105,11 +127,19 @@ committing refreshed recordings. Successful live recordings require an active
 ODP key; synthetic contract tests and an anonymous API-error recording are
 identified separately and do not establish successful live feature coverage.
 
-On October 20, 2026, application search, full application retrieval, and document
-listing (including associated metadata) were recorded successfully for the
-official sample application 14412875. Search and retrieval each returned one
-application; the document response contained 184 documents. All three recordings
-replayed offline, and the MCP tools returned their data through the real client.
-These fixtures are required by the default test suite; deleting one fails tests.
+Live recordings include application search/retrieval/history and seven dataset
+views, status codes, PDF/XML/DOCX, 32 granted claims, seven PTAB/petition/bulk
+searches, the new Office Actions search, a small bulk ZIP, and current Assignment
+Center v3 responses. Native Bun Patent Public Search also retrieved an official
+18-page PDF; its archived response fixture verifies all 26 claims. TSDR uses
+separate credentials, and Trademark Search requires an externally provided WAF
+session; fresh authenticated coverage of those two remains pending.
+
+Bulk redirects can contain signed credentials in Location headers and response
+bodies. Use the dedicated bounded recorder rather than the ordinary helper:
+`bun run record:bulk-file --product=TRTDXFAG --file=asb261018.zip`.
+Select a currently available file smaller than 1 MiB; updating the fixture's
+product/name also requires updating its explicit replay assertion. The recorder
+scrubs signed query values in requests, response locations and redirect bodies.
 
 See [stack decisions](docs/stack.md) for the Rust/WASM boundary and security limits.

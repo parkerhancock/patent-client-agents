@@ -1,0 +1,105 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/applications/14412875/meta-data
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:39:56 GMT
+      x-amz-apigw-id:
+      - FjTmjEg_oAMF3MA=
+      x-amzn-requestid:
+      - 322f5c4b-8bda-4c52-a1a7-8a30fa1778f4
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad7995c-20c175755cc324912446c1ff;Parent=00c0683f289f82bc;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: json
+      content:
+        count: 1
+        patentFileWrapperDataBag:
+        - applicationMetaData:
+            firstInventorToFileIndicator: "N"
+            applicationStatusCode: 150
+            applicationTypeCode: UTL
+            entityStatusData:
+              smallEntityStatusIndicator: false
+              businessEntityStatusCategory: Regular Undiscounted
+            filingDate: 2015-01-05
+            uspcSymbolText: 600/14
+            nationalStageIndicator: true
+            firstInventorName: Tobias Sokolowski
+            cpcClassificationBag:
+            - A61N   2/02
+            - A61N   1/40
+            - A61N   2/006
+            effectiveFilingDate: 2015-01-05
+            publicationDateBag:
+            - 2015-06-11
+            publicationSequenceNumberBag:
+            - "0157873"
+            earliestPublicationDate: 2015-06-11
+            applicationTypeLabelName: Utility
+            applicationStatusDate: 2020-08-19
+            class: "600"
+            applicationTypeCategory: REGULAR
+            inventorBag:
+            - firstName: Tobias
+              lastName: Sokolowski
+              inventorNameText: Tobias Sokolowski
+              correspondenceAddressBag:
+              - cityName: Pullach im Isartal
+                countryCode: DE
+                nameLineOneText: Tobias  Sokolowski
+                countryName: GERMANY
+                postalAddressCategory: residence
+              - cityName: Pullach im Isartal
+                countryCode: DE
+                nameLineOneText: Tobias  Sokolowski
+                countryName: GERMANY
+                postalAddressCategory: postal
+            applicationStatusDescriptionText: Patented Case
+            patentNumber: "10765880"
+            grantDate: 2020-09-08
+            applicantBag:
+            - applicantNameText: BTL Medical Technologies S.R.O.
+              correspondenceAddressBag:
+              - cityName: Prague 6
+                countryCode: CZ
+                nameLineOneText: BTL Medical Technologies S.R.O.
+                countryName: CZECHIA
+                postalAddressCategory: postal
+            firstApplicantName: BTL Medical Technologies S.R.O.
+            customerNumber: 26111
+            groupArtUnitNumber: "3791"
+            earliestPublicationNumber: US20150157873A1
+            inventionTitle: >-
+              Device For Repetitive Nerve Stimulation In Order To Break Down Fat Tissue Means
+              Of Inductive Magnetic Fields
+            applicationConfirmationNumber: 6393
+            examinerNameText: MATTHEWS, CHRISTINE HOPKINS
+            subclass: "14"
+            publicationCategoryBag:
+            - Granted/Issued
+            - Pre-Grant Publications - PGPub
+            docketNumber: "4387.0210001"
+          applicationNumberText: "14412875"
+        requestIdentifier: 322f5c4b-8bda-4c52-a1a7-8a30fa1778f4
+  recorded_at: 2026-10-20T16:39:56.912Z

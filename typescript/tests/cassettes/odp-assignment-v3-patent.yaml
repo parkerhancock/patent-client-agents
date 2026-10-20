@@ -1,0 +1,82 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/patent
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        searchCriteria:
+        - property: "10000000"
+          searchBy: patentNumber
+          matchType: Contains
+          order: 1
+          relation: AND
+        dataFilter:
+          filterBy: []
+          rowsPerPage: 1000
+          currentPage: 1
+  response:
+    status: 200
+    headers:
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:39:52 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      server:
+      - uvicorn
+      strict-transport-security:
+      - max-age=31536000
+      via:
+      - 1.1 d2c100427e6cc08d2b75af72792dd922.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - _jZjYqVF1Idn8zqTvQhRp21VNdXMrgkYaJxJfYbK9nAt2ISDBOaxOQ==
+      x-amz-cf-pop:
+      - DFW59-P8
+      x-cache:
+      - Miss from cloudfront
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-process-time:
+      - "125"
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        status: Success
+        statusCode: 200
+        error: null
+        successResponse:
+          data:
+          - reelNumber: 35130
+            frameNumber: 327
+            correspondentName: DOCKET CLERK-RAYTHEON/MWM
+            assignorExecutionDate: 03/06/2015
+            conveyance: ASSIGNMENT OF ASSIGNOR'S INTEREST
+            conveyanceCode: 23
+            mailDate: 03/11/2015
+            recorded: 03/10/2015
+            assignors:
+            - assignorName: MARRON, JOSEPH
+              executionDate: 03/06/2015
+              acknowledgementDate: null
+            assignees:
+            - RAYTHEON COMPANY
+            noOfProperties: 0
+          totalRows: 1
+          backendPagination: false
+          filteredRowsCount: 0
+          message: null
+  recorded_at: 2026-10-20T16:39:52.121Z
