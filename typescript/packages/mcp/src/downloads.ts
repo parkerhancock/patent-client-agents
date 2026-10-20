@@ -18,6 +18,7 @@ export interface DownloadOptions {
   maxBytes?: number;
 }
 interface Artifact {
+  redeemed: boolean;
   owner?: string;
   path: string;
   filename: string;
@@ -60,7 +61,7 @@ export class DownloadStore {
         );
       this.baseUrl = url.href.replace(/\/$/, "");
     }
-    this.mode = options.mode ?? "authenticated";
+    this.mode = options.mode ?? "signed";
     this.ttl = options.ttlSeconds ?? 900;
     this.maxBytes = options.maxBytes ?? 256 * 1024 * 1024;
     if (!Number.isSafeInteger(this.ttl) || this.ttl < 1 || this.ttl > 86400)
@@ -177,6 +178,7 @@ export class DownloadStore {
       this.createdFiles.add(path);
       await writeFile(path, bytes, { mode: 0o600, flag: "wx" });
       this.artifacts.set(id, {
+        redeemed: false,
         path,
         filename,
         contentType,
@@ -226,8 +228,11 @@ export class DownloadStore {
     const expiresText = query.get("expires") ?? "";
     const signature = query.get("signature") ?? "";
     const expires = Number(expiresText);
-    if (
+    const signed =
       this.mode === "signed" &&
+      (query.has("signature") || query.has("expires"));
+    if (
+      signed &&
       (!/^[0-9a-f-]{36}$/.test(id) ||
         !/^\d{1,12}$/.test(expiresText) ||
         !/^[a-f0-9]{64}$/.test(signature) ||
@@ -245,7 +250,7 @@ export class DownloadStore {
     if (
       !artifact ||
       artifact.expires <= Math.floor(Date.now() / 1000) ||
-      (this.mode === "signed"
+      (signed
         ? artifact.expires !== expires
         : !owner || artifact.owner !== owner)
     )
@@ -253,6 +258,25 @@ export class DownloadStore {
         status: 404,
         headers,
       });
+    if (signed) {
+      if (artifact.redeemed)
+        return new Response(
+          "Download link already used; request a fresh link from MCP.",
+          { status: 410, headers },
+        );
+      if (request.headers.has("range"))
+        return new Response("Single-use links require a full download.", {
+          status: 416,
+          headers: {
+            ...headers,
+            "Content-Range": `bytes */${artifact.size}`,
+            "Accept-Ranges": "none",
+          },
+        });
+      // Claim synchronously before the first await: concurrent GETs cannot redeem the same link.
+      // A failed read or interrupted transfer still consumes it; mint a fresh link to retry.
+      if (request.method === "GET") artifact.redeemed = true;
+    }
     return new Response(
       request.method === "HEAD" ? null : await readFile(artifact.path),
       {

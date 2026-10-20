@@ -97,21 +97,33 @@ MCP adapters store a temporary artifact and return its filename, MIME type,
 size, provenance, expiry and URL. Stdio returns a local file path. Document
 bytes and upstream API keys never appear in these MCP metadata responses.
 
-Authenticated retrieval is the default HTTP mode: `GET /downloads?id=<id>`
-requires an OAuth bearer token with `documents:read`, verified issuer, audience
-and expiry, and the same issuer/subject that created the artifact. A trusted
-host download tool must obtain and attach that token, save bytes outside the
-model context, and return a file handle. Ordinary URL-fetch tools do not gain
-this ability merely because MCP login succeeded. MCP and REST may share an
-explicitly configured resource audience; `createServer.downloadAuth` can select
-a separate REST verifier. Upstream USPTO credentials remain server-side.
+MCP-issued, single-use download links are the default HTTP workflow while
+credential injection across agent hosts stabilizes. Set `MCP_PUBLIC_BASE_URL`
+to the externally reachable base URL. `MCP_DOWNLOAD_MODE=signed` issues a
+short-lived signature for one artifact; the default lifetime is 15 minutes.
+The first GET consumes the link atomically before reading its file, so concurrent
+requests cannot redeem it twice. HEAD does not consume it. Range requests are
+rejected without consuming it. A failed or interrupted GET still consumes the
+link; call the MCP download tool again to obtain a fresh artifact and link.
 
-Set `MCP_PUBLIC_BASE_URL` to the externally reachable base URL. For hosts unable
-to attach credentials, explicitly select `MCP_DOWNLOAD_MODE=signed` to issue
-short-lived, artifact-specific signed URLs. These URLs are bearer capabilities,
-not credential-free links or single-use tokens. Treat them as secrets: avoid
-logging query strings, use HTTPS, and keep lifetimes short. Neither mode puts
-OAuth access tokens or USPTO keys in URLs. Do not forward MCP tokens upstream.
+Authenticated REST remains available concurrently. Remove `expires` and
+`signature` from the issued URL to use `GET /downloads?id=<id>` with an OAuth
+bearer token. This requires `documents:read`, verified issuer, audience and
+expiry, and the same issuer/subject that created the artifact. Authenticated
+retrieval does not consume the one-time link and remains available after link
+redemption until artifact expiry. `MCP_DOWNLOAD_MODE=authenticated` selects bare
+URLs in tool responses instead of signed links.
+
+A trusted host downloader would obtain and attach the OAuth token, save bytes
+outside model context, and return a file handle. That integration is not
+implemented here. Ordinary URL-fetch tools do not gain this ability merely
+because MCP login succeeded. MCP and REST may share an explicitly configured
+resource audience; `createServer.downloadAuth` can select a separate REST
+verifier. Upstream USPTO credentials remain server-side.
+
+Signed URLs are bearer capabilities. Avoid logging their query strings, use
+HTTPS, and keep lifetimes short. Neither mode puts OAuth access tokens or USPTO
+keys in URLs. Do not forward MCP tokens upstream.
 
 The implementation uses per-process temporary files, a bounded 256 MiB cache,
 a 15-minute lifetime, idle expiry cleanup and random artifact identifiers.

@@ -21,7 +21,7 @@ synthetic contracts. The Python package remains separate.
 | Trademark Search | Implemented with supplied WAF session and refresh callback | Synthetic contracts; no fresh authenticated live verification |
 | TSDR | Python normalization plus all 25 archived official routes; separate API key | Complete route-contract tests and historical responses; no fresh authenticated live verification |
 | Search guides, field/status catalogs, schemas and Swagger resources | Eleven labeled MCP resources and pure library helpers | Resource enumeration, content and authorization tests; historical source labels preserved |
-| REST document retrieval | OAuth default; optional signed-link compatibility; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
+| REST document retrieval | MCP-issued single-use links by default; authenticated REST concurrently available; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
 
 The [feature inventory](uspto-feature-inventory.md) maps every Python method to
 its TypeScript counterpart. It excludes legal manuals, fees and CPC connectors
@@ -52,8 +52,14 @@ well as request URIs. Preserve successful recordings when refreshing a subset,
 and respect upstream 429 responses.
 
 Remote identity-provider login/discovery and hosted HTTPS are not deployed.
-Authenticated REST needs a trusted host downloader that attaches OAuth tokens
-outside model context. Plain URL fetchers require explicit signed-link mode.
+MCP-issued single-use links are the default until host credential injection
+stabilizes. They expire after 15 minutes by default; the first GET consumes the
+link before file reading. HEAD does not consume it, and Range requests are
+rejected without consumption. Failed or interrupted GETs require a new MCP link.
+Authenticated REST remains available for the same artifact by removing the
+expires/signature URL parameters and supplying a bearer token. It does not
+consume the link and remains available until artifact expiry. A trusted host
+downloader for supplying OAuth tokens outside model context is not implemented.
 MCP scope is odp:read for ODP, uspto:read for other USPTO families, and
 REST documents:read for artifacts. REST ownership uses the originating issuer
 and subject. A separately configured REST audience must preserve that identity.

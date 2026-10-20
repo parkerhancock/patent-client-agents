@@ -38,7 +38,7 @@ export function configurationFromEnv(env: Record<string, string | undefined>) {
     );
   const mode = z
     .enum(["authenticated", "signed"])
-    .parse(env.MCP_DOWNLOAD_MODE ?? "authenticated");
+    .parse(env.MCP_DOWNLOAD_MODE ?? "signed");
   return {
     transport,
     port,

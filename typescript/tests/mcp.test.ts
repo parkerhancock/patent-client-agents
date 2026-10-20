@@ -256,3 +256,16 @@ test("Bun HTTP rejects missing, wrong-audience, and expired tokens and enforces 
     await identity.stop(true);
   }
 });
+
+test("download URL issuance defaults to one-time signed links with authenticated issuance opt-in", () => {
+  expect(
+    configurationFromEnv({ MCP_PUBLIC_BASE_URL: "https://patents.example" })
+      .downloads.mode,
+  ).toBe("signed");
+  expect(
+    configurationFromEnv({
+      MCP_PUBLIC_BASE_URL: "https://patents.example",
+      MCP_DOWNLOAD_MODE: "authenticated",
+    }).downloads.mode,
+  ).toBe("authenticated");
+});

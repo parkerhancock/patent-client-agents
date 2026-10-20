@@ -223,7 +223,12 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   server.customRoute(
     { path: "/downloads", methods: ["GET", "HEAD"] },
     async (request) => {
-      if (downloads.mode === "signed") return downloads.handle(request);
+      const query = new URL(request.url).searchParams;
+      if (
+        downloads.mode === "signed" &&
+        (query.has("signature") || query.has("expires"))
+      )
+        return downloads.handle(request);
       const token = /^Bearer ([^\s]+)$/i.exec(
         request.headers.get("authorization") ?? "",
       )?.[1];

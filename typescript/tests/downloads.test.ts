@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, spyOn, test } from "bun:test";
 import { readFile } from "node:fs/promises";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import { z } from "zod";
@@ -30,6 +30,9 @@ test("signed URLs retrieve exact bytes, support HEAD, and reject tampering", asy
   if (!("download_url" in result)) throw new Error("Expected HTTP download");
   expect(result.download_url).toBeString();
   const url = result.download_url;
+  const head = await store.handle(new Request(url, { method: "HEAD" }));
+  expect(head.headers.get("content-length")).toBe(String(bytes.length));
+  expect(await head.text()).toBe("");
   const response = await store.handle(new Request(url));
   expect(response.status).toBe(200);
   expect(new Uint8Array(await response.arrayBuffer())).toEqual(bytes);
@@ -38,9 +41,6 @@ test("signed URLs retrieve exact bytes, support HEAD, and reject tampering", asy
   );
   expect(response.headers.get("content-type")).toBe("application/pdf");
   expect(response.headers.get("cache-control")).toContain("no-store");
-  const head = await store.handle(new Request(url, { method: "HEAD" }));
-  expect(head.headers.get("content-length")).toBe(String(bytes.length));
-  expect(await head.text()).toBe("");
   for (const parameter of ["id", "expires", "signature"]) {
     const bad = new URL(url);
     bad.searchParams.set(parameter, `${bad.searchParams.get(parameter)}0`);
@@ -129,7 +129,7 @@ test("actual FastMCP listener serves downloads without MCP bearer tokens and sco
   }
 });
 
-test("authenticated REST checks issuer, audience, expiry, scope and document ownership", async () => {
+test("default one-time links coexist with authenticated REST issuer, audience, expiry, scope and ownership checks", async () => {
   const { generateKeyPairSync, sign } = await import("node:crypto");
   const { BearerAuth } = await import("@prefecthq/fastmcp-ts/client");
   const { privateKey, publicKey } = generateKeyPairSync("rsa", {
@@ -203,7 +203,14 @@ test("authenticated REST checks issuer, audience, expiry, scope and document own
     );
     const url = new URL(result.structuredContent?.download_url as string);
     url.port = String(server.address?.port);
-    expect(url.searchParams.has("signature")).toBe(false);
+    expect(url.searchParams.has("signature")).toBe(true);
+    const first = await fetch(url);
+    expect(first.status).toBe(200);
+    expect(new Uint8Array(await first.arrayBuffer())).toEqual(bytes);
+    expect((await fetch(url)).status).toBe(410);
+    // OAuth retrieval remains available for this artifact after its capability is spent.
+    url.searchParams.delete("signature");
+    url.searchParams.delete("expires");
     const get = (auth?: string) =>
       fetch(url, { headers: auth ? { Authorization: `Bearer ${auth}` } : {} });
     expect((await get()).status).toBe(401);
@@ -240,6 +247,114 @@ test("valid MIME parameters normalize without blocking document publication", as
     );
     expect(result.content_type).toBe("text/plain");
   } finally {
+    await store.close();
+  }
+});
+
+test("one-time links allow HEAD and reject ranges without consuming, and only one concurrent GET wins", async () => {
+  const store = new DownloadStore({
+    publicBaseUrl: "https://files.example.test",
+  });
+  try {
+    const result = await store.put(
+      bytes,
+      "file.pdf",
+      "application/pdf",
+      provenance,
+    );
+    if (!("download_url" in result)) throw new Error("Expected URL");
+    const url = result.download_url;
+    expect(
+      (await store.handle(new Request(url, { method: "HEAD" }))).status,
+    ).toBe(200);
+    expect(
+      (
+        await store.handle(
+          new Request(url, { headers: { Range: "bytes=0-3" } }),
+        )
+      ).status,
+    ).toBe(416);
+    const responses = await Promise.all(
+      Array.from({ length: 8 }, () => store.handle(new Request(url))),
+    );
+    expect(
+      responses.filter((response) => response.status === 200),
+    ).toHaveLength(1);
+    expect(
+      responses.filter((response) => response.status === 410),
+    ).toHaveLength(7);
+    const success = responses.find((response) => response.status === 200);
+    expect(await success?.text()).toBe(new TextDecoder().decode(bytes));
+    expect(
+      (await store.handle(new Request(url, { method: "HEAD" }))).status,
+    ).toBe(410);
+    const fresh = await store.put(
+      bytes,
+      "file.pdf",
+      "application/pdf",
+      provenance,
+    );
+    if (!("download_url" in fresh)) throw new Error("Expected URL");
+    const discarded = await store.handle(new Request(fresh.download_url));
+    expect(discarded.status).toBe(200);
+    await discarded.body?.cancel();
+    expect((await store.handle(new Request(fresh.download_url))).status).toBe(
+      410,
+    );
+  } finally {
+    await store.close();
+  }
+});
+
+test("authenticated-only issuance remains available and does not consume retrievals", async () => {
+  const store = new DownloadStore({
+    publicBaseUrl: "https://files.example.test",
+    mode: "authenticated",
+  });
+  try {
+    const result = await store.put(
+      bytes,
+      "file.pdf",
+      "application/pdf",
+      provenance,
+      "alice",
+    );
+    if (!("download_url" in result)) throw new Error("Expected URL");
+    expect(new URL(result.download_url).searchParams.has("signature")).toBe(
+      false,
+    );
+    expect((await store.handle(new Request(result.download_url))).status).toBe(
+      404,
+    );
+    for (let attempt = 0; attempt < 2; attempt++)
+      expect(
+        (await store.handle(new Request(result.download_url), "alice")).status,
+      ).toBe(200);
+  } finally {
+    await store.close();
+  }
+});
+
+test("an unaltered one-time token expires even before periodic cleanup", async () => {
+  const store = new DownloadStore({
+    publicBaseUrl: "https://files.example.test",
+    ttlSeconds: 1,
+  });
+  const clock = spyOn(Date, "now");
+  try {
+    const result = await store.put(
+      bytes,
+      "file.pdf",
+      "application/pdf",
+      provenance,
+    );
+    if (!("download_url" in result)) throw new Error("Expected URL");
+    clock.mockReturnValue(Date.now() + 10_000);
+    expect((await store.handle(new Request(result.download_url))).status).toBe(
+      403,
+    );
+  } finally {
+    clock.mockRestore();
     await store.close();
   }
 });

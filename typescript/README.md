@@ -79,18 +79,25 @@ a client is injected. Historical search guides and schemas remain available as
 explicitly labeled MCP resources.
 
 HTTP mode requires identity configuration. ODP tools require `odp:read`;
-other USPTO families require `uspto:read`. Document REST retrieval requires
-`documents:read` and the originating caller's issuer/subject. Put HTTPS in front
+other USPTO families require `uspto:read`. Bearer-authenticated document retrieval
+requires `documents:read` and the originating caller's issuer/subject. Put HTTPS in front
 of the loopback listener. No hosted identity provider, login UI, or deployment
 is configured by this project.
 
 Document tools return filename, MIME type, size, expiry, provenance, and a
-REST URL, with local file paths in stdio mode. Authenticated REST is the default;
-a trusted host download tool must attach OAuth credentials outside the model
-context and save response bytes to a file. Ordinary URL fetchers do not
-automatically inherit MCP authentication. `MCP_DOWNLOAD_MODE=signed` explicitly
-selects short-lived, document-specific signed links for hosts that cannot
-attach credentials. These links are bearer capabilities, not single-use tokens.
+REST URL, with local file paths in stdio mode. `MCP_DOWNLOAD_MODE=signed` is the
+default: authenticated MCP calls issue document-specific, single-use links that
+expire after 15 minutes by default. The first GET consumes the link before
+reading the file; HEAD does not consume it. Range requests are rejected without
+consuming the link. A failed or interrupted GET requires a fresh link from MCP.
+
+Authenticated REST remains available for the same artifact: remove `expires`
+and `signature` from its URL and attach an OAuth bearer token with
+`documents:read`. `MCP_DOWNLOAD_MODE=authenticated` makes tools return these
+bare URLs instead. A trusted downloader must attach credentials outside model
+context; ordinary URL fetchers do not inherit MCP authentication. That downloader
+is not implemented here. Signed links remain bearer capabilities and must be
+protected even though they expire and work only once.
 See [document transport](docs/stack.md#document-retrieval-outside-model-context).
 
 The CLI uses FastMCP's authenticated listener; its low-level `fetch()` entrypoint
