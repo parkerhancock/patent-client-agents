@@ -3,6 +3,9 @@
 Read `README.md`, `docs/stack.md`, and `docs/port-status.md` before changing this
 subproject. Root repository instructions and connector standards still apply.
 
+Before porting another connector, read `docs/connector-patterns.md` for reference
+implementations, unrepresented styles and the MPEP corpus prerequisites.
+
 Use Bun 1.4.3 and the committed lockfile. Run `bun install --frozen-lockfile`,
 `bun run check`, and `bun run build`. Use `bun test <file>` or `bun run test:watch`
 for the inner loop; tests execute TypeScript source without rebuilding first.

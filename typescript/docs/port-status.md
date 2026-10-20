@@ -67,6 +67,12 @@ name collisions. No further missing method or route was found within the stated
 70-method, 12-client USPTO network scope; legal manuals, fees and CPC remain
 outside that inventory.
 
+MPEP is implemented in Python and local search/section retrieval was verified on
+October 20. It is not ported to TypeScript. The installed May 21 corpus has
+unknown release identity; access does not establish current guidance. See
+[connector styles and MPEP prerequisites](connector-patterns.md) before using it
+as the next offline-corpus reference.
+
 Remote identity-provider login/discovery and hosted HTTPS are not deployed.
 MCP-issued single-use links are the default until host credential injection
 stabilizes. They expire after 15 minutes by default; the first GET consumes the
