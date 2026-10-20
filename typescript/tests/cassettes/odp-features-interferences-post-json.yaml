@@ -1,0 +1,58 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/interferences/decisions/search/download
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        q: interferenceNumber:106130
+        pagination:
+          limit: 1
+        format: json
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-04-38.json"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:04:38 GMT
+      x-amz-apigw-id:
+      - FjXOFELFoAMFSpQ=
+      x-amzn-requestid:
+      - be8eb6b9-32a9-4b1a-8968-dad3dc04c28c
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f26-4ddb0c83463991e51e3a1261;Parent=2c7381af14c24cde;Sampled=0;Lineage=2:5fd89aa0:0
+    body:
+      type: json
+      content:
+        interferenceData:
+        - interferenceNumber: "106130"
+          interferenceMetaData:
+            interferenceStyleName: >-
+              LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v.
+              PATRICE CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS
+          documentData:
+            decisionTypeCategory: Decision
+            decisionIssueDate: 2025-01-28
+            interferenceOutcomeCategory: Judgment
+          seniorPartyData:
+            realPartyInInterestName: UNIVERSITÉ CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT
+            applicationNumberText: "14443829"
+  recorded_at: 2026-10-20T17:04:38.658Z

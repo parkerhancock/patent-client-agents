@@ -1,0 +1,67 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/office-action/155d5a6220a95e390b12a1e28adaf485
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-length:
+      - "1140"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:06 GMT
+      x-amz-apigw-id:
+      - FjWaNHrRoAMFXvQ=
+      x-amzn-requestid:
+      - 739d8384-316e-41a9-8c83-ddc1d6ecf686
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79dda-79ff0fe05f0578c31c340ea2;Parent=5f626608fc5905fc;Sampled=0;Lineage=1:9d22a9d9:0
+    body:
+      type: json
+      content:
+        count: 1
+        requestIdentifier: 739d8384-316e-41a9-8c83-ddc1d6ecf686
+        officeActionDataBag:
+        - documentCode: CTNF
+          lastModifiedDateTime: 2026-10-09T18:32:59
+          filingDate: 2021-02-22
+          rejectionTypeBag:
+          - "102"
+          - "103"
+          - DoublePatent
+          submissionDate: 2026-10-09
+          groupArtUnitNumber: 1684
+          applicationNumberText: "17181378"
+          inventionTitle: METHODS, DEVICES, AND SYSTEMS FOR ANALYTE DETECTION AND ANALYSIS
+          documentCodeDescriptionText: Non-Final Rejections
+          officeActionRecordIdentifier: 155d5a6220a95e390b12a1e28adaf485
+          officeActionText: |2-
+            
+            
+                DETAILED ACTION
+            Reassignment of the Application
+            1.	Please note that this application has been reassigned to Examiner Kaijiang Zhang, in Art Unit 1684.  In order to expedite accurate processing of the application papers, all future correspondence with the Office should reflect this change.
+            Notice of Pre-AIA  or AIA  Status
+            2.	The present application, filed on or after March 16, 2013, is being examined under the first inventor to file provisions of the AIA .
+            Election/Restrictions
+            3.	Appl ...
+          obsoleteDocumentIdentifier: MUZN2VYX65X53X4
+          publicStatusIndicator: true
+  recorded_at: 2026-10-20T16:59:06.533Z

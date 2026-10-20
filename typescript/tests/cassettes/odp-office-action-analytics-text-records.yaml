@@ -1,0 +1,125 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/oa/oa_actions/v1/records
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: criteria=*%3A*&start=0&rows=1
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - accept, authorization, content-type, x-requested-with
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - "1"
+      connection:
+      - keep-alive
+      content-length:
+      - "4710"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:19 GMT
+      strict-transport-security:
+      - max-age=31536000;
+      x-amz-apigw-id:
+      - FjWcTENsIAMF4mA=
+      x-amzn-remapped-date:
+      - Tue, 20 Oct 2026 16:59:19 GMT
+      x-amzn-requestid:
+      - 227770d9-e76d-4e0c-9d81-d7d41227253b
+    body:
+      type: json
+      content:
+        response:
+          start: 0
+          numFound: 19937416
+          docs:
+          - applicationDeemedWithdrawnDate: 0001-01-03T00:00:00
+            workGroup:
+            - "1710"
+            filingDate: 2014-09-12T00:00:00
+            documentActiveIndicator:
+            - "0"
+            legacyDocumentCodeIdentifier:
+            - NOA
+            applicationStatusNumber: 150
+            nationalClass:
+            - "427"
+            effectiveFilingDate: 0001-01-03T00:00:00
+            bodyText:
+            - |-
+              DETAILED CORRESPONDENCE
+              EXAMINER'S AMENDMENT
+              An examiner’s amendment to the record appears below. Should the changes and/or additions be unacceptable to applicant, an amendment may be filed as provided by 37 CFR 1.312. To ensure consideration of such an amendment, it MUST be submitted no later than the payment of the issue fee.
+              Authorization for this examiner’s amendment was given in an interview with Terry Wright on April 30, 2018.
+              
+              The application has been amended as follows:
+              CLAIM 21 LINE 2: the word “intense” was deleted.
+              CLAIM 22 LINE 1: the word “intense” was deleted.
+              CLAIM 23 LINE 1: “claim 21” was deleted and replaced with - - claim 22 - -.
+              
+              Reasons for Allowance
+              The following is an examiner’s statement of reasons for allowance:
+              	Hirai (NPL Document, Preparation of Polymer-Protected Colloidal Dispersion of Copper) renders obvious a method for forming a copper ink of a dispersion of copper nanoparticles consisting of the formation steps required by claim 18. However, Hirai does not fairly teach or suggest having further applied the copper ink/dispersion to a substrate and sintering the copper ink.
+               	Buscall (U.S. Patent Publication No. 2011/0296950) teaches a method for forming a copper ink/dispersion through forming an aqueous mixture of water and copper salt to which were added a surfactant and then a reducing agent to form the copper ink/dispersion which was then applied to a substrate and sintered. However, Buscall did not teach or suggest a method consisting of the steps required by claim 18 since Buscall requires the use of an anion exchange resin which is excluded from claim 18 and its dependents.
+              Any comments considered necessary by applicant must be submitted no later than the payment of the issue fee and, to avoid processing delays, should preferably accompany the issue fee.  Such submissions should be clearly labeled “Comments on Statement of Reasons for Allowance.”
+              
+              Conclusion
+              Claims 18 through 23 have been allowed.
+              Any inquiry concerning this communication or earlier communications from the examiner should be directed to MICHAEL P WIECZOREK whose telephone number is (571)270-5341.  The examiner can normally be reached on Monday - Friday, 6:00 AM - 3:30 PM.
+              Examiner interviews are available via telephone, in-person, and video conferencing using a USPTO supplied web-based collaboration tool. To schedule an interview, applicant is encouraged to use the USPTO Automated Interview Request (AIR) at http://www.uspto.gov/interviewpractice.
+              If attempts to reach the examiner by telephone are unsuccessful, the examiner’s supervisor, Michael Cleveland can be reached on (571)272-1418.  The fax phone number for the organization where this application or proceeding is assigned is 571-273-8300.
+              Information regarding the status of an application may be obtained from the Patent Application Information Retrieval (PAIR) system.  Status information for published applications may be obtained from either Private PAIR or Public PAIR.  Status information for unpublished applications is available through Private PAIR only.  For more information about the PAIR system, see http://pair-direct.uspto.gov. Should you have questions on access to the Private PAIR system, contact the Electronic Business Center (EBC) at 866-217-9197 (toll-free). If you would like assistance from a USPTO Customer Service Representative or access to the automated information system, call 800-786-9199 (IN USA OR CANADA) or 571-272-1000.
+              
+              
+              
+              
+              
+              
+              /MICHAEL P WIECZOREK/Primary Examiner, Art Unit 1712
+            obsoleteDocumentIdentifier:
+            - JGW9HEY3RXEAPX3
+            accessLevelCategory:
+            - PUBLIC
+            id: 813869284108aad9fc4821419bb120d78f2a1e69db5a33d77e16f396
+            applicationTypeCategory:
+            - REGULAR
+            patentNumber:
+            - "10047236"
+            patentApplicationNumber:
+            - "14485382"
+            grantDate: 2018-08-14T00:00:00
+            submissionDate: 2018-05-09T00:00:00
+            customerNumber: 157106
+            groupArtUnitNumber: 1712
+            inventionTitle:
+            - METHODS FOR MAKING COPPER INKS AND FILMS
+            nationalSubclass:
+            - "553000"
+            patentApplicationConfirmationNumber: 5549
+            lastModifiedTimestamp: 2021-01-21T18:45:36
+            examinerEmployeeNumber:
+            - "85150"
+            createDateTime: 2025-01-04T23:00:34
+            techCenter:
+            - "1700"
+            inventionSubjectMatterCategory:
+            - UTL
+            sourceSystemName:
+            - OACS
+            legacyCMSIdentifier:
+            - PATENT-14485382-OACS-JGW9HEY3RXEAPX3
+  recorded_at: 2026-10-20T16:59:19.930Z

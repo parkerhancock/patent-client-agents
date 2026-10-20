@@ -1,0 +1,41 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/trials/documents/search/download?q=trialNumber%3AIPR2025-00916&limit=1&format=csv
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-04-23.csv"
+      content-type:
+      - text/csv
+      date:
+      - Tue, 20 Oct 2026 17:04:23 GMT
+      x-amz-apigw-id:
+      - FjXLwEw3IAMFqng=
+      x-amzn-requestid:
+      - ac35b105-41be-489f-bb5c-008acc86dd19
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f17-03efcbd40e540bf2785f8fef;Parent=67436f2707781c51;Sampled=0;Lineage=2:56323108:0
+    body:
+      type: text
+      content: |
+        trialNumber,patentOwnerData.technologyCenterNumber,documentData.documentTypeDescriptionText,documentData.documentTitleText,documentData.documentFilingDate,documentData.documentNumber
+        IPR2025-00916,2400,Final Written Decision:  original,Final Written Decision:  JUDGMENT Final Written Decision Determining All Challenged Claims Unpatentable ,2026-10-20,32
+  recorded_at: 2026-10-20T17:04:23.662Z

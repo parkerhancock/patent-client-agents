@@ -46,11 +46,21 @@ export class OfficeActionAnalyticsClient {
     options: RequestOptions = {},
   ) {
     const selected = z.enum(OFFICE_ACTION_ANALYTICS_DATASETS).parse(dataset);
-    return this.transport.json(
+    const result = await this.transport.json(
       "GET",
       `/api/v1/patent/oa/${paths[selected]}/fields`,
       options,
     );
+    const parsed = z
+      .looseObject({ fields: z.array(z.unknown()) })
+      .safeParse(result.data);
+    if (!parsed.success)
+      throw new OdpApiError(
+        "USPTO office action field metadata did not match the expected schema.",
+        200,
+        "INVALID_RESPONSE",
+      );
+    return { ...result, data: parsed.data };
   }
   async search(
     dataset: OfficeActionAnalyticsDataset,

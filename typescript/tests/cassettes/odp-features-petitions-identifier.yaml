@@ -1,0 +1,129 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/petition/decisions/0b9ea48d-43c9-5197-8bf1-126d965816a7
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:06:24 GMT
+      x-amz-apigw-id:
+      - FjXerHePIAMFhWg=
+      x-amzn-requestid:
+      - ba8e75ae-fbc9-45b6-b9f8-2ca5ba9d4139
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f90-4254271c2f5fdd9547069298;Parent=1d698372ed204530;Sampled=0;Lineage=2:f5f5fcbf:0
+    body:
+      type: json
+      content:
+        count: 1
+        requestIdentifier: ba8e75ae-fbc9-45b6-b9f8-2ca5ba9d4139
+        petitionDecisionDataBag:
+        - firstInventorToFileIndicator: true
+          petitionMailDate: 2026-10-18
+          lastModifiedDateTime: 2026-10-20T08:55:18
+          decisionPetitionTypeCode: "533"
+          applicationNumberText: "16947346"
+          decidedPetitionTypeCode: A
+          technologyCenter: "3700"
+          decidedPetitionTypeCodeDescriptionText: GRANTED
+          applicationStatusDate: 2026-10-18
+          decisionMailDate: 2026-10-18
+          finalPetitionDecisionIndicator: false
+          documentBag:
+          - documentCode: PET.DEC.AUTO
+            documentIdentifier: MVE73ITJ5X161X6
+            downloadOptionBag:
+            - mimeTypeIdentifier: PDF
+              downloadUrl: >-
+                https://api.uspto.gov/api/v1/download/applications/16947346/MVE73ITJ5X161X6/files/grantLetter.pdf
+              pageTotalQuantity: 1
+            officialDate: 2026-10-18T18:58:19
+            documentCodeDescriptionText: ePetition Grant Letter
+          ocrSearchText: |-
+            Doc Code : PET.DEC.AUTO
+            Description : ePetition Grant Letter
+            
+            Commissioner for Patents
+            
+            r) EENITED STATES United States Patent and Trademark Office
+            PATENT AND TRADEMARK OFFICE Alexandria, VA 22313 - 1450
+            www.uspto.gov
+            GRANT LETTER
+            APPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER
+            16/947 ,346 10/18/2026 UNDER CFR 1.378(b) 063266/551003
+            
+            Title of Invention
+            DOLL BODY MOTION ACCESSORY FOR RECREATIONAL VEHICLES
+            
+            In re Patent # 11389739
+            Issue date: 07/19/2022
+            Filing date: 0 ...
+          petitionDecisionRecordIdentifier: 0b9ea48d-43c9-5197-8bf1-126d965816a7
+          finalDecidingOfficeName: OFFICE OF PETITIONS
+          inventorBag:
+          - Jonathan BRIGHT
+          applicationStatusDescriptionText: Patented Case
+          businessEntityStatusCategory: Small
+          patentNumber: "11389739"
+          customerNumber: 826
+          groupArtUnitNumber: "3711"
+          inventionTitle: DOLL BODY MOTION ACCESSORY FOR RECREATIONAL VEHICLES
+          decisionDate: 2026-10-18
+          decisionPetitionTypeCodeDescriptionText: >-
+            REINSTATE PATENT - UNINTENTIONALLY DELAYED PAYMENT OF MAINTENANCE FEE, NO
+            ADDITIONAL INFORMATION REQUIRED (37 CFR 1.378(A))
+          courtActionIndicator: false
+          allSearchableFields: |-
+            16947346 Patented Case REINSTATE PATENT - UNINTENTIONALLY DELAYED PAYMENT OF MAINTENANCE FEE, NO ADDITIONAL INFORMATION REQUIRED (37 CFR 1.378(A)) GRANTED OFFICE OF PETITIONS DOLL BODY MOTION ACCESSORY FOR RECREATIONAL VEHICLES Jonathan BRIGHT 11389739 Doc Code : PET.DEC.AUTO
+            Description : ePetition Grant Letter
+            
+            Commissioner for Patents
+            
+            r) EENITED STATES United States Patent and Trademark Office
+            PATENT AND TRADEMARK OFFICE Alexandria, VA 22313 - 1450
+            www.uspto.gov
+            GRANT LETTER
+            APPLICATION # DECISION DATE DECISION ON PETITION # ATTORNEY DOCKET NUMBER
+            16/947 ,346 10/18/2026 UNDER CFR 1.378(b) 063266/551003
+            
+            Title of Invention
+            DOLL BODY MOTION ACCESSORY FOR RECREATIONAL VEHICLES
+            
+            In re Patent # 11389739
+            Issue date: 07/19/2022
+            Filing date: 07/29/2020
+            
+            This is an electronic decision on the petition under 37 CFR 1.378(b), filed October 18, 2026 to accept
+            unintentional delayed payment of the 3.5 year maintenance fee for the above-identified patent.
+            
+            The petition is GRANTED.
+            
+            The maintenance fee is accepted, and the above-identified patent reinstated as of October 18, 2026. This
+            decision also constitutes notice that the fee has been accepted. An electronic copy of the petition and this
+            decision has been created as an entry in the Image File Wrapper. Nevertheless, petitions should print and retain
+            an independent copy.
+            
+            Telephone inquiries concerning this decision should be directed to the Patent Electronic Business Center (EBC)
+            at 866-217-9197.
+            
+            Office of Petitions
+  recorded_at: 2026-10-20T17:06:24.740Z

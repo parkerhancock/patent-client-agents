@@ -1,0 +1,112 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/oa/oa_actions/v1/fields
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - accept, authorization, content-type, x-requested-with
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - "1"
+      connection:
+      - keep-alive
+      content-length:
+      - "1870"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:18 GMT
+      strict-transport-security:
+      - max-age=31536000;
+      x-amz-apigw-id:
+      - FjWcGFPDIAMFXIQ=
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - "1870"
+      x-amzn-remapped-date:
+      - Tue, 20 Oct 2026 16:59:18 GMT
+      x-amzn-requestid:
+      - 91fab8c8-9d4d-4a30-bcb5-62fd7a95fa43
+    body:
+      type: json
+      content:
+        apiKey: oa_actions
+        apiVersionNumber: v1
+        apiUrl: https://api.uspto.gov/api/v1/patent/oa/oa_actions/v1/fields
+        apiDocumentationUrl: >-
+          https://data.uspto.gov/swagger/index.html?urls.primaryName=USPTO%20Office%20Action%20Text%20Retrieval%20API
+        apiStatus: PUBLISHED
+        fieldCount: 56
+        fields:
+        - applicationDeemedWithdrawnDate
+        - workGroup
+        - filingDate
+        - documentActiveIndicator
+        - legacyDocumentCodeIdentifier
+        - applicationStatusNumber
+        - effectiveFilingDate
+        - nationalClass
+        - bodyText
+        - obsoleteDocumentIdentifier
+        - accessLevelCategory
+        - id
+        - applicationTypeCategory
+        - patentNumber
+        - grantDate
+        - patentApplicationNumber
+        - submissionDate
+        - customerNumber
+        - groupArtUnitNumber
+        - inventionTitle
+        - nationalSubclass
+        - patentApplicationConfirmationNumber
+        - lastModifiedTimestamp
+        - sections.withdrawalRejectionText
+        - sections.proceedingAppendixText
+        - sections.filingDate
+        - sections.section102RejectionText
+        - sections.legacyDocumentCodeIdentifier
+        - sections.section102RejectionFormParagraphText
+        - sections.section103RejectionText
+        - sections.nationalClass
+        - sections.section112RejectionFormParagraphText
+        - sections.summaryText
+        - sections.terminalDisclaimerStatusText
+        - sections.section101RejectionText
+        - sections.obsoleteDocumentIdentifier
+        - sections.officeActionIdentifier
+        - sections.section101RejectionFormParagraphText
+        - sections.section112RejectionText
+        - sections.workGroupNumber
+        - sections.grantDate
+        - sections.patentApplicationNumber
+        - sections.submissionDate
+        - sections.groupArtUnitNumber
+        - sections.nationalSubclass
+        - sections.examinerEmployeeNumber
+        - sections.specificationTitleText
+        - sections.section103RejectionFormParagraphText
+        - sections.detailCitationText
+        - sections.techCenterNumber
+        - createDateTime
+        - examinerEmployeeNumber
+        - techCenter
+        - inventionSubjectMatterCategory
+        - sourceSystemName
+        - legacyCMSIdentifier
+        lastDataUpdatedDate: 2020-03-12 11:19:05.0
+  recorded_at: 2026-10-20T16:59:18.680Z

@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import {
   OFFICE_ACTION_ANALYTICS_DATASETS,
   type OfficeActionAnalyticsClient,
+  OfficeActionResponseSchema,
   OfficeActionSearchOptionsSchema,
   type OfficeActionsClient,
   STUB_OFFICE_ACTION_FIELDS,
@@ -138,6 +139,9 @@ export function registerOfficeActionTools(
   server.tool(
     {
       ...listToolOptions(auth),
+      output: listToolOptions(auth).output.extend({
+        facets: OfficeActionResponseSchema.shape.facets,
+      }),
       name: "search_office_actions",
       description:
         "Search US patent office actions by query, exact filters, art unit/date ranges, and facets. Text is a highlighted excerpt. Use download_office_action_text for full text. Use next_cursor for another page, or advance offset.",
@@ -148,21 +152,24 @@ export function registerOfficeActionTools(
       const offset = cursorOffset(input, input.offset, "office-actions");
       const { cursor, ...options } = input;
       const result = await clients.officeActions.search({ ...options, offset });
-      return cursorEnvelope(
-        listEnvelope(
-          `${result.officeActionDataBag.length} office actions returned${result.count === undefined ? "" : `; ${result.count} matching`}.`,
-          result.officeActionDataBag.map((r) => boundedRecord(r, input.full)),
-          result.provenance,
-          {
-            ...(result.count === undefined ? {} : { count: result.count }),
-            offset,
-            limit: input.limit,
-          },
+      return {
+        ...cursorEnvelope(
+          listEnvelope(
+            `${result.officeActionDataBag.length} office actions returned${result.count === undefined ? "" : `; ${result.count} matching`}.`,
+            result.officeActionDataBag.map((r) => boundedRecord(r, input.full)),
+            result.provenance,
+            {
+              ...(result.count === undefined ? {} : { count: result.count }),
+              offset,
+              limit: input.limit,
+            },
+          ),
+          input,
+          offset,
+          "office-actions",
         ),
-        input,
-        offset,
-        "office-actions",
-      );
+        ...(input.facets && result.facets ? { facets: result.facets } : {}),
+      };
     },
   );
   server.tool(
@@ -228,6 +235,40 @@ export function registerOfficeActionTools(
         "office-action.txt",
         "text/plain",
         result.provenance,
+      );
+    },
+  );
+  server.tool(
+    {
+      ...detailToolOptions(auth),
+      name: "download_office_action_analytics",
+      description:
+        "Download raw legacy USPTO rejection, citation, office action text, or enriched citation records as JSON. Includes full document text and sections outside model context. Use dataset and criteria from search_office_action_analytics; advance start for another bounded page.",
+      input: z.object({
+        dataset: z.enum(OFFICE_ACTION_ANALYTICS_DATASETS),
+        criteria: z.string().min(1),
+        start: z.number().int().nonnegative().default(0),
+        rows: z.number().int().min(1).max(100).default(25),
+      }),
+    },
+    async (input) => {
+      const result = await clients.analytics.search(
+        input.dataset,
+        input.criteria,
+        { start: input.start, rows: input.rows },
+      );
+      const { provenance, ...records } = result;
+      return downloadResult(
+        new TextEncoder().encode(
+          JSON.stringify({
+            dataset: input.dataset,
+            criteria: input.criteria,
+            ...records,
+          }),
+        ),
+        `office-action-${input.dataset}.json`,
+        "application/json",
+        provenance,
       );
     },
   );

@@ -3,6 +3,7 @@ import { extractDocumentXml, parseGrantClaimsXml } from "./application-xml.js";
 import type {
   ApplicationDataResponse,
   ApplicationDataset,
+  ApplicationDocumentBatchOptions,
   FamilyEdge,
   FamilyGraphResponse,
   FamilyNode,
@@ -127,6 +128,104 @@ function empty(value: unknown): boolean {
   );
 }
 
+function applicationRanges(
+  ranges: z.output<typeof SearchOptionsSchema>["rangeFilters"],
+) {
+  return ranges?.map((range) => {
+    const bounds = [range.valueFrom, range.valueTo];
+    const dateRange =
+      /Date$/i.test(range.field) ||
+      bounds.some(
+        (value) =>
+          typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value),
+      );
+    if (dateRange) {
+      for (const value of bounds)
+        if (value !== undefined) z.iso.date().parse(value);
+      const valueFrom = String(range.valueFrom ?? "1776-01-01");
+      const valueTo = String(
+        range.valueTo ?? new Date().toISOString().slice(0, 10),
+      );
+      if (valueFrom > valueTo)
+        throw new TypeError("Range start must not exceed range end.");
+      return { ...range, valueFrom, valueTo };
+    }
+    if (
+      bounds.some(
+        (value) =>
+          value === undefined ||
+          (typeof value === "string" && !value.trim()) ||
+          !Number.isFinite(Number(value)),
+      )
+    )
+      throw new TypeError("Numeric range filters require both finite bounds.");
+    if (Number(range.valueFrom) > Number(range.valueTo))
+      throw new TypeError("Range start must not exceed range end.");
+    return {
+      ...range,
+      valueFrom: String(range.valueFrom),
+      valueTo: String(range.valueTo),
+    };
+  });
+}
+const downloadQuerySchema = z
+  .object({
+    q: z.string().optional(),
+    sort: z.string().optional(),
+    offset: z.number().int().nonnegative().optional(),
+    limit: z.number().int().positive().optional(),
+    fields: z.union([z.string(), z.array(z.string())]).optional(),
+    filters: z.string().optional(),
+    rangeFilters: z.string().optional(),
+    format: z.enum(["csv", "json"]).optional(),
+  })
+  .strict();
+const statusQuerySchema = downloadQuerySchema.pick({
+  q: true,
+  offset: true,
+  limit: true,
+});
+function applicationGetQuery(
+  parsed: z.output<typeof SearchOptionsSchema>,
+  ranges: ReturnType<typeof applicationRanges>,
+) {
+  if (
+    [parsed.filters, ranges, parsed.sort].some(
+      (values) => values && values.length > 1,
+    )
+  )
+    throw new TypeError(
+      "Use POST for multiple filter, range, or sort clauses.",
+    );
+  const params = new URLSearchParams({
+    offset: String(parsed.offset),
+    limit: String(parsed.limit),
+  });
+  if (parsed.query !== undefined) params.set("q", parsed.query);
+  const fields = parsed.fields?.length
+    ? parsed.fields
+    : parsed.full
+      ? undefined
+      : STUB_APPLICATION_FIELDS;
+  if (fields) params.set("fields", fields.join(","));
+  if (parsed.facets?.length) params.set("facets", parsed.facets.join(","));
+  if (parsed.filters?.[0])
+    params.set(
+      "filters",
+      `${parsed.filters[0].name} ${parsed.filters[0].value.join(",")}`,
+    );
+  if (ranges?.[0])
+    params.set(
+      "rangeFilters",
+      `${ranges[0].field} ${ranges[0].valueFrom}:${ranges[0].valueTo}`,
+    );
+  if (parsed.sort?.[0])
+    params.set(
+      "sort",
+      `${parsed.sort[0].field} ${parsed.sort[0].order.toLowerCase()}`,
+    );
+  return params;
+}
 function applicationPath(applicationNumber: string): string {
   const normalized = applicationNumber.replace(/[\s/,]/g, "");
   if (!/^[A-Za-z0-9]{6,20}$/.test(normalized))
@@ -161,13 +260,17 @@ export class ApplicationsClient {
     options: SearchOptions & { rawPayload?: Record<string, unknown> } = {},
   ): Promise<SearchResponse> {
     const { signal, rawPayload, ...input } = options;
-    const parsed = SearchOptionsSchema.parse(input);
-    const today = new Date().toISOString().slice(0, 10);
-    const rangeFilters = parsed.rangeFilters?.map((range) => ({
-      ...range,
-      valueFrom: range.valueFrom ?? "1776-01-01",
-      valueTo: range.valueTo ?? today,
-    }));
+    const parsed = SearchOptionsSchema.parse(
+      rawPayload === undefined
+        ? input
+        : { normalize: input.normalize, method: input.method },
+    );
+    if (rawPayload !== undefined && parsed.method === "GET")
+      throw new TypeError("rawPayload requires POST.");
+    const rangeFilters =
+      rawPayload === undefined
+        ? applicationRanges(parsed.rangeFilters)
+        : undefined;
     const body = prune({
       q: parsed.query,
       fields: parsed.fields?.length
@@ -182,10 +285,17 @@ export class ApplicationsClient {
       pagination: { offset: parsed.offset, limit: parsed.limit },
     });
     const result = await this.transport.json(
-      "POST",
+      parsed.method,
       "/api/v1/patent/applications/search",
       {
-        body: rawPayload === undefined ? body : prune(rawPayload),
+        ...(parsed.method === "GET"
+          ? { searchParams: applicationGetQuery(parsed, rangeFilters) }
+          : {
+              body:
+                rawPayload === undefined
+                  ? body
+                  : prune(recordSchema.parse(rawPayload)),
+            }),
         ...(signal ? { signal } : {}),
         emptyOn404: { count: 0, patentFileWrapperDataBag: [] },
       },
@@ -337,12 +447,18 @@ export class ApplicationsClient {
   }
   async getStatusCodes(
     payload: Record<string, unknown> = {},
-    options: RequestOptions = {},
+    options: RequestOptions & { method?: "GET" | "POST" } = {},
   ) {
+    const method = z.enum(["GET", "POST"]).parse(options.method ?? "POST");
     const response = await this.transport.json(
-      "POST",
+      method,
       "/api/v1/patent/status-codes",
-      { ...options, body: payload },
+      {
+        ...(options.signal ? { signal: options.signal } : {}),
+        ...(method === "POST"
+          ? { body: payload }
+          : { searchParams: statusQuerySchema.parse(payload) }),
+      },
     );
     return {
       data: parseResponse(recordSchema, response.data),
@@ -352,12 +468,26 @@ export class ApplicationsClient {
   /** Download search results using the source's PatentDownloadRequest payload, preserving format-specific bytes. */
   downloadSearch(
     payload: Record<string, unknown>,
-    options: RequestOptions = {},
+    options: RequestOptions & { method?: "GET" | "POST" } = {},
   ) {
+    const method = z.enum(["GET", "POST"]).parse(options.method ?? "POST");
+    const query =
+      method === "GET" ? downloadQuerySchema.parse(payload) : undefined;
+    const searchParams = new URLSearchParams();
+    for (const [key, value] of Object.entries(query ?? {}))
+      if (value !== undefined)
+        searchParams.set(
+          key,
+          Array.isArray(value) ? value.join(",") : String(value),
+        );
     return this.transport.bytes(
-      "POST",
+      method,
       "/api/v1/patent/applications/search/download",
-      { ...options, body: payload, timeoutMs: 120_000 },
+      {
+        ...(options.signal ? { signal: options.signal } : {}),
+        ...(method === "POST" ? { body: payload } : { searchParams }),
+        timeoutMs: 120_000,
+      },
     );
   }
   async downloadDocument(
@@ -372,45 +502,54 @@ export class ApplicationsClient {
       .string()
       .regex(/^[A-Za-z0-9_-]+$/)
       .parse(documentIdentifier);
+    const documents = await this.getDocuments(applicationNumber, {
+      includeAssociated: false,
+      ...(options.signal ? { signal: options.signal } : {}),
+    });
+    const document = documents.documents.find(
+      (doc) => doc.documentIdentifier === id,
+    );
+    if (!document)
+      throw new OdpApiError("Application document was not found.", 404);
+    return this.downloadListedDocument(
+      applicationNumber,
+      document,
+      format,
+      options,
+    );
+  }
+  private downloadListedDocument(
+    applicationNumber: string,
+    document: DocumentsResponse["documents"][number],
+    format: "pdf" | "xml" | "docx",
+    options: RequestOptions & { maxBytes?: number },
+  ) {
     const app = applicationPath(applicationNumber).replace(
       "/api/v1/patent/applications/",
       "",
     );
-    let path = `/api/v1/download/applications/${app}/${id}.pdf`;
-    {
-      const documents = await this.getDocuments(applicationNumber, {
-        includeAssociated: false,
-        ...(options.signal ? { signal: options.signal } : {}),
-      });
-      const document = documents.documents.find(
-        (doc) => doc.documentIdentifier === id,
+    const id = z
+      .string()
+      .regex(/^[A-Za-z0-9_-]+$/)
+      .parse(document.documentIdentifier);
+    const option = (document.downloadOptionBag ?? []).find(
+      (item) =>
+        String(item.mimeTypeIdentifier).toUpperCase() ===
+          (format === "docx" ? "MS_WORD" : format === "xml" ? "XML" : "PDF") &&
+        typeof item.downloadUrl === "string",
+    );
+    if (!option && format !== "pdf")
+      throw new OdpApiError(
+        `Document has no ${format.toUpperCase()} download.`,
+        404,
       );
-      if (!document)
-        throw new OdpApiError("Application document was not found.", 404);
-      const bag = Array.isArray(document.downloadOptionBag)
-        ? document.downloadOptionBag
-        : [];
-      const option = bag
-        .map(object)
-        .find(
-          (item) =>
-            String(item.mimeTypeIdentifier).toUpperCase() ===
-              (format === "docx"
-                ? "MS_WORD"
-                : format === "xml"
-                  ? "XML"
-                  : "PDF") && typeof item.downloadUrl === "string",
-        );
-      if (!option && format !== "pdf")
-        throw new OdpApiError(
-          `Document has no ${format.toUpperCase()} download.`,
-          404,
-        );
-      if (option) path = String(option.downloadUrl);
-    }
+    const path = option
+      ? String(option.downloadUrl)
+      : `/api/v1/download/applications/${app}/${id}.pdf`;
     return this.transport.bytes("GET", path, {
       ...(options.signal ? { signal: options.signal } : {}),
       allowedHosts: ["data-documents.uspto.gov"],
+      ...(options.maxBytes === undefined ? {} : { maxBytes: options.maxBytes }),
       timeoutMs: 120_000,
     });
   }
@@ -438,38 +577,109 @@ export class ApplicationsClient {
   }
   async downloadDocuments(
     applicationNumber: string,
-    options: RequestOptions & {
-      documentCodes?: string[];
-      format?: "pdf" | "xml" | "docx";
-    } = {},
+    options: ApplicationDocumentBatchOptions = {},
   ) {
+    const format = z
+      .enum(["pdf", "xml", "docx"])
+      .parse(options.format ?? "pdf");
+    const maxDocuments =
+      options.maxDocuments === undefined
+        ? undefined
+        : z.number().int().positive().parse(options.maxDocuments);
+    const maxBytes = z
+      .number()
+      .int()
+      .positive()
+      .safe()
+      .parse(options.maxTotalBytes ?? 64 * 1024 * 1024);
+    const after =
+      options.officialDateFrom === undefined
+        ? undefined
+        : z.iso.date().parse(options.officialDateFrom);
+    const before =
+      options.officialDateTo === undefined
+        ? undefined
+        : z.iso.date().parse(options.officialDateTo);
+    if (after && before && after > before)
+      throw new TypeError("Range start must not exceed range end.");
+    const identifiers =
+      options.documentIdentifiers === undefined
+        ? undefined
+        : new Set(
+            z
+              .array(z.string().regex(/^[A-Za-z0-9_-]+$/))
+              .parse(options.documentIdentifiers),
+          );
     const documents = await this.getDocuments(applicationNumber, {
       includeAssociated: false,
       ...(options.documentCodes
         ? { documentCodes: options.documentCodes }
         : {}),
+      ...(after ? { officialDateFrom: after } : {}),
+      ...(before ? { officialDateTo: before } : {}),
       ...(options.signal ? { signal: options.signal } : {}),
     });
-    const results = [];
-    for (const document of documents.documents) {
+    const selected = documents.documents.filter((document) => {
+      const id = document.documentIdentifier;
+      if (!id || (identifiers && !identifiers.has(id))) return false;
       if (
         options.documentCodes &&
         !options.documentCodes.includes(String(document.documentCode))
       )
-        continue;
-      if (
-        typeof document.documentIdentifier !== "string" ||
-        !document.documentIdentifier
-      )
-        continue;
-      results.push({
-        document,
-        ...(await this.downloadDocument(
-          applicationNumber,
-          document.documentIdentifier,
-          options,
-        )),
-      });
+        return false;
+      if (after || before) {
+        const raw = document.officialDate || document.documentDate;
+        const date = typeof raw === "string" ? raw.slice(0, 10) : "";
+        if (
+          !z.iso.date().safeParse(date).success ||
+          (after && date < after) ||
+          (before && date > before)
+        )
+          return false;
+      }
+      return true;
+    });
+    if (maxDocuments !== undefined && selected.length > maxDocuments)
+      throw new RangeError(
+        `File history has ${selected.length} matching documents; max ${maxDocuments}. Narrow the document identifiers, codes, or dates.`,
+      );
+    const controller = new AbortController();
+    const signal = options.signal
+      ? AbortSignal.any([options.signal, controller.signal])
+      : controller.signal;
+    let totalBytes = 0;
+    let tooLarge = false;
+    const results = [];
+    try {
+      for (let start = 0; start < selected.length; start += 4) {
+        const group = await Promise.all(
+          selected.slice(start, start + 4).map(async (document) => {
+            const response = await this.downloadListedDocument(
+              applicationNumber,
+              document,
+              format,
+              { signal, maxBytes },
+            );
+            totalBytes += response.data.byteLength;
+            if (totalBytes > maxBytes) {
+              tooLarge = true;
+              controller.abort();
+              throw new RangeError(
+                "File-history downloads exceed the configured combined byte limit.",
+              );
+            }
+            return { document, ...response };
+          }),
+        );
+        results.push(...group);
+      }
+    } catch (error) {
+      controller.abort();
+      if (tooLarge)
+        throw new RangeError(
+          "File-history downloads exceed the configured combined byte limit.",
+        );
+      throw error;
     }
     return results;
   }

@@ -1,3 +1,4 @@
+import { z } from "zod";
 import {
   ApiError,
   type ClientOptions,
@@ -122,18 +123,10 @@ export class TrademarkSearchClient {
     });
   }
   private async getToken(force = false): Promise<WafToken> {
-    if (force && this.options.refreshToken) {
-      this.refreshing ??= this.options.refreshToken();
-      try {
-        this.token = await this.refreshing;
-      } finally {
-        this.refreshing = undefined;
-      }
-    }
     if (!this.token && !force) {
       const raw =
         process.env.PCA_WAF_TOKEN_JSON ?? process.env.LAW_TOOLS_WAF_TOKEN_JSON;
-      if (raw) {
+      if (raw)
         try {
           this.token = JSON.parse(raw) as WafToken;
         } catch {
@@ -141,43 +134,105 @@ export class TrademarkSearchClient {
             "PCA_WAF_TOKEN_JSON is not valid token JSON.",
           );
         }
-      }
     }
-    if (!this.token && !force && this.options.refreshToken)
-      return this.getToken(true);
-    const t = this.token;
+    const nearExpiry =
+      !this.token ||
+      !Number.isFinite(this.token.expires) ||
+      this.token.expires * 1000 <= Date.now() + 6 * 3600000;
+    if ((force || nearExpiry) && this.options.refreshToken) {
+      this.refreshing ??= Promise.resolve()
+        .then(() => this.options.refreshToken?.())
+        .then((token) => {
+          if (!token) throw new Error("No token returned");
+          this.token = token;
+          return token;
+        })
+        .catch(() => {
+          throw new ConfigurationError(
+            "The external WAF session refresh failed.",
+          );
+        });
+      const refreshing = this.refreshing;
+      try {
+        await refreshing;
+      } finally {
+        if (this.refreshing === refreshing) this.refreshing = undefined;
+      }
+    } else if (force)
+      throw new ApiError(
+        "Trademark Search rejected the session; provide a refreshed external WAF token.",
+        403,
+        "AUTHENTICATION",
+      );
+    const token = this.token;
     if (
-      !t ||
-      typeof t.token !== "string" ||
-      !t.token.trim() ||
-      /[\r\n;]/.test(t.token) ||
-      !Number.isFinite(t.expires) ||
-      t.expires * 1000 <= Date.now() + (force ? 0 : 6 * 3600000) ||
-      (force && !this.options.refreshToken)
+      !token ||
+      typeof token.token !== "string" ||
+      !token.token.trim() ||
+      /[\r\n;]/.test(token.token) ||
+      !Number.isFinite(token.expires) ||
+      token.expires * 1000 <= Date.now()
     )
       throw new ConfigurationError(
         "Supply a current externally minted WAF token with its matching User-Agent, or a refreshToken callback.",
       );
-    return t;
+    return token;
+  }
+  private requestToken(
+    force: boolean,
+    signal?: AbortSignal,
+  ): Promise<WafToken> {
+    if (signal?.aborted)
+      return Promise.reject(
+        new ApiError("Trademark Search request was cancelled.", 0, "ABORTED"),
+      );
+    const work = this.getToken(force);
+    if (!signal) return work;
+    return new Promise((resolve, reject) => {
+      const abort = () =>
+        reject(
+          new ApiError("Trademark Search request was cancelled.", 0, "ABORTED"),
+        );
+      signal.addEventListener("abort", abort, { once: true });
+      if (signal.aborted) abort();
+      void work
+        .then(resolve, reject)
+        .finally(() => signal.removeEventListener("abort", abort));
+    });
   }
   async searchQuery(
     query: Record<string, unknown>,
     options: { size?: number; from?: number; signal?: AbortSignal } = {},
   ) {
-    const size = Math.min(options.size ?? 100, 500);
+    const size = Math.min(
+      options.size ?? 100,
+      500,
+      10000 - (options.from ?? 0),
+    );
     const from = options.from ?? 0;
     if (
       !Number.isInteger(size) ||
       size < 1 ||
       !Number.isInteger(from) ||
-      from < 0
+      from < 0 ||
+      from >= 10000
     )
       throw new ConfigurationError(
         "Trademark pagination requires positive size and nonnegative from.",
       );
-    let token = await this.getToken();
+    const cancelled = () => {
+      if (options.signal?.aborted)
+        throw new ApiError(
+          "Trademark Search request was cancelled.",
+          0,
+          "ABORTED",
+        );
+    };
+    cancelled();
+    let token = await this.requestToken(false, options.signal);
+    cancelled();
     const send = () =>
-      this.transport.json("POST", "/prod-stage-v1-0-0/tmsearch", {
+      this.transport.text("POST", "/prod-stage-v1-0-0/tmsearch", {
         body: { query, size, from },
         headers: {
           Cookie: `aws-waf-token=${token.token}`,
@@ -198,12 +253,11 @@ export class TrademarkSearchClient {
     } catch (error) {
       if (
         !(error instanceof ApiError) ||
-        error.status === 0 ||
-        error.status >= 500 ||
-        error.status === 429
+        ![202, 401, 403].includes(error.status)
       )
         throw error;
-      token = await this.getToken(true);
+      token = await this.requestToken(this.token === token, options.signal);
+      cancelled();
       response = await send();
       if (response.status !== 200)
         throw new ApiError(
@@ -212,33 +266,59 @@ export class TrademarkSearchClient {
           "AUTHENTICATION",
         );
     }
-    const data = response.data as {
-      hits?: {
-        totalValue?: number;
-        total?: { value?: number } | number;
-        hits?: Array<{
-          source?: Record<string, unknown>;
-          id?: string;
-          _source?: Record<string, unknown>;
-          _id?: string;
-        }>;
-      };
-      took?: number;
-    };
-    if (!data.hits)
+    let decoded: unknown;
+    try {
+      decoded = JSON.parse(response.data);
+    } catch {
       throw new ApiError(
-        "Trademark Search returned no result envelope.",
+        "Trademark Search returned invalid JSON.",
         response.status,
         "INVALID_RESPONSE",
       );
+    }
+    const hit = z.looseObject({
+      source: z.record(z.string(), z.unknown()).optional(),
+      _source: z.record(z.string(), z.unknown()).optional(),
+      id: z.union([z.string(), z.number()]).optional(),
+      _id: z.union([z.string(), z.number()]).optional(),
+    });
+    const parsed = z
+      .looseObject({
+        hits: z
+          .looseObject({
+            totalValue: z.number().int().nonnegative().optional(),
+            total: z
+              .union([
+                z.number().int().nonnegative(),
+                z.object({ value: z.number().int().nonnegative() }),
+              ])
+              .optional(),
+            hits: z.array(hit),
+          })
+          .refine(
+            (value) =>
+              value.total !== undefined || value.totalValue !== undefined,
+          ),
+        took: z.number().nonnegative().optional(),
+      })
+      .safeParse(decoded);
+    if (!parsed.success)
+      throw new ApiError(
+        "Trademark Search returned an invalid result envelope.",
+        response.status,
+        "INVALID_RESPONSE",
+      );
+    const data = parsed.data;
+    const results = data.hits.hits.map((hit) =>
+      normalize(hit.source ?? hit._source ?? {}, hit.id ?? hit._id),
+    );
     return {
+      count: results.length,
       total:
         typeof data.hits.total === "number"
           ? data.hits.total
           : (data.hits.total?.value ?? data.hits.totalValue ?? 0),
-      results: (data.hits.hits ?? []).map((hit) =>
-        normalize(hit.source ?? hit._source ?? {}, hit.id ?? hit._id),
-      ),
+      results,
       query_time_ms: data.took ?? 0,
       provenance: response.provenance,
     };
@@ -292,17 +372,34 @@ export class TrademarkSearchClient {
     if (!value.trim())
       throw new ConfigurationError("A trademark search term is required.");
     const must: Record<string, unknown>[] = [{ match: { [field]: value } }];
-    if (options.liveOnly) must.push({ term: { alive: true } });
+    if (options.liveOnly || options.status === "live")
+      must.push({ term: { alive: true } });
+    else if (options.status === "dead") must.push({ term: { alive: false } });
     return this.searchQuery({ bool: { must } }, options);
   }
-  async getBySerial(serialNumber: string) {
-    const r = await this.searchQuery({ term: { serialNumber } }, { size: 1 });
+  async getBySerial(
+    serialNumber: string,
+    options: { signal?: AbortSignal } = {},
+  ) {
+    if (!serialNumber.trim())
+      throw new ConfigurationError("A trademark serial number is required.");
+    const r = await this.searchQuery(
+      { term: { serialNumber } },
+      { size: 1, ...options },
+    );
     return { record: r.results[0] ?? null, provenance: r.provenance };
   }
-  async getByRegistration(registrationNumber: string) {
+  async getByRegistration(
+    registrationNumber: string,
+    options: { signal?: AbortSignal } = {},
+  ) {
+    if (!registrationNumber.trim())
+      throw new ConfigurationError(
+        "A trademark registration number is required.",
+      );
     const r = await this.searchQuery(
       { term: { registrationNumber } },
-      { size: 1 },
+      { size: 1, ...options },
     );
     return { record: r.results[0] ?? null, provenance: r.provenance };
   }
@@ -321,12 +418,18 @@ export class TrademarkSearchClient {
     )
       throw new ConfigurationError("Invalid trademark searchAll bounds.");
     const results: TrademarkSearchResult[] = [];
-    for (let from = 0; from <= 10000; from += size) {
-      const page = await this.search({ ...options, size, from });
+    for (let from = 0; from < 10000; ) {
+      const requested = Math.min(
+        size,
+        options.maxResults ? options.maxResults - results.length : size,
+        10000 - from,
+      );
+      const page = await this.search({ ...options, size: requested, from });
+      from += page.results.length;
       results.push(...page.results);
       if (options.maxResults && results.length >= options.maxResults)
         return results.slice(0, options.maxResults);
-      if (page.results.length < size || results.length >= page.total)
+      if (page.results.length < requested || results.length >= page.total)
         return results;
     }
     return results;

@@ -1,0 +1,64 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/office-action/search/download
+    headers:
+      accept:
+      - text/csv
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        q: officeActionRecordIdentifier:155d5a6220a95e390b12a1e28adaf485
+        fields:
+        - officeActionRecordIdentifier
+        - applicationNumberText
+        - documentCode
+        - documentCodeDescriptionText
+        - filingDate
+        - submissionDate
+        - groupArtUnitNumber
+        - patentNumber
+        - rejectionTypeBag
+        pagination:
+          limit: 1
+          offset: 0
+        format: csv
+  response:
+    status: 400
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-length:
+      - "227"
+      content-type:
+      - application/json
+      correlation-id:
+      - 6b3cb521-3e40-40a1-aca5-22133c814aad
+      date:
+      - Tue, 20 Oct 2026 16:59:11 GMT
+      x-amz-apigw-id:
+      - FjWa9FHmIAMF9Pw=
+      x-amzn-requestid:
+      - 6b3cb521-3e40-40a1-aca5-22133c814aad
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79ddf-558f69dc1aea956b2d9a94a1;Parent=331a8f907ce63b9d;Sampled=0;Lineage=1:9d22a9d9:0
+    body:
+      type: json
+      content:
+        code: "400"
+        message: Bad Request
+        detailedMessage: >-
+          Invalid download request, validate download type and field lists Verify
+          field(s) filingDate, rejectionTypeBag
+        requestIdentifier: 6b3cb521-3e40-40a1-aca5-22133c814aad
+  recorded_at: 2026-10-20T16:59:11.346Z

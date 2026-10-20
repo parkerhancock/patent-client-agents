@@ -1,0 +1,43 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/office-action/search/download?limit=1&offset=0&q=officeActionRecordIdentifier%3A155d5a6220a95e390b12a1e28adaf485&fields=officeActionRecordIdentifier%2CapplicationNumberText%2CdocumentCode%2CdocumentCodeDescriptionText%2CsubmissionDate%2CgroupArtUnitNumber%2CpatentNumber&format=csv
+    headers:
+      accept:
+      - text/csv
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-00-05.csv"
+      content-length:
+      - "224"
+      content-type:
+      - text/csv
+      date:
+      - Tue, 20 Oct 2026 17:00:06 GMT
+      x-amz-apigw-id:
+      - FjWjgH0EoAMFdwg=
+      x-amzn-requestid:
+      - 60822be9-ea45-4d4e-9625-c71fbbbce258
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79e15-1c1038523ed200107812d0a9;Parent=2d55b767dd417629;Sampled=0;Lineage=1:9d22a9d9:0
+    body:
+      type: text
+      content: |
+        officeActionRecordIdentifier,applicationNumberText,documentCode,documentCodeDescriptionText,submissionDate,groupArtUnitNumber,patentNumber
+        155d5a6220a95e390b12a1e28adaf485,17181378,CTNF,Non-Final Rejections,2026-10-09,1684,
+  recorded_at: 2026-10-20T17:00:06.022Z

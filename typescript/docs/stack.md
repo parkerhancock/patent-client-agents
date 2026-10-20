@@ -14,6 +14,7 @@ of an independent security audit or complete production readiness.
 | Remote identity | External OAuth/OIDC provider, JWT/JWKS verification | Require expected issuer, audience, expiration and explicit read scopes |
 | Tests | `bun test`, watch mode | Source execution; scoped tests during iteration |
 | HTTP recordings | Cassetter 0.11.0 | Replay only by default; explicit recording, secret filtering |
+| File-history archives | fflate 0.8.3 | ZIP assembly in the MCP package; bounded document bytes and manifest hashes |
 | Formatting and lint | Biome | Deterministic checks, no parallel formatting conventions |
 | Future CPU work | Rust compiled to WebAssembly | Optional measured extraction, no native addon required by the client |
 

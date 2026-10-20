@@ -1,0 +1,51 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://tsdrapi.uspto.gov/last-update/info.xml?sn=78787878
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - application/xml
+      date:
+      - Tue, 20 Oct 2026 17:11:14 GMT
+      keep-alive:
+      - timeout=60
+      strict-transport-security:
+      - max-age=31536000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-l7-reqid:
+      - 000001a105f57907-1f3e928
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: |
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <CaseUpdateInfo xmlns="urn:us:gov:doc:uspto:trademark">
+            <CaseData>
+                <Name>Serial Number</Name>
+                <Value>78787878</Value>
+                <CaseStatusData>
+                    <LastModifiedDate>2007-09-25</LastModifiedDate>
+                </CaseStatusData>
+                <CaseProsecutionData>
+                    <LastModifiedDate>2020-10-14</LastModifiedDate>
+                </CaseProsecutionData>
+                <CaseDocumentsData/>
+            </CaseData>
+        </CaseUpdateInfo>
+  recorded_at: 2026-10-20T17:11:21.347Z

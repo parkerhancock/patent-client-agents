@@ -99,11 +99,11 @@ describe("PTAB payloads and response contracts", () => {
       [PtabAppealsClient, "appeals"],
       [PtabInterferencesClient, "interferences"],
     ] as const) {
-      const m = mock({});
+      const m = mock({ count: 0 });
       await new Class(m.options).getDecisionsByNumber(" 123/4 ");
       expect(m.requests[0]?.url).toEndWith(`/${family}/123%2F4/decisions`);
     }
-    const m = mock({});
+    const m = mock({ count: 0 });
     const c = new PtabTrialsClient(m.options);
     await c.getDocumentsByTrial("IPR2025-1");
     await c.getDecisionsByTrial("IPR2025-1");

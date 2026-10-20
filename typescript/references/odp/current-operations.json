@@ -1040,5 +1040,23 @@
       ],
       "schema_names": []
     }
-  ]
+  ],
+  "rendered_main_operation_observation": {
+    "archive": "swagger-ui-operations-2026-10-20.json",
+    "observed_at": "2026-10-20",
+    "source_url": "https://data.uspto.gov/swagger/index.html",
+    "operation_count": 48,
+    "method": "DOM-backed visible operation method/path extraction in Chrome",
+    "sha256": "0f5b88eecdbf28ce74f20dbbdccccf11634bf0343ba7b8c57c887df125eb1c5b",
+    "original_companion_schema_bytes_archived": false
+  },
+  "operation_coverage_audit": {
+    "archive": "uspto-operation-coverage.json",
+    "documentation": "../../docs/uspto-operation-coverage.md",
+    "operation_count": 92,
+    "raw_entry_operation_count": 63,
+    "rendered_companion_operation_count": 29,
+    "schema_bundle_complete": false,
+    "behavioral_parity_proven": false
+  }
 }

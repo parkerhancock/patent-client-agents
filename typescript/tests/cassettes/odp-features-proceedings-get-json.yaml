@@ -1,0 +1,48 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/trials/proceedings/search/download?q=trialNumber%3AIPR2027-00017&limit=1&format=json
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-04-07.json"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:04:07 GMT
+      x-amz-apigw-id:
+      - FjXJLH7RIAMFX2Q=
+      x-amzn-requestid:
+      - 87c6d852-7988-4d35-b904-ff055346cc5e
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f07-6f1f9d45302d5d910887e133;Parent=447ac6a1e0717be8;Sampled=0;Lineage=2:ce682653:0
+    body:
+      type: json
+      content:
+        patentTrialData:
+        - patentOwnerData:
+            patentNumber: "11876924"
+            technologyCenterNumber: "2600"
+            applicationNumberText: "18193163"
+          trialMetaData:
+            trialStatusCategory: Pending
+            petitionFilingDate: 2026-10-19
+          trialNumber: IPR2027-00017
+  recorded_at: 2026-10-20T17:04:07.150Z

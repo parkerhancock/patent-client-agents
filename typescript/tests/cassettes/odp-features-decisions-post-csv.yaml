@@ -1,0 +1,47 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/trials/decisions/search/download
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        q: trialNumber:IPR2025-00916
+        pagination:
+          limit: 1
+        format: csv
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-04-16.csv"
+      content-type:
+      - text/csv
+      date:
+      - Tue, 20 Oct 2026 17:04:16 GMT
+      x-amz-apigw-id:
+      - FjXKpGtRoAMFl0Q=
+      x-amzn-requestid:
+      - 848aeac4-654f-4cd6-a40f-d4bab2c6e19a
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f10-35826c5b08fe057870d613c6;Parent=17db2f436c1a1104;Sampled=0;Lineage=2:56323108:0
+    body:
+      type: text
+      content: |
+        trialNumber,patentOwnerData.applicationNumberText,patentOwnerData.realPartyInInterestName,patentOwnerData.technologyCenterNumber,decisionData.decisionTypeCategory,decisionData.trialOutcomeCategory,decisionData.decisionIssueDate
+        IPR2025-00916,18158283,"Advanced Cluster Systems, Inc.",2400,Decision,Final Written Decision,2026-10-20
+  recorded_at: 2026-10-20T17:04:16.519Z

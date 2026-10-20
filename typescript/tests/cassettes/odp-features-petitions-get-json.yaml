@@ -1,0 +1,52 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/petition/decisions/search/download?q=petitionDecisionRecordIdentifier%3A0b9ea48d-43c9-5197-8bf1-126d965816a7&limit=1&format=json
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-04-44.json"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:04:44 GMT
+      x-amz-apigw-id:
+      - FjXPBHSeIAMFgIg=
+      x-amzn-requestid:
+      - 09165f0f-159c-42a8-bac9-eb2b394bb4b6
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f2c-7659ad277ca6755b0dfd064e;Parent=7d0b22175a2784dc;Sampled=0;Lineage=2:f5f5fcbf:0
+    body:
+      type: json
+      content:
+        petitionDecisionData:
+        - decisionPetitionTypeCodeDescriptionText: >-
+            REINSTATE PATENT - UNINTENTIONALLY DELAYED PAYMENT OF MAINTENANCE FEE, NO
+            ADDITIONAL INFORMATION REQUIRED (37 CFR 1.378(A))
+          petitionMailDate: 2026-10-18
+          petitionDecisionRecordIdentifier: 0b9ea48d-43c9-5197-8bf1-126d965816a7
+          technologyCenter: "3700"
+          finalDecidingOfficeName: OFFICE OF PETITIONS
+          decisionPetitionTypeCode: "533"
+          patentNumber: "11389739"
+          decidedPetitionTypeCodeDescriptionText: GRANTED
+          decisionMailDate: 2026-10-18
+          decisionDate: 2026-10-18
+  recorded_at: 2026-10-20T17:04:44.619Z

@@ -1,0 +1,68 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/office-action/search/download
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        q: officeActionRecordIdentifier:155d5a6220a95e390b12a1e28adaf485
+        fields:
+        - officeActionRecordIdentifier
+        - applicationNumberText
+        - documentCode
+        - documentCodeDescriptionText
+        - submissionDate
+        - groupArtUnitNumber
+        - patentNumber
+        - rejectionTypeBag
+        pagination:
+          limit: 1
+          offset: 0
+        format: json
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-00-09.json"
+      content-length:
+      - "305"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:00:09 GMT
+      x-amz-apigw-id:
+      - FjWkEEPjIAMF7zA=
+      x-amzn-requestid:
+      - bc1beafd-24de-4998-a9c9-b18873862e05
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79e19-411411c976c4651c03441dda;Parent=63b1c65208908d8a;Sampled=0;Lineage=1:9d22a9d9:0
+    body:
+      type: json
+      content:
+        officeActionsData:
+        - documentCode: CTNF
+          officeActionRecordIdentifier: 155d5a6220a95e390b12a1e28adaf485
+          rejectionTypeBag:
+          - "102"
+          - "103"
+          - DoublePatent
+          submissionDate: 2026-10-09
+          groupArtUnitNumber: 1684
+          applicationNumberText: "17181378"
+          documentCodeDescriptionText: Non-Final Rejections
+  recorded_at: 2026-10-20T17:00:09.614Z

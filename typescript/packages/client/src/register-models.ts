@@ -8,35 +8,47 @@ export const AssignorSchema = z.looseObject({
   executionDate: text,
   acknowledgementDate: text,
 });
-export const PatentPropertySchema = z.looseObject({
-  sequenceNumber: integer,
-  propertySequenceNumber: integer,
-  applicationNumber: text,
-  fillingDate: text,
-  patentNumber: text,
-  publicationNumber: text,
-  publicationDate: text,
-  pctNumber: text,
-  internationalRegistrationNumber: text,
-  internationalPublicationDate: text,
-  inventionTitle: text,
-  inventors: text,
-  issueDate: text,
-});
-export const AssignmentRecordSchema = z.looseObject({
-  reelNumber: z.coerce.number().int(),
-  frameNumber: z.coerce.number().int(),
-  assignorExecutionDate: text,
-  mailDate: text,
-  recorded: text,
-  correspondentName: text,
-  assignors: z.array(AssignorSchema).default([]),
-  assignees: z.array(z.string()).default([]),
-  conveyance: text,
-  conveyanceCode: integer,
-  noOfProperties: z.number().int().default(0),
-  properties: z.array(PatentPropertySchema).default([]),
-});
+export const PatentPropertySchema = z
+  .looseObject({
+    sequenceNumber: integer,
+    propertySequenceNumber: integer,
+    applicationNumber: text,
+    fillingDate: text,
+    filingDate: text,
+    patentNumber: text,
+    publicationNumber: text,
+    publicationDate: text,
+    pctNumber: text,
+    internationalRegistrationNumber: text,
+    internationalPublicationDate: text,
+    inventionTitle: text,
+    inventors: text,
+    issueDate: text,
+  })
+  .transform((property) => ({
+    ...property,
+    sequenceNumber: property.sequenceNumber ?? property.propertySequenceNumber,
+    filingDate: property.filingDate ?? property.fillingDate,
+  }));
+export const AssignmentRecordSchema = z
+  .looseObject({
+    reelNumber: z.coerce.number().int(),
+    frameNumber: z.coerce.number().int(),
+    assignorExecutionDate: text,
+    mailDate: text,
+    recorded: text,
+    correspondentName: text,
+    assignors: z.array(AssignorSchema).default([]),
+    assignees: z.array(z.string()).default([]),
+    conveyance: text,
+    conveyanceCode: integer,
+    noOfProperties: z.number().int().default(0),
+    properties: z.array(PatentPropertySchema).default([]),
+  })
+  .transform((record) => ({
+    ...record,
+    reelFrame: `${record.reelNumber}/${record.frameNumber}`,
+  }));
 export const AssignmentDetailSchema = z.looseObject({
   assignment: z.record(z.string(), z.unknown()),
   noOfProperties: z.number().int().default(0),
@@ -53,17 +65,22 @@ export const TrademarkPropertySchema = z.looseObject({
   registrationDate: text,
   internationalRegistrationNumber: text,
 });
-export const TrademarkAssignmentRecordSchema = z.looseObject({
-  reelNumber: z.coerce.number().int(),
-  frameNumber: z.union([z.string(), z.number()]).transform(String),
-  assignorExecutionDate: text,
-  correspondentName: text,
-  domesticRepresentative: text,
-  assignors: z.array(AssignorSchema).default([]),
-  assignees: z.array(z.string()).default([]),
-  noOfProperties: z.number().int().default(0),
-  properties: z.array(TrademarkPropertySchema).default([]),
-});
+export const TrademarkAssignmentRecordSchema = z
+  .looseObject({
+    reelNumber: z.coerce.number().int(),
+    frameNumber: z.union([z.string(), z.number()]).transform(String),
+    assignorExecutionDate: text,
+    correspondentName: text,
+    domesticRepresentative: text,
+    assignors: z.array(AssignorSchema).default([]),
+    assignees: z.array(z.string()).default([]),
+    noOfProperties: z.number().int().default(0),
+    properties: z.array(TrademarkPropertySchema).default([]),
+  })
+  .transform((record) => ({
+    ...record,
+    reelFrame: `${record.reelNumber}/${record.frameNumber}`,
+  }));
 export type AssignmentRecord = z.infer<typeof AssignmentRecordSchema>;
 export type AssignmentDetail = z.infer<typeof AssignmentDetailSchema>;
 export type TrademarkAssignmentRecord = z.infer<

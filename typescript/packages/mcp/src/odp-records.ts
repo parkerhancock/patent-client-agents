@@ -12,10 +12,13 @@ import { z } from "zod";
 import {
   type AuthCheck,
   detailEnvelope,
+  detailEnvelopeSchema,
   detailToolOptions,
   downloadResult,
   listEnvelope,
+  listEnvelopeSchema,
   listToolOptions,
+  objectOutputSchema,
 } from "./shared.js";
 
 const dataset = z.enum(["trials", "appeals", "interferences"]);
@@ -272,6 +275,10 @@ export function registerOdpRecordTools(
   server.tool(
     {
       ...detailToolOptions(auth),
+      output: z.union([listEnvelopeSchema, detailEnvelopeSchema]),
+      outputSchema: objectOutputSchema(
+        z.union([listEnvelopeSchema, detailEnvelopeSchema]),
+      ),
       name: "get_ptab",
       description:
         "Retrieve a PTAB record by document identifier or trial number. number identifies all decisions/documents for one trial or appeal/interference.",
@@ -280,6 +287,10 @@ export function registerOdpRecordTools(
         entity: entity.default("decisions"),
         identifier: z.string().trim().min(1),
         by_number: z.boolean().default(false),
+        full: z.boolean().default(false),
+        limit: z.number().int().min(1).max(100).default(25),
+        offset: z.number().int().nonnegative().default(0),
+        cursor: cursorInput,
       }),
     },
     async (input) => {
@@ -290,6 +301,13 @@ export function registerOdpRecordTools(
         by_number: byNumber,
       } = input;
       check(ds, kind);
+      if (byNumber && kind === "proceedings")
+        throw new Error(
+          "Proceedings use their trial number directly; by_number is for decision/document lists.",
+        );
+      if (!byNumber && (input.cursor || input.offset))
+        throw new Error("Pagination is available only with by_number=true.");
+      const offset = cursorOffset(input);
       const response =
         ds === "trials"
           ? kind === "proceedings"
@@ -304,9 +322,39 @@ export function registerOdpRecordTools(
           : byNumber
             ? await clients[ds].getDecisionsByNumber(id)
             : await clients[ds].getDecision(id);
+      const key =
+        ds === "appeals"
+          ? "patentAppealDataBag"
+          : ds === "interferences"
+            ? "patentInterferenceDataBag"
+            : kind === "proceedings"
+              ? "patentTrialProceedingDataBag"
+              : "patentTrialDocumentDataBag";
+      const rows = response[key] as Record<string, unknown>[];
+      if (byNumber)
+        return cursorEnvelope(
+          listEnvelope(
+            "PTAB records for the requested proceeding.",
+            searchRows(
+              rows.slice(offset, offset + input.limit),
+              "ptab",
+              input.full,
+            ),
+            response.provenance,
+            { count: rows.length, offset, limit: input.limit },
+          ),
+          input,
+          offset,
+        );
       return detailEnvelope(
         "PTAB record details.",
-        response,
+        {
+          ...(input.full
+            ? (boundedMetadata(response) as Record<string, unknown>)
+            : {}),
+          count: response.count,
+          [key]: searchRows(rows, "ptab", input.full),
+        },
         response.provenance,
       );
     },
@@ -408,7 +456,7 @@ export function registerOdpRecordTools(
       });
       return detailEnvelope(
         "Petition decision details.",
-        response,
+        boundedMetadata(response),
         response.provenance,
       );
     },
@@ -486,8 +534,8 @@ export function registerOdpRecordTools(
         latestOnly: z.boolean().optional(),
         fileFromDate: z.iso.date().optional(),
         fileToDate: z.iso.date().optional(),
-        limit: z.number().int().min(1).max(100).optional(),
-        offset: z.number().int().nonnegative().optional(),
+        limit: z.number().int().min(1).max(100).default(25),
+        offset: z.number().int().nonnegative().default(0),
       }),
     },
     async (input) => {
@@ -495,7 +543,7 @@ export function registerOdpRecordTools(
       const response = await clients.bulk.getProduct(identifier, options);
       return detailEnvelope(
         "Bulk product details.",
-        response,
+        boundedMetadata(response),
         response.provenance,
       );
     },

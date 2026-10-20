@@ -1,0 +1,171 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/office-action/155d5a6220a95e390b12a1e28adaf485/download/officeActionText
+    headers:
+      accept:
+      - text/plain
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T16-59-07.text/plain"
+      content-length:
+      - "22193"
+      content-type:
+      - text/plain
+      date:
+      - Tue, 20 Oct 2026 16:59:07 GMT
+      x-amz-apigw-id:
+      - FjWaZFcgIAMFVPQ=
+      x-amzn-requestid:
+      - 34715799-1c70-4c7b-a9a9-da984e21d4b6
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79ddb-20dc7ef21ad8900366ae9fdd;Parent=7ab14598ae1fa03e;Sampled=0;Lineage=1:9d22a9d9:0
+    body:
+      type: text
+      content: |2
+        
+        
+            DETAILED ACTION
+        Reassignment of the Application
+        1.	Please note that this application has been reassigned to Examiner Kaijiang Zhang, in Art Unit 1684.  In order to expedite accurate processing of the application papers, all future correspondence with the Office should reflect this change.
+        Notice of Pre-AIA  or AIA  Status
+        2.	The present application, filed on or after March 16, 2013, is being examined under the first inventor to file provisions of the AIA .
+        Election/Restrictions
+        3.	Applicant’s election without traverse of the “applicator” species as recited in claim 11 (thus claims 4-10 and 12-13 are withdrawn as being drawn to non-elected species) in the reply filed on 7/14/2025 is acknowledged.
+        4.	Claims 1-30 are pending in the application.  Claims 4-10 and 12-13 are withdrawn from further consideration pursuant to 37 CFR 1.142(b) as being drawn to a nonelected invention, there being no allowable generic or linking claim.  Claims 1-3, 11 and 14-30 are currently under examination.
+        Double Patenting
+        5.	The nonstatutory double patenting rejection is based on a judicially created doctrine grounded in public policy (a policy reflected in the statute) so as to prevent the unjustified or improper timewise extension of the “right to exclude” granted by a patent and to prevent possible harassment by multiple assignees. A nonstatutory double patenting rejection is appropriate where the conflicting claims are not identical, but at least one examined application claim is not patentably distinct from the reference claim(s) because the examined application claim is either anticipated by, or would have been obvious over, the reference claim(s). See, e.g., In re Berg, 140 F.3d 1428, 46 USPQ2d 1226 (Fed. Cir. 1998); In re Goodman, 11 F.3d 1046, 29 USPQ2d 2010 (Fed. Cir. 1993); In re Longi, 759 F.2d 887, 225 USPQ 645 (Fed. Cir. 1985); In re Van Ornum, 686 F.2d 937, 214 USPQ 761 (CCPA 1982); In re Vogel, 422 F.2d 438, 164 USPQ 619 (CCPA 1970); In re Thorington, 418 F.2d 528, 163 USPQ 644 (CCPA 1969).
+        A timely filed terminal disclaimer in compliance with 37 CFR 1.321(c) or 1.321(d) may be used to overcome an actual or provisional rejection based on nonstatutory double patenting provided the reference application or patent either is shown to be commonly owned with the examined application, or claims an invention made as a result of activities undertaken within the scope of a joint research agreement. See MPEP § 717.02 for applications subject to examination under the first inventor to file provisions of the AIA  as explained in MPEP § 2159. See MPEP § 2146 et seq. for applications not subject to examination under the first inventor to file provisions of the AIA . A terminal disclaimer must be signed in compliance with 37 CFR 1.321(b). 
+        The filing of a terminal disclaimer by itself is not a complete reply to a nonstatutory double patenting (NSDP) rejection. A complete reply requires that the terminal disclaimer be accompanied by a reply requesting reconsideration of the prior Office action. Even where the NSDP rejection is provisional the reply must be complete. See MPEP § 804, subsection I.B.1. For a reply to a non-final Office action, see 37 CFR 1.111(a). For a reply to final Office action, see 37 CFR 1.113(c). A request for reconsideration while not provided for in 37 CFR 1.113(c) may be filed after final for consideration. See MPEP §§ 706.07(e) and 714.13.
+        The USPTO Internet website contains terminal disclaimer forms which may be used. Please visit www.uspto.gov/patent/patents-forms. The actual filing date of the application in which the form is filed determines what form (e.g., PTO/SB/25, PTO/SB/26, PTO/AIA /25, or PTO/AIA /26) should be used. A web-based eTerminal Disclaimer may be filled out completely online using web-screens. An eTerminal Disclaimer that meets all requirements is auto-processed and approved immediately upon submission. For more information about eTerminal Disclaimers, refer to www.uspto.gov/patents/apply/applying-online/eterminal-disclaimer.
+        6.	Claims 1-3, 11 and 14-30 are provisionally rejected on the ground of nonstatutory double patenting as being unpatentable over claims 31-50 of copending Application No. 19/460,975 (reference application).  Although the claims at issue are not identical, they are not patentably distinct from each other because claims 31-50 of copending Application No. 19/460,975 teach or render obvious all the steps and elements as recited in instant claims 1-3, 11 and 14-30.  Specifically, claims 31 and 37 of copending Application No. 19/460,975 teach all the steps and elements as recited in instant claim 1.  In addition, the other features as recited in dependent claims 2-3, 11 and 14-30 are also taught or rendered obvious by claims 31-50 of copending Application No. 19/460,975.
+        This is a provisional nonstatutory double patenting rejection because the patentably indistinct claims have not in fact been patented.
+        Claim Rejections - 35 USC § 102
+        7.	In the event the determination of the status of the application as subject to AIA  35 U.S.C. 102 and 103 (or as subject to pre-AIA  35 U.S.C. 102 and 103) is incorrect, any correction of the statutory basis for the rejection will not be considered a new ground of rejection if the prior art relied upon, and the rationale supporting the rejection, would be the same under either status.
+        8.	The following is a quotation of the appropriate paragraphs of 35 U.S.C. 102 that form the basis for the rejections under this section made in this Office action:
+        A person shall be entitled to a patent unless –
+        
+        (a)(1) the claimed invention was patented, described in a printed publication, or in public use, on sale or otherwise available to the public before the effective filing date of the claimed invention.
+        9.	Claims 1-3, 11, 14-15, 17-20 and 22-26 are rejected under 35 U.S.C. 102(a)(1) as being anticipated by Vickovic et al. (Nat. Commun. 2016, 7:13182).
+        Regarding claim 1
+        Vickovic et al. teach, throughout the whole document, a method for delivering a reagent to a substrate surface, comprising: (a) providing a substrate (e.g., microarray of barcoded DNA oligonucleotides printed on an activated glass slide) surface comprising a plurality of nucleic acid molecules (e.g., barcoded DNA oligonucleotides) immobilized adjacent thereto (see Figure 1; page 2, column 2, paragraph 2); and (b) using an applicator (e.g., nozzle of a FACS machine, or pipette tip) to direct a solution comprising said reagent (e.g., a solution comprising cells and saline sodium citrate (SSC), where either cells or saline sodium citrate (SSC) may be regarded as reagent) to contact at least a subset of said plurality of nucleic acid molecules simultaneously, by moving said applicator, said substrate surface, or both said applicator and said substrate surface relative to each other (see Figure 1; page 7, column 1, paragraphs 2 and 4-5).
+        Regarding claim 2
+        The method according to Vickovic et al., wherein said at least said subset of said plurality of nucleic acid molecules is disposed along an axis of said substrate surface (see Figure 1. The nucleic acid molecules immobilized on each feature of the microarray are disposed along the central axis perpendicular to the circular-shaped feature.).
+        Regarding claim 3
+        The method according to Vickovic et al., wherein, in (b), an additional subset of said plurality of nucleic acid molecules is contacted with said solution simultaneously with said at least said subset of said plurality of nucleic acid molecules, wherein said additional subset of said plurality of nucleic acid molecules is disposed along a second axis of said substrate surface, different than said axis (see Figure 1; page 7, column 1, paragraph 2. For the embodiment using a pipet tip as the applicator, the cell solution pipetted onto the array surface would touch multiple features of the array, where each feature has a different central axis perpendicular to the circular-shaped feature. In addition, when the cell solution on the array surface is “smeared with a side of a pipette tip”, it would also touch multiple features simultaneously, where each of these multiple features has a different central axis perpendicular to said circular-shaped feature.).
+        Regarding claim 11
+        The method according to Vickovic et al., wherein said applicator comprises a dispense probe configured for curtain coating, wherein said dispense probe dispenses said solution as a curtain or a flat sheet to said substrate surface as a continuous stream across said substrate surface (see Figure 1; page 7, column 1, paragraph 2. For the embodiment using a pipet tip as the applicator, when the cell solution on the array surface is “smeared” with a side of the pipette tip, it would form a curtain or a flat sheet to the array surface as a continuous stream across the array surface.).
+        Regarding claims 14-15
+        The method according to Vickovic et al., wherein said applicator moves said solution from a first location to a second location on said substrate surface, wherein said applicator comprises a physical scraper or a squeegee, and (b) comprises using said physical scraper or said squeegee to spread a volume of said solution from said first location to said second location (see Figure 1; page 7, column 1, paragraph 2. For the embodiment using a pipet tip as the applicator, when the cell solution on the array surface is “smeared” with a side of the pipette tip, it’s moved from a first location to a second location on the array surface, wherein the pipet tip serves as a physical scraper or a squeegee that spreads a volume of the cell solution from said first location to said second location.).
+        Regarding claim 17
+        The method according to Vickovic et al., wherein, subsequent to (b), said substrate surface comprises a film of said solution with substantially uniform thickness (see Figure 1; page 7, column 1, paragraph 2. For the embodiment using a pipet tip as the applicator, when the cell solution on the array surface is “smeared” with a side of the pipette tip, a film of said solution with substantially uniform thickness would form on the array surface.).
+        Regarding claims 18-19
+        The method according to Vickovic et al., wherein said substantially uniform thickness is between about 10 nanometers (nm) to about 1 millimeters (mm), wherein said substantially uniform thickness is at least 10 micrometers (µm) (see Figure 1; page 7, column 1, paragraph 2.  Since a film of “single cells” is formed by using the pipetting and smearing approach, the film would have a thickness of at least 10 micrometers and less than 60 micrometers because the human or mouse cells used by Vickovic et al. have a diameter in the range of 10-30 micrometers.).
+        Regarding claim 20
+        The method according to Vickovic et al., wherein said moving of said applicator, said substrate surface, or both said applicator and said substrate surface relative to each other comprises translating (see Figure 1; page 7, column 1, paragraphs 2 and 4-5).
+        Regarding claim 22
+        The method according to Vickovic et al., wherein during (b), said moving comprises translating said applicator or said substrate surface or both relative to each other (see Figure 1; page 7, column 1, paragraphs 2 and 4-5).
+        Regarding claim 23
+        The method according to Vickovic et al., wherein said substrate surface is substantially planar (see Figure 1).
+        Regarding claim 24
+        The method according to Vickovic et al., wherein said substrate surface is patterned (see Figure 1).
+        Regarding claim 25
+        The method according to Vickovic et al., wherein said substrate surface is patterned using surface chemistry (e.g., surface chemistry that allows barcoded DNA oligonucleotides to be immobilized on the array features) (see Figure 1; page 2, column 2, paragraph 2).
+        Regarding claim 26
+        The method according to Vickovic et al., wherein said substrate surface comprises a plurality of individually addressable locations (see Figure 1).
+        
+        10.	Claims 1-3, 16, 20, 22-26 and 28-30 are rejected under 35 U.S.C. 102(a)(1) as being anticipated by Dave et al. (US 2016/0076978 A1).
+        Regarding claims 1, 26 and 28
+        Dave et al. teach, throughout the whole document, a method for delivering a reagent to a substrate surface, comprising: (a) providing a substrate surface comprising a plurality of nucleic acid molecules immobilized adjacent thereto, wherein said substrate surface comprises a plurality of individually addressable locations in the form of a two-dimensional pattern of biological capture beads deposited on the planar surface of the substrate, wherein each biological capture bead is coupled/conjugated with a subset of the plurality of nucleic acid molecules, and wherein each biological capture bead is immobilized to an individually addressable location of said plurality of individually addressable locations (see paragraphs [0043]-[0044]; claims 186-187); and (b) using an applicator (e.g., the applicator that delivers/directs a solution comprising an analyte) to direct a solution comprising said reagent (e.g., a solution comprising an analyte) to contact at least a subset of said plurality of nucleic acid molecules (e.g., a subset of the plurality of nucleic acid molecules that is coupled/conjugated to a first biological capture bead) simultaneously, by moving said applicator, said substrate surface, or both said applicator and said substrate surface relative to each other (see paragraphs [0043]-[0044]; claims 186-187).
+        Regarding claim 2
+        The method according to Dave et al., wherein said at least said subset of said plurality of nucleic acid molecules is disposed along an axis of said substrate surface (e.g., the axis that passes the center of the first biological capture bead and is perpendicular to the substrate surface) (see paragraphs [0043]-[0044]; claims 186-187).
+        Regarding claim 3
+        The method according to Dave et al., wherein, in (b), an additional subset of said plurality of nucleic acid molecules (e.g., an additional subset of said plurality of nucleic acid molecules that is coupled/conjugated to a second biological capture bead) is contacted with said solution simultaneously with said at least said subset of said plurality of nucleic acid molecules, wherein said additional subset of said plurality of nucleic acid molecules is disposed along a second axis of said substrate surface (e.g., the axis that passes the center of the second biological capture bead and is perpendicular to the substrate surface), different than said axis (see paragraphs [0043]-[0044]; claims 186-187).
+        Regarding claim 16
+        The method according to Dave et al., further comprising subjecting said substrate surface to vibration to move said solution from a first location to a second location on said substrate surface (see paragraphs [0009], [0042] and [0057]-[0073]).
+        Regarding claim 20
+        The method according to Dave et al., wherein said moving of said applicator, said substrate surface, or both said applicator and said substrate surface relative to each other comprises translating or rotating or both (see paragraphs [0057]-[0073]; claims 171-187).
+        Regarding claim 22
+        The method according to Dave et al., wherein during (b), said moving comprises translating said applicator or said substrate surface or both relative to each other (see paragraphs [0057]-[0073]; claims 171-187).
+        Regarding claim 23
+        The method according to Dave et al., wherein said substrate surface is substantially planar (see paragraphs [0043]-[0044]; claims 186-187).
+        Regarding claim 24
+        The method according to Dave et al., wherein said substrate surface is patterned (see paragraphs [0043]-[0044]; claims 186-187).
+        Regarding claim 25
+        The method according to Dave et al., wherein said substrate surface is patterned using surface chemistry (see paragraphs [0043]-[0044]; claims 186-187).
+        Regarding claim 29
+        The method according to Dave et al., wherein said bead comprises nucleic acid molecules having sequence identity (see paragraphs [0036] and [0043]-[0044]).
+        Regarding claim 30
+        The method according to Dave et al., wherein said at least said subset of said plurality of nucleic acid molecules are coupled to a plurality of beads, wherein each bead of said plurality of beads is immobilized to a different individually addressable location of said plurality of individually addressable locations (see paragraphs [0043]-[0044]; claims 186-187).
+        
+        Claim Rejections - 35 USC § 103
+        11.	The following is a quotation of 35 U.S.C. 103 which forms the basis for all obviousness rejections set forth in this Office action:
+        A patent for a claimed invention may not be obtained, notwithstanding that the claimed invention is not identically disclosed as set forth in section 102 of this title, if the differences between the claimed invention and the prior art are such that the claimed invention as a whole would have been obvious before the effective filing date of the claimed invention to a person having ordinary skill in the art to which the claimed invention pertains.  Patentability shall not be negated by the manner in which the invention was made.
+        12.	This application currently names joint inventors. In considering patentability of the claims the examiner presumes that the subject matter of the various claims was commonly owned as of the effective filing date of the claimed invention(s) absent any evidence to the contrary.  Applicant is advised of the obligation under 37 CFR 1.56 to point out the inventor and effective filing dates of each claim that was not commonly owned as of the effective filing date of the later invention in order for the examiner to consider the applicability of 35 U.S.C. 102(b)(2)(C) for any potential 35 U.S.C. 102(a)(2) prior art against the later invention.
+        13.	Claim 21 is rejected under 35 U.S.C. 103 as being unpatentable over Dave et al. (US 2016/0076978 A1).
+        Dave et al. teach the method of claims 1 and 20 as discussed above.  Although Dave et al. teach the moving comprises rotating the substrate surface about a rotational axis (see paragraphs [0009] and [0057]-[0067]), Dave et al. do not specifically disclose the preferred or optimal rotational speed range as recited in claim 21.  However, it would have been prima facie obvious to one of ordinary skill in the art before the effective filing date of the present application to optimize the rotational speed by routine experimentation thus arriving at the preferred or optimal rotational speed range as recited in the claim. The MPEP states that “Where the general conditions of a claim are disclosed in the prior art, it is not inventive to discover the optimum or working ranges by routine experimentation” In re Aller, 220 F.2d 454, 456, 105 USPQ 233, 235 (CCPA 1955); see also Peterson, 315 F.3d at 1330, 65 USPQ2d at 1382 (“The normal desire of scientists or artisans to improve upon what is already generally known provides the motivation to determine where in a disclosed set of percentage ranges is the optimum combination of percentages.”) (see MPEP 2144.05.II).
+        
+        14.	Claim 27 is rejected under 35 U.S.C. 103 as being unpatentable over Vickovic et al. (Nat. Commun. 2016, 7:13182).
+        Vickovic et al. teach the method of claims 1 and 26 as discussed above.  Although the method of Vickovic et al. is designed to be “high-throughput” (see Abstract) and Vickovic et al. provide example(s) where thousands of single cells are analyzed (involving the use of a substrate surface comprising thousands of individually addressable locations) (see Abstract; page 2, column 2, paragraph 2), Vickovic et al. do not specifically disclose the use of a substrate surface comprising at least 50,000,000,000 individually addressable locations.  However, it would have been prima facie obvious to one of ordinary skill in the art before the effective filing date of the claimed invention to scale up the method of Vickovic et al. to use a substrate surface comprising at least 50,000,000,000 individually addressable locations to arrive at a method of higher throughput, because mere scaling up of the method by scaling up the size of the substrate surface is deemed obvious (see MPEP 2144.04(IV)(A): “…mere scaling up of a prior art process capable of being scaled up, if such were the case, would not establish patentability in a claim to an old process so scaled…”).
+        
+        Conclusion
+        15.	No claim is allowed.
+        Any inquiry concerning this communication or earlier communications from the examiner should be directed to KAIJIANG ZHANG whose telephone number is (571)272-5207. The examiner can normally be reached Monday - Friday, 8:30 am - 5 pm.
+        Examiner interviews are available via telephone, in-person, and video conferencing using a USPTO supplied web-based collaboration tool. To schedule an interview, applicant is encouraged to use the USPTO Automated Interview Request (AIR) at http://www.uspto.gov/interviewpractice. 
+        If attempts to reach the examiner by telephone are unsuccessful, the examiner’s supervisor, Heather Calamita can be reached on 571-272-2876. The fax phone number for the organization where this application or proceeding is assigned is 571-273-8300.
+        Information regarding the status of published or unpublished applications may be obtained from Patent Center. Unpublished application information in Patent Center is available to registered users. To file and manage patent submissions in Patent Center, visit: https://patentcenter.uspto.gov. Visit https://www.uspto.gov/patents/apply/patent-center for more information about Patent Center and https://www.uspto.gov/patents/docx for information about filing in DOCX format. For additional questions, contact the Electronic Business Center (EBC) at 866-217-9197 (toll-free). If you would like assistance from a USPTO Customer Service Representative, call 800-786-9199 (IN USA OR CANADA) or 571-272-1000.
+        
+        
+        
+        
+        
+        /KAIJIANG ZHANG/Primary Examiner, Art Unit 1684
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+            
+  recorded_at: 2026-10-20T16:59:07.818Z

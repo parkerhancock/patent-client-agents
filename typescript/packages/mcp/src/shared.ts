@@ -19,17 +19,28 @@ export const listEnvelopeSchema = z.object({
   more_available: z.boolean(),
   provenance: provenanceSchema,
 });
-export const detailEnvelopeSchema = z.object({
-  summary: z.string().optional(),
-  details: z.unknown().optional(),
-  download_url: z.string().url().optional(),
-  file_path: z.string().optional(),
-  expires_at: z.string().datetime().optional(),
-  filename: z.string().optional(),
-  content_type: z.string().optional(),
-  size: z.number().int().nonnegative().optional(),
+const detailSchema = z
+  .object({
+    summary: z.string(),
+    details: z.unknown(),
+    provenance: provenanceSchema,
+  })
+  .refine(
+    (value) => Object.hasOwn(value, "details"),
+    "A detail response requires details.",
+  );
+const artifactSchema = z.object({
+  expires_at: z.string().datetime(),
+  filename: z.string(),
+  content_type: z.string(),
+  size: z.number().int().nonnegative(),
   provenance: provenanceSchema,
 });
+export const detailEnvelopeSchema = z.union([
+  detailSchema,
+  artifactSchema.extend({ download_url: z.string().url() }),
+  artifactSchema.extend({ file_path: z.string().min(1) }),
+]);
 const annotations = {
   readOnlyHint: true,
   destructiveHint: false,
@@ -39,9 +50,13 @@ const annotations = {
 export function listToolOptions(auth?: AuthCheck) {
   return { output: listEnvelopeSchema, annotations, ...(auth ? { auth } : {}) };
 }
+export function objectOutputSchema(schema: z.ZodType) {
+  return { ...z.toJSONSchema(schema, { io: "input" }), type: "object" };
+}
 export function detailToolOptions(auth?: AuthCheck) {
   return {
     output: detailEnvelopeSchema,
+    outputSchema: objectOutputSchema(detailEnvelopeSchema),
     annotations,
     ...(auth ? { auth } : {}),
   };

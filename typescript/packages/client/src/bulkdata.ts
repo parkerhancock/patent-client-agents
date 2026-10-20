@@ -38,6 +38,16 @@ function csv(value: string | string[] | undefined) {
         .filter(Boolean)
         .join(",");
 }
+function productSegment(value: string): string {
+  if (/[/\\]/.test(value))
+    throw new TypeError(
+      "Product identifiers and file names must be single path segments.",
+    );
+  return identifier(value);
+}
+function dateBound(value: string | undefined) {
+  return value === undefined ? undefined : z.iso.date().parse(value.trim());
+}
 export class BulkDataClient {
   private readonly transport: OdpTransport;
   constructor(options: ClientOptions = {}) {
@@ -81,13 +91,13 @@ export class BulkDataClient {
     return recordResponse(
       this.transport,
       "GET",
-      `/api/v1/datasets/products/${identifier(id)}`,
+      `/api/v1/datasets/products/${productSegment(id)}`,
       "bulkDataProductBag",
       BulkDataProductSchema,
       {
         searchParams: {
-          fileDataFromDate: options.fileFromDate,
-          fileDataToDate: options.fileToDate,
+          fileDataFromDate: dateBound(options.fileFromDate),
+          fileDataToDate: dateBound(options.fileToDate),
           offset:
             options.offset === undefined
               ? undefined
@@ -112,7 +122,7 @@ export class BulkDataClient {
   ) {
     return this.transport.bytes(
       "GET",
-      `/api/v1/datasets/products/files/${identifier(productIdentifier)}/${identifier(fileName)}`,
+      `/api/v1/datasets/products/files/${productSegment(productIdentifier)}/${productSegment(fileName)}`,
       {
         ...options,
         allowedHosts: options.allowedHosts ?? ["data.uspto.gov"],

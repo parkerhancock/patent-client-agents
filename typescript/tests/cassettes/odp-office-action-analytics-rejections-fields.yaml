@@ -1,0 +1,87 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/oa/oa_rejections/v2/fields
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - accept, authorization, content-type, x-requested-with
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - "1"
+      connection:
+      - keep-alive
+      content-length:
+      - "904"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:13 GMT
+      strict-transport-security:
+      - max-age=31536000;
+      x-amz-apigw-id:
+      - FjWbVGagoAMFnVg=
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - "904"
+      x-amzn-remapped-date:
+      - Tue, 20 Oct 2026 16:59:13 GMT
+      x-amzn-requestid:
+      - 692357c6-3e15-4ab7-a74c-eec1d66eef84
+    body:
+      type: json
+      content:
+        apiKey: oa_rejections
+        apiVersionNumber: v2
+        apiUrl: https://api.uspto.gov/api/v1/patent/oa/oa_rejections/v2/fields
+        apiDocumentationUrl: >-
+          https://data.uspto.gov/swagger/index.html?urls.primaryName=USPTO%20Office%20Action%20Rejection%20API
+        apiStatus: PUBLISHED
+        fieldCount: 31
+        fields:
+        - bilskiIndicator
+        - actionTypeCategory
+        - legacyDocumentCodeIdentifier
+        - hasRej101
+        - hasRej103
+        - hasRejDP
+        - mayoIndicator
+        - hasRej102
+        - nationalClass
+        - closingMissing
+        - cite103Max
+        - cite103EQ1
+        - obsoleteDocumentIdentifier
+        - id
+        - createUserIdentifier
+        - claimNumberArrayDocument
+        - patentApplicationNumber
+        - legalSectionCode
+        - submissionDate
+        - groupArtUnitNumber
+        - hasRej112
+        - nationalSubclass
+        - createDateTime
+        - rejectFormMissmatch
+        - formParagraphMissing
+        - aliceIndicator
+        - allowedClaimIndicator
+        - paragraphNumber
+        - cite103GT3
+        - myriadIndicator
+        - headerMissing
+        lastDataUpdatedDate: 2021-05-26 08:17:45.0
+  recorded_at: 2026-10-20T16:59:13.743Z

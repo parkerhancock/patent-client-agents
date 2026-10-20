@@ -1,0 +1,65 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/oa/oa_citations/v2/records
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: criteria=*%3A*&start=0&rows=1
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - accept, authorization, content-type, x-requested-with
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - "1"
+      connection:
+      - keep-alive
+      content-length:
+      - "609"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:17 GMT
+      strict-transport-security:
+      - max-age=31536000;
+      x-amz-apigw-id:
+      - FjWb6HD5oAMF80A=
+      x-amzn-remapped-date:
+      - Tue, 20 Oct 2026 16:59:17 GMT
+      x-amzn-requestid:
+      - dc38c5a7-000b-4977-8ddf-5986b6861f1b
+    body:
+      type: json
+      content:
+        response:
+          start: 0
+          numFound: 51036113
+          docs:
+          - applicantCitedExaminerReferenceIndicator: true
+            createUserIdentifier: ETL_SYS
+            workGroup: "3610"
+            officeActionCitationReferenceIndicator: true
+            referenceIdentifier: "Artessa, Andrew US 20030201666 A1 "
+            patentApplicationNumber: "15866467"
+            actionTypeCategory: rejected
+            legalSectionCode: "102"
+            groupArtUnitNumber: "3617"
+            createDateTime: 2025-07-07T01:12:35
+            techCenter: "3600"
+            obsoleteDocumentIdentifier: K6AT4TEFRXEAPX2
+            parsedReferenceIdentifier: "20030201666"
+            id: 018a0f33b2c4787bc3dc171b37897698
+            examinerCitedReferenceIndicator: true
+  recorded_at: 2026-10-20T16:59:17.465Z

@@ -20,7 +20,16 @@
     "replay:uspto": "bun scripts/record-uspto.ts --replay",
     "record:applications": "bun scripts/record-application-features.ts --record",
     "replay:applications": "bun scripts/record-application-features.ts --replay",
-    "record:bulk-file": "bun scripts/record-bulk-file.ts --record"
+    "record:bulk-file": "bun scripts/record-bulk-file.ts --record",
+    "record:application-get": "bun scripts/record-application-get.ts --record",
+    "replay:application-get": "bun scripts/record-application-get.ts --replay",
+    "record:record-features": "bun scripts/record-record-features.ts --record",
+    "replay:record-features": "bun scripts/record-record-features.ts --replay",
+    "record:office-actions": "bun scripts/record-office-action-features.ts --record",
+    "replay:office-actions": "bun scripts/record-office-action-features.ts --replay",
+    "record:tsdr": "bun scripts/record-tsdr-features.ts --record",
+    "replay:tsdr": "bun scripts/record-tsdr-features.ts --replay",
+    "record:ptab-pdf": "bun scripts/record-ptab-pdf.ts --record"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
@@ -29,6 +38,7 @@
     "@prefecthq/fastmcp-ts": "1.7.3",
     "@types/bun": "1.4.3",
     "cassetter": "0.11.0",
+    "fflate": "0.8.3",
     "ky": "2.2.0",
     "typescript": "5.9.3",
     "zod": "4.3.6"

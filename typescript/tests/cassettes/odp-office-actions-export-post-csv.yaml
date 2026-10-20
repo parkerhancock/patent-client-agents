@@ -1,0 +1,58 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/office-action/search/download
+    headers:
+      accept:
+      - text/csv
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        q: officeActionRecordIdentifier:155d5a6220a95e390b12a1e28adaf485
+        fields:
+        - officeActionRecordIdentifier
+        - applicationNumberText
+        - documentCode
+        - documentCodeDescriptionText
+        - submissionDate
+        - groupArtUnitNumber
+        - patentNumber
+        pagination:
+          limit: 1
+          offset: 0
+        format: csv
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-00-08.csv"
+      content-length:
+      - "224"
+      content-type:
+      - text/csv
+      date:
+      - Tue, 20 Oct 2026 17:00:08 GMT
+      x-amz-apigw-id:
+      - FjWj4GkioAMFxYA=
+      x-amzn-requestid:
+      - f692aeb0-78a6-4d75-9bf4-3be09fada359
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79e18-6266a8542057a30d09e57c15;Parent=116a70536ef4d4ce;Sampled=0;Lineage=1:9d22a9d9:0
+    body:
+      type: text
+      content: |
+        officeActionRecordIdentifier,applicationNumberText,documentCode,documentCodeDescriptionText,submissionDate,groupArtUnitNumber,patentNumber
+        155d5a6220a95e390b12a1e28adaf485,17181378,CTNF,Non-Final Rejections,2026-10-09,1684,
+  recorded_at: 2026-10-20T17:00:08.422Z

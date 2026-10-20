@@ -1,3 +1,4 @@
+import { z } from "zod";
 import type { RequestOptions } from "./models.js";
 import {
   identifier,
@@ -6,7 +7,7 @@ import {
   type RecordDownloadOptions,
   type RecordResponse,
   type RecordSearchOptions,
-  recordPayload,
+  recordRequest,
   recordResponse,
 } from "./odp-record-models.js";
 import { type ClientOptions, OdpTransport } from "./transport.js";
@@ -14,21 +15,34 @@ export type PetitionDecisionResponse = RecordResponse<
   "petitionDecisionDataBag",
   PetitionDecision
 >;
+export type PetitionSearchOptions = RecordSearchOptions;
+export type PetitionDownloadOptions = RecordDownloadOptions;
+function request(
+  options: PetitionSearchOptions,
+  download = false,
+  format?: "json" | "csv",
+) {
+  if (options.limit !== undefined)
+    z.number().int().min(1).max(500).parse(options.limit);
+  return recordRequest(options, download, format);
+}
 export class PetitionsClient {
   private readonly transport: OdpTransport;
   private readonly path = "/api/v1/petition/decisions";
   constructor(options: ClientOptions = {}) {
     this.transport = new OdpTransport(options);
   }
-  search(options: RecordSearchOptions = {}): Promise<PetitionDecisionResponse> {
+  search(
+    options: PetitionSearchOptions = {},
+  ): Promise<PetitionDecisionResponse> {
     return recordResponse(
       this.transport,
-      "POST",
+      options.method ?? "POST",
       `${this.path}/search`,
       "petitionDecisionDataBag",
       PetitionDecisionSchema,
       {
-        body: recordPayload(options),
+        ...request(options),
         ...(options.signal ? { signal: options.signal } : {}),
         emptyOn404: { count: 0, petitionDecisionDataBag: [] },
       },
@@ -54,27 +68,32 @@ export class PetitionsClient {
     );
   }
   download(
-    options: RecordSearchOptions = {},
+    options: PetitionSearchOptions = {},
   ): Promise<PetitionDecisionResponse> {
     return recordResponse(
       this.transport,
-      "POST",
+      options.method ?? "POST",
       `${this.path}/search/download`,
       "petitionDecisionDataBag",
       PetitionDecisionSchema,
       {
-        body: recordPayload(options, true, "json"),
+        ...request(options, true, "json"),
         ...(options.signal ? { signal: options.signal } : {}),
         emptyOn404: { count: 0, petitionDecisionDataBag: [] },
       },
+      { single: true, downloadKey: "petitionDecisionData" },
     );
   }
-  downloadFile(options: RecordDownloadOptions = {}) {
-    return this.transport.bytes("POST", `${this.path}/search/download`, {
-      body: recordPayload(options, true, options.fileFormat ?? "json"),
-      ...(options.signal ? { signal: options.signal } : {}),
-      timeoutMs: 120000,
-    });
+  downloadFile(options: PetitionDownloadOptions = {}) {
+    return this.transport.bytes(
+      options.method ?? "POST",
+      `${this.path}/search/download`,
+      {
+        ...request(options, true, options.fileFormat ?? "json"),
+        ...(options.signal ? { signal: options.signal } : {}),
+        timeoutMs: 120000,
+      },
+    );
   }
 }
 export type { PetitionDecision } from "./odp-record-models.js";

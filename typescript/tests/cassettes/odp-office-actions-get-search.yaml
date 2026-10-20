@@ -1,0 +1,53 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/office-action/search?limit=1&offset=0&q=documentCode%3ACTNF&fields=officeActionRecordIdentifier%2CapplicationNumberText%2CdocumentCode%2CdocumentCodeDescriptionText%2CfilingDate%2CsubmissionDate%2CgroupArtUnitNumber%2CpatentNumber%2CrejectionTypeBag
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-length:
+      - "408"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:05 GMT
+      x-amz-apigw-id:
+      - FjWaAHfgoAMFr8Q=
+      x-amzn-requestid:
+      - 691947d0-035e-4d3c-addf-d0f294019b40
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79dd9-369ecdc447bed5ed25bd2d56;Parent=78c0724afd86d9ea;Sampled=0;Lineage=2:9d22a9d9:0
+    body:
+      type: json
+      content:
+        count: 8935289
+        requestIdentifier: 691947d0-035e-4d3c-addf-d0f294019b40
+        officeActionDataBag:
+        - documentCode: CTNF
+          officeActionRecordIdentifier: 155d5a6220a95e390b12a1e28adaf485
+          filingDate: 2021-02-22
+          rejectionTypeBag:
+          - "102"
+          - "103"
+          - DoublePatent
+          submissionDate: 2026-10-09
+          groupArtUnitNumber: 1684
+          applicationNumberText: "17181378"
+          documentCodeDescriptionText: Non-Final Rejections
+  recorded_at: 2026-10-20T16:59:05.301Z

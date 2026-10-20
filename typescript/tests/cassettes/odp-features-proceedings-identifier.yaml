@@ -1,0 +1,58 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/trials/proceedings/IPR2027-00017
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:04:10 GMT
+      x-amz-apigw-id:
+      - FjXJuH-toAMFqiw=
+      x-amzn-requestid:
+      - a5128690-2316-4696-9717-6b0faec4ee9a
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f0a-5300f03e0f63932310dccad9;Parent=4cdeff1eb4149d6b;Sampled=0;Lineage=2:ce682653:0
+    body:
+      type: json
+      content:
+        count: 1
+        requestIdentifier: a5128690-2316-4696-9717-6b0faec4ee9a
+        patentTrialProceedingDataBag:
+        - lastModifiedDateTime: 2026-10-20T12:55:42
+          patentOwnerData:
+            patentNumber: "11876924"
+            grantDate: 2024-01-16
+            technologyCenterNumber: "2600"
+            groupArtUnitNumber: "2647"
+            applicationNumberText: "18193163"
+            inventorName: Sacha Spindler et al
+          trialMetaData:
+            trialTypeCode: IPR
+            fileDownloadURI: https://api.uspto.gov/api/v1/patent/ptab-files/IPR/2027/00017/IPR2027-00017.zip
+            trialStatusCategory: Pending
+            trialLastModifiedDate: 2026-10-19
+            petitionFilingDate: 2026-10-19
+            trialLastModifiedDateTime: 2026-10-19T21:44:46
+          trialNumber: IPR2027-00017
+          regularPetitionerData:
+            realPartyInInterestName: Intuit Inc.
+            counselName: Benzler, Jessica
+  recorded_at: 2026-10-20T17:04:10.651Z

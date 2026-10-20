@@ -91,7 +91,11 @@ export class GenericHttpTransport {
       .positive()
       .safe()
       .parse(options.maxResponseBytes ?? 64 * 1024 * 1024);
-    this.headers = new Headers(options.headers);
+    try {
+      this.headers = new Headers(options.headers);
+    } catch {
+      throw new ConfigurationError("Configured HTTP headers are invalid.");
+    }
     if (!this.headers.has("accept"))
       this.headers.set("accept", "application/json");
     this.timeoutMs = z
@@ -279,9 +283,15 @@ export class GenericHttpTransport {
         const chunks: Uint8Array[] = [];
         let length = 0;
         if (reader) {
+          const abortRead = () => {
+            void reader.cancel().catch(() => {});
+          };
+          signal.addEventListener("abort", abortRead, { once: true });
           try {
+            signal.throwIfAborted();
             for (;;) {
               const chunk = await reader.read();
+              signal.throwIfAborted();
               if (chunk.done) break;
               length += chunk.value.byteLength;
               if (length > maxBytes) {
@@ -295,6 +305,7 @@ export class GenericHttpTransport {
               chunks.push(chunk.value);
             }
           } finally {
+            signal.removeEventListener("abort", abortRead);
             reader.releaseLock();
           }
         }
@@ -321,6 +332,18 @@ export class GenericHttpTransport {
       }
       throw this.error("Too many redirects.", 0, "NETWORK_ERROR");
     } catch (error) {
+      if (options.signal?.aborted)
+        throw this.error(
+          `${this.sourceName} request was cancelled.`,
+          0,
+          "ABORTED",
+        );
+      if (deadline.aborted)
+        throw this.error(
+          `${this.sourceName} request exceeded its time budget.`,
+          0,
+          "TIMEOUT",
+        );
       if (error instanceof ApiError) throw error;
       if (error instanceof HTTPError) {
         if (
@@ -339,16 +362,7 @@ export class GenericHttpTransport {
           error.response.status,
         );
       }
-      if (options.signal?.aborted)
-        throw this.error(
-          `${this.sourceName} request was cancelled.`,
-          0,
-          "ABORTED",
-        );
-      if (
-        deadline.aborted ||
-        (error instanceof Error && error.name === "TimeoutError")
-      )
+      if (error instanceof Error && error.name === "TimeoutError")
         throw this.error(
           `${this.sourceName} request exceeded its time budget.`,
           0,

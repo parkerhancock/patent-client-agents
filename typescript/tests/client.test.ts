@@ -153,7 +153,6 @@ describe("ODP application contracts", () => {
     });
     for (const options of [
       { limit: 0 },
-      { limit: 101 },
       { offset: -1 },
       { limit: 1.5 },
       { rangeFilters: [{ field: "filingDate" }] },

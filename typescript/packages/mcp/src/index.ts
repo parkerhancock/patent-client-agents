@@ -87,6 +87,7 @@ const envelopeSchema = z.object({
   more_available: z.boolean(),
   provenance: provenanceSchema,
   not_found: z.array(z.string()).optional(),
+  facets: z.unknown().optional(),
 });
 const paging = {
   limit: z.number().int().min(1).max(100).default(25),
@@ -95,8 +96,8 @@ const paging = {
 };
 const searchSchema = SearchOptionsSchema.omit({
   normalize: true,
-  facets: true,
 }).extend({
+  limit: paging.limit,
   cursor: paging.cursor,
 });
 const cursorSchema = z.object({
@@ -284,6 +285,10 @@ export function createServer(options: ServerOptions = {}): FastMCP {
         next_cursor: more ? nextCursor(end, parameters) : null,
         more_available: more,
         provenance: withVersion(response.provenance),
+        ...(parameters.facets?.length &&
+        (response.facetResults ?? response.facets) !== undefined
+          ? { facets: response.facetResults ?? response.facets }
+          : {}),
       };
     },
   );
@@ -359,6 +364,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       input: z.object({
         application_number: z.string().min(1),
         document_codes: z.array(z.string()).optional(),
+        official_date_from: z.iso.date().optional(),
+        official_date_to: z.iso.date().optional(),
         ...paging,
       }),
     },
@@ -368,6 +375,12 @@ export function createServer(options: ServerOptions = {}): FastMCP {
         parameters.application_number,
         {
           includeAssociated: false,
+          ...(parameters.official_date_from
+            ? { officialDateFrom: parameters.official_date_from }
+            : {}),
+          ...(parameters.official_date_to
+            ? { officialDateTo: parameters.official_date_to }
+            : {}),
           ...(parameters.document_codes
             ? { documentCodes: parameters.document_codes }
             : {}),

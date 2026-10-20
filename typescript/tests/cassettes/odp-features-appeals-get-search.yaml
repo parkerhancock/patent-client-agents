@@ -1,0 +1,103 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/appeals/decisions/search?q=appealNumber%3A2026003167&limit=1&offset=0
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:04:28 GMT
+      x-amz-apigw-id:
+      - FjXMlHFrIAMFheg=
+      x-amzn-requestid:
+      - 576413ac-704c-4412-b664-2bd980c5fa44
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f1c-6b56637a2744d1d20a20d94e;Parent=5e483fbc2bf2f3d0;Sampled=0;Lineage=2:a3758c6d:0
+    body:
+      type: json
+      content:
+        count: 1
+        requestIdentifier: 576413ac-704c-4412-b664-2bd980c5fa44
+        patentAppealDataBag:
+        - appealNumber: "2026003167"
+          appealDocumentCategory: Decision
+          lastModifiedDateTime: 2026-09-22T18:31:51
+          appealMetaData:
+            appealFilingDate: 2026-08-11
+            appealLastModifiedDateTime: 2026-09-22T12:12:55
+            appealLastModifiedDate: 2026-09-22
+            applicationTypeCategory: REEXAM
+            fileDownloadURI: https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/003167/2026003167.zip
+          appellantData:
+            applicationNumberText: "90019709"
+            counselName: PATENTTM.US
+            groupArtUnitNumber: "3993"
+            inventorName: "10420703"
+            realPartyInInterestName: E-Link Plastic & Co. Ltd. (PO) et al.
+            patentOwnerName: 10420703 et al
+            technologyCenterNumber: "3900"
+          documentData:
+            documentFilingDate: 2026-09-22
+            documentIdentifier: 4445cc91-1c7c-46c1-aebb-4a35892af716
+            documentName: Decision_2026003167_09-22-2026.pdf
+            documentSizeQuantity: 301674
+            documentOCRText: |-
+              UNITED STATES PATENT AND TRADEMARK OFFICE
+              UNITED STATES DEPARTMENT OF COMMERCE
+              United States Patent and Trademark Office
+              Address:  COMMISSIONER FOR PATENTS
+              
+              P.O. Box 1450
+              Alexandria, Virginia 22313-1450
+              www.uspto.gov
+              
+              APPLICATION NO. FILING DATE FIRST NAMED INVENTOR ATTORNEY DOCKET NO. CONFIRMATION NO.
+              
+              90/019,709 10/24/2024 10420703 T-2382 (CFP-030581) 6255
+              
+              802 7590 09/22/2026
+              
+              PATENTTM.US
+              James H. Walters
+              205 SE SPOKANE ST STE 300
+              PORTLAND, OR 97202-6487
+              
+              EXAMINER
+              
+              DAVISON, LAURA L
+              
+              ART UNIT PAPER
+            documentTypeDescriptionText: Paper
+            fileDownloadURI: >-
+              https://api.uspto.gov/api/v1/patent/ptab-files/APP/2026/003167/4445cc91-1c7c-46c1-aebb-4a35892af716.pdf
+          decisionData:
+            appealOutcomeCategory: Affirmed
+            statuteAndRuleBag:
+            - 37 CFR 41.50(f)
+            - 37 CFR 41.50
+            - 35 USC 134
+            decisionIssueDate: 2026-09-22
+            decisionTypeCategory: Decision
+            issueTypeBag:
+            - "102"
+            - "120"
+            - "103"
+  recorded_at: 2026-10-20T17:04:29.004Z

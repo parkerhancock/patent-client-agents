@@ -1,0 +1,71 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/datasets/products/PTFWPRE?limit=1&includeFiles=true
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:06:25 GMT
+      x-amz-apigw-id:
+      - FjXe2GnyIAMFoJg=
+      x-amzn-requestid:
+      - 2ad95727-85db-42d3-861e-cd6c6a8d2a69
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f91-02b98ddc161183cc3858108e;Parent=304c4214d19c3126;Sampled=0;Lineage=2:b3566003:0
+    body:
+      type: json
+      content:
+        count: 1
+        bulkDataProductBag:
+        - productIdentifier: PTFWPRE
+          productDescriptionText: >-
+            Bibliographic and assignments static patent data compiled into file sets. The
+            Weekly Datasets (10-year increments) can be downloaded in bulk.
+          productTitleText: Patent File Wrapper (Bulk Datasets) - Weekly
+          productFrequencyText: WEEKLY
+          daysOfWeekText: SUNDAY
+          productLabelArrayText:
+          - Patent
+          productDatasetArrayText:
+          - Research
+          productDatasetCategoryArrayText:
+          - Patent file wrapper
+          productFromDate: 2001-01-01
+          productToDate: 2026-12-31
+          productTotalFileSize: 65066242145.0
+          productFileTotalQuantity: 3
+          lastModifiedDateTime: 2026-10-20 02:09:45
+          mimeTypeIdentifierArrayText:
+          - JSON
+          productFileBag:
+            count: 1
+            fileDataBag:
+            - fileName: 2011-2020-patent-filewrapper-full-json-20261018.zip
+              fileSize: 30106681887.0
+              fileDataFromDate: 2011-01-01
+              fileDataToDate: 2020-12-31
+              fileTypeText: Data
+              fileDownloadURI: >-
+                https://api.uspto.gov/api/v1/datasets/products/files/PTFWPRE/2011-2020-patent-filewrapper-full-json-20261018.zip
+              fileReleaseDate: 2026-10-19 01:18:28
+              fileDate: 2026-10-18 00:00:00
+              fileLastModifiedDateTime: 2026-10-20 02:09:45
+  recorded_at: 2026-10-20T17:06:25.864Z

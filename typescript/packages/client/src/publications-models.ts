@@ -28,7 +28,10 @@ export function htmlToText(value: unknown): string | null {
     ? decodeHTML(
         String(value)
           .replace(/<br\s*\/?>\s*/gi, "\n\n")
-          .replace(/<[^>]*>/g, ""),
+          .replace(
+            /<!--[\s\S]*?-->|<\/?[A-Za-z](?:"[^"]*"|'[^']*'|[^'">])*>/g,
+            "",
+          ),
       )
     : null;
 }
@@ -100,7 +103,11 @@ function date(v: unknown): string | null {
     ? `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}`
     : s;
   const d = new Date(normalized);
-  return Number.isNaN(d.valueOf()) ? null : d.toISOString().slice(0, 10);
+  if (Number.isNaN(d.valueOf())) return null;
+  const iso = d.toISOString().slice(0, 10);
+  return /^\d{4}-\d{2}-\d{2}$/.test(normalized) && iso !== normalized
+    ? null
+    : iso;
 }
 function month(v: unknown) {
   return v ? date(`${String(v).slice(0, 6)}01`) : null;
@@ -166,6 +173,19 @@ export function convertBiblio(d: Record<string, unknown>): PublicationRecord {
     cpc_additional: split(d.cpcAdditionalFlattened),
     ipc_code: split(d.ipcCodeFlattened),
     uspc_full_classification: split(d.uspcFullClassificationFlattened),
+    kind_code: first(d.kindCode),
+    inventors_short: d.inventorsShort,
+    government_interest: list(d.governmentInterest),
+    cpc_inventive: split(d.cpcInventiveFlattened),
+    image_file_name: d.imageFileName,
+    image_location: d.imageLocation as string,
+    database_name: d.databaseName,
+    composite_id: d.compositeId,
+    document_id: d.documentId,
+    document_size: int(d.documentSize),
+    family_identifier_cur: int(d.familyIdentifierCur),
+    language_indicator: d.languageIndicator,
+    score: d.score,
     document_structure: documentStructure(d),
   };
 }
@@ -182,8 +202,18 @@ function records(
     Object.fromEntries(
       Object.entries(mapping).map(([to, from]) => [
         to,
-        transforms[to]?.(list(d[from])[i]) ?? list(d[from])[i] ?? null,
+        transforms[to]
+          ? transforms[to](list(d[from])[i])
+          : (list(d[from])[i] ?? null),
       ]),
+    ),
+  ).filter((record) =>
+    Object.values(record).some(
+      (value) =>
+        value !== null &&
+        value !== "" &&
+        value !== undefined &&
+        (!Array.isArray(value) || value.length > 0),
     ),
   );
 }
@@ -332,8 +362,16 @@ export function convertDocument(d: Record<string, unknown>): PublicationRecord {
     ],
   ] as const)
     result[key] = list(d[from]).map((v) => {
+      if (v == null || v === "")
+        return {
+          [`${prefix}_class`]: null,
+          [`${prefix}_subclass`]: null,
+          version: null,
+        };
       const s = String(v).trim();
-      const [sub, version] = s.slice(4).trim().split(" ");
+      const pieces = s.slice(4).trim().split(/\s+/);
+      const sub = pieces[0];
+      const version = pieces.length > 1 ? pieces.at(-1) : undefined;
       return {
         [`${prefix}_class`]: s.length < 4 ? null : s.slice(0, 4),
         [`${prefix}_subclass`]: s.length < 4 ? s : (sub ?? null),

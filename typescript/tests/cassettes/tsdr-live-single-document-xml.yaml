@@ -1,0 +1,47 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/NOA20070926100613/info
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - application/xml;charset=UTF-8
+      date:
+      - Tue, 20 Oct 2026 17:11:17 GMT
+      expires:
+      - "0"
+      keep-alive:
+      - timeout=60
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-l7-reqid:
+      - 000001a105f57907-1f3e9af
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: >-
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><Document
+        xmlns="urn:us:gov:doc:uspto:trademark"><SerialNumber>78787878</SerialNumber><DocumentTypeCode>NOA</DocumentTypeCode><DocumentTypeCodeDescriptionText>Notice of Abandonment</DocumentTypeCodeDescriptionText><DocumentTypeDescriptionText>Notice of Abandonment</DocumentTypeDescriptionText><CategoryTypeCode>O</CategoryTypeCode><CategoryTypeCodeDescriptionText>Outgoing</CategoryTypeCodeDescriptionText><MailRoomDate>2007-09-25-04:00</MailRoomDate><ScanDateTime>2007-09-26T10:06:13.000-04:00</ScanDateTime><TotalPageQuantity>1</TotalPageQuantity><PageMediaTypeList><PageMediaTypeName>application/xml</PageMediaTypeName></PageMediaTypeList></Document>
+  recorded_at: 2026-10-20T17:11:25.101Z

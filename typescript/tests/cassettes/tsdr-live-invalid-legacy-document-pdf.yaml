@@ -1,0 +1,43 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://tsdrapi.uspto.gov/ts/cd/casedoc/sn78787878/78787878-NOA/download.pdf
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 400
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - text/plain;charset=UTF-8
+      date:
+      - Tue, 20 Oct 2026 17:10:08 GMT
+      expires:
+      - "0"
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-cnection:
+      - close, close
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-l7-reqid:
+      - 000001a10cdb451d-1c4cd98
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: 78787878-NOA is not a correctly formatted trademark case document identifier.
+  recorded_at: 2026-10-20T17:10:15.308Z

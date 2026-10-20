@@ -1,0 +1,41 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/applications/search/download?q=applicationNumberText%3A14412875&limit=1&fields=applicationNumberText&format=csv
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-01-55.csv"
+      content-type:
+      - text/csv
+      date:
+      - Tue, 20 Oct 2026 17:01:55 GMT
+      x-amz-apigw-id:
+      - FjW0mF_zIAMFgBw=
+      x-amzn-requestid:
+      - 64a3ff74-6e4e-4c99-a7fe-7a5a5bdc7625
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79e83-42680bd02c3f746546d62c35;Parent=2762cec67ad75881;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: text
+      content: |
+        applicationNumberText
+        14412875
+  recorded_at: 2026-10-20T17:01:55.487Z

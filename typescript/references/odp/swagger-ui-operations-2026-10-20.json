@@ -1,0 +1,208 @@
+{
+  "observed_at": "2026-10-20",
+  "source_url": "https://data.uspto.gov/swagger/index.html",
+  "method": "Read-only DOM extraction of visible .opblock-summary method/path elements from signed-out Chrome Swagger UI",
+  "scope": "Current rendered operation list, not original companion schema bytes",
+  "operation_count": 48,
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/files/{productIdentifier}/{fileName}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/search"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/{productIdentifier}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/appeals/decisions/search"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/appeals/decisions/search/download"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/appeals/decisions/{documentIdentifier}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/appeals/{appealNumber}/decisions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/search"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/search/download"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/adjustment"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/assignment"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/associated-documents"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/attorney"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/continuity"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/documents"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/foreign-priority"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/meta-data"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/transactions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/interferences/decisions/search"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/interferences/decisions/search/download"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/interferences/decisions/{documentIdentifier}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/interferences/{interferenceNumber}/decisions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/status-codes"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/decisions/search"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/decisions/search/download"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/decisions/{documentIdentifier}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/documents/search"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/documents/search/download"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/documents/{documentIdentifier}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/proceedings/search"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/proceedings/search/download"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/proceedings/{trialNumber}"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/{trialNumber}/decisions"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/{trialNumber}/documents"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/appeals/decisions/search"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/appeals/decisions/search/download"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/applications/search"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/applications/search/download"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/interferences/decisions/search"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/interferences/decisions/search/download"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/status-codes"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/decisions/search"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/decisions/search/download"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/documents/search"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/documents/search/download"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/proceedings/search"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/proceedings/search/download"
+    }
+  ],
+  "raw_companion_archive_complete": false,
+  "notes": [
+    "All seven companion URLs were observed as fetch assets in the rendered page.",
+    "The supported pageAssets bundle rejected trial-proceedings.yaml because YAML is an unsupported asset kind.",
+    "No direct navigation or export of previously blocked odp-common-base.yaml was attempted.",
+    "Rendered GET trial proceedings documentation exposes q,sort,offset,limit,facets,fields,filters,rangeFilters, with a 413 example describing a 6MB response limit."
+  ]
+}

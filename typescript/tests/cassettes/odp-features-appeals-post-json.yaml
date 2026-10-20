@@ -1,0 +1,55 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/appeals/decisions/search/download
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        q: appealNumber:2026003167
+        pagination:
+          limit: 1
+        format: json
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment;filename="results-2026-10-20T17-04-31.json"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:04:31 GMT
+      x-amz-apigw-id:
+      - FjXM9HWSIAMFXHQ=
+      x-amzn-requestid:
+      - f0795e37-7cbf-47d1-8741-3fc1e59014a0
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f1f-29f2eab910f37cf829e94e9b;Parent=76d329c4391c85f3;Sampled=0;Lineage=2:a3758c6d:0
+    body:
+      type: json
+      content:
+        patentTrialData:
+        - decisionData:
+            decisionTypeCategory: Decision
+            appealOutcomeCategory: Affirmed
+            decisionIssueDate: 2026-09-22
+          appealNumber: "2026003167"
+          appellantData:
+            realPartyInInterestName: E-Link Plastic & Co. Ltd. (PO) et al.
+            technologyCenterNumber: "3900"
+            applicationNumberText: "90019709"
+  recorded_at: 2026-10-20T17:04:31.438Z

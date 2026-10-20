@@ -400,6 +400,7 @@ test("application extra MCP tools call library and return document artifacts wit
     expect((await rpc.listTools()).map((tool) => tool.name).sort()).toEqual([
       "download_application_document",
       "download_application_search",
+      "download_file_history",
       "get_application_data",
       "get_application_family",
       "get_granted_claims",

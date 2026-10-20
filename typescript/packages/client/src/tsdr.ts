@@ -53,7 +53,8 @@ export const TrademarkStatusSchema = z.looseObject({
   isLive: z.boolean(),
 });
 export const TsdrDocumentSchema = z.looseObject({
-  docId: z.string(),
+  docId: z.string().nullable(),
+  metadataKey: z.string(),
   docType: text,
   docCategory: text,
   docDate: text,
@@ -81,6 +82,7 @@ const array = (value: unknown): unknown[] =>
 const string = (value: unknown) =>
   value === null || value === undefined ? null : String(value).trim() || null;
 const date = (value: unknown) => string(value)?.slice(0, 10) ?? null;
+const idTypeSchema = z.enum(["sn", "rn", "ir", "ref"]);
 function cleanIdentifier(identifier: string) {
   const clean = identifier.replace(/[-\s]/g, "");
   if (!/^(?:(?:sn|rn|ir|ref))?\d+$/i.test(clean))
@@ -93,8 +95,9 @@ export function formatTsdrCaseId(
   identifier: string,
   idType: "sn" | "rn" | "ir" | "ref" = "sn",
 ) {
+  const type = idTypeSchema.parse(idType);
   const clean = cleanIdentifier(identifier);
-  return /^(sn|rn|ir|ref)/.test(clean) ? clean : `${idType}${clean}`;
+  return /^(sn|rn|ir|ref)/.test(clean) ? clean : `${type}${clean}`;
 }
 export function parseTrademarkStatus(
   payload: unknown,
@@ -102,7 +105,27 @@ export function parseTrademarkStatus(
 ): TrademarkStatus {
   const parsed = parseRegister(
     z.looseObject({
-      trademarks: z.array(z.record(z.string(), z.unknown())).optional(),
+      trademarks: z
+        .array(
+          z.looseObject({
+            status: z.record(z.string(), z.unknown()).nullish(),
+            parties: z
+              .looseObject({
+                ownerGroups: z
+                  .record(
+                    z.string(),
+                    z.array(z.record(z.string(), z.unknown())).nullable(),
+                  )
+                  .nullish(),
+              })
+              .nullish(),
+            gsList: z.array(z.record(z.string(), z.unknown())).nullish(),
+            prosecutionHistory: z
+              .array(z.record(z.string(), z.unknown()))
+              .nullish(),
+          }),
+        )
+        .nullish(),
     }),
     payload,
   );
@@ -134,11 +157,11 @@ export function parseTrademarkStatus(
   );
   const goodsServices = array(tm.gsList).map((value) => {
     const raw = object(value);
-    const n = Number(string(raw.primeClassCode));
+    const prime = string(raw.primeClassCode);
+    const n = prime !== null && /^[+-]?\d+$/.test(prime) ? Number(prime) : NaN;
     return {
       ...raw,
-      classNumber:
-        raw.primeClassCode !== undefined && Number.isInteger(n) ? n : null,
+      classNumber: Number.isSafeInteger(n) ? n : null,
       classDescription: string(raw.description),
       firstUseDate: date(raw.firstUseDate),
       firstUseDateInCommerce: date(raw.firstUseInCommerceDate),
@@ -177,7 +200,7 @@ export function parseTrademarkStatus(
     registrationDate: date(st.registrationDate),
     abandonmentDate,
     cancellationDate,
-    expirationDate: date(st.dateExpired ?? st.expirationDate),
+    expirationDate: date(st.dateExpired) ?? date(st.expirationDate),
     renewalDate: date(st.renewalDate),
     owners,
     goodsServices,
@@ -225,10 +248,17 @@ export function parseTsdrDocuments(xml: string): TsdrDocument[] {
           const sn = string(raw.SerialNumber) ?? "";
           const docType = string(raw.DocumentTypeCode);
           const pages = string(raw.TotalPageQuantity);
+          // The official API example NOA20070926100613 uses type + local scan timestamp.
+          const scan = string(raw.ScanDateTime)?.match(
+            /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/,
+          );
+          const documentId =
+            docType && scan ? `${docType}${scan.slice(1).join("")}` : null;
           documents.push(
             parseRegister(TsdrDocumentSchema, {
               ...raw,
-              docId: docType ? `${sn}-${docType}` : sn,
+              docId: documentId,
+              metadataKey: docType ? `${sn}-${docType}` : sn,
               docType,
               docCategory: string(raw.CategoryTypeCodeDescriptionText),
               docDate: date(raw.MailRoomDate),
@@ -256,21 +286,23 @@ export class TsdrClient {
       ...options,
       baseUrl: options.baseUrl ?? "https://tsdrapi.uspto.gov",
       sourceName: "USPTO TSDR",
-      headers: { "USPTO-API-KEY": apiKey },
+      headers: { "USPTO-API-KEY": apiKey, accept: "*/*" },
     });
   }
   async getStatus(serialNumber: string, options: TransportRequestOptions = {}) {
+    const headers = new Headers(options.headers);
+    headers.set("accept", "application/json");
     const result = await this.http.json(
       "GET",
       `/ts/cd/casestatus/${formatTsdrCaseId(serialNumber)}/info`,
-      options,
+      { ...options, headers },
     );
     return { ...result, data: parseTrademarkStatus(result.data, serialNumber) };
   }
   getStatusJson(serialNumber: string, options: TransportRequestOptions = {}) {
     return this.http.json("GET", "/last-update/info.json", {
       ...options,
-      searchParams: { sn: cleanIdentifier(serialNumber) },
+      searchParams: { sn: numericIdentifier(serialNumber, "sn") },
     });
   }
   async getLastUpdate(
@@ -325,7 +357,7 @@ export class TsdrClient {
   getImage(serialNumber: string, options: TransportRequestOptions = {}) {
     return this.http.bytes(
       "GET",
-      `/ts/cd/rawImage/${cleanIdentifier(serialNumber)}`,
+      `/ts/cd/rawImage/${numericIdentifier(serialNumber, "sn")}`,
       options,
     );
   }
@@ -346,19 +378,18 @@ export class TsdrClient {
   ) {
     if (!serialNumbers.length)
       throw new TypeError("At least one serial number is required.");
-    return this.http.json(
-      "GET",
-      `/ts/cd/caseMultiStatus/${options.idType ?? "sn"}`,
-      {
-        timeoutMs: 60000,
-        ...options,
-        searchParams: {
-          ids: serialNumbers.map(cleanIdentifier).join(","),
-          from: options.from,
-          to: options.to,
-        },
+    const idType = idTypeSchema.parse(options.idType ?? "sn");
+    return this.http.json("GET", `/ts/cd/caseMultiStatus/${idType}`, {
+      timeoutMs: 60000,
+      ...options,
+      searchParams: {
+        ids: serialNumbers
+          .map((value) => numericIdentifier(value, idType))
+          .join(","),
+        from: options.from,
+        to: options.to,
       },
-    );
+    });
   }
   /** Current official specification advertises ST96 XML; some deployments return JSON. */
   getStatusXml(
@@ -376,7 +407,7 @@ export class TsdrClient {
   getLastUpdateXml(identifier: string, options: TransportRequestOptions = {}) {
     return this.http.text("GET", "/last-update/info.xml", {
       ...options,
-      searchParams: { sn: cleanIdentifier(identifier) },
+      searchParams: { sn: numericIdentifier(identifier, "sn") },
     });
   }
   getDocumentInfoXml(
@@ -488,9 +519,18 @@ function documentSegment(value: string) {
 function bundleParameters(identifiers: string[], idType: TsdrIdType) {
   if (!identifiers.length)
     throw new TypeError("At least one trademark identifier is required.");
+  const type = idTypeSchema.parse(idType);
   return {
-    [idType]: identifiers
-      .map((value) => cleanIdentifier(value).replace(/^(sn|rn|ir|ref)/, ""))
+    [type]: identifiers
+      .map((value) => numericIdentifier(value, type))
       .join(","),
   };
+}
+
+function numericIdentifier(identifier: string, idType: TsdrIdType) {
+  const clean = cleanIdentifier(identifier);
+  const prefix = /^(sn|rn|ir|ref)/.exec(clean)?.[1];
+  if (prefix && prefix !== idType)
+    throw new TypeError(`Expected ${idType} identifiers for this request.`);
+  return prefix ? clean.slice(prefix.length) : clean;
 }

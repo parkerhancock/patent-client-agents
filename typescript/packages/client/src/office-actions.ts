@@ -155,8 +155,16 @@ function request(
     limit,
     offset,
   } = options;
-  const projection =
-    fields ?? (full ? undefined : [...STUB_OFFICE_ACTION_FIELDS]);
+  // Live exports reject filingDate in either format and array-valued rejectionTypeBag in CSV.
+  // Keep explicitly requested fields intact so unsupported choices fail instead of silently dropping data.
+  const defaultFields = format
+    ? STUB_OFFICE_ACTION_FIELDS.filter(
+        (field) =>
+          field !== "filingDate" &&
+          (format !== "csv" || field !== "rejectionTypeBag"),
+      )
+    : STUB_OFFICE_ACTION_FIELDS;
+  const projection = fields ?? (full ? undefined : [...defaultFields]);
   if (method === "POST")
     return {
       body: {
@@ -208,6 +216,7 @@ export class OfficeActionsClient {
     const parsed = OfficeActionSearchOptionsSchema.parse(options);
     const result = await this.transport.json(parsed.method, `${root}/search`, {
       ...request(parsed),
+      emptyOn404: { count: 0, officeActionDataBag: [] },
       ...(options.signal ? { signal: options.signal } : {}),
     });
     return { ...parsedResponse(result.data), provenance: result.provenance };

@@ -238,7 +238,7 @@ test("MCP office action schemas initialize and keep full text out of responses",
   try {
     expect(
       (await connection.listTools()).map((tool) => tool.name),
-    ).toHaveLength(6);
+    ).toHaveLength(7);
     const result = await connection.callTool<{
       items: Record<string, unknown>[];
     }>("search_office_actions", {
@@ -424,5 +424,136 @@ test("MCP office action and analytics cursors advance pages and bind to the orig
   } finally {
     await connection.close();
     await server.close();
+  }
+});
+
+test("OA search no-match 404 is empty while retrieval and exports propagate missing records", async () => {
+  const api = client(() =>
+    Response.json({ code: 404, error: "Not Found" }, { status: 404 }),
+  );
+  expect(
+    await api.search({ query: "applicationNumberText:00000000" }),
+  ).toMatchObject({ count: 0, officeActionDataBag: [] });
+  await expect(api.get("missing")).rejects.toMatchObject({ status: 404 });
+  await expect(
+    api.download({ query: "applicationNumberText:00000000" }),
+  ).rejects.toMatchObject({ status: 404 });
+});
+
+test("OA export default projections exclude fields rejected by the live service without changing explicit fields", async () => {
+  for (const format of ["csv", "json"] as const) {
+    const api = client(async (request) => {
+      const body = await request.json();
+      expect(body.fields).not.toContain("filingDate");
+      expect(body.fields.includes("rejectionTypeBag")).toBe(format === "json");
+      return new Response(
+        format === "csv"
+          ? "officeActionRecordIdentifier\nabc\n"
+          : JSON.stringify({ officeActionDataBag: [record] }),
+      );
+    });
+    await api.download({ format });
+  }
+  const explicit = client(async (request) => {
+    expect((await request.json()).fields).toEqual(["filingDate"]);
+    return new Response("unsupported", { status: 400 });
+  });
+  await expect(
+    explicit.download({ fields: ["filingDate"] }),
+  ).rejects.toMatchObject({ status: 400 });
+});
+
+test("OA MCP preserves requested facets and downloads complete legacy text outside context", async () => {
+  const { FastMCP } = await import("@prefecthq/fastmcp-ts/server");
+  const { Client } = await import("@prefecthq/fastmcp-ts/client");
+  const { readFile } = await import("node:fs/promises");
+  const { DownloadStore, downloadContext } = await import(
+    "../packages/mcp/src/downloads.js"
+  );
+  const { registerOfficeActionTools } = await import(
+    "../packages/mcp/src/office-actions.js"
+  );
+  const facets = { documentCode: [{ value: "CTNF", count: 3 }] };
+  const text = "complete office action ".repeat(3000);
+  const officeActions = client(() =>
+    Response.json({ count: 3, officeActionDataBag: [record], facets }),
+  );
+  const analytics = new OfficeActionAnalyticsClient({
+    apiKey: "synthetic",
+    retryLimit: 0,
+    fetch: mockFetch(async (request) => {
+      const body = new URLSearchParams(await request.text());
+      expect(body.get("criteria")).toBe("id:legacy-record");
+      expect(body.get("rows")).toBe("1");
+      return Response.json({
+        response: {
+          numFound: 1,
+          start: 0,
+          docs: [
+            { id: "legacy-record", bodyText: [text], sections: [{ text }] },
+          ],
+        },
+      });
+    }),
+  });
+  const store = new DownloadStore();
+  const server = new FastMCP({ name: "oa-gap-test", version: "0.1.0" });
+  server.use({
+    onCallTool: (_context, next) => downloadContext.run({ store }, next),
+  });
+  registerOfficeActionTools(server, { officeActions, analytics });
+  const connection = await Client.connect(server, {
+    versionNegotiation: { mode: "legacy" },
+  });
+  try {
+    const result = await connection.callTool<{ facets?: typeof facets }>(
+      "search_office_actions",
+      { facets: ["documentCode"] },
+    );
+    expect(result.structuredContent?.facets).toEqual(facets);
+    const noFacets = await connection.callTool<{ facets?: typeof facets }>(
+      "search_office_actions",
+      {},
+    );
+    expect(noFacets.structuredContent?.facets).toBeUndefined();
+    const download = await connection.callTool<{
+      file_path: string;
+      size: number;
+    }>("download_office_action_analytics", {
+      dataset: "text",
+      criteria: "id:legacy-record",
+      rows: 1,
+    });
+    expect(download.structuredContent?.file_path).toBeString();
+    expect(JSON.stringify(download)).not.toContain(text.slice(0, 300));
+    const saved = JSON.parse(
+      await readFile(download.structuredContent?.file_path as string, "utf8"),
+    );
+    expect(saved.results[0].bodyText).toEqual([text]);
+    expect(saved.results[0].sections).toEqual([{ text }]);
+    await expect(
+      connection.callTool("download_office_action_analytics", {
+        dataset: "text",
+        criteria: "*:*",
+        rows: 101,
+      }),
+    ).rejects.toThrow();
+  } finally {
+    await connection.close();
+    await server.close();
+    await store.close();
+  }
+});
+
+test("legacy field discovery rejects malformed success metadata", async () => {
+  for (const data of [{}, { fields: "not an array" }, "not metadata"]) {
+    const api = new OfficeActionAnalyticsClient({
+      apiKey: "synthetic",
+      retryLimit: 0,
+      fetch: mockFetch(() => Response.json(data)),
+    });
+    await expect(api.getFields("text")).rejects.toMatchObject({
+      code: "INVALID_RESPONSE",
+    });
   }
 });

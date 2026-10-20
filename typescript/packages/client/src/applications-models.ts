@@ -35,3 +35,15 @@ export interface FamilyOptions extends RequestOptions {
   /** Stops unexpectedly large graphs rather than silently truncating them. */
   maxApplications?: number;
 }
+
+export interface ApplicationDocumentBatchOptions extends RequestOptions {
+  documentCodes?: string[];
+  documentIdentifiers?: string[];
+  format?: "pdf" | "xml" | "docx";
+  officialDateFrom?: string;
+  officialDateTo?: string;
+  /** Refuse oversized selections before requesting document bytes. */
+  maxDocuments?: number;
+  /** Maximum combined document bytes; defaults to 64 MiB. */
+  maxTotalBytes?: number;
+}

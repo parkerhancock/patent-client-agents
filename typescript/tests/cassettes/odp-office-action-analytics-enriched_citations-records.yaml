@@ -1,0 +1,82 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/oa/enriched_cited_reference_metadata/v3/records
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: criteria=*%3A*&start=0&rows=1
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - accept, authorization, content-type, x-requested-with
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - "1"
+      connection:
+      - keep-alive
+      content-length:
+      - "1376"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:22 GMT
+      strict-transport-security:
+      - max-age=31536000;
+      x-amz-apigw-id:
+      - FjWcrG4gIAMFWSg=
+      x-amzn-remapped-date:
+      - Tue, 20 Oct 2026 16:59:22 GMT
+      x-amzn-requestid:
+      - 4f2df2c4-1d00-4f98-a8bd-3d8fa85d1a4c
+    body:
+      type: json
+      content:
+        response:
+          start: 0
+          numFound: 45375857
+          docs:
+          - relatedClaimNumberText: 11-12
+            officeActionDate: 2017-03-13T00:00:00
+            createUserIdentifier: ETL_SYS
+            applicantCitedExaminerReferenceIndicator: false
+            kindCode: A1
+            nplIndicator: false
+            workGroupNumber: "2880"
+            patentApplicationNumber: "15061308"
+            officeActionCategory: CTNF
+            inventorNameText: Bergeron; Noah P.
+            groupArtUnitNumber: "2884"
+            qualitySummaryText: AOK
+            createDateTime: 2025-07-15T21:09:34
+            techCenter: "2800"
+            citedDocumentIdentifier: US 2013/0341529 A1
+            countryCode: US
+            passageLocationText:
+            - >-
+              paragraph [0076]|paragraphs 5-21|c. 103|section 102|figure 1|fig. 5|figures
+              2a|figs. 3-4|f.3d|claim 2|claims 11-12|paragraph [0052]|paragraphs 22, 78|c.
+              112|figure 5c|fig. 3|figures 1|figs. 6-7|claim 1|claims 19-22 and 24|paragraph
+              [0053]|paragraphs 7-10|c. 102|fig. 1|figs. 1, 3-4|claim 9|claims 1, 5, 9-10|paragraphs
+              14-16|fig. 4|figs. 1-4|claim 7|claims 1-17 and 19|paragraphs 32-35|figs. 1-3|claim
+              8|claims 1-17, 19-25|paragraphs 7-19, 96|figs. 15a|claim 6|claims 1, 19|paragraphs
+              [0064]-[0065]|figs. 3-7|claim 5|claims 2-4 and 6-8|figs. 2a|claim 3|claims 1 and
+              5|figs. 5a|claim 4|claims 2|figs. 1-7
+            obsoleteDocumentIdentifier: J02FRPALRXEAPX0
+            id: 8ff4c6937f8cf48f2995926e0225576f
+            citationCategoryCode: "Y"
+            examinerCitedReferenceIndicator: true
+            publicationNumber: "20130341529"
+  recorded_at: 2026-10-20T16:59:22.367Z

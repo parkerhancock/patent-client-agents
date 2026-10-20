@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import type {
   AssignmentCenterClient,
   TrademarkAssignmentClient,
@@ -9,17 +10,91 @@ import { z } from "zod";
 import {
   type AuthCheck,
   detailEnvelope,
-  detailEnvelopeSchema,
   detailToolOptions,
   downloadResult,
   listEnvelope,
-  listEnvelopeSchema,
   listToolOptions,
 } from "./shared.js";
 export interface RegisterClients {
   assignments: AssignmentCenterClient;
   trademarkAssignments: TrademarkAssignmentClient;
   tsdr?: TsdrClient;
+}
+const cursorInput = z.string().max(2048).optional();
+function pageQuery(input: { offset: number; cursor?: string | undefined }) {
+  const { offset: _offset, cursor: _cursor, ...query } = input;
+  return createHash("sha256").update(JSON.stringify(query)).digest("hex");
+}
+function pageOffset(input: { offset: number; cursor?: string | undefined }) {
+  if (!input.cursor) return input.offset;
+  if (input.offset !== 0) throw new Error("Use cursor or offset, not both.");
+  const schema = z.object({
+    offset: z.number().int().nonnegative(),
+    query: z.string(),
+  });
+  let page: z.infer<typeof schema>;
+  try {
+    page = schema.parse(
+      JSON.parse(Buffer.from(input.cursor, "base64").toString("utf8")),
+    );
+  } catch {
+    throw new Error("Invalid pagination cursor.");
+  }
+  if (page.query !== pageQuery(input))
+    throw new Error("Cursor belongs to a different query.");
+  return page.offset;
+}
+function paged(
+  result: ReturnType<typeof listEnvelope>,
+  input: { offset: number; cursor?: string | undefined },
+) {
+  return {
+    ...result,
+    next_cursor: result.more_available
+      ? Buffer.from(
+          JSON.stringify({
+            offset: pageOffset(input) + result.items.length,
+            query: pageQuery(input),
+          }),
+        ).toString("base64")
+      : null,
+  };
+}
+const assignmentFields = new Set([
+  "reelNumber",
+  "reelFrame",
+  "frameNumber",
+  "assignorExecutionDate",
+  "mailDate",
+  "recorded",
+  "correspondentName",
+  "domesticRepresentative",
+  "assignors",
+  "assignees",
+  "conveyance",
+  "conveyanceCode",
+  "noOfProperties",
+]);
+function preview(value: unknown, depth = 0): unknown {
+  if (typeof value === "string") return value.slice(0, 4000);
+  if (!value || typeof value !== "object") return value;
+  if (depth >= 5) return "[nested metadata omitted]";
+  if (Array.isArray(value))
+    return value.slice(0, 100).map((item) => preview(item, depth + 1));
+  return Object.fromEntries(
+    Object.entries(value)
+      .slice(0, 50)
+      .map(([key, item]) => [key, preview(item, depth + 1)]),
+  );
+}
+function projectAssignments(records: Record<string, unknown>[], full: boolean) {
+  return records.map((record) =>
+    Object.fromEntries(
+      Object.entries(record)
+        .filter(([key]) => full || assignmentFields.has(key))
+        .map(([key, value]) => [key, preview(value)]),
+    ),
+  );
 }
 export function registerRegisterTools(
   server: FastMCP,
@@ -32,7 +107,7 @@ export function registerRegisterTools(
       ...listToolOptions(auth),
       name: "search_assignments",
       description:
-        "Search US patent or trademark ownership transfers by party or property number. Use get_assignment for reel/frame detail. Patent searches are capped at 10000; trademark searches at 1000 records.",
+        "Search US patent or trademark ownership transfers by party or property number. Use get_assignment for reel/frame detail. Patent searches are capped at 10000; trademark searches at 1000 records. Defaults to lean metadata; full includes bounded additional fields.",
       input: z.object({
         right,
         query: z.string().min(1),
@@ -70,14 +145,17 @@ export function registerRegisterTools(
               .optional(),
           })
           .optional(),
+        full: z.boolean().default(false),
         exact: z.boolean().default(false),
         conveyance: z.string().optional(),
         executed_between: z.tuple([z.iso.date(), z.iso.date()]).optional(),
         offset: z.number().int().min(0).default(0),
+        cursor: cursorInput,
         limit: z.number().int().min(1).max(100).default(25),
       }),
     },
     async (input) => {
+      const offset = pageOffset(input);
       if (input.right === "patent") {
         if (
           input.by === "serial_number" ||
@@ -94,14 +172,21 @@ export function registerRegisterTools(
           ...(input.executed_between
             ? { executedBetween: input.executed_between }
             : {}),
-          offset: input.offset,
+          offset,
           limit: input.limit,
         });
-        return listEnvelope(
-          `${response.records.length} patent assignments; ${response.total} matches${response.truncated ? " (upstream cap reached)" : ""}.`,
-          response.records,
-          response.provenance,
-          { count: response.total, offset: input.offset, limit: input.limit },
+        return paged(
+          listEnvelope(
+            `${response.records.length} patent assignments; ${response.total} matches${response.truncated ? " (upstream cap reached)" : ""}.`,
+            projectAssignments(response.records, input.full),
+            response.provenance,
+            {
+              count: Math.min(response.total, 10000),
+              offset,
+              limit: input.limit,
+            },
+          ),
+          input,
         );
       }
       if (input.exact || input.conveyance || input.executed_between)
@@ -130,18 +215,21 @@ export function registerRegisterTools(
           ),
         ),
         [key]: input.query,
-        startRow: input.offset + 1,
+        startRow: offset + 1,
         limit: input.limit,
       });
-      return listEnvelope(
-        `${response.data.length} trademark assignments; ${response.total} matches${response.truncated ? " (upstream cap reached)" : ""}.`,
-        response.data,
-        response.provenance,
-        {
-          count: Math.min(response.total, 1000),
-          offset: input.offset,
-          limit: input.limit,
-        },
+      return paged(
+        listEnvelope(
+          `${response.data.length} trademark assignments; ${response.total} matches${response.truncated ? " (upstream cap reached)" : ""}.`,
+          projectAssignments(response.data, input.full),
+          response.provenance,
+          {
+            count: Math.min(response.total, 1000),
+            offset,
+            limit: input.limit,
+          },
+        ),
+        input,
       );
     },
   );
@@ -183,9 +271,8 @@ export function registerRegisterTools(
   if (!tsdr) return;
   server.tool(
     {
-      ...detailToolOptions(auth),
+      ...listToolOptions(auth),
       name: "get_trademark",
-      output: z.union([listEnvelopeSchema, detailEnvelopeSchema]),
       description:
         "Retrieve US trademark status, owners, goods/services, prosecution history or last-update data from TSDR.",
       input: z.object({
@@ -280,16 +367,28 @@ export function registerRegisterTools(
                             z.string().min(1).parse(input.document_id),
                           )
                         : await tsdr.getStatus(number);
-      if (typeof result.data === "string")
-        return downloadResult(
+      if (typeof result.data === "string") {
+        const metadata = await downloadResult(
           new TextEncoder().encode(result.data),
           `${number}.${input.view === "html" ? "html" : "xml"}`,
           input.view === "html" ? "text/html" : "application/xml",
           result.provenance,
         );
-      return detailEnvelope(
+        return listEnvelope(
+          "Trademark document ready for download.",
+          [metadata],
+          result.provenance,
+        );
+      }
+      const item =
+        result.data !== null &&
+        typeof result.data === "object" &&
+        !Array.isArray(result.data)
+          ? (result.data as Record<string, unknown>)
+          : { value: result.data };
+      return listEnvelope(
         "Trademark case retrieved.",
-        result.data,
+        [item],
         result.provenance,
       );
     },
@@ -303,20 +402,25 @@ export function registerRegisterTools(
       input: z.object({
         serial_number: z.string().min(1),
         offset: z.number().int().min(0).default(0),
+        cursor: cursorInput,
         limit: z.number().int().min(1).max(100).default(25),
       }),
     },
     async (input) => {
+      const offset = pageOffset(input);
       const response = await tsdr.getDocuments(input.serial_number);
-      return listEnvelope(
-        `${response.documents.length} documents on file.`,
-        response.documents.slice(input.offset, input.offset + input.limit),
-        response.provenance,
-        {
-          count: response.documents.length,
-          offset: input.offset,
-          limit: input.limit,
-        },
+      return paged(
+        listEnvelope(
+          `${response.documents.length} documents on file.`,
+          response.documents.slice(offset, offset + input.limit),
+          response.provenance,
+          {
+            count: response.documents.length,
+            offset,
+            limit: input.limit,
+          },
+        ),
+        input,
       );
     },
   );

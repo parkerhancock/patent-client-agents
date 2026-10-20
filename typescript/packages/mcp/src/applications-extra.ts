@@ -1,5 +1,7 @@
+import { createHash } from "node:crypto";
 import type { ApplicationsClient } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
+import { zipSync } from "fflate";
 import { z } from "zod";
 import {
   type AuthCheck,
@@ -38,11 +40,14 @@ export function registerApplicationExtraTools(
           "status-codes",
         ]),
         status_query: z.record(z.string(), z.unknown()).optional(),
+        status_method: z.enum(["GET", "POST"]).default("POST"),
       }),
     },
     async (input) => {
       if (input.dataset === "status-codes") {
-        const response = await client.getStatusCodes(input.status_query);
+        const response = await client.getStatusCodes(input.status_query, {
+          method: input.status_method,
+        });
         return detailEnvelope(
           "Application status codes.",
           response.data,
@@ -115,7 +120,7 @@ export function registerApplicationExtraTools(
       ...common,
       name: "download_application_document",
       description:
-        "Retrieve an application file-history PDF, XML archive, or DOCX as a temporary download URL. XML and DOCX must be advertised in document metadata. Binary content is delivered outside MCP context.",
+        "Retrieve an application file-history PDF, decoded XML, or DOCX as a temporary download URL. XML and DOCX must be advertised in document metadata. Binary content is delivered outside MCP context.",
       input: z.object({
         application_number,
         document_identifier: z.string().min(1),
@@ -153,13 +158,102 @@ export function registerApplicationExtraTools(
   server.tool(
     {
       ...common,
-      name: "download_application_search",
+      name: "download_file_history",
       description:
-        "Download application search results with the USPTO PatentDownloadRequest payload. Binary content is delivered via a temporary download URL.",
-      input: z.object({ payload: z.record(z.string(), z.unknown()) }),
+        "Download up to 50 selected application file-history PDFs as a ZIP with a manifest. Filters AND together; narrow by document identifiers, codes, or inclusive dates. Refuses larger selections before downloading bytes. Use list_file_history to discover documents.",
+      input: z
+        .object({
+          application_number,
+          item_ids: z
+            .array(z.string().regex(/^[A-Za-z0-9_-]+$/))
+            .min(1)
+            .max(50)
+            .optional(),
+          document_codes: z.array(z.string().min(1)).min(1).optional(),
+          after: z.iso.date().optional(),
+          before: z.iso.date().optional(),
+        })
+        .refine(
+          (input) =>
+            !input.after || !input.before || input.after <= input.before,
+          { message: "after must not exceed before" },
+        ),
     },
     async (input) => {
-      const response = await client.downloadSearch(input.payload);
+      const downloads = await client.downloadDocuments(
+        input.application_number,
+        {
+          ...(input.item_ids ? { documentIdentifiers: input.item_ids } : {}),
+          ...(input.document_codes
+            ? { documentCodes: input.document_codes }
+            : {}),
+          ...(input.after ? { officialDateFrom: input.after } : {}),
+          ...(input.before ? { officialDateTo: input.before } : {}),
+          maxDocuments: 50,
+          maxTotalBytes: 64 * 1024 * 1024,
+        },
+      );
+      const provenance = downloads[0]?.provenance;
+      if (!provenance)
+        throw new Error("No file-history documents match these filters.");
+      const entries: Record<string, Uint8Array> = {};
+      const manifest = downloads.map(({ document, data }) => {
+        const date = String(
+          document.officialDate || document.documentDate || "undated",
+        ).slice(0, 10);
+        const code = String(document.documentCode || "UNK");
+        const id = String(document.documentIdentifier);
+        const filename = `${date}_${code.slice(0, 40)}_${id}.pdf`.replace(
+          /[^A-Za-z0-9_.-]/g,
+          "_",
+        );
+        if (entries[filename])
+          throw new Error("Duplicate file-history document identifier.");
+        entries[filename] = data;
+        return {
+          document_identifier: id,
+          filename,
+          document_code: document.documentCode,
+          document_date: document.officialDate || document.documentDate,
+          description: document.documentCodeDescriptionText,
+          page_count: document.pageCount,
+          size: data.byteLength,
+          sha256: createHash("sha256").update(data).digest("hex"),
+        };
+      });
+      entries["manifest.json"] = new TextEncoder().encode(
+        JSON.stringify(
+          { application_number: input.application_number, documents: manifest },
+          null,
+          2,
+        ),
+      );
+      const archive = zipSync(entries, { level: 0 });
+      const app = input.application_number.replace(/[^A-Za-z0-9_-]/g, "");
+      const result = await downloadResult(
+        archive,
+        `${app}_file_history.zip`,
+        "application/zip",
+        provenance,
+      );
+      return result;
+    },
+  );
+  server.tool(
+    {
+      ...common,
+      name: "download_application_search",
+      description:
+        "Download application search results with a POST PatentDownloadRequest payload or documented GET query parameters. Binary content is delivered via a temporary download URL.",
+      input: z.object({
+        payload: z.record(z.string(), z.unknown()),
+        method: z.enum(["GET", "POST"]).default("POST"),
+      }),
+    },
+    async (input) => {
+      const response = await client.downloadSearch(input.payload, {
+        method: input.method,
+      });
       const type =
         response.headers.get("content-type") ?? "application/octet-stream";
       return downloadResult(

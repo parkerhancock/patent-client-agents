@@ -1,0 +1,225 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/interferences/106130/decisions
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:04:42 GMT
+      x-amz-apigw-id:
+      - FjXOpHa2oAMFwnA=
+      x-amzn-requestid:
+      - 8efd2aeb-f692-4ba5-8842-b8741bd95369
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79f2a-364ebf2e6d71ef26793e8102;Parent=38426e73b556f2a9;Sampled=0;Lineage=2:5fd89aa0:0
+    body:
+      type: json
+      content:
+        count: 2
+        requestIdentifier: 8efd2aeb-f692-4ba5-8842-b8741bd95369
+        patentInterferenceDataBag:
+        - interferenceNumber: "106130"
+          lastModifiedDateTime: 2025-12-12T17:18:56
+          additionalPartyDataBag:
+          - applicationNumberText: "16159021"
+            inventorName: Lee M Kaplan et al
+            patentNumber: ""
+            additionalPartyName: LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS
+          - applicationNumberText: "15698965"
+            inventorName: Lee M Kaplan et al
+            patentNumber: "10149870"
+            additionalPartyName: LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS
+          - applicationNumberText: "16669143"
+            inventorName: Lee M Kaplan et al
+            patentNumber: "10729732"
+            additionalPartyName: LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS
+          interferenceMetaData:
+            interferenceLastModifiedDateTime: 2025-11-13T00:00:00
+            interferenceLastModifiedDate: 2025-11-13
+            declarationDate: 2021-01-26
+            interferenceStyleName: >-
+              LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v.
+              PATRICE CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS
+            fileDownloadURI: https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/106130.zip
+          seniorPartyData:
+            applicationNumberText: "14443829"
+            counselName: "ALSTON & BIRD and GEMINI LAW LLP "
+            groupArtUnitNumber: "1651"
+            inventorName: Patrice Cani et al
+            patentOwnerName: CANI, PATRICE; EVERARD, Amandine; BELZER, Clara; DE VOS Willem
+            publicationDate: 2015-10-29
+            publicationNumber: US20150306152A1
+            realPartyInInterestName: UNIVERSITÉ CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT
+            technologyCenterNumber: "1600"
+          juniorPartyData:
+            applicationNumberText: "14862663"
+            counselName: ROTHWELL, FIGG, ERNST & MANBECK, P.C. and LATHROP GAGE LLP
+            grantDate: 2018-12-11
+            groupArtUnitNumber: "1651"
+            inventorName: Lee M. Kaplan et al
+            patentNumber: "10149867"
+            publicationDate: 2016-04-28
+            publicationNumber: US20160113971A1
+            realPartyInInterestName: >-
+              Ethicon Endo-Surgery, Inc.; The General Hospital Corporation D/B/A
+              Massachusetts General Hospital; President and Fellows of Harvard College 
+            technologyCenterNumber: "1600"
+          documentData:
+            documentIdentifier: 229ba0b8d5f70d2e45cc36b79476f56f3faf51bd26c7ccc977208e7b
+            documentName: 106130_106130-jd-20250128.pdf
+            documentSizeQuantity: 97923
+            documentOCRText: |-
+              Microsoft Word - 106,130 Judgment (to be mailed)
+              
+              
+                     
+              Trials@uspto.gov       Filed: January 28, 2025 
+              Tel: 571-272-7822 
+               
+              
+              UNITED STATES PATENT AND TRADEMARK OFFICE 
+              _______________ 
+              
+               
+              BEFORE THE PATENT TRIAL AND APPEAL BOARD 
+              
+               
+              ________________ 
+              
+                
+              LEE M. KAPLAN,  
+              
+              ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS,  
+               
+              
+              Junior Party  
+              (Patents 10,149,867; 10,149,870; and 10,729,732; 
+              
+              and Application 16/159,021),  
+               
+              
+              v.  
+               
+              
+              PATRICE CANI,  
+              AMANDINE EVERARD, CLARA BELZER, an ...
+            documentTitleText: Judgment 37 C.F.R. § 41.127(a)
+            interferenceOutcomeCategory: Judgment
+            statuteAndRuleBag:
+            - 37 CFR 41.127(a)
+            decisionIssueDate: 2025-01-28
+            decisionTypeCategory: Decision
+            fileDownloadURI: >-
+              https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/Intf508_10613014862663_1738040400000.pdf
+            documentFilingDate: 2025-01-28
+        - interferenceNumber: "106130"
+          lastModifiedDateTime: 2025-12-12T17:18:56
+          additionalPartyDataBag:
+          - applicationNumberText: "16159021"
+            inventorName: Lee M Kaplan et al
+            patentNumber: ""
+            additionalPartyName: LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS
+          - applicationNumberText: "15698965"
+            inventorName: Lee M Kaplan et al
+            patentNumber: "10149870"
+            additionalPartyName: LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS
+          - applicationNumberText: "16669143"
+            inventorName: Lee M Kaplan et al
+            patentNumber: "10729732"
+            additionalPartyName: LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS
+          interferenceMetaData:
+            interferenceLastModifiedDateTime: 2025-11-13T00:00:00
+            interferenceLastModifiedDate: 2025-11-13
+            declarationDate: 2021-01-26
+            interferenceStyleName: >-
+              LEE M. KAPLAN, ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS v.
+              PATRICE CANI, AMANDINE EVERARD, CLARA BELZER, and WILLEM DE VOS
+            fileDownloadURI: https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/106130.zip
+          seniorPartyData:
+            applicationNumberText: "14443829"
+            counselName: "ALSTON & BIRD and GEMINI LAW LLP "
+            groupArtUnitNumber: "1651"
+            inventorName: Patrice Cani et al
+            patentOwnerName: CANI, PATRICE; EVERARD, Amandine; BELZER, Clara; DE VOS Willem
+            publicationDate: 2015-10-29
+            publicationNumber: US20150306152A1
+            realPartyInInterestName: UNIVERSITÉ CATHOLIQUE DE LOUVAIN; WAGENINGEN UNIVERSITEIT
+            technologyCenterNumber: "1600"
+          juniorPartyData:
+            applicationNumberText: "14862663"
+            counselName: ROTHWELL, FIGG, ERNST & MANBECK, P.C. and LATHROP GAGE LLP
+            grantDate: 2018-12-11
+            groupArtUnitNumber: "1651"
+            inventorName: Lee M. Kaplan et al
+            patentNumber: "10149867"
+            publicationDate: 2016-04-28
+            publicationNumber: US20160113971A1
+            realPartyInInterestName: >-
+              Ethicon Endo-Surgery, Inc.; The General Hospital Corporation D/B/A
+              Massachusetts General Hospital; President and Fellows of Harvard College 
+            technologyCenterNumber: "1600"
+          documentData:
+            documentIdentifier: d8c2fdbf4c9e2a4e8c989e88b8f5ca7fbd8c2806afce701bf2de4903
+            documentName: 106130_106130-priority-20250128.pdf
+            documentSizeQuantity: 568152
+            documentOCRText: |-
+              Microsoft Word - 106130 Decision on Priority (to be mailed)
+              
+              
+              Trials@uspto.gov       Filed: January 28, 2025 
+              Tel: 571-272-7822 
+               
+               
+              
+              UNITED STATES PATENT AND TRADEMARK OFFICE 
+              _______________ 
+              
+               
+              BEFORE THE PATENT TRIAL AND APPEAL BOARD 
+              
+              _______________ 
+               
+              
+              LEE M. KAPLAN,  
+              ALICE P. LIOU, PETER J. TURNBAUGH, and JASON L. HARRIS,  
+              
+               
+              Junior Party  
+              
+              (Patents 10,149,867; 10,149,870; and 10,729,732; 
+              and Application 16/159,021),  
+              
+               
+              v.  
+               
+              
+              PATRICE CANI,  
+              AMANDINE EVERARD, CLARA BELZER, an ...
+            documentTitleText: Decision on Priority
+            interferenceOutcomeCategory: Decision on Motion
+            statuteAndRuleBag:
+            - 37 CFR 1.132
+            decisionIssueDate: 2025-01-28
+            decisionTypeCategory: Motion Decision
+            fileDownloadURI: >-
+              https://api.uspto.gov/api/v1/patent/ptab-files/INTF/106130/Intf504_10613014862663_1738040400000.pdf
+            documentFilingDate: 2025-01-28
+  recorded_at: 2026-10-20T17:04:42.289Z

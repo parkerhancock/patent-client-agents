@@ -120,6 +120,9 @@ bun run record:odp
 # More USPTO families and application datasets/downloads.
 bun run record:uspto
 bun run record:applications
+bun run record:application-get
+bun run record:record-features
+bun run record:office-actions
 
 # Verify recordings offline.
 bun run replay:odp
@@ -136,11 +139,17 @@ identified separately and do not establish successful live feature coverage.
 
 Live recordings include application search/retrieval/history and seven dataset
 views, status codes, PDF/XML/DOCX, 32 granted claims, seven PTAB/petition/bulk
-searches, the new Office Actions search, a small bulk ZIP, and current Assignment
-Center v3 responses. Native Bun Patent Public Search also retrieved an official
+searches, details and exports, all current Office Actions and legacy analytics
+operations, a PTAB PDF, a small bulk ZIP, and current Assignment Center v3 responses. Native Bun Patent Public Search also retrieved an official
 18-page PDF; its archived response fixture verifies all 26 claims. TSDR uses
 separate credentials, and Trademark Search requires an externally provided WAF
-session; fresh authenticated coverage of those two remains pending.
+session. Seven fresh authenticated TSDR recordings cover status, listing, update
+timestamps, image and single-document XML/PDF. Trademark Search live verification
+remains pending; see [deployed authentication](docs/deployed-uspto-auth.md).
+
+TSDR replay uses `bun run replay:tsdr`. Recording uses `bun run record:tsdr`
+with `USPTO_TSDR_API_KEY`, or `bun run record:tsdr --deployed-secret` for the
+existing authorized deployment secret. The latter captures the value in memory.
 
 Bulk redirects can contain signed credentials in Location headers and response
 bodies. Use the dedicated bounded recorder rather than the ordinary helper:

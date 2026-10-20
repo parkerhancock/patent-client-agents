@@ -1,0 +1,45 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://tsdrapi.uspto.gov/last-update/info.json?sn=78787878
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:11:12 GMT
+      keep-alive:
+      - timeout=60
+      strict-transport-security:
+      - max-age=31536000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-l7-reqid:
+      - 000001a105f57907-1f3e8f3
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        caseUpdateInfo:
+        - caseData:
+            caseStatusData:
+              lastModifiedDate: 2007-09-25
+            caseProsecutionData:
+              lastModifiedDate: 2020-10-14
+          name: Serial Number
+          value: "78787878"
+  recorded_at: 2026-10-20T17:11:20.119Z

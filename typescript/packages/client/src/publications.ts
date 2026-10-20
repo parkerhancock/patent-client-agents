@@ -58,6 +58,46 @@ export function validatePublicationQuery(query: string) {
       throw new ConfigurationError("Invalid PPUBS operator placement.");
   });
 }
+function payload(value: unknown): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value))
+    throw new ApiError(
+      "PPUBS returned a malformed response.",
+      200,
+      "INVALID_RESPONSE",
+    );
+  return value as Record<string, unknown>;
+}
+function numericCount(value: unknown, fallback?: number): number {
+  if (value === undefined && fallback !== undefined) return fallback;
+  const parsed =
+    typeof value === "number"
+      ? value
+      : typeof value === "string" && /^\d+$/.test(value)
+        ? Number(value)
+        : NaN;
+  if (!Number.isSafeInteger(parsed) || parsed < 0)
+    throw new ApiError(
+      "PPUBS returned an invalid result count.",
+      200,
+      "INVALID_RESPONSE",
+    );
+  return parsed;
+}
+function waitForSession(
+  work: Promise<void>,
+  signal?: AbortSignal,
+): Promise<void> {
+  if (!signal) return work;
+  return new Promise((resolve, reject) => {
+    const abort = () =>
+      reject(new ApiError("PPUBS request was cancelled.", 0, "ABORTED"));
+    signal.addEventListener("abort", abort, { once: true });
+    if (signal.aborted) abort();
+    void work
+      .then(resolve, reject)
+      .finally(() => signal.removeEventListener("abort", abort));
+  });
+}
 export class PublicationsClient {
   private readonly transport: GenericHttpTransport;
   private caseId: number | null = null;
@@ -123,14 +163,15 @@ export class PublicationsClient {
       const r = await this.transport.json("POST", "/api/users/me/session", {
         body: -1,
       });
-      const d = r.data as { userCase?: { caseId?: number } };
-      if (!Number.isInteger(d.userCase?.caseId))
+      const d = payload(r.data);
+      const userCase = payload(d.userCase);
+      if (!Number.isSafeInteger(userCase.caseId))
         throw new ApiError(
           "PPUBS session response has no case ID.",
           200,
           "INVALID_RESPONSE",
         );
-      this.caseId = d.userCase?.caseId ?? null;
+      this.caseId = userCase.caseId as number;
     })();
     try {
       await this.refreshing;
@@ -138,13 +179,18 @@ export class PublicationsClient {
       this.refreshing = null;
     }
   }
+  private async ensureSession(signal?: AbortSignal) {
+    if (signal?.aborted)
+      throw new ApiError("PPUBS request was cancelled.", 0, "ABORTED");
+    if (this.caseId === null) await waitForSession(this.refresh(), signal);
+  }
   private async request<T>(
     mode: "json" | "text" | "bytes",
     method: "GET" | "POST",
     path: string,
     options: TransportRequestOptions = {},
   ): Promise<TransportResult<T>> {
-    if (this.caseId === null) await this.refresh();
+    await this.ensureSession(options.signal);
     const previous = this.caseId;
     const send = () => {
       if (
@@ -165,8 +211,10 @@ export class PublicationsClient {
       return await send();
     } catch (e) {
       if (!(e instanceof ApiError) || ![401, 403].includes(e.status)) throw e;
-      if (this.refreshing) await this.refreshing;
-      else if (this.caseId === previous) await this.refresh();
+      if (this.refreshing)
+        await waitForSession(this.refreshing, options.signal);
+      else if (this.caseId === previous)
+        await waitForSession(this.refresh(), options.signal);
       return send();
     }
   }
@@ -183,7 +231,7 @@ export class PublicationsClient {
       throw new ConfigurationError(
         "PPUBS pagination requires positive limit and nonnegative start.",
       );
-    if (this.caseId === null) await this.refresh();
+    await this.ensureSession(options.signal);
     const query = {
       caseId: this.caseId,
       hl_snippets: "2",
@@ -209,12 +257,13 @@ export class PublicationsClient {
       "/api/searches/counts",
       { body: query, ...(options.signal ? { signal: options.signal } : {}) },
     );
-    if (counts.data.error)
+    if (payload(counts.data).error)
       throw new ApiError(
         "PPUBS rejected the count query; simplify wildcard expansion or query syntax.",
         200,
         "QUERY_ERROR",
       );
+    const numDocuments = numericCount(payload(counts.data).numResults);
     const response = await this.request<Record<string, unknown>>(
       "json",
       "POST",
@@ -238,25 +287,29 @@ export class PublicationsClient {
         ...(options.signal ? { signal: options.signal } : {}),
       },
     );
-    if (response.data.error)
+    if (payload(response.data).error)
       throw new ApiError(
         "PPUBS rejected the search query.",
         200,
         "QUERY_ERROR",
       );
+    const result = payload(response.data);
+    if (!Array.isArray(result.patents))
+      throw new ApiError(
+        "PPUBS returned no patent result array.",
+        200,
+        "INVALID_RESPONSE",
+      );
     return {
-      num_found: Number(response.data.numFound ?? 0),
-      per_page: Number(response.data.perPage ?? limit),
-      page: Number(response.data.page ?? 0),
+      num_found: numericCount(result.numFound),
+      per_page: numericCount(result.perPage, limit),
+      page: numericCount(result.page, 0),
       num_families:
-        response.data.numberOfFamilies == null
+        result.numberOfFamilies == null
           ? null
-          : Number(response.data.numberOfFamilies),
-      num_documents:
-        counts.data.numResults == null ? null : Number(counts.data.numResults),
-      docs: ((response.data.patents ?? []) as Record<string, unknown>[]).map(
-        convertBiblio,
-      ),
+          : numericCount(result.numberOfFamilies),
+      num_documents: numDocuments,
+      docs: result.patents.map((record) => convertBiblio(payload(record))),
       provenance: response.provenance,
     };
   }
@@ -279,12 +332,27 @@ export class PublicationsClient {
         ...(options.signal ? { signal: options.signal } : {}),
       },
     );
-    return { ...convertDocument(r.data), provenance: r.provenance };
+    const data = payload(r.data);
+    if (
+      typeof data.guid !== "string" ||
+      !data.guid ||
+      typeof data.type !== "string" ||
+      !data.type
+    )
+      throw new ApiError(
+        "PPUBS returned no document identity.",
+        200,
+        "INVALID_RESPONSE",
+      );
+    return { ...convertDocument(data), provenance: r.provenance };
   }
-  async resolveDocumentByPublicationNumber(number: string) {
+  async resolveDocumentByPublicationNumber(
+    number: string,
+    options: { signal?: AbortSignal } = {},
+  ) {
     const n = normalizePublicationNumber(number);
     if (!n) throw new ConfigurationError("A publication number is required.");
-    const page = await this.searchBiblio({ query: `${n}.pn.` });
+    const page = await this.searchBiblio({ query: `${n}.pn.`, ...options });
     const doc =
       page.docs.find(
         (d) =>
@@ -294,7 +362,10 @@ export class PublicationsClient {
       ) ?? page.docs.find((d) => d.guid && d.type);
     if (!doc?.guid || !doc.type)
       throw new ApiError("Patent publication was not found.", 404, "NOT_FOUND");
-    const result = await this.getDocument(doc.guid, { source: doc.type });
+    const result = await this.getDocument(doc.guid, {
+      source: doc.type,
+      ...options,
+    });
     result.publication_number ??= number;
     return result;
   }
@@ -304,7 +375,7 @@ export class PublicationsClient {
   ) {
     const count = document.document_structure?.page_count;
     if (
-      !Number.isInteger(count) ||
+      !Number.isSafeInteger(count) ||
       !count ||
       count < 1 ||
       !document.image_location ||
@@ -314,68 +385,102 @@ export class PublicationsClient {
       throw new ConfigurationError(
         "PPUBS document lacks image metadata required for PDF download.",
       );
+    const deadline = AbortSignal.timeout(this.pollTimeout);
     const signal = options.signal
-      ? AbortSignal.any([options.signal, AbortSignal.timeout(this.pollTimeout)])
-      : AbortSignal.timeout(this.pollTimeout);
-    const job = await this.request<string>(
-      "text",
-      "POST",
-      "/api/print/imageviewer",
-      {
-        signal,
-        body: {
-          caseId: this.caseId,
-          pageKeys: Array.from(
-            { length: count },
-            (_, i) =>
-              `${document.image_location}/${String(i + 1).padStart(8, "0")}.tif`,
-          ),
-          patentGuid: document.guid,
-          saveOrPrint: "save",
-          source: document.type,
-        },
-      },
-    );
-    const id = job.data.trim().replace(/^"|"$/g, "");
-    if (!id)
-      throw new ApiError(
-        "PPUBS returned an empty print job.",
-        200,
-        "INVALID_RESPONSE",
-      );
-    while (!signal.aborted) {
-      const status = await this.request<
-        Array<{ printStatus?: string; pdfName?: string }>
-      >("json", "POST", "/api/print/print-process", { body: [id], signal });
-      const item = status.data[0];
-      if (item?.printStatus === "COMPLETED" && item.pdfName)
-        return this.request<Uint8Array>(
-          "bytes",
-          "GET",
-          `/api/print/save/${encodeURIComponent(item.pdfName)}`,
-          { signal },
-        );
-      if (["FAILED", "ERROR", "CANCELLED"].includes(item?.printStatus ?? ""))
-        throw new ApiError("PPUBS print job failed.", 200, "PRINT_FAILED");
-      await new Promise<void>((resolve, reject) => {
-        const abort = () => {
-          clearTimeout(timer);
-          reject(
-            new ApiError(
-              "PPUBS PDF polling cancelled or timed out.",
-              0,
-              "ABORTED",
+      ? AbortSignal.any([options.signal, deadline])
+      : deadline;
+    try {
+      const job = await this.request<string>(
+        "text",
+        "POST",
+        "/api/print/imageviewer",
+        {
+          signal,
+          body: {
+            caseId: this.caseId,
+            pageKeys: Array.from(
+              { length: count },
+              (_, i) =>
+                `${document.image_location}/${String(i + 1).padStart(8, "0")}.tif`,
             ),
+            patentGuid: document.guid,
+            saveOrPrint: "save",
+            source: document.type,
+          },
+        },
+      );
+      const id = job.data.trim().replace(/^"|"$/g, "");
+      if (!id)
+        throw new ApiError(
+          "PPUBS returned an empty print job.",
+          200,
+          "INVALID_RESPONSE",
+        );
+      while (!signal.aborted) {
+        const status = await this.request<
+          Array<{ printStatus?: string; pdfName?: string }>
+        >("json", "POST", "/api/print/print-process", { body: [id], signal });
+        const item = Array.isArray(status.data) ? status.data[0] : undefined;
+        if (
+          !Array.isArray(status.data) ||
+          !item ||
+          typeof item.printStatus !== "string"
+        )
+          throw new ApiError(
+            "PPUBS returned malformed print status.",
+            200,
+            "INVALID_RESPONSE",
           );
-        };
-        const timer = setTimeout(() => {
-          signal.removeEventListener("abort", abort);
-          resolve();
-        }, this.pollInterval);
-        signal.addEventListener("abort", abort, { once: true });
-      });
+        if (item.printStatus === "COMPLETED") {
+          if (typeof item.pdfName !== "string" || !item.pdfName)
+            throw new ApiError(
+              "PPUBS completed the print job without a PDF name.",
+              200,
+              "INVALID_RESPONSE",
+            );
+          const pdf = await this.request<Uint8Array>(
+            "bytes",
+            "GET",
+            `/api/print/save/${encodeURIComponent(item.pdfName)}`,
+            { signal },
+          );
+          if (new TextDecoder().decode(pdf.data.subarray(0, 5)) !== "%PDF-")
+            throw new ApiError(
+              "PPUBS returned a non-PDF download.",
+              200,
+              "INVALID_RESPONSE",
+            );
+          return pdf;
+        }
+        if (["FAILED", "ERROR", "CANCELLED"].includes(item?.printStatus ?? ""))
+          throw new ApiError("PPUBS print job failed.", 200, "PRINT_FAILED");
+        await new Promise<void>((resolve, reject) => {
+          const abort = () => {
+            clearTimeout(timer);
+            reject(
+              new ApiError(
+                options.signal?.aborted
+                  ? "PPUBS PDF polling was cancelled."
+                  : "PPUBS PDF polling timed out.",
+                0,
+                options.signal?.aborted ? "ABORTED" : "TIMEOUT",
+              ),
+            );
+          };
+          const timer = setTimeout(() => {
+            signal.removeEventListener("abort", abort);
+            resolve();
+          }, this.pollInterval);
+          signal.addEventListener("abort", abort, { once: true });
+          if (signal.aborted) abort();
+        });
+      }
+      throw new ApiError("PPUBS PDF polling timed out.", 0, "TIMEOUT");
+    } catch (error) {
+      if (deadline.aborted && !options.signal?.aborted)
+        throw new ApiError("PPUBS PDF polling timed out.", 0, "TIMEOUT");
+      throw error;
     }
-    throw new ApiError("PPUBS PDF polling timed out.", 0, "TIMEOUT");
   }
   async downloadPdfBase64(
     document: PublicationRecord,
@@ -383,6 +488,26 @@ export class PublicationsClient {
   ) {
     const r = await this.downloadPdf(document, options);
     return { ...r, data: Buffer.from(r.data).toString("base64") };
+  }
+  async resolveAndDownloadPdf(
+    number: string,
+    options: { signal?: AbortSignal } = {},
+  ) {
+    const document = await this.resolveDocumentByPublicationNumber(
+      number,
+      options,
+    );
+    const pdf = await this.downloadPdfBase64(document, options);
+    return {
+      guid: document.guid ?? "",
+      publication_number: document.publication_number ?? null,
+      patent_title:
+        typeof document.patent_title === "string"
+          ? document.patent_title
+          : null,
+      pdf_base64: pdf.data,
+      provenance: pdf.provenance,
+    };
   }
 }
 export { PublicationsClient as PublicSearchClient };

@@ -159,3 +159,17 @@ freshness information while schema bytes remain unchanged. Five focused tests
 verify content preservation, JSON parsing, snapshot distinction, all resource
 reads/listings, and authorization denial. This closes static resource parity;
 it does not refresh historical documentation against current upstream behavior.
+
+
+## Current HTTP operations are a separate coverage target
+
+The [current operation audit](uspto-operation-coverage.md) maps 92 method/path
+operations across the eight current portal definitions to client methods,
+declared request/response contracts, tests, and recorded HTTP interactions.
+Sixty-three operations come from archived original entry files and 29 PTAB
+operations were confirmed in the rendered current Swagger UI. It found 15 GET
+variants that the earlier 70-method name check did not detect; the owning
+workers added their dispatch and query handling. All 92 now have named entry
+points, with per-operation evidence and limitations in the machine-readable
+map. Neither that mapping nor a matching method declaration proves complete
+behavioral parity or a resolved upstream schema bundle.

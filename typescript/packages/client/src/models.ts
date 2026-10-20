@@ -56,6 +56,7 @@ export const DocumentsResponseSchema = z.looseObject({
 export type DocumentsResponse = z.infer<typeof DocumentsResponseSchema>;
 
 export const SearchOptionsSchema = z.object({
+  method: z.enum(["GET", "POST"]).default("POST"),
   query: z.string().optional(),
   fields: z.array(z.string().min(1)).optional(),
   facets: z.array(z.string().min(1)).optional(),
@@ -67,8 +68,10 @@ export const SearchOptionsSchema = z.object({
       z
         .object({
           field: z.string().min(1),
-          valueFrom: z.iso.date().optional(),
-          valueTo: z.iso.date().optional(),
+          valueFrom: z
+            .union([z.string().min(1), z.number().finite()])
+            .optional(),
+          valueTo: z.union([z.string().min(1), z.number().finite()]).optional(),
         })
         .refine(
           (range) =>
@@ -84,7 +87,7 @@ export const SearchOptionsSchema = z.object({
       z.object({ field: z.string().min(1), order: z.enum(["Asc", "Desc"]) }),
     )
     .optional(),
-  limit: z.number().int().min(1).max(100).default(25),
+  limit: z.number().int().min(1).default(25),
   offset: z.number().int().nonnegative().default(0),
   full: z.boolean().default(false),
   normalize: z.boolean().default(true),
@@ -98,4 +101,6 @@ export interface RequestOptions {
 export interface DocumentsOptions extends RequestOptions {
   includeAssociated?: boolean;
   documentCodes?: string[];
+  officialDateFrom?: string;
+  officialDateTo?: string;
 }

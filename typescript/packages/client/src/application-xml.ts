@@ -84,13 +84,14 @@ function dependency(value: string | undefined): number | null {
     : null;
 }
 export function parseGrantClaimsXml(xml: string): PatentClaim[] {
-  return all(tree(xml), "claim").flatMap((claim, index) => {
+  const claims: PatentClaim[] = [];
+  for (const claim of all(tree(xml), "claim")) {
     const claim_text = claim.children
       .filter((child) => child.tag === "claim-text")
       .flatMap((child) => lines(child, "claim-text"))
       .join("\n")
       .trim();
-    if (!claim_text) return [];
+    if (!claim_text) continue;
     const raw = (claim.attributes.num ?? claim.attributes.id ?? "").replace(
       /\D/g,
       "",
@@ -99,17 +100,16 @@ export function parseGrantClaimsXml(xml: string): PatentClaim[] {
       all(claim, "claim-ref")
         .map((ref) => dependency(ref.attributes.idref))
         .find((value) => value !== null) ?? null;
-    return [
-      {
-        claim_number: raw ? Number(raw) : index + 1,
-        claim_text,
-        claim_type: depends_on
-          ? ("dependent" as const)
-          : ("independent" as const),
-        depends_on,
-      },
-    ];
-  });
+    claims.push({
+      claim_number: raw ? Number(raw) : claims.length + 1,
+      claim_text,
+      claim_type: depends_on
+        ? ("dependent" as const)
+        : ("independent" as const),
+      depends_on,
+    });
+  }
+  return claims;
 }
 function metadata(root: Node): Record<string, unknown> {
   const meta: Record<string, unknown> = {};

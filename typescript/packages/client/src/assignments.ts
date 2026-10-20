@@ -77,14 +77,15 @@ export class AssignmentCenterClient {
           },
         ]
       : [];
-    let page = options.conveyance ? 1 : Math.floor(offset / 1000) + 1;
+    const filterConveyance = options.conveyance !== undefined;
+    let page = filterConveyance ? 1 : Math.floor(offset / 1000) + 1;
     const records: AssignmentRecord[] = [];
     let total = 0;
     let provenance: Provenance | undefined;
     let truncated = false;
     const conveyance = options.conveyance?.toLowerCase();
     const target =
-      limit === null ? null : limit + (options.conveyance ? offset : 0);
+      limit === null ? null : limit + (filterConveyance ? offset : 0);
     do {
       const result = await this.http.json(
         "POST",
@@ -114,7 +115,7 @@ export class AssignmentCenterClient {
       truncated = total >= 10000;
       let batch = response.data;
       const serverCount = batch.length;
-      if (options.conveyance)
+      if (filterConveyance)
         batch = batch.filter((record) =>
           record.conveyance?.toLowerCase().includes(conveyance ?? ""),
         );
@@ -130,10 +131,10 @@ export class AssignmentCenterClient {
         break;
       page++;
     } while (page <= 10);
-    const selected = options.conveyance ? records.slice(offset) : records;
+    const selected = filterConveyance ? records.slice(offset) : records;
     return {
       records: limit === null ? selected : selected.slice(0, limit),
-      total: options.conveyance ? records.length : total,
+      total: filterConveyance ? records.length : total,
       truncated,
       provenance,
     };
@@ -160,10 +161,16 @@ export class AssignmentCenterClient {
       z.object({ successResponse: z.object({ data: z.unknown() }) }),
       result.data,
     );
+    const data = wrapper.successResponse.data;
+    const assignment =
+      data && typeof data === "object" && "assignment" in data
+        ? data.assignment
+        : undefined;
     if (
-      !wrapper.successResponse.data ||
-      typeof wrapper.successResponse.data !== "object" ||
-      !("assignment" in wrapper.successResponse.data)
+      !assignment ||
+      typeof assignment !== "object" ||
+      Array.isArray(assignment) ||
+      !Object.keys(assignment).length
     )
       throw new ApiError("Assignment was not found.", 404, "NOT_FOUND");
     return {

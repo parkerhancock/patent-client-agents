@@ -276,7 +276,8 @@ describe("TSDR contract", () => {
     const result = parseTsdrDocuments(String(xml));
     expect(result.length).toBeGreaterThan(1);
     expect(result[0]).toMatchObject({
-      docId: "78787878-CDR",
+      docId: "CDR20251202141721",
+      metadataKey: "78787878-CDR",
       docType: "CDR",
       pageCount: 10,
       mailDate: "2025-01-02",
@@ -505,7 +506,11 @@ test("thin register MCP adapter passes combined trademark filters and returns no
   if (!get) throw new Error("Missing status tool");
   expect(
     await get.handler(get.input.parse({ serial_number: "12345678" })),
-  ).toMatchObject({ details: { markText: "ACME" } });
+  ).toMatchObject({
+    items: [{ markText: "ACME" }],
+    next_cursor: null,
+    more_available: false,
+  });
   const batch = await get.handler(
     get.input.parse({ serial_number: ["12345678", "87654321"] }),
   );
@@ -545,9 +550,13 @@ test("thin register MCP adapter passes combined trademark filters and returns no
         ),
       );
       expect(get.output.parse(metadata)).toMatchObject({
-        download_url: expect.stringContaining("http://localhost:12345"),
-        filename: expect.stringContaining("12345678"),
-        size: expect.any(Number),
+        items: [
+          {
+            download_url: expect.stringContaining("http://localhost:12345"),
+            filename: expect.stringContaining("12345678"),
+            size: expect.any(Number),
+          },
+        ],
       });
       expect(metadata).not.toHaveProperty("details");
       expect(JSON.stringify(metadata)).not.toContain("large raw body");

@@ -6,10 +6,10 @@ import {
   type RecordDownloadOptions,
   type RecordResponse,
   type RecordSearchOptions,
-  recordPayload,
+  recordRequest,
   recordResponse,
 } from "./odp-record-models.js";
-import { type ClientOptions, OdpTransport } from "./transport.js";
+import { type ClientOptions, OdpApiError, OdpTransport } from "./transport.js";
 export type PtabProceedingResponse = RecordResponse<
   "patentTrialProceedingDataBag",
   PtabRecord
@@ -44,12 +44,12 @@ class PtabRecords<K extends string> {
   ) {
     return recordResponse(
       this.transport,
-      "POST",
+      options.method ?? "POST",
       `${path}/search`,
       key,
       PtabRecordSchema,
       {
-        body: recordPayload(options),
+        ...recordRequest(options),
         ...(options.signal ? { signal: options.signal } : {}),
         emptyOn404: { count: 0, [key]: [] },
       },
@@ -79,12 +79,12 @@ class PtabRecords<K extends string> {
   ) {
     return recordResponse(
       this.transport,
-      "POST",
+      options.method ?? "POST",
       `${path}/search/download`,
       key,
       PtabRecordSchema,
       {
-        body: recordPayload(options, true, "json"),
+        ...recordRequest(options, true, "json"),
         ...(options.signal ? { signal: options.signal } : {}),
         emptyOn404: { count: 0, [key]: [] },
       },
@@ -95,11 +95,15 @@ class PtabRecords<K extends string> {
     path: string,
     options: RecordDownloadOptions = {},
   ) {
-    return this.transport.bytes("POST", `${path}/search/download`, {
-      body: recordPayload(options, true, options.fileFormat ?? "json"),
-      ...(options.signal ? { signal: options.signal } : {}),
-      timeoutMs: 120000,
-    });
+    return this.transport.bytes(
+      options.method ?? "POST",
+      `${path}/search/download`,
+      {
+        ...recordRequest(options, true, options.fileFormat ?? "json"),
+        ...(options.signal ? { signal: options.signal } : {}),
+        timeoutMs: 120000,
+      },
+    );
   }
   search(options: RecordSearchOptions = {}) {
     return this.searchRecords(this.path, this.key, options);
@@ -245,11 +249,35 @@ export class PtabTrialsClient extends PtabRecords<
   downloadDocumentsFile(options: RecordDownloadOptions = {}) {
     return this.downloadRecordsFile("/api/v1/patent/trials/documents", options);
   }
-  downloadDocumentPdf(id: string, options: RequestOptions = {}) {
-    const path = id.startsWith("/")
-      ? id
-      : `/api/v1/patent/trials/documents/${identifier(id)}/download`;
-    return this.transport.bytes("GET", path, { ...options, timeoutMs: 120000 });
+  async downloadDocumentPdf(
+    id: string,
+    options: RequestOptions & { allowedHosts?: string[] } = {},
+  ) {
+    let path = id;
+    if (!id.startsWith("/") && !/^https?:\/\//i.test(id)) {
+      const metadata = await this.getDocument(id, options);
+      const document = metadata.patentTrialDocumentDataBag[0]?.documentData;
+      const advertised = document?.fileDownloadURI ?? document?.downloadURI;
+      if (!advertised)
+        throw new OdpApiError(
+          "PTAB document has no advertised PDF download URL.",
+          404,
+          "DOCUMENT_UNAVAILABLE",
+        );
+      path = advertised;
+    }
+    const response = await this.transport.bytes("GET", path, {
+      allowedHosts: ["data.uspto.gov"],
+      ...options,
+      timeoutMs: 120000,
+    });
+    if (new TextDecoder().decode(response.data.subarray(0, 5)) !== "%PDF-")
+      throw new OdpApiError(
+        "PTAB download did not contain a PDF document.",
+        response.status,
+        "INVALID_RESPONSE",
+      );
+    return response;
   }
 }
 export class PtabAppealsClient extends PtabRecords<"patentAppealDataBag"> {

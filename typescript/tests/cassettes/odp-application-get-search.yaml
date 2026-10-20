@@ -1,0 +1,41 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/applications/search?offset=0&limit=1&q=applicationNumberText%3A14412875&fields=applicationNumberText
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 17:01:54 GMT
+      x-amz-apigw-id:
+      - FjW0aG8BoAMF_pA=
+      x-amzn-requestid:
+      - 8968fe9a-ba6f-41d7-841b-8b4aa388aa43
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79e82-22fa7a9b5a036b401ffc2140;Parent=101c77f474a3c011;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: json
+      content:
+        count: 1
+        patentFileWrapperDataBag:
+        - applicationNumberText: "14412875"
+        requestIdentifier: 8968fe9a-ba6f-41d7-841b-8b4aa388aa43
+  recorded_at: 2026-10-20T17:01:54.289Z

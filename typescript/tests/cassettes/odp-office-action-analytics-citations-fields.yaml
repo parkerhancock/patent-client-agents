@@ -1,0 +1,71 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/oa/oa_citations/v2/fields
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - accept, authorization, content-type, x-requested-with
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - "1"
+      connection:
+      - keep-alive
+      content-length:
+      - "687"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:16 GMT
+      strict-transport-security:
+      - max-age=31536000;
+      x-amz-apigw-id:
+      - FjWbuHkZoAMFhWg=
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - "687"
+      x-amzn-remapped-date:
+      - Tue, 20 Oct 2026 16:59:16 GMT
+      x-amzn-requestid:
+      - 2e1ba00e-a89e-4ea8-819b-ee78eb2fe0f9
+    body:
+      type: json
+      content:
+        apiKey: oa_citations
+        apiVersionNumber: v2
+        apiUrl: https://api.uspto.gov/api/v1/patent/oa/oa_citations/v2/fields
+        apiDocumentationUrl: arn:aws:iam::831714700926:role/uspto-dev/uspto-dh-p-prod-service-role-1
+        apiStatus: PUBLISHED
+        fieldCount: 16
+        fields:
+        - applicantCitedExaminerReferenceIndicator
+        - createUserIdentifier
+        - workGroup
+        - officeActionCitationReferenceIndicator
+        - referenceIdentifier
+        - actionTypeCategory
+        - patentApplicationNumber
+        - legalSectionCode
+        - groupArtUnitNumber
+        - createDateTime
+        - techCenter
+        - paragraphNumber
+        - obsoleteDocumentIdentifier
+        - parsedReferenceIdentifier
+        - id
+        - examinerCitedReferenceIndicator
+        lastDataUpdatedDate: 2019-06-26 11:20:17.0
+  recorded_at: 2026-10-20T16:59:16.210Z

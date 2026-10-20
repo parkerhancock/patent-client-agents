@@ -1,0 +1,80 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://api.uspto.gov/api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - accept, authorization, content-type, x-requested-with
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - "1"
+      connection:
+      - keep-alive
+      content-length:
+      - "850"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:21 GMT
+      strict-transport-security:
+      - max-age=31536000;
+      x-amz-apigw-id:
+      - FjWcfE9loAMFjIg=
+      x-amzn-remapped-connection:
+      - keep-alive
+      x-amzn-remapped-content-length:
+      - "850"
+      x-amzn-remapped-date:
+      - Tue, 20 Oct 2026 16:59:21 GMT
+      x-amzn-requestid:
+      - c3d18da8-220c-4645-bbf6-2fb2dfbb75cc
+    body:
+      type: json
+      content:
+        apiKey: enriched_cited_reference_metadata
+        apiVersionNumber: v3
+        apiUrl: >-
+          https://api.uspto.gov/api/v1/patent/oa/enriched_cited_reference_metadata/v3/fields
+        apiDocumentationUrl: >-
+          https://data.uspto.gov/swagger/index.html?urls.primaryName=USPTO%20Enriched%20Citation%20API%20v3
+        apiStatus: PUBLISHED
+        fieldCount: 22
+        fields:
+        - officeActionDate
+        - relatedClaimNumberText
+        - applicantCitedExaminerReferenceIndicator
+        - createUserIdentifier
+        - kindCode
+        - nplIndicator
+        - workGroupNumber
+        - officeActionCategory
+        - patentApplicationNumber
+        - inventorNameText
+        - groupArtUnitNumber
+        - qualitySummaryText
+        - createDateTime
+        - techCenter
+        - citedDocumentIdentifier
+        - countryCode
+        - passageLocationText
+        - obsoleteDocumentIdentifier
+        - citationCategoryCode
+        - id
+        - examinerCitedReferenceIndicator
+        - publicationNumber
+        lastDataUpdatedDate: 2024-07-11 11:33:41.0
+  recorded_at: 2026-10-20T16:59:21.145Z

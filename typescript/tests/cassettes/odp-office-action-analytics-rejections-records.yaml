@@ -1,0 +1,82 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/oa/oa_rejections/v2/records
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: criteria=*%3A*&start=0&rows=1
+  response:
+    status: 200
+    headers:
+      access-control-allow-credentials:
+      - "true"
+      access-control-allow-headers:
+      - accept, authorization, content-type, x-requested-with
+      access-control-allow-methods:
+      - GET, POST, OPTIONS, PUT
+      access-control-allow-origin:
+      - "*"
+      access-control-max-age:
+      - "1"
+      connection:
+      - keep-alive
+      content-length:
+      - "832"
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:59:14 GMT
+      strict-transport-security:
+      - max-age=31536000;
+      x-amz-apigw-id:
+      - FjWbhFjFoAMFpJQ=
+      x-amzn-remapped-date:
+      - Tue, 20 Oct 2026 16:59:14 GMT
+      x-amzn-requestid:
+      - 938feb08-1438-4de0-b56f-e24e9c5a9b81
+    body:
+      type: json
+      content:
+        response:
+          start: 0
+          numFound: 93596599
+          docs:
+          - bilskiIndicator: false
+            actionTypeCategory: ""
+            legacyDocumentCodeIdentifier: CTNF
+            hasRej101: 0
+            hasRejDP: 0
+            hasRej103: 1
+            mayoIndicator: false
+            hasRej102: 0
+            nationalClass: "438"
+            closingMissing: 0
+            cite103Max: 2
+            cite103EQ1: 1
+            obsoleteDocumentIdentifier: GTYKOVWIPPOPPY5
+            id: 14642e2cc522ac577468fb6fc026d135
+            createUserIdentifier: ETL_SYS
+            claimNumberArrayDocument:
+            - "1"
+            patentApplicationNumber: "12190351"
+            legalSectionCode: "112"
+            submissionDate: 2011-10-19T00:00:00
+            groupArtUnitNumber: "1713"
+            hasRej112: 1
+            nationalSubclass: "725000"
+            rejectFormMissmatch: 0
+            createDateTime: 2025-07-15T21:22:06
+            formParagraphMissing: 0
+            aliceIndicator: false
+            allowedClaimIndicator: false
+            paragraphNumber: ""
+            cite103GT3: 0
+            myriadIndicator: false
+            headerMissing: 0
+  recorded_at: 2026-10-20T16:59:14.979Z

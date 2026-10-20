@@ -86,6 +86,9 @@ export function registerPortalSearchTools(
         offset: z.number().int().nonnegative().default(0),
         limit: z.number().int().min(1).max(20).default(20),
         sort: z.string().default("date_publ desc"),
+        default_operator: z.enum(["OR", "AND"]).default("OR"),
+        expand_plurals: z.boolean().default(true),
+        british_equivalents: z.boolean().default(true),
         sources: z.array(z.enum(["US-PGPUB", "USPAT", "USOCR"])).optional(),
       }),
     },
@@ -96,6 +99,9 @@ export function registerPortalSearchTools(
         start: offset,
         limit: input.limit,
         sort: input.sort,
+        defaultOperator: input.default_operator,
+        expandPlurals: input.expand_plurals,
+        britishEquivalents: input.british_equivalents,
         ...(input.sources ? { sources: input.sources } : {}),
       });
       const envelope = listEnvelope(
@@ -176,12 +182,12 @@ export function registerPortalSearchTools(
         serial_number: z.string().optional(),
         registration_number: z.string().optional(),
         status: z.enum(["live", "dead", "all"]).default("all"),
-        offset: z.number().int().min(0).max(10000).default(0),
+        offset: z.number().int().min(0).max(9999).default(0),
         limit: z.number().int().min(1).max(500).default(100),
       }),
     },
     async (i) => {
-      const offset = pageOffset(i, 10000);
+      const offset = pageOffset(i, 9999);
       const r = await clients.trademarkSearch.search({
         ...(i.wordmark ? { wordmark: i.wordmark } : {}),
         ...(i.owner ? { owner: i.owner } : {}),
