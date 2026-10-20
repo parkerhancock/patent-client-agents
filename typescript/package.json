@@ -29,7 +29,8 @@
     "replay:office-actions": "bun scripts/record-office-action-features.ts --replay",
     "record:tsdr": "bun scripts/record-tsdr-features.ts --record",
     "replay:tsdr": "bun scripts/record-tsdr-features.ts --replay",
-    "record:ptab-pdf": "bun scripts/record-ptab-pdf.ts --record"
+    "record:ptab-pdf": "bun scripts/record-ptab-pdf.ts --record",
+    "record:trademark-search": "bun scripts/record-trademark-search.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",

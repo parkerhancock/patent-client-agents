@@ -44,7 +44,30 @@ try {
   const outcomes = await tsdrFeatureRecordings(key, (value) =>
     console.log(JSON.stringify(value)),
   );
-  if (outcomes.some((value) => !value.verified)) process.exitCode = 1;
+  const failures = outcomes.filter((value) => !value.verified);
+  if (record) {
+    if (failures.length) process.exitCode = 1;
+  } else {
+    const expectedFailures = [
+      {
+        name: "case-bundle-xml",
+        verified: false,
+        status: 0,
+        code: "NETWORK_ERROR",
+      },
+      {
+        name: "single-document-content-zip",
+        verified: false,
+        status: 429,
+        code: "HTTP_ERROR",
+      },
+    ];
+    if (
+      outcomes.filter((value) => value.verified).length !== 13 ||
+      JSON.stringify(failures) !== JSON.stringify(expectedFailures)
+    )
+      process.exitCode = 1;
+  }
 } catch {
   console.log(
     JSON.stringify({

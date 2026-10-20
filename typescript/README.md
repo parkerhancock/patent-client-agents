@@ -143,13 +143,16 @@ searches, details and exports, all current Office Actions and legacy analytics
 operations, a PTAB PDF, a small bulk ZIP, and current Assignment Center v3 responses. Native Bun Patent Public Search also retrieved an official
 18-page PDF; its archived response fixture verifies all 26 claims. TSDR uses
 separate credentials, and Trademark Search requires an externally provided WAF
-session. Seven fresh authenticated TSDR recordings cover status, listing, update
-timestamps, image and single-document XML/PDF. Trademark Search live verification
-remains pending; see [deployed authentication](docs/deployed-uspto-auth.md).
+session. Fresh authenticated TSDR recordings cover status, listing, update timestamps,
+image, batch and bundle XML, and single-document XML/PDF. Further variants stopped
+at an upstream429. Native Bun Trademark Search also passed a bounded query using
+the deployed session; see [deployed authentication](docs/deployed-uspto-auth.md).
 
 TSDR replay uses `bun run replay:tsdr`. Recording uses `bun run record:tsdr`
 with `USPTO_TSDR_API_KEY`, or `bun run record:tsdr --deployed-secret` for the
 existing authorized deployment secret. The latter captures the value in memory.
+Trademark Search uses `bun run record:trademark-search --deployed-secret` for a
+single bounded query with the existing WAF session. Tests replay both offline.
 
 Bulk redirects can contain signed credentials in Location headers and response
 bodies. Use the dedicated bounded recorder rather than the ordinary helper:

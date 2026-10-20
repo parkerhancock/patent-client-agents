@@ -18,8 +18,8 @@ synthetic contracts. The Python package remains separate.
 | Four legacy Office Action analytics datasets | All eight current records/field operations implemented | Live responses for all eight records/field operations |
 | Patent and trademark assignments | Implemented | Three current Assignment Center v3 recordings, including 99 NIKE trademark matches |
 | Patent Public Search | Search, document, publication resolution, PDF/base64 implemented | Native Bun live search/document/PDF success: 18 pages, 1,214,076 bytes; archived document verifies all 26 parsed claims |
-| Trademark Search | Implemented with supplied WAF session and refresh callback | Synthetic contracts; no fresh authenticated live verification |
-| TSDR | All 25 archived official routes; source-derived document IDs; separate API key | Complete route-contract tests; seven fresh authenticated recordings: status, listing, update JSON/XML, image, document XML/PDF |
+| Trademark Search | Implemented with supplied WAF session and refresh callback | Fresh native Bun HTTP200 using the deployed WAF session and matching User-Agent; one-result query replays offline |
+| TSDR | All 25 archived official routes; source-derived document IDs; separate API key | Complete route-contract tests; Fresh authenticated status JSON/XML/HTML, listing, update JSON/XML, image, batch and bundle XML, document XML/PDF; further variants stopped at429 |
 | Search guides, field/status catalogs, schemas and Swagger resources | Eleven labeled MCP resources and pure library helpers | Resource enumeration, content and authorization tests; historical source labels preserved |
 | REST document retrieval | MCP-issued single-use links by default; authenticated REST concurrently available; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
 

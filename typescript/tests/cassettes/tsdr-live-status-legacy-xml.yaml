@@ -1,0 +1,532 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://tsdrapi.uspto.gov/ts/cd/casestatus/sn78787878/v1/info
+    headers:
+      accept:
+      - application/xml
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - application/xml;charset=UTF-8
+      date:
+      - Tue, 20 Oct 2026 17:13:37 GMT
+      expires:
+      - "0"
+      keep-alive:
+      - timeout=60
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-l7-reqid:
+      - 000001a105f57907-1f3f6d7
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: text
+      content: |
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <tmk:Transaction xmlns:com="http://www.wipo.int/standards/XMLSchema/Common/1" xmlns:tmk="http://www.wipo.int/standards/XMLSchema/Trademark/1">
+            <tmk:TrademarkTransactionBody>
+                <tmk:TransactionContentBag>
+                    <com:TransactionCategory>National trademark registration </com:TransactionCategory>
+                    <tmk:TransactionData>
+                        <tmk:TrademarkBag>
+                            <tmk:Trademark>
+                                <com:ApplicationNumber>
+                                    <com:IPOfficeCode>US</com:IPOfficeCode>
+                                    <com:ApplicationNumberText>78787878</com:ApplicationNumberText>
+                                </com:ApplicationNumber>
+                                <tmk:ApplicationDate>2006-01-09-05:00</tmk:ApplicationDate>
+                                <com:FilingPlace>US</com:FilingPlace>
+                                <tmk:MarkCurrentStatusCode>602</tmk:MarkCurrentStatusCode>
+                                <tmk:MarkCurrentStatusDate>2007-09-25</tmk:MarkCurrentStatusDate>
+                                <tmk:AssociatedMarkBag>
+                                    <tmk:AssociatedMark>
+        <tmk:AssociationCategory>International application or registration</tmk:AssociationCategory>
+        <com:ApplicationNumber>
+            <com:IPOfficeCode>WO</com:IPOfficeCode>
+            <com:ApplicationNumberText>A3141234</com:ApplicationNumberText>
+        </com:ApplicationNumber>
+        <tmk:InternationalRegistrationNumber> </tmk:InternationalRegistrationNumber>
+                                    </tmk:AssociatedMark>
+                                </tmk:AssociatedMarkBag>
+                                <tmk:MarkCategory>Collective membership mark</tmk:MarkCategory>
+                                <tmk:MarkRepresentation>
+                                    <tmk:MarkFeatureCategory>AN ILLUSTRATION DRAWING WHICH INCLUDES WORD(S)/ LETTER(S) /NUMBER(S)</tmk:MarkFeatureCategory>
+                                    <tmk:MarkReproduction>
+        <tmk:WordMarkSpecification>
+            <tmk:MarkVerbalElementText>MAC MEMPHIS ATHLETIC CAMPUS</tmk:MarkVerbalElementText>
+            <tmk:MarkSignificantVerbalElementText>MAC MEMPHIS ATHLETIC CAMPUS</tmk:MarkSignificantVerbalElementText>
+            <tmk:MarkTranslationText com:sequenceNumber="1"/>
+            <tmk:MarkTransliteration/>
+            <tmk:MarkStandardCharacterIndicator>false</tmk:MarkStandardCharacterIndicator>
+        </tmk:WordMarkSpecification>
+        <tmk:MarkImageBag>
+            <tmk:MarkImage>
+                <com:ImageFileName>78787878.png</com:ImageFileName>
+                <tmk:MarkImageColourClaimedText com:sequenceNumber="1">The applicant claims color as a feature of the mark, namely, BLACK, BLUE, WHITE, AND RED.</tmk:MarkImageColourClaimedText>
+                <tmk:MarkImageColourPartClaimedText com:sequenceNumber="1"/>
+                <tmk:NationalDesignClassificationBag>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>01.01.09</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Stars, two</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Two stars</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>01.01.13</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Stars - multiple stars with five points</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>01.15.03</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Fire (flames), other than emanating from objects, words, numbers, fireplaces or candles</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Flames, other than flames emanating from objects, words, numbers, fireplaces or candles</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>01.15.15</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Fire (flames), emanating from objects, words or numbers</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>13.01.02</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Blow torch</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Propane torches</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Torches</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Welding torch</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>24.09.07</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Advertising, banners</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Banners</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>26.01.17</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Circles, two concentric</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Concentric circles, two</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Two concentric circles</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>26.01.21</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Circles that are totally or partially shaded.</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>26.03.13</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Ovals, exactly two (not concentric)</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Two ovals</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>26.03.17</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Concentric ovals</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Concentric ovals and ovals within ovals</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Ovals within ovals</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Ovals, concentric</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>26.03.21</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Ovals that are completely or partially shaded</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>26.17.01</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Bands, straight</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Bars, straight</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Lines, straight</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Straight line(s), band(s) or bar(s)</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                    <tmk:NationalDesignClassification>
+                        <tmk:NationalDesignSearchCode>26.17.05</tmk:NationalDesignSearchCode>
+                        <tmk:NationalDesignSearchDescriptionText>Bands, horizontal</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Bars, horizontal</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Horizontal line(s), band(s) or bar(s)</tmk:NationalDesignSearchDescriptionText>
+                        <tmk:NationalDesignSearchDescriptionText>Lines, horizontal</tmk:NationalDesignSearchDescriptionText>
+                    </tmk:NationalDesignClassification>
+                </tmk:NationalDesignClassificationBag>
+                <com:ImageColourIndicator>true</com:ImageColourIndicator>
+            </tmk:MarkImage>
+        </tmk:MarkImageBag>
+        <tmk:MarkSoundBag>
+            <tmk:MarkSound/>
+        </tmk:MarkSoundBag>
+                                    </tmk:MarkReproduction>
+                                    <tmk:MarkDescriptionBag>
+        <tmk:MarkDescriptionText>The mark consists of A large vertically-oriented medium blue oval outlined with thin white and black oval lines with the letters "MAC" in the center written horizontally in black with white and black outlines on the letters with a thin white horizontal stripe above and below the letters with a small black circle intersecting the top of the large oval containing a white torch with three red flames flowing upward with a three-quarter medium blue semi-circle on each side of the torch and with a black ribbon crossing the bottom of the large oval with a medium blue pinstripe at the top and bottom of the ribbon with the words "MEMPHIS ATHLETIC CAMPUS" centered in the ribbon with a single white star on each end of the text and light blue outlines on the ribbon on the ends outside the boundary of the large oval.</tmk:MarkDescriptionText>
+        <tmk:NationalMarkDescription>
+            <tmk:MarkFeatureCode>3</tmk:MarkFeatureCode>
+        </tmk:NationalMarkDescription>
+                                    </tmk:MarkDescriptionBag>
+                                </tmk:MarkRepresentation>
+                                <tmk:MarkDisclaimerBag>
+                                    <tmk:MarkDisclaimerText com:sequenceNumber="1">"MEMPHIS ATHLETIC CAMPUS"</tmk:MarkDisclaimerText>
+                                </tmk:MarkDisclaimerBag>
+                                <tmk:GoodsServicesBag>
+                                    <tmk:GoodsServices>
+        <tmk:GoodsServicesClassificationBag>
+            <tmk:GoodsServicesClassification>
+                <tmk:ClassificationKindCode>Primary</tmk:ClassificationKindCode>
+                <tmk:NationalClassNumber>200</tmk:NationalClassNumber>
+            </tmk:GoodsServicesClassification>
+            <tmk:GoodsServicesClassification>
+                <tmk:ClassificationKindCode>Nice</tmk:ClassificationKindCode>
+                <tmk:ClassNumber>200</tmk:ClassNumber>
+            </tmk:GoodsServicesClassification>
+            <tmk:GoodsServicesClassification>
+                <tmk:ClassificationKindCode>National</tmk:ClassificationKindCode>
+                <tmk:NationalClassNumber>200</tmk:NationalClassNumber>
+            </tmk:GoodsServicesClassification>
+        </tmk:GoodsServicesClassificationBag>
+        <tmk:NationalFilingBasis>
+            <tmk:CurrentBasis>
+                <tmk:BasisForeignApplicationIndicator>false</tmk:BasisForeignApplicationIndicator>
+                <tmk:BasisForeignRegistrationIndicator>false</tmk:BasisForeignRegistrationIndicator>
+                <tmk:BasisUseIndicator>false</tmk:BasisUseIndicator>
+                <tmk:BasisIntentToUseIndicator>false</tmk:BasisIntentToUseIndicator>
+                <tmk:NoBasisIndicator>false</tmk:NoBasisIndicator>
+            </tmk:CurrentBasis>
+        </tmk:NationalFilingBasis>
+        <tmk:ClassDescriptionBag>
+            <tmk:ClassDescription>
+                <tmk:NationalClassNumber>200</tmk:NationalClassNumber>
+                <tmk:GoodsServicesDescriptionText com:sequenceNumber="1">2020</tmk:GoodsServicesDescriptionText>
+            </tmk:ClassDescription>
+            <tmk:ClassDescription>
+                <tmk:NationalStatusBag>
+                    <tmk:NationalStatus>
+                        <tmk:NationalStatusCategory>National class status</tmk:NationalStatusCategory>
+                        <tmk:NationalStatusCode>6</tmk:NationalStatusCode>
+                        <tmk:NationalStatusExternalDescriptionText>ACTIVE</tmk:NationalStatusExternalDescriptionText>
+                    </tmk:NationalStatus>
+                </tmk:NationalStatusBag>
+            </tmk:ClassDescription>
+        </tmk:ClassDescriptionBag>
+                                    </tmk:GoodsServices>
+                                </tmk:GoodsServicesBag>
+                                <tmk:PublicationBag>
+                                    <tmk:Publication>
+        <com:PublicationIdentifier>USPTO Official Gazette for Trademarks (OG)</com:PublicationIdentifier>
+                                    </tmk:Publication>
+                                </tmk:PublicationBag>
+                                <tmk:ApplicantBag>
+                                    <tmk:Applicant com:sequenceNumber="10">
+        <com:LegalEntityName>CORPORATION</com:LegalEntityName>
+        <com:NationalLegalEntityCode>3</com:NationalLegalEntityCode>
+        <com:IncorporationCountryCode>US</com:IncorporationCountryCode>
+        <com:IncorporationState>TN</com:IncorporationState>
+        <com:Version>
+            <com:CommentText com:sequenceNumber="1">ORIGINAL APPLICANT</com:CommentText>
+        </com:Version>
+        <com:Contact>
+            <com:Name>
+                <com:EntityName>MEMPHIS ATHLETIC     CAMPUS FOUNDATION</com:EntityName>
+            </com:Name>
+            <com:PostalAddressBag>
+                <com:PostalAddress>
+                    <com:PostalStructuredAddress>
+                        <com:AddressLineText com:sequenceNumber="1">xxx</com:AddressLineText>
+                        <com:AddressLineText com:sequenceNumber="2">xxx</com:AddressLineText>
+                        <com:CityName>xxxxx</com:CityName>
+                        <com:GeographicRegionName>ILLINOIS</com:GeographicRegionName>
+                        <com:CountryCode>US</com:CountryCode>
+                        <com:PostalCode>11111</com:PostalCode>
+                    </com:PostalStructuredAddress>
+                </com:PostalAddress>
+            </com:PostalAddressBag>
+        </com:Contact>
+                                    </tmk:Applicant>
+                                </tmk:ApplicantBag>
+                                <tmk:NationalRepresentative>
+                                    <com:Contact>
+        <com:Name>
+            <com:PersonName/>
+        </com:Name>
+        <com:FaxNumberBag>
+            <com:FaxNumber/>
+        </com:FaxNumberBag>
+        <com:EmailAddressBag/>
+        <com:PhoneNumberBag>
+            <com:PhoneNumber/>
+        </com:PhoneNumberBag>
+                                    </com:Contact>
+                                </tmk:NationalRepresentative>
+                                <tmk:NationalCorrespondent>
+                                    <com:Contact>
+        <com:Name>
+            <com:PersonName>
+                <com:PersonFullName>MICHAEL T EVANGELISTI</com:PersonFullName>
+            </com:PersonName>
+        </com:Name>
+        <com:PostalAddressBag>
+            <com:PostalAddress>
+                <com:PostalStructuredAddress>
+                    <com:AddressLineText com:sequenceNumber="1">1100 Ridgeway Loop Rd, STE 400</com:AddressLineText>
+                    <com:AddressLineText com:sequenceNumber="2"/>
+                    <com:CityName>memphis</com:CityName>
+                    <com:GeographicRegionName>TENNESSEE</com:GeographicRegionName>
+                    <com:CountryCode>US</com:CountryCode>
+                    <com:PostalCode>38120-4058</com:PostalCode>
+                </com:PostalStructuredAddress>
+            </com:PostalAddress>
+        </com:PostalAddressBag>
+        <com:FaxNumberBag>
+            <com:FaxNumber>(901) 259-7180</com:FaxNumber>
+        </com:FaxNumberBag>
+        <com:EmailAddressBag>
+            <com:EmailAddressText com:emailAddressPurposeCategory="Main">mte@farris-law.com</com:EmailAddressText>
+        </com:EmailAddressBag>
+        <com:PhoneNumberBag>
+            <com:PhoneNumber>(901) 259-7120</com:PhoneNumber>
+        </com:PhoneNumberBag>
+                                    </com:Contact>
+                                </tmk:NationalCorrespondent>
+                                <tmk:RecordAttorney>
+                                    <tmk:DocketText>123456789123</tmk:DocketText>
+                                    <com:CommentText com:sequenceNumber="1">Attorney of Record</com:CommentText>
+                                </tmk:RecordAttorney>
+                                <com:StaffBag>
+                                    <com:Staff>
+        <com:OfficialTitleText>Examining Attorney</com:OfficialTitleText>
+        <com:StaffName>null</com:StaffName>
+                                    </com:Staff>
+                                </com:StaffBag>
+                                <tmk:MarkEventBag>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>MAILI</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>PAPER RECEIVED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>16</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2020-10-14</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>CHANI</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>APPLICANT/CORRESPONDENCE CHANGES (NON-RESPONSIVE) ENTERED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>15</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2014-02-24</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>COARI</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>TEAS CHANGE OF OWNER ADDRESS RECEIVED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>14</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2014-02-24</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>MAB2O</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>ABANDONMENT NOTICE MAILED - FAILURE TO RESPOND</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>13</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2007-09-25</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>ABN2O</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>ABANDONMENT - FAILURE TO RESPOND OR LATE RESPONSE</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>12</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2007-09-25</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>GNRTO</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>NON-FINAL ACTION E-MAILED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>11</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2007-02-06</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>CNRTR</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>NON-FINAL ACTION  WRITTEN</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>10</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2007-02-06</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>TEMEI</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>TEAS/EMAIL CORRESPONDENCE ENTERED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>9</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-12-27</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>CRFAI</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>CORRESPONDENCE RECEIVED IN LAW OFFICE</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>8</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-12-27</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>TROAI</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>TEAS RESPONSE TO OFFICE ACTION RECEIVED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>7</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-12-27</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>DOCKD</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>ASSIGNED TO EXAMINER</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>6</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-10-10</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>GNRTF</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>NON-FINAL ACTION E-MAILED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>5</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-06-27</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>CNRTR</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>NON-FINAL ACTION  WRITTEN</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>4</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-06-27</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>DOCKD</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>ASSIGNED TO EXAMINER</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>3</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-06-27</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>MDSCO</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>NOTICE OF DESIGN SEARCH CODE MAILED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>2</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-01-13</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                    <tmk:MarkEvent>
+        <tmk:MarkEventCategory>National prosecution history entry</tmk:MarkEventCategory>
+        <tmk:NationalMarkEvent>
+            <tmk:MarkEventCode>NWAPI</tmk:MarkEventCode>
+            <tmk:MarkEventDescriptionText>NEW APPLICATION ENTERED</tmk:MarkEventDescriptionText>
+            <tmk:MarkEventEntryNumber>1</tmk:MarkEventEntryNumber>
+            <tmk:MarkEventAdditionalText>0</tmk:MarkEventAdditionalText>
+        </tmk:NationalMarkEvent>
+        <tmk:MarkEventDate>2006-01-12</tmk:MarkEventDate>
+                                    </tmk:MarkEvent>
+                                </tmk:MarkEventBag>
+                                <tmk:AssignmentBag>
+                                    <tmk:NationalAssignmentTotalQuantity>0</tmk:NationalAssignmentTotalQuantity>
+                                </tmk:AssignmentBag>
+                                <tmk:LegalProceedingsBag>
+                                    <tmk:LegalProceedings/>
+                                </tmk:LegalProceedingsBag>
+                                <tmk:NationalTrademarkInformation>
+                                    <tmk:RegisterCategory>Primary</tmk:RegisterCategory>
+                                    <tmk:ApplicationAbandonedDate>2007-08-07</tmk:ApplicationAbandonedDate>
+                                    <tmk:AmendedPrincipalRegisterIndicator>false</tmk:AmendedPrincipalRegisterIndicator>
+                                    <tmk:AmendedSupplementalRegisterIndicator>false</tmk:AmendedSupplementalRegisterIndicator>
+                                    <tmk:MarkCurrentStatusExternalDescriptionText>Abandoned because the applicant failed to respond or filed a late response to an Office action.  To view all documents in this file, click on the Trademark Document Retrieval link at the top of this page.</tmk:MarkCurrentStatusExternalDescriptionText>
+                                    <tmk:PreviouslyRegisteredMarkPublicationIndicator>false</tmk:PreviouslyRegisteredMarkPublicationIndicator>
+                                    <tmk:ConcurrentUseStatementText>test</tmk:ConcurrentUseStatementText>
+                                    <tmk:FiledAsPlusApplicationIndicator>true</tmk:FiledAsPlusApplicationIndicator>
+                                    <tmk:CurrentlyPlusApplicationIndicator>true</tmk:CurrentlyPlusApplicationIndicator>
+                                    <tmk:FiledAsRfApplicationIndicator>false</tmk:FiledAsRfApplicationIndicator>
+                                    <tmk:CurrentlyRfApplicationIndicator>false</tmk:CurrentlyRfApplicationIndicator>
+                                    <tmk:RegistrationChangeIndicator>false</tmk:RegistrationChangeIndicator>
+                                    <tmk:CertificateCorrectingRegistrationText></tmk:CertificateCorrectingRegistrationText>
+                                    <tmk:NationalCaseLocation>
+        <tmk:LawOfficeAssignedText>LAW OFFICE 107</tmk:LawOfficeAssignedText>
+        <tmk:LawOfficeAssignedDescriptionCode>L70</tmk:LawOfficeAssignedDescriptionCode>
+        <tmk:CurrentLocationText>PETITIONS OFFICE</tmk:CurrentLocationText>
+        <tmk:CurrentLocationCode>450</tmk:CurrentLocationCode>
+        <tmk:CurrentLocationDate>2023-08-30-04:00</tmk:CurrentLocationDate>
+        <tmk:ChargeToLocation>900 - FILE REPOSITORY (FRANCONIA)</tmk:ChargeToLocation>
+        <tmk:PhysicalLocation>900</tmk:PhysicalLocation>
+        <tmk:PhysicalLocationDate>2006-04-29-04:00</tmk:PhysicalLocationDate>
+                                    </tmk:NationalCaseLocation>
+                                </tmk:NationalTrademarkInformation>
+                                <tmk:NationalGoodsServices>
+                                    <tmk:ActiveClassTotalQuantity>1</tmk:ActiveClassTotalQuantity>
+                                    <tmk:NationalClassTotalQuantity>1</tmk:NationalClassTotalQuantity>
+                                </tmk:NationalGoodsServices>
+                                <tmk:NationalFilingBasis>
+                                    <tmk:FilingBasis>
+        <tmk:BasisForeignApplicationIndicator>false</tmk:BasisForeignApplicationIndicator>
+        <tmk:BasisForeignRegistrationIndicator>false</tmk:BasisForeignRegistrationIndicator>
+        <tmk:BasisUseIndicator>true</tmk:BasisUseIndicator>
+        <tmk:BasisIntentToUseIndicator>false</tmk:BasisIntentToUseIndicator>
+        <tmk:NoBasisIndicator>false</tmk:NoBasisIndicator>
+        <tmk:BasisInternationalRegistrationIndicator>false</tmk:BasisInternationalRegistrationIndicator>
+                                    </tmk:FilingBasis>
+                                    <tmk:CurrentBasis>
+        <tmk:BasisForeignApplicationIndicator>false</tmk:BasisForeignApplicationIndicator>
+        <tmk:BasisForeignRegistrationIndicator>false</tmk:BasisForeignRegistrationIndicator>
+        <tmk:BasisUseIndicator>true</tmk:BasisUseIndicator>
+        <tmk:BasisIntentToUseIndicator>false</tmk:BasisIntentToUseIndicator>
+        <tmk:NoBasisIndicator>false</tmk:NoBasisIndicator>
+        <tmk:BasisInternationalRegistrationIndicator>false</tmk:BasisInternationalRegistrationIndicator>
+                                    </tmk:CurrentBasis>
+                                    <tmk:AmendedBasis>
+        <tmk:BasisForeignApplicationIndicator>false</tmk:BasisForeignApplicationIndicator>
+        <tmk:BasisForeignRegistrationIndicator>false</tmk:BasisForeignRegistrationIndicator>
+        <tmk:BasisUseIndicator>false</tmk:BasisUseIndicator>
+        <tmk:BasisIntentToUseIndicator>false</tmk:BasisIntentToUseIndicator>
+                                    </tmk:AmendedBasis>
+                                </tmk:NationalFilingBasis>
+                            </tmk:Trademark>
+                        </tmk:TrademarkBag>
+                    </tmk:TransactionData>
+                </tmk:TransactionContentBag>
+            </tmk:TrademarkTransactionBody>
+        </tmk:Transaction>
+  recorded_at: 2026-10-20T17:13:45.114Z

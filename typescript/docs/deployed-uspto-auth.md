@@ -23,6 +23,12 @@ Secret Manager access can supply this key directly to a bounded test process;
 there is no need to paste it into chat or duplicate it in a local environment
 file. Secret values are excluded from reports and recordings.
 
+A subsequent bounded native Bun Trademark Search probe used the existing WAF
+secret only in subprocess memory and the exact User-Agent from the deployed
+refresh source. One public query returned HTTP200 and one normalized result.
+Its scrubbed response replays offline. This verifies that session from this
+host for one query, not automatic refresh or hosted Cloud Run reliability.
+
 The TypeScript Trademark Search client accepts an external WAF session and a
 trusted refresh callback. Browser acquisition and deployment integration are
 not implemented in the port. Environment-mounted secret values remain fixed

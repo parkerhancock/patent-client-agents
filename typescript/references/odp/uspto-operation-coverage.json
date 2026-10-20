@@ -10,14 +10,40 @@
     "rendered_official_swagger_ui": 29
   },
   "source_symbols_present": 92,
-  "operations_with_recorded_http_200": 72,
-  "operations_with_successful_recording": 73,
+  "operations_with_recorded_http_200": 77,
+  "operations_with_successful_recording": 78,
   "operations_with_declared_redirect_workflow": 1,
   "evidence_limits": [
     "Method symbol presence and test-file links are navigation evidence, not proof of every parameter, content type or error contract.",
     "Direct live evidence is matching method/path HTTP200 interactions; declared bulk HTTP302 followed by approved-host HTTP200 is counted separately as a successful workflow. Replay tests establish semantic validation separately.",
     "Raw PTAB companion bytes and common schema remain unarchived. Rendered operation names verify HTTP method/path, not complete schema resolution.",
     "The main text-to-search entry declares no HTTP operation and is excluded."
+  ],
+  "supplemental_successful_routes": [
+    {
+      "method": "GET",
+      "path": "/ts/cd/rawImage/{serial}",
+      "client": {
+        "class": "TsdrClient",
+        "method": "getImage",
+        "file": "packages/client/src/tsdr.ts"
+      },
+      "outside_declared_operation_denominator": true,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/rawImage/78787878",
+          "cassette": "tests/cassettes/tsdr-live-image.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "image/png;charset=UTF-8"
+          ]
+        }
+      ],
+      "replay_test": "tests/tsdr-live-recordings.test.ts"
+    }
   ],
   "operations": [
     {
@@ -61,6 +87,7 @@
       },
       "contract_anomaly": "Official source nests responses at path-item level; GET description explicitly declares HTTP302.",
       "declared_redirect_status": 302,
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [
         {
@@ -178,6 +205,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/BdssResponseBag"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -307,6 +335,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/BdssResponseProductBag"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -371,6 +400,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -458,6 +488,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -526,6 +557,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -584,6 +616,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -681,6 +714,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -848,6 +882,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -913,6 +948,19 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse"
         }
       },
+      "negative_evidence": [
+        {
+          "method": "GET",
+          "host": "api.uspto.gov",
+          "path": "/api/v1/patent/applications/14412875",
+          "cassette": "tests/cassettes/odp-unauthenticated.yaml",
+          "interaction_index": 0,
+          "http_status": 401,
+          "response_content_type": [
+            "application/json"
+          ]
+        }
+      ],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1054,6 +1102,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1142,6 +1191,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1231,6 +1281,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1330,6 +1381,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1431,6 +1483,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1515,6 +1568,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/DocumentBag"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1668,6 +1722,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1758,6 +1813,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1849,6 +1905,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1902,6 +1959,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -1989,6 +2047,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2057,6 +2116,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2115,6 +2175,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2184,6 +2245,7 @@
           "type": "string"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2261,6 +2323,7 @@
           "type": "string"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2338,6 +2401,7 @@
           "type": "string"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2415,6 +2479,7 @@
           "type": "string"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2531,6 +2596,7 @@
           "$ref": "#/components/schemas/OfficeActionSearchResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2681,6 +2747,30 @@
           "format": "binary"
         }
       },
+      "negative_evidence": [
+        {
+          "method": "GET",
+          "host": "api.uspto.gov",
+          "path": "/api/v1/patent/office-action/search/download",
+          "cassette": "tests/cassettes/odp-office-actions-export-get-csv-invalid-default-fields.yaml",
+          "interaction_index": 0,
+          "http_status": 400,
+          "response_content_type": [
+            "application/json"
+          ]
+        },
+        {
+          "method": "GET",
+          "host": "api.uspto.gov",
+          "path": "/api/v1/patent/office-action/search/download",
+          "cassette": "tests/cassettes/odp-office-actions-export-get-json-invalid-default-fields.yaml",
+          "interaction_index": 0,
+          "http_status": 400,
+          "response_content_type": [
+            "application/json"
+          ]
+        }
+      ],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2792,6 +2882,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -2944,6 +3035,7 @@
           "example": "Claims 1-10 are rejected under 35 U.S.C. 103 as being unpatentable over..."
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3016,6 +3108,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3065,6 +3158,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3122,6 +3216,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3184,6 +3279,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3242,6 +3338,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3293,6 +3390,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3353,6 +3451,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3422,6 +3521,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3473,6 +3573,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3533,6 +3634,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3591,6 +3693,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3638,6 +3741,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3746,6 +3850,7 @@
           "$ref": "#/components/schemas/PetitionDecisionSearchResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3904,6 +4009,7 @@
           "$ref": "#/components/schemas/PetitionDecision"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -3986,6 +4092,7 @@
           "$ref": "#/components/schemas/PetitionDecision"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4077,6 +4184,7 @@
           "$ref": "#/components/schemas/CaseUpdateInfoList"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4102,7 +4210,7 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 188,
+          "line": 212,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4151,6 +4259,7 @@
           "$ref": "#/components/schemas/CaseUpdateInfoList"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4170,7 +4279,7 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 193,
+          "line": 217,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4235,7 +4344,8 @@
           "$ref": "#/components/schemas/TransactionBag"
         }
       },
-      "successful_recording_present": false,
+      "negative_evidence": [],
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
@@ -4259,10 +4369,28 @@
           "line": 350,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 261,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/caseMultiStatus/sn",
+          "cassette": "tests/cassettes/tsdr-live-batch-status.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/json;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
@@ -4299,7 +4427,8 @@
           "$ref": "#/components/schemas/Document"
         }
       },
-      "successful_recording_present": false,
+      "negative_evidence": [],
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
@@ -4321,13 +4450,31 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 216,
+          "line": 240,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 284,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedoc/sn78787878/NOA20070926100613/content.pdf",
+          "cassette": "tests/cassettes/tsdr-live-single-document-content-pdf.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/pdf;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
@@ -4364,6 +4511,19 @@
           "$ref": "#/components/schemas/Document"
         }
       },
+      "negative_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedoc/sn78787878/NOA20070926100613/content.zip",
+          "cassette": "tests/cassettes/tsdr-live-single-document-content-zip.yaml",
+          "interaction_index": 0,
+          "http_status": 429,
+          "response_content_type": [
+            "text/plain;charset=UTF-8"
+          ]
+        }
+      ],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4386,7 +4546,13 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 216,
+          "line": 240,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 284,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4429,6 +4595,19 @@
           "$ref": "#/components/schemas/Document"
         }
       },
+      "negative_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedoc/sn78787878/78787878-NOA/download.pdf",
+          "cassette": "tests/cassettes/tsdr-live-invalid-legacy-document-pdf.yaml",
+          "interaction_index": 0,
+          "http_status": 400,
+          "response_content_type": [
+            "text/plain;charset=UTF-8"
+          ]
+        }
+      ],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4451,7 +4630,13 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 216,
+          "line": 240,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 284,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4506,6 +4691,7 @@
           "$ref": "#/components/schemas/Document"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4528,7 +4714,13 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 216,
+          "line": 240,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 284,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4571,6 +4763,19 @@
           "$ref": "#/components/schemas/Document"
         }
       },
+      "negative_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedoc/sn78787878/78787878-NOA/info",
+          "cassette": "tests/cassettes/tsdr-live-invalid-legacy-document-xml.yaml",
+          "interaction_index": 0,
+          "http_status": 400,
+          "response_content_type": [
+            "text/plain;charset=UTF-8"
+          ]
+        }
+      ],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4590,7 +4795,7 @@
         },
         {
           "file": "tests/tsdr-live-recordings.ts",
-          "line": 211,
+          "line": 235,
           "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
@@ -4651,6 +4856,7 @@
           "$ref": "#/components/schemas/Page"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4666,6 +4872,12 @@
           "file": "tests/assignments-tsdr.test.ts",
           "line": 358,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 293,
+          "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
@@ -4698,6 +4910,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4755,7 +4968,8 @@
           }
         }
       },
-      "successful_recording_present": false,
+      "negative_evidence": [],
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
@@ -4771,10 +4985,28 @@
           "line": 359,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 271,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casedocs/bundle.xml",
+          "cassette": "tests/cassettes/tsdr-live-bundle-xml.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/xml;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": [
         "Official operation omits identifier query parameters; client supplies sn/rn/ir/ref bundles."
       ]
@@ -4804,6 +5036,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4868,6 +5101,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4883,6 +5117,12 @@
           "file": "tests/assignments-tsdr.test.ts",
           "line": 362,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 266,
+          "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
@@ -4922,6 +5162,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -4979,6 +5220,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5036,6 +5278,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5093,6 +5336,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5150,6 +5394,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5212,7 +5457,8 @@
           "$ref": "#/components/schemas/Transaction"
         }
       },
-      "successful_recording_present": false,
+      "negative_evidence": [],
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
@@ -5234,10 +5480,28 @@
           "line": 364,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 256,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casestatus/sn78787878/content.html",
+          "cassette": "tests/cassettes/tsdr-live-status-html.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "text/html;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": []
     },
     {
@@ -5268,6 +5532,7 @@
           "$ref": "#/components/schemas/Transaction"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5286,6 +5551,12 @@
           "file": "tests/assignments-tsdr.test.ts",
           "line": 355,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 302,
+          "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
@@ -5321,6 +5592,7 @@
           "$ref": "#/components/schemas/Transaction"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5339,6 +5611,12 @@
           "file": "tests/assignments-tsdr.test.ts",
           "line": 355,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 302,
+          "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
@@ -5374,6 +5652,7 @@
           "$ref": "#/components/schemas/Transaction"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5392,6 +5671,12 @@
           "file": "tests/assignments-tsdr.test.ts",
           "line": 355,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 302,
+          "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
@@ -5427,6 +5712,7 @@
           "$ref": "#/components/schemas/Transaction"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": false,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5445,6 +5731,12 @@
           "file": "tests/assignments-tsdr.test.ts",
           "line": 355,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 302,
+          "test_title": null,
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
@@ -5480,6 +5772,7 @@
           "$ref": "#/components/schemas/TrademarkTransactionType"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5502,9 +5795,32 @@
           "line": 366,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 246,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 251,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
       "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casestatus/sn78787878/info",
+          "cassette": "tests/cassettes/tsdr-live-status-xml.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/xml;charset=UTF-8"
+          ]
+        },
         {
           "method": "GET",
           "host": "tsdrapi.uspto.gov",
@@ -5550,7 +5866,8 @@
           "$ref": "#/components/schemas/TransactionType"
         }
       },
-      "successful_recording_present": false,
+      "negative_evidence": [],
+      "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
         "class": "TsdrClient",
@@ -5574,10 +5891,34 @@
           "line": 366,
           "test_title": "all 25 archived current TSDR routes have a library request contract",
           "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 246,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
+        },
+        {
+          "file": "tests/tsdr-live-recordings.ts",
+          "line": 251,
+          "test_title": null,
+          "evidence_scope": "direct_method_call; HTTP variant and assertion strength require review"
         }
       ],
-      "live_evidence": [],
-      "live_http_200_recorded": false,
+      "live_evidence": [
+        {
+          "method": "GET",
+          "host": "tsdrapi.uspto.gov",
+          "path": "/ts/cd/casestatus/sn78787878/v1/info",
+          "cassette": "tests/cassettes/tsdr-live-status-legacy-xml.yaml",
+          "interaction_index": 0,
+          "http_status": 200,
+          "response_content_type": [
+            "application/xml;charset=UTF-8"
+          ]
+        }
+      ],
+      "live_http_200_recorded": true,
       "notes": [
         "Official XML view maps to explicit getStatusXml; Python-normalized getStatus uses observed JSON deployment behavior separately."
       ]
@@ -5595,6 +5936,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5680,6 +6022,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5744,6 +6087,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5879,6 +6223,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/PatentDataResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -5928,6 +6273,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6013,6 +6359,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6099,6 +6446,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6209,6 +6557,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6319,6 +6668,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6429,6 +6779,7 @@
           }
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6517,6 +6868,7 @@
           "$ref": "#/components/schemas/OfficeActionSearchResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6610,6 +6962,30 @@
           "format": "binary"
         }
       },
+      "negative_evidence": [
+        {
+          "method": "POST",
+          "host": "api.uspto.gov",
+          "path": "/api/v1/patent/office-action/search/download",
+          "cassette": "tests/cassettes/odp-office-actions-export-post-csv-invalid-default-fields.yaml",
+          "interaction_index": 0,
+          "http_status": 400,
+          "response_content_type": [
+            "application/json"
+          ]
+        },
+        {
+          "method": "POST",
+          "host": "api.uspto.gov",
+          "path": "/api/v1/patent/office-action/search/download",
+          "cassette": "tests/cassettes/odp-office-actions-export-post-json-invalid-default-fields.yaml",
+          "interaction_index": 0,
+          "http_status": 400,
+          "response_content_type": [
+            "application/json"
+          ]
+        }
+      ],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6697,6 +7073,7 @@
           "$ref": "./odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6746,6 +7123,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6801,6 +7179,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6861,6 +7240,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6910,6 +7290,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -6968,6 +7349,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -7017,6 +7399,7 @@
       "response_content_types": null,
       "response_schema_refs": null,
       "contract_limit": "Raw companion specification not archived; method/path visibly confirmed only.",
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -7073,6 +7456,7 @@
           "$ref": "#/components/schemas/PetitionDecisionSearchResponse"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {
@@ -7172,6 +7556,7 @@
           "$ref": "#/components/schemas/PetitionDecision"
         }
       },
+      "negative_evidence": [],
       "successful_recording_present": true,
       "redirect_workflow_evidence": [],
       "client": {

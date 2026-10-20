@@ -1,0 +1,153 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://tmsearch.uspto.gov/prod-stage-v1-0-0/tmsearch
+    headers:
+      user-agent:
+      - >-
+        Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)
+        Chrome/120.0.0.0 Safari/537.36
+    body:
+      type: json
+      content:
+        query:
+          match:
+            wordmark: APPLE
+        size: 1
+        from: 0
+  response:
+    status: 200
+    headers:
+      content-type:
+      - application/json; charset=UTF-8
+    body:
+      type: json
+      content:
+        took: 3
+        timedOut: false
+        shardsTotal: 5
+        shardsSuccessful: 5
+        shardsSkipped: 0
+        shardsFailed: 0
+        hits:
+          totalValue: 4182
+          totalRelation: eq
+          maxScore: 12.777099
+          hits:
+          - index: tmsearch-index
+            type: _doc
+            id: "99551004"
+            score: 12.777099
+            source:
+              abandonDate: null
+              affidavit: []
+              alive: true
+              applicationFormSection12C: false
+              applicationFormSection15: false
+              applicationFormSection8Full10Year: false
+              applicationFormSection8Full6Year: false
+              applicationFormSection8Partial10Year: false
+              assignmentRecorded: false
+              attorney: null
+              brsDocumentText: null
+              cancelDate: null
+              concurrentUse: null
+              coordinatedClass: null
+              currentBasis:
+              - 1b
+              designCode: 071504, 240714, 261701, 261705
+              designCodeDescription:
+              - 07.15.04 - Beams, wood; Lumber; Parquet flooring; Wood boards
+              - 24.07.14 - Plaques
+              - >-
+                26.17.01 - Bands, straight; Bars, straight; Lines, straight; Straight line(s),
+                band(s) or bar(s)
+              - >-
+                26.17.05 - Bands, horizontal; Bars, horizontal; Horizontal line(s), band(s) or
+                bar(s); Lines, horizontal
+              designCount: 4
+              disclaimer: null
+              distinctLimit: null
+              drawingCode: 3
+              drawingCodeDescription: (3) DESIGN PLUS WORDS, LETTERS, AND/OR NUMBERS
+              filedDate: 2025-12-16T00:00:00
+              firstUseAnyDate: null
+              firstUseCommerceDate: null
+              formerRegistration: null
+              goodsAndServices:
+              - "IC 035: Retail store services in the field of furniture and home décor featuring a showroom for the goods of others in the field of furniture, interior furnishings, and home décor products; Retail furniture stores."
+              goodsAndServicesOriginalParagraph: null
+              goodsAndServicesUseDate1: null
+              goodsAndServicesUseDate2: null
+              id: "99551004"
+              internationalClass:
+              - IC 035
+              internationalId: null
+              internationalUSRefNum: null
+              markDescription:
+              - >-
+                The color(s) brown, black, white, purple and gray is/are claimed as a feature
+                of the mark.
+              - >-
+                The mark consists of the word "APPLE APPLE APPLE APPLE" displayed in stylized
+                lettering. The wording appears etched on three rectangular wooden plaques shown in
+                brown at varying angles, with the top most in all capital lettering, stacked on
+                the other two wooden plaques, the left being in all lowercase and the right
+                having the first letter capitalized. Under the stylized wooden plaques is the term
+                fourth "APPLE" in gray in all lowercase on a folded piece of white paper, with a
+                gray paper clip on the right edge. The paper and wooden plaques appear with black
+                shadowing. All the forgoing appearing on a purple felt pattern in front of a black
+                background.
+              markName: null
+              markType:
+              - SERVICE MARK
+              originalBasis:
+              - 1b
+              otherData: []
+              ownerCitizenship: USA
+              ownerCity: Beaverton
+              ownerDBA: null
+              ownerEntity: INDIVIDUAL
+              ownerFullText:
+              - >-
+                (APPLICANT) Charles M. Pfister (INDIVIDUAL; USA) Apple-apple-APPLE; 1256 NW
+                175th Pl, Beaverton, Oregon 97006, UNITED STATES
+              ownerName:
+              - Charles M. Pfister (INDIVIDUAL; USA)
+              ownerNameChange: null
+              ownerOtherName: null
+              ownerStateCountryAddress: Oregon 97006, UNITED STATES
+              ownerType: ORIGINAL APPLICANT
+              physicalFiledDate: null
+              priorityDate: null
+              priorRegistrationIds: null
+              proceedings: null
+              pseudoClass: null
+              pseudoClassCount: 0
+              publishForOppositionDate: null
+              recordLoadDate: 2026-09-30T09:19:04
+              recordSource: data-threaded-20260929-0-65654.jsonl-33946
+              registered: false
+              registrationChanged: false
+              registrationDate: null
+              registrationId: null
+              registrationType:
+              - PRINCIPAL
+              renewalCount: null
+              renewalDate: null
+              renewalOccurence: null
+              series: null
+              standardCharacterClaim: false
+              statusCode: 661
+              statusDescription: RESPONSE AFTER NON-FINAL ACTION - ENTERED
+              supplementalRegistrationDate: null
+              trademarkSearchCode: null
+              translate: null
+              transliteration: null
+              usClass:
+              - 101 100 102.
+              wordmark: APPLE APPLE APPLE APPLE
+              wordmarkAsciiRepresentation: null
+              wordmarkPseudoText: null
+  recorded_at: 2026-10-20T17:14:17.727Z

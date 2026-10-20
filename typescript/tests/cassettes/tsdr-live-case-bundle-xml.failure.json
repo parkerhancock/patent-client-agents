@@ -1,0 +1,10 @@
+{
+  "verified": false,
+  "status": 0,
+  "code": "NETWORK_ERROR",
+  "observed_at": "2026-10-20",
+  "route": "/ts/cd/casedocs/sn78787878/bundle",
+  "timeout_ms": 20000,
+  "max_response_bytes": 4194304,
+  "note": "Bounded live attempt produced no captured HTTP response; not a replayed upstream response."
+}

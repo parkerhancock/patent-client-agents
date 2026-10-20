@@ -1,0 +1,423 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://tsdrapi.uspto.gov/ts/cd/caseMultiStatus/sn?ids=78787878
+    headers:
+      accept:
+      - "*/*"
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors https://*.uspto.gov:*
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Tue, 20 Oct 2026 17:13:40 GMT
+      expires:
+      - "0"
+      keep-alive:
+      - timeout=60
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-l7-reqid:
+      - 000001a105f57907-1f3f71a
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      type: json
+      content:
+        transactionList:
+        - trademarks:
+          - status:
+              staff:
+                examiner:
+                  number: null
+                paralegal: null
+                ituParalegal: null
+                lie: null
+                chargeTo: null
+              correspondence:
+                freeFormAddress: []
+                address:
+                  line1: 1100 Ridgeway Loop Rd, STE 400
+                  city: memphis
+                  region:
+                    stateCountry:
+                      code: TN
+                      name: TENNESSEE
+                    isoRegion:
+                      code: TN
+                      name: TENNESSEE
+                    iso:
+                      code: US
+                      name: UNITED STATES
+                    wipo: null
+                  postalCode: 38120-4058
+                  countryCode: US
+                  countryName: UNITED STATES
+                attorneyName: MICHAEL T EVANGELISTI
+                individualFullName: MICHAEL T EVANGELISTI
+                correspondantPhone: (901) 259-7120
+                correspondantFax: (901) 259-7180
+                correspondantEmail:
+                  authIndicator: "Y"
+                  addresses:
+                  - mte@farris-law.com
+              serialNumber: 78787878
+              designSearchList:
+              - code: 01.01.09
+                descriptions:
+                - Stars, two
+                - Two stars
+              - code: 01.01.13
+                descriptions:
+                - Stars - multiple stars with five points
+              - code: 01.15.03
+                descriptions:
+                - >-
+                  Fire (flames), other than emanating from objects, words, numbers, fireplaces or
+                  candles
+                - >-
+                  Flames, other than flames emanating from objects, words, numbers, fireplaces or
+                  candles
+              - code: 01.15.15
+                descriptions:
+                - Fire (flames), emanating from objects, words or numbers
+              - code: 13.01.02
+                descriptions:
+                - Blow torch
+                - Propane torches
+                - Torches
+                - Welding torch
+              - code: 24.09.07
+                descriptions:
+                - Advertising, banners
+                - Banners
+              - code: 26.01.17
+                descriptions:
+                - Circles, two concentric
+                - Concentric circles, two
+                - Two concentric circles
+              - code: 26.01.21
+                descriptions:
+                - Circles that are totally or partially shaded.
+              - code: 26.03.13
+                descriptions:
+                - Ovals, exactly two (not concentric)
+                - Two ovals
+              - code: 26.03.17
+                descriptions:
+                - Concentric ovals
+                - Concentric ovals and ovals within ovals
+                - Ovals within ovals
+                - Ovals, concentric
+              - code: 26.03.21
+                descriptions:
+                - Ovals that are completely or partially shaded
+              - code: 26.17.01
+                descriptions:
+                - Bands, straight
+                - Bars, straight
+                - Lines, straight
+                - Straight line(s), band(s) or bar(s)
+              - code: 26.17.05
+                descriptions:
+                - Bands, horizontal
+                - Bars, horizontal
+                - Horizontal line(s), band(s) or bar(s)
+                - Lines, horizontal
+              filingDate: 2006-01-09
+              usRegistrationNumber: ""
+              filedAsTeasPlusApp: true
+              currentlyAsTeasPlusApp: true
+              filedAsBaseApp: false
+              currentlyAsBaseApp: false
+              filedAsTeasRfApp: false
+              currentlyAsTeasRfApp: false
+              supplementalRegister: false
+              amendPrincipal: false
+              amendSupplemental: false
+              trademark: false
+              certificationMark: false
+              serviceMark: false
+              collectiveMembershipMark: true
+              collectiveServiceMark: false
+              collectiveTradeMark: false
+              status: 602
+              statusDate: 2007-09-25
+              dateAbandoned: 2007-08-07
+              standardChar: false
+              markDrawingCd: "3"
+              colorDrawingCurr: true
+              section2f: false
+              section2fPartial: false
+              others: false
+              publishedPrevRegMark: false
+              clsTotal: 1
+              filedUse: true
+              filedItu: false
+              filed44d: false
+              filed44e: false
+              filed66a: false
+              filedNoBasis: false
+              useCurr: true
+              ituCurr: false
+              sect44dCurr: false
+              sect44eCurr: false
+              sect66aCurr: false
+              noBasisCurr: false
+              useAmended: false
+              ituAmended: false
+              sect44dAmended: false
+              sect44eAmended: false
+              attrnyDktNumber: "123456789123"
+              sect8Filed: false
+              sect8Acpt: false
+              sect8PartialAcpt: false
+              sect15Filed: false
+              sect15Ack: false
+              sect71Filed: false
+              sect71Acpt: false
+              sect71PartialAcpt: false
+              renewalFiled: false
+              changeInReg: false
+              lawOffAsgnCd: L70
+              currLocationCd: "450"
+              currLocationDt: 2023-08-30
+              chargeToLocation: null
+              phyLocation: null
+              phyLocationDt: null
+              extStatusDesc: >-
+                Abandoned because the applicant failed to respond or filed a late response to
+                an Office action.  To view all documents in this file, click on the Trademark
+                Document Retrieval link at the top of this page.
+              intStatusDesc: null
+              markDrawDesc: AN ILLUSTRATION DRAWING WHICH INCLUDES WORD(S)/ LETTER(S) /NUMBER(S)
+              currentLoc: PETITIONS OFFICE
+              correction: ""
+              colorClaimed: >-
+                The applicant claims color as a feature of the mark, namely, BLACK, BLUE,
+                WHITE, AND RED.
+              concurrentUse: test
+              disclaimer: "\"MEMPHIS ATHLETIC CAMPUS\""
+              descOfMark: >-
+                The mark consists of A large vertically-oriented medium blue oval outlined with
+                thin white and black oval lines with the letters "MAC" in the center written
+                horizontally in black with white and black outlines on the letters with a thin white
+                horizontal stripe above and below the letters with a small black circle
+                intersecting the top of the large oval containing a white torch with three red flames
+                flowing upward with a three-quarter medium blue semi-circle on each side of the
+                torch and with a black ribbon crossing the bottom of the large oval with a medium
+                blue pinstripe at the top and bottom of the ribbon with the words "MEMPHIS ATHLETIC
+                CAMPUS" centered in the ribbon with a single white star on each end of the text
+                and light blue outlines on the ribbon on the ends outside the boundary of the
+                large oval.
+              markElement: MAC MEMPHIS ATHLETIC CAMPUS
+              parentOf: []
+              prevRegNumList: []
+              newLawOffAsgnCd: "107"
+              lawOffAssigned: LAW OFFICE 107
+              tm5Status: 10
+              tm5StatusDesc: DEAD/APPLICATION/Refused/Dismissed or Invalidated
+              tm5StatusDef: >-
+                This trademark application was refused, dismissed, or invalidated by  the
+                Office and this application is no longer active.
+              physicalLocationHistory:
+              - eventDate: 2006-04-29
+                physicalLocation: "900"
+                physicalLocationDescription: FILE REPOSITORY (FRANCONIA)
+              - eventDate: 2006-01-26
+                physicalLocation: MADCD
+                physicalLocationDescription: NO PHYSICAL FILE
+              pseudoMark: null
+            parties:
+              ownerGroups:
+                "10":
+                - serialNumber: 78787878
+                  partyType: 10
+                  partyTypeDescription: ORIGINAL APPLICANT
+                  reelFrame: null
+                  entityNum: 1
+                  entityType:
+                    code: 3
+                    description: CORPORATION
+                  name: MEMPHIS ATHLETIC     CAMPUS FOUNDATION
+                  composedOf: null
+                  dbaAkaFormerly: null
+                  assignment: null
+                  address1: xxx
+                  address2: xxx
+                  city: xxxxx
+                  addressStateCountry:
+                    stateCountry:
+                      code: IL
+                      name: ILLINOIS
+                    isoRegion:
+                      code: IL
+                      name: ILLINOIS
+                    iso:
+                      code: US
+                      name: UNITED STATES
+                    wipo: null
+                  zip: "11111"
+                  citizenship:
+                    stateCountry:
+                      code: TN
+                      name: TENNESSEE
+                    isoRegion:
+                      code: TN
+                      name: TENNESSEE
+                    iso:
+                      code: US
+                      name: UNITED STATES
+                    wipo: null
+            gsList:
+            - serialNumber: 78787878
+              internationalClassPrime: false
+              usClasses:
+              - code: "200"
+                description: Collective Membership Marks
+              internationalClasses:
+              - code: "200"
+                description: Collective Membership Marks
+              pseudoClasses: []
+              statusCode: "6"
+              statusDescription: ACTIVE
+              statusDate: 2020-05-19
+              firstUseDate: null
+              firstUseInCommerceDate: null
+              firstUseDateDescription: null
+              firstUseInCommerceDateDescription: null
+              description: "2020"
+              classBasis: null
+              primeClassCode: "200"
+            foreignInfoList: []
+            prosecutionHistory:
+            - entryNumber: 16
+              entryCode: MAIL
+              entryType: I
+              proceedingNum: 0
+              entryDate: 2020-10-14T04:00:00.000+0000
+              entryDesc: PAPER RECEIVED
+            - entryNumber: 15
+              entryCode: CHAN
+              entryType: I
+              proceedingNum: 0
+              entryDate: 2014-02-24T05:00:00.000+0000
+              entryDesc: APPLICANT/CORRESPONDENCE CHANGES (NON-RESPONSIVE) ENTERED
+            - entryNumber: 14
+              entryCode: COAR
+              entryType: I
+              proceedingNum: 0
+              entryDate: 2014-02-24T05:00:00.000+0000
+              entryDesc: TEAS CHANGE OF OWNER ADDRESS RECEIVED
+            - entryNumber: 13
+              entryCode: MAB2
+              entryType: O
+              proceedingNum: 0
+              entryDate: 2007-09-25T04:00:00.000+0000
+              entryDesc: ABANDONMENT NOTICE MAILED - FAILURE TO RESPOND
+            - entryNumber: 12
+              entryCode: ABN2
+              entryType: O
+              proceedingNum: 0
+              entryDate: 2007-09-25T04:00:00.000+0000
+              entryDesc: ABANDONMENT - FAILURE TO RESPOND OR LATE RESPONSE
+            - entryNumber: 11
+              entryCode: GNRT
+              entryType: O
+              proceedingNum: 0
+              entryDate: 2007-02-06T05:00:00.000+0000
+              entryDesc: NON-FINAL ACTION E-MAILED
+            - entryNumber: 10
+              entryCode: CNRT
+              entryType: R
+              proceedingNum: 0
+              entryDate: 2007-02-06T05:00:00.000+0000
+              entryDesc: NON-FINAL ACTION  WRITTEN
+            - entryNumber: 9
+              entryCode: TEME
+              entryType: I
+              proceedingNum: 0
+              entryDate: 2006-12-27T05:00:00.000+0000
+              entryDesc: TEAS/EMAIL CORRESPONDENCE ENTERED
+            - entryNumber: 8
+              entryCode: CRFA
+              entryType: I
+              proceedingNum: 0
+              entryDate: 2006-12-27T05:00:00.000+0000
+              entryDesc: CORRESPONDENCE RECEIVED IN LAW OFFICE
+            - entryNumber: 7
+              entryCode: TROA
+              entryType: I
+              proceedingNum: 0
+              entryDate: 2006-12-27T05:00:00.000+0000
+              entryDesc: TEAS RESPONSE TO OFFICE ACTION RECEIVED
+            - entryNumber: 6
+              entryCode: DOCK
+              entryType: D
+              proceedingNum: 0
+              entryDate: 2006-10-10T04:00:00.000+0000
+              entryDesc: ASSIGNED TO EXAMINER
+            - entryNumber: 5
+              entryCode: GNRT
+              entryType: F
+              proceedingNum: 0
+              entryDate: 2006-06-27T04:00:00.000+0000
+              entryDesc: NON-FINAL ACTION E-MAILED
+            - entryNumber: 4
+              entryCode: CNRT
+              entryType: R
+              proceedingNum: 0
+              entryDate: 2006-06-27T04:00:00.000+0000
+              entryDesc: NON-FINAL ACTION  WRITTEN
+            - entryNumber: 3
+              entryCode: DOCK
+              entryType: D
+              proceedingNum: 0
+              entryDate: 2006-06-27T04:00:00.000+0000
+              entryDesc: ASSIGNED TO EXAMINER
+            - entryNumber: 2
+              entryCode: MDSC
+              entryType: O
+              proceedingNum: 0
+              entryDate: 2006-01-13T05:00:00.000+0000
+              entryDesc: NOTICE OF DESIGN SEARCH CODE MAILED
+            - entryNumber: 1
+              entryCode: NWAP
+              entryType: I
+              proceedingNum: 0
+              entryDate: 2006-01-12T05:00:00.000+0000
+              entryDesc: NEW APPLICATION ENTERED
+            relationshipBundleList:
+            - internationalRegistrationNumber: " "
+              referenceNumber: A3141234
+              serialNumber: 78787878
+            internationalData: false
+            publication:
+              serialNumber: 78787878
+              officialGazettes: []
+            divisional:
+              serialNumber: 78787878
+              childOf: null
+              parentOfList: []
+          searchId: "78787878"
+        oversized: false
+        size: 1
+  recorded_at: 2026-10-20T17:13:47.952Z

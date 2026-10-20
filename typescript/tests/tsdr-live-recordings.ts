@@ -1,6 +1,10 @@
+import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { bodyToBuffer, Cassette, RecordMode } from "cassetter";
-import type { ClientOptions } from "../packages/client/src/transport.js";
+import {
+  ApiError,
+  type ClientOptions,
+} from "../packages/client/src/transport.js";
 import { TsdrClient } from "../packages/client/src/tsdr.js";
 
 const serial = "78787878"; // Existing real Python TSDR cassette case.
@@ -26,7 +30,19 @@ async function recording<T>(
   run: (client: TsdrClient) => Promise<T>,
 ) {
   const path = resolve(import.meta.dir, "cassettes", `tsdr-live-${name}.yaml`);
-  const record = key !== undefined;
+  const failurePath = path.replace(/\.yaml$/, ".failure.json");
+  if (existsSync(failurePath)) {
+    const failure = (await Bun.file(failurePath).json()) as {
+      status: number;
+      code: string;
+    };
+    throw new ApiError(
+      "Previously recorded bounded check produced no HTTP response.",
+      failure.status,
+      failure.code,
+    );
+  }
+  const record = key !== undefined && !existsSync(path);
   const cassette = new Cassette(path, {
     recordMode: record ? RecordMode.ALL : RecordMode.NONE,
     matchConfig: { matchOn: ["method", "uri"] },
@@ -48,11 +64,19 @@ async function recording<T>(
             `/ts/cd/casestatus/sn${serial}/info`,
             `/ts/cd/casedocs/sn${serial}/info`,
             `/ts/cd/rawImage/${serial}`,
+            `/ts/cd/casestatus/sn${serial}/v1/info`,
+            `/ts/cd/casestatus/sn${serial}/content.html`,
+            `/ts/cd/casedocs/sn${serial}/bundle`,
+            "/ts/cd/casedocs/bundle.xml",
+            "/ts/cd/caseMultiStatus/sn",
             "/last-update/info.xml",
             "/last-update/info.json",
           ].includes(url.pathname) ||
           new RegExp(
-            `^/ts/cd/casedoc/sn${serial}/[A-Z]+[0-9]{14}/(info|download[.]pdf)$`,
+            `^/ts/cd/casedoc/sn${serial}/[A-Z]+[0-9]{14}/(info|(content|download)[.](pdf|zip)|1/media)$`,
+          ).test(url.pathname) ||
+          new RegExp(
+            `^/ts/cd/casestatus/sn${serial}/(content|download)[.](pdf|zip)$`,
           ).test(url.pathname)
         )
       )
@@ -145,11 +169,13 @@ export async function tsdrFeatureRecordings(
   report: (value: TsdrOutcome) => void = () => {},
 ) {
   const outcomes: TsdrOutcome[] = [];
+  let stopped = false;
   async function step<T>(
     name: string,
     run: (client: TsdrClient) => Promise<T>,
     summarize: (result: T) => Partial<TsdrOutcome>,
   ) {
+    if (stopped) return undefined;
     try {
       const result = await recording(name, key, run);
       const outcome = { name, verified: true, ...summarize(result) };
@@ -167,9 +193,7 @@ export async function tsdrFeatureRecordings(
       outcomes.push(outcome);
       report(outcome);
       if (e.status === 401 || e.status === 403 || e.status === 429)
-        throw new Error(
-          "TSDR authorization or rate limit stopped bounded checks.",
-        );
+        stopped = true;
       return undefined;
     }
   }
@@ -217,5 +241,66 @@ export async function tsdrFeatureRecordings(
       (r) => ({ bytes: r.data.length }),
     );
   }
+  await step(
+    "status-xml",
+    (c) => c.getStatusXml(serial),
+    (r) => ({ bytes: r.data.length }),
+  );
+  await step(
+    "status-legacy-xml",
+    (c) => c.getStatusXml(serial, { legacy: true }),
+    (r) => ({ bytes: r.data.length }),
+  );
+  await step(
+    "status-html",
+    (c) => c.getStatusHtml(serial),
+    (r) => ({ bytes: r.data.length }),
+  );
+  await step(
+    "batch-status",
+    (c) => c.batchStatus([serial], { timeoutMs: 20_000 }),
+    () => ({}),
+  );
+  await step(
+    "case-bundle-xml",
+    (c) => c.getCaseBundleXml(serial),
+    (r) => ({ bytes: r.data.length }),
+  );
+  await step(
+    "bundle-xml",
+    (c) => c.getBundleXml([serial]),
+    (r) => ({ bytes: r.data.length }),
+  );
+  if (doc?.docId) {
+    const documentId = doc.docId;
+    for (const [delivery, format] of [
+      ["content", "pdf"],
+      ["content", "zip"],
+      ["download", "zip"],
+    ] as const)
+      await step(
+        `single-document-${delivery}-${format}`,
+        (c) =>
+          c.downloadDocument(serial, documentId, {
+            delivery,
+            format,
+            timeoutMs: 20_000,
+          }),
+        (r) => ({ bytes: r.data.length }),
+      );
+    await step(
+      "single-document-page",
+      (c) => c.getDocumentPage(serial, documentId, "1"),
+      (r) => ({ bytes: r.data.length }),
+    );
+  }
+  for (const delivery of ["content", "download"] as const)
+    for (const format of ["pdf", "zip"] as const)
+      await step(
+        `status-${delivery}-${format}`,
+        (c) =>
+          c.downloadStatus(serial, { delivery, format, timeoutMs: 20_000 }),
+        (r) => ({ bytes: r.data.length }),
+      );
   return outcomes;
 }

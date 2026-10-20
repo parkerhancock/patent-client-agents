@@ -24,8 +24,8 @@ they do not certify every parameter, response shape, or error condition.
 | `PtabAppealsClient` | 6 | 6 | 6 |
 | `PtabInterferencesClient` | 6 | 6 | 6 |
 | `PtabTrialsClient` | 17 | 17 | 17 |
-| `TsdrClient` | 25 | 6 | 6 |
-| Total | 92 | 72 | 73 |
+| `TsdrClient` | 25 | 11 | 11 |
+| Total | 92 | 77 | 78 |
 
 Successful recordings include direct HTTP 200 and the bulk-file operation's
 explicitly described HTTP 302 followed by a recorded HTTP 200 ZIP download from
@@ -36,15 +36,14 @@ HTTP 200 recordings are matching method/path observations, not proof that every
 response is semantically correct. The linked replay tests supply semantic
 assertions separately. Distinct content formats on one method/path are one
 operation in this table; format-specific behavior still needs its own tests.
-Seven fresh authenticated TSDR requests replay successfully: status JSON,
-document list XML, last-update JSON/XML, image bytes, and single-document
-XML/PDF. Six match operations in the current 25-operation TSDR entry definition;
-`GET /ts/cd/rawImage/{serial}` is a supported extra route outside that definition.
-The remaining 19 declared TSDR method/path operations lack matching successful
-recordings. The current status path's recorded response is JSON; this does not
-validate the XML representation advertised by the schema for the same path.
-Two upstream HTTP 400 receipts for invalid document identifiers are negative
-evidence and do not count toward success.
+Thirteen fresh authenticated TSDR HTTP 200 captures cover 11 of the 25 declared
+operations, with both JSON and XML recorded for the current status path.
+`GET /ts/cd/rawImage/{serial}` is the additional successful route outside that
+entry definition. The remaining 14 declared TSDR method/path operations lack
+matching successful recordings. HTTP 400 receipts for invalid document
+identifiers and the HTTP 429 for single-document content ZIP are negative
+evidence and do not count toward success. Further live requests stopped at
+the first 429. A no-response case-bundle probe also supplies no success proof.
 
 The binary application download workflow, PPUBS, Assignment Center, and
 Trademark Search have separate parity/recording evidence because these eight
@@ -144,15 +143,15 @@ a cassette does not establish that it has been committed.
 | `GET /api/v1/petition/decisions/{petitionDecisionRecordIdentifier}` | [PetitionsClient.get](../packages/client/src/petitions.ts) | Raw | [odp-features-petitions-get-search.yaml](../tests/cassettes/odp-features-petitions-get-search.yaml); [odp-features-petitions-identifier.yaml](../tests/cassettes/odp-features-petitions-identifier.yaml) |
 | `GET /last-update/info.json` | [TsdrClient.getStatusJson](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-last-update-json.yaml](../tests/cassettes/tsdr-live-last-update-json.yaml) |
 | `GET /last-update/info.xml` | [TsdrClient.getLastUpdateXml](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-last-update-xml.yaml](../tests/cassettes/tsdr-live-last-update-xml.yaml) |
-| `GET /ts/cd/caseMultiStatus/{type}` | [TsdrClient.batchStatus](../packages/client/src/tsdr.ts) | Raw | Not recorded |
-| `GET /ts/cd/casedoc/{caseid}/{docid}/content.pdf` | [TsdrClient.downloadDocument](../packages/client/src/tsdr.ts) | Raw | Not recorded |
+| `GET /ts/cd/caseMultiStatus/{type}` | [TsdrClient.batchStatus](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-batch-status.yaml](../tests/cassettes/tsdr-live-batch-status.yaml) |
+| `GET /ts/cd/casedoc/{caseid}/{docid}/content.pdf` | [TsdrClient.downloadDocument](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-single-document-content-pdf.yaml](../tests/cassettes/tsdr-live-single-document-content-pdf.yaml) |
 | `GET /ts/cd/casedoc/{caseid}/{docid}/content.zip` | [TsdrClient.downloadDocument](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casedoc/{caseid}/{docid}/download.pdf` | [TsdrClient.downloadDocument](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-single-document-pdf.yaml](../tests/cassettes/tsdr-live-single-document-pdf.yaml) |
 | `GET /ts/cd/casedoc/{caseid}/{docid}/download.zip` | [TsdrClient.downloadDocument](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casedoc/{caseid}/{docid}/info` | [TsdrClient.getDocumentInfoXml](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-single-document-xml.yaml](../tests/cassettes/tsdr-live-single-document-xml.yaml) |
 | `GET /ts/cd/casedoc/{caseid}/{docid}/{pageid}/media` | [TsdrClient.getDocumentPage](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casedocs/bundle.pdf` | [TsdrClient.downloadBundle](../packages/client/src/tsdr.ts) | Raw | Not recorded |
-| `GET /ts/cd/casedocs/bundle.xml` | [TsdrClient.getBundleXml](../packages/client/src/tsdr.ts) | Raw | Not recorded |
+| `GET /ts/cd/casedocs/bundle.xml` | [TsdrClient.getBundleXml](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-bundle-xml.yaml](../tests/cassettes/tsdr-live-bundle-xml.yaml) |
 | `GET /ts/cd/casedocs/bundle.zip` | [TsdrClient.downloadBundle](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casedocs/{caseid}/bundle` | [TsdrClient.getCaseBundleXml](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casedocs/{caseid}/content.pdf` | [TsdrClient.downloadCaseDocuments](../packages/client/src/tsdr.ts) | Raw | Not recorded |
@@ -160,13 +159,13 @@ a cassette does not establish that it has been committed.
 | `GET /ts/cd/casedocs/{caseid}/download.pdf` | [TsdrClient.downloadCaseDocuments](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casedocs/{caseid}/download.zip` | [TsdrClient.downloadCaseDocuments](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casedocs/{caseid}/info` | [TsdrClient.getDocumentsXml](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-documents.yaml](../tests/cassettes/tsdr-live-documents.yaml) |
-| `GET /ts/cd/casestatus/{caseid}/content.html` | [TsdrClient.getStatusHtml](../packages/client/src/tsdr.ts) | Raw | Not recorded |
+| `GET /ts/cd/casestatus/{caseid}/content.html` | [TsdrClient.getStatusHtml](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-status-html.yaml](../tests/cassettes/tsdr-live-status-html.yaml) |
 | `GET /ts/cd/casestatus/{caseid}/content.pdf` | [TsdrClient.downloadStatus](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casestatus/{caseid}/content.zip` | [TsdrClient.downloadStatus](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casestatus/{caseid}/download.pdf` | [TsdrClient.downloadStatus](../packages/client/src/tsdr.ts) | Raw | Not recorded |
 | `GET /ts/cd/casestatus/{caseid}/download.zip` | [TsdrClient.downloadStatus](../packages/client/src/tsdr.ts) | Raw | Not recorded |
-| `GET /ts/cd/casestatus/{caseid}/info` | [TsdrClient.getStatusXml](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-status.yaml](../tests/cassettes/tsdr-live-status.yaml) |
-| `GET /ts/cd/casestatus/{caseid}/v1/info` | [TsdrClient.getStatusXml](../packages/client/src/tsdr.ts) | Raw | Not recorded |
+| `GET /ts/cd/casestatus/{caseid}/info` | [TsdrClient.getStatusXml](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-status-xml.yaml](../tests/cassettes/tsdr-live-status-xml.yaml); [tsdr-live-status.yaml](../tests/cassettes/tsdr-live-status.yaml) |
+| `GET /ts/cd/casestatus/{caseid}/v1/info` | [TsdrClient.getStatusXml](../packages/client/src/tsdr.ts) | Raw | [tsdr-live-status-legacy-xml.yaml](../tests/cassettes/tsdr-live-status-legacy-xml.yaml) |
 | `POST /api/v1/patent/appeals/decisions/search` | [PtabAppealsClient.search](../packages/client/src/ptab.ts) | UI | [odp-ptab-appeals.yaml](../tests/cassettes/odp-ptab-appeals.yaml) |
 | `POST /api/v1/patent/appeals/decisions/search/download` | [PtabAppealsClient.downloadFile](../packages/client/src/ptab.ts) | UI | [odp-features-appeals-post-json.yaml](../tests/cassettes/odp-features-appeals-post-json.yaml) |
 | `POST /api/v1/patent/applications/search` | [ApplicationsClient.search](../packages/client/src/applications.ts) | Raw | [odp-application-granted-claims.yaml](../tests/cassettes/odp-application-granted-claims.yaml); [odp-search.yaml](../tests/cassettes/odp-search.yaml) |
