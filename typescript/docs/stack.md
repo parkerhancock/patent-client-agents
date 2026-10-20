@@ -14,7 +14,7 @@ of an independent security audit or complete production readiness.
 | Remote identity | External OAuth/OIDC provider, JWT/JWKS verification | Require expected issuer, audience, expiration and explicit read scopes |
 | Tests | `bun test`, watch mode | Source execution; scoped tests during iteration |
 | HTTP recordings | Cassetter 0.11.0 | Replay only by default; explicit recording, secret filtering |
-| Offline outline corpora | Bun SQLite/FTS5 plus native Zstandard decoding | Exact-byte SHA-256 verification, read-only snapshots, separate maintenance acquisition and explicit freshness |
+| Offline outline corpora | Bun SQLite/FTS5 plus native Zstandard decoding | Whole-file Zstd, file and decoded SHA-256 pins, bounded in-memory read-only snapshots and explicit source freshness |
 | File-history archives | fflate 0.8.3 | ZIP assembly in the MCP package; bounded document bytes and manifest hashes |
 | Formatting and lint | Biome | Deterministic checks, no parallel formatting conventions |
 | Future CPU work | Rust compiled to WebAssembly | Optional measured extraction, no native addon required by the client |
@@ -31,6 +31,8 @@ MPEP is the first offline corpus reference. Its library/MCP runtime is Bun-only,
 with no browser, Python subprocess or decoder dependency. Maintenance reuses
 the existing Python builder outside requests. See [MPEP setup](mpep.md) for
 standalone artifact preparation, bounded memory use and source-time provenance.
+Use the shared [corpus pattern](corpus-pattern.md) for whole-file Zstandard
+packaging and independent distributed-file/decoded-database pins.
 
 Connector behavior follows [CONNECTOR_STANDARDS.md](../../CONNECTOR_STANDARDS.md).
 The Python-only scaffolding requirement is implemented in this port with one

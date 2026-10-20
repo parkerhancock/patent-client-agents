@@ -37,7 +37,10 @@ const searchOptions = z.object({
 
 export interface MpepClientOptions {
   corpusPath?: string;
+  /** SHA-256 of the decoded standalone SQLite bytes; also MPEP_CORPUS_SHA256. */
   expectedSha256?: string;
+  /** SHA-256 of the file as distributed on disk; also MPEP_CORPUS_FILE_SHA256. */
+  expectedFileSha256?: string;
   maxSectionBytes?: number;
 }
 export type MpepSearchOptions = z.input<typeof searchOptions> & {
@@ -62,6 +65,8 @@ export interface MpepCorpusStatus {
   build_id: string | null;
   interim_updates_coverage: string;
   artifact_sha256: string | null;
+  file_sha256: string | null;
+  compression: "none" | "zstd" | null;
   source_url: string;
   metadata: Record<string, string>;
   release_check: typeof MPEP_RELEASE_CHECK & {
@@ -160,6 +165,15 @@ export class MpepClient {
             .string()
             .regex(/^[a-f\d]{64}$/i)
             .parse(configuredSha256);
+    const configuredFileSha256 =
+      options.expectedFileSha256 ?? process.env.MPEP_CORPUS_FILE_SHA256;
+    const expectedFileSha256 =
+      configuredFileSha256 === undefined
+        ? undefined
+        : z
+            .string()
+            .regex(/^[a-f\d]{64}$/i)
+            .parse(configuredFileSha256);
     const maxSectionBytes = z
       .number()
       .int()
@@ -171,6 +185,7 @@ export class MpepClient {
       path,
       maxSectionBytes,
       ...(expectedSha256 ? { expectedSha256 } : {}),
+      ...(expectedFileSha256 ? { expectedFileSha256 } : {}),
     });
   }
 
@@ -194,6 +209,8 @@ export class MpepClient {
       build_id: metadata.build_id ?? null,
       interim_updates_coverage: metadata.interim_updates_coverage ?? "unknown",
       artifact_sha256: this.corpus.sha256,
+      file_sha256: this.corpus.fileSha256,
+      compression: this.corpus.compression,
       source_url: source,
       metadata,
       release_check: {

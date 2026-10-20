@@ -10,24 +10,35 @@ let artifact: string | undefined;
 try {
   const args = Bun.argv.slice(2);
   if (
-    args.length !== 4 ||
+    (args.length !== 4 && args.length !== 6) ||
     args[0] !== "--corpus" ||
     args[2] !== "--sha256" ||
     !args[1] ||
-    !/^[a-f\d]{64}$/i.test(args[3] ?? "")
+    !/^[a-f\d]{64}$/i.test(args[3] ?? "") ||
+    (args.length === 6 &&
+      (args[4] !== "--file-sha256" || !/^[a-f\d]{64}$/i.test(args[5] ?? "")))
   )
     throw new Error();
   const corpusPath = args[1];
-  const expectedSha256 = args[3] as string;
-  const library = new MpepClient({ corpusPath, expectedSha256 });
+  const expectedSha256 = (args[3] as string).toLowerCase();
+  const expectedFileSha256 = args[5];
+  const library = new MpepClient({
+    corpusPath,
+    expectedSha256,
+    ...(expectedFileSha256 ? { expectedFileSha256 } : {}),
+  });
   let contentHash: string;
   let version: string;
+  let fileHash: string | null;
+  let compression: string | null;
   try {
     stage = "corpus";
     const status = await library.getCorpusStatus();
     if (!status.available || status.artifact_sha256 !== expectedSha256)
       throw new Error();
     version = status.corpus_version;
+    fileHash = status.file_sha256;
+    compression = status.compression;
     stage = "library";
     const result = await library.search({ query: "patent", limit: 1 });
     const section = await library.getSection("2106");
@@ -39,6 +50,9 @@ try {
   // Exercise default server wiring rather than an injected corpus client.
   process.env.MPEP_CORPUS_PATH = corpusPath;
   process.env.MPEP_CORPUS_SHA256 = expectedSha256;
+  if (expectedFileSha256)
+    process.env.MPEP_CORPUS_FILE_SHA256 = expectedFileSha256;
+  else delete process.env.MPEP_CORPUS_FILE_SHA256;
   const server = createServer();
   try {
     stage = "mcp";
@@ -84,6 +98,9 @@ try {
       verified,
       stage,
       corpus_version: version,
+      artifact_sha256: expectedSha256,
+      file_sha256: fileHash,
+      compression,
       section_html_sha256: contentHash,
     }),
   );

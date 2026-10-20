@@ -47,7 +47,83 @@ export interface OutlineHit extends Omit<OutlineRow, "html" | "text"> {
 export interface OutlineOptions {
   path: string;
   expectedSha256?: string;
+  expectedFileSha256?: string;
   maxSectionBytes: number;
+}
+
+/** Validate one complete standard frame before Bun's permissive native decoder.
+ * Frame layout: https://github.com/facebook/zstd/blob/dev/doc/zstd_compression_format.md
+ */
+function zstdEnvelope(bytes: Buffer, maxBytes: number) {
+  const invalid = () =>
+    new CorpusError(
+      "DECOMPRESSION_FAILED",
+      "The corpus must contain one complete standard Zstandard frame.",
+    );
+  const requireBytes = (offset: number, count: number) => {
+    if (offset + count > bytes.length) throw invalid();
+  };
+  requireBytes(4, 1);
+  const descriptor = bytes[4] ?? 0;
+  if (descriptor & 8) throw invalid();
+  const single = Boolean(descriptor & 32);
+  let offset = 5;
+  let windowSize = 0;
+  if (!single) {
+    requireBytes(offset, 1);
+    const window = bytes[offset++] ?? 0;
+    const base = 2 ** (10 + (window >> 3));
+    windowSize = base + (base / 8) * (window & 7);
+  }
+  const dictionarySize = [0, 1, 2, 4][descriptor & 3] ?? 0;
+  requireBytes(offset, dictionarySize);
+  if (dictionarySize && bytes.readUIntLE(offset, dictionarySize) !== 0)
+    throw invalid();
+  offset += dictionarySize;
+  const sizeFlag = descriptor >> 6;
+  const sizeBytes = sizeFlag ? 2 ** sizeFlag : single ? 1 : 0;
+  requireBytes(offset, sizeBytes);
+  const contentSize =
+    sizeBytes === 8
+      ? bytes.readBigUInt64LE(offset)
+      : sizeBytes
+        ? BigInt(
+            bytes.readUIntLE(offset, sizeBytes) + (sizeBytes === 2 ? 256 : 0),
+          )
+        : null;
+  offset += sizeBytes;
+  if (single) windowSize = Number(contentSize);
+  if (
+    (contentSize !== null && contentSize > BigInt(maxBytes)) ||
+    windowSize > maxBytes
+  )
+    throw new CorpusError(
+      "CORPUS_TOO_LARGE",
+      "Decoded corpus artifacts and Zstandard windows must not exceed 256 MiB.",
+    );
+  const maxBlockSize = Math.min(windowSize, 128 * 1024);
+  while (true) {
+    requireBytes(offset, 3);
+    const block = bytes.readUIntLE(offset, 3);
+    offset += 3;
+    const type = (block >> 1) & 3;
+    const length = block >>> 3;
+    if (type === 3 || length > maxBlockSize) throw invalid();
+    requireBytes(offset, type === 1 ? 1 : length);
+    offset += type === 1 ? 1 : length;
+    if (block & 1) break;
+  }
+  let checksum: number | null = null;
+  if (descriptor & 4) {
+    requireBytes(offset, 4);
+    checksum = bytes.readUInt32LE(offset);
+    offset += 4;
+  }
+  if (offset !== bytes.length) throw invalid();
+  return {
+    contentSize: contentSize === null ? null : Number(contentSize),
+    checksum,
+  };
 }
 
 /** Shared read-only outline artifact lifecycle; acquisition stays outside runtime. */
@@ -58,6 +134,8 @@ export class OutlineCorpus {
   private dictionaries = new Map<string, Uint8Array>();
   metadata: Record<string, string> = {};
   sha256: string | null = null;
+  fileSha256: string | null = null;
+  compression: "none" | "zstd" | null = null;
   sectionCount: number | null = null;
   constructor(private readonly options: OutlineOptions) {}
 
@@ -93,8 +171,62 @@ export class OutlineCorpus {
         digest.update(chunk);
         chunks.push(chunk);
       }
-      const snapshot = Buffer.concat(chunks, bytes);
-      const sha256 = digest.digest("hex");
+      const encoded = Buffer.concat(chunks, bytes);
+      const fileSha256 = digest.digest("hex");
+      if (
+        this.options.expectedFileSha256 &&
+        fileSha256 !== this.options.expectedFileSha256.toLowerCase()
+      )
+        throw new CorpusError(
+          "CHECKSUM_MISMATCH",
+          "Corpus file SHA-256 does not match its pin.",
+        );
+      const fileCompression = encoded
+        .subarray(0, 4)
+        .equals(Buffer.from([0x28, 0xb5, 0x2f, 0xfd]))
+        ? "zstd"
+        : "none";
+      let snapshot = encoded;
+      if (fileCompression === "zstd") {
+        const frame = zstdEnvelope(encoded, maxArtifactBytes);
+        try {
+          snapshot = zstdDecompressSync(encoded, {
+            maxOutputLength: maxArtifactBytes,
+          });
+        } catch (error) {
+          if (
+            error &&
+            typeof error === "object" &&
+            "code" in error &&
+            error.code === "ERR_BUFFER_TOO_LARGE"
+          )
+            throw new CorpusError(
+              "CORPUS_TOO_LARGE",
+              "Decoded corpus artifacts must not exceed 256 MiB.",
+            );
+          throw new CorpusError(
+            "DECOMPRESSION_FAILED",
+            "The Zstandard corpus file could not be decoded.",
+          );
+        }
+        if (snapshot.length > maxArtifactBytes)
+          throw new CorpusError(
+            "CORPUS_TOO_LARGE",
+            "Decoded corpus artifacts must not exceed 256 MiB.",
+          );
+        if (
+          (frame.contentSize !== null &&
+            snapshot.length !== frame.contentSize) ||
+          (frame.checksum !== null &&
+            Number(Bun.hash.xxHash64(snapshot) & 0xffff_ffffn) !==
+              frame.checksum)
+        )
+          throw new CorpusError(
+            "DECOMPRESSION_FAILED",
+            "The Zstandard corpus file size or checksum is invalid.",
+          );
+      }
+      const sha256 = createHash("sha256").update(snapshot).digest("hex");
       if (
         this.options.expectedSha256 &&
         sha256 !== this.options.expectedSha256.toLowerCase()
@@ -187,6 +319,8 @@ export class OutlineCorpus {
       this.db = db;
       this.metadata = metadata;
       this.sha256 = sha256;
+      this.fileSha256 = fileSha256;
+      this.compression = fileCompression;
       this.sectionCount = count;
       this.dictionaries = dictionaries;
     } catch (error) {
@@ -302,6 +436,8 @@ export class OutlineCorpus {
     this.db = undefined;
     this.metadata = {};
     this.sha256 = null;
+    this.fileSha256 = null;
+    this.compression = null;
     this.sectionCount = null;
     this.dictionaries.clear();
   }

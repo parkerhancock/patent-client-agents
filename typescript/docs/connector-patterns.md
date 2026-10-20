@@ -120,7 +120,10 @@ prove current USPTO guidance. Other checkouts/deployments may lack the artifact.
 The installed legacy schema-2 artifact stores HTML as zstd-compressed blobs
 with a compression dictionary. The port uses Bun's native decoder, supports
 plain/dictionary-compressed cells and keeps the legacy release unknown. Its
-new shared outline lifecycle establishes these practices:
+new shared outline lifecycle establishes these practices. The
+[compressed corpus pattern](corpus-pattern.md) specifies whole-file Zstandard
+distribution, separate file/decoded pins, bounded in-memory loading and unchanged
+source freshness metadata:
 
 1. Inventory [Python schemas](../../src/patent_client_agents/mpep/corpus/schema.py)
    and actual artifacts. Explicitly support a schema or reject it helpfully.

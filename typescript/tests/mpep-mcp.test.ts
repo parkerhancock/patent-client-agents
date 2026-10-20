@@ -32,6 +32,8 @@ async function fixture(denied = false) {
     build_id: "build-one",
     interim_updates_coverage: "not_included",
     artifact_sha256: "a".repeat(64),
+    file_sha256: "a".repeat(64),
+    compression: "none",
     metadata: { source_version: "current" },
     source_url: "https://mpep.uspto.gov",
     release_check: { ...MPEP_RELEASE_CHECK, comparison: "unknown" },
@@ -189,6 +191,9 @@ test("MPEP actual MCP search preserves corpus provenance and binds query/options
       sort: "outline",
       cursor,
     };
+    // Lossless repackaging changes the file, but preserves decoded snapshot identity.
+    api.status.file_sha256 = "c".repeat(64);
+    api.status.compression = "zstd";
     const next = await api.client.callTool<{ more_available: boolean }>(
       "search_mpep",
       parameters,

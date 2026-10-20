@@ -74,6 +74,9 @@ build/sync time and interim-update coverage. Later guidance is not incorporated.
 Appendix/form-paragraph/index extraction granularity is recorded in its manifest;
 root coverage is not a promise of every separately linked child document.
 The older May 21 artifact remains an unknown release after standalone preparation.
+Whole-file Zstandard distribution now reduces the fresh artifact from 48.70 MB
+to 17.01 MB, with independent file/decoded pins and unchanged source metadata.
+The [corpus pattern](corpus-pattern.md) documents bounded in-memory loading.
 See [MPEP setup](mpep.md), [source review](mpep-source-review.md) and
 [connector patterns](connector-patterns.md). Neither artifact was deployed.
 

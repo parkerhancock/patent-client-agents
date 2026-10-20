@@ -42,5 +42,34 @@
   ],
   "source_synced_at": "2026-10-20T18:25:48.837774+00:00",
   "artifact_built_at": "2026-10-20T18:33:27.877973+00:00",
-  "offline_rebuild_preserves_source_retrieval_time": true
+  "offline_rebuild_preserves_source_retrieval_time": true,
+  "whole_file_zstd": {
+    "receipt": "corpus-package.json",
+    "verified_on": "2026-10-20",
+    "file_sha256": "3d862a00c26f5e0c169d41510fae52d5aa86b837df57340b961cfd06747268fa",
+    "decoded_sha256": "1771226e8c16985058fc6673b8ee534e76a04b59d941abe166701b582f244060",
+    "decoded_bytes_unchanged": true,
+    "source_metadata_unchanged": true,
+    "local_checks": [
+      "Library and default MCP search/retrieval",
+      "Section HTML artifact byte equality",
+      "MCP artifact cleanup"
+    ],
+    "linux_checks": {
+      "runtime": "Bun 1.4.3",
+      "platforms": [
+        "linux/arm64",
+        "linux/amd64 (emulated)"
+      ],
+      "network": "disabled",
+      "filesystem": "read-only root and mounted source/artifact",
+      "checks": [
+        "Both configured SHA-256 pins",
+        "Source metadata equality with original build",
+        "FTS snippets",
+        "Dictionary HTML",
+        "Large chapter retrieval"
+      ]
+    }
+  }
 }

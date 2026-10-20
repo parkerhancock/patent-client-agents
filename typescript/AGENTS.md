@@ -7,6 +7,8 @@ Before porting another connector, read `docs/connector-patterns.md` for referenc
 implementations, unrepresented styles and the MPEP corpus prerequisites.
 For corpus work, also read `docs/mpep.md`: runtime reads verified standalone
 snapshots; maintenance builds preserve source retrieval times across rebuilds.
+Follow `docs/corpus-pattern.md` for whole-file Zstandard, separate file/decoded
+checksums and bounded in-memory decoding. Compression never refreshes source dates.
 
 Use Bun 1.4.3 and the committed lockfile. Run `bun install --frozen-lockfile`,
 `bun run check`, and `bun run build`. Use `bun test <file>` or `bun run test:watch`

@@ -9,6 +9,8 @@ current ODP Office Actions and Petition Decisions, and all 25 archived TSDR
 routes. Live verification varies by family; see [port status](docs/port-status.md).
 See the [source review](docs/odp-research.md) and [stack decisions](docs/stack.md).
 For subsequent connectors, read the [patterns and style coverage](docs/connector-patterns.md).
+The shared [compressed corpus pattern](docs/corpus-pattern.md) defines whole-file
+Zstandard, separate file/decoded checksums and bounded in-memory loading.
 The [MPEP corpus connector](docs/mpep.md) establishes read-only SQLite/FTS access,
 compressed HTML decoding and explicit snapshot/release metadata.
 Trademark Search session acquisition runs in a separate optional Bun/Playwright

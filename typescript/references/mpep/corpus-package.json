@@ -1,0 +1,18 @@
+{
+  "file": "mpep.db.zst",
+  "compression": "zstd",
+  "decoded_sha256": "1771226e8c16985058fc6673b8ee534e76a04b59d941abe166701b582f244060",
+  "decoded_bytes": 48697344,
+  "file_sha256": "3d862a00c26f5e0c169d41510fae52d5aa86b837df57340b961cfd06747268fa",
+  "file_bytes": 17014840,
+  "source_first_retrieved_at": "2026-10-20T18:25:21.338965+00:00",
+  "source_last_retrieved_at": "2026-10-20T18:25:48.837774+00:00",
+  "artifact_built_at": "2026-10-20T18:33:27.877973+00:00",
+  "packaging_level": 9,
+  "packaged_on": "2026-10-20",
+  "decoded_database_byte_exact": true,
+  "source_metadata_preserved": true,
+  "source_build_receipt": "corpus-build.json",
+  "reduction_percent": 65.06,
+  "source_database_retained_locally": true
+}

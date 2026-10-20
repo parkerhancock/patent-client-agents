@@ -1,7 +1,8 @@
 # MPEP corpus access
 
 MPEP is the first TypeScript offline corpus connector. The Bun library reads a
-verified SQLite/FTS5 snapshot, including dictionary-compressed HTML. The MCP
+verified SQLite/FTS5 snapshot, including dictionary-compressed HTML. Whole-file
+Zstandard distribution follows the shared [corpus pattern](corpus-pattern.md). The MCP
 adapter adds `search_mpep`, list-accepting `get_mpep_section`, and the protected
 `mpep://corpus/status` resource. No office API key is needed. HTTP access uses
 the existing `uspto:read` scope.
@@ -47,6 +48,11 @@ sections and canonical root documents are not a promise of every possible
 subsection granularity in appendices, form-paragraph books or indexes. Check
 the recorded coverage before relying on a particular document type.
 
+After building, package the standalone database with the Bun command in the
+[corpus pattern](corpus-pattern.md). This preserves the decoded database hash
+and all source freshness metadata. Keep the source database as a local rollback
+copy; runtime needs only the compressed file and trusted configuration pins.
+
 ## Prepare an existing compressed Python artifact
 
 The runtime accepts standalone SQLite files in DELETE journal mode. It rejects
@@ -76,12 +82,15 @@ from its owner rather than expecting this command to include pending WAL data.
 From `typescript/`, configure an absolute artifact path and its manifest pin:
 
 ```sh
-export MPEP_CORPUS_PATH="$PWD/.data/mpep/mpep.db"
-export MPEP_CORPUS_SHA256="THE_ARTIFACT_SHA256_FROM_THE_MANIFEST"
+export MPEP_CORPUS_PATH="$PWD/.data/mpep/mpep.db.zst"
+export MPEP_CORPUS_SHA256="THE_DECODED_SHA256_FROM_THE_PACKAGING_MANIFEST"
+export MPEP_CORPUS_FILE_SHA256="THE_FILE_SHA256_FROM_THE_PACKAGING_MANIFEST"
 bun run --cwd packages/mcp start
 ```
 
-The library also accepts `corpusPath` and `expectedSha256` directly. Explicit
+The library also accepts `corpusPath`, `expectedSha256` (decoded SQLite) and
+`expectedFileSha256` (distributed file) directly. Both pins are optional for
+legacy compatibility; configure both when distributing compressed artifacts. Explicit
 options take precedence over environment values. Without a path, it uses the
 existing Python cache location for compatibility; legacy WAL files still need
 preparation. A missing artifact produces an unavailable status and a useful
@@ -115,8 +124,10 @@ single-use links remain the default alongside authenticated REST.
 
 ## Runtime guarantees and limits
 
-The reader hashes at most 256 MiB of artifact data, then opens exactly those
-bytes as an immutable read-only in-memory SQLite database. It never opens a
+The reader hashes at most 256 MiB of file data, checks the file pin, decodes
+whole-file Zstandard with a separate 256 MiB output bound when present, and
+checks the decoded SQLite pin. It opens exactly those verified decoded bytes
+as an immutable read-only in-memory SQLite database. It never opens a
 second mutable path after verifying the hash, so path replacement and WAL
 replay cannot substitute unverified content. Schema, section count and expected
 FTS layout are validated before the artifact is available. A process keeps its
@@ -150,7 +161,8 @@ versions, freshness and actual MCP behavior. No tests silently crawl USPTO.
 For a full local artifact check from `typescript/`:
 
 ```sh
-bun run verify:mpep --corpus "$MPEP_CORPUS_PATH" --sha256 "$MPEP_CORPUS_SHA256"
+bun run verify:mpep --corpus "$MPEP_CORPUS_PATH" \
+  --sha256 "$MPEP_CORPUS_SHA256" --file-sha256 "$MPEP_CORPUS_FILE_SHA256"
 ```
 
 This verifies library access, default MCP wiring, matching HTML artifact bytes
@@ -167,3 +179,10 @@ and network-disabled Linux ARM64/AMD64 reader checks. The existing compressed
 legacy corpus also passed after explicit preparation and remained an unknown
 release. Rebuilding may change artifact bytes and timestamps; use the new
 manifest's pin rather than copying the historical validation pin.
+
+Whole-file packaging reduced this snapshot from 48,697,344 to 17,014,840 bytes
+(65.06% smaller), with the decoded database hash and source metadata unchanged.
+The [packaging receipt](../references/mpep/corpus-package.json) records both
+identities. The compressed file passed the same default MCP/artifact checks
+and network-disabled Linux ARM64/AMD64 reader checks. The expanded database
+remains a local rollback copy; runtime does not write an expanded file.
