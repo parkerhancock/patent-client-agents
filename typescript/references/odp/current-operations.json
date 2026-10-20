@@ -1,0 +1,376 @@
+{
+  "spec_file": "swagger-2026-10-20.yaml",
+  "sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
+  "retrieved_at": "2026-10-20",
+  "retrieval_method": "Official Swagger UI browser download, copied from browser Downloads/swagger.yaml",
+  "declared_source_url": "https://data.uspto.gov/swagger/swagger.yaml",
+  "portal_release": "5.0",
+  "openapi": "3.0.1",
+  "info_version": "1.0.0",
+  "path_entry_count": 36,
+  "inline_operation_count": 19,
+  "referenced_path_count": 19,
+  "schema_entry_count": 41,
+  "unique_ref_count": 63,
+  "unique_external_refs": [
+    "./odp-common-base.yaml#/components/schemas/ApplicationMetaData",
+    "./odp-common-base.yaml#/components/schemas/Assignment",
+    "./odp-common-base.yaml#/components/schemas/BdssResponseBag",
+    "./odp-common-base.yaml#/components/schemas/BdssResponseProductBag",
+    "./odp-common-base.yaml#/components/schemas/ChildContinuityData",
+    "./odp-common-base.yaml#/components/schemas/DocumentBag",
+    "./odp-common-base.yaml#/components/schemas/EventData",
+    "./odp-common-base.yaml#/components/schemas/ForeignPriority",
+    "./odp-common-base.yaml#/components/schemas/GrantFileMetaData",
+    "./odp-common-base.yaml#/components/schemas/PGPubFileMetaData",
+    "./odp-common-base.yaml#/components/schemas/ParamFacets",
+    "./odp-common-base.yaml#/components/schemas/ParamFields",
+    "./odp-common-base.yaml#/components/schemas/ParamFilters",
+    "./odp-common-base.yaml#/components/schemas/ParamFormat",
+    "./odp-common-base.yaml#/components/schemas/ParamLimit",
+    "./odp-common-base.yaml#/components/schemas/ParamOffset",
+    "./odp-common-base.yaml#/components/schemas/ParamQ",
+    "./odp-common-base.yaml#/components/schemas/ParamRangeFilters",
+    "./odp-common-base.yaml#/components/schemas/ParamSort",
+    "./odp-common-base.yaml#/components/schemas/ParentContinuityData",
+    "./odp-common-base.yaml#/components/schemas/PatentDataResponse",
+    "./odp-common-base.yaml#/components/schemas/PatentDownloadRequest",
+    "./odp-common-base.yaml#/components/schemas/PatentSearchRequest",
+    "./odp-common-base.yaml#/components/schemas/PatentTermAdjustment",
+    "./odp-common-base.yaml#/components/schemas/PetitionDecisionIdentifierResponseBag",
+    "./odp-common-base.yaml#/components/schemas/PetitionDecisionResponseBag",
+    "./odp-common-base.yaml#/components/schemas/RecordAttorney",
+    "./odp-common-base.yaml#/components/schemas/Status413",
+    "./odp-common-base.yaml#/components/schemas/StatusCodeSearchRequest",
+    "./odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse",
+    "./trial-appeal-decisions.yaml#/components/schemas/AppealDecisionDataResponse",
+    "./trial-appeal-decisions.yaml#/components/schemas/patentAppealDataBag",
+    "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search",
+    "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search~1download",
+    "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1{documentIdentifier}",
+    "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1{appealNumber}~1decisions",
+    "./trial-common.yaml#/components/schemas/BadRequest",
+    "./trial-common.yaml#/components/schemas/Forbidden",
+    "./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse",
+    "./trial-common.yaml#/components/schemas/InternalError",
+    "./trial-common.yaml#/components/schemas/NotFound",
+    "./trial-common.yaml#/components/schemas/Status413",
+    "./trial-decisions.yaml#/components/schemas/DecisionDataResponse",
+    "./trial-decisions.yaml#/components/schemas/patentTrialDecisionDataBag",
+    "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search",
+    "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search~1download",
+    "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1{documentIdentifier}",
+    "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1decisions",
+    "./trial-documents.yaml#/components/schemas/DocumentDataResponse",
+    "./trial-documents.yaml#/components/schemas/patentTrialDocumentDataBag",
+    "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search",
+    "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search~1download",
+    "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1{documentIdentifier}",
+    "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1documents",
+    "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search",
+    "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search~1download",
+    "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1{documentIdentifier}",
+    "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1{interferenceNumber}~1decisions",
+    "./trial-proceedings.yaml#/components/schemas/ProceedingDataResponse",
+    "./trial-proceedings.yaml#/components/schemas/patentTrialProceedingDataBag",
+    "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search",
+    "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search~1download",
+    "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1{trialNumber}"
+  ],
+  "external_ref_files": [
+    "./odp-common-base.yaml",
+    "./trial-appeal-decisions.yaml",
+    "./trial-common.yaml",
+    "./trial-decisions.yaml",
+    "./trial-documents.yaml",
+    "./trial-interferences.yaml",
+    "./trial-proceedings.yaml"
+  ],
+  "unresolved_local_refs": [],
+  "unresolved_external_files": [
+    "./odp-common-base.yaml",
+    "./trial-appeal-decisions.yaml",
+    "./trial-common.yaml",
+    "./trial-decisions.yaml",
+    "./trial-documents.yaml",
+    "./trial-interferences.yaml",
+    "./trial-proceedings.yaml"
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/applications/search",
+      "summary": "Search patent applications by supplying json payload",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/search",
+      "summary": "Patent application search by supplying query parameters",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/applications/search/download",
+      "summary": "Download patent data by supplying json payload",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/search/download",
+      "summary": "Patent application search by supplying query parameters",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}",
+      "summary": "Patent application data for a provided application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/meta-data",
+      "summary": "Get patent application meta data",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/adjustment",
+      "summary": "Get patent term adjustment data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/assignment",
+      "summary": "Get patent assignment data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/attorney",
+      "summary": "Get attorney/agent data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/continuity",
+      "summary": "Get continuity data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/foreign-priority",
+      "summary": "Get foreign-priority data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/transactions",
+      "summary": "Get transaction data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/documents",
+      "summary": "Documents details for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/associated-documents",
+      "summary": "Associated (pgpub, grant) documents meta-data for an application",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/status-codes",
+      "summary": "Search patent application status codes and status code description",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/status-codes",
+      "summary": "Search patent application status codes and status code description",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/search",
+      "summary": "Search bulk datasets products by supplying query parameters",
+      "tags": [
+        "Bulk DataSets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/{productIdentifier}",
+      "summary": "Bulk data- find a product by its identifier (shortName)",
+      "tags": [
+        "Bulk DataSets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/files/{productIdentifier}/{fileName}",
+      "summary": "Download bulk data product file",
+      "tags": [
+        "Bulk DataSets"
+      ]
+    }
+  ],
+  "referenced_paths": {
+    "/api/v1/patent/trials/proceedings/search": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search",
+    "/api/v1/patent/trials/proceedings/search/download": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search~1download",
+    "/api/v1/patent/trials/proceedings/{trialNumber}": "./trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1{trialNumber}",
+    "/api/v1/patent/trials/decisions/search": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search",
+    "/api/v1/patent/trials/decisions/search/download": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search~1download",
+    "/api/v1/patent/trials/decisions/{documentIdentifier}": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1{documentIdentifier}",
+    "/api/v1/patent/trials/{trialNumber}/decisions": "./trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1decisions",
+    "/api/v1/patent/trials/documents/search": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search",
+    "/api/v1/patent/trials/documents/search/download": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search~1download",
+    "/api/v1/patent/trials/documents/{documentIdentifier}": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1{documentIdentifier}",
+    "/api/v1/patent/trials/{trialNumber}/documents": "./trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1documents",
+    "/api/v1/patent/appeals/decisions/search": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search",
+    "/api/v1/patent/appeals/decisions/search/download": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search~1download",
+    "/api/v1/patent/appeals/decisions/{documentIdentifier}": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1{documentIdentifier}",
+    "/api/v1/patent/appeals/{appealNumber}/decisions": "./trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1{appealNumber}~1decisions",
+    "/api/v1/patent/interferences/decisions/search": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search",
+    "/api/v1/patent/interferences/decisions/search/download": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search~1download",
+    "/api/v1/patent/interferences/{interferenceNumber}/decisions": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1{interferenceNumber}~1decisions",
+    "/api/v1/patent/interferences/decisions/{documentIdentifier}": "./trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1{documentIdentifier}"
+  },
+  "placeholder_paths": [
+    "/api/v1/patent/applications/text-to-search"
+  ],
+  "comparison_to_historical": {
+    "removed_path_entries": [
+      "/api/v1/petition/decisions/search",
+      "/api/v1/petition/decisions/search/download",
+      "/api/v1/petition/decisions/{petitionDecisionRecordIdentifier}"
+    ],
+    "added_path_entries": [],
+    "notes": [
+      "Petition decision definitions are a separate Swagger UI selection; removal from main spec does not establish API retirement.",
+      "Current schema entries reference companion YAML files; response-shape comparison requires those sources."
+    ]
+  },
+  "swagger_ui_definitions": [
+    "Open Data Portal API",
+    "TSDR API",
+    "Petition Decisions API",
+    "Office Actions API",
+    "USPTO Office Action Rejection API",
+    "USPTO Office Action Text Retrieval API",
+    "USPTO Office Action Citations API",
+    "USPTO Enriched Citation API v3"
+  ],
+  "rendered_additional_definitions": [
+    {
+      "title": "Office Actions API",
+      "info_version": "1.0.0",
+      "openapi": "3.0.3",
+      "source_url": "https://data.uspto.gov/swagger/office-actions.yaml",
+      "retrieved_at": "2026-10-20",
+      "archive": "office-actions-2026-10-20.yaml",
+      "size_bytes": 30138,
+      "sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
+      "source_kind": "Official Swagger UI plain-link browser download",
+      "schema_verified": true,
+      "live_behavior_verified": false,
+      "implemented_in_initial_port": false,
+      "operation_count": 6,
+      "path_count": 4,
+      "schema_count": 15,
+      "unique_ref_count": 32,
+      "unresolved_refs": [],
+      "external_refs": [],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/patent/office-action/search",
+          "summary": "Search office actions by query parameters"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/patent/office-action/search",
+          "summary": "Search office actions by JSON request body"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/patent/office-action/search/download",
+          "summary": "Download office actions by query parameters"
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/patent/office-action/search/download",
+          "summary": "Download office actions by JSON request body"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/patent/office-action/{officeActionRecordIdentifier}",
+          "summary": "Get a single office action by record identifier"
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/patent/office-action/{officeActionRecordIdentifier}/download/officeActionText",
+          "summary": "Download office action text as a plain text file"
+        }
+      ],
+      "schema_names": [
+        "OfficeAction",
+        "OfficeActionFilter",
+        "OfficeActionRange",
+        "OfficeActionSort",
+        "Pagination",
+        "OfficeActionSearchRequest",
+        "OfficeActionDownloadRequest",
+        "FacetValue",
+        "OfficeActionSearchResponse",
+        "OfficeActionDownloadResponse",
+        "Response400",
+        "Response401",
+        "Response403",
+        "Response404",
+        "Response500"
+      ],
+      "upstream_generated_at": "2026-08-06T21:27:37.243116Z",
+      "upstream_generated_from": "odp-office-action-opensearch-index-definition.json"
+    }
+  ],
+  "notes": [
+    "Current main index and separate Office Actions schema are archived; full main schema bundle still awaits seven external companion files.",
+    "Office Actions schema is fully reference-resolved and documents six operations, but no initial TypeScript OA implementation or live behavioral proof is claimed."
+  ]
+}

@@ -11,6 +11,25 @@
 useDefault = true
 
 [[allowlists]]
+description = "Literal YOUR_API_KEY examples in archived official ODP specifications"
+condition = "AND"
+targetRules = ["curl-auth-header"]
+paths = [
+    '''^typescript/references/odp/swagger-2026-10-20\.yaml$''',
+    '''^typescript/references/odp/office-actions-2026-10-20\.yaml$''',
+]
+regexTarget = "line"
+regexes = ['''YOUR_API_KEY''']
+
+[[allowlists]]
+description = "Public GovDelivery bulletin impression tracking token in original source HTML"
+condition = "AND"
+targetRules = ["jwt"]
+paths = ['''^typescript/references/odp/office-action-migration-notice\.html$''']
+regexTarget = "line"
+regexes = ['''relevantBulletinImpressionTrackingUrl: "https://lnks\.gd/i/''']
+
+[[allowlists]]
 description = "Upstream USPTO / JPO / EPO OpenAPI specs and reference bundles"
 paths = [
     '''resources/uspto/uspto_odp_swagger\.yaml''',

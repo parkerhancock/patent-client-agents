@@ -1,0 +1,30 @@
+{
+  "name": "patent-client-agents-typescript",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.4.3",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "record:odp": "bun scripts/record-odp.ts --record",
+    "replay:odp": "bun scripts/record-odp.ts --replay",
+    "typecheck": "tsc -b",
+    "build": "tsc -b",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "check": "bun run lint && bun run typecheck && bun test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@types/bun": "1.4.3",
+    "cassetter": "0.11.0",
+    "typescript": "5.9.3",
+    "@patent-client-agents/client": "workspace:*",
+    "@patent-client-agents/mcp": "workspace:*",
+    "@prefecthq/fastmcp-ts": "1.7.3",
+    "ky": "2.2.0"
+  }
+}

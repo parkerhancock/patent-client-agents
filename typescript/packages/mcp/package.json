@@ -1,0 +1,21 @@
+{
+  "name": "@patent-client-agents/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "bun": "./src/index.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "start": "bun src/cli.ts"
+  },
+  "dependencies": {
+    "@patent-client-agents/client": "workspace:*",
+    "@prefecthq/fastmcp-ts": "1.7.3",
+    "zod": "4.3.6"
+  }
+}

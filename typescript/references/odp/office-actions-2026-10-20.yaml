@@ -1,0 +1,891 @@
+openapi: 3.0.3
+info:
+  title: Office Actions API
+  description: The Office Actions API for searching and downloading USPTO patent office actions data, at no cost - with several ways to do it. To learn about the ODP API Rate Limits, please visit to the <a href="https://data.uspto.gov/apis/api-rate-limits" target="_blank">API Rate Limits page</a>. <br><br> <b>Before proceeding</b>, you must have an ODP API key in order to access these Swagger UI resources. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For more details and steps to generate an API key visit to the <a href="https://data.uspto.gov/apis/getting-started" target="_blank">Getting Started page</a>.<br><br>For example, the request to retrieve a single office action record by it's unique office action record identifier, might look like as below.<br><br><code>curl -X "GET" "https://api.uspto.gov/api/v1/patent/office-action/a1b2c3d4-1234-5678-abcd-ef1234567890" -H "X-API-KEY:YOUR_API_KEY"</code><br><br></br><code>curl -X "POST" "https://api.uspto.gov/api/v1/patent/office-action/search" -H "X-API-KEY:YOUR_API_KEY" -d "{\\"q\\":\\"documentCode:CTNF\\"}"</br></code>
+  version: 1.0.0
+  contact:
+    name: USPTO ODP Team
+    email: api-support@uspto.gov
+  x-generated-at: '2026-08-06T21:27:37.243116Z'
+  x-generated-from: odp-office-action-opensearch-index-definition.json
+servers:
+- url: https://api.uspto.gov
+  description: Office Actions API - Live
+security:
+  - ApiKeyAuth: []
+tags:
+- name: Office Action Search
+  description: Search, retrieve and download USPTO patent office actions.
+paths:
+  /api/v1/patent/office-action/search:
+    x-ip-domain: Patent
+    x-service-type:
+    - Search
+    - Dissemination
+    x-content-type: Office Actions
+    get:
+      summary: Search office actions by query parameters
+      description: Search office actions using query string parameters. All parameters
+        are optional. When no query parameters are supplied, the top 25 office actions
+        sorted by submissionDate desc are returned.
+      operationId: searchOfficeActionsGet
+      tags:
+      - Office Action Search
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/facets'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/filters'
+      - $ref: '#/components/parameters/rangeFilters'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400': &id001
+          $ref: '#/components/responses/BadRequest'
+        '401': &id002
+          $ref: '#/components/responses/Unauthorized'
+        '403': &id003
+          $ref: '#/components/responses/Forbidden'
+        '404': &id004
+          $ref: '#/components/responses/NotFound'
+        '500': &id005
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Search office actions by JSON request body
+      description: Search office actions using a JSON request body. All fields are
+        optional. Empty request body returns the top 25 office actions sorted by submissionDate
+        desc.
+      operationId: searchOfficeActionsPost
+      tags:
+      - Office Action Search
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfficeActionSearchRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchSuccess'
+        '400': *id001
+        '401': *id002
+        '403': *id003
+        '404': *id004
+        '500': *id005
+  /api/v1/patent/office-action/search/download:
+    x-ip-domain: Patent
+    x-service-type:
+    - Search
+    - Dissemination
+    x-content-type: Office Actions
+    get:
+      summary: Download office actions by query parameters
+      description: Download office actions as CSV or JSON using query string parameters.
+        All parameters are optional. Facets are not supported on this endpoint. When
+        no query parameters are supplied, the top 25 office actions sorted by submissionDate
+        desc are returned.
+      operationId: downloadOfficeActionsGet
+      tags:
+      - Office Action Search
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/filters'
+      - $ref: '#/components/parameters/rangeFilters'
+      - $ref: '#/components/parameters/format'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchDownloadSuccess'
+        '400': *id001
+        '401': *id002
+        '403': *id003
+        '404': *id004
+        '500': *id005
+    post:
+      summary: Download office actions by JSON request body
+      description: Download office actions as CSV or JSON using a JSON request body.
+        All fields are optional. Facets are not supported on this endpoint.
+      operationId: downloadOfficeActionsPost
+      tags:
+      - Office Action Search
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfficeActionDownloadRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/SearchDownloadSuccess'
+        '400': *id001
+        '401': *id002
+        '403': *id003
+        '404': *id004
+        '500': *id005
+  /api/v1/patent/office-action/{officeActionRecordIdentifier}:
+    x-ip-domain: Patent
+    x-service-type:
+    - Search
+    - Dissemination
+    x-content-type: Office Actions
+    get:
+      summary: Get a single office action by record identifier
+      description: Retrieve a single office action record by its unique office action
+        record identifier.
+      operationId: getOfficeActionById
+      tags:
+      - Office Action Search
+      parameters:
+      - name: officeActionRecordIdentifier
+        in: path
+        required: true
+        description: Unique office action record identifier.
+        schema:
+          type: string
+        examples:
+          example1:
+            summary: Office action record identifier
+            value: a1b2c3d4-1234-5678-abcd-ef1234567890
+      responses:
+        '200':
+          description: Single office action record retrieved successfully.
+          content:
+            application/json:              
+              schema:
+                 properties:
+                  count:
+                    type: integer
+                    description: Total number of matching records.
+                    example: 1
+                  requestIdentifier:
+                    type: string
+                    format: uuid
+                    description: Unique request identifier for traceability.
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+                  officeActionDataBag:
+                    type: array
+                    description: List of matching office action records.
+                    items:
+                      $ref: '#/components/schemas/OfficeAction'
+        '400': *id001
+        '401': *id002
+        '403': *id003
+        '404': *id004
+        '500': *id005
+  /api/v1/patent/office-action/{officeActionRecordIdentifier}/download/officeActionText:
+    x-ip-domain: Patent
+    x-service-type:
+    - Search
+    - Dissemination
+    x-content-type: Office Actions
+    get:
+      summary: Download office action text as a plain text file
+      description: Downloads the full officeActionText field content for a specific
+        office action record as a plain text file attachment. The file is returned
+        with Content-Disposition header set to attachment.
+      operationId: downloadOfficeActionText
+      tags:
+      - Office Action Search
+      parameters:
+      - name: officeActionRecordIdentifier
+        in: path
+        required: true
+        description: Unique office action record identifier.
+        schema:
+          type: string
+        examples:
+          example1:
+            summary: Office action record identifier
+            value: a1b2c3d4-1234-5678-abcd-ef1234567890
+      responses:
+        '200':
+          $ref: '#/components/responses/TextDownloadSuccess'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+  schemas:
+    OfficeAction:
+      type: object
+      description: A single office action record.
+      properties:
+        applicationNumberText:
+          type: string
+          description: USPTO patent application number.
+          example: '15569871'
+        documentCode:
+          type: string
+          description: Code identifying the type of office action document. Supports
+            exact match, sorting and aggregation.
+          example: CTNF
+        documentCodeDescriptionText:
+          type: string
+          description: Description of the office action document type code. Supports
+            exact match, sorting and aggregation.
+          example: Non-Final Rejection
+        obsoleteDocumentIdentifier:
+          type: string
+          description: Legacy document identifier for the office action.
+          example: ABC123XYZ
+        filingDate:
+          type: string
+          format: date
+          description: Date the office action was filed.
+          example: '2022-04-15'
+        submissionDate:
+          type: string
+          format: date
+          description: Date the office action was submitted.
+          example: '2022-04-20'
+        groupArtUnitNumber:
+          type: integer
+          format: int64
+          description: USPTO group art unit number assigned to the application.
+          example: 1646
+        officeActionText:
+          type: string
+          description: Full text content of the office action. Returns up to 500 characters
+            with search term highlighting.
+          example: Claims 1-10 are rejected under 35 U.S.C. 103 as being unpatentable
+            over...
+        officeActionRecordIdentifier:
+          type: string
+          description: Unique identifier for the office action record.
+          example: a1b2c3d4-1234-5678-abcd-ef1234567890
+        patentNumber:
+          type: string
+          description: USPTO patent number if the application has been granted. Supports
+            exact match, sorting and aggregation.
+          example: '8894782'
+        lastModifiedDateTime:
+          type: string
+          format: date
+          example: 2026-08-10T20:50:02
+          description: Office action lastModifiedDateTime field.
+        rejectionTypeBag:
+          type: array
+          description: List of rejection types cited in this office action.
+          items:
+            type: string
+          example:
+          - 35 U.S.C. 102
+          - 35 U.S.C. 103
+    OfficeActionFilter:
+      type: object
+      description: Exact match filter. Provide the field name from the dataset and
+        one or more values to filter by.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Field name to filter on.
+          example: documentCode
+          enum:
+          - applicationNumberText
+          - documentCode
+          - documentCodeDescriptionText
+          - patentNumber
+          - rejectionTypeBag
+          - groupArtUnitNumber
+        value:
+          type: array
+          items:
+            type: string
+          description: List of values to filter by.
+          example:
+          - CTNF
+    OfficeActionRange:
+      type: object
+      description: Range filter. Provide a field name from the dataset along with
+        valueFrom and valueTo. Date fields must use YYYY-MM-DD format.
+      required:
+      - field
+      properties:
+        field:
+          type: string
+          description: Field name to apply the range filter on.
+          example: filingDate
+          enum:
+          - filingDate
+          - submissionDate
+          - groupArtUnitNumber
+        valueFrom:
+          type: string
+          description: Range start value inclusive. Date format YYYY-MM-DD.
+          example: '2022-01-01'
+        valueTo:
+          type: string
+          description: Range end value inclusive. Date format YYYY-MM-DD.
+          example: '2025-01-01'
+    OfficeActionSort:
+      type: object
+      description: Sort clause. Provide the field to sort by and the sort direction.
+      required:
+      - field
+      - order
+      properties:
+        field:
+          type: string
+          description: Field name to sort by.
+          example: submissionDate
+        order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: Sort direction. Case-insensitive.
+          example: desc
+    Pagination:
+      type: object
+      description: Pagination options for controlling result set size and offset.
+      properties:
+        offset:
+          type: integer
+          format: int32
+          description: Number of records to skip before returning results.
+          default: 0
+          minimum: 0
+          example: 0
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of records to return. Max 500.
+          default: 25
+          minimum: 1
+          maximum: 500
+          example: 25
+    OfficeActionSearchRequest:
+      type: object
+      description: Search request body. All fields are optional. Empty request returns
+        top 25 records sorted by submissionDate desc.
+      properties:
+        q:
+          type: string
+          description: Free-text or advanced Lucene query string. Searches across
+            all searchable fields. Supports boolean (OR/AND/NOT), wildcards (*), phrases
+            ("Non-Final Rejection"), and field-specific queries (documentCode:CTNF).
+          example: documentCode:CTNF
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfficeActionFilter'
+          description: List of exact match filters.
+        rangeFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfficeActionRange'
+          description: List of range filters.
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfficeActionSort'
+          description: Sort order. Defaults to submissionDate desc.
+        fields:
+          type: array
+          items:
+            type: string
+          description: Fields to include in response. Returns all if omitted.
+          example:
+          - officeActionRecordIdentifier
+          - applicationNumberText
+          - documentCode
+          - documentCodeDescriptionText
+          - submissionDate
+          - filingDate
+          - rejectionTypeBag
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        facets:
+          type: array
+          items:
+            type: string
+          description: Fields to aggregate. Not supported on /search/download.
+          example:
+          - documentCode
+          - rejectionTypeBag
+    OfficeActionDownloadRequest:
+      type: object
+      description: Download request body. All fields are optional. Empty request returns
+        top 25 records sorted by submissionDate desc. Facets are not supported on
+        this endpoint.
+      properties:
+        q:
+          type: string
+          description: Free-text or advanced Lucene query string. Searches across
+            all searchable fields.
+          example: documentCode:CTNF
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfficeActionFilter'
+          description: List of exact match filters.
+        rangeFilters:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfficeActionRange'
+          description: List of range filters.
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfficeActionSort'
+          description: Sort order. Defaults to submissionDate desc.
+        fields:
+          type: array
+          items:
+            type: string
+          description: Fields to include in response. Returns all if omitted.
+          example:
+          - officeActionRecordIdentifier
+          - applicationNumberText
+          - documentCode
+          - documentCodeDescriptionText
+          - submissionDate
+          - filingDate
+          - patentNumber
+          - rejectionTypeBag
+          - groupArtUnitNumber
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        format:
+          type: string
+          enum:
+          - csv
+          - json
+          default: csv
+          description: Download file format. 'csv' returns a CSV file attachment.
+            'json' returns a JSON file attachment.
+          example: csv
+    FacetValue:
+      type: object
+      description: A single facet value with its document count.
+      properties:
+        value:
+          type: string
+          description: The facet value.
+          example: CTNF
+        count:
+          type: integer
+          description: Number of records matching this facet value.
+          example: 3455
+    OfficeActionSearchResponse:
+      type: object
+      description: Search response containing matching office action records.
+      properties:
+        count:
+          type: integer
+          description: Total number of matching records.
+          example: 1
+        requestIdentifier:
+          type: string
+          format: uuid
+          description: Unique request identifier for traceability.
+          example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        officeActionDataBag:
+          type: array
+          description: List of matching office action records.
+          items:
+            $ref: '#/components/schemas/OfficeAction'
+        facets:
+          type: object
+          description: Aggregation results per requested facet field.
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/FacetValue'
+          example:
+            documentCode:
+            - value: CTNF
+              count: 3455
+            - value: CTFR
+              count: 1200
+            rejectionTypeBag:
+            - value: 35 U.S.C. 103
+              count: 2100
+            - value: 35 U.S.C. 102
+              count: 1800
+    OfficeActionDownloadResponse:
+      type: object
+      description: Search response containing matching office action records.
+      properties:        
+        officeActionDataBag:
+          type: array
+          description: List of matching office action records.
+          items:
+            type: object
+            description: A single office action record.
+            properties:
+              applicationNumberText:
+                type: string
+                description: USPTO patent application number.
+                example: '15569871'
+              documentCode:
+                type: string
+                description: Code identifying the type of office action document. Supports
+                  exact match, sorting and aggregation.
+                example: CTNF
+              documentCodeDescriptionText:
+                type: string
+                description: Description of the office action document type code. Supports
+                  exact match, sorting and aggregation.
+                example: Non-Final Rejection              
+              submissionDate:
+                type: string
+                format: date
+                description: Date the office action was submitted.
+                example: '2022-04-20'
+              groupArtUnitNumber:
+                type: integer
+                format: int64
+                description: USPTO group art unit number assigned to the application.
+                example: 1646              
+              officeActionRecordIdentifier:
+                type: string
+                description: Unique identifier for the office action record.
+                example: a1b2c3d4-1234-5678-abcd-ef1234567890
+              patentNumber:
+                type: string
+                description: USPTO patent number if the application has been granted. Supports
+                  exact match, sorting and aggregation.
+                example: '8894782'
+              lastModifiedDateTime:
+                type: string
+                format: date
+                example: 2026-08-10T20:50:02
+                description: Office action lastModifiedDateTime field.
+              rejectionTypeBag:
+                type: array
+                description: List of rejection types cited in this office action.
+                items:
+                  type: string
+                example:
+                - 35 U.S.C. 102
+                - 35 U.S.C. 103        
+    
+    Response400:
+      type: object
+      description: Bad Request — the request was invalid or malformed.
+      properties:
+        code:
+          type: integer
+          example: 400
+        error:
+          type: string
+          example: Bad Request
+        errorDetails:
+          type: string
+          example: Invalid request, review office action data request and try again.
+        requestIdentifier:
+          type: string
+          format: uuid
+          example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    Response401:
+      type: object
+      description: Unauthorized — missing or invalid authentication token.
+      properties:
+        code:
+          type: integer
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+        errorDetails:
+          type: string
+          example: Missing or invalid Bearer token. Please provide a valid Authorization
+            header.
+        requestIdentifier:
+          type: string
+          format: uuid
+          example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    Response403:
+      type: object
+      description: Forbidden — authenticated but not authorized to access this resource.
+      properties:
+        code:
+          type: integer
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+        errorDetails:
+          type: string
+          example: You do not have permission to access this resource.
+        requestIdentifier:
+          type: string
+          format: uuid
+          example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    Response404:
+      type: object
+      description: Not Found — no records match the search criteria.
+      properties:
+        code:
+          type: integer
+          example: 404
+        error:
+          type: string
+          example: Not Found
+        errorDetails:
+          type: string
+          example: No matching records found, refine your search criteria and try
+            again.
+        requestIdentifier:
+          type: string
+          format: uuid
+          example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    Response500:
+      type: object
+      description: Internal Server Error — an unexpected error occurred.
+      properties:
+        code:
+          type: integer
+          example: 500
+        error:
+          type: string
+          example: Internal Server Error
+        errorDetails:
+          type: string
+          example: An unexpected error occurred. Please contact the Help Desk.
+        requestIdentifier:
+          type: string
+          format: uuid
+          example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  parameters:
+    q:
+      name: q
+      in: query
+      required: false
+      allowReserved: true
+      schema:
+        type: string
+      description: Free-text or Lucene query. e.g. 'documentCode:CTNF'
+      examples:
+        noSearchText:
+          summary: No conditions
+          value: null
+        exactPhrase:
+          summary: Exact phrase
+          value: Non-Final Rejection
+        booleanAnd:
+          summary: Boolean AND
+          value: CTNF AND 103
+        searchByField:
+          summary: Search by field
+          value: applicationNumberText:15569871
+        booleanOr:
+          summary: Boolean OR
+          value: documentCode:CTNF OR documentCode:CTFR
+        wildcard:
+          summary: Wildcard
+          value: patentNumber:8894*
+        range:
+          summary: Date range
+          value: submissionDate:[2021-08-04 TO 2021-09-04]
+    sort:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Field to sort by followed by sort order. e.g. 'submissionDate desc'
+      examples:
+        noSort:
+          summary: No sort
+          value: null
+        ascending:
+          summary: Ascending
+          value: submissionDate asc
+        descending:
+          summary: Descending
+          value: submissionDate desc
+    offset:
+      name: offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+      description: Position in the dataset to start returning records from.
+      example: 0
+    limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 500
+      description: Maximum number of records to return. Max 500.
+      example: 25
+    facets:
+      name: facets
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-separated field names to aggregate. Not supported on /search/download.
+      examples:
+        noFacets:
+          summary: No facets
+          value: null
+        facetsExample:
+          summary: Facets example
+          value: documentCode,rejectionTypeBag
+    fields:
+      name: fields
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-separated field names to include in the response. Returns
+        all if omitted.
+      examples:
+        allFields:
+          summary: All fields
+          value: null
+        selectedFields:
+          summary: Selected fields
+          value: officeActionRecordIdentifier,applicationNumberText,documentCode,submissionDate
+    filters:
+      name: filters
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter data by providing field name and value pairs.
+      examples:
+        noFilter:
+          summary: No filter
+          value: null
+        singleValueFilter:
+          summary: Single value
+          value: documentCode CTNF
+        multiValueFilter:
+          summary: Multi-value filter
+          value: rejectionTypeBag 35 U.S.C. 102,35 U.S.C. 103
+        dateFilter:
+          summary: Date filter
+          value: filingDate 2023-10-18
+    rangeFilters:
+      name: rangeFilters
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Filter by range of values. Date values must be in YYYY-MM-DD format.
+      examples:
+        noRangeFilter:
+          summary: No range filter
+          value: null
+        dateRangeFilter:
+          summary: Date range filter
+          value: submissionDate 2021-01-01:2025-01-01
+    format:
+      name: format
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - csv
+        - json
+        default: csv
+      description: Download format. Defaults to csv if not specified.
+      examples:
+        csv:
+          summary: CSV format
+          value: csv
+        json:
+          summary: JSON format
+          value: json
+  responses:
+    SearchSuccess:
+      description: Successful search response.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OfficeActionSearchResponse'
+    SearchDownloadSuccess:
+      description: Successful download response.
+      headers:
+        Content-Disposition:
+          schema:
+            type: string
+          description: attachment; filename=office-actions-{timestamp}.json
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OfficeActionDownloadResponse'
+        text/csv:
+          schema:
+            type: string
+            format: binary        
+    TextDownloadSuccess:
+      description: Successful plain text file download.
+      headers:
+        Content-Disposition:
+          schema:
+            type: string
+          description: attachment; filename=officeActionText-{officeActionRecordIdentifier}.txt
+        Content-Type:
+          schema:
+            type: string
+          description: text/plain; charset=utf-8
+      content:
+        text/plain:
+          schema:
+            type: string
+            description: Full text content of the office action returned as a plain
+              text file attachment.
+            example: Claims 1-10 are rejected under 35 U.S.C. 103 as being unpatentable
+              over...
+    BadRequest:
+      description: Bad Request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response400'
+    Unauthorized:
+      description: Unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response401'
+    Forbidden:
+      description: Forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response403'
+    NotFound:
+      description: Not Found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response404'
+    InternalServerError:
+      description: Internal Server Error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Response500'

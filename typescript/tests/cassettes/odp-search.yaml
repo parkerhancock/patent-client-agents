@@ -1,0 +1,85 @@
+version: 1
+interactions:
+- request:
+    method: POST
+    uri: https://api.uspto.gov/api/v1/patent/applications/search
+    headers:
+      accept:
+      - application/json
+      content-type:
+      - application/json
+    body:
+      type: json
+      content:
+        q: applicationNumberText:14412875
+        fields:
+        - applicationNumberText
+        - applicationMetaData.inventionTitle
+        - applicationMetaData.patentNumber
+        - applicationMetaData.earliestPublicationNumber
+        - applicationMetaData.filingDate
+        - applicationMetaData.grantDate
+        - applicationMetaData.applicationStatusCode
+        - applicationMetaData.applicationStatusDescriptionText
+        - applicationMetaData.applicationStatusDate
+        - applicationMetaData.applicationTypeCategory
+        - applicationMetaData.firstApplicantName
+        - applicationMetaData.firstInventorName
+        - applicationMetaData.examinerNameText
+        - applicationMetaData.groupArtUnitNumber
+        - applicationMetaData.docketNumber
+        - applicationMetaData.cpcClassificationBag
+        pagination:
+          offset: 0
+          limit: 1
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - Origin, X-Requested-With, Content-Type, Accept
+      access-control-allow-methods:
+      - OPTIONS,POST,GET
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:14:13 GMT
+      x-amz-apigw-id:
+      - FjP1dE5SIAMFz9g=
+      x-amzn-requestid:
+      - 69db8cea-72b1-47a7-9ebe-9e6afe23881b
+      x-amzn-trace-id:
+      - >-
+        Root=1-6ad79355-11e722a31fc69d1a21dac99f;Parent=11597093a3b528d9;Sampled=0;Lineage=2:33e8fdb8:0
+    body:
+      type: json
+      content:
+        count: 1
+        patentFileWrapperDataBag:
+        - applicationMetaData:
+            applicationStatusCode: 150
+            filingDate: 2015-01-05
+            applicationStatusDescriptionText: Patented Case
+            patentNumber: "10765880"
+            grantDate: 2020-09-08
+            firstApplicantName: BTL Medical Technologies S.R.O.
+            groupArtUnitNumber: "3791"
+            earliestPublicationNumber: US20150157873A1
+            inventionTitle: >-
+              Device For Repetitive Nerve Stimulation In Order To Break Down Fat Tissue Means
+              Of Inductive Magnetic Fields
+            firstInventorName: Tobias Sokolowski
+            cpcClassificationBag:
+            - A61N   2/02
+            - A61N   1/40
+            - A61N   2/006
+            examinerNameText: MATTHEWS, CHRISTINE HOPKINS
+            applicationStatusDate: 2020-08-19
+            docketNumber: "4387.0210001"
+            applicationTypeCategory: REGULAR
+          applicationNumberText: "14412875"
+        requestIdentifier: 69db8cea-72b1-47a7-9ebe-9e6afe23881b
+  recorded_at: 2026-10-20T16:14:13.792Z

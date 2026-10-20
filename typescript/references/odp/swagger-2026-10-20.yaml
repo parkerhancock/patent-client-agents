@@ -1,0 +1,2143 @@
+openapi: 3.0.1
+info:
+  title: Open Data Portal (ODP) API
+  description: The Open Data Portal (ODP) API allows you to extract USPTO data at no cost - with several ways to do it. To learn about the ODP API Rate Limits, please visit to the <a href="https://data.uspto.gov/apis/api-rate-limits" target="_blank">API Rate Limits page</a>. <br><br> <b>Before proceeding</b>, you must have an ODP API key in order to access these Swagger UI resources. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For more details and steps to generate an API key visit to the <a href="https://data.uspto.gov/apis/getting-started" target="_blank">Getting Started page</a>.<br><br>For example, the request to access patent data for an application might look like as below.<br><br><code>curl -X "GET" "https://api.uspto.gov/api/v1/patent/applications/14412875" -H "X-API-KEY:YOUR_API_KEY"</code><br><br></br><code>curl -X "POST" "https://api.uspto.gov/api/v1/patent/applications/search" -H "X-API-KEY:YOUR_API_KEY" -d "{\\"q\\":\\"applicationMetaData.applicationTypeLabelName:Utility\\"}"</br></code>
+  contact:
+    email: data@uspto.gov
+    url: https://data.uspto.gov/apis/getting-started
+    name: USPTO
+  x-oas-url: https://data.uspto.gov/swagger/swagger.yaml
+  x-product-page-url: https://data.uspto.gov/apis/getting-started
+  x-ipdomain: ["Patent","Common","Trademark"]
+  x-functionality: ["Search"]
+  version: 1.0.0
+x-content-language: en-US
+servers:
+  - url: https://api.uspto.gov
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Patent Search
+    description: Search patent data by supplying query parameter or json request. Get data of a specific application or a section of an application
+  - name: Bulk DataSets
+    description: Bulk Dataset Directory provides a single repository for raw public bulk data. It contains research data from the office of the Chief Economist.
+  - name: 'PTAB Trials'
+    description: 'PTAB Trials APIs: proceedings, documents and decisions.'
+  - name: PTAB Trials:Proceedings
+    description: All public PTAB Trial proceedings
+  - name: PTAB Trials:Decisions
+    description: All public decisions filed in PTAB Trials
+  - name: PTAB Trials:Documents
+    description: All public documents filed in PTAB Trials
+  - name: PTAB Appeals
+    description: All public decisions filed in PTAB Appeals
+  - name: PTAB Interferences
+    description: All public decisions filed in PTAB Interferences
+
+paths:
+  /api/v1/patent/applications/search:
+
+    x-ip-domain: Patent
+    x-service-type: ["Search","Dissemination"]
+    x-content-type: Bibliographic data
+    post:
+      tags:
+        - Patent Search
+      summary: Search patent applications by supplying json payload
+
+      requestBody:
+        description: Patent data search request json payload. Fields in the request is optional
+        content:
+          application/json:
+            schema:
+              $ref: './odp-common-base.yaml#/components/schemas/PatentSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/PatentDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/Status413'
+
+
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    get:
+      tags:
+        - Patent Search
+      summary: Patent application search by supplying query parameters
+      description: Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+      parameters:
+        - name: q
+          in: query
+          description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+          allowReserved: true
+          schema:
+            type: string
+          examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: Utility
+              description: Search text 'Utility' across the searchable data fields
+            Exact Phrase AND:
+              value: Utility AND Design
+              description: Search text 'Utility' AND 'Design' across all searchable fields within data set
+            Search By Field Value:
+              value: applicationNumberText:14412875
+              description: Search data for application number 14412875
+            Boolean OR:
+              value: applicationMetaData.inventorBag.inventorNameText:Mark OR applicationMetaData.applicationTypeLabelName:Design
+              description: Search data where inventorNameText is Mark Or applicationTypeLabelName is Design
+            Boolean AND:
+              value: applicationMetaData.applicationTypeLabelName:Utility AND applicationMetaData.applicationStatusCode:150
+              description: Search data where applicationTypeLabelName is both Utility and applicationStatusCode value is 150
+            Wildcard:
+              value: applicationMetaData.firstApplicantName:Rockwel*
+              description: Search data where firstApplicantName has text Rockwel followed by any character
+            Range:
+              value: applicationMetaData.filingDate:[2021-08-04 TO 2021-09-04]
+              description: Search data where filingDate range is between 2020-08-04 TO 2022-08-04
+            Comparison:
+              value: applicationMetaData.applicationStatusCode:>600
+              description: Search all records where applicationStatusCode is greater than 600
+        - name: sort
+          in: query
+          description: Field to be sorted followed by sort order
+          schema:
+            type: string
+          examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: applicationMetaData.filingDate asc
+              description: Sort by filingDate ascending order
+            Descending:
+              value: applicationMetaData.grantDate desc
+              description: Sort by grantDate descending order
+        - name: offset
+          in: query
+          description: Position in the dataset of a particular record
+          schema:
+            type: integer
+            minimum: 0
+          example: 0
+        - name: limit
+          in: query
+          description: Limit the number of results returned
+          schema:
+            type: integer
+            minimum: 1
+          example: 25
+        - name: facets
+          in: query
+          description: List of fields names to be faceted upon separated by comma (<b>,</b>)
+          schema:
+            type: string
+          examples:
+            No Facets:
+              value:
+              description: No faceting option
+            Facets Example 1:
+              value: applicationMetaData.applicationTypeCode,applicationMetaData.docketNumber
+              description: Faceting by applicationTypeCode and docketNumber
+            Facets Example 2:
+              value: applicationMetaData.publicationCategoryBag,applicationMetaData.groupArtUnitNumber,applicationMetaData.applicationStatusCode
+              description: Faceting by publicationCategoryBag, groupArtUnitNumber and applicationStatusCode
+        - name: fields
+          in: query
+          description: Limits the response by specifying which fields from dataset should be included.
+          schema:
+            type: string
+          examples:
+            All Available Data Set Fields:
+              value:
+              description: Returns all available data set fields
+            Selected Fields:
+              value: applicationNumberText,applicationMetaData.patentNumber,applicationMetaData.applicationTypeCode
+              description: Include only applicationNumberText,patentNumber,applicationTypeCode in search result
+        - name: filters
+          in: query
+          description: Filter data by supplying filter parameter. Provide field name and its value.
+          schema:
+            type: string
+          examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: applicationMetaData.firstInventorToFileIndicator Y
+              description: Filter data where firstInventorToFileIndicator value is Y
+            Filters Example 2:
+              value: applicationMetaData.entityStatusData.smallEntityStatusIndicator true
+              description: Filter data where smallEntityStatusIndicator value is true
+            Filters Single Value:
+              value: applicationMetaData.filingDate 2023-10-18
+              description: Filter data where filingDate value is 2023-10-18
+            Filters Multi Value:
+              value: applicationMetaData.applicationTypeCode UTL,DES
+              description: Filter data where applicationTypeCode value is UTL or DES
+        - name: rangeFilters
+          in: query
+          description: Filter the data by supplying range of values. Applicable for number and date type fields.
+          schema:
+            type: string
+          examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: applicationMetaData.grantDate 2010-01-01:2011-01-01
+              description: Filter data where grant date is between 2010-01-01 and 2011-01-01
+            Number Range Filter:
+              value: applicationMetaData.applicationStatusCode 150:160
+              description: Filter data where grant date is between 2010-01-01 and 2011-01-01
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/PatentDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/Status413'
+
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/search/download:
+    x-ip-domain: Patent
+    x-service-type: ["Search","Dissemination"]
+    x-content-type: Bibliographic data
+    post:
+      tags:
+        - Patent Search
+      summary: Download patent data by supplying json payload
+      requestBody:
+        description: Patent data search request json payload. Fields in the request is optional
+        content:
+          application/json:
+            schema:
+              $ref: './odp-common-base.yaml#/components/schemas/PatentDownloadRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/PatentDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    get:
+      tags:
+        - Patent Search
+      summary: Patent application search by supplying query parameters
+      description: Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+      parameters:
+        - name: q
+          in: query
+          description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+          allowReserved: true
+          schema:
+            type: string
+          examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: Utility
+              description: Search text 'Utility' across the searchable data fields
+            Exact Phrase AND:
+              value: Utility AND Design
+              description: Search text 'Utility' AND 'Design' across all searchable fields within data set
+            Search By Field Value:
+              value: applicationNumberText:14412875
+              description: Search data for application number 14412875
+            Boolean OR:
+              value: applicationMetaData.inventorBag.inventorNameText:Mark OR applicationMetaData.applicationTypeLabelName:Design
+              description: Search data where inventorNameText is Mark Or applicationTypeLabelName is Design
+            Boolean AND:
+              value: applicationMetaData.applicationTypeLabelName:Utility AND applicationMetaData.applicationStatusCode:150
+              description: Search data where applicationTypeLabelName is both Utility and applicationStatusCode value is 150
+            Wildcard:
+              value: applicationMetaData.firstApplicantName:Rockwel*
+              description: Search data where firstApplicantName has text Rockwel followed by any character
+            Range:
+              value: applicationMetaData.filingDate:[2021-08-04 TO 2021-09-04]
+              description: Search data where filingDate range is between 2020-08-04 TO 2022-08-04
+            Comparison:
+              value: applicationMetaData.applicationStatusCode:>600
+              description: Search all records where applicationStatusCode is greater than 600
+        - name: sort
+          in: query
+          description: field to be sorted followed by sort order
+          schema:
+            type: string
+          examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: applicationMetaData.filingDate asc
+              description: Sort by filingDate ascending order
+            Descending:
+              value: applicationMetaData.grantDate desc
+              description: Sort by grantDate descending order
+        - name: offset
+          in: query
+          description: Page number to begin with
+          schema:
+            type: integer
+            minimum: 0
+          example: 0
+        - name: limit
+          in: query
+          description: Limit the number of results returned
+          schema:
+            type: integer
+            minimum: 1
+          example: 25
+        - name: fields
+          in: query
+          description: Limits the response by specifying fields from dataset should be included.
+          schema:
+            type: string
+          examples:
+            All Fields:
+              value:
+              description: Returns all available data set fields
+            Include Fields:
+              value: applicationNumberText,applicationMetaData.patentNumber,applicationMetaData.applicationTypeLabelName
+              description: Include only applicationNumberText,patentNumber,applicationTypeCode in search result
+
+        - name: filters
+          in: query
+          description: Filter data by supplying filter parameter. Provide field name and its value
+          schema:
+            type: string
+          examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: applicationMetaData.firstInventorToFileIndicator Y
+              description: Filter data where firstInventorToFileIndicator value is Y
+            Filters Example 2:
+              value: smallEntityStatusIndicator true
+              description: Filter data where applicationMetaData.entityStatusData.smallEntityStatusIndicator value is true
+            Filters Single Value:
+              value: entityStatusData.filingDate 2023-10-18
+              description: Filter data where filingDate value is 2023-10-18
+            Filters Multi Value:
+              value: entityStatusData.applicationTypeCode UTL,DES
+              description: Filter data where applicationTypeCode value is UTL or DES
+        - name: rangeFilters
+          in: query
+          description: Filter the data by supplying range of values. Applicable for number and date type fields.
+          schema:
+            type: string
+          examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: entityStatusData.grantDate 2010-01-01:2011-01-01
+              description: Filter data where grant date is between 2010-01-01 and 2011-01-01
+            Number Range Filter:
+              value: entityStatusData.applicationStatusCode 150:160
+              description: Filter data where grant date is between 2010-01-01 and 2011-01-01
+        - name: format
+          in: query
+          description: Download Format
+          schema:
+            type: string
+          examples:
+            json:
+              value: json
+            csv:
+              value: csv
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/PatentDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Patent application data for a provided application number
+      parameters:
+        - name: applicationNumberText
+          in: path
+          description: Patent application number. <b>Note</b>:Application number having special character e.g PCT/BR00/000001 must be encoded with UTF-8 character encoding standard
+          schema:
+            type: string
+          required: true
+          examples:
+            first:
+              value: 14412875
+              summary: Application Number
+              description: Application Number
+            second:
+              value: PCTUS0719317
+              summary: International Application Number
+              description: International Application Number
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/PatentDataResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetailed:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}/meta-data:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Get patent application meta data
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: Patent application number
+          schema:
+            type: string
+          example: 16330077
+      responses:
+        '200':
+          description: Application meta data section
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    example: 1
+                  patentFileWrapperDataBag:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationNumberText:
+                          type: string
+                          example: 14104993
+                          description: Free format of application number
+                        applicationMetaData:
+                          $ref: './odp-common-base.yaml#/components/schemas/ApplicationMetaData'
+
+                  requestIdentifier:
+                    example: 0ff4c603-a290-4659-8092-f68b408150c4
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}/adjustment:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Get patent term adjustment data for an application number
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: Patent application number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                  patentFileWrapperDataBag:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationNumberText:
+                          type: string
+                          example: 14104993
+                          description: Free format of application number
+                        patentTermAdjustmentData:
+                          $ref: './odp-common-base.yaml#/components/schemas/PatentTermAdjustment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}/assignment:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Get patent assignment data for an application number
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: Patent application number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                  patentFileWrapperDataBag:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationNumberText:
+                          type: string
+                          example: 14104993
+                          description: Free format of application number
+                        assignmentBag:
+                          $ref: './odp-common-base.yaml#/components/schemas/Assignment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}/attorney:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Get attorney/agent data for an application number
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: Patent application number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                  patentFileWrapperDataBag:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationNumberText:
+                          type: string
+                          example: 14104993
+                          description: Free format of application number
+                        recordAttorney:
+                          $ref: './odp-common-base.yaml#/components/schemas/RecordAttorney'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}/continuity:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Get continuity data for an application number
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: Patent application number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                  patentFileWrapperDataBag:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationNumberText:
+                          type: string
+                          example: 14104993
+                          description: Free format of application number
+                        parentContinuityBag:
+                          type: array
+                          items:
+                            $ref: './odp-common-base.yaml#/components/schemas/ParentContinuityData'
+                        childContinuityBag:
+                          type: array
+                          items:
+                            $ref: './odp-common-base.yaml#/components/schemas/ChildContinuityData'
+                        requestIdentifier:
+                          type: string
+                          example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}/foreign-priority:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Get foreign-priority data for an application number
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: Patent application number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                  patentFileWrapperDataBag:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationNumberText:
+                          type: string
+                          example: 14104993
+                          description: Free format of application number
+                        foreignPriorityBag:
+                          type: array
+                          items:
+                            $ref: './odp-common-base.yaml#/components/schemas/ForeignPriority'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}/transactions:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Get transaction data for an application number
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: Patent application number
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                  patentFileWrapperDataBag:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationNumberText:
+                          type: string
+                          example: 14104993
+                          description: Free format of application number
+                        eventDataBag:
+                          type: array
+                          items:
+                            $ref: './odp-common-base.yaml#/components/schemas/EventData'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/applications/{applicationNumberText}/documents:
+    x-ip-domain: Patent
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Documents details for an application number
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: application number
+          schema:
+            type: string
+            example: 16330077
+        - name: documentCodes
+          in: query
+          description: single or multiple comma separated document codes
+          allowReserved: true
+          schema:
+            type: string
+          examples:
+            No Doc Code:
+              summary: No code
+              description: Empty, No doc code conditions
+              value:
+            Single Doc Code:
+              summary: Fee Worksheet
+              description: Doc code for Fee Worksheet
+              value: WFEE
+            Multiple Doc Codes:
+              value: SRFW,SRNT
+              description: Search for doc codes SRFW and SRNT
+        - name: officialDateFrom
+          in: query
+          description: Search by document official date from
+          schema:
+            type: string
+            format: 'yyyy-MM-dd'
+        - name: officialDateTo
+          in: query
+          description: Search by document official date to
+          schema:
+            type: string
+            format: 'yyyy-MM-dd'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/DocumentBag'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+
+  /api/v1/patent/applications/{applicationNumberText}/associated-documents:
+    x-ip-domain: Patent, Research
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Patent Search
+      summary: Associated (pgpub, grant) documents meta-data for an application
+      parameters:
+        - name: applicationNumberText
+          in: path
+          required: true
+          description: application number
+          schema:
+            type: string
+            example: 16330077
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                    example: 1
+                  patentFileWrapperDataBag:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        applicationNumberText:
+                          type: string
+                          example: 14104993
+                          description: Free format of application number
+                        pgpubDocumentMetaData:
+                          $ref: './odp-common-base.yaml#/components/schemas/PGPubFileMetaData'
+                        grantDocumentMetaData:
+                          $ref: './odp-common-base.yaml#/components/schemas/GrantFileMetaData'
+                        requestIdentifier:
+                          type: string
+                          example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/patent/status-codes:
+    x-ip-domain: Patent
+    x-service-type: ["Search","Dissemination"]
+    x-content-type: Bibliographic data
+    post:
+      tags:
+        - Patent Search
+      summary: Search patent application status codes and status code description
+
+      requestBody:
+        description: Patent status code search request json payload. All fields in the request are optional
+        content:
+          application/json:
+            schema:
+              $ref: './odp-common-base.yaml#/components/schemas/StatusCodeSearchRequest'
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review search request and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+    get:
+      tags:
+        - Patent Search
+      summary: Search patent application status codes and status code description
+      description: Query parameters are optional.
+      parameters:
+        - name: q
+          in: query
+          description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+          allowReserved: true
+          schema:
+            type: string
+          examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: Transmittal
+              description: Search text 'Transmittal' across the searchable data fields
+            Exact Phrase AND:
+              value: Application AND Preexam
+              description: Search text 'Application' AND 'Preexam' within staus code description text where both text found
+            Search By Field Value:
+              value: applicationStatusDescriptionText:Preexam
+              description: Search data for applicationStatusDescriptionText 'Preexam'
+            Boolean OR:
+              value: applicationStatusDescriptionText:Terminated OR applicationStatusCode:50
+              description: Search data where applicationStatusDescriptionText is Terminated Or applicationStatusCode is 50
+            Wildcard:
+              value: applicationStatusDescriptionText:Action*
+              description: Search data where applicationStatusDescriptionText has text Action followed by any character
+            Comparison:
+              value: applicationStatusCode:>100
+              description: Search all records where applicationStatusCode is greater than 100
+        - name: offset
+          in: query
+          description: Position in the dataset of a particular record
+          schema:
+            type: integer
+            minimum: 0
+          example: 0
+        - name: limit
+          in: query
+          description: Limit the number of results returned
+          schema:
+            type: integer
+            minimum: 1
+          example: 25
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: Invalid request, review patent data request filter section and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found, refine your search criteria and try again
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/datasets/products/search:
+    x-ip-domain: Patent, Research
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Bulk DataSets
+      summary: Search bulk datasets products by supplying query parameters
+      description: Query parameters are optional. When no query parameters supplied, top 25 applications are returned
+      parameters:
+        - name: q
+          in: query
+          description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+          allowReserved: true
+          schema:
+            type: string
+          examples:
+            No Search Text:
+              summary: No conditions
+              description: Empty, No conditions
+              value:
+            Exact Phrase:
+              value: Denied
+              description: Search text 'Denied' across the searchable data fields
+            Exact Phrase AND:
+              value: Denied AND Patented
+              description: Search text 'Denied' AND 'Patented' across all searchable fields within data set
+            Search By Field Value:
+              value: applicationNumberText:11512156
+              description: Search data for application number 11512156
+            Boolean OR:
+              value: decisionTypeCodeDescriptionText:Denied OR finalDecidingOfficeName:OFFICE
+              description: Search data where decisionTypeCodeDescriptionText is Denied Or finalDecidingOfficeName is OFFICE
+            Boolean AND:
+              value: decisionTypeCodeDescriptionText:Denied AND finalDecidingOfficeName:OFFICE
+              description: Search data where decisionTypeCodeDescriptionText is Denied AND finalDecidingOfficeName is OFFICE
+            Wildcard:
+              value: firstApplicantName:BRANT*
+              description: Search data where firstApplicantName has text BRANT followed by any character
+            Range:
+              value: petitionMailDate:[2021-08-04 TO 2021-09-04]
+              description: Search data where petitionMailDate range is between 2020-08-04 TO 2022-08-04
+            Comparison:
+              value: decisionTypeCode:>524
+              description: Search all records where decisionTypeCode is greater than 524
+        - name: sort
+          in: query
+          description: field to be sorted followed by sort order
+          schema:
+            type: string
+          examples:
+            No Sort:
+              description: No sort option go by default sort
+              value:
+            Ascending:
+              value: petitionMailDate asc
+              description: Sort by petitionMailDate ascending order
+            Descending:
+              value: petitionMailDate desc
+              description: Sort by petitionMailDate descending order
+        - name: offset
+          in: query
+          description: Position in the dataset of a particular record
+          schema:
+            type: integer
+            minimum: 0
+          example: 0
+        - name: limit
+          in: query
+          description: Limit the number of results returned
+          schema:
+            type: integer
+            minimum: 1
+          example: 25
+        - name: facets
+          in: query
+          description: List of fields names to be faceted upon separated by comma (<b>,</b>)
+          schema:
+            type: string
+          examples:
+            No Facets:
+              value:
+              description: No faceting option
+            Facets Example 1:
+              value: businessEntityStatusCategory,decisionPetitionTypeCode,decisionPetitionTypeCodeDescription,decisionTypeCode,decisionTypeCodeDescriptionText,firstApplicantName,finalDecidingOfficeName,actionTakenByCourtNamepetitionIssueConsideredText,prosecutionStatusCodeDescriptionText,petitionIssueConsideredTextBag,courtActionIndicator,ruleBag,statuteBag
+              description: Faceting by businessEntityStatusCategory,decisionPetitionTypeCode,decisionPetitionTypeCodeDescription,decisionTypeCode,decisionTypeCodeDescriptionText,firstApplicantName,finalDecidingOfficeName,actionTakenByCourtNamepetitionIssueConsideredText,prosecutionStatusCodeDescriptionText,petitionIssueConsideredTextBag,courtActionIndicator,ruleBag,statuteBag
+        - name: fields
+          in: query
+          description: Limits the response by specifying fields from dataset should be included.
+          schema:
+            type: string
+          examples:
+            All Fields:
+              value:
+              description: Returns all available data set fields
+            Include Fields:
+              value: petitionDecisionRecordIdentifier,patentNumber,firstApplicantName,petitionMailDate,decisionPetitionTypeCode,decisionTypeCodeDescriptionText,decisionMailDate,finalDecidingOfficeName,decisionDate,petitionIssueConsideredTextBag,technologyCenter,businessEntityStatusCategory
+              description: Include only petitionDecisionRecordIdentifier,patentNumber,firstApplicantName,petitionMailDate,decisionPetitionTypeCode,decisionTypeCodeDescriptionText,decisionMailDate,finalDecidingOfficeName,decisionDate,petitionIssueConsideredTextBag,technologyCenter,businessEntityStatusCategory in search result
+        - name: filters
+          in: query
+          description: Filter data by supplying filter parameter. Provide field name and its value
+          schema:
+            type: string
+          examples:
+            No Filter:
+              value:
+              description: No filter
+            Filters Example 1:
+              value: technologyCenter 3600
+              description: Filter data where technologyCenter value is 3600
+            Filters Example 2:
+              value: businessEntityStatusCategory 'Small'
+              description: Filter data where businessEntityStatusCategory value is 'Small'
+            Filters Single Value:
+              value: decisionDate 2023-10-18
+              description: Filter data where decisionDate value is 2023-10-18
+            Filters Multi Value:
+              value: ruleBag 1.76,1.78
+              description: Filter data where ruleBag value is 1.76 or 1.78
+        - name: rangeFilters
+          in: query
+          description: Filter the data by supplying range of values. Applicable for number and date type fields.
+          schema:
+            type: string
+          examples:
+            No Range Filter:
+              value:
+              description: No range filter
+            Date Range Filter:
+              value: petitionMailDate 2021-01-01:2025-01-01
+              description: Filter data where petitionMailDate is between 2021-01-01 and 2025-01-01
+            Number Range Filter:
+              value: ruleBag 1.76:1.90
+              description: Filter data where ruleBag is between 1.76 and 1.90
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/BdssResponseBag'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: 'Invalid request, review data requested try again'
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+  /api/v1/datasets/products/{productIdentifier}:
+    x-ip-domain: Patent, Research
+    x-service-type: Dissemination
+    x-content-type: Bibliographic data
+    get:
+      tags:
+        - Bulk DataSets
+      summary: Bulk data- find a product by its identifier (shortName)
+      parameters:
+        - in: path
+          name: productIdentifier
+          schema:
+            type: string
+          required: true
+          description: productIdentifier represents product Short name
+
+        - name: fileDataFromDate
+          in: query
+          description: fileDataFromDate
+          schema:
+            type: string
+            format: 'yyyy-MM-dd'
+        - name: fileDataToDate
+          in: query
+          description: fileDataToDate
+          schema:
+            type: string
+            format: 'yyyy-MM-dd'
+        - name: offset
+          in: query
+          description: Number of product file records to skip
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Number of product file records to collect
+          schema:
+            type: integer
+        - name: includeFiles
+          in: query
+          description: value true if product files should be included or false if they should be omitted from the response
+          schema:
+            type: string
+        - name: latest
+          in: query
+          description: value is true if only the latest product file should be returned for this specific product
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './odp-common-base.yaml#/components/schemas/BdssResponseProductBag'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 400
+                  error:
+                    example: Bad Request
+                  errorDetails:
+                    example: 'Invalid request, review data requested try again'
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 403
+                  error:
+                    example: Forbidden
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 404
+                  error:
+                    example: Not Found
+                  errorDetails:
+                    example: No matching records found
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    example: 500
+                  error:
+                    example: Internal Server Error
+                  errorDetails:
+                    example: Internal Server Error. Please contact Help Desk.
+                  requestIdentifier:
+                    example: 07c5c24d-bf8e-458c-9427-a038500d6e98
+
+  /api/v1/datasets/products/files/{productIdentifier}/{fileName}:
+    get:
+      tags:
+       - Bulk DataSets
+      summary: "Download bulk data product file"
+      description: "Returns a 302 redirect to the actual download location for the given productIdentifier and fileName."
+    parameters:
+      - name: productIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '302':
+        description: "Redirect to file download location"
+        headers:
+          Location:
+            description: "URL of the actual file download"
+            schema:
+              type: string
+              format: uri
+
+ 
+  /api/v1/patent/applications/text-to-search:
+    x-ip-domain: Patent
+    x-service-type: [ "Search","Dissemination" ]
+    x-content-type: Bibliographic data
+
+  # ── PTAB Proceedings ─────────────────────────────
+  /api/v1/patent/trials/proceedings/search:
+    $ref: './trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search'
+  /api/v1/patent/trials/proceedings/search/download:
+    $ref: './trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1search~1download'
+  /api/v1/patent/trials/proceedings/{trialNumber}:
+    $ref: './trial-proceedings.yaml#/paths/~1api~1v1~1patent~1proceedings~1{trialNumber}'
+
+  # ── PTAB Decisions ───────────────────────────────
+  /api/v1/patent/trials/decisions/search:
+    $ref: './trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search'
+  /api/v1/patent/trials/decisions/search/download:
+    $ref: './trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1search~1download'
+  /api/v1/patent/trials/decisions/{documentIdentifier}:
+    $ref: './trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1decisions~1{documentIdentifier}'
+  /api/v1/patent/trials/{trialNumber}/decisions:
+    $ref: './trial-decisions.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1decisions'
+
+  # ── PTAB Documents ───────────────────────────────
+  /api/v1/patent/trials/documents/search:
+    $ref: './trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search'
+  /api/v1/patent/trials/documents/search/download:
+    $ref: './trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1search~1download'
+  /api/v1/patent/trials/documents/{documentIdentifier}:
+    $ref: './trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1documents~1{documentIdentifier}'
+  /api/v1/patent/trials/{trialNumber}/documents:
+    $ref: './trial-documents.yaml#/paths/~1api~1v1~1patent~1trials~1{trialNumber}~1documents'
+
+  # ── PTAB Appeal Decisions ──────────────────────────────
+  /api/v1/patent/appeals/decisions/search:
+    $ref: './trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search'
+  /api/v1/patent/appeals/decisions/search/download:
+    $ref: './trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1search~1download'
+  /api/v1/patent/appeals/decisions/{documentIdentifier}:
+    $ref: './trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1decisions~1{documentIdentifier}'
+  /api/v1/patent/appeals/{appealNumber}/decisions:
+    $ref: './trial-appeal-decisions.yaml#/paths/~1api~1v1~1patent~1appeals~1{appealNumber}~1decisions'
+
+  # ── PTAB Interferences ──────────────────────────────
+  /api/v1/patent/interferences/decisions/search:
+    $ref: './trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search'
+  /api/v1/patent/interferences/decisions/search/download:
+    $ref: './trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1search~1download'
+  /api/v1/patent/interferences/{interferenceNumber}/decisions:
+    $ref: './trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1{interferenceNumber}~1decisions'
+  /api/v1/patent/interferences/decisions/{documentIdentifier}:
+    $ref: './trial-interferences.yaml#/paths/~1api~1v1~1patent~1interferences~1decisions~1{documentIdentifier}'
+
+
+components:
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+
+  ############################
+  # SCHEMAS (aliases only)
+  ############################
+  schemas:
+    # Shared request bodies (search/download)
+    PatentSearchRequest:
+      $ref: ./odp-common-base.yaml#/components/schemas/PatentSearchRequest
+    PatentDownloadRequest:
+      $ref: ./odp-common-base.yaml#/components/schemas/PatentDownloadRequest
+    PatentDataResponse:  
+      $ref: ./odp-common-base.yaml#/components/schemas/PatentDataResponse
+    ApplicationMetaData:  
+      $ref: ./odp-common-base.yaml#/components/schemas/ApplicationMetaData
+    PatentTermAdjustment: 
+      $ref: ./odp-common-base.yaml#/components/schemas/PatentTermAdjustment
+    Assignment:
+      $ref: ./odp-common-base.yaml#/components/schemas/Assignment
+    RecordAttorney:  
+      $ref: ./odp-common-base.yaml#/components/schemas/RecordAttorney
+    ParentContinuityData:  
+      $ref: ./odp-common-base.yaml#/components/schemas/ParentContinuityData
+    ChildContinuityData:  
+      $ref: ./odp-common-base.yaml#/components/schemas/ChildContinuityData
+    ForeignPriority:  
+      $ref: ./odp-common-base.yaml#/components/schemas/ForeignPriority
+    EventData:
+      $ref: ./odp-common-base.yaml#/components/schemas/EventData
+    DocumentBag:
+      $ref: ./odp-common-base.yaml#/components/schemas/DocumentBag
+    PGPubFileMetaData:
+      $ref: ./odp-common-base.yaml#/components/schemas/PGPubFileMetaData
+    GrantFileMetaData:
+      $ref: ./odp-common-base.yaml#/components/schemas/GrantFileMetaData
+    StatusCodeSearchResponse:
+      $ref: ./odp-common-base.yaml#/components/schemas/StatusCodeSearchResponse   
+    # BulkData
+    BdssResponseProductBag:
+      $ref: ./odp-common-base.yaml#/components/schemas/BdssResponseProductBag
+
+    # Petition Decision
+    PetitionDecisionResponseBag:
+      $ref: ./odp-common-base.yaml#/components/schemas/PetitionDecisionResponseBag
+    PetitionDecisionIdentifierResponseBag:
+      $ref: ./odp-common-base.yaml#/components/schemas/PetitionDecisionIdentifierResponseBag
+   
+    # Trial – Proceedings
+    ProceedingDataResponse:
+      $ref: ./trial-proceedings.yaml#/components/schemas/ProceedingDataResponse
+    PatentTrialProceedingDataBag:
+      $ref: ./trial-proceedings.yaml#/components/schemas/patentTrialProceedingDataBag
+
+    # Trial – Documents
+    DocumentDataResponse:
+      $ref: ./trial-documents.yaml#/components/schemas/DocumentDataResponse
+    PatentTrialDocumentDataBag:
+      $ref: ./trial-documents.yaml#/components/schemas/patentTrialDocumentDataBag
+
+    # Trial – Decisions
+    DecisionDataResponse:
+      $ref: ./trial-decisions.yaml#/components/schemas/DecisionDataResponse
+    PatentTrialDecisionDataBag:
+      $ref: ./trial-decisions.yaml#/components/schemas/patentTrialDecisionDataBag
+
+    # Trial – Interferences (decisions)
+    InterferenceDecisionDataResponse:
+      $ref: ./trial-common.yaml#/components/schemas/InterferenceDecisionDataResponse
+
+    # Appeals (decisions)
+    AppealDecisionDataResponse:
+      $ref: ./trial-appeal-decisions.yaml#/components/schemas/AppealDecisionDataResponse
+    PatentAppealDataBag:
+      $ref: ./trial-appeal-decisions.yaml#/components/schemas/patentAppealDataBag
+
+
+  ############################
+  # PARAMETERS (aliases only)
+  ############################
+    q:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamQ
+    sort:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamSort
+    offset:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamOffset
+    limit:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamLimit
+    facets:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamFacets
+    fields:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamFields
+    filters:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamFilters
+    rangeFilters:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamRangeFilters
+    format:
+      $ref: ./odp-common-base.yaml#/components/schemas/ParamFormat
+
+  ############################
+  # RESPONSES (aliases only)
+  ############################
+    BadRequest:
+      $ref: ./trial-common.yaml#/components/schemas/BadRequest
+    Forbidden:
+      $ref: ./trial-common.yaml#/components/schemas/Forbidden
+    NotFound:
+      $ref: ./trial-common.yaml#/components/schemas/NotFound
+    Status413:
+      $ref: ./trial-common.yaml#/components/schemas/Status413
+    InternalError:
+      $ref: ./trial-common.yaml#/components/schemas/InternalError
+
+    

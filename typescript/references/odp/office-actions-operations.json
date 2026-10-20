@@ -1,0 +1,71 @@
+{
+  "title": "Office Actions API",
+  "info_version": "1.0.0",
+  "openapi": "3.0.3",
+  "source_url": "https://data.uspto.gov/swagger/office-actions.yaml",
+  "retrieved_at": "2026-10-20",
+  "archive": "office-actions-2026-10-20.yaml",
+  "size_bytes": 30138,
+  "sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
+  "source_kind": "Official Swagger UI plain-link browser download",
+  "schema_verified": true,
+  "live_behavior_verified": false,
+  "implemented_in_initial_port": false,
+  "operation_count": 6,
+  "path_count": 4,
+  "schema_count": 15,
+  "unique_ref_count": 32,
+  "unresolved_refs": [],
+  "external_refs": [],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/office-action/search",
+      "summary": "Search office actions by query parameters"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/office-action/search",
+      "summary": "Search office actions by JSON request body"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/office-action/search/download",
+      "summary": "Download office actions by query parameters"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/office-action/search/download",
+      "summary": "Download office actions by JSON request body"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/office-action/{officeActionRecordIdentifier}",
+      "summary": "Get a single office action by record identifier"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/office-action/{officeActionRecordIdentifier}/download/officeActionText",
+      "summary": "Download office action text as a plain text file"
+    }
+  ],
+  "schema_names": [
+    "OfficeAction",
+    "OfficeActionFilter",
+    "OfficeActionRange",
+    "OfficeActionSort",
+    "Pagination",
+    "OfficeActionSearchRequest",
+    "OfficeActionDownloadRequest",
+    "FacetValue",
+    "OfficeActionSearchResponse",
+    "OfficeActionDownloadResponse",
+    "Response400",
+    "Response401",
+    "Response403",
+    "Response404",
+    "Response500"
+  ],
+  "upstream_generated_at": "2026-08-06T21:27:37.243116Z",
+  "upstream_generated_from": "odp-office-action-opensearch-index-definition.json"
+}

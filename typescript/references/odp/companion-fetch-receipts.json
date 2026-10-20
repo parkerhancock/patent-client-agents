@@ -1,0 +1,122 @@
+[
+  {
+    "url": "https://data.uspto.gov/swagger/odp-common-base.yaml",
+    "retrieved_at": "2026-10-20",
+    "status": 200,
+    "content_type": "text/html",
+    "size": 20666,
+    "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+    "request_headers": {
+      "Accept": "application/yaml, text/yaml, application/x-yaml, */*",
+      "Referer": "https://data.uspto.gov/swagger/index.html",
+      "Cache-Control": "no-cache"
+    },
+    "valid_yaml": false,
+    "assessment": "HTML shell instead of YAML"
+  },
+  {
+    "url": "https://data.uspto.gov/swagger/trial-appeal-decisions.yaml",
+    "retrieved_at": "2026-10-20",
+    "status": 200,
+    "content_type": "text/html",
+    "size": 20666,
+    "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+    "request_headers": {
+      "Accept": "application/yaml, text/yaml, application/x-yaml, */*",
+      "Referer": "https://data.uspto.gov/swagger/index.html",
+      "Cache-Control": "no-cache"
+    },
+    "valid_yaml": false,
+    "assessment": "HTML shell instead of YAML"
+  },
+  {
+    "url": "https://data.uspto.gov/swagger/trial-common.yaml",
+    "retrieved_at": "2026-10-20",
+    "status": 200,
+    "content_type": "text/html",
+    "size": 20666,
+    "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+    "request_headers": {
+      "Accept": "application/yaml, text/yaml, application/x-yaml, */*",
+      "Referer": "https://data.uspto.gov/swagger/index.html",
+      "Cache-Control": "no-cache"
+    },
+    "valid_yaml": false,
+    "assessment": "HTML shell instead of YAML"
+  },
+  {
+    "url": "https://data.uspto.gov/swagger/trial-decisions.yaml",
+    "retrieved_at": "2026-10-20",
+    "status": 200,
+    "content_type": "text/html",
+    "size": 20666,
+    "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+    "request_headers": {
+      "Accept": "application/yaml, text/yaml, application/x-yaml, */*",
+      "Referer": "https://data.uspto.gov/swagger/index.html",
+      "Cache-Control": "no-cache"
+    },
+    "valid_yaml": false,
+    "assessment": "HTML shell instead of YAML"
+  },
+  {
+    "url": "https://data.uspto.gov/swagger/trial-documents.yaml",
+    "retrieved_at": "2026-10-20",
+    "status": 200,
+    "content_type": "text/html",
+    "size": 20666,
+    "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+    "request_headers": {
+      "Accept": "application/yaml, text/yaml, application/x-yaml, */*",
+      "Referer": "https://data.uspto.gov/swagger/index.html",
+      "Cache-Control": "no-cache"
+    },
+    "valid_yaml": false,
+    "assessment": "HTML shell instead of YAML"
+  },
+  {
+    "url": "https://data.uspto.gov/swagger/trial-interferences.yaml",
+    "retrieved_at": "2026-10-20",
+    "status": 200,
+    "content_type": "text/html",
+    "size": 20666,
+    "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+    "request_headers": {
+      "Accept": "application/yaml, text/yaml, application/x-yaml, */*",
+      "Referer": "https://data.uspto.gov/swagger/index.html",
+      "Cache-Control": "no-cache"
+    },
+    "valid_yaml": false,
+    "assessment": "HTML shell instead of YAML"
+  },
+  {
+    "url": "https://data.uspto.gov/swagger/trial-proceedings.yaml",
+    "retrieved_at": "2026-10-20",
+    "status": 200,
+    "content_type": "text/html",
+    "size": 20666,
+    "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+    "request_headers": {
+      "Accept": "application/yaml, text/yaml, application/x-yaml, */*",
+      "Referer": "https://data.uspto.gov/swagger/index.html",
+      "Cache-Control": "no-cache"
+    },
+    "valid_yaml": false,
+    "assessment": "HTML shell instead of YAML"
+  },
+  {
+    "url": "https://data.uspto.gov/swagger/office-actions.yaml",
+    "retrieved_at": "2026-10-20",
+    "status": 200,
+    "content_type": "text/html",
+    "size": 20666,
+    "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+    "request_headers": {
+      "Accept": "application/yaml, text/yaml, application/x-yaml, */*",
+      "Referer": "https://data.uspto.gov/swagger/index.html",
+      "Cache-Control": "no-cache"
+    },
+    "valid_yaml": false,
+    "assessment": "HTML shell instead of YAML"
+  }
+]

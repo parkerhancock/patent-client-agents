@@ -1,0 +1,171 @@
+{
+  "checked_at": "2026-10-20",
+  "current_portal_release": "5.0",
+  "current_openapi_verified": false,
+  "fetches": [
+    {
+      "url": "https://data.uspto.gov/support/release",
+      "status": 200,
+      "content_type": "text/html",
+      "size": 20666,
+      "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+      "effective_url": "https://data.uspto.gov/support/release",
+      "retrieved_at": "2026-10-20",
+      "archive": "portal-shell.html",
+      "assessment": "HTML application shell, not the requested documentation/specification/PDF; current content unverified"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/index.html",
+      "status": 200,
+      "content_type": "text/html",
+      "size": 20666,
+      "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+      "effective_url": "https://data.uspto.gov/swagger/index.html",
+      "retrieved_at": "2026-10-20",
+      "archive": "portal-shell.html",
+      "assessment": "HTML application shell, not the requested documentation/specification/PDF; current content unverified"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/swagger-initializer.js",
+      "status": 200,
+      "content_type": "text/html",
+      "size": 20666,
+      "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+      "effective_url": "https://data.uspto.gov/swagger/swagger-initializer.js",
+      "retrieved_at": "2026-10-20",
+      "archive": "portal-shell.html",
+      "assessment": "HTML application shell, not the requested documentation/specification/PDF; current content unverified"
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/odp-common-base.yaml",
+      "status": 200,
+      "content_type": "text/html",
+      "size": 20666,
+      "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+      "effective_url": "https://data.uspto.gov/swagger/odp-common-base.yaml",
+      "retrieved_at": "2026-10-20",
+      "archive": "portal-shell.html",
+      "assessment": "HTML application shell, not the requested documentation/specification/PDF; current content unverified"
+    },
+    {
+      "url": "https://data.uspto.gov/documents/documents/BDSS-to-ODP-API-Mapping.pdf",
+      "status": 200,
+      "content_type": "text/html",
+      "size": 20666,
+      "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+      "effective_url": "https://data.uspto.gov/documents/documents/BDSS-to-ODP-API-Mapping.pdf",
+      "retrieved_at": "2026-10-20",
+      "archive": "portal-shell.html",
+      "assessment": "HTML application shell, not the requested documentation/specification/PDF; current content unverified"
+    },
+    {
+      "url": "https://data.uspto.gov/documents/documents/DH-to-ODP-Office-Action-APIs-Mapping.pdf",
+      "status": 200,
+      "content_type": "text/html",
+      "size": 20666,
+      "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+      "effective_url": "https://data.uspto.gov/documents/documents/DH-to-ODP-Office-Action-APIs-Mapping.pdf",
+      "retrieved_at": "2026-10-20",
+      "archive": "portal-shell.html",
+      "assessment": "HTML application shell, not the requested documentation/specification/PDF; current content unverified"
+    },
+    {
+      "url": "https://data.uspto.gov/documents/documents/Decommission-FAQ-Draft.pdf",
+      "status": 200,
+      "content_type": "text/html",
+      "size": 20666,
+      "sha256": "4ccc927a003f3944c18c0c3394af2d6f2504b194a72ab480ef77fff21b997b85",
+      "effective_url": "https://data.uspto.gov/documents/documents/Decommission-FAQ-Draft.pdf",
+      "retrieved_at": "2026-10-20",
+      "archive": "portal-shell.html",
+      "assessment": "HTML application shell, not the requested documentation/specification/PDF; current content unverified"
+    },
+    {
+      "url": "https://api.uspto.gov/swagger/swagger.yaml",
+      "error": "HTTP Error 403: Forbidden",
+      "retrieved_at": "2026-10-20"
+    },
+    {
+      "url": "https://api.uspto.gov/v3/api-docs",
+      "error": "HTTP Error 403: Forbidden",
+      "retrieved_at": "2026-10-20"
+    },
+    {
+      "url": "https://www.uspto.gov/subscription-center/2026/register-access-usptos-open-data-portal",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "size": 145253,
+      "sha256": "c4a751260ebff4aa9958a1f7826cdd26a0df3c180dee6fb3e010a9ebd023ebbd",
+      "effective_url": "https://www.uspto.gov/subscription-center/2026/register-access-usptos-open-data-portal",
+      "retrieved_at": "2026-10-20",
+      "archive": "registration-notice.html",
+      "assessment": "Official USPTO registration announcement, published 2026-06-03"
+    },
+    {
+      "url": "https://content.govdelivery.com/accounts/USPTO/bulletins/40fd1a0",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "size": 44865,
+      "sha256": "c8c23bfbf8dbb3b05d374362fc4f59b7e9b682db3de44833d11bbfa0991d7776",
+      "effective_url": "https://content.govdelivery.com/accounts/USPTO/bulletins/40fd1a0",
+      "retrieved_at": "2026-10-20",
+      "archive": "office-action-migration-notice.html",
+      "assessment": "Official USPTO Office Action API migration announcement, published 2026-03-26"
+    }
+  ],
+  "repository_baseline": {
+    "path": "src/patent_client_agents/uspto_odp/data/odp_swagger.yaml",
+    "sha256": "10f50e96546fc658c7b13e47593fe25f3baa0dcf6958a5c780183789321e70f1",
+    "info_version": "1.0.0",
+    "freshness": "Existing repository copy; not revalidated against current USPTO schema",
+    "review_state_path": "src/patent_client_agents/uspto_odp/data/release_state.json"
+  },
+  "portal_release_date": "2026-10-02",
+  "portal_release_source": "https://data.uspto.gov/support/release/5.0",
+  "portal_release_verification": "Rendered official portal in signed-out browser on 2026-10-20; direct HTTP response is a shell",
+  "rendered_page_observation": {
+    "url": "https://data.uspto.gov/support/release/5.0",
+    "observed_at": "2026-10-20",
+    "archive": "release-5.0-browser-observation.md",
+    "sha256": "4441345d082f1d979cce73abb629b183c81e6f5baf6c8f98a017964071952ee2",
+    "kind": "Task browser observation summary, not original page bytes",
+    "signed_in": false
+  },
+  "current_main_openapi_verified": true,
+  "current_schema_bundle_complete": false,
+  "current_main_spec": {
+    "url": "https://data.uspto.gov/swagger/swagger.yaml",
+    "retrieved_at": "2026-10-20",
+    "archive": "swagger-2026-10-20.yaml",
+    "sha256": "6c01165869e2c806969281baea75daaa84caf3b4db038cb4cc5246366e2f4f32",
+    "size_bytes": 81460,
+    "retrieval_method": "Official Swagger UI browser download, copied from browser Downloads/swagger.yaml",
+    "info_version": "1.0.0",
+    "openapi": "3.0.1",
+    "scope": "Main specification only; external companion schemas still required"
+  },
+  "companion_fetch_receipts": "companion-fetch-receipts.json",
+  "current_operation_inventory": "current-operations.json",
+  "current_office_actions_spec": {
+    "title": "Office Actions API",
+    "info_version": "1.0.0",
+    "openapi": "3.0.3",
+    "source_url": "https://data.uspto.gov/swagger/office-actions.yaml",
+    "retrieved_at": "2026-10-20",
+    "archive": "office-actions-2026-10-20.yaml",
+    "size_bytes": 30138,
+    "sha256": "77b568c679bec7c9a6b60676268538c3e9f2cb09e3f8684e3a59c4d68c0440d6",
+    "source_kind": "Official Swagger UI plain-link browser download",
+    "schema_verified": true,
+    "live_behavior_verified": false,
+    "implemented_in_initial_port": false,
+    "operation_count": 6,
+    "path_count": 4,
+    "schema_count": 15,
+    "unique_ref_count": 32,
+    "unresolved_refs": [],
+    "external_refs": [],
+    "upstream_generated_at": "2026-08-06T21:27:37.243116Z",
+    "upstream_generated_from": "odp-office-action-opensearch-index-definition.json"
+  }
+}

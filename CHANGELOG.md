@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- A separate Bun/TypeScript workspace with an independent USPTO ODP applications
+  client, a thin authenticated Prefect FastMCP server, cassette replay tests,
+  and an ODP 5.0 source review. This is the first port slice, not full ODP parity.
+
 ### Changed
 
 - Corpus search tools declare their `limit` (1-100) and `offset` (>= 0) bounds

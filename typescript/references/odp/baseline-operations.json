@@ -1,0 +1,497 @@
+{
+  "baseline_path": "src/patent_client_agents/uspto_odp/data/odp_swagger.yaml",
+  "baseline_sha256": "10f50e96546fc658c7b13e47593fe25f3baa0dcf6958a5c780183789321e70f1",
+  "baseline_info_version": "1.0.0",
+  "last_recorded_review": "2026-01-27",
+  "current_upstream_schema_verified": false,
+  "path_count": 39,
+  "operation_count": 53,
+  "schema_names": [
+    "PatentSearchRequest",
+    "PatentDownloadRequest",
+    "PatentDataResponse",
+    "ApplicationMetaData",
+    "PatentTermAdjustment",
+    "Assignment",
+    "RecordAttorney",
+    "ParentContinuityData",
+    "ChildContinuityData",
+    "ForeignPriority",
+    "EventData",
+    "DocumentBag",
+    "PGPubFileMetaData",
+    "GrantFileMetaData",
+    "StatusCodeSearchResponse",
+    "BdssResponseProductBag",
+    "PetitionDecisionResponseBag",
+    "PetitionDecisionIdentifierResponseBag",
+    "ProceedingDataResponse",
+    "PatentTrialProceedingDataBag",
+    "DocumentDataResponse",
+    "PatentTrialDocumentDataBag",
+    "DecisionDataResponse",
+    "PatentTrialDecisionDataBag",
+    "InterferenceDecisionDataResponse",
+    "AppealDecisionDataResponse",
+    "PatentAppealDataBag",
+    "q",
+    "sort",
+    "offset",
+    "limit",
+    "facets",
+    "fields",
+    "filters",
+    "rangeFilters",
+    "format",
+    "BadRequest",
+    "Forbidden",
+    "NotFound",
+    "Status413",
+    "InternalError"
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/applications/search",
+      "summary": "Search patent applications by supplying json payload",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/search",
+      "summary": "Patent application search by supplying query parameters",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/applications/search/download",
+      "summary": "Download patent data by supplying json payload",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/search/download",
+      "summary": "Patent application search by supplying query parameters",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}",
+      "summary": "Patent application data for a provided application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/meta-data",
+      "summary": "Get patent application meta data",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/adjustment",
+      "summary": "Get patent term adjustment data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/assignment",
+      "summary": "Get patent assignment data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/attorney",
+      "summary": "Get attorney/agent data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/continuity",
+      "summary": "Get continuity data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/foreign-priority",
+      "summary": "Get foreign-priority data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/transactions",
+      "summary": "Get transaction data for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/documents",
+      "summary": "Documents details for an application number",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/applications/{applicationNumberText}/associated-documents",
+      "summary": "Associated (pgpub, grant) documents meta-data for an application",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/status-codes",
+      "summary": "Search patent application status codes and status code description",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/status-codes",
+      "summary": "Search patent application status codes and status code description",
+      "tags": [
+        "Patent Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/search",
+      "summary": "Search bulk datasets products by supplying query parameters",
+      "tags": [
+        "Bulk DataSets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/{productIdentifier}",
+      "summary": "Bulk data- find a product by its identifier (shortName)",
+      "tags": [
+        "Bulk DataSets"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/datasets/products/files/{productIdentifier}/{fileName}",
+      "summary": "Download bulk data product file",
+      "tags": [
+        "Bulk DataSets"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/petition/decisions/search",
+      "summary": "Search petition decision applications by supplying json payload",
+      "tags": [
+        "Petition Decision Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/petition/decisions/search",
+      "summary": "Petition decision application search by supplying query parameters",
+      "tags": [
+        "Petition Decision Search"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/petition/decisions/search/download",
+      "summary": "Download petition decision data by supplying json payload",
+      "tags": [
+        "Petition Decision Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/petition/decisions/search/download",
+      "summary": "Petition decision application search by supplying query parameters",
+      "tags": [
+        "Petition Decision Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/petition/decisions/{petitionDecisionRecordIdentifier}",
+      "summary": "Petition decision application data for a provided application number",
+      "tags": [
+        "Petition Decision Search"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/proceedings/search",
+      "summary": "Search trials proceedings using json payload",
+      "tags": [
+        "PTAB Trials:Proceedings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/proceedings/search",
+      "summary": "Search trials proceedings using query parameters",
+      "tags": [
+        "PTAB Trials:Proceedings"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/proceedings/search/download",
+      "summary": "Download trials proceedings search results in json or csv format using json payload",
+      "tags": [
+        "PTAB Trials:Proceedings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/proceedings/search/download",
+      "summary": "Download trials proceedings search results in json or csv format using query parameters",
+      "tags": [
+        "PTAB Trials:Proceedings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/proceedings/{trialNumber}",
+      "summary": "Retrieve a single trials proceeding by trial number",
+      "tags": [
+        "PTAB Trials:Proceedings"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/decisions/search",
+      "summary": "Search trials decisions documents using json payload",
+      "tags": [
+        "PTAB Trials:Decisions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/decisions/search",
+      "summary": "Search trials decisions documents using query parameters",
+      "tags": [
+        "PTAB Trials:Decisions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/decisions/search/download",
+      "summary": "Download trials decisions documents search results in json or csv format using json payload",
+      "tags": [
+        "PTAB Trials:Decisions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/decisions/search/download",
+      "summary": "Download trials decisions documents search results in json or csv format using query parameters",
+      "tags": [
+        "PTAB Trials:Decisions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/decisions/{documentIdentifier}",
+      "summary": "Retrieve a single trials decisions document by document identifier",
+      "tags": [
+        "PTAB Trials:Decisions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/{trialNumber}/decisions",
+      "summary": "Retrieve all trials decisions documents by trial number",
+      "tags": [
+        "PTAB Trials:Decisions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/documents/search",
+      "summary": "Search trials documents using json payload",
+      "tags": [
+        "PTAB Trials:Documents"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/documents/search",
+      "summary": "Search trials documents using query parameters",
+      "tags": [
+        "PTAB Trials:Documents"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/trials/documents/search/download",
+      "summary": "Download trials documents search results in json or csv format using json payload",
+      "tags": [
+        "PTAB Trials:Documents"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/documents/search/download",
+      "summary": "Download trials document search results in json or csv format using query parameters",
+      "tags": [
+        "PTAB Trials:Documents"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/documents/{documentIdentifier}",
+      "summary": "Retrieve a single trials document by document identifier",
+      "tags": [
+        "PTAB Trials:Documents"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/trials/{trialNumber}/documents",
+      "summary": "Retrieve all trials documents by trial number",
+      "tags": [
+        "PTAB Trials:Documents"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/appeals/decisions/search",
+      "summary": "Search appeals decisions using json payload",
+      "tags": [
+        "PTAB Appeals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/appeals/decisions/search",
+      "summary": "Search appeals decisions using query parameters",
+      "tags": [
+        "PTAB Appeals"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/appeals/decisions/search/download",
+      "summary": "Download appeals decisions search results in json or csv format using json payload",
+      "tags": [
+        "PTAB Appeals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/appeals/decisions/search/download",
+      "summary": "Download appeals decisions search results in json or csv format using query parameters",
+      "tags": [
+        "PTAB Appeals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/appeals/decisions/{documentIdentifier}",
+      "summary": "Retrieve appeals decisions by document Identifier",
+      "tags": [
+        "PTAB Appeals"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/appeals/{appealNumber}/decisions",
+      "summary": "Retrieve appeals decisions by appeal number",
+      "tags": [
+        "PTAB Appeals"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/interferences/decisions/search",
+      "summary": "Search interferences decisions using json payload",
+      "tags": [
+        "PTAB Interferences"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/interferences/decisions/search",
+      "summary": "Search interferences decisions using query parameters",
+      "tags": [
+        "PTAB Interferences"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/patent/interferences/decisions/search/download",
+      "summary": "Download interferences decisions search results in json or csv format using json payload",
+      "tags": [
+        "PTAB Interferences"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/interferences/decisions/search/download",
+      "summary": "Download interferences decisions search results in json or csv format using query parameters",
+      "tags": [
+        "PTAB Interferences"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/interferences/{interferenceNumber}/decisions",
+      "summary": "Retrieve interferences decisions by interference number",
+      "tags": [
+        "PTAB Interferences"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/patent/interferences/decisions/{documentIdentifier}",
+      "summary": "Retrieve interferences decisions by document identifier",
+      "tags": [
+        "PTAB Interferences"
+      ]
+    }
+  ],
+  "unresolved_schema_refs": [
+    "#/components/schemas/BulkDataProductBag",
+    "#/components/schemas/Facets",
+    "#/components/schemas/Filter",
+    "#/components/schemas/InterferenceDecisionRecord",
+    "#/components/schemas/Pagination",
+    "#/components/schemas/PetitionDecision",
+    "#/components/schemas/PetitionDecisionAndDocuments",
+    "#/components/schemas/PetitionDecisionFacet",
+    "#/components/schemas/PetitionDecisionFilter",
+    "#/components/schemas/PetitionDecisionRange",
+    "#/components/schemas/PetitionDecisionSort",
+    "#/components/schemas/Range",
+    "#/components/schemas/Sort",
+    "#/components/schemas/patentAppealDataBag",
+    "#/components/schemas/patentTrialDecisionDataBag",
+    "#/components/schemas/patentTrialDocumentDataBag",
+    "#/components/schemas/patentTrialProceedingDataBag"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["**/*.ts", "../scripts/**/*.ts"],
+  "references": [
+    {
+      "path": "../packages/client"
+    },
+    {
+      "path": "../packages/mcp"
+    }
+  ]
+}

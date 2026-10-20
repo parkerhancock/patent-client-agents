@@ -1,0 +1,36 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://api.uspto.gov/api/v1/patent/applications/14412875
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 401
+    headers:
+      access-control-allow-headers:
+      - Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token
+      access-control-allow-methods:
+      - GET,OPTIONS
+      access-control-allow-origin:
+      - "*"
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2026 16:12:21 GMT
+      x-amz-apigw-id:
+      - FjPkAGONoAMFRtw=
+      x-amzn-errortype:
+      - UnauthorizedException
+      x-amzn-requestid:
+      - 3d87cd32-7754-4d2f-b314-be14346522c7
+    body:
+      type: json
+      content:
+        message: Unauthorized
+  recorded_at: 2026-10-20T16:12:21.924Z

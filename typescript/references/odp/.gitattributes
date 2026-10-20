@@ -1,0 +1,3 @@
+# Preserve downloaded source bytes, including upstream line endings/whitespace.
+*.html -text -whitespace
+*.yaml -text -whitespace
