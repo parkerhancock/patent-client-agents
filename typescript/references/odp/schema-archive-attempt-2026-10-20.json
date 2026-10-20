@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-10-20",
+  "requested_original_companion_count": 7,
+  "new_original_companion_archives": 0,
+  "schema_bundle_complete": false,
+  "prior_refusal": {
+    "url": "https://data.uspto.gov/swagger/odp-common-base.yaml",
+    "evidence": "sources.json remaining_source_review.constraints records prior blocked browser navigation; exact underlying reason not captured. Not retried this pass."
+  },
+  "attempts": [
+    {
+      "url": "https://data.uspto.gov/swagger/trial-common.yaml",
+      "mechanism": "Normal Chrome browser navigation to original official URL referenced by current definition",
+      "result": "Browser refusal",
+      "browser_error": "net::ERR_BLOCKED_BY_CLIENT",
+      "original_bytes_obtained": false,
+      "retry_or_alternate_fetch": false
+    },
+    {
+      "url": "https://data.uspto.gov/swagger/trial-proceedings.yaml",
+      "mechanism": "Normal Chrome browser navigation to original official URL referenced by current definition",
+      "result": "Browser refusal",
+      "browser_error": "net::ERR_BLOCKED_BY_CLIENT",
+      "original_bytes_obtained": false,
+      "retry_or_alternate_fetch": false
+    }
+  ],
+  "not_attempted_this_pass": [
+    "trial-decisions.yaml",
+    "trial-documents.yaml",
+    "trial-appeal-decisions.yaml",
+    "trial-interferences.yaml"
+  ],
+  "stop_requirement": {
+    "skill_file": "/Users/parkerhancock/.agents/skills/synced/c1fbc5d6-2df4-4552-b244-8e1ffc707eb6_b933fff0-d8ed-440b-a231-f8753b8583ce/chrome-browser/SKILL.md",
+    "quote": "Claude stops and asks the person how to proceed, explaining what it tried and what went wrong, when any of these happen:",
+    "condition": "browser tool calls fail or return errors after 2 or 3 attempts",
+    "application": "Stopped after two distinct normal original-URL browser calls returned ERR_BLOCKED_BY_CLIENT. No blanket refusal inferred for the four unattempted files."
+  },
+  "source_validation": "schema-reference-validation-2026-10-20.json",
+  "limits": [
+    "Official Swagger UI visibly provides a main-entry source link; no companion bundle/export link was observed.",
+    "Prior supported page-asset export rejected YAML as an unsupported asset kind.",
+    "Rendered operation and schema evidence is retained separately and is not archived original companion bytes.",
+    "No original companion source bytes were received, reconstructed, or fabricated.",
+    "No safety or browser-client refusal was bypassed."
+  ]
+}

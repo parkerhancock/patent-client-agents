@@ -75,6 +75,17 @@ does not export YAML/other assets. The earlier blocked common-base URL was not
 directly navigated to or exported again. No original companion bytes were
 obtained in this audit, so the complete-schema flag remains false.
 
+A subsequent original-companion archive attempt obtained no new source bytes.
+Normal browser access to `trial-common.yaml` and `trial-proceedings.yaml`
+returned `net::ERR_BLOCKED_BY_CLIENT`; the earlier common-base refusal was not
+retried. Four other trial files were not attempted in that pass. The
+[browser receipts](../references/odp/schema-archive-attempt-2026-10-20.json)
+record the exact scope and required stop. A
+[reference-validation report](../references/odp/schema-reference-validation-2026-10-20.json)
+checks 795 reference occurrences across the eight original entry archives:
+local pointers resolve, but all seven companion filenames remain missing.
+Their transitive references cannot be validated without the original bytes.
+
 Rendered PTAB GET proceedings documentation lists q, sort, offset, limit,
 facets, fields, filters and rangeFilters. Its 413 response example describes a
 6 MB upstream payload limit. Missing raw schema parameters are recorded as

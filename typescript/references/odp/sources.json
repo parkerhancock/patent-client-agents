@@ -886,5 +886,13 @@
     "rendered_companion_operation_count": 29,
     "schema_bundle_complete": false,
     "behavioral_parity_proven": false
+  },
+  "companion_archive_followup": {
+    "archive": "schema-archive-attempt-2026-10-20.json",
+    "sha256": "e5dfdbf7e339cb3f9d85256a6ed1ea30aeedbff424a9be5560700690154e9868",
+    "reference_validation": "schema-reference-validation-2026-10-20.json",
+    "reference_validation_sha256": "b595196ac655cc44d1003180298b2bd04942970120e7fa0d7d7bbd481610cb6a",
+    "new_original_companion_archives": 0,
+    "schema_bundle_complete": false
   }
 }
