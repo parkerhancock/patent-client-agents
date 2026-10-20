@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-10-20T18:20:38.757114+00:00",
+  "official_index_url": "https://www.uspto.gov/web/offices/pac/mpep/index.html",
+  "empep_url": "https://mpep.uspto.gov/RDMS/MPEP/current",
+  "source_version": "E9_R-01.2024",
+  "edition": "Ninth Edition",
+  "revision": "01.2024",
+  "publication_date": "2024-11",
+  "publication_date_precision": "month",
+  "substantive_cutoff_date": "2024-01-31",
+  "subsequent_publications_url": "https://www.uspto.gov/web/offices/pac/mpep/subsequent-publications.pdf",
+  "subsequent_publications_as_of": "2026-07-20",
+  "interim_updates_coverage": "not_included",
+  "freshness_warning": "Latest base-manual release checked, not current examination guidance; later published and superseding material is not incorporated.",
+  "superseding_publications": [
+    {
+      "date": "2025-01-14",
+      "title": "Revised Form Paragraphs for Design Patents and Applications",
+      "source_url": "https://www.uspto.gov/sites/default/files/documents/mpep_revised_design_fp_14jan2025.pdf",
+      "file": "superseding-design-form-paragraphs.pdf"
+    },
+    {
+      "date": "2025-01-17",
+      "title": "Revised and New Form Paragraphs in View of Setting and Adjusting Patent Fees During Fiscal Year 2025",
+      "source_url": "https://www.uspto.gov/sites/default/files/documents/advance_notice_fp_17jan2025.pdf",
+      "file": "superseding-fees-form-paragraphs.pdf"
+    },
+    {
+      "date": "2025-10-24",
+      "title": "Advance notice of change to the MPEP: Similarity Search",
+      "source_url": "https://www.uspto.gov/sites/default/files/documents/MPEP-similarity-search.pdf",
+      "file": "superseding-similarity-search.pdf"
+    },
+    {
+      "date": "2025-10-24",
+      "title": "Advance notice of change to the MPEP: false assertions or certifications of entity status",
+      "source_url": "https://www.uspto.gov/sites/default/files/documents/MPEP-certificate-entity-status.pdf",
+      "file": "superseding-entity-status.pdf"
+    },
+    {
+      "date": "2025-12-05",
+      "title": "Advance notice of change to the MPEP in light of Ex Parte Desjardins",
+      "source_url": "https://www.uspto.gov/web/offices/pac/mpep/ANC-Desjardins-Memo-12-5-25.pdf",
+      "file": "superseding-desjardins.pdf"
+    }
+  ],
+  "pdf_zip": {
+    "source_url": "https://www.uspto.gov/web/offices/pac/mpep/e9r-01-2024.zip",
+    "content_length": 55106401,
+    "last_modified": "2026-03-10T00:45:58Z",
+    "format": "PDF ZIP; not downloaded",
+    "warning": "HTTP modification date is not publication or substantive cutoff date."
+  }
+}

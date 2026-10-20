@@ -1,0 +1,759 @@
+﻿<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:xalan-nodeset="org.apache.xalan.xslt.extensions.Nodeset" xmlns:java="http://xml.apache.org/xslt/java"
+  xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:pto="urn:us:gov:doc:uspto:enterprise"
+  xmlns:bf="http://www.uspto.gov/bf" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns="http://www.w3.org/1999/xhtml"
+  xml:lang="en" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Manual of Patent Examining Procedure</title>
+  <!-- MPEP Metadata: /includes/general/mpep_metadata.html-->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords"
+    content="United States Patent and Trademark Office, USPTO, Manual of Patent Examining Procedure, MPEP" />
+  <meta name="dc.title" content="MPEP" />
+  <meta name="dc.description" content="Manual of Patent Examining Procedure" />
+  <meta name="dc.creator" content="MPEP Resources" />
+  <meta name="dc.date.created" scheme="ISO8601" content="2010-11-19" />
+  <meta name="dc.date.reviewed" scheme="ISO8601" content="2010-11-19" />
+  <meta name="dc.language" scheme="DCTERMS.RFC1766" content="EN-US" />
+
+  <!-- End of mpep_metadata.html -->
+
+  <!-- CSS and JavaScript includes: /includes/general/stylesandjs.html -->
+  <!-- Used in: MPEP, TMEP -->
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/includes/c/reset-fonts-grids.css" type="text/css" media="all" charset="utf-8" />
+  <link rel="stylesheet" href="/includes/c/base-min.css" type="text/css" media="all" charset="utf-8" />
+  <link rel="stylesheet" href="/includes/c/screen.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/includes/c/base.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="/includes/c/print.css" type="text/css" media="print" charset="utf-8" />
+  <link rel="stylesheet" href="/includes/c/style.css" type="text/css" />
+  <link rel="stylesheet" href="/includes/c/slideshows.css" type="text/css" />
+  <script type="text/javascript" src="/includes/j/yahoo-dom-event.js"></script>
+  <script type="text/javascript" src="/includes/j/selector-beta-min.js"></script>
+  <script type="text/javascript" src="/includes/j/feedback.js"></script>
+  <script type="text/javascript" src="/includes/j/jquery.min.js"></script>
+  <script type="text/javascript" src="/includes/j/uspto_head_1.js"></script>
+  <!--<script type="text/javascript" src="/includes/j/slides.jquery.js"></script>
+<script type="text/javascript" src="/includes/j/jquery.easing.js"></script>-->
+  <script type="text/javascript" src="/includes/j/jquery.cycle.all.js"></script>
+  <script type="text/javascript" src="/includes/j/jquery.pngFix.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('div#hd').pngFix();
+      $('div#ft').pngFix();
+    });
+  </script>
+  <!--[if lte IE 7]>
+    <link rel="stylesheet" href="/includes/c/base-ie7.css" type="text/css" media="screen" charset="utf-8" />
+    <![endif]-->
+  <!--[if lte IE 6]>
+    <link rel="stylesheet" href="/includes/c/base-ie6.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" src="/includes/j/base-ie6.js"></script>
+    <![endif]-->
+  <!-- End of stylesandjs.html -->
+
+</head>
+
+<body>
+  <!-- Patents Top Navigation: /includes/general/patent_header.html -->
+  <!-- Used in: MPEP and CPC -->
+
+  <div id="custom-doc" class="yui-t2 custom-template">
+    <div id="hd">
+      <div id="identity"><!-- Begin sites/uspto.gov/includes/general/banner.inc-->
+
+        <img src="https://www.uspto.gov/includes/i/logo.png" alt="uspto.gov" usemap="#logo" />
+        <map name="logo" id="logo">
+          <area shape="rect" coords="0,0,443,93" href="https://www.uspto.gov/" alt="www.uspto.gov" />
+          <area shape="rect" coords="80,89,368,108" href="https://www.doc.gov" alt="www.doc.gov" />
+        </map>
+
+        <!-- End sites/uspto.gov/includes/general/banner.inc-->
+      </div>
+      <a href="#article" class="accessible">Skip over navigation</a>
+      <div id="globals"><!-- Begin sites/uspto.gov/includes/general/global_links.inc -->
+        <!-- Empty for New Home-page Design -->
+        <!-- End sites/uspto.gov/includes/general/global_links.inc -->
+        <!-- Begin sites/uspto.gov/includes/general/search.inc-->
+
+        <!-- Search box on the top -->
+
+        <div class="link"><a href="/patents/search">search for patents</a> | <a href="http://tmsearch.uspto.gov">search
+            for trademarks</a></div>
+        <form block="block-uspto-search" action="https://www-search.uspto.gov/WWW-search.html" method="GET"
+          id="search-block-form">
+          <div class="input-group">
+            <!-- <label for="headerSearchInput" class="hidden">&nbsp;</label>-->
+            <input id="headerSearchInput" title="Search MPEP" name="q" placeholder="Search MPEP"
+              class="form-control form-search" type="search" size="25" maxlength="128" style="height: 20px;" value />
+            <input type="hidden" name="op" value="Search">
+            <input type="hidden" name="searchDomain" value="MPEP">
+            <input type="hidden" name="source" value="MPEP">
+            <input type="hidden" name="fresh" value="true">
+            <span class="input-group-btn">
+              <button id="headerSearchButton" class="btn btn-search btn-info btn-block" type="submit">
+                <span class="fas fa-search"></span>
+                <span class="sr-only">Search</span>
+              </button>
+            </span>
+          </div>
+        </form>
+        <!-- End sites/uspto.gov/includes/general/search.inc-->
+
+      </div><!-- Begin sites/uspto.gov/includes/general/global_nav.inc-->
+
+      <div id="menu">
+        <ul>
+          <li>
+            <a href="/patents/index.jsp">PATENTS <!--[if IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+              <li>
+                <a href="/patents/process/search/index.jsp">Patent Search</a>
+              </li>
+              <li>
+                <a href="/patents/process/index.jsp">Patent Process</a>
+              </li>
+              <li>
+                <a href="/patents/resources/classification/index.jsp">Patent Classification</a>
+              </li>
+              <li>
+                <a href="/forms/index.jsp">Patent Forms</a>
+              </li>
+              <li>
+                <a href="/patents/stats/index.jsp">Statistics</a>
+              </li>
+              <li>
+                <a href="/patents/ebc/about.jsp">Electronic Business Center</a>
+              </li>
+              <li>
+                <a href="/patents/law/index.jsp">Patent Laws, Regulations, Policies &amp; Procedures</a>
+              </li>
+              <li>
+                <a href="/patents/resources/index.jsp">Resources and Guidance</a>
+              </li>
+              <li>
+                <a href="/patents/publications/index.jsp">Office of Data Management</a>
+              </li>
+              <li>
+                <a href="/patents/announce/index.jsp">Announcements</a>
+              </li>
+              <li>
+                <a href="/patents/init_events/index.jsp">Initiatives &amp; Events</a>
+              </li>
+              <li>
+                <a href="/patents/int_protect/index.jsp">International Protection</a>
+              </li>
+              <li>
+                <a href="http://portal.uspto.gov/external/portal/emlocator">Employee Locator</a>
+              </li>
+              <li>
+                <a href="/patents/contact_patents.jsp">Contact Patents</a>
+              </li>
+            </ul> <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+          </li>
+          <li class="nav_seperator"></li>
+          <li>
+            <a href="/trademarks/index.jsp">TRADEMARKS <!--[if IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+              <li>
+                <a href="http://tess2.uspto.gov/bin/gate.exe?f=login&amp;p_lang=english&amp;p_d=trmk">Trademark
+                  Search</a>
+              </li>
+              <li>
+                <a href="/trademarks/process/index.jsp">Trademarks Process</a>
+              </li>
+              <li>
+                <a href="/trademarks/notices/index.jsp">News &amp; Notices</a>
+              </li>
+              <li>
+                <a href="/trademarks/resources/index.jsp">Manuals, Guides, Official Gazette</a>
+              </li>
+              <li>
+                <a href="/trademarks/law/index.jsp">Laws &amp; Regulations</a>
+              </li>
+              <li>
+                <a href="/trademarks/teas/index.jsp">Online Filing</a>
+              </li>
+              <li>
+                <a href="/trademarks/contact_trademarks.jsp">Contact Trademarks</a>
+              </li>
+            </ul> <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+          </li>
+          <li class="nav_seperator"></li>
+          <li>
+            <a href="/ip/index.jsp">IP LAW &amp; POLICY <!--[if IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+              <li>
+                <a href="/ip/rules/index.jsp">Rulemaking</a>
+              </li>
+              <li>
+                <a href="/ip/global/index.jsp">IP Policy and Enforcement</a>
+              </li>
+              <li>
+                <a href="/ip/iprtoolkits.jsp">Protecting IP Overseas</a>
+              </li>
+              <li>
+                <a href="/ip/training/index.jsp">Training and Education</a>
+              </li>
+              <li>
+                <a href="/ip/events/index.jsp">Training Programs &amp; Conferences</a>
+              </li>
+              <li>
+                <a href="/ip/officegovaffairs.jsp">Office of Governmental Affairs</a>
+              </li>
+              <li>
+                <a href="/ip/officechiefecon/index.jsp">Office of Chief Economist</a>
+              </li>
+              <li>
+                <a href="/ip/boards/index.jsp">Boards and Counsel</a>
+              </li>
+            </ul> <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+          </li>
+          <li class="nav_seperator"></li>
+          <li>
+            <a href="/products/index.jsp">PRODUCTS &amp; SERVICES <!--[if IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+              <li>
+                <a href="/products/catalog/index.jsp">Electronic Data Products</a>
+              </li>
+              <li>
+                <a href="/products/xml-resources.jsp">XML Resources</a>
+              </li>
+              <li>
+                <a href="/products/xml-retrospective.jsp">XML Resources - Retrospective</a>
+              </li>
+              <li>
+                <a href="/products/qisorder.jsp">USPTO Contact Center Order Form</a>
+              </li>
+              <li>
+                <a href="/products/services/services.jsp">Services</a>
+              </li>
+              <li>
+                <a href="/products/library/index.jsp">Locate Libraries</a>
+              </li>
+              <li>
+                <a href="/products/events/index.jsp">Training/Events</a>
+              </li>
+              <li>
+                <a href="/products/online-services.jsp">Online Services Hub</a>
+              </li>
+            </ul> <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+          </li>
+          <li class="nav_seperator"></li>
+          <li>
+            <a href="/inventors/index.jsp">INVENTORS <!--[if IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+              <li>
+                <a href="/inventors/patents.jsp">Patents for Inventors</a>
+              </li>
+              <li>
+                <a href="/inventors/trademarks.jsp">Trademarks for Inventors</a>
+              </li>
+              <li>
+                <a href="/inventors/iac/index.jsp">Inventors Assistance</a>
+              </li>
+              <li>
+                <a href="/inventors/edu-inf/index.jsp">Education and Information</a>
+              </li>
+              <li>
+                <a href="/inventors/scam_prevention/index.jsp">Scam Prevention</a>
+              </li>
+              <li>
+                <a href="/inventors/proseprobono/index.jsp">Pro Se and Pro Bono</a>
+              </li>
+              <li>
+                <a href="/inventors/events/index.jsp">Current Events</a>
+              </li>
+              <li>
+                <a href="/inventors/state_resources/index.jsp">State Resources</a>
+              </li>
+              <li>
+                <a href="/inventors/independent/index.jsp">InventorsEye Newsletter</a>
+              </li>
+            </ul> <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+          </li>
+          <li class="nav_seperator"></li>
+          <li>
+            <a href="/about-us/news-updates">NEWS &amp; NOTICES <!--[if IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+              <li>
+                <a href="/subscribe">Subscription Center</a>
+              </li>
+              <li>
+                <a href="/about-us/news-updates">Press Releases</a>
+              </li>
+              <li>
+                <a href="/about-us/news-updates">Testimony and Speeches</a>
+              </li>
+              <li>
+                <a href="https://www.uspto.gov/blog/">Director's Forum</a>
+              </li>
+              <li>
+                <a href="https://www.uspto.gov/blog/ebiz">Systems Status</a>
+              </li>
+              <li>
+                <a href="/learning-and-resources/operating-status">Emergency Notices</a>
+              </li>
+              <li>
+                <a href="/learning-and-resources/uspto-videos">USPTO Videos</a>
+              </li>
+              <li>
+                <a href="/learning-and-resources/official-gazette">Official Gazette</a>
+              </li>
+              <li>
+                <a href="/learning-and-resources/federal-register">Federal Register Notices</a>
+              </li>
+              <li>
+                <a href="/about-us/events">Event Calendar</a>
+              </li>
+            </ul> <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+          </li>
+          <li class="nav_seperator"></li>
+          <li>
+            <a href="/faq/index.jsp">FAQs <!--[if IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+              <li>
+                <a href="/faq/patents.jsp">Patents FAQs</a>
+              </li>
+              <li>
+                <a href="/faq/trademarks.jsp">Trademarks FAQs</a>
+              </li>
+              <li>
+                <a href="/faq/assignments.jsp">Assignments</a>
+              </li>
+              <li>
+                <a href="/faq/security.jsp">Security</a>
+              </li>
+              <li>
+                <a href="/faq/musicart.jsp">Musicians and Artists</a>
+              </li>
+              <li>
+                <a href="/faq/plugins/index.jsp">Browser Plugins</a>
+              </li>
+              <li>
+                <a href="/faq/other.jsp">Other Web Resources</a>
+              </li>
+            </ul> <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+          </li>
+          <li class="nav_seperator"></li>
+          <li>
+            <a href="/about/index.jsp">ABOUT US <!--[if IE 7]><!--></a><!--<![endif]-->
+            <!--[if lte IE 6]><table><tr><td><![endif]-->
+            <ul>
+              <li>
+                <a href="/about/bios/index.jsp">USPTO Leadership</a>
+              </li>
+              <li>
+                <a href="/about/offices/index.jsp">USPTO Organization</a>
+              </li>
+              <li>
+                <a href="/about/locations/index.jsp">USPTO Offices</a>
+              </li>
+              <li>
+                <a href="/careers/">Careers</a>
+              </li>
+              <li>
+                <a href="/about/stratplan/index.jsp">Budget, Performance, and Planning</a>
+              </li>
+              <li>
+                <a href="/about/stats/index.jsp">Statistics</a>
+              </li>
+              <li>
+                <a href="/about/vendor_info/index.jsp">Vendor Information</a>
+              </li>
+              <li>
+                <a href="/about/advisory/index.jsp">Public Advisory Committees</a>
+              </li>
+              <li>
+                <a href="/about/nmti/index.jsp">National Medal of Technology and Innovation</a>
+              </li>
+              <li>
+                <a href="/about/ipm/index.jsp">IP in Motion</a>
+              </li>
+              <li>
+                <a href="/about/contacts/index.jsp">Contact Us</a>
+              </li>
+            </ul> <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+          </li>
+        </ul>
+      </div>
+
+
+      <!-- End sites/uspto.gov/includes/general/global_nav.inc-->
+    </div>
+
+
+    <!-- End of patent_header.html -->
+
+    <!-- MPEP Breadcrumb: /includes/general/mpep_breadcrumb.html -->
+
+    <div id="bd">
+      <div xmlns:bf="http://www.uspto.gov/bf" id="breadcrumb-container" class="clear-fix">
+        <ul id="breadcrumb">
+          <li class="first">
+            <a href="/index.jsp"><span>Home Page</span></a>
+          </li>
+          <li>
+            <a href="/patents/index.jsp"><span>Patents</span></a>
+          </li>
+          <li>
+            <a href="/patents/law/index.jsp"><span>Patent Laws, Regulations, Policies & Procedures </span></a>
+          </li>
+
+          <!-- End of mpep_breadcrumb.html -->
+          <li><a href="index.html">Manual of Patent Examining Procedure</a></li>
+          <li>Manual of Patent Examining Procedure</li>
+        </ul>
+      </div>
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g">
+            <div xmlns:bf="http://www.uspto.gov/bf" id="article">
+              <div>
+                <h1>
+                  <center>
+                    <b><span class=" ">Manual of Patent Examining Procedure (MPEP)</span></b>
+                  </center>
+                </h1>
+                <h1>
+                  <center>
+                    <b><span class=" ">Ninth Edition, Revision 01.2024</span></b>
+                  </center>
+                </h1>
+                <h3 style="font-size:14px; color:#666666;"><a href="old/index.htm">MPEP Archives</a> - PDF archive of
+                  previous publications of the manual from 1948 – 2023.</h3>
+
+                <h3 style="font-size:14px; color:#666666;">Please use <a
+                    href="mailto:MPEPFeedback@uspto.gov">MPEPFeedback@uspto.gov</a> to send an inquiry to the MPEP
+                  staff. </h3>
+
+                <br />
+                <h1>Updates Since Current MPEP</h1>
+                <blockquote>
+                  <p>The current MPEP (9th Edition, Rev. 01.2024), published November 2024, is up-to-date as of January
+                    31, 2024. Any changes to USPTO patent examining policies and procedures that occurred after January
+                    31, 2024, have not been incorporated into the current MPEP. </p>
+                  <br />
+                  <h3>The following are links to updated information:</h3>
+                  <p><a href="/curr_fees">Current fees</a> &ndash; Refer to the Current USPTO Fee Schedule.</p>
+                  <p><a href="consolidated_laws.pdf">Consolidated Laws</a> &ndash; The patent laws in effect as of July
+                    18, 2025.</p>
+                  <p><a href="consolidated_rules.pdf">Consolidated Rules</a> &ndash; The patent rules in effect as of
+                    July 20, 2026.
+                  </p>
+                  <p><a href="subsequent-publications.pdf">Subsequent Publications (After January 31, 2024)</a> &ndash;
+                    A listing of documents that made changes to USPTO patent examining policies and procedures after
+                    January 31, 2024, and are under consideration for inclusion in a future publication of the MPEP.
+                    This listing is current as of July 20, 2026.</p>
+
+
+                  <br />
+                  <h3>The following supersede one or more portions of the current MPEP:</h3>
+                  <p><a href="/sites/default/files/documents/mpep_revised_design_fp_14jan2025.pdf">Revised Form
+                      Paragraphs for Design Patents and Applications</a>, January 14, 2025 <br /><a
+                      href="/sites/default/files/documents/advance_notice_fp_17jan2025.pdf">Revised and New Form
+                      Paragraphs in View of Setting and Adjusting Patent Fees During Fiscal Year 2025</a>, January 17,
+                    2025<br /><a href="/sites/default/files/documents/MPEP-similarity-search.pdf">Advance Notice of
+                      Change to the MPEP to provide guidance on the use of PE2E Search’s Similarity Search feature</a>,
+                    October 24, 2025<br /><a
+                      href="/sites/default/files/documents/MPEP-certificate-entity-status.pdf">Advance notice of change
+                      to
+                      the MPEP with respect to false assertions or certifications of entity status</a>,
+                    October 24, 2025<br /><a href="ANC-Desjardins-Memo-12-5-25.pdf">Advance notice of change to the MPEP in light of <em>Ex Parte Desjardins</em></a>, December 5, 2025</p>
+                </blockquote>
+
+                <br />
+                <h1>Current MPEP</h1>
+                <blockquote>
+
+                  <p>MPEP sections that were revised in the current MPEP have a revision indicator of [R-01.2024]
+                    adjacent to the section title. Throughout the MPEP, these revision indicators identify the date of
+                    the last revision to that section. </p>
+                  <p>See the “Change Summary” for an explanation of the changes made in the current MPEP.</p>
+                  <p>The current MPEP (9<sup>th</sup> Edition, Rev. 01.2024) is available in three formats: Searchable
+                    MPEP (eMPEP), HTML, and PDF.</p>
+
+                  <h2><span class=" "><a href="http://mpep.uspto.gov">Searchable MPEP (eMPEP)</a></span></h2>
+                  <ul>
+                    <li><strong><a href="/sites/default/files/faq/patents/searchable_mpep_guide.pdf">See the user manual
+                        </a> or <a href="/sites/default/files/faq/patents/searchable_mpep_qrg.pdf">quick reference
+                          guide</a> for help with search features (e.g., default operators, proximity searches, and wild
+                        cards) and navigation.</strong></li>
+                  </ul>
+                  <br />
+                  <h2>HTML and PDF</h2>
+                  <p>Links below including a downloadable zip file:</p>
+
+                </blockquote>
+                <div xmlns=""> <a href="mpep-0005-change-summary.html">Change Summary</a>&nbsp; &nbsp; &nbsp;<a
+                    href="mpep-0005-change-summary.pdf">PDF </div>
+                <div xmlns=""> <a href="mpep-0010-title-page.html">Title Page</a>&nbsp; &nbsp; &nbsp; <a
+                    href="mpep-0010-title-page.pdf">PDF</a> </div>
+                <div xmlns=""> <a href="mpep-0015-foreword.html">Foreword</a>&nbsp; &nbsp; &nbsp; <a
+                    href="mpep-0015-foreword.pdf">PDF</a> </div>
+                <div xmlns=""> <a href="mpep-0020-introduction.html">Introduction</a>&nbsp; &nbsp; &nbsp; <a
+                    href="mpep-0020-introduction.pdf">PDF</a> </div>
+                <div xmlns=""> Table of Contents &nbsp; &nbsp; &nbsp; <a href="mpep-0000-table-of-contents.pdf">PDF</a>
+                </div>
+                <div xmlns=""> Chapter 100 - &nbsp; &nbsp; <a href="mpep-0100.pdf">PDF</a> &nbsp; &nbsp; <a
+                    href="mpep-0100.html">Secrecy, Access, National Security, and Foreign Filing</a> </div>
+                <div xmlns=""> Chapter 200 - &nbsp; &nbsp; <a href="mpep-0200.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-0200.html">Types and Status of Application; Benefit and Priority Claims</a> </div>
+                <div xmlns=""> Chapter 300 - &nbsp; &nbsp; <a href="mpep-0300.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-0300.html">Ownership and Assignment</a> </div>
+                <div xmlns=""> Chapter 400 -&nbsp; &nbsp; <a href="mpep-0400.pdf">PDF</a>&nbsp; &nbsp; <a
+                    href="mpep-0400.html">Representative of Applicant or Owner</a> </div>
+                <div xmlns=""> Chapter 500 - &nbsp; &nbsp; <a href="mpep-0500.pdf">PDF</a>&nbsp; &nbsp; <a
+                    href="mpep-0500.html">Receipt and Handling of Mail and Papers</a> </div>
+                <div xmlns=""> Chapter 600 - &nbsp; &nbsp; <a href="mpep-0600.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-0600.html">Parts, Form, and Content of Application</a> </div>
+                <div xmlns=""> Chapter 700 - &nbsp; &nbsp; <a href="mpep-0700.pdf">PDF</a>&nbsp; &nbsp; <a
+                    href="mpep-0700.html">Examination of Applications</a> </div>
+                <div xmlns=""> Chapter 800 - &nbsp; &nbsp; <a href="mpep-0800.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-0800.html">Restriction in Applications Filed Under 35 U.S.C. 111; Double Patenting</a>
+                </div>
+                <div xmlns=""> Chapter 900 - &nbsp; &nbsp; <a href="mpep-0900.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-0900.html">Prior Art, Search, Classification, and Routing</a> </div>
+                <div xmlns=""> Chapter 1000 - &nbsp; &nbsp; <a href="mpep-1000.pdf">PDF</a>&nbsp;&nbsp;<a
+                    href="mpep-1000.html">Matters Decided by Various U.S. Patent and Trademark Office Officials</a>
+                </div>
+                <div xmlns=""> Chapter 1100 - &nbsp; &nbsp; <a href="mpep-1100.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-1100.html">Statutory Invention Registration (SIR); Pre-Grant Publication (PGPub) and
+                    Preissuance Submissions</a> </div>
+                <div xmlns=""> Chapter 1200 - &nbsp; &nbsp; <a href="mpep-1200.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-1200.html"> Appeal</a> </div>
+                <div xmlns=""> Chapter 1300 - &nbsp; &nbsp; <a href="mpep-1300.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-1300.html">Allowance and Issue</a> </div>
+                <div xmlns=""> Chapter 1400 - &nbsp; &nbsp; <a href="mpep-1400.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-1400.html">Correction of Patents</a> </div>
+                <div xmlns=""> Chapter 1500 - &nbsp; &nbsp; <a href="mpep-1500.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-1500.html">Design Patents</a> </div>
+                <div xmlns=""> Chapter 1600 - &nbsp; &nbsp; <a href="mpep-1600.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-1600.html">Plant Patents</a> </div>
+                <div xmlns=""> Chapter 1700 - &nbsp; &nbsp; <a href="mpep-1700.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-1700.html">Miscellaneous</a> </div>
+                <div xmlns=""> Chapter 1800 - &nbsp; &nbsp; <a href="mpep-1800.pdf">PDF</a>&nbsp; &nbsp; <a
+                    href="mpep-1800.html">Patent Cooperation Treaty</a> </div>
+                <div xmlns=""> Chapter 1900 - &nbsp; &nbsp; <a href="mpep-1900.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-1900.html">Protest</a> </div>
+                <div xmlns=""> Chapter 2000 - &nbsp; &nbsp; <a href="mpep-2000.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2000.html">Duty of Disclosure</a> </div>
+                <div xmlns=""> Chapter 2100 - &nbsp; &nbsp; <a href="mpep-2100.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2100.html">Patentability</a> </div>
+                <div xmlns=""> Chapter 2200 - &nbsp; &nbsp; <a href="mpep-2200.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2200.html">Citation of Prior Art and Ex Parte Reexamination of Patents</a> </div>
+                <div xmlns=""> Chapter 2300 - &nbsp; &nbsp; <a href="mpep-2300.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2300.html">Interference and Derivation Proceedings </a> </div>
+                <div xmlns=""> Chapter 2400 - &nbsp; &nbsp; <a href="mpep-2400.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2400.html">Biotechnology</a> </div>
+                <div xmlns=""> Chapter 2500 - &nbsp; &nbsp; <a href="mpep-2500.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2500.html">Maintenance Fees</a> </div>
+                <div xmlns=""> Chapter 2600 - &nbsp; &nbsp; <a href="mpep-2600.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2600.html">Optional Inter Partes Reexamination</a> </div>
+                <div xmlns=""> Chapter 2700 - &nbsp; &nbsp; <a href="mpep-2700.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2700.html">Patent Terms, Adjustments, and Extensions</a> </div>
+                <div xmlns=""> Chapter 2800 - &nbsp; &nbsp; <a href="mpep-2800.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2800.html">Supplemental Examination</a> </div>
+                <div xmlns=""> Chapter 2900 - &nbsp; &nbsp; <a href="mpep-2900.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-2900.html">International Design Applications</a> </div>
+                <div xmlns=""> Appendix I - &nbsp; &nbsp; <a href="mpep-9005-appx-i.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-9005-appx-i.html">Reserved</a> </div>
+                <div xmlns=""> Appendix II - &nbsp; &nbsp; <a href="mpep-9010-appx-ii.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-9010-appx-ii.html">List of Decisions Cited</a> </div>
+                <div xmlns=""> Appendix L - &nbsp; &nbsp;<a href="mpep-9015-appx-l.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-9015-appx-l.html">Patent Laws</a> </div>
+                <div xmlns=""> Appendix R - &nbsp; &nbsp; <a href="mpep-9020-appx-r.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-9020-appx-r.html">Patent Rules</a> </div>
+                <div xmlns=""> Appendix T - &nbsp; &nbsp; <a href="mpep-9025-appx-t.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-9025-appx-t.html">Patent Cooperation Treaty</a> </div>
+                <div xmlns=""> Appendix AI - &nbsp; &nbsp; <a href="mpep-9030-appx-ai.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-9030-appx-ai.html">Administrative Instructions Under the PCT</a> </div>
+                <div xmlns=""> Appendix P - &nbsp; &nbsp;<a href="mpep-9035-appx-p.pdf">PDF</a>&nbsp; &nbsp;<a
+                    href="mpep-9035-appx-p.html">Paris Convention</a> </div>
+                <div xmlns=""> <a href="mpep-index-a.html">Subject Matter Index </a>&nbsp; &nbsp; &nbsp;<a
+                    href="mpep-9090-subject-matter-index.pdf">PDF</a></div>
+                <div xmlns=""><a href="mpep-9095-Form-Paragraph-Chapter.html">Form Paragraphs</a> &nbsp; &nbsp; &nbsp;<a
+                    href="mpep-9095-Form-Paragraph-Chapter.pdf">PDF</a> </div>
+                <div id="zipcollection">
+                  <p>&nbsp;</p>
+                  <p><a href="e9r-01-2024.zip">Zipped version of the MPEP current revision</a> in the PDF format.
+
+                    <br>
+                  </p>
+                </div>
+                <!--<a name="Availability of MPEP in Paper Form and Other"></a>
+        <h3>Availability of MPEP on Paper and in Other
+          Formats</h3>-->
+                <table cellpadding=8 width="100%" bgcolor=#ccffcc border=3>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <center>
+                          <p><b><span class=" vertbar">Previous Editions and Revisions</span></b> <br>
+                            <br>
+                            <b>All previous editions and revisions of the Manual are available from the <a
+                                href=" old/index.htm">MPEP Archives</a></b>
+                          </p>
+                          <br>
+                        </center>
+                        <blockquote compact="">
+                          <p><b>First Edition, November 1949&nbsp;</b> <br>
+                            <b>Second Edition, November 1953&nbsp;</b> <br>
+                            <b>Third Edition,
+                              November 1961&nbsp;</b> <br>
+                            <b>Fourth Edition, June 1979&nbsp;</b> <br>
+                            <b>Fifth Edition, August 1983&nbsp;</b> <br>
+                            <b>Sixth Edition,
+                              January 1995&nbsp;</b> <br>
+                            <b>Seventh Edition, July 1998&nbsp;</b> <br>
+                            <b>Eighth Edition, August 2001 <br>
+                            </b><strong>Ninth Edition, March 2014</strong></b>
+                          </p>
+                          <p>&nbsp;</p>
+                        </blockquote>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+              </div>
+              <div>
+                <h1 class="page-title"> </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="yui-b">
+        <div id="aside">
+          <div id="rdms-sub-nav-container" xmlns:bf="http://www.uspto.gov/bf">
+            <ul id="sub-nav">
+              <li xmlns=""> <a href="mpep-0005-change-summary.html">Change Summary</a> </li>
+              <li xmlns=""> <a href="mpep-0010-title-page.html">Title Page</a> </li>
+              <li xmlns=""> <a href="mpep-0015-foreword.html">Foreword</a> </li>
+              <li xmlns=""> <a href="mpep-0020-introduction.html">Introduction</a> </li>
+              <li xmlns=""> <a href="mpep-0100.html">Chapter 100 - Secrecy, Access, National Security, and Foreign
+                  Filing</a> </li>
+              <li xmlns=""> <a href="mpep-0200.html">Chapter 200 - Types, Cross-Noting, and Status of Application</a>
+              </li>
+              <li xmlns=""> <a href="mpep-0300.html">Chapter 300 - Ownership and Assignment</a> </li>
+              <li xmlns=""> <a href="mpep-0400.html">Chapter 400 - Representative of Applicant or Owner</a> </li>
+              <li xmlns=""> <a href="mpep-0500.html">Chapter 500 - Receipt and Handling of Mail and Papers</a> </li>
+              <li xmlns=""> <a href="mpep-0600.html">Chapter 600 - Parts, Form, and Content of Application</a> </li>
+              <li xmlns=""> <a href="mpep-0700.html">Chapter 700 - Examination of Applications</a> </li>
+              <li xmlns=""> <a href="mpep-0800.html">Chapter 800 - Restriction in Applications Filed Under 35 U.S.C.
+                  111; Double Patenting</a> </li>
+              <li xmlns=""> <a href="mpep-0900.html">Chapter 900 - Prior Art, Classification, and Search</a> </li>
+              <li xmlns=""> <a href="mpep-1000.html">Chapter 1000 - Matters Decided by Various U.S. Patent and Trademark
+                  Office Officials</a> </li>
+              <li xmlns=""> <a href="mpep-1100.html">Chapter 1100 - Statutory Invention Registration (SIR); Pre-Grant
+                  Publication (PGPub) and Preissuance Submissions</a> </li>
+              <li xmlns=""> <a href="mpep-1200.html">Chapter 1200 - Appeal</a> </li>
+              <li xmlns=""> <a href="mpep-1300.html">Chapter 1300 - Allowance and Issue</a> </li>
+              <li xmlns=""> <a href="mpep-1400.html">Chapter 1400 - Correction of Patents</a> </li>
+              <li xmlns=""> <a href="mpep-1500.html">Chapter 1500 - Design Patents</a> </li>
+              <li xmlns=""> <a href="mpep-1600.html">Chapter 1600 - Plant Patents</a> </li>
+              <li xmlns=""> <a href="mpep-1700.html">Chapter 1700 - Miscellaneous</a> </li>
+              <li xmlns=""> <a href="mpep-1800.html">Chapter 1800 - Patent Cooperation Treaty</a> </li>
+              <li xmlns=""> <a href="mpep-1900.html">Chapter 1900 - Protest</a> </li>
+              <li xmlns=""> <a href="mpep-2000.html">Chapter 2000 - Duty of Disclosure</a> </li>
+              <li xmlns=""> <a href="mpep-2100.html">Chapter 2100 - Patentability</a> </li>
+              <li xmlns=""> <a href="mpep-2200.html">Chapter 2200 - Citation of Prior Art and Ex Parte Reexamination of
+                  Patents</a> </li>
+              <li xmlns=""> <a href="mpep-2300.html">Chapter 2300 - Interference and Derivation Proceedings</a> </li>
+              <li xmlns=""> <a href="mpep-2400.html">Chapter 2400 - Biotechnology</a> </li>
+              <li xmlns=""> <a href="mpep-2500.html">Chapter 2500 - Maintenance Fees</a> </li>
+              <li xmlns=""> <a href="mpep-2600.html">Chapter 2600 - Optional Inter Partes Reexamination</a> </li>
+              <li xmlns=""> <a href="mpep-2700.html">Chapter 2700 - Patent Terms, Adjustments, and Extensions</a> </li>
+              <li xmlns=""> <a href="mpep-2800.html">Chapter 2800 - Supplemental Examination</a> </li>
+              <li xmlns=""> <a href="mpep-2900.html">Chapter 2900 - International Design Applications</a> </li>
+              <li xmlns=""> <a href="mpep-9005-appx-i.html">Appendix I - Reserved</a> </li>
+              <li xmlns=""> <a href="mpep-9010-appx-ii.html">Appendix II - List of Decisions Cited</a> </li>
+              <li xmlns=""> <a href="mpep-9015-appx-l.html">Appendix L - Patent Laws</a> </li>
+              <li xmlns=""> <a href="mpep-9020-appx-r.html">Appendix R - Patent Rules</a> </li>
+              <li xmlns=""> <a href="mpep-9025-appx-t.html">Appendix T - Patent Cooperation Treaty</a> </li>
+              <li xmlns=""> <a href="mpep-9030-appx-ai.html">Appendix AI - Administrative Instructions Under the PCT</a>
+              </li>
+              <li xmlns=""> <a href="mpep-9035-appx-p.html">Appendix P - Paris Convention</a> </li>
+              <li xmlns=""> <a href="mpep-index-a.html">Subject Matter Index</a> </li>
+              <li xmlns=""> <a href="mpep-9095-Form-Paragraph-Chapter.pdf">Form Paragraphs </a> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer Navigation: /includes/general/footer2.html -->
+    <!-- Used in: MPEP, CPC -->
+
+    <div id="ft" class="clear-fix">
+      <div class="colLogos"> <a href="http://www.uspto.gov/" title="United States Patent and Trademark Office"><img
+            src="/includes/i/footer_uspto.png" alt="United States Patent and Trademark Office" border="0" /></a><br />
+      </div>
+      <div class="col">
+        <ul class="footer">
+          <li><a href="/accessibility.jsp">Accessibility</a></li>
+          <li><a href="/privact.jsp">Privacy Policy</a></li>
+          <li><a href="/termsofuse.jsp">Terms of Use</a></li>
+          <li><a href="/faq/security.jsp">Security</a></li>
+          <li><a href="/news/index_emergency.jsp">Emergencies/Security Alerts</a></li>
+          <li><a href="/products/catalog/infoqualityguide.jsp">Information Quality Guidelines</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="footer">
+          <li><a href="/about/stratplan/fair/index.jsp">Federal Activities Inventory Reform (FAIR) Act</a></li>
+          <li><a href="/about/offices/cao/ocr/nofear/index.jsp">Notification and Federal Employee Antidiscrimination and
+              Retaliation (NoFEAR) Act</a></li>
+          <li><a href="/about/stratplan/index.jsp">Budget &amp; Performance</a></li>
+          <li><a href="/ip/boards/foia_rr/index.jsp">Freedom of Information Act (FOIA)</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="footer">
+          <li><a href="http://www.osec.doc.gov/ocr/nofear/nofear.htm">Department of Commerce NoFEAR Act Report</a></li>
+          <li><a href="http://www.regulations.gov/">Regulations.gov</a></li>
+          <li><a href="http://www.stopfakes.gov/">STOP!Fakes.gov</a></li>
+          <li><a href="http://www.commerce.gov/">Department of Commerce</a></li>
+          <li><a href="http://www.usa.gov/">USA.gov</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="footer">
+          <li><a href="/ip/global/stopfakes.jsp">Strategy Targeting Organized Piracy (STOP!)</a></li>
+          <li><a href="/careers/">Careers</a></li>
+          <li><a href="/siteindex.jsp">Site Index</a></li>
+          <li><a href="/about/contacts/index.jsp">Contact Us</a></li>
+          <li><a href="mailto:MPEPFeedback@uspto.gov">Submit Feedback</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="width:100%">
+      <div style="float:left;margin-left:15px"> This page is owned by Patents.</div>
+      <div style="text-align:right"> Last Modified:
+
+        11/05/2015 11:53:50
+      </div>
+    </div>
+  </div>
+  <div id="extra-div-1"> <span /> </div>
+  <div id="extra-div-2"> <span /> </div>
+  <div id="extra-div-3"> <span /> </div>
+  <div id="extra-div-4"> <span /> </div>
+  <div id="extra-div-5"> <span /> </div>
+  <div id="extra-div-6"> <span /> </div>
+
+  <!-- End of footer2.html -->
+
+</body>
+
+</html>

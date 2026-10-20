@@ -1,0 +1,182 @@
+{
+  "source_version": "E9_R-01.2024",
+  "seed_origin": "existing legacy corpus; each candidate must be verified against the explicit official release before use",
+  "expected_chapters": [
+    "100",
+    "200",
+    "300",
+    "400",
+    "500",
+    "600",
+    "700",
+    "800",
+    "900",
+    "1000",
+    "1100",
+    "1200",
+    "1300",
+    "1400",
+    "1500",
+    "1600",
+    "1700",
+    "1800",
+    "1900",
+    "2000",
+    "2100",
+    "2200",
+    "2300",
+    "2400",
+    "2500",
+    "2600",
+    "2700",
+    "2800",
+    "2900"
+  ],
+  "candidates": [
+    {
+      "chapter": "100",
+      "href": "d0e1338.html",
+      "legacy_section_rows": 59
+    },
+    {
+      "chapter": "200",
+      "href": "ch200_d1ff6c_224a0_3c4.html",
+      "legacy_section_rows": 58
+    },
+    {
+      "chapter": "300",
+      "href": "ch300_d1fdca_1df0f_1f4.html",
+      "legacy_section_rows": 41
+    },
+    {
+      "chapter": "400",
+      "href": "ch400_d1fe3a_237c2_34b.html",
+      "legacy_section_rows": 45
+    },
+    {
+      "chapter": "500",
+      "href": "ch500_d1b085_16c20_2f0.html",
+      "legacy_section_rows": 36
+    },
+    {
+      "chapter": "600",
+      "href": "ch600_d1ff5d_19164_199.html",
+      "legacy_section_rows": 116
+    },
+    {
+      "chapter": "700",
+      "href": "ch700_d1b08a_2849c_65.html",
+      "legacy_section_rows": 278
+    },
+    {
+      "chapter": "800",
+      "href": "ch800_d222f5_29b52_ba.html",
+      "legacy_section_rows": 89
+    },
+    {
+      "chapter": "900",
+      "href": "ch900_d22347_279bf_363.html",
+      "legacy_section_rows": 88
+    },
+    {
+      "chapter": "1000",
+      "href": "ch1000_d22347_260af_1ba.html",
+      "legacy_section_rows": 35
+    },
+    {
+      "chapter": "1100",
+      "href": "ch1100_d1ffb9_1bea0_213.html",
+      "legacy_section_rows": 19
+    },
+    {
+      "chapter": "1200",
+      "href": "ch1200_d1fc9d_147da_3d.html",
+      "legacy_section_rows": 52
+    },
+    {
+      "chapter": "1300",
+      "href": "ch1300_d22347_27423_c5.html",
+      "legacy_section_rows": 43
+    },
+    {
+      "chapter": "1400",
+      "href": "ch1400_d2001e_20efc_24f.html",
+      "legacy_section_rows": 65
+    },
+    {
+      "chapter": "1500",
+      "href": "ch1500_d22347_1e2a5_7e.html",
+      "legacy_section_rows": 29
+    },
+    {
+      "chapter": "1600",
+      "href": "d0e161286.html",
+      "legacy_section_rows": 13
+    },
+    {
+      "chapter": "1700",
+      "href": "d0e162383.html",
+      "legacy_section_rows": 9
+    },
+    {
+      "chapter": "1800",
+      "href": "ch1800_d1ffbd_19259_1ec.html",
+      "legacy_section_rows": 234
+    },
+    {
+      "chapter": "1900",
+      "href": "d0e193635.html",
+      "legacy_section_rows": 12
+    },
+    {
+      "chapter": "2000",
+      "href": "ch2000_d22347_29dee_13d.html",
+      "legacy_section_rows": 29
+    },
+    {
+      "chapter": "2100",
+      "href": "ch2100_d1b13f_18960_3c9.html",
+      "legacy_section_rows": 289
+    },
+    {
+      "chapter": "2200",
+      "href": "ch2200_d2241d_22c06_b3.html",
+      "legacy_section_rows": 111
+    },
+    {
+      "chapter": "2300",
+      "href": "ch2300_d2988c_24ad0_c7.html",
+      "legacy_section_rows": 51
+    },
+    {
+      "chapter": "2400",
+      "href": "ch2400_d22348_25ede_3e6.html",
+      "legacy_section_rows": 120
+    },
+    {
+      "chapter": "2500",
+      "href": "ch2500_d22348_28434_21d.html",
+      "legacy_section_rows": 23
+    },
+    {
+      "chapter": "2600",
+      "href": "ch2600_d1fe2a_19cb6_dd.html",
+      "legacy_section_rows": 123
+    },
+    {
+      "chapter": "2700",
+      "href": "ch2700_d222f8_1c46c_350.html",
+      "legacy_section_rows": 34
+    },
+    {
+      "chapter": "2800",
+      "href": "ch2800_d1fea8_29e6a_8a.html",
+      "legacy_section_rows": 42
+    },
+    {
+      "chapter": "2900",
+      "href": "ch2900_d24abb_18c25_3c6.html",
+      "legacy_section_rows": 38
+    }
+  ]
+}

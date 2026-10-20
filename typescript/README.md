@@ -9,7 +9,8 @@ current ODP Office Actions and Petition Decisions, and all 25 archived TSDR
 routes. Live verification varies by family; see [port status](docs/port-status.md).
 See the [source review](docs/odp-research.md) and [stack decisions](docs/stack.md).
 For subsequent connectors, read the [patterns and style coverage](docs/connector-patterns.md).
-MPEP is available through Python; its TypeScript corpus connector is not yet implemented.
+The [MPEP corpus connector](docs/mpep.md) establishes read-only SQLite/FTS access,
+compressed HTML decoding and explicit snapshot/release metadata.
 Trademark Search session acquisition runs in a separate optional Bun/Playwright
 worker; see [worker setup and fresh delivery](docs/waf-worker.md).
 

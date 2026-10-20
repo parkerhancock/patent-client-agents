@@ -20,6 +20,7 @@ coverage is recorded in the [operation evidence map](uspto-operation-coverage.md
 | API-key JSON REST, search, pagination and exports | [Applications](../packages/client/src/applications.ts), [Office Actions](../packages/client/src/office-actions.ts), [transport](../packages/client/src/transport.ts) | [Application](../tests/applications-complete.test.ts) and [transport](../tests/transport.test.ts) tests, real ODP recordings. Reuse HTTP behavior; keep office payloads and normalization source-specific. |
 | Public JSON/form API | [Assignments](../packages/client/src/assignments.ts), [trademark assignments](../packages/client/src/trademark-assignments.ts) | [Register tests](../tests/register-gaps.test.ts) and real assignment recordings. Keyless sources use the same transport. |
 | XML parsing | [Application XML](../packages/client/src/application-xml.ts), [TSDR](../packages/client/src/tsdr.ts) | [TSDR replays](../tests/tsdr-live-recordings.test.ts) and application tests. Preserve namespaces, identifiers and source-derived document IDs. XML alone does not establish SOAP. |
+| Read-only SQLite/FTS corpus with compressed content | [MPEP](../packages/client/src/mpep.ts), [outline lifecycle](../packages/client/src/corpus/outline.ts), [MCP adapter](../packages/mcp/src/mpep.ts) | [Reader tests](../tests/mpep-client.test.ts), [actual MCP tests](../tests/mpep-mcp.test.ts), fresh/legacy artifact verification. [Setup and limits](mpep.md) distinguish maintenance acquisition, pinned bytes, release identity and later guidance. |
 | Session bootstrap, cookies and rotating headers | [Patent Public Search](../packages/client/src/publications.ts) | [Search-portal tests](../tests/publications-trademark-search.test.ts). Coalesce bootstrap and isolate credentials to approved origins. This is source-specific session handling, not upstream OAuth2. |
 | Asynchronous document generation/polling | [Patent Public Search PDF workflow](../packages/client/src/publications.ts) | Same search-portal tests and recorded native PDF success. Bound polling, honor cancellation and validate final bytes. |
 | Browser-minted temporary session | [Worker](../packages/waf-worker/src/index.ts), [provider](../packages/waf-session/src/provider.ts), [Trademark Search](../packages/client/src/trademark-search.ts) | [Worker](../tests/waf-worker.test.ts), [delivery](../tests/waf-session.test.ts), [MCP wiring](../tests/waf-integration.test.ts) and [dependency boundary](../tests/waf-boundaries.test.ts) tests. [Image verification](waf-worker.md) covers ARM64/AMD64. Browser acquisition stays separate. |
@@ -35,7 +36,6 @@ runtime compatibility.
 
 | Missing style | Python candidate | First-slice proof |
 | --- | --- | --- |
-| Read-only SQLite/FTS legal corpus | [MPEP](../../src/patent_client_agents/mpep/client.py) | Search, exact retrieval, reference resolution, installed versions, artifact/schema validation and honest corpus status. Recommended next slice. |
 | Upstream OAuth2 token lifecycle | [EPO OPS](../../src/patent_client_agents/epo_ops/client.py) or [IP Australia shared auth](../../src/patent_client_agents/ip_australia_common/__init__.py) | Token acquisition, expiry, concurrent refresh, bounded rejection handling and scrubbed token recordings. MCP JWT validation does not cover this. |
 | HTML DOM extraction from whole pages | [Google Patents](../../src/patent_client_agents/google_patents/client.py) | Archived page fixtures, deliberate parser selection, selectors/structured metadata and explicit changed-page failures. Claims HTML-to-text is narrower. |
 | Live fee schedules | [Fees](../../src/patent_client_agents/fees/client.py) | Effective date distinct from retrieval time, currency, fee codes and entity tiers. Unknown effective dates stay explicit. This is a category contract even when parsing/transport is reused. |
@@ -89,12 +89,13 @@ Current network library provenance carries source URL/name, retrieval time,
 version `0.1.0`. There is no runtime HTTP response cache. Cassettes are test
 recordings; the WAF cache holds credentials, not office data.
 
-Before corpus/fee ports, extend shared library and MCP provenance deliberately.
-Corpus sync/version and fee effective-date fields are not implemented in the
-current schemas. Distinguish corpus snapshot time from access time; do not
-describe a local read as a fresh upstream fetch. Follow standards §§3–4 and
-provide corpus status without a live upstream dependency. Keep package-version
-identity consistent as the private packages evolve.
+MPEP adds a separate `CorpusProvenance` type without weakening the network
+contract: `cache_hit: true`, nullable source retrieval/sync time, current access
+time and installed corpus version. MCP preserves those fields. Its status
+resource exposes release, build, cutoff and interim-update metadata without a
+network call. Follow this example for standards §§3–4; do not describe a local
+read as a fresh upstream fetch. Fee effective-date provenance remains to be
+implemented. Keep package-version identity consistent as packages evolve.
 
 Retain canonical identity from `catalog/sources/`. The generated Python coverage
 manifest does not prove TypeScript support. Track TypeScript method/route and
@@ -102,12 +103,13 @@ verification evidence separately until the catalog represents both runtimes.
 For a new jurisdiction, follow the research runbook and substitution check
 before building duplicate coverage.
 
-## MPEP is available in Python, not TypeScript
+## MPEP establishes the first corpus pattern
 
 The [Python MPEP client](../../src/patent_client_agents/mpep/client.py) serves
 SQLite/FTS5 snapshots through `search`, `get_section`, `resolve_section_href` and
 `list_versions`. Python MCP exposes `search_mpep` and `get_mpep_section`.
-TypeScript has no MPEP client, tool or corpus runtime yet.
+The TypeScript client now ports those operations and adds a corpus-status
+helper, the same two intent-based MCP tools and a protected status resource.
 
 On October 20, a read-only check of the existing local Python installation
 successfully searched the corpus and retrieved section 2106. The installed
@@ -116,12 +118,13 @@ snapshot is dated May 21, 2026 and lacks verified release identity. The legacy
 prove current USPTO guidance. Other checkouts/deployments may lack the artifact.
 
 The installed legacy schema-2 artifact stores HTML as zstd-compressed blobs
-with a compression dictionary. A TypeScript reader cannot assume plain-text
-SQLite columns. The next corpus reference should:
+with a compression dictionary. The port uses Bun's native decoder, supports
+plain/dictionary-compressed cells and keeps the legacy release unknown. Its
+new shared outline lifecycle establishes these practices:
 
 1. Inventory [Python schemas](../../src/patent_client_agents/mpep/corpus/schema.py)
-   and actual artifacts. Explicitly support a schema or reject it helpfully;
-   verify dictionary decompression before choosing a reader.
+   and actual artifacts. Explicitly support a schema or reject it helpfully.
+   Detect compression from table/row data, not a schema-version assumption.
 2. Keep acquisition/building outside requests. Reuse a checksummed artifact
    where compatible; keep Python subprocesses out of the TypeScript runtime.
    Any artifact conversion must preserve provenance and be explicit.
@@ -132,10 +135,15 @@ SQLite columns. The next corpus reference should:
    and actual MCP behavior with small real-schema fixtures, including compressed
    HTML and incomplete metadata. Ordinary tests must remain offline.
 
-MPEP establishes the corpus style before other manuals/statutes. Upstream
-OAuth2 is the next distinct auth example; HTML/fees and SOAP follow when their
-connectors enter the port. This guide selects no new dependency, corpus
-migration or connector implementation.
+The fresh MPEP build checks the official TOC and pinned release before publishing
+a standalone artifact. Runtime reads the exact verified bytes in memory and
+rejects WAL headers; [explicit preparation](mpep.md) preserves legacy content
+without silently patching headers or upgrading metadata. Corpus fixtures prove
+the compressed schema, and a real local check verifies default MCP/artifact use.
+
+Upstream OAuth2 is the next distinct auth example; HTML/fees and SOAP follow
+when their connectors enter the port. MPEP does not establish every statute
+schema or ingestion format, and no new decoder dependency was required.
 
 ## Verification and iteration
 

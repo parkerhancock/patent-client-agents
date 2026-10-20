@@ -1,0 +1,169 @@
+# MPEP corpus access
+
+MPEP is the first TypeScript offline corpus connector. The Bun library reads a
+verified SQLite/FTS5 snapshot, including dictionary-compressed HTML. The MCP
+adapter adds `search_mpep`, list-accepting `get_mpep_section`, and the protected
+`mpep://corpus/status` resource. No office API key is needed. HTTP access uses
+the existing `uspto:read` scope.
+
+## Source release and freshness
+
+The [official-source review](mpep-source-review.md) checked USPTO on October 20,
+2026: Ninth Edition, Revision 01.2024 (`E9_R-01.2024`), published November 2024,
+with a January 31, 2024 substantive cutoff. The separately archived subsequent
+publications and five superseding memoranda are **not incorporated** into this
+base-manual corpus. The subsequent-publications listing is current through July
+20, 2026; that date is distinct from our October check.
+
+Each corpus response distinguishes installed release, source sync/snapshot time,
+access time, substantive cutoff and interim-update coverage. `current` means
+the installed snapshot. Only that snapshot is retained; requests for another
+release fail. Unknown/moving version labels remain `unknown`. A dated
+`release_check` compares the artifact with the last verified base release; it
+does not perform a live release check or establish present-day legal currency.
+
+## Build a fresh artifact outside the runtime
+
+The maintenance command reuses this repository's existing Python acquisition
+and compression code. Python, lxml and zstandard are maintenance dependencies;
+the TypeScript library and MCP service never start Python or crawl on demand.
+Run from the repository root with its existing Python environment:
+
+```sh
+uv run --frozen --no-sync python typescript/scripts/build-mpep-corpus.py \
+  --output typescript/.data/mpep/mpep.db
+```
+
+The builder discovers the pinned release's official table of contents, archives
+its root responses, checks release identity and chapter coverage, and publishes
+a standalone database plus `mpep.manifest.json`. It fails on missing responses,
+insufficient budgets, changed releases or integrity failures instead of silently
+publishing a partial crawl. Existing output files are not overwritten. Source
+responses and the large artifact stay under ignored `.data/`; small compatibility
+fixtures and the separate release-source archive are committed.
+
+The manifest records the actual extraction scope and limitations. Numbered
+sections and canonical root documents are not a promise of every possible
+subsection granularity in appendices, form-paragraph books or indexes. Check
+the recorded coverage before relying on a particular document type.
+
+## Prepare an existing compressed Python artifact
+
+The runtime accepts standalone SQLite files in DELETE journal mode. It rejects
+WAL-mode headers with `CORPUS_WAL_UNSUPPORTED`: a checksum of the main file
+cannot safely authenticate data replayed from an unpinned neighbouring WAL.
+Do not patch SQLite header bytes or copy sidecars into runtime storage.
+
+For an existing artifact, make a new standalone copy explicitly:
+
+```sh
+mkdir -p typescript/.data
+uv run --frozen --no-sync python typescript/scripts/prepare-mpep-corpus.py \
+  --input "$HOME/.cache/patent_client_agents/mpep.db" \
+  --output typescript/.data/mpep-legacy-prepared.db
+```
+
+An optional `--sha256 HEX` checks the input pin. Preparation uses a read-only,
+immutable view of the main file and intentionally excludes WAL changes. It
+preserves section bytes, compression dictionaries and metadata, checks integrity,
+and publishes without overwriting existing output. It reports a new artifact
+SHA-256. It does not upgrade unknown release metadata or refresh old content.
+For a database actively being written, publish a checked standalone artifact
+from its owner rather than expecting this command to include pending WAL data.
+
+## Use the library and MCP
+
+From `typescript/`, configure an absolute artifact path and its manifest pin:
+
+```sh
+export MPEP_CORPUS_PATH="$PWD/.data/mpep/mpep.db"
+export MPEP_CORPUS_SHA256="THE_ARTIFACT_SHA256_FROM_THE_MANIFEST"
+bun run --cwd packages/mcp start
+```
+
+The library also accepts `corpusPath` and `expectedSha256` directly. Explicit
+options take precedence over environment values. Without a path, it uses the
+existing Python cache location for compatibility; legacy WAL files still need
+preparation. A missing artifact produces an unavailable status and a useful
+error on queries, without downloading or creating a database.
+
+```ts
+import { MpepClient } from "@patent-client-agents/client";
+
+const mpep = new MpepClient();
+try {
+  const status = await mpep.getCorpusStatus();
+  const hits = await mpep.search({ query: "subject matter eligibility", limit: 5 });
+  const section = await mpep.getSection("2106");
+  const href = await mpep.resolveSectionHref("2106.04(a)");
+  const installed = await mpep.listVersions();
+} finally {
+  mpep.close();
+}
+```
+
+Search supports `adj`/`exact` phrases, `and`, `or`, relevance/outline sorting,
+limit and offset. User terms are quoted as FTS text, not executed as raw MATCH
+syntax. Section references accept numbers or stored eMPEP hrefs. The source URL,
+decoded HTML SHA-256 and section revision travel with retrieved content.
+
+MCP searches are lean by default. Cursors bind query options and artifact/build
+identity. Section fetches preserve portfolio order; individual missing entries
+are reported when other entries succeed. HTML and text exceeding the aggregate
+inline budget use the existing protected artifact-download interface. HTTP
+single-use links remain the default alongside authenticated REST.
+
+## Runtime guarantees and limits
+
+The reader hashes at most 256 MiB of artifact data, then opens exactly those
+bytes as an immutable read-only in-memory SQLite database. It never opens a
+second mutable path after verifying the hash, so path replacement and WAL
+replay cannot substitute unverified content. Schema, section count and expected
+FTS layout are validated before the artifact is available. A process keeps its
+snapshot until closed/recreated; artifact publication does not hot-swap readers.
+
+Bun 1.4.3's native `node:zlib.zstdDecompressSync` handles dictionary and plain
+frames with bounded output. HTML plus text is limited to 16 MiB per section by
+default (`maxSectionBytes` is explicit configuration). No decoder dependency,
+Python runtime bridge, native addon or new Rust/WASM module was added.
+The in-memory snapshot costs memory proportional to the artifact; very large
+corpora need a separately measured design rather than raising limits blindly.
+
+Corpus provenance has `cache_hit: true`, source-time `retrieved_at`, current
+`accessed_at`, `corpus_synced_at` and `corpus_version`. Unknown source times are
+null. Date-only snapshot metadata remains visible in status and is represented
+at UTC midnight without claiming a precise fetch time. Network provenance keeps
+its existing non-null time and `cache_hit: false` contract.
+
+Maintenance records `artifact_built_at` separately from source retrieval/sync
+time. Rebuilding with `--from-archive` verifies the saved response hashes and
+preserves their retrieval dates; it must not make old content appear freshly
+fetched. The source-time range remains in artifact metadata and receipts.
+
+## Verification
+
+Ordinary tests use small committed SQLite fixtures with real schema and a real
+legacy dictionary-compressed section. Tests cover pinning, WAL rejection,
+path replacement, decompression limits, malformed schemas, FTS queries,
+versions, freshness and actual MCP behavior. No tests silently crawl USPTO.
+
+For a full local artifact check from `typescript/`:
+
+```sh
+bun run verify:mpep --corpus "$MPEP_CORPUS_PATH" --sha256 "$MPEP_CORPUS_SHA256"
+```
+
+This verifies library access, default MCP wiring, matching HTML artifact bytes
+and cleanup. It prints verification metadata and the content hash, not section
+text. Python maintenance tests are separate from `bun test`; run the focused
+files under `typescript/scripts/test_*mpep*.py` when changing acquisition or
+preparation. No production corpus, service or deployment is changed here.
+
+The October 20 [build receipt](../references/mpep/corpus-build.json),
+[source-response hashes](../references/mpep/corpus-sources.json) and
+[validation receipt](../references/mpep/validation.json) record the local
+3,055-row artifact and its pin. It passed library/default-MCP artifact checks
+and network-disabled Linux ARM64/AMD64 reader checks. The existing compressed
+legacy corpus also passed after explicit preparation and remained an unknown
+release. Rebuilding may change artifact bytes and timestamps; use the new
+manifest's pin rather than copying the historical validation pin.

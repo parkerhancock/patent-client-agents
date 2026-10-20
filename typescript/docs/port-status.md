@@ -20,6 +20,7 @@ synthetic contracts. The Python package remains separate.
 | Patent Public Search | Search, document, publication resolution, PDF/base64 implemented | Native Bun live search/document/PDF success: 18 pages, 1,214,076 bytes; archived document verifies all 26 parsed claims |
 | Trademark Search | Implemented with supplied WAF session, refresh callback or fresh-session provider; separate browser worker | Native Bun HTTP200 replays offline; fresh worker acquisition and protected-file delivery passed through default MCP and both Linux ARM64/AMD64 worker images |
 | TSDR | All 25 archived official routes; source-derived document IDs; separate API key; MCP batch identifier types, ranges and filtered multicase XML/PDF/ZIP | Complete route-contract tests; successful live recordings for all 25 declared operations plus mark image; PDF/ZIP/XML/HTML checked offline; actual MCP option-forwarding and invalid-combination regressions |
+| MPEP (additional corpus scope) | Read-only SQLite/FTS search, section/href lookup, installed versions/status; thin MCP tools and protected artifacts | Fresh pinned `E9_R-01.2024` build from all 42 official TOC roots, 29 chapters and 3,055 rows; compressed corpus and default MCP verification passed; legacy preparation preserves unknown release metadata |
 | Search guides, field/status catalogs, schemas and Swagger resources | Eleven labeled MCP resources and pure library helpers | Resource enumeration, content and authorization tests; historical source labels preserved |
 | REST document retrieval | MCP-issued single-use links by default; authenticated REST concurrently available; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
 
@@ -67,11 +68,14 @@ name collisions. No further missing method or route was found within the stated
 70-method, 12-client USPTO network scope; legal manuals, fees and CPC remain
 outside that inventory.
 
-MPEP is implemented in Python and local search/section retrieval was verified on
-October 20. It is not ported to TypeScript. The installed May 21 corpus has
-unknown release identity; access does not establish current guidance. See
-[connector styles and MPEP prerequisites](connector-patterns.md) before using it
-as the next offline-corpus reference.
+MPEP now adds a corpus connector beyond that 12-client network inventory. The
+fresh local artifact has verified base-release identity and explicit cutoff,
+build/sync time and interim-update coverage. Later guidance is not incorporated.
+Appendix/form-paragraph/index extraction granularity is recorded in its manifest;
+root coverage is not a promise of every separately linked child document.
+The older May 21 artifact remains an unknown release after standalone preparation.
+See [MPEP setup](mpep.md), [source review](mpep-source-review.md) and
+[connector patterns](connector-patterns.md). Neither artifact was deployed.
 
 Remote identity-provider login/discovery and hosted HTTPS are not deployed.
 MCP-issued single-use links are the default until host credential injection

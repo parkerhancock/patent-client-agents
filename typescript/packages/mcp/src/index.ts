@@ -4,6 +4,7 @@ import {
   AssignmentCenterClient,
   BulkDataClient,
   ConfigurationError,
+  MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
   PetitionsClient,
@@ -34,6 +35,7 @@ import {
   DownloadStore,
   downloadContext,
 } from "./downloads.js";
+import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
 import { registerRegisterTools } from "./registers.js";
@@ -54,6 +56,7 @@ export interface UsptoClients {
   tsdr: TsdrClient;
   publications: PublicationsClient;
   trademarkSearch: TrademarkSearchClient;
+  mpep: MpepClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -216,6 +219,7 @@ class DocumentServer extends FastMCP {
   constructor(
     options: FastMCPOptions,
     private readonly artifacts: DownloadStore,
+    private readonly closeCorpus: () => void,
   ) {
     super(options);
   }
@@ -223,13 +227,18 @@ class DocumentServer extends FastMCP {
     try {
       await super.close();
     } finally {
-      await this.artifacts.close();
+      try {
+        await this.artifacts.close();
+      } finally {
+        this.closeCorpus();
+      }
     }
   }
 }
 export function createServer(options: ServerOptions = {}): FastMCP {
   const wafSession = options.wafSession ?? wafSessionSourceFromEnv(process.env);
   const provided = options.clients ?? {};
+  const mpep = provided.mpep ?? new MpepClient();
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -243,6 +252,9 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       logLevel: "warn",
     },
     downloads,
+    () => {
+      if (!provided.mpep) mpep.close();
+    },
   );
   const downloadVerifier = options.downloadAuth ?? options.auth;
   const verifyDownloadToken = downloadVerifier
@@ -500,5 +512,6 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     externalAuth,
   );
   registerUsptoResources(server, auth);
+  registerMpepTools(server, mpep, externalAuth);
   return server;
 }

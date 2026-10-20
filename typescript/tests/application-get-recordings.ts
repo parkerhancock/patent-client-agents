@@ -1,6 +1,8 @@
 import { ApplicationsClient } from "../packages/client/src/applications.js";
 import { recorded } from "./cassettes.js";
-export async function applicationPostDownloadRecording(mode: "all" | "none") {
+export async function applicationPostDownloadRecording(
+  mode: "all" | "none",
+): Promise<Awaited<ReturnType<ApplicationsClient["downloadSearch"]>>> {
   const client = new ApplicationsClient({
     ...(mode === "none" ? { apiKey: "replay-placeholder" } : {}),
     retryLimit: 0,
@@ -19,7 +21,11 @@ export async function applicationPostDownloadRecording(mode: "all" | "none") {
     mode,
   );
 }
-export async function applicationGetRecordings(mode: "all" | "none") {
+export async function applicationGetRecordings(mode: "all" | "none"): Promise<{
+  search: Awaited<ReturnType<ApplicationsClient["search"]>>;
+  download: Awaited<ReturnType<ApplicationsClient["downloadSearch"]>>;
+  status: Awaited<ReturnType<ApplicationsClient["getStatusCodes"]>>;
+}> {
   const client = new ApplicationsClient({
     ...(mode === "none" ? { apiKey: "replay-placeholder" } : {}),
     retryLimit: 0,

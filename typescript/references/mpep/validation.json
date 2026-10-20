@@ -1,0 +1,46 @@
+{
+  "verified_on": "2026-10-20",
+  "corpus_sha256": "1771226e8c16985058fc6673b8ee534e76a04b59d941abe166701b582f244060",
+  "corpus_version": "E9_R-01.2024",
+  "section_2106_html_sha256": "b43eabdd823c0ab6557a71975f3bf8dbd90f00d0b83570a287d79364f699ae78",
+  "local_checks": [
+    "Bun library FTS and section retrieval",
+    "default MCP search and HTML artifact byte equality",
+    "MCP artifact cleanup"
+  ],
+  "linux_checks": {
+    "runtime": "Bun 1.4.3",
+    "platforms": [
+      "linux/arm64",
+      "linux/amd64 (emulated)"
+    ],
+    "network": "disabled",
+    "mounts": "read-only reader source and artifact in existing Bun worker images",
+    "checks": [
+      "pinned artifact",
+      "FTS search",
+      "dictionary-compressed HTML",
+      "large chapter retrieval"
+    ]
+  },
+  "legacy_preparation": {
+    "artifact_sha256": "4903e9ffe2dadf86bd2e406ae61f26dfe645657af92632689c1bf434c0a733a0",
+    "interim_updates_coverage": "unknown",
+    "metadata_preserved": true,
+    "snapshot_date": "2026-05-21",
+    "source_sha256": "3906b8d749c3819e9ad065e513b81e5b75bbd3555c7fd846f5d6abff6b9cba7a",
+    "source_version": "current",
+    "wal_changes_included": false
+  },
+  "legacy_verified_corpus_version": "unknown",
+  "legacy_section_2106_html_sha256": "cd6d838cc1040617ffe3028a4741c2cec7000f9148c5e0977cf2e44a613d579c",
+  "limits": [
+    "No production deployment or corpus activation",
+    "Interim/superseding guidance not incorporated",
+    "See corpus-build.json for extraction scope",
+    "Large artifacts and full chapter responses remain local ignored data"
+  ],
+  "source_synced_at": "2026-10-20T18:25:48.837774+00:00",
+  "artifact_built_at": "2026-10-20T18:33:27.877973+00:00",
+  "offline_rebuild_preserves_source_retrieval_time": true
+}

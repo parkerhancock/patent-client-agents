@@ -10,6 +10,15 @@ export const ProvenanceSchema = z.object({
   cache_hit: z.literal(false),
 });
 export type Provenance = z.infer<typeof ProvenanceSchema>;
+export const CorpusProvenanceSchema = ProvenanceSchema.extend({
+  retrieved_at: z.iso.datetime().nullable(),
+  cache_hit: z.literal(true),
+  accessed_at: z.iso.datetime(),
+  corpus_synced_at: z.iso.datetime().nullable(),
+  corpus_version: z.string().min(1),
+});
+export type CorpusProvenance = z.infer<typeof CorpusProvenanceSchema>;
+export type SourceProvenance = Provenance | CorpusProvenance;
 
 // The initial port types the identifying fields and retains unmodeled ODP data.
 export const ApplicationRecordSchema = z.looseObject({

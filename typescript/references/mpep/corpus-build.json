@@ -1,0 +1,333 @@
+{
+  "file": "mpep.db",
+  "sha256": "1771226e8c16985058fc6673b8ee534e76a04b59d941abe166701b582f244060",
+  "bytes": 48697344,
+  "sections": 3055,
+  "source_responses": 43,
+  "source_first_retrieved_at": "2026-10-20T18:25:21.338965+00:00",
+  "source_last_retrieved_at": "2026-10-20T18:25:48.837774+00:00",
+  "artifact_built_at": "2026-10-20T18:33:27.877973+00:00",
+  "metadata": {
+    "schema_version": "1",
+    "build_id": "2ce832ee7ed3f657918924098de84812ecc3af2772d7e1379136d7eecc43a12a",
+    "section_count": "3055",
+    "source_version": "E9_R-01.2024",
+    "edition": "Ninth Edition",
+    "revision": "01.2024",
+    "publication_date": "2024-11",
+    "substantive_cutoff_date": "2024-01-31",
+    "interim_updates_coverage": "not_included",
+    "synced_at": "2026-10-20T18:25:48.837774+00:00",
+    "snapshot_date": "2026-10-20",
+    "source_first_retrieved_at": "2026-10-20T18:25:21.338965+00:00",
+    "source_last_retrieved_at": "2026-10-20T18:25:48.837774+00:00",
+    "release_checked_at": "2026-10-20",
+    "artifact_built_at": "2026-10-20T18:33:27.877973+00:00",
+    "coverage_scope": "all_official_toc_roots_with_parsed_numbered_sections",
+    "source_response_count": "43",
+    "official_root_count": "42",
+    "form_paragraph_coverage": "root_index_only_not_child_book_documents",
+    "source_url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=MPEP-ChangePage.html"
+  },
+  "roots": [
+    {
+      "href": "MPEP-ChangePage.html",
+      "title": "- Change Summary - Change Summary for the Ninth Edition, Revision 01.2024",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 135728
+    },
+    {
+      "href": "d0e18.html",
+      "title": "- Title Page - Manual of PATENT EXAMINING PROCEDURE",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 3333
+    },
+    {
+      "href": "d0e189.html",
+      "title": "- Foreword - Foreword",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 1899
+    },
+    {
+      "href": "d0e246.html",
+      "title": "- Introduction - Constitutional Basis",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 9528
+    },
+    {
+      "href": "d0e405.html",
+      "title": "0100 - Secrecy, Access, National Security, and Foreign Filing",
+      "chapter": "100",
+      "parsed_sections": 15,
+      "root_text_chars": 181176
+    },
+    {
+      "href": "d0e4510.html",
+      "title": "0200 - Types and Status of Application; Benefit and Priority Claims",
+      "chapter": "200",
+      "parsed_sections": 58,
+      "root_text_chars": 527765
+    },
+    {
+      "href": "d0e17683.html",
+      "title": "0300 - Ownership and Assignment",
+      "chapter": "300",
+      "parsed_sections": 41,
+      "root_text_chars": 137419
+    },
+    {
+      "href": "d0e20478.html",
+      "title": "0400 - Representative of Applicant or Owner",
+      "chapter": "400",
+      "parsed_sections": 45,
+      "root_text_chars": 186566
+    },
+    {
+      "href": "d0e24253.html",
+      "title": "0500 - Receipt and Handling of Mail and Papers",
+      "chapter": "500",
+      "parsed_sections": 36,
+      "root_text_chars": 562599
+    },
+    {
+      "href": "d0e34301.html",
+      "title": "0600 - Parts, Form, and Content of Application",
+      "chapter": "600",
+      "parsed_sections": 116,
+      "root_text_chars": 955778
+    },
+    {
+      "href": "d0e55397.html",
+      "title": "0700 - Examination of Applications",
+      "chapter": "700",
+      "parsed_sections": 278,
+      "root_text_chars": 1159231
+    },
+    {
+      "href": "d0e97826.html",
+      "title": "0800 - Restriction in Applications Filed Under 35 U.S.C. 111; Double Patenting",
+      "chapter": "800",
+      "parsed_sections": 89,
+      "root_text_chars": 439227
+    },
+    {
+      "href": "d0e110007.html",
+      "title": "0900 - Prior Art, Search, Classification, and Routing",
+      "chapter": "900",
+      "parsed_sections": 88,
+      "root_text_chars": 194304
+    },
+    {
+      "href": "d0e115995.html",
+      "title": "1000 - Matters Decided by Various U.S. Patent and Trademark Office Officials",
+      "chapter": "1000",
+      "parsed_sections": 35,
+      "root_text_chars": 76120
+    },
+    {
+      "href": "d0e4051.html",
+      "title": "1100 - Statutory Invention Registration (SIR); Pre-Grant Publication (PGPub) and Preissuance Submissions",
+      "chapter": "1100",
+      "parsed_sections": 19,
+      "root_text_chars": 191805
+    },
+    {
+      "href": "d0e122292.html",
+      "title": "1200 - Appeal",
+      "chapter": "1200",
+      "parsed_sections": 52,
+      "root_text_chars": 309923
+    },
+    {
+      "href": "d0e131453.html",
+      "title": "1300 - Allowance and Issue",
+      "chapter": "1300",
+      "parsed_sections": 43,
+      "root_text_chars": 97672
+    },
+    {
+      "href": "d0e134581.html",
+      "title": "1400 - Correction of Patents",
+      "chapter": "1400",
+      "parsed_sections": 65,
+      "root_text_chars": 622756
+    },
+    {
+      "href": "d0e150114.html",
+      "title": "1500 - Design Patents",
+      "chapter": "1500",
+      "parsed_sections": 29,
+      "root_text_chars": 373060
+    },
+    {
+      "href": "d0e161282.html",
+      "title": "1600 - Plant Patents",
+      "chapter": "1600",
+      "parsed_sections": 13,
+      "root_text_chars": 37105
+    },
+    {
+      "href": "d0e162379.html",
+      "title": "1700 - Miscellaneous",
+      "chapter": "1700",
+      "parsed_sections": 9,
+      "root_text_chars": 43274
+    },
+    {
+      "href": "d0e163752.html",
+      "title": "1800 - Patent Cooperation Treaty",
+      "chapter": "1800",
+      "parsed_sections": 237,
+      "root_text_chars": 762664
+    },
+    {
+      "href": "d0e193631.html",
+      "title": "1900 - Protest",
+      "chapter": "1900",
+      "parsed_sections": 12,
+      "root_text_chars": 52308
+    },
+    {
+      "href": "d0e195418.html",
+      "title": "2000 - Duty of Disclosure",
+      "chapter": "2000",
+      "parsed_sections": 29,
+      "root_text_chars": 94872
+    },
+    {
+      "href": "d0e197004.html",
+      "title": "2100 - Patentability",
+      "chapter": "2100",
+      "parsed_sections": 289,
+      "root_text_chars": 2360591
+    },
+    {
+      "href": "d0e220689.html",
+      "title": "2200 - Citation of Prior Art and Ex Parte Reexamination of Patents",
+      "chapter": "2200",
+      "parsed_sections": 111,
+      "root_text_chars": 694316
+    },
+    {
+      "href": "d0e237627.html",
+      "title": "2300 - Interference and Derivation Proceedings",
+      "chapter": "2300",
+      "parsed_sections": 51,
+      "root_text_chars": 112830
+    },
+    {
+      "href": "d0e240552.html",
+      "title": "2400 - Biotechnology",
+      "chapter": "2400",
+      "parsed_sections": 120,
+      "root_text_chars": 452000
+    },
+    {
+      "href": "d0e247906.html",
+      "title": "2500 - Maintenance Fees",
+      "chapter": "2500",
+      "parsed_sections": 23,
+      "root_text_chars": 85790
+    },
+    {
+      "href": "d0e249708.html",
+      "title": "2600 - Optional Inter Partes Reexamination",
+      "chapter": "2600",
+      "parsed_sections": 123,
+      "root_text_chars": 32614
+    },
+    {
+      "href": "d0e271941.html",
+      "title": "2700 - Patent Terms, Adjustments, and Extensions",
+      "chapter": "2700",
+      "parsed_sections": 34,
+      "root_text_chars": 403696
+    },
+    {
+      "href": "ch2800_d1fea8_279ab_9.html",
+      "title": "2800 - Supplemental Examination",
+      "chapter": "2800",
+      "parsed_sections": 42,
+      "root_text_chars": 207329
+    },
+    {
+      "href": "ch2900_d24ad2_2793a_190.html",
+      "title": "2900 - International Design Applications",
+      "chapter": "2900",
+      "parsed_sections": 38,
+      "root_text_chars": 265640
+    },
+    {
+      "href": "d0e289501.html",
+      "title": "I - [Reserved]",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 23
+    },
+    {
+      "href": "d0e290278.html",
+      "title": "II - List of Decisions Cited",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 172127
+    },
+    {
+      "href": "d0e300730.html",
+      "title": "L - Patent Laws",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 519737
+    },
+    {
+      "href": "d0e312906.html",
+      "title": "R - Patent Rules",
+      "chapter": null,
+      "parsed_sections": 560,
+      "root_text_chars": 1956646
+    },
+    {
+      "href": "d0e362842.html",
+      "title": "T - Patent Cooperation Treaty and Regulations Under the PCT",
+      "chapter": null,
+      "parsed_sections": 313,
+      "root_text_chars": 528299
+    },
+    {
+      "href": "d0e278035.html",
+      "title": "AI - Administrative Instructions Under the PCT",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 271319
+    },
+    {
+      "href": "d0e311120.html",
+      "title": "P - Paris Convention",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 66394
+    },
+    {
+      "href": "mpep-index.html",
+      "title": "MPEP - Subject Matter Index",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 308358
+    },
+    {
+      "href": "fpb-index.html",
+      "title": "Form-Paragraph - Book",
+      "chapter": null,
+      "parsed_sections": 0,
+      "root_text_chars": 863
+    }
+  ],
+  "limitations": [
+    "Interim/superseding guidance is not merged",
+    "Root documents are retained whole; individual article/section extraction follows the existing outline parser",
+    "Form-paragraph book and subject-index roots do not imply all linked child documents were crawled"
+  ]
+}

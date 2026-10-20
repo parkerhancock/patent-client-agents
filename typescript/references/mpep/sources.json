@@ -1,0 +1,105 @@
+{
+  "verified_on": "2026-10-20",
+  "sources": [
+    {
+      "file": "mpep-landing.html",
+      "source_url": "https://www.uspto.gov/web/offices/pac/mpep/index.html",
+      "final_url": "https://www.uspto.gov/web/offices/pac/mpep/index.html",
+      "retrieved_at": "2026-10-20T18:17:01.418987+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 41223,
+      "sha256": "938c29ba26f7fb9c83beffce7f5e5f91481253906bb6798ad08809c4a4ca8e6f"
+    },
+    {
+      "file": "empep-current.html",
+      "source_url": "https://mpep.uspto.gov/RDMS/MPEP/current",
+      "final_url": "https://mpep.uspto.gov/RDMS/MPEP/current",
+      "retrieved_at": "2026-10-20T18:17:01.830496+00:00",
+      "content_type": "text/html;charset=ISO-8859-1",
+      "bytes": 33838,
+      "sha256": "e7e234cac2d597536a3b1efe38261b3c8538a994ffe8257f343953603397ce55"
+    },
+    {
+      "file": "mpep-title-page.html",
+      "source_url": "https://www.uspto.gov/web/offices/pac/mpep/mpep-0010-title-page.html",
+      "final_url": "https://www.uspto.gov/web/offices/pac/mpep/mpep-0010-title-page.html",
+      "retrieved_at": "2026-10-20T18:17:01.988401+00:00",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes": 22896,
+      "sha256": "5844a734954da8c17dd664d4a56c453858e696ba6261c5681d514ea60a3b0bd2"
+    },
+    {
+      "file": "subsequent-publications.pdf",
+      "source_url": "https://www.uspto.gov/web/offices/pac/mpep/subsequent-publications.pdf",
+      "final_url": "https://www.uspto.gov/web/offices/pac/mpep/subsequent-publications.pdf",
+      "retrieved_at": "2026-10-20T18:17:02.309033+00:00",
+      "content_type": "application/pdf",
+      "bytes": 211189,
+      "sha256": "74d53326e075e87028043361eea542e4ee63b7acc549558cf8523f7aa7922872"
+    },
+    {
+      "file": "empep-release-title.html",
+      "source_url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e18.html",
+      "final_url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e18.html",
+      "retrieved_at": "2026-10-20T18:17:45.617932+00:00",
+      "content_type": "text/plain;charset=ISO-8859-1",
+      "bytes": 13709,
+      "sha256": "132645725eb0edfed49a6cc90574a09d72cd3ba457a17199760bfffa952bc2ba"
+    },
+    {
+      "file": "superseding-design-form-paragraphs.pdf",
+      "source_url": "https://www.uspto.gov/sites/default/files/documents/mpep_revised_design_fp_14jan2025.pdf",
+      "final_url": "https://www.uspto.gov/sites/default/files/documents/mpep_revised_design_fp_14jan2025.pdf",
+      "retrieved_at": "2026-10-20T18:17:45.921650+00:00",
+      "content_type": "application/pdf",
+      "bytes": 154025,
+      "sha256": "6614700d728f76549b31fdaabc4e220f9703629abf8e8196bfd1fe18c5e2ccfb"
+    },
+    {
+      "file": "superseding-fees-form-paragraphs.pdf",
+      "source_url": "https://www.uspto.gov/sites/default/files/documents/advance_notice_fp_17jan2025.pdf",
+      "final_url": "https://www.uspto.gov/sites/default/files/documents/advance_notice_fp_17jan2025.pdf",
+      "retrieved_at": "2026-10-20T18:17:46.248596+00:00",
+      "content_type": "application/pdf",
+      "bytes": 266253,
+      "sha256": "2d7db827a4a53e5e55647734a11c20f75d1ff3b2db05ec118e15477fecf03d09"
+    },
+    {
+      "file": "superseding-similarity-search.pdf",
+      "source_url": "https://www.uspto.gov/sites/default/files/documents/MPEP-similarity-search.pdf",
+      "final_url": "https://www.uspto.gov/sites/default/files/documents/MPEP-similarity-search.pdf",
+      "retrieved_at": "2026-10-20T18:17:46.878037+00:00",
+      "content_type": "application/pdf",
+      "bytes": 287000,
+      "sha256": "1036980322268a5fe4128e45c216c9f66e4ea157c5132be92d2e46f6321190c9"
+    },
+    {
+      "file": "superseding-entity-status.pdf",
+      "source_url": "https://www.uspto.gov/sites/default/files/documents/MPEP-certificate-entity-status.pdf",
+      "final_url": "https://www.uspto.gov/sites/default/files/documents/MPEP-certificate-entity-status.pdf",
+      "retrieved_at": "2026-10-20T18:17:47.536017+00:00",
+      "content_type": "application/pdf",
+      "bytes": 365681,
+      "sha256": "00d132d1d4c292cdebcf20f59f754041f29b736dbf6e8f186e15b79db1aa08b6"
+    },
+    {
+      "file": "superseding-desjardins.pdf",
+      "source_url": "https://www.uspto.gov/web/offices/pac/mpep/ANC-Desjardins-Memo-12-5-25.pdf",
+      "final_url": "https://www.uspto.gov/web/offices/pac/mpep/ANC-Desjardins-Memo-12-5-25.pdf",
+      "retrieved_at": "2026-10-20T18:17:48.665926+00:00",
+      "content_type": "application/pdf",
+      "bytes": 326292,
+      "sha256": "d5a59072946f5c7887ab0272ddaa37ac6cc17d19c07eddef439c0f0406755f1a"
+    },
+    {
+      "file": "chapter-100-static.html",
+      "source_url": "https://www.uspto.gov/web/offices/pac/mpep/mpep-0100.html",
+      "final_url": "https://www.uspto.gov/web/offices/pac/mpep/mpep-0100.html",
+      "retrieved_at": "2026-10-20T18:18:24.861606+00:00",
+      "content_type": "text/html",
+      "bytes": 21966,
+      "sha256": "ce7f4d4650f19eb9bd20f1b7abdd557330948e24e20e2bd7fc62c11cc39ae2fa",
+      "purpose": "Verify static chapter URL is a table of contents, not an RDMS chapter-content document."
+    }
+  ]
+}

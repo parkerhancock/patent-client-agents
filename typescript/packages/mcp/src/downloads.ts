@@ -8,7 +8,7 @@ import {
 import { mkdtemp, readFile, rmdir, unlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import type { Provenance } from "@patent-client-agents/client";
+import type { SourceProvenance } from "@patent-client-agents/client";
 
 export interface DownloadOptions {
   /** Externally reachable server origin, including an optional deployment prefix. */
@@ -137,7 +137,7 @@ export class DownloadStore {
     bytes: Uint8Array,
     name: string,
     mime: string,
-    provenance: Provenance,
+    provenance: SourceProvenance,
     owner?: string,
   ) {
     if (this.closed)
@@ -150,7 +150,7 @@ export class DownloadStore {
     bytes: Uint8Array,
     name: string,
     mime: string,
-    provenance: Provenance,
+    provenance: SourceProvenance,
     owner?: string,
   ) {
     if (this.baseUrl && this.mode === "authenticated" && !owner)
@@ -299,7 +299,7 @@ export function downloadResult(
   bytes: Uint8Array,
   name: string,
   mime: string,
-  provenance: Provenance,
+  provenance: SourceProvenance,
 ) {
   const context = downloadContext.getStore();
   if (!context && !localStore) localStore = new DownloadStore();

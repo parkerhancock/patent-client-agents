@@ -1,0 +1,389 @@
+[
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/toc?version=E9_R-01.2024&tocId=0",
+    "retrieved_at": "2026-10-20T18:25:21.338965+00:00",
+    "sha256": "c487e7ab316dc423e4715992724fc9aac58a12be570c1ca5bda9533f9d4c5f93",
+    "bytes": 5404,
+    "file": "sources/f5d8b26bb47ac919c226b475bda69924f48fea7403f4ced4543f9685dad6614c.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=MPEP-ChangePage.html",
+    "retrieved_at": "2026-10-20T18:25:21.934243+00:00",
+    "sha256": "c66cb0e60c139b00b6085c705d4c8b5f8e058e2de6df797cf7e1d1261f939bb4",
+    "bytes": 640212,
+    "file": "sources/4ae7c8029d5efd155efb6f098d1dad8bde1039d022159f622351e905826cba56.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e18.html",
+    "retrieved_at": "2026-10-20T18:25:22.138665+00:00",
+    "sha256": "132645725eb0edfed49a6cc90574a09d72cd3ba457a17199760bfffa952bc2ba",
+    "bytes": 13709,
+    "file": "sources/90d07784fed7a20d4a203cc4dc6d3ab843df55099790f210319ea5ea601779b3.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e189.html",
+    "retrieved_at": "2026-10-20T18:25:22.345263+00:00",
+    "sha256": "4e9522dbccfd328a58cc761cb531babf41aeda5983055fd9e515c6e70faccb80",
+    "bytes": 7145,
+    "file": "sources/b2d4e09b5d09b89941f806b579fcc50c634c3bf0e33587660c298f14bec2bb76.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e246.html",
+    "retrieved_at": "2026-10-20T18:25:22.664406+00:00",
+    "sha256": "98315fed977167120ae39f0a442215f29774501dd50592068140c376b35f5fcb",
+    "bytes": 24958,
+    "file": "sources/8ebb3827b3bf746d3a5fed35791b91bda3d40c9aecc05f29f65cb06cf31f0adc.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e405.html",
+    "retrieved_at": "2026-10-20T18:25:23.334498+00:00",
+    "sha256": "88dd325f932606b7cddee8770522446934a61b4dec08967fb74b4b0dcd6e45f9",
+    "bytes": 372949,
+    "file": "sources/0b7e3ce6a5cd853029d153806dca6ac5d8b46f23088913a60d7ca3c75eec599c.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e4510.html",
+    "retrieved_at": "2026-10-20T18:25:24.228972+00:00",
+    "sha256": "6bc495c9af09fd4b53966d0b2b586c81df983b79bffdb7fc0b03fcc34ebb624d",
+    "bytes": 1280332,
+    "file": "sources/841cee740260763a23f13ea019ebf110e1ffd29e9012c613f4e7e9bc0d2642fe.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e17683.html",
+    "retrieved_at": "2026-10-20T18:25:24.991666+00:00",
+    "sha256": "1def1dc1c1af799e8b10d7950c9b7fc55f32d3db8df188fa73599042695d924e",
+    "bytes": 345006,
+    "file": "sources/f0a6feb13b85b4971595d6901677ffd8d1d896800cc4e5812b54c19946cf39d8.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e20478.html",
+    "retrieved_at": "2026-10-20T18:25:25.335525+00:00",
+    "sha256": "3cfd36e1f338b95cc7a6cb3326030e7e61c465d60d51f6023d3ce70895810183",
+    "bytes": 442995,
+    "file": "sources/87fe46d06e0d004273db807f7b3a60a752c4ecc2e38aeb237d0e629ebdcabe95.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e24253.html",
+    "retrieved_at": "2026-10-20T18:25:25.745051+00:00",
+    "sha256": "145b81e0ca77a4eebe431b61f7b46678555eba1020ef7e4705c31cf0a082be51",
+    "bytes": 1192998,
+    "file": "sources/d0af9a3a59f35fd2f56c443f7c00651b906f810b4baa43b0ba21bc53e367ae26.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e34301.html",
+    "retrieved_at": "2026-10-20T18:25:26.591831+00:00",
+    "sha256": "90f807d568a32bc397d331580dc0c304fe1f1c3860d7b89906ecb9a6f8854dbd",
+    "bytes": 2257555,
+    "file": "sources/333d27c61d3402ac426b17265166b8b6d3c108b891bc406e82dc3cdd9b4665d2.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e55397.html",
+    "retrieved_at": "2026-10-20T18:25:27.680231+00:00",
+    "sha256": "690a38b9cda135127183b6af5054175b4e67f23e9072855a3811f822bf65f6e5",
+    "bytes": 2844670,
+    "file": "sources/088e702bfe1296c2dfa7f02f34dc9577959ed87e8c612ee9602c2aaeb5724b8c.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e97826.html",
+    "retrieved_at": "2026-10-20T18:25:28.708878+00:00",
+    "sha256": "675bee0564618422cbded5285882472da245841d698b659f1fc561a8fa1cdb42",
+    "bytes": 1105454,
+    "file": "sources/ad385b9029a8fdc2e1c5f6d22a1bd48b5b3be2969bfea440151da284e3ed2c28.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e110007.html",
+    "retrieved_at": "2026-10-20T18:25:28.997402+00:00",
+    "sha256": "d33d778525b9549c6ce643f83e03f39cafed5af6f9cccce119f233349ebd4c1a",
+    "bytes": 496432,
+    "file": "sources/f3a339c411cbec75ca9af949c497127871448abeeba1cc20b95c32ef086c2db1.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e115995.html",
+    "retrieved_at": "2026-10-20T18:25:29.290040+00:00",
+    "sha256": "a49e56b780f467e79535769e0a6329b65786e866382932ab9adf01b779929bc1",
+    "bytes": 283586,
+    "file": "sources/e43b353a19bbe3db20f5a45fc68f1ed206534128987ace1b745b8f7ac2d2b856.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e4051.html",
+    "retrieved_at": "2026-10-20T18:25:29.643984+00:00",
+    "sha256": "3a18f746d55464256e48258b9ea721ea8a8d93911f8ff8c5d3263adae6b18744",
+    "bytes": 418439,
+    "file": "sources/95393de2e0180b6af06aea9b53ae7acc49b3d391a139ee4b4735e3482fc5d752.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e122292.html",
+    "retrieved_at": "2026-10-20T18:25:30.034974+00:00",
+    "sha256": "a29c1d3e251eec95d9a82c713ef6e3ebfa808d7b5f3f1789f8e7867726cf08ab",
+    "bytes": 740961,
+    "file": "sources/d7c180069d4367ae2249c2e40bf03b3d88cb3af5792166177b339bd8197b287e.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e131453.html",
+    "retrieved_at": "2026-10-20T18:25:30.379411+00:00",
+    "sha256": "aabccda7d4e9b00b1d820ae4e9d8327f143806ac522187178d753e16f3096ff7",
+    "bytes": 241305,
+    "file": "sources/89e9f3bd1bc2cb2899601992c3d6cc51be4be8148aa2183c6a6cc0eb51ddd626.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e134581.html",
+    "retrieved_at": "2026-10-20T18:25:31.896239+00:00",
+    "sha256": "c76f85fe466180bd42556218794ffd567a7fc72480bee62e1a0debac31b7f31b",
+    "bytes": 1449219,
+    "file": "sources/948d6f54321cb6852ee657727bbb09344a8dbd75089d981055d2b2146a0e7190.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e150114.html",
+    "retrieved_at": "2026-10-20T18:25:32.717788+00:00",
+    "sha256": "e6631e57261292d7e9c8309a0e0c963da1845384f3705db46ce3a6d27aff0e84",
+    "bytes": 922235,
+    "file": "sources/099b87ad1a55e9050fbbf67af7279aabf216b92e318f57be251f98aa98ce737b.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e161282.html",
+    "retrieved_at": "2026-10-20T18:25:33.219341+00:00",
+    "sha256": "7f67ebcf5dc13b1692e38b73b8c2aac80f351b99e264e95bf20a07b8ea6636c4",
+    "bytes": 95659,
+    "file": "sources/01d55d8bc22084bcfe03c691d64161fa1fc44e45e4f557c05dc5ea6fa4b43e4d.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e162379.html",
+    "retrieved_at": "2026-10-20T18:25:33.597195+00:00",
+    "sha256": "977d3e90f48363528674e5f503d7383fa1b7db34ed42ac5f9e81e4ae7b1a7c76",
+    "bytes": 113679,
+    "file": "sources/af83ab90a98da4ab03ec92085824f34d55157ca1ac250508dd803adeb365e20f.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e163752.html",
+    "retrieved_at": "2026-10-20T18:25:34.745760+00:00",
+    "sha256": "2d836f0e5f9a3091fe7ff6f77cbbe37cb527bc20adf9e557a82571da8c6cd18b",
+    "bytes": 1972165,
+    "file": "sources/7261ac2139d8c2d19a543b9590475b1ebee7e328954b003fc7a3fe10a4b2f2d9.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e193631.html",
+    "retrieved_at": "2026-10-20T18:25:35.036088+00:00",
+    "sha256": "24fc57e8c7dc52502b202fba64633f765af4c40a37279ecbd40f1cdc866ebfcb",
+    "bytes": 115283,
+    "file": "sources/f3a3ae0ff7c18e7fcf67cbf7a16e12fa24cdc7e838859e54edf13cf66666aac1.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e195418.html",
+    "retrieved_at": "2026-10-20T18:25:35.370476+00:00",
+    "sha256": "e2de2a2d66083a66de4e0b20976dc744bb07b5cae1f98b45239b373f66ad04d2",
+    "bytes": 195401,
+    "file": "sources/67760af2bcc405657f23aa0eadc0c4bd9836470c88fae27842d4cee2865a8632.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e197004.html",
+    "retrieved_at": "2026-10-20T18:25:36.673053+00:00",
+    "sha256": "650e57da2b4e2610aeab856b4a4e965c9694f8308727f7ba6863590c876f4d70",
+    "bytes": 4837534,
+    "file": "sources/71286c88704c168ebfb7b6962261da5c7d37b6aa33f9a7af950bf7895e30df0a.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e220689.html",
+    "retrieved_at": "2026-10-20T18:25:37.509018+00:00",
+    "sha256": "5d1468a78f1ec0b3831b04a0dca2513982be33e8f40ffaf474df028dbccefed2",
+    "bytes": 1567463,
+    "file": "sources/a0ff3c5c3fc3e85a3c67483569430746047532366fa6345d84488469e706b07a.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e237627.html",
+    "retrieved_at": "2026-10-20T18:25:37.821114+00:00",
+    "sha256": "b99f77e4a1c11e532124532a3c87138833a434eef0716fa69cecc2c4ae50c5b3",
+    "bytes": 293939,
+    "file": "sources/128a8ca89a892ef21b32131e41ccc0744188f6016b7f571c3390cd6cda8f78c2.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e240552.html",
+    "retrieved_at": "2026-10-20T18:25:38.352048+00:00",
+    "sha256": "da58c5f78bc90ffa371de57d550d817a686909681dfc26522849962352ed6d97",
+    "bytes": 1190114,
+    "file": "sources/332e541162c591c8ef96a9bc135162b1ffc428129926eb6222f230af6817a0f2.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e247906.html",
+    "retrieved_at": "2026-10-20T18:25:38.859458+00:00",
+    "sha256": "8d9d7428e4369a14890708e3eb8e7309cca2f87f8b3c7228ff0a4fb6b975cd4f",
+    "bytes": 194371,
+    "file": "sources/618aac1942b747439703b34de293c2e2dd2d8d518c42fd5d1f654e60ec2b2b58.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e249708.html",
+    "retrieved_at": "2026-10-20T18:25:39.087033+00:00",
+    "sha256": "2962aacfc97643e6acd5d7c45075b9e1d3e90e2996e6b4fef3e0e9a8a5ed3ddc",
+    "bytes": 151569,
+    "file": "sources/538c0bad9bc2dd7bc10ebf974af0ac50456b0bb5cf92f9aed298775cd273ea47.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e271941.html",
+    "retrieved_at": "2026-10-20T18:25:39.521721+00:00",
+    "sha256": "0f90bd5e4060f5baa62732c8080ad0c87f53c881bb3442ff68248daa0e3b2275",
+    "bytes": 863943,
+    "file": "sources/130f5758d69b374301a9c20ac5f36a0ce1f5b6c77a66f31e6207d40452ed6c77.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=ch2800_d1fea8_279ab_9.html",
+    "retrieved_at": "2026-10-20T18:25:39.828743+00:00",
+    "sha256": "1a6251cc598b93f70bda7e6a1408521aefb34360d9a4ea16f7ff9cc5c0733395",
+    "bytes": 466464,
+    "file": "sources/40bde5cf974ed23daaa1792c7b017ebdb593b4555e743d6ee33d3e50c5457ba9.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=ch2900_d24ad2_2793a_190.html",
+    "retrieved_at": "2026-10-20T18:25:40.130864+00:00",
+    "sha256": "eb9a606e4275062d403914b250707e2630da1c025dd21edf6b1ac02a8484c3fe",
+    "bytes": 631685,
+    "file": "sources/fb14780d56789f01a6537c54b9c94921351c5158a77cb6008ab19ec9f831d8b1.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e289501.html",
+    "retrieved_at": "2026-10-20T18:25:40.404614+00:00",
+    "sha256": "e389587f3d4cce989282a80534b3efaf48469df8ea1549a71d04e4997013724a",
+    "bytes": 3008,
+    "file": "sources/3ad1838a7fe14d00136adc094ef2722db447e5ccc3ce27befd03cee938ace3a8.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e290278.html",
+    "retrieved_at": "2026-10-20T18:25:40.790336+00:00",
+    "sha256": "792cad7c8a2ef59ab104dd4ef151b0c9022186ac0daeacfbce4601e1e372b47e",
+    "bytes": 948657,
+    "file": "sources/f68fb0a49abbb18b66af92c73ed214f0d6ada1ef160d9018d033235dc0283221.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e300730.html",
+    "retrieved_at": "2026-10-20T18:25:41.303801+00:00",
+    "sha256": "706545a4513536acb87d8f982f1be8ce8b5334f28f917e0b022ade9380ae6477",
+    "bytes": 1270152,
+    "file": "sources/529757445de765c64aecfda72da1f31bd43f08e32db58cebafe612d6c5f72bfb.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e312906.html",
+    "retrieved_at": "2026-10-20T18:25:43.395438+00:00",
+    "sha256": "d828bd35a3de5befebfb319676ff4d50c4ea9e1e2608ed343397bcc4253310e1",
+    "bytes": 5084659,
+    "file": "sources/9861cc1ed7ed8bfa91168784a72de3210f2528d34bdef5ece9222570f47e9a85.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e362842.html",
+    "retrieved_at": "2026-10-20T18:25:44.171099+00:00",
+    "sha256": "88a30ea98df4edacf73740c5667db3dcac10d72bb36c16989de66710682de3f7",
+    "bytes": 1613136,
+    "file": "sources/b74426d72281c82e173ab9ba2bf2b5a82753b92ef32585a19f7210a66be1eef3.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e278035.html",
+    "retrieved_at": "2026-10-20T18:25:44.543005+00:00",
+    "sha256": "8e6d6fe648b81e18c0b27d9e4e867b81287b660054889d7cd782fd6db9d57bac",
+    "bytes": 797952,
+    "file": "sources/ccaf0bf785cdb206665f9e8714c5837e296f7ce92648d3b362df1d03d311d820.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=d0e311120.html",
+    "retrieved_at": "2026-10-20T18:25:44.818949+00:00",
+    "sha256": "4433f7f92af37d872e71a2d8f22134e816bce6852466d6b5d71379dd1c426495",
+    "bytes": 172065,
+    "file": "sources/3f05d287581be8f5830cdb1d2ea8864efc194b9bb2cbe4b15197ca11cd9d6a16.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=mpep-index.html",
+    "retrieved_at": "2026-10-20T18:25:48.461725+00:00",
+    "sha256": "ef1de03ed31422d4e95746244803db2c787a41968bef5401287c375936795769",
+    "bytes": 4593896,
+    "file": "sources/3d14e54d578cee63bf62309a6917b79d4c61c59132cada78e96b277b8e496809.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  },
+  {
+    "url": "https://mpep.uspto.gov/RDMS/MPEP/content?version=E9_R-01.2024&href=fpb-index.html",
+    "retrieved_at": "2026-10-20T18:25:48.837774+00:00",
+    "sha256": "c771db2edadfe6fe4c5d11c72492499eca7325cd3cb9e3240cd936427b80e0f0",
+    "bytes": 4678,
+    "file": "sources/f452f7524aed474d83e8b7d84a75580d1184d43d7cdb77ef538e8380ab28958c.html",
+    "content_type": "text/plain;charset=ISO-8859-1",
+    "encoding": "iso-8859-1"
+  }
+]

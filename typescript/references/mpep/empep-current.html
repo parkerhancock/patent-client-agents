@@ -1,0 +1,435 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html xml:lang="en" lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+        <meta http-equiv="Content-Security-Policy" content="style-src 'self'; script-src 'self' https://www.googletagmanager.com https://components.uspto.gov"/>
+
+	    <?import namespace="v" implementation="#default#VML" ?>
+	    <title>MPEP</title>
+	    <link rel="stylesheet" type="text/css" href="/resource/yui/menu/assets/skins/sam/menu.css" media="screen" />
+	    <link rel="stylesheet" type="text/css" href="/resource/yui/autocomplete/assets/skins/sam/autocomplete.css" media="screen" />
+	    <link rel="stylesheet" type="text/css" href="/resource/css/rdms.css"/> 
+		<link rel="stylesheet" type="text/css" href="/resource/css/facybox.css"/> 
+		<link rel="stylesheet" type="text/css" href="/resource/css/facybox_urls.css"/> 
+				
+	</head>
+	<body class="rdms-body">
+		<input type="hidden" id="manual_type" value="MPEP"/>
+		<input type="hidden" id="role_id" value="0"/>
+		
+		<div id="suggestions" class="yui-skin-sam"><!--Autocomplete suggestion div here outside region to avoid truncation--></div>
+		<ul id="rdms-settings-menu-area" class="position-absolute display-none"></ul><!-- style="width: 100%; position: fixed; top: 0"-->
+	
+		
+		
+		<div id="rdms-header">	
+		   
+		  <div>
+		     <div id="rdms-search-form-area">
+		   		<ul class="topNav">
+				    <li><a href="#" title="Select to show the Help drop down menu.">Help</a>
+					    <ul class="rdms-topnav-menu">
+							
+								
+									
+										
+											<li xmlns=""><a href="https://www.uspto.gov/sites/default/files/faq/patents/searchable_mpep_qrg.pdf" target="_blank">Public Quick Reference Guide</a></li>
+										
+									
+										
+											<li xmlns=""><a href="https://www.uspto.gov/sites/default/files/faq/patents/searchable_mpep_guide.pdf" target="_blank">Public User Manual</a></li>
+										
+									
+								
+								
+							
+							
+			      		</ul>
+			      	</li>
+					
+					
+						     
+				    <li><a href="#" title="Select to show the Switch Version drop down menu.">Switch Version</a>
+				    	<ul class="rdms-topnav-menu">
+							  
+									
+									
+									<li><a href="/RDMS/MPEP/E8r8" title="Click to select the E8r8 version." target="_self">E8r8</a></li>
+										
+									
+									
+									
+							  
+									
+									
+									<li><a href="/RDMS/MPEP/e8r9" title="Click to select the e8r9 version." target="_self">e8r9</a></li>
+										
+									
+									
+									
+							  
+									
+									
+									<li><a href="/RDMS/MPEP/E9_R-11.2013" title="Click to select the E9_R-11.2013 version." target="_self">E9_R-11.2013</a></li>
+										
+									
+									
+									
+							  
+									
+									
+									<li><a href="/RDMS/MPEP/E9_R-07.2015" title="Click to select the E9_R-07.2015 version." target="_self">E9_R-07.2015</a></li>
+										
+									
+									
+									
+							  
+									
+									
+									<li><a href="/RDMS/MPEP/E9_R-08.2017." title="Click to select the E9_R-08.2017. version." target="_self">E9_R-08.2017.</a></li>
+										
+									
+									
+									
+							  
+									
+									
+									<li><a href="/RDMS/MPEP/E9_R-10.2019" title="Click to select the E9_R-10.2019 version." target="_self">E9_R-10.2019</a></li>
+										
+									
+									
+									
+							  
+									
+									
+									<li><a href="/RDMS/MPEP/E9_R-07.2022" title="Click to select the E9_R-07.2022 version." target="_self">E9_R-07.2022</a></li>
+										
+									
+									
+									
+							  
+									
+									<li><a href="/RDMS/MPEP/current" title="Click to select the E9_R-01.2024 version." target="_self">E9_R-01.2024 (Current)</a></li>
+									
+										
+									
+									
+									
+							 		
+			     		</ul>
+			     	</li>
+		 		</ul>
+		 		
+		 		<span id="searchform"><input type="text" id="q" name="q" class="searchbox" value="" title="Enter search term"/>
+			 		<div class="searchbutton"><button type="submit" id="searchbutton" title="Run Search"></button></div>
+			 		<input type="hidden" id="r" name="r" class="searchbox" value=""/>
+			 		<div class="clear-both"></div>
+			 	
+			 		<div id="search-constraints">
+					  	<div id="search-over">
+						  	<input name="ccb" id="content-cb" type="checkbox" title="Check to search the MPEP" checked="checked" >MPEP</input>
+							
+						  	<input name="icb" id="index-cb" type="checkbox" title="Check to search the Subject Matter Index"  >Index</input>
+								 	
+								<input name="fcb" id="fpb-cb" type="checkbox" title="Check to search the Form Paragraph Book"  >FPs</input>
+								
+					  	</div>
+						
+							
+							
+								<input type="hidden" name="searchVer" id="searchVersion" value="current"/>
+							
+						
+					  	<div class="search-constraint">
+				            Operator    
+				            <select name="syn" id="syntax">
+								  <option value="adj" title="Select to search using the adjacent operator" selected="selected" >ADJ</option>
+								  <option value="and" title="Select to search using the and operator"  >AND</option>
+								  <option value="or" title="Select to search using the or operator"  >OR</option>
+							</select>
+						</div>
+						<div class="search-constraint search-view display-none">
+							Snippet: 
+				            <select name="results" id="snippet-type">
+								  <option value="compact" title="Show smaller search result snippets" selected="selected" >Short</option>
+								  <option value="detailed" title="Show longer search result snippets"  >Long</option>
+							</select></div>
+						<div class="search-constraint search-view display-none">
+							Sort : 
+				            <select name="sort" id="sort-order">
+								  <option value="relevance" title="Show results sorted by relevance" selected="selected" >Relevance</option>
+								  <option value="outline" title="Show results sorted by outline order"  >Section order</option>
+							</select>	
+						</div>
+						<div class="search-constraint search-view display-none"> 
+							List: 
+							<select name="cnt" id="results-cnt">
+								  <option value="10" title="Show 10 results" selected="selected" >10</option>
+								  <option value="25" title="Show 25 results"  >25</option>
+								  <option value="50" title="Show 50 results"  >50</option>
+								  <option value="75" title="Show 75 results"  >75</option>
+								  <option value="100" title="Show 100 results"  >100</option>
+							</select>
+						</div>
+					</div>
+				</span>
+			</div>
+		
+			<div id="rdms-logo-block">
+				<div class="logo-row">
+					<div class="logo-cell"><img id="home-logo" src="/resource/images/uspto-logo.png" alt="USPTO logo"/></div>
+					<div class="logo-cell text-blue acronym">MPEP</div>
+					<div class="logo-cell rdms-header-title-separator"> </div>
+				  			
+							<div class="logo-cell text-blue long-title">Manual of Patent Examining Procedure<br/>
+						
+						
+						
+									
+						  
+							
+						  
+							
+						  
+							
+						  
+							
+						  
+							
+						  
+							
+						  
+							
+						  
+							
+								<a href="/RDMS/MPEP/current" title="Home Page E9_R-01.2024 Version">Latest Revision November 2024 [R-01.2024]</a></div>
+							
+						
+				</div>
+			</div>
+			
+			<!--  inserting the notification -->
+			
+
+		    
+			   <div id="toolbar" class="toolbar">
+			
+			<!-- END inserting the notification -->
+				<div class="float-left-full">
+					<div id="rdms-sidebar-buttonbar" class="rdms-buttonbar">
+						<ul class="rdms-buttonbar-nav">
+							<li id="manual-li"><a href="#manual"><img src="/resource/images/nav_browse.png" title="MPEP TOC" alt="MPEP TOC"/></a></li>
+								
+							<li id="results-li" class="ui-state-disabled"><a href="#facets"><img src="/resource/images/nav_searchresults.png" title="Search Results TOC" alt="Search Results TOC"/></a></li>
+							<li id="searches-li"><a href="#searches"><img src="/resource/images/nav_savedsearches.png" title="Saved Searches TOC" alt="Saved Searches TOC"/></a></li>
+							<li id="collapse-li"><a href="#collapse"><img src="/resource/images/nav_collapse.png" title="Close Sidebar" alt="Close Sidebar"/></a></li>
+			      		</ul>
+			      	</div>
+			    </div>
+		     	<div class="float-right-full">
+		     		<div id="text-size-controls" class="toolbar-item">
+		     			<a id="increase-font-size" class="toolbar-icon" href="#" title="Increase font size"></a>
+			   		<a id="decrease-font-size" class="toolbar-icon" href="#" title="Decrease font size"></a>
+			   		</div>
+			   		<a id="print-button" class="toolbar-item view-browse view-search-result display-inline" title="Print" href="" target="PRINT">
+			   			<div id="print-button-icon" class="toolbar-icon"></div>
+			   		</a>
+			   		<a id="back-to-search-results" class="toolbar-item view-search-result" href="#" title="Return to search results"> 
+						<div id="back-to-search-results-icon" class="toolbar-icon">
+							<div class="toolbar-item-label">Search Results</div>
+						</div>
+					</a>
+					<!--  
+					<a id="highlights-toggle" class="toolbar-item view-search-result" href="#" title="Turn highlights on/off">
+						<div id="highlights-toggle-icon" class="toolbar-icon highlights-enabled">
+							<div class="toolbar-item-label">Highlights</div>
+						</div>
+					</a>
+					-->
+					<div class="toolbar-item view-search-result">
+                        <input id="highlights-toggle" type="checkbox" title="Turn highlights on/off" checked="checked">Highlights</input>
+                    </div>
+					<div id="highlight-widget" class="toolbar-item view-search-result">
+						<div class="toolbar-item-label-left text-none-imp;">Search Hits <span id="search-hits"></span></div>
+						<a id="highlight-widget-up-icon" class="toolbar-icon min-width-12-imp" href="#" title="Go to previous highlight"> </a>
+						<a id="highlight-widget-down-icon" class="toolbar-icon" href="#" title="Go to next highlight"> </a>
+					</div>
+					<div id="toolbar-search-controls" class="toolbar-item view-search">
+						<div class="toolbar-item-label-left text-none-imp">
+							<span>Snippet	
+					          <select id="toolbar-snippet">
+							    <option value="compact" selected="selected">Short</option>
+							    <option value="detailed">Long</option>
+							  </select>
+							 </span>
+							 <span>Sort by
+					          <select id="toolbar-sort-order">
+							    <option value="relevance">Relevance</option>
+							    <option value="outline">Section order</option>
+							  </select>
+							 </span>
+							  <span>List
+					          <select id="toolbar-results-count">
+							    <option value="10" selected="selected">10</option>
+							    <option value="25">25</option>
+							    <option value="50">50</option>
+							    <option value="75">75</option>
+							    <option value="100">100</option>
+							  </select>
+							 </span>
+						 </div>
+				  	</div>
+					
+					<div id="toolbar-spacer" class="toolbar-item cursor-default"> </div>
+		    	</div>
+		  	</div>
+		  </div>
+		
+		  <div id="rdms-content-toolbar"> </div>
+		</div> <!-- end of header -->
+		
+		
+		<div class="clear-both"></div>
+		<div id="save-search-dialog" class="display-none">
+			 <strong>Saved Search Name</strong>
+			 <br/>
+			 <input id="save-search-name" type="text" class="save-search-inp"/>
+			 <br/>
+			 <span id="save-cancel-controls">
+				  <a id="save-search-cancel-button" href="#" title="Cancel save search">Cancel</a> or 
+				  <button id="save-search-save-button" disabled="true" title="Save search">Save</button>
+			 </span>
+		</div>
+		  
+		<!-- <p>!!!requestScope.isDefaultPage = true</p>-->
+	    
+	         
+		
+		
+		<div id="rdms-content">	
+		 
+		  
+			  <!-- <div id="rdms-splitter-bounds"> </div> -->
+			  
+			  <div id="rdms-sidebar">
+				<div id="sidebar">
+				  	<span id="toc-mouseover"><a href="#"> </a></span>
+				  	<div id="manual" class="sidebar-panel demo"><!-- toc --></div>
+				  		  	
+				  	<div id="notes" class="sidebar-panel display-none">
+				  	  <div class="note-header">
+				  		<h2><img src="/resource/images/icon_note.png" alt="Notes icon" title="Notes" class="notes-pos"/>Notes</h2>
+				  		<div class="note-header">
+				  			<a id="notes-toggle" class="view-browse view-search-result" href="#" title="Click to show note links">
+								
+								<div id="notes-toggle-icon" class="notes-disabled">Show Notes Icon in Results</div>
+				  			</a>
+				  		</div>
+				  	  </div>
+				  		<div class="annotation-list" xmlns=""> </div>
+				  	</div>
+				  	<div id="searches" class="sidebar-panel" class="display-none">
+				  		<div id="show-saved-searches"></div>
+				  		<div id="show-history"></div>
+				  	</div>
+				  	<div id="results-panel" class="sidebar-panel" class="display-none">
+				  		<div class="results">
+				  			<div class="result-navigation"></div>
+				  			<div id="resultlist"></div>
+				  		</div>
+				  	</div>
+				  	<div id="facets" class="sidebar-panel" class="display-none">
+				  		<div id="search-results-list"></div>
+				  	</div>
+				</div>
+			  </div> <!-- end of sidebar -->
+			  	
+			  <div id="rdms-splitter"> </div>
+			  
+			  <div id="rdms-content-canvas">
+			  	 <div id="canvas">
+				  	<div id="content" class="content">
+	
+					<div class="section-navigation"><div class="float-left"><span class="section-navigation-arrows">&#5130;</span><a href="#/current/MPEP-ChangePage.html" class="section-navigation section-navigation-top-left">  - Change Summary</a></div><div class="float-right"><p class="text-align-right"><a href="#/current/d0e189.html" class="section-navigation section-navigation-top-right"> - Foreword </a><span class="section-navigation-arrows">&#5125;</span></p></div><div class="width-50-left"><p class="text-align-center"> - Title Page <span class="breadcrumb"><select id="edition-select" name="edition-select" class="edition-select" title="Select version to view"><option value="/E8r8/d0e18.html" class="E8r8" title="Select to view the E8r8 version of this manual section.">E8r8</option><option value="/e8r9/d0e18.html" class="e8r9" title="Select to view the e8r9 version of this manual section.">e8r9</option><option value="/E9_R-11.2013/d0e18.html" class="E9_R-11.2013" title="Select to view the E9_R-11.2013 version of this manual section.">E9_R-11.2013</option><option value="/E9_R-07.2015/d0e18.html" class="E9_R-07.2015" title="Select to view the E9_R-07.2015 version of this manual section.">E9_R-07.2015</option><option value="/E9_R-08.2017./d0e18.html" class="E9_R-08.2017." title="Select to view the E9_R-08.2017. version of this manual section.">E9_R-08.2017.</option><option value="/E9_R-10.2019/d0e18.html" class="E9_R-10.2019" title="Select to view the E9_R-10.2019 version of this manual section.">E9_R-10.2019</option><option value="/E9_R-07.2022/d0e18.html" class="E9_R-07.2022" title="Select to view the E9_R-07.2022 version of this manual section.">E9_R-07.2022</option><option value="/current/d0e18.html" class="E9_R-01.2024" title="Select to view the E9_R-01.2024 version of this manual section." selected="selected">E9_R-01.2024 (Current)</option></select></span></p></div></div><div class="detail"><form><input type="hidden" id="search-index" value="1"/><input type="hidden" id="search-start" value="1"/><input type="hidden" id="search-query" value=""/></form><div id="contentScroller"><div id="primary"><label class="left-999"></label><div><h1 xmlns="urn:us:gov:doc:uspto:enterprise" class="page-title">Manual of PATENT EXAMINING PROCEDURE</h1>Manual of PATENT EXAMINING PROCEDURE<p align="left">Original Ninth Edition,</p><p align="left">March 2014</p><p align="left">Latest Revision</p><p align="left">November 2024 [R-01.2024]</p><p align="left">&#9643;&#9643;&#9643;&#9643;&#9643;</p><div xmlns="urn:us:gov:doc:uspto:enterprise" class="figure" id="d3e9"> <img src="graphics/E9_R-01.2024/seals.png" alt="USPTO Seal on the Title Page" title="USPTO Seal on the Title Page" width="282" height="282"></img> </div><p align="left" id="tp_d24cb8_227a7_fb" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643;<a href="tp_d24cb8_227a7_fb" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d24cb8_227b8_1da" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643;<a href="tp_d24cb8_227b8_1da" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="d0e27" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">U.S. DEPARTMENT OF COMMERCE<a href="d0e27" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d24cb8_206c1_31a" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643;<a href="tp_d24cb8_206c1_31a" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d24cb8_206c1_31d" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643; <a href="tp_d24cb8_206c1_31d" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="d0e30" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">United States Patent and Trademark Office<a href="d0e30" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left"> AVAILABILITY </p><p align="left" id="tp_d20020_24b87_23b" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">The paperbound format of the Manual was discontinued by the Government Publishing Office effective December 13, 2012. The Manual is available electronically in html and PDF renderings on the USPTO website at <b xmlns="urn:us:gov:doc:uspto:enterprise"><a href="http://www.uspto.gov/web/offices/pac/mpep/index/htm" target="_blank">www.uspto.gov/web/offices/pac/mpep/</a></b>. The Office also provides a search engine for searching the full text of the Manual at <b xmlns="urn:us:gov:doc:uspto:enterprise"><a href="https://mpep.uspto.gov/RDMS" target="_blank">https://mpep.uspto.gov/RDMS</a></b>. <a href="tp_d20020_24b87_23b" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_25e0c_21e" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643; <a href="tp_d20020_25e0c_21e" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_24c54_94" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">Most hyperlinks from the Manual to internal and external websites are active. For particularly long website addresses (URLs), an extra space has been added to the rendered text for readability (especially in the PDF rendering). Clicking on a hyperlink will direct the user to the referenced website because the reference link data in the source document includes the URL without the extra space; however, copying text that includes the extra space and thereafter pasting it in a browser will result in an error. <a href="tp_d20020_24c54_94" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_25e16_358" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643;<a href="tp_d20020_25e16_358" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_25181_35d" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">Previous editions and revisions of the Manual are available from the MPEP Archives page on the USPTO website at <b xmlns="urn:us:gov:doc:uspto:enterprise"><a href="http://www.uspto.gov/web/offices/pac/mpep/old/index.htm" target="_blank">www.uspto.gov/web/offices/pac/mpep/old/index.htm</a></b>. <a href="tp_d20020_25181_35d" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left"></p><p align="left" id="tp_d20020_25238_3a2" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok"> EXPLANATION OF NOTATIONS <a href="tp_d20020_25238_3a2" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left"></p><p align="left" id="tp_d20020_2524d_3d2" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">Revision Date Indicator. Each section within an MPEP Chapter includes a revision date indicator, e.g., [R-01.2024]. The numbers within the bracket indicate the date the revision cycle for that section was completed, which would be January 2024 in the example above. Note that the publication date of the Manual as indicated on the title page and on the bottom of the PDF renderings may be later than the date the revision cycle was completed because of the time required for clearance processes.<a href="tp_d20020_2524d_3d2" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_25e5b_3a2" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643; <a href="tp_d20020_25e5b_3a2" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_25294_3b" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">"Pre-AIA." Where the phrase "pre-AIA" is associated with a law or rule, it means that version which was in force before the date of the change necessitated by the Leahy-Smith America Invents Act (AIA), Public Law 112-29, 125 Stat. 284.<a href="tp_d20020_25294_3b" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d24cb8_202df_2f8" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643; <a href="tp_d24cb8_202df_2f8" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_25e62_173" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">"Pre-PLT" or pre-PLT (AIA)." Where the phrase "pre-PLT" or "pre-PLT (AIA)" is associated with a law or rule, it means that version which was in force before the date of the change necessitated by the Patent Law Treaties Implementation Act of 2012, Title II (Patent Law Treaty Implementation (PLT)), Public Law 112-211, 126 Stat. 1527 (Dec. 18, 2012). Note that the "pre-PLT (AIA)" designation is used when there is also a "pre-AIA" version of the law or rule that still has applicability in limited circumstances.<a href="tp_d20020_25e62_173" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d24cb8_202e4_29e" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643; <a href="tp_d24cb8_202e4_29e" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left"> Five Asterisks. The use of five asterisks in the body of the laws, rules, treaties, and administrative instructions indicates a portion of the law, rule, treaty, or administrative instruction which was not reproduced.</p><p align="left" id="tp_d20020_25e6c_46" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643; <a href="tp_d20020_25e6c_46" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_25e73_3a3" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643; <a href="tp_d20020_25e73_3a3" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><p align="left" id="tp_d20020_25e79_95" uri="d0e18.html" note-title=" - Title Page - Manual of PATENT EXAMINING PROCEDURE" class="annotate-ok">&#9643;&#9643;&#9643;&#9643;&#9643; <a href="tp_d20020_25e79_95" title="Add a Note" class="note-toggle"><img src="/resource/images/icon_note.png"></a></p><table xmlns="urn:us:gov:doc:uspto:enterprise" width="50%" id="d0e125"> <tr> <td>First Edition</td> <td>November 1949</td> </tr> <tr> <td>Second Edition</td> <td>November 1953</td> </tr> <tr> <td>Third Edition</td> <td>November 1961</td> </tr> <tr> <td>Fourth Edition</td> <td>June 1979</td> </tr> <tr> <td>Fifth Edition</td> <td>August 1983</td> </tr> <tr> <td>Sixth Edition</td> <td>January 1995</td> </tr> <tr> <td>Seventh Edition</td> <td>July 1998</td> </tr> <tr> <td>Eighth Edition</td> <td>August 2001</td> </tr> <tr> <td>&#9643;&#9643;&#9643;&#9643;Final Revision</td> <td>August 2012</td> </tr> <tr> <td>Ninth Edition</td> <td>March 2014</td> <td>&#9643;[R-11.2013]</td> </tr> <tr> <td>&#9643;&#9643;&#9643;&#9643;Revised</td> <td>October 2015</td> <td>&#9643;[R-07.2015]</td> </tr> <tr> <td>&#9643;&#9643;&#9643;&#9643;Revised</td> <td>November 2015</td> <td>&#9643;[R-07.2015]</td> </tr> <tr> <td>&#9643;&#9643;&#9643;&#9643;Revised</td> <td>January 2018</td> <td>&#9643;[R-08.2017]</td> </tr> <tr> <td>&#9643;&#9643;&#9643;&#9643;Revised</td> <td>June 2020</td> <td>&#9643;[R-10.2019]</td> </tr> <tr> <td>&#9643;&#9643;&#9643;&#9643;Revised</td> <td>February 2023</td> <td>&#9643;[R-07.2022]</td> </tr> <tr> <td>&#9643;&#9643;&#9643;&#9643;Revised</td> <td>Novemeber 2024</td> <td>&#9643;[R-01.2024]</td> </tr></table><table xmlns="urn:us:gov:doc:uspto:enterprise" id="d0e125" width="50%"></table></div></div></div></div><div class="section-navigation"><div class="float-left"><span class="section-navigation-arrows">&#5130;</span><a href="#/current/MPEP-ChangePage.html" class="section-navigation section-navigation-top-left">  - Change Summary</a></div><div class="float-right"><p class="text-align-right"><a href="#/current/d0e189.html" class="section-navigation section-navigation-top-right"> - Foreword </a><span class="section-navigation-arrows">&#5125;</span></p></div><div class="width-50-left"><p class="text-align-center"><a href="#" onclick="scrollContentTop()"> - Title Page-Top</a></p></div></div></div>
+		       
+		         	</div>
+		    
+					<div id="canvas-loading" class="display-none">
+						<div>
+							 <br/>
+							 <span class="acronym">Loading...</span>
+							 <img src="/resource/images/loading.gif" alt="loading..." class="float-right-full"/>
+						 </div>
+					</div>  
+				 
+		         	</div> 	
+			 </div> <!-- end of rdms-content-canvas -->
+	       
+	       <p>!!!requestScope.isDefaultPage = true</p>
+	         
+		   	 <div id="toolbar3" class="bottom-27">
+				  <p class="warning-title2">
+					You are accessing a U.S. Government information system. You understand and consent to the following: you may access this information system for authorized use only; unauthorized use of the system is prohibited and subject to criminal and civil penalties; you have no reasonable expectation of privacy regarding any communication or data transiting or stored on this information system at any time and for any lawful Government purpose, the Government may monitor, intercept, audit, and search and seize any communication or data transiting or stored on this information system; and any communications or data transiting or stored on this information system may be disclosed or used for any lawful Government purpose. Accessing and using this system indicates your understanding of this warning.
+				  </p>
+			 </div>
+       </div>
+	   
+         
+       <script src="/resource/yui/yahoo-dom-event/yahoo-dom-event.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/yui/container/container_core-min.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/yui/menu/menu-min.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/yui/animation/animation-min.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/yui/datasource/datasource-min.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/yui/connection/connection-min.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/yui/autocomplete/autocomplete-min.js" type="text/javascript"><!-- --></script>
+   
+       <script src="/resource/js/vendor/jquery-3.7.1.min.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/vendor/jquery-migrate-1.4.1.min.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/vendor/jquery-migrate-3.3.2.min.js" type="text/javascript" charset="utf-8"><!-- --></script>
+ 
+       <script src="/resource/js/vendor/jquery-ui.min.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.scrollTo.min.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.mousewheel.min.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.inlineedit.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.ba-hashchange.min.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.hotkeys.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.cookie.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.paginate.js" type="text/javascript"><!-- --></script> 
+       <script src="/resource/js/vendor/jquery.colorbox-min.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.truncate.min.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.floatbox.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/vendor/jquery.treeview.js" type="text/javascript"><!-- --></script>
+        
+       <script src="/resource/js/application.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/json2.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/detail-view.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/top-nav.js" type="text/javascript" charset="utf-8"><!-- --></script>
+       <script src="/resource/js/appjs.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/appjs-history.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/saved-search.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/adv-search.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/layout-docReady.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/ajax-view-controller.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/tabs-docReady.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/manage-help-docReady.js" type="text/javascript" ><!-- --></script>
+       <script src="/resource/js/manage-users-roles-docReady.js" type="text/javascript" ><!-- --></script>
+       <script src="/resource/js/manage-releases-docReady.js" type="text/javascript" ><!-- --></script>
+       <script src="/resource/js/notes-docReady.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/accessibility.js" type="text/javascript"><!-- --></script>
+       <script src="/resource/js/facybox.js" type="text/javascript" ><!-- --></script>
+       <script src="/resource/js/toc-docReady.js" type="text/javascript" ><!-- --></script>
+       <script src="/resource/js/manage-settings-docReady.js" type="text/javascript" ><!-- --></script>
+       <script src="/resource/js/generate-report-data-docReady.js" type="text/javascript" ><!-- --></script>
+       <script src="/resource/js/purify.min.js" type="text/javascript" ><!-- --></script>
+       <script src="https://components.uspto.gov/js/ais/68-rdms.js" defer><!-- --></script>
+       <script src="/resource/js/rdms-menu.js" type="text/javascript" ><!-- --></script>
+       <script src="/resource/js/toolbar3-hide.js" type="text/javascript" ><!-- --></script> 
+
+  	</body>
+</html>

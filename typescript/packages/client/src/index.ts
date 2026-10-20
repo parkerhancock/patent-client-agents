@@ -4,6 +4,8 @@ export * from "./applications-models.js";
 export * from "./assignments.js";
 export * from "./bulkdata.js";
 export * from "./models.js";
+export * from "./mpep.js";
+export * from "./mpep-release.js";
 export * from "./office-action-analytics.js";
 export * from "./office-actions.js";
 export * from "./petitions.js";

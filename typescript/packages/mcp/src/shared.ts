@@ -1,4 +1,4 @@
-import type { Provenance } from "@patent-client-agents/client";
+import type { SourceProvenance } from "@patent-client-agents/client";
 import type { AuthCheck } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
 
@@ -7,10 +7,13 @@ export type { AuthCheck };
 export const provenanceSchema = z.object({
   source_url: z.string().url(),
   source_name: z.string(),
-  retrieved_at: z.string().datetime(),
+  retrieved_at: z.string().datetime().nullable(),
   cache_hit: z.boolean(),
   connector_version: z.literal("0.1.0"),
   as_of_status: z.string().optional(),
+  corpus_synced_at: z.string().datetime().nullable().optional(),
+  corpus_version: z.string().min(1).optional(),
+  accessed_at: z.string().datetime().optional(),
 });
 export const listEnvelopeSchema = z.object({
   summary: z.string(),
@@ -64,7 +67,7 @@ export function detailToolOptions(auth?: AuthCheck) {
 export function listEnvelope(
   summary: string,
   items: Record<string, unknown>[],
-  provenance: Provenance,
+  provenance: SourceProvenance,
   options: { count?: number; offset?: number; limit?: number } = {},
 ) {
   const end = (options.offset ?? 0) + items.length;
@@ -79,7 +82,7 @@ export function listEnvelope(
 export function detailEnvelope(
   summary: string,
   details: unknown,
-  provenance: Provenance,
+  provenance: SourceProvenance,
 ) {
   return {
     summary,

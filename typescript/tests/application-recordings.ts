@@ -18,7 +18,17 @@ export async function applicationFeatureRecordings(
   mode: "none" | "all",
   report: (value: unknown) => void = () => {},
   only?: string[],
-) {
+): Promise<{
+  datasets: Record<string, Record<string, unknown>>;
+  status: Awaited<ReturnType<ApplicationsClient["getStatusCodes"]>>;
+  artifacts: Record<
+    string,
+    { documentIdentifier: string; size: number; sha256: string }
+  >;
+  claims:
+    | Awaited<ReturnType<ApplicationsClient["getGrantedClaims"]>>
+    | undefined;
+}> {
   const recordingMode = (name: string) =>
     mode === "all" && (!only || only.includes(name)) ? "all" : "none";
   const api = new ApplicationsClient({
