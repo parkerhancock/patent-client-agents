@@ -137,29 +137,17 @@ that a client saves bytes outside model context.
 
 ## Trademark Search session acquisition
 
-The HTTP client consumes an externally supplied WAF cookie and matching
-User-Agent, coalesces refresh callbacks, and can retry once after session
-rejection. Fresh native Bun search has been verified. Browser acquisition and
-automatic deployment session delivery remain separate, unported capabilities.
-The default MCP server supplies no refresh callback; rotating an environment
-secret does not update a warm process.
+The optional `waf-worker` package acquires sessions with Playwright 1.64.0 under
+Bun. The client and MCP runtime remain browser-free. The `waf-session` package
+provides protected atomic files and Secret Manager workload-identity storage,
+plus polling, coalesced reloads, deadlines and unchanged-session rejection.
+MCP configures it through `PCA_WAF_TOKEN_FILE` or `PCA_WAF_SECRET_RESOURCE`.
 
-| Option | Benefit | Cost |
-| --- | --- | --- |
-| Existing Python refresh job with a trusted TypeScript session provider | Reuses the working browser job and current secret contract | Retains an operational Python dependency; provider integration is still required |
-| Separate Bun/TypeScript Playwright worker | Fits the intended standalone Bun stack and isolates browser dependencies | Requires a tested browser image and acquisition workflow, plus fresh-session delivery |
-| Browser acquisition in the default library | Convenient automatic local acquisition | Adds browser installation, startup time and browser failure handling to ordinary library use |
+A configured provider is authoritative over static environment JSON. Warm
+processes see rotation on the next poll; a WAF rejection forces a fresh read and
+at most one search retry. Browser acquisition runs separately from requests.
+The existing Python worker can supply sessions during transition; new writes
+preserve its timestamp contract. No production cutover is included.
 
-For a standalone TypeScript release, prefer the separate optional worker.
-The existing Python job can supply sessions during the transition. Keep
-Playwright outside the pure client and MCP request path. A trusted deployment
-provider should load the latest session through workload identity or a protected
-file, detect an unchanged rejected version, and own a bounded refresh timeout.
-Cookies must stay out of MCP inputs/results and agent-visible output.
-
-This is a deployment direction, not an implemented worker or automatic refresh
-integration. Playwright's published JavaScript requirements target Node;
-Bun compatibility for browser acquisition must be verified with the actual
-container and browser version. See [Playwright Library](https://playwright.dev/docs/library),
-[requirements](https://playwright.dev/docs/intro), [Docker setup](https://playwright.dev/docs/docker)
-and [Bun compatibility](https://bun.com/docs/runtime/nodejs-compat).
+See [worker setup and delivery](waf-worker.md) for configuration, permissions,
+container build, validation and the remaining deployment boundary.

@@ -45,8 +45,11 @@ TSDR uses USPTO_TSDR_API_KEY; fresh verification used the existing deployed
 Secret Manager key without saving its value locally. See [deployed authentication](deployed-uspto-auth.md).
 Trademark Search needs an externally supplied
 current WAF token with its matching User-Agent, or a trusted refresh callback.
-The port does not automate browser challenge acquisition or claim that native
-Fetch duplicates Python curl_cffi's TLS behavior. PPUBS native Bun behavior was
+The separate optional Bun/Playwright worker now acquires sessions and publishes
+them through protected files or Secret Manager. Configured MCP providers load
+rotated sessions without restarting. See [worker setup](waf-worker.md). No
+production worker/job cutover has been performed. Native Fetch behavior remains
+a separate verification from Python curl_cffi's TLS behavior. PPUBS native Bun behavior was
 verified for the recorded sample, not guaranteed for every future WAF policy.
 
 The [operation evidence map](uspto-operation-coverage.md) now links successful

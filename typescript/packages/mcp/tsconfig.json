@@ -1,6 +1,16 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "rootDir": "src", "outDir": "dist" },
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
   "include": ["src/**/*.ts"],
-  "references": [{ "path": "../client" }]
+  "references": [
+    {
+      "path": "../client"
+    },
+    {
+      "path": "../waf-session"
+    }
+  ]
 }

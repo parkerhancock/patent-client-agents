@@ -8,6 +8,8 @@
         "@biomejs/biome": "2.5.15",
         "@patent-client-agents/client": "workspace:*",
         "@patent-client-agents/mcp": "workspace:*",
+        "@patent-client-agents/waf-session": "workspace:*",
+        "@patent-client-agents/waf-worker": "workspace:*",
         "@prefecthq/fastmcp-ts": "1.7.3",
         "@types/bun": "1.4.3",
         "cassetter": "0.11.0",
@@ -32,9 +34,26 @@
       "version": "0.1.0",
       "dependencies": {
         "@patent-client-agents/client": "workspace:*",
+        "@patent-client-agents/waf-session": "workspace:*",
         "@prefecthq/fastmcp-ts": "1.7.3",
         "fflate": "0.8.3",
         "zod": "4.3.6",
+      },
+    },
+    "packages/waf-session": {
+      "name": "@patent-client-agents/waf-session",
+      "version": "0.1.0",
+      "dependencies": {
+        "@patent-client-agents/client": "workspace:*",
+      },
+    },
+    "packages/waf-worker": {
+      "name": "@patent-client-agents/waf-worker",
+      "version": "0.1.0",
+      "dependencies": {
+        "@patent-client-agents/client": "workspace:*",
+        "@patent-client-agents/waf-session": "workspace:*",
+        "playwright": "1.64.0",
       },
     },
   },
@@ -80,6 +99,10 @@
     "@patent-client-agents/client": ["@patent-client-agents/client@workspace:packages/client"],
 
     "@patent-client-agents/mcp": ["@patent-client-agents/mcp@workspace:packages/mcp"],
+
+    "@patent-client-agents/waf-session": ["@patent-client-agents/waf-session@workspace:packages/waf-session"],
+
+    "@patent-client-agents/waf-worker": ["@patent-client-agents/waf-worker@workspace:packages/waf-worker"],
 
     "@prefecthq/fastmcp-ts": ["@prefecthq/fastmcp-ts@1.7.3", "", { "dependencies": { "@clack/prompts": "^1.2.0", "@modelcontextprotocol/client": "^2.0.0", "@modelcontextprotocol/core": "^2.0.0", "@modelcontextprotocol/node": "^2.0.0", "@modelcontextprotocol/server": "^2.0.0", "@modelcontextprotocol/server-legacy": "^2.0.0", "@standard-schema/spec": "^1.1.0", "@types/express": "^5.0.6", "chalk": "^5.6.2", "chokidar": "^5.0.0", "citty": "^0.2.2", "cli-table3": "^0.6.5", "express": "^5.2.1", "fastest-levenshtein": "^1.0.16", "jose": "6.2.2", "listr2": "^10.2.1", "url-template": "^3.1.1", "yaml": "^2.8.3" }, "peerDependencies": { "@anthropic-ai/sdk": ">=0.39", "@google/genai": ">=0.7", "openai": ">=4" }, "optionalPeers": ["@anthropic-ai/sdk", "@google/genai", "openai"], "bin": { "fastmcp": "dist/cli/index.cjs" } }, "sha512-dUY/ArT7offgQjOdAKkmQHuaAxxTNJ1aYaJTSarXIlatlPKP8XhFWyDrtk5slcOW8wFz1rhswAmiOzqBm61sLQ=="],
 
@@ -286,6 +309,10 @@
     "path-to-regexp": ["path-to-regexp@8.4.2", "", {}, "sha512-qRcuIdP69NPm4qbACK+aDogI5CBDMi1jKe0ry5rSQJz8JVLsC7jV8XpiJjGRLLol3N+R5ihGYcrPLTno6pAdBA=="],
 
     "pkce-challenge": ["pkce-challenge@5.0.1", "", {}, "sha512-wQ0b/W4Fr01qtpHlqSqspcj3EhBvimsdh0KlHhH8HRZnMsEa0ea2fTULOXOS9ccQr3om+GcGRk4e+isrZWV8qQ=="],
+
+    "playwright": ["playwright@1.64.0", "", { "dependencies": { "playwright-core": "1.64.0" }, "bin": { "playwright": "cli.js" } }, "sha512-kVzTnYFYEyQ9RGzBjNCd2+yEqWmVbxl3AHPynv3qQ6JTjv4a+kwRcnqQwIpuP3NnrnIrE/Q6wWAIAvMfIE2/Yg=="],
+
+    "playwright-core": ["playwright-core@1.64.0", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-T9r+MZkTECl2+oUcZ26YgZzTrYidTsIhYYkJix+6iDOymOb1FB2RLLSOxRGnZGv5DStt+aduIVbt+E8WygXYpg=="],
 
     "proxy-addr": ["proxy-addr@2.0.8", "", { "dependencies": { "forwarded": "0.2.0", "ipaddr.js": "1.9.1" } }, "sha512-5nnx0yGyVUcY6t9RnWcARWtwT9F1D8O9rt08htPvnd49W1IgZtmLkhu9WfMzQj1cFxjHIO6connUNVW5k7AVyQ=="],
 

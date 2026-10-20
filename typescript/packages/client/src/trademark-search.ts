@@ -12,6 +12,13 @@ export interface WafToken {
   expires: number;
   userAgent?: string;
 }
+/** A trusted deployment adapter; browser acquisition stays outside this library. */
+export interface WafTokenProvider {
+  load(options: {
+    forceRefresh: boolean;
+    rejectedToken?: WafToken;
+  }): Promise<WafToken>;
+}
 export interface TrademarkSearchOptions {
   wordmark?: string;
   owner?: string;
@@ -29,6 +36,7 @@ export interface TrademarkSearchClientOptions
   token?: WafToken;
   userAgent?: string;
   refreshToken?: () => Promise<WafToken>;
+  sessionProvider?: WafTokenProvider;
 }
 export interface TrademarkSearchResult extends Record<string, unknown> {
   serial_number: string;
@@ -122,7 +130,26 @@ export class TrademarkSearchClient {
       },
     });
   }
-  private async getToken(force = false): Promise<WafToken> {
+  private async getToken(
+    force = false,
+    rejectedToken?: WafToken,
+  ): Promise<WafToken> {
+    if (this.options.sessionProvider) {
+      let candidate: WafToken;
+      try {
+        candidate = await this.options.sessionProvider.load({
+          forceRefresh: force,
+          ...(rejectedToken ? { rejectedToken } : {}),
+        });
+      } catch {
+        throw new ConfigurationError(
+          "The trusted WAF session provider failed.",
+        );
+      }
+      this.validateToken(candidate);
+      this.token = candidate;
+      return candidate;
+    }
     if (!this.token && !force) {
       const raw =
         process.env.PCA_WAF_TOKEN_JSON ?? process.env.LAW_TOOLS_WAF_TOKEN_JSON;
@@ -164,29 +191,57 @@ export class TrademarkSearchClient {
         403,
         "AUTHENTICATION",
       );
-    const token = this.token;
+    this.validateToken(this.token);
+    return this.token;
+  }
+  private validateToken(token: unknown): asserts token is WafToken {
     if (
       !token ||
+      typeof token !== "object" ||
+      !("token" in token) ||
       typeof token.token !== "string" ||
       !token.token.trim() ||
       /[\r\n;]/.test(token.token) ||
+      !("expires" in token) ||
+      typeof token.expires !== "number" ||
       !Number.isFinite(token.expires) ||
-      token.expires * 1000 <= Date.now()
+      token.expires * 1000 <= Date.now() ||
+      ("userAgent" in token &&
+        (typeof token.userAgent !== "string" ||
+          !token.userAgent.trim() ||
+          /[^\x20-\x7e]/.test(token.userAgent)))
     )
       throw new ConfigurationError(
         "Supply a current externally minted WAF token with its matching User-Agent, or a refreshToken callback.",
       );
-    return token;
+  }
+  private userAgent(token: WafToken): string {
+    return this.options.sessionProvider
+      ? (token.userAgent ?? WAF_USER_AGENT)
+      : (this.options.userAgent ?? token.userAgent ?? WAF_USER_AGENT);
   }
   private requestToken(
     force: boolean,
     signal?: AbortSignal,
+    rejectedToken?: WafToken,
   ): Promise<WafToken> {
     if (signal?.aborted)
       return Promise.reject(
         new ApiError("Trademark Search request was cancelled.", 0, "ABORTED"),
       );
-    const work = this.getToken(force);
+    const work = this.getToken(force, rejectedToken).then((token) => {
+      if (
+        rejectedToken &&
+        token.token === rejectedToken.token &&
+        this.userAgent(token) === this.userAgent(rejectedToken)
+      )
+        throw new ApiError(
+          "The WAF session provider returned the rejected session unchanged.",
+          403,
+          "AUTHENTICATION",
+        );
+      return token;
+    });
     if (!signal) return work;
     return new Promise((resolve, reject) => {
       const abort = () =>
@@ -236,8 +291,7 @@ export class TrademarkSearchClient {
         body: { query, size, from },
         headers: {
           Cookie: `aws-waf-token=${token.token}`,
-          "User-Agent":
-            this.options.userAgent ?? token.userAgent ?? WAF_USER_AGENT,
+          "User-Agent": this.userAgent(token),
         },
         ...(options.signal ? { signal: options.signal } : {}),
       });
@@ -256,7 +310,11 @@ export class TrademarkSearchClient {
         ![202, 401, 403].includes(error.status)
       )
         throw error;
-      token = await this.requestToken(this.token === token, options.signal);
+      token = await this.requestToken(
+        this.token === token,
+        options.signal,
+        token,
+      );
       cancelled();
       response = await send();
       if (response.status !== 200)

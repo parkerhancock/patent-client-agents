@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { createServer } from "./index.js";
+import { createServer, wafSessionSourceFromEnv } from "./index.js";
 
 export function configurationFromEnv(env: Record<string, string | undefined>) {
+  const wafSession = wafSessionSourceFromEnv(env);
   const transport = z
     .enum(["stdio", "http"])
     .parse(env.MCP_TRANSPORT ?? "stdio");
@@ -45,12 +46,19 @@ export function configurationFromEnv(env: Record<string, string | undefined>) {
     host: env.MCP_HOST ?? "127.0.0.1",
     auth,
     downloads: publicBaseUrl ? { publicBaseUrl, mode } : {},
+    ...(wafSession ? { wafSession } : {}),
   };
 }
 
 if (import.meta.main) {
-  const { auth, downloads, ...runtime } = configurationFromEnv(process.env);
-  const server = createServer({ downloads, ...(auth ? { auth } : {}) });
+  const { auth, downloads, wafSession, ...runtime } = configurationFromEnv(
+    process.env,
+  );
+  const server = createServer({
+    downloads,
+    ...(auth ? { auth } : {}),
+    ...(wafSession ? { wafSession } : {}),
+  });
   await server.run({ ...runtime, stateless: true });
   for (const signal of ["SIGINT", "SIGTERM"] as const) {
     process.once(signal, () => {

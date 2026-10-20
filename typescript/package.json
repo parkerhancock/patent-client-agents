@@ -30,7 +30,10 @@
     "record:tsdr": "bun scripts/record-tsdr-features.ts --record",
     "replay:tsdr": "bun scripts/record-tsdr-features.ts --replay",
     "record:ptab-pdf": "bun scripts/record-ptab-pdf.ts --record",
-    "record:trademark-search": "bun scripts/record-trademark-search.ts"
+    "record:trademark-search": "bun scripts/record-trademark-search.ts",
+    "waf:refresh": "bun packages/waf-worker/src/cli.ts",
+    "waf:install-browser": "bun run --filter @patent-client-agents/waf-worker install:browser",
+    "verify:waf": "bun scripts/verify-waf-worker.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
@@ -42,6 +45,8 @@
     "fflate": "0.8.3",
     "ky": "2.2.0",
     "typescript": "5.9.3",
-    "zod": "4.3.6"
+    "zod": "4.3.6",
+    "@patent-client-agents/waf-session": "workspace:*",
+    "@patent-client-agents/waf-worker": "workspace:*"
   }
 }

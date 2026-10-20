@@ -29,11 +29,14 @@ refresh source. One public query returned HTTP200 and one normalized result.
 Its scrubbed response replays offline. This verifies that session from this
 host for one query, not automatic refresh or hosted Cloud Run reliability.
 
-The TypeScript Trademark Search client accepts an external WAF session and a
-trusted refresh callback. Browser acquisition and deployment integration are
-not implemented in the port. Environment-mounted secret values remain fixed
-for an instance lifetime, so periodic secret updates alone do not guarantee a
-running process sees a new session.
+The TypeScript port now has a separate Bun/Playwright acquisition worker and
+browser-free file or Secret Manager session delivery. The default MCP client
+polls the configured source and reloads after WAF rejection. Fresh browser
+acquisition through protected-file delivery to an actual MCP search was
+verified locally. See [WAF worker](waf-worker.md) for setup and validation.
+Production cutover has not occurred. Environment-mounted secret values remain
+fixed for an instance lifetime, so that legacy configuration alone does not
+deliver periodic secret updates to a running process.
 
 Evidence: deployed service and job metadata; tracked
 `src/patent_mcp_deploy/waf_refresh.py`, `src/patent_mcp_deploy/main.py`,

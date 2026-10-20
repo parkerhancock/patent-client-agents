@@ -3,6 +3,7 @@ import {
   ApplicationsClient,
   AssignmentCenterClient,
   BulkDataClient,
+  ConfigurationError,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
   PetitionsClient,
@@ -15,6 +16,11 @@ import {
   TrademarkSearchClient,
   TsdrClient,
 } from "@patent-client-agents/client";
+import {
+  createFileWafSessionStore,
+  createGoogleWafSessionStore,
+  createWafSessionProvider,
+} from "@patent-client-agents/waf-session";
 import {
   FastMCP,
   type FastMCPOptions,
@@ -71,6 +77,46 @@ export interface ServerOptions {
   downloadAuth?: { jwksUri: string; issuer: string; audience: string };
   client?: Pick<ApplicationsClient, "search" | "get" | "getDocuments">;
   auth?: { jwksUri: string; issuer: string; audience: string };
+  wafSession?: WafSessionSource;
+}
+
+export type WafSessionSource =
+  | { filePath: string; secretResource?: never }
+  | { secretResource: string; filePath?: never };
+
+export function wafSessionSourceFromEnv(
+  env: Record<string, string | undefined>,
+): WafSessionSource | undefined {
+  const filePath = env.PCA_WAF_TOKEN_FILE;
+  const secretResource = env.PCA_WAF_SECRET_RESOURCE;
+  if (filePath !== undefined && secretResource !== undefined)
+    throw new ConfigurationError(
+      "Configure either PCA_WAF_TOKEN_FILE or PCA_WAF_SECRET_RESOURCE, not both.",
+    );
+  if (filePath !== undefined) {
+    if (!filePath.trim())
+      throw new ConfigurationError("PCA_WAF_TOKEN_FILE must be nonempty.");
+    return { filePath: filePath.trim() };
+  }
+  if (secretResource !== undefined) {
+    if (!secretResource.trim())
+      throw new ConfigurationError("PCA_WAF_SECRET_RESOURCE must be nonempty.");
+    return { secretResource: secretResource.trim() };
+  }
+  return undefined;
+}
+
+function configuredTrademarkSearchClient(source?: WafSessionSource) {
+  if (!source) return new TrademarkSearchClient();
+  if ((source.filePath !== undefined) === (source.secretResource !== undefined))
+    throw new ConfigurationError("Configure exactly one WAF session source.");
+  const store =
+    source.filePath !== undefined
+      ? createFileWafSessionStore(source.filePath)
+      : createGoogleWafSessionStore(source.secretResource);
+  return new TrademarkSearchClient({
+    sessionProvider: createWafSessionProvider(store),
+  });
 }
 
 const provenanceSchema = z.object({
@@ -182,6 +228,7 @@ class DocumentServer extends FastMCP {
   }
 }
 export function createServer(options: ServerOptions = {}): FastMCP {
+  const wafSession = options.wafSession ?? wafSessionSourceFromEnv(process.env);
   const provided = options.clients ?? {};
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
@@ -448,7 +495,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
         provided.publications ?? lazyClient(() => new PublicationsClient()),
       trademarkSearch:
         provided.trademarkSearch ??
-        lazyClient(() => new TrademarkSearchClient()),
+        lazyClient(() => configuredTrademarkSearchClient(wafSession)),
     },
     externalAuth,
   );

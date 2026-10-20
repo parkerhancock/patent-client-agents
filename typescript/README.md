@@ -8,6 +8,8 @@ The USPTO API port covers the 70 inventoried public Python domain methods,
 current ODP Office Actions and Petition Decisions, and all 25 archived TSDR
 routes. Live verification varies by family; see [port status](docs/port-status.md).
 See the [source review](docs/odp-research.md) and [stack decisions](docs/stack.md).
+Trademark Search session acquisition runs in a separate optional Bun/Playwright
+worker; see [worker setup and fresh delivery](docs/waf-worker.md).
 
 ## Development
 

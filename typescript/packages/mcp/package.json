@@ -17,6 +17,7 @@
     "@patent-client-agents/client": "workspace:*",
     "@prefecthq/fastmcp-ts": "1.7.3",
     "fflate": "0.8.3",
-    "zod": "4.3.6"
+    "zod": "4.3.6",
+    "@patent-client-agents/waf-session": "workspace:*"
   }
 }
