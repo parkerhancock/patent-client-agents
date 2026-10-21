@@ -16,6 +16,7 @@ export * from "./petitions.js";
 export * from "./ptab.js";
 export * from "./publications.js";
 export * from "./register-models.js";
+export * from "./relay.js";
 export { configureWasm, type WasmLocations } from "./runtime/wasm.js";
 export * from "./trademark-assignments.js";
 export * from "./trademark-search.js";

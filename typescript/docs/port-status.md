@@ -134,3 +134,11 @@ time, explicit code maps that report unmapped codes, and renewal coverage
 computed from the parsed rows. The port separates Unitary Patent fees from EP
 application fees, which the Python schedule mixes. The other 23 offices in the
 Python fees package are not ported. Nothing is deployed.
+
+## Runtimes
+
+October 21, 2026. The client library runs in Bun, Node and browsers, with
+WebAssembly SQLite and Zstandard in every runtime and an authenticated relay
+for office APIs a browser cannot call directly. Node and headless-Chromium
+smoke tests are part of `bun run check`. See [runtimes](runtimes.md). The relay
+is not deployed or tried against real office endpoints.

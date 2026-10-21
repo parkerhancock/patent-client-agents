@@ -133,10 +133,12 @@ replay cannot substitute unverified content. Schema, section count and expected
 FTS layout are validated before the artifact is available. A process keeps its
 snapshot until closed/recreated; artifact publication does not hot-swap readers.
 
-Bun 1.4.3's native `node:zlib.zstdDecompressSync` handles dictionary and plain
-frames with bounded output. HTML plus text is limited to 16 MiB per section by
-default (`maxSectionBytes` is explicit configuration). No decoder dependency,
-Python runtime bridge, native addon or new Rust/WASM module was added.
+libzstd compiled to WebAssembly (`@bokuweb/zstd-wasm`) handles dictionary and
+plain frames; dictionary cells must declare their decoded size, which is checked
+against the limit before decoding. HTML plus text is limited to 16 MiB per section by
+default (`maxSectionBytes` is explicit configuration). Both decoding and SQLite use third-party WebAssembly builds so the same
+reader runs in every runtime ([runtimes](runtimes.md)); there is no Python
+runtime bridge or native addon.
 The in-memory snapshot costs memory proportional to the artifact; very large
 corpora need a separately measured design rather than raising limits blindly.
 

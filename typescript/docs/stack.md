@@ -6,7 +6,7 @@ of an independent security audit or complete production readiness.
 
 | Concern | Choice | Contract |
 | --- | --- | --- |
-| Runtime and package manager | Bun 1.4.3, workspaces, text lockfile | One runtime; frozen installs in CI |
+| Runtime and package manager | Bun 1.4.3, workspaces, text lockfile, for development and the MCP server | The client library also runs in Node and browsers; `bun run check` smoke-tests both ([runtimes](runtimes.md)) |
 | Language | TypeScript 5.9.3, strict ESM | Incremental compiler checks and emitted declarations |
 | Runtime schemas | Zod 4 | Infer types from validated schemas; retain unmodeled upstream fields |
 | HTTP | Ky 2 over native Fetch | Central retry, cancellation, deadline, error and credential behavior |
@@ -14,7 +14,7 @@ of an independent security audit or complete production readiness.
 | Remote identity | External OAuth/OIDC provider, JWT/JWKS verification | Require expected issuer, audience, expiration and explicit read scopes |
 | Tests | `bun test`, watch mode | Source execution; scoped tests during iteration |
 | HTTP recordings | Cassetter 0.11.0 | Replay only by default; explicit recording, secret filtering |
-| Offline outline corpora | Bun SQLite/FTS5 plus native Zstandard decoding | Whole-file Zstd, file and decoded SHA-256 pins, bounded in-memory read-only snapshots and explicit source freshness |
+| Offline outline corpora | Official SQLite WebAssembly build (FTS5) plus libzstd WebAssembly, in every runtime | Whole-file Zstd, file and decoded SHA-256 pins, bounded in-memory read-only snapshots and explicit source freshness |
 | File-history archives | fflate 0.8.3 | ZIP assembly in the MCP package; bounded document bytes and manifest hashes |
 | PDF page merging | pdf-lib 1.17.1 | EPO OPS full-document PDFs in the client package; pure JavaScript, last published 2021, page count bounded |
 | Formatting and lint | Biome | Deterministic checks, no parallel formatting conventions |
@@ -28,8 +28,8 @@ framework. `packages/mcp` depends on the client and adds tool schemas, concise
 summaries, portfolio handling, cursors, authorization, and transport startup.
 The two packages are private while their API settles; nothing is published.
 
-MPEP is the first offline corpus reference. Its library/MCP runtime is Bun-only,
-with no browser, Python subprocess or decoder dependency. Maintenance reuses
+MPEP is the first offline corpus reference. The client library runs in Bun,
+Node and browsers ([runtimes](runtimes.md)); there is no Python subprocess. Maintenance reuses
 the existing Python builder outside requests. See [MPEP setup](mpep.md) for
 standalone artifact preparation, bounded memory use and source-time provenance.
 Use the shared [corpus pattern](corpus-pattern.md) for whole-file Zstandard

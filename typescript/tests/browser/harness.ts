@@ -2,6 +2,7 @@
 // with no Node or Bun APIs available and reports results on window.
 import {
   configureWasm,
+  createRelayFetch,
   EpcClient,
   EpoFeesClient,
   EpoOpsClient,
@@ -63,6 +64,25 @@ try {
             )) as unknown as typeof fetch,
     }).search("ta=x")
   ).data.total_results;
+  // Cross-origin leg: the page's origin differs from the relay and the upstream.
+  const relay = JSON.parse(
+    decodeURIComponent(location.hash.slice(1)) || "null",
+  ) as {
+    relayUrl: string;
+    token: string;
+    upstreamUrl: string;
+  } | null;
+  if (relay) {
+    results.direct_cross_origin = await fetch(relay.upstreamUrl)
+      .then(() => "allowed")
+      .catch(() => "blocked by CORS");
+    results.relay_fee = (
+      await new EpoFeesClient({
+        retryLimit: 0,
+        fetch: createRelayFetch({ url: relay.relayUrl, token: relay.token }),
+      }).getEpcSchedule()
+    ).fees[0]?.amount;
+  }
   report({ ok: true, ...results });
 } catch (error) {
   report({ ok: false, error: String(error), stack: (error as Error).stack });

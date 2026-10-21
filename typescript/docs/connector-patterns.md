@@ -119,7 +119,7 @@ snapshot is dated May 21, 2026 and lacks verified release identity. The legacy
 prove current USPTO guidance. Other checkouts/deployments may lack the artifact.
 
 The installed legacy schema-2 artifact stores HTML as zstd-compressed blobs
-with a compression dictionary. The port uses Bun's native decoder, supports
+with a compression dictionary. The port decodes with libzstd compiled to WebAssembly ([runtimes](runtimes.md)), supports
 plain/dictionary-compressed cells and keeps the legacy release unknown. Its
 new shared outline lifecycle establishes these practices. The
 [compressed corpus pattern](corpus-pattern.md) specifies whole-file Zstandard

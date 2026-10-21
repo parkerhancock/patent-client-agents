@@ -65,10 +65,12 @@ The shared [outline reader](../packages/client/src/corpus/outline.ts) reads at
 most 256 MiB of encoded bytes, checks the configured file pin before decoding,
 and detects Zstandard by its frame magic rather than a filename extension.
 The reader validates frame boundaries and rejects truncation, concatenated
-frames and trailing bytes. Native Bun `node:zlib` decoding has a separate
-256 MiB output limit. The reader
-checks the decoded pin before deserializing those same bytes into read-only Bun
-SQLite. It rejects WAL headers and unsupported schema/FTS layouts. Nothing
+frames and trailing bytes. Decoding uses libzstd compiled to WebAssembly, which
+verifies frame checksums; frames without a declared size decode into a buffer
+that doubles up to the same 256 MiB limit. The reader
+checks the decoded pin before deserializing those same bytes into a read-only
+SQLite WebAssembly database. Both run in Bun, Node and browsers
+([runtimes](runtimes.md)). It rejects WAL headers and unsupported schema/FTS layouts. Nothing
 writes an expanded database to disk or consults sidecars.
 
 Open once per client, reuse the in-memory snapshot, and close it with its owner.

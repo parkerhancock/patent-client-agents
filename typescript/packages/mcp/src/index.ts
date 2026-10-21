@@ -49,6 +49,13 @@ import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
 import { registerRegisterTools } from "./registers.js";
+import {
+  createRelayHandler,
+  RELAY_EXPOSED_HEADERS,
+  RELAY_REQUEST_HEADERS,
+  type RelayOptions,
+  relayCredentialsFromEnv,
+} from "./relay.js";
 import { registerUsptoResources } from "./resources.js";
 import { registerPortalSearchTools } from "./search-portals.js";
 
@@ -95,6 +102,12 @@ export interface ServerOptions {
   client?: Pick<ApplicationsClient, "search" | "get" | "getDocuments">;
   auth?: { jwksUri: string; issuer: string; audience: string };
   wafSession?: WafSessionSource;
+  /**
+   * Browser relay at /relay?url=... for CORS-blocked or credentialed office
+   * APIs. Requires auth; callers need the relay:use scope. The relay origins
+   * also become the listener's allowed CORS origins.
+   */
+  relay?: RelayOptions;
 }
 
 export type WafSessionSource =
@@ -276,7 +289,15 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       name: "patent-client-agents",
       version: "0.1.0",
       ...(options.auth ? { auth: tokenVerifier(options.auth) } : {}),
-      http: { cors: false },
+      http: {
+        cors: options.relay
+          ? {
+              origin: options.relay.origins,
+              allowedHeaders: RELAY_REQUEST_HEADERS,
+              exposedHeaders: RELAY_EXPOSED_HEADERS,
+            }
+          : false,
+      },
       logLevel: "warn",
     },
     downloads,
@@ -285,6 +306,43 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       for (const client of ownedEpoLegal) client.close();
     },
   );
+  if (options.relay) {
+    if (!options.auth)
+      throw new ConfigurationError(
+        "The relay injects office credentials and requires server auth.",
+      );
+    const verifier = tokenVerifier(options.auth);
+    const relay = createRelayHandler(
+      {
+        ...options.relay,
+        credentials:
+          options.relay.credentials ?? relayCredentialsFromEnv(process.env),
+      },
+      async (request) => {
+        const token = /^Bearer ([^\s]+)$/i.exec(
+          request.headers.get("authorization") ?? "",
+        )?.[1];
+        const headers = {
+          "Cache-Control": "no-store",
+          "WWW-Authenticate": 'Bearer scope="relay:use"',
+        };
+        if (!token)
+          return new Response("Authentication required", {
+            status: 401,
+            headers,
+          });
+        try {
+          const identity = await verifier.verify(token);
+          return identity.scopes.includes("relay:use")
+            ? null
+            : new Response("Insufficient scope", { status: 403, headers });
+        } catch {
+          return new Response("Invalid access token", { status: 401, headers });
+        }
+      },
+    );
+    server.customRoute({ path: "/relay", methods: ["GET", "POST"] }, relay);
+  }
   const downloadVerifier = options.downloadAuth ?? options.auth;
   const verifyDownloadToken = downloadVerifier
     ? tokenVerifier(downloadVerifier)

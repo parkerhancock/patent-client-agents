@@ -1,9 +1,11 @@
 // Bundles tests/browser/harness.ts for the browser and runs it in headless
 // Chromium. Usage: bun run smoke:browser
+import { generateKeyPairSync, sign } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { zstdCompressSync } from "node:zlib";
 import { chromium } from "playwright";
+import { createServer } from "../packages/mcp/src/index.js";
 
 const root = join(import.meta.dir, "..");
 const build = await Bun.build({
@@ -67,12 +69,70 @@ const server = Bun.serve({
       : new Response("Not found", { status: 404 });
   },
 });
+// A fake EPO fee feed with no CORS headers, an identity provider and the
+// relay, each on its own origin, to exercise real browser CORS enforcement.
+const feed = Bun.serve({
+  hostname: "127.0.0.1",
+  port: 0,
+  fetch: () =>
+    Response.json([
+      {
+        data: { feeCode: "001", feeDescription: "Filing", amount: "135,00" },
+        children: [],
+      },
+    ]),
+});
+const { privateKey, publicKey } = generateKeyPairSync("rsa", {
+  modulusLength: 2048,
+});
+const identity = Bun.serve({
+  hostname: "127.0.0.1",
+  port: 0,
+  fetch: () =>
+    Response.json({
+      keys: [
+        {
+          ...publicKey.export({ format: "jwk" }),
+          kid: "k",
+          alg: "RS256",
+          use: "sig",
+        },
+      ],
+    }),
+});
+const issuer = "https://identity.test";
+const audience = "patent-client-agents";
+const pageOrigin = `http://127.0.0.1:${server.port}`;
+const relayServer = createServer({
+  auth: { jwksUri: `http://127.0.0.1:${identity.port}/jwks`, issuer, audience },
+  relay: {
+    origins: [pageOrigin],
+    credentials: {},
+    upstreams: { "fees.apps.epo.org": `http://127.0.0.1:${feed.port}/` },
+  },
+});
+await relayServer.run({
+  transport: "http",
+  host: "127.0.0.1",
+  port: 0,
+  stateless: true,
+});
+const encode = (value: object) =>
+  Buffer.from(JSON.stringify(value)).toString("base64url");
+const unsigned = `${encode({ alg: "RS256", kid: "k", typ: "JWT" })}.${encode({ iss: issuer, aud: audience, sub: "smoke", exp: Math.floor(Date.now() / 1000) + 300, scope: "relay:use" })}`;
+const relayConfig = {
+  relayUrl: `http://127.0.0.1:${relayServer.address?.port}/relay`,
+  token: `${unsigned}.${sign("RSA-SHA256", Buffer.from(unsigned), privateKey).toString("base64url")}`,
+  upstreamUrl: `http://127.0.0.1:${feed.port}/prod/bff/api/fees`,
+};
 const browser = await chromium.launch();
 try {
   const page = await browser.newPage();
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto(`http://127.0.0.1:${server.port}/`);
+  await page.goto(
+    `${pageOrigin}/#${encodeURIComponent(JSON.stringify(relayConfig))}`,
+  );
   await page.waitForFunction(() => "smoke" in window, null, {
     timeout: 60_000,
   });
@@ -92,8 +152,21 @@ try {
       ),
     }),
   );
-  if (!(result as { ok?: boolean }).ok) process.exitCode = 1;
+  const checked = result as {
+    ok?: boolean;
+    direct_cross_origin?: string;
+    relay_fee?: string;
+  };
+  if (
+    !checked.ok ||
+    checked.direct_cross_origin !== "blocked by CORS" ||
+    checked.relay_fee !== "135.00"
+  )
+    process.exitCode = 1;
 } finally {
   await browser.close();
   server.stop(true);
+  await relayServer.close();
+  feed.stop(true);
+  identity.stop(true);
 }
