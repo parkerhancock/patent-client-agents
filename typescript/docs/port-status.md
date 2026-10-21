@@ -24,6 +24,7 @@ synthetic contracts. The Python package remains separate.
 | Search guides, field/status catalogs, schemas and Swagger resources | Eleven labeled MCP resources and pure library helpers | Resource enumeration, content and authorization tests; historical source labels preserved |
 | REST document retrieval | MCP-issued single-use links by default; authenticated REST concurrently available; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
 | EPO OPS and CPC (EPO scope) | Search, biblio, full text, citations, equivalents, INPADOC family, legal events, EP Register views, Unitary Patent package, family evidence, number conversion, merged PDF, CPC retrieval/search/mapping/media/CPCI; eight intent-based MCP tools under `epo:read` | 22 live recordings on October 21 replay offline; synthetic OAuth2, error and MCP tests. See [EPO OPS](epo-ops.md) |
+| EPO legal corpora (EPC, Case Law, Guidelines, PCT-EPO and UP Guidelines) | Read-only SQLite/FTS readers with book-specific citations; ten MCP tools, five status resources, `epo:read` scope | Real-row fixtures for all five books; all five May 14, 2026 Python snapshots prepared, Zstandard-packaged, pinned and read through library and default MCP on October 21. Edition labels unverified; not deployed |
 
 The [feature inventory](uspto-feature-inventory.md) maps every Python method to
 its TypeScript counterpart. It excludes legal manuals, fees and CPC connectors
@@ -111,3 +112,15 @@ recorded operations succeeded live with the deployed OPS credentials read into
 memory; recordings omit tokens, client ids and caller IP headers. This verifies
 the recorded samples, not every OPS service or parameter. OPS tools are not
 deployed, and `getCpcMedia` is tested only for id validation.
+
+## EPO legal corpora
+
+October 21, 2026. Five EPO books join MPEP as offline corpus connectors; see
+[EPO legal corpora](epo-legal.md). This is implementation plus local artifact
+verification, not EPO network coverage; OPS and CPC are covered by
+[EPO OPS](epo-ops.md).
+The installed snapshots record EPC 2020, Case Law 2022, Guidelines 2024,
+PCT-EPO Guidelines 2024 and UP Guidelines 2026 as crawl-path editions. No
+release check confirms those are EPO's current editions. Fresh builds still use
+the Python builders. The crawled text has an upstream heading defect that
+hides some heading words from search. No artifact was deployed.

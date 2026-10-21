@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import { zstdDecompressSync } from "node:zlib";
+import { z } from "zod";
 
 export type CorpusErrorCode =
   | "CORPUS_UNAVAILABLE"
@@ -46,6 +47,9 @@ export interface OutlineHit extends Omit<OutlineRow, "html" | "text"> {
 }
 export interface OutlineOptions {
   path: string;
+  /** Names the corpus and its path variable in unavailable-artifact errors. */
+  label?: string;
+  envVar?: string;
   expectedSha256?: string;
   expectedFileSha256?: string;
   maxSectionBytes: number;
@@ -334,7 +338,7 @@ export class OutlineCorpus {
       )
         throw new CorpusError(
           "CORPUS_UNAVAILABLE",
-          "MPEP corpus is unavailable. Set MPEP_CORPUS_PATH to an existing verified artifact; acquisition never runs during a request.",
+          `${this.options.label ?? "MPEP"} corpus is unavailable. Set ${this.options.envVar ?? "MPEP_CORPUS_PATH"} to an existing verified artifact; acquisition never runs during a request.`,
         );
       throw new CorpusError(
         "INVALID_CORPUS",
@@ -441,4 +445,30 @@ export class OutlineCorpus {
     this.sectionCount = null;
     this.dictionaries.clear();
   }
+}
+
+/** Quote user terms as FTS5 text; never execute caller input as MATCH syntax. */
+export function outlineFtsQuery(
+  query: string,
+  syntax: "adj" | "exact" | "and" | "or",
+) {
+  const clean = query.trim();
+  if (!clean) return "";
+  const quote = (text: string) => `"${text.replaceAll('"', '""')}"`;
+  return syntax === "adj" || syntax === "exact"
+    ? quote(clean)
+    : clean
+        .split(/\s+/)
+        .map(quote)
+        .join(syntax === "or" ? " OR " : " ");
+}
+
+/** A metadata date or timestamp as ISO UTC; malformed values become null. */
+export function corpusTimestamp(value?: string): string | null {
+  if (!value) return null;
+  const full = /^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T00:00:00Z` : value;
+  const parsed = z.iso.datetime({ offset: true }).safeParse(full);
+  if (!parsed.success) return null;
+  const date = new Date(parsed.data);
+  return Number.isNaN(date.valueOf()) ? null : date.toISOString();
 }

@@ -4,7 +4,12 @@ import {
   AssignmentCenterClient,
   BulkDataClient,
   ConfigurationError,
+  EpcClient,
+  EpoCaseLawClient,
+  EpoGuidelinesClient,
   EpoOpsClient,
+  EpoPctGuidelinesClient,
+  EpoUpGuidelinesClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -37,6 +42,7 @@ import {
   downloadContext,
 } from "./downloads.js";
 import { registerEpoTools } from "./epo.js";
+import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
@@ -78,6 +84,8 @@ function lazyClient<T extends object>(factory: () => T): T {
 }
 export interface ServerOptions {
   clients?: Partial<UsptoClients>;
+  /** EPO legal corpus readers; omitted books use their default artifact paths. */
+  epoLegal?: Partial<EpoLegalClients>;
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
   downloadAuth?: { jwksUri: string; issuer: string; audience: string };
@@ -242,6 +250,20 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const wafSession = options.wafSession ?? wafSessionSourceFromEnv(process.env);
   const provided = options.clients ?? {};
   const mpep = provided.mpep ?? new MpepClient();
+  const ownedEpoLegal: { close(): void }[] = [];
+  const own = <T extends { close(): void }>(client: T) => {
+    ownedEpoLegal.push(client);
+    return client;
+  };
+  const epoLegal: EpoLegalClients = {
+    epc: options.epoLegal?.epc ?? own(new EpcClient()),
+    caseLaw: options.epoLegal?.caseLaw ?? own(new EpoCaseLawClient()),
+    guidelines: options.epoLegal?.guidelines ?? own(new EpoGuidelinesClient()),
+    pctGuidelines:
+      options.epoLegal?.pctGuidelines ?? own(new EpoPctGuidelinesClient()),
+    upGuidelines:
+      options.epoLegal?.upGuidelines ?? own(new EpoUpGuidelinesClient()),
+  };
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -257,6 +279,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     downloads,
     () => {
       if (!provided.mpep) mpep.close();
+      for (const client of ownedEpoLegal) client.close();
     },
   );
   const downloadVerifier = options.downloadAuth ?? options.auth;
@@ -528,5 +551,10 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       epoOps,
       options.auth ? requireScopes("epo:read") : undefined,
     );
+  registerEpoLegalTools(
+    server,
+    epoLegal,
+    options.auth ? requireScopes("epo:read") : undefined,
+  );
   return server;
 }
