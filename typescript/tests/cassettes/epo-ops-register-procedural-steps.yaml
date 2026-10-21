@@ -1,0 +1,171 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://ops.epo.org/3.2/rest-services/register/publication/epodoc/EP1000000/procedural-steps
+    headers:
+      accept:
+      - application/xml
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000, h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control:
+      - no-cache
+      content-type:
+      - application/xml;charset=utf-8
+      date:
+      - Wed, 21 Oct 2026 21:15:20 GMT
+      etag:
+      - "\"0fa210e99ff35621aa55ab6740567467e\""
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      vary:
+      - Accept
+      via:
+      - 1.1 google, 1.1 google
+      x-accel-buffering:
+      - "no"
+      x-api:
+      - ops-v3.2
+      x-elapsed-time:
+      - "169"
+      x-individualquotaperhour-used:
+      - "247699"
+      x-registeredquotaperweek-used:
+      - "9623739"
+      x-request-id:
+      - 37eebec4-2e7b-42c4-bb4e-f70d2dcd181a
+      x-throttling-control:
+      - >-
+        busy (images=green:100, inpadoc=green:45, other=green:1000,
+        retrieval=green:100, search=green:15)
+    body:
+      type: text
+      content: |
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><?xml-stylesheet type='text/xsl' href='../../../../../style/rplus.xsl' ?>
+        <ops:world-patent-data xmlns:ops="http://ops.epo.org" xmlns:reg="http://www.epo.org/register" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cpc="http://www.epo.org/cpcexport" xmlns:cpcdef="http://www.epo.org/cpcdefinition">
+            <ops:register-search total-result-count="1">
+                <ops:query syntax="CQL">publication=EP1000000</ops:query>
+                <ops:range begin="1" end="1"/>
+                <reg:register-documents dtd-version="1.3.3" produced-by="RO">
+                    <reg:register-document date-produced="20261021" dtd-version="1.3.3" lang="en" produced-by="RO" status="No opposition filed within time limit">
+                        <reg:ep-patent-statuses>
+                            <reg:ep-patent-status change-date="" status-code="7">No opposition filed within time limit</reg:ep-patent-status>
+                        </reg:ep-patent-statuses>
+                        <reg:procedural-data>
+                            <reg:procedural-step id="RENEWAL_5310442" procedure-step-phase="undefined">
+                                <reg:procedural-step-code>RFEE</reg:procedural-step-code>
+                                <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Renewal fee payment</reg:procedural-step-text>
+                                <reg:procedural-step-text step-text-type="YEAR">03</reg:procedural-step-text>
+                                <reg:procedural-step-date step-date-type="DATE_OF_PAYMENT">
+                                    <reg:date>20011128</reg:date>
+                                </reg:procedural-step-date>
+                            </reg:procedural-step>
+                            <reg:procedural-step id="RENEWAL_5310443" procedure-step-phase="undefined">
+                                <reg:procedural-step-code>RFEE</reg:procedural-step-code>
+                                <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Renewal fee payment</reg:procedural-step-text>
+                                <reg:procedural-step-text step-text-type="YEAR">04</reg:procedural-step-text>
+                                <reg:procedural-step-date step-date-type="DATE_OF_PAYMENT">
+                                    <reg:date>20021128</reg:date>
+                                </reg:procedural-step-date>
+                            </reg:procedural-step>
+                            <reg:procedural-step id="STEP_AGRA_151644" procedure-step-phase="examination">
+                                <reg:procedural-step-code>AGRA</reg:procedural-step-code>
+                                <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Announcement of grant (old EPC before 1 July 2002)</reg:procedural-step-text>
+                                <reg:procedural-step-text step-text-type="approval">yes</reg:procedural-step-text>
+                                <reg:procedural-step-date step-date-type="DATE_OF_DISPATCH">
+                                    <reg:date>20020423</reg:date>
+                                </reg:procedural-step-date>
+                            </reg:procedural-step>
+                            <reg:procedural-step id="STEP_IGRA_978677" procedure-step-phase="examination">
+                                <reg:procedural-step-code>IGRA</reg:procedural-step-code>
+                                <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Intention to grant the patent</reg:procedural-step-text>
+                                <reg:procedural-step-date step-date-type="DATE_OF_DISPATCH">
+                                    <reg:date>20020807</reg:date>
+                                </reg:procedural-step-date>
+                                <reg:procedural-step-date step-date-type="GRANT_FEE_PAID">
+                                    <reg:date>20020824</reg:date>
+                                </reg:procedural-step-date>
+                                <reg:procedural-step-date step-date-type="PRINT_FEE_PAID">
+                                    <reg:date>20020824</reg:date>
+                                </reg:procedural-step-date>
+                            </reg:procedural-step>
+                            <reg:procedural-step id="STEP_PROL_1577470" procedure-step-phase="examination">
+                                <reg:procedural-step-code>PROL</reg:procedural-step-code>
+                                <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Language of the procedure</reg:procedural-step-text>
+                                <reg:procedural-step-text step-text-type="procedure language">en</reg:procedural-step-text>
+                            </reg:procedural-step>
+                            <reg:procedural-step id="STEP_ISAT_1570473" procedure-step-phase="entry-regional-phase">
+                                <reg:procedural-step-code>ISAT</reg:procedural-step-code>
+                                <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">International searching authority</reg:procedural-step-text>
+                                <reg:procedural-step-text step-text-type="searching authority"></reg:procedural-step-text>
+                            </reg:procedural-step>
+                        </reg:procedural-data>
+                    </reg:register-document>
+                </reg:register-documents>
+            </ops:register-search>
+        </ops:world-patent-data>
+  recorded_at: 2026-10-21T21:15:21.428Z
+- request:
+    method: POST
+    uri: https://ops.epo.org/3.2/auth/accesstoken
+    headers:
+      accept:
+      - application/xml
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: grant_type=client_credentials
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      content-type:
+      - application/json
+      date:
+      - Wed, 21 Oct 2026 21:15:20 GMT
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      via:
+      - 1.1 google
+      x-request-id:
+      - 807304c8-f687-4fbf-bff0-2e4f9e8e5661
+    body:
+      type: json
+      content:
+        refresh_token_expires_in: "[FILTERED]"
+        api_product_list: "[FILTERED]"
+        api_product_list_json: "[FILTERED]"
+        organization_name: p-epo-apigeex-prj-a7e0
+        developer.email: parker.hancock@protonmail.com
+        token_type: Bearer
+        issued_at: "1792617320916"
+        client_id: "[FILTERED]"
+        access_token: "[FILTERED]"
+        application_name: dc81cc3e-9e21-4d76-8f39-7b6c8d227737
+        scope: core
+        expires_in: "1199"
+        refresh_count: "0"
+        status: approved
+  recorded_at: 2026-10-21T21:15:21.012Z

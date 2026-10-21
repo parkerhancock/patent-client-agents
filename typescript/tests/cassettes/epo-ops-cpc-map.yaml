@@ -1,0 +1,115 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://ops.epo.org/3.2/rest-services/classification/map/cpc/H04L9/32/ipc
+    headers:
+      accept:
+      - application/xml
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - >-
+        h3=":443"; ma=2592000,h3-29=":443"; ma=2592000, h3=":443";
+        ma=2592000,h3-29=":443"; ma=2592000
+      cache-control:
+      - no-cache
+      content-type:
+      - application/xml;charset=utf-8
+      date:
+      - Wed, 21 Oct 2026 21:15:38 GMT
+      etag:
+      - "\"0eb6d8df4d498c34caf46b3c3a268f8c5\""
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      vary:
+      - Accept
+      via:
+      - 1.1 google, 1.1 google
+      x-accel-buffering:
+      - "no"
+      x-api:
+      - ops-v3.2
+      x-individualquotaperhour-used:
+      - "472398"
+      x-registeredquotaperweek-used:
+      - "9848438"
+      x-request-id:
+      - 30c60a0c-0dcf-43a7-8b8b-50280e650c73
+      x-throttling-control:
+      - >-
+        overloaded (images=green:50, inpadoc=green:30, other=green:1000,
+        retrieval=green:50, search=green:5)
+    body:
+      type: text
+      content: >-
+        <?xml version="1.0" encoding="utf-8" standalone="yes"?><?xml-stylesheet
+        type='text/xsl' href='../../../../../../style/class-mapping.xsl'
+        ?><ops:world-patent-data xmlns:ops="http://ops.epo.org" xmlns:reg="http://www.epo.org/register"
+        xmlns:cpcdef="http://www.epo.org/cpcdefinition" xmlns:cpc="http://www.epo.org/cpcexport"
+        xmlns:xlink="http://www.w3.org/1999/xlink"><ops:meta name="elapsed-time"
+        value="107"/><ops:classification-scheme><ops:mappings inputSchema="CPC"
+        outputSchema="IPC"><ops:mapping additional-only="true"><ops:cpc
+        xlink:href="classification/cpc/H04L9/32">H04L9/32</ops:cpc><ops:ipc>H04L9/32</ops:ipc></ops:mapping></ops:mappings></ops:classification-scheme></ops:world-patent-data>
+  recorded_at: 2026-10-21T21:15:39.927Z
+- request:
+    method: POST
+    uri: https://ops.epo.org/3.2/auth/accesstoken
+    headers:
+      accept:
+      - application/xml
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: grant_type=client_credentials
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000
+      content-type:
+      - application/json
+      date:
+      - Wed, 21 Oct 2026 21:15:39 GMT
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      via:
+      - 1.1 google
+      x-request-id:
+      - 1e714e06-fc6a-4612-8b26-0b656a01a408
+    body:
+      type: json
+      content:
+        refresh_token_expires_in: "[FILTERED]"
+        api_product_list: "[FILTERED]"
+        api_product_list_json: "[FILTERED]"
+        organization_name: p-epo-apigeex-prj-a7e0
+        developer.email: parker.hancock@protonmail.com
+        token_type: Bearer
+        issued_at: "1792617339487"
+        client_id: "[FILTERED]"
+        access_token: "[FILTERED]"
+        application_name: dc81cc3e-9e21-4d76-8f39-7b6c8d227737
+        scope: core
+        expires_in: "1199"
+        refresh_count: "0"
+        status: approved
+  recorded_at: 2026-10-21T21:15:39.576Z

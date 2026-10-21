@@ -16,6 +16,7 @@ of an independent security audit or complete production readiness.
 | HTTP recordings | Cassetter 0.11.0 | Replay only by default; explicit recording, secret filtering |
 | Offline outline corpora | Bun SQLite/FTS5 plus native Zstandard decoding | Whole-file Zstd, file and decoded SHA-256 pins, bounded in-memory read-only snapshots and explicit source freshness |
 | File-history archives | fflate 0.8.3 | ZIP assembly in the MCP package; bounded document bytes and manifest hashes |
+| PDF page merging | pdf-lib 1.17.1 | EPO OPS full-document PDFs in the client package; pure JavaScript, last published 2021, page count bounded |
 | Formatting and lint | Biome | Deterministic checks, no parallel formatting conventions |
 | Future CPU work | Rust compiled to WebAssembly | Optional measured extraction, no native addon required by the client |
 

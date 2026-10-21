@@ -18,6 +18,18 @@ export class ApiError extends Error {
 export class OdpApiError extends ApiError {
   override name = "OdpApiError";
 }
+/** An HTTP error whose bounded body the connector asked to inspect. Never surface `bodyText` verbatim. */
+export class HttpResponseError extends ApiError {
+  override name = "HttpResponseError";
+  constructor(
+    message: string,
+    status: number,
+    public readonly headers: Headers,
+    public readonly bodyText: string,
+  ) {
+    super(message, status);
+  }
+}
 export interface ClientOptions {
   apiKey?: string;
   baseUrl?: string;
@@ -48,6 +60,8 @@ export interface TransportRequestOptions {
   timeoutMs?: number;
   /** Exact HTTPS hostnames approved by the connector for public downloads. */
   allowedHosts?: string[];
+  /** Expose up to 64 KiB of Ky's bounded error body as an HttpResponseError for connector inspection. */
+  readErrorBody?: boolean;
 }
 export interface TransportResult<T> {
   data: T;
@@ -357,6 +371,18 @@ export class GenericHttpTransport {
             headers: error.response.headers,
             status: 404,
           };
+        if (options.readErrorBody)
+          throw new HttpResponseError(
+            `${this.sourceName} returned HTTP ${error.response.status}.`,
+            error.response.status,
+            error.response.headers,
+            (typeof error.data === "string"
+              ? error.data
+              : error.data === undefined
+                ? ""
+                : JSON.stringify(error.data)
+            ).slice(0, 64 * 1024),
+          );
         throw this.error(
           `${this.sourceName} returned HTTP ${error.response.status}.`,
           error.response.status,

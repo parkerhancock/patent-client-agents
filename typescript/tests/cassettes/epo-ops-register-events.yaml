@@ -1,0 +1,500 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://ops.epo.org/3.2/rest-services/register/publication/epodoc/EP1000000/events
+    headers:
+      accept:
+      - application/xml
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - >-
+        h3=":443"; ma=2592000,h3-29=":443"; ma=2592000, h3=":443";
+        ma=2592000,h3-29=":443"; ma=2592000
+      cache-control:
+      - no-cache
+      content-type:
+      - application/xml;charset=utf-8
+      date:
+      - Wed, 21 Oct 2026 21:15:18 GMT
+      etag:
+      - "\"0e161e89ccf0522a48f391e5b2724c565\""
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      vary:
+      - Accept
+      via:
+      - 1.1 google, 1.1 google
+      x-accel-buffering:
+      - "no"
+      x-api:
+      - ops-v3.2
+      x-elapsed-time:
+      - "162"
+      x-individualquotaperhour-used:
+      - "242645"
+      x-registeredquotaperweek-used:
+      - "9618685"
+      x-request-id:
+      - 9b8648d9-bfe5-4309-9382-dfbaf0fd937d
+      x-throttling-control:
+      - >-
+        busy (images=green:100, inpadoc=green:45, other=green:1000,
+        retrieval=green:100, search=green:15)
+    body:
+      type: text
+      content: |
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><?xml-stylesheet type='text/xsl' href='../../../../../style/rplus.xsl' ?>
+        <ops:world-patent-data xmlns:ops="http://ops.epo.org" xmlns:reg="http://www.epo.org/register" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cpc="http://www.epo.org/cpcexport" xmlns:cpcdef="http://www.epo.org/cpcdefinition">
+            <ops:register-search total-result-count="1">
+                <ops:query syntax="CQL">publication=EP1000000</ops:query>
+                <ops:range begin="1" end="1"/>
+                <reg:register-documents dtd-version="1.3.3" produced-by="RO">
+                    <reg:register-document date-produced="20261021" dtd-version="1.3.3" lang="en" produced-by="RO" status="No opposition filed within time limit">
+                        <reg:ep-patent-statuses>
+                            <reg:ep-patent-status change-date="" status-code="7">No opposition filed within time limit</reg:ep-patent-status>
+                        </reg:ep-patent-statuses>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558955" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20140607</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOSDTIPA</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Deletion: Observations by third parties</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558956" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20130315</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2013/16</reg:gazette-num>
+                                    <reg:date>20130417</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558957" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20130315</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009299LAPS</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Change - lapse in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2013/16</reg:gazette-num>
+                                    <reg:date>20130417</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558958" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20111202</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOSNTIPA</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">New entry: Observations by third parties</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558959" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20080718</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009299FREP</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Change - representative</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2008/34</reg:gazette-num>
+                                    <reg:date>20080820</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558960" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20080321</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2008/17</reg:gazette-num>
+                                    <reg:date>20080423</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558961" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20060217</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2006/14</reg:gazette-num>
+                                    <reg:date>20060405</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558962" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20041203</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2005/03</reg:gazette-num>
+                                    <reg:date>20050119</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558963" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20040806</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2004/39</reg:gazette-num>
+                                    <reg:date>20040922</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558964" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20040716</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2004/36</reg:gazette-num>
+                                    <reg:date>20040901</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558965" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20031219</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009261</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">No opposition filed within time limit</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2004/06</reg:gazette-num>
+                                    <reg:date>20040204</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558966" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20031212</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2004/05</reg:gazette-num>
+                                    <reg:date>20040128</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558967" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20031121</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2004/02</reg:gazette-num>
+                                    <reg:date>20040107</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558968" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20031003</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2003/47</reg:gazette-num>
+                                    <reg:date>20031119</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558969" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20030926</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2003/46</reg:gazette-num>
+                                    <reg:date>20031112</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558970" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20030905</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2003/43</reg:gazette-num>
+                                    <reg:date>20031022</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558971" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20030822</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2003/41</reg:gazette-num>
+                                    <reg:date>20031008</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558972" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20030815</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2003/40</reg:gazette-num>
+                                    <reg:date>20031001</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558973" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20030620</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009250</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Lapse of the patent in a contracting state</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2003/32</reg:gazette-num>
+                                    <reg:date>20030806</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558974" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20021228</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009210</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">(Expected) grant</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2003/07</reg:gazette-num>
+                                    <reg:date>20030212</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558975" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20021206</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOS RFEE</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Renewal fee</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558976" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20020906</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOS IGRA</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Communication of intention to grant a patent</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558977" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20020802</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOS AGRA</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Communication of intention to grant</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558978" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20020802</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOS IGRA</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Communication of intention to grant a patent</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558979" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20020419</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009185</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">First examination report</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558980" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20020415</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOS AGRA</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Communication of intention to grant</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558981" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20011207</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOS RFEE</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Renewal fee</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558982" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20010208</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>EPIDOS EXPT</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Change - extension states</reg:event-text>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558983" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20001215</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009084</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Definitive list of designations</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2001/05</reg:gazette-num>
+                                    <reg:date>20010131</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558984" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20001110</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009171</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Request for examination filed</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2000/52</reg:gazette-num>
+                                    <reg:date>20001227</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558985" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20000526</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009199FREP</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Change - representative</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2000/28</reg:gazette-num>
+                                    <reg:date>20000712</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                        <reg:events-data>
+                            <reg:dossier-event id="EVT_42558986" event-type="new">
+                                <reg:event-date>
+                                    <reg:date>20000331</reg:date>
+                                </reg:event-date>
+                                <reg:event-code>0009012</reg:event-code>
+                                <reg:event-text event-text-type="DESCRIPTION">Publication in section I.1 EP Bulletin</reg:event-text>
+                                <reg:gazette-reference>
+                                    <reg:gazette-num>2000/20</reg:gazette-num>
+                                    <reg:date>20000517</reg:date>
+                                </reg:gazette-reference>
+                            </reg:dossier-event>
+                        </reg:events-data>
+                    </reg:register-document>
+                </reg:register-documents>
+            </ops:register-search>
+        </ops:world-patent-data>
+  recorded_at: 2026-10-21T21:15:19.325Z
+- request:
+    method: POST
+    uri: https://ops.epo.org/3.2/auth/accesstoken
+    headers:
+      accept:
+      - application/xml
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: grant_type=client_credentials
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      content-type:
+      - application/json
+      date:
+      - Wed, 21 Oct 2026 21:15:18 GMT
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      via:
+      - 1.1 google
+      x-request-id:
+      - c44faa70-42c5-4640-bcdb-25b02f269952
+    body:
+      type: json
+      content:
+        refresh_token_expires_in: "[FILTERED]"
+        api_product_list: "[FILTERED]"
+        api_product_list_json: "[FILTERED]"
+        organization_name: p-epo-apigeex-prj-a7e0
+        developer.email: parker.hancock@protonmail.com
+        token_type: Bearer
+        issued_at: "1792617318828"
+        client_id: "[FILTERED]"
+        access_token: "[FILTERED]"
+        application_name: dc81cc3e-9e21-4d76-8f39-7b6c8d227737
+        scope: core
+        expires_in: "1199"
+        refresh_count: "0"
+        status: approved
+  recorded_at: 2026-10-21T21:15:18.907Z

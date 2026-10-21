@@ -34,20 +34,22 @@
     "waf:refresh": "bun packages/waf-worker/src/cli.ts",
     "waf:install-browser": "bun run --filter @patent-client-agents/waf-worker install:browser",
     "verify:waf": "bun scripts/verify-waf-worker.ts",
-    "verify:mpep": "bun scripts/verify-mpep.ts"
+    "verify:mpep": "bun scripts/verify-mpep.ts",
+    "record:epo-ops": "bun scripts/record-epo-ops.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
     "@patent-client-agents/client": "workspace:*",
     "@patent-client-agents/mcp": "workspace:*",
+    "@patent-client-agents/waf-session": "workspace:*",
+    "@patent-client-agents/waf-worker": "workspace:*",
     "@prefecthq/fastmcp-ts": "1.7.3",
     "@types/bun": "1.4.3",
     "cassetter": "0.11.0",
     "fflate": "0.8.3",
     "ky": "2.2.0",
+    "pdf-lib": "1.17.1",
     "typescript": "5.9.3",
-    "zod": "4.3.6",
-    "@patent-client-agents/waf-session": "workspace:*",
-    "@patent-client-agents/waf-worker": "workspace:*"
+    "zod": "4.3.6"
   }
 }

@@ -1,0 +1,2610 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://ops.epo.org/3.2/rest-services/register/publication/epodoc/EP4108782/upp
+    headers:
+      accept:
+      - application/xml
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000, h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control:
+      - no-cache
+      content-type:
+      - application/xml;charset=utf-8
+      date:
+      - Wed, 21 Oct 2026 21:15:26 GMT
+      etag:
+      - "\"047b79cc67f46441607ce8ef5fa2bb257\""
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      vary:
+      - Accept
+      via:
+      - 1.1 google, 1.1 google
+      x-accel-buffering:
+      - "no"
+      x-api:
+      - ops-v3.2
+      x-elapsed-time:
+      - "3769"
+      x-individualquotaperhour-used:
+      - "406455"
+      x-registeredquotaperweek-used:
+      - "9782495"
+      x-request-id:
+      - e6be46c0-6b53-40e3-895f-9e8868a3dea9
+      x-throttling-control:
+      - >-
+        busy (images=green:100, inpadoc=green:45, other=green:1000,
+        retrieval=green:100, search=green:15)
+    body:
+      type: text
+      content: |
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><?xml-stylesheet type='text/xsl' href='../../../../../style/rplus.xsl' ?>
+        <ops:world-patent-data xmlns:ops="http://ops.epo.org" xmlns:reg="http://www.epo.org/register" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cpc="http://www.epo.org/cpcexport" xmlns:cpcdef="http://www.epo.org/cpcdefinition">
+            <ops:register-search total-result-count="1">
+                <ops:query syntax="CQL">publication=EP4108782</ops:query>
+                <ops:range begin="1" end="1"/>
+                <reg:register-documents dtd-version="1.3.3" produced-by="RO">
+                    <reg:register-document date-produced="20261021" dtd-version="1.3.3" lang="en" produced-by="RO" status="Patent maintained as amended">
+                        <reg:ep-patent-statuses>
+                            <reg:ep-patent-status change-date="20251212" status-code="3">Patent maintained as amended</reg:ep-patent-status>
+                            <reg:ep-patent-status change-date="20230505" status-code="8">The patent has been granted</reg:ep-patent-status>
+                            <reg:ep-patent-status change-date="20230405" status-code="12">Grant of patent is intended</reg:ep-patent-status>
+                            <reg:ep-patent-status change-date="20230217" status-code="15">Request for examination was made</reg:ep-patent-status>
+                            <reg:ep-patent-status change-date="20221125" status-code="16">The application has been published</reg:ep-patent-status>
+                        </reg:ep-patent-statuses>
+                        <reg:bibliographic-data country="EP" id="EP22170334P" lang="en" status="Patent maintained as amended">
+                            <reg:publication-reference change-gazette-num="2022/52">
+                                <reg:document-id lang="en">
+                                    <reg:country>EP</reg:country>
+                                    <reg:doc-number>4108782</reg:doc-number>
+                                    <reg:kind>A1</reg:kind>
+                                    <reg:date>20221228</reg:date>
+                                </reg:document-id>
+                            </reg:publication-reference>
+                            <reg:publication-reference change-gazette-num="2023/23">
+                                <reg:document-id lang="en">
+                                    <reg:country>EP</reg:country>
+                                    <reg:doc-number>4108782</reg:doc-number>
+                                    <reg:kind>B1</reg:kind>
+                                    <reg:date>20230607</reg:date>
+                                </reg:document-id>
+                            </reg:publication-reference>
+                            <reg:publication-reference change-gazette-num="2026/03">
+                                <reg:document-id lang="en">
+                                    <reg:country>EP</reg:country>
+                                    <reg:doc-number>4108782</reg:doc-number>
+                                    <reg:kind>B2</reg:kind>
+                                    <reg:date>20260114</reg:date>
+                                </reg:document-id>
+                            </reg:publication-reference>
+                            <reg:classifications-ipcr change-date="20221125" change-gazette-num="2022/52">
+                                <reg:classification-ipcr id="CLASSIFICATION_2099892">
+                                    <reg:text>C12Q1/6816, C12Q1/6804, C12N15/11, G01N33/68, G01N33/532, G01N33/53</reg:text>
+                                </reg:classification-ipcr>
+                            </reg:classifications-ipcr>
+                            <reg:application-reference change-gazette-num="2022/52">
+                                <reg:document-id>
+                                    <reg:country>EP</reg:country>
+                                    <reg:doc-number>22170334</reg:doc-number>
+                                    <reg:date>20121221</reg:date>
+                                </reg:document-id>
+                            </reg:application-reference>
+                            <reg:language-of-filing>en</reg:language-of-filing>
+                            <reg:priority-claims change-date="20221125" change-gazette-num="2022/52">
+                                <reg:priority-claim kind="national" sequence="1">
+                                    <reg:country>US</reg:country>
+                                    <reg:doc-number>201161579265P</reg:doc-number>
+                                    <reg:date>20111222</reg:date>
+                                </reg:priority-claim>
+                            </reg:priority-claims>
+                            <reg:parties>
+                                <reg:applicants change-date="20251212" change-gazette-num="2026/03">
+                                    <reg:applicant app-type="applicant" designation="all" sequence="1">
+        <reg:addressbook cdsid="0101646268">
+            <reg:name>President and Fellows of Harvard College</reg:name>
+            <reg:address>
+                <reg:address-1>17 Quincy Street</reg:address-1>
+                <reg:address-2>Cambridge, MA 02138</reg:address-2>
+                <reg:country>US</reg:country>
+            </reg:address>
+        </reg:addressbook>
+        <reg:nationality>
+            <reg:country></reg:country>
+        </reg:nationality>
+        <reg:residence>
+            <reg:country></reg:country>
+        </reg:residence>
+                                    </reg:applicant>
+                                </reg:applicants>
+                                <reg:applicants change-date="20221125" change-gazette-num="2022/52">
+                                    <reg:applicant app-type="applicant" designation="all" sequence="1">
+        <reg:addressbook cdsid="0101646268">
+            <reg:name>President and Fellows of Harvard College</reg:name>
+            <reg:address>
+                <reg:address-1>17 Quincy Street</reg:address-1>
+                <reg:address-2>Cambridge, MA 02138</reg:address-2>
+                <reg:country>US</reg:country>
+            </reg:address>
+        </reg:addressbook>
+        <reg:nationality>
+            <reg:country></reg:country>
+        </reg:nationality>
+        <reg:residence>
+            <reg:country></reg:country>
+        </reg:residence>
+                                    </reg:applicant>
+                                </reg:applicants>
+                                <reg:inventors change-date="20221125" change-gazette-num="2022/52">
+                                    <reg:inventor sequence="01">
+        <reg:addressbook>
+            <reg:name>LEVNER, Daniel</reg:name>
+            <reg:address>
+                <reg:address-1>Boston, MA 02115</reg:address-1>
+                <reg:country>US</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:inventor>
+                                    <reg:inventor sequence="02">
+        <reg:addressbook>
+            <reg:name>LEE, Jehyuk</reg:name>
+            <reg:address>
+                <reg:address-1>Allston, MA 02134</reg:address-1>
+                <reg:country>US</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:inventor>
+                                    <reg:inventor sequence="03">
+        <reg:addressbook>
+            <reg:name>CHURCH, George M.</reg:name>
+            <reg:address>
+                <reg:address-1>Brookline, MA 02446</reg:address-1>
+                <reg:country>US</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:inventor>
+                                    <reg:inventor sequence="04">
+        <reg:addressbook>
+            <reg:name>SUPER, Michael</reg:name>
+            <reg:address>
+                <reg:address-1>Lexington, MA</reg:address-1>
+                <reg:country>US</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:inventor>
+                                </reg:inventors>
+                                <reg:agents change-date="20251212" change-gazette-num="2026/03">
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101856342">
+            <reg:name>Bardehle Pagenberg Partnerschaft mbB Patentanwälte Rechtsanwälte</reg:name>
+            <reg:address>
+                <reg:address-1>Prinzregentenplatz 7</reg:address-1>
+                <reg:address-2>81675 München</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                </reg:agents>
+                                <reg:agents change-date="20221125" change-gazette-num="2022/52">
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101927740">
+            <reg:name>Keltie LLP</reg:name>
+            <reg:address>
+                <reg:address-1>No. 1 London Bridge</reg:address-1>
+                <reg:address-2>London SE1 9BA</reg:address-2>
+                <reg:country>GB</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                </reg:agents>
+                            </reg:parties>
+                            <reg:designation-of-states change-date="20230217" change-gazette-num="2023/12">
+                                <reg:designation-pct>
+                                    <reg:regional>
+        <reg:region>
+            <reg:country>EP</reg:country>
+        </reg:region>
+        <reg:country>AL</reg:country>
+        <reg:country>AT</reg:country>
+        <reg:country>BE</reg:country>
+        <reg:country>BG</reg:country>
+        <reg:country>CH</reg:country>
+        <reg:country>CY</reg:country>
+        <reg:country>CZ</reg:country>
+        <reg:country>DE</reg:country>
+        <reg:country>DK</reg:country>
+        <reg:country>EE</reg:country>
+        <reg:country>ES</reg:country>
+        <reg:country>FI</reg:country>
+        <reg:country>FR</reg:country>
+        <reg:country>GB</reg:country>
+        <reg:country>GR</reg:country>
+        <reg:country>HR</reg:country>
+        <reg:country>HU</reg:country>
+        <reg:country>IE</reg:country>
+        <reg:country>IS</reg:country>
+        <reg:country>IT</reg:country>
+        <reg:country>LI</reg:country>
+        <reg:country>LT</reg:country>
+        <reg:country>LU</reg:country>
+        <reg:country>LV</reg:country>
+        <reg:country>MC</reg:country>
+        <reg:country>MK</reg:country>
+        <reg:country>MT</reg:country>
+        <reg:country>NL</reg:country>
+        <reg:country>NO</reg:country>
+        <reg:country>PL</reg:country>
+        <reg:country>PT</reg:country>
+        <reg:country>RO</reg:country>
+        <reg:country>RS</reg:country>
+        <reg:country>SE</reg:country>
+        <reg:country>SI</reg:country>
+        <reg:country>SK</reg:country>
+        <reg:country>SM</reg:country>
+        <reg:country>TR</reg:country>
+                                    </reg:regional>
+                                </reg:designation-pct>
+                            </reg:designation-of-states>
+                            <reg:designation-of-states change-date="20221125" change-gazette-num="2022/52">
+                                <reg:designation-pct>
+                                    <reg:regional>
+        <reg:region>
+            <reg:country>EP</reg:country>
+        </reg:region>
+        <reg:country>AL</reg:country>
+        <reg:country>AT</reg:country>
+        <reg:country>BE</reg:country>
+        <reg:country>BG</reg:country>
+        <reg:country>CH</reg:country>
+        <reg:country>CY</reg:country>
+        <reg:country>CZ</reg:country>
+        <reg:country>DE</reg:country>
+        <reg:country>DK</reg:country>
+        <reg:country>EE</reg:country>
+        <reg:country>ES</reg:country>
+        <reg:country>FI</reg:country>
+        <reg:country>FR</reg:country>
+        <reg:country>GB</reg:country>
+        <reg:country>GR</reg:country>
+        <reg:country>HR</reg:country>
+        <reg:country>HU</reg:country>
+        <reg:country>IE</reg:country>
+        <reg:country>IS</reg:country>
+        <reg:country>IT</reg:country>
+        <reg:country>LI</reg:country>
+        <reg:country>LT</reg:country>
+        <reg:country>LU</reg:country>
+        <reg:country>LV</reg:country>
+        <reg:country>MC</reg:country>
+        <reg:country>MK</reg:country>
+        <reg:country>MT</reg:country>
+        <reg:country>NL</reg:country>
+        <reg:country>NO</reg:country>
+        <reg:country>PL</reg:country>
+        <reg:country>PT</reg:country>
+        <reg:country>RO</reg:country>
+        <reg:country>RS</reg:country>
+        <reg:country>SE</reg:country>
+        <reg:country>SI</reg:country>
+        <reg:country>SK</reg:country>
+        <reg:country>SM</reg:country>
+        <reg:country>TR</reg:country>
+                                    </reg:regional>
+                                </reg:designation-pct>
+                            </reg:designation-of-states>
+                            <reg:invention-title lang="de" change-date="20221125" change-gazette-num="2022/52">ZUSAMMENSETZUNGEN UND VERFAHREN ZUR ANALYTDETEKTION</reg:invention-title>
+                            <reg:invention-title lang="en" change-date="20221125" change-gazette-num="2022/52">COMPOSITIONS AND METHODS FOR ANALYTE DETECTION</reg:invention-title>
+                            <reg:invention-title lang="fr" change-date="20221125" change-gazette-num="2022/52">COMPOSITIONS ET PROCÉDÉS DE DÉTECTION D'ANALYTE</reg:invention-title>
+                            <reg:term-of-grant change-date="20251226" change-gazette-num="2026/05">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20121221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>HU</reg:country>
+                                    <reg:date>20121221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CZ</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>HR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>MC</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PL</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RO</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RS</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SK</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SM</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>TR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IS</reg:country>
+                                    <reg:date>20231007</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IE</reg:country>
+                                    <reg:date>20231221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20231231</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20250822" change-gazette-num="2025/39">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20121221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>HU</reg:country>
+                                    <reg:date>20121221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CZ</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>HR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>MC</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PL</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RO</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RS</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SK</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SM</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IS</reg:country>
+                                    <reg:date>20231007</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IE</reg:country>
+                                    <reg:date>20231221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20231231</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20250801" change-gazette-num="2025/36">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20121221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CZ</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>HR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>MC</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PL</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RO</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RS</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SK</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SM</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IS</reg:country>
+                                    <reg:date>20231007</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IE</reg:country>
+                                    <reg:date>20231221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20231231</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20241025" change-gazette-num="2024/48">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CZ</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>HR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>MC</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PL</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RO</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RS</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SK</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SM</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IS</reg:country>
+                                    <reg:date>20231007</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IE</reg:country>
+                                    <reg:date>20231221</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20231231</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20240830" change-gazette-num="2024/40">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CZ</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>HR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>MC</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PL</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RO</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RS</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SK</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SM</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IS</reg:country>
+                                    <reg:date>20231007</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20240202" change-gazette-num="2024/10">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CZ</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>HR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PL</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RO</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RS</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SK</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SM</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IS</reg:country>
+                                    <reg:date>20231007</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20240119" change-gazette-num="2024/08">
+                                <reg:lapsed-in-country>
+                                    <reg:country>HR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RS</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SK</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SM</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20231117" change-gazette-num="2023/51">
+                                <reg:lapsed-in-country>
+                                    <reg:country>HR</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>RS</reg:country>
+                                    <reg:date>20230607</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20231110" change-gazette-num="2023/50">
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20230908</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20231027" change-gazette-num="2023/48">
+                                <reg:lapsed-in-country>
+                                    <reg:country>NO</reg:country>
+                                    <reg:date>20230907</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:dates-rights-effective>
+                                <reg:request-for-examination change-gazette-num="2023/12">
+                                    <reg:date>20230210</reg:date>
+                                </reg:request-for-examination>
+                                <reg:first-examination-report-despatched>
+                                    <reg:date>20230406</reg:date>
+                                </reg:first-examination-report-despatched>
+                                <reg:patent-maintained-as-amended>
+                                    <reg:date>20260114</reg:date>
+                                </reg:patent-maintained-as-amended>
+                            </reg:dates-rights-effective>
+                            <reg:references-cited>
+                                <reg:citation id="cit_4002370" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2005233318&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2005233318</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(CHEE MARK S et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>DA</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002371" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS7473767&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>7473767</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(DIMITROV KRASSEN et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>DA</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002372" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2006177833&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2006177833</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(BRENNER SYDNEY et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002373" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2011086774&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2011086774</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(DUNAWAY DWAYNE L et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002374" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2011294135&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2011294135</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(CARLSON ROBERT HENNING et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002375" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2007020650&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2007020650</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(KAHVEJIAN AVAK et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002376" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2011245111&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2011245111</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(CHEE MARK S et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002377" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2003148335&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2003148335</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(SHEN LI et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002378" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011143583&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011143583</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(ILLUMINA INC et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002379" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2011257031&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2011257031</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(BODEAU JOHN et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002380" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2011104693&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2011104693</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(SELIGMANN BRUCE et al.)  </reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002381" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2007231824&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2007231824</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002382" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS7473767&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>7473767</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002383" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2010047924&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2010047924</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002384" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2007166708&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2007166708</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002385" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2010261026&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2010261026</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002386" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DEP0404097&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>EP</reg:country>
+            <reg:doc-number>0404097</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002387" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO9311161&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>9311161</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002388" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS61508957&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>61508957</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002389" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS6403374&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>6403374</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002390" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS6800733&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>6800733</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002391" cited-phase="description" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS7157566&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>7157566</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002392" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>BATZER ET AL., NUCLEIC ACID RES., vol. 19, 1991, pages 5081 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002393" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>OHTSUKA ET AL., J. BIOL. CHEM., vol. 260, 1985, pages 2605 - 2608 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002394" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ROSSOLINI ET AL., MOL. CELL. PROBES, vol. 8, 1994, pages 91 - 98 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002395" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>KLEIN: "Immunology", 1982, JOHN WILEY </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002396" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CLARK, W. R: "The Experimental Foundations of Modern Immunology", 1986, WILEY &amp; SONS, INC. </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002397" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>KABAT ET AL.: "Sequences of Proteins of Immunological Interest", 1991, BLACKWELL SCIENTIFIC PUBLICATIONS </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002398" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CHOTHIALESK, J. MOL. BIOL., vol. 196, 1987, pages 901 - 917 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002399" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ZAPATA ET AL., PROTEIN ENG., vol. 8, no. 10, 1995, pages 1057 - 1062 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002400" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>PLUCKTHUN: "The Pharmacology of Monoclonal Antibodies", vol. 113, 1994, SPRINGER- VERLAG, pages: 269 - 315 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002401" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>HOLLINGER, PROC. NATL. ACAD. SD. USA, 1993, pages 6444 - 6448 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002402" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ZUKER, NUCLEIC ACIDS RES., vol. 31, no. 13, 2003, pages 3406 - 15 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002403" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>MATHEWS ET AL., J. MOL. BIOL., vol. 288, 1999, pages 911 - 940 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002404" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DAVIS ET AL., PROC. NATL. ACAD. SCI. USA, vol. 103, 2006, pages 8155 - 60 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002405" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DOAN ET AL., MOL. MICROBIOL, vol. 55, 2005, pages 1767 - 1781 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002406" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CRAMERI ET AL., NAT. BIOTECHNOL., vol. 14, 1996, pages 315319 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002407" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>RIZZO ET AL., NAT. BIOTECHNOL, vol. 22, 2004, pages 445 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002408" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>TSIEN, ANNU. REV. BIOCHEM., vol. 67, 1998, pages 509 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002409" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>NAGAL ET AL., NAT. BIOTECHNOL., vol. 20, 2002, pages 87 - 90 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002410" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SHANER ET AL., NAT. BIOTECHNOL., vol. 22, 2004, pages 1567 - 1572 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002411" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>WANG ET AL., PROC. NATL. ACAD. SCI. U.S.A., vol. 101, 2004, pages 16745 - 16749 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002412" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>FISCHER ET AL., FEBS LETT., vol. 577, 2004, pages 227 - 232 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002413" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>FISCHER ET AL., FEBS LETT, vol. 580, 2006, pages 2495 - 2502 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002414" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>WANGGIESE, ANAL. CHEM., vol. 65, 1993, pages 3518 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002415" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>HYRUP ET AL., BIOORGANIC &amp; MEDICINAL CHEMISTRY, vol. 40, no. 1, 1996, pages 5 - 23 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002416" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>PERRY-O'KEEFE ET AL., PROC. NATL. ACAD. SCI. USA, vol. 93, 1996, pages 14670 - 675 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002417" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>FRANGIONI, CURR. OPIN. CHEM. BIOL, vol. 7, 2003, pages 626 - 634 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002418" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>RAMANUJAM ET AL., IEEE TRANSACTIONS ON BIOMEDICAL ENGINEERING, vol. 48, 2001, pages 1034 - 1041 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002419" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>"Harrison's Principles of Internal Medicine", 1997, MEDICAL ECONOMICS CO. </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002420" cited-phase="description" office="EP">
+                                    <reg:nplcit>
+        <reg:text>GOODMANGILMAN: "Pharmacological Basis of Therapeutics", 1990, UNITED STATES PHARMACOPEIA </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002421" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DEP3425063&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>EP</reg:country>
+            <reg:doc-number>3425063</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002422" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2013096851&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2013096851</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002423" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS61579265&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>61579265</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002424" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2010151472&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2010151472</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002425" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO03003810&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>03003810</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002426" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011048184&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011048184</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002427" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011112634&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011112634</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002428" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DEP0611828&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>EP</reg:country>
+            <reg:doc-number>0611828</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002429" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2007001986&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2007001986</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002430" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011038403&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011038403</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002431" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DDE10143757&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>DE</reg:country>
+            <reg:doc-number>10143757</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002432" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS6068979&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>6068979</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002433" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2005079603&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2005079603</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002434" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS7033758&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>7033758</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002435" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2010120043&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2010120043</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002436" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2005064435&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2005064435</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002437" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011047087&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011047087</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002438" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DEP3425063&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>EP</reg:country>
+            <reg:doc-number>3425063</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002439" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2013096851&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2013096851</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002440" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2010151472&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2010151472</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002441" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO03003810&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>03003810</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002442" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2010120043&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2010120043</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002443" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2005064435&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2005064435</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002444" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011047087&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011047087</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002445" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DEP4108782&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>EP</reg:country>
+            <reg:doc-number>4108782</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002446" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011048184&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011048184</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002447" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011112634&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011112634</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002448" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DEP0611828&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>EP</reg:country>
+            <reg:doc-number>0611828</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002449" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2007001986&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2007001986</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002450" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DWO2011038403&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>WO</reg:country>
+            <reg:doc-number>2011038403</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002451" cited-phase="opposition" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DUS2010120043&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>US</reg:country>
+            <reg:doc-number>2010120043</reg:doc-number>
+        </reg:document-id>
+                                    </reg:patcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002452" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>J. GORANSSON, GORANSSON, WAHLBY, ISAKSSON, HOWELL, JARVIUS, NILSSON: "A single molecule array for digital targeted molecular analyses", NUCLEIC ACIDS RESEARCH, INFORMATION RETRIEVAL LTD., vol. 37, no. 1, 1 January 2009 (2009-01-01), pages e7 - e7, XP055069029, ISSN: 03051048, DOI: 10.1093/nar/gkn921 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002453" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DZIFA Y. DUOSE, RYAN M. SCHWELLER, WALTER N. HITTELMAN, MICHAEL R. DIEHL: "Multiplexed and Reiterative Fluorescence Labeling via DNA Circuitry", BIOCONJUGATE CHEMISTRY, AMERICAN CHEMICAL SOCIETY, vol. 21, no. 12, 15 December 2010 (2010-12-15), pages 2327 - 2331, XP055097266, ISSN: 10431802, DOI: 10.1021/bc100348q </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002454" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SCHUBERT WALTER ET AL: "Analyzing proteome topology and function by automated multidimensional fluorescence microscopy.", NATURE BIOTECHNOLOGY, NATURE PUBLISHING GROUP US, NEW YORK, vol. 24, no. 10, 1 October 2006 (2006-10-01), New York, pages 1270 - 1278, XP002438060, ISSN: 1087-0156, DOI: 10.1038/nbt1250 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002455" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>D. K. ZHEN, J. Y. WANG, V. M. FALCO, W. WEBER, L. DELLI-BOVI, D. W. BIANCHI: "Poly-FISH: a technique of repeated hybridizations that improves cytogenetic analysis of fetal cells in maternal blood", PRENETAL DIAGNOSIS, CHICHESTER, SUSSEX, GB, vol. 18, no. 11, 1 November 1998 (1998-11-01), GB                                                                                                                                                                                                      , pages 1181 - 1185, XP055763455, ISSN: 0197-3851, DOI: 10.1002/(SICI)1097-0223(199811)18:11&lt;1181::AID-PD410&gt;3.0.CO;2-K </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002456" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>GUNDERSON KEVIN L ET AL: "Decoding randomly ordered DNA arrays", GENOME RESEARCH, COLD SPRING HARBOR LABORATORY PRESS, US, vol. 14, no. 5, 1 May 2004 (2004-05-01), US                                                                                                                                                                                                      , pages 870 - 877, XP002617593, ISSN: 1088-9051, DOI: 10.1101/gr.2255804 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002457" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>STRYER ET AL.: "BIOCHEMISTRY, 5th Edition", 1 January 2002, W.H. FREEMAN &amp; CO., US, ISBN: 0-7167-4684-0, article JEREMY M. BERG; JOHN L. TYMOCZKO; LUBERT STRYER. WEB CONTENT BY NEIL D. CLARKE: "5.2.3 The Double Helix Can Be Reversible Melted", pages: 124 - 125, XP009553254 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002458" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>OLEJNIK JERZY, KRZYMANSKA-OLEJNIK E, ROTHSCHILD K J: "Photocleavable aminotag phosphoramidites for 5'-termini DNA/RNA labeling", NUCLEIC ACIDS RESEARCH, OXFORD UNIVERSITY PRESS, GB, vol. 26, no. 15, 1 August 1998 (1998-08-01), GB                                                                                                                                                                                                      , pages 3572 - 3576, XP002188068, ISSN: 0305-1048, DOI: 10.1093/nar/26.15.3572 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002459" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>BO HUANG, MARK BATES, XIAOWEI ZHUANG: "Super-Resolution Fluorescence Microscopy", ANNUAL REVIEW OF BIOCHEMISTRY, STANFORD UNIVERSITY PRESS, vol. 78, no. 1, 1 June 2009 (2009-06-01), pages 993 - 1016, XP055137847, ISSN: 00664154, DOI: 10.1146/annurev.biochem.77.061906.092014 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002460" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DONALDSON JULIE G.: "Immunofluorescence Staining", CURRENT PROTOCOLS IN CELL BIOLOGY, JOHN WILEY &amp; SONS INC, US, vol. 00, no. 1, 1 October 1998 (1998-10-01), US                                                                                                                                                                                                      , XP093128847, ISSN: 1934-2500, DOI: 10.1002/0471143030.cb0403s00 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002461" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>OLA SDERBERG, KARL-JOHAN LEUCHOWIUS, MATS GULLBERG, MALIN JARVIUS, IRENE WEIBRECHT, LARS-GUNNAR LARSSON AND ULF LANDEGREN: "Characterizing proteins and their interactions in cells and tissues using the in situ proximity ligation assay.", METHODS, ACADEMIC PRESS, NL, vol. 45, no. 3, 1 July 2008 (2008-07-01), NL                                                                                                                                                                                                      , pages 227 - 232, XP002638191, ISSN: 1046-2023, DOI: 10.1016/J.YMETH.2008.06.014 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002462" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SDERBERG O ET AL.: "Direct observation of individual endogenous protein complexes in situ by proximity ligation", NATURE METHODS, NATURE PUBLISHING GROUP US, NEW YORK, vol. 3, no. 12, 1 December 2006 (2006-12-01), New York, pages 995 - 1000, XP002522344, ISSN: 1548-7091, DOI: 10.1038/NMETH947 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002463" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SRIMUKH PRASAD VECCHAM; JOONHO LEE; YUEZHI MAO; PAUL R. HORN; MARTIN HEAD-GORDON: "A Non-Perturbative Pairwise-Additive Analysis of Charge Transfer Contributions to Intermolecular Interaction Energies", ARXIV.ORG, CORNELL UNIVERSITY LIBRARY, 201 OLIN LIBRARY CORNELL UNIVERSITY ITHACA, NY 14853, 10 November 2020 (2020-11-10), 201 Olin Library Cornell University Ithaca, NY 14853                                                                                                                                                    , XP081945619, DOI: 10.1039/D0CP05852A </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002464" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CAMMACK: "OXFORD DICTIONARY OF BIOCHEMISTRY AND MOLECULAR BIOLOGY, SECOND EDITION", 1 January 2006, OXFORD UNIVERSITY PRESS, ISBN: 978-0-19-852917-0, article R. CAMMACK; CAMMACK, RICHARD: "Passage", pages: 321 - 322, XP009551902 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002465" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CAMMACK: "OXFORD DICTIONARY OF Biochemistry and Molecular Biology Revised Edition", 1 January 2006, OXFORD UNIVERSITY PRESS, ISBN: 978-0-19-852917-0, article R. CAMMACK; CAMMACK, RICHARD: "Passage", pages: 545 - 546, XP009551901 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002466" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>BENEDETTA BOTTARI ; DANILO ERCOLINI ; MONICA GATTI ; ERASMO NEVIANI: "Application of FISH technology for microbiological analysis: current state and prospects", APPLIED MICROBIOLOGY AND BIOTECHNOLOGY, SPRINGER, BERLIN, DE, vol. 73, no. 3, 19 October 2006 (2006-10-19), Berlin, DE                                                                                                                                                                                              , pages 485 - 494, XP019458776, ISSN: 1432-0614, DOI: 10.1007/s00253-006-0615-z </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002467" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>MLLER STEFAN, NEUSSER MICHAELA, WIENBERG JOHANNES: "Towards unlimited colors for uorescence in-situ hybridization (FISH)", CHROMOSOME RESEARCH, vol. 10, 1 January 2002 (2002-01-01), pages 223 - 232, XP093128854 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002468" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>HENEGARIU OCTAVIAN, NYLA A. HEEREMA, PATRICIA BRAY-WARD, DAVID C. WARD : "Colour-changing karyotyping: an alternative to M-FISH/SKY", NATURE GENETICS, vol. 23, 23 November 1999 (1999-11-23), pages 263 - 264, XP093128859 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002469" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DZIFA Y. DUOSE, RYAN M. SCHWELLER, JAN ZIMAK, ARTHUR R. ROGERS, WALTER N. HITTELMAN AND MICHAEL R. DIEHL: "Configuring robust DNA strand displacement reactions for in situ molecular analyses.", NUCLEIC ACIDS RESEARCH, OXFORD UNIVERSITY PRESS, GB, vol. 40, no. 7, 1 April 2012 (2012-04-01), GB                                                                                                                                                                                                      , pages 3289 - 3298, XP002715512, ISSN: 1362-4962, DOI: 10.1093/nar/gkr1209 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002470" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ARJUN RAJ, PATRICK VAN DEN BOGAARD, SCOTT A RIFKIN, ALEXANDER VAN OUDENAARDEN, SANJAY TYAGI: "Imaging individual mRNA molecules using multiple singly labeled probes", NATURE METHODS, vol. 5, no. 10, 1 October 2008 (2008-10-01), pages 877 - 879, XP055041223, ISSN: 15487091, DOI: 10.1038/nmeth.1253 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002471" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>PETR MOKROS, JAN VRBSKY, JIRI SIROKY: "Identification of chromosomal fusion sites in Arabidopsis mutants using sequential bicolour BAC-FISH", GENOME, vol. 49, no. 8, 1 August 2006 (2006-08-01), Ottawa; CA                                                                                                                                                                                              , pages 1036 - 1042, XP055763443, ISSN: 0831-2796, DOI: 10.1139/g06-082 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002472" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ANONYMOUS: "In situ hybridization of mammalian cells (RNA and Oligonucleotide probes)", SINGER LAB PROTOCOL, 1 January 1998 (1998-01-01), pages 1 - 2, XP093171161 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002473" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ANONYMOUS: "In situ hybridization of yeast cells (RNA and Oligonucleotide probes)", SINGER LAB PROTOCOL, 1 January 1998 (1998-01-01), pages 1 - 2, XP093171164 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002474" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>NGUYEN HA NAM, REIJO PERA RENEE A.: "Metaphase Spreads and Spectral Karyotyping of Human Embryonic Stem Cells", COLD SPRING HARBOR PROTOCOLS, vol. 3, no. 9, 1 September 2008 (2008-09-01), pages 1 - 6, XP093171171, DOI: 10.1101/pdb.prot5047 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002475" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>AUDREY N PLAYER, LU-PING SHEN, DARYN KENNY, VINCENT P ANTAO, JANICE A KOLBERG: "Single-copy Gene Detection Using Branched DNA (bDNA) In Situ Hybridization", THE JOURNAL OF HISTOCHEMISTRY &amp; CYTOCHEMISTRY, vol. 49, no. 5, 1 May 2001 (2001-05-01), pages 603 - 611, XP055572874, DOI: 10.1177/002215540104900507 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002476" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>HARRY M T CHOI, JOANN Y CHANG, LE A TRINH, JENNIFER E PADILLA, SCOTT E FRASER, NILES A PIERCE: "Programmable in situ amplification for multiplexed imaging of mRNA expression", NATURE BIOTECHNOLOGY, vol. 28, no. 11, 1 November 2010 (2010-11-01), pages 1208 - 1212, XP055035263, ISSN: 1087-0156, DOI: 10.1038/nbt.1692 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002477" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>FAY WANG, JOHN FLANAGAN, NAN SU, LI-CHONG WANG, SON BUI, ALLISSA NIELSON, XINGYONG WU, HONG-THUY VO, XIAO-JUN MA, YULING LUO: "RNAscope. A novel in situ RNA analysis platform for formalin-fixed, paraffin-embedded tissues", THE JOURNAL OF MOLECULAR DIAGNOSTICS, vol. 14, no. 1, 1 January 2012 (2012-01-01), pages 22 - 29, XP055191966, ISSN: 1525-1578, DOI: 10.1016/j.jmoldx.2011.08.002 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002478" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>STOUGAARD MAGNUS; LOHMANN JAKOB S; ZAJAC MAGDALENA; HAMILTON-DUTOIT STEPHEN; KOCH JRN: "In situ detection of non-polyadenylated RNA molecules using Turtle Probes and target primed rolling circle PRINS", BMC BIOTECHNOLOGY, BIOMED CENTRAL LTD, vol. 7, no. 1, 18 October 2007 (2007-10-18), pages 69, XP021035652, ISSN: 1472-6750 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002479" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>BAI XIAOPENG , ET AL: "Photocleavage of a 2-nitrobenzyl linker bridging a fluorophore to the 5' end of DNA.", PROCEEDINGS OF THE NATIONAL ACADEMY OF SCIENCES, NATIONAL ACADEMY OF SCIENCES, vol. 100, no. 2, 21 January 2003 (2003-01-21), pages 409 - 413, XP002368474, ISSN: 0027-8424, DOI: 10.1073/pnas.242729099 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002480" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>A. LAGUNAVICIUS, E. MERKIENE, Z. KIVERYTE, A. SAVANEVICIUTE, V. ZIMBAITE-RUSKULIENE, T. RADZVILAVICIUS, A. JANULAITIS: "Novel application of Phi29 DNA polymerase: RNA detection and analysis in vitro and in situ by target RNA-primed RCA", RNA, COLD SPRING HARBOR LABORATORY PRESS, US, vol. 15, no. 5, US                                                                                                                                                                                                      , pages 765 - 771, XP055474383, ISSN: 1355-8382, DOI: 10.1261/rna.1279909 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002481" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>WEIMING ZHENG ; LIN HE: "Multiplexed detection of protein cancer markers on Au/Ag-barcoded nanorods using fluorescent-conjugated polymers", ANALYTICAL AND BIOANALYTICAL CHEMISTRY, SPRINGER, BERLIN, DE, vol. 397, no. 6, 25 May 2010 (2010-05-25), Berlin, DE                                                                                                                                                                                              , pages 2261 - 2270, XP019839369, ISSN: 1618-2650 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002482" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>RICHARD M. LEVENSON, JAMES R. MANSFIELD: "Multispectral imaging in biology and medicine: Slices of life", CYTOMETRY PART A, WILEY-LISS, vol. 69A, no. 8, 1 August 2006 (2006-08-01), pages 748 - 758, XP055125631, ISSN: 15524922, DOI: 10.1002/cyto.a.20319 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002483" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SWEENEY, E. ; WARD, T.H. ; GRAY, N. ; WOMACK, C. ; JAYSON, G. ; HUGHES, A. ; DIVE, C. ; BYERS, R.: "Quantitative multiplexed quantum dot immunohistochemistry", BIOCHEMICAL AND BIOPHYSICAL RESEARCH COMMUNICATIONS, ELSEVIER, AMSTERDAM NL, vol. 374, no. 2, 19 September 2008 (2008-09-19), Amsterdam NL                                                                                                                                                                                            , pages 181 - 186, XP023521452, ISSN: 0006-291X, DOI: 10.1016/j.bbrc.2008.06.127 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002484" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>LEVSKY JEFFREY M., SHAILESH M. SHENOY, ROSSANNA C. PEZO, ROBERT H. SINGER: "Single-Cell Gene Expression Profiling", SCIENCE, SPRINGER-VERLAG, 2 August 2002 (2002-08-02), XP055983017, [retrieved on 20221118] </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002485" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CAPODIECI P, ET AL.: "GENE EXPRESSION PROFILING IN SINGLE CELLS WITHIN TISSUE", NATURE METHODS, NATURE PUBLISHING GROUP US, NEW YORK, vol. 02, no. 09, 1 September 2005 (2005-09-01), New York, pages 663 - 665, XP009070911, ISSN: 1548-7091, DOI: 10.1038/nmeth786 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002486" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>KOSMAN D, ET AL: "Multiplex detection of RNA expression in Drosophila embryos.", SCIENCE, AMERICAN ASSOCIATION FOR THE ADVANCEMENT OF SCIENCE, US, vol. 305, no. 5685, 6 August 2004 (2004-08-06), US                                                                                                                                                                                                      , pages 846, XP002394668, ISSN: 0036-8075, DOI: 10.1126/science.1099247 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002487" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CHAN POKMAN, TONY YUEN, FREDERIQUE RUF, JAVIER GONZALEZ-MAESO, STUART C. SEALFON: "Method for multiplex cellular detection of mRNAs using quantum dot fluorescent in situ hybridization", NUCLEIC ACIDS RESEARCH, OXFORD UNIVERSITY PRESS, GB, vol. 33, no. 18, 12 October 2005 (2005-10-12), GB                                                                                                                                                                                                      , pages e161 - e161, XP093185216, ISSN: 0305-1048, DOI: 10.1093/nar/gni162 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002488" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>LARSSON CHATARINA: "Single-molecule Detection in situ", DOCTORAL DISSERTATION, UPPSALA UNIVERSITY, 9 April 2009 (2009-04-09), XP093185219 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002489" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>GRUNDBERG IDA: " Genotyping and Mutation Detection In Situ", DOCTORAL DISSERTATION, UPPSALA UNIVERSITY, 6 May 2011 (2011-05-06), XP093185221 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002490" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>J. GORANSSON, GORANSSON, WAHLBY, ISAKSSON, HOWELL, JARVIUS, NILSSON: "A single molecule array for digital targeted molecular analyses", NUCLEIC ACIDS RESEARCH, INFORMATION RETRIEVAL LTD., vol. 37, no. 1, 1 January 2009 (2009-01-01), pages e7 - e7, XP055069029, ISSN: 03051048, DOI: 10.1093/nar/gkn921 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002491" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DUOSE ET AL.: "Multiplexed and Reiterative Fluorescence Labeling via DNA Circuitry", BIOCONJUGATE CHEM., vol. 21, 2010, pages 2327 - 2331, XP055097266, DOI: 10.1021/bc100348q </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002492" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SCHUBERT WALTER ET AL: "Analyzing proteome topology and function by automated multidimensional fluorescence microscopy.", NATURE BIOTECHNOLOGY, NATURE PUBLISHING GROUP US, NEW YORK, vol. 24, no. 10, 1 October 2006 (2006-10-01), New York, pages 1270 - 1278, XP002438060, ISSN: 1087-0156, DOI: 10.1038/nbt1250 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002493" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ZHEN ET AL.: "Poly-Fish: A Technique Of Repeated Hybridizations That Improved Cytogenetic Analysis of Fetal Cells in Maternal Blood", PRENAT. DIAGN., vol. 18, 1998, pages 1181 - 1185, XP055763455, DOI: 10.1002/(SICI)1097-0223(199811)18:11&lt;1181::AID-PD410&gt;3.0.CO;2-K </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002494" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>GUNDERSON ET AL.: "Decoding Randomly Ordered DNA Array s", GENOME RESEARCH, vol. 14, 2004, pages 870 - 877, XP002617593, DOI: 10.1101/gr.2255804 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002495" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>OLEJNIK ET AL.: "Photocleavable aminotag phosphoramidites for 5'-termini DNA/RNA labeling", NUCLEIC ACIDS RESEARCH, vol. 26, no. 15, 1998, XP002188068, DOI: 10.1093/nar/26.15.3572 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002496" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>HUANG ET AL.: "Super-Resolution Fluorescence Microscopy", ANNU. REV. VIOCHEM., vol. 78, 2009, pages 993 - 1016, XP055137847, DOI: 10.1146/annurev.biochem.77.061906.092014 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002497" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DONALDSON JULIE G.: "Immunofluorescence Staining", CURRENT PROTOCOLS IN CELL BIOLOGY, JOHN WILEY &amp; SONS INC, US, vol. 00, no. 1, 1 October 1998 (1998-10-01), US                                                                                                                                                                                                      , XP093128847, ISSN: 1934-2500, DOI: 10.1002/0471143030.cb0403s00 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002498" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SODERBERG, O. ; LEUCHOWIUS, K.J. ; GULLBERG, M. ; JARVIUS, M. ; WEIBRECHT, I. ; LARSSON, L.G. ; LANDEGREN, U.: "Characterizing proteins and their interactions in cells and tissues using the in situ proximity ligation assay", METHODS, ACADEMIC PRESS, NL, vol. 45, no. 3, 1 July 2008 (2008-07-01), NL                                                                                                                                                                                                      , pages 227 - 232, XP023437838, ISSN: 1046-2023, DOI: 10.1016/j.ymeth.2008.06.014 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002499" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SODERBERG ET AL.: "Direct observation of ondividual endogenous protein complexes in situ by proximity ligation", NATURE METHODS, vol. 3, no. 12, 2006, XP002522344, DOI: 10.1038/NMETH947 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002500" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SRIMUKH PRASAD VECCHAM; JOONHO LEE; YUEZHI MAO; PAUL R. HORN; MARTIN HEAD-GORDON: "A Non-Perturbative Pairwise-Additive Analysis of Charge Transfer Contributions to Intermolecular Interaction Energies", ARXIV.ORG, CORNELL UNIVERSITY LIBRARY, 201 OLIN LIBRARY CORNELL UNIVERSITY ITHACA, NY 14853, 10 November 2020 (2020-11-10), 201 Olin Library Cornell University Ithaca, NY 14853                                                                                                                                                    , XP081945619, DOI: 10.1039/D0CP05852A </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002501" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>MULLER ET AL.: "Towards unlimited colors for fluorescence in-situ hybdridization (FISH", CHROMOSOME RESEARCH, vol. 10, 2002, pages 223 - 232, XP055763435 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002502" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>BENEDETTA BOTTARI ; DANILO ERCOLINI ; MONICA GATTI ; ERASMO NEVIANI: "Application of FISH technology for microbiological analysis: current state and prospects", APPLIED MICROBIOLOGY AND BIOTECHNOLOGY, SPRINGER, BERLIN, DE, vol. 73, no. 3, 19 October 2006 (2006-10-19), Berlin, DE                                                                                                                                                                                              , pages 485 - 494, XP019458776, ISSN: 1432-0614, DOI: 10.1007/s00253-006-0615-z </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002503" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>HENEGARIU ET AL.: "Colour-changing karyotyping: an alternative to M-FISH/SKY", NATURE GENETICS, vol. 23, 1999, pages 263 - 264, XP093128859 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002504" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DUOSE ET AL.: "Configuring robust DNA strand displacement reactions for in situ molecular analyses", NUCLEIC ACID RESEARCH, vol. 40, no. 7, 2012, pages 3289 - 3298, XP002715512, DOI: 10.1093/nar/gkr1209 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002505" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>DUOSE ET AL.: "Configuring robust DNA strand displacement reactions for in situ molecular analyses", NUCLEIC ACID RESEARCH, vol. 40, 2012, XP002715512, DOI: 10.1093/nar/gkr1209 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002506" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>MAGNUS STOUGAARD, JAKOB S LOHMANN, MAGDALENA ZAJAC, STEPHEN HAMILTON-DUTOIT, JRN KOCH: "In situ detection of non-polyadenylated RNA molecules using Turtle Probes and target primed rolling circle PRINS", BMC BIOTECHNOLOGY, BIOMED CENTRAL, vol. 7, no. 1, 1 January 2007 (2007-01-01), pages 69, XP055095962, ISSN: 14726750, DOI: 10.1186/1472-6750-7-69 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002507" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>BAI ET AL.: "Photocleavage of a 2-nitrobenzyl linker bridging a fluorophore to the 5' end of DNA", PNAS, vol. 100, no. 2, 2003, pages 409 - 413, XP002413913, DOI: 10.1073/pnas.242729099 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002508" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>LAGUNAVICIUS ET AL.: "Novel Application of Phi29 DNA polymerase: RNA detection and analysis in vitro and in situ by target RNA-primed RCA", RNA, vol. 15, 2009, pages 765 - 771, XP055474383, DOI: 10.1261/rna.1279909 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002509" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ZHENG ET AL.: "Multiplexed detection of protein cancer markers on Au/Ag-barcoded nanorods using fluorescent-conjugated polymers", ANAL BIOANAL CHEM, vol. 397, 2010, pages 2261 - 2270, XP019839369 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002510" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>RICHARD M. LEVENSON; JAMES R. MANSFIELD: "Multispectral imaging in biology and medicine: Slices of life", CYTOMETRY A, WILEY-LISS, HOBOKEN, USA, no. 8, 12 September 2006 (2006-09-12), Hoboken, USA, pages 748 - 758, XP072329884, ISSN: 1552-4922, DOI: 10.1002/cyto.a.20319 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002511" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>SWEENEY, E. ; WARD, T.H. ; GRAY, N. ; WOMACK, C. ; JAYSON, G. ; HUGHES, A. ; DIVE, C. ; BYERS, R.: "Quantitative multiplexed quantum dot immunohistochemistry", BIOCHEMICAL AND BIOPHYSICAL RESEARCH COMMUNICATIONS, ELSEVIER, AMSTERDAM NL, vol. 374, no. 2, 19 September 2008 (2008-09-19), Amsterdam NL                                                                                                                                                                                            , pages 181 - 186, XP023521452, ISSN: 0006-291X, DOI: 10.1016/j.bbrc.2008.06.127 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002512" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>LEVSKY ET AL.: "Single- Cell Gene Expression Profiling", SCIENCE, vol. 297, 2002, XP002394669, DOI: 10.1126/science.1072241 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002513" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CAPODIECY ET AL.: "Gene expression profiling in single cells within tissue", NATURE METHODS, vol. 2, no. 9, 2005, XP009070911, DOI: 10.1038/nmeth786 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002514" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>KOSMAN ET AL.: "Multiplex Detection of RNA Expression in Drosophila Embryos", SCIENCE, vol. 305, 2004, XP002394668, DOI: 10.1126/science.1099247 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002515" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CHAN ET AL.: "Method for multiplex cellular detection of mRNAs using quantum dot fluorescent in situ hybridization", NUCLEIC ACIDS RESEARCH, vol. 33, no. 18, 2005, XP002418825 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002516" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>LARSSON CHATARINA: "Single-molecule Detection in situ", DOCTORAL DISSERTATION, UPPSALA UNIVERSITY, 9 April 2009 (2009-04-09), XP093185219 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002517" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>GRUNDBERG IDA: " Genotyping and Mutation Detection In Situ", DOCTORAL DISSERTATION, UPPSALA UNIVERSITY, 6 May 2011 (2011-05-06), XP093185221 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002518" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ARJUN RAJ, PATRICK VAN DEN BOGAARD, SCOTT A RIFKIN, ALEXANDER VAN OUDENAARDEN, SANJAY TYAGI: "Imaging individual mRNA molecules using multiple singly labeled probes", NATURE METHODS, NATURE PUB. GROUP, vol. 5, no. 10, 1 October 2008 (2008-10-01), pages 877 - 879, XP055041223, ISSN: 15487091, DOI: 10.1038/nmeth.1253 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002519" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>MOKROS ET AL.: "Identification of chromosomal fusion sites in Arabidopsis mutants using sequential bicolour BA C-FISH", GENOME, vol. 49, 2006, pages 1036 - 1042, XP055763443, DOI: 10.1139/g06-082 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002520" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ANONYMOUS: "In situ hybridization of mammalian cells (RNA and Oligonucleotide probes)", SINGER LAB PROTOCOL, 21 July 1998 (1998-07-21), XP093186007 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002521" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ANONYMOUS: "In situ hybridization of yeast cells (RNA and Oligonucleotide probes)", SINGER LAB PROTOCOL, 21 July 1998 (1998-07-21), XP093186028, Retrieved from the Internet &lt;URL:https://einsteinmed.edu/uploadedFiles/LABS/robert-singer-lab/yeast_fish.pdf&gt; </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002522" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>NGUYEN HA NAM, REIJO PERA RENEE A.: "Metaphase Spreads and Spectral Karyotyping of Human Embryonic Stem Cells", COLD SPRING HARBOR PROTOCOLS, vol. 3, no. 9, 1 September 2008 (2008-09-01), pages 1 - 6, XP093171171, DOI: 10.1101/pdb.prot5047 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002523" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>PLAYER ET AL.: "Single-copy Gene Detection Using Branched DNA (bDNA) In Situ Hybridization", THE JOURNAL OF HISTOCHEMISTRY &amp; CYTOCHEMISTRY, vol. 49, no. 5, 2001, pages 603 - 611, XP001041855 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002524" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>CHOI ET AL.: "Programmable in situ amplification for multiplexed imaging of mRNA", NATURE BIOTECHNOLOGY, vol. 28, no. 11, 2010, XP055554132, DOI: 10.1038/nbt.1692 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002525" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>WANG ET AL.: "RNAscope - A Novel in Situ RNA Analysis Platform for Formalin- Fixed, Paraffin-Embedded Tissues", THE JOURNAL OF MOLECULAR DIAGNOSTICS, vol. 14, no. 1, 2012, XP055191966, DOI: 10.1016/j.jmoldx.2011.08.002 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002526" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>N. SRINIVAS, T. E. OULDRIDGE, P. SULC, J. M. SCHAEFFER, B. YURKE, A. A. LOUIS, J. P. K. DOYE, E. WINFREE: "On the biophysics and kinetics of toehold-mediated DNA strand displacement", NUCLEIC ACIDS RESEARCH, OXFORD UNIVERSITY PRESS, GB, vol. 41, no. 22, 1 December 2013 (2013-12-01), GB                                                                                                                                                                                                      , pages 10641 - 10658, XP055341398, ISSN: 0305-1048, DOI: 10.1093/nar/gkt801 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002527" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>ISAKSSON MAGNUS: "Extracting Genomic Variations using Selector Technology", DOCTORAL DISSERTATION, UPPSALA UNIVERSITET, 1 January 2010 (2010-01-01), XP093194647, Retrieved from the Internet &lt;URL:https://uu.diva-portal.org/smash/get/diva2:305290/FULLTEXT01.pdf&gt; </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002528" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>J. GORANSSON, GORANSSON, WAHLBY, ISAKSSON, HOWELL, JARVIUS, NILSSON: "A single molecule array for digital targeted molecular analyses", NUCLEIC ACIDS RESEARCH, INFORMATION RETRIEVAL LTD., vol. 37, no. 1, 1 January 2009 (2009-01-01), pages e7 - e7, XP055069029, ISSN: 03051048, DOI: 10.1093/nar/gkn921 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4002529" cited-phase="opposition" office="EP">
+                                    <reg:nplcit>
+        <reg:text>GRUNDBERG IDA: " Genotyping and Mutation Detection In Situ", DOCTORAL DISSERTATION, UPPSALA UNIVERSITY, 6 May 2011 (2011-05-06), XP093185221 </reg:text>
+                                    </reg:nplcit>
+                                    <reg:category></reg:category>
+                                </reg:citation>
+                            </reg:references-cited>
+                            <reg:related-documents>
+                                <reg:division>
+                                    <reg:relation>
+        <reg:parent-doc>
+            <reg:document-id document-id-type="application number">
+                <reg:country>EP</reg:country>
+                <reg:doc-number>20120860433</reg:doc-number>
+                <reg:kind>D</reg:kind>
+            </reg:document-id>
+            <reg:document-id document-id-type="publication number">
+                <reg:country>EP</reg:country>
+                <reg:doc-number>2794928</reg:doc-number>
+                <reg:kind>D</reg:kind>
+            </reg:document-id>
+        </reg:parent-doc>
+        <reg:child-doc>
+            <reg:document-id>
+                <reg:country></reg:country>
+                <reg:doc-number></reg:doc-number>
+            </reg:document-id>
+        </reg:child-doc>
+                                    </reg:relation>
+                                </reg:division>
+                                <reg:division>
+                                    <reg:relation>
+        <reg:parent-doc>
+            <reg:document-id document-id-type="application number">
+                <reg:country>EP</reg:country>
+                <reg:doc-number>20180173059</reg:doc-number>
+                <reg:kind>D</reg:kind>
+            </reg:document-id>
+            <reg:document-id document-id-type="publication number">
+                <reg:country>EP</reg:country>
+                <reg:doc-number>3425063</reg:doc-number>
+                <reg:kind>D</reg:kind>
+            </reg:document-id>
+        </reg:parent-doc>
+        <reg:child-doc>
+            <reg:document-id>
+                <reg:country></reg:country>
+                <reg:doc-number></reg:doc-number>
+            </reg:document-id>
+        </reg:child-doc>
+                                    </reg:relation>
+                                </reg:division>
+                            </reg:related-documents>
+                            <reg:office-specific-bib-data file="" id="bib22170334P" lang="en" office="EPO" office-dtd="1.3.3" status="">
+                                <reg:ep-appeal-data appeal-phase="opposition" appeal-num="T1006/25-3308">
+                                    <reg:date>20250730</reg:date>
+                                    <reg:ep-appeal-result date="20250818">WITHDRAWAL OF APPEAL OF THE PATENT PROPRIETOR</reg:ep-appeal-result>
+                                    <reg:ep-date-payment-appeal-fee>
+        <reg:date>20250730</reg:date>
+                                    </reg:ep-date-payment-appeal-fee>
+                                </reg:ep-appeal-data>
+                            </reg:office-specific-bib-data>
+                            <reg:opposition-data change-date="20250516" change-gazette-num="2025/25">
+                                <reg:opponent sequence="01">
+                                    <reg:addressbook cdsid="0102087019">
+        <reg:name>Bruker Spatial Biology, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>251 Little Falls Drive</reg:address-1>
+            <reg:address-2>Wilmington, DE 19808</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101612690">
+            <reg:name>Bird &amp; Bird LLP</reg:name>
+            <reg:address>
+                <reg:address-1>Maximiliansplatz 22</reg:address-1>
+                <reg:address-2>80333 München</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="WITHDRAWN">
+        <reg:date>20250514</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20230718</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                                <reg:opponent sequence="02">
+                                    <reg:addressbook cdsid="0101293389">
+        <reg:name>König Szynka Tilmann von Renesse</reg:name>
+        <reg:address>
+            <reg:address-1>Patentanwälte Partnerschaft mbB</reg:address-1>
+            <reg:address-2>Mönchenwerther Strasse 11</reg:address-2>
+            <reg:address-3>40545 Düsseldorf</reg:address-3>
+            <reg:country>DE</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101952832">
+            <reg:name>König Szynka Tilmann von Renesse Patentanwälte Partnerschaft mbB Düsseldorf</reg:name>
+            <reg:address>
+                <reg:address-1>Mönchenwerther Straße 11</reg:address-1>
+                <reg:address-2>40545 Düsseldorf</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20240308</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20240307</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                                <reg:opponent sequence="03">
+                                    <reg:addressbook cdsid="0102036778">
+        <reg:name>Vizgen, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>61 Moulton Street</reg:address-1>
+            <reg:address-2>Cambridge, MA 02138</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0102014424">
+            <reg:name>Kommer, Jérôme, et al</reg:name>
+            <reg:address>
+                <reg:address-1>Quinn Emanuel Urquhart &amp; Sullivan, LLP</reg:address-1>
+                <reg:address-2>Mollstraße 42</reg:address-2>
+                <reg:address-3>68165 Mannheim</reg:address-3>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="WITHDRAWN">
+        <reg:date>20250212</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20240307</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                            </reg:opposition-data>
+                            <reg:opposition-data change-date="20250411" change-gazette-num="2025/20">
+                                <reg:opponent sequence="01">
+                                    <reg:addressbook cdsid="0102087019">
+        <reg:name>Bruker Spatial Biology, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>251 Little Falls Drive</reg:address-1>
+            <reg:address-2>Wilmington, DE 19808</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101612690">
+            <reg:name>Bird &amp; Bird LLP</reg:name>
+            <reg:address>
+                <reg:address-1>Maximiliansplatz 22</reg:address-1>
+                <reg:address-2>80333 München</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20230719</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20230718</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                                <reg:opponent sequence="02">
+                                    <reg:addressbook cdsid="0101293389">
+        <reg:name>König Szynka Tilmann von Renesse</reg:name>
+        <reg:address>
+            <reg:address-1>Patentanwälte Partnerschaft mbB</reg:address-1>
+            <reg:address-2>Mönchenwerther Strasse 11</reg:address-2>
+            <reg:address-3>40545 Düsseldorf</reg:address-3>
+            <reg:country>DE</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101952832">
+            <reg:name>König Szynka Tilmann von Renesse Patentanwälte Partnerschaft mbB Düsseldorf</reg:name>
+            <reg:address>
+                <reg:address-1>Mönchenwerther Straße 11</reg:address-1>
+                <reg:address-2>40545 Düsseldorf</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20240308</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20240307</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                                <reg:opponent sequence="03">
+                                    <reg:addressbook cdsid="0102036778">
+        <reg:name>Vizgen, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>61 Moulton Street</reg:address-1>
+            <reg:address-2>Cambridge, MA 02138</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0102014424">
+            <reg:name>Kommer, Jérôme, et al</reg:name>
+            <reg:address>
+                <reg:address-1>Quinn Emanuel Urquhart &amp; Sullivan, LLP</reg:address-1>
+                <reg:address-2>Mollstraße 42</reg:address-2>
+                <reg:address-3>68165 Mannheim</reg:address-3>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="WITHDRAWN">
+        <reg:date>20250212</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20240307</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                            </reg:opposition-data>
+                            <reg:opposition-data change-date="20250214" change-gazette-num="2025/12">
+                                <reg:opponent sequence="01">
+                                    <reg:addressbook cdsid="0102005059">
+        <reg:name>NanoString Technologies, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>530 Fairview Ave N</reg:address-1>
+            <reg:address-2>Seattle, WA 98109</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101612690">
+            <reg:name>Bird &amp; Bird LLP</reg:name>
+            <reg:address>
+                <reg:address-1>Maximiliansplatz 22</reg:address-1>
+                <reg:address-2>80333 München</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20230719</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20230718</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                                <reg:opponent sequence="02">
+                                    <reg:addressbook cdsid="0101293389">
+        <reg:name>König Szynka Tilmann von Renesse</reg:name>
+        <reg:address>
+            <reg:address-1>Patentanwälte Partnerschaft mbB</reg:address-1>
+            <reg:address-2>Mönchenwerther Strasse 11</reg:address-2>
+            <reg:address-3>40545 Düsseldorf</reg:address-3>
+            <reg:country>DE</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101952832">
+            <reg:name>König Szynka Tilmann von Renesse Patentanwälte Partnerschaft mbB Düsseldorf</reg:name>
+            <reg:address>
+                <reg:address-1>Mönchenwerther Straße 11</reg:address-1>
+                <reg:address-2>40545 Düsseldorf</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20240308</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20240307</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                                <reg:opponent sequence="03">
+                                    <reg:addressbook cdsid="0102036778">
+        <reg:name>Vizgen, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>61 Moulton Street</reg:address-1>
+            <reg:address-2>Cambridge, MA 02138</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0102014424">
+            <reg:name>Kommer, Jérôme, et al</reg:name>
+            <reg:address>
+                <reg:address-1>Quinn Emanuel Urquhart &amp; Sullivan, LLP</reg:address-1>
+                <reg:address-2>Mollstraße 42</reg:address-2>
+                <reg:address-3>68165 Mannheim</reg:address-3>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="WITHDRAWN">
+        <reg:date>20250212</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20240307</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                            </reg:opposition-data>
+                            <reg:opposition-data change-date="20240315" change-gazette-num="2024/16">
+                                <reg:opponent sequence="01">
+                                    <reg:addressbook cdsid="0102005059">
+        <reg:name>NanoString Technologies, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>530 Fairview Ave N</reg:address-1>
+            <reg:address-2>Seattle, WA 98109</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101612690">
+            <reg:name>Bird &amp; Bird LLP</reg:name>
+            <reg:address>
+                <reg:address-1>Maximiliansplatz 22</reg:address-1>
+                <reg:address-2>80333 München</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20230719</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20230718</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                                <reg:opponent sequence="02">
+                                    <reg:addressbook cdsid="0101293389">
+        <reg:name>König Szynka Tilmann von Renesse</reg:name>
+        <reg:address>
+            <reg:address-1>Patentanwälte Partnerschaft mbB</reg:address-1>
+            <reg:address-2>Mönchenwerther Strasse 11</reg:address-2>
+            <reg:address-3>40545 Düsseldorf</reg:address-3>
+            <reg:country>DE</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101952832">
+            <reg:name>König Szynka Tilmann von Renesse Patentanwälte Partnerschaft mbB Düsseldorf</reg:name>
+            <reg:address>
+                <reg:address-1>Mönchenwerther Straße 11</reg:address-1>
+                <reg:address-2>40545 Düsseldorf</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20240308</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20240307</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                                <reg:opponent sequence="03">
+                                    <reg:addressbook cdsid="0102036778">
+        <reg:name>Vizgen, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>61 Moulton Street</reg:address-1>
+            <reg:address-2>Cambridge, MA 02138</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0102014424">
+            <reg:name>Kommer, Jérôme, et al</reg:name>
+            <reg:address>
+                <reg:address-1>Quinn Emanuel Urquhart &amp; Sullivan, LLP</reg:address-1>
+                <reg:address-2>Mollstraße 42</reg:address-2>
+                <reg:address-3>68165 Mannheim</reg:address-3>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20240311</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20240307</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                            </reg:opposition-data>
+                            <reg:opposition-data change-date="20230721" change-gazette-num="2023/34">
+                                <reg:opponent sequence="01">
+                                    <reg:addressbook cdsid="0102005059">
+        <reg:name>NanoString Technologies, Inc.</reg:name>
+        <reg:address>
+            <reg:address-1>530 Fairview Ave N</reg:address-1>
+            <reg:address-2>Seattle, WA 98109</reg:address-2>
+            <reg:country>US</reg:country>
+        </reg:address>
+                                    </reg:addressbook>
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101612690">
+            <reg:name>Bird &amp; Bird LLP</reg:name>
+            <reg:address>
+                <reg:address-1>Maximiliansplatz 22</reg:address-1>
+                <reg:address-2>80333 München</reg:address-2>
+                <reg:country>DE</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                    <reg:opponent-status status="ADMISSIBLE">
+        <reg:date>20230719</reg:date>
+                                    </reg:opponent-status>
+                                    <reg:date-opposition-filed>
+        <reg:date>20230718</reg:date>
+                                    </reg:date-opposition-filed>
+                                </reg:opponent>
+                            </reg:opposition-data>
+                            <reg:search-reports-information>
+                                <reg:search-report-information office="EP" search-type="national" declaration-of-no-search="not-determined" change-gazette-num="2022/52">
+                                    <reg:search-report-publication>
+        <reg:document-id lang="en">
+            <reg:country>EP</reg:country>
+            <reg:doc-number>4108782</reg:doc-number>
+            <reg:kind>A1</reg:kind>
+            <reg:date>20221228</reg:date>
+        </reg:document-id>
+                                    </reg:search-report-publication>
+                                </reg:search-report-information>
+                                <reg:search-report-information office="EP" search-type="national-supplementary" declaration-of-no-search="not-determined">
+                                    <reg:date-search-report-mailed>
+        <reg:date>20221123</reg:date>
+                                    </reg:date-search-report-mailed>
+                                </reg:search-report-information>
+                            </reg:search-reports-information>
+                        </reg:bibliographic-data>
+                        <reg:unitary-patent>
+                            <reg:unitary-patent-statuses>
+                                <reg:unitary-patent-status change-date="20230607" status-code="9">Unitary effect registered</reg:unitary-patent-status>
+                                <reg:unitary-patent-status change-date="20230606" status-code="6">Request for unitary effect filed</reg:unitary-patent-status>
+                            </reg:unitary-patent-statuses>
+                            <reg:parties>
+                                <reg:applicants transfer-of-rights="no" change-date="20230607" change-gazette-num="2023/28">
+                                    <reg:applicant app-type="proprietor" designation="all" sequence="1">
+        <reg:addressbook cdsid="0101646268">
+            <reg:name>President and Fellows of Harvard College</reg:name>
+            <reg:address>
+                <reg:address-1>17 Quincy Street</reg:address-1>
+                <reg:address-2>Cambridge, MA 02138</reg:address-2>
+                <reg:country>US</reg:country>
+            </reg:address>
+        </reg:addressbook>
+        <reg:nationality>
+            <reg:country></reg:country>
+        </reg:nationality>
+        <reg:residence>
+            <reg:country></reg:country>
+        </reg:residence>
+                                    </reg:applicant>
+                                </reg:applicants>
+                                <reg:agents change-date="20230607" change-gazette-num="2023/28">
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0101927740">
+            <reg:name>Keltie LLP</reg:name>
+            <reg:address>
+                <reg:address-1>No. 1 London Bridge</reg:address-1>
+                <reg:address-2>London SE1 9BA</reg:address-2>
+                <reg:country>GB</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                </reg:agents>
+                            </reg:parties>
+                            <reg:places-of-business/>
+                            <reg:procedural-data>
+                                <reg:procedural-step id="STEP_UP_UDFI_457712" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UDFI</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">The request for unitary effects</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_OF_REQUEST">
+        <reg:date>20230607</reg:date>
+                                    </reg:procedural-step-date>
+                                    <reg:gazette-reference>
+        <reg:gazette-num>2023/28</reg:gazette-num>
+        <reg:date></reg:date>
+                                    </reg:gazette-reference>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UDEC_457713" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UDEC</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Date and purport of the decision on the registration of unitary effect</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_OF_DECISION">
+        <reg:date>20230612</reg:date>
+                                    </reg:procedural-step-date>
+                                    <reg:procedural-step-result>Positive</reg:procedural-step-result>
+                                    <reg:gazette-reference>
+        <reg:gazette-num>2023/28</reg:gazette-num>
+        <reg:date></reg:date>
+                                    </reg:gazette-reference>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UREG_457714" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UREG</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Date of registration of unitary effect</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="UNITARY_STATES">AT, BE, BG, DE, DK, EE, FI, FR, IT, LT, LU, LV, MT, NL, PT, SE, SI</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_REGISTRATION">
+        <reg:date>20230612</reg:date>
+                                    </reg:procedural-step-date>
+                                    <reg:procedural-step-date step-date-type="DATE_EFFECTIVE">
+        <reg:date>20230607</reg:date>
+                                    </reg:procedural-step-date>
+                                    <reg:gazette-reference>
+        <reg:gazette-num>2023/28</reg:gazette-num>
+        <reg:date></reg:date>
+                                    </reg:gazette-reference>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_RFEE_457715" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>RFEE</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Renewal fee payment</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="YEAR">12</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_OF_PAYMENT">
+        <reg:date>20231227</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_RFEE_457716" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>RFEE</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Renewal fee payment</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="YEAR">13</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_OF_PAYMENT">
+        <reg:date>20241227</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_RFEE_457717" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>RFEE</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">Renewal fee payment</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="YEAR">14</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_OF_PAYMENT">
+        <reg:date>20251229</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCA_457723" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCA</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_CTRY"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CASE_NUMBER_ACTION">ACT_460565/2023</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_ACTION">1</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_ID"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ACTION_TYPE">I</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_ACTION">
+        <reg:date>20230601</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCD_457724" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCD</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Decision on Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CODE_DECISION">PROCEEDING_TERMINATED</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_DECISION"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_DECISION">1</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_UPCA_ID_ACTION">1</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_DECISION">
+        <reg:date>20250221</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCA_457725" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCA</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_CTRY"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CASE_NUMBER_ACTION">ACT_568963/2023</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_ACTION">2</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_ID"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ACTION_TYPE">I</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_ACTION">
+        <reg:date>20230831</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCD_457726" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCD</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Decision on Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CODE_DECISION">PROCEEDING_TERMINATED</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_DECISION"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_DECISION">1</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_UPCA_ID_ACTION">2</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_DECISION">
+        <reg:date>20250716</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCA_457727" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCA</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_CTRY"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CASE_NUMBER_ACTION">CC_589258/2023</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_ACTION">3</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_ID"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ACTION_TYPE">C</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_ACTION">
+        <reg:date>20231129</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCA_457728" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCA</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_CTRY"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CASE_NUMBER_ACTION">CC_593069/2023</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_ACTION">4</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_ID"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ACTION_TYPE">C</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_ACTION">
+        <reg:date>20231211</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCD_457729" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCD</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Decision on Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CODE_DECISION">PROCEEDING_TERMINATED</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_DECISION"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_DECISION">1</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_UPCA_ID_ACTION">4</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_DECISION">
+        <reg:date>20250716</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCA_457730" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCA</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_CTRY"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CASE_NUMBER_ACTION">CC_593060/2023</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_ACTION">5</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_ID"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ACTION_TYPE">C</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_ACTION">
+        <reg:date>20231211</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCD_457731" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCD</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Decision on Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CODE_DECISION">PROCEEDING_TERMINATED</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_DECISION"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_DECISION">1</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_UPCA_ID_ACTION">5</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_DECISION">
+        <reg:date>20250716</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCA_457732" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCA</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_CTRY"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CASE_NUMBER_ACTION">CC_592964/2023</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_ACTION">6</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="SPC_ID"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ACTION_TYPE">C</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_ACTION">
+        <reg:date>20231211</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                                <reg:procedural-step id="STEP_UP_UPCD_457733" procedure-step-phase="unitary-protection">
+                                    <reg:procedural-step-code>UPCD</reg:procedural-step-code>
+                                    <reg:procedural-step-text step-text-type="STEP_DESCRIPTION">UPC Decision on Action</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="CODE_DECISION">PROCEEDING_TERMINATED</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_DECISION"></reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="ID_DECISION">1</reg:procedural-step-text>
+                                    <reg:procedural-step-text step-text-type="REF_UPCA_ID_ACTION">6</reg:procedural-step-text>
+                                    <reg:procedural-step-date step-date-type="DATE_FILING_DECISION">
+        <reg:date>20250716</reg:date>
+                                    </reg:procedural-step-date>
+                                </reg:procedural-step>
+                            </reg:procedural-data>
+                            <reg:events-data>
+                                <reg:dossier-event id="EVT_UP_457718" event-type="new">
+                                    <reg:event-date>
+        <reg:date>20260101</reg:date>
+                                    </reg:event-date>
+                                    <reg:event-code>0009703RFEE22</reg:event-code>
+                                    <reg:event-text event-text-type="DESCRIPTION">New entry: Payment of renewal fee</reg:event-text>
+                                </reg:dossier-event>
+                            </reg:events-data>
+                            <reg:events-data>
+                                <reg:dossier-event id="EVT_UP_457719" event-type="new">
+                                    <reg:event-date>
+        <reg:date>20250103</reg:date>
+                                    </reg:event-date>
+                                    <reg:event-code>0009703RFEE22</reg:event-code>
+                                    <reg:event-text event-text-type="DESCRIPTION">New entry: Payment of renewal fee</reg:event-text>
+                                </reg:dossier-event>
+                            </reg:events-data>
+                            <reg:events-data>
+                                <reg:dossier-event id="EVT_UP_457720" event-type="new">
+                                    <reg:event-date>
+        <reg:date>20231229</reg:date>
+                                    </reg:event-date>
+                                    <reg:event-code>0009703RFEE22</reg:event-code>
+                                    <reg:event-text event-text-type="DESCRIPTION">New entry: Payment of renewal fee</reg:event-text>
+                                </reg:dossier-event>
+                            </reg:events-data>
+                            <reg:events-data>
+                                <reg:dossier-event id="EVT_UP_457721" event-type="new">
+                                    <reg:event-date>
+        <reg:date>20230609</reg:date>
+                                    </reg:event-date>
+                                    <reg:event-code>0009700UREQ01</reg:event-code>
+                                    <reg:event-text event-text-type="DESCRIPTION">Filing of request for unitary effect</reg:event-text>
+                                    <reg:gazette-reference>
+        <reg:gazette-num>2023/28</reg:gazette-num>
+        <reg:date>20230712</reg:date>
+                                    </reg:gazette-reference>
+                                </reg:dossier-event>
+                            </reg:events-data>
+                            <reg:events-data>
+                                <reg:dossier-event id="EVT_UP_457722" event-type="new">
+                                    <reg:event-date>
+        <reg:date>20230609</reg:date>
+                                    </reg:event-date>
+                                    <reg:event-code>0009701UREQ02</reg:event-code>
+                                    <reg:event-text event-text-type="DESCRIPTION">Decision on the request for unitary effect</reg:event-text>
+                                    <reg:gazette-reference>
+        <reg:gazette-num>2023/28</reg:gazette-num>
+        <reg:date>20230712</reg:date>
+                                    </reg:gazette-reference>
+                                </reg:dossier-event>
+                            </reg:events-data>
+                        </reg:unitary-patent>
+                    </reg:register-document>
+                </reg:register-documents>
+            </ops:register-search>
+        </ops:world-patent-data>
+  recorded_at: 2026-10-21T21:15:27.368Z
+- request:
+    method: POST
+    uri: https://ops.epo.org/3.2/auth/accesstoken
+    headers:
+      accept:
+      - application/xml
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: grant_type=client_credentials
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      content-type:
+      - application/json
+      date:
+      - Wed, 21 Oct 2026 21:15:22 GMT
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      via:
+      - 1.1 google
+      x-request-id:
+      - 42c3d605-2db1-4dfb-bc14-3c049e223f6e
+    body:
+      type: json
+      content:
+        refresh_token_expires_in: "[FILTERED]"
+        api_product_list: "[FILTERED]"
+        api_product_list_json: "[FILTERED]"
+        organization_name: p-epo-apigeex-prj-a7e0
+        developer.email: parker.hancock@protonmail.com
+        token_type: Bearer
+        issued_at: "1792617323009"
+        client_id: "[FILTERED]"
+        access_token: "[FILTERED]"
+        application_name: dc81cc3e-9e21-4d76-8f39-7b6c8d227737
+        scope: core
+        expires_in: "1199"
+        refresh_count: "0"
+        status: approved
+  recorded_at: 2026-10-21T21:15:23.083Z

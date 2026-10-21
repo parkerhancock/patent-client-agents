@@ -1,0 +1,305 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://ops.epo.org/3.2/rest-services/family/publication/docdb/EP1000000A1
+    headers:
+      accept:
+      - application/xml
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000, h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      cache-control:
+      - no-cache
+      content-type:
+      - application/xml;charset=utf-8
+      date:
+      - Wed, 21 Oct 2026 21:15:11 GMT
+      etag:
+      - "\"03145b7ccb2cd35f42b128e8d182b1054\""
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      vary:
+      - Accept
+      via:
+      - 1.1 google, 1.1 google
+      x-accel-buffering:
+      - "no"
+      x-api:
+      - ops-v3.2
+      x-elapsed-time:
+      - "1"
+      x-individualquotaperhour-used:
+      - "103286"
+      x-registeredquotaperweek-used:
+      - "9479326"
+      x-request-id:
+      - ae4b4a74-ddf1-4f56-97b5-e55392074751
+      x-throttling-control:
+      - >-
+        busy (images=green:100, inpadoc=green:45, other=green:1000,
+        retrieval=green:100, search=green:15)
+    body:
+      type: text
+      content: |-
+        <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="../../../../style/family.xsl"?>
+        <ops:world-patent-data xmlns="http://www.epo.org/exchange" xmlns:ops="http://ops.epo.org" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <ops:patent-family legal="false" total-result-count="6">
+                <ops:publication-reference>
+                    <document-id document-id-type="docdb">
+                        <country>EP</country>
+                        <doc-number>1000000</doc-number>
+                        <kind>A1</kind>
+                    </document-id>
+                </ops:publication-reference>
+                <ops:family-member family-id="19768124">
+                    <publication-reference>
+                        <document-id document-id-type="docdb">
+                            <country>EP</country>
+                            <doc-number>1000000</doc-number>
+                            <kind>A1</kind>
+                            <date>20000517</date>
+                        </document-id>
+                        <document-id document-id-type="epodoc">
+                            <doc-number>EP1000000</doc-number>
+                            <date>20000517</date>
+                        </document-id>
+                    </publication-reference>
+                    <application-reference doc-id="17397285" is-representative="YES">
+                        <document-id document-id-type="docdb">
+                            <country>EP</country>
+                            <doc-number>99203729</doc-number>
+                            <kind>A</kind>
+                            <date>19991108</date>
+                        </document-id>
+                    </application-reference>
+                    <priority-claim sequence="1" kind="national">
+                        <document-id document-id-type="docdb">
+                            <country>NL</country>
+                            <doc-number>1010536</doc-number>
+                            <kind>A</kind>
+                            <date>19981112</date>
+                        </document-id>
+                        <priority-active-indicator>YES</priority-active-indicator>
+                    </priority-claim>
+                </ops:family-member>
+                <ops:family-member family-id="19768124">
+                    <publication-reference>
+                        <document-id document-id-type="docdb">
+                            <country>EP</country>
+                            <doc-number>1000000</doc-number>
+                            <kind>B1</kind>
+                            <date>20030212</date>
+                        </document-id>
+                        <document-id document-id-type="epodoc">
+                            <doc-number>EP1000000</doc-number>
+                            <date>20030212</date>
+                        </document-id>
+                    </publication-reference>
+                    <application-reference doc-id="17397285" is-representative="YES">
+                        <document-id document-id-type="docdb">
+                            <country>EP</country>
+                            <doc-number>99203729</doc-number>
+                            <kind>A</kind>
+                            <date>19991108</date>
+                        </document-id>
+                    </application-reference>
+                    <priority-claim sequence="1" kind="national">
+                        <document-id document-id-type="docdb">
+                            <country>NL</country>
+                            <doc-number>1010536</doc-number>
+                            <kind>A</kind>
+                            <date>19981112</date>
+                        </document-id>
+                        <priority-active-indicator>YES</priority-active-indicator>
+                    </priority-claim>
+                </ops:family-member>
+                <ops:family-member family-id="19768124">
+                    <publication-reference>
+                        <document-id document-id-type="docdb">
+                            <country>AT</country>
+                            <doc-number>E232441</doc-number>
+                            <kind>T1</kind>
+                            <date>20030215</date>
+                        </document-id>
+                        <document-id document-id-type="epodoc">
+                            <doc-number>ATE232441T</doc-number>
+                            <date>20030215</date>
+                        </document-id>
+                    </publication-reference>
+                    <application-reference doc-id="1370469">
+                        <document-id document-id-type="docdb">
+                            <country>AT</country>
+                            <doc-number>99203729</doc-number>
+                            <kind>T</kind>
+                            <date>19991108</date>
+                        </document-id>
+                    </application-reference>
+                    <priority-claim sequence="1" kind="national">
+                        <document-id document-id-type="docdb">
+                            <country>NL</country>
+                            <doc-number>1010536</doc-number>
+                            <kind>A</kind>
+                            <date>19981112</date>
+                        </document-id>
+                        <priority-active-indicator>YES</priority-active-indicator>
+                    </priority-claim>
+                </ops:family-member>
+                <ops:family-member family-id="19768124">
+                    <publication-reference>
+                        <document-id document-id-type="docdb">
+                            <country>DE</country>
+                            <doc-number>69905327</doc-number>
+                            <kind>D1</kind>
+                            <date>20030320</date>
+                        </document-id>
+                        <document-id document-id-type="epodoc">
+                            <doc-number>DE69905327D1</doc-number>
+                            <date>20030320</date>
+                        </document-id>
+                    </publication-reference>
+                    <application-reference doc-id="14768233">
+                        <document-id document-id-type="docdb">
+                            <country>DE</country>
+                            <doc-number>69905327</doc-number>
+                            <kind>T</kind>
+                            <date>19991108</date>
+                        </document-id>
+                    </application-reference>
+                    <priority-claim sequence="1" kind="national">
+                        <document-id document-id-type="docdb">
+                            <country>NL</country>
+                            <doc-number>1010536</doc-number>
+                            <kind>A</kind>
+                            <date>19981112</date>
+                        </document-id>
+                        <priority-active-indicator>YES</priority-active-indicator>
+                    </priority-claim>
+                </ops:family-member>
+                <ops:family-member family-id="19768124">
+                    <publication-reference>
+                        <document-id document-id-type="docdb">
+                            <country>NL</country>
+                            <doc-number>1010536</doc-number>
+                            <kind>C2</kind>
+                            <date>20000515</date>
+                        </document-id>
+                        <document-id document-id-type="epodoc">
+                            <doc-number>NL1010536C</doc-number>
+                            <date>20000515</date>
+                        </document-id>
+                    </publication-reference>
+                    <application-reference doc-id="41488391">
+                        <document-id document-id-type="docdb">
+                            <country>NL</country>
+                            <doc-number>1010536</doc-number>
+                            <kind>A</kind>
+                            <date>19981112</date>
+                        </document-id>
+                    </application-reference>
+                    <priority-claim sequence="1" kind="national">
+                        <document-id document-id-type="docdb">
+                            <country>NL</country>
+                            <doc-number>1010536</doc-number>
+                            <kind>A</kind>
+                            <date>19981112</date>
+                        </document-id>
+                        <priority-active-indicator>YES</priority-active-indicator>
+                    </priority-claim>
+                </ops:family-member>
+                <ops:family-member family-id="19768124">
+                    <publication-reference>
+                        <document-id document-id-type="docdb">
+                            <country>US</country>
+                            <doc-number>6093011</doc-number>
+                            <kind>A</kind>
+                            <date>20000725</date>
+                        </document-id>
+                        <document-id document-id-type="epodoc">
+                            <doc-number>US6093011</doc-number>
+                            <date>20000725</date>
+                        </document-id>
+                    </publication-reference>
+                    <application-reference doc-id="48654472">
+                        <document-id document-id-type="docdb">
+                            <country>US</country>
+                            <doc-number>20685698</doc-number>
+                            <kind>A</kind>
+                            <date>19981208</date>
+                        </document-id>
+                    </application-reference>
+                    <priority-claim sequence="1" kind="national">
+                        <document-id document-id-type="docdb">
+                            <country>NL</country>
+                            <doc-number>1010536</doc-number>
+                            <kind>A</kind>
+                            <date>19981112</date>
+                        </document-id>
+                        <priority-active-indicator>YES</priority-active-indicator>
+                    </priority-claim>
+                </ops:family-member>
+            </ops:patent-family>
+        </ops:world-patent-data>
+  recorded_at: 2026-10-21T21:15:12.168Z
+- request:
+    method: POST
+    uri: https://ops.epo.org/3.2/auth/accesstoken
+    headers:
+      accept:
+      - application/xml
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: grant_type=client_credentials
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000
+      content-type:
+      - application/json
+      date:
+      - Wed, 21 Oct 2026 21:15:11 GMT
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      via:
+      - 1.1 google
+      x-request-id:
+      - 9a1638c8-86c7-4fd8-85e4-347dbb9b8adc
+    body:
+      type: json
+      content:
+        refresh_token_expires_in: "[FILTERED]"
+        api_product_list: "[FILTERED]"
+        api_product_list_json: "[FILTERED]"
+        organization_name: p-epo-apigeex-prj-a7e0
+        developer.email: parker.hancock@protonmail.com
+        token_type: Bearer
+        issued_at: "1792617311883"
+        client_id: "[FILTERED]"
+        access_token: "[FILTERED]"
+        application_name: dc81cc3e-9e21-4d76-8f39-7b6c8d227737
+        scope: core
+        expires_in: "1199"
+        refresh_count: "0"
+        status: approved
+  recorded_at: 2026-10-21T21:15:11.959Z

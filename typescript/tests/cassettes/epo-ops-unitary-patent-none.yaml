@@ -1,0 +1,859 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://ops.epo.org/3.2/rest-services/register/publication/epodoc/EP1000000/upp
+    headers:
+      accept:
+      - application/xml
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - >-
+        h3=":443"; ma=2592000,h3-29=":443"; ma=2592000, h3=":443";
+        ma=2592000,h3-29=":443"; ma=2592000
+      cache-control:
+      - no-cache
+      content-type:
+      - application/xml;charset=utf-8
+      date:
+      - Wed, 21 Oct 2026 21:15:28 GMT
+      etag:
+      - "\"052c41ec01adf2716231316b0a396710b\""
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      vary:
+      - Accept
+      via:
+      - 1.1 google, 1.1 google
+      x-accel-buffering:
+      - "no"
+      x-api:
+      - ops-v3.2
+      x-elapsed-time:
+      - "209"
+      x-individualquotaperhour-used:
+      - "446994"
+      x-registeredquotaperweek-used:
+      - "9823034"
+      x-request-id:
+      - 0aee82c5-1269-4d5c-8fcf-44d5a4b52158
+      x-throttling-control:
+      - >-
+        overloaded (images=green:50, inpadoc=green:30, other=green:1000,
+        retrieval=green:50, search=green:5)
+    body:
+      type: text
+      content: |
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?><?xml-stylesheet type='text/xsl' href='../../../../../style/rplus.xsl' ?>
+        <ops:world-patent-data xmlns:ops="http://ops.epo.org" xmlns:reg="http://www.epo.org/register" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cpc="http://www.epo.org/cpcexport" xmlns:cpcdef="http://www.epo.org/cpcdefinition">
+            <ops:register-search total-result-count="1">
+                <ops:query syntax="CQL">publication=EP1000000</ops:query>
+                <ops:range begin="1" end="1"/>
+                <reg:register-documents dtd-version="1.3.3" produced-by="RO">
+                    <reg:register-document date-produced="20261021" dtd-version="1.3.3" lang="en" produced-by="RO" status="No opposition filed within time limit">
+                        <reg:ep-patent-statuses>
+                            <reg:ep-patent-status change-date="" status-code="7">No opposition filed within time limit</reg:ep-patent-status>
+                        </reg:ep-patent-statuses>
+                        <reg:bibliographic-data country="EP" id="EP99203729P" lang="en" status="No opposition filed within time limit">
+                            <reg:publication-reference change-gazette-num="2000/20">
+                                <reg:document-id lang="en">
+                                    <reg:country>EP</reg:country>
+                                    <reg:doc-number>1000000</reg:doc-number>
+                                    <reg:kind>A1</reg:kind>
+                                    <reg:date>20000517</reg:date>
+                                </reg:document-id>
+                            </reg:publication-reference>
+                            <reg:publication-reference change-gazette-num="2003/07">
+                                <reg:document-id lang="en">
+                                    <reg:country>EP</reg:country>
+                                    <reg:doc-number>1000000</reg:doc-number>
+                                    <reg:kind>B1</reg:kind>
+                                    <reg:date>20030212</reg:date>
+                                </reg:document-id>
+                            </reg:publication-reference>
+                            <reg:classifications-ipcr change-date="20000331" change-gazette-num="2000/20">
+                                <reg:classification-ipcr id="CLASSIFICATION_2101024">
+                                    <reg:text>B28B5/02, B28B7/00, B28B1/29</reg:text>
+                                </reg:classification-ipcr>
+                            </reg:classifications-ipcr>
+                            <reg:application-reference change-gazette-num="2000/20">
+                                <reg:document-id>
+                                    <reg:country>EP</reg:country>
+                                    <reg:doc-number>99203729</reg:doc-number>
+                                    <reg:date>19991108</reg:date>
+                                </reg:document-id>
+                            </reg:application-reference>
+                            <reg:language-of-filing>nl</reg:language-of-filing>
+                            <reg:priority-claims change-date="20000331" change-gazette-num="2000/20">
+                                <reg:priority-claim kind="national" sequence="1">
+                                    <reg:country>NL</reg:country>
+                                    <reg:doc-number>19981010536</reg:doc-number>
+                                    <reg:date>19981112</reg:date>
+                                </reg:priority-claim>
+                            </reg:priority-claims>
+                            <reg:parties>
+                                <reg:applicants change-date="20000331" change-gazette-num="2000/20">
+                                    <reg:applicant app-type="applicant" designation="all" sequence="1">
+        <reg:addressbook cdsid="0100085116">
+            <reg:name>Beheermaatschappij De Boer Nijmegen B.V.</reg:name>
+            <reg:address>
+                <reg:address-1>Koopvaardijweg 2</reg:address-1>
+                <reg:address-2>6541 BS Nijmegen</reg:address-2>
+                <reg:country>NL</reg:country>
+            </reg:address>
+        </reg:addressbook>
+        <reg:nationality>
+            <reg:country></reg:country>
+        </reg:nationality>
+        <reg:residence>
+            <reg:country></reg:country>
+        </reg:residence>
+                                    </reg:applicant>
+                                </reg:applicants>
+                                <reg:inventors change-date="20000331" change-gazette-num="2000/20">
+                                    <reg:inventor sequence="01">
+        <reg:addressbook>
+            <reg:name>Kosman, Wilhelmus Jacobus Maria</reg:name>
+            <reg:address>
+                <reg:address-1>Bredeweg 9</reg:address-1>
+                <reg:address-2>6562 DA Groesbeek</reg:address-2>
+                <reg:country>NL</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:inventor>
+                                </reg:inventors>
+                                <reg:agents change-date="20080718" change-gazette-num="N/P">
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0100747114">
+            <reg:name>'t Jong, Bastiaan Jacobus, et al</reg:name>
+            <reg:address>
+                <reg:address-1>Arnold &amp; Siedsma</reg:address-1>
+                <reg:address-2>Sweelinckplein 1</reg:address-2>
+                <reg:address-3>2517 GK The Hague</reg:address-3>
+                <reg:country>NL</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                </reg:agents>
+                                <reg:agents change-date="20080718" change-gazette-num="2008/34">
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0100747114">
+            <reg:name>'t Jong, Bastiaan Jacobus, et al</reg:name>
+            <reg:address>
+                <reg:address-1>Arnold &amp; Siedsma Sweelinckplein 1</reg:address-1>
+                <reg:address-2>2517 GK The Hague</reg:address-2>
+                <reg:country>NL</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                </reg:agents>
+                                <reg:agents change-date="20000526" change-gazette-num="2000/28">
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="1 00049911">
+            <reg:name>'t Jong, Bastiaan Jacobus, et al</reg:name>
+            <reg:address>
+                <reg:address-1>Arnold &amp; Siedsma, Advocaten en Octrooigemachtigden, Sweelinckplein 1</reg:address-1>
+                <reg:address-2>2517 GK Den Haag</reg:address-2>
+                <reg:country>NL</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                </reg:agents>
+                                <reg:agents change-date="20000331" change-gazette-num="2000/20">
+                                    <reg:agent rep-type="agent" sequence="1">
+        <reg:addressbook cdsid="0100021818">
+            <reg:name>Schumann, Bernard Herman Johan, et al</reg:name>
+            <reg:address>
+                <reg:address-1>Arnold &amp; Siedsma, Advocaten en Octrooigemachtigden, Sweelinckplein 1</reg:address-1>
+                <reg:address-2>2517 GK Den Haag</reg:address-2>
+                <reg:country>NL</reg:country>
+            </reg:address>
+        </reg:addressbook>
+                                    </reg:agent>
+                                </reg:agents>
+                            </reg:parties>
+                            <reg:designation-of-states change-date="20000331" change-gazette-num="2000/20">
+                                <reg:designation-pct>
+                                    <reg:regional>
+        <reg:region>
+            <reg:country>EP</reg:country>
+        </reg:region>
+        <reg:country>AT</reg:country>
+        <reg:country>BE</reg:country>
+        <reg:country>CH</reg:country>
+        <reg:country>CY</reg:country>
+        <reg:country>DE</reg:country>
+        <reg:country>DK</reg:country>
+        <reg:country>ES</reg:country>
+        <reg:country>FI</reg:country>
+        <reg:country>FR</reg:country>
+        <reg:country>GB</reg:country>
+        <reg:country>GR</reg:country>
+        <reg:country>IE</reg:country>
+        <reg:country>IT</reg:country>
+        <reg:country>LI</reg:country>
+        <reg:country>LU</reg:country>
+        <reg:country>MC</reg:country>
+        <reg:country>NL</reg:country>
+        <reg:country>PT</reg:country>
+        <reg:country>SE</reg:country>
+                                    </reg:regional>
+                                </reg:designation-pct>
+                            </reg:designation-of-states>
+                            <reg:invention-title lang="de" change-date="20000331" change-gazette-num="2000/20">Vorrichtung zur Herstellung von Steinformlingen für die Ziegelindustrie</reg:invention-title>
+                            <reg:invention-title lang="en" change-date="20000331" change-gazette-num="2000/20">Apparatus for manufacturing green bricks for the brick manufacturing industry</reg:invention-title>
+                            <reg:invention-title lang="fr" change-date="20000331" change-gazette-num="2000/20">Dispositif pour la fabrication de briques crues utilisées dans l'industrie manufacturière des briques</reg:invention-title>
+                            <reg:term-of-grant change-date="20130315" change-gazette-num="2013/16">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DK</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DE</reg:country>
+                                    <reg:date>20030513</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>ES</reg:country>
+                                    <reg:date>20030828</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LU</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IE</reg:country>
+                                    <reg:date>20031110</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20080321" change-gazette-num="2008/17">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DK</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DE</reg:country>
+                                    <reg:date>20030513</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>ES</reg:country>
+                                    <reg:date>20030828</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LU</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IE</reg:country>
+                                    <reg:date>20031110</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20060217" change-gazette-num="2006/14">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DK</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DE</reg:country>
+                                    <reg:date>20030513</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>ES</reg:country>
+                                    <reg:date>20030828</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LU</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IE</reg:country>
+                                    <reg:date>20031110</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20041203" change-gazette-num="2005/03">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DK</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DE</reg:country>
+                                    <reg:date>20030513</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>ES</reg:country>
+                                    <reg:date>20030828</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LU</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>IE</reg:country>
+                                    <reg:date>20031110</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20040806" change-gazette-num="2004/39">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DK</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DE</reg:country>
+                                    <reg:date>20030513</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>ES</reg:country>
+                                    <reg:date>20030828</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LU</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20040716" change-gazette-num="2004/36">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DK</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DE</reg:country>
+                                    <reg:date>20030513</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>ES</reg:country>
+                                    <reg:date>20030828</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CY</reg:country>
+                                    <reg:date>20031108</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20031212" change-gazette-num="2004/05">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DK</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DE</reg:country>
+                                    <reg:date>20030513</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>ES</reg:country>
+                                    <reg:date>20030828</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20031121" change-gazette-num="2004/02">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>DK</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20031003" change-gazette-num="2003/47">
+                                <reg:lapsed-in-country>
+                                    <reg:country>AT</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20030926" change-gazette-num="2003/46">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>GR</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20030905" change-gazette-num="2003/43">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>PT</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20030822" change-gazette-num="2003/41">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>FI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20030815" change-gazette-num="2003/40">
+                                <reg:lapsed-in-country>
+                                    <reg:country>CH</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>LI</reg:country>
+                                    <reg:date>20030212</reg:date>
+                                </reg:lapsed-in-country>
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:term-of-grant change-date="20030620" change-gazette-num="2003/32">
+                                <reg:lapsed-in-country>
+                                    <reg:country>SE</reg:country>
+                                    <reg:date>20030512</reg:date>
+                                </reg:lapsed-in-country>
+                            </reg:term-of-grant>
+                            <reg:dates-rights-effective>
+                                <reg:request-for-examination change-gazette-num="2000/52">
+                                    <reg:date>20001027</reg:date>
+                                </reg:request-for-examination>
+                                <reg:first-examination-report-despatched>
+                                    <reg:date>20020423</reg:date>
+                                </reg:first-examination-report-despatched>
+                            </reg:dates-rights-effective>
+                            <reg:references-cited>
+                                <reg:citation id="cit_4057505" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DEP0680812&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>EP</reg:country>
+            <reg:doc-number>0680812</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(BOER BEHEER NIJMEGEN BV DE et al.)  [A]  1,10,11 * the whole document *</reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4057506" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DNL9400663&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>NL</reg:country>
+            <reg:doc-number>9400663</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(BOER BEHEER NIJMEGEN BV DE et al.)  [A]  1,3 * the whole document *</reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                                <reg:citation id="cit_4057507" cited-phase="search" office="EP">
+                                    <reg:patcit url="https://worldwide.espacenet.com/patent/search?q=pn%3DDE3546191&amp;called_by=EuropeanRegister">
+        <reg:document-id>
+            <reg:country>DE</reg:country>
+            <reg:doc-number>3546191</reg:doc-number>
+        </reg:document-id>
+        <reg:text>(NETZSCH MASCHINENFABRIK et al.)  [A]  1-3,8 * the whole document *</reg:text>
+                                    </reg:patcit>
+                                    <reg:category>A</reg:category>
+                                </reg:citation>
+                            </reg:references-cited>
+                            <reg:opposition-data change-date="20031219" change-gazette-num="2004/06">
+                                <reg:opposition-not-filed>
+                                    <reg:date>20031113</reg:date>
+                                </reg:opposition-not-filed>
+                            </reg:opposition-data>
+                            <reg:search-reports-information>
+                                <reg:search-report-information office="EP" search-type="national" declaration-of-no-search="not-determined" change-gazette-num="2000/20">
+                                    <reg:search-report-publication>
+        <reg:document-id lang="en">
+            <reg:country>EP</reg:country>
+            <reg:doc-number>1000000</reg:doc-number>
+            <reg:kind>A1</reg:kind>
+            <reg:date>20000517</reg:date>
+        </reg:document-id>
+                                    </reg:search-report-publication>
+                                </reg:search-report-information>
+                                <reg:search-report-information office="EP" search-type="national-supplementary" declaration-of-no-search="not-determined">
+                                    <reg:date-search-report-mailed>
+        <reg:date>20000309</reg:date>
+                                    </reg:date-search-report-mailed>
+                                </reg:search-report-information>
+                            </reg:search-reports-information>
+                        </reg:bibliographic-data>
+                    </reg:register-document>
+                </reg:register-documents>
+            </ops:register-search>
+        </ops:world-patent-data>
+  recorded_at: 2026-10-21T21:15:29.572Z
+- request:
+    method: POST
+    uri: https://ops.epo.org/3.2/auth/accesstoken
+    headers:
+      accept:
+      - application/xml
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: grant_type=client_credentials
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      content-type:
+      - application/json
+      date:
+      - Wed, 21 Oct 2026 21:15:28 GMT
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      via:
+      - 1.1 google
+      x-request-id:
+      - 48a41301-2e3d-4f5c-969d-d6950d27947e
+    body:
+      type: json
+      content:
+        refresh_token_expires_in: "[FILTERED]"
+        api_product_list: "[FILTERED]"
+        api_product_list_json: "[FILTERED]"
+        organization_name: p-epo-apigeex-prj-a7e0
+        developer.email: parker.hancock@protonmail.com
+        token_type: Bearer
+        issued_at: "1792617329007"
+        client_id: "[FILTERED]"
+        access_token: "[FILTERED]"
+        application_name: dc81cc3e-9e21-4d76-8f39-7b6c8d227737
+        scope: core
+        expires_in: "1199"
+        refresh_count: "0"
+        status: approved
+  recorded_at: 2026-10-21T21:15:29.086Z

@@ -1,0 +1,113 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: >-
+      https://ops.epo.org/3.2/rest-services/published-data/publication/docdb/EP1000000B1/claims
+    headers:
+      accept:
+      - application/xml
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - >-
+        h3=":443"; ma=2592000,h3-29=":443"; ma=2592000, h3=":443";
+        ma=2592000,h3-29=":443"; ma=2592000
+      cache-control:
+      - no-cache
+      content-type:
+      - application/xml;charset=utf-8
+      date:
+      - Wed, 21 Oct 2026 21:15:07 GMT
+      etag:
+      - "\"0dc19ab784d12e7e1665f89a09dfb19cb\""
+      pragma:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      vary:
+      - Accept
+      via:
+      - 1.1 google, 1.1 google
+      x-accel-buffering:
+      - "no"
+      x-api:
+      - ops-v3.2
+      x-elapsed-time:
+      - "1398"
+      x-individualquotaperhour-used:
+      - "82887"
+      x-registeredquotaperweek-used:
+      - "9458927"
+      x-request-id:
+      - bd4dc280-fc86-41d1-a2ed-d2a9bd60f92f
+      x-throttling-control:
+      - >-
+        busy (images=green:100, inpadoc=green:45, other=green:1000,
+        retrieval=green:100, search=green:15)
+    body:
+      type: text
+      content: |-
+        <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="../../../../../style/pub-ftxt-claims.xsl"?>
+        <ops:world-patent-data xmlns="http://www.epo.org/exchange" xmlns:ops="http://ops.epo.org" xmlns:xlink="http://www.w3.org/1999/xlink"><ftxt:fulltext-documents xmlns="http://www.epo.org/fulltext" xmlns:ftxt="http://www.epo.org/fulltext"><ftxt:fulltext-document system="ops.epo.org" fulltext-format="text-only"><bibliographic-data><publication-reference data-format="docdb"><document-id><country>EP</country><doc-number>1000000</doc-number><kind>B1</kind></document-id></publication-reference></bibliographic-data><claims lang="DE"><claim><claim-text>1. Vorrichtung zum Herstellen von Grünziegeln aus Lehm für die Ziegel-Herstellungs-Industrie, aufweisend einen Umlauf-Förderer (3), der Form-Behälter trägt, die zu Form-Behälter-Teilen (4) kombiniert sind, einen Vorratsbehälter (5) für Lehm, der über den Form-Behältern angeordnet ist, Mittel (6, 7) zum Fördern von Lehm aus dem Vorratsbehälter in die Form-Behälter, Mittel (9) zum Pressen und Formen von Lehm in den Form-Behältern, Mittel (11) zum Zuführen und Platzieren von Abnehm-Platten (12) für die Grün-Ziegel und Mittel zum Entladen von Grün-Ziegeln, die von den Form-Behältern freigegeben sind,
+         dadurch gekennzeichnet, dass die Vorrichtung ferner ein Balkenteil (26) mit Stopper-Teilen (27) aufweist, das eingerichtet ist, um an einem Form-Behälter-Teil (4) zum Bewegen der mit Grün-Ziegeln gefüllten Form-Behälter-Teile anzugreifen, so dass eine hervorstehende Kante an zumindest einer Seite der Grün-Ziegel ausgebildet wird.</claim-text><claim-text>2. Vorrichtung gemäß Anspruch 1, wobei die kantenformenden Mittel eingerichtet sind, die Form-Behälter-Teile für eine bestimmte Zeitdauer wiederholt zu bewegen.</claim-text><claim-text>3. Vorrichtung gemäß Anspruch 1 oder 2, wobei die kantenformenden Mittel eingerichtet sind, die Form-Behälter-Teile im Wesentlichen quer zur Transportrichtung zu bewegen.</claim-text><claim-text>4. Vorrichtung gemäß einem der vorangehenden Ansprüche, wobei die kantenformenden Mittel ein Balkenteil aufweisen, das eingerichtet ist, individuell an einem Form-Behälter-Teil anzugreifen.</claim-text><claim-text>5. Vorrichtung gemäß Anspruch 4, wobei das Balkenteil das Form-Behälter-Teil überspannt und an beiden Seiten mit Stopper-Teilen versehen ist, die während des Betriebs an der Position der Seitenwände des Form-Behälter-Teils positioniert sind.</claim-text><claim-text>6. Vorrichtung gemäß Anspruch 5, wobei die Stopper-Teile mit Stopper-Flächen versehen sind, die bevorzugt Kunststoff aufweisen.</claim-text><claim-text>7. Vorrichtung gemäß Anspruch 5 oder 6, wobei die Form-Behälter-Teile an ihren Seitenwänden mit Stopper-Flächen versehen sind, die bevorzugt Kunststoff aufweisen.</claim-text><claim-text>8. Vorrichtung gemäß Anspruch 4, 5, 6 oder 7, wobei die kantenformenden Mittel einen Exzenter-Antrieb für das Balkenteil aufweisen.</claim-text><claim-text>9. Vorrichtung gemäß einem der vorangehenden Ansprüche, wobei jedes Form-Behälter-Teil mit einer Anzahl von Abstandshaltern zum Stützen der Abnehm-Platten mit einem Abstand über den Grün-Ziegeln versehen ist.</claim-text><claim-text>10. Vorrichtung gemäß einem der vorangehenden Ansprüche, wobei die Form-Behälter-Teile beweglich auf dem Förderer mit gewissem Spielraum in Bewegungsrichtung befestigt sind.</claim-text><claim-text>11. Vorrichtung gemäß Anspruch 10, wobei der Förderer ein Kettenförderer ist, und wobei die Form-Behälter-Teile mit gewissem Spielraum in Bewegungsrichtung mit einem Kettenteil gekuppelt sind, das mit der Kette kuppelbar ist.</claim-text></claim></claims><claims lang="FR"><claim><claim-text>1. Dispositif pour la fabrication de briques crues à partir d&apos;argile pour l&apos;industrie manufacturière des briques, comprenant un convoyeur circulant (3) portant des conteneurs à moules associés à des parties de conteneurs à moules (4), un réservoir (5) pour l&apos;argile disposé au-dessus des conteneurs à moules, des moyens (6, 7) pour enlever l&apos;argile du réservoir et l&apos;amener dans les conteneurs à moules, des moyens (9) pour presser et lisser l&apos;argile dans les conteneurs à moule, des moyens (11) pour amener et placer des plaques d&apos;enlèvement (12) pour les briques crues et des moyens pour décharger les briques crues dégagées des conteneurs à moules, caractérisé en ce que le dispositif comprend, en outre, un châssis (26) avec des pièces d&apos;arrêt (27) qui est conçu pour s&apos;engager dans une partie de conteneurs à moules (4) pour déplacer les parties de conteneurs à moules remplies de briques crues de manière à ce qu&apos;un bord saillant soit formé sur au moins un côté des briques crues.</claim-text><claim-text>2. Dispositif selon la revendication 1, dans lequel les moyens de formage de bord sont conçus pour déplacer les parties de conteneurs à moules de manière répétée pendant un certain temps.</claim-text><claim-text>3. Dispositif selon la revendication 1 ou 2, dans lequel les moyens de formage de bord sont conçus pour déplacer les parties de conteneurs à moules sensiblement dans le sens transversal du sens de transport.</claim-text><claim-text>4. Dispositif selon l&apos;une quelconque des revendications précédentes, dans lequel les moyens de formage de bord comprennent un châssis qui est conçu pour s&apos;engager individuellement dans une partie de conteneurs à moules.</claim-text><claim-text>5. Dispositif selon la revendication 4, dans lequel le châssis enjambe la partie de conteneurs à moules et est pourvu des deux côtés de pièces d&apos;arrêt qui, pendant le fonctionnement, sont situés à l&apos;emplacement des parois latérales de la partie de conteneurs à moules.</claim-text><claim-text>6. Dispositif selon la revendication 5, dans lequel les pièces d&apos;arrêt comportent des surfaces d&apos;arrêt qui comprennent, de préférence, du plastique.</claim-text><claim-text>7. Dispositif selon la revendication 5 ou 6, dans lequel les parties de conteneurs à moules comportent, sur leurs parois latérales, des surfaces d&apos;arrêt qui comprennent, de préférence, du plastique.</claim-text><claim-text>8. Dispositif selon la revendication 4, 5, 6 ou 7, dans lequel les moyens de formage de bord comprennent une commande à excentrique pour le châssis.</claim-text><claim-text>9. Dispositif selon l&apos;une quelconque des revendications précédentes, dans lequel chacune des parties de conteneurs à moules comporte un certain nombre de pièces d&apos;écartement pour soutenir les plaques d&apos;enlèvement à une certaine distance au-dessus des briques crues.</claim-text><claim-text>10. Dispositif selon l&apos;une quelconque des revendications précédentes, dans lequel les parties de conteneurs à moules sont fixées de manière mobile sur le convoyeur avec un certain jeu dans le sens du mouvement.</claim-text><claim-text>11. Dispositif selon la revendication 10, dans lequel le convoyeur est un convoyeur à chaîne et les parties de conteneurs à moules sont accouplées, avec un certain jeu dans le sens du mouvement, à une partie de chaîne qui peut être raccordée à la chaîne.</claim-text></claim></claims><claims lang="EN"><claim><claim-text>1. Apparatus for manufacturing green bricks from clay for the brick manufacturing industry, comprising a circulating conveyor (3) carrying mould containers combined to mould container parts (4), a reservoir (5) for clay arranged above the mould containers, means (6,7) for carrying clay out of the reservoir into the mould containers, means (9) for pressing and trimming clay in the mould containers, means (11) for supplying and placing take-off plates (12) for the green bricks and means for discharging green bricks released from the mould containers, characterized in that the apparatus further comprises a frame (26) with stop members (27), which is adapted to engage on a mould container part (4) for moving the mould container parts filled with green bricks such that a protruding edge is formed on at least one side of the green bricks.</claim-text><claim-text>2. Apparatus as claimed in claim 1, wherein the edge-forming means are adapted to move the mould container parts repeatedly for a certain period.</claim-text><claim-text>3. Apparatus as claimed in claim 1 or 2, wherein the edge-forming means are adapted to move the mould container parts substantially transversely of the transporting direction.</claim-text><claim-text>4. Apparatus as claimed in any of the foregoing claims, wherein the edge-forming means comprise a frame which is adapted to engage individually on a mould container part.</claim-text><claim-text>5. Apparatus as claimed in claim 4, wherein the frame spans the mould container part and is provided on both sides with stop members which are situated during operation at the location of the side walls of the mould container part.</claim-text><claim-text>6. Apparatus as claimed in claim 5, wherein the stop members are provided with stop surfaces which preferably comprise plastic.</claim-text><claim-text>7. Apparatus as claimed in claim 5 or 6, wherein the mould container parts are provided on their side walls with stop surfaces which preferably comprise plastic.</claim-text><claim-text>8. Apparatus as claimed in claim 4, 5, 6 or 7, wherein the edge-forming means comprise an eccentric drive for the frame.</claim-text><claim-text>9. Apparatus as claimed in any of the foregoing claims, wherein each mould container part is provided with a number of spacer members for supporting the take-off plates at a distance above the green bricks.</claim-text><claim-text>10. Apparatus as claimed in any of the foregoing claims, wherein the mould container parts are fixed movably onto the conveyor with some clearance in the direction of movement.</claim-text><claim-text>11. Apparatus as claimed in claim 10, wherein the conveyor is a chain conveyor and the mould container parts are coupled with some clearance in the direction of movement to a chain part connectable to the chain.</claim-text></claim></claims></ftxt:fulltext-document></ftxt:fulltext-documents></ops:world-patent-data>
+  recorded_at: 2026-10-21T21:15:08.030Z
+- request:
+    method: POST
+    uri: https://ops.epo.org/3.2/auth/accesstoken
+    headers:
+      accept:
+      - application/xml
+      content-type:
+      - application/x-www-form-urlencoded;charset=UTF-8
+    body:
+      type: text
+      content: grant_type=client_credentials
+  response:
+    status: 200
+    headers:
+      access-control-allow-headers:
+      - origin, x-requested-with, accept, content-type, authorization
+      access-control-allow-methods:
+      - POST
+      access-control-allow-origin:
+      - "*"
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      content-type:
+      - application/json
+      date:
+      - Wed, 21 Oct 2026 21:15:05 GMT
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      via:
+      - 1.1 google
+      x-request-id:
+      - db34f75e-1e07-4719-9084-db2bcb520d67
+    body:
+      type: json
+      content:
+        refresh_token_expires_in: "[FILTERED]"
+        api_product_list: "[FILTERED]"
+        api_product_list_json: "[FILTERED]"
+        organization_name: p-epo-apigeex-prj-a7e0
+        developer.email: parker.hancock@protonmail.com
+        token_type: Bearer
+        issued_at: "1792617306195"
+        client_id: "[FILTERED]"
+        access_token: "[FILTERED]"
+        application_name: dc81cc3e-9e21-4d76-8f39-7b6c8d227737
+        scope: core
+        expires_in: "1199"
+        refresh_count: "0"
+        status: approved
+  recorded_at: 2026-10-21T21:15:06.300Z

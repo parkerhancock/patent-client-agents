@@ -4,6 +4,7 @@ import {
   AssignmentCenterClient,
   BulkDataClient,
   ConfigurationError,
+  EpoOpsClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -35,6 +36,7 @@ import {
   DownloadStore,
   downloadContext,
 } from "./downloads.js";
+import { registerEpoTools } from "./epo.js";
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
@@ -57,6 +59,7 @@ export interface UsptoClients {
   publications: PublicationsClient;
   trademarkSearch: TrademarkSearchClient;
   mpep: MpepClient;
+  epoOps: EpoOpsClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -513,5 +516,17 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   );
   registerUsptoResources(server, auth);
   registerMpepTools(server, mpep, externalAuth);
+  const epoOps =
+    provided.epoOps ??
+    ((process.env.EPO_OPS_API_KEY || process.env.EPO_API_KEY) &&
+    (process.env.EPO_OPS_API_SECRET || process.env.EPO_API_SECRET)
+      ? lazyClient(() => new EpoOpsClient())
+      : undefined);
+  if (epoOps)
+    registerEpoTools(
+      server,
+      epoOps,
+      options.auth ? requireScopes("epo:read") : undefined,
+    );
   return server;
 }

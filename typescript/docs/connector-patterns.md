@@ -27,6 +27,7 @@ coverage is recorded in the [operation evidence map](uspto-operation-coverage.md
 | Binary files, redirects and assembled archives | [Bulk data](../packages/client/src/bulkdata.ts), [PTAB](../packages/client/src/ptab.ts), [artifact storage](../packages/mcp/src/downloads.ts) | [Downloads](../tests/downloads.test.ts), [lifecycle](../tests/downloads-lifecycle.test.ts), [deadlines](../tests/transport-deadlines.test.ts) and [recorded files](../tests/record-feature-replay.test.ts). Bounded buffering is established; giant-dump streaming and shared replica storage are not. |
 | Guides/specifications as static resources | [Library resources](../packages/client/src/uspto-resources.ts), [MCP resources](../packages/mcp/src/resources.ts) | [Resource](../tests/resources.test.ts) and [source archive](../tests/sources.test.ts) tests. Preserve source/version labels and hashes. Embedded strings are not a searchable legal corpus. |
 | Thin MCP adapter with parallel REST retrieval | [Envelopes](../packages/mcp/src/shared.ts), [server](../packages/mcp/src/index.ts), [register tools](../packages/mcp/src/registers.ts) | [Actual MCP listener](../tests/mcp.test.ts), download and [option-forwarding](../tests/tsdr-mcp-options.test.ts) tests. MCP caller identity remains separate from office credentials. |
+| Upstream OAuth2 client-credentials token | [EPO OPS](../packages/client/src/epo-ops.ts), [MCP tools](../packages/mcp/src/epo.ts), [details](epo-ops.md) | [Token lifecycle](../tests/epo-ops-client.test.ts), [real OPS replays](../tests/epo-ops-recordings.test.ts) and [MCP scope](../tests/epo-ops-mcp.test.ts) tests. Local-clock expiry, single-flight refresh, one retry on token rejection, scrubbed token/client-id/IP recordings. IP Australia OAuth should reuse the pattern, not the class. |
 
 ## Styles that still need a reference
 
@@ -36,7 +37,6 @@ runtime compatibility.
 
 | Missing style | Python candidate | First-slice proof |
 | --- | --- | --- |
-| Upstream OAuth2 token lifecycle | [EPO OPS](../../src/patent_client_agents/epo_ops/client.py) or [IP Australia shared auth](../../src/patent_client_agents/ip_australia_common/__init__.py) | Token acquisition, expiry, concurrent refresh, bounded rejection handling and scrubbed token recordings. MCP JWT validation does not cover this. |
 | HTML DOM extraction from whole pages | [Google Patents](../../src/patent_client_agents/google_patents/client.py) | Archived page fixtures, deliberate parser selection, selectors/structured metadata and explicit changed-page failures. Claims HTML-to-text is narrower. |
 | Live fee schedules | [Fees](../../src/patent_client_agents/fees/client.py) | Effective date distinct from retrieval time, currency, fee codes and entity tiers. Unknown effective dates stay explicit. This is a category contract even when parsing/transport is reused. |
 | SOAP service | [Spain OEPM](../../src/patent_client_agents/oepm_spain/client.py) | WSDL-derived envelopes, namespaces, escaping, body-credential scrubbing, faults and not-found behavior. Python coverage is a BYOK beta, not live TypeScript proof. |
@@ -144,8 +144,8 @@ rejects WAL headers; [explicit preparation](mpep.md) preserves legacy content
 without silently patching headers or upgrading metadata. Corpus fixtures prove
 the compressed schema, and a real local check verifies default MCP/artifact use.
 
-Upstream OAuth2 is the next distinct auth example; HTML/fees and SOAP follow
-when their connectors enter the port. MPEP does not establish every statute
+EPO OPS now establishes upstream OAuth2; HTML/fees and SOAP follow when
+their connectors enter the port. MPEP does not establish every statute
 schema or ingestion format, and no new decoder dependency was required.
 
 ## Verification and iteration

@@ -23,6 +23,7 @@ synthetic contracts. The Python package remains separate.
 | MPEP (additional corpus scope) | Read-only SQLite/FTS search, section/href lookup, installed versions/status; thin MCP tools and protected artifacts | Fresh pinned `E9_R-01.2024` build from all 42 official TOC roots, 29 chapters and 3,055 rows; compressed corpus and default MCP verification passed; legacy preparation preserves unknown release metadata |
 | Search guides, field/status catalogs, schemas and Swagger resources | Eleven labeled MCP resources and pure library helpers | Resource enumeration, content and authorization tests; historical source labels preserved |
 | REST document retrieval | MCP-issued single-use links by default; authenticated REST concurrently available; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
+| EPO OPS and CPC (EPO scope) | Search, biblio, full text, citations, equivalents, INPADOC family, legal events, EP Register views, Unitary Patent package, family evidence, number conversion, merged PDF, CPC retrieval/search/mapping/media/CPCI; eight intent-based MCP tools under `epo:read` | 22 live recordings on October 21 replay offline; synthetic OAuth2, error and MCP tests. See [EPO OPS](epo-ops.md) |
 
 The [feature inventory](uspto-feature-inventory.md) maps every Python method to
 its TypeScript counterpart. It excludes legal manuals, fees and CPC connectors
@@ -100,3 +101,13 @@ a 64 MiB buffering limit; this implementation does not stream multi-gigabyte
 bulk dumps. Native streaming can be added when that workflow is needed.
 Library cancellation includes response-body deadlines and caller aborts. MCP
 cancellation propagation awaits a supported FastMCP context signal. Rust/WASM extraction remains a profiling-driven path.
+
+## EPO Open Patent Services
+
+October 21, 2026. The [EPO OPS port](epo-ops.md) covers every public method of
+the Python `epo_ops` and `cpc` clients and the Python MCP family-intelligence
+aggregate, and establishes the first upstream OAuth2 token lifecycle. All 22
+recorded operations succeeded live with the deployed OPS credentials read into
+memory; recordings omit tokens, client ids and caller IP headers. This verifies
+the recorded samples, not every OPS service or parameter. OPS tools are not
+deployed, and `getCpcMedia` is tested only for id validation.
