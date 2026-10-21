@@ -1,0 +1,178 @@
+import type { ClientOptions, TransportRequestOptions } from "../transport.js";
+import { OFFICE_ALIASES, PYTHON_FEE_ROUTES } from "./aliases.js";
+import { EpoFeesClient } from "./epo.js";
+import {
+  type EntityTier,
+  type FeeCategory,
+  type FeeItem,
+  type FeeSchedule,
+  type FeeScheduleSummary,
+  type RightType,
+  RightTypeSchema,
+} from "./models.js";
+
+export * from "./aliases.js";
+export * from "./epo.js";
+export * from "./models.js";
+
+export type FeeRouteErrorCode =
+  | "UNKNOWN_JURISDICTION"
+  | "UNSUPPORTED_RIGHT"
+  | "NOT_PORTED";
+export class FeeRouteError extends Error {
+  override name = "FeeRouteError";
+  constructor(
+    message: string,
+    public readonly code: FeeRouteErrorCode,
+  ) {
+    super(message);
+  }
+}
+
+/**
+ * Resolve an office name or jurisdiction to `[jurisdiction, office_code]`.
+ * The right disambiguates regional codes: EP is EPO for patents and EUIPO
+ * for trademarks and designs; WIPO is PCT, Madrid or Hague.
+ */
+export function resolveFeeJurisdiction(
+  value: string,
+  right: RightType = "patent",
+): [string, string] {
+  const key = value.trim().toUpperCase();
+  if (key === "EP")
+    return right === "trademark" || right === "design"
+      ? ["EP", "EUIPO"]
+      : ["EP", "EPO"];
+  if (
+    [
+      "WIPO",
+      "WO",
+      "INTERNATIONAL BUREAU",
+      "WORLD INTELLECTUAL PROPERTY ORGANIZATION",
+    ].includes(key)
+  ) {
+    const system = {
+      patent: "WIPO-PCT",
+      trademark: "WIPO-MADRID",
+      design: "WIPO-HAGUE",
+    }[right as "patent" | "trademark" | "design"];
+    if (!system)
+      throw new FeeRouteError(
+        `WIPO has no ${right} schedule (PCT=patent, Madrid=trademark, Hague=design).`,
+        "UNSUPPORTED_RIGHT",
+      );
+    return ["WO", system];
+  }
+  const alias = OFFICE_ALIASES[key];
+  if (!alias)
+    throw new FeeRouteError(
+      `Unknown jurisdiction or office: ${value}.`,
+      "UNKNOWN_JURISDICTION",
+    );
+  const [jurisdiction, office] = alias;
+  if ((office === "EPO" || office === "EPO-UP") && right !== "patent")
+    throw new FeeRouteError(
+      `EPO has no ${right} schedule; EU-wide ${right}s are administered by EUIPO.`,
+      "UNSUPPORTED_RIGHT",
+    );
+  if (office === "EUIPO" && right === "patent")
+    throw new FeeRouteError(
+      "EUIPO has no patent schedule; European patents are handled by the EPO.",
+      "UNSUPPORTED_RIGHT",
+    );
+  return [jurisdiction, office];
+}
+
+export interface FeeLookup {
+  category?: FeeCategory;
+  /** Ignored for fees without an entity tier. Defaults to large. */
+  tier?: EntityTier;
+  /** Renewal or maintenance year. Omit to exclude year-indexed rows. */
+  year?: number;
+}
+
+type Loader = (options: TransportRequestOptions) => Promise<FeeSchedule>;
+
+/** Dispatches `(office, right)` routes to office-specific fee clients. */
+export class FeesClient {
+  private readonly routes: Map<string, Loader>;
+  constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    const epo = new EpoFeesClient(options);
+    this.routes = new Map([
+      ["EPO/patent", (o) => epo.getEpcSchedule(o)],
+      ["EPO-UP/patent", (o) => epo.getUnitaryPatentSchedule(o)],
+    ]);
+  }
+  /** Schedules available in this runtime, as `office/right` keys. */
+  get supportedRoutes(): string[] {
+    return [...this.routes.keys()];
+  }
+  async getSchedule(
+    jurisdiction: string,
+    right: RightType = "patent",
+    options: TransportRequestOptions = {},
+  ): Promise<FeeSchedule> {
+    const parsedRight = RightTypeSchema.parse(right);
+    const [, office] = resolveFeeJurisdiction(jurisdiction, parsedRight);
+    const loader = this.routes.get(`${office}/${parsedRight}`);
+    if (!loader) {
+      const python = PYTHON_FEE_ROUTES.some(
+        ([o, r]) => o === office && r === parsedRight,
+      );
+      throw new FeeRouteError(
+        python
+          ? `${office} ${parsedRight} fees are not yet ported to TypeScript.`
+          : `${office} has no ${parsedRight} fee schedule.`,
+        python ? "NOT_PORTED" : "UNSUPPORTED_RIGHT",
+      );
+    }
+    return loader(options);
+  }
+  /**
+   * Matching fees. An empty list is a real answer only when the schedule's
+   * recurring_fee_coverage is complete for renewal lookups.
+   */
+  async lookupFees(
+    jurisdiction: string,
+    filter: FeeLookup = {},
+    right: RightType = "patent",
+    options: TransportRequestOptions = {},
+  ): Promise<{ schedule: FeeSchedule; fees: FeeItem[] }> {
+    const schedule = await this.getSchedule(jurisdiction, right, options);
+    return { schedule, fees: filterFees(schedule.fees, filter) };
+  }
+  async listSchedules(
+    options: TransportRequestOptions = {},
+  ): Promise<FeeScheduleSummary[]> {
+    const schedules = await Promise.all(
+      [...this.routes.values()].map((loader) => loader(options)),
+    );
+    return schedules.map(summarizeSchedule);
+  }
+}
+
+/** Python lookup semantics: tier applies only to tiered rows; year must match exactly. */
+export function filterFees(fees: FeeItem[], filter: FeeLookup): FeeItem[] {
+  const tier = filter.tier ?? "large";
+  return fees.filter(
+    (fee) =>
+      (filter.category === undefined || fee.category === filter.category) &&
+      (fee.tier === "none" || fee.tier === tier) &&
+      fee.year === (filter.year ?? null),
+  );
+}
+export function summarizeSchedule(schedule: FeeSchedule): FeeScheduleSummary {
+  return {
+    key: schedule.key,
+    jurisdiction: schedule.jurisdiction,
+    office_code: schedule.office_code,
+    issuing_body: schedule.issuing_body,
+    right: schedule.right,
+    currency: schedule.currency,
+    effective_date: schedule.effective_date,
+    source_url: schedule.source_url,
+    fee_count: schedule.fees.length,
+    recurring_fee_coverage: schedule.recurring_fee_coverage,
+    retrieved_at: schedule.provenance.retrieved_at,
+  };
+}

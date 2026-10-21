@@ -14,6 +14,7 @@ export const provenanceSchema = z.object({
   corpus_synced_at: z.string().datetime().nullable().optional(),
   corpus_version: z.string().min(1).optional(),
   accessed_at: z.string().datetime().optional(),
+  effective_date: z.iso.date().nullable().optional(),
 });
 export const listEnvelopeSchema = z.object({
   summary: z.string(),

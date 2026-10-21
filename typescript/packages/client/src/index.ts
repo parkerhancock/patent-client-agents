@@ -6,6 +6,7 @@ export * from "./bulkdata.js";
 export * from "./epo-legal.js";
 export * from "./epo-ops.js";
 export * from "./epo-ops-resources.js";
+export * from "./fees/index.js";
 export * from "./models.js";
 export * from "./mpep.js";
 export * from "./mpep-release.js";

@@ -29,6 +29,7 @@ coverage is recorded in the [operation evidence map](uspto-operation-coverage.md
 | Guides/specifications as static resources | [Library resources](../packages/client/src/uspto-resources.ts), [MCP resources](../packages/mcp/src/resources.ts) | [Resource](../tests/resources.test.ts) and [source archive](../tests/sources.test.ts) tests. Preserve source/version labels and hashes. Embedded strings are not a searchable legal corpus. |
 | Thin MCP adapter with parallel REST retrieval | [Envelopes](../packages/mcp/src/shared.ts), [server](../packages/mcp/src/index.ts), [register tools](../packages/mcp/src/registers.ts) | [Actual MCP listener](../tests/mcp.test.ts), download and [option-forwarding](../tests/tsdr-mcp-options.test.ts) tests. MCP caller identity remains separate from office credentials. |
 | Upstream OAuth2 client-credentials token | [EPO OPS](../packages/client/src/epo-ops.ts), [MCP tools](../packages/mcp/src/epo.ts), [details](epo-ops.md) | [Token lifecycle](../tests/epo-ops-client.test.ts), [real OPS replays](../tests/epo-ops-recordings.test.ts) and [MCP scope](../tests/epo-ops-mcp.test.ts) tests. Local-clock expiry, single-flight refresh, one retry on token rejection, scrubbed token/client-id/IP recordings. IP Australia OAuth should reuse the pattern, not the class. |
+| Live fee schedules | [Fee models](../packages/client/src/fees/models.ts), [EPO fees](../packages/client/src/fees/epo.ts), [MCP tools](../packages/mcp/src/fees.ts), [pattern](fees.md) | [Fee tests](../tests/fees.test.ts) with real EPO recordings. Decimal-string amounts, published effective date separate from retrieval time, explicit code maps with visible unmapped codes, computed renewal coverage, Python-generated office aliases. 23 offices remain. |
 
 ## Styles that still need a reference
 
@@ -39,7 +40,6 @@ runtime compatibility.
 | Missing style | Python candidate | First-slice proof |
 | --- | --- | --- |
 | HTML DOM extraction from whole pages | [Google Patents](../../src/patent_client_agents/google_patents/client.py) | Archived page fixtures, deliberate parser selection, selectors/structured metadata and explicit changed-page failures. Claims HTML-to-text is narrower. |
-| Live fee schedules | [Fees](../../src/patent_client_agents/fees/client.py) | Effective date distinct from retrieval time, currency, fee codes and entity tiers. Unknown effective dates stay explicit. This is a category contract even when parsing/transport is reused. |
 | SOAP service | [Spain OEPM](../../src/patent_client_agents/oepm_spain/client.py) | WSDL-derived envelopes, namespaces, escaping, body-credential scrubbing, faults and not-found behavior. Python coverage is a BYOK beta, not live TypeScript proof. |
 | Account login with CSRF/session refresh | [INPI France](../../src/patent_client_agents/inpi_pi/client.py) | Source-specific bootstrap/login, CSRF, expiry/relogin and safe credential isolation. WAF delivery does not establish this flow. |
 
@@ -95,8 +95,8 @@ contract: `cache_hit: true`, nullable source retrieval/sync time, current access
 time and installed corpus version. MCP preserves those fields. Its status
 resource exposes release, build, cutoff and interim-update metadata without a
 network call. Follow this example for standards §§3–4; do not describe a local
-read as a fresh upstream fetch. Fee effective-date provenance remains to be
-implemented. Keep package-version identity consistent as packages evolve.
+read as a fresh upstream fetch. Fee provenance adds a nullable
+`effective_date` ([fees](fees.md)). Keep package-version identity consistent as packages evolve.
 
 Retain canonical identity from `catalog/sources/`. The generated Python coverage
 manifest does not prove TypeScript support. Track TypeScript method/route and

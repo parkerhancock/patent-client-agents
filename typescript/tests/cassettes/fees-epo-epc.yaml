@@ -1,0 +1,1199 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://fees.apps.epo.org/prod/bff/api/fees?language=EN&currency=EUR
+    headers:
+      accept:
+      - application/json
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      alt-svc:
+      - h3=":443"; ma=86400
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      cf-cache-status:
+      - BYPASS
+      cf-ray:
+      - a4e38a8d0dd5f5f0-AMS
+      connection:
+      - keep-alive
+      content-type:
+      - application/json
+      date:
+      - Wed, 21 Oct 2026 22:01:30 GMT
+      expires:
+      - "0"
+      pragma:
+      - no-cache
+      server:
+      - cloudflare
+      strict-transport-security:
+      - max-age=31536000 ; includeSubDomains
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-envoy-decorator-operation:
+      - nufi-bff-prod.user-area.svc.cluster.local:80/*
+      x-envoy-upstream-service-time:
+      - "38"
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - "0"
+    body:
+      type: json
+      content:
+      - key: 1
+        children:
+        - key: 1
+          children: []
+          data:
+            feeCode: null
+            feeDescription: not online
+            amount: 285,00
+            validUntil: null
+        - key: 1
+          children: []
+          data:
+            feeCode: null
+            feeDescription: online
+            amount: 135,00
+            validUntil: null
+        data:
+          feeCode: "001"
+          feeDescription: Filing fee - EP direct
+          amount: null
+          validUntil: null
+      - key: 2
+        children:
+        - key: 2
+          children: []
+          data:
+            feeCode: null
+            feeDescription: Supplementary search for applications filed before 01.07.2005
+            amount: 1.595,00
+            validUntil: null
+        - key: 2
+          children: []
+          data:
+            feeCode: null
+            feeDescription: Applications filed on/after 01.07.2005
+            amount: 1.595,00
+            validUntil: null
+        data:
+          feeCode: "002"
+          feeDescription: Fee for a European search
+          amount: null
+          validUntil: null
+      - key: 3
+        children: []
+        data:
+          feeCode: "003"
+          feeDescription: Fee for an international search
+          amount: 1.885,00
+          validUntil: null
+      - key: 4
+        children:
+        - key: 4
+          children: []
+          data:
+            feeCode: null
+            feeDescription: first filings
+            amount: 1.485,00
+            validUntil: null
+        - key: 4
+          children: []
+          data:
+            feeCode: null
+            feeDescription: all other cases
+            amount: 2.320,00
+            validUntil: null
+        data:
+          feeCode: "004"
+          feeDescription: Fee for an international-type search
+          amount: null
+          validUntil: null
+      - key: 5
+        children:
+        - key: 5
+          children: []
+          data:
+            feeCode: null
+            feeDescription: For each State designated (max. 7x) for applications filed before 01.04.2009
+            amount: 125,00
+            validUntil: null
+        - key: 5
+          children: []
+          data:
+            feeCode: null
+            feeDescription: For all contracting States designated for applications filed on/after 01.04.2009
+            amount: 720,00
+            validUntil: null
+        data:
+          feeCode: "005"
+          feeDescription: Designation fee
+          amount: null
+          validUntil: null
+      - key: 6
+        children:
+        - key: 6
+          children: []
+          data:
+            feeCode: null
+            feeDescription: for international applications without a supplementary European search report
+            amount: 2.240,00
+            validUntil: null
+        - key: 6
+          children: []
+          data:
+            feeCode: null
+            feeDescription: for other applications
+            amount: 2.010,00
+            validUntil: null
+        data:
+          feeCode: "006"
+          feeDescription: Examination fee
+          amount: null
+          validUntil: null
+      - key: 7
+        children: []
+        data:
+          feeCode: "007"
+          feeDescription: >-
+            Fee for grant and printing (not more than 35 pages) or fee for grant including
+            fee for publication
+          amount: 1.135,00
+          validUntil: null
+      - key: 8
+        children: []
+        data:
+          feeCode: "008"
+          feeDescription: Additional printing fee for 36th and each subsequent page
+          amount: 19,00
+          validUntil: null
+      - key: 10
+        children: []
+        data:
+          feeCode: "010"
+          feeDescription: Opposition fee
+          amount: 880,00
+          validUntil: null
+      - key: 11
+        children:
+        - key: 11
+          children: []
+          data:
+            feeCode: null
+            feeDescription: >-
+              for an appeal filed by a natural person or an entity referred to in Rule
+              7a(2)(a)-(d) EPC
+            amount: 2.015,00
+            validUntil: null
+        - key: 11
+          children: []
+          data:
+            feeCode: null
+            feeDescription: >-
+              for an appeal filed by a person other than those referred to in Rule
+              7a(2)(a)-(d) EPC
+            amount: 2.925,00
+            validUntil: null
+        data:
+          feeCode: "011"
+          feeDescription: Fee for appeal
+          amount: null
+          validUntil: null
+      - key: 13
+        children: []
+        data:
+          feeCode: "013"
+          feeDescription: Fee for re-establishment, reinstatement, restoration (EPC, PCT)
+          amount: 790,00
+          validUntil: null
+      - key: 14
+        children: []
+        data:
+          feeCode: "014"
+          feeDescription: Conversion fee
+          amount: 0,00
+          validUntil: null
+      - key: 15
+        children:
+        - key: 15
+          children: []
+          data:
+            feeCode: null
+            feeDescription: for the 16th and each subsequent claim to the limit of 50
+            amount: 290,00
+            validUntil: null
+        - key: 15
+          children: []
+          data:
+            feeCode: null
+            feeDescription: For the 51st and each subsequent claim
+            amount: 720,00
+            validUntil: null
+        data:
+          feeCode: "015"
+          feeDescription: Claims fee
+          amount: null
+          validUntil: null
+      - key: 16
+        children:
+        - key: 16
+          children: []
+          data:
+            feeCode: null
+            feeDescription: for the 16th and each subsequent claim to the limit of 50
+            amount: 290,00
+            validUntil: null
+        - key: 16
+          children: []
+          data:
+            feeCode: null
+            feeDescription: For the 51st and each subsequent claim
+            amount: 720,00
+            validUntil: null
+        data:
+          feeCode: "016"
+          feeDescription: Claims fee in accordance with R. 71(4)
+          amount: null
+          validUntil: null
+      - key: 17
+        children: []
+        data:
+          feeCode: "017"
+          feeDescription: >-
+            Fee for the request of a decision on the fixing of costs by the opposition
+            division (Rule 88(3) EPC)
+          amount: 95,00
+          validUntil: null
+      - key: 19
+        children: []
+        data:
+          feeCode: "019"
+          feeDescription: Transmittal fee for an international application
+          amount: 160,00
+          validUntil: null
+      - key: 20
+        children:
+        - key: 20
+          children: []
+          data:
+            feeCode: null
+            feeDescription: not online
+            amount: 285,00
+            validUntil: null
+        - key: 20
+          children: []
+          data:
+            feeCode: null
+            feeDescription: online
+            amount: 135,00
+            validUntil: null
+        data:
+          feeCode: "020"
+          feeDescription: Filing fee - entry EP-phase
+          amount: null
+          validUntil: null
+      - key: 21
+        children: []
+        data:
+          feeCode: "021"
+          feeDescription: Fee for preliminary examination of int. application
+          amount: 2.010,00
+          validUntil: null
+      - key: 22
+        children: []
+        data:
+          feeCode: "022"
+          feeDescription: Registration of transfer
+          amount: 125,00
+          validUntil: null
+      - key: 23
+        children: []
+        data:
+          feeCode: "023"
+          feeDescription: Registration or cancellation of licences and other rights
+          amount: 125,00
+          validUntil: null
+      - key: 29
+        children: []
+        data:
+          feeCode: "029"
+          feeDescription: >-
+            Certified copy (application, priority document, patent certificate, other
+            documents)
+          amount: 125,00
+          validUntil: null
+      - key: 33
+        children: []
+        data:
+          feeCode: "033"
+          feeDescription: Renewal fee for the 3rd year
+          amount: 725,00
+          validUntil: null
+      - key: 34
+        children: []
+        data:
+          feeCode: "034"
+          feeDescription: Renewal fee for the 4th year
+          amount: 885,00
+          validUntil: null
+      - key: 35
+        children: []
+        data:
+          feeCode: "035"
+          feeDescription: Renewal fee for the 5th year
+          amount: 1.050,00
+          validUntil: null
+      - key: 36
+        children: []
+        data:
+          feeCode: "036"
+          feeDescription: Renewal fee for the 6th year
+          amount: 1.215,00
+          validUntil: null
+      - key: 37
+        children: []
+        data:
+          feeCode: "037"
+          feeDescription: Renewal fee for the 7th year
+          amount: 1.375,00
+          validUntil: null
+      - key: 38
+        children: []
+        data:
+          feeCode: "038"
+          feeDescription: Renewal fee for the 8th year
+          amount: 1.540,00
+          validUntil: null
+      - key: 39
+        children: []
+        data:
+          feeCode: "039"
+          feeDescription: Renewal fee for the 9th year
+          amount: 1.700,00
+          validUntil: null
+      - key: 40
+        children: []
+        data:
+          feeCode: "040"
+          feeDescription: Renewal fee for the 10th year (constant from 10th year on)
+          amount: 1.865,00
+          validUntil: null
+      - key: 41
+        children: []
+        data:
+          feeCode: "041"
+          feeDescription: Renewal fee for the 11th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 42
+        children: []
+        data:
+          feeCode: "042"
+          feeDescription: Renewal fee for the 12th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 43
+        children: []
+        data:
+          feeCode: "043"
+          feeDescription: Renewal fee for the 13th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 44
+        children: []
+        data:
+          feeCode: "044"
+          feeDescription: Renewal fee for the 14th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 45
+        children: []
+        data:
+          feeCode: "045"
+          feeDescription: Renewal fee for the 15th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 46
+        children: []
+        data:
+          feeCode: "046"
+          feeDescription: Renewal fee for the 16th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 47
+        children: []
+        data:
+          feeCode: "047"
+          feeDescription: Renewal fee for the 17th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 48
+        children: []
+        data:
+          feeCode: "048"
+          feeDescription: Renewal fee for the 18th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 49
+        children: []
+        data:
+          feeCode: "049"
+          feeDescription: Renewal fee for the 19th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 50
+        children: []
+        data:
+          feeCode: "050"
+          feeDescription: Renewal fee for the 20th year
+          amount: 1.865,00
+          validUntil: null
+      - key: 60
+        children: []
+        data:
+          feeCode: "060"
+          feeDescription: Fee for a technical opinion
+          amount: 4.790,00
+          validUntil: null
+      - key: 62
+        children: []
+        data:
+          feeCode: "062"
+          feeDescription: Protest fee
+          amount: 1.070,00
+          validUntil: null
+      - key: 63
+        children: []
+        data:
+          feeCode: "063"
+          feeDescription: Late payment fee (R. 16bis.2 PCT), maximum amount
+          amount: 714,00
+          validUntil: null
+      - key: 64
+        children: []
+        data:
+          feeCode: "064"
+          feeDescription: Late payment fee (R. 58bis.2 PCT)
+          amount: 430,00
+          validUntil: null
+      - key: 66
+        children: []
+        data:
+          feeCode: "066"
+          feeDescription: Fee for late furnishing of sequence listings (R. 13ter.1, 13ter.2 PCT)
+          amount: 280,00
+          validUntil: null
+      - key: 67
+        children: []
+        data:
+          feeCode: "067"
+          feeDescription: Fee for late furnishing of sequence listing (R. 30(3) EPC)
+          amount: 280,00
+          validUntil: null
+      - key: 69
+        children: []
+        data:
+          feeCode: "069"
+          feeDescription: Review fee for a supplementary international search
+          amount: 1.070,00
+          validUntil: null
+      - key: 93
+        children: []
+        data:
+          feeCode: "093"
+          feeDescription: Add. fee for renewal fee 3rd year
+          amount: 362,50
+          validUntil: null
+      - key: 94
+        children: []
+        data:
+          feeCode: "094"
+          feeDescription: Add. fee for renewal fee 4th year
+          amount: 442,50
+          validUntil: null
+      - key: 95
+        children: []
+        data:
+          feeCode: "095"
+          feeDescription: Add. fee for renewal fee 5th year
+          amount: 525,00
+          validUntil: null
+      - key: 96
+        children: []
+        data:
+          feeCode: "096"
+          feeDescription: Add. fee for renewal fee 6th year
+          amount: 607,50
+          validUntil: null
+      - key: 97
+        children: []
+        data:
+          feeCode: "097"
+          feeDescription: Add. fee for renewal fee 7th year
+          amount: 687,50
+          validUntil: null
+      - key: 98
+        children: []
+        data:
+          feeCode: "098"
+          feeDescription: Add. fee for renewal fee 8th year
+          amount: 770,00
+          validUntil: null
+      - key: 99
+        children: []
+        data:
+          feeCode: "099"
+          feeDescription: Add. fee for renewal fee 9th year
+          amount: 850,00
+          validUntil: null
+      - key: 100
+        children: []
+        data:
+          feeCode: "100"
+          feeDescription: Add. fee for renewal fee 10th year
+          amount: 932,50
+          validUntil: null
+      - key: 101
+        children: []
+        data:
+          feeCode: "101"
+          feeDescription: Add. fee for renewal fee 11th year
+          amount: 932,50
+          validUntil: null
+      - key: 102
+        children: []
+        data:
+          feeCode: "102"
+          feeDescription: Add. fee for renewal fee 12th year
+          amount: 932,50
+          validUntil: null
+      - key: 103
+        children: []
+        data:
+          feeCode: "103"
+          feeDescription: Add. fee for renewal fee 13th year
+          amount: 932,50
+          validUntil: null
+      - key: 104
+        children: []
+        data:
+          feeCode: "104"
+          feeDescription: Add. fee for renewal fee 14th year
+          amount: 932,50
+          validUntil: null
+      - key: 105
+        children: []
+        data:
+          feeCode: "105"
+          feeDescription: Add. fee for renewal fee 15th year
+          amount: 932,50
+          validUntil: null
+      - key: 106
+        children: []
+        data:
+          feeCode: "106"
+          feeDescription: Add. fee for renewal fee 16th year
+          amount: 932,50
+          validUntil: null
+      - key: 107
+        children: []
+        data:
+          feeCode: "107"
+          feeDescription: Add. fee for renewal fee 17th year
+          amount: 932,50
+          validUntil: null
+      - key: 108
+        children: []
+        data:
+          feeCode: "108"
+          feeDescription: Add. fee for renewal fee 18th year
+          amount: 932,50
+          validUntil: null
+      - key: 109
+        children: []
+        data:
+          feeCode: "109"
+          feeDescription: Add. fee for renewal fee 19th year
+          amount: 932,50
+          validUntil: null
+      - key: 110
+        children: []
+        data:
+          feeCode: "110"
+          feeDescription: Add. fee for renewal fee 20th year
+          amount: 932,50
+          validUntil: null
+      - key: 111
+        children: []
+        data:
+          feeCode: "111"
+          feeDescription: Fee for petition for review
+          amount: 3.570,00
+          validUntil: null
+      - key: 121
+        children: []
+        data:
+          feeCode: "121"
+          feeDescription: Fee for further processing (late performance of acts R. 71(3))
+          amount: 315,00
+          validUntil: null
+      - key: 122
+        children: []
+        data:
+          feeCode: "122"
+          feeDescription: Fee for further processing (non fee related cases)
+          amount: 315,00
+          validUntil: null
+      - key: 123
+        children: []
+        data:
+          feeCode: "123"
+          feeDescription: Fee for further processing (late payment of a fee - 50% of the relevant fee )
+          amount: 0,00
+          validUntil: null
+      - key: 131
+        children: []
+        data:
+          feeCode: "131"
+          feeDescription: Limitation fee
+          amount: 1.425,00
+          validUntil: null
+      - key: 141
+        children: []
+        data:
+          feeCode: "141"
+          feeDescription: Revocation fee
+          amount: 645,00
+          validUntil: null
+      - key: 222
+        children: []
+        data:
+          feeCode: "222"
+          feeDescription: PCT charge per sheet in excess of 30
+          amount: 16,00
+          validUntil: null
+      - key: 224
+        children: []
+        data:
+          feeCode: "224"
+          feeDescription: Handling fee
+          amount: 215,00
+          validUntil: null
+      - key: 225
+        children: []
+        data:
+          feeCode: "225"
+          feeDescription: International filing fee
+          amount: 1.428,00
+          validUntil: null
+      - key: 316
+        children: []
+        data:
+          feeCode: "316"
+          feeDescription: PCT reduction (PDF request and specification)
+          amount: 107,00
+          validUntil: null
+      - key: 318
+        children: []
+        data:
+          feeCode: "318"
+          feeDescription: PCT reduction (XML request / PDF specification)
+          amount: 215,00
+          validUntil: null
+      - key: 319
+        children: []
+        data:
+          feeCode: "319"
+          feeDescription: PCT reduction (XML request and specification)
+          amount: 322,00
+          validUntil: null
+      - key: 400
+        children: []
+        data:
+          feeCode: "400"
+          feeDescription: Surcharge for extension fees
+          amount: 51,00
+          validUntil: null
+      - key: 403
+        children: []
+        data:
+          feeCode: "403"
+          feeDescription: Extension fee for Latvia (LV) (EPC Contracting State as from 1.7.2005)
+          amount: 102,00
+          validUntil: null
+      - key: 404
+        children: []
+        data:
+          feeCode: "404"
+          feeDescription: Extension fee for Albania (AL) (EPC Contracting State as from 1.5.2010)
+          amount: 102,00
+          validUntil: null
+      - key: 406
+        children: []
+        data:
+          feeCode: "406"
+          feeDescription: Extension fee for North Macedonia (MK) (EPC Contracting State as from 1.1.2009)
+          amount: 102,00
+          validUntil: null
+      - key: 407
+        children: []
+        data:
+          feeCode: "407"
+          feeDescription: Extension fee for Croatia (HR) (EPC Contracting State as from 1. 1. 2008)
+          amount: 102,00
+          validUntil: null
+      - key: 408
+        children: []
+        data:
+          feeCode: "408"
+          feeDescription: Extension fee for Bosnia and Herzegovina (BA)
+          amount: 102,00
+          validUntil: null
+      - key: 409
+        children: []
+        data:
+          feeCode: "409"
+          feeDescription: Extension fee for Serbia (RS) ( filing date as of 04.06.2006-30.09.2010)
+          amount: 102,00
+          validUntil: null
+      - key: 410
+        children: []
+        data:
+          feeCode: "410"
+          feeDescription: Extension fee for Montenegro (ME) (EPC Contracting State as from 1.10.2022)
+          amount: 102,00
+          validUntil: null
+      - key: 420
+        children: []
+        data:
+          feeCode: "420"
+          feeDescription: Validation fee for Morocco (MA)
+          amount: 240,00
+          validUntil: null
+      - key: 421
+        children: []
+        data:
+          feeCode: "421"
+          feeDescription: >-
+            Validation fee for the Republic of Moldova (MD) (EPC Contracting State as from
+            1.6.2026)
+          amount: 200,00
+          validUntil: null
+      - key: 422
+        children: []
+        data:
+          feeCode: "422"
+          feeDescription: Validation fee for Tunisia (TN)
+          amount: 180,00
+          validUntil: null
+      - key: 423
+        children: []
+        data:
+          feeCode: "423"
+          feeDescription: Validation fee for Cambodia (KH)
+          amount: 180,00
+          validUntil: null
+      - key: 424
+        children: []
+        data:
+          feeCode: "424"
+          feeDescription: Validation fee for Georgia (GE)
+          amount: 200,00
+          validUntil: null
+      - key: 425
+        children: []
+        data:
+          feeCode: "425"
+          feeDescription: Validation fee for Lao PDR (LA)
+          amount: 180,00
+          validUntil: null
+      - key: 450
+        children: []
+        data:
+          feeCode: "450"
+          feeDescription: Surcharge on the validation fee for Morocco (MA)
+          amount: 120,00
+          validUntil: null
+      - key: 451
+        children: []
+        data:
+          feeCode: "451"
+          feeDescription: Surcharge on the validation fee for the Republic of Moldova (MD)
+          amount: 100,00
+          validUntil: null
+      - key: 452
+        children: []
+        data:
+          feeCode: "452"
+          feeDescription: Surcharge on the validation fee for Tunisia (TN)
+          amount: 90,00
+          validUntil: null
+      - key: 453
+        children: []
+        data:
+          feeCode: "453"
+          feeDescription: Surcharge on the validation fee for Cambodia (KH)
+          amount: 90,00
+          validUntil: null
+      - key: 454
+        children: []
+        data:
+          feeCode: "454"
+          feeDescription: Surcharge on the validation fee for Georgia (GE)
+          amount: 100,00
+          validUntil: null
+      - key: 455
+        children: []
+        data:
+          feeCode: "455"
+          feeDescription: Surcharge on the validation fee for Lao PDR (LA)
+          amount: 90,00
+          validUntil: null
+      - key: 501
+        children: []
+        data:
+          feeCode: "501"
+          feeDescription: Additional filing fee for the 36th and each subsequent page
+          amount: 17,00
+          validUntil: null
+      - key: 520
+        children: []
+        data:
+          feeCode: "520"
+          feeDescription: >-
+            Additional filing fee for the 36th and each subsequent page - entry into EP
+            phase
+          amount: 17,00
+          validUntil: null
+      - key: 552
+        children: []
+        data:
+          feeCode: "552"
+          feeDescription: Add. fee for divisional 2nd generation
+          amount: 235,00
+          validUntil: null
+      - key: 553
+        children: []
+        data:
+          feeCode: "553"
+          feeDescription: Add. fee for divisional 3rd generation
+          amount: 480,00
+          validUntil: null
+      - key: 554
+        children: []
+        data:
+          feeCode: "554"
+          feeDescription: Add. fee for divisional 4th generation
+          amount: 715,00
+          validUntil: null
+      - key: 555
+        children: []
+        data:
+          feeCode: "555"
+          feeDescription: Add. fee for divisional 5th or subsequent generation
+          amount: 955,00
+          validUntil: null
+      - key: 701
+        children: []
+        data:
+          feeCode: "701"
+          feeDescription: Additional fee R 10(4) UPR
+          amount: 750,00
+          validUntil: null
+      - key: 713
+        children: []
+        data:
+          feeCode: "713"
+          feeDescription: Fee for re-establishment of rights
+          amount: 790,00
+          validUntil: null
+      - key: 732
+        children: []
+        data:
+          feeCode: "732"
+          feeDescription: Renewal fee for the 2nd year
+          amount: 35,00
+          validUntil: null
+      - key: 733
+        children: []
+        data:
+          feeCode: "733"
+          feeDescription: Renewal fee for the 3rd year
+          amount: 105,00
+          validUntil: null
+      - key: 734
+        children: []
+        data:
+          feeCode: "734"
+          feeDescription: Renewal fee for the 4th year
+          amount: 145,00
+          validUntil: null
+      - key: 735
+        children: []
+        data:
+          feeCode: "735"
+          feeDescription: Renewal fee for the 5th year
+          amount: 315,00
+          validUntil: null
+      - key: 736
+        children: []
+        data:
+          feeCode: "736"
+          feeDescription: Renewal fee for the 6th year
+          amount: 475,00
+          validUntil: null
+      - key: 737
+        children: []
+        data:
+          feeCode: "737"
+          feeDescription: Renewal fee for the 7th year
+          amount: 630,00
+          validUntil: null
+      - key: 738
+        children: []
+        data:
+          feeCode: "738"
+          feeDescription: Renewal fee for the 8th year
+          amount: 815,00
+          validUntil: null
+      - key: 739
+        children: []
+        data:
+          feeCode: "739"
+          feeDescription: Renewal fee for the 9th year
+          amount: 990,00
+          validUntil: null
+      - key: 740
+        children: []
+        data:
+          feeCode: "740"
+          feeDescription: Renewal fee for the 10th year
+          amount: 1.175,00
+          validUntil: null
+      - key: 741
+        children: []
+        data:
+          feeCode: "741"
+          feeDescription: Renewal fee for the 11th year
+          amount: 1.460,00
+          validUntil: null
+      - key: 742
+        children: []
+        data:
+          feeCode: "742"
+          feeDescription: Renewal fee for the 12th year
+          amount: 1.775,00
+          validUntil: null
+      - key: 743
+        children: []
+        data:
+          feeCode: "743"
+          feeDescription: Renewal fee for the 13th year
+          amount: 2.105,00
+          validUntil: null
+      - key: 744
+        children: []
+        data:
+          feeCode: "744"
+          feeDescription: Renewal fee for the 14th year
+          amount: 2.455,00
+          validUntil: null
+      - key: 745
+        children: []
+        data:
+          feeCode: "745"
+          feeDescription: Renewal fee for the 15th year
+          amount: 2.830,00
+          validUntil: null
+      - key: 746
+        children: []
+        data:
+          feeCode: "746"
+          feeDescription: Renewal fee for the 16th year
+          amount: 3.240,00
+          validUntil: null
+      - key: 747
+        children: []
+        data:
+          feeCode: "747"
+          feeDescription: Renewal fee for the 17th year
+          amount: 3.640,00
+          validUntil: null
+      - key: 748
+        children: []
+        data:
+          feeCode: "748"
+          feeDescription: Renewal fee for the 18th year
+          amount: 4.055,00
+          validUntil: null
+      - key: 749
+        children: []
+        data:
+          feeCode: "749"
+          feeDescription: Renewal fee for the 19th year
+          amount: 4.455,00
+          validUntil: null
+      - key: 750
+        children: []
+        data:
+          feeCode: "750"
+          feeDescription: Renewal fee for the 20th year
+          amount: 4.855,00
+          validUntil: null
+      - key: 752
+        children: []
+        data:
+          feeCode: "752"
+          feeDescription: Add. fee for renewal fee 2nd year
+          amount: 17,50
+          validUntil: null
+      - key: 753
+        children: []
+        data:
+          feeCode: "753"
+          feeDescription: Add. fee for renewal fee 3rd year
+          amount: 52,50
+          validUntil: null
+      - key: 754
+        children: []
+        data:
+          feeCode: "754"
+          feeDescription: Add. fee for renewal fee 4th year
+          amount: 72,50
+          validUntil: null
+      - key: 755
+        children: []
+        data:
+          feeCode: "755"
+          feeDescription: Add. fee for renewal fee 5th year
+          amount: 157,50
+          validUntil: null
+      - key: 756
+        children: []
+        data:
+          feeCode: "756"
+          feeDescription: Add. fee for renewal fee 6th year
+          amount: 237,50
+          validUntil: null
+      - key: 757
+        children: []
+        data:
+          feeCode: "757"
+          feeDescription: Add. fee for renewal fee 7th year
+          amount: 315,00
+          validUntil: null
+      - key: 758
+        children: []
+        data:
+          feeCode: "758"
+          feeDescription: Add. fee for renewal fee 8th year
+          amount: 407,50
+          validUntil: null
+      - key: 759
+        children: []
+        data:
+          feeCode: "759"
+          feeDescription: Add. fee for renewal fee 9th year
+          amount: 495,00
+          validUntil: null
+      - key: 760
+        children: []
+        data:
+          feeCode: "760"
+          feeDescription: Add. fee for renewal fee 10th year
+          amount: 587,50
+          validUntil: null
+      - key: 761
+        children: []
+        data:
+          feeCode: "761"
+          feeDescription: Add. fee for renewal fee 11th year
+          amount: 730,00
+          validUntil: null
+      - key: 762
+        children: []
+        data:
+          feeCode: "762"
+          feeDescription: Add. fee for renewal fee 12th year
+          amount: 887,50
+          validUntil: null
+      - key: 763
+        children: []
+        data:
+          feeCode: "763"
+          feeDescription: Add. fee for renewal fee 13th year
+          amount: 1.052,50
+          validUntil: null
+      - key: 764
+        children: []
+        data:
+          feeCode: "764"
+          feeDescription: Add. fee for renewal fee 14th year
+          amount: 1.227,50
+          validUntil: null
+      - key: 765
+        children: []
+        data:
+          feeCode: "765"
+          feeDescription: Add. fee for renewal fee 15th year
+          amount: 1.415,00
+          validUntil: null
+      - key: 766
+        children: []
+        data:
+          feeCode: "766"
+          feeDescription: Add. fee for renewal fee 16th year
+          amount: 1.620,00
+          validUntil: null
+      - key: 767
+        children: []
+        data:
+          feeCode: "767"
+          feeDescription: Add. fee for renewal fee 17th year
+          amount: 1.820,00
+          validUntil: null
+      - key: 768
+        children: []
+        data:
+          feeCode: "768"
+          feeDescription: Add. fee for renewal fee 18th year
+          amount: 2.027,50
+          validUntil: null
+      - key: 769
+        children: []
+        data:
+          feeCode: "769"
+          feeDescription: Add. fee for renewal fee 19th year
+          amount: 2.227,50
+          validUntil: null
+      - key: 770
+        children: []
+        data:
+          feeCode: "770"
+          feeDescription: Add. fee for renewal fee 20th year
+          amount: 2.427,50
+          validUntil: null
+      - key: 771
+        children: []
+        data:
+          feeCode: "771"
+          feeDescription: Reimbursement of reduction of renewal fees
+          amount: 0,00
+          validUntil: null
+      - key: 999
+        children: []
+        data:
+          feeCode: "999"
+          feeDescription: Insignificant amount Art. 12 RFees
+          amount: 17,00
+          validUntil: null
+  recorded_at: 2026-10-21T22:01:30.581Z
