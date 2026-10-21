@@ -1,5 +1,5 @@
-import { gunzipSync } from "node:zlib";
 import { XMLParser, XMLValidator } from "fast-xml-parser";
+import { Gunzip } from "fflate";
 
 export interface PatentClaim {
   claim_number: number | null;
@@ -188,11 +188,30 @@ export function parseDocumentXml(xml: string): Record<string, unknown> {
     ? parseClaimsXml(xml)
     : parseSpecXml(xml);
 }
+/** Gunzip with a hard output bound, failing as soon as it is exceeded. */
+function gunzipBounded(input: Uint8Array, maxBytes: number): Uint8Array {
+  const chunks: Uint8Array[] = [];
+  let total = 0;
+  const stream = new Gunzip((chunk) => {
+    total += chunk.length;
+    if (total > maxBytes)
+      throw new RangeError("Decompressed XML is too large.");
+    chunks.push(chunk);
+  });
+  stream.push(input, true);
+  const output = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    output.set(chunk, offset);
+    offset += chunk.length;
+  }
+  return output;
+}
 /** Read an XML member without extracting archive paths to the filesystem. */
 export function extractDocumentXml(input: Uint8Array): string {
   const data =
     input[0] === 0x1f && input[1] === 0x8b
-      ? gunzipSync(input, { maxOutputLength: 128 * 1024 * 1024 })
+      ? gunzipBounded(input, 128 * 1024 * 1024)
       : input;
   const decoder = new TextDecoder("utf-8", { fatal: true });
   if (

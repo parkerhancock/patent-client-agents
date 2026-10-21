@@ -15,7 +15,9 @@
     "build": "tsc -b",
     "lint": "biome check .",
     "format": "biome check --write .",
-    "check": "bun run lint && bun run typecheck && bun test",
+    "check": "bun run lint && bun run typecheck && bun test && bun run smoke:node && bun run smoke:browser",
+    "smoke:node": "node scripts/smoke-node.mjs",
+    "smoke:browser": "bun scripts/smoke-browser.ts",
     "record:uspto": "bun scripts/record-uspto.ts --record",
     "replay:uspto": "bun scripts/record-uspto.ts --replay",
     "record:applications": "bun scripts/record-application-features.ts --record",
@@ -47,10 +49,12 @@
     "@patent-client-agents/waf-worker": "workspace:*",
     "@prefecthq/fastmcp-ts": "1.7.3",
     "@types/bun": "1.4.3",
+    "@types/node": "26.6.5",
     "cassetter": "0.11.0",
     "fflate": "0.8.3",
     "ky": "2.2.0",
     "pdf-lib": "1.17.1",
+    "playwright": "1.64.0",
     "typescript": "5.9.3",
     "zod": "4.3.6"
   }

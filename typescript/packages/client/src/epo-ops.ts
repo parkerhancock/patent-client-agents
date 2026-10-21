@@ -38,6 +38,7 @@ import {
   type UnitaryPatentPackage,
 } from "./epo-ops-parsing.js";
 import type { Provenance } from "./models.js";
+import { env, textToBase64 } from "./runtime/env.js";
 import {
   ApiError,
   type ClientOptions,
@@ -166,9 +167,7 @@ function credential(
   primary: string,
   legacy: string,
 ): string | undefined {
-  return (
-    (value ?? process.env[primary] ?? process.env[legacy])?.trim() || undefined
-  );
+  return (value ?? env(primary) ?? env(legacy))?.trim() || undefined;
 }
 function invalidToken(error: unknown) {
   return (
@@ -339,10 +338,7 @@ export class EpoOpsClient {
       sourceName: EPO_OPS_SOURCE,
       headers: { accept: "application/xml" },
     });
-    this.token = new OpsToken(
-      this.http,
-      Buffer.from(`${key}:${secret}`).toString("base64"),
-    );
+    this.token = new OpsToken(this.http, textToBase64(`${key}:${secret}`));
     this.maxPdfPages = z
       .number()
       .int()

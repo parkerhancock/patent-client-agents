@@ -1,7 +1,5 @@
-import { createHash } from "node:crypto";
-import { homedir } from "node:os";
-import { join } from "node:path";
 import { z } from "zod";
+import { defaultCorpusPath } from "#files";
 import {
   CorpusError,
   checkCorpusSignal,
@@ -11,6 +9,7 @@ import {
   outlineFtsQuery,
 } from "./corpus/outline.js";
 import type { CorpusProvenance } from "./models.js";
+import { byteLength, env, sha256Hex } from "./runtime/env.js";
 
 const origin = "https://www.epo.org";
 const reference = z
@@ -79,6 +78,8 @@ export interface EpoLegalBook<C> {
 
 export interface EpoLegalClientOptions {
   corpusPath?: string;
+  /** Artifact bytes or a loader for them, used instead of a path; required in browsers. */
+  source?: Uint8Array | (() => Promise<Uint8Array>);
   /** SHA-256 of the decoded standalone SQLite bytes; also <PREFIX>_CORPUS_SHA256. */
   expectedSha256?: string;
   /** SHA-256 of the file as distributed on disk; also <PREFIX>_CORPUS_FILE_SHA256. */
@@ -348,16 +349,17 @@ export class EpoLegalCorpusClient<C> {
     const prefix = book.envPrefix;
     const path =
       options.corpusPath ??
-      process.env[`${prefix}_CORPUS_PATH`] ??
-      join(homedir(), ".cache", "patent_client_agents", book.filename);
-    reference.parse(path);
+      env(`${prefix}_CORPUS_PATH`) ??
+      defaultCorpusPath(book.filename) ??
+      "";
+    if (!options.source) reference.parse(path);
     const pin = (value: string | undefined) =>
       value === undefined ? undefined : sha256Pin.parse(value);
     const expectedSha256 = pin(
-      options.expectedSha256 ?? process.env[`${prefix}_CORPUS_SHA256`],
+      options.expectedSha256 ?? env(`${prefix}_CORPUS_SHA256`),
     );
     const expectedFileSha256 = pin(
-      options.expectedFileSha256 ?? process.env[`${prefix}_CORPUS_FILE_SHA256`],
+      options.expectedFileSha256 ?? env(`${prefix}_CORPUS_FILE_SHA256`),
     );
     this.maxSectionBytes = z
       .number()
@@ -367,6 +369,7 @@ export class EpoLegalCorpusClient<C> {
       .parse(options.maxSectionBytes ?? 16 * 1024 * 1024);
     this.corpus = new OutlineCorpus({
       path,
+      source: options.source,
       label: book.label,
       envVar: `${prefix}_CORPUS_PATH`,
       maxSectionBytes: this.maxSectionBytes,
@@ -533,10 +536,7 @@ export class EpoLegalCorpusClient<C> {
       );
     const html = await this.corpus.text(row.html, "html");
     const text = await this.corpus.text(row.text, "text");
-    if (
-      Buffer.byteLength(html) + Buffer.byteLength(text) >
-      this.maxSectionBytes
-    )
+    if (byteLength(html) + byteLength(text) > this.maxSectionBytes)
       throw new CorpusError(
         "SECTION_TOO_LARGE",
         "Corpus section exceeds the configured decoded-byte limit.",
@@ -554,7 +554,7 @@ export class EpoLegalCorpusClient<C> {
       version: corpus.corpus_version,
       edition: corpus.edition,
       source_url: sourceUrl,
-      content_sha256: createHash("sha256").update(html).digest("hex"),
+      content_sha256: await sha256Hex(new TextEncoder().encode(html)),
       corpus_metadata: corpus.metadata,
       provenance: this.provenance(corpus, sourceUrl),
     };

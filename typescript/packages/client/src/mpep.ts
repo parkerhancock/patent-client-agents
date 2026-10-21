@@ -1,7 +1,5 @@
-import { createHash } from "node:crypto";
-import { homedir } from "node:os";
-import { join } from "node:path";
 import { z } from "zod";
+import { defaultCorpusPath } from "#files";
 import {
   CorpusError,
   checkCorpusSignal,
@@ -12,6 +10,7 @@ import {
 } from "./corpus/outline.js";
 import type { CorpusProvenance } from "./models.js";
 import { MPEP_RELEASE_CHECK } from "./mpep-release.js";
+import { byteLength, env, sha256Hex } from "./runtime/env.js";
 
 export { CorpusError, type CorpusErrorCode } from "./corpus/outline.js";
 
@@ -39,6 +38,8 @@ const searchOptions = z.object({
 
 export interface MpepClientOptions {
   corpusPath?: string;
+  /** Artifact bytes or a loader for them, used instead of a path; required in browsers. */
+  source?: Uint8Array | (() => Promise<Uint8Array>);
   /** SHA-256 of the decoded standalone SQLite bytes; also MPEP_CORPUS_SHA256. */
   expectedSha256?: string;
   /** SHA-256 of the file as distributed on disk; also MPEP_CORPUS_FILE_SHA256. */
@@ -135,11 +136,12 @@ export class MpepClient {
   constructor(options: MpepClientOptions = {}) {
     const path =
       options.corpusPath ??
-      process.env.MPEP_CORPUS_PATH ??
-      join(homedir(), ".cache", "patent_client_agents", "mpep.db");
-    reference.parse(path);
+      env("MPEP_CORPUS_PATH") ??
+      defaultCorpusPath("mpep.db") ??
+      "";
+    if (!options.source) reference.parse(path);
     const configuredSha256 =
-      options.expectedSha256 ?? process.env.MPEP_CORPUS_SHA256;
+      options.expectedSha256 ?? env("MPEP_CORPUS_SHA256");
     const expectedSha256 =
       configuredSha256 === undefined
         ? undefined
@@ -148,7 +150,7 @@ export class MpepClient {
             .regex(/^[a-f\d]{64}$/i)
             .parse(configuredSha256);
     const configuredFileSha256 =
-      options.expectedFileSha256 ?? process.env.MPEP_CORPUS_FILE_SHA256;
+      options.expectedFileSha256 ?? env("MPEP_CORPUS_FILE_SHA256");
     const expectedFileSha256 =
       configuredFileSha256 === undefined
         ? undefined
@@ -165,6 +167,7 @@ export class MpepClient {
     this.maxSectionBytes = maxSectionBytes;
     this.corpus = new OutlineCorpus({
       path,
+      source: options.source,
       maxSectionBytes,
       ...(expectedSha256 ? { expectedSha256 } : {}),
       ...(expectedFileSha256 ? { expectedFileSha256 } : {}),
@@ -304,10 +307,7 @@ export class MpepClient {
       );
     const html = await this.corpus.text(row.html, "html");
     const text = await this.corpus.text(row.text, "text");
-    if (
-      Buffer.byteLength(html) + Buffer.byteLength(text) >
-      this.maxSectionBytes
-    )
+    if (byteLength(html) + byteLength(text) > this.maxSectionBytes)
       throw new CorpusError(
         "SECTION_TOO_LARGE",
         "Corpus section exceeds the configured decoded-byte limit.",
@@ -322,7 +322,7 @@ export class MpepClient {
       text,
       version: corpus.source_version,
       source_url: sourceUrl,
-      content_sha256: createHash("sha256").update(html).digest("hex"),
+      content_sha256: await sha256Hex(new TextEncoder().encode(html)),
       section_revision:
         /\[R-[^\]]+\]/.exec(`${row.title ?? ""} ${text.slice(0, 500)}`)?.[0] ??
         null,

@@ -1,9 +1,8 @@
-import { Database } from "bun:sqlite";
-import { createHash } from "node:crypto";
-import { createReadStream } from "node:fs";
-import { stat } from "node:fs/promises";
-import { zstdDecompressSync } from "node:zlib";
 import { z } from "zod";
+import { readArtifact } from "#files";
+import { byteLength, sha256Hex } from "../runtime/env.js";
+import { openSnapshot, type SnapshotDatabase } from "../runtime/sqlite.js";
+import { ZstdOutputTooLarge, zstd } from "../runtime/zstd.js";
 
 export type CorpusErrorCode =
   | "CORPUS_UNAVAILABLE"
@@ -46,7 +45,10 @@ export interface OutlineHit extends Omit<OutlineRow, "html" | "text"> {
   snippet: string;
 }
 export interface OutlineOptions {
+  /** Artifact path in server runtimes. */
   path: string;
+  /** Artifact bytes, or a loader for them; takes precedence over path and is the only option in browsers. */
+  source?: Uint8Array | (() => Promise<Uint8Array>) | undefined;
   /** Names the corpus and its path variable in unavailable-artifact errors. */
   label?: string;
   envVar?: string;
@@ -55,10 +57,17 @@ export interface OutlineOptions {
   maxSectionBytes: number;
 }
 
-/** Validate one complete standard frame before Bun's permissive native decoder.
+const readLE = (bytes: Uint8Array, offset: number, count: number) => {
+  let value = 0n;
+  for (let i = count - 1; i >= 0; i--)
+    value = (value << 8n) | BigInt(bytes[offset + i] ?? 0);
+  return value;
+};
+
+/** Validate one complete standard frame before decoding.
  * Frame layout: https://github.com/facebook/zstd/blob/dev/doc/zstd_compression_format.md
  */
-function zstdEnvelope(bytes: Buffer, maxBytes: number) {
+function zstdEnvelope(bytes: Uint8Array, maxBytes: number) {
   const invalid = () =>
     new CorpusError(
       "DECOMPRESSION_FAILED",
@@ -81,20 +90,15 @@ function zstdEnvelope(bytes: Buffer, maxBytes: number) {
   }
   const dictionarySize = [0, 1, 2, 4][descriptor & 3] ?? 0;
   requireBytes(offset, dictionarySize);
-  if (dictionarySize && bytes.readUIntLE(offset, dictionarySize) !== 0)
+  if (dictionarySize && readLE(bytes, offset, dictionarySize) !== 0n)
     throw invalid();
   offset += dictionarySize;
   const sizeFlag = descriptor >> 6;
   const sizeBytes = sizeFlag ? 2 ** sizeFlag : single ? 1 : 0;
   requireBytes(offset, sizeBytes);
-  const contentSize =
-    sizeBytes === 8
-      ? bytes.readBigUInt64LE(offset)
-      : sizeBytes
-        ? BigInt(
-            bytes.readUIntLE(offset, sizeBytes) + (sizeBytes === 2 ? 256 : 0),
-          )
-        : null;
+  const contentSize = sizeBytes
+    ? readLE(bytes, offset, sizeBytes) + (sizeBytes === 2 ? 256n : 0n)
+    : null;
   offset += sizeBytes;
   if (single) windowSize = Number(contentSize);
   if (
@@ -108,7 +112,7 @@ function zstdEnvelope(bytes: Buffer, maxBytes: number) {
   const maxBlockSize = Math.min(windowSize, 128 * 1024);
   while (true) {
     requireBytes(offset, 3);
-    const block = bytes.readUIntLE(offset, 3);
+    const block = Number(readLE(bytes, offset, 3));
     offset += 3;
     const type = (block >> 1) & 3;
     const length = block >>> 3;
@@ -117,22 +121,31 @@ function zstdEnvelope(bytes: Buffer, maxBytes: number) {
     offset += type === 1 ? 1 : length;
     if (block & 1) break;
   }
-  let checksum: number | null = null;
   if (descriptor & 4) {
     requireBytes(offset, 4);
-    checksum = bytes.readUInt32LE(offset);
     offset += 4;
   }
   if (offset !== bytes.length) throw invalid();
-  return {
-    contentSize: contentSize === null ? null : Number(contentSize),
-    checksum,
-  };
+  return { contentSize: contentSize === null ? null : Number(contentSize) };
+}
+
+/** Declared content size of a dictionary-compressed cell frame, or null when absent or malformed. */
+function cellContentSize(bytes: Uint8Array): number | null {
+  if (bytes.length < 6 || readLE(bytes, 0, 4) !== 0xfd2fb528n) return null;
+  const descriptor = bytes[4] ?? 0;
+  const single = Boolean(descriptor & 32);
+  const offset = 5 + (single ? 0 : 1) + ([0, 1, 2, 4][descriptor & 3] ?? 0);
+  const sizeFlag = descriptor >> 6;
+  const sizeBytes = sizeFlag ? 2 ** sizeFlag : single ? 1 : 0;
+  if (!sizeBytes || offset + sizeBytes > bytes.length) return null;
+  return Number(
+    readLE(bytes, offset, sizeBytes) + (sizeBytes === 2 ? 256n : 0n),
+  );
 }
 
 /** Shared read-only outline artifact lifecycle; acquisition stays outside runtime. */
 export class OutlineCorpus {
-  private db: Database | undefined;
+  private db: SnapshotDatabase | undefined;
   private opening: Promise<void> | undefined;
   private generation = 0;
   private dictionaries = new Map<string, Uint8Array>();
@@ -152,31 +165,22 @@ export class OutlineCorpus {
   }
 
   private async load(generation: number) {
-    let db: Database | undefined;
+    let db: SnapshotDatabase | undefined;
     try {
-      const info = await stat(this.options.path);
-      if (!info.isFile()) throw new Error();
       const maxArtifactBytes = 256 * 1024 * 1024;
-      if (info.size > maxArtifactBytes)
+      const source = this.options.source;
+      const encoded =
+        source instanceof Uint8Array
+          ? source
+          : source
+            ? await source()
+            : await readArtifact(this.options.path, maxArtifactBytes);
+      if (encoded.byteLength > maxArtifactBytes)
         throw new CorpusError(
           "CORPUS_TOO_LARGE",
           "Corpus artifacts must not exceed 256 MiB.",
         );
-      const digest = createHash("sha256");
-      const chunks: Buffer[] = [];
-      let bytes = 0;
-      for await (const chunk of createReadStream(this.options.path)) {
-        bytes += chunk.length;
-        if (bytes > maxArtifactBytes)
-          throw new CorpusError(
-            "CORPUS_TOO_LARGE",
-            "Corpus artifacts must not exceed 256 MiB.",
-          );
-        digest.update(chunk);
-        chunks.push(chunk);
-      }
-      const encoded = Buffer.concat(chunks, bytes);
-      const fileSha256 = digest.digest("hex");
+      const fileSha256 = await sha256Hex(encoded);
       if (
         this.options.expectedFileSha256 &&
         fileSha256 !== this.options.expectedFileSha256.toLowerCase()
@@ -185,25 +189,22 @@ export class OutlineCorpus {
           "CHECKSUM_MISMATCH",
           "Corpus file SHA-256 does not match its pin.",
         );
-      const fileCompression = encoded
-        .subarray(0, 4)
-        .equals(Buffer.from([0x28, 0xb5, 0x2f, 0xfd]))
-        ? "zstd"
-        : "none";
+      const fileCompression =
+        readLE(encoded, 0, 4) === 0xfd2fb528n && encoded.length >= 4
+          ? "zstd"
+          : "none";
       let snapshot = encoded;
       if (fileCompression === "zstd") {
         const frame = zstdEnvelope(encoded, maxArtifactBytes);
+        // libzstd verifies the frame checksum when one is present.
         try {
-          snapshot = zstdDecompressSync(encoded, {
-            maxOutputLength: maxArtifactBytes,
-          });
+          snapshot = (await zstd()).decompress(
+            encoded,
+            maxArtifactBytes,
+            frame.contentSize,
+          );
         } catch (error) {
-          if (
-            error &&
-            typeof error === "object" &&
-            "code" in error &&
-            error.code === "ERR_BUFFER_TOO_LARGE"
-          )
+          if (error instanceof ZstdOutputTooLarge)
             throw new CorpusError(
               "CORPUS_TOO_LARGE",
               "Decoded corpus artifacts must not exceed 256 MiB.",
@@ -218,19 +219,13 @@ export class OutlineCorpus {
             "CORPUS_TOO_LARGE",
             "Decoded corpus artifacts must not exceed 256 MiB.",
           );
-        if (
-          (frame.contentSize !== null &&
-            snapshot.length !== frame.contentSize) ||
-          (frame.checksum !== null &&
-            Number(Bun.hash.xxHash64(snapshot) & 0xffff_ffffn) !==
-              frame.checksum)
-        )
+        if (frame.contentSize !== null && snapshot.length !== frame.contentSize)
           throw new CorpusError(
             "DECOMPRESSION_FAILED",
             "The Zstandard corpus file size or checksum is invalid.",
           );
       }
-      const sha256 = createHash("sha256").update(snapshot).digest("hex");
+      const sha256 = await sha256Hex(snapshot);
       if (
         this.options.expectedSha256 &&
         sha256 !== this.options.expectedSha256.toLowerCase()
@@ -244,15 +239,10 @@ export class OutlineCorpus {
           "CORPUS_WAL_UNSUPPORTED",
           "Prepare a standalone SQLite artifact in DELETE journal mode outside runtime. WAL-mode files and sidecars are not accepted.",
         );
-      // Deserializing the hashed bytes prevents WAL replay and path-replacement races.
-      db = Database.deserialize(snapshot, true);
-      db.exec("PRAGMA query_only = ON");
+      db = await openSnapshot(snapshot);
       const metadata = Object.fromEntries(
         db
-          .query<{ key: string; value: string }, []>(
-            "SELECT key, value FROM meta",
-          )
-          .all()
+          .all<{ key: string; value: string }>("SELECT key, value FROM meta")
           .map((row) => [row.key, row.value]),
       );
       if (
@@ -267,20 +257,18 @@ export class OutlineCorpus {
           "UNSUPPORTED_SCHEMA",
           "Unsupported outline corpus schema; supported versions are 1 and 2.",
         );
-      const count = db
-        .query<{ count: number }, []>("SELECT count(*) AS count FROM sections")
-        .get()?.count;
-      db.query(
+      const count = db.get<{ count: number }>(
+        "SELECT count(*) AS count FROM sections",
+      )?.count;
+      db.all(
         "SELECT href, section_number, title, breadcrumb, chapter, html, text FROM sections LIMIT 0",
-      ).all();
-      const fts = db
-        .query<{ sql: string }, [string]>(
-          "SELECT sql FROM sqlite_master WHERE name = ? AND type = 'table'",
-        )
-        .get("sections_fts");
+      );
+      const fts = db.get<{ sql: string }>(
+        "SELECT sql FROM sqlite_master WHERE name = ? AND type = 'table'",
+        ["sections_fts"],
+      );
       const ftsColumns = db
-        .query<{ name: string }, []>("PRAGMA table_info(sections_fts)")
-        .all()
+        .all<{ name: string }>("PRAGMA table_info(sections_fts)")
         .map((row) => row.name);
       if (
         !fts ||
@@ -294,18 +282,15 @@ export class OutlineCorpus {
           Number(metadata.section_count) !== count)
       )
         throw new Error();
-      const compression = db
-        .query(
-          "SELECT 1 FROM sqlite_master WHERE name = 'compression_dict' AND type = 'table'",
-        )
-        .get();
+      const compression = db.get(
+        "SELECT 1 FROM sqlite_master WHERE name = 'compression_dict' AND type = 'table'",
+      );
       const dictionaries = new Map<string, Uint8Array>();
       if (compression)
-        for (const row of db
-          .query<{ column_name: string; dict_bytes: Uint8Array }, []>(
-            "SELECT column_name, dict_bytes FROM compression_dict",
-          )
-          .all()) {
+        for (const row of db.all<{
+          column_name: string;
+          dict_bytes: Uint8Array;
+        }>("SELECT column_name, dict_bytes FROM compression_dict")) {
           if (
             !["html", "text"].includes(row.column_name) ||
             !(row.dict_bytes instanceof Uint8Array) ||
@@ -334,7 +319,17 @@ export class OutlineCorpus {
         error &&
         typeof error === "object" &&
         "code" in error &&
-        error.code === "ENOENT"
+        error.code === "TOO_LARGE"
+      )
+        throw new CorpusError(
+          "CORPUS_TOO_LARGE",
+          "Corpus artifacts must not exceed 256 MiB.",
+        );
+      if (
+        error &&
+        typeof error === "object" &&
+        "code" in error &&
+        (error.code === "ENOENT" || error.code === "NO_FILES")
       )
         throw new CorpusError(
           "CORPUS_UNAVAILABLE",
@@ -352,11 +347,10 @@ export class OutlineCorpus {
     if (!this.db) throw new CorpusError("ABORTED", "The corpus was closed.");
     try {
       return (
-        this.db
-          .query<OutlineRow, [string]>(
-            `SELECT href, section_number, title, breadcrumb, chapter, html, text FROM sections WHERE ${column} = ? LIMIT 1`,
-          )
-          .get(value) ?? null
+        this.db.get<OutlineRow>(
+          `SELECT href, section_number, title, breadcrumb, chapter, html, text FROM sections WHERE ${column} = ? LIMIT 1`,
+          [value],
+        ) ?? null
       );
     } catch {
       throw new CorpusError(
@@ -376,12 +370,9 @@ export class OutlineCorpus {
       sort === "outline" ? "s.section_number, s.href" : "rank, s.href";
     if (!this.db) throw new CorpusError("ABORTED", "The corpus was closed.");
     try {
-      return (
-        this.db
-          .query<OutlineHit, [string, number, number]>(
-            `SELECT s.href, s.section_number, s.title, s.breadcrumb, s.chapter, snippet(sections_fts, 2, '<mark>', '</mark>', '…', 40) AS snippet FROM sections_fts JOIN sections s ON s.rowid = sections_fts.rowid WHERE sections_fts MATCH ? ORDER BY ${order} LIMIT ? OFFSET ?`,
-          )
-          .all(query, limit, offset) ?? []
+      return this.db.all<OutlineHit>(
+        `SELECT s.href, s.section_number, s.title, s.breadcrumb, s.chapter, snippet(sections_fts, 2, '<mark>', '</mark>', '…', 40) AS snippet FROM sections_fts JOIN sections s ON s.rowid = sections_fts.rowid WHERE sections_fts MATCH ? ORDER BY ${order} LIMIT ? OFFSET ?`,
+        [query, limit, offset],
       );
     } catch {
       throw new CorpusError(
@@ -396,7 +387,7 @@ export class OutlineCorpus {
     column: "html" | "text",
   ): Promise<string> {
     if (typeof value === "string") {
-      if (Buffer.byteLength(value) > this.options.maxSectionBytes)
+      if (byteLength(value) > this.options.maxSectionBytes)
         throw new CorpusError(
           "SECTION_TOO_LARGE",
           "Corpus section exceeds the configured decoded-byte limit.",
@@ -409,24 +400,22 @@ export class OutlineCorpus {
         "DECOMPRESSION_FAILED",
         "Compressed corpus content has no decoding dictionary.",
       );
+    const size = cellContentSize(value);
+    if (size === null)
+      throw new CorpusError(
+        "DECOMPRESSION_FAILED",
+        "Corpus dictionary-compressed content must declare its decoded size.",
+      );
+    if (size > this.options.maxSectionBytes)
+      throw new CorpusError(
+        "SECTION_TOO_LARGE",
+        "Corpus section exceeds the configured decoded-byte limit.",
+      );
     try {
-      const options = {
-        dictionary,
-        maxOutputLength: this.options.maxSectionBytes,
-      };
-      const bytes = zstdDecompressSync(value, options);
+      const bytes = (await zstd()).decompressWithDictionary(value, dictionary);
+      if (bytes.length !== size) throw new Error();
       return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
-    } catch (error) {
-      if (
-        error &&
-        typeof error === "object" &&
-        "code" in error &&
-        error.code === "ERR_BUFFER_TOO_LARGE"
-      )
-        throw new CorpusError(
-          "SECTION_TOO_LARGE",
-          "Corpus section exceeds the configured decoded-byte limit.",
-        );
+    } catch {
       throw new CorpusError(
         "DECOMPRESSION_FAILED",
         "Corpus dictionary-compressed content could not be decoded.",

@@ -1,6 +1,7 @@
 import ky, { HTTPError } from "ky";
 import { z } from "zod";
 import type { Provenance } from "./models.js";
+import { env } from "./runtime/env.js";
 
 export class ConfigurationError extends Error {
   override name = "ConfigurationError";
@@ -410,7 +411,7 @@ export class GenericHttpTransport {
 }
 export class OdpTransport extends GenericHttpTransport {
   constructor(options: ClientOptions = {}) {
-    const apiKey = options.apiKey || process.env.USPTO_ODP_API_KEY;
+    const apiKey = options.apiKey || env("USPTO_ODP_API_KEY");
     if (!apiKey?.trim())
       throw new ConfigurationError(
         "Set USPTO_ODP_API_KEY or pass apiKey to use USPTO ODP.",

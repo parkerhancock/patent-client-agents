@@ -1,6 +1,7 @@
 import { XMLParser, XMLValidator } from "fast-xml-parser";
 import { z } from "zod";
 import { parseRegister } from "./register-models.js";
+import { env } from "./runtime/env.js";
 import {
   ApiError,
   type ClientOptions,
@@ -280,7 +281,7 @@ export function parseTsdrDocuments(xml: string): TsdrDocument[] {
 export class TsdrClient {
   private readonly http: GenericHttpTransport;
   constructor(options: ClientOptions = {}) {
-    const apiKey = options.apiKey ?? process.env.USPTO_TSDR_API_KEY;
+    const apiKey = options.apiKey ?? env("USPTO_TSDR_API_KEY");
     if (!apiKey?.trim())
       throw new ConfigurationError(
         "Set USPTO_TSDR_API_KEY or pass apiKey to use TSDR.",

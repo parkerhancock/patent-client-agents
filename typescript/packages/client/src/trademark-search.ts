@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { env } from "./runtime/env.js";
 import {
   ApiError,
   type ClientOptions,
@@ -151,8 +152,7 @@ export class TrademarkSearchClient {
       return candidate;
     }
     if (!this.token && !force) {
-      const raw =
-        process.env.PCA_WAF_TOKEN_JSON ?? process.env.LAW_TOOLS_WAF_TOKEN_JSON;
+      const raw = env("PCA_WAF_TOKEN_JSON") ?? env("LAW_TOOLS_WAF_TOKEN_JSON");
       if (raw)
         try {
           this.token = JSON.parse(raw) as WafToken;

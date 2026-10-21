@@ -23,6 +23,8 @@ export {
   normalizePublicationNumber,
   parseClaims,
 } from "./publications-models.js";
+
+import { bytesToBase64 } from "./runtime/env.js";
 export interface PublicationSearchOptions {
   query: string;
   start?: number;
@@ -487,7 +489,7 @@ export class PublicationsClient {
     options: { signal?: AbortSignal } = {},
   ) {
     const r = await this.downloadPdf(document, options);
-    return { ...r, data: Buffer.from(r.data).toString("base64") };
+    return { ...r, data: bytesToBase64(r.data) };
   }
   async resolveAndDownloadPdf(
     number: string,
