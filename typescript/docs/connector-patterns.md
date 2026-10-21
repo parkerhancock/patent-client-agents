@@ -21,6 +21,7 @@ coverage is recorded in the [operation evidence map](uspto-operation-coverage.md
 | Public JSON/form API | [Assignments](../packages/client/src/assignments.ts), [trademark assignments](../packages/client/src/trademark-assignments.ts) | [Register tests](../tests/register-gaps.test.ts) and real assignment recordings. Keyless sources use the same transport. |
 | XML parsing | [Application XML](../packages/client/src/application-xml.ts), [TSDR](../packages/client/src/tsdr.ts) | [TSDR replays](../tests/tsdr-live-recordings.test.ts) and application tests. Preserve namespaces, identifiers and source-derived document IDs. XML alone does not establish SOAP. |
 | Read-only SQLite/FTS corpus with compressed content | [MPEP](../packages/client/src/mpep.ts), [outline lifecycle](../packages/client/src/corpus/outline.ts), [MCP adapter](../packages/mcp/src/mpep.ts) | [Reader tests](../tests/mpep-client.test.ts), [actual MCP tests](../tests/mpep-mcp.test.ts), fresh/legacy artifact verification. [Setup and limits](mpep.md) distinguish maintenance acquisition, pinned bytes, release identity and later guidance. |
+| Several outline books behind one reader | [EPO legal corpora](../packages/client/src/epo-legal.ts), [MCP adapter](../packages/mcp/src/epo-legal.ts), [corpus cursors](../packages/mcp/src/corpus-paging.ts) | [Reader tests](../tests/epo-legal-client.test.ts), [actual MCP and scope tests](../tests/epo-legal-mcp.test.ts), [verification](epo-legal.md). One shared reader plus a configuration object per book; citation grammars and position metadata stay book-specific. |
 | Session bootstrap, cookies and rotating headers | [Patent Public Search](../packages/client/src/publications.ts) | [Search-portal tests](../tests/publications-trademark-search.test.ts). Coalesce bootstrap and isolate credentials to approved origins. This is source-specific session handling, not upstream OAuth2. |
 | Asynchronous document generation/polling | [Patent Public Search PDF workflow](../packages/client/src/publications.ts) | Same search-portal tests and recorded native PDF success. Bound polling, honor cancellation and validate final bytes. |
 | Browser-minted temporary session | [Worker](../packages/waf-worker/src/index.ts), [provider](../packages/waf-session/src/provider.ts), [Trademark Search](../packages/client/src/trademark-search.ts) | [Worker](../tests/waf-worker.test.ts), [delivery](../tests/waf-session.test.ts), [MCP wiring](../tests/waf-integration.test.ts) and [dependency boundary](../tests/waf-boundaries.test.ts) tests. [Image verification](waf-worker.md) covers ARM64/AMD64. Browser acquisition stays separate. |
@@ -172,3 +173,12 @@ review and staged secret scanning. Update evidence with the implementation.
 Keep implemented, offline-verified, live-verified, image-verified and deployed
 states distinct. Preserve the [Rust/WASM boundary](stack.md#rust-and-webassembly)
 for future measured CPU work.
+
+## EPO legal corpora reuse the outline pattern
+
+The five epo.org/en/legal books share MPEP's outline schema, so they reuse
+`OutlineCorpus` (now with a per-book unavailable-artifact label), the shared FTS
+quoting and timestamp helpers, and MCP cursor binding. Each book declares only
+its citation grammar, slug-derived position, path label and URL suffix. Their
+edition labels are recorded crawl-path years, reported as unverified rather
+than unknown. See [EPO legal corpora](epo-legal.md) for limits and evidence.

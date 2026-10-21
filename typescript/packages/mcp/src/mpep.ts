@@ -1,7 +1,11 @@
-import { createHash } from "node:crypto";
 import { CorpusError, type MpepClient } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
+import {
+  corpusCursor,
+  corpusPageOffset,
+  corpusQueryKey,
+} from "./corpus-paging.js";
 import {
   type AuthCheck,
   downloadResult,
@@ -12,45 +16,14 @@ import {
 type CorpusStatus = Awaited<ReturnType<MpepClient["getCorpusStatus"]>>;
 type Client = Pick<MpepClient, "search" | "getSection" | "getCorpusStatus">;
 export const MPEP_CORPUS_STATUS_URI = "mpep://corpus/status";
-const cursorSchema = z.object({
-  version: z.literal(1),
-  offset: z.number().int().nonnegative(),
-  key: z.string(),
-});
-function queryKey(input: Record<string, unknown>, corpus: CorpusStatus) {
-  const { cursor: _cursor, offset: _offset, ...parameters } = input;
-  return createHash("sha256")
-    .update(
-      JSON.stringify({
-        parameters,
-        artifact: corpus.artifact_sha256,
-        build: corpus.build_id,
-        release: corpus.source_version,
-        snapshot: corpus.snapshot_date,
-      }),
-    )
-    .digest("hex");
-}
-function pageOffset(
-  input: Record<string, unknown> & {
-    cursor?: string | undefined;
-    offset: number;
-  },
-  corpus: CorpusStatus,
-) {
-  if (!input.cursor) return input.offset;
-  if (input.offset !== 0) throw new Error("Use cursor or offset, not both.");
-  let page: z.infer<typeof cursorSchema>;
-  try {
-    page = cursorSchema.parse(
-      JSON.parse(Buffer.from(input.cursor, "base64").toString("utf8")),
-    );
-  } catch {
-    throw new Error("Invalid pagination cursor.");
-  }
-  if (page.key !== queryKey(input, corpus))
-    throw new Error("Cursor belongs to a different query or corpus snapshot.");
-  return page.offset;
+// Cursor identity is unchanged from the original MPEP cursors.
+function identity(corpus: CorpusStatus) {
+  return {
+    artifact: corpus.artifact_sha256,
+    build: corpus.build_id,
+    release: corpus.source_version,
+    snapshot: corpus.snapshot_date,
+  };
 }
 function freshness(corpus: CorpusStatus): string {
   return `Installed release ${corpus.corpus_version}; snapshot ${corpus.snapshot_date ?? "unknown"}; interim updates ${corpus.interim_updates_coverage}. Release comparison ${corpus.release_check.comparison} (checked ${corpus.release_check.checked_at}). This is a local snapshot, not a live currency check.`;
@@ -92,7 +65,7 @@ export function registerMpepTools(
     },
     async (input) => {
       const corpus = await client.getCorpusStatus();
-      const offset = pageOffset(input, corpus);
+      const offset = corpusPageOffset(input, identity(corpus));
       const response = await client.search({
         query: input.query,
         version: input.version,
@@ -104,7 +77,8 @@ export function registerMpepTools(
       // A replacement between the status/read calls must not splice two snapshots.
       if (
         input.cursor &&
-        queryKey(input, response.corpus) !== queryKey(input, corpus)
+        corpusQueryKey(input, identity(response.corpus)) !==
+          corpusQueryKey(input, identity(corpus))
       )
         throw new Error("The corpus snapshot changed; restart the search.");
       const result = listEnvelope(
@@ -123,13 +97,11 @@ export function registerMpepTools(
       return {
         ...result,
         next_cursor: response.has_more
-          ? Buffer.from(
-              JSON.stringify({
-                version: 1,
-                offset: offset + response.hits.length,
-                key: queryKey(input, response.corpus),
-              }),
-            ).toString("base64")
+          ? corpusCursor(
+              offset + response.hits.length,
+              input,
+              identity(response.corpus),
+            )
           : null,
       };
     },

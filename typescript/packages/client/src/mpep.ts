@@ -5,8 +5,10 @@ import { z } from "zod";
 import {
   CorpusError,
   checkCorpusSignal,
+  outlineFtsQuery as fts,
   OutlineCorpus,
   type OutlineHit,
+  corpusTimestamp as timestamp,
 } from "./corpus/outline.js";
 import type { CorpusProvenance } from "./models.js";
 import { MPEP_RELEASE_CHECK } from "./mpep-release.js";
@@ -116,14 +118,6 @@ function sourceVersion(metadata: Record<string, string>): string {
     ? value
     : "unknown";
 }
-function timestamp(value?: string): string | null {
-  if (!value) return null;
-  const full = /^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T00:00:00Z` : value;
-  const parsed = z.iso.datetime({ offset: true }).safeParse(full);
-  if (!parsed.success) return null;
-  const date = new Date(parsed.data);
-  return Number.isNaN(date.valueOf()) ? null : date.toISOString();
-}
 function url(href?: string, version?: string) {
   const result = new URL(
     href ? "/RDMS/MPEP/result" : "/RDMS/MPEP/search",
@@ -134,18 +128,6 @@ function url(href?: string, version?: string) {
     result.searchParams.set("version", version);
   return result.href;
 }
-function fts(query: string, syntax: "adj" | "exact" | "and" | "or") {
-  const clean = query.trim();
-  if (!clean) return "";
-  const quote = (text: string) => `"${text.replaceAll('"', '""')}"`;
-  return syntax === "adj" || syntax === "exact"
-    ? quote(clean)
-    : clean
-        .split(/\s+/)
-        .map(quote)
-        .join(syntax === "or" ? " OR " : " ");
-}
-
 /** Read-only MPEP snapshot reader; never acquires or refreshes an artifact. */
 export class MpepClient {
   private readonly corpus: OutlineCorpus;

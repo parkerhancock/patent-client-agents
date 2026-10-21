@@ -34,7 +34,8 @@
     "waf:refresh": "bun packages/waf-worker/src/cli.ts",
     "waf:install-browser": "bun run --filter @patent-client-agents/waf-worker install:browser",
     "verify:waf": "bun scripts/verify-waf-worker.ts",
-    "verify:mpep": "bun scripts/verify-mpep.ts"
+    "verify:mpep": "bun scripts/verify-mpep.ts",
+    "verify:epo-legal": "bun scripts/verify-epo-legal.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
