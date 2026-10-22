@@ -394,6 +394,21 @@ export class OutlineCorpus {
     }
   }
 
+  /** Every stored href, in rowid order. */
+  hrefs(): string[] {
+    if (!this.db) throw new CorpusError("ABORTED", "The corpus was closed.");
+    try {
+      return this.db
+        .all<{ href: string }>("SELECT href FROM sections ORDER BY rowid")
+        .map((row) => row.href);
+    } catch {
+      throw new CorpusError(
+        "INVALID_CORPUS",
+        "The corpus section index is not readable.",
+      );
+    }
+  }
+
   search(
     query: string,
     limit: number,

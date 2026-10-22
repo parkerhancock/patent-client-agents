@@ -602,7 +602,6 @@ test("legal references route MPEP, TMEP and every EPO corpus, and refuse unporte
   ).rejects.toThrow("only for uspto_mpep");
   for (const name of [
     "dpma",
-    "ukipo_mopp",
     "india_statutes",
     "india_mppp",
     "tw_trade_secrets",

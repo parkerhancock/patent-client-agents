@@ -32,7 +32,7 @@ output-mode schemas mark defaulted parameters as required.
 | `classify_cpc` | Served; needs EPO OPS credentials. USCLS mapping is rejected (OPS maps CPC, IPC and ECLA). |
 | `get_fees` | Served for the EPO, the Unitary Patent and the USPTO (patent, trademark, design); other offices report not yet ported |
 | `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC decisions not ported (the site now sits behind a Cloudflare challenge); USITC appears only with `USITC_EDIS_TOKEN`, matching the Python EDIS-enabled build (checked by a second contract fixture) |
-| `search_legal_reference`, `get_legal_reference` | MPEP, TMEP and the five EPO corpora served; DPMA, UKIPO MOPP, India and Taiwan not ported |
+| `search_legal_reference`, `get_legal_reference` | MPEP, TMEP, UKIPO MoPP and the five EPO corpora served; DPMA, India and Taiwan not ported |
 | `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents and CAFC opinions served; USITC attachments with `USITC_EDIS_TOKEN`; IP Australia not ported |
 | `search_upc_statutes`, `get_upc_section` | Served from the UPC statutes corpus. See [UPC statutes](upc-statutes.md) |
 | `search_wipo_lex_legislation`, `get_wipo_lex_legislation` | Served. See [WIPO Lex](wipo-lex.md) |
@@ -121,6 +121,9 @@ schedule (412 fees, effective January 19, 2025) and a small-entity year-4
 maintenance fee lookup passed live, and KR search reported that
 `KIPO_KIPRIS_API_KEY` is not configured. The full toolset's public USITC tools
 also answered live (HTS search, the IDS investigation feed).
+Later on October 22, `search_legal_reference` and `get_legal_reference` for
+`ukipo_mopp` ("inventive step", section 4A) passed against the packaged
+May 14 MoPP snapshot.
 
 Not facade defects, but visible in the run:
 

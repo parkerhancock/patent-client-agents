@@ -8,6 +8,7 @@ import {
   EpoFeesClient,
   EpoOpsClient,
   GooglePatentsClient,
+  MoppClient,
   MpepClient,
   TmepClient,
   UpcStatutesClient,
@@ -59,6 +60,14 @@ const tmep = new TmepClient({
 });
 results.tmep_section = (await tmep.getSection("1207.01")).href;
 assert.equal(results.tmep_section, "TMEP-1200d1e5044.html");
+const mopp = new MoppClient({
+  source: new Uint8Array(await readFile(fixture("ukipo-mopp/mopp.db"))),
+});
+results.mopp_section = (await mopp.getSection("4a")).href;
+assert.equal(
+  results.mopp_section,
+  "-section-4a-methods-of-treatment-or-diagnosis",
+);
 
 // Network clients with synthetic upstreams.
 const fees = new EpoFeesClient({
@@ -95,6 +104,6 @@ const google = GooglePatentsClient.parsePatent(
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
 
-for (const client of [epcByPath, epcBytes, mpep, zst, upc, tmep])
+for (const client of [epcByPath, epcBytes, mpep, zst, upc, tmep, mopp])
   client.close();
 console.log(JSON.stringify({ runtime: `node ${process.version}`, ...results }));

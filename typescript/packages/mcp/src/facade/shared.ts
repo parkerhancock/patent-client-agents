@@ -8,6 +8,7 @@ import type {
   EpoOpsClient,
   FeesClient,
   KiprisClient,
+  MoppClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -59,6 +60,7 @@ export interface FacadeClients {
   trademarkSearch: TrademarkSearchClient;
   mpep: MpepClient;
   tmep: TmepClient;
+  mopp: MoppClient;
   fees: FeesClient;
   cafc: CafcClient;
   copyright: CopyrightClient;
