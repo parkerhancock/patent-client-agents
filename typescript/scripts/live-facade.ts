@@ -55,7 +55,7 @@ const cases: Case[] = [
     args: { query: "ta=CRISPR and pa=Broad", jurisdiction: "ep_wo", limit: 3 },
   },
   {
-    name: "search kr (unported)",
+    name: "search kr (not configured)",
     tool: "search_patents",
     args: { query: "battery", jurisdiction: "kr" },
     expect: "error",
@@ -376,9 +376,25 @@ const cases: Case[] = [
     args: { mode: "jurisdictions" },
   },
   {
-    name: "fees USPTO (unported)",
+    name: "fees USPTO schedule",
     tool: "get_fees",
     args: { mode: "schedule", jurisdiction: "USPTO" },
+  },
+  {
+    name: "fees USPTO maintenance",
+    tool: "get_fees",
+    args: {
+      mode: "lookup",
+      jurisdiction: "USPTO",
+      category: "maintenance",
+      tier: "small",
+      year: 4,
+    },
+  },
+  {
+    name: "fees JPO (unported)",
+    tool: "get_fees",
+    args: { mode: "schedule", jurisdiction: "JPO" },
     expect: "error",
   },
   // Litigation
@@ -563,9 +579,19 @@ const cases: Case[] = [
       f.copyright ? { mode: "get", public_records_id: f.copyright } : null,
   },
   {
-    name: "tmep (unported)",
+    name: "tmep search",
     tool: "search_legal_reference",
-    args: { corpus: "uspto_tmep", query: "likelihood of confusion" },
+    args: { corpus: "uspto_tmep", query: "likelihood of confusion", limit: 3 },
+  },
+  {
+    name: "tmep section",
+    tool: "get_legal_reference",
+    args: { corpus: "uspto_tmep", identifier: "1207.01" },
+  },
+  {
+    name: "dpma (unported)",
+    tool: "search_legal_reference",
+    args: { corpus: "dpma", query: "Patent" },
     expect: "error",
   },
   // Documents

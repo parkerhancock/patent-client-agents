@@ -25,15 +25,15 @@ output-mode schemas mark defaulted parameters as required.
 
 | Tools | Status |
 | --- | --- |
-| `search_patents`, `get_patent`, `resolve_patent_number`, `patent_client_status` | Served. KR routes (KIPRIS) are not ported. |
+| `search_patents`, `get_patent`, `resolve_patent_number`, `patent_client_status` | Served. KR routes need `KIPO_KIPRIS_API_KEY`; without it they report how to enable them. |
 | `search_uspto`, `get_uspto`, `get_file_history`, `search_office_actions`, `search_patent_assignments` | Served |
 | `get_epo`, `search_epo` | Served; need EPO OPS credentials |
 | `search_trademarks`, `get_trademark`, `search_trademark_assignments` | Served; TSDR views need `USPTO_TSDR_API_KEY` |
 | `classify_cpc` | Served; needs EPO OPS credentials. USCLS mapping is rejected (OPS maps CPC, IPC and ECLA). |
-| `get_fees` | Served for EPO and the Unitary Patent; other offices report not yet ported |
-| `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC decisions not ported (the site now sits behind a Cloudflare challenge); USITC tools stay off as in the EDIS-less Python build |
-| `search_legal_reference`, `get_legal_reference` | MPEP and the five EPO corpora served; TMEP, DPMA, UKIPO MOPP, India and Taiwan not ported |
-| `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents and CAFC opinions served; USITC and IP Australia not ported |
+| `get_fees` | Served for the EPO, the Unitary Patent and the USPTO (patent, trademark, design); other offices report not yet ported |
+| `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC decisions not ported (the site now sits behind a Cloudflare challenge); USITC appears only with `USITC_EDIS_TOKEN`, matching the Python EDIS-enabled build (checked by a second contract fixture) |
+| `search_legal_reference`, `get_legal_reference` | MPEP, TMEP and the five EPO corpora served; DPMA, UKIPO MOPP, India and Taiwan not ported |
+| `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents and CAFC opinions served; USITC attachments with `USITC_EDIS_TOKEN`; IP Australia not ported |
 | `search_upc_statutes`, `get_upc_section` | Served from the UPC statutes corpus. See [UPC statutes](upc-statutes.md) |
 | `search_wipo_lex_legislation`, `get_wipo_lex_legislation` | Served. See [WIPO Lex](wipo-lex.md) |
 | `copyright` | Served. See [copyright](copyright.md) |
@@ -116,7 +116,11 @@ opinion PDFs by four-digit appeal number (127 KB) and by a harvested appeal
 (112 KB). A third run added the UPC statutes (search and the fee table, read
 from the May 14 snapshot), WIPO Lex (Canadian patent laws, then the Patent
 Act with its attachments) and the Copyright Office (233 hits for "Steamboat
-Willie", then one record by id).
+Willie", then one record by id). On October 22, TMEP search and section 1207.01, the USPTO patent
+schedule (412 fees, effective January 19, 2025) and a small-entity year-4
+maintenance fee lookup passed live, and KR search reported that
+`KIPO_KIPRIS_API_KEY` is not configured. The full toolset's public USITC tools
+also answered live (HTS search, the IDS investigation feed).
 
 Not facade defects, but visible in the run:
 
