@@ -9,6 +9,7 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   MpepClient,
+  TmepClient,
   UpcStatutesClient,
 } from "@patent-client-agents/client";
 
@@ -53,6 +54,11 @@ const upc = new UpcStatutesClient({
 });
 results.upc_instrument = (await upc.getInstrument("statute")).instrument;
 assert.equal(results.upc_instrument, "upca");
+const tmep = new TmepClient({
+  source: new Uint8Array(await readFile(fixture("tmep/tmep.db"))),
+});
+results.tmep_section = (await tmep.getSection("1207.01")).href;
+assert.equal(results.tmep_section, "TMEP-1200d1e5044.html");
 
 // Network clients with synthetic upstreams.
 const fees = new EpoFeesClient({
@@ -89,5 +95,6 @@ const google = GooglePatentsClient.parsePatent(
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
 
-for (const client of [epcByPath, epcBytes, mpep, zst, upc]) client.close();
+for (const client of [epcByPath, epcBytes, mpep, zst, upc, tmep])
+  client.close();
 console.log(JSON.stringify({ runtime: `node ${process.version}`, ...results }));

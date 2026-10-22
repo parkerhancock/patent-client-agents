@@ -16,6 +16,7 @@ import {
   PtabInterferencesClient,
   PtabTrialsClient,
   type PublicationsClient,
+  TmepClient,
 } from "@patent-client-agents/client";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
@@ -237,6 +238,7 @@ const corpus = (name: string) =>
 let server: FastMCP;
 let client: Client;
 let mpep: MpepClient;
+let tmep: TmepClient;
 type Envelope = {
   summary: string;
   items: Record<string, unknown>[];
@@ -319,6 +321,9 @@ beforeAll(async () => {
   mpep = new MpepClient({
     corpusPath: join(import.meta.dir, "fixtures", "mpep", "plain.db"),
   });
+  tmep = new TmepClient({
+    corpusPath: join(import.meta.dir, "fixtures", "tmep", "tmep.db"),
+  });
   server = createServer({
     toolset: "curated",
     clients: {
@@ -330,6 +335,7 @@ beforeAll(async () => {
       publications,
       epoOps,
       mpep,
+      tmep,
     },
     epoLegal: {
       epc: new EpcClient({ corpusPath: corpus("epc") }),
@@ -351,6 +357,7 @@ afterAll(async () => {
   await client.close();
   await server.close();
   mpep.close();
+  tmep.close();
 });
 
 test("the group's tools are registered with the deployed parameter names", async () => {
@@ -537,7 +544,7 @@ test("list_ptab_children covers trials, appeals with no decisions, and interfere
   ).rejects.toThrow("parent_type");
 });
 
-test("legal references route MPEP and every EPO corpus, and refuse unported corpora", async () => {
+test("legal references route MPEP, TMEP and every EPO corpus, and refuse unported corpora", async () => {
   const mpepHits = await call("search_legal_reference", {
     corpus: "uspto_mpep",
     query: "patent",
@@ -551,6 +558,7 @@ test("legal references route MPEP and every EPO corpus, and refuse unported corp
     "title",
   ]);
   for (const name of [
+    "uspto_tmep",
     "epc",
     "epo_case_law",
     "epo_guidelines",
@@ -593,7 +601,6 @@ test("legal references route MPEP and every EPO corpus, and refuse unported corp
     }),
   ).rejects.toThrow("only for uspto_mpep");
   for (const name of [
-    "uspto_tmep",
     "dpma",
     "ukipo_mopp",
     "india_statutes",

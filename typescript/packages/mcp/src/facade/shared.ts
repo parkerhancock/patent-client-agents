@@ -14,6 +14,7 @@ import type {
   PtabInterferencesClient,
   PtabTrialsClient,
   PublicationsClient,
+  TmepClient,
   TrademarkAssignmentClient,
   TrademarkSearchClient,
   TsdrClient,
@@ -53,6 +54,7 @@ export interface FacadeClients {
   publications: PublicationsClient;
   trademarkSearch: TrademarkSearchClient;
   mpep: MpepClient;
+  tmep: TmepClient;
   fees: FeesClient;
   cafc: CafcClient;
   copyright: CopyrightClient;

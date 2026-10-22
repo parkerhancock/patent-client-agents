@@ -38,7 +38,6 @@ const corpus = z.enum(LEGAL_CORPORA);
 
 /** Corpora whose TypeScript reader does not exist yet. */
 const UNPORTED: Partial<Record<Corpus, string>> = {
-  uspto_tmep: "The TMEP corpus",
   dpma: "The DPMA (German statutes) corpus",
   ukipo_mopp: "The UKIPO Manual of Patent Practice corpus",
   india_statutes: "The India IP statutes corpus",
@@ -101,9 +100,10 @@ function reader(clients: FacadeClients, name: Corpus): Reader {
   if (unported)
     notPorted(
       `${unported}`,
-      "Available corpora: uspto_mpep, epc, epo_case_law, epo_guidelines, epo_pct_guidelines, epo_up_guidelines.",
+      "Available corpora: uspto_mpep, uspto_tmep, epc, epo_case_law, epo_guidelines, epo_pct_guidelines, epo_up_guidelines.",
     );
   if (name === "uspto_mpep") return clients.mpep as unknown as Reader;
+  if (name === "uspto_tmep") return clients.tmep as unknown as Reader;
   return clients.epoLegal[
     EPO_BOOK[name as keyof typeof EPO_BOOK]
   ] as unknown as Reader;
@@ -126,7 +126,7 @@ function stubHit(hit: Hit): Record<string, unknown> {
 }
 
 const CORPUS_DESCRIPTION =
-  "Which legal-reference corpus to search. US: 'uspto_mpep' (patent examiner manual), 'uspto_tmep' (trademark examiner manual, not yet available on this server). EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines' (unitary patent), 'epo_case_law' (Boards of Appeal), 'epc' (the Convention). National statutes/manuals (not yet available on this server): 'dpma' (Germany), 'ukipo_mopp' (UK), 'india_statutes', 'india_mppp' (India patent practice), 'tw_trade_secrets' (Taiwan).";
+  "Which legal-reference corpus to search. US: 'uspto_mpep' (patent examiner manual), 'uspto_tmep' (trademark examiner manual). EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines' (unitary patent), 'epo_case_law' (Boards of Appeal), 'epc' (the Convention). National statutes/manuals (not yet available on this server): 'dpma' (Germany), 'ukipo_mopp' (UK), 'india_statutes', 'india_mppp' (India patent practice), 'tw_trade_secrets' (Taiwan).";
 const VERSION_DESCRIPTION =
   "MPEP installed release selector; other corpora support current only.";
 
@@ -140,7 +140,7 @@ export function registerLegalReferenceFacade(
       ...facadeToolOptions(auth),
       name: "search_legal_reference",
       description:
-        "Search a legal-reference corpus — statutes, examination manuals, or guidelines.\n\nRoutes to one of the bundled substantive-law corpora by ``corpus`` and returns relevance-ranked snippet hits. Find a provision, then call ``get_legal_reference`` with the same ``corpus`` and the hit's section/citation identifier for the full text. On this server the MPEP and the five EPO corpora are available; the other corpus values report that they are not yet ported. The ``statute`` filter applies only to corpus='dpma' and 'india_statutes'.\n\nRelated tools: get_legal_reference.",
+        "Search a legal-reference corpus — statutes, examination manuals, or guidelines.\n\nRoutes to one of the bundled substantive-law corpora by ``corpus`` and returns relevance-ranked snippet hits. Find a provision, then call ``get_legal_reference`` with the same ``corpus`` and the hit's section/citation identifier for the full text. On this server the MPEP, the TMEP and the five EPO corpora are available; the other corpus values report that they are not yet ported. The ``statute`` filter applies only to corpus='dpma' and 'india_statutes'.\n\nRelated tools: get_legal_reference.",
       input: z.object({
         corpus: corpus.describe(CORPUS_DESCRIPTION),
         query: z
@@ -234,7 +234,7 @@ export function registerLegalReferenceFacade(
         "Fetch the full text of one legal-reference section by identifier.\n\nAlways returns a ``ListEnvelope`` (stable shape). Route by ``corpus``; the identifier is a section number for examination manuals/guidelines or a statute citation for statute corpora — discover it with ``search_legal_reference``. Sections longer than 32,000 characters are delivered as a text artifact instead of inline text.\n\nRelated tools: search_legal_reference.",
       input: z.object({
         corpus: corpus.describe(
-          "Which legal-reference corpus the identifier belongs to (same enum as search_legal_reference). US: 'uspto_mpep', 'uspto_tmep'. EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines', 'epo_case_law', 'epc'. National: 'dpma', 'ukipo_mopp', 'india_statutes', 'india_mppp', 'tw_trade_secrets'. Only uspto_mpep and the EPO corpora are available on this server.",
+          "Which legal-reference corpus the identifier belongs to (same enum as search_legal_reference). US: 'uspto_mpep', 'uspto_tmep'. EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines', 'epo_case_law', 'epc'. National: 'dpma', 'ukipo_mopp', 'india_statutes', 'india_mppp', 'tw_trade_secrets'. Only uspto_mpep, uspto_tmep and the EPO corpora are available on this server.",
         ),
         identifier: z
           .string()

@@ -23,6 +23,7 @@ import {
   PtabTrialsClient,
   PublicationsClient,
   SearchOptionsSchema,
+  TmepClient,
   TrademarkAssignmentClient,
   TrademarkSearchClient,
   TsdrClient,
@@ -67,6 +68,7 @@ import {
 } from "./relay.js";
 import { registerUsptoResources } from "./resources.js";
 import { registerPortalSearchTools } from "./search-portals.js";
+import { registerTmepTools } from "./tmep.js";
 import {
   registerUpcStatutesTools,
   type UpcStatutesReader,
@@ -88,6 +90,7 @@ export interface UsptoClients {
   publications: PublicationsClient;
   trademarkSearch: TrademarkSearchClient;
   mpep: MpepClient;
+  tmep: TmepClient;
   epoOps: EpoOpsClient;
   fees: FeesClient;
   googlePatents: GooglePatentsClient;
@@ -301,6 +304,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const wafSession = options.wafSession ?? wafSessionSourceFromEnv(process.env);
   const provided = options.clients ?? {};
   const mpep = provided.mpep ?? new MpepClient();
+  const tmep = provided.tmep ?? new TmepClient();
   const ownedEpoLegal: { close(): void }[] = [];
   const own = <T extends { close(): void }>(client: T) => {
     ownedEpoLegal.push(client);
@@ -339,6 +343,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     downloads,
     () => {
       if (!provided.mpep) mpep.close();
+      if (!provided.tmep) tmep.close();
       for (const client of ownedEpoLegal) client.close();
     },
   );
@@ -470,6 +475,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       provided.trademarkSearch ??
       lazyClient(() => configuredTrademarkSearchClient(wafSession)),
     mpep,
+    tmep,
     fees: provided.fees ?? new FeesClient(),
     googlePatents: provided.googlePatents ?? new GooglePatentsClient(),
     cafc: provided.cafc ?? new CafcClient(),
@@ -669,6 +675,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   );
   registerUsptoResources(server, auth);
   registerMpepTools(server, mpep, externalAuth);
+  registerTmepTools(server, tmep, externalAuth);
   registerGooglePatentsTools(
     server,
     clients.googlePatents,

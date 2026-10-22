@@ -45,7 +45,8 @@
     "record:google-patents": "bun scripts/record-google-patents.ts",
     "verify:facade-live": "bun scripts/live-facade.ts",
     "verify:epo-legal": "bun scripts/verify-epo-legal.ts",
-    "verify:upc-statutes": "bun scripts/verify-upc-statutes.ts"
+    "verify:upc-statutes": "bun scripts/verify-upc-statutes.ts",
+    "verify:tmep": "bun scripts/verify-tmep.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
