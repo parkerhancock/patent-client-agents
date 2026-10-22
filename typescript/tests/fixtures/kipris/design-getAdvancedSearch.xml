@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc-derived, not recorded: the documented sample response for getAdvancedSearch on the KIPRIS Plus DBII_000000000000008 page (references/kipris), trimmed to two items for searches. -->
+<response>
+  <header>
+    <requestMsgID />
+    <responseTime>2014-10-31 10:44:10.4410</responseTime>
+    <responseMsgID />
+    <successYN />
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <agentName>박종욱</agentName>
+        <applicantName>김민수</applicantName>
+        <applicationDate>20130814</applicationDate>
+        <applicationNumber>3020130041948</applicationNumber>
+        <applicationStatus>등록</applicationStatus>
+        <articleName>직물지</articleName>
+        <designMainClassification>M1110</designMainClassification>
+        <dsShpClssCd>M1110</dsShpClssCd>
+        <fullText>Y</fullText>
+        <inventorName />
+        <number>1</number>
+        <openDate />
+        <openNumber />
+        <priorityDate />
+        <priorityNumber />
+        <publicationDate>20131205</publicationDate>
+        <publicationNumber />
+        <registrationDate>20131126</registrationDate>
+        <registrationNumber>3007186540000</registrationNumber>
+      </item>
+      <item>
+        <agentName>김효정</agentName>
+        <applicantName>김민수</applicantName>
+        <applicationDate>20140526</applicationDate>
+        <applicationNumber>3020140025871</applicationNumber>
+        <applicationStatus>등록</applicationStatus>
+        <articleName>파일용 속지</articleName>
+        <designMainClassification>F31320</designMainClassification>
+        <dsShpClssCd>F31320</dsShpClssCd>
+        <fullText>Y</fullText>
+        <inventorName>김민수</inventorName>
+        <number>2</number>
+        <openDate />
+        <openNumber />
+        <priorityDate />
+        <priorityNumber />
+        <publicationDate>20141027</publicationDate>
+        <publicationNumber />
+        <registrationDate>20141021</registrationDate>
+        <registrationNumber>3007681010000</registrationNumber>
+      </item>
+    </items>
+  </body>
+  <count>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>71</totalCount>
+  </count>
+</response>

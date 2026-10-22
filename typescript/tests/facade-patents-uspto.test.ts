@@ -454,7 +454,7 @@ describe("search_patents and search_uspto", () => {
     await expect(
       mcp.call("search_patents", { query: "x", jurisdiction: "kr" }),
     ).rejects.toThrow(
-      /Korean \(KR\) patent search is not enabled on this server \(KIPO_KIPRIS_API_KEY\/KIPO_KIPRIS_BASE_URL is not configured\).*jurisdiction='us'/,
+      /Korean \(KR\) patent search is not enabled on this server \(KIPO_KIPRIS_API_KEY is not configured\).*jurisdiction='us'/,
     );
   });
   test("search_uspto routes applications, publications and petitions", async () => {

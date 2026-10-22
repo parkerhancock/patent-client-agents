@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc-derived, not recorded: the documented sample response for getBibliographyDetailInfoSearch on the KIPRIS Plus DBII_000000000000008 page (references/kipris), trimmed to two items for searches. -->
+<response>
+  <header>
+    <requestMsgID />
+    <responseTime>2018-04-25 09:00:03.03</responseTime>
+    <responseMsgID />
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <item>
+      <agentInfoArray />
+      <applicantInfoArray>
+        <applicantInfo>
+          <applicantAddress>경기도 고양시 일산동구...</applicantAddress>
+          <applicantCode>419980496068</applicantCode>
+          <applicantCountry>대한민국</applicantCountry>
+          <applicantName>안준상</applicantName>
+        </applicantInfo>
+      </applicantInfoArray>
+      <biblioSummaryInfoArray>
+        <biblioInfoArray>
+          <biblioSummaryInfo>
+            <admstStat>소멸</admstStat>
+            <applicationDate>2011.05.31</applicationDate>
+            <applicationNumber>30-2011-0022388</applicationNumber>
+            <articleName>구두용 장식구</articleName>
+            <designBasicSimilarYn>기본디자인</designBasicSimilarYn>
+            <designCount>단독디자인</designCount>
+            <designCountNumber>1</designCountNumber>
+            <designNumber>M01</designNumber>
+            <designPriorityApplicationCountry />
+            <designPriorityApplicationDate />
+            <designPriorityApplicationNumber />
+            <dsScgrtDmndYn>공개디자인</dsScgrtDmndYn>
+            <dsShpClssCd />
+            <imgFg>Y</imgFg>
+            <lastDispositionCode>11251</lastDispositionCode>
+            <lastDispositionDate>2011.11.22</lastDispositionDate>
+            <lastDispositionDescription>등록결정(일반)</lastDispositionDescription>
+            <lastRetroDate>2011.05.31</lastRetroDate>
+            <lastRetroDescription />
+            <lastRetroTpcd />
+            <openDate />
+            <openNumber />
+            <originalApplicationDate />
+            <originalApplicationNumber />
+            <partDesignFg>부분디자인</partDesignFg>
+            <pubFg>Y</pubFg>
+            <publicationDate>2012.01.17</publicationDate>
+            <publicationNumber />
+            <regFg>Y</regFg>
+            <registrationDate>2012.01.06</registrationDate>
+            <registrationNumber>30-0628776-0000</registrationNumber>
+            <relationApplicationNumber />
+            <repubFg>N</repubFg>
+            <rgstTpcd>소멸 디자인</rgstTpcd>
+            <rgstTpcdDscr>등록료불납</rgstTpcdDscr>
+          </biblioSummaryInfo>
+        </biblioInfoArray>
+        <classificationCodeInfoArray>
+          <classificationCodeInfo>
+            <classificationCode>B915</classificationCode>
+          </classificationCodeInfo>
+        </classificationCodeInfoArray>
+        <designImageInfoArray>
+          <designImageInfo>
+            <applicationNumber>3020110022388</applicationNumber>
+            <designNumber>M01</designNumber>
+            <imagePath>
+              <imageName>000.jpg</imageName>
+              <largePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b42b8daf35d9e00e6
+</largePath>
+              <number>0</number>
+              <smallPath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed8ba518d13d6978d7
+</smallPath>
+            </imagePath>
+            <imagePath>
+              <imageName>000.jpg</imageName>
+              <largePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b42b8daf35d9e00e6
+</largePath>
+              <number>1</number>
+              <smallPath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed8ba518d13d6978d7
+</smallPath>
+            </imagePath>
+            <imagePath>
+              <imageName>001.jpg</imageName>
+              <largePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b327fab4c101a42cf
+</largePath>
+              <number>2</number>
+              <smallPath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed0f864fee46e65b9f
+</smallPath>
+            </imagePath>
+            <imagePath>
+              <imageName>002.jpg</imageName>
+              <largePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b32a61df4dc81231a
+</largePath>
+              <number>3</number>
+              <smallPath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbeda299d3410f8ad5a9
+</smallPath>
+            </imagePath>
+            <imagePath>
+              <imageName>003.jpg</imageName>
+              <largePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b86858096daffcccb
+</largePath>
+              <number>4</number>
+              <smallPath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbedc34e21a0e1eed999
+</smallPath>
+            </imagePath>
+            <imagePath>
+              <imageName>004.jpg</imageName>
+              <largePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025ba925e8e5dba9e275
+</largePath>
+              <number>5</number>
+              <smallPath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbedb38ea5aa03fd8159
+</smallPath>
+            </imagePath>
+            <imagePath>
+              <imageName>005.jpg</imageName>
+              <largePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b6dc2a0cfd19febf8
+</largePath>
+              <number>6</number>
+              <smallPath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed1e1ec865f6b44cde
+</smallPath>
+            </imagePath>
+            <imagePath>
+              <imageName>006.jpg</imageName>
+              <largePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025be2faeca842331780
+</largePath>
+              <number>7</number>
+              <smallPath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed6df84b73a2956a53
+</smallPath>
+            </imagePath>
+          </designImageInfo>
+        </designImageInfoArray>
+        <fullTextInfoArray>
+          <fullTextInfo>
+            <applicationNumber>3020110022388</applicationNumber>
+            <designNumber>M01</designNumber>
+            <fullTextFileKindCode>S10221</fullTextFileKindCode>
+            <fullTextFilePath>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=30a1e03368e0d50d8f05b95fbbd884e45e16bb9c11e9189c26d1d5a20b97a08dac1e246b0cdfccd417327e73d39403377df04aa47c15defc
+</fullTextFilePath>
+            <pageCount>0</pageCount>
+          </fullTextInfo>
+        </fullTextInfoArray>
+      </biblioSummaryInfoArray>
+      <creativeDescriptionInfoArray>
+        <creativeDescriptionInfo>
+          <designDescription>
+1. 재질은 금속재 및 유리재임.2. 본원 디자인은 구두의 전면 상부에 부착시켜 구두의 미감을 향상시키기 위한 장식구로 사용하는 것임.
+</designDescription>
+          <designNumber>M01</designNumber>
+        </creativeDescriptionInfo>
+      </creativeDescriptionInfoArray>
+      <creativeSummaryInfoArray>
+        <creativeSummaryInfo>
+          <designNumber>M01</designNumber>
+          <designSummary>"구두용 장식구"의 형상과 모양의 결합을 디자인 창작 내용의 요점으로 함.</designSummary>
+        </creativeSummaryInfo>
+      </creativeSummaryInfoArray>
+      <inventorInfoArray>
+        <inventorInfo>
+          <designNumber>M01</designNumber>
+          <inventorAddress>경기도 고양시 일산서구...</inventorAddress>
+          <inventorCode>419980496068</inventorCode>
+          <inventorCountry>대한민국</inventorCountry>
+          <inventorName>안준상</inventorName>
+        </inventorInfo>
+      </inventorInfoArray>
+      <legalStatusInfoArray>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.05.31</rsDate>
+          <rsDocumentName>[디자인심사등록출원]디자인등록출원서</rsDocumentName>
+          <rsDocumentNameEng>Application for Design Registration</rsDocumentNameEng>
+          <rsNo>112011041082764</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.05.31</rsDate>
+          <rsDocumentName>[디자인심사등록출원]디자인등록출원서</rsDocumentName>
+          <rsDocumentNameEng>Application for Examined Design Registration</rsDocumentNameEng>
+          <rsNo>112011041082764</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.05.31</rsDate>
+          <rsDocumentName>[디자인심사등록출원]디자인등록출원서</rsDocumentName>
+          <rsDocumentNameEng>
+[Application for Examined Design Registration] Application for Design Registration
+</rsDocumentNameEng>
+          <rsNo>112011041082764</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>불수리</procSTCD>
+          <rsDate>2011.06.02</rsDate>
+          <rsDocumentName>디자인무심사등록변경출원서</rsDocumentName>
+          <rsDocumentNameEng>
+Converted Application for Unexamined Design Registration
+</rsDocumentNameEng>
+          <rsNo>112011041800683</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.06.07</rsDate>
+          <rsDocumentName>서류반려이유통지서</rsDocumentName>
+          <rsDocumentNameEng>Notice of Reason for Return of Document</rsDocumentNameEng>
+          <rsNo>152011004953214</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.08</rsDate>
+          <rsDocumentName>[출원서등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Amendment to Bibliographic items</rsDocumentNameEng>
+          <rsNo>112011043175275</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.08</rsDate>
+          <rsDocumentName>[출원서등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>
+Amendment to Bibliographic items(Correction of Payment Particulars)
+</rsDocumentNameEng>
+          <rsNo>112011043175275</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.08</rsDate>
+          <rsDocumentName>[출원서등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Amendment to Bibliographic items(No charge)</rsDocumentNameEng>
+          <rsNo>112011043175275</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.08</rsDate>
+          <rsDocumentName>[출원서등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Amendment to Bibliographic items(Payer Number)</rsDocumentNameEng>
+          <rsNo>112011043175275</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.08</rsDate>
+          <rsDocumentName>[출원서등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>
+Amendment to Bibliographic items(requires payment )
+</rsDocumentNameEng>
+          <rsNo>112011043175275</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.08</rsDate>
+          <rsDocumentName>[출원서등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>[Amendment to Application, etc.] Amendment</rsDocumentNameEng>
+          <rsNo>112011043175275</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.08</rsDate>
+          <rsDocumentName>[출원서등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>
+[Amendment to Application, etc.] Amendment(Correction to Payment Particulars)
+</rsDocumentNameEng>
+          <rsNo>112011043175275</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.08</rsDate>
+          <rsDocumentName>[출원서등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>
+[Amendment to Patent Application, etc.] Amendment(Payer number)
+</rsDocumentNameEng>
+          <rsNo>112011043175275</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.15</rsDate>
+          <rsDocumentName>[반려요청]서류반려요청(반환신청)서</rsDocumentName>
+          <rsDocumentNameEng>Request for Return</rsDocumentNameEng>
+          <rsNo>112011045414363</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.06.15</rsDate>
+          <rsDocumentName>[반려요청]서류반려요청(반환신청)서</rsDocumentName>
+          <rsDocumentNameEng>
+[Request for Return] Request for Return of Document
+</rsDocumentNameEng>
+          <rsNo>112011045414363</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.06.16</rsDate>
+          <rsDocumentName>서류반려통지서</rsDocumentName>
+          <rsDocumentNameEng>Notice for Return</rsDocumentNameEng>
+          <rsNo>152011005335051</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.06.16</rsDate>
+          <rsDocumentName>서류반려통지서</rsDocumentName>
+          <rsDocumentNameEng>Notice for Return of Document</rsDocumentNameEng>
+          <rsNo>152011005335051</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.06.16</rsDate>
+          <rsDocumentName>서류반려통지서</rsDocumentName>
+          <rsDocumentNameEng>Notice for Return of Document, etc.</rsDocumentNameEng>
+          <rsNo>152011005335051</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.06.16</rsDate>
+          <rsDocumentName>서류반려통지서</rsDocumentName>
+          <rsDocumentNameEng>Notification for Return of Document</rsDocumentNameEng>
+          <rsNo>152011005335051</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.06.16</rsDate>
+          <rsDocumentName>서류반려통지서</rsDocumentName>
+          <rsDocumentNameEng>Notification of Partial Return</rsDocumentNameEng>
+          <rsNo>152011005335051</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.08.22</rsDate>
+          <rsDocumentName>의견제출통지서</rsDocumentName>
+          <rsDocumentNameEng>Notice of Reason for Refusal (Retransmission)</rsDocumentNameEng>
+          <rsNo>952011046841269</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.08.22</rsDate>
+          <rsDocumentName>의견제출통지서</rsDocumentName>
+          <rsDocumentNameEng>Notification of reason for refusal</rsDocumentNameEng>
+          <rsNo>952011046841269</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.22</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Amendment to Drawings</rsDocumentNameEng>
+          <rsNo>112011082783116</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.22</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Amendment to Drawings(Reexamination)</rsDocumentNameEng>
+          <rsNo>112011082783116</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.22</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Submission of Specimen</rsDocumentNameEng>
+          <rsNo>112011082783116</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.22</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>
+[Amendment to Drawing, etc.] Amendment(Re-examination)
+</rsDocumentNameEng>
+          <rsNo>112011082783116</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.22</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>[Amendment to Drawings, etc.]Amendment</rsDocumentNameEng>
+          <rsNo>112011082783116</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.26</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Amendment to Drawings</rsDocumentNameEng>
+          <rsNo>112011084076887</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.26</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Amendment to Drawings(Reexamination)</rsDocumentNameEng>
+          <rsNo>112011084076887</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.26</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>Submission of Specimen</rsDocumentNameEng>
+          <rsNo>112011084076887</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.26</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>
+[Amendment to Drawing, etc.] Amendment(Re-examination)
+</rsDocumentNameEng>
+          <rsNo>112011084076887</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>보정승인</procSTCD>
+          <rsDate>2011.10.26</rsDate>
+          <rsDocumentName>[도면등 보정]보정서</rsDocumentName>
+          <rsDocumentNameEng>[Amendment to Drawings, etc.]Amendment</rsDocumentNameEng>
+          <rsNo>112011084076887</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.11.05</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>
+Notification of Change (Correction) of Information of Applicant
+</rsDocumentNameEng>
+          <rsNo>412011522176484</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.11.05</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>Notification of change of applicant's information</rsDocumentNameEng>
+          <rsNo>412011522176484</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2011.11.05</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>
+Report on Change (Correction) of Information of Applicant
+</rsDocumentNameEng>
+          <rsNo>412011522176484</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>발송처리완료</procSTCD>
+          <rsDate>2011.11.22</rsDate>
+          <rsDocumentName>디자인등록결정서</rsDocumentName>
+          <rsDocumentNameEng>Decision to grant Design Registration</rsDocumentNameEng>
+          <rsNo>952011068123389</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2016.09.28</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>
+Notification of Change (Correction) of Information of Applicant
+</rsDocumentNameEng>
+          <rsNo>412016513814062</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2016.09.28</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>Notification of change of applicant's information</rsDocumentNameEng>
+          <rsNo>412016513814062</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2016.09.28</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>
+Report on Change (Correction) of Information of Applicant
+</rsDocumentNameEng>
+          <rsNo>412016513814062</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2017.08.22</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>
+Notification of Change (Correction) of Information of Applicant
+</rsDocumentNameEng>
+          <rsNo>412017513346940</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2017.08.22</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>Notification of change of applicant's information</rsDocumentNameEng>
+          <rsNo>412017513346940</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2017.08.22</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>
+Report on Change (Correction) of Information of Applicant
+</rsDocumentNameEng>
+          <rsNo>412017513346940</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2017.08.22</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>
+Notification of Change (Correction) of Information of Applicant
+</rsDocumentNameEng>
+          <rsNo>412017513347097</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2017.08.22</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>Notification of change of applicant's information</rsDocumentNameEng>
+          <rsNo>412017513347097</rsNo>
+        </legalStatusInfo>
+        <legalStatusInfo>
+          <procSTCD>수리</procSTCD>
+          <rsDate>2017.08.22</rsDate>
+          <rsDocumentName>출원인정보변경(경정)신고서</rsDocumentName>
+          <rsDocumentNameEng>
+Report on Change (Correction) of Information of Applicant
+</rsDocumentNameEng>
+          <rsNo>412017513347097</rsNo>
+        </legalStatusInfo>
+      </legalStatusInfoArray>
+    </item>
+  </body>
+</response>

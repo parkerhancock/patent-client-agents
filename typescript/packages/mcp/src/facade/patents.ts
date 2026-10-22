@@ -151,7 +151,7 @@ const CQL_HELP = {
 
 const EPO_OPS = "https://ops.epo.org/3.2/rest-services";
 const EPO_NAME = "European Patent Office Open Patent Services (EPO OPS)";
-const KIPRIS_ENV = "KIPO_KIPRIS_API_KEY/KIPO_KIPRIS_BASE_URL";
+const KIPRIS_ENV = "KIPO_KIPRIS_API_KEY";
 
 /** Facade sub-modes routed to notPorted, reported by patent_client_status. */
 export const PATENTS_UNPORTED_MODES: string[] = [];
@@ -165,7 +165,7 @@ const isUs = (identifier: string) => {
   const cleaned = identifier.trim().toUpperCase();
   return cleaned.startsWith("US") || /^[\d,]+$/.test(cleaned);
 };
-/** KR routing needs the BYOK key and an HTTPS endpoint (Python checked only the key). */
+/** KR routing needs the BYOK key, as in Python. */
 function requireKipris(
   clients: FacadeClients,
   feature: string,
@@ -654,7 +654,7 @@ export function registerPatentsFacade(
         jpo: ["JPO_API_USERNAME", "JPO_API_PASSWORD"],
         euipo: ["EUIPO_CLIENT_ID"],
         ip_australia: ["IPAUSTRALIA_CLIENT_ID"],
-        kipo: ["KIPO_KIPRIS_API_KEY", "KIPO_KIPRIS_BASE_URL"],
+        kipo: ["KIPO_KIPRIS_API_KEY"],
         tipo: ["TIPO_API_KEY"],
         inpi: ["INPI_USERNAME"],
         canlii: ["CANLII_API_KEY"],

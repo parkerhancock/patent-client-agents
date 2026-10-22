@@ -1,0 +1,239 @@
+
+
+
+
+
+
+	<article class="mt-10">
+		<p class="tit">Operation Name</p>
+	</article>
+
+	<p class="p-type1"> getWordSearch</p>
+
+	
+
+	<article class="mt-10">
+		<p class="tit">
+			Request URL
+		</p>
+	</article>
+	<p class="p-type1"><span class="txt-blue">http://plus.kipris.or.kr/</span></p>
+	<article class="mt-10">
+		<p class="tit">
+			Request Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+	
+
+	 
+
+
+
+
+	<div data-ax5grid="apiInutparameterGrid" data-ax5grid-config="{ }" style="height: 198px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid1' ,
+    	target : $("[data-ax5grid='apiInutparameterGrid']"),
+   		columns : [
+ 		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"word","paramDataInfo1":"검색단어","paramDataInfo2":"","paramOrder":"I0001","parentParamOrder":"NONE","path":"-[I0001]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"year","paramDataInfo1":"검색 연도 범위","paramDataInfo2":"0~10, 당해연도 기준 N년차","paramOrder":"I0002","parentParamOrder":"NONE","path":"-[I0002]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"patent","paramDataInfo1":"특허 포함 여부","paramDataInfo2":"true/false","paramOrder":"I0003","parentParamOrder":"NONE","path":"-[I0003]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"utility","paramDataInfo1":"실용신안 포함 여부","paramDataInfo2":"true/false","paramOrder":"I0004","parentParamOrder":"NONE","path":"-[I0004]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"numOfRows","paramDataInfo1":"페이지당 출력 건수","paramDataInfo2":"기본 10, 최대 500","paramOrder":"I0005","parentParamOrder":"NONE","path":"-[I0005]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"pageNo","paramDataInfo1":"페이지 번호","paramDataInfo2":"기본 1","paramOrder":"I0006","parentParamOrder":"NONE","path":"-[I0006]"}];
+
+    $g.setData( {data : data , id : "grid1"});
+
+//     $("[data-ax5grid='apiInutparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].paramData) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Input values ​​(sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="입력값(샘플)">http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getWordSearch?word=센서&year=0&ServiceKey=write your service key
+</textarea>
+	<article class="mt-10">
+		<p class="tit">
+			Response Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+
+
+	<div data-ax5grid="apiOutputparameterGrid" data-ax5grid-config="{ }" style="height: 588px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid2' ,
+    	target : $("[data-ax5grid='apiOutputparameterGrid']"),
+   		columns : [
+		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"items","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0001","parentParamOrder":"NONE","path":"-[G0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" indexNo","paramDataInfo1":"일련번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0001","path":"-[G0001]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registerStatus","paramDataInfo1":"등록상태","paramDataInfo2":"공개, 등록, 거절, 무효, 소멸, 취하, 포기","paramOrder":"D0002","parentParamOrder":"G0001","path":"-[G0001]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" inventionTitle","paramDataInfo1":"발명의명칭","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0001","path":"-[G0001]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" ipcNumber","paramDataInfo1":"IPC코드","paramDataInfo2":"복수값 '|' 구분","paramOrder":"D0004","parentParamOrder":"G0001","path":"-[G0001]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registerNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0001","path":"-[G0001]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registerDate","paramDataInfo1":"등록일자","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0001","path":"-[G0001]-[D0006]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0001","path":"-[G0001]-[D0007]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0001","path":"-[G0001]-[D0008]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" openNumber","paramDataInfo1":"공개번호","paramDataInfo2":"","paramOrder":"D0009","parentParamOrder":"G0001","path":"-[G0001]-[D0009]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" openDate","paramDataInfo1":"공개일자","paramDataInfo2":"","paramOrder":"D0010","parentParamOrder":"G0001","path":"-[G0001]-[D0010]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationNumber","paramDataInfo1":"공고번호","paramDataInfo2":"","paramOrder":"D0011","parentParamOrder":"G0001","path":"-[G0001]-[D0011]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationDate","paramDataInfo1":"공고일자","paramDataInfo2":"","paramOrder":"D0012","parentParamOrder":"G0001","path":"-[G0001]-[D0012]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" astrtCont","paramDataInfo1":"초록","paramDataInfo2":"","paramOrder":"D0013","parentParamOrder":"G0001","path":"-[G0001]-[D0013]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" drawing","paramDataInfo1":"이미지경로","paramDataInfo2":"","paramOrder":"D0014","parentParamOrder":"G0001","path":"-[G0001]-[D0014]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" bigDrawing","paramDataInfo1":"큰이미지경로","paramDataInfo2":"","paramOrder":"D0015","parentParamOrder":"G0001","path":"-[G0001]-[D0015]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicantName","paramDataInfo1":"출원인명","paramDataInfo2":"복수값 '|' 구분","paramOrder":"D0016","parentParamOrder":"G0001","path":"-[G0001]-[D0016]"},{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"count","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0002","parentParamOrder":"NONE","path":"-[G0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" numOfRows","paramDataInfo1":"페이지당건수","paramDataInfo2":"","paramOrder":"D0017","parentParamOrder":"G0002","path":"-[G0002]-[D0017]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" pageNo","paramDataInfo1":"페이지번호","paramDataInfo2":"","paramOrder":"D0018","parentParamOrder":"G0002","path":"-[G0002]-[D0018]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" totalCount","paramDataInfo1":"전체건수","paramDataInfo2":"","paramOrder":"D0019","parentParamOrder":"G0002","path":"-[G0002]-[D0019]"}];
+
+    $g.setData({data : data , id : "grid2"});
+
+//     $("[data-ax5grid='apiOutputparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].serviceNm) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Output value (sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="출력값(샘플)">&lt;response&gt;
+&lt;header&gt;
+&lt;requestMsgID&gt;&lt;/requestMsgID&gt;
+&lt;responseTime&gt;2014-10-30 16:25:03.253&lt;/responseTime&gt;
+&lt;responseMsgID&gt;&lt;/responseMsgID&gt;
+&lt;successYN&gt;&lt;/successYN&gt;
+&lt;resultCode&gt;00&lt;/resultCode&gt;
+&lt;resultMsg&gt;NORMAL SERVICE.&lt;/resultMsg&gt;&lt;/header&gt;
+&lt;body&gt;
+&lt;items&gt;
+&lt;item&gt;&lt;applicantName&gt;이두수&lt;/applicantName&gt;
+&lt;applicationDate&gt;1985/12/30 00:00:00&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1019850010013&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;내용 없음.&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;&lt;/bigDrawing&gt;
+&lt;drawing&gt;&lt;/drawing&gt;
+&lt;indexNo&gt;1&lt;/indexNo&gt;
+&lt;inventionTitle&gt;회전체의센서와센서의엔코더(SENSOR AND SENSOR ENCODER FOR
+                    ROTATOR)&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01D 5/00&lt;/ipcNumber&gt;
+&lt;openDate&gt;1987/07/11 00:00:00&lt;/openDate&gt;
+&lt;openNumber&gt;1019870006388&lt;/openNumber&gt;
+&lt;publicationDate&gt;1989/06/30 00:00:00&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;1019890002319&lt;/publicationNumber&gt;
+&lt;registerDate&gt;1990/02/28 00:00:00&lt;/registerDate&gt;
+&lt;registerNumber&gt;1000319440000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;&lt;/item&gt;
+&lt;item&gt;&lt;applicantName&gt;스나미사다가쓰&lt;/applicantName&gt;
+&lt;applicationDate&gt;1988/09/23 00:00:00&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1019880012313&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;내용 없음&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;&lt;/bigDrawing&gt;
+&lt;drawing&gt;&lt;/drawing&gt;
+&lt;indexNo&gt;2&lt;/indexNo&gt;
+&lt;inventionTitle&gt;자동차도난방지시스템&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;B60R 25/00 | B60R 25/01&lt;/ipcNumber&gt;
+&lt;openDate&gt;1990/04/12 00:00:00&lt;/openDate&gt;
+&lt;openNumber&gt;1019900004564&lt;/openNumber&gt;
+&lt;publicationDate&gt;1991/09/06 00:00:00&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;1019910006825&lt;/publicationNumber&gt;
+&lt;registerDate&gt;1991/12/19 00:00:00&lt;/registerDate&gt;
+&lt;registerNumber&gt;1000470810000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;&lt;/item&gt;
+&lt;item&gt;&lt;applicantName&gt;미쓰비시덴키 가부시키가이샤&lt;/applicantName&gt;
+&lt;applicationDate&gt;1987/03/21 00:00:00&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1019870002580&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;내용 없음&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;&lt;/bigDrawing&gt;
+&lt;drawing&gt;&lt;/drawing&gt;
+&lt;indexNo&gt;3&lt;/indexNo&gt;
+&lt;inventionTitle&gt;모터구동식파워스테어링제어장치(ELECTRONICALLY CONTROLLED POWER STEERING
+                    FOR VEHICLES)&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;B62D 5/06 | B62D 5/04&lt;/ipcNumber&gt;
+&lt;openDate&gt;1987/12/19 00:00:00&lt;/openDate&gt;
+&lt;openNumber&gt;1019870010995&lt;/openNumber&gt;
+&lt;publicationDate&gt;1990/10/31 00:00:00&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;1019900008031&lt;/publicationNumber&gt;
+&lt;registerDate&gt;1991/02/02 00:00:00&lt;/registerDate&gt;
+&lt;registerNumber&gt;1000395370000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;&lt;/item&gt;
+&lt;item&gt;&lt;applicantName&gt;미쓰비시 마테리알 가부시키가이샤&lt;/applicantName&gt;
+&lt;applicationDate&gt;1988/07/29 00:00:00&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1019880009648&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;내용 없음&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;&lt;/bigDrawing&gt;
+&lt;drawing&gt;&lt;/drawing&gt;
+&lt;indexNo&gt;4&lt;/indexNo&gt;
+&lt;inventionTitle&gt;반도체단결정봉의절단장치(APPARATUS FOR CUTTING SEMICONDUCTOR
+                    CRYSTAL)&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H01L 21/00&lt;/ipcNumber&gt;
+&lt;openDate&gt;1989/04/12 00:00:00&lt;/openDate&gt;
+&lt;openNumber&gt;1019890002988&lt;/openNumber&gt;
+&lt;publicationDate&gt;1994/11/26 00:00:00&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;1019940011179&lt;/publicationNumber&gt;
+&lt;registerDate&gt;1995/02/28 00:00:00&lt;/registerDate&gt;
+&lt;registerNumber&gt;1000828050000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;&lt;/item&gt;
+&lt;/items&gt;
+&lt;/body&gt;
+&lt;count&gt;&lt;numOfRows&gt;10&lt;/numOfRows&gt;
+&lt;pageNo&gt;1&lt;/pageNo&gt;
+&lt;totalCount&gt;414120&lt;/totalCount&gt;&lt;/count&gt;
+&lt;/response&gt;</textarea>
+							

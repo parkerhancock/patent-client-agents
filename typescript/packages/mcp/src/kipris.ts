@@ -18,7 +18,8 @@ import {
 /** Python LIST_CAP for list-accepting fetch tools. */
 const LIST_CAP = 50;
 
-// ── Lean projections, field for field with Python's _lean_* ─────────
+// ── Lean projections. Python's _lean_* keys, less the fields the KIPRIS
+// documentation shows no search element for (see docs/kipris.md). ─────
 
 export function leanKiprisPatent(row: KiprisPatentRow) {
   return {
@@ -29,9 +30,7 @@ export function leanKiprisPatent(row: KiprisPatentRow) {
     register_number: row.registerNumber,
     register_status: row.registerStatus,
     invention_title: row.inventionTitle,
-    invention_title_english: row.inventionTitleEnglish,
     applicant_name: row.applicantName,
-    inventor_name: row.inventorName,
     ipc_number: row.ipcNumber,
   };
 }
@@ -54,12 +53,12 @@ export function leanKiprisDesign(row: KiprisDesignRow) {
     application_date: row.applicationDate,
     registration_number: row.registrationNumber,
     registration_date: row.registrationDate,
-    register_status: row.registerStatus,
+    register_status: row.applicationStatus,
     article_name: row.articleName,
-    loc_code: row.locCode,
+    design_classification: row.designMainClassification,
     applicant_name: row.applicantName,
     inventor_name: row.inventorName,
-    drawing: row.drawing,
+    drawing: row.imagePath,
   };
 }
 
@@ -75,7 +74,7 @@ function searchEnvelope<T extends Record<string, unknown>>(
   const items = page.items.map((row) => (full ? { ...row } : lean(row)));
   const total = page.pagination.totalCount;
   const counted = typeof total === "number";
-  // Python multiplied by the requested size; the client caps it at 1000 rows.
+  // Python multiplied by the requested size; the client caps it at the documented 500 rows.
   const rows = Math.min(numOfRows, KIPRIS_MAX_ROWS);
   return {
     ...listEnvelope(
@@ -189,7 +188,7 @@ const rowsField = z
   .int()
   .min(1)
   .default(10)
-  .describe("Page size (max 1000).");
+  .describe("Page size (max 500).");
 const pageField = z
   .number()
   .int()
@@ -258,7 +257,7 @@ export function registerKiprisTools(
           ),
         right_type: rightType,
         num_of_rows: rowsField.describe(
-          "Page size. KIPRIS Plus defaults to 10; max 1000.",
+          "Page size. Defaults to 10; KIPRIS Plus allows at most 500.",
         ),
         page_no: pageField,
         full: z
@@ -329,10 +328,10 @@ export function registerKiprisTools(
     {
       ...options,
       name: "get_kipo_patent",
-      description: `Fetch a single KIPO patent / utility model by application or publication number.\n\nAccepts a single number or a list (capped at ${LIST_CAP}). Iterates serially per ToS §11 quota awareness; the response stays a list envelope even for a single ID.\n\n${RELATED}`,
+      description: `Fetch a single KIPO patent / utility model by application number.\n\nAccepts a single number or a list (capped at ${LIST_CAP}). Iterates serially per ToS §11 quota awareness; the response stays a list envelope even for a single ID.\n\n${RELATED}`,
       input: z.object({
         application_number: numberInput(
-          `KIPO application or publication number (digits-only), or a list (capped at ${LIST_CAP}) for portfolio workflows. Fan-out is serial — KIPRIS has no batch endpoint.`,
+          `KIPO application number (13 digits, e.g. 1020230012345), or a list (capped at ${LIST_CAP}) for portfolio workflows. Fan-out is serial — KIPRIS has no batch endpoint.`,
         ),
         full: fullField,
       }),
@@ -423,10 +422,10 @@ export function registerKiprisTools(
     {
       ...options,
       name: "get_kipo_trademark",
-      description: `Fetch a single KIPO trademark by application or registration number.\n\nAccepts a single number or a list (capped at ${LIST_CAP}).`,
+      description: `Fetch a single KIPO trademark by application number.\n\nAccepts a single number or a list (capped at ${LIST_CAP}).`,
       input: z.object({
         application_number: numberInput(
-          `KIPO trademark application or registration number (digits-only), or a list (capped at ${LIST_CAP}). Fan-out is serial — KIPRIS has no batch endpoint.`,
+          `KIPO trademark application number (13 digits), or a list (capped at ${LIST_CAP}). Fan-out is serial — KIPRIS has no batch endpoint.`,
         ),
         full: fullField,
       }),
@@ -486,7 +485,9 @@ export function registerKiprisTools(
           "Match against article name (the product the design covers).",
         ),
         applicant: optionalText("Match against applicant name."),
-        loc_code: optionalText("Locarno design classification code."),
+        loc_code: optionalText(
+          "KIPO design classification code (upstream designMainClassification, e.g. 'M1110'). KIPRIS offers no Locarno filter.",
+        ),
         application_date: optionalText(
           "Filing date filter (YYYYMMDD or range).",
         ),
@@ -502,7 +503,7 @@ export function registerKiprisTools(
       const page = await client.searchDesignsAdvanced({
         articleName: orUndefined(input.article_name),
         applicant: orUndefined(input.applicant),
-        locCode: orUndefined(input.loc_code),
+        designClassification: orUndefined(input.loc_code),
         applicationDate: orUndefined(input.application_date),
         registrationDate: orUndefined(input.registration_date),
         numOfRows: input.num_of_rows,
@@ -523,10 +524,10 @@ export function registerKiprisTools(
     {
       ...options,
       name: "get_kipo_design",
-      description: `Fetch a single KIPO design by application or registration number.\n\nAccepts a single number or a list (capped at ${LIST_CAP}). Always includes the drawing image URL field.`,
+      description: `Fetch a single KIPO design by application number.\n\nAccepts a single number or a list (capped at ${LIST_CAP}). Always includes the drawing image URL field.`,
       input: z.object({
         application_number: numberInput(
-          `KIPO design application or registration number (digits-only), or a list (capped at ${LIST_CAP}). Fan-out is serial — KIPRIS has no batch endpoint.`,
+          `KIPO design application number (13 digits), or a list (capped at ${LIST_CAP}). Fan-out is serial — KIPRIS has no batch endpoint.`,
         ),
         full: fullField,
       }),

@@ -1,35 +1,43 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import {
   ApiError,
   ConfigurationError,
+  KIPRIS_BASE_URL,
   KiprisClient,
   type KiprisPatentRow,
   kiprisDate,
   parseKiprisResponse,
 } from "../packages/client/src/index.js";
 import { createServer } from "../packages/mcp/src/index.js";
+import { kiprisCassette, kiprisRecording } from "./kipris-recordings.js";
 
 /**
- * The Python connector's XML fixtures (tests/kipo_kipris/fixtures) are
- * synthesized from the KIPRIS envelope documentation, not recorded: no
- * KIPRIS key has been issued. They are replayed here through a synthetic
- * fetch; nothing touches the network.
+ * Fixtures in tests/fixtures/kipris are doc-derived, not recorded: the sample
+ * responses printed on the KIPRIS Plus Open API pages (archived in
+ * references/kipris), trimmed to two items. The two error envelopes have the
+ * shape observed live without a registered key. Small inline responses below
+ * are synthetic edge cases. Nothing touches the network.
  */
-const FIXTURES = join(
-  import.meta.dir,
-  "..",
-  "..",
-  "tests",
-  "kipo_kipris",
-  "fixtures",
-);
+const FIXTURES = join(import.meta.dir, "fixtures", "kipris");
 const fixture = (name: string) => readFileSync(join(FIXTURES, name), "utf8");
-const BASE = "https://kipris.example.test/openapi/service";
 const KEY = "test-service-key";
 const KIPO_VARS = ["KIPO_KIPRIS_API_KEY", "KIPO_KIPRIS_BASE_URL"];
+const PATENTS = `${KIPRIS_BASE_URL}/patUtiModInfoSearchSevice`;
+/** Synthetic: a documented envelope with no hits. */
+const EMPTY =
+  "<response><header><resultCode>00</resultCode><resultMsg>NORMAL SERVICE.</resultMsg></header><body><items/></body><count><numOfRows>10</numOfRows><pageNo>1</pageNo><totalCount>0</totalCount></count></response>";
+/** Synthetic: one page of a three-row result, `rows` items long. */
+const paged = (page: number, rows: number) =>
+  `<response><header><resultCode>00</resultCode></header><body><items>${Array.from(
+    { length: rows },
+    (_, i) =>
+      `<item><applicationNumber>10202300000${page}${i}</applicationNumber><inventionTitle>Row ${page}.${i}</inventionTitle></item>`,
+  ).join(
+    "",
+  )}</items></body><count><numOfRows>2</numOfRows><pageNo>${page}</pageNo><totalCount>3</totalCount></count></response>`;
 
 interface Seen {
   path: string;
@@ -39,51 +47,37 @@ interface Seen {
 function fakeKipris(overrides: Record<string, string | Response> = {}) {
   const seen: Seen[] = [];
   const xml = (body: string) =>
-    new Response(body, { headers: { "content-type": "application/xml" } });
+    new Response(body, { headers: { "content-type": "text/xml" } });
   const fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
     const url = new URL(new Request(input, init).url);
     const query = Object.fromEntries(url.searchParams);
     seen.push({ path: url.pathname, query });
-    const operation = url.pathname.split("/").slice(-2).join("/");
-    const key = query.word ?? query.applicationNumber ?? operation;
-    const override = overrides[key] ?? overrides[operation];
+    const [service = "", operation = ""] = url.pathname.split("/").slice(-2);
+    const term =
+      query.word ??
+      query.searchString ??
+      (operation === "getWordSearch" ? query.articleName : undefined) ??
+      query.applicationNumber;
+    const override =
+      (term === undefined ? undefined : overrides[term]) ??
+      overrides[`${service}/${operation}`];
     if (override instanceof Response) return override;
     if (override !== undefined) return xml(override);
-    if (operation === "patUtliInfoSearchService/getWordSearch") {
-      if (query.word === "paged")
-        return xml(
-          fixture(
-            query.pageNo === "1"
-              ? "pat_utl_word_search_page1_full.xml"
-              : "pat_utl_word_search_page2_short.xml",
-          ),
-        );
-      return xml(fixture("pat_utl_word_search_2rows.xml"));
-    }
-    if (operation === "patUtliInfoSearchService/getAdvancedSearch")
-      return xml(
-        fixture(
-          query.applicationNumber === "1020230012345" ||
-            query.applicationNumber === undefined
-            ? "pat_utl_get_single.xml"
-            : "pat_utl_word_search_empty.xml",
-        ),
-      );
-    if (operation === "trademarkInfoSearchService/getWordSearch")
-      return xml(fixture("tm_word_search_2rows.xml"));
-    if (operation === "trademarkInfoSearchService/getAdvancedSearch")
-      return xml(fixture("tm_get_single.xml"));
-    if (operation === "designInfoSearchService/getWordSearch")
-      return xml(fixture("design_word_search_1row.xml"));
-    if (operation === "designInfoSearchService/getAdvancedSearch")
-      return xml(fixture("design_get_single.xml"));
-    return new Response("not found", { status: 404 });
+    if (term === "paged")
+      return xml(paged(Number(query.pageNo), query.pageNo === "1" ? 2 : 1));
+    if (term === "missing" || term === "1029999999999") return xml(EMPTY);
+    const kind = {
+      patUtiModInfoSearchSevice: "patent",
+      trademarkInfoSearchService: "trademark",
+      designInfoSearchService: "design",
+    }[service];
+    if (!kind) return new Response("not found", { status: 404 });
+    return xml(fixture(`${kind}-${operation}.xml`));
   };
   return {
     seen,
     client: new KiprisClient({
       serviceKey: KEY,
-      baseUrl: BASE,
       fetch: fetch as typeof globalThis.fetch,
       retryLimit: 0,
     }),
@@ -104,170 +98,258 @@ async function withoutKipoEnv<T>(run: () => Promise<T> | T): Promise<T> {
 }
 
 describe("client configuration", () => {
-  test("requires a key and an HTTPS endpoint, as Python does", async () => {
+  test("a key alone selects the documented HTTPS endpoint; overrides must be HTTPS", async () => {
     await withoutKipoEnv(() => {
-      expect(() => new KiprisClient({ baseUrl: BASE })).toThrow(
-        /KIPO_KIPRIS_API_KEY/,
-      );
-      expect(() => new KiprisClient({ serviceKey: KEY })).toThrow(
-        /KIPO_KIPRIS_BASE_URL/,
-      );
+      expect(() => new KiprisClient()).toThrow(/KIPO_KIPRIS_API_KEY/);
+      expect(
+        new KiprisClient({ serviceKey: KEY }).operationUrl(
+          "patUtiModInfoSearchSevice",
+          "getWordSearch",
+        ),
+      ).toBe(`${PATENTS}/getWordSearch`);
       expect(
         () =>
           new KiprisClient({
             serviceKey: KEY,
-            baseUrl: "http://kipo-api.kipi.or.kr/openapi/service",
+            baseUrl: "http://plus.kipris.or.kr/kipo-api/kipi",
           }),
       ).toThrow(ConfigurationError);
       process.env.KIPO_KIPRIS_API_KEY = KEY;
-      process.env.KIPO_KIPRIS_BASE_URL = BASE;
-      expect(new KiprisClient().operationUrl("x" as never, "y")).toBe(
-        `${BASE}/x/y`,
-      );
+      process.env.KIPO_KIPRIS_BASE_URL = "https://mirror.example.test/api";
+      expect(
+        new KiprisClient().operationUrl("designInfoSearchService", "x"),
+      ).toBe("https://mirror.example.test/api/designInfoSearchService/x");
     });
   });
 });
 
-describe("client parsing of the Python fixtures", () => {
-  test("word search sends Python's parameters and normalizes rows", async () => {
+describe("client requests and parsing", () => {
+  test("patent word search sends the documented parameters", async () => {
     const { client, seen } = fakeKipris();
-    const page = await client.searchPatentsWord("battery", {
+    const page = await client.searchPatentsWord("센서", {
       utility: false,
       numOfRows: 5000,
     });
     expect(seen[0]?.path).toBe(
-      "/openapi/service/patUtliInfoSearchService/getWordSearch",
+      "/kipo-api/kipi/patUtiModInfoSearchSevice/getWordSearch",
     );
     expect(seen[0]?.query).toEqual({
-      word: "battery",
-      patent: "Y",
-      utility: "N",
-      numOfRows: "1000",
+      word: "센서",
+      patent: "true",
+      utility: "false",
+      numOfRows: "500",
       pageNo: "1",
-      serviceKey: KEY,
+      ServiceKey: KEY,
     });
     expect(page.pagination).toEqual({
       resultCode: "00",
-      resultMsg: "NORMAL SERVICE",
+      resultMsg: "NORMAL SERVICE.",
       numOfRows: 10,
       pageNo: 1,
-      totalCount: 2,
+      totalCount: 414120,
     });
     expect(page.items).toHaveLength(2);
     expect(page.items[0]).toMatchObject({
-      applicationNumber: "1020230012345",
-      applicationDate: "2023-01-05",
-      openDate: "2023-07-15",
-      registerStatus: "등록",
-      inventionTitleEnglish: "Lithium Ion Battery Module",
-      ipcNumber: "H01M 10/0525;H01M 50/204",
+      applicationNumber: "1019850010013",
+      applicationDate: "1985-12-30",
+      openDate: "1987-07-11",
+      registerDate: "1990-02-28",
+      registerStatus: "소멸",
+      indexNo: "1",
+      drawing: null,
     });
-    expect(page.items[1]).toMatchObject({
-      publicationNumber: null,
-      publicationDate: null,
-      registerNumber: null,
-      agentName: null,
-      registerStatus: "공개",
-    });
-    expect(page.provenance.source_url).toBe(
-      `${BASE}/patUtliInfoSearchService/getWordSearch`,
-    );
+    expect(page.items[1]?.ipcNumber).toBe("B60R 25/00 | B60R 25/01");
+    expect(page.provenance.source_url).toBe(`${PATENTS}/getWordSearch`);
     expect(JSON.stringify(page)).not.toContain(KEY);
   });
 
-  test("advanced search maps fields to the upstream parameter names", async () => {
+  test("advanced searches map options to the documented parameter names", async () => {
     const { client, seen } = fakeKipris();
-    await client.searchPatentsAdvanced({
-      inventionTitle: "배터리",
+    const patents = await client.searchPatentsAdvanced({
+      inventionTitle: "센서",
       inventor: "홍길동",
-      ipc: "H01M",
-      applicationDate: "20230101~20231231",
-      serviceKey: "override",
-    } as never);
+      ipc: "H04Q",
+      applicationDate: "20060101~20061231",
+      extra: { ServiceKey: "override", sortSpec: "AD" },
+    });
     expect(seen[0]?.query).toEqual({
-      inventionTitle: "배터리",
+      inventionTitle: "센서",
       inventors: "홍길동",
-      ipcNumber: "H01M",
-      applicationDate: "20230101~20231231",
-      patent: "Y",
-      utility: "Y",
+      ipcNumber: "H04Q",
+      applicationDate: "20060101~20061231",
+      patent: "true",
+      utility: "true",
       numOfRows: "10",
       pageNo: "1",
-      serviceKey: KEY,
+      sortSpec: "AD",
+      ServiceKey: KEY,
     });
-    await client.searchTrademarksAdvanced({
-      applicant: "삼성",
-      viennaCode: "26.04.01",
-      extra: { serviceKey: "override", custom: "1" },
+    expect(patents.pagination.totalCount).toBe(22251);
+    expect(patents.items[0]).toMatchObject({
+      applicantName: "한국전자통신연구원",
+      applicationDate: "2006-06-16",
     });
-    expect(seen[1]?.query).toEqual({
-      applicantName: "삼성",
-      viennaCode: "26.04.01",
-      numOfRows: "10",
-      pageNo: "1",
-      custom: "1",
-      serviceKey: KEY,
+    const marks = await client.searchTrademarksAdvanced({
+      title: "NUTRIMACY",
+      applicant: "(주)아모레퍼시픽",
+      registrationDate: "20200101~20201231",
     });
-    await client.searchDesignsAdvanced({ locCode: "14-03", pageNo: 2 });
-    expect(seen[2]?.query).toMatchObject({ locCode: "14-03", pageNo: "2" });
-  });
-
-  test("trademark and design rows", async () => {
-    const { client } = fakeKipris();
-    const marks = await client.searchTrademarksWord("galaxy");
+    expect(seen[1]?.query).toMatchObject({
+      trademarkName: "NUTRIMACY",
+      applicantName: "(주)아모레퍼시픽",
+      registerDate: "20200101~20201231",
+      application: "true",
+      abandonment: "true",
+      trademark: "true",
+      geoCertMark: "true",
+      character: "true",
+      invisible: "true",
+    });
+    expect(Object.keys(seen[1]?.query ?? {})).toHaveLength(36);
     expect(marks.items[0]).toMatchObject({
-      title: "GALAXY",
-      registrationDate: "2024-04-01",
-      classificationCode: "09;42",
-      regPrivilegeName: "삼성전자주식회사",
+      title: "NUTRIMACY",
+      applicationStatus: "출원",
+      classificationCode: "32",
+      registrationDate: null,
     });
-    expect(marks.items[1]).toMatchObject({
-      registrationNumber: null,
-      bigDrawing: null,
+    const designs = await client.searchDesignsAdvanced({
+      applicant: "김민수",
+      designClassification: "M1110",
+      pageNo: 2,
     });
-    const designs = await client.getDesign("3020230012345");
+    expect(seen[2]?.query).toMatchObject({
+      applicantName: "김민수",
+      designMainClassification: "M1110",
+      cancle: "true",
+      simi: "true",
+      pageNo: "2",
+    });
     expect(designs.items[0]).toMatchObject({
-      articleName: "휴대용 전화기",
-      locCode: "14-03",
-      drawing: "https://www.kipris.or.kr/images/3020230012345_drawing.jpg",
+      articleName: "직물지",
+      designMainClassification: "M1110",
+      registrationDate: "2013-11-26",
     });
   });
 
-  test("a non-00 result code is an error that never echoes the key", async () => {
-    const { client } = fakeKipris({
-      "patUtliInfoSearchService/getWordSearch": fixture(
-        "kipris_error_invalid_key.xml",
-      ),
+  test("trademark and design word searches use their documented parameters", async () => {
+    const { client, seen } = fakeKipris();
+    const marks = await client.searchTrademarksWord("롯데");
+    expect(seen[0]?.query).toEqual({
+      searchString: "롯데",
+      numOfRows: "10",
+      pageNo: "1",
+      ServiceKey: KEY,
     });
-    const error = await client.searchPatentsWord("x").catch((e) => e);
+    expect(marks.items[0]).toMatchObject({
+      title: "롯데푸드 하이쿡",
+      classificationCode: "29 30",
+      registrationPublicDate: "2017-02-01",
+      bigDrawing: expect.stringMatching(
+        /^http:\/\/plus\.kipris\.or\.kr\/kiprisplusws\/fileToss\.jsp/,
+      ),
+      viennaCode: null,
+    });
+    const designs = await client.searchDesignsWord("한국");
+    expect(seen[1]?.query).toMatchObject({ articleName: "한국" });
+    expect(designs.pagination.totalCount).toBe(935);
+    expect(designs.items[1]).toMatchObject({
+      openNumber: "3020140000424",
+      openDate: "2014-05-19",
+    });
+  });
+
+  test("by-number lookups use advanced search; bibliography detail keeps the nested record", async () => {
+    const { client, seen } = fakeKipris();
+    await client.getPatent("1020060054155");
+    expect(seen[0]?.query).toMatchObject({
+      applicationNumber: "1020060054155",
+      patent: "true",
+      utility: "true",
+    });
+    await client.getTrademark("4020200228156");
+    expect(seen[1]?.query).toMatchObject({
+      applicationNumber: "4020200228156",
+      trademark: "true",
+    });
+    const patent = await client.getPatentBibliography("1020050050026");
+    expect(seen[2]?.path).toBe(
+      "/kipo-api/kipi/patUtiModInfoSearchSevice/getBibliographyDetailInfoSearch",
+    );
+    expect(seen[2]?.query).toEqual({
+      applicationNumber: "1020050050026",
+      ServiceKey: KEY,
+    });
+    expect(patent.item).toMatchObject({
+      abstractInfoArray: {
+        abstractInfo: { astrtCont: expect.stringContaining("결빙") },
+      },
+    });
+    const design = await client.getDesignBibliography("3020110022388");
+    expect(design.item).toMatchObject({
+      applicantInfoArray: { applicantInfo: { applicantName: "안준상" } },
+    });
+    const mark = await client.getTrademarkBibliography("4020230168937");
+    const products = (
+      mark.item?.asignProductArray as { asignProduct?: unknown } | undefined
+    )?.asignProduct;
+    expect(Array.isArray(products)).toBe(true);
+    expect(mark.provenance.source_url).toBe(
+      `${KIPRIS_BASE_URL}/trademarkInfoSearchService/getBibliographyDetailInfoSearch`,
+    );
+    const none = await fakeKipris({
+      "1020000000000":
+        "<response><header><resultCode>00</resultCode></header><body/></response>",
+    }).client.getPatentBibliography("1020000000000");
+    expect(none.item).toBeNull();
+  });
+
+  test("result codes become clear errors that never echo the key", async () => {
+    const { client } = fakeKipris({
+      bad: fixture("result-10-invalid-parameter.xml"),
+      unregistered: fixture("result-30-unregistered-key.xml"),
+      quota:
+        "<response><header><resultCode>22</resultCode><resultMsg>LIMITED_NUMBER_OF_SERVICE_REQUESTS_EXCEEDS_ERROR</resultMsg></header></response>",
+      odd: "<response><header><resultCode>77</resultCode></header></response>",
+    });
+    const error = await client
+      .searchPatentsWord("unregistered")
+      .catch((e) => e);
     expect(error).toBeInstanceOf(ApiError);
-    expect(error.code).toBe("UPSTREAM_ERROR");
-    expect(error.message).toBe(
-      "KIPRIS Plus result 30: SERVICE_KEY_DAILY_QUOTA_EXCEEDED",
+    expect(error).toMatchObject({ status: 401, code: "UNAUTHORIZED" });
+    expect(error.message).toStartWith(
+      "KIPRIS Plus result 30: SERVICE_KEY_IS_NOT_REGISTERED_ERROR. KIPO_KIPRIS_API_KEY is not a registered",
     );
     expect(error.message).not.toContain(KEY);
+    await expect(client.searchPatentsWord("bad")).rejects.toMatchObject({
+      status: 400,
+      code: "INVALID_INPUT",
+    });
+    await expect(client.searchPatentsWord("quota")).rejects.toMatchObject({
+      status: 429,
+      code: "RATE_LIMITED",
+    });
+    await expect(client.searchPatentsWord("odd")).rejects.toMatchObject({
+      status: 502,
+      code: "UPSTREAM_ERROR",
+      message: "KIPRIS Plus result 77: unknown error.",
+    });
   });
 
-  test("the empty fixture is an empty page, but malformed bodies are errors", async () => {
+  test("an empty result is empty, but malformed bodies are errors", async () => {
     const { client } = fakeKipris({
-      empty: fixture("pat_utl_word_search_empty.xml"),
       nobody:
         "<response><header><resultCode>00</resultCode></header></response>",
       html: "<html><body>oops",
-      gateway:
-        "<OpenAPI_ServiceResponse><cmmMsgHeader><errMsg>SERVICE ERROR</errMsg><returnAuthMsg>SERVICE_KEY_IS_NOT_REGISTERED_ERROR</returnAuthMsg><returnReasonCode>30</returnReasonCode></cmmMsgHeader></OpenAPI_ServiceResponse>",
       entity: '<?xml version="1.0"?><!DOCTYPE r [<!ENTITY x "y">]><response/>',
+      items: "<response><header/><body><items>text</items></body></response>",
     });
-    const empty = await client.searchPatentsWord("empty");
+    const empty = await client.searchPatentsWord("missing");
     expect(empty.items).toEqual([]);
     expect(empty.pagination.totalCount).toBe(0);
-    for (const word of ["nobody", "html", "entity"])
+    for (const word of ["nobody", "html", "entity", "items"])
       await expect(client.searchPatentsWord(word)).rejects.toMatchObject({
         code: "INVALID_RESPONSE",
       });
-    await expect(client.searchPatentsWord("gateway")).rejects.toThrow(
-      "KIPRIS Plus result 30: SERVICE_KEY_IS_NOT_REGISTERED_ERROR",
-    );
   });
 
   test("HTTP failures surface as ApiError without the request URL", async () => {
@@ -288,9 +370,9 @@ describe("client parsing of the Python fixtures", () => {
     ))
       rows.push(row);
     expect(rows.map((row) => row.inventionTitle)).toEqual([
-      "Row 1",
-      "Row 2",
-      "Row 3",
+      "Row 1.0",
+      "Row 1.1",
+      "Row 2.0",
     ]);
     expect(seen.map((s) => s.query.pageNo)).toEqual(["1", "2"]);
     const capped: KiprisPatentRow[] = [];
@@ -302,9 +384,11 @@ describe("client parsing of the Python fixtures", () => {
     expect(capped).toHaveLength(2);
   });
 
-  test("dates follow Python parse_iso_date", () => {
+  test("dates accept every documented form", () => {
     expect(kiprisDate("20240310")).toBe("2024-03-10");
     expect(kiprisDate("2024-03-10")).toBe("2024-03-10");
+    expect(kiprisDate("2011.05.31")).toBe("2011-05-31");
+    expect(kiprisDate("1985/12/30 00:00:00")).toBe("1985-12-30");
     expect(kiprisDate("00000000")).toBeNull();
     expect(kiprisDate("20230230")).toBeNull();
     expect(kiprisDate("2024")).toBeNull();
@@ -313,10 +397,10 @@ describe("client parsing of the Python fixtures", () => {
 
   test("unmodeled elements are kept and nested elements lose their text", () => {
     const { items } = parseKiprisResponse(
-      "<response><header><resultCode>00</resultCode></header><body><items><item><applicationNumber>1</applicationNumber><indexNo>7</indexNo><nested><a>x</a></nested></item></items><totalCount>1</totalCount></body></response>",
+      "<response><header><resultCode>00</resultCode></header><body><items><item><applicationNumber>1</applicationNumber><extra>7</extra><nested><a>x</a></nested></item></items></body></response>",
     );
     expect(items).toEqual([
-      { applicationNumber: "1", indexNo: "7", nested: null },
+      { applicationNumber: "1", extra: "7", nested: null },
     ]);
   });
 });
@@ -420,44 +504,42 @@ describe("MCP tools", () => {
       expect(params(name)).toEqual(["application_number", "full"]);
   });
 
-  test("search_kipo_patents returns Python's lean stub and summary", async () => {
+  test("search_kipo_patents returns the lean stub and Python's summary", async () => {
     const result = await call("search_kipo_patents", {
-      query: "battery",
+      query: "센서",
       right_type: "patent",
     });
     expect(fake.seen.at(-1)?.query).toMatchObject({
-      patent: "Y",
-      utility: "N",
+      patent: "true",
+      utility: "false",
     });
-    expect(result.summary).toBe("KIPO patents/UM — `battery`: 2 of 2 hits.");
-    expect(result.more_available).toBe(false);
+    expect(result.summary).toBe("KIPO patents/UM — `센서`: 2 of 414120 hits.");
+    expect(result.more_available).toBe(true);
     expect(result.next_cursor).toBeNull();
     expect(result.items[0]).toEqual({
-      application_number: "1020230012345",
-      application_date: "2023-01-05",
-      publication_number: "1024567890000",
-      publication_date: "2024-03-10",
-      register_number: "1024567890000",
-      register_status: "등록",
-      invention_title: "리튬 이온 배터리 모듈",
-      invention_title_english: "Lithium Ion Battery Module",
-      applicant_name: "삼성전자주식회사",
-      inventor_name: "홍길동;김철수",
-      ipc_number: "H01M 10/0525;H01M 50/204",
+      application_number: "1019850010013",
+      application_date: "1985-12-30",
+      publication_number: "1019890002319",
+      publication_date: "1989-06-30",
+      register_number: "1000319440000",
+      register_status: "소멸",
+      invention_title: expect.stringContaining("SENSOR AND SENSOR ENCODER"),
+      applicant_name: "이두수",
+      ipc_number: "G01D 5/00",
     });
     expect(result.provenance).toMatchObject({
-      source_url: `${BASE}/patUtliInfoSearchService/getWordSearch`,
+      source_url: `${PATENTS}/getWordSearch`,
       source_name: expect.stringContaining("ToS §11"),
       connector_version: "0.1.0",
     });
     const full = await call("search_kipo_patents", {
-      query: "battery",
+      query: "센서",
       full: true,
     });
     expect(full.items[0]).toMatchObject({
-      astrtCont: "본 발명은 리튬 이온 배터리 모듈에 관한 것으로...",
-      openNumber: "1020230112345",
-      applicationDate: "2023-01-05",
+      astrtCont: "내용 없음.",
+      openNumber: "1019870006388",
+      indexNo: "1",
     });
   });
 
@@ -465,91 +547,96 @@ describe("MCP tools", () => {
     const result = await call("search_kipo_patents", {
       query: "paged",
       num_of_rows: 2,
+      page_no: 2,
     });
-    expect(result.summary).toBe("KIPO patents/UM — `paged`: 2 of 3 hits.");
-    expect(result.more_available).toBe(true);
+    expect(result.summary).toBe("KIPO patents/UM — `paged`: 1 of 3 hits.");
+    expect(result.more_available).toBe(false);
   });
 
   test("advanced searches forward every option", async () => {
     const patents = await call("search_kipo_patents_advanced", {
-      applicant: "삼성",
-      claim_scope: "battery",
+      applicant: "한국전자통신연구원",
+      claim_scope: "센서",
       right_type: "utility_model",
       num_of_rows: 3,
       page_no: 2,
     });
     expect(fake.seen.at(-1)?.query).toEqual({
-      claimScope: "battery",
-      applicant: "삼성",
-      patent: "N",
-      utility: "Y",
+      claimScope: "센서",
+      applicant: "한국전자통신연구원",
+      patent: "false",
+      utility: "true",
       numOfRows: "3",
       pageNo: "2",
-      serviceKey: KEY,
+      ServiceKey: KEY,
     });
     expect(patents.summary).toBe(
-      "KIPO advanced patent/UM search: 1 of 1 hits.",
+      "KIPO advanced patent/UM search: 2 of 22251 hits.",
     );
     const marks = await call("search_kipo_trademarks_advanced", {
-      title: "GALAXY",
-      classification: "09",
-      registration_date: "20240401",
+      title: "NUTRIMACY",
+      classification: "32",
+      registration_date: "20200101~20201231",
     });
     expect(fake.seen.at(-1)?.query).toMatchObject({
-      title: "GALAXY",
-      classification: "09",
-      registrationDate: "20240401",
+      trademarkName: "NUTRIMACY",
+      classification: "32",
+      registerDate: "20200101~20201231",
     });
     expect(marks.items[0]).toEqual({
-      application_number: "4020230123456",
-      application_date: "2023-03-20",
-      registration_number: "4000123456",
-      registration_date: "2024-04-01",
-      title: "GALAXY",
-      classification_code: "09;42",
-      vienna_code: "26.04.01",
-      applicant_name: "삼성전자주식회사",
-      big_drawing: "https://www.kipris.or.kr/images/4020230123456_big.gif",
+      application_number: "4020200228156",
+      application_date: "2020-12-14",
+      registration_number: null,
+      registration_date: null,
+      title: "NUTRIMACY",
+      classification_code: "32",
+      vienna_code: null,
+      applicant_name: "(주)아모레퍼시픽",
+      big_drawing: expect.stringMatching(
+        /^http:\/\/plus\.kipris\.or\.kr\/kiprisplusws\/fileToss\.jsp\?arg=/,
+      ),
     });
     const designs = await call("search_kipo_designs_advanced", {
-      article_name: "전화기",
-      applicant: "삼성",
+      article_name: "직물지",
+      applicant: "김민수",
+      loc_code: "M1110",
     });
     expect(fake.seen.at(-1)?.query).toMatchObject({
-      articleName: "전화기",
-      applicantName: "삼성",
+      articleName: "직물지",
+      applicantName: "김민수",
+      designMainClassification: "M1110",
     });
     expect(designs.items[0]).toEqual({
-      application_number: "3020230012345",
-      application_date: "2023-02-10",
-      registration_number: "3000987654",
-      registration_date: "2024-01-20",
+      application_number: "3020130041948",
+      application_date: "2013-08-14",
+      registration_number: "3007186540000",
+      registration_date: "2013-11-26",
       register_status: "등록",
-      article_name: "휴대용 전화기",
-      loc_code: "14-03",
-      applicant_name: "삼성전자주식회사",
-      inventor_name: "박디자인",
-      drawing: "https://www.kipris.or.kr/images/3020230012345_drawing.jpg",
+      article_name: "직물지",
+      design_classification: "M1110",
+      applicant_name: "김민수",
+      inventor_name: null,
+      drawing: null,
     });
-    const word = await call("search_kipo_designs", { query: "phone" });
-    expect(word.summary).toBe("KIPO designs — `phone`: 1 of 1 hits.");
-    const tm = await call("search_kipo_trademarks", { query: "galaxy" });
-    expect(tm.summary).toBe("KIPO trademarks — `galaxy`: 2 of 2 hits.");
+    const word = await call("search_kipo_designs", { query: "한국" });
+    expect(word.summary).toBe("KIPO designs — `한국`: 2 of 935 hits.");
+    const tm = await call("search_kipo_trademarks", { query: "롯데" });
+    expect(tm.summary).toBe("KIPO trademarks — `롯데`: 2 of 4431 hits.");
   });
 
   test("get tools fetch serially and name numbers with no rows", async () => {
     const before = fake.seen.length;
     const result = await call("get_kipo_patent", {
-      application_number: ["1020230012345", "1029999999999"],
+      application_number: ["1020060054155", "1029999999999"],
     });
     expect(
       fake.seen.slice(before).map((s) => s.query.applicationNumber),
-    ).toEqual(["1020230012345", "1029999999999"]);
+    ).toEqual(["1020060054155", "1029999999999"]);
     expect(result.summary).toBe(
       "Fetched 1 of 2 KIPO patent/UM records. Not found: 1029999999999.",
     );
     expect(result.not_found).toEqual(["1029999999999"]);
-    expect(result.items).toHaveLength(1);
+    expect(result.items).toHaveLength(2);
     const one = await call("get_kipo_patent", {
       application_number: "1029999999999",
     });
@@ -558,20 +645,18 @@ describe("MCP tools", () => {
     );
     expect(one.not_found).toEqual(["1029999999999"]);
     const mark = await call("get_kipo_trademark", {
-      application_number: "4020230123456",
+      application_number: "4020200228156",
       full: true,
     });
     expect(mark.summary).toBe(
-      "Fetched 1 KIPO trademark record(s) for 1 number(s).",
+      "Fetched 2 KIPO trademark record(s) for 1 number(s).",
     );
-    expect(mark.items[0]).toMatchObject({
-      registrationPublicNumber: "4000123456-0000",
-    });
+    expect(mark.items[0]).toMatchObject({ fullText: "N" });
     const design = await call("get_kipo_design", {
-      application_number: ["3020230012345"],
+      application_number: ["3020130041948"],
     });
     expect(design.summary).toBe(
-      "Fetched 1 KIPO design record(s) for 1 number(s).",
+      "Fetched 2 KIPO design record(s) for 1 number(s).",
     );
     await expect(
       call("get_kipo_design", {
@@ -580,12 +665,16 @@ describe("MCP tools", () => {
     ).rejects.toThrow();
   });
 
-  test("tools are absent without a key and an HTTPS endpoint", async () => {
-    for (const env of [
-      {},
-      { KIPO_KIPRIS_API_KEY: KEY },
-      { KIPO_KIPRIS_API_KEY: KEY, KIPO_KIPRIS_BASE_URL: "http://kipris.test" },
-    ]) {
+  test("tools register with a key alone, but not without one or with an HTTP override", async () => {
+    for (const [env, present] of [
+      [{}, false],
+      [{ KIPO_KIPRIS_BASE_URL: "https://mirror.example.test" }, false],
+      [
+        { KIPO_KIPRIS_API_KEY: KEY, KIPO_KIPRIS_BASE_URL: "http://x.test" },
+        false,
+      ],
+      [{ KIPO_KIPRIS_API_KEY: KEY }, true],
+    ] as const) {
       const names = await withoutKipoEnv(async () => {
         Object.assign(process.env, env);
         const plain = createServer();
@@ -599,7 +688,7 @@ describe("MCP tools", () => {
           await plain.close();
         }
       });
-      for (const name of KIPO_TOOLS) expect(names).not.toContain(name);
+      for (const name of KIPO_TOOLS) expect(names.includes(name)).toBe(present);
     }
   });
 });
@@ -631,48 +720,43 @@ describe("curated facade KR routing", () => {
     const mcp = await facade(fake.client);
     try {
       const search = await mcp.call("search_patents", {
-        query: "battery",
+        query: "센서",
         jurisdiction: "kr",
         limit: 5,
       });
       expect(fake.seen.at(-1)?.query).toMatchObject({
-        word: "battery",
+        word: "센서",
         numOfRows: "5",
-        patent: "Y",
-        utility: "Y",
+        patent: "true",
+        utility: "true",
       });
-      expect(search.summary).toBe("KIPO patents/UM — `battery`: 2 of 2 hits.");
+      expect(search.summary).toBe(
+        "KIPO patents/UM — `센서`: 2 of 414120 hits.",
+      );
       expect(search.items[0]).not.toHaveProperty("astrt_cont");
       const biblio = await mcp.call("get_patent", {
         view: "biblio",
-        identifier: ["KR10-2023-0012345", "KR1029999999999"],
+        identifier: ["KR10-2006-0054155", "KR1029999999999"],
       });
       expect(fake.seen.slice(-2).map((s) => s.query.applicationNumber)).toEqual(
-        ["1020230012345", "1029999999999"],
+        ["1020060054155", "1029999999999"],
       );
       expect(biblio.not_found).toEqual(["1029999999999"]);
       expect(biblio.items[0]).toMatchObject({
-        application_number: "1020230012345",
+        application_number: "1020060054155",
       });
-      const one = await mcp.call("get_patent", {
-        view: "biblio",
-        identifier: "KR1020230012345",
-      });
-      expect(one.summary).toBe(
-        "Fetched 1 KIPO patent/UM record(s) for 1 number(s).",
-      );
     } finally {
       await mcp.close();
     }
   });
 
-  test("without KIPRIS the KR branches report the missing configuration", async () => {
+  test("without KIPRIS the KR branches report the missing key", async () => {
     const mcp = await facade();
     try {
       await expect(
         mcp.call("search_patents", { query: "x", jurisdiction: "kr" }),
       ).rejects.toThrow(
-        "Korean (KR) patent search is not enabled on this server (KIPO_KIPRIS_API_KEY/KIPO_KIPRIS_BASE_URL is not configured).",
+        "Korean (KR) patent search is not enabled on this server (KIPO_KIPRIS_API_KEY is not configured).",
       );
       await expect(
         mcp.call("get_patent", {
@@ -687,3 +771,15 @@ describe("curated facade KR routing", () => {
     }
   });
 });
+
+test.skipIf(!existsSync(kiprisCassette))(
+  "recorded KIPRIS session replays offline",
+  async () => {
+    const recording = await kiprisRecording();
+    expect(recording.patents.pagination.resultCode).toBe("00");
+    expect(recording.patents.items.length).toBeGreaterThan(0);
+    expect(readFileSync(kiprisCassette, "utf8")).not.toMatch(
+      /ServiceKey=(?!REDACTED)[^&\s"']+/i,
+    );
+  },
+);

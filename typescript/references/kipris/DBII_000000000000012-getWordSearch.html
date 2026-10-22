@@ -1,0 +1,444 @@
+
+
+
+
+
+
+	<article class="mt-10">
+		<p class="tit">Operation Name</p>
+	</article>
+
+	<p class="p-type1"> getWordSearch</p>
+
+	
+
+	<article class="mt-10">
+		<p class="tit">
+			Request URL
+		</p>
+	</article>
+	<p class="p-type1"><span class="txt-blue">http://plus.kipris.or.kr/</span></p>
+	<article class="mt-10">
+		<p class="tit">
+			Request Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+	
+
+	 
+
+
+
+
+	<div data-ax5grid="apiInutparameterGrid" data-ax5grid-config="{ }" style="height: 146px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid1' ,
+    	target : $("[data-ax5grid='apiInutparameterGrid']"),
+   		columns : [
+ 		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"searchString","paramDataInfo1":"물품명칭","paramDataInfo2":"","paramOrder":"I0001","parentParamOrder":"NONE","path":"-[I0001]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"searchRecentYear","paramDataInfo1":"검색년도범위","paramDataInfo2":"","paramOrder":"I0002","parentParamOrder":"NONE","path":"-[I0002]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"numOfRows","paramDataInfo1":"페이지당 출력 건수","paramDataInfo2":"기본 30, 최대 500","paramOrder":"I0003","parentParamOrder":"NONE","path":"-[I0003]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"pageNo","paramDataInfo1":"페이지 번호","paramDataInfo2":"기본 1","paramOrder":"I0004","parentParamOrder":"NONE","path":"-[I0004]"}];
+
+    $g.setData( {data : data , id : "grid1"});
+
+//     $("[data-ax5grid='apiInutparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].paramData) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Input values ​​(sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="입력값(샘플)">http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getWordSearch?searchString=롯데&searchRecentYear=0&ServiceKey=write your service key</textarea>
+	<article class="mt-10">
+		<p class="tit">
+			Response Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+
+
+	<div data-ax5grid="apiOutputparameterGrid" data-ax5grid-config="{ }" style="height: 822px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid2' ,
+    	target : $("[data-ax5grid='apiOutputparameterGrid']"),
+   		columns : [
+		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"items","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0001","parentParamOrder":"NONE","path":"-[G0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" indexNo","paramDataInfo1":"번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0001","path":"-[G0001]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0001","path":"-[G0001]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0001","path":"-[G0001]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationNumber","paramDataInfo1":"출원공고번호","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0001","path":"-[G0001]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationDate","paramDataInfo1":"출원공고일자","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0001","path":"-[G0001]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationPublicNumber","paramDataInfo1":"등록공고번호","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0001","path":"-[G0001]-[D0006]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationPublicDate","paramDataInfo1":"등록공고일자","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0001","path":"-[G0001]-[D0007]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0001","path":"-[G0001]-[D0008]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationDate","paramDataInfo1":"등록일자","paramDataInfo2":"","paramOrder":"D0009","parentParamOrder":"G0001","path":"-[G0001]-[D0009]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" priorityNumber","paramDataInfo1":"우선권주장번호","paramDataInfo2":"","paramOrder":"D0010","parentParamOrder":"G0001","path":"-[G0001]-[D0010]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" priorityDate","paramDataInfo1":"우선권주장일자","paramDataInfo2":"","paramOrder":"D0011","parentParamOrder":"G0001","path":"-[G0001]-[D0011]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationStatus","paramDataInfo1":"출원상태","paramDataInfo2":"","paramOrder":"D0012","parentParamOrder":"G0001","path":"-[G0001]-[D0012]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" classificationCode","paramDataInfo1":"상품분류코드","paramDataInfo2":"","paramOrder":"D0013","parentParamOrder":"G0001","path":"-[G0001]-[D0013]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" viennaCode","paramDataInfo1":"도형코드","paramDataInfo2":"","paramOrder":"D0014","parentParamOrder":"G0001","path":"-[G0001]-[D0014]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicantName","paramDataInfo1":"출원인명/특허고객번호","paramDataInfo2":"","paramOrder":"D0015","parentParamOrder":"G0001","path":"-[G0001]-[D0015]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" agentName","paramDataInfo1":"대리인명/대리인번호","paramDataInfo2":"","paramOrder":"D0016","parentParamOrder":"G0001","path":"-[G0001]-[D0016]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" regPrivilegeName","paramDataInfo1":"등록권자명/특허고객번호","paramDataInfo2":"복수값 '|' 구분","paramOrder":"D0017","parentParamOrder":"G0001","path":"-[G0001]-[D0017]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" title","paramDataInfo1":"상표명칭","paramDataInfo2":"","paramOrder":"D0018","parentParamOrder":"G0001","path":"-[G0001]-[D0018]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" fullText","paramDataInfo1":"전문존재유무","paramDataInfo2":"","paramOrder":"D0019","parentParamOrder":"G0001","path":"-[G0001]-[D0019]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" drawing","paramDataInfo1":"이미지경로","paramDataInfo2":"","paramOrder":"D0020","parentParamOrder":"G0001","path":"-[G0001]-[D0020]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" bigDrawing","paramDataInfo1":"큰이미지경로","paramDataInfo2":"","paramOrder":"D0021","parentParamOrder":"G0001","path":"-[G0001]-[D0021]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" appReferenceNumber","paramDataInfo1":"출원참조번호","paramDataInfo2":"","paramOrder":"D0022","parentParamOrder":"G0001","path":"-[G0001]-[D0022]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" regReferenceNumber","paramDataInfo1":"등록참조번호","paramDataInfo2":"","paramOrder":"D0023","parentParamOrder":"G0001","path":"-[G0001]-[D0023]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" internationalRegisterNumber","paramDataInfo1":"국제등록번호","paramDataInfo2":"","paramOrder":"D0024","parentParamOrder":"G0001","path":"-[G0001]-[D0024]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" internationalRegisterDate","paramDataInfo1":"국제등록일자","paramDataInfo2":"","paramOrder":"D0025","parentParamOrder":"G0001","path":"-[G0001]-[D0025]"},{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"count","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0002","parentParamOrder":"NONE","path":"-[G0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" numOfRows","paramDataInfo1":"페이지당건수","paramDataInfo2":"","paramOrder":"D0026","parentParamOrder":"G0002","path":"-[G0002]-[D0026]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" pageNo","paramDataInfo1":"페이지번호","paramDataInfo2":"","paramOrder":"D0027","parentParamOrder":"G0002","path":"-[G0002]-[D0027]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" totalCount","paramDataInfo1":"전체건수","paramDataInfo2":"","paramOrder":"D0028","parentParamOrder":"G0002","path":"-[G0002]-[D0028]"}];
+
+    $g.setData({data : data , id : "grid2"});
+
+//     $("[data-ax5grid='apiOutputparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].serviceNm) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Output value (sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="출력값(샘플)">&lt;response&gt;
+&lt;header&gt;
+&lt;requestMsgID/&gt;
+&lt;responseTime&gt;2017-02-06 10:01:13.113&lt;/responseTime&gt;
+&lt;responseMsgID/&gt;
+&lt;successYN&gt;Y&lt;/successYN&gt;
+&lt;resultCode&gt;00&lt;/resultCode&gt;
+&lt;resultMsg&gt;NORMAL SERVICE.&lt;/resultMsg&gt;
+&lt;/header&gt;
+&lt;body&gt;
+&lt;items&gt;
+&lt;item&gt;
+&lt;agentName/&gt;
+&lt;applicantName&gt;롯데푸드 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20160531&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020160040342&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29d6c998e272153d94df05fc2bc3ff671edf1c22b8fc2fcbb70c0e0a8826417cbe
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;29 30&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a9134423c9c66155bdee316d00095335d451e08683247460d44cfb8e03eb7e099f17fe
+&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;1&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20161031&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020160113502&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;롯데푸드 주식회사&lt;/regPrivilegeName&gt;
+&lt;registrationDate&gt;20170124&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4012292000000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate&gt;20170201&lt;/registrationPublicDate&gt;
+&lt;registrationPublicNumber&gt;4020170009446&lt;/registrationPublicNumber&gt;
+&lt;title&gt;롯데푸드 하이쿡&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;황의만&lt;/agentName&gt;
+&lt;applicantName&gt;롯데글로벌로지스 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20161121&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020160101664&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29d6c998e272153d9496d9a4872571ea82a73893b67a30133fedabf1c0941a7540
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;39&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a9134423c9c66155bdee31bcb1f22e208f970aed65145c198b6dba9c8b754c9c8ebc34
+&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;2&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데택배&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;황의만&lt;/agentName&gt;
+&lt;applicantName&gt;롯데글로벌로지스 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20161121&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020160101663&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29d6c998e272153d9496d9a4872571ea82a73893b67a30133fefbb6826d7f5de11
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;39&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a9134423c9c66155bdee31bcb1f22e208f970aed65145c198b6dba02c991cf1cd79695
+&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;3&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데글로벌로지스(주)&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName/&gt;
+&lt;applicantName&gt;롯데푸드 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20151005&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020150073061&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;공고&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e298cd4f29188d84816f1ae61e2fe121ca0769d14f08732a249650661e6ae5529c3
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;29&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a9134459b0ed09a289f7372b59bdd72afeb760f7b06bcd38a2280b3b847227f0e3d6d6
+&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;4&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20170125&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020170008784&lt;/publicationNumber&gt;
+&lt;regPrivilegeName/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데푸드 : Doctors Choice&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;백덕열 이태희&lt;/agentName&gt;
+&lt;applicantName&gt;롯데전자주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;19970131&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;5019970001198&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4eae3bd0d2e1a0a7d6bda6283d1f007067a3d8c581dc6584fb7c8bafa20eefa2c8a9c05a0dba05b2048
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;039&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e234e1fcd03919711540b74413b3f950ccb352a1435eec688f2956dd094bb43827688b4a0959bdb064
+&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;5&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName&gt;롯데전자주식회사 롯데알미늄 주식회사 주식회사 롯데기공 롯데알미늄 주식회사&lt;/regPrivilegeName&gt;
+&lt;registrationDate&gt;19970611&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4001400880000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데 : LOTTE&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName/&gt;
+&lt;applicantName&gt;롯데제과주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20050902&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020050041059&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;소멸&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29b30afd527c27b25a3ffdd1f6510be0b1d107918f0236fe54c8d1140e5b8d3afe
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;30&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344b1486cfa4836122f42e33d82206c362476b333cd965ec7f68985b64897c157fc
+&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;6&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20060403&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020060020053&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;롯데제과주식회사&lt;/regPrivilegeName&gt;
+&lt;registrationDate&gt;20060712&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4006703250000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데 토마애플 : LOTTE TOMAPPLE&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName/&gt;
+&lt;applicantName&gt;롯데제과주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20050902&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020050041055&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;소멸&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29b30afd527c27b25a3ffdd1f6510be0b1d107918f0236fe54dc98876820161f10
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;30&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344b1486cfa4836122f42e33d82206c362476b333cd965ec7f6799c641e08c5f106
+&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;7&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20060403&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020060020051&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;롯데제과주식회사&lt;/regPrivilegeName&gt;
+&lt;registrationDate&gt;20060712&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4006703230000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데 애플베리 : LOTTE APPLEBERRY&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;이숙열&lt;/agentName&gt;
+&lt;applicantName&gt;주식회사 롯데기공 롯데알미늄 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20070321&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;5020070005195&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4eae3bd0d2e1a0a7d6b06a3bfe52a9ffeb1b25781b4be5d320392c59f6601637403ea9a470abd63b52a
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;039 11 09 07&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e234e1fcd0391971152369211e80b03b92b27c0287f6a94d7fec4dca404dc327900b9a6499a6313a07
+&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;8&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName&gt;롯데전자주식회사 롯데알미늄 주식회사 주식회사 롯데기공 롯데알미늄 주식회사&lt;/regPrivilegeName&gt;
+&lt;registrationDate&gt;20070514&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4001400880000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데 : LOTTE&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;이태희&lt;/agentName&gt;
+&lt;applicantName&gt;롯데파이오니아주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;19851030&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4019850018487&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29cd49521cfd7b4539f644a085d3779c96424ed5e9583e6c790967e64790baed53
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;039&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a913445020f05e645c4714c7500773fc7bd0b6bb57c2876581c2b91edb8087fb58c5d4
+&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;9&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;19870128&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4019870000472&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;롯데전자주식회사 롯데알미늄 주식회사 주식회사 롯데기공 롯데알미늄 주식회사&lt;/regPrivilegeName&gt;
+&lt;registrationDate&gt;19870416&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4001400880000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데 : LOTTE&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName/&gt;
+&lt;applicantName&gt;롯데푸드 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20161115&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020160098609&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29d6c998e272153d946ea785cbe9f389a29f524ea4be1e6e1d392cc833141e618c
+&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;30&lt;/classificationCode&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a9134423c9c66155bdee31c91aae1028e35d6192b2a860e0ddf526df4f721f7f15041f
+&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;10&lt;/indexNo&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;롯데푸드 육교자 육&lt;/title&gt;
+&lt;viennaCode&gt;240308 260118 270510&lt;/viennaCode&gt;
+&lt;/item&gt;
+&lt;/items&gt;
+&lt;/body&gt;
+&lt;count&gt;
+&lt;numOfRows&gt;10&lt;/numOfRows&gt;
+&lt;pageNo&gt;1&lt;/pageNo&gt;
+&lt;totalCount&gt;4431&lt;/totalCount&gt;
+&lt;/count&gt;
+&lt;/response&gt;</textarea>
+							

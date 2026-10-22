@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc-derived, not recorded: the documented sample response for getAdvancedSearch on the KIPRIS Plus DBII_000000000000012 page (references/kipris), trimmed to two items for searches. -->
+<response>
+  <header>
+    <requestMsgID />
+    <responseTime>2020-12-31 13:14:50.1450</responseTime>
+    <responseMsgID />
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <agentName>김영철</agentName>
+        <appReferenceNumber />
+        <applicantName>(주)아모레퍼시픽</applicantName>
+        <applicationDate>20201214</applicationDate>
+        <applicationNumber>4020200228156</applicationNumber>
+        <applicationStatus>출원</applicationStatus>
+        <bigDrawing>http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e92bfe2e09b7f259ad74c00b546079426b0284c72621c07d0e17edc336f3e19c92</bigDrawing>
+        <classificationCode>32</classificationCode>
+        <drawing>http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8a07c61e12afa1ccc435a88523125f67c11e16c3627927022a889c2e70c579b211</drawing>
+        <fullText>N</fullText>
+        <indexNo>1</indexNo>
+        <internationalRegisterDate />
+        <internationalRegisterNumber />
+        <priorityDate />
+        <priorityNumber />
+        <publicationDate />
+        <publicationNumber />
+        <regPrivilegeName />
+        <regReferenceNumber />
+        <registrationDate />
+        <registrationNumber />
+        <registrationPublicDate />
+        <registrationPublicNumber />
+        <title>NUTRIMACY</title>
+        <viennaCode />
+      </item>
+      <item>
+        <agentName>김영철</agentName>
+        <appReferenceNumber />
+        <applicantName>(주)아모레퍼시픽</applicantName>
+        <applicationDate>20201214</applicationDate>
+        <applicationNumber>4020200228154</applicationNumber>
+        <applicationStatus>출원</applicationStatus>
+        <bigDrawing>http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e92bfe2e09b7f259ad74c00b546079426bc6a0f09805c2b29025580afa165dd9c3</bigDrawing>
+        <classificationCode>29</classificationCode>
+        <drawing>http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8a07c61e12afa1ccc435a88523125f67c118bd6b6ffde70c423dc9727afaa710ed</drawing>
+        <fullText>N</fullText>
+        <indexNo>2</indexNo>
+        <internationalRegisterDate />
+        <internationalRegisterNumber />
+        <priorityDate />
+        <priorityNumber />
+        <publicationDate />
+        <publicationNumber />
+        <regPrivilegeName />
+        <regReferenceNumber />
+        <registrationDate />
+        <registrationNumber />
+        <registrationPublicDate />
+        <registrationPublicNumber />
+        <title>NUTRIMACY</title>
+        <viennaCode />
+      </item>
+    </items>
+  </body>
+  <count>
+    <numOfRows>20</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>33427</totalCount>
+  </count>
+</response>

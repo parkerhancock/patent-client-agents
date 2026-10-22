@@ -450,11 +450,12 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     (process.env.EPO_OPS_API_SECRET || process.env.EPO_API_SECRET)
       ? lazyClient(() => new EpoOpsClient())
       : undefined);
-  // KIPRIS is BYOK (ToS §11) and needs an operator-verified HTTPS endpoint, as in Python.
+  // KIPRIS is BYOK (ToS §11). KIPO_KIPRIS_BASE_URL is an optional HTTPS-only override.
   const kiprisClient =
     provided.kipris ??
     (process.env.KIPO_KIPRIS_API_KEY &&
-    /^https:\/\//i.test(process.env.KIPO_KIPRIS_BASE_URL ?? "")
+    (!process.env.KIPO_KIPRIS_BASE_URL ||
+      /^https:\/\//i.test(process.env.KIPO_KIPRIS_BASE_URL))
       ? lazyClient(() => new KiprisClient())
       : undefined);
   const clients = {

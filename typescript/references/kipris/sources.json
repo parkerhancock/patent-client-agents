@@ -1,0 +1,95 @@
+[
+  {
+    "kind": "service page (not archived; large)",
+    "title": "Patent-Utility Model Publications",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000001/view.do?menuNo=310000",
+    "retrieved": "2026-10-22",
+    "sha256": "c4be229a37da34bcc207aeed8ca9a46ab965a3d3f180e01e0299cc0b0034a134"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000001)",
+    "file": "DBII_000000000000001-getWordSearch.html",
+    "title": "Patent-Utility Model Publications: getWordSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000001/ADI_0000000000002038/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "905b0776df74f32796106292bc82ea4c03e95d6d1685fba684e2731b547b5432"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000001)",
+    "file": "DBII_000000000000001-getAdvancedSearch.html",
+    "title": "Patent-Utility Model Publications: getAdvancedSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000001/ADI_0000000000002944/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "718444531bf5dd505522bfb4e07a8d04714cb623bb0501ca4d53d51c5c5bfdaa"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000001)",
+    "file": "DBII_000000000000001-getBibliographyDetailInfoSearch.html",
+    "title": "Patent-Utility Model Publications: getBibliographyDetailInfoSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000001/ADI_0000000000002130/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "31ba92e397154540a35225a8a73f781f888d6f20904e2e58426a4ab69e501ebe"
+  },
+  {
+    "kind": "service page (not archived; large)",
+    "title": "Designs",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000008/view.do?menuNo=310000",
+    "retrieved": "2026-10-22",
+    "sha256": "bd0685ae200928c5dada3afeb462e710ef5776a8e3f57e976d26f389efec7d86"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000008)",
+    "file": "DBII_000000000000008-getWordSearch.html",
+    "title": "Designs: getWordSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000008/ADI_0000000000002310/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "aed5909a3d4a8f84b05f8d11316bae5f7efad194bb0336b551872fb5b5debcde"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000008)",
+    "file": "DBII_000000000000008-getAdvancedSearch.html",
+    "title": "Designs: getAdvancedSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000008/ADI_0000000000002311/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "1846893dc54277ea183859759460542faa23ce4725bafb16175869f784185ea1"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000008)",
+    "file": "DBII_000000000000008-getBibliographyDetailInfoSearch.html",
+    "title": "Designs: getBibliographyDetailInfoSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000008/ADI_0000000000002312/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "819aeb7c9755900b53a47022da7f91f76734fa580caa6abc0551f000b73881b7"
+  },
+  {
+    "kind": "service page (not archived; large)",
+    "title": "Trademark Bulletins",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000012/view.do?menuNo=310000",
+    "retrieved": "2026-10-22",
+    "sha256": "229f2892c221e82f18134fe704a899a2f9c6d105b59b6de0d9c2a163f9572b1d"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000012)",
+    "file": "DBII_000000000000012-getWordSearch.html",
+    "title": "Trademark Bulletins: getWordSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000012/ADI_0000000000002320/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "b663d071075cc981eed09b480368ec76d23f9aa7cc7c3f97edc0ef7ed6e64481"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000012)",
+    "file": "DBII_000000000000012-getAdvancedSearch.html",
+    "title": "Trademark Bulletins: getAdvancedSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000012/ADI_0000000000002321/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "7de4cc7569dc8c06ae50e4f7c2b4740ea0b4037e7501233d75c72ba904921a41"
+  },
+  {
+    "kind": "operation page (POST bCode=DBII_000000000000012)",
+    "file": "DBII_000000000000012-getBibliographyDetailInfoSearch.html",
+    "title": "Trademark Bulletins: getBibliographyDetailInfoSearch",
+    "url": "https://plus.kipris.or.kr/eng/data/clas/DBII_000000000000012/ADI_0000000000002322/ajaxOperation.do?menuNo=310000&entYn=N&scode=SC002",
+    "retrieved": "2026-10-22",
+    "sha256": "a46961b34a3135ea2cfb1ded2c9552f859b3e3ce1d78fd3a165cd66dc0f592f2"
+  }
+]

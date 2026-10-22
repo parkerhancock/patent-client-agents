@@ -1,0 +1,375 @@
+
+
+
+
+
+
+	<article class="mt-10">
+		<p class="tit">Operation Name</p>
+	</article>
+
+	<p class="p-type1"> getBibliographyDetailInfoSearch</p>
+
+	
+
+	<article class="mt-10">
+		<p class="tit">
+			Request URL
+		</p>
+	</article>
+	<p class="p-type1"><span class="txt-blue">http://plus.kipris.or.kr/</span></p>
+	<article class="mt-10">
+		<p class="tit">
+			Request Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+	
+
+	 
+
+
+
+
+	<div data-ax5grid="apiInutparameterGrid" data-ax5grid-config="{ }" style="height: 68px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid1' ,
+    	target : $("[data-ax5grid='apiInutparameterGrid']"),
+   		columns : [
+ 		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"I0001","parentParamOrder":"NONE","path":"-[I0001]"}];
+
+    $g.setData( {data : data , id : "grid1"});
+
+//     $("[data-ax5grid='apiInutparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].paramData) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Input values ​​(sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="입력값(샘플)">http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getBibliographyDetailInfoSearch?applicationNumber=1020050050026&ServiceKey=servicekey</textarea>
+	<article class="mt-10">
+		<p class="tit">
+			Response Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+
+
+	<div data-ax5grid="apiOutputparameterGrid" data-ax5grid-config="{ }" style="height: 2590px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid2' ,
+    	target : $("[data-ax5grid='apiOutputparameterGrid']"),
+   		columns : [
+		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"item","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0001","parentParamOrder":"NONE","path":"-[G0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" biblioSummaryInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0002","parentParamOrder":"G0001","path":"-[G0001]-[G0002]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  biblioSummaryInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0003","parentParamOrder":"G0002","path":"-[G0001]-[G0002]-[G0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicationFlag","paramDataInfo1":"출원구분","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   claimCount","paramDataInfo1":"청구항수","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   examinerName","paramDataInfo1":"심사관명","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0005]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   finalDisposal","paramDataInfo1":"최종처분내용","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0006]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   inventionTitle","paramDataInfo1":"발명의명칭","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0007]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   inventionTitleEng","paramDataInfo1":"발명의명칭","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0008]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   openDate","paramDataInfo1":"공개일자","paramDataInfo2":"","paramOrder":"D0009","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0009]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   openNumber","paramDataInfo1":"공개번호","paramDataInfo2":"","paramOrder":"D0010","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0010]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   originalApplicationDate","paramDataInfo1":"원출원출원일자","paramDataInfo2":"","paramOrder":"D0011","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0011]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   originalApplicationKind","paramDataInfo1":"원출원종류","paramDataInfo2":"","paramOrder":"D0012","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0012]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   originalApplicationNumber","paramDataInfo1":"원출원출원번호","paramDataInfo2":"","paramOrder":"D0013","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0013]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   originalExaminationRequestDate","paramDataInfo1":"심사청구일자","paramDataInfo2":"","paramOrder":"D0014","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0014]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   originalExaminationRequestFlag","paramDataInfo1":"심사청구여부","paramDataInfo2":"","paramOrder":"D0015","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0015]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   publicationDate","paramDataInfo1":"공고일자","paramDataInfo2":"","paramOrder":"D0016","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0016]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   publicationNumber","paramDataInfo1":"공고번호","paramDataInfo2":"","paramOrder":"D0017","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0017]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registerDate","paramDataInfo1":"등록일자","paramDataInfo2":"","paramOrder":"D0018","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0018]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registerNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0019","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0019]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registerStatus","paramDataInfo1":"등록상태","paramDataInfo2":"공개, 등록, 거절, 무효, 소멸, 취하, 포기","paramOrder":"D0020","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0020]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   translationSubmitDate","paramDataInfo1":"번역문제출일자","paramDataInfo2":"","paramOrder":"D0021","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0021]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" ipcInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0004","parentParamOrder":"G0001","path":"-[G0001]-[G0004]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  ipcInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0005","parentParamOrder":"G0004","path":"-[G0001]-[G0004]-[G0005]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   ipcDate","paramDataInfo1":"IPC개정일자","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   ipcNumber","paramDataInfo1":"IPC코드","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" familyInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0006","parentParamOrder":"G0001","path":"-[G0001]-[G0006]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  familyInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0007","parentParamOrder":"G0006","path":"-[G0001]-[G0006]-[G0007]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   familyApplicationNumber","paramDataInfo1":"패밀리출원번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0007","path":"-[G0001]-[G0006]-[G0007]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" abstractInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0008","parentParamOrder":"G0001","path":"-[G0001]-[G0008]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  abstractInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0009","parentParamOrder":"G0008","path":"-[G0001]-[G0008]-[G0009]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   astrtCont","paramDataInfo1":"초록","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0009","path":"-[G0001]-[G0008]-[G0009]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" internationalInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0010","parentParamOrder":"G0001","path":"-[G0001]-[G0010]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  internationalInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0011","parentParamOrder":"G0010","path":"-[G0001]-[G0010]-[G0011]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   internationOpenDate","paramDataInfo1":"국제공개일자","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   internationOpenNumber","paramDataInfo1":"국제공개번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   internationalApplicationDate","paramDataInfo1":"국제출원일자","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   internationalApplicationNumber","paramDataInfo1":"국제출원번호","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" claimInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0012","parentParamOrder":"G0001","path":"-[G0001]-[G0012]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  claimInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0013","parentParamOrder":"G0012","path":"-[G0001]-[G0012]-[G0013]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   claim","paramDataInfo1":"청구항","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" applicantInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0014","parentParamOrder":"G0001","path":"-[G0001]-[G0014]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  applicantInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0015","parentParamOrder":"G0014","path":"-[G0001]-[G0014]-[G0015]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   address","paramDataInfo1":"대리인주소","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   code","paramDataInfo1":"대리인번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   country","paramDataInfo1":"대리인국가","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   engName","paramDataInfo1":"대리인명","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   name","paramDataInfo1":"대리인명","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" inventorInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0016","parentParamOrder":"G0001","path":"-[G0001]-[G0016]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  inventorInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0017","parentParamOrder":"G0016","path":"-[G0001]-[G0016]-[G0017]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   address","paramDataInfo1":"대리인주소","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   code","paramDataInfo1":"대리인번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   country","paramDataInfo1":"대리인국가","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   engName","paramDataInfo1":"대리인명","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   name","paramDataInfo1":"대리인명","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" agentInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0018","parentParamOrder":"G0001","path":"-[G0001]-[G0018]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  agentInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0019","parentParamOrder":"G0018","path":"-[G0001]-[G0018]-[G0019]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   address","paramDataInfo1":"대리인주소","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   code","paramDataInfo1":"대리인번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   country","paramDataInfo1":"대리인국가","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   engName","paramDataInfo1":"대리인명","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   name","paramDataInfo1":"대리인명","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" priorityInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0020","parentParamOrder":"G0001","path":"-[G0001]-[G0020]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  priorityInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0021","parentParamOrder":"G0020","path":"-[G0001]-[G0020]-[G0021]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   priorityApplicationCountry","paramDataInfo1":"우선권주장국가","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   priorityApplicationNumber","paramDataInfo1":"우선권주장번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   priorityApplicationDate","paramDataInfo1":"우선권주장일자","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" designatedStateInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0022","parentParamOrder":"G0001","path":"-[G0001]-[G0022]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  designatedStateInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0023","parentParamOrder":"G0022","path":"-[G0001]-[G0022]-[G0023]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   kind","paramDataInfo1":"지정국가그룹","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   country","paramDataInfo1":"지정국가","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" priorArtDocumentsInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0024","parentParamOrder":"G0001","path":"-[G0001]-[G0024]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  priorArtDocumentsInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0025","parentParamOrder":"G0024","path":"-[G0001]-[G0024]-[G0025]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   documentsNumber","paramDataInfo1":"선행기술조사문헌번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0025","path":"-[G0001]-[G0024]-[G0025]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   examinerQuotationFlag","paramDataInfo1":"심사관인용여부","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0025","path":"-[G0001]-[G0024]-[G0025]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" legalStatusInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0026","parentParamOrder":"G0001","path":"-[G0001]-[G0026]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  legalStatusInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0027","parentParamOrder":"G0026","path":"-[G0001]-[G0026]-[G0027]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   commonCodeName","paramDataInfo1":"처리상태","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0027","path":"-[G0001]-[G0026]-[G0027]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   documentEngName","paramDataInfo1":"서류명","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0027","path":"-[G0001]-[G0026]-[G0027]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   documentName","paramDataInfo1":"서류명","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0027","path":"-[G0001]-[G0026]-[G0027]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   receiptDate","paramDataInfo1":"접수일자","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0027","path":"-[G0001]-[G0026]-[G0027]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   receiptNumber","paramDataInfo1":"접수번호","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0027","path":"-[G0001]-[G0026]-[G0027]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" imagePathInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0028","parentParamOrder":"G0001","path":"-[G0001]-[G0028]"},{"lvl":3,"paramType1":"OUT","paramType2":"DATA","paramData":"  docName","paramDataInfo1":"파일명","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0028","path":"-[G0001]-[G0028]-[D0001]"},{"lvl":3,"paramType1":"OUT","paramType2":"DATA","paramData":"  largePath","paramDataInfo1":"큰이미지경로","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0028","path":"-[G0001]-[G0028]-[D0002]"},{"lvl":3,"paramType1":"OUT","paramType2":"DATA","paramData":"  path","paramDataInfo1":"이미지경로","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0028","path":"-[G0001]-[G0028]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" rndInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0029","parentParamOrder":"G0001","path":"-[G0001]-[G0029]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  rndInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0030","parentParamOrder":"G0029","path":"-[G0001]-[G0029]-[G0030]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rndDepartmentName","paramDataInfo1":"연구부처명","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0030","path":"-[G0001]-[G0029]-[G0030]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rndDuration","paramDataInfo1":"연구기관내용","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0030","path":"-[G0001]-[G0029]-[G0030]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rndManagingInstituteName","paramDataInfo1":"주관기관명","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0030","path":"-[G0001]-[G0029]-[G0030]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rndProjectName","paramDataInfo1":"연구사업명","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0030","path":"-[G0001]-[G0029]-[G0030]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rndSpecialInstituteName","paramDataInfo1":"연구관리전문기관명","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0030","path":"-[G0001]-[G0029]-[G0030]-[D0005]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rndTaskContribution","paramDataInfo1":"연구과제기여율내용","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0030","path":"-[G0001]-[G0029]-[G0030]-[D0006]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rndTaskName","paramDataInfo1":"연구과제명","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0030","path":"-[G0001]-[G0029]-[G0030]-[D0007]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rndTaskNumber","paramDataInfo1":"연구개발과제번호","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0030","path":"-[G0001]-[G0029]-[G0030]-[D0008]"}];
+
+    $g.setData({data : data , id : "grid2"});
+
+//     $("[data-ax5grid='apiOutputparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].serviceNm) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Output value (sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="출력값(샘플)">&lt;response&gt;
+  &lt;header&gt;&lt;resultCode&gt;00&lt;/resultCode&gt;
+    &lt;resultMsg&gt;NORMAL SERVICE.&lt;/resultMsg&gt;&lt;/header&gt;
+      &lt;body&gt;
+        &lt;items&gt;
+            &lt;abstractInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.AbstractInfoArray&quot;&gt;
+               &lt;abstractInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.AbstractInfo&quot;&gt;
+                  &lt;astrtCont&gt;본 발명은 도로노면 세척 및 결빙방지시스템에 관한 것으로서, 특히 제어부와; 터널의 진입로 일측 지면에 설치된 물탱크 및 염수탱크와; 상기 제어부와 전기적으로 연결된 솔레노이드밸브가 중간에 설치된 유입배관에 의하여 물탱크 및 염수탱크와 연결되는 압력펌프가 내설된 컨트롤박스와; 상기 압력펌프와 배출배관으로 연결되고 상기 터널의 진입로 중앙에 소정간격으로 설치되어, 상기 솔레노이드밸브의 동작에 따라 물탱크 내의 물 또는 염수탱크 내의 물을 진입로 도로노면에 분사하는 복수개의 물분사수단;로 구성되어, 터널 진입로를 세척하여 터널 내부로 흙이나 먼지가 유입되는 것을 최소화할 수 있고 도로의 결빙을 방지할 수 있는 효과가 있다.&lt;/astrtCont&gt;
+               &lt;/abstractInfo&gt;
+            &lt;/abstractInfoArray&gt;
+            &lt;agentInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.AgentInfoArray&quot;&gt;
+               &lt;agentInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.AgentInfo&quot;&gt;
+                  &lt;address&gt;서울 강남구 역삼동 ***-** 삼화빌딩 *층(두성국제특허법률사무소)&lt;/address&gt;
+                  &lt;code&gt;920010005131&lt;/code&gt;
+                  &lt;country&gt;대한민국&lt;/country&gt;
+                  &lt;engName&gt;Choi Byoung Gill&lt;/engName&gt;
+                  &lt;name&gt;최병길&lt;/name&gt;
+               &lt;/agentInfo&gt;
+            &lt;/agentInfoArray&gt;
+            &lt;applicantInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ApplicantInfoArray&quot;&gt;
+               &lt;applicantInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ApplicantInfo&quot;&gt;
+                  &lt;address&gt;경기도 성남시 분당 서현동 ***-*&lt;/address&gt;
+                  &lt;code&gt;119990076274&lt;/code&gt;
+                  &lt;country&gt;대한민국&lt;/country&gt;
+                  &lt;engName&gt;KYUNG HWA ENGINEERING CO., LTD.&lt;/engName&gt;
+                  &lt;name&gt;(주) 경화엔지니어링&lt;/name&gt;
+               &lt;/applicantInfo&gt;
+            &lt;/applicantInfoArray&gt;
+            &lt;biblioSummaryInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.BiblioSummaryInfoArray&quot;&gt;
+               &lt;biblioSummaryInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.BiblioSummaryInfo&quot;&gt;
+                  &lt;applicationDate&gt;2008.03.19&lt;/applicationDate&gt;
+                  &lt;applicationFlag/&gt;
+                  &lt;applicationNumber&gt;10-2008-0025578&lt;/applicationNumber&gt;
+                  &lt;claimCount&gt;5&lt;/claimCount&gt;
+                  &lt;finalDisposal&gt;등록결정(일반)&lt;/finalDisposal&gt;
+                  &lt;inventionTitle&gt;도로노면 세척 및 결빙방지시스템&lt;/inventionTitle&gt;
+                  &lt;inventionTitleEng&gt;CLEANING AND ANTIFREEZE SYSTEM FOR ROAD SURFACE TO PREVENT SOIL AND DUST FROM ENTERING A TUNNEL BY CLEANING AN ENTRANCE OF THE TUNNEL&lt;/inventionTitleEng&gt;
+                  &lt;openDate&gt;&lt;/openDate&gt;
+                  &lt;openNumber&gt;&lt;/openNumber&gt;
+                  &lt;originalApplicationDate&gt;&lt;/originalApplicationDate&gt;
+                  &lt;originalApplicationKind/&gt;
+                  &lt;originalApplicationNumber&gt;&lt;/originalApplicationNumber&gt;
+                  &lt;originalExaminationRequestDate&gt;2008.03.19&lt;/originalExaminationRequestDate&gt;
+                  &lt;originalExaminationRequestFlag&gt;Y&lt;/originalExaminationRequestFlag&gt;
+                  &lt;publicationDate&gt;2008.07.09&lt;/publicationDate&gt;
+                  &lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+                  &lt;registerDate&gt;2008.07.01&lt;/registerDate&gt;
+                  &lt;registerNumber&gt;10-0844582-0000&lt;/registerNumber&gt;
+                  &lt;registerStatus&gt;등록특허()&lt;/registerStatus&gt;
+                  &lt;translationSubmitDate&gt;&lt;/translationSubmitDate&gt;
+               &lt;/biblioSummaryInfo&gt;
+            &lt;/biblioSummaryInfoArray&gt;
+            &lt;claimInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ClaimInfoArray&quot;&gt;
+               &lt;claimInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo&quot;&gt;
+                  &lt;claim&gt;제어부(10)와, 터널(T)의 진입로(R) 일측 지면에 설치된 물탱크(20) 및 염수탱크(30)와, 상기 제어부(10)와 전기적으로 연결된 솔레노이드밸브(SV)가 중간에 설치된 유입배관(P1)에 의하여 물탱크(20) 및 염수탱크(30)와 연결되는 압력펌프(41)가 내설된 컨트롤박스(40)와, 상기 압력펌프(41)와 배출배관(P2)으로 연결되고 상기 터널(T)의 진입로(R) 중앙에 소정간격으로 설치되어 상기 솔레노이드밸브(SV)의 동작에 따라 물탱크(20) 내의 물 또는 염수탱크(30) 내의 물을 진입로(R) 도로노면에 분사하는 복수개의 물분사수단(50)으로 구성된 도로노면 세척 및 결빙방지시스템에 있어서,	상기 물분사수단(50)은 진입로(R)에 매설되고 상기 배출배관(P2)이 연결되도록 중앙에 관통홀(51a)이 형성된 매설본체(51)와;	상기 매설본체(51)에 상하이동 가능하게 설치되고, 외주면에 복수개의 물배출홀(56a)이 방사상으로 형성된 분사캡(52);으로 구성된 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.&lt;/claim&gt;
+               &lt;/claimInfo&gt;
+               &lt;claimInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo&quot;&gt;
+                  &lt;claim&gt;청구항 1에 있어서,	상기 터널(T)의 진입로(R) 상에는 상기 제어부(10)와 전기적으로 연결된 먼지감지센서(S2)가 설치된 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.&lt;/claim&gt;
+               &lt;/claimInfo&gt;
+               &lt;claimInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo&quot;&gt;
+                  &lt;claim&gt;청구항 2에 있어서,	상기 진입로(R)에는 상기 제어부(10)와 전기적으로 연결되어 도로노면의 온도를 감지하는 온도감지센서(S1)가 더 설치된 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.&lt;/claim&gt;
+               &lt;/claimInfo&gt;
+               &lt;claimInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo&quot;&gt;
+                  &lt;claim&gt;삭제&lt;/claim&gt;
+               &lt;/claimInfo&gt;
+               &lt;claimInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo&quot;&gt;
+                  &lt;claim&gt;청구항 1에 있어서,	상기 분사캡(52)의 물배출홀(56a)은 소정의 곡률을 갖도록 라운드지게 형성되어 물 또는 염수가 배출될 때 상기 매설본체(51)로부터 분사캡(52)이 회전되는 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.&lt;/claim&gt;
+               &lt;/claimInfo&gt;
+               &lt;claimInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo&quot;&gt;
+                  &lt;claim&gt;청구항 1에 있어서,	상기 진입로(R) 상에는 상기 물분사수단(50)으로부터 소정거리 전방에 차량감지센서(S3)가 설치된 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.&lt;/claim&gt;
+               &lt;/claimInfo&gt;
+            &lt;/claimInfoArray&gt;
+            &lt;designatedStateInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.DesignatedStateInfoArray&quot;/&gt;
+            &lt;familyInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.FamilyInfoArray&quot;&gt;
+               &lt;familyInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.FamilyInfo&quot;&gt;
+                  &lt;familyApplicationNumber xsi:nil=&quot;true&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;/&gt;
+               &lt;/familyInfo&gt;
+            &lt;/familyInfoArray&gt;
+            &lt;imagePathInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.ImagePathInfo&quot;&gt;
+               &lt;docName&gt;ent_image/PT_R/10&lt;/docName&gt;
+               &lt;largePath&gt;http://plus.kipris.or.kr/patent_image/PT_R/1020080025578/1020080025578.jpg&lt;/largePath&gt;
+               &lt;path&gt;http://plus.kipris.or.kr/patent_image/PT/1020080025578/1020080025578.jpg&lt;/path&gt;
+            &lt;/imagePathInfo&gt;
+            &lt;internationalInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.InternationalInfoArray&quot;&gt;
+               &lt;internationalInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.InternationalInfo&quot;&gt;
+                  &lt;internationOpenDate&gt;&lt;/internationOpenDate&gt;
+                  &lt;internationOpenNumber&gt;&lt;/internationOpenNumber&gt;
+                  &lt;internationalApplicationDate&gt;&lt;/internationalApplicationDate&gt;
+                  &lt;internationalApplicationNumber xsi:nil=&quot;true&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;/&gt;
+               &lt;/internationalInfo&gt;
+            &lt;/internationalInfoArray&gt;
+            &lt;inventorInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.InventorInfoArray&quot;&gt;
+               &lt;inventorInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.InventorInfo&quot;&gt;
+                  &lt;address&gt;서울 송파구 문정*동 래미안APT ***-****&lt;/address&gt;
+                  &lt;code&gt;&lt;/code&gt;
+                  &lt;country&gt;대한민국&lt;/country&gt;
+                  &lt;engName&gt;LEE, Yong June&lt;/engName&gt;
+                  &lt;name&gt;이용준&lt;/name&gt;
+               &lt;/inventorInfo&gt;
+               &lt;inventorInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.InventorInfo&quot;&gt;
+                  &lt;address&gt;경기 용인시 수지구 풍덕천동 **** 태영데시앙*차아파트 ***동****호&lt;/address&gt;
+                  &lt;code&gt;&lt;/code&gt;
+                  &lt;country&gt;대한민국&lt;/country&gt;
+                  &lt;engName&gt;PARK, Won Jae&lt;/engName&gt;
+                  &lt;name&gt;박원재&lt;/name&gt;
+               &lt;/inventorInfo&gt;
+            &lt;/inventorInfoArray&gt;
+            &lt;ipcInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.IpcInfoArray&quot;&gt;
+               &lt;ipcInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.IpcInfo&quot;&gt;
+                  &lt;ipcDate&gt;(2006.01)&lt;/ipcDate&gt;
+                  &lt;ipcNumber&gt;E01H 3/04&lt;/ipcNumber&gt;
+               &lt;/ipcInfo&gt;
+               &lt;ipcInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.IpcInfo&quot;&gt;
+                  &lt;ipcDate&gt;(2006.01)&lt;/ipcDate&gt;
+                  &lt;ipcNumber&gt;E01H 5/00&lt;/ipcNumber&gt;
+               &lt;/ipcInfo&gt;
+               &lt;ipcInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.IpcInfo&quot;&gt;
+                  &lt;ipcDate&gt;(2006.01)&lt;/ipcDate&gt;
+                  &lt;ipcNumber&gt;E01H 10/00&lt;/ipcNumber&gt;
+               &lt;/ipcInfo&gt;
+            &lt;/ipcInfoArray&gt;
+            &lt;legalStatusInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfoArray&quot;&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;수리&lt;/commonCodeName&gt;
+                  &lt;documentEngName&gt;Application of Patent&lt;/documentEngName&gt;
+                  &lt;documentName&gt;[특허출원]특허출원서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.03.19&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;1-1-2008-0200004-08&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;수리&lt;/commonCodeName&gt;
+                  &lt;documentEngName/&gt;
+                  &lt;documentName&gt;[출원인변경]권리관계변경신고서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.03.21&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;1-1-2008-0207928-77&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;수리&lt;/commonCodeName&gt;
+                  &lt;documentEngName/&gt;
+                  &lt;documentName&gt;[우선심사신청]심사청구(우선심사신청)서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.03.21&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;1-1-2008-0207968-93&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;수리&lt;/commonCodeName&gt;
+                  &lt;documentEngName&gt;Request for Prior ArtSearch&lt;/documentEngName&gt;
+                  &lt;documentName&gt;선행기술조사의뢰서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.04.04&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;9-1-9999-9999999-89&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;수리&lt;/commonCodeName&gt;
+                  &lt;documentEngName&gt;Report of Prior Art Search&lt;/documentEngName&gt;
+                  &lt;documentName&gt;선행기술조사보고서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.05.15&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;9-1-2008-0030370-58&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;발송처리완료&lt;/commonCodeName&gt;
+                  &lt;documentEngName&gt;Notice of Submission of Opinion&lt;/documentEngName&gt;
+                  &lt;documentName&gt;의견제출통지서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.05.20&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;9-5-2008-0267473-36&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;보정승인간주&lt;/commonCodeName&gt;
+                  &lt;documentEngName&gt;Amendment including Specification etc.&lt;/documentEngName&gt;
+                  &lt;documentName&gt;[명세서등 보정]보정서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.05.28&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;1-1-2008-0382372-07&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;수리&lt;/commonCodeName&gt;
+                  &lt;documentEngName&gt;Submission of opinion&lt;/documentEngName&gt;
+                  &lt;documentName&gt;[거절이유 등 통지에 따른 의견]의견(답변, 소명)서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.05.28&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;1-1-2008-0382373-42&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;발송처리완료&lt;/commonCodeName&gt;
+                  &lt;documentEngName&gt;Written Decision on Registration&lt;/documentEngName&gt;
+                  &lt;documentName&gt;등록결정서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.06.30&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;9-5-2008-0350520-10&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+               &lt;legalStatusInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo&quot;&gt;
+                  &lt;commonCodeName&gt;수리&lt;/commonCodeName&gt;
+                  &lt;documentEngName/&gt;
+                  &lt;documentName&gt;[출원인변경]권리관계변경신고서&lt;/documentName&gt;
+                  &lt;receiptDate&gt;2008.07.01&lt;/receiptDate&gt;
+                  &lt;receiptNumber&gt;1-1-2008-0474561-10&lt;/receiptNumber&gt;
+               &lt;/legalStatusInfo&gt;
+            &lt;/legalStatusInfoArray&gt;
+            &lt;priorArtDocumentsInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfoArray&quot;&gt;
+               &lt;priorArtDocumentsInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo&quot;&gt;
+                  &lt;documentsNumber&gt;KR1020010090145 A&lt;/documentsNumber&gt;
+               &lt;/priorArtDocumentsInfo&gt;
+               &lt;priorArtDocumentsInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo&quot;&gt;
+                  &lt;documentsNumber&gt;KR1020050089527 A&lt;/documentsNumber&gt;
+               &lt;/priorArtDocumentsInfo&gt;
+               &lt;priorArtDocumentsInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo&quot;&gt;
+                  &lt;documentsNumber&gt;KR1020020062413 A&lt;/documentsNumber&gt;
+               &lt;/priorArtDocumentsInfo&gt;
+               &lt;priorArtDocumentsInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo&quot;&gt;
+                  &lt;documentsNumber&gt;JP52091629 U&lt;/documentsNumber&gt;
+               &lt;/priorArtDocumentsInfo&gt;
+               &lt;priorArtDocumentsInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo&quot;&gt;
+                  &lt;documentsNumber&gt;KR1020050036880 A&lt;/documentsNumber&gt;
+               &lt;/priorArtDocumentsInfo&gt;
+               &lt;priorArtDocumentsInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo&quot;&gt;
+                  &lt;documentsNumber&gt;KR200171993 Y1&lt;/documentsNumber&gt;
+               &lt;/priorArtDocumentsInfo&gt;
+               &lt;priorArtDocumentsInfo type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo&quot;&gt;
+                  &lt;documentsNumber&gt;JP03228906 A&lt;/documentsNumber&gt;
+               &lt;/priorArtDocumentsInfo&gt;
+            &lt;/priorArtDocumentsInfoArray&gt;
+            &lt;priorityInfoArray type=&quot;kr.or.kipris.plus.webservice.services.patentbean.PriorityInfoArray&quot;/&gt;
+        &lt;/items&gt;
+    &lt;/body&gt;
+&lt;/response&gt;</textarea>
+							

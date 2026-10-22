@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Result code and message observed live on 2026-10-22 when the key parameter was omitted (coordinator check); envelope as in the code-30 response. -->
+<response><header><requestMsgID/><responseTime>2026-10-22 00:00:00.0</responseTime><responseMsgID/><successYN>N</successYN><resultCode>10</resultCode><resultMsg>INVALID_REQUEST_PARAMETER_ERROR</resultMsg></header></response>
