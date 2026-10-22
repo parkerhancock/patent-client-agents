@@ -10,7 +10,7 @@ import {
   prhRows,
   resolveFeeJurisdiction,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseStrict } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 const recorded = feeRecordings("prh");
 const pick = (fees: FeeItem[], code: string) =>
@@ -236,13 +236,10 @@ test("PRH routes resolve through FeesClient and share one PDF fetch", async () =
   for (const name of ["PRH", "Finland", "FI", "Patentti- ja rekisterihallitus"])
     expect(resolveFeeJurisdiction(name, "design")).toEqual(["FI", "PRH"]);
   let fetches = 0;
+  const replay = recordedFeeFetch();
   const fetch = ((input: RequestInfo | URL) => {
     fetches++;
-    return Promise.resolve(
-      recordedFeeResponseStrict(
-        String(input instanceof Request ? input.url : input),
-      ),
-    );
+    return replay(input);
   }) as unknown as typeof globalThis.fetch;
   const prh = new PrhFeesClient({ retryLimit: 0, fetch });
   await Promise.all([

@@ -9,9 +9,6 @@ import {
 } from "@patent-client-agents/client";
 import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
-const offline = (async () => {
-  throw new Error("unrecorded request");
-}) as unknown as typeof fetch;
 const amounts = (schedule: FeeSchedule) =>
   Object.fromEntries(schedule.fees.map((fee) => [fee.code, fee.amount]));
 
@@ -139,7 +136,7 @@ test("ILPO amounts, aliases, shared fetch and drift", async () => {
     expect(() => parseShekelAmount(bad)).toThrow();
   expect(resolveFeeJurisdiction("Israel", "design")).toEqual(["IL", "ILPO"]);
   let calls = 0;
-  const replay = recordedFeeFetch(["ilpo"], offline);
+  const replay = recordedFeeFetch();
   const client = new IlpoFeesClient({
     retryLimit: 0,
     fetch: (async (input: RequestInfo | URL, init?: RequestInit) => {

@@ -12,7 +12,7 @@ import {
   parseSgdAmount,
   resolveFeeJurisdiction,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseAny } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 const byCode = (fees: FeeItem[], code: string) => {
   const fee = fees.find((item) => item.code === code);
@@ -30,14 +30,14 @@ const ladder = (fees: FeeItem[], tier: "large" | "small" = "large") =>
       )
       .map((fee) => [fee.year, fee.amount]),
   );
+const replay = recordedFeeFetch();
 /** Serve recorded pages, optionally rewritten, from a fake fetch. */
 const recordedFetch = (
   rewrite: (url: string, body: string) => string = (_, body) => body,
 ) =>
   (async (input: RequestInfo | URL) => {
     const url = String(input instanceof Request ? input.url : input);
-    const response = recordedFeeResponseAny(url);
-    if (!response) return new Response("not recorded", { status: 404 });
+    const response = await replay(url);
     if (url.includes("download-document")) return response;
     return new Response(rewrite(url, await response.text()));
   }) as unknown as typeof fetch;
@@ -580,7 +580,7 @@ test("INPI: the PDF is found through the Tarifs page, with Python's fallback", a
       const url = String(input instanceof Request ? input.url : input);
       if (url.includes("download-document")) {
         pdfPath = new URL(url).search;
-        return recordedFeeResponseAny(url) as Response;
+        return replay(url);
       }
       return new Response("<html><body>Tarifs</body></html>");
     }) as unknown as typeof fetch,

@@ -9,10 +9,6 @@ import {
 } from "@patent-client-agents/client";
 import { feeRecording, recordedFeeFetch } from "./fees-recordings.js";
 
-const offline = (async () => {
-  throw new Error("unrecorded request");
-}) as unknown as typeof fetch;
-
 test("real IP Australia pages: procedural fees and claim fees", async () => {
   const schedule = await feeRecording("ipaustralia");
   expect(schedule.key).toBe("AU/IPAU/patent");
@@ -114,7 +110,7 @@ test("IP Australia amounts, aliases and drift", async () => {
   expect(resolveFeeJurisdiction("IP Australia")).toEqual(["AU", "IPAU"]);
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: recordedFeeFetch(["ipaustralia"], offline),
+    fetch: recordedFeeFetch(),
   });
   expect((await client.getSchedule("Australia")).key).toBe("AU/IPAU/patent");
   const broken = new IpAustraliaFeesClient({

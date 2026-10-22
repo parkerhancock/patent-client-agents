@@ -8,12 +8,7 @@ import {
 } from "@patent-client-agents/client";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";
-import {
-  cipoFixtureFetch,
-  jpoFeePage,
-  recordedFeeFetch,
-  usptoFeePage,
-} from "./fees-recordings.js";
+import { recordedFeeFetch } from "./fees-recordings.js";
 
 type Envelope = {
   summary: string;
@@ -180,79 +175,51 @@ function trademarkAssignments() {
   });
   return { client, bodies };
 }
+const replayFees = recordedFeeFetch();
+/** Recorded pages for every fee office except the EPO feed, which is faked. */
 function feesClient() {
   return new FeesClient({
     retryLimit: 0,
-    fetch: recordedFeeFetch(
-      [
-        "cnipa",
-        "dpma",
-        "ipaustralia",
-        "ilpo",
-        "impi",
-        "kipo",
-        "ipindia",
-        "oepm",
-        "prv",
-        "ukipo",
-        "wipo",
-        "ipos",
-        "hk-ipd",
-        "inpi-fr",
-        "tipo",
-        "prh",
-        "turkpatent",
-        "inpi-br",
-      ],
-      cipoFixtureFetch((async (input: RequestInfo | URL) =>
-        String(input instanceof Request ? input.url : input).includes(
-          "jpo.go.jp",
-        )
-          ? new Response(jpoFeePage(), {
-              headers: { "content-type": "text/html" },
-            })
-          : String(input instanceof Request ? input.url : input).includes(
-                "uspto.gov",
-              )
-            ? new Response(usptoFeePage(), {
-                headers: { "content-type": "text/html" },
-              })
-            : Response.json([
-                {
-                  data: {
-                    feeCode: "001",
-                    feeDescription: "Filing fee",
-                    amount: null,
-                  },
-                  children: [
-                    {
-                      data: {
-                        feeCode: null,
-                        feeDescription: "online",
-                        amount: "135,00",
-                      },
-                      children: [],
+    fetch: ((input: RequestInfo | URL) =>
+      String(input instanceof Request ? input.url : input).includes("epo.org")
+        ? Promise.resolve(
+            Response.json([
+              {
+                data: {
+                  feeCode: "001",
+                  feeDescription: "Filing fee",
+                  amount: null,
+                },
+                children: [
+                  {
+                    data: {
+                      feeCode: null,
+                      feeDescription: "online",
+                      amount: "135,00",
                     },
-                  ],
-                },
-                ...Array.from({ length: 18 }, (_, i) => ({
-                  data: {
-                    feeCode: String(33 + i).padStart(3, "0"),
-                    feeDescription: `Renewal fee for the ${i + 3}th year`,
-                    amount: "1.000,00",
+                    children: [],
                   },
-                  children: [],
-                })),
-                {
-                  data: {
-                    feeCode: "732",
-                    feeDescription: "Renewal fee for the 2nd year",
-                    amount: "35,00",
-                  },
-                  children: [],
+                ],
+              },
+              ...Array.from({ length: 18 }, (_, i) => ({
+                data: {
+                  feeCode: String(33 + i).padStart(3, "0"),
+                  feeDescription: `Renewal fee for the ${i + 3}th year`,
+                  amount: "1.000,00",
                 },
-              ])) as unknown as typeof fetch),
-    ),
+                children: [],
+              })),
+              {
+                data: {
+                  feeCode: "732",
+                  feeDescription: "Renewal fee for the 2nd year",
+                  amount: "35,00",
+                },
+                children: [],
+              },
+            ]),
+          )
+        : replayFees(input)) as unknown as typeof fetch,
   });
 }
 
@@ -646,36 +613,61 @@ test("get_fees covers schedule, lookup and jurisdictions, and names unported off
       "No matching fees found. Recurring-fee coverage: complete",
     );
     const list = await mcp.call("get_fees", { mode: "jurisdictions" });
-    expect(list.items?.map((item) => item.key)).toEqual(
-      expect.arrayContaining([
-        "US/USPTO/patent",
-        "US/USPTO/trademark",
-        "US/USPTO/design",
-        "EP/EPO/patent",
-        "UP/EPO-UP/patent",
-        "DE/DPMA/patent",
-        "IL/ILPO/design",
-        "MX/IMPI/utility_model",
-        "KR/KIPO/patent",
-        "KR/KIPO/trademark",
-        "KR/KIPO/design",
-        "JP/JPO/patent",
-        "JP/JPO/trademark",
-        "JP/JPO/design",
-        "IN/IPIN/patent",
-        "ES/OEPM/patent",
-        "ES/OEPM/trademark",
-        "ES/OEPM/design",
-        "SE/PRV/patent",
-        "SE/PRV/trademark",
-        "SE/PRV/design",
-        "GB/UKIPO/patent",
-        "GB/UKIPO/trademark",
-        "WO/WIPO-PCT/patent",
-        "WO/WIPO-MADRID/trademark",
-        "WO/WIPO-HAGUE/design",
-      ]),
-    );
+    expect(list.items?.map((item) => item.key)).toEqual([
+      "US/USPTO/patent",
+      "US/USPTO/trademark",
+      "US/USPTO/design",
+      "EP/EPO/patent",
+      "UP/EPO-UP/patent",
+      "CA/CIPO/patent",
+      "CN/CNIPA/patent",
+      "DE/DPMA/patent",
+      "AU/IPAU/patent",
+      "IL/ILPO/patent",
+      "IL/ILPO/trademark",
+      "IL/ILPO/design",
+      "MX/IMPI/patent",
+      "MX/IMPI/utility_model",
+      "MX/IMPI/trademark",
+      "MX/IMPI/design",
+      "KR/KIPO/patent",
+      "KR/KIPO/trademark",
+      "KR/KIPO/design",
+      "JP/JPO/patent",
+      "JP/JPO/trademark",
+      "JP/JPO/design",
+      "IN/IPIN/patent",
+      "ES/OEPM/patent",
+      "ES/OEPM/trademark",
+      "ES/OEPM/design",
+      "SE/PRV/patent",
+      "SE/PRV/trademark",
+      "SE/PRV/design",
+      "GB/UKIPO/patent",
+      "GB/UKIPO/trademark",
+      "WO/WIPO-PCT/patent",
+      "WO/WIPO-MADRID/trademark",
+      "WO/WIPO-HAGUE/design",
+      "SG/IPOS/patent",
+      "SG/IPOS/trademark",
+      "SG/IPOS/design",
+      "HK/HKIPD/patent",
+      "HK/HKIPD/trademark",
+      "HK/HKIPD/design",
+      "FR/INPI-FR/patent",
+      "FR/INPI-FR/trademark",
+      "FR/INPI-FR/design",
+      "TW/TIPO/patent",
+      "TW/TIPO/trademark",
+      "FI/PRH/patent",
+      "FI/PRH/trademark",
+      "FI/PRH/design",
+      "TR/TURKPATENT/patent",
+      "TR/TURKPATENT/trademark",
+      "TR/TURKPATENT/design",
+      "BR/INPI-BR/patent",
+      "BR/INPI-BR/trademark",
+    ]);
     expect(list.summary).toContain("Not yet ported: EUIPO trademark");
     // USPTO is served by routing alone; refresh is accepted for USPTO only.
     const maintenance = await mcp.call("get_fees", {

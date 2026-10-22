@@ -8,7 +8,7 @@ import {
   resolveFeeJurisdiction,
   TurkpatentFeesClient,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseStrict } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 const recorded = feeRecordings("turkpatent");
 const pick = (fees: FeeItem[], code: string) =>
@@ -130,9 +130,7 @@ test("TÜRKPATENT parsers and drift", async () => {
   ).toThrow();
   const fetch = (edit: (body: string) => string) =>
     (async (input: RequestInfo | URL) => {
-      const response = recordedFeeResponseStrict(
-        String(input instanceof Request ? input.url : input),
-      );
+      const response = await recordedFeeFetch()(input);
       return new Response(edit(await response.text()), {
         headers: response.headers,
       });
@@ -159,12 +157,7 @@ test("TÜRKPATENT routes resolve through FeesClient", async () => {
     expect(resolveFeeJurisdiction(name)).toEqual(["TR", "TURKPATENT"]);
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: ((input: RequestInfo | URL) =>
-      Promise.resolve(
-        recordedFeeResponseStrict(
-          String(input instanceof Request ? input.url : input),
-        ),
-      )) as unknown as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect(client.supportedRoutes).toEqual(
     expect.arrayContaining([

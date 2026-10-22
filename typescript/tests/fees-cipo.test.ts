@@ -8,12 +8,9 @@ import {
   parseCadAmount,
   resolveFeeJurisdiction,
 } from "@patent-client-agents/client";
-import { cipoFixtureFetch } from "./fees-recordings.js";
+import { recordedFeeFetch } from "./fees-recordings.js";
 
-const offline = (async () => {
-  throw new Error("unrecorded request");
-}) as unknown as typeof fetch;
-const replay = cipoFixtureFetch(offline);
+const replay = recordedFeeFetch();
 const recording = () =>
   new CipoFeesClient({ retryLimit: 0, fetch: replay }).getPatentSchedule();
 

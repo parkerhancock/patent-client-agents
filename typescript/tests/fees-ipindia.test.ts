@@ -8,7 +8,7 @@ import {
   parseRateCell,
   resolveFeeJurisdiction,
 } from "@patent-client-agents/client";
-import { feeRecording, recordedFeeResponse } from "./fees-recordings.js";
+import { feeRecording, recordedFeeFetch } from "./fees-recordings.js";
 
 const byCode = (schedule: FeeSchedule, code: string) =>
   schedule.fees.find((fee) => fee.code === code);
@@ -151,7 +151,7 @@ test("rate cells parse exactly or fail", () => {
 
 test("a non-PDF response fails; the recorded PDF parses from a fake fetch", async () => {
   const pdf = new Uint8Array(
-    await recordedFeeResponse("ipindia", IPINDIA_FEES_PDF_URL).arrayBuffer(),
+    await (await recordedFeeFetch()(IPINDIA_FEES_PDF_URL)).arrayBuffer(),
   );
   const client = (body: Uint8Array) =>
     new IpIndiaFeesClient({
@@ -181,11 +181,7 @@ test("India aliases resolve and route through FeesClient", async () => {
     expect(resolveFeeJurisdiction(name)).toEqual(["IN", "IPIN"]);
   const fees = new FeesClient({
     retryLimit: 0,
-    fetch: (async () =>
-      recordedFeeResponse(
-        "ipindia",
-        IPINDIA_FEES_PDF_URL,
-      )) as unknown as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect((await fees.getSchedule("India")).key).toBe("IN/IPIN/patent");
   expect(

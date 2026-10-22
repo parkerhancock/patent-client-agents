@@ -9,7 +9,7 @@ import {
   parseKrwAmount,
   resolveFeeJurisdiction,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponse } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 const byCode = (schedule: FeeSchedule, code: string) =>
   schedule.fees.find((fee) => fee.code === code);
@@ -189,8 +189,8 @@ const kipoFetch = (patentPage: string, tmPage: string) => {
   return { fetch, calls: () => calls };
 };
 const pages = async () => ({
-  patent: await recordedFeeResponse("kipo", KIPO_PATENT_FEES_URL).text(),
-  tm: await recordedFeeResponse("kipo", KIPO_TRADEMARK_DESIGN_FEES_URL).text(),
+  patent: await (await recordedFeeFetch()(KIPO_PATENT_FEES_URL)).text(),
+  tm: await (await recordedFeeFetch()(KIPO_TRADEMARK_DESIGN_FEES_URL)).text(),
 });
 
 test("KIPO page drift fails or surfaces, and one fetch serves both schedules on a page", async () => {

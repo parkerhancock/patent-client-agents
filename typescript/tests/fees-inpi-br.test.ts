@@ -7,7 +7,7 @@ import {
   parseBrlAmount,
   resolveFeeJurisdiction,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseStrict } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 const recorded = feeRecordings("inpi-br");
 const pick = (fees: FeeItem[], code: string) =>
@@ -157,12 +157,7 @@ test("INPI Brazil routes resolve through FeesClient", async () => {
     ]);
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: ((input: RequestInfo | URL) =>
-      Promise.resolve(
-        recordedFeeResponseStrict(
-          String(input instanceof Request ? input.url : input),
-        ),
-      )) as unknown as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect(client.supportedRoutes).toEqual(
     expect.arrayContaining(["INPI-BR/patent", "INPI-BR/trademark"]),
