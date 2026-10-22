@@ -16,8 +16,10 @@ import {
   GooglePatentsClient,
   getPatentClaims,
   IlpoStatutesClient,
+  InpiBrStatutesClient,
   IpoInStatutesClient,
   IposStatutesClient,
+  LegifranceIpClient,
   MoppClient,
   MpepClient,
   parseHearingNotice,
@@ -99,6 +101,24 @@ assert.equal(
   results.ilpo_section,
   "Prohibition against misappropriation of a trade secret",
 );
+const inpiBr = new InpiBrStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(
+      await readFile(fixture("inpi-br-statutes/inpi_br_statutes.db")),
+    ),
+  ),
+});
+results.inpi_br_section = (await inpiBr.getSection("Art. 195(XI) LPI")).href;
+assert.equal(results.inpi_br_section, "art195");
+const legifrance = new LegifranceIpClient({
+  source: new Uint8Array(
+    await readFile(fixture("legifrance-ip/legifrance_ip.db")),
+  ),
+});
+results.legifrance_section = (
+  await legifrance.getSection("L. 151-1 Code de commerce")
+).statute;
+assert.equal(results.legifrance_section, "Code de commerce");
 const tmep = new TmepClient({
   source: new Uint8Array(await readFile(fixture("tmep/tmep.db"))),
 });
@@ -259,6 +279,8 @@ for (const client of [
   mopp,
   dpma,
   ilpo,
+  inpiBr,
+  legifrance,
   tw,
 ])
   client.close();
