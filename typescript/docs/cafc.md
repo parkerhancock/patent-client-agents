@@ -62,4 +62,6 @@ input validation and the full-toolset tools. The live facade check
 (`bun run verify:facade-live`) calls every CAFC facade route.
 
 Browsers cannot call the court's site directly, because it sends no CORS
-headers; use the relay as for other offices.
+headers; the relay allows `www.cafc.uscourts.gov`, and the index answers
+without the browser user agent and `X-Requested-With` header the client
+sends directly.

@@ -524,6 +524,45 @@ const cases: Case[] = [
     args: { corpus: "epo_case_law", query: "inventive step", limit: 3 },
   },
   {
+    name: "upc statutes search",
+    tool: "search_upc_statutes",
+    args: { query: "opt-out", per_page: 3 },
+  },
+  {
+    name: "upc section",
+    tool: "get_upc_section",
+    args: { instrument: "fees", language: "en" },
+  },
+  {
+    name: "wipo lex search",
+    tool: "search_wipo_lex_legislation",
+    args: { country_codes: ["CA"], keywords: "patent" },
+    harvest: (r, f) => {
+      const id = pick(items(r)[0], "legislation_id", "id");
+      if (id) f.wipo = id;
+    },
+  },
+  {
+    name: "wipo lex get",
+    tool: "get_wipo_lex_legislation",
+    args: (f) => (f.wipo ? { legislation_id: f.wipo } : null),
+  },
+  {
+    name: "copyright search",
+    tool: "copyright",
+    args: { mode: "search", query: "Steamboat Willie", page_size: 3 },
+    harvest: (r, f) => {
+      const id = pick(items(r)[0], "public_records_id");
+      if (id) f.copyright = id;
+    },
+  },
+  {
+    name: "copyright get",
+    tool: "copyright",
+    args: (f) =>
+      f.copyright ? { mode: "get", public_records_id: f.copyright } : null,
+  },
+  {
     name: "tmep (unported)",
     tool: "search_legal_reference",
     args: { corpus: "uspto_tmep", query: "likelihood of confusion" },

@@ -27,6 +27,10 @@ synthetic contracts. The Python package remains separate.
 | Fee schedules (EPO and Unitary Patent) | `FeesClient` with Python-parity office resolution; EPO EPC and Unitary Patent schedules from the live EPO fee feed; three MCP tools under `fees:read` | Two live recordings on October 21 replay offline; Article 2 RFeesUPP cross-check; 23 other offices report not yet ported. See [fees](fees.md) |
 | Google Patents | Page metadata, claims, limitations, description Markdown, figures, citations, family, events; search; PDFs; three MCP tools under `patents:read` | Archived real pages and live recordings; parsers run in Bun, Node and Chromium. See [Google Patents](google-patents.md) |
 | Federal Circuit opinions | Opinions and orders search with date and origin filters, Python-parity patent classifier, PDF downloads; three MCP tools under `cafc:read` | Live recording on October 21 replays offline; classifier matches Python on 426 inputs. See [CAFC](cafc.md) |
+| UPC statutes | UPCA with the Statute, Rules of Procedure and Table of Court Fees in en/fr/de from the May 14, 2026 Python snapshot; three MCP tools and a status resource under `upc:read` | Real-row fixtures; full snapshot read through library, full and curated servers; German RoP text hash matches Python. See [UPC statutes](upc-statutes.md) |
+| WIPO Lex legislation | Legislation search and detail scraped from WIPO Lex, with row counts checked against the page; two MCP tools under `wipo:read` | Archived pages and a live recording on October 21; five Python bugs corrected. See [WIPO Lex](wipo-lex.md) |
+| U.S. Copyright Office public records | Registration and recorded-document search and record lookup; two MCP tools under `copyright:read` | Live recording on October 21 across all four record families; works over HTTP/1.1 in Bun and Node. See [copyright](copyright.md) |
+| UPC decisions | Not ported | unifiedpatentcourt.org now serves a Cloudflare challenge on the decisions listing from both a home and an office connection (October 21); the Python connector fails the same way |
 | Curated facade toolset | The deployed `patent-client-facade` tool names and parameters over the TypeScript clients, behind `toolset: "curated"` | Contract test against the exported Python schemas; 37 routing tests. See [facade](facade.md) |
 | EPO legal corpora (EPC, Case Law, Guidelines, PCT-EPO and UP Guidelines) | Read-only SQLite/FTS readers with book-specific citations; ten MCP tools, five status resources, `epo:read` scope | Real-row fixtures for all five books; all five May 14, 2026 Python snapshots prepared, Zstandard-packaged, pinned and read through library and default MCP on October 21. Edition labels unverified; not deployed |
 
@@ -156,6 +160,7 @@ throttled; nothing is deployed.
 ## Curated facade
 
 October 21, 2026. The [curated toolset](facade.md) serves the deployed facade's
-tool surface with identical inputs. Twenty-four of the thirty Python tools are
-served; six wait on UPC, WIPO Lex and copyright connectors. All
+tool surface with identical inputs. Twenty-nine of the thirty Python tools are
+served; `search_upc_decisions` waits on access to the UPC decisions site, which
+now sits behind a Cloudflare challenge. All
 served tools and modes passed a live check on October 21; not deployed.

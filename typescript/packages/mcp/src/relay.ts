@@ -15,6 +15,9 @@ export const RELAY_HOSTS = [
   "fees.apps.epo.org",
   "patents.google.com",
   "patentimages.storage.googleapis.com",
+  "www.cafc.uscourts.gov",
+  "api.publicrecords.copyright.gov",
+  "www.wipo.int",
 ] as const;
 /** Request headers forwarded upstream; everything else, including cookies and Origin, is dropped. */
 const FORWARD = ["accept", "accept-language", "content-type", "x-ops-range"];

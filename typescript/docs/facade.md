@@ -31,10 +31,13 @@ output-mode schemas mark defaulted parameters as required.
 | `search_trademarks`, `get_trademark`, `search_trademark_assignments` | Served; TSDR views need `USPTO_TSDR_API_KEY` |
 | `classify_cpc` | Served; needs EPO OPS credentials. USCLS mapping is rejected (OPS maps CPC, IPC and ECLA). |
 | `get_fees` | Served for EPO and the Unitary Patent; other offices report not yet ported |
-| `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC not ported; USITC tools stay off as in the EDIS-less Python build |
+| `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC decisions not ported (the site now sits behind a Cloudflare challenge); USITC tools stay off as in the EDIS-less Python build |
 | `search_legal_reference`, `get_legal_reference` | MPEP and the five EPO corpora served; TMEP, DPMA, UKIPO MOPP, India and Taiwan not ported |
 | `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents and CAFC opinions served; USITC and IP Australia not ported |
-| `copyright`, `get_upc_section`, `search_upc_statutes`, `search_upc_decisions`, `search_wipo_lex_legislation`, `get_wipo_lex_legislation` | Not registered; listed by `patent_client_status` |
+| `search_upc_statutes`, `get_upc_section` | Served from the UPC statutes corpus. See [UPC statutes](upc-statutes.md) |
+| `search_wipo_lex_legislation`, `get_wipo_lex_legislation` | Served. See [WIPO Lex](wipo-lex.md) |
+| `copyright` | Served. See [copyright](copyright.md) |
+| `search_upc_decisions` | Not registered; listed by `patent_client_status` |
 
 Sub-modes without a TypeScript connector fail with "… is not yet available on
 the TypeScript server"; credential-gated families say which variable to set.
@@ -66,6 +69,11 @@ clients, so full records are not byte-compatible. Notable changes:
   them to the court's index unchanged, where only `24-1945` matches.
   `download_document(source='cafc')` also takes the opinion's PDF URL as
   `identifier`, since the facade has no `document_url` parameter.
+- WIPO Lex, Copyright Office and UPC statutes outputs correct several Python
+  bugs (inverted `include_historical`, empty post-1978 copyright titles and
+  claimants, unquoted FTS operators, among others); each connector doc lists
+  them. Long UPC instrument texts arrive as text artifacts past 32,000
+  characters, not inline.
 - CAFC `more_available` comes from the index's filtered count, and the
   `search_litigation` summary reports source rows inspected out of that count.
 
@@ -105,7 +113,10 @@ patent PDFs for US (618 KB) and EP (558 KB). Unported modes returned their
 not-yet-available messages. A later run on October 21 added CAFC: free-text
 and patent-only search, patent opinions for September 2026 (61 rows), and
 opinion PDFs by four-digit appeal number (127 KB) and by a harvested appeal
-(112 KB).
+(112 KB). A third run added the UPC statutes (search and the fee table, read
+from the May 14 snapshot), WIPO Lex (Canadian patent laws, then the Patent
+Act with its attachments) and the Copyright Office (233 hits for "Steamboat
+Willie", then one record by id).
 
 Not facade defects, but visible in the run:
 

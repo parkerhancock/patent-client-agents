@@ -72,7 +72,8 @@ serves `/relay?url=…` ([source](../packages/mcp/src/relay.ts)):
 - Targets must be plain HTTPS URLs on an allowlist: `api.uspto.gov`,
   `data.uspto.gov`, `data-documents.uspto.gov`, `tsdrapi.uspto.gov`,
   `assignmentcenter.uspto.gov`, `ops.epo.org`, `fees.apps.epo.org`,
-  `patents.google.com` and `patentimages.storage.googleapis.com`.
+  `patents.google.com`, `patentimages.storage.googleapis.com`,
+  `www.cafc.uscourts.gov`, `api.publicrecords.copyright.gov` and `www.wipo.int`.
 - It forwards only `accept`, `accept-language`, `content-type` and `x-ops-range`. Browser
   cookies, `Origin` and the relay token never reach the office.
 - It injects the server's ODP and TSDR keys and the OPS client credentials for
