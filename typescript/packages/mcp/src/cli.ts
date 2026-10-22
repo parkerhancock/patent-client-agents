@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { GcsBlobStore, gcsBlobStoreOptionsFromEnv } from "./gcs-blob-store.js";
 import { createServer, wafSessionSourceFromEnv } from "./index.js";
 
 export function configurationFromEnv(env: Record<string, string | undefined>) {
@@ -33,19 +34,27 @@ export function configurationFromEnv(env: Record<string, string | undefined>) {
           })
       : undefined;
   const publicBaseUrl = env.MCP_PUBLIC_BASE_URL;
-  if (transport === "http" && !publicBaseUrl)
+  const gcs = gcsBlobStoreOptionsFromEnv(env);
+  if (transport === "http" && !publicBaseUrl && !gcs)
     throw new Error(
-      "Set MCP_PUBLIC_BASE_URL so document download URLs are reachable by clients.",
+      "Set MCP_PUBLIC_BASE_URL or DOWNLOAD_BUCKET so document download URLs are reachable by clients.",
     );
   const mode = z
     .enum(["authenticated", "signed"])
     .parse(env.MCP_DOWNLOAD_MODE ?? "signed");
+  if (gcs && mode === "authenticated")
+    throw new Error(
+      "DOWNLOAD_BUCKET issues bearer signed URLs; it cannot be combined with MCP_DOWNLOAD_MODE=authenticated.",
+    );
   return {
     transport,
     port,
     host: env.MCP_HOST ?? "127.0.0.1",
     auth,
-    downloads: publicBaseUrl ? { publicBaseUrl, mode } : {},
+    downloads: {
+      ...(publicBaseUrl ? { publicBaseUrl, mode } : {}),
+      ...(gcs ? { blobStore: new GcsBlobStore(gcs) } : {}),
+    },
     ...(wafSession ? { wafSession } : {}),
   };
 }

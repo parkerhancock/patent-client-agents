@@ -21,7 +21,7 @@ adds:
 | Terms gate | Middleware diverts `/authorize` to `/consent` until a versioned cookie is set | None |
 | Rate limits | Firestore token buckets per pseudonymous user, per minute and per day | None (fastmcp-ts ships an in-memory `RateLimitingMiddleware`) |
 | Usage log | Firestore `usage/` record per tool call | None |
-| Downloads | GCS objects with V4 signed URLs (IAM `signBlob`) | HMAC-signed URLs served by the process, so a URL dies with its instance |
+| Downloads | `blob_store.py` supports GCS objects with V4 signed URLs (IAM `signBlob`), but the deploy Terraform sets no `LAW_TOOLS_CORE_GCS_BUCKET`; links go through the HMAC `/downloads` route behind `downloads.patentclient.com` | Done locally: `GcsBlobStore` with V4 signed URLs through `signBlob`, enabled by `DOWNLOAD_BUCKET` ([downloads.md](downloads.md)); without it, HMAC-signed URLs served by the process |
 | Web pages | Landing page, `/static` icons, `robots.txt`, favicon, `/-/health`, browser redirect on `GET /mcp`, security headers | None |
 | Hidden tools | `search_trademarks`, `search_upc_decisions` hidden on the demo | Facade has no visibility filter; UPC decisions is already unported |
 | Corpora | Bootstrap pulls zstd blobs from `gs://patentclient-mcp-corpora/manifest.json` at start; UPC baked in | Reads prepared DELETE-mode `.zst` files; none are published, and the EPO corpora have not been prepared |
@@ -56,7 +56,10 @@ No GCP writes.
 
 1. Build `packages/hosted`: the curated server plus Google OAuth with
    Firestore storage, the terms gate, Firestore rate limits and usage log,
-   GCS signed-URL downloads, the web pages and headers, serverInfo icons, and
+   GCS signed-URL downloads (done in `packages/mcp`: pass a `GcsBlobStore`
+   as `downloads.blobStore`; see [downloads.md](downloads.md), which also
+   lists the bucket, lifecycle rule and IAM Phase 1 needs), the web pages
+   and headers, serverInfo icons, and
    a hidden-tool list (`search_trademarks` until hosted WAF refresh is shown
    to work).
 2. Corpora: prepare the five EPO corpora as `.zst` and write a TypeScript

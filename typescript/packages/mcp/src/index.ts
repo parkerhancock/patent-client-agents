@@ -101,6 +101,13 @@ import {
 import { registerUsitcTools, usitcTokenFromEnv } from "./usitc.js";
 import { registerWipoLexTools } from "./wipo-lex.js";
 
+export type {
+  BlobObject,
+  BlobStore,
+  DownloadOptions,
+  StoredBlob,
+} from "./downloads.js";
+
 export interface UsptoClients {
   applications: ApplicationsClient;
   trials: PtabTrialsClient;
@@ -159,6 +166,7 @@ export interface ServerOptions {
   /** IPO India statutes and MPPP corpus readers; omitted, they use their default artifact paths. */
   ipoInStatutes?: IpoInStatutesReader;
   ipoInMppp?: IpoInMpppReader;
+  /** Download URLs; pass `blobStore` (for example a GcsBlobStore) for URLs that outlive the process. */
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
   downloadAuth?: { jwksUri: string; issuer: string; audience: string };
