@@ -448,10 +448,23 @@ const cases: Case[] = [
     },
   },
   {
-    name: "cafc (unported)",
+    name: "cafc search",
     tool: "search_litigation",
-    args: { forum: "cafc", query: "obviousness" },
-    expect: "error",
+    args: { forum: "cafc", query: "valtrus", limit: 5 },
+  },
+  {
+    name: "cafc search patent_only",
+    tool: "search_litigation",
+    args: { forum: "cafc", query: "patent", patent_only: true, limit: 10 },
+  },
+  {
+    name: "cafc patent opinions",
+    tool: "search_cafc_patent_opinions",
+    args: { date_from: "2026-09-01", date_to: "2026-09-30", max_results: 5 },
+    harvest: (r, f) => {
+      const appeal = pick(items(r)[0], "appeal_number");
+      if (appeal) f.appeal = appeal;
+    },
   },
   {
     name: "get ptab trial",
@@ -541,6 +554,16 @@ const cases: Case[] = [
     name: "patent pdf US",
     tool: "download_document",
     args: { source: "patent_pdf", identifier: "US10123456B2" },
+  },
+  {
+    name: "cafc pdf",
+    tool: "download_document",
+    args: { source: "cafc", identifier: "2024-1945" },
+  },
+  {
+    name: "cafc pdf harvested",
+    tool: "download_document",
+    args: (f) => (f.appeal ? { source: "cafc", identifier: f.appeal } : null),
   },
   {
     name: "patent pdf EP",

@@ -2,6 +2,11 @@ import { ApiError, type Provenance } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
 import {
+  cafcPatentSearchSchema,
+  searchCafcOpinions,
+  searchCafcPatentOpinions,
+} from "../cafc.js";
+import {
   type AuthCheck,
   asList,
   type FacadeClients,
@@ -194,12 +199,12 @@ export function registerLitigationFacade(
       ...facadeToolOptions(auth),
       name: "search_litigation",
       description:
-        "Search a patent tribunal's records by free text — PTAB proceedings/decisions or Federal Circuit opinions.\n\nRoutes to the right tribunal by ``forum``. On this server only forum='ptab' is available; Federal Circuit (forum='cafc') search is not yet ported. For one record by identifier use ``get_litigation``.\n\nRelated tools: get_litigation, list_ptab_children.",
+        "Search a patent tribunal's records by free text — PTAB proceedings/decisions or Federal Circuit opinions.\n\nRoutes to the right tribunal by ``forum``. Only the two free-text searches fold here; for Federal Circuit patent-opinions-by-date use the dedicated ``search_cafc_patent_opinions`` (UPC decisions are not yet available on this server). For one record by identifier use ``get_litigation``.\n\nRelated tools: get_litigation, search_cafc_patent_opinions, list_ptab_children.",
       input: z.object({
         forum: z
           .enum(["ptab", "cafc"])
           .describe(
-            "Which tribunal's free-text index to search. 'ptab' = USPTO Patent Trial and Appeal Board records (AIA trials, ex parte appeals, pre-AIA interferences). 'cafc' = U.S. Court of Appeals for the Federal Circuit opinions and orders (not yet available on this server).",
+            "Which tribunal's free-text index to search. 'ptab' = USPTO Patent Trial and Appeal Board records (AIA trials, ex parte appeals, pre-AIA interferences). 'cafc' = U.S. Court of Appeals for the Federal Circuit opinions and orders. For CAFC patent-only-by-date use search_cafc_patent_opinions.",
           ),
         query: z.string().min(1).describe("Free-text search query."),
         limit: z
@@ -242,10 +247,7 @@ export function registerLitigationFacade(
     },
     async (input) => {
       if (input.forum === "cafc")
-        notPorted(
-          "Federal Circuit (CAFC) opinion search",
-          "Use forum='ptab' for PTAB records.",
-        );
+        return searchCafcOpinions(clients.cafc, input);
       let { offset, limit } = input;
       if (input.next_cursor)
         ({ offset, limit } = decodeCursor(input.next_cursor));
@@ -280,6 +282,17 @@ export function registerLitigationFacade(
         next_cursor: more ? encodeCursor(offset + rows.length, limit) : null,
       };
     },
+  );
+
+  server.tool(
+    {
+      ...facadeToolOptions(auth),
+      name: "search_cafc_patent_opinions",
+      description:
+        "Search U.S. Court of Appeals for the Federal Circuit opinions from patent-relevant origins.\n\nFilters to opinions whose origin is PTO, DCT, ITC, or CFC — the four paths that bring patent cases to the Federal Circuit. Optional date range narrows the window; date_to requires date_from, and reversed bounds are rejected. Origins include non-patent cases as well. Continue with next_cursor and the same dates; cursors are offsets, not snapshots. Returns lean stubs by default; pass ``full=True`` for the upstream row shape. Use ``download_document(source='cafc')`` with an appeal number to pull a specific opinion PDF.\n\nRelated tools: search_litigation, download_document.",
+      input: cafcPatentSearchSchema,
+    },
+    (input) => searchCafcPatentOpinions(clients.cafc, input),
   );
 
   server.tool(

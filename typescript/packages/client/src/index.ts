@@ -3,6 +3,7 @@ export { ApplicationsClient, STUB_APPLICATION_FIELDS } from "./applications.js";
 export * from "./applications-models.js";
 export * from "./assignments.js";
 export * from "./bulkdata.js";
+export * from "./cafc.js";
 export * from "./epo-legal.js";
 export * from "./epo-ops.js";
 export * from "./epo-ops-resources.js";

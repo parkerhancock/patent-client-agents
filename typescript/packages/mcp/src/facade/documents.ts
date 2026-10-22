@@ -3,6 +3,7 @@ import { ApiError, type Provenance } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { zipSync } from "fflate";
 import { z } from "zod";
+import { downloadCafcPdf } from "../cafc.js";
 import {
   type AuthCheck,
   detailEnvelope,
@@ -393,7 +394,7 @@ export function registerDocumentsFacade(
       ...facadeToolOptions(auth),
       name: "download_document",
       description:
-        "Download a patent, court, PTAB, USITC, or bulk-register document by source.\n\nRoutes by ``source`` to the matching downloader and returns one file artifact (a download link or file path). Single-file sources return the file; the ptab_* sources return the PDF when one document matches and otherwise a ZIP with manifest.json. ptab_trial caps at 50 decisions and ptab_trial_docs at 100 documents — narrow with item_ids or a date range. 'cafc' and 'ipa_bulk' are not yet available on this server.\n\nRelated tools: search_bulk_data, search_litigation, list_ptab_children, get_patent.",
+        "Download a patent, court, PTAB, USITC, or bulk-register document by source.\n\nRoutes by ``source`` to the matching downloader and returns one file artifact (a download link or file path). Single-file sources return the file; the ptab_* sources return the PDF when one document matches and otherwise a ZIP with manifest.json. ptab_trial caps at 50 decisions and ptab_trial_docs at 100 documents — narrow with item_ids or a date range. For cafc, an appeal with several documents needs the PDF URL from search_litigation(forum='cafc') as identifier. 'ipa_bulk' is not yet available on this server.\n\nRelated tools: search_bulk_data, search_litigation, list_ptab_children, get_patent.",
       input: z.object({
         source: z
           .enum([
@@ -406,7 +407,7 @@ export function registerDocumentsFacade(
             "ipa_bulk",
           ])
           .describe(
-            "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF (not yet available). 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available).",
+            "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available).",
           ),
         identifier: z
           .string()
@@ -414,7 +415,7 @@ export function registerDocumentsFacade(
           .nullable()
           .default(null)
           .describe(
-            "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234'); ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; ipa_bulk → CKAN release id.",
+            "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234') or the opinion's PDF URL; ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; ipa_bulk → CKAN release id.",
           ),
         document_id: z
           .number()
@@ -465,8 +466,6 @@ export function registerDocumentsFacade(
       }),
     },
     async (input) => {
-      if (input.source === "cafc")
-        notPorted("Federal Circuit (CAFC) opinion PDFs");
       if (input.source === "ipa_bulk")
         notPorted("IP Australia IP RAPID bulk downloads");
       if (!input.identifier)
@@ -475,6 +474,8 @@ export function registerDocumentsFacade(
         );
       if (input.source === "patent_pdf")
         return patentPdf(clients, input.identifier);
+      if (input.source === "cafc")
+        return downloadCafcPdf(clients.cafc, input.identifier);
       return ptabDownload(clients, input.source, input.identifier, {
         item_ids: input.item_ids,
         after: input.after,

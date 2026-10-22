@@ -2,6 +2,7 @@ import type {
   ApplicationsClient,
   AssignmentCenterClient,
   BulkDataClient,
+  CafcClient,
   EpoOpsClient,
   FeesClient,
   MpepClient,
@@ -50,6 +51,7 @@ export interface FacadeClients {
   trademarkSearch: TrademarkSearchClient;
   mpep: MpepClient;
   fees: FeesClient;
+  cafc: CafcClient;
   epoLegal: EpoLegalClients;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
@@ -71,7 +73,6 @@ export const UNPORTED_FACADE_TOOLS = [
   "search_upc_decisions",
   "search_wipo_lex_legislation",
   "get_wipo_lex_legislation",
-  "search_cafc_patent_opinions",
 ] as const;
 
 /** A facade sub-mode whose connector is not ported yet. */

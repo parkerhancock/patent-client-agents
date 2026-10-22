@@ -3,6 +3,7 @@ import {
   ApplicationsClient,
   AssignmentCenterClient,
   BulkDataClient,
+  CafcClient,
   ConfigurationError,
   EpcClient,
   EpoCaseLawClient,
@@ -38,6 +39,7 @@ import {
 } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
 import { registerApplicationExtraTools } from "./applications-extra.js";
+import { registerCafcTools } from "./cafc.js";
 import {
   type DownloadOptions,
   DownloadStore,
@@ -80,6 +82,7 @@ export interface UsptoClients {
   epoOps: EpoOpsClient;
   fees: FeesClient;
   googlePatents: GooglePatentsClient;
+  cafc: CafcClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -455,6 +458,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     mpep,
     fees: provided.fees ?? new FeesClient(),
     googlePatents: provided.googlePatents ?? new GooglePatentsClient(),
+    cafc: provided.cafc ?? new CafcClient(),
     epoLegal,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
@@ -652,6 +656,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     clients.googlePatents,
     options.auth ? requireScopes("patents:read") : undefined,
+  );
+  registerCafcTools(
+    server,
+    clients.cafc,
+    options.auth ? requireScopes("cafc:read") : undefined,
   );
   registerFeeTools(
     server,

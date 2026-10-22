@@ -4,6 +4,7 @@ import { join } from "node:path";
 import {
   ApiError,
   BulkDataClient,
+  CafcClient,
   EpcClient,
   EpoCaseLawClient,
   EpoGuidelinesClient,
@@ -248,6 +249,69 @@ type Envelope = {
   filename?: string;
   content_type?: string;
 };
+/** Synthetic CAFC opinions index: one page with a nonce, the DataTables endpoint and PDFs. */
+const cafcRows = [
+  [
+    "10/19/2026",
+    "24-1945",
+    "PTO",
+    "OPINION",
+    `<a sort="GOOGLE LLC v. VALTRUS INNOVATIONS LTD. [OPINION]">`,
+    "Precedential",
+    "opinions-orders/24-1945.OPINION.pdf",
+  ],
+  [
+    "10/18/2026",
+    "25-1000",
+    "MSPB",
+    "ORDER",
+    `<a sort="SMITH v. MSPB [ORDER]">`,
+    "Nonprecedential",
+    "opinions-orders/25-1000.ORDER.pdf",
+  ],
+  [
+    "10/17/2026",
+    "24-2000",
+    "DCT",
+    "OPINION",
+    `<a sort="ACME v. WIDGET CO. [OPINION]">`,
+    "Nonprecedential",
+    "opinions-orders/24-2000.OPINION.pdf",
+  ],
+  [
+    "10/16/2026",
+    "24-2000",
+    "DCT",
+    "ORDER",
+    `<a sort="ACME v. WIDGET CO. [ORDER]">`,
+    "Nonprecedential",
+    "opinions-orders/24-2000.ORDER.pdf",
+  ],
+];
+const cafcFetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+  const request = new Request(input, init);
+  const url = new URL(request.url);
+  if (url.pathname.endsWith(".pdf")) return new Response(PDF);
+  if (request.method === "GET")
+    return new Response(
+      '<input type="hidden" id="wdtNonceFrontendServerSide_1" value="0123456789" />',
+    );
+  const form = new URLSearchParams(await request.text());
+  const query = form.get("search[value]")?.toLowerCase() ?? "";
+  const origins = form.get("columns[2][search][value]")?.split("|");
+  const rows = cafcRows.filter(
+    (row) =>
+      (row[1]?.includes(query) || row[4]?.toLowerCase().includes(query)) &&
+      (!origins?.[0] || origins.includes(row[2] ?? "")),
+  );
+  const start = Number(form.get("start"));
+  return Response.json({
+    recordsFiltered: String(rows.length),
+    recordsTotal: String(cafcRows.length),
+    data: rows.slice(start, start + Number(form.get("length"))),
+  });
+}) as typeof fetch;
+
 const call = async (name: string, args: Record<string, unknown>) =>
   (await client.callTool<Envelope>(name, args)).structuredContent as Envelope;
 
@@ -262,6 +326,7 @@ beforeAll(async () => {
       appeals: new PtabAppealsClient(odp),
       interferences: new PtabInterferencesClient(odp),
       bulk: new BulkDataClient(odp),
+      cafc: new CafcClient({ fetch: cafcFetch, retryLimit: 0 }),
       publications,
       epoOps,
       mpep,
@@ -313,7 +378,6 @@ test("the group's tools are registered with the deployed parameter names", async
     );
   }
   for (const absent of [
-    "search_cafc_patent_opinions",
     "search_upc_decisions",
     "get_upc_section",
     "search_wipo_lex_legislation",
@@ -321,7 +385,7 @@ test("the group's tools are registered with the deployed parameter names", async
     expect(tools.map((t) => t.name)).not.toContain(absent);
 });
 
-test("search_litigation routes PTAB record kinds, pages by cursor, and refuses CAFC", async () => {
+test("search_litigation routes PTAB record kinds and pages by cursor", async () => {
   const first = await call("search_litigation", {
     forum: "ptab",
     query: "owner",
@@ -362,9 +426,59 @@ test("search_litigation routes PTAB record kinds, pages by cursor, and refuses C
     appeal_outcome: "Affirmed",
     application_number: "16123456",
   });
+});
+
+test("search_litigation(forum='cafc') and search_cafc_patent_opinions search the CAFC index", async () => {
+  const first = await call("search_litigation", {
+    forum: "cafc",
+    query: "v.",
+    limit: 2,
+  });
+  expect(first.items).toEqual([
+    {
+      appeal_number: "24-1945",
+      case_name_short: "GOOGLE LLC v. VALTRUS INNOVATIONS LTD.",
+      release_date: "2026-10-19",
+      origin: "PTO",
+      document_type: "OPINION",
+      precedential_status: "Precedential",
+      is_patent_case: false,
+      pdf_url:
+        "https://www.cafc.uscourts.gov/opinions-orders/24-1945.OPINION.pdf",
+    },
+    expect.objectContaining({ appeal_number: "25-1000" }),
+  ]);
+  expect(first.more_available).toBe(true);
+  const second = await call("search_litigation", {
+    forum: "cafc",
+    query: "v.",
+    next_cursor: first.next_cursor,
+  });
+  expect(second.items.map((o) => o.document_type)).toEqual([
+    "OPINION",
+    "ORDER",
+  ]);
+  expect(second.more_available).toBe(false);
+  const full = await call("search_litigation", {
+    forum: "cafc",
+    query: "valtrus",
+    full: true,
+  });
+  expect(full.items[0]).toHaveProperty("patent_confidence", 0);
+  const patentOnly = await call("search_litigation", {
+    forum: "cafc",
+    query: "v.",
+    patent_only: true,
+  });
+  expect(patentOnly.items).toEqual([]);
+  expect(patentOnly.summary).toContain("Inspected 4 of 4 source rows");
+  const byOrigin = await call("search_cafc_patent_opinions", {
+    date_from: "2026-10-01",
+  });
+  expect(byOrigin.items.map((o) => o.origin)).toEqual(["PTO", "DCT", "DCT"]);
   await expect(
-    client.callTool("search_litigation", { forum: "cafc", query: "x" }),
-  ).rejects.toThrow("not yet available");
+    client.callTool("search_cafc_patent_opinions", { date_to: "2026-10-01" }),
+  ).rejects.toThrow("date_to requires date_from");
 });
 
 test("get_litigation fetches PTAB records, reports missing list members, and refuses UPC", async () => {
@@ -586,10 +700,38 @@ test("PTAB downloads return one PDF or a ZIP with a manifest, honoring filters a
       item_ids: ["nope"],
     }),
   ).rejects.toThrow("No PTAB trial decisions");
-  for (const source of ["cafc", "ipa_bulk"])
-    await expect(
-      client.callTool("download_document", { source, identifier: "x" }),
-    ).rejects.toThrow("not yet available");
+  await expect(
+    client.callTool("download_document", {
+      source: "ipa_bulk",
+      identifier: "x",
+    }),
+  ).rejects.toThrow("not yet available");
+  const cafc = await call("download_document", {
+    source: "cafc",
+    identifier: "2024-1945",
+  });
+  expect(cafc).toMatchObject({
+    filename: "24-1945.OPINION.pdf",
+    content_type: "application/pdf",
+  });
+  await expect(
+    client.callTool("download_document", {
+      source: "cafc",
+      identifier: "24-2000",
+    }),
+  ).rejects.toThrow("has 2 documents");
+  const chosen = await call("download_document", {
+    source: "cafc",
+    identifier:
+      "https://www.cafc.uscourts.gov/opinions-orders/24-2000.ORDER.pdf",
+  });
+  expect(chosen.filename).toBe("24-2000.ORDER.pdf");
+  await expect(
+    client.callTool("download_document", {
+      source: "cafc",
+      identifier: "99-9999",
+    }),
+  ).rejects.toThrow("No Federal Circuit opinion");
   await expect(
     client.callTool("download_document", { source: "ptab_trial" }),
   ).rejects.toThrow("requires identifier");

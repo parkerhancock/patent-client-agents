@@ -31,10 +31,10 @@ output-mode schemas mark defaulted parameters as required.
 | `search_trademarks`, `get_trademark`, `search_trademark_assignments` | Served; TSDR views need `USPTO_TSDR_API_KEY` |
 | `classify_cpc` | Served; needs EPO OPS credentials. USCLS mapping is rejected (OPS maps CPC, IPC and ECLA). |
 | `get_fees` | Served for EPO and the Unitary Patent; other offices report not yet ported |
-| `search_litigation`, `get_litigation`, `list_ptab_children` | PTAB served; CAFC and UPC not ported; USITC tools stay off as in the EDIS-less Python build |
+| `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC not ported; USITC tools stay off as in the EDIS-less Python build |
 | `search_legal_reference`, `get_legal_reference` | MPEP and the five EPO corpora served; TMEP, DPMA, UKIPO MOPP, India and Taiwan not ported |
-| `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs and PTAB documents served; CAFC, USITC and IP Australia not ported |
-| `copyright`, `get_upc_section`, `search_upc_statutes`, `search_upc_decisions`, `search_wipo_lex_legislation`, `get_wipo_lex_legislation`, `search_cafc_patent_opinions` | Not registered; listed by `patent_client_status` |
+| `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents and CAFC opinions served; USITC and IP Australia not ported |
+| `copyright`, `get_upc_section`, `search_upc_statutes`, `search_upc_decisions`, `search_wipo_lex_legislation`, `get_wipo_lex_legislation` | Not registered; listed by `patent_client_status` |
 
 Sub-modes without a TypeScript connector fail with "… is not yet available on
 the TypeScript server"; credential-gated families say which variable to set.
@@ -62,6 +62,12 @@ clients, so full records are not byte-compatible. Notable changes:
   TypeScript client shapes (TSDR is camelCase).
 - Searches without a cursor parameter in the Python schema return
   `next_cursor: null` with `more_available`.
+- CAFC appeal numbers work with four-digit years (`2024-1945`); Python passed
+  them to the court's index unchanged, where only `24-1945` matches.
+  `download_document(source='cafc')` also takes the opinion's PDF URL as
+  `identifier`, since the facade has no `document_url` parameter.
+- CAFC `more_available` comes from the index's filtered count, and the
+  `search_litigation` summary reports source rows inspected out of that count.
 
 Each module documents its own deviations inline:
 [patents](../packages/mcp/src/facade/patents.ts),
@@ -96,7 +102,10 @@ Trademark Search through the deployed WAF session, all four TSDR views, EPO
 fee lookups, PTAB search across all five record types, office-action text by
 document identifier, file-history item (25 KB) and NOA bundle (780 KB), and
 patent PDFs for US (618 KB) and EP (558 KB). Unported modes returned their
-not-yet-available messages.
+not-yet-available messages. A later run on October 21 added CAFC: free-text
+and patent-only search, patent opinions for September 2026 (61 rows), and
+opinion PDFs by four-digit appeal number (127 KB) and by a harvested appeal
+(112 KB).
 
 Not facade defects, but visible in the run:
 

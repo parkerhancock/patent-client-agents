@@ -26,6 +26,7 @@ synthetic contracts. The Python package remains separate.
 | EPO OPS and CPC (EPO scope) | Search, biblio, full text, citations, equivalents, INPADOC family, legal events, EP Register views, Unitary Patent package, family evidence, number conversion, merged PDF, CPC retrieval/search/mapping/media/CPCI; eight intent-based MCP tools under `epo:read` | 22 live recordings on October 21 replay offline; synthetic OAuth2, error and MCP tests. See [EPO OPS](epo-ops.md) |
 | Fee schedules (EPO and Unitary Patent) | `FeesClient` with Python-parity office resolution; EPO EPC and Unitary Patent schedules from the live EPO fee feed; three MCP tools under `fees:read` | Two live recordings on October 21 replay offline; Article 2 RFeesUPP cross-check; 23 other offices report not yet ported. See [fees](fees.md) |
 | Google Patents | Page metadata, claims, limitations, description Markdown, figures, citations, family, events; search; PDFs; three MCP tools under `patents:read` | Archived real pages and live recordings; parsers run in Bun, Node and Chromium. See [Google Patents](google-patents.md) |
+| Federal Circuit opinions | Opinions and orders search with date and origin filters, Python-parity patent classifier, PDF downloads; three MCP tools under `cafc:read` | Live recording on October 21 replays offline; classifier matches Python on 426 inputs. See [CAFC](cafc.md) |
 | Curated facade toolset | The deployed `patent-client-facade` tool names and parameters over the TypeScript clients, behind `toolset: "curated"` | Contract test against the exported Python schemas; 37 routing tests. See [facade](facade.md) |
 | EPO legal corpora (EPC, Case Law, Guidelines, PCT-EPO and UP Guidelines) | Read-only SQLite/FTS readers with book-specific citations; ten MCP tools, five status resources, `epo:read` scope | Real-row fixtures for all five books; all five May 14, 2026 Python snapshots prepared, Zstandard-packaged, pinned and read through library and default MCP on October 21. Edition labels unverified; not deployed |
 
@@ -155,6 +156,6 @@ throttled; nothing is deployed.
 ## Curated facade
 
 October 21, 2026. The [curated toolset](facade.md) serves the deployed facade's
-tool surface with identical inputs. Twenty-three of the thirty Python tools are
-served; seven wait on CAFC, UPC, WIPO Lex and copyright connectors. All
+tool surface with identical inputs. Twenty-four of the thirty Python tools are
+served; six wait on UPC, WIPO Lex and copyright connectors. All
 served tools and modes passed a live check on October 21; not deployed.
