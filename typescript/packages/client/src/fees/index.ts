@@ -7,6 +7,7 @@ import { EpoFeesClient } from "./epo.js";
 import { HkIpdFeesClient } from "./hk-ipd.js";
 import { IlpoFeesClient } from "./ilpo.js";
 import { ImpiFeesClient } from "./impi.js";
+import { InpiBrFeesClient } from "./inpi-br.js";
 import { InpiFrFeesClient } from "./inpi-fr.js";
 import { IpAustraliaFeesClient } from "./ipaustralia.js";
 import { IpIndiaFeesClient } from "./ipindia.js";
@@ -23,7 +24,10 @@ import {
   RightTypeSchema,
 } from "./models.js";
 import { OepmFeesClient } from "./oepm.js";
+import { PrhFeesClient } from "./prh.js";
 import { PrvFeesClient } from "./prv-se.js";
+import { TipoFeesClient } from "./tipo.js";
+import { TurkpatentFeesClient } from "./turkpatent.js";
 import { UkipoFeesClient } from "./ukipo.js";
 import { UsptoFeesClient } from "./uspto.js";
 import { WipoFeesClient } from "./wipo.js";
@@ -36,6 +40,7 @@ export * from "./epo.js";
 export * from "./hk-ipd.js";
 export * from "./ilpo.js";
 export * from "./impi.js";
+export * from "./inpi-br.js";
 export * from "./inpi-fr.js";
 export * from "./ipaustralia.js";
 export * from "./ipindia.js";
@@ -44,7 +49,10 @@ export * from "./jpo.js";
 export * from "./kipo.js";
 export * from "./models.js";
 export * from "./oepm.js";
+export * from "./prh.js";
 export * from "./prv-se.js";
+export * from "./tipo.js";
+export * from "./turkpatent.js";
 export * from "./ukipo.js";
 export * from "./uspto.js";
 export * from "./wipo.js";
@@ -149,6 +157,10 @@ export class FeesClient {
     const ipos = new IposFeesClient(options);
     const hkIpd = new HkIpdFeesClient(options);
     const inpiFr = new InpiFrFeesClient(options);
+    const tipo = new TipoFeesClient(options);
+    const prh = new PrhFeesClient(options);
+    const turkpatent = new TurkpatentFeesClient(options);
+    const inpiBr = new InpiBrFeesClient(options);
     this.routes = new Map<string, Loader>([
       ["USPTO/patent", (o) => uspto.getPatentSchedule(o)],
       ["USPTO/trademark", (o) => uspto.getTrademarkSchedule(o)],
@@ -193,6 +205,16 @@ export class FeesClient {
       ["INPI-FR/patent", (o) => inpiFr.getPatentSchedule(o)],
       ["INPI-FR/trademark", (o) => inpiFr.getTrademarkSchedule(o)],
       ["INPI-FR/design", (o) => inpiFr.getDesignSchedule(o)],
+      ["TIPO/patent", (o) => tipo.getPatentSchedule(o)],
+      ["TIPO/trademark", (o) => tipo.getTrademarkSchedule(o)],
+      ["PRH/patent", (o) => prh.getPatentSchedule(o)],
+      ["PRH/trademark", (o) => prh.getTrademarkSchedule(o)],
+      ["PRH/design", (o) => prh.getDesignSchedule(o)],
+      ["TURKPATENT/patent", (o) => turkpatent.getPatentSchedule(o)],
+      ["TURKPATENT/trademark", (o) => turkpatent.getTrademarkSchedule(o)],
+      ["TURKPATENT/design", (o) => turkpatent.getDesignSchedule(o)],
+      ["INPI-BR/patent", (o) => inpiBr.getPatentSchedule(o)],
+      ["INPI-BR/trademark", (o) => inpiBr.getTrademarkSchedule(o)],
     ]);
   }
   /** Schedules available in this runtime, as `office/right` keys. */

@@ -913,6 +913,224 @@ This corrects the Python scraper, which still behaves the old way:
    transmitting an international (Madrid) application, and the €0.75 per-page
    copy fees for EP and PCT transmissions.
 
+## TIPO (Taiwan)
+
+`TipoFeesClient` ([source](../packages/client/src/fees/tipo.ts)) reads the
+English patent fee table (`https://www.tipo.gov.tw/en/tipo2/326.html`) and the
+bilingual Trademark Fee Standards PDF linked from
+`https://www.tipo.gov.tw/en/tipo2/342.html`, as Python does. The PDF link is
+discovered from the landing page on each call because TIPO names the file by
+upload time. Both are fetched with plain requests.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `TW/TIPO/patent` | 20 procedural rows plus annuities for invention (years 1-20), utility model (1-10) and design (1-15) patents, 110 fees | Complete |
+| `TW/TIPO/trademark` | 30 catalog fees, enforced May 1, 2024 per the PDF | Renewal year 10 |
+
+Taiwan's three patent kinds share the patent schedule, as in Python, because
+Python routes no utility model or design schedule for TIPO. TIPO publishes row
+numbers rather than fee codes, so codes keep Python's slugs
+(`tipo-patent-<row>`, `tipo-annuity-<kind>-<year>-<tier>`, `tipo-tm-<entry>`).
+Annuities carry a large and a small tier: the small tier is the reduced
+annuity for natural persons, schools and small and medium-sized enterprises,
+and the parser checks that each reduction row restates its year band and
+amount. The bilingual trademark PDF interleaves Chinese and English, so a
+curated catalog of 30 fees is verified against it: each entry's English phrase
+must appear with its NT$ amount within 300 characters, or the parse fails. The
+phrases were re-derived for pdf.js text extraction. The patent page publishes
+no effective date; its "Update" stamp goes in `provenance.as_of_status`.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. Its patent effective date is 2024-05-01, the trademark schedule's date. The
+   patent page states none, so it is null here.
+2. Annuity years without a reduction (invention 7-20, utility model 7-10,
+   design 7-15) had only a large-tier row, so a small-tier renewal lookup for
+   those years returned nothing. Both tiers are present here at the standard
+   amount. Python emits 83 patent fees; this emits 110.
+3. Keyword order filed row 11 (supplementary invalidation reasons, post-grant
+   amendments) as cancellation, row 14 (changes of name, inventor or agent) as
+   transfer and rows 33-34 (attorney and agent licenses) as transfer. All are
+   `other` here.
+4. Per-class trademark conditions used threshold 1, which implies the first
+   class is free; here they use threshold 0. The surcharges per good over 20
+   and per retail service over 5 were encoded as `classes_over` 20 and 5; they
+   carry no condition here, since the vocabulary has no per-good trigger, and
+   say so in notes. The two e-filing discounts were positive filing fees; they
+   are `other` with a note that they are reductions. The Classes 35-45 entry was
+   verified against the Classes 1-34 text; it now has its own phrase.
+
+## PRH (Finland)
+
+`PrhFeesClient` ([source](../packages/client/src/fees/prh.ts)) parses the
+fee regulation PDF, Maksuasetus 171/2026
+(`https://www.prh.fi/material/sites/prh/attachments/tietoaprhsta/maksuasetusl-llehikoinen/5o12dsujn/Maksuasetus_171_2026.pdf`),
+as Python does; PRH's English price-list pages are script-rendered shells with
+no fees in the HTML. One fetch serves all three routes. The effective date
+(April 1, 2026), the regulation number and the amended regulation (1216/2025)
+are read from the PDF rather than hard-coded. The schedule `source_url` stays
+Python's English price-list page for each right; provenance carries the PDF.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `FI/PRH/patent` | §1 national patents, §2 utility models, §3 PCT, §4 European patents, §5 SPCs; 98 fees | Patent annuities years 1-20 complete |
+| `FI/PRH/trademark` | §8, electronic and paper channels; 35 fees | Renewal year 10 |
+| `FI/PRH/design` | §9; 22 fees | Renewal years 5, 10, 15, 20 |
+
+Codes keep Python's slugs of the label text on the amount's line
+(`fi-prh-pat-…`, `fi-prh-tm-electronic-…`). Labels are the full Finnish text:
+wrapped lines are joined and a sub-heading prefixes the rows under it ("Maksu
+uudelleenkäsiteltäväksi ottamisesta, ensimmäinen kerta"). Finland has no
+entity tiers. The 20% surcharge on late annuities and the PCT percentage late
+fees are stated as percentages and are not itemized; §6 topographies and §7
+attorney fees are not included, as in Python. The URL is pinned to the
+171/2026 PDF; a new regulation (normally each January) needs a new URL.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. The utility model renewal surcharges (Uudistamismaksun korotus) were
+   renewals at year 1; they are late fees at years 4 and 8 here. The two-year
+   renewal was stored at year 10; it falls due at the end of year 8.
+2. Trademark renewals applied for after the registration period ended were
+   renewals at year 10, so a renewal lookup returned eight amounts; they are
+   late fees here.
+3. The design renewal fee was stored only at year 10; it is stored at years 5,
+   10, 15 and 20. The late design renewal surcharge was a renewal, the storage
+   fee per specimen (säilytysmaksu) was `deferment`, and the non-electronic
+   design filing fee had no paper condition.
+4. Matching ignored Finnish inflection, so the opposition fee ("väitteen"),
+   register entries ("merkinnästä") and the PCT additional and supplementary
+   search fees ("uutuustutkimuksesta") fell to `other`. The trademark
+   revocation and invalidation fee and the amendment fee matched
+   "hakemusmaksu" and were filing fees.
+5. The PCT search-fee refund (300 €) was a search fee; it is `other` with a
+   note that it is a refund. The Madrid transmittal and replacement fees are
+   `madrid`; patent limitation is `other`, not cancellation.
+6. The certificate and Madrid rows after the paper-channel trademark block
+   carried a paper condition; they have no electronic twin and apply to both
+   channels.
+
+## TÜRKPATENT (Türkiye)
+
+`TurkpatentFeesClient` ([source](../packages/client/src/fees/turkpatent.ts))
+parses the three HTML fee tables at `https://www.turkpatent.gov.tr/`
+`patent-islem-ucretleri`, `marka-islem-ucretleri` and
+`tasarim-islem-ucretleri`, as Python does. They answered plain requests; the
+local resolver briefly failed to resolve `www.turkpatent.gov.tr` during
+recording, which was a DNS fault on this machine, not blocking.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `TR/TURKPATENT/patent` | 01.01.xx codes; 52 fees | Annuities years 3-20 |
+| `TR/TURKPATENT/trademark` | 02.01.xx codes; 29 fees | Renewal year 10 |
+| `TR/TURKPATENT/design` | 04.01.xx codes; 30 fees | Renewal years 5, 10, 15, 20 |
+
+Every code is mapped explicitly; unknown codes would appear in
+`unmapped_codes`. Patent amounts are the total (TOPLAM TUTAR), checked to equal
+office fee plus VAT plus stamp duty, with the breakdown in notes. The
+trademark and design effective date is January 1 of the tariff year in the
+table header (2026); the patent table names no year, so its effective date is
+null. The four patent rows given as formulas or in Swiss francs (01.01.20,
+01.01.21, 01.01.43, 01.01.59) are omitted and named in the notes. The
+additional-design fee (04.01.02) lists three bands in one cell and becomes
+three fees with `multi_design` conditions.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. It emitted the three formula rows as fees of 0.00, so a late-fee lookup
+   summed to nothing. They are omitted and described.
+2. Keyword rules filed 01.01.04 (publication of a corrected European patent
+   translation) as filing, 01.01.17 (certified copy) as grant, 01.01.56
+   (search on converting a utility model) as filing and the Madrid
+   transmittal fees 02.01.19 and 02.01.35 as filing.
+3. Late renewals (02.01.24, and design 04.01.07 and 04.01.08) were renewals,
+   so renewal lookups returned the late amounts too. They are late fees here.
+   Design renewals were stored only at year 10; they are at years 5, 10, 15 and
+   20, which is why the design schedule has 30 fees to Python's 18.
+4. The reduced search and examination rates for natural persons and
+   universities (01.01.48, 01.01.50) and Teknogirişim-badge companies
+   (01.01.65) had tier none next to the standard rates; they are tier small
+   and the standard rates tier large.
+5. 02.01.02 (the second class only) had a per-unit condition, implying every
+   class after the first; it is charged once.
+6. Its docstring says utility model fees share the patent table. They are on a
+   separate page (Faydalı Model İşlem Ücretleri) that neither runtime reads.
+
+## INPI Brazil
+
+`InpiBrFeesClient` ([source](../packages/client/src/fees/inpi-br.ts)) parses
+INPI's English fee PDFs under `https://www.gov.br/inpi/en/costs-and-payment`.
+The Portuguese tables redirect to a login and were not checked. The English
+tables cite Ordinance MDIC 39/2014, ME Ordinance 516/2019 and INPI Resolution
+251/2019 and date from 2020-2021; the parser fails if the citation changes.
+INPI publishes no effective date, so it is null.
+
+| Route | Source | Fees | Recurring fees |
+| --- | --- | --- | --- |
+| `BR/INPI-BR/patent` | `TabelaPatentesinglsapsalteraesCGRECincpapelpct.pdf` (April 2021) | 346 | Invention annual fees years 3-20 |
+| `BR/INPI-BR/trademark` | `schedule-of-fees-trademarks.pdf` (December 2020) | 76 | Renewal year 10 |
+
+The tables have code, service, amount and discounted-amount columns, and a
+code is printed at the vertical center of its cell, which can hold several
+priced lines. The parser therefore reads positioned text from `pdfPageItems`:
+a line with its own code owns its amounts, and other priced lines take the
+nearest code on the same page and in the same section whose line is bare or
+is itself a "- " sub-line. Wrapped text joins a row when it starts in lower
+case, closes a parenthesis or moves the cell's middle toward its code. Two
+amounts become tiers large and small (the discount of up to 60%); one amount
+means no discount (tier none); "No charge" is 0.00; "Variable" rows (287,
+293, 800) are omitted and named. Annual-fee bands are expanded per year; fees
+paid within the extended term are late fees for the same years. The
+examination claim surcharges stated in prose (R$100, 200 and 500 per claim
+for claims 11-15, 16-30 and 31 on) become three `excess_claims` rows per
+tier. Codes keep Python's form (`inpi-br-222-l-y3`, `inpi-br-tm-374-s`), with
+`n` for tier none and a suffix for a cell's second line (`-paper`,
+`-additional-process-as`). Invention patents, utility models and certificates
+of addition share the patent schedule, as in Python, and their renewal rows
+differ by code and label.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. It reads the December 2020 patent table. The landing page's newest English
+   patent table, from April 2021, adds paper-filing fees for codes 200 and
+   271.
+2. It pairs each amount pair with the nearest code printed before it in
+   flattened text, but codes sit at the middle of their cells. The national
+   filing fee (175.00/70.00) is credited to "251", read from "Resolution No.
+   251" in the page header; the amendment fee of code 207 goes to 206, which is
+   free; code 800, a variable fee, gets 65.00. In trademarks, 349 gets 35.00
+   (code 348's fee), 3014 gets 710.00 (code 361's) and 800 and 251 appear with
+   amounts.
+3. It requires two amounts per row, so every fee without a discount is
+   dropped, and it keeps one row per code, dropping paper rates. Python finds
+   60 patent codes (272 fees) and 17 trademark codes (34 fees); here 93 patent
+   codes (346 fees) and 62 trademark codes (76 fees). Codes 200, 201, 203 and
+   207 and the PCT search and examination fees 266-269 are among those Python
+   misses.
+4. Extended-term annual fees (223-247, odd codes) were renewals for the same
+   years, so a renewal lookup returned the regular and late amounts together.
+   The extended-term issue and trademark fees (213, 373, 375) are late fees
+   here too.
+5. Its categories filed the publication fee (202) and the examination
+   requests (203-205) as filing fees, and per-class fees used threshold 1.
+
+## Recording
+
+`bun scripts/record-fees.ts` records every fee operation; these four were
+recorded live on October 22, 2026 with the user agent
+`patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)`
+and plain requests. The PDF cassettes store bodies as hex, so they are large
+(PRH 2.6 MB, INPI Brazil 1.5 MB, TIPO 0.6 MB). TÜRKPATENT's pages embed a
+public Google API key and reCAPTCHA site key in their Next.js data; recording
+replaces them with `[FILTERED]` so secret scanning passes, and the parser
+never reads them. Tests replay them through
+`feeRecordings` and, for routing and drift tests, through
+`recordedFeeResponse`, which serves any recorded fee URL. The MCP fee tests
+in `fees.test.ts` and `facade-epo-tm-ref.test.ts` wrap their EPO and USPTO
+fakes in `recordedFeesOr`, so listing every schedule replays the other
+offices' recordings; their route-list assertions now check inclusion rather
+than the exact list.
+
 ## MCP
 
 `get_fee_schedule`, `list_fee_jurisdictions` and `lookup_fee` keep the Python
