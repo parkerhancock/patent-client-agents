@@ -3,7 +3,7 @@
 October 22, 2026. Phase 0 of the [shadow deploy plan](deploy-plan.md). Nothing
 here has been uploaded; the publish script has only been run as a dry run.
 
-A hosted TypeScript server reads twelve offline corpora. Each is a packaged
+A hosted TypeScript server reads seventeen offline corpora. Each is a packaged
 DELETE-journal SQLite file in one Zstandard frame, as the
 [corpus pattern](corpus-pattern.md) describes. At container start the
 bootstrap downloads them from Cloud Storage, checks both pins, and hands the
@@ -86,7 +86,7 @@ see it; the portability test checks this.
 
 The bootstrap gets an access token, reads the manifest through the Cloud
 Storage JSON API (`alt=media`, 1 MiB cap), validates it, and checks that every
-requested corpus (all twelve by default, or `options.corpora`) has an entry.
+requested corpus (all seventeen by default, or `options.corpora`) has an entry.
 Each artifact goes to `<cacheDir>/<corpus>/<snapshot>/<file>`. If a file is
 already there, it is rehashed: file size and SHA-256, then a streaming
 Zstandard decode for the decoded size and SHA-256. A match is reused without a
@@ -117,7 +117,7 @@ access is the trust boundary, as it is for Python.
 
 ## Publishing
 
-`scripts/publish-corpora.ts` reads the twelve packaged artifacts from
+`scripts/publish-corpora.ts` reads the seventeen packaged artifacts from
 `.data/` at fixed paths (the table below), checks each against its packaging
 manifest (`<file>.manifest.json`), decodes it, confirms DELETE journal mode,
 reads `meta.snapshot_date`, and builds the manifest. It runs offline and
@@ -134,7 +134,7 @@ bytes stops the publish, because a snapshot path is never rewritten. The
 manifest is then written with `ifGenerationMatch` set to the generation read
 just before the write (0 when absent). If another writer got there first,
 Cloud Storage answers 412 and the publish fails without overwriting; rerun it.
-The manifest always lists all twelve corpora from the local artifacts, so the
+The manifest always lists every corpus from the local artifacts, so the
 dry run shows exactly what would be written apart from `generated_at`.
 
 To ship a new corpus build, package it with `scripts/compress-corpus.ts` at
@@ -172,7 +172,10 @@ files left all twelve readers available from the returned variables.
 | `ipo_in_mppp` | 2026-10-22 | `ipo-in/ipo_in_mppp.db.zst` | 199,121 | `00905acf0d481c4323fd8cd6ebb47915a49b7c55c515749c7b5a426770affe7d` | 688,128 | `b2e440776a7b45048ec20b37b5054d327cde309978cb87a4c2899911bc9f6b5b` |
 | `ilpo_statutes` | 2026-10-22 | `ilpo_statutes/ilpo_statutes.db.zst` | 250,922 | `2b78e6dec05ad9abaea1f6a292b683eeb75b81ae38a357cfc443ebfa69e2de68` | 892,928 | `733e534fbe2508af8bf4ff30e97d148e2fa400f7e0a70dc25050e1fd9cc3fe11` |
 
-Total: 37,481,312 bytes compressed (35.7 MiB) and 99,717,120 bytes decoded
+On October 22 the ILPO, IPOS statutes, IPOS manuals, INPI Brazil and
+Légifrance corpora were added and published (2,328,516 bytes compressed in
+all; see each corpus's own doc for its hashes), making 39,809,828 bytes
+compressed. Before that, the twelve totalled 37,481,312 bytes compressed (35.7 MiB) and 99,717,120 bytes decoded
 (95.1 MiB). Baking the files into the image would add about 36 MB; the
 bootstrap adds a download of the same size at cold start. Locally, against a
 fake bucket, a full bootstrap took about 0.2 s and a verified rerun 0.15 s;

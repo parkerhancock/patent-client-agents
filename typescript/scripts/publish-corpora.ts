@@ -46,6 +46,10 @@ export const LOCAL_ARTIFACTS: Record<CorpusId, string> = {
   ipo_in_statutes: "ipo-in/ipo_in_statutes.db.zst",
   ipo_in_mppp: "ipo-in/ipo_in_mppp.db.zst",
   ilpo_statutes: "ilpo_statutes/ilpo_statutes.db.zst",
+  ipos_statutes: "ipos/ipos_statutes.db.zst",
+  ipos_manuals: "ipos/ipos_manuals.db.zst",
+  inpi_br_statutes: "inpi_br_statutes/inpi_br_statutes.db.zst",
+  legifrance_ip: "legifrance_ip/legifrance_ip.db.zst",
 };
 
 class PublishError extends Error {}
