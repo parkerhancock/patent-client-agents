@@ -977,21 +977,26 @@ wheels = [
 
 [[package]]
 name = "hishel"
-version = "1.2.1"
+version = "1.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "msgpack" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2d/7a/ef9231da56bc04000f7343831deb1946f5fc270213080fa212f61ddbfe0a/hishel-1.2.1.tar.gz", hash = "sha256:87212cd31a7a6904352ec5bd7119ed3b43d0ab1259d5995751a2a2b173d7c305", size = 814761, upload-time = "2026-04-27T16:16:42.35Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c6/ff/efba29288e1d304359491fa3aab83174c3ef24a63819e6acad6873d8c0a9/hishel-1.4.0.tar.gz", hash = "sha256:e406b052c658ce28629fc31423b9914b637d47d7c923f5fe9e288ec47e4823d1", size = 813499, upload-time = "2026-09-16T15:38:54.085Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c3/de/5f1bebcf644f2f350c39d2630f391399d0c39ff39fbfff98113889898827/hishel-1.2.1-py3-none-any.whl", hash = "sha256:5e1c1e38f4c970eeef69bc8528e85fd5c02eab15a22f9845d30fc880da32b881", size = 73223, upload-time = "2026-04-27T16:16:40.585Z" },
+    { url = "https://files.pythonhosted.org/packages/da/c5/2cf7b80da9833de6ae5099111b64cf541830ccb4ef26605ae86f23ed5604/hishel-1.4.0-py3-none-any.whl", hash = "sha256:38cb62d7d38fb437dc086f789c26d0cab41310d12497ec3f56dcead4b08571f0", size = 80795, upload-time = "2026-09-16T15:38:52.545Z" },
 ]
 
 [package.optional-dependencies]
 async = [
     { name = "anyio" },
     { name = "anysqlite" },
+]
+httpx2 = [
+    { name = "anyio" },
+    { name = "anysqlite" },
+    { name = "httpx2" },
 ]
 
 [[package]]
@@ -1001,19 +1006,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/26/5b/fcabf6028144a8723726318b07a32c2f3314acdff6265743cf08a344b18e/hpack-4.2.0.tar.gz", hash = "sha256:0895cfa3b5531fc65fe439c05eb65144f123bf7a394fcaa56aa423548d8e45c0", size = 51300, upload-time = "2026-06-23T18:34:46.667Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/71/b4/4a9fcfb2aef6ba44d9073ecd301443aa00b3dac95de5619f2a7de7ec8a91/hpack-4.2.0-py3-none-any.whl", hash = "sha256:858ac0b02280fa582b5080d68db0899c62a80375e0e5413a74970c5e518b6986", size = 34246, upload-time = "2026-06-23T18:34:45.472Z" },
-]
-
-[[package]]
-name = "httpcore"
-version = "1.0.9"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "certifi" },
-    { name = "h11" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/06/94/82699a10bca87a5556c9c59b5963f2d039dbd239f25bc2a63907a05a14cb/httpcore-1.0.9.tar.gz", hash = "sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8", size = 85484, upload-time = "2025-04-24T22:06:22.219Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/7e/f5/f66802a942d491edb555dd61e3a9961140fd64c90bce1eafd741609d334d/httpcore-1.0.9-py3-none-any.whl", hash = "sha256:2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55", size = 78784, upload-time = "2025-04-24T22:06:20.566Z" },
 ]
 
 [[package]]
@@ -1027,21 +1019,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/cb/f3/1db7aa2bc2524062192bb0e0323969492d1883152a232fe36eea65f4e35c/httpcore2-2.13.1.tar.gz", hash = "sha256:e0aa977abe17e69a3b820a24542a6fa88702676d83880b8d194dcd18408e5103", size = 68071, upload-time = "2026-09-23T07:47:22.372Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/09/ba/a4568248771ce81957bfb7cc600264a40fbcda092391ee1c415c50be4bea/httpcore2-2.13.1-py3-none-any.whl", hash = "sha256:e1e05d4f25f7d7d496bfb96748f6f4b67657b03da069b3a68c36069f3db73d0a", size = 83423, upload-time = "2026-09-23T07:47:19.365Z" },
-]
-
-[[package]]
-name = "httpx"
-version = "0.28.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "anyio" },
-    { name = "certifi" },
-    { name = "httpcore" },
-    { name = "idna" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/b1/df/48c586a5fe32a0f01324ee087459e112ebb7224f646c0b5023f5e79e9956/httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc", size = 141406, upload-time = "2024-12-06T15:37:23.222Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad", size = 73517, upload-time = "2024-12-06T15:37:21.509Z" },
 ]
 
 [[package]]
@@ -1522,22 +1499,22 @@ wheels = [
 
 [[package]]
 name = "mcp-data-core"
-version = "0.13.0"
+version = "0.14.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
     { name = "h2" },
-    { name = "hishel", extra = ["async"] },
-    { name = "httpx" },
+    { name = "hishel", extra = ["async", "httpx2"] },
+    { name = "httpx2" },
     { name = "pydantic" },
     { name = "python-dateutil" },
     { name = "pyyaml" },
     { name = "tenacity" },
     { name = "zstandard" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b2/5c/79d25506a7e5242471dba97b555e26f3da6b142fb8c1f02827384dee3520/mcp_data_core-0.13.0.tar.gz", hash = "sha256:3267a904e746a692fa3d5e9a1bfd060de6e6c4ba06b0648ad4221d9ce1a1193b", size = 214979, upload-time = "2026-10-14T18:29:08.049Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/97/c1/c848777fcead7ce467f45043236a607b6f3092998c7061ceaa2d97ba09c8/mcp_data_core-0.14.0.tar.gz", hash = "sha256:85ba7510b1c7e1aa66a38a589d1448b7abb6bbeacb5aa8ed9df0120e6d520093", size = 216277, upload-time = "2026-10-22T02:12:14.547Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/aa/e7/a8bb4b93aeaabd01f5d1a675b1a5ebbbb6b4d798a2a16a7d99fec2ad08cd/mcp_data_core-0.13.0-py3-none-any.whl", hash = "sha256:0bd69f0439fca5138701c6101e6f8122893a94058a7fce0607dfc2424ba40d25", size = 70750, upload-time = "2026-10-14T18:29:06.302Z" },
+    { url = "https://files.pythonhosted.org/packages/97/ac/228500d55e6ee7449f2518fca2b3707cfb17661b42d978895466fc142a16/mcp_data_core-0.14.0-py3-none-any.whl", hash = "sha256:d23f88d376b3622a069f67bc61836e40b1e3cc706d7f6a6ceeb4fa1a6ac1f798", size = 70811, upload-time = "2026-10-22T02:12:12.825Z" },
 ]
 
 [[package]]
@@ -1777,8 +1754,8 @@ dependencies = [
     { name = "cssselect" },
     { name = "google-cloud-storage" },
     { name = "h2" },
-    { name = "hishel", extra = ["async"] },
-    { name = "httpx" },
+    { name = "hishel", extra = ["async", "httpx2"] },
+    { name = "httpx2" },
     { name = "lxml" },
     { name = "markdownify" },
     { name = "mcp-data-core" },
@@ -1829,11 +1806,11 @@ requires-dist = [
     { name = "google-cloud-storage", specifier = ">=2.18" },
     { name = "griffe", marker = "extra == 'mcp'", specifier = "<3" },
     { name = "h2", specifier = ">=4.1" },
-    { name = "hishel", extras = ["async"], specifier = ">=1.1.3" },
-    { name = "httpx", specifier = ">=0.27" },
+    { name = "hishel", extras = ["async", "httpx2"], specifier = ">=1.4.0" },
+    { name = "httpx2", specifier = ">=2.13.1" },
     { name = "lxml", specifier = ">=5.2" },
     { name = "markdownify", specifier = ">=1.2" },
-    { name = "mcp-data-core", specifier = ">=0.13.0" },
+    { name = "mcp-data-core", specifier = ">=0.14.0" },
     { name = "playwright", marker = "extra == 'tmsearch'", specifier = ">=1.40" },
     { name = "pydantic", specifier = ">=2.7" },
     { name = "pypdf", specifier = ">=4.2,<6.15" },
