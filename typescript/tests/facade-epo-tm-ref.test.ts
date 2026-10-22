@@ -196,6 +196,9 @@ function feesClient() {
         "prv",
         "ukipo",
         "wipo",
+        "ipos",
+        "hk-ipd",
+        "inpi-fr",
       ],
       cipoFixtureFetch((async (input: RequestInfo | URL) =>
         String(input instanceof Request ? input.url : input).includes(

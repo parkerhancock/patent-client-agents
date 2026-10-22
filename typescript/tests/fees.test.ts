@@ -22,6 +22,7 @@ import {
   jpoFeePage,
   recordedFeeFetch,
   recordedFeeResponse,
+  recordedFeeResponseAny,
   recordedFeeResponseByUrl,
   usptoFeePage,
 } from "./fees-recordings.js";
@@ -283,6 +284,8 @@ const feeFetch = (async (input: RequestInfo | URL) => {
     });
   const recorded = recordedFeeResponseByUrl(url);
   if (recorded) return recorded;
+  const other = recordedFeeResponseAny(url);
+  if (other) return other;
   return url.includes("uspto.gov")
     ? new Response(usptoFeePage(), { headers: { "content-type": "text/html" } })
     : Response.json(feesFromCassetteBody());

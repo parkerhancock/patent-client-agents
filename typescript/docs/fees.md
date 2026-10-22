@@ -753,6 +753,166 @@ none blocked them. The tests replay the recordings offline and check row
 counts, spot amounts per right, renewal years, tiers, conditions, alias
 resolution and drift failures.
 
+## IPOS (Singapore)
+
+`IposFeesClient` ([source](../packages/client/src/fees/ipos.ts)) parses the
+three server-rendered IPOS "forms and fees" pages, as Python does:
+`/about-ip/patents/forms-and-fees-singapore/`,
+`/about-ip/trade-marks/forms-and-fees/` and `/about-ip/designs/forms-and-fees/`
+on `www.ipos.gov.sg`. Each page has `Form | Description | Fee` tables keyed by
+form code. The pages are large Next.js documents (the patent page is about
+1.4 MB), so the recording is about 3 MB.
+
+| Route | Fees | Recurring fees |
+| --- | --- | --- |
+| `SG/IPOS/patent` | 124 | PF15 renewal years 5-20, plus year 21 for each year after the 20th |
+| `SG/IPOS/trademark` | 35 | Renewal year 10 |
+| `SG/IPOS/design` | 26 | Extensions at years 10, 15, 20 and 25 |
+
+Codes are Python's slugs (`sg-pat-pf1-request-for-the-grant-of-a-patent`,
+`sg-tm-tm4-preapproved`, `sg-pat-pf15-y-5`), so the same row has the same code
+in both runtimes. Categories come from the form code (PF1 filing, PF11 search,
+PF12 examination, PF14 grant, TM28 cancellation, D13 cancellation) instead of
+Python's description keywords; forms without a mapping appear as `other` and
+are listed in `unmapped_codes`. The effective date stays Python's 2026-04-01,
+the second tranche of the 2025 reform (Patents Circular 3/2025, Trade Marks
+Circular 3/2025, Designs Circular 1/2025), because the pages state none of
+their own; each page's "Last updated" date goes in `provenance.as_of_status`.
+Screen-reader text ("opens in new tab") is excluded, as in Python. The PCT
+receiving-office, ISA and IPEA tables on the patent page are not included, as
+in Python.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. It emits every per-claim surcharge twice: once as a base fee (PF11 and
+   PF12 at S$80 as search and examination fees, PF14 at S$40 as grant fees)
+   and once as the `excess_claims` row. Here the surcharge is only the
+   `excess_claims` row. PF13A's surcharge, over a claim count that depends on
+   the application, is `excess_claims` with a null threshold, and PF14's
+   (a)(iii)(B) surcharge is no longer dropped from the excess rows.
+2. The second PF15 table (patents endorsed licence of right, half fees) is
+   emitted as renewals too, so a renewal lookup for year 5 returns S$176 and
+   S$88, and PF20 (restoration) repeats the ladder a third time. Here the
+   licence-of-right fees are `other` (codes `sg-pat-pf15-lor-y-N`) and the
+   restoration fees are late fees, so the lookup returns one fee. PF20's
+   S$300 additional fee was a renewal for year 1; it is now a late fee without
+   a year, and PF20's 20th-year row, which Python filed as `other`, is a late
+   fee at year 20.
+3. TM19 lists renewal (S$480), late renewal (S$700) and restoration (S$770)
+   in one cell; Python makes all three renewals at year 10. Here only S$480
+   is a renewal.
+4. TM27 lists each amount before and "From 1 April 2026" after the reform;
+   Python emits the superseded S$50 rates alongside the S$60 ones. Here only
+   the amount in force is kept (codes `-v2`, `-v4`, `-v6`).
+5. Keyword categories misfile many rows: the D3 design filing fee as
+   `deferment`, D8 restoration and D13 revocation as `filing`, trademark CM6-CM8
+   recordals as `filing`, TM HC3 extensions as `opposition`, patent CM4 and
+   CM12 as `transfer`, PF58 (b)-(d) oppositions as `other` or `transfer`.
+6. HC1 on the trademark page ("$1,000 for the first class and $800 for each
+   subsequent class") puts the per-additional-class condition on the S$1,000
+   first-class fee as well.
+7. Its design notes say renewal rows are year 5 and registration lasts 15
+   years; the rows are years 10-25 and registration lasts 25 years.
+
+Multi-amount cells get labels from the cell's own headings ("Late renewal of
+registration", "Second request"), which Python left identical.
+
+## HK IPD (Hong Kong)
+
+`HkIpdFeesClient` ([source](../packages/client/src/fees/hk-ipd.ts)) parses the
+three Intellectual Property Department "forms and fees" pages,
+`/en/{patents,trade-marks,designs}/forms-and-fees/index.html` on
+`www.ipd.gov.hk`, as Python does. Each form (OP1, P10, T8, D11) is an
+accordion with a small table; filing tables split e-filing and paper-filing
+rates and trademark tables add a per-class column.
+
+| Route | Fees | Recurring fees |
+| --- | --- | --- |
+| `HK/HKIPD/patent` | 75 | Standard-patent renewal years 4-20; short-term patent renewal at year 5 |
+| `HK/HKIPD/trademark` | 42 | Renewal year 10 |
+| `HK/HKIPD/design` | 37 | Extensions at years 10, 15, 20 and 25 |
+
+Codes are Python's slugs, including its patent route tag (`hk-pat-ogp-`,
+`hk-pat-rr-`, `hk-pat-stp-`, `hk-pat-gen-`). The form code now goes in each
+fee's notes and drives the category. Tables are read as a grid with rowspan
+and colspan expanded. Paper-filing rates are separate rows with a
+`paper_filing` condition; "Nil" rows are zero fees, as in Python. A
+short-term patent renewal and a standard-patent renewal both answer a year-5
+renewal lookup; the code prefix tells them apart. The pages publish no
+effective date, so `effective_date` is null and the page's revision date goes
+in `provenance.as_of_status`.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. Its effective dates are the commencement dates of the ordinances or of
+   the original-grant route (2019-12-19, 2003-04-04, 2000-06-27), not dates
+   of the fee schedules. They are null here.
+2. It drops rows whose fee cell is shared through rowspan: trademark
+   revocation and invalidity applications and interventions (HK$800 each),
+   merging registrations and deleting a mark from a series, and the HK$200
+   per-class fee for a section 12 search.
+3. It stores the short-term patent renewal at years 4 and 8. A short-term
+   patent is renewed once, after its 4th year, so it is year 5 here, and it no
+   longer conflicts with the standard-patent fee at year 4.
+4. Trademark restoration with renewal (HK$4,000) is a renewal at year 10, and
+   the HK$500 late renewal charge is only a note. Here both are late fees at
+   year 10, so a renewal lookup returns the HK$2,670 renewal alone.
+5. It reads "$2,000 for the first class and $1,000 for each additional class
+   in respect of each additional application" (dividing a series) as one
+   HK$2,000 per-additional-class fee. Here it is a HK$2,000 fee per
+   additional application and a HK$1,000 fee per additional class.
+6. It marks per-page copy fees with the `late_days` trigger. Here they use
+   `pages_over` with threshold 0; per-copy fees carry a note instead.
+7. It files the OP1 and P6 grant requests (the original-grant and short-term
+   applications) as `grant`, the design set-of-articles filing fees as
+   `other`, and restorations as `other`. Here they are `filing`, `filing` and
+   `petition`.
+
+## INPI France
+
+`InpiFrFeesClient` ([source](../packages/client/src/fees/inpi-fr.ts)) reads
+the "Tarifs des procédures applicables au …" PDF, found through its link on
+the Tarifs landing page
+(`/ressources/propriete-intellectuelle/tarifs-procedures-et-prestations-de-linpi`
+on `www.inpi.fr`), with Python's fixed address
+(`/inpi-block/download-document?id=20516`) as the fallback. Text comes from the
+shared `pdfPageTexts` helper. One landing-page fetch and one PDF fetch serve
+all three routes.
+
+| Route | Fees | Recurring fees |
+| --- | --- | --- |
+| `FR/INPI-FR/patent` | 51 | Annuities 2-20 (the first is in the filing fee) |
+| `FR/INPI-FR/trademark` | 14 | Renewal year 10 |
+| `FR/INPI-FR/design` | 8 | Extensions at years 10, 15, 20 and 25 |
+
+The PDF has no fee codes, so, as in Python, a catalog names each row. The
+catalog is matched in document order within each section, and every amount is
+read from the PDF; Python's catalog hard-codes the amounts and only checks
+that a phrase is present. A missing or reordered row fails with
+`INVALID_RESPONSE`; an amount line no catalog row claims appears as `other`
+with an `inpi-fr-unmapped-` code. Codes are Python's (`inpi-fr-<row>-l`, plus
+`-s` for the reduced rate). Rows with a reduced rate are tier `large` and
+`small`; the rest are tier `none`. The effective date comes from the PDF
+heading (2026-07-02, matching Python's constant). Late-payment surcharges are
+percentages (50% of the fee due) and are omitted, as in Python.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. Its notes say the reduced rate for annuities 8-20 exists but pypdf drops
+   it, and suggest estimating 50%. The PDF has no reduced rate after the 7th
+   annuity; those rows are tier `none` here and nothing suggests an estimate.
+2. Its notes give the reduced-rate threshold as fewer than 1,000 employees;
+   the PDF says 250, which the notes now read from the footnote.
+3. It puts a `classes_over` condition with threshold 1 on the one-class
+   filing and renewal fees, which reads as a per-class charge beyond the
+   first. The base fees now have no condition; the per-class fee carries it.
+4. It stores one design extension fee at year 5. The fee is due for each of
+   the four 5-year extensions, stored at years 10, 15, 20 and 25.
+5. It omits the per-class renewal fee (€40), the €150 fees per additional
+   earlier right in oppositions and invalidity actions, the €62 fee for
+   transmitting an international (Madrid) application, and the €0.75 per-page
+   copy fees for EP and PCT transmissions.
+
 ## MCP
 
 `get_fee_schedule`, `list_fee_jurisdictions` and `lookup_fee` keep the Python
@@ -788,6 +948,13 @@ and IMPI use `maintenance`, which ADD_NEW_OFFICE.md reserves for the USPTO's
 3.5/7.5/11.5-year fees. The ILPO and IMPI PDFs are each fetched once for all
 of their routes. `recordedFeeFetch` in the test helpers replays any recorded
 fee interaction, and `cipoFixtureFetch` the archived CIPO page, so `listSchedules` can run offline.
+`bun scripts/record-fees.ts` gained `ipos`, `hk-ipd` and `inpi-fr` operations;
+they were recorded live on October 22, 2026 with plain requests and the
+`patent-client-agents` user agent: IPOS 124 patent, 35 trademark and 26 design
+fees; HK IPD 75, 42 and 37; INPI France 51, 14 and 8; no unmapped codes and
+complete renewal coverage on all nine routes. [Tests](../tests/fees-ipos-hk-inpi.test.ts)
+replay them and pin amounts read from the pages and the PDF, renewal ladders,
+tiers, alias resolution and drift handling.
 
 There is no response cache: each call fetches the source (the EPO feed is
 about 23 KB, the USPTO page about 210 KB). Python caches both for seven days

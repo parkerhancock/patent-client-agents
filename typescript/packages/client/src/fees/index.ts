@@ -4,10 +4,13 @@ import { CipoFeesClient } from "./cipo.js";
 import { CnipaFeesClient } from "./cnipa.js";
 import { DpmaFeesClient } from "./dpma.js";
 import { EpoFeesClient } from "./epo.js";
+import { HkIpdFeesClient } from "./hk-ipd.js";
 import { IlpoFeesClient } from "./ilpo.js";
 import { ImpiFeesClient } from "./impi.js";
+import { InpiFrFeesClient } from "./inpi-fr.js";
 import { IpAustraliaFeesClient } from "./ipaustralia.js";
 import { IpIndiaFeesClient } from "./ipindia.js";
+import { IposFeesClient } from "./ipos.js";
 import { JpoFeesClient } from "./jpo.js";
 import { KipoFeesClient } from "./kipo.js";
 import {
@@ -30,10 +33,13 @@ export * from "./cipo.js";
 export * from "./cnipa.js";
 export * from "./dpma.js";
 export * from "./epo.js";
+export * from "./hk-ipd.js";
 export * from "./ilpo.js";
 export * from "./impi.js";
+export * from "./inpi-fr.js";
 export * from "./ipaustralia.js";
 export * from "./ipindia.js";
+export * from "./ipos.js";
 export * from "./jpo.js";
 export * from "./kipo.js";
 export * from "./models.js";
@@ -140,6 +146,9 @@ export class FeesClient {
     const prv = new PrvFeesClient(options);
     const ukipo = new UkipoFeesClient(options);
     const wipo = new WipoFeesClient(options);
+    const ipos = new IposFeesClient(options);
+    const hkIpd = new HkIpdFeesClient(options);
+    const inpiFr = new InpiFrFeesClient(options);
     this.routes = new Map<string, Loader>([
       ["USPTO/patent", (o) => uspto.getPatentSchedule(o)],
       ["USPTO/trademark", (o) => uspto.getTrademarkSchedule(o)],
@@ -175,6 +184,15 @@ export class FeesClient {
       ["WIPO-PCT/patent", (o) => wipo.getPctSchedule(o)],
       ["WIPO-MADRID/trademark", (o) => wipo.getMadridSchedule(o)],
       ["WIPO-HAGUE/design", (o) => wipo.getHagueSchedule(o)],
+      ["IPOS/patent", (o) => ipos.getPatentSchedule(o)],
+      ["IPOS/trademark", (o) => ipos.getTrademarkSchedule(o)],
+      ["IPOS/design", (o) => ipos.getDesignSchedule(o)],
+      ["HKIPD/patent", (o) => hkIpd.getPatentSchedule(o)],
+      ["HKIPD/trademark", (o) => hkIpd.getTrademarkSchedule(o)],
+      ["HKIPD/design", (o) => hkIpd.getDesignSchedule(o)],
+      ["INPI-FR/patent", (o) => inpiFr.getPatentSchedule(o)],
+      ["INPI-FR/trademark", (o) => inpiFr.getTrademarkSchedule(o)],
+      ["INPI-FR/design", (o) => inpiFr.getDesignSchedule(o)],
     ]);
   }
   /** Schedules available in this runtime, as `office/right` keys. */

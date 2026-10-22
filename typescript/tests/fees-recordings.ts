@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { gunzipSync } from "node:zlib";
 import {
@@ -14,10 +14,13 @@ import {
   DpmaFeesClient,
   EpoFeesClient,
   type FeeSchedule,
+  HkIpdFeesClient,
   IlpoFeesClient,
   ImpiFeesClient,
+  InpiFrFeesClient,
   IpAustraliaFeesClient,
   IpIndiaFeesClient,
+  IposFeesClient,
   KipoFeesClient,
   OepmFeesClient,
   PrvFeesClient,
@@ -55,6 +58,17 @@ const impi = async () => {
     client.getTrademarkSchedule(),
   ]);
 };
+/** Patent, trademark and design schedules of a three-route office client. */
+const threeRoutes = (client: {
+  getPatentSchedule(): Promise<FeeSchedule>;
+  getTrademarkSchedule(): Promise<FeeSchedule>;
+  getDesignSchedule(): Promise<FeeSchedule>;
+}) =>
+  Promise.all([
+    client.getPatentSchedule(),
+    client.getTrademarkSchedule(),
+    client.getDesignSchedule(),
+  ]);
 export const feeOperations: Record<string, () => Promise<FeeSchedule[]>> = {
   "epo-epc": async () => [await epo().getEpcSchedule()],
   "epo-unitary": async () => [await epo().getUnitaryPatentSchedule()],
@@ -118,6 +132,10 @@ export const feeOperations: Record<string, () => Promise<FeeSchedule[]>> = {
       await client.getHagueSchedule(),
     ];
   },
+  ipos: () => threeRoutes(new IposFeesClient({ retryLimit: 0 })),
+  "hk-ipd": () => threeRoutes(new HkIpdFeesClient({ retryLimit: 0 })),
+  /** One landing page and one PDF serve all three INPI schedules. */
+  "inpi-fr": () => threeRoutes(new InpiFrFeesClient({ retryLimit: 0 })),
 };
 export type FeeOperation =
   | "epo-epc"
@@ -134,7 +152,10 @@ export type FeeOperation =
   | "oepm"
   | "prv"
   | "ukipo"
-  | "wipo";
+  | "wipo"
+  | "ipos"
+  | "hk-ipd"
+  | "inpi-fr";
 export const feeCassette = (name: string) =>
   resolve(import.meta.dir, "cassettes", `fees-${name}.yaml`);
 
@@ -299,4 +320,43 @@ export function recordedFeeResponseByUrl(url: string): Response | null {
     );
   }
   return null;
+}
+
+interface RecordedBody {
+  type: string;
+  content: string;
+}
+let recorded: Map<string, { status: number; body: RecordedBody }> | null = null;
+/**
+ * A recorded fee response by URL, from every fee cassette except the EPO
+ * feed (tests fake that one). Lets tests load all routes offline.
+ */
+export function recordedFeeResponseAny(url: string): Response | null {
+  recorded ??= new Map(
+    readdirSync(resolve(import.meta.dir, "cassettes"))
+      .filter((file) => /^fees-(?!epo-).+\.yaml$/.test(file))
+      .flatMap(
+        (file) =>
+          (
+            Bun.YAML.parse(
+              readFileSync(resolve(import.meta.dir, "cassettes", file), "utf8"),
+            ) as {
+              interactions: {
+                request: { uri: string };
+                response: { status: number; body: RecordedBody };
+              }[];
+            }
+          ).interactions,
+      )
+      .map((i) => [i.request.uri, i.response]),
+  );
+  const hit = recorded.get(url);
+  if (!hit) return null;
+  const body =
+    hit.body.type === "binary"
+      ? Uint8Array.from(hit.body.content.match(/../g) ?? [], (byte) =>
+          Number.parseInt(byte, 16),
+        )
+      : hit.body.content;
+  return new Response(body, { status: hit.status });
 }
