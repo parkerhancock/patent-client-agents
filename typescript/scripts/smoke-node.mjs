@@ -7,11 +7,14 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { gunzipSync, zstdCompressSync } from "node:zlib";
 import {
+  ApiError,
   DpmaStatutesClient,
+  downloadPatentPdfClean,
   EpcClient,
   EpoFeesClient,
   EpoOpsClient,
   GooglePatentsClient,
+  getPatentClaims,
   IpoInStatutesClient,
   MoppClient,
   MpepClient,
@@ -126,14 +129,55 @@ const ops = new EpoOpsClient({
 });
 results.ops_total = (await ops.search("ta=x")).data.total_results;
 
-const google = GooglePatentsClient.parsePatent(
-  gunzipSync(
-    await readFile(fixture("google-patents/US7654321B2.html.gz")),
-  ).toString(),
-  "US7654321B2",
-);
+const googleHtml = gunzipSync(
+  await readFile(fixture("google-patents/US7654321B2.html.gz")),
+).toString();
+const google = GooglePatentsClient.parsePatent(googleHtml, "US7654321B2");
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
+
+// Fused helpers with stand-in sources: an ODP miss falls back to Google,
+// and a PPUBS miss falls through to EPO.
+const fused = await getPatentClaims(
+  {
+    applications: {
+      getGrantedClaims: async () => ({ claims: null, provenance: null }),
+    },
+    googlePatents: {
+      getPatentHtml: async (number) => ({
+        html: googleHtml,
+        patentNumber: number,
+        provenance: null,
+      }),
+    },
+  },
+  "US7654321B2",
+);
+assert.equal(fused.claims.length, 26);
+assert.ok(fused.claims[0].limitations.some((item) => item.depth > 0));
+results.unified_claims = `${fused.source}:${fused.claims.length}`;
+const fusedPdf = await downloadPatentPdfClean(
+  {
+    publications: {
+      resolveDocumentByPublicationNumber: async () => {
+        throw new ApiError("missing", 404, "NOT_FOUND");
+      },
+      downloadPdf: async () => assert.fail("PPUBS had no document"),
+    },
+    epoOps: {
+      downloadPdf: async (number) => ({
+        data: new TextEncoder().encode("%PDF-"),
+        pages: 1,
+        publicationNumber: number,
+        provenance: null,
+      }),
+    },
+  },
+  "US1234567B1",
+);
+assert.equal(fusedPdf.filename, "US1234567B1.pdf");
+results.unified_pdf = fusedPdf.source;
+assert.equal(results.unified_pdf, "epo");
 
 // The server-only bootstrap subpath: stream-verify a packaged artifact under Node.
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");

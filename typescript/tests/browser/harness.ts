@@ -8,6 +8,7 @@ import {
   EpoFeesClient,
   EpoOpsClient,
   GooglePatentsClient,
+  getPatentClaims,
   IpoInMpppClient,
   MpepClient,
   TwTradeSecretsClient,
@@ -90,12 +91,29 @@ try {
             )) as unknown as typeof fetch,
     }).search("ta=x")
   ).data.total_results;
-  const google = GooglePatentsClient.parsePatent(
-    await (await fetch("/fixtures/google-patents/US7654321B2.html")).text(),
-    "US7654321B2",
-  );
+  const googleHtml = await (
+    await fetch("/fixtures/google-patents/US7654321B2.html")
+  ).text();
+  const google = GooglePatentsClient.parsePatent(googleHtml, "US7654321B2");
   results.google_claims = google.claims.length;
   results.google_markdown = (google.description_markdown?.length ?? 0) > 10_000;
+  // Fused claims helper with stand-in sources: an ODP miss falls back to Google.
+  const fused = await getPatentClaims(
+    {
+      applications: {
+        getGrantedClaims: async () => ({ claims: null, provenance: null }),
+      },
+      googlePatents: {
+        getPatentHtml: async (patentNumber: string) => ({
+          html: googleHtml,
+          patentNumber,
+          provenance: null,
+        }),
+      },
+    } as unknown as Parameters<typeof getPatentClaims>[0],
+    "US7654321B2",
+  );
+  results.unified_claims = `${fused.source}:${fused.claims.length}`;
   // Cross-origin leg: the page's origin differs from the relay and the upstream.
   const relay = JSON.parse(
     decodeURIComponent(location.hash.slice(1)) || "null",

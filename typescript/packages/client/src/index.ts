@@ -47,6 +47,7 @@ export {
 export * from "./tsdr.js";
 export * from "./tw-trade-secrets.js";
 export * from "./ukipo-mopp.js";
+export * from "./unified.js";
 export * from "./upc-statutes.js";
 export * from "./usitc.js";
 export * from "./uspto-resources.js";
