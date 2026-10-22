@@ -16,6 +16,7 @@ export const RELAY_HOSTS = [
   "patents.google.com",
   "patentimages.storage.googleapis.com",
   "www.cafc.uscourts.gov",
+  "www-u.fct-cf.gc.ca",
   "api.publicrecords.copyright.gov",
   "www.wipo.int",
   "www.courts.go.jp",

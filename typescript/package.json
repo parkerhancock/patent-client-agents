@@ -39,6 +39,7 @@
     "verify:mpep": "bun scripts/verify-mpep.ts",
     "record:epo-ops": "bun scripts/record-epo-ops.ts",
     "record:cafc": "bun scripts/record-cafc.ts",
+    "record:canada-federal-court": "bun scripts/record-canada-federal-court.ts",
     "record:japan-ip-high-court": "bun scripts/record-japan-ip-high-court.ts",
     "record:kipris": "bun scripts/record-kipris.ts",
     "record:copyright": "bun scripts/record-copyright.ts",
