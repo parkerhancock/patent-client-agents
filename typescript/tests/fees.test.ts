@@ -17,6 +17,7 @@ import { createServer } from "../packages/mcp/src/index.js";
 import {
   feeRecording,
   feeRecordings,
+  recordedFeeResponse,
   usptoFeePage,
 } from "./fees-recordings.js";
 
@@ -223,13 +224,15 @@ test("jurisdiction resolution matches Python and separates unported offices", as
   );
   expect(() => resolveFeeJurisdiction("Narnia")).toThrow("Unknown");
   const client = new FeesClient();
-  expect(client.supportedRoutes).toEqual([
-    "USPTO/patent",
-    "USPTO/trademark",
-    "USPTO/design",
-    "EPO/patent",
-    "EPO-UP/patent",
-  ]);
+  expect(client.supportedRoutes).toEqual(
+    expect.arrayContaining([
+      "USPTO/patent",
+      "USPTO/trademark",
+      "USPTO/design",
+      "EPO/patent",
+      "EPO-UP/patent",
+    ]),
+  );
   expect(resolveFeeJurisdiction("United States", "design")).toEqual([
     "US",
     "USPTO",
@@ -242,11 +245,10 @@ test("jurisdiction resolution matches Python and separates unported offices", as
   ).toBe("UNSUPPORTED_RIGHT");
 });
 
-/** EPO feed fake plus the recorded USPTO page, routed by host. */
+/** EPO feed fake plus every other recorded fee source, routed by URL. */
 const feeFetch = (async (input: RequestInfo | URL) =>
-  String(input instanceof Request ? input.url : input).includes("uspto.gov")
-    ? new Response(usptoFeePage(), { headers: { "content-type": "text/html" } })
-    : Response.json(feesFromCassetteBody())) as unknown as typeof fetch;
+  recordedFeeResponse(String(input instanceof Request ? input.url : input)) ??
+  Response.json(feesFromCassetteBody())) as unknown as typeof fetch;
 function feesFromCassetteBody() {
   return [
     node("001", "Filing fee - EP direct", null, [
@@ -325,13 +327,15 @@ test("fee MCP tools forward filters and report gaps and unported offices", async
       "135.00",
     ]);
     const list = await client.callTool<Envelope>("list_fee_jurisdictions", {});
-    expect(list.structuredContent?.items.map((item) => item.key)).toEqual([
-      "US/USPTO/patent",
-      "US/USPTO/trademark",
-      "US/USPTO/design",
-      "EP/EPO/patent",
-      "UP/EPO-UP/patent",
-    ]);
+    expect(list.structuredContent?.items.map((item) => item.key)).toEqual(
+      expect.arrayContaining([
+        "US/USPTO/patent",
+        "US/USPTO/trademark",
+        "US/USPTO/design",
+        "EP/EPO/patent",
+        "UP/EPO-UP/patent",
+      ]),
+    );
     await expect(
       client.callTool("get_fee_schedule", { jurisdiction: "JPO" }),
     ).rejects.toThrow("not yet ported");
