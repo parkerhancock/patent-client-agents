@@ -76,7 +76,7 @@ test("search_dpma_statutes keeps Python's parameters, lean stubs and summary", a
       {
         statute: "PatG",
         section: "139",
-        title: "Unterlassungs- und Schadensersatzanspruch",
+        title: null,
         snippet: expect.stringContaining("<mark>Unterlassung</mark>"),
       },
     ]);
@@ -116,34 +116,36 @@ test("get_dpma_section returns sections in order with not_found, as Python's Fet
   try {
     const one = await call("get_dpma_section", { citation: "§ 139 PatG" });
     expect(one.summary).toBe(
-      "**§ 139 PatG** — Unterlassungs- und Schadensersatzanspruch\nSource: DPMA Germany statutes corpus (snapshot-2026-10-22)",
+      "**§ 139 PatG**\nSource: DPMA Germany statutes corpus (snapshot-2026-10-22); PatG Stand: zuletzt geändert durch Art. 13 G v. 20.5.2026 I Nr. 152",
     );
     expect(one.items).toEqual([
       {
         statute: "PatG",
         section: "139",
-        title: "Unterlassungs- und Schadensersatzanspruch",
+        title: null,
         text: expect.stringContaining("(1) Wer entgegen"),
+        stand: "zuletzt geändert durch Art. 13 G v. 20.5.2026 I Nr. 152",
+        version_date: "2026-05-20",
       },
     ]);
     expect(one.not_found).toEqual([]);
 
     const many = await call("get_dpma_section", {
-      citation: ["§ 97 UrhG", "§ 4 PatG", "Section 14 MarkenG", "§ 1 BGB"],
+      citation: ["§ 97 UrhG", "§ 999 PatG", "Section 14 MarkenG", "§ 1 BGB"],
     });
     expect(many.items.map((item) => `${item.statute} ${item.section}`)).toEqual(
       ["UrhG 97", "MarkenG 14"],
     );
-    expect(many.not_found).toEqual(["§ 4 PatG", "§ 1 BGB"]);
+    expect(many.not_found).toEqual(["§ 999 PatG", "§ 1 BGB"]);
     expect(many.summary).toBe(
-      "Fetched 2 of 4 DPMA statute sections. Not found: § 4 PatG, § 1 BGB.",
+      "Fetched 2 of 4 DPMA statute sections. Not found: § 999 PatG, § 1 BGB.",
     );
 
     // A single missing citation, a bare ambiguous number and an unparseable
     // citation fail the call, as in Python.
     await expect(
-      client.callTool("get_dpma_section", { citation: "§ 4 PatG" }),
-    ).rejects.toThrow("Section '4' not found in 'PatG'.");
+      client.callTool("get_dpma_section", { citation: "§ 999 PatG" }),
+    ).rejects.toThrow("Section '999' not found in 'PatG'.");
     await expect(
       client.callTool("get_dpma_section", { citation: ["1", "§ 97 UrhG"] }),
     ).rejects.toThrow("ambiguous");
@@ -157,7 +159,7 @@ test("get_dpma_section returns sections in order with not_found, as Python's Fet
     );
     expect(status).toMatchObject({
       available: true,
-      section_count: 12,
+      section_count: 16,
       corpus_version: "snapshot-2026-10-22",
       artifact_sha256: expect.stringMatching(/^[a-f\d]{64}$/),
     });
@@ -209,20 +211,21 @@ test("the curated facade routes corpus='dpma' with the statute filter and statut
 
     const got = await call("get_legal_reference", {
       corpus: "dpma",
-      identifier: "§ 3 PatG",
+      identifier: "§ 2 GeschGehG",
     });
     expect(got.items).toEqual([
       expect.objectContaining({
-        statute: "PatG",
-        section: "3",
-        title: "Neuheit",
+        statute: "GeschGehG",
+        section: "2",
+        title: "Begriffsbestimmungen",
+        version_date: "2019-04-18",
       }),
     ]);
     expect(got.not_found).toEqual([]);
     await expect(
       client.callTool("get_legal_reference", {
         corpus: "dpma",
-        identifier: "§ 4 PatG",
+        identifier: "§ 999 PatG",
       }),
     ).rejects.toThrow("not found");
     await expect(
@@ -314,9 +317,9 @@ test("Bun HTTP serves DPMA statutes tools only to tokens with dpma:read", async 
   }
 });
 
-test("the fixture is the packaged Python build, byte for byte", async () => {
+test("the fixture is the builder's subset output, byte for byte", async () => {
   const bytes = await readFile(fixture);
   expect(new Bun.CryptoHasher("sha256").update(bytes).digest("hex")).toBe(
-    "6256d69d7d32325a05c3c8e30c619ed66b61043a4b7879927b700307dcec3b98",
+    "7fc597bcf93eee053ef4e382cb97a636124b7bec4caba751e76c66a1efe2dd32",
   );
 });

@@ -26,23 +26,69 @@ only for `dpma` and ignored for the other corpora. `get_legal_reference` takes
 the identifier as one citation and returns the get tool's envelope, including
 `not_found`.
 
-## The corpus is a 12-section seed
+## Source and contents
 
-There is no fuller DPMA corpus anywhere. The Python builder does not crawl
-gesetze-im-internet.de; it loads the `seed.jsonl` bundled with the package,
-which holds 12 sections (PatG §§ 1, 3, 139; MarkenG §§ 14, 32; GebrMG §§ 1, 11;
-DesignG § 1; UrhG §§ 1, 97; GeschGehG §§ 1, 2), each cut to its first paragraph
-or sentence. The deploy image does not build it or set
-`DPMA_STATUTES_CORPUS_PATH`, and `gs://patentclient-mcp-corpora/` has no DPMA
-object, so the deployed Python server answers every DPMA call with "corpus not
-found" (checked on October 22 through the hosted `search_legal_reference`).
-Python has no runtime fallback to the seed; neither does this port. A real
-corpus needs a builder for the official texts, which is out of scope here.
+The corpus is built in TypeScript from the official consolidated texts on
+gesetze-im-internet.de (Bundesministerium der Justiz / Bundesamt für Justiz),
+which publishes each Act as a zip holding one XML document under the
+`gii-norm` DTD 1.01. `scripts/build-dpma-statutes-corpus.ts` downloads the six
+zips with one plain HTTPS GET each and the user agent
+`patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)`;
+there is no browser, cookie or challenge handling. Every § of each Act is one
+row, in German, as currently in force. The Python `seed.jsonl` (12 truncated
+sections) is no longer used here.
+
+| Act | Slug | Rows | Stand (as published) | Version date | Publisher build |
+| --- | --- | --- | --- | --- | --- |
+| PatG | `patg` | 174 | zuletzt geändert durch Art. 13 G v. 20.5.2026 I Nr. 152 | 2026-05-20 | 2026-09-30 |
+| MarkenG | `markeng` | 193 | Zuletzt geändert durch Art. 14 G v. 20.5.2026 I Nr. 152 | 2026-05-20 | 2026-09-30 |
+| GebrMG | `gebrmg` | 45 | zuletzt geändert durch Art. 17 G v. 15.7.2024 I Nr. 237 | 2024-07-15 | 2024-07-18 |
+| DesignG | `geschmmg_2004` | 88 | Zuletzt geändert durch Art. 10 G v. 10.8.2021 I 3490 | 2021-08-10 | 2026-05-06 |
+| UrhG | `urhg` | 255 | Zuletzt geändert durch Art. 2 G v. 26.5.2026 I Nr. 157 | 2026-05-26 | 2026-05-29 |
+| GeschGehG | `geschgehg` | 23 | none in the source (BGBl I 2019, 466) | 2019-04-18 | 2021-01-28 |
+
+That is 778 rows. The Designgesetz still lives under its 2004 slug
+(Geschmacksmustergesetz). The GeschGehG document carries no Stand note, so
+its version date is the Ausfertigungsdatum. The zips were retrieved on
+October 22, 2026; [`scripts/dpma-statutes-sources.json`](../scripts/dpma-statutes-sources.json)
+records each URL, retrieval time, `Last-Modified`, zip and XML SHA-256,
+publisher build stamp, Stand note and row count.
+
+How the XML becomes rows:
+
+- A section's `enbez` (`§ 16a`) gives the number, lowercased; `titel` gives
+  the title. The PatG and GebrMG have no official section headings, so their
+  titles are null (the old seed's PatG titles were unofficial).
+- Text keeps the structure the citation parser drops: one line per Absatz
+  (`(1) …`), one line per numbered or lettered item (`1. …`, `a) …`) with two
+  spaces of indent per list level, and `<BR/>` breaks kept. `get_dpma_section`
+  therefore returns the whole section for `§ 139 Abs. 1 PatG`. Footnotes
+  (Textnachweis and validity notes) and Fundstelle annotations are not section
+  text and are left out.
+- Repealed sections stay citable. A single repealed § keeps its published
+  title `(weggefallen)` and text (`-`); a grouped entry such as
+  `(XXXX) §§ 18 und 19` or `§§ 161 bis 163` becomes one row per number, title
+  and text `(weggefallen)`.
+- The UrhG's `Anlage (zu § 61a)` is stored as section `Anlage` (reach it with
+  `getSection("Anlage", { statute: "UrhG" })`; the citation parser takes
+  numbers only). The Inhaltsübersicht and the structural headings
+  (Abschnitte, Teile) are not stored.
+- Meta adds `source`, `retrieved_at` and `acts`, a JSON array with each Act's
+  long title, Stand note, amendment date, Ausfertigungsdatum, Fundstelle,
+  version date, publisher build stamp, source URL, retrieval time, zip
+  SHA-256 and row count. `snapshot_date` is the retrieval date, so rebuilding
+  from the same zips gives the same bytes.
+
+Spot checks on October 22, 2026: § 1, § 9, § 16a and § 139 PatG, § 14
+MarkenG and § 2 GeschGehG were compared with their official HTML pages
+(`/patg/__139.html` and so on); text and titles are identical once whitespace
+is ignored.
 
 ## Schema and behavior
 
 Each row of `sections` is one § of one Act (`statute`, `section`, `title`,
-`text`), indexed by the external-content FTS5 table `sections_fts` over all
+`text`), the schema the Python builder defines (version 1, unchanged),
+indexed by the external-content FTS5 table `sections_fts` over all
 four columns with the `porter unicode61` tokenizer. The reader checks meta
 `schema_version` 1, the columns and the FTS5 definition, and rejects WAL files,
 as the shared `openCorpusSnapshot` does for every corpus.
@@ -56,6 +102,11 @@ resolves; one found in several fails with the list of Acts (`AMBIGUOUS_SECTION`)
 A single missing citation fails the call; in a list, missing citations go to
 `not_found` while parse and ambiguity errors fail the call, as in Python.
 
+Status adds `acts`, the parsed meta `acts` array (null for a corpus built
+without it, such as the Python seed build). Each section carries its Act's
+`stand` and `version_date` (null when the corpus does not record them), and
+the single-section summary of `get_dpma_section` names the Stand.
+
 Search defaults to all-terms matching and BM25 order, returns lean stubs
 (statute, section, title, a 400-character snippet with `<mark>` highlights) or,
 with `full`, the hit with its rank. Status reports `corpus_version` as
@@ -63,7 +114,8 @@ with `full`, the hit with its rank. Status reports `corpus_version` as
 (Python's form, with a hyphen), and `corpus_synced_at` as that date at UTC
 midnight; a missing or malformed date gives `unknown` and `null`. Section text
 beyond a 32,000-character inline budget would be delivered as a text artifact,
-as the other corpus tools do; no seed section comes close.
+as the other corpus tools do; the longest section in the build is about
+4,500 characters.
 
 ## Python differences
 
@@ -74,8 +126,9 @@ Python is being retired, so these are fixed here rather than there.
   mode matches either word) or fail (`NOT` alone raises an FTS5 syntax error).
   The TypeScript reader quotes every term.
 - `sort='outline'` ordered sections as text, so § 139 came before § 3. Sections
-  now sort numerically within each Act. BM25 ties fall back to row order so
-  pages are stable.
+  now sort numerically within each Act, a letter section after its number
+  (§ 16, § 16a, § 17) and the UrhG Anlage last. BM25 ties fall back to row
+  order so pages are stable.
 - The citation parser rejected German subdivisions (`§ 139 Abs. 1 PatG`,
   `§ 2 Nr. 1 GeschGehG`) and Act citations without a `§` (`139 PatG`). Both now
   resolve to the whole section. Letter suffixes are lowercased (`16A` → `16a`)
@@ -85,51 +138,49 @@ Python is being retired, so these are fixed here rather than there.
   statutes default to `and`. The TypeScript facade leaves `syntax` without a
   schema default and applies `and` for `dpma`, `adj` for the manuals.
 
-## Artifact source, packaging and verification
+## Building, packaging and verification
 
-The runtime never fetches or rebuilds the corpus. From `typescript/`, with the
-Python project's environment (the builder only reads the bundled seed):
+The runtime never fetches or rebuilds the corpus. From `typescript/`:
 
 ```sh
-mkdir -p .data/dpma_statutes
-uv run --project .. --frozen --no-sync patent-client-agents-build-dpma-statutes-corpus \
-  --output "$TMPDIR/dpma_statutes.db"
-uv run --project .. --frozen --no-sync python scripts/prepare-mpep-corpus.py \
-  --input "$TMPDIR/dpma_statutes.db" --output .data/dpma_statutes/dpma_statutes.db
+bun run build:dpma-statutes --fetch     # download the zips, rewrite the source manifest, build
+bun run build:dpma-statutes             # or rebuild from the archived zips
 bun scripts/compress-corpus.ts \
   --input .data/dpma_statutes/dpma_statutes.db \
   --output .data/dpma_statutes/dpma_statutes.db.zst
 bun run verify:dpma-statutes --file .data/dpma_statutes/dpma_statutes.db.zst
 ```
 
-The builder writes a WAL-mode database, so the preparation step is required.
-Its output says `source_version: unknown` and its errors say "MPEP"; both are
-cosmetic here. A rebuild on another day changes `snapshot_date` and so the
-hashes.
+The raw zips go to the ignored `.data/dpma_statutes/raw/`; a rebuild checks
+each against the SHA-256 and row count in the committed source manifest and
+stops on a mismatch. The builder writes a standalone DELETE-journal database
+(no preparation step), never overwrites its output, and checks integrity.
+`--fixture` also rewrites the test fixture. When the local resolver cannot
+resolve the host, `--connect-ip ADDRESS` connects to that address and still
+verifies TLS against `www.gesetze-im-internet.de` (it was needed on October 22,
+when the tailnet resolver failed on the host's CNAME).
 
-On October 22, 2026 this sequence ran over the seed (SHA-256
-`2a84f3ce8c62056f140193dcbdc73e1bfe16efef364fa8aca62570c727d496dd`). The
-verifier configured the packaged file and both pins, then exercised the
-library and the default full and curated MCP servers.
+The October 22, 2026 build (zips retrieved 11:59 UTC):
 
-| Sections | Built (WAL) SHA-256 | Prepared bytes | Decoded SHA-256 | Zstandard bytes | File SHA-256 |
-| --- | --- | --- | --- | --- | --- |
-| 12 | `6f8fc6029d883baa830d55b52990470241c7cd45779db71a9252dc861f6b8849` | 53,248 | `6256d69d7d32325a05c3c8e30c619ed66b61043a4b7879927b700307dcec3b98` | 5,266 | `c5605037b18975e157e2476504a33b8e38d30abf2eb10b07b0e9f8df232b6121` |
+| Rows | Decoded bytes | Decoded SHA-256 | Zstandard bytes | File SHA-256 |
+| --- | --- | --- | --- | --- |
+| 778 | 1,470,464 | `211bf701e26fb7f9719d0a20929596424711ae89e43130f30d220b8e74cefee2` | 402,417 | `2a59048b1775ef370dcaf41f6196d3990e02412d50005a5af58fd390341bc83c` |
 
-A one-off comparison ran the Python `DpmaStatutesClient` and the TypeScript
-client on the same prepared file: seven searches (all four syntaxes, Act
-filters, outline sort) returned the same hits in the same order with identical
-snippets, and seven citations returned identical sections. BM25 ranks differ
-only in the last floating-point digit (SQLite builds differ). The outline
-search compared has no § 3/§ 139 pair, so the sort fix is not visible there.
-The live facade probe (`dpma search`, `dpma section`) passed against the
-packaged file. The artifacts stay under ignored `.data/` and were not deployed.
+The verifier configured the packaged file and both pins, checked the per-Act
+metadata against the row count, and exercised the library and the default
+full and curated MCP servers. The live facade probes (`dpma search`,
+`dpma section`) passed with `DPMA_STATUTES_CORPUS_PATH` set to the packaged
+file. The artifacts stay under ignored `.data/` and were not deployed; the
+deployed Python server still has no DPMA corpus.
 
 ## Tests
 
-The [fixture](../tests/fixtures/dpma-statutes/README.md) is the whole prepared
-build. [Library tests](../tests/dpma-statutes-client.test.ts) cover citation
-parsing, status, sections, ambiguity and not-found errors, search syntax, Act
+The [fixture](../tests/fixtures/dpma-statutes/README.md) is 16 real sections
+written by the builder from the October 22 zips. [Builder tests](../tests/dpma-statutes-build.test.ts)
+cover the XML-to-text rules, grouped repealed sections, Act metadata and the
+source manifest. [Library tests](../tests/dpma-statutes-client.test.ts) cover citation
+parsing, status and per-Act metadata, sections (Absatz and list lines, letter
+and repealed sections, the Anlage), ambiguity and not-found errors, search syntax, Act
 filters and aliases, numeric outline order, paging, FTS operator quoting,
 Zstandard bytes, pins, the environment variables, WAL, schema and metadata
 gaps. [MCP tests](../tests/dpma-statutes-mcp.test.ts) cover both tools against

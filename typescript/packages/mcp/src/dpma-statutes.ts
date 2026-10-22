@@ -130,7 +130,7 @@ export async function searchDpmaStatutes(
 }
 
 function summarizeSection(section: DpmaSection) {
-  return `**§ ${section.section} ${section.statute}**${section.title ? ` — ${section.title}` : ""}\nSource: DPMA Germany statutes corpus (${section.provenance.corpus_version})`;
+  return `**§ ${section.section} ${section.statute}**${section.title ? ` — ${section.title}` : ""}\nSource: DPMA Germany statutes corpus (${section.provenance.corpus_version})${section.stand ? `; ${section.statute} Stand: ${section.stand}` : ""}`;
 }
 
 /**
@@ -219,7 +219,7 @@ export function registerDpmaStatutesTools(
       uri: DPMA_STATUTES_STATUS_URI,
       name: "Installed DPMA statutes corpus status",
       description:
-        "Installed snapshot identity, section count and snapshot date. Availability does not establish that the bundled sections are complete or current.",
+        "Installed snapshot identity, section count, snapshot date and, per Act, the Stand (last amendment) the snapshot was built from. The snapshot is not updated after it is built; check the Stand before relying on it as current law.",
       mimeType: "application/json",
       ...(auth ? { auth } : {}),
     },

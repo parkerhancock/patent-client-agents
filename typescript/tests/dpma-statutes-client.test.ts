@@ -97,7 +97,7 @@ test("citations parse as Python does, plus German subdivisions and bare-number A
   expect(resolveDpmaStatute("copyright act")).toBe("UrhG");
 });
 
-test("DPMA status, sections and search come from the Python-built corpus", async () => {
+test("DPMA status, sections and search come from the gesetze-im-internet.de build", async () => {
   const before = hash(await readFile(fixture));
   const client = new DpmaStatutesClient({ corpusPath: fixture });
   try {
@@ -107,12 +107,36 @@ test("DPMA status, sections and search come from the Python-built corpus", async
       label: "DPMA statutes",
       corpus_version: "snapshot-2026-10-22",
       schema_version: 1,
-      section_count: 12,
+      section_count: 16,
       snapshot_date: "2026-10-22",
       corpus_synced_at: "2026-10-22T00:00:00.000Z",
       compression: "none",
       source_url: DPMA_STATUTES_SOURCE_URL,
-      metadata: { section_count: "12" },
+      // The fixture is a 16-section subset of the 778-section build.
+      metadata: { section_count: "16", fixture_subset_of: "778" },
+    });
+    expect(status.acts?.map((act) => act.statute)).toEqual([
+      "PatG",
+      "MarkenG",
+      "GebrMG",
+      "DesignG",
+      "UrhG",
+      "GeschGehG",
+    ]);
+    expect(status.acts?.[0]).toMatchObject({
+      title: "Patentgesetz",
+      stand: "zuletzt geändert durch Art. 13 G v. 20.5.2026 I Nr. 152",
+      amended_on: "2026-05-20",
+      version_date: "2026-05-20",
+      source_url: "https://www.gesetze-im-internet.de/patg/xml.zip",
+      section_count: 174,
+    });
+    // GeschGehG has never been amended: its version is the enactment.
+    expect(status.acts?.[5]).toMatchObject({
+      stand: null,
+      enacted_on: "2019-04-18",
+      fundstelle: "BGBl I 2019, 466",
+      version_date: "2019-04-18",
     });
     expect(status.artifact_sha256).toBe(before);
     expect(await client.listStatutes()).toEqual([
@@ -125,12 +149,43 @@ test("DPMA status, sections and search come from the Python-built corpus", async
     ]);
 
     const section = await client.getSectionByCitation("§ 139 PatG");
+    // The PatG has no official section headings.
     expect(section).toMatchObject({
       statute: "PatG",
       section: "139",
-      title: "Unterlassungs- und Schadensersatzanspruch",
+      title: null,
+      stand: "zuletzt geändert durch Art. 13 G v. 20.5.2026 I Nr. 152",
+      version_date: "2026-05-20",
     });
+    // The whole section, one line per Absatz.
     expect(section.text).toStartWith("(1) Wer entgegen den §§ 9 bis 13");
+    expect(section.text.split("\n").map((line) => line.slice(0, 3))).toEqual([
+      "(1)",
+      "(2)",
+      "(3)",
+    ]);
+    expect((await client.getSectionByCitation("§ 139 Abs. 2 PatG")).text).toBe(
+      section.text,
+    );
+    // Numbered items keep their own lines; lettered sub-items are indented.
+    expect((await client.getSectionByCitation("§ 9 PatG")).text).toContain(
+      "\n1. ein Erzeugnis, das Gegenstand des Patents ist,",
+    );
+    const secret = await client.getSectionByCitation("§ 2 Nr. 1 GeschGehG");
+    expect(secret.title).toBe("Begriffsbestimmungen");
+    expect(secret.text).toContain("\n  a) die weder insgesamt");
+    expect(secret.version_date).toBe("2019-04-18");
+    expect((await client.getSectionByCitation("§ 16A PatG")).text).toStartWith(
+      "(1) Für das Patent kann nach Maßgabe von Verordnungen",
+    );
+    // '§§ 18 und 19 (weggefallen)' is one source entry; each number resolves.
+    expect(await client.getSectionByCitation("§ 18 PatG")).toMatchObject({
+      title: "(weggefallen)",
+      text: "(weggefallen)",
+    });
+    expect((await client.getSection("Anlage", { statute: "UrhG" })).title).toBe(
+      "Anlage (zu § 61a): Quellen einer sorgfältigen Suche",
+    );
     expect(CorpusProvenanceSchema.parse(section.provenance)).toMatchObject({
       source_url: DPMA_STATUTES_SOURCE_URL,
       source_name: "DPMA Germany — IP statutes",
@@ -150,8 +205,8 @@ test("DPMA status, sections and search come from the Python-built corpus", async
     expect(await code(client.getSectionByCitation("§ 1 BGB"))).toBe(
       "SECTION_NOT_FOUND",
     );
-    await expect(client.getSectionByCitation("§ 4 PatG")).rejects.toThrow(
-      "Section '4' not found in 'PatG'.",
+    await expect(client.getSectionByCitation("§ 999 PatG")).rejects.toThrow(
+      "Section '999' not found in 'PatG'.",
     );
     expect(await code(client.getSectionByCitation("Article 54"))).toBe(
       "INVALID_CITATION",
@@ -161,7 +216,7 @@ test("DPMA status, sections and search come from the Python-built corpus", async
     expect(hits.statute).toBeNull();
     expect(
       hits.hits.map((hit) => `${hit.statute} ${hit.section}`).sort(),
-    ).toEqual(["PatG 139", "UrhG 97"]);
+    ).toEqual(["MarkenG 14", "PatG 139", "UrhG 97"]);
     expect(hits.hits[0]).toEqual({
       statute: expect.any(String),
       section: expect.any(String),
@@ -200,14 +255,31 @@ test("DPMA status, sections and search come from the Python-built corpus", async
       ).hits.map((hit) => `${hit.statute} ${hit.section}`),
     ).toEqual(["PatG 1"]);
 
-    // Outline order is numeric within an Act (Python sorts "139" before "3").
+    // Outline order is numeric within an Act (Python sorts "139" before "3"),
+    // letter sections follow their number and an Anlage comes last.
     const outline = await client.search({
-      query: "Erfindungen Erfindung Verletzten",
+      query: "Erfindungen Erfindung Verletzten Patent",
       syntax: "or",
       sort: "outline",
       statute: "PatG",
     });
-    expect(outline.hits.map((hit) => hit.section)).toEqual(["1", "3", "139"]);
+    expect(outline.hits.map((hit) => hit.section)).toEqual([
+      "1",
+      "3",
+      "9",
+      "16a",
+      "139",
+    ]);
+    expect(
+      (
+        await client.search({
+          query: "Quellen Werke",
+          syntax: "or",
+          sort: "outline",
+          statute: "UrhG",
+        })
+      ).hits.map((hit) => hit.section),
+    ).toEqual(["1", "Anlage"]);
 
     const first = await client.search({
       query: "Gesetzes",
@@ -348,6 +420,16 @@ test("WAL files, other schemas and metadata gaps are reported, not guessed", asy
       client.close();
     },
   );
+  await withCopy("DELETE FROM meta WHERE key = 'acts'", async (filename) => {
+    // A corpus without per-Act metadata (the old seed build) still reads.
+    const client = new DpmaStatutesClient({ corpusPath: filename });
+    expect((await client.getCorpusStatus()).acts).toBeNull();
+    expect(await client.getSectionByCitation("§ 1 PatG")).toMatchObject({
+      stand: null,
+      version_date: null,
+    });
+    client.close();
+  });
   await withCopy(
     "INSERT INTO meta VALUES ('source_version', 'current'); DELETE FROM meta WHERE key = 'snapshot_date'",
     async (filename) => {
