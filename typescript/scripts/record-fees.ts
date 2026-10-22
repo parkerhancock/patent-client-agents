@@ -6,7 +6,10 @@ import {
 
 /** Record public fee-schedule fetches. Prints counts and coverage, never bodies. */
 let failures = 0;
+// Optional operation names, e.g. `bun scripts/record-fees.ts dpma ilpo`.
+const only = process.argv.slice(2);
 for (const name of Object.keys(feeOperations) as FeeOperation[]) {
+  if (only.length && !only.includes(name)) continue;
   try {
     for (const schedule of await feeRecordings(name, true))
       console.log(

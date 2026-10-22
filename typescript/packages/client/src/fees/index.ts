@@ -1,6 +1,12 @@
 import type { ClientOptions, TransportRequestOptions } from "../transport.js";
 import { OFFICE_ALIASES, PYTHON_FEE_ROUTES } from "./aliases.js";
+import { CipoFeesClient } from "./cipo.js";
+import { CnipaFeesClient } from "./cnipa.js";
+import { DpmaFeesClient } from "./dpma.js";
 import { EpoFeesClient } from "./epo.js";
+import { IlpoFeesClient } from "./ilpo.js";
+import { ImpiFeesClient } from "./impi.js";
+import { IpAustraliaFeesClient } from "./ipaustralia.js";
 import {
   type EntityTier,
   type FeeCategory,
@@ -13,7 +19,13 @@ import {
 import { UsptoFeesClient } from "./uspto.js";
 
 export * from "./aliases.js";
+export * from "./cipo.js";
+export * from "./cnipa.js";
+export * from "./dpma.js";
 export * from "./epo.js";
+export * from "./ilpo.js";
+export * from "./impi.js";
+export * from "./ipaustralia.js";
 export * from "./models.js";
 export * from "./uspto.js";
 
@@ -101,12 +113,29 @@ export class FeesClient {
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
     const epo = new EpoFeesClient(options);
     const uspto = new UsptoFeesClient(options);
+    const cipo = new CipoFeesClient(options);
+    const cnipa = new CnipaFeesClient(options);
+    const dpma = new DpmaFeesClient(options);
+    const ilpo = new IlpoFeesClient(options);
+    const impi = new ImpiFeesClient(options);
+    const ipau = new IpAustraliaFeesClient(options);
     this.routes = new Map<string, Loader>([
       ["USPTO/patent", (o) => uspto.getPatentSchedule(o)],
       ["USPTO/trademark", (o) => uspto.getTrademarkSchedule(o)],
       ["USPTO/design", (o) => uspto.getDesignSchedule(o)],
       ["EPO/patent", (o) => epo.getEpcSchedule(o)],
       ["EPO-UP/patent", (o) => epo.getUnitaryPatentSchedule(o)],
+      ["CIPO/patent", (o) => cipo.getPatentSchedule(o)],
+      ["CNIPA/patent", (o) => cnipa.getPatentSchedule(o)],
+      ["DPMA/patent", (o) => dpma.getPatentSchedule(o)],
+      ["IPAU/patent", (o) => ipau.getPatentSchedule(o)],
+      ["ILPO/patent", (o) => ilpo.getPatentSchedule(o)],
+      ["ILPO/trademark", (o) => ilpo.getTrademarkSchedule(o)],
+      ["ILPO/design", (o) => ilpo.getDesignSchedule(o)],
+      ["IMPI/patent", (o) => impi.getPatentSchedule(o)],
+      ["IMPI/utility_model", (o) => impi.getUtilityModelSchedule(o)],
+      ["IMPI/trademark", (o) => impi.getTrademarkSchedule(o)],
+      ["IMPI/design", (o) => impi.getDesignSchedule(o)],
     ]);
   }
   /** Schedules available in this runtime, as `office/right` keys. */
