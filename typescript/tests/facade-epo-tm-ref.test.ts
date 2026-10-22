@@ -235,7 +235,7 @@ async function connect(
   };
 }
 
-test("curated toolset lists the EPO, trademark and reference facade tools, not copyright", async () => {
+test("curated toolset lists the EPO, trademark and reference facade tools", async () => {
   const mcp = await connect({ epoOps: epoClient().client });
   try {
     const names = (await mcp.client.listTools()).map((tool) => tool.name);
@@ -248,9 +248,9 @@ test("curated toolset lists the EPO, trademark and reference facade tools, not c
         "search_trademark_assignments",
         "classify_cpc",
         "get_fees",
+        "copyright",
       ]),
     );
-    expect(names).not.toContain("copyright");
     // The full toolset's names stay out of the curated surface.
     expect(names).not.toContain("search_cpc");
     expect(names).not.toContain("lookup_fee");

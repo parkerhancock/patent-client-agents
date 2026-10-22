@@ -3,6 +3,7 @@ import type {
   AssignmentCenterClient,
   BulkDataClient,
   CafcClient,
+  CopyrightClient,
   EpoOpsClient,
   FeesClient,
   MpepClient,
@@ -52,6 +53,7 @@ export interface FacadeClients {
   mpep: MpepClient;
   fees: FeesClient;
   cafc: CafcClient;
+  copyright: CopyrightClient;
   epoLegal: EpoLegalClients;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
@@ -67,7 +69,6 @@ export type FacadeRegistrar = (
  * registered; patent_client_status lists them.
  */
 export const UNPORTED_FACADE_TOOLS = [
-  "copyright",
   "get_upc_section",
   "search_upc_statutes",
   "search_upc_decisions",

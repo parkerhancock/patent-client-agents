@@ -9,6 +9,7 @@ import {
 } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
+import { getCopyrightRecords, searchCopyright } from "../copyright.js";
 import { requireEpo } from "./epo.js";
 import {
   type AuthCheck,
@@ -355,6 +356,88 @@ Related tools: classify_cpc.`,
         ),
         source_metadata: metadata,
       };
+    },
+  );
+
+  server.tool(
+    {
+      ...facadeToolOptions(auth),
+      name: "copyright",
+      description: `Search U.S. Copyright Office registrations and recorded documents, or fetch one by id.
+
+Routes by \`mode\`: 'search' finds registrations and recorded documents
+(transfers, assignments, licenses) by keyword and returns lean stubs;
+'get' fetches the full record(s) for a Public Records id. Both return a
+list envelope. Search first, then pass a hit's \`public_records_id\` to
+mode='get'. The office pages through only the first 50,000 hits of a query.
+
+Related tools: classify_cpc, get_fees.`,
+      input: z.object({
+        mode: z
+          .enum(["search", "get"])
+          .describe(
+            "What to do. 'search' = find U.S. Copyright Office registrations by keyword. 'get' = fetch one or more full records by Public Records id.",
+          ),
+        query: z
+          .string()
+          .max(500)
+          .nullable()
+          .default(null)
+          .describe(
+            "mode='search': a title, a claimant/author name, a registration number (e.g. 'TX 1234567'), or any keyword.",
+          ),
+        public_records_id: z
+          .union([
+            z.string().min(1).max(200),
+            z.array(z.string().min(1).max(200)).min(1).max(50),
+          ])
+          .nullable()
+          .default(null)
+          .describe(
+            "mode='get': the opaque Public Records id from a search hit's `public_records_id` field (NOT a registration number). Single id or a list of up to 50 for portfolio workflows. Examples: 'voyager_37022961'.",
+          ),
+        field: z
+          .string()
+          .default("keyword")
+          .describe(
+            "mode='search': which field to search — 'keyword' (default, all fields), 'title', or 'name' (claimant/author).",
+          ),
+        page: z
+          .number()
+          .int()
+          .min(1)
+          .default(1)
+          .describe("mode='search': page number (1-based)."),
+        page_size: z
+          .number()
+          .int()
+          .min(1)
+          .max(100)
+          .default(10)
+          .describe("mode='search': results per page (default 10, max 100)."),
+        full: z
+          .boolean()
+          .default(false)
+          .describe(
+            "mode='search': False (default) = lean stub per hit. True = every title/claimant/date/class list and the relevance score.",
+          ),
+      }),
+    },
+    async (input) => {
+      if (input.mode === "get") {
+        if (input.public_records_id === null)
+          throw new Error("copyright(mode='get') requires public_records_id.");
+        return getCopyrightRecords(clients.copyright, input.public_records_id);
+      }
+      if (!input.query?.trim())
+        throw new Error("copyright(mode='search') requires query.");
+      return searchCopyright(clients.copyright, {
+        query: input.query,
+        field: input.field,
+        page: input.page,
+        page_size: input.page_size,
+        full: input.full,
+      });
     },
   );
 }

@@ -8,6 +8,7 @@ import {
   PublicationsClient,
 } from "@patent-client-agents/client";
 import { Client } from "@prefecthq/fastmcp-ts/client";
+import { UNPORTED_FACADE_TOOLS } from "../packages/mcp/src/facade/index.js";
 import { createServer } from "../packages/mcp/src/index.js";
 import contract from "./fixtures/facade/python-facade-tools.json" with {
   type: "json",
@@ -643,7 +644,7 @@ describe("resolve_patent_number and patent_client_status", () => {
     const status = await mcp.call("patent_client_status", {});
     expect(fake.seen.length).toBe(before);
     expect(status.details).toMatchObject({ version: "0.1.0" });
-    expect(status.details?.unported_tools).toContain("copyright");
+    expect(status.details?.unported_tools).toEqual([...UNPORTED_FACADE_TOOLS]);
     expect(status.details?.unported_modes).toContain(
       "search_patents(jurisdiction='kr')",
     );

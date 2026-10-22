@@ -39,6 +39,7 @@
     "verify:mpep": "bun scripts/verify-mpep.ts",
     "record:epo-ops": "bun scripts/record-epo-ops.ts",
     "record:cafc": "bun scripts/record-cafc.ts",
+    "record:copyright": "bun scripts/record-copyright.ts",
     "record:fees": "bun scripts/record-fees.ts",
     "record:google-patents": "bun scripts/record-google-patents.ts",
     "verify:facade-live": "bun scripts/live-facade.ts",
