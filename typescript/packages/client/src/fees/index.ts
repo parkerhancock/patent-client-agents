@@ -1,6 +1,9 @@
 import type { ClientOptions, TransportRequestOptions } from "../transport.js";
 import { OFFICE_ALIASES, PYTHON_FEE_ROUTES } from "./aliases.js";
 import { EpoFeesClient } from "./epo.js";
+import { IpIndiaFeesClient } from "./ipindia.js";
+import { JpoFeesClient } from "./jpo.js";
+import { KipoFeesClient } from "./kipo.js";
 import {
   type EntityTier,
   type FeeCategory,
@@ -14,6 +17,9 @@ import { UsptoFeesClient } from "./uspto.js";
 
 export * from "./aliases.js";
 export * from "./epo.js";
+export * from "./ipindia.js";
+export * from "./jpo.js";
+export * from "./kipo.js";
 export * from "./models.js";
 export * from "./uspto.js";
 
@@ -101,12 +107,22 @@ export class FeesClient {
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
     const epo = new EpoFeesClient(options);
     const uspto = new UsptoFeesClient(options);
+    const kipo = new KipoFeesClient(options);
+    const jpo = new JpoFeesClient(options);
+    const ipindia = new IpIndiaFeesClient(options);
     this.routes = new Map<string, Loader>([
       ["USPTO/patent", (o) => uspto.getPatentSchedule(o)],
       ["USPTO/trademark", (o) => uspto.getTrademarkSchedule(o)],
       ["USPTO/design", (o) => uspto.getDesignSchedule(o)],
       ["EPO/patent", (o) => epo.getEpcSchedule(o)],
       ["EPO-UP/patent", (o) => epo.getUnitaryPatentSchedule(o)],
+      ["KIPO/patent", (o) => kipo.getPatentSchedule(o)],
+      ["KIPO/trademark", (o) => kipo.getTrademarkSchedule(o)],
+      ["KIPO/design", (o) => kipo.getDesignSchedule(o)],
+      ["JPO/patent", (o) => jpo.getPatentSchedule(o)],
+      ["JPO/trademark", (o) => jpo.getTrademarkSchedule(o)],
+      ["JPO/design", (o) => jpo.getDesignSchedule(o)],
+      ["IPIN/patent", (o) => ipindia.getPatentSchedule(o)],
     ]);
   }
   /** Schedules available in this runtime, as `office/right` keys. */

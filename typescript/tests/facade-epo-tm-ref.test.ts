@@ -8,7 +8,11 @@ import {
 } from "@patent-client-agents/client";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";
-import { usptoFeePage } from "./fees-recordings.js";
+import {
+  jpoFeePage,
+  recordedFeeResponse,
+  usptoFeePage,
+} from "./fees-recordings.js";
 
 type Envelope = {
   summary: string;
@@ -178,8 +182,16 @@ function trademarkAssignments() {
 function feesClient() {
   return new FeesClient({
     retryLimit: 0,
-    fetch: (async (input: RequestInfo | URL) =>
-      String(input instanceof Request ? input.url : input).includes("uspto.gov")
+    fetch: (async (input: RequestInfo | URL) => {
+      const url = String(input instanceof Request ? input.url : input);
+      if (url.includes("kipo.go.kr")) return recordedFeeResponse("kipo", url);
+      if (url.includes("ipindia.gov.in"))
+        return recordedFeeResponse("ipindia", url);
+      if (url.includes("jpo.go.jp"))
+        return new Response(jpoFeePage(), {
+          headers: { "content-type": "text/html" },
+        });
+      return url.includes("uspto.gov")
         ? new Response(usptoFeePage(), {
             headers: { "content-type": "text/html" },
           })
@@ -217,7 +229,8 @@ function feesClient() {
               },
               children: [],
             },
-          ])) as unknown as typeof fetch,
+          ]);
+    }) as unknown as typeof fetch,
   });
 }
 
@@ -617,6 +630,13 @@ test("get_fees covers schedule, lookup and jurisdictions, and names unported off
       "US/USPTO/design",
       "EP/EPO/patent",
       "UP/EPO-UP/patent",
+      "KR/KIPO/patent",
+      "KR/KIPO/trademark",
+      "KR/KIPO/design",
+      "JP/JPO/patent",
+      "JP/JPO/trademark",
+      "JP/JPO/design",
+      "IN/IPIN/patent",
     ]);
     expect(list.summary).toContain("Not yet ported: EUIPO trademark");
     // USPTO is served by routing alone; refresh is accepted for USPTO only.
@@ -635,7 +655,8 @@ test("get_fees covers schedule, lookup and jurisdictions, and names unported off
     await expect(
       mcp.client.callTool("get_fees", {
         mode: "schedule",
-        jurisdiction: "JPO",
+        jurisdiction: "EUIPO",
+        right: "trademark",
       }),
     ).rejects.toThrow("not yet ported");
     await expect(
