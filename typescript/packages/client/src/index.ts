@@ -38,5 +38,6 @@ export {
 } from "./transport.js";
 export * from "./tsdr.js";
 export * from "./upc-statutes.js";
+export * from "./usitc.js";
 export * from "./uspto-resources.js";
 export * from "./wipo-lex.js";

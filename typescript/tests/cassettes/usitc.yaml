@@ -1,0 +1,1516 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://edis.usitc.gov/data/attachment/856966
+    headers:
+      accept:
+      - application/xml
+      user-agent:
+      - curl/8.7.1
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - max-age=0, no-cache, no-store
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors 'self';
+      content-type:
+      - application/xml
+      date:
+      - Thu, 22 Oct 2026 03:21:09 GMT
+      expires:
+      - Thu, 22 Oct 2026 03:21:09 GMT
+      pragma:
+      - no-cache
+      server-timing:
+      - >-
+        cdn-cache; desc=MISS, edge; dur=28, origin; dur=923, ak_p;
+        desc="1792639268397_398468522_3795697342_94865_130301_7_0_-";dur=1
+      strict-transport-security:
+      - max-age=31536000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - "0"
+    body:
+      type: text
+      content: >-
+        <results><attachments><attachment><id>2404585</id><documentId>856966</documentId><title>Order 50 - granting relief from PO</title><fileSize>116283</fileSize><pageCount>2</pageCount><createDate>2025/07/16 13:19:15</createDate><lastModifiedDate/><downloadUri>https://edis.usitc.gov/data/download/856966/2404585</downloadUri></attachment><attachment><id>2404616</id><documentId>856966</documentId><title>Certificate of Service 07/16/2025</title><fileSize>6243</fileSize><pageCount>2</pageCount><createDate>2025/07/16 14:57:42</createDate><lastModifiedDate/><downloadUri>https://edis.usitc.gov/data/download/856966/2404616</downloadUri></attachment></attachments></results>
+  recorded_at: 2026-10-22T03:21:09.559Z
+- request:
+    method: GET
+    uri: https://edis.usitc.gov/data/document?investigationNumber=337-1380&pageNumber=1
+    headers:
+      accept:
+      - application/xml
+      user-agent:
+      - curl/8.7.1
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - max-age=0, no-cache, no-store
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors 'self';
+      content-type:
+      - application/xml
+      date:
+      - Thu, 22 Oct 2026 03:20:37 GMT
+      expires:
+      - Thu, 22 Oct 2026 03:20:37 GMT
+      pragma:
+      - no-cache
+      server-timing:
+      - >-
+        cdn-cache; desc=MISS, edge; dur=82, origin; dur=377, ak_p;
+        desc="1792639237486_398468522_3795461261_45838_10203_7_0_-";dur=1
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - "0"
+    body:
+      type: text
+      content: "<results><documents><document><id>856966</id><documentType>Order</documentType><documentTitle>Granting Nokia&amp;#39;s Unopposed Motion for Relief from the Protective Order</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Other1</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Other)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>USITC</firmOrganization><filedBy>Cameron R. Elliot</filedBy><onBehalfOf>Administrative Law Judge</onBehalfOf><documentDate>2025/07/16 00:00:00</documentDate><officialReceivedDate>2025/07/16 13:19:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/856966</attachmentListUri><modifiedDate>2025/07/16 14:57:00</modifiedDate></document><document><id>856777</id><documentType>Motion</documentType><documentTitle>Nokia&amp;#39;s Unopposed Motion for Relief from the Protective Order</documentTitle><securityLevel>Confidential</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Other1</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Other)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>McKool Smith P.C.</firmOrganization><filedBy>Joshua J. Newcomer</filedBy><onBehalfOf>Nokia Technologies Oy and Nokia Corporation</onBehalfOf><documentDate>2025/07/14 00:00:00</documentDate><officialReceivedDate>2025/07/15 08:45:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/856777</attachmentListUri><modifiedDate>2025/07/16 13:19:29</modifiedDate></document><document><id>850077</id><documentType>Notice</documentType><documentTitle>F.R. Notice of a Commission Determination to Grant a Joint Motion to Terminate the Investigation in Its Entirety Based on Settlement; Termination of the Investigation</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>USITC</firmOrganization><filedBy>Lisa R. Barton</filedBy><onBehalfOf>Office of the Secretary</onBehalfOf><documentDate>2025/04/29 00:00:00</documentDate><officialReceivedDate>2025/04/30 15:12:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/850077</attachmentListUri><modifiedDate>2025/05/02 09:24:23</modifiedDate></document><document><id>849651</id><documentType>Voting Sheet</documentType><documentTitle/><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>USITC</firmOrganization><filedBy>Lisa R. Barton</filedBy><onBehalfOf>Office of the Secretary</onBehalfOf><documentDate>2025/04/23 00:00:00</documentDate><officialReceivedDate>2025/04/24 16:56:00</officialReceivedDate><actionJacketControlNumber>GC-25-143</actionJacketControlNumber><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/849651</attachmentListUri><modifiedDate>2025/04/25 11:09:47</modifiedDate></document><document><id>849511</id><documentType>Notice</documentType><documentTitle>Commission Determination to Grant a Joint Motion to Terminate the Investigation in its Entirety Based on Settlement; Termination of the Investigation</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>USITC</firmOrganization><filedBy>Lisa R. Barton</filedBy><onBehalfOf>Office of the Secretary</onBehalfOf><documentDate>2025/04/23 00:00:00</documentDate><officialReceivedDate>2025/04/23 16:41:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/849511</attachmentListUri><modifiedDate>2025/04/23 17:36:34</modifiedDate></document><document><id>848904</id><documentType>Motion</documentType><documentTitle>Amended Public Exhibit 2 to Public Version of Joint Motion to Terminate the Investigation in its Entirety Based on Settlement and Patent Agreements</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Alston &amp;amp; Bird LLP</firmOrganization><filedBy>Adam D. Swain</filedBy><onBehalfOf>Nokia Technologies Oy, Nokia Corp., Amazon.com, Inc., and Amazon.com Services LLC</onBehalfOf><documentDate>2025/04/16 00:00:00</documentDate><officialReceivedDate>2025/04/16 17:03:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/848904</attachmentListUri><modifiedDate>2025/04/17 11:59:30</modifiedDate></document><document><id>848477</id><documentType>Motion Response/Reply</documentType><documentTitle>Response of the Office of Unfair Import Investigations to the Joint Motion to Terminate the Investigation in Its Entirety Based on Settlement and Patent Agreements</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Active</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>USITC</firmOrganization><filedBy>Marissa R. Ducca</filedBy><onBehalfOf>Office of Unfair Import Investigations</onBehalfOf><documentDate>2025/04/11 00:00:00</documentDate><officialReceivedDate>2025/04/11 10:02:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/848477</attachmentListUri><modifiedDate>2025/04/11 11:35:24</modifiedDate></document><document><id>848204</id><documentType>Motion</documentType><documentTitle>Joint Motion to Terminate the Investigation in Its Entirety Based on Settlement and Patent Agreements</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Alston &amp;amp; Bird LLP</firmOrganization><filedBy>Adam D. Swain</filedBy><onBehalfOf>Nokia Technologies Oy, Nokia Corp., Amazon.com, Inc., and Amazon.com Services LLC</onBehalfOf><documentDate>2025/04/08 00:00:00</documentDate><officialReceivedDate>2025/04/09 08:45:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/848204</attachmentListUri><modifiedDate>2025/04/09 10:43:25</modifiedDate></document><document><id>848195</id><documentType>Motion</documentType><documentTitle>Joint Motion to Terminate the Investigation in Its Entirety Based on Settlement and Patent Agreements</documentTitle><securityLevel>Confidential</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Alston &amp;amp; Bird LLP</firmOrganization><filedBy>Adam D. Swain</filedBy><onBehalfOf>Nokia Technologies Oy, Nokia Corp., Amazon.com, Inc., and Amazon.com Services LLC</onBehalfOf><documentDate>2025/04/08 00:00:00</documentDate><officialReceivedDate>2025/04/08 17:02:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/848195</attachmentListUri><modifiedDate>2025/04/09 10:42:05</modifiedDate></document><document><id>847767</id><documentType>Voting Sheet</documentType><documentTitle/><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Active</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>USITC</firmOrganization><filedBy>Lisa R. Barton</filedBy><onBehalfOf>Office of the Secretary</onBehalfOf><documentDate>2025/04/03 00:00:00</documentDate><officialReceivedDate>2025/04/03 15:31:00</officialReceivedDate><actionJacketControlNumber>GC-25-110</actionJacketControlNumber><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847767</attachmentListUri><modifiedDate>2025/04/03 15:52:31</modifiedDate></document><document><id>847733</id><documentType>Notice</documentType><documentTitle>Commission Determination to Grant a Joint Unopposed Motion for Temporary Suspension of Pending Deadlines</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Active</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>USITC</firmOrganization><filedBy>Lisa R. Barton</filedBy><onBehalfOf>Office of the Secretary</onBehalfOf><documentDate>2025/04/03 00:00:00</documentDate><officialReceivedDate>2025/04/03 11:44:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847733</attachmentListUri><modifiedDate>2025/04/04 13:13:55</modifiedDate></document><document><id>847476</id><documentType>Motion</documentType><documentTitle>Joint Unopposed Motion for Temporary Suspension of Pending Deadlines</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Active</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Alston &amp;amp; Bird LLP</firmOrganization><filedBy>Adam D. Swain</filedBy><onBehalfOf>Nokia Technologies, Nokia Corporation, Amazon.com, Inc., and Amazon.com Services, LLC</onBehalfOf><documentDate>2025/04/01 00:00:00</documentDate><officialReceivedDate>2025/04/01 12:13:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847476</attachmentListUri><modifiedDate>2025/04/02 12:34:07</modifiedDate></document><document><id>847402</id><documentType>Brief on Review/Remedy</documentType><documentTitle>Amazon Respondents&amp;#39; Reply Brief to the Commission on Issues under Review, Remedy, and Bond</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Perkins Coie, LLP</firmOrganization><filedBy>Veronica S. Ascarrunz</filedBy><onBehalfOf>Amazon.com Services, LLC, and Amazon.com, Inc</onBehalfOf><documentDate>2025/03/31 00:00:00</documentDate><officialReceivedDate>2025/04/01 08:45:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847402</attachmentListUri><modifiedDate>2025/04/01 11:47:46</modifiedDate></document><document><id>847404</id><documentType>Brief on Review/Remedy</documentType><documentTitle>Complainants&amp;#39; Reply to Amazon Respondents&amp;#39; Brief to the Commission on Issues under Review, Remedy, and Bond</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Alston &amp;amp; Bird LLP</firmOrganization><filedBy>Adam D. Swain</filedBy><onBehalfOf>Nokia Technologies Oy and Nokia Corporation</onBehalfOf><documentDate>2025/03/31 00:00:00</documentDate><officialReceivedDate>2025/04/01 08:45:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847404</attachmentListUri><modifiedDate>2025/04/01 11:49:41</modifiedDate></document><document><id>847143</id><documentType>Exhibit, Post-Trial</documentType><documentTitle>RX-4463 - RX-4646</documentTitle><securityLevel>Public</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Perkins Coie, LLP</firmOrganization><filedBy>Veronica S. Ascarrunz</filedBy><onBehalfOf>Amazon.com, Inc. and Amazon.com Services, LLC</onBehalfOf><documentDate>2025/03/28 00:00:00</documentDate><officialReceivedDate>2025/03/28 11:54:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847143</attachmentListUri><modifiedDate>2025/04/09 10:27:17</modifiedDate></document><document><id>847013</id><documentType>Exhibit, Post-Trial</documentType><documentTitle>RX-4818 - RX-5498</documentTitle><securityLevel>Confidential</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Perkins Coie, LLP</firmOrganization><filedBy>Veronica S. Ascarrunz</filedBy><onBehalfOf>Amazon.com, Inc. and Amazon.com Services, LLC</onBehalfOf><documentDate>2025/03/27 00:00:00</documentDate><officialReceivedDate>2025/03/27 10:21:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847013</attachmentListUri><modifiedDate>2025/04/07 16:09:16</modifiedDate></document><document><id>847010</id><documentType>Exhibit, Post-Trial</documentType><documentTitle>RX-4063 - RX-4385</documentTitle><securityLevel>Confidential</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Perkins Coie, LLP</firmOrganization><filedBy>Veronica S. Ascarrunz</filedBy><onBehalfOf>Amazon.com, Inc. and Amazon.com Services, LLC</onBehalfOf><documentDate>2025/03/27 00:00:00</documentDate><officialReceivedDate>2025/03/27 10:19:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847010</attachmentListUri><modifiedDate>2025/03/28 10:00:11</modifiedDate></document><document><id>847011</id><documentType>Exhibit, Post-Trial</documentType><documentTitle>RX-4386 - RX-4817</documentTitle><securityLevel>Confidential</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Perkins Coie, LLP</firmOrganization><filedBy>Veronica S. Ascarrunz</filedBy><onBehalfOf>Amazon.com, Inc. and Amazon.com Services, LLC</onBehalfOf><documentDate>2025/03/27 00:00:00</documentDate><officialReceivedDate>2025/03/27 10:19:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847011</attachmentListUri><modifiedDate>2025/04/07 11:05:06</modifiedDate></document><document><id>847009</id><documentType>Exhibit, Post-Trial</documentType><documentTitle>RX-3671 - RX-4062</documentTitle><securityLevel>Confidential</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Perkins Coie, LLP</firmOrganization><filedBy>Veronica S. Ascarrunz</filedBy><onBehalfOf>Amazon.com, Inc. and Amazon.com Services, LLC</onBehalfOf><documentDate>2025/03/27 00:00:00</documentDate><officialReceivedDate>2025/03/27 10:18:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847009</attachmentListUri><modifiedDate>2025/03/27 17:44:42</modifiedDate></document><document><id>847008</id><documentType>Exhibit, Post-Trial</documentType><documentTitle>RX-3193 - RX-3670</documentTitle><securityLevel>Confidential</securityLevel><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><firmOrganization>Perkins Coie, LLP</firmOrganization><filedBy>Veronica S. Ascarrunz</filedBy><onBehalfOf>Amazon.com, Inc. and Amazon.com Services, LLC</onBehalfOf><documentDate>2025/03/27 00:00:00</documentDate><officialReceivedDate>2025/03/27 10:17:00</officialReceivedDate><actionJacketControlNumber/><memorandumControlNumber/><attachmentListUri>https://edis.usitc.gov/data/attachment/847008</attachmentListUri><modifiedDate>2025/04/07 10:37:23</modifiedDate></document></documents></results>"
+  recorded_at: 2026-10-22T03:20:37.967Z
+- request:
+    method: GET
+    uri: https://edis.usitc.gov/data/document?investigationNumber=337-1380&pageNumber=99
+    headers:
+      accept:
+      - application/xml
+      user-agent:
+      - curl/8.7.1
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - max-age=0, no-cache, no-store
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors 'self';
+      content-type:
+      - application/xml
+      date:
+      - Thu, 22 Oct 2026 03:20:53 GMT
+      expires:
+      - Thu, 22 Oct 2026 03:20:53 GMT
+      pragma:
+      - no-cache
+      server-timing:
+      - >-
+        cdn-cache; desc=MISS, edge; dur=43, origin; dur=335, ak_p;
+        desc="1792639252984_398468522_3795574484_37784_10423_6_0_-";dur=1
+      strict-transport-security:
+      - max-age=31536000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - "0"
+    body:
+      type: text
+      content: <results><documents/></results>
+  recorded_at: 2026-10-22T03:20:53.379Z
+- request:
+    method: GET
+    uri: https://edis.usitc.gov/data/investigation/337-1380
+    headers:
+      accept:
+      - application/xml
+      user-agent:
+      - curl/8.7.1
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - max-age=0, no-cache, no-store
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors 'self';
+      content-type:
+      - application/xml
+      date:
+      - Thu, 22 Oct 2026 03:19:51 GMT
+      expires:
+      - Thu, 22 Oct 2026 03:19:51 GMT
+      pragma:
+      - no-cache
+      server-timing:
+      - >-
+        cdn-cache; desc=MISS, edge; dur=97, origin; dur=182, ak_p;
+        desc="1792639191303_398468522_3795222767_27872_155082_6_23_-";dur=1
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - "0"
+    body:
+      type: text
+      content: >-
+        <results><investigations><investigation><investigationNumber>337-1380</investigationNumber><investigationPhase>Other1</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Other)</investigationTitle><investigationType>Sec 337</investigationType><docketNumber>3706</docketNumber><documentListUri>https://edis.usitc.gov/data/document?investigationNumber=337-1380&amp;investigationPhase=Other1</documentListUri></investigation><investigation><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><docketNumber>3706</docketNumber><documentListUri>https://edis.usitc.gov/data/document?investigationNumber=337-1380&amp;investigationPhase=Violation</documentListUri></investigation></investigations></results>
+  recorded_at: 2026-10-22T03:19:51.781Z
+- request:
+    method: GET
+    uri: https://edis.usitc.gov/data/investigation/337-1380/Violation
+    headers:
+      accept:
+      - application/xml
+      user-agent:
+      - curl/8.7.1
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - max-age=0, no-cache, no-store
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors 'self';
+      content-type:
+      - application/xml;charset=UTF-8
+      date:
+      - Thu, 22 Oct 2026 03:20:07 GMT
+      expires:
+      - Thu, 22 Oct 2026 03:20:07 GMT
+      pragma:
+      - no-cache
+      server-timing:
+      - >-
+        cdn-cache; desc=MISS, edge; dur=133, origin; dur=245, ak_p;
+        desc="1792639206801_398468522_3795226758_37787_9645_6_0_-";dur=1
+      strict-transport-security:
+      - max-age=31536000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - "0"
+    body:
+      type: text
+      content: >-
+        <results><investigations><investigation><investigationNumber>337-1380</investigationNumber><investigationPhase>Violation</investigationPhase><investigationStatus>Inactive</investigationStatus><investigationTitle>Certain Video Capable Electronic Devices, Including Computers, Streaming Devices, Televisions, and Components and Modules Thereof; Inv. No. 337-TA-1380 (Violation)</investigationTitle><investigationType>Sec 337</investigationType><docketNumber>3706</docketNumber><documentListUri>https://edis.usitc.gov/data/document?investigationNumber=337-1380&amp;investigationPhase=Violation</documentListUri></investigation></investigations></results>
+  recorded_at: 2026-10-22T03:20:07.194Z
+- request:
+    method: GET
+    uri: https://edis.usitc.gov/data/investigation/337-9999999
+    headers:
+      accept:
+      - application/xml
+      user-agent:
+      - curl/8.7.1
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - max-age=0, no-cache, no-store
+      connection:
+      - keep-alive
+      content-security-policy:
+      - frame-ancestors 'self';
+      content-type:
+      - application/xml
+      date:
+      - Thu, 22 Oct 2026 03:20:22 GMT
+      expires:
+      - Thu, 22 Oct 2026 03:20:22 GMT
+      pragma:
+      - no-cache
+      server-timing:
+      - >-
+        cdn-cache; desc=MISS, edge; dur=64, origin; dur=78, ak_p;
+        desc="1792639222233_398468522_3795361743_14239_58671_6_0_-";dur=1
+      strict-transport-security:
+      - max-age=31536000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - "0"
+    body:
+      type: text
+      content: <results><investigations/></results>
+  recorded_at: 2026-10-22T03:20:22.451Z
+- request:
+    method: GET
+    uri: >-
+      https://hts.usitc.gov/reststop/exportList?from=0101&to=0102&format=JSON&styles=true
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - curl/8.7.1
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - max-age=0, no-cache, no-store
+      connection:
+      - keep-alive
+      content-disposition:
+      - attachment; filename=htsdata.json
+      content-type:
+      - application/octet-stream
+      date:
+      - Thu, 22 Oct 2026 03:21:41 GMT
+      expires:
+      - Thu, 22 Oct 2026 03:21:41 GMT
+      pragma:
+      - no-cache
+      server-timing:
+      - >-
+        cdn-cache; desc=MISS, edge; dur=38, origin; dur=42, ak_p;
+        desc="1792639301594_398468519_566915642_7921_7613_8_0_-";dur=1
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - >-
+        Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
+        Accept-Encoding
+    body:
+      type: text
+      content: |-
+        [ {
+          "htsno" : "0101",
+          "indent" : "0",
+          "description" : "Live horses, asses, mules and hinnies:",
+          "superior" : null,
+          "units" : [ ],
+          "general" : "",
+          "special" : "",
+          "other" : "",
+          "footnotes" : [ ],
+          "quotaQuantity" : "",
+          "additionalDuties" : "",
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "",
+          "indent" : "1",
+          "description" : "Horses:",
+          "superior" : "true",
+          "units" : [ ],
+          "general" : "",
+          "special" : "",
+          "other" : "",
+          "footnotes" : null,
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.21.00",
+          "indent" : "2",
+          "description" : "Purebred breeding animals",
+          "superior" : null,
+          "units" : [ ],
+          "general" : "Free",
+          "special" : "",
+          "other" : "Free",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.21.00.10",
+          "indent" : "3",
+          "description" : "Males",
+          "superior" : null,
+          "units" : [ "No." ],
+          "general" : "",
+          "special" : "",
+          "other" : "",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.21.00.20",
+          "indent" : "3",
+          "description" : "Females",
+          "superior" : null,
+          "units" : [ "No." ],
+          "general" : "",
+          "special" : "",
+          "other" : "",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.29.00",
+          "indent" : "2",
+          "description" : "Other",
+          "superior" : null,
+          "units" : [ ],
+          "general" : "Free",
+          "special" : "",
+          "other" : "20%",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.29.00.10",
+          "indent" : "3",
+          "description" : "Imported for immediate slaughter",
+          "superior" : null,
+          "units" : [ "No." ],
+          "general" : "",
+          "special" : "",
+          "other" : "",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.29.00.90",
+          "indent" : "3",
+          "description" : "Other",
+          "superior" : null,
+          "units" : [ "No." ],
+          "general" : "",
+          "special" : "",
+          "other" : "",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.30.00.00",
+          "indent" : "1",
+          "description" : "Asses",
+          "superior" : null,
+          "units" : [ "No." ],
+          "general" : "6.8%",
+          "special" : "Free (A+,AU,BH,CL,CO,D,E,IL,JO,KR,MA,OM,P,PA,PE,S,SG)",
+          "other" : "15%",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.90",
+          "indent" : "1",
+          "description" : "Other:",
+          "superior" : null,
+          "units" : [ ],
+          "general" : "",
+          "special" : "",
+          "other" : "",
+          "footnotes" : [ ],
+          "quotaQuantity" : "",
+          "additionalDuties" : "",
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.90.30.00",
+          "indent" : "2",
+          "description" : "Imported for immediate slaughter",
+          "superior" : null,
+          "units" : [ "No." ],
+          "general" : "Free",
+          "special" : "",
+          "other" : "Free",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0101.90.40.00",
+          "indent" : "2",
+          "description" : "Other",
+          "superior" : null,
+          "units" : [ "No." ],
+          "general" : "4.5%",
+          "special" : "Free (A+,AU,BH,CL,CO,D,E, IL,JO,KR,MA,OM,P,PA,PE,S, SG)",
+          "other" : "20%",
+          "footnotes" : [ ],
+          "quotaQuantity" : null,
+          "additionalDuties" : null,
+          "addiitionalDuties" : null
+        }, {
+          "htsno" : "0102",
+          "indent" : "0",
+          "description" : "Live bovine animals:",
+          "superior" : null,
+          "units" : [ ],
+          "general" : "",
+          "special" : "",
+          "other" : "",
+          "footnotes" : [ ],
+          "quotaQuantity" : "",
+          "additionalDuties" : "",
+          "addiitionalDuties" : null
+        } ]
+  recorded_at: 2026-10-22T03:21:41.686Z
+- request:
+    method: GET
+    uri: https://hts.usitc.gov/reststop/search?keyword=semiconductor
+    headers:
+      accept:
+      - application/json
+      user-agent:
+      - curl/8.7.1
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      cache-control:
+      - max-age=0, no-cache, no-store
+      connection:
+      - keep-alive
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Thu, 22 Oct 2026 03:21:26 GMT
+      expires:
+      - Thu, 22 Oct 2026 03:21:26 GMT
+      pragma:
+      - no-cache
+      server-timing:
+      - >-
+        cdn-cache; desc=MISS, edge; dur=86, origin; dur=26, ak_p;
+        desc="1792639286005_398468519_566913953_11143_120191_8_50_-";dur=1
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - >-
+        Origin,Access-Control-Request-Method,Access-Control-Request-Headers,
+        Accept-Encoding
+    body:
+      type: json
+      content:
+      - additionalDuties: null
+        description: >-
+          Specially shaped or fitted for the conveyance or packing of semiconductor
+          wafers, masks or reticles of subheadings 3923.10 or 8486.90
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 3923.10.20.00
+        indent: "2"
+        other: 80%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - kg
+      - additionalDuties: null
+        description: >-
+          Quartz reactor tubes and holders designed for insertion into diffusion and
+          oxidation furnaces for production of semiconductor wafers
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 7017.10.30.00
+        indent: "2"
+        other: 50%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - kg
+      - additionalDuties: null
+        description: >-
+          Quartz reactor tubes and holders designed for insertion into diffusion and
+          oxidation furnaces for production of semiconductor wafers
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 7020.00.30.00
+        indent: "1"
+        other: 55%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: For the manufacture of semiconductor devices
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 8480.71.40.00
+        indent: "3"
+        other: Free
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: "Machines and apparatus of a kind used solely or principally for the manufacture of semiconductor boules or wafers, semiconductor devices, electronic integrated circuits or flat panel displays; machines and apparatus specified in note 11(C) to this chapter; parts and accessories:"
+        effectivePeriod: null
+        footnotes: []
+        general: ""
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: "8486"
+        indent: "0"
+        other: ""
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Machines and apparatus for the manufacture of semiconductor devices or of
+          electronic integrated circuits
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 8486.20.00.00
+        indent: "1"
+        other: 35%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: For assembling semiconductor devices or electronic integrated circuits
+        effectivePeriod: null
+        footnotes: []
+        general: ""
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 8486.40.00.20
+        indent: "2"
+        other: ""
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "20"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: >-
+          For lifting, handling, loading or unloading of boules, wafers, semiconductor
+          devices, electronic integrated circuits and flat panel displays
+        effectivePeriod: null
+        footnotes: []
+        general: ""
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 8486.40.00.30
+        indent: "2"
+        other: ""
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "30"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: "Using magnetic, optical or semiconductor media:"
+        effectivePeriod: null
+        footnotes: []
+        general: null
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: "8519.81"
+        indent: "2"
+        other: null
+        quotaQuantity: null
+        selector: htsno
+        special: null
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: []
+      - additionalDuties: null
+        description: Solid-state non-volatile storage devices
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 8523.51.00.00
+        indent: "2"
+        other: 80%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: "Semiconductor devices (for example, diodes, transistors, semiconductor-based transducers); photosensitive semiconductor devices, including photovoltaic cells whether or not assembled in modules or made up into panels; light-emitting diodes (LED), whether or not assembled with other light-emitting diodes (LED); mounted piezo-electric crystals; parts thereof:"
+        effectivePeriod: null
+        footnotes: []
+        general: ""
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: "8541"
+        indent: "0"
+        other: ""
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: Light-emitting diodes (LED)
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - other
+          marker: "1"
+          type: endnote
+          value: "See 9903.90.08. "
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 8541.41.00.00
+        indent: "2"
+        other: 20%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: Semiconductor-based transducers
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 8541.51.00.00
+        indent: "2"
+        other: 35%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: Multimeters, without a recording device
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9030.31.00.00
+        indent: "2"
+        other: 40%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: >-
+          For measuring or checking semiconductor wafers or devices (including integrated
+          circuits)
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9030.82.00.00
+        indent: "2"
+        other: 40%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: >-
+          For inspecting semiconductor wafers or devices (including integrated circuits)
+          or for inspecting photomasks or reticles used in manufacturing semiconductor
+          devices (including integrated circuits)
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9031.41.00
+        indent: "2"
+        other: 50%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          For inspecting photomasks or reticles used in manufacturing semiconductor
+          devices
+        effectivePeriod: null
+        footnotes: []
+        general: ""
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9031.41.00.20
+        indent: "3"
+        other: ""
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "20"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: For wafers
+        effectivePeriod: null
+        footnotes: []
+        general: ""
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9031.41.00.40
+        indent: "4"
+        other: ""
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "40"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: >-
+          For inspecting masks (other than photomasks) used in manufacturing
+          semiconductor devices; for measuring surface particulate contamination on semiconductor
+          devices
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9031.49.70.00
+        indent: "3"
+        other: 50%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: >-
+          Electron beam microscopes fitted with equipment specifically designed for the
+          handling and transport of semiconductor wafers or reticles
+        effectivePeriod: null
+        footnotes: []
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9031.80.40.00
+        indent: "2"
+        other: 40%
+        quotaQuantity: null
+        selector: htsno
+        special: ""
+        statisticalSuffix: "00"
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units:
+        - No.
+      - additionalDuties: null
+        description: >-
+          Electrical cables and cable bundles for a voltage not exceeding 1,000 V, fitted
+          with connectors (provided for in subheading 8544.42.90), the foregoing of a kind
+          used with machines and apparatus for the manufacture or inspection of
+          semiconductor devices of subheading 8486.20.00 or with optical instruments and appliances
+          for inspecting semiconductor wafers of 9031.41.00
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: See chapter 99 statistical note 1.
+        general: Free
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9902.16.96
+        indent: "0"
+        other: No change
+        quotaQuantity: null
+        selector: htsno
+        special: No change
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: []
+      - additionalDuties: null
+        description: >-
+          Articles of iron or steel; derivative articles of iron or steel; articles of
+          aluminum; derivative articles of aluminum; wood products; passenger vehicles
+          (sedans, sport utility vehicles, crossover utility vehicles, minivans and cargo vans);
+          light trucks; parts of passenger vehicles (sedans, sport utility vehicles,
+          crossover utility vehicles, minivans and cargo vans) and light trucks; medium- and
+          heavy-duty vehicles; parts of medium- and heavy-duty vehicles; semiconductor
+          articles; semi-finished copper; and intensive copper derivative products, of any country,
+          as provided in subdivisions (v)(vi) through (v)(xvi) of U.S. note 2 to this
+          subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.01.33
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Articles of iron or steel; derivative articles of iron or steel; articles of
+          aluminum; derivative articles of aluminum; wood products; passenger vehicles
+          (sedans, sport utility vehicles, crossover utility vehicles, minivans and cargo vans);
+          light trucks; parts of passenger vehicles (sedans, sport utility vehicles,
+          crossover utility vehicles, minivans and cargo vans) and light trucks; medium- and
+          heavy-duty vehicles; parts of medium- and heavy-duty vehicles; semiconductor
+          articles; semi-finished copper; and intensive copper derivative products, of Brazil, as
+          provided in subdivisions (x)(v) through (x)(xv) of U.S. note 2 to this subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.01.83
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: "Articles of iron or steel; derivative articles of iron or steel; articles of aluminum; wood products; derivative articles of aluminum; passenger vehicles (sedans, sport utility vehicles, crossover utility vehicles, minivans, and cargo vans); light trucks; parts of passenger vehicles (sedans, sport utility vehicles, crossover utility vehicles, minivans, and cargo vans) and light trucks; medium- and heavy-duty vehicles; parts of medium- and heavy-duty vehicles; semiconductor articles; semi-finished copper; and intensive copper derivative products, of India, as provided in subdivisions (z)(iii) through (z)(xiii) of U.S. note 2 to this subchapter <b>[Compiler's note: provision terminated as of February 7, 2026.]</b>"
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.01.87
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: "Articles of aluminum, of steel, or of copper or derivative aluminum or steel articles; passenger vehicles (sedans, sport utility vehicles, crossover utility vehicles, minivans, and cargo vans) and light trucks; parts of passenger vehicles (sedans, sport utility vehicles, crossover utility vehicles, minivans, and cargo vans) and light trucks; medium- and heavy-duty vehicles; parts of medium- and heavy-duty vehicles; wood products; and semiconductor articles, of any country, as provided in subdivision (aa)(v) of U.S. note 2 to this subchapter <b>[Compiler's note: A modification to this heading was proclaimed after its expiration by 91 Fed. Reg. 18183. Consult U.S. Customs and Border Protection with any questions.]</b>"
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.03.06
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Articles of aluminum, of steel or of copper or derivative aluminum or steel
+          articles; passenger vehicles (sedans, sport utility vehicles, crossover utility
+          vehicles, minivans and cargo vans) and light trucks; parts of passenger vehicles
+          (sedans, sport utility vehicles, crossover utility vehicles, minivans and cargo vans)
+          and light trucks; medium- and heavy-duty vehicles; parts of medium- and
+          heavy-duty vehicles; wood products; semiconductor articles; and patented pharmaceutical
+          articles, as provided in subdivision (c) of U.S. note 51 to this subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: No change
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.03.15
+        indent: "0"
+        other: No change
+        quotaQuantity: null
+        selector: htsno
+        special: No change
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Articles of aluminum, of steel, or of copper or derivative aluminum or steel
+          articles; passenger vehicles (sedans, sport utility vehicles, crossover utility
+          vehicles, minivans, and cargo vans) and light trucks; parts of passenger vehicles
+          (sedans, sport utility vehicles, crossover utility vehicles, minivans, and cargo
+          vans) and light trucks; medium- and heavy-duty vehicles; parts of medium- and
+          heavy-duty vehicles; wood products; patented pharmaceutical articles; and
+          semiconductor articles, of Brazil, as provided in subdivision (a)(vi) of U.S. note 50 to this
+          subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.05.07
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Articles of aluminum, of steel or of copper or derivative aluminum or steel
+          articles; passenger vehicles (sedans, sport utility vehicles, crossover utility
+          vehicles, minivans and cargo vans) and light trucks; parts of passenger vehicles
+          (sedans, sport utility vehicles, crossover utility vehicles, minivans and cargo vans)
+          and light trucks; medium- and heavy-duty vehicles; parts of medium- and
+          heavy-duty vehicles; wood products; patented pharmaceutical articles; and semiconductor
+          articles, as provided in subdivision (f) of U.S. note 52 to this subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.05.90
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Semiconductor articles as provided for in subdivisions (a) and (b) of U.S. note
+          39 to this subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading + 25%
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.79.01
+        indent: "0"
+        other: The duty provided in the applicable subheading + 25%
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading + 25%
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Semiconductor articles, as defined in subdivision (b) of U.S. note 39 to this
+          subchapter, that are for use in U.S. data centers, as defined in subdivision (d)
+          of U.S. note 39 to this subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.79.03
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Semiconductor articles, as defined in subdivision (b) of U.S. note 39 to this
+          subchapter, that are for repairs or replacement in the United States
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.79.04
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Semiconductor articles, as defined in subdivision (b) of U.S. note 39 to this
+          subchapter, that are for research and development in the United States, as defined
+          in subdivision (d) of U.S. note 39 to this subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.79.05
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Semiconductor articles, as defined in subdivision (b) of U.S. note 39 to this
+          subchapter, that are for use by startups in the United States, as defined in
+          subdivision (d) of U.S. note 39 to this subchapter
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.79.06
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Semiconductor articles, as defined in subdivision (b) of U.S. note 39 to this
+          subchapter, that are for use in non-data center consumer electronics applications
+          in the United States
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.79.07
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Semiconductor articles, as defined in subdivision (b) of U.S. note 39 to this
+          subchapter, that are for use in non-data center civil industrial applications in
+          the United States
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.79.08
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+      - additionalDuties: null
+        description: >-
+          Semiconductor articles, as defined in subdivision (b) of U.S. note 39 to this
+          subchapter, that are for use in United States public sector applications
+        effectivePeriod: null
+        footnotes:
+        - columns:
+          - stat
+          - units
+          marker: "1"
+          type: footnote
+          value: " See chapter 99 statistical note 1. "
+        general: The duty provided in the applicable subheading
+        hasHighlight: null
+        highlightHtsNo: null
+        highlightStatSuffix: null
+        htmlStatNote: null
+        htscode: null
+        htsno: 9903.79.09
+        indent: "0"
+        other: The duty provided in the applicable subheading
+        quotaQuantity: null
+        selector: htsno
+        special: The duty provided in the applicable subheading
+        statisticalSuffix: ""
+        status: null
+        tariff: null
+        type: null
+        unique: null
+        units: null
+  recorded_at: 2026-10-22T03:21:26.362Z

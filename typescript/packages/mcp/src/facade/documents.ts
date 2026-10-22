@@ -5,6 +5,10 @@ import { zipSync } from "fflate";
 import { z } from "zod";
 import { downloadCafcPdf } from "../cafc.js";
 import {
+  downloadUsitcAttachment,
+  downloadUsitcInvestigation,
+} from "../usitc.js";
+import {
   type AuthCheck,
   detailEnvelope,
   downloadResult,
@@ -311,6 +315,7 @@ export function registerDocumentsFacade(
   clients: FacadeClients,
   auth?: AuthCheck,
 ): void {
+  const { edis } = clients;
   server.tool(
     {
       ...facadeToolOptions(auth),
@@ -393,29 +398,58 @@ export function registerDocumentsFacade(
     {
       ...facadeToolOptions(auth),
       name: "download_document",
-      description:
-        "Download a patent, court, PTAB, USITC, or bulk-register document by source.\n\nRoutes by ``source`` to the matching downloader and returns one file artifact (a download link or file path). Single-file sources return the file; the ptab_* sources return the PDF when one document matches and otherwise a ZIP with manifest.json. ptab_trial caps at 50 decisions and ptab_trial_docs at 100 documents — narrow with item_ids or a date range. For cafc, an appeal with several documents needs the PDF URL from search_litigation(forum='cafc') as identifier. 'ipa_bulk' is not yet available on this server.\n\nRelated tools: search_bulk_data, search_litigation, list_ptab_children, get_patent.",
+      description: edis
+        ? "Download a patent, court, PTAB, USITC, or bulk-register document by source.\n\nRoutes by ``source`` to the matching downloader and returns one file artifact (a download link or file path). Single-file sources return the file; the ptab_* and usitc_investigation sources return the file when one document matches and otherwise a ZIP with manifest.json. ptab_trial caps at 50 decisions, ptab_trial_docs at 100 documents and usitc_investigation at 25 attachments — narrow with item_ids, document_types or a date range. For cafc, an appeal with several documents needs the PDF URL from search_litigation(forum='cafc') as identifier. usitc_attachment takes document_id and attachment_id (see list_usitc_attachments). 'ipa_bulk' is not yet available on this server.\n\nRelated tools: search_bulk_data, search_litigation, list_ptab_children, list_usitc_attachments, get_patent."
+        : "Download a patent, court, PTAB, USITC, or bulk-register document by source.\n\nRoutes by ``source`` to the matching downloader and returns one file artifact (a download link or file path). Single-file sources return the file; the ptab_* sources return the PDF when one document matches and otherwise a ZIP with manifest.json. ptab_trial caps at 50 decisions and ptab_trial_docs at 100 documents — narrow with item_ids or a date range. For cafc, an appeal with several documents needs the PDF URL from search_litigation(forum='cafc') as identifier. 'ipa_bulk' is not yet available on this server.\n\nRelated tools: search_bulk_data, search_litigation, list_ptab_children, get_patent.",
       input: z.object({
-        source: z
-          .enum([
-            "patent_pdf",
-            "cafc",
-            "ptab_appeal",
-            "ptab_interference",
-            "ptab_trial",
-            "ptab_trial_docs",
-            "ipa_bulk",
-          ])
-          .describe(
-            "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available).",
-          ),
+        source: (edis
+          ? z
+              .enum([
+                "patent_pdf",
+                "cafc",
+                "ptab_appeal",
+                "ptab_interference",
+                "ptab_trial",
+                "ptab_trial_docs",
+                "usitc_attachment",
+                "usitc_investigation",
+                "ipa_bulk",
+              ])
+              .describe(
+                "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'usitc_attachment' = one EDIS attachment; 'usitc_investigation' = all attachments for a 337 investigation. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available).",
+              )
+          : z
+              .enum([
+                "patent_pdf",
+                "cafc",
+                "ptab_appeal",
+                "ptab_interference",
+                "ptab_trial",
+                "ptab_trial_docs",
+                "ipa_bulk",
+              ])
+              .describe(
+                "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS → EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL (not yet available).",
+              )) as z.ZodType<
+          | "patent_pdf"
+          | "cafc"
+          | "ptab_appeal"
+          | "ptab_interference"
+          | "ptab_trial"
+          | "ptab_trial_docs"
+          | "usitc_attachment"
+          | "usitc_investigation"
+          | "ipa_bulk"
+        >,
         identifier: z
           .string()
           .min(1)
           .nullable()
           .default(null)
           .describe(
-            "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234') or the opinion's PDF URL; ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; ipa_bulk → CKAN release id.",
+            edis
+              ? "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234') or the opinion's PDF URL; ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; usitc_investigation → investigation number in EDIS format ('337-1234'); ipa_bulk → CKAN release id. Not used for usitc_attachment (uses document_id/attachment_id)."
+              : "Primary key for the source. patent_pdf → patent/publication number ('US10123456B2'); cafc → appeal number ('2023-1234') or the opinion's PDF URL; ptab_trial/ptab_trial_docs → AIA trial number ('IPR2024-00001'); ptab_appeal → application number ('16123456'); ptab_interference → interference number; ipa_bulk → CKAN release id.",
           ),
         document_id: z
           .number()
@@ -468,6 +502,17 @@ export function registerDocumentsFacade(
     async (input) => {
       if (input.source === "ipa_bulk")
         notPorted("IP Australia IP RAPID bulk downloads");
+      if (input.source === "usitc_attachment" && edis) {
+        if (input.document_id === null || input.attachment_id === null)
+          throw new Error(
+            "download_document(source='usitc_attachment') requires document_id and attachment_id.",
+          );
+        return downloadUsitcAttachment(
+          edis,
+          input.document_id,
+          input.attachment_id,
+        );
+      }
       if (!input.identifier)
         throw new Error(
           `download_document(source='${input.source}') requires identifier.`,
@@ -476,6 +521,19 @@ export function registerDocumentsFacade(
         return patentPdf(clients, input.identifier);
       if (input.source === "cafc")
         return downloadCafcPdf(clients.cafc, input.identifier);
+      if (input.source === "usitc_investigation" && edis)
+        return downloadUsitcInvestigation(edis, {
+          investigation_number: input.identifier,
+          item_ids: input.item_ids,
+          document_types: input.document_types,
+          after: input.after,
+          before: input.before,
+        });
+      if (
+        input.source === "usitc_attachment" ||
+        input.source === "usitc_investigation"
+      )
+        throw new Error(`Unknown download_document source '${input.source}'.`);
       return ptabDownload(clients, input.source, input.identifier, {
         item_ids: input.item_ids,
         after: input.after,

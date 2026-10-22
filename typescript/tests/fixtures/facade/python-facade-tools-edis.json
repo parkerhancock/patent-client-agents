@@ -1,0 +1,1767 @@
+[
+  {
+    "name": "classify_cpc",
+    "title": null,
+    "description": "Work with CPC (Cooperative Patent Classification) codes \u2014 search, look up, or map them.\n\nRoutes by ``mode``: 'search' finds candidate symbols by keyword (returns a\nranked list); 'lookup' returns one symbol's official title and hierarchy;\n'map' cross-references one symbol between CPC, IPC, and the US\nClassification System. Find a symbol with mode='search' first, then\nmode='lookup' to read it or mode='map' to translate it.\n\nRelated tools: get_fees.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "description": "What to do. 'search' = find candidate CPC symbols by keyword. 'lookup' = get the title/definition for one symbol you already have. 'map' = cross-reference one symbol between schemes (CPC/IPC/USCLS).",
+          "enum": ["search", "lookup", "map"],
+          "type": "string"
+        },
+        "query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='search': keyword(s) describing the technology area (e.g. 'machine learning', 'lithium battery thermal management')."
+        },
+        "symbol": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='lookup'/'map': the CPC classification symbol (e.g. 'H04L9/32', 'G06F1/00')."
+        },
+        "from_scheme": {
+          "default": "cpc",
+          "description": "mode='map': source scheme \u2014 'cpc', 'ipc', or 'uscls'.",
+          "type": "string"
+        },
+        "to_scheme": {
+          "default": "ipc",
+          "description": "mode='map': target scheme \u2014 'cpc', 'ipc', or 'uscls'.",
+          "type": "string"
+        },
+        "range_begin": {
+          "default": 1,
+          "description": "mode='search': start of result range (1-indexed).",
+          "type": "integer"
+        },
+        "range_end": {
+          "default": 10,
+          "description": "mode='search': end of result range.",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "mode='search': False (default) = lean stub per hit (symbol + title + parent). True = full upstream record (match percentage, title parts).",
+          "type": "boolean"
+        }
+      },
+      "required": ["mode"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "copyright",
+    "title": null,
+    "description": "Search U.S. Copyright Office registrations and recorded documents, or fetch one by id.\n\nRoutes by ``mode``: 'search' finds registrations and recorded documents\n(transfers, assignments, licenses) by keyword and returns lean stubs;\n'get' fetches the full record(s) for a Public Records id. Both return a\n``ListEnvelope``. Search first, then pass a hit's ``public_records_id`` to\nmode='get'.\n\nRelated tools: classify_cpc, get_fees.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "description": "What to do. 'search' = find U.S. Copyright Office registrations by keyword. 'get' = fetch one or more full records by Public Records id.",
+          "enum": ["search", "get"],
+          "type": "string"
+        },
+        "query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='search': a title, a claimant/author name, a registration number (e.g. 'TX 1234567'), or any keyword."
+        },
+        "public_records_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='get': the opaque Public Records id from a search hit's ``public_records_id`` field (NOT a registration number). Single id or a list for portfolio workflows. Examples: 'voyager_12345'."
+        },
+        "field": {
+          "default": "keyword",
+          "description": "mode='search': which field to search \u2014 'keyword' (default, all fields), 'title', or 'name' (claimant/author).",
+          "type": "string"
+        },
+        "page": {
+          "default": 1,
+          "description": "mode='search': page number (1-based).",
+          "type": "integer"
+        },
+        "page_size": {
+          "default": 10,
+          "description": "mode='search': results per page (default 10, max ~50).",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "mode='search': False (default) = lean stub per hit. True = full upstream record (every title/claimant/date/class, relevance score).",
+          "type": "boolean"
+        }
+      },
+      "required": ["mode"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "download_document",
+    "title": null,
+    "description": "Download a patent, court, PTAB, USITC, or bulk-register document by source.\n\nRoutes by ``source`` to the matching downloader. Return shape is uniform\nacross sources: single-file sources (patent_pdf, cafc, usitc_attachment,\nipa_bulk) return one ``ResourceLink`` / signed-URL record; bulk sources\n(the ptab_* and usitc_investigation) return ``ResourceLink``s plus a zip\nmanifest. ptab_trial caps at 50/decisions and 100/documents; usitc caps at\n25 attachments \u2014 narrow with item_ids / document_types / date range.\n\nRelated tools: search_bulk_data, search_ptab, search_cafc_opinions,\nget_patent.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "description": "Which document repository to download from. 'patent_pdf' = a patent/publication PDF (USPTO PPUBS \u2192 EPO OPS cascade). 'cafc' = a Federal Circuit opinion PDF. 'ptab_appeal'/'ptab_interference' = PTAB ex parte appeal / pre-AIA interference decisions. 'ptab_trial' = AIA trial board decisions; 'ptab_trial_docs' = AIA trial party filings. 'usitc_attachment' = one EDIS attachment; 'usitc_investigation' = all attachments for a 337 investigation. 'ipa_bulk' = resolve an IP Australia IP RAPID release to its URL.",
+          "enum": [
+            "patent_pdf",
+            "cafc",
+            "ptab_appeal",
+            "ptab_interference",
+            "ptab_trial",
+            "ptab_trial_docs",
+            "usitc_attachment",
+            "usitc_investigation",
+            "ipa_bulk"
+          ],
+          "type": "string"
+        },
+        "identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Primary key for the source. patent_pdf \u2192 patent/publication number ('US10123456B2'); cafc \u2192 appeal number ('2023-1234'); ptab_trial/ptab_trial_docs \u2192 AIA trial number ('IPR2024-00001'); ptab_appeal \u2192 application number ('16123456'); ptab_interference \u2192 interference number; usitc_investigation \u2192 investigation number ('337-TA-1234'); ipa_bulk \u2192 CKAN release id (from search_bulk_data mode='ipa_releases'). Not used for usitc_attachment (uses document_id/attachment_id)."
+        },
+        "document_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "usitc_attachment only: EDIS document id."
+        },
+        "attachment_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "usitc_attachment only: EDIS attachment id."
+        },
+        "dataset_id": {
+          "default": "iprapid",
+          "description": "ipa_bulk only: parent CKAN dataset id (defaults to 'iprapid').",
+          "type": "string"
+        },
+        "item_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ptab_* and usitc_investigation: specific document identifiers to fetch. None = all matching the other filters."
+        },
+        "document_types": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "usitc_investigation only: filter to these EDIS document types (e.g. ['Motion', 'Order']). Must match exactly."
+        },
+        "after": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ptab_* and usitc_investigation: only docs on/after this date (YYYY-MM-DD)."
+        },
+        "before": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ptab_* and usitc_investigation: only docs on/before this date (YYYY-MM-DD)."
+        }
+      },
+      "required": ["source"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_epo",
+    "title": null,
+    "description": "Fetch one structured EPO OPS or European Patent Register view.\n\nFamily intelligence and unitary status take one publication number; the\nother views also accept lists. Find identifiers with ``search_epo``;\nconvert number formats with ``resolve_patent_number``.\n\nRelated tools: search_epo, resolve_patent_number.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "view": {
+          "description": "Which EPO record to fetch for the patent. 'biblio' = bibliographic data (title, applicants, inventors, IPC/CPC, priority). 'family' = INPADOC family members (priority-linked publications across jurisdictions). 'family_intelligence' = source-separated family, backward-citation, legal-event, and EP Register evidence for one publication, without a family-wide legal-status conclusion. 'fulltext' = claims + description. 'legal_events' = legal-status timeline (filing, publication, grant, lapse). 'citations' = structured backward patent and non-patent citations. 'equivalents' = simple-family equivalent publications. 'register_biblio' = correction-aware European Patent Register bibliographic data for one or more EP publications. 'register_events' = European Patent Register dossier events. 'procedural_steps' = European Patent Register dossier chronology. 'unitary_status' = EPO Register Unitary Patent (UP) record (single EP number only).",
+          "enum": [
+            "biblio",
+            "citations",
+            "equivalents",
+            "family",
+            "family_intelligence",
+            "fulltext",
+            "legal_events",
+            "procedural_steps",
+            "register_biblio",
+            "register_events",
+            "unitary_status"
+          ],
+          "type": "string"
+        },
+        "identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "Patent document number, or a list for portfolio workflows. Examples: 'EP1234567A1', ['EP1234567A1', 'US10123456B2']. EPO OPS accepts country-prefixed publication numbers across all jurisdictions it indexes. NOTE: views 'family_intelligence' and 'unitary_status' take a single publication number. Pass the granted B1 when known for unitary_status."
+        }
+      },
+      "required": ["view", "identifier"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_fees",
+    "title": null,
+    "description": "Get patent, trademark, and design fees from the USPTO, EPO, and EUIPO.\n\nRoutes by ``mode``: 'schedule' returns one office's full published fee\nschedule; 'lookup' filters a schedule down to line items matching a\ncategory/tier/year; 'jurisdictions' lists every available (office, right)\nschedule so you know what to ask for. Discover with mode='jurisdictions'\nfirst, then mode='schedule' or mode='lookup'.\n\nRelated tools: classify_cpc.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "description": "What to do. 'schedule' = the full published fee schedule for one office. 'lookup' = filter a schedule down to matching line items. 'jurisdictions' = list which (office, right) schedules are available.",
+          "enum": ["schedule", "lookup", "jurisdictions"],
+          "type": "string"
+        },
+        "jurisdiction": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='schedule'/'lookup': office or jurisdiction \u2014 'USPTO', 'US', 'EPO', 'EUIPO', or 'EP'. Not used for mode='jurisdictions'."
+        },
+        "right": {
+          "default": "patent",
+          "description": "mode='schedule'/'lookup': which IP right's schedule \u2014 'patent' (default), 'trademark', or 'design'.",
+          "type": "string"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='lookup': filter to one fee category ('filing', 'search', 'examination', 'grant', 'renewal', 'maintenance', 'excess_claims', 'extension', 'appeal', 'petition', 'opposition'). None = every category."
+        },
+        "tier": {
+          "default": "large",
+          "description": "mode='lookup': entity-tier filter for offices with discounts (USPTO patents + designs). 'large' (default), 'small', or 'micro'. Ignored on schedules with no tier dimension.",
+          "type": "string"
+        },
+        "year": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='lookup': required when filtering renewal/maintenance fees (USPTO maintenance: 4, 8, 12; EPO renewals: 2-20; EUIPO design renewals: 5, 10, 15, 20; TM renewals: 10). None excludes renewal/maintenance rows."
+        },
+        "refresh": {
+          "default": false,
+          "description": "Force USPTO source revalidation for schedule/lookup.",
+          "type": "boolean"
+        }
+      },
+      "required": ["mode"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_file_history",
+    "title": null,
+    "description": "Work with a USPTO application's prosecution file history \u2014 list, read one, or bulk-download.\n\nReturn shape varies by mode. 'list' returns a ``ListEnvelope`` of document\ndescriptors. 'item' returns one signed PDF, XML, or DOCX download.\n'download' returns ``ResourceLink``s plus a zip manifest. Discover document\nids, codes, and available formats with mode='list' first.\n\nRelated tools: search_uspto, get_uspto.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "application_number": {
+          "description": "USPTO application number (8+ digits). Example: '16123456'.",
+          "type": "string"
+        },
+        "mode": {
+          "default": "list",
+          "description": "'list' (default) = enumerate file-history documents with codes and dates. 'item' = download one document in an exact format (needs document_identifier). 'download' = bulk-download matching PDFs.",
+          "enum": ["list", "item", "download"],
+          "type": "string"
+        },
+        "document_identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Required when mode='item'. A document_identifier from mode='list'."
+        },
+        "format": {
+          "default": "pdf",
+          "description": "mode='item' artifact format: 'pdf' (default), 'xml', or 'docx'. The item is returned without OCR or text extraction.",
+          "enum": ["pdf", "xml", "docx"],
+          "type": "string"
+        },
+        "item_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='download': specific document_identifier values. None = all documents matching the other filters."
+        },
+        "document_codes": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='download': filter to USPTO document codes (e.g. ['CTNF', 'NOA'])."
+        },
+        "after": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='download': include docs on/after this date (YYYY-MM-DD)."
+        },
+        "before": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='download': include docs on/before this date (YYYY-MM-DD)."
+        }
+      },
+      "required": ["application_number"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_legal_reference",
+    "title": null,
+    "description": "Fetch the full text of one legal-reference section by identifier.\n\nAlways returns a ``ListEnvelope`` (stable shape). Route by ``corpus``;\nthe identifier is a section number for examination manuals/guidelines or\na statute citation for statute corpora \u2014 discover it with\n``search_legal_reference``. For corpus='upc' or 'wipo_lex' use\n``get_upc_section`` / ``get_wipo_lex_legislation`` instead.\n\nRelated tools: search_legal_reference, get_upc_section, get_wipo_lex_legislation.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "corpus": {
+          "description": "Which legal-reference corpus the identifier belongs to (same enum as search_legal_reference). US: 'uspto_mpep', 'uspto_tmep'. EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines', 'epo_case_law', 'epc'. National: 'dpma', 'ukipo_mopp', 'india_statutes', 'india_mppp', 'tw_trade_secrets'. For 'upc' or 'wipo_lex' use get_upc_section / get_wipo_lex_legislation \u2014 their identifiers (instrument key / legislation id) differ.",
+          "enum": [
+            "uspto_mpep",
+            "uspto_tmep",
+            "epo_guidelines",
+            "epo_pct_guidelines",
+            "epo_up_guidelines",
+            "epo_case_law",
+            "epc",
+            "dpma",
+            "ukipo_mopp",
+            "india_statutes",
+            "india_mppp",
+            "tw_trade_secrets"
+          ],
+          "type": "string"
+        },
+        "identifier": {
+          "description": "Section number or statute citation, from a search_legal_reference hit. Examples: '2106' (MPEP), 'Article 54' (EPC), '\u00a7 4 PatG' (dpma), 'Section 3 Patents Act' (india_statutes).",
+          "type": "string"
+        },
+        "version": {
+          "default": "current",
+          "description": "MPEP installed release selector; other corpora support current only.",
+          "type": "string"
+        }
+      },
+      "required": ["corpus", "identifier"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_litigation",
+    "title": null,
+    "description": "Fetch one tribunal record by identifier \u2014 a PTAB record, USITC investigation, or UPC decision.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id\nor many). Find identifiers with ``search_litigation`` (PTAB/CAFC) or the\nstructured-filter search ``search_upc_decisions``. For child records of a\nPTAB trial use ``list_ptab_children``.\n\nRelated tools: search_litigation, list_ptab_children, search_upc_decisions.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "forum": {
+          "description": "Which tribunal the identifier names. 'ptab' = USPTO Patent Trial and Appeal Board record. 'usitc' = U.S. International Trade Commission Section 337 investigation. 'upc' = Unified Patent Court decision.",
+          "enum": ["ptab", "usitc", "upc"],
+          "type": "string"
+        },
+        "identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "The record identifier, or a list for portfolio workflows. By forum: ptab \u2192 trial number (e.g. 'IPR2024-00001') or a document identifier for non-proceeding ptab_type; usitc \u2192 investigation number in EDIS format (e.g. '337-1234', without the 'TA-' infix); upc \u2192 canonical case id (e.g. 'UPC_CFI_1747/2025', 'UPC_CoA_335/2023')."
+        },
+        "ptab_type": {
+          "default": "proceeding",
+          "description": "forum='ptab' only: what the identifier names. 'proceeding' takes a trial number; the others take a document identifier from search_litigation(forum='ptab').",
+          "enum": [
+            "proceeding",
+            "trial_decision",
+            "trial_document",
+            "appeal_decision",
+            "interference_decision"
+          ],
+          "type": "string"
+        }
+      },
+      "required": ["forum", "identifier"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_patent",
+    "title": "Get Patent (biblio / claims / family / figures / citations)",
+    "description": "Fetch one slice of a patent by view, using clean public sources only.\n\nRoutes by ``view`` and (for biblio) by jurisdiction: US \u2192 PPUBS, KR \u2192\nKIPRIS (when configured), other \u2192 EPO OPS. No Google Patents is touched.\n\nFind numbers with ``search_patents``; normalize with\n``resolve_patent_number``.\n\nRelated tools: search_patents, resolve_patent_number.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "view": {
+          "description": "Which slice of a patent to fetch. 'biblio' = bibliographic record (title, abstract, applicants, classifications, dates) \u2014 US via PPUBS, KR via KIPRIS, everything else via EPO OPS. 'claims' = structured claims (US ODP grant XML, EPO OPS full-text fallback). 'family' = patent family relationships via USPTO ODP. 'figures' = figure page images (PPUBS/EPO; callout bounding boxes are not available from clean sources). 'citations' = US examiner-cited prior-art references (true forward citations have no clean public source; non-US unavailable).",
+          "enum": ["biblio", "claims", "family", "figures", "citations"],
+          "type": "string"
+        },
+        "identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "Patent or publication number with country and kind code. Examples: 'US10123456B2', 'US20230012345A1', 'EP3456789A1', 'KR1020230012345'. view='biblio' accepts a list for portfolio fan-out; the other views take a single number."
+        }
+      },
+      "required": ["view", "identifier"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_trademark",
+    "title": null,
+    "description": "Fetch one or more USPTO trademarks by serial or registration number.\n\nAlways returns a ``ListEnvelope`` (stable shape for one id or many). For\nthe full register record use view='record' (TESS); for current status,\nprosecution documents, or last-update timestamps use the TSDR views\n(status/documents/last_update). Find identifiers with ``search_trademarks``.\n\nRelated tools: search_trademarks, search_trademark_assignments.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "USPTO trademark serial number (8 digits, e.g. '97123456') or registration number (6-7 digits, e.g. '1234567'). Pass a list for portfolio workflows; the response shape stays a ListEnvelope. view='documents' accepts a single serial number only."
+        },
+        "view": {
+          "default": "record",
+          "description": "Which facet to fetch. 'record' (default) = full TESS register record (wordmark, owner, goods/services, dates). 'status' = current TSDR status. 'documents' = TSDR prosecution documents (single serial). 'last_update' = TSDR last-modified timestamp.",
+          "enum": ["record", "status", "documents", "last_update"],
+          "type": "string"
+        }
+      },
+      "required": ["identifier"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_upc_section",
+    "title": null,
+    "description": "Fetch the full plain text of one or more Unified Patent Court (UPC) legal instruments.\n\nNote: section-level (per-Article, per-Rule) retrieval is not yet\navailable \u2014 this returns the entire instrument text. Pair with\n``search_upc_statutes`` to locate a specific provision and quote the\nsnippet. Accepts either a single instrument key or a list (\u00a75.4); the\nresponse is always a ListEnvelope so the shape is stable. Bounded\nconcurrent fan-out internally; order matches the input.\n\nRelated tools: search_upc_statutes, list_upc_instruments.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "instrument": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "Instrument key, or a list for portfolio reads. One of 'upca', 'rop', 'fees', 'coc' (or 'statute' as an alias for the UPCA Annex I portion). Examples: 'upca', ['upca', 'rop']."
+        },
+        "language": {
+          "default": "en",
+          "description": "ISO 639-1: 'en' (default), 'fr', or 'de'.",
+          "type": "string"
+        }
+      },
+      "required": ["instrument"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_uspto",
+    "title": null,
+    "description": "Fetch one USPTO record by identifier \u2014 application, publication, petition, office action, or assignment.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id\nor many). For status/dates use dataset='application'; for claim/spec\ntext use dataset='publication'. Find identifiers with ``search_uspto``\n(or ``search_office_actions`` / ``search_patent_assignments``).\n\nRelated tools: search_uspto, get_file_history.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "dataset": {
+          "description": "What kind of record the identifier names. 'application' = ODP application metadata. 'publication' = PPUBS patent text. 'petition' = petition decision record. 'office_action' = office-action document. 'assignment' = recorded assignments for an application.",
+          "enum": [
+            "application",
+            "publication",
+            "petition",
+            "office_action",
+            "assignment"
+          ],
+          "type": "string"
+        },
+        "identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "The record identifier, or a list for portfolio workflows. By dataset: application/assignment \u2192 application number (8+ digits, e.g. '16123456'); publication \u2192 publication or patent number (e.g. 'US20230012345A1', 'US10123456B2'); petition \u2192 petition record id (from search); office_action \u2192 office-action document id (from search_office_actions)."
+        }
+      },
+      "required": ["dataset", "identifier"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "get_wipo_lex_legislation",
+    "title": null,
+    "description": "Get one or more WIPO Lex (global IP legislation database) entries by ID.\n\nReturns title, jurisdiction, summary line (year, assent date, type,\nsubjects), canonical URL, and the list of downloadable PDF/DOC\nattachments per entry. Accepts either a single ID or a list (\u00a75.4);\nthe response is always a ListEnvelope so the shape is stable.\nBounded concurrent fan-out internally; order matches the input.\n\nRelated tools: search_wipo_lex_legislation.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "legislation_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "WIPO Lex internal ID, or a list of IDs for portfolio workflows. Examples: '23293' (Canadian Patent Act), ['23293', '23437']."
+        }
+      },
+      "required": ["legislation_id"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "list_ptab_children",
+    "title": null,
+    "description": "List Patent Trial and Appeal Board (PTAB) children \u2014 decisions or documents attached to a parent record.\n\nThe parent can be an AIA trial number, a USPTO application number (for\nex parte appeals), or a pre-AIA interference number. For trials, pass\n``include='both'`` to enumerate decisions and party filings in one\ncall. Use the document identifiers to fetch full records via\n``get_ptab`` or PDFs via the ``download_ptab_*`` family.\n\nRelated tools: search_ptab, get_ptab, download_ptab_trial_documents,\ndownload_ptab_trial_decisions, download_ptab_appeal_decisions,\ndownload_ptab_interference_decisions.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_type": {
+          "description": "What the ``parent_identifier`` refers to. 'trial' \u2014 an AIA trial number (e.g. 'IPR2024-00001'); lists decisions and/or documents. 'application' \u2014 a USPTO application number; lists ex parte appeal decisions for it. 'interference' \u2014 an interference number; lists decisions.",
+          "type": "string"
+        },
+        "parent_identifier": {
+          "description": "Trial number, application number, or interference number",
+          "type": "string"
+        },
+        "include": {
+          "default": "decisions",
+          "description": "For parent_type='trial' only: 'decisions' (default), 'documents', or 'both'. Appeals and interferences only return decisions.",
+          "type": "string"
+        }
+      },
+      "required": ["parent_type", "parent_identifier"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "list_usitc_attachments",
+    "title": null,
+    "description": "List attachments for a U.S. International Trade Commission (USITC) EDIS document.\n\nEDIS (Electronic Document Information System) groups one or more\nattachments under each document record. Use\n``download_usitc_attachment`` to fetch a specific attachment as a PDF.\n\nRelated tools: search_usitc_documents, download_usitc_attachment,\ndownload_usitc_investigation_documents.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "document_id": {
+          "description": "EDIS document ID to list attachments for.",
+          "type": "integer"
+        }
+      },
+      "required": ["document_id"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "patent_client_status",
+    "title": "Patent Client Status",
+    "description": "Report package version and which env-gated connector families are configured.\n\nNo network calls \u2014 reports the installed ``patent-client-agents`` version\nand, per connector family, whether its required environment variables are\npresent. The USPTO/EPO clean sources and bundled SQLite corpora are the\nalways-available backbone; KR (KIPRIS) search/retrieval activates only when\n``KIPO_KIPRIS_API_KEY`` is configured.\n\nRelated tools: search_patents, get_patent.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {},
+      "type": "object"
+    }
+  },
+  {
+    "name": "resolve_patent_number",
+    "title": "Resolve / Convert Patent Number",
+    "description": "Normalize or convert a patent number, or show EPO search syntax.\n\n'resolve' confirms a publication number against PPUBS and returns its\ncanonical form. 'convert_epo' translates between EPO normalization formats.\n'cql_help' returns the EPO CQL field codes and operators for building EPO\nqueries. All three return a \u00a75.9 ``ResponseEnvelope``.\n\nRelated tools: search_patents, get_patent.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "default": "resolve",
+          "description": "What to do. 'resolve' = normalize a publication number to canonical form and confirm it exists in USPTO Public Search (PPUBS). 'convert_epo' = convert a number between EPO formats (original \u2194 docdb \u2194 epodoc). 'cql_help' = show the EPO CQL search syntax accepted by EPO search (no identifier needed).",
+          "enum": ["resolve", "convert_epo", "cql_help"],
+          "type": "string"
+        },
+        "number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The number to act on. Required for 'resolve' and 'convert_epo'; ignored for 'cql_help'. resolve: 'US20230012345A1', '10123456', etc. convert_epo: 'EP1234567A1', 'EP.1234567.A1', 'EP1234567'."
+        },
+        "input_format": {
+          "default": "original",
+          "description": "convert_epo only: input format \u2014 'original', 'docdb', or 'epodoc'.",
+          "type": "string"
+        },
+        "output_format": {
+          "default": "docdb",
+          "description": "convert_epo only: output format \u2014 'docdb' or 'epodoc'.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_bulk_data",
+    "title": null,
+    "description": "Browse bulk IP data catalogs \u2014 USPTO bulk products or IP Australia register releases.\n\nRoutes by ``mode``. 'datasets' searches the USPTO bulk product catalog;\n'dataset' fetches one product's file listing (each file carries a\nready-to-use download URL when the download proxy is configured \u2014 fetch it\ndirectly, no API key needed); 'ipa_releases' enumerates downloadable IP\nAustralia IP RAPID register snapshots. Resolve a listed release to a\ndownload URL with ``download_document`` (source='ipa_bulk').\n\nRelated tools: download_document.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "description": "Which bulk catalog to hit. 'datasets' = search the USPTO bulk data product catalog by keyword. 'dataset' = fetch one USPTO bulk product's details and file listing by product id. 'ipa_releases' = list IP Australia IP RAPID (Australian bulk register) releases on data.gov.au.",
+          "enum": ["datasets", "dataset", "ipa_releases"],
+          "type": "string"
+        },
+        "query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='datasets': keyword query over USPTO bulk product names. Required for that mode; ignored otherwise."
+        },
+        "product_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "mode='dataset': USPTO bulk data product identifier (from mode='datasets'). Required for that mode; ignored otherwise."
+        },
+        "dataset_id": {
+          "default": "iprapid",
+          "description": "mode='ipa_releases': data.gov.au CKAN dataset id. Defaults to 'iprapid' (the weekly snapshot). Ignored for the USPTO modes.",
+          "type": "string"
+        },
+        "latest_only": {
+          "default": false,
+          "description": "mode='dataset': return only the most recent file in the product (default False returns the full listing \u2014 some products have hundreds). Ignored for the other modes.",
+          "type": "boolean"
+        }
+      },
+      "required": ["mode"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_cafc_patent_opinions",
+    "title": null,
+    "description": "Search U.S. Court of Appeals for the Federal Circuit opinions from patent-relevant origins.\n\nFilters to opinions whose origin is PTO, DCT, ITC, or CFC \u2014 the four\npaths that bring patent cases to the Federal Circuit. Optional date\nrange narrows the window; date_to requires date_from, and reversed\nbounds are rejected. Origins include non-patent cases as well.\nContinue with next_cursor and the same dates; cursors are offsets, not\nsnapshots. Returns lean stubs by default; pass\n``full=True`` for the upstream row shape. Use ``download_cafc_pdf``\nwith an appeal number to pull a specific opinion PDF.\n\nRelated tools: search_cafc_opinions, download_cafc_pdf.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "date_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Start date (YYYY-MM-DD) to filter opinions"
+        },
+        "date_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "End date (YYYY-MM-DD) to filter opinions"
+        },
+        "max_results": {
+          "default": 25,
+          "description": "Maximum source rows per page (1-100)",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "When False (the default), each hit is a lean stub: appeal number, short case name, release date, origin, document type, precedential status, patent classification, PDF URL. When True, each hit carries the full CAFCOpinion record.",
+          "type": "boolean"
+        },
+        "offset": {
+          "default": 0,
+          "description": "Offset into the upstream filtered index",
+          "type": "integer"
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Continuation from the previous page; overrides offset and page size"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_epo",
+    "title": null,
+    "description": "Search worldwide patents (US, EP, WO, JP, CN, KR, and more) via EPO Open Patent Services.\n\nReturns a ListEnvelope of publication or family hits ranked by EPO's\nCQL search service. The lean default surfaces just the identifiers an\nagent needs to follow up with ``get_epo_biblio`` (bibliography),\n``get_epo_fulltext`` (claims + description), ``get_epo_family``\n(INPADOC family), ``get_epo_legal_events`` (status timeline), or\n``convert_epo_number`` (format conversion). Pass ``group_by='family'``\nto deduplicate across priority-linked publications.\n\nPagination uses EPO's ``range_begin``/``range_end`` window (1-indexed,\ninclusive). When ``total > shown + (range_begin - 1)`` the envelope\nsets ``more_available=True`` and returns an opaque ``next_cursor`` \u2014\npass it back unchanged for the next page.\n\nRelated tools: get_epo_cql_help, get_epo_biblio, get_epo_fulltext,\nget_epo_family, get_epo_legal_events, convert_epo_number.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "cql_query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "CQL (Common Query Language) query string. Common examples: 'ta=CRISPR and pa=Broad Institute' (title/abstract + applicant), 'in=Nakamura and ic=H01L' (inventor + IPC class), 'pn=EP1234567' (publication number lookup). Call ``get_epo_cql_help`` for the full field reference."
+        },
+        "query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Compatibility alias for cql_query. Use cql_query for new callers."
+        },
+        "group_by": {
+          "default": "publication",
+          "description": "Result grouping: 'publication' (one row per publication, default) or 'family' (one row per patent family \u2014 de-duplicates across jurisdictions).",
+          "type": "string"
+        },
+        "range_begin": {
+          "default": 1,
+          "description": "Start of result range (1-indexed).",
+          "type": "integer"
+        },
+        "range_end": {
+          "default": 25,
+          "description": "End of result range.",
+          "type": "integer"
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Opaque cursor from a previous response's ``next_cursor``. Overrides ``range_begin``/``range_end`` when present."
+        },
+        "full": {
+          "default": false,
+          "description": "When False (default), each hit is a lean stub: publication number, application number, publication date, country, kind, family id. When True, hits carry the full upstream ``SearchResult`` shape. For deep bibliographic data on one publication, prefer ``get_epo_biblio``.",
+          "type": "boolean"
+        },
+        "jurisdiction": {
+          "anyOf": [
+            {
+              "enum": ["CN", "DE", "KR"],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional national publication filter. CN searches Chinese publications, DE searches German publications, and KR searches Korean publications. The filter is combined with cql_query and reuses the existing EPO fetch tools."
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_legal_reference",
+    "title": null,
+    "description": "Search a legal-reference corpus \u2014 statutes, examination manuals, or guidelines.\n\nRoutes to one of 12 bundled substantive-law corpora by ``corpus`` and\nreturns relevance-ranked snippet hits. Find a provision, then call\n``get_legal_reference`` with the same ``corpus`` and the hit's\nsection/citation identifier for the full text. The ``statute`` filter\napplies only to corpus='dpma' and 'india_statutes'. For corpus='upc' or\n'wipo_lex' use ``search_upc_statutes`` / ``search_wipo_lex_legislation``.\n\nRelated tools: get_legal_reference, search_upc_statutes, search_wipo_lex_legislation.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "corpus": {
+          "description": "Which legal-reference corpus to search. US: 'uspto_mpep' (patent examiner manual), 'uspto_tmep' (trademark examiner manual). EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines' (unitary patent), 'epo_case_law' (Boards of Appeal), 'epc' (the Convention). National statutes/manuals: 'dpma' (Germany), 'ukipo_mopp' (UK), 'india_statutes', 'india_mppp' (India patent practice), 'tw_trade_secrets' (Taiwan). For UPC or WIPO Lex law use the dedicated search_upc_statutes / search_wipo_lex_legislation.",
+          "enum": [
+            "uspto_mpep",
+            "uspto_tmep",
+            "epo_guidelines",
+            "epo_pct_guidelines",
+            "epo_up_guidelines",
+            "epo_case_law",
+            "epc",
+            "dpma",
+            "ukipo_mopp",
+            "india_statutes",
+            "india_mppp",
+            "tw_trade_secrets"
+          ],
+          "type": "string"
+        },
+        "query": {
+          "description": "Search query. Examples: 'subject matter eligibility', 'inventive step', 'restriction requirement'. Default treats terms as a phrase (or all-terms for statute corpora); set syntax to widen.",
+          "type": "string"
+        },
+        "limit": {
+          "default": 25,
+          "description": "Maximum hits to return (1-100).",
+          "type": "integer"
+        },
+        "offset": {
+          "default": 0,
+          "description": "Result offset for pagination.",
+          "type": "integer"
+        },
+        "syntax": {
+          "default": "adj",
+          "description": "Query syntax: 'adj' (phrase), 'and' (all terms), 'or' (any term), 'exact'. Per-corpus default differs (manuals='adj', statutes='and').",
+          "type": "string"
+        },
+        "sort": {
+          "default": "relevance",
+          "description": "'relevance' (BM25, default) or 'outline' (section/citation order).",
+          "type": "string"
+        },
+        "statute": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Act filter \u2014 corpus='dpma': 'PatG'/'MarkenG'/'GebrMG'/'DesignG'/'UrhG'/'GeschGehG'; corpus='india_statutes': 'Patents Act'/'Patent Rules'/'Designs Act'/'Trade Marks Act'/'Copyright Act'. Ignored for other corpora. Omit to search across all Acts."
+        },
+        "full": {
+          "default": false,
+          "description": "False (default) = lean stub per hit. True = full upstream row.",
+          "type": "boolean"
+        },
+        "version": {
+          "default": "current",
+          "description": "MPEP installed release selector; other corpora support current only.",
+          "type": "string"
+        }
+      },
+      "required": ["corpus", "query"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_litigation",
+    "title": null,
+    "description": "Search a patent tribunal's records by free text \u2014 PTAB proceedings/decisions or Federal Circuit opinions.\n\nRoutes to the right tribunal by ``forum``. Only the two free-text\nsearches fold here; for UPC decisions or Federal Circuit\npatent-opinions-by-date use the dedicated ``search_upc_decisions`` /\n``search_cafc_patent_opinions``. For one record by identifier use\n``get_litigation``.\n\nRelated tools: get_litigation, search_upc_decisions,\nsearch_cafc_patent_opinions.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "forum": {
+          "description": "Which tribunal's free-text index to search. 'ptab' = USPTO Patent Trial and Appeal Board records (AIA trials, ex parte appeals, pre-AIA interferences). 'cafc' = U.S. Court of Appeals for the Federal Circuit opinions and orders. For UPC decisions or CAFC patent-only-by-date use the dedicated structured-filter tools.",
+          "enum": ["ptab", "cafc"],
+          "type": "string"
+        },
+        "query": {
+          "description": "Free-text search query.",
+          "type": "string"
+        },
+        "limit": {
+          "default": 25,
+          "description": "Maximum source rows per page (CAFC: 1-100).",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "False (default) = lean stub per hit (small). True = full record per hit (large; prefer get_litigation for a single record).",
+          "type": "boolean"
+        },
+        "ptab_type": {
+          "default": "proceeding",
+          "description": "forum='ptab' only: which PTAB record kind to search. 'proceeding' = AIA trials (IPR/PGR/CBM/DER); 'trial_decision'/'trial_document' = filings in those trials; 'appeal_decision' = ex parte appeals; 'interference_decision' = pre-AIA interferences.",
+          "enum": [
+            "proceeding",
+            "trial_decision",
+            "trial_document",
+            "appeal_decision",
+            "interference_decision"
+          ],
+          "type": "string"
+        },
+        "patent_only": {
+          "default": false,
+          "description": "forum='cafc' only: case-name heuristic; can miss patent cases.",
+          "type": "boolean"
+        },
+        "offset": {
+          "default": 0,
+          "description": "Number of source records to skip (PTAB or CAFC).",
+          "type": "integer"
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Continuation from the previous response; overrides offset and limit. Keep forum, query, ptab_type, and patent_only unchanged."
+        }
+      },
+      "required": ["forum", "query"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_office_actions",
+    "title": null,
+    "description": "Search USPTO office-action data (rejections, citations, text, or enriched citations).\n\nAll four result types share the same Lucene ``criteria`` surface but\naccept different field names \u2014 see the ``criteria`` description for\nthe valid fields per type. Returns lean stubs by default; pass\n``full=True`` for the full Solr record per hit.\n\nFor a single office action's full text by document identifier, use\n``get_office_action`` instead.\n\nRelated tools: get_office_action, search_applications, list_file_history,\nget_application.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "criteria": {
+          "description": "Lucene query. Valid fields depend on result_type:   rejections \u2192 patentApplicationNumber, hasRej101, hasRej102, hasRej103, hasRej112, hasRejDP, legalSectionCode, nationalClass, groupArtUnitNumber, submissionDate, aliceIndicator, allowedClaimIndicator.   citations \u2192 patentApplicationNumber, referenceIdentifier, parsedReferenceIdentifier, legalSectionCode, examinerCitedReferenceIndicator, applicantCitedExaminerReferenceIndicator, groupArtUnitNumber, techCenter.   text \u2192 patentApplicationNumber, inventionTitle, submissionDate, legacyDocumentCodeIdentifier (CTNF/CTFR/NOA/\u2026), groupArtUnitNumber, patentNumber, applicationTypeCategory.   enriched_citations \u2192 patentApplicationNumber, citedDocumentIdentifier, publicationNumber, inventorNameText, countryCode, kindCode, officeActionCategory, citationCategoryCode, officeActionDate, examinerCitedReferenceIndicator, nplIndicator, groupArtUnitNumber.",
+          "type": "string"
+        },
+        "result_type": {
+          "default": "rejections",
+          "description": "What to search: 'rejections' (per-claim rejection records with 101/102/103/112/DP indicators plus Alice/Bilski/Mayo/Myriad flags), 'citations' (prior-art references cited with examiner/applicant indicators), 'text' (full office-action body text with structured sections), or 'enriched_citations' (citations with inventor names, country/kind codes, and passage locations).",
+          "type": "string"
+        },
+        "start": {
+          "default": 0,
+          "description": "Result offset for pagination",
+          "type": "integer"
+        },
+        "rows": {
+          "default": 25,
+          "description": "Maximum results to return (max 100)",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "When False (the default), each hit is a lean stub (~8 scalars: identifier, application number, document code, mail date, rejection types or reference id, art unit, etc.). When True, each hit is the full Solr record \u2014 for 'text', this includes the full bodyText and structured sections (large).",
+          "type": "boolean"
+        }
+      },
+      "required": ["criteria"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_patent_assignments",
+    "title": null,
+    "description": "Search USPTO patent assignment recordations by assignee, assignor, conveyance, or patent identifier.\n\nReturns recordations with reel/frame, conveyance type, assignors,\nassignees, correspondent, and affected properties. Lean by default\n(\u00a75.5); use ``full=True`` for the upstream record per hit. To pull\nassignments for a specific application, use ``get_patent_assignment``;\nfor the underlying prosecution context, use ``get_application`` or\n``get_patent``.\n\nRelated tools: get_patent_assignment, get_application, get_patent.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "query": {
+          "description": "Value to search for (e.g. 'Apple Inc', '16136935', '52614/446').",
+          "type": "string"
+        },
+        "by": {
+          "description": "What kind of value `query` is. One of: assignee, assignor, correspondent, application_number, patent_number, publication_number, reel_frame, international_registration_number, pct_number.",
+          "type": "string"
+        },
+        "exact": {
+          "default": false,
+          "description": "True for exact match, False (default) for contains match. Ignored for number axes, where USPTO accepts either.",
+          "type": "boolean"
+        },
+        "executed_after": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Narrow to recordations whose assignor execution date is on or after this date (YYYY-MM-DD). Without ``executed_before`` the range runs through today. Note: only assignor execution date is honored by USPTO; recordation, mail, and receipt date filters are ignored."
+        },
+        "executed_before": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Narrow to recordations whose assignor execution date is on or before this date (YYYY-MM-DD). Without ``executed_after`` the range starts at 1980-01-01, the start of USPTO's assignment records."
+        },
+        "conveyance": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Contains-match against conveyance text (e.g. 'ASSIGNMENT', 'SECURITY', 'CHANGE OF NAME')."
+        },
+        "offset": {
+          "default": 0,
+          "description": "Number of records to skip from the start of the result set.",
+          "type": "integer"
+        },
+        "limit": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Maximum records to return. None (default) fetches everything matching, capped at USPTO's ~10,000 for very-broad queries."
+        },
+        "full": {
+          "default": false,
+          "description": "When False (the default), each hit is a lean stub: reel/frame, conveyance, first assignor, first assignee, execution date, number of properties, plus the lead property's application/patent/publication number. When True, every hit is the full Assignment Center record (all assignors, correspondent, etc.). Note: USPTO's July 2026 Assignment Center update stopped returning per-hit properties from search, so the property-derived fields are currently always null/empty.",
+          "type": "boolean"
+        }
+      },
+      "required": ["query", "by"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_patents",
+    "title": "Search Patents (US / EP / WO / KR)",
+    "description": "Search patents by jurisdiction using clean public sources (no Google).\n\nRoutes to the right official source by ``jurisdiction``:\nUS \u2192 USPTO PPUBS full text; EP/WO \u2192 EPO OPS CQL; KR \u2192 KIPRIS.\nReturns a \u00a75.9 ``ListEnvelope`` of hits (lean stubs by default).\n\nFull-text search of CN and JP body text has no clean public source. To\nlook at a known CN/JP publication, pass its number to ``get_patent``.\n\nRelated tools: get_patent, resolve_patent_number.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "query": {
+          "description": "Search query. For US (jurisdiction='us') this is PPUBS full-text syntax (Boolean + field codes like CLM/SPEC/AB/TTL). For EP/WO (jurisdiction='ep_wo') this is EPO CQL (e.g. 'ta=CRISPR and pa=Broad'). For KR (jurisdiction='kr') this is KIPRIS free text.",
+          "type": "string"
+        },
+        "jurisdiction": {
+          "default": "us",
+          "description": "Which clean source to search. 'us' = USPTO Public Search (PPUBS) full text (claims + specification + abstract). 'ep_wo' = EPO OPS worldwide CQL search (best for EP/WO; biblio across many offices). 'kr' = KIPO KIPRIS (requires the deployment to carry a KIPRIS key). Note: CN and JP full-text search have no clean public source \u2014 retrieve a known CN/JP number via get_patent instead.",
+          "enum": ["us", "ep_wo", "kr"],
+          "type": "string"
+        },
+        "limit": {
+          "default": 20,
+          "description": "Maximum results to return (1-20 for US PPUBS).",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "False (default) = lean stub per hit. True = full upstream row (large; prefer get_patent for one record).",
+          "type": "boolean"
+        }
+      },
+      "required": ["query"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_trademark_assignments",
+    "title": null,
+    "description": "Search USPTO trademark assignment recordations by assignee, assignor, or mark identifier.\n\nReturns recordations with reel/frame, assignors, assignees, and\naffected trademark properties. Lean by default (\u00a75.5); use\n``full=True`` for the upstream record per hit. No auth required.\nFor the underlying register data, use ``get_trademark`` (full record)\nor ``get_trademark_status`` (current TSDR status).\n\nRelated tools: get_trademark, get_trademark_status, search_trademarks.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "query": {
+          "description": "Value to search for (e.g. 'Apple Inc', '97123456', '9006/0093').",
+          "type": "string"
+        },
+        "by": {
+          "description": "What kind of value `query` is. One of: assignee, assignor, serial_number, registration_number, reel_frame.",
+          "type": "string"
+        },
+        "limit": {
+          "default": 100,
+          "description": "Maximum records to return per request (max 1000).",
+          "type": "integer"
+        },
+        "start_row": {
+          "default": 1,
+          "description": "1-based starting row for pagination.",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "When False (the default), each hit is a lean stub: reel/frame, first assignor, first assignee, execution date, number of properties, plus the lead property's serial/registration number and mark text. When True, every hit is the full Trademark Assignment Center record (all properties, all assignors, correspondent, domestic representative, etc.).",
+          "type": "boolean"
+        }
+      },
+      "required": ["query", "by"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_trademarks",
+    "title": null,
+    "description": "Search USPTO trademarks by wordmark, owner, or goods/services (TESS).\n\nReturns lean stubs by default. Use ``get_trademark`` for a full record or\ncurrent status by serial/registration number. For assignment recordations\n(reel/frame, assignor/assignee chains) use ``search_trademark_assignments``.\n\nRelated tools: get_trademark, search_trademark_assignments.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "query": {
+          "description": "Search query \u2014 a wordmark, owner name, or goods/services description.",
+          "type": "string"
+        },
+        "search_by": {
+          "default": "wordmark",
+          "description": "Which field to search. 'wordmark' (default) \u2014 trademark text; 'owner' \u2014 registrant name; 'goods_services' \u2014 goods/services description.",
+          "enum": ["wordmark", "owner", "goods_services"],
+          "type": "string"
+        },
+        "paginate_all": {
+          "default": false,
+          "description": "When true, auto-paginates through all matching results (wordmark/owner only). Ignored for goods_services.",
+          "type": "boolean"
+        },
+        "max_results": {
+          "default": 500,
+          "description": "Cap on total results when paginate_all=True.",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "False (default) = lean stub per hit (serial, wordmark, owner, status, dates, registration number). True = full TESS record per hit (large; prefer get_trademark for one).",
+          "type": "boolean"
+        }
+      },
+      "required": ["query"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_upc_decisions",
+    "title": null,
+    "description": "Search Unified Patent Court (UPC) decisions and orders by court, division, or language.\n\nReturns a page of decisions with canonical case IDs (``UPC_CFI_<n>/<yyyy>``,\n``UPC_CoA_<n>/<yyyy>``, or ``ACT_<n>/<yyyy>``), court, type of action,\nparties, and direct URLs to the PDF/A document(s). Lean stubs by default;\npass ``full=True`` for the upstream-shaped row. Pagination via the\n``page`` arg; ``more_available`` reflects ``total_pages`` from the pager.\n\nRelated tools: get_upc_decision, list_upc_divisions, list_upc_languages,\nsearch_upc_statutes.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "default": 0,
+          "description": "0-indexed page number, default 0 (most recent)",
+          "type": "integer"
+        },
+        "judgement_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Filter to 'order' or 'decision'; omit for both"
+        },
+        "court_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Court-type ID: '1' = Court of Appeal, '2' = Central CFI, '3' = Local CFI, '4' = Regional CFI. Omit for all."
+        },
+        "division": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Specific division ID \u2014 use list_upc_divisions to discover."
+        },
+        "proceedings_lang": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Procedural-language ID \u2014 use list_upc_languages to discover."
+        },
+        "full": {
+          "default": false,
+          "description": "When False (default), each hit is a lean stub: case_id, court, type_of_action, parties, detail_url, primary_pdf_url. When True, every hit carries the upstream row (with full pdf_urls list and raw_references) \u2014 prefer ``get_upc_decision`` for one record.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_upc_statutes",
+    "title": null,
+    "description": "Search the Unified Patent Court (UPC) statutes corpus (UPCA, RoP, Fees, CoC).\n\nReturns ranked snippets with ``<mark>...</mark>`` highlights around\nmatched terms. Use this for citation lookups like ``\"Article 33\"``\nor topical searches like ``\"opt-out withdrawal\"``. Once you've\nlocated a provision, call ``get_upc_section`` to fetch the full\ninstrument text.\n\nRelated tools: get_upc_section, list_upc_instruments.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "query": {
+          "description": "Search query against the UPC statutes corpus.",
+          "type": "string"
+        },
+        "instrument": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional instrument key \u2014 'upca', 'rop', 'fees', or 'coc'. Use 'statute' as an alias for the UPCA Annex I portion. Omit to search across all instruments."
+        },
+        "language": {
+          "default": "en",
+          "description": "ISO 639-1: 'en' (default), 'fr', or 'de'.",
+          "type": "string"
+        },
+        "per_page": {
+          "default": 10,
+          "description": "Hits per page, 1..100.",
+          "type": "integer"
+        },
+        "page": {
+          "default": 1,
+          "description": "1-indexed page number.",
+          "type": "integer"
+        }
+      },
+      "required": ["query"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_usitc_documents",
+    "title": null,
+    "description": "Search U.S. International Trade Commission (USITC) EDIS documents.\n\nReturns documents from the Electronic Document Information System\n(EDIS): ID, type, title, security level, filing party, date, firm,\nand investigation context. Use ``investigation_number`` to scope to\na specific investigation. Up to 100 results per page; check\n``more_available`` and increment ``page_number`` to paginate.\n\nWhen ``date_from`` or ``date_to`` is set, the server fetches all\nmatching documents from EDIS (up to 3000) and filters by\n``document_date``, then returns the requested page of filtered\nresults.\n\nRelated tools: search_usitc_investigations, list_usitc_attachments,\ndownload_usitc_attachment, download_usitc_investigation_documents.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "investigation_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Investigation number in EDIS format (e.g. '337-1234'). Partial numbers allowed."
+        },
+        "investigation_phase": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Phase filter (e.g. 'Violation', 'Final', 'Review2')."
+        },
+        "document_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Document type (e.g. 'Motion', 'Order', 'Notice', 'Brief Filed With ALJ'). Must match exactly \u2014 partial matches not allowed."
+        },
+        "firm_org": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Firm/organization name. Each word is treated as an OR search."
+        },
+        "security_level": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Security level filter: 'Public', 'Confidential', or 'Limited'."
+        },
+        "date_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Filter documents on or after this date (YYYY-MM-DD). Triggers server-side pagination through all results."
+        },
+        "date_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Filter documents on or before this date (YYYY-MM-DD). Triggers server-side pagination through all results."
+        },
+        "page_number": {
+          "default": 1,
+          "description": "Page number (100 results per page). If ``more_available`` is true, increment to get the next page.",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "When False (default), each hit is a lean stub. When True, every hit carries the full EDIS document record.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_usitc_investigations",
+    "title": null,
+    "description": "Search U.S. International Trade Commission (USITC) Section 337 investigations via EDIS.\n\nEDIS is the USITC Electronic Document Information System. Filter by\ninvestigation number (path lookup), phase, type, or status. Lean\nstubs by default; pass ``full=True`` for the upstream record.\n\nRelated tools: get_usitc_investigation, list_usitc_attachments,\nsearch_usitc_documents, download_usitc_investigation_documents.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "investigation_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Investigation number in EDIS format (e.g. '337-1234'). Used as a path segment per EDIS API \u2014 pass without the 'TA-' infix."
+        },
+        "phase": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Phase filter (e.g. 'Violation', 'Preliminary', 'Final', 'Review2')."
+        },
+        "investigation_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Type filter (e.g. 'Sec 337', 'Import Injury', 'Industry and Economic Analysis', 'Tariff Affairs & Trade Agreements')."
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Status filter: 'PreInstitution', 'Active', 'Inactive', or 'Cancelled'."
+        },
+        "full": {
+          "default": false,
+          "description": "When False (default), each hit is a lean stub (investigation number, title, status, phase, type, docket number). When True, every hit carries the full EDIS investigation record \u2014 prefer ``get_usitc_investigation`` for one record.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_uspto",
+    "title": null,
+    "description": "Search USPTO records \u2014 application metadata, full-text publications, or petition decisions.\n\nRoutes to the right USPTO index by ``dataset``. NOTE: 'applications'\nsearches metadata only; for claim/specification text use\n'publications'. For one record by identifier use ``get_uspto``; for\nprosecution documents use ``get_file_history``; for office actions or\nassignments use the dedicated ``search_office_actions`` /\n``search_patent_assignments``.\n\nRelated tools: get_uspto, get_file_history, search_office_actions, search_patent_assignments.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "dataset": {
+          "description": "Which USPTO index to search. 'applications' = ODP application metadata (title, CPC, dates, status \u2014 NOT claim/spec text). 'publications' = Public Search (PPUBS) full text (claims, specification, abstract). 'petitions' = decided petition records.",
+          "enum": ["applications", "publications", "petitions"],
+          "type": "string"
+        },
+        "query": {
+          "description": "Search query. Applications/petitions: Lucene over metadata fields. Publications: PPUBS syntax with field codes (CLM/SPEC/AB/TTL/IN/AS). Example (applications): 'applicationMetaData.inventionTitle:\"neural\"'. Example (publications): '\"machine learning\" AND neural.CLM.'",
+          "type": "string"
+        },
+        "limit": {
+          "default": 20,
+          "description": "Maximum results to return (1-20 for publications).",
+          "type": "integer"
+        },
+        "offset": {
+          "default": 0,
+          "description": "Result offset for pagination. Applies to applications and petitions; PPUBS publications paginate by limit only (offset ignored).",
+          "type": "integer"
+        },
+        "full": {
+          "default": false,
+          "description": "False (default) = lean stub per hit (small). True = full record per hit (large; prefer get_uspto for a single record).",
+          "type": "boolean"
+        }
+      },
+      "required": ["dataset", "query"],
+      "type": "object"
+    }
+  },
+  {
+    "name": "search_wipo_lex_legislation",
+    "title": null,
+    "description": "Search WIPO Lex (global IP legislation database) for statutes across ~200 jurisdictions.\n\nFilters AND together. Returns a lean stub per hit by default\n(``legislation_id``, ``title``, ``url``); pass ``full=True`` for the\nupstream row shape. Use ``get_wipo_lex_legislation`` with a hit's\n``legislation_id`` to pull the jurisdiction, summary line, and\ndownloadable PDF/DOC attachments.\n\nExamples:\n  * Canadian patent law: country_codes=[\"CA\"], subject_matter=[1]\n  * Trade secrets statutes globally: subject_matter=[9]\n  * UK IP enforcement: country_codes=[\"GB\"], subject_matter=[12]\n\nRelated tools: get_wipo_lex_legislation.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "country_codes": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO 3166-1 alpha-2 country codes or regional org codes. Examples: ['CA', 'US'], ['EU']."
+        },
+        "subject_matter": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "SubjectMatter codes: 1=Patents, 2=Utility Models, 3=Designs, 4=Trademarks, 5=GIs, 9=Trade Secrets, 10=PVP, 11=Copyright, 12=Enforcement."
+        },
+        "type_of_text": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "TypeOfText codes: 205=Main IP Laws, 207=Implementing Rules, 210=IP-related Laws, 213=Framework Laws, 214=Other, 215=National IP Strategy."
+        },
+        "keywords": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Free-text search over title + notes."
+        },
+        "start_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Lower bound (ISO YYYY-MM-DD)."
+        },
+        "end_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Upper bound (ISO YYYY-MM-DD)."
+        },
+        "include_historical": {
+          "default": false,
+          "description": "Include superseded texts.",
+          "type": "boolean"
+        },
+        "full": {
+          "default": false,
+          "description": "When False (the default), each hit is a lean stub: legislation_id, title, url. When True, returns the upstream row shape unchanged.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  }
+]

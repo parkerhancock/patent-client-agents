@@ -1,0 +1,1364 @@
+{
+  "date": "2026-10-20T22:00:03.281Z",
+  "count": 4434,
+  "data": [
+    {
+      "Has Internal Remand?": false,
+      "Initiating Document Received Date": "05-07-2024",
+      "Countries": [],
+      "Date of Publication of FR Notice (NOI)": {
+        "date": "2024-06-13T12:00:00.000Z",
+        "isNa": false
+      },
+      "Intellectual Property": [
+        {
+          "Intellectual Property ID": {
+            "Type": {
+              "ID": 2,
+              "Name": "Patent"
+            },
+            "Number": "8,854,381",
+            "Intellectual Property ID": 2338,
+            "IP Expiration Date": "04-10-2033"
+          },
+          "Active Date": "05-07-2024",
+          "Inactive Date": "06-07-2024",
+          "ID": 3593
+        }
+      ],
+      "Participants": [
+        {
+          "Participant Disposition": {
+            "name": "Granted",
+            "ID": 11
+          },
+          "Participant Type": {
+            "name": "Respondent",
+            "ID": 8
+          },
+          "Participant Disposition Date": "06-07-2024",
+          "Is Petitioner?": true,
+          "Participant": {
+            "Country": {
+              "name": "Hong Kong",
+              "ID": 111
+            },
+            "ID": 19640,
+            "Is Active?": true,
+            "Name": "TCL Industries Holdings (H.K.) Co. Limited"
+          },
+          "Active Date": "05-07-2024",
+          "Inactive Date": "06-07-2024",
+          "Investigation ID": 8568,
+          "ID": 11769,
+          "List of Participant Order Dispositions": [],
+          "Default": false
+        }
+      ],
+      "F.R. Citation for Notice of Institution": "89 FR 50367",
+      "Is Active?": true,
+      "official_investigation_number": "337-1318",
+      "Start Date": "06-07-2024",
+      "Phase Number": {
+        "Name": 3
+      },
+      "Unfair Import Orders": [
+        {
+          "Case ID": 8060,
+          "Unfair Acts": [
+            {
+              "Unfair Act Order Status": {
+                "name": "Rescinded",
+                "ID": 3
+              },
+              "ID": {
+                "Active on Order": true,
+                "Is Instituted?": true,
+                "Active Date": "05-05-2022",
+                "Inactive Date": "01-24-2024",
+                "Investigation ID": 8208,
+                "ID": 836,
+                "Unfair Act in Notice": {
+                  "name": "Patent Infringement",
+                  "ID": 1
+                }
+              }
+            }
+          ],
+          "Intellectual Property": [
+            {
+              "Intellectual Property ID": 2338,
+              "IP Order Status": 3,
+              "ID": 3738
+            }
+          ],
+          "Order Title": "337-1318 Limited Exclusion Order",
+          "ID": 1396,
+          "Participants": [
+            {
+              "Participant": {
+                "Country": {
+                  "name": "Taiwan",
+                  "ID": 239
+                },
+                "ID": 5658,
+                "Is Active?": true,
+                "Name": "Realtek Semiconductor Corp."
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2291
+            },
+            {
+              "Participant": {
+                "ID": 18636,
+                "Is Active?": true,
+                "Name": "Manufacturas Avanzadas SA de CV"
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2290
+            },
+            {
+              "Participant": {
+                "Country": {
+                  "name": "China",
+                  "ID": 49
+                },
+                "ID": 19639,
+                "Is Active?": true,
+                "Name": "Shenzhen TCL New Technology Co., Ltd."
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2292
+            },
+            {
+              "Participant": {
+                "ID": 18630,
+                "Is Active?": true,
+                "Name": "TCL Electronics Holdings Limited f/k/a TCL Multimedia Technology Holdings, Ltd."
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2293
+            },
+            {
+              "Participant": {
+                "ID": 18637,
+                "Is Active?": true,
+                "Name": "TCL Electronics Mexico, S de RL de CV"
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2294
+            },
+            {
+              "Participant": {
+                "ID": 18634,
+                "Is Active?": true,
+                "Name": "TCL Holdings (BVI) Limited"
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2295
+            },
+            {
+              "Participant": {
+                "Country": {
+                  "name": "Hong Kong",
+                  "ID": 111
+                },
+                "ID": 19640,
+                "Is Active?": true,
+                "Name": "TCL Industries Holdings (H.K.) Co. Limited"
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2296
+            },
+            {
+              "Participant": {
+                "ID": 18628,
+                "Is Active?": true,
+                "Name": "TCL Industries Holdings Co., Ltd."
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2297
+            },
+            {
+              "Participant": {
+                "ID": 18635,
+                "Is Active?": true,
+                "Name": "TCL King Electrical Appliances (Huizhou) Co. Ltd."
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2298
+            },
+            {
+              "Participant": {
+                "Country": {
+                  "name": "Hong Kong",
+                  "ID": 111
+                },
+                "ID": 9943,
+                "Is Active?": true,
+                "Name": "TCL MOKA International Limited"
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2299
+            },
+            {
+              "Participant": {
+                "ID": 18638,
+                "Is Active?": true,
+                "Name": "TCL Overseas Marketing Ltd."
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2300
+            },
+            {
+              "Participant": {
+                "Country": {
+                  "name": "Vietnam",
+                  "ID": 265
+                },
+                "ID": 9944,
+                "Is Active?": true,
+                "Name": "TCL Smart Device (Vietnam) Co., Ltd"
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2301
+            },
+            {
+              "Participant": {
+                "ID": 18631,
+                "Is Active?": true,
+                "Name": "TCL Technology Group Corporation"
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2302
+            },
+            {
+              "Participant": {
+                "ID": 18633,
+                "Is Active?": true,
+                "Name": "TTE Corporation"
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2303
+            },
+            {
+              "Participant": {
+                "Country": {
+                  "name": "United States of America",
+                  "ID": 258
+                },
+                "ID": 9964,
+                "Is Active?": true,
+                "Name": "TTE Technology, Inc."
+              },
+              "Participant Order Status": {
+                "ID": 3,
+                "Name": "Rescinded"
+              },
+              "ID": 2304
+            }
+          ],
+          "Order Status": {
+            "Participant Type Name": "Rescinded",
+            "ID": 3
+          },
+          "Order Type": {
+            "Participant Type Name": "Limited Exclusion Order",
+            "ID": 4
+          },
+          "HTS Numbers": [
+            {
+              "HTS Number & Description": {
+                "Description": "Transmission apparatus for radiobroadcasting",
+                "ID": 21499,
+                "Name": "85255070"
+              },
+              "ID": 3168
+            },
+            {
+              "HTS Number & Description": {
+                "Description": "Television antennas and antenna reflectors, and parts suitable for use therewith",
+                "ID": 21733,
+                "Name": "85291021"
+              },
+              "ID": 3169
+            },
+            {
+              "HTS Number & Description": {
+                "Description": "Flat panel screen assemblies for the apparatus of subheadings 8528.12.62, 8528.12.64, 8528.12.68, 8528.12.72, 8528.21.55 and 7 other HTS",
+                "ID": 21767,
+                "Name": "85299053"
+              },
+              "ID": 3170
+            }
+          ]
+        }
+      ],
+      "Investigation ID": 8568,
+      "Topic": "Certain Graphics Systems, Components Thereof, and Digital Televisions Containing The Same",
+      "Requestor": [],
+      "Full Title": "Certain Graphics Systems, Components Thereof, and Digital Televisions Containing The Same; Inv. No. 337-TA-1318 (Modification 3)",
+      "Case ID": 8060,
+      "Investigation Number": "337-1318",
+      "Final Determination Type": {
+        "finalDeterminationTypeId": 6,
+        "finalDeterminationType": "Granted",
+        "isActive": true
+      },
+      "Party Comments Due Date": {
+        "date": null,
+        "isNa": false
+      },
+      "Investigation Status": {
+        "ID": 11,
+        "Name": "Terminated"
+      },
+      "Final Determination Date": "06-07-2024",
+      "Investigation End Date": "06-07-2024",
+      "Is Operational?": true,
+      "Investigation Categories": [
+        {
+          "ID": 6,
+          "Is Active?": true,
+          "Name": "337 - Unfair Imports"
+        }
+      ],
+      "Investigation Termination Date": {
+        "date": "2024-06-07T12:00:00.000Z",
+        "isNa": false
+      },
+      "Unfair Act": [
+        {
+          "Active on Order": true,
+          "Is Instituted?": true,
+          "Active Date": "05-07-2024",
+          "Inactive Date": "06-07-2024",
+          "Investigation ID": 8568,
+          "ID": 1181,
+          "Unfair Act in Notice": {
+            "name": "Patent Infringement",
+            "ID": 1
+          }
+        }
+      ],
+      "Consolidations": [
+        {
+          "Investigation ID": 8568,
+          "ID": 62
+        }
+      ],
+      "Investigation Type": {
+        "Name": "Unfair Imports"
+      },
+      "Investigation Phase": {
+        "Name": "Modification"
+      },
+      "Staff": []
+    },
+    {
+      "Responses to Notice of Institution Due Date": "03-03-2021",
+      "Docket Number": "",
+      "Has Internal Remand?": false,
+      "Active Associated Litigation": {
+        "id": 2,
+        "Name": "Inactive"
+      },
+      "Countries": [
+        {
+          "name": "China",
+          "ID": 49
+        }
+      ],
+      "Date of Publication of FR Notice (NOI)": {
+        "date": "2021-02-01T12:00:00.000Z",
+        "isNa": false
+      },
+      "Hearing/Conf Suspended/Canceled": false,
+      "Commerce Orders": [
+        {
+          "Case ID": 265,
+          "Sub-Investigation": {
+            "Investigation Number": "731-125",
+            "Investigation Phase": {
+              "Name": "Review"
+            },
+            "Country": {
+              "name": "China",
+              "ID": 49
+            },
+            "Investigation ID": 5132,
+            "ID": 3075,
+            "Investigation Categories": {
+              "ID": 1,
+              "Is Active?": true,
+              "Name": "AD"
+            }
+          },
+          "Commerce Order/Case Number": "A-570-001",
+          "Investigation ID": 5132,
+          "ID": 681,
+          "Order Issuance/Suspension Agreement Date": "01-31-1984",
+          "Continued Date": "12-09-2021"
+        }
+      ],
+      "Staff": [],
+      "Commissioner Rulings on Adequacy/Inadequacy and Expedited/Full Review": "05-07-2021",
+      "Commerce Initiation Date": "02-01-2021",
+      "Vote Date": {
+        "date": "2021-11-05T12:00:00.000Z",
+        "isNa": false
+      },
+      "Participants": [
+        {
+          "Participant Type": {
+            "name": "Interested Party",
+            "ID": 28
+          },
+          "Is Petitioner?": false,
+          "Participant": {
+            "ID": 17889,
+            "Is Active?": true,
+            "Name": "Pacific Accelerator Limited"
+          },
+          "Active Date": "02-22-2021",
+          "Inactive Date": "11-29-2021",
+          "Investigation ID": 5132,
+          "ID": 7671,
+          "List of Participant Order Dispositions": [],
+          "Default": false
+        }
+      ],
+      "Posthearing/Conf Briefs Due from Parties": {
+        "date": "2021-10-13T12:00:00.000Z",
+        "isNa": false
+      },
+      "Prehearing Report to Commission Date": {
+        "date": "2021-09-20T12:00:00.000Z",
+        "isNa": false
+      },
+      "Hearing Witnesses": [
+        {
+          "Name of Hearing Witness": "Representative Adam D. Kinzinger",
+          "Company/Affiliation of Hearing Witness": "U.S. House of Representatives (IL-16)",
+          "Investigation ID": 5132,
+          "ID": 246
+        }
+      ],
+      "Start Date": "02-01-2021",
+      "ITC FR Notice of Review Schedule": "06-16-2021",
+      "ITC FR Notice of Full Review": {
+        "date": "2021-05-20T12:00:00.000Z",
+        "isNa": false
+      },
+      "Phase Number": {
+        "Name": 5
+      },
+      "Investigation ID": 5132,
+      "Product Group Code": {
+        "ID": 2,
+        "Is Active?": true,
+        "Name": "CH",
+        "Product Group Code Description": "Chemicals and pharmaceuticals"
+      },
+      "Comments on Adequacy/Appropriateness of Expedited or Full Review": "04-14-2021",
+      "Is Split Final?": false,
+      "Case ID": 265,
+      "Sub-investigation": [
+        {
+          "Investigation Number": "731-125",
+          "Investigation Phase": {
+            "Name": "Review"
+          },
+          "Country": {
+            "name": "China",
+            "ID": 49
+          },
+          "Votes": [
+            {
+              "Vote": {
+                "ID": 8,
+                "Name": "Full"
+              },
+              "Investigation Phase": {
+                "Name": "Review"
+              },
+              "Domestic Group Response": {
+                "ID": 1,
+                "Name": "Adequate"
+              },
+              "Sub-Investigation": "731-125",
+              "Vote Type": {
+                "ID": 2,
+                "Name": "Adequacy Vote"
+              },
+              "Respondent Group Response": {
+                "ID": 1,
+                "Name": "Adequate"
+              },
+              "Votes": [
+                {
+                  "Vote": {
+                    "ID": 14,
+                    "Name": "Full"
+                  },
+                  "Domestic Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "Respondent Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "ID": 17399,
+                  "Determinations": [],
+                  "Name": {
+                    "Staff Last Name": "Schmidtlein",
+                    "Email": "rhonda.schmidtlein@usitc.gov",
+                    "Staff Title": "Commissioner (CO86)",
+                    "ID": 86,
+                    "Phone Number": "(202) 205-5990",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 123,
+                      "Name": "Office of Commissioner Schmidtlein"
+                    },
+                    "Staff First Name": "Rhonda",
+                    "Name": "rhonda.schmidtlein"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 14,
+                    "Name": "Full"
+                  },
+                  "Domestic Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "Respondent Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "ID": 17398,
+                  "Determinations": [],
+                  "Name": {
+                    "Staff Last Name": "Johanson",
+                    "Email": "David.Johanson@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 83,
+                    "Phone Number": "(202) 205-2744",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 131,
+                      "Name": "Office of Commissioner Johanson"
+                    },
+                    "Staff First Name": "David S.",
+                    "Name": "David.Johanson"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 14,
+                    "Name": "Full"
+                  },
+                  "Domestic Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "Respondent Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "ID": 17395,
+                  "Determinations": [],
+                  "Name": {
+                    "Staff Last Name": "Stayin",
+                    "Email": "Randolph.Stayin@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 88,
+                    "Phone Number": "(202) 708-5482",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 113,
+                      "Name": "Office of Commissioner Stayin"
+                    },
+                    "Staff First Name": "Randolph",
+                    "Name": "Randolph.Stayin"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 14,
+                    "Name": "Full"
+                  },
+                  "Domestic Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "Respondent Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "ID": 17397,
+                  "Determinations": [],
+                  "Name": {
+                    "Staff Last Name": "Karpel",
+                    "Email": "Amy.Karpel@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 89,
+                    "Phone Number": "(202) 205-2356",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 128,
+                      "Name": "Office of Commissioner Karpel"
+                    },
+                    "Staff First Name": "Amy",
+                    "Name": "Amy.Karpel"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 14,
+                    "Name": "Full"
+                  },
+                  "Domestic Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "Respondent Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "ID": 17396,
+                  "Determinations": [],
+                  "Name": {
+                    "Staff Last Name": "Kearns",
+                    "Email": "Jason.Kearns@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 87,
+                    "Phone Number": "(202) 708-2882",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 171,
+                      "Name": "Office of Commissioner Kearns"
+                    },
+                    "Staff First Name": "Jason",
+                    "Name": "Jason.Kearns"
+                  }
+                }
+              ],
+              "ID": 4269,
+              "Vote Date": "05-07-2021",
+              "Determinations": []
+            },
+            {
+              "Vote": {
+                "ID": 1,
+                "Name": "Affirmative"
+              },
+              "Investigation Phase": {
+                "Name": "Review"
+              },
+              "Sub-Investigation": "731-125",
+              "Vote Type": {
+                "ID": 1,
+                "Name": "Investigation Vote"
+              },
+              "Votes": [
+                {
+                  "Vote": {
+                    "ID": 1,
+                    "Name": "Affirmative"
+                  },
+                  "ID": 17820,
+                  "Determinations": [
+                    {
+                      "Vote": {
+                        "ID": 1,
+                        "Name": "Affirmative"
+                      },
+                      "Product": "Potassium Permanganate",
+                      "ID": 169
+                    }
+                  ],
+                  "Name": {
+                    "Staff Last Name": "Johanson",
+                    "Email": "David.Johanson@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 83,
+                    "Phone Number": "(202) 205-2744",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 131,
+                      "Name": "Office of Commissioner Johanson"
+                    },
+                    "Staff First Name": "David S.",
+                    "Name": "David.Johanson"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 1,
+                    "Name": "Affirmative"
+                  },
+                  "ID": 17817,
+                  "Determinations": [
+                    {
+                      "Vote": {
+                        "ID": 1,
+                        "Name": "Affirmative"
+                      },
+                      "Product": "Potassium Permanganate",
+                      "ID": 165
+                    }
+                  ],
+                  "Name": {
+                    "Staff Last Name": "Schmidtlein",
+                    "Email": "rhonda.schmidtlein@usitc.gov",
+                    "Staff Title": "Commissioner (CO86)",
+                    "ID": 86,
+                    "Phone Number": "(202) 205-5990",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 123,
+                      "Name": "Office of Commissioner Schmidtlein"
+                    },
+                    "Staff First Name": "Rhonda",
+                    "Name": "rhonda.schmidtlein"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 1,
+                    "Name": "Affirmative"
+                  },
+                  "ID": 17818,
+                  "Determinations": [
+                    {
+                      "Vote": {
+                        "ID": 1,
+                        "Name": "Affirmative"
+                      },
+                      "Product": "Potassium Permanganate",
+                      "ID": 168
+                    }
+                  ],
+                  "Name": {
+                    "Staff Last Name": "Kearns",
+                    "Email": "Jason.Kearns@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 87,
+                    "Phone Number": "(202) 708-2882",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 171,
+                      "Name": "Office of Commissioner Kearns"
+                    },
+                    "Staff First Name": "Jason",
+                    "Name": "Jason.Kearns"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 1,
+                    "Name": "Affirmative"
+                  },
+                  "ID": 17819,
+                  "Determinations": [
+                    {
+                      "Vote": {
+                        "ID": 1,
+                        "Name": "Affirmative"
+                      },
+                      "Product": "Potassium Permanganate",
+                      "ID": 167
+                    }
+                  ],
+                  "Name": {
+                    "Staff Last Name": "Karpel",
+                    "Email": "Amy.Karpel@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 89,
+                    "Phone Number": "(202) 205-2356",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 128,
+                      "Name": "Office of Commissioner Karpel"
+                    },
+                    "Staff First Name": "Amy",
+                    "Name": "Amy.Karpel"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 1,
+                    "Name": "Affirmative"
+                  },
+                  "ID": 17816,
+                  "Determinations": [
+                    {
+                      "Vote": {
+                        "ID": 1,
+                        "Name": "Affirmative"
+                      },
+                      "Product": "Potassium Permanganate",
+                      "ID": 166
+                    }
+                  ],
+                  "Name": {
+                    "Staff Last Name": "Stayin",
+                    "Email": "Randolph.Stayin@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 88,
+                    "Phone Number": "(202) 708-5482",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 113,
+                      "Name": "Office of Commissioner Stayin"
+                    },
+                    "Staff First Name": "Randolph",
+                    "Name": "Randolph.Stayin"
+                  }
+                }
+              ],
+              "ID": 4180,
+              "Vote Date": "11-05-2021",
+              "Determinations": [
+                {
+                  "Sub-Investigation": "731-125",
+                  "Product": "Potassium Permanganate",
+                  "ID": 4180,
+                  "Determination": {
+                    "ID": 1,
+                    "Name": "Affirmative"
+                  }
+                }
+              ]
+            }
+          ],
+          "Investigation ID": 5132,
+          "ID": 3075,
+          "Investigation Categories": {
+            "ID": 1,
+            "Is Active?": true,
+            "Name": "AD"
+          }
+        }
+      ],
+      "ITC Qs Issued": {
+        "date": "2021-07-14T12:00:00.000Z",
+        "isNa": false
+      },
+      "Investigation Number": "731-125",
+      "Investigation Documents": [
+        {
+          "Document Title": "Continuation - AD - China",
+          "Document Type": {
+            "Investigation Document Name": "Other",
+            "ID": 29,
+            "Is Active?": true
+          },
+          "Document Link": "https://www.govinfo.gov/content/pkg/FR-2021-12-09/pdf/2021-26658.pdf",
+          "Investigation ID": 5132,
+          "ID": 324
+        }
+      ],
+      "Party Comments Due Date": {
+        "date": "2021-11-03T12:00:00.000Z",
+        "isNa": false
+      },
+      "Investigation Status": {
+        "ID": 6,
+        "Name": "Completed"
+      },
+      "ITC Qs Returned": {
+        "date": "2021-08-13T12:00:00.000Z",
+        "isNa": false
+      },
+      "Determination Date": {
+        "date": "2021-11-29T12:00:00.000Z",
+        "isNa": false
+      },
+      "Investigation Type": {
+        "Name": "Import Injury"
+      },
+      "Associated Litigation": [
+        {
+          "Associated Litigation ID": 27,
+          "Court Forum": {
+            "id": 1,
+            "Name": "CIT"
+          },
+          "Docketing Date": "12-31-2021",
+          "Case Number": "1:21-cv-00643",
+          "Case Name": "Pacific Accelerator Limited et al v. United States",
+          "Proceeding Status": {
+            "id": 2,
+            "Name": "Closed"
+          },
+          "Case Outcome": [
+            {
+              "ID": 11,
+              "Name": "Dismissed (Voluntarily Dismissed)"
+            }
+          ],
+          "Date of Case Outcome": "01-26-2022"
+        }
+      ],
+      "Investigation Phase": {
+        "Name": "Review"
+      },
+      "Commerce Notice of No Domestic Response": "02-22-2021",
+      "Commerce Final Results": "06-07-2021",
+      "Adequacy Report Due to Commission": "04-26-2021",
+      "Commerce Notice of Inadequate Respondent Response": "03-23-2021",
+      "Is Active?": true,
+      "Commission Adequacy APO Release": "04-07-2021",
+      "Staff Report Due to Commission": {
+        "date": "2021-10-26T12:00:00.000Z",
+        "isNa": false
+      },
+      "Prehearing Briefs Due from Parties": {
+        "date": "2021-09-28T12:00:00.000Z",
+        "isNa": false
+      },
+      "Views Date": {
+        "date": "2021-11-29T12:00:00.000Z",
+        "isNa": false
+      },
+      "Topic": "Potassium Permanganate",
+      "Requestor": [],
+      "Full Title": "Potassium Permanganate from China; Inv. No. 731-TA-125 (Fifth Review)",
+      "Hearing/Conf Start Date": {
+        "date": "2021-10-05T12:00:00.000Z",
+        "isNa": false
+      },
+      "Investigation End Date": "11-29-2021",
+      "Is Operational?": true,
+      "Investigation Categories": [
+        {
+          "ID": 1,
+          "Is Active?": true,
+          "Name": "AD"
+        }
+      ],
+      "Review Type": {},
+      "Deadline for Request to Appear at Hearing": {
+        "date": "2021-09-29T12:00:00.000Z",
+        "isNa": false
+      },
+      "Hearing/Conf End Date": {
+        "date": "2021-10-05T12:00:00.000Z",
+        "isNa": false
+      }
+    },
+    {
+      "Responses to Notice of Institution Due Date": "12-31-2025",
+      "Docket Number": "3417",
+      "Countries": [
+        {
+          "name": "South Korea",
+          "ID": 136
+        }
+      ],
+      "Date of Publication of FR Notice (NOI)": {
+        "date": "2025-12-01T12:00:00.000Z",
+        "isNa": false
+      },
+      "Commerce Orders": [
+        {
+          "Case ID": 4920,
+          "Sub-Investigation": {
+            "Investigation Number": "701-631",
+            "Investigation Phase": {
+              "Name": "Review"
+            },
+            "Country": {
+              "name": "India",
+              "ID": 115
+            },
+            "Investigation ID": 8826,
+            "ID": 4339,
+            "Investigation Categories": {
+              "ID": 2,
+              "Is Active?": true,
+              "Name": "CVD"
+            }
+          },
+          "Commerce Order/Case Number": "C-533-892",
+          "Investigation ID": 8826,
+          "ID": 2397,
+          "Order Issuance/Suspension Agreement Date": "12-11-2020"
+        }
+      ],
+      "Staff": [],
+      "Commissioner Rulings on Adequacy/Inadequacy and Expedited/Full Review": "03-06-2026",
+      "Commerce Initiation Date": "12-01-2025",
+      "Vote Date": {
+        "date": "2026-11-30T12:00:00.000Z",
+        "isNa": false
+      },
+      "Participants": [
+        {
+          "Participant Type": {
+            "name": "Interested Party",
+            "ID": 28
+          },
+          "Is Petitioner?": false,
+          "Participant": {
+            "Country": {
+              "name": "United States of America",
+              "ID": 258
+            },
+            "ID": 25729,
+            "Is Active?": true,
+            "Name": "Phoenix Forging Company d/b/a Capitol Manufacturing Company"
+          },
+          "Active Date": "12-08-2025",
+          "Investigation ID": 8826,
+          "ID": 14077,
+          "List of Participant Order Dispositions": [],
+          "Default": false
+        }
+      ],
+      "Posthearing/Conf Briefs Due from Parties": {
+        "date": "2026-10-13T12:00:00.000Z",
+        "isNa": false
+      },
+      "Prehearing Report to Commission Date": {
+        "date": "2026-09-22T12:00:00.000Z",
+        "isNa": false
+      },
+      "official_investigation_number": "701-TA-631",
+      "Start Date": "12-01-2025",
+      "Phase Number": {
+        "Name": 1
+      },
+      "Investigation ID": 8826,
+      "Product Group Code": {
+        "ID": 5,
+        "Is Active?": true,
+        "Name": "ISP",
+        "Product Group Code Description": "Iron & steel: Pipe products"
+      },
+      "Comments on Adequacy/Appropriateness of Expedited or Full Review": "02-10-2026",
+      "Is Split Final?": false,
+      "Case ID": 4920,
+      "Sub-investigation": [
+        {
+          "Investigation Number": "701-631",
+          "Investigation Phase": {
+            "Name": "Review"
+          },
+          "Country": {
+            "name": "India",
+            "ID": 115
+          },
+          "Votes": [
+            {
+              "Investigation Phase": {
+                "Name": "Review"
+              },
+              "Sub-Investigation": "701-631",
+              "Vote Type": {
+                "ID": 1,
+                "Name": "Investigation Vote"
+              },
+              "Votes": [],
+              "ID": 5977,
+              "Determinations": []
+            },
+            {
+              "Vote": {
+                "ID": 8,
+                "Name": "Full"
+              },
+              "Investigation Phase": {
+                "Name": "Review"
+              },
+              "Domestic Group Response": {
+                "ID": 1,
+                "Name": "Adequate"
+              },
+              "Sub-Investigation": "701-631",
+              "Vote Type": {
+                "ID": 2,
+                "Name": "Adequacy Vote"
+              },
+              "Respondent Group Response": {
+                "ID": 2,
+                "Name": "Inadequate"
+              },
+              "Votes": [
+                {
+                  "Vote": {
+                    "ID": 14,
+                    "Name": "Full"
+                  },
+                  "Domestic Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "Respondent Group Response": {
+                    "ID": 2,
+                    "Name": "Inadequate"
+                  },
+                  "ID": 24365,
+                  "Determinations": [],
+                  "Name": {
+                    "Staff Last Name": "Kearns",
+                    "Email": "Jason.Kearns@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 87,
+                    "Phone Number": "(202) 708-2882",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 171,
+                      "Name": "Office of Commissioner Kearns"
+                    },
+                    "Staff First Name": "Jason",
+                    "Name": "Jason.Kearns"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 14,
+                    "Name": "Full"
+                  },
+                  "Domestic Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "Respondent Group Response": {
+                    "ID": 2,
+                    "Name": "Inadequate"
+                  },
+                  "ID": 24366,
+                  "Determinations": [],
+                  "Name": {
+                    "Staff Last Name": "Karpel",
+                    "Email": "Amy.Karpel@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 89,
+                    "Phone Number": "(202) 205-2356",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 128,
+                      "Name": "Office of Commissioner Karpel"
+                    },
+                    "Staff First Name": "Amy",
+                    "Name": "Amy.Karpel"
+                  }
+                },
+                {
+                  "Vote": {
+                    "ID": 14,
+                    "Name": "Full"
+                  },
+                  "Domestic Group Response": {
+                    "ID": 1,
+                    "Name": "Adequate"
+                  },
+                  "Respondent Group Response": {
+                    "ID": 2,
+                    "Name": "Inadequate"
+                  },
+                  "ID": 24364,
+                  "Determinations": [],
+                  "Name": {
+                    "Staff Last Name": "Johanson",
+                    "Email": "David.Johanson@usitc.gov",
+                    "Staff Title": "Commissioner",
+                    "ID": 83,
+                    "Phone Number": "(202) 205-2744",
+                    "Staff Type ID": {
+                      "ID": 4,
+                      "Name": "Commissioner"
+                    },
+                    "Staff Department ID": {
+                      "ID": 131,
+                      "Name": "Office of Commissioner Johanson"
+                    },
+                    "Staff First Name": "David S.",
+                    "Name": "David.Johanson"
+                  }
+                }
+              ],
+              "ID": 5978,
+              "Vote Date": "03-06-2026",
+              "Determinations": []
+            }
+          ],
+          "Investigation ID": 8826,
+          "ID": 4339,
+          "Investigation Categories": {
+            "ID": 2,
+            "Is Active?": true,
+            "Name": "CVD"
+          }
+        }
+      ],
+      "ITC Qs Issued": {
+        "date": "2026-07-13T12:00:00.000Z",
+        "isNa": false
+      },
+      "Investigation Number": "701-631",
+      "Investigation Documents": [
+        {
+          "Document Title": "C-533-892- India CVD",
+          "Document Type": {
+            "Investigation Document Name": "Commerce FR Notices",
+            "ID": 38,
+            "Is Active?": true
+          },
+          "Document Link": "https://www.federalregister.gov/documents/search?conditions%5Bagencies%5D%5B%5D=international-trade-administration&conditions%5Bdocket_id%5D=C-533-892&conditions%5Bsearch_type_id%5D=3&conditions%5Btype%5D%5B%5D=NOTICE",
+          "Investigation ID": 8826,
+          "ID": 8749
+        }
+      ],
+      "Party Comments Due Date": {
+        "date": "2026-11-23T12:00:00.000Z",
+        "isNa": false
+      },
+      "Investigation Status": {
+        "ID": 0,
+        "Name": "Active"
+      },
+      "ITC Qs Returned": {
+        "date": "2026-08-10T12:00:00.000Z",
+        "isNa": false
+      },
+      "Determination Date": {
+        "date": "2026-12-14T12:00:00.000Z",
+        "isNa": false
+      },
+      "Investigation Type": {
+        "Name": "Import Injury"
+      },
+      "Investigation Phase": {
+        "Name": "Review"
+      },
+      "Commerce Notice of No Domestic Response": "12-22-2025",
+      "Commerce Final Results": "04-15-2026",
+      "Adequacy Report Due to Commission": "02-23-2026",
+      "Commerce Notice of Inadequate Respondent Response": "01-20-2026",
+      "Is Active?": true,
+      "Commission Adequacy APO Release": "02-03-2026",
+      "Staff Report Due to Commission": {
+        "date": "2026-11-16T12:00:00.000Z",
+        "isNa": false
+      },
+      "Prehearing Briefs Due from Parties": {
+        "date": "2026-09-29T12:00:00.000Z",
+        "isNa": false
+      },
+      "Views Date": {
+        "date": "2026-12-14T12:00:00.000Z",
+        "isNa": false
+      },
+      "Topic": "Forged Steel Fittings",
+      "Requestor": [],
+      "Full Title": "Forged Steel Fittings from India and South Korea; Inv. No. 701-TA-631 and 731-TA-1463-1464 (Review)",
+      "Hearing/Conf Start Date": {
+        "date": "2026-10-06T12:00:00.000Z",
+        "isNa": false
+      },
+      "Is Operational?": true,
+      "Investigation Categories": [
+        {
+          "ID": 1,
+          "Is Active?": true,
+          "Name": "AD"
+        }
+      ],
+      "Review Type": {},
+      "Deadline for Request to Appear at Hearing": {
+        "date": "2026-10-01T12:00:00.000Z",
+        "isNa": false
+      },
+      "Hearing/Conf End Date": {
+        "date": "2026-10-06T12:00:00.000Z",
+        "isNa": false
+      }
+    }
+  ],
+  "_note": "Three rows of https://ids.usitc.gov/investigations.json fetched 2026-10-21; lists cut to one entry, Staff and Case Manager removed."
+}
