@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Before you connect — Patent Client Agents{% endblock %}
+{% block content %}
+
+<h1>Before you connect</h1>
+<p class="muted" style="font-size: 1.05rem;">
+  This is a public demonstration of <code>patent-client-agents</code>.
+  Please read and acknowledge the points below before signing in with
+  Google.
+</p>
+
+<div class="warn">
+  <strong>This is a public demo. No confidentiality.</strong>
+  Every request you make may be logged and inspected by the operator
+  for abuse prevention, debugging, and aggregate analytics. Treat this
+  service like any other public web tool.
+</div>
+
+<h2>Key points</h2>
+<ul style="line-height: 1.7;">
+  <li>
+    <strong>Don't submit privileged or confidential material.</strong>
+    No client-confidential matters, attorney-work-product, trade secrets,
+    or anything you wouldn't put into a public search engine.
+  </li>
+  <li>
+    <strong>Output isn't legal advice.</strong> Results are pulled from
+    public patent data sources; we don't validate them and they may be
+    incomplete or wrong.
+  </li>
+  <li>
+    <strong>Best-effort availability.</strong> No SLA. Endpoints, data
+    sources, and rate limits can change without notice.
+  </li>
+  <li>
+    <strong>Per-account rate limits</strong> apply: 100 MB/day, 20 MB/min.
+  </li>
+  <li>
+    By continuing you agree to the
+    <a href="/terms" target="_blank" rel="noopener">full Terms of Use</a>
+    (version <code>{{ terms_version }}</code>) and acknowledge our
+    <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.
+  </li>
+</ul>
+
+<form method="POST" action="/consent/accept" style="margin-top: 2rem;">
+  <input type="hidden" name="next" value="{{ next_url }}" />
+  <label style="display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 1.25rem;">
+    <input type="checkbox" name="agree" required style="margin-top: 0.3rem;" />
+    <span>
+      I have read the points above and agree to the
+      <a href="/terms" target="_blank" rel="noopener">Terms of Use</a>.
+      I will not submit privileged, client-confidential, or otherwise
+      sensitive information.
+    </span>
+  </label>
+  <div style="display: flex; gap: 0.75rem; align-items: center;">
+    <button type="submit" class="button">
+      I agree — continue to Google sign-in
+    </button>
+    <a href="/" class="muted" style="margin-left: 0.5rem;">Cancel</a>
+  </div>
+</form>
+
+<p class="muted" style="margin-top: 2.5rem;">
+  Need a private instance, higher limits, or a confidentiality
+  guarantee?
+  <a href="mailto:pypatent2018@gmail.com?subject=Enterprise%20licensing%20inquiry">Contact us</a>
+  about an enterprise deployment.
+</p>
+
+{% endblock %}

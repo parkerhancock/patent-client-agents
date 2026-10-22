@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}Patent Client Agents — hosted MCP demo{% endblock %}
+{% block content %}
+
+<h1>Patent research tools for your AI assistant</h1>
+<p class="muted" style="font-size: 1.05rem; margin-top: 0;">
+  A hosted MCP connector that lets Claude — and any other MCP-speaking
+  AI client — search and analyze patents from the USPTO, EPO, Google
+  Patents, and more.
+</p>
+
+<div class="warn">
+  <strong>Public demonstration · no confidentiality.</strong><br />
+  We may log any request you make and disclose it as permitted by the
+  <a href="/terms#no-confidentiality">Terms</a>. Do not submit
+  privileged, client-confidential, trade-secret, or otherwise sensitive
+  information.
+  <a href="mailto:pypatent2018@gmail.com?subject=Enterprise%20licensing%20inquiry">Contact us</a>
+  if you need a private instance or higher limits.
+</div>
+
+<section class="install-panel" aria-labelledby="install-heading">
+  <div class="install-panel__header">
+    <h2 id="install-heading">Connect your client</h2>
+    <p class="muted" style="margin-bottom: 0;">
+      Any verified Google account can connect through OAuth. No static token
+      or API key is required for the hosted demo.
+    </p>
+  </div>
+  <div class="install-panel__body">
+    <strong>Connector URL</strong>
+    <div class="url-line">
+      <code>{{ public_url }}/mcp</code>
+      <a class="button" href="{{ public_url }}/mcp">Open</a>
+    </div>
+
+    <div class="install-grid">
+      <div class="install-option">
+        <h3>Claude, CoWork, or desktop clients</h3>
+        <ol>
+          <li>Add a custom MCP connector.</li>
+          <li>Paste the connector URL above.</li>
+          <li>Accept the terms screen and sign in with Google.</li>
+        </ol>
+      </div>
+      <div class="install-option">
+        <h3>Claude Code or JSON clients</h3>
+        <ol>
+          <li>Add the JSON block below to your MCP config.</li>
+          <li>Reload the client.</li>
+          <li>Start a tool call and complete the OAuth browser flow.</li>
+        </ol>
+      </div>
+    </div>
+
+    <span class="code-label">JSON config</span>
+    <pre><code>{
+  "mcpServers": {
+    "patent-client-agents": {
+      "url": "{{ public_url }}/mcp"
+    }
+  }
+}</code></pre>
+
+    <span class="code-label">Claude Code plugin</span>
+    <pre><code>/plugin marketplace add parkerhancock/patent-client-agents
+/plugin install patent-client-agents@patent-client-agents
+/reload-plugins</code></pre>
+  </div>
+</section>
+
+<h2>Limits</h2>
+<div class="card">
+  <p style="margin-top:0;">
+    Per Google account:
+  </p>
+  <ul style="margin: 0.25rem 0 0.5rem 1.25rem;">
+    <li><strong>100 MB / day</strong> of response data</li>
+    <li><strong>20 MB / minute</strong> short-burst cap</li>
+  </ul>
+  <p class="muted" style="margin-bottom: 0;">
+    Enough for exploratory research; not enough for bulk scraping.
+    <a href="mailto:pypatent2018@gmail.com?subject=Enterprise%20licensing%20inquiry">Email us</a>
+    if you need more.
+  </p>
+</div>
+
+<h2>What's behind it</h2>
+<p>
+  One hundred seven typed MCP tools across USPTO ODP, USPTO Public Search,
+  USPTO Assignments, USPTO Office Actions, USPTO Petitions, USPTO Bulk
+  Data, EPO OPS, Google Patents, CPC, ITC, PTAB, fee schedules,
+  and deploy-safe substantive-law corpora. Credential-gated BYOK families
+  and corpus/WAF-sensitive tools such as JPO, MPEP, USPTO trademark search,
+  and UPC decisions are intentionally absent from this public demo until
+  they are reliable in hosted mode. Same library you
+  can install yourself —
+  <a href="https://docs.patentclient.com/installation/">install modes</a>
+  are documented at
+  <a href="https://docs.patentclient.com/">docs.patentclient.com</a>.
+</p>
+
+<p style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+  <a class="button" href="https://docs.patentclient.com/">Read the docs</a>
+  <a class="button secondary" href="https://github.com/parkerhancock/patent-client-agents">View on GitHub</a>
+</p>
+
+<p class="muted" style="margin-top: 2rem;">
+  By using this service you agree to our <a href="/terms">Terms of Use</a>.
+</p>
+
+{% endblock %}

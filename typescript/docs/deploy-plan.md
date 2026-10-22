@@ -59,14 +59,27 @@ No GCP writes.
    GCS signed-URL downloads, the web pages and headers, serverInfo icons, and
    a hidden-tool list (`search_trademarks` until hosted WAF refresh is shown
    to work).
+   Status (October 22): built, see [hosted](hosted.md). GCS downloads are
+   not wired in yet; the hosted app passes the current `downloads` option.
 2. Corpora: prepare the five EPO corpora as `.zst` and write a TypeScript
    bootstrap that reads a separate manifest
    (`gs://patentclient-mcp-corpora/ts/manifest.json`), checks sha256 and
    fails the container on mismatch, as Python does. The total is small enough
    that baking them into the image is the fallback.
+   Status (October 22): separate work. The hosted entrypoint calls
+   `bootstrapCorpora(manifestUri, cacheDir)` when `CORPORA_MANIFEST_URI` is
+   set; it is a stub that fails startup until the real one replaces it.
 3. Dockerfile on `oven/bun`, run with the Node and Bun smoke tests.
+   Status (October 22): `Dockerfile.hosted` builds a 267 MB image that
+   passes the eight public smoke checks locally; Node and browser smoke
+   scripts pass.
 4. Tests against the Firestore emulator and a fake GCS; an end-to-end local
    run with Claude Code against the container, using auth bypass.
+   Status (October 22): storage tests pass against the Firestore emulator
+   and a fake Firestore server, and the OAuth flow is tested end to end
+   against a fake Google. The container served tools/list and live tool
+   calls over HTTP with auth bypass; a Claude Code session against it and
+   fake-GCS tests are not done.
 
 Stop: review the diff and a local demo.
 

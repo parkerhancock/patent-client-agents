@@ -16,6 +16,9 @@
     },
     {
       "path": "../packages/mcp"
+    },
+    {
+      "path": "../packages/hosted"
     }
   ]
 }
