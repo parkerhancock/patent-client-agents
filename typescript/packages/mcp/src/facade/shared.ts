@@ -4,6 +4,7 @@ import type {
   BulkDataClient,
   CafcClient,
   CopyrightClient,
+  EdisClient,
   EpoOpsClient,
   FeesClient,
   MpepClient,
@@ -37,7 +38,9 @@ export {
 
 /**
  * Clients behind the curated facade. Credential-gated families (TSDR, EPO
- * OPS) are optional; their facade branches report how to enable them.
+ * OPS) are optional; their facade branches report how to enable them. USITC
+ * EDIS is optional too, but, as in Python, its tools and routing values are
+ * registered only when it is configured.
  */
 export interface FacadeClients {
   applications: ApplicationsClient;
@@ -61,6 +64,8 @@ export interface FacadeClients {
   upcStatutes: UpcStatutesReader;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
+  /** USITC EDIS; when present the facade adds the Python EDIS-enabled surface. */
+  edis?: EdisClient | undefined;
 }
 export type FacadeRegistrar = (
   server: import("@prefecthq/fastmcp-ts/server").FastMCP,

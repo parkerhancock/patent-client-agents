@@ -1,0 +1,231 @@
+[
+  {
+    "args": {},
+    "query": {
+      "savedQueryName": "",
+      "savedQueryDesc": "",
+      "isOwner": true,
+      "runMonthly": false,
+      "reportOptions": {
+        "tradeType": "Import",
+        "classificationSystem": "HTS"
+      },
+      "searchOptions": {
+        "countries": {
+          "aggregation": "Aggregate Countries",
+          "countriesSelectType": "all",
+          "countries": [],
+          "countriesExpanded": [
+            {
+              "name": "All Countries",
+              "value": "all"
+            }
+          ],
+          "countryGroups": {
+            "systemGroups": [],
+            "userGroups": []
+          }
+        },
+        "commodities": {
+          "aggregation": "Aggregate Commodities",
+          "commoditySelectType": "all",
+          "commodities": [],
+          "commoditiesExpanded": [],
+          "commoditiesManual": "",
+          "commodityGroups": {
+            "systemGroups": [],
+            "userGroups": []
+          },
+          "granularity": "2",
+          "codeDisplayFormat": "YES",
+          "groupGranularity": null,
+          "searchGranularity": null
+        },
+        "componentSettings": {
+          "timeframeSelectType": "fullYears",
+          "years": ["2024"],
+          "yearsTimeline": "Annual",
+          "dataToReport": ["CONS_CUSTOMS_VALUE"],
+          "scale": "1",
+          "startDate": null,
+          "endDate": null,
+          "startMonth": null,
+          "endMonth": null
+        },
+        "MiscGroup": {
+          "districts": {
+            "aggregation": "Aggregate District",
+            "districtGroups": {
+              "userGroups": []
+            },
+            "districts": [],
+            "districtsExpanded": [
+              {
+                "name": "All Districts",
+                "value": "all"
+              }
+            ],
+            "districtsSelectType": "all"
+          },
+          "importPrograms": {
+            "aggregation": null,
+            "importPrograms": [],
+            "programsSelectType": "all"
+          },
+          "extImportPrograms": {
+            "aggregation": "Aggregate CSC",
+            "extImportPrograms": [],
+            "extImportProgramsExpanded": [],
+            "programsSelectType": "all"
+          },
+          "provisionCodes": {
+            "aggregation": "Aggregate RPCODE",
+            "provisionCodesSelectType": "all",
+            "rateProvisionCodes": [],
+            "rateProvisionCodesExpanded": []
+          }
+        }
+      },
+      "sortingAndDataFormat": {
+        "DataSort": {
+          "columnOrder": [],
+          "fullColumnOrder": [],
+          "sortOrder": []
+        },
+        "reportCustomizations": {
+          "exportCombineTables": false,
+          "showAllSubtotal": true,
+          "subtotalRecords": "",
+          "totalRecords": "20000",
+          "exportRawData": false
+        }
+      }
+    }
+  },
+  {
+    "args": {
+      "trade_type": "Export",
+      "classification": "NAIC",
+      "years": ["2022", "2023"],
+      "timeline": "Monthly",
+      "data_metrics": ["CONS_CUSTOMS_VALUE", "CONS_QUANTITY_2"],
+      "scale": "1000",
+      "commodities": ["8542", "8541"],
+      "granularity": "4",
+      "countries": [
+        {
+          "name": "China",
+          "value": "5700"
+        }
+      ],
+      "aggregate_countries": false,
+      "aggregate_commodities": false,
+      "max_rows": "500"
+    },
+    "query": {
+      "savedQueryName": "",
+      "savedQueryDesc": "",
+      "isOwner": true,
+      "runMonthly": false,
+      "reportOptions": {
+        "tradeType": "Export",
+        "classificationSystem": "NAIC"
+      },
+      "searchOptions": {
+        "countries": {
+          "aggregation": "Break Out Countries",
+          "countriesSelectType": "selected",
+          "countries": [
+            {
+              "name": "China",
+              "value": "5700"
+            }
+          ],
+          "countriesExpanded": [
+            {
+              "name": "China",
+              "value": "5700"
+            }
+          ],
+          "countryGroups": {
+            "systemGroups": [],
+            "userGroups": []
+          }
+        },
+        "commodities": {
+          "aggregation": "Break Out Commodities",
+          "commoditySelectType": "manual",
+          "commodities": [],
+          "commoditiesExpanded": [],
+          "commoditiesManual": "8542,8541",
+          "commodityGroups": {
+            "systemGroups": [],
+            "userGroups": []
+          },
+          "granularity": "4",
+          "codeDisplayFormat": "YES",
+          "groupGranularity": null,
+          "searchGranularity": null
+        },
+        "componentSettings": {
+          "timeframeSelectType": "fullYears",
+          "years": ["2022", "2023"],
+          "yearsTimeline": "Monthly",
+          "dataToReport": ["CONS_CUSTOMS_VALUE", "CONS_QUANTITY_2"],
+          "scale": "1000",
+          "startDate": null,
+          "endDate": null,
+          "startMonth": null,
+          "endMonth": null
+        },
+        "MiscGroup": {
+          "districts": {
+            "aggregation": "Aggregate District",
+            "districtGroups": {
+              "userGroups": []
+            },
+            "districts": [],
+            "districtsExpanded": [
+              {
+                "name": "All Districts",
+                "value": "all"
+              }
+            ],
+            "districtsSelectType": "all"
+          },
+          "importPrograms": {
+            "aggregation": null,
+            "importPrograms": [],
+            "programsSelectType": "all"
+          },
+          "extImportPrograms": {
+            "aggregation": "Aggregate CSC",
+            "extImportPrograms": [],
+            "extImportProgramsExpanded": [],
+            "programsSelectType": "all"
+          },
+          "provisionCodes": {
+            "aggregation": "Aggregate RPCODE",
+            "provisionCodesSelectType": "all",
+            "rateProvisionCodes": [],
+            "rateProvisionCodesExpanded": []
+          }
+        }
+      },
+      "sortingAndDataFormat": {
+        "DataSort": {
+          "columnOrder": [],
+          "fullColumnOrder": [],
+          "sortOrder": []
+        },
+        "reportCustomizations": {
+          "exportCombineTables": false,
+          "showAllSubtotal": true,
+          "subtotalRecords": "",
+          "totalRecords": "500",
+          "exportRawData": false
+        }
+      }
+    }
+  }
+]

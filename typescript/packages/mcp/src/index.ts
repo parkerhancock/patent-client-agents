@@ -6,6 +6,8 @@ import {
   CafcClient,
   ConfigurationError,
   CopyrightClient,
+  DataWebClient,
+  EdisClient,
   EpcClient,
   EpoCaseLawClient,
   EpoGuidelinesClient,
@@ -14,6 +16,8 @@ import {
   EpoUpGuidelinesClient,
   FeesClient,
   GooglePatentsClient,
+  HtsClient,
+  IdsClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -71,6 +75,7 @@ import {
   registerUpcStatutesTools,
   type UpcStatutesReader,
 } from "./upc-statutes.js";
+import { registerUsitcTools, usitcTokenFromEnv } from "./usitc.js";
 import { registerWipoLexTools } from "./wipo-lex.js";
 
 export interface UsptoClients {
@@ -94,6 +99,11 @@ export interface UsptoClients {
   cafc: CafcClient;
   copyright: CopyrightClient;
   wipoLex: WipoLexClient;
+  /** USITC EDIS; served only when a client is provided or USITC_EDIS_TOKEN(_FILE) is set. */
+  edis: EdisClient;
+  hts: HtsClient;
+  ids: IdsClient;
+  dataweb: DataWebClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -447,6 +457,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     (process.env.EPO_OPS_API_SECRET || process.env.EPO_API_SECRET)
       ? lazyClient(() => new EpoOpsClient())
       : undefined);
+  const edisToken = usitcTokenFromEnv("USITC_EDIS_TOKEN");
+  const edisClient =
+    provided.edis ??
+    (edisToken ? new EdisClient({ token: edisToken }) : undefined);
+  const datawebToken = usitcTokenFromEnv("USITC_DATAWEB_TOKEN");
   const clients = {
     applications,
     officeActions:
@@ -479,6 +494,12 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     upcStatutes,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
+    edis: edisClient,
+    hts: provided.hts ?? new HtsClient(),
+    ids: provided.ids ?? new IdsClient(),
+    dataweb:
+      provided.dataweb ??
+      new DataWebClient(datawebToken ? { token: datawebToken } : {}),
   };
   if ((options.toolset ?? toolsetFromEnv(process.env)) === "curated") {
     registerFacadeTools(
@@ -709,6 +730,16 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     upcStatutes,
     options.auth ? requireScopes("upc:read") : undefined,
+  );
+  registerUsitcTools(
+    server,
+    {
+      edis: edisClient,
+      hts: clients.hts,
+      ids: clients.ids,
+      dataweb: clients.dataweb,
+    },
+    options.auth ? requireScopes("usitc:read") : undefined,
   );
   return server;
 }

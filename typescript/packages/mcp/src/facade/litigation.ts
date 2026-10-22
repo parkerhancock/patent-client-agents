@@ -7,6 +7,18 @@ import {
   searchCafcPatentOpinions,
 } from "../cafc.js";
 import {
+  getUsitcInvestigations,
+  LIST_USITC_ATTACHMENTS_DESCRIPTION,
+  listUsitcAttachments,
+  listUsitcAttachmentsSchema,
+  SEARCH_USITC_DOCUMENTS_DESCRIPTION,
+  SEARCH_USITC_INVESTIGATIONS_DESCRIPTION,
+  searchUsitcDocuments,
+  searchUsitcDocumentsSchema,
+  searchUsitcInvestigations,
+  searchUsitcInvestigationsSchema,
+} from "../usitc.js";
+import {
   type AuthCheck,
   asList,
   type FacadeClients,
@@ -194,6 +206,7 @@ export function registerLitigationFacade(
   clients: FacadeClients,
   auth?: AuthCheck,
 ): void {
+  const { edis } = clients;
   server.tool(
     {
       ...facadeToolOptions(auth),
@@ -299,18 +312,27 @@ export function registerLitigationFacade(
     {
       ...facadeToolOptions(auth),
       name: "get_litigation",
-      description:
-        "Fetch one tribunal record by identifier — a PTAB record, USITC investigation, or UPC decision.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id or many). On this server only forum='ptab' is available; UPC decisions are not yet ported. Find identifiers with ``search_litigation``. For child records of a PTAB trial use ``list_ptab_children``.\n\nRelated tools: search_litigation, list_ptab_children.",
+      description: edis
+        ? "Fetch one tribunal record by identifier — a PTAB record, USITC investigation, or UPC decision.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id or many). On this server forum='ptab' and forum='usitc' are available; UPC decisions are not yet ported. Find identifiers with ``search_litigation`` or ``search_usitc_investigations``. For child records of a PTAB trial use ``list_ptab_children``.\n\nRelated tools: search_litigation, list_ptab_children, search_usitc_investigations, search_usitc_documents."
+        : "Fetch one tribunal record by identifier — a PTAB record, USITC investigation, or UPC decision.\n\nAlways returns a ``ListEnvelope`` (stable shape whether you pass one id or many). On this server only forum='ptab' is available; UPC decisions are not yet ported. Find identifiers with ``search_litigation``. For child records of a PTAB trial use ``list_ptab_children``.\n\nRelated tools: search_litigation, list_ptab_children.",
       input: z.object({
-        forum: z
-          .enum(["ptab", "upc"])
-          .describe(
-            "Which tribunal the identifier names. 'ptab' = USPTO Patent Trial and Appeal Board record. 'upc' = Unified Patent Court decision (not yet available on this server).",
-          ),
+        forum: (edis
+          ? z
+              .enum(["ptab", "usitc", "upc"])
+              .describe(
+                "Which tribunal the identifier names. 'ptab' = USPTO Patent Trial and Appeal Board record. 'usitc' = U.S. International Trade Commission Section 337 investigation. 'upc' = Unified Patent Court decision (not yet available on this server).",
+              )
+          : z
+              .enum(["ptab", "upc"])
+              .describe(
+                "Which tribunal the identifier names. 'ptab' = USPTO Patent Trial and Appeal Board record. 'upc' = Unified Patent Court decision (not yet available on this server).",
+              )) as z.ZodType<"ptab" | "usitc" | "upc">,
         identifier: z
           .union([z.string().min(1), z.array(z.string().min(1)).min(1).max(50)])
           .describe(
-            "The record identifier, or a list for portfolio workflows. By forum: ptab → trial number (e.g. 'IPR2024-00001') or a document identifier for non-proceeding ptab_type; upc → canonical case id (e.g. 'UPC_CFI_1747/2025', 'UPC_CoA_335/2023').",
+            edis
+              ? "The record identifier, or a list for portfolio workflows. By forum: ptab → trial number (e.g. 'IPR2024-00001') or a document identifier for non-proceeding ptab_type; usitc → investigation number in EDIS format (e.g. '337-1234', without the 'TA-' infix); upc → canonical case id (e.g. 'UPC_CFI_1747/2025', 'UPC_CoA_335/2023')."
+              : "The record identifier, or a list for portfolio workflows. By forum: ptab → trial number (e.g. 'IPR2024-00001') or a document identifier for non-proceeding ptab_type; upc → canonical case id (e.g. 'UPC_CFI_1747/2025', 'UPC_CoA_335/2023').",
           ),
         ptab_type: ptabType
           .default("proceeding")
@@ -325,6 +347,8 @@ export function registerLitigationFacade(
           "Unified Patent Court (UPC) decision retrieval",
           "Use forum='ptab'.",
         );
+      if (input.forum === "usitc" && edis)
+        return getUsitcInvestigations(edis, input.identifier);
       const type = input.ptab_type;
       const ids = asList(input.identifier);
       const get = ptabGet(clients, type);
@@ -469,5 +493,36 @@ export function registerLitigationFacade(
         response.provenance,
       );
     },
+  );
+
+  // Python re-exports the EDIS search and attachment-list tools only when the
+  // EDIS token is configured.
+  if (!edis) return;
+  server.tool(
+    {
+      ...facadeToolOptions(auth),
+      name: "search_usitc_investigations",
+      description: SEARCH_USITC_INVESTIGATIONS_DESCRIPTION,
+      input: searchUsitcInvestigationsSchema,
+    },
+    (input) => searchUsitcInvestigations(edis, input),
+  );
+  server.tool(
+    {
+      ...facadeToolOptions(auth),
+      name: "search_usitc_documents",
+      description: SEARCH_USITC_DOCUMENTS_DESCRIPTION,
+      input: searchUsitcDocumentsSchema,
+    },
+    (input) => searchUsitcDocuments(edis, input),
+  );
+  server.tool(
+    {
+      ...facadeToolOptions(auth),
+      name: "list_usitc_attachments",
+      description: LIST_USITC_ATTACHMENTS_DESCRIPTION,
+      input: listUsitcAttachmentsSchema,
+    },
+    ({ document_id }) => listUsitcAttachments(edis, document_id),
   );
 }
