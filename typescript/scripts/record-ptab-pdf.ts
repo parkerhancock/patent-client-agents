@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { ptabPdfRecording } from "../tests/ptab-pdf-recording.js";
 
 if (!Bun.argv.includes("--record"))

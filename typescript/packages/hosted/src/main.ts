@@ -10,6 +10,8 @@ import { logEvent } from "./usage.js";
  */
 async function main() {
   const config = loadConfig(process.env);
+  // The client library reads this when each connector is constructed.
+  process.env.PATENT_CLIENT_AGENTS_CACHE = config.httpCache;
   await prepareCorpora(config.corpora);
   const app = await createHostedApp(config);
   const listener = Bun.serve({
@@ -29,6 +31,7 @@ async function main() {
     state_backend: config.stateBackend,
     hidden_tools: config.hiddenTools,
     credentials: config.credentials,
+    http_cache: config.httpCache,
   });
   let stopping = false;
   for (const signal of ["SIGINT", "SIGTERM"] as const)

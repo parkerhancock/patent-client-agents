@@ -1,5 +1,6 @@
 import { XMLParser, XMLValidator } from "fast-xml-parser";
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import { parseRegister } from "./register-models.js";
 import { env } from "./runtime/env.js";
 import {
@@ -280,9 +281,10 @@ export function parseTsdrDocuments(xml: string): TsdrDocument[] {
   walk(parsed);
   return documents;
 }
-export class TsdrClient {
+export class TsdrClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: ClientOptions = {}) {
+    super();
     const apiKey = options.apiKey ?? env("USPTO_TSDR_API_KEY");
     if (!apiKey?.trim())
       throw new ConfigurationError(
@@ -292,6 +294,7 @@ export class TsdrClient {
       ...options,
       baseUrl: options.baseUrl ?? "https://tsdrapi.uspto.gov",
       sourceName: "USPTO TSDR",
+      cache: { name: "uspto_tsdr" },
       headers: { "USPTO-API-KEY": apiKey, accept: "*/*" },
     });
   }

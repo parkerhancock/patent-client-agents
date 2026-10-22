@@ -1,3 +1,4 @@
+import { CachedClient } from "../cache/client.js";
 import { pdfPageTexts } from "../runtime/pdf.js";
 import {
   ApiError,
@@ -1020,17 +1021,21 @@ const COMMON_NOTES =
   "From OEPM's consolidated PDF of fees and public prices. Fee codes are OEPM's own (oepm-<code>); rows without their own code (further classes, multi-design bands, surcharge columns) extend the code they are printed with. Paper rows (trámite o pago no electrónicos) carry a paper_filing condition; electronic rows say so in the notes. Agent registration fees (BB01, BB02) and the public prices (precios públicos) are not IP-right fees and are omitted.";
 
 /** Fetches OEPM's fee PDF and projects the patent, trademark and design schedules. */
-export class OepmFeesClient {
+export class OepmFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private pending: Promise<
     Parsed & { provenance: FeeSchedule["provenance"] }
   > | null = null;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       timeoutMs: options.timeoutMs ?? 60_000,
       baseUrl: options.baseUrl ?? "https://www.oepm.es",
       sourceName: OEPM_FEES_SOURCE,
+      cache: { name: "oepm_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "application/pdf", "user-agent": USER_AGENT },
     });
   }

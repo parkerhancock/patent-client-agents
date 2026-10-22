@@ -9,6 +9,7 @@ starts and lists every tool under Node 24.
 | | Bun | Node 24 | Browser |
 | --- | --- | --- | --- |
 | Corpora (MPEP, EPO legal books) | Yes, by path or bytes | Yes, by path or bytes | Yes, by bytes only |
+| HTTP response cache | SQLite file (default), memory | SQLite file via `node:sqlite` (default), memory | Memory (default), IndexedDB |
 | Network connectors | Yes | Yes | Where the office allows CORS, or through the relay |
 | Patent Public Search, Trademark Search | Yes | Yes | No; use the MCP server |
 | MCP server | Yes | Starts and serves tools (smoke-checked) | No |
@@ -33,6 +34,12 @@ The client package uses web-standard APIs: `fetch`, Web Crypto, `TextEncoder`,
 - **Files.** `src/runtime/files.ts` reads artifact paths on server runtimes.
   The package's `#files` import condition swaps in `files.browser.ts` for
   browser builds, where paths fail with `CORPUS_UNAVAILABLE`.
+- **HTTP response cache.** The policy engine (`http-cache-semantics`) is
+  plain JavaScript. SQLite cache files use `bun:sqlite` under Bun and
+  `node:sqlite` under Node 22.5+ (which prints an `ExperimentalWarning`),
+  through the `#cache-sqlite` import condition; the browser build gets a stub
+  and defaults to memory, with IndexedDB on request. Where SQLite is missing
+  the cache falls back to memory with a one-time notice. See [cache](cache.md).
 
 Corpus clients take `source` (bytes, or a function returning bytes) instead of
 `corpusPath`, which is how browsers supply artifacts:

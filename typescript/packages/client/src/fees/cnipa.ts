@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -261,13 +262,17 @@ export function cnipaPatentFees(rows: [string, string | null][]): {
 }
 
 /** Fetches the CNIPA English fee page and projects the invention-patent schedule. */
-export class CnipaFeesClient {
+export class CnipaFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://english.cnipa.gov.cn",
       sourceName: CNIPA_FEES_SOURCE,
+      cache: { name: "cnipa_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/html", "user-agent": USER_AGENT },
     });
   }

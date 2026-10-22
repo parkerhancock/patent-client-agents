@@ -10,6 +10,7 @@ import type {
   FamilyOptions,
   IdentifierType,
 } from "./applications-models.js";
+import { CachedClient } from "./cache/client.js";
 import {
   ApplicationRecordSchema,
   type ApplicationResponse,
@@ -250,9 +251,10 @@ function applications(result: JsonResult, flatten: boolean): SearchResponse {
   });
 }
 
-export class ApplicationsClient {
+export class ApplicationsClient extends CachedClient {
   private readonly transport: OdpTransport;
   constructor(options: ClientOptions = {}) {
+    super();
     this.transport = new OdpTransport(options);
   }
 

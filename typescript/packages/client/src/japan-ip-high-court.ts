@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { Provenance } from "./models.js";
 import {
   readXls,
@@ -271,14 +272,16 @@ export function findJapanIpHighCourtCase(
   return found;
 }
 
-export class JapanIpHighCourtClient {
+export class JapanIpHighCourtClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       timeoutMs: options.timeoutMs ?? 60_000,
       baseUrl: options.baseUrl ?? JAPAN_IP_HIGH_COURT_ORIGIN,
       sourceName: JAPAN_IP_HIGH_COURT_SOURCE,
+      cache: { name: "japan_ip_high_court" },
       headers: HEADERS,
     });
   }

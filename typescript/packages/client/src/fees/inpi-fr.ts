@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import { pdfPageTexts } from "../runtime/pdf.js";
 import {
   ApiError,
@@ -729,7 +730,7 @@ const COVERAGE_NOTE: Record<Right, string> = {
 };
 
 /** Fetches the INPI procedures PDF (found through the Tarifs page) and projects the patent, trademark and design schedules. */
-export class InpiFrFeesClient {
+export class InpiFrFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private pending: Promise<{
     parsed: Parsed;
@@ -737,10 +738,14 @@ export class InpiFrFeesClient {
     provenance: FeeSchedule["provenance"];
   }> | null = null;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? INPI_BASE,
       sourceName: INPI_FR_FEES_SOURCE,
+      cache: { name: "inpi_fr_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: {
         accept: "text/html,application/pdf",
         "user-agent": USER_AGENT,

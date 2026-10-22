@@ -82,6 +82,11 @@ const schema = z.object({
   HIDDEN_TOOLS: z.string().default("search_trademarks"),
   CORPORA_MANIFEST_URI: z.string().trim().optional(),
   CORPORA_CACHE_DIR: z.string().trim().min(1).default("/app/corpora"),
+  // Cloud Run's filesystem is memory-backed and per instance, so a SQLite file
+  // buys nothing over an in-process cache; "off" disables it.
+  PATENT_CLIENT_AGENTS_CACHE: z
+    .enum(["off", "memory", "sqlite"])
+    .default("memory"),
   K_SERVICE: z.string().optional(),
 });
 
@@ -134,6 +139,8 @@ export interface HostedConfig {
   };
   hiddenTools: string[];
   corpora: { manifestUri?: string; cacheDir: string };
+  /** HTTP response cache for the connectors (PATENT_CLIENT_AGENTS_CACHE); see docs/cache.md. */
+  httpCache: "off" | "memory" | "sqlite";
   /** Configured credential families, by name only. Values never leave the environment. */
   credentials: Record<string, boolean>;
 }
@@ -255,6 +262,7 @@ export function loadConfig(env: Env): HostedConfig {
         : {}),
       cacheDir: value.CORPORA_CACHE_DIR,
     },
+    httpCache: value.PATENT_CLIENT_AGENTS_CACHE,
     credentials,
   };
 }

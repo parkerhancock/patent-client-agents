@@ -1,5 +1,6 @@
 import { degrees, PDFDocument } from "pdf-lib";
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import {
   type ClassificationMappingResponse,
   type CpciBiblioResponse,
@@ -310,11 +311,12 @@ function evidenceIsEmpty(name: string, data: object): boolean {
 }
 
 /** EPO Open Patent Services 3.2: published data, family, legal, register, number service and CPC. */
-export class EpoOpsClient {
+export class EpoOpsClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private readonly token: OpsToken;
   private readonly maxPdfPages: number;
   constructor(options: EpoOpsClientOptions = {}) {
+    super();
     const key = credential(options.apiKey, "EPO_OPS_API_KEY", "EPO_API_KEY");
     const secret = credential(
       options.apiSecret,
@@ -336,6 +338,7 @@ export class EpoOpsClient {
       ...transport,
       baseUrl: options.baseUrl ?? ORIGIN,
       sourceName: EPO_OPS_SOURCE,
+      cache: { name: "epo_ops" },
       headers: { accept: "application/xml" },
     });
     this.token = new OpsToken(this.http, textToBase64(`${key}:${secret}`));

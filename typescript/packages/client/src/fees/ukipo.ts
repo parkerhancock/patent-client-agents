@@ -1,3 +1,4 @@
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -520,7 +521,7 @@ function maintenanceCoverage(fees: FeeItem[]): RecurringFeeCoverage {
 }
 
 /** Fetches the UK IPO's official fee CSVs for patents and trade marks. */
-export class UkipoFeesClient {
+export class UkipoFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   /** gov.uk serves the CSV files from a separate asset host. */
   private readonly assets: GenericHttpTransport;
@@ -529,16 +530,23 @@ export class UkipoFeesClient {
     effective: string;
   }> | null = null;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.gov.uk",
       sourceName: UKIPO_FEES_SOURCE,
+      cache: { name: "ukipo_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/html", "user-agent": USER_AGENT },
     });
     this.assets = new GenericHttpTransport({
       ...options,
       baseUrl: `https://${ASSET_HOST}`,
       sourceName: UKIPO_FEES_SOURCE,
+      cache: { name: "ukipo_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/csv", "user-agent": USER_AGENT },
     });
   }

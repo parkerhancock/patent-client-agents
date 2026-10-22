@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { epoRecording, operations } from "../tests/epo-ops-recordings.js";
 
 /**

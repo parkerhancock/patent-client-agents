@@ -1,5 +1,6 @@
 import { decodeHTML, decodeXML } from "entities";
 import { XMLParser } from "fast-xml-parser";
+import { CachedClient } from "./cache/client.js";
 import type { Provenance } from "./models.js";
 import { env } from "./runtime/env.js";
 import {
@@ -37,6 +38,7 @@ const invalid = (message: string, status = 200) =>
   new ApiError(message, status, "INVALID_RESPONSE");
 
 function transport(
+  cacheName: string,
   options: UsitcClientOptions,
   origin: string,
   headers: Record<string, string>,
@@ -48,6 +50,7 @@ function transport(
     timeoutMs: rest.timeoutMs ?? timeoutMs,
     baseUrl: rest.baseUrl ?? origin,
     sourceName: USITC_SOURCE,
+    cache: { name: cacheName },
     headers: { ...headers, "user-agent": userAgent ?? USITC_USER_AGENT },
   });
 }
@@ -323,17 +326,20 @@ export function dispositionFilename(header: string | null): string | null {
  * EDIS (https://edis.usitc.gov/data). Investigation, document and attachment
  * metadata are public; attachment downloads need an EDIS API bearer token.
  */
-export class EdisClient {
+export class EdisClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private readonly token: string | undefined;
   private readonly expiresAt: number | null;
   private readonly now: () => number;
   constructor(options: EdisClientOptions = {}) {
+    super();
     const { token, now, ...rest } = options;
     this.token = (token ?? env("USITC_EDIS_TOKEN"))?.trim() || undefined;
     this.expiresAt = this.token ? jwtExpiry(this.token) : null;
     this.now = now ?? Date.now;
-    this.http = transport(rest, EDIS_ORIGIN, { accept: "application/xml" });
+    this.http = transport("usitc_edis", rest, EDIS_ORIGIN, {
+      accept: "application/xml",
+    });
   }
   /** True when a token is configured. */
   get hasToken(): boolean {
@@ -534,10 +540,13 @@ const stringOrNull = (value: unknown) =>
   typeof value === "string" && value ? value : null;
 
 /** Harmonized Tariff Schedule REST (https://hts.usitc.gov/reststop). No key. */
-export class HtsClient {
+export class HtsClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: UsitcClientOptions = {}) {
-    this.http = transport(options, HTS_ORIGIN, { accept: "application/json" });
+    super();
+    this.http = transport("usitc_hts", options, HTS_ORIGIN, {
+      accept: "application/json",
+    });
   }
   /** Keyword search; the service returns at most about 100 rows. */
   async search(
@@ -655,11 +664,13 @@ const IDS_FIELDS: Record<string, string> = {
 };
 
 /** USITC IDS investigations feed (https://ids.usitc.gov/investigations.json). No key. */
-export class IdsClient {
+export class IdsClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: UsitcClientOptions = {}) {
+    super();
     // The feed was 37 MB in October 2026 and grows; allow headroom.
     this.http = transport(
+      "usitc_ids",
       {
         ...options,
         maxResponseBytes: options.maxResponseBytes ?? 128 * 1024 * 1024,
@@ -852,13 +863,15 @@ export function dataWebRowCount(dto: Record<string, unknown>): number | null {
 }
 
 /** USITC DataWeb trade statistics (https://datawebws.usitc.gov/dataweb). Bearer token. */
-export class DataWebClient {
+export class DataWebClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private readonly token: string | undefined;
   constructor(options: DataWebClientOptions = {}) {
+    super();
     const { token, ...rest } = options;
     this.token = (token ?? env("USITC_DATAWEB_TOKEN"))?.trim() || undefined;
     this.http = transport(
+      "usitc_dataweb",
       rest,
       DATAWEB_ORIGIN,
       { accept: "application/json" },

@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import {
   ApiError,
   type ClientOptions,
@@ -681,14 +682,18 @@ interface Page {
  * and design schedules. The JPO's CloudFront edge answered plain requests
  * with HTTP 403 when this port was recorded; see docs/fees.md.
  */
-export class JpoFeesClient {
+export class JpoFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private pending: Promise<Page> | null = null;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.jpo.go.jp",
       sourceName: JPO_FEES_SOURCE,
+      cache: { name: "jpo_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "text/html", "user-agent": USER_AGENT },
     });
   }

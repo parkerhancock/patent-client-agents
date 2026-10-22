@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { RequestOptions } from "./models.js";
 import { type ClientOptions, OdpApiError, OdpTransport } from "./transport.js";
 
@@ -36,10 +37,11 @@ export type OfficeActionAnalyticsOptions = z.input<
   typeof OfficeActionAnalyticsOptionsSchema
 > &
   RequestOptions;
-export class OfficeActionAnalyticsClient {
+export class OfficeActionAnalyticsClient extends CachedClient {
   private readonly transport: OdpTransport;
   constructor(options: ClientOptions = {}) {
-    this.transport = new OdpTransport(options);
+    super();
+    this.transport = new OdpTransport(options, "uspto_office_actions");
   }
   async getFields(
     dataset: OfficeActionAnalyticsDataset,

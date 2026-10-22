@@ -1,3 +1,4 @@
+import { CachedClient } from "../cache/client.js";
 import { type PdfTextItem, pdfPageItems } from "../runtime/pdf.js";
 import {
   ApiError,
@@ -827,7 +828,7 @@ const LANGUAGE =
   "The notice is Hebrew only; labels are English summaries of the Hebrew items, and the notice says the Reshumot (Official Gazette) publication controls. Fees are CPI-linked and republished each January.";
 
 /** Fetches the ILPO fee notice and projects the patent, trade mark and design schedules. */
-export class IlpoFeesClient {
+export class IlpoFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private pending: Promise<{
     items: IlpoItem[];
@@ -835,10 +836,14 @@ export class IlpoFeesClient {
     provenance: FeeSchedule["provenance"];
   }> | null = null;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.gov.il",
       sourceName: ILPO_FEES_SOURCE,
+      cache: { name: "ilpo_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 30 * 24 * 3600,
       headers: { accept: "application/pdf", "user-agent": USER_AGENT },
     });
   }

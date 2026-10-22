@@ -2,6 +2,8 @@
 // records what happens. Credentials come from the environment (see
 // docs/facade.md); nothing here prints them.
 // Usage: bun scripts/live-facade.ts <report.json> [--only=tool,tool]
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { writeFile } from "node:fs/promises";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";

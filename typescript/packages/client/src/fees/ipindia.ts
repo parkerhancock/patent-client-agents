@@ -1,3 +1,4 @@
+import { CachedClient } from "../cache/client.js";
 import { pdfPageItems } from "../runtime/pdf.js";
 import {
   ApiError,
@@ -607,13 +608,17 @@ function coverage(fees: FeeItem[]): RecurringFeeCoverage {
 }
 
 /** Fetches the First Schedule PDF and projects the patent schedule. */
-export class IpIndiaFeesClient {
+export class IpIndiaFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://ipindia.gov.in",
       sourceName: IPINDIA_FEES_SOURCE,
+      cache: { name: "ipindia_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "application/pdf", "user-agent": USER_AGENT },
     });
   }

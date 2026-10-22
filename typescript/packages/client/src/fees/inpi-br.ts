@@ -1,3 +1,4 @@
+import { CachedClient } from "../cache/client.js";
 import { type PdfTextItem, pdfPageItems } from "../runtime/pdf.js";
 import {
   ApiError,
@@ -626,13 +627,17 @@ const STATUTORY =
   "Lei 9.279/1996 (Brazilian IP Law); Ordinance MDIC 39/2014; ME Ordinance 516/2019; INPI Resolution 251/2019.";
 
 /** Fetches INPI Brazil's English fee tables (patents, trademarks). */
-export class InpiBrFeesClient {
+export class InpiBrFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.gov.br",
       sourceName: INPI_BR_FEES_SOURCE,
+      cache: { name: "inpi_br_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: { accept: "application/pdf", "user-agent": USER_AGENT },
     });
   }

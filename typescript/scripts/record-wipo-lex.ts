@@ -1,3 +1,5 @@
+// Recording must reach the network: the response cache stays off.
+import "../tests/no-cache.js";
 import { wipoLexRecording } from "../tests/wipo-lex-recordings.js";
 
 /** Record a WIPO Lex session. Prints counts, never bodies. */

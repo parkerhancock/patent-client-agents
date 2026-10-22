@@ -1,5 +1,6 @@
 import { XMLParser, XMLValidator } from "fast-xml-parser";
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { Provenance } from "./models.js";
 import { env } from "./runtime/env.js";
 import {
@@ -569,12 +570,13 @@ function pageParams(options: KiprisPageOptions) {
 const flag = (value: boolean | undefined) =>
   value === false ? "false" : "true";
 
-export class KiprisClient {
+export class KiprisClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private readonly serviceKey: string;
   private readonly baseUrl: string;
 
   constructor(options: KiprisClientOptions = {}) {
+    super();
     const key =
       options.serviceKey || options.apiKey || env("KIPO_KIPRIS_API_KEY");
     if (!key?.trim())
@@ -601,6 +603,7 @@ export class KiprisClient {
       ...transport,
       baseUrl: this.baseUrl,
       sourceName: KIPRIS_SOURCE,
+      cache: { name: "kipo_kipris" },
       headers: { accept: "application/xml" },
     });
   }

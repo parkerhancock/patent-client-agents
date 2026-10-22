@@ -3,8 +3,12 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, relative } from "node:path";
 
 const root = join(import.meta.dir, "..", "packages", "client", "src");
-/** Server-only modules: the #files adapter and the corpus bootstrap, which the index does not export. */
-const serverOnly = new Set(["runtime/files.ts", "corpus/bootstrap.ts"]);
+/** Server-only modules: the #files and #cache-sqlite adapters and the corpus bootstrap, which the index does not export. */
+const serverOnly = new Set([
+  "runtime/files.ts",
+  "runtime/cache-sqlite.ts",
+  "corpus/bootstrap.ts",
+]);
 
 async function sources(directory: string): Promise<string[]> {
   const entries = await readdir(directory, { withFileTypes: true });

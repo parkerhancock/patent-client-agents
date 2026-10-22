@@ -183,6 +183,8 @@ try {
     jp_court?: string;
     ilpo_section?: string;
     ipos_manual?: string;
+    idb_cache?: string;
+    default_cache?: string;
   };
   if (
     !checked.ok ||
@@ -198,7 +200,9 @@ try {
     checked.jp_court !== "34/219:令和7年（行ケ）第10084号" ||
     checked.ipo_in_mppp !== "09.03.05.04" ||
     checked.ilpo_section !== "Section 13 Commercial Torts Law" ||
-    checked.ipos_manual !== "Discoveries"
+    checked.ipos_manual !== "Discoveries" ||
+    checked.idb_cache !== "indexeddb:1:1:135.00" ||
+    checked.default_cache !== "memory"
   )
     process.exitCode = 1;
 } finally {

@@ -1,4 +1,5 @@
 import { parseHTML } from "linkedom";
+import { CachedClient } from "../cache/client.js";
 import { pdfPageTexts } from "../runtime/pdf.js";
 import {
   ApiError,
@@ -615,13 +616,17 @@ export function trademarkEnforcedDate(pdfText: string): string | null {
 }
 
 /** Fetches TIPO's patent fee page and trademark fee PDF. */
-export class TipoFeesClient {
+export class TipoFeesClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? "https://www.tipo.gov.tw",
       sourceName: TIPO_FEES_SOURCE,
+      cache: { name: "tipo_fees" },
+      // Python's DEFAULT_TTL_SECONDS: the default age for cacheClearExpired, not freshness.
+      ttlSeconds: options.ttlSeconds ?? 7 * 24 * 3600,
       headers: {
         accept: "text/html,application/pdf",
         "user-agent": USER_AGENT,

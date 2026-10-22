@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { RequestOptions } from "./models.js";
 import { type ClientOptions, OdpApiError, OdpTransport } from "./transport.js";
 
@@ -207,10 +208,11 @@ function request(
   return { searchParams };
 }
 
-export class OfficeActionsClient {
+export class OfficeActionsClient extends CachedClient {
   private readonly transport: OdpTransport;
   constructor(options: ClientOptions = {}) {
-    this.transport = new OdpTransport(options);
+    super();
+    this.transport = new OdpTransport(options, "uspto_office_actions");
   }
   async search(options: OfficeActionSearchOptions = {}) {
     const parsed = OfficeActionSearchOptionsSchema.parse(options);

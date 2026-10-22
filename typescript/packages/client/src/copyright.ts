@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import type { Provenance } from "./models.js";
 import {
   ApiError,
@@ -176,13 +177,15 @@ export function normalizeCopyrightRecord(
   };
 }
 
-export class CopyrightClient {
+export class CopyrightClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.http = new GenericHttpTransport({
       ...options,
       baseUrl: options.baseUrl ?? COPYRIGHT_ORIGIN,
       sourceName: COPYRIGHT_SOURCE,
+      cache: { name: "copyright" },
       headers: { accept: "application/json, text/plain, */*" },
     });
   }

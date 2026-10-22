@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CachedClient } from "./cache/client.js";
 import { all, first, parseDocument, squash } from "./google-patents/dom.js";
 import type { Provenance } from "./models.js";
 import {
@@ -407,10 +408,11 @@ const positivePage = (page: number) => {
   return page;
 };
 
-export class ChinaSpcIpCourtClient {
+export class ChinaSpcIpCourtClient extends CachedClient {
   private readonly http: GenericHttpTransport;
   private readonly baseUrl: string;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
+    super();
     this.baseUrl = (options.baseUrl ?? CHINA_SPC_IP_COURT_ORIGIN).replace(
       /\/+$/,
       "",
@@ -420,6 +422,7 @@ export class ChinaSpcIpCourtClient {
       timeoutMs: options.timeoutMs ?? 60_000,
       baseUrl: this.baseUrl,
       sourceName: CHINA_SPC_IP_COURT_SOURCE,
+      cache: { name: "china_spc_ip_court" },
       headers: {
         accept: "text/html,application/xhtml+xml",
         "accept-language": "zh-CN,zh;q=0.9,en;q=0.8",
