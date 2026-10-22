@@ -1,6 +1,7 @@
 import type { ClientOptions, TransportRequestOptions } from "../transport.js";
 import { OFFICE_ALIASES, PYTHON_FEE_ROUTES } from "./aliases.js";
 import { EpoFeesClient } from "./epo.js";
+import { InpiBrFeesClient } from "./inpi-br.js";
 import {
   type EntityTier,
   type FeeCategory,
@@ -10,11 +11,18 @@ import {
   type RightType,
   RightTypeSchema,
 } from "./models.js";
+import { PrhFeesClient } from "./prh.js";
+import { TipoFeesClient } from "./tipo.js";
+import { TurkpatentFeesClient } from "./turkpatent.js";
 import { UsptoFeesClient } from "./uspto.js";
 
 export * from "./aliases.js";
 export * from "./epo.js";
+export * from "./inpi-br.js";
 export * from "./models.js";
+export * from "./prh.js";
+export * from "./tipo.js";
+export * from "./turkpatent.js";
 export * from "./uspto.js";
 
 export type FeeRouteErrorCode =
@@ -101,12 +109,26 @@ export class FeesClient {
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
     const epo = new EpoFeesClient(options);
     const uspto = new UsptoFeesClient(options);
+    const tipo = new TipoFeesClient(options);
+    const prh = new PrhFeesClient(options);
+    const turkpatent = new TurkpatentFeesClient(options);
+    const inpiBr = new InpiBrFeesClient(options);
     this.routes = new Map<string, Loader>([
       ["USPTO/patent", (o) => uspto.getPatentSchedule(o)],
       ["USPTO/trademark", (o) => uspto.getTrademarkSchedule(o)],
       ["USPTO/design", (o) => uspto.getDesignSchedule(o)],
       ["EPO/patent", (o) => epo.getEpcSchedule(o)],
       ["EPO-UP/patent", (o) => epo.getUnitaryPatentSchedule(o)],
+      ["TIPO/patent", (o) => tipo.getPatentSchedule(o)],
+      ["TIPO/trademark", (o) => tipo.getTrademarkSchedule(o)],
+      ["PRH/patent", (o) => prh.getPatentSchedule(o)],
+      ["PRH/trademark", (o) => prh.getTrademarkSchedule(o)],
+      ["PRH/design", (o) => prh.getDesignSchedule(o)],
+      ["TURKPATENT/patent", (o) => turkpatent.getPatentSchedule(o)],
+      ["TURKPATENT/trademark", (o) => turkpatent.getTrademarkSchedule(o)],
+      ["TURKPATENT/design", (o) => turkpatent.getDesignSchedule(o)],
+      ["INPI-BR/patent", (o) => inpiBr.getPatentSchedule(o)],
+      ["INPI-BR/trademark", (o) => inpiBr.getTrademarkSchedule(o)],
     ]);
   }
   /** Schedules available in this runtime, as `office/right` keys. */
