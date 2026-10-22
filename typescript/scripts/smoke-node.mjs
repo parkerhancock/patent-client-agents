@@ -18,6 +18,7 @@ import {
   IpoInStatutesClient,
   MoppClient,
   MpepClient,
+  parseJapanIpHighCourtWorkbook,
   TmepClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
@@ -74,6 +75,15 @@ results.dpma_section = (
   await dpma.getSectionByCitation("§ 14 MarkenG")
 ).statute;
 assert.equal(results.dpma_section, "MarkenG");
+const jpCourt = parseJapanIpHighCourtWorkbook(
+  new Uint8Array(
+    gunzipSync(
+      await readFile(fixture("japan-ip-high-court/jikenitiran.xls.gz")),
+    ),
+  ),
+);
+results.jp_court = `${jpCourt.pending_count}/${jpCourt.closed_count}`;
+assert.equal(results.jp_court, "34/219");
 const tmep = new TmepClient({
   source: new Uint8Array(await readFile(fixture("tmep/tmep.db"))),
 });

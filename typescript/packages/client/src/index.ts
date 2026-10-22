@@ -12,6 +12,7 @@ export * from "./epo-ops-resources.js";
 export * from "./fees/index.js";
 export * from "./google-patents/index.js";
 export * from "./ipo-in.js";
+export * from "./japan-ip-high-court.js";
 export * from "./kipris.js";
 export * from "./models.js";
 export * from "./mpep.js";
@@ -29,6 +30,14 @@ export {
   pdfPageTexts,
 } from "./runtime/pdf.js";
 export { configureWasm, type WasmLocations } from "./runtime/wasm.js";
+export {
+  readXls,
+  type XlsCell,
+  XlsError,
+  type XlsSheet,
+  type XlsWorkbook,
+  xlsSerialDate,
+} from "./runtime/xls.js";
 export * from "./tmep.js";
 export * from "./trademark-assignments.js";
 export * from "./trademark-search.js";
