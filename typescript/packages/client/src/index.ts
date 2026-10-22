@@ -23,6 +23,11 @@ export * from "./ptab.js";
 export * from "./publications.js";
 export * from "./register-models.js";
 export * from "./relay.js";
+export {
+  type PdfTextItem,
+  pdfPageItems,
+  pdfPageTexts,
+} from "./runtime/pdf.js";
 export { configureWasm, type WasmLocations } from "./runtime/wasm.js";
 export * from "./tmep.js";
 export * from "./trademark-assignments.js";
