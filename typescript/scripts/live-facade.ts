@@ -589,10 +589,14 @@ const cases: Case[] = [
     args: { corpus: "uspto_tmep", identifier: "1207.01" },
   },
   {
-    name: "dpma (unported)",
+    name: "dpma search",
     tool: "search_legal_reference",
-    args: { corpus: "dpma", query: "Patent" },
-    expect: "error",
+    args: { corpus: "dpma", query: "Unterlassung", statute: "PatG" },
+  },
+  {
+    name: "dpma section",
+    tool: "get_legal_reference",
+    args: { corpus: "dpma", identifier: "§ 139 PatG" },
   },
   // Documents
   {

@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { gunzipSync, zstdCompressSync } from "node:zlib";
 import {
+  DpmaStatutesClient,
   EpcClient,
   EpoFeesClient,
   EpoOpsClient,
@@ -54,6 +55,15 @@ const upc = new UpcStatutesClient({
 });
 results.upc_instrument = (await upc.getInstrument("statute")).instrument;
 assert.equal(results.upc_instrument, "upca");
+const dpma = new DpmaStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("dpma-statutes/dpma_statutes.db"))),
+  ),
+});
+results.dpma_section = (
+  await dpma.getSectionByCitation("§ 14 MarkenG")
+).statute;
+assert.equal(results.dpma_section, "MarkenG");
 const tmep = new TmepClient({
   source: new Uint8Array(await readFile(fixture("tmep/tmep.db"))),
 });
@@ -95,6 +105,6 @@ const google = GooglePatentsClient.parsePatent(
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
 
-for (const client of [epcByPath, epcBytes, mpep, zst, upc, tmep])
+for (const client of [epcByPath, epcBytes, mpep, zst, upc, dpma, tmep])
   client.close();
 console.log(JSON.stringify({ runtime: `node ${process.version}`, ...results }));

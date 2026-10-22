@@ -23,6 +23,7 @@ import type {
   WipoLexClient,
 } from "@patent-client-agents/client";
 import { z } from "zod";
+import type { DpmaStatutesReader } from "../dpma-statutes.js";
 import type { EpoLegalClients } from "../epo-legal.js";
 import {
   type AuthCheck,
@@ -65,6 +66,7 @@ export interface FacadeClients {
   wipoLex: WipoLexClient;
   epoLegal: EpoLegalClients;
   upcStatutes: UpcStatutesReader;
+  dpmaStatutes: DpmaStatutesReader;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
   /** USITC EDIS; when present the facade adds the Python EDIS-enabled surface. */
