@@ -118,20 +118,23 @@ function originalLimitations(claim: Element): string[] {
   });
 }
 
-/** Claims, dependency and structured limitations from a Google Patents page. */
-export function extractClaims(root: Root): ExtractedClaims {
+/** The claim elements of a page, in claim order. */
+function claimElements(root: Root): Element[] {
   const container =
     first(root, "div.claims") ?? first(root, "section[itemprop='claims']");
+  if (!container) return [];
+  const divClaims = all(container, "div.claim[num]");
+  return divClaims.length ? divClaims : all(container, "claim[num]");
+}
+
+/** Claims, dependency and structured limitations from a Google Patents page. */
+export function extractClaims(root: Root): ExtractedClaims {
   const result: ExtractedClaims = {
     claims: [],
     structured_limitations: {},
     original_limitations: {},
   };
-  if (!container) return result;
-  const divClaims = all(container, "div.claim[num]");
-  for (const claim of divClaims.length
-    ? divClaims
-    : all(container, "claim[num]")) {
+  for (const claim of claimElements(root)) {
     const number = (claim.getAttribute("num") ?? "").replace(/^0+/, "").trim();
     if (!number) continue;
     const original = originalText(claim);
@@ -159,6 +162,52 @@ export function extractClaims(root: Root): ExtractedClaims {
     result.structured_limitations[number] = limitations(english);
     if (original)
       result.original_limitations[number] = originalLimitations(claim);
+  }
+  return result;
+}
+
+/** One limitation and its nesting depth in the claim tree (0 = top level). */
+export interface ClaimLimitation {
+  text: string;
+  depth: number;
+}
+function limitationTree(node: Element, depth: number): ClaimLimitation[] {
+  const own = directText(node);
+  return [
+    // Only the top level carries the claim number.
+    ...(own
+      ? [{ text: depth === 0 ? stripLeadingNumber(own) : own, depth }]
+      : []),
+    ...nestedClaimTexts(node).flatMap((child) =>
+      limitationTree(child, depth + 1),
+    ),
+  ];
+}
+/**
+ * Each claim's limitations with their depth in the nested claim-text tree,
+ * keyed by claim number (Python unified.google_limitations_from_html). Unlike
+ * `structured_limitations`, long limitations are not split, so the result
+ * lines up with ODP grant XML. Translated pages use the translation only, and
+ * a claim with no nested claim-text becomes one top-level limitation; Python
+ * mixed in the original-language text and returned no limitations there.
+ */
+export function extractClaimLimitations(
+  root: Root,
+): Record<string, ClaimLimitation[]> {
+  const result: Record<string, ClaimLimitation[]> = {};
+  for (const claim of claimElements(root)) {
+    const number = (claim.getAttribute("num") ?? "").replace(/^0+/, "").trim();
+    if (!number) continue;
+    const english = originalText(claim) ? translated(claim) : claim;
+    const tree = nestedClaimTexts(english).flatMap((child) =>
+      limitationTree(child, 0),
+    );
+    const whole = stripLeadingNumber(squash(english.textContent ?? ""));
+    result[number] = tree.length
+      ? tree
+      : whole
+        ? [{ text: whole, depth: 0 }]
+        : [];
   }
   return result;
 }

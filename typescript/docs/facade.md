@@ -57,10 +57,12 @@ clients, so full records are not byte-compatible. Notable changes:
   URLs, as Python does without its signing proxy, which is not ported.
 - US `get_patent` citations resolve the number to its application first;
   Python passed the patent number's digits as an application number.
-- The EPO claims fallback splits the English claim block into numbered claims
-  instead of one claim per language.
-- The patent PDF cascade tries Patent Public Search only for US numbers, then
-  EPO OPS.
+- The claims and patent PDF cascades are the client package's
+  [fused helpers](unified.md), which list their changes from Python. The EPO
+  claims fallback splits the English claim block into numbered claims instead
+  of one claim per language, an EPO fault other than not-found surfaces
+  instead of reading as "Claims not found", and the patent PDF cascade tries
+  Patent Public Search only for US numbers, then EPO OPS.
 - Family is the ODP family graph; TSDR views and full trademark records use the
   TypeScript client shapes (TSDR is camelCase).
 - Searches without a cursor parameter in the Python schema return

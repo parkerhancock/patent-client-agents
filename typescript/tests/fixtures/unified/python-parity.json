@@ -1,0 +1,2161 @@
+{
+  "odp": [
+    {
+      "input": "1. A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    charging the pulse capacitor;\n    switching the at least one switch;\n    providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed magnetic field by the stimulation coil;\n    cooling the stimulation coil; and\n    applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
+      "limitations": [
+        {
+          "text": "A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:",
+          "depth": 0
+        },
+        {
+          "text": "charging the pulse capacitor;",
+          "depth": 1
+        },
+        {
+          "text": "switching the at least one switch;",
+          "depth": 1
+        },
+        {
+          "text": "providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed magnetic field by the stimulation coil;",
+          "depth": 1
+        },
+        {
+          "text": "cooling the stimulation coil; and",
+          "depth": 1
+        },
+        {
+          "text": "applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "2. The method of claim 1, further comprising applying the pulsed magnetic field to at least one body region of the patient including the thighs, buttocks, abdomen, or waist.",
+      "limitations": [
+        {
+          "text": "The method of claim 1, further comprising applying the pulsed magnetic field to at least one body region of the patient including the thighs, buttocks, abdomen, or waist.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "3. The method of claim 1, wherein the stimulation coil is positioned in a plastic housing, and\n    wherein the plastic housing comprises a concave curvature.",
+      "limitations": [
+        {
+          "text": "The method of claim 1, wherein the stimulation coil is positioned in a plastic housing, and",
+          "depth": 0
+        },
+        {
+          "text": "wherein the plastic housing comprises a concave curvature.",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "4. The method of claim 1, wherein the stimulation coil includes a conductor having a cross-sectional area in a range of about 1 cm 2 to 2 cm 2.",
+      "limitations": [
+        {
+          "text": "The method of claim 1, wherein the stimulation coil includes a conductor having a cross-sectional area in a range of about 1 cm 2 to 2 cm 2.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "5. The method of claim 3,\n    wherein the plastic housing-comprises at least one orifice for flowing a cooling media on a side which is different from a side closest to the patient.",
+      "limitations": [
+        {
+          "text": "The method of claim 3,",
+          "depth": 0
+        },
+        {
+          "text": "wherein the plastic housing-comprises at least one orifice for flowing a cooling media on a side which is different from a side closest to the patient.",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "6. The method of claim 1, wherein the stimulation coil is a planar coil;\n    wherein the stimulation coil is positioned inside a plastic housing; and\n    wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing a cooling media between the stimulation coil and the plastic housing.",
+      "limitations": [
+        {
+          "text": "The method of claim 1, wherein the stimulation coil is a planar coil;",
+          "depth": 0
+        },
+        {
+          "text": "wherein the stimulation coil is positioned inside a plastic housing; and",
+          "depth": 1
+        },
+        {
+          "text": "wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing a cooling media between the stimulation coil and the plastic housing.",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "7. The method of claim 1, further comprising replacing the stimulation coil with another stimulation coil.",
+      "limitations": [
+        {
+          "text": "The method of claim 1, further comprising replacing the stimulation coil with another stimulation coil.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "8. A method for breaking down fatty tissue of a patient using a device including a power unit, at least one switch, a pulse capacitor, and a stimulation coil, the method comprising:\n    placing the stimulation coil in a plastic housing proximate to the patient wherein the stimulation coil is not in contact with the patient;\n    charging the pulse capacitor;\n    switching the at least one switch;\n    providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed time-varying magnetic field by the stimulation coil;\n    cooling the stimulation coil with a fluid cooling media;\n    applying diphasic sinusoidal pulses of the pulsed magnetic field to a muscle of the patient within a body region including at least one of the buttocks, abdomen, or waist in order to cause a repetitive contraction of the muscle and a breaking down of the fatty tissue.",
+      "limitations": [
+        {
+          "text": "A method for breaking down fatty tissue of a patient using a device including a power unit, at least one switch, a pulse capacitor, and a stimulation coil, the method comprising:",
+          "depth": 0
+        },
+        {
+          "text": "placing the stimulation coil in a plastic housing proximate to the patient wherein the stimulation coil is not in contact with the patient;",
+          "depth": 1
+        },
+        {
+          "text": "charging the pulse capacitor;",
+          "depth": 1
+        },
+        {
+          "text": "switching the at least one switch;",
+          "depth": 1
+        },
+        {
+          "text": "providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed time-varying magnetic field by the stimulation coil;",
+          "depth": 1
+        },
+        {
+          "text": "cooling the stimulation coil with a fluid cooling media;",
+          "depth": 1
+        },
+        {
+          "text": "applying diphasic sinusoidal pulses of the pulsed magnetic field to a muscle of the patient within a body region including at least one of the buttocks, abdomen, or waist in order to cause a repetitive contraction of the muscle and a breaking down of the fatty tissue.",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "9. The method of claim 8, wherein the pulsed magnetic field has a pulse duration, and wherein the method further comprises adjusting the pulse duration via an operation console.",
+      "limitations": [
+        {
+          "text": "The method of claim 8, wherein the pulsed magnetic field has a pulse duration, and wherein the method further comprises adjusting the pulse duration via an operation console.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "10. The method of claim 9, wherein the stimulation coil is a planar coil, and\n    wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing the fluid cooling media between the stimulation coil and the plastic housing.",
+      "limitations": [
+        {
+          "text": "The method of claim 9, wherein the stimulation coil is a planar coil, and",
+          "depth": 0
+        },
+        {
+          "text": "wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing the fluid cooling media between the stimulation coil and the plastic housing.",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "11. The method of claim 10, wherein the pulsed magnetic field has a magnet flow density in a range of 0.01 Tesla to 0.1 Tesla at 5 cm in front of a surface of the stimulation coil.",
+      "limitations": [
+        {
+          "text": "The method of claim 10, wherein the pulsed magnetic field has a magnet flow density in a range of 0.01 Tesla to 0.1 Tesla at 5 cm in front of a surface of the stimulation coil.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "12. The method of claim 11, further comprising inducing an electric field intensity in a range from 0.1 V/cm to 1 V/cm at a stimulation site of a tissue.",
+      "limitations": [
+        {
+          "text": "The method of claim 11, further comprising inducing an electric field intensity in a range from 0.1 V/cm to 1 V/cm at a stimulation site of a tissue.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "13. The method of claim 12, wherein a frequency of the pulses is in a range of 10 Hz to 30 Hz.",
+      "limitations": [
+        {
+          "text": "The method of claim 12, wherein a frequency of the pulses is in a range of 10 Hz to 30 Hz.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "14. The method of claim 13, wherein the plastic housing comprises a concave curvature.",
+      "limitations": [
+        {
+          "text": "The method of claim 13, wherein the plastic housing comprises a concave curvature.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "15. The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "limitations": [
+        {
+          "text": "The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "16. The method of claim 15, wherein the stimulation coil includes a high-frequency wire.",
+      "limitations": [
+        {
+          "text": "The method of claim 15, wherein the stimulation coil includes a high-frequency wire.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "17. A method for treating obesity of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    placing the stimulation coil in a housing having a surface proximate to the patient;\n    positioning the housing proximate to the patient;\n    charging the pulse capacitor;\n    switching the at least one switch in order to enable discharging the pulse capacitor into the stimulation coil and providing a current in a range of 500 A to 6000 A into the stimulation coil;\n    generating a pulsed magnetic field by the stimulation coil; and\n    applying diphasic pulses of the pulsed magnetic field to a muscle of the patient within a body region including at least one of the thighs, buttocks, abdomen, or waist in order to cause a contraction of the muscle in order to reduce fatty tissue of the patient; and\n    cooling the stimulation coil.",
+      "limitations": [
+        {
+          "text": "A method for treating obesity of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:",
+          "depth": 0
+        },
+        {
+          "text": "placing the stimulation coil in a housing having a surface proximate to the patient;",
+          "depth": 1
+        },
+        {
+          "text": "positioning the housing proximate to the patient;",
+          "depth": 1
+        },
+        {
+          "text": "charging the pulse capacitor;",
+          "depth": 1
+        },
+        {
+          "text": "switching the at least one switch in order to enable discharging the pulse capacitor into the stimulation coil and providing a current in a range of 500 A to 6000 A into the stimulation coil;",
+          "depth": 1
+        },
+        {
+          "text": "generating a pulsed magnetic field by the stimulation coil; and",
+          "depth": 1
+        },
+        {
+          "text": "applying diphasic pulses of the pulsed magnetic field to a muscle of the patient within a body region including at least one of the thighs, buttocks, abdomen, or waist in order to cause a contraction of the muscle in order to reduce fatty tissue of the patient; and",
+          "depth": 1
+        },
+        {
+          "text": "cooling the stimulation coil.",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "18. The method of claim 17, wherein the housing comprises a concave curvature.",
+      "limitations": [
+        {
+          "text": "The method of claim 17, wherein the housing comprises a concave curvature.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "19. The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "limitations": [
+        {
+          "text": "The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "20. The method of claim 17, further comprising inducing an electric field intensity in a range from 0.1 V/cm to 1 V/cm at a stimulation site of a tissue.",
+      "limitations": [
+        {
+          "text": "The method of claim 17, further comprising inducing an electric field intensity in a range from 0.1 V/cm to 1 V/cm at a stimulation site of a tissue.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "21. The method of claim 17, further comprising replacing the stimulation coil with another stimulation coil.",
+      "limitations": [
+        {
+          "text": "The method of claim 17, further comprising replacing the stimulation coil with another stimulation coil.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "22. The method of claim 21, wherein the pulsed magnetic field has a magnet flow density in a range of 0.01 Tesla to 0.1 Tesla at 5 cm in front of a surface of the stimulation coil.",
+      "limitations": [
+        {
+          "text": "The method of claim 21, wherein the pulsed magnetic field has a magnet flow density in a range of 0.01 Tesla to 0.1 Tesla at 5 cm in front of a surface of the stimulation coil.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "23. The method of claim 22, further comprising applying the pulses of the pulsed magnetic field with a stimulation frequency in a range of 10 Hz to 30 Hz for a treatment time in a range of 1 min to 45 min to the muscle of the patient.",
+      "limitations": [
+        {
+          "text": "The method of claim 22, further comprising applying the pulses of the pulsed magnetic field with a stimulation frequency in a range of 10 Hz to 30 Hz for a treatment time in a range of 1 min to 45 min to the muscle of the patient.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "24. The method of claim 17, wherein the stimulation coil is oval.",
+      "limitations": [
+        {
+          "text": "The method of claim 17, wherein the stimulation coil is oval.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "25. A method for breaking down fatty tissue of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    placing the stimulation coil in a plastic housing proximate to the patient wherein the stimulation coil is not in contact with the patient;\n    charging the pulse capacitor;\n    switching the at least one switch in order to enable providing a current in a range of 500 A to 6000 A to the stimulation coil and generating a pulsed magnetic field with the stimulation coil;\n    applying diphasic pulses of the magnetic field to a muscle of the patient within a body region including at least one of the thighs, buttocks, abdomen, or waist in order to cause a repetitive contraction of the muscle in order to break down fatty tissue; and\n    cooling the stimulation coil with a fluid cooling media.",
+      "limitations": [
+        {
+          "text": "A method for breaking down fatty tissue of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:",
+          "depth": 0
+        },
+        {
+          "text": "placing the stimulation coil in a plastic housing proximate to the patient wherein the stimulation coil is not in contact with the patient;",
+          "depth": 1
+        },
+        {
+          "text": "charging the pulse capacitor;",
+          "depth": 1
+        },
+        {
+          "text": "switching the at least one switch in order to enable providing a current in a range of 500 A to 6000 A to the stimulation coil and generating a pulsed magnetic field with the stimulation coil;",
+          "depth": 1
+        },
+        {
+          "text": "applying diphasic pulses of the magnetic field to a muscle of the patient within a body region including at least one of the thighs, buttocks, abdomen, or waist in order to cause a repetitive contraction of the muscle in order to break down fatty tissue; and",
+          "depth": 1
+        },
+        {
+          "text": "cooling the stimulation coil with a fluid cooling media.",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "26. The method of claim 25, wherein the plastic housing comprises a concave curvature.",
+      "limitations": [
+        {
+          "text": "The method of claim 25, wherein the plastic housing comprises a concave curvature.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "27. The method of claim 26, wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing the fluid cooling media between the stimulation coil and the plastic housing.",
+      "limitations": [
+        {
+          "text": "The method of claim 26, wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing the fluid cooling media between the stimulation coil and the plastic housing.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "28. The method of claim 26, further comprising applying the pulses of the pulsed magnetic field with a stimulation frequency in a range of 10 Hz to 30 Hz.",
+      "limitations": [
+        {
+          "text": "The method of claim 26, further comprising applying the pulses of the pulsed magnetic field with a stimulation frequency in a range of 10 Hz to 30 Hz.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "29. The method of claim 28, wherein the stimulation coil includes a high-frequency wire.",
+      "limitations": [
+        {
+          "text": "The method of claim 28, wherein the stimulation coil includes a high-frequency wire.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "30. The method of claim 25, further comprising increasing metabolism and/or reducing fatty tissue.",
+      "limitations": [
+        {
+          "text": "The method of claim 25, further comprising increasing metabolism and/or reducing fatty tissue.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "31. The method of claim 25, further comprising increasing blood circulation or oxygen supply.",
+      "limitations": [
+        {
+          "text": "The method of claim 25, further comprising increasing blood circulation or oxygen supply.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "32. The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "limitations": [
+        {
+          "text": "The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "12. A device comprising:\n    a housing; and\n        a lid.",
+      "limitations": [
+        {
+          "text": "A device comprising:",
+          "depth": 0
+        },
+        {
+          "text": "a housing; and",
+          "depth": 1
+        },
+        {
+          "text": "a lid.",
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "input": "  2 spaces only",
+      "limitations": [
+        {
+          "text": "2 spaces only",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "1.5 mm thick plate.",
+      "limitations": [
+        {
+          "text": "1.5 mm thick plate.",
+          "depth": 0
+        }
+      ]
+    },
+    {
+      "input": "3. \n\n    trailing   \n",
+      "limitations": [
+        {
+          "text": "3.",
+          "depth": 0
+        },
+        {
+          "text": "trailing",
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "input": "10.no space after dot",
+      "limitations": [
+        {
+          "text": "10.no space after dot",
+          "depth": 0
+        }
+      ]
+    }
+  ],
+  "odp_canonical": [
+    {
+      "claim_number": 1,
+      "limitations": [
+        {
+          "text": "A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:",
+          "depth": 0
+        },
+        {
+          "text": "charging the pulse capacitor;",
+          "depth": 1
+        },
+        {
+          "text": "switching the at least one switch;",
+          "depth": 1
+        },
+        {
+          "text": "providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed magnetic field by the stimulation coil;",
+          "depth": 1
+        },
+        {
+          "text": "cooling the stimulation coil; and",
+          "depth": 1
+        },
+        {
+          "text": "applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
+          "depth": 1
+        }
+      ],
+      "claim_text": "1. A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    charging the pulse capacitor;\n    switching the at least one switch;\n    providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed magnetic field by the stimulation coil;\n    cooling the stimulation coil; and\n    applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 2,
+      "limitations": [
+        {
+          "text": "The method of claim 1, further comprising applying the pulsed magnetic field to at least one body region of the patient including the thighs, buttocks, abdomen, or waist.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "2. The method of claim 1, further comprising applying the pulsed magnetic field to at least one body region of the patient including the thighs, buttocks, abdomen, or waist.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 3,
+      "limitations": [
+        {
+          "text": "The method of claim 1, wherein the stimulation coil is positioned in a plastic housing, and",
+          "depth": 0
+        },
+        {
+          "text": "wherein the plastic housing comprises a concave curvature.",
+          "depth": 1
+        }
+      ],
+      "claim_text": "3. The method of claim 1, wherein the stimulation coil is positioned in a plastic housing, and\n    wherein the plastic housing comprises a concave curvature.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 4,
+      "limitations": [
+        {
+          "text": "The method of claim 1, wherein the stimulation coil includes a conductor having a cross-sectional area in a range of about 1 cm 2 to 2 cm 2.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "4. The method of claim 1, wherein the stimulation coil includes a conductor having a cross-sectional area in a range of about 1 cm 2 to 2 cm 2.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 5,
+      "limitations": [
+        {
+          "text": "The method of claim 3,",
+          "depth": 0
+        },
+        {
+          "text": "wherein the plastic housing-comprises at least one orifice for flowing a cooling media on a side which is different from a side closest to the patient.",
+          "depth": 1
+        }
+      ],
+      "claim_text": "5. The method of claim 3,\n    wherein the plastic housing-comprises at least one orifice for flowing a cooling media on a side which is different from a side closest to the patient.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 6,
+      "limitations": [
+        {
+          "text": "The method of claim 1, wherein the stimulation coil is a planar coil;",
+          "depth": 0
+        },
+        {
+          "text": "wherein the stimulation coil is positioned inside a plastic housing; and",
+          "depth": 1
+        },
+        {
+          "text": "wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing a cooling media between the stimulation coil and the plastic housing.",
+          "depth": 1
+        }
+      ],
+      "claim_text": "6. The method of claim 1, wherein the stimulation coil is a planar coil;\n    wherein the stimulation coil is positioned inside a plastic housing; and\n    wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing a cooling media between the stimulation coil and the plastic housing.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 7,
+      "limitations": [
+        {
+          "text": "The method of claim 1, further comprising replacing the stimulation coil with another stimulation coil.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "7. The method of claim 1, further comprising replacing the stimulation coil with another stimulation coil.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 8,
+      "limitations": [
+        {
+          "text": "A method for breaking down fatty tissue of a patient using a device including a power unit, at least one switch, a pulse capacitor, and a stimulation coil, the method comprising:",
+          "depth": 0
+        },
+        {
+          "text": "placing the stimulation coil in a plastic housing proximate to the patient wherein the stimulation coil is not in contact with the patient;",
+          "depth": 1
+        },
+        {
+          "text": "charging the pulse capacitor;",
+          "depth": 1
+        },
+        {
+          "text": "switching the at least one switch;",
+          "depth": 1
+        },
+        {
+          "text": "providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed time-varying magnetic field by the stimulation coil;",
+          "depth": 1
+        },
+        {
+          "text": "cooling the stimulation coil with a fluid cooling media;",
+          "depth": 1
+        },
+        {
+          "text": "applying diphasic sinusoidal pulses of the pulsed magnetic field to a muscle of the patient within a body region including at least one of the buttocks, abdomen, or waist in order to cause a repetitive contraction of the muscle and a breaking down of the fatty tissue.",
+          "depth": 1
+        }
+      ],
+      "claim_text": "8. A method for breaking down fatty tissue of a patient using a device including a power unit, at least one switch, a pulse capacitor, and a stimulation coil, the method comprising:\n    placing the stimulation coil in a plastic housing proximate to the patient wherein the stimulation coil is not in contact with the patient;\n    charging the pulse capacitor;\n    switching the at least one switch;\n    providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed time-varying magnetic field by the stimulation coil;\n    cooling the stimulation coil with a fluid cooling media;\n    applying diphasic sinusoidal pulses of the pulsed magnetic field to a muscle of the patient within a body region including at least one of the buttocks, abdomen, or waist in order to cause a repetitive contraction of the muscle and a breaking down of the fatty tissue.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 9,
+      "limitations": [
+        {
+          "text": "The method of claim 8, wherein the pulsed magnetic field has a pulse duration, and wherein the method further comprises adjusting the pulse duration via an operation console.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "9. The method of claim 8, wherein the pulsed magnetic field has a pulse duration, and wherein the method further comprises adjusting the pulse duration via an operation console.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 10,
+      "limitations": [
+        {
+          "text": "The method of claim 9, wherein the stimulation coil is a planar coil, and",
+          "depth": 0
+        },
+        {
+          "text": "wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing the fluid cooling media between the stimulation coil and the plastic housing.",
+          "depth": 1
+        }
+      ],
+      "claim_text": "10. The method of claim 9, wherein the stimulation coil is a planar coil, and\n    wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing the fluid cooling media between the stimulation coil and the plastic housing.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 11,
+      "limitations": [
+        {
+          "text": "The method of claim 10, wherein the pulsed magnetic field has a magnet flow density in a range of 0.01 Tesla to 0.1 Tesla at 5 cm in front of a surface of the stimulation coil.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "11. The method of claim 10, wherein the pulsed magnetic field has a magnet flow density in a range of 0.01 Tesla to 0.1 Tesla at 5 cm in front of a surface of the stimulation coil.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 12,
+      "limitations": [
+        {
+          "text": "The method of claim 11, further comprising inducing an electric field intensity in a range from 0.1 V/cm to 1 V/cm at a stimulation site of a tissue.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "12. The method of claim 11, further comprising inducing an electric field intensity in a range from 0.1 V/cm to 1 V/cm at a stimulation site of a tissue.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 13,
+      "limitations": [
+        {
+          "text": "The method of claim 12, wherein a frequency of the pulses is in a range of 10 Hz to 30 Hz.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "13. The method of claim 12, wherein a frequency of the pulses is in a range of 10 Hz to 30 Hz.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 14,
+      "limitations": [
+        {
+          "text": "The method of claim 13, wherein the plastic housing comprises a concave curvature.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "14. The method of claim 13, wherein the plastic housing comprises a concave curvature.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 15,
+      "limitations": [
+        {
+          "text": "The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "15. The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 16,
+      "limitations": [
+        {
+          "text": "The method of claim 15, wherein the stimulation coil includes a high-frequency wire.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "16. The method of claim 15, wherein the stimulation coil includes a high-frequency wire.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 17,
+      "limitations": [
+        {
+          "text": "A method for treating obesity of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:",
+          "depth": 0
+        },
+        {
+          "text": "placing the stimulation coil in a housing having a surface proximate to the patient;",
+          "depth": 1
+        },
+        {
+          "text": "positioning the housing proximate to the patient;",
+          "depth": 1
+        },
+        {
+          "text": "charging the pulse capacitor;",
+          "depth": 1
+        },
+        {
+          "text": "switching the at least one switch in order to enable discharging the pulse capacitor into the stimulation coil and providing a current in a range of 500 A to 6000 A into the stimulation coil;",
+          "depth": 1
+        },
+        {
+          "text": "generating a pulsed magnetic field by the stimulation coil; and",
+          "depth": 1
+        },
+        {
+          "text": "applying diphasic pulses of the pulsed magnetic field to a muscle of the patient within a body region including at least one of the thighs, buttocks, abdomen, or waist in order to cause a contraction of the muscle in order to reduce fatty tissue of the patient; and",
+          "depth": 1
+        },
+        {
+          "text": "cooling the stimulation coil.",
+          "depth": 1
+        }
+      ],
+      "claim_text": "17. A method for treating obesity of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    placing the stimulation coil in a housing having a surface proximate to the patient;\n    positioning the housing proximate to the patient;\n    charging the pulse capacitor;\n    switching the at least one switch in order to enable discharging the pulse capacitor into the stimulation coil and providing a current in a range of 500 A to 6000 A into the stimulation coil;\n    generating a pulsed magnetic field by the stimulation coil; and\n    applying diphasic pulses of the pulsed magnetic field to a muscle of the patient within a body region including at least one of the thighs, buttocks, abdomen, or waist in order to cause a contraction of the muscle in order to reduce fatty tissue of the patient; and\n    cooling the stimulation coil.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 18,
+      "limitations": [
+        {
+          "text": "The method of claim 17, wherein the housing comprises a concave curvature.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "18. The method of claim 17, wherein the housing comprises a concave curvature.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 19,
+      "limitations": [
+        {
+          "text": "The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "19. The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 20,
+      "limitations": [
+        {
+          "text": "The method of claim 17, further comprising inducing an electric field intensity in a range from 0.1 V/cm to 1 V/cm at a stimulation site of a tissue.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "20. The method of claim 17, further comprising inducing an electric field intensity in a range from 0.1 V/cm to 1 V/cm at a stimulation site of a tissue.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 21,
+      "limitations": [
+        {
+          "text": "The method of claim 17, further comprising replacing the stimulation coil with another stimulation coil.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "21. The method of claim 17, further comprising replacing the stimulation coil with another stimulation coil.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 22,
+      "limitations": [
+        {
+          "text": "The method of claim 21, wherein the pulsed magnetic field has a magnet flow density in a range of 0.01 Tesla to 0.1 Tesla at 5 cm in front of a surface of the stimulation coil.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "22. The method of claim 21, wherein the pulsed magnetic field has a magnet flow density in a range of 0.01 Tesla to 0.1 Tesla at 5 cm in front of a surface of the stimulation coil.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 23,
+      "limitations": [
+        {
+          "text": "The method of claim 22, further comprising applying the pulses of the pulsed magnetic field with a stimulation frequency in a range of 10 Hz to 30 Hz for a treatment time in a range of 1 min to 45 min to the muscle of the patient.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "23. The method of claim 22, further comprising applying the pulses of the pulsed magnetic field with a stimulation frequency in a range of 10 Hz to 30 Hz for a treatment time in a range of 1 min to 45 min to the muscle of the patient.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 24,
+      "limitations": [
+        {
+          "text": "The method of claim 17, wherein the stimulation coil is oval.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "24. The method of claim 17, wherein the stimulation coil is oval.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 25,
+      "limitations": [
+        {
+          "text": "A method for breaking down fatty tissue of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:",
+          "depth": 0
+        },
+        {
+          "text": "placing the stimulation coil in a plastic housing proximate to the patient wherein the stimulation coil is not in contact with the patient;",
+          "depth": 1
+        },
+        {
+          "text": "charging the pulse capacitor;",
+          "depth": 1
+        },
+        {
+          "text": "switching the at least one switch in order to enable providing a current in a range of 500 A to 6000 A to the stimulation coil and generating a pulsed magnetic field with the stimulation coil;",
+          "depth": 1
+        },
+        {
+          "text": "applying diphasic pulses of the magnetic field to a muscle of the patient within a body region including at least one of the thighs, buttocks, abdomen, or waist in order to cause a repetitive contraction of the muscle in order to break down fatty tissue; and",
+          "depth": 1
+        },
+        {
+          "text": "cooling the stimulation coil with a fluid cooling media.",
+          "depth": 1
+        }
+      ],
+      "claim_text": "25. A method for breaking down fatty tissue of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    placing the stimulation coil in a plastic housing proximate to the patient wherein the stimulation coil is not in contact with the patient;\n    charging the pulse capacitor;\n    switching the at least one switch in order to enable providing a current in a range of 500 A to 6000 A to the stimulation coil and generating a pulsed magnetic field with the stimulation coil;\n    applying diphasic pulses of the magnetic field to a muscle of the patient within a body region including at least one of the thighs, buttocks, abdomen, or waist in order to cause a repetitive contraction of the muscle in order to break down fatty tissue; and\n    cooling the stimulation coil with a fluid cooling media.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 26,
+      "limitations": [
+        {
+          "text": "The method of claim 25, wherein the plastic housing comprises a concave curvature.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "26. The method of claim 25, wherein the plastic housing comprises a concave curvature.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 27,
+      "limitations": [
+        {
+          "text": "The method of claim 26, wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing the fluid cooling media between the stimulation coil and the plastic housing.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "27. The method of claim 26, wherein the stimulation coil is spaced apart from the plastic housing in order to enable flowing the fluid cooling media between the stimulation coil and the plastic housing.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 28,
+      "limitations": [
+        {
+          "text": "The method of claim 26, further comprising applying the pulses of the pulsed magnetic field with a stimulation frequency in a range of 10 Hz to 30 Hz.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "28. The method of claim 26, further comprising applying the pulses of the pulsed magnetic field with a stimulation frequency in a range of 10 Hz to 30 Hz.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 29,
+      "limitations": [
+        {
+          "text": "The method of claim 28, wherein the stimulation coil includes a high-frequency wire.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "29. The method of claim 28, wherein the stimulation coil includes a high-frequency wire.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 30,
+      "limitations": [
+        {
+          "text": "The method of claim 25, further comprising increasing metabolism and/or reducing fatty tissue.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "30. The method of claim 25, further comprising increasing metabolism and/or reducing fatty tissue.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 31,
+      "limitations": [
+        {
+          "text": "The method of claim 25, further comprising increasing blood circulation or oxygen supply.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "31. The method of claim 25, further comprising increasing blood circulation or oxygen supply.",
+      "claim_type": "independent",
+      "depends_on": null
+    },
+    {
+      "claim_number": 32,
+      "limitations": [
+        {
+          "text": "The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "depth": 0
+        }
+      ],
+      "claim_text": "32. The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "claim_type": "independent",
+      "depends_on": null
+    }
+  ],
+  "google": {
+    "US7654321B2": {
+      "1": {
+        "limitations": [
+          {
+            "text": "A fluid sampling system for retrieving a formation fluid sample from a formation surrounding a wellbore extending along a wellbore axis, the formation having a virgin fluid and a contaminated fluid therein, comprising:",
+            "depth": 0
+          },
+          {
+            "text": "a sample inlet provided on a sample inlet assembly including a sample inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a first guard inlet spaced from the sample inlet in a first direction along the wellbore axis, wherein the first guard inlet is provided on a first guard inlet assembly including a first guard inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a second guard inlet spaced from the sample inlet in a second, opposite direction relative to the first guard inlet along the wellbore axis, wherein the second guard inlet is provided on a second guard inlet assembly including a second guard inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "at least one cleanup flowline fluidly connected to the first and second guard inlets for passing the contaminated fluid;",
+            "depth": 1
+          },
+          {
+            "text": "an evaluation flowline fluidly connected to the sample inlet for collecting the virgin fluid;",
+            "depth": 1
+          },
+          {
+            "text": "an inlet packer completely surrounding outer peripheries of the sample inlet, the first guard inlet, and the second guard inlet, wherein the inlet packer includes a first packer segment disposed between the sample inlet and the first guard inlet and a second packer segment disposed between the sample inlet and the second guard inlet;",
+            "depth": 1
+          },
+          {
+            "text": "wherein the sample inlet extension mechanism, the first guard inlet extension mechanism, and the second guard inlet extension mechanism are operable independently of one another.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "2": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the inlet packer has an oval-shaped outer periphery.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "3": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the sample inlet assembly has a diameter, and wherein the first and second guard inlet assemblies are longitudinally spaced from the sample inlet assembly by a distance substantially equal to or greater than the diameter.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "4": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which at least one of the first and the second guard inlet assemblies has a diameter, and wherein the at least one of the first and the second guard inlet assembly is longitudinally spaced from the sample inlet assembly by a distance substantially equal to or greater than the diameter.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "5": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the sample inlet assembly, the first guard inlet assembly, and the second guard inlet assembly are provided on a stabilizing blade of a drilling tool.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "6": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the sample inlet is azimuthally offset from the first and the second guard inlets.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "7": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, further comprising a third guard inlet fluidly connected to the cleanup flowline.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "8": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the sample inlet, the first guard inlet, and the second guard inlet are integrally provided an a single probe assembly including an inlet extension mechanism.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "9": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the first and second packer segments further comprise a reinforcement material.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "10": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the sample inlet has an oval-shaped cross-sectional profile, with a major axis perpendicular to the wellbore axis and a minor axis parallel to the wellbore axis.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "11": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the system is associated with a wireline tool.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "12": {
+        "limitations": [
+          {
+            "text": "The fluid sampling system of claim 1, in which the system is associated with a drilling tool.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "13": {
+        "limitations": [
+          {
+            "text": "A fluid sampling system for retrieving a formation fluid sample from a formation surrounding a wellbore extending along a wellbore axis, the formation having a virgin fluid and a contaminated fluid therein, comprising:",
+            "depth": 0
+          },
+          {
+            "text": "a sample inlet provided on a sample inlet assembly including a sample inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a first guard inlet spaced from the sample inlet in a first direction along the wellbore axis, wherein the first guard inlet is provided on a first guard inlet assembly including a first guard inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a second guard inlet spaced from the sample inlet in a second, opposite direction relative to the first guard inlet along the wellbore axis, wherein the second guard inlet is provided on a second guard inlet assembly including a second guard inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "at least one cleanup flowline fluidly connected to the first and second guard inlets for passing the contaminated fluid; and",
+            "depth": 1
+          },
+          {
+            "text": "an evaluation flowline fluidly connected to the sample inlet for collecting the virgin fluid;",
+            "depth": 1
+          },
+          {
+            "text": "a sample inlet packer completely surrounding an outer periphery of the sample inlet;",
+            "depth": 1
+          },
+          {
+            "text": "a first guard inlet packer completely surrounding an outer periphery of the first guard inlet; and",
+            "depth": 1
+          },
+          {
+            "text": "a second guard inlet packer completely surrounding an outer periphery of the second guard inlet;",
+            "depth": 1
+          },
+          {
+            "text": "wherein the sample inlet extension mechanism, the first guard inlet extension mechanism, and the second guard inlet extension mechanism are operable independently of one another.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "14": {
+        "limitations": [
+          {
+            "text": "A fluid sampling system for retrieving a formation fluid sample from a formation surrounding a wellbore extending along a wellbore axis, the formation having a virgin fluid and a contaminated fluid therein, comprising:",
+            "depth": 0
+          },
+          {
+            "text": "a sample inlet provided on a sample inlet assembly including a sample inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a first guard inlet spaced from the sample inlet in a first direction along the wellbore axis, wherein the first guard inlet is provided on a first guard inlet assembly including a first guard inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a second guard inlet spaced from the sample inlet in a second, opposite direction relative to the first guard inlet along the wellbore axis, wherein the second guard inlet is provided on a second guard inlet assembly including a second guard inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "at least one cleanup flowline fluidly connected to the first and the second guard inlets for passing the contaminated fluid;",
+            "depth": 1
+          },
+          {
+            "text": "an evaluation flowline fluidly connected to the sample inlet for collecting the virgin fluid; and",
+            "depth": 1
+          },
+          {
+            "text": "an inlet packer completely surrounding outer peripheries of the sample inlet, the first guard inlet, and the second guard inlet;",
+            "depth": 1
+          },
+          {
+            "text": "in which an exterior face of the inlet packer includes a guard channel; and",
+            "depth": 1
+          },
+          {
+            "text": "wherein the sample inlet extension mechanism, the first guard inlet extension mechanism, and the second guard inlet extension mechanism are operable independently of one another.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "15": {
+        "limitations": [
+          {
+            "text": "A probe assembly for use with a fluid sampling system to retrieve a formation fluid sample from a formation surrounding a wellbore extending along a wellbore axis, the formation having a virgin fluid and a contaminated fluid therein, comprising:",
+            "depth": 0
+          },
+          {
+            "text": "an inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a sample inlet coupled to the inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a first guard inlet coupled to the inlet extension mechanism, the first guard inlet being positioned adjacent to the sample inlet and spaced from the sample inlet in a first direction parallel to the wellbore axis;",
+            "depth": 1
+          },
+          {
+            "text": "a second guard inlet coupled to the inlet extension mechanism, the second guard inlet being positioned adjacent to the sample inlet and spaced from the sample inlet in a second, opposite direction relative to the first guard inlet parallel to the wellbore axis; and",
+            "depth": 1
+          },
+          {
+            "text": "an inlet packer completely surrounding outer peripheries of the sample inlet, the first guard inlet, and the second guard inlet;",
+            "depth": 1
+          },
+          {
+            "text": "in which an exterior face of the inlet packer includes a guard channel, and in which the guard channel includes a guard ring section completely surrounding an outer periphery of the first guard inlet and at least a first wing section connected to and extending away from the guard ring section.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "16": {
+        "limitations": [
+          {
+            "text": "The probe assembly of claim 15, in which the guard channel further includes a second wing section connecting to and extending away from the guard ring section.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 15
+      },
+      "17": {
+        "limitations": [
+          {
+            "text": "The probe assembly of claim 15, further including a second guard channel having a second guard ring section completely surrounding an outer periphery of the second guard inlet and at least a second wing section connected to and extending away from the guard ring section.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 15
+      },
+      "18": {
+        "limitations": [
+          {
+            "text": "The probe assembly of claim 15, in which the guard channel is defined by a channel insert coupled to the inlet packer.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 15
+      },
+      "19": {
+        "limitations": [
+          {
+            "text": "The probe assembly of claim 18, in which the channel insert is mechanically coupled to the inlet packer.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 18
+      },
+      "20": {
+        "limitations": [
+          {
+            "text": "The probe assembly of claim 15, in which the sample inlet, the first guard inlet, and the second guard inlet are pivotably coupled to the inlet extension mechanism.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 15
+      },
+      "21": {
+        "limitations": [
+          {
+            "text": "A downhole tool connected to a drill string positioned in a wellbore penetrating a subterranean formation along a wellbore axis, the tool comprising:",
+            "depth": 0
+          },
+          {
+            "text": "a drilling collar having at least one stabilizing blade defining a blade axis;",
+            "depth": 1
+          },
+          {
+            "text": "an inlet extension mechanism housed within the stabilizing blade; and",
+            "depth": 1
+          },
+          {
+            "text": "a probe assembly pivotably coupled to the inlet extension mechanism, the probe assembly comprising:",
+            "depth": 1
+          },
+          {
+            "text": "a sample inlet having a mouth portion with a first profile dimension in a direction parallel to the blade axis and a second profile dimension in a direction perpendicular to the blade axis, in which the first profile dimension is greater than the second profile dimension;",
+            "depth": 2
+          },
+          {
+            "text": "an inner packer completely surrounding an outer periphery of the sample inlet;",
+            "depth": 2
+          },
+          {
+            "text": "a guard inlet extending completely around an outer periphery of the inner packer; and",
+            "depth": 2
+          },
+          {
+            "text": "an outer packer completely surrounding an outer periphery of the guard inlet.",
+            "depth": 2
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "22": {
+        "limitations": [
+          {
+            "text": "The downhole tool of claim 21, in which the mouth portion has a generally oval shape cross-sectional profile, with the first profile dimension comprising a major axis and the second profile dimension comprising a minor axis.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 21
+      },
+      "23": {
+        "limitations": [
+          {
+            "text": "The downhole tool of claim 21, in which the second profile dimension is less than approximately 3.5 inches.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 21
+      },
+      "24": {
+        "limitations": [
+          {
+            "text": "A probe assembly for use with a fluid sampling system to retrieve a formation fluid sample from a formation surrounding a wellbore extending along a wellbore axis, the formation having a virgin fluid and a contaminated fluid therein, comprising:",
+            "depth": 0
+          },
+          {
+            "text": "an inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a sample inlet coupled to the inlet extension mechanism;",
+            "depth": 1
+          },
+          {
+            "text": "a first guard inlet coupled to the inlet extension mechanism, the first guard inlet being positioned adjacent to the sample inlet and spaced from the sample inlet in a first direction parallel to the wellbore axis;",
+            "depth": 1
+          },
+          {
+            "text": "a second guard inlet coupled to the inlet extension mechanism, the second guard inlet being positioned adjacent to the sample inlet and spaced from the sample inlet in a second, opposite direction relative to the first guard inlet parallel to the wellbore axis; and",
+            "depth": 1
+          },
+          {
+            "text": "an inlet packer completely surrounding outer peripheries of the sample inlet, the first guard inlet, and the second guard inlet;",
+            "depth": 1
+          },
+          {
+            "text": "wherein an exterior face of the inlet packer includes a guard channel comprising:",
+            "depth": 1
+          },
+          {
+            "text": "a central ring section completely surrounding the outer periphery of the sample inlet;",
+            "depth": 2
+          },
+          {
+            "text": "a first guard ring section completely surrounding the outer periphery of the first guard inlet;",
+            "depth": 2
+          },
+          {
+            "text": "a second guard ring section completely surrounding an outer periphery of the second guard inlet;",
+            "depth": 2
+          },
+          {
+            "text": "a first link section extending between the central ring section and the first guard ring section; and",
+            "depth": 2
+          },
+          {
+            "text": "a second link section extending between the central ring section and the second guard ring section.",
+            "depth": 2
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "25": {
+        "limitations": [
+          {
+            "text": "The probe assembly of claim 24, in which the guard channel is defined by a channel insert coupled to the inlet packer.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 24
+      },
+      "26": {
+        "limitations": [
+          {
+            "text": "The probe assembly of claim 25, in which the channel insert is mechanically coupled to the inlet packer.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 25
+      }
+    },
+    "US20230012345A1": {
+      "1": {
+        "limitations": [
+          {
+            "text": "1 . A logic-in-memory inverter comprising:",
+            "depth": 0
+          },
+          {
+            "text": "a metal oxide semiconductor field-effect transistor; and",
+            "depth": 1
+          },
+          {
+            "text": "a feedback field-effect transistor in which a drain region of a nanostructure is connected in series to a drain region of the metal oxide semiconductor field-effect transistor,",
+            "depth": 1
+          },
+          {
+            "text": "wherein the logic-in-memory inverter performs a logical operation based on an output voltage V OUT that changes depending on a level of an input voltage V IN that is input to a gate electrode of the feedback field-effect transistor and a gate electrode of the metal oxide semiconductor field-effect transistor while a source voltage V SS is input to a source region of the nanostructure and a drain voltage V DD is input to a source region of the metal oxide semiconductor field-effect transistor.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "2": {
+        "limitations": [
+          {
+            "text": "2 . The logic-in-memory inverter according to claim 1, wherein the logic-in-memory inverter controls a height of a potential barrier in the feedback field-effect transistor depending on the level of the input voltage V IN, and as controlling generation of a positive feedback loop depending on the controlled height, the logic-in-memory inverter maintains a logic state based on the performed logical operation when the source voltage V SS, the drain voltage VDD, and the input voltage V IN switch to a zero level.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "3": {
+        "limitations": [
+          {
+            "text": "3 . The logic-in-memory inverter according to claim 2, wherein, in the feedback field-effect transistor, when the input voltage V IN switches from a low level to a zero level, the height of the potential barrier based on the low level blocks electrons and holes injected into a channel region from a drain region and a source region of the nanostructure and an energy level of a drain voltage of the feedback field-effect transistor is maintained in a high state to maintain a logic state based on the performed logical operation in a high state.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 2
+      },
+      "4": {
+        "limitations": [
+          {
+            "text": "4 . The logic-in-memory inverter according to claim 2, wherein, in the feedback field-effect transistor, when the input voltage V IN is at a high level, a positive feedback loop in which electrons and holes are injected into a channel region from a drain region and a source region of the nanostructure is generated as the height of the potential barrier decreases, and when the input voltage V IN switches from a high level to a zero level, an energy level of a drain voltage of the feedback field-effect transistor is maintained in a low state to maintain a logic state based on the performed logical operation in a low state based on electrons and holes accumulated in a potential well of the channel region through the positive feedback loop.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 2
+      },
+      "5": {
+        "limitations": [
+          {
+            "text": "5 . The logic-in-memory inverter according to claim 4, wherein, in the feedback field-effect transistor, when the input voltage V IN increases to a high level from a zero level, a latch-up phenomenon occurs based on the positive feedback loop.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 4
+      },
+      "6": {
+        "limitations": [
+          {
+            "text": "6 . The logic-in-memory inverter according to claim 1, wherein:",
+            "depth": 0
+          },
+          {
+            "text": "when the input voltage V IN is at a low level, the logic-in-memory inverter determines a logic state based on the performed logical operation as a high state; and",
+            "depth": 1
+          },
+          {
+            "text": "when the input voltage V IN is at a high level, the logic-in-memory inverter determines the logic state based on the performed logical operation as a low state.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "7": {
+        "limitations": [
+          {
+            "text": "7 . The logic-in-memory inverter according to claim 1, wherein:",
+            "depth": 0
+          },
+          {
+            "text": "when the input voltage V IN switches from a low level to a zero level, the logic-in-memory inverter maintains a logic state based on the performed logical operation in a high state; and",
+            "depth": 1
+          },
+          {
+            "text": "when the input voltage V IN switches from a high level to a zero level, the logic-in-memory inverter maintains the logic state based on the performed logical in a low state.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "8": {
+        "limitations": [
+          {
+            "text": "8 . The logic-in-memory inverter according to claim 1, wherein:",
+            "depth": 0
+          },
+          {
+            "text": "the metal oxide semiconductor field-effect transistor is a p-type field-effect transistor; and",
+            "depth": 1
+          },
+          {
+            "text": "the feedback field-effect transistor is an n-type field-effect transistor.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 1
+      },
+      "9": {
+        "limitations": [
+          {
+            "text": "9 . The logic-in-memory inverter according to claim 8, wherein:",
+            "depth": 0
+          },
+          {
+            "text": "the metal oxide semiconductor field-effect transistor includes a p-n-p transistor including a drain region, a source region, and a channel region, a gate insulating layer, and a gate electrode;",
+            "depth": 1
+          },
+          {
+            "text": "the drain region and the source region are in a p-doped state; and",
+            "depth": 1
+          },
+          {
+            "text": "the channel region is in an n-doped state.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 8
+      },
+      "10": {
+        "limitations": [
+          {
+            "text": "10 . The logic-in-memory inverter according to claim 8, wherein:",
+            "depth": 0
+          },
+          {
+            "text": "the feedback field-effect transistor includes the nanostructure, a gate insulating layer, and a gate electrode;",
+            "depth": 1
+          },
+          {
+            "text": "the nanostructure is a p-n-p-n nanostructure and includes a drain region, a source region, a first channel region, and a second channel region;",
+            "depth": 1
+          },
+          {
+            "text": "the drain region and the second channel region are in a p-doped state;",
+            "depth": 1
+          },
+          {
+            "text": "the source region and the first channel region are in an n-doped state; and",
+            "depth": 1
+          },
+          {
+            "text": "a channel length of the first channel region is equal to a channel length of the second channel region.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "dependent",
+        "depends_on": 8
+      }
+    },
+    "EP3456789A1": {
+      "1": {
+        "limitations": [
+          {
+            "text": "A composite build material for use in a three-dimensional printing system comprising:",
+            "depth": 0
+          },
+          {
+            "text": "a carrier ink comprising a curable material;",
+            "depth": 1
+          },
+          {
+            "text": "pigment particles dispersed in the carrier ink,",
+            "depth": 1
+          },
+          {
+            "text": "the pigment particles comprising mica; and",
+            "depth": 1
+          },
+          {
+            "text": "a colorant, the colorant differing from the pigment particles.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "2": {
+        "limitations": [
+          {
+            "text": "The composite build material of claim 1, wherein the carrier ink is present in the composite build material in an amount of 80-98% by weight, based on the total weight of the composite build material.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "3": {
+        "limitations": [
+          {
+            "text": "The composite build material of claim 1 or 2, wherein the curable material comprises one or more species of (meth)acrylates.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "4": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein the curable material comprises one or more oligomeric materials.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "5": {
+        "limitations": [
+          {
+            "text": "The composite build material of claim 4, wherein the one or more oligomeric materials comprise a urethane (meth)acrylate.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "6": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein the pigment particles are present in the composite build material in an amount of 2-8% by weight, based on the total weight of the composite build material.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "7": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein the pigment particles have an average diameter of 5-500 µm.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "8": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein the pigment particles comprise up to 85% by weight mica, based on the total weight of the pigment particles.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "9": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein the pigment particles further comprise TiO 2, Fe 2 O 3, or both.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "10": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein:",
+            "depth": 0
+          },
+          {
+            "text": "the carrier ink is present in the composite build material in an amount of 85-98% by weight, based on the total weight of the composite build material;",
+            "depth": 1
+          },
+          {
+            "text": "the curable material comprises a mixture of 45-55% by weight of one or more monomeric (meth)acrylates and 45-55% by weight of one or more oligomeric urethane (meth)acrylates, based on the total weight of the curable material;",
+            "depth": 1
+          },
+          {
+            "text": "the pigment particles are present in the composite build material in an amount of 2-8% by weight, based on the total weight of the composite build material;",
+            "depth": 1
+          },
+          {
+            "text": "the pigment particles have an average diameter of 5-500 µm and",
+            "depth": 1
+          },
+          {
+            "text": "comprise up to 85% by weight mica, based on the total weight of the pigment particles;",
+            "depth": 1
+          },
+          {
+            "text": "the pigment particles exhibit a gold color;",
+            "depth": 1
+          },
+          {
+            "text": "the colorant is present in the composite build material in an amount of 0.1-2.0% by weight, based on the total weight of the composite build material; and",
+            "depth": 1
+          },
+          {
+            "text": "the colorant exhibits a white color.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "11": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein:",
+            "depth": 0
+          },
+          {
+            "text": "the carrier ink is present in the composite build material in an amount of 85-98% by weight, based on the total weight of the composite build material;",
+            "depth": 1
+          },
+          {
+            "text": "the curable material comprises a mixture of 45-55% by weight of one or more monomeric (meth)acrylates and 45-55% by weight of one or more oligomeric urethane (meth)acrylates, based on the total weight of the curable material;",
+            "depth": 1
+          },
+          {
+            "text": "the pigment particles are present in the composite build material in an amount of 2-8% by weight, based on the total weight of the composite build material;",
+            "depth": 1
+          },
+          {
+            "text": "the pigment particles have an average diameter of 5-500 µm and",
+            "depth": 1
+          },
+          {
+            "text": "comprise up to 85% by weight mica, based on the total weight of the pigment particles;",
+            "depth": 1
+          },
+          {
+            "text": "the pigment particles exhibit a white color;",
+            "depth": 1
+          },
+          {
+            "text": "the colorant is present in the composite build material in an amount of 0.005-0.05% by weight, based on the total weight of the composite build material; and",
+            "depth": 1
+          },
+          {
+            "text": "the colorant exhibits a black color.",
+            "depth": 1
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "12": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, further comprising one or more additives selected from the group consisting of photoinitiators, inhibitors, stabilizing agents, sensitizers, and combinations thereof.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "13": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein the composite build material when non-cured exhibits a dynamic viscosity of 400-1000 cP at 30°C.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "14": {
+        "limitations": [
+          {
+            "text": "The composite build material of one or more of the preceding claims, wherein a surface of the composite build material when cured exhibits a metallic finish.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "15": {
+        "limitations": [
+          {
+            "text": "Printed 3D article formed from a composite build material according to one or more of claims 1 to 14.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      }
+    },
+    "WO2020123456A1": {
+      "1": {
+        "limitations": [
+          {
+            "text": "An assembly comprising:",
+            "depth": 0
+          },
+          {
+            "text": "a frame including a front side, a backside and a cavity located between the front side and backside that opens to the front side;",
+            "depth": 0
+          },
+          {
+            "text": "first and second electrically conductive pads located on the frame;",
+            "depth": 0
+          },
+          {
+            "text": "a first light emitting diode having an anode and a cathode, the first light emitting diode being located inside the cavity of the frame with the anode and cathode respectively being electrically coupled to the first and second electrically conductive pads;",
+            "depth": 0
+          },
+          {
+            "text": "a first light diffusing optical fiber having a core and a cladding surrounding the core, the first light diffusing optical fiber including a proximal end portion having a first light receiving end that is butt-coupled to the first light emitting diode;",
+            "depth": 0
+          },
+          {
+            "text": "a lid located distal to the first light emitting diode, the lid having a front side, a backside, and a through opening that extends between and through the front side and backside of the lid, the backside of the lid being attached to the front side of the frame, the first light diffusing optical fiber extending through and being supported in the through opening; and",
+            "depth": 0
+          },
+          {
+            "text": "a printed circuit board having a voltage terminal and a ground terminal, the first electrically conductive pad of the frame being electrically connected to the voltage terminal and the second electrically conductive pad of the frame being electrically connected to the ground terminal.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "2": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, further comprising a resilient strain relief housing enclosing at least a portion of the first light diffusing optical fiber, the resilient strain relief housing having a proximal end that butts against the front side of the lid.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "3": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, further comprising a resilient strain relief housing enclosing at least a portion of the first light diffusing optical fiber, the resilient strain relief housing having a proximal end portion that resides inside the through opening of the lid.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "4": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein the proximal end portion of the first light diffusing optical fiber protrudes proximally from the backside of the lid into the cavity of the frame.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "5": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 4, wherein the first light emitting diode includes a front side from which light is emitted, a distance between the backside of the lid and the front side of the first light emitting diode is equal to or less than 1 millimeter.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "6": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein at least a portion of each of the first and second electrically conductive pads of the frame is located on the backside of the frame, the first electrically conductive pad being electrically coupled to the voltage terminal of the printed circuit board via a first electrically conductive pin that extends through a topside of the printed circuit board, the second electrically conductive pad being electrically coupled to the ground terminal of the printed circuit board via a second electrically conductive pin that extends through the topside of the printed circuit board.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "7": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein at least a portion of each of the first and second electrically conductive pads of the frame is located on a bottom side of the frame, each of the voltage terminal and ground terminal of the printed circuit board respectively comprising first and second metallic pads residing on the top side surface of the printed circuit board, the first and second electrically conductive pads of the frame being respectively surface mounted in an electrically conducive manner to the first and second metallic pads of the printed circuit board.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "8": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein the anode of the first light emitting diode is electrically coupled to the first electrically conductive pad by an electrically conductive wire having a first end and a second end, the first end being attached to and electrically coupled to the anode of the first light emitting diode, the second end being attached to and electrically coupled to the first electrically conductive pad.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "9": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein the anode of the first light emitting diode is electrically coupled to a first electrical conductor element residing inside the frame, the first electrical conductor element comprising a first metallic mass that is electrically coupled to the first electrically conductive pad.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "10": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 9, wherein the anode of the first light emitting diode is electrically coupled to the first electrical conductor element by an electrically conductive wire having a first end and a second end, the first end being attached to and electrically coupled to the anode of the first light emitting diode, the second end being attached to and electrically coupled to the first electrical conductor element.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "11": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein the cathode of the first light emitting diode is electrically coupled to a second electrical conductor element residing inside the frame, the second electrical conductor element comprising a second metallic mass that is electrically coupled to the second electrically conductive pad.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "12": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 11, wherein the cathode of the first light emitting diode is surface mounted to the second electrical conductor element.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "13": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein the first light emitting diode comprises a light emitting side and each of the core and cladding at the light receiving end of the first light diffusing optical fiber is butt-coupled to the light emitting side of the first light emitting diode.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "14": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein the through opening of the lid has a length dimension and a portion of the first light diffusing optical fiber residing in the through opening has an outer diameter dimension, the length dimension being greater than the outer diameter dimension.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "15": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, further comprising:",
+            "depth": 0
+          },
+          {
+            "text": "a second light emitting diode located inside the cavity of the frame; and a second light diffusing optical fiber having a core and a cladding surrounding the core, the second light diffusing optical fiber having a light receiving end that is optically coupled to the second light emitting diode, the second light diffusing optical fiber extending through and being supported in the through opening of the lid.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "16": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 15, wherein the first light emitting diode emits ultraviolet light and the second light emitting diode emits visible light.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "17": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 15, wherein the first and second light emitting diodes are configured to be concurrently energized to concurrently deliver ultraviolet light and visible light into the first light diffusing light diffusing optical fiber.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "18": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 1, wherein the core of the first light diffusing light diffusing optical fiber has a distal end opposite the proximal end that is optically coupled to a second light emitting diode.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "19": {
+        "limitations": [
+          {
+            "text": "The assembly according to claim 18, wherein the first light emitting diode emits ultraviolet light and the second light emitting diode emits visible light.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      }
+    },
+    "JP2019000001A": {
+      "1": {
+        "limitations": [
+          {
+            "text": "細胞を培養する細胞培養装置であって、 培養液を有する容器と、 複数の細胞塊を含む前記培養液の画像を取得する細胞観察手段と、 前記細胞観察手段により取得された画像に基づき、細胞塊のサイズを計測する計測手段と、 前記計測手段により計測した細胞塊のサイズが閾値を超えた場合に、当該閾値を超えた細胞塊に対し超音波を照射する超音波照射手段と、を有することを特徴とする細胞培養装置。 A cell culture device for culturing cells, A container having a culture solution; Cell observation means for acquiring an image of the culture solution containing a plurality of cell masses; Based on the image acquired by the cell observation means, measurement means for measuring the size of the cell mass, An ultrasonic irradiation means for irradiating an ultrasonic wave to the cell mass exceeding the threshold when the size of the cell mass measured by the measurement means exceeds the threshold.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "2": {
+        "limitations": [
+          {
+            "text": "請求項１に記載の細胞培養装置において、 前記培養液を攪拌する攪拌手段を有し、 前記細胞観察手段は前記攪拌手段により攪拌された培養液の画像を取得することを特徴とする細胞培養装置。 The cell culture device according to claim 1, A stirring means for stirring the culture solution; The cell culturing device, wherein the cell observation means acquires an image of the culture solution stirred by the stirring means.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "3": {
+        "limitations": [
+          {
+            "text": "請求項２に記載の細胞培養装置において、 前記細胞観察手段は予め定められた領域を撮影するように固定されていることを特徴とする細胞培養装置。 The cell culture device according to claim 2, The cell culturing apparatus, wherein the cell observation means is fixed so as to photograph a predetermined region.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "4": {
+        "limitations": [
+          {
+            "text": "請求項１乃至３のいずれか一項に記載の細胞培養装置において、 前記計測手段は計測する細胞塊のサイズは、細胞塊の直径であることを特徴とする細胞培養装置。 In the cell culture device according to any one of claims 1 to 3, The cell culture apparatus characterized in that the size of the cell mass measured by the measuring means is the diameter of the cell mass.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "5": {
+        "limitations": [
+          {
+            "text": "請求項１乃至４のいずれか一項に記載の細胞培養装置において、 前記培養液全体のうち前記閾値を超えた細胞塊は、前記超音波照射手段による超音波の照射範囲に含まれ、 前記培養液全体のうち前記閾値を超えない細胞塊は、前記超音波照射手段による超音波の照射範囲に含まれないことを特徴とする細胞培養装置。 In the cell culture device according to any one of claims 1 to 4, The cell mass that exceeds the threshold value in the whole culture solution is included in the ultrasonic irradiation range by the ultrasonic irradiation means, A cell mass that does not exceed the threshold in the whole culture solution is not included in the ultrasonic irradiation range by the ultrasonic irradiation means.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "6": {
+        "limitations": [
+          {
+            "text": "請求項１乃至５のいずれか一項に記載の細胞培養装置において、 前記培養液の一部を循環させる流路を有し、 前記流路を流れる培養液の画像を取得することを特徴とする細胞培養装置。 In the cell culture device according to any one of claims 1 to 5, Having a flow path for circulating a part of the culture solution; A cell culture device characterized by acquiring an image of a culture solution flowing through the flow path.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "7": {
+        "limitations": [
+          {
+            "text": "請求項１乃至６のいずれか一項に記載の細胞培養装置において、 前記容器の一部または全体が透明であることを特徴とする細胞培養装置。 In the cell culture device according to any one of claims 1 to 6, A cell culture apparatus, wherein a part or the whole of the container is transparent.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      }
+    },
+    "CN110000000A": {
+      "1": {
+        "limitations": [
+          {
+            "text": "a kind of chilli powder foreign body eliminating equipment, it is characterised in that the equipment is by rack (1), feed bin (2), plate vibration feeding Device (3), automatic iron remover (4), boloscope (5), metallic foreign body device for eliminating (6), foreign bodies detection conveyer belt (7), X Ray foreign bodies detection machine (8), foreign body removing device (9) and finished product materials conveyer belt (10) composition, which is characterized in that rack (1) For the support and connecting component of whole equipment, feed bin (2) is mounted on the right side topmost of rack (1), plate vibration feeder (3) It is mounted below rack (1) feeding bin (2), a left side for automatic iron remover (4) installation frame (1) upper flat plate oscillating feeder (3) Lower portion is leaned in side, and for the feed inlet of automatic iron remover (4) in the underface of the unloading position of plate vibration feeder (3), metal is different Object detector (5) is mounted on the underface of the discharge port of automatic iron remover (4) on rack (1), boloscope (5) and from It is connected vertically between the discharge port of dynamic magnetic separator de-ironing (4) by pipeline, metallic foreign body device for eliminating (6) is mounted on rack (1) golden Belong to the lower part of foreign-body locator (5), metallic foreign body device for eliminating (6) is connected with the discharge port of boloscope (5), foreign matter Detection conveyer belt (7) is mounted on the position that metallic foreign body device for eliminating (6) keeps left below on rack (1), X-ray foreign bodies detection machine (8) it is mounted on the surface of foreign bodies detection conveyer belt (7) on rack (1), finished product materials conveyer belt (10) is mounted on rack (1) Position on the left of foreign bodies detection conveyer belt (7) on the lower, foreign body removing device (9) are mounted on finished product materials conveyer belt on rack (1) (10) and the centre of foreign bodies detection conveyer belt (7) garbage collection storehouse, is arranged in rack (1), stores automatic iron remover (4), metal The waste material that foreign body removing device (6) and foreign body removing device (9) are rejected.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "2": {
+        "limitations": [
+          {
+            "text": "chilli powder foreign body eliminating equipment according to claim 1, which is characterized in that automatic iron remover (4) is rotary Permanent magnet powder magnetic separator de-ironing, feed inlet top, discharge port straight down.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "3": {
+        "limitations": [
+          {
+            "text": "chilli powder foreign body eliminating equipment according to claim 1, which is characterized in that boloscope (5) is electricity Magnetic inductive boloscope, for feed inlet in top, discharge port in lower part, the shape of inlet port and outlet port is rectangle, It is connected vertically between boloscope (5) and the discharge port of automatic iron remover (4) by rectangular duct.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "4": {
+        "limitations": [
+          {
+            "text": "chilli powder foreign body eliminating equipment according to claim 1, which is characterized in that metallic foreign body device for eliminating (6) is The panel turnover device being driven by motor.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      },
+      "5": {
+        "limitations": [
+          {
+            "text": "chilli powder foreign body eliminating equipment according to claim 1, which is characterized in that foreign body removing device (9) is by electricity The panel turnover device of machine driving.",
+            "depth": 0
+          }
+        ],
+        "claim_type": "independent",
+        "depends_on": null
+      }
+    }
+  }
+}

@@ -1,5 +1,8 @@
 import { createHash } from "node:crypto";
-import { ApiError, type Provenance } from "@patent-client-agents/client";
+import {
+  downloadPatentPdfClean,
+  type Provenance,
+} from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { zipSync } from "fflate";
 import { z } from "zod";
@@ -52,59 +55,14 @@ function stripAuthUrls(value: unknown, depth = 0): unknown {
   return value;
 }
 
-const isNotFound = (error: unknown) =>
-  error instanceof ApiError &&
-  (error.status === 404 || error.code === "NOT_FOUND");
-/** US-prefixed, bare-numeric, or bare US design/reissue/plant numbers. */
-const isUsNumber = (value: string) => {
-  const text = value.trim().toUpperCase();
-  return text.startsWith("US") || /^\d/.test(text) || /^(RE|PP|D)\d/.test(text);
-};
-
-/**
- * Patent PDF from clean public sources: Patent Public Search for US numbers,
- * then EPO OPS. Python also tried PPUBS for non-US numbers and relied on a
- * 404; PPUBS search can match an unrelated document, so only US numbers go
- * there. Non-not-found errors surface immediately.
- */
+/** Patent PDF from clean public sources (PPUBS, then EPO OPS). */
 async function patentPdf(clients: FacadeClients, number: string) {
-  const tried: string[] = [];
-  if (isUsNumber(number)) {
-    try {
-      const document =
-        await clients.publications.resolveDocumentByPublicationNumber(number);
-      const pdf = await clients.publications.downloadPdf(document);
-      const resolved = String(document.publication_number ?? number).replace(
-        /[^A-Za-z0-9]/g,
-        "",
-      );
-      return downloadResult(
-        pdf.data,
-        `${resolved}.pdf`,
-        "application/pdf",
-        pdf.provenance,
-      );
-    } catch (error) {
-      if (!isNotFound(error)) throw error;
-      tried.push("ppubs (not found)");
-    }
-  }
-  if (clients.epoOps) {
-    try {
-      const pdf = await clients.epoOps.downloadPdf(number);
-      return downloadResult(
-        pdf.data,
-        `${pdf.publicationNumber}.pdf`,
-        "application/pdf",
-        pdf.provenance,
-      );
-    } catch (error) {
-      if (!isNotFound(error)) throw error;
-      tried.push("epo (not found)");
-    }
-  } else tried.push("epo (EPO_OPS_API_KEY/EPO_OPS_API_SECRET not configured)");
-  throw new Error(
-    `No PDF found for '${number}' in clean sources (PPUBS, EPO). Tried: ${tried.join("; ")}`,
+  const pdf = await downloadPatentPdfClean(clients, number);
+  return downloadResult(
+    pdf.data,
+    pdf.filename,
+    "application/pdf",
+    pdf.provenance,
   );
 }
 

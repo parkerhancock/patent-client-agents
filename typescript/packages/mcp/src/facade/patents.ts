@@ -1,6 +1,6 @@
 import {
-  ApiError,
   type EpoOpsClient,
+  getPatentClaimsClean,
   type KiprisClient,
   type SourceProvenance,
 } from "@patent-client-agents/client";
@@ -161,10 +161,6 @@ const countryOf = (identifier: string) => {
   return /^[A-Za-z]{2}$/.test(head) ? head.toUpperCase() : null;
 };
 const digits = (identifier: string) => identifier.replace(/\D/g, "");
-const isUs = (identifier: string) => {
-  const cleaned = identifier.trim().toUpperCase();
-  return cleaned.startsWith("US") || /^[\d,]+$/.test(cleaned);
-};
 /** KR routing needs the BYOK key, as in Python. */
 function requireKipris(
   clients: FacadeClients,
@@ -178,163 +174,6 @@ function requireEpo(clients: FacadeClients): EpoOpsClient {
   if (!clients.epoOps)
     notConfigured("EPO OPS", "EPO_OPS_API_KEY/EPO_OPS_API_SECRET");
   return clients.epoOps;
-}
-
-// ── Canonical claims (Python unified.build_canonical_claim) ──────────
-
-interface Limitation {
-  text: string;
-  depth: number;
-}
-function canonicalClaim(
-  claim_number: number,
-  limitations: Limitation[],
-  claim_type: string,
-  depends_on: number | null,
-) {
-  const indented = limitations
-    .map((item) => "    ".repeat(item.depth) + item.text)
-    .join("\n");
-  return {
-    claim_number,
-    limitations,
-    claim_text: `${claim_number}. ${indented}`,
-    claim_type,
-    depends_on,
-  };
-}
-/** Python odp_limitations_from_text: four spaces per nesting level. */
-function odpLimitations(claimText: string): Limitation[] {
-  return claimText.split("\n").flatMap((line) => {
-    if (!line.trim()) return [];
-    const stripped = line.replace(/^ +/, "");
-    const depth = Math.floor((line.length - stripped.length) / 4);
-    let text = stripped.trimEnd();
-    if (depth === 0 && /^\d/.test(text)) {
-      const dot = text.indexOf(". ");
-      if (dot > 0 && /^\d+$/.test(text.slice(0, dot)))
-        text = text.slice(dot + 2);
-    }
-    return [{ text: text.trim(), depth }];
-  });
-}
-/** Python _ppubs_claim_texts: blank-line paragraphs, each starting "N.". */
-function ppubsClaimTexts(
-  claimsText: string | null | undefined,
-): [number, string][] {
-  const claims: [number, string][] = [];
-  for (const raw of (claimsText ?? "").split(/\n\s*\n/)) {
-    const para = raw.trim();
-    if (!para) continue;
-    const match = /^(?:\.Iadd\.)?\s*(\d+)\s*\.\s*([\s\S]*)$/.exec(para);
-    const last = claims.at(-1);
-    if (match) claims.push([Number(match[1]), (match[2] ?? "").trim()]);
-    else if (last) last[1] = `${last[1]}\n${para}`;
-    else claims.push([1, para]);
-  }
-  return claims.filter(([, text]) => text);
-}
-/**
- * EPO full text holds one claims block per language, each a run of
- * "N. ..." claim texts. Prefer English and split it into numbered claims;
- * Python numbered the language blocks as if they were claims.
- */
-function epoClaimTexts(
-  claims: { language: string | null; text: string | null }[],
-): [number, string][] {
-  const block =
-    claims.find((claim) => claim.language === "en" && claim.text) ??
-    claims.find((claim) => claim.text);
-  if (!block?.text) return [];
-  const parts = block.text.split(/\n(?=\d+\s*\.\s)/);
-  return parts.flatMap((part, index) => {
-    const match = /^(\d+)\s*\.\s*([\s\S]*)$/.exec(part.trim());
-    const text = (match ? (match[2] ?? "") : part).trim();
-    return text
-      ? [[match ? Number(match[1]) : index + 1, text] as [number, string]]
-      : [];
-  });
-}
-/** Python get_patent_claims_clean: ODP grant XML, then PPUBS, then EPO OPS. */
-async function cleanClaims(clients: FacadeClients, number: string) {
-  const us = isUs(number);
-  if (us) {
-    try {
-      const odp = await clients.applications.getGrantedClaims(number);
-      if (odp.claims?.length)
-        return {
-          source: "uspto_odp",
-          provenance: odp.provenance,
-          claims: odp.claims.map((claim) =>
-            canonicalClaim(
-              Number(claim.claim_number),
-              odpLimitations(claim.claim_text),
-              claim.claim_type,
-              claim.depends_on,
-            ),
-          ),
-        };
-    } catch {
-      // ODP grant XML is unavailable for this number; fall through.
-    }
-    try {
-      const document =
-        await clients.publications.resolveDocumentByPublicationNumber(number);
-      const text = (document.document as { claims_text?: string } | undefined)
-        ?.claims_text;
-      const claims = ppubsClaimTexts(text).map(([num, claimText]) => {
-        const reference = /\bclaims?\s+(\d+)/i.exec(claimText);
-        const parent = reference ? Number(reference[1]) : null;
-        const depends_on = parent !== null && parent < num ? parent : null;
-        return canonicalClaim(
-          num,
-          [{ depth: 0, text: claimText }],
-          depends_on ? "dependent" : "independent",
-          depends_on,
-        );
-      });
-      if (claims.length)
-        return {
-          source: "uspto_ppubs",
-          provenance: document.provenance,
-          claims,
-        };
-    } catch {
-      // PPUBS has no full text for this number; fall through.
-    }
-  }
-  const sources = us ? "ODP, PPUBS, EPO" : "ODP, EPO";
-  if (!clients.epoOps)
-    throw new ApiError(
-      `Claims not found for patent ${number} in clean sources (${sources}); the EPO OPS fallback is not configured (EPO_OPS_API_KEY/EPO_OPS_API_SECRET).`,
-      404,
-      "NOT_FOUND",
-    );
-  let fulltext: Awaited<ReturnType<EpoOpsClient["getFullText"]>>;
-  try {
-    fulltext = await clients.epoOps.getFullText(number, "claims");
-  } catch {
-    throw new ApiError(
-      `Claims not found for patent ${number} in clean sources (${sources}).`,
-      404,
-      "NOT_FOUND",
-    );
-  }
-  const texts = epoClaimTexts(fulltext.data.claims);
-  if (!texts.length)
-    throw new ApiError(
-      `Claims not found for patent ${number} in clean sources (${sources}).`,
-      404,
-      "NOT_FOUND",
-    );
-  return {
-    source: "epo_ops",
-    provenance: fulltext.provenance,
-    // EPO claims carry no structure, so each is one limitation, unnested.
-    claims: texts.map(([num, text]) =>
-      canonicalClaim(num, [{ depth: 0, text }], "independent", null),
-    ),
-  };
 }
 
 // ── EPO helpers ──────────────────────────────────────────────────────
@@ -512,7 +351,7 @@ export function registerPatentsFacade(
       }
       const number = single(identifier, "get_patent", view);
       if (view === "claims") {
-        const result = await cleanClaims(clients, number);
+        const result = await getPatentClaimsClean(clients, number);
         return listEnvelope(
           `${result.claims.length} claims for ${number} from ${result.source}.`,
           result.claims,
