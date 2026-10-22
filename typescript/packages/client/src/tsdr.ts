@@ -231,6 +231,8 @@ export function parseTsdrDocuments(xml: string): TsdrDocument[] {
       parseTagValue: false,
       ignoreAttributes: false,
       processEntities: true,
+      // Also decode numeric character references such as &#x3bc;.
+      htmlEntities: true,
     }).parse(xml);
   } catch {
     throw new ApiError(

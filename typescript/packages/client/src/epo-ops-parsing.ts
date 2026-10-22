@@ -27,6 +27,8 @@ export function parseXmlTree(xml: string): XmlNode {
     parseTagValue: false,
     parseAttributeValue: false,
     processEntities: true,
+    // Also decode numeric character references such as &#x3bc;.
+    htmlEntities: true,
   }).parse(xml) as Record<string, unknown>[];
   function convert(list: Record<string, unknown>[]): XmlNode[] {
     return list.flatMap((entry) =>

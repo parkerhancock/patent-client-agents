@@ -26,6 +26,8 @@ function tree(xml: string): Node {
     trimValues: false,
     parseTagValue: false,
     processEntities: true,
+    // Also decode numeric character references such as &#x3bc;.
+    htmlEntities: true,
   }).parse(xml) as Record<string, unknown>[];
   function convert(entries: Record<string, unknown>[]): Node[] {
     return entries.flatMap((entry) =>

@@ -35,6 +35,14 @@ test("grant fallback claim numbers count parsed claims rather than empty source 
   expect(claims.map((claim) => claim.claim_number)).toEqual([1, 2]);
 });
 
+test("grant claim text decodes numeric character references", () => {
+  const [claim] = parseGrantClaimsXml(
+    "<us-patent-grant><claim><claim-text>A 5&#x3bc;m film &#956; &amp; &#x26;lt;</claim-text></claim></us-patent-grant>",
+  );
+  expect(JSON.stringify(claim)).toContain("A 5μm film μ & &lt;");
+  expect(JSON.stringify(claim)).not.toContain("&#");
+});
+
 test("batch document download lists history once and follows each advertised format URL", async () => {
   const paths: string[] = [];
   const client = api((request) => {

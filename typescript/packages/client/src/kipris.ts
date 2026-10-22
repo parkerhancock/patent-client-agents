@@ -461,6 +461,8 @@ function parseDocument(xml: string): Record<string, unknown> {
     parseTagValue: false,
     trimValues: true,
     processEntities: true,
+    // Also decode numeric character references such as &#x3bc;.
+    htmlEntities: true,
     isArray: (name, path) =>
       name === "item" && path === "response.body.items.item",
   }).parse(xml) as Record<string, unknown>;

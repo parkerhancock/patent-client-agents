@@ -1,7 +1,7 @@
 {
   "odp": [
     {
-      "input": "1. A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    charging the pulse capacitor;\n    switching the at least one switch;\n    providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed magnetic field by the stimulation coil;\n    cooling the stimulation coil; and\n    applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
+      "input": "1. A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    charging the pulse capacitor;\n    switching the at least one switch;\n    providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed magnetic field by the stimulation coil;\n    cooling the stimulation coil; and\n    applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
       "limitations": [
         {
           "text": "A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:",
@@ -24,7 +24,7 @@
           "depth": 1
         },
         {
-          "text": "applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
+          "text": "applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
           "depth": 1
         }
       ]
@@ -191,10 +191,10 @@
       ]
     },
     {
-      "input": "15. The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "input": "15. The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
       "limitations": [
         {
-          "text": "The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "text": "The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
           "depth": 0
         }
       ]
@@ -255,10 +255,10 @@
       ]
     },
     {
-      "input": "19. The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "input": "19. The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
       "limitations": [
         {
-          "text": "The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "text": "The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
           "depth": 0
         }
       ]
@@ -392,10 +392,10 @@
       ]
     },
     {
-      "input": "32. The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "input": "32. The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
       "limitations": [
         {
-          "text": "The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "text": "The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
           "depth": 0
         }
       ]
@@ -483,11 +483,11 @@
           "depth": 1
         },
         {
-          "text": "applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
+          "text": "applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
           "depth": 1
         }
       ],
-      "claim_text": "1. A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    charging the pulse capacitor;\n    switching the at least one switch;\n    providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed magnetic field by the stimulation coil;\n    cooling the stimulation coil; and\n    applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
+      "claim_text": "1. A method for reducing excess weight of a patient using a device including a power unit, at least one switch, a pulse capacitor and a stimulation coil, the method comprising:\n    charging the pulse capacitor;\n    switching the at least one switch;\n    providing a current pulse having a peak current in a range of 500 A to 6000 A from the pulse capacitor to the stimulation coil in order to generate a pulsed magnetic field by the stimulation coil;\n    cooling the stimulation coil; and\n    applying diphasic sinusoidal pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs to a muscle of the patient in order to cause a contraction of the muscle in order to reduce fatty tissue.",
       "claim_type": "independent",
       "depends_on": null
     },
@@ -695,11 +695,11 @@
       "claim_number": 15,
       "limitations": [
         {
-          "text": "The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "text": "The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
           "depth": 0
         }
       ],
-      "claim_text": "15. The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "claim_text": "15. The method of claim 14, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
       "claim_type": "independent",
       "depends_on": null
     },
@@ -771,11 +771,11 @@
       "claim_number": 19,
       "limitations": [
         {
-          "text": "The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "text": "The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
           "depth": 0
         }
       ],
-      "claim_text": "19. The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "claim_text": "19. The method of claim 17, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
       "claim_type": "independent",
       "depends_on": null
     },
@@ -947,11 +947,11 @@
       "claim_number": 32,
       "limitations": [
         {
-          "text": "The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+          "text": "The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
           "depth": 0
         }
       ],
-      "claim_text": "32. The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 &#x3bc;s to 300 &#x3bc;s.",
+      "claim_text": "32. The method of claim 25, further comprising applying the pulses of the pulsed magnetic field with a pulse duration in a range of 100 μs to 300 μs.",
       "claim_type": "independent",
       "depends_on": null
     }
