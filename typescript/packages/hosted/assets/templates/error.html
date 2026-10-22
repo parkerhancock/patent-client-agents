@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ error_title }} — Patent Client Agents{% endblock %}
+{% block content %}
+
+<h1>{{ error_title }}</h1>
+<div class="warn">{{ error_message }}</div>
+<p class="muted">
+  Return to your MCP client and connect again. If this keeps happening,
+  remove the connector and add it back.
+</p>
+<p><a class="button secondary" href="/">Back to the home page</a></p>
+
+{% endblock %}

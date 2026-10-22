@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Patent Client Agents — MCP demo{% endblock %}</title>
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg" />
+  <link rel="icon" type="image/png" href="/static/icon.png" />
+  <link rel="apple-touch-icon" href="/static/icon.png" />
+  <meta name="theme-color" content="#008cc8" />
+  <style>
+    :root {
+      color-scheme: light dark;
+      /* Brand palette — matches docs.patentclient.com */
+      --cobalt:    #008cc8;
+      --cyan:      #19c6d6;
+      --navy:      #0b4a6e;
+      --navy-deep: #06324a;
+
+      --bg:        #ffffff;
+      --bg-soft:   #f5f7fa;
+      --bg-warn:   #fff8e6;
+      --border:    #e1e6ec;
+      --border-warn: #f1c232;
+      --text:      #1a1a1a;
+      --text-muted:#5a6573;
+      --text-warn: #6b4f00;
+      --link:      var(--cobalt);
+      --code-bg:   #f4f6f9;
+      --code-text: var(--navy);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:        hsl(206, 28%, 11%);
+        --bg-soft:   hsl(206, 28%, 14%);
+        --bg-warn:   hsl(38, 50%, 14%);
+        --border:    hsl(206, 18%, 22%);
+        --border-warn: hsl(38, 60%, 30%);
+        --text:      #e8edf2;
+        --text-muted:#9aa6b3;
+        --text-warn: #fde68a;
+        --link:      var(--cyan);
+        --code-bg:   hsl(206, 28%, 16%);
+        --code-text: var(--cyan);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Branded header band */
+    .site-header {
+      background: var(--cobalt);
+      color: #fff;
+      padding: 0.6rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .site-header__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #fff;
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    .site-header__brand img { height: 1.7rem; width: auto; display: block; }
+    .site-header__nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+    .site-header__nav a {
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    .site-header__nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Page container */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 2vw + 1rem, 2.25rem);
+      line-height: 1.2;
+      margin: 0 0 0.5rem;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+    @media (prefers-color-scheme: dark) {
+      h1 { color: #fff; }
+    }
+    h2 {
+      font-size: 1.3rem;
+      margin: 2.25rem 0 0.75rem;
+      color: var(--text);
+      letter-spacing: -0.005em;
+    }
+    h3 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; color: var(--text); }
+    p { margin: 0.75rem 0; }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Code */
+    code, pre {
+      font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+    code {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+    }
+    pre {
+      background: var(--code-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    pre code { background: transparent; padding: 0; color: inherit; border-radius: 0; }
+
+    /* Cards & callouts */
+    .card {
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .install-panel {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .install-panel__header {
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.15rem;
+    }
+    .install-panel__header h2 { margin: 0 0 0.25rem; }
+    .install-panel__body { padding: 1rem 1.15rem 1.15rem; }
+    .install-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .install-option {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 0.95rem;
+      background: var(--bg-soft);
+    }
+    .install-option h3 { margin-top: 0; }
+    .install-option ol {
+      margin: 0.5rem 0 0 1.25rem;
+      padding: 0;
+    }
+    .install-option li { margin: 0.25rem 0; }
+    .code-label {
+      display: block;
+      margin: 1rem 0 0.35rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .url-line {
+      display: flex;
+      gap: 0.5rem;
+      align-items: stretch;
+      flex-wrap: wrap;
+      margin: 0.75rem 0 0;
+    }
+    .url-line code {
+      flex: 1 1 20rem;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      display: block;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--border);
+    }
+    .warn {
+      background: var(--bg-warn);
+      border: 1px solid var(--border-warn);
+      color: var(--text-warn);
+      padding: 0.95rem 1.1rem;
+      border-radius: 8px;
+      margin: 1.25rem 0;
+    }
+    .warn strong { color: inherit; }
+    .warn a { color: inherit; text-decoration: underline; }
+
+    /* Buttons */
+    .button {
+      display: inline-block;
+      background: var(--cobalt);
+      color: #fff;
+      border: 1px solid var(--cobalt);
+      padding: 0.6rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 120ms ease, border-color 120ms ease;
+    }
+    .button:hover { background: var(--navy); border-color: var(--navy); text-decoration: none; }
+    .button.secondary {
+      background: transparent;
+      color: var(--cobalt);
+    }
+    .button.secondary:hover { background: var(--cobalt); color: #fff; }
+
+    .muted { color: var(--text-muted); font-size: 0.92rem; }
+
+    @media (max-width: 680px) {
+      .install-grid { grid-template-columns: 1fr; }
+      .site-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .site-header__nav {
+        margin-left: 0;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 0.94rem; margin: 1rem 0; }
+    th, td { text-align: left; padding: 0.55rem 0.5rem; border-bottom: 1px solid var(--border); }
+    th { background: var(--bg-soft); font-weight: 600; }
+
+    /* Footer */
+    footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 2.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    footer .spacer { flex: 1; }
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--link); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-header__brand" href="/" aria-label="Patent Client Agents home">
+      <img src="/static/wordmark.png" alt="Patent Client Agents" />
+    </a>
+    <nav class="site-header__nav">
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="https://docs.patentclient.com/">Docs</a>
+      <a href="https://github.com/parkerhancock/patent-client-agents">GitHub</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <span>&copy; 2026 Patent Client, LLC</span>
+    <span class="spacer"></span>
+    <a href="https://docs.patentclient.com/">Docs</a>
+    <a href="https://github.com/parkerhancock/patent-client-agents">GitHub</a>
+    <a href="/terms">Terms of Use</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="mailto:pypatent2018@gmail.com?subject=Enterprise%20licensing%20inquiry">Enterprise licensing</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+# syntax=docker/dockerfile:1.7
+# Hosted curated MCP server (packages/hosted). Build from the typescript/
+# workspace:  docker build -f Dockerfile.hosted -t patent-mcp-ts .
+# Bun runs the TypeScript sources directly; there is no build step.
+FROM oven/bun:1.4.3-slim@sha256:14a223fa35747ec728bce300ef85888bc5f7958164d15bbba6a54b22b52a3288
+
+WORKDIR /app
+
+# Workspace manifests first so the dependency layer caches across source edits.
+COPY package.json bun.lock bunfig.toml ./
+COPY packages/client/package.json ./packages/client/package.json
+COPY packages/mcp/package.json ./packages/mcp/package.json
+COPY packages/waf-session/package.json ./packages/waf-session/package.json
+COPY packages/waf-worker/package.json ./packages/waf-worker/package.json
+COPY packages/hosted/package.json ./packages/hosted/package.json
+RUN bun install --frozen-lockfile --production --filter @patent-client-agents/hosted \
+    && rm -rf /root/.bun/install/cache
+
+COPY packages/client/src ./packages/client/src
+COPY packages/waf-session/src ./packages/waf-session/src
+COPY packages/mcp/src ./packages/mcp/src
+COPY packages/hosted/src ./packages/hosted/src
+COPY packages/hosted/assets ./packages/hosted/assets
+
+# Corpus bootstrap target (CORPORA_MANIFEST_URI); writable by the runtime user.
+RUN mkdir -p /app/corpora && chown bun:bun /app/corpora
+
+ENV NODE_ENV=production \
+    HOST=0.0.0.0 \
+    PORT=8080 \
+    CORPORA_CACHE_DIR=/app/corpora
+
+USER bun
+EXPOSE 8080
+
+# Cloud Run probes the port itself; this serves `docker run` and local checks.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+  CMD ["bun", "-e", "fetch(`http://127.0.0.1:${process.env.PORT ?? 8080}/-/health`).then(r => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+
+# Exec form: bun is PID 1 and receives SIGTERM for a graceful stop.
+CMD ["bun", "packages/hosted/src/main.ts"]

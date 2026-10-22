@@ -62,6 +62,9 @@ No GCP writes.
    and headers, serverInfo icons, and
    a hidden-tool list (`search_trademarks` until hosted WAF refresh is shown
    to work).
+   Status (October 22): built, see [hosted](hosted.md). `DOWNLOAD_BUCKET`
+   switches downloads to the GCS store, and `CORPORA_MANIFEST_URI` runs the
+   corpus bootstrap before the server binds.
 2. Corpora: prepare the five EPO corpora as `.zst` and write a TypeScript
    bootstrap that reads a separate manifest
    (`gs://patentclient-mcp-corpora/ts/manifest.json`), checks sha256 and
@@ -73,8 +76,16 @@ No GCP writes.
    `scripts/publish-corpora.ts` has been run only as a dry run. See
    [corpus bootstrap](corpus-bootstrap.md). The upload is Phase 1, step 1.
 3. Dockerfile on `oven/bun`, run with the Node and Bun smoke tests.
+   Status (October 22): `Dockerfile.hosted` builds a 267 MB image that
+   passes the eight public smoke checks locally; Node and browser smoke
+   scripts pass.
 4. Tests against the Firestore emulator and a fake GCS; an end-to-end local
    run with Claude Code against the container, using auth bypass.
+   Status (October 22): storage tests pass against the Firestore emulator
+   and a fake Firestore server, and the OAuth flow is tested end to end
+   against a fake Google. The container served tools/list and live tool
+   calls over HTTP with auth bypass; a Claude Code session against it and
+   fake-GCS tests are not done.
 
 Stop: review the diff and a local demo.
 

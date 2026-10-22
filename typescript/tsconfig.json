@@ -15,6 +15,9 @@
     },
     {
       "path": "tests"
+    },
+    {
+      "path": "packages/hosted"
     }
   ]
 }

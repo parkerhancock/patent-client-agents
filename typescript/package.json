@@ -54,11 +54,13 @@
     "verify:ukipo-mopp": "bun scripts/verify-ukipo-mopp.ts",
     "verify:ipo-in": "bun scripts/verify-ipo-in.ts",
     "build:ipo-in": "bun scripts/build-ipo-in-corpora.ts",
-    "fetch:ipo-in": "bun scripts/build-ipo-in-corpora.ts --fetch"
+    "fetch:ipo-in": "bun scripts/build-ipo-in-corpora.ts --fetch",
+    "start:hosted": "bun packages/hosted/src/main.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
     "@patent-client-agents/client": "workspace:*",
+    "@patent-client-agents/hosted": "workspace:*",
     "@patent-client-agents/mcp": "workspace:*",
     "@patent-client-agents/waf-session": "workspace:*",
     "@patent-client-agents/waf-worker": "workspace:*",

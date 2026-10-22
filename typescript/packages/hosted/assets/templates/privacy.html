@@ -1,0 +1,336 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy — Patent Client MCP Demo{% endblock %}
+{% block content %}
+<h1>Privacy Policy</h1>
+<p class="muted"><strong>Last updated:</strong> May 1, 2026</p>
+
+<p>
+  This Privacy Policy describes how Patent Client, LLC, a Texas
+  limited liability company ("<strong>Patent Client</strong>,"
+  "<strong>we</strong>," "<strong>us</strong>," or
+  "<strong>our</strong>") collects, uses, retains, and discloses
+  information in connection with the public demonstration service
+  available at <code>mcp.patentclient.com</code> (the
+  "<strong>Service</strong>"). This policy is incorporated into, and
+  is part of, our <a href="/terms">Terms of Use</a>.
+</p>
+
+<p>
+  <strong>Bottom line:</strong> the Service is a public demonstration.
+  We collect the minimum information needed to authenticate users via
+  Google, enforce per-user rate limits, prevent abuse, and operate the
+  Service. We do not sell personal data, run targeted advertising, or
+  embed third-party tracking. Your queries are proxied to the
+  underlying patent data sources, which may keep their own records.
+  Treat the Service like any other public web tool: do not submit
+  privileged, client-confidential, trade-secret, or otherwise sensitive
+  information.
+</p>
+
+<h2>1. Information We Collect</h2>
+
+<p>We collect a narrow set of information when you use the Service:</p>
+
+<ul>
+  <li>
+    <strong>Account identity (from Google).</strong> When you sign in,
+    Google provides us with your Google account email address, a stable
+    Google-issued user identifier, and (depending on your Google account
+    settings) basic profile information such as your name. We use this
+    information to identify your account, attribute requests for
+    rate-limiting purposes, and contact you about the Service if
+    necessary.
+  </li>
+  <li>
+    <strong>Request and usage data.</strong> When you make a request
+    through the Service, we record the request endpoint, method,
+    timestamp, response size in bytes, your user identifier, and the
+    outcome (success, error, or rate-limited). This data is used to
+    enforce rate limits, debug failures, prevent abuse, and produce
+    aggregate operational metrics.
+  </li>
+  <li>
+    <strong>Query content.</strong> The Service relays your search
+    parameters, patent numbers, identifiers, and similar request inputs
+    to upstream patent data sources (see Section 3 below). These inputs
+    may also appear in our request logs for debugging and abuse
+    prevention.
+  </li>
+  <li>
+    <strong>Technical data.</strong> Standard server logs collect your
+    IP address, user-agent string, and connection metadata. This data
+    is collected by our hosting provider (Google Cloud Run) and used
+    for security, abuse prevention, and diagnostics.
+  </li>
+  <li>
+    <strong>Cookies.</strong> See Section 5 below. The Service uses one
+    functional cookie to record your acceptance of the Terms of Use.
+    The Service does not set advertising or cross-site tracking cookies.
+  </li>
+</ul>
+
+<p>
+  We do not knowingly collect Social Security numbers, driver's license
+  numbers, biometric data, precise geolocation, payment-card numbers,
+  health data, or sensitive personal information categories under
+  applicable state law. The Service has no payment functionality.
+</p>
+
+<h2>2. How We Use Information</h2>
+
+<p>We use the information described in Section 1 to:</p>
+
+<ul>
+  <li>Authenticate you and operate the Service;</li>
+  <li>Enforce per-account rate limits and detect abusive use;</li>
+  <li>Diagnose errors and improve reliability;</li>
+  <li>Maintain aggregate operational metrics (for example, total daily request volume);</li>
+  <li>Comply with our legal obligations and respond to lawful requests; and</li>
+  <li>Enforce our <a href="/terms">Terms of Use</a> and protect the rights, property, and safety of Patent Client, our users, and the public.</li>
+</ul>
+
+<p>
+  We do not use your information for targeted advertising, behavioral
+  profiling, or any form of automated decision-making that produces
+  legal or similarly significant effects about you. We do not train
+  machine-learning models on your query content.
+</p>
+
+<h2>3. Who We Share Information With</h2>
+
+<p>
+  We share information with a limited set of third parties, each
+  described below.
+</p>
+
+<ul>
+  <li>
+    <strong>Google (authentication).</strong> Google is our identity
+    provider. When you sign in, your interaction with Google's OAuth
+    flow is governed by
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
+    Google receives information necessary to authenticate you and may
+    log the authorization itself.
+  </li>
+  <li>
+    <strong>Upstream patent data sources.</strong> The Service proxies
+    your queries to public and third-party patent data sources,
+    including the United States Patent and Trademark Office (USPTO)
+    Open Data Portal and Public Search systems, the European Patent
+    Office (EPO) Open Patent Services, Google Patents, the Manual of
+    Patent Examining Procedure (MPEP), and the Cooperative Patent
+    Classification (CPC) system. Each upstream source receives the
+    search parameters needed to fulfill your request and may keep its
+    own records. Their use of that data is governed by their own
+    policies.
+  </li>
+  <li>
+    <strong>Hosting and infrastructure providers.</strong> The Service
+    is hosted on Google Cloud Platform. Google Cloud processes
+    information on our behalf as a service provider, including running
+    the Cloud Run container, storing rate-limit counters in Firestore,
+    and ingesting server logs into Cloud Logging.
+  </li>
+  <li>
+    <strong>Legal, safety, and compliance.</strong> We may disclose
+    information when we believe in good faith that disclosure is
+    necessary to comply with a court order, subpoena, regulatory
+    request, or applicable law; to enforce our Terms of Use; or to
+    protect the rights, property, or safety of Patent Client, our
+    users, or the public.
+  </li>
+  <li>
+    <strong>Business transfers.</strong> If Patent Client is involved
+    in a merger, acquisition, financing, reorganization, dissolution,
+    or sale of all or substantially all of its assets, your information
+    may be transferred as part of that transaction. We will notify
+    affected users where required by law.
+  </li>
+</ul>
+
+<p>
+  <strong>We do not sell your personal data, and we do not share your
+  personal data for cross-context behavioral advertising</strong>, as
+  those terms are defined under the California Consumer Privacy Act
+  and similar state laws.
+</p>
+
+<h2>4. How Long We Keep Information</h2>
+
+<p>
+  We retain personal data for as long as we deem reasonably necessary
+  for the purposes described in this policy, taking into account our
+  operational needs, the security and abuse-prevention value of
+  historical data, our legal and regulatory obligations, applicable
+  statutes of limitations, and the nature and sensitivity of the
+  information. We do not commit to a specific retention period.
+  Aggregated and de-identified information may be retained
+  indefinitely. Account identifiers and request logs may be retained
+  for the lifetime of the Service. Subject to your statutory rights
+  described in Section 6, you may request deletion of personal data
+  about you, and we will fulfill those requests as required by
+  applicable law.
+</p>
+
+<h2>5. Cookies and Tracking Technologies</h2>
+
+<p>
+  The Service uses one cookie:
+  <code>pca_terms_accepted</code>, which records that you have agreed
+  to the current version of our Terms of Use. The cookie is set with
+  the <code>HttpOnly</code>, <code>Secure</code>, and
+  <code>SameSite=Lax</code> attributes, expires after one year, and
+  contains only the version string of the Terms you accepted. It is
+  not used for tracking, analytics, or advertising.
+</p>
+<p>
+  The Service does not use Google Analytics, advertising pixels, or
+  third-party trackers. The Service does not set cookies for
+  behavioral advertising or cross-site tracking. Some browsers send a
+  Global Privacy Control ("<strong>GPC</strong>") signal; because we
+  do not sell or share personal data for cross-context behavioral
+  advertising, no opt-out is necessary, but we honor GPC signals as
+  required by applicable law.
+</p>
+
+<h2>6. Your Rights and Choices</h2>
+
+<p>
+  Depending on where you reside, you may have rights under applicable
+  privacy laws — including the California Consumer Privacy Act (as
+  amended by the California Privacy Rights Act), and analogous laws
+  in Virginia, Colorado, Connecticut, Utah, Texas, Oregon, Montana,
+  and other states. These rights typically include:
+</p>
+
+<ul>
+  <li>
+    <strong>Access.</strong> Confirm whether we process your personal
+    data and obtain a copy in a portable format.
+  </li>
+  <li>
+    <strong>Correction.</strong> Request correction of inaccurate
+    personal data.
+  </li>
+  <li>
+    <strong>Deletion.</strong> Request deletion of your personal data,
+    subject to exceptions under applicable law (for example, where we
+    must retain data for security, legal, or compliance reasons).
+  </li>
+  <li>
+    <strong>Opt out of sale, sharing, profiling, and targeted
+    advertising.</strong> We do not sell or share personal data and do
+    not engage in targeted advertising or profiling, so no opt-out is
+    necessary; however, you may submit a request and we will confirm
+    that no such processing occurs.
+  </li>
+  <li>
+    <strong>Non-discrimination.</strong> We will not deny you the
+    Service, charge a different price, or provide a different level of
+    service because you exercised your privacy rights.
+  </li>
+  <li>
+    <strong>Appeal.</strong> If we deny your request, you may appeal
+    by replying to our response or by contacting us again at the
+    address in Section 11.
+  </li>
+</ul>
+
+<p>
+  To exercise any of these rights, email
+  <a href="mailto:pypatent2018@gmail.com?subject=Privacy%20Request">pypatent2018@gmail.com</a>
+  with the subject line "Privacy Request" and a description of your
+  request. We will verify your identity through your Google account
+  email of record before fulfilling sensitive requests. We will
+  respond within the timeframes required by applicable law (generally
+  45 days, with one extension where permitted). You may use an
+  authorized agent to submit a request on your behalf where permitted
+  by law; we may require written proof of authorization.
+</p>
+
+<p>
+  <strong>Nevada residents:</strong> Nevada law provides a limited
+  right to opt out of the sale of certain personal information. We do
+  not sell personal information triggering Nevada's opt-out
+  requirement, but you may submit a request to the email address above
+  to confirm.
+</p>
+
+<h2>7. Children</h2>
+
+<p>
+  The Service is intended for adult, professional users — primarily
+  patent practitioners, researchers, and developers integrating
+  patent data into AI workflows. The Service is not directed at
+  children under 18, and we do not knowingly collect personal
+  information from anyone under 18. If you believe a child under 18
+  has provided personal information through the Service, please
+  contact us at the address in Section 11 and we will delete that
+  information.
+</p>
+
+<h2>8. Security</h2>
+
+<p>
+  We use commercially reasonable administrative, technical, and
+  physical measures designed to protect personal data from accidental
+  loss, unauthorized access, use, alteration, and disclosure. These
+  measures include transport encryption (HTTPS), authentication via
+  Google OAuth 2.0, scoped service accounts, and encrypted storage at
+  rest provided by Google Cloud Platform. No system can be perfectly
+  secure, however, and we cannot guarantee the security of information
+  transmitted to or through the Service. You are responsible for
+  maintaining the confidentiality of your Google account credentials
+  and for the actions taken under your account.
+</p>
+
+<h2>9. International Users</h2>
+
+<p>
+  The Service is operated from the United States and is intended for
+  users located in the United States. If you access the Service from
+  outside the United States, you understand that your information will
+  be transferred to, stored, and processed in the United States.
+  United States privacy laws may differ from those of your country,
+  and by using the Service you consent to that transfer and
+  processing. We do not intentionally target users in the European
+  Economic Area, the United Kingdom, Switzerland, the People's
+  Republic of China, or any other jurisdiction whose laws would
+  require additional disclosures or affirmative consent we have not
+  obtained.
+</p>
+
+<h2>10. Changes to This Policy</h2>
+
+<p>
+  We may update this Privacy Policy from time to time. When we do, we
+  will revise the "Last updated" date at the top of the page and, for
+  material changes, take additional reasonable steps to notify users
+  (such as posting a notice on the Service or, where appropriate,
+  emailing affected users). Your continued use of the Service after a
+  change to this policy constitutes your acceptance of the updated
+  policy.
+</p>
+
+<h2>11. Contact</h2>
+
+<p>
+  Questions, concerns, or requests under this Privacy Policy may be
+  sent to:
+</p>
+
+<p>
+  Patent Client, LLC<br />
+  Email:
+  <a href="mailto:pypatent2018@gmail.com?subject=Privacy%20Inquiry">pypatent2018@gmail.com</a>
+</p>
+
+<p class="muted" style="margin-top: 2.5rem;">
+  This Privacy Policy is provided for the public demonstration only.
+  If you need a private deployment with contractual confidentiality,
+  Data Processing Addendum, or different data-handling commitments,
+  <a href="mailto:pypatent2018@gmail.com?subject=Enterprise%20licensing%20inquiry">contact us</a>
+  about an enterprise instance.
+</p>
+
+{% endblock %}

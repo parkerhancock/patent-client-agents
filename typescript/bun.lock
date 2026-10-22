@@ -7,6 +7,7 @@
       "devDependencies": {
         "@biomejs/biome": "2.5.15",
         "@patent-client-agents/client": "workspace:*",
+        "@patent-client-agents/hosted": "workspace:*",
         "@patent-client-agents/mcp": "workspace:*",
         "@patent-client-agents/waf-session": "workspace:*",
         "@patent-client-agents/waf-worker": "workspace:*",
@@ -35,6 +36,17 @@
         "ky": "2.2.0",
         "linkedom": "0.18.13",
         "pdf-lib": "1.17.1",
+        "zod": "4.3.6",
+      },
+    },
+    "packages/hosted": {
+      "name": "@patent-client-agents/hosted",
+      "version": "0.1.0",
+      "dependencies": {
+        "@patent-client-agents/client": "workspace:*",
+        "@patent-client-agents/mcp": "workspace:*",
+        "@prefecthq/fastmcp-ts": "1.7.3",
+        "jose": "6.2.2",
         "zod": "4.3.6",
       },
     },
@@ -132,6 +144,8 @@
     "@nodable/entities": ["@nodable/entities@3.1.0", "", {}, "sha512-LsS/DjHr+uDM647Gru/cA8+J3a3HfhttwCKLyuoyN7yXTFCxKBtSgMQBvrW9yNPa2/zDRUNuGPaH5QUFoa4arQ=="],
 
     "@patent-client-agents/client": ["@patent-client-agents/client@workspace:packages/client"],
+
+    "@patent-client-agents/hosted": ["@patent-client-agents/hosted@workspace:packages/hosted"],
 
     "@patent-client-agents/mcp": ["@patent-client-agents/mcp@workspace:packages/mcp"],
 

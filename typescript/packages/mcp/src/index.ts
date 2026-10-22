@@ -50,6 +50,7 @@ import {
   type FastMCPOptions,
   jwtVerifier,
   requireScopes,
+  type ToolConfig,
 } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
 import { registerApplicationExtraTools } from "./applications-extra.js";
@@ -185,6 +186,15 @@ export interface ServerOptions {
    * the default.
    */
   toolset?: "full" | "curated";
+  /**
+   * Tool names to hide: registered disabled, so tools/list omits them and
+   * tools/call refuses them. Names that are not registered are ignored.
+   */
+  hiddenTools?: readonly string[];
+  /** Extra MCP serverInfo fields, such as icons for connector cards. */
+  serverInfo?: { title?: string; websiteUrl?: string; icons?: ServerIcon[] };
+  /** Instructions returned from initialize. */
+  instructions?: string;
 }
 
 export function toolsetFromEnv(
@@ -328,13 +338,74 @@ function tokenVerifier(auth: NonNullable<ServerOptions["auth"]>) {
   };
 }
 
+/** An icon advertised in MCP serverInfo (protocol revision 2025-11-25). */
+export interface ServerIcon {
+  src: string;
+  mimeType?: string;
+  sizes?: string[];
+  theme?: "light" | "dark";
+}
+
+interface Presentation {
+  hiddenTools?: readonly string[];
+  serverInfo?: ServerOptions["serverInfo"];
+  instructions?: string;
+}
+
+type ToolRegistration = (
+  config: ToolConfig,
+  handler: (args: Record<string, unknown>) => unknown,
+) => void;
+
+/**
+ * FastMCP builds a fresh SDK Server per request and only passes it a name and
+ * version. Extend each one's serverInfo and instructions as it is made. This
+ * relies on FastMCP and SDK internals, so fail loudly if their shape changes.
+ */
+function decorateServerInfo(server: FastMCP, presentation: Presentation) {
+  const target = server as unknown as {
+    _makeServer?: (...args: unknown[]) => unknown;
+  };
+  const make = target._makeServer;
+  if (typeof make !== "function")
+    throw new Error(
+      "FastMCP no longer exposes _makeServer; update serverInfo.",
+    );
+  target._makeServer = (...args: unknown[]) => {
+    const made = make.apply(server, args) as {
+      _serverInfo?: Record<string, unknown>;
+      _instructions?: string;
+    };
+    if (typeof made._serverInfo !== "object" || made._serverInfo === null)
+      throw new Error("MCP Server no longer exposes _serverInfo.");
+    Object.assign(made._serverInfo, presentation.serverInfo ?? {});
+    if (presentation.instructions)
+      made._instructions = presentation.instructions;
+    return made;
+  };
+}
+
 class DocumentServer extends FastMCP {
   constructor(
     options: FastMCPOptions,
     private readonly artifacts: DownloadStore,
     private readonly closeCorpus: () => void,
+    presentation: Presentation = {},
   ) {
     super(options);
+    const hidden = new Set(presentation.hiddenTools ?? []);
+    if (hidden.size > 0) {
+      // Register hidden tools disabled: FastMCP omits them from tools/list
+      // and answers tools/call with "Unknown tool".
+      const register = this.tool.bind(this) as ToolRegistration;
+      this.tool = ((config, handler) =>
+        register(
+          hidden.has(config.name) ? { ...config, disabled: true } : config,
+          handler,
+        )) as ToolRegistration as FastMCP["tool"];
+    }
+    if (presentation.serverInfo || presentation.instructions)
+      decorateServerInfo(this, presentation);
   }
   override async close(): Promise<void> {
     try {
@@ -400,6 +471,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       if (!provided.tmep) tmep.close();
       if (!provided.mopp) mopp.close();
       for (const client of ownedEpoLegal) client.close();
+    },
+    {
+      ...(options.hiddenTools ? { hiddenTools: options.hiddenTools } : {}),
+      ...(options.serverInfo ? { serverInfo: options.serverInfo } : {}),
+      ...(options.instructions ? { instructions: options.instructions } : {}),
     },
   );
   if (options.relay) {
