@@ -15,6 +15,9 @@ starts and lists every tool under Node 24.
 
 Deno is untested.
 
+Document download URLs, including the server-only GCS signed-URL store,
+are described in [downloads](downloads.md).
+
 ## How the client stays portable
 
 The client package uses web-standard APIs: `fetch`, Web Crypto, `TextEncoder`,

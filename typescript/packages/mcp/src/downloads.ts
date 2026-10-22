@@ -10,12 +10,34 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { SourceProvenance } from "@patent-client-agents/client";
 
+/** Bytes to publish, already sanitized by the download layer. */
+export interface BlobObject {
+  bytes: Uint8Array;
+  filename: string;
+  contentType: string;
+}
+export interface StoredBlob {
+  /** A URL that serves the bytes without further credentials until expiresAt. */
+  url: string;
+  expiresAt: Date;
+}
+/**
+ * Durable object store for download bytes (for example GCS with V4 signed
+ * URLs, see gcs-blob-store.ts). Without one, downloads stay in this process:
+ * HMAC-signed or authenticated /downloads URLs, or a local file over stdio.
+ */
+export interface BlobStore {
+  put(object: BlobObject): Promise<StoredBlob>;
+}
+
 export interface DownloadOptions {
   /** Externally reachable server origin, including an optional deployment prefix. */
   publicBaseUrl?: string;
   mode?: "authenticated" | "signed";
   ttlSeconds?: number;
   maxBytes?: number;
+  /** Publish to this store instead of the process; its URLs are bearer links like "signed". */
+  blobStore?: BlobStore;
 }
 interface Artifact {
   redeemed: boolean;
@@ -42,6 +64,7 @@ export class DownloadStore {
   private closing: Promise<void> | undefined;
   private cleanupTimer?: ReturnType<typeof setInterval>;
   private readonly createdFiles = new Set<string>();
+  private readonly blobStore: BlobStore | undefined;
   constructor(options: DownloadOptions = {}) {
     if (options.publicBaseUrl) {
       const url = new URL(options.publicBaseUrl);
@@ -68,6 +91,11 @@ export class DownloadStore {
       throw new Error("Download TTL must be 1–86400 seconds.");
     if (!Number.isSafeInteger(this.maxBytes) || this.maxBytes < 1)
       throw new Error("Download cache capacity must be positive.");
+    this.blobStore = options.blobStore;
+    if (this.blobStore && this.mode === "authenticated")
+      throw new Error(
+        "A blob store issues bearer URLs and cannot enforce authenticated downloads.",
+      );
   }
   private signature(id: string, expires: number) {
     return createHmac("sha256", this.key)
@@ -142,9 +170,41 @@ export class DownloadStore {
   ) {
     if (this.closed)
       return Promise.reject(new Error("Download store is closed."));
+    // Remote uploads run concurrently; the lock guards only local disk state.
+    if (this.blobStore)
+      return this.putBlob(this.blobStore, bytes, name, mime, provenance);
     return this.exclusive(() =>
       this.putArtifact(bytes, name, mime, provenance, owner),
     );
+  }
+  private async putBlob(
+    store: BlobStore,
+    bytes: Uint8Array,
+    name: string,
+    mime: string,
+    provenance: SourceProvenance,
+  ) {
+    const { filename, contentType } = this.validate(bytes, name, mime);
+    if (bytes.byteLength > this.maxBytes)
+      throw new Error("Document exceeds the download size limit.");
+    const stored = await store.put({ bytes, filename, contentType });
+    return {
+      filename,
+      content_type: contentType,
+      size: bytes.byteLength,
+      expires_at: stored.expiresAt.toISOString(),
+      provenance: { ...provenance, connector_version: "0.1.0" as const },
+      download_url: stored.url,
+    };
+  }
+  private validate(bytes: Uint8Array, name: string, mime: string) {
+    if (!bytes.byteLength) throw new Error("Cannot publish an empty document.");
+    const filename =
+      name.replace(/[^\w.\- ]/g, "_").slice(0, 180) || "document";
+    const contentType = mime.split(";")[0]?.trim().toLowerCase() ?? "";
+    if (!/^[\w.+-]+\/[\w.+-]+$/.test(contentType))
+      throw new Error("Invalid download content type.");
+    return { filename, contentType };
   }
   private async putArtifact(
     bytes: Uint8Array,
@@ -158,14 +218,9 @@ export class DownloadStore {
         "Authenticated downloads require a verified caller identity.",
       );
     await this.prune();
-    if (!bytes.byteLength) throw new Error("Cannot publish an empty document.");
+    const { filename, contentType } = this.validate(bytes, name, mime);
     if (bytes.byteLength > this.maxBytes - this.usedBytes)
       throw new Error("Document download cache capacity exceeded.");
-    const filename =
-      name.replace(/[^\w.\- ]/g, "_").slice(0, 180) || "document";
-    const contentType = mime.split(";")[0]?.trim().toLowerCase() ?? "";
-    if (!/^[\w.+-]+\/[\w.+-]+$/.test(contentType))
-      throw new Error("Invalid download content type.");
     // Reserve before awaiting filesystem I/O so concurrent downloads cannot exceed the cap.
     this.usedBytes += bytes.byteLength;
     const id = randomUUID();

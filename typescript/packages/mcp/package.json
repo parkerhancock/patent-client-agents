@@ -8,6 +8,11 @@
       "types": "./dist/index.d.ts",
       "bun": "./src/index.ts",
       "default": "./dist/index.js"
+    },
+    "./gcs-blob-store": {
+      "types": "./dist/gcs-blob-store.d.ts",
+      "bun": "./src/gcs-blob-store.ts",
+      "default": "./dist/gcs-blob-store.js"
     }
   },
   "scripts": {
