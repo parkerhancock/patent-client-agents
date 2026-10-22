@@ -1,7 +1,7 @@
 """Client-level tests for the data.gov.il ILPO trade-mark CKAN client.
 
 Constructor smoke + CKAN ``package_show`` shape + ``ApiError`` raise +
-the ``download_resource`` fetch. HTTP mocked with ``httpx.MockTransport``;
+the ``download_resource`` fetch. HTTP mocked with ``httpx2.MockTransport``;
 no live calls.
 """
 
@@ -9,24 +9,24 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import ApiError
 from patent_client_agents.ilpo_tm import IlpoTmClient
 
 
-def _mock_http(handler: Callable[[httpx.Request], httpx.Response]) -> httpx.AsyncClient:
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+def _mock_http(handler: Callable[[httpx2.Request], httpx2.Response]) -> httpx2.AsyncClient:
+    return httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
 
 
 @pytest.mark.asyncio
 async def test_get_dataset_calls_ckan_package_show() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json={
                 "success": True,
@@ -66,11 +66,11 @@ async def test_get_dataset_calls_ckan_package_show() -> None:
 
 @pytest.mark.asyncio
 async def test_get_dataset_passes_custom_id() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json={
                 "success": True,
@@ -87,9 +87,9 @@ async def test_get_dataset_passes_custom_id() -> None:
 
 @pytest.mark.asyncio
 async def test_get_dataset_raises_on_success_false() -> None:
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         del request
-        return httpx.Response(200, json={"success": False, "error": {"message": "Not Found"}})
+        return httpx2.Response(200, json={"success": False, "error": {"message": "Not Found"}})
 
     async with IlpoTmClient(client=_mock_http(handler)) as client:
         with pytest.raises(ApiError, match="success=False"):
@@ -98,11 +98,11 @@ async def test_get_dataset_raises_on_success_false() -> None:
 
 @pytest.mark.asyncio
 async def test_download_resource_streams_bytes() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=b"id,owner\n123,Acme")
+        return httpx2.Response(200, content=b"id,owner\n123,Acme")
 
     async with IlpoTmClient(client=_mock_http(handler)) as client:
         data = await client.download_resource(

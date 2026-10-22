@@ -9,7 +9,7 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import (
     ApiError,
@@ -42,11 +42,11 @@ _HEADERS = {
 
 _BASE_URL = "https://ppubs.uspto.gov"
 _DATA_PATH = Path(__file__).resolve().parent / "data" / "search_query.json"
-_DEFAULT_TIMEOUT = httpx.Timeout(30.0, connect=10.0)
+_DEFAULT_TIMEOUT = httpx2.Timeout(30.0, connect=10.0)
 _MAX_SEARCH_PAGE_SIZE = 20
 
 
-async def _raise_retryable_status(response: httpx.Response, *, operation: str) -> None:
+async def _raise_retryable_status(response: httpx2.Response, *, operation: str) -> None:
     """Convert transient PPUBS statuses into the shared retryable errors."""
     status = response.status_code
     body = response.text[:500]
@@ -147,11 +147,11 @@ class PublicSearchClient:
 
     def __init__(
         self,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
         *,
-        transport: httpx.AsyncBaseTransport | None = None,
+        transport: httpx2.AsyncBaseTransport | None = None,
     ) -> None:
-        self._client = client or httpx.AsyncClient(
+        self._client = client or httpx2.AsyncClient(
             headers=_HEADERS.copy(),
             http2=True,
             follow_redirects=True,
@@ -190,7 +190,7 @@ class PublicSearchClient:
         self._case_id = None
         self._access_token = None
         self._client.headers.pop("X-Access-Token", None)
-        self._client.cookies = httpx.Cookies()
+        self._client.cookies = httpx2.Cookies()
         landing = await self._client.get(f"{_BASE_URL}/pubwebapp/")
         await _raise_retryable_status(landing, operation="session bootstrap")
         landing.raise_for_status()
@@ -208,7 +208,7 @@ class PublicSearchClient:
             self._client.headers["X-Access-Token"] = self._access_token
 
     @with_retry(max_attempts=4, initial_wait=1.0, max_wait=8.0)
-    async def _request(self, method: str, url: str, **kwargs: Any) -> httpx.Response:
+    async def _request(self, method: str, url: str, **kwargs: Any) -> httpx2.Response:
         # A retry reuses kwargs, so bring the body's caseId up to the current
         # session first; otherwise a stale caseId forces another refresh.
         if self._case_id is not None:

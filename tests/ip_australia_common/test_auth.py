@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from urllib.parse import parse_qs
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import AuthenticationError, NotFoundError, RateLimitError
@@ -24,19 +24,19 @@ CLIENTS = [
 
 
 @pytest.fixture
-def requests_seen() -> list[httpx.Request]:
+def requests_seen() -> list[httpx2.Request]:
     return []
 
 
 @pytest.fixture
-def transport(requests_seen: list[httpx.Request]) -> httpx.MockTransport:
-    def handler(request: httpx.Request) -> httpx.Response:
+def transport(requests_seen: list[httpx2.Request]) -> httpx2.MockTransport:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         requests_seen.append(request)
         if request.url.path.endswith("/access_token"):
-            return httpx.Response(200, json={"access_token": "tok-1", "expires_in": 3600})
-        return httpx.Response(200, json={})
+            return httpx2.Response(200, json={"access_token": "tok-1", "expires_in": 3600})
+        return httpx2.Response(200, json={})
 
-    return httpx.MockTransport(handler)
+    return httpx2.MockTransport(handler)
 
 
 @pytest.mark.parametrize(("client_cls", "method"), CLIENTS)
@@ -49,8 +49,8 @@ def transport(requests_seen: list[httpx.Request]) -> httpx.MockTransport:
 )
 async def test_first_request_fetches_a_token_and_sends_it(
     monkeypatch: pytest.MonkeyPatch,
-    transport: httpx.MockTransport,
-    requests_seen: list[httpx.Request],
+    transport: httpx2.MockTransport,
+    requests_seen: list[httpx2.Request],
     client_cls: type,
     method: str,
     env: str | None,
@@ -90,13 +90,13 @@ async def test_api_errors_map_to_typed_exceptions(
     monkeypatch.setenv("IPAUSTRALIA_CLIENT_SECRET", "secret-1")
     monkeypatch.delenv("IPAUSTRALIA_ENV", raising=False)
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if request.url.path.endswith("/access_token"):
-            return httpx.Response(200, json={"access_token": "tok", "expires_in": 3600})
-        return httpx.Response(status, text="error")
+            return httpx2.Response(200, json={"access_token": "tok", "expires_in": 3600})
+        return httpx2.Response(status, text="error")
 
     async with client_cls(
-        transport=httpx.MockTransport(handler), use_cache=False, max_retries=1
+        transport=httpx2.MockTransport(handler), use_cache=False, max_retries=1
     ) as client:
         with pytest.raises(error):
             await getattr(client, method)("123")

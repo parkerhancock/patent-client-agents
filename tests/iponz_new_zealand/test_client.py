@@ -4,7 +4,7 @@ from datetime import date
 from pathlib import Path
 from typing import Literal
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import (
@@ -24,19 +24,19 @@ from patent_client_agents.iponz_new_zealand.client import (
 def _client_for(
     fixture_dir: Path,
     fixture_name: str,
-    captured: list[httpx.Request] | None = None,
+    captured: list[httpx2.Request] | None = None,
     *,
     environment: Literal["production", "sandbox"] | None = None,
     access_token: str | None = None,
 ) -> IponzClient:
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         if captured is not None:
             captured.append(request)
-        return httpx.Response(200, content=(fixture_dir / fixture_name).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / fixture_name).read_bytes())
 
     return IponzClient(
         "mock-subscription",
-        transport=httpx.MockTransport(handler),
+        transport=httpx2.MockTransport(handler),
         environment=environment,
         access_token=access_token,
     )
@@ -81,7 +81,7 @@ async def test_detail_operations_use_exact_paths_and_parse_official_schemas(
     field: str,
     expected: str,
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, fixture, captured) as client:
         row = await getattr(client, method)(number)
     assert getattr(row, field) == expected
@@ -149,7 +149,7 @@ async def test_date_range_operations(
     right_type: str,
     path: str,
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, fixture, captured) as client:
         rows = await getattr(client, method)(date(2026, 8, 1), date(2026, 8, 3))
     assert rows[0].right_type == right_type
@@ -171,7 +171,7 @@ def test_configuration_and_environment(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_register_number_validation() -> None:
     async with IponzClient(
         "key",
-        transport=httpx.MockTransport(lambda _: httpx.Response(500)),
+        transport=httpx2.MockTransport(lambda _: httpx2.Response(500)),
     ) as client:
         with pytest.raises(ConfigurationError, match="only digits"):
             await client.get_patent("NZ/123")
@@ -181,7 +181,7 @@ async def test_register_number_validation() -> None:
 
 @pytest.mark.asyncio
 async def test_sandbox_and_optional_bearer_headers(fixture_dir: Path) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(
         fixture_dir,
         "patent_information.xml",
@@ -207,7 +207,7 @@ async def test_sandbox_and_optional_bearer_headers(fixture_dir: Path) -> None:
 async def test_date_range_validation(start: date, end: date, message: str) -> None:
     async with IponzClient(
         "key",
-        transport=httpx.MockTransport(lambda _: httpx.Response(500)),
+        transport=httpx2.MockTransport(lambda _: httpx2.Response(500)),
     ) as client:
         with pytest.raises(ConfigurationError, match=message):
             await client.list_patents_updated(start, end)
@@ -224,20 +224,20 @@ async def test_date_range_validation(start: date, end: date, message: str) -> No
     ],
 )
 async def test_http_errors(status: int, exception: type[Exception]) -> None:
-    async def handler(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(status, text="upstream failure")
+    async def handler(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(status, text="upstream failure")
 
-    async with IponzClient("key", transport=httpx.MockTransport(handler)) as client:
+    async with IponzClient("key", transport=httpx2.MockTransport(handler)) as client:
         with pytest.raises(exception):
             await client.get_patent("765432")
 
 
 @pytest.mark.asyncio
 async def test_rate_limit_transaction_error_and_malformed_xml(fixture_dir: Path) -> None:
-    async def throttled(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(429, headers={"Retry-After": "7"}, text="slow")
+    async def throttled(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(429, headers={"Retry-After": "7"}, text="slow")
 
-    async with IponzClient("key", transport=httpx.MockTransport(throttled)) as client:
+    async with IponzClient("key", transport=httpx2.MockTransport(throttled)) as client:
         with pytest.raises(RateLimitError) as raised:
             await client.get_patent("765432")
     assert raised.value.retry_after == 7
@@ -246,9 +246,9 @@ async def test_rate_limit_transaction_error_and_malformed_xml(fixture_dir: Path)
         with pytest.raises(ApiError, match="INVALID_CASE"):
             await client.get_patent("999999")
 
-    async def malformed(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, content=b"not xml")
+    async def malformed(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, content=b"not xml")
 
-    async with IponzClient("key", transport=httpx.MockTransport(malformed)) as client:
+    async with IponzClient("key", transport=httpx2.MockTransport(malformed)) as client:
         with pytest.raises(ApiError, match="malformed XML"):
             await client.get_patent("765432")

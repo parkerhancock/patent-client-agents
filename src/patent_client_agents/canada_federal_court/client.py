@@ -6,7 +6,7 @@ import asyncio
 from datetime import date
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import NotFoundError
 from patent_client_agents.shared.client import ConnectorClient
@@ -105,7 +105,7 @@ class CanadaFederalCourtClient(ConnectorClient):
     CACHE_NAME = "canada_federal_court"
     DEFAULT_TIMEOUT = 60.0
 
-    def __init__(self, *, client: httpx.AsyncClient | None = None, **kwargs: Any) -> None:
+    def __init__(self, *, client: httpx2.AsyncClient | None = None, **kwargs: Any) -> None:
         kwargs.setdefault("ttl_seconds", 900)
         super().__init__(client=client, headers=_BROWSER_HEADERS, **kwargs)
 

@@ -257,18 +257,18 @@ def test_main_handles_keyboard_interrupt(monkeypatch, tmp_path: Path):
 
 def test_fetcher_fetch_retries_then_succeeds(monkeypatch):
     """A transient 503 is retried and the second attempt's text is returned."""
-    import httpx
+    import httpx2
 
     from mcp_data_core import default_retryer
     from patent_client_agents.ipos_statutes.corpus.build import IposStatutesFetcher
 
     calls: list[str] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         calls.append(request.url.path)
         if len(calls) == 1:
-            return httpx.Response(503, content=b"busy")
-        return httpx.Response(200, content=b"<html><body><p>13. Stub heading</p></body></html>")
+            return httpx2.Response(503, content=b"busy")
+        return httpx2.Response(200, content=b"<html><body><p>13. Stub heading</p></body></html>")
 
     # Real retry policy, zero backoff so the test does not sleep.
     monkeypatch.setattr(
@@ -280,8 +280,8 @@ def test_fetcher_fetch_retries_then_succeeds(monkeypatch):
     async def run():
         fetcher = IposStatutesFetcher()
         await fetcher._client.aclose()
-        fetcher._client = httpx.AsyncClient(
-            base_url="https://sso.example", transport=httpx.MockTransport(handler)
+        fetcher._client = httpx2.AsyncClient(
+            base_url="https://sso.example", transport=httpx2.MockTransport(handler)
         )
         async with fetcher:
             source = StatuteSource(

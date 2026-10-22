@@ -29,7 +29,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 
-import httpx
+import httpx2
 from lxml import html
 
 from mcp_data_core.corpus_compression import finalize_outline_corpus
@@ -214,10 +214,10 @@ class TmepScraper:
     ) -> None:
         self._base_url = base_url.rstrip("/")
         self._version = version
-        self._client = httpx.AsyncClient(
+        self._client = httpx2.AsyncClient(
             base_url=self._base_url,
             headers={"User-Agent": user_agent},
-            timeout=httpx.Timeout(timeout, connect=10.0, read=timeout, write=timeout),
+            timeout=httpx2.Timeout(timeout, connect=10.0, read=timeout, write=timeout),
             follow_redirects=True,
         )
 

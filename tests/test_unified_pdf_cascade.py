@@ -13,7 +13,7 @@ from __future__ import annotations
 import base64
 from unittest.mock import AsyncMock, MagicMock, patch
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import NotFoundError
@@ -29,11 +29,11 @@ def google_client(**behavior):
 
 
 def http_error(status: int, url: str = "https://patents.google.com/patent/X/en"):
-    request = httpx.Request("GET", url)
-    return httpx.HTTPStatusError(
+    request = httpx2.Request("GET", url)
+    return httpx2.HTTPStatusError(
         f"Client error '{status}'",
         request=request,
-        response=httpx.Response(status, request=request),
+        response=httpx2.Response(status, request=request),
     )
 
 
@@ -82,7 +82,7 @@ async def test_a_google_server_error_is_not_swallowed():
         "patent_client_agents.google_patents.GooglePatentsClient",
         return_value=google_client(side_effect=http_error(503)),
     ):
-        with pytest.raises(httpx.HTTPStatusError):
+        with pytest.raises(httpx2.HTTPStatusError):
             await unified.download_patent_pdf("US10123456B2")
 
 

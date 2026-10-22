@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-import httpx
+import httpx2
 import pytest
 
 # Import the consumer package so its logging and envelope configuration runs.
@@ -25,30 +25,30 @@ from mcp_data_core.resilience import is_retryable_error, with_retry
 
 
 def mock_transport(status_code: int, body: str = "", headers: dict | None = None):
-    """Create an httpx.MockTransport returning a fixed response."""
+    """Create an httpx2.MockTransport returning a fixed response."""
 
-    def handler(request: httpx.Request) -> httpx.Response:  # noqa: ARG001
-        return httpx.Response(status_code, text=body, headers=headers or {})
+    def handler(request: httpx2.Request) -> httpx2.Response:  # noqa: ARG001
+        return httpx2.Response(status_code, text=body, headers=headers or {})
 
-    return httpx.MockTransport(handler)
+    return httpx2.MockTransport(handler)
 
 
 def sequenced_transport(responses: list[tuple[int, str]]):
     """Transport that returns different responses on successive calls."""
     call_count = {"n": 0}
 
-    def handler(request: httpx.Request) -> httpx.Response:  # noqa: ARG001
+    def handler(request: httpx2.Request) -> httpx2.Response:  # noqa: ARG001
         idx = min(call_count["n"], len(responses) - 1)
         call_count["n"] += 1
         status, body = responses[idx]
-        return httpx.Response(status, text=body)
+        return httpx2.Response(status, text=body)
 
-    return httpx.MockTransport(handler)
+    return httpx2.MockTransport(handler)
 
 
-def make_client(transport: httpx.MockTransport, **kwargs) -> BaseAsyncClient:
+def make_client(transport: httpx2.MockTransport, **kwargs) -> BaseAsyncClient:
     """Build a BaseAsyncClient backed by a mock transport."""
-    http = httpx.AsyncClient(transport=transport)
+    http = httpx2.AsyncClient(transport=transport)
     return BaseAsyncClient(
         base_url="https://api.test",
         client=http,
@@ -87,19 +87,19 @@ class TestBaseAsyncClientInit:
         assert client.base_url == "https://example.com"
 
     def test_cache_disabled_when_client_injected(self) -> None:
-        http = httpx.AsyncClient(transport=mock_transport(200))
+        http = httpx2.AsyncClient(transport=mock_transport(200))
         client = BaseAsyncClient(client=http)
         assert client.cache_enabled is False
 
     def test_injected_client_with_headers(self) -> None:
         """Lines 104-106: headers merged into injected client."""
-        http = httpx.AsyncClient(transport=mock_transport(200))
+        http = httpx2.AsyncClient(transport=mock_transport(200))
         client = BaseAsyncClient(client=http, headers={"X-Custom": "value1"})
         assert client._client.headers.get("X-Custom") == "value1"
 
     def test_injected_client_headers_dont_overwrite(self) -> None:
         """setdefault should not overwrite existing headers."""
-        http = httpx.AsyncClient(
+        http = httpx2.AsyncClient(
             transport=mock_transport(200),
             headers={"X-Custom": "original"},
         )
@@ -116,9 +116,9 @@ class TestBaseAsyncClientInit:
 class TestRaiseForStatus:
     """Tests for _raise_for_status status-code mapping."""
 
-    def _response(self, status: int, body: str = "err") -> httpx.Response:
-        request = httpx.Request("GET", "https://api.test/foo")
-        return httpx.Response(status, text=body, request=request)
+    def _response(self, status: int, body: str = "err") -> httpx2.Response:
+        request = httpx2.Request("GET", "https://api.test/foo")
+        return httpx2.Response(status, text=body, request=request)
 
     def test_success_does_not_raise(self) -> None:
         client = make_client(mock_transport(200))
@@ -201,11 +201,11 @@ class TestRequest:
         500 therefore exhausts all attempts, then reraises ServerError."""
         call_count = {"n": 0}
 
-        def handler(request: httpx.Request) -> httpx.Response:  # noqa: ARG001
+        def handler(request: httpx2.Request) -> httpx2.Response:  # noqa: ARG001
             call_count["n"] += 1
-            return httpx.Response(500, text="fail")
+            return httpx2.Response(500, text="fail")
 
-        transport = httpx.MockTransport(handler)
+        transport = httpx2.MockTransport(handler)
         client = make_client(transport, max_retries=3)
         with pytest.raises(ServerError):
             await client._request("GET", "/flaky")
@@ -240,11 +240,11 @@ class TestRequest:
         """Line 258-259: json kwarg passed through."""
         seen_bodies: list[bytes] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             seen_bodies.append(request.content)
-            return httpx.Response(200, text="ok")
+            return httpx2.Response(200, text="ok")
 
-        transport = httpx.MockTransport(handler)
+        transport = httpx2.MockTransport(handler)
         client = make_client(transport)
         await client._request("POST", "/items", json={"key": "val"})
         assert b"key" in seen_bodies[0]
@@ -254,11 +254,11 @@ class TestRequest:
         """Query params should appear in the request."""
         seen_urls: list[str] = []
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             seen_urls.append(str(request.url))
-            return httpx.Response(200, text="ok")
+            return httpx2.Response(200, text="ok")
 
-        transport = httpx.MockTransport(handler)
+        transport = httpx2.MockTransport(handler)
         client = make_client(transport)
         await client._request("GET", "/search", params={"q": "test"})
         assert "q=test" in seen_urls[0]
@@ -296,7 +296,7 @@ class TestCacheMethodsDisabled:
     """Cache ops raise RuntimeError when caching is disabled."""
 
     def _client(self) -> BaseAsyncClient:
-        http = httpx.AsyncClient(transport=mock_transport(200))
+        http = httpx2.AsyncClient(transport=mock_transport(200))
         return BaseAsyncClient(client=http)
 
     @pytest.mark.asyncio
@@ -415,7 +415,7 @@ class TestClientLifecycle:
     @pytest.mark.asyncio
     async def test_close_not_owned_leaves_client_open(self) -> None:
         """close() should NOT close an injected client."""
-        http = httpx.AsyncClient(transport=mock_transport(200))
+        http = httpx2.AsyncClient(transport=mock_transport(200))
         client = BaseAsyncClient(client=http)
         await client.close()
         assert not http.is_closed
@@ -449,20 +449,20 @@ class TestIsRetryableError:
 
     @pytest.mark.parametrize("status", [429, 500, 502, 503, 504])
     def test_retryable_http_status(self, status: int) -> None:
-        request = httpx.Request("GET", "https://api.test/x")
-        response = httpx.Response(status, request=request)
-        exc = httpx.HTTPStatusError("err", request=request, response=response)
+        request = httpx2.Request("GET", "https://api.test/x")
+        response = httpx2.Response(status, request=request)
+        exc = httpx2.HTTPStatusError("err", request=request, response=response)
         assert is_retryable_error(exc) is True
 
     @pytest.mark.parametrize("status", [400, 401, 403, 404, 418])
     def test_non_retryable_http_status(self, status: int) -> None:
-        request = httpx.Request("GET", "https://api.test/x")
-        response = httpx.Response(status, request=request)
-        exc = httpx.HTTPStatusError("err", request=request, response=response)
+        request = httpx2.Request("GET", "https://api.test/x")
+        response = httpx2.Response(status, request=request)
+        exc = httpx2.HTTPStatusError("err", request=request, response=response)
         assert is_retryable_error(exc) is False
 
     def test_transport_error_is_retryable(self) -> None:
-        assert is_retryable_error(httpx.ConnectError("timeout")) is True
+        assert is_retryable_error(httpx2.ConnectError("timeout")) is True
 
     def test_rate_limit_error_is_retryable(self) -> None:
         assert is_retryable_error(RateLimitError("slow", 429, "")) is True
@@ -476,7 +476,7 @@ class TestIsRetryableError:
 
     @pytest.mark.parametrize("status", [429, 500, 502, 503, 504])
     def test_api_error_retryable_status(self, status: int) -> None:
-        # BaseAsyncClient raises typed ApiError (not httpx.HTTPStatusError) via
+        # BaseAsyncClient raises typed ApiError (not httpx2.HTTPStatusError) via
         # _raise_for_status, so this branch is what actually gates 5xx retries.
         assert is_retryable_error(ApiError("boom", status, "")) is True
 

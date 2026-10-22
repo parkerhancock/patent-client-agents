@@ -3,7 +3,7 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 SCRIPT = Path(__file__).parents[1] / "scripts" / "hosted_smoke.py"
@@ -15,14 +15,14 @@ SPEC.loader.exec_module(smoke)
 
 @pytest.mark.asyncio
 async def test_check_availability_accepts_oauth_challenge():
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if request.url.path == "/-/health":
-            return httpx.Response(200, json={"status": "ok"})
+            return httpx2.Response(200, json={"status": "ok"})
         if ".well-known" in str(request.url):
-            return httpx.Response(200, json={"resource": "https://example.test/mcp"})
-        return httpx.Response(401)
+            return httpx2.Response(200, json={"resource": "https://example.test/mcp"})
+        return httpx2.Response(401)
 
-    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+    async with httpx2.AsyncClient(transport=httpx2.MockTransport(handler)) as client:
         report = await smoke.check_availability(
             "https://example.test/mcp", attempts=1, client=client
         )
@@ -37,26 +37,26 @@ async def test_check_availability_accepts_oauth_challenge():
 
 @pytest.mark.asyncio
 async def test_check_availability_rejects_server_error():
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if request.url.path == "/-/health":
-            return httpx.Response(200, json={"status": "ok"})
+            return httpx2.Response(200, json={"status": "ok"})
         if ".well-known" in str(request.url):
-            return httpx.Response(200, json={})
-        return httpx.Response(503)
+            return httpx2.Response(200, json={})
+        return httpx2.Response(503)
 
-    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+    async with httpx2.AsyncClient(transport=httpx2.MockTransport(handler)) as client:
         with pytest.raises(smoke.SmokeFailure, match="MCP endpoint returned HTTP 503"):
             await smoke.check_availability("https://example.test/mcp", attempts=1, client=client)
 
 
 @pytest.mark.asyncio
 async def test_check_availability_rejects_bad_health_payload():
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         if request.url.path == "/-/health":
-            return httpx.Response(200, json={"status": "starting"})
-        return httpx.Response(200, json={})
+            return httpx2.Response(200, json={"status": "starting"})
+        return httpx2.Response(200, json={})
 
-    async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+    async with httpx2.AsyncClient(transport=httpx2.MockTransport(handler)) as client:
         with pytest.raises(smoke.SmokeFailure, match="health response did not report ok"):
             await smoke.check_availability("https://example.test/mcp", attempts=1, client=client)
 

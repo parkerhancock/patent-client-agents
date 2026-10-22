@@ -10,7 +10,7 @@ import sys
 from typing import Any
 from urllib.parse import urlsplit
 
-import httpx
+import httpx2
 
 DEFAULT_URL = "https://mcp.patentclient.com/mcp"
 
@@ -36,11 +36,11 @@ async def check_availability(
     *,
     attempts: int = 3,
     timeout: float = 10.0,
-    client: httpx.AsyncClient | None = None,
+    client: httpx2.AsyncClient | None = None,
 ) -> dict[str, Any]:
     """Require healthy OAuth metadata and a non-server-error MCP endpoint."""
     owned_client = client is None
-    http = client or httpx.AsyncClient(timeout=timeout, follow_redirects=False)
+    http = client or httpx2.AsyncClient(timeout=timeout, follow_redirects=False)
     metadata_url = protected_resource_url(server_url)
     deployment_health_url = health_url(server_url)
     last_error = "availability check did not run"
@@ -72,7 +72,7 @@ async def check_availability(
                     "endpoint_status": endpoint.status_code,
                     "attempts": attempt,
                 }
-            except (httpx.HTTPError, SmokeFailure) as exc:
+            except (httpx2.HTTPError, SmokeFailure) as exc:
                 last_error = str(exc)
                 if attempt < attempts:
                     await asyncio.sleep(2 ** (attempt - 1))

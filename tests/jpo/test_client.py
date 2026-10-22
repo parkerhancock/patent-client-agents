@@ -1,6 +1,6 @@
 """Mocked unit tests for JpoClient.
 
-These tests use ``httpx.MockTransport`` to simulate live JPO responses,
+These tests use ``httpx2.MockTransport`` to simulate live JPO responses,
 so they run without credentials or network. The mocked payloads mirror
 what the *real* API returns (validated 2026-05-07).
 """
@@ -10,7 +10,7 @@ from __future__ import annotations
 import asyncio
 import time
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import (
@@ -59,15 +59,15 @@ class TestTokenManager:
 
     @pytest.mark.asyncio
     async def test_get_token_success(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     json={"access_token": "test_token_123", "expires_in": 3600},
                 )
-            return httpx.Response(404)
+            return httpx2.Response(404)
 
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         manager = TokenManager("user", "pass")
         token = await manager.get_token(client)
         assert token == "test_token_123"
@@ -77,12 +77,12 @@ class TestTokenManager:
     async def test_get_token_reuses_valid_token(self) -> None:
         call_count = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal call_count
             call_count += 1
-            return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
 
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         manager = TokenManager("user", "pass")
         await manager.get_token(client)
         await manager.get_token(client)
@@ -92,15 +92,15 @@ class TestTokenManager:
     async def test_get_token_refreshes_expired(self) -> None:
         call_count = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal call_count
             call_count += 1
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={"access_token": f"token_{call_count}", "expires_in": 1},
             )
 
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         manager = TokenManager("user", "pass")
         await manager.get_token(client)
         manager._token_expiry = time.time() - 100
@@ -110,20 +110,20 @@ class TestTokenManager:
 
     @pytest.mark.asyncio
     async def test_get_token_auth_error_401(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(401, text="Invalid credentials")
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(401, text="Invalid credentials")
 
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         manager = TokenManager("user", "pass")
         with pytest.raises(AuthenticationError, match="Invalid JPO credentials"):
             await manager.get_token(client)
 
     @pytest.mark.asyncio
     async def test_get_token_auth_error_403(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(403, text="Forbidden")
+        def handler(request: httpx2.Request) -> httpx2.Response:
+            return httpx2.Response(403, text="Forbidden")
 
-        client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         manager = TokenManager("user", "pass")
         with pytest.raises(AuthenticationError, match="access forbidden"):
             await manager.get_token(client)
@@ -203,16 +203,16 @@ def _build_handler(
 ):
     """Build an httpx mock handler reflecting real JPO response shapes."""
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         path = str(request.url.path)
 
         # Token endpoint
         if "/auth/token" in path:
-            return httpx.Response(200, json={"access_token": "test_token", "expires_in": 3600})
+            return httpx2.Response(200, json={"access_token": "test_token", "expires_in": 3600})
 
         # Patent progress
         if "/patent/v1/app_progress/" in path and "simple" not in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -235,7 +235,7 @@ def _build_handler(
 
         # Patent progress simple
         if "/patent/v1/app_progress_simple/" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -252,7 +252,7 @@ def _build_handler(
 
         # Divisional info
         if "/divisional_app_info/" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -273,7 +273,7 @@ def _build_handler(
 
         # Priority info
         if "/priority_right_app_info/" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -294,7 +294,7 @@ def _build_handler(
 
         # Applicant by code (returns single name string)
         if "/applicant_attorney_cd/" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -306,7 +306,7 @@ def _build_handler(
 
         # Applicant by name (returns list of code+name)
         if "/applicant_attorney/" in path and "_cd" not in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -322,7 +322,7 @@ def _build_handler(
 
         # case_number_reference (returns single object)
         if "/case_number_reference/" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -343,14 +343,14 @@ def _build_handler(
             or "/app_doc_cont_refusal_reason/" in path
         ):
             zip_body = b"PK\x03\x04\x14\x00\x00\x00\x08\x00fakezip"
-            return httpx.Response(
+            return httpx2.Response(
                 200, content=zip_body, headers={"content-type": "application/zip"}
             )
 
         # Cited documents
         if "/cite_doc_info/" in path:
             if cite_doc_ok:
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     json={
                         "result": {
@@ -373,7 +373,7 @@ def _build_handler(
 
         # Registration info
         if "/registration_info/" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -388,7 +388,7 @@ def _build_handler(
 
         # J-PlatPat URL — uses "URL" key (uppercase)
         if "/jpp_fixed_address/" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -402,7 +402,7 @@ def _build_handler(
 
         # PCT national phase
         if "/pct_national_phase_application_number/" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -414,7 +414,7 @@ def _build_handler(
 
         # Design progress (full + simple)
         if "/design/v1/app_progress" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -430,7 +430,7 @@ def _build_handler(
 
         # Trademark progress
         if "/trademark/v1/app_progress" in path:
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -446,19 +446,19 @@ def _build_handler(
                 },
             )
 
-        return httpx.Response(404, json={"error": "Not found"})
+        return httpx2.Response(404, json={"error": "Not found"})
 
     return handler
 
 
 @pytest.fixture
-def mock_transport() -> httpx.MockTransport:
-    return httpx.MockTransport(_build_handler())
+def mock_transport() -> httpx2.MockTransport:
+    return httpx2.MockTransport(_build_handler())
 
 
 @pytest.fixture
-def client(mock_transport: httpx.MockTransport) -> JpoClient:
-    http_client = httpx.AsyncClient(transport=mock_transport)
+def client(mock_transport: httpx2.MockTransport) -> JpoClient:
+    http_client = httpx2.AsyncClient(transport=mock_transport)
     return JpoClient(username="user", password="pass", client=http_client)
 
 
@@ -612,20 +612,20 @@ class TestDesignAndTrademarkMethods:
 
 class TestJpoClientNoData:
     @pytest.fixture
-    def no_data_transport(self) -> httpx.MockTransport:
-        def handler(request: httpx.Request) -> httpx.Response:
+    def no_data_transport(self) -> httpx2.MockTransport:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
-            return httpx.Response(
+                return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(
                 200,
                 json={"result": {"statusCode": "107", "errorMessage": "No data"}},
             )
 
-        return httpx.MockTransport(handler)
+        return httpx2.MockTransport(handler)
 
     @pytest.fixture
-    def client(self, no_data_transport: httpx.MockTransport) -> JpoClient:
-        http_client = httpx.AsyncClient(transport=no_data_transport)
+    def client(self, no_data_transport: httpx2.MockTransport) -> JpoClient:
+        http_client = httpx2.AsyncClient(transport=no_data_transport)
         return JpoClient(username="user", password="pass", client=http_client)
 
     @pytest.mark.asyncio
@@ -658,17 +658,17 @@ class TestJpoClientNoDocument:
 
     @pytest.mark.asyncio
     async def test_108_returns_empty_bundle(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "t", "expires_in": 3600})
+                return httpx2.Response(200, json={"access_token": "t", "expires_in": 3600})
             # JSON path — content-type application/json, status 200, code 108
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={"result": {"statusCode": "108", "errorMessage": "No doc", "data": {}}},
                 headers={"content-type": "application/json"},
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="u", password="p", client=http_client)
         result = await client.get_patent_application_documents("2020123456")
         assert isinstance(result, DocumentBundleResult)
@@ -680,10 +680,10 @@ class TestJpoClientUnavailableNumber:
 
     @pytest.mark.asyncio
     async def test_111_returns_none(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "t", "expires_in": 3600})
-            return httpx.Response(
+                return httpx2.Response(200, json={"access_token": "t", "expires_in": 3600})
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -694,7 +694,7 @@ class TestJpoClientUnavailableNumber:
                 },
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="u", password="p", client=http_client)
         assert await client.get_patent_progress("1900000000") is None
 
@@ -707,10 +707,10 @@ class TestJpoClientUnavailableNumber:
 class TestJpoClientErrors:
     @pytest.mark.asyncio
     async def test_rate_limit_error_from_api(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
-            return httpx.Response(
+                return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -720,7 +720,7 @@ class TestJpoClientErrors:
                 },
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         with pytest.raises(RateLimitError, match="daily access limit"):
             await client.get_patent_progress("2020123456")
@@ -729,10 +729,10 @@ class TestJpoClientErrors:
     async def test_concentrated_access_303(self) -> None:
         """303 = transient concentration; map to RateLimitError so callers retry."""
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
-            return httpx.Response(
+                return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -742,17 +742,17 @@ class TestJpoClientErrors:
                 },
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         with pytest.raises(RateLimitError, match="concentrated"):
             await client.get_patent_progress("2020123456")
 
     @pytest.mark.asyncio
     async def test_invalid_parameter_204(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
-            return httpx.Response(
+                return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -762,17 +762,17 @@ class TestJpoClientErrors:
                 },
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         with pytest.raises(ApiError, match="invalid request"):
             await client.get_patent_progress("2020123456")
 
     @pytest.mark.asyncio
     async def test_url_not_found_301(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
-            return httpx.Response(
+                return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -782,17 +782,17 @@ class TestJpoClientErrors:
                 },
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         with pytest.raises(NotFoundError):
             await client.get_patent_progress("2020123456")
 
     @pytest.mark.asyncio
     async def test_unexpected_error_999(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
-            return httpx.Response(
+                return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -802,19 +802,19 @@ class TestJpoClientErrors:
                 },
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         with pytest.raises(ApiError, match="server error"):
             await client.get_patent_progress("2020123456")
 
     @pytest.mark.asyncio
     async def test_rate_limit_error_429(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
-            return httpx.Response(429, text="Rate limited")
+                return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(429, text="Rate limited")
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         with pytest.raises(RateLimitError):
             await client.get_patent_progress("2020123456")
@@ -823,32 +823,32 @@ class TestJpoClientErrors:
     async def test_invalid_token_error(self) -> None:
         call_count = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal call_count
             if "/auth/token" in str(request.url):
                 call_count += 1
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     json={"access_token": f"token_{call_count}", "expires_in": 3600},
                 )
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={"result": {"statusCode": "210", "errorMessage": "Invalid token"}},
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         with pytest.raises(AuthenticationError, match="Invalid JPO API token"):
             await client.get_patent_progress("2020123456")
 
     @pytest.mark.asyncio
     async def test_api_error_500(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "token", "expires_in": 3600})
-            return httpx.Response(500, text="Internal server error")
+                return httpx2.Response(200, json={"access_token": "token", "expires_in": 3600})
+            return httpx2.Response(500, text="Internal server error")
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         with pytest.raises(ApiError):
             await client.get_patent_progress("2020123456")
@@ -858,19 +858,19 @@ class TestJpoClientErrors:
         call_count = 0
         token_calls = 0
 
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             nonlocal call_count, token_calls
             if "/auth/token" in str(request.url):
                 token_calls += 1
-                return httpx.Response(
+                return httpx2.Response(
                     200,
                     json={"access_token": f"token_{token_calls}", "expires_in": 3600},
                 )
 
             call_count += 1
             if call_count == 1:
-                return httpx.Response(401, text="Unauthorized")
-            return httpx.Response(
+                return httpx2.Response(401, text="Unauthorized")
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -880,7 +880,7 @@ class TestJpoClientErrors:
                 },
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="user", password="pass", client=http_client)
         result = await client.get_patent_progress("2020123456")
         assert result is not None
@@ -900,10 +900,10 @@ class TestJpoClientErrors:
 class TestDocumentBundleOversize:
     @pytest.mark.asyncio
     async def test_oversize_json_redirect(self) -> None:
-        def handler(request: httpx.Request) -> httpx.Response:
+        def handler(request: httpx2.Request) -> httpx2.Response:
             if "/auth/token" in str(request.url):
-                return httpx.Response(200, json={"access_token": "t", "expires_in": 3600})
-            return httpx.Response(
+                return httpx2.Response(200, json={"access_token": "t", "expires_in": 3600})
+            return httpx2.Response(
                 200,
                 json={
                     "result": {
@@ -914,7 +914,7 @@ class TestDocumentBundleOversize:
                 headers={"content-type": "application/json"},
             )
 
-        http_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         client = JpoClient(username="u", password="p", client=http_client)
         result = await client.get_patent_application_documents("2020123456")
         assert isinstance(result, DocumentBundleResult)

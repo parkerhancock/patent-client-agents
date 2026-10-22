@@ -4,7 +4,7 @@ KIPRIS Plus requires a per-user ``serviceKey`` (ToS §11 BYOK — no shared
 keys). We do not currently have a real key issued (acquisition is
 blocked behind Korean phone / i-PIN verification per spec §6 open
 items), so this connector ships with **synthesized XML fixtures**
-under ``tests/kipo_kipris/fixtures/`` and ``httpx.MockTransport`` —
+under ``tests/kipo_kipris/fixtures/`` and ``httpx2.MockTransport`` —
 no VCR cassettes are recorded for KIPRIS in v1.
 
 If/when a live ``serviceKey`` is acquired and live cassettes get

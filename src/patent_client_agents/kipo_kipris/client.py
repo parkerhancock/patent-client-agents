@@ -48,7 +48,7 @@ from collections.abc import AsyncIterator
 from typing import Any
 from urllib.parse import urlsplit
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import (
     ApiError,
@@ -99,7 +99,7 @@ class KiprisClient(ConnectorClient):
         service_key: str | None = None,
         *,
         base_url: str | None = None,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
     ) -> None:
         """Initialize the KIPRIS Plus client.
 
@@ -108,7 +108,7 @@ class KiprisClient(ConnectorClient):
                 to ``KIPO_KIPRIS_API_KEY``.
             base_url: Operator-verified HTTPS API base URL. Falls back to
                 ``KIPO_KIPRIS_BASE_URL``.
-            client: Existing httpx.AsyncClient (for testing).
+            client: Existing httpx2.AsyncClient (for testing).
 
         Raises:
             ConfigurationError: If no ``serviceKey`` or secure endpoint is

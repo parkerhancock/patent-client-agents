@@ -1111,8 +1111,8 @@ class GooglePatentsClient:
         """Fetch full patent data, propagating typed errors on failure.
 
         Raises ``FileNotFoundError`` when Google Patents returns its "couldn't
-        find this patent" page, ``httpx.HTTPStatusError`` on 503/other upstream
-        failures, and ``httpx.TransportError`` on network errors. Callers that
+        find this patent" page, ``httpx2.HTTPStatusError`` on 503/other upstream
+        failures, and ``httpx2.TransportError`` on network errors. Callers that
         need the legacy "return None on any error" behavior should wrap their
         own try/except.
         """

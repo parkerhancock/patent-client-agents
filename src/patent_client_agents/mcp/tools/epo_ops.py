@@ -7,7 +7,7 @@ import base64
 from collections.abc import Awaitable
 from typing import Annotated, Any, Literal
 
-import httpx
+import httpx2
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import (
@@ -852,18 +852,18 @@ _FAMILY_INTELLIGENCE_LIMITATIONS = [
 
 async def _capture_family_intelligence_failure(
     request: Awaitable[object],
-) -> object | ApiError | ParseError | httpx.TransportError:
+) -> object | ApiError | ParseError | httpx2.TransportError:
     """Return expected source failures while propagating auth, config, and code errors."""
     try:
         return await request
     except (AuthenticationError, ConfigurationError):
         raise
-    except (ApiError, ParseError, httpx.TransportError) as exc:
+    except (ApiError, ParseError, httpx2.TransportError) as exc:
         return exc
 
 
 def _family_intelligence_failure_code(
-    exc: ApiError | ParseError | httpx.TransportError,
+    exc: ApiError | ParseError | httpx2.TransportError,
 ) -> Literal[
     "not_found",
     "rate_limited",
@@ -880,7 +880,7 @@ def _family_intelligence_failure_code(
         return "upstream_server_error"
     if isinstance(exc, ParseError):
         return "parse_error"
-    if isinstance(exc, httpx.TransportError):
+    if isinstance(exc, httpx2.TransportError):
         return "transport_error"
     return "upstream_api_error"
 
@@ -1226,10 +1226,10 @@ async def get_epo_family_intelligence(
             *[_capture_family_intelligence_failure(call[1]) for call in calls]
         )
 
-    failures: list[ApiError | ParseError | httpx.TransportError] = []
+    failures: list[ApiError | ParseError | httpx2.TransportError] = []
     successful = 0
     for (name, _, path, register), result in zip(calls, results, strict=True):
-        if isinstance(result, (ApiError, ParseError, httpx.TransportError)):
+        if isinstance(result, (ApiError, ParseError, httpx2.TransportError)):
             failures.append(result)
             source_name, source_url = _family_intelligence_source(
                 path=path,

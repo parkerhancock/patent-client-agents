@@ -30,7 +30,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import AuthenticationError
 
@@ -64,7 +64,7 @@ class InpiSession:
     re-mint the bearer without re-issuing the user's password), XSRF
     token (sent as ``X-XSRF-TOKEN`` header + held in the cookie jar),
     expiry timestamp (used to decide whether to proactively refresh),
-    and the raw cookie dict (passed back to ``httpx.AsyncClient`` for
+    and the raw cookie dict (passed back to ``httpx2.AsyncClient`` for
     cookie-jar reconstruction across requests).
     """
 
@@ -81,7 +81,7 @@ class InpiSession:
         return datetime.now(UTC) >= self.expires_at - timedelta(seconds=buffer_seconds)
 
 
-def _capture_cookies(response: httpx.Response) -> dict[str, str]:
+def _capture_cookies(response: httpx2.Response) -> dict[str, str]:
     """Extract the cookie jar values from a response as a plain dict.
 
     httpx exposes ``response.cookies`` as a ``Cookies`` proxy; we copy
@@ -117,7 +117,7 @@ def _parse_expires_at(body: dict[str, Any] | None) -> datetime:
     return now + timedelta(seconds=DEFAULT_TOKEN_TTL_SECONDS)
 
 
-async def fetch_xsrf(client: httpx.AsyncClient, *, base_url: str) -> str:
+async def fetch_xsrf(client: httpx2.AsyncClient, *, base_url: str) -> str:
     """Bootstrap an XSRF-TOKEN cookie from INPI's gateway.
 
     Performs an uncredentialed ``GET`` on a no-side-effect apidiffusion
@@ -144,7 +144,7 @@ async def fetch_xsrf(client: httpx.AsyncClient, *, base_url: str) -> str:
 
 
 async def login(
-    client: httpx.AsyncClient,
+    client: httpx2.AsyncClient,
     username: str,
     password: str,
     xsrf_token: str,
@@ -206,7 +206,7 @@ async def login(
 
 
 async def refresh(
-    client: httpx.AsyncClient,
+    client: httpx2.AsyncClient,
     refresh_token: str,
     xsrf_token: str,
     *,

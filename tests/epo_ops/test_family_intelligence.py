@@ -6,7 +6,7 @@ from contextlib import AbstractContextManager
 from typing import Any
 from unittest.mock import AsyncMock, MagicMock, patch
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.envelope import ResponseEnvelope
@@ -248,7 +248,7 @@ async def test_family_intelligence_captures_parse_and_transport_failures() -> No
     client.fetch_register_biblio = AsyncMock(
         side_effect=ParseError("bad register XML", source="register")
     )
-    client.fetch_register_events = AsyncMock(side_effect=httpx.ReadTimeout("register timed out"))
+    client.fetch_register_events = AsyncMock(side_effect=httpx2.ReadTimeout("register timed out"))
 
     with _patch_client(client):
         result = await get_epo_family_intelligence("EP1000000A1")

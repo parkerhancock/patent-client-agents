@@ -39,7 +39,7 @@ from dataclasses import dataclass, field
 from typing import Any
 from xml.etree import ElementTree as ET
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import (
     ApiError,
@@ -237,7 +237,7 @@ class InpiPiClient(ConnectorClient):
         password: str | None = None,
         *,
         base_url: str | None = None,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
         clock: Callable[[], float] | None = None,
     ) -> None:
         """Initialize the INPI api-gateway client.
@@ -248,7 +248,7 @@ class InpiPiClient(ConnectorClient):
             password: INPI ``data.inpi.fr`` account password. Falls back
                 to ``INPI_PASSWORD``.
             base_url: Override the default gateway base URL.
-            client: Existing ``httpx.AsyncClient`` to reuse (testing).
+            client: Existing ``httpx2.AsyncClient`` to reuse (testing).
             clock: Injectable monotonic-clock callable for the
                 throttle. Defaults to :func:`time.monotonic`.
 
@@ -351,7 +351,7 @@ class InpiPiClient(ConnectorClient):
         params: dict[str, Any] | None = None,
         accept: str = "application/json",
         retry_auth: bool = True,
-    ) -> httpx.Response:
+    ) -> httpx2.Response:
         """Issue a throttled, authenticated request to INPI's gateway.
 
         Applies the 10-req/min sliding-window throttle, attaches the
@@ -504,7 +504,7 @@ class InpiPiClient(ConnectorClient):
         return InpiDesignRow.model_validate(data)
 
     @classmethod
-    def _coerce_notice(cls, response: httpx.Response, parser) -> Any:  # noqa: ANN001
+    def _coerce_notice(cls, response: httpx2.Response, parser) -> Any:  # noqa: ANN001
         """Dispatch a notice response to the right parser based on Content-Type."""
         content_type = (response.headers.get("content-type") or "").lower()
         if "xml" in content_type:

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from unittest.mock import AsyncMock, MagicMock
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.uspto_office_actions import OfficeActionClient
@@ -12,9 +12,9 @@ from patent_client_agents.uspto_office_actions import OfficeActionClient
 API_KEY = "test-key"
 
 
-def _make_response(json_data: dict, status_code: int = 200) -> httpx.Response:
-    """Build a mock httpx.Response."""
-    resp = MagicMock(spec=httpx.Response)
+def _make_response(json_data: dict, status_code: int = 200) -> httpx2.Response:
+    """Build a mock httpx2.Response."""
+    resp = MagicMock(spec=httpx2.Response)
     resp.status_code = status_code
     resp.is_success = status_code < 400
     resp.json.return_value = json_data
@@ -56,7 +56,7 @@ class TestSearchRejections:
                 }
             )
         )
-        monkeypatch.setattr(httpx.AsyncClient, "request", mock_request)
+        monkeypatch.setattr(httpx2.AsyncClient, "request", mock_request)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             result = await client.search_rejections("patentApplicationNumber:16123456")
@@ -78,7 +78,7 @@ class TestSearchRejections:
         mock_request = AsyncMock(
             return_value=_make_response({"response": {"numFound": 100, "start": 50, "docs": []}})
         )
-        monkeypatch.setattr(httpx.AsyncClient, "request", mock_request)
+        monkeypatch.setattr(httpx2.AsyncClient, "request", mock_request)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             result = await client.search_rejections("hasRej103:1", start=50, rows=10)
@@ -92,7 +92,7 @@ class TestSearchRejections:
     @pytest.mark.asyncio
     async def test_empty_response(self, monkeypatch: pytest.MonkeyPatch) -> None:
         mock_request = AsyncMock(return_value=_make_response({}))
-        monkeypatch.setattr(httpx.AsyncClient, "request", mock_request)
+        monkeypatch.setattr(httpx2.AsyncClient, "request", mock_request)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             result = await client.search_rejections("patentApplicationNumber:99999999")
@@ -124,7 +124,7 @@ class TestSearchRejections:
                 }
             )
         )
-        monkeypatch.setattr(httpx.AsyncClient, "request", mock_request)
+        monkeypatch.setattr(httpx2.AsyncClient, "request", mock_request)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             result = await client.search_rejections("patentApplicationNumber:16000001")
@@ -164,7 +164,7 @@ class TestSearchCitations:
                 }
             )
         )
-        monkeypatch.setattr(httpx.AsyncClient, "request", mock_request)
+        monkeypatch.setattr(httpx2.AsyncClient, "request", mock_request)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             result = await client.search_citations("patentApplicationNumber:16123456")
@@ -208,7 +208,7 @@ class TestSearchOfficeActionText:
                 }
             )
         )
-        monkeypatch.setattr(httpx.AsyncClient, "request", mock_request)
+        monkeypatch.setattr(httpx2.AsyncClient, "request", mock_request)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             result = await client.search_office_action_text("patentApplicationNumber:16123456")
@@ -257,7 +257,7 @@ class TestSearchEnrichedCitations:
                 }
             )
         )
-        monkeypatch.setattr(httpx.AsyncClient, "request", mock_request)
+        monkeypatch.setattr(httpx2.AsyncClient, "request", mock_request)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             result = await client.search_enriched_citations("patentApplicationNumber:16123456")
@@ -303,16 +303,16 @@ class TestClientConfig:
     @pytest.mark.asyncio
     async def test_sends_api_key(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Office action client sends X-API-KEY header."""
-        # Patch ``send`` (not ``request``) so the captured httpx.Request
+        # Patch ``send`` (not ``request``) so the captured httpx2.Request
         # carries the client's merged default headers.
         mock_send = AsyncMock(
             return_value=_make_response({"response": {"numFound": 0, "start": 0, "docs": []}})
         )
-        monkeypatch.setattr(httpx.AsyncClient, "send", mock_send)
+        monkeypatch.setattr(httpx2.AsyncClient, "send", mock_send)
 
         async with OfficeActionClient(api_key=API_KEY) as client:
             await client.search_rejections("*:*", rows=1)
 
         sent = mock_send.call_args.args[0]
-        assert isinstance(sent, httpx.Request)
+        assert isinstance(sent, httpx2.Request)
         assert sent.headers["X-API-KEY"] == API_KEY

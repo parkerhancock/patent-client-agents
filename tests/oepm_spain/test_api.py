@@ -3,7 +3,7 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.oepm_spain import api
@@ -28,12 +28,12 @@ async def test_get_helpers_send_soap_lookup_and_parse(
     field: str,
     value: object,
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     closed: list[OepmSpainClient] = []
 
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=(fixture_dir / fixture).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / fixture).read_bytes())
 
     class Tracked(OepmSpainClient):
         async def __aexit__(self, *exc: object) -> None:
@@ -41,7 +41,7 @@ async def test_get_helpers_send_soap_lookup_and_parse(
             closed.append(self)
 
     def factory() -> OepmSpainClient:
-        http = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         return Tracked("user", "password", client=http)
 
     monkeypatch.setattr(api, "OepmSpainClient", factory)

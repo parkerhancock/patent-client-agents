@@ -30,7 +30,7 @@ from __future__ import annotations
 from collections.abc import Iterable
 from typing import Any
 
-import httpx
+import httpx2
 
 from patent_client_agents.shared.client import ConnectorClient
 
@@ -347,7 +347,7 @@ class PrhClient(ConnectorClient):
     def __init__(
         self,
         *,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
         headers: dict[str, str] | None = None,
         **kwargs: Any,
     ) -> None:

@@ -14,7 +14,7 @@ from datetime import date
 from typing import Any, Literal
 from urllib.parse import quote
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import (
     ApiError,
@@ -291,8 +291,8 @@ class IponzClient(ConnectorClient):
         access_token: str | None = None,
         environment: IponzEnvironment | None = None,
         base_url: str | None = None,
-        client: httpx.AsyncClient | None = None,
-        transport: httpx.AsyncBaseTransport | None = None,
+        client: httpx2.AsyncClient | None = None,
+        transport: httpx2.AsyncBaseTransport | None = None,
     ) -> None:
         resolved_key = subscription_key or os.getenv("IPONZ_SUBSCRIPTION_KEY")
         if not resolved_key:
@@ -329,7 +329,7 @@ class IponzClient(ConnectorClient):
         )
 
     @staticmethod
-    def _rate_limit(response: httpx.Response) -> RateLimitError:
+    def _rate_limit(response: httpx2.Response) -> RateLimitError:
         value = response.headers.get("Retry-After")
         try:
             retry_after = float(value) if value is not None else None

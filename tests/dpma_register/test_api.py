@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.dpma_register import api
@@ -12,19 +12,19 @@ from patent_client_agents.dpma_register.client import DpmaRegisterClient
 @pytest.fixture
 def wire(
     monkeypatch: pytest.MonkeyPatch, fixture_dir: Path
-) -> tuple[dict[str, str], list[httpx.Request], list[DpmaRegisterClient]]:
+) -> tuple[dict[str, str], list[httpx2.Request], list[DpmaRegisterClient]]:
     """Route ``api`` through a real client on a mock transport.
 
     Returns ``(served, captured, closed)``: set ``served["file"]`` to the fixture
     to answer with; requests land in ``captured``; exited clients in ``closed``.
     """
     served: dict[str, str] = {}
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     closed: list[DpmaRegisterClient] = []
 
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=(fixture_dir / served["file"]).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / served["file"]).read_bytes())
 
     class Tracked(DpmaRegisterClient):
         async def __aexit__(self, *exc: object) -> None:
@@ -32,7 +32,7 @@ def wire(
             closed.append(self)
 
     def factory() -> DpmaRegisterClient:
-        http = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        http = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
         return Tracked("user", "pass", base_url="https://mock.test", client=http)
 
     monkeypatch.setattr(api, "DpmaRegisterClient", factory)
@@ -63,7 +63,7 @@ def wire(
     ],
 )
 async def test_search_helpers_query_register_and_apply_limit(
-    wire: tuple[dict[str, str], list[httpx.Request], list[DpmaRegisterClient]],
+    wire: tuple[dict[str, str], list[httpx2.Request], list[DpmaRegisterClient]],
     helper: str,
     fixture: str,
     service: str,
@@ -112,7 +112,7 @@ async def test_search_helpers_query_register_and_apply_limit(
     ],
 )
 async def test_get_helpers_fetch_register_info(
-    wire: tuple[dict[str, str], list[httpx.Request], list[DpmaRegisterClient]],
+    wire: tuple[dict[str, str], list[httpx2.Request], list[DpmaRegisterClient]],
     helper: str,
     fixture: str,
     service: str,

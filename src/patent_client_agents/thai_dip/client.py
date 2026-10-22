@@ -10,7 +10,7 @@ import os
 from collections.abc import Callable
 from typing import Any, Literal, TypeVar, cast
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import (
     ApiError,
@@ -219,8 +219,8 @@ class ThaiDipClient(ConnectorClient):
         token: str | None = None,
         *,
         base_url: str | None = None,
-        client: httpx.AsyncClient | None = None,
-        transport: httpx.AsyncBaseTransport | None = None,
+        client: httpx2.AsyncClient | None = None,
+        transport: httpx2.AsyncBaseTransport | None = None,
     ) -> None:
         resolved_token = token or os.getenv("DIP_DATA_EXCHANGE_TOKEN")
         if not resolved_token:

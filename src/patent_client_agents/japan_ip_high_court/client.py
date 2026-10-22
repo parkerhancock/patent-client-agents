@@ -7,7 +7,7 @@ import unicodedata
 from datetime import date
 from typing import Any, Literal
 
-import httpx
+import httpx2
 import xlrd
 
 from mcp_data_core.exceptions import NotFoundError, ParseError
@@ -198,7 +198,7 @@ class JapanIpHighCourtClient(ConnectorClient):
     CACHE_NAME = "japan_ip_high_court"
     DEFAULT_TIMEOUT = 60.0
 
-    def __init__(self, *, client: httpx.AsyncClient | None = None, **kwargs: Any) -> None:
+    def __init__(self, *, client: httpx2.AsyncClient | None = None, **kwargs: Any) -> None:
         kwargs.setdefault("ttl_seconds", 21_600)
         super().__init__(client=client, headers=_HEADERS, **kwargs)
         if client is not None:

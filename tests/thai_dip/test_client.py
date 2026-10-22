@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import (
@@ -19,7 +19,7 @@ from patent_client_agents.thai_dip.models import parse_dip_date
 
 def _client_for(
     fixture_dir: Path,
-    captured: list[httpx.Request] | None = None,
+    captured: list[httpx2.Request] | None = None,
 ) -> ThaiDipClient:
     fixture_by_endpoint = {
         "PATENT_NOIP": "patent.json",
@@ -31,18 +31,18 @@ def _client_for(
         "GI": "gi.json",
     }
 
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         if captured is not None:
             captured.append(request)
         filename = fixture_by_endpoint[request.url.path.rsplit("/", 1)[-1]]
-        return httpx.Response(200, content=(fixture_dir / filename).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / filename).read_bytes())
 
-    return ThaiDipClient("explicit-token", transport=httpx.MockTransport(handler))
+    return ThaiDipClient("explicit-token", transport=httpx2.MockTransport(handler))
 
 
 @pytest.mark.asyncio
 async def test_patent_search_uses_documented_body_and_bearer_token(fixture_dir: Path) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, captured) as client:
         rows, total = await client.search_patents("sensor", limit=1)
 
@@ -66,7 +66,7 @@ async def test_patent_search_uses_documented_body_and_bearer_token(fixture_dir: 
 async def test_all_patent_datasets(
     right_type: PatentKind, endpoint: str, fixture_dir: Path
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, captured) as client:
         rows, _ = await client.search_patents(
             "2501000001", right_type=right_type, field="application_number"
@@ -89,7 +89,7 @@ async def test_all_patent_datasets(
 async def test_other_catalogue_schemas(
     method: str, endpoint: str, field: str, expected: str, fixture_dir: Path
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, captured) as client:
         rows, total = await getattr(client, method)("Synthetic")
     assert str(captured[0].url) == f"{BASE_URL}/{endpoint}"
@@ -125,10 +125,10 @@ async def test_get_trademark_returns_the_exact_application_not_a_longer_match() 
         {"REQ_NO": "25000001", "TR_NAME": "RIGHT MARK"},
     ]
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=rows)
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=rows)
 
-    async with ThaiDipClient("explicit-token", transport=httpx.MockTransport(handler)) as client:
+    async with ThaiDipClient("explicit-token", transport=httpx2.MockTransport(handler)) as client:
         record = await client.get_trademark("25000001")
         assert record.mark_name == "RIGHT MARK"
         with pytest.raises(NotFoundError):
@@ -169,10 +169,10 @@ async def test_limit_validation(fixture_dir: Path) -> None:
     ],
 )
 async def test_http_errors_map_to_domain_errors(status: int, error_type: type[Exception]) -> None:
-    async def handler(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(status, text="upstream error")
+    async def handler(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(status, text="upstream error")
 
-    async with ThaiDipClient("token", transport=httpx.MockTransport(handler)) as client:
+    async with ThaiDipClient("token", transport=httpx2.MockTransport(handler)) as client:
         with pytest.raises(error_type):
             await client.search_songs("melody")
 
@@ -183,10 +183,10 @@ async def test_http_errors_map_to_domain_errors(status: int, error_type: type[Ex
     [(b"not-json", "malformed JSON"), (b'{"message":"Invalid Api."}', "Invalid Api")],
 )
 async def test_invalid_response_shapes_raise_api_error(content: bytes, match: str) -> None:
-    async def handler(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, content=content)
+    async def handler(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, content=content)
 
-    async with ThaiDipClient("token", transport=httpx.MockTransport(handler)) as client:
+    async with ThaiDipClient("token", transport=httpx2.MockTransport(handler)) as client:
         with pytest.raises(ApiError, match=match):
             await client.search_geographical_indications("rice")
 
@@ -195,10 +195,10 @@ async def test_invalid_response_shapes_raise_api_error(content: bytes, match: st
 async def test_missing_record_and_identifier_raise_domain_errors() -> None:
     responses = iter([b"[]", b'[{"PATENT_NAME":"missing number"}]'])
 
-    async def handler(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, content=next(responses))
+    async def handler(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, content=next(responses))
 
-    async with ThaiDipClient("token", transport=httpx.MockTransport(handler)) as client:
+    async with ThaiDipClient("token", transport=httpx2.MockTransport(handler)) as client:
         with pytest.raises(NotFoundError):
             await client.get_trademark("missing")
         with pytest.raises(ApiError, match="lacks an identifier"):

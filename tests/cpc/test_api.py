@@ -1,7 +1,7 @@
 """Tests for the CPC API module.
 
 The CPC helpers run through a real ``EpoOpsClient`` whose network layer is an
-``httpx.MockTransport``: the OPS OAuth token exchange, headers, URL building,
+``httpx2.MockTransport``: the OPS OAuth token exchange, headers, URL building,
 cache and XML parsing all run as in production.
 """
 
@@ -14,7 +14,7 @@ from collections.abc import Awaitable, Callable
 from pathlib import Path
 from typing import Any
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.cpc import api as cpc_api
@@ -96,15 +96,15 @@ GIF_BYTES = b"GIF89a\x01\x00\x01\x00fake"
 class FakeOps:
     """OPS stand-in: issues an OAuth token and serves one canned data reply."""
 
-    def __init__(self, reply: httpx.Response) -> None:
+    def __init__(self, reply: httpx2.Response) -> None:
         self.reply = reply
-        self.token_requests: list[httpx.Request] = []
-        self.data_requests: list[httpx.Request] = []
+        self.token_requests: list[httpx2.Request] = []
+        self.data_requests: list[httpx2.Request] = []
 
-    def handle(self, request: httpx.Request) -> httpx.Response:
+    def handle(self, request: httpx2.Request) -> httpx2.Response:
         if request.url.path == "/3.2/auth/accesstoken":
             self.token_requests.append(request)
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "issued_at": str(int(time.time() * 1000)),
@@ -114,11 +114,11 @@ class FakeOps:
             )
         self.data_requests.append(request)
         if request.headers.get("Authorization") != "Bearer ops-token":
-            return httpx.Response(401, text="<fault>invalid_access_token</fault>")
+            return httpx2.Response(401, text="<fault>invalid_access_token</fault>")
         return self.reply
 
     @property
-    def request(self) -> httpx.Request:
+    def request(self) -> httpx2.Request:
         (only,) = self.data_requests
         return only
 
@@ -134,7 +134,7 @@ def run(
     via = request.param
 
     async def _run(ops: FakeOps, call: Call) -> Any:
-        transport = httpx.MockTransport(ops.handle)
+        transport = httpx2.MockTransport(ops.handle)
         if via == "env":
             monkeypatch.setenv("EPO_OPS_API_KEY", "key")
             monkeypatch.setenv("EPO_OPS_API_SECRET", "secret")
@@ -172,7 +172,7 @@ def _assert_authenticated(ops: FakeOps) -> None:
 
 @pytest.mark.asyncio
 async def test_retrieve_cpc(run: Callable[[FakeOps, Call], Awaitable[Any]]) -> None:
-    ops = FakeOps(httpx.Response(200, text=RETRIEVAL_XML))
+    ops = FakeOps(httpx2.Response(200, text=RETRIEVAL_XML))
 
     result = await run(
         ops,
@@ -193,7 +193,7 @@ async def test_retrieve_cpc(run: Callable[[FakeOps, Call], Awaitable[Any]]) -> N
 
 @pytest.mark.asyncio
 async def test_search_cpc(run: Callable[[FakeOps, Call], Awaitable[Any]]) -> None:
-    ops = FakeOps(httpx.Response(200, text=SEARCH_XML))
+    ops = FakeOps(httpx2.Response(200, text=SEARCH_XML))
 
     result = await run(ops, functools.partial(cpc_api.search_cpc, "battery", range_end=5))
 
@@ -208,7 +208,7 @@ async def test_search_cpc(run: Callable[[FakeOps, Call], Awaitable[Any]]) -> Non
 
 @pytest.mark.asyncio
 async def test_map_classification(run: Callable[[FakeOps, Call], Awaitable[Any]]) -> None:
-    ops = FakeOps(httpx.Response(200, text=MAPPING_XML))
+    ops = FakeOps(httpx2.Response(200, text=MAPPING_XML))
 
     result = await run(
         ops,
@@ -232,7 +232,7 @@ async def test_map_classification(run: Callable[[FakeOps, Call], Awaitable[Any]]
 
 @pytest.mark.asyncio
 async def test_fetch_media(run: Callable[[FakeOps, Call], Awaitable[Any]]) -> None:
-    ops = FakeOps(httpx.Response(200, content=GIF_BYTES, headers={"Content-Type": "image/gif"}))
+    ops = FakeOps(httpx2.Response(200, content=GIF_BYTES, headers={"Content-Type": "image/gif"}))
 
     result = await run(
         ops, functools.partial(cpc_api.fetch_media, "classification/cpc/media/media123")
@@ -247,7 +247,7 @@ async def test_fetch_media(run: Callable[[FakeOps, Call], Awaitable[Any]]) -> No
 
 @pytest.mark.asyncio
 async def test_fetch_biblio_cpci(run: Callable[[FakeOps, Call], Awaitable[Any]]) -> None:
-    ops = FakeOps(httpx.Response(200, text=CPCI_BIBLIO_XML))
+    ops = FakeOps(httpx2.Response(200, text=CPCI_BIBLIO_XML))
 
     result = await run(
         ops, functools.partial(cpc_api.fetch_biblio_cpci, "ep 1000000", condensed=True)
@@ -285,12 +285,12 @@ class TestGetClient:
     async def test_explicit_credentials_authenticate_requests(
         self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
     ) -> None:
-        ops = FakeOps(httpx.Response(200, text=SEARCH_XML))
+        ops = FakeOps(httpx2.Response(200, text=SEARCH_XML))
         monkeypatch.setattr(
             cpc_api,
             "EpoOpsClient",
             functools.partial(
-                EpoOpsClient, transport=httpx.MockTransport(ops.handle), cache_path=tmp_path
+                EpoOpsClient, transport=httpx2.MockTransport(ops.handle), cache_path=tmp_path
             ),
         )
         client = cpc_api.get_client(api_key="explicit-key", api_secret="explicit-secret")

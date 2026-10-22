@@ -30,7 +30,7 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
-import httpx
+import httpx2
 from lxml import html
 
 from mcp_data_core.corpus_compression import finalize_outline_corpus
@@ -146,8 +146,8 @@ async def build_corpus(
     """
     with atomic_output(output_path) as tmp_path:
         headers = {"User-Agent": user_agent, "Accept": "text/html"}
-        async with httpx.AsyncClient(
-            base_url=base_url, headers=headers, timeout=httpx.Timeout(30.0, connect=10.0)
+        async with httpx2.AsyncClient(
+            base_url=base_url, headers=headers, timeout=httpx2.Timeout(30.0, connect=10.0)
         ) as client:
             logger.info("Fetching MoPP index from %s%s", base_url, INDEX_PATH)
             index_html = await fetch_text(client, INDEX_PATH)

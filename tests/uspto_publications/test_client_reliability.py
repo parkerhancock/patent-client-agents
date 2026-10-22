@@ -1,7 +1,7 @@
 """Reliability regressions for the USPTO Patent Public Search client.
 
 Every client test drives the public ``PublicSearchClient`` methods against
-``FakePpubs``, an in-process PPUBS served through ``httpx.MockTransport``.
+``FakePpubs``, an in-process PPUBS served through ``httpx2.MockTransport``.
 The real session bootstrap, session refresh, caseId rewrite, typed-error
 mapping and retry decorator all run; only the network and the retry backoff
 are replaced.
@@ -14,7 +14,7 @@ import json
 from typing import Any
 from unittest.mock import AsyncMock, call, patch
 
-import httpx
+import httpx2
 import pytest
 import tenacity
 
@@ -85,7 +85,7 @@ async def test_search_bootstraps_session_and_sends_its_token_and_case_id(
 
 @pytest.mark.asyncio
 async def test_request_retries_transient_server_error(ppubs: FakePpubs) -> None:
-    ppubs.queue(COUNTS, httpx.Response(500))
+    ppubs.queue(COUNTS, httpx2.Response(500))
 
     async with _client(ppubs) as client:
         page = await client.search_biblio(query="neural.CLM.")
@@ -96,7 +96,7 @@ async def test_request_retries_transient_server_error(ppubs: FakePpubs) -> None:
 
 @pytest.mark.asyncio
 async def test_request_retries_transport_timeout(ppubs: FakePpubs) -> None:
-    ppubs.queue(SEARCH, httpx.ReadTimeout("PPUBS read timed out"))
+    ppubs.queue(SEARCH, httpx2.ReadTimeout("PPUBS read timed out"))
 
     async with _client(ppubs) as client:
         page = await client.search_biblio(query="neural.CLM.")
@@ -107,7 +107,7 @@ async def test_request_retries_transport_timeout(ppubs: FakePpubs) -> None:
 
 @pytest.mark.asyncio
 async def test_persistent_403_is_typed_retryable_authentication_error(ppubs: FakePpubs) -> None:
-    ppubs.always(COUNTS, httpx.Response(403))
+    ppubs.always(COUNTS, httpx2.Response(403))
 
     async with _client(ppubs) as client:
         with pytest.raises(RetryableAuthenticationError):
@@ -126,8 +126,8 @@ async def test_request_uses_one_session_refresh_attempt_per_request_attempt(
 ) -> None:
     async with _client(ppubs) as client:
         await client.search_biblio(query="warm.CLM.")
-        ppubs.always(COUNTS, httpx.Response(403))
-        ppubs.always(SESSION, httpx.Response(403))
+        ppubs.always(COUNTS, httpx2.Response(403))
+        ppubs.always(SESSION, httpx2.Response(403))
         with pytest.raises(RetryableAuthenticationError, match="session bootstrap"):
             await client.search_biblio(query="neural.CLM.")
 
@@ -138,7 +138,7 @@ async def test_request_uses_one_session_refresh_attempt_per_request_attempt(
 
 @pytest.mark.asyncio
 async def test_429_is_typed_rate_limit_error(ppubs: FakePpubs) -> None:
-    ppubs.always(COUNTS, httpx.Response(429, headers={"x-rate-limit-retry-after-seconds": "3"}))
+    ppubs.always(COUNTS, httpx2.Response(429, headers={"x-rate-limit-retry-after-seconds": "3"}))
 
     with patch("asyncio.sleep", new=AsyncMock()) as sleep:
         async with _client(ppubs) as client:
@@ -160,9 +160,9 @@ async def test_429_is_typed_rate_limit_error(ppubs: FakePpubs) -> None:
 async def test_request_updates_case_id_after_session_refresh(
     ppubs: FakePpubs, path: str, nested: bool
 ) -> None:
-    async def expire_then_reject(request: httpx.Request) -> httpx.Response:
+    async def expire_then_reject(request: httpx2.Request) -> httpx2.Response:
         ppubs.expire_session()
-        return httpx.Response(403)
+        return httpx2.Response(403)
 
     ppubs.queue(path, expire_then_reject)
 
@@ -197,13 +197,13 @@ async def _two_requests_in_flight_then_403(ppubs: FakePpubs) -> None:
     both_in_flight = asyncio.Event()
     arrived = 0
 
-    async def reject_when_both_arrived(request: httpx.Request) -> httpx.Response:
+    async def reject_when_both_arrived(request: httpx2.Request) -> httpx2.Response:
         nonlocal arrived
         arrived += 1
         if arrived == 2:
             both_in_flight.set()
         await both_in_flight.wait()
-        return httpx.Response(403)
+        return httpx2.Response(403)
 
     ppubs.queue(COUNTS, reject_when_both_arrived, reject_when_both_arrived)
 
@@ -235,7 +235,7 @@ async def test_waiting_request_recovers_after_concurrent_refresh_failure(
         await client.search_biblio(query="warm.CLM.")
         ppubs.expire_session()
         await _two_requests_in_flight_then_403(ppubs)
-        ppubs.queue(SESSION, httpx.Response(403))
+        ppubs.queue(SESSION, httpx2.Response(403))
 
         pages = await asyncio.gather(
             client.search_biblio(query="neural.CLM."),
@@ -256,7 +256,7 @@ async def test_failed_refresh_does_not_force_an_extra_session(ppubs: FakePpubs) 
         await client.search_biblio(query="warm.CLM.")
         ppubs.expire_session()
         await _two_requests_in_flight_then_403(ppubs)
-        ppubs.queue(SESSION, httpx.Response(403))
+        ppubs.queue(SESSION, httpx2.Response(403))
 
         await asyncio.gather(
             client.search_biblio(query="neural.CLM."),
@@ -269,7 +269,7 @@ async def test_failed_refresh_does_not_force_an_extra_session(ppubs: FakePpubs) 
 
 @pytest.mark.asyncio
 async def test_session_bootstrap_retries_server_error(ppubs: FakePpubs) -> None:
-    ppubs.queue(SESSION, httpx.Response(500))
+    ppubs.queue(SESSION, httpx2.Response(500))
 
     async with _client(ppubs) as client:
         page = await client.search_biblio(query="neural.CLM.")
@@ -337,7 +337,7 @@ def test_query_syntax_names_the_problem(query: str, match: str) -> None:
 async def test_search_stops_on_counts_error_payload(ppubs: FakePpubs) -> None:
     ppubs.queue(
         COUNTS,
-        httpx.Response(
+        httpx2.Response(
             200, json={"error": {"errorCode": 121, "errorMessage": "Cannot start a group"}}
         ),
     )
@@ -353,7 +353,7 @@ async def test_search_stops_on_counts_error_payload(ppubs: FakePpubs) -> None:
 @pytest.mark.asyncio
 async def test_counts_server_error_explains_query_was_not_run(ppubs: FakePpubs) -> None:
     body = '{"status":"INTERNAL_SERVER_ERROR","developerMessage":"Unable to Process"}'
-    ppubs.always(COUNTS, httpx.Response(500, text=body))
+    ppubs.always(COUNTS, httpx2.Response(500, text=body))
 
     async with _client(ppubs) as client:
         with pytest.raises(
@@ -367,8 +367,8 @@ async def test_counts_server_error_explains_query_was_not_run(ppubs: FakePpubs) 
 
 @pytest.mark.asyncio
 async def test_search_server_error_after_counts_stays_retryable(ppubs: FakePpubs) -> None:
-    ppubs.queue(COUNTS, httpx.Response(200, json={"numResults": 214}))
-    ppubs.always(SEARCH, httpx.Response(500, text="{}"))
+    ppubs.queue(COUNTS, httpx2.Response(200, json={"numResults": 214}))
+    ppubs.always(SEARCH, httpx2.Response(500, text="{}"))
 
     async with _client(ppubs) as client:
         with pytest.raises(ServerError, match="accepted the query at /counts \\(214 documents\\)"):

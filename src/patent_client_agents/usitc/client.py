@@ -6,7 +6,7 @@ import os
 from datetime import UTC, datetime
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import AuthenticationError
 from patent_client_agents.shared.client import ConnectorClient
@@ -63,7 +63,7 @@ class EdisClient(ConnectorClient):
     DEFAULT_BASE_URL = os.getenv("USITC_EDIS_BASE_URL", "https://edis.usitc.gov/data")
     CACHE_NAME = "usitc_edis"
 
-    def __init__(self, client: httpx.AsyncClient | None = None) -> None:
+    def __init__(self, client: httpx2.AsyncClient | None = None) -> None:
         token = get_env_token("USITC_EDIS_TOKEN")
         # Don't set a custom User-Agent here. edis.usitc.gov is fronted
         # by Akamai bot-management which 403s anything that looks like
@@ -103,7 +103,7 @@ class EdisClient(ConnectorClient):
                 f"and update USITC_EDIS_TOKEN."
             )
 
-    async def _request(self, *args: Any, **kwargs: Any) -> httpx.Response:
+    async def _request(self, *args: Any, **kwargs: Any) -> httpx2.Response:
         self._assert_token_fresh()
         return await super()._request(*args, **kwargs)
 
@@ -311,7 +311,7 @@ class DataWebClient(ConnectorClient):
     CACHE_NAME = "usitc_dataweb"
     DEFAULT_TIMEOUT = 60.0
 
-    def __init__(self, client: httpx.AsyncClient | None = None) -> None:
+    def __init__(self, client: httpx2.AsyncClient | None = None) -> None:
         token = get_env_token("USITC_DATAWEB_TOKEN")
         headers: dict[str, str] = {
             "Accept": "application/json",
@@ -354,7 +354,7 @@ class IdsClient(ConnectorClient):
     CACHE_NAME = "usitc_ids"
     DEFAULT_TIMEOUT = 10.0
 
-    def __init__(self, client: httpx.AsyncClient | None = None) -> None:
+    def __init__(self, client: httpx2.AsyncClient | None = None) -> None:
         super().__init__(client=client)
 
     async def list_investigations(self) -> list[IdsInvestigation]:
@@ -366,7 +366,7 @@ class HtsClient(ConnectorClient):
     DEFAULT_BASE_URL = os.getenv("USITC_HTS_BASE_URL", "https://hts.usitc.gov/reststop")
     CACHE_NAME = "usitc_hts"
 
-    def __init__(self, client: httpx.AsyncClient | None = None) -> None:
+    def __init__(self, client: httpx2.AsyncClient | None = None) -> None:
         headers: dict[str, str] = {"Accept": "application/json"}
         super().__init__(headers=headers, client=client)
 

@@ -26,7 +26,7 @@ import re
 import sys
 from pathlib import Path
 
-import httpx
+import httpx2
 
 from patent_client_agents.shared.corpus import fetch_text
 from patent_client_agents.shared.corpus.epo_legal import (
@@ -70,7 +70,7 @@ def _chapter_from_slug(slug: str) -> str | None:
 _PAGES = BookPages(section_number_for=_section_number_from_slug, chapter_for=_chapter_from_slug)
 
 
-async def _discover(client: httpx.AsyncClient, base_path: str) -> list[str]:
+async def _discover(client: httpx2.AsyncClient, base_path: str) -> list[str]:
     """Every ``clr_*`` URL the index page's embedded TOC lists."""
     logger.info("Fetching Case Law index: %s/index.html", base_path)
     index_html = await fetch_text(client, f"{base_path}/index.html")

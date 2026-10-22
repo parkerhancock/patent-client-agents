@@ -3,7 +3,7 @@ from __future__ import annotations
 import base64
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import ApiError, ConfigurationError, NotFoundError, RateLimitError
@@ -13,15 +13,15 @@ from patent_client_agents.dpma_register.client import DpmaRegisterClient
 def _client_for(
     fixture_dir: Path,
     filename: str,
-    captured: list[httpx.Request] | None = None,
+    captured: list[httpx2.Request] | None = None,
 ) -> DpmaRegisterClient:
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         if captured is not None:
             captured.append(request)
-        return httpx.Response(200, content=(fixture_dir / filename).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / filename).read_bytes())
 
-    transport = httpx.MockTransport(handler)
-    http_client = httpx.AsyncClient(transport=transport, base_url="https://mock.test")
+    transport = httpx2.MockTransport(handler)
+    http_client = httpx2.AsyncClient(transport=transport, base_url="https://mock.test")
     return DpmaRegisterClient(
         "explicit-user",
         "explicit-pass",
@@ -34,7 +34,7 @@ def _client_for(
 async def test_patent_search_is_namespace_tolerant_and_preserves_unknown_xml(
     fixture_dir: Path,
 ) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, "patent_search.xml", captured) as client:
         rows, total = await client.search_patents("AKZ=10 2023", limit=25)
 
@@ -101,10 +101,10 @@ async def test_xml_error_and_malformed_xml_raise_api_error(fixture_dir: Path) ->
         with pytest.raises(ApiError, match="Invalid expert query"):
             await client.search_patents("bad")
 
-    async def malformed(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, content=b"not xml")
+    async def malformed(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, content=b"not xml")
 
-    http_client = httpx.AsyncClient(transport=httpx.MockTransport(malformed))
+    http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(malformed))
     async with DpmaRegisterClient("user", "password", client=http_client) as client:
         with pytest.raises(ApiError, match="malformed XML"):
             await client.get_patent("bad")
@@ -112,10 +112,10 @@ async def test_xml_error_and_malformed_xml_raise_api_error(fixture_dir: Path) ->
 
 @pytest.mark.asyncio
 async def test_rate_limit_maps_to_domain_error() -> None:
-    async def throttled(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(429, text="slow down")
+    async def throttled(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(429, text="slow down")
 
-    http_client = httpx.AsyncClient(transport=httpx.MockTransport(throttled))
+    http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(throttled))
     async with DpmaRegisterClient("user", "password", client=http_client) as client:
         with pytest.raises(RateLimitError):
             await client.get_design("1")
@@ -123,10 +123,10 @@ async def test_rate_limit_maps_to_domain_error() -> None:
 
 @pytest.mark.asyncio
 async def test_missing_record_maps_to_not_found() -> None:
-    async def missing(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(404, text="no such record")
+    async def missing(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(404, text="no such record")
 
-    http_client = httpx.AsyncClient(transport=httpx.MockTransport(missing))
+    http_client = httpx2.AsyncClient(transport=httpx2.MockTransport(missing))
     async with DpmaRegisterClient("user", "password", client=http_client) as client:
         with pytest.raises(NotFoundError):
             await client.get_design("1")

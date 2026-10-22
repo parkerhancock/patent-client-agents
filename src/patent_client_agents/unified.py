@@ -21,7 +21,7 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
-import httpx
+import httpx2
 
 from mcp_data_core.exceptions import McpDataCoreError, NotFoundError
 
@@ -454,7 +454,7 @@ async def download_patent_pdf(patent_number: str) -> PatentPdf:
     except (NotFoundError, FileNotFoundError, ValueError) as exc:
         logger.info("Google Patents did not have PDF for %s: %s", patent_number, exc)
         tried.append(f"google_patents ({exc})")
-    except httpx.HTTPStatusError as exc:
+    except httpx2.HTTPStatusError as exc:
         # Google answers an unknown publication with a plain 404 rather than
         # anything in the hierarchy above, and a very recent US publication is
         # routinely missing there while PPUBS already has it. Without this the

@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from typing import Any
 
-import httpx
+import httpx2
 
 from patent_client_agents.ip_australia_common import (
     IpAustraliaEnvironment,
@@ -51,7 +51,7 @@ class IpAustraliaPatentsClient(ConnectorClient):
         client_secret: str | None = None,
         environment: IpAustraliaEnvironment | None = None,
         base_url: str | None = None,
-        auth: httpx.Auth | None = None,
+        auth: httpx2.Auth | None = None,
         **kwargs: Any,
     ) -> None:
         resolved_env = resolve_environment(environment)

@@ -2,16 +2,16 @@
 
 from unittest.mock import AsyncMock, patch
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.uspto_trademark_assignments import TrademarkAssignmentClient
 
 
-def _search_response(data: list[dict]) -> httpx.Response:
-    return httpx.Response(
+def _search_response(data: list[dict]) -> httpx2.Response:
+    return httpx2.Response(
         200,
-        request=httpx.Request(
+        request=httpx2.Request(
             "POST",
             "https://assignmentcenter.uspto.gov/ipas/search/api/v3/public/search/trademark",
         ),

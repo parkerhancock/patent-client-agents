@@ -6,7 +6,7 @@ Layers exercised:
 - ``_build_params()`` query composition + ``MAX_TOP`` cap.
 - ``paginate()`` page-walking behaviour incl. short-page termination.
 - ROC ``YYYY/MM/DD`` date validator (valid / empty / placeholder / bad).
-- Per-endpoint methods using ``httpx.MockTransport`` to confirm the
+- Per-endpoint methods using ``httpx2.MockTransport`` to confirm the
   upstream call shape and parsing pipeline.
 """
 
@@ -16,7 +16,7 @@ import os
 from collections.abc import Callable
 from datetime import date
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import ConfigurationError
@@ -34,10 +34,10 @@ from patent_client_agents.tipo_opdata.models import _parse_tipo_date
 
 
 def _mock_http(
-    handler: Callable[[httpx.Request], httpx.Response],
-) -> httpx.AsyncClient:
+    handler: Callable[[httpx2.Request], httpx2.Response],
+) -> httpx2.AsyncClient:
     """Build an AsyncClient with a MockTransport for offline tests."""
-    return httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    return httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
 
 
 def _patent_row(appl_no: str = "112100001", appl_date: str = "2023/01/05") -> dict:
@@ -303,11 +303,11 @@ async def test_search_patent_appl_builds_request_and_parses_rows(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "live-tk")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json=_tipo_envelope(rows=[_patent_row("112100001")]),
         )
@@ -334,11 +334,11 @@ async def test_search_patent_appl_joins_list_appl_no(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_tipo_envelope(rows=[]))
+        return httpx2.Response(200, json=_tipo_envelope(rows=[]))
 
     async with TipoClient(client=_mock_http(handler)) as client:
         await client.search_patent_appl(appl_no=["A", "B", "C"])
@@ -350,9 +350,9 @@ async def test_search_patent_appl_joins_list_appl_no(
 async def test_get_patent_pub(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         assert request.url.path.endswith("/PatentPub")
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json=_tipo_envelope(
                 rows=[{"sequence": 1, "patent-title": {"patent-name-chinese": "x"}}]
@@ -368,8 +368,8 @@ async def test_get_patent_pub(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_patent_rights(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json=_tipo_envelope(rows=[{"sequence": 1, "patent-right": {"patent-no": "I12345"}}]),
         )
@@ -384,8 +384,8 @@ async def test_get_patent_rights(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_patent_priority(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json=_tipo_envelope(rows=[{"sequence": 1, "appl-no": "A1", "prioritys": []}]),
         )
@@ -399,8 +399,8 @@ async def test_get_patent_priority(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_patent_annuity(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json=_tipo_envelope(
                 rows=[
@@ -423,8 +423,8 @@ async def test_get_patent_annuity(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_patent_twins(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json=_tipo_envelope(rows=[{"sequence": 1, "appl-no": "X"}]),
         )
@@ -438,8 +438,8 @@ async def test_get_patent_twins(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_patent_alteration(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json=_tipo_envelope(rows=[{"sequence": 1, "appl-no": "X", "alteration": []}]),
         )
@@ -453,8 +453,8 @@ async def test_get_patent_alteration(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_patent_change(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json=_tipo_envelope(
                 rows=[
@@ -476,8 +476,8 @@ async def test_get_patent_change(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_patent_divide(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json=_tipo_envelope(
                 rows=[
@@ -499,11 +499,11 @@ async def test_get_patent_divide(monkeypatch: pytest.MonkeyPatch) -> None:
 @pytest.mark.asyncio
 async def test_search_tmark_appl(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json={
                 "version": "1.0",
@@ -537,8 +537,8 @@ async def test_search_tmark_appl(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_tmark_rights(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json={
                 "version": "1.0",
@@ -568,8 +568,8 @@ async def test_get_tmark_rights(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_tmark_priority(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json={
                 "version": "1.0",
@@ -594,8 +594,8 @@ async def test_get_tmark_priority(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_tmark_pics(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json={
                 "version": "1.0",
@@ -624,8 +624,8 @@ async def test_get_tmark_pics(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_tmark_change(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json={
                 "version": "1.0",
@@ -655,8 +655,8 @@ async def test_get_tmark_change(monkeypatch: pytest.MonkeyPatch) -> None:
 async def test_get_tmark_divide(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(
             200,
             json={
                 "version": "1.0",
@@ -698,7 +698,7 @@ async def test_paginate_walks_until_short_page(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     pages = [
         [_patent_row(f"page1-{i}") for i in range(3)],
         [_patent_row(f"page2-{i}") for i in range(3)],
@@ -706,11 +706,11 @@ async def test_paginate_walks_until_short_page(
     ]
     counter = {"i": 0}
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
         page = pages[counter["i"]]
         counter["i"] += 1
-        return httpx.Response(200, json=_tipo_envelope(rows=page))
+        return httpx2.Response(200, json=_tipo_envelope(rows=page))
 
     async with TipoClient(client=_mock_http(handler)) as client:
         seen = []
@@ -738,11 +738,11 @@ async def test_paginate_clamps_top_to_max_top(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_tipo_envelope(rows=[]))
+        return httpx2.Response(200, json=_tipo_envelope(rows=[]))
 
     async with TipoClient(client=_mock_http(handler)) as client:
         # Even though caller asks for 99999, top must clamp to MAX_TOP.
@@ -758,8 +758,8 @@ async def test_paginate_empty_first_page_terminates(
 ) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
 
-    def handler(request: httpx.Request) -> httpx.Response:
-        return httpx.Response(200, json=_tipo_envelope(rows=[]))
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(200, json=_tipo_envelope(rows=[]))
 
     async with TipoClient(client=_mock_http(handler)) as client:
         rows = [r async for r in client.paginate("/PatentAppl", top=10)]
@@ -771,11 +771,11 @@ async def test_paginate_forwards_filters(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     monkeypatch.setenv("TIPO_API_KEY", "tk")
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, json=_tipo_envelope(rows=[]))
+        return httpx2.Response(200, json=_tipo_envelope(rows=[]))
 
     async with TipoClient(client=_mock_http(handler)) as client:
         async for _ in client.paginate("/PatentAppl", top=10, applicant="TSMC"):

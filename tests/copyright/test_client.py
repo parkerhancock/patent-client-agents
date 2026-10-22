@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from unittest.mock import AsyncMock, patch
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.copyright.client import CopyrightClient
@@ -100,10 +100,10 @@ _EMPTY_RESPONSE = {
 }
 
 
-def _mock_response(data: dict) -> httpx.Response:
-    """Create a mock httpx.Response with JSON data."""
-    request = httpx.Request("GET", "https://api.publicrecords.copyright.gov/")
-    return httpx.Response(
+def _mock_response(data: dict) -> httpx2.Response:
+    """Create a mock httpx2.Response with JSON data."""
+    request = httpx2.Request("GET", "https://api.publicrecords.copyright.gov/")
+    return httpx2.Response(
         200,
         content=json.dumps(data).encode(),
         headers={"content-type": "application/json"},
@@ -111,19 +111,19 @@ def _mock_response(data: dict) -> httpx.Response:
     )
 
 
-def _mock_error_response(status: int = 500, text: str = "Error") -> httpx.Response:
-    request = httpx.Request("GET", "https://api.publicrecords.copyright.gov/")
-    return httpx.Response(status, text=text, request=request)
+def _mock_error_response(status: int = 500, text: str = "Error") -> httpx2.Response:
+    request = httpx2.Request("GET", "https://api.publicrecords.copyright.gov/")
+    return httpx2.Response(status, text=text, request=request)
 
 
 @pytest.fixture
 def mock_request():
-    """Patch BaseAsyncClient's underlying httpx.AsyncClient.request.
+    """Patch BaseAsyncClient's underlying httpx2.AsyncClient.request.
 
     BaseAsyncClient routes everything through ``self._client.request(...)``
     rather than ``.get(...)``, so we patch at that seam.
     """
-    with patch.object(httpx.AsyncClient, "request", new_callable=AsyncMock) as mock:
+    with patch.object(httpx2.AsyncClient, "request", new_callable=AsyncMock) as mock:
         yield mock
 
 

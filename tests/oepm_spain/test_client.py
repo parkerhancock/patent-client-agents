@@ -3,7 +3,7 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
 
 from mcp_data_core.exceptions import (
@@ -26,23 +26,23 @@ from patent_client_agents.oepm_spain.models import parse_oepm_date
 def _client_for(
     fixture_dir: Path,
     fixture_name: str,
-    captured: list[httpx.Request] | None = None,
+    captured: list[httpx2.Request] | None = None,
 ) -> OepmSpainClient:
-    async def handler(request: httpx.Request) -> httpx.Response:
+    async def handler(request: httpx2.Request) -> httpx2.Response:
         if captured is not None:
             captured.append(request)
-        return httpx.Response(200, content=(fixture_dir / fixture_name).read_bytes())
+        return httpx2.Response(200, content=(fixture_dir / fixture_name).read_bytes())
 
     return OepmSpainClient(
         "explicit-user",
         "explicit-password",
-        client=httpx.AsyncClient(transport=httpx.MockTransport(handler)),
+        client=httpx2.AsyncClient(transport=httpx2.MockTransport(handler)),
     )
 
 
 @pytest.mark.asyncio
 async def test_patent_request_matches_wsdl_and_response_parses(fixture_dir: Path) -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
     async with _client_for(fixture_dir, "patent.xml", captured) as client:
         record = await client.get_patent("p202400001")
 
@@ -150,11 +150,11 @@ async def test_wsdl_result_errors_and_soap_faults(fixture_dir: Path) -> None:
     ],
 )
 async def test_http_and_malformed_errors(status: int, body: bytes, error: type[Exception]) -> None:
-    async def handler(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(status, content=body)
+    async def handler(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(status, content=body)
 
     async with OepmSpainClient(
-        "user", "password", client=httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        "user", "password", client=httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
     ) as client:
         with pytest.raises(error):
             await client.get_patent("P0000001")
@@ -162,11 +162,11 @@ async def test_http_and_malformed_errors(status: int, body: bytes, error: type[E
 
 @pytest.mark.asyncio
 async def test_rate_limit_preserves_retry_after() -> None:
-    async def handler(_: httpx.Request) -> httpx.Response:
-        return httpx.Response(429, headers={"Retry-After": "7"})
+    async def handler(_: httpx2.Request) -> httpx2.Response:
+        return httpx2.Response(429, headers={"Retry-After": "7"})
 
     async with OepmSpainClient(
-        "user", "password", client=httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        "user", "password", client=httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
     ) as client:
         with pytest.raises(RateLimitError) as raised:
             await client.get_patent("P0000001")

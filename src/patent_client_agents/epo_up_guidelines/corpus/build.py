@@ -21,7 +21,7 @@ import re
 import sys
 from pathlib import Path
 
-import httpx
+import httpx2
 from lxml import html
 
 from patent_client_agents.shared.corpus import fetch_text
@@ -98,7 +98,7 @@ _PAGES = BookPages(
 )
 
 
-async def _discover(client: httpx.AsyncClient, base_path: str) -> list[str]:
+async def _discover(client: httpx2.AsyncClient, base_path: str) -> list[str]:
     """The ``section_*`` URLs the legal sitemap lists for this edition."""
     logger.info("Discovering UP Guidelines sections from sitemap")
     sitemap = await fetch_text(client, "/en/legal/sitemap/sitemap-en-1.xml")

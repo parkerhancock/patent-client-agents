@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
-import httpx
+import httpx2
 import pytest
 
 from patent_client_agents.japan_ip_high_court import JapanIpHighCourtClient
@@ -13,13 +13,13 @@ from patent_client_agents.japan_ip_high_court.models import JapanIpHighCourtCase
 
 @pytest.mark.asyncio
 async def test_client_downloads_official_workbook_with_excel_accept_header() -> None:
-    captured: list[httpx.Request] = []
+    captured: list[httpx2.Request] = []
 
-    def handler(request: httpx.Request) -> httpx.Response:
+    def handler(request: httpx2.Request) -> httpx2.Response:
         captured.append(request)
-        return httpx.Response(200, content=b"legacy xls")
+        return httpx2.Response(200, content=b"legacy xls")
 
-    transport_client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    transport_client = httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
     expected = JapanIpHighCourtCaseList(pending_count=0, closed_count=0, cases=[])
     with patch(
         "patent_client_agents.japan_ip_high_court.client.parse_case_workbook",

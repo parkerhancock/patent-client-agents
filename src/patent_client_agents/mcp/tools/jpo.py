@@ -22,7 +22,7 @@ from __future__ import annotations
 
 from typing import Annotated, Any, Literal
 
-import httpx
+import httpx2
 from fastmcp import FastMCP
 
 from mcp_data_core.envelope import (
@@ -122,7 +122,7 @@ async def _fetch_jpo_document_bundle(path: str) -> tuple[bytes, str]:
             # Oversize redirect: JPO hosts the ZIP on their CDN. We fetch
             # in-process so the agent's signed URL always resolves to
             # bytes — we never hand off "go fetch this other URL".
-            async with httpx.AsyncClient(timeout=120.0) as http:
+            async with httpx2.AsyncClient(timeout=120.0) as http:
                 resp = await http.get(bundle.download_url)
                 resp.raise_for_status()
                 content = resp.content
@@ -812,7 +812,7 @@ async def get_jpo_documents(
         # ZIP for both the parser and the download cache.
         zip_bytes: bytes | None = bundle_result.zip_bytes
         if zip_bytes is None and bundle_result.download_url:
-            async with httpx.AsyncClient(timeout=120.0) as http:
+            async with httpx2.AsyncClient(timeout=120.0) as http:
                 resp = await http.get(bundle_result.download_url)
                 resp.raise_for_status()
                 zip_bytes = resp.content

@@ -22,7 +22,7 @@ import logging
 import re
 from typing import Any
 
-import httpx
+import httpx2
 from lxml import html
 from lxml.html import HtmlElement
 
@@ -242,7 +242,7 @@ class UpcDecisionsClient(ConnectorClient):
         *,
         language: str = DEFAULT_LANGUAGE,
         user_agent: str = DEFAULT_USER_AGENT,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
         use_cache: bool = True,
         timeout: float | None = None,
     ) -> None:
