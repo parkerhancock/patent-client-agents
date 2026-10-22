@@ -1,0 +1,305 @@
+{
+  "description": "Official sources of the IPOS Singapore statutes and manuals corpora. Raw files are archived gzipped under typescript/.data/ipos/sources/<path>.gz (not committed); sha256 and bytes are of the raw file.",
+  "access_notes": [
+    "2026-10-22: sso.agc.gov.sg (Singapore Statutes Online, CloudFront) answered HTTP 403 'Request blocked' to plain GETs with this user agent for /Act/PA1994, /Act/PA1994?WholeDoc=1, the site root and robots.txt, and to curl's default user agent. No other access method was tried. The Acts therefore come from WIPO Lex, which republishes the SSO PDF of each Act ('Informal Consolidation – version in force from 9/3/2025').",
+    "2026-10-22: the three www.ipos.gov.sg /docs/default-source/... manual PDF paths that Python's builder used answer HTTP 404; IPOS now serves its documents from isomer-user-content.by.gov.sg and file.go.gov.sg, linked from the guides pages recorded as listing_url.",
+    "The Trade Marks Work Manual is published as a cover file and 22 chapter PDFs, not one PDF.",
+    "IPOS no longer publishes a Registered Designs (Industrial Designs) Work Manual: the Designs guides page lists an infopack, information notes and 'Registered Designs - Guidelines for Non-Physical Products', the only examination guidance with numbered paragraphs, which is used as the designs manual."
+  ],
+  "user_agent": "patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)",
+  "extractor": {
+    "pdf": "pdfjs-dist 4.10.38"
+  },
+  "documents": [
+    {
+      "id": "act_patents",
+      "title": "Patents Act 1994 (2020 Revised Edition)",
+      "version": "Patents Act 1994 (2020 Revised Edition, amended up to March 9, 2025)",
+      "publisher": "Attorney-General's Chambers, Singapore (Singapore Statutes Online PDF), republished by WIPO Lex",
+      "listing_url": "https://www.wipo.int/wipolex/en/legislation/details/23204",
+      "files": [
+        {
+          "path": "statutes/patents.pdf",
+          "url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/sg/sg198en_1.pdf",
+          "retrieved_at": "2026-10-22T16:16:11Z",
+          "sha256": "81ec0f1a5561b2a06e8ac392589a3e118366a5d17788bc494fc5561b18326c92",
+          "bytes": 682152
+        }
+      ]
+    },
+    {
+      "id": "act_tm",
+      "title": "Trade Marks Act 1998 (2020 Revised Edition)",
+      "version": "Trade Marks Act 1998 (2020 Revised Edition, amended up to March 9, 2025)",
+      "publisher": "Attorney-General's Chambers, Singapore (Singapore Statutes Online PDF), republished by WIPO Lex",
+      "listing_url": "https://www.wipo.int/wipolex/en/legislation/details/23203",
+      "files": [
+        {
+          "path": "statutes/tm.pdf",
+          "url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/sg/sg197en_1.pdf",
+          "retrieved_at": "2026-10-22T16:16:13Z",
+          "sha256": "84d9881b345fad2c989e368fa78c66b044446e274f1e45c3efcb4da4b2c088de",
+          "bytes": 596283
+        }
+      ]
+    },
+    {
+      "id": "act_designs",
+      "title": "Registered Designs Act 2000 (2020 Revised Edition)",
+      "version": "Registered Designs Act 2000 (2020 Revised Edition, amended up to March 9, 2025)",
+      "publisher": "Attorney-General's Chambers, Singapore (Singapore Statutes Online PDF), republished by WIPO Lex",
+      "listing_url": "https://www.wipo.int/wipolex/en/legislation/details/23205",
+      "files": [
+        {
+          "path": "statutes/designs.pdf",
+          "url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/sg/sg199en_1.pdf",
+          "retrieved_at": "2026-10-22T16:16:15Z",
+          "sha256": "bdfce883d4377332b526de832d88ae4849db720844f20e240c9b47b3c4bf849a",
+          "bytes": 501606
+        }
+      ]
+    },
+    {
+      "id": "act_copyright",
+      "title": "Copyright Act 2021",
+      "version": "Copyright Act 2021 (2020 Revised Edition, amended up to March 9, 2025)",
+      "publisher": "Attorney-General's Chambers, Singapore (Singapore Statutes Online PDF), republished by WIPO Lex",
+      "listing_url": "https://www.wipo.int/wipolex/en/legislation/details/23201",
+      "files": [
+        {
+          "path": "statutes/copyright.pdf",
+          "url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/sg/sg195en_1.pdf",
+          "retrieved_at": "2026-10-22T16:16:17Z",
+          "sha256": "fc6850e53693bbba37e9eb73002a6ea75e2e18cf1cf03ec6dc8cba3511a5373e",
+          "bytes": 1198846
+        }
+      ]
+    },
+    {
+      "id": "manual_peg",
+      "title": "IPOS Examination Guidelines for Patent Applications",
+      "version": "Version Oct 2023 (released 11 October 2023)",
+      "publisher": "Intellectual Property Office of Singapore (ipos.gov.sg)",
+      "listing_url": "https://www.ipos.gov.sg/about-ip/patents/guides/",
+      "files": [
+        {
+          "path": "manuals/peg.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/d159c40c-f15d-49d6-97de-feb33bca527f/examination-guidelines-for-patent-applications.pdf",
+          "retrieved_at": "2026-10-22T16:16:20Z",
+          "sha256": "6d00e54fc366031a5804b11b11e2ac2e67792c802b569a8c7c940dcbcb490c44",
+          "bytes": 4253483
+        }
+      ]
+    },
+    {
+      "id": "manual_tm",
+      "title": "IPOS Trade Marks Work Manual",
+      "version": "Chapters as published on the IPOS Trade Marks guides page; each chapter carries its own version (recorded per row)",
+      "publisher": "Intellectual Property Office of Singapore (ipos.gov.sg)",
+      "listing_url": "https://www.ipos.gov.sg/about-ip/trade-marks/tm-guides/",
+      "files": [
+        {
+          "path": "manuals/tm/00.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/498ad68f-161b-42e3-976a-8d5f622e8f94/cover-page-and-contents.pdf",
+          "retrieved_at": "2026-10-22T16:16:21Z",
+          "sha256": "5d8bd39f26571fd1d47032a652107baeeb009efaf7959656185d290c4a2825bf",
+          "bytes": 220863,
+          "chapter": 0
+        },
+        {
+          "path": "manuals/tm/01.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/b32924a5-c5b0-403e-9d6d-50f0c81c5d83/chapter-1---what-is-a-trade-mark.pdf",
+          "retrieved_at": "2026-10-22T16:16:22Z",
+          "sha256": "49b9a71ba723da41e695b11438f3b0ddf56eb2d3e2cb6d82be36f168f5832e85",
+          "bytes": 440371,
+          "chapter": 1
+        },
+        {
+          "path": "manuals/tm/02.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/10e29c48-8d72-4fd6-9856-b123309c11b5/chapter-2---colour-marks.pdf",
+          "retrieved_at": "2026-10-22T16:16:23Z",
+          "sha256": "9fbb0cdcac99f9f277cc1e189b105fb0ca18e46f630bab665414a529a6abddc2",
+          "bytes": 269708,
+          "chapter": 2
+        },
+        {
+          "path": "manuals/tm/03.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/3d012a27-27d2-4c5c-874f-642f5fda76c1/chapter-3---shape-marks.pdf",
+          "retrieved_at": "2026-10-22T16:16:24Z",
+          "sha256": "b2678f1fb362909226d3ee40653b879b158ec7d723f03852720e6ad4c0b9b5b1",
+          "bytes": 543542,
+          "chapter": 3
+        },
+        {
+          "path": "manuals/tm/04.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/90276d31-5f21-49f8-8929-73bc6a7a6006/chapter-4---descriptive-trade-marks.pdf",
+          "retrieved_at": "2026-10-22T16:16:25Z",
+          "sha256": "de68b97ff4d074a63152ccd77dd64cf5bfd93226708e9fba86b263bd36065f71",
+          "bytes": 188550,
+          "chapter": 4
+        },
+        {
+          "path": "manuals/tm/05.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/5eb05195-6a37-4c2f-b7cb-3f1daf22a6bc/chapter-5---geographical-names.pdf",
+          "retrieved_at": "2026-10-22T16:16:25Z",
+          "sha256": "1f1caa381aa090ae3a814a2ef887b377175fc4dda89d7cc0e6bb6875fdb7f937",
+          "bytes": 194480,
+          "chapter": 5
+        },
+        {
+          "path": "manuals/tm/06.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/cb2538bd-d5aa-4fc9-a77c-03ca6f04d582/chapter-6---evidence-of-distinctiveness-acquired-through-use.pdf",
+          "retrieved_at": "2026-10-22T16:16:26Z",
+          "sha256": "165b467b117fe11c88b27be43a1794aab743237649f88f8a0b7bb08f6fe5cd77",
+          "bytes": 334991,
+          "chapter": 6
+        },
+        {
+          "path": "manuals/tm/07.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/72483891-4c16-42e1-9a6d-83964b8ff361/chapter-7---relative-grounds-for-refusal-of-registration.pdf",
+          "retrieved_at": "2026-10-22T16:16:27Z",
+          "sha256": "3477bb2ab89de0f7940fd1b8a59ccf062e93b01c3dfda4c8709e33bcca442660",
+          "bytes": 880784,
+          "chapter": 7
+        },
+        {
+          "path": "manuals/tm/08.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/18aa6d16-5b82-4e7e-abe3-22e6effd5b1d/chapter-8---series-of-marks.pdf",
+          "retrieved_at": "2026-10-22T16:16:28Z",
+          "sha256": "9e465624d0fd3f338b520a51df947fce7c97deff55e22b9901e8779bab85352b",
+          "bytes": 716070,
+          "chapter": 8
+        },
+        {
+          "path": "manuals/tm/09.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/00debbe8-8ed0-4d12-a07e-91b87c273310/chapter-9---marks-contrary-to-public-policy-or-to-morality.pdf",
+          "retrieved_at": "2026-10-22T16:16:29Z",
+          "sha256": "f5ca9759ba84d9f330029178b599a92771cf826651a44100f0d5e476e838bf19",
+          "bytes": 227621,
+          "chapter": 9
+        },
+        {
+          "path": "manuals/tm/10.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/ba367386-c269-4297-9ed9-a29ec1441e39/10-names-and-representations-of-famous-people-fictional-character-(nov-2022).pdf",
+          "retrieved_at": "2026-10-22T16:16:30Z",
+          "sha256": "7f66ae1335653b54344ea106ff1abd32b61d85cda08fd4be5f3fc7be9918e68c",
+          "bytes": 229888,
+          "chapter": 10
+        },
+        {
+          "path": "manuals/tm/11.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/03f7586f-02fe-4b54-a8b2-7d7090445606/chapter-11---other-grounds-for-refusal-of-application.pdf",
+          "retrieved_at": "2026-10-22T16:16:30Z",
+          "sha256": "cc8b22bf527b0a810cc989353757ed8559774156120e11b747bd965b84de4d01",
+          "bytes": 242177,
+          "chapter": 11
+        },
+        {
+          "path": "manuals/tm/12.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/581d223a-710e-4c3a-8092-a524d21a3389/chapter-12---deceptive-marks.pdf",
+          "retrieved_at": "2026-10-22T16:16:31Z",
+          "sha256": "a1ba83ee6f5e4cd665cfd5fd3b82ab78a0bb965605c0251b1b7800499ca018da",
+          "bytes": 204774,
+          "chapter": 12
+        },
+        {
+          "path": "manuals/tm/13.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/a8c70f60-ed39-40d1-aea9-8bf0cc6e9af6/chapter-13---licences.pdf",
+          "retrieved_at": "2026-10-22T16:16:32Z",
+          "sha256": "86411e957b674897163e27cdd355095b8b9395faa808a45aee9dd48a4f239072",
+          "bytes": 121531,
+          "chapter": 13
+        },
+        {
+          "path": "manuals/tm/14.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/efc6908d-57c1-46a7-bbd4-e10eb83d3c5f/chapter-14---slogans.pdf",
+          "retrieved_at": "2026-10-22T16:16:33Z",
+          "sha256": "b8269033141c8daff4b84a422d483f72042b5cba73fcf7980a31b8a96aa37210",
+          "bytes": 308549,
+          "chapter": 14
+        },
+        {
+          "path": "manuals/tm/15.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/dbb9857e-a6c0-4a5c-8e39-b329872bbe3d/15-collective-marks_version-4-2-october-2024.pdf",
+          "retrieved_at": "2026-10-22T16:16:34Z",
+          "sha256": "fa762e456d20f3b605e5b6aecc4dd73c2847a2d866cae1776cf4d24ce4f825a1",
+          "bytes": 321865,
+          "chapter": 15
+        },
+        {
+          "path": "manuals/tm/16.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/d6071432-2428-4be3-9b67-c4e33e1fecbc/16-certification-marks-version-4-2-october-2024.pdf",
+          "retrieved_at": "2026-10-22T16:16:35Z",
+          "sha256": "acc72afa33c0bbddbbdc7bc3fd5f13baae656cc84ca8064fb2d44cd0ca53897e",
+          "bytes": 339695,
+          "chapter": 16
+        },
+        {
+          "path": "manuals/tm/17.pdf",
+          "url": "https://file.go.gov.sg/17-renewal.pdf",
+          "retrieved_at": "2026-10-22T16:16:38Z",
+          "sha256": "58a936b909f721d11db6b1a1247d9f635335c9aacd448a87a01fffe9b60af7b2",
+          "bytes": 384028,
+          "listed_url": "https://go.gov.sg/17-renewal",
+          "chapter": 17
+        },
+        {
+          "path": "manuals/tm/18.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/c0e98343-c029-4233-bdaf-fbd21d0cf2e2/chapter-18---classification-of-goods-and-services.pdf",
+          "retrieved_at": "2026-10-22T16:16:39Z",
+          "sha256": "1b366ae7159981b9344fffe1fd6b731f3c485c5fd03b31a6a99782e902f30657",
+          "bytes": 357306,
+          "chapter": 18
+        },
+        {
+          "path": "manuals/tm/19.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/bc88d99a-feed-4b5c-a169-6bd6f7cf5054/chapter-19---international-registrations---subsequent-designations-designating-singapore.pdf",
+          "retrieved_at": "2026-10-22T16:16:40Z",
+          "sha256": "1d4a600cdd725196a27751f91c8642751f5b3d4d9f24d095d7ac31cfee79b659",
+          "bytes": 323383,
+          "chapter": 19
+        },
+        {
+          "path": "manuals/tm/20.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/7d335a2c-5cea-4901-a2bb-e9dfd54b86b3/chapter-20---international-applications-where-singapore-is-the-office-of-origin.pdf",
+          "retrieved_at": "2026-10-22T16:16:41Z",
+          "sha256": "ffcacfa31ffbaafcb51f5c5bffd472a72f230492574b9f162db311a43399a5aa",
+          "bytes": 341342,
+          "chapter": 20
+        },
+        {
+          "path": "manuals/tm/21.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/5ecae391-6c3e-429f-ae31-959cabfbab68/chapter-21---priority-claims.pdf",
+          "retrieved_at": "2026-10-22T16:16:41Z",
+          "sha256": "fed5b0208c942977bec5f3fc05a0e8e8779933931acede63a4cdb12e9711adf4",
+          "bytes": 362708,
+          "chapter": 21
+        },
+        {
+          "path": "manuals/tm/22.pdf",
+          "url": "https://file.go.gov.sg/chapter22---assignment.pdf",
+          "retrieved_at": "2026-10-22T16:16:44Z",
+          "sha256": "19287998cd8d96dfbf4de203270c7d75cf748c72d0820d4f9b363ed84e28fe7b",
+          "bytes": 929338,
+          "chapter": 22
+        }
+      ]
+    },
+    {
+      "id": "manual_designs",
+      "title": "IPOS Registered Designs — Guidelines for Non-Physical Products",
+      "version": "Version Jun 2022 (released 2 June 2022)",
+      "publisher": "Intellectual Property Office of Singapore (ipos.gov.sg)",
+      "listing_url": "https://www.ipos.gov.sg/about-ip/designs/guides/",
+      "files": [
+        {
+          "path": "manuals/designs.pdf",
+          "url": "https://isomer-user-content.by.gov.sg/61/b03d0f2e-986b-466b-9dbd-2a61e748fe23/registered-designs-guidelines-for-non-physical-products.pdf",
+          "retrieved_at": "2026-10-22T16:16:46Z",
+          "sha256": "109b2fa9c40e289af09289d9ae80e24371f59245b49d99021b604384ed740147",
+          "bytes": 893623
+        }
+      ]
+    }
+  ]
+}

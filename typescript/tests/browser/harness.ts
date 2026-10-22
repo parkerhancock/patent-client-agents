@@ -10,6 +10,7 @@ import {
   GooglePatentsClient,
   getPatentClaims,
   IpoInMpppClient,
+  IposManualsClient,
   MpepClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
@@ -62,6 +63,10 @@ try {
     source: () => bytes("/fixtures/ipo-in/ipo_in_mppp.db"),
   });
   results.ipo_in_mppp = (await india.getSection("MPPP 9.3.5.4")).section_number;
+  const singapore = new IposManualsClient({
+    source: () => bytes("/fixtures/ipos/ipos_manuals.db"),
+  });
+  results.ipos_manual = (await singapore.getByCitation("IPOS PEG 8.12")).title;
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

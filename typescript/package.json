@@ -55,6 +55,9 @@
     "verify:ipo-in": "bun scripts/verify-ipo-in.ts",
     "build:ipo-in": "bun scripts/build-ipo-in-corpora.ts",
     "fetch:ipo-in": "bun scripts/build-ipo-in-corpora.ts --fetch",
+    "build:ipos": "bun scripts/build-ipos-corpora.ts",
+    "fetch:ipos": "bun scripts/build-ipos-corpora.ts --fetch",
+    "verify:ipos": "bun scripts/verify-ipos.ts",
     "start:hosted": "bun packages/hosted/src/main.ts"
   },
   "devDependencies": {
