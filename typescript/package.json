@@ -50,7 +50,8 @@
     "verify:upc-statutes": "bun scripts/verify-upc-statutes.ts",
     "verify:dpma-statutes": "bun scripts/verify-dpma-statutes.ts",
     "verify:tmep": "bun scripts/verify-tmep.ts",
-    "verify:ukipo-mopp": "bun scripts/verify-ukipo-mopp.ts"
+    "verify:ukipo-mopp": "bun scripts/verify-ukipo-mopp.ts",
+    "verify:ipo-in": "bun scripts/verify-ipo-in.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",

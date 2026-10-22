@@ -19,6 +19,8 @@ import {
   GooglePatentsClient,
   HtsClient,
   IdsClient,
+  IpoInMpppClient,
+  IpoInStatutesClient,
   KiprisClient,
   MoppClient,
   MpepClient,
@@ -67,6 +69,11 @@ import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
 import { registerFacadeTools } from "./facade/index.js";
 import { registerFeeTools } from "./fees.js";
 import { registerGooglePatentsTools } from "./google-patents.js";
+import {
+  type IpoInMpppReader,
+  type IpoInStatutesReader,
+  registerIpoInTools,
+} from "./ipo-in.js";
 import { registerKiprisTools } from "./kipris.js";
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
@@ -149,6 +156,9 @@ export interface ServerOptions {
   dpmaStatutes?: DpmaStatutesReader;
   /** Taiwan Trade Secrets Act reader; omitted, it uses the bundled text. */
   twTradeSecrets?: TwTradeSecretsReader;
+  /** IPO India statutes and MPPP corpus readers; omitted, they use their default artifact paths. */
+  ipoInStatutes?: IpoInStatutesReader;
+  ipoInMppp?: IpoInMpppReader;
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
   downloadAuth?: { jwksUri: string; issuer: string; audience: string };
@@ -354,6 +364,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const dpmaStatutes = options.dpmaStatutes ?? own(new DpmaStatutesClient());
   const twTradeSecrets =
     options.twTradeSecrets ?? own(new TwTradeSecretsClient());
+  const ipoInStatutes = options.ipoInStatutes ?? own(new IpoInStatutesClient());
+  const ipoInMppp = options.ipoInMppp ?? own(new IpoInMpppClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -534,6 +546,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     upcStatutes,
     dpmaStatutes,
     twTradeSecrets,
+    ipoInStatutes,
+    ipoInMppp,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
     edis: edisClient,
@@ -795,6 +809,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     twTradeSecrets,
     options.auth ? requireScopes("tw:read") : undefined,
+  );
+  registerIpoInTools(
+    server,
+    { statutes: ipoInStatutes, mppp: ipoInMppp },
+    options.auth ? requireScopes("ipoin:read") : undefined,
   );
   registerUsitcTools(
     server,

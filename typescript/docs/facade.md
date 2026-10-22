@@ -32,7 +32,7 @@ output-mode schemas mark defaulted parameters as required.
 | `classify_cpc` | Served; needs EPO OPS credentials. USCLS mapping is rejected (OPS maps CPC, IPC and ECLA). |
 | `get_fees` | Served for the EPO, the Unitary Patent and the USPTO (patent, trademark, design); other offices report not yet ported |
 | `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC decisions not ported (the site now sits behind a Cloudflare challenge); USITC appears only with `USITC_EDIS_TOKEN`, matching the Python EDIS-enabled build (checked by a second contract fixture) |
-| `search_legal_reference`, `get_legal_reference` | MPEP, TMEP, UKIPO MoPP, DPMA, the Taiwan Trade Secrets Act and the five EPO corpora served; India not ported. See [DPMA statutes](dpma-statutes.md). For `tw_trade_secrets` an omitted `syntax` means all terms, as the description says; Python sent phrase. See [Taiwan Trade Secrets Act](tw-trade-secrets.md) |
+| `search_legal_reference`, `get_legal_reference` | All corpora served: MPEP, TMEP, UKIPO MoPP, DPMA, the India statutes and MPPP, the Taiwan Trade Secrets Act and the five EPO corpora. India returns its own hit shape, as Python forwards it. For the statute corpora (`dpma`, `india_statutes`, `tw_trade_secrets`) an omitted `syntax` means all terms, as the description says; Python sent phrase. See [DPMA statutes](dpma-statutes.md), [IPO India](ipo-in.md) and [Taiwan Trade Secrets Act](tw-trade-secrets.md) |
 | `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents and CAFC opinions served; USITC attachments with `USITC_EDIS_TOKEN`; IP Australia not ported |
 | `search_upc_statutes`, `get_upc_section` | Served from the UPC statutes corpus. See [UPC statutes](upc-statutes.md) |
 | `search_wipo_lex_legislation`, `get_wipo_lex_legislation` | Served. See [WIPO Lex](wipo-lex.md) |
@@ -129,7 +129,9 @@ Later on October 22, `search_legal_reference` and `get_legal_reference` for
 May 14 MoPP snapshot, and DPMA search (`Unterlassung` in PatG) and `§ 139 PatG`
 passed against the packaged DPMA statutes artifact; that corpus is local, so
 the run checks wiring, not an upstream. The Taiwan Trade Secrets Act search and Article 13-1 also passed; that
-text is bundled, so no network call is involved.
+text is bundled, so no network call is involved. The India
+statutes and MPPP probes (search and one section each) read the local
+seed-built snapshots, since the corpora are offline only.
 
 Not facade defects, but visible in the run:
 

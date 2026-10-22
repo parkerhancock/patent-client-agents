@@ -167,6 +167,7 @@ try {
     upc_instrument?: string;
     dpma_section?: string;
     tw_hits?: string;
+    ipo_in_mppp?: string;
   };
   if (
     !checked.ok ||
@@ -175,7 +176,8 @@ try {
     checked.relay_fee !== "135.00" ||
     checked.upc_instrument !== "upca" ||
     checked.dpma_section !== "139" ||
-    checked.tw_hits !== "12,13"
+    checked.tw_hits !== "12,13" ||
+    checked.ipo_in_mppp !== "04.05.01"
   )
     process.exitCode = 1;
 } finally {

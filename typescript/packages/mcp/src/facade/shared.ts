@@ -26,6 +26,7 @@ import type {
 import { z } from "zod";
 import type { DpmaStatutesReader } from "../dpma-statutes.js";
 import type { EpoLegalClients } from "../epo-legal.js";
+import type { IpoInMpppReader, IpoInStatutesReader } from "../ipo-in.js";
 import {
   type AuthCheck,
   detailEnvelopeSchema,
@@ -71,6 +72,8 @@ export interface FacadeClients {
   upcStatutes: UpcStatutesReader;
   dpmaStatutes: DpmaStatutesReader;
   twTradeSecrets: TwTradeSecretsReader;
+  ipoInStatutes: IpoInStatutesReader;
+  ipoInMppp: IpoInMpppReader;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
   /** USITC EDIS; when present the facade adds the Python EDIS-enabled surface. */
