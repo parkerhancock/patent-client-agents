@@ -21,21 +21,10 @@ import { CorpusProvenanceSchema } from "../packages/client/src/models.js";
 const dir = join(import.meta.dir, "fixtures", "ipo-in");
 const statutesDb = join(dir, "ipo_in_statutes.db");
 const mpppDb = join(dir, "ipo_in_mppp.db");
-const seedDir = join(
-  import.meta.dir,
-  "..",
-  "..",
-  "src",
-  "patent_client_agents",
-);
 const hash = (value: Uint8Array | string) =>
   createHash("sha256").update(value).digest("hex");
-async function seed(name: string) {
-  return (await readFile(join(seedDir, name, "data", "seed.jsonl"), "utf8"))
-    .split("\n")
-    .filter((line) => line.trim())
-    .map((line) => JSON.parse(line) as Record<string, string>);
-}
+const PDF = (page: number) =>
+  `https://ipindia.gov.in/storage/uploads/docs-operator/73b5bf10-b04e-4f45-abef-87ff117315dc.pdf#page=${page}`;
 async function withCopy(
   source: string,
   sql: string,
@@ -97,7 +86,7 @@ test("statute citations parse Python's forms and the ones it rejected", () => {
   ).toEqual(["2", "3", "3(d)", "25(1)", "25(2)", "107A", "146"]);
 });
 
-test("IPO India statutes status, search and sections come from the Python-built seed corpus", async () => {
+test("IPO India statutes status, search and sections come from the official-text fixture", async () => {
   const client = new IpoInStatutesClient({ corpusPath: statutesDb });
   try {
     const status = await client.getCorpusStatus();
@@ -106,13 +95,17 @@ test("IPO India statutes status, search and sections come from the Python-built 
       label: "IPO India statutes",
       corpus_version: "snapshot-2026-10-22",
       schema_version: 1,
-      section_count: 26,
+      section_count: 37,
       snapshot_date: "2026-10-22",
       source_version: null,
       corpus_synced_at: "2026-10-22T00:00:00.000Z",
       compression: "none",
       source_url: IPO_IN_STATUTES_SOURCE_URL,
     });
+    expect(status.metadata.source_patents_act).toContain(
+      "incorporating all amendments till 01-08-2024",
+    );
+    expect(status.metadata.source_patent_rules).toContain("G.S.R. 865(E)");
     expect(status.artifact_sha256).toBe(hash(await readFile(statutesDb)));
     expect(await client.listStatutes()).toEqual([
       "Copyright Act",
@@ -133,8 +126,8 @@ test("IPO India statutes status, search and sections come from the Python-built 
     expect(efficacy.hits).toEqual([
       {
         statute_name: "Patents Act",
-        section_number: "3(d)",
-        title: "Section 3(d) — incremental improvement bar (anti-evergreening)",
+        section_number: "3",
+        title: "What are not inventions",
         snippet: expect.stringContaining("<mark>efficacy</mark>"),
         rank: expect.any(Number),
       },
@@ -151,15 +144,18 @@ test("IPO India statutes status, search and sections come from the Python-built 
       statute: "trade marks act 1999",
     });
     expect(filtered.statute_name).toBe("Trade Marks Act");
-    expect(
-      filtered.hits.every((hit) => hit.statute_name === "Trade Marks Act"),
-    ).toBe(true);
+    expect(filtered.hits.map((hit) => hit.section_number).sort()).toEqual([
+      "11",
+      "2",
+      "29",
+      "9",
+    ]);
     expect(
       (await client.search({ query: "registered", statute: "Nonexistent" }))
         .hits,
     ).toEqual([]);
 
-    // Natural outline order (Python sorted "107A" before "2").
+    // Natural outline order (Python sorted "107A" before "11A" and "2").
     const outline = await client.search({
       query: "the",
       statute: "Patents Act",
@@ -167,16 +163,19 @@ test("IPO India statutes status, search and sections come from the Python-built 
       limit: 100,
     });
     expect(outline.hits.map((hit) => hit.section_number)).toEqual([
+      "1",
       "2",
       "3",
-      "3(d)",
+      "5",
       "8",
-      "25(1)",
-      "25(2)",
+      "11A",
+      "25",
+      "48",
       "53",
       "84",
       "107A",
       "122",
+      "124A",
       "146",
     ]);
     const page = await client.search({
@@ -187,43 +186,74 @@ test("IPO India statutes status, search and sections come from the Python-built 
       offset: 4,
     });
     expect(page.hits.map((hit) => hit.section_number)).toEqual([
-      "25(1)",
-      "25(2)",
-      "53",
-      "84",
+      "8",
+      "11A",
+      "25",
+      "48",
     ]);
     expect(page.has_more).toBe(true);
 
+    // Whole sections are stored; a clause citation returns its section.
     const section = await client.getSectionByCitation(
       "Section 3(d) of the Patents Act, 1970",
     );
     expect(section).toMatchObject({
       statute_name: "Patents Act",
-      section_number: "3(d)",
-      source_url:
-        "https://ipindia.gov.in/writereaddata/portal/ev/sections/ps3.html",
+      section_number: "3",
+      subdivision: "(d)",
+      title: "What are not inventions",
+      source_url: PDF(9),
       corpus_version: "snapshot-2026-10-22",
     });
+    expect(section.text).toContain(
+      "[(d) the mere discovery of a new form of a known substance which does not result in the enhancement of the known efficacy of that substance",
+    );
+    // Superscript amendment markers and page-foot footnotes are not text.
+    expect(section.text).not.toMatch(/Subs\. by|Ins\. by|w\.e\.f\./);
     expect(section.provenance.source_url).toBe(section.source_url ?? "");
-    expect((await client.getSection("107a")).section_number).toBe("107A");
-    expect((await client.getSectionByCitation("Rule 71")).statute_name).toBe(
-      "Patent Rules",
+    expect(
+      await client.getSectionByCitation("Section 25(2) Patents Act"),
+    ).toMatchObject({ section_number: "25", subdivision: "(2)" });
+    expect(
+      (await client.getSection("107a", { statute: "Patents Act" }))
+        .section_number,
+    ).toBe("107A");
+    // "§107A" is a section, so the Patent Rules' rule 107A does not compete.
+    expect(await client.getSectionByCitation("§107A")).toMatchObject({
+      statute_name: "Patents Act",
+      title: "Certain acts not to be considered as infringement",
+    });
+    await expect(client.getSection("107A")).rejects.toThrow(
+      "ambiguous — exists in: Patent Rules, Patents Act",
+    );
+    const rule = await client.getSectionByCitation("Rule 13");
+    expect(rule).toMatchObject({
+      statute_name: "Patent Rules",
+      section_number: "13",
+      title: "Specifications",
+      source_url: "https://ipindia.gov.in/acts/patent-rules-2003/rule-13",
+    });
+    expect(rule.text).toStartWith(
+      "(1) Every specification, whether provisional or complete, shall be made in Form 2.",
+    );
+    // Chapter XIV-A comes from the Patents (Amendment) Rules, 2025.
+    expect((await client.getSectionByCitation("Rule 107A")).text).toContain(
+      '"adjudicating officer" means an officer authorised under section 124A',
+    );
+    const nine = await client.getSectionByCitation("Section 9 Trade Marks Act");
+    expect(nine.title).toBe("Absolute grounds for refusal of registration");
+    expect(nine.text).toContain(
+      "(a) which are devoid of any distinctive character",
     );
     await expect(client.getSectionByCitation("Section 2")).rejects.toThrow(
-      "ambiguous — exists in: Patents Act, Trade Marks Act",
+      "ambiguous — exists in: Copyright Act, Designs Act, Patents Act, Trade Marks Act",
     );
     await expect(
       client.getSectionByCitation("Section 999 Patents Act"),
     ).rejects.toMatchObject({ code: "SECTION_NOT_FOUND" });
-
-    // Every seed row is stored and returned unchanged.
-    for (const row of await seed("ipo_in_statutes")) {
-      const stored = await client.getSection(row.section_number as string, {
-        statute: row.statute_name as string,
-      });
-      expect(stored.content_sha256).toBe(hash(row.text as string));
-      expect(stored.text).toBe(row.text as string);
-    }
+    await expect(
+      client.getSectionByCitation("Section 999(a) Patents Act"),
+    ).rejects.toMatchObject({ code: "SECTION_NOT_FOUND" });
   } finally {
     client.close();
   }
@@ -245,8 +275,9 @@ test("IPO India search quotes caller syntax instead of executing FTS operators",
         .length,
     ).toBeGreaterThan(1);
     expect(
-      (await client.search({ query: "well-known mark", syntax: "adj" })).hits,
-    ).toHaveLength(1);
+      (await client.search({ query: "well-known trade mark", syntax: "adj" }))
+        .hits.length,
+    ).toBeGreaterThan(0);
     expect((await client.search({ query: "  " })).hits).toEqual([]);
     const controller = new AbortController();
     controller.abort();
@@ -264,38 +295,48 @@ test("IPO India MPPP status, search and sections, including unpadded references"
     expect(await client.getCorpusStatus()).toMatchObject({
       available: true,
       label: "IPO India MPPP",
-      corpus_version: "v3.0 (2019)",
-      source_version: "v3.0 (2019)",
-      section_count: 12,
+      corpus_version: "v3.0 (2019-11-26)",
+      source_version: "v3.0 (2019-11-26)",
+      section_count: 14,
       corpus_synced_at: "2026-10-22T00:00:00.000Z",
       source_url: IPO_IN_MPPP_PDF_URL,
     });
-    const hits = await client.search({ query: "opposition" });
-    expect(hits.hits.map((hit) => hit.section_number).sort()).toEqual([
-      "05.03",
-      "05.04",
+    const hits = await client.search({ query: "first examination report" });
+    expect(hits.hits.map((hit) => hit.section_number)).toEqual([
+      "09.04",
+      "09.01",
     ]);
-    expect(hits.hits[0]?.chapter).toBe("Chapter 5");
+    expect(hits.hits[0]?.chapter).toBe("Chapter 09: Examination and Grant");
     expect(
       (
         await client.search({ query: "the", sort: "outline", limit: 3 })
       ).hits.map((hit) => hit.section_number),
-    ).toEqual(["01.01", "02.03", "03.04"]);
-    for (const ref of ["04.05.01", "Chapter 04.05.01", "MPPP 4.5.1"])
-      expect((await client.getSection(ref)).section_number).toBe("04.05.01");
-    const section = await client.getSection("07.02");
-    expect(section).toMatchObject({
-      chapter: "Chapter 7",
-      source_url: IPO_IN_MPPP_PDF_URL,
-      corpus_version: "v3.0 (2019)",
+    ).toEqual(["01", "04.01", "04.02"]);
+    for (const ref of ["09.03.05.04", "Chapter 09.03.05.04", "MPPP 9.3.5.4"])
+      expect((await client.getSection(ref)).section_number).toBe("09.03.05.04");
+    const pct = await client.getSection("07.02");
+    expect(pct).toMatchObject({
+      chapter:
+        "Chapter 07: Convention Application, International Application and National Phase Application",
+      title: "International Application under PCT",
+      source_url: `${IPO_IN_MPPP_PDF_URL}#page=55`,
+      corpus_version: "v3.0 (2019-11-26)",
     });
+    // A heading with no text of its own keeps the heading line; marginal
+    // statutory references go on a separate last line.
+    expect(pct.text).toBe("07.02 International Application under PCT");
+    expect((await client.getSection("07.02.01")).text).toEndWith(
+      "\n[Marginal references: Section 39, 118, Rule 4]",
+    );
+    const examination = await client.getSection("MPPP 09.03");
+    expect(examination.title).toBe("Examination of application");
+    expect((await client.getSection("9")).title).toBe("Examination and Grant");
+    expect((await client.getSection("09.03.05.04")).text).toContain(
+      "Explanation to Section 3(d) further clarifies",
+    );
     await expect(client.getSection("99.99")).rejects.toMatchObject({
       code: "SECTION_NOT_FOUND",
     });
-    for (const row of await seed("ipo_in_mppp"))
-      expect(
-        (await client.getSection(row.section_number as string)).content_sha256,
-      ).toBe(hash(row.text as string));
   } finally {
     client.close();
   }

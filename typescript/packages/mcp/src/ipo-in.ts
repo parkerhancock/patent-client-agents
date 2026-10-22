@@ -32,7 +32,7 @@ export type IpoInMpppReader = Pick<
 >;
 export const IPO_IN_STATUTES_STATUS_URI = "ipo-in-statutes://corpus/status";
 export const IPO_IN_MPPP_STATUS_URI = "ipo-in-mppp://corpus/status";
-const INDIACODE = IPO_IN_STATUTES_SOURCE_URL;
+const STATUTES_SOURCE = IPO_IN_STATUTES_SOURCE_URL;
 const IPINDIA = "https://ipindia.gov.in/";
 // Python's FetchedList: the list envelope plus references not found.
 const fetchedEnvelope = listEnvelopeSchema.extend({
@@ -288,11 +288,11 @@ export function getIpoInSections(
     filename: (s) =>
       `ipo-in-${fileSafe(s.statute_name)}-${fileSafe(s.section_number)}.txt`,
     summarizeOne: (s) =>
-      `**${s.statute_name} §${s.section_number}**${s.title ? ` — ${s.title}` : ""}\nSource: IPO India statutes corpus (${s.corpus_version})`,
+      `**${s.statute_name} §${s.section_number}**${s.title ? ` — ${s.title}` : ""}${s.subdivision ? `\nCited ${s.subdivision} is within this section's text.` : ""}\nSource: IPO India statutes corpus (${s.corpus_version})`,
     missing: (ref) => `IPO India statute section ${ref} — not found.`,
     noun: "IPO India statute sections",
     sourceUrl: (found) =>
-      single && found[0] ? (found[0].source_url ?? IPINDIA) : INDIACODE,
+      single && found[0] ? (found[0].source_url ?? IPINDIA) : STATUTES_SOURCE,
     sourceName: IPO_IN_STATUTES_SOURCE_NAME,
     status: () => client.getCorpusStatus(),
   });
@@ -303,13 +303,17 @@ export function getIpoInMpppSections(
   client: IpoInMpppReader,
   citation: string | string[],
 ) {
+  const single = Array.isArray(citation) ? citation.length === 1 : true;
   return fetchSections(citation, (ref) => client.getSection(ref), {
     filename: (s) => `ipo-in-mppp-${fileSafe(s.section_number)}.txt`,
     summarizeOne: (s) =>
       `**MPPP Chapter ${s.section_number}**${s.title ? ` — ${s.title}` : ""}\nSource: MPPP ${s.corpus_version}`,
     missing: (ref) => `MPPP section ${ref} — not found.`,
     noun: "MPPP sections",
-    sourceUrl: () => IPO_IN_MPPP_PDF_URL,
+    sourceUrl: (found) =>
+      single && found[0]
+        ? (found[0].source_url ?? IPO_IN_MPPP_PDF_URL)
+        : IPO_IN_MPPP_PDF_URL,
     sourceName: IPO_IN_MPPP_SOURCE_NAME,
     status: () => client.getCorpusStatus(),
   });
@@ -339,7 +343,7 @@ export function registerIpoInTools(
       uri: IPO_IN_STATUTES_STATUS_URI,
       name: "Installed IPO India statutes corpus status",
       description:
-        "Installed snapshot identity, section count and snapshot date. The corpus is a curated excerpt seed, not the complete Acts; availability does not establish currency.",
+        "Installed snapshot identity, section count, snapshot date and the official source and version of each Act (metadata.source_*); availability does not establish currency.",
       mimeType: "application/json",
       ...(auth ? { auth } : {}),
     },
@@ -350,7 +354,7 @@ export function registerIpoInTools(
       uri: IPO_IN_MPPP_STATUS_URI,
       name: "Installed IPO India MPPP corpus status",
       description:
-        "Installed snapshot identity, edition, section count and snapshot date. The corpus is a curated excerpt seed of MPPP v3.0 (2019), not the complete manual.",
+        "Installed snapshot identity, edition, section count and snapshot date of the full MPPP v3.0 (26 November 2019) text.",
       mimeType: "application/json",
       ...(auth ? { auth } : {}),
     },
@@ -361,7 +365,7 @@ export function registerIpoInTools(
       ...listToolOptions(auth),
       name: "search_ipo_in_statutes",
       description:
-        "Search Indian IP statutes (Patents, Designs, Trade Marks, Copyright Acts).\n\nThe corpus bundles the four core Indian IP Acts plus the Patent Rules 2003 — pass ``statute=`` to constrain to one Act, or omit to search across all four. Use ``get_ipo_in_section`` for the full section text by citation (e.g. 'Section 3(d) Patents Act'). The installed corpus is a curated set of key sections, not every section of each Act.\n\nExamples:\n  * §3(d) anti-evergreening:    query='efficacy'\n  * Compulsory licensing:       query='compulsory licensing', statute='Patents Act'\n  * Trade mark dilution:        query='well-known mark', statute='Trade Marks Act'\n  * Fair dealing copyright:     query='fair dealing'\n\nRelated tools: get_ipo_in_section, search_ipo_in_mppp.",
+        "Search Indian IP statutes (Patents, Designs, Trade Marks, Copyright Acts).\n\nThe corpus bundles the four core Indian IP Acts plus the Patent Rules 2003 — pass ``statute=`` to constrain to one Act, or omit to search across all four. Use ``get_ipo_in_section`` for the full section text by citation (e.g. 'Section 3(d) Patents Act'). The corpus holds every section of each Act and every rule of the Patents Rules 2003 (schedules and forms excluded), from the official consolidated texts; the status resource names each text's version.\n\nExamples:\n  * §3(d) anti-evergreening:    query='efficacy'\n  * Compulsory licensing:       query='compulsory licensing', statute='Patents Act'\n  * Trade mark dilution:        query='well-known mark', statute='Trade Marks Act'\n  * Fair dealing copyright:     query='fair dealing'\n\nRelated tools: get_ipo_in_section, search_ipo_in_mppp.",
       input: ipoInStatutesSearchSchema,
     },
     (input) => searchIpoInStatutes(clients.statutes, input),
@@ -371,7 +375,7 @@ export function registerIpoInTools(
       ...fetchedOptions,
       name: "get_ipo_in_section",
       description:
-        "Get one or more sections of the bundled Indian IP Acts by citation.\n\nAccepts free-text citations like 'Section 3(d) Patents Act' or 'Rule 71 Patent Rules'; the parser extracts the section number and statute name. Bare section numbers ('§107A') resolve when the number is unique across the bundled Acts. Pass a list for portfolio workflows; the response shape stays a list envelope with order preserved and missing citations in not_found.\n\nThe bundled corpus version is surfaced in ``provenance.corpus_version`` so agents can quote freshness.\n\nRelated tools: search_ipo_in_statutes, get_ipo_in_mppp_section.",
+        "Get one or more sections of the bundled Indian IP Acts by citation.\n\nAccepts free-text citations like 'Section 3(d) Patents Act' or 'Rule 71 Patent Rules'; the parser extracts the section number and statute name. Bare section numbers ('§107A') resolve when the number is unique across the bundled Acts. A sub-section or clause ('Section 3(d)') returns the whole enclosing section, with ``subdivision`` naming the cited part. Pass a list for portfolio workflows; the response shape stays a list envelope with order preserved and missing citations in not_found.\n\nThe bundled corpus version is surfaced in ``provenance.corpus_version`` so agents can quote freshness.\n\nRelated tools: search_ipo_in_statutes, get_ipo_in_mppp_section.",
       input: z.object({
         citation: citationInput(
           "Statute citation. Accepts: free-text form ('Section 3(d) Patents Act', 'Rule 71 Patent Rules', 'Section 25(2) of the Patents Act'); or a list of either for portfolio workflows. Examples: 'Section 3(d) Patents Act', ['Section 3(d) Patents Act', 'Section 84 Patents Act', 'Section 9 Trade Marks Act'].",
@@ -385,7 +389,7 @@ export function registerIpoInTools(
       ...listToolOptions(auth),
       name: "search_ipo_in_mppp",
       description:
-        "Search the IPO India Manual of Patent Practice & Procedure (MPPP).\n\nThe MPPP is the IPO India's internal patent examination manual — India's counterpart to the USPTO's MPEP and the UKIPO's MoPP. It explains procedural and substantive examination practice under the Patents Act, 1970 and the Patent Rules, 2003. Use ``get_ipo_in_mppp_section`` for the full text of any hit. The installed corpus is a curated set of key sections of MPPP v3.0 (2019), not the complete manual.\n\nExamples:\n  * Examination procedure:   query='first examination report'\n  * Section 3(d) practice:   query='efficacy enhancement'\n  * Working statements:      query='Form 27 working'\n  * PCT national phase:      query='national phase 31 months'\n\nRelated tools: get_ipo_in_mppp_section, search_ipo_in_statutes.",
+        "Search the IPO India Manual of Patent Practice & Procedure (MPPP).\n\nThe MPPP is the IPO India's internal patent examination manual — India's counterpart to the USPTO's MPEP and the UKIPO's MoPP. It explains procedural and substantive examination practice under the Patents Act, 1970 and the Patent Rules, 2003. Use ``get_ipo_in_mppp_section`` for the full text of any hit. The corpus holds every numbered paragraph of MPPP v3.0 (26 November 2019), plus one row per chapter for its opening text.\n\nExamples:\n  * Examination procedure:   query='first examination report'\n  * Section 3(d) practice:   query='efficacy enhancement'\n  * Working statements:      query='Form 27 working'\n  * PCT national phase:      query='national phase 31 months'\n\nRelated tools: get_ipo_in_mppp_section, search_ipo_in_statutes.",
       input: ipoInMpppSearchSchema,
     },
     (input) => searchIpoInMppp(clients.mppp, input),

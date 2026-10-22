@@ -594,7 +594,7 @@ const cases: Case[] = [
     tool: "search_legal_reference",
     args: {
       corpus: "india_statutes",
-      query: "compulsory licensing",
+      query: "compulsory licence",
       statute: "Patents Act",
     },
   },
@@ -611,7 +611,7 @@ const cases: Case[] = [
   {
     name: "india mppp section",
     tool: "get_legal_reference",
-    args: { corpus: "india_mppp", identifier: "MPPP Chapter 04.05.02" },
+    args: { corpus: "india_mppp", identifier: "MPPP 09.03.05.04" },
   },
   {
     name: "tw trade secrets search",

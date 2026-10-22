@@ -15,12 +15,13 @@ import type { SnapshotDatabase } from "./runtime/sqlite.js";
  * Readers for the two Indian Patent Office corpora: the IP statutes (Patents,
  * Designs, Trade Marks and Copyright Acts plus the Patent Rules) and the
  * Manual of Patent Office Practice and Procedure (MPPP). Both are SQLite/FTS5
- * snapshots built by the Python builders from their bundled JSON seeds.
+ * snapshots built by scripts/build-ipo-in-corpora.ts from the official texts
+ * (references/ipo-in/sources.json lists each source, version and hash).
  */
 export const IPO_IN_STATUTES_SOURCE_URL =
-  "https://indiacode.nic.in/handle/123456789";
+  "https://ipindia.gov.in/pages/home/acts-rules-ipr";
 export const IPO_IN_MPPP_PDF_URL =
-  "https://ipindia.gov.in/frontend/pdf/patents/Manual_for_Patent_Office_Practice_and_Procedure_.pdf";
+  "https://ipindia.gov.in/storage/uploads/docs-operator/e1adfe40-7af3-4180-ba04-2e0099c6dca5.pdf";
 export const IPO_IN_STATUTES_SOURCE_NAME = "IPO India — IP statutes";
 export const IPO_IN_MPPP_SOURCE_NAME =
   "IPO India Manual of Patent Practice & Procedure (MPPP)";
@@ -208,6 +209,12 @@ interface SectionBody {
 export interface IpoInSection extends SectionBody {
   statute_name: string;
   section_number: string;
+  /**
+   * Set when the citation named a sub-section or clause ("3(d)" gives "(d)").
+   * The corpus stores whole sections, so the returned text is the enclosing
+   * section and the cited subdivision lies within it.
+   */
+  subdivision?: string;
 }
 export interface IpoInMpppSection extends SectionBody {
   section_number: string;
@@ -586,22 +593,42 @@ export class IpoInStatutesClient extends IpoInCorpusReader {
   /**
    * One section by number. With a statute, that Act only; without one, the
    * number must exist in exactly one Act (IpoInCitationError lists the Acts
-   * otherwise). Section numbers match case-insensitively.
+   * otherwise). Section numbers match case-insensitively. A sub-section or
+   * clause citation ("3(d)") returns its enclosing section with `subdivision`.
    */
   async getSection(
     sectionNumber: string,
-    options: { statute?: string | null; signal?: AbortSignal } = {},
+    options: {
+      statute?: string | null;
+      /** Without a statute, look only in the Acts (a "section" is never a rule). */
+      actsOnly?: boolean;
+      signal?: AbortSignal;
+    } = {},
   ): Promise<IpoInSection> {
     const number = text(200).parse(sectionNumber).replace(/\s+/g, "");
     const statute = options.statute
       ? resolveIpoInStatute(text(200).parse(options.statute))
       : null;
     const corpus = await this.ready(options.signal);
-    const rows = this.query<StatuteRow>(
-      `SELECT statute_name, section_number, title, text, source_url FROM sections WHERE section_number = ? COLLATE NOCASE${statute ? " AND statute_name = ?" : ""} ORDER BY statute_name`,
-      statute ? [number, statute] : [number],
-      "section table",
-    );
+    const filter = statute
+      ? " AND statute_name = ?"
+      : options.actsOnly
+        ? " AND statute_name <> 'Patent Rules'"
+        : "";
+    const lookup = (value: string) =>
+      this.query<StatuteRow>(
+        `SELECT statute_name, section_number, title, text, source_url FROM sections WHERE section_number = ? COLLATE NOCASE${filter} ORDER BY statute_name`,
+        statute ? [value, statute] : [value],
+        "section table",
+      );
+    let rows = lookup(number);
+    // "3(d)" or "25(2)": whole sections are stored, so fall back to "3" / "25".
+    const parent = /^(\d+[A-Za-z]{0,3})(\(.+)$/.exec(number);
+    let subdivision: string | undefined;
+    if (!rows.length && parent) {
+      rows = lookup(parent[1] as string);
+      subdivision = parent[2] as string;
+    }
     const row = rows[0];
     if (!row)
       throw new CorpusError(
@@ -617,18 +644,24 @@ export class IpoInStatutesClient extends IpoInCorpusReader {
     return {
       statute_name: row.statute_name,
       section_number: row.section_number,
+      ...(subdivision ? { subdivision } : {}),
       ...(await this.body(row, corpus, options.signal)),
     };
   }
 
-  /** One section by free-text citation, e.g. 'Section 3(d) Patents Act'. */
+  /**
+   * One section by free-text citation, e.g. 'Section 3(d) Patents Act'. A
+   * "Section"/"§"/"S." citation without an Act never matches a Patent Rule.
+   */
   async getSectionByCitation(
     citation: string,
     options: { signal?: AbortSignal } = {},
   ): Promise<IpoInSection> {
-    const parsed = parseIpoInCitation(text(500).parse(citation));
+    const value = text(500).parse(citation);
+    const parsed = parseIpoInCitation(value);
     return this.getSection(parsed.section_number, {
       statute: parsed.statute_name,
+      actsOnly: /^\s*(?:section\b|sec\.|s\.|s\s|§)/i.test(value),
       ...(options.signal ? { signal: options.signal } : {}),
     });
   }

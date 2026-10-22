@@ -60,7 +60,7 @@ try {
   const india = new IpoInMpppClient({
     source: () => bytes("/fixtures/ipo-in/ipo_in_mppp.db"),
   });
-  results.ipo_in_mppp = (await india.getSection("MPPP 4.5.1")).section_number;
+  results.ipo_in_mppp = (await india.getSection("MPPP 9.3.5.4")).section_number;
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

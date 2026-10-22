@@ -1,0 +1,1489 @@
+{
+  "description": "Official sources of the IPO India statutes and MPPP corpora. Raw files are archived gzipped under typescript/.data/ipo-in/sources/<path>.gz (not committed); sha256 and bytes are of the raw file.",
+  "access_notes": [
+    "2026-10-22: www.indiacode.nic.in (Akamai) answered HTTP 403 Access Denied to plain GETs with this user agent for the handle page, the site root and a bitstream PDF; www.legislative.gov.in answered 403 too. No other access method was tried.",
+    "ipindia.gov.in publishes consolidated text for the Patents Act (PDF, amendments till 01-08-2024) and an e-Version of the Patents Rules and the Designs Act, but for the Trade Marks Act only the 1999 text and the 2010 amending Act, so the Trade Marks and Copyright Acts come from WIPO Lex's republication of the India Code consolidations.",
+    "The ipindia Patents Act e-Version (HTML) was not used: it lacks sections 124A/124B and still shows section 121, which the Jan Vishwas Act changed with effect from 01-08-2024."
+  ],
+  "user_agent": "patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)",
+  "extractor": {
+    "pdf": "pdfjs-dist 4.10.38"
+  },
+  "documents": [
+    {
+      "id": "patents_act",
+      "title": "The Patents Act, 1970 (incorporating all amendments till 01-08-2024)",
+      "version": "Consolidated text incorporating all amendments till 01-08-2024 (through the Jan Vishwas (Amendment of Provisions) Act, 2023, w.e.f. 01-08-2024)",
+      "publisher": "Office of the Controller General of Patents, Designs and Trade Marks (ipindia.gov.in)",
+      "listing_url": "https://ipindia.gov.in/resource/patents-resources-act",
+      "files": [
+        {
+          "path": "patents-act-1970.pdf",
+          "url": "https://ipindia.gov.in/storage/uploads/docs-operator/73b5bf10-b04e-4f45-abef-87ff117315dc.pdf",
+          "retrieved_at": "2026-10-22T12:05:57Z",
+          "sha256": "d57084888c69d70b16ed6a52a612363a526994203effa58880a26faaaa6e0678",
+          "bytes": 665996
+        }
+      ]
+    },
+    {
+      "id": "patent_rules",
+      "title": "The Patents Rules, 2003 (e-Version) with Chapter XIV-A as substituted by the Patents (Amendment) Rules, 2025",
+      "version": "ipindia.gov.in e-Version (HTML) 'updated till 01-08-2024' for rules 1-139; Chapter XIV-A (rules 107A-107G) from the Patents (Amendment) Rules, 2025, G.S.R. 865(E), Gazette of India Extraordinary, 25 November 2025, which substituted the whole chapter",
+      "publisher": "Office of the Controller General of Patents, Designs and Trade Marks (ipindia.gov.in)",
+      "listing_url": "https://ipindia.gov.in/resource/patents-resources-rules",
+      "files": [
+        {
+          "path": "patent-rules-2003/index.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003",
+          "retrieved_at": "2026-10-22T12:06:00Z",
+          "sha256": "8a0a5ced1a689fd61cff5085d7f8b087d22d647efddfa1654823c19fa443f15c",
+          "bytes": 407098
+        },
+        {
+          "path": "patent-rules-2003/rule-1-2.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-1-2",
+          "retrieved_at": "2026-10-22T12:06:02Z",
+          "sha256": "8deb5b63bb5a40929e10f8b4869ea108b9ada40af20351b669fe99cc730ccb85",
+          "bytes": 216807
+        },
+        {
+          "path": "patent-rules-2003/rule-2.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-2",
+          "retrieved_at": "2026-10-22T12:06:04Z",
+          "sha256": "7c3a68d51ab2f8b5781d49fb5333cdda8f08980fed8fa08bc367710d652876e1",
+          "bytes": 220173
+        },
+        {
+          "path": "patent-rules-2003/rule-3.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-3",
+          "retrieved_at": "2026-10-22T12:06:06Z",
+          "sha256": "26b8639acbc1ea01fabd5164c6ac975996a07676066ca08aef5d2adfb2aacd58",
+          "bytes": 217120
+        },
+        {
+          "path": "patent-rules-2003/rule-4.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-4",
+          "retrieved_at": "2026-10-22T12:06:07Z",
+          "sha256": "888b00e2882356ed970e049c9f4bd3c99f31cfefaeab9522a688d6fbb00de046",
+          "bytes": 218565
+        },
+        {
+          "path": "patent-rules-2003/rule-5.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-5",
+          "retrieved_at": "2026-10-22T12:06:09Z",
+          "sha256": "5566ebf6ae3dc5f7735125d65917bad6cad898dce2e63a9c8f858691d3bb7f1b",
+          "bytes": 217684
+        },
+        {
+          "path": "patent-rules-2003/rule-6.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-6",
+          "retrieved_at": "2026-10-22T12:06:10Z",
+          "sha256": "6146d47fcd6e2093bd91acd00a1a22a0c40f4b9fe6057a077404f36886f8e48e",
+          "bytes": 221865
+        },
+        {
+          "path": "patent-rules-2003/rule-7.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-7",
+          "retrieved_at": "2026-10-22T12:06:12Z",
+          "sha256": "cdba03f977086fafd4ddcc0432ff7a6b795b05d8e37d1aca7627030cd39196ce",
+          "bytes": 220915
+        },
+        {
+          "path": "patent-rules-2003/rule-8.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-8",
+          "retrieved_at": "2026-10-22T12:06:13Z",
+          "sha256": "a592d6fa822e5e09ae58377950dfd9e3c1dd4b00bf23fae3f881eace370cfb80",
+          "bytes": 217156
+        },
+        {
+          "path": "patent-rules-2003/rule-8-2.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-8-2",
+          "retrieved_at": "2026-10-22T12:06:15Z",
+          "sha256": "ac39448cfac8972e17f6359b881d23bf852e0a23195286750eca0ac2a8f4621f",
+          "bytes": 218966
+        },
+        {
+          "path": "patent-rules-2003/rule-10.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-10",
+          "retrieved_at": "2026-10-22T12:06:16Z",
+          "sha256": "1996c5990eda6a7e3edd91104fa857fd9301efbe8bf0b80e4e6e70ec7cd961ca",
+          "bytes": 217625
+        },
+        {
+          "path": "patent-rules-2003/rule-11.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-11",
+          "retrieved_at": "2026-10-22T12:06:18Z",
+          "sha256": "478173b0979888491fc1bb8549cc294e70a3393fffa17861eef334f556bac205",
+          "bytes": 217330
+        },
+        {
+          "path": "patent-rules-2003/rule-12.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-12",
+          "retrieved_at": "2026-10-22T12:06:20Z",
+          "sha256": "f035360d904dc96eca69188e43f0546e37fc8bed917a350641abaf13870bc6b1",
+          "bytes": 218624
+        },
+        {
+          "path": "patent-rules-2003/rule-13.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-13",
+          "retrieved_at": "2026-10-22T12:06:21Z",
+          "sha256": "dcd40567bb3ea0d37491b5481a797b2d0360e6c8981840028c4d5d017f746729",
+          "bytes": 221502
+        },
+        {
+          "path": "patent-rules-2003/rule-14.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-14",
+          "retrieved_at": "2026-10-22T12:06:23Z",
+          "sha256": "902418b3049cbfc5308aa6ff314fe98860a4b6d0376b0aee4ad6fc9248db166c",
+          "bytes": 217723
+        },
+        {
+          "path": "patent-rules-2003/rule-15.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-15",
+          "retrieved_at": "2026-10-22T12:06:24Z",
+          "sha256": "3b36531414e7eb49ee83d3f49ade02e5fe478afcfd065202d15b168bd90da3fc",
+          "bytes": 218133
+        },
+        {
+          "path": "patent-rules-2003/rule-16.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-16",
+          "retrieved_at": "2026-10-22T12:06:26Z",
+          "sha256": "bd99d5945dfab491ddd34fb76135b19d6c4cf1904684ac91871d79b5d960f308",
+          "bytes": 217036
+        },
+        {
+          "path": "patent-rules-2003/rule-17.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-17",
+          "retrieved_at": "2026-10-22T12:06:27Z",
+          "sha256": "72f1442d904bdcdbb290bba384489d8e17617de12497f5c5e26f936bb27196fc",
+          "bytes": 217739
+        },
+        {
+          "path": "patent-rules-2003/rule-18.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-18",
+          "retrieved_at": "2026-10-22T12:06:29Z",
+          "sha256": "81584b7e5597881bafc2258790d476cf2412b014e6f4d11eb6b6f61f85a5c015",
+          "bytes": 218254
+        },
+        {
+          "path": "patent-rules-2003/rule-19.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19",
+          "retrieved_at": "2026-10-22T12:06:31Z",
+          "sha256": "9ba8d676bccc0df1dbe0cb5d4d2b9820d0f7624f42077220bae78055deddb1d8",
+          "bytes": 217900
+        },
+        {
+          "path": "patent-rules-2003/rule-19a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19a",
+          "retrieved_at": "2026-10-22T12:06:32Z",
+          "sha256": "2c625fcc687bf7c28b4fbc3a7b0e77ceff408162748ebaec075b80ccb8089921",
+          "bytes": 217725
+        },
+        {
+          "path": "patent-rules-2003/rule-19b.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19b",
+          "retrieved_at": "2026-10-22T12:06:34Z",
+          "sha256": "2cddf606fc8e9d516dbf1715d87cc9f14b6ea38114bfae179925acd8a10062e8",
+          "bytes": 221672
+        },
+        {
+          "path": "patent-rules-2003/rule-19c.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19c",
+          "retrieved_at": "2026-10-22T12:06:36Z",
+          "sha256": "faeae342b0d89f804ca062c6601d255d6b38cad2adea3fa25b63cab48873046a",
+          "bytes": 217381
+        },
+        {
+          "path": "patent-rules-2003/rule-19d.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19d",
+          "retrieved_at": "2026-10-22T12:06:37Z",
+          "sha256": "37a15bdf26d6575c4797b5b42ace6ea65f3a441db7512ff45ea2b490baff5d52",
+          "bytes": 217362
+        },
+        {
+          "path": "patent-rules-2003/rule-19e.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19e",
+          "retrieved_at": "2026-10-22T12:06:39Z",
+          "sha256": "0cddeed17f9620bf62bd944526d4d8dc70deb7948cc59a1c8461b0a2fc628888",
+          "bytes": 217134
+        },
+        {
+          "path": "patent-rules-2003/rule-19f.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19f",
+          "retrieved_at": "2026-10-22T12:06:41Z",
+          "sha256": "ad42d4d27e7f2b2b3ab42e0b1a85a7d8d8a31def321a99b8b8532fb4e9aacd19",
+          "bytes": 218007
+        },
+        {
+          "path": "patent-rules-2003/rule-19g.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19g",
+          "retrieved_at": "2026-10-22T12:06:42Z",
+          "sha256": "3c691efcc59f0da7c3ad23505405d2e0a5732556f97b34386808aeb03207b33c",
+          "bytes": 217348
+        },
+        {
+          "path": "patent-rules-2003/rule-19h.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19h",
+          "retrieved_at": "2026-10-22T12:06:44Z",
+          "sha256": "8f94252f958cc0635ec11dc6dc8343e9c9aea38cee79072c67e1a9dd5c1c8c77",
+          "bytes": 217164
+        },
+        {
+          "path": "patent-rules-2003/rule-19i.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19i",
+          "retrieved_at": "2026-10-22T12:06:45Z",
+          "sha256": "ffb7111d99400d538934761932fa68fd7cbea6ba44aab9c219e27583d64aa2bf",
+          "bytes": 217120
+        },
+        {
+          "path": "patent-rules-2003/rule-19j.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19j",
+          "retrieved_at": "2026-10-22T12:06:47Z",
+          "sha256": "09af13fc7998426af8f1e981e8a5ebcecb6bf25ef6907fa1ef789b27da8fa714",
+          "bytes": 217545
+        },
+        {
+          "path": "patent-rules-2003/rule-19k.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19k",
+          "retrieved_at": "2026-10-22T12:06:48Z",
+          "sha256": "69980770a6c22fa1fac32a662ae092053422515c9d40c735d207edfa83f907ff",
+          "bytes": 220750
+        },
+        {
+          "path": "patent-rules-2003/rule-19l.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19l",
+          "retrieved_at": "2026-10-22T12:06:50Z",
+          "sha256": "5efedc2d3c44d522f658dad0bfdd17eea58c1e12516af5386dac53690256a054",
+          "bytes": 217543
+        },
+        {
+          "path": "patent-rules-2003/rule-19m.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19m",
+          "retrieved_at": "2026-10-22T12:06:52Z",
+          "sha256": "e3a41bd45f7748b69c014e99197ab71d6f8bcfc47140a8dc58bc03c04e140d38",
+          "bytes": 217230
+        },
+        {
+          "path": "patent-rules-2003/rule-19n.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-19n",
+          "retrieved_at": "2026-10-22T12:06:53Z",
+          "sha256": "efc7dde84266796625a5a86e9305196faf329b19d89dacafa7bf331ae0159b84",
+          "bytes": 217263
+        },
+        {
+          "path": "patent-rules-2003/rule-20.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-20",
+          "retrieved_at": "2026-10-22T12:06:55Z",
+          "sha256": "2ecda904ca56ad1451985b92208bd1b6b07b3a3009f37761bb01c7ba5c8a3cb0",
+          "bytes": 220674
+        },
+        {
+          "path": "patent-rules-2003/rule-21.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-21",
+          "retrieved_at": "2026-10-22T12:06:56Z",
+          "sha256": "97d459d6b9599fba5c721a9713faf94efe507e8baf873d1c3233db0e743a31c8",
+          "bytes": 218248
+        },
+        {
+          "path": "patent-rules-2003/rule-22.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-22",
+          "retrieved_at": "2026-10-22T12:06:58Z",
+          "sha256": "1e31da7080291f1827b217cedd421fbb415da0a40dcedf6968d8c625f4d48795",
+          "bytes": 217155
+        },
+        {
+          "path": "patent-rules-2003/rule-23.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-23",
+          "retrieved_at": "2026-10-22T12:07:00Z",
+          "sha256": "4b747fd9a4ac2967afb02f56139cfa78e1e22de618932c54e6732e1093b52377",
+          "bytes": 217926
+        },
+        {
+          "path": "patent-rules-2003/rule-24.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-24",
+          "retrieved_at": "2026-10-22T12:07:01Z",
+          "sha256": "a80272dd17aae1720f443f0d1663253d927e93faa3e472a486cbc8566054ec0a",
+          "bytes": 217455
+        },
+        {
+          "path": "patent-rules-2003/rule-24a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-24a",
+          "retrieved_at": "2026-10-22T12:07:03Z",
+          "sha256": "aae82a0dad8cebefdc6178af011689157ed791b45cbf219442a62fdc17a83c90",
+          "bytes": 217087
+        },
+        {
+          "path": "patent-rules-2003/rule-24b.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-24b",
+          "retrieved_at": "2026-10-22T12:07:04Z",
+          "sha256": "9c55e2de8df1fa461ae87fc110971e26b0500e97577f16f31ed5f9e93d5d8ae6",
+          "bytes": 221393
+        },
+        {
+          "path": "patent-rules-2003/rule-24c.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-24c",
+          "retrieved_at": "2026-10-22T12:07:06Z",
+          "sha256": "7b4125b32f1a7934b6ac95c3fcee9783793b152bebb6b4dff531abe5f979f186",
+          "bytes": 222968
+        },
+        {
+          "path": "patent-rules-2003/rule-25.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-25",
+          "retrieved_at": "2026-10-22T12:07:08Z",
+          "sha256": "40f897563c800bbc791852c7985d211ad54bed7cc17db45116d83d2f72c44e08",
+          "bytes": 217180
+        },
+        {
+          "path": "patent-rules-2003/rule-26.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-26",
+          "retrieved_at": "2026-10-22T12:07:09Z",
+          "sha256": "5bc87ba71db70e2dcbf5930a164ab4354e8a9d5f09d8d0aeaa6c330f08b18e94",
+          "bytes": 217100
+        },
+        {
+          "path": "patent-rules-2003/rule-27.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-27",
+          "retrieved_at": "2026-10-22T12:07:11Z",
+          "sha256": "e7d5093a7d76287341416c2df370f8ce38412e7a42e02394e5ab7b5cad79569d",
+          "bytes": 217487
+        },
+        {
+          "path": "patent-rules-2003/rule-28.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-28",
+          "retrieved_at": "2026-10-22T12:07:12Z",
+          "sha256": "cb4b7c6bf505d45752e81be93e5a095dcc18296e8aa5ce7fa5ffdca7265b7112",
+          "bytes": 219867
+        },
+        {
+          "path": "patent-rules-2003/rule-28a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-28a",
+          "retrieved_at": "2026-10-22T12:07:14Z",
+          "sha256": "dd163d543f5872ec26af7c9614f8d39c29439a1db6a08a0dfb083da9327d18c5",
+          "bytes": 217175
+        },
+        {
+          "path": "patent-rules-2003/rule-29.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-29",
+          "retrieved_at": "2026-10-22T12:07:15Z",
+          "sha256": "90350fbf4dd098480a550c9232b2ddafcf6f27b61f9de9e8f938659ac4d4cf77",
+          "bytes": 217602
+        },
+        {
+          "path": "patent-rules-2003/rule-29a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-29a",
+          "retrieved_at": "2026-10-22T12:07:17Z",
+          "sha256": "9623c46b5e7246069289e42f1ba069faae3a672160bf64086daf233c03d95b83",
+          "bytes": 217129
+        },
+        {
+          "path": "patent-rules-2003/rule-30.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-30",
+          "retrieved_at": "2026-10-22T12:07:18Z",
+          "sha256": "98cd92486a1963a5bac2f8b96e2c1d33ab3b876247fdc0df08654b724f327b0d",
+          "bytes": 217922
+        },
+        {
+          "path": "patent-rules-2003/rule-31.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-31",
+          "retrieved_at": "2026-10-22T12:07:20Z",
+          "sha256": "08148cf528673250fa84fb50affc48d9a1291790c2af30f7913a979b1ab01b90",
+          "bytes": 217438
+        },
+        {
+          "path": "patent-rules-2003/rule-32.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-32",
+          "retrieved_at": "2026-10-22T12:07:22Z",
+          "sha256": "fcf7216b4aeff58018ceb507baab980d6565bba0f1d8b0358ffc523334d273af",
+          "bytes": 217373
+        },
+        {
+          "path": "patent-rules-2003/rule-33.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-33",
+          "retrieved_at": "2026-10-22T12:07:23Z",
+          "sha256": "c60a3c0256c3a69c153c55aba78f2d6652db19139c909fad50225cd1d94bd1bd",
+          "bytes": 217372
+        },
+        {
+          "path": "patent-rules-2003/rule-34.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-34",
+          "retrieved_at": "2026-10-22T12:07:25Z",
+          "sha256": "9a7f559d340c9a405fb1038615eb9d04557c516b4ec150098c0d7bf48848f149",
+          "bytes": 217355
+        },
+        {
+          "path": "patent-rules-2003/rule-35.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-35",
+          "retrieved_at": "2026-10-22T12:07:26Z",
+          "sha256": "60880f026cf4825ed24958192d53177f55516224e6ef06084c0b85ba935b4887",
+          "bytes": 217439
+        },
+        {
+          "path": "patent-rules-2003/rule-36.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-36",
+          "retrieved_at": "2026-10-22T12:07:28Z",
+          "sha256": "f81b9c5760f797ac80a536027ddffc7ad7965cd21b3b9a6e9f60559e5f0c51f6",
+          "bytes": 217365
+        },
+        {
+          "path": "patent-rules-2003/rule-37.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-37",
+          "retrieved_at": "2026-10-22T12:07:29Z",
+          "sha256": "3f762b6a7731d9c27f422c12456bee7f2e3471b1533ede88dda79a20a8f900e8",
+          "bytes": 217270
+        },
+        {
+          "path": "patent-rules-2003/rule-38.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-38",
+          "retrieved_at": "2026-10-22T12:07:31Z",
+          "sha256": "936f606e92b7900bc9d09731d30d47bf6afeb0c864bd349f1b79f349a5110397",
+          "bytes": 216957
+        },
+        {
+          "path": "patent-rules-2003/rule-55.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-55",
+          "retrieved_at": "2026-10-22T12:07:33Z",
+          "sha256": "735690cfb22bd5a732ef68cfa5a23badfaa83784538d050de458fea62933cc11",
+          "bytes": 219891
+        },
+        {
+          "path": "patent-rules-2003/rule-55a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-55a",
+          "retrieved_at": "2026-10-22T12:07:35Z",
+          "sha256": "0dcabe391d42a62d03439154bd383bd38497faf7b87bfcff9dfad27333a59e72",
+          "bytes": 217167
+        },
+        {
+          "path": "patent-rules-2003/rule-56.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-56",
+          "retrieved_at": "2026-10-22T12:07:36Z",
+          "sha256": "2dac9bf479f8379f74d97262f60262d94c02e7b89b60ee33d4210cdaf2ac7ffa",
+          "bytes": 217971
+        },
+        {
+          "path": "patent-rules-2003/rule-57.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-57",
+          "retrieved_at": "2026-10-22T12:07:38Z",
+          "sha256": "c5da403bf33e21b1d45e076d41322ef16637b87f4a376c23782ff7286187f001",
+          "bytes": 217339
+        },
+        {
+          "path": "patent-rules-2003/rule-58.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-58",
+          "retrieved_at": "2026-10-22T12:07:39Z",
+          "sha256": "6f54806d292bc603ff1f6fcf15de151286a54e4bc7997e8c8803e1229d0ce878",
+          "bytes": 217612
+        },
+        {
+          "path": "patent-rules-2003/rule-59.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-59",
+          "retrieved_at": "2026-10-22T12:07:41Z",
+          "sha256": "b627557f269b8f5e9e4e71cfbd95ef3b1f7a73fce77aee474317d9bb5a8e0339",
+          "bytes": 217312
+        },
+        {
+          "path": "patent-rules-2003/rule-60.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-60",
+          "retrieved_at": "2026-10-22T12:07:43Z",
+          "sha256": "1d1eca3fa789a611ed070deedd088c300bbdf205be9947a9ea5b8a81ae5b1b8b",
+          "bytes": 217271
+        },
+        {
+          "path": "patent-rules-2003/rule-61.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-61",
+          "retrieved_at": "2026-10-22T12:07:44Z",
+          "sha256": "7843f2fcf4dc122fcf8d785777fd24b584c72a3d1479f48a4e0e16efffb7a933",
+          "bytes": 217567
+        },
+        {
+          "path": "patent-rules-2003/rule-62.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-62",
+          "retrieved_at": "2026-10-22T12:07:46Z",
+          "sha256": "80d53c3100ee13b295e5001e8ae0c47c2e494de59f276077735768333a1fae55",
+          "bytes": 218239
+        },
+        {
+          "path": "patent-rules-2003/rule-63.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-63",
+          "retrieved_at": "2026-10-22T12:07:47Z",
+          "sha256": "fb334bed3bd4750745aa5d18a35594bfc48ae515a426864197025528ff96ac9a",
+          "bytes": 217223
+        },
+        {
+          "path": "patent-rules-2003/rule-63a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-63a",
+          "retrieved_at": "2026-10-22T12:07:49Z",
+          "sha256": "b93068166d66727489f5f0b5d4ac302cf218a209acfe7bcf4db3b285e7999ff2",
+          "bytes": 217260
+        },
+        {
+          "path": "patent-rules-2003/rule-66.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-66",
+          "retrieved_at": "2026-10-22T12:07:50Z",
+          "sha256": "ae6288abf76c6c2d47707028175854acd4df81c4928f493dba6810b9cad732ed",
+          "bytes": 217089
+        },
+        {
+          "path": "patent-rules-2003/rule-67.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-67",
+          "retrieved_at": "2026-10-22T12:07:52Z",
+          "sha256": "e9ae9d91e0653264dd9bfd7107096b7026a005cf8236abf23149cfdde434fac9",
+          "bytes": 217435
+        },
+        {
+          "path": "patent-rules-2003/rule-68.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-68",
+          "retrieved_at": "2026-10-22T12:07:54Z",
+          "sha256": "9e2f4b7f63f9de702c9b87c747da001e91bf5305a278b02c07796edf163e5df9",
+          "bytes": 217468
+        },
+        {
+          "path": "patent-rules-2003/rule-69.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-69",
+          "retrieved_at": "2026-10-22T12:07:55Z",
+          "sha256": "497c0ee494f19eda8b8b1084b50208598ff27b408a3b3328003ee6eddd375c1f",
+          "bytes": 217487
+        },
+        {
+          "path": "patent-rules-2003/rule-70.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-70",
+          "retrieved_at": "2026-10-22T12:07:57Z",
+          "sha256": "a024e39071816d4db308b7fd1c0106028c3ccb58e330eb60b8b7b7b84707e641",
+          "bytes": 217288
+        },
+        {
+          "path": "patent-rules-2003/rule-70a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-70a",
+          "retrieved_at": "2026-10-22T12:07:58Z",
+          "sha256": "7389734061bb71aaeba2d59e54eb94c7e8b0cc998656059638eaa7001226615c",
+          "bytes": 217604
+        },
+        {
+          "path": "patent-rules-2003/rule-71.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-71",
+          "retrieved_at": "2026-10-22T12:08:00Z",
+          "sha256": "5bde12afdedc9ba8b1c7175b7937c8ad9f2bf3b4b4e7386cbcfb8f3460776b3b",
+          "bytes": 217470
+        },
+        {
+          "path": "patent-rules-2003/rule-72.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-72",
+          "retrieved_at": "2026-10-22T12:08:02Z",
+          "sha256": "dd83e369efbe84bfd51d91dcb68d2df0cd1eb360875b0879644705a5d67c04e2",
+          "bytes": 217559
+        },
+        {
+          "path": "patent-rules-2003/rule-73.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-73",
+          "retrieved_at": "2026-10-22T12:08:03Z",
+          "sha256": "ec046deb60cbe98e322d754267c87bf172e4a9aaa40509e55dee537fcd5b5fb4",
+          "bytes": 217016
+        },
+        {
+          "path": "patent-rules-2003/rule-74.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-74",
+          "retrieved_at": "2026-10-22T12:08:05Z",
+          "sha256": "32047e3bd121b4e986d6e5cf9ab549e8729856ca538dbe6021123a752dd0fc95",
+          "bytes": 217322
+        },
+        {
+          "path": "patent-rules-2003/rule-74a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-74a",
+          "retrieved_at": "2026-10-22T12:08:06Z",
+          "sha256": "5bd988856fa6a1ec494f6c458c35cec4230bfa60b935977990f343ac6dab0948",
+          "bytes": 217370
+        },
+        {
+          "path": "patent-rules-2003/rule-75.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-75",
+          "retrieved_at": "2026-10-22T12:08:08Z",
+          "sha256": "55ca60467c84a49e95effc837f973814ea353ce8fd4db4212fb3e77199a5a746",
+          "bytes": 217109
+        },
+        {
+          "path": "patent-rules-2003/rule-76.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-76",
+          "retrieved_at": "2026-10-22T12:08:09Z",
+          "sha256": "475cd151b1ead2bad15d038b616ba9b8d264607471a5b6fea614953bbc1d6a8f",
+          "bytes": 217357
+        },
+        {
+          "path": "patent-rules-2003/rule-77.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-77",
+          "retrieved_at": "2026-10-22T12:08:11Z",
+          "sha256": "07672d173aa2c0605bf8c115ca99c007ab8b30c169147a1c777006816ee43a64",
+          "bytes": 217292
+        },
+        {
+          "path": "patent-rules-2003/rule-78.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-78",
+          "retrieved_at": "2026-10-22T12:08:13Z",
+          "sha256": "0bdaab1b37171da699a9da3f696a26c84f0ed9aa684da70ea5122d562703355f",
+          "bytes": 217285
+        },
+        {
+          "path": "patent-rules-2003/rule-79.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-79",
+          "retrieved_at": "2026-10-22T12:08:14Z",
+          "sha256": "208169450ed41400cf299965f5c84942ba2abdc9b55107e539c89dd96e1f3128",
+          "bytes": 217644
+        },
+        {
+          "path": "patent-rules-2003/rule-80.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-80",
+          "retrieved_at": "2026-10-22T12:08:16Z",
+          "sha256": "80a9915711a1ad1f358db213b314ee77c84e3db6ca7b75827dd02a978010c35c",
+          "bytes": 217942
+        },
+        {
+          "path": "patent-rules-2003/rule-81.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-81",
+          "retrieved_at": "2026-10-22T12:08:17Z",
+          "sha256": "8b3bc67ee8a3a368487e7522c50f0f0117cbb9553f99692dc91720548795c9e2",
+          "bytes": 218225
+        },
+        {
+          "path": "patent-rules-2003/rule-82.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-82",
+          "retrieved_at": "2026-10-22T12:08:19Z",
+          "sha256": "fd807ae14f778c906f2781b4fcdcc7c5d109647b9dacc6c0dba5c2ff5ad88b42",
+          "bytes": 217428
+        },
+        {
+          "path": "patent-rules-2003/rule-83.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-83",
+          "retrieved_at": "2026-10-22T12:08:21Z",
+          "sha256": "df29d2da9af720ce5e498d9db5218e58d753f918ba3260d1f93980a60ecd39b6",
+          "bytes": 217109
+        },
+        {
+          "path": "patent-rules-2003/rule-84.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-84",
+          "retrieved_at": "2026-10-22T12:08:22Z",
+          "sha256": "85e979e1f58a02aa9a9e5ead8a23bd7c38e9dea985ef398029b67c6b9a13b9d8",
+          "bytes": 217704
+        },
+        {
+          "path": "patent-rules-2003/rule-85.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-85",
+          "retrieved_at": "2026-10-22T12:08:24Z",
+          "sha256": "9137347fdc45adf471cf3d4335d9c9d11ac935c95a7f9c52e844deddcb2b58e3",
+          "bytes": 217557
+        },
+        {
+          "path": "patent-rules-2003/rule-86.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-86",
+          "retrieved_at": "2026-10-22T12:08:25Z",
+          "sha256": "917d49c3c8d0d808d41349d3d1fd625da7677113b8eb844fd58fe736554587f5",
+          "bytes": 217316
+        },
+        {
+          "path": "patent-rules-2003/rule-87.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-87",
+          "retrieved_at": "2026-10-22T12:08:27Z",
+          "sha256": "94c3e9b2e8fa9b550a39c8847b5b8e70f5aac75706f94c6363101aef96c19d13",
+          "bytes": 217742
+        },
+        {
+          "path": "patent-rules-2003/rule-88.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-88",
+          "retrieved_at": "2026-10-22T12:08:29Z",
+          "sha256": "324aaa84cd2e56efe315c968d8ef032ed5c82f0dfc23f8d42d0a66a6f4177805",
+          "bytes": 217941
+        },
+        {
+          "path": "patent-rules-2003/rule-89.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-89",
+          "retrieved_at": "2026-10-22T12:08:30Z",
+          "sha256": "e894dc02188b3f2059f49dc3e2bfec2608dacce119fbcabd7abe509530f8ad96",
+          "bytes": 217023
+        },
+        {
+          "path": "patent-rules-2003/rule-90.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-90",
+          "retrieved_at": "2026-10-22T12:08:32Z",
+          "sha256": "3c571cb22cb4b157f0b276d39470d416e70bbd9db49fe9bc8c98d5b3d99424ed",
+          "bytes": 217325
+        },
+        {
+          "path": "patent-rules-2003/rule-91.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-91",
+          "retrieved_at": "2026-10-22T12:08:34Z",
+          "sha256": "5b1b78c09fbe05e027152a937aabde62fdfce7cb9cc1ebd7b4b84a7982bafe0a",
+          "bytes": 217524
+        },
+        {
+          "path": "patent-rules-2003/rule-92.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-92",
+          "retrieved_at": "2026-10-22T12:08:36Z",
+          "sha256": "9eb4e436bd3cec925bef0eea299306169f8ac346784c4648b0141e80391eefd3",
+          "bytes": 217625
+        },
+        {
+          "path": "patent-rules-2003/rule-93.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-93",
+          "retrieved_at": "2026-10-22T12:08:37Z",
+          "sha256": "4d405e7737221be3751bb3784bfa137987094062ff64d906df14818fb6308273",
+          "bytes": 217204
+        },
+        {
+          "path": "patent-rules-2003/rule-94.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-94",
+          "retrieved_at": "2026-10-22T12:08:39Z",
+          "sha256": "52293dcf8d98b2f8b26be469e68070dc7a4b0f1e41d711d00f594d008d079283",
+          "bytes": 217754
+        },
+        {
+          "path": "patent-rules-2003/rule-95.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-95",
+          "retrieved_at": "2026-10-22T12:08:40Z",
+          "sha256": "0fecd98d6b956ef4bc2e60d63cbd24bbfedf565902a40568df4389b2b23843af",
+          "bytes": 217479
+        },
+        {
+          "path": "patent-rules-2003/rule-96.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-96",
+          "retrieved_at": "2026-10-22T12:08:42Z",
+          "sha256": "2a116db4a582cd4593236fbad222a143f5e58da96aa138c3e01095622e18dc4b",
+          "bytes": 217396
+        },
+        {
+          "path": "patent-rules-2003/rule-97.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-97",
+          "retrieved_at": "2026-10-22T12:08:44Z",
+          "sha256": "655a270096889ae3bf5b04542f347370ff2ede7003df140c8f5757f607a518b2",
+          "bytes": 217681
+        },
+        {
+          "path": "patent-rules-2003/rule-98.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-98",
+          "retrieved_at": "2026-10-22T12:08:45Z",
+          "sha256": "384a2bd899518a02e58f86a45157c0d392ca801b0cf5b4f610d4124df8edbd1f",
+          "bytes": 218181
+        },
+        {
+          "path": "patent-rules-2003/rule-99.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-99",
+          "retrieved_at": "2026-10-22T12:08:47Z",
+          "sha256": "ea4fde445369ff5eeae58b80f6c96107ed9a0dd459367c49b1f1f1eb8035f215",
+          "bytes": 217129
+        },
+        {
+          "path": "patent-rules-2003/rule-100.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-100",
+          "retrieved_at": "2026-10-22T12:08:48Z",
+          "sha256": "14141e89929d55dbd8f221a00020a90e4280f7eaaa1632e9dd116505e940a773",
+          "bytes": 217842
+        },
+        {
+          "path": "patent-rules-2003/rule-101.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-101",
+          "retrieved_at": "2026-10-22T12:08:50Z",
+          "sha256": "35e25ce1dfa531b08b23413a0f0bce564360723199519e7b7a22dfe9ad2674b2",
+          "bytes": 218898
+        },
+        {
+          "path": "patent-rules-2003/rule-102.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-102",
+          "retrieved_at": "2026-10-22T12:08:51Z",
+          "sha256": "111baa51fcb8f31d59e8aca494507fe4c27306dd02cd2499e7483d359e49fd61",
+          "bytes": 218543
+        },
+        {
+          "path": "patent-rules-2003/rule-103.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-103",
+          "retrieved_at": "2026-10-22T12:08:53Z",
+          "sha256": "ee66188f7feb450900575b2110c6119936dfa6074bebed92491fc28e97582e73",
+          "bytes": 218103
+        },
+        {
+          "path": "patent-rules-2003/rule-103a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-103a",
+          "retrieved_at": "2026-10-22T12:08:55Z",
+          "sha256": "bba9779c11b10f8058ecaeef78e110365a6cd1ac51c30726c255cfbd9ed1b107",
+          "bytes": 217790
+        },
+        {
+          "path": "patent-rules-2003/rule-104.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-104",
+          "retrieved_at": "2026-10-22T12:08:56Z",
+          "sha256": "e302bf5b96309adf4ea1ff57a7d8a4d5ec5e49305be23f923adbc29da5faa4fc",
+          "bytes": 217140
+        },
+        {
+          "path": "patent-rules-2003/rule-105.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-105",
+          "retrieved_at": "2026-10-22T12:08:58Z",
+          "sha256": "85091c68c7d1e5c9cd5d51292684974b1557fa0abc9bc810148126c55211258f",
+          "bytes": 217282
+        },
+        {
+          "path": "patent-rules-2003/rule-106.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-106",
+          "retrieved_at": "2026-10-22T12:08:59Z",
+          "sha256": "d68974f386d11e8c9fb18fa615ba9a52efea99c74a3ff08edf1924f382de4618",
+          "bytes": 217226
+        },
+        {
+          "path": "patent-rules-2003/rule-107.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-107",
+          "retrieved_at": "2026-10-22T12:09:01Z",
+          "sha256": "e645da97fc5a8766710386640aff009883dc0126fed44ccf76e6530355a30e38",
+          "bytes": 217825
+        },
+        {
+          "path": "patent-rules-2003/rule-108.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-108",
+          "retrieved_at": "2026-10-22T12:09:03Z",
+          "sha256": "2dfb334dfc1b2515117ff1f3892d8072cf9e36e14bd4b409d508f928551da54c",
+          "bytes": 217971
+        },
+        {
+          "path": "patent-rules-2003/rule-109.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-109",
+          "retrieved_at": "2026-10-22T12:09:05Z",
+          "sha256": "5648a8c6bdf57b2340074e49d409a6b0e79daaf06dab5f67f5fc6e97cc364114",
+          "bytes": 217454
+        },
+        {
+          "path": "patent-rules-2003/rule-110.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-110",
+          "retrieved_at": "2026-10-22T12:09:06Z",
+          "sha256": "b45fc899d54aaa621fca682136042bac2caafa7c3f1aede510752b6aebd62146",
+          "bytes": 217903
+        },
+        {
+          "path": "patent-rules-2003/rule-111.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-111",
+          "retrieved_at": "2026-10-22T12:09:08Z",
+          "sha256": "6b2c47c9ed6dde042e9a0ed03743e7518c0308a4df121d19d3971fe31e9af227",
+          "bytes": 217307
+        },
+        {
+          "path": "patent-rules-2003/rule-111a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-111a",
+          "retrieved_at": "2026-10-22T12:09:10Z",
+          "sha256": "66f0392990acde16e9fc4769622dc1727729669c406b9cc0835fe8a0f6f4241e",
+          "bytes": 217312
+        },
+        {
+          "path": "patent-rules-2003/rule-112.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-112",
+          "retrieved_at": "2026-10-22T12:09:12Z",
+          "sha256": "63ebd2a92fa3f226420f9de6a950b808c3a95c7f6237deaa113bbbdab96af152",
+          "bytes": 217139
+        },
+        {
+          "path": "patent-rules-2003/rule-113.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-113",
+          "retrieved_at": "2026-10-22T12:09:13Z",
+          "sha256": "fd7409edfe4e94ebbee1a15c96210df6a20f44d6b4b5e662e3cb719828ae137a",
+          "bytes": 217239
+        },
+        {
+          "path": "patent-rules-2003/rule-114.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-114",
+          "retrieved_at": "2026-10-22T12:09:15Z",
+          "sha256": "1050a5e39ff1378b030a538c1a3240d73944ae66d9e6de0199998bbc708b2f10",
+          "bytes": 218432
+        },
+        {
+          "path": "patent-rules-2003/rule-115.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-115",
+          "retrieved_at": "2026-10-22T12:09:17Z",
+          "sha256": "54ad73085cea3b17c548157dc7f71b99efaedc38addde81b7b9392e0c4744a0d",
+          "bytes": 217087
+        },
+        {
+          "path": "patent-rules-2003/rule-116.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-116",
+          "retrieved_at": "2026-10-22T12:09:18Z",
+          "sha256": "4b9ea37af6b93f6a2a84ea71c7e64d8519d562407d61300a20a59059737c217e",
+          "bytes": 218365
+        },
+        {
+          "path": "patent-rules-2003/rule-117.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-117",
+          "retrieved_at": "2026-10-22T12:09:20Z",
+          "sha256": "dc94e20734dd4db59c3029295d770804dffa9b4a572a32db3299ba814de68e8a",
+          "bytes": 217575
+        },
+        {
+          "path": "patent-rules-2003/rule-118.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-118",
+          "retrieved_at": "2026-10-22T12:09:21Z",
+          "sha256": "7c55bbf7a3b2addc9f9be485c8291817c678a46a3fcdbf2ba0bde549877ce099",
+          "bytes": 217609
+        },
+        {
+          "path": "patent-rules-2003/rule-119.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-119",
+          "retrieved_at": "2026-10-22T12:09:23Z",
+          "sha256": "71b17d5062f72226cd53f2c3e7864f92e6fa1560e9139c5f3845421bd6535eba",
+          "bytes": 217474
+        },
+        {
+          "path": "patent-rules-2003/rule-120.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-120",
+          "retrieved_at": "2026-10-22T12:09:24Z",
+          "sha256": "6a18e38c1883da147dc64d69598d55a30754f6bb59f1011bfd45e591850f2386",
+          "bytes": 217036
+        },
+        {
+          "path": "patent-rules-2003/rule-121.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-121",
+          "retrieved_at": "2026-10-22T12:09:26Z",
+          "sha256": "b4d3036b69a07142743bb8a78aab3738904f34b8a4e538f1035c72909277472b",
+          "bytes": 217199
+        },
+        {
+          "path": "patent-rules-2003/rule-121a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-121a",
+          "retrieved_at": "2026-10-22T12:09:28Z",
+          "sha256": "08f0498af371bd4089e4f4865d3a80a0c9934d1cef70711cbefa344a9a28a284",
+          "bytes": 217090
+        },
+        {
+          "path": "patent-rules-2003/rule-122.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-122",
+          "retrieved_at": "2026-10-22T12:09:29Z",
+          "sha256": "c790e9d0d19e54cb8a438ce179de0547e56fc99d9bbfc1a15f1c1425e0441548",
+          "bytes": 217199
+        },
+        {
+          "path": "patent-rules-2003/rule-123.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-123",
+          "retrieved_at": "2026-10-22T12:09:31Z",
+          "sha256": "3fdc282795745c558173a71cb883425a9aae59aded6dfef95263be75e6290735",
+          "bytes": 217363
+        },
+        {
+          "path": "patent-rules-2003/rule-124.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-124",
+          "retrieved_at": "2026-10-22T12:09:32Z",
+          "sha256": "6536ebb5601945133345760806aa6eca5582f7d622e7e17486ef9385a0fa0020",
+          "bytes": 217772
+        },
+        {
+          "path": "patent-rules-2003/rule-125.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-125",
+          "retrieved_at": "2026-10-22T12:09:34Z",
+          "sha256": "41c3ea312b335179c81e1a50bae1e0015eae99aabad0143baf409e1da2be4ef0",
+          "bytes": 217099
+        },
+        {
+          "path": "patent-rules-2003/rule-126.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-126",
+          "retrieved_at": "2026-10-22T12:09:35Z",
+          "sha256": "d8ef54d45586933ada97b1191d01df929b3d57db41e3573cec1d21f7c9a19257",
+          "bytes": 218705
+        },
+        {
+          "path": "patent-rules-2003/rule-127.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-127",
+          "retrieved_at": "2026-10-22T12:09:38Z",
+          "sha256": "858db8f67490f6ff9c6ef9c5e0e4be7e063e4d7fdc8abe2aa77e5c9298c5ca71",
+          "bytes": 217392
+        },
+        {
+          "path": "patent-rules-2003/rule-128.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-128",
+          "retrieved_at": "2026-10-22T12:09:39Z",
+          "sha256": "15ae725244fcc70b935af067caf2a7da8e3bac56a91e8b9b294406e412a2f81e",
+          "bytes": 217678
+        },
+        {
+          "path": "patent-rules-2003/rule-129.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-129",
+          "retrieved_at": "2026-10-22T12:09:41Z",
+          "sha256": "9af0b30de7eab04248d8ff0d8ba9c23d581736e5158a4aaa53af47a35c8c2ab6",
+          "bytes": 217264
+        },
+        {
+          "path": "patent-rules-2003/rule-129a.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-129a",
+          "retrieved_at": "2026-10-22T12:09:42Z",
+          "sha256": "fe337e6e5b748cfa4676b559f3b9e5ed609b156280ef74cead6793b92711c98f",
+          "bytes": 217445
+        },
+        {
+          "path": "patent-rules-2003/rule-130.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-130",
+          "retrieved_at": "2026-10-22T12:09:44Z",
+          "sha256": "e9dc5859130e41b07c043c6f864160bb309d1e6e16a89a526941c5b92a6b2839",
+          "bytes": 218317
+        },
+        {
+          "path": "patent-rules-2003/rule-131.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-131",
+          "retrieved_at": "2026-10-22T12:09:46Z",
+          "sha256": "89a91319f9ffc909eb54cac8ce68d55bb3aae8472a66a012e4be9e79d68fdd1e",
+          "bytes": 217927
+        },
+        {
+          "path": "patent-rules-2003/rule-132.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-132",
+          "retrieved_at": "2026-10-22T12:09:47Z",
+          "sha256": "9eabf0a7fb67bbc5f82d44ac2cae4f5200494a86a4dca07f4411c958b30f0a6e",
+          "bytes": 217230
+        },
+        {
+          "path": "patent-rules-2003/rule-133.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-133",
+          "retrieved_at": "2026-10-22T12:09:49Z",
+          "sha256": "3e9a12b15488ead2d4535c69405056e6f9992642026f7cad742fc282d19f8c73",
+          "bytes": 217727
+        },
+        {
+          "path": "patent-rules-2003/rule-134.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-134",
+          "retrieved_at": "2026-10-22T12:09:50Z",
+          "sha256": "3eee49d3a34d9a7ad62e1875dbc949718ac40beeadd205ca8508b40749d6abef",
+          "bytes": 219500
+        },
+        {
+          "path": "patent-rules-2003/rule-135.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-135",
+          "retrieved_at": "2026-10-22T12:09:52Z",
+          "sha256": "f2d3c6de5933648e20f09ba5b13d6bef772e3da2a750d53bb0cb3c80d055c386",
+          "bytes": 217990
+        },
+        {
+          "path": "patent-rules-2003/rule-136.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-136",
+          "retrieved_at": "2026-10-22T12:09:54Z",
+          "sha256": "a7e8b727e550937391086f496ff0eef1c092440d9e011097ec25322a272e70e6",
+          "bytes": 217463
+        },
+        {
+          "path": "patent-rules-2003/rule-137.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-137",
+          "retrieved_at": "2026-10-22T12:09:55Z",
+          "sha256": "a2422dacf324fbe5d050f2a44756cfb504114237a45c8b40ac82af196565544b",
+          "bytes": 217790
+        },
+        {
+          "path": "patent-rules-2003/rule-138.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-138",
+          "retrieved_at": "2026-10-22T12:09:57Z",
+          "sha256": "d098c06b185f63d7891f6f79a371280769f6f68650c1a154f89cb7e3dcdb57ee",
+          "bytes": 217415
+        },
+        {
+          "path": "patent-rules-2003/rule-139.html",
+          "url": "https://ipindia.gov.in/acts/patent-rules-2003/rule-139",
+          "retrieved_at": "2026-10-22T12:09:58Z",
+          "sha256": "db72d9ff38c187ef88f156e296118249e239c3f00b533dc7f148a6f33e167a85",
+          "bytes": 217416
+        },
+        {
+          "path": "patents-amendment-rules-2025.pdf",
+          "url": "https://ipindia.gov.in/storage/uploads/docs-operator/0cd91608-5e17-4c91-accb-84f81b05fe9b.pdf",
+          "retrieved_at": "2026-10-22T12:10:05Z",
+          "sha256": "25d1dc09298090adbe893710348fc98426dcb18661f27e0890c43b2d49e34a71",
+          "bytes": 1458903
+        }
+      ]
+    },
+    {
+      "id": "designs_act",
+      "title": "The Designs Act, 2000 (e-Version)",
+      "version": "ipindia.gov.in e-Version (HTML); the page states no amendment date, and the ipindia Designs Act listing names no amending Act. Not cross-checked against India Code, which refused plain requests (HTTP 403).",
+      "publisher": "Office of the Controller General of Patents, Designs and Trade Marks (ipindia.gov.in)",
+      "listing_url": "https://ipindia.gov.in/designs-resources-act",
+      "files": [
+        {
+          "path": "designs-act-2000/index.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000",
+          "retrieved_at": "2026-10-22T12:10:08Z",
+          "sha256": "daf0a23620bdbb14eb5e84f99bdbd847e773f9214d129d049db605599937c7e0",
+          "bytes": 227389
+        },
+        {
+          "path": "designs-act-2000/section-1-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-1-4",
+          "retrieved_at": "2026-10-22T12:10:10Z",
+          "sha256": "e46342344338085864713ad7d5a373bf4baec3aa52d8858bc7e507e73f196a5b",
+          "bytes": 164756
+        },
+        {
+          "path": "designs-act-2000/section-2-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-2-4",
+          "retrieved_at": "2026-10-22T12:10:11Z",
+          "sha256": "90688b519b274038927b4576bb852a3a3e69731ebe9b3eadf9e6b81306b6d432",
+          "bytes": 167405
+        },
+        {
+          "path": "designs-act-2000/section-3-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-3-4",
+          "retrieved_at": "2026-10-22T12:10:13Z",
+          "sha256": "f77307f420e5c2e15dc00c7bf30978fcfd52d1210e24587c3260534596c75152",
+          "bytes": 165881
+        },
+        {
+          "path": "designs-act-2000/section-4-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-4-4",
+          "retrieved_at": "2026-10-22T12:10:15Z",
+          "sha256": "8c84d0c149ac7a01e5373482bb77f10ff9965cd228714ae8376dd713779ababe",
+          "bytes": 165151
+        },
+        {
+          "path": "designs-act-2000/section-5-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-5-4",
+          "retrieved_at": "2026-10-22T12:10:16Z",
+          "sha256": "a749b765697cd6b30b52c37e40fc9302a00f67367e57f6fb4bef97e6ae75a494",
+          "bytes": 166119
+        },
+        {
+          "path": "designs-act-2000/section-6-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-6-4",
+          "retrieved_at": "2026-10-22T12:10:18Z",
+          "sha256": "5f586eda94855ea5497920a969fd9ca65f6d1f4a460d9636580f72577beacd36",
+          "bytes": 166557
+        },
+        {
+          "path": "designs-act-2000/section-7-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-7-4",
+          "retrieved_at": "2026-10-22T12:10:19Z",
+          "sha256": "d898ee5fb690ac12cfd2287f6e6c91155f06514e0a81ca1e4102a9b4e2833b7d",
+          "bytes": 164896
+        },
+        {
+          "path": "designs-act-2000/section-8-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-8-4",
+          "retrieved_at": "2026-10-22T12:10:21Z",
+          "sha256": "edd91fa727ae2e956f6b669c5d6d82e04dc8fde8cce6c102580b4969786f41dc",
+          "bytes": 167379
+        },
+        {
+          "path": "designs-act-2000/section-9-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-9-4",
+          "retrieved_at": "2026-10-22T12:10:22Z",
+          "sha256": "dd4939def43615fd74f96e81f938008601452772ab80f59890098caeaf0b36c6",
+          "bytes": 164910
+        },
+        {
+          "path": "designs-act-2000/section-10-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-10-4",
+          "retrieved_at": "2026-10-22T12:10:24Z",
+          "sha256": "1aa1fb2f9870464fc4d8c1476f813e98f5314d9e93aad626079d8a22400fb3a0",
+          "bytes": 165612
+        },
+        {
+          "path": "designs-act-2000/section-11-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-11-4",
+          "retrieved_at": "2026-10-22T12:10:26Z",
+          "sha256": "a62f2dccbb984d2ad55e09086b8fb03658dd836488f61691f1d3dc67db266a4f",
+          "bytes": 165187
+        },
+        {
+          "path": "designs-act-2000/section-12-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-12-4",
+          "retrieved_at": "2026-10-22T12:10:27Z",
+          "sha256": "70903d4415e102782d7a7927ff4d6f9f2948adf3bb1045c6e5e1418b8b81b9fb",
+          "bytes": 165502
+        },
+        {
+          "path": "designs-act-2000/section-13-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-13-4",
+          "retrieved_at": "2026-10-22T12:10:29Z",
+          "sha256": "867ec8d28959b4c9ca7ba844a926ca68084b50ea02a14841ecb5b872718f76e7",
+          "bytes": 165432
+        },
+        {
+          "path": "designs-act-2000/section-14-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-14-4",
+          "retrieved_at": "2026-10-22T12:10:30Z",
+          "sha256": "c0801e531706997972f9e78d86bf9a8053e32909688a5a61f18e6c1f89c5da5c",
+          "bytes": 165523
+        },
+        {
+          "path": "designs-act-2000/section-15-4.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-15-4",
+          "retrieved_at": "2026-10-22T12:10:32Z",
+          "sha256": "f0ab185cecd8fe0ff22db2cc798712479edde6469c64c906c78129e9f9e872e9",
+          "bytes": 166251
+        },
+        {
+          "path": "designs-act-2000/section-16-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-16-3",
+          "retrieved_at": "2026-10-22T12:10:34Z",
+          "sha256": "52c5301bad5557ddee158ac222d97732ab315a123cadacf0c5d8e8f14a4462ae",
+          "bytes": 165262
+        },
+        {
+          "path": "designs-act-2000/section-17-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-17-3",
+          "retrieved_at": "2026-10-22T12:10:35Z",
+          "sha256": "0b27d7641a017bfdde3d43773f282127c6d51822bb57474e0d4a2f23f9357a05",
+          "bytes": 165040
+        },
+        {
+          "path": "designs-act-2000/section-18-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-18-3",
+          "retrieved_at": "2026-10-22T12:10:37Z",
+          "sha256": "5dc839781634d038ded15b4d161a60bf0f6829605e29a9acc4dc76bf691139ca",
+          "bytes": 165065
+        },
+        {
+          "path": "designs-act-2000/section-198.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-198",
+          "retrieved_at": "2026-10-22T12:10:38Z",
+          "sha256": "e8cf9602ed9f7bb37a530f41ae3b2e251fd91093bdd26aa11f9686ea9f3cba9a",
+          "bytes": 165480
+        },
+        {
+          "path": "designs-act-2000/section-20-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-20-3",
+          "retrieved_at": "2026-10-22T12:10:40Z",
+          "sha256": "9d103ca65c3f2c538b7a7a74110f67cd478bc446d33fee5363b3cf7ed0b11daa",
+          "bytes": 164893
+        },
+        {
+          "path": "designs-act-2000/section-21-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-21-3",
+          "retrieved_at": "2026-10-22T12:10:41Z",
+          "sha256": "8b39cad6c44f664c4be9d8506cd096260e781f1dcc372c41367429ffc89e13dd",
+          "bytes": 165696
+        },
+        {
+          "path": "designs-act-2000/section-22-25.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-22-25",
+          "retrieved_at": "2026-10-22T12:10:43Z",
+          "sha256": "2c100480fa2fd7873c02e544fe1cb34162857cdbc4b1e782223eb80034957d3c",
+          "bytes": 167276
+        },
+        {
+          "path": "designs-act-2000/section-23-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-23-2",
+          "retrieved_at": "2026-10-22T12:10:45Z",
+          "sha256": "96d5c41df0edf8e3e56577e672424f5b9d2f6d5678561a682616d3a4b2ee13fc",
+          "bytes": 165173
+        },
+        {
+          "path": "designs-act-2000/section-24-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-24-2",
+          "retrieved_at": "2026-10-22T12:10:46Z",
+          "sha256": "f6c4030cb14dbea901203f79f0ce286f656dcffd249d38b3d391225d59e58446",
+          "bytes": 164995
+        },
+        {
+          "path": "designs-act-2000/section-25-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-25-3",
+          "retrieved_at": "2026-10-22T12:10:48Z",
+          "sha256": "a306084db0836d42d99d3ecd52345ba72046b3e9cf4b9cdca20fd55e0b907082",
+          "bytes": 164775
+        },
+        {
+          "path": "designs-act-2000/section-26-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-26-3",
+          "retrieved_at": "2026-10-22T12:10:49Z",
+          "sha256": "601eb862e2f83e68097a7036df6bb4ad1e2aa251564012d872c4331f2e16ac63",
+          "bytes": 165196
+        },
+        {
+          "path": "designs-act-2000/section-27-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-27-3",
+          "retrieved_at": "2026-10-22T12:10:51Z",
+          "sha256": "3e5a4a396b7410f44acb742a84528e50dfa9578e46438b37a8d3b809bed9539f",
+          "bytes": 164774
+        },
+        {
+          "path": "designs-act-2000/section-28-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-28-3",
+          "retrieved_at": "2026-10-22T12:10:52Z",
+          "sha256": "ef21bb31984ecea5e6f9dd8dbbf5d3ed36bd3b687dc0ef0848e503981c8ded6c",
+          "bytes": 164943
+        },
+        {
+          "path": "designs-act-2000/section-29-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-29-3",
+          "retrieved_at": "2026-10-22T12:10:54Z",
+          "sha256": "93ce45e82120c3633527967485d63a530a9f73ae9ce5db8a75ff1912a949897a",
+          "bytes": 164885
+        },
+        {
+          "path": "designs-act-2000/section-30-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-30-3",
+          "retrieved_at": "2026-10-22T12:10:56Z",
+          "sha256": "b8cd6e22bb0b30142f742ccb8dc884dff1d3a95861fd27b393162fea60d24a70",
+          "bytes": 167406
+        },
+        {
+          "path": "designs-act-2000/section-31-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-31-3",
+          "retrieved_at": "2026-10-22T12:10:57Z",
+          "sha256": "e66f0a1a58a76d1764676fd665506fdfe3c5229278bdbb68ddc24125b746f408",
+          "bytes": 165908
+        },
+        {
+          "path": "designs-act-2000/section-32-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-32-3",
+          "retrieved_at": "2026-10-22T12:10:59Z",
+          "sha256": "b718cde0cf189080e7cbb8f9afa2536a5dab0621af8267f653b6e03c3edc0195",
+          "bytes": 165138
+        },
+        {
+          "path": "designs-act-2000/section-33-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-33-3",
+          "retrieved_at": "2026-10-22T12:11:00Z",
+          "sha256": "2733a09fb72524383b55261b79f69ddefca0a57db5e3ed79dab9e3305e46b25d",
+          "bytes": 164951
+        },
+        {
+          "path": "designs-act-2000/section-34-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-34-3",
+          "retrieved_at": "2026-10-22T12:11:02Z",
+          "sha256": "d4c270c592795a85ceebe4f0daeea5800ea18ba180048cf16373cf354c10f78a",
+          "bytes": 164870
+        },
+        {
+          "path": "designs-act-2000/section-35-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-35-3",
+          "retrieved_at": "2026-10-22T12:11:04Z",
+          "sha256": "a9b42efa78277636277604f12c6c84eee0f91eaeb647c901c9e46b649b1075a6",
+          "bytes": 164896
+        },
+        {
+          "path": "designs-act-2000/section-36-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-36-3",
+          "retrieved_at": "2026-10-22T12:11:05Z",
+          "sha256": "25eca513a9638bbe26aaacfe6bf634f74581921c1db274ae79887fe5132b28ab",
+          "bytes": 165284
+        },
+        {
+          "path": "designs-act-2000/section-37-3.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-37-3",
+          "retrieved_at": "2026-10-22T12:11:07Z",
+          "sha256": "60b96cd2b240164cecc635dd66eeb5b0849ed36dc7a5aa5393af40106cfe9b57",
+          "bytes": 165058
+        },
+        {
+          "path": "designs-act-2000/section-38-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-38-2",
+          "retrieved_at": "2026-10-22T12:11:08Z",
+          "sha256": "cd8ed61690fe012f29935a625bb18925286026e5248072a2ad11a3544ae41d66",
+          "bytes": 164951
+        },
+        {
+          "path": "designs-act-2000/section-39-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-39-2",
+          "retrieved_at": "2026-10-22T12:11:10Z",
+          "sha256": "d3e4a732f8473eee2899d3b8bd22b51ccdbbaaf981ff9580e65ddc38751e779d",
+          "bytes": 165198
+        },
+        {
+          "path": "designs-act-2000/section-40-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-40-2",
+          "retrieved_at": "2026-10-22T12:11:12Z",
+          "sha256": "871810e432c524ddfe99f49ecc788d3500bbb5eaca4dafa6b0631c895bb3eeed",
+          "bytes": 164814
+        },
+        {
+          "path": "designs-act-2000/section-41-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-41-2",
+          "retrieved_at": "2026-10-22T12:11:13Z",
+          "sha256": "af405157286202eb9df4d9ac0731518f998d17564388e22f1a3f0067a5955896",
+          "bytes": 165430
+        },
+        {
+          "path": "designs-act-2000/section-42-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-42-2",
+          "retrieved_at": "2026-10-22T12:11:15Z",
+          "sha256": "04d69961d1532000439b1544eb6f6b39e6406f6aa2919ce3e8d88387758439f1",
+          "bytes": 167623
+        },
+        {
+          "path": "designs-act-2000/section-43-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-43-2",
+          "retrieved_at": "2026-10-22T12:11:16Z",
+          "sha256": "91b6055203695e5c11b311015968a21faab1053c546aaefdc772015bc19f1d2e",
+          "bytes": 165200
+        },
+        {
+          "path": "designs-act-2000/section-44-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-44-2",
+          "retrieved_at": "2026-10-22T12:11:18Z",
+          "sha256": "9ae5d53146a411909a2519b9a93c774c1f76aac982099bbf87fde844d5d362da",
+          "bytes": 168188
+        },
+        {
+          "path": "designs-act-2000/section-45-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-45-2",
+          "retrieved_at": "2026-10-22T12:11:19Z",
+          "sha256": "8aece133c10c2328edf5eb2de757534a842fc735b9acae9e374214b5f6d3c72f",
+          "bytes": 164849
+        },
+        {
+          "path": "designs-act-2000/section-46-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-46-2",
+          "retrieved_at": "2026-10-22T12:11:21Z",
+          "sha256": "a9e73c383a2b3c45950f1db319bcb698974b90369005d681e65d536b1246c806",
+          "bytes": 165611
+        },
+        {
+          "path": "designs-act-2000/section-47-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-47-2",
+          "retrieved_at": "2026-10-22T12:11:22Z",
+          "sha256": "ca881e21aab428153193d7550babb65f6352d5077c0cfd144c1ddccc77a1cbeb",
+          "bytes": 170042
+        },
+        {
+          "path": "designs-act-2000/section-48-2.html",
+          "url": "https://ipindia.gov.in/acts/designs-act-2000/section-48-2",
+          "retrieved_at": "2026-10-22T12:11:24Z",
+          "sha256": "6bc621274b4e2780c8c1eef051247f8b5b4ff7166556317431bd5cf21dc78b3c",
+          "bytes": 165830
+        }
+      ]
+    },
+    {
+      "id": "trade_marks_act",
+      "title": "The Trade Marks Act, 1999 (Act No. 47 of 1999, amended up to Act No. 18 of 2023)",
+      "version": "Consolidated India Code text amended up to the Jan Vishwas (Amendment of Provisions) Act, 2023 (Act No. 18 of 2023), as republished by WIPO Lex (entry 22958, version year 2023). ipindia.gov.in publishes only the 1999 text and the 2010 amending Act; India Code refused plain requests (HTTP 403).",
+      "publisher": "Government of India (India Code), via WIPO Lex",
+      "listing_url": "https://www.wipo.int/wipolex/en/legislation/details/22958",
+      "files": [
+        {
+          "path": "trade-marks-act-1999.pdf",
+          "url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/in/in154en_1.pdf",
+          "retrieved_at": "2026-10-22T12:11:27Z",
+          "sha256": "e12835963e0aa1091202a459009cd90160e4504abb398bdcc54671541cd4071f",
+          "bytes": 494939
+        }
+      ]
+    },
+    {
+      "id": "copyright_act",
+      "title": "The Copyright Act, 1957 (Act No. 14 of 1957, amended up to Act No. 18 of 2023)",
+      "version": "Consolidated India Code text amended up to the Jan Vishwas (Amendment of Provisions) Act, 2023 (Act No. 18 of 2023), as republished by WIPO Lex (entry 22949, version year 2023). India Code refused plain requests (HTTP 403).",
+      "publisher": "Government of India (India Code), via WIPO Lex",
+      "listing_url": "https://www.wipo.int/wipolex/en/legislation/details/22949",
+      "files": [
+        {
+          "path": "copyright-act-1957.pdf",
+          "url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/in/in153en_1.pdf",
+          "retrieved_at": "2026-10-22T12:11:30Z",
+          "sha256": "05f47cc9ca63dfee32153beb07b12241298c92f6cadf3caed805887a3f843c4a",
+          "bytes": 534087
+        }
+      ]
+    },
+    {
+      "id": "mppp",
+      "title": "Manual of Patent Office Practice and Procedure, Version 3.0, 26th November, 2019",
+      "version": "Version 3.0, 26th November, 2019 (in force; the August 2026 draft revision is not adopted)",
+      "publisher": "Office of the Controller General of Patents, Designs and Trade Marks (ipindia.gov.in)",
+      "listing_url": "https://ipindia.gov.in/resource/patents-resources-manuals",
+      "files": [
+        {
+          "path": "mppp-v3.0-2019.pdf",
+          "url": "https://ipindia.gov.in/storage/uploads/docs-operator/e1adfe40-7af3-4180-ba04-2e0099c6dca5.pdf",
+          "retrieved_at": "2026-10-22T12:11:39Z",
+          "sha256": "73d52f8b8073d3d0699f5e99a321d0428646b7d3bb80fb51abebca6db9fbb311",
+          "bytes": 1658264
+        }
+      ]
+    }
+  ]
+}
