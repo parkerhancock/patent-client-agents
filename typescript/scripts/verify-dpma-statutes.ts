@@ -36,7 +36,14 @@ try {
     status.file_sha256 !== manifest.file_sha256
   )
     throw new Error("DPMA statutes: artifact status or pins did not verify.");
-  const section = await library.getSectionByCitation("§ 139 PatG");
+  if (
+    status.acts?.length !== 6 ||
+    status.acts.reduce((sum, act) => sum + act.section_count, 0) !==
+      status.section_count
+  )
+    throw new Error("DPMA statutes: per-Act metadata is missing or off.");
+  const section = await library.getSectionByCitation("§ 139 Abs. 1 PatG");
+  const letter = await library.getSectionByCitation("§ 16a PatG");
   Object.assign(report, {
     corpus_version: status.corpus_version,
     corpus_synced_at: status.corpus_synced_at,
@@ -44,7 +51,12 @@ try {
     statutes: await library.listStatutes(),
     decoded_sha256: status.artifact_sha256,
     file_sha256: status.file_sha256,
-    patg_139_title: section.title,
+    acts: status.acts.map(
+      (act) =>
+        `${act.statute}: ${act.section_count} sections, version ${act.version_date} (${act.stand ?? act.fundstelle})`,
+    ),
+    patg_139: `${section.text.split("\n").length} paragraphs, Stand ${section.stand}`,
+    patg_16a: letter.text.slice(0, 60),
   });
 } finally {
   library.close();
@@ -61,7 +73,7 @@ const cases = {
     ["search_dpma_statutes", { query: "Unterlassung" }],
     [
       "get_dpma_section",
-      { citation: ["§ 1 PatG", "§ 14 MarkenG", "§ 97 UrhG", "§ 4 PatG"] },
+      { citation: ["§ 1 PatG", "§ 14 MarkenG", "§ 97 UrhG", "§ 999 PatG"] },
     ],
   ],
   curated: [

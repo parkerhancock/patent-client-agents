@@ -116,6 +116,53 @@ export interface DpmaSectionOptions {
   signal?: AbortSignal;
 }
 
+/** One Act's version and source, as the gesetze-im-internet.de build records it in meta `acts`. */
+export interface DpmaActInfo {
+  statute: string;
+  /** Official long title, e.g. 'Patentgesetz'. */
+  title: string;
+  /** The Act's Stand note, e.g. 'zuletzt geändert durch Art. 13 G v. 20.5.2026 I Nr. 152'; null if never amended. */
+  stand: string | null;
+  /** Date of the amending Act in the Stand note (ISO). */
+  amended_on: string | null;
+  /** Ausfertigungsdatum (ISO). */
+  enacted_on: string | null;
+  /** Promulgation reference, e.g. 'BGBl I 2019, 466'. */
+  fundstelle: string | null;
+  /** amended_on, or enacted_on for an Act never amended. */
+  version_date: string | null;
+  /** Publisher build stamp of the XML (YYYYMMDDhhmmss). */
+  builddate: string;
+  source_url: string;
+  retrieved_at: string;
+  zip_sha256: string;
+  section_count: number;
+}
+
+const actInfo = z.object({
+  statute: z.string(),
+  title: z.string(),
+  stand: z.string().nullable(),
+  amended_on: z.string().nullable(),
+  enacted_on: z.string().nullable(),
+  fundstelle: z.string().nullable(),
+  version_date: z.string().nullable(),
+  builddate: z.string(),
+  source_url: z.string(),
+  retrieved_at: z.string(),
+  zip_sha256: z.string(),
+  section_count: z.number(),
+});
+/** Meta `acts` when present and well formed; seed builds have none. */
+function parseActs(value: string | undefined): DpmaActInfo[] | null {
+  if (!value) return null;
+  try {
+    return z.array(actInfo).parse(JSON.parse(value));
+  } catch {
+    return null;
+  }
+}
+
 export interface DpmaStatutesCorpusStatus {
   available: boolean;
   label: string;
@@ -129,6 +176,8 @@ export interface DpmaStatutesCorpusStatus {
   file_sha256: string | null;
   compression: "none" | "zstd" | null;
   source_url: string;
+  /** Per-Act version and source, or null for a corpus built without them. */
+  acts: DpmaActInfo[] | null;
   metadata: Record<string, string>;
   error?: { code: string; message: string };
 }
@@ -138,6 +187,10 @@ export interface DpmaSection {
   section: string;
   title: string | null;
   text: string;
+  /** The Act's Stand note at build time, when the corpus records it. */
+  stand: string | null;
+  /** The Act's last amendment (or enactment) date, when recorded. */
+  version_date: string | null;
   provenance: CorpusProvenance;
 }
 export interface DpmaSearchHit {
@@ -220,6 +273,7 @@ export class DpmaStatutesClient {
   private opening: Promise<void> | undefined;
   private generation = 0;
   private metadata: Record<string, string> = {};
+  private acts: DpmaActInfo[] | null = null;
   private count: number | null = null;
   private sha256: string | null = null;
   private fileSha256: string | null = null;
@@ -275,6 +329,7 @@ export class DpmaStatutesClient {
       }
       this.db = snapshot.db;
       this.metadata = snapshot.value.metadata;
+      this.acts = parseActs(snapshot.value.metadata.acts);
       this.count = snapshot.value.count;
       this.sha256 = snapshot.sha256;
       this.fileSha256 = snapshot.fileSha256;
@@ -324,6 +379,7 @@ export class DpmaStatutesClient {
       file_sha256: this.fileSha256,
       compression: this.compression,
       source_url: DPMA_STATUTES_SOURCE_URL,
+      acts: this.acts,
       metadata,
       ...(error ? { error: { code: error.code, message: error.message } } : {}),
     };
@@ -413,11 +469,14 @@ export class DpmaStatutesClient {
         "The DPMA statutes section text is not readable.",
       );
     checkCorpusSignal(options.signal);
+    const act = this.acts?.find((item) => item.statute === row.statute);
     return {
       statute: row.statute,
       section: row.section,
       title: row.title,
       text: row.text,
+      stand: act?.stand ?? null,
+      version_date: act?.version_date ?? null,
       provenance: this.provenance(corpus),
     };
   }
@@ -444,11 +503,12 @@ export class DpmaStatutesClient {
     const match = outlineFtsQuery(input.query, input.syntax);
     const bind: (string | number)[] = [match];
     if (statute) bind.push(statute);
-    // Outline order is numeric by section ("3" before "139"); BM25 ties fall
-    // back to row order so pages are stable.
+    // Outline order is numeric by section ("3" before "139"), with an
+    // unnumbered Anlage after the sections; BM25 ties fall back to row order
+    // so pages are stable.
     const order =
       input.sort === "outline"
-        ? "s.statute, CAST(s.section AS INTEGER), s.section"
+        ? "s.statute, s.section NOT GLOB '[0-9]*', CAST(s.section AS INTEGER), s.section"
         : "rank, s.rowid";
     const rows = match
       ? this.query<DpmaSearchHit>(
@@ -481,6 +541,7 @@ export class DpmaStatutesClient {
     this.db?.close();
     this.db = undefined;
     this.metadata = {};
+    this.acts = null;
     this.count = null;
     this.sha256 = null;
     this.fileSha256 = null;
