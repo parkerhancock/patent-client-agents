@@ -589,6 +589,16 @@ const cases: Case[] = [
     args: { corpus: "uspto_tmep", identifier: "1207.01" },
   },
   {
+    name: "mopp search",
+    tool: "search_legal_reference",
+    args: { corpus: "ukipo_mopp", query: "inventive step", limit: 3 },
+  },
+  {
+    name: "mopp section",
+    tool: "get_legal_reference",
+    args: { corpus: "ukipo_mopp", identifier: "4A" },
+  },
+  {
     name: "dpma (unported)",
     tool: "search_legal_reference",
     args: { corpus: "dpma", query: "Patent" },

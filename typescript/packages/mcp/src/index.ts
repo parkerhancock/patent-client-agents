@@ -19,6 +19,7 @@ import {
   HtsClient,
   IdsClient,
   KiprisClient,
+  MoppClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -75,6 +76,7 @@ import {
 import { registerUsptoResources } from "./resources.js";
 import { registerPortalSearchTools } from "./search-portals.js";
 import { registerTmepTools } from "./tmep.js";
+import { registerMoppTools } from "./ukipo-mopp.js";
 import {
   registerUpcStatutesTools,
   type UpcStatutesReader,
@@ -98,6 +100,7 @@ export interface UsptoClients {
   trademarkSearch: TrademarkSearchClient;
   mpep: MpepClient;
   tmep: TmepClient;
+  mopp: MoppClient;
   epoOps: EpoOpsClient;
   fees: FeesClient;
   googlePatents: GooglePatentsClient;
@@ -318,6 +321,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   const provided = options.clients ?? {};
   const mpep = provided.mpep ?? new MpepClient();
   const tmep = provided.tmep ?? new TmepClient();
+  const mopp = provided.mopp ?? new MoppClient();
   const ownedEpoLegal: { close(): void }[] = [];
   const own = <T extends { close(): void }>(client: T) => {
     ownedEpoLegal.push(client);
@@ -357,6 +361,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     () => {
       if (!provided.mpep) mpep.close();
       if (!provided.tmep) tmep.close();
+      if (!provided.mopp) mopp.close();
       for (const client of ownedEpoLegal) client.close();
     },
   );
@@ -502,6 +507,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       lazyClient(() => configuredTrademarkSearchClient(wafSession)),
     mpep,
     tmep,
+    mopp,
     fees: provided.fees ?? new FeesClient(),
     googlePatents: provided.googlePatents ?? new GooglePatentsClient(),
     cafc: provided.cafc ?? new CafcClient(),
@@ -709,6 +715,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
   registerUsptoResources(server, auth);
   registerMpepTools(server, mpep, externalAuth);
   registerTmepTools(server, tmep, externalAuth);
+  registerMoppTools(
+    server,
+    mopp,
+    options.auth ? requireScopes("ukipo:read") : undefined,
+  );
   registerGooglePatentsTools(
     server,
     clients.googlePatents,
