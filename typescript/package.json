@@ -42,7 +42,8 @@
     "record:fees": "bun scripts/record-fees.ts",
     "record:google-patents": "bun scripts/record-google-patents.ts",
     "verify:facade-live": "bun scripts/live-facade.ts",
-    "verify:epo-legal": "bun scripts/verify-epo-legal.ts"
+    "verify:epo-legal": "bun scripts/verify-epo-legal.ts",
+    "verify:upc-statutes": "bun scripts/verify-upc-statutes.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",

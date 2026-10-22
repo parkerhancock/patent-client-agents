@@ -24,6 +24,7 @@ import {
   detailEnvelopeSchema,
   listEnvelopeSchema,
 } from "../shared.js";
+import type { UpcStatutesReader } from "../upc-statutes.js";
 
 export {
   type AuthCheck,
@@ -53,6 +54,7 @@ export interface FacadeClients {
   fees: FeesClient;
   cafc: CafcClient;
   epoLegal: EpoLegalClients;
+  upcStatutes: UpcStatutesReader;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
 }
@@ -68,8 +70,6 @@ export type FacadeRegistrar = (
  */
 export const UNPORTED_FACADE_TOOLS = [
   "copyright",
-  "get_upc_section",
-  "search_upc_statutes",
   "search_upc_decisions",
   "search_wipo_lex_legislation",
   "get_wipo_lex_legislation",

@@ -377,11 +377,7 @@ test("the group's tools are registered with the deployed parameter names", async
       Object.keys(python?.inputSchema.properties ?? {}).sort(),
     );
   }
-  for (const absent of [
-    "search_upc_decisions",
-    "get_upc_section",
-    "search_wipo_lex_legislation",
-  ])
+  for (const absent of ["search_upc_decisions", "search_wipo_lex_legislation"])
     expect(tools.map((t) => t.name)).not.toContain(absent);
 });
 

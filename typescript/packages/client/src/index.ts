@@ -35,4 +35,5 @@ export {
   type TransportResult,
 } from "./transport.js";
 export * from "./tsdr.js";
+export * from "./upc-statutes.js";
 export * from "./uspto-resources.js";

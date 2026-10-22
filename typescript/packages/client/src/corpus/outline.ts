@@ -44,7 +44,8 @@ export interface OutlineRow {
 export interface OutlineHit extends Omit<OutlineRow, "html" | "text"> {
   snippet: string;
 }
-export interface OutlineOptions {
+/** Where a corpus artifact comes from and how it is pinned. */
+export interface CorpusArtifactOptions {
   /** Artifact path in server runtimes. */
   path: string;
   /** Artifact bytes, or a loader for them; takes precedence over path and is the only option in browsers. */
@@ -54,6 +55,8 @@ export interface OutlineOptions {
   envVar?: string;
   expectedSha256?: string;
   expectedFileSha256?: string;
+}
+export interface OutlineOptions extends CorpusArtifactOptions {
   maxSectionBytes: number;
 }
 
@@ -143,6 +146,138 @@ function cellContentSize(bytes: Uint8Array): number | null {
   );
 }
 
+export interface CorpusSnapshot<T> {
+  db: SnapshotDatabase;
+  sha256: string;
+  fileSha256: string;
+  compression: "none" | "zstd";
+  /** What the schema check returned. */
+  value: T;
+}
+
+/**
+ * Read one artifact, check its file pin, decode a Zstandard frame, check the
+ * decoded pin, reject WAL headers and open the bytes read-only, then run the
+ * schema-specific check `validate`. Known failures are CorpusErrors; any
+ * other error from `validate` reports INVALID_CORPUS.
+ */
+export async function openCorpusSnapshot<T>(
+  options: CorpusArtifactOptions,
+  validate: (db: SnapshotDatabase) => T,
+  kind = "outline",
+): Promise<CorpusSnapshot<T>> {
+  let db: SnapshotDatabase | undefined;
+  try {
+    const maxArtifactBytes = 256 * 1024 * 1024;
+    const source = options.source;
+    const encoded =
+      source instanceof Uint8Array
+        ? source
+        : source
+          ? await source()
+          : await readArtifact(options.path, maxArtifactBytes);
+    if (encoded.byteLength > maxArtifactBytes)
+      throw new CorpusError(
+        "CORPUS_TOO_LARGE",
+        "Corpus artifacts must not exceed 256 MiB.",
+      );
+    const fileSha256 = await sha256Hex(encoded);
+    if (
+      options.expectedFileSha256 &&
+      fileSha256 !== options.expectedFileSha256.toLowerCase()
+    )
+      throw new CorpusError(
+        "CHECKSUM_MISMATCH",
+        "Corpus file SHA-256 does not match its pin.",
+      );
+    const fileCompression =
+      readLE(encoded, 0, 4) === 0xfd2fb528n && encoded.length >= 4
+        ? "zstd"
+        : "none";
+    let snapshot = encoded;
+    if (fileCompression === "zstd") {
+      const frame = zstdEnvelope(encoded, maxArtifactBytes);
+      // libzstd verifies the frame checksum when one is present.
+      try {
+        snapshot = (await zstd()).decompress(
+          encoded,
+          maxArtifactBytes,
+          frame.contentSize,
+        );
+      } catch (error) {
+        if (error instanceof ZstdOutputTooLarge)
+          throw new CorpusError(
+            "CORPUS_TOO_LARGE",
+            "Decoded corpus artifacts must not exceed 256 MiB.",
+          );
+        throw new CorpusError(
+          "DECOMPRESSION_FAILED",
+          "The Zstandard corpus file could not be decoded.",
+        );
+      }
+      if (snapshot.length > maxArtifactBytes)
+        throw new CorpusError(
+          "CORPUS_TOO_LARGE",
+          "Decoded corpus artifacts must not exceed 256 MiB.",
+        );
+      if (frame.contentSize !== null && snapshot.length !== frame.contentSize)
+        throw new CorpusError(
+          "DECOMPRESSION_FAILED",
+          "The Zstandard corpus file size or checksum is invalid.",
+        );
+    }
+    const sha256 = await sha256Hex(snapshot);
+    if (
+      options.expectedSha256 &&
+      sha256 !== options.expectedSha256.toLowerCase()
+    )
+      throw new CorpusError(
+        "CHECKSUM_MISMATCH",
+        "Corpus SHA-256 does not match its pin.",
+      );
+    if (snapshot[18] === 2 || snapshot[19] === 2)
+      throw new CorpusError(
+        "CORPUS_WAL_UNSUPPORTED",
+        "Prepare a standalone SQLite artifact in DELETE journal mode outside runtime. WAL-mode files and sidecars are not accepted.",
+      );
+    db = await openSnapshot(snapshot);
+    return {
+      db,
+      sha256,
+      fileSha256,
+      compression: fileCompression,
+      value: validate(db),
+    };
+  } catch (error) {
+    db?.close();
+    if (error instanceof CorpusError) throw error;
+    if (
+      error &&
+      typeof error === "object" &&
+      "code" in error &&
+      error.code === "TOO_LARGE"
+    )
+      throw new CorpusError(
+        "CORPUS_TOO_LARGE",
+        "Corpus artifacts must not exceed 256 MiB.",
+      );
+    if (
+      error &&
+      typeof error === "object" &&
+      "code" in error &&
+      (error.code === "ENOENT" || error.code === "NO_FILES")
+    )
+      throw new CorpusError(
+        "CORPUS_UNAVAILABLE",
+        `${options.label ?? "MPEP"} corpus is unavailable. Set ${options.envVar ?? "MPEP_CORPUS_PATH"} to an existing verified artifact; acquisition never runs during a request.`,
+      );
+    throw new CorpusError(
+      "INVALID_CORPUS",
+      `The ${kind} corpus is not a supported readable SQLite/FTS5 artifact.`,
+    );
+  }
+}
+
 /** Shared read-only outline artifact lifecycle; acquisition stays outside runtime. */
 export class OutlineCorpus {
   private db: SnapshotDatabase | undefined;
@@ -165,81 +300,7 @@ export class OutlineCorpus {
   }
 
   private async load(generation: number) {
-    let db: SnapshotDatabase | undefined;
-    try {
-      const maxArtifactBytes = 256 * 1024 * 1024;
-      const source = this.options.source;
-      const encoded =
-        source instanceof Uint8Array
-          ? source
-          : source
-            ? await source()
-            : await readArtifact(this.options.path, maxArtifactBytes);
-      if (encoded.byteLength > maxArtifactBytes)
-        throw new CorpusError(
-          "CORPUS_TOO_LARGE",
-          "Corpus artifacts must not exceed 256 MiB.",
-        );
-      const fileSha256 = await sha256Hex(encoded);
-      if (
-        this.options.expectedFileSha256 &&
-        fileSha256 !== this.options.expectedFileSha256.toLowerCase()
-      )
-        throw new CorpusError(
-          "CHECKSUM_MISMATCH",
-          "Corpus file SHA-256 does not match its pin.",
-        );
-      const fileCompression =
-        readLE(encoded, 0, 4) === 0xfd2fb528n && encoded.length >= 4
-          ? "zstd"
-          : "none";
-      let snapshot = encoded;
-      if (fileCompression === "zstd") {
-        const frame = zstdEnvelope(encoded, maxArtifactBytes);
-        // libzstd verifies the frame checksum when one is present.
-        try {
-          snapshot = (await zstd()).decompress(
-            encoded,
-            maxArtifactBytes,
-            frame.contentSize,
-          );
-        } catch (error) {
-          if (error instanceof ZstdOutputTooLarge)
-            throw new CorpusError(
-              "CORPUS_TOO_LARGE",
-              "Decoded corpus artifacts must not exceed 256 MiB.",
-            );
-          throw new CorpusError(
-            "DECOMPRESSION_FAILED",
-            "The Zstandard corpus file could not be decoded.",
-          );
-        }
-        if (snapshot.length > maxArtifactBytes)
-          throw new CorpusError(
-            "CORPUS_TOO_LARGE",
-            "Decoded corpus artifacts must not exceed 256 MiB.",
-          );
-        if (frame.contentSize !== null && snapshot.length !== frame.contentSize)
-          throw new CorpusError(
-            "DECOMPRESSION_FAILED",
-            "The Zstandard corpus file size or checksum is invalid.",
-          );
-      }
-      const sha256 = await sha256Hex(snapshot);
-      if (
-        this.options.expectedSha256 &&
-        sha256 !== this.options.expectedSha256.toLowerCase()
-      )
-        throw new CorpusError(
-          "CHECKSUM_MISMATCH",
-          "Corpus SHA-256 does not match its pin.",
-        );
-      if (snapshot[18] === 2 || snapshot[19] === 2)
-        throw new CorpusError(
-          "CORPUS_WAL_UNSUPPORTED",
-          "Prepare a standalone SQLite artifact in DELETE journal mode outside runtime. WAL-mode files and sidecars are not accepted.",
-        );
-      db = await openSnapshot(snapshot);
+    const snapshot = await openCorpusSnapshot(this.options, (db) => {
       const metadata = Object.fromEntries(
         db
           .all<{ key: string; value: string }>("SELECT key, value FROM meta")
@@ -300,46 +361,19 @@ export class OutlineCorpus {
             throw new Error();
           dictionaries.set(row.column_name, row.dict_bytes);
         }
-      if (generation !== this.generation)
-        throw new CorpusError(
-          "ABORTED",
-          "The corpus was closed while opening.",
-        );
-      this.db = db;
-      this.metadata = metadata;
-      this.sha256 = sha256;
-      this.fileSha256 = fileSha256;
-      this.compression = fileCompression;
-      this.sectionCount = count;
-      this.dictionaries = dictionaries;
-    } catch (error) {
-      db?.close();
-      if (error instanceof CorpusError) throw error;
-      if (
-        error &&
-        typeof error === "object" &&
-        "code" in error &&
-        error.code === "TOO_LARGE"
-      )
-        throw new CorpusError(
-          "CORPUS_TOO_LARGE",
-          "Corpus artifacts must not exceed 256 MiB.",
-        );
-      if (
-        error &&
-        typeof error === "object" &&
-        "code" in error &&
-        (error.code === "ENOENT" || error.code === "NO_FILES")
-      )
-        throw new CorpusError(
-          "CORPUS_UNAVAILABLE",
-          `${this.options.label ?? "MPEP"} corpus is unavailable. Set ${this.options.envVar ?? "MPEP_CORPUS_PATH"} to an existing verified artifact; acquisition never runs during a request.`,
-        );
-      throw new CorpusError(
-        "INVALID_CORPUS",
-        "The outline corpus is not a supported readable SQLite/FTS5 artifact.",
-      );
+      return { metadata, count, dictionaries };
+    });
+    if (generation !== this.generation) {
+      snapshot.db.close();
+      throw new CorpusError("ABORTED", "The corpus was closed while opening.");
     }
+    this.db = snapshot.db;
+    this.metadata = snapshot.value.metadata;
+    this.sha256 = snapshot.sha256;
+    this.fileSha256 = snapshot.fileSha256;
+    this.compression = snapshot.compression;
+    this.sectionCount = snapshot.value.count;
+    this.dictionaries = snapshot.value.dictionaries;
   }
 
   section(value: string, byNumber: boolean): OutlineRow | null {
