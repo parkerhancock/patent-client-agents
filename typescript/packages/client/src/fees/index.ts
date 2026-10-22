@@ -10,10 +10,12 @@ import {
   type RightType,
   RightTypeSchema,
 } from "./models.js";
+import { UsptoFeesClient } from "./uspto.js";
 
 export * from "./aliases.js";
 export * from "./epo.js";
 export * from "./models.js";
+export * from "./uspto.js";
 
 export type FeeRouteErrorCode =
   | "UNKNOWN_JURISDICTION"
@@ -98,7 +100,11 @@ export class FeesClient {
   private readonly routes: Map<string, Loader>;
   constructor(options: Omit<ClientOptions, "apiKey"> = {}) {
     const epo = new EpoFeesClient(options);
-    this.routes = new Map([
+    const uspto = new UsptoFeesClient(options);
+    this.routes = new Map<string, Loader>([
+      ["USPTO/patent", (o) => uspto.getPatentSchedule(o)],
+      ["USPTO/trademark", (o) => uspto.getTrademarkSchedule(o)],
+      ["USPTO/design", (o) => uspto.getDesignSchedule(o)],
       ["EPO/patent", (o) => epo.getEpcSchedule(o)],
       ["EPO-UP/patent", (o) => epo.getUnitaryPatentSchedule(o)],
     ]);

@@ -211,7 +211,7 @@ Related tools: get_fees.`,
     {
       ...facadeToolOptions(auth),
       name: "get_fees",
-      description: `Get official patent fees. This server has the EPO (European patent application) and EPO-UP (Unitary Patent) schedules; other offices report that they are not yet ported.
+      description: `Get official patent fees. This server has the USPTO (patent, design and trademark), EPO (European patent application) and EPO-UP (Unitary Patent) schedules; other offices report that they are not yet ported.
 
 Routes by \`mode\`: 'schedule' returns one office's full published fee
 schedule; 'lookup' filters a schedule down to line items matching a
@@ -232,7 +232,7 @@ Related tools: classify_cpc.`,
           .nullable()
           .default(null)
           .describe(
-            "mode='schedule'/'lookup': office or jurisdiction — 'EPO', 'EP', or 'UP' (Unitary Patent). Not used for mode='jurisdictions'.",
+            "mode='schedule'/'lookup': office or jurisdiction — 'USPTO' or 'US', 'EPO' or 'EP', or 'UP' (Unitary Patent). Not used for mode='jurisdictions'.",
           ),
         right: z
           .string()
@@ -261,13 +261,13 @@ Related tools: classify_cpc.`,
           .nullable()
           .default(null)
           .describe(
-            "mode='lookup': required when filtering renewal/maintenance fees (EPO renewals: 3-20; Unitary Patent renewals: 2-20). None excludes renewal/maintenance rows.",
+            "mode='lookup': required when filtering renewal/maintenance fees (USPTO maintenance: 4, 8, 12 for the 3.5/7.5/11.5-year fees; USPTO trademark renewals: 10; EPO renewals: 3-20; Unitary Patent renewals: 2-20). None excludes renewal/maintenance rows.",
           ),
         refresh: z
           .boolean()
           .default(false)
           .describe(
-            "Force USPTO source revalidation for schedule/lookup. USPTO fees are not yet ported, so this is not available on this server.",
+            "USPTO only. This server keeps no fee cache, so every USPTO request already fetches the live page; refresh is accepted for USPTO and rejected for other offices.",
           ),
       }),
     },
@@ -297,15 +297,13 @@ Related tools: classify_cpc.`,
         throw new Error(
           `get_fees(mode='${input.mode}') requires jurisdiction.`,
         );
-      if (input.refresh)
-        throw new Error(
-          "refresh is supported only for USPTO fees, which are not yet available on the TypeScript server.",
-        );
       const schedule = await loadSchedule(
         clients,
         input.jurisdiction,
         input.right,
       );
+      if (input.refresh && schedule.office_code !== "USPTO")
+        throw new Error("refresh is supported only for USPTO fees.");
       const { provenance, ...details } = schedule;
       if (input.mode === "schedule")
         return detailEnvelope(

@@ -8,6 +8,7 @@ import {
 } from "@patent-client-agents/client";
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";
+import { usptoFeePage } from "./fees-recordings.js";
 
 type Envelope = {
   summary: string;
@@ -177,38 +178,46 @@ function trademarkAssignments() {
 function feesClient() {
   return new FeesClient({
     retryLimit: 0,
-    fetch: (async () =>
-      Response.json([
-        {
-          data: { feeCode: "001", feeDescription: "Filing fee", amount: null },
-          children: [
+    fetch: (async (input: RequestInfo | URL) =>
+      String(input instanceof Request ? input.url : input).includes("uspto.gov")
+        ? new Response(usptoFeePage(), {
+            headers: { "content-type": "text/html" },
+          })
+        : Response.json([
             {
               data: {
-                feeCode: null,
-                feeDescription: "online",
-                amount: "135,00",
+                feeCode: "001",
+                feeDescription: "Filing fee",
+                amount: null,
+              },
+              children: [
+                {
+                  data: {
+                    feeCode: null,
+                    feeDescription: "online",
+                    amount: "135,00",
+                  },
+                  children: [],
+                },
+              ],
+            },
+            ...Array.from({ length: 18 }, (_, i) => ({
+              data: {
+                feeCode: String(33 + i).padStart(3, "0"),
+                feeDescription: `Renewal fee for the ${i + 3}th year`,
+                amount: "1.000,00",
+              },
+              children: [],
+            })),
+            {
+              data: {
+                feeCode: "732",
+                feeDescription: "Renewal fee for the 2nd year",
+                amount: "35,00",
               },
               children: [],
             },
-          ],
-        },
-        ...Array.from({ length: 18 }, (_, i) => ({
-          data: {
-            feeCode: String(33 + i).padStart(3, "0"),
-            feeDescription: `Renewal fee for the ${i + 3}th year`,
-            amount: "1.000,00",
-          },
-          children: [],
-        })),
-        {
-          data: {
-            feeCode: "732",
-            feeDescription: "Renewal fee for the 2nd year",
-            amount: "35,00",
-          },
-          children: [],
-        },
-      ])) as unknown as typeof fetch,
+          ])) as unknown as typeof fetch,
   });
 }
 
@@ -603,14 +612,30 @@ test("get_fees covers schedule, lookup and jurisdictions, and names unported off
     );
     const list = await mcp.call("get_fees", { mode: "jurisdictions" });
     expect(list.items?.map((item) => item.key)).toEqual([
+      "US/USPTO/patent",
+      "US/USPTO/trademark",
+      "US/USPTO/design",
       "EP/EPO/patent",
       "UP/EPO-UP/patent",
     ]);
-    expect(list.summary).toContain("Not yet ported: USPTO patent");
+    expect(list.summary).toContain("Not yet ported: EUIPO trademark");
+    // USPTO is served by routing alone; refresh is accepted for USPTO only.
+    const maintenance = await mcp.call("get_fees", {
+      mode: "lookup",
+      jurisdiction: "US",
+      category: "maintenance",
+      tier: "small",
+      year: 8,
+      refresh: true,
+    });
+    expect(maintenance.items).toEqual([
+      expect.objectContaining({ code: "2552", amount: "1616.00", year: 8 }),
+    ]);
+    expect(maintenance.summary).toContain("effective 2025-01-19");
     await expect(
       mcp.client.callTool("get_fees", {
         mode: "schedule",
-        jurisdiction: "USPTO",
+        jurisdiction: "JPO",
       }),
     ).rejects.toThrow("not yet ported");
     await expect(

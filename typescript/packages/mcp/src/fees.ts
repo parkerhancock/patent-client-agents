@@ -52,7 +52,7 @@ const jurisdiction = z
   .min(1)
   .max(80)
   .describe(
-    "Office or jurisdiction name, e.g. EPO, EP, Unitary Patent (UP). EP means EPO for patents.",
+    "Office or jurisdiction name, e.g. USPTO, US, EPO, EP, Unitary Patent (UP). EP means EPO for patents.",
   );
 
 export function registerFeeTools(
@@ -65,7 +65,7 @@ export function registerFeeTools(
       ...detailToolOptions(auth),
       name: "get_fee_schedule",
       description:
-        "Fetch an IP office's full official fee schedule: every fee with code, category, amount as a decimal string, currency, year for renewals and any per-claim or per-page condition. effective_date is the office's published date (null when unpublished), distinct from provenance.retrieved_at. Currently EPO (EPC fees) and EPO-UP (Unitary Patent renewals); other offices report that they are not yet ported.",
+        "Fetch an IP office's full official fee schedule: every fee with code, category, amount as a decimal string, currency, year for renewals and any per-claim or per-page condition. effective_date is the office's published date (null when unpublished), distinct from provenance.retrieved_at. Currently USPTO (patent, design, trademark), EPO (EPC fees) and EPO-UP (Unitary Patent renewals); other offices report that they are not yet ported.",
       input: z.object({
         jurisdiction,
         right: RightTypeSchema.default("patent"),
@@ -111,7 +111,7 @@ export function registerFeeTools(
       output: listEnvelopeSchema.extend({ source_metadata: z.unknown() }),
       name: "lookup_fee",
       description:
-        "Filter one office's fee schedule. Omit year to exclude renewal rows; pass year (EPO 3-20, Unitary Patent 2-20) for a renewal or its late-payment fee. tier applies only to offices with entity discounts. An empty result is authoritative for renewals only when coverage is complete.",
+        "Filter one office's fee schedule. Omit year to exclude renewal rows; pass year (USPTO maintenance 4, 8, 12; USPTO trademark renewal 10; EPO 3-20; Unitary Patent 2-20) for a renewal or maintenance fee or its late-payment fee. tier applies only to offices with entity discounts. An empty result is authoritative for renewals only when coverage is complete.",
       input: z.object({
         jurisdiction,
         right: RightTypeSchema.default("patent"),
