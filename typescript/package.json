@@ -40,6 +40,7 @@
     "record:epo-ops": "bun scripts/record-epo-ops.ts",
     "record:fees": "bun scripts/record-fees.ts",
     "record:google-patents": "bun scripts/record-google-patents.ts",
+    "verify:facade-live": "bun scripts/live-facade.ts",
     "verify:epo-legal": "bun scripts/verify-epo-legal.ts"
   },
   "devDependencies": {

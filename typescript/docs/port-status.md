@@ -156,5 +156,5 @@ throttled; nothing is deployed.
 
 October 21, 2026. The [curated toolset](facade.md) serves the deployed facade's
 tool surface with identical inputs. Twenty-three of the thirty Python tools are
-served; seven wait on CAFC, UPC, WIPO Lex and copyright connectors. Not
-deployed or tried against live offices.
+served; seven wait on CAFC, UPC, WIPO Lex and copyright connectors. All
+served tools and modes passed a live check on October 21; not deployed.

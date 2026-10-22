@@ -9,6 +9,7 @@ import {
   recordRequest,
   recordResponse,
 } from "./odp-record-models.js";
+import type { TransportRequestOptions } from "./transport.js";
 import { type ClientOptions, OdpApiError, OdpTransport } from "./transport.js";
 export type PtabProceedingResponse = RecordResponse<
   "patentTrialProceedingDataBag",
@@ -65,7 +66,7 @@ class PtabRecords<K extends string> {
   protected getRecords(
     path: string,
     key: K,
-    options: RequestOptions = {},
+    options: RequestOptions & Pick<TransportRequestOptions, "emptyOn404"> = {},
     single = false,
   ) {
     return recordResponse(
@@ -209,20 +210,24 @@ export class PtabTrialsClient extends PtabRecords<
     id: string,
     options: RequestOptions = {},
   ): Promise<PtabDocumentResponse> {
+    // ODP answers 404 when a trial has no decisions yet (pending IPRs); that is
+    // an empty list, not a failure. An unknown trial number also reads empty.
     return this.getRecords(
       `/api/v1/patent/trials/${identifier(id)}/decisions`,
       "patentTrialDocumentDataBag",
-      options,
+      { emptyOn404: { count: 0, patentTrialDocumentDataBag: [] }, ...options },
     ) as Promise<PtabDocumentResponse>;
   }
   getDocumentsByTrial(
     id: string,
     options: RequestOptions = {},
   ): Promise<PtabDocumentResponse> {
+    // ODP answers 404 when a trial has no documents yet (pending IPRs); that is
+    // an empty list, not a failure. An unknown trial number also reads empty.
     return this.getRecords(
       `/api/v1/patent/trials/${identifier(id)}/documents`,
       "patentTrialDocumentDataBag",
-      options,
+      { emptyOn404: { count: 0, patentTrialDocumentDataBag: [] }, ...options },
     ) as Promise<PtabDocumentResponse>;
   }
   downloadProceedings(

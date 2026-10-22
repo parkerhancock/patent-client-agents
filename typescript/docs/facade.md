@@ -73,6 +73,41 @@ Each module documents its own deviations inline:
 [legal reference](../packages/mcp/src/facade/legal-reference.ts),
 [documents](../packages/mcp/src/facade/documents.ts).
 
+## Live check
+
+On October 21, 2026, [`scripts/live-facade.ts`](../scripts/live-facade.ts)
+(`bun run verify:facade-live <report.json>`) called every served tool and mode
+against the live offices: 81 calls in the first run, with the deployed ODP, TSDR and EPO OPS
+keys and Trademark Search WAF session read from Secret Manager into the process
+environment only, the fresh MPEP artifact and the prepared EPO corpora.
+Every call behaved as expected after one fix:
+
+- **Fixed:** ODP answers HTTP 404 for a trial's decisions while the trial is
+  pending. `list_ptab_children` and `download_document(source='ptab_trial')`
+  failed for every pending IPR. The PTAB client now reads that 404 as an empty
+  list ([regression test](../tests/ptab-children.test.ts)); a pending trial's
+  download reports that no decisions match, and a decided trial
+  (IPR2020-00019) returns its 105 documents and a 42 KB decision.
+
+Confirmed live, among others: the claims cascade (ODP for a granted US patent,
+Patent Public Search for a pre-grant publication, EPO OPS for EP1000000B1), all
+eleven `get_epo` views including the registered Unitary Patent EP4108782,
+Trademark Search through the deployed WAF session, all four TSDR views, EPO
+fee lookups, PTAB search across all five record types, office-action text by
+document identifier, file-history item (25 KB) and NOA bundle (780 KB), and
+patent PDFs for US (618 KB) and EP (558 KB). Unported modes returned their
+not-yet-available messages.
+
+Not facade defects, but visible in the run:
+
+- `search_legal_reference(corpus='epc', query='novelty')` returns no hits,
+  because the crawled EPC text runs heading words into numbers. The builder
+  fix is on `fix/epo-legal-heading-whitespace`; the corpora have not been
+  rebuilt with it.
+- `get_epo(view='register_biblio')` summarizes with the first register title,
+  which is the German one for EP1000000. The data includes all three.
+- Trademark Search owner names can carry runs of spaces from the source.
+
 ## Verification
 
 37 facade tests across [patents and USPTO](../tests/facade-patents-uspto.test.ts),
@@ -80,4 +115,4 @@ Each module documents its own deviations inline:
 [litigation, legal reference and documents](../tests/facade-lit-ref-docs.test.ts)
 check routing, cascades, list handling, validation and gaps against synthetic
 upstreams and the real corpus fixtures, plus the contract test. The curated
-toolset has not been run against live offices or deployed.
+toolset is not deployed.
