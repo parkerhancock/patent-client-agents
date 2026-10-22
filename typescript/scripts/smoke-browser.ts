@@ -3,7 +3,7 @@
 import { generateKeyPairSync, sign } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { zstdCompressSync } from "node:zlib";
+import { gunzipSync, zstdCompressSync } from "node:zlib";
 import { chromium } from "playwright";
 import { createServer } from "../packages/mcp/src/index.js";
 
@@ -54,6 +54,13 @@ const server = Bun.serve({
               ),
         ),
         { headers: { "content-type": "application/wasm" } },
+      );
+    if (path === "/fixtures/google-patents/US7654321B2.html")
+      return new Response(
+        gunzipSync(
+          await readFile(join(fixtures, "google-patents/US7654321B2.html.gz")),
+        ),
+        { headers: { "content-type": "text/html" } },
       );
     if (path === "/fixtures/plain.db.zst")
       return new Response(
@@ -154,11 +161,13 @@ try {
   );
   const checked = result as {
     ok?: boolean;
+    google_claims?: number;
     direct_cross_origin?: string;
     relay_fee?: string;
   };
   if (
     !checked.ok ||
+    checked.google_claims !== 26 ||
     checked.direct_cross_origin !== "blocked by CORS" ||
     checked.relay_fee !== "135.00"
   )

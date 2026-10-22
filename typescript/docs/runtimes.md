@@ -71,8 +71,9 @@ serves `/relay?url=…` ([source](../packages/mcp/src/relay.ts)):
   without server auth.
 - Targets must be plain HTTPS URLs on an allowlist: `api.uspto.gov`,
   `data.uspto.gov`, `data-documents.uspto.gov`, `tsdrapi.uspto.gov`,
-  `assignmentcenter.uspto.gov`, `ops.epo.org` and `fees.apps.epo.org`.
-- It forwards only `accept`, `content-type` and `x-ops-range`. Browser
+  `assignmentcenter.uspto.gov`, `ops.epo.org`, `fees.apps.epo.org`,
+  `patents.google.com` and `patentimages.storage.googleapis.com`.
+- It forwards only `accept`, `accept-language`, `content-type` and `x-ops-range`. Browser
   cookies, `Origin` and the relay token never reach the office.
 - It injects the server's ODP and TSDR keys and the OPS client credentials for
   the token endpoint. A browser-held OPS bearer token travels as

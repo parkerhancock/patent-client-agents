@@ -1,0 +1,2162 @@
+version: 1
+interactions:
+- request:
+    method: GET
+    uri: https://patents.google.com/patent/JP2019000001A/en
+    headers:
+      accept:
+      - application/json
+      accept-language:
+      - en-US,en;q=0.9
+    body:
+      type: none
+  response:
+    status: 200
+    headers:
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      content-security-policy-report-only:
+      - >-
+        script-src 'none'; form-action 'none'; frame-src 'none'; report-uri
+        https://csp.withgoogle.com/csp/goa-cf66a5ad_2
+      content-type:
+      - text/html
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Thu, 22 Oct 2026 01:09:42 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Sec-Fetch-Site, Sec-Fetch-Mode, Sec-Fetch-Dest
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-frontend-version:
+      - patent-search.search_20261019_RC00
+      x-xss-protection:
+      - "0"
+    body:
+      type: text
+      content: |
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <title>JP2019000001A - 
+                Cell culture equipment
+               
+                - Google Patents</title>
+        
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta charset="UTF-8">
+            <meta name="referrer" content="origin-when-crossorigin">
+            <link rel="canonical" href="https://patents.google.com/patent/JP2019000001A/en">
+            <meta name="description" content="
+             
+              There is currently no method for controlling the diameter of cell mass suitable for suspension culture for mass production. Then, in view of the above situation, an object of the present invention is to provide a method for controlling the diameter of a cell mass and a cell culture apparatus to which the control method is applied. A culture apparatus according to the present invention controls the diameter of a cell mass by applying ultrasonic waves to a relatively large cell mass while floating in a culture solution. [Selection] Figure 1
+             
+           
+           ">
+            <meta name="DC.type" content="patent">
+            <meta name="DC.title" content="
+                Cell culture equipment
+               
+               ">
+            <meta name="DC.date" content="2015-09-29" scheme="dateSubmitted">
+            <meta name="DC.description" content="
+             
+              There is currently no method for controlling the diameter of cell mass suitable for suspension culture for mass production. Then, in view of the above situation, an object of the present invention is to provide a method for controlling the diameter of a cell mass and a cell culture apparatus to which the control method is applied. A culture apparatus according to the present invention controls the diameter of a cell mass by applying ultrasonic waves to a relatively large cell mass while floating in a culture solution. [Selection] Figure 1
+             
+           
+           ">
+            <meta name="citation_patent_application_number" content="JP:2015190614A">
+            <meta name="citation_pdf_url" content="https://patentimages.storage.googleapis.com/61/e0/0d/00e6f82016774b/JP2019000001A.pdf">
+            <meta name="citation_patent_publication_number" content="JP:2019000001:A">
+            <meta name="DC.date" content="2019-01-10">
+            <meta name="DC.contributor" content="千鶴 平井" scheme="inventor">
+            <meta name="DC.contributor" content="Chizuru Hirai" scheme="inventor">
+            <meta name="DC.contributor" content="千鶴 平井" scheme="inventor">
+            <meta name="DC.contributor" content="啓介 渋谷" scheme="inventor">
+            <meta name="DC.contributor" content="Keisuke Shibuya" scheme="inventor">
+            <meta name="DC.contributor" content="啓介 渋谷" scheme="inventor">
+            <meta name="DC.contributor" content="拓司 安藤" scheme="inventor">
+            <meta name="DC.contributor" content="Takuji Ando" scheme="inventor">
+            <meta name="DC.contributor" content="拓司 安藤" scheme="inventor">
+            <meta name="DC.contributor" content="良一 芳賀" scheme="inventor">
+            <meta name="DC.contributor" content="Ryoichi Haga" scheme="inventor">
+            <meta name="DC.contributor" content="良一 芳賀" scheme="inventor">
+            <meta name="DC.contributor" content="Hitachi Ltd" scheme="assignee">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Product+Sans">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700">
+        
+            <style>
+              
+              #gb { position: absolute; top: 6px; left: auto; right: 0; width: auto; min-width: 135px !important; }   
+              body { transition: none; }
+            </style>
+            <script></script>
+        
+            <script>
+              window.version = 'patent-search.search_20261019_RC00';
+        
+              function sendFeedback() {
+                userfeedback.api.startFeedback({
+                  'productId': '713680',
+                  'bucket': 'patent-search-web',
+                  'productVersion': window.version,
+                });
+              }
+        
+              window.experiments = {};
+              window.experiments.patentCountries = "ae,ag,al,am,ao,ap,ar,at,au,aw,az,ba,bb,bd,be,bf,bg,bh,bj,bn,bo,br,bw,bx,by,bz,ca,cf,cg,ch,ci,cl,cm,cn,co,cr,cs,cu,cy,cz,dd,de,dj,dk,dm,do,dz,ea,ec,ee,eg,em,ep,es,fi,fr,ga,gb,gc,gd,ge,gh,gm,gn,gq,gr,gt,gw,hk,hn,hr,hu,ib,id,ie,il,in,ir,is,it,jo,jp,ke,kg,kh,km,kn,kp,kr,kw,kz,la,lc,li,lk,lr,ls,lt,lu,lv,ly,ma,mc,md,me,mg,mk,ml,mn,mo,mr,mt,mw,mx,my,mz,na,ne,ng,ni,nl,no,nz,oa,om,pa,pe,pg,ph,pl,pt,py,qa,ro,rs,ru,rw,sa,sc,sd,se,sg,si,sk,sl,sm,sn,st,su,sv,sy,sz,td,tg,th,tj,tm,tn,tr,tt,tw,tz,ua,ug,us,uy,uz,vc,ve,vn,wo,yu,za,zm,zw";
+              
+              
+              window.experiments.keywordWizard = true;
+              
+              
+              
+              window.experiments.definitions = true;
+              window.experiments.plogs = true;
+        
+              window.Polymer = {
+                dom: 'shady',
+                lazyRegister: true,
+              };
+            </script>
+        
+            <script src="//www.gstatic.com/patent-search/frontend/patent-search.search_20261019_RC00/scs/compiled_dir/webcomponentsjs/webcomponents-lite.min.js"></script>
+            <link rel="import" href="//www.gstatic.com/patent-search/frontend/patent-search.search_20261019_RC00/scs/compiled_dir/search-app-vulcanized.html">
+          </head>
+          <body unresolved>
+            
+            
+            <script></script>
+            <script src="//www.gstatic.com/patent-search/frontend/patent-search.search_20261019_RC00/scs/compiled_dir/search-app-vulcanized.js"></script>
+            <search-app>
+              
+              
+        
+              <article class="result" itemscope itemtype="http://schema.org/ScholarlyArticle">
+          <h1 itemprop="pageTitle">JP2019000001A - 
+                Cell culture equipment
+               
+                - Google Patents</h1>
+          <span itemprop="title">
+                Cell culture equipment
+               
+               </span>
+        
+          <meta itemprop="type" content="patent">
+          <a href="https://patentimages.storage.googleapis.com/61/e0/0d/00e6f82016774b/JP2019000001A.pdf" itemprop="pdfLink">Download PDF</a>
+          <h2>Info</h2>
+        
+          <dl>
+            <dt>Publication number</dt>
+            <dd itemprop="publicationNumber">JP2019000001A</dd>
+            <meta itemprop="numberWithoutCodes" content="2019000001">
+            <meta itemprop="kindCode" content="A">
+            <meta itemprop="publicationDescription" content="Published unexamined patent application">
+            <span>JP2019000001A</span>
+            <span>JP2015190614A</span>
+            <span>JP2015190614A</span>
+            <span>JP2019000001A</span>
+            <span>JP 2019000001 A</span>
+            <span>JP2019000001 A</span>
+            <span>JP 2019000001A</span>
+            <span>JP 2015190614 A</span>
+            <span>JP2015190614 A</span>
+            <span>JP 2015190614A</span>
+            <span>JP 2015190614 A</span>
+            <span>JP2015190614 A</span>
+            <span>JP 2015190614A</span>
+            <span>JP 2019000001 A</span>
+            <span>JP2019000001 A</span>
+            <span>JP 2019000001A</span>
+        
+            <dt>Authority</dt>
+            <dd itemprop="countryCode">JP</dd>
+            <dd itemprop="countryName">Japan</dd>
+        
+            <dt>Prior art keywords</dt>
+            <dd itemprop="priorArtKeywords" repeat>cell</dd>
+            <dd itemprop="priorArtKeywords" repeat>culture</dd>
+            <dd itemprop="priorArtKeywords" repeat>cell mass</dd>
+            <dd itemprop="priorArtKeywords" repeat>cells</dd>
+            <dd itemprop="priorArtKeywords" repeat>culture solution</dd>
+        
+            <dt>Prior art date</dt>
+            <dd><time itemprop="priorArtDate" datetime="2015-09-29">2015-09-29</time></dd>
+        
+            <dt>Legal status (The legal status is an assumption and is not a legal conclusion. Google has not performed a legal analysis and makes no representation as to the accuracy of the status listed.)</dt>
+            <dd itemprop="legalStatusIfi" itemscope>
+              <span itemprop="status">Pending</span>
+            </dd>
+          </dl>
+        
+          <dt>Application number</dt>
+          <dd itemprop="applicationNumber">JP2015190614A</dd>
+        
+          <dt>Other languages</dt>
+          <dd itemprop="otherLanguages" itemscope repeat>
+            <a href="/patent/JP2019000001A/ja">
+              <span itemprop="name">Japanese</span> (<span itemprop="code">ja</span>)
+            </a>
+          </dd>
+        
+          
+        
+          <dt>Inventor</dt>
+          <dd itemprop="inventor" repeat>千鶴 平井</dd>
+          <dd itemprop="inventor" repeat>Chizuru Hirai</dd>
+          <dd itemprop="inventor" repeat>千鶴 平井</dd>
+          <dd itemprop="inventor" repeat>啓介 渋谷</dd>
+          <dd itemprop="inventor" repeat>Keisuke Shibuya</dd>
+          <dd itemprop="inventor" repeat>啓介 渋谷</dd>
+          <dd itemprop="inventor" repeat>拓司 安藤</dd>
+          <dd itemprop="inventor" repeat>Takuji Ando</dd>
+          <dd itemprop="inventor" repeat>拓司 安藤</dd>
+          <dd itemprop="inventor" repeat>良一 芳賀</dd>
+          <dd itemprop="inventor" repeat>Ryoichi Haga</dd>
+          <dd itemprop="inventor" repeat>良一 芳賀</dd>
+        
+          <dt>Current Assignee (The listed assignees may be inaccurate. Google has not performed a legal analysis and makes no representation or warranty as to the accuracy of the list.)</dt>
+          <dd itemprop="assigneeCurrent" repeat>
+            Hitachi Ltd
+          </dd>
+        
+          <dt>Original Assignee</dt>
+          <dd itemprop="assigneeOriginal" repeat>Hitachi Ltd</dd>
+        
+          <dt>Priority date (The priority date is an assumption and is not a legal conclusion. Google has not performed a legal analysis and makes no representation as to the accuracy of the date listed.)</dt>
+          <dd><time itemprop="priorityDate" datetime="2015-09-29">2015-09-29</time></dd>
+        
+          <dt>Filing date</dt>
+          <dd><time itemprop="filingDate" datetime="2015-09-29">2015-09-29</time></dd>
+        
+          <dt>Publication date</dt>
+          <dd><time itemprop="publicationDate" datetime="2019-01-10">2019-01-10</time></dd>
+        
+          
+          <dd itemprop="events" itemscope repeat>
+            <time itemprop="date" datetime="2015-09-29">2015-09-29</time>
+            <span itemprop="title">Application filed by Hitachi Ltd</span>
+            <span itemprop="type">filed</span>
+            <span itemprop="critical" content="true" bool>Critical</span>
+            
+            
+            
+            <span itemprop="assigneeSearch">Hitachi Ltd</span>
+          </dd>
+          <dd itemprop="events" itemscope repeat>
+            <time itemprop="date" datetime="2015-09-29">2015-09-29</time>
+            <span itemprop="title">Priority to JP2015190614A</span>
+            <span itemprop="type">priority</span>
+            <span itemprop="critical" content="true" bool>Critical</span>
+            
+            
+            <span itemprop="documentId">patent/JP2019000001A/en</span>
+            
+          </dd>
+          <dd itemprop="events" itemscope repeat>
+            <time itemprop="date" datetime="2016-08-03">2016-08-03</time>
+            <span itemprop="title">Priority to PCT/JP2016/072711</span>
+            <span itemprop="type">priority</span>
+            
+            
+            
+            <span itemprop="documentId">patent/WO2017056695A1/en</span>
+            
+          </dd>
+          <dd itemprop="events" itemscope repeat>
+            <time itemprop="date" datetime="2019-01-10">2019-01-10</time>
+            <span itemprop="title">Publication of JP2019000001A</span>
+            <span itemprop="type">publication</span>
+            <span itemprop="critical" content="true" bool>Critical</span>
+            
+            
+            <span itemprop="documentId">patent/JP2019000001A/en</span>
+            
+          </dd>
+          <dd itemprop="events" itemscope repeat>
+            <time itemprop="date">Status</time>
+            <span itemprop="title">Pending</span>
+            <span itemprop="type">legal-status</span>
+            <span itemprop="critical" content="true" bool>Critical</span>
+            <span itemprop="current" content="true" bool>Current</span>
+            
+            
+            
+          </dd>
+        
+          <h2>Links</h2>
+          <ul>
+            
+        
+            <li itemprop="links" itemscope repeat>
+                <meta itemprop="id" content="espacenetLink">
+                <a href="https://worldwide.espacenet.com/publicationDetails/biblio?CC=JP&amp;NR=2019000001A&amp;KC=A&amp;FT=D" itemprop="url" target="_blank"><span itemprop="text">Espacenet</span></a>
+              </li>
+              
+        
+            
+        
+            <li itemprop="links" itemscope repeat>
+              <meta itemprop="id" content="globalDossierLink">
+              <a href="https://globaldossier.uspto.gov/result/application/JP/2015190614/1" itemprop="url" target="_blank"><span itemprop="text">Global Dossier</span></a>
+            </li>
+        
+            
+        
+              
+        
+              
+        
+              
+              <li itemprop="links" itemscope repeat>
+                <meta itemprop="id" content="stackexchangeLink">
+                <a href="https://patents.stackexchange.com/questions/tagged/JP2019000001A" itemprop="url"><span itemprop="text">Discuss</span></a>
+              </li>
+          </ul>
+        
+          
+        
+          <section>
+            <h2>Images</h2>
+            <ul>
+              <li itemprop="images" itemscope repeat>
+                <img itemprop="thumbnail" src="https://patentimages.storage.googleapis.com/61/ae/d0/ecc2e274b7008b/2019000001-3.png">
+                <meta itemprop="full" content="https://patentimages.storage.googleapis.com/3e/3b/17/8e6e55b70937a2/2019000001-3.png">
+                <ul>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="0">
+                    <meta itemprop="id" content="1">
+                    <meta itemprop="label" content="container body">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="47">
+                      <meta itemprop="top" content="21">
+                      <meta itemprop="right" content="56">
+                      <meta itemprop="bottom" content="34">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="0">
+                    <meta itemprop="id" content="5">
+                    <meta itemprop="label" content="ultrasonic irradiation unit">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="218">
+                      <meta itemprop="top" content="81">
+                      <meta itemprop="right" content="228">
+                      <meta itemprop="bottom" content="92">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="0">
+                    <meta itemprop="id" content="7">
+                    <meta itemprop="label" content="cell observation unit">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="217">
+                      <meta itemprop="top" content="142">
+                      <meta itemprop="right" content="226">
+                      <meta itemprop="bottom" content="153">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="0">
+                    <meta itemprop="id" content="8">
+                    <meta itemprop="label" content="lid">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="217">
+                      <meta itemprop="top" content="102">
+                      <meta itemprop="right" content="226">
+                      <meta itemprop="bottom" content="112">
+                    </span>
+                  </li>
+                </ul>
+              </li>
+              <li itemprop="images" itemscope repeat>
+                <img itemprop="thumbnail" src="https://patentimages.storage.googleapis.com/84/6a/53/2ccbe15ff5c59f/2019000001-4.png">
+                <meta itemprop="full" content="https://patentimages.storage.googleapis.com/3a/9f/e9/5ee00257692589/2019000001-4.png">
+                <ul>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="1">
+                    <meta itemprop="id" content="1">
+                    <meta itemprop="label" content="container body">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="210">
+                      <meta itemprop="top" content="147">
+                      <meta itemprop="right" content="217">
+                      <meta itemprop="bottom" content="159">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="1">
+                    <meta itemprop="id" content="10">
+                    <meta itemprop="label" content="sterilization filter">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="22">
+                      <meta itemprop="top" content="96">
+                      <meta itemprop="right" content="40">
+                      <meta itemprop="bottom" content="107">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="1">
+                    <meta itemprop="id" content="6">
+                    <meta itemprop="label" content="measuring device">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="31">
+                      <meta itemprop="top" content="162">
+                      <meta itemprop="right" content="41">
+                      <meta itemprop="bottom" content="173">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="1">
+                    <meta itemprop="id" content="8">
+                    <meta itemprop="label" content="lid">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="214">
+                      <meta itemprop="top" content="108">
+                      <meta itemprop="right" content="224">
+                      <meta itemprop="bottom" content="119">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="1">
+                    <meta itemprop="id" content="9">
+                    <meta itemprop="label" content="additive conduit">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="361">
+                      <meta itemprop="top" content="188">
+                      <meta itemprop="right" content="371">
+                      <meta itemprop="bottom" content="199">
+                    </span>
+                  </li>
+                </ul>
+              </li>
+              <li itemprop="images" itemscope repeat>
+                <img itemprop="thumbnail" src="https://patentimages.storage.googleapis.com/08/cc/66/21152c95bb5a50/2019000001-5.png">
+                <meta itemprop="full" content="https://patentimages.storage.googleapis.com/0f/48/a1/4ff0c0d9eac19d/2019000001-5.png">
+                <ul>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="2">
+                    <meta itemprop="id" content="10">
+                    <meta itemprop="label" content="sterilization filter">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="135">
+                      <meta itemprop="top" content="59">
+                      <meta itemprop="right" content="157">
+                      <meta itemprop="bottom" content="70">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="2">
+                    <meta itemprop="id" content="10">
+                    <meta itemprop="label" content="sterilization filter">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="128">
+                      <meta itemprop="top" content="90">
+                      <meta itemprop="right" content="148">
+                      <meta itemprop="bottom" content="107">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="2">
+                    <meta itemprop="id" content="12">
+                    <meta itemprop="label" content="waste liquid conduit">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="129">
+                      <meta itemprop="top" content="154">
+                      <meta itemprop="right" content="146">
+                      <meta itemprop="bottom" content="165">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="2">
+                    <meta itemprop="id" content="13">
+                    <meta itemprop="label" content="liquid glass container">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="71">
+                      <meta itemprop="top" content="294">
+                      <meta itemprop="right" content="90">
+                      <meta itemprop="bottom" content="306">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="2">
+                    <meta itemprop="id" content="14">
+                    <meta itemprop="label" content="medium storage container">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="40">
+                      <meta itemprop="top" content="294">
+                      <meta itemprop="right" content="57">
+                      <meta itemprop="bottom" content="306">
+                    </span>
+                  </li>
+                </ul>
+              </li>
+              <li itemprop="images" itemscope repeat>
+                <img itemprop="thumbnail" src="https://patentimages.storage.googleapis.com/98/08/1c/e7bba84a580f1b/2019000001-6.png">
+                <meta itemprop="full" content="https://patentimages.storage.googleapis.com/dd/38/c1/df5daa835207ee/2019000001-6.png">
+                <ul>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="3">
+                    <meta itemprop="id" content="15">
+                    <meta itemprop="label" content="flow path">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="174">
+                      <meta itemprop="top" content="299">
+                      <meta itemprop="right" content="190">
+                      <meta itemprop="bottom" content="311">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="3">
+                    <meta itemprop="id" content="4">
+                    <meta itemprop="label" content="ultrasonic transmission terminal">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="39">
+                      <meta itemprop="top" content="17">
+                      <meta itemprop="right" content="47">
+                      <meta itemprop="bottom" content="31">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="3">
+                    <meta itemprop="id" content="5">
+                    <meta itemprop="label" content="ultrasonic irradiation unit">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="294">
+                      <meta itemprop="top" content="144">
+                      <meta itemprop="right" content="301">
+                      <meta itemprop="bottom" content="156">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="3">
+                    <meta itemprop="id" content="6">
+                    <meta itemprop="label" content="measuring device">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="427">
+                      <meta itemprop="top" content="201">
+                      <meta itemprop="right" content="435">
+                      <meta itemprop="bottom" content="211">
+                    </span>
+                  </li>
+                </ul>
+              </li>
+              <li itemprop="images" itemscope repeat>
+                <img itemprop="thumbnail" src="https://patentimages.storage.googleapis.com/85/29/3a/9882782b1eb121/2019000001-7.png">
+                <meta itemprop="full" content="https://patentimages.storage.googleapis.com/c2/90/3d/ca3b7fa4473ed3/2019000001-7.png">
+                <ul>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="4">
+                    <meta itemprop="id" content="16">
+                    <meta itemprop="label" content="support column">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="145">
+                      <meta itemprop="top" content="284">
+                      <meta itemprop="right" content="162">
+                      <meta itemprop="bottom" content="295">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="4">
+                    <meta itemprop="id" content="17">
+                    <meta itemprop="label" content="plastic support">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="143">
+                      <meta itemprop="top" content="192">
+                      <meta itemprop="right" content="162">
+                      <meta itemprop="bottom" content="204">
+                    </span>
+                  </li>
+                  <li itemprop="callouts" itemscope repeat>
+                    <meta itemprop="figurePage" content="4">
+                    <meta itemprop="id" content="3">
+                    <meta itemprop="label" content="culture solution">
+                    <span itemprop="bounds" itemscope>
+                      <meta itemprop="left" content="50">
+                      <meta itemprop="top" content="247">
+                      <meta itemprop="right" content="59">
+                      <meta itemprop="bottom" content="257">
+                    </span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        
+          <section>
+            <h2>Classifications</h2>
+            <ul>
+              <li>
+                <ul itemprop="classifications" itemscope repeat>
+                  <li itemprop="classifications" itemscope repeat>
+                    <span itemprop="Code">C</span>&mdash;<span itemprop="Description">CHEMISTRY; METALLURGY</span>
+                    <meta itemprop="IsCPC" content="true">
+                  </li>
+                  <li itemprop="classifications" itemscope repeat>
+                    <span itemprop="Code">C12</span>&mdash;<span itemprop="Description">BIOCHEMISTRY; BEER; SPIRITS; WINE; VINEGAR; MICROBIOLOGY; ENZYMOLOGY; MUTATION OR GENETIC ENGINEERING</span>
+                    <meta itemprop="IsCPC" content="true">
+                  </li>
+                  <li itemprop="classifications" itemscope repeat>
+                    <span itemprop="Code">C12M</span>&mdash;<span itemprop="Description">APPARATUS FOR ENZYMOLOGY OR MICROBIOLOGY; APPARATUS FOR CULTURING MICROORGANISMS FOR PRODUCING BIOMASS, FOR GROWING CELLS OR FOR OBTAINING FERMENTATION OR METABOLIC PRODUCTS, i.e. BIOREACTORS OR FERMENTERS</span>
+                    <meta itemprop="IsCPC" content="true">
+                  </li>
+                  <li itemprop="classifications" itemscope repeat>
+                    <span itemprop="Code">C12M47/00</span>&mdash;<span itemprop="Description">Means for after-treatment of the produced biomass or of the fermentation or metabolic products, e.g. storage of biomass</span>
+                    <meta itemprop="IsCPC" content="true">
+                  </li>
+                  <li itemprop="classifications" itemscope repeat>
+                    <span itemprop="Code">C12M47/04</span>&mdash;<span itemprop="Description">Cell isolation or sorting</span>
+                    <meta itemprop="Leaf" content="true"><meta itemprop="FirstCode" content="true"><meta itemprop="IsCPC" content="true">
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        
+          
+        
+          
+        
+          
+        
+          <section>
+            <h2>Landscapes</h2>
+            <ul>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Life Sciences &amp; Earth Sciences</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Engineering &amp; Computer Science</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Health &amp; Medical Sciences</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Chemical &amp; Material Sciences</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Wood Science &amp; Technology</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Biotechnology</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Bioinformatics &amp; Cheminformatics</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Organic Chemistry</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Zoology</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Biomedical Technology</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Sustainable Development</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Microbiology</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Cell Biology</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Biochemistry</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">General Engineering &amp; Computer Science</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">General Health &amp; Medical Sciences</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Genetics &amp; Genomics</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Molecular Biology</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+              <li itemprop="landscapes" itemscope repeat>
+                <span itemprop="name">Apparatus Associated With Microorganisms And Enzymes</span>
+                (<span itemprop="type">AREA</span>)
+              </li>
+            </ul>
+          </section>
+        
+        
+          <section itemprop="abstract" itemscope>
+            <h2>Abstract</h2>
+            <aside>Translated from <span itemprop="translatedLanguage">Japanese</span></aside>
+            <div itemprop="content" html><abstract mxw-id="PA296411338" lang="EN" source="national office" load-source="google">
+            <p>
+              <span class="notranslate"> <span class="google-src-text">【課題】現在、大量生産を目的とした、浮遊培養に適した細胞塊の直径制御方法は存在しない。そこで、本発明は、上述したような実情に鑑み、細胞塊の直径を制御する方法、当該制御方法を適用した細胞培養装置を提供することを目的とする。【解決手段】本発明に係る培養装置は、培養液中に浮遊する中で比較的に大きい細胞塊に超音波付与を行うことで、細胞塊の直径を制御する。【選択図】 図１</span>There is currently no method for controlling the diameter of cell mass suitable for suspension culture for mass production. Then, in view of the above situation, an object of the present invention is to provide a method for controlling the diameter of a cell mass and a cell culture apparatus to which the control method is applied. A culture apparatus according to the present invention controls the diameter of a cell mass by applying ultrasonic waves to a relatively large cell mass while floating in a culture solution. [Selection] Figure 1</span>
+            </p>
+          </abstract>
+          </div>
+          </section>
+        
+          <section itemprop="description" itemscope>
+            <h2>Description</h2>
+            <aside>Translated from <span itemprop="translatedLanguage">Japanese</span></aside>
+            <div itemprop="content" html><description mxw-id="PDES182469922" lang="EN" load-source="google">
+            <technical-field>
+              <p num="0001">
+                <span class="notranslate"> <span class="google-src-text">
+          本発明は、人工多能性細胞のような細胞を培養する細胞培養装置に関する。
+        </span>
+          The present invention relates to a cell culture apparatus for culturing cells such as artificial pluripotent cells.
+        </span>
+              </p>
+            </technical-field>
+            <background-art>
+              <p num="0002">
+                <span class="notranslate"> <span class="google-src-text">
+          動物細胞は、主に医療や医薬品等の産業で利用される。動物細胞の一種である幹細胞(人工多能性細胞など)は、様々な細胞に分化することが可能である。近年、幹細胞は損傷した臓器などを治療する、再生医療用の細胞性医薬品として利用され始めている。細胞性医薬品の生産は、幹細胞を培養し、増殖させることで得ることができる。
+        </span>
+          Animal cells are mainly used in the medical and pharmaceutical industries. Stem cells (such as induced pluripotent cells), which are a kind of animal cells, can differentiate into various cells. In recent years, stem cells have begun to be used as cellular medicines for regenerative medicine that treat damaged organs and the like. Cellular pharmaceutical production can be obtained by culturing and proliferating stem cells.
+        </span>
+              </p>
+              <p num="0003">
+                <span class="notranslate"> <span class="google-src-text">
+          従来、再生医療で用いられる動物細胞の培養方法には接着培養が用いられてきた。接着培養は細胞を培養容器に接着させ培養する方法である。今まで、再生医療は細胞シートなど接着培養を用いた少量生産で行われてきた。幹細胞の一種である人工多能性細胞は、細胞塊を形成して増殖する。その細胞塊の直径は人工多能性細胞の特性(未分化状態、生存率)に影響を与える。そのため、人工多能性細胞など一部の細胞では、細胞塊の直径制御が必要である。この直径制御は細胞塊に物理的な力を加えて行われる。ここで言う物理的な力とは、ピペッティング操作で細胞に加えられるせん断応力などである。少量生産を目的とした接着培養では、人工多能性細胞の細胞塊への力の加え方に手作業によるピペッティングが用いられてきた。
+        </span>
+          Conventionally, adhesion culture has been used as a method for culturing animal cells used in regenerative medicine. Adhesion culture is a method in which cells are adhered to a culture vessel and cultured. Until now, regenerative medicine has been carried out in small-scale production using adhesion culture such as cell sheets. Artificial pluripotent cells, which are a type of stem cell, form a cell mass and proliferate. The diameter of the cell mass affects the properties (undifferentiated state, survival rate) of the induced pluripotent cells. Therefore, in some cells such as artificial pluripotent cells, it is necessary to control the diameter of the cell mass. This diameter control is performed by applying physical force to the cell mass. The physical force referred to here is a shear stress applied to cells by pipetting operation. In adhesion culture for the purpose of small-scale production, manual pipetting has been used to apply force to the cell mass of artificial pluripotent cells.
+        </span>
+              </p>
+              <p num="0004">
+                <span class="notranslate"> <span class="google-src-text">
+          一般的に再生医療によって心疾患などを治療する場合は、幹細胞から心筋細胞に分化させた細胞が10<sup>9</sup>個必要になる。現在幹細胞の培養で主に用いられている接着培養の場合、一般的に用いられる直径10cmの培養皿1枚に、10<sup>7</sup>個程度の幹細胞を培養するのが限界である。もし接着培養で10<sup>9</sup>個の細胞を生産する場合、100枚の培養皿が必要となる。100枚の培養皿の培養、維持には多大な労力がかかってしまうため、接着培養は大量生産に向かない。
+        </span>In general, when treating heart disease or the like by regenerative medicine, 10 <sup>9</sup> cells differentiated from stem cells into cardiomyocytes are required. In the case of adhesion culture, which is currently used mainly for culturing stem cells, the limit is that about 10 <sup>7</sup> stem cells can be cultured in one commonly used culture dish having a diameter of 10 cm. If 10 <sup>9</sup> cells are produced by adhesion culture, 100 culture dishes are required. Adhesive culture is not suitable for mass production because it takes a lot of labor to culture and maintain 100 culture dishes.</span>
+              </p>
+              <p num="0005">
+                <span class="notranslate"> <span class="google-src-text">
+          大量培養技術の１つとして、浮遊系培養技術の適用が検討されている。浮遊系培養でも、人工多能性細胞の場合細胞塊の直径が特性の維持に関わる。そのため、人工多能性細胞では、浮遊培養でも細胞塊の直径制御が必要である。人工多能性細胞の浮遊培養では、効率的に大量の細胞塊の直径を制御する必要がある。
+        </span>
+          As one of the mass culture techniques, application of a suspension culture technique is being studied. Even in suspension culture, in the case of induced pluripotent cells, the diameter of the cell mass is involved in maintaining the characteristics. Therefore, in artificial pluripotent cells, it is necessary to control the diameter of the cell mass even in suspension culture. In suspension culture of induced pluripotent cells, it is necessary to efficiently control the diameter of a large amount of cell mass.
+        </span>
+              </p>
+              <p num="0006">
+                <span class="notranslate"> <span class="google-src-text">
+          従来技術では、浮遊培養において、細胞塊の直径を制御する方法として、メッシュを適応している。この制御方法は、一度に多くの細胞塊に適応可能だが、メッシュの目詰まりが問題になってしまう。実用化した際、メッシュの交換作業により、コストと作業効率が悪くなる可能性が高い。
+        </span>
+          In the prior art, mesh is applied as a method for controlling the diameter of a cell mass in suspension culture. This control method can be applied to many cell clusters at once, but mesh clogging becomes a problem. When put into practical use, there is a high possibility that the cost and work efficiency will deteriorate due to the replacement work of the mesh.
+        </span>
+              </p>
+              <p num="0007">
+                <span class="notranslate"> <span class="google-src-text">
+          細胞塊に物理的な力を加える手段として、超音波を細胞に照射する手法が考えられる。従来の細胞に対する超音波の処理例は以下の通りである。特許文献１では、培養槽と攪拌翼と超音波照射手段を有する細胞培養装置が記載され、超音波を培養槽壁面に付着した細胞に照射することで、細胞を剥離する方法が開示されている。しかし、この方法は培養槽内の細胞全体に超音波を当ててしまうため、細胞によっては余分な物理的ストレスを受ける。
+        </span>
+          As a means for applying a physical force to the cell mass, a method of irradiating cells with ultrasonic waves can be considered. The example of the process of the ultrasonic wave with respect to the conventional cell is as follows. <figure-callout id="1" label="Patent Document" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">Patent Document</figure-callout> 1 describes a cell culture device having a culture tank, a stirring blade, and an ultrasonic irradiation means, and discloses a method of detaching cells by irradiating the cells attached to the wall of the culture tank with ultrasonic waves. . However, since this method applies ultrasonic waves to the entire cells in the culture tank, some cells are subjected to extra physical stress.
+        </span>
+              </p>
+              <p num="0008">
+                <span class="notranslate"> <span class="google-src-text">
+          また超音波を細胞に照射する例として、特許文献２には、容器に付着した接着培養に対して局所的に超音波を与え、所望の細胞を培養容器から剥離する方法が記載されている。この超音波照射方法は、局所的な超音波付与が可能で、細胞に余分なストレスを与えることは無い。しかし、特許文献１と同様に、付着した細胞を剥すことを目的とした有効な技術であり、培養液中に浮遊する特定の細胞のみに超音波を照射することはできない。
+        </span>
+          As an example of irradiating cells with ultrasonic waves, Patent Document 2 describes a method in which ultrasonic waves are locally applied to an adhesion culture attached to a container and desired cells are detached from the culture container. This ultrasonic irradiation method can apply a local ultrasonic wave and does not apply extra stress to the cells. However, as in <figure-callout id="1" label="Patent Document" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">Patent Document</figure-callout> 1, it is an effective technique for the purpose of peeling attached cells, and it is not possible to irradiate only specific cells floating in the culture solution with ultrasonic waves.
+        </span>
+              </p>
+            </background-art>
+            <citation-list>
+              <patent-literature>
+                <p num="0009">
+                  <patcit num="1">
+                    <text>
+                      <span class="notranslate"> <span class="google-src-text">特開平６−１４１８５０号公報</span>JP-A-6-141850</span>
+                    </text>
+                  </patcit>
+                  <patcit num="2">
+                    <text>
+                      <span class="notranslate"> <span class="google-src-text">特開２０１４−１８１８５号公報</span>JP 2014-18185 A</span>
+                    </text>
+                  </patcit>
+                </p>
+              </patent-literature>
+            </citation-list>
+            
+            <summary-of-invention>
+              <tech-problem>
+                <p num="0010">
+                  <span class="notranslate"> <span class="google-src-text">
+          現在、大量生産を目的とした、浮遊培養に適した細胞塊の直径制御方法は存在しない。そこで、本発明は、上述したような実情に鑑み、細胞塊の直径を制御する方法、当該制御方法を適用した細胞培養装置を提供することを目的とする。
+        </span>
+          Currently, there is no method for controlling the diameter of cell mass suitable for suspension culture for mass production. Then, in view of the above situation, an object of the present invention is to provide a method for controlling the diameter of a cell mass and a cell culture device to which the control method is applied.
+        </span>
+                </p>
+              </tech-problem>
+              <tech-solution>
+                <p num="0011">
+                  <span class="notranslate"> <span class="google-src-text">
+          本発明に係る培養装置は、培養液中に浮遊する中で比較的に大きい細胞塊に超音波付与を行うことで、細胞塊の直径を制御する。
+        </span>
+          The culture apparatus according to the present invention controls the diameter of a cell mass by applying ultrasonic waves to a relatively large cell mass while floating in a culture solution.
+        </span>
+                </p>
+              </tech-solution>
+              <advantageous-effects>
+                <p num="0012">
+                  <span class="notranslate"> <span class="google-src-text">
+          培養時に細胞塊の直径を容易に制御可能な細胞培養装置を提供できる。
+        </span>
+          A cell culture device capable of easily controlling the diameter of a cell mass during culture can be provided.
+        </span>
+                </p>
+              </advantageous-effects>
+            </summary-of-invention>
+            
+            <description-of-drawings>
+              <p num="0013">
+                <figref num="1">
+                  <span class="notranslate"> <span class="google-src-text">本実施形態に係る細胞培養装置の一例である。</span>It is an example of the cell culture apparatus which concerns on this embodiment.</span>
+                </figref>
+                <figref num="2">
+                  <span class="notranslate"> <span class="google-src-text">実施例２に係る細胞培養装置である。</span>2 is a cell culture device according to Example 2.</span>
+                </figref>
+                <figref num="3">
+                  <span class="notranslate"> <span class="google-src-text">実施例３に係る細胞培養装置である。</span>3 is a cell culture device according to Example 3.</span>
+                </figref>
+                <figref num="4">
+                  <span class="notranslate"> <span class="google-src-text">実施例４に係る細胞培養装置である。</span>4 is a cell culture device according to Example 4;</span>
+                </figref>
+                <figref num="5">
+                  <span class="notranslate"> <span class="google-src-text">実施例５に係る細胞培養装置である。</span>10 is a cell culture device according to Example 5.</span>
+                </figref>
+              </p>
+            </description-of-drawings>
+            <description-of-embodiments>
+              <p num="0014">
+                <span class="notranslate"> <span class="google-src-text">
+          以下、本実施形態に係る細胞培養装置を、図面を参照して詳細に説明する。本実施形態に係る細胞培養装置は、例えば、細胞自体が医薬品となる細胞の培養に適用できる。また、培養対象の細胞は、動物細胞、植物細胞、昆虫細胞、細菌、酵母、真菌及び藻類などをあげることができる。特に、iPS細胞などの細胞塊を凝集して培養する細胞が好ましい。
+        </span>
+          Hereinafter, the cell culture device according to the present embodiment will be described in detail with reference to the drawings. The cell culture device according to the present embodiment can be applied, for example, to culture of cells in which the cells themselves are pharmaceuticals. Examples of cells to be cultured include animal cells, plant cells, insect cells, bacteria, yeasts, fungi, and algae. In particular, cells in which cell clusters such as iPS cells are aggregated and cultured are preferred.
+        </span>
+              </p>
+              <p num="0015">
+                <span class="notranslate"> <span class="google-src-text">
+          図１に本実施形態に係る細胞培養装置の一例を模式的に示す。細胞培養装置２０は容器本体１を備える。容器本体１は、大きさが異なる複数の細胞の凝集体である細胞塊を含む培養液３と、培養液３を攪拌する攪拌手段２と、超音波を発信する端子である超音波発信端子４とを有する。超音波発信端子４は培養液３の液面に接し、かつ蓋体８に配設されている。
+        </span>
+          FIG. 1 schematically shows an example of a cell culture device according to the present embodiment. The cell culture device 20 includes a <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1. The <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1 includes a <figure-callout id="3" label="culture solution" filenames="2019000001-7.png" state="{{state}}">culture solution</figure-callout> 3 including a cell mass that is an aggregate of a plurality of cells having different sizes, an agitation unit 2 that agitates the <figure-callout id="3" label="culture solution" filenames="2019000001-7.png" state="{{state}}">culture solution</figure-callout> 3, and an <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4 that is a terminal that transmits ultrasonic waves. And have. The <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4 is in contact with the liquid surface of the <figure-callout id="3" label="culture solution" filenames="2019000001-7.png" state="{{state}}">culture solution</figure-callout> 3 and is disposed on the <figure-callout id="8" label="lid body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">lid body</figure-callout> 8.
+        </span>
+              </p>
+              <p num="0016">
+                <span class="notranslate"> <span class="google-src-text">
+          容器本体１の外部には、超音波を照射する超音波照射手段５と、超音波のサイズ等を計測する計測装置６と、細胞を観察する細胞観察手段７を備える。
+        </span>
+          Outside the container <figure-callout id="1" label="main body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">main body</figure-callout> 1, an <figure-callout id="5" label="ultrasonic irradiation unit" filenames="2019000001-3.png,2019000001-6.png" state="{{state}}">ultrasonic irradiation unit</figure-callout> 5 that irradiates ultrasonic waves, a <figure-callout id="6" label="measuring device" filenames="2019000001-4.png,2019000001-6.png" state="{{state}}">measuring device</figure-callout> 6 that measures the size of ultrasonic waves, and a <figure-callout id="7" label="cell observation unit" filenames="2019000001-3.png" state="{{state}}">cell observation unit</figure-callout> 7 that observes cells are provided.
+        </span>
+              </p>
+              <p num="0017">
+                <span class="notranslate"> <span class="google-src-text">
+          細胞塊が細胞観察手段７により撮影され、撮影画像を取得する。計測装置６でその撮影画像の解析が行われ、解析結果を基に撮影画像に写された細胞塊が超音波発信端子４からの超音波を受ける位置にあるとき、超音波照射手段５に計測装置６からシグナルが送られ、超音波発信端子４から超音波を発信する。
+        </span>
+          A cell mass is photographed by the cell observation means 7 to obtain a photographed image. The <figure-callout id="6" label="measurement device" filenames="2019000001-4.png,2019000001-6.png" state="{{state}}">measurement device</figure-callout> 6 analyzes the captured image, and the ultrasonic irradiation means 5 performs measurement when the cell mass captured in the captured image is in a position to receive the ultrasonic wave from the <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4 based on the analysis result. A signal is sent from the <figure-callout id="6" label="device" filenames="2019000001-4.png,2019000001-6.png" state="{{state}}">device</figure-callout> 6, and an ultrasonic wave is transmitted from the <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4.
+        </span>
+              </p>
+              <p num="0018">
+                <span class="notranslate"> <span class="google-src-text">
+          細胞観察手段７は、容器本体１の外部に配設したＣＣＤ素子を用いたカメラのなどで構成する。超音波発信端子４の先端の定められた領域に存在する細胞もしくは細胞塊を撮影し、画像データを取得する。
+        </span>
+          The cell observation means 7 is constituted by a camera using a CCD element disposed outside the <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1. A cell or a cell mass existing in a predetermined region at the tip of the ultrasonic <figure-callout id="4" label="wave transmitting terminal" filenames="2019000001-6.png" state="{{state}}">wave transmitting terminal</figure-callout> 4 is photographed to acquire image data.
+        </span>
+              </p>
+              <p num="0019">
+                <span class="notranslate"> <span class="google-src-text">
+          細胞観察手段７は予め定められた領域を撮影するように固定しても良い。攪拌手段２により培養液３は攪拌され周回するので、細胞観察手段７を固定していても、培養液に含まれる各細胞塊を定期的に観察することができる。
+        </span>
+          The cell observation means 7 may be fixed so as to photograph a predetermined area. Since the <figure-callout id="3" label="culture solution" filenames="2019000001-7.png" state="{{state}}">culture solution</figure-callout> 3 is stirred and circulated by the stirring means 2, even if the cell observation means 7 is fixed, each cell mass contained in the culture solution can be regularly observed.
+        </span>
+              </p>
+              <p num="0020">
+                <span class="notranslate"> <span class="google-src-text">
+          また、細胞観察手段７を固定せずに可動可能な形態としても良い。その際は培養液３の中にサイズの大きな細胞塊が生成されたらすぐに発見できるように、細胞観察手段７を細胞塊全体について観察可能な位置に配置する。
+        </span>
+          The cell observation means 7 may be movable without being fixed. In that case, the cell observation means 7 is arranged at a position where the entire cell mass can be observed so that it can be found as soon as a large cell mass is generated in the <figure-callout id="3" label="culture solution" filenames="2019000001-7.png" state="{{state}}">culture solution</figure-callout> 3.
+        </span>
+              </p>
+              <p num="0021">
+                <span class="notranslate"> <span class="google-src-text">
+          計測装置６は、細胞塊を認識し、さらにその直径を計測する機能を持った、画像解析ソフトを搭載したコンピュータである。細胞観察手段７と超音波照射手段５と接続しており、細胞観察手段７が撮影した画像データを受信し、画像データ中の細胞塊の直径を計測し、あらかじめ定められた大きさを超えた細胞塊を発見したとき、超音波照射手段５にシグナルを送り、超音波照射手段５を作動させる。
+        </span>
+          The <figure-callout id="6" label="measuring device" filenames="2019000001-4.png,2019000001-6.png" state="{{state}}">measuring device</figure-callout> 6 is a computer equipped with image analysis software that has a function of recognizing a cell mass and measuring its diameter. The cell observation means 7 and the ultrasonic irradiation means 5 are connected, and the image data taken by the cell observation means 7 is received, the diameter of the cell mass in the image data is measured, and exceeds a predetermined size. When a cell mass is found, a signal is sent to the ultrasonic irradiation means 5 to activate the ultrasonic irradiation means 5.
+        </span>
+              </p>
+              <p num="0022">
+                <span class="notranslate"> <span class="google-src-text">
+          超音波照射手段５は計測装置６と超音波発信端子４と接続している。超音波照射手段５は圧電セラミックスを用いた方法をとる。また、超音波の出力は培養槽の一部にのみ超音波が届く程度の出力を用いる。もしくは、超音波発信端子４に反射器を取り付け局所的に超音波が伝達するようにしても良い。
+        </span>
+          The ultrasonic irradiation means 5 is connected to the <figure-callout id="6" label="measuring device" filenames="2019000001-4.png,2019000001-6.png" state="{{state}}">measuring device</figure-callout> 6 and the <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4. The ultrasonic irradiation means 5 is a method using piezoelectric ceramics. Moreover, the output of an ultrasonic wave is used so that the ultrasonic wave reaches only a part of the culture tank. Alternatively, a reflector may be attached to the <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4 so that ultrasonic waves are transmitted locally.
+        </span>
+              </p>
+              <p num="0023">
+                <span class="notranslate"> <span class="google-src-text">
+          このように、培養液全体のうち閾値を超えた細胞塊は超音波照射手段５による超音波の照射範囲に含まれ、閾値を超えない細胞塊は超音波照射手段５による超音波の照射範囲に含まれない構成とする。超音波を照射された細胞塊はストレスを受けるので、サイズが閾値を超えない細胞塊に対して超音波を照射せず余分な物理的ストレスを与えないようにする。
+        </span>
+          Thus, the cell mass exceeding the threshold in the whole culture solution is included in the ultrasonic irradiation range by the ultrasonic irradiation means 5, and the cell mass not exceeding the threshold is in the ultrasonic irradiation range by the ultrasonic irradiation means 5. The configuration is not included. Since the cell mass irradiated with the ultrasonic wave is subjected to stress, the cell mass whose size does not exceed the threshold value is not irradiated with the ultrasonic wave so as to avoid applying an extra physical stress.
+        </span>
+              </p>
+              <p num="0024">
+                <span class="notranslate"> <span class="google-src-text">
+          超音波照射手段５が照射する超音波の周波数は20Hz〜10GHzであることが望ましい。この周波数は所望の細胞塊が細分化するのに適切である。また超音波が培養槽の一部にのみ伝達される範囲を用いるのがさらに望ましい。細胞塊の細分化に必要な時間は、主に超音波の周波数に関係しているので、所望の細胞塊の大きさに合わせて決定することができる。
+        </span>
+          The frequency of the ultrasonic wave emitted by the ultrasonic wave irradiation means 5 is desirably 20 Hz to 10 GHz. This frequency is appropriate for the desired cell mass to be subdivided. It is further desirable to use a range in which ultrasonic waves are transmitted only to a part of the culture tank. Since the time required for subdividing the cell mass is mainly related to the frequency of the ultrasonic wave, it can be determined according to the size of the desired cell mass.
+        </span>
+              </p>
+              <p num="0025">
+                <span class="notranslate"> <span class="google-src-text">
+          容器本体１は、一部もしくは全てが透明容器であり、ガラスやプラスチックなどを用いる。さらに、超音波の影響を最小限に留めるために、図４のように流路１５を取り付けても良いし、図５のようにプラスチック製の支柱１７と、プラスチック製の壁１８を取り付けても良い。流路１６はガラスやプラスチックなど透明な材質を用いる。
+        </span>
+          A part or all of the <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1 is a transparent container, and uses glass or plastic. Further, in order to minimize the influence of ultrasonic waves, the <figure-callout id="15" label="flow path" filenames="2019000001-6.png" state="{{state}}">flow path</figure-callout> 15 may be attached as shown in FIG. 4, or the <figure-callout id="17" label="plastic support" filenames="2019000001-7.png" state="{{state}}">plastic support</figure-callout> 17 and the plastic wall 18 may be attached as shown in FIG. good. The <figure-callout id="16" label="channel" filenames="2019000001-7.png" state="{{state}}">channel</figure-callout> 16 is made of a transparent material such as glass or plastic.
+        </span>
+              </p>
+              <p num="0026">
+                <span class="notranslate"> <span class="google-src-text">
+          なお、図１に示した細胞培養装置２０は、回分培養(一回毎に新たな培地を用意し、そこへ株を植えて収穫まで培地を加えない方法)に適した構成となっているが、当該構成に限定されるものではない。流加培養(培養中に、培地自体や培地中の特定の成分を添加し、培養終了時までその生成物を抜き取らない方法)を適応する場合は添加培地装置を加えて構成することもできる。連続培養(一定の速度で培養系に培地を供給し、同時に同量の培養液を抜き取る方法)を適応する場合は、培養液抜き出しようのラインを設けても良いし、エアリフト型の培養装置に超音波照射手段と超音波発信端子と培養液観察手段を備えても良い。
+        </span>
+          The cell culture apparatus 20 shown in FIG. 1 has a configuration suitable for batch culture (a method in which a new medium is prepared every time, a strain is planted there, and no medium is added until harvest). However, the present invention is not limited to this configuration. In the case of adapting to fed-batch culture (a method in which the medium itself or a specific component in the medium is added during cultivation and the product is not extracted until the end of the culture), an addition medium apparatus can be added. When applying continuous culture (a method of supplying a culture medium to a culture system at a constant speed and simultaneously extracting the same amount of culture solution), a line for extracting the culture solution may be provided, or an airlift type culture device may be provided. You may provide an ultrasonic irradiation means, an ultrasonic transmission terminal, and a culture solution observation means.
+        </span>
+              </p>
+              <embodiments-example>
+                <p num="0027">
+                  <span class="notranslate"> <span class="google-src-text">
+          ＜実施例１＞<br/>
+          図１の培養装置を市販の温度調節用のヒーター上で使用し、本実施形態を回分培養に適応したものが実施例１である。容器本体１を小規模のスピナーフラスコまたはガラス製の容器で構成する。
+        </span>&lt;Example 1&gt; <br/> Example 1 is an example in which the culture apparatus of FIG. 1 is used on a commercially available temperature control heater and this embodiment is adapted to batch culture. The <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1 is composed of a small-scale spinner flask or a glass container.</span>
+                </p>
+                <p num="0028">
+                  <span class="notranslate"> <span class="google-src-text">
+          攪拌手段２として平羽根型の翼を用いて、回転数30rpmで培養液の攪拌を行った。細胞として市販の人工多能性細胞を用いた。また、細胞の培養液は、市販のDMEM/F12培地を主成分とする培地を用いた。
+        </span>
+          Using a flat blade type blade as the stirring means 2, the culture solution was stirred at a rotation speed of 30 rpm. Commercially available induced pluripotent cells were used as the cells. In addition, a medium mainly composed of a commercially available DMEM / F12 medium was used as a cell culture solution.
+        </span>
+                </p>
+                <p num="0029">
+                  <span class="notranslate"> <span class="google-src-text">
+          外部に培養液観察手段７として、拡大撮影機能のついたデジタル顕微鏡を用いた。容器本体１の外部に設置され、培養液３中の細胞を撮影する。培養液観察手段７で録画された細胞塊の拡大画像をもとに、計測手段６により細胞塊の大きさを計測した。計測装置６としてコンピュータと市販の画像解析ソフトを用いた。取得した画像を市販の画像解析ソフトで二値化し、細胞塊を認識した。細胞が密集している部分を細胞塊とし、単体の細胞のみ検出された部分は細胞塊とはみなさなかった。細胞塊と認識した部分の直径を計測し、規定外に大きいか否かを判断した。細胞塊が規定外に大きい場合は超音波照射手段５を作動させ、細胞塊の細分化を行った。
+        </span>
+          A digital microscope with an enlarged photographing function was used as the culture medium observation means 7 outside. It is installed outside the <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1 and photographs the cells in the <figure-callout id="3" label="culture medium" filenames="2019000001-7.png" state="{{state}}">culture medium</figure-callout> 3. Based on the enlarged image of the cell mass recorded by the culture medium observation means 7, the size of the cell mass was measured by the measurement means 6. A computer and commercially available image analysis software were used as the measuring <figure-callout id="6" label="device" filenames="2019000001-4.png,2019000001-6.png" state="{{state}}">device</figure-callout> 6. The acquired image was binarized with commercially available image analysis software, and the cell mass was recognized. The portion where the cells were dense was defined as a cell mass, and the portion where only a single cell was detected was not regarded as a cell mass. The diameter of the part recognized as a cell mass was measured, and it was judged whether it was larger than the specification. When the cell mass was excessively large, the ultrasonic irradiation means 5 was operated to subdivide the cell mass.
+        </span>
+                </p>
+                <p num="0030">
+                  <span class="notranslate"> <span class="google-src-text">
+          細胞培養装置２０は、超音波照射手段５と、超音波発信端子４によって細胞塊に超音波を付与し細分化する。超音波発信端子４は培養液３に先端が接するように設置されている。またその先端は、培養液観察手段７で得られた動物細胞の拡大画像データを計測装置６が処理し、超音波付与を行うか否か決定した時に、処理した画像データ上にある細胞が、超音波が届く位置に流れる場所に位置する。攪拌されている培養液中の細胞は約0.3m/sで移動しており、培養液観察手段７から攪拌翼の回転方向に３秒後に超音波が照射されるため、約１０cm離れた所に1つ設置する。超音波照射手段５が用いる周波数は20Hz〜10GHzである。
+        </span>
+          The cell culture device 20 applies ultrasonic waves to the cell mass by the ultrasonic wave irradiation means 5 and the ultrasonic <figure-callout id="4" label="wave transmission terminal" filenames="2019000001-6.png" state="{{state}}">wave transmission terminal</figure-callout> 4 and subdivides them. The <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4 is installed so that the tip is in contact with the <figure-callout id="3" label="culture solution" filenames="2019000001-7.png" state="{{state}}">culture solution</figure-callout> 3. In addition, when the <figure-callout id="6" label="measurement device" filenames="2019000001-4.png,2019000001-6.png" state="{{state}}">measurement device</figure-callout> 6 processes the enlarged image data of the animal cell obtained by the culture medium observation means 7 and determines whether or not to apply ultrasonic waves, the tip of the tip is the cell on the processed image data. Located in a location where ultrasonic waves can reach. The cells in the culture medium being stirred are moving at about 0.3 m / s, and ultrasonic waves are irradiated from the culture medium observation means 7 in the direction of rotation of the <figure-callout id="3" label="stirring blade" filenames="2019000001-7.png" state="{{state}}">stirring blade</figure-callout> 3 seconds later. Install one. The frequency used by the ultrasonic irradiation means 5 is 20 Hz to 10 GHz.
+        </span>
+                </p>
+                <p num="0031">
+                  <span class="notranslate"> <span class="google-src-text">
+          この装置に50mLの市販の培地を入れ、人工多能性細胞を７日間培養した。７日間で、3×10<sup>5</sup>cellsから7×10<sup>7</sup>cellsまで細胞が増殖した。
+        </span>50 mL of a commercially available medium was put into this apparatus, and artificial pluripotent cells were cultured for 7 days. In 7 days, the cells grew from 3 × 10 <sup>5</sup> cells to 7 × 10 <sup>7</sup> cells.</span>
+                </p>
+                <p num="0032">
+                  <span class="notranslate"> <span class="google-src-text">
+          培養開始前、細胞塊の直径は50〜100μmである。培養を開始すると、細胞塊は大きくなるが、大きくなり過ぎると細胞の特性(未分化状態、生存率)に悪い影響を与えるため、直径が閾値を超えた細胞塊に超音波照射手段５で超音波を照射する。この閾値は例えば300μmとする。超音波を照射された細胞塊は細分化され、培養終了時は200μm〜300μmになった。
+        </span>
+          Before the start of culturing, the diameter of the cell mass is 50-100 μm. When culturing is started, the cell mass becomes large, but if it becomes too large, cell characteristics (undifferentiated state, survival rate) are adversely affected. Irradiate sound waves. This threshold value is, for example, 300 μm. The cell mass irradiated with ultrasonic waves was subdivided and became 200 μm to 300 μm at the end of the culture.
+        </span>
+                </p>
+                <p num="0033">
+                  <span class="notranslate"> <span class="google-src-text">
+        ＜実施例２＞ <br/>
+          図２は実施例２に係る細胞培養装置を示す。実施例２は細胞培養装置を流加培養に適応したものである。蓋体８に5ng/mL線維芽細胞増殖因子を添加物用管路９と、添加物用管路９に接続された添加物を無菌的に保存するためのガラス瓶を取り付けたものである。5ng/mL線維芽細胞増殖因子は１日毎添加した。この装置に50mLの市販の培地を入れ、人工多能性細胞を７日間培養した。3×10<sup>5</sup>cellsから7.4×10<sup>7</sup>cellsまで細胞が増殖した。
+        </span>&lt;Example 2&gt; <br/> FIG. 2 shows a cell culture apparatus according to the second embodiment. In Example 2, the cell culture apparatus is adapted for fed-batch culture. The <figure-callout id="8" label="lid" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">lid</figure-callout> 8 is provided with a 5 ng / mL fibroblast growth factor <figure-callout id="9" label="additive conduit" filenames="2019000001-4.png" state="{{state}}">additive conduit</figure-callout> 9 and a glass bottle for aseptically storing the additive connected to the <figure-callout id="9" label="additive conduit" filenames="2019000001-4.png" state="{{state}}">additive conduit</figure-callout> 9. 5 ng / mL fibroblast growth factor was added every day. 50 mL of a commercially available medium was put into this apparatus, and artificial pluripotent cells were cultured for 7 days. Cells grew from 3 × 10 <sup>5</sup> cells to 7.4 × 10 <sup>7</sup> cells.</span>
+                </p>
+                <p num="0034">
+                  <span class="notranslate"> <span class="google-src-text">
+          実施例１と同様に超音波照射手段５で細胞塊のサイズを制御したところ、細胞塊細胞塊の直径は、培養開始時の50〜100μmから、培養終了時は200μm〜300μmになった。さらに、流加培養に装置を適応したことで、細胞の維持のために毎日行っていた繊維芽細胞増殖因子の添加作業をする必要が無くなり、労働効率が良くなった。
+        </span>
+          When the size of the cell mass was controlled by the ultrasonic irradiation means 5 in the same manner as in Example 1, the diameter of the cell mass cell mass was changed from 50 to 100 μm at the start of the culture to 200 μm to 300 μm at the end of the culture. Furthermore, by adapting the apparatus to fed-batch culture, the work of adding fibroblast growth factor, which was performed every day for cell maintenance, was eliminated, and work efficiency was improved.
+        </span>
+                </p>
+                <p num="0035">
+                  <span class="notranslate"> <span class="google-src-text">
+        ＜実施例３＞<br/>
+          図３は本実施形態を連続培養に適応した実施例３を概略的にあらわしたものである。蓋体８に新鮮培地用管路１１と、新鮮培地用管路１１に接続した新鮮培地を無菌状態で保存できる新鮮培地保存用容器１４と、廃液用管路１２と、廃液用ガラス容器１３を設置した。新鮮培地用管路１１と廃液用管路１２には除菌フィルター１０を設置した。24時間毎に20分間培養装置の攪拌をとめ、細胞塊を培養液の底に沈めた。さらに上澄みを廃液用管路１２で吸引し、新しい培地を新鮮培地用管路１１で入れた。この装置に50mLの市販の培地を入れ、人工多能性細胞を７日間培養した。3×10<sup>5</sup>cellsから6.5×10<sup>7</sup>cellsまで細胞が増殖した。
+        </span>&lt;Example 3&gt; <br/> FIG. 3 schematically shows Example 3 in which this embodiment is applied to continuous culture. A fresh medium conduit 11 on the <figure-callout id="8" label="lid" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">lid</figure-callout> 8, a fresh <figure-callout id="14" label="medium storage container" filenames="2019000001-5.png" state="{{state}}">medium storage container</figure-callout> 14 that can store the fresh medium connected to the fresh medium conduit 11 in an aseptic state, a <figure-callout id="12" label="waste liquid conduit" filenames="2019000001-5.png" state="{{state}}">waste liquid conduit</figure-callout> 12, and a waste <figure-callout id="13" label="liquid glass container" filenames="2019000001-5.png" state="{{state}}">liquid glass container</figure-callout> 13. installed. A <figure-callout id="10" label="sterilization filter" filenames="2019000001-4.png,2019000001-5.png" state="{{state}}">sterilization filter</figure-callout> 10 was installed in the fresh medium pipe 11 and the <figure-callout id="12" label="waste liquid pipe" filenames="2019000001-5.png" state="{{state}}">waste liquid pipe</figure-callout> 12. The culture apparatus was agitated for 20 minutes every 24 hours, and the cell mass was submerged in the bottom of the culture solution. Further, the supernatant was aspirated through the <figure-callout id="12" label="waste liquid line" filenames="2019000001-5.png" state="{{state}}">waste liquid line</figure-callout> 12, and a new medium was added through the fresh medium line 11. 50 mL of a commercially available medium was put into this apparatus, and artificial pluripotent cells were cultured for 7 days. Cells grew from 3 × 10 <sup>5</sup> cells to 6.5 × 10 <sup>7</sup> cells.</span>
+                </p>
+                <p num="0036">
+                  <span class="notranslate"> <span class="google-src-text">
+          実施例１と同様に超音波照射手段５で細胞塊のサイズを制御したところ、細胞塊の直径は、培養開始時の50〜100μmから、培養終了時は200μm〜300μmになった。さらに、連続培養に装置を適応したことで、細胞の維持に必要な培地交換をする必要が無くなり、労働効率が良くなった。
+        </span>
+          When the size of the cell mass was controlled by the ultrasonic irradiation means 5 as in Example 1, the diameter of the cell mass was changed from 50 to 100 μm at the start of the culture to 200 μm to 300 μm at the end of the culture. Furthermore, adapting the device to continuous culture eliminates the need for medium change necessary for cell maintenance, and improves labor efficiency.
+        </span>
+                </p>
+                <p num="0037">
+                  <span class="notranslate"> <span class="google-src-text">
+        ＜実施例４＞<br/>
+          図４は本実施形態における実施例４を概略的にあらわしたものである。容器本体１に流路１５を取り付け、培養液観察手段７を流路１５の外部に取り付け、超音波発信端子４を流路１５に取り付ける。この装置に50mLの市販の培地を入れ、人工多能性細胞を7日間培養した。3×10<sup>5</sup>cellsから7.5×10<sup>7</sup>cellsまで細胞が増殖した。
+        </span>&lt;Example 4&gt; <br/> FIG. 4 schematically shows Example 4 in the present embodiment. A <figure-callout id="15" label="flow path" filenames="2019000001-6.png" state="{{state}}">flow path</figure-callout> 15 is attached to the <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1, the culture solution observation means 7 is attached to the outside of the <figure-callout id="15" label="flow path" filenames="2019000001-6.png" state="{{state}}">flow path</figure-callout> 15, and the <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4 is attached to the <figure-callout id="15" label="flow path" filenames="2019000001-6.png" state="{{state}}">flow path</figure-callout> 15. 50 mL of a commercially available medium was put into this apparatus, and artificial pluripotent cells were cultured for 7 days. Cells grew from 3 × 10 <sup>5</sup> cells to 7.5 × 10 <sup>7</sup> cells.</span>
+                </p>
+                <p num="0038">
+                  <span class="notranslate"> <span class="google-src-text">
+          実施例１と同様に超音波照射手段５で細胞塊のサイズを制御したところ、細胞塊の直径は、培養開始時の50〜100μmから、培養終了時は200μm〜300μmになった。培養液中に含まれる細胞塊のうちで一部の細胞塊が流路１５を流れる。
+        </span>
+          When the size of the cell mass was controlled by the ultrasonic irradiation means 5 as in Example 1, the diameter of the cell mass was changed from 50 to 100 μm at the start of the culture to 200 μm to 300 μm at the end of the culture. A part of the cell mass contained in the culture fluid flows through the <figure-callout id="15" label="flow path" filenames="2019000001-6.png" state="{{state}}">flow path</figure-callout> 15.
+        </span>
+                </p>
+                <p num="0039">
+                  <span class="notranslate"> <span class="google-src-text">
+          流路１５を取り付けたことで、取り付けない時より一部の細胞にのみ超音波が照射され易くなり、細胞への影響を最小限に抑えることができた。
+        </span>
+          By attaching the <figure-callout id="15" label="flow path" filenames="2019000001-6.png" state="{{state}}">flow path</figure-callout> 15, it becomes easier to irradiate only a part of the cells with ultrasonic waves than when it is not attached, and the influence on the cells can be minimized.
+        </span>
+                </p>
+                <p num="0040">
+                  <span class="notranslate"> <span class="google-src-text">
+        ＜実施例５＞<br/>
+          図５は本実施形態における実施例５を概略的にあらわしたものである。容器本体１の内部に5cmの長さをもつ支柱１６を用いて容器本体１と10cm<sup>2</sup>の正方形の板17を取り付けた。超音波発信端子４を板１７と容器本体１の壁面に設置した。この装置に50mLの市販の培地を入れ、人工多能性細胞を7日間培養した。3×10<sup>5</sup>cellsから8.0×10<sup>7</sup>cellsまで細胞が増殖した。
+        </span>&lt;Example 5&gt; <br/> FIG. 5 schematically shows Example 5 in the present embodiment. The <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1 and a 10 cm <sup>2</sup> <figure-callout id="17" label="square plate" filenames="2019000001-7.png" state="{{state}}">square plate</figure-callout> 17 were attached to the inside of the <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1 by using a <figure-callout id="16" label="support column" filenames="2019000001-7.png" state="{{state}}">support column</figure-callout> 16 having a length of 5 cm. The <figure-callout id="4" label="ultrasonic transmission terminal" filenames="2019000001-6.png" state="{{state}}">ultrasonic transmission terminal</figure-callout> 4 was installed on the wall surface of the <figure-callout id="17" label="plate" filenames="2019000001-7.png" state="{{state}}">plate</figure-callout> 17 and the <figure-callout id="1" label="container body" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">container body</figure-callout> 1. 50 mL of a commercially available medium was put into this apparatus, and artificial pluripotent cells were cultured for 7 days. Cells grew from 3 × 10 <sup>5</sup> cells to 8.0 × 10 <sup>7</sup> cells.</span>
+                </p>
+                <p num="0041">
+                  <span class="notranslate"> <span class="google-src-text">
+          実施例１と同様に超音波照射手段５で細胞塊のサイズを制御したところ、細胞塊の直径は、培養開始時の50〜100μmから、培養終了時は200μm〜300μmになった。
+        </span>
+          When the size of the cell mass was controlled by the ultrasonic irradiation means 5 as in Example 1, the diameter of the cell mass was changed from 50 to 100 μm at the start of the culture to 200 μm to 300 μm at the end of the culture.
+        </span>
+                </p>
+              </embodiments-example>
+            </description-of-embodiments>
+            <reference-signs-list>
+              <p num="0042">
+                <span class="notranslate"> <span class="google-src-text">
+        １…容器本体、２…攪拌手段、３…培養液、４…超音波発信端子、<br/>
+        ５…超音波照射手段、６…計測装置、７…培養液観察手段、<br/>
+        ８…蓋体、９…添加物用管路、１０…除菌フィルター、<br/>
+        １１…新鮮培地用管路、１２…廃液用管路、１３…廃液用ガラス容器、<br/>
+        １４…新鮮培地保存用容器、１５…流路、１６…支柱、１７…板
+        </span>DESCRIPTION OF <figure-callout id="1" label="SYMBOLS" filenames="2019000001-3.png,2019000001-4.png" state="{{state}}">SYMBOLS</figure-callout> 1 ... Container body, 2 ... Stirring means, 3 ... Culture solution, 4 ... Ultrasonic transmission terminal, <br/> 5 ... Ultrasonic irradiation means, 6 ... Measuring device, 7 ... Culture medium observation means, <br/> 8 ... Lid, 9 ... Pipe for additive, 10 ... Disinfection filter, <br/> 11 ... Pipe for fresh medium, 12 ... Pipe for waste liquid, 13 ... Glass container for waste liquid, <br/> 14 ... Fresh medium storage container, 15 ... Channel, 16 ... Post, 17 ... Plate</span>
+              </p>
+            </reference-signs-list>
+          </description>
+          </div>
+          </section>
+        
+          <section itemprop="claims" itemscope>
+            <h2>Claims (<span itemprop="count">7</span>)</h2>
+            <aside>Translated from <span itemprop="translatedLanguage">Japanese</span></aside>
+            <div itemprop="content" html><claims mxw-id="PCLM176347116" lang="EN" load-source="google">
+            <claim num="1">
+              <claim-text>
+                <span class="notranslate"> <span class="google-src-text">
+          細胞を培養する細胞培養装置であって、<br/>
+          培養液を有する容器と、<br/>
+          複数の細胞塊を含む前記培養液の画像を取得する細胞観察手段と、<br/>
+          前記細胞観察手段により取得された画像に基づき、細胞塊のサイズを計測する計測手段と、<br/>
+          前記計測手段により計測した細胞塊のサイズが閾値を超えた場合に、当該閾値を超えた細胞塊に対し超音波を照射する超音波照射手段と、を有することを特徴とする細胞培養装置。
+        </span>A cell culture device for culturing cells, <br/> A container having a culture solution; <br/> Cell observation means for acquiring an image of the culture solution containing a plurality of cell masses; <br/> Based on the image acquired by the cell observation means, measurement means for measuring the size of the cell mass, <br/> An ultrasonic irradiation means for irradiating an ultrasonic wave to the cell mass exceeding the threshold when the size of the cell mass measured by the measurement means exceeds the threshold.</span>
+              </claim-text>
+            </claim>
+            <claim num="2">
+              <claim-text>
+                <span class="notranslate"> <span class="google-src-text">
+          請求項１に記載の細胞培養装置において、<br/>
+          前記培養液を攪拌する攪拌手段を有し、<br/>
+          前記細胞観察手段は前記攪拌手段により攪拌された培養液の画像を取得することを特徴とする細胞培養装置。
+        </span>The cell culture device according to claim 1, <br/> A stirring means for stirring the culture solution; <br/> The cell culturing device, wherein the cell observation means acquires an image of the culture solution stirred by the stirring means.</span>
+              </claim-text>
+            </claim>
+            <claim num="3">
+              <claim-text>
+                <span class="notranslate"> <span class="google-src-text">
+          請求項２に記載の細胞培養装置において、<br/>
+          前記細胞観察手段は予め定められた領域を撮影するように固定されていることを特徴とする細胞培養装置。
+        </span>The cell culture device according to claim 2, <br/> The cell culturing apparatus, wherein the cell observation means is fixed so as to photograph a predetermined region.</span>
+              </claim-text>
+            </claim>
+            <claim num="4">
+              <claim-text>
+                <span class="notranslate"> <span class="google-src-text">
+          請求項１乃至３のいずれか一項に記載の細胞培養装置において、<br/>
+          前記計測手段は計測する細胞塊のサイズは、細胞塊の直径であることを特徴とする細胞培養装置。
+        </span>In the cell culture device according to any one of claims 1 to 3, <br/> The cell culture apparatus characterized in that the size of the cell mass measured by the measuring means is the diameter of the cell mass.</span>
+              </claim-text>
+            </claim>
+            <claim num="5">
+              <claim-text>
+                <span class="notranslate"> <span class="google-src-text">
+          請求項１乃至４のいずれか一項に記載の細胞培養装置において、<br/>
+          前記培養液全体のうち前記閾値を超えた細胞塊は、前記超音波照射手段による超音波の照射範囲に含まれ、<br/>
+          前記培養液全体のうち前記閾値を超えない細胞塊は、前記超音波照射手段による超音波の照射範囲に含まれないことを特徴とする細胞培養装置。
+        </span>In the cell culture device according to any one of claims 1 to 4, <br/> The cell mass that exceeds the threshold value in the whole culture solution is included in the ultrasonic irradiation range by the ultrasonic irradiation means, <br/> A cell mass that does not exceed the threshold in the whole culture solution is not included in the ultrasonic irradiation range by the ultrasonic irradiation means.</span>
+              </claim-text>
+            </claim>
+            <claim num="6">
+              <claim-text>
+                <span class="notranslate"> <span class="google-src-text">
+          請求項１乃至５のいずれか一項に記載の細胞培養装置において、<br/>
+          前記培養液の一部を循環させる流路を有し、<br/>
+          前記流路を流れる培養液の画像を取得することを特徴とする細胞培養装置。
+        </span>In the cell culture device according to any one of claims 1 to 5, <br/> Having a flow path for circulating a part of the culture solution; <br/> A cell culture device characterized by acquiring an image of a culture solution flowing through the flow path.</span>
+              </claim-text>
+            </claim>
+            <claim num="7">
+              <claim-text>
+                <span class="notranslate"> <span class="google-src-text">
+          請求項１乃至６のいずれか一項に記載の細胞培養装置において、<br/>
+          前記容器の一部または全体が透明であることを特徴とする細胞培養装置。
+        </span>In the cell culture device according to any one of claims 1 to 6, <br/> A cell culture apparatus, wherein a part or the whole of the container is transparent.</span>
+              </claim-text>
+            </claim>
+          </claims>
+          </div>
+          </section>
+        
+          <section itemprop="application" itemscope>
+        
+            <section itemprop="metadata" itemscope>
+              <span itemprop="applicationNumber">JP2015190614A</span>
+              <span itemprop="priorityDate">2015-09-29</span>
+              <span itemprop="filingDate">2015-09-29</span>
+              <span itemprop="title">
+                Cell culture equipment
+               
+               </span>
+              <span itemprop="ifiStatus">Pending</span>
+              
+              <a href="/patent/JP2019000001A/en">
+                <span itemprop="representativePublication">JP2019000001A</span>
+                (<span itemprop="primaryLanguage">en</span>)
+              </a>
+            </section>
+        
+            <h2>Priority Applications (2)</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Application Number</th>
+                  <th>Priority Date</th>
+                  <th>Filing Date</th>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="priorityApps" itemscope repeat>
+                  <td>
+                    <span itemprop="applicationNumber">JP2015190614A</span>
+                    
+                    <a href="/patent/JP2019000001A/en">
+                      <span itemprop="representativePublication">JP2019000001A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                  </td>
+                  <td itemprop="priorityDate">2015-09-29</td>
+                  <td itemprop="filingDate">2015-09-29</td>
+                  <td itemprop="title">
+                Cell culture equipment
+               
+               </td>
+                </tr>
+                <tr itemprop="priorityApps" itemscope repeat>
+                  <td>
+                    <span itemprop="applicationNumber">PCT/JP2016/072711</span>
+                    
+                    <a href="/patent/WO2017056695A1/en">
+                      <span itemprop="representativePublication">WO2017056695A1</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                  </td>
+                  <td itemprop="priorityDate">2015-09-29</td>
+                  <td itemprop="filingDate">2016-08-03</td>
+                  <td itemprop="title">Cell culture apparatus 
+               </td>
+                </tr>
+              </tbody>
+            </table>
+        
+            <h2>Applications Claiming Priority (1)</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Application Number</th>
+                  <th>Priority Date</th>
+                  <th>Filing Date</th>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="appsClaimingPriority" itemscope repeat>
+                  <td>
+                    <span itemprop="applicationNumber">JP2015190614A</span>
+                    <a href="/patent/JP2019000001A/en">
+                      <span itemprop="representativePublication">JP2019000001A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                  </td>
+                  <td itemprop="priorityDate">2015-09-29</td>
+                  <td itemprop="filingDate">2015-09-29</td>
+                  <td itemprop="title">
+                Cell culture equipment
+               
+               </td>
+                </tr>
+              </tbody>
+            </table>
+        
+            
+        
+            
+        
+            <h2>Publications (1)</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Publication Number</th>
+                  <th>Publication Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="pubs" itemscope repeat>
+                  <td>
+                    <span itemprop="publicationNumber">JP2019000001A</span>
+                    
+                    <span itemprop="thisPatent">true</span>
+                    <a href="/patent/JP2019000001A/en">
+                      JP2019000001A
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                  </td>
+                  <td itemprop="publicationDate">2019-01-10</td>
+                </tr>
+              </tbody>
+            </table>
+        
+          </section>
+        
+          <section itemprop="family" itemscope>
+            <h1>Family</h1>
+            <h2>ID=58423427</h2>
+        
+            <h2>Family Applications (1)</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Application Number</th>
+                  <th>Title</th>
+                  <th>Priority Date</th>
+                  <th>Filing Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="applications" itemscope repeat>
+                  <td>
+                    <span itemprop="applicationNumber">JP2015190614A</span>
+                    <span itemprop="ifiStatus">Pending</span>
+                    
+                    <a href="/patent/JP2019000001A/en">
+                      <span itemprop="representativePublication">JP2019000001A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                  </td>
+                  <td itemprop="priorityDate">2015-09-29</td>
+                  <td itemprop="filingDate">2015-09-29</td>
+                  <td itemprop="title">
+                Cell culture equipment
+               
+               </td>
+                </tr>
+              </tbody>
+            </table>
+        
+            
+        
+            
+        
+            <h2>Country Status (2)</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Country</th>
+                  <th>Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="countryStatus" itemscope repeat>
+                  <td>
+                    <span itemprop="countryCode">JP</span>
+                    (<span itemprop="num">1</span>)
+                    <meta itemprop="thisCountry" content="true">
+                  </td>
+                  <td>
+                    <a href="/patent/JP2019000001A/en">
+                      <span itemprop="representativePublication">JP2019000001A</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                  </td>
+                </tr>
+                <tr itemprop="countryStatus" itemscope repeat>
+                  <td>
+                    <span itemprop="countryCode">WO</span>
+                    (<span itemprop="num">1</span>)
+                    
+                  </td>
+                  <td>
+                    <a href="/patent/WO2017056695A1/en">
+                      <span itemprop="representativePublication">WO2017056695A1</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        
+            <h2>Cited By (1)</h2>
+            <table>
+              <caption>* Cited by examiner, † Cited by third party</caption>
+              <thead>
+                <tr>
+                  <th>Publication number</th>
+                  <th>Priority date</th>
+                  <th>Publication date</th>
+                  <th>Assignee</th>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="forwardReferencesOrig" itemscope repeat>
+                  <td>
+                    <a href="/patent/JP2023532649A/en">
+                      <span itemprop="publicationNumber">JP2023532649A</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2020-06-25</td>
+                  <td itemprop="publicationDate">2023-07-31</td>
+                  <td><span itemprop="assigneeOriginal">コーニング インコーポレイテッド</span></td>
+                  <td itemprop="title">
+                Ultrasonic device and method of use
+               
+               </td>
+                </tr>
+              </tbody>
+            </table>
+        
+            <h2>Families Citing this family (4)</h2>
+            <table>
+              <caption>* Cited by examiner, † Cited by third party</caption>
+              <thead>
+                <tr>
+                  <th>Publication number</th>
+                  <th>Priority date</th>
+                  <th>Publication date</th>
+                  <th>Assignee</th>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="forwardReferencesFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/JP7130396B2/en">
+                      <span itemprop="publicationNumber">JP7130396B2</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2018-03-15</td>
+                  <td itemprop="publicationDate">2022-09-05</td>
+                  <td><span itemprop="assigneeOriginal">株式会社エビデント</span></td>
+                  <td itemprop="title">
+                Analysis device, analysis system, program
+               
+               </td>
+                </tr>
+                <tr itemprop="forwardReferencesFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/JP6956873B2/en">
+                      <span itemprop="publicationNumber">JP6956873B2</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2018-07-05</td>
+                  <td itemprop="publicationDate">2021-11-02</td>
+                  <td><span itemprop="assigneeOriginal">三菱電機株式会社</span></td>
+                  <td itemprop="title">
+                Cell culture device, cell culture method and program
+               
+             </td>
+                </tr>
+                <tr itemprop="forwardReferencesFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/JP7280574B2/en">
+                      <span itemprop="publicationNumber">JP7280574B2</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2018-08-20</td>
+                  <td itemprop="publicationDate">2023-05-24</td>
+                  <td><span itemprop="assigneeOriginal">アイ ピース，インコーポレイテッド</span></td>
+                  <td itemprop="title">
+                cell incubator
+               
+               </td>
+                </tr>
+                <tr itemprop="forwardReferencesFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/DE102018124666A1/en">
+                      <span itemprop="publicationNumber">DE102018124666A1</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2018-10-05</td>
+                  <td itemprop="publicationDate">2020-04-09</td>
+                  <td><span itemprop="assigneeOriginal">Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.</span></td>
+                  <td itemprop="title">
+                Method for stimulating the growth of biomass contained in a liquid within a bioreactor
+               
+               </td>
+                </tr>
+              </tbody>
+            </table>
+        
+            
+        
+            <h2>Family Cites Families (4)</h2>
+            <table>
+              <caption>* Cited by examiner, † Cited by third party</caption>
+              <thead>
+                <tr>
+                  <th>Publication number</th>
+                  <th>Priority date</th>
+                  <th>Publication date</th>
+                  <th>Assignee</th>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="backwardReferencesFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/JP2006081434A/en">
+                      <span itemprop="publicationNumber">JP2006081434A</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2004-09-15</td>
+                  <td itemprop="publicationDate">2006-03-30</td>
+                  <td><span itemprop="assigneeOriginal">Ishikawajima Harima Heavy Ind Co Ltd</span></td>
+                  <td itemprop="title">
+                Cell culture apparatus and method
+               
+               </td>
+                </tr>
+                <tr itemprop="backwardReferencesFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/US20130129799A1/en">
+                      <span itemprop="publicationNumber">US20130129799A1</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2010-08-30</td>
+                  <td itemprop="publicationDate">2013-05-23</td>
+                  <td><span itemprop="assigneeOriginal">Fukuoka University</span></td>
+                  <td itemprop="title">Tumor proliferation inhibitor containing ultrasound-sensitive substance and method for inhibiting tumor proliferation by using tumor proliferation inhibitor and low-intensity pulsed ultrasound waves 
+             </td>
+                </tr>
+                <tr itemprop="backwardReferencesFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/WO2013077423A1/en">
+                      <span itemprop="publicationNumber">WO2013077423A1</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2011-11-25</td>
+                  <td itemprop="publicationDate">2013-05-30</td>
+                  <td><span itemprop="assigneeOriginal">国立大学法人京都大学</span></td>
+                  <td itemprop="title">Method for culturing pluripotent stem cell 
+               </td>
+                </tr>
+                <tr itemprop="backwardReferencesFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/JP2015062400A/en">
+                      <span itemprop="publicationNumber">JP2015062400A</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                    <span itemprop="examinerCited">*</span>
+                    
+                  </td>
+                  <td itemprop="priorityDate">2013-08-30</td>
+                  <td itemprop="publicationDate">2015-04-09</td>
+                  <td><span itemprop="assigneeOriginal">独立行政法人放射線医学総合研究所</span></td>
+                  <td itemprop="title">Method for preparing cell aggregate derived from cancer tissues, and anticancer drug screening method using cell aggregate derived from cancer tissues, quantitative analysis of anticancer agent, or radiosensitivity test of cancer tissues 
+               </td>
+                </tr>
+              </tbody>
+            </table>
+        
+            <ul>
+              <li itemprop="applicationsByYear" itemscope repeat>
+                <span itemprop="year">2015</span>
+                <ul>
+                  <li itemprop="application" itemscope repeat>
+                    <span itemprop="filingDate">2015-09-29</span>
+                    <span itemprop="countryCode">JP</span>
+                    <span itemprop="applicationNumber">JP2015190614A</span>
+                    <a href="/patent/JP2019000001A/en"><span itemprop="documentId">patent/JP2019000001A/en</span></a>
+                    <span itemprop="legalStatusCat">active</span>
+                    <span itemprop="legalStatus">Pending</span>
+                    <span itemprop="thisApp" content="true" bool></span>
+                  </li>
+                </ul>
+              </li>
+              <li itemprop="applicationsByYear" itemscope repeat>
+                <span itemprop="year">2016</span>
+                <ul>
+                  <li itemprop="application" itemscope repeat>
+                    <span itemprop="filingDate">2016-08-03</span>
+                    <span itemprop="countryCode">WO</span>
+                    <span itemprop="applicationNumber">PCT/JP2016/072711</span>
+                    <a href="/patent/WO2017056695A1/en"><span itemprop="documentId">patent/WO2017056695A1/en</span></a>
+                    <span itemprop="legalStatusCat">not_active</span>
+                    <span itemprop="legalStatus">Ceased</span>
+                    
+                  </li>
+                </ul>
+              </li>
+            </ul>
+        
+            </section>
+        
+          
+        
+          
+        
+          <h2>Cited By (2)</h2>
+          <table>
+            <caption>* Cited by examiner, † Cited by third party</caption>
+            <thead>
+              <tr>
+                <th>Publication number</th>
+                <th>Priority date</th>
+                <th>Publication date</th>
+                <th>Assignee</th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr itemprop="forwardReferences" itemscope repeat>
+                <td>
+                  <a href="/patent/JP2023532649A/en">
+                    <span itemprop="publicationNumber">JP2023532649A</span>
+                    (<span itemprop="primaryLanguage">en</span>)
+                  </a>
+                  <span itemprop="examinerCited">*</span>
+                  
+                </td>
+                <td itemprop="priorityDate">2020-06-25</td>
+                <td itemprop="publicationDate">2023-07-31</td>
+                <td><span itemprop="assigneeOriginal">コーニング インコーポレイテッド</span></td>
+                <td itemprop="title">
+                Ultrasonic device and method of use
+               
+               </td>
+              </tr>
+              <tr itemprop="forwardReferences" itemscope repeat>
+                <td>
+                  <a href="/patent/JP7822553B2/en">
+                    <span itemprop="publicationNumber">JP7822553B2</span>
+                    (<span itemprop="primaryLanguage">en</span>)
+                  </a>
+                  
+                  
+                </td>
+                <td itemprop="priorityDate">2020-06-25</td>
+                <td itemprop="publicationDate">2026-03-03</td>
+                <td><span itemprop="assigneeOriginal">コーニング インコーポレイテッド</span></td>
+                <td itemprop="title">
+                Ultrasound Device and Method of Use
+               
+               </td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <section>
+            <h2>Also Published As</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Publication number</th>
+                  <th>Publication date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="docdbFamily" itemscope repeat>
+                  <td>
+                    <a href="/patent/WO2017056695A1/en">
+                      <span itemprop="publicationNumber">WO2017056695A1</span>
+                      (<span itemprop="primaryLanguage">en</span>)
+                    </a>
+                  </td>
+                  <td itemprop="publicationDate">2017-04-06</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        
+          <section>
+            <h2>Similar Documents</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Publication</th>
+                  <th>Publication Date</th>
+                  <th>Title</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/WO2017056695A1/en">
+                        <span itemprop="publicationNumber">WO2017056695A1</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2017-04-06">2017-04-06</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Cell culture apparatus 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/KR102282939B1/en">
+                        <span itemprop="publicationNumber">KR102282939B1</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2021-07-28">2021-07-28</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">High-density cell banking methods 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP2019528087A/en">
+                        <span itemprop="publicationNumber">JP2019528087A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2019-10-10">2019-10-10</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Bioreactor and use thereof
+               
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP6733126B2/en">
+                        <span itemprop="publicationNumber">JP6733126B2</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2020-07-29">2020-07-29</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Method for producing three-dimensional cell aggregate
+               
+             </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/EP2733199A1/en">
+                        <span itemprop="publicationNumber">EP2733199A1</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2014-05-21">2014-05-21</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Cell culture device, device for long-term monitoring of cell culture, method for long-term cell culture, and method for long-term monitoring of cell culture 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/CN108342350A/en">
+                        <span itemprop="publicationNumber">CN108342350A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2018-07-31">2018-07-31</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Harvest the method and system of cell 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP2016093149A/en">
+                        <span itemprop="publicationNumber">JP2016093149A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2016-05-26">2016-05-26</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Cell culture device and cell culture method
+               
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP2019509047A/en">
+                        <span itemprop="publicationNumber">JP2019509047A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2019-04-04">2019-04-04</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Proliferation and passage of pluripotent stem cells using a stirred tank bioreactor
+               
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP6326827B2/en">
+                        <span itemprop="publicationNumber">JP6326827B2</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2018-05-23">2018-05-23</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Cell culture device and cell culture method
+               
+             </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP6475322B2/en">
+                        <span itemprop="publicationNumber">JP6475322B2</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2019-02-27">2019-02-27</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Three-dimensional cell culture system and cell culture method using the same
+               
+             </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP2006246720A/en">
+                        <span itemprop="publicationNumber">JP2006246720A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2006-09-21">2006-09-21</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Cell culture chamber
+               
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/CN112961821B/en">
+                        <span itemprop="publicationNumber">CN112961821B</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2023-05-30">2023-05-30</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Method for three-dimensional culture of vascular endothelial cells 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/AU2020401338B2/en">
+                        <span itemprop="publicationNumber">AU2020401338B2</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2026-02-26">2026-02-26</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Automated medium exchange strategy for suspension cells 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/EP2430148A1/en">
+                        <span itemprop="publicationNumber">EP2430148A1</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2012-03-21">2012-03-21</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Bioreactorsystem 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP2023086914A/en">
+                        <span itemprop="publicationNumber">JP2023086914A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2023-06-22">2023-06-22</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                cell incubator
+               
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP4649224B2/en">
+                        <span itemprop="publicationNumber">JP4649224B2</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2011-03-09">2011-03-09</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Method and apparatus for culturing adherent cells
+               
+             </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    
+                    <meta itemprop="isScholar" content="true">
+                      <meta itemprop="scholarID" content="1610961844061561514">
+                      <a href="/scholar/1610961844061561514"><span itemprop="scholarAuthors">Charelli et al.</span></a>
+                    
+                  </td>
+                  <td>
+                    
+                    <time itemprop="publicationDate" datetime="2022">2022</time>
+                    
+                  </td>
+                  <td itemprop="title">Generation of tissue spheroids via a 3D printed stamp-like device</td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/KR20250126750A/en">
+                        <span itemprop="publicationNumber">KR20250126750A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2025-08-25">2025-08-25</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Modular bioreactor 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/WO2025133096A1/en">
+                        <span itemprop="publicationNumber">WO2025133096A1</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2025-06-26">2025-06-26</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">A method of producing differentiated cells from pluripotent stem cells, cell populations obtained by the method, corresponding pharmaceutical compositions and a system for producing differentiated cells from pluripotent stem cells 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/US20240093155A1/en">
+                        <span itemprop="publicationNumber">US20240093155A1</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2024-03-21">2024-03-21</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Method of changing culture medium of a culture using spinfilters 
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JPH06141850A/en">
+                        <span itemprop="publicationNumber">JPH06141850A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="1994-05-24">1994-05-24</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Animal cell culture device and culture method
+               
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    
+                    <meta itemprop="isScholar" content="true">
+                      <meta itemprop="scholarID" content="6083523196493656714">
+                      <a href="/scholar/6083523196493656714"><span itemprop="scholarAuthors">Shojaie et al.</span></a>
+                    
+                  </td>
+                  <td>
+                    
+                    <time itemprop="publicationDate" datetime="2016">2016</time>
+                    
+                  </td>
+                  <td itemprop="title">Generation of ESC-derived mouse airway epithelial cells using decellularized lung scaffolds</td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JPWO2006057444A1/en">
+                        <span itemprop="publicationNumber">JPWO2006057444A1</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2008-06-05">2008-06-05</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Method for automatic diagnosis of cell differentiation
+               
+             </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/CN210340843U/en">
+                        <span itemprop="publicationNumber">CN210340843U</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2020-04-17">2020-04-17</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">
+                Adherent cell microcarrier culture device
+               
+               </td>
+                </tr>
+                <tr itemprop="similarDocuments" itemscope repeat>
+                  <td>
+                    <meta itemprop="isPatent" content="true">
+                      <a href="/patent/JP2020198794A/en">
+                        <span itemprop="publicationNumber">JP2020198794A</span>
+                        (<span itemprop="primaryLanguage">en</span>)
+                      </a>
+                    
+                    
+                  </td>
+                  <td>
+                    <time itemprop="publicationDate" datetime="2020-12-17">2020-12-17</time>
+                    
+                    
+                  </td>
+                  <td itemprop="title">Culture mold, shaking culture vessel, culture system, coculture method, fertilized egg, and endometrium cell 
+               </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        
+          
+        
+        </article>
+        
+            </search-app>
+            
+            <script></script>
+            <script type="text/javascript" src="//www.gstatic.com/feedback/api.js"></script>
+            <script type="text/javascript" src="//www.gstatic.com/feedback/js/help/prod/service/lazy.min.js"></script>
+            <script type="text/javascript">
+              if (window.help && window.help.service) {
+                helpApi = window.help.service.Lazy.create(0, {apiKey: 'AIzaREDACTED', locale: 'en-US'});
+                window.requestedSurveys = new Set();
+                window.requestSurvey = function(triggerId) {
+                  if (window.requestedSurveys.has(triggerId)) {
+                    return;
+                  }
+                  window.requestedSurveys.add(triggerId);
+                  helpApi.requestSurvey({
+                    triggerId: triggerId,
+                    enableTestingMode: false,
+                    callback: (requestSurveyCallbackParam) => {
+                      if (!requestSurveyCallbackParam.surveyData) {
+                        return;
+                      }
+                      helpApi.presentSurvey({
+                        productData: {
+                          productVersion: window.version,
+                          customData: {
+                            "experiments": "",
+                          },
+                        },
+                        surveyData: requestSurveyCallbackParam.surveyData,
+                        colorScheme: 1,
+                        customZIndex: 10000,
+                      });
+                    }
+                  });
+                };
+        
+                window.requestSurvey('YXTwAsvoW0kedxbuTdH0RArc9VhT');
+              }
+            </script>
+            <script src="/sw/null_loader.js"></script>
+          </body>
+        </html>
+  recorded_at: 2026-10-22T01:09:42.546Z

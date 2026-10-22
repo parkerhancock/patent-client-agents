@@ -30,6 +30,7 @@ coverage is recorded in the [operation evidence map](uspto-operation-coverage.md
 | Thin MCP adapter with parallel REST retrieval | [Envelopes](../packages/mcp/src/shared.ts), [server](../packages/mcp/src/index.ts), [register tools](../packages/mcp/src/registers.ts) | [Actual MCP listener](../tests/mcp.test.ts), download and [option-forwarding](../tests/tsdr-mcp-options.test.ts) tests. MCP caller identity remains separate from office credentials. |
 | Upstream OAuth2 client-credentials token | [EPO OPS](../packages/client/src/epo-ops.ts), [MCP tools](../packages/mcp/src/epo.ts), [details](epo-ops.md) | [Token lifecycle](../tests/epo-ops-client.test.ts), [real OPS replays](../tests/epo-ops-recordings.test.ts) and [MCP scope](../tests/epo-ops-mcp.test.ts) tests. Local-clock expiry, single-flight refresh, one retry on token rejection, scrubbed token/client-id/IP recordings. IP Australia OAuth should reuse the pattern, not the class. |
 | Live fee schedules | [Fee models](../packages/client/src/fees/models.ts), [EPO fees](../packages/client/src/fees/epo.ts), [MCP tools](../packages/mcp/src/fees.ts), [pattern](fees.md) | [Fee tests](../tests/fees.test.ts) with real EPO recordings. Decimal-string amounts, published effective date separate from retrieval time, explicit code maps with visible unmapped codes, computed renewal coverage, Python-generated office aliases. 23 offices remain. |
+| HTML DOM extraction from whole pages | [Google Patents](../packages/client/src/google-patents/client.ts), [DOM helpers](../packages/client/src/google-patents/dom.ts), [details](google-patents.md) | [Parser and client tests](../tests/google-patents.test.ts) with archived real pages and recordings. Portable linkedom DOM, itemprop selectors, loud failure on unrecognizable pages, a shared throttle that fails fast during cooldown. |
 
 ## Styles that still need a reference
 
@@ -39,7 +40,6 @@ runtime compatibility.
 
 | Missing style | Python candidate | First-slice proof |
 | --- | --- | --- |
-| HTML DOM extraction from whole pages | [Google Patents](../../src/patent_client_agents/google_patents/client.py) | Archived page fixtures, deliberate parser selection, selectors/structured metadata and explicit changed-page failures. Claims HTML-to-text is narrower. |
 | SOAP service | [Spain OEPM](../../src/patent_client_agents/oepm_spain/client.py) | WSDL-derived envelopes, namespaces, escaping, body-credential scrubbing, faults and not-found behavior. Python coverage is a BYOK beta, not live TypeScript proof. |
 | Account login with CSRF/session refresh | [INPI France](../../src/patent_client_agents/inpi_pi/client.py) | Source-specific bootstrap/login, CSRF, expiry/relogin and safe credential isolation. WAF delivery does not establish this flow. |
 

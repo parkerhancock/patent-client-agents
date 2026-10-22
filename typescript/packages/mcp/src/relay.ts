@@ -13,9 +13,11 @@ export const RELAY_HOSTS = [
   "assignmentcenter.uspto.gov",
   "ops.epo.org",
   "fees.apps.epo.org",
+  "patents.google.com",
+  "patentimages.storage.googleapis.com",
 ] as const;
 /** Request headers forwarded upstream; everything else, including cookies and Origin, is dropped. */
-const FORWARD = ["accept", "content-type", "x-ops-range"];
+const FORWARD = ["accept", "accept-language", "content-type", "x-ops-range"];
 /** Response headers dropped before the browser sees them. */
 const STRIP = new Set([
   "set-cookie",

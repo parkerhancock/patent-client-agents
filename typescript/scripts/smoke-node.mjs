@@ -2,11 +2,12 @@
 // Usage: bun run build && node scripts/smoke-node.mjs
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { zstdCompressSync } from "node:zlib";
+import { gunzipSync, zstdCompressSync } from "node:zlib";
 import {
   EpcClient,
   EpoFeesClient,
   EpoOpsClient,
+  GooglePatentsClient,
   MpepClient,
 } from "@patent-client-agents/client";
 
@@ -70,6 +71,15 @@ const ops = new EpoOpsClient({
   },
 });
 results.ops_total = (await ops.search("ta=x")).data.total_results;
+
+const google = GooglePatentsClient.parsePatent(
+  gunzipSync(
+    await readFile(fixture("google-patents/US7654321B2.html.gz")),
+  ).toString(),
+  "US7654321B2",
+);
+assert.equal(google.claims.length, 26);
+results.google_claims = google.claims.length;
 
 for (const client of [epcByPath, epcBytes, mpep, zst]) client.close();
 console.log(JSON.stringify({ runtime: `node ${process.version}`, ...results }));

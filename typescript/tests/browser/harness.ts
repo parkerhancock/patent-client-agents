@@ -6,6 +6,7 @@ import {
   EpcClient,
   EpoFeesClient,
   EpoOpsClient,
+  GooglePatentsClient,
   MpepClient,
 } from "../../packages/client/src/index.js";
 
@@ -64,6 +65,12 @@ try {
             )) as unknown as typeof fetch,
     }).search("ta=x")
   ).data.total_results;
+  const google = GooglePatentsClient.parsePatent(
+    await (await fetch("/fixtures/google-patents/US7654321B2.html")).text(),
+    "US7654321B2",
+  );
+  results.google_claims = google.claims.length;
+  results.google_markdown = (google.description_markdown?.length ?? 0) > 10_000;
   // Cross-origin leg: the page's origin differs from the relay and the upstream.
   const relay = JSON.parse(
     decodeURIComponent(location.hash.slice(1)) || "null",

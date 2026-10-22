@@ -25,6 +25,7 @@ synthetic contracts. The Python package remains separate.
 | REST document retrieval | MCP-issued single-use links by default; authenticated REST concurrently available; stdio files | Actual listener verifies expiry, issuer, audience, scope, ownership; signature, capacity, MIME and cleanup tests |
 | EPO OPS and CPC (EPO scope) | Search, biblio, full text, citations, equivalents, INPADOC family, legal events, EP Register views, Unitary Patent package, family evidence, number conversion, merged PDF, CPC retrieval/search/mapping/media/CPCI; eight intent-based MCP tools under `epo:read` | 22 live recordings on October 21 replay offline; synthetic OAuth2, error and MCP tests. See [EPO OPS](epo-ops.md) |
 | Fee schedules (EPO and Unitary Patent) | `FeesClient` with Python-parity office resolution; EPO EPC and Unitary Patent schedules from the live EPO fee feed; three MCP tools under `fees:read` | Two live recordings on October 21 replay offline; Article 2 RFeesUPP cross-check; 23 other offices report not yet ported. See [fees](fees.md) |
+| Google Patents | Page metadata, claims, limitations, description Markdown, figures, citations, family, events; search; PDFs; three MCP tools under `patents:read` | Archived real pages and live recordings; parsers run in Bun, Node and Chromium. See [Google Patents](google-patents.md) |
 | EPO legal corpora (EPC, Case Law, Guidelines, PCT-EPO and UP Guidelines) | Read-only SQLite/FTS readers with book-specific citations; ten MCP tools, five status resources, `epo:read` scope | Real-row fixtures for all five books; all five May 14, 2026 Python snapshots prepared, Zstandard-packaged, pinned and read through library and default MCP on October 21. Edition labels unverified; not deployed |
 
 The [feature inventory](uspto-feature-inventory.md) maps every Python method to
@@ -142,3 +143,10 @@ WebAssembly SQLite and Zstandard in every runtime and an authenticated relay
 for office APIs a browser cannot call directly. Node and headless-Chromium
 smoke tests are part of `bun run check`. See [runtimes](runtimes.md). The relay
 is not deployed or tried against real office endpoints.
+
+## Google Patents
+
+October 21, 2026. The [Google Patents port](google-patents.md) establishes the
+whole-page HTML pattern and corrects several places where the Python parser
+has fallen behind Google's current markup or query rules. It is unofficial and
+throttled; nothing is deployed.

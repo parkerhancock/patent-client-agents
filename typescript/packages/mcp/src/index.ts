@@ -11,6 +11,7 @@ import {
   EpoPctGuidelinesClient,
   EpoUpGuidelinesClient,
   FeesClient,
+  GooglePatentsClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -45,6 +46,7 @@ import {
 import { registerEpoTools } from "./epo.js";
 import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
 import { registerFeeTools } from "./fees.js";
+import { registerGooglePatentsTools } from "./google-patents.js";
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
@@ -76,6 +78,7 @@ export interface UsptoClients {
   mpep: MpepClient;
   epoOps: EpoOpsClient;
   fees: FeesClient;
+  googlePatents: GooglePatentsClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -606,6 +609,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     (process.env.EPO_OPS_API_SECRET || process.env.EPO_API_SECRET)
       ? lazyClient(() => new EpoOpsClient())
       : undefined);
+  registerGooglePatentsTools(
+    server,
+    provided.googlePatents ?? new GooglePatentsClient(),
+    options.auth ? requireScopes("patents:read") : undefined,
+  );
   registerFeeTools(
     server,
     provided.fees ?? new FeesClient(),
