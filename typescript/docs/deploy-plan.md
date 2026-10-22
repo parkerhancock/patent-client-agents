@@ -71,7 +71,7 @@ No GCP writes.
    fails the container on mismatch, as Python does. The total is small enough
    that baking them into the image is the fallback.
    **Done locally (October 22):** all twelve corpora the curated server reads
-   are packaged under `.data/` (37,442,379 bytes compressed), the bootstrap is
+   are packaged under `.data/` (37,481,312 bytes compressed, EPO text re-derived with the word-break fix), the bootstrap is
    `@patent-client-agents/client/corpus-bootstrap`, and
    `scripts/publish-corpora.ts` has been run only as a dry run. See
    [corpus bootstrap](corpus-bootstrap.md). The upload is Phase 1, step 1.

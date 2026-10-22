@@ -89,11 +89,24 @@ and the default MCP server. The results:
 
 | Book | Sections | Prepared bytes | Zstandard bytes | Decoded SHA-256 |
 | --- | --- | --- | --- | --- |
-| EPC 2020 | 356 | 1,540,096 | 604,119 | `edd3b7d40d5383400961f92291cd284cd0821e6350b791c926183466cef8f628` |
-| Case Law 2022 | 2,631 | 21,151,744 | 8,808,711 | `c0054ee284e467b2b7109b57b5840fd5b72ae4189e2ca5dfc485cd50ae27b087` |
-| Guidelines 2024 | 1,771 | 6,275,072 | 2,453,326 | `6589efe366740d429b0fc8cca0623c403bb4c03b9505c4fedcd42f500516f33d` |
-| PCT-EPO Guidelines 2024 | 756 | 1,826,816 | 667,742 | `80216f4a743e35dd241e5ad4eda507211651542f670e5544fd6bf7ad347a2fe4` |
-| UP Guidelines 2026 | 142 | 663,552 | 374,684 | `e28802ba804d98de7f77d75c0fa3c420da034c53132664becfb8be8050225bff` |
+| EPC 2020 | 356 | 1,536,000 | 601,266 | `328831fdf72bd839e27b56e6837a958839730d949957b1134fc7f846c5ab4089` |
+| Case Law 2022 | 2,631 | 21,229,568 | 8,845,767 | `d8019ed232edd6dedd1a4dbf9a717a10aa8f55f54b66a6a6bb349e22ff39b92a` |
+| Guidelines 2024 | 1,771 | 6,283,264 | 2,463,179 | `2ab0b031987e057f1e236bccdccf83a386f3ca5d2a7990d709b769b1ad340b91` |
+| PCT-EPO Guidelines 2024 | 756 | 1,818,624 | 664,202 | `6272227033dab1e34896e09f270280809ad83d935d7c0529711bef2dcedca57b` |
+| UP Guidelines 2026 | 142 | 659,456 | 373,101 | `3013d61ef8f2e8fac19cd3db73733c158f3d3f802863bc0f5796423a07003ed4` |
+
+On October 22, 2026 the text and FTS index of all five were re-derived from
+each row's stored HTML with the word-break fix from
+`fix/epo-legal-heading-whitespace` (deb55e73), using
+[`scripts/rederive-epo-legal-text.py`](../scripts/rederive-epo-legal-text.py).
+The script refuses to write unless the old extraction reproduces every stored
+text from the stored HTML, which held for all 5,656 rows; the changes add
+whitespace only (no row differs once whitespace is removed). EPC Article 54
+now reads "Article 54 42 , 43 Novelty" and `novelty` finds it. The snapshot is
+otherwise the May 14 one, and each file's `meta` records
+`text_extraction = element_text deb55e73`. The table above lists the
+re-derived artifacts; run the script on each prepared file before
+`compress-corpus.ts` to reproduce them.
 
 The artifacts stay under ignored `.data/` and were not deployed. Configure
 artifacts by absolute path with both pins from each packaging manifest.

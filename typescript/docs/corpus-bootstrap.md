@@ -27,9 +27,9 @@ untouched.
       "uri": "gs://patentclient-mcp-corpora/ts/epc/2026-05-14/epc.db.zst",
       "file": "epc.db.zst",
       "compression": "zstd",
-      "file_sha256": "ddb2058b…",
+      "file_sha256": "b3c6867e…",
       "file_bytes": 604119,
-      "decoded_sha256": "edd3b7d4…",
+      "decoded_sha256": "328831fd…",
       "decoded_bytes": 1540096,
       "metadata": { "schema_version": "1", "snapshot_date": "2026-05-14", "epc_year": "2020" }
     }
@@ -160,28 +160,28 @@ files left all twelve readers available from the returned variables.
 | `mpep` | 2026-10-20 | `mpep/mpep.db.zst` | 17,014,840 | `3d862a00c26f5e0c169d41510fae52d5aa86b837df57340b961cfd06747268fa` | 48,697,344 | `1771226e8c16985058fc6673b8ee534e76a04b59d941abe166701b582f244060` |
 | `tmep` | 2026-05-13 | `tmep/tmep.db.zst` | 3,316,287 | `398814bd370d146e5fbe9c8471564d4c828faea6b2ff359f559780be39ac780a` | 8,417,280 | `2d678fdf821fb94dd7aec66c738a91bc9cbffee2adb2a4e438abf48d8cd52aa8` |
 | `ukipo_mopp` | 2026-05-14 | `ukipo_mopp/mopp.db.zst` | 2,560,203 | `d48e10116b928c76677137799da7dd9eadbd80a3643e5c82c2f21af61c3ea785` | 5,525,504 | `4bd204a2873034ecfc4078513dc81bdebf9c75c54330e46a1587486e9af4ddac` |
-| `epc` | 2026-05-14 | `epo-legal/epc.db.zst` | 604,119 | `ddb2058b95b1bf93a5d6e6cf4371ff76b739fa645d4f66b67108fe692294efd8` | 1,540,096 | `edd3b7d40d5383400961f92291cd284cd0821e6350b791c926183466cef8f628` |
-| `epo_case_law` | 2026-05-14 | `epo-legal/caselaw.db.zst` | 8,808,711 | `262f865448dea273ed50111d60480193d6827cabc4419f9a643be18efd6488b7` | 21,151,744 | `c0054ee284e467b2b7109b57b5840fd5b72ae4189e2ca5dfc485cd50ae27b087` |
-| `epo_guidelines` | 2026-05-14 | `epo-legal/guidelines.db.zst` | 2,453,326 | `ad780ca486e8e77a81548e6a72bc5f54eaeb0e8659e4156bd6685645149bc14d` | 6,275,072 | `6589efe366740d429b0fc8cca0623c403bb4c03b9505c4fedcd42f500516f33d` |
-| `epo_pct_guidelines` | 2026-05-14 | `epo-legal/pct_guidelines.db.zst` | 667,742 | `144f059678c20554fe8c652818f9a32dfd8aa2ed44fad4e4f82c75e47d008765` | 1,826,816 | `80216f4a743e35dd241e5ad4eda507211651542f670e5544fd6bf7ad347a2fe4` |
-| `epo_up_guidelines` | 2026-05-14 | `epo-legal/up_guidelines.db.zst` | 374,684 | `4eddfc98ca4a104b573472b8fafbce12a71bdd7568365078e08f1bc4ee448fea` | 663,552 | `e28802ba804d98de7f77d75c0fa3c420da034c53132664becfb8be8050225bff` |
+| `epc` | 2026-05-14 | `epo-legal/epc.db.zst` | 601,266 | `b3c6867e2186673ad2b29c1719aa973b94fad12147b97936bc56c2f9a9352b46` | 1,536,000 | `328831fdf72bd839e27b56e6837a958839730d949957b1134fc7f846c5ab4089` |
+| `epo_case_law` | 2026-05-14 | `epo-legal/caselaw.db.zst` | 8,845,767 | `92e29e61c05dd2a25d7c68e01e84bdd8978b86be95d77ce3d25fe207a625811d` | 21,229,568 | `d8019ed232edd6dedd1a4dbf9a717a10aa8f55f54b66a6a6bb349e22ff39b92a` |
+| `epo_guidelines` | 2026-05-14 | `epo-legal/guidelines.db.zst` | 2,463,179 | `6efb3830069879434cc48d1d0aa98cda95c8fab323297d1d2cb5d83f8944c1cb` | 6,283,264 | `2ab0b031987e057f1e236bccdccf83a386f3ca5d2a7990d709b769b1ad340b91` |
+| `epo_pct_guidelines` | 2026-05-14 | `epo-legal/pct_guidelines.db.zst` | 664,202 | `5579fe0fb06cbdfe6a6022d83e643af6fa0d9b09ea97db692739698ed7ed25c0` | 1,818,624 | `6272227033dab1e34896e09f270280809ad83d935d7c0529711bef2dcedca57b` |
+| `epo_up_guidelines` | 2026-05-14 | `epo-legal/up_guidelines.db.zst` | 373,101 | `af35345140499af46260cdfe5c69b15b298ca6a765b7c9cc873016709d91a161` | 659,456 | `3013d61ef8f2e8fac19cd3db73733c158f3d3f802863bc0f5796423a07003ed4` |
 | `upc_statutes` | 2026-05-14 | `upc/upc_statutes.db.zst` | 652,442 | `8f8477f68912ba8fb42704cdac10cd55797794b968de55778cdea90e91dca50d` | 1,986,560 | `2d1fd1e1aadefe3fd6122cd3488acab80ddd14304eecb3efd5c6ea204fbac0b9` |
 | `dpma_statutes` | 2026-10-22 | `dpma_statutes/dpma_statutes.db.zst` | 402,417 | `2a59048b1775ef370dcaf41f6196d3990e02412d50005a5af58fd390341bc83c` | 1,470,464 | `211bf701e26fb7f9719d0a20929596424711ae89e43130f30d220b8e74cefee2` |
 | `ipo_in_statutes` | 2026-10-22 | `ipo-in/ipo_in_statutes.db.zst` | 388,487 | `96aeed06437c05bdaef4f943c7b1b81599dd6f315ee433d158fe151a8bf9f55f` | 1,404,928 | `82bfaea2cabe9dda467590bed2af231edafaf683308f69f09015ee72b5314671` |
 | `ipo_in_mppp` | 2026-10-22 | `ipo-in/ipo_in_mppp.db.zst` | 199,121 | `00905acf0d481c4323fd8cd6ebb47915a49b7c55c515749c7b5a426770affe7d` | 688,128 | `b2e440776a7b45048ec20b37b5054d327cde309978cb87a4c2899911bc9f6b5b` |
 
-Total: 37,442,379 bytes compressed (35.7 MiB) and 99,647,488 bytes decoded
-(95.0 MiB). Baking the files into the image would add about 36 MB; the
+Total: 37,481,312 bytes compressed (35.7 MiB) and 99,717,120 bytes decoded
+(95.1 MiB). Baking the files into the image would add about 36 MB; the
 bootstrap adds a download of the same size at cold start. Locally, against a
 fake bucket, a full bootstrap took about 0.2 s and a verified rerun 0.15 s;
 the time from Cloud Run to Cloud Storage has not been measured. Steady-state memory is the decoded size plus each
 reader's in-memory SQLite copy once a corpus is opened, whichever way the files
 arrive.
 
-The EPO heading defect noted in [EPO legal](epo-legal.md) is present in the
-deployed blobs: EPC Article 54 reads `Article 5442, 43Novelty`, a search for
-`novelty` returns no hits and `43novelty` returns `a54`. It was not fixed
-here; the fix belongs in the Python builders.
+The deployed EPO blobs carry the heading defect (EPC Article 54 read
+`Article 5442, 43Novelty`, so `novelty` missed it). The artifacts above are
+the re-derived ones described in [EPO legal](epo-legal.md), so the TypeScript
+manifest does not ship the defect.
 
 ## Tests
 

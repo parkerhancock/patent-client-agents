@@ -139,9 +139,10 @@ the corpora are offline only.
 Not facade defects, but visible in the run:
 
 - `search_legal_reference(corpus='epc', query='novelty')` returns no hits,
-  because the crawled EPC text runs heading words into numbers. The builder
-  fix is on `fix/epo-legal-heading-whitespace`; the corpora have not been
-  rebuilt with it.
+  because the crawled EPC text runs heading words into numbers. Fixed on
+  October 22 for the TypeScript artifacts, whose text was re-derived with the
+  word-break fix from `fix/epo-legal-heading-whitespace` (see
+  [EPO legal](epo-legal.md)); the deployed Python corpora still have it.
 - `get_epo(view='register_biblio')` summarizes with the first register title,
   which is the German one for EP1000000. The data includes all three.
 - Trademark Search owner names can carry runs of spaces from the source.
