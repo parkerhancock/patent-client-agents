@@ -10,6 +10,7 @@ import { Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";
 import {
   cipoFixtureFetch,
+  jpoFeePage,
   recordedFeeFetch,
   usptoFeePage,
 } from "./fees-recordings.js";
@@ -183,49 +184,55 @@ function feesClient() {
   return new FeesClient({
     retryLimit: 0,
     fetch: recordedFeeFetch(
-      ["cnipa", "dpma", "ipaustralia", "ilpo", "impi"],
+      ["cnipa", "dpma", "ipaustralia", "ilpo", "impi", "kipo", "ipindia"],
       cipoFixtureFetch((async (input: RequestInfo | URL) =>
         String(input instanceof Request ? input.url : input).includes(
-          "uspto.gov",
+          "jpo.go.jp",
         )
-          ? new Response(usptoFeePage(), {
+          ? new Response(jpoFeePage(), {
               headers: { "content-type": "text/html" },
             })
-          : Response.json([
-              {
-                data: {
-                  feeCode: "001",
-                  feeDescription: "Filing fee",
-                  amount: null,
-                },
-                children: [
-                  {
-                    data: {
-                      feeCode: null,
-                      feeDescription: "online",
-                      amount: "135,00",
-                    },
-                    children: [],
+          : String(input instanceof Request ? input.url : input).includes(
+                "uspto.gov",
+              )
+            ? new Response(usptoFeePage(), {
+                headers: { "content-type": "text/html" },
+              })
+            : Response.json([
+                {
+                  data: {
+                    feeCode: "001",
+                    feeDescription: "Filing fee",
+                    amount: null,
                   },
-                ],
-              },
-              ...Array.from({ length: 18 }, (_, i) => ({
-                data: {
-                  feeCode: String(33 + i).padStart(3, "0"),
-                  feeDescription: `Renewal fee for the ${i + 3}th year`,
-                  amount: "1.000,00",
+                  children: [
+                    {
+                      data: {
+                        feeCode: null,
+                        feeDescription: "online",
+                        amount: "135,00",
+                      },
+                      children: [],
+                    },
+                  ],
                 },
-                children: [],
-              })),
-              {
-                data: {
-                  feeCode: "732",
-                  feeDescription: "Renewal fee for the 2nd year",
-                  amount: "35,00",
+                ...Array.from({ length: 18 }, (_, i) => ({
+                  data: {
+                    feeCode: String(33 + i).padStart(3, "0"),
+                    feeDescription: `Renewal fee for the ${i + 3}th year`,
+                    amount: "1.000,00",
+                  },
+                  children: [],
+                })),
+                {
+                  data: {
+                    feeCode: "732",
+                    feeDescription: "Renewal fee for the 2nd year",
+                    amount: "35,00",
+                  },
+                  children: [],
                 },
-                children: [],
-              },
-            ])) as unknown as typeof fetch),
+              ])) as unknown as typeof fetch),
     ),
   });
 }
@@ -630,6 +637,13 @@ test("get_fees covers schedule, lookup and jurisdictions, and names unported off
         "DE/DPMA/patent",
         "IL/ILPO/design",
         "MX/IMPI/utility_model",
+        "KR/KIPO/patent",
+        "KR/KIPO/trademark",
+        "KR/KIPO/design",
+        "JP/JPO/patent",
+        "JP/JPO/trademark",
+        "JP/JPO/design",
+        "IN/IPIN/patent",
       ]),
     );
     expect(list.summary).toContain("Not yet ported: EUIPO trademark");
@@ -649,7 +663,8 @@ test("get_fees covers schedule, lookup and jurisdictions, and names unported off
     await expect(
       mcp.client.callTool("get_fees", {
         mode: "schedule",
-        jurisdiction: "JPO",
+        jurisdiction: "EUIPO",
+        right: "trademark",
       }),
     ).rejects.toThrow("not yet ported");
     await expect(

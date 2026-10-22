@@ -7,6 +7,9 @@ import { EpoFeesClient } from "./epo.js";
 import { IlpoFeesClient } from "./ilpo.js";
 import { ImpiFeesClient } from "./impi.js";
 import { IpAustraliaFeesClient } from "./ipaustralia.js";
+import { IpIndiaFeesClient } from "./ipindia.js";
+import { JpoFeesClient } from "./jpo.js";
+import { KipoFeesClient } from "./kipo.js";
 import {
   type EntityTier,
   type FeeCategory,
@@ -26,6 +29,9 @@ export * from "./epo.js";
 export * from "./ilpo.js";
 export * from "./impi.js";
 export * from "./ipaustralia.js";
+export * from "./ipindia.js";
+export * from "./jpo.js";
+export * from "./kipo.js";
 export * from "./models.js";
 export * from "./uspto.js";
 
@@ -119,6 +125,9 @@ export class FeesClient {
     const ilpo = new IlpoFeesClient(options);
     const impi = new ImpiFeesClient(options);
     const ipau = new IpAustraliaFeesClient(options);
+    const kipo = new KipoFeesClient(options);
+    const jpo = new JpoFeesClient(options);
+    const ipindia = new IpIndiaFeesClient(options);
     this.routes = new Map<string, Loader>([
       ["USPTO/patent", (o) => uspto.getPatentSchedule(o)],
       ["USPTO/trademark", (o) => uspto.getTrademarkSchedule(o)],
@@ -136,6 +145,13 @@ export class FeesClient {
       ["IMPI/utility_model", (o) => impi.getUtilityModelSchedule(o)],
       ["IMPI/trademark", (o) => impi.getTrademarkSchedule(o)],
       ["IMPI/design", (o) => impi.getDesignSchedule(o)],
+      ["KIPO/patent", (o) => kipo.getPatentSchedule(o)],
+      ["KIPO/trademark", (o) => kipo.getTrademarkSchedule(o)],
+      ["KIPO/design", (o) => kipo.getDesignSchedule(o)],
+      ["JPO/patent", (o) => jpo.getPatentSchedule(o)],
+      ["JPO/trademark", (o) => jpo.getTrademarkSchedule(o)],
+      ["JPO/design", (o) => jpo.getDesignSchedule(o)],
+      ["IPIN/patent", (o) => ipindia.getPatentSchedule(o)],
     ]);
   }
   /** Schedules available in this runtime, as `office/right` keys. */

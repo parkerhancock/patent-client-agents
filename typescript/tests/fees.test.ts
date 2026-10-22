@@ -19,7 +19,9 @@ import {
   cipoFixtureFetch,
   feeRecording,
   feeRecordings,
+  jpoFeePage,
   recordedFeeFetch,
+  recordedFeeResponse,
   usptoFeePage,
 } from "./fees-recordings.js";
 
@@ -233,6 +235,13 @@ test("jurisdiction resolution matches Python and separates unported offices", as
       "USPTO/design",
       "EPO/patent",
       "EPO-UP/patent",
+      "KIPO/patent",
+      "KIPO/trademark",
+      "KIPO/design",
+      "JPO/patent",
+      "JPO/trademark",
+      "JPO/design",
+      "IPIN/patent",
     ]),
   );
   expect(resolveFeeJurisdiction("United States", "design")).toEqual([
@@ -250,11 +259,20 @@ test("jurisdiction resolution matches Python and separates unported offices", as
   ).toBe("UNSUPPORTED_RIGHT");
 });
 
-/** EPO feed fake plus the recorded USPTO page, routed by host. */
-const feeFetch = (async (input: RequestInfo | URL) =>
-  String(input instanceof Request ? input.url : input).includes("uspto.gov")
+/** EPO feed fake plus recorded pages for the other offices, routed by host. */
+const feeFetch = (async (input: RequestInfo | URL) => {
+  const url = String(input instanceof Request ? input.url : input);
+  if (url.includes("kipo.go.kr")) return recordedFeeResponse("kipo", url);
+  if (url.includes("ipindia.gov.in"))
+    return recordedFeeResponse("ipindia", url);
+  if (url.includes("jpo.go.jp"))
+    return new Response(jpoFeePage(), {
+      headers: { "content-type": "text/html" },
+    });
+  return url.includes("uspto.gov")
     ? new Response(usptoFeePage(), { headers: { "content-type": "text/html" } })
-    : Response.json(feesFromCassetteBody())) as unknown as typeof fetch;
+    : Response.json(feesFromCassetteBody());
+}) as unknown as typeof fetch;
 function feesFromCassetteBody() {
   return [
     node("001", "Filing fee - EP direct", null, [
@@ -354,10 +372,20 @@ test("fee MCP tools forward filters and report gaps and unported offices", async
         "MX/IMPI/utility_model",
         "MX/IMPI/trademark",
         "MX/IMPI/design",
+        "KR/KIPO/patent",
+        "KR/KIPO/trademark",
+        "KR/KIPO/design",
+        "JP/JPO/patent",
+        "JP/JPO/trademark",
+        "JP/JPO/design",
+        "IN/IPIN/patent",
       ]),
     );
     await expect(
-      client.callTool("get_fee_schedule", { jurisdiction: "JPO" }),
+      client.callTool("get_fee_schedule", {
+        jurisdiction: "EUIPO",
+        right: "trademark",
+      }),
     ).rejects.toThrow("not yet ported");
   } finally {
     await client.close();

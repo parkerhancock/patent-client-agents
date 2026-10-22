@@ -371,6 +371,204 @@ This corrects the Python scraper:
    information services no longer appear in the trade mark schedule, and
    the trade mark search report (24) appears only there.
 
+## KIPO
+
+`KipoFeesClient` ([source](../packages/client/src/fees/kipo.ts)) parses
+KIPO's two English fee pages, as Python does: patents
+(`https://www.kipo.go.kr/en/HtmlApp?c=92004&catmenu=ek03_04_01`, which also
+has utility model and PCT tables) and trademarks and designs
+(`...?c=93006&catmenu=ek04_04_01`). Both pages answer plain requests and were
+recorded live on October 22, 2026.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `KR/KIPO/patent` | 66 fees: application, examination, annual fees, conversions | Renewal years 1-25, basic and per claim |
+| `KR/KIPO/trademark` | 24 fees: per-class application, registration, renewal, opposition | Renewal year 10 (lump sum and installment) |
+| `KR/KIPO/design` | 60 fees: application by examination track, examination, annual fees, divisions | Renewal years 1-20 for each of two tracks |
+
+Each table has two columns. A fee with sub-items ("a. Basic fee / b.
+Additional fee for each claim") has a description cell with a rowspan, and
+the following rows carry only further amounts; the parser follows the
+rowspan instead of guessing from cell text. Every known row is matched by
+section and exact wording to an explicit rule that also checks how many
+amounts it has and whether they are labelled electronic or paper. A row with
+no rule still appears, as `other`, and is listed in `unmapped_codes`; a known
+row that disappears or changes shape fails with `INVALID_RESPONSE`. KIPO
+publishes no fee codes, so codes are readable slugs with Python's prefixes
+(`kr-`, `kr-tm-`, `kr-des-`), for example `kr-annual-fee-y10` and
+`kr-tm-renewal-installment`. The effective date is the one the pages state
+("in effect since August 1, 2023", as Python has it), and each page's "Last
+updated" date goes in `provenance.as_of_status`. Amounts are whole won.
+Paper rates are separate fees with a `paper_filing` condition. KIPO's fee
+reductions are a separate refund program, so every fee has tier `none`.
+Utility model and PCT tables are not routed, as in Python.
+
+Annual patent fees are a basic fee plus a fee for each claim, both per year;
+each year gets a renewal row and an `excess_claims` row (claims_over,
+threshold 0). Trademark charges for designated goods beyond 10 in a class are
+`excess_classes` rows without a condition, because the closed trigger
+vocabulary counts classes, not goods; the notes say so. Designs have two
+annual-fee tracks (after substantive and after partial-substantive
+examination), so a renewal lookup by year returns one row per track.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. A rowspan continuation cell ("18,000(electronic) 20,000(paper-based)") is
+   read as a section header, so every examination fee after the priority
+   claim (substantive examination, reexamination, preferential examination)
+   is filed as `other`.
+2. Amounts on continuation rows are dropped unless the description ends in
+   "Basic fee", which only annual-fee rows do: the per-claim examination fee
+   (51,000), the per-claim reexamination fee (10,000), the paper page fee
+   (1,000) and the additional priority-claim fee are missing, and so are the
+   paper rates on the patent page.
+3. Annual fees are `maintenance` (the USPTO 3.5/7.5/11.5-year category)
+   rather than `renewal`, and the per-claim annual fee is one row per band
+   with no year, so a lookup by year never returns it. Per-claim conditions
+   use threshold 1; KIPO charges for every claim.
+4. Reexamination is filed as `ptab` and the patent-term-extension application
+   as `extension` (extension of time). Here they are `examination` and `other`.
+5. The trademark goods surcharge carries `classes_over` with threshold 10,
+   which reads as "more than ten classes"; its renewal rows have no year.
+6. The design divisional row loses its second rate pair (59,000 electronic,
+   69,000 paper); the two design application tracks have nearly identical
+   labels; paper rows have no `paper_filing` condition; and a trailing
+   "Application fee" cell is read as a section header, so later trademark
+   codes name the wrong section.
+
+## JPO
+
+`JpoFeesClient` ([source](../packages/client/src/fees/jpo.ts)) parses the
+JPO schedule of fees page
+(`https://www.jpo.go.jp/e/system/process/tesuryo/hyou.html`), as Python does.
+
+**Blocked for live recording.** On October 22, 2026 the JPO's CloudFront edge
+answered every plain request from this machine with HTTP 403 and a "page not
+found" body, including the English home page and `robots.txt`, with the
+project user agent and with curl's default. Python gets through by sending a
+Chrome user agent and browser `Sec-Fetch-*` headers; this port does not
+impersonate a browser. The routes are registered and send the project user
+agent; where the JPO refuses, they fail with the HTTP 403 rather than return
+anything. The parser is built and tested against the page Python's tests
+saved on May 20, 2026 (`tests/fixtures/fees/jpo-hyou-2026-05-20.htm`, kept as
+`.htm` so Biome does not lint it). There is no JPO cassette and no `jpo`
+recorder operation.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `JP/JPO/patent` | 253 fees: filing, examination (two cohorts), annual fees (four cohorts), opposition and trials, shared procedural fees | Renewal years 1-25, basic and per claim |
+| `JP/JPO/trademark` | 38 fees: application, registration and renewal (full or installment), defensive marks, opposition and trials, shared procedural fees | Renewal year 10 |
+| `JP/JPO/design` | 52 fees: application, secret design, annual fees, appeal and trial, shared procedural fees | Renewal years 1-25 |
+
+The page has numbered sections (1. Application ... 6. After Registration);
+sections 1-4 have one table per right under "(1)Patents" ... "(4)Trademarks",
+and sections 5 and 6 are single tables for every right. Rowspans and colspans
+are expanded into a grid so continuation rows keep their labels. Fee cells
+must be `¥X`, `¥X + ¥Y per claim|classification|sheet` or `¥X per
+classification`; anything else fails with `INVALID_RESPONSE`, as do a
+missing effective-date heading and a table outside the numbered sections.
+Rows are mapped by section, right and wording; unknown rows appear as
+`other` and are listed in `unmapped_codes`. The effective date is the one the
+page states ("Schedule of fees (on or after April 1, 2022)", Python's date).
+
+The per-claim, per-classification and per-sheet parts of a fee are separate
+`excess_claims`, `excess_classes` and `excess_pages` rows with threshold 0.
+Examination fees differ for applications filed before and after April 1,
+2019, and patent annual fees by filing date (1988) and examination-request
+date (April 1, 2004); every cohort is listed, the current one without a code
+suffix (`jp-annual-fee-y10`, `jp-annual-fee-exam-pre-2004-y10`, ...), so a
+patent renewal lookup by year returns four rows. Design annual fees are
+¥8,500 for years 1-3 and ¥16,900 from year 4 to the end of a term of 15, 20
+or 25 years depending on the filing date; years 16-25 say which designs they
+apply to. Section 5 procedural fees and the general-succession and
+owner-name fees of section 6 appear in all three schedules with all four
+rights listed; transfer-of-right fees and the two Article 50 extension fees go
+to their own right only.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. It de-duplicates rows by the first 60 characters of the description, so
+   it drops the examination fee where another International Searching
+   Authority made the search report (¥124,000 + ¥3,600 per claim; ¥106,000
+   before 2019) and the design Article 50 extension (¥7,200).
+2. It reads only the first two cells of rowspan rows, so it loses the patent
+   transfer fee (¥15,000) and every on-line certificate, inspection and copy
+   fee (it keeps one unlabelled "-over the counter" row of ¥1,400), and files
+   the utility model, design and trademark transfer fees in the patent
+   schedule as `other`.
+3. Annual fees are `maintenance` instead of `renewal`; the PCT and
+   designated-search examination fees are `filing`; patent trials are `ptab`
+   (the USPTO board) while trademark and design trials are `trial`;
+   registration of a patent term extension is `extension` (extension of
+   time); foreign-language applications and PCT national phase entry are
+   `other`.
+4. The trademark and design schedules have none of the shared procedural
+   fees (extensions of time, certificates, inspection), and design labels
+   keep footnote marks ("Design application ※1").
+
+## IPO India
+
+`IpIndiaFeesClient` ([source](../packages/client/src/fees/ipindia.ts)) parses
+the First Schedule to the Patents Rules, 2003, from the PDF Python uses
+(`https://ipindia.gov.in/frontend/pdf/forms_and_official_fees/Schedule_1.pdf`,
+8 pages, recorded live on October 22, 2026). The route is `IN/IPIN/patent`:
+330 fees from entries 1-59, with renewal years 3-20 complete.
+
+The PDF is a seven-column table: entry number, what the fee is for, form,
+then four rates. The rate columns are **e-filing** for natural persons,
+startups, small entities and educational institutions (tier `small`) and for
+other applicants (tier `large`), then **physical filing** for the same two
+groups. The parser uses the shared `pdfPageItems` helper and the x positions
+of the column header on page 1, groups text into per-column lines across
+pages, and treats a height at which all four rate columns start with an
+amount or "No fee" / "Not allowed" / "Not applicable" as a rate row. Rate
+rows labelled "(i)", "(ii)" ... take their description from the matching
+sub-item. Each entry number is checked against the wording it must still
+have; an entry whose wording changed is `other` and listed in
+`unmapped_codes`. Codes are `in-<entry>[-<sub-item>|-y<year>]-<tier>-<mode>`,
+for example `in-1-ii-small-efile` or `in-18-y10-large-paper`. Physical-filing
+fees carry a `paper_filing` condition. "No fee" cells are fees of 0; "Not
+allowed" and "Not applicable" cells are omitted and named in the notes of the
+same row. A physical rate below the e-filing rate of the same group fails
+with `INVALID_RESPONSE`. Patent-agent register fees (entries 34-38) are not
+fees on a patent right and are left out, as the USPTO enrollment fees are;
+entry 58 is charged "as applicable" and has no amount.
+
+The PDF states no effective date, so `effective_date` is null and
+`as_of_status` says so. Its content, including the certificate of
+inventorship (Form 8A) and grace-period (Form 31) fees, matches the Patents
+(Amendment) Rules, 2024; the notes say this rather than adopting Python's
+constant of March 15, 2024.
+
+This corrects the Python scraper, which still behaves the old way:
+
+1. It reads the four rates as small e-filing, small paper, other e-filing,
+   other paper. The PDF's order is small e-filing, other e-filing, small
+   physical, other physical, so every Python India fee in the middle two
+   columns has the wrong tier and mode: for the year-3 renewal it lists 4,000
+   as the small-entity paper fee (the other-applicant e-filing fee) and 880 as
+   the other-applicant e-filing fee (the small-entity physical fee). Its
+   "paper is never below e-filing" check passes because of the swap.
+2. Its regular expressions capture only entries 6, 18 and 59 (80 fees). The
+   filing fee (entry 1, which has an asterisk), every entry with sub-items or
+   "Not allowed" cells, examination, opposition and restoration are missing.
+3. Renewal fees are `maintenance` rather than `renewal`.
+4. Its landing page constant (`https://ipindia.gov.in/form-and-fees.htm`)
+   returns HTTP 404; the PDF URL still works.
+
+## EUIPO
+
+**Blocked; not ported.** `EP/EUIPO/trademark` and `EP/EUIPO/design` still
+report `NOT_PORTED`. On October 22, 2026 `www.euipo.europa.eu` answered every
+plain request (both fee pages, the home page and `robots.txt`) with a
+CloudFront "Request blocked" HTTP 403, with the project user agent and with
+curl's default. Python gets through with a Chrome user agent and browser
+`Sec-Fetch-*` headers. Python's tests keep no saved EUIPO fee page (only
+parser unit tests), so there was nothing to build the parser against. The
+fees themselves are fixed in Annex I of Regulation (EU) 2017/1001 and in the
+annex to Regulation (EU) 2024/2822, but EUR-Lex answered a plain request with
+a 202 challenge page, so that route was not pursued either.
+
 ## MCP
 
 `get_fee_schedule`, `list_fee_jurisdictions` and `lookup_fee` keep the Python
@@ -412,3 +610,15 @@ about 23 KB, the USPTO page about 210 KB). Python caches both for seven days
 and keeps a USPTO revalidation receipt; neither is ported, and the
 `get_fee_schedule` and `lookup_fee` tools have no `refresh` input.
 Nothing is deployed.
+
+`bun run record:fees` also records KIPO (both pages) and the IPO India PDF;
+both were recorded live on October 22, 2026 with the project user agent
+(`patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)`),
+which the KIPO, JPO and IPO India clients send. Their tests
+([KIPO](../tests/fees-kipo.test.ts), [JPO](../tests/fees-jpo.test.ts),
+[IPO India](../tests/fees-ipindia.test.ts)) check counts, published amounts
+for every right, renewal ladders, cohorts, column order, drift handling and
+alias routing. Because `listSchedules` fetches every route with
+`Promise.all`, `list_fee_jurisdictions` fails whenever one source refuses,
+as the JPO does from this machine; making it report per-route failures is a
+change to the shared client and is left for when the remaining offices land.
