@@ -11,6 +11,7 @@ import {
   getPatentClaims,
   IpoInMpppClient,
   MpepClient,
+  parseHearingNotice,
   TwTradeSecretsClient,
   UpcStatutesClient,
 } from "../../packages/client/src/index.js";
@@ -96,6 +97,14 @@ try {
   ).text();
   const google = GooglePatentsClient.parsePatent(googleHtml, "US7654321B2");
   results.google_claims = google.claims.length;
+  const spc = (
+    (await (
+      await fetch("/fixtures/china-spc-ip-court/notices.json")
+    ).json()) as { notices: Record<string, { html: string }> }
+  ).notices["6106"];
+  results.spc_dispute = parseHearingNotice(spc?.html ?? "", {
+    noticeUrl: "https://ipc.court.gov.cn/zh-cn/news/view-6106.html",
+  }).dispute_type;
   results.google_markdown = (google.description_markdown?.length ?? 0) > 10_000;
   // Fused claims helper with stand-in sources: an ODP miss falls back to Google.
   const fused = await getPatentClaims(

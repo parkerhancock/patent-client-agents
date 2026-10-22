@@ -1,0 +1,181 @@
+{
+  "source": "https://ipc.court.gov.cn/zh-cn/news/view-<id>.html, retrieved 2026-10-22; html is the page's div.detail; python is parse_hearing_notice output on the full page",
+  "notices": {
+    "173": {
+      "html": "<div class=\"detail\">\n\t    <h2>最高人民法院知识产权法庭2019年3月27日开庭公告</h2>\n\t    <div class=\"message\">\n\t        <span>发布时间：2019-03-25 16:24:18</span>\n\t        \t        <span>来源：最高人民法院知产法庭</span>\n\t        <!-- <span>浏览量：<font id=\"clicks\"></font>0</span> -->\n\t    </div>\n\t    <div class=\"detail_video\">\n\t    \t\t    </div>\n        \t    <div class=\"detail_image\">\n\t    \t\t    </div>\n\n\t    <div class=\"txt\"><p align=\"left\">\n\t<span>　　</span>最高人民法院定于二〇一九年三月二十七日九点在最高人民法院知识产权法庭第一法庭公开开庭审理上诉人厦门卢卡斯汽车配件有限公司、厦门富可汽车配件有限公司与被上诉人瓦莱奥清洗系统公司、原审被告陈少强侵害发明专利权纠纷一案。<br />\n　　中国庭审公开网、最高人民法院官方微博、最高人民法院官方微信、新浪司法频道进行庭审直播。<br />\n　　特此公告。<br />\n\t<div style=\"text-align:right;\">\n\t\t　　二〇一九年三月二十四日\n\t</div>\n</p></div>\n\t    <div class=\"edit\">责任编辑：知识产权法庭</div>\n\t</div>",
+      "python": {
+        "notice_id": "173",
+        "title": "最高人民法院知识产权法庭2019年3月27日开庭公告",
+        "published_at": "2019-03-25T16:24:18",
+        "hearing_date": "2019-03-27",
+        "hearing_time_text": null,
+        "venue": null,
+        "dispute_type": "侵害发明专利权纠纷",
+        "party_clause": "上诉人厦门卢卡斯汽车配件有限公司、厦门富可汽车配件有限公司与被上诉人瓦莱奥清洗系统公司、原审被告陈少强",
+        "parties": [
+          {
+            "role_zh": "上诉人",
+            "role_en": "appellant",
+            "name": "厦门卢卡斯汽车配件有限公司、厦门富可汽车配件有限公司"
+          },
+          {
+            "role_zh": "被上诉人",
+            "role_en": "appellee",
+            "name": "瓦莱奥清洗系统公司"
+          },
+          {
+            "role_zh": "原审被告",
+            "role_en": "original_defendant",
+            "name": "陈少强"
+          }
+        ],
+        "body_text": "最高人民法院定于二〇一九年三月二十七日九点在最高人民法院知识产权法庭第一法庭公开开庭审理上诉人厦门卢卡斯汽车配件有限公司、厦门富可汽车配件有限公司与被上诉人瓦莱奥清洗系统公司、原审被告陈少强侵害发明专利权纠纷一案。中国庭审公开网、最高人民法院官方微博、最高人民法院官方微信、新浪司法频道进行庭审直播。特此公告。二〇一九年三月二十四日",
+        "notice_url": "https://ipc.court.gov.cn/zh-cn/news/view-173.html"
+      }
+    },
+    "997": {
+      "html": "<div class=\"detail\">\n\t    <h2>最高人民法院知识产权法庭2021年1月13日开庭公告</h2>\n\t    <div class=\"message\">\n\t        <span>发布时间：2021-01-12 15:43:51</span>\n\t        \t        <span>来源：最高人民法院知识产权法庭</span>\n\t        <!-- <span>浏览量：<font id=\"clicks\"></font>0</span> -->\n\t    </div>\n\t    <div class=\"detail_video\">\n\t    \t\t    </div>\n        \t    <div class=\"detail_image\">\n\t    \t\t    </div>\n\n\t    <div class=\"txt\"><span>　　</span>最高人民法院定于二〇二一年一月十三日上午九点在最高人民法院知产法庭第九法庭公开开庭审理广州市行心信息科技有限公司与联合大数据有限公司计算机软件开发合同纠纷一案。<br />\n　　中国庭审公开网、最高人民法院官方微博、最高人民法院官方微信、新浪司法频道进行庭审直播。<br />\n　　特此公告。<br />\n<div style=\"text-align:right;\">\n\t　　二〇二一年一月十二日\n</div></div>\n\t    <div class=\"edit\">责任编辑：知识产权法庭</div>\n\t</div>",
+      "python": {
+        "notice_id": "997",
+        "title": "最高人民法院知识产权法庭2021年1月13日开庭公告",
+        "published_at": "2021-01-12T15:43:51",
+        "hearing_date": "2021-01-13",
+        "hearing_time_text": null,
+        "venue": null,
+        "dispute_type": "计算机软件开发合同纠纷",
+        "party_clause": "广州市行心信息科技有限公司与联合大数据有限公司",
+        "parties": [],
+        "body_text": "最高人民法院定于二〇二一年一月十三日上午九点在最高人民法院知产法庭第九法庭公开开庭审理广州市行心信息科技有限公司与联合大数据有限公司计算机软件开发合同纠纷一案。中国庭审公开网、最高人民法院官方微博、最高人民法院官方微信、新浪司法频道进行庭审直播。特此公告。二〇二一年一月十二日",
+        "notice_url": "https://ipc.court.gov.cn/zh-cn/news/view-997.html"
+      }
+    },
+    "3997": {
+      "html": "<div class=\"detail\">\n\t    <h2>最高人民法院知识产权法庭2025年3月10日开庭公告</h2>\n\t    <div class=\"message\">\n\t        <span>发布时间：2025-03-07 17:18:03</span>\n\t        \t        <span>来源：最高人民法院知识产权法庭</span>\n\t        <!-- <span>浏览量：<font id=\"clicks\"></font>0</span> -->\n\t    </div>\n\t    <div class=\"detail_video\">\n\t    \t\t    </div>\n        \t    <div class=\"detail_image\">\n\t    \t\t    </div>\n\n\t    <div class=\"txt\"><span>　　</span>最高人民法院知识产权法庭定于二〇二五年三月十日下午十四时三十分在最高人民法院知识产权法庭第五法庭公开开庭审理上诉人郑州丰元冶金材料有限公司、赵冠军与被上诉人李明安、一审第三人赵万顺侵害发明专利权纠纷一案。<br />\n　　特此公告。<br />\n<div style=\"text-align:right;\">\n\t　　二〇二五年三月七日\n</div></div>\n\t    <div class=\"edit\">责任编辑：知识产权法庭</div>\n\t</div>",
+      "python": {
+        "notice_id": "3997",
+        "title": "最高人民法院知识产权法庭2025年3月10日开庭公告",
+        "published_at": "2025-03-07T17:18:03",
+        "hearing_date": "2025-03-10",
+        "hearing_time_text": "下午十四时三十分",
+        "venue": "最高人民法院知识产权法庭第五法庭",
+        "dispute_type": "侵害发明专利权纠纷",
+        "party_clause": "上诉人郑州丰元冶金材料有限公司、赵冠军与被上诉人李明安、一审第三人赵万顺",
+        "parties": [
+          {
+            "role_zh": "上诉人",
+            "role_en": "appellant",
+            "name": "郑州丰元冶金材料有限公司、赵冠军"
+          },
+          {
+            "role_zh": "被上诉人",
+            "role_en": "appellee",
+            "name": "李明安、一审"
+          },
+          {
+            "role_zh": "第三人",
+            "role_en": "third_party",
+            "name": "赵万顺"
+          }
+        ],
+        "body_text": "最高人民法院知识产权法庭定于二〇二五年三月十日下午十四时三十分在最高人民法院知识产权法庭第五法庭公开开庭审理上诉人郑州丰元冶金材料有限公司、赵冠军与被上诉人李明安、一审第三人赵万顺侵害发明专利权纠纷一案。特此公告。二〇二五年三月七日",
+        "notice_url": "https://ipc.court.gov.cn/zh-cn/news/view-3997.html"
+      }
+    },
+    "4008": {
+      "html": "<div class=\"detail\">\n\t    <h2>最高人民法院知识产权法庭2025年3月11日开庭公告</h2>\n\t    <div class=\"message\">\n\t        <span>发布时间：2025-03-08 18:13:25</span>\n\t        \t        <span>来源：最高人民法院知识产权法庭</span>\n\t        <!-- <span>浏览量：<font id=\"clicks\"></font>0</span> -->\n\t    </div>\n\t    <div class=\"detail_video\">\n\t    \t\t    </div>\n        \t    <div class=\"detail_image\">\n\t    \t\t    </div>\n\n\t    <div class=\"txt\"><span>　　</span>最高人民法院知识产权法庭定于二〇二五年三月十一日下午十四时三十分在最高人民法院知识产权法庭第二法庭公开开庭审理上诉人樊荣龙与被上诉人南安市千羽水暖洁具厂，上诉人樊荣龙与被上诉人南安市仑苍泊客卫浴洁具店侵害发明专利权纠纷两案。<br />\n　　特此公告。<br />\n<div style=\"text-align:right;\">\n\t　　二〇二五年三月八日\n</div></div>\n\t    <div class=\"edit\">责任编辑：知识产权法庭</div>\n\t</div>",
+      "python": {
+        "notice_id": "4008",
+        "title": "最高人民法院知识产权法庭2025年3月11日开庭公告",
+        "published_at": "2025-03-08T18:13:25",
+        "hearing_date": "2025-03-11",
+        "hearing_time_text": "下午十四时三十分",
+        "venue": "最高人民法院知识产权法庭第二法庭",
+        "dispute_type": null,
+        "party_clause": null,
+        "parties": [],
+        "body_text": "最高人民法院知识产权法庭定于二〇二五年三月十一日下午十四时三十分在最高人民法院知识产权法庭第二法庭公开开庭审理上诉人樊荣龙与被上诉人南安市千羽水暖洁具厂，上诉人樊荣龙与被上诉人南安市仑苍泊客卫浴洁具店侵害发明专利权纠纷两案。特此公告。二〇二五年三月八日",
+        "notice_url": "https://ipc.court.gov.cn/zh-cn/news/view-4008.html"
+      }
+    },
+    "6026": {
+      "html": "<div class=\"detail\">\n\t    <h2>最高人民法院知识产权法庭2026年9月7日开庭公告</h2>\n\t    <div class=\"message\">\n\t        <span>发布时间：2026-09-05 09:21:48</span>\n\t        \t        <span>来源：最高人民法院知识产权法庭</span>\n\t        <!-- <span>浏览量：<font id=\"clicks\"></font>0</span> -->\n\t    </div>\n\t    <div class=\"detail_video\">\n\t    \t\t    </div>\n        \t    <div class=\"detail_image\">\n\t    \t\t    </div>\n\n\t    <div class=\"txt\"><span style=\"white-space:normal;\">　　</span>最高人民法院知识产权法庭定于二〇二六年九月七日下午十四时三十分在最高人民法院知识产权法庭第五法庭公开开庭审理上诉人斯皮拉有限公司与被上诉人国家知识产权局及一审第三人西安慕声电子科技有限公司、上海阿乐乐可国际贸易有限公司实用新型专利权无效行政纠纷两案。<br />\n　　特此公告。<br />\n<div style=\"text-align:right;\">\n\t　　二〇二六年九月四日\n</div></div>\n\t    <div class=\"edit\">责任编辑：知识产权法庭</div>\n\t</div>",
+      "python": {
+        "notice_id": "6026",
+        "title": "最高人民法院知识产权法庭2026年9月7日开庭公告",
+        "published_at": "2026-09-05T09:21:48",
+        "hearing_date": "2026-09-07",
+        "hearing_time_text": "下午十四时三十分",
+        "venue": "最高人民法院知识产权法庭第五法庭",
+        "dispute_type": null,
+        "party_clause": null,
+        "parties": [],
+        "body_text": "最高人民法院知识产权法庭定于二〇二六年九月七日下午十四时三十分在最高人民法院知识产权法庭第五法庭公开开庭审理上诉人斯皮拉有限公司与被上诉人国家知识产权局及一审第三人西安慕声电子科技有限公司、上海阿乐乐可国际贸易有限公司实用新型专利权无效行政纠纷两案。特此公告。二〇二六年九月四日",
+        "notice_url": "https://ipc.court.gov.cn/zh-cn/news/view-6026.html"
+      }
+    },
+    "6078": {
+      "html": "<div class=\"detail\">\n\t    <h2>最高人民法院知识产权法庭2026年9月23日开庭公告</h2>\n\t    <div class=\"message\">\n\t        <span>发布时间：2026-09-20 18:59:00</span>\n\t        \t        <span>来源：最高人民法院知识产权法庭</span>\n\t        <!-- <span>浏览量：<font id=\"clicks\"></font>0</span> -->\n\t    </div>\n\t    <div class=\"detail_video\">\n\t    \t\t    </div>\n        \t    <div class=\"detail_image\">\n\t    \t\t    </div>\n\n\t    <div class=\"txt\"><span style=\"white-space:normal;\"><span style=\"white-space:normal;\">　　</span></span>最高人民法院知识产权法庭定于二〇二六年九月二十三日上午九时在最高人民法院知识产权法庭第一法庭公开开庭审理上诉人埃玛纽埃尔·沙尔庞捷（CHARPENTIER,EMMANUELLE）、维也纳大学（UNIVERSITY OF VIENNA）、加利福尼亚大学董事会（THE REGENTS OF THE UNIVERSITY OF CALIFORNIA）与被上诉人王晓阳及一审被告国家知识产权局发明专利权无效行政纠纷一案。<br />\n　　特此公告。<br />\n<div style=\"text-align:right;\">\n\t　　二〇二六年九月二十日\n</div></div>\n\t    <div class=\"edit\">责任编辑：知识产权法庭</div>\n\t</div>",
+      "python": {
+        "notice_id": "6078",
+        "title": "最高人民法院知识产权法庭2026年9月23日开庭公告",
+        "published_at": "2026-09-20T18:59:00",
+        "hearing_date": "2026-09-23",
+        "hearing_time_text": "上午九时",
+        "venue": "最高人民法院知识产权法庭第一法庭",
+        "dispute_type": "发明专利权无效行政纠纷",
+        "party_clause": "上诉人埃玛纽埃尔·沙尔庞捷（CHARPENTIER,EMMANUELLE）、维也纳大学（UNIVERSITYOFVIENNA）、加利福尼亚大学董事会（THEREGENTSOFTHEUNIVERSITYOFCALIFORNIA）与被上诉人王晓阳及一审被告国家知识产权局",
+        "parties": [
+          {
+            "role_zh": "上诉人",
+            "role_en": "appellant",
+            "name": "埃玛纽埃尔·沙尔庞捷（CHARPENTIER,EMMANUELLE）、维也纳大学（UNIVERSITYOFVIENNA）、加利福尼亚大学董事会（THEREGENTSOFTHEUNIVERSITYOFCALIFORNIA）"
+          },
+          {
+            "role_zh": "被上诉人",
+            "role_en": "appellee",
+            "name": "王晓阳"
+          },
+          {
+            "role_zh": "一审被告",
+            "role_en": "first_instance_defendant",
+            "name": "国家知识产权局"
+          }
+        ],
+        "body_text": "最高人民法院知识产权法庭定于二〇二六年九月二十三日上午九时在最高人民法院知识产权法庭第一法庭公开开庭审理上诉人埃玛纽埃尔·沙尔庞捷（CHARPENTIER,EMMANUELLE）、维也纳大学（UNIVERSITYOFVIENNA）、加利福尼亚大学董事会（THEREGENTSOFTHEUNIVERSITYOFCALIFORNIA）与被上诉人王晓阳及一审被告国家知识产权局发明专利权无效行政纠纷一案。特此公告。二〇二六年九月二十日",
+        "notice_url": "https://ipc.court.gov.cn/zh-cn/news/view-6078.html"
+      }
+    },
+    "6106": {
+      "html": "<div class=\"detail\">\n\t    <h2>最高人民法院知识产权法庭2026年9月28日开庭公告</h2>\n\t    <div class=\"message\">\n\t        <span>发布时间：2026-09-26 15:23:56</span>\n\t        \t        <span>来源：最高人民法院知识产权法庭</span>\n\t        <!-- <span>浏览量：<font id=\"clicks\"></font>0</span> -->\n\t    </div>\n\t    <div class=\"detail_video\">\n\t    \t\t    </div>\n        \t    <div class=\"detail_image\">\n\t    \t\t    </div>\n\n\t    <div class=\"txt\"><span style=\"white-space:normal;\">　　</span>最高人民法院知识产权法庭定于二〇二六年九月二十八日下午十四时三十分在最高人民法院知识产权法庭第五法庭公开开庭审理上诉人国家知识产权局、福建镁孚科技有限公司与被上诉人特维斯股份有限公司及一审第三人胡耀波发明专利权无效行政纠纷一案。<br />\n　　特此公告。<br />\n<div style=\"text-align:right;\">\n\t　　二〇二六年九月二十五日\n</div></div>\n\t    <div class=\"edit\">责任编辑：知识产权法庭</div>\n\t</div>",
+      "python": {
+        "notice_id": "6106",
+        "title": "最高人民法院知识产权法庭2026年9月28日开庭公告",
+        "published_at": "2026-09-26T15:23:56",
+        "hearing_date": "2026-09-28",
+        "hearing_time_text": "下午十四时三十分",
+        "venue": "最高人民法院知识产权法庭第五法庭",
+        "dispute_type": "发明专利权无效行政纠纷",
+        "party_clause": "上诉人国家知识产权局、福建镁孚科技有限公司与被上诉人特维斯股份有限公司及一审第三人胡耀波",
+        "parties": [
+          {
+            "role_zh": "上诉人",
+            "role_en": "appellant",
+            "name": "国家知识产权局、福建镁孚科技有限公司"
+          },
+          {
+            "role_zh": "被上诉人",
+            "role_en": "appellee",
+            "name": "特维斯股份有限公司及一审"
+          },
+          {
+            "role_zh": "第三人",
+            "role_en": "third_party",
+            "name": "胡耀波"
+          }
+        ],
+        "body_text": "最高人民法院知识产权法庭定于二〇二六年九月二十八日下午十四时三十分在最高人民法院知识产权法庭第五法庭公开开庭审理上诉人国家知识产权局、福建镁孚科技有限公司与被上诉人特维斯股份有限公司及一审第三人胡耀波发明专利权无效行政纠纷一案。特此公告。二〇二六年九月二十五日",
+        "notice_url": "https://ipc.court.gov.cn/zh-cn/news/view-6106.html"
+      }
+    }
+  }
+}

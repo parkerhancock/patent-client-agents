@@ -77,6 +77,7 @@ serves `/relay?url=…` ([source](../packages/mcp/src/relay.ts)):
   `assignmentcenter.uspto.gov`, `ops.epo.org`, `fees.apps.epo.org`,
   `patents.google.com`, `patentimages.storage.googleapis.com`,
   `www.cafc.uscourts.gov`, `api.publicrecords.copyright.gov` and `www.wipo.int`.
+  `ipc.court.gov.cn` (China's SPC IP Court) is also allowed.
 - It forwards only `accept`, `accept-language`, `content-type` and `x-ops-range`. Browser
   cookies, `Origin` and the relay token never reach the office.
 - It injects the server's ODP and TSDR keys and the OPS client credentials for

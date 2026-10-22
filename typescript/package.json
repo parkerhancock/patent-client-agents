@@ -39,6 +39,7 @@
     "verify:mpep": "bun scripts/verify-mpep.ts",
     "record:epo-ops": "bun scripts/record-epo-ops.ts",
     "record:cafc": "bun scripts/record-cafc.ts",
+    "record:china-spc-ip-court": "bun scripts/record-china-spc-ip-court.ts",
     "record:kipris": "bun scripts/record-kipris.ts",
     "record:copyright": "bun scripts/record-copyright.ts",
     "record:usitc": "bun scripts/record-usitc.ts",

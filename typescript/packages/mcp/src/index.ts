@@ -4,6 +4,7 @@ import {
   AssignmentCenterClient,
   BulkDataClient,
   CafcClient,
+  ChinaSpcIpCourtClient,
   ConfigurationError,
   CopyrightClient,
   DataWebClient,
@@ -55,6 +56,7 @@ import {
 import { z } from "zod";
 import { registerApplicationExtraTools } from "./applications-extra.js";
 import { registerCafcTools } from "./cafc.js";
+import { registerChinaSpcIpCourtTools } from "./china-spc-ip-court.js";
 import { registerCopyrightTools } from "./copyright.js";
 import {
   type DownloadOptions,
@@ -130,6 +132,7 @@ export interface UsptoClients {
   fees: FeesClient;
   googlePatents: GooglePatentsClient;
   cafc: CafcClient;
+  chinaSpcIpCourt: ChinaSpcIpCourtClient;
   copyright: CopyrightClient;
   wipoLex: WipoLexClient;
   /** USITC EDIS; served only when a client is provided or USITC_EDIS_TOKEN(_FILE) is set. */
@@ -624,6 +627,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     fees: provided.fees ?? new FeesClient(),
     googlePatents: provided.googlePatents ?? new GooglePatentsClient(),
     cafc: provided.cafc ?? new CafcClient(),
+    chinaSpcIpCourt: provided.chinaSpcIpCourt ?? new ChinaSpcIpCourtClient(),
     copyright: provided.copyright ?? new CopyrightClient(),
     wipoLex: provided.wipoLex ?? new WipoLexClient(),
     epoLegal,
@@ -846,6 +850,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     clients.cafc,
     options.auth ? requireScopes("cafc:read") : undefined,
+  );
+  registerChinaSpcIpCourtTools(
+    server,
+    clients.chinaSpcIpCourt,
+    options.auth ? requireScopes("spc:read") : undefined,
   );
   registerCopyrightTools(
     server,
