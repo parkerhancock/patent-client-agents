@@ -1,10 +1,12 @@
 import {
   ApiError,
   type EpoOpsClient,
+  type KiprisClient,
   type SourceProvenance,
 } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
+import { getKipoPatents, searchKipoPatents } from "../kipris.js";
 import {
   type AuthCheck,
   detailEnvelope,
@@ -13,7 +15,6 @@ import {
   identifierInput,
   listEnvelope,
   notConfigured,
-  notPorted,
   single,
   UNPORTED_FACADE_TOOLS,
 } from "./shared.js";
@@ -35,12 +36,12 @@ const DOC = {
   search_patents: {
     title: "Search Patents (US / EP / WO / KR)",
     description:
-      "Search patents by jurisdiction using clean public sources (no Google).\n\nRoutes to the right official source by ``jurisdiction``:\nUS → USPTO PPUBS full text; EP/WO → EPO OPS CQL; KR → KIPRIS (not yet available on the TypeScript server).\nReturns a §5.9 ``ListEnvelope`` of hits (lean stubs by default).\n\nFull-text search of CN and JP body text has no clean public source. To\nlook at a known CN/JP publication, pass its number to ``get_patent``.\n\nRelated tools: get_patent, resolve_patent_number.",
+      "Search patents by jurisdiction using clean public sources (no Google).\n\nRoutes to the right official source by ``jurisdiction``:\nUS → USPTO PPUBS full text; EP/WO → EPO OPS CQL; KR → KIPRIS.\nReturns a §5.9 ``ListEnvelope`` of hits (lean stubs by default).\n\nFull-text search of CN and JP body text has no clean public source. To\nlook at a known CN/JP publication, pass its number to ``get_patent``.\n\nRelated tools: get_patent, resolve_patent_number.",
     params: {
       query:
         "Search query. For US (jurisdiction='us') this is PPUBS full-text syntax (Boolean + field codes like CLM/SPEC/AB/TTL). For EP/WO (jurisdiction='ep_wo') this is EPO CQL (e.g. 'ta=CRISPR and pa=Broad'). For KR (jurisdiction='kr') this is KIPRIS free text.",
       jurisdiction:
-        "Which clean source to search. 'us' = USPTO Public Search (PPUBS) full text (claims + specification + abstract). 'ep_wo' = EPO OPS worldwide CQL search (best for EP/WO; biblio across many offices). 'kr' = KIPO KIPRIS (not yet available on the TypeScript server). Note: CN and JP full-text search have no clean public source — retrieve a known CN/JP number via get_patent instead.",
+        "Which clean source to search. 'us' = USPTO Public Search (PPUBS) full text (claims + specification + abstract). 'ep_wo' = EPO OPS worldwide CQL search (best for EP/WO; biblio across many offices). 'kr' = KIPO KIPRIS (requires the deployment to carry a KIPRIS key). Note: CN and JP full-text search have no clean public source — retrieve a known CN/JP number via get_patent instead.",
       limit: "Maximum results to return (1-20 for US PPUBS).",
       full: "False (default) = lean stub per hit. True = full upstream row (large; prefer get_patent for one record).",
     },
@@ -48,7 +49,7 @@ const DOC = {
   get_patent: {
     title: "Get Patent (biblio / claims / family / figures / citations)",
     description:
-      "Fetch one slice of a patent by view, using clean public sources only.\n\nRoutes by ``view`` and (for biblio) by jurisdiction: US → PPUBS, KR →\nKIPRIS (not yet available on the TypeScript server), other → EPO OPS. No Google Patents is touched.\n\nFind numbers with ``search_patents``; normalize with\n``resolve_patent_number``.\n\nRelated tools: search_patents, resolve_patent_number.",
+      "Fetch one slice of a patent by view, using clean public sources only.\n\nRoutes by ``view`` and (for biblio) by jurisdiction: US → PPUBS, KR →\nKIPRIS (when configured), other → EPO OPS. No Google Patents is touched.\n\nFind numbers with ``search_patents``; normalize with\n``resolve_patent_number``.\n\nRelated tools: search_patents, resolve_patent_number.",
     params: {
       view: "Which slice of a patent to fetch. 'biblio' = bibliographic record (title, abstract, applicants, classifications, dates) — US via PPUBS, KR via KIPRIS, everything else via EPO OPS. 'claims' = structured claims (US ODP grant XML, EPO OPS full-text fallback). 'family' = patent family relationships via USPTO ODP. 'figures' = figure page images (PPUBS/EPO; callout bounding boxes are not available from clean sources). 'citations' = US examiner-cited prior-art references (true forward citations have no clean public source; non-US unavailable).",
       identifier:
@@ -150,14 +151,10 @@ const CQL_HELP = {
 
 const EPO_OPS = "https://ops.epo.org/3.2/rest-services";
 const EPO_NAME = "European Patent Office Open Patent Services (EPO OPS)";
-const KIPRIS =
-  "Use jurisdiction='us' (USPTO PPUBS) or 'ep_wo' (EPO OPS) for clean full-text/biblio search, or retrieve a known KR number with get_patent.";
+const KIPRIS_ENV = "KIPO_KIPRIS_API_KEY/KIPO_KIPRIS_BASE_URL";
 
 /** Facade sub-modes routed to notPorted, reported by patent_client_status. */
-export const PATENTS_UNPORTED_MODES = [
-  "search_patents(jurisdiction='kr')",
-  "get_patent(view='biblio') for KR-only numbers",
-];
+export const PATENTS_UNPORTED_MODES: string[] = [];
 
 const countryOf = (identifier: string) => {
   const head = identifier.trim().slice(0, 2);
@@ -168,6 +165,15 @@ const isUs = (identifier: string) => {
   const cleaned = identifier.trim().toUpperCase();
   return cleaned.startsWith("US") || /^[\d,]+$/.test(cleaned);
 };
+/** KR routing needs the BYOK key and an HTTPS endpoint (Python checked only the key). */
+function requireKipris(
+  clients: FacadeClients,
+  feature: string,
+  alternative: string,
+): KiprisClient {
+  if (!clients.kipris) notConfigured(feature, KIPRIS_ENV, alternative);
+  return clients.kipris;
+}
 function requireEpo(clients: FacadeClients): EpoOpsClient {
   if (!clients.epoOps)
     notConfigured("EPO OPS", "EPO_OPS_API_KEY/EPO_OPS_API_SECRET");
@@ -425,7 +431,20 @@ export function registerPatentsFacade(
           input.full,
         );
       if (input.jurisdiction === "kr")
-        notPorted("Korean (KR) patent search", KIPRIS);
+        return searchKipoPatents(
+          requireKipris(
+            clients,
+            "Korean (KR) patent search",
+            "Use jurisdiction='us' (USPTO PPUBS) or 'ep_wo' (EPO OPS) for clean full-text/biblio search, or retrieve a known KR number with get_patent.",
+          ),
+          {
+            query: input.query,
+            right_type: "both",
+            num_of_rows: input.limit,
+            page_no: 1,
+            full: input.full,
+          },
+        );
       const epo = requireEpo(clients);
       const result = await epo.search(input.query, {
         rangeBegin: 1,
@@ -479,9 +498,14 @@ export function registerPatentsFacade(
         if (countries.size === 1 && countries.has("US"))
           return getPublications(clients, identifier);
         if (countries.size === 1 && countries.has("KR"))
-          notPorted(
-            "Korean (KR) bibliographic retrieval",
-            "EPO OPS biblio may still cover this KR publication: use get_epo(view='biblio').",
+          // Python passes a list, so a KR number with no row lands in not_found.
+          return getKipoPatents(
+            requireKipris(
+              clients,
+              "Korean (KR) bibliographic retrieval",
+              "EPO OPS biblio may still cover this KR publication: use get_epo(view='biblio').",
+            ),
+            numbers.map(digits),
           );
         // Mixed or non-US/KR numbers go to EPO OPS, which indexes worldwide biblio.
         return epoBiblio(clients, numbers, typeof identifier === "string");
@@ -630,7 +654,7 @@ export function registerPatentsFacade(
         jpo: ["JPO_API_USERNAME", "JPO_API_PASSWORD"],
         euipo: ["EUIPO_CLIENT_ID"],
         ip_australia: ["IPAUSTRALIA_CLIENT_ID"],
-        kipo: ["KIPO_KIPRIS_API_KEY"],
+        kipo: ["KIPO_KIPRIS_API_KEY", "KIPO_KIPRIS_BASE_URL"],
         tipo: ["TIPO_API_KEY"],
         inpi: ["INPI_USERNAME"],
         canlii: ["CANLII_API_KEY"],

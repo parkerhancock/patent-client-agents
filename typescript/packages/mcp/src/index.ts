@@ -14,6 +14,7 @@ import {
   EpoUpGuidelinesClient,
   FeesClient,
   GooglePatentsClient,
+  KiprisClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -54,6 +55,7 @@ import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
 import { registerFacadeTools } from "./facade/index.js";
 import { registerFeeTools } from "./fees.js";
 import { registerGooglePatentsTools } from "./google-patents.js";
+import { registerKiprisTools } from "./kipris.js";
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
@@ -94,6 +96,7 @@ export interface UsptoClients {
   cafc: CafcClient;
   copyright: CopyrightClient;
   wipoLex: WipoLexClient;
+  kipris: KiprisClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -447,6 +450,13 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     (process.env.EPO_OPS_API_SECRET || process.env.EPO_API_SECRET)
       ? lazyClient(() => new EpoOpsClient())
       : undefined);
+  // KIPRIS is BYOK (ToS §11) and needs an operator-verified HTTPS endpoint, as in Python.
+  const kiprisClient =
+    provided.kipris ??
+    (process.env.KIPO_KIPRIS_API_KEY &&
+    /^https:\/\//i.test(process.env.KIPO_KIPRIS_BASE_URL ?? "")
+      ? lazyClient(() => new KiprisClient())
+      : undefined);
   const clients = {
     applications,
     officeActions:
@@ -479,6 +489,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     upcStatutes,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
+    kipris: kiprisClient,
   };
   if ((options.toolset ?? toolsetFromEnv(process.env)) === "curated") {
     registerFacadeTools(
@@ -699,6 +710,12 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       server,
       epoOpsClient,
       options.auth ? requireScopes("epo:read") : undefined,
+    );
+  if (kiprisClient)
+    registerKiprisTools(
+      server,
+      kiprisClient,
+      options.auth ? requireScopes("kipo:read") : undefined,
     );
   registerEpoLegalTools(
     server,

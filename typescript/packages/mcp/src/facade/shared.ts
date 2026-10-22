@@ -6,6 +6,7 @@ import type {
   CopyrightClient,
   EpoOpsClient,
   FeesClient,
+  KiprisClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -37,7 +38,7 @@ export {
 
 /**
  * Clients behind the curated facade. Credential-gated families (TSDR, EPO
- * OPS) are optional; their facade branches report how to enable them.
+ * OPS, KIPRIS) are optional; their facade branches report how to enable them.
  */
 export interface FacadeClients {
   applications: ApplicationsClient;
@@ -61,6 +62,7 @@ export interface FacadeClients {
   upcStatutes: UpcStatutesReader;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
+  kipris?: KiprisClient | undefined;
 }
 export type FacadeRegistrar = (
   server: import("@prefecthq/fastmcp-ts/server").FastMCP,
@@ -81,9 +83,13 @@ export function notPorted(feature: string, alternative?: string): never {
   );
 }
 /** A credential-gated family that is not configured on this server. */
-export function notConfigured(feature: string, variables: string): never {
+export function notConfigured(
+  feature: string,
+  variables: string,
+  alternative?: string,
+): never {
   throw new Error(
-    `${feature} is not enabled on this server (${variables} is not configured).`,
+    `${feature} is not enabled on this server (${variables} is not configured).${alternative ? ` ${alternative}` : ""}`,
   );
 }
 export const asList = (value: string | string[]) =>
