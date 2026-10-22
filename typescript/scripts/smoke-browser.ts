@@ -177,7 +177,7 @@ try {
     checked.upc_instrument !== "upca" ||
     checked.dpma_section !== "139" ||
     checked.tw_hits !== "12,13" ||
-    checked.ipo_in_mppp !== "04.05.01"
+    checked.ipo_in_mppp !== "09.03.05.04"
   )
     process.exitCode = 1;
 } finally {

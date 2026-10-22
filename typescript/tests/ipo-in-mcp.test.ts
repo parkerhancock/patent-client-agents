@@ -67,16 +67,16 @@ test("IPO India statutes MCP tools keep Python's envelopes, lean stubs and not_f
     ).toBe(true);
 
     const search = await client.callTool<Envelope>("search_ipo_in_statutes", {
-      query: "compulsory licensing",
+      query: "compulsory licence",
       statute: "patents act 1970",
     });
     expect(search.structuredContent).toMatchObject({
       summary:
-        "IPO India statutes (Patents Act) — `compulsory licensing`: 1 hit (corpus snapshot-2026-10-22).",
+        "IPO India statutes (Patents Act) — `compulsory licence`: 1 hit (corpus snapshot-2026-10-22).",
       next_cursor: null,
       more_available: false,
       provenance: {
-        source_url: "https://indiacode.nic.in/handle/123456789",
+        source_url: "https://ipindia.gov.in/pages/home/acts-rules-ipr",
         source_name: "IPO India — IP statutes",
         corpus_version: "snapshot-2026-10-22",
         corpus_synced_at: "2026-10-22T00:00:00.000Z",
@@ -98,14 +98,15 @@ test("IPO India statutes MCP tools keep Python's envelopes, lean stubs and not_f
       citation: "Section 3(d) Patents Act",
     });
     expect(one.structuredContent?.summary).toBe(
-      "**Patents Act §3(d)** — Section 3(d) — incremental improvement bar (anti-evergreening)\nSource: IPO India statutes corpus (snapshot-2026-10-22)",
+      "**Patents Act §3** — What are not inventions\nCited (d) is within this section's text.\nSource: IPO India statutes corpus (snapshot-2026-10-22)",
     );
     expect(one.structuredContent?.provenance.source_url).toBe(
-      "https://ipindia.gov.in/writereaddata/portal/ev/sections/ps3.html",
+      "https://ipindia.gov.in/storage/uploads/docs-operator/73b5bf10-b04e-4f45-abef-87ff117315dc.pdf#page=9",
     );
     expect(one.structuredContent?.items[0]).toMatchObject({
       statute_name: "Patents Act",
-      section_number: "3(d)",
+      section_number: "3",
+      subdivision: "(d)",
       text: expect.stringContaining("enhancement of the known efficacy"),
     });
     const many = await client.callTool<Envelope>("get_ipo_in_section", {
@@ -119,7 +120,9 @@ test("IPO India statutes MCP tools keep Python's envelopes, lean stubs and not_f
       summary:
         "Fetched 2 of 3 IPO India statute sections. Not found: Section 999.",
       not_found: ["Section 999"],
-      provenance: { source_url: "https://indiacode.nic.in/handle/123456789" },
+      provenance: {
+        source_url: "https://ipindia.gov.in/pages/home/acts-rules-ipr",
+      },
     });
     expect(
       many.structuredContent?.items.map((item) => item.section_number),
@@ -137,7 +140,7 @@ test("IPO India statutes MCP tools keep Python's envelopes, lean stubs and not_f
       JSON.parse(status[0] && "text" in status[0] ? status[0].text : "{}"),
     ).toMatchObject({
       available: true,
-      section_count: 26,
+      section_count: 37,
     });
   } finally {
     await close();
@@ -148,41 +151,44 @@ test("IPO India MPPP MCP tools search and fetch sections", async () => {
   const { client, close } = await connect("full");
   try {
     const search = await client.callTool<Envelope>("search_ipo_in_mppp", {
-      query: "Form 27",
+      query: "working",
     });
     expect(search.structuredContent).toMatchObject({
-      summary: "IPO India MPPP — `Form 27`: 1 hit (corpus v3.0 (2019)).",
+      summary: "IPO India MPPP — `working`: 1 hit (corpus v3.0 (2019-11-26)).",
       items: [
         {
-          section_number: "07.02",
-          chapter: "Chapter 7",
-          title: "Form 27 — working statement under section 146(2)",
+          section_number: "14.01",
+          chapter: "Chapter 14: Compulsory Licensing",
+          title: "Working of patents - General principles",
           snippet: expect.stringContaining("<mark>"),
         },
       ],
       provenance: {
         source_name: "IPO India Manual of Patent Practice & Procedure (MPPP)",
-        corpus_version: "v3.0 (2019)",
+        corpus_version: "v3.0 (2019-11-26)",
       },
     });
     const get = await client.callTool<Envelope>("get_ipo_in_mppp_section", {
-      citation: ["MPPP Chapter 4.5.1", "99.01"],
+      citation: ["MPPP 9.3.5.4", "99.01"],
     });
     expect(get.structuredContent).toMatchObject({
       summary: "Fetched 1 of 2 MPPP sections. Not found: 99.01.",
       not_found: ["99.01"],
     });
     const single = await client.callTool<Envelope>("get_ipo_in_mppp_section", {
-      citation: "05.04",
+      citation: "09.03",
     });
     expect(single.structuredContent?.summary).toStartWith(
-      "**MPPP Chapter 05.04** — Post-grant opposition",
+      "**MPPP Chapter 09.03** — Examination of application",
+    );
+    expect(single.structuredContent?.provenance.source_url).toBe(
+      "https://ipindia.gov.in/storage/uploads/docs-operator/e1adfe40-7af3-4180-ba04-2e0099c6dca5.pdf#page=81",
     );
     const status = await client.readResource(IPO_IN_MPPP_STATUS_URI);
     expect(
       JSON.parse(status[0] && "text" in status[0] ? status[0].text : "{}"),
     ).toMatchObject({
-      corpus_version: "v3.0 (2019)",
+      corpus_version: "v3.0 (2019-11-26)",
     });
   } finally {
     await close();
@@ -218,7 +224,9 @@ test("the curated facade routes india_statutes and india_mppp with the statute f
       corpus: "india_mppp",
       query: "pre-grant opposition",
     });
-    expect(mppp.structuredContent?.items[0]?.section_number).toBe("05.03");
+    expect(
+      mppp.structuredContent?.items.map((item) => item.section_number),
+    ).toEqual(["09.04", "01"]);
 
     const get = await client.callTool<Envelope>("get_legal_reference", {
       corpus: "india_statutes",
@@ -230,10 +238,10 @@ test("the curated facade routes india_statutes and india_mppp with the statute f
     );
     const section = await client.callTool<Envelope>("get_legal_reference", {
       corpus: "india_mppp",
-      identifier: "Chapter 04.05.02",
+      identifier: "Chapter 09.03.05.04",
     });
     expect(section.structuredContent?.items[0]?.section_number).toBe(
-      "04.05.02",
+      "09.03.05.04",
     );
     await expect(
       client.callTool("get_legal_reference", {

@@ -130,8 +130,11 @@ May 14 MoPP snapshot, and DPMA search (`Unterlassung` in PatG) and `§ 139 PatG`
 passed against the packaged DPMA statutes artifact; that corpus is local, so
 the run checks wiring, not an upstream. The Taiwan Trade Secrets Act search and Article 13-1 also passed; that
 text is bundled, so no network call is involved. The India
-statutes and MPPP probes (search and one section each) read the local
-seed-built snapshots, since the corpora are offline only.
+statutes and MPPP probes (search and one section each) passed against the
+packaged snapshots built from the official texts (`compulsory licence` in the
+Patents Act, 9 hits; `Section 3(d) Patents Act` returns section 3 with
+subdivision `(d)`; MPPP `first examination report`, 3 hits, and 09.03.05.04);
+the corpora are offline only.
 
 Not facade defects, but visible in the run:
 

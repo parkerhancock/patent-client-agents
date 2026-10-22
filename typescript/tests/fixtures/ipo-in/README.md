@@ -1,16 +1,13 @@
 # IPO India corpus fixtures
 
-`ipo_in_statutes.db` and `ipo_in_mppp.db` are the complete corpora, not
-subsets: the Python builders (`patent-client-agents-build-ipo-in-statutes-corpus`
-and `patent-client-agents-build-ipo-in-mppp-corpus`) ingest only the seeds
-bundled with the Python package, so the full snapshots are this small. They
-were built on October 22, 2026 and prepared into DELETE journal mode with
-`scripts/prepare-mpep-corpus.py`.
+`ipo_in_statutes.db` and `ipo_in_mppp.db` are subsets of the real corpora,
+written by `bun scripts/build-ipo-in-corpora.ts --fixtures` from the same
+parse of the official sources listed in `references/ipo-in/sources.json`
+(retrieved October 22, 2026). The row text is exactly as in the full build;
+only the row selection is smaller. `meta` carries the full build's source
+metadata, with `section_count` the fixture's own row count.
 
-| File | Rows | Seed SHA-256 | Prepared SHA-256 |
-| --- | --- | --- | --- |
-| `ipo_in_statutes.db` | 26 sections | `efbee2e3e51cd9b440ec65ccd81a79ba84c94ef12e45e1b37f865f47133fba83` | `229ff9cba90ab13cdb86391cc79222fa72f8a2584fab7809848a94a93b4a42d8` |
-| `ipo_in_mppp.db` | 12 sections | `c40fb9f0f49cf98b58780fc278b674ecb4c6b7704fe9e76dc0155e675b8e7160` | `856b91aa136641e71f508bfe3cce5d692345aeddf009c0a567c52ee29ba58884` |
-
-`meta.snapshot_date` is the build date (2026-10-22), not a source retrieval
-date; the seed texts are curated excerpts, not official consolidated text.
+| File | Rows |
+| --- | --- |
+| `ipo_in_statutes.db` | 37: Patents Act 1, 2, 3, 5, 8, 11A, 25, 48, 53, 84, 107A, 122, 124A, 146; Patents Rules 2, 13, 24B, 55, 71, 107A, 131, 138; Designs Act 2, 4, 11, 22; Trade Marks Act 2, 9, 11, 29, 36A; Copyright Act 2, 13, 14, 22, 52, 63 |
+| `ipo_in_mppp.db` | 14: 01, 04.01, 04.02, 07.02, 07.02.01, 09, 09.01, 09.03, 09.03.01, 09.03.05, 09.03.05.04, 09.03.05.10, 09.04, 14.01 |

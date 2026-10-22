@@ -94,7 +94,7 @@ const india = new IpoInStatutesClient({
 results.ipo_in_section = (
   await india.getSectionByCitation("Section 3(d) Patents Act")
 ).section_number;
-assert.equal(results.ipo_in_section, "3(d)");
+assert.equal(results.ipo_in_section, "3");
 
 // Network clients with synthetic upstreams.
 const fees = new EpoFeesClient({

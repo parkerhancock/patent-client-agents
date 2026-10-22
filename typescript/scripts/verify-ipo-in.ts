@@ -8,16 +8,15 @@ import {
 import { Client } from "@prefecthq/fastmcp-ts/client";
 import { z } from "zod";
 import { createServer } from "../packages/mcp/src/index.js";
+import { build } from "./build-ipo-in-corpora.js";
 
 /**
  * Verify packaged IPO India statutes and MPPP artifacts: pins, every row
- * against the Python seed the builder ingested, search and get parity with
- * the Python clients over the same databases, and the default full and
- * curated MCP wiring.
+ * against a fresh parse of the archived official sources
+ * (references/ipo-in/sources.json), spot checks of known provisions, and the
+ * default full and curated MCP wiring.
  *
  * Usage: bun scripts/verify-ipo-in.ts --statutes S.db.zst --mppp M.db.zst
- * The prepared .db files (the .zst paths without the suffix) are what the
- * Python clients read.
  */
 const manifestSchema = z.object({
   decoded_sha256: z.string().regex(/^[a-f\d]{64}$/),
@@ -36,7 +35,6 @@ if (!statutesFile || !mpppFile) {
   );
   process.exit(2);
 }
-const root = resolve(import.meta.dir, "..", "..");
 const sha = (text: string) => createHash("sha256").update(text).digest("hex");
 const report: Record<string, unknown> = {};
 
@@ -52,102 +50,79 @@ async function configure(prefix: string, file: string) {
 }
 const statutes = await configure("IPO_IN_STATUTES", statutesFile);
 const mppp = await configure("IPO_IN_MPPP", mpppFile);
-
-async function seed(name: string) {
-  const text = await readFile(
-    resolve(root, "src/patent_client_agents", name, "data/seed.jsonl"),
+const sources = JSON.parse(
+  await readFile(
+    resolve(import.meta.dir, "../references/ipo-in/sources.json"),
     "utf8",
-  );
-  return text
-    .split("\n")
-    .filter((line) => line.trim())
-    .map((line) => JSON.parse(line) as Record<string, string>);
-}
+  ),
+);
+const expected = await build(sources);
 
-const STATUTE_QUERIES = [
-  ["efficacy", null],
-  ["compulsory licensing", "Patents Act"],
-  ["well-known mark", null],
-  ["fair dealing", null],
-  ["opposition", null],
-  ["registered", "trade marks"],
-  ["term", null],
-] as const;
-const MPPP_QUERIES = [
-  "first examination report",
-  "opposition",
-  "Form 27",
-  "national phase",
-  "efficacy",
-] as const;
-
-/** Python client results for the same queries over the prepared databases. */
-function python() {
-  const script = `
-import asyncio, json, os, sys
-from patent_client_agents.ipo_in_statutes import IpoInStatutesClient
-from patent_client_agents.ipo_in_mppp import MpppClient
-args = json.loads(sys.argv[1])
-async def main():
-    out = {"statutes": [], "mppp": [], "sections": {}, "mppp_sections": {}}
-    async with IpoInStatutesClient(corpus_path=args["statutes"]) as c:
-        for q, statute in args["statute_queries"]:
-            r = await c.search(q, statute_name=statute, per_page=50)
-            out["statutes"].append([[h.statute_name, h.section_number, h.snippet] for h in r.hits])
-        for cite in args["citations"]:
-            s = await c.get_section_by_citation(cite)
-            out["sections"][cite] = [s.statute_name, s.section_number, s.title, s.text, s.source_url]
-    async with MpppClient(corpus_path=args["mppp"]) as c:
-        for q in args["mppp_queries"]:
-            r = await c.search(q, per_page=50)
-            out["mppp"].append([[h.section_number, h.snippet] for h in r.hits])
-        for ref in args["mppp_refs"]:
-            s = await c.get_section(ref)
-            out["mppp_sections"][ref] = [s.section_number, s.chapter, s.title, s.text, s.source_url]
-    print(json.dumps(out))
-asyncio.run(main())
-`;
-  const result = Bun.spawnSync(
+/** Provisions checked against wording read from the source documents. */
+const STATUTE_SPOT_CHECKS: [string, string, string, string[]][] = [
+  [
+    "Section 3(d) Patents Act",
+    "Patents Act",
+    "3",
     [
-      "uv",
-      "run",
-      "--project",
-      root,
-      "--frozen",
-      "--no-sync",
-      "python",
-      "-c",
-      script,
-      JSON.stringify({
-        statutes: statutes.path.replace(/\.zst$/, ""),
-        mppp: mppp.path.replace(/\.zst$/, ""),
-        statute_queries: STATUTE_QUERIES,
-        citations: CITATIONS,
-        mppp_queries: MPPP_QUERIES,
-        mppp_refs: MPPP_REFS,
-      }),
+      "the mere discovery of a new form of a known substance which does not result in the enhancement of the known efficacy of that substance",
+      "salts, esters, ethers, polymorphs, metabolites, pure form, particle size",
+      "(p) an invention which, in effect, is traditional knowledge",
     ],
-    { stderr: "pipe" },
-  );
-  if (result.exitCode !== 0)
-    throw new Error(`Python parity run failed: ${result.stderr.toString()}`);
-  return JSON.parse(result.stdout.toString()) as {
-    statutes: string[][][];
-    mppp: string[][][];
-    sections: Record<string, (string | null)[]>;
-    mppp_sections: Record<string, (string | null)[]>;
-  };
-}
-const CITATIONS = [
-  "Section 3(d) Patents Act",
-  "Section 25(2) of the Patents Act",
-  "Rule 71 Patent Rules",
-  "S. 84",
-  "Section 9 Trade Marks Act",
-  "Section 52 Copyright Act",
-  "Section 2(d) Designs Act",
+  ],
+  [
+    "Section 25 Patents Act",
+    "Patents Act",
+    "25",
+    [
+      "Opposition to the patent.",
+      "(1) Where an application for a patent has been published but a patent has not been granted, any person may, in writing, represent by way of opposition to the Controller",
+      "(2) At any time after the grant of patent but before the expiry of a period of one year from the date of publication of grant of a patent",
+    ],
+  ],
+  [
+    "§107A",
+    "Patents Act",
+    "107A",
+    [
+      "Certain acts not to be considered as infringement.",
+      "a patented invention solely for uses reasonably related to the development and submission of information required under any law",
+    ],
+  ],
+  [
+    "Rule 13",
+    "Patent Rules",
+    "13",
+    [
+      "(1) Every specification, whether provisional or complete, shall be made in Form 2.",
+      "(7) (a) The abstract as specified under clause (d) of sub-section (4) of section 10",
+    ],
+  ],
+  [
+    "Section 9 Trade Marks Act",
+    "Trade Marks Act",
+    "9",
+    [
+      "Absolute grounds for refusal of registration.",
+      "(1) The trade marks— (a) which are devoid of any distinctive character",
+      "(3) A mark shall not be registered as a trade mark if it consists exclusively of",
+    ],
+  ],
 ];
-const MPPP_REFS = ["04.05.01", "Chapter 05.04", "MPPP Chapter 07.02"];
+const MPPP_SPOT_CHECKS: [string, string, string, string[]][] = [
+  [
+    "MPPP 09.03",
+    "09.03",
+    "Examination of application",
+    ["Chapter 09: Examination and Grant"],
+  ],
+  [
+    "07.02",
+    "07.02",
+    "International Application under PCT",
+    ["Chapter 07: Convention Application, International Application and"],
+  ],
+];
 
 const mismatches: string[] = [];
 const statuteClient = new IpoInStatutesClient();
@@ -173,74 +148,85 @@ try {
       file_sha256: status.file_sha256,
     };
   }
+  const statutesCount = (await statuteClient.getCorpusStatus()).section_count;
+  const mpppCount = (await mpppClient.getCorpusStatus()).section_count;
+  if (statutesCount !== expected.statutes.length)
+    mismatches.push(
+      `statutes rows ${statutesCount} != ${expected.statutes.length}`,
+    );
+  if (mpppCount !== expected.mppp.length)
+    mismatches.push(`mppp rows ${mpppCount} != ${expected.mppp.length}`);
 
-  // Every seed row comes back unchanged through the TypeScript reader.
-  const statuteSeed = await seed("ipo_in_statutes");
-  for (const row of statuteSeed) {
-    const section = await statuteClient.getSection(
-      row.section_number as string,
-      { statute: row.statute_name as string },
+  // Every row matches a fresh parse of the archived official sources.
+  for (const row of expected.statutes) {
+    const section = await statuteClient.getSection(row.section_number, {
+      statute: row.statute_name,
+    });
+    if (
+      section.content_sha256 !== sha(row.text) ||
+      section.title !== row.title ||
+      section.source_url !== row.source_url ||
+      section.section_number !== row.section_number
+    )
+      mismatches.push(`statutes ${row.statute_name} ${row.section_number}`);
+  }
+  for (const row of expected.mppp) {
+    const section = await mpppClient.getSection(row.section_number);
+    if (
+      section.content_sha256 !== sha(row.text) ||
+      section.chapter !== row.chapter ||
+      section.title !== row.title
+    )
+      mismatches.push(`mppp ${row.section_number}`);
+  }
+  const counts: Record<string, number> = {};
+  for (const row of expected.statutes)
+    counts[row.statute_name] = (counts[row.statute_name] ?? 0) + 1;
+
+  const spot: Record<string, unknown> = {};
+  for (const [citation, statute, number, phrases] of STATUTE_SPOT_CHECKS) {
+    const section = await statuteClient.getSectionByCitation(citation);
+    const flat = section.text.replace(/\s+/g, " ");
+    const missing = phrases.filter(
+      (phrase) => !`${section.title}. ${flat}`.includes(phrase),
     );
     if (
-      section.content_sha256 !== sha(row.text as string) ||
-      section.title !== (row.title ?? null) ||
-      section.source_url !== (row.source_url ?? null)
+      section.statute_name !== statute ||
+      section.section_number !== number ||
+      missing.length
     )
-      mismatches.push(
-        `statutes seed ${row.statute_name} ${row.section_number}`,
-      );
+      mismatches.push(`spot ${citation}: ${missing.join(" | ")}`);
+    spot[citation] = {
+      section: `${section.statute_name} ${section.section_number}`,
+      subdivision: section.subdivision ?? null,
+      title: section.title,
+      chars: section.text.length,
+      source_url: section.source_url,
+    };
   }
-  const mpppSeed = await seed("ipo_in_mppp");
-  for (const row of mpppSeed) {
-    const section = await mpppClient.getSection(row.section_number as string);
+  for (const [reference, number, title, chapter] of MPPP_SPOT_CHECKS) {
+    const section = await mpppClient.getSection(reference);
     if (
-      section.content_sha256 !== sha(row.text as string) ||
-      section.chapter !== (row.chapter ?? null) ||
-      section.title !== (row.title ?? null)
+      section.section_number !== number ||
+      !section.title?.startsWith(title) ||
+      !chapter.every((value) => section.chapter?.startsWith(value))
     )
-      mismatches.push(`mppp seed ${row.section_number}`);
+      mismatches.push(`spot ${reference}: ${section.title}`);
+    spot[reference] = {
+      section: section.section_number,
+      chapter: section.chapter,
+      title: section.title,
+      chars: section.text.length,
+      source_url: section.source_url,
+    };
   }
-
-  // Python parity over queries without FTS5 operator words.
-  const py = python();
-  for (const [index, [query, statute]] of STATUTE_QUERIES.entries()) {
-    const hits = (
-      await statuteClient.search({ query, statute, limit: 50 })
-    ).hits.map((h) => [h.statute_name, h.section_number, h.snippet]);
-    if (JSON.stringify(hits) !== JSON.stringify(py.statutes[index]))
-      mismatches.push(`statutes search '${query}'`);
-  }
-  for (const [index, query] of MPPP_QUERIES.entries()) {
-    const hits = (await mpppClient.search({ query, limit: 50 })).hits.map(
-      (h) => [h.section_number, h.snippet],
-    );
-    if (JSON.stringify(hits) !== JSON.stringify(py.mppp[index]))
-      mismatches.push(`mppp search '${query}'`);
-  }
-  for (const citation of CITATIONS) {
-    const s = await statuteClient.getSectionByCitation(citation);
-    const row = [
-      s.statute_name,
-      s.section_number,
-      s.title,
-      s.text,
-      s.source_url,
-    ];
-    if (JSON.stringify(row) !== JSON.stringify(py.sections[citation]))
-      mismatches.push(`statutes get '${citation}'`);
-  }
-  for (const ref of MPPP_REFS) {
-    const s = await mpppClient.getSection(ref);
-    const row = [s.section_number, s.chapter, s.title, s.text, s.source_url];
-    if (JSON.stringify(row) !== JSON.stringify(py.mppp_sections[ref]))
-      mismatches.push(`mppp get '${ref}'`);
-  }
-  report.parity = {
-    seed_rows_checked: statuteSeed.length + mpppSeed.length,
-    python_searches: STATUTE_QUERIES.length + MPPP_QUERIES.length,
-    python_gets: CITATIONS.length + MPPP_REFS.length,
+  report.rows = {
+    statutes: counts,
+    statutes_total: expected.statutes.length,
+    mppp: expected.mppp.length,
     mismatches,
   };
+  report.spot_checks = spot;
 } finally {
   statuteClient.close();
   mpppClient.close();
@@ -258,17 +244,17 @@ const full = await Client.connect(server, {
 });
 try {
   const search = await full.callTool<Envelope>("search_ipo_in_statutes", {
-    query: "compulsory licensing",
+    query: "compulsory licence",
     statute: "patents act 1970",
   });
   const get = await full.callTool<Envelope>("get_ipo_in_section", {
     citation: ["Section 3(d) Patents Act", "Section 999 Patents Act"],
   });
   const mpppSearch = await full.callTool<Envelope>("search_ipo_in_mppp", {
-    query: "opposition",
+    query: "pre-grant opposition",
   });
   const mpppGet = await full.callTool<Envelope>("get_ipo_in_mppp_section", {
-    citation: "MPPP Chapter 4.5.1",
+    citation: "MPPP 9.3.5.4",
   });
   if (
     !search.structuredContent?.items.length ||
@@ -294,7 +280,7 @@ const curated = await Client.connect(curatedServer, {
 try {
   const search = await curated.callTool<Envelope>("search_legal_reference", {
     corpus: "india_statutes",
-    query: "well-known mark",
+    query: "well-known trade mark",
     statute: "Trade Marks Act",
   });
   const get = await curated.callTool<Envelope>("get_legal_reference", {
@@ -307,7 +293,7 @@ try {
   );
   const mpppGet = await curated.callTool<Envelope>("get_legal_reference", {
     corpus: "india_mppp",
-    identifier: "04.05.02",
+    identifier: "09.03",
   });
   if (
     !search.structuredContent?.items.length ||
