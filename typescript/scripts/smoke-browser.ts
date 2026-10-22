@@ -165,13 +165,15 @@ try {
     direct_cross_origin?: string;
     relay_fee?: string;
     upc_instrument?: string;
+    ipo_in_mppp?: string;
   };
   if (
     !checked.ok ||
     checked.google_claims !== 26 ||
     checked.direct_cross_origin !== "blocked by CORS" ||
     checked.relay_fee !== "135.00" ||
-    checked.upc_instrument !== "upca"
+    checked.upc_instrument !== "upca" ||
+    checked.ipo_in_mppp !== "04.05.01"
   )
     process.exitCode = 1;
 } finally {

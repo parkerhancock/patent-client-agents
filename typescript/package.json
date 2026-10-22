@@ -48,7 +48,8 @@
     "verify:facade-live": "bun scripts/live-facade.ts",
     "verify:epo-legal": "bun scripts/verify-epo-legal.ts",
     "verify:upc-statutes": "bun scripts/verify-upc-statutes.ts",
-    "verify:tmep": "bun scripts/verify-tmep.ts"
+    "verify:tmep": "bun scripts/verify-tmep.ts",
+    "verify:ipo-in": "bun scripts/verify-ipo-in.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",

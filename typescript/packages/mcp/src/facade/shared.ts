@@ -24,6 +24,7 @@ import type {
 } from "@patent-client-agents/client";
 import { z } from "zod";
 import type { EpoLegalClients } from "../epo-legal.js";
+import type { IpoInMpppReader, IpoInStatutesReader } from "../ipo-in.js";
 import {
   type AuthCheck,
   detailEnvelopeSchema,
@@ -65,6 +66,8 @@ export interface FacadeClients {
   wipoLex: WipoLexClient;
   epoLegal: EpoLegalClients;
   upcStatutes: UpcStatutesReader;
+  ipoInStatutes: IpoInStatutesReader;
+  ipoInMppp: IpoInMpppReader;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
   /** USITC EDIS; when present the facade adds the Python EDIS-enabled surface. */

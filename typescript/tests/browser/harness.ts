@@ -7,6 +7,7 @@ import {
   EpoFeesClient,
   EpoOpsClient,
   GooglePatentsClient,
+  IpoInMpppClient,
   MpepClient,
   UpcStatutesClient,
 } from "../../packages/client/src/index.js";
@@ -43,6 +44,10 @@ try {
   results.upc_instrument = (
     await upc.search({ query: "opt-out", limit: 1 })
   ).hits[0]?.instrument;
+  const india = new IpoInMpppClient({
+    source: () => bytes("/fixtures/ipo-in/ipo_in_mppp.db"),
+  });
+  results.ipo_in_mppp = (await india.getSection("MPPP 4.5.1")).section_number;
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

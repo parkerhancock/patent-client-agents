@@ -8,6 +8,7 @@ import {
   EpoFeesClient,
   EpoOpsClient,
   GooglePatentsClient,
+  IpoInStatutesClient,
   MpepClient,
   TmepClient,
   UpcStatutesClient,
@@ -59,6 +60,15 @@ const tmep = new TmepClient({
 });
 results.tmep_section = (await tmep.getSection("1207.01")).href;
 assert.equal(results.tmep_section, "TMEP-1200d1e5044.html");
+const india = new IpoInStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("ipo-in/ipo_in_statutes.db"))),
+  ),
+});
+results.ipo_in_section = (
+  await india.getSectionByCitation("Section 3(d) Patents Act")
+).section_number;
+assert.equal(results.ipo_in_section, "3(d)");
 
 // Network clients with synthetic upstreams.
 const fees = new EpoFeesClient({

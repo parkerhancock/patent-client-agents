@@ -1,6 +1,12 @@
 import { CorpusError } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
+import {
+  getIpoInMpppSections,
+  getIpoInSections,
+  searchIpoInMppp,
+  searchIpoInStatutes,
+} from "../ipo-in.js";
 import { registerUpcStatutesSearchAndGet } from "../upc-statutes.js";
 import {
   getWipoLexLegislation,
@@ -40,8 +46,6 @@ const corpus = z.enum(LEGAL_CORPORA);
 const UNPORTED: Partial<Record<Corpus, string>> = {
   dpma: "The DPMA (German statutes) corpus",
   ukipo_mopp: "The UKIPO Manual of Patent Practice corpus",
-  india_statutes: "The India IP statutes corpus",
-  india_mppp: "The India Manual of Patent Practice and Procedure corpus",
   tw_trade_secrets: "The Taiwan Trade Secrets Act corpus",
 };
 const EPO_BOOK = {
@@ -100,7 +104,7 @@ function reader(clients: FacadeClients, name: Corpus): Reader {
   if (unported)
     notPorted(
       `${unported}`,
-      "Available corpora: uspto_mpep, uspto_tmep, epc, epo_case_law, epo_guidelines, epo_pct_guidelines, epo_up_guidelines.",
+      "Available corpora: uspto_mpep, uspto_tmep, epc, epo_case_law, epo_guidelines, epo_pct_guidelines, epo_up_guidelines, india_statutes, india_mppp.",
     );
   if (name === "uspto_mpep") return clients.mpep as unknown as Reader;
   if (name === "uspto_tmep") return clients.tmep as unknown as Reader;
@@ -126,7 +130,7 @@ function stubHit(hit: Hit): Record<string, unknown> {
 }
 
 const CORPUS_DESCRIPTION =
-  "Which legal-reference corpus to search. US: 'uspto_mpep' (patent examiner manual), 'uspto_tmep' (trademark examiner manual). EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines' (unitary patent), 'epo_case_law' (Boards of Appeal), 'epc' (the Convention). National statutes/manuals (not yet available on this server): 'dpma' (Germany), 'ukipo_mopp' (UK), 'india_statutes', 'india_mppp' (India patent practice), 'tw_trade_secrets' (Taiwan).";
+  "Which legal-reference corpus to search. US: 'uspto_mpep' (patent examiner manual), 'uspto_tmep' (trademark examiner manual). EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines' (unitary patent), 'epo_case_law' (Boards of Appeal), 'epc' (the Convention). India: 'india_statutes' (Patents, Designs, Trade Marks and Copyright Acts plus the Patent Rules), 'india_mppp' (India patent practice manual). Not yet available on this server: 'dpma' (Germany), 'ukipo_mopp' (UK), 'tw_trade_secrets' (Taiwan).";
 const VERSION_DESCRIPTION =
   "MPEP installed release selector; other corpora support current only.";
 
@@ -140,7 +144,7 @@ export function registerLegalReferenceFacade(
       ...facadeToolOptions(auth),
       name: "search_legal_reference",
       description:
-        "Search a legal-reference corpus — statutes, examination manuals, or guidelines.\n\nRoutes to one of the bundled substantive-law corpora by ``corpus`` and returns relevance-ranked snippet hits. Find a provision, then call ``get_legal_reference`` with the same ``corpus`` and the hit's section/citation identifier for the full text. On this server the MPEP, the TMEP and the five EPO corpora are available; the other corpus values report that they are not yet ported. The ``statute`` filter applies only to corpus='dpma' and 'india_statutes'.\n\nRelated tools: get_legal_reference.",
+        "Search a legal-reference corpus — statutes, examination manuals, or guidelines.\n\nRoutes to one of the bundled substantive-law corpora by ``corpus`` and returns relevance-ranked snippet hits. Find a provision, then call ``get_legal_reference`` with the same ``corpus`` and the hit's section/citation identifier for the full text. On this server the MPEP, the TMEP, the five EPO corpora and the two India corpora are available; dpma, ukipo_mopp and tw_trade_secrets report that they are not yet ported. The ``statute`` filter applies only to corpus='dpma' and 'india_statutes'.\n\nRelated tools: get_legal_reference.",
       input: z.object({
         corpus: corpus.describe(CORPUS_DESCRIPTION),
         query: z
@@ -163,9 +167,10 @@ export function registerLegalReferenceFacade(
           .nonnegative()
           .default(0)
           .describe("Result offset for pagination."),
+        // No schema default: the per-corpus default is applied below.
         syntax: z
           .string()
-          .default("adj")
+          .optional()
           .describe(
             "Query syntax: 'adj' (phrase), 'and' (all terms), 'or' (any term), 'exact'. Per-corpus default differs (manuals='adj', statutes='and').",
           ),
@@ -197,13 +202,33 @@ export function registerLegalReferenceFacade(
       }),
     },
     async (input) => {
-      const source = reader(clients, input.corpus);
       if (input.corpus !== "uspto_mpep" && input.version !== "current")
         throw new Error(
           "Explicit version selection is supported only for uspto_mpep",
         );
-      const syntax = z.enum(["adj", "exact", "and", "or"]).parse(input.syntax);
+      const syntax = z
+        .enum(["adj", "exact", "and", "or"])
+        .parse(
+          input.syntax ?? (input.corpus === "india_statutes" ? "and" : "adj"),
+        );
       const sort = z.enum(["relevance", "outline"]).parse(input.sort);
+      // India keeps its own hit shape and summary, as Python forwards verbatim.
+      const india = {
+        query: input.query,
+        limit: input.limit,
+        offset: input.offset,
+        syntax,
+        sort,
+        full: input.full,
+      };
+      if (input.corpus === "india_statutes")
+        return searchIpoInStatutes(clients.ipoInStatutes, {
+          ...india,
+          statute: input.statute,
+        });
+      if (input.corpus === "india_mppp")
+        return searchIpoInMppp(clients.ipoInMppp, india);
+      const source = reader(clients, input.corpus);
       const response = await source.search({
         query: input.query,
         version: input.version,
@@ -234,7 +259,7 @@ export function registerLegalReferenceFacade(
         "Fetch the full text of one legal-reference section by identifier.\n\nAlways returns a ``ListEnvelope`` (stable shape). Route by ``corpus``; the identifier is a section number for examination manuals/guidelines or a statute citation for statute corpora — discover it with ``search_legal_reference``. Sections longer than 32,000 characters are delivered as a text artifact instead of inline text.\n\nRelated tools: search_legal_reference.",
       input: z.object({
         corpus: corpus.describe(
-          "Which legal-reference corpus the identifier belongs to (same enum as search_legal_reference). US: 'uspto_mpep', 'uspto_tmep'. EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines', 'epo_case_law', 'epc'. National: 'dpma', 'ukipo_mopp', 'india_statutes', 'india_mppp', 'tw_trade_secrets'. Only uspto_mpep, uspto_tmep and the EPO corpora are available on this server.",
+          "Which legal-reference corpus the identifier belongs to (same enum as search_legal_reference). US: 'uspto_mpep', 'uspto_tmep'. EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines', 'epo_case_law', 'epc'. National: 'dpma', 'ukipo_mopp', 'india_statutes', 'india_mppp', 'tw_trade_secrets'. Only uspto_mpep, uspto_tmep, the EPO corpora, india_statutes and india_mppp are available on this server.",
         ),
         identifier: z
           .string()
@@ -252,16 +277,26 @@ export function registerLegalReferenceFacade(
       }),
     },
     async (input) => {
-      const source = reader(clients, input.corpus);
       if (input.corpus !== "uspto_mpep" && input.version !== "current")
         throw new Error(
           "Explicit version selection is supported only for uspto_mpep",
         );
       let section: Section;
       try {
-        section = await source.getSection(input.identifier, {
-          version: input.version,
-        });
+        if (input.corpus === "india_statutes")
+          return await getIpoInSections(
+            clients.ipoInStatutes,
+            input.identifier,
+          );
+        if (input.corpus === "india_mppp")
+          return await getIpoInMpppSections(
+            clients.ipoInMppp,
+            input.identifier,
+          );
+        section = await reader(clients, input.corpus).getSection(
+          input.identifier,
+          { version: input.version },
+        );
       } catch (error) {
         if (error instanceof CorpusError && error.code === "SECTION_NOT_FOUND")
           throw new Error(

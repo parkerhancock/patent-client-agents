@@ -588,6 +588,31 @@ const cases: Case[] = [
     tool: "get_legal_reference",
     args: { corpus: "uspto_tmep", identifier: "1207.01" },
   },
+  // India corpora read IPO_IN_STATUTES_CORPUS_PATH / IPO_IN_MPPP_CORPUS_PATH.
+  {
+    name: "india statutes search",
+    tool: "search_legal_reference",
+    args: {
+      corpus: "india_statutes",
+      query: "compulsory licensing",
+      statute: "Patents Act",
+    },
+  },
+  {
+    name: "india statutes section",
+    tool: "get_legal_reference",
+    args: { corpus: "india_statutes", identifier: "Section 3(d) Patents Act" },
+  },
+  {
+    name: "india mppp search",
+    tool: "search_legal_reference",
+    args: { corpus: "india_mppp", query: "first examination report" },
+  },
+  {
+    name: "india mppp section",
+    tool: "get_legal_reference",
+    args: { corpus: "india_mppp", identifier: "MPPP Chapter 04.05.02" },
+  },
   {
     name: "dpma (unported)",
     tool: "search_legal_reference",
