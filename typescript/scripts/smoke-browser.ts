@@ -167,6 +167,8 @@ try {
     relay_fee?: string;
     upc_instrument?: string;
     dpma_section?: string;
+    inpi_br_hits?: string;
+    legifrance_section?: string;
     tw_hits?: string;
     ipo_in_mppp?: string;
   };
@@ -178,6 +180,8 @@ try {
     checked.relay_fee !== "135.00" ||
     checked.upc_instrument !== "upca" ||
     checked.dpma_section !== "139" ||
+    !checked.inpi_br_hits?.split(",").includes("art195") ||
+    checked.legifrance_section !== "L611-10" ||
     checked.tw_hits !== "12,13" ||
     checked.ipo_in_mppp !== "09.03.05.04"
   )

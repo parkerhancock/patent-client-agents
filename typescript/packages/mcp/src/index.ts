@@ -19,9 +19,11 @@ import {
   GooglePatentsClient,
   HtsClient,
   IdsClient,
+  InpiBrStatutesClient,
   IpoInMpppClient,
   IpoInStatutesClient,
   KiprisClient,
+  LegifranceIpClient,
   MoppClient,
   MpepClient,
   OfficeActionAnalyticsClient,
@@ -71,11 +73,19 @@ import { registerFacadeTools } from "./facade/index.js";
 import { registerFeeTools } from "./fees.js";
 import { registerGooglePatentsTools } from "./google-patents.js";
 import {
+  type InpiBrStatutesReader,
+  registerInpiBrStatutesTools,
+} from "./inpi-br-statutes.js";
+import {
   type IpoInMpppReader,
   type IpoInStatutesReader,
   registerIpoInTools,
 } from "./ipo-in.js";
 import { registerKiprisTools } from "./kipris.js";
+import {
+  type LegifranceIpReader,
+  registerLegifranceIpTools,
+} from "./legifrance-ip.js";
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
 import { registerOfficeActionTools } from "./office-actions.js";
@@ -167,6 +177,10 @@ export interface ServerOptions {
   /** IPO India statutes and MPPP corpus readers; omitted, they use their default artifact paths. */
   ipoInStatutes?: IpoInStatutesReader;
   ipoInMppp?: IpoInMpppReader;
+  /** INPI Brazil LPI corpus reader; omitted, it uses the default artifact path. */
+  inpiBrStatutes?: InpiBrStatutesReader;
+  /** Légifrance IP corpus reader; omitted, it uses the default artifact path. */
+  legifranceIp?: LegifranceIpReader;
   /** Download URLs; pass `blobStore` (for example a GcsBlobStore) for URLs that outlive the process. */
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
@@ -445,6 +459,9 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     options.twTradeSecrets ?? own(new TwTradeSecretsClient());
   const ipoInStatutes = options.ipoInStatutes ?? own(new IpoInStatutesClient());
   const ipoInMppp = options.ipoInMppp ?? own(new IpoInMpppClient());
+  const inpiBrStatutes =
+    options.inpiBrStatutes ?? own(new InpiBrStatutesClient());
+  const legifranceIp = options.legifranceIp ?? own(new LegifranceIpClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -898,6 +915,16 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     { statutes: ipoInStatutes, mppp: ipoInMppp },
     options.auth ? requireScopes("ipoin:read") : undefined,
+  );
+  registerInpiBrStatutesTools(
+    server,
+    inpiBrStatutes,
+    options.auth ? requireScopes("inpibr:read") : undefined,
+  );
+  registerLegifranceIpTools(
+    server,
+    legifranceIp,
+    options.auth ? requireScopes("legifrance:read") : undefined,
   );
   registerUsitcTools(
     server,

@@ -1,0 +1,55 @@
+{
+  "description": "Lei nº 9.279/1996 (Lei da Propriedade Industrial): the Portuguese consolidated text and the WIPO Lex English translation of the 1996 text.",
+  "access_notes": [
+    "https://www.planalto.gov.br/ccivil_03/leis/l9279.htm (Python's source) reset the connection after the TLS handshake for every plain HTTPS request on October 22, 2026, including requests for the site's home page, so the Câmara dos Deputados consolidated text (\"norma atualizada\") is used instead.",
+    "The English PDF is linked from the WIPO Lex record with a CloudFront signature that expires; the manifest records the unsigned URL.",
+    "The English translation is of the law as enacted in 1996. It does not include later amendments, so for amended articles it differs from the Portuguese text, which is authoritative."
+  ],
+  "user_agent": "patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)",
+  "extractor": {
+    "html": "regular expressions over <p> and <h1>-<h6> blocks",
+    "pdf": "pdfjs-dist 4.10.38"
+  },
+  "retrieved_at": "2026-10-22T16:12:04Z",
+  "pt": {
+    "publisher": "Câmara dos Deputados, Centro de Documentação e Informação (Legislação Informatizada)",
+    "heading": "LEI Nº 9.279, DE 14 DE MAIO DE 1996",
+    "article_count": 248,
+    "latest_amendment": "Lei nº 14.852, de 3/5/2024 (2024-05-03)"
+  },
+  "en": {
+    "publisher": "WIPO Lex (World Intellectual Property Organization)",
+    "version": "Law No. 9.279 of May 14, 1996, as enacted (WIPO Lex record 515)",
+    "pdf_modified": "2022-06-27T08:28:34Z",
+    "article_count": 244
+  },
+  "files": [
+    {
+      "role": "pt",
+      "file": "camara-l9279-normaatualizada.html",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/1996/lei-9279-14-maio-1996-374644-normaatualizada-pl.html",
+      "retrieved_at": "2026-10-22T16:12:04Z",
+      "last_modified": null,
+      "sha256": "bb983a4287a5c09e956a2fc11e46c099e240695d80db9b946becd92e7f888515",
+      "bytes": 311488
+    },
+    {
+      "role": "en_record",
+      "file": "wipolex-515.html",
+      "url": "https://www.wipo.int/wipolex/en/legislation/details/515",
+      "retrieved_at": "2026-10-22T16:12:05Z",
+      "last_modified": null,
+      "sha256": "3365b6265c222034bdd7c8a034153f1d350696828d711e76ca1f78dba97255cf",
+      "bytes": 315417
+    },
+    {
+      "role": "en_pdf",
+      "file": "br003en.pdf",
+      "url": "https://wipolex-res.wipo.int/edocs/lexdocs/laws/en/br/br003en.pdf",
+      "retrieved_at": "2026-10-22T16:12:05Z",
+      "last_modified": "Tue, 16 Dec 2025 02:44:34 GMT",
+      "sha256": "d7f0a5120a3dcff2e76003d2ff99fa18abca0f3ec4b1d9bbb88021002c53cd1d",
+      "bytes": 250996
+    }
+  ]
+}

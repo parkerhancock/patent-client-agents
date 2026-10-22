@@ -9,7 +9,9 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   getPatentClaims,
+  InpiBrStatutesClient,
   IpoInMpppClient,
+  LegifranceIpClient,
   MpepClient,
   TwTradeSecretsClient,
   UpcStatutesClient,
@@ -52,6 +54,20 @@ try {
   });
   results.dpma_section = (
     await dpma.getSectionByCitation("§ 139 Abs. 1 PatG")
+  ).section;
+  const inpiBr = new InpiBrStatutesClient({
+    source: () => bytes("/fixtures/inpi-br-statutes/inpi_br_statutes.db"),
+  });
+  results.inpi_br_hits = (
+    await inpiBr.search({ query: "unfair competition" })
+  ).hits
+    .map((hit) => hit.href)
+    .join(",");
+  const legifrance = new LegifranceIpClient({
+    source: () => bytes("/fixtures/legifrance-ip/legifrance_ip.db"),
+  });
+  results.legifrance_section = (
+    await legifrance.getSection("Art. L. 611-10 CPI")
   ).section;
   results.tw_hits = (
     await new TwTradeSecretsClient().search({ query: "damage" })
