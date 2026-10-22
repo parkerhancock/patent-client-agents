@@ -2,6 +2,14 @@ import { CorpusError } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
 import {
+  getWipoLexLegislation,
+  searchWipoLexLegislation,
+  WIPO_LEX_GET_DESCRIPTION,
+  WIPO_LEX_SEARCH_DESCRIPTION,
+  wipoLexGetSchema,
+  wipoLexSearchSchema,
+} from "../wipo-lex.js";
+import {
   type AuthCheck,
   downloadResult,
   type FacadeClients,
@@ -276,5 +284,27 @@ export function registerLegalReferenceFacade(
         provenance,
       );
     },
+  );
+
+  // WIPO Lex keeps its own search/get pair (re-exposed verbatim in Python):
+  // its filters do not fold into the corpus dispatchers' query shape.
+  server.tool(
+    {
+      ...facadeToolOptions(auth),
+      name: "search_wipo_lex_legislation",
+      description: WIPO_LEX_SEARCH_DESCRIPTION,
+      input: wipoLexSearchSchema,
+    },
+    (input) => searchWipoLexLegislation(clients.wipoLex, input),
+  );
+  server.tool(
+    {
+      ...facadeToolOptions(auth),
+      name: "get_wipo_lex_legislation",
+      description: WIPO_LEX_GET_DESCRIPTION,
+      input: wipoLexGetSchema,
+    },
+    ({ legislation_id }) =>
+      getWipoLexLegislation(clients.wipoLex, legislation_id),
   );
 }

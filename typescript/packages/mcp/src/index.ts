@@ -26,6 +26,7 @@ import {
   TrademarkAssignmentClient,
   TrademarkSearchClient,
   TsdrClient,
+  WipoLexClient,
 } from "@patent-client-agents/client";
 import {
   createFileWafSessionStore,
@@ -65,6 +66,7 @@ import {
 } from "./relay.js";
 import { registerUsptoResources } from "./resources.js";
 import { registerPortalSearchTools } from "./search-portals.js";
+import { registerWipoLexTools } from "./wipo-lex.js";
 
 export interface UsptoClients {
   applications: ApplicationsClient;
@@ -86,6 +88,7 @@ export interface UsptoClients {
   googlePatents: GooglePatentsClient;
   cafc: CafcClient;
   copyright: CopyrightClient;
+  wipoLex: WipoLexClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -463,6 +466,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     googlePatents: provided.googlePatents ?? new GooglePatentsClient(),
     cafc: provided.cafc ?? new CafcClient(),
     copyright: provided.copyright ?? new CopyrightClient(),
+    wipoLex: provided.wipoLex ?? new WipoLexClient(),
     epoLegal,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
@@ -670,6 +674,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     clients.copyright,
     options.auth ? requireScopes("copyright:read") : undefined,
+  );
+  registerWipoLexTools(
+    server,
+    clients.wipoLex,
+    options.auth ? requireScopes("wipo:read") : undefined,
   );
   registerFeeTools(
     server,
