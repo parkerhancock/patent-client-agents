@@ -32,7 +32,7 @@ output-mode schemas mark defaulted parameters as required.
 | `classify_cpc` | Served; needs EPO OPS credentials. USCLS mapping is rejected (OPS maps CPC, IPC and ECLA). |
 | `get_fees` | Served for the EPO, the Unitary Patent and the USPTO (patent, trademark, design); other offices report not yet ported |
 | `search_litigation`, `get_litigation`, `list_ptab_children`, `search_cafc_patent_opinions` | PTAB and CAFC served; UPC decisions not ported (the site now sits behind a Cloudflare challenge); USITC appears only with `USITC_EDIS_TOKEN`, matching the Python EDIS-enabled build (checked by a second contract fixture) |
-| `search_legal_reference`, `get_legal_reference` | MPEP, TMEP, UKIPO MoPP and the five EPO corpora served; DPMA, India and Taiwan not ported |
+| `search_legal_reference`, `get_legal_reference` | MPEP, TMEP, UKIPO MoPP, DPMA and the five EPO corpora served; India and Taiwan not ported. See [DPMA statutes](dpma-statutes.md) |
 | `search_bulk_data`, `download_document` | ODP bulk data, patent PDFs, PTAB documents and CAFC opinions served; USITC attachments with `USITC_EDIS_TOKEN`; IP Australia not ported |
 | `search_upc_statutes`, `get_upc_section` | Served from the UPC statutes corpus. See [UPC statutes](upc-statutes.md) |
 | `search_wipo_lex_legislation`, `get_wipo_lex_legislation` | Served. See [WIPO Lex](wipo-lex.md) |
@@ -69,7 +69,10 @@ clients, so full records are not byte-compatible. Notable changes:
   them to the court's index unchanged, where only `24-1945` matches.
   `download_document(source='cafc')` also takes the opinion's PDF URL as
   `identifier`, since the facade has no `document_url` parameter.
-- WIPO Lex, Copyright Office and UPC statutes outputs correct several Python
+- `search_legal_reference` has no schema default for `syntax`. Omitted, it
+  is `adj` for the manuals and `and` for `dpma`, as its description says;
+  Python's facade defaults it to `adj` and so phrase-matches DPMA searches.
+- WIPO Lex, Copyright Office, UPC and DPMA statutes outputs correct several Python
   bugs (inverted `include_historical`, empty post-1978 copyright titles and
   claimants, unquoted FTS operators, among others); each connector doc lists
   them. Long UPC instrument texts arrive as text artifacts past 32,000
@@ -123,7 +126,9 @@ maintenance fee lookup passed live, and KR search reported that
 also answered live (HTS search, the IDS investigation feed).
 Later on October 22, `search_legal_reference` and `get_legal_reference` for
 `ukipo_mopp` ("inventive step", section 4A) passed against the packaged
-May 14 MoPP snapshot.
+May 14 MoPP snapshot, and DPMA search (`Unterlassung` in PatG) and `§ 139 PatG`
+passed against the packaged DPMA statutes artifact; that corpus is local, so
+the run checks wiring, not an upstream.
 
 Not facade defects, but visible in the run:
 

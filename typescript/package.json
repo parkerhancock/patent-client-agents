@@ -48,6 +48,7 @@
     "verify:facade-live": "bun scripts/live-facade.ts",
     "verify:epo-legal": "bun scripts/verify-epo-legal.ts",
     "verify:upc-statutes": "bun scripts/verify-upc-statutes.ts",
+    "verify:dpma-statutes": "bun scripts/verify-dpma-statutes.ts",
     "verify:tmep": "bun scripts/verify-tmep.ts",
     "verify:ukipo-mopp": "bun scripts/verify-ukipo-mopp.ts"
   },

@@ -3,6 +3,7 @@
 import {
   configureWasm,
   createRelayFetch,
+  DpmaStatutesClient,
   EpcClient,
   EpoFeesClient,
   EpoOpsClient,
@@ -43,6 +44,12 @@ try {
   results.upc_instrument = (
     await upc.search({ query: "opt-out", limit: 1 })
   ).hits[0]?.instrument;
+  const dpma = new DpmaStatutesClient({
+    source: () => bytes("/fixtures/dpma-statutes/dpma_statutes.db"),
+  });
+  results.dpma_section = (
+    await dpma.getSectionByCitation("§ 139 Abs. 1 PatG")
+  ).section;
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

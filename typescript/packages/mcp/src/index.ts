@@ -7,6 +7,7 @@ import {
   ConfigurationError,
   CopyrightClient,
   DataWebClient,
+  DpmaStatutesClient,
   EdisClient,
   EpcClient,
   EpoCaseLawClient,
@@ -56,6 +57,10 @@ import {
   DownloadStore,
   downloadContext,
 } from "./downloads.js";
+import {
+  type DpmaStatutesReader,
+  registerDpmaStatutesTools,
+} from "./dpma-statutes.js";
 import { registerEpoTools } from "./epo.js";
 import { type EpoLegalClients, registerEpoLegalTools } from "./epo-legal.js";
 import { registerFacadeTools } from "./facade/index.js";
@@ -135,6 +140,8 @@ export interface ServerOptions {
   epoLegal?: Partial<EpoLegalClients>;
   /** UPC statutes corpus reader; omitted, it uses the default artifact path. */
   upcStatutes?: UpcStatutesReader;
+  /** DPMA statutes corpus reader; omitted, it uses the default artifact path. */
+  dpmaStatutes?: DpmaStatutesReader;
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
   downloadAuth?: { jwksUri: string; issuer: string; audience: string };
@@ -337,6 +344,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       options.epoLegal?.upGuidelines ?? own(new EpoUpGuidelinesClient()),
   };
   const upcStatutes = options.upcStatutes ?? own(new UpcStatutesClient());
+  const dpmaStatutes = options.dpmaStatutes ?? own(new DpmaStatutesClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -515,6 +523,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     wipoLex: provided.wipoLex ?? new WipoLexClient(),
     epoLegal,
     upcStatutes,
+    dpmaStatutes,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
     edis: edisClient,
@@ -766,6 +775,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     upcStatutes,
     options.auth ? requireScopes("upc:read") : undefined,
+  );
+  registerDpmaStatutesTools(
+    server,
+    dpmaStatutes,
+    options.auth ? requireScopes("dpma:read") : undefined,
   );
   registerUsitcTools(
     server,

@@ -1,6 +1,7 @@
 import { CorpusError } from "@patent-client-agents/client";
 import type { FastMCP } from "@prefecthq/fastmcp-ts/server";
 import { z } from "zod";
+import { getDpmaSections, searchDpmaStatutes } from "../dpma-statutes.js";
 import { registerUpcStatutesSearchAndGet } from "../upc-statutes.js";
 import {
   getWipoLexLegislation,
@@ -38,7 +39,6 @@ const corpus = z.enum(LEGAL_CORPORA);
 
 /** Corpora whose TypeScript reader does not exist yet. */
 const UNPORTED: Partial<Record<Corpus, string>> = {
-  dpma: "The DPMA (German statutes) corpus",
   india_statutes: "The India IP statutes corpus",
   india_mppp: "The India Manual of Patent Practice and Procedure corpus",
   tw_trade_secrets: "The Taiwan Trade Secrets Act corpus",
@@ -94,12 +94,12 @@ type Reader = {
   getSection(section: string, options: { version: string }): Promise<Section>;
 };
 
-function reader(clients: FacadeClients, name: Corpus): Reader {
+function reader(clients: FacadeClients, name: Exclude<Corpus, "dpma">): Reader {
   const unported = UNPORTED[name];
   if (unported)
     notPorted(
       `${unported}`,
-      "Available corpora: uspto_mpep, uspto_tmep, ukipo_mopp, epc, epo_case_law, epo_guidelines, epo_pct_guidelines, epo_up_guidelines.",
+      "Available corpora: uspto_mpep, uspto_tmep, ukipo_mopp, dpma, epc, epo_case_law, epo_guidelines, epo_pct_guidelines, epo_up_guidelines.",
     );
   if (name === "uspto_mpep") return clients.mpep as unknown as Reader;
   if (name === "uspto_tmep") return clients.tmep as unknown as Reader;
@@ -126,7 +126,7 @@ function stubHit(hit: Hit): Record<string, unknown> {
 }
 
 const CORPUS_DESCRIPTION =
-  "Which legal-reference corpus to search. US: 'uspto_mpep' (patent examiner manual), 'uspto_tmep' (trademark examiner manual). EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines' (unitary patent), 'epo_case_law' (Boards of Appeal), 'epc' (the Convention). UK: 'ukipo_mopp' (UKIPO Manual of Patent Practice). Other national statutes/manuals (not yet available on this server): 'dpma' (Germany), 'india_statutes', 'india_mppp' (India patent practice), 'tw_trade_secrets' (Taiwan).";
+  "Which legal-reference corpus to search. US: 'uspto_mpep' (patent examiner manual), 'uspto_tmep' (trademark examiner manual). EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines' (unitary patent), 'epo_case_law' (Boards of Appeal), 'epc' (the Convention). UK: 'ukipo_mopp' (UKIPO Manual of Patent Practice). Germany: 'dpma' (German IP statutes). Other national statutes/manuals (not yet available on this server): 'india_statutes', 'india_mppp' (India patent practice), 'tw_trade_secrets' (Taiwan).";
 const VERSION_DESCRIPTION =
   "MPEP installed release selector; other corpora support current only.";
 
@@ -140,7 +140,7 @@ export function registerLegalReferenceFacade(
       ...facadeToolOptions(auth),
       name: "search_legal_reference",
       description:
-        "Search a legal-reference corpus — statutes, examination manuals, or guidelines.\n\nRoutes to one of the bundled substantive-law corpora by ``corpus`` and returns relevance-ranked snippet hits. Find a provision, then call ``get_legal_reference`` with the same ``corpus`` and the hit's section/citation identifier for the full text. On this server the MPEP, the TMEP, the UKIPO MoPP and the five EPO corpora are available; the other corpus values report that they are not yet ported. The ``statute`` filter applies only to corpus='dpma' and 'india_statutes'.\n\nRelated tools: get_legal_reference.",
+        "Search a legal-reference corpus — statutes, examination manuals, or guidelines.\n\nRoutes to one of the bundled substantive-law corpora by ``corpus`` and returns relevance-ranked snippet hits. Find a provision, then call ``get_legal_reference`` with the same ``corpus`` and the hit's section/citation identifier for the full text. On this server the MPEP, the TMEP, the UKIPO MoPP, the DPMA German statutes and the five EPO corpora are available; the other corpus values report that they are not yet ported. The ``statute`` filter applies only to corpus='dpma' and 'india_statutes'.\n\nRelated tools: get_legal_reference.",
       input: z.object({
         corpus: corpus.describe(CORPUS_DESCRIPTION),
         query: z
@@ -163,9 +163,10 @@ export function registerLegalReferenceFacade(
           .nonnegative()
           .default(0)
           .describe("Result offset for pagination."),
+        // No schema default: omitted, manuals use 'adj' and statutes 'and'.
         syntax: z
           .string()
-          .default("adj")
+          .optional()
           .describe(
             "Query syntax: 'adj' (phrase), 'and' (all terms), 'or' (any term), 'exact'. Per-corpus default differs (manuals='adj', statutes='and').",
           ),
@@ -197,13 +198,29 @@ export function registerLegalReferenceFacade(
       }),
     },
     async (input) => {
-      const source = reader(clients, input.corpus);
       if (input.corpus !== "uspto_mpep" && input.version !== "current")
         throw new Error(
           "Explicit version selection is supported only for uspto_mpep",
         );
-      const syntax = z.enum(["adj", "exact", "and", "or"]).parse(input.syntax);
+      const syntax = z
+        .enum(["adj", "exact", "and", "or"])
+        .parse(input.syntax ?? (input.corpus === "dpma" ? "and" : "adj"));
       const sort = z.enum(["relevance", "outline"]).parse(input.sort);
+      // Python forwards the statute filter only to the statute corpora.
+      if (input.corpus === "dpma")
+        return {
+          ...(await searchDpmaStatutes(clients.dpmaStatutes, {
+            query: input.query,
+            statute: input.statute,
+            limit: input.limit,
+            offset: input.offset,
+            syntax,
+            sort,
+            full: input.full,
+          })),
+          next_cursor: null,
+        };
+      const source = reader(clients, input.corpus);
       const response = await source.search({
         query: input.query,
         version: input.version,
@@ -234,7 +251,7 @@ export function registerLegalReferenceFacade(
         "Fetch the full text of one legal-reference section by identifier.\n\nAlways returns a ``ListEnvelope`` (stable shape). Route by ``corpus``; the identifier is a section number for examination manuals/guidelines or a statute citation for statute corpora — discover it with ``search_legal_reference``. Sections longer than 32,000 characters are delivered as a text artifact instead of inline text.\n\nRelated tools: search_legal_reference.",
       input: z.object({
         corpus: corpus.describe(
-          "Which legal-reference corpus the identifier belongs to (same enum as search_legal_reference). US: 'uspto_mpep', 'uspto_tmep'. EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines', 'epo_case_law', 'epc'. National: 'dpma', 'ukipo_mopp', 'india_statutes', 'india_mppp', 'tw_trade_secrets'. Only uspto_mpep, uspto_tmep, ukipo_mopp and the EPO corpora are available on this server.",
+          "Which legal-reference corpus the identifier belongs to (same enum as search_legal_reference). US: 'uspto_mpep', 'uspto_tmep'. EPO: 'epo_guidelines', 'epo_pct_guidelines', 'epo_up_guidelines', 'epo_case_law', 'epc'. National: 'dpma', 'ukipo_mopp', 'india_statutes', 'india_mppp', 'tw_trade_secrets'. Only uspto_mpep, uspto_tmep, ukipo_mopp, dpma and the EPO corpora are available on this server.",
         ),
         identifier: z
           .string()
@@ -252,11 +269,14 @@ export function registerLegalReferenceFacade(
       }),
     },
     async (input) => {
-      const source = reader(clients, input.corpus);
       if (input.corpus !== "uspto_mpep" && input.version !== "current")
         throw new Error(
           "Explicit version selection is supported only for uspto_mpep",
         );
+      // Python passes the identifier to get_dpma_section as one citation.
+      if (input.corpus === "dpma")
+        return getDpmaSections(clients.dpmaStatutes, input.identifier);
+      const source = reader(clients, input.corpus);
       let section: Section;
       try {
         section = await source.getSection(input.identifier, {

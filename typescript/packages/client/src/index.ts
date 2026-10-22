@@ -5,6 +5,7 @@ export * from "./assignments.js";
 export * from "./bulkdata.js";
 export * from "./cafc.js";
 export * from "./copyright.js";
+export * from "./dpma-statutes.js";
 export * from "./epo-legal.js";
 export * from "./epo-ops.js";
 export * from "./epo-ops-resources.js";
