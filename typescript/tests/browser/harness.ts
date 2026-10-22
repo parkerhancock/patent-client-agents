@@ -11,6 +11,7 @@ import {
   getPatentClaims,
   IpoInMpppClient,
   MpepClient,
+  parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
   TwTradeSecretsClient,
   UpcStatutesClient,
@@ -101,6 +102,14 @@ try {
     await bytes("/fixtures/japan-ip-high-court/jikenitiran.xls"),
   );
   results.jp_court = `${jpCourt.pending_count}/${jpCourt.closed_count}:${jpCourt.cases[0]?.case_number}`;
+  const spc = (
+    (await (
+      await fetch("/fixtures/china-spc-ip-court/notices.json")
+    ).json()) as { notices: Record<string, { html: string }> }
+  ).notices["6106"];
+  results.spc_dispute = parseHearingNotice(spc?.html ?? "", {
+    noticeUrl: "https://ipc.court.gov.cn/zh-cn/news/view-6106.html",
+  }).dispute_type;
   results.google_markdown = (google.description_markdown?.length ?? 0) > 10_000;
   // Fused claims helper with stand-in sources: an ODP miss falls back to Google.
   const fused = await getPatentClaims(

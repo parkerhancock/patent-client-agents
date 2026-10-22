@@ -18,6 +18,7 @@ import {
   IpoInStatutesClient,
   MoppClient,
   MpepClient,
+  parseHearingNotice,
   parseJapanIpHighCourtWorkbook,
   TmepClient,
   TwTradeSecretsClient,
@@ -145,6 +146,15 @@ const googleHtml = gunzipSync(
 const google = GooglePatentsClient.parsePatent(googleHtml, "US7654321B2");
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
+
+const spc = JSON.parse(
+  await readFile(fixture("china-spc-ip-court/notices.json"), "utf8"),
+).notices["6106"];
+const spcNotice = parseHearingNotice(spc.html, {
+  noticeUrl: "https://ipc.court.gov.cn/zh-cn/news/view-6106.html",
+});
+assert.equal(spcNotice.parties[2].role_en, "first_instance_third_party");
+results.spc_dispute = spcNotice.dispute_type;
 
 // Fused helpers with stand-in sources: an ODP miss falls back to Google,
 // and a PPUBS miss falls through to EPO.

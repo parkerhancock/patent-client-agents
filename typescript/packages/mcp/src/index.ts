@@ -5,6 +5,7 @@ import {
   BulkDataClient,
   CafcClient,
   CanadaFederalCourtClient,
+  ChinaSpcIpCourtClient,
   ConfigurationError,
   CopyrightClient,
   DataWebClient,
@@ -58,6 +59,7 @@ import { z } from "zod";
 import { registerApplicationExtraTools } from "./applications-extra.js";
 import { registerCafcTools } from "./cafc.js";
 import { registerCanadaFederalCourtTools } from "./canada-federal-court.js";
+import { registerChinaSpcIpCourtTools } from "./china-spc-ip-court.js";
 import { registerCopyrightTools } from "./copyright.js";
 import {
   type DownloadOptions,
@@ -135,6 +137,7 @@ export interface UsptoClients {
   googlePatents: GooglePatentsClient;
   cafc: CafcClient;
   canadaFederalCourt: CanadaFederalCourtClient;
+  chinaSpcIpCourt: ChinaSpcIpCourtClient;
   copyright: CopyrightClient;
   wipoLex: WipoLexClient;
   /** USITC EDIS; served only when a client is provided or USITC_EDIS_TOKEN(_FILE) is set. */
@@ -632,6 +635,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     cafc: provided.cafc ?? new CafcClient(),
     canadaFederalCourt:
       provided.canadaFederalCourt ?? new CanadaFederalCourtClient(),
+    chinaSpcIpCourt: provided.chinaSpcIpCourt ?? new ChinaSpcIpCourtClient(),
     copyright: provided.copyright ?? new CopyrightClient(),
     wipoLex: provided.wipoLex ?? new WipoLexClient(),
     epoLegal,
@@ -860,6 +864,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     clients.canadaFederalCourt,
     options.auth ? requireScopes("fct:read") : undefined,
+  );
+  registerChinaSpcIpCourtTools(
+    server,
+    clients.chinaSpcIpCourt,
+    options.auth ? requireScopes("spc:read") : undefined,
   );
   registerCopyrightTools(
     server,

@@ -5,6 +5,7 @@ export * from "./assignments.js";
 export * from "./bulkdata.js";
 export * from "./cafc.js";
 export * from "./canada-federal-court.js";
+export * from "./china-spc-ip-court.js";
 export * from "./copyright.js";
 export * from "./dpma-statutes.js";
 export * from "./epo-legal.js";
