@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc-derived, not recorded: the documented sample response for getBibliographyDetailInfoSearch on the KIPRIS Plus DBII_000000000000001 page (references/kipris), trimmed to two items for searches. -->
+<response xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <header>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <abstractInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.AbstractInfoArray">
+        <abstractInfo type="kr.or.kipris.plus.webservice.services.patentbean.AbstractInfo">
+          <astrtCont>본 발명은 도로노면 세척 및 결빙방지시스템에 관한 것으로서, 특히 제어부와; 터널의 진입로 일측 지면에 설치된 물탱크 및 염수탱크와; 상기 제어부와 전기적으로 연결된 솔레노이드밸브가 중간에 설치된 유입배관에 의하여 물탱크 및 염수탱크와 연결되는 압력펌프가 내설된 컨트롤박스와; 상기 압력펌프와 배출배관으로 연결되고 상기 터널의 진입로 중앙에 소정간격으로 설치되어, 상기 솔레노이드밸브의 동작에 따라 물탱크 내의 물 또는 염수탱크 내의 물을 진입로 도로노면에 분사하는 복수개의 물분사수단;로 구성되어, 터널 진입로를 세척하여 터널 내부로 흙이나 먼지가 유입되는 것을 최소화할 수 있고 도로의 결빙을 방지할 수 있는 효과가 있다.</astrtCont>
+        </abstractInfo>
+      </abstractInfoArray>
+      <agentInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.AgentInfoArray">
+        <agentInfo type="kr.or.kipris.plus.webservice.services.patentbean.AgentInfo">
+          <address>서울 강남구 역삼동 ***-** 삼화빌딩 *층(두성국제특허법률사무소)</address>
+          <code>920010005131</code>
+          <country>대한민국</country>
+          <engName>Choi Byoung Gill</engName>
+          <name>최병길</name>
+        </agentInfo>
+      </agentInfoArray>
+      <applicantInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.ApplicantInfoArray">
+        <applicantInfo type="kr.or.kipris.plus.webservice.services.patentbean.ApplicantInfo">
+          <address>경기도 성남시 분당 서현동 ***-*</address>
+          <code>119990076274</code>
+          <country>대한민국</country>
+          <engName>KYUNG HWA ENGINEERING CO., LTD.</engName>
+          <name>(주) 경화엔지니어링</name>
+        </applicantInfo>
+      </applicantInfoArray>
+      <biblioSummaryInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.BiblioSummaryInfoArray">
+        <biblioSummaryInfo type="kr.or.kipris.plus.webservice.services.patentbean.BiblioSummaryInfo">
+          <applicationDate>2008.03.19</applicationDate>
+          <applicationFlag />
+          <applicationNumber>10-2008-0025578</applicationNumber>
+          <claimCount>5</claimCount>
+          <finalDisposal>등록결정(일반)</finalDisposal>
+          <inventionTitle>도로노면 세척 및 결빙방지시스템</inventionTitle>
+          <inventionTitleEng>CLEANING AND ANTIFREEZE SYSTEM FOR ROAD SURFACE TO PREVENT SOIL AND DUST FROM ENTERING A TUNNEL BY CLEANING AN ENTRANCE OF THE TUNNEL</inventionTitleEng>
+          <openDate />
+          <openNumber />
+          <originalApplicationDate />
+          <originalApplicationKind />
+          <originalApplicationNumber />
+          <originalExaminationRequestDate>2008.03.19</originalExaminationRequestDate>
+          <originalExaminationRequestFlag>Y</originalExaminationRequestFlag>
+          <publicationDate>2008.07.09</publicationDate>
+          <publicationNumber />
+          <registerDate>2008.07.01</registerDate>
+          <registerNumber>10-0844582-0000</registerNumber>
+          <registerStatus>등록특허()</registerStatus>
+          <translationSubmitDate />
+        </biblioSummaryInfo>
+      </biblioSummaryInfoArray>
+      <claimInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.ClaimInfoArray">
+        <claimInfo type="kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo">
+          <claim>제어부(10)와, 터널(T)의 진입로(R) 일측 지면에 설치된 물탱크(20) 및 염수탱크(30)와, 상기 제어부(10)와 전기적으로 연결된 솔레노이드밸브(SV)가 중간에 설치된 유입배관(P1)에 의하여 물탱크(20) 및 염수탱크(30)와 연결되는 압력펌프(41)가 내설된 컨트롤박스(40)와, 상기 압력펌프(41)와 배출배관(P2)으로 연결되고 상기 터널(T)의 진입로(R) 중앙에 소정간격으로 설치되어 상기 솔레노이드밸브(SV)의 동작에 따라 물탱크(20) 내의 물 또는 염수탱크(30) 내의 물을 진입로(R) 도로노면에 분사하는 복수개의 물분사수단(50)으로 구성된 도로노면 세척 및 결빙방지시스템에 있어서,	상기 물분사수단(50)은 진입로(R)에 매설되고 상기 배출배관(P2)이 연결되도록 중앙에 관통홀(51a)이 형성된 매설본체(51)와;	상기 매설본체(51)에 상하이동 가능하게 설치되고, 외주면에 복수개의 물배출홀(56a)이 방사상으로 형성된 분사캡(52);으로 구성된 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.</claim>
+        </claimInfo>
+        <claimInfo type="kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo">
+          <claim>청구항 1에 있어서,	상기 터널(T)의 진입로(R) 상에는 상기 제어부(10)와 전기적으로 연결된 먼지감지센서(S2)가 설치된 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.</claim>
+        </claimInfo>
+        <claimInfo type="kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo">
+          <claim>청구항 2에 있어서,	상기 진입로(R)에는 상기 제어부(10)와 전기적으로 연결되어 도로노면의 온도를 감지하는 온도감지센서(S1)가 더 설치된 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.</claim>
+        </claimInfo>
+        <claimInfo type="kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo">
+          <claim>삭제</claim>
+        </claimInfo>
+        <claimInfo type="kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo">
+          <claim>청구항 1에 있어서,	상기 분사캡(52)의 물배출홀(56a)은 소정의 곡률을 갖도록 라운드지게 형성되어 물 또는 염수가 배출될 때 상기 매설본체(51)로부터 분사캡(52)이 회전되는 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.</claim>
+        </claimInfo>
+        <claimInfo type="kr.or.kipris.plus.webservice.services.patentbean.ClaimInfo">
+          <claim>청구항 1에 있어서,	상기 진입로(R) 상에는 상기 물분사수단(50)으로부터 소정거리 전방에 차량감지센서(S3)가 설치된 것을 특징으로 하는 도로노면 세척 및 결빙방지시스템.</claim>
+        </claimInfo>
+      </claimInfoArray>
+      <designatedStateInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.DesignatedStateInfoArray" />
+      <familyInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.FamilyInfoArray">
+        <familyInfo type="kr.or.kipris.plus.webservice.services.patentbean.FamilyInfo">
+          <familyApplicationNumber xsi:nil="true" />
+        </familyInfo>
+      </familyInfoArray>
+      <imagePathInfo type="kr.or.kipris.plus.webservice.services.patentbean.ImagePathInfo">
+        <docName>ent_image/PT_R/10</docName>
+        <largePath>http://plus.kipris.or.kr/patent_image/PT_R/1020080025578/1020080025578.jpg</largePath>
+        <path>http://plus.kipris.or.kr/patent_image/PT/1020080025578/1020080025578.jpg</path>
+      </imagePathInfo>
+      <internationalInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.InternationalInfoArray">
+        <internationalInfo type="kr.or.kipris.plus.webservice.services.patentbean.InternationalInfo">
+          <internationOpenDate />
+          <internationOpenNumber />
+          <internationalApplicationDate />
+          <internationalApplicationNumber xsi:nil="true" />
+        </internationalInfo>
+      </internationalInfoArray>
+      <inventorInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.InventorInfoArray">
+        <inventorInfo type="kr.or.kipris.plus.webservice.services.patentbean.InventorInfo">
+          <address>서울 송파구 문정*동 래미안APT ***-****</address>
+          <code />
+          <country>대한민국</country>
+          <engName>LEE, Yong June</engName>
+          <name>이용준</name>
+        </inventorInfo>
+        <inventorInfo type="kr.or.kipris.plus.webservice.services.patentbean.InventorInfo">
+          <address>경기 용인시 수지구 풍덕천동 **** 태영데시앙*차아파트 ***동****호</address>
+          <code />
+          <country>대한민국</country>
+          <engName>PARK, Won Jae</engName>
+          <name>박원재</name>
+        </inventorInfo>
+      </inventorInfoArray>
+      <ipcInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.IpcInfoArray">
+        <ipcInfo type="kr.or.kipris.plus.webservice.services.patentbean.IpcInfo">
+          <ipcDate>(2006.01)</ipcDate>
+          <ipcNumber>E01H 3/04</ipcNumber>
+        </ipcInfo>
+        <ipcInfo type="kr.or.kipris.plus.webservice.services.patentbean.IpcInfo">
+          <ipcDate>(2006.01)</ipcDate>
+          <ipcNumber>E01H 5/00</ipcNumber>
+        </ipcInfo>
+        <ipcInfo type="kr.or.kipris.plus.webservice.services.patentbean.IpcInfo">
+          <ipcDate>(2006.01)</ipcDate>
+          <ipcNumber>E01H 10/00</ipcNumber>
+        </ipcInfo>
+      </ipcInfoArray>
+      <legalStatusInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfoArray">
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>수리</commonCodeName>
+          <documentEngName>Application of Patent</documentEngName>
+          <documentName>[특허출원]특허출원서</documentName>
+          <receiptDate>2008.03.19</receiptDate>
+          <receiptNumber>1-1-2008-0200004-08</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>수리</commonCodeName>
+          <documentEngName />
+          <documentName>[출원인변경]권리관계변경신고서</documentName>
+          <receiptDate>2008.03.21</receiptDate>
+          <receiptNumber>1-1-2008-0207928-77</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>수리</commonCodeName>
+          <documentEngName />
+          <documentName>[우선심사신청]심사청구(우선심사신청)서</documentName>
+          <receiptDate>2008.03.21</receiptDate>
+          <receiptNumber>1-1-2008-0207968-93</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>수리</commonCodeName>
+          <documentEngName>Request for Prior ArtSearch</documentEngName>
+          <documentName>선행기술조사의뢰서</documentName>
+          <receiptDate>2008.04.04</receiptDate>
+          <receiptNumber>9-1-9999-9999999-89</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>수리</commonCodeName>
+          <documentEngName>Report of Prior Art Search</documentEngName>
+          <documentName>선행기술조사보고서</documentName>
+          <receiptDate>2008.05.15</receiptDate>
+          <receiptNumber>9-1-2008-0030370-58</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>발송처리완료</commonCodeName>
+          <documentEngName>Notice of Submission of Opinion</documentEngName>
+          <documentName>의견제출통지서</documentName>
+          <receiptDate>2008.05.20</receiptDate>
+          <receiptNumber>9-5-2008-0267473-36</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>보정승인간주</commonCodeName>
+          <documentEngName>Amendment including Specification etc.</documentEngName>
+          <documentName>[명세서등 보정]보정서</documentName>
+          <receiptDate>2008.05.28</receiptDate>
+          <receiptNumber>1-1-2008-0382372-07</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>수리</commonCodeName>
+          <documentEngName>Submission of opinion</documentEngName>
+          <documentName>[거절이유 등 통지에 따른 의견]의견(답변, 소명)서</documentName>
+          <receiptDate>2008.05.28</receiptDate>
+          <receiptNumber>1-1-2008-0382373-42</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>발송처리완료</commonCodeName>
+          <documentEngName>Written Decision on Registration</documentEngName>
+          <documentName>등록결정서</documentName>
+          <receiptDate>2008.06.30</receiptDate>
+          <receiptNumber>9-5-2008-0350520-10</receiptNumber>
+        </legalStatusInfo>
+        <legalStatusInfo type="kr.or.kipris.plus.webservice.services.patentbean.LegalStatusInfo">
+          <commonCodeName>수리</commonCodeName>
+          <documentEngName />
+          <documentName>[출원인변경]권리관계변경신고서</documentName>
+          <receiptDate>2008.07.01</receiptDate>
+          <receiptNumber>1-1-2008-0474561-10</receiptNumber>
+        </legalStatusInfo>
+      </legalStatusInfoArray>
+      <priorArtDocumentsInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfoArray">
+        <priorArtDocumentsInfo type="kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo">
+          <documentsNumber>KR1020010090145 A</documentsNumber>
+        </priorArtDocumentsInfo>
+        <priorArtDocumentsInfo type="kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo">
+          <documentsNumber>KR1020050089527 A</documentsNumber>
+        </priorArtDocumentsInfo>
+        <priorArtDocumentsInfo type="kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo">
+          <documentsNumber>KR1020020062413 A</documentsNumber>
+        </priorArtDocumentsInfo>
+        <priorArtDocumentsInfo type="kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo">
+          <documentsNumber>JP52091629 U</documentsNumber>
+        </priorArtDocumentsInfo>
+        <priorArtDocumentsInfo type="kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo">
+          <documentsNumber>KR1020050036880 A</documentsNumber>
+        </priorArtDocumentsInfo>
+        <priorArtDocumentsInfo type="kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo">
+          <documentsNumber>KR200171993 Y1</documentsNumber>
+        </priorArtDocumentsInfo>
+        <priorArtDocumentsInfo type="kr.or.kipris.plus.webservice.services.patentbean.PriorArtDocumentsInfo">
+          <documentsNumber>JP03228906 A</documentsNumber>
+        </priorArtDocumentsInfo>
+      </priorArtDocumentsInfoArray>
+      <priorityInfoArray type="kr.or.kipris.plus.webservice.services.patentbean.PriorityInfoArray" />
+    </items>
+  </body>
+</response>

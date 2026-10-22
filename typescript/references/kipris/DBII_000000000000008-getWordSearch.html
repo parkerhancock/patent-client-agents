@@ -1,0 +1,366 @@
+
+
+
+
+
+
+	<article class="mt-10">
+		<p class="tit">Operation Name</p>
+	</article>
+
+	<p class="p-type1"> getWordSearch</p>
+
+	
+
+	<article class="mt-10">
+		<p class="tit">
+			Request URL
+		</p>
+	</article>
+	<p class="p-type1"><span class="txt-blue">http://plus.kipris.or.kr/kipo-api/kipi/designInfoSearchService</span></p>
+	<article class="mt-10">
+		<p class="tit">
+			Request Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+	
+
+	 
+
+
+
+
+	<div data-ax5grid="apiInutparameterGrid" data-ax5grid-config="{ }" style="height: 146px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid1' ,
+    	target : $("[data-ax5grid='apiInutparameterGrid']"),
+   		columns : [
+ 		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"articleName","paramDataInfo1":"디자인물품명칭","paramDataInfo2":"물품명칭, 출원인, 창작자 및 창작자 주소","paramOrder":"I0001","parentParamOrder":"NONE","path":"-[I0001]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"searchYearRange","paramDataInfo1":"검색년도범위","paramDataInfo2":"0:전체, 최근 1~10년","paramOrder":"I0002","parentParamOrder":"NONE","path":"-[I0002]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"numOfRows","paramDataInfo1":"페이지당 출력 건수","paramDataInfo2":"기본 30, 최대 500","paramOrder":"I0003","parentParamOrder":"NONE","path":"-[I0003]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"pageNo","paramDataInfo1":"페이지 번호","paramDataInfo2":"기본 1","paramOrder":"I0004","parentParamOrder":"NONE","path":"-[I0004]"}];
+
+    $g.setData( {data : data , id : "grid1"});
+
+//     $("[data-ax5grid='apiInutparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].paramData) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Input values ​​(sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="입력값(샘플)">http://plus.kipris.or.kr/kipo-api/kipi/designInfoSearchService/getWordSearch?articleName=한국&searchYearRange=1&ServiceKey=write your service key</textarea>
+	<article class="mt-10">
+		<p class="tit">
+			Response Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+
+
+	<div data-ax5grid="apiOutputparameterGrid" data-ax5grid-config="{ }" style="height: 848px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid2' ,
+    	target : $("[data-ax5grid='apiOutputparameterGrid']"),
+   		columns : [
+		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"items","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0001","parentParamOrder":"NONE","path":"-[G0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" number","paramDataInfo1":"번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0001","path":"-[G0001]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0001","path":"-[G0001]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0001","path":"-[G0001]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationNumber","paramDataInfo1":"공고번호","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0001","path":"-[G0001]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationDate","paramDataInfo1":"공고일자","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0001","path":"-[G0001]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0001","path":"-[G0001]-[D0006]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationDate","paramDataInfo1":"등록일자","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0001","path":"-[G0001]-[D0007]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" priorityNumber","paramDataInfo1":"우선권주장번호","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0001","path":"-[G0001]-[D0008]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" priorityDate","paramDataInfo1":"우선권주장일자","paramDataInfo2":"","paramOrder":"D0009","parentParamOrder":"G0001","path":"-[G0001]-[D0009]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationStatus","paramDataInfo1":"등록상태","paramDataInfo2":"","paramOrder":"D0010","parentParamOrder":"G0001","path":"-[G0001]-[D0010]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicantName","paramDataInfo1":"출원인명","paramDataInfo2":"","paramOrder":"D0011","parentParamOrder":"G0001","path":"-[G0001]-[D0011]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" agentName","paramDataInfo1":"대리인명","paramDataInfo2":"","paramOrder":"D0012","parentParamOrder":"G0001","path":"-[G0001]-[D0012]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" fullText","paramDataInfo1":"전문존재유무","paramDataInfo2":"","paramOrder":"D0013","parentParamOrder":"G0001","path":"-[G0001]-[D0013]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" inventorName","paramDataInfo1":"창작자명","paramDataInfo2":"","paramOrder":"D0014","parentParamOrder":"G0001","path":"-[G0001]-[D0014]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" articleName","paramDataInfo1":"디자인물품명칭","paramDataInfo2":"","paramOrder":"D0015","parentParamOrder":"G0001","path":"-[G0001]-[D0015]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" designMainClassification","paramDataInfo1":"디자인분류코드","paramDataInfo2":"","paramOrder":"D0016","parentParamOrder":"G0001","path":"-[G0001]-[D0016]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" openNumber","paramDataInfo1":"공개번호","paramDataInfo2":"","paramOrder":"D0017","parentParamOrder":"G0001","path":"-[G0001]-[D0017]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" openDate","paramDataInfo1":"공개일자","paramDataInfo2":"","paramOrder":"D0018","parentParamOrder":"G0001","path":"-[G0001]-[D0018]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" dsShpClssCd","paramDataInfo1":"형태분류","paramDataInfo2":"","paramOrder":"D0019","parentParamOrder":"G0001","path":"-[G0001]-[D0019]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" imagePath","paramDataInfo1":"이미지경로","paramDataInfo2":"","paramOrder":"D0020","parentParamOrder":"G0001","path":"-[G0001]-[D0020]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" imagePathLarge","paramDataInfo1":"큰이미지경로","paramDataInfo2":"","paramOrder":"D0021","parentParamOrder":"G0001","path":"-[G0001]-[D0021]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" designNumber","paramDataInfo1":"디자인일련번호","paramDataInfo2":"","paramOrder":"D0022","parentParamOrder":"G0001","path":"-[G0001]-[D0022]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" appReferenceNumber","paramDataInfo1":"출원참조번호","paramDataInfo2":"","paramOrder":"D0023","parentParamOrder":"G0001","path":"-[G0001]-[D0023]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" regReferenceNumber","paramDataInfo1":"등록참조번호","paramDataInfo2":"","paramOrder":"D0024","parentParamOrder":"G0001","path":"-[G0001]-[D0024]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" internationalRegisterNumber","paramDataInfo1":"국제등록번호","paramDataInfo2":"","paramOrder":"D0025","parentParamOrder":"G0001","path":"-[G0001]-[D0025]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" internationalRegisterDate","paramDataInfo1":"국제등록일자","paramDataInfo2":"","paramOrder":"D0026","parentParamOrder":"G0001","path":"-[G0001]-[D0026]"},{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"count","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0002","parentParamOrder":"NONE","path":"-[G0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" numOfRows","paramDataInfo1":"페이지당건수","paramDataInfo2":"","paramOrder":"D0027","parentParamOrder":"G0002","path":"-[G0002]-[D0027]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" pageNo","paramDataInfo1":"페이지번호","paramDataInfo2":"","paramOrder":"D0028","parentParamOrder":"G0002","path":"-[G0002]-[D0028]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" totalCount","paramDataInfo1":"전체건수","paramDataInfo2":"","paramOrder":"D0029","parentParamOrder":"G0002","path":"-[G0002]-[D0029]"}];
+
+    $g.setData({data : data , id : "grid2"});
+
+//     $("[data-ax5grid='apiOutputparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].serviceNm) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Output value (sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="출력값(샘플)">&lt;response&gt;
+&lt;header&gt;
+&lt;requestMsgID&gt;&lt;/requestMsgID&gt;
+&lt;responseTime&gt;2014-10-31 10:41:41.4141&lt;/responseTime&gt;
+&lt;responseMsgID&gt;&lt;/responseMsgID&gt;
+&lt;successYN&gt;&lt;/successYN&gt;
+&lt;resultCode&gt;00&lt;/resultCode&gt;
+&lt;resultMsg&gt;NORMAL SERVICE.&lt;/resultMsg&gt;&lt;/header&gt;
+&lt;body&gt;
+&lt;items&gt;
+&lt;item&gt;
+&lt;agentName&gt;&lt;/agentName&gt;
+&lt;applicantName&gt;임영란&lt;/applicantName&gt;
+&lt;applicationDate&gt;20130513&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020130025043&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;한 벌의 반상기 세트&lt;/articleName&gt;
+&lt;designMainClassification&gt;C5210C&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;C5210C&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;임영란&lt;/inventorName&gt;
+&lt;number&gt;1&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140924&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20140916&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007623810000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;&lt;/agentName&gt;
+&lt;applicantName&gt;김관중&lt;/applicantName&gt;
+&lt;applicationDate&gt;20140314&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020140012920&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;직물지&lt;/articleName&gt;
+&lt;designMainClassification&gt;M1110H N27&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;M1110H N27&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;김관중&lt;/inventorName&gt;
+&lt;number&gt;2&lt;/number&gt;
+&lt;openDate&gt;20140519&lt;/openDate&gt;
+&lt;openNumber&gt;3020140000424&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140923&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20140914&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007619540000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;&lt;agentName&gt;특허법인 신우&lt;/agentName&gt;
+&lt;applicantName&gt;김순복&lt;/applicantName&gt;
+&lt;applicationDate&gt;20121101&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020120052186&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;밥상보&lt;/articleName&gt;
+&lt;designMainClassification&gt;C5510&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;C5510&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;김순복&lt;/inventorName&gt;
+&lt;number&gt;3&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140107&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20131230&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007236960000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;&lt;agentName&gt;특허법인 신우&lt;/agentName&gt;
+&lt;applicantName&gt;김순복&lt;/applicantName&gt;
+&lt;applicationDate&gt;20121101&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020120052185&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;밥상보&lt;/articleName&gt;
+&lt;designMainClassification&gt;C5510&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;C5510&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;김순복&lt;/inventorName&gt;
+&lt;number&gt;4&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140107&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20131230&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007236970000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;&lt;agentName&gt;특허법인 신우&lt;/agentName&gt;
+&lt;applicantName&gt;김순복&lt;/applicantName&gt;
+&lt;applicationDate&gt;20121012&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020120048677&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;밥상보&lt;/articleName&gt;
+&lt;designMainClassification&gt;C5510&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;C5510&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;김순복&lt;/inventorName&gt;
+&lt;number&gt;5&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140107&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20131230&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007236950000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;&lt;agentName&gt;특허법인 신우&lt;/agentName&gt;
+&lt;applicantName&gt;김순복&lt;/applicantName&gt;
+&lt;applicationDate&gt;20121012&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020120048676&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;밥상보&lt;/articleName&gt;
+&lt;designMainClassification&gt;C5510&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;C5510&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;김순복&lt;/inventorName&gt;
+&lt;number&gt;6&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140107&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20131230&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007236980000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;&lt;/agentName&gt;
+&lt;applicantName&gt;강선영&lt;/applicantName&gt;
+&lt;applicationDate&gt;20120919&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020120045085&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;트럼프&lt;/articleName&gt;
+&lt;designMainClassification&gt;E223 F11CA&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;F11CA E223&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;강선영&lt;/inventorName&gt;
+&lt;number&gt;7&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140213&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20140203&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007284300000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;&lt;/agentName&gt;
+&lt;applicantName&gt;강성문&lt;/applicantName&gt;
+&lt;applicationDate&gt;20120918&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020120044889&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;벽시계&lt;/articleName&gt;
+&lt;designMainClassification&gt;J250A&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;J250A&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;강성문&lt;/inventorName&gt;
+&lt;number&gt;8&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20131107&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20131030&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007150850000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;&lt;agentName&gt;이석화&lt;/agentName&gt;
+&lt;applicantName&gt;재진가로등 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20120823&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020120040273&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;조명용 엘이디 모듈&lt;/articleName&gt;
+&lt;designMainClassification&gt;H1729&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;H1729&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;이성형&lt;/inventorName&gt;
+&lt;number&gt;9&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140218&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20140212&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3007300090000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;&lt;/agentName&gt;
+&lt;applicantName&gt;강선영&lt;/applicantName&gt;
+&lt;applicationDate&gt;20120816&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;3020120039293&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;등록&lt;/applicationStatus&gt;
+&lt;articleName&gt;트럼프&lt;/articleName&gt;
+&lt;designMainClassification&gt;E223&lt;/designMainClassification&gt;
+&lt;dsShpClssCd&gt;E223&lt;/dsShpClssCd&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;inventorName&gt;강선영&lt;/inventorName&gt;
+&lt;number&gt;10&lt;/number&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;priorityDate&gt;&lt;/priorityDate&gt;
+&lt;priorityNumber&gt;&lt;/priorityNumber&gt;
+&lt;publicationDate&gt;20140414&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;registrationDate&gt;20130321&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;3006867790000&lt;/registrationNumber&gt;&lt;/item&gt;
+&lt;/items&gt;
+&lt;/body&gt;
+&lt;count&gt;&lt;numOfRows&gt;10&lt;/numOfRows&gt;
+&lt;pageNo&gt;1&lt;/pageNo&gt;
+&lt;totalCount&gt;935&lt;/totalCount&gt;&lt;/count&gt;
+&lt;/response&gt;</textarea>
+							

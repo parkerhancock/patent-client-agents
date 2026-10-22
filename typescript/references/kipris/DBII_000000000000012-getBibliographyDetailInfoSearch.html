@@ -1,0 +1,413 @@
+
+
+
+
+
+
+	<article class="mt-10">
+		<p class="tit">Operation Name</p>
+	</article>
+
+	<p class="p-type1"> getBibliographyDetailInfoSearch</p>
+
+	
+
+	<article class="mt-10">
+		<p class="tit">
+			Request URL
+		</p>
+	</article>
+	<p class="p-type1"><span class="txt-blue">http://plus.kipris.or.kr/</span></p>
+	<article class="mt-10">
+		<p class="tit">
+			Request Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+	
+
+	 
+
+
+
+
+	<div data-ax5grid="apiInutparameterGrid" data-ax5grid-config="{ }" style="height: 68px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid1' ,
+    	target : $("[data-ax5grid='apiInutparameterGrid']"),
+   		columns : [
+ 		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"I0001","parentParamOrder":"NONE","path":"-[I0001]"}];
+
+    $g.setData( {data : data , id : "grid1"});
+
+//     $("[data-ax5grid='apiInutparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].paramData) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Input values ​​(sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="입력값(샘플)">http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getBibliographyDetailInfoSearch?applicationNumber=1020050050026&ServiceKey=servicekey</textarea>
+	<article class="mt-10">
+		<p class="tit">
+			Response Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+
+
+	<div data-ax5grid="apiOutputparameterGrid" data-ax5grid-config="{ }" style="height: 3188px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid2' ,
+    	target : $("[data-ax5grid='apiOutputparameterGrid']"),
+   		columns : [
+		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"item","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0001","parentParamOrder":"NONE","path":"-[G0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" administrativeMeasureInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0002","parentParamOrder":"G0001","path":"-[G0001]-[G0002]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  administrativeMeasureInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0003","parentParamOrder":"G0002","path":"-[G0001]-[G0002]-[G0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   processStateCode","paramDataInfo1":"처리상태코드","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   receiptSendDate","paramDataInfo1":"접수발송일자","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   receiptSendDocumentEngName","paramDataInfo1":"접수발송서류영문명","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   receiptSendDocumentName","paramDataInfo1":"접수발송서류명","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   receiptSendNumber","paramDataInfo1":"접수발송번호","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0005]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   seq","paramDataInfo1":"처리순서","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0006]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" agentInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0004","parentParamOrder":"G0001","path":"-[G0001]-[G0004]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  agentInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0005","parentParamOrder":"G0004","path":"-[G0001]-[G0004]-[G0005]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   agentAddress","paramDataInfo1":"대리인주소","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   agentCode","paramDataInfo1":"대리인번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   nameKoreanLong","paramDataInfo1":"출원인이름","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   nationalCode","paramDataInfo1":"출원인국적코드","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   seq","paramDataInfo1":"처리순서","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" applicantInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0006","parentParamOrder":"G0001","path":"-[G0001]-[G0006]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  applicantInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0007","parentParamOrder":"G0006","path":"-[G0001]-[G0006]-[G0007]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicantAddress","paramDataInfo1":"출원인주소","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0007","path":"-[G0001]-[G0006]-[G0007]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicantCode","paramDataInfo1":"특허고객번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0007","path":"-[G0001]-[G0006]-[G0007]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   nameKoreanLong","paramDataInfo1":"출원인이름","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0007","path":"-[G0001]-[G0006]-[G0007]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   nationalCode","paramDataInfo1":"출원인국적코드","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0007","path":"-[G0001]-[G0006]-[G0007]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   seq","paramDataInfo1":"처리순서","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0007","path":"-[G0001]-[G0006]-[G0007]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" applicationNumberInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0008","parentParamOrder":"G0001","path":"-[G0001]-[G0008]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  applicationNumberInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0009","parentParamOrder":"G0008","path":"-[G0001]-[G0008]-[G0009]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   relatedApplicationDate","paramDataInfo1":"관련출원일자","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0009","path":"-[G0001]-[G0008]-[G0009]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   relatedApplicationNumber","paramDataInfo1":"관련출원번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0009","path":"-[G0001]-[G0008]-[G0009]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" asignProductArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0010","parentParamOrder":"G0001","path":"-[G0001]-[G0010]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  asignProduct","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0011","parentParamOrder":"G0010","path":"-[G0001]-[G0010]-[G0011]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   mainCode","paramDataInfo1":"상품분류코드","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   productName","paramDataInfo1":"지정상품명","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   productNameEng","paramDataInfo1":"지정상품명","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   seq","paramDataInfo1":"지정상품일련번호","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   subCode","paramDataInfo1":"유사군코드","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0011","path":"-[G0001]-[G0010]-[G0011]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" biblioSummaryInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0012","parentParamOrder":"G0001","path":"-[G0001]-[G0012]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  biblioSummaryInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0013","parentParamOrder":"G0012","path":"-[G0001]-[G0012]-[G0013]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   appReferenceNumber","paramDataInfo1":"출원참조번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   classVersion","paramDataInfo1":"상품분류버전","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   designateDate","paramDataInfo1":"사후지정일자","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0005]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   familyFlag","paramDataInfo1":"관련출원번호(패밀리)유무","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0006]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   imageFlag","paramDataInfo1":"견본이미지유무","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0007]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   internationalRegisterDate","paramDataInfo1":"국제등록일자","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0008]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   internationalRegisterNumber","paramDataInfo1":"국제등록번호","paramDataInfo2":"","paramOrder":"D0009","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0009]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   lastDisposalCode","paramDataInfo1":"최종처분코드","paramDataInfo2":"","paramOrder":"D0010","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0010]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   lastDisposalDate","paramDataInfo1":"최종처분일자","paramDataInfo2":"","paramOrder":"D0011","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0011]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   originalApplicationFlag","paramDataInfo1":"원출원유무","paramDataInfo2":"","paramOrder":"D0012","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0012]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   priorityFlag","paramDataInfo1":"우선권주장유무","paramDataInfo2":"","paramOrder":"D0013","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0013]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   productName","paramDataInfo1":"상품의 명칭","paramDataInfo2":"","paramOrder":"D0014","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0014]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   productNameEng","paramDataInfo1":"상품의 명칭(영문)","paramDataInfo2":"","paramOrder":"D0015","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0015]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   publicationDate","paramDataInfo1":"출원공고일자","paramDataInfo2":"","paramOrder":"D0016","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0016]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   publicationFlag","paramDataInfo1":"울원공고유무","paramDataInfo2":"","paramOrder":"D0017","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0017]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   publicationNumber","paramDataInfo1":"출원공고번호","paramDataInfo2":"","paramOrder":"D0018","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0018]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rePublicationFlag","paramDataInfo1":"정정공보유무","paramDataInfo2":"","paramOrder":"D0019","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0019]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   regReferenceNumber","paramDataInfo1":"등록참조번호","paramDataInfo2":"","paramOrder":"D0020","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0020]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registerFlag","paramDataInfo1":"등록유무","paramDataInfo2":"","paramOrder":"D0021","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0021]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registerStatus","paramDataInfo1":"등록상태","paramDataInfo2":"공개, 등록, 거절, 무효, 소멸, 취하, 포기","paramOrder":"D0022","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0022]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registrationDate","paramDataInfo1":"등록일자","paramDataInfo2":"","paramOrder":"D0023","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0023]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registrationNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0024","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0024]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registrationPublicDate","paramDataInfo1":"등록공고일자","paramDataInfo2":"","paramOrder":"D0025","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0025]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registrationPublicGazetteFlag","paramDataInfo1":"등록공고공보유무","paramDataInfo2":"","paramOrder":"D0026","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0026]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registrationPublicNumber","paramDataInfo1":"등록공고번호","paramDataInfo2":"","paramOrder":"D0027","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0027]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   retroDate","paramDataInfo1":"최종소급일자","paramDataInfo2":"","paramOrder":"D0028","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0028]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   retroDivisionCode","paramDataInfo1":"소급구분","paramDataInfo2":"","paramOrder":"D0029","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0029]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   tmDivisionCode","paramDataInfo1":"명칭구분코드","paramDataInfo2":"","paramOrder":"D0030","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0030]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   tmNameAcquisitionDate","paramDataInfo1":"상표명칭입수일자","paramDataInfo2":"","paramOrder":"D0031","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0031]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   trademarkDivisionCode","paramDataInfo1":"상표구분코드","paramDataInfo2":"","paramOrder":"D0032","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0032]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   trlFlag","paramDataInfo1":"심판청구유무","paramDataInfo2":"","paramOrder":"D0033","parentParamOrder":"G0013","path":"-[G0001]-[G0012]-[G0013]-[D0033]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" CoAgreementInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0014","parentParamOrder":"G0001","path":"-[G0001]-[G0014]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  CoAgreementInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0015","parentParamOrder":"G0014","path":"-[G0001]-[G0014]-[G0015]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   inputDate","paramDataInfo1":"입력일자","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   registrationNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   seq","paramDataInfo1":"지정상품일련번호","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0015","path":"-[G0001]-[G0014]-[G0015]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" originalApplicationIndicationArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0016","parentParamOrder":"G0001","path":"-[G0001]-[G0016]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  originalApplicationIndication","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0017","parentParamOrder":"G0016","path":"-[G0001]-[G0016]-[G0017]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   originalApplicationDate","paramDataInfo1":"원출원일자","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   originalApplicationNumber","paramDataInfo1":"원출원번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" partialRejectInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0018","parentParamOrder":"G0001","path":"-[G0001]-[G0018]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  partialRejectInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0019","parentParamOrder":"G0018","path":"-[G0001]-[G0018]-[G0019]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   mainCode","paramDataInfo1":"상품분류코드","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   productName","paramDataInfo1":"지정상품명","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   productNameEng","paramDataInfo1":"지정상품명","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   seq","paramDataInfo1":"지정상품일련번호","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   subCode","paramDataInfo1":"유사군코드","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" priorityClaimInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0020","parentParamOrder":"G0001","path":"-[G0001]-[G0020]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  priorityClaimInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0021","parentParamOrder":"G0020","path":"-[G0001]-[G0020]-[G0021]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   priorityApplicationCountry","paramDataInfo1":"우선권주장국가","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   priorityApplicationDate","paramDataInfo1":"우선권주장일자","paramDataInfo2":"","paramOrder":"D0059","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0059]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   priorityApplicationNumber","paramDataInfo1":"우선권주장번호","paramDataInfo2":"","paramOrder":"D0060","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0060]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" revisionPublicationInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0022","parentParamOrder":"G0001","path":"-[G0001]-[G0022]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  revisionPublicationInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0023","parentParamOrder":"G0022","path":"-[G0001]-[G0022]-[G0023]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   number","paramDataInfo1":"순번","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   openingPublicTypeCodeName","paramDataInfo1":"공고종류","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   path","paramDataInfo1":"파일경로","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   pdfName","paramDataInfo1":"파일명","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0004]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   publicationDate","paramDataInfo1":"발간일자","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" sampleImageInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0024","parentParamOrder":"G0001","path":"-[G0001]-[G0024]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  sampleImageInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0025","parentParamOrder":"G0024","path":"-[G0001]-[G0024]-[G0025]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   imageName","paramDataInfo1":"이미지명","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0025","path":"-[G0001]-[G0024]-[G0025]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   path","paramDataInfo1":"큰이미지경로","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0025","path":"-[G0001]-[G0024]-[G0025]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   smallPath","paramDataInfo1":"이미지경로","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0025","path":"-[G0001]-[G0024]-[G0025]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" similarityCodeInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0026","parentParamOrder":"G0001","path":"-[G0001]-[G0026]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  similarityCodeInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0027","parentParamOrder":"G0026","path":"-[G0001]-[G0026]-[G0027]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   similarCode","paramDataInfo1":"유사군코드","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0027","path":"-[G0001]-[G0026]-[G0027]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" vfersionInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0028","parentParamOrder":"G0001","path":"-[G0001]-[G0028]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  vfersionInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0029","parentParamOrder":"G0028","path":"-[G0001]-[G0028]-[G0029]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   cd","paramDataInfo1":"국제분류정보","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0029","path":"-[G0001]-[G0028]-[G0029]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   enNm","paramDataInfo1":"국제분류명","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0029","path":"-[G0001]-[G0028]-[G0029]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   koNm","paramDataInfo1":"국제분류명","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0029","path":"-[G0001]-[G0028]-[G0029]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   ver","paramDataInfo1":"국제분류버전","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0029","path":"-[G0001]-[G0028]-[G0029]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" viennaCodeInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0030","parentParamOrder":"G0001","path":"-[G0001]-[G0030]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  viennaCodeInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0031","parentParamOrder":"G0030","path":"-[G0001]-[G0030]-[G0031]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rowNumber","paramDataInfo1":"번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0031","path":"-[G0001]-[G0030]-[G0031]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   viennaCode","paramDataInfo1":"도형분류코드","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0031","path":"-[G0001]-[G0030]-[G0031]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   viennaCodeDescription","paramDataInfo1":"도형분류코드설명","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0031","path":"-[G0001]-[G0030]-[G0031]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" publicationInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0032","parentParamOrder":"G0001","path":"-[G0001]-[G0032]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  publicationInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0033","parentParamOrder":"G0032","path":"-[G0001]-[G0032]-[G0033]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   path","paramDataInfo1":"파일경로","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0033","path":"-[G0001]-[G0032]-[G0033]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   pdfName","paramDataInfo1":"파일명","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0033","path":"-[G0001]-[G0032]-[G0033]-[D0002]"}];
+
+    $g.setData({data : data , id : "grid2"});
+
+//     $("[data-ax5grid='apiOutputparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].serviceNm) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Output value (sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="출력값(샘플)"><response>
+<header>
+<requestMsgID/>
+<responseTime>2025-03-04 09:28:12.2812</responseTime>
+<responseMsgID/>
+<successYN>Y</successYN>
+<resultCode>00</resultCode>
+<resultMsg>NORMAL SERVICE.</resultMsg>
+</header>
+<body>
+<item>
+<administrativeMeasureInfoArray>
+<administrativeMeasureInfo>
+<processStateCode>수리</processStateCode>
+<receiptSendDate>2023.09.14</receiptSendDate>
+<receiptSendDocumentEngName>[Trademark Registration Application][Trademark] Application for Trademark Registration</receiptSendDocumentEngName>
+<receiptSendDocumentName>[상표등록출원][상표]상표등록출원서</receiptSendDocumentName>
+<receiptSendNumber>1-1-2023-1020613-57</receiptSendNumber>
+<seq>1</seq>
+</administrativeMeasureInfo>
+<administrativeMeasureInfo>
+<processStateCode>수리</processStateCode>
+<receiptSendDate>2023.09.21</receiptSendDate>
+<receiptSendDocumentEngName> </receiptSendDocumentEngName>
+<receiptSendDocumentName>[우선심사신청]심사청구서·우선심사신청서</receiptSendDocumentName>
+<receiptSendNumber>1-1-2023-1048954-55</receiptSendNumber>
+<seq>2</seq>
+</administrativeMeasureInfo>
+<administrativeMeasureInfo>
+<processStateCode>수리</processStateCode>
+<receiptSendDate>2023.10.05</receiptSendDate>
+<receiptSendDocumentEngName> </receiptSendDocumentEngName>
+<receiptSendDocumentName>우선심사용 선행상표조사보고서</receiptSendDocumentName>
+<receiptSendNumber>9-2-9999-9999999-90</receiptSendNumber>
+<seq>3</seq>
+</administrativeMeasureInfo>
+<administrativeMeasureInfo>
+<processStateCode>발송처리완료</processStateCode>
+<receiptSendDate>2023.10.23</receiptSendDate>
+<receiptSendDocumentEngName>Decision on Preferential Examination</receiptSendDocumentEngName>
+<receiptSendDocumentName>우선심사결정서</receiptSendDocumentName>
+<receiptSendNumber>9-5-2023-0952848-41</receiptSendNumber>
+<seq>4</seq>
+</administrativeMeasureInfo>
+<administrativeMeasureInfo>
+<processStateCode>발송처리완료</processStateCode>
+<receiptSendDate>2023.12.04</receiptSendDate>
+<receiptSendDocumentEngName>Notification of reason for refusal</receiptSendDocumentEngName>
+<receiptSendDocumentName>의견제출통지서</receiptSendDocumentName>
+<receiptSendNumber>9-5-2023-1089020-89</receiptSendNumber>
+<seq>5</seq>
+</administrativeMeasureInfo>
+<administrativeMeasureInfo>
+<processStateCode>발송처리완료</processStateCode>
+<receiptSendDate>2024.05.06</receiptSendDate>
+<receiptSendDocumentEngName>Notice of PPreliminarily Refusing the Registration of Trademark Application</receiptSendDocumentEngName>
+<receiptSendDocumentName>거절예고통지서</receiptSendDocumentName>
+<receiptSendNumber>9-5-2024-0377509-36</receiptSendNumber>
+<seq>6</seq>
+</administrativeMeasureInfo>
+<administrativeMeasureInfo>
+<processStateCode>발송처리완료</processStateCode>
+<receiptSendDate>2024.08.29</receiptSendDate>
+<receiptSendDocumentEngName>Decision to Refuse a Patent</receiptSendDocumentEngName>
+<receiptSendDocumentName>거절결정서</receiptSendDocumentName>
+<receiptSendNumber>9-5-2024-0729429-94</receiptSendNumber>
+<seq>7</seq>
+</administrativeMeasureInfo>
+<administrativeMeasureInfo>
+<processStateCode>발송처리완료</processStateCode>
+<receiptSendDate>2025.01.13</receiptSendDate>
+<receiptSendDocumentEngName>Written decision on publication of examined application</receiptSendDocumentEngName>
+<receiptSendDocumentName>출원공고결정서</receiptSendDocumentName>
+<receiptSendNumber>9-5-2025-0044672-84</receiptSendNumber>
+<seq>8</seq>
+</administrativeMeasureInfo>
+</administrativeMeasureInfoArray>
+<agentInfoArray>
+<agentInfo>
+<agentAddress>서울특별시 강남구 테헤란로**길 **, ***호(대치동,보성빌딩)</agentAddress>
+<agentCode>920201000425</agentCode>
+<nameKoreanLong>특허법인이씨엠</nameKoreanLong>
+<nationalCode>대한민국</nationalCode>
+<seq>1</seq>
+</agentInfo>
+</agentInfoArray>
+<applicantInfoArray>
+<applicantInfo>
+<applicantAddress>경기도 화성...</applicantAddress>
+<applicantCode>420060063799</applicantCode>
+<nameKoreanLong>성형원</nameKoreanLong>
+<nationalCode>대한민국</nationalCode>
+<seq>1</seq>
+</applicantInfo>
+</applicantInfoArray>
+<applicationNumberInfoArray/>
+<asignProductArray>
+<asignProduct>
+<mainCode>35</mainCode>
+<productName>35MM 카메라 도매업</productName>
+<productNameEng> </productNameEng>
+<seq>1</seq>
+<subCode>S2034</subCode>
+</asignProduct>
+<asignProduct>
+<mainCode>35</mainCode>
+<productName>3D 스캐너 도매업</productName>
+<productNameEng> </productNameEng>
+<seq>2</seq>
+<subCode>S2039</subCode>
+</asignProduct>
+<asignProduct>
+<mainCode>35</mainCode>
+<productName>3D 카메라 리그 제어 모듈 도매업</productName>
+<productNameEng> </productNameEng>
+<seq>3</seq>
+<subCode>S2034</subCode>
+</asignProduct>
+<asignProduct>
+<mainCode>35</mainCode>
+<productName>CCD 카메라 도매업</productName>
+<productNameEng> </productNameEng>
+<seq>4</seq>
+<subCode>S2034</subCode>
+</asignProduct>
+<asignProduct>
+<mainCode>35</mainCode>
+<productName>CCTV IR 돔카메라 도매업</productName>
+<productNameEng> </productNameEng>
+<seq>5</seq>
+<subCode>S2034</subCode>
+</asignProduct>
+<asignProduct>
+<mainCode>35</mainCode>
+<productName>기록된 컴퓨터 작동프로그램 도매업</productName>
+<productNameEng> </productNameEng>
+<seq>6</seq>
+<subCode>S2039</subCode>
+</asignProduct>
+<asignProduct>
+<mainCode>35</mainCode>
+<productName>기본 입출력 시스템 소프트웨어 도매업</productName>
+<productNameEng> </productNameEng>
+<seq>7</seq>
+<subCode>S2039</subCode>
+</asignProduct>
+</asignProductArray>
+<biblioSummaryInfoArray>
+<biblioSummaryInfo>
+<appReferenceNumber/>
+<applicationDate>20230914</applicationDate>
+<applicationNumber>4020230168937</applicationNumber>
+<classVersion> </classVersion>
+<designateDate> </designateDate>
+<familyFlag>N</familyFlag>
+<imageFlag>Y</imageFlag>
+<internationalRegisterDate> </internationalRegisterDate>
+<internationalRegisterNumber> </internationalRegisterNumber>
+<lastDisposalCode> </lastDisposalCode>
+<lastDisposalDate> </lastDisposalDate>
+<originalApplicationFlag>N</originalApplicationFlag>
+<priorityFlag>N</priorityFlag>
+<productName> </productName>
+<productNameEng> </productNameEng>
+<publicationDate>20250115</publicationDate>
+<publicationFlag>Y</publicationFlag>
+<publicationNumber>4020250009085</publicationNumber>
+<rePublicationFlag>N</rePublicationFlag>
+<regReferenceNumber/>
+<registerFlag>N</registerFlag>
+<registerStatus>공고</registerStatus>
+<registrationDate> </registrationDate>
+<registrationNumber> </registrationNumber>
+<registrationPublicDate> </registrationPublicDate>
+<registrationPublicGazetteFlag>N</registrationPublicGazetteFlag>
+<registrationPublicNumber> </registrationPublicNumber>
+<retroDate>20230914</retroDate>
+<retroDivisionCode> </retroDivisionCode>
+<tmDivisionCode>도형상표</tmDivisionCode>
+<tmNameAcquisitionDate>20250304</tmNameAcquisitionDate>
+<trademarkDivisionCode>국내상표 도형상표 일반상표</trademarkDivisionCode>
+<trlFlag>N</trlFlag>
+</biblioSummaryInfo>
+</biblioSummaryInfoArray>
+<originalApplicationIndicationArray/>
+<partialRejectInfoArray>
+<partialRejectInfo>
+<mainCode>35</mainCode>
+<productName>3D 프린터 및 스캐너 도매업</productName>
+<productNameEng> </productNameEng>
+<seq>1</seq>
+<subCode>S2038</subCode>
+</partialRejectInfo>
+</partialRejectInfoArray>
+<priorityClaimInfoArray/>
+<publicationInfoArray>
+<publicationInfo>
+<path>http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=6c650beb4cee9ce48d38b2f192085e036cf889a7496c27afe5f3c85f86e4f93e98bcb19ce0a7c80032b30836f2ace100636138c85e2b0dd48580952bb78bc4687d28a810bfc77680</path>
+<pdfName>4020230168937.pdf</pdfName>
+</publicationInfo>
+</publicationInfoArray>
+<revisionPublicationInfoArray/>
+<sampleImageInfoArray>
+<sampleImageInfo>
+<imageName>4020230168937_tm000001.jpg</imageName>
+<path>http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e2991ba5d9d09407d4bd08f911418aa253f75d04908bf4d3aba0cf711763dcdef3433110918a2edb573</path>
+<smallPath>http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a913440be47db3b03c4b73496f6a5d6185e2c10b04d6ae0f7deb7bfe6ca20550f8412d9c82aa67459441a5</smallPath>
+</sampleImageInfo>
+</sampleImageInfoArray>
+<similarityCodeInfoArray>
+<similarityCodeInfo>
+<similarCode>S2034</similarCode>
+</similarityCodeInfo>
+<similarityCodeInfo>
+<similarCode>S2038</similarCode>
+</similarityCodeInfo>
+<similarityCodeInfo>
+<similarCode>S2039</similarCode>
+</similarityCodeInfo>
+</similarityCodeInfoArray>
+<vfersionInfoArray>
+<vfersionInfo>
+<cd>35류11판</cd>
+<enNm> </enNm>
+<koNm>광고업; 사업관리업; 기업경영업; 사무처리업</koNm>
+<ver>11</ver>
+</vfersionInfo>
+</vfersionInfoArray>
+<viennaCodeInfoArray>
+<viennaCodeInfo>
+<rowNumber>1</rowNumber>
+<viennaCode>261111</viennaCode>
+<viennaCodeDescription>꺽인 / 절단된 선 또는 띠 (A- 26-11-13 제외)</viennaCodeDescription>
+</viennaCodeInfo>
+<viennaCodeInfo>
+<rowNumber>2</rowNumber>
+<viennaCode>260312</viennaCode>
+<viennaCodeDescription>하나 이상의 기타 다른 기하 도형을 포함하는 삼각형[Note]구부러진 선 혹은 직선이 포함된 삼각형 포함</viennaCodeDescription>
+</viennaCodeInfo>
+<viennaCodeInfo>
+<rowNumber>3</rowNumber>
+<viennaCode>260304</viennaCode>
+<viennaCodeDescription>병렬로 놓이거나 접하거나 또는 교차된 다수의 삼각형</viennaCodeDescription>
+</viennaCodeInfo>
+<viennaCodeInfo>
+<rowNumber>4</rowNumber>
+<viennaCode>260302</viennaCode>
+<viennaCodeDescription>두 개의 삼각형(하나의 내부에 다른 하나가 있는 삼각형)</viennaCodeDescription>
+</viennaCodeInfo>
+<viennaCodeInfo>
+<rowNumber>5</rowNumber>
+<viennaCode>260326</viennaCode>
+<viennaCodeDescription>일부가 잘린 삼각형 </viennaCodeDescription>
+</viennaCodeInfo>
+</viennaCodeInfoArray>
+</item>
+</body>
+</response></textarea>
+							

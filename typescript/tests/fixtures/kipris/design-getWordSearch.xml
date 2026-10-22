@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc-derived, not recorded: the documented sample response for getWordSearch on the KIPRIS Plus DBII_000000000000008 page (references/kipris), trimmed to two items for searches. -->
+<response>
+  <header>
+    <requestMsgID />
+    <responseTime>2014-10-31 10:41:41.4141</responseTime>
+    <responseMsgID />
+    <successYN />
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <agentName />
+        <applicantName>임영란</applicantName>
+        <applicationDate>20130513</applicationDate>
+        <applicationNumber>3020130025043</applicationNumber>
+        <applicationStatus>등록</applicationStatus>
+        <articleName>한 벌의 반상기 세트</articleName>
+        <designMainClassification>C5210C</designMainClassification>
+        <dsShpClssCd>C5210C</dsShpClssCd>
+        <fullText>Y</fullText>
+        <inventorName>임영란</inventorName>
+        <number>1</number>
+        <openDate />
+        <openNumber />
+        <priorityDate />
+        <priorityNumber />
+        <publicationDate>20140924</publicationDate>
+        <publicationNumber />
+        <registrationDate>20140916</registrationDate>
+        <registrationNumber>3007623810000</registrationNumber>
+      </item>
+      <item>
+        <agentName />
+        <applicantName>김관중</applicantName>
+        <applicationDate>20140314</applicationDate>
+        <applicationNumber>3020140012920</applicationNumber>
+        <applicationStatus>등록</applicationStatus>
+        <articleName>직물지</articleName>
+        <designMainClassification>M1110H N27</designMainClassification>
+        <dsShpClssCd>M1110H N27</dsShpClssCd>
+        <fullText>Y</fullText>
+        <inventorName>김관중</inventorName>
+        <number>2</number>
+        <openDate>20140519</openDate>
+        <openNumber>3020140000424</openNumber>
+        <priorityDate />
+        <priorityNumber />
+        <publicationDate>20140923</publicationDate>
+        <publicationNumber />
+        <registrationDate>20140914</registrationDate>
+        <registrationNumber>3007619540000</registrationNumber>
+      </item>
+    </items>
+  </body>
+  <count>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>935</totalCount>
+  </count>
+</response>

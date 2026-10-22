@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc-derived, not recorded: the documented sample response for getWordSearch on the KIPRIS Plus DBII_000000000000012 page (references/kipris), trimmed to two items for searches. -->
+<response>
+  <header>
+    <requestMsgID />
+    <responseTime>2017-02-06 10:01:13.113</responseTime>
+    <responseMsgID />
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <agentName />
+        <applicantName>롯데푸드 주식회사</applicantName>
+        <applicationDate>20160531</applicationDate>
+        <applicationNumber>4020160040342</applicationNumber>
+        <applicationStatus>등록</applicationStatus>
+        <bigDrawing>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29d6c998e272153d94df05fc2bc3ff671edf1c22b8fc2fcbb70c0e0a8826417cbe
+</bigDrawing>
+        <classificationCode>29 30</classificationCode>
+        <drawing>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a9134423c9c66155bdee316d00095335d451e08683247460d44cfb8e03eb7e099f17fe
+</drawing>
+        <fullText>Y</fullText>
+        <indexNo>1</indexNo>
+        <priorityDate />
+        <priorityNumber />
+        <publicationDate>20161031</publicationDate>
+        <publicationNumber>4020160113502</publicationNumber>
+        <regPrivilegeName>롯데푸드 주식회사</regPrivilegeName>
+        <registrationDate>20170124</registrationDate>
+        <registrationNumber>4012292000000</registrationNumber>
+        <registrationPublicDate>20170201</registrationPublicDate>
+        <registrationPublicNumber>4020170009446</registrationPublicNumber>
+        <title>롯데푸드 하이쿡</title>
+        <viennaCode />
+      </item>
+      <item>
+        <agentName>황의만</agentName>
+        <applicantName>롯데글로벌로지스 주식회사</applicantName>
+        <applicationDate>20161121</applicationDate>
+        <applicationNumber>4020160101664</applicationNumber>
+        <applicationStatus>출원</applicationStatus>
+        <bigDrawing>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29d6c998e272153d9496d9a4872571ea82a73893b67a30133fedabf1c0941a7540
+</bigDrawing>
+        <classificationCode>39</classificationCode>
+        <drawing>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a9134423c9c66155bdee31bcb1f22e208f970aed65145c198b6dba9c8b754c9c8ebc34
+</drawing>
+        <fullText>N</fullText>
+        <indexNo>2</indexNo>
+        <priorityDate />
+        <priorityNumber />
+        <publicationDate />
+        <publicationNumber />
+        <regPrivilegeName />
+        <registrationDate />
+        <registrationNumber />
+        <registrationPublicDate />
+        <registrationPublicNumber />
+        <title>롯데택배</title>
+        <viennaCode />
+      </item>
+    </items>
+  </body>
+  <count>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>4431</totalCount>
+  </count>
+</response>

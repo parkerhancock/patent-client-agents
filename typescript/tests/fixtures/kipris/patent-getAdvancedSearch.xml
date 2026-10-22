@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc-derived, not recorded: the documented sample response for getAdvancedSearch on the KIPRIS Plus DBII_000000000000001 page (references/kipris), trimmed to two items for searches. -->
+<response>
+  <header>
+    <requestMsgID />
+    <responseTime>2017-02-10 13:12:16.1216</responseTime>
+    <responseMsgID />
+    <successYN>Y</successYN>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <applicantName>한국전자통신연구원</applicantName>
+        <applicationDate>20060616</applicationDate>
+        <applicationNumber>1020060054155</applicationNumber>
+        <astrtCont>
+1. 청구범위에 기재된 발명이 속한 기술분야본 발명은 유비쿼터스 센서 네트워크에서의 원격제어용 센서 노드, 및 이동통신 단말기를 이용한 센서노드 원격 제어 방법에 관한 것임.2. 발명이 해결하려고 하는 기술적 과제본 발명은 유비쿼터스 센서 네트워크(USN)에서의 센서 노드와 연결된 임의의 사고감지 대상 장치(예를 들면, 변압기)에 문제가 발생한 경우 관리자가 현장에 출동하지 않고도 자신의 이동통신 단말기를 이용하여 센서 노드를 원격 제어함으로써 신속/용이하게 사고에 대처할 수 있게 하는, 유비쿼터스 센서 네트워크에서의 원격제어용 센서 노드, 및 이동통신 단말기를 이용한 센서노드 원격 제어 방법을 제공하는데 그 목적이 있음.3. 발명의 해결방법의 요지본 발명은, 유비쿼터스 센서 네트워크(USN)에서의 원격제어용 센서 노드에 있어서, 사고감지 대상 장치 및 그 환경에 대한 물리량을 측정하여 사고발생 감지정보를 생성하기 위한 센싱 수단; 센싱 제어 정보, 라우팅 정보 및 통신프로토콜 관련 데이터를 저장하는 저장 수단; 상기 저장된 라우팅 정보를 이용하여, 사고발생 감지정보를 전달할 이웃한 센서노드나 싱크노드(이웃 노드)의 위치를 탐색하기 위한 경로 탐색 수단; 상기 센싱 수단에서 출력되거나 다른 센서 노드로부터 전달된 사고발생 감지정보를 무선신호로서 상기 이웃 노드로 전송하거나, 관리자의 이동통신 단말기...(이하생략)
+</astrtCont>
+        <bigDrawing>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cfe49d03e6a3dce01a4cdc06f54ae4fb03c595c9cf8f59121103f901f0de38e94
+</bigDrawing>
+        <drawing>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe46c22163f668395d47a3b0ebcaa316c32acc0008db1b5a56e062babd6c97708f4
+</drawing>
+        <indexNo>1</indexNo>
+        <inventionTitle>
+유비쿼터스 센서 네트워크에서의 원격제어용 센서 노드, 및이동통신 단말기를 이용한 센서노드 원격 제어 방법(Sensor Node for Remote Control in Ubiquitous SensorNetworks, and Method for Remote Control of Sensor Nodeusing Mobile Terminal)
+</inventionTitle>
+        <ipcNumber>H04Q 9/00 | G06K 17/00 | H04W 40/02 | G06Q 50/00J0</ipcNumber>
+        <openDate>20070607</openDate>
+        <openNumber>1020070057627</openNumber>
+        <publicationDate>20070712</publicationDate>
+        <publicationNumber />
+        <registerDate>20070705</registerDate>
+        <registerNumber>1007383330000</registerNumber>
+        <registerStatus>소멸</registerStatus>
+      </item>
+      <item>
+        <applicantName>만도기계 주식회사</applicantName>
+        <applicationDate>19960106</applicationDate>
+        <applicationNumber>1019960000139</applicationNumber>
+        <astrtCont>
+본 발명은 자동차에 사용되는 VR센서를 몰딩형으로 제작하는 방법에 관한 발명으로, 특히 자동차의 기능향상이나 자동화등을 위한 데이타로서의 차속등을 센싱하여 이를 처리하는 제어기둥에 송신하는 센서등을 제작하는 개량된 제작법에 관한 발명이다. 본 발명은 VR센서를 제작함에 있어서; ①수지개의 보빈(13)을 사출하는 공정과 ,②이에 마그네트(12)와 포일피스(15)를 삽입하는 공정과, ③리드프레임(11)을 융착하는 공정과, ④애나멜드코일(14)을 상기 보빈(13)에 권선하여 보빈어셈블리(1)를 완성하는 공정과, ⑤상기 보빈어셈블리(1)의 외주를 몰딩하는 공정과 ⑥와이어(141)를 상기 리드프레임(11)에 연결하는 공정과, ⑦상기 리드프레임(11)에서 인출되는 와이어(141)와 리드 프레임 상부를 몰딩하는 공정 및⑧ 상기⑤ 공정으로 형성되는 케이블 아웃렛몰딩(23)을 감쌓는 외피하우징(24)을 몰딩하는 공정으로 이루어진 것으로, 저렴하고도 손쉽게 제작이 되며, 밀봉이나 방수는 물론 전기적인 절연성능도 향상되며 완충작용도 되므로 기능부의 보호에도 완벽을 기하로서 있는 효과적인 발명인 것이다.
+</astrtCont>
+        <bigDrawing>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9c6468d92a0531fdc417369930ec36254a881a512bf4d0d5c4c26f337426926439
+</bigDrawing>
+        <drawing>
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe477b8e79b56045f0750aa20ab99c4c542d1b2a9bbfd515f1ed03ca78621c9fa23
+</drawing>
+        <indexNo>2</indexNo>
+        <inventionTitle>몰딩형 VR센서(속도센서) 제작방법</inventionTitle>
+        <ipcNumber>G01P 3/00 | G01P 3/488</ipcNumber>
+        <openDate>19970812</openDate>
+        <openNumber>1019970059735</openNumber>
+        <publicationDate />
+        <publicationNumber />
+        <registerDate />
+        <registerNumber />
+        <registerStatus>거절</registerStatus>
+      </item>
+    </items>
+  </body>
+  <count>
+    <numOfRows>20</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>22251</totalCount>
+  </count>
+</response>

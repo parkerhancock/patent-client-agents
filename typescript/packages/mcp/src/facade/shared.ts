@@ -7,6 +7,7 @@ import type {
   EdisClient,
   EpoOpsClient,
   FeesClient,
+  KiprisClient,
   MpepClient,
   OfficeActionAnalyticsClient,
   OfficeActionsClient,
@@ -39,7 +40,7 @@ export {
 
 /**
  * Clients behind the curated facade. Credential-gated families (TSDR, EPO
- * OPS) are optional; their facade branches report how to enable them. USITC
+ * OPS, KIPRIS) are optional; their facade branches report how to enable them. USITC
  * EDIS is optional too, but, as in Python, its tools and routing values are
  * registered only when it is configured.
  */
@@ -68,6 +69,7 @@ export interface FacadeClients {
   epoOps?: EpoOpsClient | undefined;
   /** USITC EDIS; when present the facade adds the Python EDIS-enabled surface. */
   edis?: EdisClient | undefined;
+  kipris?: KiprisClient | undefined;
 }
 export type FacadeRegistrar = (
   server: import("@prefecthq/fastmcp-ts/server").FastMCP,
@@ -88,9 +90,13 @@ export function notPorted(feature: string, alternative?: string): never {
   );
 }
 /** A credential-gated family that is not configured on this server. */
-export function notConfigured(feature: string, variables: string): never {
+export function notConfigured(
+  feature: string,
+  variables: string,
+  alternative?: string,
+): never {
   throw new Error(
-    `${feature} is not enabled on this server (${variables} is not configured).`,
+    `${feature} is not enabled on this server (${variables} is not configured).${alternative ? ` ${alternative}` : ""}`,
   );
 }
 export const asList = (value: string | string[]) =>

@@ -1,0 +1,690 @@
+
+
+
+
+
+
+	<article class="mt-10">
+		<p class="tit">Operation Name</p>
+	</article>
+
+	<p class="p-type1"> getAdvancedSearch</p>
+
+	
+
+	<article class="mt-10">
+		<p class="tit">
+			Request URL
+		</p>
+	</article>
+	<p class="p-type1"><span class="txt-blue">http://plus.kipris.or.kr/</span></p>
+	<article class="mt-10">
+		<p class="tit">
+			Request Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+	
+
+	 
+
+
+
+
+	<div data-ax5grid="apiInutparameterGrid" data-ax5grid-config="{ }" style="height: 822px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid1' ,
+    	target : $("[data-ax5grid='apiInutparameterGrid']"),
+   		columns : [
+ 		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"word","paramDataInfo1":"자유검색","paramDataInfo2":"","paramOrder":"I0001","parentParamOrder":"NONE","path":"-[I0001]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"inventionTitle","paramDataInfo1":"발명의명칭","paramDataInfo2":"","paramOrder":"I0002","parentParamOrder":"NONE","path":"-[I0002]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"astrtCont","paramDataInfo1":"초록","paramDataInfo2":"","paramOrder":"I0003","parentParamOrder":"NONE","path":"-[I0003]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"claimScope","paramDataInfo1":"청구범위","paramDataInfo2":"","paramOrder":"I0004","parentParamOrder":"NONE","path":"-[I0004]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"ipcNumber","paramDataInfo1":"IPC 분류코드","paramDataInfo2":"","paramOrder":"I0005","parentParamOrder":"NONE","path":"-[I0005]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"I0006","parentParamOrder":"NONE","path":"-[I0006]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"openNumber","paramDataInfo1":"공개번호","paramDataInfo2":"","paramOrder":"I0007","parentParamOrder":"NONE","path":"-[I0007]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"publicationNumber","paramDataInfo1":"공보(고)번호","paramDataInfo2":"","paramOrder":"I0008","parentParamOrder":"NONE","path":"-[I0008]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"registerNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"I0009","parentParamOrder":"NONE","path":"-[I0009]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"priorityApplicationNumber","paramDataInfo1":"우선권주장번호","paramDataInfo2":"","paramOrder":"I0010","parentParamOrder":"NONE","path":"-[I0010]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"internationalApplicationNumber","paramDataInfo1":"국제출원번호","paramDataInfo2":"","paramOrder":"I0011","parentParamOrder":"NONE","path":"-[I0011]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"internationOpenNumber","paramDataInfo1":"국제공개번호","paramDataInfo2":"","paramOrder":"I0012","parentParamOrder":"NONE","path":"-[I0012]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0013","parentParamOrder":"NONE","path":"-[I0013]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"openDate","paramDataInfo1":"공개일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0014","parentParamOrder":"NONE","path":"-[I0014]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"publicationDate","paramDataInfo1":"공고일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0015","parentParamOrder":"NONE","path":"-[I0015]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"registerDate","paramDataInfo1":"등록일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0016","parentParamOrder":"NONE","path":"-[I0016]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"priorityApplicationDate","paramDataInfo1":"우선권주장일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0017","parentParamOrder":"NONE","path":"-[I0017]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"internationalApplicationDate","paramDataInfo1":"국제출원일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0018","parentParamOrder":"NONE","path":"-[I0018]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"internationOpenDate","paramDataInfo1":"국제공개일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0019","parentParamOrder":"NONE","path":"-[I0019]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicant","paramDataInfo1":"출원인명/특허고객번호","paramDataInfo2":"","paramOrder":"I0020","parentParamOrder":"NONE","path":"-[I0020]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"inventors","paramDataInfo1":"발명자명/특허고객번호","paramDataInfo2":"","paramOrder":"I0021","parentParamOrder":"NONE","path":"-[I0021]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"agent","paramDataInfo1":"대리인명/대리인코드","paramDataInfo2":"","paramOrder":"I0022","parentParamOrder":"NONE","path":"-[I0022]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"rightHoler","paramDataInfo1":"등록권자 (특허권자)","paramDataInfo2":"","paramOrder":"I0023","parentParamOrder":"NONE","path":"-[I0023]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"patent","paramDataInfo1":"특허","paramDataInfo2":"true/false","paramOrder":"I0024","parentParamOrder":"NONE","path":"-[I0024]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"utility","paramDataInfo1":"실용","paramDataInfo2":"true/false","paramOrder":"I0025","parentParamOrder":"NONE","path":"-[I0025]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"lastvalue","paramDataInfo1":"행정처분(권리상태) 필터","paramDataInfo2":"전체:공백입력, 공개:A, 취하:C, 소멸:F, 포기:G, 무효:I, 거절:J, 등록:R","paramOrder":"I0026","parentParamOrder":"NONE","path":"-[I0026]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"pageNo","paramDataInfo1":"페이지 번호","paramDataInfo2":"기본 1","paramOrder":"I0027","parentParamOrder":"NONE","path":"-[I0027]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"numOfRows","paramDataInfo1":"페이지당 출력 건수","paramDataInfo2":"기본 10, 최대 500","paramOrder":"I0028","parentParamOrder":"NONE","path":"-[I0028]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"sortSpec","paramDataInfo1":"정렬 기준 항목","paramDataInfo2":"PD-공고일자, AD-출원일자, GD-등록일자, OPD-공개일자, FD-국제출원일자, FOD-국제공개일자, RD-우선권주장일자","paramOrder":"I0029","parentParamOrder":"NONE","path":"-[I0029]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"descSort","paramDataInfo1":"정렬 방향","paramDataInfo2":"true=내림차순/false=오름차순, sortSpec 함께 사용","paramOrder":"I0030","parentParamOrder":"NONE","path":"-[I0030]"}];
+
+    $g.setData( {data : data , id : "grid1"});
+
+//     $("[data-ax5grid='apiInutparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].paramData) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Input values ​​(sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="입력값(샘플)">http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch?astrtCont=발명&inventionTitle=센서&ServiceKey=write your service key</textarea>
+	<article class="mt-10">
+		<p class="tit">
+			Response Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+
+
+	<div data-ax5grid="apiOutputparameterGrid" data-ax5grid-config="{ }" style="height: 588px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid2' ,
+    	target : $("[data-ax5grid='apiOutputparameterGrid']"),
+   		columns : [
+		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"items","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0001","parentParamOrder":"NONE","path":"-[G0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" indexNo","paramDataInfo1":"일련번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0001","path":"-[G0001]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registerStatus","paramDataInfo1":"등록상태","paramDataInfo2":"공개, 등록, 거절, 무효, 소멸, 취하, 포기","paramOrder":"D0002","parentParamOrder":"G0001","path":"-[G0001]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" inventionTitle","paramDataInfo1":"발명의명칭","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0001","path":"-[G0001]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" ipcNumber","paramDataInfo1":"IPC코드","paramDataInfo2":"복수값 '|' 구분","paramOrder":"D0004","parentParamOrder":"G0001","path":"-[G0001]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registerNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0001","path":"-[G0001]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registerDate","paramDataInfo1":"등록일자","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0001","path":"-[G0001]-[D0006]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0001","path":"-[G0001]-[D0007]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0001","path":"-[G0001]-[D0008]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" openNumber","paramDataInfo1":"공개번호","paramDataInfo2":"","paramOrder":"D0009","parentParamOrder":"G0001","path":"-[G0001]-[D0009]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" openDate","paramDataInfo1":"공개일자","paramDataInfo2":"","paramOrder":"D0010","parentParamOrder":"G0001","path":"-[G0001]-[D0010]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationNumber","paramDataInfo1":"공고번호","paramDataInfo2":"","paramOrder":"D0011","parentParamOrder":"G0001","path":"-[G0001]-[D0011]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationDate","paramDataInfo1":"공고일자","paramDataInfo2":"","paramOrder":"D0012","parentParamOrder":"G0001","path":"-[G0001]-[D0012]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" astrtCont","paramDataInfo1":"초록","paramDataInfo2":"","paramOrder":"D0013","parentParamOrder":"G0001","path":"-[G0001]-[D0013]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" drawing","paramDataInfo1":"이미지경로","paramDataInfo2":"","paramOrder":"D0014","parentParamOrder":"G0001","path":"-[G0001]-[D0014]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" bigDrawing","paramDataInfo1":"큰이미지경로","paramDataInfo2":"","paramOrder":"D0015","parentParamOrder":"G0001","path":"-[G0001]-[D0015]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicantName","paramDataInfo1":"출원인","paramDataInfo2":"","paramOrder":"D0016","parentParamOrder":"G0001","path":"-[G0001]-[D0016]"},{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"count","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0002","parentParamOrder":"NONE","path":"-[G0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" numOfRows","paramDataInfo1":"페이지당건수","paramDataInfo2":"","paramOrder":"D0017","parentParamOrder":"G0002","path":"-[G0002]-[D0017]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" pageNo","paramDataInfo1":"페이지번호","paramDataInfo2":"","paramOrder":"D0018","parentParamOrder":"G0002","path":"-[G0002]-[D0018]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" totalCount","paramDataInfo1":"전체건수","paramDataInfo2":"","paramOrder":"D0019","parentParamOrder":"G0002","path":"-[G0002]-[D0019]"}];
+
+    $g.setData({data : data , id : "grid2"});
+
+//     $("[data-ax5grid='apiOutputparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].serviceNm) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Output value (sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="출력값(샘플)">&lt;response&gt;
+&lt;header&gt;
+&lt;requestMsgID/&gt;
+&lt;responseTime&gt;2017-02-10 13:12:16.1216&lt;/responseTime&gt;
+&lt;responseMsgID/&gt;
+&lt;successYN&gt;Y&lt;/successYN&gt;
+&lt;resultCode&gt;00&lt;/resultCode&gt;
+&lt;resultMsg&gt;NORMAL SERVICE.&lt;/resultMsg&gt;
+&lt;/header&gt;
+&lt;body&gt;
+&lt;items&gt;
+&lt;item&gt;
+&lt;applicantName&gt;한국전자통신연구원&lt;/applicantName&gt;
+&lt;applicationDate&gt;20060616&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020060054155&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+1. 청구범위에 기재된 발명이 속한 기술분야본 발명은 유비쿼터스 센서 네트워크에서의 원격제어용 센서 노드, 및 이동통신 단말기를 이용한 센서노드 원격 제어 방법에 관한 것임.2. 발명이 해결하려고 하는 기술적 과제본 발명은 유비쿼터스 센서 네트워크(USN)에서의 센서 노드와 연결된 임의의 사고감지 대상 장치(예를 들면, 변압기)에 문제가 발생한 경우 관리자가 현장에 출동하지 않고도 자신의 이동통신 단말기를 이용하여 센서 노드를 원격 제어함으로써 신속/용이하게 사고에 대처할 수 있게 하는, 유비쿼터스 센서 네트워크에서의 원격제어용 센서 노드, 및 이동통신 단말기를 이용한 센서노드 원격 제어 방법을 제공하는데 그 목적이 있음.3. 발명의 해결방법의 요지본 발명은, 유비쿼터스 센서 네트워크(USN)에서의 원격제어용 센서 노드에 있어서, 사고감지 대상 장치 및 그 환경에 대한 물리량을 측정하여 사고발생 감지정보를 생성하기 위한 센싱 수단; 센싱 제어 정보, 라우팅 정보 및 통신프로토콜 관련 데이터를 저장하는 저장 수단; 상기 저장된 라우팅 정보를 이용하여, 사고발생 감지정보를 전달할 이웃한 센서노드나 싱크노드(이웃 노드)의 위치를 탐색하기 위한 경로 탐색 수단; 상기 센싱 수단에서 출력되거나 다른 센서 노드로부터 전달된 사고발생 감지정보를 무선신호로서 상기 이웃 노드로 전송하거나, 관리자의 이동통신 단말기...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cfe49d03e6a3dce01a4cdc06f54ae4fb03c595c9cf8f59121103f901f0de38e94
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe46c22163f668395d47a3b0ebcaa316c32acc0008db1b5a56e062babd6c97708f4
+&lt;/drawing&gt;
+&lt;indexNo&gt;1&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+유비쿼터스 센서 네트워크에서의 원격제어용 센서 노드, 및이동통신 단말기를 이용한 센서노드 원격 제어 방법(Sensor Node for Remote Control in Ubiquitous SensorNetworks, and Method for Remote Control of Sensor Nodeusing Mobile Terminal)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H04Q 9/00 | G06K 17/00 | H04W 40/02 | G06Q 50/00J0&lt;/ipcNumber&gt;
+&lt;openDate&gt;20070607&lt;/openDate&gt;
+&lt;openNumber&gt;1020070057627&lt;/openNumber&gt;
+&lt;publicationDate&gt;20070712&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20070705&lt;/registerDate&gt;
+&lt;registerNumber&gt;1007383330000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;만도기계 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;19960106&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1019960000139&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 자동차에 사용되는 VR센서를 몰딩형으로 제작하는 방법에 관한 발명으로, 특히 자동차의 기능향상이나 자동화등을 위한 데이타로서의 차속등을 센싱하여 이를 처리하는 제어기둥에 송신하는 센서등을 제작하는 개량된 제작법에 관한 발명이다. 본 발명은 VR센서를 제작함에 있어서; ①수지개의 보빈(13)을 사출하는 공정과 ,②이에 마그네트(12)와 포일피스(15)를 삽입하는 공정과, ③리드프레임(11)을 융착하는 공정과, ④애나멜드코일(14)을 상기 보빈(13)에 권선하여 보빈어셈블리(1)를 완성하는 공정과, ⑤상기 보빈어셈블리(1)의 외주를 몰딩하는 공정과 ⑥와이어(141)를 상기 리드프레임(11)에 연결하는 공정과, ⑦상기 리드프레임(11)에서 인출되는 와이어(141)와 리드 프레임 상부를 몰딩하는 공정 및⑧ 상기⑤ 공정으로 형성되는 케이블 아웃렛몰딩(23)을 감쌓는 외피하우징(24)을 몰딩하는 공정으로 이루어진 것으로, 저렴하고도 손쉽게 제작이 되며, 밀봉이나 방수는 물론 전기적인 절연성능도 향상되며 완충작용도 되므로 기능부의 보호에도 완벽을 기하로서 있는 효과적인 발명인 것이다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9c6468d92a0531fdc417369930ec36254a881a512bf4d0d5c4c26f337426926439
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe477b8e79b56045f0750aa20ab99c4c542d1b2a9bbfd515f1ed03ca78621c9fa23
+&lt;/drawing&gt;
+&lt;indexNo&gt;2&lt;/indexNo&gt;
+&lt;inventionTitle&gt;몰딩형 VR센서(속도센서) 제작방법&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01P 3/00 | G01P 3/488&lt;/ipcNumber&gt;
+&lt;openDate&gt;19970812&lt;/openDate&gt;
+&lt;openNumber&gt;1019970059735&lt;/openNumber&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate/&gt;
+&lt;registerNumber/&gt;
+&lt;registerStatus&gt;거절&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;한동철 | 대한민국(관리부서 서울대학교(정밀기계설계공동연구소))&lt;/applicantName&gt;
+&lt;applicationDate&gt;19961230&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1019960077662&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 공작기계의 축 회전 정밀도 측정을 위한 정전 용량형 센서 시스템에 관한 것으로서 보다 상세하게는 용도에 적합하도록 개발된 정정 용량형 센서와 이의 신호처리를 통한 초정밀 회전 정밀도 측정 시스템에 관한 것이다.본 발명은 상술한 바와 같이 일반적인 변위 측정 센서로 측정하기 곤란한 정밀 주축의 회전 정밀도 측정을 위해, 측정 대상물의 형상 오차를 제거한 축의 운동 성분 만을 측정하기 위한 시스템을 제공함에 있다.본 발명의 특징은 NT40 표준 척에 쉽게 장착할 수 있는 마스터 실린더와; 상기 마스터 실린더 원주면을 모두 감싸는 4조로 구성된 넓은 면적의 판형 정전 용량형 센서로 구성된 원통형 센서 시스템에 있다.본 발명의 다른 특징은 4쌍의 센서 및 가드 판이 원통형 센서 형상에 서로 전기적으로 분리되도록 제작하는 방법과; 상기 각 센서 및 가드 판에 센서 선 및 가드선을 연결하는 방법과 상기 센서로부터 나온 신호의 처리 회로로의 연결 선의 제작 단계와, 상기 센서를 원통형 틀에 고정하여 에폭시 몰딩의 과정으로 제작하는 단계와; 마지막 연삭 공정을 통하여 원통형 센서에서 센서 및 가드가 분리되며 필요한 형상 정밀도를 내는 단계로 이루어지는 원통형 센서의 제조 방법이 포함된다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9c6468d92a0531fdc4890876003a3ba7844b90afecaabda52d9feb54277dc57ca4
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe477b8e79b56045f07ce0d2c5a173f8fc847c387a11d2872999332c0e3dbcc4ba1
+&lt;/drawing&gt;
+&lt;indexNo&gt;3&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+공작기계의 축 회전 정밀도 측정을 위한 정전 용량형 센서 시스 템과 원통형 센서의 제조방법(Capacitor type sensor system and cylindrical sensor manufacturing method for the shaft rotation precision measurement of machine tool)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;B23Q 17/00&lt;/ipcNumber&gt;
+&lt;openDate&gt;19980925&lt;/openDate&gt;
+&lt;openNumber&gt;1019980058338&lt;/openNumber&gt;
+&lt;publicationDate&gt;19990901&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;19990602&lt;/registerDate&gt;
+&lt;registerNumber&gt;1002169870000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;파나소닉 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;19971122&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1019970062125&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+1. 청구범위에 기재된 발명이 속하는 기술분야온도센서소자 및 동 소자를 갖춘 온도센서2. 발명이 해결하려고 하는 기술적 과제내열성에 뛰어나고, 열응답성이 빠르고, 저항치가 안정하고, 또한 그 경시변화가 작은 신뢰성이 높은 온도센서소자를 제공함. 3. 발명의 해결방법의 요지온도센서소자는, 온도에 따라서 전기저항이 변화하는 감열성 재료로 이루어진 감열막, 상기 감열막의 막두께 방향의 전기저항을 검지하도록 배열된 전극막, 이것들을 지지하는 내열성 절연재로 이루어진 기판, 상기 감열막과 기판 쪽의 전극막과의 사이에 배치된 확산방지막, 및 상기 감열막, 전극막을 전극막의 리드빼내기부를 제외하고 피복하는 내열성 절연재로 이루어진 막을 구비한다.감열막에는, 식(Al1-x-yCrxFey)2O3(0.05≤x＋y≤0.95,0≤y/(x＋y)≤0.6)으로 표시되고, 확산방지막에는, 식(Al1-x-yCrxFey)2O3(0≤x＋y≤0.95)으로 표시되는 커런덤형 결정구조의 산화물이 사용된다.4. 발명의 중요한 용도자동차 엔진의 배기계통에 사용되는 촉매컨버터등에서 촉매온도를 측정하는데 사용됨.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9c93fedfa9c20efe97098700c1d24aec00a08201387b3eaa97bff7abbec528723d
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe48bfcdbc584708557fec4e61a92bb2be21bd5e5b45bb62f4130a4c740f433812f
+&lt;/drawing&gt;
+&lt;indexNo&gt;4&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+온도센서소자 및 동 소자를 갖춘 온도센서(TEMPERATURE SENSOR ELEMENT, TEMPERATURE SENSOR HAVING THE SAME)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01N 25/00 | G01N 27/00&lt;/ipcNumber&gt;
+&lt;openDate&gt;19980817&lt;/openDate&gt;
+&lt;openNumber&gt;1019980042672&lt;/openNumber&gt;
+&lt;publicationDate&gt;20000401&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;19991215&lt;/registerDate&gt;
+&lt;registerNumber&gt;1002480690000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;가부시기 가이샤 메트롤&lt;/applicantName&gt;
+&lt;applicationDate&gt;19970621&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1019970026803&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+1. 청구범위에 기재된 발명이 속하는 기술분야선반에 설치한 암의 선단에 부착하여 베이트의 설정위치를 검출하여 그검출신호를 송출하는 터치센서에 있어서, 터치센서의 암선단에 부착하는, 기부의 프랜지를 제1프랜지와 제2프랜지로 분리하여 제1프랜지는 센서와 일체적으로 만들고,제2프랜지는 상설암의 선단에 부착토록 구성하며 제1프랜지와 제2프랜지사이는 착탈이 용이한 체결수단으로 체결하는 것과 함께 제2프랜지의 암선단에 부착하는 면보다 터치센서의 접촉중심까지의 거리는 제1프랜지와 제2프랜지를 분리하기전의 프랜지가 암의 선단에 부착하는 면보다 터치센서의 접촉의 중심선까지의 거리와 거의 동등하게 구성하는 것을 특징으로하는 터치센서 및 터치센서의 개조방법.2. 발명이 해결하려고 하는 기술적 과제선반에 부착한 암내부의 리드선, 또는 암전체를 변경하지 않고 터치센서를 경신하도록한 개조방법을 제공함과 함께, 상기 개조된 구성을 처음부터 채용함으로 터치센서의 경신을 극히 용이하게한 구성.3. 발명의 해결방법요지터치센서의 암선단에 부착한 기부의프랜지를 제1프랜지와 제2프랜지로 분리하여 착탈용이한 체결수단으로 체결함과 동시에 제2프랜지의 암선단에 부착하는 면보다 터치센서의 접촉의 중심선까지의 거리는 제1프랜지와 제2프랜지에 분리하기 전의 프랜지가 암의 선단에 부착하는 면보다 터치센서의 접촉중심선까지의 거리와 거의 동등하게 구성...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9c93fedfa9c20efe9706d8d64adba5e0ff220bcba01d3fcf7b239eafbdece74888
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe48bfcdbc5847085573496f74dd755269fe67c1a6c36dfc904720347702f3762f3
+&lt;/drawing&gt;
+&lt;indexNo&gt;5&lt;/indexNo&gt;
+&lt;inventionTitle&gt;터치센서 및 터치센서의 개조방법&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;B23Q 17/00&lt;/ipcNumber&gt;
+&lt;openDate&gt;19981026&lt;/openDate&gt;
+&lt;openNumber&gt;1019980069802&lt;/openNumber&gt;
+&lt;publicationDate&gt;20040908&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20040618&lt;/registerDate&gt;
+&lt;registerNumber&gt;1004379040000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;브라운 게엠베하&lt;/applicantName&gt;
+&lt;applicationDate&gt;20010309&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020017003030&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 여러 상이한 영역으로부터의 적외선을 감지하는 다중 센서 요소를 포함하는 방사 온도계에 관한 것이다. 또한, 본 발명은 다중 적외선 센서 요소를 구비한 방사 센서에 관한 것이며, 또한 이러한 방사 센서를 구비한 방사 온도계에 의하여 온도를 결정하는 방법에 관한 것이다. 방사 센서(10)는 하나 이상의 센서 요소(30)와 연관되어 있는 다중 광학 요소(50, 45, 55)로 구성되며, 이들 광학 요소는 입체각을 형성하여 이 입체각 범위로 나오는 방사선이 각 센서 요소 또는 센서 요소에 충돌할 수 있다. 본 발명에 의한 방사 센서가 설치된 귀 온도계에 의해 열을 측정하는 본 발명의 방법은 공지되어 있는 사실, 즉 고막이 이도(耳導)보다 온도가 더 높다는 사실을 기초로 한다. 따라서, 센서 요소의 일부, 즉 고막을 모니터하는 센서 요소는 이도를 모니터하는 나머지 센서 요소보다 높은 온도를 감지한다. 센서 요소로부터 나오는 상당히 더 큰 온도 신호만이 산정된다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9c03b9191f44294830cbe39b61f818ea0e5e93d74e7071ae2c39070823c8ed68b4
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe4d174b5bc1f739d152f21eecb399543c61f797f10824c795ed01b8ca1a93587e8
+&lt;/drawing&gt;
+&lt;indexNo&gt;6&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+다중 센서 요소를 구비한 방사 온도계 및 방사 센서와 그온도 결정 방법(RADIATION THERMOMETER AND RADIATION SENSOR WITHSEVERAL SENSOR ELEMENTS, METHOD FOR DETERMININGTEMPERATURE)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01J 5/10&lt;/ipcNumber&gt;
+&lt;openDate&gt;20010822&lt;/openDate&gt;
+&lt;openNumber&gt;1020010079774&lt;/openNumber&gt;
+&lt;publicationDate&gt;20061019&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20061012&lt;/registerDate&gt;
+&lt;registerNumber&gt;1006359560000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;등록&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;한국과학기술원&lt;/applicantName&gt;
+&lt;applicationDate&gt;20020703&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020020038276&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 스퍼터링을 이용한 박막형 미소온도센서의 제작공정과 상기 공정에 의해 제작된 박막형 미소온도센서에 관한 발명이다. 본 발명은 종래의 열전대로 온도를 측정하는 경우에 미소영역의 온도를 쉽게 측정하지 못하는 단점을 개선하고, 종래의 다이오드센서(Diode sensor)나 저항온도검출기(Resistance Thermal Detector, 약칭으로 RTD)와 같이 온도에 따른 전압신호의 캘리브레이션 (Calibration)을 행하는 후공정이 불필요한 박막형 미소온도센서를 제공함에 그 목적이 있다. 또한 본 발명에 의한 박막형 미소온도센서의 제작방법은 기존의 다이오드 센서나 저항온도검출기의 제작공정과 달리 아주 단순한 공정을 사용하여 간편하게 제작할 수 있어 시간과 비용을 절감하는 효과가 있다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cf9a9b73d316615831f2eb4cd9e052c62cd3b6ac5c405cee21ff02240fcae76d9
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe454c99e47ce599fbaf21ec114d897165fa8d42c0bde8401e1fa62f95728ae2325
+&lt;/drawing&gt;
+&lt;indexNo&gt;7&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+박막형 미소온도센서와 박막형 미소온도센서의 제작방법(A THIN FILM TYPE MICRO-THERMAL SENSOR, AND A METHOD OFFABRICATING THE SAME)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H01L 35/04&lt;/ipcNumber&gt;
+&lt;openDate&gt;20040113&lt;/openDate&gt;
+&lt;openNumber&gt;1020040003539&lt;/openNumber&gt;
+&lt;publicationDate&gt;20040816&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20040806&lt;/registerDate&gt;
+&lt;registerNumber&gt;1004446330000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;프레제니우스 메디칼 케어 도이칠란드 게엠베하&lt;/applicantName&gt;
+&lt;applicationDate&gt;20041118&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020040094498&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 시트형 방식으로 서로 연결된 필름들로서 액체 또는 가스 시료내의 분석물질을 결정하기 위한 센서 카드에 관한 것으로서, 다시 말해서 이는 개구부(10-24,26,28,29)를 가지며 상기 시료와 마주하는 센서 필름(4) 및 전기 태핑을 위한 개구부(64,66)를 가지며 상기 시료로부터 이격된 덮개 필름(6), 상기 센서 필름(4)과 상기 덮개 필름(6) 사이에 제공되고 배열된 적어도 하나의 센서 또는 센서의 일부(48,50,52,56)를 가진다. 본 발명에 따르면, 상기 센서 필름(4) 및 상기 덮개 필름(6) 사이에 적어도 하나의 중간 필름(8)이 제공되는데, 상기 중간 필름(8)에는 절개부(36,38,40,42,44,46)가 제공되고, 상기 절개부(36,38) 중 하나에 상기 센서(48,50,52,56)가 배열된다. 본 발명에 따른 센서 카드는, 상기 센서 카드가 분석 시스템 내에서 유동 채널을 부분적으로 형성하는 플레이트에 연결되는 때에, 액체 시료에 대한 유동 채널의 신뢰할 수 있는 밀봉을 가져오는 균일한 두께를 가진다는 이점을 가진다. 나아가, 본 발명은 그러한 센서 카드를 제조하는 방법에 관한 것이다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd03bf8e5ba4e1dbf726c16f1e621000b7323f9063b4815520b71ad2007c000fe534b77c416035c40128133382701cff4b344b4f18fd0a15df58c98b58c5ffc9d090
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e22d01c5c32ba711cfa336586a85d6a639d7b2e236581d69fd6c6315825ddd05fc3612fcc8587b8775384c53828d799dd16a67fb8f53d868926542dc8cc46ec8d1
+&lt;/drawing&gt;
+&lt;indexNo&gt;8&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+액체 또는 기체 시료 내의 분석물질을 결정하기 위한 센서 카드 및 장치와, 그러한 센서 카드를 제조하는 방법(SENSOR CARD AND ARRANGEMENT FOR DETERMINING ANALYTES IN LIQUID OR GAS SAMPLES, AND METHOD FOR PRODUCING THE SENSOR CARD)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01N 27/333&lt;/ipcNumber&gt;
+&lt;openDate&gt;20050524&lt;/openDate&gt;
+&lt;openNumber&gt;1020050048513&lt;/openNumber&gt;
+&lt;publicationDate&gt;20110811&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20110804&lt;/registerDate&gt;
+&lt;registerNumber&gt;1010561260000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;한국전자통신연구원&lt;/applicantName&gt;
+&lt;applicationDate&gt;20041220&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020040108817&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+1. 청구범위에 기재된 발명이 속한 기술분야 본 발명은 무선 센서 네트워크에서 센서 노드 동적 재구성을 위한 무선 송/수신 방법에 관한 것임. 2. 발명이 해결하려고 하는 기술적 과제 본 발명은 동작중인 다수의 센서 노드를 재구성(소프트웨어 업그레이드 및 각종 설정 변경)하기 위한 프로그램 이미지를 무선 통신 채널을 이용하여 송/수신함으로써, 센서 노드 재구성을 위한 운용자의 편의성을 향상시키고 각 센서 노드의 재구성을 시스템 중단 없이 동적으로 수행하기 위한, 무선 센서 네트워크에서 센서 노드 동적 재구성을 위한 무선 송/수신 방법을 제공하는데 그 목적이 있음. 3. 발명의 해결방법의 요지 본 발명은, 베이스 단말 노드에서 센서 노드 동적 재구성을 위한 무선 송신 방법에 있어서, 다수의 무선 센서 노드들과 무선 통신 채널을 형성하는 연결 단계; 상기 다수의 무선 센서 노드들 중 타겟 센서 노드를 선택하는 노드 선택 단계; 동적 재구성을 위한 정보를 생성하는 정보 생성 단계; 및 상기 생성한 동적 재구성을 위한 정보를 동적 재구성 작업을 수행하도록 상기 타겟 센서 노드로 송신하는 송신 단계를 포함한다. 4. 발명의 중요한 용도 ...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9ccf2ab65a398793487f569639ade1920c80473813befb6bed3f7aa543d43f0d4c
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe4598c4c077876d4f90cec990e48146f11de34fbdb4d3092e322b589abbb56a6b7
+&lt;/drawing&gt;
+&lt;indexNo&gt;9&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+무선 센서 네트워크에서 센서 노드 동적 재구성을 위한무선 송/수신 방법(Transmitting/Receiving method for dynamicreconfiguration of sensor nodes using wirelesstelecommunication in wireless sensor network)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H04L 12/28&lt;/ipcNumber&gt;
+&lt;openDate&gt;20060623&lt;/openDate&gt;
+&lt;openNumber&gt;1020060070165&lt;/openNumber&gt;
+&lt;publicationDate&gt;20061011&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20060928&lt;/registerDate&gt;
+&lt;registerNumber&gt;1006324050000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;재단법인 포항산업과학연구원&lt;/applicantName&gt;
+&lt;applicationDate&gt;20040902&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020040069905&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+1. 청구범위에 기재된 발명이 속한 기술분야본 발명은, 다공성 실리콘 층을 이용한 습도 감지용 센서의 제조 방법 및 그에 의해 제조된 센서에 관한 것임.2. 발명이 해결하려고 하는 기술적 과제본 발명은, 다공성 실리콘 및 폴리이미드 박막을 이용하고 초소형 전자정밀기계(micro electro mechanical system; MEMS) 구조의 에칭 영역을 사용함으로써, 센서 외부에 열려진 부분을 없애 사용상의 안정성을 확보하기 위한, 다공성 실리콘 층을 이용한 습도 감지용 센서의 제조 방법 및 그에 의해 제조된 센서를 제공하는데 그 목적이 있음.3. 발명의 해결방법의 요지본 발명은, 다공성 실리콘 층을 이용한 습도 감지용 센서의 제조 방법에 있어서, n 타입의 제 1실리콘 웨이퍼를 에칭하여 제 1경사면을 생성하는 단계, 상기 제 1실리콘 웨이퍼에 p 타입의 확산 영역을 생성하고, 이를 불산에서 전기분해하여 다공성 실리콘층을 생성하여, 상부구조를 구성하는 단계, n 타입의 제 2실리콘 웨이퍼를 에칭하여 제 2경사면을 생성하는 단계, 상기 제 2실리콘 웨이퍼에 p 타입의 확산에 의하여 저항 영역을 생성하고, 이 저항 영역의 외부 연결을 위한 p+ 전극부 및 금속 전극부를 형성하는 단계, 상기 제 2경사면에 폴리이미드를 스핀 코팅하고 경화하여, 하부구조를 구성하는 단계, 및 상기 상부구조 및 상기 하부구...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9ccf2ab65a398793485bae9eafcda56d53ed6d577c4e86254180715c96bdc0b36a
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe4598c4c077876d4f995dfa7932659786cb82d32353ad264c2f9fc79420dc7c8ba
+&lt;/drawing&gt;
+&lt;indexNo&gt;10&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+다공성 실리콘 층을 이용한 습도 감지용 센서의 제조 방법및 그에 의해 제조된 센서(Method for Manufacturing Humidity Sensor by usingPorous Silicon Layer and Sensor Manufactured by it)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01N 27/12&lt;/ipcNumber&gt;
+&lt;openDate&gt;20060307&lt;/openDate&gt;
+&lt;openNumber&gt;1020060021082&lt;/openNumber&gt;
+&lt;publicationDate&gt;20061211&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20061204&lt;/registerDate&gt;
+&lt;registerNumber&gt;1006558880000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;재단법인 포항산업과학연구원 | 주식회사 월텍&lt;/applicantName&gt;
+&lt;applicationDate&gt;20040902&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020040069824&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+1. 청구범위에 기재된 발명이 속한 기술분야본 발명은, 고주파 초음파 센서용 음향 정합층 및 그를 이용한 초음파 센서의 제조 방법에 관한 것임.2. 발명이 해결하려고 하는 기술적 과제본 발명은, 기존에 음향 임피던스 정합층으로 사용하고 있는 에폭시와 알루미나 파우더 복합물 이외에 두께 조절과 공정이 아주 용이한 실리콘 웨이퍼를 음향 정합층으로 사용함으로써, 광대역 특성을 갖는 동시에 상대적으로 높은 감도를 가지도록 하기 위한, 고주파 초음파 센서용 음향 정합층을 제공하는데 그 목적이 있음.3. 발명의 해결방법의 요지본 발명은, 압전 세라믹과, 상기 압전 세라믹의 후면에 도포되는 텅스턴이 섞인 고무 재질의 후면재와, 상기 압전 세라믹의 전면에 접합되고, 두께가 파장의 1/4인 제1 정합층과, 상기 제1 정합층의 전면에 접합되고, 두께가 파장의 1/4인 제2 정합층과, 상기 제2 정합층의 전면에 접합되고, 상기 제1 정합층보다 그 음향 임피던스 및 결합계수가 낮은 지연재와, 상기 지연재의 전면에 접합되는 결합재를 포함하여 구성되며, 상기 결합재와의 임피던스 정합을 위한 고주파 초음파 센서의 음향 정합층에 있어서, 상기 제1 정합층은 실리콘 웨이퍼 재질로 구성되고, 상기 제2 정합층은 에폭시 복합재 재질로 구성되며, 상기 지연재는 플라스틱 재질로 구성되고, 상기 각각은 하기의 식으로 표현되는 것을 특징으...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9ccf2ab65a398793485bae9eafcda56d53bac95756d18add2e72da2ff17fcf21b5
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe4598c4c077876d4f995dfa7932659786cf024bb6b2112227eebaba17b01c00a86
+&lt;/drawing&gt;
+&lt;indexNo&gt;11&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+고주파 초음파 센서용 음향 정합층 및 그를 이용한 초음파센서의 제조 방법(Acoustic Impedance Matching Layer for High FrequencyUltrasonic Transducer and Method for FabricatingUltrasonic Transducer by using it)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01N 29/24 | H01L 41/04 | G01N 29/04&lt;/ipcNumber&gt;
+&lt;openDate&gt;20060307&lt;/openDate&gt;
+&lt;openNumber&gt;1020060021026&lt;/openNumber&gt;
+&lt;publicationDate&gt;20070118&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20070112&lt;/registerDate&gt;
+&lt;registerNumber&gt;1006714190000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;등록&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;세주엔지니어링주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20040216&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020040010045&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 접촉연소식 센서를 마이크로화하여 보상소자를 구비하는 복합가스센서를 제공함으로써, 반도체식 복합센서보다 정밀하게 가스 반응 패턴을 측정할 수 있는 복합 가스센서를 제공하는데 그 목적이 있다. 상기와 같은 목적을 달성하기 위하여 본 발명은, 실리콘 기판 양면에 얇은 절연층을 형성하여 센서기판을 형성하는 단계; 상기 센세기판의 일측 절연층의 중앙부를, 국부적으로 식각하여 윈도우를 형성하여 실리콘 기판이 노출되도록 하는 윈도우 형성단계; 상기 기판에 형성된 윈도우 상부를 가로질러 양측으로 절연층까지 연장되며, 히터, 감지수단 및 전극으로 기능하는 하나의 도선 패턴을 형성하는 도선형성단계; 상기 윈도우 상에 도선패턴이 형성된 기판하부를 식각하여 홈을 형성하는 홈형성단계; 및 상기 도선패턴 상부에 백금(Pt), 팔라듐(Pd) 등의 촉매를 고분산시킨 패이스트 형태의 소형 알루미나 담채를 도포하여 접촉연소식 감지물질을 형성하는 감지물질형성단계를 포함하는 접촉연소식 소형 가스센서 제조방법을 제공한다. 또한, 본 발명은 기판; 상기 기판 상에 형성되는 두전극; 상기 두 전극을 서로 전기적으로 연결하여 열을 제공하는 히터, 가스감지수단으로 각용하는 하나의 도선; 상기 도선 상부에 촉매를 고분산(high dispersion)시킨 패이스트 형태의 ㅅ형 알루미...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9ccf2ab65a3987934810b5f8b637700b171cfe5027d861cd8b96d322540422ab69
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe4598c4c077876d4f9d4dcf0465fdac7ba0c2a31a5be6934b65d0272a4fa45727c
+&lt;/drawing&gt;
+&lt;indexNo&gt;12&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+접촉연소식 소형 가스센서 제조방법 및 접촉연소식 소형가스센서를 이용한 가스센서(Method for manufacturing micro-structure catalyticcombustion type gas sensor, and gas sensor using themicro-structure catalytic combustion gas sensor)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01N 27/14&lt;/ipcNumber&gt;
+&lt;openDate&gt;20050819&lt;/openDate&gt;
+&lt;openNumber&gt;1020050081691&lt;/openNumber&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate/&gt;
+&lt;registerNumber/&gt;
+&lt;registerStatus&gt;거절&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;주식회사 오토산업&lt;/applicantName&gt;
+&lt;applicationDate&gt;20050607&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020050048422&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 가스 검출 분야에 관한 것으로, 특히 검출하고자 하는 가스가 잘 흡수하는 특정 파장 대역의 광원을 광도파로가 형성된 가스셀에 방사하여 상기 가스셀 내에 존재하는 가스 농도를 측정하는 광학형 가스 검출 센서에 관한 것이다. 본 발명에 따른 광학형 가스 검출 센서는 웨이퍼(wafer) 및 반도체형 쿼츠(quartz)에 MEMS(Micro Electro Mechanical System)기술을 적용하여 제조한 부품들로 구현됨으로써, 가스 검출을 수 ppm 정도까지 정확하게 측정할 수 있는 것이다. 또한, 본 발명에 따른 광학형 가스 검출 센서는 광 반사막에 의한 광 반사 횟수를 늘리기 위해 가스셀을 반도체형 쿼츠(quartz)로 구현하고 그 외주면에 가스셀의 공간부를 투과한 광원을 반사하는 광 반사막을 형성함으로써, 전체적으로 광학형 가스 검출 센서의 구조가 컴팩트해지는 장점이 있다. 또한, 본 발명에 따른 광학형 가스 검출 센서는 비교적 저가의 웨이퍼(wafer) 및 반도체형 쿼츠(quartz)를 재료로 제조되기에 센서의 제조원가를 낮출 수 있고 한번의 제조공정을 통해 반도체 가스셀을 대량 생산 할 수 있는 것이다. 광학형 가스 검출 센서, 실리콘 기판, 발광부, 광 필터부, 광 검출부
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9c592fb536ea920a4d2260bbd77a1b8af1f236212ec34ced18caa7ca7c71d33613
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe407489d23bbfec243d35b63c3cf319be4a16c15351395e085b48b7b70e385a4b9
+&lt;/drawing&gt;
+&lt;indexNo&gt;13&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+광학형 가스 검출 센서 제조방법 및 그 방법에 따라 제조된 광학형 가스 검출 센서(METHOD FOR MANUFACTURING OPTICAL TYPE GAS DETECTOR AND OPTICAL TYPE GAS DETECTOR THEREOF)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01N 21/17&lt;/ipcNumber&gt;
+&lt;openDate&gt;20061213&lt;/openDate&gt;
+&lt;openNumber&gt;1020060127438&lt;/openNumber&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate/&gt;
+&lt;registerNumber/&gt;
+&lt;registerStatus&gt;거절&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;주식회사 케이티&lt;/applicantName&gt;
+&lt;applicationDate&gt;20061026&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020060104650&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+1. 청구범위에 기재된 발명이 속한 기술분야본 발명은 센서 노드 ID 할당 방법 및 그를 이용한 계층적 센서 네트워크 구성 방법과, 상기 방법들을 실현시키기 위한 프로그램을 기록한 컴퓨터로 읽을 수 있는 기록매체에 관한 것임.2. 발명이 해결하려고 하는 기술적 과제본 발명은 특히 무선 센서 네트워크에서 각 센서 노드의 아이디(ID)를 ID 체계를 바탕으로 멀티 홉 네트워크 트리를 따라 계층적으로 분산 할당하고, 이를 바탕으로 각 노드가 별도의 라우팅 테이블을 사용하지 않고도 경로 상의 다음 중간 경유 노드(next-hop)를 결정할 수 있도록 함으로써, 센서 노드의 에너지 효율을 높일 수 있는, 센서 노드 ID 할당 방법 및 그를 이용한 계층적 센서 네트워크 구성 방법과, 상기 방법들을 실현시키기 위한 프로그램을 기록한 컴퓨터로 읽을 수 있는 기록매체를 제공하는데 그 목적이 있음.3. 발명의 해결방법의 요지본 발명은, 계층적 센서 네트워크를 구성하는 방법에 있어서, 싱크 노드를 포함하는 부모(parent) 노드(비콘 방송 노드)가 할당 가능한 고유의 아이디(ID)를 비콘을 통해 방송하는 노드 ID 방송 단계; 네트워크에 참여하려는 자식(child) 노드(비콘 방송 수신 노드)가 방송된 ID를 이용하여 네트워크에 접속하는 노드 접속 단계; 및 상기 각 센서 노드가 자신에게 할당된 고유의 ID(센서 노...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cfe49d03e6a3dce011361ffd1e9f9604b2897f98f5091aa6432279ef8889c8cb7
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe46c22163f668395d4c5dc096604962fb924de9a26ad96f803572b32296a747dad
+&lt;/drawing&gt;
+&lt;indexNo&gt;14&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+센서 노드 ＩＤ 할당 방법 및 그를 이용한 계층적 센서네트워크 구성 방법(Sensor node ID assignment method and method forhierarchical configuration of wireless sensor networksusing it)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H04W 40/02 | H04W 84/18&lt;/ipcNumber&gt;
+&lt;openDate/&gt;
+&lt;openNumber/&gt;
+&lt;publicationDate&gt;20070806&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20070730&lt;/registerDate&gt;
+&lt;registerNumber&gt;1007464710000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;등록&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;고려대학교 산학협력단&lt;/applicantName&gt;
+&lt;applicationDate&gt;20060310&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020060022649&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+센서노드를 이용한 리더간의 충돌방지 방법 및 그 방법이 적용된 센서 리더 노드 장치가 개시된다. 본 발명은 센서네트워크와 RFID 네트워크가 결합되어 있는 환경에서 센서 노드의 특성을 이용한 RFID 리더 충돌 방지에 대한 방법을 제안한다. 본 발명은 센서정보 요청 메시지를 브로드캐스트하는 단계, 상기 메시지를 수신한 센서 노드들로부터 상기 요청 메시지의 응답신호를 수신하는 단계, 상기 응답신호의 세기가 소정의 크기 이상인 센서 노드들을 이웃 노드들로 설정하는 단계 및 상기 이웃 노드들이 비충돌 상태이면, 상기 태그를 리드하는 단계를 포함한다. 또한, 본 발명은 센서정보 요청 메시지를 브로드캐스트하는 메시지 송신부, 상기 메시지를 수신한 센서 노드들로부터 상기 요청 메시지의 응답신호를 수신하는 메시지 수신부, 상기 응답신호의 세기가 소정의 크기 이상인 센서 노드들을 이웃 노드들로 설정하는 이웃노드 설정부 및 상기 이웃 노드들이 비충돌 상태이면, 상기 태그를 리드하는 리더부를 포함한다.본 발명에 의하면, 리더와 센서가 결합되어 있는 환경에서, 센서 노드들간의 거리에 따라 리더들 간의 동기를 맞추어 충돌을 방지함으로써, 전체 시스템의 부하를 감소시키고, 시스템을 관리하는데 자원 낭비를 방지하며, 시스템의 처리율 및 효율을 향상시킬 수 있다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cfe49d03e6a3dce01f55f95573754bac2e5aff97decace779d662c376dc456f5d
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe46c22163f668395d4e1057d4cb1bff56761db3661fa2a92ab2b30c125ed0a1bca
+&lt;/drawing&gt;
+&lt;indexNo&gt;15&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+센서노드를 이용한 리더간의 충돌방지 방법 및 그 방법이적용된 센서 리더 노드 장치(Method for Reader Collision Avoidance using sensornodes and Apparatus thereof)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G06K 17/00&lt;/ipcNumber&gt;
+&lt;openDate/&gt;
+&lt;openNumber/&gt;
+&lt;publicationDate&gt;20070215&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20070207&lt;/registerDate&gt;
+&lt;registerNumber&gt;1006824500000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;등록&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;한국전자통신연구원&lt;/applicantName&gt;
+&lt;applicationDate&gt;20060929&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020060095561&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+1. 청구범위에 기재된 발명이 속한 기술분야본 발명은 센서 네트워크에서 저전력을 위한 센서 데이터의 관리방법에 관한 것임.2. 발명이 해결하려고 하는 기술적 과제본 발명은 센서노드에서 센서 데이터를 부모노드로 전송하는 경우에 이전 측정값과 현재 측정값이 오차범위 내에서 동일하다고 인정되면 미리 정의된 신호를 부모노드로 전송하고, 부모노드에서 센서노드로부터 전송된 상기 신호에 따라 이전 측정값을 그대로 저장하고 타임스탬프를 갱신하며, 부모노드에서 게이트웨이로부터 센서 데이터가 요청되면 상기 타임스탬프가 기준시간 이내에 갱신된 경우에 기 저장되어 있는 센서 데이터를 전달하는, 센서 네트워크에서 저전력을 위한 센서 데이터의 관리방법을 제공하는데 그 목적이 있음.3. 발명의 해결방법의 요지본 발명은 하나 이상의 센서노드와 상기 센서노드로부터 센서 데이터를 수집하는 부모노드를 포함하는 센서 네트워크에서 센서 데이터의 관리방법에 있어서, 상기 센서노드가 상기 부모노드에게 전송할 센서 데이터를 측정하면, 상기 센서 데이터의 현재 측정값이 기 저장된 이전 측정값과 오차범위 내에서 동일한지 판단하는 제1 단계; 상기 제1 단계에서 동일한 것으로 판단되면, 상기 부모노드에게 현재 측정값과 이전 측정값이 동일한지 나타내는 신호를 전송하는 제2 단계; 및 상기 부모노드가 상기 센서노드로부터 현재 측정값과 이전 측정값이 ...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cfe49d03e6a3dce01d8bac71b41b9fc3fc59196a46f8a783e6776794cebfdf96a
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe46c22163f668395d4ec7f2c7af522ca21209f4bf7becfff74c1ca0406a4d0ee45
+&lt;/drawing&gt;
+&lt;indexNo&gt;16&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+센서 네트워크에서 저전력을 위한 센서 데이터의 관리방법(Method of managing sensor data for low power in sensornetwork)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H04L 12/26 | H04W 12/24 | H04W 24/00&lt;/ipcNumber&gt;
+&lt;openDate/&gt;
+&lt;openNumber/&gt;
+&lt;publicationDate&gt;20070817&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20070809&lt;/registerDate&gt;
+&lt;registerNumber&gt;1007498240000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;소멸&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;마루엘에스아이 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20060526&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020060047435&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 자외선 센서, 자외선 센서용 독출 회로 및 자외선 센서를 포함하는 이미지 센서에 관한 발명으로써, 보다 구체적으로 이미지 정보뿐만 아니라 자외선의 세기까지 출력할 수 있는 이미지 센서와 이러한 이미지 센서에 사용될 수 있고 실리콘 공정을 이용하는 자외선 센서 및 자외선 센서용 독출 회로에 관한 발명이다. 본 발명은 조광영역 내부에 위치하며, 입사되는 가시광선에 대응하는 이미지 신호를 출력하는 화소 어레이; 상기 조광영역 내부에 위치하며, 입사되는 자외선의 세기에 대응하는 자외선 신호를 출력하는 자외선 센서; 및 상기 화소 어레이를 제어하며, 상기 이미지 신호 및 상기 자외선 신호를 처리하여 출력하는 주변회로부를 포함하는 이미지 센서를 제공한다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cfe49d03e6a3dce018adad635d28d5de359bb71c6e7cf7b862321a3cb1d9b769a
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe46c22163f668395d473c9566377a6584b77b44e22ccb98d3a4159341b78cd1f8f
+&lt;/drawing&gt;
+&lt;indexNo&gt;17&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+자외선 센서, 자외선 센서용 독출 회로 및 자외선 센서를포함하는 이미지 센서(ULTRAVIOLET SENSOR, READOUT CIRCUIT FOR ULTRAVILETSENSOR AND IMAGE SENSOR INCLUDING ULTRAVIOLET SENSOR)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H04N 5/341&lt;/ipcNumber&gt;
+&lt;openDate&gt;20071129&lt;/openDate&gt;
+&lt;openNumber&gt;1020070113751&lt;/openNumber&gt;
+&lt;publicationDate&gt;20080201&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20080128&lt;/registerDate&gt;
+&lt;registerNumber&gt;1008003090000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;등록&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;마루엘에스아이 주식회사&lt;/applicantName&gt;
+&lt;applicationDate&gt;20060427&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020060037905&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 이미지 센서용 화소 회로 및 샘플 및 홀더의 제어방법, 및 이미지 센서에 관한 발명으로서, 보다 구체적으로 CMOS형 이미지 센서용 화소 회로 및 샘플 및 홀더의 제어방법, 및 CMOS형 이미지 센서에 관한 발명이다. 본 발명은 CMOS 이미지 센서용 화소 회로의 제어방법에 있어서, (a) 포토다이오드와 플로팅 확산 영역 사이에 연결된 제1 트랜지스터와 상기 플로팅 확산 영역과 오버플로우 캐패시터 사이에 연결된 제2 트랜지스터를 오프 상태로 유지하며 상기 플로팅 확산 영역을 리셋하는 단계; (b) 상기 제1 트랜지스터를 오프 상태로 유지하고 상기 플로팅 확산 영역을 리셋이 해제된 상태로 유지하며 상기 제2 트랜지스터를 온하여, 상기 포토다이오드로부터 플로팅 확산 영역으로 오버플로우되는 오버플로우 전하를 상기 오버플로우 캐패시터에 저장하는 단계; (c) 상기 (a) 단계 및 상기 (b) 단계를 적어도 1회 이상 반복하는 단계; 및 (d) 상기 포토다이오드에 축적된 전하에 대응하는 저조도 전압 및 상기 오버플로우 캐패시터에 저장된 오버플로우 전하에 대응하는 고조도 전압이 출력되는 단계를 포함하는 제어방법을 제공한다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cfe49d03e6a3dce01a361d9aa163c91ae7cae31e92ac2a1823c301928a3650596
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe46c22163f668395d462d2f012b4befc940c67e50ace783d11fd54a4541b818f67
+&lt;/drawing&gt;
+&lt;indexNo&gt;18&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+이미지 센서용 화소 회로 및 샘플 및 홀더의 제어방법, 및이미지 센서(image sensor, and method for controlling pixel circuitand sample and holder)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H04N 5/3745&lt;/ipcNumber&gt;
+&lt;openDate&gt;20071031&lt;/openDate&gt;
+&lt;openNumber&gt;1020070105587&lt;/openNumber&gt;
+&lt;publicationDate&gt;20080201&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20080128&lt;/registerDate&gt;
+&lt;registerNumber&gt;1008003070000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;등록&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;주식회사 티엘아이&lt;/applicantName&gt;
+&lt;applicationDate&gt;20070502&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020070042471&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+센싱소자의 면적을 증가시킬 수 있는 이미지 센서 및 이의 구동방법, 그리고, 이미지 센서의 단위픽셀 및 이의 구동방법이 게시된다. 본 발명의 이미지 센서의 단위픽셀은 저장노드; 외부의 에너지에 의하여 전하를 발생하는 센싱소자로서, 상기 저장노드와 데이터 라인에 접속되어 형성되는 상기 센싱소자; 및 상기 저장노드를 게이트 라인에 커플링하는 저장소자를 구비한다. 본 발명의 이미지 센서의 단위픽셀의 구현을 위해서는, 센싱소자, 저장소자, 게이트 라인 및 데이터 라인만이 필수적으로 요구된다. 따라서, 본 발명의 단위픽셀에 의하면, 레이아웃 면적이 크게 감소한다. 다시 기술하면, 본 발명의 이미지 센서의 단위픽셀에 의하면, 감소된 레이아웃 면적을 센싱소자의 영역으로 활당함으로써, 주어진 단위픽셀의 레이아웃 면적에서 센싱소자의 면적이 증가될 수 있으며, 그에 따라 빛의 대한 센싱이 용이하게 된다.
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd035bfb5ff666db4c9cf44e6e9608087f40d6454b6e9345aa54cc45d66ec3a7177646ddbd267de8e991
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e2d625a3dcb0746fe484b73ac8e410bb22b665cd13e71ecab85ecaac1572aac74660ec6a126014fe8a
+&lt;/drawing&gt;
+&lt;indexNo&gt;19&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+센싱소자의 면적을 증가시킬 수 있는 이미지 센서 및 이의 구동방법, 그리고, 이미지 센서의 단위픽셀 및 이의 구동방법(Image Sensor for Increased sensing area and operating method thereof, Pixel in Image Sensor and operating method thereof)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;H04N 5/369&lt;/ipcNumber&gt;
+&lt;openDate/&gt;
+&lt;openNumber/&gt;
+&lt;publicationDate&gt;20080703&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20080627&lt;/registerDate&gt;
+&lt;registerNumber&gt;1008436630000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;등록&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;applicantName&gt;주식회사 시오스&lt;/applicantName&gt;
+&lt;applicationDate&gt;20071231&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;1020070141885&lt;/applicationNumber&gt;
+&lt;astrtCont&gt;
+본 발명은 이산화탄소센서 및 상기 이산화탄소센서가 구비된 이산화탄소 측정장치에 관한 것으로서, 기준전극이 구비되는 기준전극안착홈이 형성된 고체전해질을 이용하고, 센서가 구비되는 센서안착홈이 형성된 가열수단을 이용하여 고정력을 높여 내구성을 향상시키고 규격화가 가능하여 대량생산이 용이하고, 센서 신호의 신뢰성 및 안정성을 높일 수 있는 이산화탄소센서 및 상기 이산화탄소센서가 구비된 이산화탄소 측정장치에 관한 것이다. 본 발명에 따른 이산화탄소센서는 일측 면에 내측으로 함입된 기준전극안착홈이 형성된 고체전해질, 상기 고체전해질의 기준전극안착홈에 형성되는 기준전극, 상기 고체전해질의 타측 면에 형성되는 감지전극, 및 상기 기준전극 및 감지전극과 각각 연결되어 연장되는 한 쌍의 기전력리드선 을 포함하여 형성되는 것을 특징으로 한다. 한편, 본 발명에 따른 이산화탄소 측정장치는 일측 면에 상기 이산화탄소센서가 구비되는 센서안착홈이 형성되는 가열수단, 및 상술한 바와 같은 특징을 가지는 이산화탄소센서를 포함하여 형성되는 것을 특징으로 한다. 이에 따라, 본 발명의 이산화탄소센서 및 상기 이산화탄소센서가 구비된 이산화탄소 측정장치는 기준전극을 정확한 위치에 형성하고, 가열수단에 센서를 정확한 위치에 형성 가능하여 제조의 편의성을 높여 생산성을 향상시킬 수 있으며, 내구성을 높여 사용수명을 증대시킬 수 있는 장...(이하생략)
+&lt;/astrtCont&gt;
+&lt;bigDrawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=452306798ef1fd03bf8e5ba4e1dbf7268f6cd03ca6950c0b5115bcb8784127e2f742aa5dbce8f43261be4a8302661dc0d3f2e54bb4694b292d60d3739e0137d566bb0352b489c5af
+&lt;/bigDrawing&gt;
+&lt;drawing&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e22d01c5c32ba711cf85bbd94cb23c760db37df36909e7ec35064dc5ba269ea22d94fa5cdcd70c75e511c40c800910528366cedbf7d3ab5fe87a248e536a1bf217
+&lt;/drawing&gt;
+&lt;indexNo&gt;20&lt;/indexNo&gt;
+&lt;inventionTitle&gt;
+이산화탄소센서 및 상기 이산화탄소센서가 구비된이산화탄소 측정장치(THE CARBON DIOXIDE ELECTROCHEMICAL SENSOR AND THE MEASURING DEVICE EQUIPPED WITH SAME)
+&lt;/inventionTitle&gt;
+&lt;ipcNumber&gt;G01N 31/00 | G01N 31/20 | G01N 27/26 | G01N 27/00&lt;/ipcNumber&gt;
+&lt;openDate&gt;20090703&lt;/openDate&gt;
+&lt;openNumber&gt;1020090073825&lt;/openNumber&gt;
+&lt;publicationDate&gt;20100125&lt;/publicationDate&gt;
+&lt;publicationNumber/&gt;
+&lt;registerDate&gt;20100118&lt;/registerDate&gt;
+&lt;registerNumber&gt;1009386730000&lt;/registerNumber&gt;
+&lt;registerStatus&gt;등록&lt;/registerStatus&gt;
+&lt;/item&gt;
+&lt;/items&gt;
+&lt;/body&gt;
+&lt;count&gt;
+&lt;numOfRows&gt;20&lt;/numOfRows&gt;
+&lt;pageNo&gt;1&lt;/pageNo&gt;
+&lt;totalCount&gt;22251&lt;/totalCount&gt;
+&lt;/count&gt;
+&lt;/response&gt;</textarea>
+							

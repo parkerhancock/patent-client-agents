@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Shape observed live on 2026-10-22 from plus.kipris.or.kr/kipo-api/kipi with an unregistered key (coordinator check); timestamp replaced. -->
+<response><header><requestMsgID/><responseTime>2026-10-22 00:00:00.0</responseTime><responseMsgID/><successYN>N</successYN><resultCode>30</resultCode><resultMsg>SERVICE_KEY_IS_NOT_REGISTERED_ERROR</resultMsg></header></response>

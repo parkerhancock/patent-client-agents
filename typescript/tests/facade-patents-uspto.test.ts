@@ -450,11 +450,11 @@ describe("search_patents and search_uspto", () => {
       "EPO OPS — `ta=bricks` (publication): 1 of 40 hits.",
     );
   });
-  test("KR search is reported as not yet available", async () => {
+  test("KR search reports the missing KIPRIS configuration", async () => {
     await expect(
       mcp.call("search_patents", { query: "x", jurisdiction: "kr" }),
     ).rejects.toThrow(
-      /Korean \(KR\) patent search is not yet available.*jurisdiction='us'/,
+      /Korean \(KR\) patent search is not enabled on this server \(KIPO_KIPRIS_API_KEY is not configured\).*jurisdiction='us'/,
     );
   });
   test("search_uspto routes applications, publications and petitions", async () => {
@@ -508,7 +508,7 @@ describe("get_patent", () => {
     await expect(
       mcp.call("get_patent", { view: "biblio", identifier: "KR1020230012345" }),
     ).rejects.toThrow(
-      "Korean (KR) bibliographic retrieval is not yet available",
+      "Korean (KR) bibliographic retrieval is not enabled on this server",
     );
   });
   test("claims cascade: ODP grant XML first", async () => {
@@ -645,9 +645,7 @@ describe("resolve_patent_number and patent_client_status", () => {
     expect(fake.seen.length).toBe(before);
     expect(status.details).toMatchObject({ version: "0.1.0" });
     expect(status.details?.unported_tools).toEqual([...UNPORTED_FACADE_TOOLS]);
-    expect(status.details?.unported_modes).toContain(
-      "search_patents(jurisdiction='kr')",
-    );
+    expect(status.details?.unported_modes).toEqual([]);
     expect(
       Object.keys(status.details?.configured_families as object),
     ).toContain("epo");

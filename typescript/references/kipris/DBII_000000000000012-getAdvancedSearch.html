@@ -1,0 +1,714 @@
+
+
+
+
+
+
+	<article class="mt-10">
+		<p class="tit">Operation Name</p>
+	</article>
+
+	<p class="p-type1"> getAdvancedSearch</p>
+
+	
+
+	<article class="mt-10">
+		<p class="tit">
+			Request URL
+		</p>
+	</article>
+	<p class="p-type1"><span class="txt-blue">http://plus.kipris.or.kr/</span></p>
+	<article class="mt-10">
+		<p class="tit">
+			Request Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+	
+
+	 
+
+
+
+
+	<div data-ax5grid="apiInutparameterGrid" data-ax5grid-config="{ }" style="height: 1498px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid1' ,
+    	target : $("[data-ax5grid='apiInutparameterGrid']"),
+   		columns : [
+ 		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"trademarkName","paramDataInfo1":"상표명칭","paramDataInfo2":"","paramOrder":"I0001","parentParamOrder":"NONE","path":"-[I0001]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"trademarkNameMatch","paramDataInfo1":"상표명칭완전일치","paramDataInfo2":"","paramOrder":"I0002","parentParamOrder":"NONE","path":"-[I0002]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"classification","paramDataInfo1":"상품분류코드","paramDataInfo2":"","paramOrder":"I0003","parentParamOrder":"NONE","path":"-[I0003]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"asignProduct","paramDataInfo1":"지정상품","paramDataInfo2":"","paramOrder":"I0004","parentParamOrder":"NONE","path":"-[I0004]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"I0005","parentParamOrder":"NONE","path":"-[I0005]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"registerNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"I0006","parentParamOrder":"NONE","path":"-[I0006]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"publicationNumber","paramDataInfo1":"출원공고번호","paramDataInfo2":"","paramOrder":"I0007","parentParamOrder":"NONE","path":"-[I0007]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"registrationPublicNumber","paramDataInfo1":"등록공고번호","paramDataInfo2":"","paramOrder":"I0008","parentParamOrder":"NONE","path":"-[I0008]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"internationalRegisterNumber","paramDataInfo1":"국제등록번호","paramDataInfo2":"","paramOrder":"I0009","parentParamOrder":"NONE","path":"-[I0009]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"priorityNumber","paramDataInfo1":"우선권주장번호","paramDataInfo2":"","paramOrder":"I0010","parentParamOrder":"NONE","path":"-[I0010]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0011","parentParamOrder":"NONE","path":"-[I0011]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"registerDate","paramDataInfo1":"등록일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0012","parentParamOrder":"NONE","path":"-[I0012]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"publicationDate","paramDataInfo1":"출원공고일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0013","parentParamOrder":"NONE","path":"-[I0013]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"registrationPublicDate","paramDataInfo1":"등록공고일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0014","parentParamOrder":"NONE","path":"-[I0014]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"internationalRegisterDate","paramDataInfo1":"국제등록일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0015","parentParamOrder":"NONE","path":"-[I0015]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"priorityDate","paramDataInfo1":"우선권주장일자","paramDataInfo2":"YYYYMMDD~YYYYMMDD","paramOrder":"I0016","parentParamOrder":"NONE","path":"-[I0016]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicantName","paramDataInfo1":"출원인명/특허고객번호 (출원인(AP)/코드)","paramDataInfo2":"","paramOrder":"I0017","parentParamOrder":"NONE","path":"-[I0017]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"agentName","paramDataInfo1":"대리인명/대리인번호 (대리인(AG)/코드)","paramDataInfo2":"","paramOrder":"I0018","parentParamOrder":"NONE","path":"-[I0018]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"regPrivilegeName","paramDataInfo1":"등록권자","paramDataInfo2":"","paramOrder":"I0019","parentParamOrder":"NONE","path":"-[I0019]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"viennaCode","paramDataInfo1":"도형코드 (DR 비엔나)","paramDataInfo2":"","paramOrder":"I0020","parentParamOrder":"NONE","path":"-[I0020]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"freeSearch","paramDataInfo1":"자유검색","paramDataInfo2":"","paramOrder":"I0021","parentParamOrder":"NONE","path":"-[I0021]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"similarityCode","paramDataInfo1":"유사군코드","paramDataInfo2":"","paramOrder":"I0022","parentParamOrder":"NONE","path":"-[I0022]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"application","paramDataInfo1":"출원","paramDataInfo2":"true/false ; ※ 권리구분 플래그(application·registration·refused·expiration·withdrawal·publication·cancel·abandonment) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0023","parentParamOrder":"NONE","path":"-[I0023]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"registration","paramDataInfo1":"등록","paramDataInfo2":"true/false ; ※ 권리구분 플래그(application·registration·refused·expiration·withdrawal·publication·cancel·abandonment) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0024","parentParamOrder":"NONE","path":"-[I0024]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"refused","paramDataInfo1":"거절","paramDataInfo2":"true/false ; ※ 권리구분 플래그(application·registration·refused·expiration·withdrawal·publication·cancel·abandonment) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0025","parentParamOrder":"NONE","path":"-[I0025]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"expiration","paramDataInfo1":"소멸","paramDataInfo2":"true/false ; ※ 권리구분 플래그(application·registration·refused·expiration·withdrawal·publication·cancel·abandonment) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0026","parentParamOrder":"NONE","path":"-[I0026]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"withdrawal","paramDataInfo1":"취하","paramDataInfo2":"true/false ; ※ 권리구분 플래그(application·registration·refused·expiration·withdrawal·publication·cancel·abandonment) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0027","parentParamOrder":"NONE","path":"-[I0027]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"publication","paramDataInfo1":"공고","paramDataInfo2":"true/false ; ※ 권리구분 플래그(application·registration·refused·expiration·withdrawal·publication·cancel·abandonment) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0028","parentParamOrder":"NONE","path":"-[I0028]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"cancel","paramDataInfo1":"무효","paramDataInfo2":"true/false ; ※ 권리구분 플래그(application·registration·refused·expiration·withdrawal·publication·cancel·abandonment) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0029","parentParamOrder":"NONE","path":"-[I0029]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"abandonment","paramDataInfo1":"포기","paramDataInfo2":"true/false ; ※ 권리구분 플래그(application·registration·refused·expiration·withdrawal·publication·cancel·abandonment) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0030","parentParamOrder":"NONE","path":"-[I0030]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"trademark","paramDataInfo1":"상표 포함 여부","paramDataInfo2":"40 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0031","parentParamOrder":"NONE","path":"-[I0031]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"serviceMark","paramDataInfo1":"서비스표","paramDataInfo2":"41 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0032","parentParamOrder":"NONE","path":"-[I0032]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"trademarkServiceMark","paramDataInfo1":"상표/서비스표","paramDataInfo2":"45 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0033","parentParamOrder":"NONE","path":"-[I0033]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"businessEmblem","paramDataInfo1":"업무표장","paramDataInfo2":"42 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0034","parentParamOrder":"NONE","path":"-[I0034]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"collectiveMark","paramDataInfo1":"단체표장","paramDataInfo2":"43 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0035","parentParamOrder":"NONE","path":"-[I0035]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"geoOrgMark","paramDataInfo1":"지리적표시단체표장","paramDataInfo2":"44 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0036","parentParamOrder":"NONE","path":"-[I0036]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"internationalMark","paramDataInfo1":"국제등록상표","paramDataInfo2":"마드리드 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0037","parentParamOrder":"NONE","path":"-[I0037]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"certMark","paramDataInfo1":"증명표장","paramDataInfo2":"47 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0038","parentParamOrder":"NONE","path":"-[I0038]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"geoCertMark","paramDataInfo1":"지리적증명표장","paramDataInfo2":"48 · true/false ; ※ 상표유형 플래그(trademark·serviceMark·businessEmblem·certMark·collectiveMark·geoCertMark·geoOrgMark·internationalMark·trademarkServiceMark) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0039","parentParamOrder":"NONE","path":"-[I0039]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"character","paramDataInfo1":"문자상표","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0040","parentParamOrder":"NONE","path":"-[I0040]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"figure","paramDataInfo1":"도형상표","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0041","parentParamOrder":"NONE","path":"-[I0041]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"compositionCharacter","paramDataInfo1":"복합문자","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0042","parentParamOrder":"NONE","path":"-[I0042]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"figureComposition","paramDataInfo1":"도형복합","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0043","parentParamOrder":"NONE","path":"-[I0043]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"sound","paramDataInfo1":"소리상표","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0044","parentParamOrder":"NONE","path":"-[I0044]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"fragrance","paramDataInfo1":"냄새상표","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0045","parentParamOrder":"NONE","path":"-[I0045]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"color","paramDataInfo1":"색채상표","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0046","parentParamOrder":"NONE","path":"-[I0046]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"dimension","paramDataInfo1":"입체상표","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0047","parentParamOrder":"NONE","path":"-[I0047]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"colorMixed","paramDataInfo1":"색채복합","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0048","parentParamOrder":"NONE","path":"-[I0048]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"hologram","paramDataInfo1":"홀로그램","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0049","parentParamOrder":"NONE","path":"-[I0049]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"motion","paramDataInfo1":"동작상표","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0050","parentParamOrder":"NONE","path":"-[I0050]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"visual","paramDataInfo1":"기타시각적으로인식가능","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0051","parentParamOrder":"NONE","path":"-[I0051]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"invisible","paramDataInfo1":"기타시각적으로인식불가능","paramDataInfo2":"true/false ; ※ 표장구성 플래그(character·figure·compositionCharacter·figureComposition·fragrance·sound·color·colorMixed·dimension·hologram·invisible·motion·visual) 중 1개 이상 true 필수(그룹 전체 미지정 시 오류)","paramOrder":"I0052","parentParamOrder":"NONE","path":"-[I0052]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"pageNo","paramDataInfo1":"페이지 번호","paramDataInfo2":"기본 1","paramOrder":"I0053","parentParamOrder":"NONE","path":"-[I0053]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"numOfRows","paramDataInfo1":"페이지당 출력 건수","paramDataInfo2":"기본 30, 최대 500","paramOrder":"I0054","parentParamOrder":"NONE","path":"-[I0054]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"sortSpec","paramDataInfo1":"정렬 기준 항목","paramDataInfo2":"","paramOrder":"I0055","parentParamOrder":"NONE","path":"-[I0055]"},{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"descSort","paramDataInfo1":"정렬 방향","paramDataInfo2":"true=내림차순/false=오름차순, sortSpec 함께 사용","paramOrder":"I0056","parentParamOrder":"NONE","path":"-[I0056]"}];
+
+    $g.setData( {data : data , id : "grid1"});
+
+//     $("[data-ax5grid='apiInutparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].paramData) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Input values ​​(sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="입력값(샘플)">http://plus.kipris.or.kr/kipo-api/kipi/trademarkInfoSearchService/getAdvancedSearch?applicantName=(주)아모레퍼시픽&application=true&amp;registration=true&refused=true&expiration=true&withdrawal=true&publication=true&cancel=true&abandonment=true&trademark=true&serviceMark=true&businessEmblem=true&collectiveMark=true&geoOrgMark=true&trademarkServiceMark=true&certMark=true&geoCertMark=true&internationalMark=true&character=true&figure=true&compositionCharacter=true&figureComposition=true&fragrance=true&sound=true&color=true&colorMixed=true&dimension=true&hologram=true&invisible=true&motion=true&visual=true&ServiceKey=write your service key</textarea>
+	<article class="mt-10">
+		<p class="tit">
+			Response Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+
+
+	<div data-ax5grid="apiOutputparameterGrid" data-ax5grid-config="{ }" style="height: 822px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid2' ,
+    	target : $("[data-ax5grid='apiOutputparameterGrid']"),
+   		columns : [
+		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"items","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0001","parentParamOrder":"NONE","path":"-[G0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" indexNo","paramDataInfo1":"번호","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0001","path":"-[G0001]-[D0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0001","path":"-[G0001]-[D0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0001","path":"-[G0001]-[D0003]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationNumber","paramDataInfo1":"출원공고번호","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0001","path":"-[G0001]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" publicationDate","paramDataInfo1":"출원공고일자","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0001","path":"-[G0001]-[D0005]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationPublicNumber","paramDataInfo1":"등록공고번호","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0001","path":"-[G0001]-[D0006]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationPublicDate","paramDataInfo1":"등록공고일자","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0001","path":"-[G0001]-[D0007]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0001","path":"-[G0001]-[D0008]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" registrationDate","paramDataInfo1":"등록일자","paramDataInfo2":"","paramOrder":"D0009","parentParamOrder":"G0001","path":"-[G0001]-[D0009]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" priorityNumber","paramDataInfo1":"우선권주장번호","paramDataInfo2":"","paramOrder":"D0010","parentParamOrder":"G0001","path":"-[G0001]-[D0010]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" priorityDate","paramDataInfo1":"우선권주장일자","paramDataInfo2":"","paramOrder":"D0011","parentParamOrder":"G0001","path":"-[G0001]-[D0011]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicationStatus","paramDataInfo1":"출원상태","paramDataInfo2":"","paramOrder":"D0012","parentParamOrder":"G0001","path":"-[G0001]-[D0012]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" classificationCode","paramDataInfo1":"상품분류코드","paramDataInfo2":"","paramOrder":"D0013","parentParamOrder":"G0001","path":"-[G0001]-[D0013]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" viennaCode","paramDataInfo1":"도형코드","paramDataInfo2":"복수값 '|' 구분","paramOrder":"D0014","parentParamOrder":"G0001","path":"-[G0001]-[D0014]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" applicantName","paramDataInfo1":"출원인명/특허고객번호","paramDataInfo2":"","paramOrder":"D0015","parentParamOrder":"G0001","path":"-[G0001]-[D0015]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" agentName","paramDataInfo1":"대리인명/대리인번호","paramDataInfo2":"","paramOrder":"D0016","parentParamOrder":"G0001","path":"-[G0001]-[D0016]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" regPrivilegeName","paramDataInfo1":"등록권자명/특허고객번호","paramDataInfo2":"","paramOrder":"D0017","parentParamOrder":"G0001","path":"-[G0001]-[D0017]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" title","paramDataInfo1":"상표명칭","paramDataInfo2":"","paramOrder":"D0018","parentParamOrder":"G0001","path":"-[G0001]-[D0018]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" fullText","paramDataInfo1":"전문존재유무","paramDataInfo2":"","paramOrder":"D0019","parentParamOrder":"G0001","path":"-[G0001]-[D0019]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" drawing","paramDataInfo1":"이미지경로","paramDataInfo2":"","paramOrder":"D0020","parentParamOrder":"G0001","path":"-[G0001]-[D0020]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" bigDrawing","paramDataInfo1":"큰이미지경로","paramDataInfo2":"","paramOrder":"D0021","parentParamOrder":"G0001","path":"-[G0001]-[D0021]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" appReferenceNumber","paramDataInfo1":"출원참조번호","paramDataInfo2":"","paramOrder":"D0022","parentParamOrder":"G0001","path":"-[G0001]-[D0022]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" regReferenceNumber","paramDataInfo1":"등록참조번호","paramDataInfo2":"","paramOrder":"D0023","parentParamOrder":"G0001","path":"-[G0001]-[D0023]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" internationalRegisterNumber","paramDataInfo1":"국제등록번호","paramDataInfo2":"","paramOrder":"D0024","parentParamOrder":"G0001","path":"-[G0001]-[D0024]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" internationalRegisterDate","paramDataInfo1":"국제등록일자","paramDataInfo2":"","paramOrder":"D0025","parentParamOrder":"G0001","path":"-[G0001]-[D0025]"},{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"count","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0002","parentParamOrder":"NONE","path":"-[G0002]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" numOfRows","paramDataInfo1":"페이지당건수","paramDataInfo2":"","paramOrder":"D0026","parentParamOrder":"G0002","path":"-[G0002]-[D0026]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" pageNo","paramDataInfo1":"페이지번호","paramDataInfo2":"","paramOrder":"D0027","parentParamOrder":"G0002","path":"-[G0002]-[D0027]"},{"lvl":2,"paramType1":"OUT","paramType2":"DATA","paramData":" totalCount","paramDataInfo1":"전체건수","paramDataInfo2":"","paramOrder":"D0028","parentParamOrder":"G0002","path":"-[G0002]-[D0028]"}];
+
+    $g.setData({data : data , id : "grid2"});
+
+//     $("[data-ax5grid='apiOutputparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].serviceNm) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Output value (sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="출력값(샘플)">&lt;response&gt;
+&lt;header&gt;
+&lt;requestMsgID/&gt;
+&lt;responseTime&gt;2020-12-31 13:14:50.1450&lt;/responseTime&gt;
+&lt;responseMsgID/&gt;
+&lt;successYN&gt;Y&lt;/successYN&gt;
+&lt;resultCode&gt;00&lt;/resultCode&gt;
+&lt;resultMsg&gt;NORMAL SERVICE.&lt;/resultMsg&gt;
+&lt;/header&gt;
+&lt;body&gt;
+&lt;items&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20201214&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200228156&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e92bfe2e09b7f259ad74c00b546079426b0284c72621c07d0e17edc336f3e19c92&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;32&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8a07c61e12afa1ccc435a88523125f67c11e16c3627927022a889c2e70c579b211&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;1&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;NUTRIMACY&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20201214&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200228154&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e92bfe2e09b7f259ad74c00b546079426bc6a0f09805c2b29025580afa165dd9c3&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;29&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8a07c61e12afa1ccc435a88523125f67c118bd6b6ffde70c423dc9727afaa710ed&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;2&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;NUTRIMACY&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20201214&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200228155&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e92bfe2e09b7f259ad74c00b546079426bca4996603248349962e3f7cfc89c279e&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;30&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8a07c61e12afa1ccc435a88523125f67c17faedb059fc73d77cae444f392ae4344&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;3&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;NUTRIMACY&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20201214&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200228153&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e92bfe2e09b7f259ad74c00b546079426bb7b53d2fb39d5a3b57c9b084e5f9732c&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;05&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8a07c61e12afa1ccc435a88523125f67c1f9dcb3086c550cd92f70c8498f2166f6&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;4&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;NUTRIMACY&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200508&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200076026&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e90996dde5f848fea12beba5ce00ae38b5688131ebfbd99b0aae189444ce1a1d4f&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8af448e3e4ed57d1eb105a77553dff22eb2c9deaa60d63927e2f1ab2e6562df94f&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;5&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PEREWA&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200508&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200076027&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e90996dde5f848fea12beba5ce00ae38b57552b97bedbe815f6da553ce3ace14ad&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8af448e3e4ed57d1eb105a77553dff22eb55f07984815f3e605345e0d63e286fb1&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;6&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PEREWELL&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200519&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200082384&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e940cfe3072c11991b6232a1be2fa84e0f77d72b5fc94e16f5e66a51bdd3c1fa3b&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8a8a59736436d82f22d457cddb3980ba982f8a795cc508a09f1efe5b8efa590d06&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;7&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;RAFFINO-LACTO TRAP WATER&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200508&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200076024&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e90996dde5f848fea12beba5ce00ae38b5ef1aa1370c45f3283db46f0fc6abcc0d&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;21&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8af448e3e4ed57d1eb105a77553dff22ebd8cbc27c0bb0e3863496529436658450&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;8&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PEREU&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200508&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200076025&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e90996dde5f848fea12beba5ce00ae38b50cd3247705b661fddaecf58dc01367f8&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;35&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8af448e3e4ed57d1eb105a77553dff22eb4c8c54e492a342f5c1d52e260300e6f9&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;9&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PEREU&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200519&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200082383&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e940cfe3072c11991b6232a1be2fa84e0f79c448222666e08feb0a3c5cbd2f1fed&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8a8a59736436d82f22d457cddb3980ba98c1b30469d690dd5d874a3a7acdce3a20&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;10&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;AKINDOF&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200508&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200076033&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e90996dde5f848fea198a3bbc73e8146c22b173d9d83064dced1be6343dd40b131&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8af448e3e4ed57d1ebe58f7fb7d7badada0fe70475a579350e7782385f0faa2749&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;11&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;시예누&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200508&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200076023&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e90996dde5f848fea12beba5ce00ae38b5b04f474c9f2a2e00f734acbe57b2e5ee&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8af448e3e4ed57d1eb105a77553dff22eb4e5bdd11d443519da50f0a7702216d1d&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;12&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PEREU&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20090515&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020090022416&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;소멸&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a438998fe897a23675ce4c37cef60776c026cf204195babf85a115c8fa0ab546418ab1fce4c0329216a3d2e&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;01&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344caa2520f8fd62e90d8f52354c7fbb5d123378726d612e537f17ac04a29c6ac7d&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;13&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20100409&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020100018022&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;(주)아모레퍼시픽 AMOREPACIFIC CORPORATION&lt;/regPrivilegeName&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate&gt;20100617&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4008268630000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PHARMAPLEX&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName/&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20090323&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020090013196&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;소멸&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a438998fe897a23675ce4c37cef60776c026cf2d9e845567dfe06c3e4b1b01f23e8351d2957f02faead7ef0&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;01&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344caa2520f8fd62e900debfbcdd8fdd51af135f7e5ecca38bd94194e28f0d23791&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;14&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20100329&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020100015500&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;(주)아모레퍼시픽 AMOREPACIFIC CORPORATION&lt;/regPrivilegeName&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate&gt;20100617&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4008269630000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;LINE REPAIRING COMPLEX&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName/&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20090319&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020090012866&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;소멸&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a438998fe897a23675ce4c37cef60776c026cf20df0b1d10c0c74f43729f484ab2449907bb37448e9a94e43&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344caa2520f8fd62e90b28665baba5c9ac876905aa859a40aad8798cc0f614a011a&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;15&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20100329&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020100015484&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;(주)아모레퍼시픽 AMOREPACIFIC CORPORATION&lt;/regPrivilegeName&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate&gt;20100617&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4008269540000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PRODENTAL&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200508&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200076032&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e90996dde5f848fea198a3bbc73e8146c26b2533bef4b2150b95be36ad5d8ab9d7&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8af448e3e4ed57d1ebe58f7fb7d7badadaa84e2bb77d7861978b3eaa9ae27c582f&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;16&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PERENA&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20090518&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020090022827&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;소멸&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a438998fe897a23675ce4c37cef60776c026cf204195babf85a115cbaa57b43a398fb3eb2d62945daae5312&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344caa2520f8fd62e90d8f52354c7fbb5d1d361f9213717f910ed1543d5ee26747f&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;17&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20100409&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020100018034&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;(주)아모레퍼시픽 AMOREPACIFIC CORPORATION&lt;/regPrivilegeName&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate&gt;20100617&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4008268580000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;VITALASTER&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20090515&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020090022417&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;소멸&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a438998fe897a23675ce4c37cef60776c026cf204195babf85a115c8fa0ab546418ab1ffd83f8dddab460bb&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344caa2520f8fd62e90d8f52354c7fbb5d123378726d612e537fc68c692c7aeadd5&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;18&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20100409&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020100018023&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;(주)아모레퍼시픽 AMOREPACIFIC CORPORATION&lt;/regPrivilegeName&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate&gt;20100617&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4008268640000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PHARMAPLEX&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName&gt;김영철&lt;/agentName&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20200508&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020200076028&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;출원&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ad7a17eeeef6e4ea4b5e22ef00dd3e29df616987ef7331e90996dde5f848fea12beba5ce00ae38b56236b16fd1715187bcc1442c9b4ee9d0&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344f20ce8245b099a8af448e3e4ed57d1eb105a77553dff22eb34f1492ca9c37a9e06f72ab8067b0a40&lt;/drawing&gt;
+&lt;fullText&gt;N&lt;/fullText&gt;
+&lt;indexNo&gt;19&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate/&gt;
+&lt;publicationNumber/&gt;
+&lt;regPrivilegeName/&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate/&gt;
+&lt;registrationNumber/&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;PEREWAY&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;item&gt;
+&lt;agentName/&gt;
+&lt;appReferenceNumber/&gt;
+&lt;applicantName&gt;(주)아모레퍼시픽&lt;/applicantName&gt;
+&lt;applicationDate&gt;20090319&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;4020090012867&lt;/applicationNumber&gt;
+&lt;applicationStatus&gt;소멸&lt;/applicationStatus&gt;
+&lt;bigDrawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a438998fe897a23675ce4c37cef60776c026cf20df0b1d10c0c74f43729f484ab244990166854e77e51a7bd&lt;/bigDrawing&gt;
+&lt;classificationCode&gt;03&lt;/classificationCode&gt;
+&lt;drawing&gt;http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e251697a9d72a91344caa2520f8fd62e90b28665baba5c9ac876905aa859a40aad5e0c975f405b017b&lt;/drawing&gt;
+&lt;fullText&gt;Y&lt;/fullText&gt;
+&lt;indexNo&gt;20&lt;/indexNo&gt;
+&lt;internationalRegisterDate/&gt;
+&lt;internationalRegisterNumber/&gt;
+&lt;priorityDate/&gt;
+&lt;priorityNumber/&gt;
+&lt;publicationDate&gt;20100329&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;4020100015485&lt;/publicationNumber&gt;
+&lt;regPrivilegeName&gt;(주)아모레퍼시픽 AMOREPACIFIC CORPORATION&lt;/regPrivilegeName&gt;
+&lt;regReferenceNumber/&gt;
+&lt;registrationDate&gt;20100617&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;4008269550000&lt;/registrationNumber&gt;
+&lt;registrationPublicDate/&gt;
+&lt;registrationPublicNumber/&gt;
+&lt;title&gt;WATER WEAR&lt;/title&gt;
+&lt;viennaCode/&gt;
+&lt;/item&gt;
+&lt;/items&gt;
+&lt;/body&gt;
+&lt;count&gt;
+&lt;numOfRows&gt;20&lt;/numOfRows&gt;
+&lt;pageNo&gt;1&lt;/pageNo&gt;
+&lt;totalCount&gt;33427&lt;/totalCount&gt;
+&lt;/count&gt;
+&lt;/response&gt;</textarea>
+							

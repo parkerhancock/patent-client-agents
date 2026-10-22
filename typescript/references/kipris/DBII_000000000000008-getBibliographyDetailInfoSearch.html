@@ -1,0 +1,696 @@
+
+
+
+
+
+
+	<article class="mt-10">
+		<p class="tit">Operation Name</p>
+	</article>
+
+	<p class="p-type1"> getBibliographyDetailInfoSearch</p>
+
+	
+
+	<article class="mt-10">
+		<p class="tit">
+			Request URL
+		</p>
+	</article>
+	<p class="p-type1"><span class="txt-blue">http://plus.kipris.or.kr/kipo-api/kipi/designInfoSearchService</span></p>
+	<article class="mt-10">
+		<p class="tit">
+			Request Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+	
+
+	 
+
+
+
+
+	<div data-ax5grid="apiInutparameterGrid" data-ax5grid-config="{ }" style="height: 68px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid1' ,
+    	target : $("[data-ax5grid='apiInutparameterGrid']"),
+   		columns : [
+ 		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"IN","paramType2":"DATA","paramData":"applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"I0001","parentParamOrder":"NONE","path":"-[I0001]"}];
+
+    $g.setData( {data : data , id : "grid1"});
+
+//     $("[data-ax5grid='apiInutparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].paramData) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Input values ​​(sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="입력값(샘플)">http://plus.kipris.or.kr/kipo-api/kipi/designInfoSearchService/getBibliographyDetailInfoSearch?applicationNumber=3020110022388&ServiceKey=servicekey</textarea>
+	<article class="mt-10">
+		<p class="tit">
+			Response Parameter
+		</p>
+	</article>
+<!-- 	<div class="brdCont_table brd-t1 firstTd"> -->
+
+<!-- 	</div> -->
+	
+
+
+	<div data-ax5grid="apiOutputparameterGrid" data-ax5grid-config="{ }" style="height: 2590px;"></div>
+	<script>
+    
+    
+    var label = ['Level', 'Type', 'Data', 'Data Info', 'Add Info'];
+    
+
+    $g.extend({
+    	id : 'grid2' ,
+    	target : $("[data-ax5grid='apiOutputparameterGrid']"),
+   		columns : [
+		        	{ key : 'lvl', label : label[0], align : 'center', width : 80},
+  		        	{ key : 'paramType2' , label : label[1], align : 'center', width : 118 },
+  		        	{ key : 'paramData', label : label[2], align : 'left', width : 250
+  		        		, formatter: function(){
+  		        			var data = this.value;
+  		        			for(var i=1; i<this.item.lvl; ++i){
+  		        				data = data.replace(" ", "&nbsp;&nbsp;");
+  		        			}
+  		        			return data;
+  		        		} },
+  		        	{ key : 'paramDataInfo1', label : label[3], align : 'center', width : 250 },
+  		        	{ key : 'paramDataInfo2', label : label[4], align : 'center', width : 450 }
+  		    	],
+  		body : {
+  			//align : 'center',
+// 	     	columnHeight : 40,
+  			onClick : function(){
+  				alert(this.value);
+//   				console.log(this);
+  			}
+   		}
+    });
+
+    var data = [{"lvl":1,"paramType1":"OUT","paramType2":"GROUP","paramData":"item","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0001","parentParamOrder":"NONE","path":"-[G0001]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" agentInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0002","parentParamOrder":"G0001","path":"-[G0001]-[G0002]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  agentInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0003","parentParamOrder":"G0002","path":"-[G0001]-[G0002]-[G0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   agentAddress","paramDataInfo1":"대리인주소","paramDataInfo2":"","paramOrder":"D0001","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0001]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   agentCode","paramDataInfo1":"대리인번호","paramDataInfo2":"","paramOrder":"D0002","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0002]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   agentCountry","paramDataInfo1":"대리인국가","paramDataInfo2":"","paramOrder":"D0003","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0003]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   agentName","paramDataInfo1":"대리인명","paramDataInfo2":"","paramOrder":"D0004","parentParamOrder":"G0003","path":"-[G0001]-[G0002]-[G0003]-[D0004]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" applicantInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0004","parentParamOrder":"G0001","path":"-[G0001]-[G0004]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  applicantInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0005","parentParamOrder":"G0004","path":"-[G0001]-[G0004]-[G0005]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicantAddress","paramDataInfo1":"출원인주소","paramDataInfo2":"","paramOrder":"D0005","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0005]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicantCode","paramDataInfo1":"출원인번호","paramDataInfo2":"","paramOrder":"D0006","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0006]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicantCountry","paramDataInfo1":"출원인국가","paramDataInfo2":"","paramOrder":"D0007","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0007]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   applicantName","paramDataInfo1":"출원인명","paramDataInfo2":"","paramOrder":"D0008","parentParamOrder":"G0005","path":"-[G0001]-[G0004]-[G0005]-[D0008]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" biblioSummaryInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0006","parentParamOrder":"G0001","path":"-[G0001]-[G0006]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  biblioInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0007","parentParamOrder":"G0006","path":"-[G0001]-[G0006]-[G0007]"},{"lvl":4,"paramType1":"OUT","paramType2":"GROUP","paramData":"   biblioSummaryInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0008","parentParamOrder":"G0007","path":"-[G0001]-[G0006]-[G0007]-[G0008]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    admstStat","paramDataInfo1":"행정처분상태","paramDataInfo2":"","paramOrder":"D0009","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0009]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    appReferenceNumber","paramDataInfo1":"출원참조번호","paramDataInfo2":"","paramOrder":"D0010","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0010]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    applicationDate","paramDataInfo1":"출원일자","paramDataInfo2":"","paramOrder":"D0011","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0011]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0012","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0012]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    articleName","paramDataInfo1":"디자인물품명칭","paramDataInfo2":"","paramOrder":"D0013","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0013]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designBasicSimilarYn","paramDataInfo1":"기본유사유무","paramDataInfo2":"","paramOrder":"D0014","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0014]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designCount","paramDataInfo1":"의장의수","paramDataInfo2":"","paramOrder":"D0015","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0015]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designCountNumber","paramDataInfo1":"의장의수(실제숫자)","paramDataInfo2":"","paramOrder":"D0016","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0016]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designNumber","paramDataInfo1":"디자인일련번호","paramDataInfo2":"","paramOrder":"D0017","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0017]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designPriorityApplicationCountry","paramDataInfo1":"우선권주장국가","paramDataInfo2":"","paramOrder":"D0018","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0018]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designPriorityApplicationDate","paramDataInfo1":"우선권주장일자","paramDataInfo2":"","paramOrder":"D0019","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0019]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designPriorityApplicationNumber","paramDataInfo1":"우선권주장번호","paramDataInfo2":"","paramOrder":"D0020","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0020]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    dsScgrtDmndYn","paramDataInfo1":"비밀의장여부","paramDataInfo2":"","paramOrder":"D0021","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0021]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    dsShpClssCd","paramDataInfo1":"디자인형태분류코드","paramDataInfo2":"","paramOrder":"D0022","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0022]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    imgFg","paramDataInfo1":"견본이미지유무","paramDataInfo2":"","paramOrder":"D0023","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0023]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    internationalRegisterDate","paramDataInfo1":"국제등록일자","paramDataInfo2":"","paramOrder":"D0024","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0024]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    internationalRegisterNumber","paramDataInfo1":"국제등록번호","paramDataInfo2":"","paramOrder":"D0025","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0025]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    lastDispositionCode","paramDataInfo1":"최종처분코드","paramDataInfo2":"","paramOrder":"D0026","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0026]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    lastDispositionDate","paramDataInfo1":"최종처분일자","paramDataInfo2":"","paramOrder":"D0027","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0027]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    lastDispositionDescription","paramDataInfo1":"최종처분설명","paramDataInfo2":"","paramOrder":"D0028","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0028]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    lastRetroDate","paramDataInfo1":"최종소급일자","paramDataInfo2":"","paramOrder":"D0029","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0029]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    lastRetroDescription","paramDataInfo1":"최종소급구분설명","paramDataInfo2":"","paramOrder":"D0030","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0030]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    lastRetroTpcd","paramDataInfo1":"최종소급구분코드","paramDataInfo2":"","paramOrder":"D0031","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0031]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    openDate","paramDataInfo1":"공개일자","paramDataInfo2":"","paramOrder":"D0032","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0032]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    openNumber","paramDataInfo1":"공개번호","paramDataInfo2":"","paramOrder":"D0033","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0033]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    originalApplicationDate","paramDataInfo1":"원출원일자","paramDataInfo2":"","paramOrder":"D0034","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0034]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    originalApplicationNumber","paramDataInfo1":"원출원번호","paramDataInfo2":"","paramOrder":"D0035","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0035]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    partDesignFg","paramDataInfo1":"부분의장여부","paramDataInfo2":"","paramOrder":"D0036","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0036]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    pubFg","paramDataInfo1":"공고공보유무","paramDataInfo2":"","paramOrder":"D0037","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0037]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    publicationDate","paramDataInfo1":"공고일자","paramDataInfo2":"","paramOrder":"D0038","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0038]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    publicationNumber","paramDataInfo1":"공고번호","paramDataInfo2":"","paramOrder":"D0039","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0039]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    regFg","paramDataInfo1":"등록유무","paramDataInfo2":"","paramOrder":"D0040","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0040]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    regReferenceNumber","paramDataInfo1":"등록참조번호","paramDataInfo2":"","paramOrder":"D0041","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0041]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    registrationDate","paramDataInfo1":"등록일자","paramDataInfo2":"","paramOrder":"D0042","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0042]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    registrationNumber","paramDataInfo1":"등록번호","paramDataInfo2":"","paramOrder":"D0043","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0043]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    relationApplicationNumber","paramDataInfo1":"관련출원번호","paramDataInfo2":"","paramOrder":"D0044","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0044]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    repubFg","paramDataInfo1":"정정공보유무","paramDataInfo2":"","paramOrder":"D0045","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0045]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    rgstTpcd","paramDataInfo1":"등록상태","paramDataInfo2":"","paramOrder":"D0046","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0046]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    rgstTpcdDscr","paramDataInfo1":"등록상태설명","paramDataInfo2":"","paramOrder":"D0047","parentParamOrder":"G0008","path":"-[G0001]-[G0006]-[G0007]-[G0008]-[D0047]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  classificationCodeInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0009","parentParamOrder":"G0006","path":"-[G0001]-[G0006]-[G0009]"},{"lvl":4,"paramType1":"OUT","paramType2":"GROUP","paramData":"   classificationCodeInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0010","parentParamOrder":"G0009","path":"-[G0001]-[G0006]-[G0009]-[G0010]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    classificationCode","paramDataInfo1":"디자인분류코드","paramDataInfo2":"","paramOrder":"D0048","parentParamOrder":"G0010","path":"-[G0001]-[G0006]-[G0009]-[G0010]-[D0048]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  designImageInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0011","parentParamOrder":"G0006","path":"-[G0001]-[G0006]-[G0011]"},{"lvl":4,"paramType1":"OUT","paramType2":"GROUP","paramData":"   designImageInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0012","parentParamOrder":"G0011","path":"-[G0001]-[G0006]-[G0011]-[G0012]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    appReferenceNumber","paramDataInfo1":"출원참조번호","paramDataInfo2":"","paramOrder":"D0049","parentParamOrder":"G0012","path":"-[G0001]-[G0006]-[G0011]-[G0012]-[D0049]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0050","parentParamOrder":"G0012","path":"-[G0001]-[G0006]-[G0011]-[G0012]-[D0050]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designNumber","paramDataInfo1":"디자인일련번호","paramDataInfo2":"","paramOrder":"D0051","parentParamOrder":"G0012","path":"-[G0001]-[G0006]-[G0011]-[G0012]-[D0051]"},{"lvl":5,"paramType1":"OUT","paramType2":"GROUP","paramData":"    imagePath","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0013","parentParamOrder":"G0012","path":"-[G0001]-[G0006]-[G0011]-[G0012]-[G0013]"},{"lvl":6,"paramType1":"OUT","paramType2":"DATA","paramData":"     imageName","paramDataInfo1":"이미지명","paramDataInfo2":"","paramOrder":"D0052","parentParamOrder":"G0013","path":"-[G0001]-[G0006]-[G0011]-[G0012]-[G0013]-[D0052]"},{"lvl":6,"paramType1":"OUT","paramType2":"DATA","paramData":"     largePath","paramDataInfo1":"큰이미지경로","paramDataInfo2":"","paramOrder":"D0053","parentParamOrder":"G0013","path":"-[G0001]-[G0006]-[G0011]-[G0012]-[G0013]-[D0053]"},{"lvl":6,"paramType1":"OUT","paramType2":"DATA","paramData":"     number","paramDataInfo1":"순번","paramDataInfo2":"","paramOrder":"D0054","parentParamOrder":"G0013","path":"-[G0001]-[G0006]-[G0011]-[G0012]-[G0013]-[D0054]"},{"lvl":6,"paramType1":"OUT","paramType2":"DATA","paramData":"     smallPath","paramDataInfo1":"이미지경로","paramDataInfo2":"","paramOrder":"D0055","parentParamOrder":"G0013","path":"-[G0001]-[G0006]-[G0011]-[G0012]-[G0013]-[D0055]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  fullTextInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0014","parentParamOrder":"G0006","path":"-[G0001]-[G0006]-[G0014]"},{"lvl":4,"paramType1":"OUT","paramType2":"GROUP","paramData":"   fullTextInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0015","parentParamOrder":"G0014","path":"-[G0001]-[G0006]-[G0014]-[G0015]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    appReferenceNumber","paramDataInfo1":"출원참조번호","paramDataInfo2":"","paramOrder":"D0056","parentParamOrder":"G0015","path":"-[G0001]-[G0006]-[G0014]-[G0015]-[D0056]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    applicationNumber","paramDataInfo1":"출원번호","paramDataInfo2":"","paramOrder":"D0057","parentParamOrder":"G0015","path":"-[G0001]-[G0006]-[G0014]-[G0015]-[D0057]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    designNumber","paramDataInfo1":"디자인일련번호","paramDataInfo2":"","paramOrder":"D0058","parentParamOrder":"G0015","path":"-[G0001]-[G0006]-[G0014]-[G0015]-[D0058]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    fullTextFileKindCode","paramDataInfo1":"전문파일종류코드","paramDataInfo2":"","paramOrder":"D0059","parentParamOrder":"G0015","path":"-[G0001]-[G0006]-[G0014]-[G0015]-[D0059]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    fullTextFilePath","paramDataInfo1":"전문파일경로","paramDataInfo2":"","paramOrder":"D0060","parentParamOrder":"G0015","path":"-[G0001]-[G0006]-[G0014]-[G0015]-[D0060]"},{"lvl":5,"paramType1":"OUT","paramType2":"DATA","paramData":"    pageCount","paramDataInfo1":"페이지수","paramDataInfo2":"","paramOrder":"D0061","parentParamOrder":"G0015","path":"-[G0001]-[G0006]-[G0014]-[G0015]-[D0061]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" creativeDescriptionInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0016","parentParamOrder":"G0001","path":"-[G0001]-[G0016]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  creativeDescriptionInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0017","parentParamOrder":"G0016","path":"-[G0001]-[G0016]-[G0017]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   designDescription","paramDataInfo1":"창작의내용","paramDataInfo2":"","paramOrder":"D0062","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0062]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   designNumber","paramDataInfo1":"디자인일련번호","paramDataInfo2":"","paramOrder":"D0063","parentParamOrder":"G0017","path":"-[G0001]-[G0016]-[G0017]-[D0063]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" creativeSummaryInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0018","parentParamOrder":"G0001","path":"-[G0001]-[G0018]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  creativeSummaryInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0019","parentParamOrder":"G0018","path":"-[G0001]-[G0018]-[G0019]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   designNumber","paramDataInfo1":"디자인일련번호","paramDataInfo2":"","paramOrder":"D0064","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0064]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   designSummary","paramDataInfo1":"창작의요점","paramDataInfo2":"","paramOrder":"D0065","parentParamOrder":"G0019","path":"-[G0001]-[G0018]-[G0019]-[D0065]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" inventorInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0020","parentParamOrder":"G0001","path":"-[G0001]-[G0020]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  inventorInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0021","parentParamOrder":"G0020","path":"-[G0001]-[G0020]-[G0021]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   designNumber","paramDataInfo1":"디자인일련번호","paramDataInfo2":"","paramOrder":"D0066","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0066]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   inventorAddress","paramDataInfo1":"창작자주소","paramDataInfo2":"","paramOrder":"D0067","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0067]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   inventorCode","paramDataInfo1":"특허고객번호(창작자번호)","paramDataInfo2":"","paramOrder":"D0068","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0068]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   inventorCountry","paramDataInfo1":"창작자국가","paramDataInfo2":"","paramOrder":"D0069","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0069]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   inventorName","paramDataInfo1":"창작자명","paramDataInfo2":"","paramOrder":"D0070","parentParamOrder":"G0021","path":"-[G0001]-[G0020]-[G0021]-[D0070]"},{"lvl":2,"paramType1":"OUT","paramType2":"GROUP","paramData":" legalStatusInfoArray","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0022","parentParamOrder":"G0001","path":"-[G0001]-[G0022]"},{"lvl":3,"paramType1":"OUT","paramType2":"GROUP","paramData":"  legalStatusInfo","paramDataInfo1":"","paramDataInfo2":"","paramOrder":"G0023","parentParamOrder":"G0022","path":"-[G0001]-[G0022]-[G0023]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   procSTCD","paramDataInfo1":"처리상태코드","paramDataInfo2":"","paramOrder":"D0071","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0071]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rsDate","paramDataInfo1":"접수발송일자","paramDataInfo2":"","paramOrder":"D0072","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0072]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rsDocumentName","paramDataInfo1":"접수발송서류명","paramDataInfo2":"","paramOrder":"D0073","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0073]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rsDocumentNameEng","paramDataInfo1":"접수발송서류명","paramDataInfo2":"","paramOrder":"D0074","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0074]"},{"lvl":4,"paramType1":"OUT","paramType2":"DATA","paramData":"   rsNo","paramDataInfo1":"접수발송번호","paramDataInfo2":"","paramOrder":"D0075","parentParamOrder":"G0023","path":"-[G0001]-[G0022]-[G0023]-[D0075]"}];
+
+    $g.setData({data : data , id : "grid2"});
+
+//     $("[data-ax5grid='apiOutputparameterGrid']").find("[data-ax5grid-container='body']").find("table").eq(1).find("tr").each(function(index){
+//     	$(this).find("td").eq(1).attr("title" ,"<strong>"+(data[index].serviceNm) + "</strong><br /><br />" + (data[index].serviceCt).replace(/&lt;/gi , "<").replace(/&gt;/gi , ">"));
+//     	console.log($(this).find("td").eq(1).html());
+// //     	$(this).find("td").eq(1).tooltip();
+
+//     });
+	</script>
+	
+	
+	<article class="mt-10">
+		<p class="tit">
+			Output value (sample)
+		</p>
+	</article>
+	<textarea id="xmlTextarea" wrap="off" readonly="readonly" title="출력값(샘플)">This XML file does not appear to have any style information associated with it. The document tree is shown below.
+&lt;response&gt;
+&lt;header&gt;
+&lt;requestMsgID/&gt;
+&lt;responseTime&gt;2018-04-25 09:00:03.03&lt;/responseTime&gt;
+&lt;responseMsgID/&gt;
+&lt;successYN&gt;Y&lt;/successYN&gt;
+&lt;resultCode&gt;00&lt;/resultCode&gt;
+&lt;resultMsg&gt;NORMAL SERVICE.&lt;/resultMsg&gt;
+&lt;/header&gt;
+&lt;body&gt;
+&lt;item&gt;
+&lt;agentInfoArray/&gt;
+&lt;applicantInfoArray&gt;
+&lt;applicantInfo&gt;
+&lt;applicantAddress&gt;경기도 고양시 일산동구...&lt;/applicantAddress&gt;
+&lt;applicantCode&gt;419980496068&lt;/applicantCode&gt;
+&lt;applicantCountry&gt;대한민국&lt;/applicantCountry&gt;
+&lt;applicantName&gt;안준상&lt;/applicantName&gt;
+&lt;/applicantInfo&gt;
+&lt;/applicantInfoArray&gt;
+&lt;biblioSummaryInfoArray&gt;
+&lt;biblioInfoArray&gt;
+&lt;biblioSummaryInfo&gt;
+&lt;admstStat&gt;소멸&lt;/admstStat&gt;
+&lt;applicationDate&gt;2011.05.31&lt;/applicationDate&gt;
+&lt;applicationNumber&gt;30-2011-0022388&lt;/applicationNumber&gt;
+&lt;articleName&gt;구두용 장식구&lt;/articleName&gt;
+&lt;designBasicSimilarYn&gt;기본디자인&lt;/designBasicSimilarYn&gt;
+&lt;designCount&gt;단독디자인&lt;/designCount&gt;
+&lt;designCountNumber&gt;1&lt;/designCountNumber&gt;
+&lt;designNumber&gt;M01&lt;/designNumber&gt;
+&lt;designPriorityApplicationCountry&gt;&lt;/designPriorityApplicationCountry&gt;
+&lt;designPriorityApplicationDate/&gt;
+&lt;designPriorityApplicationNumber&gt;&lt;/designPriorityApplicationNumber&gt;
+&lt;dsScgrtDmndYn&gt;공개디자인&lt;/dsScgrtDmndYn&gt;
+&lt;dsShpClssCd&gt;&lt;/dsShpClssCd&gt;
+&lt;imgFg&gt;Y&lt;/imgFg&gt;
+&lt;lastDispositionCode&gt;11251&lt;/lastDispositionCode&gt;
+&lt;lastDispositionDate&gt;2011.11.22&lt;/lastDispositionDate&gt;
+&lt;lastDispositionDescription&gt;등록결정(일반)&lt;/lastDispositionDescription&gt;
+&lt;lastRetroDate&gt;2011.05.31&lt;/lastRetroDate&gt;
+&lt;lastRetroDescription&gt;&lt;/lastRetroDescription&gt;
+&lt;lastRetroTpcd&gt;&lt;/lastRetroTpcd&gt;
+&lt;openDate&gt;&lt;/openDate&gt;
+&lt;openNumber&gt;&lt;/openNumber&gt;
+&lt;originalApplicationDate/&gt;
+&lt;originalApplicationNumber&gt;&lt;/originalApplicationNumber&gt;
+&lt;partDesignFg&gt;부분디자인&lt;/partDesignFg&gt;
+&lt;pubFg&gt;Y&lt;/pubFg&gt;
+&lt;publicationDate&gt;2012.01.17&lt;/publicationDate&gt;
+&lt;publicationNumber&gt;&lt;/publicationNumber&gt;
+&lt;regFg&gt;Y&lt;/regFg&gt;
+&lt;registrationDate&gt;2012.01.06&lt;/registrationDate&gt;
+&lt;registrationNumber&gt;30-0628776-0000&lt;/registrationNumber&gt;
+&lt;relationApplicationNumber&gt;&lt;/relationApplicationNumber&gt;
+&lt;repubFg&gt;N&lt;/repubFg&gt;
+&lt;rgstTpcd&gt;소멸 디자인&lt;/rgstTpcd&gt;
+&lt;rgstTpcdDscr&gt;등록료불납&lt;/rgstTpcdDscr&gt;
+&lt;/biblioSummaryInfo&gt;
+&lt;/biblioInfoArray&gt;
+&lt;classificationCodeInfoArray&gt;
+&lt;classificationCodeInfo&gt;
+&lt;classificationCode&gt;B915&lt;/classificationCode&gt;
+&lt;/classificationCodeInfo&gt;
+&lt;/classificationCodeInfoArray&gt;
+&lt;designImageInfoArray&gt;
+&lt;designImageInfo&gt;
+&lt;applicationNumber&gt;3020110022388&lt;/applicationNumber&gt;
+&lt;designNumber&gt;M01&lt;/designNumber&gt;
+&lt;imagePath&gt;
+&lt;imageName&gt;000.jpg&lt;/imageName&gt;
+&lt;largePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b42b8daf35d9e00e6
+&lt;/largePath&gt;
+&lt;number&gt;0&lt;/number&gt;
+&lt;smallPath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed8ba518d13d6978d7
+&lt;/smallPath&gt;
+&lt;/imagePath&gt;
+&lt;imagePath&gt;
+&lt;imageName&gt;000.jpg&lt;/imageName&gt;
+&lt;largePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b42b8daf35d9e00e6
+&lt;/largePath&gt;
+&lt;number&gt;1&lt;/number&gt;
+&lt;smallPath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed8ba518d13d6978d7
+&lt;/smallPath&gt;
+&lt;/imagePath&gt;
+&lt;imagePath&gt;
+&lt;imageName&gt;001.jpg&lt;/imageName&gt;
+&lt;largePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b327fab4c101a42cf
+&lt;/largePath&gt;
+&lt;number&gt;2&lt;/number&gt;
+&lt;smallPath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed0f864fee46e65b9f
+&lt;/smallPath&gt;
+&lt;/imagePath&gt;
+&lt;imagePath&gt;
+&lt;imageName&gt;002.jpg&lt;/imageName&gt;
+&lt;largePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b32a61df4dc81231a
+&lt;/largePath&gt;
+&lt;number&gt;3&lt;/number&gt;
+&lt;smallPath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbeda299d3410f8ad5a9
+&lt;/smallPath&gt;
+&lt;/imagePath&gt;
+&lt;imagePath&gt;
+&lt;imageName&gt;003.jpg&lt;/imageName&gt;
+&lt;largePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b86858096daffcccb
+&lt;/largePath&gt;
+&lt;number&gt;4&lt;/number&gt;
+&lt;smallPath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbedc34e21a0e1eed999
+&lt;/smallPath&gt;
+&lt;/imagePath&gt;
+&lt;imagePath&gt;
+&lt;imageName&gt;004.jpg&lt;/imageName&gt;
+&lt;largePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025ba925e8e5dba9e275
+&lt;/largePath&gt;
+&lt;number&gt;5&lt;/number&gt;
+&lt;smallPath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbedb38ea5aa03fd8159
+&lt;/smallPath&gt;
+&lt;/imagePath&gt;
+&lt;imagePath&gt;
+&lt;imageName&gt;005.jpg&lt;/imageName&gt;
+&lt;largePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025b6dc2a0cfd19febf8
+&lt;/largePath&gt;
+&lt;number&gt;6&lt;/number&gt;
+&lt;smallPath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed1e1ec865f6b44cde
+&lt;/smallPath&gt;
+&lt;/imagePath&gt;
+&lt;imagePath&gt;
+&lt;imageName&gt;006.jpg&lt;/imageName&gt;
+&lt;largePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=75a63eed5a4389985e80c60c4d1f17763467bb09347d178e58e5b68ce67d31330adbf6df1e1229771a2e8bb0d1e68c8c52f6ddc78c30025be2faeca842331780
+&lt;/largePath&gt;
+&lt;number&gt;7&lt;/number&gt;
+&lt;smallPath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=ed43a0609e94d6e29e0b68f68d514bb0bf26c31bed4db0fc76858ed61fdb91f11069ebfb03a1d9bc363821971891aafabf2522f83bb2cbed6df84b73a2956a53
+&lt;/smallPath&gt;
+&lt;/imagePath&gt;
+&lt;/designImageInfo&gt;
+&lt;/designImageInfoArray&gt;
+&lt;fullTextInfoArray&gt;
+&lt;fullTextInfo&gt;
+&lt;applicationNumber&gt;3020110022388&lt;/applicationNumber&gt;
+&lt;designNumber&gt;M01&lt;/designNumber&gt;
+&lt;fullTextFileKindCode&gt;S10221&lt;/fullTextFileKindCode&gt;
+&lt;fullTextFilePath&gt;
+http://plus.kipris.or.kr/kiprisplusws/fileToss.jsp?arg=30a1e03368e0d50d8f05b95fbbd884e45e16bb9c11e9189c26d1d5a20b97a08dac1e246b0cdfccd417327e73d39403377df04aa47c15defc
+&lt;/fullTextFilePath&gt;
+&lt;pageCount&gt;0&lt;/pageCount&gt;
+&lt;/fullTextInfo&gt;
+&lt;/fullTextInfoArray&gt;
+&lt;/biblioSummaryInfoArray&gt;
+&lt;creativeDescriptionInfoArray&gt;
+&lt;creativeDescriptionInfo&gt;
+&lt;designDescription&gt;
+1. 재질은 금속재 및 유리재임.2. 본원 디자인은 구두의 전면 상부에 부착시켜 구두의 미감을 향상시키기 위한 장식구로 사용하는 것임.
+&lt;/designDescription&gt;
+&lt;designNumber&gt;M01&lt;/designNumber&gt;
+&lt;/creativeDescriptionInfo&gt;
+&lt;/creativeDescriptionInfoArray&gt;
+&lt;creativeSummaryInfoArray&gt;
+&lt;creativeSummaryInfo&gt;
+&lt;designNumber&gt;M01&lt;/designNumber&gt;
+&lt;designSummary&gt;&quot;구두용 장식구&quot;의 형상과 모양의 결합을 디자인 창작 내용의 요점으로 함.&lt;/designSummary&gt;
+&lt;/creativeSummaryInfo&gt;
+&lt;/creativeSummaryInfoArray&gt;
+&lt;inventorInfoArray&gt;
+&lt;inventorInfo&gt;
+&lt;designNumber&gt;M01&lt;/designNumber&gt;
+&lt;inventorAddress&gt;경기도 고양시 일산서구...&lt;/inventorAddress&gt;
+&lt;inventorCode&gt;419980496068&lt;/inventorCode&gt;
+&lt;inventorCountry&gt;대한민국&lt;/inventorCountry&gt;
+&lt;inventorName&gt;안준상&lt;/inventorName&gt;
+&lt;/inventorInfo&gt;
+&lt;/inventorInfoArray&gt;
+&lt;legalStatusInfoArray&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.05.31&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[디자인심사등록출원]디자인등록출원서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Application for Design Registration&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011041082764&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.05.31&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[디자인심사등록출원]디자인등록출원서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Application for Examined Design Registration&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011041082764&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.05.31&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[디자인심사등록출원]디자인등록출원서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+[Application for Examined Design Registration] Application for Design Registration
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011041082764&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;불수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.02&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;디자인무심사등록변경출원서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Converted Application for Unexamined Design Registration
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011041800683&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.07&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;서류반려이유통지서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notice of Reason for Return of Document&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;152011004953214&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.08&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[출원서등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Amendment to Bibliographic items&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011043175275&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.08&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[출원서등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Amendment to Bibliographic items(Correction of Payment Particulars)
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011043175275&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.08&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[출원서등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Amendment to Bibliographic items(No charge)&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011043175275&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.08&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[출원서등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Amendment to Bibliographic items(Payer Number)&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011043175275&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.08&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[출원서등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Amendment to Bibliographic items(requires payment )
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011043175275&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.08&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[출원서등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;[Amendment to Application, etc.] Amendment&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011043175275&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.08&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[출원서등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+[Amendment to Application, etc.] Amendment(Correction to Payment Particulars)
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011043175275&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.08&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[출원서등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+[Amendment to Patent Application, etc.] Amendment(Payer number)
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011043175275&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.15&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[반려요청]서류반려요청(반환신청)서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Request for Return&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011045414363&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.15&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[반려요청]서류반려요청(반환신청)서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+[Request for Return] Request for Return of Document
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011045414363&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.16&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;서류반려통지서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notice for Return&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;152011005335051&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.16&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;서류반려통지서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notice for Return of Document&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;152011005335051&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.16&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;서류반려통지서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notice for Return of Document, etc.&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;152011005335051&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.16&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;서류반려통지서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notification for Return of Document&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;152011005335051&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.06.16&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;서류반려통지서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notification of Partial Return&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;152011005335051&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.08.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;의견제출통지서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notice of Reason for Refusal (Retransmission)&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;952011046841269&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.08.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;의견제출통지서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notification of reason for refusal&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;952011046841269&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Amendment to Drawings&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011082783116&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Amendment to Drawings(Reexamination)&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011082783116&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Submission of Specimen&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011082783116&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+[Amendment to Drawing, etc.] Amendment(Re-examination)
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011082783116&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;[Amendment to Drawings, etc.]Amendment&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011082783116&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.26&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Amendment to Drawings&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011084076887&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.26&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Amendment to Drawings(Reexamination)&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011084076887&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.26&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Submission of Specimen&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011084076887&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.26&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+[Amendment to Drawing, etc.] Amendment(Re-examination)
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011084076887&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;보정승인&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.10.26&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;[도면등 보정]보정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;[Amendment to Drawings, etc.]Amendment&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;112011084076887&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.11.05&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Notification of Change (Correction) of Information of Applicant
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412011522176484&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.11.05&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notification of change of applicant&apos;s information&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412011522176484&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.11.05&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Report on Change (Correction) of Information of Applicant
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412011522176484&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;발송처리완료&lt;/procSTCD&gt;
+&lt;rsDate&gt;2011.11.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;디자인등록결정서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Decision to grant Design Registration&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;952011068123389&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2016.09.28&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Notification of Change (Correction) of Information of Applicant
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412016513814062&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2016.09.28&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notification of change of applicant&apos;s information&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412016513814062&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2016.09.28&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Report on Change (Correction) of Information of Applicant
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412016513814062&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2017.08.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Notification of Change (Correction) of Information of Applicant
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412017513346940&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2017.08.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notification of change of applicant&apos;s information&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412017513346940&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2017.08.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Report on Change (Correction) of Information of Applicant
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412017513346940&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2017.08.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Notification of Change (Correction) of Information of Applicant
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412017513347097&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2017.08.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;Notification of change of applicant&apos;s information&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412017513347097&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;legalStatusInfo&gt;
+&lt;procSTCD&gt;수리&lt;/procSTCD&gt;
+&lt;rsDate&gt;2017.08.22&lt;/rsDate&gt;
+&lt;rsDocumentName&gt;출원인정보변경(경정)신고서&lt;/rsDocumentName&gt;
+&lt;rsDocumentNameEng&gt;
+Report on Change (Correction) of Information of Applicant
+&lt;/rsDocumentNameEng&gt;
+&lt;rsNo&gt;412017513347097&lt;/rsNo&gt;
+&lt;/legalStatusInfo&gt;
+&lt;/legalStatusInfoArray&gt;
+&lt;/item&gt;
+&lt;/body&gt;
+&lt;/response&gt;</textarea>
+							

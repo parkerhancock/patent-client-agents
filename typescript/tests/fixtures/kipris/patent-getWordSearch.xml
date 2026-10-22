@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Doc-derived, not recorded: the documented sample response for getWordSearch on the KIPRIS Plus DBII_000000000000001 page (references/kipris), trimmed to two items for searches. -->
+<response>
+  <header>
+    <requestMsgID />
+    <responseTime>2014-10-30 16:25:03.253</responseTime>
+    <responseMsgID />
+    <successYN />
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <applicantName>이두수</applicantName>
+        <applicationDate>1985/12/30 00:00:00</applicationDate>
+        <applicationNumber>1019850010013</applicationNumber>
+        <astrtCont>내용 없음.</astrtCont>
+        <bigDrawing />
+        <drawing />
+        <indexNo>1</indexNo>
+        <inventionTitle>회전체의센서와센서의엔코더(SENSOR AND SENSOR ENCODER FOR
+                    ROTATOR)</inventionTitle>
+        <ipcNumber>G01D 5/00</ipcNumber>
+        <openDate>1987/07/11 00:00:00</openDate>
+        <openNumber>1019870006388</openNumber>
+        <publicationDate>1989/06/30 00:00:00</publicationDate>
+        <publicationNumber>1019890002319</publicationNumber>
+        <registerDate>1990/02/28 00:00:00</registerDate>
+        <registerNumber>1000319440000</registerNumber>
+        <registerStatus>소멸</registerStatus>
+      </item>
+      <item>
+        <applicantName>스나미사다가쓰</applicantName>
+        <applicationDate>1988/09/23 00:00:00</applicationDate>
+        <applicationNumber>1019880012313</applicationNumber>
+        <astrtCont>내용 없음</astrtCont>
+        <bigDrawing />
+        <drawing />
+        <indexNo>2</indexNo>
+        <inventionTitle>자동차도난방지시스템</inventionTitle>
+        <ipcNumber>B60R 25/00 | B60R 25/01</ipcNumber>
+        <openDate>1990/04/12 00:00:00</openDate>
+        <openNumber>1019900004564</openNumber>
+        <publicationDate>1991/09/06 00:00:00</publicationDate>
+        <publicationNumber>1019910006825</publicationNumber>
+        <registerDate>1991/12/19 00:00:00</registerDate>
+        <registerNumber>1000470810000</registerNumber>
+        <registerStatus>소멸</registerStatus>
+      </item>
+    </items>
+  </body>
+  <count>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>414120</totalCount>
+  </count>
+</response>
