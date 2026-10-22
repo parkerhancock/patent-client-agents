@@ -9,10 +9,6 @@ import {
 } from "@patent-client-agents/client";
 import { feeRecording, recordedFeeFetch } from "./fees-recordings.js";
 
-const offline = (async () => {
-  throw new Error("unrecorded request");
-}) as unknown as typeof fetch;
-
 test("real CNIPA page: invention fees, PCT fees and annual fees by year", async () => {
   const schedule = await feeRecording("cnipa");
   expect(schedule.key).toBe("CN/CNIPA/patent");
@@ -112,7 +108,7 @@ test("CNIPA amounts, unknown rows and aliases", async () => {
   expect(resolveFeeJurisdiction("China")).toEqual(["CN", "CNIPA"]);
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: recordedFeeFetch(["cnipa"], offline),
+    fetch: recordedFeeFetch(),
   });
   expect((await client.getSchedule("CN")).key).toBe("CN/CNIPA/patent");
   expect(

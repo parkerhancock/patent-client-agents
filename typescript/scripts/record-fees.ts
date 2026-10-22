@@ -8,6 +8,11 @@ import {
 let failures = 0;
 // Optional operation names, e.g. `bun scripts/record-fees.ts dpma ilpo`.
 const only = process.argv.slice(2);
+const unknown = only.filter((name) => !(name in feeOperations));
+if (unknown.length)
+  throw new Error(
+    `Unknown fee operation: ${unknown.join(", ")}. Known: ${Object.keys(feeOperations).join(", ")}`,
+  );
 for (const name of Object.keys(feeOperations) as FeeOperation[]) {
   if (only.length && !only.includes(name)) continue;
   try {

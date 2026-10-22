@@ -6,7 +6,7 @@ import {
   PrvFeesClient,
   parsePrvAmount,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseByUrl } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 /** PRV's three fee pages, recorded October 22, 2026. */
 const recording = feeRecordings("prv");
@@ -186,10 +186,7 @@ test("PRV page drift fails instead of returning a partial schedule", async () =>
 test("PRV routes resolve through the Python aliases", async () => {
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: (async (input: RequestInfo | URL) =>
-      recordedFeeResponseByUrl(
-        String(input instanceof Request ? input.url : input),
-      ) ?? new Response("missing", { status: 404 })) as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect((await client.getSchedule("Sweden", "design")).key).toBe(
     "SE/PRV/design",

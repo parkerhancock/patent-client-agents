@@ -12,9 +12,6 @@ import {
 } from "@patent-client-agents/client";
 import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
-const offline = (async () => {
-  throw new Error("unrecorded request");
-}) as unknown as typeof fetch;
 const find = (schedule: FeeSchedule, code: string, tier = "large") =>
   schedule.fees.find((fee) => fee.code === code && fee.tier === tier);
 
@@ -174,7 +171,7 @@ test("IMPI parsing helpers", () => {
 test("IMPI routes by alias, shares one fetch and offers utility models", async () => {
   expect(resolveFeeJurisdiction("México", "trademark")).toEqual(["MX", "IMPI"]);
   let calls = 0;
-  const replay = recordedFeeFetch(["impi"], offline);
+  const replay = recordedFeeFetch();
   const client = new ImpiFeesClient({
     retryLimit: 0,
     fetch: (async (input: RequestInfo | URL, init?: RequestInit) => {

@@ -6,7 +6,7 @@ import {
   parseUkipoAmount,
   UkipoFeesClient,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseByUrl } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 /** The UK IPO guidance page and its patents and trade marks CSVs, recorded October 22, 2026. */
 const recording = feeRecordings("ukipo");
@@ -186,10 +186,7 @@ test("UK IPO guidance drift fails clearly", async () => {
 test("UKIPO routes resolve through the Python aliases; no design route", async () => {
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: (async (input: RequestInfo | URL) =>
-      recordedFeeResponseByUrl(
-        String(input instanceof Request ? input.url : input),
-      ) ?? new Response("missing", { status: 404 })) as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect((await client.getSchedule("Britain", "trademark")).key).toBe(
     "GB/UKIPO/trademark",

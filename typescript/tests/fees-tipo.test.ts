@@ -10,7 +10,7 @@ import {
   TipoFeesClient,
   trademarkEnforcedDate,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseStrict } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 const recorded = feeRecordings("tipo");
 const amounts = (fees: FeeItem[]) => fees.map((fee) => [fee.code, fee.amount]);
@@ -146,11 +146,12 @@ test("TIPO parsers: amounts, normalization, enforcement date", () => {
   expect(trademarkEnforcedDate("no date")).toBeNull();
 });
 
+const replay = recordedFeeFetch();
 /** Serve the recorded TIPO responses, with one page rewritten. */
 function rewritten(path: string, edit: (body: string) => string) {
   return (async (input: RequestInfo | URL) => {
     const url = String(input instanceof Request ? input.url : input);
-    const response = recordedFeeResponseStrict(url);
+    const response = await replay(url);
     return url.endsWith(path)
       ? new Response(edit(await response.text()), { headers: response.headers })
       : response;
@@ -188,12 +189,7 @@ test("TIPO routes resolve through FeesClient", async () => {
     expect(resolveFeeJurisdiction(name, "trademark")).toEqual(["TW", "TIPO"]);
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: ((input: RequestInfo | URL) =>
-      Promise.resolve(
-        recordedFeeResponseStrict(
-          String(input instanceof Request ? input.url : input),
-        ),
-      )) as unknown as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect(client.supportedRoutes).toEqual(
     expect.arrayContaining(["TIPO/patent", "TIPO/trademark"]),

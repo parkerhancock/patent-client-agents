@@ -3,14 +3,16 @@ import {
   type FeeSchedule,
   FeesClient,
   filterFees,
+  JPO_FEES_URL,
   JpoFeesClient,
   parseYenCell,
   resolveFeeJurisdiction,
 } from "@patent-client-agents/client";
-import { jpoFeePage } from "./fees-recordings.js";
+import { recordedFeeFetch } from "./fees-recordings.js";
 
 /** The JPO page cannot be recorded with plain requests (HTTP 403), so these tests serve the Python fixture. */
-const jpo = (html = jpoFeePage(), status = 200) => {
+const page = await (await recordedFeeFetch()(JPO_FEES_URL)).text();
+const jpo = (html = page, status = 200) => {
   let calls = 0;
   const client = new JpoFeesClient({
     retryLimit: 0,
@@ -216,7 +218,6 @@ test("yen cells parse exactly or fail", () => {
 });
 
 test("JPO page drift fails or surfaces; a blocked page is an HTTP error", async () => {
-  const page = jpoFeePage();
   const unknown = await jpo(
     page.replace(
       "Request for inspection of documents (paper)",
@@ -251,10 +252,7 @@ test("JPO aliases resolve and route through FeesClient", async () => {
     expect(resolveFeeJurisdiction(name, "trademark")).toEqual(["JP", "JPO"]);
   const fees = new FeesClient({
     retryLimit: 0,
-    fetch: (async () =>
-      new Response(jpoFeePage(), {
-        headers: { "content-type": "text/html" },
-      })) as unknown as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect((await fees.getSchedule("Japan", "design")).key).toBe("JP/JPO/design");
   expect(

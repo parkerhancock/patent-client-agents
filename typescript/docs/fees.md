@@ -1124,12 +1124,10 @@ and plain requests. The PDF cassettes store bodies as hex, so they are large
 public Google API key and reCAPTCHA site key in their Next.js data; recording
 replaces them with `[FILTERED]` so secret scanning passes, and the parser
 never reads them. Tests replay them through
-`feeRecordings` and, for routing and drift tests, through
-`recordedFeeResponse`, which serves any recorded fee URL. The MCP fee tests
-in `fees.test.ts` and `facade-epo-tm-ref.test.ts` wrap their EPO and USPTO
-fakes in `recordedFeesOr`, so listing every schedule replays the other
-offices' recordings; their route-list assertions now check inclusion rather
-than the exact list.
+`feeRecordings` and, for routing and drift tests, through `recordedFeeFetch`
+(see below). The MCP fee tests in `fees.test.ts` and
+`facade-epo-tm-ref.test.ts` fake only the EPO feed and replay every other
+office, so their route-list assertions check the exact list.
 
 ## MCP
 
@@ -1164,8 +1162,10 @@ renewal ladders, tiers, conditions, aliases and drift failures. Across these
 offices annual fees use `renewal`; the Python scrapers for CIPO, CNIPA, DPMA
 and IMPI use `maintenance`, which ADD_NEW_OFFICE.md reserves for the USPTO's
 3.5/7.5/11.5-year fees. The ILPO and IMPI PDFs are each fetched once for all
-of their routes. `recordedFeeFetch` in the test helpers replays any recorded
-fee interaction, and `cipoFixtureFetch` the archived CIPO page, so `listSchedules` can run offline.
+of their routes. `recordedFeeFetch()` in the test helpers is a fetch that
+replays every `fees-*.yaml` interaction by method and URL, plus the archived
+CIPO and JPO pages, so `listSchedules` can run offline; an unrecorded request
+fails, naming the request.
 `bun scripts/record-fees.ts` gained `ipos`, `hk-ipd` and `inpi-fr` operations;
 they were recorded live on October 22, 2026 with plain requests and the
 `patent-client-agents` user agent: IPOS 124 patent, 35 trademark and 26 design

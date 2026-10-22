@@ -10,10 +10,6 @@ import {
 } from "@patent-client-agents/client";
 import { feeRecording, recordedFeeFetch } from "./fees-recordings.js";
 
-const offline = (async () => {
-  throw new Error("unrecorded request");
-}) as unknown as typeof fetch;
-
 const fee = (
   schedule: Awaited<ReturnType<typeof feeRecording>>,
   code: string,
@@ -134,7 +130,7 @@ test("DPMA routes by alias and fails on an unrecognized PDF", async () => {
   expect(resolveFeeJurisdiction("Germany")).toEqual(["DE", "DPMA"]);
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: recordedFeeFetch(["dpma"], offline),
+    fetch: recordedFeeFetch(),
   });
   expect((await client.getSchedule("DE")).key).toBe("DE/DPMA/patent");
   const broken = new DpmaFeesClient({

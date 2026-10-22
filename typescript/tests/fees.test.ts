@@ -11,20 +11,15 @@ import {
   parseEuroAmount,
   parseUsdAmount,
   resolveFeeJurisdiction,
+  USPTO_FEES_URL,
   UsptoFeesClient,
 } from "@patent-client-agents/client";
 import { BearerAuth, Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";
 import {
-  cipoFixtureFetch,
   feeRecording,
   feeRecordings,
-  jpoFeePage,
   recordedFeeFetch,
-  recordedFeeResponse,
-  recordedFeeResponseAny,
-  recordedFeeResponseByUrl,
-  usptoFeePage,
 } from "./fees-recordings.js";
 
 /** Article 2(1), item 1, Rules relating to Fees for Unitary Patent Protection, as transcribed in the Python package. */
@@ -230,33 +225,61 @@ test("jurisdiction resolution matches Python and separates unported offices", as
   );
   expect(() => resolveFeeJurisdiction("Narnia")).toThrow("Unknown");
   const client = new FeesClient();
-  expect(client.supportedRoutes).toEqual(
-    expect.arrayContaining([
-      "USPTO/patent",
-      "USPTO/trademark",
-      "USPTO/design",
-      "EPO/patent",
-      "EPO-UP/patent",
-      "KIPO/patent",
-      "KIPO/trademark",
-      "KIPO/design",
-      "JPO/patent",
-      "JPO/trademark",
-      "JPO/design",
-      "IPIN/patent",
-      "OEPM/patent",
-      "OEPM/trademark",
-      "OEPM/design",
-      "PRV/patent",
-      "PRV/trademark",
-      "PRV/design",
-      "UKIPO/patent",
-      "UKIPO/trademark",
-      "WIPO-PCT/patent",
-      "WIPO-MADRID/trademark",
-      "WIPO-HAGUE/design",
-    ]),
-  );
+  expect(client.supportedRoutes).toEqual([
+    "USPTO/patent",
+    "USPTO/trademark",
+    "USPTO/design",
+    "EPO/patent",
+    "EPO-UP/patent",
+    "CIPO/patent",
+    "CNIPA/patent",
+    "DPMA/patent",
+    "IPAU/patent",
+    "ILPO/patent",
+    "ILPO/trademark",
+    "ILPO/design",
+    "IMPI/patent",
+    "IMPI/utility_model",
+    "IMPI/trademark",
+    "IMPI/design",
+    "KIPO/patent",
+    "KIPO/trademark",
+    "KIPO/design",
+    "JPO/patent",
+    "JPO/trademark",
+    "JPO/design",
+    "IPIN/patent",
+    "OEPM/patent",
+    "OEPM/trademark",
+    "OEPM/design",
+    "PRV/patent",
+    "PRV/trademark",
+    "PRV/design",
+    "UKIPO/patent",
+    "UKIPO/trademark",
+    "WIPO-PCT/patent",
+    "WIPO-MADRID/trademark",
+    "WIPO-HAGUE/design",
+    "IPOS/patent",
+    "IPOS/trademark",
+    "IPOS/design",
+    "HKIPD/patent",
+    "HKIPD/trademark",
+    "HKIPD/design",
+    "INPI-FR/patent",
+    "INPI-FR/trademark",
+    "INPI-FR/design",
+    "TIPO/patent",
+    "TIPO/trademark",
+    "PRH/patent",
+    "PRH/trademark",
+    "PRH/design",
+    "TURKPATENT/patent",
+    "TURKPATENT/trademark",
+    "TURKPATENT/design",
+    "INPI-BR/patent",
+    "INPI-BR/trademark",
+  ]);
   expect(resolveFeeJurisdiction("United States", "design")).toEqual([
     "US",
     "USPTO",
@@ -272,24 +295,12 @@ test("jurisdiction resolution matches Python and separates unported offices", as
   ).toBe("UNSUPPORTED_RIGHT");
 });
 
-/** EPO feed fake plus recorded pages for the other offices, routed by host. */
-const feeFetch = (async (input: RequestInfo | URL) => {
-  const url = String(input instanceof Request ? input.url : input);
-  if (url.includes("kipo.go.kr")) return recordedFeeResponse("kipo", url);
-  if (url.includes("ipindia.gov.in"))
-    return recordedFeeResponse("ipindia", url);
-  if (url.includes("jpo.go.jp"))
-    return new Response(jpoFeePage(), {
-      headers: { "content-type": "text/html" },
-    });
-  const recorded = recordedFeeResponseByUrl(url);
-  if (recorded) return recorded;
-  const other = recordedFeeResponseAny(url);
-  if (other) return other;
-  return url.includes("uspto.gov")
-    ? new Response(usptoFeePage(), { headers: { "content-type": "text/html" } })
-    : Response.json(feesFromCassetteBody());
-}) as unknown as typeof fetch;
+const replay = recordedFeeFetch();
+/** EPO feed fake plus recorded pages for the other offices. */
+const feeFetch = ((input: RequestInfo | URL) =>
+  String(input instanceof Request ? input.url : input).includes("epo.org")
+    ? Promise.resolve(Response.json(feesFromCassetteBody()))
+    : replay(input)) as unknown as typeof fetch;
 function feesFromCassetteBody() {
   return [
     node("001", "Filing fee - EP direct", null, [
@@ -312,10 +323,7 @@ function feesFromCassetteBody() {
 test("fee MCP tools forward filters and report gaps and unported offices", async () => {
   const fees = new FeesClient({
     retryLimit: 0,
-    fetch: recordedFeeFetch(
-      ["cnipa", "dpma", "ipaustralia", "ilpo", "impi"],
-      cipoFixtureFetch(feeFetch),
-    ),
+    fetch: feeFetch,
   });
   const server = createServer({ clients: { fees } });
   const client = await Client.connect(server, {
@@ -371,44 +379,61 @@ test("fee MCP tools forward filters and report gaps and unported offices", async
       "135.00",
     ]);
     const list = await client.callTool<Envelope>("list_fee_jurisdictions", {});
-    expect(list.structuredContent?.items.map((item) => item.key)).toEqual(
-      expect.arrayContaining([
-        "US/USPTO/patent",
-        "US/USPTO/trademark",
-        "US/USPTO/design",
-        "EP/EPO/patent",
-        "UP/EPO-UP/patent",
-        "CA/CIPO/patent",
-        "CN/CNIPA/patent",
-        "DE/DPMA/patent",
-        "AU/IPAU/patent",
-        "IL/ILPO/patent",
-        "IL/ILPO/trademark",
-        "IL/ILPO/design",
-        "MX/IMPI/patent",
-        "MX/IMPI/utility_model",
-        "MX/IMPI/trademark",
-        "MX/IMPI/design",
-        "KR/KIPO/patent",
-        "KR/KIPO/trademark",
-        "KR/KIPO/design",
-        "JP/JPO/patent",
-        "JP/JPO/trademark",
-        "JP/JPO/design",
-        "IN/IPIN/patent",
-        "ES/OEPM/patent",
-        "ES/OEPM/trademark",
-        "ES/OEPM/design",
-        "SE/PRV/patent",
-        "SE/PRV/trademark",
-        "SE/PRV/design",
-        "GB/UKIPO/patent",
-        "GB/UKIPO/trademark",
-        "WO/WIPO-PCT/patent",
-        "WO/WIPO-MADRID/trademark",
-        "WO/WIPO-HAGUE/design",
-      ]),
-    );
+    expect(list.structuredContent?.items.map((item) => item.key)).toEqual([
+      "US/USPTO/patent",
+      "US/USPTO/trademark",
+      "US/USPTO/design",
+      "EP/EPO/patent",
+      "UP/EPO-UP/patent",
+      "CA/CIPO/patent",
+      "CN/CNIPA/patent",
+      "DE/DPMA/patent",
+      "AU/IPAU/patent",
+      "IL/ILPO/patent",
+      "IL/ILPO/trademark",
+      "IL/ILPO/design",
+      "MX/IMPI/patent",
+      "MX/IMPI/utility_model",
+      "MX/IMPI/trademark",
+      "MX/IMPI/design",
+      "KR/KIPO/patent",
+      "KR/KIPO/trademark",
+      "KR/KIPO/design",
+      "JP/JPO/patent",
+      "JP/JPO/trademark",
+      "JP/JPO/design",
+      "IN/IPIN/patent",
+      "ES/OEPM/patent",
+      "ES/OEPM/trademark",
+      "ES/OEPM/design",
+      "SE/PRV/patent",
+      "SE/PRV/trademark",
+      "SE/PRV/design",
+      "GB/UKIPO/patent",
+      "GB/UKIPO/trademark",
+      "WO/WIPO-PCT/patent",
+      "WO/WIPO-MADRID/trademark",
+      "WO/WIPO-HAGUE/design",
+      "SG/IPOS/patent",
+      "SG/IPOS/trademark",
+      "SG/IPOS/design",
+      "HK/HKIPD/patent",
+      "HK/HKIPD/trademark",
+      "HK/HKIPD/design",
+      "FR/INPI-FR/patent",
+      "FR/INPI-FR/trademark",
+      "FR/INPI-FR/design",
+      "TW/TIPO/patent",
+      "TW/TIPO/trademark",
+      "FI/PRH/patent",
+      "FI/PRH/trademark",
+      "FI/PRH/design",
+      "TR/TURKPATENT/patent",
+      "TR/TURKPATENT/trademark",
+      "TR/TURKPATENT/design",
+      "BR/INPI-BR/patent",
+      "BR/INPI-BR/trademark",
+    ]);
     await expect(
       client.callTool("get_fee_schedule", {
         jurisdiction: "EUIPO",
@@ -673,7 +698,7 @@ test("dollar amounts parse exactly or fail", () => {
 });
 
 test("USPTO page drift fails or surfaces, and one fetch serves all schedules", async () => {
-  const page = usptoFeePage();
+  const page = await (await replay(USPTO_FEES_URL)).text();
   let calls = 0;
   const client = (html: string) =>
     new UsptoFeesClient({

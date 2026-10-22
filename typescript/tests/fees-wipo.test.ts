@@ -6,7 +6,7 @@ import {
   resolveFeeJurisdiction,
   WipoFeesClient,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseByUrl } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 /** The PCT, Madrid and Hague Schedules of Fees, recorded October 22, 2026. */
 const recording = feeRecordings("wipo");
@@ -142,10 +142,7 @@ test("WIPO aliases route by right", async () => {
   ]);
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: (async (input: RequestInfo | URL) =>
-      recordedFeeResponseByUrl(
-        String(input instanceof Request ? input.url : input),
-      ) ?? new Response("missing", { status: 404 })) as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect((await client.getSchedule("WIPO")).key).toBe("WO/WIPO-PCT/patent");
   expect((await client.getSchedule("WO", "design")).key).toBe(

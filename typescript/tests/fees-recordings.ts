@@ -1,14 +1,9 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { gunzipSync } from "node:zlib";
+import { bodyToBuffer, Cassette, RecordMode, useCassette } from "cassetter";
 import {
-  type Body,
-  bodyToBuffer,
-  Cassette,
-  RecordMode,
-  useCassette,
-} from "cassetter";
-import {
+  CIPO_FEES_URL,
   CipoFeesClient,
   CnipaFeesClient,
   DpmaFeesClient,
@@ -22,6 +17,7 @@ import {
   IpAustraliaFeesClient,
   IpIndiaFeesClient,
   IposFeesClient,
+  JPO_FEES_URL,
   KipoFeesClient,
   OepmFeesClient,
   PrhFeesClient,
@@ -195,7 +191,7 @@ export type FeeOperation =
   | "prh"
   | "turkpatent"
   | "inpi-br";
-export const feeCassette = (name: string) =>
+const feeCassette = (name: string) =>
   resolve(import.meta.dir, "cassettes", `fees-${name}.yaml`);
 
 /** Replay (default) or record the schedules of one fee operation. The sources are public. */
@@ -242,237 +238,79 @@ export async function feeRecording(
   return schedule;
 }
 
-/** The recorded USPTO fee page, for tests that serve it from a fake fetch. */
-export function usptoFeePage(): string {
-  const cassette = Bun.YAML.parse(
-    readFileSync(feeCassette("uspto"), "utf8"),
-  ) as { interactions: { response: { body: { content: string } } }[] };
-  const body = cassette.interactions[0]?.response.body.content;
-  if (typeof body !== "string") throw new Error("USPTO fee cassette changed.");
-  return body;
-}
-
 /**
- * A fetch that answers from the recorded fee cassettes of `names` by method
- * and URL, and passes anything else to `fallback`. Interactions may repeat.
+ * The archived pages served alongside the cassettes. CIPO's is the Internet
+ * Archive's raw capture of 2026-10-06: the ISED site returned 503 for
+ * maintenance throughout the October 22 recording session. JPO's is the page
+ * saved by the Python tests on May 20, 2026: the JPO's edge answers plain
+ * requests with HTTP 403, so it cannot be recorded here.
  */
-export function recordedFeeFetch(
-  names: FeeOperation[],
-  fallback: typeof fetch,
-): typeof fetch {
-  const interactions = names.flatMap((name) => {
-    const cassette = new Cassette(feeCassette(name), {
+const fixtures: Record<string, () => Response> = {
+  [`GET ${CIPO_FEES_URL}`]: () =>
+    new Response(
+      gunzipSync(readFileSync(fixture("cipo-patent-fees-2026-10-06.html.gz"))),
+      {
+        headers: {
+          "content-type": "text/html; charset=utf-8",
+          date: "Tue, 06 Oct 2026 05:53:08 GMT",
+        },
+      },
+    ),
+  [`GET ${JPO_FEES_URL}`]: () =>
+    new Response(readFileSync(fixture("jpo-hyou-2026-05-20.htm")), {
+      headers: { "content-type": "text/html" },
+    }),
+};
+function fixture(name: string) {
+  return resolve(import.meta.dir, "fixtures/fees", name);
+}
+/** The replayed body is already decoded and complete. */
+const DROPPED_HEADERS = [
+  "content-encoding",
+  "content-length",
+  "transfer-encoding",
+];
+let replays: Map<string, () => Response> | undefined;
+/** Every recorded fee response, keyed by method and URL; a cassette replaces a fixture for the same URL. */
+function recordedResponses() {
+  if (replays) return replays;
+  replays = new Map(Object.entries(fixtures));
+  const dir = resolve(import.meta.dir, "cassettes");
+  for (const file of readdirSync(dir).filter((f) =>
+    /^fees-.+\.yaml$/.test(f),
+  )) {
+    const cassette = new Cassette(resolve(dir, file), {
       recordMode: RecordMode.NONE,
     });
     cassette.load();
-    return cassette.interactions;
-  });
-  return (async (input: RequestInfo | URL, init?: RequestInit) => {
-    const request = new Request(input, init);
-    const hit = interactions.find(
-      (interaction) =>
-        interaction.request.method === request.method &&
-        interaction.request.uri === request.url,
-    );
-    if (!hit) return fallback(input, init);
-    const headers = new Headers();
-    for (const [key, values] of Object.entries(hit.response.headers))
-      if (!["content-encoding", "content-length"].includes(key))
-        headers.set(key, values.join(", "));
-    return new Response(new Uint8Array(bodyToBuffer(hit.response.body)), {
-      status: hit.response.status,
-      headers,
-    });
-  }) as typeof fetch;
-}
-
-/**
- * CIPO's page as archived by the Internet Archive on 2026-10-06 (raw `id_`
- * capture). The ISED site returned 503 for maintenance throughout the
- * October 22 recording session, so CIPO tests use this copy until a live
- * recording replaces it.
- */
-export const CIPO_FIXTURE = resolve(
-  import.meta.dir,
-  "fixtures/fees/cipo-patent-fees-2026-10-06.html.gz",
-);
-/** Serves the archived CIPO page for its URL, with the capture's date; anything else goes to `fallback`. */
-export function cipoFixtureFetch(fallback: typeof fetch): typeof fetch {
-  return (async (input: RequestInfo | URL, init?: RequestInit) => {
-    const url = String(input instanceof Request ? input.url : input);
-    if (!url.startsWith("https://ised-isde.canada.ca/"))
-      return fallback(input, init);
-    return new Response(gunzipSync(readFileSync(CIPO_FIXTURE)), {
-      headers: {
-        "content-type": "text/html; charset=utf-8",
-        date: "Tue, 06 Oct 2026 05:53:08 GMT",
-      },
-    });
-  }) as typeof fetch;
-}
-/** A recorded response by URL, for tests that serve fee sources from a fake fetch. */
-export function recordedFeeResponse(name: FeeOperation, url: string): Response {
-  const cassette = Bun.YAML.parse(readFileSync(feeCassette(name), "utf8")) as {
-    interactions: {
-      request: { uri: string };
-      response: {
-        status: number;
-        headers: Record<string, string[]>;
-        body: Body;
-      };
-    }[];
-  };
-  const hit = cassette.interactions.find(
-    (interaction) => interaction.request.uri === url,
-  );
-  if (!hit) throw new Error(`No recorded ${name} response for ${url}`);
-  return new Response(new Uint8Array(bodyToBuffer(hit.response.body)), {
-    status: hit.response.status,
-    headers: {
-      "content-type": hit.response.headers["content-type"]?.[0] ?? "",
-    },
-  });
-}
-
-/**
- * The JPO fee page as saved by the Python tests on May 20, 2026. The JPO's
- * edge answers plain requests with HTTP 403, so it cannot be recorded here.
- */
-export const jpoFeePage = (): string =>
-  readFileSync(
-    resolve(import.meta.dir, "fixtures/fees/jpo-hyou-2026-05-20.htm"),
-    "utf8",
-  );
-/** A recorded fee response by exact URL, for fake fetches that serve several offices. */
-export function recordedFeeResponseByUrl(url: string): Response | null {
-  for (const name of ["oepm", "prv", "ukipo", "wipo"] as const) {
-    if (!existsSync(feeCassette(name))) continue;
-    const cassette = Bun.YAML.parse(
-      readFileSync(feeCassette(name), "utf8"),
-    ) as {
-      interactions: {
-        request: { uri: string };
-        response: {
-          status: number;
-          headers: Record<string, string[]>;
-          body: { type: string; content?: string };
-        };
-      }[];
-    };
-    const hit = cassette.interactions.find((i) => i.request.uri === url);
-    if (!hit) continue;
-    const { body, headers, status } = hit.response;
-    const content = body.content ?? "";
-    return new Response(
-      body.type === "binary" ? Buffer.from(content, "hex") : content,
-      {
-        status,
-        headers: { "content-type": headers["content-type"]?.[0] ?? "" },
-      },
-    );
-  }
-  return null;
-}
-
-interface RecordedBody {
-  type: string;
-  content: string;
-}
-let recorded: Map<string, { status: number; body: RecordedBody }> | null = null;
-/**
- * A recorded fee response by URL, from every fee cassette except the EPO
- * feed (tests fake that one). Lets tests load all routes offline.
- */
-export function recordedFeeResponseAny(url: string): Response | null {
-  recorded ??= new Map(
-    readdirSync(resolve(import.meta.dir, "cassettes"))
-      .filter((file) => /^fees-(?!epo-).+\.yaml$/.test(file))
-      .flatMap(
-        (file) =>
-          (
-            Bun.YAML.parse(
-              readFileSync(resolve(import.meta.dir, "cassettes", file), "utf8"),
-            ) as {
-              interactions: {
-                request: { uri: string };
-                response: { status: number; body: RecordedBody };
-              }[];
-            }
-          ).interactions,
-      )
-      .map((i) => [i.request.uri, i.response]),
-  );
-  const hit = recorded.get(url);
-  if (!hit) return null;
-  const body =
-    hit.body.type === "binary"
-      ? Uint8Array.from(hit.body.content.match(/../g) ?? [], (byte) =>
-          Number.parseInt(byte, 16),
-        )
-      : hit.body.content;
-  return new Response(body, { status: hit.status });
-}
-
-type RecordedFeeBody =
-  | { type: "none" }
-  | { type: "text"; content: string }
-  | { type: "json"; content: unknown }
-  | { type: "binary"; content: string };
-interface RecordedInteraction {
-  request: { method: string; uri: string };
-  response: {
-    status: number;
-    headers: Record<string, string[]>;
-    body: RecordedFeeBody;
-  };
-}
-let recordedByUrl: Map<string, RecordedInteraction["response"]> | undefined;
-/**
- * The recorded response for a fee URL from any fee cassette, for tests that
- * list every schedule through a fake fetch. Throws for an unrecorded URL.
- */
-export function recordedFeeResponseStrict(url: string): Response {
-  if (!recordedByUrl) {
-    recordedByUrl = new Map();
-    const dir = resolve(import.meta.dir, "cassettes");
-    for (const name of readdirSync(dir).filter((file) =>
-      /^fees-.+\.yaml$/.test(file),
-    )) {
-      const cassette = Bun.YAML.parse(
-        readFileSync(resolve(dir, name), "utf8"),
-      ) as {
-        interactions: RecordedInteraction[];
-      };
-      for (const { request, response } of cassette.interactions)
-        if (request.method === "GET") recordedByUrl.set(request.uri, response);
+    for (const { request, response } of cassette.interactions) {
+      const headers = new Headers();
+      for (const [key, values] of Object.entries(response.headers))
+        if (!DROPPED_HEADERS.includes(key))
+          for (const value of values) headers.append(key, value);
+      const body = new Uint8Array(bodyToBuffer(response.body));
+      replays.set(
+        `${request.method} ${request.uri}`,
+        () => new Response(body, { status: response.status, headers }),
+      );
     }
   }
-  const response = recordedByUrl.get(url);
-  if (!response) throw new Error(`No recorded fee response for ${url}`);
-  const body = response.body;
-  const content =
-    body.type === "binary"
-      ? Buffer.from(body.content, "hex")
-      : body.type === "json"
-        ? JSON.stringify(body.content)
-        : body.type === "text"
-          ? body.content
-          : null;
-  const headers = new Headers();
-  for (const [key, values] of Object.entries(response.headers))
-    if (
-      !["content-length", "content-encoding", "transfer-encoding"].includes(key)
-    )
-      for (const value of values) headers.append(key, value);
-  return new Response(content, { status: response.status, headers });
+  return replays;
 }
 
-/** Wrap a fake fee fetch so offices other than the USPTO and EPO replay their recordings. */
-export function recordedFeesOr(fake: typeof fetch): typeof fetch {
-  return ((input: RequestInfo | URL, init?: RequestInit) => {
-    const url = String(input instanceof Request ? input.url : input);
-    return /uspto\.gov|epo\.org/.test(url)
-      ? fake(input, init)
-      : Promise.resolve(recordedFeeResponseStrict(url));
+/**
+ * A fetch that replays every recorded fee source by method and URL: all
+ * `fees-*.yaml` cassettes plus the archived CIPO and JPO pages. Any other
+ * request fails, naming the request.
+ */
+export function recordedFeeFetch(): typeof fetch {
+  return (async (input: RequestInfo | URL, init?: RequestInit) => {
+    const request = new Request(input, init);
+    const replay = recordedResponses().get(`${request.method} ${request.url}`);
+    if (!replay)
+      throw new Error(
+        `No recorded fee response for ${request.method} ${request.url}`,
+      );
+    return replay();
   }) as typeof fetch;
 }

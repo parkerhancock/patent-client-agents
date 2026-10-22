@@ -5,7 +5,7 @@ import {
   filterFees,
   parseOepmAmount,
 } from "@patent-client-agents/client";
-import { feeRecordings, recordedFeeResponseByUrl } from "./fees-recordings.js";
+import { feeRecordings, recordedFeeFetch } from "./fees-recordings.js";
 
 /** The OEPM PDF recorded October 22, 2026 ("desde el 1 de abril de 2026"). */
 const recording = feeRecordings("oepm");
@@ -229,10 +229,7 @@ test("Spanish amounts parse exactly or fail", () => {
 test("OEPM routes resolve through the Python aliases", async () => {
   const client = new FeesClient({
     retryLimit: 0,
-    fetch: (async (input: RequestInfo | URL) =>
-      recordedFeeResponseByUrl(
-        String(input instanceof Request ? input.url : input),
-      ) ?? new Response("missing", { status: 404 })) as typeof fetch,
+    fetch: recordedFeeFetch(),
   });
   expect((await client.getSchedule("Spain", "trademark")).key).toBe(
     "ES/OEPM/trademark",
