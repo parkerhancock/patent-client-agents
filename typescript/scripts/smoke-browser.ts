@@ -166,6 +166,7 @@ try {
     relay_fee?: string;
     upc_instrument?: string;
     dpma_section?: string;
+    tw_hits?: string;
   };
   if (
     !checked.ok ||
@@ -173,7 +174,8 @@ try {
     checked.direct_cross_origin !== "blocked by CORS" ||
     checked.relay_fee !== "135.00" ||
     checked.upc_instrument !== "upca" ||
-    checked.dpma_section !== "139"
+    checked.dpma_section !== "139" ||
+    checked.tw_hits !== "12,13"
   )
     process.exitCode = 1;
 } finally {

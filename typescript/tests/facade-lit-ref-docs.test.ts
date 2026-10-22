@@ -600,7 +600,7 @@ test("legal references route MPEP, TMEP and every EPO corpus, and refuse unporte
       version: "2020",
     }),
   ).rejects.toThrow("only for uspto_mpep");
-  for (const name of ["india_statutes", "india_mppp", "tw_trade_secrets"])
+  for (const name of ["india_statutes", "india_mppp"])
     await expect(
       client.callTool("search_legal_reference", { corpus: name, query: "x" }),
     ).rejects.toThrow("not yet available");

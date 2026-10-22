@@ -12,6 +12,7 @@ import {
   MoppClient,
   MpepClient,
   TmepClient,
+  TwTradeSecretsClient,
   UpcStatutesClient,
 } from "@patent-client-agents/client";
 
@@ -78,6 +79,12 @@ assert.equal(
   results.mopp_section,
   "-section-4a-methods-of-treatment-or-diagnosis",
 );
+// Bundled text indexed into in-memory SQLite; no artifact.
+const tw = new TwTradeSecretsClient();
+results.tw_hits = (await tw.search({ query: "damage" })).hits
+  .map((hit) => hit.section)
+  .join(",");
+assert.equal(results.tw_hits, "12,13");
 
 // Network clients with synthetic upstreams.
 const fees = new EpoFeesClient({
@@ -114,6 +121,16 @@ const google = GooglePatentsClient.parsePatent(
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
 
-for (const client of [epcByPath, epcBytes, mpep, zst, upc, tmep, mopp, dpma])
+for (const client of [
+  epcByPath,
+  epcBytes,
+  mpep,
+  zst,
+  upc,
+  tmep,
+  mopp,
+  dpma,
+  tw,
+])
   client.close();
 console.log(JSON.stringify({ runtime: `node ${process.version}`, ...results }));

@@ -9,6 +9,7 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   MpepClient,
+  TwTradeSecretsClient,
   UpcStatutesClient,
 } from "../../packages/client/src/index.js";
 
@@ -50,6 +51,11 @@ try {
   results.dpma_section = (
     await dpma.getSectionByCitation("§ 139 Abs. 1 PatG")
   ).section;
+  results.tw_hits = (
+    await new TwTradeSecretsClient().search({ query: "damage" })
+  ).hits
+    .map((hit) => hit.section)
+    .join(",");
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

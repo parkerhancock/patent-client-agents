@@ -12,14 +12,7 @@ export interface SnapshotDatabase {
   close(): void;
 }
 
-/**
- * Open bytes as a read-only database with the official SQLite WebAssembly
- * build (FTS5 included). Deserializing the hashed bytes, rather than opening
- * a path, rules out WAL replay and file-replacement races in every runtime.
- */
-export async function openSnapshot(
-  bytes: Uint8Array,
-): Promise<SnapshotDatabase> {
+function sqliteModule(): Promise<Sqlite> {
   module ??= (() => {
     const { sqlite } = wasmLocations();
     // Emscripten module options: an explicit binary or file location.
@@ -33,7 +26,18 @@ export async function openSnapshot(
       sqlite3InitModule as unknown as (options: object) => Promise<Sqlite>
     )(options);
   })();
-  const sqlite3 = await module;
+  return module;
+}
+
+/**
+ * Open bytes as a read-only database with the official SQLite WebAssembly
+ * build (FTS5 included). Deserializing the hashed bytes, rather than opening
+ * a path, rules out WAL replay and file-replacement races in every runtime.
+ */
+export async function openSnapshot(
+  bytes: Uint8Array,
+): Promise<SnapshotDatabase> {
+  const sqlite3 = await sqliteModule();
   const { capi, wasm, oo1 } = sqlite3;
   const db = new oo1.DB(":memory:", "c");
   try {
@@ -47,6 +51,37 @@ export async function openSnapshot(
       capi.SQLITE_DESERIALIZE_FREEONCLOSE | capi.SQLITE_DESERIALIZE_READONLY,
     );
     if (rc !== 0) throw new Error(`sqlite3_deserialize failed with ${rc}.`);
+    db.exec("PRAGMA query_only = ON");
+  } catch (error) {
+    db.close();
+    throw error;
+  }
+  return {
+    all: <T>(sql: string, bind: Bind = []) =>
+      db.selectObjects(sql, bind) as T[],
+    get: <T>(sql: string, bind: Bind = []) =>
+      (db.selectObjects(sql, bind)[0] as T | undefined) ?? undefined,
+    close: () => db.close(),
+  };
+}
+
+/**
+ * Build a small in-memory database from bundled data (schema and rows), then
+ * make it read-only. For corpora shipped inside the package instead of as an
+ * artifact file.
+ */
+export async function openBuiltDatabase(
+  statements: { sql: string; bind?: Bind }[],
+): Promise<SnapshotDatabase> {
+  const { oo1 } = await sqliteModule();
+  const db = new oo1.DB(":memory:", "c");
+  try {
+    for (const statement of statements)
+      db.exec(
+        statement.bind
+          ? { sql: statement.sql, bind: statement.bind }
+          : { sql: statement.sql },
+      );
     db.exec("PRAGMA query_only = ON");
   } catch (error) {
     db.close();

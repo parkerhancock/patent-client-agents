@@ -31,6 +31,7 @@ import {
   detailEnvelopeSchema,
   listEnvelopeSchema,
 } from "../shared.js";
+import type { TwTradeSecretsReader } from "../tw-trade-secrets.js";
 import type { UpcStatutesReader } from "../upc-statutes.js";
 
 export {
@@ -69,6 +70,7 @@ export interface FacadeClients {
   epoLegal: EpoLegalClients;
   upcStatutes: UpcStatutesReader;
   dpmaStatutes: DpmaStatutesReader;
+  twTradeSecrets: TwTradeSecretsReader;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
   /** USITC EDIS; when present the facade adds the Python EDIS-enabled surface. */

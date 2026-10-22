@@ -589,6 +589,19 @@ const cases: Case[] = [
     args: { corpus: "uspto_tmep", identifier: "1207.01" },
   },
   {
+    name: "tw trade secrets search",
+    tool: "search_legal_reference",
+    args: { corpus: "tw_trade_secrets", query: "damages", limit: 3 },
+  },
+  {
+    name: "tw trade secrets article",
+    tool: "get_legal_reference",
+    args: {
+      corpus: "tw_trade_secrets",
+      identifier: "Art. 13-1 Trade Secrets Act",
+    },
+  },
+  {
     name: "mopp search",
     tool: "search_legal_reference",
     args: { corpus: "ukipo_mopp", query: "inventive step", limit: 3 },
