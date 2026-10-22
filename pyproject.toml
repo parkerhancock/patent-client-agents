@@ -162,4 +162,4 @@ exclude-newer = "7 days"
 
 # First-party packages are exempt from the cooldown. Starlette is also
 # exempted here because 1.0.1 is a time-sensitive security fix.
-exclude-newer-package = { "mcp-data-core" = "2099-01-01", "starlette" = "2099-01-01" }
+exclude-newer-package = { "mcp-data-core" = "2099-01-01T00:00:00Z", "starlette" = "2099-01-01T00:00:00Z" }
