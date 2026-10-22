@@ -2,7 +2,8 @@
 
 October 21, 2026. EPO fees were the first TypeScript fee connector and the
 reference for porting the other offices in the Python `fees` package; USPTO
-fees followed.
+fees followed. On October 22, 2026 CIPO, CNIPA, DPMA, IP Australia, ILPO and
+IMPI were ported.
 
 ## The pattern
 
@@ -139,6 +140,237 @@ reissue filing fees (1.16(a), (b), (d), (e)), utility and design issue fees
 tiers, and the trademark paper and electronic application and renewal fees
 (2.6(a)(1), (a)(5)). All match the page and are pinned in the tests.
 
+## CIPO
+
+`CipoFeesClient` ([source](../packages/client/src/fees/cipo.ts)) parses CIPO's
+patent fee page
+(`https://ised-isde.canada.ca/site/canadian-intellectual-property-office/en/patents/patent-fees`).
+The page holds one panel per year ("2026 list of fees for patents" and, from
+autumn, next year's list marked subject to change), each with four tables:
+extension of time, applications, international applications and patents.
+The client takes the latest list whose year has started, checks that the
+column headers name that year, and uses January 1 of it as the effective
+date, which the page states ("On January 1, 2026, certain fees ...
+increased by 2.7%").
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `CA/CIPO/patent` (163 fees) | Application, examination, final, PCT, post-grant and copy fees | Maintenance, anniversaries 2-20 |
+
+Fees that differ for small entities have a `small` and a `large` row; fees
+that do not are one untiered row. CIPO's maintenance fees are annual, so
+they are categorized `renewal` (the vocabulary keeps `maintenance` for the
+USPTO's 3.5/7.5/11.5-year fees) and expanded from the word bands ("second,
+third and fourth") to one row per anniversary, separately for pending
+applications and granted patents. The 20th-anniversary fee is also due each
+later year; maintenance of category 1 patents counts from the issue date and
+is categorized `other` with its anniversary year. Fees the page gives only as
+"See description" (PCT international filing and handling fees and their late
+fees) are omitted and named in the notes. CIPO publishes no fee codes; codes
+use Python's slug (fee type, year, tier), numbered when a slug repeats.
+
+Not yet recorded live: on October 22, 2026 every request to
+`ised-isde.canada.ca`, the fee page included, returned 503 with the site's
+"temporarily offline while we carry out urgent maintenance" page. The tests
+run against the Internet Archive's raw capture of the same page from October
+6, 2026 (`tests/fixtures/fees/cipo-patent-fees-2026-10-06.html.gz`, served
+with that capture's date); `bun scripts/record-fees.ts cipo` records the
+live page once the site is back, after which the tests should replay that
+cassette instead.
+
+This corrects the Python scraper:
+
+1. It reads only four-cell rows, but each fee type cell spans its sub-rows,
+   so every second and later row of a group is dropped: maintenance years
+   5-19, the standard examination fee, both per-claim fees, the final-fee
+   page fee and more (84 fees instead of 163).
+2. It treats the second set of tables as a print copy and keeps the first by
+   caption, which is only correct while the current year's panel comes
+   first; its effective date is the constant 2026-01-01.
+3. It categorizes every PCT fee as filing, uses threshold 0 for the
+   final-fee page surcharge (the page says over 100 pages), and files
+   re-examination as `ptab`.
+4. Its codes collide (application and patent maintenance rows, two late
+   fees), and it emits untiered fees twice, as small and large.
+5. It requests the retired `www.ic.gc.ca` URL and relies on the redirect.
+
+## CNIPA
+
+`CnipaFeesClient` ([source](../packages/client/src/fees/cnipa.ts)) parses the
+English fee page (`https://english.cnipa.gov.cn/col/col3000/index.html`), one
+table with a domestic part in Roman-numeral sections, rows split by right
+("1. Invention", "2. Utility Model", "3. Design"), and a PCT part.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `CN/CNIPA/patent` (48 fees) | Invention-patent domestic fees, PCT international-phase and national-entry fees | Annual fees, years 1-20 |
+
+As in Python, only invention rows are routed; utility model and design rows
+on the same page are not. Annual fees are published in bands and expanded to
+one row per year. The page publishes no effective date. The late annual-fee
+surcharge (5% of the annual fee per month) has no fixed amount and is noted,
+not emitted. Codes are Python's slugs.
+
+This corrects the Python scraper:
+
+1. It reads the PCT rows as domestic sections I and II, so the PCT search,
+   preliminary examination, copy and restoration fees become `filing` fees
+   with domestic-looking codes. They are now `cn-pct-…` with their own
+   categories.
+2. The second excess-page tier (over 300 pages) carries threshold 30.
+3. Reexamination and invalidation are `ptab`; they are now `appeal` and
+   `cancellation`. Extension-of-time fees, charged per month, now say so.
+
+## DPMA
+
+`DpmaFeesClient` ([source](../packages/client/src/fees/dpma.ts)) parses form A
+9510.1 (`https://www.dpma.de/docs/english/formulare/allg_eng/a9510_1.pdf`)
+with the shared PDF helper. Rows are six-digit fee numbers with a dot leader
+and a whole-euro amount; a row's text may wrap onto following lines.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `DE/DPMA/patent` (101 fees) | Fee numbers 31x xxx: application, search, examination, annual fees, SPCs and other requests | Annual fees, years 3-20; SPC years as 21-26 |
+
+Every patent fee number is mapped explicitly; unknown 31x numbers appear as
+`other` in `unmapped_codes`. Each annual fee has a licence-of-right row at
+half the amount and a 50-euro late surcharge, both carrying the same year.
+Supplementary protection certificate annual fees are stored as years 21-26,
+following the INPI France convention. Fee 311 100 (paper filing) is stated as
+150% of 311 000 and is stored at that amount with a `paper_filing`
+condition. The PDF's edition ("July 2026") goes in `as_of_status`; DPMA
+publishes no effective date. Utility model, trade mark and design fees in the
+same PDF are not routed, as in Python.
+
+This corrects the Python scraper:
+
+1. Its single-line pattern drops every row whose text wraps: 311 500, 311
+   600, 313 800, 313 810, 313 820, 313 900 and 314 100.
+2. The claim surcharges 311 050 and 311 160 have no `claims_over`
+   condition because the qualifying words are on the next line.
+3. Licence-of-right rows are `other` with no year (the notes say they are
+   maintenance rows with a year), late surcharges have no year, and SPC
+   annual fees are `other`.
+4. SPC duration extensions are `extension` (extension of time), and the
+   search for an extended patent is `examination`.
+
+## IP Australia
+
+`IpAustraliaFeesClient` ([source](../packages/client/src/fees/ipaustralia.ts))
+reads two pages: procedural fees from
+`https://www.ipaustralia.gov.au/patents/timeframes-and-fees` and the standard
+patent renewal table from
+`https://www.ipaustralia.gov.au/manage-my-ip/how-to-renew-my-ip-right`.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `AU/IPAU/patent` (67 fees) | Filing, search, examination, acceptance, claim, amendment, extension, re-examination and copy fees | Renewals, anniversary years 4-24 |
+
+Each renewal year has an online fee and the higher fee for other payment
+methods, which carries a `paper_filing` condition, as do postal application
+fees. Years 20-24 apply only to extended pharmaceutical patents and say so.
+The grace-period surcharge (100 dollars per month) is a `late_fee`. Claim
+fees depend on whether examination was requested before or on/after 1
+October 2024, and the notes say which; for the acceptance rows published as
+"$300 plus $125 per claim" the per-claim part is the fee (the $300 is the
+acceptance fee itself). The pages publish no schedule date; the effective
+date is 2024-10-01, when the current claim fees began, and becomes null if
+the page stops referring to it. Innovation patent renewals are not included.
+Codes are Python's slugs.
+
+This corrects the Python scraper:
+
+1. Its renewal ladder is a hard-coded copy of years 4-19; it is now read from
+   the renewal page, with years 20-24 and the other-payment fees.
+2. "Examination of more than 30 claims" (250 dollars per claim over 30) has
+   threshold 20, and the acceptance rows store the base amounts ($300 as an
+   examination fee, $1550 with threshold 20) instead of the per-claim fees.
+3. Postal fees have no paper condition, and re-examination is `ptab`.
+
+## ILPO
+
+`IlpoFeesClient` ([source](../packages/client/src/fees/ilpo.ts)) parses the
+Hebrew-only annual fee notice
+(`https://www.gov.il/BlobFolder/news/ilpo-fees/he/news_fees-2026.pdf`). The
+gov.il landing page answers plain requests with a Cloudflare 403, but the PDF
+itself is served, so it is recorded live; Python's docstring says both are
+blocked. The PDF is right-to-left, so lines are rebuilt from text positions
+with `pdfPageItems`: item numbers sit at the right margin, amounts in a
+column at the left. Items are matched by their number path (`8(ב)(1)`), and
+the parser fails if an expected item is missing or an unknown one appears.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `IL/ILPO/patent` (47 fees) | Patent items 1-22, PCT authority fees, patent term extension fees | Renewal periods ending years 6, 10, 14, 18, 20; extensions as years 21-25 |
+| `IL/ILPO/trademark` (19 fees) | Trade mark items 1-14 and three Madrid handling fees | Renewal, year 10 |
+| `IL/ILPO/design` (21 fees) | Designs Law 5777-2017 items 1-15 | Renewal periods ending years 10, 15, 20, 25 |
+
+The effective date (2026-01-01) is read from the notice. Labels are English
+summaries; the Hebrew notice and the Reshumot publication control. Renewals
+are paid for periods and stored at the last year each covers, as in Python.
+Items with the 40% first-application reduction (patent items 1 and 10,
+design items 1 and 2) have a `large` row and a `small` row at 60%, rounded to
+the nearest shekel as Python does. Legacy design fees (pre-2018 designs) and
+the maximum-costs table are not routed. The PDF URL names the year; it must
+be updated when the 2027 notice is published.
+
+This corrects the Python scraper:
+
+1. It misreads the patent term extension table: the fourth-year extension
+   fee (7,223) and the opposition fee (2,402) are lost, the cancellation fee
+   is labeled as the fourth-year fee, and the extension fees are years 1-3,
+   two of them at year 1. They are now years 21-25.
+2. The whole-term renewal (14,410) is a year-20 renewal next to item 12(5),
+   and the all-periods design renewal (3,535) a year-25 renewal next to item
+   5(4), so lookups return two amounts. Both are alternatives and are now
+   `other`.
+3. The full-amount rows of reducible items have tier `none`, so a
+   small-entity lookup returns both amounts; they are now `large`.
+4. Restoration requests are `other`; they are now `petition`.
+
+## IMPI
+
+`ImpiFeesClient` ([source](../packages/client/src/fees/impi.ts)) parses the
+consolidated tariff Acuerdo
+(`https://www.gob.mx/cms/uploads/attachment/file/824879/Acuerdo.Tarifa.12.05.23.pdf`).
+Rows are article codes (`1 a`, `1 a bis`, `14b`, `16 quáter`) with MXN
+amounts; every code is mapped explicitly to routes and categories.
+
+| Route | Content | Recurring fees |
+| --- | --- | --- |
+| `MX/IMPI/patent` (109 fees) | Articles 1-5, 13, patent information services and procedural fees | Annuities, years 1-20 |
+| `MX/IMPI/utility_model` (83 fees) | Articles 9 a-9 e bis, 10, 12 a (utility models and integrated-circuit layout designs) | Annuities, years 1-15 |
+| `MX/IMPI/design` (44 fees) | Articles 9 f-9 g, 11, 12 b, 37 III | Renewals at years 5, 10, 15, 20 |
+| `MX/IMPI/trademark` (34 fees) | Article 14, Madrid fees paid to IMPI (36 b), procedural fees | Renewal, year 10 |
+
+The utility_model route is new: Python bundles utility models and layout
+designs into the patent schedule, where their annuities collide with patent
+annuities, so they now have their own route. Rows eligible for the Disposición Cuarta 50% reduction
+(Articles 1 a-1 f, 2-13, 19-23, 26 BIS) have a `large` row and a `small`
+row at half, rounded half-to-even as Python does; other rows are untiered.
+Procedural Articles 16-18 and 27-34 appear in every schedule. Amounts exclude
+16% VAT. Article 15 (appellations of origin) has no route; Article 35 (PCT)
+and the CHF fees of Articles 36-37 are omitted. The effective date is the
+DOF date of the last reform (2023-05-12), read from the PDF; the March 2024
+indigenous-community waiver is not in the PDF and is not applied.
+
+This corrects the Python scraper:
+
+1. The Madrid fees paid to IMPI (Article 36 b, items 1-4) are read as
+   Articles 1-4 and land in the patent schedule, one as a year-1 annuity.
+2. It misses rows without "$" or without a space after the article number:
+   9 e (layout design filing), 14b (trade mark opposition, 3,704.09), 14f
+   and 14g.
+3. Annuities are stored once at a representative year (1, 6, 11); they are
+   now one row per year, and design renewals one row per renewal.
+4. Categories: trade mark filing (14 a) is `grant`, patent correction (1 f)
+   is `extension`, design filing (9 f) is `other`, transfer recording (32)
+   is `cancellation`, and the per-page fees are `other`.
+5. Rows without a reduction are tier `large`, so a small-entity lookup drops
+   every trade mark fee; they are now untiered. Article 13 and the patent
+   information services no longer appear in the trade mark schedule, and
+   the trade mark search report (24) appears only there.
+
 ## MCP
 
 `get_fee_schedule`, `list_fee_jurisdictions` and `lookup_fee` keep the Python
@@ -160,6 +392,20 @@ amount parsing, drift detection, schema rules, resolver parity, MCP filters and
 the `fees:read` scope. The USPTO tests check the eCFR amounts, tier codes,
 route membership, trademark paper and combined codes, single-fetch sharing and
 page drift.
+
+`bun scripts/record-fees.ts cnipa dpma ipaustralia ilpo impi` recorded five
+offices live on October 22, 2026 with plain requests and the user agent
+`patent-client-agents (+https://github.com/parkerhancock/patent-client-agents)`;
+no unmapped codes, complete recurring-fee coverage on every route. CIPO's
+site was down for maintenance and is tested against an archived copy (see
+CIPO).
+Per-office tests replay them and pin amounts read off the official pages,
+renewal ladders, tiers, conditions, aliases and drift failures. Across these
+offices annual fees use `renewal`; the Python scrapers for CIPO, CNIPA, DPMA
+and IMPI use `maintenance`, which ADD_NEW_OFFICE.md reserves for the USPTO's
+3.5/7.5/11.5-year fees. The ILPO and IMPI PDFs are each fetched once for all
+of their routes. `recordedFeeFetch` in the test helpers replays any recorded
+fee interaction, and `cipoFixtureFetch` the archived CIPO page, so `listSchedules` can run offline.
 
 There is no response cache: each call fetches the source (the EPO feed is
 about 23 KB, the USPTO page about 210 KB). Python caches both for seven days

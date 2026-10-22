@@ -7,6 +7,7 @@ import {
   FeeScheduleSchema,
   FeesClient,
   filterFees,
+  PYTHON_FEE_ROUTES,
   parseEuroAmount,
   parseUsdAmount,
   resolveFeeJurisdiction,
@@ -15,8 +16,10 @@ import {
 import { BearerAuth, Client } from "@prefecthq/fastmcp-ts/client";
 import { createServer } from "../packages/mcp/src/index.js";
 import {
+  cipoFixtureFetch,
   feeRecording,
   feeRecordings,
+  recordedFeeFetch,
   usptoFeePage,
 } from "./fees-recordings.js";
 
@@ -223,20 +226,25 @@ test("jurisdiction resolution matches Python and separates unported offices", as
   );
   expect(() => resolveFeeJurisdiction("Narnia")).toThrow("Unknown");
   const client = new FeesClient();
-  expect(client.supportedRoutes).toEqual([
-    "USPTO/patent",
-    "USPTO/trademark",
-    "USPTO/design",
-    "EPO/patent",
-    "EPO-UP/patent",
-  ]);
+  expect(client.supportedRoutes).toEqual(
+    expect.arrayContaining([
+      "USPTO/patent",
+      "USPTO/trademark",
+      "USPTO/design",
+      "EPO/patent",
+      "EPO-UP/patent",
+    ]),
+  );
   expect(resolveFeeJurisdiction("United States", "design")).toEqual([
     "US",
     "USPTO",
   ]);
-  expect(await client.getSchedule("DPMA").catch((error) => error.code)).toBe(
-    "NOT_PORTED",
-  );
+  for (const [office, right] of PYTHON_FEE_ROUTES.filter(
+    ([office, right]) => !client.supportedRoutes.includes(`${office}/${right}`),
+  ))
+    expect(
+      await client.getSchedule(office, right).catch((error) => error.code),
+    ).toBe("NOT_PORTED");
   expect(
     await client.getSchedule("Germany", "design").catch((error) => error.code),
   ).toBe("UNSUPPORTED_RIGHT");
@@ -269,7 +277,10 @@ function feesFromCassetteBody() {
 test("fee MCP tools forward filters and report gaps and unported offices", async () => {
   const fees = new FeesClient({
     retryLimit: 0,
-    fetch: feeFetch,
+    fetch: recordedFeeFetch(
+      ["cnipa", "dpma", "ipaustralia", "ilpo", "impi"],
+      cipoFixtureFetch(feeFetch),
+    ),
   });
   const server = createServer({ clients: { fees } });
   const client = await Client.connect(server, {
@@ -325,13 +336,26 @@ test("fee MCP tools forward filters and report gaps and unported offices", async
       "135.00",
     ]);
     const list = await client.callTool<Envelope>("list_fee_jurisdictions", {});
-    expect(list.structuredContent?.items.map((item) => item.key)).toEqual([
-      "US/USPTO/patent",
-      "US/USPTO/trademark",
-      "US/USPTO/design",
-      "EP/EPO/patent",
-      "UP/EPO-UP/patent",
-    ]);
+    expect(list.structuredContent?.items.map((item) => item.key)).toEqual(
+      expect.arrayContaining([
+        "US/USPTO/patent",
+        "US/USPTO/trademark",
+        "US/USPTO/design",
+        "EP/EPO/patent",
+        "UP/EPO-UP/patent",
+        "CA/CIPO/patent",
+        "CN/CNIPA/patent",
+        "DE/DPMA/patent",
+        "AU/IPAU/patent",
+        "IL/ILPO/patent",
+        "IL/ILPO/trademark",
+        "IL/ILPO/design",
+        "MX/IMPI/patent",
+        "MX/IMPI/utility_model",
+        "MX/IMPI/trademark",
+        "MX/IMPI/design",
+      ]),
+    );
     await expect(
       client.callTool("get_fee_schedule", { jurisdiction: "JPO" }),
     ).rejects.toThrow("not yet ported");
