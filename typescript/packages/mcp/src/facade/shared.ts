@@ -16,6 +16,7 @@ import type {
   TrademarkAssignmentClient,
   TrademarkSearchClient,
   TsdrClient,
+  WipoLexClient,
 } from "@patent-client-agents/client";
 import { z } from "zod";
 import type { EpoLegalClients } from "../epo-legal.js";
@@ -52,6 +53,7 @@ export interface FacadeClients {
   mpep: MpepClient;
   fees: FeesClient;
   cafc: CafcClient;
+  wipoLex: WipoLexClient;
   epoLegal: EpoLegalClients;
   tsdr?: TsdrClient | undefined;
   epoOps?: EpoOpsClient | undefined;
@@ -71,8 +73,6 @@ export const UNPORTED_FACADE_TOOLS = [
   "get_upc_section",
   "search_upc_statutes",
   "search_upc_decisions",
-  "search_wipo_lex_legislation",
-  "get_wipo_lex_legislation",
 ] as const;
 
 /** A facade sub-mode whose connector is not ported yet. */
