@@ -45,6 +45,7 @@ export const LOCAL_ARTIFACTS: Record<CorpusId, string> = {
   dpma_statutes: "dpma_statutes/dpma_statutes.db.zst",
   ipo_in_statutes: "ipo-in/ipo_in_statutes.db.zst",
   ipo_in_mppp: "ipo-in/ipo_in_mppp.db.zst",
+  ilpo_statutes: "ilpo_statutes/ilpo_statutes.db.zst",
 };
 
 class PublishError extends Error {}

@@ -179,6 +179,7 @@ try {
     tw_hits?: string;
     ipo_in_mppp?: string;
     jp_court?: string;
+    ilpo_section?: string;
   };
   if (
     !checked.ok ||
@@ -190,7 +191,8 @@ try {
     checked.dpma_section !== "139" ||
     checked.tw_hits !== "12,13" ||
     checked.jp_court !== "34/219:令和7年（行ケ）第10084号" ||
-    checked.ipo_in_mppp !== "09.03.05.04"
+    checked.ipo_in_mppp !== "09.03.05.04" ||
+    checked.ilpo_section !== "Section 13 Commercial Torts Law"
   )
     process.exitCode = 1;
 } finally {

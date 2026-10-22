@@ -53,6 +53,8 @@
     "verify:upc-statutes": "bun scripts/verify-upc-statutes.ts",
     "build:dpma-statutes": "bun scripts/build-dpma-statutes-corpus.ts",
     "verify:dpma-statutes": "bun scripts/verify-dpma-statutes.ts",
+    "build:ilpo-statutes": "bun scripts/build-ilpo-statutes-corpus.ts",
+    "verify:ilpo-statutes": "bun scripts/verify-ilpo-statutes.ts",
     "verify:tmep": "bun scripts/verify-tmep.ts",
     "verify:ukipo-mopp": "bun scripts/verify-ukipo-mopp.ts",
     "verify:ipo-in": "bun scripts/verify-ipo-in.ts",

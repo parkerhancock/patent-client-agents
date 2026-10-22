@@ -13,6 +13,7 @@ export * from "./epo-ops.js";
 export * from "./epo-ops-resources.js";
 export * from "./fees/index.js";
 export * from "./google-patents/index.js";
+export * from "./ilpo-statutes.js";
 export * from "./ipo-in.js";
 export * from "./japan-ip-high-court.js";
 export * from "./kipris.js";

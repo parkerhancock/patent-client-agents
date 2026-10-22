@@ -15,6 +15,7 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   getPatentClaims,
+  IlpoStatutesClient,
   IpoInStatutesClient,
   MoppClient,
   MpepClient,
@@ -85,6 +86,18 @@ const jpCourt = parseJapanIpHighCourtWorkbook(
 );
 results.jp_court = `${jpCourt.pending_count}/${jpCourt.closed_count}`;
 assert.equal(results.jp_court, "34/219");
+const ilpo = new IlpoStatutesClient({
+  source: new Uint8Array(
+    zstdCompressSync(await readFile(fixture("ilpo-statutes/ilpo_statutes.db"))),
+  ),
+});
+results.ilpo_section = (
+  await ilpo.getSectionByCitation("Section 6 Commercial Torts Law")
+)?.title;
+assert.equal(
+  results.ilpo_section,
+  "Prohibition against misappropriation of a trade secret",
+);
 const tmep = new TmepClient({
   source: new Uint8Array(await readFile(fixture("tmep/tmep.db"))),
 });
@@ -235,6 +248,7 @@ for (const client of [
   tmep,
   mopp,
   dpma,
+  ilpo,
   tw,
 ])
   client.close();
