@@ -32,6 +32,7 @@ import {
   TrademarkAssignmentClient,
   TrademarkSearchClient,
   TsdrClient,
+  TwTradeSecretsClient,
   UpcStatutesClient,
   WipoLexClient,
 } from "@patent-client-agents/client";
@@ -75,6 +76,10 @@ import {
 import { registerUsptoResources } from "./resources.js";
 import { registerPortalSearchTools } from "./search-portals.js";
 import { registerTmepTools } from "./tmep.js";
+import {
+  registerTwTradeSecretsTools,
+  type TwTradeSecretsReader,
+} from "./tw-trade-secrets.js";
 import {
   registerUpcStatutesTools,
   type UpcStatutesReader,
@@ -132,6 +137,8 @@ export interface ServerOptions {
   epoLegal?: Partial<EpoLegalClients>;
   /** UPC statutes corpus reader; omitted, it uses the default artifact path. */
   upcStatutes?: UpcStatutesReader;
+  /** Taiwan Trade Secrets Act reader; omitted, it uses the bundled text. */
+  twTradeSecrets?: TwTradeSecretsReader;
   downloads?: DownloadOptions;
   /** Defaults to MCP identity settings; audience must intentionally cover document REST access. */
   downloadAuth?: { jwksUri: string; issuer: string; audience: string };
@@ -333,6 +340,8 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       options.epoLegal?.upGuidelines ?? own(new EpoUpGuidelinesClient()),
   };
   const upcStatutes = options.upcStatutes ?? own(new UpcStatutesClient());
+  const twTradeSecrets =
+    options.twTradeSecrets ?? own(new TwTradeSecretsClient());
   const applications =
     provided.applications ?? lazyClient(() => new ApplicationsClient());
   const client = options.client ?? applications;
@@ -509,6 +518,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     wipoLex: provided.wipoLex ?? new WipoLexClient(),
     epoLegal,
     upcStatutes,
+    twTradeSecrets,
     tsdr: tsdrClient,
     epoOps: epoOpsClient,
     edis: edisClient,
@@ -755,6 +765,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
     server,
     upcStatutes,
     options.auth ? requireScopes("upc:read") : undefined,
+  );
+  registerTwTradeSecretsTools(
+    server,
+    twTradeSecrets,
+    options.auth ? requireScopes("tw:read") : undefined,
   );
   registerUsitcTools(
     server,

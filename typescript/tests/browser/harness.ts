@@ -8,6 +8,7 @@ import {
   EpoOpsClient,
   GooglePatentsClient,
   MpepClient,
+  TwTradeSecretsClient,
   UpcStatutesClient,
 } from "../../packages/client/src/index.js";
 
@@ -43,6 +44,11 @@ try {
   results.upc_instrument = (
     await upc.search({ query: "opt-out", limit: 1 })
   ).hits[0]?.instrument;
+  results.tw_hits = (
+    await new TwTradeSecretsClient().search({ query: "damage" })
+  ).hits
+    .map((hit) => hit.section)
+    .join(",");
   const pathOnly = new MpepClient({ corpusPath: "/nowhere/mpep.db" });
   results.path_in_browser = (await pathOnly.getCorpusStatus()).error?.code;
   results.fee = (

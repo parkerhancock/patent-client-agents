@@ -10,6 +10,7 @@ import {
   GooglePatentsClient,
   MpepClient,
   TmepClient,
+  TwTradeSecretsClient,
   UpcStatutesClient,
 } from "@patent-client-agents/client";
 
@@ -59,6 +60,12 @@ const tmep = new TmepClient({
 });
 results.tmep_section = (await tmep.getSection("1207.01")).href;
 assert.equal(results.tmep_section, "TMEP-1200d1e5044.html");
+// Bundled text indexed into in-memory SQLite; no artifact.
+const tw = new TwTradeSecretsClient();
+results.tw_hits = (await tw.search({ query: "damage" })).hits
+  .map((hit) => hit.section)
+  .join(",");
+assert.equal(results.tw_hits, "12,13");
 
 // Network clients with synthetic upstreams.
 const fees = new EpoFeesClient({
@@ -95,6 +102,6 @@ const google = GooglePatentsClient.parsePatent(
 assert.equal(google.claims.length, 26);
 results.google_claims = google.claims.length;
 
-for (const client of [epcByPath, epcBytes, mpep, zst, upc, tmep])
+for (const client of [epcByPath, epcBytes, mpep, zst, upc, tmep, tw])
   client.close();
 console.log(JSON.stringify({ runtime: `node ${process.version}`, ...results }));
