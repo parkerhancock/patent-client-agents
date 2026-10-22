@@ -21,6 +21,7 @@ import {
   IdsClient,
   IpoInMpppClient,
   IpoInStatutesClient,
+  JapanIpHighCourtClient,
   KiprisClient,
   MoppClient,
   MpepClient,
@@ -75,6 +76,7 @@ import {
   type IpoInStatutesReader,
   registerIpoInTools,
 } from "./ipo-in.js";
+import { registerJapanIpHighCourtTools } from "./japan-ip-high-court.js";
 import { registerKiprisTools } from "./kipris.js";
 import { registerMpepTools } from "./mpep.js";
 import { registerOdpRecordTools } from "./odp-records.js";
@@ -138,6 +140,7 @@ export interface UsptoClients {
   ids: IdsClient;
   dataweb: DataWebClient;
   kipris: KiprisClient;
+  japanIpHighCourt: JapanIpHighCourtClient;
 }
 /** Instantiate a connector only when a tool invokes it, keeping optional credentials local to that family. */
 function lazyClient<T extends object>(factory: () => T): T {
@@ -641,6 +644,7 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       provided.dataweb ??
       new DataWebClient(datawebToken ? { token: datawebToken } : {}),
     kipris: kiprisClient,
+    japanIpHighCourt: provided.japanIpHighCourt ?? new JapanIpHighCourtClient(),
   };
   if ((options.toolset ?? toolsetFromEnv(process.env)) === "curated") {
     registerFacadeTools(
@@ -908,6 +912,11 @@ export function createServer(options: ServerOptions = {}): FastMCP {
       dataweb: clients.dataweb,
     },
     options.auth ? requireScopes("usitc:read") : undefined,
+  );
+  registerJapanIpHighCourtTools(
+    server,
+    clients.japanIpHighCourt,
+    options.auth ? requireScopes("jpcourt:read") : undefined,
   );
   return server;
 }

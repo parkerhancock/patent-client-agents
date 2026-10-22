@@ -11,6 +11,7 @@ import {
   getPatentClaims,
   IpoInMpppClient,
   MpepClient,
+  parseJapanIpHighCourtWorkbook,
   TwTradeSecretsClient,
   UpcStatutesClient,
 } from "../../packages/client/src/index.js";
@@ -96,6 +97,10 @@ try {
   ).text();
   const google = GooglePatentsClient.parsePatent(googleHtml, "US7654321B2");
   results.google_claims = google.claims.length;
+  const jpCourt = parseJapanIpHighCourtWorkbook(
+    await bytes("/fixtures/japan-ip-high-court/jikenitiran.xls"),
+  );
+  results.jp_court = `${jpCourt.pending_count}/${jpCourt.closed_count}:${jpCourt.cases[0]?.case_number}`;
   results.google_markdown = (google.description_markdown?.length ?? 0) > 10_000;
   // Fused claims helper with stand-in sources: an ODP miss falls back to Google.
   const fused = await getPatentClaims(

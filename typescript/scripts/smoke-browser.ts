@@ -62,6 +62,15 @@ const server = Bun.serve({
         ),
         { headers: { "content-type": "text/html" } },
       );
+    if (path === "/fixtures/japan-ip-high-court/jikenitiran.xls")
+      return new Response(
+        gunzipSync(
+          await readFile(
+            join(fixtures, "japan-ip-high-court/jikenitiran.xls.gz"),
+          ),
+        ),
+        { headers: { "content-type": "application/vnd.ms-excel" } },
+      );
     if (path === "/fixtures/plain.db.zst")
       return new Response(
         zstdCompressSync(await readFile(join(fixtures, "mpep/plain.db"))),
@@ -169,6 +178,7 @@ try {
     dpma_section?: string;
     tw_hits?: string;
     ipo_in_mppp?: string;
+    jp_court?: string;
   };
   if (
     !checked.ok ||
@@ -179,6 +189,7 @@ try {
     checked.upc_instrument !== "upca" ||
     checked.dpma_section !== "139" ||
     checked.tw_hits !== "12,13" ||
+    checked.jp_court !== "34/219:令和7年（行ケ）第10084号" ||
     checked.ipo_in_mppp !== "09.03.05.04"
   )
     process.exitCode = 1;

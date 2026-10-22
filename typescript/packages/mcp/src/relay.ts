@@ -18,6 +18,7 @@ export const RELAY_HOSTS = [
   "www.cafc.uscourts.gov",
   "api.publicrecords.copyright.gov",
   "www.wipo.int",
+  "www.courts.go.jp",
 ] as const;
 /** Request headers forwarded upstream; everything else, including cookies and Origin, is dropped. */
 const FORWARD = ["accept", "accept-language", "content-type", "x-ops-range"];
